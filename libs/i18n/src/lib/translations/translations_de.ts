@@ -17,10 +17,10 @@ export default {
         menuButtonAriaLabel: 'Menüdrucktaste'
     },
     coreActionSheet: {
-        toolbarLabel: 'Action Bar'
+        toolbarLabel: 'Aktionsleiste'
     },
     coreAvatarGroup: {
-        backButton: 'Back'
+        backButton: 'Zurück'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Navigationspfad',
@@ -59,7 +59,7 @@ export default {
         rightNavigationBtnLabel: 'Zum nächsten Element wechseln'
     },
     coreCombobox: {
-        clearButtonTitle: 'Clear input'
+        clearButtonTitle: 'Eingabe löschen'
     },
     coreDatePicker: {
         dateInputLabel: 'Datumseingabe',
@@ -79,11 +79,11 @@ export default {
         displayTypeTimeLabel: 'Uhrzeit'
     },
     coreDynamicPage: {
-        breadcrumbsLabel: 'Breadcrumbs',
+        breadcrumbsLabel: 'Navigationspfade',
         collapseLabel: 'Kopfbereich komprimieren',
         expandLabel: 'Kopfbereich expandieren',
         pinLabel: 'Kopfbereich anheften',
-        toggleHeader: 'Toggle header',
+        toggleHeader: 'Kopfbereich ein-/ausblenden',
         unpinLabel: 'Kopfbereich lösen'
     },
     coreFeedListItem: {
@@ -113,8 +113,8 @@ export default {
         announcementSuccess: 'Erfolgsmeldungsleiste',
         announcementWarning: 'Warnmeldungsleiste',
         closable: 'Schließbar',
-        defaultDismissButtonText: 'Close',
-        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Schließen',
+        defaultHiddenText: 'Meldungsleiste',
         dismissLabel: 'Schließen'
     },
     coreMultiComboBox: {
@@ -130,12 +130,12 @@ export default {
         multiInputAriaLabel: 'Mehrwerteingabe',
         navigateSelectionsWithArrows: 'Navigieren Sie mit den Pfeilen nach oben und unten in der Auswahl.',
         noResults: 'Keine Ergebnisse.',
-        showAll: 'Show All ({count})',
+        showAll: 'Alle anzeigen ({count})',
         tokensCountText: 'Enthält folgende Tokensumme: {length}.'
     },
     coreNavigation: {
         mainNavigation: 'Hauptnavigation',
-        navigationPath: 'Navigationspfad'
+        navigationPath: 'Navigation Path'
     },
     coreNestedList: {
         linkItemAriaLabel: 'Baumelement {itemDetails}, {selectedDescription}'
@@ -198,7 +198,7 @@ export default {
         ariaRoleDescription: 'Bewertungsindikator'
     },
     coreSelect: {
-        closeButton: 'Close'
+        closeButton: 'Schließen'
     },
     coreShellbar: {
         assistiveTools: 'Unterstützende Tools',
@@ -239,7 +239,7 @@ export default {
         semanticDeclineLabel: 'Ablehnen'
     },
     coreTabs: {
-        expandIconLabel: 'See More',
+        expandIconLabel: 'Mehr anzeigen',
         tabListExpandButtonText: 'Mehr'
     },
     coreText: {
@@ -273,10 +273,10 @@ export default {
     coreTimePicker: {
         timePickerButtonLabel: 'Auswahl öffnen',
         timePickerInputLabel: 'Zeitauswahleingabe',
-        valueStateErrorMessage: 'Value state Error',
-        valueStateInformationMessage: 'Value state Information',
-        valueStateSuccessMessage: 'Value state Success',
-        valueStateWarningMessage: 'Value state Warning'
+        valueStateErrorMessage: 'Wertzustand Fehler',
+        valueStateInformationMessage: 'Wertzustand Information',
+        valueStateSuccessMessage: 'Wertzustand Erfolg',
+        valueStateWarningMessage: 'Wertzustand Warnung'
     },
     coreToken: {
         ariaRoleDescription: 'Token',
@@ -287,7 +287,7 @@ export default {
         tokenizerLabel: 'Tokenizer'
     },
     coreToolbar: {
-        moreButton: 'More'
+        moreButton: 'Mehr'
     },
     coreTree: {
         collapse: 'Knoten komprimieren',
@@ -304,8 +304,8 @@ export default {
         menuOkText: 'OK'
     },
     coreUserMenu: {
-        closeButton: 'Close',
-        previousButton: 'Previous'
+        closeButton: 'Schließen',
+        previousButton: 'Zurück'
     },
     coreWizard: {
         ariaLabel: 'Assistent'
@@ -390,7 +390,7 @@ export default {
         countListResultsSingular: '1 Ergebnislistenelement'
     },
     platformFeedInput: {
-        sendButton: 'Send',
+        sendButton: 'Senden',
         userTitle: 'Benutzer'
     },
     platformIconTabBar: {
@@ -404,7 +404,7 @@ export default {
     },
     platformMessagePopover: {
         allErrors: 'Alle',
-        backButton: 'Go back',
+        backButton: 'Zurück',
         defaultErrors: {
             email: 'E-Mail ist ungültig',
             max: 'Das Feld überschreitet den maximalen Wert',
@@ -428,20 +428,20 @@ export default {
         detailsActionAriaLabel: 'Detail'
     },
     platformSearchField: {
-        allButtonLabel: 'All',
-        cancelLabel: 'Cancel',
-        clearButtonTitle: 'Auswahl aufheben',
-        counterLabel: 'Total results: {count}',
-        deleteButtonAriaLabel: 'Remove',
-        deleteButtonTitle: 'Remove Suggestion',
-        groupHeader: 'Group Header',
+        allButtonLabel: 'Alle',
+        cancelLabel: 'Abbrechen',
+        clearButtonTitle: 'Suchfeld leeren',
+        counterLabel: 'Gesamtergebnisse: {count}',
+        deleteButtonAriaLabel: 'Entfernen',
+        deleteButtonTitle: 'Vorschlag entfernen',
+        groupHeader: 'Gruppenkopfzeile',
         searchInputLabel: 'Suchen',
         searchSuggestionMessage: '{count} Vorschläge gefunden.',
         searchSuggestionNavigateMessage: 'Pfeile nach oben und unten für Navigation verwenden',
-        selectScopeLabel: 'Select scope',
-        selectStateMessageLabel: 'Select',
-        submitButtonTitle: 'Suchen',
-        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Umfang auswählen',
+        selectStateMessageLabel: 'Auswählen',
+        submitButtonTitle: 'Suchen (Eingabetaste)',
+        suggestionsWrapperAriaLabel: 'Vorschläge',
         synchronizeButtonTitle: 'Synchronisieren'
     },
     platformSelect: {
@@ -493,7 +493,7 @@ export default {
         submitButtonLabel: 'Los'
     },
     platformSplitMenuButton: {
-        groupLabel: 'Split button group'
+        groupLabel: 'Schaltflächengruppe aufteilen'
     },
     platformStandardListItem: {
         deleteActionAriaLabel: 'Löschen',
@@ -542,6 +542,7 @@ export default {
         headerMenuUnfreeze: 'Fixierung der Spalte aufheben',
         headerMenuUnfreezePlural: 'Fixierung der Spalten aufheben',
         loadMore: 'Mehr anzeigen',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage:
             'Es gibt gerade keine sichtbaren Spalten in der Tabelle. Wählen Sie die Spalten, die Sie benötigen, in den Tabelleneinstellungen aus.',
         P13ColumnsDialogCancelBtnLabel: 'Abbrechen',
@@ -705,7 +706,7 @@ export default {
         successButtonLabel: 'OK'
     },
     platformWizardGenerator: {
-        stepsLabel: 'Wizard Steps',
+        stepsLabel: 'Schritte im Assistenten',
         summarySectionEditStep: 'Bearbeiten'
     },
     segmentedButton: {

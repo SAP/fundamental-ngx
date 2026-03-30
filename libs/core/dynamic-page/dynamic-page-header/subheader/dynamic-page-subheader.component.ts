@@ -118,7 +118,7 @@ export class DynamicPageSubheaderComponent {
     get _toggleButtonAriaLabel(): string {
         const expandLabel = this.expandLabel || this._defaultExpandLabel();
         const collapseLabel = this.collapseLabel || this._defaultCollapseLabel();
-        return this._collapsed ? expandLabel : collapseLabel;
+        return this._dynamicPageService.collapsed() ? expandLabel : collapseLabel;
     }
 
     /**
@@ -135,12 +135,6 @@ export class DynamicPageSubheaderComponent {
      * tracking if pin button is pinned
      */
     _pinned = false;
-
-    /**
-     * @hidden
-     * tracking expand/collapse button
-     */
-    private _collapsed = false;
 
     /** @hidden */
     private _resolveTranslationSignal = resolveTranslationSignalFn();
@@ -167,7 +161,7 @@ export class DynamicPageSubheaderComponent {
     toggleCollapse(): void {
         this._pinned = false;
         this.collapsed = !this.collapsed;
-        this.collapsedChange.emit(this._collapsed);
+        this.collapsedChange.emit(this.collapsed);
     }
 
     /**

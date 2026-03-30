@@ -17,10 +17,10 @@ export default {
         menuButtonAriaLabel: 'Menijski gumb'
     },
     coreActionSheet: {
-        toolbarLabel: 'Action Bar'
+        toolbarLabel: 'Orodna vrstica'
     },
     coreAvatarGroup: {
-        backButton: 'Back'
+        backButton: 'Nazaj'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Sled poti',
@@ -59,7 +59,7 @@ export default {
         rightNavigationBtnLabel: 'Premik na naslednjo postavko'
     },
     coreCombobox: {
-        clearButtonTitle: 'Clear input'
+        clearButtonTitle: 'Brisanje vnosa'
     },
     coreDatePicker: {
         dateInputLabel: 'Vnos datuma',
@@ -79,11 +79,11 @@ export default {
         displayTypeTimeLabel: 'Čas'
     },
     coreDynamicPage: {
-        breadcrumbsLabel: 'Breadcrumbs',
+        breadcrumbsLabel: 'Drobtinice',
         collapseLabel: 'Skrčitev glave',
         expandLabel: 'Razširitev glave',
         pinLabel: 'Pripenjanje glave',
-        toggleHeader: 'Toggle header',
+        toggleHeader: 'Preklop glave',
         unpinLabel: 'Odpenjanje glave'
     },
     coreFeedListItem: {
@@ -113,9 +113,9 @@ export default {
         announcementSuccess: 'Vrstica z obvestilom o uspehu',
         announcementWarning: 'Vrstica z opozorilnim obvestilom',
         closable: 'Je mogoče zapreti',
-        defaultDismissButtonText: 'Close',
-        defaultHiddenText: 'Message strip',
-        dismissLabel: 'Zapri'
+        defaultDismissButtonText: 'Zapiranje',
+        defaultHiddenText: 'Vrstica sporočila',
+        dismissLabel: 'Zapiranje'
     },
     coreMultiComboBox: {
         listGroupHeader: 'Glava skupine',
@@ -130,12 +130,12 @@ export default {
         multiInputAriaLabel: 'Vnos z več vrednostmi',
         navigateSelectionsWithArrows: 'Krmarjenje po izbirah s puščičnima tipkama navzgor in navzdol.',
         noResults: 'Ni rezultatov.',
-        showAll: 'Show All ({count})',
+        showAll: 'Pokaži vse ({count})',
         tokensCountText: 'Vsebuje skupno število žetonov: {dolžina}.'
     },
     coreNavigation: {
         mainNavigation: 'Glavno krmarjenje',
-        navigationPath: 'Pot krmarjenja'
+        navigationPath: 'Navigation Path'
     },
     coreNestedList: {
         linkItemAriaLabel: 'Element drevesa {itemDetails}, {selectedDescription}'
@@ -198,7 +198,7 @@ export default {
         ariaRoleDescription: 'Oznaka ocene'
     },
     coreSelect: {
-        closeButton: 'Close'
+        closeButton: 'Zapiranje'
     },
     coreShellbar: {
         assistiveTools: 'Pomožna orodja',
@@ -239,7 +239,7 @@ export default {
         semanticDeclineLabel: 'Odkloni'
     },
     coreTabs: {
-        expandIconLabel: 'See More',
+        expandIconLabel: 'Prikaži več',
         tabListExpandButtonText: 'Več'
     },
     coreText: {
@@ -273,10 +273,10 @@ export default {
     coreTimePicker: {
         timePickerButtonLabel: 'Odpiranje izbirnika',
         timePickerInputLabel: 'Vnos izbirnika časa',
-        valueStateErrorMessage: 'Value state Error',
-        valueStateInformationMessage: 'Value state Information',
-        valueStateSuccessMessage: 'Value state Success',
-        valueStateWarningMessage: 'Value state Warning'
+        valueStateErrorMessage: 'Status vrednosti Napaka',
+        valueStateInformationMessage: 'Status vrednosti Informacije',
+        valueStateSuccessMessage: 'Status vrednosti Uspeh',
+        valueStateWarningMessage: 'Status vrednosti Opozorilo'
     },
     coreToken: {
         ariaRoleDescription: 'žeton',
@@ -287,7 +287,7 @@ export default {
         tokenizerLabel: 'Generator žetonov'
     },
     coreToolbar: {
-        moreButton: 'More'
+        moreButton: 'Več'
     },
     coreTree: {
         collapse: 'Skrčitev vozlišča',
@@ -304,15 +304,15 @@ export default {
         menuOkText: 'V redu'
     },
     coreUserMenu: {
-        closeButton: 'Close',
-        previousButton: 'Previous'
+        closeButton: 'Zapiranje',
+        previousButton: 'Nazaj'
     },
     coreWizard: {
         ariaLabel: 'Čarovnik'
     },
     platformApprovalFlow: {
         addNodeAddActionBtnLabel: 'Dodaj',
-        addNodeApproverOrTeamDetailsCloseActionBtnLabel: 'Zapri',
+        addNodeApproverOrTeamDetailsCloseActionBtnLabel: 'Zapiranje',
         addNodeButtonTitle: 'Dodaj vozlišče',
         addNodeCancelActionBtnLabel: 'Prekliči',
         addNodeCancelApproverSelectionActionBtnLabel: 'Prekliči',
@@ -389,7 +389,7 @@ export default {
         countListResultsSingular: 'Seznam postavk z 1 rezultatom'
     },
     platformFeedInput: {
-        sendButton: 'Send',
+        sendButton: 'Pošiljanje',
         userTitle: 'Uporabnik'
     },
     platformIconTabBar: {
@@ -403,7 +403,7 @@ export default {
     },
     platformMessagePopover: {
         allErrors: 'Vse',
-        backButton: 'Go back',
+        backButton: 'Nazaj',
         defaultErrors: {
             email: 'E-pošta ni veljavna',
             max: 'Polje presega največjo vrednost',
@@ -427,20 +427,20 @@ export default {
         detailsActionAriaLabel: 'podrobnost'
     },
     platformSearchField: {
-        allButtonLabel: 'All',
-        cancelLabel: 'Cancel',
-        clearButtonTitle: 'Počisti',
-        counterLabel: 'Total results: {count}',
-        deleteButtonAriaLabel: 'Remove',
-        deleteButtonTitle: 'Remove Suggestion',
-        groupHeader: 'Group Header',
+        allButtonLabel: 'Vse',
+        cancelLabel: 'Preklic',
+        clearButtonTitle: 'Brisanje polja za iskanje',
+        counterLabel: 'Skupno število rezultatov: {count}',
+        deleteButtonAriaLabel: 'Odstranitev',
+        deleteButtonTitle: 'Odstranitev predloga',
+        groupHeader: 'Glava skupine',
         searchInputLabel: 'Iskanje',
         searchSuggestionMessage: '{count} predlogov najdenih.',
         searchSuggestionNavigateMessage: 'za krmarjenje uporabite puščici navzgor in navzdol',
-        selectScopeLabel: 'Select scope',
-        selectStateMessageLabel: 'Select',
-        submitButtonTitle: 'Iskanje',
-        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Izbira obsega',
+        selectStateMessageLabel: 'Izbira',
+        submitButtonTitle: 'Iskanje (vnesite)',
+        suggestionsWrapperAriaLabel: 'Predlogi',
         synchronizeButtonTitle: 'Sinhronizacija'
     },
     platformSelect: {
@@ -453,7 +453,7 @@ export default {
     },
     platformSmartFilterBar: {
         defineConditionsAddConditionButtonLabel: 'Dodaj pogoj',
-        defineConditionsCancelButton: 'Prekliči',
+        defineConditionsCancelButton: 'Preklic',
         defineConditionsRemoveConditionButtonTitle: 'Odstrani pogoj',
         defineConditionsSubmitButtonLabel: 'Pojdi',
         filterConditionAfter: 'po',
@@ -479,7 +479,7 @@ export default {
         searchPlaceholder: 'Iskanje',
         selectFiltersActiveColumnLabel: 'Aktivno',
         selectFiltersAvailableFiltersText: 'Razpoložljivi filtri',
-        selectFiltersCancelButton: 'Prekliči',
+        selectFiltersCancelButton: 'Preklic',
         selectFiltersFilterColumnLabel: 'Filter',
         selectFiltersHeader: 'Filtri',
         selectFiltersSubmitButtonLabel: 'Pojdi',
@@ -492,7 +492,7 @@ export default {
         submitButtonLabel: 'Pojdi'
     },
     platformSplitMenuButton: {
-        groupLabel: 'Split button group'
+        groupLabel: 'Razdelitev skupine gumbov'
     },
     platformStandardListItem: {
         deleteActionAriaLabel: 'izbriši',
@@ -502,7 +502,7 @@ export default {
         ariaLabel: 'Preklop vnosa'
     },
     platformTable: {
-        cancelBtnLabel: 'Prekliči',
+        cancelBtnLabel: 'Preklic',
         clearFilters: 'Počisti filtre',
         collapseRowButtonTitle: 'Skrči vrstico',
         confirmBtnLabel: 'V redu',
@@ -516,14 +516,14 @@ export default {
         emptyCell: 'Prazno',
         expandRowButtonTitle: 'Razširi vrstico',
         filterDialogBackToColumns: 'Nazaj',
-        filterDialogCancelBtnLabel: 'Prekliči',
+        filterDialogCancelBtnLabel: 'Preklic',
         filterDialogConfirmBtnLabel: 'V redu',
         filterDialogFilterBy: 'Filtriraj po',
         filterDialogFilterByLabel: 'Filtriraj po: {filterLabel}',
         filterDialogFilterTitle: 'Filtriraj',
         filterDialogNotFilteredLabel: '(Brez filtriranja)',
         filteredBy: 'Filtrirano po',
-        groupDialogCancelBtnLabel: 'Prekliči',
+        groupDialogCancelBtnLabel: 'Preklic',
         groupDialogConfirmBtnLabel: 'V redu',
         groupDialogGroupByHeader: 'Grupiranje po',
         groupDialogGroupOrderAsc: 'Naraščajoče',
@@ -541,9 +541,10 @@ export default {
         headerMenuUnfreeze: 'Odmrznitev stolpca',
         headerMenuUnfreezePlural: 'Odmrznitev stolpcev',
         loadMore: 'Prikaži več',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage:
             'Trenutno ni vidnih stolpcev v tabeli. V nastavitvah tabele izberite stolpce, ki jih potrebujete.',
-        P13ColumnsDialogCancelBtnLabel: 'Prekliči',
+        P13ColumnsDialogCancelBtnLabel: 'Preklic',
         P13ColumnsDialogConfirmationBtnLabel: 'V redu',
         P13ColumnsDialogHeader: 'Stolpci',
         P13ColumnsDialogMoveDownBtn: 'Premakni navzdol',
@@ -558,7 +559,7 @@ export default {
         P13FilterBooleanOptionNotDefined: '',
         P13FilterBooleanOptionTrue: 'Da',
         P13FilterDialogAddFilterBtnTitle: 'Dodaj filter',
-        P13FilterDialogCancelBtnLabel: 'Prekliči',
+        P13FilterDialogCancelBtnLabel: 'Preklic',
         P13FilterDialogConfirmationBtnLabel: 'V redu',
         P13FilterDialogExcludePanelTitleWithCount: 'Izključi ({count})',
         P13FilterDialogExcludePanelTitleWithoutCount: 'Izključi',
@@ -581,19 +582,19 @@ export default {
         P13FilterStrategyLabelNotDefined: 'Ni določeno',
         P13FilterStrategyLabelOnOrAfter: 'na ali po',
         P13GroupDialogAddNewGroupBtnTitle: 'Dodaj novo',
-        P13GroupDialogCancelBtnLabel: 'Prekliči',
+        P13GroupDialogCancelBtnLabel: 'Preklic',
         P13GroupDialogConfirmationBtnLabel: 'V redu',
         P13GroupDialogHeader: 'Uskupinjanje',
         P13GroupDialogNoneSelectedColumnSelectPlaceholder: '(brez)',
-        P13GroupDialogRemoveGroupBtnTitle: 'Odstrani',
+        P13GroupDialogRemoveGroupBtnTitle: 'Odstranitev',
         P13GroupDialogShowFieldAsColumnCheckboxLabel: 'Prikaz polja kot stolpec',
         P13SortDialogAddNewSortBtnTitle: 'Dodaj novo',
-        P13SortDialogCancelBtnLabel: 'Prekliči',
+        P13SortDialogCancelBtnLabel: 'Preklic',
         P13SortDialogConfirmationBtnLabel: 'V redu',
         P13SortDialogHeader: 'Razvrsti',
         P13SortDialogNoneSelectedColumn: '(brez)',
         P13SortDialogNoneSelectedSorting: '(brez)',
-        P13SortDialogRemoveSortBtnTitle: 'Odstrani',
+        P13SortDialogRemoveSortBtnTitle: 'Odstranitev',
         P13SortDialogSortOrderSelectOptionAsc: 'Naraščajoče',
         P13SortDialogSortOrderSelectOptionDesc: 'Padajoče',
         resetChangesButtonLabel: 'Ponastavi',
@@ -604,7 +605,7 @@ export default {
         selectSingleRow: 'Za izbiro vrstice pritisnite preslednico',
         settingsDialogHeader: 'Nastavitve',
         showingBlankOfBlank: 'Prikazano {totalGrowingItemsCount} od {totalGrowingItemsCount}',
-        sortDialogCancelBtnLabel: 'Prekliči',
+        sortDialogCancelBtnLabel: 'Preklic',
         sortDialogConfirmBtnLabel: 'V redu',
         sortDialogHeader: 'Razvrsti',
         sortDialogNotSortedLabel: '(Ni razvrščeno)',
@@ -613,7 +614,7 @@ export default {
         sortDialogSortOrderDesc: 'Padajoče',
         sortDialogSortOrderHeader: 'Zaporedje razvrščanja',
         toolbarActionButtonTitle: 'Nastavitve',
-        toolbarActionCancelButtonLabel: 'Prekliči',
+        toolbarActionCancelButtonLabel: 'Preklic',
         toolbarActionCollapseAllButtonTitle: 'Skrči vse',
         toolbarActionColumnsButtonTitle: 'Stolpci',
         toolbarActionCreateButtonLabel: 'Ustvari',
@@ -636,7 +637,7 @@ export default {
             private: 'Zasebno'
         },
         applyAutomatically: 'Uporabi samodejno',
-        cancel: 'Prekliči',
+        cancel: 'Preklic',
         createdBy: 'Ustvaril',
         default: 'Privzeto',
         manage: 'Upravljaj',
@@ -656,7 +657,7 @@ export default {
         view: 'Ogled'
     },
     platformVHD: {
-        cancelButtonLabel: 'Prekliči',
+        cancelButtonLabel: 'Preklic',
         defineConditionAddConditionButtonLabel: 'Dodaj',
         defineConditionAddConditionButtonTitle: 'Dodaj pogoj',
         defineConditionConditionsGroupHeaderExclude: 'Izključi',
@@ -704,7 +705,7 @@ export default {
         successButtonLabel: 'V redu'
     },
     platformWizardGenerator: {
-        stepsLabel: 'Wizard Steps',
+        stepsLabel: 'Koraki čarovnika',
         summarySectionEditStep: 'Uredi'
     },
     segmentedButton: {

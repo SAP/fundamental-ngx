@@ -16,10 +16,10 @@ export default {
         menuButtonAriaLabel: 'לחצן תפריט'
     },
     coreActionSheet: {
-        toolbarLabel: 'Action Bar'
+        toolbarLabel: 'שורת פעולות'
     },
     coreAvatarGroup: {
-        backButton: 'Back'
+        backButton: 'חזרה'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'שביל ניווט',
@@ -58,7 +58,7 @@ export default {
         rightNavigationBtnLabel: 'עבור לפריט הבא'
     },
     coreCombobox: {
-        clearButtonTitle: 'Clear input'
+        clearButtonTitle: 'נקה קלט'
     },
     coreDatePicker: {
         dateInputLabel: 'קלט של תאריך',
@@ -78,11 +78,11 @@ export default {
         displayTypeTimeLabel: 'זמן'
     },
     coreDynamicPage: {
-        breadcrumbsLabel: 'Breadcrumbs',
+        breadcrumbsLabel: 'שביל ניווט',
         collapseLabel: 'צמצם כותרת',
         expandLabel: 'הרחב כותרת',
         pinLabel: 'הצמד כותרת',
-        toggleHeader: 'Toggle header',
+        toggleHeader: 'החלף כותרת',
         unpinLabel: 'בטל הצמדת כותרת'
     },
     coreFeedListItem: {
@@ -112,8 +112,8 @@ export default {
         announcementSuccess: 'רצועת הודעות הצלחה',
         announcementWarning: 'רצועת הודעות אזהרה',
         closable: 'ניתן לסגירה',
-        defaultDismissButtonText: 'Close',
-        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'סגור',
+        defaultHiddenText: 'רצועת הודעות',
         dismissLabel: 'סגור'
     },
     coreMultiComboBox: {
@@ -129,12 +129,12 @@ export default {
         multiInputAriaLabel: 'קלט עם ערכים מרובים',
         navigateSelectionsWithArrows: 'נווט בבחירות עם החצים למעלה ולמטה.',
         noResults: 'אין תוצאות.',
-        showAll: 'Show All ({count})',
+        showAll: 'הצג הכול ({count})',
         tokensCountText: 'מכיל סה"כ tokens: {length}.'
     },
     coreNavigation: {
         mainNavigation: 'ניווט ראשי',
-        navigationPath: 'נתיב ניווט'
+        navigationPath: 'Navigation Path'
     },
     coreNestedList: {
         linkItemAriaLabel: 'פריט עץ {itemDetails}, {selectedDescription}'
@@ -197,7 +197,7 @@ export default {
         ariaRoleDescription: 'סמן דירוג'
     },
     coreSelect: {
-        closeButton: 'Close'
+        closeButton: 'סגור'
     },
     coreShellbar: {
         assistiveTools: 'כלים מסייעים',
@@ -238,7 +238,7 @@ export default {
         semanticDeclineLabel: 'דחה'
     },
     coreTabs: {
-        expandIconLabel: 'See More',
+        expandIconLabel: 'הצג עוד',
         tabListExpandButtonText: 'עוד'
     },
     coreText: {
@@ -272,10 +272,10 @@ export default {
     coreTimePicker: {
         timePickerButtonLabel: 'פתח בוחר',
         timePickerInputLabel: 'קלט בוחר שעות',
-        valueStateErrorMessage: 'Value state Error',
-        valueStateInformationMessage: 'Value state Information',
-        valueStateSuccessMessage: 'Value state Success',
-        valueStateWarningMessage: 'Value state Warning'
+        valueStateErrorMessage: 'שגיאת מצב ערך',
+        valueStateInformationMessage: 'מידע על מצב ערך',
+        valueStateSuccessMessage: 'מצב הערך – הצלחה',
+        valueStateWarningMessage: 'מצב הערך – אזהרה'
     },
     coreToken: {
         ariaRoleDescription: 'אסימון',
@@ -286,7 +286,7 @@ export default {
         tokenizerLabel: 'Tokenizer'
     },
     coreToolbar: {
-        moreButton: 'More'
+        moreButton: 'עוד'
     },
     coreTree: {
         collapse: 'צמצם צומת',
@@ -303,8 +303,8 @@ export default {
         menuOkText: 'OK'
     },
     coreUserMenu: {
-        closeButton: 'Close',
-        previousButton: 'Previous'
+        closeButton: 'סגור',
+        previousButton: 'הקודם'
     },
     coreWizard: {
         ariaLabel: 'אשף'
@@ -387,7 +387,7 @@ export default {
         countListResultsSingular: 'פריט רשימת תוצאות אחד'
     },
     platformFeedInput: {
-        sendButton: 'Send',
+        sendButton: 'שלח',
         userTitle: 'משתמש'
     },
     platformIconTabBar: {
@@ -401,7 +401,7 @@ export default {
     },
     platformMessagePopover: {
         allErrors: 'הכול',
-        backButton: 'Go back',
+        backButton: 'חזור',
         defaultErrors: {
             email: 'דוא"ל לא חוקי',
             max: 'השדה חורג מהערך המרבי',
@@ -425,20 +425,20 @@ export default {
         detailsActionAriaLabel: 'פירוט'
     },
     platformSearchField: {
-        allButtonLabel: 'All',
-        cancelLabel: 'Cancel',
-        clearButtonTitle: 'נקה',
-        counterLabel: 'Total results: {count}',
-        deleteButtonAriaLabel: 'Remove',
-        deleteButtonTitle: 'Remove Suggestion',
-        groupHeader: 'Group Header',
+        allButtonLabel: 'הכול',
+        cancelLabel: 'בטל',
+        clearButtonTitle: 'נקה חיפוש',
+        counterLabel: 'סה"כ תוצאות: {count}',
+        deleteButtonAriaLabel: 'הסר',
+        deleteButtonTitle: 'הסר הצעה',
+        groupHeader: 'כותרת קבוצה',
         searchInputLabel: 'חפש',
         searchSuggestionMessage: 'נמצאו {count} הצעות.',
         searchSuggestionNavigateMessage: 'השתמש בחצים למעלה ולמטה כדי לנווט',
-        selectScopeLabel: 'Select scope',
-        selectStateMessageLabel: 'Select',
-        submitButtonTitle: 'חפש',
-        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'בחר טווח',
+        selectStateMessageLabel: 'בחר',
+        submitButtonTitle: 'חפש (Enter)',
+        suggestionsWrapperAriaLabel: 'הצעות',
         synchronizeButtonTitle: 'סנכרן'
     },
     platformSelect: {
@@ -490,7 +490,7 @@ export default {
         submitButtonLabel: 'בצע'
     },
     platformSplitMenuButton: {
-        groupLabel: 'Split button group'
+        groupLabel: 'פצל קבוצת לחצנים'
     },
     platformStandardListItem: {
         deleteActionAriaLabel: 'מחק',
@@ -539,6 +539,7 @@ export default {
         headerMenuUnfreeze: 'בטל הקפאת עמודה',
         headerMenuUnfreezePlural: 'בטל הקפאת עמודות',
         loadMore: 'הצג עוד',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage: 'כרגע, אין עמודות גלויות בטבלה. בחר את העמודות הנדרשות בהגדרות הטבלה.',
         P13ColumnsDialogCancelBtnLabel: 'בטל',
         P13ColumnsDialogConfirmationBtnLabel: 'OK',
@@ -701,7 +702,7 @@ export default {
         successButtonLabel: 'OK'
     },
     platformWizardGenerator: {
-        stepsLabel: 'Wizard Steps',
+        stepsLabel: 'שלבי אשף',
         summarySectionEditStep: 'ערוך'
     },
     segmentedButton: {

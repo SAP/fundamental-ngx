@@ -17,10 +17,10 @@ export default {
         menuButtonAriaLabel: 'Dugme menija'
     },
     coreActionSheet: {
-        toolbarLabel: 'Action Bar'
+        toolbarLabel: 'Traka s radnjama'
     },
     coreAvatarGroup: {
-        backButton: 'Back'
+        backButton: 'Nazad'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Put usmeravanja',
@@ -59,7 +59,7 @@ export default {
         rightNavigationBtnLabel: 'Idi na sledeću stavku'
     },
     coreCombobox: {
-        clearButtonTitle: 'Clear input'
+        clearButtonTitle: 'Izbriši unos'
     },
     coreDatePicker: {
         dateInputLabel: 'Unos datuma',
@@ -79,11 +79,11 @@ export default {
         displayTypeTimeLabel: 'Vreme'
     },
     coreDynamicPage: {
-        breadcrumbsLabel: 'Breadcrumbs',
+        breadcrumbsLabel: 'Navigacija s putanjom',
         collapseLabel: 'Sažmi zaglavlje',
         expandLabel: 'Proširi zaglavlje',
         pinLabel: 'Fiksiraj zaglavlje',
-        toggleHeader: 'Toggle header',
+        toggleHeader: 'Uključi/isključi zaglavlje',
         unpinLabel: 'Poništi fiksiranje zaglavlja'
     },
     coreFeedListItem: {
@@ -113,8 +113,8 @@ export default {
         announcementSuccess: 'Statusna traka upozorenja',
         announcementWarning: 'Statusna traka upozorenja',
         closable: 'Može se zatvoriti',
-        defaultDismissButtonText: 'Close',
-        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Zatvori',
+        defaultHiddenText: 'Traka poruke',
         dismissLabel: 'Zatvori'
     },
     coreMultiComboBox: {
@@ -130,12 +130,12 @@ export default {
         multiInputAriaLabel: 'Unos višestrukih vrednosti',
         navigateSelectionsWithArrows: 'Usmeravajte odabire strelicama gore i dole.',
         noResults: 'Nema rezultata.',
-        showAll: 'Show All ({count})',
+        showAll: 'Prikaži sve ({count})',
         tokensCountText: 'Sadrži ukupno tokena: {length}.'
     },
     coreNavigation: {
         mainNavigation: 'Glavno usmeravanje',
-        navigationPath: 'Put usmeravanja'
+        navigationPath: 'Navigation Path'
     },
     coreNestedList: {
         linkItemAriaLabel: 'Stavka stabla {itemDetails}, {selectedDescription}'
@@ -198,7 +198,7 @@ export default {
         ariaRoleDescription: 'Pokazatelj vrednovanja'
     },
     coreSelect: {
-        closeButton: 'Close'
+        closeButton: 'Zatvori'
     },
     coreShellbar: {
         assistiveTools: 'Asistivni alati',
@@ -239,7 +239,7 @@ export default {
         semanticDeclineLabel: 'Odbij'
     },
     coreTabs: {
-        expandIconLabel: 'See More',
+        expandIconLabel: 'Prikaži više',
         tabListExpandButtonText: 'Više'
     },
     coreText: {
@@ -273,10 +273,10 @@ export default {
     coreTimePicker: {
         timePickerButtonLabel: 'Otvori birač',
         timePickerInputLabel: 'Unos birača vremena',
-        valueStateErrorMessage: 'Value state Error',
-        valueStateInformationMessage: 'Value state Information',
-        valueStateSuccessMessage: 'Value state Success',
-        valueStateWarningMessage: 'Value state Warning'
+        valueStateErrorMessage: 'Greška statusa vrednosti',
+        valueStateInformationMessage: 'Status vrednosti Informacije',
+        valueStateSuccessMessage: 'Status vrednosti Uspeh',
+        valueStateWarningMessage: 'Status vrednosti Upozorenje'
     },
     coreToken: {
         ariaRoleDescription: 'token',
@@ -287,7 +287,7 @@ export default {
         tokenizerLabel: 'Generator tokena'
     },
     coreToolbar: {
-        moreButton: 'More'
+        moreButton: 'Više'
     },
     coreTree: {
         collapse: 'Sažmi čvor',
@@ -304,8 +304,8 @@ export default {
         menuOkText: 'Ok'
     },
     coreUserMenu: {
-        closeButton: 'Close',
-        previousButton: 'Previous'
+        closeButton: 'Zatvori',
+        previousButton: 'Prethodno'
     },
     coreWizard: {
         ariaLabel: 'Čarobnjak'
@@ -389,7 +389,7 @@ export default {
         countListResultsSingular: '1 stavka liste rezultata'
     },
     platformFeedInput: {
-        sendButton: 'Send',
+        sendButton: 'Pošalji',
         userTitle: 'Korisnik'
     },
     platformIconTabBar: {
@@ -403,7 +403,7 @@ export default {
     },
     platformMessagePopover: {
         allErrors: 'Sve',
-        backButton: 'Go back',
+        backButton: 'Vrati se',
         defaultErrors: {
             email: 'E-pošta je nevažeća',
             max: 'Polje prekoračuje maksimalnu vrednost',
@@ -427,20 +427,20 @@ export default {
         detailsActionAriaLabel: 'detalj'
     },
     platformSearchField: {
-        allButtonLabel: 'All',
-        cancelLabel: 'Cancel',
-        clearButtonTitle: 'Izbriši',
-        counterLabel: 'Total results: {count}',
-        deleteButtonAriaLabel: 'Remove',
-        deleteButtonTitle: 'Remove Suggestion',
-        groupHeader: 'Group Header',
+        allButtonLabel: 'Sve',
+        cancelLabel: 'Odustani',
+        clearButtonTitle: 'Poništi traženje',
+        counterLabel: 'Ukupni rezultati: {count}',
+        deleteButtonAriaLabel: 'Ukloni',
+        deleteButtonTitle: 'Ukloni predlog',
+        groupHeader: 'Zaglavlje grupe',
         searchInputLabel: 'Traži',
         searchSuggestionMessage: '{count} predloga nađeno.',
         searchSuggestionNavigateMessage: 'koristite strelice gore i dole za usmeravanje',
-        selectScopeLabel: 'Select scope',
-        selectStateMessageLabel: 'Select',
-        submitButtonTitle: 'Traži',
-        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Odaberi opseg',
+        selectStateMessageLabel: 'Odaberi',
+        submitButtonTitle: 'Traži (unesi)',
+        suggestionsWrapperAriaLabel: 'Predlozi',
         synchronizeButtonTitle: 'Sinhronizuj'
     },
     platformSelect: {
@@ -492,7 +492,7 @@ export default {
         submitButtonLabel: 'Idi'
     },
     platformSplitMenuButton: {
-        groupLabel: 'Split button group'
+        groupLabel: 'Grupa dugmadi podele'
     },
     platformStandardListItem: {
         deleteActionAriaLabel: 'izbriši',
@@ -541,6 +541,7 @@ export default {
         headerMenuUnfreeze: 'Odmrzni kolonu',
         headerMenuUnfreezePlural: 'Odmrzni kolone',
         loadMore: 'Pokaži više',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage:
             'Trenutno nema vidljivih kolona u tabeli. Odaberite kolone koje su vam potrebne u podešavanjima tabele.',
         P13ColumnsDialogCancelBtnLabel: 'Otkaži',
@@ -704,7 +705,7 @@ export default {
         successButtonLabel: 'OK'
     },
     platformWizardGenerator: {
-        stepsLabel: 'Wizard Steps',
+        stepsLabel: 'Koraci čarobnjaka',
         summarySectionEditStep: 'Uredi'
     },
     segmentedButton: {

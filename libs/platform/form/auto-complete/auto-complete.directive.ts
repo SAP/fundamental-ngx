@@ -1,15 +1,5 @@
 import { BACKSPACE, CONTROL, DELETE, ENTER, ESCAPE, LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
-import {
-    DestroyRef,
-    Directive,
-    ElementRef,
-    EventEmitter,
-    HostListener,
-    Input,
-    NgZone,
-    Output,
-    inject
-} from '@angular/core';
+import { DestroyRef, Directive, ElementRef, EventEmitter, HostListener, Input, Output, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';
@@ -71,9 +61,6 @@ export class AutoCompleteDirective {
     private _isComposing = false;
 
     /** @hidden */
-    private readonly _zone = inject(NgZone);
-
-    /** @hidden */
     private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
@@ -83,24 +70,19 @@ export class AutoCompleteDirective {
          * With chinese characters inputText property update was triggered after the keyup event trigger.
          * By ensuring that we set all properties we can proceed with stable data.
          */
-        this._zone.runOutsideAngular(() => {
-            const keyupEvent = fromEvent<KeyboardEvent>(this._elementRef.nativeElement, 'keyup');
-            const compositionStartEvent = fromEvent<CompositionEvent>(
-                this._elementRef.nativeElement,
-                'compositionstart'
-            );
-            const compositionEndEvent = fromEvent<CompositionEvent>(this._elementRef.nativeElement, 'compositionend');
+        const keyupEvent = fromEvent<KeyboardEvent>(this._elementRef.nativeElement, 'keyup');
+        const compositionStartEvent = fromEvent<CompositionEvent>(this._elementRef.nativeElement, 'compositionstart');
+        const compositionEndEvent = fromEvent<CompositionEvent>(this._elementRef.nativeElement, 'compositionend');
 
-            keyupEvent.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((evt) => this.handleKeyboardEvent(evt));
+        keyupEvent.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((evt) => this.handleKeyboardEvent(evt));
 
-            compositionStartEvent.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
-                this._isComposing = true;
-            });
+        compositionStartEvent.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+            this._isComposing = true;
+        });
 
-            compositionEndEvent.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
-                this._isComposing = false;
-                this.inputText = this._elementRef.nativeElement.value;
-            });
+        compositionEndEvent.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+            this._isComposing = false;
+            this.inputText = this._elementRef.nativeElement.value;
         });
     }
 

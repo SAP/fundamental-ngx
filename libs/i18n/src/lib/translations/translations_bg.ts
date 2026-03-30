@@ -17,10 +17,10 @@ export default {
         menuButtonAriaLabel: 'Бутон за меню'
     },
     coreActionSheet: {
-        toolbarLabel: 'Action Bar'
+        toolbarLabel: 'Лента с действия'
     },
     coreAvatarGroup: {
-        backButton: 'Back'
+        backButton: 'Назад'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Навигационен път',
@@ -59,15 +59,15 @@ export default {
         rightNavigationBtnLabel: 'Към следващата позиция'
     },
     coreCombobox: {
-        clearButtonTitle: 'Clear input'
+        clearButtonTitle: 'Изчистване на въведените данни'
     },
     coreDatePicker: {
         dateInputLabel: 'Въвеждане на дата',
         dateRangeInputLabel: 'Въвеждане на диапазон от дати',
         displayCalendarToggleLabel: 'Отваряне на средство за избор',
-        valueStateErrorMessage: 'Статус стойност "Грешка”',
-        valueStateInformationMessage: 'Статус стойност “Информация”',
-        valueStateSuccessMessage: 'Статус стойност "Успех"',
+        valueStateErrorMessage: 'Статус на стойност „Грешка“',
+        valueStateInformationMessage: 'Статус за стойност „Информация”',
+        valueStateSuccessMessage: 'Статус за стойност „Успех"',
         valueStateWarningMessage: 'Статус стойност "Предупреждение"'
     },
     coreDatetimePicker: {
@@ -79,11 +79,11 @@ export default {
         displayTypeTimeLabel: 'Час'
     },
     coreDynamicPage: {
-        breadcrumbsLabel: 'Breadcrumbs',
+        breadcrumbsLabel: 'Навигационни пътеки',
         collapseLabel: 'Свиване на заглавна област',
         expandLabel: 'Разширяване на заглавна област',
         pinLabel: 'Закачване на заглавна област',
-        toggleHeader: 'Toggle header',
+        toggleHeader: 'Превключване на заглавка',
         unpinLabel: 'Откачване на заглавна област'
     },
     coreFeedListItem: {
@@ -113,8 +113,8 @@ export default {
         announcementSuccess: 'Лента със съобщение за успешно изпълнение',
         announcementWarning: 'Лента с предупредително съобщение',
         closable: 'Може да се затвори',
-        defaultDismissButtonText: 'Close',
-        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Затваряне',
+        defaultHiddenText: 'Лента със съобщение',
         dismissLabel: 'Затваряне'
     },
     coreMultiComboBox: {
@@ -130,12 +130,12 @@ export default {
         multiInputAriaLabel: 'Въвеждане на множество стойности',
         navigateSelectionsWithArrows: 'Със стрелките нагоре и надолу може да преминавате през избора.',
         noResults: 'Няма резултати.',
-        showAll: 'Покажи всички ({count})',
+        showAll: 'Показване на всички ({count})',
         tokensCountText: 'Общ брой на съдържащите се токени: {length}.'
     },
     coreNavigation: {
         mainNavigation: 'Основна навигация',
-        navigationPath: 'Път на навигацията'
+        navigationPath: 'Navigation Path'
     },
     coreNestedList: {
         linkItemAriaLabel: 'Позиция от дърво {itemDetails}, {selectedDescription}'
@@ -198,7 +198,7 @@ export default {
         ariaRoleDescription: 'Индикатор за рейтинг'
     },
     coreSelect: {
-        closeButton: 'Close'
+        closeButton: 'Затваряне'
     },
     coreShellbar: {
         assistiveTools: 'Помощни инструменти',
@@ -239,7 +239,7 @@ export default {
         semanticDeclineLabel: 'Отхвърляне'
     },
     coreTabs: {
-        expandIconLabel: 'See More',
+        expandIconLabel: 'Вижте повече',
         tabListExpandButtonText: 'Повече'
     },
     coreText: {
@@ -273,10 +273,10 @@ export default {
     coreTimePicker: {
         timePickerButtonLabel: 'Отваряне на средство за избор',
         timePickerInputLabel: 'Въвеждане на средство за избор на време',
-        valueStateErrorMessage: 'Value state Error',
-        valueStateInformationMessage: 'Value state Information',
-        valueStateSuccessMessage: 'Value state Success',
-        valueStateWarningMessage: 'Value state Warning'
+        valueStateErrorMessage: 'Статус на стойност „Грешка“',
+        valueStateInformationMessage: 'Статус за стойност „Информация”',
+        valueStateSuccessMessage: 'Статус за стойност „Успех"',
+        valueStateWarningMessage: 'Статус стойност "Предупреждение"'
     },
     coreToken: {
         ariaRoleDescription: 'токен',
@@ -287,7 +287,7 @@ export default {
         tokenizerLabel: 'Генератор за токени'
     },
     coreToolbar: {
-        moreButton: 'More'
+        moreButton: 'Повече'
     },
     coreTree: {
         collapse: 'Скриване на възела',
@@ -304,8 +304,8 @@ export default {
         menuOkText: 'OK'
     },
     coreUserMenu: {
-        closeButton: 'Close',
-        previousButton: 'Previous'
+        closeButton: 'Затваряне',
+        previousButton: 'Назад'
     },
     coreWizard: {
         ariaLabel: 'Асистент'
@@ -389,11 +389,11 @@ export default {
         countListResultsSingular: '1 позиция от списъка с резултати'
     },
     platformFeedInput: {
-        sendButton: 'Send',
+        sendButton: 'Изпращане',
         userTitle: 'Потребител'
     },
     platformIconTabBar: {
-        moreButton: 'Още'
+        moreButton: 'Повече'
     },
     platformLink: {
         roleDescriptionWithMedia: 'Медии: {media}'
@@ -403,7 +403,7 @@ export default {
     },
     platformMessagePopover: {
         allErrors: 'Всички',
-        backButton: 'Go back',
+        backButton: 'Връщане',
         defaultErrors: {
             email: 'Имейлът е невалиден',
             max: 'Полето надхвърля максималната стойност',
@@ -427,20 +427,20 @@ export default {
         detailsActionAriaLabel: 'подробности'
     },
     platformSearchField: {
-        allButtonLabel: 'All',
-        cancelLabel: 'Cancel',
-        clearButtonTitle: 'Изчистване',
-        counterLabel: 'Total results: {count}',
-        deleteButtonAriaLabel: 'Remove',
-        deleteButtonTitle: 'Remove Suggestion',
-        groupHeader: 'Group Header',
+        allButtonLabel: 'Всички',
+        cancelLabel: 'Отказ',
+        clearButtonTitle: 'Изчистване на търсенето',
+        counterLabel: 'Общо резултати: {count}',
+        deleteButtonAriaLabel: 'Премахване',
+        deleteButtonTitle: 'Премахване на предложението',
+        groupHeader: 'Заглавка на група',
         searchInputLabel: 'Търсене',
         searchSuggestionMessage: 'Намерени са {count} предложения.',
         searchSuggestionNavigateMessage: 'за придвижване, използвайте стрелките нагоре и надолу',
-        selectScopeLabel: 'Select scope',
-        selectStateMessageLabel: 'Select',
-        submitButtonTitle: 'Търсене',
-        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Избор на обхват',
+        selectStateMessageLabel: 'Избор',
+        submitButtonTitle: 'Търсене (въвеждане)',
+        suggestionsWrapperAriaLabel: 'Предложения',
         synchronizeButtonTitle: 'Синхронизиране'
     },
     platformSelect: {
@@ -484,7 +484,7 @@ export default {
         selectFiltersHeader: 'Филтри',
         selectFiltersSubmitButtonLabel: 'Прилагане',
         settingsCategoryActive: 'Активно',
-        settingsCategoryAll: 'Всичко',
+        settingsCategoryAll: 'Всички',
         settingsCategoryMandatory: 'Задължително',
         settingsCategoryVisible: 'Видимо',
         settingsCategoryVisibleAndActive: 'Видимо и активно',
@@ -492,7 +492,7 @@ export default {
         submitButtonLabel: 'Напред'
     },
     platformSplitMenuButton: {
-        groupLabel: 'Split button group'
+        groupLabel: 'Група бутони за разделяне'
     },
     platformStandardListItem: {
         deleteActionAriaLabel: 'изтриване',
@@ -502,7 +502,7 @@ export default {
         ariaLabel: 'Въвеждане на превключвател'
     },
     platformTable: {
-        cancelBtnLabel: 'Отмяна',
+        cancelBtnLabel: 'Отказ',
         clearFilters: 'Изчистване на филтрите',
         collapseRowButtonTitle: 'Свиване на реда',
         confirmBtnLabel: 'OK',
@@ -541,6 +541,7 @@ export default {
         headerMenuUnfreeze: 'Отмяна на фиксирането на колоната',
         headerMenuUnfreezePlural: 'Отмяна на фиксирането на колоните',
         loadMore: 'Покажи повече',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage:
             'В момента в таблицата няма видими колони. Моля, изберете онези, които ви трябват, от настройките на таблицата.',
         P13ColumnsDialogCancelBtnLabel: 'Отказ',
@@ -704,7 +705,7 @@ export default {
         successButtonLabel: 'ОК'
     },
     platformWizardGenerator: {
-        stepsLabel: 'Wizard Steps',
+        stepsLabel: 'Стъпки на асистент',
         summarySectionEditStep: 'Редактиране'
     },
     segmentedButton: {

@@ -16,10 +16,10 @@ export default {
         menuButtonAriaLabel: '菜单按钮'
     },
     coreActionSheet: {
-        toolbarLabel: 'Action Bar'
+        toolbarLabel: '操作栏'
     },
     coreAvatarGroup: {
-        backButton: 'Back'
+        backButton: '返回'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: '浏览记录',
@@ -58,7 +58,7 @@ export default {
         rightNavigationBtnLabel: '转到下一个项目'
     },
     coreCombobox: {
-        clearButtonTitle: 'Clear input'
+        clearButtonTitle: '清除输入'
     },
     coreDatePicker: {
         dateInputLabel: '日期输入',
@@ -78,11 +78,11 @@ export default {
         displayTypeTimeLabel: '时间'
     },
     coreDynamicPage: {
-        breadcrumbsLabel: 'Breadcrumbs',
+        breadcrumbsLabel: '面包屑导航',
         collapseLabel: '折叠标题',
         expandLabel: '展开标题',
         pinLabel: '固定标题',
-        toggleHeader: 'Toggle header',
+        toggleHeader: '切换抬头',
         unpinLabel: '取消固定标题'
     },
     coreFeedListItem: {
@@ -112,8 +112,8 @@ export default {
         announcementSuccess: '成功消息条',
         announcementWarning: '警告消息条',
         closable: '可关闭',
-        defaultDismissButtonText: 'Close',
-        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: '关闭',
+        defaultHiddenText: '消息条',
         dismissLabel: '关闭'
     },
     coreMultiComboBox: {
@@ -128,12 +128,12 @@ export default {
         multiInputAriaLabel: '多值输入',
         navigateSelectionsWithArrows: '使用向上和向下箭头导航选择。',
         noResults: '无结果。',
-        showAll: 'Show All ({count})',
+        showAll: '显示所有 ({count})',
         tokensCountText: '包含的令牌总数：{length}。'
     },
     coreNavigation: {
         mainNavigation: '主导航',
-        navigationPath: '导航路径'
+        navigationPath: 'Navigation Path'
     },
     coreNestedList: {
         linkItemAriaLabel: '树项目 {itemDetails}，{selectedDescription}'
@@ -196,7 +196,7 @@ export default {
         ariaRoleDescription: '评级指示器'
     },
     coreSelect: {
-        closeButton: 'Close'
+        closeButton: '关闭'
     },
     coreShellbar: {
         assistiveTools: '辅助工具',
@@ -237,7 +237,7 @@ export default {
         semanticDeclineLabel: '拒绝'
     },
     coreTabs: {
-        expandIconLabel: 'See More',
+        expandIconLabel: '查看更多',
         tabListExpandButtonText: '更多'
     },
     coreText: {
@@ -271,10 +271,10 @@ export default {
     coreTimePicker: {
         timePickerButtonLabel: '打开选取器',
         timePickerInputLabel: '时间选取器输入',
-        valueStateErrorMessage: 'Value state Error',
-        valueStateInformationMessage: 'Value state Information',
-        valueStateSuccessMessage: 'Value state Success',
-        valueStateWarningMessage: 'Value state Warning'
+        valueStateErrorMessage: '值状态错误',
+        valueStateInformationMessage: '值状态信息',
+        valueStateSuccessMessage: '值状态成功',
+        valueStateWarningMessage: '值状态警告'
     },
     coreToken: {
         ariaRoleDescription: '令牌',
@@ -285,7 +285,7 @@ export default {
         tokenizerLabel: '分词器'
     },
     coreToolbar: {
-        moreButton: 'More'
+        moreButton: '更多'
     },
     coreTree: {
         collapse: '折叠节点',
@@ -302,8 +302,8 @@ export default {
         menuOkText: '确定'
     },
     coreUserMenu: {
-        closeButton: 'Close',
-        previousButton: 'Previous'
+        closeButton: '关闭',
+        previousButton: '上一步'
     },
     coreWizard: {
         ariaLabel: '向导'
@@ -386,7 +386,7 @@ export default {
         countListResultsSingular: '1 个结果列表项目'
     },
     platformFeedInput: {
-        sendButton: 'Send',
+        sendButton: '发送',
         userTitle: '用户'
     },
     platformIconTabBar: {
@@ -400,7 +400,7 @@ export default {
     },
     platformMessagePopover: {
         allErrors: '全部',
-        backButton: 'Go back',
+        backButton: '返回',
         defaultErrors: {
             email: '电子邮件无效',
             max: '该字段超出最大值',
@@ -424,20 +424,20 @@ export default {
         detailsActionAriaLabel: '详细信息'
     },
     platformSearchField: {
-        allButtonLabel: 'All',
-        cancelLabel: 'Cancel',
-        clearButtonTitle: '清除',
-        counterLabel: 'Total results: {count}',
-        deleteButtonAriaLabel: 'Remove',
-        deleteButtonTitle: 'Remove Suggestion',
-        groupHeader: 'Group Header',
+        allButtonLabel: '所有',
+        cancelLabel: '取消',
+        clearButtonTitle: '清除搜索',
+        counterLabel: '结果总数：{count}',
+        deleteButtonAriaLabel: '移除',
+        deleteButtonTitle: '移除建议',
+        groupHeader: '组抬头',
         searchInputLabel: '搜索',
         searchSuggestionMessage: '找到 {count} 个建议。',
         searchSuggestionNavigateMessage: '使用向上和向下箭头进行导航',
-        selectScopeLabel: 'Select scope',
-        selectStateMessageLabel: 'Select',
-        submitButtonTitle: '搜索',
-        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: '选择范围',
+        selectStateMessageLabel: '选择',
+        submitButtonTitle: '搜索 (Enter)',
+        suggestionsWrapperAriaLabel: '建议',
         synchronizeButtonTitle: '同步'
     },
     platformSelect: {
@@ -489,7 +489,7 @@ export default {
         submitButtonLabel: '执行'
     },
     platformSplitMenuButton: {
-        groupLabel: 'Split button group'
+        groupLabel: '拆分按钮组'
     },
     platformStandardListItem: {
         deleteActionAriaLabel: '删除',
@@ -538,6 +538,7 @@ export default {
         headerMenuUnfreeze: '取消冻结列',
         headerMenuUnfreezePlural: '取消冻结列',
         loadMore: '显示更多',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage: '此刻，表中没有可见的列。请在表设置中选择所需的列。',
         P13ColumnsDialogCancelBtnLabel: '取消',
         P13ColumnsDialogConfirmationBtnLabel: '确定',
@@ -700,7 +701,7 @@ export default {
         successButtonLabel: '确定'
     },
     platformWizardGenerator: {
-        stepsLabel: 'Wizard Steps',
+        stepsLabel: '向导步骤',
         summarySectionEditStep: '编辑'
     },
     segmentedButton: {

@@ -16,10 +16,10 @@ export default {
         menuButtonAriaLabel: 'ปุ่มเมนู'
     },
     coreActionSheet: {
-        toolbarLabel: 'Action Bar'
+        toolbarLabel: 'แถบการดำเนินการ'
     },
     coreAvatarGroup: {
-        backButton: 'Back'
+        backButton: 'ย้อนกลับ'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'เมนูนำทาง',
@@ -58,7 +58,7 @@ export default {
         rightNavigationBtnLabel: 'ไปยังไอเท็มถัดไป'
     },
     coreCombobox: {
-        clearButtonTitle: 'Clear input'
+        clearButtonTitle: 'เคลียร์ข้อมูลที่ป้อน'
     },
     coreDatePicker: {
         dateInputLabel: 'การป้อนข้อมูลวันที่',
@@ -78,11 +78,11 @@ export default {
         displayTypeTimeLabel: 'เวลา'
     },
     coreDynamicPage: {
-        breadcrumbsLabel: 'Breadcrumbs',
+        breadcrumbsLabel: 'เมนูที่ใช้นำทางในเว็บไซต์ (Breadcrumb)',
         collapseLabel: 'ยุบรวมส่วนหัว',
         expandLabel: 'ขยายส่วนหัว',
         pinLabel: 'ปักหมุดส่วนหัว',
-        toggleHeader: 'Toggle header',
+        toggleHeader: 'สลับส่วนหัว',
         unpinLabel: 'ยกเลิกการปักหมุดส่วนหัว'
     },
     coreFeedListItem: {
@@ -112,8 +112,8 @@ export default {
         announcementSuccess: 'แถบข้อความแสดงความสำเร็จ',
         announcementWarning: 'แถบข้อความเตือน',
         closable: 'สามารถปิดได้',
-        defaultDismissButtonText: 'Close',
-        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'ปิด',
+        defaultHiddenText: 'แถบข้อความ',
         dismissLabel: 'ปิด'
     },
     coreMultiComboBox: {
@@ -129,12 +129,12 @@ export default {
         multiInputAriaLabel: 'การป้อนค่าหลายค่า',
         navigateSelectionsWithArrows: 'เนวิเกตไปยังรายการที่เลือกด้วยลูกศรขึ้นและลง',
         noResults: 'ไม่มีผลลัพธ์',
-        showAll: 'Show All ({count})',
+        showAll: 'แสดงทั้งหมด ({count})',
         tokensCountText: 'มี Token ทั้งหมด: {length}'
     },
     coreNavigation: {
         mainNavigation: 'การเนวิเกตหลัก',
-        navigationPath: 'พาธการเนวิเกต'
+        navigationPath: 'Navigation Path'
     },
     coreNestedList: {
         linkItemAriaLabel: 'ไอเท็มแบบทรี {itemDetails} {selectedDescription}'
@@ -197,7 +197,7 @@ export default {
         ariaRoleDescription: 'ตัวบ่งชี้การจัดอันดับ'
     },
     coreSelect: {
-        closeButton: 'Close'
+        closeButton: 'ปิด'
     },
     coreShellbar: {
         assistiveTools: 'เครื่องมือช่วยเหลือ',
@@ -238,7 +238,7 @@ export default {
         semanticDeclineLabel: 'ปฏิเสธ'
     },
     coreTabs: {
-        expandIconLabel: 'See More',
+        expandIconLabel: 'ดูเพิ่มเติม',
         tabListExpandButtonText: 'เพิ่มเติม'
     },
     coreText: {
@@ -272,10 +272,10 @@ export default {
     coreTimePicker: {
         timePickerButtonLabel: 'เปิดตัวเลือก',
         timePickerInputLabel: 'อินพุทของตัวเลือกเวลา',
-        valueStateErrorMessage: 'Value state Error',
-        valueStateInformationMessage: 'Value state Information',
-        valueStateSuccessMessage: 'Value state Success',
-        valueStateWarningMessage: 'Value state Warning'
+        valueStateErrorMessage: 'สถานะของค่า - ข้อผิดพลาด',
+        valueStateInformationMessage: 'สถานะของค่า - ข้อมูล',
+        valueStateSuccessMessage: 'สถานะของค่า - สำเร็จ',
+        valueStateWarningMessage: 'สถานะของค่า - คำเตือน'
     },
     coreToken: {
         ariaRoleDescription: 'Token',
@@ -286,7 +286,7 @@ export default {
         tokenizerLabel: 'ตัวแปลงเป็น Token'
     },
     coreToolbar: {
-        moreButton: 'More'
+        moreButton: 'เพิ่มเติม'
     },
     coreTree: {
         collapse: 'ยุบรวมโหนด',
@@ -303,8 +303,8 @@ export default {
         menuOkText: 'ตกลง'
     },
     coreUserMenu: {
-        closeButton: 'Close',
-        previousButton: 'Previous'
+        closeButton: 'ปิด',
+        previousButton: 'ก่อนหน้า'
     },
     coreWizard: {
         ariaLabel: 'Wizard'
@@ -388,7 +388,7 @@ export default {
         countListResultsSingular: 'ไอเท็มในรายการผลลัพธ์ 1 รายการ'
     },
     platformFeedInput: {
-        sendButton: 'Send',
+        sendButton: 'ส่ง',
         userTitle: 'ผู้ใช้'
     },
     platformIconTabBar: {
@@ -402,7 +402,7 @@ export default {
     },
     platformMessagePopover: {
         allErrors: 'ทั้งหมด',
-        backButton: 'Go back',
+        backButton: 'ย้อนกลับ',
         defaultErrors: {
             email: 'อีเมล์ไม่ถูกต้อง',
             max: 'ฟิลด์นี้เกินค่าสูงสุด',
@@ -426,20 +426,20 @@ export default {
         detailsActionAriaLabel: 'รายละเอียด'
     },
     platformSearchField: {
-        allButtonLabel: 'All',
-        cancelLabel: 'Cancel',
-        clearButtonTitle: 'เคลียร์',
-        counterLabel: 'Total results: {count}',
-        deleteButtonAriaLabel: 'Remove',
-        deleteButtonTitle: 'Remove Suggestion',
-        groupHeader: 'Group Header',
+        allButtonLabel: 'ทั้งหมด',
+        cancelLabel: 'ยกเลิก',
+        clearButtonTitle: 'เคลียร์การค้นหา',
+        counterLabel: 'ผลลัพธ์ทั้งหมด: {count}',
+        deleteButtonAriaLabel: 'เอาออก',
+        deleteButtonTitle: 'เอาคำแนะนำออก',
+        groupHeader: 'ส่วนหัวของกลุ่ม',
         searchInputLabel: 'ค้นหา',
         searchSuggestionMessage: 'พบคำแนะนำ {count} รายการ',
         searchSuggestionNavigateMessage: 'ใช้ลูกศรขึ้นและลูกศรลงเพื่อเนวิเกต',
-        selectScopeLabel: 'Select scope',
-        selectStateMessageLabel: 'Select',
-        submitButtonTitle: 'ค้นหา',
-        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'เลือกขอบเขต',
+        selectStateMessageLabel: 'เลือก',
+        submitButtonTitle: 'ค้นหา (Enter)',
+        suggestionsWrapperAriaLabel: 'คำแนะนำ',
         synchronizeButtonTitle: 'ซิงโครไนซ์'
     },
     platformSelect: {
@@ -491,7 +491,7 @@ export default {
         submitButtonLabel: 'ไป'
     },
     platformSplitMenuButton: {
-        groupLabel: 'Split button group'
+        groupLabel: 'กลุ่มปุ่มแยก'
     },
     platformStandardListItem: {
         deleteActionAriaLabel: 'ลบ',
@@ -540,6 +540,7 @@ export default {
         headerMenuUnfreeze: 'ยกเลิกการตรึงคอลัมน์',
         headerMenuUnfreezePlural: 'ยกเลิกการตรึงคอลัมน์',
         loadMore: 'แสดงเพิ่มเติม',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage:
             'ไม่มีคอลัมน์ที่มองเห็นได้ในตารางในขณะนี้ กรุณาเลือกคอลัมน์ที่คุณต้องการในการกำหนดค่าตาราง',
         P13ColumnsDialogCancelBtnLabel: 'ยกเลิก',
@@ -703,7 +704,7 @@ export default {
         successButtonLabel: 'ตกลง'
     },
     platformWizardGenerator: {
-        stepsLabel: 'Wizard Steps',
+        stepsLabel: 'ขั้นตอนของ Wizard',
         summarySectionEditStep: 'แก้ไข'
     },
     segmentedButton: {

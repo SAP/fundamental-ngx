@@ -16,10 +16,10 @@ export default {
         menuButtonAriaLabel: '功能表按鈕'
     },
     coreActionSheet: {
-        toolbarLabel: 'Action Bar'
+        toolbarLabel: '動作列'
     },
     coreAvatarGroup: {
-        backButton: 'Back'
+        backButton: '返回'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: '階層連結軌跡',
@@ -58,7 +58,7 @@ export default {
         rightNavigationBtnLabel: '移至下一個項目'
     },
     coreCombobox: {
-        clearButtonTitle: 'Clear input'
+        clearButtonTitle: '清除輸入'
     },
     coreDatePicker: {
         dateInputLabel: '日期輸入',
@@ -78,11 +78,11 @@ export default {
         displayTypeTimeLabel: '時間'
     },
     coreDynamicPage: {
-        breadcrumbsLabel: 'Breadcrumbs',
+        breadcrumbsLabel: '階層連結',
         collapseLabel: '摺疊表頭',
         expandLabel: '展開表頭',
         pinLabel: '釘選表頭',
-        toggleHeader: 'Toggle header',
+        toggleHeader: '切換表頭',
         unpinLabel: '取消釘選表頭'
     },
     coreFeedListItem: {
@@ -112,8 +112,8 @@ export default {
         announcementSuccess: '成功訊息列',
         announcementWarning: '警告訊息列',
         closable: '可關閉',
-        defaultDismissButtonText: 'Close',
-        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: '關閉',
+        defaultHiddenText: '訊息列',
         dismissLabel: '關閉'
     },
     coreMultiComboBox: {
@@ -128,12 +128,12 @@ export default {
         multiInputAriaLabel: '多重值輸入',
         navigateSelectionsWithArrows: '使用向上和向下箭頭瀏覽選擇。',
         noResults: '無結果。',
-        showAll: 'Show All ({count})',
+        showAll: '顯示全部 ({count})',
         tokensCountText: '包含總計權杖：{length}。'
     },
     coreNavigation: {
         mainNavigation: '主瀏覽',
-        navigationPath: '瀏覽路徑'
+        navigationPath: 'Navigation Path'
     },
     coreNestedList: {
         linkItemAriaLabel: '樹狀項目 {itemDetails}、{selectedDescription}'
@@ -196,7 +196,7 @@ export default {
         ariaRoleDescription: '評級指示碼'
     },
     coreSelect: {
-        closeButton: 'Close'
+        closeButton: '關閉'
     },
     coreShellbar: {
         assistiveTools: '輔助工具',
@@ -237,7 +237,7 @@ export default {
         semanticDeclineLabel: '拒絕'
     },
     coreTabs: {
-        expandIconLabel: 'See More',
+        expandIconLabel: '檢視更多',
         tabListExpandButtonText: '更多'
     },
     coreText: {
@@ -271,10 +271,10 @@ export default {
     coreTimePicker: {
         timePickerButtonLabel: '開啟選擇器',
         timePickerInputLabel: '時間選擇器輸入',
-        valueStateErrorMessage: 'Value state Error',
-        valueStateInformationMessage: 'Value state Information',
-        valueStateSuccessMessage: 'Value state Success',
-        valueStateWarningMessage: 'Value state Warning'
+        valueStateErrorMessage: '值狀態 (錯誤)',
+        valueStateInformationMessage: '值狀態 (資訊)',
+        valueStateSuccessMessage: '值狀態 (成功)',
+        valueStateWarningMessage: '值狀態 (警告)'
     },
     coreToken: {
         ariaRoleDescription: '權杖',
@@ -285,7 +285,7 @@ export default {
         tokenizerLabel: '賦予器'
     },
     coreToolbar: {
-        moreButton: 'More'
+        moreButton: '更多'
     },
     coreTree: {
         collapse: '收合節點',
@@ -302,8 +302,8 @@ export default {
         menuOkText: '確定'
     },
     coreUserMenu: {
-        closeButton: 'Close',
-        previousButton: 'Previous'
+        closeButton: '關閉',
+        previousButton: '上一步'
     },
     coreWizard: {
         ariaLabel: '精靈'
@@ -386,7 +386,7 @@ export default {
         countListResultsSingular: '1 個結果清單項目'
     },
     platformFeedInput: {
-        sendButton: 'Send',
+        sendButton: '傳送',
         userTitle: '使用者'
     },
     platformIconTabBar: {
@@ -400,7 +400,7 @@ export default {
     },
     platformMessagePopover: {
         allErrors: '全部',
-        backButton: 'Go back',
+        backButton: '返回',
         defaultErrors: {
             email: '電子郵件無效',
             max: '欄位超過最大值',
@@ -424,20 +424,20 @@ export default {
         detailsActionAriaLabel: '詳細資訊'
     },
     platformSearchField: {
-        allButtonLabel: 'All',
-        cancelLabel: 'Cancel',
-        clearButtonTitle: '清除',
-        counterLabel: 'Total results: {count}',
-        deleteButtonAriaLabel: 'Remove',
-        deleteButtonTitle: 'Remove Suggestion',
-        groupHeader: 'Group Header',
+        allButtonLabel: '全部',
+        cancelLabel: '取消',
+        clearButtonTitle: '清除搜尋',
+        counterLabel: '總計結果：{count} 個',
+        deleteButtonAriaLabel: '刪除',
+        deleteButtonTitle: '刪除建議',
+        groupHeader: '群組標題',
         searchInputLabel: '搜尋',
         searchSuggestionMessage: '找到 {count} 個建議。',
         searchSuggestionNavigateMessage: '使用向上和向下箭頭瀏覽',
-        selectScopeLabel: 'Select scope',
-        selectStateMessageLabel: 'Select',
-        submitButtonTitle: '搜尋',
-        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: '選擇範圍',
+        selectStateMessageLabel: '選擇',
+        submitButtonTitle: '搜尋 (Enter)',
+        suggestionsWrapperAriaLabel: '建議',
         synchronizeButtonTitle: '同步'
     },
     platformSelect: {
@@ -489,7 +489,7 @@ export default {
         submitButtonLabel: '開始'
     },
     platformSplitMenuButton: {
-        groupLabel: 'Split button group'
+        groupLabel: '分割按鈕群組'
     },
     platformStandardListItem: {
         deleteActionAriaLabel: '刪除',
@@ -538,6 +538,7 @@ export default {
         headerMenuUnfreeze: '取消凍結欄',
         headerMenuUnfreezePlural: '取消凍結欄',
         loadMore: '顯示更多',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage: '現在表格中沒有可見的欄，請在表格設定中選擇您需要的欄。',
         P13ColumnsDialogCancelBtnLabel: '取消',
         P13ColumnsDialogConfirmationBtnLabel: '確定',
@@ -700,7 +701,7 @@ export default {
         successButtonLabel: '確定'
     },
     platformWizardGenerator: {
-        stepsLabel: 'Wizard Steps',
+        stepsLabel: '精靈步驟',
         summarySectionEditStep: '編輯'
     },
     segmentedButton: {

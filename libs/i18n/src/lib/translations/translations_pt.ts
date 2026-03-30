@@ -16,10 +16,10 @@ export default {
         menuButtonAriaLabel: 'Botão de menu'
     },
     coreActionSheet: {
-        toolbarLabel: 'Action Bar'
+        toolbarLabel: 'Barra de ação'
     },
     coreAvatarGroup: {
-        backButton: 'Back'
+        backButton: 'Voltar'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Trilha de breadcrumb',
@@ -58,7 +58,7 @@ export default {
         rightNavigationBtnLabel: 'Ir para o próximo item'
     },
     coreCombobox: {
-        clearButtonTitle: 'Clear input'
+        clearButtonTitle: 'Limpar entrada'
     },
     coreDatePicker: {
         dateInputLabel: 'Entrada de data',
@@ -82,7 +82,7 @@ export default {
         collapseLabel: 'Recolher cabeçalho',
         expandLabel: 'Expandir cabeçalho',
         pinLabel: 'Fixar cabeçalho',
-        toggleHeader: 'Toggle header',
+        toggleHeader: 'Alternar cabeçalho',
         unpinLabel: 'Desafixar cabeçalho'
     },
     coreFeedListItem: {
@@ -112,8 +112,8 @@ export default {
         announcementSuccess: 'Faixa de mensagens de êxito',
         announcementWarning: 'Faixa de mensagens de aviso',
         closable: 'Fechável',
-        defaultDismissButtonText: 'Close',
-        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Fechar',
+        defaultHiddenText: 'Faixa de mensagens',
         dismissLabel: 'Fechar'
     },
     coreMultiComboBox: {
@@ -129,12 +129,12 @@ export default {
         multiInputAriaLabel: 'Entrada de valores múltiplos',
         navigateSelectionsWithArrows: 'Navegue nas seleções com as setas para cima e para baixo.',
         noResults: 'Nenhum resultado.',
-        showAll: 'Show All ({count})',
+        showAll: 'Mostrar tudo ({count})',
         tokensCountText: 'Contém total de tokens: {length}.'
     },
     coreNavigation: {
         mainNavigation: 'Navegação principal',
-        navigationPath: 'Caminho de navegação'
+        navigationPath: 'Navigation Path'
     },
     coreNestedList: {
         linkItemAriaLabel: 'Item da árvore {itemDetails}, {selectedDescription}'
@@ -197,7 +197,7 @@ export default {
         ariaRoleDescription: 'Indicador de avaliação'
     },
     coreSelect: {
-        closeButton: 'Close'
+        closeButton: 'Fechar'
     },
     coreShellbar: {
         assistiveTools: 'Ferramentas assistivas',
@@ -238,7 +238,7 @@ export default {
         semanticDeclineLabel: 'Recusar'
     },
     coreTabs: {
-        expandIconLabel: 'See More',
+        expandIconLabel: 'Ver mais',
         tabListExpandButtonText: 'Mais'
     },
     coreText: {
@@ -272,10 +272,10 @@ export default {
     coreTimePicker: {
         timePickerButtonLabel: 'Abrir selecionador',
         timePickerInputLabel: 'Entrada de seletor de hora',
-        valueStateErrorMessage: 'Value state Error',
-        valueStateInformationMessage: 'Value state Information',
-        valueStateSuccessMessage: 'Value state Success',
-        valueStateWarningMessage: 'Value state Warning'
+        valueStateErrorMessage: 'Status de valor Erro',
+        valueStateInformationMessage: 'Status de valor Informação',
+        valueStateSuccessMessage: 'Status de valor Sucesso',
+        valueStateWarningMessage: 'Status de valor Advertência'
     },
     coreToken: {
         ariaRoleDescription: 'token',
@@ -286,7 +286,7 @@ export default {
         tokenizerLabel: 'Tokenizador'
     },
     coreToolbar: {
-        moreButton: 'More'
+        moreButton: 'Mais'
     },
     coreTree: {
         collapse: 'Recolher nó',
@@ -303,8 +303,8 @@ export default {
         menuOkText: 'OK'
     },
     coreUserMenu: {
-        closeButton: 'Close',
-        previousButton: 'Previous'
+        closeButton: 'Fechar',
+        previousButton: 'Anterior'
     },
     coreWizard: {
         ariaLabel: 'Assistente'
@@ -388,7 +388,7 @@ export default {
         countListResultsSingular: '1 item da lista de resultados'
     },
     platformFeedInput: {
-        sendButton: 'Send',
+        sendButton: 'Enviar',
         userTitle: 'Usuário'
     },
     platformIconTabBar: {
@@ -402,7 +402,7 @@ export default {
     },
     platformMessagePopover: {
         allErrors: 'Tudo',
-        backButton: 'Go back',
+        backButton: 'Voltar',
         defaultErrors: {
             email: 'O e-mail é inválido.',
             max: 'O campo excede o valor máximo',
@@ -426,20 +426,20 @@ export default {
         detailsActionAriaLabel: 'detalhes'
     },
     platformSearchField: {
-        allButtonLabel: 'All',
-        cancelLabel: 'Cancel',
-        clearButtonTitle: 'Limpar',
-        counterLabel: 'Total results: {count}',
-        deleteButtonAriaLabel: 'Remove',
-        deleteButtonTitle: 'Remove Suggestion',
-        groupHeader: 'Group Header',
+        allButtonLabel: 'Tudo',
+        cancelLabel: 'Cancelar',
+        clearButtonTitle: 'Limpar pesquisa',
+        counterLabel: 'Total de resultados: {count}',
+        deleteButtonAriaLabel: 'Remover',
+        deleteButtonTitle: 'Remover sugestão',
+        groupHeader: 'Cabeçalho do grupo',
         searchInputLabel: 'Pesquisar',
         searchSuggestionMessage: '{count} sugestões encontradas.',
         searchSuggestionNavigateMessage: 'usar as setas para cima e para baixo para navegar',
-        selectScopeLabel: 'Select scope',
-        selectStateMessageLabel: 'Select',
-        submitButtonTitle: 'Pesquisar',
-        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Selecionar escopo',
+        selectStateMessageLabel: 'Selecionar',
+        submitButtonTitle: 'Procurar (Enter)',
+        suggestionsWrapperAriaLabel: 'Sugestões',
         synchronizeButtonTitle: 'Sincronizar'
     },
     platformSelect: {
@@ -491,7 +491,7 @@ export default {
         submitButtonLabel: 'Ir'
     },
     platformSplitMenuButton: {
-        groupLabel: 'Split button group'
+        groupLabel: 'Grupo de botões Dividir'
     },
     platformStandardListItem: {
         deleteActionAriaLabel: 'excluir',
@@ -540,6 +540,7 @@ export default {
         headerMenuUnfreeze: 'Descongelar coluna',
         headerMenuUnfreezePlural: 'Descongelar colunas',
         loadMore: 'Mostrar mais',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage:
             'Neste momento, não existem colunas visíveis na tabela. Selecione as colunas de que você necessita nas configurações de tabela.',
         P13ColumnsDialogCancelBtnLabel: 'Cancelar',
@@ -703,7 +704,7 @@ export default {
         successButtonLabel: 'OK'
     },
     platformWizardGenerator: {
-        stepsLabel: 'Wizard Steps',
+        stepsLabel: 'Passos do assistente',
         summarySectionEditStep: 'Editar'
     },
     segmentedButton: {

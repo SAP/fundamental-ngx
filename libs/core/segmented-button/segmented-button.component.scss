@@ -9,3 +9,9 @@
     --fdButtonBorderColor: var(--sapButton_Selected_BorderColor);
     --fdButtonBackgroundColor: var(--sapButton_Selected_Background);
 }
+
+.fd-segmented-button:has(.fd-button.is-disabled):focus-visible,
+.fd-segmented-button:has(.fd-button:disabled):focus-visible,
+.fd-segmented-button:has(.fd-button[aria-disabled='true']):focus-visible {
+    outline: none;
+}

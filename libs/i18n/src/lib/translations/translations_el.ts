@@ -16,10 +16,10 @@ export default {
         menuButtonAriaLabel: 'Κουμπί μενού'
     },
     coreActionSheet: {
-        toolbarLabel: 'Action Bar'
+        toolbarLabel: 'Γραμμή Ενεργειών'
     },
     coreAvatarGroup: {
-        backButton: 'Back'
+        backButton: 'Πίσω'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Διαδρομή Περιήγησης',
@@ -58,7 +58,7 @@ export default {
         rightNavigationBtnLabel: 'Προς επόμενο στοιχείο'
     },
     coreCombobox: {
-        clearButtonTitle: 'Clear input'
+        clearButtonTitle: 'Εκκαθάριση εισόδου'
     },
     coreDatePicker: {
         dateInputLabel: 'Είσοδος ημερομηνίας',
@@ -78,11 +78,11 @@ export default {
         displayTypeTimeLabel: 'Ώρα'
     },
     coreDynamicPage: {
-        breadcrumbsLabel: 'Breadcrumbs',
-        collapseLabel: 'Σύμπτηξη Κεφαλίδας',
+        breadcrumbsLabel: 'Δυναμικές διαδρομές',
+        collapseLabel: 'Σύμπτυξη Κεφαλίδας',
         expandLabel: 'Επέκταση Κεφαλίδας',
         pinLabel: 'Καρφίτσωμα Κεφαλίδας',
-        toggleHeader: 'Toggle header',
+        toggleHeader: 'Εναλλαγή της κεφαλίδας',
         unpinLabel: 'Ξεκαρφίτσωμα Κεφαλίδας'
     },
     coreFeedListItem: {
@@ -112,8 +112,8 @@ export default {
         announcementSuccess: 'Ταινία Μηνύματος Επιτυχίας',
         announcementWarning: 'Ταινία Μηνύματος Προειδοποίησης',
         closable: 'Δυνατότητα κλεισίματος',
-        defaultDismissButtonText: 'Close',
-        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Κλείσιμο',
+        defaultHiddenText: 'Ταινία Μηνύματος',
         dismissLabel: 'Κλείσιμο'
     },
     coreMultiComboBox: {
@@ -129,12 +129,12 @@ export default {
         multiInputAriaLabel: 'Είσοδος Πολλών Τιμών',
         navigateSelectionsWithArrows: 'Πλοήγηση επιλογών με τα βέλη πάνω και κάτω.',
         noResults: 'Κανένα αποτέλεσμα.',
-        showAll: 'Show All ({count})',
+        showAll: 'Εμφάνιση όλων ({count})',
         tokensCountText: 'Περιέχει συνολικά διακριτικά: {μήκος}.'
     },
     coreNavigation: {
         mainNavigation: 'Κύρια Πλοήγηση',
-        navigationPath: 'Διαδρομή Πλοήγησης'
+        navigationPath: 'Navigation Path'
     },
     coreNestedList: {
         linkItemAriaLabel: 'Στοιχείο δέντρου {itemDetails}, {selectedDescription}'
@@ -197,7 +197,7 @@ export default {
         ariaRoleDescription: 'Δείκτης αξιολόγησης'
     },
     coreSelect: {
-        closeButton: 'Close'
+        closeButton: 'Κλείσιμο'
     },
     coreShellbar: {
         assistiveTools: 'Βοηθητικά Εργαλεία',
@@ -238,7 +238,7 @@ export default {
         semanticDeclineLabel: 'Απόρριψη'
     },
     coreTabs: {
-        expandIconLabel: 'See More',
+        expandIconLabel: 'Εμφάνιση Περισσότερων',
         tabListExpandButtonText: 'Περισσότερα'
     },
     coreText: {
@@ -272,10 +272,10 @@ export default {
     coreTimePicker: {
         timePickerButtonLabel: 'Ανοιγμα επιλογέα',
         timePickerInputLabel: 'Είσοδος επιλογέα χρόνου',
-        valueStateErrorMessage: 'Value state Error',
-        valueStateInformationMessage: 'Value state Information',
-        valueStateSuccessMessage: 'Value state Success',
-        valueStateWarningMessage: 'Value state Warning'
+        valueStateErrorMessage: "Κατάσταση τιμής 'Σφάλμα'",
+        valueStateInformationMessage: "Κατάσταση τιμής 'Πληροφορίες'",
+        valueStateSuccessMessage: "Κατάσταση τιμής 'Επιτυχία'",
+        valueStateWarningMessage: "Κατάσταση τιμής 'Προειδοποίηση'"
     },
     coreToken: {
         ariaRoleDescription: 'διακριτικό',
@@ -286,7 +286,7 @@ export default {
         tokenizerLabel: 'Δημιουργία διακριτικού'
     },
     coreToolbar: {
-        moreButton: 'More'
+        moreButton: 'Περισσότερα'
     },
     coreTree: {
         collapse: 'Σύμπτυξη κόμβου',
@@ -303,8 +303,8 @@ export default {
         menuOkText: 'OK'
     },
     coreUserMenu: {
-        closeButton: 'Close',
-        previousButton: 'Previous'
+        closeButton: 'Κλείσιμο',
+        previousButton: 'Προηγούμενο'
     },
     coreWizard: {
         ariaLabel: 'Οδηγός'
@@ -389,7 +389,7 @@ export default {
         countListResultsSingular: '1 στοιχείο λίστας αποτελεσμάτων'
     },
     platformFeedInput: {
-        sendButton: 'Send',
+        sendButton: 'Αποστολή',
         userTitle: 'Χρήστης'
     },
     platformIconTabBar: {
@@ -403,7 +403,7 @@ export default {
     },
     platformMessagePopover: {
         allErrors: 'Όλοι',
-        backButton: 'Go back',
+        backButton: 'Επιστροφή',
         defaultErrors: {
             email: 'Email είναι άκυρο',
             max: 'Το πεδίο υπερβαίνει τη μέγιστη τιμή',
@@ -427,20 +427,20 @@ export default {
         detailsActionAriaLabel: 'αναλυτικό'
     },
     platformSearchField: {
-        allButtonLabel: 'All',
-        cancelLabel: 'Cancel',
-        clearButtonTitle: 'Απαλοιφή',
-        counterLabel: 'Total results: {count}',
-        deleteButtonAriaLabel: 'Remove',
-        deleteButtonTitle: 'Remove Suggestion',
-        groupHeader: 'Group Header',
+        allButtonLabel: 'Όλα',
+        cancelLabel: 'Ακύρωση',
+        clearButtonTitle: 'Εκκαθάριση Αναζήτησης',
+        counterLabel: 'Συνολικά αποτελέσματα: {count}',
+        deleteButtonAriaLabel: 'Κατάργηση',
+        deleteButtonTitle: 'Διαγραφή Πρότασης',
+        groupHeader: 'Κεφαλίδα ομάδας',
         searchInputLabel: 'Αναζήτηση',
         searchSuggestionMessage: '{count} προτάσεις βρέθηκαν.',
         searchSuggestionNavigateMessage: 'χρήση βελών πάνω και κάτω για πλοήγηση',
-        selectScopeLabel: 'Select scope',
-        selectStateMessageLabel: 'Select',
-        submitButtonTitle: 'Αναζήτηση',
-        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Επιλογή Εύρους',
+        selectStateMessageLabel: 'Επιλογή',
+        submitButtonTitle: 'Αναζήτηση (Enter)',
+        suggestionsWrapperAriaLabel: 'Συστάσεις',
         synchronizeButtonTitle: 'Συγχρονισμός'
     },
     platformSelect: {
@@ -492,7 +492,7 @@ export default {
         submitButtonLabel: 'Μετάβαση'
     },
     platformSplitMenuButton: {
-        groupLabel: 'Split button group'
+        groupLabel: 'Ομάδα κουμπιών διαχωρισμού'
     },
     platformStandardListItem: {
         deleteActionAriaLabel: 'διαγραφή',
@@ -541,6 +541,7 @@ export default {
         headerMenuUnfreeze: 'Αποδέσμευση Στήλης',
         headerMenuUnfreezePlural: 'Αποδέσμευση στηλών',
         loadMore: 'Εμφάνιση Περισσότερων',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage:
             'Τώρα δεν υπάρχουν ορατές στήλες στον πίνακα. Επιλέξτε τις στήλες που χρειάζεστε στις ρυθμίσεις πίνακα.',
         P13ColumnsDialogCancelBtnLabel: 'Ακύρωση',
@@ -704,7 +705,7 @@ export default {
         successButtonLabel: 'ΟΚ'
     },
     platformWizardGenerator: {
-        stepsLabel: 'Wizard Steps',
+        stepsLabel: 'Βήματα Οδηγού',
         summarySectionEditStep: 'Επεξεργασία'
     },
     segmentedButton: {

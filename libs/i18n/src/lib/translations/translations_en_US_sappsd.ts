@@ -55,7 +55,7 @@ export default {
     },
     coreCarousel: {
         leftNavigationBtnLabel: '[[[Ģŏ ţŏ ρŗēʋįŏűş įţēɱ∙∙∙∙∙]]]',
-        pageIndicatorLabel: '[[[Ĭţēɱ {įţēɱŃűɱ} ŏƒ {ţŏţąĺŃűɱ} ƌįşρĺąŷēƌ∙∙∙∙∙∙∙∙∙∙∙∙∙]]]',
+        pageIndicatorLabel: '[[[Ĭţēɱ {itemNum} ŏƒ {totalNum} ƌįşρĺąŷēƌ]]]',
         rightNavigationBtnLabel: '[[[Ģŏ ţŏ ŋēχţ įţēɱ∙∙∙∙]]]'
     },
     coreCombobox: {
@@ -88,14 +88,14 @@ export default {
     },
     coreFeedListItem: {
         lessLabel: '[[[Ļēşş]]]',
-        moreLabel: '[[[{ċŏűŋţ} ɱŏŗē∙∙∙∙∙∙∙]]]'
+        moreLabel: '[[[{count} ɱŏŗē]]]'
     },
     coreGridList: {
         filterBarCancelButtonTitle: '[[[Ĉąŋċēĺ∙∙∙∙∙∙∙∙]]]',
         listItemButtonDeleteTitle: '[[[Ďēĺēţē∙∙∙∙∙∙∙∙]]]',
         listItemButtonDetailsTitle: '[[[Ďēţąįĺş∙∙∙∙∙∙∙]]]',
-        listItemCounterAriaLabel: '[[[Ĭţēɱ ĥąş {ċŏűŋţ} ċĥįĺƌŗēŋ.∙∙∙∙∙∙∙]]]',
-        listItemStatusAriaLabel: '[[[Ĭţēɱ ĥąş şţąţűş. Ŝţąţűş: {şţąţűş}.∙∙∙∙∙∙∙∙∙∙∙]]]',
+        listItemCounterAriaLabel: '[[[Ĭţēɱ ĥąş {count} ċĥįĺƌŗēŋ.]]]',
+        listItemStatusAriaLabel: '[[[Ĭţēɱ ĥąş şţąţűş. Ŝţąţűş: {status}.]]]',
         listItemStatusContainsErrors: '[[[Ĉŏŋţąįŋş ēŗŗŏŗş∙∙∙∙]]]',
         listItemStatusDraft: '[[[Ďŗąƒţ∙∙∙∙∙∙∙∙∙]]]',
         listItemStatusLocked: '[[[Ļŏċķēƌ∙∙∙∙∙∙∙∙]]]'
@@ -120,25 +120,25 @@ export default {
     coreMultiComboBox: {
         listGroupHeader: '[[[Ģŗŏűρ Ĥēąƌēŗ∙∙∙∙∙∙∙]]]',
         multiComboBoxAriaLabel: '[[[Μűĺţį Ʋąĺűē Ĉŏɱƃŏ Ɓŏχ∙∙∙∙∙]]]',
-        selectAllLabel: '[[[Ŝēĺēċţ ąĺĺ ({şēĺēċţēƌĬţēɱş} ŏƒ {ţŏţąĺĬţēɱş})∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]'
+        selectAllLabel: '[[[Ŝēĺēċţ ąĺĺ ({selectedItems} ŏƒ {totalItems})]]]'
     },
     coreMultiInput: {
-        countListResultsPlural: '[[[{ċŏűŋţ} ŗēşűĺţ ĺįşţ įţēɱş.∙∙∙∙∙∙∙]]]',
+        countListResultsPlural: '[[[{count} ŗēşűĺţ ĺįşţ įţēɱş.]]]',
         countListResultsSingular: '[[[1 ŗēşűĺţ ĺįşţ įţēɱ.∙∙∙∙∙]]]',
         escapeNavigateTokens:
             '[[[Ƥŗēşş ēşċąρē ţŏ ēχįţ ţĥē įŋρűţ ƒįēĺƌ ąŋƌ űşē ţĥē ĺēƒţ ąŋƌ ŗįğĥţ ąŗŗŏŵ ķēŷş ţŏ ŋąʋįğąţē ţĥŗŏűğĥ ţĥē şēĺēċţēƌ ŏρţįŏŋş.∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]',
         multiInputAriaLabel: '[[[Μűĺţį Ʋąĺűē Ĭŋρűţ∙∙∙∙∙∙∙]]]',
         navigateSelectionsWithArrows: '[[[Ńąʋįğąţē şēĺēċţįŏŋş ŵįţĥ ţĥē űρ ąŋƌ ƌŏŵŋ ąŗŗŏŵş.∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]',
         noResults: '[[[Ńŏ ŗēşűĺţş.∙∙∙∙∙∙∙∙]]]',
-        showAll: '[[[Ŝĥŏŵ Āĺĺ ({ċŏűŋţ})∙∙∙∙∙∙]]]',
-        tokensCountText: '[[[Ĉŏŋţąįŋş ţŏţąĺ ţŏķēŋş: {ĺēŋğţĥ}.∙∙∙∙∙∙∙∙∙∙]]]'
+        showAll: '[[[Ŝĥŏŵ Āĺĺ ({count})]]]',
+        tokensCountText: '[[[Ĉŏŋţąįŋş ţŏţąĺ ţŏķēŋş: {length}.]]]'
     },
     coreNavigation: {
         mainNavigation: '[[[Μąįŋ Ńąʋįğąţįŏŋ∙∙∙∙]]]',
-        navigationPath: '[[[Ńąʋįğąţįŏŋ Ƥąţĥ∙∙∙∙]]]'
+        navigationPath: 'Navigation Path'
     },
     coreNestedList: {
-        linkItemAriaLabel: '[[[Ţŗēē Ĭţēɱ {įţēɱĎēţąįĺş}, {şēĺēċţēƌĎēşċŗįρţįŏŋ}∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]'
+        linkItemAriaLabel: '[[[Ţŗēē Ĭţēɱ {itemDetails}, {selectedDescription}]]]'
     },
     coreNotification: {
         groupAriaDescription: '[[[Ńŏţįƒįċąţįŏŋ Ģŗŏűρ∙∙∙∙∙∙]]]',
@@ -172,21 +172,21 @@ export default {
         positive: '[[[Ĕŋţŗŷ şűċċēşşƒűĺĺŷ ʋąĺįƌąţēƌ∙∙∙∙∙∙∙∙]]]'
     },
     coreOverflowLayout: {
-        moreItemsButton: '[[[{ċŏűŋţ} ɱŏŗē∙∙∙∙∙∙∙]]]'
+        moreItemsButton: '[[[{count} ɱŏŗē]]]'
     },
     corePagination: {
         ariaLabel: '[[[Ƥąğįŋąţįŏŋ∙∙∙∙]]]',
-        currentPageAriaLabel: '[[[Ƥąğē {ρąğēŃűɱƃēŗ} įş ċűŗŗēŋţ ρąğē∙∙∙∙∙∙∙∙∙∙∙]]]',
+        currentPageAriaLabel: '[[[Ƥąğē {pageNumber} įş ċűŗŗēŋţ ρąğē]]]',
         firstLabel: '[[[Ƒįŗşţ∙∙∙∙∙∙∙∙∙]]]',
-        inputAriaLabel: '[[[Ƥąğē įŋρűţ, Ĉűŗŗēŋţ ρąğē, Ƥąğē {ρąğēŃűɱƃēŗ} ŏƒ {ţŏţąĺĈŏűŋţ}∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]',
+        inputAriaLabel: '[[[Ƥąğē įŋρűţ, Ĉűŗŗēŋţ ρąğē, Ƥąğē {pageNumber} ŏƒ {totalCount}]]]',
         itemsPerPageLabel: '[[[Řēşűĺţş ρēŗ Ƥąğē:∙∙∙∙∙∙∙]]]',
-        labelAfterInputMobile: '[[[ŏƒ {ţŏţąĺĈŏűŋţ}∙∙∙∙]]]',
+        labelAfterInputMobile: '[[[ŏƒ {totalCount}]]]',
         labelBeforeInputMobile: '[[[Ƥąğē:∙∙∙∙∙∙∙∙∙]]]',
         lastLabel: '[[[Ļąşţ]]]',
         nextLabel: '[[[Ńēχţ]]]',
-        pageLabel: '[[[Ƥąğē {ρąğēŃűɱƃēŗ}∙∙∙∙∙∙∙]]]',
+        pageLabel: '[[[Ƥąğē {pageNumber}]]]',
         previousLabel: '[[[Ƥŗēʋįŏűş∙∙∙∙∙∙]]]',
-        totalResultsLabel: '[[[{ţŏţąĺĈŏűŋţ} Řēşűĺţş∙∙∙∙]]]'
+        totalResultsLabel: '[[[{totalCount} Řēşűĺţş]]]'
     },
     coreProductSwitch: {
         ariaLabel: '[[[Ƥŗŏƌűċţ Ŝŵįţċĥ∙∙∙∙∙]]]'
@@ -209,20 +209,18 @@ export default {
         search: '[[[Ŝēąŗċĥ∙∙∙∙∙∙∙∙]]]'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails:
-            '[[[Řąŋğē şĺįƌēŗ ɱįŋįɱűɱ ʋąĺűē įş {ɱįŋ}, ɱąχįɱűɱ ʋąĺűē įş {ɱąχ}∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]',
-        multipleHandle1ValuemaxDetails: '[[[Ʋąĺűē įş {ʋąĺűē}∙∙∙∙∙∙∙∙]]]',
-        multipleHandle1ValueminDetails: '[[[Ʋąĺűē įş {ʋąĺűē}∙∙∙∙∙∙∙∙]]]',
-        multipleHandle1ValueNowDetails: '[[[Ĉűŗŗēŋţ ʋąĺűē įş {ʋąĺűē}∙∙∙∙∙∙]]]',
-        multipleHandle2MinMaxDetails:
-            '[[[Řąŋğē şĺįƌēŗ ɱįŋįɱűɱ ʋąĺűē įş {ɱįŋ}, ɱąχįɱűɱ ʋąĺűē įş {ɱąχ}∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]',
-        multipleHandle2ValuemaxDetails: '[[[Ʋąĺűē įş {ʋąĺűē}∙∙∙∙∙∙∙∙]]]',
-        multipleHandle2ValueminDetails: '[[[Ʋąĺűē įş {ʋąĺűē}∙∙∙∙∙∙∙∙]]]',
-        multipleHandle2ValueNowDetails: '[[[Ĉűŗŗēŋţ ʋąĺűē įş {ʋąĺűē}∙∙∙∙∙∙]]]',
-        singleMinMaxDetails: '[[[Ŝĺįƌēŗ ɱįŋįɱűɱ ʋąĺűē įş {ɱįŋ}, ɱąχįɱűɱ ʋąĺűē įş {ɱąχ}∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]',
-        singleValuemaxDetails: '[[[Ʋąĺűē įş {ʋąĺűē}∙∙∙∙∙∙∙∙]]]',
-        singleValueminDetails: '[[[Ʋąĺűē įş {ʋąĺűē}∙∙∙∙∙∙∙∙]]]',
-        singleValueNowDetails: '[[[Ĉűŗŗēŋţ ʋąĺűē įş {ʋąĺűē}∙∙∙∙∙∙]]]'
+        multipleHandle1MinMaxDetails: '[[[Řąŋğē şĺįƌēŗ ɱįŋįɱűɱ ʋąĺűē įş {min}, ɱąχįɱűɱ ʋąĺűē įş {max}]]]',
+        multipleHandle1ValuemaxDetails: '[[[Ʋąĺűē įş {value}]]]',
+        multipleHandle1ValueminDetails: '[[[Ʋąĺűē įş {value}]]]',
+        multipleHandle1ValueNowDetails: '[[[Ĉűŗŗēŋţ ʋąĺűē įş {value}]]]',
+        multipleHandle2MinMaxDetails: '[[[Řąŋğē şĺįƌēŗ ɱįŋįɱűɱ ʋąĺűē įş {min}, ɱąχįɱűɱ ʋąĺűē įş {max}]]]',
+        multipleHandle2ValuemaxDetails: '[[[Ʋąĺűē įş {value}]]]',
+        multipleHandle2ValueminDetails: '[[[Ʋąĺűē įş {value}]]]',
+        multipleHandle2ValueNowDetails: '[[[Ĉűŗŗēŋţ ʋąĺűē įş {value}]]]',
+        singleMinMaxDetails: '[[[Ŝĺįƌēŗ ɱįŋįɱűɱ ʋąĺűē įş {min}, ɱąχįɱűɱ ʋąĺűē įş {max}]]]',
+        singleValuemaxDetails: '[[[Ʋąĺűē įş {value}]]]',
+        singleValueminDetails: '[[[Ʋąĺűē įş {value}]]]',
+        singleValueNowDetails: '[[[Ĉűŗŗēŋţ ʋąĺűē įş {value}]]]'
     },
     coreSplitButton: {
         arialLabel: '[[[Ŝρĺįţ ƃűţţŏŋ∙∙∙∙∙∙∙]]]',
@@ -285,7 +283,7 @@ export default {
         deleteButtonLabel: '[[[Ďēĺēţąƃĺē∙∙∙∙∙]]]'
     },
     coreTokenizer: {
-        moreLabel: '[[[{ċŏűŋţ} ɱŏŗē∙∙∙∙∙∙∙]]]',
+        moreLabel: '[[[{count} ɱŏŗē]]]',
         tokenizerLabel: '[[[Ţŏķēŋįžēŗ∙∙∙∙∙]]]'
     },
     coreToolbar: {
@@ -356,11 +354,11 @@ export default {
         nodeActionAddApproversParallel: '[[[Āƌƌ ρąŗąĺĺēĺ ąρρŗŏʋēŗş∙∙∙∙∙]]]',
         nodeActionEditApprover: '[[[Ĕƌįţ ąρρŗŏʋēŗ∙∙∙∙∙∙]]]',
         nodeActionRemove: '[[[Řēɱŏʋē∙∙∙∙∙∙∙∙]]]',
-        nodeMembersCount: '[[[{ċŏűŋţ} ɱēɱƃēŗş∙∙∙∙]]]',
+        nodeMembersCount: '[[[{count} ɱēɱƃēŗş]]]',
         nodeMenuButtonTitle: '[[[Μēŋű]]]',
-        nodeStatusDueInXDays: '[[[Ďűē įŋ {ċŏűŋţ} ƌąŷş∙∙∙∙∙]]]',
+        nodeStatusDueInXDays: '[[[Ďűē įŋ {count} ƌąŷş]]]',
         nodeStatusDueToday: '[[[Ďűē ţŏƌąŷ∙∙∙∙∙]]]',
-        nodeStatusXDaysOverdue: '[[[{ċŏűŋţ} ƌąŷş ŏʋēŗƌűē∙∙∙∙]]]',
+        nodeStatusXDaysOverdue: '[[[{count} ƌąŷş ŏʋēŗƌűē]]]',
         nodeVariousTeams: '[[[Ʋąŗįŏűş ţēąɱş∙∙∙∙∙∙]]]',
         prevButtonAriaLabel: '[[[Ģŏ ţŏ ρŗēʋįŏűş şĺįƌē∙∙∙∙]]]',
         selectTypeDialogCancelButton: '[[[Ĉąŋċēĺ∙∙∙∙∙∙∙∙]]]',
@@ -383,12 +381,12 @@ export default {
         userDetailsCancelBtnLabel: '[[[Ĉąŋċēĺ∙∙∙∙∙∙∙∙]]]',
         userDetailsHeader: '[[[Ďēţąįĺ∙∙∙∙∙∙∙∙]]]',
         userDetailsSendReminderBtnLabel: '[[[Ŝēŋƌ ŗēɱįŋƌēŗ∙∙∙∙∙∙]]]',
-        userListSelectedItemsCountPlural: '[[[{ċŏűŋţ} įţēɱş şēĺēċţēƌ∙∙∙∙∙]]]',
+        userListSelectedItemsCountPlural: '[[[{count} įţēɱş şēĺēċţēƌ]]]',
         userListSelectedItemsCountSingular: '[[[1 įţēɱ şēĺēċţēƌ∙∙∙∙]]]',
         watchersInputPlaceholder: '[[[Ŝēąŗċĥ ĥēŗē..∙∙∙∙∙∙]]]'
     },
     platformCombobox: {
-        countListResultsPlural: '[[[{ċŏűŋţ} ŗēşűĺţ ĺįşţ įţēɱş∙∙∙∙∙∙∙]]]',
+        countListResultsPlural: '[[[{count} ŗēşűĺţ ĺįşţ įţēɱş]]]',
         countListResultsSingular: '[[[1 ŗēşűĺţ ĺįşţ įţēɱ∙∙∙∙∙∙]]]'
     },
     platformFeedInput: {
@@ -399,7 +397,7 @@ export default {
         moreButton: '[[[Μŏŗē]]]'
     },
     platformLink: {
-        roleDescriptionWithMedia: '[[[Μēƌįą: {ɱēƌįą}∙∙∙∙∙]]]'
+        roleDescriptionWithMedia: '[[[Μēƌįą: {media}]]]'
     },
     platformList: {
         loadingAriaLabel: '[[[ĺŏąƌįŋğ∙∙∙∙∙∙∙]]]'
@@ -430,20 +428,20 @@ export default {
         detailsActionAriaLabel: '[[[ƌēţąįĺ∙∙∙∙∙∙∙∙]]]'
     },
     platformSearchField: {
-        allButtonLabel: 'All',
-        cancelLabel: 'Cancel',
-        clearButtonTitle: '[[[Ĉĺēąŗ∙∙∙∙∙∙∙∙∙]]]',
-        counterLabel: 'Total results: {count}',
-        deleteButtonAriaLabel: 'Remove',
-        deleteButtonTitle: 'Remove Suggestion',
-        groupHeader: 'Group Header',
+        allButtonLabel: '[[[Āĺĺ∙]]]',
+        cancelLabel: '[[[Ĉąŋċēĺ∙∙∙∙∙∙∙∙]]]',
+        clearButtonTitle: '[[[Ĉĺēąŗ Ŝēąŗċĥ∙∙∙∙∙∙∙]]]',
+        counterLabel: '[[[Ţŏţąĺ ŗēşűĺţş: {count}]]]',
+        deleteButtonAriaLabel: '[[[Řēɱŏʋē∙∙∙∙∙∙∙∙]]]',
+        deleteButtonTitle: '[[[Řēɱŏʋē Ŝűğğēşţįŏŋ∙∙∙∙∙∙∙]]]',
+        groupHeader: '[[[Ģŗŏűρ Ĥēąƌēŗ∙∙∙∙∙∙∙]]]',
         searchInputLabel: '[[[Ŝēąŗċĥ∙∙∙∙∙∙∙∙]]]',
-        searchSuggestionMessage: '[[[{ċŏűŋţ} şűğğēşţįŏŋş ƒŏűŋƌ.∙∙∙∙∙∙∙]]]',
+        searchSuggestionMessage: '[[[{count} şűğğēşţįŏŋş ƒŏűŋƌ.]]]',
         searchSuggestionNavigateMessage: '[[[űşē űρ ąŋƌ ƌŏŵŋ ąŗŗŏŵş ţŏ ŋąʋįğąţē∙∙∙∙∙∙∙∙∙∙∙]]]',
-        selectScopeLabel: 'Select scope',
-        selectStateMessageLabel: 'Select',
-        submitButtonTitle: '[[[Ŝēąŗċĥ∙∙∙∙∙∙∙∙]]]',
-        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: '[[[Ŝēĺēċţ şċŏρē∙∙∙∙∙∙∙]]]',
+        selectStateMessageLabel: '[[[Ŝēĺēċţ∙∙∙∙∙∙∙∙]]]',
+        submitButtonTitle: '[[[Ŝēąŗċĥ (Ĕŋţēŗ)∙∙∙∙∙]]]',
+        suggestionsWrapperAriaLabel: '[[[Ŝűğğēşţįŏŋş∙∙∙∙∙∙∙∙]]]',
         synchronizeButtonTitle: '[[[Ŝŷŋċĥŗŏŋįžē∙∙∙∙∙∙∙∙]]]'
     },
     platformSelect: {
@@ -475,7 +473,7 @@ export default {
         filterConditionValueFromPlaceholder: '[[[ƒŗŏɱ]]]',
         filterConditionValuePlaceholder: '[[[ʋąĺűē∙∙∙∙∙∙∙∙∙]]]',
         filterConditionValueToPlaceholder: '[[[ţŏ∙∙]]]',
-        filtersButtonLabel: '[[[Ƒįĺţēŗş ({ƒįĺţēŗşĈŏűŋţ})∙∙∙∙∙∙]]]',
+        filtersButtonLabel: '[[[Ƒįĺţēŗş ({filtersCount})]]]',
         hideFiltersButtonLabel: '[[[Ĥįƌē ƒįĺţēŗş∙∙∙∙∙∙∙]]]',
         manageFieldConditions: '[[[Μąŋąğē ƒįēĺƌ ċŏŋƌįţįŏŋş∙∙∙∙∙∙]]]',
         refreshButtonAriaLabel: '[[[Řēƒŗēşĥ∙∙∙∙∙∙∙]]]',
@@ -522,7 +520,7 @@ export default {
         filterDialogCancelBtnLabel: '[[[Ĉąŋċēĺ∙∙∙∙∙∙∙∙]]]',
         filterDialogConfirmBtnLabel: '[[[ŎĶ∙∙]]]',
         filterDialogFilterBy: '[[[Ƒįĺţēŗ Ɓŷ∙∙∙∙∙]]]',
-        filterDialogFilterByLabel: '[[[Ƒįĺţēŗ ƃŷ: {ƒįĺţēŗĻąƃēĺ}∙∙∙∙∙∙]]]',
+        filterDialogFilterByLabel: '[[[Ƒįĺţēŗ ƃŷ: {filterLabel}]]]',
         filterDialogFilterTitle: '[[[Ƒįĺţēŗ∙∙∙∙∙∙∙∙]]]',
         filterDialogNotFilteredLabel: '[[[(Ńŏţ Ƒįĺţēŗēƌ)∙∙∙∙∙]]]',
         filteredBy: '[[[Ƒįĺţēŗēƌ ƃŷ∙∙∙∙∙∙∙∙]]]',
@@ -544,6 +542,7 @@ export default {
         headerMenuUnfreeze: '[[[Ůŋƒŗēēžē ċŏĺűɱŋ∙∙∙∙]]]',
         headerMenuUnfreezePlural: '[[[Ůŋƒŗēēžē ċŏĺűɱŋş∙∙∙∙∙∙∙∙]]]',
         loadMore: '[[[Ŝĥŏŵ Μŏŗē∙∙∙∙∙]]]',
+        navigationColumnTitle: '[[[Řŏŵ Āċţįŏŋş∙∙∙∙∙∙∙∙]]]',
         noVisibleColumnsMessage:
             '[[[Řįğĥţ ŋŏŵ, ţĥēŗē ąŗē ŋŏ ʋįşįƃĺē ċŏĺűɱŋş įŋ ţĥē ţąƃĺē. Ƥĺēąşē şēĺēċţ ţĥē ċŏĺűɱŋş ŷŏű ŋēēƌ įŋ ţĥē ţąƃĺē şēţţįŋğş.∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]',
         P13ColumnsDialogCancelBtnLabel: '[[[Ĉąŋċēĺ∙∙∙∙∙∙∙∙]]]',
@@ -554,8 +553,7 @@ export default {
         P13ColumnsDialogMoveToTopBtn: '[[[Μŏʋē ţŏ Ţŏρ∙∙∙∙∙∙∙∙]]]',
         P13ColumnsDialogMoveUpBtn: '[[[Μŏʋē Ůρ∙∙∙∙∙∙∙]]]',
         P13ColumnsDialogSearchPlaceholder: '[[[Ŝēąŗċĥ∙∙∙∙∙∙∙∙]]]',
-        P13ColumnsDialogSelectAll:
-            '[[[Ŝēĺēċţ Āĺĺ ({şēĺēċţēƌĈŏĺűɱŋşĈŏűŋţ}/{şēĺēċţąƃĺēĈŏĺűɱŋşĈŏűŋţ})∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]',
+        P13ColumnsDialogSelectAll: '[[[Ŝēĺēċţ Āĺĺ ({selectedColumnsCount}/{selectableColumnsCount})]]]',
         P13ColumnsDialogShowAll: '[[[Ŝĥŏŵ ąĺĺ∙∙∙∙∙∙]]]',
         P13ColumnsDialogsShowSelected: '[[[Ŝĥŏŵ Ŝēĺēċţēƌ∙∙∙∙∙∙]]]',
         P13FilterBooleanOptionFalse: '[[[Ńŏ∙∙]]]',
@@ -564,10 +562,10 @@ export default {
         P13FilterDialogAddFilterBtnTitle: '[[[Āƌƌ Ƒįĺţēŗ∙∙∙∙]]]',
         P13FilterDialogCancelBtnLabel: '[[[Ĉąŋċēĺ∙∙∙∙∙∙∙∙]]]',
         P13FilterDialogConfirmationBtnLabel: '[[[ŎĶ∙∙]]]',
-        P13FilterDialogExcludePanelTitleWithCount: '[[[Ĕχċĺűƌē ({ċŏűŋţ})∙∙∙∙∙∙∙]]]',
+        P13FilterDialogExcludePanelTitleWithCount: '[[[Ĕχċĺűƌē ({count})]]]',
         P13FilterDialogExcludePanelTitleWithoutCount: '[[[Ĕχċĺűƌē∙∙∙∙∙∙∙]]]',
         P13FilterDialogHeader: '[[[Ƒįĺţēŗ Ɓŷ∙∙∙∙∙]]]',
-        P13FilterDialogIncludePanelTitleWithCount: '[[[Ĭŋċĺűƌē ({ċŏűŋţ})∙∙∙∙∙∙∙]]]',
+        P13FilterDialogIncludePanelTitleWithCount: '[[[Ĭŋċĺűƌē ({count})]]]',
         P13FilterDialogIncludePanelTitleWithoutCount: '[[[Ĭŋċĺűƌē∙∙∙∙∙∙∙]]]',
         P13FilterDialogRemoveFilterBtnTitle: '[[[Řēɱŏʋē Ƒįĺţēŗ∙∙∙∙∙∙]]]',
         P13FilterStrategyLabelAfter: '[[[ąƒţēŗ∙∙∙∙∙∙∙∙∙]]]',
@@ -607,8 +605,7 @@ export default {
         selectAllCheckboxMixedLongLabel: '[[[Ĉĥēċķƃŏχ, ɱįχēƌ, ċĺįċķ ţŏ şēĺēċţ ąĺĺ∙∙∙∙∙∙∙∙∙∙∙∙]]]',
         selectSingleRow: '[[[Ţŏ şēĺēċţ ŗŏŵ, ρŗēşş ŜƤĀĈĔƁĀŘ∙∙∙∙∙∙∙∙∙]]]',
         settingsDialogHeader: '[[[Ŝēţţįŋğş∙∙∙∙∙∙]]]',
-        showingBlankOfBlank:
-            '[[[Ŝĥŏŵįŋğ {ţŏţąĺĢŗŏŵįŋğĬţēɱşĈŏűŋţ} ŏƒ {ţŏţąĺĢŗŏŵįŋğĬţēɱşĈŏűŋţ}∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]',
+        showingBlankOfBlank: '[[[Ŝĥŏŵįŋğ {totalGrowingItemsCount} ŏƒ {totalGrowingItemsCount}]]]',
         sortDialogCancelBtnLabel: '[[[Ĉąŋċēĺ∙∙∙∙∙∙∙∙]]]',
         sortDialogConfirmBtnLabel: '[[[ŎĶ∙∙]]]',
         sortDialogHeader: '[[[Ŝŏŗţ]]]',
@@ -630,9 +627,9 @@ export default {
         toolbarSearchPlaceholder: '[[[Ŝēąŗċĥ∙∙∙∙∙∙∙∙]]]'
     },
     platformTextarea: {
-        counterMessageCharactersOverTheLimitPlural: '[[[{ċŏűŋţ} ċĥąŗąċţēŗş ŏʋēŗ ţĥē ĺįɱįţ∙∙∙∙∙∙∙∙∙∙∙]]]',
+        counterMessageCharactersOverTheLimitPlural: '[[[{count} ċĥąŗąċţēŗş ŏʋēŗ ţĥē ĺįɱįţ]]]',
         counterMessageCharactersOverTheLimitSingular: '[[[1 ċĥąŗąċţēŗ ŏʋēŗ ţĥē ĺįɱįţ∙∙∙∙∙∙∙]]]',
-        counterMessageCharactersRemainingPlural: '[[[{ċŏűŋţ} ċĥąŗąċţēŗş ŗēɱąįŋįŋğ∙∙∙∙∙∙∙∙]]]',
+        counterMessageCharactersRemainingPlural: '[[[{count} ċĥąŗąċţēŗş ŗēɱąįŋįŋğ]]]',
         counterMessageCharactersRemainingSingular: '[[[1 ċĥąŗąċţēŗ ŗēɱąįŋįŋğ∙∙∙∙∙]]]'
     },
     platformVariantManagement: {
@@ -680,9 +677,9 @@ export default {
         defineConditionConditionStrategyLabelNotEqualTo: '[[[ŋŏţ ēƣűąĺ ţŏ∙∙∙∙∙∙∙]]]',
         defineConditionConditionStrategyLabelStartsWith: '[[[şţąŗţş ŵįţĥ∙∙∙∙∙∙∙∙]]]',
         defineConditionFromPlaceholder: '[[[ƒŗŏɱ]]]',
-        defineConditionMaxCountError: '[[[Ĕŋţēŗ ą ʋąĺűē ŵįţĥ ŋŏ ɱŏŗē ţĥąŋ {ċŏűŋţ} ċĥąŗąċţēŗş∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]',
+        defineConditionMaxCountError: '[[[Ĕŋţēŗ ą ʋąĺűē ŵįţĥ ŋŏ ɱŏŗē ţĥąŋ {count} ċĥąŗąċţēŗş]]]',
         defineConditionRemoveConditionButtonTitle: '[[[Řēɱŏʋē Ĉŏŋƌįţįŏŋ∙∙∙∙∙∙∙∙]]]',
-        defineConditionSelectedValueHiddenA11yLabel: '[[[şēĺēċţēƌ ʋąĺűē {ʋąĺűē}∙∙∙∙∙]]]',
+        defineConditionSelectedValueHiddenA11yLabel: '[[[şēĺēċţēƌ ʋąĺűē {value}]]]',
         defineConditionTitle: '[[[Ƥŗŏƌűċţ∙∙∙∙∙∙∙]]]',
         defineConditionToPlaceholder: '[[[ţŏ∙∙]]]',
         defineConditionValuePlaceholder: '[[[ʋąĺűē∙∙∙∙∙∙∙∙∙]]]',
@@ -702,9 +699,9 @@ export default {
         selectMobileConditionEmpty: '[[[Ĕɱρţŷ∙∙∙∙∙∙∙∙∙]]]',
         selectMobileTabBackBtnTitle: '[[[Ɓąċķ]]]',
         selectMobileTabBtnOpenDialogLabel: '[[[Ŏρēŋ ƌįąĺŏğ∙∙∙∙∙∙∙∙]]]',
-        selectMobileTabTitle: '[[[{ţįţĺē} ţąƃ∙∙∙∙∙∙∙∙]]]',
-        selectTabCountHiddenA11yLabel: '[[[ċŏŋţąįŋş {ŗŏŵĈŏűŋţ} ŗŏŵş ąŋƌ {ċŏĺĈŏűŋţ} ċŏĺűɱŋş∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]',
-        selectTabDisplayCountLabel: '[[[Ĭţēɱş ({ċŏűŋţ})∙∙∙∙]]]',
+        selectMobileTabTitle: '[[[{title} ţąƃ]]]',
+        selectTabCountHiddenA11yLabel: '[[[ċŏŋţąįŋş {rowCount} ŗŏŵş ąŋƌ {colCount} ċŏĺűɱŋş]]]',
+        selectTabDisplayCountLabel: '[[[Ĭţēɱş ({count})]]]',
         selectTabMoreBtnLabel: '[[[Μŏŗē]]]',
         selectTabTitle: '[[[Ŝēĺēċţ ƒŗŏɱ ĺįşţ∙∙∙∙∙∙∙∙]]]',
         successButtonLabel: '[[[ŎĶ∙∙]]]'

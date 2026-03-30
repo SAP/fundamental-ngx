@@ -17,10 +17,10 @@ export default {
         menuButtonAriaLabel: 'Menügomb'
     },
     coreActionSheet: {
-        toolbarLabel: 'Action Bar'
+        toolbarLabel: 'Műveletsáv'
     },
     coreAvatarGroup: {
-        backButton: 'Back'
+        backButton: 'Vissza'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Útkövetési napló',
@@ -59,7 +59,7 @@ export default {
         rightNavigationBtnLabel: 'Ugrás a következő elemre'
     },
     coreCombobox: {
-        clearButtonTitle: 'Clear input'
+        clearButtonTitle: 'Bevitel törlése'
     },
     coreDatePicker: {
         dateInputLabel: 'Dátum bevitele',
@@ -79,11 +79,11 @@ export default {
         displayTypeTimeLabel: 'Időpont'
     },
     coreDynamicPage: {
-        breadcrumbsLabel: 'Breadcrumbs',
+        breadcrumbsLabel: 'Útkövetés',
         collapseLabel: 'Fejléc visszazárása',
         expandLabel: 'Fejléc kibontása',
         pinLabel: 'Fejléc rögzítése',
-        toggleHeader: 'Toggle header',
+        toggleHeader: 'Fejléc átkapcsolása',
         unpinLabel: 'Fejléc feloldása'
     },
     coreFeedListItem: {
@@ -113,8 +113,8 @@ export default {
         announcementSuccess: 'Sikerüzenetsor',
         announcementWarning: 'Figyelmeztető üzenetek sora',
         closable: 'Bezárható',
-        defaultDismissButtonText: 'Close',
-        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Bezárás',
+        defaultHiddenText: 'Üzenetsor',
         dismissLabel: 'Bezárás'
     },
     coreMultiComboBox: {
@@ -130,12 +130,12 @@ export default {
         multiInputAriaLabel: 'Többértékes bevitel',
         navigateSelectionsWithArrows: 'A le és a fel nyíllal navigálhat a kiválasztott elemek között.',
         noResults: 'Nincs eredmény.',
-        showAll: 'Show All ({count})',
+        showAll: 'Összes megjelenítése ({count})',
         tokensCountText: 'Összesen {length} tokent tartalmaz.'
     },
     coreNavigation: {
         mainNavigation: 'Fő navigáció',
-        navigationPath: 'Navigációs útvonal'
+        navigationPath: 'Navigation Path'
     },
     coreNestedList: {
         linkItemAriaLabel: '{itemDetails} struktúraelem, {selectedDescription}'
@@ -198,7 +198,7 @@ export default {
         ariaRoleDescription: 'Osztályozás jelölője'
     },
     coreSelect: {
-        closeButton: 'Close'
+        closeButton: 'Bezárás'
     },
     coreShellbar: {
         assistiveTools: 'Segítségnyújtó eszközök',
@@ -239,8 +239,8 @@ export default {
         semanticDeclineLabel: 'Elutasítás'
     },
     coreTabs: {
-        expandIconLabel: 'See More',
-        tabListExpandButtonText: 'Továbbiak'
+        expandIconLabel: 'Több megjelenítése',
+        tabListExpandButtonText: 'Több'
     },
     coreText: {
         lessLabel: 'Kevesebb',
@@ -273,10 +273,10 @@ export default {
     coreTimePicker: {
         timePickerButtonLabel: 'Választó megnyitása',
         timePickerInputLabel: 'Időpontválasztó szerinti bevitel',
-        valueStateErrorMessage: 'Value state Error',
-        valueStateInformationMessage: 'Value state Information',
-        valueStateSuccessMessage: 'Value state Success',
-        valueStateWarningMessage: 'Value state Warning'
+        valueStateErrorMessage: 'Értékállapot – hiba',
+        valueStateInformationMessage: 'Értékállapot – információ',
+        valueStateSuccessMessage: 'Értékállapot – sikeres',
+        valueStateWarningMessage: 'Értékállapot – figyelmeztetés'
     },
     coreToken: {
         ariaRoleDescription: 'token',
@@ -287,7 +287,7 @@ export default {
         tokenizerLabel: 'Tokenizáló'
     },
     coreToolbar: {
-        moreButton: 'More'
+        moreButton: 'Több'
     },
     coreTree: {
         collapse: 'Csomópont visszazárása',
@@ -304,8 +304,8 @@ export default {
         menuOkText: 'OK'
     },
     coreUserMenu: {
-        closeButton: 'Close',
-        previousButton: 'Previous'
+        closeButton: 'Bezárás',
+        previousButton: 'Előző'
     },
     coreWizard: {
         ariaLabel: 'Varázsló'
@@ -389,7 +389,7 @@ export default {
         countListResultsSingular: '1 listaelemet kapott eredményül'
     },
     platformFeedInput: {
-        sendButton: 'Send',
+        sendButton: 'Küldés',
         userTitle: 'Felhasználó'
     },
     platformIconTabBar: {
@@ -403,7 +403,7 @@ export default {
     },
     platformMessagePopover: {
         allErrors: 'Összes',
-        backButton: 'Go back',
+        backButton: 'Vissza',
         defaultErrors: {
             email: 'Az e-mail-cím érvénytelen',
             max: 'A mező értéke nagyobb a megengedett maximális értéknél',
@@ -427,20 +427,20 @@ export default {
         detailsActionAriaLabel: 'részlet'
     },
     platformSearchField: {
-        allButtonLabel: 'All',
-        cancelLabel: 'Cancel',
-        clearButtonTitle: 'Törlés',
-        counterLabel: 'Total results: {count}',
-        deleteButtonAriaLabel: 'Remove',
-        deleteButtonTitle: 'Remove Suggestion',
-        groupHeader: 'Group Header',
+        allButtonLabel: 'Összes',
+        cancelLabel: 'Mégse',
+        clearButtonTitle: 'Keresés törlése',
+        counterLabel: 'Összes találat: {count}',
+        deleteButtonAriaLabel: 'Eltávolítás',
+        deleteButtonTitle: 'Javaslat eltávolítása',
+        groupHeader: 'Csoportfejléc',
         searchInputLabel: 'Keresés',
         searchSuggestionMessage: '{count} javaslat található.',
         searchSuggestionNavigateMessage: 'a le és a fel nyíllal navigálhat',
-        selectScopeLabel: 'Select scope',
-        selectStateMessageLabel: 'Select',
-        submitButtonTitle: 'Keresés',
-        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Terjedelem kiválasztása',
+        selectStateMessageLabel: 'Kiválasztás',
+        submitButtonTitle: 'Keresés (Enter)',
+        suggestionsWrapperAriaLabel: 'Javaslatok',
         synchronizeButtonTitle: 'Szinkronizálás'
     },
     platformSelect: {
@@ -492,7 +492,7 @@ export default {
         submitButtonLabel: 'Mehet'
     },
     platformSplitMenuButton: {
-        groupLabel: 'Split button group'
+        groupLabel: 'Gombcsoport felosztása'
     },
     platformStandardListItem: {
         deleteActionAriaLabel: 'törlés',
@@ -541,6 +541,7 @@ export default {
         headerMenuUnfreeze: 'Oszlop rögzítésének feloldása',
         headerMenuUnfreezePlural: 'Oszlop rögzítésének feloldása',
         loadMore: 'Több megjelenítése',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage:
             'Jelenleg nincs látható oszlop a táblában. Válassza ki a kívánt oszlopokat a táblabeállításokban.',
         P13ColumnsDialogCancelBtnLabel: 'Mégse',
@@ -699,12 +700,12 @@ export default {
         selectMobileTabTitle: '„{title}” lap',
         selectTabCountHiddenA11yLabel: '{rowCount} sort és {colCount} oszlopot tartalmaz',
         selectTabDisplayCountLabel: 'Elemek ({count})',
-        selectTabMoreBtnLabel: 'Továbbiak',
+        selectTabMoreBtnLabel: 'Több',
         selectTabTitle: 'Válasszon a listáról',
         successButtonLabel: 'OK'
     },
     platformWizardGenerator: {
-        stepsLabel: 'Wizard Steps',
+        stepsLabel: 'Varázsló lépései',
         summarySectionEditStep: 'Szerkesztés'
     },
     segmentedButton: {

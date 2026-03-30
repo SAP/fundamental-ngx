@@ -17,10 +17,10 @@ export default {
         menuButtonAriaLabel: 'Кнопка меню'
     },
     coreActionSheet: {
-        toolbarLabel: 'Action Bar'
+        toolbarLabel: 'Панель действий'
     },
     coreAvatarGroup: {
-        backButton: 'Back'
+        backButton: 'Назад'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Путь навигации',
@@ -59,7 +59,7 @@ export default {
         rightNavigationBtnLabel: 'К следующей позиции'
     },
     coreCombobox: {
-        clearButtonTitle: 'Clear input'
+        clearButtonTitle: 'Очистить ввод'
     },
     coreDatePicker: {
         dateInputLabel: 'Ввод даты',
@@ -71,7 +71,7 @@ export default {
         valueStateWarningMessage: 'Статус значения "Предупреждение"'
     },
     coreDatetimePicker: {
-        datetimeCancelLabel: 'Отменить',
+        datetimeCancelLabel: 'Отмена',
         datetimeInputLabel: 'Ввод даты/времени',
         datetimeOkLabel: 'ОК',
         displayDatetimeToggleLabel: 'Показать переключатель календаря',
@@ -79,11 +79,11 @@ export default {
         displayTypeTimeLabel: 'Время'
     },
     coreDynamicPage: {
-        breadcrumbsLabel: 'Breadcrumbs',
+        breadcrumbsLabel: 'Навигационная цепочка',
         collapseLabel: 'Свернуть заголовок',
         expandLabel: 'Развернуть заголовок',
         pinLabel: 'Закрепить заголовок',
-        toggleHeader: 'Toggle header',
+        toggleHeader: 'Переключить заголовок',
         unpinLabel: 'Открепить заголовок'
     },
     coreFeedListItem: {
@@ -91,7 +91,7 @@ export default {
         moreLabel: 'Еще {count}'
     },
     coreGridList: {
-        filterBarCancelButtonTitle: 'Отменить',
+        filterBarCancelButtonTitle: 'Отмена',
         listItemButtonDeleteTitle: 'Удалить',
         listItemButtonDetailsTitle: 'Сведения',
         listItemCounterAriaLabel: 'Позиция имеет нижестоящие: {count}',
@@ -113,8 +113,8 @@ export default {
         announcementSuccess: 'Строка сообщения об успешном выполнении',
         announcementWarning: 'Строка сообщения с предупреждением',
         closable: 'Можно закрыть',
-        defaultDismissButtonText: 'Close',
-        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Закрыть',
+        defaultHiddenText: 'Строка сообщения',
         dismissLabel: 'Закрыть'
     },
     coreMultiComboBox: {
@@ -130,12 +130,12 @@ export default {
         multiInputAriaLabel: 'Ввод нескольких значений',
         navigateSelectionsWithArrows: 'По выбранным позициям можно передвигаться с помощью стрелок вверх и вниз.',
         noResults: 'Нет результатов.',
-        showAll: 'Show All ({count})',
+        showAll: 'Показать все ({count})',
         tokensCountText: 'Содержит токенов, всего: {length}.'
     },
     coreNavigation: {
         mainNavigation: 'Основная навигация',
-        navigationPath: 'Путь навигации'
+        navigationPath: 'Navigation Path'
     },
     coreNestedList: {
         linkItemAriaLabel: 'Элемент дерева {itemDetails}, {selectedDescription}'
@@ -198,12 +198,12 @@ export default {
         ariaRoleDescription: 'Индикатор оценки'
     },
     coreSelect: {
-        closeButton: 'Close'
+        closeButton: 'Закрыть'
     },
     coreShellbar: {
         assistiveTools: 'Вспомогательные инструменты',
         backButtonLabel: 'Назад',
-        cancel: 'Отменить',
+        cancel: 'Отмена',
         collapsedItemMenuLabel: 'Свернутое меню позиций',
         navigationButtonLabel: 'Навигация',
         search: 'Поиск'
@@ -239,7 +239,7 @@ export default {
         semanticDeclineLabel: 'Отклонить'
     },
     coreTabs: {
-        expandIconLabel: 'See More',
+        expandIconLabel: 'Показать больше',
         tabListExpandButtonText: 'Больше'
     },
     coreText: {
@@ -273,10 +273,10 @@ export default {
     coreTimePicker: {
         timePickerButtonLabel: 'Открыть средство выбора',
         timePickerInputLabel: 'Ввод средства выбора времени',
-        valueStateErrorMessage: 'Value state Error',
-        valueStateInformationMessage: 'Value state Information',
-        valueStateSuccessMessage: 'Value state Success',
-        valueStateWarningMessage: 'Value state Warning'
+        valueStateErrorMessage: 'Статус значения "Ошибка"',
+        valueStateInformationMessage: 'Статус значения "Информация"',
+        valueStateSuccessMessage: 'Статус значения "Успешно"',
+        valueStateWarningMessage: 'Статус значения "Предупреждение"'
     },
     coreToken: {
         ariaRoleDescription: 'токен',
@@ -287,7 +287,7 @@ export default {
         tokenizerLabel: 'Токенизатор'
     },
     coreToolbar: {
-        moreButton: 'More'
+        moreButton: 'Больше'
     },
     coreTree: {
         collapse: 'Свернуть узел',
@@ -296,16 +296,16 @@ export default {
     },
     coreUploadCollection: {
         formItemPlaceholder: 'Имя файла',
-        menuCancelAriaLabel: 'Отменить',
-        menuCancelText: 'Отменить',
+        menuCancelAriaLabel: 'Отмена',
+        menuCancelText: 'Отмена',
         menuDeleteAriaLabel: 'Удалить',
         menuEditAriaLabel: 'Изменить',
         menuOkAriaLabel: 'Изменить',
         menuOkText: 'ОК'
     },
     coreUserMenu: {
-        closeButton: 'Close',
-        previousButton: 'Previous'
+        closeButton: 'Закрыть',
+        previousButton: 'Назад'
     },
     coreWizard: {
         ariaLabel: 'Ассистент'
@@ -314,8 +314,8 @@ export default {
         addNodeAddActionBtnLabel: 'Добавить',
         addNodeApproverOrTeamDetailsCloseActionBtnLabel: 'Закрыть',
         addNodeButtonTitle: 'Добавить узел',
-        addNodeCancelActionBtnLabel: 'Отменить',
-        addNodeCancelApproverSelectionActionBtnLabel: 'Отменить',
+        addNodeCancelActionBtnLabel: 'Отмена',
+        addNodeCancelApproverSelectionActionBtnLabel: 'Отмена',
         addNodeDialogAddToNext: 'Добавить в следующий последовательный узел',
         addNodeDialogApproverType: 'Тип утверждающего',
         addNodeDialogApproverTypeTeamAnyone: 'Любой участник команды',
@@ -360,7 +360,7 @@ export default {
         nodeStatusXDaysOverdue: 'Просрочено на {count} дн.',
         nodeVariousTeams: 'Разные группы',
         prevButtonAriaLabel: 'Предыдущий слайд',
-        selectTypeDialogCancelButton: 'Отменить',
+        selectTypeDialogCancelButton: 'Отмена',
         selectTypeDialogConfirmButton: 'Подтвердить',
         selectTypeDialogMoveApproverAs: 'Переместить утверждающего как',
         selectTypeDialogNodeTypeParallel: 'Параллельный утверждающий',
@@ -377,7 +377,7 @@ export default {
         toolbarEditApprover: 'Изменить утверждающего',
         toolbarEditButton: 'Изменить',
         toolbarRemove: 'Удалить',
-        userDetailsCancelBtnLabel: 'Отменить',
+        userDetailsCancelBtnLabel: 'Отмена',
         userDetailsHeader: 'Сведения',
         userDetailsSendReminderBtnLabel: 'Отправить напоминание',
         userListSelectedItemsCountPlural: '{count} поз. выбрано',
@@ -389,11 +389,11 @@ export default {
         countListResultsSingular: '1 позиция в списке результатов'
     },
     platformFeedInput: {
-        sendButton: 'Send',
+        sendButton: 'Отправить',
         userTitle: 'Пользователь'
     },
     platformIconTabBar: {
-        moreButton: 'Ещё'
+        moreButton: 'Больше'
     },
     platformLink: {
         roleDescriptionWithMedia: 'Медиа: {media}'
@@ -403,7 +403,7 @@ export default {
     },
     platformMessagePopover: {
         allErrors: 'Все',
-        backButton: 'Go back',
+        backButton: 'Назад',
         defaultErrors: {
             email: 'Недействительный адрес электронной почты',
             max: 'Превышено максимальное значение поля',
@@ -427,20 +427,20 @@ export default {
         detailsActionAriaLabel: 'сведения'
     },
     platformSearchField: {
-        allButtonLabel: 'All',
-        cancelLabel: 'Cancel',
-        clearButtonTitle: 'Очистить',
-        counterLabel: 'Total results: {count}',
-        deleteButtonAriaLabel: 'Remove',
-        deleteButtonTitle: 'Remove Suggestion',
-        groupHeader: 'Group Header',
+        allButtonLabel: 'Все',
+        cancelLabel: 'Отмена',
+        clearButtonTitle: 'Очистить поиск',
+        counterLabel: 'Всего результатов: {count}',
+        deleteButtonAriaLabel: 'Удалить',
+        deleteButtonTitle: 'Удалить предложение',
+        groupHeader: 'Заголовок группы',
         searchInputLabel: 'Поиск',
         searchSuggestionMessage: 'Найдено предложений: {count}',
         searchSuggestionNavigateMessage: 'для навигации используйте стрелки вверх и вниз',
-        selectScopeLabel: 'Select scope',
-        selectStateMessageLabel: 'Select',
-        submitButtonTitle: 'Поиск',
-        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Выбор объема',
+        selectStateMessageLabel: 'Выбрать',
+        submitButtonTitle: 'Поиск (Enter)',
+        suggestionsWrapperAriaLabel: 'Предложения',
         synchronizeButtonTitle: 'Синхронизировать'
     },
     platformSelect: {
@@ -453,7 +453,7 @@ export default {
     },
     platformSmartFilterBar: {
         defineConditionsAddConditionButtonLabel: 'Добавить условие',
-        defineConditionsCancelButton: 'Отменить',
+        defineConditionsCancelButton: 'Отмена',
         defineConditionsRemoveConditionButtonTitle: 'Удалить условие',
         defineConditionsSubmitButtonLabel: 'Выполнить',
         filterConditionAfter: 'после',
@@ -479,7 +479,7 @@ export default {
         searchPlaceholder: 'Поиск',
         selectFiltersActiveColumnLabel: 'Активно',
         selectFiltersAvailableFiltersText: 'Доступные фильтры',
-        selectFiltersCancelButton: 'Отменить',
+        selectFiltersCancelButton: 'Отмена',
         selectFiltersFilterColumnLabel: 'Фильтр',
         selectFiltersHeader: 'Фильтры',
         selectFiltersSubmitButtonLabel: 'Выполнить',
@@ -492,7 +492,7 @@ export default {
         submitButtonLabel: 'Выполнить'
     },
     platformSplitMenuButton: {
-        groupLabel: 'Split button group'
+        groupLabel: 'Группа разделенных кнопок'
     },
     platformStandardListItem: {
         deleteActionAriaLabel: 'удалить',
@@ -502,7 +502,7 @@ export default {
         ariaLabel: 'Ввод переключателя'
     },
     platformTable: {
-        cancelBtnLabel: 'Отменить',
+        cancelBtnLabel: 'Отмена',
         clearFilters: 'Очистить фильтры',
         collapseRowButtonTitle: 'Свернуть строку',
         confirmBtnLabel: 'ОК',
@@ -516,14 +516,14 @@ export default {
         emptyCell: 'Пусто',
         expandRowButtonTitle: 'Развернуть строку',
         filterDialogBackToColumns: 'Перейти назад',
-        filterDialogCancelBtnLabel: 'Отменить',
+        filterDialogCancelBtnLabel: 'Отмена',
         filterDialogConfirmBtnLabel: 'ОК',
         filterDialogFilterBy: 'Фильтр по',
         filterDialogFilterByLabel: 'Фильтр по: {filterLabel}',
         filterDialogFilterTitle: 'Фильтр',
         filterDialogNotFilteredLabel: '(не отфильтровано)',
         filteredBy: 'Отфильтровано по',
-        groupDialogCancelBtnLabel: 'Отменить',
+        groupDialogCancelBtnLabel: 'Отмена',
         groupDialogConfirmBtnLabel: 'ОК',
         groupDialogGroupByHeader: 'Группировать по',
         groupDialogGroupOrderAsc: 'По восходящей',
@@ -541,9 +541,10 @@ export default {
         headerMenuUnfreeze: 'Отменить фиксацию столбца',
         headerMenuUnfreezePlural: 'Отменить фиксацию столбцов',
         loadMore: 'Показать больше',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage:
             'В настоящий момент в таблице нет видимых столбцов. Выберите нужные столбцы в настройках таблицы.',
-        P13ColumnsDialogCancelBtnLabel: 'Отменить',
+        P13ColumnsDialogCancelBtnLabel: 'Отмена',
         P13ColumnsDialogConfirmationBtnLabel: 'ОК',
         P13ColumnsDialogHeader: 'Столбцы',
         P13ColumnsDialogMoveDownBtn: 'Переместить ниже',
@@ -558,7 +559,7 @@ export default {
         P13FilterBooleanOptionNotDefined: '',
         P13FilterBooleanOptionTrue: 'Да',
         P13FilterDialogAddFilterBtnTitle: 'Добавить фильтр',
-        P13FilterDialogCancelBtnLabel: 'Отменить',
+        P13FilterDialogCancelBtnLabel: 'Отмена',
         P13FilterDialogConfirmationBtnLabel: 'ОК',
         P13FilterDialogExcludePanelTitleWithCount: 'Исключить ({count})',
         P13FilterDialogExcludePanelTitleWithoutCount: 'Исключить',
@@ -581,14 +582,14 @@ export default {
         P13FilterStrategyLabelNotDefined: 'Не определено',
         P13FilterStrategyLabelOnOrAfter: 'на дату или после',
         P13GroupDialogAddNewGroupBtnTitle: 'Добавить новые',
-        P13GroupDialogCancelBtnLabel: 'Отменить',
+        P13GroupDialogCancelBtnLabel: 'Отмена',
         P13GroupDialogConfirmationBtnLabel: 'ОК',
         P13GroupDialogHeader: 'Группа',
         P13GroupDialogNoneSelectedColumnSelectPlaceholder: '(нет)',
         P13GroupDialogRemoveGroupBtnTitle: 'Удалить',
         P13GroupDialogShowFieldAsColumnCheckboxLabel: 'Показать поле как столбец',
         P13SortDialogAddNewSortBtnTitle: 'Добавить новые',
-        P13SortDialogCancelBtnLabel: 'Отменить',
+        P13SortDialogCancelBtnLabel: 'Отмена',
         P13SortDialogConfirmationBtnLabel: 'ОК',
         P13SortDialogHeader: 'Сортировать',
         P13SortDialogNoneSelectedColumn: '(нет)',
@@ -604,7 +605,7 @@ export default {
         selectSingleRow: 'Для выбора строки нажмите пробел',
         settingsDialogHeader: 'Настройки',
         showingBlankOfBlank: 'Показано {totalGrowingItemsCount} из {totalGrowingItemsCount}',
-        sortDialogCancelBtnLabel: 'Отменить',
+        sortDialogCancelBtnLabel: 'Отмена',
         sortDialogConfirmBtnLabel: 'ОК',
         sortDialogHeader: 'Сортировать',
         sortDialogNotSortedLabel: '(не отсортировано)',
@@ -613,7 +614,7 @@ export default {
         sortDialogSortOrderDesc: 'По нисходящей',
         sortDialogSortOrderHeader: 'Порядок сортировки',
         toolbarActionButtonTitle: 'Настройки',
-        toolbarActionCancelButtonLabel: 'Отменить',
+        toolbarActionCancelButtonLabel: 'Отмена',
         toolbarActionCollapseAllButtonTitle: 'Свернуть все',
         toolbarActionColumnsButtonTitle: 'Столбцы',
         toolbarActionCreateButtonLabel: 'Создать',
@@ -636,7 +637,7 @@ export default {
             private: 'Частный'
         },
         applyAutomatically: 'Применить автоматически',
-        cancel: 'Отменить',
+        cancel: 'Отмена',
         createdBy: 'Создал',
         default: 'По умолчанию',
         manage: 'Управление',
@@ -656,7 +657,7 @@ export default {
         view: 'Просмотреть'
     },
     platformVHD: {
-        cancelButtonLabel: 'Отменить',
+        cancelButtonLabel: 'Отмена',
         defineConditionAddConditionButtonLabel: 'Добавить',
         defineConditionAddConditionButtonTitle: 'Добавить условие',
         defineConditionConditionsGroupHeaderExclude: 'Исключить',
@@ -704,7 +705,7 @@ export default {
         successButtonLabel: 'ОК'
     },
     platformWizardGenerator: {
-        stepsLabel: 'Wizard Steps',
+        stepsLabel: 'Шаги мастера',
         summarySectionEditStep: 'Изменить'
     },
     segmentedButton: {

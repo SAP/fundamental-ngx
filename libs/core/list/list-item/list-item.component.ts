@@ -47,7 +47,7 @@ let listItemUniqueId = 0;
     templateUrl: './list-item.component.html',
     host: {
         class: 'fd-list__item',
-        '[attr.tabindex]': '_normalizedTabIndex$()',
+        '[attr.tabindex]': '_normalizedTabIndex()',
         '[attr.id]': 'id',
         '[class.fd-list__item--suggestion]': 'suggestion()'
     },

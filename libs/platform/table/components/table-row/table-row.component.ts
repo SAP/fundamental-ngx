@@ -399,6 +399,12 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
             return;
         }
 
+        // If cell contains elements with explicit accessible names, don't announce as empty
+        if (this._hasAccessibleContent(tableTextContainer)) {
+            this._announceEmptyCell.set(false);
+            return;
+        }
+
         let value: string;
         // For non-column templates (data-driven), always check for empty content.
         const isCellEmptyInNonColumnTemplate =
@@ -411,5 +417,10 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
             column.columnCellTemplate && column.announceEmptyCell() && tableTextContainer?.innerText?.trim() === '';
 
         this._announceEmptyCell.set(isCellEmptyInColumnTemplate || isCellEmptyInNonColumnTemplate);
+    }
+
+    /** @hidden Checks if container has elements with explicit accessible names (aria-label, aria-labelledby) */
+    private _hasAccessibleContent(container: HTMLElement): boolean {
+        return !!container?.querySelector('[aria-label], [aria-labelledby]');
     }
 }

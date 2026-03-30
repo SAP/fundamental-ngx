@@ -16,10 +16,10 @@ export default {
         menuButtonAriaLabel: 'زر القائمة'
     },
     coreActionSheet: {
-        toolbarLabel: 'Action Bar'
+        toolbarLabel: 'شريط الإجراءات'
     },
     coreAvatarGroup: {
-        backButton: 'Back'
+        backButton: 'الخلف'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'مسار التنقل',
@@ -58,7 +58,7 @@ export default {
         rightNavigationBtnLabel: 'انتقال إلى البند التالي'
     },
     coreCombobox: {
-        clearButtonTitle: 'Clear input'
+        clearButtonTitle: 'مسح الإدخال'
     },
     coreDatePicker: {
         dateInputLabel: 'إدخال التاريخ',
@@ -78,11 +78,11 @@ export default {
         displayTypeTimeLabel: 'الوقت'
     },
     coreDynamicPage: {
-        breadcrumbsLabel: 'Breadcrumbs',
+        breadcrumbsLabel: 'مسارات التنقل',
         collapseLabel: 'طي المقدمة',
         expandLabel: 'توسيع المقدمة',
         pinLabel: 'تثبيت المقدمة',
-        toggleHeader: 'Toggle header',
+        toggleHeader: 'تبديل المقدمة',
         unpinLabel: 'إلغاء تثبيت المقدمة'
     },
     coreFeedListItem: {
@@ -112,8 +112,8 @@ export default {
         announcementSuccess: 'شريط رسالة النجاح',
         announcementWarning: 'شريط رسالة التحذير',
         closable: 'قابل للإغلاق',
-        defaultDismissButtonText: 'Close',
-        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'إغلاق',
+        defaultHiddenText: 'شريط الرسائل',
         dismissLabel: 'إغلاق'
     },
     coreMultiComboBox: {
@@ -129,12 +129,12 @@ export default {
         multiInputAriaLabel: 'إدخال قيم متعددة',
         navigateSelectionsWithArrows: 'يمكنك التنقل بين التحديدات بالسهم المتجه لأعلى والسهم المتجه لأسفل.',
         noResults: 'لا توجد نتائج.',
-        showAll: 'Show All ({count})',
+        showAll: 'إظهار الكل ({count})',
         tokensCountText: 'يحتوي على إجمالي الرموز المميزة: {length}.'
     },
     coreNavigation: {
         mainNavigation: 'التنقل الرئيسي',
-        navigationPath: 'مسار التنقل'
+        navigationPath: 'Navigation Path'
     },
     coreNestedList: {
         linkItemAriaLabel: 'عنصر الشجرة {itemDetails}، {selectedDescription}'
@@ -197,7 +197,7 @@ export default {
         ariaRoleDescription: 'مؤشر التصنيف'
     },
     coreSelect: {
-        closeButton: 'Close'
+        closeButton: 'إغلاق'
     },
     coreShellbar: {
         assistiveTools: 'الأدوات المساعدة',
@@ -238,7 +238,7 @@ export default {
         semanticDeclineLabel: 'رفض'
     },
     coreTabs: {
-        expandIconLabel: 'See More',
+        expandIconLabel: 'عرض المزيد',
         tabListExpandButtonText: 'المزيد'
     },
     coreText: {
@@ -272,10 +272,10 @@ export default {
     coreTimePicker: {
         timePickerButtonLabel: 'فتح أداة الانتقاء',
         timePickerInputLabel: 'إدخال أداة انتقاء الوقت',
-        valueStateErrorMessage: 'Value state Error',
-        valueStateInformationMessage: 'Value state Information',
-        valueStateSuccessMessage: 'Value state Success',
-        valueStateWarningMessage: 'Value state Warning'
+        valueStateErrorMessage: 'حالة القيمة "خطأ"',
+        valueStateInformationMessage: 'حالة القيمة "معلومات"',
+        valueStateSuccessMessage: 'حالة القيمة "تم بنجاح"',
+        valueStateWarningMessage: 'حالة القيمة "تحذير"'
     },
     coreToken: {
         ariaRoleDescription: 'الرمز المميز',
@@ -286,7 +286,7 @@ export default {
         tokenizerLabel: 'أداة التقسيم إلى رموز مميزة'
     },
     coreToolbar: {
-        moreButton: 'More'
+        moreButton: 'المزيد'
     },
     coreTree: {
         collapse: 'طي العقدة',
@@ -303,8 +303,8 @@ export default {
         menuOkText: 'موافق'
     },
     coreUserMenu: {
-        closeButton: 'Close',
-        previousButton: 'Previous'
+        closeButton: 'إغلاق',
+        previousButton: 'السابق'
     },
     coreWizard: {
         ariaLabel: 'المعالج'
@@ -387,7 +387,7 @@ export default {
         countListResultsSingular: 'عنصر قائمة نتائج واحد'
     },
     platformFeedInput: {
-        sendButton: 'Send',
+        sendButton: 'إرسال',
         userTitle: 'المستخدم'
     },
     platformIconTabBar: {
@@ -401,7 +401,7 @@ export default {
     },
     platformMessagePopover: {
         allErrors: 'الكل',
-        backButton: 'Go back',
+        backButton: 'رجوع',
         defaultErrors: {
             email: 'البريد الإلكتروني غير صالح',
             max: 'يتجاوز الحقل الحد الأقصى للقيمة',
@@ -425,20 +425,20 @@ export default {
         detailsActionAriaLabel: 'التفاصيل'
     },
     platformSearchField: {
-        allButtonLabel: 'All',
-        cancelLabel: 'Cancel',
-        clearButtonTitle: 'مسح',
-        counterLabel: 'Total results: {count}',
-        deleteButtonAriaLabel: 'Remove',
-        deleteButtonTitle: 'Remove Suggestion',
-        groupHeader: 'Group Header',
+        allButtonLabel: 'الكل',
+        cancelLabel: 'إلغاء',
+        clearButtonTitle: 'مسح البحث',
+        counterLabel: 'إجمالي النتائج: {count}',
+        deleteButtonAriaLabel: 'إزالة',
+        deleteButtonTitle: 'إزالة الاقتراح',
+        groupHeader: 'مقدمة المجموعة',
         searchInputLabel: 'بحث',
         searchSuggestionMessage: 'تم العثور على {count} من الاقتراحات.',
         searchSuggestionNavigateMessage: 'استخدم السهم المتجه لأعلى والسهم المتجه لأسفل للتنقل',
-        selectScopeLabel: 'Select scope',
-        selectStateMessageLabel: 'Select',
-        submitButtonTitle: 'بحث',
-        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'تحديد المجال',
+        selectStateMessageLabel: 'تحديد',
+        submitButtonTitle: 'بحث (إدخال)',
+        suggestionsWrapperAriaLabel: 'الاقتراحات',
         synchronizeButtonTitle: 'مزامنة'
     },
     platformSelect: {
@@ -490,7 +490,7 @@ export default {
         submitButtonLabel: 'انتقال'
     },
     platformSplitMenuButton: {
-        groupLabel: 'Split button group'
+        groupLabel: 'مجموعة أزرار التقسيم'
     },
     platformStandardListItem: {
         deleteActionAriaLabel: 'حذف',
@@ -539,6 +539,7 @@ export default {
         headerMenuUnfreeze: 'إلغاء تجميد العمود',
         headerMenuUnfreezePlural: 'إلغاء تجميد الأعمدة',
         loadMore: 'إظهار المزيد',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage:
             'لا توجد الآن أعمدة مرئية في الجدول. يرجى تحديد الأعمدة التي تحتاج إليها في إعدادات الجدول.',
         P13ColumnsDialogCancelBtnLabel: 'إلغاء',
@@ -702,7 +703,7 @@ export default {
         successButtonLabel: 'موافق'
     },
     platformWizardGenerator: {
-        stepsLabel: 'Wizard Steps',
+        stepsLabel: 'خطوات المعالِج',
         summarySectionEditStep: 'تحرير'
     },
     segmentedButton: {

@@ -17,10 +17,10 @@ export default {
         menuButtonAriaLabel: 'Buton meniu'
     },
     coreActionSheet: {
-        toolbarLabel: 'Action Bar'
+        toolbarLabel: 'Bară de acțiuni'
     },
     coreAvatarGroup: {
-        backButton: 'Back'
+        backButton: 'Înapoi'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Istoric de navigare',
@@ -59,7 +59,7 @@ export default {
         rightNavigationBtnLabel: 'Salt la articol următor'
     },
     coreCombobox: {
-        clearButtonTitle: 'Clear input'
+        clearButtonTitle: 'Golire intrare'
     },
     coreDatePicker: {
         dateInputLabel: 'Intrare dată',
@@ -79,11 +79,11 @@ export default {
         displayTypeTimeLabel: 'Ora'
     },
     coreDynamicPage: {
-        breadcrumbsLabel: 'Breadcrumbs',
+        breadcrumbsLabel: 'Istoric navigare',
         collapseLabel: 'Restrângere antet',
         expandLabel: 'Extindere antet',
         pinLabel: 'Fixare antet',
-        toggleHeader: 'Toggle header',
+        toggleHeader: 'Comutare antet',
         unpinLabel: 'Anulare fixare antet'
     },
     coreFeedListItem: {
@@ -113,8 +113,8 @@ export default {
         announcementSuccess: 'Linie de mesaj de succes',
         announcementWarning: 'Linie de mesaj de avertizare',
         closable: 'Poate fi închis',
-        defaultDismissButtonText: 'Close',
-        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Închidere',
+        defaultHiddenText: 'Linie de mesaj',
         dismissLabel: 'Închidere'
     },
     coreMultiComboBox: {
@@ -130,12 +130,12 @@ export default {
         multiInputAriaLabel: 'Intrare valori multiple',
         navigateSelectionsWithArrows: 'Navigați printre selecții cu săgețile în sus și în jos.',
         noResults: 'Niciun rezultat.',
-        showAll: 'Show All ({count})',
+        showAll: 'Afișare toate ({count})',
         tokensCountText: 'Conține tokenuri totale: {length}.'
     },
     coreNavigation: {
         mainNavigation: 'Meniul principal',
-        navigationPath: 'Cale de navigare'
+        navigationPath: 'Navigation Path'
     },
     coreNestedList: {
         linkItemAriaLabel: 'Element din arbore {itemDetails}, {selectedDescription}'
@@ -198,7 +198,7 @@ export default {
         ariaRoleDescription: 'Indicator de evaluare'
     },
     coreSelect: {
-        closeButton: 'Close'
+        closeButton: 'Închidere'
     },
     coreShellbar: {
         assistiveTools: 'Instrumente de asistență',
@@ -239,7 +239,7 @@ export default {
         semanticDeclineLabel: 'Refuzare'
     },
     coreTabs: {
-        expandIconLabel: 'See More',
+        expandIconLabel: 'Afișare mai mult',
         tabListExpandButtonText: 'Mai mult'
     },
     coreText: {
@@ -273,10 +273,10 @@ export default {
     coreTimePicker: {
         timePickerButtonLabel: 'Deschidere selector',
         timePickerInputLabel: 'Intrare selector oră',
-        valueStateErrorMessage: 'Value state Error',
-        valueStateInformationMessage: 'Value state Information',
-        valueStateSuccessMessage: 'Value state Success',
-        valueStateWarningMessage: 'Value state Warning'
+        valueStateErrorMessage: 'Stare valoare Eroare',
+        valueStateInformationMessage: 'Stare valoare Informații',
+        valueStateSuccessMessage: 'Stare valoare Reușită',
+        valueStateWarningMessage: 'Stare valoare Avertizare'
     },
     coreToken: {
         ariaRoleDescription: 'token',
@@ -287,7 +287,7 @@ export default {
         tokenizerLabel: 'Generator de tokenuri'
     },
     coreToolbar: {
-        moreButton: 'More'
+        moreButton: 'Mai mult'
     },
     coreTree: {
         collapse: 'Restrângere nod',
@@ -304,8 +304,8 @@ export default {
         menuOkText: 'OK'
     },
     coreUserMenu: {
-        closeButton: 'Close',
-        previousButton: 'Previous'
+        closeButton: 'Închidere',
+        previousButton: 'Înapoi'
     },
     coreWizard: {
         ariaLabel: 'Aplicație-asistent'
@@ -390,7 +390,7 @@ export default {
         countListResultsSingular: '1 articol în lista de rezultate'
     },
     platformFeedInput: {
-        sendButton: 'Send',
+        sendButton: 'Trimitere',
         userTitle: 'Utilizator'
     },
     platformIconTabBar: {
@@ -404,7 +404,7 @@ export default {
     },
     platformMessagePopover: {
         allErrors: 'Toate',
-        backButton: 'Go back',
+        backButton: 'Înapoi',
         defaultErrors: {
             email: 'E-mailul este nevalid',
             max: 'Câmpul depășește valoarea maximă',
@@ -428,20 +428,20 @@ export default {
         detailsActionAriaLabel: 'detaliu'
     },
     platformSearchField: {
-        allButtonLabel: 'All',
-        cancelLabel: 'Cancel',
-        clearButtonTitle: 'Golire',
-        counterLabel: 'Total results: {count}',
-        deleteButtonAriaLabel: 'Remove',
-        deleteButtonTitle: 'Remove Suggestion',
-        groupHeader: 'Group Header',
+        allButtonLabel: 'Toate',
+        cancelLabel: 'Anulare',
+        clearButtonTitle: 'Golire căutare',
+        counterLabel: 'Total rezultate: {count}',
+        deleteButtonAriaLabel: 'Eliminare',
+        deleteButtonTitle: 'Eliminare sugestie',
+        groupHeader: 'Antet de grup',
         searchInputLabel: 'Căutare',
         searchSuggestionMessage: '{count} sugestii găsite.',
         searchSuggestionNavigateMessage: 'utilizați săgețile în sus și în jos pentru a naviga',
-        selectScopeLabel: 'Select scope',
-        selectStateMessageLabel: 'Select',
-        submitButtonTitle: 'Căutare',
-        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Selectare sferă de aplicare',
+        selectStateMessageLabel: 'Selectare',
+        submitButtonTitle: 'Căutare (Enter)',
+        suggestionsWrapperAriaLabel: 'Sugestii',
         synchronizeButtonTitle: 'Sincronizare'
     },
     platformSelect: {
@@ -493,7 +493,7 @@ export default {
         submitButtonLabel: 'Lansare'
     },
     platformSplitMenuButton: {
-        groupLabel: 'Split button group'
+        groupLabel: 'Grup de butoane de divizare'
     },
     platformStandardListItem: {
         deleteActionAriaLabel: 'ștergere',
@@ -542,6 +542,7 @@ export default {
         headerMenuUnfreeze: 'Anulare înghețare coloană',
         headerMenuUnfreezePlural: 'Anulare înghețare coloane',
         loadMore: 'Afișare mai mult',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage:
             'În acest moment, nu există coloane vizibile în tabel. Selectați coloanele de care aveți nevoie în setările tabelului.',
         P13ColumnsDialogCancelBtnLabel: 'Anulare',
@@ -705,7 +706,7 @@ export default {
         successButtonLabel: 'OK'
     },
     platformWizardGenerator: {
-        stepsLabel: 'Wizard Steps',
+        stepsLabel: 'Etape asistent',
         summarySectionEditStep: 'Modificare'
     },
     segmentedButton: {

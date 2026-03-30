@@ -17,7 +17,6 @@ import {
     HostBinding,
     inject,
     Input,
-    NgZone,
     OnDestroy,
     Output
 } from '@angular/core';
@@ -29,7 +28,6 @@ import {
     FdDropEvent,
     KeyUtil
 } from '@fundamental-ngx/cdk/utils';
-import { take } from 'rxjs/operators';
 import { FDP_TABLE_DRAGGABLE_DIRECTIVE } from '../constants';
 import { TableRowType } from '../enums';
 import { findRowChildren, getRowParents } from '../helpers';
@@ -91,9 +89,6 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> implemen
     private _table: Table;
 
     /** @hidden */
-    private readonly _ngZone = inject(NgZone);
-
-    /** @hidden */
     private readonly _cdr = inject(ChangeDetectorRef, {
         host: true
     });
@@ -142,49 +137,43 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> implemen
     /** Method called when drag&drop event being cancelled. */
     dropCancelled(): void {
         /** After timeout to make click event handled first */
-        this._ngZone.runOutsideAngular(() => {
-            setTimeout(() => this._setDragInProgress(false));
-        });
+        setTimeout(() => this._setDragInProgress(false));
     }
 
     /** Method called when dragged item being dropped. */
     dragDropItemDrop(event: FdDropEvent<TableRow>): void {
         /** After timeout to make click event handled first */
-        this._ngZone.runOutsideAngular(() => {
-            setTimeout(() => {
-                this._setDragInProgress(false);
-            });
+        setTimeout(() => {
+            this._setDragInProgress(false);
         });
 
-        this._onZoneFree(() => {
-            if (this.isTreeTable && event.draggedItemIndex !== event.replacedItemIndex) {
-                event.draggedItemIndex = this._table._tableCurrentlyRenderedRowsPlaceholder[event.draggedItemIndex];
-                event.replacedItemIndex = this._table._tableCurrentlyRenderedRowsPlaceholder[event.replacedItemIndex];
-                const dragRow = this._table._tableRows.find(
-                    (row) => row === this._table._tableRowsVisible[event.draggedItemIndex]
-                );
-                const dropRow = this._table._tableRows.find(
-                    (row) => row === this._table._tableRowsVisible[event.replacedItemIndex]
-                );
+        if (this.isTreeTable && event.draggedItemIndex !== event.replacedItemIndex) {
+            event.draggedItemIndex = this._table._tableCurrentlyRenderedRowsPlaceholder[event.draggedItemIndex];
+            event.replacedItemIndex = this._table._tableCurrentlyRenderedRowsPlaceholder[event.replacedItemIndex];
+            const dragRow = this._table._tableRows.find(
+                (row) => row === this._table._tableRowsVisible[event.draggedItemIndex]
+            );
+            const dropRow = this._table._tableRows.find(
+                (row) => row === this._table._tableRowsVisible[event.replacedItemIndex]
+            );
 
-                if (!dragRow || !dropRow || this._isDroppedInsideItself(dropRow, dragRow)) {
-                    return;
-                }
-                this._dragDropUpdateDragParentRowAttributes(dragRow);
-                this._dragDropRearrangeTreeRows(dragRow, dropRow, event);
-                this._dragDropUpdateDropRowAttributes(dragRow, dropRow, event.mode);
-
-                if (!dropRow.expanded && event.mode === 'group') {
-                    this._table.toggleExpandableTableRow(dropRow, true);
-                } else {
-                    this._table.onTableRowsChanged();
-                }
-
-                this._cdr.detectChanges();
-                this._emitRowsRearrangeEvent(dragRow, dropRow, event);
-                this._table.refreshDndList();
+            if (!dragRow || !dropRow || this._isDroppedInsideItself(dropRow, dragRow)) {
+                return;
             }
-        });
+            this._dragDropUpdateDragParentRowAttributes(dragRow);
+            this._dragDropRearrangeTreeRows(dragRow, dropRow, event);
+            this._dragDropUpdateDropRowAttributes(dragRow, dropRow, event.mode);
+
+            if (!dropRow.expanded && event.mode === 'group') {
+                this._table.toggleExpandableTableRow(dropRow, true);
+            } else {
+                this._table.onTableRowsChanged();
+            }
+
+            this._cdr.detectChanges();
+            this._emitRowsRearrangeEvent(dragRow, dropRow, event);
+            this._table.refreshDndList();
+        }
     }
 
     /**
@@ -328,13 +317,6 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> implemen
         );
 
         this._table._tableRows = [...allRows, ...dropRowItems, ...rowsToMove, ...rowsAfterDropRow];
-    }
-
-    /** @hidden */
-    private _onZoneFree(callback: () => void): void {
-        this._ngZone.onMicrotaskEmpty.pipe(take(1)).subscribe(() => {
-            callback();
-        });
     }
 
     /** @hidden */

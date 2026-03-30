@@ -17,10 +17,10 @@ export default {
         menuButtonAriaLabel: 'Bouton de menu'
     },
     coreActionSheet: {
-        toolbarLabel: 'Action Bar'
+        toolbarLabel: "Barre d'actions"
     },
     coreAvatarGroup: {
-        backButton: 'Back'
+        backButton: 'Retour'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: "Fil d'Ariane",
@@ -59,7 +59,7 @@ export default {
         rightNavigationBtnLabel: "Aller à l'élément suivant"
     },
     coreCombobox: {
-        clearButtonTitle: 'Clear input'
+        clearButtonTitle: 'Effacer la saisie'
     },
     coreDatePicker: {
         dateInputLabel: 'Saisie de date',
@@ -79,11 +79,11 @@ export default {
         displayTypeTimeLabel: 'Heure'
     },
     coreDynamicPage: {
-        breadcrumbsLabel: 'Breadcrumbs',
+        breadcrumbsLabel: 'Fil d’Ariane',
         collapseLabel: "Réduire l'en-tête",
         expandLabel: "Développer l'en-tête",
         pinLabel: "Épingler l'en-tête",
-        toggleHeader: 'Toggle header',
+        toggleHeader: "Basculer l'en-tête",
         unpinLabel: "Détacher l'en-tête"
     },
     coreFeedListItem: {
@@ -113,8 +113,8 @@ export default {
         announcementSuccess: 'Barre de message de réussite',
         announcementWarning: "Barre de message d'avertissement",
         closable: 'Peut être fermé',
-        defaultDismissButtonText: 'Close',
-        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Fermer',
+        defaultHiddenText: 'Barre de message',
         dismissLabel: 'Fermer'
     },
     coreMultiComboBox: {
@@ -131,15 +131,15 @@ export default {
         navigateSelectionsWithArrows:
             "Naviguez entre les sélections à l'aide des flèches pointant vers le haut et le bas.",
         noResults: 'Aucun résultat',
-        showAll: 'Show All ({count})',
+        showAll: 'Tout afficher ({count})',
         tokensCountText: 'Contient ce nombre total de jetons : {length}.'
     },
     coreNavigation: {
         mainNavigation: 'Navigation principale',
-        navigationPath: 'Chemin de navigation'
+        navigationPath: 'Navigation Path'
     },
     coreNestedList: {
-        linkItemAriaLabel: "Élément d'arborescence  {itemDetails}, {selectedDescription}"
+        linkItemAriaLabel: "Élément d'arborescence {itemDetails}, {selectedDescription}"
     },
     coreNotification: {
         groupAriaDescription: 'Groupe de notifications',
@@ -199,7 +199,7 @@ export default {
         ariaRoleDescription: 'Indicateur de notation'
     },
     coreSelect: {
-        closeButton: 'Close'
+        closeButton: 'Fermer'
     },
     coreShellbar: {
         assistiveTools: "Outils d'assistance",
@@ -240,7 +240,7 @@ export default {
         semanticDeclineLabel: 'Refuser'
     },
     coreTabs: {
-        expandIconLabel: 'See More',
+        expandIconLabel: 'Voir plus',
         tabListExpandButtonText: 'Plus'
     },
     coreText: {
@@ -274,10 +274,10 @@ export default {
     coreTimePicker: {
         timePickerButtonLabel: 'Ouvrir le sélecteur',
         timePickerInputLabel: "Entrée du sélecteur d'heure",
-        valueStateErrorMessage: 'Value state Error',
-        valueStateInformationMessage: 'Value state Information',
-        valueStateSuccessMessage: 'Value state Success',
-        valueStateWarningMessage: 'Value state Warning'
+        valueStateErrorMessage: 'État de valeur Erreur',
+        valueStateInformationMessage: 'État de valeur Information',
+        valueStateSuccessMessage: 'État de valeur Réussite',
+        valueStateWarningMessage: 'État de valeur Avertissement'
     },
     coreToken: {
         ariaRoleDescription: 'jeton',
@@ -288,7 +288,7 @@ export default {
         tokenizerLabel: 'Générateur de jetons'
     },
     coreToolbar: {
-        moreButton: 'More'
+        moreButton: 'Plus'
     },
     coreTree: {
         collapse: 'Réduire le nœud',
@@ -305,8 +305,8 @@ export default {
         menuOkText: 'Ok'
     },
     coreUserMenu: {
-        closeButton: 'Close',
-        previousButton: 'Previous'
+        closeButton: 'Fermer',
+        previousButton: 'Précédent'
     },
     coreWizard: {
         ariaLabel: 'Assistant'
@@ -391,7 +391,7 @@ export default {
         countListResultsSingular: '1 élément dans la liste des résultats'
     },
     platformFeedInput: {
-        sendButton: 'Send',
+        sendButton: 'Envoyer',
         userTitle: 'Utilisateur'
     },
     platformIconTabBar: {
@@ -405,7 +405,7 @@ export default {
     },
     platformMessagePopover: {
         allErrors: 'Tout',
-        backButton: 'Go back',
+        backButton: 'Retour',
         defaultErrors: {
             email: 'E-mail non valide',
             max: 'Le champ dépasse la valeur maximale.',
@@ -429,19 +429,19 @@ export default {
         detailsActionAriaLabel: 'détails'
     },
     platformSearchField: {
-        allButtonLabel: 'All',
-        cancelLabel: 'Cancel',
-        clearButtonTitle: 'Effacer',
-        counterLabel: 'Total results: {count}',
-        deleteButtonAriaLabel: 'Remove',
-        deleteButtonTitle: 'Remove Suggestion',
-        groupHeader: 'Group Header',
+        allButtonLabel: 'Tout',
+        cancelLabel: 'Annuler',
+        clearButtonTitle: 'Effacer la recherche',
+        counterLabel: 'Nombre total de résultats : {count}',
+        deleteButtonAriaLabel: 'Supprimer',
+        deleteButtonTitle: 'Supprimer la suggestion',
+        groupHeader: 'En-tête de groupe',
         searchInputLabel: 'Rechercher',
         searchSuggestionMessage: '{count} suggestions trouvées',
         searchSuggestionNavigateMessage: 'utiliser les flèches pointant vers le haut ou le bas pour naviguer',
-        selectScopeLabel: 'Select scope',
-        selectStateMessageLabel: 'Select',
-        submitButtonTitle: 'Rechercher',
+        selectScopeLabel: "Sélectionner le champ d'application",
+        selectStateMessageLabel: 'Sélectionner',
+        submitButtonTitle: 'Rechercher (Entrée)',
         suggestionsWrapperAriaLabel: 'Suggestions',
         synchronizeButtonTitle: 'Synchroniser'
     },
@@ -494,7 +494,7 @@ export default {
         submitButtonLabel: 'Lancer'
     },
     platformSplitMenuButton: {
-        groupLabel: 'Split button group'
+        groupLabel: 'Fractionner le groupe de boutons'
     },
     platformStandardListItem: {
         deleteActionAriaLabel: 'supprimer',
@@ -543,6 +543,7 @@ export default {
         headerMenuUnfreeze: 'Débloquer la colonne',
         headerMenuUnfreezePlural: 'Débloquer les colonnes',
         loadMore: 'Afficher plus',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage:
             'Aucune colonne visible actuellement dans la table. Sélectionnez les colonnes requises dans les paramètres de table.',
         P13ColumnsDialogCancelBtnLabel: 'Annuler',
@@ -706,7 +707,7 @@ export default {
         successButtonLabel: 'OK'
     },
     platformWizardGenerator: {
-        stepsLabel: 'Wizard Steps',
+        stepsLabel: "Étapes de l'assistant",
         summarySectionEditStep: 'Modifier'
     },
     segmentedButton: {

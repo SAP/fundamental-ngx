@@ -16,10 +16,10 @@ export default {
         menuButtonAriaLabel: 'Кнопка меню'
     },
     coreActionSheet: {
-        toolbarLabel: 'Action Bar'
+        toolbarLabel: 'Панель дій'
     },
     coreAvatarGroup: {
-        backButton: 'Back'
+        backButton: 'Назад'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Навігаційна стежка',
@@ -58,7 +58,7 @@ export default {
         rightNavigationBtnLabel: 'Перейти до наступного елемента'
     },
     coreCombobox: {
-        clearButtonTitle: 'Clear input'
+        clearButtonTitle: 'Очистити введені дані'
     },
     coreDatePicker: {
         dateInputLabel: 'Введення дати',
@@ -78,11 +78,11 @@ export default {
         displayTypeTimeLabel: 'Час'
     },
     coreDynamicPage: {
-        breadcrumbsLabel: 'Breadcrumbs',
+        breadcrumbsLabel: 'Історія навігації',
         collapseLabel: 'Згорнути заголовок',
         expandLabel: 'Розгорнути заголовок',
         pinLabel: 'Закріпити заголовок',
-        toggleHeader: 'Toggle header',
+        toggleHeader: 'Перемкнути заголовок',
         unpinLabel: 'Відкріпити заголовок'
     },
     coreFeedListItem: {
@@ -112,8 +112,8 @@ export default {
         announcementSuccess: 'Рядок повідомлень про успішне виконання',
         announcementWarning: 'Рядок попереджувальних повідомлень',
         closable: 'З можливістю закриття',
-        defaultDismissButtonText: 'Close',
-        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Закрити',
+        defaultHiddenText: 'Рядок повідомлень',
         dismissLabel: 'Закрити'
     },
     coreMultiComboBox: {
@@ -129,12 +129,12 @@ export default {
         multiInputAriaLabel: 'Багатозначне введення',
         navigateSelectionsWithArrows: 'Переміщайтеся між виділеними елементами за допомогою стрілок вгору та вниз.',
         noResults: 'Жодних результатів.',
-        showAll: 'Show All ({count})',
+        showAll: 'Показати всі ({count})',
         tokensCountText: 'Містить загалом токенів: {length}.'
     },
     coreNavigation: {
         mainNavigation: 'Головна навігація',
-        navigationPath: 'Шлях навігації'
+        navigationPath: 'Navigation Path'
     },
     coreNestedList: {
         linkItemAriaLabel: 'Елемент дерева {itemDetails}, {selectedDescription}'
@@ -197,7 +197,7 @@ export default {
         ariaRoleDescription: 'Індикатор рейтингу'
     },
     coreSelect: {
-        closeButton: 'Close'
+        closeButton: 'Закрити'
     },
     coreShellbar: {
         assistiveTools: 'Допоміжні інструменти',
@@ -238,7 +238,7 @@ export default {
         semanticDeclineLabel: 'Відхилити'
     },
     coreTabs: {
-        expandIconLabel: 'See More',
+        expandIconLabel: 'Див. більше',
         tabListExpandButtonText: 'Більше'
     },
     coreText: {
@@ -272,10 +272,10 @@ export default {
     coreTimePicker: {
         timePickerButtonLabel: 'Відкрити засіб вибору',
         timePickerInputLabel: 'Введення для селектора часу',
-        valueStateErrorMessage: 'Value state Error',
-        valueStateInformationMessage: 'Value state Information',
-        valueStateSuccessMessage: 'Value state Success',
-        valueStateWarningMessage: 'Value state Warning'
+        valueStateErrorMessage: 'Стан значення: помилка',
+        valueStateInformationMessage: 'Стан значення: інформація',
+        valueStateSuccessMessage: 'Стан значення: успіх',
+        valueStateWarningMessage: 'Стан значення: попередження'
     },
     coreToken: {
         ariaRoleDescription: 'токен',
@@ -286,7 +286,7 @@ export default {
         tokenizerLabel: 'Генератор токенів'
     },
     coreToolbar: {
-        moreButton: 'More'
+        moreButton: 'Більше'
     },
     coreTree: {
         collapse: 'Згорнути вузол',
@@ -303,8 +303,8 @@ export default {
         menuOkText: 'ОК'
     },
     coreUserMenu: {
-        closeButton: 'Close',
-        previousButton: 'Previous'
+        closeButton: 'Закрити',
+        previousButton: 'Назад'
     },
     coreWizard: {
         ariaLabel: 'Майстер'
@@ -388,7 +388,7 @@ export default {
         countListResultsSingular: '1 елемент списку результатів'
     },
     platformFeedInput: {
-        sendButton: 'Send',
+        sendButton: 'Надіслати',
         userTitle: 'Користувач'
     },
     platformIconTabBar: {
@@ -401,8 +401,8 @@ export default {
         loadingAriaLabel: 'Завантажується'
     },
     platformMessagePopover: {
-        allErrors: 'Все',
-        backButton: 'Go back',
+        allErrors: 'Усе',
+        backButton: 'Назад',
         defaultErrors: {
             email: 'Адреса електронної пошти є недійсною',
             max: 'Поле перевищує максимальне значення',
@@ -426,20 +426,20 @@ export default {
         detailsActionAriaLabel: 'відомості'
     },
     platformSearchField: {
-        allButtonLabel: 'All',
-        cancelLabel: 'Cancel',
-        clearButtonTitle: 'Очистити',
-        counterLabel: 'Total results: {count}',
-        deleteButtonAriaLabel: 'Remove',
-        deleteButtonTitle: 'Remove Suggestion',
-        groupHeader: 'Group Header',
+        allButtonLabel: 'Усі',
+        cancelLabel: 'Скасувати',
+        clearButtonTitle: 'Очистити пошук',
+        counterLabel: 'Усього результатів: {count}',
+        deleteButtonAriaLabel: 'Видалити',
+        deleteButtonTitle: 'Видалити пропозицію',
+        groupHeader: 'Заголовок групи',
         searchInputLabel: 'Пошук',
         searchSuggestionMessage: 'Знайдено пропозицій: {count}.',
         searchSuggestionNavigateMessage: 'використовуйте стрілки вгору і вниз для навігації',
-        selectScopeLabel: 'Select scope',
-        selectStateMessageLabel: 'Select',
-        submitButtonTitle: 'Пошук',
-        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Вибрати область',
+        selectStateMessageLabel: 'Вибрати',
+        submitButtonTitle: 'Пошук (введіть)',
+        suggestionsWrapperAriaLabel: 'Пропозиції',
         synchronizeButtonTitle: 'Синхронізувати'
     },
     platformSelect: {
@@ -491,7 +491,7 @@ export default {
         submitButtonLabel: 'Перейти'
     },
     platformSplitMenuButton: {
-        groupLabel: 'Split button group'
+        groupLabel: 'Група кнопок із розділенням'
     },
     platformStandardListItem: {
         deleteActionAriaLabel: 'видалити',
@@ -541,6 +541,7 @@ export default {
         headerMenuUnfreeze: 'Розблокувати стовпець',
         headerMenuUnfreezePlural: 'Розблокувати стовпці',
         loadMore: 'Показати більше',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage:
             'Наразі у таблиці немає видимих стовпців. Виберіть потрібні стовпці у налаштуваннях таблиці.',
         P13ColumnsDialogCancelBtnLabel: 'Скасувати',
@@ -704,7 +705,7 @@ export default {
         successButtonLabel: 'ОК'
     },
     platformWizardGenerator: {
-        stepsLabel: 'Wizard Steps',
+        stepsLabel: 'Кроки майстра',
         summarySectionEditStep: 'Редагувати'
     },
     segmentedButton: {

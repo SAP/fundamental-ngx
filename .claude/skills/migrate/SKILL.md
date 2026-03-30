@@ -7,6 +7,8 @@ disable-model-invocation: true
 
 # Angular 21+ Migration: $ARGUMENTS
 
+If `$ARGUMENTS` is empty, ask the user for a component path or folder before proceeding.
+
 ## Phase 1: Analyze
 
 Read all files in the target path. For each component, directive, or service, scan for migration items below. If a folder is given, process all `.ts` and `.html` files within it.
@@ -16,7 +18,7 @@ Read all files in the target path. For each component, directive, or service, sc
 **Inputs / Outputs / Models:**
 
 - `@Input()` → `input()` or `input.required()`
-- `@Input()` with setter → `input()` + `linkedSignal()` or `effect()`
+- `@Input()` with setter → `input()` + `linkedSignal()` (preferred) or `effect()` (only for DOM side effects)
 - `@Input()` + `@Output()` pair (e.g. `value` / `valueChange`) → `model()`
 - `@Output()` → `output()`
 - Boolean inputs: add `{ transform: booleanAttribute }`
@@ -47,7 +49,9 @@ Read all files in the target path. For each component, directive, or service, sc
 - `BehaviorSubject` used for local component state → `signal()`
 - `BehaviorSubject` + `combineLatest` → `computed()`
 - `Subject<void>` used only to trigger side effects → `effect()`
+- `effect()` that only calls `signal.set()` for derived state → `computed()` or `linkedSignal`
 - Redundant `markForCheck()` after signal updates → remove
+- Object/array mutation in place + `signal.set()` with same ref → immutable update with `signal.update()`
 
 **CSS class building:**
 
@@ -60,8 +64,8 @@ Read all files in the target path. For each component, directive, or service, sc
 
 **Decorator cleanup:**
 
-- Remove `standalone: true` (default in Angular 21+)
-- Remove `allowSignalWrites: true` in `effect()` (deprecated)
+- Remove `standalone: true` (default since Angular 19)
+- Remove `allowSignalWrites` option in `effect()` (the option no longer exists)
 
 **Imports:**
 
@@ -83,6 +87,10 @@ Do NOT convert these — they should stay as-is:
 - **BehaviorSubject with complex operators**: `switchMap`, `debounceTime`, `distinctUntilChanged`, `combineLatest` with async sources → keep as RxJS
 - **Plain properties with no reactive consumer**: If nothing in template, host binding, computed, or effect reads it → keep as plain property, do not wrap in `signal()`
 - **Signals for internal bookkeeping**: One-time flags, cached DOM measurements, counters with no reactive consumer → use plain property
+
+### Migration is optional for existing code
+
+The migration targets are recommendations, not mandatory fixes. Present all findings but let the user decide scope. Existing `@Input()` / `@Output()` decorators are valid — only migrate them if the user wants to or if the code is being substantially reworked.
 
 ## Phase 2: Present Plan
 
@@ -145,7 +153,8 @@ Output a structured migration plan:
 After approval:
 
 1. Apply all migrations from the approved plan
-2. Run build: `nx run <library>:build`
-3. Run lint: `nx run <library>:lint`
-4. Run tests: `nx run <library>:test --testfile=<spec-file> --skip-nx-cache`
-5. Report results and any issues
+2. Format code: `yarn format`
+3. Run build: `nx run <library>:build`
+4. Run lint: `nx run <library>:lint`
+5. Run tests: `nx run <library>:test --testfile=<spec-file> --skip-nx-cache`
+6. Report results and any issues

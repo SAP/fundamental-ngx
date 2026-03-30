@@ -540,6 +540,7 @@ export default {
         headerMenuUnfreeze: 'हैडर मेनू अनफ्रीज',
         headerMenuUnfreezePlural: 'Unfreeze columns',
         loadMore: 'Show More',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage:
             'Right now, there are no visible columns in the table. Please select the columns you need in the table settings.',
         P13ColumnsDialogCancelBtnLabel: 'रद्द करो',

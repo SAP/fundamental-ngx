@@ -15,7 +15,6 @@ import {
     HostBinding,
     HostListener,
     Input,
-    NgZone,
     OnChanges,
     Output,
     QueryList,
@@ -32,7 +31,7 @@ import { KeyUtil, RtlService, resizeObservable } from '@fundamental-ngx/cdk/util
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { merge } from 'rxjs';
-import { debounceTime, take } from 'rxjs/operators';
+import { debounceTime } from 'rxjs/operators';
 import { CarouselItemComponent } from './carousel-item/carousel-item.component';
 import { CarouselConfig, CarouselItemInterface, CarouselService, PanEndOutput } from './carousel.service';
 import { CarouselResourceStringsEN, FdCarouselResourceStrings } from './i18n/carousel-resources';
@@ -268,8 +267,7 @@ export class CarouselComponent implements AfterContentInit, AfterViewInit, After
         private readonly _elementRef: ElementRef<HTMLElement>,
         private readonly _renderer: Renderer2,
         private readonly _changeDetectorRef: ChangeDetectorRef,
-        private readonly _carouselService: CarouselService,
-        private readonly _zone: NgZone
+        private readonly _carouselService: CarouselService
     ) {
         effect(() => {
             const isRtl = this._isRtl();
@@ -530,7 +528,7 @@ export class CarouselComponent implements AfterContentInit, AfterViewInit, After
 
     /** @hidden Initialize carousel with visible items */
     private _initializeCarousel(): void {
-        this._zone.onMicrotaskEmpty.pipe(take(1)).subscribe(() => {
+        queueMicrotask(() => {
             // Handles navigator button enabled/disabled state
             this._buttonVisibility();
             let arrayLength: number;

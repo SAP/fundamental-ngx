@@ -17,10 +17,10 @@ export default {
         menuButtonAriaLabel: 'Мәзір түймесі'
     },
     coreActionSheet: {
-        toolbarLabel: 'Action Bar'
+        toolbarLabel: 'Операция панелі'
     },
     coreAvatarGroup: {
-        backButton: 'Back'
+        backButton: 'Артқа'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Өту тізбегінің жолы',
@@ -59,14 +59,14 @@ export default {
         rightNavigationBtnLabel: 'Келесі тармаққа өту'
     },
     coreCombobox: {
-        clearButtonTitle: 'Clear input'
+        clearButtonTitle: 'Енгізілімді тазарту'
     },
     coreDatePicker: {
         dateInputLabel: 'Күнді енгізу',
         dateRangeInputLabel: 'Күндер ауқымын енгізу',
         displayCalendarToggleLabel: 'Таңдау құралын ашу',
         valueStateErrorMessage: 'Мән күйі: қате',
-        valueStateInformationMessage: 'Мән күйі туралы ақпарат',
+        valueStateInformationMessage: 'Мән күйі: ақпарат',
         valueStateSuccessMessage: 'Мән күйі: сәтті',
         valueStateWarningMessage: 'Мән күйі: ескерту'
     },
@@ -79,11 +79,11 @@ export default {
         displayTypeTimeLabel: 'Уақыт'
     },
     coreDynamicPage: {
-        breadcrumbsLabel: 'Breadcrumbs',
+        breadcrumbsLabel: 'Шарлау тарихы',
         collapseLabel: 'Тақырыпты жию',
         expandLabel: 'Тақырыпты жаю',
         pinLabel: 'Тақырыпты бекіту',
-        toggleHeader: 'Toggle header',
+        toggleHeader: 'Тақырыпты ауыстыру',
         unpinLabel: 'Тақырыпты босату'
     },
     coreFeedListItem: {
@@ -113,8 +113,8 @@ export default {
         announcementSuccess: 'Сәттілік туралы хабардың жолағы',
         announcementWarning: 'Ескерту хабарының жолағы',
         closable: 'Жабуға болады',
-        defaultDismissButtonText: 'Close',
-        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Жабу',
+        defaultHiddenText: 'Хабар жолағы',
         dismissLabel: 'Жабу'
     },
     coreMultiComboBox: {
@@ -130,12 +130,12 @@ export default {
         multiInputAriaLabel: 'Көп мәнді енгізу',
         navigateSelectionsWithArrows: 'Жоғары және төмен көрсеткілерді пайдаланып, бөлімдерге өтіңіз.',
         noResults: 'Нәтижелер жоқ.',
-        showAll: 'Show All ({count})',
+        showAll: 'Барлығын көрсету ({count})',
         tokensCountText: 'Ішіндегі жалпы маркерлер саны: {length}.'
     },
     coreNavigation: {
         mainNavigation: 'Негізгі навигация',
-        navigationPath: 'Навигация жолы'
+        navigationPath: 'Navigation Path'
     },
     coreNestedList: {
         linkItemAriaLabel: 'Тармақты құрылым тармағы {itemDetails}, {selectedDescription}'
@@ -198,7 +198,7 @@ export default {
         ariaRoleDescription: 'Рейтинг индикаторы'
     },
     coreSelect: {
-        closeButton: 'Close'
+        closeButton: 'Жабу'
     },
     coreShellbar: {
         assistiveTools: 'Көмекші құралдар',
@@ -239,7 +239,7 @@ export default {
         semanticDeclineLabel: 'Қабылдамау'
     },
     coreTabs: {
-        expandIconLabel: 'See More',
+        expandIconLabel: 'Көбірек көрсету',
         tabListExpandButtonText: 'Көбірек'
     },
     coreText: {
@@ -273,10 +273,10 @@ export default {
     coreTimePicker: {
         timePickerButtonLabel: 'Таңдау құралын ашу',
         timePickerInputLabel: 'Уақыт таңдау құралын енгізу',
-        valueStateErrorMessage: 'Value state Error',
-        valueStateInformationMessage: 'Value state Information',
-        valueStateSuccessMessage: 'Value state Success',
-        valueStateWarningMessage: 'Value state Warning'
+        valueStateErrorMessage: 'Мән күйі: қате',
+        valueStateInformationMessage: 'Мән күйі: ақпарат',
+        valueStateSuccessMessage: 'Мән күйі: сәтті',
+        valueStateWarningMessage: 'Мән күйі: ескерту'
     },
     coreToken: {
         ariaRoleDescription: 'маркер',
@@ -287,7 +287,7 @@ export default {
         tokenizerLabel: 'Маркер жасаушы'
     },
     coreToolbar: {
-        moreButton: 'More'
+        moreButton: 'Көбірек'
     },
     coreTree: {
         collapse: 'Түйінді жию',
@@ -304,8 +304,8 @@ export default {
         menuOkText: 'OK'
     },
     coreUserMenu: {
-        closeButton: 'Close',
-        previousButton: 'Previous'
+        closeButton: 'Жабу',
+        previousButton: 'Алдыңғы'
     },
     coreWizard: {
         ariaLabel: 'Шебер'
@@ -389,11 +389,11 @@ export default {
         countListResultsSingular: '1 нәтижелер тізімінің тармағы'
     },
     platformFeedInput: {
-        sendButton: 'Send',
+        sendButton: 'Жіберу',
         userTitle: 'Пайдаланушы'
     },
     platformIconTabBar: {
-        moreButton: 'Тағы'
+        moreButton: 'Көбірек'
     },
     platformLink: {
         roleDescriptionWithMedia: 'Медиа: {media}'
@@ -403,7 +403,7 @@ export default {
     },
     platformMessagePopover: {
         allErrors: 'Барлығы',
-        backButton: 'Go back',
+        backButton: 'Артқа',
         defaultErrors: {
             email: 'Электрондық пошта мекенжайы жарамсыз',
             max: 'Өріс максималды мәннен асады',
@@ -427,20 +427,20 @@ export default {
         detailsActionAriaLabel: 'мәлімет'
     },
     platformSearchField: {
-        allButtonLabel: 'All',
-        cancelLabel: 'Cancel',
-        clearButtonTitle: 'Тазарту',
-        counterLabel: 'Total results: {count}',
-        deleteButtonAriaLabel: 'Remove',
-        deleteButtonTitle: 'Remove Suggestion',
-        groupHeader: 'Group Header',
+        allButtonLabel: 'Барлығы',
+        cancelLabel: 'Болдырмау',
+        clearButtonTitle: 'Іздеуді тазарту',
+        counterLabel: 'Жалпы нәтижелер саны: {count}',
+        deleteButtonAriaLabel: 'Жою',
+        deleteButtonTitle: 'Ұсынысты жою',
+        groupHeader: 'Топ тақырыбы',
         searchInputLabel: 'Іздеу',
         searchSuggestionMessage: '{count} ұсыныс табылды.',
         searchSuggestionNavigateMessage: 'өту үшін жоғары және төмен көрсеткілерді пайдаланыңыз',
-        selectScopeLabel: 'Select scope',
-        selectStateMessageLabel: 'Select',
-        submitButtonTitle: 'Іздеу',
-        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Ауқымды таңдау',
+        selectStateMessageLabel: 'Таңдау',
+        submitButtonTitle: 'Іздеу (енгізу)',
+        suggestionsWrapperAriaLabel: 'Ұсыныстар',
         synchronizeButtonTitle: 'Синхрондау'
     },
     platformSelect: {
@@ -492,7 +492,7 @@ export default {
         submitButtonLabel: 'Өту'
     },
     platformSplitMenuButton: {
-        groupLabel: 'Split button group'
+        groupLabel: 'Бөлу түймелерінің тобы'
     },
     platformStandardListItem: {
         deleteActionAriaLabel: 'жою',
@@ -541,6 +541,7 @@ export default {
         headerMenuUnfreeze: 'Бағанды босату',
         headerMenuUnfreezePlural: 'Бағандарды босату',
         loadMore: 'Көбірек көрсету',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage:
             'Дәл қазір кестеде көрінетін бағандар жоқ. Кесте параметрлерінде қажетті бағандарды таңдаңыз.',
         P13ColumnsDialogCancelBtnLabel: 'Болдырмау',
@@ -704,7 +705,7 @@ export default {
         successButtonLabel: 'OK'
     },
     platformWizardGenerator: {
-        stepsLabel: 'Wizard Steps',
+        stepsLabel: 'Шебер қадамдары',
         summarySectionEditStep: 'Өңдеу'
     },
     segmentedButton: {
