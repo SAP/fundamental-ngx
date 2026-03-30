@@ -25,7 +25,7 @@ alwaysApply: false
 
 ## New Code vs Existing Code
 
-- **New components/directives/pipes**: use `input()`, `output()`, `model()`, `computed()`, `host: {}`.
+- **New components/directives/pipes**: use `input()`, `output()`, `model()`, `computed()`, `linkedSignal()`, `host: {}`.
 - **Existing code**: both decorator-style (`@Input`, `@Output`, `@HostBinding`) and signal-style are fine.
 - **When modifying existing `@Input()`/`@Output()`**: prefer migrating to signal functions if the change is already in scope, but don't refactor just for the sake of it.
 
@@ -87,14 +87,16 @@ protected readonly _cssClass = computed(() => {
 ## Effects
 
 - Signal writes in effects work by default -- do not pass `allowSignalWrites` (the option no longer exists).
-- Prefer `computed()` over `effect()` for derived state.
+- **Never use `effect()` for derived state** -- use `computed()` (read-only) or `linkedSignal` (writable/resettable).
 - Use `untracked()` to read signals without creating dependencies.
+- **Beware conditional signal reads**: if a signal is only read inside an `if` branch, it won't be tracked when that branch isn't taken. Read tracked signals before conditional logic.
+- Wrap non-tracked function calls in `untracked()` to avoid hidden dependencies.
 
 ```typescript
 effect(() => {
     const content = this.content(); // tracked
     const duration = untracked(this.duration); // not tracked
-    this.animate(content, duration);
+    untracked(() => this.animate(content, duration)); // prevent hidden deps
 });
 ```
 
@@ -122,3 +124,6 @@ The codebase is migrating toward zoneless change detection. For new code:
 - Don't use `ngClass` / `ngStyle` -- use direct `class` / `style` bindings.
 - Don't use custom `DestroyedService` -- use `DestroyRef` + `takeUntilDestroyed()`.
 - Don't use `signal.set()` then `markForCheck()` when the signal is read in the template -- Angular tracks it automatically. `markForCheck()` is still valid when you need to trigger change detection outside of a template-consumed signal.
+- Don't mutate objects/arrays in place then call `signal.set()` with the same reference -- signals use reference equality (`===`), so same-reference updates are silently ignored. Always create new references: `signal.update(arr => [...arr, item])`.
+- Don't use `effect()` to derive state from other signals -- use `computed()` or `linkedSignal`. Effects are for side effects only (DOM, logging, external APIs).
+- Don't rely on conditional signal reads inside `effect()` / `computed()` -- if a signal is only read inside an `if` branch, it won't be tracked when that branch isn't taken.

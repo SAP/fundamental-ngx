@@ -1,7 +1,16 @@
-import { AfterViewInit, DestroyRef, Directive, ElementRef, inject, Input, NgZone } from '@angular/core';
+import {
+    afterNextRender,
+    AfterViewInit,
+    DestroyRef,
+    Directive,
+    ElementRef,
+    inject,
+    Injector,
+    Input
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BehaviorSubject } from 'rxjs';
-import { distinctUntilChanged, filter, take } from 'rxjs/operators';
+import { distinctUntilChanged, filter } from 'rxjs/operators';
 import { TabbableElementService } from '../../services/tabbable-element.service';
 
 @Directive({
@@ -41,12 +50,14 @@ export class InitialFocusDirective implements AfterViewInit {
     private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
+    private readonly _injector = inject(Injector);
+
+    /** @hidden */
     private readonly _enabled$ = new BehaviorSubject<boolean>(true);
 
     /** @hidden */
     constructor(
         private _elmRef: ElementRef<HTMLElement>,
-        private _ngZone: NgZone,
         private readonly _tabbableService: TabbableElementService
     ) {}
 
@@ -59,20 +70,8 @@ export class InitialFocusDirective implements AfterViewInit {
                 takeUntilDestroyed(this._destroyRef)
             )
             .subscribe(() => {
-                this._executeOnEmpty(() => this._focus());
+                afterNextRender(() => this._focus(), { injector: this._injector });
             });
-    }
-
-    /**
-     * @hidden
-     * Executes a function when the zone is stable.
-     */
-    private _executeOnEmpty(fn: () => any): void {
-        if (!this._ngZone.hasPendingMicrotasks) {
-            fn();
-        } else {
-            this._ngZone.onMicrotaskEmpty.pipe(take(1)).subscribe(fn);
-        }
     }
 
     /**

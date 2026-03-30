@@ -22,7 +22,9 @@
                 role="heading"
                 [headerSize]="4"
                 [attr.aria-level]="headingLevelParsed()"
-                class="fd-toolbar__title"
+                [attr.title]="titleText()"
+                [attr.aria-label]="titleText()"
+                class="fd-toolbar__title fd-toolbar__title--truncate"
                 [id]="tableToolbarTitleId"
             >
                 <ng-template

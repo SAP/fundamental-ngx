@@ -17,10 +17,10 @@ export default {
         menuButtonAriaLabel: 'Knop Menu'
     },
     coreActionSheet: {
-        toolbarLabel: 'Action Bar'
+        toolbarLabel: 'Actiebalk'
     },
     coreAvatarGroup: {
-        backButton: 'Back'
+        backButton: 'Terug'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Navigatiepad',
@@ -59,7 +59,7 @@ export default {
         rightNavigationBtnLabel: 'Naar volgende item'
     },
     coreCombobox: {
-        clearButtonTitle: 'Clear input'
+        clearButtonTitle: 'Invoer wissen'
     },
     coreDatePicker: {
         dateInputLabel: 'Invoer datum',
@@ -79,11 +79,11 @@ export default {
         displayTypeTimeLabel: 'Tijd'
     },
     coreDynamicPage: {
-        breadcrumbsLabel: 'Breadcrumbs',
+        breadcrumbsLabel: 'Navigatiepad',
         collapseLabel: 'Kop samenvouwen',
         expandLabel: 'Kop uitvouwen',
-        pinLabel: 'Kop vastpinnen',
-        toggleHeader: 'Toggle header',
+        pinLabel: 'Kop vastmaken',
+        toggleHeader: 'Kop in-/uitschakelen',
         unpinLabel: 'Kop losmaken'
     },
     coreFeedListItem: {
@@ -113,8 +113,8 @@ export default {
         announcementSuccess: 'Statusbalk succesmelding',
         announcementWarning: 'Statusbalk waarschuwingsmelding',
         closable: 'Sluitbaar',
-        defaultDismissButtonText: 'Close',
-        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Sluiten',
+        defaultHiddenText: 'Statusbalk',
         dismissLabel: 'Sluiten'
     },
     coreMultiComboBox: {
@@ -130,12 +130,12 @@ export default {
         multiInputAriaLabel: 'Invoer van meerdere waarden',
         navigateSelectionsWithArrows: 'Gebruik de pijl-omhoog en pijl-omlaag om door de selecties te bladeren.',
         noResults: 'Geen resultaten.',
-        showAll: 'Show All ({count})',
+        showAll: 'Alles weergeven ({count})',
         tokensCountText: 'Totaal aantal tokens: {length}.'
     },
     coreNavigation: {
         mainNavigation: 'Hoofdnavigatie',
-        navigationPath: 'Navigatiepad'
+        navigationPath: 'Navigation Path'
     },
     coreNestedList: {
         linkItemAriaLabel: 'Structuuritem {itemDetails}, {selectedDescription}'
@@ -198,7 +198,7 @@ export default {
         ariaRoleDescription: 'Waarderingsindicator'
     },
     coreSelect: {
-        closeButton: 'Close'
+        closeButton: 'Sluiten'
     },
     coreShellbar: {
         assistiveTools: 'Ondersteunende tools',
@@ -239,7 +239,7 @@ export default {
         semanticDeclineLabel: 'Weigeren'
     },
     coreTabs: {
-        expandIconLabel: 'See More',
+        expandIconLabel: 'Meer bekijken',
         tabListExpandButtonText: 'Meer'
     },
     coreText: {
@@ -273,10 +273,10 @@ export default {
     coreTimePicker: {
         timePickerButtonLabel: 'Kiezer openen',
         timePickerInputLabel: 'Invoer tijdkiezer',
-        valueStateErrorMessage: 'Value state Error',
-        valueStateInformationMessage: 'Value state Information',
-        valueStateSuccessMessage: 'Value state Success',
-        valueStateWarningMessage: 'Value state Warning'
+        valueStateErrorMessage: 'Waardestatus Fout',
+        valueStateInformationMessage: 'Waardestatus Informatie',
+        valueStateSuccessMessage: 'Waardestatus Geslaagd',
+        valueStateWarningMessage: 'Waardestatus Waarschuwing'
     },
     coreToken: {
         ariaRoleDescription: 'token',
@@ -287,7 +287,7 @@ export default {
         tokenizerLabel: 'Tokenizer'
     },
     coreToolbar: {
-        moreButton: 'More'
+        moreButton: 'Meer'
     },
     coreTree: {
         collapse: 'Knooppunt samenvouwen',
@@ -304,8 +304,8 @@ export default {
         menuOkText: 'OK'
     },
     coreUserMenu: {
-        closeButton: 'Close',
-        previousButton: 'Previous'
+        closeButton: 'Sluiten',
+        previousButton: 'Vorige'
     },
     coreWizard: {
         ariaLabel: 'Wizard'
@@ -390,7 +390,7 @@ export default {
         countListResultsSingular: '1 item in resultatenlijst'
     },
     platformFeedInput: {
-        sendButton: 'Send',
+        sendButton: 'Verzenden',
         userTitle: 'Gebruiker'
     },
     platformIconTabBar: {
@@ -404,7 +404,7 @@ export default {
     },
     platformMessagePopover: {
         allErrors: 'Alle',
-        backButton: 'Go back',
+        backButton: 'Ga terug',
         defaultErrors: {
             email: 'E-mail is ongeldig',
             max: 'Waarde van veld is groter dan toegestaan',
@@ -428,20 +428,20 @@ export default {
         detailsActionAriaLabel: 'detail'
     },
     platformSearchField: {
-        allButtonLabel: 'All',
-        cancelLabel: 'Cancel',
-        clearButtonTitle: 'Wissen',
-        counterLabel: 'Total results: {count}',
-        deleteButtonAriaLabel: 'Remove',
-        deleteButtonTitle: 'Remove Suggestion',
-        groupHeader: 'Group Header',
+        allButtonLabel: 'Alles',
+        cancelLabel: 'Annuleren',
+        clearButtonTitle: 'Zoekopdracht wissen',
+        counterLabel: 'Totaal aantal resultaten: {count}',
+        deleteButtonAriaLabel: 'Verwijderen',
+        deleteButtonTitle: 'Suggestie verwijderen',
+        groupHeader: 'Groepskop',
         searchInputLabel: 'Zoeken',
         searchSuggestionMessage: '{count} suggesties gevonden',
         searchSuggestionNavigateMessage: 'gebruik pijl-omhoog en pijl-omlaag om te bladeren',
-        selectScopeLabel: 'Select scope',
-        selectStateMessageLabel: 'Select',
-        submitButtonTitle: 'Zoeken',
-        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Scope selecteren',
+        selectStateMessageLabel: 'Selecteren',
+        submitButtonTitle: 'Zoeken (Enter)',
+        suggestionsWrapperAriaLabel: 'Suggesties',
         synchronizeButtonTitle: 'Synchroniseren'
     },
     platformSelect: {
@@ -493,7 +493,7 @@ export default {
         submitButtonLabel: 'Start'
     },
     platformSplitMenuButton: {
-        groupLabel: 'Split button group'
+        groupLabel: 'Groep knoppen splitsen'
     },
     platformStandardListItem: {
         deleteActionAriaLabel: 'verwijderen',
@@ -706,7 +706,7 @@ export default {
         successButtonLabel: 'OK'
     },
     platformWizardGenerator: {
-        stepsLabel: 'Wizard Steps',
+        stepsLabel: 'Wizardstappen',
         summarySectionEditStep: 'Bewerken'
     },
     segmentedButton: {

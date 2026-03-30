@@ -7,7 +7,6 @@ import {
     ContentChildren,
     ElementRef,
     Input,
-    NgZone,
     QueryList,
     ViewChild,
     ViewEncapsulation,
@@ -18,7 +17,17 @@ import {
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { Nullable, resizeObservable } from '@fundamental-ngx/cdk';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
-import { asyncScheduler, debounceTime, filter, merge, observeOn, startWith, switchMap, take } from 'rxjs';
+import {
+    animationFrames,
+    asyncScheduler,
+    debounceTime,
+    filter,
+    merge,
+    observeOn,
+    startWith,
+    switchMap,
+    take
+} from 'rxjs';
 import { FdbNavigationContentContainer } from '../../models/navigation-content-container.class';
 import { FdbNavigationListItem } from '../../models/navigation-list-item.class';
 import { FdbNavigation } from '../../models/navigation.class';
@@ -118,9 +127,6 @@ export class NavigationContentStartComponent extends FdbNavigationContentContain
     private readonly _cdr = inject(ChangeDetectorRef);
 
     /** @hidden */
-    private readonly _zone = inject(NgZone);
-
-    /** @hidden */
     ngAfterContentInit(): void {
         this._listItems.changes
             .pipe(
@@ -136,7 +142,10 @@ export class NavigationContentStartComponent extends FdbNavigationContentContain
         const resize = resizeObservable(this._elementRef.nativeElement).pipe(debounceTime(30));
 
         merge(this._isSnappedObservable, this._listItemsObservable, resize)
-            .pipe(switchMap(() => this._zone.onStable.pipe(startWith(this._zone.isStable), take(1))))
+            .pipe(
+                switchMap(() => animationFrames().pipe(take(1))),
+                takeUntilDestroyed(this._destroyRef)
+            )
             .subscribe(() => {
                 this._calculateVisibleItems();
             });

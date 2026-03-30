@@ -1,24 +1,18 @@
 import { DomPortal } from '@angular/cdk/portal';
-import {
-    AfterViewInit,
-    DestroyRef,
-    Directive,
-    ElementRef,
-    HostListener,
-    inject,
-    Input,
-    NgZone,
-    Renderer2
-} from '@angular/core';
+import { AfterViewInit, DestroyRef, Directive, ElementRef, inject, Input, Renderer2 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { HasElementRef } from '@fundamental-ngx/cdk/utils';
-import { BehaviorSubject, combineLatest, delayWhen, Observable, Subject, tap } from 'rxjs';
+import { BehaviorSubject, combineLatest, delay, Observable, Subject, tap } from 'rxjs';
 import { MenuItemComponent } from '../../menu-item/menu-item.component';
 import { FD_MENU_ITEM_COMPONENT } from '../../menu.tokens';
 
 @Directive({
     selector: 'li[fd-menu-item][fdMenuSegmentedButtonOption]',
-    standalone: true
+    host: {
+        '(click)': '_onClick($event)',
+        '(keydown.enter)': '_onClick($event)',
+        '(keydown.space)': '_onClick($event)'
+    }
 })
 export class SegmentedButtonOptionDirective<T> implements AfterViewInit, HasElementRef {
     /** @hidden */
@@ -54,8 +48,7 @@ export class SegmentedButtonOptionDirective<T> implements AfterViewInit, HasElem
     /** @hidden */
     constructor() {
         this.clicked = this._clicked.asObservable();
-        const ngZone = inject(NgZone);
-        combineLatest([this._viewInit$.pipe(delayWhen(() => ngZone.onStable.asObservable())), this._selected$])
+        combineLatest([this._viewInit$.pipe(delay(0)), this._selected$])
             .pipe(
                 tap(() => {
                     if (!this._dotElement) {
@@ -71,9 +64,6 @@ export class SegmentedButtonOptionDirective<T> implements AfterViewInit, HasElem
     }
 
     /** @hidden */
-    @HostListener('click', ['$event'])
-    @HostListener('keydown.enter', ['$event'])
-    @HostListener('keydown.space', ['$event'])
     _onClick($event: Event): void {
         $event.preventDefault();
         this._clicked.next();

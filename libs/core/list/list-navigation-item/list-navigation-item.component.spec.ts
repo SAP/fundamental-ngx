@@ -84,3 +84,45 @@ describe('ListNavigationItemComponent', () => {
         expect(component.list._childIndicatedAndCollapsed()).toBeTruthy();
     });
 });
+
+@Component({
+    template: `
+        <li fd-list-navigation-item #nonExpandableItem>
+            <fd-icon glyph="home"></fd-icon>
+            <span fd-list-navigation-item-text>Overview</span>
+        </li>
+    `,
+    standalone: true,
+    imports: [ListModule, IconComponent]
+})
+class NonExpandableTestComponent {
+    @ViewChild('nonExpandableItem', { read: ElementRef })
+    ref: ElementRef;
+    @ViewChild(ListNavigationItemComponent)
+    item: ListNavigationItemComponent;
+}
+
+describe('ListNavigationItemComponent non-expandable', () => {
+    let component: NonExpandableTestComponent;
+    let fixture: ComponentFixture<NonExpandableTestComponent>;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [NonExpandableTestComponent]
+        }).compileComponents();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(NonExpandableTestComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
+
+    it('should reflect tabindex=0 on the DOM host element for non-expandable items', () => {
+        expect(component.ref.nativeElement.getAttribute('tabindex')).toBe('0');
+    });
+
+    it('should not be marked as expandable', () => {
+        expect(component.item._isExpandable).toBe(false);
+    });
+});

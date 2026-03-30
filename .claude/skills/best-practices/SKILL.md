@@ -18,7 +18,7 @@ Audit the code at `$ARGUMENTS` against the project's conventions. Unlike `/revie
 
 ### 1. Angular 21+ Patterns
 
-- [ ] **New code** uses `input()` / `output()` / `model()`. Existing `@Input()` / `@Output()` decorators are acceptable.
+- [ ] **New code** uses `input()` / `output()` / `model()` / `linkedSignal()`. Existing `@Input()` / `@Output()` decorators are acceptable.
 - [ ] `host: {}` in decorator — no `@HostBinding()` / `@HostListener()`
 - [ ] `@if` / `@for` / `@switch` — no `*ngIf` / `*ngFor` / `*ngSwitch`
 - [ ] No `standalone: true` (default since Angular 19)
@@ -34,6 +34,10 @@ Audit the code at `$ARGUMENTS` against the project's conventions. Unlike `/revie
 - [ ] No redundant `markForCheck()` after signal updates
 - [ ] `BehaviorSubject` only for async streams, not local state
 - [ ] `effect()` for signal side effects — no `Subject<void>` for trigger-only patterns
+- [ ] No `effect()` used for state derivation — use `computed()` or `linkedSignal` instead
+- [ ] `linkedSignal` used for mutable derived state (e.g., editable fields that reset on input change)
+- [ ] No object/array mutation in place then `signal.set()` with same reference — always create new references
+- [ ] No conditional signal reads creating invisible dependency gaps in `effect()` / `computed()` — tracked signals read before conditional logic
 
 ### 3. Dependency Injection
 

@@ -185,6 +185,49 @@ readonly density = linkedSignal({
 
 ## Effects
 
+### When to use effects
+
+Effects are for **side effects only** -- DOM manipulation, logging, external API calls. Do NOT use effects for deriving state (use `computed()` or `linkedSignal`).
+
+### Implicit Tracking Pitfalls
+
+Effects automatically track every signal read during execution. This creates two traps:
+
+**Trap 1: Conditional reads create invisible dependency gaps**
+
+```typescript
+// DANGEROUS - if showCalendar() is false on first run,
+// calendarRef() is never read and the effect won't re-run
+// when calendarRef changes
+effect(() => {
+    if (this.showCalendar()) {
+        this.calendarRef()?.scrollToToday();
+    }
+});
+
+// SAFER - read tracked signals before conditional logic
+effect(() => {
+    const show = this.showCalendar();
+    const ref = this.calendarRef();
+    if (show && ref) {
+        ref.scrollToToday();
+    }
+});
+```
+
+**Trap 2: Non-tracked code may read signals accidentally**
+
+Any function called inside an effect can create hidden dependencies. Wrap non-tracked work in `untracked()`:
+
+```typescript
+effect(() => {
+    const value = this.content(); // Tracked - intentional
+    untracked(() => {
+        this.externalService.update(value); // May read signals internally
+    });
+});
+```
+
 ### Basic Effect
 
 ```typescript
@@ -277,7 +320,7 @@ set collapsed(value: boolean) {
 // Consumer:
 effect(() => {
     this.service.collapsed();  // Track signal
-    this.update();             // React to change
+    untracked(() => this.update());  // React without creating hidden dependencies
 });
 ```
 
@@ -453,12 +496,15 @@ afterRender(
 
 - Prefer `afterNextRender()` for one-time initialization
 - Use `afterRender()` sparingly - it runs frequently
+- For DOM work that should react to signal changes, consider `afterRenderEffect()` -- it combines signal tracking with the render lifecycle (runs after rendering, only when tracked signals change)
 - Clean up subscriptions and listeners in `ngOnDestroy`
 - Avoid heavy computations in these hooks
 
 ---
 
 ## Resource API (Experimental)
+
+> **Warning:** `resource()`, `rxResource()`, and `httpResource()` are in **developer preview** as of Angular 21. Known issues include: `value()` throws when in error state, `fixture.whenStable()` doesn't resolve with pending resources, errors don't trigger `ErrorHandler`, and the error signal is typed as `unknown`. Use with caution and expect API changes.
 
 Angular 21 introduces experimental `resource()` API for async data fetching:
 

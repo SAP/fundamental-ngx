@@ -16,10 +16,10 @@ export default {
         menuButtonAriaLabel: 'メニューボタン'
     },
     coreActionSheet: {
-        toolbarLabel: 'Action Bar'
+        toolbarLabel: 'アクションバー'
     },
     coreAvatarGroup: {
-        backButton: 'Back'
+        backButton: '戻る'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: '階層リンク',
@@ -58,7 +58,7 @@ export default {
         rightNavigationBtnLabel: '次の項目へ'
     },
     coreCombobox: {
-        clearButtonTitle: 'Clear input'
+        clearButtonTitle: '入力をクリア'
     },
     coreDatePicker: {
         dateInputLabel: '日付入力',
@@ -78,11 +78,11 @@ export default {
         displayTypeTimeLabel: '時刻'
     },
     coreDynamicPage: {
-        breadcrumbsLabel: 'Breadcrumbs',
+        breadcrumbsLabel: '階層リンク',
         collapseLabel: 'ヘッダーを圧縮',
         expandLabel: 'ヘッダーを展開',
         pinLabel: 'ヘッダーを固定',
-        toggleHeader: 'Toggle header',
+        toggleHeader: 'ヘッダーの切替',
         unpinLabel: 'ヘッダーの固定を解除'
     },
     coreFeedListItem: {
@@ -112,8 +112,8 @@ export default {
         announcementSuccess: '正常終了メッセージストリップ',
         announcementWarning: '警告メッセージストリップ',
         closable: 'クローズ可能',
-        defaultDismissButtonText: 'Close',
-        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: '閉じる',
+        defaultHiddenText: 'メッセージストリップ',
         dismissLabel: '閉じる'
     },
     coreMultiComboBox: {
@@ -129,12 +129,12 @@ export default {
         multiInputAriaLabel: '複数値入力',
         navigateSelectionsWithArrows: '上下の矢印で選択内容をナビゲートします。',
         noResults: '結果はありません。',
-        showAll: 'Show All ({count})',
+        showAll: 'すべて表示 ({count})',
         tokensCountText: '含まれるトークンの合計: {length}'
     },
     coreNavigation: {
         mainNavigation: 'メインナビゲーション',
-        navigationPath: 'ナビゲーションパス'
+        navigationPath: 'Navigation Path'
     },
     coreNestedList: {
         linkItemAriaLabel: 'ツリー項目: {itemDetails}、{selectedDescription}'
@@ -197,7 +197,7 @@ export default {
         ariaRoleDescription: '評価区分'
     },
     coreSelect: {
-        closeButton: 'Close'
+        closeButton: '閉じる'
     },
     coreShellbar: {
         assistiveTools: '補助ツール',
@@ -238,7 +238,7 @@ export default {
         semanticDeclineLabel: '拒否'
     },
     coreTabs: {
-        expandIconLabel: 'See More',
+        expandIconLabel: '表示を増やす',
         tabListExpandButtonText: '表示を増やす'
     },
     coreText: {
@@ -272,10 +272,10 @@ export default {
     coreTimePicker: {
         timePickerButtonLabel: '日付選択を開く',
         timePickerInputLabel: '時刻選択の入力',
-        valueStateErrorMessage: 'Value state Error',
-        valueStateInformationMessage: 'Value state Information',
-        valueStateSuccessMessage: 'Value state Success',
-        valueStateWarningMessage: 'Value state Warning'
+        valueStateErrorMessage: '値の状況: エラー',
+        valueStateInformationMessage: '値の状況: 情報',
+        valueStateSuccessMessage: '値の状況: 成功',
+        valueStateWarningMessage: '値の状況: 注意'
     },
     coreToken: {
         ariaRoleDescription: 'トークン',
@@ -286,7 +286,7 @@ export default {
         tokenizerLabel: 'トークン化プログラム'
     },
     coreToolbar: {
-        moreButton: 'More'
+        moreButton: '表示を増やす'
     },
     coreTree: {
         collapse: 'ノードを圧縮',
@@ -303,8 +303,8 @@ export default {
         menuOkText: 'OK'
     },
     coreUserMenu: {
-        closeButton: 'Close',
-        previousButton: 'Previous'
+        closeButton: '閉じる',
+        previousButton: '前へ'
     },
     coreWizard: {
         ariaLabel: 'ウィザード'
@@ -388,11 +388,11 @@ export default {
         countListResultsSingular: '結果の一覧項目は1件です。'
     },
     platformFeedInput: {
-        sendButton: 'Send',
+        sendButton: '送信',
         userTitle: 'ユーザー'
     },
     platformIconTabBar: {
-        moreButton: '詳細'
+        moreButton: '表示を増やす'
     },
     platformLink: {
         roleDescriptionWithMedia: 'メディア: {media}'
@@ -402,7 +402,7 @@ export default {
     },
     platformMessagePopover: {
         allErrors: 'すべて',
-        backButton: 'Go back',
+        backButton: '戻る',
         defaultErrors: {
             email: '電子メールが無効です。',
             max: 'このフィールドは最大値を超過しています。',
@@ -426,20 +426,20 @@ export default {
         detailsActionAriaLabel: '詳細'
     },
     platformSearchField: {
-        allButtonLabel: 'All',
-        cancelLabel: 'Cancel',
-        clearButtonTitle: 'クリア',
-        counterLabel: 'Total results: {count}',
-        deleteButtonAriaLabel: 'Remove',
-        deleteButtonTitle: 'Remove Suggestion',
-        groupHeader: 'Group Header',
+        allButtonLabel: 'すべて',
+        cancelLabel: 'キャンセル',
+        clearButtonTitle: '検索をクリア',
+        counterLabel: '結果の合計数: {count}件',
+        deleteButtonAriaLabel: '削除',
+        deleteButtonTitle: '候補を削除',
+        groupHeader: 'グループヘッダー',
         searchInputLabel: '検索',
         searchSuggestionMessage: '{count}件の候補が見つかりました。',
         searchSuggestionNavigateMessage: '上下の矢印でナビゲートします。',
-        selectScopeLabel: 'Select scope',
-        selectStateMessageLabel: 'Select',
-        submitButtonTitle: '検索',
-        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: '範囲を選択',
+        selectStateMessageLabel: '選択',
+        submitButtonTitle: '検索 (Enter)',
+        suggestionsWrapperAriaLabel: '候補',
         synchronizeButtonTitle: '同期'
     },
     platformSelect: {
@@ -491,7 +491,7 @@ export default {
         submitButtonLabel: '実行'
     },
     platformSplitMenuButton: {
-        groupLabel: 'Split button group'
+        groupLabel: '分割ボタングループ'
     },
     platformStandardListItem: {
         deleteActionAriaLabel: '削除',
@@ -704,7 +704,7 @@ export default {
         successButtonLabel: 'OK'
     },
     platformWizardGenerator: {
-        stepsLabel: 'Wizard Steps',
+        stepsLabel: 'ウィザードの手順',
         summarySectionEditStep: '編集'
     },
     segmentedButton: {
