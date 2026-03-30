@@ -12,8 +12,8 @@ import {
 import { Properties } from '../../models/schema.model';
 import { AsFormControlPipe, AsFormGroupPipe } from '../../pipes/type-casting.pipe';
 
-import '@sap-ui/common-css/dist/sap-padding.css';
-import '@sap-ui/common-css/dist/sap-typography.css';
+import '@fundamental-styles/common-css/dist/sap-padding.css';
+import '@fundamental-styles/common-css/dist/sap-typography.css';
 
 @Component({
     selector: 'schema-group',
