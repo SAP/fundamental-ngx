@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 
 import { InlineHelpModule } from './inline-help.module';
 
@@ -38,14 +38,15 @@ describe('InlineHelpDirective', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should show the inline help on hover', () => {
+    it('should show the inline help on hover', fakeAsync(() => {
         const selector = '.fd-popover__body.fd-inline-help__content';
         expect(document.body.querySelector(selector)).toBeFalsy();
         component.ref.nativeElement.dispatchEvent(new Event('mouseenter'));
         expect(document.body.querySelector(selector)).toBeTruthy();
         component.ref.nativeElement.dispatchEvent(new Event('mouseleave'));
+        tick(50);
         expect(document.body.querySelector(selector)).toBeFalsy();
-    });
+    }));
 
     it('should hide the inline help if host element is destroyed', () => {
         const selector = '.fd-popover__body.fd-inline-help__content';
@@ -70,10 +71,11 @@ describe('InlineHelpDirective', () => {
         expect(component.ref.nativeElement.classList.contains('fd-inline-help__trigger')).toBe(true);
     });
 
-    it('should apply inline help content class to popover body', () => {
+    it('should apply inline help content class to popover body', fakeAsync(() => {
         component.ref.nativeElement.dispatchEvent(new Event('mouseenter'));
         const popoverBody = document.body.querySelector('.fd-popover__body');
         expect(popoverBody?.classList.contains('fd-inline-help__content')).toBe(true);
         component.ref.nativeElement.dispatchEvent(new Event('mouseleave'));
-    });
+        tick(50);
+    }));
 });
