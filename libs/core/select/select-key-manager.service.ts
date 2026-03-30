@@ -28,7 +28,7 @@ export class SelectKeyManagerService {
 
         this._keyManager.tabOut.pipe(takeUntilDestroyed(this._component._destroy)).subscribe(() => {
             // tab focus fix for mobile
-            if (!this._component.mobile) {
+            if (!this._isMobile()) {
                 this._component.focus();
                 this._component.close(false, true);
             }
@@ -121,10 +121,20 @@ export class SelectKeyManagerService {
             event.preventDefault();
             manager.activeItem._selectViaInteraction();
             this._component.blur();
-        } else if (!isTyping && KeyUtil.isKeyCode(event, [TAB]) && this._component.mobile) {
-            event.preventDefault();
+        } else if (!isTyping && KeyUtil.isKeyCode(event, [TAB])) {
+            if (this._isMobile()) {
+                event.preventDefault();
+            }
         } else {
             manager.onKeydown(event);
         }
+    }
+
+    /**
+     * Checks if the component is in mobile mode.
+     * @hidden
+     */
+    private _isMobile(): boolean {
+        return typeof this._component.mobile === 'function' ? this._component.mobile() : this._component.mobile;
     }
 }
