@@ -17,10 +17,10 @@ export default {
         menuButtonAriaLabel: 'Tlačidlo ponuky'
     },
     coreActionSheet: {
-        toolbarLabel: 'Action Bar'
+        toolbarLabel: 'Panel akcií'
     },
     coreAvatarGroup: {
-        backButton: 'Back'
+        backButton: 'Späť'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Navigačná cesta',
@@ -59,7 +59,7 @@ export default {
         rightNavigationBtnLabel: 'Prejsť na ďalšiu položku'
     },
     coreCombobox: {
-        clearButtonTitle: 'Clear input'
+        clearButtonTitle: 'Výmaz zadania'
     },
     coreDatePicker: {
         dateInputLabel: 'Zadanie dátumu',
@@ -83,7 +83,7 @@ export default {
         collapseLabel: 'Zbaliť hlavičku',
         expandLabel: 'Rozbaliť hlavičku',
         pinLabel: 'Pripnúť hlavičku',
-        toggleHeader: 'Toggle header',
+        toggleHeader: 'Prepnúť hlavičku',
         unpinLabel: 'Zrušiť pripnutie hlavičky'
     },
     coreFeedListItem: {
@@ -113,8 +113,8 @@ export default {
         announcementSuccess: 'Riadok správy o úspešnosti',
         announcementWarning: 'Riadok upozorňujúcej správy',
         closable: 'Možnosť zavrieť',
-        defaultDismissButtonText: 'Close',
-        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Zavrieť',
+        defaultHiddenText: 'Riadok správy',
         dismissLabel: 'Zavrieť'
     },
     coreMultiComboBox: {
@@ -130,12 +130,12 @@ export default {
         multiInputAriaLabel: 'Zadanie viacerých hodnôt',
         navigateSelectionsWithArrows: 'Prechádzajte výbermi pomocou šípok nahor a nadol.',
         noResults: 'Žiadne výsledky.',
-        showAll: 'Show All ({count})',
+        showAll: 'Zobraziť všetko ({count})',
         tokensCountText: 'Obsahuje celkový počet tokenov: {length}.'
     },
     coreNavigation: {
         mainNavigation: 'Hlavná navigácia',
-        navigationPath: 'Cesta navigácie'
+        navigationPath: 'Navigation Path'
     },
     coreNestedList: {
         linkItemAriaLabel: 'Položka stromu {itemDetails}, {selectedDescription}'
@@ -198,7 +198,7 @@ export default {
         ariaRoleDescription: 'Indikátor hodnotenia'
     },
     coreSelect: {
-        closeButton: 'Close'
+        closeButton: 'Zavrieť'
     },
     coreShellbar: {
         assistiveTools: 'Pomocné nástroje',
@@ -239,7 +239,7 @@ export default {
         semanticDeclineLabel: 'Zamietnuť'
     },
     coreTabs: {
-        expandIconLabel: 'See More',
+        expandIconLabel: 'Zobraziť viac',
         tabListExpandButtonText: 'Ďalšie'
     },
     coreText: {
@@ -273,10 +273,10 @@ export default {
     coreTimePicker: {
         timePickerButtonLabel: 'Otvoriť výber',
         timePickerInputLabel: 'Zadanie pre výber času',
-        valueStateErrorMessage: 'Value state Error',
-        valueStateInformationMessage: 'Value state Information',
-        valueStateSuccessMessage: 'Value state Success',
-        valueStateWarningMessage: 'Value state Warning'
+        valueStateErrorMessage: 'Status hodnoty Chyba',
+        valueStateInformationMessage: 'Status hodnoty Informácia',
+        valueStateSuccessMessage: 'Status hodnoty Úspešné',
+        valueStateWarningMessage: 'Status hodnoty Upozornenie'
     },
     coreToken: {
         ariaRoleDescription: 'token',
@@ -287,7 +287,7 @@ export default {
         tokenizerLabel: 'Tokenizér'
     },
     coreToolbar: {
-        moreButton: 'More'
+        moreButton: 'Ďalšie'
     },
     coreTree: {
         collapse: 'Zbaliť uzol',
@@ -304,8 +304,8 @@ export default {
         menuOkText: 'OK'
     },
     coreUserMenu: {
-        closeButton: 'Close',
-        previousButton: 'Previous'
+        closeButton: 'Zavrieť',
+        previousButton: 'Predchádzajúce'
     },
     coreWizard: {
         ariaLabel: 'Sprievodca'
@@ -389,11 +389,11 @@ export default {
         countListResultsSingular: '1 položka zoznamu výsledkov'
     },
     platformFeedInput: {
-        sendButton: 'Send',
+        sendButton: 'Odoslať',
         userTitle: 'Používateľ'
     },
     platformIconTabBar: {
-        moreButton: 'Viac'
+        moreButton: 'Ďalšie'
     },
     platformLink: {
         roleDescriptionWithMedia: 'Médiá: {media}'
@@ -403,7 +403,7 @@ export default {
     },
     platformMessagePopover: {
         allErrors: 'Všetko',
-        backButton: 'Go back',
+        backButton: 'Vrátiť sa späť',
         defaultErrors: {
             email: 'E-mail je neplatný',
             max: 'Pole prekračuje maximálnu hodnotu',
@@ -427,20 +427,20 @@ export default {
         detailsActionAriaLabel: 'Detail'
     },
     platformSearchField: {
-        allButtonLabel: 'All',
-        cancelLabel: 'Cancel',
-        clearButtonTitle: 'Vymazať',
-        counterLabel: 'Total results: {count}',
-        deleteButtonAriaLabel: 'Remove',
-        deleteButtonTitle: 'Remove Suggestion',
-        groupHeader: 'Group Header',
+        allButtonLabel: 'Všetky',
+        cancelLabel: 'Stornovať',
+        clearButtonTitle: 'Vymazať hľadanie',
+        counterLabel: 'Celkové výsledky: {count}',
+        deleteButtonAriaLabel: 'Odstrániť',
+        deleteButtonTitle: 'Odstrániť návrh',
+        groupHeader: 'Hlavička skupiny',
         searchInputLabel: 'Vyhľadávanie',
         searchSuggestionMessage: '{count} nájdených návrhov.',
         searchSuggestionNavigateMessage: 'na navigáciu použite šípky nahor a nadol',
-        selectScopeLabel: 'Select scope',
-        selectStateMessageLabel: 'Select',
-        submitButtonTitle: 'Vyhľadávanie',
-        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Vybrať rozsah',
+        selectStateMessageLabel: 'Vybrať',
+        submitButtonTitle: 'Hľadať (Enter)',
+        suggestionsWrapperAriaLabel: 'Návrhy',
         synchronizeButtonTitle: 'Synchronizovať'
     },
     platformSelect: {
@@ -492,7 +492,7 @@ export default {
         submitButtonLabel: 'Spustiť'
     },
     platformSplitMenuButton: {
-        groupLabel: 'Split button group'
+        groupLabel: 'Skupina tlačidiel rozdelenia'
     },
     platformStandardListItem: {
         deleteActionAriaLabel: 'Odstrániť',
@@ -705,7 +705,7 @@ export default {
         successButtonLabel: 'OK'
     },
     platformWizardGenerator: {
-        stepsLabel: 'Wizard Steps',
+        stepsLabel: 'Kroky sprievodcu',
         summarySectionEditStep: 'Upraviť'
     },
     segmentedButton: {

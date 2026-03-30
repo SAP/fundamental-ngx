@@ -26,7 +26,7 @@ For each changed file, check the applicable sections below. Report findings grou
 
 ### 1. Angular 21+ Patterns
 
-- [ ] **New code** uses `input()` / `output()` / `model()`. Existing `@Input()` / `@Output()` decorators being modified should prefer migration to signal functions, but it's not blocking.
+- [ ] **New code** uses `input()` / `output()` / `model()` / `linkedSignal()`. Existing `@Input()` / `@Output()` decorators being modified should prefer migration to signal functions, but it's not blocking.
 - [ ] `host: {}` in decorator — no `@HostBinding()` / `@HostListener()`
 - [ ] `@if` / `@for` / `@switch` — no `*ngIf` / `*ngFor` / `*ngSwitch`
 - [ ] No `standalone: true` in `@Component` (default since Angular 19)
@@ -42,6 +42,10 @@ For each changed file, check the applicable sections below. Report findings grou
 - [ ] No redundant `markForCheck()` after signal updates
 - [ ] `BehaviorSubject` → `signal()` where there are no async consumers
 - [ ] `effect()` for signal reactions; RxJS only for async operations (HTTP, WebSocket, timers)
+- [ ] No `effect()` used for state derivation — use `computed()` or `linkedSignal` instead
+- [ ] `linkedSignal` used where mutable derived state is needed (not `effect()` + `signal.set()`)
+- [ ] No object/array mutation in place then `signal.set()` with same reference — always new references
+- [ ] No conditional signal reads creating invisible dependency gaps in `effect()` / `computed()`
 
 ### 3. Dependency Injection
 

@@ -17,10 +17,10 @@ export default {
         menuButtonAriaLabel: 'Menyknapp'
     },
     coreActionSheet: {
-        toolbarLabel: 'Action Bar'
+        toolbarLabel: 'Handlingslinje'
     },
     coreAvatarGroup: {
-        backButton: 'Back'
+        backButton: 'Tilbake'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Navigeringsbane',
@@ -59,7 +59,7 @@ export default {
         rightNavigationBtnLabel: 'Gå til neste element'
     },
     coreCombobox: {
-        clearButtonTitle: 'Clear input'
+        clearButtonTitle: 'Fjern inndata'
     },
     coreDatePicker: {
         dateInputLabel: 'Datoregistrering',
@@ -79,11 +79,11 @@ export default {
         displayTypeTimeLabel: 'Klokkeslett'
     },
     coreDynamicPage: {
-        breadcrumbsLabel: 'Breadcrumbs',
+        breadcrumbsLabel: 'Navigeringssti',
         collapseLabel: 'Komprimer overskrift',
         expandLabel: 'Utvid overskrift',
         pinLabel: 'Fest overskrift',
-        toggleHeader: 'Toggle header',
+        toggleHeader: 'Vis/skjul overskrift',
         unpinLabel: 'Løsne overskrift'
     },
     coreFeedListItem: {
@@ -113,8 +113,8 @@ export default {
         announcementSuccess: 'Bekreftelsesmeldingslinje',
         announcementWarning: 'Advarselsmeldingslinje',
         closable: 'Kan lukkes',
-        defaultDismissButtonText: 'Close',
-        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Lukk',
+        defaultHiddenText: 'Meldingslinje',
         dismissLabel: 'Lukk'
     },
     coreMultiComboBox: {
@@ -130,12 +130,12 @@ export default {
         multiInputAriaLabel: 'Inndata for flere verdier',
         navigateSelectionsWithArrows: 'Naviger utvalg med oppover og nedover pilene.',
         noResults: 'Ingen resultater.',
-        showAll: 'Show All ({count})',
+        showAll: 'Vis alle ({count})',
         tokensCountText: 'Totalt antall token: {length}'
     },
     coreNavigation: {
         mainNavigation: 'Hovednavigering',
-        navigationPath: 'Navigeringsbane'
+        navigationPath: 'Navigation Path'
     },
     coreNestedList: {
         linkItemAriaLabel: 'Treelement {itemDetails}, {selectedDescription}'
@@ -198,7 +198,7 @@ export default {
         ariaRoleDescription: 'Vurderingsindikator'
     },
     coreSelect: {
-        closeButton: 'Close'
+        closeButton: 'Lukk'
     },
     coreShellbar: {
         assistiveTools: 'Hjelpeverktøy',
@@ -239,7 +239,7 @@ export default {
         semanticDeclineLabel: 'Avvis'
     },
     coreTabs: {
-        expandIconLabel: 'See More',
+        expandIconLabel: 'Vis mer',
         tabListExpandButtonText: 'Mer'
     },
     coreText: {
@@ -273,10 +273,10 @@ export default {
     coreTimePicker: {
         timePickerButtonLabel: 'Åpne velger',
         timePickerInputLabel: 'Inndata for tidsvelger',
-        valueStateErrorMessage: 'Value state Error',
-        valueStateInformationMessage: 'Value state Information',
-        valueStateSuccessMessage: 'Value state Success',
-        valueStateWarningMessage: 'Value state Warning'
+        valueStateErrorMessage: 'Verdistatus "feil"',
+        valueStateInformationMessage: 'Verdistatus "informasjon"',
+        valueStateSuccessMessage: 'Verdistatus "utført"',
+        valueStateWarningMessage: 'Verdistatus "advarsel"'
     },
     coreToken: {
         ariaRoleDescription: 'token',
@@ -287,7 +287,7 @@ export default {
         tokenizerLabel: 'Tokenizer'
     },
     coreToolbar: {
-        moreButton: 'More'
+        moreButton: 'Mer'
     },
     coreTree: {
         collapse: 'Komprimer knutepunkt',
@@ -304,8 +304,8 @@ export default {
         menuOkText: 'OK'
     },
     coreUserMenu: {
-        closeButton: 'Close',
-        previousButton: 'Previous'
+        closeButton: 'Lukk',
+        previousButton: 'Forrige'
     },
     coreWizard: {
         ariaLabel: 'Veiviser'
@@ -404,7 +404,7 @@ export default {
     },
     platformMessagePopover: {
         allErrors: 'Alle',
-        backButton: 'Go back',
+        backButton: 'Gå tilbake',
         defaultErrors: {
             email: 'E-post er ugyldig',
             max: 'Feltet overskrider maksimumsverdien',
@@ -428,20 +428,20 @@ export default {
         detailsActionAriaLabel: 'detalj'
     },
     platformSearchField: {
-        allButtonLabel: 'All',
-        cancelLabel: 'Cancel',
-        clearButtonTitle: 'Tilbakestill',
-        counterLabel: 'Total results: {count}',
-        deleteButtonAriaLabel: 'Remove',
-        deleteButtonTitle: 'Remove Suggestion',
-        groupHeader: 'Group Header',
+        allButtonLabel: 'Alle',
+        cancelLabel: 'Avbryt',
+        clearButtonTitle: 'Tilbakestill søk',
+        counterLabel: 'Totalt antall resultater: {count}',
+        deleteButtonAriaLabel: 'Fjern',
+        deleteButtonTitle: 'Fjern forslag',
+        groupHeader: 'Gruppeoverskrift',
         searchInputLabel: 'Søk',
         searchSuggestionMessage: '{count} forslag funnet.',
         searchSuggestionNavigateMessage: 'bruk oppover og nedover piler til å navigere',
-        selectScopeLabel: 'Select scope',
-        selectStateMessageLabel: 'Select',
-        submitButtonTitle: 'Søk',
-        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Velg omfang',
+        selectStateMessageLabel: 'Velg',
+        submitButtonTitle: 'Søk (Enter)',
+        suggestionsWrapperAriaLabel: 'Forslag',
         synchronizeButtonTitle: 'Synkroniser'
     },
     platformSelect: {
@@ -493,7 +493,7 @@ export default {
         submitButtonLabel: 'Start'
     },
     platformSplitMenuButton: {
-        groupLabel: 'Split button group'
+        groupLabel: 'Del opp knappegruppe'
     },
     platformStandardListItem: {
         deleteActionAriaLabel: 'slett',
@@ -706,7 +706,7 @@ export default {
         successButtonLabel: 'OK'
     },
     platformWizardGenerator: {
-        stepsLabel: 'Wizard Steps',
+        stepsLabel: 'Trinn i veiviser',
         summarySectionEditStep: 'Rediger'
     },
     segmentedButton: {
