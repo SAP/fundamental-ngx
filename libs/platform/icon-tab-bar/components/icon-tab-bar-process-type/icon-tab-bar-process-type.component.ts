@@ -104,7 +104,7 @@ export class IconTabBarProcessTypeComponent extends ClosableIconTabBar {
         this._selectItem(selectedItem);
 
         queueMicrotask(() => {
-            if (this.overflowDirective) {
+            if (this.overflowDirective && !this._destroyed) {
                 const extra = this.overflowDirective.getAmountOfExtraItems();
                 isPreviousStepsStrategy
                     ? this.recalculateItemsByPrevArr(extra, amountOfPreviousSteps)

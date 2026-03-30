@@ -119,13 +119,13 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
     protected readonly _cd = inject(ChangeDetectorRef);
 
     /** @hidden */
+    protected _destroyed = false;
+
+    /** @hidden */
     private _tabs: IconTabBarItem[] = [];
 
     /** @hidden */
     private _densityMode: TabDensityMode;
-
-    /** @hidden */
-    private _destroyed = false;
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
