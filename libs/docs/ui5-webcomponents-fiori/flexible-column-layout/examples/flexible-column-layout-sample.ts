@@ -11,9 +11,9 @@ import { ListItemStandard } from '@fundamental-ngx/ui5-webcomponents/list-item-s
 import { Text } from '@fundamental-ngx/ui5-webcomponents/text';
 import { Title } from '@fundamental-ngx/ui5-webcomponents/title';
 
-import '@sap-ui/common-css/dist/sap-flex.css';
-import '@sap-ui/common-css/dist/sap-margin.css';
-import '@sap-ui/common-css/dist/sap-padding.css';
+import '@fundamental-styles/common-css/dist/sap-flex.css';
+import '@fundamental-styles/common-css/dist/sap-margin.css';
+import '@fundamental-styles/common-css/dist/sap-padding.css';
 
 interface Product {
     id: number;

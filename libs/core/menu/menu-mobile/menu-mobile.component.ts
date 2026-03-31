@@ -66,7 +66,6 @@ import { MenuService } from '../services/menu.service';
         TitleComponent
     ]
 })
-// @ts-expect-error - MenuInterface has InputSignal properties which don't perfectly match MobileMode base
 export class MenuMobileComponent extends MobileModeBase<MenuInterface> implements OnInit {
     /** @hidden */
     @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;

@@ -1,14 +1,12 @@
 import {
-    AfterViewInit,
+    afterNextRender,
     ChangeDetectionStrategy,
     Component,
     ContentChild,
     HostBinding,
     Input,
-    NgZone,
     ViewEncapsulation
 } from '@angular/core';
-import { first } from 'rxjs';
 import { FORM_ITEM_CONTROL, FormItemControl } from '../form-item-control/form-item-control';
 import { FormLabelComponent } from '../form-label/form-label.component';
 
@@ -31,7 +29,7 @@ import { FormLabelComponent } from '../form-label/form-label.component';
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true
 })
-export class FormItemComponent implements AfterViewInit {
+export class FormItemComponent {
     /** Whether the form item is inline. */
     @Input()
     @HostBinding('class.fd-form-item--inline')
@@ -55,16 +53,11 @@ export class FormItemComponent implements AfterViewInit {
     formItemControl?: FormItemControl;
 
     /** @hidden */
-    constructor(private ngZone: NgZone) {}
-
-    /** @hidden */
-    ngAfterViewInit(): void {
-        if (this.formLabel && this.formItemControl && !this.formItemControl.ariaLabelledBy) {
-            this.ngZone.onStable.pipe(first()).subscribe(() => {
-                if (this.formLabel && this.formItemControl) {
-                    this.formItemControl.ariaLabelledBy = this.formLabel.formLabelId;
-                }
-            });
-        }
+    constructor() {
+        afterNextRender(() => {
+            if (this.formLabel && this.formItemControl && !this.formItemControl.ariaLabelledBy) {
+                this.formItemControl.ariaLabelledBy = this.formLabel.formLabelId;
+            }
+        });
     }
 }

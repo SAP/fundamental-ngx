@@ -13,12 +13,12 @@ import { Title } from '@fundamental-ngx/ui5-webcomponents/title';
 import '@ui5/webcomponents-icons/dist/AllIcons.js';
 
 // Import CSS utilities
-import '@sap-ui/common-css/dist/sap-display.css';
-import '@sap-ui/common-css/dist/sap-flex.css';
-import '@sap-ui/common-css/dist/sap-margin.css';
-import '@sap-ui/common-css/dist/sap-padding.css';
-import '@sap-ui/common-css/dist/sap-text.css';
-import '@sap-ui/common-css/dist/sap-title.css';
+import '@fundamental-styles/common-css/dist/sap-display.css';
+import '@fundamental-styles/common-css/dist/sap-flex.css';
+import '@fundamental-styles/common-css/dist/sap-margin.css';
+import '@fundamental-styles/common-css/dist/sap-padding.css';
+import '@fundamental-styles/common-css/dist/sap-text.css';
+import '@fundamental-styles/common-css/dist/sap-title.css';
 import 'fundamental-styles/dist/section.css';
 
 // Product data interface
