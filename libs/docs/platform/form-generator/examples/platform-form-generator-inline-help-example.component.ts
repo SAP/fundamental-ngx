@@ -1,20 +1,17 @@
-import { AfterViewInit, Component, inject, NgZone, TemplateRef, ViewChild } from '@angular/core';
+import { afterNextRender, Component, TemplateRef, ViewChild } from '@angular/core';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import { DynamicFormItem, PlatformFormGeneratorModule } from '@fundamental-ngx/platform/form';
 import { HintOptions } from '@fundamental-ngx/platform/shared';
-import { first } from 'rxjs';
 
 @Component({
     selector: 'fdp-platform-form-generator-inline-help-example',
     templateUrl: './platform-form-generator-inline-help-example.component.html',
     imports: [PlatformFormGeneratorModule, ButtonComponent, IconComponent]
 })
-export class PlatformFormGeneratorInlineHelpExampleComponent implements AfterViewInit {
+export class PlatformFormGeneratorInlineHelpExampleComponent {
     @ViewChild('hintTemplate', { static: true })
     hintTemplate!: TemplateRef<void>;
-
-    ngZone = inject(NgZone);
 
     formItemsAutoHintPlacement: DynamicFormItem[] = [
         {
@@ -98,8 +95,8 @@ export class PlatformFormGeneratorInlineHelpExampleComponent implements AfterVie
         content: 'Some hint for main title'
     };
 
-    ngAfterViewInit(): void {
-        this.ngZone.onStable.pipe(first()).subscribe(() => {
+    constructor() {
+        afterNextRender(() => {
             this.formItemsWithTemplateHint = [
                 {
                     name: 'firstAndLastName',

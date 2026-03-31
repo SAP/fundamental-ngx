@@ -6,6 +6,10 @@
     }
 }
 
+.fd-combobox-custom-list.fd-list--dropdown .fd-list__item.fd-list__group-header {
+    border-bottom: var(--sapList_BorderWidth) solid var(--sapList_GroupHeaderBorderColor);
+}
+
 .fd-list__item.fd-combobox-list-item {
     cursor: pointer;
 }

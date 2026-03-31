@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Properties, Schema } from '../../models/schema.model';
 import { SchemaGroupComponent } from '../schema-group/schema-group.component';
 
-import '@sap-ui/common-css/dist/sap-margin.css';
+import '@fundamental-styles/common-css/dist/sap-margin.css';
 
 @Component({
     selector: 'schema',

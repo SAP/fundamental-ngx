@@ -69,7 +69,7 @@ For each changed file, check the applicable sections below. Report findings grou
 - [ ] **If public API changed (new input, changed behavior, removed feature), docs examples are updated**
 - [ ] Examples consolidated into existing examples — no unnecessary standalone example files
 - [ ] Every demonstrated feature is user-observable (can the user see it working?)
-- [ ] `@sap-ui/common-css` utility classes (`sap-flex`, `sap-margin-*`, `sap-padding-*`) — no inline styles
+- [ ] `@fundamental-styles/common-css` utility classes (`sap-flex`, `sap-margin-*`, `sap-padding-*`) — no inline styles
 - [ ] Individual component imports in examples — no deprecated `*Module` classes
 
 ### 6. Breaking Changes

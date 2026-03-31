@@ -11,7 +11,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
-import { CssClassBuilder, Nullable, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { Subscription } from 'rxjs';
 import { FormItemControl, registerFormItemControl } from '../form-item-control/form-item-control';
@@ -51,22 +51,22 @@ export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges,
 
     /** aria-label for form-control. */
     @Input()
-    ariaLabel: Nullable<string>;
+    ariaLabel: string | undefined | null;
 
     /** aria-label for form-control. */
     @Input()
-    ariaLabelledBy: Nullable<string>;
+    ariaLabelledBy: string | undefined | null;
 
     /** @hidden */
     @HostBinding('attr.aria-label')
-    protected get ariaLabelBinding(): string {
-        return this.ariaLabelAttr || this.ariaLabel || '';
+    protected get ariaLabelBinding(): string | null {
+        return this.ariaLabelAttr || this.ariaLabel || null;
     }
 
     /** @hidden */
     @HostBinding('attr.aria-labelledby')
-    protected get ariaLabelledByBinding(): string {
-        return this.ariaLabelledByAttr || this.ariaLabelledBy || '';
+    protected get ariaLabelledByBinding(): string | null {
+        return this.ariaLabelledByAttr || this.ariaLabelledBy || null;
     }
 
     /** @hidden */
