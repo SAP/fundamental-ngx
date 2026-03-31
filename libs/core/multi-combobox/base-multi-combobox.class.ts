@@ -663,6 +663,10 @@ export abstract class BaseMultiCombobox<T = any> {
      * Prepares the data stream and subscribes to it.
      */
     protected _openDataStream(matchingStrategy: MatchingStrategy): void {
+        if (!this.dataSourceDirective.dataSourceProvider) {
+            throw new Error(`[dataSource] source did not match an array, Observable, or DataSource`);
+        }
+
         this._matchingStrategy = matchingStrategy;
         this._configureDataSourceProvider(matchingStrategy);
 
