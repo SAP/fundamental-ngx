@@ -1,23 +1,39 @@
-<fd-toolbar fdType="solid">
-    <label fd-toolbar-label>Solid</label>
+<fd-toolbar fdType="solid" ariaLabel="Solid Toolbar">
+    <span fd-toolbar-label>Solid</span>
 </fd-toolbar>
 <br />
 
 <fd-toolbar fdType="auto">
-    <label fd-toolbar-label>Auto</label>
+    <span fd-toolbar-label>Auto</span>
 </fd-toolbar>
 <br />
 
-<fd-toolbar fdType="transparent" [clearBorder]="true">
-    <label fd-toolbar-label>Transparent</label>
+<fd-toolbar fdType="transparent" [clearBorder]="true" ariaLabelledBy="toolbar-example-label">
+    <span fd-toolbar-label>Transparent</span>
 </fd-toolbar>
 <br />
 
-<fd-toolbar fdType="info">
-    <label fd-toolbar-label>Info</label>
+<fd-toolbar fdType="info" ariaDescribedBy="toolbar-example-label">
+    <span fd-toolbar-label>Info</span>
 </fd-toolbar>
 <br />
 
 <fd-toolbar fdType="info" [active]="true">
-    <label fd-toolbar-label>Info active</label>
+    <span fd-toolbar-label>Info active</span>
 </fd-toolbar>
+
+<br /><br />
+<label
+    id="toolbar-example-label"
+    style="
+        clip: rect(0 0 0 0);
+        clip-path: inset(50%);
+        height: 1px;
+        overflow: hidden;
+        position: absolute;
+        white-space: nowrap;
+        width: 1px;
+    "
+>
+    Toolbar Example
+</label>
