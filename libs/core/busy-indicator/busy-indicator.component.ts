@@ -1,15 +1,14 @@
 import { TAB } from '@angular/cdk/keycodes';
 
-import { BooleanInput } from '@angular/cdk/coercion';
 import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
-    OnChanges,
     OnDestroy,
     ViewEncapsulation,
     booleanAttribute,
     computed,
+    effect,
     inject,
     input,
     viewChild
@@ -48,7 +47,7 @@ export type BusyIndicatorSize = 's' | 'm' | 'l';
         '(keydown)': 'hostFocusChangeHandler($event)'
     }
 })
-export class BusyIndicatorComponent implements OnChanges, OnDestroy {
+export class BusyIndicatorComponent implements OnDestroy {
     /** Whether to display the loading indicator animation. */
     readonly loading = input(false);
 
@@ -74,7 +73,7 @@ export class BusyIndicatorComponent implements OnChanges, OnDestroy {
     readonly ariaLive = input<'assertive' | 'polite' | 'off' | null>(null);
 
     /** Whether to stop mouse wheel events when the busy indicator is displayed via loading="true". */
-    preventWheelEvents = input<boolean, BooleanInput>(false, { transform: booleanAttribute });
+    preventWheelEvents = input(false, { transform: booleanAttribute });
 
     /** @hidden */
     protected readonly fakeFocusElement = viewChild<ElementRef>('fakeFocusElement');
@@ -98,13 +97,15 @@ export class BusyIndicatorComponent implements OnChanges, OnDestroy {
     /** @hidden */
     private readonly _elementRef = inject(ElementRef);
 
-    /** @hidden */
-    ngOnChanges(): void {
-        if (this.preventWheelEvents()) {
-            this._elementRef.nativeElement.addEventListener('wheel', this._wheelListener, {
-                passive: false
-            });
-        }
+    constructor() {
+        effect(() => {
+            const preventWheelEvents = this.preventWheelEvents();
+            if (preventWheelEvents) {
+                this._elementRef.nativeElement.addEventListener('wheel', this._wheelListener, {
+                    passive: false
+                });
+            }
+        });
     }
 
     /** @hidden */
