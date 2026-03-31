@@ -9,6 +9,7 @@ import {
 } from '@fundamental-ngx/docs/shared';
 import { AdvancedUsageComponent } from './examples/advanced-usage/advanced-usage.component';
 import { DefaultExampleComponent } from './examples/default-example/default-example.component';
+import { ReadonlyExampleComponent } from './examples/readonly-example/readonly-example.component';
 
 const defaultExampleHtml = 'default-example/default-example.component.html';
 const defaultExampleTs = 'default-example/default-example.component.ts';
@@ -16,6 +17,9 @@ const defaultExampleTs = 'default-example/default-example.component.ts';
 const advancedExampleHtml = 'advanced-usage/advanced-usage.component.html';
 const advancedExampleTs = 'advanced-usage/advanced-usage.component.ts';
 const advancedExampleCustomDirTs = 'advanced-usage/custom-selectable-item.directive.ts';
+
+const readonlyExampleHtml = 'readonly-example/readonly-example.component.html';
+const readonlyExampleTs = 'readonly-example/readonly-example.component.ts';
 
 @Component({
     selector: 'app-tabs',
@@ -27,7 +31,8 @@ const advancedExampleCustomDirTs = 'advanced-usage/custom-selectable-item.direct
         DefaultExampleComponent,
         CodeExampleComponent,
         DescriptionComponent,
-        AdvancedUsageComponent
+        AdvancedUsageComponent,
+        ReadonlyExampleComponent
     ]
 })
 export class SelectableListDocsComponent {
@@ -43,6 +48,21 @@ export class SelectableListDocsComponent {
             fileName: 'default-example',
             selector: 'selectable-list-default-example',
             component: 'DefaultExampleComponent'
+        }
+    ];
+
+    readonlyExample: ExampleFile[] = [
+        {
+            code: getAssetFromModuleAssets(readonlyExampleHtml),
+            language: 'html',
+            fileName: 'readonly-example'
+        },
+        {
+            code: getAssetFromModuleAssets(readonlyExampleTs),
+            language: 'typescript',
+            fileName: 'readonly-example',
+            selector: 'selectable-list-readonly-example',
+            component: 'ReadonlyExampleComponent'
         }
     ];
 

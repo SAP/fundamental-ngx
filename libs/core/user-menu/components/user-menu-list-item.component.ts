@@ -1,18 +1,18 @@
 import { ESCAPE, LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 import { CommonModule } from '@angular/common';
 import {
+    afterNextRender,
     booleanAttribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     computed,
-    DestroyRef,
     ElementRef,
     EventEmitter,
     HostListener,
     inject,
+    Injector,
     input,
-    NgZone,
     Output,
     output,
     signal,
@@ -20,10 +20,9 @@ import {
     viewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { KeyboardSupportItemInterface, KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
-import { asyncScheduler, Observable, observeOn, startWith, Subject, take } from 'rxjs';
+import { Subject } from 'rxjs';
 
 let uniqueId = 0;
 let uniqueTextId = 0;
@@ -117,10 +116,7 @@ export class UserMenuListItemComponent implements KeyboardSupportItemInterface {
     readonly _elementRef = inject(ElementRef);
 
     /** @hidden */
-    private readonly _destroyRef = inject(DestroyRef);
-
-    /** @hidden */
-    private readonly _zone = inject(NgZone);
+    private readonly _injector = inject(Injector);
 
     /** @hidden */
     private _changeDetectionRef = inject(ChangeDetectorRef);
@@ -268,12 +264,15 @@ export class UserMenuListItemComponent implements KeyboardSupportItemInterface {
 
         this.isOpenChange.emit(isOpen);
 
-        this._onZoneStable().subscribe(() => {
-            this.isOpen() ? linkElement.classList.add('is-selected') : linkElement.classList.remove('is-selected');
-            if (keyboardTriggered && firstTabbableElement && this.isOpen()) {
-                firstTabbableElement.focus();
-            }
-        });
+        afterNextRender(
+            () => {
+                this.isOpen() ? linkElement.classList.add('is-selected') : linkElement.classList.remove('is-selected');
+                if (keyboardTriggered && firstTabbableElement && this.isOpen()) {
+                    firstTabbableElement.focus();
+                }
+            },
+            { injector: this._injector }
+        );
 
         if (!this.isOpen() && keyboardTriggered) {
             linkElement.focus();
@@ -299,15 +298,5 @@ export class UserMenuListItemComponent implements KeyboardSupportItemInterface {
             clearTimeout(this._hoverCloseTimer);
             this._hoverCloseTimer = null;
         }
-    }
-
-    /** @hidden */
-    private _onZoneStable(): Observable<void> {
-        return this._zone.onStable.pipe(
-            startWith(this._zone.isStable),
-            observeOn(asyncScheduler),
-            take(1),
-            takeUntilDestroyed(this._destroyRef)
-        );
     }
 }

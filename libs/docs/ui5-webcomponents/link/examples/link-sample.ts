@@ -24,11 +24,11 @@ import 'fundamental-styles/dist/panel.css';
 import 'fundamental-styles/dist/section.css';
 
 // Import SAP UI Common CSS
-import '@sap-ui/common-css/dist/sap-flex.css';
-import '@sap-ui/common-css/dist/sap-heading.css';
-import '@sap-ui/common-css/dist/sap-margin.css';
-import '@sap-ui/common-css/dist/sap-padding.css';
-import '@sap-ui/common-css/dist/sap-text.css';
+import '@fundamental-styles/common-css/dist/sap-flex.css';
+import '@fundamental-styles/common-css/dist/sap-heading.css';
+import '@fundamental-styles/common-css/dist/sap-margin.css';
+import '@fundamental-styles/common-css/dist/sap-padding.css';
+import '@fundamental-styles/common-css/dist/sap-text.css';
 
 @Component({
     selector: 'ui5-link-sample',

@@ -34,7 +34,7 @@ export class StackblitzDependencies {
         'core-js',
         'focus-trap',
         'fundamental-styles',
-        '@sap-ui/common-css',
+        '@fundamental-styles/common-css',
         'dayjs',
         'moment',
         'tslib',

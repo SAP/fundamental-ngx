@@ -3,15 +3,16 @@ import {
     ElementRef,
     Inject,
     Injectable,
-    NgZone,
+    Injector,
     OnDestroy,
     Optional,
     Self,
     SkipSelf,
+    afterNextRender,
     inject
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { BehaviorSubject, Observable, ReplaySubject, combineLatest, firstValueFrom } from 'rxjs';
+import { BehaviorSubject, Observable, ReplaySubject, combineLatest } from 'rxjs';
 import { distinctUntilChanged, startWith, tap } from 'rxjs/operators';
 import { DefaultReadonlyViewModifier } from './default-readonly-view-modifier';
 import { FDK_READONLY_DIRECTIVE } from './fdk-readonly.token';
@@ -37,8 +38,10 @@ export class FdkReadonlyProvider extends ReplaySubject<boolean> implements Reado
     private readonly readonlyObserver = inject(ReadonlyObserver);
 
     /** @hidden */
+    private readonly _injector = inject(Injector);
+
+    /** @hidden */
     constructor(
-        private ngZone: NgZone,
         private elementRef: ElementRef<Element>,
         @Optional() @Self() @Inject(FDK_READONLY_DIRECTIVE) private selfReadonly$: ReadonlyBehavior,
         @Optional() @SkipSelf() @Inject(FDK_READONLY_DIRECTIVE) private parentReadonly$: ReadonlyBehavior
@@ -72,9 +75,12 @@ export class FdkReadonlyProvider extends ReplaySubject<boolean> implements Reado
 
     /** @hidden */
     setReadonlyState(isReadonly: boolean): void {
-        firstValueFrom(this.ngZone.onStable).then(() => {
-            this._viewModifiers$.value.forEach((viewModifier) => viewModifier.setReadonlyState(isReadonly));
-        });
+        afterNextRender(
+            () => {
+                this._viewModifiers$.value.forEach((viewModifier) => viewModifier.setReadonlyState(isReadonly));
+            },
+            { injector: this._injector }
+        );
     }
 
     /** @hidden */
