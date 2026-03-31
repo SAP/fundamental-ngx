@@ -143,7 +143,11 @@ export class AutoCompleteDirective {
                 );
 
                 if (item) {
-                    this._typeahead(this.displayFn(item));
+                    const displayedValue = this.displayFn(item);
+                    // Only autocomplete if the current native value matches the start of the found item
+                    if (displayedValue.toLocaleLowerCase().startsWith(currentNativeValue.toLocaleLowerCase())) {
+                        this._typeahead(displayedValue);
+                    }
                 }
             }
         }
