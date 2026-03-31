@@ -1,6 +1,7 @@
 import { CdkPortalOutlet, CdkPortalOutletAttachedRef, PortalModule } from '@angular/cdk/portal';
 import {
     AfterViewInit,
+    ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     ComponentRef,
@@ -28,6 +29,7 @@ import { MessageBoxRef } from '../utils/message-box-ref.class';
 @Component({
     selector: 'fd-message-box-container',
     template: '<ng-template (attached)="_attached($event)" cdkPortalOutlet></ng-template>',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [PortalModule],
     host: {
         style: 'opacity: 0; position: relative; z-index: 999'

@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, DoCheck, EventEmitter, Input, Output } from '@angular/core';
+import {
+    afterEveryRender,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    EventEmitter,
+    inject,
+    Input,
+    Output
+} from '@angular/core';
 import { CollectionFilter } from '@fundamental-ngx/platform/table-helpers';
 
 import { NgTemplateOutlet } from '@angular/common';
@@ -19,12 +28,12 @@ import { TableViewSettingsFilterComponent } from '../table-view-settings-filter.
 @Component({
     selector: 'fdp-filter-custom',
     templateUrl: './filter-custom.component.html',
-    // Keep it "Default" intentionally to run ngDoCheck when child template emits changes
-    changeDetection: ChangeDetectionStrategy.Default,
+    // afterEveryRender is used to detect mutations on the _value object after each render cycle.
+    changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [contentDensityObserverProviders()],
     imports: [NgTemplateOutlet]
 })
-export class FilterCustomComponent implements DoCheck {
+export class FilterCustomComponent {
     /** ViewSettingsFilter options the filter is created from */
     @Input()
     filter: TableViewSettingsFilterComponent;
@@ -63,12 +72,16 @@ export class FilterCustomComponent implements DoCheck {
     _valueLastEmitted: Record<string, any>;
 
     /** @hidden */
-    constructor(private contentDensityObserver: ContentDensityObserver) {}
+    private readonly _cdr = inject(ChangeDetectorRef);
 
     /** @hidden */
-    ngDoCheck(): void {
+    constructor(private contentDensityObserver: ContentDensityObserver) {
+        afterEveryRender(() => this._checkValueChanges());
+    }
+
+    /** @hidden */
+    _checkValueChanges(): void {
         try {
-            // Didn't find a better way to catch changes in the custom template
             if (JSON.stringify(this._value) === JSON.stringify(this._valueLastEmitted)) {
                 return;
             }
@@ -76,6 +89,7 @@ export class FilterCustomComponent implements DoCheck {
             this._valueLastEmitted = { ...this._value };
 
             this.valueChange.emit(this._value);
+            this._cdr.markForCheck();
         } catch {}
     }
 }

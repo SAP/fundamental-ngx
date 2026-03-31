@@ -1,4 +1,14 @@
-import { AfterViewInit, Component, computed, contentChild, effect, inject, input, signal } from '@angular/core';
+import {
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    Component,
+    computed,
+    contentChild,
+    effect,
+    inject,
+    input,
+    signal
+} from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FD_LANGUAGE_SIGNAL, TranslationResolver } from '@fundamental-ngx/i18n';
 import { NotificationGroupHeaderTitleDirective } from '../directives/notification-group-header-title.directive';
@@ -8,7 +18,7 @@ import { FD_NOTIFICATION_GROUP_HEADER, FD_NOTIFICATION_GROUP_HEADER_TITLE, FD_NO
 
 @Component({
     selector: 'fd-notification-group',
-    standalone: true,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     template: `<div class="fd-notification-group__wrapper">
         <ng-content select="fd-notification-group-header"></ng-content>
         @if (isExpanded()) {

@@ -1,5 +1,14 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, HostListener, Input, TemplateRef, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    HostListener,
+    inject,
+    Input,
+    TemplateRef,
+    ViewEncapsulation
+} from '@angular/core';
 import { warnOnce } from '@fundamental-ngx/cdk/utils';
 
 export type footerSize = 'sm' | 'md' | 'lg' | 'xl';
@@ -13,6 +22,7 @@ export type footerSize = 'sm' | 'md' | 'lg' | 'xl';
     templateUrl: './page-footer.component.html',
     styleUrl: './page-footer.component.scss',
     encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [NgTemplateOutlet]
 })
 export class PlatformFooterComponent {
@@ -32,6 +42,9 @@ export class PlatformFooterComponent {
     public screenHeight: any;
 
     /** @hidden */
+    private readonly _cdr = inject(ChangeDetectorRef);
+
+    /** @hidden */
     constructor() {
         warnOnce('PlatformFooterComponent component is deprecated since version 0.40.0');
     }
@@ -49,5 +62,6 @@ export class PlatformFooterComponent {
         } else {
             this.size = 'xl';
         }
+        this._cdr.markForCheck();
     }
 }

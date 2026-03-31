@@ -1,4 +1,12 @@
-import { Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import {
+    afterNextRender,
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    QueryList,
+    ViewChild,
+    ViewChildren
+} from '@angular/core';
 
 import { NgTemplateOutlet } from '@angular/common';
 import { AsyncOrSyncPipe, OverflowListDirective, OverflowListItemDirective } from '@fundamental-ngx/cdk/utils';
@@ -13,6 +21,7 @@ import { IconTabBarPopoverComponent } from '../popovers/icon-tab-bar-popover/ico
 @Component({
     selector: 'fdp-icon-tab-bar-process-type',
     templateUrl: './icon-tab-bar-process-type.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         {
             provide: IconTabBarBase,
@@ -103,15 +112,18 @@ export class IconTabBarProcessTypeComponent extends ClosableIconTabBar {
         }
         this._selectItem(selectedItem);
 
-        queueMicrotask(() => {
-            if (this.overflowDirective && !this._destroyed) {
-                const extra = this.overflowDirective.getAmountOfExtraItems();
-                isPreviousStepsStrategy
-                    ? this.recalculateItemsByPrevArr(extra, amountOfPreviousSteps)
-                    : this._recalculateItemsByNextArr(extra, amountOfNextSteps);
-                this._cd.detectChanges();
-            }
-        });
+        afterNextRender(
+            () => {
+                if (this.overflowDirective && !this._destroyed) {
+                    const extra = this.overflowDirective.getAmountOfExtraItems();
+                    isPreviousStepsStrategy
+                        ? this.recalculateItemsByPrevArr(extra, amountOfPreviousSteps)
+                        : this._recalculateItemsByNextArr(extra, amountOfNextSteps);
+                    this._cd.markForCheck();
+                }
+            },
+            { injector: this._injector }
+        );
     }
 
     /**
@@ -122,6 +134,7 @@ export class IconTabBarProcessTypeComponent extends ClosableIconTabBar {
     _recalculateVisibleItems(extraItems: number): void {
         const amountOfPrevSteps = this._currentStepIndex > extraItems ? extraItems : this._currentStepIndex;
         this.recalculateItemsByPrevArr(extraItems, amountOfPrevSteps);
+        this._cd.markForCheck();
     }
 
     /** @hidden */
@@ -178,7 +191,7 @@ export class IconTabBarProcessTypeComponent extends ClosableIconTabBar {
             : this._prevSteps.length + visibleAmountOfItems - 1;
 
         this._showLeftBtn = !!this._prevSteps.length;
-        this._cd.detectChanges();
+        this._cd.markForCheck();
     }
 
     /**
@@ -227,6 +240,6 @@ export class IconTabBarProcessTypeComponent extends ClosableIconTabBar {
 
         this._showRightBtn = !!this._nextSteps.length;
         this._offsetOverflowDirective = this._nextSteps.length ? 70 : 0;
-        this._cd.detectChanges();
+        this._cd.markForCheck();
     }
 }
