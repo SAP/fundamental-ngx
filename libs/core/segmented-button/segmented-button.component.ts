@@ -10,7 +10,6 @@ import {
     Host,
     HostListener,
     Input,
-    NgZone,
     OnChanges,
     OnDestroy,
     QueryList,
@@ -134,7 +133,6 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
         private readonly _changeDetRef: ChangeDetectorRef,
         private readonly _elementRef: ElementRef,
         private readonly _destroyRef: DestroyRef,
-        private readonly _ngZone: NgZone,
         @Host() private _focusableList: FocusableListDirective
     ) {
         this._focusableList.navigationDirection.set(this.vertical ? 'vertical' : 'horizontal');
@@ -230,12 +228,10 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
         this._onRefresh$.next();
 
         if (!isDisabled) {
-            this._ngZone.run(() => {
-                if (this._buttons) {
-                    this._listenToButtonChanges();
-                    this._pickButtonsByValues(this._currentValue);
-                }
-            });
+            if (this._buttons) {
+                this._listenToButtonChanges();
+                this._pickButtonsByValues(this._currentValue);
+            }
         }
         this._changeDetRef.detectChanges();
     }

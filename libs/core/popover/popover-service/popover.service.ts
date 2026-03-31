@@ -172,6 +172,12 @@ export class PopoverService {
     /** @hidden */
     private _ignoreTriggers = false;
 
+    /** @hidden Timer for delayed hover close, allows mouse to travel from trigger to overlay body. */
+    private _hoverCloseTimer: ReturnType<typeof setTimeout> | null = null;
+
+    /** @hidden Listeners for mouseenter/mouseleave on the overlay element. */
+    private _overlayHoverListeners: (() => void)[] = [];
+
     /** @hidden */
     private _modalBodyClass = 'fd-overlay-active';
 
@@ -263,6 +269,8 @@ export class PopoverService {
         });
 
         this._destroyRef.onDestroy(() => {
+            this._clearHoverCloseTimer();
+            this._removeOverlayHoverListeners();
             this._removeTriggerListeners();
             if (this._overlayRef) {
                 this._overlayRef.detach();
@@ -314,6 +322,9 @@ export class PopoverService {
 
     /** Closes the popover. */
     close(focusActiveElement = true): void {
+        this._clearHoverCloseTimer();
+        this._removeOverlayHoverListeners();
+
         if (this._overlayRef) {
             this._overlayRef.dispose();
         }
@@ -354,6 +365,7 @@ export class PopoverService {
 
             this._safeSetIsOpen(true);
 
+            this._setupOverlayHoverListeners();
             this._listenOnClose();
             this._focusFirstTabbableElement();
             this._onLoad.next(this._getPopoverBody()._elementRef);
@@ -542,15 +554,30 @@ export class PopoverService {
         this._removeTriggerListeners();
 
         if (this.triggers()?.length) {
+            const hasHoverTrigger = this._hasHoverTriggers();
+
             this._normalizeTriggers().forEach((trigger) => {
                 this._eventRef.push(
                     this._renderer.listen(this._triggerHtmlElement, trigger.trigger, (event: Event) => {
                         if (this._ignoreTriggers || this.disabled()) {
                             return;
                         }
+
                         const closeAction = !!trigger.closeAction;
                         const openAction = !!trigger.openAction;
-                        this.toggle(openAction, closeAction);
+
+                        // For hover triggers, use delayed close to prevent flickering
+                        // when the mouse travels between the trigger and the popover body.
+                        if (hasHoverTrigger && trigger.trigger === 'mouseenter' && openAction) {
+                            this._clearHoverCloseTimer();
+                            if (!this.isOpen()) {
+                                this.toggle(openAction, closeAction);
+                            }
+                        } else if (hasHoverTrigger && trigger.trigger === 'mouseleave' && closeAction) {
+                            this._scheduleHoverClose();
+                        } else {
+                            this.toggle(openAction, closeAction);
+                        }
 
                         if (trigger.stopPropagation) {
                             event.stopImmediatePropagation();
@@ -593,6 +620,60 @@ export class PopoverService {
                 throw e;
             }
         }
+    }
+
+    /** @hidden Whether the current triggers include mouseenter or mouseleave. */
+    private _hasHoverTriggers(): boolean {
+        return this.triggers().some((t) => {
+            const name = typeof t === 'string' ? t : t.trigger;
+            return name === 'mouseenter' || name === 'mouseleave';
+        });
+    }
+
+    /** @hidden Clears any pending delayed hover close. */
+    private _clearHoverCloseTimer(): void {
+        if (this._hoverCloseTimer !== null) {
+            clearTimeout(this._hoverCloseTimer);
+            this._hoverCloseTimer = null;
+        }
+    }
+
+    /** @hidden Schedules a delayed close to allow mouse to travel from trigger to overlay body. */
+    private _scheduleHoverClose(): void {
+        this._clearHoverCloseTimer();
+        this._hoverCloseTimer = setTimeout(() => {
+            this._hoverCloseTimer = null;
+            this.close();
+        }, 50);
+    }
+
+    /** @hidden Adds mouseenter/mouseleave listeners on the overlay element when hover triggers are active. */
+    private _setupOverlayHoverListeners(): void {
+        this._removeOverlayHoverListeners();
+
+        if (!this._hasHoverTriggers() || !this._overlayRef) {
+            return;
+        }
+
+        const overlayElement = this._overlayRef.overlayElement;
+
+        this._overlayHoverListeners.push(
+            this._renderer.listen(overlayElement, 'mouseenter', () => {
+                this._clearHoverCloseTimer();
+            })
+        );
+
+        this._overlayHoverListeners.push(
+            this._renderer.listen(overlayElement, 'mouseleave', () => {
+                this._scheduleHoverClose();
+            })
+        );
+    }
+
+    /** @hidden Removes overlay hover listeners. */
+    private _removeOverlayHoverListeners(): void {
+        this._overlayHoverListeners.forEach((fn) => fn());
+        this._overlayHoverListeners = [];
     }
 
     /** @hidden */

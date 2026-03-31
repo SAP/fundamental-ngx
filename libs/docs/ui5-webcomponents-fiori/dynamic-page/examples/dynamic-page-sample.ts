@@ -17,9 +17,9 @@ import { GenericTagComponent } from '@fundamental-ngx/core';
 
 import '@ui5/webcomponents-icons/dist/AllIcons.js';
 
-import '@sap-ui/common-css/dist/sap-flex.css';
-import '@sap-ui/common-css/dist/sap-margin.css';
-import '@sap-ui/common-css/dist/sap-title.css';
+import '@fundamental-styles/common-css/dist/sap-flex.css';
+import '@fundamental-styles/common-css/dist/sap-margin.css';
+import '@fundamental-styles/common-css/dist/sap-title.css';
 import 'fundamental-styles/dist/section.css';
 import 'fundamental-styles/dist/title.css';
 

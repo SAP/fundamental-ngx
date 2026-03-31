@@ -1,6 +1,6 @@
 /* Import SAP common-css utilities for spacing, padding, etc. */
-@import '@sap-ui/common-css/dist/sap-margin.css';
-@import '@sap-ui/common-css/dist/sap-padding.css';
+@import '@fundamental-styles/common-css/dist/sap-margin.css';
+@import '@fundamental-styles/common-css/dist/sap-padding.css';
 
 /* Import fundamental-styles for list and title components */
 @import 'fundamental-styles/dist/list.css';
