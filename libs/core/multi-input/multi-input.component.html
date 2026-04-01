@@ -17,6 +17,8 @@
                     [disabled]="disabled"
                     [fillControlMode]="fillControlMode"
                     class="fd-multi-input-popover-custom"
+                    [focusTrapped]="true"
+                    [focusAutoCapture]="false"
                 >
                     <fd-popover-control>
                         <form (submit)="_onSubmit()">
