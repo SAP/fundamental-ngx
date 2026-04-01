@@ -1,16 +1,5 @@
 import { TitleCasePipe } from '@angular/common';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    ElementRef,
-    ViewEncapsulation,
-    computed,
-    effect,
-    inject,
-    input,
-    signal,
-    viewChildren
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, computed, inject, input, signal } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -18,8 +7,6 @@ import { MessageStripAlertService, MessageStripComponent } from '@fundamental-ng
 import { FDP_ICON_TAB_BAR } from '@fundamental-ngx/platform/icon-tab-bar';
 import { isObservable, of, shareReplay, switchMap, zip } from 'rxjs';
 import { catchError, map, startWith } from 'rxjs/operators';
-import { CopyService } from '../../services/copy.service';
-import { height } from '../../utilities';
 import { CodeSnippetComponent } from '../code-snippet/code-snippet.component';
 import { StackblitzService } from '../stackblitz/stackblitz.service';
 import { ExampleFile } from './example-file';
@@ -35,7 +22,6 @@ enum ExampleEntityState {
     templateUrl: './code-example.component.html',
     styleUrls: ['./code-example.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    animations: [height({ time: 200 })],
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
         ButtonComponent,
@@ -44,7 +30,10 @@ enum ExampleEntityState {
         FDP_ICON_TAB_BAR,
         CodeSnippetComponent,
         TitleCasePipe
-    ]
+    ],
+    host: {
+        '(keydown)': '_onKeydown($event)'
+    }
 })
 export class CodeExampleComponent {
     /**
@@ -55,16 +44,16 @@ export class CodeExampleComponent {
     // Expose enum for template
     protected readonly states = ExampleEntityState;
 
-    // Modern viewChildren query with signals
-    protected readonly codeElements = viewChildren(CodeSnippetComponent, { read: ElementRef });
-
     // State signals
     protected readonly isOpen = signal(false);
-    protected readonly smallScreen = signal(false);
     protected readonly activeIndex = signal(0);
 
     // Computed signals
     protected readonly expandIcon = computed(() => (this.isOpen() ? 'navigation-up-arrow' : 'navigation-down-arrow'));
+
+    protected readonly canOpenStackBlitz = computed(() =>
+        this.exampleFiles().some((f) => f.language === 'typescript' && f.component)
+    );
 
     // Convert observable to signal for template
     protected readonly exampleFilesNetworkEntity = toSignal(
@@ -121,24 +110,17 @@ export class CodeExampleComponent {
         { initialValue: { state: ExampleEntityState.loading, exampleFiles: [] } }
     );
 
+    protected readonly isMac = typeof navigator !== 'undefined' && /mac/i.test(navigator.userAgent);
+
     // Services
-    private readonly _copyService = inject(CopyService);
     private readonly _messageStripAlertService = inject(MessageStripAlertService);
     private readonly _stackBlitzService = inject(StackblitzService);
 
-    constructor() {
-        // Listen to window resize with effect (zoneless-compatible)
-        if (typeof window !== 'undefined') {
-            effect((onCleanup): void => {
-                const handleResize = (): void => this.smallScreen.set(window.innerWidth <= 768);
-
-                // Set initial value on effect initialization
-                handleResize();
-
-                // Signal updates automatically trigger change detection in both zone and zoneless modes
-                window.addEventListener('resize', handleResize);
-                onCleanup(() => window.removeEventListener('resize', handleResize));
-            });
+    protected toggle(): void {
+        const opening = !this.isOpen();
+        this.isOpen.set(opening);
+        if (!opening) {
+            this.activeIndex.set(0);
         }
     }
 
@@ -153,11 +135,43 @@ export class CodeExampleComponent {
         const entity = this.exampleFilesNetworkEntity();
         const index = this.activeIndex();
         if (entity?.exampleFiles?.[index]) {
-            this._copyService.copyText(entity.exampleFiles[index].code);
-            this._messageStripAlertService.open({
-                content: 'Code copied!',
-                messageStrip: { type: 'success', duration: 5000, mousePersist: true }
-            });
+            this._copyToClipboard(entity.exampleFiles[index].code);
         }
+    }
+
+    /** @hidden */
+    protected _onKeydown(event: KeyboardEvent): void {
+        if (!this.isOpen()) {
+            return;
+        }
+        const isCopy = (event.ctrlKey || event.metaKey) && event.key === 'c';
+        if (isCopy && !window.getSelection()?.toString()) {
+            event.preventDefault();
+            this.copyText();
+        }
+    }
+
+    /** @hidden Track scroll position to show/hide bottom fade gradient. */
+    protected _onSnippetScroll(event: Event): void {
+        const el = event.target as HTMLElement;
+        const atBottom = el.scrollHeight - el.scrollTop - el.clientHeight < 2;
+        el.classList.toggle('docs-code-snippet-wrapper--at-bottom', atBottom);
+    }
+
+    private _copyToClipboard(text: string): void {
+        navigator.clipboard.writeText(text).then(
+            () => {
+                this._messageStripAlertService.open({
+                    content: 'Code copied!',
+                    messageStrip: { type: 'success', duration: 5000, mousePersist: true }
+                });
+            },
+            () => {
+                this._messageStripAlertService.open({
+                    content: 'Failed to copy code.',
+                    messageStrip: { type: 'error', duration: 5000, mousePersist: true }
+                });
+            }
+        );
     }
 }

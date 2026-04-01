@@ -1,7 +1,6 @@
 import { DOWN_ARROW } from '@angular/cdk/keycodes';
 import { Component, ElementRef, signal, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { PopoverBodyComponent } from './popover-body/popover-body.component';
 import { PopoverControlComponent } from './popover-control/popover-control.component';
 import { PopoverService } from './popover-service/popover.service';
@@ -74,7 +73,7 @@ describe('PopoverComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [TestPopoverComponent, NoopAnimationsModule]
+            imports: [TestPopoverComponent]
         }).compileComponents();
     }));
 
@@ -317,7 +316,7 @@ describe('PopoverComponent with config input', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [TestPopoverConfigComponent, NoopAnimationsModule]
+            imports: [TestPopoverConfigComponent]
         }).compileComponents();
     }));
 

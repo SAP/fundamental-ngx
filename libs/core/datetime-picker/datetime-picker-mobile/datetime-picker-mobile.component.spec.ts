@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { EventEmitter } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
@@ -31,7 +30,7 @@ describe('DatetimePickerMobileComponent', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [NoopAnimationsModule, DatetimePickerMobileComponent],
+            imports: [DatetimePickerMobileComponent],
             providers: [
                 {
                     provide: FD_DATETIME_PICKER_COMPONENT,

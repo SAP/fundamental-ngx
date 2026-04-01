@@ -1,6 +1,5 @@
 import { Component, NgModule, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NavigationStart, Router, RouterEvent, RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FD_DIALOG_FOCUS_TRAP_ERROR } from '@fundamental-ngx/core/dialog';
@@ -45,7 +44,7 @@ describe('MessageBoxComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [TestModule, RouterModule, RouterTestingModule, NoopAnimationsModule],
+            imports: [TestModule, RouterModule, RouterTestingModule],
             providers: [
                 { provide: MessageBoxRef, useValue: messageBoxRef },
                 { provide: MessageBoxConfig, useValue: messageBoxConfig },

@@ -1,7 +1,6 @@
 import { ComponentFixture, fakeAsync, flush, TestBed, tick, waitForAsync } from '@angular/core/testing';
 
 import { Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MenuTitleDirective } from './directives/menu-title.directive';
 import { MenuTriggerDirective } from './directives/menu-trigger.directive';
 import { MenuInteractiveComponent } from './menu-interactive.component';
@@ -112,7 +111,7 @@ describe('MenuComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [TestMenuComponent, NoopAnimationsModule]
+            imports: [TestMenuComponent]
         }).compileComponents();
     }));
 
@@ -294,7 +293,7 @@ describe('MenuComponent with submenus', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [TestMenuSubmenuComponent, NoopAnimationsModule]
+            imports: [TestMenuSubmenuComponent]
         }).compileComponents();
     }));
 
@@ -417,7 +416,7 @@ describe('MenuComponent config input', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [TestMenuConfigComponent, NoopAnimationsModule]
+            imports: [TestMenuConfigComponent]
         }).compileComponents();
     }));
 
@@ -478,7 +477,7 @@ describe('MenuComponent advanced options', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [TestMenuAdvancedComponent, NoopAnimationsModule]
+            imports: [TestMenuAdvancedComponent]
         }).compileComponents();
     }));
 

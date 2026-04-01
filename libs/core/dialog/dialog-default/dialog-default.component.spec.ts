@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogModule } from '../dialog.module';
 import { DialogConfig } from '../utils/dialog-config.class';
 import { DialogDefaultContent } from '../utils/dialog-default-content.class';
@@ -13,7 +12,7 @@ describe('DefaultDialogComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [DialogModule, NoopAnimationsModule],
+            imports: [DialogModule],
             providers: [DialogConfig, DialogRef]
         }).compileComponents();
     }));
