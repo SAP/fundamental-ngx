@@ -32,7 +32,9 @@
                 ? 'relative'
                 : 'static'
         "
-        [class.fdp-table__body--disable-scroll]="!!_dndTableDirective?.dragDropInProgress"
+        [class.fdp-table__body--disable-scroll]="
+            !!_dndTableDirective?.dragDropInProgress && !_virtualScrollDirective?.scrollWholeRows
+        "
         fdpTableScrollable
         #tableScrollable="tableScrollable"
         [style.height]="bodyHeight"
@@ -124,7 +126,7 @@
                                         (keydown.enter)="_onRowClick(row, $event)"
                                         (keydown.space)="_onRowClick(row, $event)"
                                         (click)="_onRowClick(row, $event)"
-                                        (started)="_dndTableDirective?.dragDropStart()"
+                                        (started)="_onDragStarted(row, $index, rowIndex)"
                                         [main]="true"
                                         [class.fd-table__row--draggable]="isDraggable"
                                         fdp-table-row
@@ -260,7 +262,9 @@
             @if (_virtualScrollDirective?.virtualScroll && _virtualScrollDirective?.scrollWholeRows) {
                 <tbody
                     [class.fd-table__body--scroll-mock]="!!_virtualScrollDirective?.scrollWholeRows"
-                    [class.fdp-table__body--disable-scroll]="!!_dndTableDirective?.dragDropInProgress"
+                    [class.fdp-table__body--disable-scroll]="
+                        !!_dndTableDirective?.dragDropInProgress && !_virtualScrollDirective?.scrollWholeRows
+                    "
                     #tableScrollMockContainer
                 >
                     <tr>

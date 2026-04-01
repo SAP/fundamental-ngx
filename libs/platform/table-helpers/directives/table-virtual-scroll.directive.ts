@@ -314,7 +314,7 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
      * up or down using the event's deltaX property, and scrolls the table by one row.
      */
     private _wheelScrollListenerFunction = (event: WheelEvent): void => {
-        if (Math.abs(event.deltaX) < Math.abs(event.deltaY) && !this._dndTableDirective?.dragDropInProgress) {
+        if (Math.abs(event.deltaX) < Math.abs(event.deltaY)) {
             event.preventDefault();
             event.stopImmediatePropagation();
             if (this._wheelTimeout) {

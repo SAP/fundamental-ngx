@@ -967,8 +967,56 @@ export class TableComponent<T = any>
      * @param length Length of rows.
      */
     setCurrentlyRenderedRows(startIndex = 0, length: number): void {
-        this._tableCurrentlyRenderedRowsPlaceholder = new Array(length).fill(null).map((_, i) => i + startIndex);
-        this._dndTableRowsPlaceholder = this._tableRows.slice(startIndex, length);
+        const newIndices = new Array(length).fill(null).map((_, i) => i + startIndex);
+        const newSlice = this._tableRows.slice(startIndex, startIndex + length);
+
+        // During drag with virtual scroll, preserve the dragged row at its original DnD index
+        if (
+            this._virtualScrollDirective?.virtualScroll &&
+            this._virtualScrollDirective?.scrollWholeRows &&
+            this._dndTableDirective?.dragDropInProgress &&
+            this._dndTableDirective?.draggedRow &&
+            this._dndTableDirective?.draggedRowGlobalIndex !== null &&
+            this._dndTableDirective?.draggedDndIndex !== null
+        ) {
+            const draggedRow = this._dndTableDirective.draggedRow;
+            const draggedGlobalIndex = this._dndTableDirective.draggedRowGlobalIndex;
+            const targetDndIndex = this._dndTableDirective.draggedDndIndex;
+
+            // Find where the dragged row is in the new slice
+            const indexInNewSlice = newSlice.indexOf(draggedRow);
+            const draggedGlobalIndexInNewIndices = newIndices.indexOf(draggedGlobalIndex);
+
+            if (indexInNewSlice >= 0 && draggedGlobalIndexInNewIndices >= 0) {
+                // Dragged row is in the new range - move it to target DnD index
+                if (indexInNewSlice !== targetDndIndex && targetDndIndex < newSlice.length) {
+                    newSlice.splice(indexInNewSlice, 1);
+                    newSlice.splice(targetDndIndex, 0, draggedRow);
+
+                    newIndices.splice(draggedGlobalIndexInNewIndices, 1);
+                    newIndices.splice(targetDndIndex, 0, draggedGlobalIndex);
+                }
+            } else if (draggedGlobalIndexInNewIndices < 0) {
+                // Dragged row is NOT in the new range, but we need to keep it visible
+                if (targetDndIndex < newSlice.length) {
+                    newSlice.splice(targetDndIndex, 0, draggedRow);
+                    newSlice.pop();
+
+                    newIndices.splice(targetDndIndex, 0, draggedGlobalIndex);
+                    newIndices.pop();
+                } else {
+                    newSlice.push(draggedRow);
+                    newIndices.push(draggedGlobalIndex);
+                }
+            }
+
+            this._dndTableRowsPlaceholder = newSlice;
+            this._tableCurrentlyRenderedRowsPlaceholder = newIndices;
+        } else {
+            this._dndTableRowsPlaceholder = newSlice;
+            this._tableCurrentlyRenderedRowsPlaceholder = newIndices;
+        }
+
         this._cdr.detectChanges();
     }
 
@@ -1470,6 +1518,11 @@ export class TableComponent<T = any>
             return;
         }
         this._dndDirective?.refreshQueryList();
+    }
+
+    /** @hidden */
+    _onDragStarted(row: TableRow, dndIndex: number, globalIndex: number): void {
+        this._dndTableDirective?.dragDropStart(row, dndIndex, globalIndex);
     }
 
     /**

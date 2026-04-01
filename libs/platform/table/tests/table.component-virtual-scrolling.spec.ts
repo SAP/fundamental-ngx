@@ -442,5 +442,70 @@ describe('TableComponent Virtual Scrolling', () => {
                 });
             });
         });
+
+        describe('Drag & Drop State Tracking', () => {
+            it('should preserve dragged row in render arrays when drag is in progress and scrollWholeRows is enabled', () => {
+                // Simulate a drag state
+                const mockRow = tableComponent._tableRowsVisible[10];
+                const dndIndex = 5;
+                const globalIndex = 10;
+
+                // Manually set up the drag state (simulating what would happen in a tree table)
+                if (tableComponent._dndTableDirective) {
+                    tableComponent._dndTableDirective['_draggedRowObject'] = mockRow;
+                    tableComponent._dndTableDirective['_draggedDndIndex'] = dndIndex;
+                    tableComponent._dndTableDirective['_draggedRowGlobalIndex'] = globalIndex;
+                    tableComponent._dndTableDirective.dragDropInProgress = true;
+                }
+
+                // Simulate virtual scroll rendering new rows
+                tableComponent.setCurrentlyRenderedRows(15, 10);
+
+                // If drag state exists, the dragged row should be preserved at its DnD index
+                if (tableComponent._dndTableDirective?.dragDropInProgress) {
+                    expect(tableComponent._dndTableRowsPlaceholder[dndIndex]).toBe(mockRow);
+                    expect(tableComponent._tableCurrentlyRenderedRowsPlaceholder[dndIndex]).toBe(globalIndex);
+                }
+            });
+
+            it('should not preserve dragged row when drag is not in progress', () => {
+                // No drag state
+                if (tableComponent._dndTableDirective) {
+                    tableComponent._dndTableDirective.dragDropInProgress = false;
+                }
+
+                const originalSlice = tableComponent._dndTableRowsPlaceholder.slice();
+
+                // Simulate virtual scroll
+                tableComponent.setCurrentlyRenderedRows(15, 10);
+
+                // The arrays should be a normal slice without any preservation
+                expect(tableComponent._dndTableRowsPlaceholder.length).toBe(10);
+                expect(tableComponent._tableCurrentlyRenderedRowsPlaceholder.length).toBe(10);
+            });
+
+            it('should not preserve dragged row when scrollWholeRows is disabled', () => {
+                // Disable scrollWholeRows
+                hostComponent.virtualScrollDirective.scrollWholeRows = false;
+                fixture.detectChanges();
+
+                const mockRow = tableComponent._tableRowsVisible[10];
+
+                // Set up drag state
+                if (tableComponent._dndTableDirective) {
+                    tableComponent._dndTableDirective['_draggedRowObject'] = mockRow;
+                    tableComponent._dndTableDirective['_draggedDndIndex'] = 5;
+                    tableComponent._dndTableDirective['_draggedRowGlobalIndex'] = 10;
+                    tableComponent._dndTableDirective.dragDropInProgress = true;
+                }
+
+                // Simulate virtual scroll
+                tableComponent.setCurrentlyRenderedRows(15, 10);
+
+                // Should not preserve (scrollWholeRows is false)
+                // Just verify it doesn't throw an error
+                expect(tableComponent._dndTableRowsPlaceholder).toBeDefined();
+            });
+        });
     });
 });

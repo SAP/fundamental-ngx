@@ -98,11 +98,17 @@ export class BusyIndicatorComponent implements OnDestroy {
     private readonly _elementRef = inject(ElementRef);
 
     constructor() {
-        effect(() => {
-            const preventWheelEvents = this.preventWheelEvents();
-            if (preventWheelEvents) {
+        // Reactively manage wheel event listener based on preventWheelEvents signal
+        effect((onCleanup) => {
+            if (this.preventWheelEvents()) {
                 this._elementRef.nativeElement.addEventListener('wheel', this._wheelListener, {
                     passive: false
+                });
+
+                onCleanup(() => {
+                    this._elementRef.nativeElement.removeEventListener('wheel', this._wheelListener, {
+                        passive: false
+                    });
                 });
             }
         });
