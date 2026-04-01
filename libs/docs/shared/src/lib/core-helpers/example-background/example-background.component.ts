@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { SwitchComponent } from '@fundamental-ngx/core/switch';
 
-import '@sap-ui/common-css/dist/sap-margin.css';
+import '@fundamental-styles/common-css/dist/sap-margin.css';
 
 @Component({
     selector: 'background-switch',

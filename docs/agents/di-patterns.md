@@ -46,11 +46,16 @@ export class Title {
 
     private readonly _defaultHeaderSize = inject(DEFAULT_TITLE_SIZE, { optional: true });
 
+    // Compute the effective size: explicit input > injected default > element tag name
+    protected readonly _effectiveSize = computed(
+        () => this.headerSize() ?? this._defaultHeaderSize ?? this._detectSize()
+    );
+
+    // Use effect only for the imperative DOM side effect
     constructor() {
         effect(() => {
-            // Priority: explicit input > injected default > element tag name
-            const size = this.headerSize() ?? this._defaultHeaderSize ?? this._detectSize();
-            this._applySize(size);
+            const size = this._effectiveSize();
+            untracked(() => this._applySize(size));
         });
     }
 
@@ -195,6 +200,8 @@ export class FormField {
 
 When migrating from `@Input()` decorators to `input()` signals, you may encounter cases where external code needs to programmatically update a directive's input value. **Signal inputs are read-only** from outside the component.
 
+> **Note:** This is a workaround for a known Angular limitation ([angular/angular#54782](https://github.com/angular/angular/issues/54782) -- 79 comments, still open). If Angular adds programmatic input setting in the future, this pattern may become unnecessary.
+
 ### The Problem
 
 ```typescript
@@ -314,10 +321,14 @@ export class Title {
     readonly headerSize = input<HeaderSizes | null>(null);
     private readonly _defaultHeaderSize = inject(DEFAULT_TITLE_SIZE, { optional: true });
 
+    protected readonly _effectiveSize = computed(
+        () => this.headerSize() ?? this._defaultHeaderSize ?? this._fallback()
+    );
+
     constructor() {
         effect(() => {
-            const size = this.headerSize() ?? this._defaultHeaderSize ?? this._fallback();
-            this._applySize(size);
+            const size = this._effectiveSize();
+            untracked(() => this._applySize(size));
         });
     }
 }

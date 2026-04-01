@@ -7,10 +7,10 @@ import { MessageStrip } from '@fundamental-ngx/ui5-webcomponents/message-strip';
 import { Tag } from '@fundamental-ngx/ui5-webcomponents/tag';
 
 // Import CSS classes for styling
-import '@sap-ui/common-css/dist/sap-display.css';
-import '@sap-ui/common-css/dist/sap-flex.css';
-import '@sap-ui/common-css/dist/sap-margin.css';
-import '@sap-ui/common-css/dist/sap-text.css';
+import '@fundamental-styles/common-css/dist/sap-display.css';
+import '@fundamental-styles/common-css/dist/sap-flex.css';
+import '@fundamental-styles/common-css/dist/sap-margin.css';
+import '@fundamental-styles/common-css/dist/sap-text.css';
 import 'fundamental-styles/dist/section.css';
 
 interface ScanResult {

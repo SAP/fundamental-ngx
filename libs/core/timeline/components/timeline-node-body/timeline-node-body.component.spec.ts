@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TextComponent } from '@fundamental-ngx/core/text';
@@ -13,6 +13,7 @@ describe('TimelineNodeBodyComponent', () => {
         await TestBed.configureTestingModule({
             imports: [TimeLineNodeBodyTestComponent],
             providers: [
+                provideZonelessChangeDetection(),
                 {
                     provide: TimelinePositionControlService,
                     useValue: {
@@ -48,7 +49,7 @@ describe('TimelineNodeBodyComponent', () => {
         expect(moreBtn).toBeTruthy();
     });
 
-    it('should call calculate positions when expanded or collapsed occurs', () => {
+    it('should call calculate positions when expanded or collapsed occurs', async () => {
         const hostEl: HTMLElement = fixture.debugElement.nativeElement;
         const moreBtn = hostEl.querySelector<HTMLAnchorElement>('.fd-text__link--more');
         const calculatePositionsSpy = jest.spyOn(
@@ -57,6 +58,7 @@ describe('TimelineNodeBodyComponent', () => {
         );
         expect(moreBtn).toBeDefined();
         moreBtn?.click();
+        await fixture.whenStable();
         expect(calculatePositionsSpy).toHaveBeenCalledTimes(1);
     });
 });

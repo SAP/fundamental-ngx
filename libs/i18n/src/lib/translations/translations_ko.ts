@@ -16,10 +16,10 @@ export default {
         menuButtonAriaLabel: '메뉴 버튼'
     },
     coreActionSheet: {
-        toolbarLabel: 'Action Bar'
+        toolbarLabel: '액션 바'
     },
     coreAvatarGroup: {
-        backButton: 'Back'
+        backButton: '뒤로'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: '탐색 경로 추적',
@@ -58,7 +58,7 @@ export default {
         rightNavigationBtnLabel: '다음 항목으로 이동'
     },
     coreCombobox: {
-        clearButtonTitle: 'Clear input'
+        clearButtonTitle: '입력 지우기'
     },
     coreDatePicker: {
         dateInputLabel: '날짜 입력',
@@ -78,11 +78,11 @@ export default {
         displayTypeTimeLabel: '시간'
     },
     coreDynamicPage: {
-        breadcrumbsLabel: 'Breadcrumbs',
+        breadcrumbsLabel: '탐색 경로',
         collapseLabel: '헤더 접기',
         expandLabel: '헤더 펼치기',
         pinLabel: '헤더 고정',
-        toggleHeader: 'Toggle header',
+        toggleHeader: '헤더 토글',
         unpinLabel: '헤더 고정 취소'
     },
     coreFeedListItem: {
@@ -112,8 +112,8 @@ export default {
         announcementSuccess: '성공 메시지 스트립',
         announcementWarning: '경고 메시지 스트립',
         closable: '닫기 가능',
-        defaultDismissButtonText: 'Close',
-        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: '닫기',
+        defaultHiddenText: '메시지 스트립',
         dismissLabel: '닫기'
     },
     coreMultiComboBox: {
@@ -129,12 +129,12 @@ export default {
         multiInputAriaLabel: '다중 값 입력',
         navigateSelectionsWithArrows: '위쪽 및 아래쪽 화살표를 사용하여 선택항목을 탐색합니다.',
         noResults: '결과가 없습니다.',
-        showAll: 'Show All ({count})',
+        showAll: '모두 표시({count}개)',
         tokensCountText: '총 토큰 수 포함: {length}.'
     },
     coreNavigation: {
         mainNavigation: '기본 탐색',
-        navigationPath: '탐색 경로'
+        navigationPath: 'Navigation Path'
     },
     coreNestedList: {
         linkItemAriaLabel: '트리 항목 {itemDetails}, {selectedDescription}'
@@ -197,7 +197,7 @@ export default {
         ariaRoleDescription: '평가 지시자'
     },
     coreSelect: {
-        closeButton: 'Close'
+        closeButton: '닫기'
     },
     coreShellbar: {
         assistiveTools: '지원 툴',
@@ -238,7 +238,7 @@ export default {
         semanticDeclineLabel: '거부'
     },
     coreTabs: {
-        expandIconLabel: 'See More',
+        expandIconLabel: '자세히 보기',
         tabListExpandButtonText: '더 보기'
     },
     coreText: {
@@ -272,10 +272,10 @@ export default {
     coreTimePicker: {
         timePickerButtonLabel: '선택 도구 열기',
         timePickerInputLabel: '시간 선택 도구 입력',
-        valueStateErrorMessage: 'Value state Error',
-        valueStateInformationMessage: 'Value state Information',
-        valueStateSuccessMessage: 'Value state Success',
-        valueStateWarningMessage: 'Value state Warning'
+        valueStateErrorMessage: "값 상태 '오류'",
+        valueStateInformationMessage: "값 상태 '정보'",
+        valueStateSuccessMessage: "값 상태 '성공'",
+        valueStateWarningMessage: "값 상태 '경고'"
     },
     coreToken: {
         ariaRoleDescription: '토큰',
@@ -286,7 +286,7 @@ export default {
         tokenizerLabel: '토크나이저'
     },
     coreToolbar: {
-        moreButton: 'More'
+        moreButton: '더 보기'
     },
     coreTree: {
         collapse: '노드 접기',
@@ -303,8 +303,8 @@ export default {
         menuOkText: '확인'
     },
     coreUserMenu: {
-        closeButton: 'Close',
-        previousButton: 'Previous'
+        closeButton: '닫기',
+        previousButton: '이전'
     },
     coreWizard: {
         ariaLabel: '마법사'
@@ -387,11 +387,11 @@ export default {
         countListResultsSingular: '1개의 결과 리스트 항목'
     },
     platformFeedInput: {
-        sendButton: 'Send',
+        sendButton: '보내기',
         userTitle: '사용자'
     },
     platformIconTabBar: {
-        moreButton: '더보기'
+        moreButton: '더 보기'
     },
     platformLink: {
         roleDescriptionWithMedia: '미디어: {media}'
@@ -401,7 +401,7 @@ export default {
     },
     platformMessagePopover: {
         allErrors: '모두',
-        backButton: 'Go back',
+        backButton: '뒤로 가기',
         defaultErrors: {
             email: '전자메일이 유효하지 않습니다.',
             max: '필드가 최대값을 초과합니다.',
@@ -425,20 +425,20 @@ export default {
         detailsActionAriaLabel: '세부사항'
     },
     platformSearchField: {
-        allButtonLabel: 'All',
-        cancelLabel: 'Cancel',
-        clearButtonTitle: '지우기',
-        counterLabel: 'Total results: {count}',
-        deleteButtonAriaLabel: 'Remove',
-        deleteButtonTitle: 'Remove Suggestion',
-        groupHeader: 'Group Header',
+        allButtonLabel: '모두',
+        cancelLabel: '취소',
+        clearButtonTitle: '검색 지우기',
+        counterLabel: '총 결과: {count}개',
+        deleteButtonAriaLabel: '제거',
+        deleteButtonTitle: '제안 제거',
+        groupHeader: '그룹 헤더',
         searchInputLabel: '검색',
         searchSuggestionMessage: '{count}개의 제안을 찾았습니다.',
         searchSuggestionNavigateMessage: '위쪽 및 아래쪽 화살표를 사용하여 탐색',
-        selectScopeLabel: 'Select scope',
-        selectStateMessageLabel: 'Select',
-        submitButtonTitle: '검색',
-        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: '범위 선택',
+        selectStateMessageLabel: '선택',
+        submitButtonTitle: '검색(입력)',
+        suggestionsWrapperAriaLabel: '제안',
         synchronizeButtonTitle: '동기화'
     },
     platformSelect: {
@@ -490,7 +490,7 @@ export default {
         submitButtonLabel: '이동'
     },
     platformSplitMenuButton: {
-        groupLabel: 'Split button group'
+        groupLabel: '분할 버튼 그룹'
     },
     platformStandardListItem: {
         deleteActionAriaLabel: '삭제',
@@ -702,7 +702,7 @@ export default {
         successButtonLabel: '확인'
     },
     platformWizardGenerator: {
-        stepsLabel: 'Wizard Steps',
+        stepsLabel: '마법사 단계',
         summarySectionEditStep: '편집'
     },
     segmentedButton: {

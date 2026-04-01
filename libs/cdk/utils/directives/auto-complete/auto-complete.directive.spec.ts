@@ -94,4 +94,32 @@ describe('AutoCompleteDirective', () => {
 
         expect((<any>directive)._elementRef.nativeElement.value).toBe('SomeOtherWord');
     });
+
+    it('should not autocomplete when user types non-matching character after partial match', () => {
+        // Simulate: user types "A" -> autocompletes to "Apple", then user types "x"
+        // Expected: should not autocomplete to "Apple" since "Ax" doesn't match
+        directive.inputText = 'A';
+        (<any>directive)._elementRef.nativeElement.value = 'Apple';
+        (<any>directive)._elementRef.nativeElement.setSelectionRange(1, 5);
+
+        // User types 'x', changing value from 'Apple' (selected) to 'Ax'
+        directive.inputText = 'Ax';
+        (<any>directive)._elementRef.nativeElement.value = 'Ax';
+
+        directive._handleKeyboardEvent(<any>{ preventDefault: () => {}, key: 'x' });
+
+        // Should remain 'Ax' and not autocomplete back to 'Apple'
+        expect((<any>directive)._elementRef.nativeElement.value).toBe('Ax');
+    });
+
+    it('should autocomplete when native value matches the start of an option', () => {
+        // Simulate: user types "Ban"
+        directive.inputText = 'Ban';
+        (<any>directive)._elementRef.nativeElement.value = 'Ban';
+
+        directive._handleKeyboardEvent(<any>{ preventDefault: () => {}, key: 'n' });
+
+        // Should autocomplete to "Banana"
+        expect((<any>directive)._elementRef.nativeElement.value).toBe('Banana');
+    });
 });

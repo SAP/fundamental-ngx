@@ -18,7 +18,7 @@ Read all files in the target path. For each component, directive, or service, sc
 **Inputs / Outputs / Models:**
 
 - `@Input()` → `input()` or `input.required()`
-- `@Input()` with setter → `input()` + `linkedSignal()` or `effect()`
+- `@Input()` with setter → `input()` + `linkedSignal()` (preferred) or `effect()` (only for DOM side effects)
 - `@Input()` + `@Output()` pair (e.g. `value` / `valueChange`) → `model()`
 - `@Output()` → `output()`
 - Boolean inputs: add `{ transform: booleanAttribute }`
@@ -49,7 +49,9 @@ Read all files in the target path. For each component, directive, or service, sc
 - `BehaviorSubject` used for local component state → `signal()`
 - `BehaviorSubject` + `combineLatest` → `computed()`
 - `Subject<void>` used only to trigger side effects → `effect()`
+- `effect()` that only calls `signal.set()` for derived state → `computed()` or `linkedSignal`
 - Redundant `markForCheck()` after signal updates → remove
+- Object/array mutation in place + `signal.set()` with same ref → immutable update with `signal.update()`
 
 **CSS class building:**
 

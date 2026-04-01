@@ -1,34 +1,37 @@
-<div class="fd-feed-input" [class.is-disabled]="disabled">
-    @if (avatarShow) {
-        <fd-avatar
-            class="fd-feed-input__thumb"
-            size="s"
-            role="img"
-            [attr.aria-label]="('platformFeedInput.userTitle' | fdTranslate)()"
-            [title]="('platformFeedInput.userTitle' | fdTranslate)()"
-            [image]="avatarSrc"
-            [class.fd-avatar--placeholder]="!avatarSrc"
-            [class.sap-icon]="!avatarSrc"
-            [glyph]="!avatarSrc ? 'person-placeholder' : null"
-        >
-        </fd-avatar>
-    }
-    <textarea
-        #textAreaElement
-        fd-form-control
-        class="fd-textarea fd-feed-input__textarea"
-        [disabled]="disabled"
-        [placeholder]="placeholder"
-        [(ngModel)]="value"
-        (ngModelChange)="onChange()"
-    ></textarea>
-    <button
-        fd-button
-        class="fd-feed-input__submit-button"
-        glyph="feeder-arrow"
-        [title]="('platformFeedInput.sendButton' | fdTranslate)()"
-        [ariaLabel]="('platformFeedInput.sendButton' | fdTranslate)()"
-        [disabled]="!value || disabled"
-        (click)="onSubmit()"
-    ></button>
+<div class="fd-feed-input" role="group" [attr.aria-label]="ariaLabel()" [class.is-disabled]="disabled">
+    <div class="fd-feed-input__container">
+        @if (avatarShow) {
+            <fd-avatar
+                class="fd-feed-input__thumb"
+                size="s"
+                role="img"
+                [attr.aria-label]="('platformFeedInput.userTitle' | fdTranslate)()"
+                [title]="('platformFeedInput.userTitle' | fdTranslate)()"
+                [image]="avatarSrc"
+                [class.fd-avatar--placeholder]="!avatarSrc"
+                [class.sap-icon]="!avatarSrc"
+                [glyph]="!avatarSrc ? 'person-placeholder' : null"
+            >
+            </fd-avatar>
+        }
+        <textarea
+            #textAreaElement
+            fd-form-control
+            [id]="textareaId"
+            class="fd-textarea fd-feed-input__textarea"
+            [disabled]="disabled"
+            [placeholder]="placeholder"
+            [(ngModel)]="value"
+            (ngModelChange)="onChange()"
+        ></textarea>
+        <button
+            fd-button
+            class="fd-feed-input__submit-button"
+            glyph="feeder-arrow"
+            [title]="('platformFeedInput.sendButton' | fdTranslate)()"
+            [ariaLabel]="('platformFeedInput.sendButton' | fdTranslate)()"
+            [disabled]="!value || disabled"
+            (click)="onSubmit()"
+        ></button>
+    </div>
 </div>

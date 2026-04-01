@@ -31,10 +31,10 @@ import 'fundamental-styles/dist/layout-grid.css';
 import 'fundamental-styles/dist/panel.css';
 import 'fundamental-styles/dist/section.css';
 
-import '@sap-ui/common-css/dist/sap-flex.css';
-import '@sap-ui/common-css/dist/sap-margin.css';
-import '@sap-ui/common-css/dist/sap-padding.css';
-import '@sap-ui/common-css/dist/sap-text.css';
+import '@fundamental-styles/common-css/dist/sap-flex.css';
+import '@fundamental-styles/common-css/dist/sap-margin.css';
+import '@fundamental-styles/common-css/dist/sap-padding.css';
+import '@fundamental-styles/common-css/dist/sap-text.css';
 
 @Component({
     selector: 'ui5-input-sample',

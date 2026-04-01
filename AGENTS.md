@@ -1,7 +1,7 @@
 <!--
 Document: Angular 21+ Development Guidelines for Fundamental NGX
-Last Updated: March 9, 2026
-Version: 4.0
+Last Updated: March 29, 2026
+Version: 5.0
 Purpose: Comprehensive guide for AI agents and developers working with Angular 21+ in NX monorepo
 Note: Detailed documentation has been split into separate files in docs/agents/
 -->
@@ -90,20 +90,23 @@ All components use `fd-` prefix: `fd-button`, `fd-dialog`, `fd-card`
 
 ## Common Mistakes to Avoid
 
-| ❌ Don't Do This                     | ✅ Do This Instead                        | Why                                 |
-| ------------------------------------ | ----------------------------------------- | ----------------------------------- |
-| `@HostBinding()` / `@HostListener()` | Use `host: {}` in decorator               | Better tree-shaking, AOT            |
-| `@Input()` / `@Output()` decorators  | Use `input()` / `output()`                | Signal-based, auto change detection |
-| `standalone: true` in decorator      | Omit it (default in Angular 21+)          | Cleaner code                        |
-| `ngClass` / `ngStyle`                | Use `class` / `style` bindings            | Direct binding is simpler           |
-| `*ngIf` / `*ngFor` / `*ngSwitch`     | Use `@if` / `@for` / `@switch`            | New control flow syntax             |
-| `BehaviorSubject` for local state    | Use `signal()`                            | Simpler, automatic cleanup          |
-| `signal()` for internal bookkeeping  | Use plain property                        | No reactive consumer                |
-| `signal.set(); markForCheck();`      | Just `signal.set();`                      | Signals auto-notify                 |
-| Custom `DestroyedService`            | Use `DestroyRef` + `takeUntilDestroyed()` | Built-in Angular                    |
-| `CssClassBuilder` + `@applyCssClass` | Use `computed()` + `host: { '[class]': }` | Signal-based                        |
-| Protected after private members      | Protected before private                  | ESLint member ordering              |
-| `allowSignalWrites: true` in effect  | Remove the option                         | Deprecated in Angular 21+           |
+| ❌ Don't Do This                      | ✅ Do This Instead                        | Why                                 |
+| ------------------------------------- | ----------------------------------------- | ----------------------------------- |
+| `@HostBinding()` / `@HostListener()`  | Use `host: {}` in decorator               | Better tree-shaking, AOT            |
+| `@Input()` / `@Output()` decorators   | Use `input()` / `output()`                | Signal-based, auto change detection |
+| `standalone: true` in decorator       | Omit it (default in Angular 21+)          | Cleaner code                        |
+| `ngClass` / `ngStyle`                 | Use `class` / `style` bindings            | Direct binding is simpler           |
+| `*ngIf` / `*ngFor` / `*ngSwitch`      | Use `@if` / `@for` / `@switch`            | New control flow syntax             |
+| `BehaviorSubject` for local state     | Use `signal()`                            | Simpler, automatic cleanup          |
+| `signal()` for internal bookkeeping   | Use plain property                        | No reactive consumer                |
+| `signal.set(); markForCheck();`       | Just `signal.set();`                      | Signals auto-notify                 |
+| Custom `DestroyedService`             | Use `DestroyRef` + `takeUntilDestroyed()` | Built-in Angular                    |
+| `CssClassBuilder` + `@applyCssClass`  | Use `computed()` + `host: { '[class]': }` | Signal-based                        |
+| Mutate object then `signal.set(same)` | `signal.update(o => ({...o, k: v}))`      | Reference equality = silent no-op   |
+| `effect(() => sig.set(derived))`      | Use `computed()` or `linkedSignal`        | Effects are for side effects only   |
+| Conditional signal read in `effect`   | Read tracked signals before `if`          | Unread signal = untracked dep       |
+| Protected after private members       | Protected before private                  | ESLint member ordering              |
+| `allowSignalWrites: true` in effect   | Remove the option                         | Deprecated in Angular 21+           |
 
 ---
 
@@ -292,7 +295,9 @@ For comprehensive patterns and examples, see the detailed documentation:
 **[state-management.md](docs/agents/state-management.md)**
 
 - When to use signals vs plain properties
-- Effect vs Observables decision guide
+- Immutable update patterns for signals (mutation trap)
+- Effect vs Observables vs linkedSignal decision guide
+- linkedSignal for mutable derived state
 - BehaviorSubject + combineLatest migration
 - Migrating classes that extend BehaviorSubject
 - Signal-based change detection

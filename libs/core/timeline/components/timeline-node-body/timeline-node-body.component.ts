@@ -1,6 +1,13 @@
-import { ChangeDetectionStrategy, Component, Input, NgZone, ViewEncapsulation } from '@angular/core';
+import {
+    afterNextRender,
+    ChangeDetectionStrategy,
+    Component,
+    inject,
+    Injector,
+    Input,
+    ViewEncapsulation
+} from '@angular/core';
 import { TextComponent } from '@fundamental-ngx/core/text';
-import { first } from 'rxjs/operators';
 import { TimelinePositionControlService } from '../../services/timeline-position-control.service';
 
 @Component({
@@ -26,15 +33,18 @@ export class TimelineNodeBodyComponent {
     maxLines: number;
 
     /** @hidden */
-    constructor(
-        private _ngZone: NgZone,
-        private _timelinePositionControlService: TimelinePositionControlService
-    ) {}
+    private readonly _injector = inject(Injector);
+
+    /** @hidden */
+    private readonly _timelinePositionControlService = inject(TimelinePositionControlService);
 
     /** @hidden */
     calculatePositions(): void {
-        this._ngZone.onStable.pipe(first()).subscribe(() => {
-            this._timelinePositionControlService.calculatePositions();
-        });
+        afterNextRender(
+            () => {
+                this._timelinePositionControlService.calculatePositions();
+            },
+            { injector: this._injector }
+        );
     }
 }
