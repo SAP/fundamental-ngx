@@ -57,6 +57,7 @@ const MAX_CONTENT_SIZE = 99999999;
 export type ToolbarType = 'solid' | 'transparent' | 'auto' | 'info';
 
 let toolbarTitleId = 0;
+let toolbarId = 0;
 
 export const enum OverflowPriorityEnum {
     ALWAYS = 'always',
@@ -168,6 +169,23 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
     @Input()
     @HostBinding('attr.aria-labelledby')
     ariaLabelledBy: string;
+
+    /** Toolbar Aria-describedby attribute. */
+    @Input()
+    @HostBinding('attr.aria-describedby')
+    ariaDescribedBy: string;
+
+    /** Toolbar Aria-orientation attribute. */
+    @Input()
+    @HostBinding('attr.aria-orientation')
+    ariaOrientation: 'horizontal' | 'vertical' = 'horizontal';
+
+    /**
+     * The ID of the toolbar
+     * */
+    @Input()
+    @HostBinding('attr.id')
+    id = `fd-toolbar-${toolbarId++}`;
 
     /** @hidden */
     @ViewChild('titleElement', { read: ElementRef })
