@@ -238,6 +238,104 @@ describe('MultiComboBox component', () => {
         component._popoverOpenChangeHandle(false);
         expect(unpauseFocusTrapSpy).toHaveBeenCalled();
     });
+
+    describe('search after dataSource change', () => {
+        const newDataSource = [
+            { name: 'Red', type: 'Color' },
+            { name: 'Green', type: 'Color' },
+            { name: 'Blue', type: 'Color' },
+            { name: 'Yellow', type: 'Color' },
+            { name: 'Purple', type: 'Color' }
+        ];
+
+        beforeEach(() => {
+            fixture.componentRef.setInput('displayKey', 'name');
+        });
+
+        it('should filter items when searching after dataSource is replaced', () => {
+            // Replace data source (simulates async data load, e.g. setTimeout or HTTP)
+            component.dataSourceDirective.dataSource = newDataSource;
+            fixture.detectChanges();
+
+            // Verify new data loaded
+            expect(component._suggestions().length).toBe(newDataSource.length);
+            expect(component._suggestions()[0].label).toBe('Red');
+
+            // Now search for "Gr" — should find "Green"
+            component._searchTermChanged('Gr');
+            fixture.detectChanges();
+
+            const filtered = component._suggestions();
+            expect(filtered.length).toBeGreaterThan(0);
+            expect(filtered.some((item) => item.label === 'Green')).toBe(true);
+        });
+
+        it('should return to full list after clearing search on a replaced dataSource', () => {
+            // Replace data source
+            component.dataSourceDirective.dataSource = newDataSource;
+            fixture.detectChanges();
+
+            // Search
+            component._searchTermChanged('Re');
+            fixture.detectChanges();
+            expect(component._suggestions().some((item) => item.label === 'Red')).toBe(true);
+
+            // Clear search — should show all items again
+            component._searchTermChanged('');
+            fixture.detectChanges();
+
+            expect(component._suggestions().length).toBe(newDataSource.length);
+        });
+
+        it('should filter correctly after multiple dataSource replacements', () => {
+            // First replacement
+            component.dataSourceDirective.dataSource = newDataSource;
+            fixture.detectChanges();
+
+            // Second replacement
+            const thirdDataSource = [
+                { name: 'Berlin', type: 'City' },
+                { name: 'Barcelona', type: 'City' },
+                { name: 'Tokyo', type: 'City' }
+            ];
+            component.dataSourceDirective.dataSource = thirdDataSource;
+            fixture.detectChanges();
+
+            // Search on third data source
+            component._searchTermChanged('Ber');
+            fixture.detectChanges();
+
+            const filtered = component._suggestions();
+            expect(filtered.length).toBeGreaterThan(0);
+            expect(filtered.some((item) => item.label === 'Berlin')).toBe(true);
+            expect(filtered.some((item) => item.label === 'Tokyo')).toBe(false);
+        });
+
+        it('should handle replacement with an empty data source', () => {
+            // First replace with real data
+            component.dataSourceDirective.dataSource = newDataSource;
+            fixture.detectChanges();
+
+            expect(component._suggestions().length).toBe(newDataSource.length);
+
+            // Replace with empty array
+            component.dataSourceDirective.dataSource = [];
+            fixture.detectChanges();
+
+            expect(component._suggestions().length).toBe(0);
+
+            // Replace back with real data — search should still work
+            component.dataSourceDirective.dataSource = newDataSource;
+            fixture.detectChanges();
+
+            expect(component._suggestions().length).toBe(newDataSource.length);
+
+            component._searchTermChanged('Bl');
+            fixture.detectChanges();
+
+            expect(component._suggestions().some((item) => item.label === 'Blue')).toBe(true);
+        });
+    });
 });
 
 describe('MultiComboBox component CVA', () => {
