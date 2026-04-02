@@ -69,8 +69,9 @@ export class AutoCompleteDirective {
     constructor() {
         /**
          * Fixes #10710
-         * With chinese characters inputText property update was triggered after the keyup event trigger.
-         * By ensuring that we set all properties we can proceed with stable data.
+         * With IME input (e.g. Chinese), keyup events fire during composition before the final
+         * character is committed. The _isComposing flag suppresses autocomplete logic during
+         * composition, and compositionend syncs inputText with the committed native value.
          */
         const keyupEvent = fromEvent<KeyboardEvent>(this._elementRef.nativeElement, 'keyup');
         const compositionStartEvent = fromEvent<CompositionEvent>(this._elementRef.nativeElement, 'compositionstart');
