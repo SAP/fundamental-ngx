@@ -17,10 +17,10 @@ export default {
         menuButtonAriaLabel: 'Przycisk menu'
     },
     coreActionSheet: {
-        toolbarLabel: 'Action Bar'
+        toolbarLabel: 'Pasek czynności'
     },
     coreAvatarGroup: {
-        backButton: 'Back'
+        backButton: 'Wstecz'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Ścieżka nawigacji',
@@ -59,7 +59,7 @@ export default {
         rightNavigationBtnLabel: 'Przejdź do następnej pozycji'
     },
     coreCombobox: {
-        clearButtonTitle: 'Clear input'
+        clearButtonTitle: 'Wyczyść dane wejściowe'
     },
     coreDatePicker: {
         dateInputLabel: 'Wpis daty',
@@ -79,11 +79,11 @@ export default {
         displayTypeTimeLabel: 'Czas'
     },
     coreDynamicPage: {
-        breadcrumbsLabel: 'Breadcrumbs',
+        breadcrumbsLabel: 'Ścieżka nawigacji',
         collapseLabel: 'Zwiń nagłówek',
         expandLabel: 'Rozwiń nagłówek',
         pinLabel: 'Przypnij nagłówek',
-        toggleHeader: 'Toggle header',
+        toggleHeader: 'Przełącz nagłówek',
         unpinLabel: 'Odepnij nagłówek'
     },
     coreFeedListItem: {
@@ -113,8 +113,8 @@ export default {
         announcementSuccess: 'Pasek komunikatów o powodzeniu',
         announcementWarning: 'Pasek komunikatów ostrzegawczych',
         closable: 'Możliwy do zamknięcia',
-        defaultDismissButtonText: 'Close',
-        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Zamknij',
+        defaultHiddenText: 'Pasek wiadomości',
         dismissLabel: 'Zamknij'
     },
     coreMultiComboBox: {
@@ -130,12 +130,12 @@ export default {
         multiInputAriaLabel: 'Wprowadzanie wielu wartości',
         navigateSelectionsWithArrows: 'Nawiguj po wyborach za pomocą strzałek w górę i w dół.',
         noResults: 'Brak wyników.',
-        showAll: 'Show All ({count})',
+        showAll: 'Pokaż wszystkie ({count})',
         tokensCountText: 'Zawiera łączną liczbę tokenów: {length}.'
     },
     coreNavigation: {
         mainNavigation: 'Nawigacja główna',
-        navigationPath: 'Ścieżka nawigacji'
+        navigationPath: 'Navigation Path'
     },
     coreNestedList: {
         linkItemAriaLabel: 'Pozycja drzewa {itemDetails}, {selectedDescription}'
@@ -185,7 +185,7 @@ export default {
         lastLabel: 'Ostatnia',
         nextLabel: 'Następna',
         pageLabel: 'Strona {pageNumber}',
-        previousLabel: 'Poprzednia',
+        previousLabel: 'Poprzedni',
         totalResultsLabel: '{totalCount} wyniki(-ów)'
     },
     coreProductSwitch: {
@@ -198,7 +198,7 @@ export default {
         ariaRoleDescription: 'Wskaźnik punktacji'
     },
     coreSelect: {
-        closeButton: 'Close'
+        closeButton: 'Zamknij'
     },
     coreShellbar: {
         assistiveTools: 'Narzędzia pomocnicze',
@@ -239,7 +239,7 @@ export default {
         semanticDeclineLabel: 'Oddal'
     },
     coreTabs: {
-        expandIconLabel: 'See More',
+        expandIconLabel: 'Zobacz więcej',
         tabListExpandButtonText: 'Więcej'
     },
     coreText: {
@@ -273,10 +273,10 @@ export default {
     coreTimePicker: {
         timePickerButtonLabel: 'Otwórz selektor',
         timePickerInputLabel: 'Wpis selektora czasu',
-        valueStateErrorMessage: 'Value state Error',
-        valueStateInformationMessage: 'Value state Information',
-        valueStateSuccessMessage: 'Value state Success',
-        valueStateWarningMessage: 'Value state Warning'
+        valueStateErrorMessage: 'Status wartości Błąd',
+        valueStateInformationMessage: 'Status wartości Informacja',
+        valueStateSuccessMessage: 'Status wartości Powodzenie',
+        valueStateWarningMessage: 'Status wartości Ostrzeżenie'
     },
     coreToken: {
         ariaRoleDescription: 'token',
@@ -287,7 +287,7 @@ export default {
         tokenizerLabel: 'Tokenizer'
     },
     coreToolbar: {
-        moreButton: 'More'
+        moreButton: 'Więcej'
     },
     coreTree: {
         collapse: 'Zwiń węzeł',
@@ -304,8 +304,8 @@ export default {
         menuOkText: 'OK'
     },
     coreUserMenu: {
-        closeButton: 'Close',
-        previousButton: 'Previous'
+        closeButton: 'Zamknij',
+        previousButton: 'Poprzedni'
     },
     coreWizard: {
         ariaLabel: 'Kreator'
@@ -389,7 +389,7 @@ export default {
         countListResultsSingular: 'Pozycja listy wyników: 1'
     },
     platformFeedInput: {
-        sendButton: 'Send',
+        sendButton: 'Wyślij',
         userTitle: 'Użytkownik'
     },
     platformIconTabBar: {
@@ -402,8 +402,8 @@ export default {
         loadingAriaLabel: 'ładowanie'
     },
     platformMessagePopover: {
-        allErrors: 'Wszystkie',
-        backButton: 'Go back',
+        allErrors: 'Wszystko',
+        backButton: 'Wróć',
         defaultErrors: {
             email: 'E-mail jest nieprawidłowy',
             max: 'Pole przekracza maksymalną wartość',
@@ -427,20 +427,20 @@ export default {
         detailsActionAriaLabel: 'szczegóły'
     },
     platformSearchField: {
-        allButtonLabel: 'All',
-        cancelLabel: 'Cancel',
-        clearButtonTitle: 'Wyczyść',
-        counterLabel: 'Total results: {count}',
-        deleteButtonAriaLabel: 'Remove',
-        deleteButtonTitle: 'Remove Suggestion',
-        groupHeader: 'Group Header',
+        allButtonLabel: 'Wszystko',
+        cancelLabel: 'Anuluj',
+        clearButtonTitle: 'Wyczyść wyszukiwanie',
+        counterLabel: 'Łącznie wyników: {count}',
+        deleteButtonAriaLabel: 'Usuń',
+        deleteButtonTitle: 'Usuń sugestię',
+        groupHeader: 'Nagłówek grupy',
         searchInputLabel: 'Wyszukiwanie',
         searchSuggestionMessage: 'Liczba znalezionych podpowiedzi: {count}.',
         searchSuggestionNavigateMessage: 'użyj strzałek w górę i w dół do nawigacji',
-        selectScopeLabel: 'Select scope',
-        selectStateMessageLabel: 'Select',
-        submitButtonTitle: 'Wyszukiwanie',
-        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Wybierz zakres',
+        selectStateMessageLabel: 'Wybierz',
+        submitButtonTitle: 'Szukaj (Enter)',
+        suggestionsWrapperAriaLabel: 'Sugestie',
         synchronizeButtonTitle: 'Synchronizuj'
     },
     platformSelect: {
@@ -484,7 +484,7 @@ export default {
         selectFiltersHeader: 'Filtry',
         selectFiltersSubmitButtonLabel: 'Przejdź',
         settingsCategoryActive: 'Aktywne',
-        settingsCategoryAll: 'Wszystkie',
+        settingsCategoryAll: 'Wszystko',
         settingsCategoryMandatory: 'Obowiązkowe',
         settingsCategoryVisible: 'Widoczne',
         settingsCategoryVisibleAndActive: 'Widoczne i aktywne',
@@ -492,7 +492,7 @@ export default {
         submitButtonLabel: 'Przejdź'
     },
     platformSplitMenuButton: {
-        groupLabel: 'Split button group'
+        groupLabel: 'Podziel grupę przycisków'
     },
     platformStandardListItem: {
         deleteActionAriaLabel: 'usuń',
@@ -705,7 +705,7 @@ export default {
         successButtonLabel: 'OK'
     },
     platformWizardGenerator: {
-        stepsLabel: 'Wizard Steps',
+        stepsLabel: 'Kroki kreatora',
         summarySectionEditStep: 'Edytuj'
     },
     segmentedButton: {

@@ -16,10 +16,10 @@ export default {
         menuButtonAriaLabel: 'Menyknapp'
     },
     coreActionSheet: {
-        toolbarLabel: 'Action Bar'
+        toolbarLabel: 'Åtgärdsfält'
     },
     coreAvatarGroup: {
-        backButton: 'Back'
+        backButton: 'Tillbaka'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Tillämpade datafiltreringssteg',
@@ -58,7 +58,7 @@ export default {
         rightNavigationBtnLabel: 'Gå till nästa artikel'
     },
     coreCombobox: {
-        clearButtonTitle: 'Clear input'
+        clearButtonTitle: 'Rensa inmatning'
     },
     coreDatePicker: {
         dateInputLabel: 'Datuminmatning',
@@ -82,7 +82,7 @@ export default {
         collapseLabel: 'Komprimera huvud',
         expandLabel: 'Expandera huvud',
         pinLabel: 'Fäst huvud',
-        toggleHeader: 'Toggle header',
+        toggleHeader: 'Växla huvud',
         unpinLabel: 'Lossa huvud'
     },
     coreFeedListItem: {
@@ -112,8 +112,8 @@ export default {
         announcementSuccess: 'Resultatmeddelanderad',
         announcementWarning: 'Varningsmeddelanderad',
         closable: 'Kan stängas',
-        defaultDismissButtonText: 'Close',
-        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Stäng',
+        defaultHiddenText: 'Meddelanderad',
         dismissLabel: 'Stäng'
     },
     coreMultiComboBox: {
@@ -129,12 +129,12 @@ export default {
         multiInputAriaLabel: 'Inmatning av flera värden',
         navigateSelectionsWithArrows: 'Navigera urval med upp- och nedpilarna.',
         noResults: 'Inga resultat.',
-        showAll: 'Show All ({count})',
+        showAll: 'Visa alla ({count})',
         tokensCountText: 'Innehåller totalt antal token: {length}.'
     },
     coreNavigation: {
         mainNavigation: 'Huvudnavigering',
-        navigationPath: 'Navigeringssökväg'
+        navigationPath: 'Navigation Path'
     },
     coreNestedList: {
         linkItemAriaLabel: 'Trädelement {itemDetails}, {selectedDescription}'
@@ -197,7 +197,7 @@ export default {
         ariaRoleDescription: 'Betygsindikator'
     },
     coreSelect: {
-        closeButton: 'Close'
+        closeButton: 'Stäng'
     },
     coreShellbar: {
         assistiveTools: 'Hjälpverktyg',
@@ -238,7 +238,7 @@ export default {
         semanticDeclineLabel: 'Avslå'
     },
     coreTabs: {
-        expandIconLabel: 'See More',
+        expandIconLabel: 'Visa mer',
         tabListExpandButtonText: 'Fler'
     },
     coreText: {
@@ -272,10 +272,10 @@ export default {
     coreTimePicker: {
         timePickerButtonLabel: 'Öppna väljare',
         timePickerInputLabel: 'Inmatning för val av klockslag',
-        valueStateErrorMessage: 'Value state Error',
-        valueStateInformationMessage: 'Value state Information',
-        valueStateSuccessMessage: 'Value state Success',
-        valueStateWarningMessage: 'Value state Warning'
+        valueStateErrorMessage: 'Värdestatus Fel',
+        valueStateInformationMessage: 'Värdestatus Information',
+        valueStateSuccessMessage: 'Värdestatus OK',
+        valueStateWarningMessage: 'Värdestatus Varning'
     },
     coreToken: {
         ariaRoleDescription: 'Token',
@@ -286,7 +286,7 @@ export default {
         tokenizerLabel: 'Tokenizer'
     },
     coreToolbar: {
-        moreButton: 'More'
+        moreButton: 'Mer'
     },
     coreTree: {
         collapse: 'Komprimera nod',
@@ -303,8 +303,8 @@ export default {
         menuOkText: 'OK'
     },
     coreUserMenu: {
-        closeButton: 'Close',
-        previousButton: 'Previous'
+        closeButton: 'Stäng',
+        previousButton: 'Föregående'
     },
     coreWizard: {
         ariaLabel: 'Guide'
@@ -388,7 +388,7 @@ export default {
         countListResultsSingular: '1 resultatlistobjekt'
     },
     platformFeedInput: {
-        sendButton: 'Send',
+        sendButton: 'Skicka',
         userTitle: 'Användare'
     },
     platformIconTabBar: {
@@ -402,7 +402,7 @@ export default {
     },
     platformMessagePopover: {
         allErrors: 'Alla',
-        backButton: 'Go back',
+        backButton: 'Gå tillbaka',
         defaultErrors: {
             email: 'Ogiltig e-post',
             max: 'Fältet överskrider maximalt värde',
@@ -426,20 +426,20 @@ export default {
         detailsActionAriaLabel: 'detalj'
     },
     platformSearchField: {
-        allButtonLabel: 'All',
-        cancelLabel: 'Cancel',
-        clearButtonTitle: 'Rensa',
-        counterLabel: 'Total results: {count}',
-        deleteButtonAriaLabel: 'Remove',
-        deleteButtonTitle: 'Remove Suggestion',
-        groupHeader: 'Group Header',
+        allButtonLabel: 'Alla',
+        cancelLabel: 'Avbryt',
+        clearButtonTitle: 'Rensa sökning',
+        counterLabel: 'Totalt antal resultat: {count}',
+        deleteButtonAriaLabel: 'Ta bort',
+        deleteButtonTitle: 'Ta bort förslag',
+        groupHeader: 'Grupphuvud',
         searchInputLabel: 'Sök',
         searchSuggestionMessage: '{count} förslag hittades.',
         searchSuggestionNavigateMessage: 'använd upp- och nedpilarna för att navigera',
-        selectScopeLabel: 'Select scope',
-        selectStateMessageLabel: 'Select',
-        submitButtonTitle: 'Sök',
-        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Välj omfattning',
+        selectStateMessageLabel: 'Välj',
+        submitButtonTitle: 'Sök (Retur)',
+        suggestionsWrapperAriaLabel: 'Förslag',
         synchronizeButtonTitle: 'Synkronisera'
     },
     platformSelect: {
@@ -491,7 +491,7 @@ export default {
         submitButtonLabel: 'Kör'
     },
     platformSplitMenuButton: {
-        groupLabel: 'Split button group'
+        groupLabel: 'Dela knappgrupp'
     },
     platformStandardListItem: {
         deleteActionAriaLabel: 'ta bort',
@@ -704,7 +704,7 @@ export default {
         successButtonLabel: 'OK'
     },
     platformWizardGenerator: {
-        stepsLabel: 'Wizard Steps',
+        stepsLabel: 'Guidesteg',
         summarySectionEditStep: 'Redigera'
     },
     segmentedButton: {

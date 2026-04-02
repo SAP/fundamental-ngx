@@ -8,7 +8,8 @@ import {
     Output,
     Renderer2,
     ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    input
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { warnOnce } from '@fundamental-ngx/cdk/utils';
@@ -16,6 +17,8 @@ import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FormControlComponent } from '@fundamental-ngx/core/form';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+
+let feedInputTextareaId = 0;
 
 /**
  * @deprecated
@@ -60,8 +63,14 @@ export class FeedInputComponent implements AfterViewInit {
     @ViewChild('textAreaElement', { read: ElementRef })
     textarea: ElementRef;
 
+    /** Value for aria label */
+    ariaLabel = input<string>();
+
     /** @hidden Textarea entered value */
     value: string | null;
+
+    /** @hidden Unique id for the textarea element */
+    textareaId = `fdp-feed-input-textarea-${feedInputTextareaId++}`;
 
     /** @hidden */
     constructor(private _renderer: Renderer2) {

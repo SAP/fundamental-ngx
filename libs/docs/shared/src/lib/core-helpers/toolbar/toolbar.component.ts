@@ -14,10 +14,10 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 import { CompleteThemeDefinition, ThemingService } from '@fundamental-ngx/core/theming';
 
-import '@sap-ui/common-css/dist/sap-colors.css';
-import '@sap-ui/common-css/dist/sap-display.css';
-import '@sap-ui/common-css/dist/sap-flex.css';
-import '@sap-ui/common-css/dist/sap-margin.css';
+import '@fundamental-styles/common-css/dist/sap-colors.css';
+import '@fundamental-styles/common-css/dist/sap-display.css';
+import '@fundamental-styles/common-css/dist/sap-flex.css';
+import '@fundamental-styles/common-css/dist/sap-margin.css';
 
 import { NgTemplateOutlet } from '@angular/common';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';

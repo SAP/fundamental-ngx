@@ -16,11 +16,11 @@ import 'fundamental-styles/dist/panel.css';
 import 'fundamental-styles/dist/section.css';
 
 // Import SAP UI Common CSS
-import '@sap-ui/common-css/dist/sap-flex.css';
-import '@sap-ui/common-css/dist/sap-margin.css';
-import '@sap-ui/common-css/dist/sap-padding.css';
-import '@sap-ui/common-css/dist/sap-position.css';
-import '@sap-ui/common-css/dist/sap-text.css';
+import '@fundamental-styles/common-css/dist/sap-flex.css';
+import '@fundamental-styles/common-css/dist/sap-margin.css';
+import '@fundamental-styles/common-css/dist/sap-padding.css';
+import '@fundamental-styles/common-css/dist/sap-position.css';
+import '@fundamental-styles/common-css/dist/sap-text.css';
 
 @Component({
     selector: 'ui5-slider-sample',

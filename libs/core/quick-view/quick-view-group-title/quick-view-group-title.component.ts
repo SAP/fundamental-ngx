@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, Input } from '@angular/core';
+import { HeadingLevel } from '@fundamental-ngx/core/shared';
 
 let groupTitleUniqueId = 0;
 
@@ -12,4 +13,7 @@ export class QuickViewGroupTitleComponent {
     /** Id of the quick view group title. */
     @Input()
     id: string = 'fd-quick-view-group-title-' + groupTitleUniqueId++;
+
+    /** Heading level of the title. */
+    headingLevel = input<HeadingLevel | undefined | null>(undefined);
 }

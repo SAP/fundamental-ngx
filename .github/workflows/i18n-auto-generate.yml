@@ -63,7 +63,7 @@ jobs:
                   # Validate file paths (more specific regex - no subdirectories)
                   INVALID_FILES=""
                   for file in $FILES; do
-                      if [[ ! "$file" =~ ^libs/i18n/src/lib/translations/[^/]+\.properties$ ]]; then
+                      if [[ ! "$file" =~ ^libs/i18n/src/lib/translations/[^/]+\.(properties|ts)$ ]]; then
                           INVALID_FILES="$INVALID_FILES\n  - $file"
                       fi
                   done

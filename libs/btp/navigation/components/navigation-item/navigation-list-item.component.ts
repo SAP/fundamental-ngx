@@ -2,35 +2,36 @@ import { FocusKeyManager } from '@angular/cdk/a11y';
 import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 import { NgClass, NgTemplateOutlet } from '@angular/common';
 import {
+    afterNextRender,
     AfterViewInit,
+    booleanAttribute,
     ChangeDetectionStrategy,
     Component,
+    computed,
     ContentChild,
     ContentChildren,
     DestroyRef,
     Directive,
+    effect,
     ElementRef,
+    inject,
+    Injector,
     Input,
-    NgZone,
+    input,
     OnDestroy,
     QueryList,
+    signal,
     TemplateRef,
     ViewChild,
-    ViewEncapsulation,
-    booleanAttribute,
-    computed,
-    effect,
-    inject,
-    input,
-    signal,
-    viewChild
+    viewChild,
+    ViewEncapsulation
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { HasElementRef, KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
 import { PopoverBodyComponent, PopoverComponent } from '@fundamental-ngx/core/popover';
 import { Placement } from '@fundamental-ngx/core/shared';
 import { FD_LANGUAGE_SIGNAL, TranslationResolver } from '@fundamental-ngx/i18n';
-import { Observable, asyncScheduler, filter, observeOn, startWith, take } from 'rxjs';
+import { filter, startWith } from 'rxjs';
 import { NavigationListItemDirective } from '../../directives/navigation-list-item-ref.directive';
 import { FdbNavigationContentContainer } from '../../models/navigation-content-container.class';
 import { FdbNavigationItemLink } from '../../models/navigation-item-link.class';
@@ -192,9 +193,12 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
     /** Renderer template reference. */
     @ViewChild('renderer')
     set renderer(renderer: TemplateRef<any> | undefined) {
-        this._onZoneStable().subscribe(() => {
-            this.renderer$.set(renderer || null);
-        });
+        afterNextRender(
+            () => {
+                this.renderer$.set(renderer || null);
+            },
+            { injector: this._injector }
+        );
     }
 
     /** ID for the navigation list item. Default one is assigned if not provided. */
@@ -468,7 +472,7 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
     private _keyManager: Nullable<FocusKeyManager<FdbNavigationListItem>>;
 
     /** @hidden */
-    private readonly _zone = inject(NgZone);
+    private readonly _injector = inject(Injector);
 
     /** @hidden */
     private readonly _langSignal = inject(FD_LANGUAGE_SIGNAL);
@@ -765,62 +769,68 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
 
         this.popoverOpen$.set(isOpen);
         if (isOpen) {
-            this._onZoneStable().subscribe(() => {
-                // Force update of tabindex for all child links before focusing
-                this._ensureChildTabindexUpdated();
-                setTimeout(() => {
-                    // Try to use the FocusKeyManager first
-                    if (this._keyManager) {
-                        this._keyManager.setActiveItem(0);
-                        return;
-                    }
-
-                    // Fallback: Use component data structures to find the first focusable link
-                    const firstFocusableLink = this._links.find(
-                        (link) => link.inPopover && link.elementRef?.nativeElement
-                    );
-
-                    if (firstFocusableLink) {
-                        firstFocusableLink.elementRef.nativeElement.focus();
-                        return;
-                    }
-
-                    // Alternative: Use listItems to find first item's link
-                    const firstListItem = this.listItems$().find((item) => item && !item.skipNavigation);
-                    if (firstListItem) {
-                        const link = firstListItem.link$();
-                        if (link?.elementRef?.nativeElement) {
-                            link.elementRef.nativeElement.focus();
+            afterNextRender(
+                () => {
+                    // Force update of tabindex for all child links before focusing
+                    this._ensureChildTabindexUpdated();
+                    setTimeout(() => {
+                        // Try to use the FocusKeyManager first
+                        if (this._keyManager) {
+                            this._keyManager.setActiveItem(0);
                             return;
                         }
-                    }
 
-                    // Last resort: use the popover's built-in focus management
-                    try {
-                        const popoverBody = popover.popoverBody();
-                        popoverBody?._focusFirstTabbableElement(true);
-                    } catch (error) {
-                        console.error('Error focusing in popover:', error);
+                        // Fallback: Use component data structures to find the first focusable link
+                        const firstFocusableLink = this._links.find(
+                            (link) => link.inPopover && link.elementRef?.nativeElement
+                        );
 
-                        const popoverBody = popover.popoverBody();
-                        const popoverBodyElement = popoverBody?._elementRef?.nativeElement;
-                        if (popoverBodyElement) {
-                            const firstFocusableElement = popoverBodyElement.querySelector(
-                                'a, button, [tabindex]:not([tabindex="-1"])'
-                            ) as HTMLElement;
-                            if (firstFocusableElement) {
-                                firstFocusableElement.focus();
+                        if (firstFocusableLink) {
+                            firstFocusableLink.elementRef.nativeElement.focus();
+                            return;
+                        }
+
+                        // Alternative: Use listItems to find first item's link
+                        const firstListItem = this.listItems$().find((item) => item && !item.skipNavigation);
+                        if (firstListItem) {
+                            const link = firstListItem.link$();
+                            if (link?.elementRef?.nativeElement) {
+                                link.elementRef.nativeElement.focus();
+                                return;
                             }
                         }
-                    }
-                }, 0);
-            });
+
+                        // Last resort: use the popover's built-in focus management
+                        try {
+                            const popoverBody = popover.popoverBody();
+                            popoverBody?._focusFirstTabbableElement(true);
+                        } catch (error) {
+                            console.error('Error focusing in popover:', error);
+
+                            const popoverBody = popover.popoverBody();
+                            const popoverBodyElement = popoverBody?._elementRef?.nativeElement;
+                            if (popoverBodyElement) {
+                                const firstFocusableElement = popoverBodyElement.querySelector(
+                                    'a, button, [tabindex]:not([tabindex="-1"])'
+                                ) as HTMLElement;
+                                if (firstFocusableElement) {
+                                    firstFocusableElement.focus();
+                                }
+                            }
+                        }
+                    }, 0);
+                },
+                { injector: this._injector }
+            );
         } else {
             // When popover closes, return focus to the parent link (for snapped state)
             if (this.navigation.isSnapped$()) {
-                this._onZoneStable().subscribe(() => {
-                    this.focusLink();
-                });
+                afterNextRender(
+                    () => {
+                        this.focusLink();
+                    },
+                    { injector: this._injector }
+                );
             }
         }
     }
@@ -956,15 +966,5 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
             this.popoverOpen$.set(false);
             this.link?.elementRef.nativeElement.focus();
         }
-    }
-
-    /** @hidden */
-    private _onZoneStable(): Observable<void> {
-        return this._zone.onStable.pipe(
-            startWith(this._zone.isStable),
-            observeOn(asyncScheduler),
-            take(1),
-            takeUntilDestroyed(this._destroyRef)
-        );
     }
 }
