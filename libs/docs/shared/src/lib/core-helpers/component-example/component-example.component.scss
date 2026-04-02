@@ -1,109 +1,47 @@
-component-example {
+// =============================================================================
+// Example card — elevated container for live component demos
+// =============================================================================
+
+.docs-tile.docs-component {
+    border: 0.0625rem solid var(--sapGroup_ContentBorderColor);
+    border-radius: 0.75rem 0.75rem 0 0;
+    background: var(--sapGroup_ContentBackground);
+    box-shadow: var(--sapContent_Shadow0);
     display: block;
+    overflow: hidden;
+    transition: background-color 250ms ease;
 }
 
-.docs-example-card {
-    border: 0.0625rem solid var(--sapGroup_ContentBorderColor);
-    border-radius: var(--sapField_BorderCornerRadius) var(--sapField_BorderCornerRadius) 0 0;
-    background-color: var(--sapBaseColor);
-    transition: background-color 0.25s ease;
-    position: relative;
+.docs-tile.docs-tile-example-background {
+    background-color: var(--sapBackgroundColor);
+    color: var(--sapTextColor);
+}
 
-    &--bg {
-        background-color: var(--sapBackgroundColor);
-        color: var(--sapTextColor);
+.docs-tile-content-example {
+    padding: 1.5rem;
+}
+
+// ── Feature toggle row (RTL + background switches) ─────────
+.component-example__features {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 1rem;
+    background: color-mix(in srgb, var(--sapGroup_ContentBackground) 50%, var(--sapBackgroundColor));
+    border-block-end: 0.0625rem solid var(--sapGroup_ContentBorderColor);
+    font-family: var(--sapFontFamily);
+    font-size: var(--sapFontSmallSize);
+
+    .fd-switch {
+        margin-inline-end: 0;
     }
+}
 
-    &__content {
-        padding: var(--sapContent_Space_M);
+rtl-switch {
+    padding-inline-end: 0;
+}
 
-        &--responsive {
-            display: flex;
-            justify-content: center;
-            background-image: radial-gradient(
-                circle,
-                var(--sapGroup_ContentBorderColor) 0.0625rem,
-                transparent 0.0625rem
-            );
-            background-size: 1rem 1rem;
-            min-height: 6rem;
-        }
-    }
-
-    &__viewport {
-        width: 100%;
-        transition: max-width 300ms cubic-bezier(0.4, 0, 0.2, 1);
-
-        .docs-example-card__content--responsive & {
-            resize: horizontal;
-            overflow: hidden;
-            border-right: 0.125rem dashed var(--sapGroup_ContentBorderColor);
-            background-color: var(--sapBaseColor);
-        }
-    }
-
-    &__actions {
-        position: absolute;
-        top: -0.0625rem;
-        right: 0.75rem;
-        transform: translateY(-50%);
-        display: flex;
-        align-items: center;
-        gap: 0;
-        z-index: 1;
-        background-color: var(--sapGroup_ContentBackground);
-        border: 0.0625rem solid var(--sapGroup_ContentBorderColor);
-        border-radius: 0.375rem;
-        overflow: hidden;
-        box-shadow: var(--sapContent_Shadow0);
-    }
-
-    &__separator {
-        width: 0.0625rem;
-        height: 1.125rem;
-        background-color: var(--sapGroup_ContentBorderColor);
-    }
-
-    &__action {
-        appearance: none;
-        border: none;
-        background: transparent;
-        color: var(--sapContent_NonInteractiveIconColor);
-        font-family: var(--sapFontFamily);
-        font-size: 0.8125rem;
-        font-weight: 700;
-        letter-spacing: 0.03em;
-        text-transform: uppercase;
-        line-height: 1;
-        padding: 0.5rem 0.75rem;
-        cursor: pointer;
-        transition:
-            background-color 150ms ease,
-            color 150ms ease;
-
-        &--icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0.4375rem 0.5625rem;
-
-            fd-icon {
-                font-size: 0.875rem;
-            }
-        }
-
-        &:hover {
-            background-color: var(--sapList_Hover_Background);
-            color: var(--sapContent_IconColor);
-        }
-
-        &--active {
-            color: var(--sapSelectedColor);
-            background-color: var(--sapList_SelectionBackgroundColor);
-
-            &:hover {
-                background-color: var(--sapList_Hover_SelectionBackground);
-            }
-        }
-    }
+span.fd-badge,
+span.fd-status-label {
+    margin-inline-end: 1rem;
 }

@@ -18,15 +18,15 @@ import { CURRENT_LIB, Libraries } from '../../utilities/libraries';
     selector: 'fd-docs-section-title',
     template: `
         <h2 [id]="id" #title class="docs-header-link">
+            <ng-content></ng-content>
             <a
                 class="docs-markdown-a"
                 [attr.aria-describedby]="id"
                 [routerLink]="'/' + currentLibrary + '/' + componentName"
                 [fragment]="id"
             >
-                <fd-icon glyph="chain-link"></fd-icon>
+                <fd-icon glyph="number-sign"></fd-icon>
             </a>
-            <ng-content></ng-content>
         </h2>
     `,
     styleUrls: ['./docs-section-title.component.scss'],

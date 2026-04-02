@@ -7,6 +7,7 @@
 @include cdk.a11y-visually-hidden();
 
 $gutter-size: 1rem;
+$doc-font-family-mono: 'Fira Code', 'Cascadia Code', Consolas, monospace;
 
 html,
 body {
@@ -27,28 +28,19 @@ body {
 }
 
 .container {
-    max-width: 60rem;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    max-width: 960px;
+    margin-inline: auto;
+    padding-inline: 1rem;
 }
 
 .row {
     display: flex;
-    margin-right: -1rem;
-    margin-left: -1rem;
+    margin-inline: -1rem;
 }
 
 .col {
-    padding-right: 1rem;
-    padding-left: 1rem;
+    padding-inline: 1rem;
     flex: 1;
-}
-
-.navbar {
-    background-color: var(--sapPageHeader_Background);
-    margin-bottom: 1.25rem;
 }
 
 .nav {
@@ -56,24 +48,24 @@ body {
 }
 
 .nav-item {
-    margin-bottom: 0;
+    margin-block-end: 0;
     display: inline-block;
     text-decoration: none;
 }
 
 .nav-link {
     display: block;
-    padding: 0.625rem 1rem;
+    padding: 0.625rem 0.9375rem;
     text-decoration: none;
 }
 
 .code-snippet {
-    padding: 0.15rem;
-    background: var(--sapContent_ForegroundColor);
-}
-
-h2 {
-    font-weight: 550;
+    padding: 0.125rem 0.375rem;
+    background: color-mix(in srgb, var(--sapBackgroundColor) 80%, var(--sapGroup_ContentBorderColor));
+    border: 0.0625rem solid var(--sapGroup_ContentBorderColor);
+    border-radius: 0.25rem;
+    font-family: $doc-font-family-mono;
+    font-size: 0.85em;
 }
 
 fd-card {
@@ -84,50 +76,38 @@ fd-card {
     width: 95%;
 }
 
-.fd-scroll-spy-example-icon-class {
+.doc-scroll-spy-example-icon-class {
     position: relative;
     display: inline-block;
-    margin-right: 0.25rem;
-
-    @at-root {
-        [dir='rtl'] &,
-        &[dir='rtl'] {
-            margin-right: 0;
-            margin-left: 0.25rem;
-            transform: rotate(180deg);
-            bottom: 0.125rem;
-        }
-    }
+    margin-inline-end: 0.25rem;
 }
 
 .middle-marker-container {
-    @at-root {
-        [dir='rtl'] &,
-        &[dir='rtl'] {
-            right: initial !important;
-            left: 0 !important;
-        }
-    }
+    inset-inline-end: initial !important;
+    inset-inline-start: 0 !important;
 }
 
 pre {
     margin: 0;
     white-space: pre-wrap;
-    white-space: -moz-pre-wrap;
-    white-space: -o-pre-wrap;
     word-wrap: break-word;
     display: flex;
-    padding: 1rem;
-    font-size: 0.8rem;
-    line-height: 1.42857143;
+    padding: 1.25rem;
+    font-size: var(--sapFontSmallSize);
+    line-height: 1.6;
     word-break: break-all;
+    font-family: $doc-font-family-mono;
 
     code {
         display: block;
     }
 }
 
-.fd-centered-content {
+.docs-tile-content-example {
+    padding: 1.5rem;
+}
+
+.doc-centered-content {
     text-align: center;
 }
 
@@ -136,52 +116,218 @@ pre {
     pointer-events: none;
 }
 
-/** Highlight overrides */
-
-.hljs-tag,
-.hljs-name {
-    color: var(--sapInformativeColor);
-}
-
-.hljs-keyword {
-    color: var(--sapLinkColor);
-}
-
-.hljs-comment {
-    color: var(--sapPositiveColor);
-}
-
-.hljs-attr {
-    color: var(--sapAccentColor7);
-}
-
-.hljs-string {
-    color: var(--sapNegativeColor);
-}
-
-.hljs-meta {
-    color: var(--sapAccentColor6);
-}
-
 .side-nav__search {
     padding: 0.625rem 0.625rem 0 0.625rem;
 }
 
-.fd-playground--markdown,
+.doc-playground--markdown,
 .api-main-header,
-.fd-tsdoc-container {
+.doc-tsdoc-container {
     color: var(--sapTextColor);
 }
 
-.fd-tsdoc-container .tsd-panel {
-    background-color: var(--sapBaseColor);
-    box-shadow: var(--sapContent_Shadow0);
+// =============================================================================
+// TypeDoc API — Modern SAP-themed overrides
+// =============================================================================
+
+.doc-tsdoc-container {
+    font-family: var(--sapFontFamily);
+    background: transparent !important;
+
+    // ── Panels (individual member cards) ───────────────────────
+    .tsd-panel {
+        margin-block: 1.25rem 0;
+        padding: 1.25rem;
+        background: var(--sapGroup_ContentBackground);
+        border: 0.0625rem solid var(--sapGroup_ContentBorderColor);
+        border-radius: 0.75rem;
+        box-shadow: none;
+
+        & > h1,
+        & > h2,
+        & > h3 {
+            margin: 1.25rem -1.25rem 0.75rem;
+            padding: 0 1.25rem 0.75rem;
+            border-block-end: 0.0625rem solid var(--sapGroup_ContentBorderColor);
+            color: var(--sapTitleColor);
+
+            &:first-child {
+                margin-block-start: 0;
+            }
+        }
+
+        & > .tsd-signature {
+            margin-inline: -1.25rem;
+            border-radius: 0;
+            border-inline-width: 0;
+        }
+
+        & > .tsd-signatures {
+            margin-inline: -1.25rem;
+            border-radius: 0;
+            border-inline-width: 0;
+        }
+
+        table {
+            margin-block-start: 0.75rem;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 0.375rem;
+            overflow: hidden;
+
+            th,
+            td {
+                padding: 0.5rem 0.875rem;
+                border: 0.0625rem solid var(--sapGroup_ContentBorderColor);
+            }
+
+            th {
+                font-weight: 600;
+                background: color-mix(in srgb, var(--sapGroup_ContentBackground) 80%, var(--sapBackgroundColor));
+            }
+
+            tr {
+                background: var(--sapGroup_ContentBackground);
+                border-block-start: 0.0625rem solid var(--sapGroup_ContentBorderColor);
+
+                &:nth-child(2n) {
+                    background: color-mix(in srgb, var(--sapGroup_ContentBackground) 92%, var(--sapBackgroundColor));
+                }
+            }
+        }
+    }
+
+    // ── Panel groups (section containers: Properties, Methods, etc.) ──
+    .tsd-panel-group {
+        margin-block: 2.5rem 0;
+
+        & > h1,
+        & > h2,
+        & > h3 {
+            padding-inline-start: 0.75rem;
+            padding-inline-end: 0;
+            border-inline-start: 0.1875rem solid var(--sapBrandColor);
+            font-size: var(--sapFontHeader3Size);
+            font-weight: 600;
+            color: var(--sapTitleColor);
+        }
+    }
+
+    // ── Signatures (code-style type definitions) ───────────────
+    .tsd-signature {
+        margin-block-end: 0.75rem;
+        padding: 0.75rem 1rem;
+        border: 0.0625rem solid var(--sapGroup_ContentBorderColor);
+        border-radius: 0.375rem;
+        background: color-mix(in srgb, var(--sapBackgroundColor) 80%, var(--sapGroup_ContentBorderColor));
+        font-family: $doc-font-family-mono;
+        font-size: var(--sapFontSmallSize);
+        line-height: 1.6;
+        color: var(--sapTextColor);
+    }
+
+    .tsd-signature-type {
+        color: var(--sapBrandColor);
+        font-style: italic;
+        font-weight: normal;
+    }
+
+    .tsd-signature-symbol {
+        color: var(--sapContent_NonInteractiveIconColor);
+        font-weight: normal;
+    }
+
+    // ── Signature groups (overloads container) ─────────────────
+    .tsd-signatures {
+        padding: 0;
+        margin-block-end: 0.75rem;
+        border: 0.0625rem solid var(--sapGroup_ContentBorderColor);
+        border-radius: 0.375rem;
+        overflow: hidden;
+
+        .tsd-signature {
+            margin: 0;
+            border-radius: 0;
+            border-inline-width: 0;
+            border-block-start-width: 0.0625rem;
+            border-block-start-color: var(--sapGroup_ContentBorderColor);
+
+            &:first-child {
+                border-block-start-width: 0;
+            }
+
+            &.current {
+                background: color-mix(in srgb, var(--sapSelectedColor) 8%, var(--sapGroup_ContentBackground));
+            }
+        }
+    }
+
+    // ── Sources (file path links) ──────────────────────────────
+    .tsd-sources {
+        font-size: var(--sapFontSmallSize);
+        color: var(--sapContent_LabelColor);
+        margin-block: 0 0.75rem;
+
+        a {
+            color: var(--sapLinkColor);
+            text-decoration: none;
+
+            &.is-hover,
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    // ── Hierarchy ──────────────────────────────────────────────
+    .tsd-hierarchy {
+        list-style: square;
+        padding-inline-start: 1.25rem;
+        margin: 0;
+
+        .target {
+            font-weight: bold;
+            color: var(--sapBrandColor);
+        }
+    }
+
+    // ── Index panel (column layout) ────────────────────────────
+    .tsd-index-panel {
+        h3 {
+            margin: 0 -1.25rem 0.75rem;
+            padding: 0 1.25rem 0.75rem;
+            border-block-end: 0.0625rem solid var(--sapGroup_ContentBorderColor);
+            color: var(--sapTitleColor);
+        }
+    }
+
+    // ── Comment tags (@deprecated, @example, etc.) ─────────────
+    dl.tsd-comment-tags {
+        dt {
+            border-inline-start: 0.125rem solid var(--sapBrandColor);
+            padding-inline-start: 0.5rem;
+            color: var(--sapTitleColor);
+        }
+    }
+
+    // ── Code within API docs ───────────────────────────────────
+    code,
+    pre {
+        font-family: $doc-font-family-mono;
+    }
+
+    code {
+        background: color-mix(in srgb, var(--sapBackgroundColor) 80%, var(--sapGroup_ContentBorderColor));
+        padding: 0.0625rem 0.25rem;
+        border-radius: 0.1875rem;
+        font-size: var(--sapFontSmallSize);
+    }
 }
 
-.fd-playground--markdown {
+.doc-playground--markdown {
     #fundamental-ngx {
-        margin-top: calc(2rem + 0.625rem);
-        font-size: 2.2rem;
+        margin-block-start: 2.625rem;
+        font-size: var(--sapFontHeader1Size);
     }
 
     a {
@@ -190,47 +336,46 @@ pre {
 
     ol,
     ul {
-        padding-left: 2rem;
+        padding-inline-start: 2rem;
     }
 
     pre {
         margin: 1.5rem 0;
         background-color: var(--sapBackgroundColor) !important;
         white-space: pre-wrap;
-        white-space: -moz-pre-wrap;
-        white-space: -o-pre-wrap;
         word-wrap: break-word;
         display: flex;
-        padding: 1rem;
-        font-size: 0.8rem;
-        line-height: 1.42857143;
+        padding: 1.25rem;
+        font-size: var(--sapFontSmallSize);
+        line-height: 1.6;
         color: var(--sapTextColor);
         word-break: break-all;
-        border: 1px solid var(--sapNeutralBorderColor);
-        border-radius: 0.25rem;
+        border: 0.0625rem solid var(--sapGroup_ContentBorderColor);
+        border-radius: 0.5rem;
+
         code {
             display: block;
         }
     }
+
+    & > h1 {
+        font-size: var(--sapFontHeader1Size);
+        line-height: 1;
+    }
+
+    & > p {
+        margin-block-end: 1.5rem;
+        font-size: var(--sapFontLargeSize);
+        font-weight: 400;
+    }
 }
 
-.fd-playground--markdown > h1 {
-    font-size: 2.2rem;
-    line-height: 1;
-}
-
-.fd-playground--markdown > p {
-    margin-bottom: 1.5rem;
-    font-size: 1rem;
-    font-weight: 300;
-}
-
-.fd-flex-row {
+.doc-flex-row {
     display: flex;
     flex-direction: row;
 }
 
-.fd-flex-col {
+.doc-flex-col {
     display: flex;
     flex-direction: column;
 }
@@ -246,25 +391,5 @@ body {
 }
 
 .fd-info-label + .fd-info-label {
-    margin-left: 0.3rem;
-}
-
-.fd-docs--toolbar {
-    .fd-shellbar__product {
-        margin: 0 0.5rem;
-    }
-
-    .fd-shellbar--s {
-        .fd-shellbar__product {
-            margin: 0;
-        }
-    }
-
-    .fd-shellbar__action--mobile {
-        display: none !important;
-    }
-
-    .fd-shellbar__action--desktop {
-        display: flex !important;
-    }
+    margin-inline-start: 0.3rem;
 }

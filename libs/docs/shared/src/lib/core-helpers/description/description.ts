@@ -28,13 +28,15 @@ const PACKAGE_MAPPING: Record<string, string> = {
         `
             .description {
                 color: var(--sapTextColor);
-                font-weight: 300;
-                font-size: 1rem;
-                margin-bottom: 1.5rem;
+                font-family: var(--sapFontFamily);
+                font-weight: 400;
+                font-size: var(--sapFontLargeSize, 0.875rem);
+                line-height: 1.6;
+                margin-block-end: 1.5rem;
             }
 
             .component-description {
-                margin-bottom: 0.5rem;
+                margin-block-end: 0.5rem;
             }
 
             .component-description markdown {
@@ -46,7 +48,7 @@ const PACKAGE_MAPPING: Record<string, string> = {
             }
 
             .component-description markdown p:last-child {
-                margin-bottom: 0;
+                margin-block-end: 0;
             }
 
             .fallback-content:empty {
@@ -54,8 +56,7 @@ const PACKAGE_MAPPING: Record<string, string> = {
             }
         `
     ],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DescriptionComponent implements AfterViewInit {
     /** Component name */

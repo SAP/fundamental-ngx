@@ -4,16 +4,20 @@
     @if (files().length > 1) {
         <button
             fd-button
+            fdType="transparent"
             [label]="'Select a file (' + files().length + ')'"
             [fdMenu]="true"
             [fdMenuTrigger]="menu"
         ></button>
     }
-    <fd-menu #menu [fillControlMode]="null" placement="bottom-start">
+    <fd-menu #menu [fillControlMode]="null" placement="bottom-start" additionalBodyClass="fd-docs-panel">
         @for (file of files(); track file) {
-            <li fd-menu-item [class.is-selected]="file === activeFile()" (click)="getFile(file)">
-                <div fd-menu-interactive>
+            <li fd-menu-item (click)="getFile(file)">
+                <div fd-menu-interactive [class.fd-docs-panel__item--selected]="file === activeFile()">
                     <span fd-menu-title>{{ file }}</span>
+                    @if (file === activeFile()) {
+                        <fd-icon class="fd-docs-panel__check" glyph="accept"></fd-icon>
+                    }
                 </div>
             </li>
         }

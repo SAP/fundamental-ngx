@@ -6,6 +6,7 @@ import {
     effect,
     inject,
     output,
+    Signal,
     untracked,
     viewChild,
     ViewEncapsulation,
@@ -137,6 +138,11 @@ export class ToolbarDocsComponent {
         this._windowWidth();
         return window.innerWidth < 768 ? 's' : 'm';
     });
+
+    /** Expose current language signal to the template for selection styling */
+    protected get currentLanguage(): Signal<FdLanguage> {
+        return this._langSignal.asReadonly();
+    }
 
     private readonly _contentDensityService = inject(GlobalContentDensityService);
     private readonly _themingService = inject(ThemingService);

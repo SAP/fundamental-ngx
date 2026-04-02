@@ -22,7 +22,7 @@
     white-space: nowrap;
     overflow: hidden;
     flex-grow: 1;
-    border-right: var(--sapList_BorderWidth) solid var(--sapGroup_ContentBorderColor);
+    border-inline-end: var(--sapList_BorderWidth) solid var(--sapGroup_ContentBorderColor);
 }
 
 // =============================================================================
@@ -35,7 +35,7 @@
     gap: 0.375rem;
     padding: 0.75rem;
     background: var(--sapGroup_ContentBackground);
-    border-bottom: 0.0625rem solid var(--sapGroup_ContentBorderColor);
+    border-block-end: 0.0625rem solid var(--sapGroup_ContentBorderColor);
 
     // ── Search pill ─────────────────────────────────────────
     &__pill {
@@ -137,6 +137,11 @@
             background: var(--sapBrandColor);
             border-color: var(--sapBrandColor);
             color: var(--sapContent_ContrastTextColor, #fff);
+
+            &:hover {
+                background: var(--sapButton_Emphasized_Hover_Background, var(--sapBrandColor));
+                border-color: var(--sapButton_Emphasized_Hover_BorderColor, var(--sapBrandColor));
+            }
         }
     }
 
@@ -217,7 +222,7 @@
 // ── Group container ─────────────────────────────────────────
 .fd-docs-nav__group {
     & + & {
-        padding-top: 0.25rem;
+        padding-block-start: 0.25rem;
     }
 }
 
@@ -258,7 +263,7 @@
             flex-shrink: 0;
             width: 0.375rem;
             height: 0.375rem;
-            margin-left: 0.375rem;
+            margin-inline-start: 0.375rem;
             border-radius: 50%;
             background: var(--sapBrandColor);
             transition: opacity 200ms ease;
@@ -317,7 +322,8 @@
     align-items: center;
     position: relative;
     height: 2.25rem;
-    padding: 0 0.75rem 0 1.5rem;
+    padding-block: 0;
+    padding-inline: 1.5rem 0.75rem;
     margin: 0.0625rem 0.5rem;
     border-radius: 0.375rem;
     font-family: var(--sapFontFamily);
@@ -347,9 +353,9 @@
         &::before {
             content: '';
             position: absolute;
-            left: 0;
-            top: 0.375rem;
-            bottom: 0.375rem;
+            inset-inline-start: 0;
+            inset-block-start: 0.375rem;
+            inset-block-end: 0.375rem;
             width: 0.1875rem;
             border-radius: 0.125rem;
             background: var(--sapBrandColor);
@@ -366,7 +372,8 @@
     display: flex;
     align-items: center;
     height: 2rem;
-    padding: 0 0.75rem 0 1.5rem;
+    padding-block: 0;
+    padding-inline: 1.5rem 0.75rem;
     font-family: var(--sapFontFamily);
     font-size: var(--sapFontSize);
     font-weight: 600;
@@ -379,7 +386,7 @@
 // Sub-group items — slightly more indented
 .fd-docs-nav__subgroup {
     .fd-docs-nav__item {
-        padding-left: 2.25rem;
+        padding-inline-start: 2.25rem;
     }
 }
 
@@ -388,14 +395,14 @@
 // =============================================================================
 
 .sidebar-collapsed {
-    margin-left: -18.5rem;
+    margin-inline-start: -18.5rem;
     box-shadow: none !important;
 }
 
 .skip-navigation {
     position: absolute;
-    left: -5000px;
-    top: 0;
+    inset-inline-start: -5000px;
+    inset-block-start: 0;
     width: 1px;
     height: 1px;
     overflow: hidden;
@@ -406,8 +413,8 @@
         position: absolute;
         box-shadow: 0.125rem 0 3.125rem 0 rgba(0, 0, 0, 0.7);
         height: auto;
-        top: 0;
-        bottom: 0;
-        left: 0;
+        inset-block-start: 0;
+        inset-block-end: 0;
+        inset-inline-start: 0;
     }
 }

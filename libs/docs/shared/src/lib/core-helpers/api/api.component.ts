@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, effect, inject, signal, viewChild }
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { MenuComponent, MenuModule } from '@fundamental-ngx/core/menu';
 import { catchError, of, switchMap } from 'rxjs';
 import { ApiDocsService } from '../../services/api-docs.service';
@@ -11,7 +12,7 @@ import { ApiDocsService } from '../../services/api-docs.service';
     templateUrl: './api.component.html',
     styleUrls: ['./api.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [ButtonComponent, MenuModule]
+    imports: [ButtonComponent, IconComponent, MenuModule]
 })
 export class ApiComponent {
     protected readonly menu = viewChild<MenuComponent>('menu');

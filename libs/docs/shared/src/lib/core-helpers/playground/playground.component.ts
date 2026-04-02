@@ -1,9 +1,6 @@
 import { ChangeDetectionStrategy, Component, input, output, ViewEncapsulation } from '@angular/core';
 import { Schema, SchemaComponent } from '@fundamental-ngx/docs/schema';
 
-import '@fundamental-styles/common-css/dist/sap-flex.css';
-import '@fundamental-styles/common-css/dist/sap-padding.css';
-
 @Component({
     selector: 'playground',
     templateUrl: './playground.component.html',

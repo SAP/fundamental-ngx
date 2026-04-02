@@ -203,8 +203,15 @@
     </li>
     @for (translation of translations(); track translation) {
         <li fd-menu-item>
-            <div fd-menu-interactive (click)="selectTranslation(translation.value)">
+            <div
+                fd-menu-interactive
+                [class.fd-docs-panel__item--selected]="currentLanguage() === translation.value"
+                (click)="selectTranslation(translation.value)"
+            >
                 <span fd-menu-title>{{ translation.name }}</span>
+                @if (currentLanguage() === translation.value) {
+                    <fd-icon class="fd-docs-panel__check" glyph="accept"></fd-icon>
+                }
             </div>
         </li>
     }

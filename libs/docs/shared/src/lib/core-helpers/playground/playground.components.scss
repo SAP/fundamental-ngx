@@ -1,12 +1,39 @@
-@use '@fundamental-styles/common-css/dist/sap-padding.css';
+// =============================================================================
+// Playground — Interactive schema-based component preview
+// =============================================================================
 
 .fd-playground {
     display: block;
+    margin-block-start: 1rem;
+    border: 0.0625rem solid var(--sapGroup_ContentBorderColor);
+    border-radius: 0.75rem;
+    overflow: hidden;
     background-color: var(--sapObjectHeader_Background);
+
+    &__title {
+        font-family: var(--sapFontFamily);
+        font-size: var(--sapFontHeader4Size, 1.125rem);
+        font-weight: 600;
+        color: var(--sapTitleColor, var(--sapTextColor));
+        padding: 1rem 1.25rem;
+        margin: 0;
+        border-block-end: 0.0625rem solid var(--sapGroup_ContentBorderColor);
+        border-inline-start: 0.1875rem solid var(--sapBrandColor);
+    }
+
+    &__body {
+        display: flex;
+        flex-wrap: wrap;
+
+        &--block {
+            display: block;
+        }
+    }
 
     &__col {
         flex: 1;
         max-width: 100%;
         box-sizing: border-box;
+        padding: 1.25rem;
     }
 }

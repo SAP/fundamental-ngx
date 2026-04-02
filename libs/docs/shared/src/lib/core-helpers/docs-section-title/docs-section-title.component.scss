@@ -1,19 +1,36 @@
 .docs-header-link {
-    color: var(--sapPageHeader_TextColor);
+    color: var(--sapTitleColor, var(--sapTextColor));
+    font-family: var(--sapFontFamily);
+    font-size: var(--sapFontHeader3Size, 1.5rem);
+    font-weight: 600;
+    line-height: 1.3;
     position: relative;
-    padding-top: 2rem;
-    margin-top: 0;
+    padding-block-start: 2.5rem;
+    margin-block-start: 0;
+    transition: color 200ms ease;
+
+    &:hover {
+        color: var(--sapBrandColor);
+    }
 }
 
 .docs-header-link .docs-markdown-a {
-    visibility: hidden;
-    text-align: center;
+    opacity: 0;
     text-decoration: none;
-    margin-left: -25px;
+    margin-inline-start: 0.5rem;
     display: inline-block;
     vertical-align: middle;
+    font-size: 0.75em;
+    color: var(--sapContent_NonInteractiveIconColor);
+    transition:
+        opacity 200ms ease,
+        color 200ms ease,
+        transform 200ms ease;
+    transform: translateX(-0.25rem);
 }
 
 .docs-header-link:hover .docs-markdown-a {
-    visibility: visible;
+    opacity: 1;
+    color: var(--sapBrandColor);
+    transform: translateX(0);
 }

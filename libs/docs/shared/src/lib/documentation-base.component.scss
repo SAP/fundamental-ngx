@@ -7,13 +7,13 @@ fd-base-documentation {
 
 .nav {
     list-style: none;
-    padding-left: 0;
+    padding-inline-start: 0;
 }
 
 .content {
     flex-grow: 1;
     overflow-y: scroll;
-    padding-bottom: 2rem;
+    padding-block-end: 2rem;
     background-color: var(--sapBaseColor);
 
     &:focus {
@@ -22,8 +22,10 @@ fd-base-documentation {
 }
 
 .content-margin {
-    padding: 12px 40px 80px 60px;
-    width: 80%;
+    padding-block: 0.75rem 5rem;
+    padding-inline: 3.75rem 2.5rem;
+    width: 100%;
+    box-sizing: border-box;
     outline: 0;
     transition: 0.5s padding ease-in-out;
 }
@@ -55,8 +57,8 @@ fd-base-documentation {
 
 .skip-navigation {
     position: absolute;
-    left: -5000px;
-    top: 0;
+    inset-inline-start: -5000px;
+    inset-block-start: 0;
     width: 1px;
     height: 1px;
     overflow: hidden;
@@ -64,19 +66,20 @@ fd-base-documentation {
 
 @media (max-width: 992px) {
     .content-margin {
-        padding: 10px 60px;
+        padding-inline: 3.75rem;
+        padding-block: 0.625rem;
         width: auto;
     }
 }
 
 @media (max-width: 768px) {
     .content-margin {
-        padding: 10px 40px;
+        padding-inline: 2.5rem;
     }
 }
 
 @media (max-width: 576px) {
     .content-margin {
-        padding: 10px 20px;
+        padding-inline: 1.25rem;
     }
 }
