@@ -1,8 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { By } from '@angular/platform-browser';
-import { OverflowListDirective } from '@fundamental-ngx/cdk/utils';
-import { of } from 'rxjs';
+import { OverflowListDirective, OverflowListItemDirective } from '@fundamental-ngx/cdk/utils';
 import { IconTabBarComponent } from '../../icon-tab-bar.component';
 import { _generateTabBarItems, generateTestConfig } from '../../tests-helper';
 import { IconTabBarProcessTypeComponent } from './icon-tab-bar-process-type.component';
@@ -24,7 +23,6 @@ describe('IconTabBarProcessTypeComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(IconTabBarProcessTypeComponent);
         component = fixture.componentInstance;
-        (component as any)['_ngZone'] = fakeNgZone as any;
         (component as any)['_cd'] = fakeCdr as any;
 
         component.tabs = _generateTabBarItems(generateTestConfig(100));
@@ -45,29 +43,31 @@ describe('IconTabBarProcessTypeComponent', () => {
         expect(component._nextSteps.length).toBeGreaterThan(0);
     });
 
-    it('should shift tabs by click inside previous steps popover', () => {
+    it('should shift tabs by click inside previous steps popover', fakeAsync(() => {
         const previousLengthOfPrevSteps = component._prevSteps.length;
         const previousLengthOfNextSteps = component._nextSteps.length;
 
         const randomSubTabInsidePrevPopover = component._prevSteps[component._prevSteps.length - 5];
         component._selectExtraItem(randomSubTabInsidePrevPopover);
+        flush();
         fixture.detectChanges();
 
         expect(component._prevSteps.length).toBeLessThan(previousLengthOfPrevSteps);
         expect(component._nextSteps.length).toBeGreaterThan(previousLengthOfNextSteps);
-    });
+    }));
 
-    it('should shift tabs by click inside next steps popover', () => {
+    it('should shift tabs by click inside next steps popover', fakeAsync(() => {
         const previousLengthOfPrevSteps = component._prevSteps.length;
         const previousLengthOfNextSteps = component._nextSteps.length;
         const randomSubTabInsideNextPopover = component._nextSteps[component._nextSteps.length - 3];
 
         component._selectExtraItem(randomSubTabInsideNextPopover);
+        flush();
         fixture.detectChanges();
 
         expect(component._prevSteps.length).toBeGreaterThan(previousLengthOfPrevSteps);
         expect(component._nextSteps.length).toBeLessThan(previousLengthOfNextSteps);
-    });
+    }));
 
     it('should set tabindex=0 to the selected tab', () => {
         const tabElements = fixture.debugElement.queryAll(By.css('li a'));
@@ -147,12 +147,6 @@ describe('IconTabBarProcessTypeComponent', () => {
 
 const fakeOverflowDirective = {
     getAmountOfExtraItems: () => AMOUNT_OF_EXTRA_TABS
-};
-
-const fakeNgZone = {
-    onMicrotaskEmpty: {
-        pipe: () => of(1)
-    }
 };
 
 const fakeCdr = {
