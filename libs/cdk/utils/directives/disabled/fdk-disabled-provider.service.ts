@@ -3,15 +3,16 @@ import {
     ElementRef,
     Inject,
     Injectable,
-    NgZone,
+    Injector,
     OnDestroy,
     Optional,
     Self,
     SkipSelf,
+    afterNextRender,
     inject
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { BehaviorSubject, Observable, ReplaySubject, combineLatest, firstValueFrom } from 'rxjs';
+import { BehaviorSubject, Observable, ReplaySubject, combineLatest } from 'rxjs';
 import { distinctUntilChanged, startWith, tap } from 'rxjs/operators';
 import { DefaultDisabledViewModifier } from './default-disabled-view-modifier';
 import { DisabledBehavior } from './disabled-behavior.interface';
@@ -26,6 +27,8 @@ export class FdkDisabledProvider extends ReplaySubject<boolean> implements Disab
     /** @Hidden */
     private readonly _destroyRef = inject(DestroyRef);
     /** @hidden */
+    private readonly _injector = inject(Injector);
+    /** @hidden */
     private readonly disabledObserver = inject(DisabledObserver);
     /** @hidden */
     private readonly _viewModifiers$: BehaviorSubject<DisabledViewModifier[]>;
@@ -34,7 +37,6 @@ export class FdkDisabledProvider extends ReplaySubject<boolean> implements Disab
 
     /** @hidden */
     constructor(
-        private ngZone: NgZone,
         private elementRef: ElementRef<HTMLElement>,
         @Optional() @Self() @Inject(FDK_DISABLED_DIRECTIVE) private selfDisabled$?: DisabledBehavior,
         @Optional() @SkipSelf() @Inject(FDK_DISABLED_DIRECTIVE) private parentDisabled$?: DisabledBehavior
@@ -67,9 +69,12 @@ export class FdkDisabledProvider extends ReplaySubject<boolean> implements Disab
 
     /** @hidden */
     setDisabledState(isDisabled: boolean): void {
-        firstValueFrom(this.ngZone.onStable).then(() => {
-            this._viewModifiers$.value.forEach((viewModifier) => viewModifier.setDisabledState(isDisabled));
-        });
+        afterNextRender(
+            () => {
+                this._viewModifiers$.value.forEach((viewModifier) => viewModifier.setDisabledState(isDisabled));
+            },
+            { injector: this._injector }
+        );
     }
 
     /** @hidden */
