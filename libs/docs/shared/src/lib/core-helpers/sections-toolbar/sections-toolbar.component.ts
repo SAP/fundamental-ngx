@@ -1,13 +1,21 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, effect, inject, input, model, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { RouterLink, RouterLinkActive } from '@angular/router';
-import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { InputGroupModule } from '@fundamental-ngx/core/input-group';
-import { NestedListModule } from '@fundamental-ngx/core/nested-list';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    computed,
+    effect,
+    ElementRef,
+    inject,
+    input,
+    model,
+    signal,
+    viewChild
+} from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
-import { SideNavigationModule } from '@fundamental-ngx/core/side-navigation';
+import { filter, map } from 'rxjs';
 import { SortByPipe } from '../pipes/sort.pipe';
 import {
     SectionInterface,
@@ -23,18 +31,7 @@ const SMALL_SCREEN_BREAKPOINT = 992;
     templateUrl: './sections-toolbar.component.html',
     styleUrls: ['./sections-toolbar.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [
-        ButtonComponent,
-        InputGroupModule,
-        FormsModule,
-        SideNavigationModule,
-        NestedListModule,
-        NgTemplateOutlet,
-        RouterLinkActive,
-        RouterLink,
-        SortByPipe,
-        ScrollbarDirective
-    ]
+    imports: [IconComponent, RouterLinkActive, RouterLink, SortByPipe, ScrollbarDirective]
 })
 export class SectionsToolbarComponent {
     readonly sections = input<SectionInterface[]>([]);
@@ -48,20 +45,30 @@ export class SectionsToolbarComponent {
         const expanded = this.expandedSections();
         return sections.every((section) => expanded.get(section.header) === true);
     });
+    protected readonly isMac = typeof navigator !== 'undefined' && /Mac|iPod|iPhone|iPad/.test(navigator.platform);
 
     private readonly _liveAnnouncer = inject(LiveAnnouncer);
+    private readonly _router = inject(Router);
+    private readonly _searchInput = viewChild<ElementRef<HTMLInputElement>>('searchInput');
+    private readonly _currentUrl = toSignal(
+        this._router.events.pipe(
+            filter((e): e is NavigationEnd => e instanceof NavigationEnd),
+            map((e) => e.urlAfterRedirects || e.url)
+        ),
+        { initialValue: this._router.url }
+    );
 
     private get _smallScreen(): boolean {
         return window.innerWidth < SMALL_SCREEN_BREAKPOINT;
     }
 
     constructor() {
-        // Initialize sections in collapsed state
+        // Initialize sections in expanded state
         effect(() => {
             const sections = this.sections();
             const expandedMap = new Map<string, boolean>();
             sections.forEach((section) => {
-                expandedMap.set(section.header, false);
+                expandedMap.set(section.header, true);
             });
             this.expandedSections.set(expandedMap);
         });
@@ -96,10 +103,32 @@ export class SectionsToolbarComponent {
     $asSectionNestedContent = (sectionContent: SectionInterfaceContent[]): SectionInterfaceContentNested[] =>
         <any>sectionContent;
 
+    /** Focus the search input, expanding the sidebar if necessary. */
+    focusSearch(): void {
+        if (this.sideCollapsed()) {
+            this.sideCollapsed.set(false);
+            // Wait for sidebar CSS transition (300ms) to complete before focusing
+            setTimeout(() => this._focusInput(), 350);
+        } else {
+            this._focusInput();
+        }
+    }
+
     onActivate(): void {
         if (this._smallScreen && !this.sideCollapsed()) {
             this.sideCollapsed.set(true);
         }
+    }
+
+    toggleAllSections(): void {
+        const sections = this.displayedSections();
+        const expandedMap = new Map<string, boolean>();
+        const shouldExpand = !this.allExpanded();
+
+        sections.forEach((section) => {
+            expandedMap.set(section.header, shouldExpand);
+        });
+        this.expandedSections.set(expandedMap);
     }
 
     protected onSearchChange(searchTerm: string): void {
@@ -134,19 +163,24 @@ export class SectionsToolbarComponent {
         this.expandedSections.set(expandedMap);
     }
 
-    protected toggleAllSections(): void {
-        const sections = this.displayedSections();
-        const expandedMap = new Map<string, boolean>();
-        const shouldExpand = !this.allExpanded();
-
-        sections.forEach((section) => {
-            expandedMap.set(section.header, shouldExpand);
-        });
-        this.expandedSections.set(expandedMap);
-    }
-
     protected isSectionExpanded(sectionHeader: string): boolean {
         return this.expandedSections().get(sectionHeader) ?? false;
+    }
+
+    protected sectionHasActiveItem(section: SectionInterface): boolean {
+        const currentUrl = this._currentUrl();
+        if (!currentUrl) {
+            return false;
+        }
+        const normalizedUrl = currentUrl.split('?')[0].split('#')[0];
+        return section.content.some((contentEl) => {
+            if (this._isNestedContentItem(contentEl)) {
+                return contentEl.subItems.some(
+                    (sub) => normalizedUrl.endsWith('/' + sub.url) || normalizedUrl === '/' + sub.url
+                );
+            }
+            return normalizedUrl.endsWith('/' + contentEl.url) || normalizedUrl === '/' + contentEl.url;
+        });
     }
 
     protected trackBySection(index: number, section: SectionInterface): string {
@@ -155,6 +189,10 @@ export class SectionsToolbarComponent {
 
     protected trackBySectionContent(index: number, content: SectionInterfaceContent): string {
         return content.name;
+    }
+
+    private _focusInput(): void {
+        this._searchInput()?.nativeElement?.focus();
     }
 
     private _filterSections(sections: SectionInterface[], searchTerm: string): SectionInterface[] {

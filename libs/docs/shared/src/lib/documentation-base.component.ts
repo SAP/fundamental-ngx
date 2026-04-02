@@ -48,6 +48,18 @@ export class DocumentationBaseComponent implements OnInit {
         this._isCollapsed();
     }
 
+    @HostListener('document:keydown', ['$event'])
+    onKeydown(event: KeyboardEvent): void {
+        if ((event.metaKey || event.ctrlKey) && event.key === 'k') {
+            event.preventDefault();
+            this.sectionsToolbar?.focusSearch();
+        }
+        if ((event.metaKey || event.ctrlKey) && event.key === '.') {
+            event.preventDefault();
+            this.sectionsToolbar?.toggleAllSections();
+        }
+    }
+
     ngOnInit(): void {
         this.components.sort((el1, el2) => {
             if (el1.name < el2.name) {
@@ -92,6 +104,8 @@ export class DocumentationBaseComponent implements OnInit {
     private _isCollapsed(): void {
         if (window.innerWidth < SMALL_SCREEN_BREAKPOINT) {
             this.sideCollapsed.set(true);
+        } else {
+            this.sideCollapsed.set(false);
         }
     }
 }

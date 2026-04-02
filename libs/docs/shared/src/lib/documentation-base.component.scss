@@ -1,4 +1,5 @@
 fd-base-documentation {
+    position: relative;
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -14,7 +15,6 @@ fd-base-documentation {
     overflow-y: scroll;
     padding-bottom: 2rem;
     background-color: var(--sapBaseColor);
-    padding-top: 52px;
 
     &:focus {
         outline: none;
@@ -32,17 +32,13 @@ fd-base-documentation {
     background-color: black;
     opacity: 0;
     position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: 5;
+    inset: 0;
+    z-index: 7;
     transition: 0.3s opacity ease-in-out;
     visibility: hidden;
 
     @media screen and (min-width: 992px) {
         display: none;
-        width: 0;
-        height: 0;
-        overflow: hidden;
     }
 }
 
@@ -52,6 +48,8 @@ fd-base-documentation {
 }
 
 .fd-sidebar-container {
+    position: relative;
+    flex: 1;
     overflow: hidden;
 }
 

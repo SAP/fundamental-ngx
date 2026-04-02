@@ -8,25 +8,16 @@ import {
     output,
     untracked,
     viewChild,
+    ViewEncapsulation,
     WritableSignal
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 import { CompleteThemeDefinition, ThemingService } from '@fundamental-ngx/core/theming';
 
-import '@fundamental-styles/common-css/dist/sap-colors.css';
-import '@fundamental-styles/common-css/dist/sap-display.css';
-import '@fundamental-styles/common-css/dist/sap-flex.css';
-import '@fundamental-styles/common-css/dist/sap-margin.css';
-
 import { NgTemplateOutlet } from '@angular/common';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { ButtonComponent } from '@fundamental-ngx/core/button';
-import {
-    ContentDensityDirective,
-    ContentDensityMode,
-    GlobalContentDensityService
-} from '@fundamental-ngx/core/content-density';
+import { ContentDensityMode, GlobalContentDensityService } from '@fundamental-ngx/core/content-density';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import {
     MenuAddonDirective,
@@ -38,13 +29,6 @@ import {
     MenuTriggerDirective,
     SubmenuComponent
 } from '@fundamental-ngx/core/menu';
-import {
-    ShellbarActionsComponent,
-    ShellbarComponent,
-    ShellbarLogoComponent,
-    ShellbarSidenavDirective,
-    ShellbarSizes
-} from '@fundamental-ngx/core/shellbar';
 import { FD_LANGUAGE_SIGNAL, FdLanguage } from '@fundamental-ngx/i18n';
 import { filter, fromEvent } from 'rxjs';
 import { debounceTime, startWith } from 'rxjs/operators';
@@ -68,14 +52,9 @@ type Version = {
     styleUrl: './toolbar.component.scss',
     providers: [MenuKeyboardService],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
     imports: [
-        ShellbarComponent,
-        ButtonComponent,
-        ShellbarSidenavDirective,
-        ContentDensityDirective,
-        ShellbarLogoComponent,
         RouterLink,
-        ShellbarActionsComponent,
         MenuComponent,
         MenuItemComponent,
         MenuInteractiveComponent,
@@ -128,6 +107,21 @@ export class ToolbarDocsComponent {
     /** Initial theme to apply */
     protected readonly initialTheme = 'sap_horizon';
 
+    /** Current theme name for display */
+    protected readonly currentThemeName = computed(() => {
+        const theme = this._currentTheme();
+        return theme?.name ?? 'Horizon';
+    });
+
+    /** Current theme ID for selected state tracking */
+    protected readonly currentThemeId = computed(() => {
+        const theme = this._currentTheme();
+        return theme?.id ?? this.initialTheme;
+    });
+
+    /** Current content density for display */
+    protected readonly currentDensity = computed(() => this._contentDensityService.currentDensitySignal());
+
     /** CSS URL for highlight.js theme - computed from current theme */
     protected readonly highlightJsThemeCss = computed<SafeResourceUrl | null>(() => {
         const theme = this._currentTheme();
@@ -137,8 +131,8 @@ export class ToolbarDocsComponent {
         return this._getHighlightThemeCss(theme.id);
     });
 
-    /** Current shellbar size - computed from window width */
-    protected readonly size = computed<ShellbarSizes>(() => {
+    /** Current toolbar size - computed from window width */
+    protected readonly size = computed<'s' | 'm'>(() => {
         // Track window resize events
         this._windowWidth();
         return window.innerWidth < 768 ? 's' : 'm';
