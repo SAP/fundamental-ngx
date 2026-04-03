@@ -6,7 +6,6 @@ import {
     ElementRef,
     EventEmitter,
     Input,
-    NgZone,
     Output,
     QueryList,
     inject
@@ -64,10 +63,7 @@ export class OverflowListDirective implements AfterViewInit {
     private _recalcScheduled = false;
 
     /** @hidden */
-    constructor(
-        private _el: ElementRef,
-        private _ngZone: NgZone
-    ) {}
+    constructor(private _el: ElementRef) {}
 
     /** @hidden */
     ngAfterViewInit(): void {
@@ -112,14 +108,14 @@ export class OverflowListDirective implements AfterViewInit {
         this._recalcScheduled = true;
         Promise.resolve().then(() => {
             this._recalcScheduled = false;
-            this._ngZone.run(() => this._calculateAmountOfOverflowedItems());
+            this._calculateAmountOfOverflowedItems();
         });
     }
 
     /** @hidden */
     private _initResizeObserver(): void {
         this._resizeObserver = new ResizeObserver(() => {
-            this._ngZone.run(() => this.calculateOverflow());
+            this.calculateOverflow();
         });
         this._resizeObserver.observe(this._el.nativeElement);
         this._destroyRef.onDestroy(() => this._resizeObserver.disconnect());
