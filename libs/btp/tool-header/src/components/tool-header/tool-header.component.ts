@@ -1,22 +1,21 @@
 /* eslint-disable @angular-eslint/no-input-rename */
 import { PortalModule } from '@angular/cdk/portal';
-import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
     ContentChild,
     ContentChildren,
     EventEmitter,
-    HostListener,
     Injector,
     Input,
-    NgZone,
-    OnDestroy,
     Output,
     QueryList,
     ViewEncapsulation,
+    afterNextRender,
     booleanAttribute,
-    inject
+    inject,
+    signal
 } from '@angular/core';
 import { ToolHeaderButtonDirective } from '@fundamental-ngx/btp/button';
 import {
@@ -42,7 +41,6 @@ import {
 } from '@fundamental-ngx/core/overflow-layout';
 import { FD_PRODUCT_SWITCH_COMPONENT } from '@fundamental-ngx/core/product-switch';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
-import { BehaviorSubject, Subscription, delayWhen, first } from 'rxjs';
 import { ToolHeaderActionButtonDirective } from '../../directives/tool-header-action-button.directive';
 import { ToolHeaderActionDirective } from '../../directives/tool-header-action.directive';
 import { ToolHeaderElementDirective } from '../../directives/tool-header-element.directive';
@@ -60,7 +58,10 @@ import { ToolHeaderComponentClass } from '../../tool-header-component.class';
     encapsulation: ViewEncapsulation.None,
     host: {
         class: 'fd-tool-header',
-        '[class.fd-tool-header--menu]': 'showMenuButton'
+        '[class.fd-tool-header--menu]': 'showMenuButton',
+        '(document:click)': '_onClick($event)',
+        '(document:keydown.control.k)': '_onKeyDown()',
+        '(document:keydown.meta.k)': '_onKeyDown()'
     },
     imports: [
         ToolHeaderGroupDirective,
@@ -76,7 +77,6 @@ import { ToolHeaderComponentClass } from '../../tool-header-component.class';
         FocusableItemDirective,
         NavigationMenuPopoverComponent,
         NavigationMenuPopoverControlDirective,
-        AsyncPipe,
         OverflowLayoutComponent,
         OverflowLayoutItemDirective,
         OverflowItemRefDirective,
@@ -91,7 +91,7 @@ import { ToolHeaderComponentClass } from '../../tool-header-component.class';
         }
     ]
 })
-export class ToolHeaderComponent extends ToolHeaderComponentClass implements OnDestroy {
+export class ToolHeaderComponent extends ToolHeaderComponentClass {
     /**
      * (required) the Product Name is the official name of the tool.
      */
@@ -187,16 +187,10 @@ export class ToolHeaderComponent extends ToolHeaderComponentClass implements OnD
     _toolHeaderProductSwitch?: unknown;
 
     /** @hidden */
-    protected _hiddenActions$ = new BehaviorSubject<OverflowItemRef<ToolHeaderActionDirective>[]>([]);
+    protected readonly _hiddenActions$ = signal<OverflowItemRef<ToolHeaderActionDirective>[]>([]);
 
     /** @hidden */
-    protected _delayedHiddenActions$ = this._hiddenActions$.pipe(delayWhen(() => this._ngZone.onStable));
-
-    /** @hidden */
-    private _searchFieldOutsideClickSubscription?: Subscription;
-
-    /** @hidden */
-    private _ngZone = inject(NgZone);
+    private readonly _injector = inject(Injector);
 
     /** @hidden */
     private _mapOfItemsAndInjectors = new WeakMap<OverflowItemRef<ToolHeaderActionDirective>, Injector>();
@@ -206,7 +200,6 @@ export class ToolHeaderComponent extends ToolHeaderComponentClass implements OnD
      * on outside click
      * @hidden
      **/
-    @HostListener('document:click', ['$event'])
     _onClick(event: MouseEvent): void {
         if (this._searchFieldExpanded$()) {
             if (
@@ -226,19 +219,10 @@ export class ToolHeaderComponent extends ToolHeaderComponentClass implements OnD
      * when the user presses `Ctrl + K` or `Cmd + K` keys
      * @hidden
      **/
-    @HostListener('document:keydown.control.k')
-    @HostListener('document:keydown.meta.k')
     _onKeyDown(): void {
         if (this._mode$() === 'tablet' && this._orientation$() === 'portrait' && this._searchField$()) {
             this._searchFieldExpanded$.set(true);
             this._searchField$()?.focus();
-        }
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        if (this._searchFieldOutsideClickSubscription) {
-            this._searchFieldOutsideClickSubscription.unsubscribe();
         }
     }
 
@@ -247,9 +231,7 @@ export class ToolHeaderComponent extends ToolHeaderComponentClass implements OnD
      **/
     expandSearchField(): void {
         this._searchFieldExpanded$.set(true);
-        this._ngZone.onStable.pipe(first()).subscribe(() => {
-            this._searchField$()?.focus();
-        });
+        afterNextRender(() => this._searchField$()?.focus(), { injector: this._injector });
     }
 
     /** @hidden */
@@ -272,17 +254,15 @@ export class ToolHeaderComponent extends ToolHeaderComponentClass implements OnD
 
     /** @hidden */
     protected _handleHiddenItemsChange($event: OverflowItemRef<ToolHeaderActionDirective>[]): void {
-        this._ngZone.runOutsideAngular(() => {
-            this._hiddenActions$.next(
-                $event.reduce((acc: OverflowItemRef<ToolHeaderActionDirective>[], i) => {
-                    if (!i.item.isSeparator) {
-                        acc.push(i);
-                        this._mapOfItemsAndInjectors.delete(i);
-                    }
-                    return acc;
-                }, [])
-            );
-        });
+        this._hiddenActions$.set(
+            $event.reduce((acc: OverflowItemRef<ToolHeaderActionDirective>[], i) => {
+                if (!i.item.isSeparator) {
+                    acc.push(i);
+                    this._mapOfItemsAndInjectors.delete(i);
+                }
+                return acc;
+            }, [])
+        );
     }
 
     /** @hidden */
