@@ -8,10 +8,6 @@ on:
 env:
     NODE_VERSION: '22.x'
 
-permissions:
-    contents: write
-    pull-requests: write
-
 concurrency:
     group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
     cancel-in-progress: true
@@ -21,6 +17,9 @@ jobs:
         name: Generate TypeScript files from .properties changes
         runs-on: ubuntu-latest
         timeout-minutes: 10
+        permissions:
+            contents: write
+            pull-requests: write
         # Security: Only run for same-repo PRs or trusted translation bot (service-tip-git)
         if: |
             github.event.pull_request.head.repo.full_name == github.repository ||
@@ -47,14 +46,16 @@ jobs:
             # Security: Validate fork PRs only modify translation files (after checkout)
             - name: Validate translation-only changes (fork PRs)
               if: github.event.pull_request.head.repo.full_name != github.repository
+              env:
+                  BASE_REF: ${{ github.event.pull_request.base.ref }}
               run: |
                   echo "🔍 Validating fork PR only modifies translation files..."
 
                   # Fetch base branch for comparison
-                  git fetch origin ${{ github.event.pull_request.base.ref }}
+                  git fetch origin "$BASE_REF"
 
                   # Get list of changed files (using two-dot diff for direct comparison)
-                  FILES=$(git diff --name-only origin/${{ github.event.pull_request.base.ref }}..HEAD)
+                  FILES=$(git diff --name-only "origin/${BASE_REF}..HEAD")
 
                   echo "Files changed in this PR:"
                   echo "$FILES"
@@ -157,10 +158,31 @@ jobs:
                   echo "✅ Changes committed and pushed successfully"
 
             # Fork PRs: commit locally, then push to the fork via GHACTIONS PAT
+            # Security: fork repo name and branch ref are passed via env vars (not
+            # interpolated into the shell script) to prevent injection attacks from
+            # crafted branch names or repo names.
             - name: Commit and push (fork PRs)
               if: steps.git-check.outputs.changed == 'true' && github.event.pull_request.head.repo.full_name != github.repository
+              env:
+                  FORK_REPO: ${{ github.event.pull_request.head.repo.full_name }}
+                  FORK_REF: ${{ github.event.pull_request.head.ref }}
+                  GHACTIONS_TOKEN: ${{ secrets.GHACTIONS }}
               run: |
                   set -e
+
+                  # Validate ref name: only allow safe characters (alphanumeric, -, _, ., /)
+                  # Also reject ".." sequences for defense in depth
+                  if [[ ! "$FORK_REF" =~ ^[a-zA-Z0-9._/-]+$ ]] || [[ "$FORK_REF" == *..* ]]; then
+                      echo "❌ ERROR: Branch ref contains invalid characters: $FORK_REF"
+                      exit 1
+                  fi
+
+                  # Validate repo name: must be owner/repo format with safe characters
+                  if [[ ! "$FORK_REPO" =~ ^[a-zA-Z0-9._-]+/[a-zA-Z0-9._-]+$ ]]; then
+                      echo "❌ ERROR: Fork repo name has invalid format: $FORK_REPO"
+                      exit 1
+                  fi
+
                   git add libs/i18n/src/lib/translations/
 
                   if ! git commit -m "chore(i18n): auto-generate TypeScript files from .properties changes
@@ -170,9 +192,9 @@ jobs:
                       exit 1
                   fi
 
-                  FORK_URL="https://x-access-token:${{ secrets.GHACTIONS }}@github.com/${{ github.event.pull_request.head.repo.full_name }}.git"
-                  if ! git push "$FORK_URL" HEAD:${{ github.event.pull_request.head.ref }}; then
-                      echo "❌ Push to fork failed - PAT may not have access to ${{ github.event.pull_request.head.repo.full_name }}"
+                  FORK_URL="https://x-access-token:${GHACTIONS_TOKEN}@github.com/${FORK_REPO}.git"
+                  if ! git push "$FORK_URL" "HEAD:${FORK_REF}" 2>/dev/null; then
+                      echo "❌ Push to fork failed - PAT may not have access to ${FORK_REPO}"
                       exit 1
                   fi
 

@@ -6,9 +6,6 @@ on:
         branches:
             - main
             - tmp_hotfix_branch
-permissions:
-    contents: write
-    id-token: write
 env:
     NODE_VERSION: '22.x'
     # Package list for build, lint, pack, and publish operations
@@ -25,6 +22,7 @@ jobs:
     nx_agents:
         name: Nx Cloud Agent ${{ matrix.agent }}
         runs-on: ubuntu-latest
+        permissions: {}
         timeout-minutes: 60
         strategy:
             matrix:
@@ -44,6 +42,9 @@ jobs:
     create_release:
         name: Create release
         runs-on: ubuntu-latest
+        permissions:
+            contents: write
+            id-token: write
         outputs:
             npmTag: ${{ steps.releaseTags.outputs.npm }}
             ghTag: ${{ steps.releaseTags.outputs.gh }}
