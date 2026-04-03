@@ -1,0 +1,24 @@
+<p><b>Active dataset:</b> {{ activeDataset() || 'loading...' }}</p>
+
+<fd-segmented-button [ngModel]="activeDataset()" (ngModelChange)="switchDataset($event)">
+    <button fd-button fdkFocusableItem label="Fruits" value="fruits"></button>
+    <button fd-button fdkFocusableItem label="Vegetables" value="vegetables"></button>
+</fd-segmented-button>
+
+<br /><br />
+
+<div fd-form-item>
+    <label fd-form-label for="dynamic-ds">Search and select:</label>
+    <fd-multi-combobox
+        [autoResize]="true"
+        name="dynamic-ds"
+        inputId="dynamic-ds"
+        placeholder="Type some text..."
+        [dataSource]="dataSource()"
+        displayKey="name"
+        [selectedItems]="selectedItems"
+        (selectionChange)="onSelect($event)"
+    ></fd-multi-combobox>
+</div>
+
+<p>Selected: {{ selectedItems | json }}</p>

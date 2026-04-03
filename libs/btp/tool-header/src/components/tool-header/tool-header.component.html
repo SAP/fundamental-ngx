@@ -112,7 +112,7 @@
         }
     }
     <!-- Custom overflow button used as overflow item START -->
-    @if (_delayedHiddenActions$ | async; as hiddenActions) {
+    @if (_hiddenActions$(); as hiddenActions) {
         @if (hiddenActions.length > 0) {
             <ng-template fdOverflowItemRef>
                 <fdb-navigation-menu-popover fdbToolHeaderElement fdOverflowLayoutItem [forceVisibility]="true">
