@@ -31,8 +31,9 @@ const PACKAGE_MAPPING: Record<string, string> = {
                 font-family: var(--sapFontFamily);
                 font-weight: 400;
                 font-size: var(--sapFontLargeSize, 0.875rem);
-                line-height: 1.6;
-                margin-block-end: 1.5rem;
+                line-height: 1.7;
+                margin-block-end: 1rem;
+                max-width: 48rem;
             }
 
             .component-description {

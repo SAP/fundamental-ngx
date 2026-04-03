@@ -7,10 +7,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
         `
             :host {
                 display: block;
-                margin: 2.5rem 0 0.5rem;
+                margin-block-start: 1.5rem;
                 border: none;
-                height: 0.0625rem;
-                background: linear-gradient(to right, transparent, var(--sapGroup_ContentBorderColor), transparent);
+                height: 0;
             }
         `
     ],

@@ -12,16 +12,17 @@
     }
 }
 
-// ── Code toolbar (Show Code / Copy / StackBlitz) ───────────
+// ── Code toolbar — seamless strip connecting example + code ──
 .docs-code-example-toolbar {
     display: flex;
     flex-grow: 1;
     align-items: center;
     justify-content: space-between;
-    padding: 0.5rem 0.75rem;
+    padding: 0.375rem 0.75rem;
     background: color-mix(in srgb, var(--sapGroup_ContentBackground) 80%, var(--sapBackgroundColor));
     border: 0.0625rem solid var(--sapGroup_ContentBorderColor);
     border-block-start: none;
+    min-height: 2.5rem;
 }
 
 .fd-tabs__panel.is-expanded {
@@ -36,10 +37,18 @@ code-example {
     }
 }
 
-// ── Code content panel ─────────────────────────────────────
+// ── Code content panel — bottom card with rounded corners ──
 .docs-code-example-content {
     border: 0.0625rem solid var(--sapGroup_ContentBorderColor);
     border-block-start: none;
     border-radius: 0 0 0.75rem 0.75rem;
     overflow: hidden;
+}
+
+// ── When code is collapsed, round the toolbar bottom ───────
+code-example:has(.docs-html-example-container:empty),
+code-example:not(:has(.docs-code-example-content)) {
+    .docs-code-example-toolbar {
+        border-radius: 0 0 0.75rem 0.75rem;
+    }
 }

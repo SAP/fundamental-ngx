@@ -18,7 +18,9 @@ import { CURRENT_LIB, Libraries } from '../../utilities/libraries';
     selector: 'fd-docs-section-title',
     template: `
         <h2 [id]="id" #title class="docs-header-link">
-            <ng-content></ng-content>
+            <span class="docs-header-link__text">
+                <ng-content></ng-content>
+            </span>
             <a
                 class="docs-markdown-a"
                 [attr.aria-describedby]="id"

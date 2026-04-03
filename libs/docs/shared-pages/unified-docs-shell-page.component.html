@@ -9,8 +9,11 @@
             [(sideCollapsed)]="baseDocumentation.sideCollapsed"
         ></sections-toolbar>
         <div tabindex="0" class="content" #content id="page-content" cdk-scrollable>
-            <div class="content-margin">
-                <router-outlet (activate)="baseDocumentation.onActivate()"></router-outlet>
+            <div class="fd-docs-content-layout">
+                <div class="content-margin">
+                    <router-outlet (activate)="baseDocumentation.onActivate()"></router-outlet>
+                </div>
+                <fd-docs-table-of-contents [scrollContainer]="content"></fd-docs-table-of-contents>
             </div>
         </div>
     </div>

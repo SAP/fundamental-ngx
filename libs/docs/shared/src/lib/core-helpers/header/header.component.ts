@@ -20,26 +20,31 @@ import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
     `,
     styles: [
         `
+            :host {
+                display: block;
+            }
+
             .header {
                 position: relative;
                 color: var(--sapTitleColor, var(--sapTextColor));
                 font-family: var(--sapFontFamily);
-                font-size: var(--sapFontHeader1Size, 2.25rem);
+                font-size: clamp(1.75rem, 4vw, var(--sapFontHeader1Size, 2.25rem));
                 font-weight: 700;
                 line-height: 1.2;
                 margin-block-start: 1.5rem;
-                margin-block-end: 0.5rem;
+                margin-block-end: 0.75rem;
                 padding-inline-start: 1rem;
+                letter-spacing: -0.01em;
             }
 
             .header::before {
                 content: '';
                 position: absolute;
                 inset-inline-start: 0;
-                inset-block-start: 0.25rem;
-                inset-block-end: 0.25rem;
+                inset-block-start: 0.15rem;
+                inset-block-end: 0.15rem;
                 width: 0.25rem;
-                border-radius: 0.125rem;
+                border-radius: 0.25rem;
                 background: var(--sapBrandColor);
             }
         `
