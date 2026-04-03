@@ -22,6 +22,7 @@
     margin-block-start: 0;
     margin-block-end: 0.25rem;
     transition: color 200ms ease;
+    cursor: pointer;
 
     &:hover {
         color: var(--sapBrandColor);

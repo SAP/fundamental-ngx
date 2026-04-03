@@ -10,22 +10,22 @@ import {
     ViewChild
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { CURRENT_LIB, Libraries } from '../../utilities/libraries';
 
 @Component({
     selector: 'fd-docs-section-title',
     template: `
-        <h2 [id]="id" #title class="docs-header-link">
+        <h2 [id]="id" #title class="docs-header-link" (click)="navigateToFragment($event)">
             <span class="docs-header-link__text">
                 <ng-content></ng-content>
             </span>
             <a
                 class="docs-markdown-a"
                 [attr.aria-describedby]="id"
-                [routerLink]="'/' + currentLibrary + '/' + componentName"
-                [fragment]="id"
+                [href]="fragmentUrl"
+                (click)="navigateToFragment($event)"
             >
                 <fd-icon glyph="number-sign"></fd-icon>
             </a>
@@ -33,7 +33,7 @@ import { CURRENT_LIB, Libraries } from '../../utilities/libraries';
     `,
     styleUrls: ['./docs-section-title.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [RouterLink, IconComponent]
+    imports: [IconComponent]
 })
 export class DocsSectionTitleComponent implements OnInit, AfterViewInit {
     @ViewChild('title', { read: ElementRef })
@@ -47,10 +47,16 @@ export class DocsSectionTitleComponent implements OnInit, AfterViewInit {
 
     readonly currentLibrary: Libraries;
 
+    /** Pre-computed fragment URL for the anchor href (hash-based routing). */
+    get fragmentUrl(): string {
+        return `#/${this.currentLibrary}/${this.componentName}#${this.id}`;
+    }
+
     private idFromUrl: any;
 
     constructor(
         private readonly activatedRoute: ActivatedRoute,
+        private readonly router: Router,
         @Inject(CURRENT_LIB) private readonly currentLib: Libraries,
         private readonly _destroyRef: DestroyRef
     ) {
@@ -66,6 +72,15 @@ export class DocsSectionTitleComponent implements OnInit, AfterViewInit {
 
     ngAfterViewInit(): void {
         this.handleUrlFragment();
+    }
+
+    /** Navigate to this section's fragment when the heading is clicked. */
+    navigateToFragment(event: MouseEvent): void {
+        event.preventDefault();
+        this.router.navigate(['/' + this.currentLibrary + '/' + this.componentName], {
+            fragment: this.id,
+            replaceUrl: true
+        });
     }
 
     private handleUrlFragment(): void {

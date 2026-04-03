@@ -9,7 +9,7 @@ import {
     signal
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 
 interface TocSection {
@@ -144,12 +144,14 @@ export class TableOfContentsComponent {
     protected readonly visible = computed(() => this.sections().length >= 2 && this._isWideScreen());
 
     private readonly _router = inject(Router);
+    private readonly _route = inject(ActivatedRoute);
     private readonly _destroyRef = inject(DestroyRef);
     private readonly _isWideScreen = signal(true);
     private _intersectionObserver: IntersectionObserver | null = null;
     private _mutationObserver: MutationObserver | null = null;
     private _resizeObserver: ResizeObserver | null = null;
     private _scanTimeout: ReturnType<typeof setTimeout> | null = null;
+    private _lastRoutePath = '';
 
     constructor() {
         this._router.events
@@ -157,9 +159,14 @@ export class TableOfContentsComponent {
                 filter((e): e is NavigationEnd => e instanceof NavigationEnd),
                 takeUntilDestroyed()
             )
-            .subscribe(() => {
-                // Clear sections immediately on navigation so the ToC doesn't show stale items
-                this.sections.set([]);
+            .subscribe((e) => {
+                // Extract the path portion (before any fragment) to detect actual page changes.
+                // Only clear sections when navigating to a different page, not on fragment-only changes.
+                const path = e.urlAfterRedirects.split('#')[0];
+                if (this._lastRoutePath && path !== this._lastRoutePath) {
+                    this.sections.set([]);
+                }
+                this._lastRoutePath = path;
             });
 
         afterNextRender(() => {
@@ -199,6 +206,13 @@ export class TableOfContentsComponent {
         });
 
         this.activeId.set(id);
+
+        // Update the URL fragment without triggering a full navigation
+        this._router.navigate([], {
+            relativeTo: this._route,
+            fragment: id,
+            replaceUrl: true
+        });
     }
 
     private _scanSections(): void {
