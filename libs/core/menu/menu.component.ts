@@ -237,8 +237,9 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
             // Emit isOpenChange for MenuMobileComponent and other consumers
             this.isOpenChange.emit(openState);
 
-            // Sync to service only if not already syncing (prevents loop)
-            if (!this._syncingIsOpen) {
+            // Sync to service only if not already syncing and not in mobile mode (prevents loop).
+            // In mobile mode, the dialog handles open/close — the popover service should not be involved.
+            if (!this._syncingIsOpen && !this.mobile()) {
                 this._syncingIsOpen = true;
                 this._popoverService.isOpen.set(openState);
                 this._syncingIsOpen = false;
@@ -446,7 +447,7 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
     /** @hidden */
     set trigger(trigger: ElementRef | null) {
         this._externalTrigger = trigger;
-        if (trigger) {
+        if (trigger && !this.mobile()) {
             this._popoverService.initialise(trigger);
         }
         this._destroyEventListeners();
@@ -462,7 +463,8 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
         // Always update component state for consistency
         this.isOpen.set(true);
 
-        // In desktop mode, also explicitly open the popover service
+        // In desktop mode, also explicitly open the popover service.
+        // In mobile mode the dialog handles open/close via the isOpen signal.
         if (!this.mobile()) {
             this._popoverService.open();
         }
