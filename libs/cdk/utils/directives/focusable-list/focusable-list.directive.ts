@@ -266,7 +266,6 @@ export class FocusableListDirective implements AfterViewInit, OnDestroy {
     /** Set items programmatically. */
     setItems(items: ReadonlyArray<FocusableItem>): void {
         this._itemsOverride.set(items);
-        this._listenOnItems();
     }
 
     /** @hidden */

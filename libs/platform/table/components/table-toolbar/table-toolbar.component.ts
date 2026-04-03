@@ -65,6 +65,7 @@ export interface TableToolbarTitleTemplateContext {
 export type EditMode = 'none' | 'inline';
 
 let tableToolbarTitleUniqueId = 0;
+let tableToolbarUniqueId = 0;
 
 @Directive({
     selector: '[fdpTableToolbarTemplate]',
@@ -161,6 +162,28 @@ export class TableToolbarComponent implements TableToolbarInterface, AfterViewCh
     /** Whether display search button in the search field */
     @Input()
     disableSearch = false;
+
+    /** Toolbar Aria-label attribute. */
+    @Input()
+    ariaLabel: string;
+
+    /** Toolbar Aria-labelledby attribute. */
+    @Input()
+    ariaLabelledBy: string;
+
+    /** Toolbar Aria-describedby attribute. */
+    @Input()
+    ariaDescribedBy: string;
+
+    /** Toolbar Aria-orientation attribute. */
+    @Input()
+    ariaOrientation: 'horizontal' | 'vertical' = 'horizontal';
+
+    /**
+     * The ID of the toolbar
+     * */
+    @Input()
+    id = `fd-table-toolbar-${tableToolbarUniqueId++}`;
 
     /** Search field input text. */
     @Input()
