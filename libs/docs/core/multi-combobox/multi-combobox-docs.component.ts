@@ -12,6 +12,7 @@ import {
 import { MultiComboboxBylineExampleComponent } from './examples/multi-combobox-byline/multi-combobox-byline-example.component';
 import { MultiComboboxColumnsExampleComponent } from './examples/multi-combobox-columns/multi-combobox-columns-example.component';
 import { MultiComboboxDatasourceExampleComponent } from './examples/multi-combobox-datasource/multi-combobox-datasource-example.component';
+import { MultiComboboxDynamicDatasourceExampleComponent } from './examples/multi-combobox-dynamic-datasource/multi-combobox-dynamic-datasource-example.component';
 import { MultiComboboxFormsExampleComponent } from './examples/multi-combobox-forms/multi-combobox-forms-example.component';
 import { MultiComboboxGroupExampleComponent } from './examples/multi-combobox-group/multi-combobox-group-example.component';
 import { MultiComboboxInsideDialogExampleComponent } from './examples/multi-combobox-inside-dialog/multi-combobox-inside-dialog-example.component';
@@ -22,6 +23,10 @@ import { MultiComboboxResponsiveTokenizerExampleComponent } from './examples/tok
 
 const multiComboboxDatasourceHtml = 'multi-combobox-datasource/multi-combobox-datasource-example.component.html';
 const multiComboboxDatasourceTs = 'multi-combobox-datasource/multi-combobox-datasource-example.component.ts';
+const multiComboboxDynamicDatasourceHtml =
+    'multi-combobox-dynamic-datasource/multi-combobox-dynamic-datasource-example.component.html';
+const multiComboboxDynamicDatasourceTs =
+    'multi-combobox-dynamic-datasource/multi-combobox-dynamic-datasource-example.component.ts';
 const multiComboboxMobileHtml = 'multi-combobox-mobile/multi-combobox-mobile-example.component.html';
 const multiComboboxMobileTs = 'multi-combobox-mobile/multi-combobox-mobile-example.component.ts';
 const multiComboboxFormsHtml = 'multi-combobox-forms/multi-combobox-forms-example.component.html';
@@ -50,6 +55,7 @@ const multiComboboxInsideDialogTs = 'multi-combobox-inside-dialog/multi-combobox
         DescriptionComponent,
         ComponentExampleComponent,
         MultiComboboxDatasourceExampleComponent,
+        MultiComboboxDynamicDatasourceExampleComponent,
         CodeExampleComponent,
         SeparatorComponent,
         RouterLink,
@@ -76,6 +82,20 @@ export class MultiComboboxDocsComponent {
             fileName: 'multi-combobox-datasource-example',
             code: getAssetFromModuleAssets(multiComboboxDatasourceTs),
             component: 'MultiComboboxDatasourceExampleComponent'
+        }
+    ];
+
+    multiComboboxDynamicDatasourceExample: ExampleFile[] = [
+        {
+            language: 'html',
+            fileName: 'multi-combobox-dynamic-datasource-example',
+            code: getAssetFromModuleAssets(multiComboboxDynamicDatasourceHtml)
+        },
+        {
+            language: 'typescript',
+            fileName: 'multi-combobox-dynamic-datasource-example',
+            code: getAssetFromModuleAssets(multiComboboxDynamicDatasourceTs),
+            component: 'MultiComboboxDynamicDatasourceExampleComponent'
         }
     ];
 
