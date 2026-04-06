@@ -7,11 +7,13 @@ import {
     Inject,
     Input,
     OnInit,
+    Optional,
     ViewChild
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IconComponent } from '@fundamental-ngx/core/icon';
+import { CURRENT_COMPONENT } from '../../tokens/current-component.token';
 import { CURRENT_LIB, Libraries } from '../../utilities/libraries';
 
 @Component({
@@ -49,7 +51,7 @@ export class DocsSectionTitleComponent implements OnInit, AfterViewInit {
 
     /** Pre-computed fragment URL for the anchor href (hash-based routing). */
     get fragmentUrl(): string {
-        return `#/${this.currentLibrary}/${this.componentName}#${this.id}`;
+        return `#/${this.currentLibrary}/${this._routeSlug}#${this.id}`;
     }
 
     private idFromUrl: any;
@@ -58,9 +60,26 @@ export class DocsSectionTitleComponent implements OnInit, AfterViewInit {
         private readonly activatedRoute: ActivatedRoute,
         private readonly router: Router,
         @Inject(CURRENT_LIB) private readonly currentLib: Libraries,
+        @Optional() @Inject(CURRENT_COMPONENT) private readonly currentComponent: string | null,
         private readonly _destroyRef: DestroyRef
     ) {
         this.currentLibrary = this.currentLib;
+    }
+
+    /** Derive the route slug from CURRENT_COMPONENT token, falling back to the current URL path. */
+    private get _routeSlug(): string {
+        if (this.currentComponent) {
+            return this.currentComponent;
+        }
+        // Fallback: extract the component slug from the current URL.
+        // URL format: /<library>/<component-slug> (possibly with fragment/query)
+        const url = this.router.url.split('#')[0].split('?')[0];
+        const libPrefix = '/' + this.currentLibrary + '/';
+        const idx = url.indexOf(libPrefix);
+        if (idx !== -1) {
+            return url.substring(idx + libPrefix.length).split('/')[0];
+        }
+        return this.componentName;
     }
 
     ngOnInit(): void {
@@ -77,7 +96,7 @@ export class DocsSectionTitleComponent implements OnInit, AfterViewInit {
     /** Navigate to this section's fragment when the heading is clicked. */
     navigateToFragment(event: MouseEvent): void {
         event.preventDefault();
-        this.router.navigate(['/' + this.currentLibrary + '/' + this.componentName], {
+        this.router.navigate(['/' + this.currentLibrary + '/' + this._routeSlug], {
             fragment: this.id,
             replaceUrl: true
         });
