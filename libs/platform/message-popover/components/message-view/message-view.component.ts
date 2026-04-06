@@ -1,4 +1,3 @@
-import { animate, keyframes, state, style, transition, trigger } from '@angular/animations';
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
@@ -9,7 +8,6 @@ import {
     DestroyRef,
     ElementRef,
     EventEmitter,
-    HostBinding,
     Inject,
     Input,
     Output,
@@ -26,73 +24,18 @@ import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { debounceTime } from 'rxjs';
 import { MessagePopoverEntry, MessagePopoverErrorGroup } from '../../models/message-popover-entry.interface';
 
+const ANIMATION_EASING = 'cubic-bezier(0, 0, 0.2, 1)';
+const ANIMATION_DURATION = 100;
+
 @Component({
     selector: 'fdp-message-view',
     templateUrl: './message-view.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [TabbableElementService],
-    animations: [
-        trigger('openCloseList', [
-            // ...
-            state(
-                'open',
-                style({
-                    transform: 'translateX(0)',
-                    opacity: 1
-                })
-            ),
-            state(
-                'closed',
-                style({
-                    transform: 'translateX(-50px)',
-                    opacity: 0
-                })
-            ),
-            transition('open => closed', [animate('.1s cubic-bezier(0, 0, 0.2, 1)')]),
-            transition('closed => open', [animate('0.1s .1s cubic-bezier(0, 0, 0.2, 1)')])
-        ]),
-        trigger('openCloseDetails', [
-            state(
-                'open',
-                style({
-                    transform: 'translateX(0)',
-                    opacity: 1,
-                    display: 'block'
-                })
-            ),
-            state(
-                'closed',
-                style({
-                    transform: 'translateX(50px)',
-                    opacity: 0
-                })
-            ),
-            transition('open => closed', [
-                animate(
-                    '.1s cubic-bezier(0, 0, 0.2, 1)',
-                    keyframes([
-                        style({
-                            transform: 'translateX(0)',
-                            opacity: 1,
-                            display: 'block'
-                        }),
-                        style({
-                            transform: 'translateX(50px)',
-                            opacity: 0,
-                            display: 'none'
-                        })
-                    ])
-                )
-            ]),
-            transition('closed => open', [
-                style({
-                    display: 'block'
-                }),
-                animate('0.1s .1s cubic-bezier(0, 0, 0.2, 1)')
-            ])
-        ])
-    ],
+    host: {
+        class: 'fd-message-popover__view-container'
+    },
     imports: [
         NgTemplateOutlet,
         CdkScrollable,
@@ -106,7 +49,16 @@ import { MessagePopoverEntry, MessagePopoverErrorGroup } from '../../models/mess
 export class MessageViewComponent implements AfterViewInit {
     /** Current Message Popover screen. Can be either `list` or `details`. */
     @Input()
-    currentScreen: 'list' | 'details';
+    set currentScreen(value: 'list' | 'details') {
+        const prev = this._currentScreen;
+        this._currentScreen = value;
+        if (prev && prev !== value) {
+            this._animateScreenTransition(value);
+        }
+    }
+    get currentScreen(): 'list' | 'details' {
+        return this._currentScreen;
+    }
 
     /** Filtered errors to render. */
     @Input()
@@ -136,19 +88,39 @@ export class MessageViewComponent implements AfterViewInit {
     @ViewChild('detailsView', { read: ElementRef })
     protected _detailsView: ElementRef;
 
-    /** @Hidden */
-    @HostBinding('class')
-    protected readonly _initialClass = 'fd-message-popover__view-container';
+    /** @hidden */
+    @ViewChild('listSection', { read: ElementRef })
+    protected _listSection: ElementRef;
+
+    /** @hidden */
+    @ViewChild('detailsSection', { read: ElementRef })
+    protected _detailsSection: ElementRef;
+
+    /** @hidden */
+    private _currentScreen: 'list' | 'details' = 'list';
 
     /** @hidden */
     private _activeListElement: Nullable<HTMLElement> = null;
+
+    /** @hidden */
+    private _listAnimation: Animation | null = null;
+
+    /** @hidden */
+    private _detailsAnimation: Animation | null = null;
 
     /** @hidden */
     constructor(
         private readonly _destroyRef: DestroyRef,
         private readonly _tabbableService: TabbableElementService,
         @Inject(DOCUMENT) private readonly _document: Document
-    ) {}
+    ) {
+        this._destroyRef.onDestroy(() => {
+            this._listAnimation?.cancel();
+            this._listAnimation = null;
+            this._detailsAnimation?.cancel();
+            this._detailsAnimation = null;
+        });
+    }
 
     /** @hidden */
     ngAfterViewInit(): void {
@@ -156,7 +128,7 @@ export class MessageViewComponent implements AfterViewInit {
             .pipe(debounceTime(20), takeUntilDestroyed(this._destroyRef))
             .subscribe(() => {
                 const { height } = this._detailsView.nativeElement.getBoundingClientRect();
-                this._listView.nativeElement.style.minHeight = `${height}px`;
+                this._listSection.nativeElement.style.minHeight = `${height}px`;
             });
     }
 
@@ -185,11 +157,88 @@ export class MessageViewComponent implements AfterViewInit {
         });
     }
 
-    /** @hidden */
-    _onListAnimationComplete(event: any): void {
-        if (event.toState === 'open' && this._activeListElement) {
-            this._activeListElement.focus();
-            this._activeListElement = null;
+    /** @hidden Animate the transition between list and details screens. */
+    private _animateScreenTransition(screen: 'list' | 'details'): void {
+        const listEl = this._listSection?.nativeElement;
+        const detailsEl = this._detailsSection?.nativeElement;
+
+        if (!listEl || !detailsEl) {
+            return;
         }
+
+        this._listAnimation?.cancel();
+        this._detailsAnimation?.cancel();
+
+        if (screen === 'details') {
+            this._animateListToDetails(listEl, detailsEl);
+        } else {
+            this._animateDetailsToList(listEl, detailsEl);
+        }
+    }
+
+    /** @hidden Slide list out left, details in from right. */
+    private _animateListToDetails(listEl: HTMLElement, detailsEl: HTMLElement): void {
+        if (typeof listEl.animate !== 'function') {
+            return;
+        }
+
+        this._listAnimation = listEl.animate(
+            [
+                { transform: 'translateX(0)', opacity: 1 },
+                { transform: 'translateX(-50px)', opacity: 0 }
+            ],
+            { duration: ANIMATION_DURATION, easing: ANIMATION_EASING, fill: 'forwards' }
+        );
+
+        this._detailsAnimation = detailsEl.animate(
+            [
+                { transform: 'translateX(50px)', opacity: 0 },
+                { transform: 'translateX(0)', opacity: 1 }
+            ],
+            { duration: ANIMATION_DURATION, easing: ANIMATION_EASING, fill: 'forwards', delay: ANIMATION_DURATION }
+        );
+
+        this._detailsAnimation.finished
+            .then(() => {
+                this._detailsAnimation = null;
+            })
+            .catch(() => {
+                this._detailsAnimation = null;
+            });
+    }
+
+    /** @hidden Slide details out right, list in from left. */
+    private _animateDetailsToList(listEl: HTMLElement, detailsEl: HTMLElement): void {
+        if (typeof listEl.animate !== 'function') {
+            return;
+        }
+
+        this._detailsAnimation = detailsEl.animate(
+            [
+                { transform: 'translateX(0)', opacity: 1 },
+                { transform: 'translateX(50px)', opacity: 0 }
+            ],
+            { duration: ANIMATION_DURATION, easing: ANIMATION_EASING, fill: 'forwards' }
+        );
+
+        this._listAnimation = listEl.animate(
+            [
+                { transform: 'translateX(-50px)', opacity: 0 },
+                { transform: 'translateX(0)', opacity: 1 }
+            ],
+            { duration: ANIMATION_DURATION, easing: ANIMATION_EASING, fill: 'forwards', delay: ANIMATION_DURATION }
+        );
+
+        this._listAnimation.finished
+            .then(() => {
+                this._listAnimation = null;
+                if (this._activeListElement) {
+                    this._activeListElement.focus();
+                    this._activeListElement = null;
+                }
+            })
+            .catch(() => {
+                this._listAnimation = null;
+            });
     }
 }

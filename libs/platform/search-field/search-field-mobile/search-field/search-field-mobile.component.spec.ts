@@ -1,6 +1,5 @@
 import { EventEmitter } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Subject } from 'rxjs';
 
 import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
@@ -41,7 +40,7 @@ describe('SearchFieldMobileComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [DialogModule, NoopAnimationsModule, SearchFieldMobileComponent],
+            imports: [DialogModule, SearchFieldMobileComponent],
             providers: [
                 DynamicComponentService,
                 { provide: SEARCH_FIELD_COMPONENT, useValue: new SearchFieldComponent() }
