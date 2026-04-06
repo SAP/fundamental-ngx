@@ -17,6 +17,7 @@ import { PopoverModule } from './popover.module';
             [isOpen]="isOpen"
             [noArrow]="noArrow"
             [closeOnEscapeKey]="closeOnEscapeKey"
+            [mobile]="mobile"
         >
             <fd-popover-control>
                 <button #trigger>Open Popover</button>
@@ -40,6 +41,7 @@ class TestPopoverComponent {
     isOpen = false;
     noArrow = true;
     closeOnEscapeKey = true;
+    mobile = false;
 }
 
 @Component({
@@ -344,6 +346,105 @@ describe('PopoverComponent with config input', () => {
         expect(effectiveConfig.placement).toBe('bottom-start'); // input default takes precedence
         expect(effectiveConfig.noArrow).toBe(true); // input default takes precedence
     });
+});
+
+describe('PopoverComponent mobile mode', () => {
+    let fixture: ComponentFixture<TestPopoverComponent>;
+    let testComponent: TestPopoverComponent;
+    let popover: PopoverComponent;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [TestPopoverComponent, NoopAnimationsModule]
+        }).compileComponents();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(TestPopoverComponent);
+        testComponent = fixture.componentInstance;
+        testComponent.mobile = true;
+        fixture.detectChanges();
+        popover = testComponent.popover;
+    });
+
+    it('should not sync isOpen to service when in mobile mode', fakeAsync(() => {
+        const service = popover['_popoverService'];
+
+        popover.open();
+        fixture.detectChanges();
+        tick();
+
+        // In mobile mode, the service isOpen should NOT be updated
+        expect(popover.isOpen()).toBe(true);
+        expect(service.isOpen()).toBe(false);
+
+        popover.close();
+        fixture.detectChanges();
+        tick();
+
+        expect(popover.isOpen()).toBe(false);
+    }));
+
+    it('should not create a popover overlay when opened in mobile mode', fakeAsync(() => {
+        popover.open();
+        fixture.detectChanges();
+        tick();
+
+        // The popover body overlay should not be rendered — only the mobile dialog should be used
+        const popoverBody = document.querySelector('.cdk-overlay-container .fd-popover__body');
+        expect(popoverBody).toBeNull();
+    }));
+
+    it('should reopen in mobile mode after close', fakeAsync(() => {
+        // Open
+        popover.open();
+        fixture.detectChanges();
+        tick();
+        expect(popover.isOpen()).toBe(true);
+
+        // Close
+        popover.close();
+        fixture.detectChanges();
+        tick();
+        expect(popover.isOpen()).toBe(false);
+
+        // Reopen - this is the scenario that was broken
+        popover.open();
+        fixture.detectChanges();
+        tick();
+        expect(popover.isOpen()).toBe(true);
+    }));
+
+    it('should still emit isOpenChange and beforeOpen events in mobile mode', fakeAsync(() => {
+        const emittedValues: boolean[] = [];
+        let beforeOpenEmitted = false;
+        popover.isOpenChange.subscribe((value) => emittedValues.push(value));
+        popover.beforeOpen.subscribe(() => (beforeOpenEmitted = true));
+
+        popover.open();
+        fixture.detectChanges();
+        tick();
+
+        expect(beforeOpenEmitted).toBe(true);
+        expect(emittedValues).toContain(true);
+
+        popover.close();
+        fixture.detectChanges();
+        tick();
+
+        expect(emittedValues).toContain(false);
+    }));
+
+    it('should not set up trigger listeners on the service in mobile mode', fakeAsync(() => {
+        const service = popover['_popoverService'];
+        jest.spyOn(service, 'updateTriggerElement');
+
+        // Trigger a config change to exercise the sync effect
+        fixture.detectChanges();
+        tick();
+
+        expect(service.updateTriggerElement).not.toHaveBeenCalled();
+    }));
 });
 
 describe('PopoverComponent service stub tests', () => {

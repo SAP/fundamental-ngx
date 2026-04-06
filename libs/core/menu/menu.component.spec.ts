@@ -439,6 +439,36 @@ describe('MenuComponent config input', () => {
     });
 });
 
+describe('MenuComponent mobile mode', () => {
+    let fixture: ComponentFixture<TestMenuComponent>;
+    let testComponent: TestMenuComponent;
+    let menu: MenuComponent;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [TestMenuComponent, NoopAnimationsModule]
+        }).compileComponents();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(TestMenuComponent);
+        testComponent = fixture.componentInstance;
+        testComponent.mobileMode = true;
+        fixture.detectChanges();
+        menu = testComponent.menu;
+    });
+
+    it('should not create a popover overlay when opened in mobile mode', fakeAsync(() => {
+        menu.open();
+        fixture.detectChanges();
+        tick();
+
+        // The popover body should not be rendered — only the mobile dialog should be used
+        const popoverBody = document.querySelector('.fd-popover__body');
+        expect(popoverBody).toBeNull();
+    }));
+});
+
 describe('MenuComponent advanced options', () => {
     @Component({
         selector: 'fd-menu-advanced-test',
