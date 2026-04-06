@@ -140,6 +140,9 @@ export interface PopoverConfig {
     /** ARIA role for the popover body. */
     bodyRole?: string | null;
 
+    /** ARIA label for the popover body. */
+    bodyAriaLabel?: string | null;
+
     /** ID for the popover body. */
     bodyId?: string | null;
 }

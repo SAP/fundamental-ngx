@@ -5,6 +5,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    ElementRef,
     Input,
     OnDestroy,
     QueryList,
@@ -12,7 +13,8 @@ import {
     ViewChildren,
     ViewEncapsulation,
     computed,
-    inject
+    inject,
+    output
 } from '@angular/core';
 import { FocusableListDirective, RtlService, elementClick$ } from '@fundamental-ngx/cdk/utils';
 import { BarComponent, BarElementDirective, BarLeftDirective, ButtonBarComponent } from '@fundamental-ngx/core/bar';
@@ -22,6 +24,8 @@ import { Subscription, map, merge, startWith } from 'rxjs';
 import { filter, switchMap } from 'rxjs/operators';
 import { AvatarGroupItemRendererDirective } from '../../directives/avatar-group-item-renderer.directive';
 import { AvatarGroupItemDirective } from '../../directives/avatar-group-item.directive';
+import { AVATAR_GROUP_HOST_CONFIG } from '../../tokens';
+import { AvatarGroupHostConfig } from '../../types';
 
 @Component({
     selector: 'fd-default-avatar-group-overflow-body',
@@ -42,6 +46,16 @@ import { AvatarGroupItemDirective } from '../../directives/avatar-group-item.dir
         class: 'fd-popover__wrapper',
         '[style.max-width.rem]': '20'
     },
+    providers: [
+        {
+            // Override the parent group config so that items inside the overflow popup are always
+            // rendered as individually focusable. Without this, a group-type parent would set
+            // tabindex=-1 and isFocusable=false on each avatar via AvatarGroupItemRendererDirective,
+            // making them invisible to fdkFocusableList and unreachable by keyboard.
+            provide: AVATAR_GROUP_HOST_CONFIG,
+            useValue: { type: 'individual', orientation: 'horizontal', size: 's' } as AvatarGroupHostConfig
+        }
+    ],
     styleUrl: './default-avatar-group-overflow-body.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -63,6 +77,9 @@ export class DefaultAvatarGroupOverflowBodyComponent implements AfterViewInit, O
     @ViewChildren(AvatarGroupItemRendererDirective)
     _avatarGroupItemPortals: QueryList<AvatarGroupItemRendererDirective>;
 
+    /** Emitted when the Escape key is pressed inside the overflow body. */
+    readonly escapePressed = output<void>();
+
     /** @hidden */
     _overflowPopoverStage: 'main' | 'details' = 'main';
 
@@ -83,6 +100,12 @@ export class DefaultAvatarGroupOverflowBodyComponent implements AfterViewInit, O
     private _itemClickSubscription: Subscription;
 
     /** @hidden */
+    private _escapeUnlisten: () => void;
+
+    /** @hidden */
+    private readonly _elementRef = inject(ElementRef<HTMLElement>);
+
+    /** @hidden */
     private readonly _changeDetectorRef = inject(ChangeDetectorRef);
 
     /** @hidden */
@@ -93,6 +116,7 @@ export class DefaultAvatarGroupOverflowBodyComponent implements AfterViewInit, O
 
     /** @hidden */
     ngAfterViewInit(): void {
+        this._registerEscapeListener();
         this._avatarGroupItemPortals.changes
             .pipe(
                 startWith(this._avatarGroupItemPortals),
@@ -113,20 +137,50 @@ export class DefaultAvatarGroupOverflowBodyComponent implements AfterViewInit, O
                     this._overflowPopoverStage = 'details';
                     this._selectedItem = item.avatarGroupItem;
                     this._changeDetectorRef.detectChanges();
+                    this._focusFirstTabbableElement();
                 });
             });
     }
 
     /** @hidden */
     ngOnDestroy(): void {
-        if (this._itemClickSubscription) {
-            this._itemClickSubscription.unsubscribe();
-        }
+        this._itemClickSubscription?.unsubscribe();
+        this._escapeUnlisten();
     }
 
     /** @hidden */
     protected openOverflowMain(): void {
         this._overflowPopoverStage = 'main';
         this._changeDetectorRef.detectChanges();
+        const target = this._avatarGroupItemPortals.find((r) => r.avatarGroupItem === this._selectedItem);
+        if (target?.element) {
+            target.element.focus();
+        } else {
+            this._focusFirstTabbableElement();
+        }
+    }
+
+    /** @hidden */
+    private _focusFirstTabbableElement(): void {
+        requestAnimationFrame(() => {
+            const el: HTMLElement | null = this._elementRef.nativeElement.querySelector(
+                '[tabindex="0"], button, a, input'
+            );
+            el?.focus();
+        });
+    }
+
+    /** @hidden */
+    private _registerEscapeListener(): void {
+        const el = this._elementRef.nativeElement;
+        const escapeHandler = (event: KeyboardEvent): void => {
+            if (event.key === 'Escape') {
+                this.escapePressed.emit();
+            }
+        };
+        // Capture phase is required: child elements (e.g. fdkFocusableList items) call
+        // stopPropagation() on keydown, which would prevent the event from bubbling up.
+        el.addEventListener('keydown', escapeHandler, true);
+        this._escapeUnlisten = () => el.removeEventListener('keydown', escapeHandler, true);
     }
 }

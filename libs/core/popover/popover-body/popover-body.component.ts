@@ -97,6 +97,9 @@ export class PopoverBodyComponent {
     /** @hidden Aria role for the popover body. */
     readonly _bodyRole = signal<Nullable<string>>('dialog');
 
+    /** @hidden Aria label for the popover body. */
+    readonly _bodyAriaLabel = signal<Nullable<string>>(null);
+
     /** @hidden ID for the popover body. */
     readonly _bodyId = signal<string | null>(null);
 

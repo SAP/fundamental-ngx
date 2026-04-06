@@ -11,15 +11,12 @@ import {
     ViewChildren,
     ViewEncapsulation,
     computed,
-    inject
+    inject,
+    viewChild
 } from '@angular/core';
-import {
-    FocusableItemDirective,
-    FocusableListDirective,
-    ResizeObserverDirective,
-    RtlService
-} from '@fundamental-ngx/cdk/utils';
+import { FocusableListDirective, ResizeObserverDirective, RtlService } from '@fundamental-ngx/cdk/utils';
 import { PopoverBodyDirective, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
+import { resolveTranslationSignalFn } from '@fundamental-ngx/i18n';
 import { AvatarGroupHostComponent } from './components/avatar-group-host.component';
 import { AvatarGroupOverflowButtonComponent } from './components/avatar-group-overflow-button.component';
 import { DefaultAvatarGroupOverflowBodyComponent } from './components/default-avatar-group-overflow-body/default-avatar-group-overflow-body.component';
@@ -49,7 +46,6 @@ import { AvatarGroupHostConfig } from './types';
         PopoverControlComponent,
         PopoverBodyDirective,
         NgTemplateOutlet,
-        FocusableItemDirective,
         FocusableListDirective,
         AvatarGroupItemRendererDirective,
         AvatarGroupOverflowButtonComponent,
@@ -93,6 +89,14 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
     @Input()
     overflowPopoverTitle: string;
 
+    /**
+     * Aria label for the avatar group container.
+     * When not provided, a default label is generated from the i18n `coreAvatarGroup.ariaLabel` key,
+     * using the current displayed and hidden avatar counts as context.
+     */
+    @Input()
+    ariaLabel: string;
+
     /** @hidden */
     @ViewChildren(AvatarGroupItemRendererDirective)
     _avatarRenderers: QueryList<AvatarGroupItemRendererDirective>;
@@ -110,7 +114,26 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
     _avatarGroupPopoverBody: AvatarGroupOverflowBodyDirective;
 
     /** @hidden */
+    readonly _avatarGroupHost = viewChild(AvatarGroupHostComponent);
+
+    /** @hidden */
     protected readonly contentDirection = computed<Direction>(() => (this._rtlService?.rtl() ? 'rtl' : 'ltr'));
+
+    /** @hidden */
+    protected readonly _defaultAriaLabel = computed(() =>
+        this._translate('coreAvatarGroup.ariaLabel', this._ariaLabelContext)()
+    );
+
+    /** @hidden */
+    private readonly _translate = resolveTranslationSignalFn();
+
+    /** @hidden */
+    private readonly _ariaLabelContext = computed(() => {
+        const hiddenItems = this._avatarGroupHost()?._hiddenItems() ?? [];
+        const hiddenCount = hiddenItems.length;
+        const count = (this._avatars?.length ?? 0) - hiddenCount;
+        return { count, hiddenCount };
+    });
 
     /** @hidden */
     private readonly _cdr = inject(ChangeDetectorRef);

@@ -13,6 +13,7 @@ export type FdLanguageKeyIdentifier =
     | 'btpSearchField.searchInputPlaceholder'
     | 'btpToolHeader.menuButtonAriaLabel'
     | 'coreActionSheet.toolbarLabel'
+    | 'coreAvatarGroup.ariaLabel'
     | 'coreAvatarGroup.backButton'
     | 'coreBreadcrumb.breadcrumbTrailLabel'
     | 'coreBreadcrumb.overflowTitleMore'

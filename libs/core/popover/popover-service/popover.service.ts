@@ -136,6 +136,9 @@ export class PopoverService {
     /** @hidden Aria role for the popover body. */
     protected _bodyRole: string | null = 'dialog';
 
+    /** @hidden Aria label for the popover body. */
+    protected _bodyAriaLabel: string | null = null;
+
     /** @hidden ID for the popover body. */
     protected readonly _bodyId = signal<string | null>(null);
 
@@ -513,6 +516,9 @@ export class PopoverService {
         if (config.bodyRole !== undefined) {
             this._bodyRole = unwrap(config.bodyRole);
         }
+        if (config.bodyAriaLabel !== undefined) {
+            this._bodyAriaLabel = unwrap(config.bodyAriaLabel);
+        }
         if (config.bodyId !== undefined) {
             this._bodyId.set(unwrap(config.bodyId));
         }
@@ -882,6 +888,7 @@ export class PopoverService {
         }
         body._closeOnEscapeKey.set(this.closeOnEscapeKey());
         body._bodyRole.set(this._bodyRole);
+        body._bodyAriaLabel.set(this._bodyAriaLabel);
         body._bodyId.set(this._bodyId());
         body._resizable.set(this.resizable());
         body._setBodyComponentClasses(this.additionalBodyComponentClasses());

@@ -363,6 +363,12 @@ export interface FdLanguage {
     coreWizard: {
         ariaLabel: FdLanguageKey;
     };
+    coreAvatarGroup: {
+        /** Aria label for the avatar group container. Supports placeholders: {{count}} (total visible), {{hiddenCount}} (overflow count). */
+        ariaLabel: FdLanguageKey<{ count: number; hiddenCount: number }>;
+        /** Back button label in the overflow popover */
+        backButton: FdLanguageKey;
+    };
     coreBreadcrumb: {
         overflowTitleMore: FdLanguageKey;
     };

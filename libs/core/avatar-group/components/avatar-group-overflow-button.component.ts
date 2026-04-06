@@ -29,7 +29,9 @@ import { AVATAR_GROUP_HOST_CONFIG } from '../tokens';
     selector: 'fd-avatar-group-overflow-button',
     template: ` <ng-content></ng-content>`,
     host: {
-        role: 'button'
+        role: 'button',
+        '(keydown.enter)': 'elementRef.nativeElement.click()',
+        '(keydown.space)': 'elementRef.nativeElement.click(); $event.preventDefault()'
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
