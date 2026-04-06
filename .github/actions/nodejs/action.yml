@@ -10,10 +10,6 @@ inputs:
         description: Install dependencies from lock file
         required: false
         default: 'true'
-    registry-url:
-        description: npm registry URL (set for publishing with OIDC trusted publishing)
-        required: false
-        default: ''
 
 runs:
     using: composite
@@ -22,7 +18,6 @@ runs:
           uses: actions/setup-node@v4.3.0
           with:
               node-version: ${{ inputs.node-version }}
-              registry-url: ${{ inputs.registry-url }}
 
         - name: Get Yarn path from .yarnrc.yml
           id: yarn-path
