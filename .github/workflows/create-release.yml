@@ -66,9 +66,6 @@ jobs:
                   name: ${{ secrets.GH_NAME }}
                   email: ${{ secrets.GH_EMAIL }}
 
-            - name: Update npm for trusted publishing
-              run: npm install -g npm@latest
-
             - name: Initialize the Nx Cloud distributed CI run
               run: npx nx-cloud start-ci-run
 
