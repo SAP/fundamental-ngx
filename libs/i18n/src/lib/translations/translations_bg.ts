@@ -21,7 +21,7 @@ export default {
     },
     coreAvatarGroup: {
         ariaLabel:
-            'Попъп с групови аватари {count} avatars displayed, {hiddenCount} avatars hidden, activate for complete list',
+            'Has popup type dialog conjoined avatars, {count} avatars displayed, {hiddenCount} avatars hidden, activate for complete list',
         backButton: 'Назад',
         popupBodyAriaLabel: 'With {count} items'
     },
