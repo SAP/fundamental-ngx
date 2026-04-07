@@ -446,7 +446,7 @@ describe('MenuComponent mobile mode', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [TestMenuComponent, NoopAnimationsModule]
+            imports: [TestMenuComponent]
         }).compileComponents();
     }));
 
