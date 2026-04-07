@@ -499,6 +499,17 @@ afterRender(
 - For DOM work that should react to signal changes, consider `afterRenderEffect()` -- it combines signal tracking with the render lifecycle (runs after rendering, only when tracked signals change)
 - Clean up subscriptions and listeners in `ngOnDestroy`
 - Avoid heavy computations in these hooks
+- **Avoid using `afterNextRender` to set properties on child components.** We hit NG0100 when `FormItemComponent` used `afterNextRender` to set `ariaLabelledBy` on a content child (PR #14045). Moving to `ngAfterContentInit` fixed it. Angular docs recommend `afterNextRender` for DOM operations, not for modifying component state.
+
+### afterNextRender vs lifecycle hooks
+
+| Need to...                                    | Use                  |
+| --------------------------------------------- | -------------------- |
+| React to `@ContentChild` being available      | `ngAfterContentInit` |
+| React to `@ViewChild` being available         | `ngAfterViewInit`    |
+| Measure/manipulate DOM after render           | `afterNextRender`    |
+| Initialize third-party library on DOM element | `afterNextRender`    |
+| Set a property on a content child             | `ngAfterContentInit` |
 
 ---
 

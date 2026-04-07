@@ -1,7 +1,6 @@
 import { OverlayModule } from '@angular/cdk/overlay';
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogModule } from '../dialog.module';
 import { DialogService } from './dialog.service';
 
@@ -35,7 +34,7 @@ describe('DialogService', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [OverlayModule, NoopAnimationsModule, TemplateTestComponent, DialogServiceTestComponent]
+            imports: [OverlayModule, TemplateTestComponent, DialogServiceTestComponent]
         }).compileComponents();
     });
 
@@ -94,4 +93,69 @@ describe('DialogService', () => {
         tick(); // Wait for the closing animation or processing
         expect(service.hasOpenDialogs()).toBe(false);
     }));
+
+    describe('lifecycle', () => {
+        it('should clean up overlay on close', fakeAsync(() => {
+            const dialogRef = service.open(TemplateTestComponent);
+
+            fixture.detectChanges();
+            tick();
+
+            // Verify overlay is in the DOM
+            const overlayContainer = document.querySelector('.cdk-overlay-container');
+            expect(overlayContainer?.querySelector('fd-dialog-container')).toBeTruthy();
+
+            dialogRef.close('result');
+            fixture.detectChanges();
+            tick(200);
+
+            // Overlay pane should be removed
+            expect(service.hasOpenDialogs()).toBe(false);
+        }));
+
+        it('should update dialog ref status on close', fakeAsync(() => {
+            const dialogRef = service.open(TemplateTestComponent);
+
+            fixture.detectChanges();
+            tick();
+
+            expect(dialogRef.isClosed()).toBe(false);
+
+            dialogRef.close('done');
+            fixture.detectChanges();
+            tick(200);
+
+            expect(dialogRef.isClosed()).toBe(true);
+            expect(dialogRef.status()).toBe('closed');
+        }));
+
+        it('should update dialog ref status on dismiss', fakeAsync(() => {
+            const dialogRef = service.open(TemplateTestComponent);
+
+            fixture.detectChanges();
+            tick();
+
+            dialogRef.dismiss('cancel');
+            fixture.detectChanges();
+            tick(200);
+
+            expect(dialogRef.isClosed()).toBe(true);
+            expect(dialogRef.status()).toBe('dismissed');
+        }));
+
+        it('should provide close result via signal', fakeAsync(() => {
+            const dialogRef = service.open(TemplateTestComponent);
+
+            fixture.detectChanges();
+            tick();
+
+            expect(dialogRef.closeResult()).toBeNull();
+
+            dialogRef.close('my-result');
+            fixture.detectChanges();
+            tick(200);
+
+            expect(dialogRef.closeResult()).toEqual({ status: 'closed', value: 'my-result' });
+        }));
+    });
 });

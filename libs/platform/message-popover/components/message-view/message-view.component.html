@@ -51,13 +51,7 @@
     ></ng-template>
 </ng-template>
 <div class="fd-message-view">
-    <section
-        class="fd-message-view__list"
-        tabindex="-1"
-        [@openCloseList]="currentScreen === 'list' ? 'open' : 'closed'"
-        (@openCloseList.done)="_onListAnimationComplete($event)"
-        fd-scrollbar
-    >
+    <section #listSection class="fd-message-view__list" tabindex="-1" fd-scrollbar>
         <ul #listView fd-list class="message-popover__list fd-list--message-view" [navigationIndicator]="true">
             @for (group of filteredErrors; track group) {
                 @if (group.group) {
@@ -109,7 +103,7 @@
             }
         </ul>
     </section>
-    <section class="fd-message-view__details" [@openCloseDetails]="currentScreen === 'details' ? 'open' : 'closed'">
+    <section #detailsSection class="fd-message-view__details">
         <div #detailsView>
             @if (currentEntry) {
                 <span class="fd-message-view__details-title">
