@@ -1,9 +1,9 @@
 <div class="sidebar" [class.sidebar-collapsed]="sideCollapsed()">
-    <div class="fd-docs-search">
-        <div class="fd-docs-search__pill">
-            <fd-icon class="fd-docs-search__icon" glyph="search"></fd-icon>
+    <div class="fd-docs-command-bar">
+        <div class="fd-docs-command-bar__search">
+            <fd-icon class="fd-docs-command-bar__icon" glyph="search"></fd-icon>
             <input
-                class="fd-docs-search__input"
+                class="fd-docs-command-bar__input"
                 type="text"
                 placeholder="Search..."
                 aria-label="Search components"
@@ -12,32 +12,11 @@
                 #searchInput
             />
             @if (!search()) {
-                <span class="fd-docs-search__shortcuts" aria-hidden="true">
-                    <span class="fd-docs-search__shortcut">{{ isMac ? '⌘' : '⌃' }}K</span>
-                    <span class="fd-docs-search__shortcut-sep"></span>
-                    <span
-                        class="fd-docs-search__shortcut fd-docs-search__shortcut--toggle"
-                        [class.fd-docs-search__shortcut--active]="allExpanded()"
-                        role="button"
-                        tabindex="0"
-                        [attr.aria-label]="allExpanded() ? 'Collapse all sections' : 'Expand all sections'"
-                        [attr.aria-pressed]="allExpanded()"
-                        (click)="toggleAllSections(); $event.stopPropagation()"
-                        (keydown.enter)="toggleAllSections(); $event.stopPropagation()"
-                        (keydown.space)="toggleAllSections(); $event.preventDefault(); $event.stopPropagation()"
-                    >
-                        <fd-icon
-                            class="fd-docs-search__toggle-chevron"
-                            [class.fd-docs-search__toggle-chevron--open]="allExpanded()"
-                            glyph="slim-arrow-down"
-                        ></fd-icon>
-                        {{ isMac ? '⌘' : '⌃' }}.
-                    </span>
-                </span>
+                <span class="fd-docs-command-bar__hint" aria-hidden="true">{{ isMac ? '⌘' : '⌃' }}K</span>
             }
             @if (search()) {
                 <button
-                    class="fd-docs-search__clear"
+                    class="fd-docs-command-bar__clear"
                     aria-label="Clear search"
                     (click)="onSearchChange(''); searchInput.focus()"
                 >
@@ -45,6 +24,22 @@
                 </button>
             }
         </div>
+        <span class="fd-docs-command-bar__divider"></span>
+        <button
+            class="fd-docs-command-bar__action"
+            [class.fd-docs-command-bar__action--active]="allExpanded()"
+            [attr.aria-label]="allExpanded() ? 'Collapse all sections' : 'Expand all sections'"
+            [attr.aria-pressed]="allExpanded()"
+            [title]="allExpanded() ? 'Collapse all' : 'Expand all'"
+            (click)="toggleAllSections()"
+        >
+            <fd-icon
+                class="fd-docs-command-bar__chevron"
+                [class.fd-docs-command-bar__chevron--open]="allExpanded()"
+                glyph="slim-arrow-down"
+            ></fd-icon>
+            <kbd class="fd-docs-command-bar__action-kbd" aria-hidden="true">{{ isMac ? '⌘' : '⌃' }}.</kbd>
+        </button>
     </div>
     <div class="fd-docs-sidebar-content" fd-scrollbar>
         <nav class="fd-docs-nav" aria-label="Component navigation">

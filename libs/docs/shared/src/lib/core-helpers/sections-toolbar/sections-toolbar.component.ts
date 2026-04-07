@@ -63,12 +63,12 @@ export class SectionsToolbarComponent {
     }
 
     constructor() {
-        // Initialize sections in expanded state
+        // Initialize sections — collapsed by default, expand only the active one
         effect(() => {
             const sections = this.sections();
             const expandedMap = new Map<string, boolean>();
             sections.forEach((section) => {
-                expandedMap.set(section.header, true);
+                expandedMap.set(section.header, this.sectionHasActiveItem(section));
             });
             this.expandedSections.set(expandedMap);
         });

@@ -7,7 +7,7 @@ import { MarkdownModule } from 'ngx-markdown';
  */
 @Component({
     selector: 'fd-unified-home-page',
-    template: `<markdown class="fd-playground--markdown" [src]="readmeSrc"></markdown>`,
+    template: `<markdown class="doc-playground--markdown" [src]="readmeSrc"></markdown>`,
     imports: [MarkdownModule]
 })
 export class UnifiedHomePageComponent {

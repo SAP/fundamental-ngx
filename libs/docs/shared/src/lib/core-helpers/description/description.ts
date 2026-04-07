@@ -26,14 +26,17 @@ const PACKAGE_MAPPING: Record<string, string> = {
     imports: [MarkdownComponent],
     styles: [
         `
+            :host {
+                display: block;
+            }
+
             .description {
                 color: var(--sapTextColor);
                 font-family: var(--sapFontFamily);
                 font-weight: 400;
-                font-size: var(--sapFontLargeSize, 0.875rem);
+                font-size: var(--sapFontLargeSize);
                 line-height: 1.7;
                 margin-block-end: 1rem;
-                max-width: 48rem;
             }
 
             .component-description {

@@ -25,27 +25,14 @@ import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
             }
 
             .header {
-                position: relative;
-                color: var(--sapTitleColor, var(--sapTextColor));
+                color: var(--sapTitleColor);
                 font-family: var(--sapFontFamily);
-                font-size: clamp(1.75rem, 4vw, var(--sapFontHeader1Size, 2.25rem));
+                font-size: clamp(1.75rem, 4vw, var(--sapFontHeader1Size));
                 font-weight: 700;
                 line-height: 1.2;
                 margin-block-start: 1.5rem;
                 margin-block-end: 0.75rem;
-                padding-inline-start: 1rem;
                 letter-spacing: -0.01em;
-            }
-
-            .header::before {
-                content: '';
-                position: absolute;
-                inset-inline-start: 0;
-                inset-block-start: 0.15rem;
-                inset-block-end: 0.15rem;
-                width: 0.25rem;
-                border-radius: 0.25rem;
-                background: var(--sapBrandColor);
             }
         `
     ],

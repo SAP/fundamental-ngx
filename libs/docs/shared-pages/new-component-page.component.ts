@@ -4,7 +4,7 @@ import { MarkdownModule } from 'ngx-markdown';
 @Component({
     template: `
         <markdown
-            class="fd-playground--markdown"
+            class="doc-playground--markdown"
             src="assets/NEW_COMPONENT.md"
             (load)="onLoad()"
             (error)="onError()"
