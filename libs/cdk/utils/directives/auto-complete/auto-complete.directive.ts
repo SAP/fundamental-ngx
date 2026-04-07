@@ -1,5 +1,5 @@
 import { BACKSPACE, CONTROL, DELETE, ENTER, ESCAPE, LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
-import { DestroyRef, Directive, ElementRef, EventEmitter, Input, NgZone, Output, inject } from '@angular/core';
+import { DestroyRef, Directive, ElementRef, EventEmitter, Input, Output, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { fromEvent } from 'rxjs';
 import { KeyUtil } from '../../functions';
@@ -63,36 +63,29 @@ export class AutoCompleteDirective {
     private readonly _elementRef = inject(ElementRef);
 
     /** @hidden */
-    private readonly _zone = inject(NgZone);
-
-    /** @hidden */
     private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     constructor() {
         /**
          * Fixes #10710
-         * With chinese characters inputText property update was triggered after the keyup event trigger.
-         * By ensuring that we set all properties we can proceed with stable data.
+         * With IME input (e.g. Chinese), keyup events fire during composition before the final
+         * character is committed. The _isComposing flag suppresses autocomplete logic during
+         * composition, and compositionend syncs inputText with the committed native value.
          */
-        this._zone.runOutsideAngular(() => {
-            const keyupEvent = fromEvent<KeyboardEvent>(this._elementRef.nativeElement, 'keyup');
-            const compositionStartEvent = fromEvent<CompositionEvent>(
-                this._elementRef.nativeElement,
-                'compositionstart'
-            );
-            const compositionEndEvent = fromEvent<CompositionEvent>(this._elementRef.nativeElement, 'compositionend');
+        const keyupEvent = fromEvent<KeyboardEvent>(this._elementRef.nativeElement, 'keyup');
+        const compositionStartEvent = fromEvent<CompositionEvent>(this._elementRef.nativeElement, 'compositionstart');
+        const compositionEndEvent = fromEvent<CompositionEvent>(this._elementRef.nativeElement, 'compositionend');
 
-            keyupEvent.pipe(takeUntilDestroyed()).subscribe((evt) => this._handleKeyboardEvent(evt));
+        keyupEvent.pipe(takeUntilDestroyed()).subscribe((evt) => this._handleKeyboardEvent(evt));
 
-            compositionStartEvent.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
-                this._isComposing = true;
-            });
+        compositionStartEvent.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+            this._isComposing = true;
+        });
 
-            compositionEndEvent.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
-                this._isComposing = false;
-                this.inputText = this._elementRef.nativeElement.value;
-            });
+        compositionEndEvent.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+            this._isComposing = false;
+            this.inputText = this._elementRef.nativeElement.value;
         });
     }
 

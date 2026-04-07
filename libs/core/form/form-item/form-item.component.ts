@@ -1,5 +1,5 @@
 import {
-    afterNextRender,
+    AfterContentInit,
     ChangeDetectionStrategy,
     Component,
     ContentChild,
@@ -26,10 +26,9 @@ import { FormLabelComponent } from '../form-label/form-label.component';
     template: `<ng-content></ng-content>`,
     styleUrl: './form-item.component.scss',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FormItemComponent {
+export class FormItemComponent implements AfterContentInit {
     /** Whether the form item is inline. */
     @Input()
     @HostBinding('class.fd-form-item--inline')
@@ -53,11 +52,9 @@ export class FormItemComponent {
     formItemControl?: FormItemControl;
 
     /** @hidden */
-    constructor() {
-        afterNextRender(() => {
-            if (this.formLabel && this.formItemControl && !this.formItemControl.ariaLabelledBy) {
-                this.formItemControl.ariaLabelledBy = this.formLabel.formLabelId;
-            }
-        });
+    ngAfterContentInit(): void {
+        if (this.formLabel && this.formItemControl && !this.formItemControl.ariaLabelledBy) {
+            this.formItemControl.ariaLabelledBy = this.formLabel.formLabelId;
+        }
     }
 }

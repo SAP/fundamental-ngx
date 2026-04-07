@@ -1,4 +1,3 @@
-import { AnimationEvent } from '@angular/animations';
 import { CdkPortalOutlet, CdkPortalOutletAttachedRef, PortalModule } from '@angular/cdk/portal';
 import {
     AfterViewInit,
@@ -8,18 +7,17 @@ import {
     DestroyRef,
     ElementRef,
     EmbeddedViewRef,
-    HostBinding,
-    HostListener,
     Injector,
     Input,
     TemplateRef,
     Type,
     ViewChild,
+    ViewRef,
     signal
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CssClassBuilder, DynamicComponentContainer, applyCssClass } from '@fundamental-ngx/cdk/utils';
-import { DialogContainer, dialogFade } from '@fundamental-ngx/core/dialog';
+import { DialogContainer } from '@fundamental-ngx/core/dialog';
 import { MessageBoxContentType } from '../message-box-content.type';
 import { MessageBoxDefaultComponent } from '../message-box-default/message-box-default.component';
 import { MessageBoxConfig } from '../utils/message-box-config.class';
@@ -30,8 +28,10 @@ import { MessageBoxRef } from '../utils/message-box-ref.class';
 @Component({
     selector: 'fd-message-box-container',
     template: '<ng-template (attached)="_attached($event)" cdkPortalOutlet></ng-template>',
-    animations: [dialogFade],
-    imports: [PortalModule]
+    imports: [PortalModule],
+    host: {
+        style: 'opacity: 0; position: relative; z-index: 999'
+    }
 })
 export class MessageBoxContainerComponent
     extends DynamicComponentContainer<MessageBoxContentType>
@@ -44,12 +44,6 @@ export class MessageBoxContainerComponent
         this.buildComponentCssClass();
     }
 
-    /** The state of the Dialog animations. */
-    @HostBinding('@state')
-    protected get _animationState(): string {
-        return this._animationStateSignal();
-    }
-
     /** @hidden */
     @ViewChild(CdkPortalOutlet)
     portalOutlet: CdkPortalOutlet;
@@ -57,8 +51,11 @@ export class MessageBoxContainerComponent
     /** @hidden */
     private _class = '';
 
-    /** @hidden */
+    /** @hidden Tracks the current animation phase for lifecycle management. */
     private _animationStateSignal = signal('void');
+
+    /** @hidden Reference to the current Web Animation for cleanup. */
+    private _currentAnimation: Animation | null = null;
 
     /** @hidden */
     constructor(
@@ -70,23 +67,17 @@ export class MessageBoxContainerComponent
         injector: Injector
     ) {
         super(elementRef, injector);
+
+        this._destroyRef.onDestroy(() => {
+            this._currentAnimation?.cancel();
+            this._currentAnimation = null;
+        });
     }
 
     /** @hidden */
     @applyCssClass
     buildComponentCssClass(): string[] {
         return [this.messageBoxConfig.containerClass ? this.messageBoxConfig.containerClass : '', this._class];
-    }
-
-    /** Handle end of animations, updating the state of the Message Toast. */
-    @HostListener('@state.done', ['$event'])
-    onAnimationEnd(event: AnimationEvent): void {
-        const { toState } = event;
-
-        if (toState === 'hidden') {
-            this.ref._endClose$.next();
-            this.ref._endClose$.complete();
-        }
     }
 
     /** @hidden */
@@ -108,6 +99,9 @@ export class MessageBoxContainerComponent
 
     /** @hidden Load received content */
     protected _loadContent(): void {
+        if ((this._cdr as ViewRef).destroyed) {
+            return;
+        }
         if (this.childContent instanceof Type) {
             this._createFromComponent(this.childContent);
         } else if (this.childContent instanceof TemplateRef) {
@@ -115,7 +109,7 @@ export class MessageBoxContainerComponent
         } else {
             this._createFromDefaultMessageBox(this.childContent ?? null);
         }
-        this._animationStateSignal.set('visible');
+        this._enter();
         this._cdr.detectChanges();
     }
 
@@ -131,18 +125,69 @@ export class MessageBoxContainerComponent
         instance._messageBoxContent = content;
     }
 
+    /** @hidden Animate the message box container entrance (opacity 0 → 1). */
+    private _enter(): void {
+        const el: HTMLElement = this.elementRef.nativeElement;
+
+        if (typeof el.animate !== 'function') {
+            el.style.opacity = '1';
+            this._animationStateSignal.set('visible');
+            return;
+        }
+
+        this._currentAnimation = el.animate([{ opacity: 0 }, { opacity: 1 }], {
+            duration: 150,
+            easing: 'cubic-bezier(0, 0, 0.2, 1)',
+            fill: 'forwards'
+        });
+
+        this._currentAnimation.finished
+            .then(() => {
+                el.style.opacity = '1';
+                this._currentAnimation?.cancel();
+                this._currentAnimation = null;
+                this._animationStateSignal.set('visible');
+            })
+            .catch(() => {
+                this._currentAnimation = null;
+            });
+    }
+
+    /** @hidden Animate the message box container exit (opacity 1 → 0). */
+    private _exit(): void {
+        const el: HTMLElement = this.elementRef.nativeElement;
+        this._animationStateSignal.set('hidden');
+        this._cdr.detectChanges();
+
+        if (typeof el.animate !== 'function') {
+            return;
+        }
+
+        this._currentAnimation?.cancel();
+
+        this._currentAnimation = el.animate([{ opacity: 1 }, { opacity: 0 }], {
+            duration: 75,
+            easing: 'cubic-bezier(0.4, 0, 1, 1)',
+            fill: 'forwards'
+        });
+
+        this._currentAnimation.finished
+            .then(() => {
+                this._currentAnimation = null;
+            })
+            .catch(() => {
+                this._currentAnimation = null;
+            });
+    }
+
     /**
      * @hidden
-     * We need to wait until animation plays, and then send signal to the service to destroy the component.
+     * Listen for message box close/dismiss and trigger exit animation.
      */
     private _listenOnClose(): void {
-        const callback: () => void = () => {
-            this._animationStateSignal.set('hidden');
-            this._cdr.detectChanges();
-        };
         this.ref.afterClosed.pipe(takeUntilDestroyed(this._destroyRef)).subscribe({
-            next: () => callback(),
-            error: () => callback()
+            next: () => this._exit(),
+            error: () => this._exit()
         });
     }
 }

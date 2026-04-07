@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
 import { SortDirection, Table } from '@fundamental-ngx/platform/table-helpers';
 
@@ -27,7 +26,7 @@ describe('PlatformTableSortDialogComponent', () => {
                 DialogService,
                 DialogConfig
             ],
-            imports: [PlatformTableModule, NoopAnimationsModule]
+            imports: [PlatformTableModule]
         }).compileComponents();
     }));
 

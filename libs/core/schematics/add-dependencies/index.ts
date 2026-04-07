@@ -23,11 +23,11 @@ const desiredVersions = {
  * Adds dependencies to the project
  * @param options
  */
-export function addDependencies(options: Schema): Rule {
-    return addExternalLibraries(options);
+export function addDependencies(_options: Schema): Rule {
+    return addExternalLibraries();
 }
 
-function addExternalLibraries(options: Schema): Rule {
+function addExternalLibraries(): Rule {
     return (tree: Tree, context: SchematicContext) => {
         const ngCoreVersionTag = getPackageJsonDependency(tree, '@angular/core');
         if (!ngCoreVersionTag) {
@@ -49,19 +49,6 @@ function addExternalLibraries(options: Schema): Rule {
                     type: NodeDependencyType.Default,
                     version: angularVersion,
                     name: '@angular/forms'
-                },
-                context
-            );
-        }
-
-        const animationsDependency = getPackageJsonDependency(tree, '@angular/animations');
-        if (options.animations && !animationsDependency) {
-            addPackageDependency(
-                tree,
-                {
-                    type: NodeDependencyType.Default,
-                    version: angularVersion,
-                    name: '@angular/animations'
                 },
                 context
             );

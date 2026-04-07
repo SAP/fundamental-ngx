@@ -298,8 +298,9 @@ export class PopoverComponent implements AfterViewInit, AfterContentInit, OnDest
                 this.isOpenChange.emit(currentIsOpen);
             }
 
-            // Sync to service only if not already syncing (prevents loop)
-            if (!this._syncingIsOpen) {
+            // Sync to service only if not already syncing and not in mobile mode (prevents loop).
+            // In mobile mode, the dialog handles open/close — the popover service should not be involved.
+            if (!this._syncingIsOpen && !this.mobile()) {
                 this._syncingIsOpen = true;
                 this._popoverService.isOpen.set(currentIsOpen);
                 this._syncingIsOpen = false;
@@ -315,6 +316,10 @@ export class PopoverComponent implements AfterViewInit, AfterContentInit, OnDest
                 this._popoverService.isOpenChange
                     .pipe(takeUntilDestroyed(this._destroyRef))
                     .subscribe((serviceIsOpen) => {
+                        // In mobile mode, the dialog handles open/close — ignore service changes.
+                        if (this.mobile()) {
+                            return;
+                        }
                         // Only update if different and not already syncing (prevents loop)
                         if (!this._syncingIsOpen && this.isOpen() !== serviceIsOpen) {
                             this._syncingIsOpen = true;
@@ -336,8 +341,9 @@ export class PopoverComponent implements AfterViewInit, AfterContentInit, OnDest
             this._popoverService.disabled.set(effectiveConfig.disabled);
             this._popoverService.refreshConfiguration({ bodyAriaLabel: effectiveConfig.bodyAriaLabel });
 
-            // Full sync only when trigger is set (for fdPopoverTrigger directive)
-            if (triggerValue) {
+            // Full sync only when trigger is set and not in mobile mode (for fdPopoverTrigger directive).
+            // In mobile mode, the dialog handles open/close — the popover service should not be involved.
+            if (triggerValue && !this.mobile()) {
                 this._syncToService(effectiveConfig, triggerValue);
             }
         });
@@ -373,12 +379,22 @@ export class PopoverComponent implements AfterViewInit, AfterContentInit, OnDest
 
     /** Opens the popover. */
     open(): void {
-        this._popoverService.open();
+        // In mobile mode, just update the signal — the mobile component's effect handles the dialog.
+        if (this.mobile()) {
+            this.isOpen.set(true);
+        } else {
+            this._popoverService.open();
+        }
     }
 
     /** Closes the popover. */
     close(focusActiveElement = true): void {
-        this._popoverService.close(focusActiveElement);
+        // In mobile mode, just update the signal — the mobile component's effect handles the dialog.
+        if (this.mobile()) {
+            this.isOpen.set(false);
+        } else {
+            this._popoverService.close(focusActiveElement);
+        }
     }
 
     /** Temporary sets the ignoring of the event triggers. */
@@ -433,7 +449,7 @@ export class PopoverComponent implements AfterViewInit, AfterContentInit, OnDest
         ) {
             // prevent page scrolling on Space keydown
             event.preventDefault();
-            this._popoverService.toggle();
+            this.toggle();
         }
     }
 
