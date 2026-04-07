@@ -1,7 +1,6 @@
 import { ComponentFixture, fakeAsync, flush, TestBed, tick, waitForAsync } from '@angular/core/testing';
 
 import { Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MenuTitleDirective } from './directives/menu-title.directive';
 import { MenuTriggerDirective } from './directives/menu-trigger.directive';
 import { MenuInteractiveComponent } from './menu-interactive.component';
@@ -447,7 +446,7 @@ describe('MenuComponent mobile mode', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [TestMenuComponent, NoopAnimationsModule]
+            imports: [TestMenuComponent]
         }).compileComponents();
     }));
 
