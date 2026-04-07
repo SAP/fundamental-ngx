@@ -21,7 +21,8 @@ export default {
     coreAvatarGroup: {
         ariaLabel:
             'Has popup type dialog conjoined avatars, {count} avatars displayed, {hiddenCount} avatars hidden, activate for complete list',
-        backButton: 'Tillbaka'
+        backButton: 'Tillbaka',
+        popupBodyAriaLabel: 'With {count} items'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Tillämpade datafiltreringssteg',

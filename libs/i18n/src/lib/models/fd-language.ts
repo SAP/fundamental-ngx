@@ -368,6 +368,8 @@ export interface FdLanguage {
         ariaLabel: FdLanguageKey<{ count: number; hiddenCount: number }>;
         /** Back button label in the overflow popover */
         backButton: FdLanguageKey;
+        /** Aria label for the overflow popup dialog. Supports placeholder: {{count}} (number of items). */
+        popupBodyAriaLabel: FdLanguageKey<{ count: number }>;
     };
     coreBreadcrumb: {
         overflowTitleMore: FdLanguageKey;

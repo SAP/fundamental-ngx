@@ -21,7 +21,8 @@ export default {
     coreAvatarGroup: {
         ariaLabel:
             'Has popup type dialog conjoined avatars, {count} avatars displayed, {hiddenCount} avatars hidden, activate for complete list',
-        backButton: 'Tilbage'
+        backButton: 'Tilbage',
+        popupBodyAriaLabel: 'With {count} items'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Brødkrummespor',

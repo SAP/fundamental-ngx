@@ -37,7 +37,7 @@
                 #overflowPopover
                 [noArrow]="false"
                 [focusAutoCapture]="true"
-                [bodyAriaLabel]="'With ' + hiddenItems.length + ' items'"
+                [bodyAriaLabel]="_popupBodyAriaLabel(hiddenItems.length)"
             >
                 <fd-popover-control tabindex="-1">
                     <ng-template
@@ -59,7 +59,7 @@
         #groupPopover
         [noArrow]="false"
         [focusAutoCapture]="true"
-        [bodyAriaLabel]="'With ' + _avatars.length + ' items'"
+        [bodyAriaLabel]="_popupBodyAriaLabel(_avatars.length)"
         fdkResizeObserver
         (resized)="_detectChanges()"
     >

@@ -332,8 +332,9 @@ export class PopoverComponent implements AfterViewInit, AfterContentInit, OnDest
             const effectiveConfig = this._effectiveConfig();
             const triggerValue = this.trigger();
 
-            // Always sync disabled state to service (for both trigger directive and control usage)
+            // Always sync these to service (for both trigger directive and control usage)
             this._popoverService.disabled.set(effectiveConfig.disabled);
+            this._popoverService.refreshConfiguration({ bodyAriaLabel: effectiveConfig.bodyAriaLabel });
 
             // Full sync only when trigger is set (for fdPopoverTrigger directive)
             if (triggerValue) {

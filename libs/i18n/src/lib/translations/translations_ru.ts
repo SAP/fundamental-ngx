@@ -22,7 +22,8 @@ export default {
     coreAvatarGroup: {
         ariaLabel:
             'Has popup type dialog conjoined avatars, {count} avatars displayed, {hiddenCount} avatars hidden, activate for complete list',
-        backButton: 'Назад'
+        backButton: 'Назад',
+        popupBodyAriaLabel: 'With {count} items'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Путь навигации',

@@ -15,6 +15,7 @@ export type FdLanguageKeyIdentifier =
     | 'coreActionSheet.toolbarLabel'
     | 'coreAvatarGroup.ariaLabel'
     | 'coreAvatarGroup.backButton'
+    | 'coreAvatarGroup.popupBodyAriaLabel'
     | 'coreBreadcrumb.breadcrumbTrailLabel'
     | 'coreBreadcrumb.overflowTitleMore'
     | 'coreBusyIndicator.defaultAriaValueText'

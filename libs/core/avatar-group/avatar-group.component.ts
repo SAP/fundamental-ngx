@@ -12,6 +12,7 @@ import {
     ViewEncapsulation,
     computed,
     inject,
+    signal,
     viewChild
 } from '@angular/core';
 import { FocusableListDirective, ResizeObserverDirective, RtlService } from '@fundamental-ngx/cdk/utils';
@@ -144,5 +145,10 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
     /** @hidden */
     _detectChanges(): void {
         this._cdr.detectChanges();
+    }
+
+    /** @hidden */
+    protected _popupBodyAriaLabel(count: number): string {
+        return this._translate('coreAvatarGroup.popupBodyAriaLabel', signal({ count }))();
     }
 }

@@ -21,7 +21,8 @@ export default {
     coreAvatarGroup: {
         ariaLabel:
             'Has popup type dialog conjoined avatars, {count} avatars displayed, {hiddenCount} avatars hidden, activate for complete list',
-        backButton: '뒤로'
+        backButton: '뒤로',
+        popupBodyAriaLabel: 'With {count} items'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: '탐색 경로 추적',
