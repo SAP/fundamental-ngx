@@ -29,13 +29,13 @@ import { ExampleFile } from '../code-example/example-file';
             .docs-code-gutter {
                 flex-shrink: 0;
                 padding: 1rem 0;
-                text-align: right;
+                text-align: end;
                 user-select: none;
                 color: var(--sapNeutralTextColor);
                 opacity: 0.5;
-                font-size: 0.8125rem;
+                font-size: var(--sapFontSmallSize);
                 line-height: 1.42857143;
-                border-right: 0.0625rem solid var(--sapGroup_ContentBorderColor);
+                border-inline-end: 0.0625rem solid var(--sapGroup_ContentBorderColor);
             }
             .docs-code-gutter span {
                 display: block;

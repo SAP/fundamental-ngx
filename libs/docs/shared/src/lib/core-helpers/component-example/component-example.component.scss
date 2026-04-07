@@ -70,7 +70,7 @@ component-example {
         background: transparent;
         color: var(--sapContent_NonInteractiveIconColor);
         font-family: var(--sapFontFamily);
-        font-size: 0.8125rem;
+        font-size: var(--sapFontSmallSize);
         font-weight: 700;
         letter-spacing: 0.03em;
         text-transform: uppercase;
@@ -88,7 +88,7 @@ component-example {
             padding: 0.4375rem 0.5625rem;
 
             fd-icon {
-                font-size: 0.875rem;
+                font-size: var(--sapFontSize);
             }
         }
 

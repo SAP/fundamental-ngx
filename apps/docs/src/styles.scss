@@ -6,7 +6,6 @@
 
 @include cdk.a11y-visually-hidden();
 
-$gutter-size: 1rem;
 $doc-font-family-mono: 'Fira Code', 'Cascadia Code', Consolas, monospace;
 
 html,
@@ -24,39 +23,7 @@ a {
 body {
     margin: 0;
     background-color: var(--sapBackgroundColor);
-    font-family: '72', sans-serif;
-}
-
-.container {
-    max-width: 960px;
-    margin-inline: auto;
-    padding-inline: 1rem;
-}
-
-.row {
-    display: flex;
-    margin-inline: -1rem;
-}
-
-.col {
-    padding-inline: 1rem;
-    flex: 1;
-}
-
-.nav {
-    list-style-type: none;
-}
-
-.nav-item {
-    margin-block-end: 0;
-    display: inline-block;
-    text-decoration: none;
-}
-
-.nav-link {
-    display: block;
-    padding: 0.625rem 0.9375rem;
-    text-decoration: none;
+    font-family: var(--sapFontFamily);
 }
 
 .code-snippet {
@@ -65,15 +32,11 @@ body {
     border: 0.0625rem solid var(--sapGroup_ContentBorderColor);
     border-radius: 0.25rem;
     font-family: $doc-font-family-mono;
-    font-size: 0.85em;
+    font-size: var(--sapFontSmallSize);
 }
 
 fd-card {
     width: 80%;
-}
-
-.fd-tabs__panel.is-expanded {
-    width: 95%;
 }
 
 .doc-scroll-spy-example-icon-class {
@@ -111,19 +74,8 @@ pre {
     text-align: center;
 }
 
-.is-disabled,
-.is-blocked {
+.is-disabled {
     pointer-events: none;
-}
-
-.side-nav__search {
-    padding: 0.625rem 0.625rem 0 0.625rem;
-}
-
-.doc-playground--markdown,
-.api-main-header,
-.doc-tsdoc-container {
-    color: var(--sapTextColor);
 }
 
 // =============================================================================
@@ -137,7 +89,7 @@ pre {
     font-size: var(--sapFontSize);
     line-height: 1.5;
     color: var(--sapTextColor);
-    background: transparent !important;
+    background: transparent;
 
     .fd-tsdoc-main-header {
         font-size: var(--sapFontHeader3Size);
@@ -197,12 +149,7 @@ pre {
             }
         }
 
-        & > .tsd-signature {
-            margin-inline: -1.25rem;
-            border-radius: 0;
-            border-inline-width: 0;
-        }
-
+        & > .tsd-signature,
         & > .tsd-signatures {
             margin-inline: -1.25rem;
             border-radius: 0;
@@ -443,7 +390,7 @@ pre {
         .fd-tsd-comment-tag-pill {
             text-transform: capitalize;
             font-weight: bold;
-            font-size: 0.9em;
+            font-size: var(--sapFontSmallSize);
         }
 
         dt {
@@ -483,10 +430,6 @@ pre {
         font-size: var(--sapFontHeader1Size);
     }
 
-    a {
-        color: var(--sapLinkColor);
-    }
-
     ol,
     ul {
         padding-inline-start: 2rem;
@@ -523,21 +466,7 @@ pre {
     }
 }
 
-.doc-flex-row {
-    display: flex;
-    flex-direction: row;
-}
-
-.doc-flex-col {
-    display: flex;
-    flex-direction: column;
-}
-
 body {
-    .custom-container-class {
-        z-index: 0;
-    }
-
     .dialog-custom-overlay-example {
         background: radial-gradient(circle, rgba(2, 0, 36, 1) 0%, rgba(0, 0, 0, 0.48) 100%);
     }
