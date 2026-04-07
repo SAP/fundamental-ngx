@@ -973,7 +973,6 @@ export class TableComponent<T = any>
         // During drag with virtual scroll, preserve the dragged row at its original DnD index
         if (
             this._virtualScrollDirective?.virtualScroll &&
-            this._virtualScrollDirective?.scrollWholeRows &&
             this._dndTableDirective?.dragDropInProgress &&
             this._dndTableDirective?.draggedRow &&
             this._dndTableDirective?.draggedRowGlobalIndex !== null &&
@@ -1788,10 +1787,6 @@ export class TableComponent<T = any>
         this._reIndexTableRows();
         this._calculateVisibleTableRows();
         this._calculateCheckedAll();
-
-        if (this._virtualScrollDirective) {
-            this._virtualScrollDirective.calculateVirtualScrollRows();
-        }
     }
 
     /** @hidden */
@@ -2450,6 +2445,10 @@ export class TableComponent<T = any>
             return;
         }
         this.tableScrollable.initializeScrollTop(state.scrollTopPosition);
+
+        setTimeout(() => {
+            this._virtualScrollDirective?.calculateVirtualScrollRows();
+        });
     }
 
     /**

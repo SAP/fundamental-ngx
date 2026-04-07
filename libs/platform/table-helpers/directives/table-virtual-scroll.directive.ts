@@ -195,7 +195,7 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
             const scrollMockContainer = this._table.tableScrollMockContainer.nativeElement;
             scrollMockContainer.style.maxHeight = this.bodyHeight;
         } else {
-            if (!this.virtualScroll || !this.bodyHeight || this._dndTableDirective?.dragDropInProgress) {
+            if (!this.virtualScroll || !this.bodyHeight) {
                 return;
             }
 
@@ -228,6 +228,7 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
                 startNodeIndex === this._virtualScrollCache.startNodeIndex &&
                 visibleNodeCount === this._virtualScrollCache.visibleNodeCount &&
                 totalNodeCount === this._virtualScrollCache.totalNodeCount &&
+                !this._dndTableDirective?.dragDropInProgress &&
                 // On rows change, even if the total number of rows is the same, the row object will be different
                 startNodeIndex === currentlyRenderedRows[0];
 

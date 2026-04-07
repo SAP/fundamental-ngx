@@ -1,15 +1,4 @@
 import {
-    DOWN_ARROW,
-    END,
-    HOME,
-    LEFT_ARROW,
-    PAGE_DOWN,
-    PAGE_UP,
-    RIGHT_ARROW,
-    SPACE,
-    UP_ARROW
-} from '@angular/cdk/keycodes';
-import {
     ChangeDetectorRef,
     Directive,
     EventEmitter,
@@ -25,8 +14,7 @@ import {
     DropPredicate,
     FdDndDropEventMode,
     FdDndDropType,
-    FdDropEvent,
-    KeyUtil
+    FdDropEvent
 } from '@fundamental-ngx/cdk/utils';
 import { FDP_TABLE_DRAGGABLE_DIRECTIVE } from '../constants';
 import { TableRowType } from '../enums';
@@ -188,10 +176,7 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> implemen
             let dragRow = this._draggedRowObject;
             if (!dragRow) {
                 // Fallback to old behavior if tracking failed
-                // If virtual scroll with scrollWholeRows, map the DnD index to global index
-                if (this._table._virtualScrollDirective?.scrollWholeRows) {
-                    event.draggedItemIndex = this._table._tableCurrentlyRenderedRowsPlaceholder[event.draggedItemIndex];
-                }
+                event.draggedItemIndex = this._table._tableCurrentlyRenderedRowsPlaceholder[event.draggedItemIndex];
                 dragRow =
                     this._table._tableRows.find(
                         (row) => row === this._table._tableRowsVisible[event.draggedItemIndex]
@@ -270,7 +255,6 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> implemen
     /** @hidden */
     private _setDragInProgress(dragging: boolean): void {
         this.dragDropInProgress = dragging;
-        dragging ? this._blockScrolling() : this._enableScrolling();
     }
 
     /** @hidden */
@@ -383,44 +367,5 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> implemen
         );
 
         this._table._tableRows = [...allRows, ...dropRowItems, ...rowsToMove, ...rowsAfterDropRow];
-    }
-
-    /** @hidden */
-    private _blockScrolling(): void {
-        this._table._focusableGrid._preventKeydown = true;
-        // Don't block wheel events if scrollWholeRows is enabled - virtual scroll needs them
-        if (!this._table._virtualScrollDirective?.scrollWholeRows) {
-            this._table.tableContainer.nativeElement.addEventListener('DOMMouseScroll', preventDefault, false);
-            this._table.tableContainer.nativeElement.addEventListener('wheel', preventDefault, { passive: false });
-            this._table.tableContainer.nativeElement.addEventListener('mousewheel', preventDefault, { passive: false });
-            this._table.tableContainer.nativeElement.addEventListener('touchmove', preventDefault, { passive: false });
-        }
-        this._table.tableContainer.nativeElement.addEventListener('keydown', preventDefaultForScrollKeys, false);
-    }
-
-    /** @hidden */
-    private _enableScrolling(): void {
-        this._table._focusableGrid._preventKeydown = false;
-        if (!this._table._virtualScrollDirective?.scrollWholeRows) {
-            this._table.tableContainer.nativeElement.removeEventListener('DOMMouseScroll', preventDefault, false);
-            this._table.tableContainer.nativeElement.removeEventListener('wheel', preventDefault);
-            this._table.tableContainer.nativeElement.removeEventListener('mousewheel', preventDefault);
-            this._table.tableContainer.nativeElement.removeEventListener('touchmove', preventDefault);
-        }
-        this._table.tableContainer.nativeElement.removeEventListener('keydown', preventDefaultForScrollKeys, false);
-    }
-}
-
-function preventDefault(event: Event): void {
-    event.preventDefault();
-}
-
-function preventDefaultForScrollKeys(event: KeyboardEvent): boolean | undefined {
-    if (
-        !event.altKey &&
-        KeyUtil.isKeyCode(event, [LEFT_ARROW, RIGHT_ARROW, UP_ARROW, DOWN_ARROW, SPACE, PAGE_DOWN, PAGE_UP, END, HOME])
-    ) {
-        preventDefault(event);
-        return false;
     }
 }
