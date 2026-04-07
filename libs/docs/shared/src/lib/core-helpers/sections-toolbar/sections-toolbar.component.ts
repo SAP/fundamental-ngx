@@ -175,11 +175,9 @@ export class SectionsToolbarComponent {
         const normalizedUrl = currentUrl.split('?')[0].split('#')[0];
         return section.content.some((contentEl) => {
             if (this._isNestedContentItem(contentEl)) {
-                return contentEl.subItems.some(
-                    (sub) => normalizedUrl.endsWith('/' + sub.url) || normalizedUrl === '/' + sub.url
-                );
+                return contentEl.subItems.some((sub) => this._isActiveUrl(normalizedUrl, sub.url));
             }
-            return normalizedUrl.endsWith('/' + contentEl.url) || normalizedUrl === '/' + contentEl.url;
+            return this._isActiveUrl(normalizedUrl, contentEl.url);
         });
     }
 
@@ -231,5 +229,11 @@ export class SectionsToolbarComponent {
 
     private _isNestedContentItem(item: SectionInterfaceContent): item is SectionInterfaceContentNested {
         return !!(<SectionInterfaceContentNested>item).subItems;
+    }
+
+    /** Checks if the current URL matches or is a child of the item URL (e.g., /core/button/api matches button). */
+    private _isActiveUrl(normalizedUrl: string, itemUrl: string): boolean {
+        const segment = '/' + itemUrl;
+        return normalizedUrl.endsWith(segment) || normalizedUrl.includes(segment + '/');
     }
 }

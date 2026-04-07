@@ -69,7 +69,7 @@ const SCROLL_OFFSET = 60;
         .fd-docs-toc__heading {
             display: block;
             font-family: var(--sapFontFamily);
-            font-size: var(--sapFontSmallSize, 0.75rem);
+            font-size: var(--sapFontSmallSize);
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.04em;
@@ -91,7 +91,7 @@ const SCROLL_OFFSET = 60;
             padding-block: 0.3rem;
             padding-inline: 0.75rem;
             font-family: var(--sapFontFamily);
-            font-size: var(--sapFontSize, 0.875rem);
+            font-size: var(--sapFontSize);
             color: var(--sapContent_LabelColor);
             text-decoration: none;
             line-height: 1.4;
@@ -111,8 +111,7 @@ const SCROLL_OFFSET = 60;
         }
 
         .fd-docs-toc__link:focus-visible {
-            outline: var(--sapContent_FocusWidth, 0.0625rem) var(--sapContent_FocusStyle, dotted)
-                var(--sapContent_FocusColor);
+            outline: var(--sapContent_FocusWidth) var(--sapContent_FocusStyle) var(--sapContent_FocusColor);
             outline-offset: 0.0625rem;
         }
 
@@ -128,7 +127,7 @@ const SCROLL_OFFSET = 60;
 
         .fd-docs-toc__number {
             flex-shrink: 0;
-            font-size: var(--sapFontSmallSize, 0.75rem);
+            font-size: var(--sapFontSmallSize);
             font-weight: 600;
             color: var(--sapContent_NonInteractiveIconColor);
             font-variant-numeric: tabular-nums;

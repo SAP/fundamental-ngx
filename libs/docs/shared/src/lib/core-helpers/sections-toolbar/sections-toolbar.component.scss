@@ -64,7 +64,7 @@
     &__icon {
         flex-shrink: 0;
         color: var(--sapContent_NonInteractiveIconColor);
-        font-size: 1rem;
+        font-size: var(--sapFontSize);
         transition: color 200ms ease;
 
         .fd-docs-command-bar:focus-within & {
@@ -273,7 +273,7 @@
     transition: background-color 150ms ease;
 
     &:hover {
-        background: var(--sapList_Hover_Background);
+        background: color-mix(in srgb, var(--sapList_Hover_Background) 70%, var(--sapGroup_ContentBorderColor));
     }
 
     &:focus-visible {
@@ -282,7 +282,7 @@
     }
 
     &:active {
-        background: var(--sapList_Active_Background);
+        background: color-mix(in srgb, var(--sapList_Active_Background) 80%, var(--sapGroup_ContentBorderColor));
     }
 
     // Visual cue when section contains the active item
@@ -371,8 +371,8 @@
     transition: background-color 150ms ease;
 
     &:hover {
-        background: var(--sapList_Hover_Background);
-        color: var(--sapList_Active_TextColor, var(--sapTextColor));
+        background: color-mix(in srgb, var(--sapList_Hover_Background) 70%, var(--sapGroup_ContentBorderColor));
+        color: var(--sapList_Active_TextColor);
     }
 
     &:focus-visible {
@@ -382,7 +382,7 @@
 
     // ── Selected state — brand-color left accent bar ────────
     &--selected {
-        background: var(--sapList_SelectionBackgroundColor);
+        background: color-mix(in srgb, var(--sapSelectedColor) 12%, var(--sapGroup_ContentBackground));
         color: var(--sapBrandColor);
         font-weight: 600;
 
@@ -398,7 +398,7 @@
         }
 
         &:hover {
-            background: var(--sapList_Hover_SelectionBackground);
+            background: color-mix(in srgb, var(--sapSelectedColor) 18%, var(--sapGroup_ContentBackground));
             color: var(--sapBrandColor);
         }
     }

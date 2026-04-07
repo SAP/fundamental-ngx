@@ -28,19 +28,19 @@ import { ExampleFile } from '../code-example/example-file';
             }
             .docs-code-gutter {
                 flex-shrink: 0;
-                padding: 1rem 0;
+                padding: 1.25rem 0;
                 text-align: end;
                 user-select: none;
                 color: var(--sapNeutralTextColor);
                 opacity: 0.5;
+                font-family: 'Fira Code', 'Cascadia Code', Consolas, monospace;
                 font-size: var(--sapFontSmallSize);
-                line-height: 1.42857143;
+                line-height: 1.6;
                 border-inline-end: 0.0625rem solid var(--sapGroup_ContentBorderColor);
             }
             .docs-code-gutter span {
                 display: block;
                 padding: 0 0.75rem;
-                min-height: 1.25em;
             }
             pre {
                 margin: 0;
@@ -49,6 +49,7 @@ import { ExampleFile } from '../code-example/example-file';
             }
             code.hljs {
                 width: 100%;
+                padding: 0;
                 background: transparent;
             }
         `
@@ -56,7 +57,7 @@ import { ExampleFile } from '../code-example/example-file';
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
         <div class="docs-code-snippet">
-            @if (lineCount() > 0) {
+            @if (lineCount() > 1) {
                 <div class="docs-code-gutter" aria-hidden="true">
                     @for (n of lineNumbers(); track n) {
                         <span>{{ n }}</span>

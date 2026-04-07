@@ -8,6 +8,7 @@ import {
 } from '@fundamental-ngx/docs/shared';
 
 @Component({
+    selector: 'fd-docs-btp-search-field-header',
     templateUrl: './search-field-header.component.html',
     imports: [HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent, RouterOutlet]
 })

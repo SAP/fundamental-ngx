@@ -8,6 +8,7 @@ import {
 } from '@fundamental-ngx/docs/shared';
 
 @Component({
+    selector: 'fd-docs-cdk-focusable-list-header',
     templateUrl: './focusable-list-header.component.html',
     imports: [HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent, RouterOutlet]
 })

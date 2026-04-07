@@ -13,7 +13,7 @@
     background: color-mix(in srgb, var(--sapShell_Background) 85%, transparent);
     backdrop-filter: blur(0.75rem);
     -webkit-backdrop-filter: blur(0.75rem);
-    border-block-end: 0.0625rem solid var(--sapShell_BorderColor, var(--sapGroup_ContentBorderColor));
+    border-block-end: 0.0625rem solid var(--sapShell_BorderColor);
 
     // ── Layout groups ──────────────────────────────────────────
     &__start,
@@ -30,7 +30,7 @@
     // ── Logo ───────────────────────────────────────────────────
     &__logo {
         font-family: var(--sapFontFamily);
-        font-size: var(--sapFontHeader4Size, 1.125rem);
+        font-size: var(--sapFontHeader4Size);
         font-weight: 700;
         color: var(--sapShell_TextColor);
         text-decoration: none;
@@ -69,7 +69,7 @@
         background: transparent;
         color: var(--sapShell_TextColor);
         font-family: var(--sapFontFamily);
-        font-size: var(--sapFontLargeSize, 0.875rem);
+        font-size: var(--sapFontLargeSize);
         line-height: 1;
         cursor: pointer;
         white-space: nowrap;
@@ -94,7 +94,7 @@
         }
 
         fd-icon {
-            font-size: 1.125rem;
+            font-size: var(--sapFontLargeSize);
             line-height: 1;
         }
 
@@ -105,14 +105,14 @@
 
         // ── Action label text ──────────────────────────────────
         &-label {
-            font-size: var(--sapFontSmallSize, 0.75rem);
+            font-size: var(--sapFontSmallSize);
             opacity: 0.75;
             text-transform: capitalize;
         }
 
         // ── Muted variant (version badge) ──────────────────────
         &--muted {
-            font-size: var(--sapFontSize, 0.875rem);
+            font-size: var(--sapFontSize);
             opacity: 0.7;
             transition:
                 opacity 200ms ease,
@@ -188,7 +188,7 @@
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.04em;
-        color: var(--sapContent_LabelColor, var(--sapContent_NonInteractiveIconColor));
+        color: var(--sapContent_LabelColor);
         border-block-end: 0.0625rem solid var(--sapGroup_ContentBorderColor);
         margin-block-end: 0.125rem;
 
@@ -301,7 +301,7 @@
     // ── Selected item — persistent brand accent + real checkmark icon ────
     .fd-menu__link.fd-docs-panel__item--selected {
         background: var(--sapList_SelectionBackgroundColor) !important;
-        padding-left: 1rem;
+        padding-inline-start: 1rem;
         padding-inline-end: 0.75rem;
         font-weight: 600;
 
@@ -310,7 +310,7 @@
         }
 
         &:hover {
-            background: var(--sapList_Hover_SelectionBackground, var(--sapList_SelectionBackgroundColor)) !important;
+            background: var(--sapList_Hover_SelectionBackground) !important;
         }
     }
 

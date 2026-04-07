@@ -16,7 +16,7 @@
 
 .fd-tabs__link {
     font-family: var(--sapFontFamily);
-    font-size: var(--sapFontLargeSize, 0.875rem);
+    font-size: var(--sapFontLargeSize);
     font-weight: 500;
     color: var(--sapContent_LabelColor);
     transition:
@@ -34,9 +34,8 @@
         box-shadow: none;
 
         .fd-tabs__tag::before {
-            outline: var(--sapContent_FocusWidth, 0.0625rem) var(--sapContent_FocusStyle, dotted)
-                var(--sapContent_FocusColor);
-            outline-offset: var(--sapContent_FocusWidth, 0.0625rem);
+            outline: var(--sapContent_FocusWidth) var(--sapContent_FocusStyle) var(--sapContent_FocusColor);
+            outline-offset: var(--sapContent_FocusWidth);
         }
     }
 

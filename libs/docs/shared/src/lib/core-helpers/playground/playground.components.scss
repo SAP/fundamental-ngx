@@ -12,9 +12,9 @@
 
     &__title {
         font-family: var(--sapFontFamily);
-        font-size: var(--sapFontHeader4Size, 1.125rem);
+        font-size: var(--sapFontHeader4Size);
         font-weight: 600;
-        color: var(--sapTitleColor, var(--sapTextColor));
+        color: var(--sapTitleColor);
         padding: 1rem 1.25rem;
         margin: 0;
         border-block-end: 0.0625rem solid var(--sapGroup_ContentBorderColor);
