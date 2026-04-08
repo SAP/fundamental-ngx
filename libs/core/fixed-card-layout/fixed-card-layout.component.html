@@ -28,15 +28,17 @@
                 cdkDrag
                 fdDndKeyboardItem
                 tabindex="0"
+                role="group"
                 cdkDragPreviewClass="fd-fixed-card-layout__card-preview"
                 [cdkDragData]="card"
                 [cdkDragStartDelay]="dragStartDelay"
                 [itemIndex]="_itemIndexes.get(card.fdCardDef)!"
                 [groupIndex]="_groupIndexes.get(card.fdCardDef)!"
+                [attr.aria-labelledby]="cardLayoutItem.cardTitleId()"
                 (cdkDragStarted)="_onDragStarted($event)"
                 (cdkDragDropped)="_onDragDropped($event)"
             >
-                <fd-fixed-card-layout-item>
+                <fd-fixed-card-layout-item #cardLayoutItem>
                     <ng-template [ngTemplateOutlet]="card?.template || null"> </ng-template>
                 </fd-fixed-card-layout-item>
                 <div
