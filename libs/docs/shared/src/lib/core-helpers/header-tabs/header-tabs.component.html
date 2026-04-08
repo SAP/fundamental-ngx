@@ -3,6 +3,7 @@
         <li fd-tab-item>
             <a
                 fd-tab-link
+                tabindex="0"
                 [routerLink]="customTab.link"
                 routerLinkActive
                 #rla="routerLinkActive"
@@ -17,6 +18,7 @@
     <li fd-tab-item>
         <a
             fd-tab-link
+            tabindex="0"
             [routerLink]="observedLink ? (observedLink.link | async) : './'"
             routerLinkActive
             #rla1="routerLinkActive"
@@ -27,13 +29,27 @@
         </a>
     </li>
     <li fd-tab-item>
-        <a fd-tab-link routerLink="./api" routerLinkActive #rla2="routerLinkActive" [active]="rla2.isActive">
+        <a
+            fd-tab-link
+            tabindex="0"
+            routerLink="./api"
+            routerLinkActive
+            #rla2="routerLinkActive"
+            [active]="rla2.isActive"
+        >
             <span fd-tab-tag>API</span>
         </a>
     </li>
     @if (hasI18n) {
         <li fd-tab-item>
-            <a fd-tab-link routerLink="./i18n" routerLinkActive #rla3="routerLinkActive" [active]="rla3.isActive">
+            <a
+                fd-tab-link
+                tabindex="0"
+                routerLink="./i18n"
+                routerLinkActive
+                #rla3="routerLinkActive"
+                [active]="rla3.isActive"
+            >
                 <span fd-tab-tag>I18n</span>
             </a>
         </li>
@@ -42,6 +58,7 @@
         <li fd-tab-item>
             <a
                 fd-tab-link
+                tabindex="0"
                 [routerLink]="customTab.link"
                 routerLinkActive
                 #rla="routerLinkActive"
@@ -54,4 +71,3 @@
         </li>
     }
 </ul>
-<separator [style.margin-top]="0"></separator>

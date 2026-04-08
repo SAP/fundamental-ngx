@@ -6,6 +6,14 @@ import { CodeSnippetComponent } from '../code-snippet/code-snippet.component';
 @Component({
     selector: 'import',
     template: ` <fd-code-snippet [file]="file()"></fd-code-snippet>`,
+    styles: [
+        `
+            :host {
+                display: block;
+                margin-block-end: 1.5rem;
+            }
+        `
+    ],
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [CodeSnippetComponent]
 })
