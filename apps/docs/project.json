@@ -238,11 +238,7 @@
                         "output": "./assets/i18n"
                     }
                 ],
-                "styles": [
-                    "node_modules/fundamental-styles/dist/icon.css",
-                    "apps/docs/src/fd-typedoc/assets/css/main.scss",
-                    "apps/docs/src/styles.scss"
-                ],
+                "styles": ["node_modules/fundamental-styles/dist/icon.css", "apps/docs/src/styles.scss"],
                 "stylePreprocessorOptions": {
                     "includePaths": ["node_modules"]
                 },

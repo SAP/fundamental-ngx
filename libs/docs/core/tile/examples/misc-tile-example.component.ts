@@ -7,7 +7,7 @@ import { TileModule } from '@fundamental-ngx/core/tile';
     templateUrl: './misc-tile-example.component.html',
     styles: [
         `
-            .fddoc-container {
+            .fd-docs-container {
                 display: flex;
                 justify-content: space-around;
                 padding-bottom: 1rem;

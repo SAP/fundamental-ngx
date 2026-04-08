@@ -11,7 +11,7 @@ import { SplitButtonModule } from '@fundamental-ngx/core/split-button';
             fd-split-button {
                 margin-right: 12px;
             }
-            .docs-button {
+            .fd-docs-button {
                 margin-right: 12px;
             }
         `

@@ -15,31 +15,50 @@
                 [attr.aria-haspopup]="true"
             ></button>
         </fd-popover-control>
-        <fd-popover-body [id]="data.id + '-1'" role="tooltip">
+        <fd-popover-body [id]="data.id + '-1'" role="tooltip" style="max-width: 600px">
             <fd-quick-view [id]="data.id">
-                <fd-quick-view-title align="middle">{{ data.title }}</fd-quick-view-title>
+                <fd-quick-view-title align="middle"
+                    >{{ data.title }} Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio ipsam
+                    cupiditate voluptatibus et, dolorum voluptatum eum doloribus consequuntur temporibus ad nulla
+                    numquam quia, voluptatem nam mollitia eius minus provident tenetur.</fd-quick-view-title
+                >
                 <fd-quick-view-subheader>
                     <fd-avatar [image]="data.subHeader.avatar" size="s"></fd-avatar>
-                    <fd-quick-view-subheader-title>
-                        {{ data.subHeader.title }}
+                    <fd-quick-view-subheader-title allowWrap>
+                        {{ data.subHeader.title }} Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio
+                        ipsam cupiditate voluptatibus et, dolorum voluptatum eum doloribus consequuntur temporibus ad
+                        nulla numquam quia, voluptatem nam mollitia eius minus provident tenetur.
                     </fd-quick-view-subheader-title>
-                    <fd-quick-view-subheader-subtitle>
-                        {{ data.subHeader.subtitle }}
+                    <fd-quick-view-subheader-subtitle allowWrap>
+                        {{ data.subHeader.subtitle }} Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Distinctio ipsam cupiditate voluptatibus et, dolorum voluptatum eum doloribus consequuntur
+                        temporibus ad nulla numquam quia, voluptatem nam mollitia eius minus provident tenetur.
                     </fd-quick-view-subheader-subtitle>
                 </fd-quick-view-subheader>
                 @for (group of data.groups; track group; let i = $index) {
                     <fd-quick-view-group [attr.aria-labelledby]="getGroupId(i, group)">
-                        <fd-quick-view-group-title [id]="getGroupId(i, group)">
-                            {{ group.title }}
+                        <fd-quick-view-group-title allowWrap [id]="getGroupId(i, group)">
+                            {{ group.title }} Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio ipsam
+                            cupiditate voluptatibus et, dolorum voluptatum eum doloribus consequuntur temporibus ad
+                            nulla numquam quia, voluptatem nam mollitia eius minus provident tenetur.
                         </fd-quick-view-group-title>
                         @for (item of group.items; track item) {
                             <fd-quick-view-group-item>
-                                <fd-quick-view-group-item-label>
-                                    {{ item.label }}
+                                <fd-quick-view-group-item-label allowWrap>
+                                    {{ item.label }} Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio
+                                    ipsam cupiditate voluptatibus et, dolorum voluptatum eum doloribus consequuntur
+                                    temporibus ad nulla numquam quia, voluptatem nam mollitia eius minus provident
+                                    tenetur.
                                 </fd-quick-view-group-item-label>
                                 <fd-quick-view-group-item-content>
                                     @switch (item.label) {
-                                        @case (item.label === 'Mobile' || item.label === 'Phone' ? item.label : '') {
+                                        @case (
+                                            item.label ===
+                                                'Mobile Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio ipsam cupiditate voluptatibus et, dolorum voluptatum eum doloribus consequuntur temporibus ad nulla numquam quia, voluptatem nam mollitia eius minus provident tenetur.' ||
+                                            item.label === 'Phone'
+                                                ? item.label
+                                                : ''
+                                        ) {
                                             <a
                                                 [href]="'tel:' + item.value"
                                                 fd-link

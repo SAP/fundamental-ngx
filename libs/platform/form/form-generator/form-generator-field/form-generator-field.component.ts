@@ -1,5 +1,5 @@
 import {
-    ChangeDetectorRef,
+    ChangeDetectionStrategy,
     Component,
     forwardRef,
     Input,
@@ -37,6 +37,7 @@ const formGroupChildProvider: Provider = {
     templateUrl: './form-generator-field.component.html',
     providers: [formFieldProvider, formGroupChildProvider],
     encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [FdpFormGroupModule, FormsModule, ReactiveFormsModule, DynamicFormControlDirective]
 })
 export class FormGeneratorFieldComponent implements OnInit {
@@ -104,15 +105,11 @@ export class FormGeneratorFieldComponent implements OnInit {
     _errorModels: { type: string; value: any }[] = [];
 
     /** @hidden */
-    constructor(
-        private _fgService: FormGeneratorService,
-        private _cdr: ChangeDetectorRef
-    ) {}
+    constructor(private _fgService: FormGeneratorService) {}
 
     /** @hidden */
     ngOnInit(): void {
         this._errorModels = this._getErrors();
-        this._cdr.detectChanges();
     }
 
     /** @hidden */

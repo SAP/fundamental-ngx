@@ -1,19 +1,83 @@
-.docs-header-link {
-    color: var(--sapPageHeader_TextColor);
+// =============================================================================
+// Section title — heading with accent bar and anchor link
+// =============================================================================
+
+:host {
+    display: block;
+}
+
+.fd-docs-header-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--sapTitleColor);
+    font-family: var(--sapFontFamily);
+    font-size: var(--sapFontHeader3Size);
+    font-weight: 600;
+    line-height: 1.3;
     position: relative;
-    padding-top: 2rem;
-    margin-top: 0;
+    padding-block-start: 2rem;
+    padding-inline-start: 0.875rem;
+    margin-block-start: 0;
+    margin-block-end: 0.25rem;
+    transition: color 200ms ease;
+    cursor: pointer;
+
+    // ── Brand-color left accent bar ───────────────────────
+    &::before {
+        content: '';
+        position: absolute;
+        inset-inline-start: 0;
+        inset-block-end: 0;
+        width: 0.1875rem;
+        height: 1.5rem;
+        border-radius: 0.125rem;
+        background: var(--sapBrandColor);
+        opacity: 0.5;
+        transition:
+            height 250ms cubic-bezier(0.4, 0, 0.2, 1),
+            opacity 250ms ease;
+    }
+
+    &:hover {
+        color: var(--sapBrandColor);
+
+        &::before {
+            height: 100%;
+            opacity: 1;
+        }
+    }
 }
 
-.docs-header-link .docs-markdown-a {
-    visibility: hidden;
-    text-align: center;
+// ── Section text ───────────────────────────────────────────
+.fd-docs-header-link__text {
+    flex: 1;
+    min-width: 0;
+}
+
+// ── Anchor link ────────────────────────────────────────────
+.fd-docs-header-link .fd-docs-markdown-a {
+    opacity: 0;
     text-decoration: none;
-    margin-left: -25px;
-    display: inline-block;
-    vertical-align: middle;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 0.375rem;
+    color: var(--sapContent_NonInteractiveIconColor);
+    transition:
+        opacity 200ms ease,
+        color 200ms ease,
+        transform 200ms ease,
+        background-color 200ms ease;
+    transform: translateX(calc(-0.25rem * var(--fd-docs-dir, 1)));
 }
 
-.docs-header-link:hover .docs-markdown-a {
-    visibility: visible;
+.fd-docs-header-link:hover .fd-docs-markdown-a {
+    opacity: 1;
+    color: var(--sapBrandColor);
+    background: color-mix(in srgb, var(--sapBrandColor) 8%, transparent);
+    transform: translateX(0);
 }

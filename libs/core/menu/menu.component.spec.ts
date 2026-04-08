@@ -30,7 +30,6 @@ import { MenuComponent } from './menu.component';
 
         <button #trigger [fdMenuTrigger]="menu">Open Menu</button>
     `,
-    standalone: true,
     imports: [MenuComponent, MenuItemComponent, MenuInteractiveComponent, MenuTitleDirective, MenuTriggerDirective]
 })
 export class TestMenuComponent {
@@ -446,7 +445,7 @@ describe('MenuComponent mobile mode', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [TestMenuComponent, NoopAnimationsModule]
+            imports: [TestMenuComponent]
         }).compileComponents();
     }));
 

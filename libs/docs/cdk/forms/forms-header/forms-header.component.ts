@@ -9,7 +9,7 @@ import {
 } from '@fundamental-ngx/docs/shared';
 
 @Component({
-    selector: 'app-forms-header',
+    selector: 'fd-docs-cdk-forms-header',
     templateUrl: './forms-header.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, RouterLink, ImportComponent, HeaderTabsComponent]

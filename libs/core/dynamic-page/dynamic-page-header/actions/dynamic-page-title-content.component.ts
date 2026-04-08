@@ -1,5 +1,13 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, inject, ViewEncapsulation } from '@angular/core';
+import {
+    booleanAttribute,
+    ChangeDetectionStrategy,
+    Component,
+    computed,
+    inject,
+    input,
+    ViewEncapsulation
+} from '@angular/core';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { ToolbarComponent, ToolbarItemDirective } from '@fundamental-ngx/core/toolbar';
 import { DynamicPageService } from '../../dynamic-page.service';
@@ -21,7 +29,10 @@ import { DynamicPageService } from '../../dynamic-page.service';
                 </div>
             </fd-toolbar>
         } @else {
-            <div class="fd-dynamic-page__title-content">
+            <div
+                class="fd-dynamic-page__title-content"
+                [class.fd-dynamic-page__title-content--wrap]="titleContentWrap()"
+            >
                 <ng-template [ngTemplateOutlet]="templateContentRef"></ng-template>
             </div>
         }
@@ -29,20 +40,18 @@ import { DynamicPageService } from '../../dynamic-page.service';
             <ng-content></ng-content>
         </ng-template>
     `,
-    // TO BE REMOVED WITH THE LATEST VERSION OF FUNDAMENTAL STYLES
-    styles: [
-        `
-            .fd-dynamic-page__title-content {
-                padding-inline: 1rem 0.2rem;
-            }
-        `
-    ],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [contentDensityObserverProviders()],
     imports: [ToolbarComponent, ToolbarItemDirective, NgTemplateOutlet]
 })
 export class DynamicPageTitleContentComponent {
+    /**
+     * Whether the title content text should wrap to multiple lines instead of truncating with ellipsis.
+     * @default false
+     */
+    readonly titleContentWrap = input(false, { transform: booleanAttribute });
+
     /** @hidden */
     protected readonly _contentDensityObserver = inject(ContentDensityObserver);
 

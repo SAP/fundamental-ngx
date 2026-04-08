@@ -61,7 +61,6 @@ describe('IconTabBarProcessTypeComponent', () => {
     beforeEach(fakeAsync(() => {
         fixture = TestBed.createComponent(IconTabBarProcessTypeComponent);
         component = fixture.componentInstance;
-        (component as any)['_cd'] = fakeCdr as any;
 
         component.tabs = _generateTabBarItems(generateTestConfig(100));
         fixture.detectChanges();
@@ -188,9 +187,4 @@ describe('IconTabBarProcessTypeComponent', () => {
 
 const fakeOverflowDirective = {
     getAmountOfExtraItems: () => AMOUNT_OF_EXTRA_TABS
-};
-
-const fakeCdr = {
-    detectChanges: () => null,
-    markForCheck: () => null
 };

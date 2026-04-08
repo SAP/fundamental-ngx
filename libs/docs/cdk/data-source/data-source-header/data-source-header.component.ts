@@ -8,7 +8,7 @@ import {
 } from '@fundamental-ngx/docs/shared';
 
 @Component({
-    selector: 'app-data-source-header',
+    selector: 'fd-docs-cdk-data-source-header',
     templateUrl: './data-source-header.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]

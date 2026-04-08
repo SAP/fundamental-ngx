@@ -8,6 +8,4 @@ import { DeprecatedAlertsComponent } from '../deprecated-alerts/deprecated-alert
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [DeprecatedAlertsComponent, RouterOutlet]
 })
-export class DocPageComponent {
-    constructor() {}
-}
+export class DocPageComponent {}

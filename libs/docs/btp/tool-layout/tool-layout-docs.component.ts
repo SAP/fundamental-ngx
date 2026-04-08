@@ -14,6 +14,7 @@ import { ToolLayoutPhoneExampleComponent } from './examples/phone-example/tool-l
 import { ToolLayoutTabletExampleComponent } from './examples/tablet-example/tool-layout-tablet-example.component';
 
 @Component({
+    selector: 'fd-docs-btp-tool-layout',
     templateUrl: './tool-layout-docs.component.html',
     imports: [
         DocsSectionTitleComponent,

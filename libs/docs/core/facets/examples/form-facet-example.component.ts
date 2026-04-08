@@ -16,7 +16,7 @@ import { TextComponent } from '@fundamental-ngx/core/text';
     templateUrl: './form-facet-example.component.html',
     styles: [
         `
-            .fddoc-flex {
+            .fd-docs-flex {
                 display: flex;
             }
         `

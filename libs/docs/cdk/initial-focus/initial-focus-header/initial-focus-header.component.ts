@@ -8,7 +8,7 @@ import {
 } from '@fundamental-ngx/docs/shared';
 
 @Component({
-    selector: 'app-initial-focus-header',
+    selector: 'fd-docs-cdk-initial-focus-header',
     templateUrl: './initial-focus-header.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
