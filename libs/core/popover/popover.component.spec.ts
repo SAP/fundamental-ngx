@@ -355,7 +355,7 @@ describe('PopoverComponent mobile mode', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [TestPopoverComponent, NoopAnimationsModule]
+            imports: [TestPopoverComponent]
         }).compileComponents();
     }));
 
