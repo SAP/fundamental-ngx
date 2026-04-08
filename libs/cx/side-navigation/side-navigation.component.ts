@@ -2,6 +2,7 @@ import { NgTemplateOutlet } from '@angular/common';
 import {
     AfterContentInit,
     AfterViewInit,
+    ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     ContentChild,
@@ -46,6 +47,7 @@ import { SideNavigationUtilityDirective } from './side-navigation-utility.direct
     templateUrl: './side-navigation.component.html',
     styleUrl: 'side-navigation.component.scss',
     encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
         FdTranslatePipe,
         NgTemplateOutlet,
@@ -55,7 +57,6 @@ import { SideNavigationUtilityDirective } from './side-navigation-utility.direct
         SideNavigationUtilityDirective,
         SideNavigationButtonDirective
     ],
-    standalone: true,
     providers: [MenuKeyboardService, NestedListKeyboardService, NestedListStateService]
 })
 export class SideNavigationComponent
@@ -169,6 +170,7 @@ export class SideNavigationComponent
         if (this.collapseWidth) {
             this._condensed = window.innerWidth <= this.collapseWidth;
         }
+        this._cdRef.markForCheck();
     }
 
     /** @hidden */
@@ -230,7 +232,7 @@ export class SideNavigationComponent
                     item._narrow = false;
                 });
             }
-            this._cdRef.detectChanges();
+            this._cdRef.markForCheck();
         });
     }
 

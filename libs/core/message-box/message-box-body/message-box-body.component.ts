@@ -1,4 +1,4 @@
-import { Component, Optional } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Optional } from '@angular/core';
 import { MessageBoxConfig, MessageBoxHost } from '../utils/message-box-config.class';
 
 /**
@@ -13,11 +13,11 @@ import { MessageBoxConfig, MessageBoxHost } from '../utils/message-box-config.cl
     template: `<section>
         <ng-content></ng-content>
     </section>`,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         '[class.fd-message-box__body]': 'true',
         '[class.fd-message-box__body--no-vertical-padding]': '!messageBoxConfig.verticalPadding'
-    },
-    standalone: true
+    }
 })
 export class MessageBoxBodyComponent {
     /** @hidden */

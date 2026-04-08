@@ -1,4 +1,4 @@
-import { Component, input, model, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, model, output } from '@angular/core';
 import { ToolHeaderButtonDirective } from '@fundamental-ngx/btp/button';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { TriggerConfig } from '@fundamental-ngx/core/popover';
@@ -51,7 +51,8 @@ import { FdTranslatePipe } from '@fundamental-ngx/i18n';
     ],
     host: {
         '[class.fd-popover-custom--disabled]': 'disabled()'
-    }
+    },
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToolHeaderProductSwitchComponent {
     /** Placement of a popover. */

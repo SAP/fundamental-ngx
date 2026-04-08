@@ -1,5 +1,5 @@
 import { FocusableOption } from '@angular/cdk/a11y';
-import { ChangeDetectionStrategy, Component, ElementRef } from '@angular/core';
+import { afterNextRender, ChangeDetectionStrategy, Component, ElementRef, inject, signal } from '@angular/core';
 
 @Component({
     selector: 'fd-fixed-card-layout-item',
@@ -7,12 +7,24 @@ import { ChangeDetectionStrategy, Component, ElementRef } from '@angular/core';
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         '[style.display]': '"block"'
-    },
-    standalone: true
+    }
 })
 export class FixedCardLayoutItemComponent implements FocusableOption {
+    /** Card title ID for aria-labelledby, or undefined if no title is present */
+    readonly cardTitleId = signal<string | undefined>(undefined);
+
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    private _elementRef = inject(ElementRef);
+
+    /** @hidden */
+    constructor() {
+        afterNextRender(() => {
+            // Query the DOM for the card title element after render
+            const titleElement = this._elementRef.nativeElement.querySelector('[fd-card-title]') as HTMLElement;
+            const titleId = titleElement?.getAttribute('id');
+            this.cardTitleId.set(titleId || undefined);
+        });
+    }
 
     /** Set focus on the element. */
     focus(): void {

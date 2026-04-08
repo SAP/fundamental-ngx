@@ -1,5 +1,15 @@
 import { NgClass } from '@angular/common';
-import { Component, ElementRef, EventEmitter, Input, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    EventEmitter,
+    Input,
+    Output,
+    QueryList,
+    ViewChild,
+    ViewChildren
+} from '@angular/core';
 import { Nullable, OverflowListDirective, OverflowListItemDirective } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { IconComponent } from '@fundamental-ngx/core/icon';
@@ -26,6 +36,7 @@ type TabItem = ElementRef<HTMLElement> | TextTypePopoverComponent;
 @Component({
     selector: 'fdp-icon-tab-bar-text-type',
     templateUrl: './icon-tab-bar-text-type.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         {
             provide: IconTabBarBase,

@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, Inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SelectableOptionItem } from '@fundamental-ngx/cdk/forms';
 import { Nullable, TemplateDirective } from '@fundamental-ngx/cdk/utils';
@@ -22,6 +22,7 @@ import { MULTI_COMBOBOX_COMPONENT } from '../multi-combobox.token';
     selector: 'fd-mobile-multi-combobox',
     templateUrl: './mobile-multi-combobox.component.html',
     styleUrl: './mobile-multi-combobox.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
         BarMiddleDirective,
         BarElementDirective,

@@ -1,5 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
 import {
+    ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     ContentChild,
@@ -39,7 +40,7 @@ import {
         </ng-template>
     `,
     imports: [NgTemplateOutlet],
-    standalone: true,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     selector:
         // eslint-disable-next-line @angular-eslint/component-selector
         '[fdx-nested-list-link], button[fdx-nested-list-link], a[fdx-nested-list-link], div[fdx-nested-list-link]',
@@ -136,6 +137,7 @@ export class NestedLinkComponent {
     changeSelected(selected: boolean): void {
         this.selected = selected;
         this.selectedChange.emit(selected);
+        this.changeDetRef.markForCheck();
     }
 
     /** Set focus on the element. */
