@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, FormsModule } from '@angular/forms';
 import { FormControlComponent } from '@fundamental-ngx/core/form';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
@@ -8,6 +8,7 @@ import { FdTranslatePipe } from '@fundamental-ngx/i18n';
     host: { class: 'fd-upload-collection__form-item' },
     templateUrl: './upload-collection-form-item.component.html',
     encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [FormControlComponent, FormsModule, FdTranslatePipe]
 })
 export class UploadCollectionFormItemComponent implements ControlValueAccessor {

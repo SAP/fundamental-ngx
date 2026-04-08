@@ -1,5 +1,5 @@
 import { BooleanInput } from '@angular/cdk/coercion';
-import { Component, booleanAttribute, computed, effect, input, output } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, input, output } from '@angular/core';
 
 import { ModuleDeprecation, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { ButtonType, ButtonComponent as CoreButtonComponent, GlyphPosition } from '@fundamental-ngx/core/button';
@@ -24,6 +24,7 @@ let platformButtonId = 0;
         }
     ],
     imports: [CoreButtonComponent],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         role: 'button',
         '[attr.tabindex]': '-1'

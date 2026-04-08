@@ -1,5 +1,7 @@
 import {
     AfterContentInit,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ContentChild,
     DestroyRef,
@@ -32,7 +34,7 @@ let sideNavigationItemUniqueId = 0;
     selector: '[cxNestedItem], [fdx-nested-list-item], li[fdx-nested-list-item]',
     template: ` <ng-content></ng-content> `,
     providers: [NestedItemService],
-    standalone: true,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         role: 'treeitem'
     }
@@ -149,6 +151,9 @@ export class NestedItemComponent implements AfterContentInit, NestedItemInterfac
 
     /** @hidden */
     private readonly _destroyRef = inject(DestroyRef);
+
+    /** @hidden */
+    private readonly _cdr = inject(ChangeDetectorRef);
 
     /** Unique element ID */
     private readonly _elementId: string = 'fdNestedItem' + sideNavigationItemUniqueId++;
@@ -278,6 +283,7 @@ export class NestedItemComponent implements AfterContentInit, NestedItemInterfac
         }
 
         this.expandedChange.emit(open);
+        this._cdr.markForCheck();
     }
 
     /** @hidden */
@@ -320,7 +326,7 @@ export class NestedItemComponent implements AfterContentInit, NestedItemInterfac
         if (this.contentItem && this.hasChildren) {
             this._ariaExpanded = false;
             this.contentItem.hasChildren = true;
-            this.contentItem.changeDetRef.detectChanges();
+            this.contentItem.changeDetRef.markForCheck();
         }
     }
 
@@ -341,5 +347,6 @@ export class NestedItemComponent implements AfterContentInit, NestedItemInterfac
         } else if (this.linkItem) {
             this.linkItem.changeSelected(selected);
         }
+        this._cdr.markForCheck();
     }
 }

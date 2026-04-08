@@ -1,5 +1,15 @@
 import { CdkPortalOutlet, ComponentPortal, PortalModule } from '@angular/cdk/portal';
-import { Component, ContentChild, ElementRef, HostBinding, HostListener, ViewChild, inject } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    ContentChild,
+    ElementRef,
+    HostBinding,
+    HostListener,
+    ViewChild,
+    inject
+} from '@angular/core';
 import { HasElementRef, Nullable } from '@fundamental-ngx/cdk/utils';
 import { MenuAddonDirective } from './directives/menu-addon.directive';
 import { MenuItemInputDirective } from './directives/menu-item-input.directive';
@@ -14,6 +24,7 @@ import { MenuItemInputDirective } from './directives/menu-item-input.directive';
     host: {
         role: 'menuitem'
     },
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [PortalModule]
 })
 export class MenuInteractiveComponent implements HasElementRef {
@@ -71,6 +82,9 @@ export class MenuInteractiveComponent implements HasElementRef {
     readonly elementRef: ElementRef = inject(ElementRef);
 
     /** @hidden */
+    private readonly _cdr = inject(ChangeDetectorRef);
+
+    /** @hidden */
     private _startAddonInstance: MenuAddonDirective;
 
     /** @hidden */
@@ -100,18 +114,21 @@ export class MenuInteractiveComponent implements HasElementRef {
         if (this.ariaHaspopup || this._fromSplitButton) {
             this.ariaExpanded = isSelected;
         }
+        this._cdr.markForCheck();
     }
 
     /** @hidden */
     setDisabled(isDisabled: boolean): void {
         this.disabled = isDisabled;
         this.tabindex = isDisabled ? -1 : 0;
+        this._cdr.markForCheck();
     }
 
     /** @hidden */
     setSubmenu(hasSubmenu: boolean, itemId?: string): void {
         this.ariaHaspopup = hasSubmenu;
         this.ariaControls = hasSubmenu ? itemId || this.ariaControls : null;
+        this._cdr.markForCheck();
     }
 }
 
