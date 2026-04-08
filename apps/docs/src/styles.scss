@@ -79,15 +79,15 @@ fd-card {
     width: 80%;
 }
 
-.docs-tile-content-example {
+.fd-docs-tile-content-example {
     padding: 1.5rem;
 }
 
-.doc-centered-content {
+.fd-docs-centered-content {
     text-align: center;
 }
 
-.doc-scroll-spy-example-icon-class {
+.fd-docs-scroll-spy-icon {
     position: relative;
     display: inline-block;
     margin-inline-end: 0.25rem;
@@ -452,7 +452,7 @@ fd-card {
 // Markdown playground (README pages)
 // =============================================================================
 
-.doc-playground--markdown {
+.fd-docs-playground--markdown {
     #fundamental-ngx {
         margin-block-start: 2.625rem;
         font-size: var(--sapFontHeader1Size);

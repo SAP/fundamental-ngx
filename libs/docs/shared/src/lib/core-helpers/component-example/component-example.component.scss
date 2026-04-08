@@ -2,7 +2,7 @@ component-example {
     display: block;
 }
 
-.docs-example-card {
+.fd-docs-example-card {
     border: 0.0625rem solid var(--sapGroup_ContentBorderColor);
     border-radius: var(--sapField_BorderCornerRadius) var(--sapField_BorderCornerRadius) 0 0;
     background-color: var(--sapBaseColor);
@@ -34,7 +34,7 @@ component-example {
         width: 100%;
         transition: max-width 300ms cubic-bezier(0.4, 0, 0.2, 1);
 
-        .docs-example-card__content--responsive & {
+        .fd-docs-example-card__content--responsive & {
             resize: horizontal;
             overflow: hidden;
             border-inline-end: 0.125rem dashed var(--sapGroup_ContentBorderColor);

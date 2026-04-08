@@ -7,7 +7,7 @@
 // Sidebar shell
 // =============================================================================
 
-.sidebar {
+.fd-docs-sidebar {
     color: var(--sapTextColor);
     background: var(--sapBackgroundColor);
     transition:
@@ -431,12 +431,12 @@
 // Sidebar states & responsive
 // =============================================================================
 
-.sidebar-collapsed {
+.fd-docs-sidebar--collapsed {
     margin-inline-start: -18.5rem;
     box-shadow: none !important;
 }
 
-.skip-navigation {
+.fd-docs-skip-navigation {
     position: absolute;
     inset-inline-start: -5000px;
     inset-block-start: 0;
@@ -446,7 +446,7 @@
 }
 
 @media (max-width: 992px) {
-    .sidebar {
+    .fd-docs-sidebar {
         position: absolute;
         box-shadow: 0.125rem 0 3.125rem 0 rgba(0, 0, 0, 0.7);
         height: auto;

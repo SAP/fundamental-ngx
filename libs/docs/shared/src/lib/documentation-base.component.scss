@@ -5,12 +5,12 @@ fd-base-documentation {
     height: 100%;
 }
 
-.nav {
+.fd-docs-nav-list {
     list-style: none;
     padding-inline-start: 0;
 }
 
-.content {
+.fd-docs-content {
     flex-grow: 1;
     overflow-y: scroll;
     padding-block-end: 2rem;
@@ -21,7 +21,7 @@ fd-base-documentation {
     }
 }
 
-.content-margin {
+.fd-docs-content__margin {
     padding-block: 0.75rem 5rem;
     padding-inline: 3.75rem 2.5rem;
     width: 100%;
@@ -35,12 +35,12 @@ fd-base-documentation {
     min-height: 100%;
 }
 
-.fd-docs-content-layout > .content-margin {
+.fd-docs-content-layout > .fd-docs-content__margin {
     flex: 1;
     min-width: 0;
 }
 
-.collapsed-overlay {
+.fd-docs-overlay {
     background-color: black;
     opacity: 0;
     position: absolute;
@@ -54,18 +54,18 @@ fd-base-documentation {
     }
 }
 
-.overlay-init {
+.fd-docs-overlay--visible {
     opacity: 0.7;
     visibility: visible;
 }
 
-.fd-sidebar-container {
+.fd-docs-sidebar-container {
     position: relative;
     flex: 1;
     overflow: hidden;
 }
 
-.skip-navigation {
+.fd-docs-skip-navigation {
     position: absolute;
     inset-inline-start: -5000px;
     inset-block-start: 0;
@@ -75,7 +75,7 @@ fd-base-documentation {
 }
 
 @media (max-width: 992px) {
-    .content-margin {
+    .fd-docs-content__margin {
         padding-inline: 3.75rem;
         padding-block: 0.625rem;
         width: auto;
@@ -83,13 +83,13 @@ fd-base-documentation {
 }
 
 @media (max-width: 768px) {
-    .content-margin {
+    .fd-docs-content__margin {
         padding-inline: 2.5rem;
     }
 }
 
 @media (max-width: 576px) {
-    .content-margin {
+    .fd-docs-content__margin {
         padding-inline: 1.25rem;
     }
 }

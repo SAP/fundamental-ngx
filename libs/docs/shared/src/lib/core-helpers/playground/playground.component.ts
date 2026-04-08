@@ -9,7 +9,7 @@ import { Schema, SchemaComponent } from '@fundamental-ngx/docs/schema';
     encapsulation: ViewEncapsulation.None,
     imports: [SchemaComponent],
     host: {
-        class: 'fd-playground'
+        class: 'fd-docs-playground'
     }
 })
 export class PlayGroundComponent {

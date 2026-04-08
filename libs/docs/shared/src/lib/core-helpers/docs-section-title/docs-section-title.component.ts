@@ -19,12 +19,12 @@ import { CURRENT_LIB, Libraries } from '../../utilities/libraries';
 @Component({
     selector: 'fd-docs-section-title',
     template: `
-        <h2 [id]="id" #title class="docs-header-link" (click)="navigateToFragment($event)">
-            <span class="docs-header-link__text">
+        <h2 [id]="id" #title class="fd-docs-header-link" (click)="navigateToFragment($event)">
+            <span class="fd-docs-header-link__text">
                 <ng-content></ng-content>
             </span>
             <a
-                class="docs-markdown-a"
+                class="fd-docs-markdown-a"
                 [attr.aria-describedby]="id"
                 [href]="fragmentUrl"
                 (click)="navigateToFragment($event)"

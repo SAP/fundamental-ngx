@@ -1,4 +1,4 @@
-.docs-html-example-container {
+.fd-docs-html-example-container {
     display: grid;
     grid-template-rows: 0fr;
     transition: grid-template-rows 250ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -8,11 +8,11 @@
     }
 }
 
-.docs-code-example-content-wrapper {
+.fd-docs-code-example-content-wrapper {
     overflow: hidden;
 }
 
-.docs-code-example-content {
+.fd-docs-code-example-content {
     background-color: var(--sapGroup_ContentBackground);
     color: var(--sapTextColor);
     border: 0.0625rem solid var(--sapGroup_ContentBorderColor);
@@ -20,15 +20,15 @@
     border-radius: 0 0 var(--sapField_BorderCornerRadius) var(--sapField_BorderCornerRadius);
 }
 
-.docs-code-enter {
-    animation: docs-code-fade-in 150ms 100ms ease-in both;
+.fd-docs-code-enter {
+    animation: fd-docs-code-fade-in 150ms 100ms ease-in both;
 }
 
-.docs-code-leave {
-    animation: docs-code-fade-out 150ms ease-out both;
+.fd-docs-code-leave {
+    animation: fd-docs-code-fade-out 150ms ease-out both;
 }
 
-@keyframes docs-code-fade-in {
+@keyframes fd-docs-code-fade-in {
     from {
         opacity: 0;
     }
@@ -37,7 +37,7 @@
     }
 }
 
-@keyframes docs-code-fade-out {
+@keyframes fd-docs-code-fade-out {
     from {
         opacity: 1;
     }
@@ -47,7 +47,7 @@
 }
 
 // Scrollable code area with fade hint
-.docs-code-snippet-wrapper {
+.fd-docs-code-snippet-wrapper {
     position: relative;
     max-height: 25rem;
     overflow-y: auto;
@@ -73,7 +73,7 @@
     }
 }
 
-.docs-code-example-toolbar {
+.fd-docs-code-example-toolbar {
     display: flex;
     flex-grow: 1;
     align-items: center;
@@ -94,7 +94,7 @@
     width: 100%;
 }
 
-.docs-code-example-loading {
+.fd-docs-code-example-loading {
     text-align: center;
     padding: var(--sapContent_Space_S);
 }
@@ -109,7 +109,7 @@ code-example {
     }
 }
 
-.docs-kbd {
+.fd-docs-kbd {
     display: inline-block;
     margin-inline-start: 0.375rem;
     padding: 0.0625rem 0.25rem;

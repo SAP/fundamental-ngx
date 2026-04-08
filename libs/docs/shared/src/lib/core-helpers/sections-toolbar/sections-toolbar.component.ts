@@ -143,19 +143,6 @@ export class SectionsToolbarComponent {
         }
     }
 
-    protected onItemClick(): void {
-        this.sideCollapsed.set(false);
-    }
-
-    protected windowSize(): void {
-        if (!this._smallScreen) {
-            this.sideCollapsed.set(false);
-            return;
-        }
-
-        this.onActivate();
-    }
-
     protected toggleSection(sectionHeader: string): void {
         const expandedMap = new Map(this.expandedSections());
         const currentState = expandedMap.get(sectionHeader) ?? false;
@@ -190,7 +177,11 @@ export class SectionsToolbarComponent {
     }
 
     private _focusInput(): void {
-        this._searchInput()?.nativeElement?.focus();
+        const el = this._searchInput()?.nativeElement;
+        if (el) {
+            el.focus();
+            el.select();
+        }
     }
 
     private _filterSections(sections: SectionInterface[], searchTerm: string): SectionInterface[] {

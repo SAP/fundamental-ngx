@@ -6,7 +6,7 @@
     display: block;
 }
 
-.docs-header-link {
+.fd-docs-header-link {
     display: flex;
     align-items: center;
     gap: 0.75rem;
@@ -50,13 +50,13 @@
 }
 
 // ── Section text ───────────────────────────────────────────
-.docs-header-link__text {
+.fd-docs-header-link__text {
     flex: 1;
     min-width: 0;
 }
 
 // ── Anchor link ────────────────────────────────────────────
-.docs-header-link .docs-markdown-a {
+.fd-docs-header-link .fd-docs-markdown-a {
     opacity: 0;
     text-decoration: none;
     flex-shrink: 0;
@@ -75,7 +75,7 @@
     transform: translateX(calc(-0.25rem * var(--fd-docs-dir, 1)));
 }
 
-.docs-header-link:hover .docs-markdown-a {
+.fd-docs-header-link:hover .fd-docs-markdown-a {
     opacity: 1;
     color: var(--sapBrandColor);
     background: color-mix(in srgb, var(--sapBrandColor) 8%, transparent);

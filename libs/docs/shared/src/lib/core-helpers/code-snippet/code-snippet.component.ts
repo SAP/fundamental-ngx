@@ -22,11 +22,11 @@ import { ExampleFile } from '../code-example/example-file';
             :host {
                 display: block;
             }
-            .docs-code-snippet {
+            .fd-docs-code-snippet {
                 display: flex;
                 overflow-x: auto;
             }
-            .docs-code-gutter {
+            .fd-docs-code-gutter {
                 flex-shrink: 0;
                 padding: 1.25rem 0;
                 text-align: end;
@@ -38,7 +38,7 @@ import { ExampleFile } from '../code-example/example-file';
                 line-height: 1.6;
                 border-inline-end: 0.0625rem solid var(--sapGroup_ContentBorderColor);
             }
-            .docs-code-gutter span {
+            .fd-docs-code-gutter span {
                 display: block;
                 padding: 0 0.75rem;
             }
@@ -56,9 +56,9 @@ import { ExampleFile } from '../code-example/example-file';
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
-        <div class="docs-code-snippet">
+        <div class="fd-docs-code-snippet">
             @if (lineCount() > 1) {
-                <div class="docs-code-gutter" aria-hidden="true">
+                <div class="fd-docs-code-gutter" aria-hidden="true">
                     @for (n of lineNumbers(); track n) {
                         <span>{{ n }}</span>
                     }
