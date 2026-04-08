@@ -1,6 +1,6 @@
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
-import { DestroyRef, Directive, inject, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { DestroyRef, Directive, inject, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FocusableItemPosition, KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
@@ -26,7 +26,7 @@ import { Table } from '../table';
         '(keydown)': '_keydownHandler($event)'
     }
 })
-export class TableVirtualScrollDirective extends TableVirtualScroll implements OnChanges, OnInit, OnDestroy {
+export class TableVirtualScrollDirective extends TableVirtualScroll implements OnChanges, OnDestroy {
     /** Whether to show only visible rows in matter of performance
      * false by default, when true setting bodyHeight and rowHeight is required.
      */
@@ -98,10 +98,10 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
     private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
-    private _wheelTimeout: any;
+    private _wheelTimeout: number | undefined;
 
     /** @hidden */
-    private _scrollMockTimeout: any;
+    private _scrollMockTimeout: number | undefined;
 
     /** @hidden */
     private _lastMockScrollPosition = 0;
@@ -121,13 +121,6 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
     /** @hidden */
     constructor(readonly _tableService: TableService) {
         super();
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        if (this.scrollWholeRows && !this.virtualScroll) {
-            this.virtualScroll = true;
-        }
     }
 
     /** @hidden */

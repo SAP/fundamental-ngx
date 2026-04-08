@@ -102,8 +102,8 @@ export class TableScrollingDocsComponent {
         {
             language: 'html',
             code: getAssetFromModuleAssets(platformVirtualScrollWholeRowTableDefaultSrc),
-            fileName: 'platform-table-virtual-scroll-example',
-            name: 'platform-table-virtual-scroll-example.component.html'
+            fileName: 'platform-table-virtual-scroll-whole-row-example',
+            name: 'platform-table-virtual-scroll-whole-row-example.component.html'
         },
         {
             language: 'typescript',

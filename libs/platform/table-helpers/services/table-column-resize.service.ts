@@ -8,8 +8,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Table } from '../table';
 import { TableScrollDispatcherService } from './table-scroll-dispatcher.service';
 
-import { SELECTION_COLUMN_WIDTH } from '../constants';
-
 export const TABLE_RESIZER_BORDER_WIDTH = 3;
 
 /**
@@ -181,24 +179,8 @@ export class TableColumnResizeService implements OnDestroy {
 
     /** Retrieves custom column value or returns `unset` */
     getColumnWidthStyle(columnName: string): string {
-        if (this._tableRef._virtualScrollDirective?.scrollWholeRows) {
-            if (!this._initialTableWidth) {
-                this._initialTableWidth = this._tableRef._tableWidthPx;
-            }
-            const selectionColumnWidth = SELECTION_COLUMN_WIDTH.get(this._tableRef.contentDensityObserver.value) ?? 0;
-            let sizeDividedByColumnsCount =
-                this._initialTableWidth / this._tableRef.getVisibleTableColumns().length -
-                selectionColumnWidth / this._tableRef.getVisibleTableColumns().length;
-            // In the event of tables with a very high number of columns, need to prevent the default behavior which
-            // would make each column not wide enough to be usable and instead use a horizontal scrollbar.
-            if (sizeDividedByColumnsCount < 176) {
-                sizeDividedByColumnsCount = 176;
-            }
-            return this._fixedColumnsWidthMap.get(columnName) || sizeDividedByColumnsCount + 'px';
-        } else {
-            const calculatedWidth = this._fixedColumnsWidthMap.get(columnName);
-            return calculatedWidth || 'unset';
-        }
+        const calculatedWidth = this._fixedColumnsWidthMap.get(columnName);
+        return calculatedWidth || 'unset';
     }
 
     /** Previous column name */

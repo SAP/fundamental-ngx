@@ -4,7 +4,6 @@ import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
-    OnDestroy,
     ViewEncapsulation,
     booleanAttribute,
     computed,
@@ -47,7 +46,7 @@ export type BusyIndicatorSize = 's' | 'm' | 'l';
         '(keydown)': 'hostFocusChangeHandler($event)'
     }
 })
-export class BusyIndicatorComponent implements OnDestroy {
+export class BusyIndicatorComponent {
     /** Whether to display the loading indicator animation. */
     readonly loading = input(false);
 
@@ -73,7 +72,7 @@ export class BusyIndicatorComponent implements OnDestroy {
     readonly ariaLive = input<'assertive' | 'polite' | 'off' | null>(null);
 
     /** Whether to stop mouse wheel events when the busy indicator is displayed via loading="true". */
-    preventWheelEvents = input(false, { transform: booleanAttribute });
+    readonly preventWheelEvents = input(false, { transform: booleanAttribute });
 
     /** @hidden */
     protected readonly fakeFocusElement = viewChild<ElementRef>('fakeFocusElement');
@@ -111,13 +110,6 @@ export class BusyIndicatorComponent implements OnDestroy {
                     });
                 });
             }
-        });
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._elementRef.nativeElement.removeEventListener('wheel', this._wheelListener, {
-            passive: false
         });
     }
 
