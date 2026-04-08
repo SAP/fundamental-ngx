@@ -35,15 +35,10 @@ export type BarDesignType = 'header' | 'subheader' | 'header-with-subheader' | '
     ],
     host: {
         '[attr.role]': 'role()',
-        '[class]': '_cssClass()',
-        '[class.fd-bar--initial-suggestion-title]': 'initialSuggestionTitle()',
-        '[class.fd-bar--initial-suggestion-subline]': 'initialSuggestionSubline()'
+        '[class]': 'cssClass()'
     }
 })
 export class BarComponent {
-    /** user's custom classes */
-    readonly class = input<string>('');
-
     /** Whether the Bar component is used as a header, subheader, header-with-subheader,
      * footer or floating-footer.
      * Types available: 'header' | 'subheader' | 'header-with-subheader' | 'footer' | 'floating-footer' */
@@ -75,23 +70,23 @@ export class BarComponent {
     readonly role = input('toolbar');
 
     /** @hidden */
-    protected readonly _cssClass = computed(() => {
+    protected readonly cssClass = computed(() => {
         const barDesign = this.barDesign();
         const inPage = this.inPage();
         const inHomePage = this.inHomePage();
         const size = this.size();
+
         return [
             'fd-bar',
             this._contentDensityObserver.isCompactSignal() || this._contentDensityObserver.isCondensedSignal()
                 ? ''
                 : 'fd-bar--cozy', // TODO: fix in styles
-            barDesign ? `fd-bar--${barDesign}` : '',
-            inPage && !size ? 'fd-bar--page' : '',
-            inPage && size ? `fd-bar--page-${size}` : '',
-            inHomePage && !size ? 'fd-bar--home-page' : '',
-            inHomePage && size ? `fd-bar--home-page-${size}` : '',
-            this.clear() ? 'fd-bar--clear' : '',
-            this.class()
+            barDesign && `fd-bar--${barDesign}`,
+            inPage && `fd-bar--page${size ? `-${size}` : ''}`,
+            inHomePage && `fd-bar--home-page${size ? `-${size}` : ''}`,
+            this.clear() && 'fd-bar--clear',
+            this.initialSuggestionTitle() && 'fd-bar--initial-suggestion-title',
+            this.initialSuggestionSubline() && 'fd-bar--initial-suggestion-subline'
         ]
             .filter(Boolean)
             .join(' ');

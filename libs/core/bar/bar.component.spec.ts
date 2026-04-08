@@ -85,12 +85,6 @@ describe('BarComponent', () => {
         expect(el.classList).toContain('fd-bar--clear');
     });
 
-    it('should apply custom class', () => {
-        fixture.componentRef.setInput('class', 'my-custom-class');
-        fixture.detectChanges();
-        expect(el.classList).toContain('my-custom-class');
-    });
-
     it('should apply initialSuggestionTitle class', () => {
         fixture.componentRef.setInput('initialSuggestionTitle', true);
         fixture.detectChanges();
