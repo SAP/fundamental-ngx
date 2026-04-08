@@ -32,7 +32,6 @@ const placeholders = new Map([
 @Component({
     selector: 'fd-datetime-picker-complex-i18n-example',
     templateUrl: './datetime-picker-complex-i18n-example.component.html',
-    styleUrls: ['./datetime-picker-complex-i18n-example.component.scss'],
     providers: [
         // Note that this is usually provided in the root of your application.
         // Due to the limit of this example we must provide it on this level.

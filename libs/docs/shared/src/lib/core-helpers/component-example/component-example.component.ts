@@ -1,48 +1,106 @@
-import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    computed,
+    effect,
+    inject,
+    input,
+    linkedSignal,
+    signal,
+    ViewEncapsulation
+} from '@angular/core';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import {
+    ContentDensityDirective,
+    ContentDensityMode,
+    contentDensityObserverProviders,
+    GlobalContentDensityService
+} from '@fundamental-ngx/core/content-density';
 import { DialogService } from '@fundamental-ngx/core/dialog';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { WizardDialogGeneratorService } from '@fundamental-ngx/platform/wizard-generator';
-import { DirectionalityComponent } from '../directionality/directionality.component';
-import { ExampleBackgroundComponent } from '../example-background/example-background.component';
-
-let componentExampleUniqueId = 0;
 
 @Component({
     selector: 'component-example',
-    template: `
-        <div class="docs-tile docs-component" [class.docs-tile-example-background]="hasBackground()" [id]="id">
-            <div class="docs-tile__content docs-tile-content-example">
-                <div class="component-example__features" fdCompact>
-                    <rtl-switch [label]="id2"></rtl-switch>
-                    <background-switch [label]="id"></background-switch>
-                </div>
-                <div class="fd-doc-component" [id]="id2">
-                    <ng-content></ng-content>
-                </div>
-            </div>
-        </div>
-    `,
+    templateUrl: './component-example.component.html',
     styleUrls: ['./component-example.component.scss'],
     providers: [
         RtlService,
-        // Needed in order for dialog service and components to inherit local rtl service.
         DialogService,
-        WizardDialogGeneratorService
+        WizardDialogGeneratorService,
+        contentDensityObserverProviders({
+            supportedContentDensity: [ContentDensityMode.COMPACT, ContentDensityMode.COZY],
+            defaultContentDensity: ContentDensityMode.COZY,
+            restrictChildContentDensity: true
+        })
     ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [ContentDensityDirective, DirectionalityComponent, ExampleBackgroundComponent]
+    imports: [IconComponent],
+    hostDirectives: [
+        {
+            directive: ContentDensityDirective,
+            inputs: ['fdContentDensity']
+        }
+    ]
 })
 export class ComponentExampleComponent {
     readonly hasBackground = input(true);
 
-    protected readonly id: string;
-    protected readonly id2: string;
+    protected readonly rtlEnabled = signal(false);
+    protected readonly showBackground = linkedSignal(() => this.hasBackground());
+    protected readonly compactMode = linkedSignal(
+        () => this._globalDensity.currentDensitySignal() === ContentDensityMode.COMPACT
+    );
+    protected readonly responsiveEnabled = signal(false);
+    protected readonly viewportWidth = signal<string | null>(null);
+
+    protected readonly direction = computed(() => (this.rtlEnabled() ? 'rtl' : 'ltr'));
+
+    protected readonly activePreset = computed(() => {
+        const w = this.viewportWidth();
+        if (!w) {
+            return 'full';
+        }
+        if (w === '23.4375rem') {
+            return 'phone';
+        }
+        if (w === '48rem') {
+            return 'tablet';
+        }
+        return 'custom';
+    });
+
+    private readonly _rtlService = inject(RtlService);
+    private readonly _contentDensityDirective = inject(ContentDensityDirective);
+    private readonly _globalDensity = inject(GlobalContentDensityService);
 
     constructor() {
-        const exampleName = `ex${componentExampleUniqueId++}`;
-        this.id = `rtl-${exampleName}`;
-        this.id2 = `background-${exampleName}`;
+        effect(() => {
+            this._rtlService.rtl.set(this.rtlEnabled());
+        });
+        effect(() => {
+            this._contentDensityDirective.setDensity(
+                this.compactMode() ? ContentDensityMode.COMPACT : ContentDensityMode.COZY
+            );
+        });
+    }
+
+    protected toggleResponsive(): void {
+        this.responsiveEnabled.update((v) => !v);
+    }
+
+    protected setPreset(preset: 'phone' | 'tablet' | 'full'): void {
+        switch (preset) {
+            case 'phone':
+                this.viewportWidth.set('23.4375rem');
+                break;
+            case 'tablet':
+                this.viewportWidth.set('48rem');
+                break;
+            case 'full':
+                this.viewportWidth.set(null);
+                break;
+        }
     }
 }

@@ -20,6 +20,7 @@ const aliasNamesExampleTs = 'alias-names-example/alias-names-example.component.t
 const differentSourceExampleTs = 'different-observe-target-example.component.ts';
 
 @Component({
+    selector: 'fd-docs-cdk-breakpoint',
     templateUrl: './breakpoint-docs.component.html',
     imports: [
         DocsSectionTitleComponent,

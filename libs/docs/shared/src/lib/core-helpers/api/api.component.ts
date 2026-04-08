@@ -1,7 +1,9 @@
-import { ChangeDetectionStrategy, Component, effect, inject, signal, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, signal, viewChild } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { MenuComponent, MenuModule } from '@fundamental-ngx/core/menu';
 import { catchError, of, switchMap } from 'rxjs';
 import { ApiDocsService } from '../../services/api-docs.service';
@@ -11,7 +13,7 @@ import { ApiDocsService } from '../../services/api-docs.service';
     templateUrl: './api.component.html',
     styleUrls: ['./api.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [ButtonComponent, MenuModule]
+    imports: [ButtonComponent, IconComponent, MenuModule]
 })
 export class ApiComponent {
     protected readonly menu = viewChild<MenuComponent>('menu');
@@ -22,8 +24,13 @@ export class ApiComponent {
     // Sorted files from route data
     protected readonly files = signal<string[]>([]);
 
+    // Bypass sanitization — content is our own TypeDoc-generated HTML from assets/
+    protected readonly result = computed<SafeHtml>(() =>
+        this._sanitizer.bypassSecurityTrustHtml(this._rawHtml() ?? '')
+    );
+
     // Reactive: automatically fetches HTML when activeFile changes
-    protected readonly result = toSignal(
+    private readonly _rawHtml = toSignal(
         toObservable(this.activeFile).pipe(
             switchMap((file) => {
                 if (!file) {
@@ -42,6 +49,7 @@ export class ApiComponent {
 
     private readonly _route = inject(ActivatedRoute);
     private readonly _apiService = inject(ApiDocsService);
+    private readonly _sanitizer = inject(DomSanitizer);
 
     constructor() {
         // Initialize files from route data

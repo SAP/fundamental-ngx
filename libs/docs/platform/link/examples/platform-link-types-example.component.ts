@@ -6,7 +6,7 @@ import { PlatformLinkModule } from '@fundamental-ngx/platform/link';
     templateUrl: './platform-link-types-example.component.html',
     styles: [
         `
-            .fddoc-example-link {
+            .fd-docs-example-link {
                 background-color: black;
                 padding: 1rem;
             }

@@ -9,7 +9,6 @@ import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { InfoLabelComponent } from '@fundamental-ngx/core/info-label';
 import { MessageStripAlertService } from '@fundamental-ngx/core/message-strip';
-import { CopyService } from '@fundamental-ngx/docs/shared';
 import {
     FdpCellDef,
     TableColumnComponent,
@@ -58,7 +57,6 @@ export class SearchIconsComponent {
     source = new TableDataSource<FdIconDocsType>(this.dataProvider);
     iconType!: FdIconDocsType;
 
-    private copyService = inject(CopyService);
     private messageStripAlertService = inject(MessageStripAlertService);
     private domSanitizer = inject(DomSanitizer);
 
@@ -77,16 +75,25 @@ export class SearchIconsComponent {
     }
 
     private _copy(text: string): void {
-        this.copyService.copyText(text);
-        this.messageStripAlertService.open({
-            content: `\`${text}\` copied!`,
-            messageStrip: {
-                dismissible: true,
-                type: 'success',
-                duration: 5000,
-                mousePersist: true
+        navigator.clipboard.writeText(text).then(
+            () => {
+                this.messageStripAlertService.open({
+                    content: `\`${text}\` copied!`,
+                    messageStrip: {
+                        dismissible: true,
+                        type: 'success',
+                        duration: 5000,
+                        mousePersist: true
+                    }
+                });
+            },
+            () => {
+                this.messageStripAlertService.open({
+                    content: 'Failed to copy.',
+                    messageStrip: { type: 'error', duration: 5000, mousePersist: true }
+                });
             }
-        });
+        );
     }
 }
 

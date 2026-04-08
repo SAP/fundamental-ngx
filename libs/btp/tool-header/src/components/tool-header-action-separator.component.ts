@@ -1,4 +1,4 @@
-import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, TemplateRef, ViewChild } from '@angular/core';
 import { ToolHeaderActionClass } from '../tool-header-action.class';
 
 @Component({
@@ -14,7 +14,7 @@ import { ToolHeaderActionClass } from '../tool-header-action.class';
             useExisting: ToolHeaderActionSeparatorComponent
         }
     ],
-    standalone: true
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToolHeaderActionSeparatorComponent extends ToolHeaderActionClass {
     /** @hidden */

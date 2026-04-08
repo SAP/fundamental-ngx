@@ -1,5 +1,7 @@
 import {
     AfterViewInit,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     DestroyRef,
     ElementRef,
@@ -28,7 +30,8 @@ import { of, tap } from 'rxjs';
     hostDirectives: [CvaDirective],
     providers: [CvaControl],
     imports: [IconComponent, FormsModule, FdTranslatePipe, ButtonComponent, NestedButtonDirective],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchFieldComponent implements AfterViewInit, HasElementRef {
     /** Placeholder for the input field. */
@@ -60,6 +63,9 @@ export class SearchFieldComponent implements AfterViewInit, HasElementRef {
     private _destroyRef = inject(DestroyRef);
 
     /** @hidden */
+    private _cdr = inject(ChangeDetectorRef);
+
+    /** @hidden */
     focus(): void {
         this._searchInputField?.nativeElement.focus();
     }
@@ -68,7 +74,10 @@ export class SearchFieldComponent implements AfterViewInit, HasElementRef {
         this._cvaControl.listenToChanges();
         (this._cvaControl.cvaDirective?.ngControl?.valueChanges || of(undefined))
             .pipe(
-                tap((value: string) => (this._value = value)),
+                tap((value: string) => {
+                    this._value = value;
+                    this._cdr.markForCheck();
+                }),
                 takeUntilDestroyed(this._destroyRef)
             )
             .subscribe();

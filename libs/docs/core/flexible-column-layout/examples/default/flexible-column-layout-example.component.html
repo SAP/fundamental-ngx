@@ -1,8 +1,8 @@
 <button fd-button (click)="enterFullscreenExample()">Click to open full screen</button>
-<div cdkScrollable class="docs-fcl-example-overlay" #overlay>
+<div cdkScrollable class="fd-docs-fcl-example-overlay" #overlay>
     @if (fullscreen) {
-        <div class="docs-fcl-example-overlay-content">
-            <div class="docs-fcl-example-button">
+        <div class="fd-docs-fcl-example-overlay-content">
+            <div class="fd-docs-fcl-example-button">
                 <button fd-button (click)="exitFullscreenExample($event)">Exit Example</button>
             </div>
             <!-- Flexible Column Layout -->
@@ -14,7 +14,7 @@
                 collapseTitleEndBtn="Collapse last column"
             >
                 <ng-template #startColumn>
-                    <div class="docs-fcl-example-section">
+                    <div class="fd-docs-fcl-example-section">
                         <h2>Start Column</h2>
                         <div>
                             <button class="fd-button" (click)="changeLayout('TwoColumnsStartExpanded')">
@@ -24,7 +24,7 @@
                     </div>
                 </ng-template>
                 <ng-template #midColumn>
-                    <div class="docs-fcl-example-section">
+                    <div class="fd-docs-fcl-example-section">
                         <h2>Mid Column</h2>
                         <div>
                             <button class="fd-button" (click)="changeLayout('ThreeColumnsMidExpanded')">
@@ -34,7 +34,7 @@
                     </div>
                 </ng-template>
                 <ng-template #endColumn>
-                    <div class="docs-fcl-example-section">
+                    <div class="fd-docs-fcl-example-section">
                         <h2>End Column</h2>
                         <div>
                             @if (localLayout !== 'OneColumnEndFullScreen') {

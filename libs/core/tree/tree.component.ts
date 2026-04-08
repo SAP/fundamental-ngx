@@ -3,6 +3,7 @@ import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keyc
 import { NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
+    ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     ContentChild,
@@ -55,6 +56,7 @@ import { TreeService } from './tree.service';
     selector: 'fd-tree',
     templateUrl: './tree.component.html',
     encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     styleUrl: './tree.component.scss',
     hostDirectives: [
         {
@@ -289,7 +291,7 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
         this.buildComponentCssClass();
 
         this._treeService.detectChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
-            this._cdr.detectChanges();
+            this._cdr.markForCheck();
         });
 
         if (this.selection !== 'none') {
@@ -340,6 +342,7 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
         }
 
         this._focusKeyManager.setActiveItem(focusedIndex);
+        this._cdr.markForCheck();
     }
 
     /** @hidden */
@@ -402,7 +405,7 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
         }
 
         treeItem.expanded = true;
-        this._cdr.detectChanges();
+        this._cdr.markForCheck();
     }
 
     /** @hidden */
@@ -416,7 +419,7 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
             }
         }
         treeItem.expanded = false;
-        this._cdr.detectChanges();
+        this._cdr.markForCheck();
     }
 
     /** @hidden */

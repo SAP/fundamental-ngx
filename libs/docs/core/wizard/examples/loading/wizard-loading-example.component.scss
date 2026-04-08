@@ -21,7 +21,7 @@
     }
 
     /* All classes below are for the fullscreen functionality */
-    .docs-wizard-example-overlay {
+    .fd-docs-wizard-example-overlay {
         height: 100%;
         width: 0;
         position: fixed;
@@ -32,19 +32,19 @@
         overflow-x: hidden;
     }
 
-    .docs-wizard-example-overlay-content {
+    .fd-docs-wizard-example-overlay-content {
         position: relative;
         width: 100%;
     }
 
-    .docs-wizard-example-button {
+    .fd-docs-wizard-example-button {
         display: flex;
         justify-content: flex-end;
         padding: 3px 1rem;
         background: #394a5d;
     }
 
-    .docs-wizard-example-section {
+    .fd-docs-wizard-example-section {
         height: 100vh;
 
         h2 {

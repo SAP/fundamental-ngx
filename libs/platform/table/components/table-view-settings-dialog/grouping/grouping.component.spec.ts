@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
 import { SortDirection, Table } from '@fundamental-ngx/platform/table-helpers';
@@ -18,7 +17,7 @@ describe('PlatformTableGroupDialogComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [PlatformTableModule, NoopAnimationsModule],
+            imports: [PlatformTableModule],
             providers: [
                 { provide: DialogRef, useValue: dialogRef },
                 { provide: Table, useValue: {} },

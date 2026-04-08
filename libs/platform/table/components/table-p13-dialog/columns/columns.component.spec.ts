@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
@@ -19,7 +18,7 @@ describe('PlatformTableP13ColumnsDialogComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             providers: [{ provide: DialogRef, useValue: dialogRef }, DialogService, DialogConfig, RtlService],
-            imports: [PlatformTableModule, NoopAnimationsModule]
+            imports: [PlatformTableModule]
         }).compileComponents();
     }));
 

@@ -1,10 +1,12 @@
 import {
+    afterNextRender,
     AfterViewInit,
     ChangeDetectorRef,
     Directive,
     ElementRef,
     EventEmitter,
     inject,
+    Injector,
     input,
     Input,
     isDevMode,
@@ -120,6 +122,9 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
 
     /** @hidden */
     protected _destroyed = false;
+
+    /** @hidden */
+    protected readonly _injector = inject(Injector);
 
     /** @hidden */
     private _tabs: IconTabBarItem[] = [];
@@ -262,7 +267,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
         this._resetAndHideExtraTabs(tabs, extraTabs);
 
         this._extraTabs$.set(extraTabs);
-        this._cd.detectChanges();
+        this._cd.markForCheck();
     }
 
     /**
@@ -286,13 +291,16 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
      * @description trigger recalculation items, need to do it asynchronously after dom was rerendered
      */
     protected _triggerRecalculationVisibleItems(): void {
-        queueMicrotask(() => {
-            if (this.overflowDirective && !this._destroyed) {
-                const extra = this.overflowDirective.getAmountOfExtraItems();
-                this._recalculateVisibleItems(extra);
-                this._cd.detectChanges();
-            }
-        });
+        afterNextRender(
+            () => {
+                if (this.overflowDirective && !this._destroyed) {
+                    const extra = this.overflowDirective.getAmountOfExtraItems();
+                    this._recalculateVisibleItems(extra);
+                    this._cd.markForCheck();
+                }
+            },
+            { injector: this._injector }
+        );
     }
 
     /**

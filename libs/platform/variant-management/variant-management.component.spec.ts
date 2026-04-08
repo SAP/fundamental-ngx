@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Variant } from './models/variant.interface';
 import { VariantItem } from './variant-item.class';
 
@@ -39,7 +38,7 @@ describe('VariantManagementComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [VariantManagementComponent, NoopAnimationsModule]
+            imports: [VariantManagementComponent]
         }).compileComponents();
 
         fixture = TestBed.createComponent(VariantManagementComponent);

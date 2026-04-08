@@ -1,6 +1,7 @@
 import { ComponentPortal, DomPortal, Portal, PortalModule, TemplatePortal } from '@angular/cdk/portal';
 import {
     afterNextRender,
+    ChangeDetectionStrategy,
     Component,
     DestroyRef,
     inject,
@@ -33,6 +34,7 @@ export type MessageStripAlertPortalType<ComponentType> =
  */
 @Component({
     templateUrl: `./message-strip-alert.component.html`,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [MessageStripComponent, PortalModule, AutoDismissMessageStripDirective]
 })
 export class MessageStripAlertComponent<ComponentType = unknown> implements MessageStripAlert {
