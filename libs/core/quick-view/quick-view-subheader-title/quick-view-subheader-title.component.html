@@ -1,3 +1,3 @@
-<h5 fd-title [headerSize]="5">
+<span role="heading" [attr.aria-level]="headerSize()" fd-title [headerSize]="headerSize()" [wrap]="allowWrap()">
     <ng-content></ng-content>
-</h5>
+</span>

@@ -18,7 +18,7 @@ describe('DynamicPageService', () => {
 
     describe('responsiveSize computed signal', () => {
         it('should return same value as dynamicPageWidthToSize utility', () => {
-            const testWidths = [0, 500, 599, 600, 800, 1023, 1024, 1200, 1439, 1440, 1600, 2000];
+            const testWidths = [500, 599, 600, 800, 1023, 1024, 1200, 1439, 1440, 1600, 2000];
 
             testWidths.forEach((width) => {
                 service.pixelsSizeChanged.set(width);
@@ -28,6 +28,11 @@ describe('DynamicPageService', () => {
 
                 expect(fromSignal).toBe(fromUtility);
             });
+        });
+
+        it('should return large as default when width is 0 (unmeasured)', () => {
+            service.pixelsSizeChanged.set(0);
+            expect(service.responsiveSize()).toBe('large');
         });
     });
 
@@ -49,12 +54,12 @@ describe('DynamicPageService', () => {
         });
 
         it('should override responsiveSize when set', () => {
-            // pixelsSizeChanged is 0, which would compute to 'small'
-            expect(service.responsiveSize()).toBe('small');
-
-            // Set manual override to 'large'
-            service.manualSizeOverride.set('large');
+            // pixelsSizeChanged is 0, which defaults to 'large'
             expect(service.responsiveSize()).toBe('large');
+
+            // Set manual override to 'small'
+            service.manualSizeOverride.set('small');
+            expect(service.responsiveSize()).toBe('small');
 
             // Set manual override to 'extra-large'
             service.manualSizeOverride.set('extra-large');
