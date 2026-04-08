@@ -1,0 +1,86 @@
+<div
+    class="docs-example-card docs-tile docs-component"
+    [class.docs-example-card--bg]="showBackground()"
+    [dir]="direction()"
+>
+    <div class="docs-example-card__actions" role="toolbar" aria-label="Example controls" dir="ltr">
+        <button
+            class="docs-example-card__action"
+            [class.docs-example-card__action--active]="rtlEnabled()"
+            [attr.aria-pressed]="rtlEnabled()"
+            [attr.title]="rtlEnabled() ? 'Switch to LTR' : 'Switch to RTL'"
+            (click)="rtlEnabled.set(!rtlEnabled())"
+        >
+            RTL
+        </button>
+        @if (hasBackground()) {
+            <span class="docs-example-card__separator"></span>
+            <button
+                class="docs-example-card__action"
+                [class.docs-example-card__action--active]="showBackground()"
+                [attr.aria-pressed]="showBackground()"
+                [attr.title]="showBackground() ? 'Remove example background' : 'Apply example background'"
+                (click)="showBackground.set(!showBackground())"
+            >
+                BG
+            </button>
+        }
+        <span class="docs-example-card__separator"></span>
+        <button
+            class="docs-example-card__action docs-example-card__action--icon"
+            [class.docs-example-card__action--active]="compactMode()"
+            [attr.aria-pressed]="compactMode()"
+            [attr.title]="compactMode() ? 'Switch to cozy mode' : 'Switch to compact mode'"
+            (click)="compactMode.set(!compactMode())"
+        >
+            <fd-icon glyph="keyboard-and-mouse"></fd-icon>
+        </button>
+        @if (responsiveEnabled()) {
+            <button
+                class="docs-example-card__action docs-example-card__action--icon"
+                [class.docs-example-card__action--active]="activePreset() === 'phone'"
+                [attr.aria-pressed]="activePreset() === 'phone'"
+                title="Phone (375px)"
+                (click)="setPreset('phone')"
+            >
+                <fd-icon glyph="iphone"></fd-icon>
+            </button>
+            <button
+                class="docs-example-card__action docs-example-card__action--icon"
+                [class.docs-example-card__action--active]="activePreset() === 'tablet'"
+                [attr.aria-pressed]="activePreset() === 'tablet'"
+                title="Tablet (768px)"
+                (click)="setPreset('tablet')"
+            >
+                <fd-icon glyph="ipad"></fd-icon>
+            </button>
+            <button
+                class="docs-example-card__action docs-example-card__action--icon"
+                [class.docs-example-card__action--active]="activePreset() === 'full'"
+                [attr.aria-pressed]="activePreset() === 'full'"
+                title="Full width"
+                (click)="setPreset('full')"
+            >
+                <fd-icon glyph="sys-monitor"></fd-icon>
+            </button>
+            <span class="docs-example-card__separator"></span>
+        }
+        <button
+            class="docs-example-card__action docs-example-card__action--icon"
+            [class.docs-example-card__action--active]="responsiveEnabled()"
+            [attr.aria-pressed]="responsiveEnabled()"
+            title="Responsive preview"
+            (click)="toggleResponsive()"
+        >
+            <fd-icon glyph="responsive"></fd-icon>
+        </button>
+    </div>
+    <div
+        class="docs-example-card__content docs-tile-content-example"
+        [class.docs-example-card__content--responsive]="responsiveEnabled()"
+    >
+        <div class="docs-example-card__viewport fd-doc-component" [style.max-width]="viewportWidth()">
+            <ng-content></ng-content>
+        </div>
+    </div>
+</div>

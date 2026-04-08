@@ -15,6 +15,11 @@
         [title]="titleTemplate() ? '' : title && !hideItemCount ? title + ' (' + counter() + ')' : title"
         [shouldOverflow]="shouldOverflow"
         [headingLevel]="headingLevel()"
+        [ariaLabel]="ariaLabel"
+        [id]="id"
+        [ariaLabelledBy]="ariaLabelledBy"
+        [ariaDescribedBy]="ariaDescribedBy"
+        [ariaOrientation]="ariaOrientation"
     >
         @if (titleTemplate()) {
             <span

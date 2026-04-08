@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { IconComponent } from '@fundamental-ngx/core/icon';
@@ -42,8 +41,7 @@ describe('NestedListPopoverComponent', () => {
                 RouterModule,
                 IconComponent,
                 ContentDensityModule,
-                NestedListContentDirective,
-                NoopAnimationsModule
+                NestedListContentDirective
             ],
             providers: [NestedListStateService, MenuKeyboardService, NestedListKeyboardService]
         }).compileComponents();

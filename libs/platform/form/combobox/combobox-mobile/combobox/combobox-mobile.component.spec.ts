@@ -1,6 +1,5 @@
 import { EventEmitter } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Subject } from 'rxjs';
 
 import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
@@ -44,7 +43,7 @@ describe('ComboboxMobileComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [DialogModule, NoopAnimationsModule, ComboboxMobileComponent],
+            imports: [DialogModule, ComboboxMobileComponent],
             providers: [
                 DynamicComponentService,
                 { provide: COMBOBOX_COMPONENT, useValue: new ComboboxInputComponent() }

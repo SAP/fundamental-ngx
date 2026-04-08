@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FdDate } from '@fundamental-ngx/core/datetime';
 import { whenStable } from '@fundamental-ngx/core/tests';
 import { FilterType, FilterableColumnDataType, PlatformTableModule } from '@fundamental-ngx/platform/table';
@@ -316,7 +315,7 @@ describe('SmartFilterBarComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [TestComponent, NoopAnimationsModule]
+            imports: [TestComponent]
         }).compileComponents();
     });
 

@@ -1,5 +1,6 @@
 import {
     AfterViewInit,
+    ChangeDetectionStrategy,
     Component,
     ElementRef,
     Input,
@@ -37,8 +38,8 @@ import { MessageBoxRef } from './utils/message-box-ref.class';
         tabindex: '-1'
     },
     encapsulation: ViewEncapsulation.None,
-    providers: [{ provide: MessageBoxHost, useExisting: MessageBoxComponent }],
-    standalone: true
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [{ provide: MessageBoxHost, useExisting: MessageBoxComponent }]
 })
 export class MessageBoxComponent
     extends DialogBase

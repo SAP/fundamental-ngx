@@ -1,7 +1,6 @@
 import { ComponentFixture, fakeAsync, flush, TestBed, tick, waitForAsync } from '@angular/core/testing';
 
 import { Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MenuTitleDirective } from './directives/menu-title.directive';
 import { MenuTriggerDirective } from './directives/menu-trigger.directive';
 import { MenuInteractiveComponent } from './menu-interactive.component';
@@ -112,7 +111,7 @@ describe('MenuComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [TestMenuComponent, NoopAnimationsModule]
+            imports: [TestMenuComponent]
         }).compileComponents();
     }));
 
@@ -294,7 +293,7 @@ describe('MenuComponent with submenus', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [TestMenuSubmenuComponent, NoopAnimationsModule]
+            imports: [TestMenuSubmenuComponent]
         }).compileComponents();
     }));
 
@@ -417,7 +416,7 @@ describe('MenuComponent config input', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [TestMenuConfigComponent, NoopAnimationsModule]
+            imports: [TestMenuConfigComponent]
         }).compileComponents();
     }));
 
@@ -438,6 +437,36 @@ describe('MenuComponent config input', () => {
         // Individual inputs should take precedence
         expect(testComponent.menu.placement()).toBe('bottom-start');
     });
+});
+
+describe('MenuComponent mobile mode', () => {
+    let fixture: ComponentFixture<TestMenuComponent>;
+    let testComponent: TestMenuComponent;
+    let menu: MenuComponent;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [TestMenuComponent]
+        }).compileComponents();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(TestMenuComponent);
+        testComponent = fixture.componentInstance;
+        testComponent.mobileMode = true;
+        fixture.detectChanges();
+        menu = testComponent.menu;
+    });
+
+    it('should not create a popover overlay when opened in mobile mode', fakeAsync(() => {
+        menu.open();
+        fixture.detectChanges();
+        tick();
+
+        // The popover body should not be rendered — only the mobile dialog should be used
+        const popoverBody = document.querySelector('.fd-popover__body');
+        expect(popoverBody).toBeNull();
+    }));
 });
 
 describe('MenuComponent advanced options', () => {
@@ -478,7 +507,7 @@ describe('MenuComponent advanced options', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [TestMenuAdvancedComponent, NoopAnimationsModule]
+            imports: [TestMenuAdvancedComponent]
         }).compileComponents();
     }));
 

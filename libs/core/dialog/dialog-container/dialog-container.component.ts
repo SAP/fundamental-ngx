@@ -1,14 +1,12 @@
-import { AnimationEvent } from '@angular/animations';
 import {
     AfterViewInit,
+    ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     ComponentRef,
     DestroyRef,
     ElementRef,
     EmbeddedViewRef,
-    HostBinding,
-    HostListener,
     Injector,
     Input,
     signal,
@@ -30,17 +28,18 @@ import { DialogConfig } from '../utils/dialog-config.class';
 import { DialogContainer } from '../utils/dialog-container.model';
 import { DialogDefaultContent } from '../utils/dialog-default-content.class';
 import { DialogRef } from '../utils/dialog-ref.class';
-import { dialogFade } from '../utils/dialog.animations';
 
 /** Dialog container where the dialog content is embedded. */
 @Component({
     selector: 'fd-dialog-container',
     template: '<ng-template (attached)="_attached($event)" cdkPortalOutlet></ng-template>',
     styleUrls: ['./dialog-container.component.scss'],
-    animations: [dialogFade],
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
-    imports: [PortalModule]
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [PortalModule],
+    host: {
+        style: 'opacity: 0; position: relative; z-index: 999'
+    }
 })
 export class DialogContainerComponent
     extends DynamicComponentContainer<DialogContentType>
@@ -57,17 +56,14 @@ export class DialogContainerComponent
     @ViewChild(CdkPortalOutlet)
     portalOutlet: CdkPortalOutlet;
 
-    /** The state of the Dialog animations. */
-    @HostBinding('@state')
-    protected get _animationState(): string {
-        return this._animationStateSignal();
-    }
-
     /** @hidden */
     private _class = '';
 
-    /** @hidden */
+    /** @hidden Tracks the current animation phase for lifecycle management. */
     private _animationStateSignal = signal('void');
+
+    /** @hidden Reference to the current Web Animation for cleanup. */
+    private _currentAnimation: Animation | null = null;
 
     /** @hidden */
     constructor(
@@ -79,23 +75,17 @@ export class DialogContainerComponent
         injector: Injector
     ) {
         super(elementRef, injector);
+
+        this._destroyRef.onDestroy(() => {
+            this._currentAnimation?.cancel();
+            this._currentAnimation = null;
+        });
     }
 
     /** @hidden */
     @applyCssClass
     buildComponentCssClass(): string[] {
         return [this.dialogConfig.containerClass ? this.dialogConfig.containerClass : '', this._class];
-    }
-
-    /** Handle end of animations, updating the state of the Message Toast. */
-    @HostListener('@state.done', ['$event'])
-    onAnimationEnd(event: AnimationEvent): void {
-        const { toState } = event;
-
-        if (toState === 'hidden') {
-            this.ref._endClose$.next();
-            this.ref._endClose$.complete();
-        }
     }
 
     /** @hidden */
@@ -127,7 +117,7 @@ export class DialogContainerComponent
         } else {
             this._createFromDefaultDialog(this.childContent);
         }
-        this._animationStateSignal.set('visible');
+        this._enter();
     }
 
     /** @hidden Returns context for embedded template */
@@ -143,17 +133,69 @@ export class DialogContainerComponent
         instance._defaultDialogConfiguration = this.dialogConfig;
     }
 
+    /** @hidden Animate the dialog container entrance (opacity 0 → 1). */
+    private _enter(): void {
+        const el: HTMLElement = this.elementRef.nativeElement;
+
+        if (typeof el.animate !== 'function') {
+            el.style.opacity = '1';
+            this._animationStateSignal.set('visible');
+            return;
+        }
+
+        this._currentAnimation = el.animate([{ opacity: 0 }, { opacity: 1 }], {
+            duration: 150,
+            easing: 'cubic-bezier(0, 0, 0.2, 1)',
+            fill: 'forwards'
+        });
+
+        this._currentAnimation.finished
+            .then(() => {
+                el.style.opacity = '1';
+                this._currentAnimation?.cancel();
+                this._currentAnimation = null;
+                this._animationStateSignal.set('visible');
+            })
+            .catch(() => {
+                this._currentAnimation = null;
+            });
+    }
+
+    /** @hidden Animate the dialog container exit (opacity 1 → 0). */
+    private _exit(): void {
+        const el: HTMLElement = this.elementRef.nativeElement;
+        this._animationStateSignal.set('hidden');
+        this._cdr.detectChanges();
+
+        if (typeof el.animate !== 'function') {
+            return;
+        }
+
+        this._currentAnimation?.cancel();
+
+        this._currentAnimation = el.animate([{ opacity: 1 }, { opacity: 0 }], {
+            duration: 75,
+            easing: 'cubic-bezier(0.4, 0, 1, 1)',
+            fill: 'forwards'
+        });
+
+        this._currentAnimation.finished
+            .then(() => {
+                this._currentAnimation = null;
+            })
+            .catch(() => {
+                this._currentAnimation = null;
+            });
+    }
+
     /**
      * @hidden
-     * We need to wait until animation plays, and then send signal to the service to destroy the component.
+     * Listen for dialog close/dismiss and trigger exit animation.
      */
     private _listenOnClose(): void {
-        const callback: () => void = () => {
-            this._animationStateSignal.set('hidden');
-        };
         this.ref.afterClosed.pipe(takeUntilDestroyed(this._destroyRef)).subscribe({
-            next: () => callback(),
-            error: () => callback()
+            next: () => this._exit(),
+            error: () => this._exit()
         });
     }
 }

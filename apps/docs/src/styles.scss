@@ -6,7 +6,7 @@
 
 @include cdk.a11y-visually-hidden();
 
-$gutter-size: 15px;
+$gutter-size: 1rem;
 
 html,
 body {
@@ -27,28 +27,28 @@ body {
 }
 
 .container {
-    max-width: 960px;
+    max-width: 60rem;
     margin-left: auto;
     margin-right: auto;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
 .row {
     display: flex;
-    margin-right: -15px;
-    margin-left: -15px;
+    margin-right: -1rem;
+    margin-left: -1rem;
 }
 
 .col {
-    padding-right: 15px;
-    padding-left: 15px;
+    padding-right: 1rem;
+    padding-left: 1rem;
     flex: 1;
 }
 
 .navbar {
-    background-color: #eee;
-    margin-bottom: 20px;
+    background-color: var(--sapPageHeader_Background);
+    margin-bottom: 1.25rem;
 }
 
 .nav {
@@ -63,13 +63,13 @@ body {
 
 .nav-link {
     display: block;
-    padding: 10px 15px;
+    padding: 0.625rem 1rem;
     text-decoration: none;
 }
 
 .code-snippet {
     padding: 0.15rem;
-    background: rgba(0, 0, 0, 0.03);
+    background: var(--sapContent_ForegroundColor);
 }
 
 h2 {
@@ -87,15 +87,15 @@ fd-card {
 .fd-scroll-spy-example-icon-class {
     position: relative;
     display: inline-block;
-    margin-right: 4px;
+    margin-right: 0.25rem;
 
     @at-root {
         [dir='rtl'] &,
         &[dir='rtl'] {
             margin-right: 0;
-            margin-left: 4px;
+            margin-left: 0.25rem;
             transform: rotate(180deg);
-            bottom: 2px;
+            bottom: 0.125rem;
         }
     }
 }
@@ -118,21 +118,13 @@ pre {
     word-wrap: break-word;
     display: flex;
     padding: 1rem;
-    font-size: 13px;
+    font-size: 0.8rem;
     line-height: 1.42857143;
     word-break: break-all;
 
     code {
         display: block;
     }
-}
-
-.docs-component.docs-tile {
-    border-radius: 4px 4px 0 0;
-    padding-bottom: 4px;
-    border: 1px solid #ccc;
-    transition: 0.25s background-color;
-    display: block;
 }
 
 .fd-centered-content {
@@ -148,31 +140,31 @@ pre {
 
 .hljs-tag,
 .hljs-name {
-    color: #000080;
+    color: var(--sapInformativeColor);
 }
 
 .hljs-keyword {
-    color: #00f;
+    color: var(--sapLinkColor);
 }
 
 .hljs-comment {
-    color: #008000;
+    color: var(--sapPositiveColor);
 }
 
 .hljs-attr {
-    color: #008080;
+    color: var(--sapAccentColor7);
 }
 
 .hljs-string {
-    color: #d14;
+    color: var(--sapNegativeColor);
 }
 
 .hljs-meta {
-    color: #2b91af;
+    color: var(--sapAccentColor6);
 }
 
 .side-nav__search {
-    padding: 10px 10px 0 10px;
+    padding: 0.625rem 0.625rem 0 0.625rem;
 }
 
 .fd-playground--markdown,
@@ -188,12 +180,12 @@ pre {
 
 .fd-playground--markdown {
     #fundamental-ngx {
-        margin-top: calc(2rem + 10px);
+        margin-top: calc(2rem + 0.625rem);
         font-size: 2.2rem;
     }
 
     a {
-        color: #0a6ed1;
+        color: var(--sapLinkColor);
     }
 
     ol,
@@ -202,7 +194,7 @@ pre {
     }
 
     pre {
-        margin: 25px 0px;
+        margin: 1.5rem 0;
         background-color: var(--sapBackgroundColor) !important;
         white-space: pre-wrap;
         white-space: -moz-pre-wrap;
@@ -210,13 +202,12 @@ pre {
         word-wrap: break-word;
         display: flex;
         padding: 1rem;
-        font-size: 13px;
+        font-size: 0.8rem;
         line-height: 1.42857143;
         color: var(--sapTextColor);
         word-break: break-all;
         border: 1px solid var(--sapNeutralBorderColor);
-        border-radius: 4px;
-        color: var(--sapTextColor);
+        border-radius: 0.25rem;
         code {
             display: block;
         }

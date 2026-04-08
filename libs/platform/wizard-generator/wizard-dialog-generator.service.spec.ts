@@ -1,7 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { Validators } from '@angular/forms';
 
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
 import { WizardGeneratorItem } from './interfaces/wizard-generator-item.interface';
 import { WizardTitle } from './interfaces/wizard-title.interface';
@@ -104,7 +103,7 @@ describe('WizardDialogGeneratorService', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [DialogModule, NoopAnimationsModule],
+            imports: [DialogModule],
             providers: [WizardDialogGeneratorService]
         });
         service = TestBed.inject(WizardDialogGeneratorService);
