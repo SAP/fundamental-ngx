@@ -39,8 +39,7 @@ let inlineHelpId = 0;
     providers: [PopoverService],
     host: {
         '[class.fd-inline-help__trigger]': 'true',
-        '[attr.aria-describedby]': 'bodyId()',
-        '(keydown.escape)': '_onEscapeKey($event)'
+        '[attr.aria-describedby]': 'bodyId()'
     }
 })
 export class InlineHelpDirective {
@@ -169,15 +168,6 @@ export class InlineHelpDirective {
             this._popoverService.updateContent(text, template);
             this._setupScreenreaderElement(content);
         });
-    }
-
-    /** @hidden */
-    _onEscapeKey(event: Event): void {
-        if (this.closeOnEscapeKey() && this._popoverService.isOpen()) {
-            event.preventDefault();
-            event.stopImmediatePropagation();
-            this._popoverService.close();
-        }
     }
 
     /** @hidden */

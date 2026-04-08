@@ -185,17 +185,35 @@ describe('InlineHelpDirective popover inputs', () => {
         document.body.removeChild(container);
     });
 
-    it('should close on escape key when closeOnEscapeKey is true', fakeAsync(() => {
+    it('should close on escape key when closeOnEscapeKey is true (focus on trigger)', fakeAsync(() => {
         const selector = '.fd-popover__body.fd-inline-help__content';
         component.closeOnEscapeKey = true;
         fixture.detectChanges();
 
         // Open via focusin on the trigger
         component.ref.nativeElement.dispatchEvent(new Event('focusin'));
+        fixture.detectChanges();
         expect(document.body.querySelector(selector)).toBeTruthy();
 
         // Press Escape on the trigger element
-        component.ref.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+        component.ref.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+        tick(50);
+        expect(document.body.querySelector(selector)).toBeFalsy();
+    }));
+
+    it('should close on escape key when closeOnEscapeKey is true (hover, no focus on trigger)', fakeAsync(() => {
+        const selector = '.fd-popover__body.fd-inline-help__content';
+        component.closeOnEscapeKey = true;
+        fixture.detectChanges();
+
+        // Open via mouseenter (hover) — keyboard focus is NOT on the trigger
+        component.ref.nativeElement.dispatchEvent(new Event('mouseenter'));
+        fixture.detectChanges();
+        expect(document.body.querySelector(selector)).toBeTruthy();
+
+        // Press Escape on the document body (simulates real user pressing Escape
+        // when focus is elsewhere, not on the trigger element)
+        document.body.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
         tick(50);
         expect(document.body.querySelector(selector)).toBeFalsy();
     }));
@@ -210,12 +228,31 @@ describe('InlineHelpDirective popover inputs', () => {
         expect(document.body.querySelector(selector)).toBeTruthy();
 
         // Press Escape on the trigger element — should NOT close
-        component.ref.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+        component.ref.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
         tick(50);
         expect(document.body.querySelector(selector)).toBeTruthy();
 
         // Clean up
         component.ref.nativeElement.dispatchEvent(new Event('focusout'));
+        tick(50);
+    }));
+
+    it('should not close on document escape key when closeOnEscapeKey is false (hover)', fakeAsync(() => {
+        const selector = '.fd-popover__body.fd-inline-help__content';
+        component.closeOnEscapeKey = false;
+        fixture.detectChanges();
+
+        // Open via mouseenter (hover)
+        component.ref.nativeElement.dispatchEvent(new Event('mouseenter'));
+        expect(document.body.querySelector(selector)).toBeTruthy();
+
+        // Press Escape on document — should NOT close
+        document.body.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+        tick(50);
+        expect(document.body.querySelector(selector)).toBeTruthy();
+
+        // Clean up
+        component.ref.nativeElement.dispatchEvent(new Event('mouseleave'));
         tick(50);
     }));
 });
