@@ -1,12 +1,11 @@
-import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
 
 import { VhdTab } from '../../models';
 
 @Component({
     template: '',
-    standalone: true
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class VhdBaseTab {
     /** Tab Title */
     @Input()
