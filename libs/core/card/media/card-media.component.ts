@@ -1,6 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding, booleanAttribute, input } from '@angular/core';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { isTruthy } from '../utils';
+import { ChangeDetectionStrategy, Component, booleanAttribute, computed, input } from '@angular/core';
 
 @Component({
     selector: 'fd-card-media',
@@ -9,21 +7,11 @@ import { isTruthy } from '../utils';
     standalone: true,
     host: {
         role: 'group',
-        class: 'fd-card__media',
-        '[class.fd-card__media--with-padding]': 'hasPadding()',
+        '[class]': 'cssClass()',
         '[attr.aria-roledescription]': 'ariaRoleDescription()'
     }
 })
 export class CardMediaComponent {
-    /** @hidden */
-    @HostBinding('class')
-    get cssClass(): string[] {
-        return [
-            this.shellColor() && `fd-card__media--bg-shell-${this.shellColor()}`,
-            this.legendColor() && `fd-card__media--bg-legend-${this.legendColor()}`
-        ].filter(isTruthy);
-    }
-
     /**
      * aria-roledescription for the container
      * default: 'Card Media Block'
@@ -42,11 +30,28 @@ export class CardMediaComponent {
      * Shell Category Colors
      * Available values: number from 1 to 16
      */
-    shellColor = input<Nullable<number>>();
+    shellColor = input<number | null | undefined>();
 
     /**
      * Legend Background Colors
      * Available values: number from 1 to 20
      */
-    legendColor = input<Nullable<number>>();
+    legendColor = input<number | null | undefined>();
+
+    /** @hidden */
+    protected readonly cssClass = computed(() => {
+        let classes = 'fd-card__media';
+        if (this.hasPadding()) {
+            classes += ' fd-card__media--with-padding';
+        }
+        const shell = this.shellColor();
+        if (shell) {
+            classes += ` fd-card__media--bg-shell-${shell}`;
+        }
+        const legend = this.legendColor();
+        if (legend) {
+            classes += ` fd-card__media--bg-legend-${legend}`;
+        }
+        return classes;
+    });
 }

@@ -1,26 +1,14 @@
-import { Directive, HostBinding, booleanAttribute, input } from '@angular/core';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { isTruthy } from '../utils';
+import { Directive, booleanAttribute, computed, input } from '@angular/core';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-card-media-content-container]',
     standalone: true,
     host: {
-        class: 'fd-card__media-content-container',
-        '[class.fd-card__media-content-container--overlay]': 'isOverlay()'
+        '[class]': 'cssClass()'
     }
 })
 export class CardMediaContentContainerDirective {
-    /** @hidden */
-    @HostBinding('class')
-    get cssClass(): string[] {
-        return [
-            this.shellColor() && `fd-card__media-content-container--bg-shell-${this.shellColor()}`,
-            this.legendColor() && `fd-card__media-content-container--bg-legend-${this.legendColor()}`
-        ].filter(isTruthy);
-    }
-
     /**
      * Whether the media content container is an overlay
      * Default value: false
@@ -33,11 +21,31 @@ export class CardMediaContentContainerDirective {
      * Shell Category Colors
      * Available values: number from 1 to 16
      */
-    shellColor = input<Nullable<number>>();
+    shellColor = input<number | null | undefined>();
 
     /**
      * Legend Background Colors
      * Available values: number from 1 to 20
      */
-    legendColor = input<Nullable<number>>();
+    legendColor = input<number | null | undefined>();
+
+    /** @hidden */
+    protected readonly cssClass = computed(() => {
+        let classes = 'fd-card__media-content-container';
+        if (this.isOverlay()) {
+            classes += ' fd-card__media-content-container--overlay';
+        }
+
+        const shell = this.shellColor();
+        if (shell) {
+            classes += ` fd-card__media-content-container--bg-shell-${shell}`;
+        }
+
+        const legend = this.legendColor();
+        if (legend) {
+            classes += ` fd-card__media-content-container--bg-legend-${legend}`;
+        }
+
+        return classes;
+    });
 }

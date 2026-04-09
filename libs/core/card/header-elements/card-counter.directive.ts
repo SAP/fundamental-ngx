@@ -6,11 +6,14 @@ import { HasElementRef } from '@fundamental-ngx/cdk';
 import { CLASS_NAME } from '../constants';
 import { FD_CARD_COUNTER } from '../token';
 
+let cardCounterId = 0;
+
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-card-counter]',
     host: {
-        '[class]': '_cssClass()'
+        '[class]': '_cssClass()',
+        '[attr.id]': 'id()'
     },
     providers: [
         {
@@ -20,6 +23,9 @@ import { FD_CARD_COUNTER } from '../token';
     ]
 })
 export class CardCounterDirective implements HasElementRef {
+    /** Card title id, it has some default value if not set,  */
+    id = input('fd-card-counter-id-' + cardCounterId++);
+
     /**
      * the status represented by the Object Status.
      * can be one of the following: 'negative' | 'critical' | 'positive' | 'informative' | 'neutral'

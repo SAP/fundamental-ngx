@@ -1,6 +1,14 @@
 @if (!isLoading()) {
-    <!-- Badge -->
+    <!-- Screen Reader Elements -->
+    @if (role() === 'listitem') {
+        <span class="fd-card__sr-only" [attr.id]="ariaDescriptionId()" aria-hidden="true">{{ ariaDescription() }}</span>
+    }
 
+    <span class="fd-card__sr-only" [attr.id]="ariaRoleDescriptionId()" aria-hidden="true">
+        {{ ariaRoledescription() ? ariaRoledescription() : `${cardType()} Card` }}</span
+    >
+
+    <!-- Badge -->
     @if (badge() || badgeIcon() || secondBadge() || secondBadgeIcon()) {
         <div class="fd-card__badge-container">
             @if (badge() || badgeIcon()) {
@@ -13,6 +21,7 @@
                     [indicationColor]="badgeColor()"
                     [secondaryIndication]="badgeColorSecondary()"
                     [label]="badge()"
+                    [attr.id]="badgeId()"
                     [attr.aria-label]="badgeAriaLabel()"
                 >
                 </span>
@@ -28,6 +37,7 @@
                     [indicationColor]="secondBadgeColor()"
                     [secondaryIndication]="secondBadgeColorSecondary()"
                     [label]="secondBadge()"
+                    [attr.id]="secondBadgeId()"
                     [attr.aria-label]="secondBadgeAriaLabel()"
                 >
                 </span>
@@ -37,6 +47,7 @@
 
     <!-- Header and Content -->
     <ng-content></ng-content>
+
     <!-- Footer -->
     <ng-content select="fd-card-footer"></ng-content>
 } @else {
