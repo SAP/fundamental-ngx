@@ -155,7 +155,7 @@ export class CodeExampleComponent {
     protected _onSnippetScroll(event: Event): void {
         const el = event.target as HTMLElement;
         const atBottom = el.scrollHeight - el.scrollTop - el.clientHeight < 2;
-        el.classList.toggle('docs-code-snippet-wrapper--at-bottom', atBottom);
+        el.classList.toggle('fd-docs-code-snippet-wrapper--at-bottom', atBottom);
     }
 
     private _copyToClipboard(text: string): void {

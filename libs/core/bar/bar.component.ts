@@ -1,21 +1,17 @@
 import {
+    booleanAttribute,
     ChangeDetectionStrategy,
     Component,
+    computed,
     ElementRef,
     input,
-    Input,
-    OnChanges,
-    OnDestroy,
-    OnInit,
     ViewEncapsulation
 } from '@angular/core';
-import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
 import {
     ContentDensityMode,
     ContentDensityObserver,
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
-import { Subscription } from 'rxjs';
 
 export type SizeType = '' | 's' | 'm_l' | 'xl';
 export type BarDesignType = 'header' | 'subheader' | 'header-with-subheader' | 'footer' | 'floating-footer';
@@ -39,55 +35,62 @@ export type BarDesignType = 'header' | 'subheader' | 'header-with-subheader' | '
     ],
     host: {
         '[attr.role]': 'role()',
-        '[class.fd-bar--initial-suggestion-title]': 'initialSuggestionTitle',
-        '[class.fd-bar--initial-suggestion-subline]': 'initialSuggestionSubline'
-    },
-    standalone: true
+        '[class]': 'cssClass()'
+    }
 })
-export class BarComponent implements OnChanges, OnInit, CssClassBuilder, OnDestroy {
-    /** user's custom classes */
-    @Input()
-    class: string;
-
+export class BarComponent {
     /** Whether the Bar component is used as a header, subheader, header-with-subheader,
      * footer or floating-footer.
      * Types available: 'header' | 'subheader' | 'header-with-subheader' | 'footer' | 'floating-footer' */
-    @Input()
-    barDesign: BarDesignType;
+    readonly barDesign = input<BarDesignType>();
 
     /** Whether the Bar component is used in Page Layout. */
-    @Input()
-    inPage: boolean;
+    readonly inPage = input(false, { transform: booleanAttribute });
 
     /** Whether the Bar component is used in Home Page Layout. */
-    @Input()
-    inHomePage: boolean;
+    readonly inHomePage = input(false, { transform: booleanAttribute });
 
     /** Whether the Bar component should remove the box-shadow on the bottom. */
-    @Input()
-    clear: boolean;
+    readonly clear = input(false, { transform: booleanAttribute });
 
     /** The size of the Page in Page responsive design.
      * Available sizes: 's' | 'm_l' | 'xl'
      */
-    @Input()
-    size: SizeType = '';
+    readonly size = input<SizeType>('');
 
     /** Whether this bar is to be used for the search results initial suggestion title. */
-    @Input()
-    initialSuggestionTitle = false;
+    readonly initialSuggestionTitle = input(false, { transform: booleanAttribute });
 
     /** Whether this bar is to be used for the search results initial suggestion subline. */
-    @Input()
-    initialSuggestionSubline = false;
+    readonly initialSuggestionSubline = input(false, { transform: booleanAttribute });
 
     /** Aria role for the Bar
      * default is toolbar
      */
-    role = input('toolbar');
+    readonly role = input('toolbar');
 
     /** @hidden */
-    private _subscriptions = new Subscription();
+    protected readonly cssClass = computed(() => {
+        const barDesign = this.barDesign();
+        const inPage = this.inPage();
+        const inHomePage = this.inHomePage();
+        const size = this.size();
+
+        return [
+            'fd-bar',
+            this._contentDensityObserver.isCompactSignal() || this._contentDensityObserver.isCondensedSignal()
+                ? ''
+                : 'fd-bar--cozy', // TODO: fix in styles
+            barDesign && `fd-bar--${barDesign}`,
+            inPage && `fd-bar--page${size ? `-${size}` : ''}`,
+            inHomePage && `fd-bar--home-page${size ? `-${size}` : ''}`,
+            this.clear() && 'fd-bar--clear',
+            this.initialSuggestionTitle() && 'fd-bar--initial-suggestion-title',
+            this.initialSuggestionSubline() && 'fd-bar--initial-suggestion-subline'
+        ]
+            .filter(Boolean)
+            .join(' ');
+    });
 
     /** @hidden */
     constructor(
@@ -95,40 +98,5 @@ export class BarComponent implements OnChanges, OnInit, CssClassBuilder, OnDestr
         private _contentDensityObserver: ContentDensityObserver
     ) {
         this._contentDensityObserver.subscribe();
-    }
-
-    /** @hidden
-     * CssClassBuilder interface implementation
-     * function must return single string
-     * function is responsible for order which css classes are applied
-     */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return [
-            'fd-bar',
-            this._contentDensityObserver.isCompact || this._contentDensityObserver.isCondensed ? '' : 'fd-bar--cozy', // TODO: fix in styles
-            this.barDesign ? `fd-bar--${this.barDesign}` : '',
-            this.inPage && !this.size ? 'fd-bar--page' : '',
-            this.inPage && this.size ? `fd-bar--page-${this.size}` : '',
-            this.inHomePage && !this.size ? 'fd-bar--home-page' : '',
-            this.inHomePage && this.size ? `fd-bar--home-page-${this.size}` : '',
-            this.clear ? 'fd-bar--clear' : '',
-            this.class
-        ];
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._subscriptions.unsubscribe();
-    }
-
-    /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
     }
 }

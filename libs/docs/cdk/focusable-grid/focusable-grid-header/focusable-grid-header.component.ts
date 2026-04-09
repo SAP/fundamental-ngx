@@ -8,6 +8,7 @@ import {
 } from '@fundamental-ngx/docs/shared';
 
 @Component({
+    selector: 'fd-docs-cdk-focusable-grid-header',
     templateUrl: './focusable-grid-header.component.html',
     imports: [HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent, RouterOutlet]
 })

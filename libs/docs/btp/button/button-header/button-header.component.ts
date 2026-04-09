@@ -8,6 +8,7 @@ import {
 } from '@fundamental-ngx/docs/shared';
 
 @Component({
+    selector: 'fd-docs-btp-button-header',
     templateUrl: './button-header.component.html',
     imports: [HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent, RouterOutlet]
 })

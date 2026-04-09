@@ -8,7 +8,7 @@ import {
 } from '@fundamental-ngx/docs/shared';
 
 @Component({
-    selector: 'app-tabbable-header',
+    selector: 'fd-docs-cdk-tabbable-header',
     templateUrl: './tabbable-header.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]

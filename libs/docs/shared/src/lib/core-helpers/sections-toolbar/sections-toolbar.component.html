@@ -1,88 +1,111 @@
-<div class="sidebar" [class.sidebar-collapsed]="sideCollapsed()">
-    <div class="fd-docs-search sap-flex">
-        <fd-input-group
-            glyph="decline"
-            glyphAriaLabel="Clear"
-            placeholder="Search"
-            buttonType="transparent"
-            [button]="true"
-            [disabled]="false"
-            [ngModel]="search()"
-            (ngModelChange)="onSearchChange($event)"
-            (addOnButtonClicked)="onSearchChange('')"
-        >
-        </fd-input-group>
+<div class="fd-docs-sidebar" [class.fd-docs-sidebar--collapsed]="sideCollapsed()">
+    <div class="fd-docs-command-bar">
+        <div class="fd-docs-command-bar__search">
+            <fd-icon class="fd-docs-command-bar__icon" glyph="search"></fd-icon>
+            <input
+                class="fd-docs-command-bar__input"
+                type="text"
+                placeholder="Search..."
+                aria-label="Search components"
+                [value]="search()"
+                (input)="onSearchChange($event.target.value)"
+                #searchInput
+            />
+            @if (!search()) {
+                <span class="fd-docs-command-bar__hint" aria-hidden="true">{{ isMac ? '⌘' : '⌃' }}K</span>
+            }
+            @if (search()) {
+                <button
+                    class="fd-docs-command-bar__clear"
+                    aria-label="Clear search"
+                    (click)="onSearchChange(''); searchInput.focus()"
+                >
+                    <fd-icon glyph="decline"></fd-icon>
+                </button>
+            }
+        </div>
+        <span class="fd-docs-command-bar__divider"></span>
         <button
-            fd-button
-            [toggled]="true"
-            [glyph]="allExpanded() ? 'collapse' : 'expand'"
-            [ariaLabel]="allExpanded() ? 'Collapse all sections' : 'Expand all sections'"
-            [title]="allExpanded() ? 'Collapse all sections' : 'Expand all sections'"
+            class="fd-docs-command-bar__action"
+            [class.fd-docs-command-bar__action--active]="allExpanded()"
+            [attr.aria-label]="allExpanded() ? 'Collapse all sections' : 'Expand all sections'"
+            [attr.aria-pressed]="allExpanded()"
+            [title]="allExpanded() ? 'Collapse all' : 'Expand all'"
             (click)="toggleAllSections()"
-        ></button>
+        >
+            <fd-icon
+                class="fd-docs-command-bar__chevron"
+                [class.fd-docs-command-bar__chevron--open]="allExpanded()"
+                glyph="slim-arrow-down"
+            ></fd-icon>
+            <kbd class="fd-docs-command-bar__action-kbd" aria-hidden="true">{{ isMac ? '⌘' : '⌃' }}.</kbd>
+        </button>
     </div>
-    <div class="fd-docs-sidebar-content">
-        <fd-side-nav>
-            <div fd-side-nav-main fd-scrollbar>
-                <ul fd-nested-list [textOnly]="true">
-                    @for (section of displayedSections(); track trackBySection($index, section)) {
-                        <li fd-nested-list-item [expanded]="isSectionExpanded(section.header)">
-                            <div fd-nested-list-content>
-                                <a fd-nested-list-link (click)="toggleSection(section.header)">
-                                    <span fd-nested-list-title>{{ section.header }}</span>
-                                </a>
-                                <button fd-nested-list-expand-icon (click)="toggleSection(section.header)"></button>
-                            </div>
-                            <ul fd-nested-list>
-                                @for (
-                                    item of $asSectionNestedContent(section.content) | sortBy: true : 'name';
-                                    track item.name
-                                ) {
-                                    @if (item.subItems; as itemSubItems) {
-                                        <li fd-nested-list-item [expanded]="true">
-                                            <div fd-nested-list-content>
-                                                <a fd-nested-list-link>
-                                                    <span fd-nested-list-title>{{ item.name }}</span>
-                                                </a>
-                                                <button fd-nested-list-expand-icon></button>
-                                            </div>
-                                            <ul fd-nested-list>
-                                                @for (subItem of itemSubItems; track subItem.name) {
-                                                    <ng-template
-                                                        [ngTemplateOutlet]="listItemTpl"
-                                                        [ngTemplateOutletContext]="{ $implicit: subItem }"
+    <div class="fd-docs-sidebar-content" fd-scrollbar>
+        <nav class="fd-docs-nav" aria-label="Component navigation">
+            @for (section of displayedSections(); track trackBySection($index, section)) {
+                <div class="fd-docs-nav__group">
+                    <button
+                        class="fd-docs-nav__header"
+                        [class.fd-docs-nav__header--has-active]="sectionHasActiveItem(section)"
+                        [attr.aria-expanded]="isSectionExpanded(section.header)"
+                        [title]="section.header"
+                        (click)="toggleSection(section.header)"
+                    >
+                        <span class="fd-docs-nav__header-label">{{ section.header }}</span>
+                        <fd-icon
+                            class="fd-docs-nav__header-chevron"
+                            [class.fd-docs-nav__header-chevron--open]="isSectionExpanded(section.header)"
+                            glyph="slim-arrow-down"
+                        ></fd-icon>
+                    </button>
+                    <div
+                        class="fd-docs-nav__items"
+                        [class.fd-docs-nav__items--open]="isSectionExpanded(section.header)"
+                        [attr.aria-hidden]="!isSectionExpanded(section.header)"
+                    >
+                        <ul class="fd-docs-nav__list" role="list">
+                            @for (
+                                item of $asSectionNestedContent(section.content) | sortBy: true : 'name';
+                                track item.name
+                            ) {
+                                @if (item.subItems; as itemSubItems) {
+                                    <li class="fd-docs-nav__subgroup">
+                                        <span class="fd-docs-nav__subgroup-label">{{ item.name }}</span>
+                                        <ul class="fd-docs-nav__list" role="list">
+                                            @for (subItem of itemSubItems; track subItem.name) {
+                                                <li>
+                                                    <a
+                                                        class="fd-docs-nav__item"
+                                                        [routerLink]="'/' + subItem.url"
+                                                        routerLinkActive="fd-docs-nav__item--selected"
+                                                        [title]="subItem.name"
+                                                        (keypress)="onKeypressHandler($event)"
                                                     >
-                                                    </ng-template>
-                                                }
-                                            </ul>
-                                        </li>
-                                    } @else {
-                                        <ng-template
-                                            [ngTemplateOutlet]="listItemTpl"
-                                            [ngTemplateOutletContext]="{ $implicit: item }"
+                                                        {{ subItem.name }}
+                                                    </a>
+                                                </li>
+                                            }
+                                        </ul>
+                                    </li>
+                                } @else {
+                                    <li>
+                                        <a
+                                            class="fd-docs-nav__item"
+                                            [routerLink]="'/' + item.url"
+                                            routerLinkActive="fd-docs-nav__item--selected"
+                                            [title]="item.name"
+                                            (keypress)="onKeypressHandler($event)"
                                         >
-                                        </ng-template>
-                                    }
+                                            {{ item.name }}
+                                        </a>
+                                    </li>
                                 }
-                            </ul>
-                        </li>
-                    }
-                    <ng-template #listItemTpl let-item>
-                        <li fd-nested-list-item>
-                            <a
-                                fd-nested-list-link
-                                [routerLink]="'/' + item.url"
-                                routerLinkActive="is-selected"
-                                (keypress)="onKeypressHandler($event)"
-                                tabindex="0"
-                                role="button"
-                            >
-                                <span fd-nested-list-title>{{ item.name }}</span>
-                            </a>
-                        </li>
-                    </ng-template>
-                </ul>
-            </div>
-        </fd-side-nav>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            }
+        </nav>
     </div>
 </div>

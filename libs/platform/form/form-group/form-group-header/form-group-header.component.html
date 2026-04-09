@@ -1,21 +1,21 @@
-@if (fieldGroup && hintOptions?.position === 'before') {
+@if (fieldGroup() && hintOptions()?.position === 'before') {
     <ng-template [ngTemplateOutlet]="inlineHelpRef"></ng-template>
 }
-<h6 class="fd-form-group__header-text">
-    {{ fieldGroup?.label }}
+<h6 class="fd-form-group__header-text" [class.fd-form-group__header-text--wrap]="allowWrap()">
+    {{ fieldGroup()?.label }}
 </h6>
-@if (fieldGroup && hintOptions?.position === 'after') {
+@if (fieldGroup() && hintOptions()?.position === 'after') {
     <ng-template [ngTemplateOutlet]="inlineHelpRef"></ng-template>
 }
 <ng-template #inlineHelpRef>
-    @if (hintOptions) {
+    @if (hintOptions(); as options) {
         <span fd-link [undecorated]="true">
             <fd-icon
                 [style.vertical-align]="'middle'"
-                [fd-inline-help]="hintOptions.content"
-                [glyph]="hintOptions.glyph"
-                [placement]="hintOptions.placement ?? null"
-                [triggers]="hintOptions.trigger ?? []"
+                [fd-inline-help]="options.content"
+                [glyph]="options.glyph"
+                [placement]="options.placement ?? null"
+                [triggers]="options.trigger ?? []"
                 tabindex="0"
             ></fd-icon>
         </span>

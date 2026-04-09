@@ -25,14 +25,13 @@
                     </fd-breadcrumb>
                 </fd-dynamic-page-breadcrumb>
                 <fd-dynamic-page-title-content>
-                    <div fd-generic-tag name="Key Info" value="Lorem Ipsum"></div>
+                    <div fd-generic-tag name="Key Info" value="Value"></div>
                 </fd-dynamic-page-title-content>
                 <fd-dynamic-page-global-actions>
                     <fd-toolbar fdType="transparent" [clearBorder]="true">
                         <button
                             fd-toolbar-item
                             fd-button
-                            fdCompact
                             fdType="positive"
                             (click)="handleAction('Page is accepted')"
                             label="Accept"
@@ -41,13 +40,11 @@
                         <button
                             fd-toolbar-item
                             fd-button
-                            fdCompact
                             fdType="negative"
                             (click)="handleAction('Page is rejected')"
                             label="Reject"
                             title="Reject"
                         ></button>
-                        <fd-toolbar-separator></fd-toolbar-separator>
                     </fd-toolbar>
                 </fd-dynamic-page-global-actions>
                 <fd-dynamic-page-layout-actions>

@@ -27,7 +27,6 @@ import { PopoverModule } from './popover.module';
             </fd-popover-body>
         </fd-popover>
     `,
-    standalone: true,
     imports: [PopoverModule]
 })
 class TestPopoverComponent {

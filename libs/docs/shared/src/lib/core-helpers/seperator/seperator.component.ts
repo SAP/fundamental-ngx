@@ -7,8 +7,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
         `
             :host {
                 display: block;
-                margin-top: 2rem;
-                border-bottom: 1px solid var(--sapList_BorderColor);
+                margin-block-start: 1.5rem;
+                border: none;
+                height: 0;
             }
         `
     ],

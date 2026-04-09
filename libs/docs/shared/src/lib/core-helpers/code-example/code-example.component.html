@@ -1,4 +1,4 @@
-<div class="docs-code-example-toolbar">
+<div class="fd-docs-code-example-toolbar">
     <button
         fd-button
         fdType="ghost"
@@ -6,7 +6,7 @@
         [label]="(isOpen() ? 'Hide' : 'Show') + ' Code'"
         (click)="toggle()"
     ></button>
-    <div class="docs-code-example-toolbar__actions">
+    <div class="fd-docs-code-example-toolbar__actions">
         @if (isOpen()) {
             <button
                 fd-button
@@ -15,7 +15,7 @@
                 [title]="'Copy to clipboard (' + (isMac ? '⌘' : 'Ctrl+') + 'C)'"
                 (click)="copyText()"
             >
-                Copy <kbd class="docs-kbd">{{ isMac ? '⌘C' : 'Ctrl C' }}</kbd>
+                Copy <kbd class="fd-docs-kbd">{{ isMac ? '⌘C' : 'Ctrl C' }}</kbd>
             </button>
         }
         @if (canOpenStackBlitz()) {
@@ -30,14 +30,18 @@
         }
     </div>
 </div>
-<div class="docs-html-example-container" [class.docs-html-example-container--open]="isOpen()">
-    <div class="docs-code-example-content-wrapper">
+<div class="fd-docs-html-example-container" [class.fd-docs-html-example-container--open]="isOpen()">
+    <div class="fd-docs-code-example-content-wrapper">
         @if (isOpen()) {
-            <div class="docs-code-example-content" animate.enter="docs-code-enter" animate.leave="docs-code-leave">
+            <div
+                class="fd-docs-code-example-content"
+                animate.enter="fd-docs-code-enter"
+                animate.leave="fd-docs-code-leave"
+            >
                 @if (exampleFilesNetworkEntity(); as examples) {
                     @switch (examples.state) {
                         @case (states.loading) {
-                            <div class="docs-code-example-loading">
+                            <div class="fd-docs-code-example-loading">
                                 <fd-busy-indicator
                                     [loading]="true"
                                     ariaLabel="loading example files"
@@ -54,7 +58,7 @@
                         }
                         @case (states.success) {
                             @if (examples.exampleFiles.length === 1) {
-                                <div class="docs-code-snippet-wrapper" (scroll)="_onSnippetScroll($event)">
+                                <div class="fd-docs-code-snippet-wrapper" (scroll)="_onSnippetScroll($event)">
                                     <fd-code-snippet [file]="examples.exampleFiles[0]"></fd-code-snippet>
                                 </div>
                             } @else {
@@ -64,7 +68,10 @@
                                 >
                                     @for (file of examples.exampleFiles; track file) {
                                         <fdp-icon-tab-bar-tab [label]="file.name || file.language | titlecase">
-                                            <div class="docs-code-snippet-wrapper" (scroll)="_onSnippetScroll($event)">
+                                            <div
+                                                class="fd-docs-code-snippet-wrapper"
+                                                (scroll)="_onSnippetScroll($event)"
+                                            >
                                                 <fd-code-snippet [file]="file"></fd-code-snippet>
                                             </div>
                                         </fdp-icon-tab-bar-tab>

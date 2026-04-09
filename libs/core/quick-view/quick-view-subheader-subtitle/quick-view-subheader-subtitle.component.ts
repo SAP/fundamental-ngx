@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-
+import { booleanAttribute, ChangeDetectionStrategy, Component, input } from '@angular/core';
 @Component({
     selector: 'fd-quick-view-subheader-subtitle',
     templateUrl: './quick-view-subheader-subtitle.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class QuickViewSubheaderSubtitleComponent {}
+export class QuickViewSubheaderSubtitleComponent {
+    /** Whether the subtitle should wrap on multiple lines */
+    readonly allowWrap = input(false, { transform: booleanAttribute });
+}

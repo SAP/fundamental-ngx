@@ -18,6 +18,7 @@ const providerExampleTs = 'provider-example/provider-example.component.ts';
 const providerExampleDirectiveTs = 'provider-example/usage-with-provider.directive.ts';
 
 @Component({
+    selector: 'fd-docs-cdk-clicked',
     templateUrl: './clicked-docs.component.html',
     imports: [
         DocsSectionTitleComponent,
