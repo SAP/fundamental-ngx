@@ -14,8 +14,8 @@
                     class="fd-panel__button"
                     [glyph]="buttonIcon()"
                     [id]="expandId()"
-                    [class.is-expanded]="_expanded()"
-                    [attr.aria-expanded]="_expanded()"
+                    [class.is-expanded]="expanded()"
+                    [attr.aria-expanded]="expanded()"
                     [attr.aria-controls]="panelContent()?.id"
                     [ariaLabel]="expandAriaLabel()"
                     [attr.aria-labelledby]="expandAriaLabelledBy() + ' ' + expandId()"
@@ -27,7 +27,7 @@
         <ng-content select="[fd-panel-title]"></ng-content>
         <ng-content></ng-content>
     </div>
-    @if (_expanded() || fixed()) {
+    @if (expanded() || fixed()) {
         <ng-content select="[fd-panel-content]"></ng-content>
     }
 </div>

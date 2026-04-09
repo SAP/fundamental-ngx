@@ -8,8 +8,7 @@ import {
     contentChild,
     inject,
     input,
-    linkedSignal,
-    output
+    model
 } from '@angular/core';
 
 import { Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
@@ -56,12 +55,8 @@ export class PanelComponent {
     /** aria-labelledby of the expand button */
     readonly expandAriaLabelledBy = input<Nullable<string>>(null);
 
-    /** @hidden Signal input backing the expanded state; template uses [expanded]="..." via alias. */
-    // eslint-disable-next-line @angular-eslint/no-input-rename
-    readonly _expandedInput = input(false, { alias: 'expanded', transform: booleanAttribute });
-
-    /** Output event triggered when the Expand button is clicked */
-    readonly expandedChange = output<boolean>();
+    /** Whether the Panel Content is expanded */
+    readonly expanded = model(false);
 
     /** Whether the panel (header and content) is transparent */
     readonly transparent = input(false, { transform: booleanAttribute });
@@ -72,21 +67,9 @@ export class PanelComponent {
     /** Reference to panel content */
     readonly panelContent = contentChild(PanelContentDirective);
 
-    /** Whether the Panel Content is expanded */
-    set expanded(value: boolean) {
-        this._expanded.set(value);
-    }
-
-    get expanded(): boolean {
-        return this._expanded();
-    }
-
-    /** @hidden */
-    protected readonly _expanded = linkedSignal(() => this._expandedInput());
-
     /** @hidden */
     protected readonly buttonIcon = computed(() =>
-        this._expanded() ? 'slim-arrow-down' : this._rtlService?.rtl() ? 'slim-arrow-left' : 'slim-arrow-right'
+        this.expanded() ? 'slim-arrow-down' : this._rtlService?.rtl() ? 'slim-arrow-left' : 'slim-arrow-right'
     );
 
     /** @hidden */
@@ -102,7 +85,6 @@ export class PanelComponent {
 
     /** Methods that toggles the Panel Content */
     toggleExpand(): void {
-        this._expanded.update((expanded) => !expanded);
-        this.expandedChange.emit(this._expanded());
+        this.expanded.update((expanded) => !expanded);
     }
 }

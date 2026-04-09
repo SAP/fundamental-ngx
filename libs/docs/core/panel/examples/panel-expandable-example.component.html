@@ -5,16 +5,19 @@
     [attr.aria-pressed]="expanded"
     aria-controls="panel-content-1"
     [attr.aria-expanded]="expanded"
-    (click)="expanded = !expanded"
+    aria-label="Toggle"
+    (click)="panel.toggleExpand()"
 ></button>
 
 <fd-text text="Expanded value is: {{ expanded }}"></fd-text>
 
 <fd-panel
+    #panel
     [(expanded)]="expanded"
     expandId="panel-expand-1"
     expandAriaLabel="Panel Expand"
     expandAriaLabelledBy="panel-expandable-title-1"
+    (expandedChange)="expandedChanged($event)"
 >
     <h5 fd-panel-title id="panel-expandable-title-1">Panel Header</h5>
     <div fd-panel-content ariaLabel="Panel Content" id="panel-content-1">
