@@ -10,6 +10,7 @@
         (_tableService.tableLoading$ | async) === true && _dataSourceDirective._firstLoadingDone && !pageScrolling
     "
     [block]="true"
+    [preventWheelEvents]="pageScrolling && !!_virtualScrollDirective?.scrollWholeRows"
 >
     <!-- Table Container -->
     <div class="fdp-table__container" #tableContainer>
@@ -28,7 +29,14 @@
     <div
         class="fdp-table__body fd-scrollbar"
         [class.fdp-table__body--virtual-scroll]="!!_virtualScrollDirective?.virtualScroll"
-        [class.fdp-table__body--disable-scroll]="!!_dndTableDirective?.dragDropInProgress"
+        [style.position]="
+            !!_virtualScrollDirective?.virtualScroll && !_virtualScrollDirective?.scrollWholeRows
+                ? 'relative'
+                : 'static'
+        "
+        [class.fdp-table__body--disable-scroll]="
+            !!_dndTableDirective?.dragDropInProgress && !_virtualScrollDirective?.scrollWholeRows
+        "
         fdpTableScrollable
         #tableScrollable="tableScrollable"
         [style.height]="bodyHeight"
@@ -88,6 +96,9 @@
                                 @case ('group') {
                                     <tr
                                         fdp-table-group-row
+                                        [style.max-height.px]="
+                                            _virtualScrollDirective?.scrollWholeRows ? rowHeight : 'auto'
+                                        "
                                         [index]="rowIndex"
                                         [height]="rowHeight"
                                         [draggable]="isDraggable"
@@ -109,12 +120,15 @@
                                         [activable]="rowsActivable || !!row.navigatable"
                                         [active]="rowIndex === _navigatedRowIndex"
                                         [highlightActive]="highlightNavigatedRow"
+                                        [style.max-height.px]="
+                                            _virtualScrollDirective?.scrollWholeRows ? rowHeight : 'auto'
+                                        "
                                         [style.height.px]="rowHeight"
                                         [attr.aria-level]="isTreeTable ? row.level + 1 : null"
                                         (keydown.enter)="_onRowClick(row, $event)"
                                         (keydown.space)="_onRowClick(row, $event)"
                                         (click)="_onRowClick(row, $event)"
-                                        (started)="_dndTableDirective?.dragDropStart()"
+                                        (started)="_onDragStarted(row, $index, rowIndex)"
                                         [main]="true"
                                         [class.fd-table__row--draggable]="isDraggable"
                                         fdp-table-row
@@ -180,7 +194,7 @@
                             }
                         }
                     }
-                    @if (pageScrolling) {
+                    @if (pageScrolling && !_virtualScrollDirective?.scrollWholeRows) {
                         <tr
                             aria-hidden="true"
                             class="fd-table__intersection-spy"
@@ -256,11 +270,25 @@
             @if (pageScrolling) {
                 <tbody class="fd-table__body__focus-mock"></tbody>
             }
-            @if (_virtualScrollDirective?.virtualScroll) {
+            @if (_virtualScrollDirective?.virtualScroll && !_virtualScrollDirective?.scrollWholeRows) {
                 <!-- the tbody element below is so the scrollbar renders correctly -->
                 <tbody>
                     <tr>
                         <td colspan="100%" [style.height.px]="_virtualScrollDirective!.virtualScrollTotalHeight"></td>
+                    </tr>
+                </tbody>
+            }
+            <!-- the tbody element below is so the scrollbar renders correctly -->
+            @if (_virtualScrollDirective?.virtualScroll && _virtualScrollDirective?.scrollWholeRows) {
+                <tbody
+                    [class.fd-table__body--scroll-mock]="!!_virtualScrollDirective?.scrollWholeRows"
+                    [class.fdp-table__body--disable-scroll]="
+                        !!_dndTableDirective?.dragDropInProgress && !_virtualScrollDirective?.scrollWholeRows
+                    "
+                    #tableScrollMockContainer
+                >
+                    <tr>
+                        <td colspan="100%" [style.height.px]="_virtualScrollDirective?.virtualScrollTotalHeight"></td>
                     </tr>
                 </tbody>
             }
