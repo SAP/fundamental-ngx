@@ -9,12 +9,19 @@ import {
     OnInit,
     Output,
     QueryList,
+    computed,
     contentChildren,
     inject,
     input
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FocusEscapeDirection, KeyboardSupportService, Nullable, destroyObservable } from '@fundamental-ngx/cdk/utils';
+import {
+    FocusEscapeDirection,
+    KeyboardSupportService,
+    Nullable,
+    RtlService,
+    destroyObservable
+} from '@fundamental-ngx/cdk/utils';
 import { Observable, Subject, map, merge, startWith, takeUntil } from 'rxjs';
 import { CardFocusItem } from '../card-focus-item.model';
 import { CardComponent } from '../card.component';
@@ -75,6 +82,12 @@ export class CardListDirective implements OnInit, AfterContentInit, OnDestroy {
     private readonly _onRefresh$: Subject<void> = new Subject<void>();
 
     /** @hidden */
+    private readonly _rtlService = inject(RtlService, { optional: true });
+
+    /** @hidden */
+    private readonly _isRtl = computed(() => this._rtlService?.rtl() ?? false);
+
+    /** @hidden */
     constructor(private _keyboardSupportService: KeyboardSupportService<CardFocusItem>) {}
 
     /** @hidden */
@@ -114,6 +127,7 @@ export class CardListDirective implements OnInit, AfterContentInit, OnDestroy {
     /** @hidden */
     ngAfterContentInit(): void {
         this._keyboardSupportService.setKeyboardService(this._focusItems, false, false);
+        this._keyboardSupportService.keyManager.withHorizontalOrientation(this._isRtl() ? 'rtl' : 'ltr');
         this._listenOnQueryChange();
     }
 
