@@ -1,5 +1,13 @@
 import { NgTemplateOutlet, SlicePipe } from '@angular/common';
-import { Component, ElementRef, Input, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    Input,
+    QueryList,
+    ViewChild,
+    ViewChildren
+} from '@angular/core';
 import { AsyncOrSyncPipe, OverflowListDirective, OverflowListItemDirective } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { IconComponent } from '@fundamental-ngx/core/icon';
@@ -11,6 +19,7 @@ import { IconTabBarPopoverComponent } from '../popovers/icon-tab-bar-popover/ico
 @Component({
     selector: 'fdp-icon-tab-bar-filter-type',
     templateUrl: './icon-tab-bar-filter-type.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         {
             provide: IconTabBarBase,

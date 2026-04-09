@@ -2,7 +2,6 @@ import {
     ChangeDetectionStrategy,
     Component,
     ContentChild,
-    HostListener,
     Input,
     OnInit,
     ViewEncapsulation,
@@ -19,7 +18,10 @@ const SMALL_SCREEN_BREAKPOINT = 992;
     styleUrls: ['./documentation-base.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true
+    host: {
+        '(window:resize)': 'onResize()',
+        '(document:keydown)': 'onKeydown($event)'
+    }
 })
 export class DocumentationBaseComponent implements OnInit {
     @Input() content: HTMLElement;
@@ -42,10 +44,20 @@ export class DocumentationBaseComponent implements OnInit {
 
     smallScreen: boolean = window.innerWidth < SMALL_SCREEN_BREAKPOINT;
 
-    @HostListener('window:resize')
     onResize(): void {
         this.windowSize();
         this._isCollapsed();
+    }
+
+    onKeydown(event: KeyboardEvent): void {
+        if ((event.metaKey || event.ctrlKey) && event.key === 'k') {
+            event.preventDefault();
+            this.sectionsToolbar?.focusSearch();
+        }
+        if ((event.metaKey || event.ctrlKey) && event.key === '.') {
+            event.preventDefault();
+            this.sectionsToolbar?.toggleAllSections();
+        }
     }
 
     ngOnInit(): void {
@@ -92,6 +104,8 @@ export class DocumentationBaseComponent implements OnInit {
     private _isCollapsed(): void {
         if (window.innerWidth < SMALL_SCREEN_BREAKPOINT) {
             this.sideCollapsed.set(true);
+        } else {
+            this.sideCollapsed.set(false);
         }
     }
 }

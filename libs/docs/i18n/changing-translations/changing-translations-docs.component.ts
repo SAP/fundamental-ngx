@@ -15,6 +15,7 @@ import { LocaleChangeExampleComponent } from './examples/i18n-locale-change-exam
 import { LocaleOverrideExampleComponent } from './examples/i18n-locale-override-example/locale-override-example.component';
 
 @Component({
+    selector: 'fd-docs-i18n-changing-translations',
     templateUrl: './changing-translations-docs.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [

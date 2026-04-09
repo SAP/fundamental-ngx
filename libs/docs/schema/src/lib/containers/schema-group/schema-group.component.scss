@@ -6,11 +6,11 @@
 
 :host {
     display: block;
-    border-width: var(--sapElement_BorderWidth, 0.0625rem);
-    border-color: var(--sapField_BorderColor, #89919a);
+    border-width: var(--sapElement_BorderWidth);
+    border-color: var(--sapField_BorderColor);
     border-style: solid;
-    border-radius: var(--sapElement_BorderCornerRadius, 0.25rem);
-    background-color: var(--sapBackgroundColor, #f7f7f7);
+    border-radius: var(--sapElement_BorderCornerRadius);
+    background-color: var(--sapBackgroundColor);
 }
 
 .form-group {
@@ -24,7 +24,7 @@
 }
 
 .schema--sub-header {
-    color: var(--sapTextColor, #32363a);
+    color: var(--sapTextColor);
 }
 
 .schema--inner-group {

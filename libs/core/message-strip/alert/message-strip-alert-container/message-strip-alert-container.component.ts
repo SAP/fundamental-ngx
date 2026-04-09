@@ -1,5 +1,13 @@
 import { CdkPortalOutlet, ComponentPortal, PortalModule } from '@angular/cdk/portal';
-import { Component, ComponentRef, computed, signal, viewChildren, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ComponentRef,
+    computed,
+    signal,
+    viewChildren,
+    ViewEncapsulation
+} from '@angular/core';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { MessageStripAlertContainerFooterComponent } from '../message-strip-alert-container-footer/message-strip-alert-container-footer.component';
 import { MessageStripAlertComponent } from '../message-strip-alert/message-strip-alert.component';
@@ -22,6 +30,7 @@ import { MessageStripAlert } from '../message-strip-alert/message-strip-alert.in
     `,
     styleUrl: './message-strip-alert-container.component.scss',
     encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [PortalModule, ScrollbarDirective, MessageStripAlertContainerFooterComponent]
 })
 export class MessageStripAlertContainerComponent {

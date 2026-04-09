@@ -1,20 +1,23 @@
 <fd-base-documentation [content]="content" #baseDocumentation>
-    <button (click)="baseDocumentation.skipNavClicked()" aria-label="skip navigation" class="skip-navigation">
+    <button (click)="baseDocumentation.skipNavClicked()" aria-label="skip navigation" class="fd-docs-skip-navigation">
         Skip Navigation
     </button>
     <fd-docs-toolbar (btnClicked)="baseDocumentation.handleMenuCollapseClick()"></fd-docs-toolbar>
-    <div class="fd-flex-row fd-sidebar-container">
+    <div class="sap-flex--row fd-docs-sidebar-container">
         <sections-toolbar [sections]="sections" [(sideCollapsed)]="baseDocumentation.sideCollapsed"></sections-toolbar>
-        <div tabindex="0" class="content" #content id="page-content" cdk-scrollable>
-            <div class="content-margin">
-                <router-outlet (activate)="baseDocumentation.onActivate()"></router-outlet>
+        <div tabindex="0" class="fd-docs-content" #content id="page-content" cdk-scrollable>
+            <div class="fd-docs-content-layout">
+                <div class="fd-docs-content__margin">
+                    <router-outlet (activate)="baseDocumentation.onActivate()"></router-outlet>
+                </div>
+                <fd-docs-table-of-contents [scrollContainer]="content"></fd-docs-table-of-contents>
             </div>
         </div>
     </div>
     @if (baseDocumentation.smallScreen) {
         <div
-            class="collapsed-overlay"
-            [class.overlay-init]="!baseDocumentation.sideCollapsed()"
+            class="fd-docs-overlay"
+            [class.fd-docs-overlay--visible]="!baseDocumentation.sideCollapsed()"
             (click)="baseDocumentation.closeSideBar()"
         ></div>
     }

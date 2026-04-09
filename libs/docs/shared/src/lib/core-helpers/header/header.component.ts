@@ -20,15 +20,23 @@ import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
     `,
     styles: [
         `
+            :host {
+                display: block;
+            }
+
             .header {
-                color: var(--sapPageHeader_TextColor);
-                margin-top: 2rem;
-                font-size: 2.2rem;
+                color: var(--sapTitleColor);
+                font-family: var(--sapFontFamily);
+                font-size: clamp(1.75rem, 4vw, var(--sapFontHeader1Size));
+                font-weight: 700;
+                line-height: 1.2;
+                margin-block-start: 1.5rem;
+                margin-block-end: 0.75rem;
+                letter-spacing: -0.01em;
             }
         `
     ],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent {
     @Input() isDeprecated: WritableSignal<boolean> = signal(true);

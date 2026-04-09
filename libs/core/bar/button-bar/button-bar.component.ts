@@ -1,5 +1,5 @@
 import { BooleanInput } from '@angular/cdk/coercion';
-import { booleanAttribute, Component, input, viewChild } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, input, viewChild } from '@angular/core';
 import { BaseButton, ButtonComponent, ButtonType } from '@fundamental-ngx/core/button';
 import { FD_BUTTON_BAR_COMPONENT } from '../tokens';
 
@@ -31,6 +31,7 @@ let randomButtonBarId = 0;
         }
     ],
     imports: [ButtonComponent],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         class: 'fd-bar__element',
         '[class.fd-bar__element--full-width]': 'fullWidth()',

@@ -19,6 +19,7 @@ import { ProductSwitchExampleComponent } from './examples/product-switch-example
 import { UsageWithLayoutExampleComponent } from './examples/usage-with-layout-example/usage-with-layout-example.component';
 
 @Component({
+    selector: 'fd-docs-btp-tool-header',
     templateUrl: './tool-header-docs.component.html',
     imports: [
         DocsSectionTitleComponent,

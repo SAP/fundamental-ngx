@@ -9,6 +9,7 @@ import {
 } from '@fundamental-ngx/docs/shared';
 
 @Component({
+    selector: 'fd-docs-btp-tool-header-header',
     templateUrl: './tool-header-header.component.html',
     imports: [
         HeaderComponent,

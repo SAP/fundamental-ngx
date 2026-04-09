@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef } from '@angular/core';
+import { AfterViewInit, booleanAttribute, ChangeDetectionStrategy, Component, ElementRef, input } from '@angular/core';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
 
 @Component({
@@ -8,6 +8,9 @@ import { FormLabelComponent } from '@fundamental-ngx/core/form';
     imports: [FormLabelComponent]
 })
 export class QuickViewGroupItemLabelComponent implements AfterViewInit {
+    /** Whether the text should wrap on multiple lines. */
+    readonly allowWrap = input(false, { transform: booleanAttribute });
+
     /** @hidden */
     constructor(private readonly _elRef: ElementRef<Element>) {}
 

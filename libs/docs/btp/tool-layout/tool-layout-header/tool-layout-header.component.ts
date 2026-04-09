@@ -8,6 +8,7 @@ import {
 } from '@fundamental-ngx/docs/shared';
 
 @Component({
+    selector: 'fd-docs-btp-tool-layout-header',
     templateUrl: './tool-layout-header.component.html',
     styles: [
         `

@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input, OnInit } from '@angular/core';
 import { ListGroupHeaderDirective, ListTitleDirective } from '@fundamental-ngx/core/list';
 import { BaseListItem, LIST_ITEM_TYPE } from './base-list-item';
 
@@ -19,6 +19,7 @@ let nextListGrpHeaderId = 0;
         <ng-content></ng-content>
     </div>`,
     providers: [{ provide: BaseListItem, useExisting: forwardRef(() => ListGroupHeaderComponent) }],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         role: 'none'
     },

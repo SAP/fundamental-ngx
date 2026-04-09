@@ -6,7 +6,9 @@
     ></ng-template>
 }
 <fd-busy-indicator
-    [loading]="(_tableService.tableLoading$ | async) === true && _dataSourceDirective._firstLoadingDone"
+    [loading]="
+        (_tableService.tableLoading$ | async) === true && _dataSourceDirective._firstLoadingDone && !pageScrolling
+    "
     [block]="true"
 >
     <!-- Table Container -->
@@ -186,6 +188,24 @@
                             (intersected)="$event && _onSpyIntersect($event)"
                             [style.top.px]="pageScrollingThreshold * -1"
                         ></tr>
+                        @if (
+                            (_tableService.tableLoading$ | async) === true &&
+                            _dataSourceDirective._firstLoadingDone &&
+                            pageScrolling
+                        ) {
+                            <tr fd-table-row>
+                                @for (_ of loadingColumnsRange; track $index) {
+                                    <td fd-table-cell>
+                                        <fd-skeleton
+                                            [style.margin]="'auto 0'"
+                                            type="text"
+                                            textLines="1"
+                                            width="100%"
+                                        ></fd-skeleton>
+                                    </td>
+                                }
+                            </tr>
+                        }
                     }
                 </tbody>
             } @else {

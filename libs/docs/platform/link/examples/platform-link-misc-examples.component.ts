@@ -6,11 +6,11 @@ import { PlatformLinkModule } from '@fundamental-ngx/platform/link';
     templateUrl: './platform-link-misc-examples.component.html',
     styles: [
         `
-            .fddoc-truncate {
+            .fd-docs-truncate {
                 display: inline-block;
                 width: 100px;
             }
-            .fddoc-wrap {
+            .fd-docs-wrap {
                 width: 100px;
                 white-space: normal;
                 overflow: break-word;

@@ -31,10 +31,12 @@ describe('QuickViewSubheaderTitleComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should assign classes to h5 tag', () => {
-        const h5 = fixture.debugElement.query(By.css('h5[fd-title]'));
+    it('should assign classes to span with fd-title', () => {
+        const titleElement = fixture.debugElement.query(By.css('span[fd-title][role="heading"]'));
 
-        expect(h5.nativeElement.classList).toContain('fd-title');
-        expect(h5.nativeElement.classList).toContain('fd-title--h5');
+        expect(titleElement).toBeTruthy();
+        expect(titleElement.nativeElement.classList).toContain('fd-title');
+        expect(titleElement.nativeElement.classList).toContain('fd-title--h5');
+        expect(titleElement.nativeElement.getAttribute('aria-level')).toBe('5');
     });
 });

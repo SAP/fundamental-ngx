@@ -12,6 +12,7 @@ import {
 import { SearchFieldBasicExampleComponent } from './examples/basic-example/search-field-basic-example.component';
 
 @Component({
+    selector: 'fd-docs-btp-search-field',
     templateUrl: './search-field-docs.component.html',
     imports: [
         DocsSectionTitleComponent,
