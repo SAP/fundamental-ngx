@@ -121,7 +121,6 @@ describe('TableComponent Virtual Scrolling', () => {
         it('should automatically enable virtualScroll when scrollWholeRows is true', () => {
             hostComponent.virtualScrollDirective.virtualScroll = false;
             hostComponent.virtualScrollDirective.scrollWholeRows = true;
-            hostComponent.virtualScrollDirective.ngOnInit();
             expect(hostComponent.virtualScrollDirective.virtualScroll).toBe(true);
         });
 

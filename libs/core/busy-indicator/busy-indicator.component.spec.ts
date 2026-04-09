@@ -265,7 +265,7 @@ describe('BusyIndicatorComponent', () => {
             fixture.componentRef.setInput('preventWheelEvents', true);
             fixture.detectChanges();
 
-            component.ngOnDestroy();
+            fixture.destroy();
 
             expect(removeEventListenerSpy).toHaveBeenCalledWith('wheel', expect.any(Function), { passive: false });
         });
