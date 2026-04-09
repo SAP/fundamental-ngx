@@ -17,6 +17,7 @@ import { UsingTranslationPipeExampleComponent } from './examples/using-translati
 import { UsingUtilityFunctionsExampleComponent } from './examples/using-utility-functions-example.component';
 
 @Component({
+    selector: 'fd-docs-i18n-translation-resolver',
     templateUrl: './translation-resolver-docs.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [

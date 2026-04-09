@@ -14,6 +14,7 @@ import { JsonLoadingExampleComponent } from './examples/json-loading-example/jso
 import { PropertiesLoadingExampleComponent } from './examples/properties-loading-example/properties-loading-example.component';
 
 @Component({
+    selector: 'fd-docs-i18n-loading-translations',
     templateUrl: './loading-translations-docs.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [

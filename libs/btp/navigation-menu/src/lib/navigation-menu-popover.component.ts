@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, ContentChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ContentChild, ViewEncapsulation } from '@angular/core';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { NavigationMenuPopoverControlDirective } from './navigation-menu-popover-control.directive';
 
@@ -17,7 +17,8 @@ import { NavigationMenuPopoverControlDirective } from './navigation-menu-popover
     `,
     styleUrls: ['./navigation-menu-popover.component.scss'],
     imports: [PopoverComponent, PopoverControlComponent, PopoverBodyComponent, NgTemplateOutlet],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavigationMenuPopoverComponent {
     /** @hidden */

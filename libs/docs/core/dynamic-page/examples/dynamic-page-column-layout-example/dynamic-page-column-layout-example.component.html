@@ -151,51 +151,47 @@
                 </fd-dynamic-page>
             </ng-template>
             <ng-template #midColumn>
-                <div class="docs-fcl-example-section">
-                    <h2 id="mid-column">Mid Column</h2>
-                    <div>
-                        <button
-                            aria-describedby="mid-column"
-                            title="Open Column 3"
-                            class="fd-button"
-                            (click)="changeLayout('ThreeColumnsMidExpanded')"
-                        >
-                            Open Column 3
-                        </button>
-                    </div>
-                    <fdp-icon-tab-bar iconTabSize="responsive-paddings">
-                        @for (tab of [1, 2, 3, 4]; track tab) {
-                            <fdp-icon-tab-bar-tab [label]="'Tab ' + tab">
-                                <div class="fd-dynamic-page-section-example">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                                    irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                                    deserunt mollit anim id est laborum.
-                                </div>
-                            </fdp-icon-tab-bar-tab>
-                        }
-                    </fdp-icon-tab-bar>
+                <h2 id="mid-column">Mid Column</h2>
+                <div>
+                    <button
+                        aria-describedby="mid-column"
+                        title="Open Column 3"
+                        class="fd-button"
+                        (click)="changeLayout('ThreeColumnsMidExpanded')"
+                    >
+                        Open Column 3
+                    </button>
                 </div>
+                <fdp-icon-tab-bar iconTabSize="responsive-paddings">
+                    @for (tab of [1, 2, 3, 4]; track tab) {
+                        <fdp-icon-tab-bar-tab [label]="'Tab ' + tab">
+                            <div class="fd-dynamic-page-section-example">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+                                dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                                mollit anim id est laborum.
+                            </div>
+                        </fdp-icon-tab-bar-tab>
+                    }
+                </fdp-icon-tab-bar>
             </ng-template>
             <ng-template #endColumn>
-                <div class="docs-fcl-example-section">
-                    <h2>End Column</h2>
-                    <div>
-                        @if (localLayout !== 'OneColumnEndFullScreen') {
-                            <button class="fd-button" (click)="changeLayout('OneColumnEndFullScreen')">
-                                Expand Column 3
-                            </button>
-                            <button class="fd-button" (click)="changeLayout('TwoColumnsMidExpanded')">
-                                Close Column 3
-                            </button>
-                        } @else {
-                            <button class="fd-button" (click)="changeLayout('ThreeColumnsMidExpanded')">
-                                Exit Full Screen Column 3
-                            </button>
-                        }
-                    </div>
+                <h2>End Column</h2>
+                <div>
+                    @if (localLayout !== 'OneColumnEndFullScreen') {
+                        <button class="fd-button" (click)="changeLayout('OneColumnEndFullScreen')">
+                            Expand Column 3
+                        </button>
+                        <button class="fd-button" (click)="changeLayout('TwoColumnsMidExpanded')">
+                            Close Column 3
+                        </button>
+                    } @else {
+                        <button class="fd-button" (click)="changeLayout('ThreeColumnsMidExpanded')">
+                            Exit Full Screen Column 3
+                        </button>
+                    }
                 </div>
             </ng-template>
         </fd-flexible-column-layout>

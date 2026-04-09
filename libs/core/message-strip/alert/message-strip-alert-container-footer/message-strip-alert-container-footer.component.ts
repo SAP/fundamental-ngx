@@ -1,5 +1,5 @@
 import { ComponentPortal, PortalModule } from '@angular/cdk/portal';
-import { Component, DestroyRef, effect, inject, Injector, input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, effect, inject, Injector, input, signal } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { Observable } from 'rxjs';
@@ -24,6 +24,7 @@ import { MessageStripAlertContainerAlertRefs, MessageStripAlertContainerPosition
             }
         `
     ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [PortalModule]
 })
 export class MessageStripAlertContainerFooterComponent {

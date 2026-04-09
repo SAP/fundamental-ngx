@@ -4,6 +4,7 @@ import { NgTemplateOutlet } from '@angular/common';
 import {
     AfterContentInit,
     AfterViewInit,
+    ChangeDetectionStrategy,
     Component,
     ContentChild,
     ContentChildren,
@@ -32,6 +33,7 @@ import { FD_LIST_COMPONENT } from '../tokens';
     selector: '[fd-list-navigation-item], [fdListNavigaitonItem]',
     templateUrl: './list-navigation-item.component.html',
     styleUrl: './list-navigation-item.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         role: 'treeitem'
     },

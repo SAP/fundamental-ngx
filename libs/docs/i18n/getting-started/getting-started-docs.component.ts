@@ -16,6 +16,7 @@ import {
 import { GettingStartedExampleComponent } from './examples/getting-started-example.component';
 
 @Component({
+    selector: 'fd-docs-i18n-getting-started',
     templateUrl: './getting-started-docs.component.html',
     imports: [
         HeaderComponent,

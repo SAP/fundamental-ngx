@@ -1,4 +1,4 @@
-import { Component, Type, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Type, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
@@ -17,7 +17,6 @@ import { MessageBoxButtonClass, MessageBoxFooterComponent } from './message-box-
             </ng-template>
         </fd-message-box-footer>
     `,
-    standalone: true,
     imports: [MessageBoxFooterComponent, BarMiddleDirective, TemplateDirective]
 })
 class CustomFooterTestComponent {
@@ -30,7 +29,6 @@ class CustomFooterTestComponent {
             <fd-button-bar label="Default button">Default button</fd-button-bar>
         </fd-message-box-footer>
     `,
-    standalone: true,
     imports: [MessageBoxFooterComponent, ButtonBarComponent]
 })
 class DefaultFooterTestComponent {
@@ -68,6 +66,8 @@ describe('MessageBoxFooterComponent', () => {
 
         component.messageBoxFooter.messageBoxConfig.mobile = true;
 
+        const cdr = fixture.debugElement.children[0].injector.get(ChangeDetectorRef);
+        cdr.markForCheck();
         await whenStable(fixture);
         const footerEl = fixture.nativeElement.querySelector('footer');
 

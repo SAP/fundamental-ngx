@@ -8,7 +8,7 @@ import {
 } from '@fundamental-ngx/docs/shared';
 
 @Component({
-    selector: 'app-focusable-item-header',
+    selector: 'fd-docs-cdk-focusable-item-header',
     templateUrl: './focusable-item-header.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]

@@ -15,6 +15,7 @@ import { NestedExampleComponent } from './examples/nested-example.component';
 import { ToolHeaderExampleComponent } from './examples/tool-header-example.component';
 
 @Component({
+    selector: 'fd-docs-btp-button',
     templateUrl: './button-docs.component.html',
     imports: [
         DocsSectionTitleComponent,

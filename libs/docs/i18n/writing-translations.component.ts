@@ -12,6 +12,7 @@ import {
 } from '@fundamental-ngx/docs/shared';
 
 @Component({
+    selector: 'fd-docs-i18n-writing-translations',
     templateUrl: './writing-translations.component.html',
     imports: [
         HeaderComponent,

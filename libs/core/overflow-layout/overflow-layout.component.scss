@@ -41,6 +41,10 @@ $fd-block: 'fd-overflow-layout';
         @include fd-reset();
         @include fd-flex();
         flex-shrink: 0;
+
+        .fd-breadcrumb__item {
+            margin-block-start: 0.1875rem;
+        }
     }
 
     &__items-container {

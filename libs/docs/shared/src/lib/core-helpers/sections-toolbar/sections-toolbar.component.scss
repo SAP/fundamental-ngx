@@ -3,172 +3,455 @@
     flex-direction: column;
 }
 
-.sidebar {
+// =============================================================================
+// Sidebar shell
+// =============================================================================
+
+.fd-docs-sidebar {
     color: var(--sapTextColor);
+    background: var(--sapBackgroundColor);
     transition:
         0.3s margin ease-in-out,
         0.3s box-shadow ease-in-out;
     z-index: 6;
-    width: 255px;
-    min-width: 255px;
+    width: 18rem;
+    min-width: 18rem;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     white-space: nowrap;
     overflow: hidden;
     flex-grow: 1;
-    border-right: var(--sapList_BorderWidth) solid var(--sapGroup_ContentBorderColor);
+    border-inline-end: var(--sapList_BorderWidth) solid var(--sapGroup_ContentBorderColor);
 }
+
+// =============================================================================
+// Command bar — unified glass surface with search + expand action
+// =============================================================================
+
+.fd-docs-command-bar {
+    display: flex;
+    align-items: center;
+    margin: 0.625rem;
+    border-radius: 0.625rem;
+    background: color-mix(in srgb, var(--sapGroup_ContentBackground) 70%, var(--sapBackgroundColor));
+    border: 0.0625rem solid var(--sapGroup_ContentBorderColor);
+    box-shadow:
+        0 0.0625rem 0.125rem rgba(0, 0, 0, 0.04),
+        0 0.0625rem 0.25rem rgba(0, 0, 0, 0.02);
+    transition:
+        border-color 200ms ease,
+        box-shadow 300ms ease;
+
+    &:focus-within {
+        border-color: var(--sapBrandColor);
+        box-shadow:
+            0 0 0 0.0625rem var(--sapBrandColor),
+            0 0.25rem 0.75rem -0.125rem color-mix(in srgb, var(--sapBrandColor) 16%, transparent);
+    }
+
+    // ── Search section (left, flexible) ────────────────────────
+    &__search {
+        display: flex;
+        align-items: center;
+        flex: 1;
+        min-width: 0;
+        gap: 0.5rem;
+        padding: 0 0.75rem;
+        height: 2.5rem;
+    }
+
+    &__icon {
+        flex-shrink: 0;
+        color: var(--sapContent_NonInteractiveIconColor);
+        font-size: var(--sapFontSize);
+        transition: color 200ms ease;
+
+        .fd-docs-command-bar:focus-within & {
+            color: var(--sapBrandColor);
+        }
+    }
+
+    &__input {
+        flex: 1;
+        min-width: 0;
+        border: none;
+        outline: none;
+        background: transparent;
+        font-family: var(--sapFontFamily);
+        font-size: var(--sapFontSize);
+        color: var(--sapField_TextColor);
+        line-height: 1.4;
+
+        &::placeholder {
+            color: var(--sapField_PlaceholderTextColor);
+        }
+    }
+
+    // ── Search shortcut hint — faded, passive, just text ─────────
+    &__hint {
+        flex-shrink: 0;
+        font-family: var(--sapFontFamily);
+        font-size: var(--sapFontSmallSize);
+        font-weight: 400;
+        line-height: 1;
+        color: var(--sapContent_NonInteractiveIconColor);
+        white-space: nowrap;
+        user-select: none;
+        letter-spacing: 0.02em;
+    }
+
+    // ── Inner divider ──────────────────────────────────────────
+    &__divider {
+        flex-shrink: 0;
+        width: 0.0625rem;
+        align-self: stretch;
+        margin-block: 0.5rem;
+        background: var(--sapGroup_ContentBorderColor);
+    }
+
+    // ── Expand/collapse action (right segment) ─────────────────
+    &__action {
+        flex-shrink: 0;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.375rem;
+        height: 100%;
+        padding: 0 0.625rem;
+        border: none;
+        border-radius: 0 0.5625rem 0.5625rem 0;
+        background: transparent;
+        color: var(--sapContent_IconColor);
+        cursor: pointer;
+        font-family: var(--sapFontFamily);
+        font-size: var(--sapFontSmallSize);
+        transition:
+            background-color 150ms ease,
+            color 150ms ease;
+
+        &:hover {
+            background: color-mix(in srgb, var(--sapList_Hover_Background) 60%, transparent);
+
+            .fd-docs-command-bar__action-kbd {
+                border-color: var(--sapField_Hover_BorderColor);
+                box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+            }
+        }
+
+        &:focus-visible {
+            outline: var(--sapContent_FocusWidth) var(--sapContent_FocusStyle) var(--sapContent_FocusColor);
+            outline-offset: -0.125rem;
+        }
+
+        &--active {
+            color: var(--sapBrandColor);
+            background: color-mix(in srgb, var(--sapBrandColor) 8%, transparent);
+
+            .fd-docs-command-bar__action-kbd {
+                color: var(--sapContent_ContrastTextColor);
+                background: var(--sapBrandColor);
+                border-color: var(--sapBrandColor);
+                border-block-end-color: color-mix(in srgb, var(--sapBrandColor) 70%, #000);
+            }
+
+            &:hover {
+                background: color-mix(in srgb, var(--sapBrandColor) 14%, transparent);
+            }
+        }
+    }
+
+    // ── Action kbd — raised key cap, looks pressable ───────────
+    &__action-kbd {
+        flex-shrink: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 1.5rem;
+        height: 1.375rem;
+        padding: 0 0.3125rem;
+        font-family: var(--sapFontFamily);
+        font-size: var(--sapFontSmallSize);
+        font-weight: 600;
+        line-height: 1;
+        color: var(--sapContent_LabelColor);
+        background: var(--sapGroup_ContentBackground);
+        border: 0.0625rem solid var(--sapGroup_ContentBorderColor);
+        border-block-end-width: 0.1875rem;
+        border-radius: 0.25rem;
+        white-space: nowrap;
+        user-select: none;
+        box-shadow: 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.06);
+        transition:
+            background-color 150ms ease,
+            border-color 150ms ease,
+            color 150ms ease,
+            box-shadow 150ms ease;
+    }
+
+    // ── Chevron inside action ──────────────────────────────────
+    &__chevron {
+        font-size: var(--sapFontSmallSize);
+        line-height: 1;
+        transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+        &--open {
+            transform: rotate(180deg);
+        }
+    }
+
+    // ── Clear button ───────────────────────────────────────────
+    &__clear {
+        flex-shrink: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.5rem;
+        height: 1.5rem;
+        padding: 0;
+        border: none;
+        border-radius: 50%;
+        background: transparent;
+        color: var(--sapContent_IconColor);
+        cursor: pointer;
+        transition:
+            background-color 150ms ease,
+            color 150ms ease;
+
+        &:hover {
+            background: color-mix(in srgb, var(--sapContent_IconColor) 10%, transparent);
+        }
+
+        &:active {
+            background: color-mix(in srgb, var(--sapContent_IconColor) 18%, transparent);
+        }
+
+        &:focus-visible {
+            outline: var(--sapContent_FocusWidth) var(--sapContent_FocusStyle) var(--sapContent_FocusColor);
+            outline-offset: 0.0625rem;
+        }
+
+        fd-icon {
+            font-size: var(--sapFontSmallSize);
+        }
+    }
+}
+
+// =============================================================================
+// Sidebar content
+// =============================================================================
 
 .fd-docs-sidebar-content {
     flex-grow: 1;
     overflow-y: auto;
 }
 
-.nav {
-    list-style: none;
-    padding-left: 0;
+// =============================================================================
+// Custom navigation — no fd-side-nav, no fd-nested-list, no ::ng-deep
+// =============================================================================
+
+.fd-docs-nav {
+    padding: 0.25rem 0;
 }
 
-.nav-item {
-    color: var(--sapTextColor);
-    font-size: 1.05rem;
-    position: relative;
-    padding: 13px 0 13px 40px;
-    flex-grow: 1;
-    transition: 250ms all ease-in-out;
+// ── Group container ─────────────────────────────────────────
+.fd-docs-nav__group {
+    & + & {
+        padding-block-start: 0.25rem;
+    }
+}
+
+// ── Section header — subtle label button ────────────────────
+.fd-docs-nav__header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 2.5rem;
+    padding: 0 0.75rem;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: background-color 150ms ease;
 
     &:hover {
-        background-color: #fafafa;
-        color: #085caf;
+        background: color-mix(in srgb, var(--sapList_Hover_Background) 70%, var(--sapGroup_ContentBorderColor));
     }
 
-    &:focus {
-        background-color: #fafafa;
-        color: #085caf;
-        text-decoration: none;
+    &:focus-visible {
+        outline: var(--sapContent_FocusWidth) var(--sapContent_FocusStyle) var(--sapContent_FocusColor);
+        outline-offset: -0.0625rem;
+    }
+
+    &:active {
+        background: color-mix(in srgb, var(--sapList_Active_Background) 80%, var(--sapGroup_ContentBorderColor));
+    }
+
+    // Visual cue when section contains the active item
+    &--has-active {
+        .fd-docs-nav__header-label {
+            color: var(--sapBrandColor);
+        }
+
+        // Brand-color dot indicator next to chevron
+        &::after {
+            content: '';
+            flex-shrink: 0;
+            width: 0.375rem;
+            height: 0.375rem;
+            margin-inline-start: 0.375rem;
+            border-radius: 50%;
+            background: var(--sapBrandColor);
+            transition: opacity 200ms ease;
+        }
     }
 }
 
-.nav-item--active {
-    color: #424e5a;
-    box-shadow: inset 6px 0 0 0 #61dafb;
-    cursor: pointer;
-    background-color: #fff;
+.fd-docs-nav__header-label {
+    flex: 1;
+    font-family: var(--sapFontFamily);
+    font-size: var(--sapFontLargeSize);
     font-weight: 700;
+    color: var(--sapTitleColor);
+    text-align: start;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.side-nav__headers {
-    color: #424e5a;
-    padding: 15px 20px;
-    display: block;
-    font-size: 1.25rem;
-    font-weight: bold;
-}
+.fd-docs-nav__header-chevron {
+    flex-shrink: 0;
+    font-size: var(--sapFontSize);
+    color: var(--sapContent_NonInteractiveIconColor);
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
-.content {
-    flex-grow: 1;
-    overflow-y: scroll;
-    padding-bottom: 2rem;
-    background-color: #ffffff;
-    padding-top: 52px;
-
-    &:focus {
-        outline: none;
+    &--open {
+        transform: rotate(180deg);
     }
 }
 
-.content-margin {
-    padding: 12px 40px 80px 60px;
-    width: 80%;
-    outline: 0;
-    transition: 0.5s padding ease-in-out;
-}
+// ── Animated expand/collapse via grid ───────────────────────
+.fd-docs-nav__items {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
-.fd-docs-search {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--sapList_Background);
-}
-
-.nav-item-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
-}
-
-.collapsed-overlay {
-    background-color: black;
-    opacity: 0;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: 5;
-    transition: 0.3s opacity ease-in-out;
-    visibility: hidden;
-
-    @media screen and (min-width: 992px) {
-        display: none;
-        width: 0;
-        height: 0;
+    > .fd-docs-nav__list {
         overflow: hidden;
     }
+
+    &--open {
+        grid-template-rows: 1fr;
+    }
 }
 
-.overlay-init {
-    opacity: 0.7;
-    visibility: visible;
+// ── Item list ───────────────────────────────────────────────
+.fd-docs-nav__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
-.sidebar-collapsed {
-    margin-left: -265px;
+// ── Nav item ────────────────────────────────────────────────
+.fd-docs-nav__item {
+    display: flex;
+    align-items: center;
+    position: relative;
+    height: 2.25rem;
+    padding-block: 0;
+    padding-inline: 1.5rem 0.75rem;
+    margin: 0.0625rem 0.5rem;
+    border-radius: 0.375rem;
+    font-family: var(--sapFontFamily);
+    font-size: var(--sapFontLargeSize);
+    color: var(--sapTextColor);
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    transition: background-color 150ms ease;
+
+    &:hover {
+        background: color-mix(in srgb, var(--sapList_Hover_Background) 70%, var(--sapGroup_ContentBorderColor));
+        color: var(--sapList_Active_TextColor);
+    }
+
+    &:focus-visible {
+        outline: var(--sapContent_FocusWidth) var(--sapContent_FocusStyle) var(--sapContent_FocusColor);
+        outline-offset: -0.0625rem;
+    }
+
+    // ── Selected state — brand-color left accent bar ────────
+    &--selected {
+        background: color-mix(in srgb, var(--sapSelectedColor) 12%, var(--sapGroup_ContentBackground));
+        color: var(--sapBrandColor);
+        font-weight: 600;
+
+        &::before {
+            content: '';
+            position: absolute;
+            inset-inline-start: 0;
+            inset-block-start: 0.375rem;
+            inset-block-end: 0.375rem;
+            width: 0.1875rem;
+            border-radius: 0.125rem;
+            background: var(--sapBrandColor);
+        }
+
+        &:hover {
+            background: color-mix(in srgb, var(--sapSelectedColor) 18%, var(--sapGroup_ContentBackground));
+            color: var(--sapBrandColor);
+        }
+    }
+}
+
+// ── Sub-group label ─────────────────────────────────────────
+.fd-docs-nav__subgroup-label {
+    display: flex;
+    align-items: center;
+    height: 2rem;
+    padding-block: 0;
+    padding-inline: 1.5rem 0.75rem;
+    font-family: var(--sapFontFamily);
+    font-size: var(--sapFontSize);
+    font-weight: 600;
+    color: var(--sapContent_LabelColor);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+// Sub-group items — slightly more indented
+.fd-docs-nav__subgroup {
+    .fd-docs-nav__item {
+        padding-inline-start: 2.25rem;
+    }
+}
+
+// =============================================================================
+// Sidebar states & responsive
+// =============================================================================
+
+.fd-docs-sidebar--collapsed {
+    margin-inline-start: -18.5rem;
     box-shadow: none !important;
 }
 
-.fd-sidebar-container {
-    overflow: hidden;
-}
-
-.skip-navigation {
+.fd-docs-skip-navigation {
     position: absolute;
-    left: -5000px;
-    top: 0;
+    inset-inline-start: -5000px;
+    inset-block-start: 0;
     width: 1px;
     height: 1px;
     overflow: hidden;
 }
 
 @media (max-width: 992px) {
-    .sidebar {
+    .fd-docs-sidebar {
         position: absolute;
-        box-shadow: 2px 0 50px 0 #292929;
+        box-shadow: 0.125rem 0 3.125rem 0 rgba(0, 0, 0, 0.7);
         height: auto;
-        top: 0;
-        bottom: 0;
-        left: 0;
+        inset-block-start: 0;
+        inset-block-end: 0;
+        inset-inline-start: 0;
     }
-
-    .content-margin {
-        padding: 10px 60px;
-        width: 100%;
-    }
-}
-
-@media (max-width: 768px) {
-    .content-margin {
-        padding: 10px 40px;
-    }
-}
-
-@media (max-width: 576px) {
-    .content-margin {
-        padding: 10px 20px;
-    }
-}
-
-.section-toolbar--theme-selector {
-    margin-bottom: 20px;
-    display: block;
 }

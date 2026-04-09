@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { AfterViewInit, Component, inject } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { BarComponent, BarRightDirective } from '@fundamental-ngx/core/bar';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { DialogFooterBase } from '@fundamental-ngx/core/dialog';
@@ -22,6 +22,7 @@ export const MessageBoxButtonClass = 'fd-message-box__decisive-button';
 @Component({
     selector: 'fd-message-box-footer',
     templateUrl: './message-box-footer.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [BarComponent, ContentDensityDirective, NgTemplateOutlet, BarRightDirective]
 })
 export class MessageBoxFooterComponent extends DialogFooterBase implements AfterViewInit {

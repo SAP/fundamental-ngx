@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { DescriptionComponent, HeaderComponent, HeaderTabsComponent } from '@fundamental-ngx/docs/shared';
 
 @Component({
-    selector: 'fd-rtl-service-header',
+    selector: 'fd-docs-cdk-rtl-service-header',
     templateUrl: './rtl-service-header.component.html',
     imports: [HeaderComponent, RouterOutlet, DescriptionComponent, HeaderTabsComponent]
 })

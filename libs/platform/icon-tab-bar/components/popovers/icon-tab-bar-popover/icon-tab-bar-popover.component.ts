@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, ElementRef, Input, QueryList, ViewChildren } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, QueryList, ViewChildren } from '@angular/core';
 import { AsyncOrSyncPipe } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { IconComponent } from '@fundamental-ngx/core/icon';
@@ -10,6 +10,7 @@ import { IconTabBarPopoverBase } from '../icon-tab-bar-popover-base.class';
 @Component({
     selector: 'fdp-icon-tab-bar-popover',
     templateUrl: './icon-tab-bar-popover.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
         PopoverComponent,
         PopoverControlComponent,

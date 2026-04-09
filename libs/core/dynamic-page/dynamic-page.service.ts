@@ -22,10 +22,20 @@ export class DynamicPageService {
     /**
      * Computed responsive size based on pixel width or manual override.
      * Returns 'small', 'medium', 'large', or 'extra-large'.
+     * Defaults to 'large' when pixel width hasn't been measured yet (0).
      */
-    readonly responsiveSize = computed<DynamicPageResponsiveSize>(
-        () => this.manualSizeOverride() ?? dynamicPageWidthToSize(this.pixelsSizeChanged())
-    );
+    readonly responsiveSize = computed<DynamicPageResponsiveSize>(() => {
+        const manualOverride = this.manualSizeOverride();
+        if (manualOverride) {
+            return manualOverride;
+        }
+        const width = this.pixelsSizeChanged();
+        // Don't compute size as 'small' before the page width has been measured
+        if (width === 0) {
+            return 'large';
+        }
+        return dynamicPageWidthToSize(width);
+    });
 
     /** @hidden */
     toggleCollapsed(): void {

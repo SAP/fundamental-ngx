@@ -12,6 +12,7 @@ import {
 import { PlatformI18nTranslationCustomizationExampleComponent } from './examples/i18n-translation-customization-example/i18n-translation-customization-example.component';
 
 @Component({
+    selector: 'fd-docs-i18n-patching-translations',
     templateUrl: './patching-translations-docs.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [

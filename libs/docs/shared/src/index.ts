@@ -17,6 +17,7 @@ export * from './lib/core-helpers/sections-toolbar/section.interface';
 export * from './lib/core-helpers/sections-toolbar/sections-toolbar.component';
 export * from './lib/core-helpers/seperator/seperator.component';
 export * from './lib/core-helpers/stackblitz/stackblitz.service';
+export * from './lib/core-helpers/table-of-contents/table-of-contents.component';
 export * from './lib/core-helpers/toolbar/toolbar.component';
 export * from './lib/documentation-base.component';
 export * from './lib/getAsset';

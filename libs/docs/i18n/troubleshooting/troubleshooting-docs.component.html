@@ -1,4 +1,6 @@
-<fd-docs-section-title id="overview" componentName="i18n"> Common Issues and Solutions </fd-docs-section-title>
+<fd-docs-section-title id="overview" componentName="troubleshooting">
+    Common Issues and Solutions
+</fd-docs-section-title>
 <description>
     <p>
         This section covers common problems you might encounter when implementing i18n in your application, along with
@@ -9,7 +11,7 @@
 <separator></separator>
 
 <!-- Issue 1: Translations Don't Update -->
-<fd-docs-section-title id="not-updating" componentName="i18n">
+<fd-docs-section-title id="not-updating" componentName="troubleshooting">
     🔴 Problem: Translations don't update when I change the language
 </fd-docs-section-title>
 <description>
@@ -89,7 +91,7 @@ export const appConfig: ApplicationConfig = {{ '{' }}{{ '{' }}
 <separator></separator>
 
 <!-- Issue 2: Seeing English Instead of Target Language -->
-<fd-docs-section-title id="wrong-language" componentName="i18n">
+<fd-docs-section-title id="wrong-language" componentName="troubleshooting">
     🔴 Problem: I see English text instead of my target language
 </fd-docs-section-title>
 <description>
@@ -147,7 +149,7 @@ const MY_CUSTOM_LANGUAGE: FdLanguage = {{ '{' }}{{ '{' }}
 <separator></separator>
 
 <!-- Issue 3: Parameters Don't Work -->
-<fd-docs-section-title id="parameters-broken" componentName="i18n">
+<fd-docs-section-title id="parameters-broken" componentName="troubleshooting">
     🔴 Problem: Parameters in translations don't work (showing {{ '{' }}paramName{{ '}' }} literally)
 </fd-docs-section-title>
 <description>
@@ -227,7 +229,7 @@ const message = resolveTranslationSignal('myApp.items', {{ '{' }} count: 5 {{ '}
 <separator></separator>
 
 <!-- Issue 4: TypeScript Errors -->
-<fd-docs-section-title id="typescript-errors" componentName="i18n">
+<fd-docs-section-title id="typescript-errors" componentName="troubleshooting">
     🔴 Problem: TypeScript errors with translation keys
 </fd-docs-section-title>
 <description>
@@ -282,7 +284,7 @@ resolveTranslationSignal(myKey);  // ✅ Works</code></pre>
 <separator></separator>
 
 <!-- Issue 5: Injection Context Errors -->
-<fd-docs-section-title id="injection-errors" componentName="i18n">
+<fd-docs-section-title id="injection-errors" componentName="troubleshooting">
     🔴 Problem: "inject() must be called from an injection context"
 </fd-docs-section-title>
 <description>
@@ -377,7 +379,7 @@ onClick() {{ '{' }}{{ '{' }}
 <separator></separator>
 
 <!-- Issue 6: Performance Issues -->
-<fd-docs-section-title id="performance" componentName="i18n">
+<fd-docs-section-title id="performance" componentName="troubleshooting">
     🟡 Problem: Performance issues with translations
 </fd-docs-section-title>
 <description>
@@ -436,7 +438,9 @@ readonly label = resolveTranslationSignal('myApp.label');
 <separator></separator>
 
 <!-- Quick Checklist -->
-<fd-docs-section-title id="checklist" componentName="i18n"> ✅ Quick Troubleshooting Checklist </fd-docs-section-title>
+<fd-docs-section-title id="checklist" componentName="troubleshooting">
+    ✅ Quick Troubleshooting Checklist
+</fd-docs-section-title>
 <description>
     <p>Use this checklist to quickly diagnose common i18n issues:</p>
 

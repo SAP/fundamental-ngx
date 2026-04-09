@@ -7,6 +7,7 @@ import {
     DocumentationBaseComponent,
     SectionInterface,
     SectionsToolbarComponent,
+    TableOfContentsComponent,
     ToolbarDocsComponent
 } from '@fundamental-ngx/docs/shared';
 import { filter, map, startWith } from 'rxjs';
@@ -19,7 +20,14 @@ import { filter, map, startWith } from 'rxjs';
 @Component({
     selector: 'fd-unified-docs-shell',
     templateUrl: './unified-docs-shell-page.component.html',
-    imports: [DocumentationBaseComponent, ToolbarDocsComponent, SectionsToolbarComponent, RouterOutlet, CdkScrollable]
+    imports: [
+        DocumentationBaseComponent,
+        ToolbarDocsComponent,
+        SectionsToolbarComponent,
+        RouterOutlet,
+        CdkScrollable,
+        TableOfContentsComponent
+    ]
 })
 export class UnifiedDocsShellPageComponent {
     /** Unified sections from all registered packages */
