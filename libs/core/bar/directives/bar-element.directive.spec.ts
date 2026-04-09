@@ -1,11 +1,10 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { BarModule } from '../bar.module';
+import { BarElementDirective } from './bar-element.directive';
 
 @Component({
     template: ` <fd-bar-element #directiveElement [fullWidth]="fullWidth"> Bar Element Test </fd-bar-element> `,
-    standalone: true,
-    imports: [BarModule]
+    imports: [BarElementDirective]
 })
 class TestComponent {
     @ViewChild('directiveElement')
