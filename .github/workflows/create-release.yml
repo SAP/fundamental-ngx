@@ -227,6 +227,7 @@ jobs:
     gh_pages:
         name: Github Pages deploy
         runs-on: ubuntu-latest
+        permissions: {}
         needs: create_release
         if: ${{ needs.create_release.outputs.npmTag == 'latest' }}
         steps:
@@ -256,6 +257,7 @@ jobs:
         needs: create_release
         name: Nx Cloud - Stop Agents
         runs-on: ubuntu-latest
+        permissions: {}
         steps:
             - uses: actions/checkout@v4.2.2
               with:
