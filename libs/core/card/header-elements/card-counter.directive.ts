@@ -1,4 +1,4 @@
-import { Directive, ElementRef, computed, input } from '@angular/core';
+import { Directive, ElementRef, computed, inject, input } from '@angular/core';
 
 import { OBJECT_STATUS_CLASS_NAME, ObjectStatus } from '@fundamental-ngx/core/object-status';
 
@@ -23,7 +23,7 @@ let cardCounterId = 0;
     ]
 })
 export class CardCounterDirective implements HasElementRef {
-    /** Card title id, it has some default value if not set,  */
+    /** Card counter id, it has some default value if not set,  */
     id = input('fd-card-counter-id-' + cardCounterId++);
 
     /**
@@ -33,11 +33,11 @@ export class CardCounterDirective implements HasElementRef {
     readonly statusInput = input<ObjectStatus>('neutral');
 
     /** @hidden */
+    readonly elementRef = inject(ElementRef);
+
+    /** @hidden */
     protected readonly _cssClass = computed(() => {
         const statusClass = this.statusInput() ? `fd-object-status--${this.statusInput()}` : '';
         return [CLASS_NAME.cardCounter, OBJECT_STATUS_CLASS_NAME, statusClass].filter(Boolean).join(' ');
     });
-
-    /** @hidden */
-    constructor(public readonly elementRef: ElementRef<HTMLElement>) {}
 }

@@ -4,7 +4,6 @@ import {
     DestroyRef,
     Directive,
     EventEmitter,
-    HostListener,
     OnDestroy,
     OnInit,
     Output,
@@ -30,11 +29,11 @@ import { FD_CARD } from '../token';
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-card-list]',
-    standalone: true,
     host: {
         role: 'list',
         '[attr.aria-roledescription]': 'ariaRoleDescription()',
-        '[attr.aria-label]': 'ariaLabel()'
+        '[attr.aria-label]': 'ariaLabel()',
+        '(keydown)': 'keyDownHandler($event)'
     },
     providers: [KeyboardSupportService]
 })
@@ -91,7 +90,6 @@ export class CardListDirective implements OnInit, AfterContentInit, OnDestroy {
     constructor(private _keyboardSupportService: KeyboardSupportService<CardFocusItem>) {}
 
     /** @hidden */
-    @HostListener('keydown', ['$event'])
     keyDownHandler(event: KeyboardEvent): void {
         if (this.keyboardSupport()) {
             this._keyboardSupportService.onKeyDown(event);

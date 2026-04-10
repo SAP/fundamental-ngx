@@ -2,7 +2,6 @@ import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
-    HostListener,
     ViewEncapsulation,
     computed,
     contentChild,
@@ -19,10 +18,18 @@ import { FdTranslatePipe, resolveTranslationSignal } from '@fundamental-ngx/i18n
 import { CardFocusItem } from './card-focus-item.model';
 import { CardType } from './constants';
 import { CardCounterDirective } from './header-elements/card-counter.directive';
+import { CardSecondSubtitleDirective } from './header-elements/card-second-subtitle.directive';
 import { CardSubtitleDirective } from './header-elements/card-subtitle.directive';
 import { CardTitleDirective } from './header-elements/card-title.directive';
 import { CardMediaHeadingDirective } from './media/card-media-heading.directive';
-import { FD_CARD, FD_CARD_COUNTER, FD_CARD_MEDIA_HEADING, FD_CARD_SUBTITLE, FD_CARD_TITLE } from './token';
+import {
+    FD_CARD,
+    FD_CARD_COUNTER,
+    FD_CARD_MEDIA_HEADING,
+    FD_CARD_SECOND_SUBTITLE,
+    FD_CARD_SUBTITLE,
+    FD_CARD_TITLE
+} from './token';
 
 let cardId = 0;
 
@@ -54,7 +61,8 @@ let cardId = 0;
         '[attr.aria-selected]': 'selected()',
         '[tabindex]': 'role() === "listitem" ? 0 : -1',
         '[attr.aria-posinset]': 'role() === "listitem" ? ariaPosinset() : null',
-        '[attr.aria-setsize]': 'role() === "listitem" ? ariaSetsize() : null'
+        '[attr.aria-setsize]': 'role() === "listitem" ? ariaSetsize() : null',
+        '(keydown)': 'keydownHandler($event)'
     }
 })
 export class CardComponent<T = any> extends CardFocusItem<T> implements HasElementRef {
@@ -63,6 +71,9 @@ export class CardComponent<T = any> extends CardFocusItem<T> implements HasEleme
 
     /** @hidden */
     cardSubtitle = contentChild<CardSubtitleDirective>(FD_CARD_SUBTITLE);
+
+    /** @hidden */
+    cardSecondSubtitle = contentChild<CardSecondSubtitleDirective>(FD_CARD_SECOND_SUBTITLE);
 
     /** @hidden */
     cardCounter = contentChild<CardCounterDirective>(FD_CARD_COUNTER);
@@ -212,20 +223,17 @@ export class CardComponent<T = any> extends CardFocusItem<T> implements HasEleme
      */
     ariaDescribedby = input<string | null | undefined>();
 
-    /**
-     * @hidden
-     * Implementation of KeyboardSupportItemInterface
-     */
-    readonly keyDown = output<KeyboardEvent>();
-
     /** @hidden */
     readonly contentDensityObserver = inject(ContentDensityObserver);
 
     /** @hidden */
     readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
-    /** @hidden */
-    class: string;
+    /**
+     * @hidden
+     * Implementation of KeyboardSupportItemInterface
+     */
+    readonly keyDown = output<KeyboardEvent>();
 
     /** @hidden Default translated aria description */
     protected readonly defaultAriaDescription = resolveTranslationSignal('coreCard.ariaDescription');
@@ -235,10 +243,10 @@ export class CardComponent<T = any> extends CardFocusItem<T> implements HasEleme
         () => this.ariaDescription() || this.defaultAriaDescription()
     );
 
-    /** @hidden ID for the visually hidden span announcing the card  description */
+    /** @hidden ID for the visually hidden span announcing the card description */
     protected readonly ariaDescriptionId = computed(() => `${this.id()}-description`);
 
-    /** @hidden ID for the visually hidden span announcing the card  role description */
+    /** @hidden ID for the visually hidden span announcing the card role description */
     protected readonly ariaRoleDescriptionId = computed(() => `${this.id()}-role-description`);
 
     /** @hidden Badge ID for first badge */
@@ -253,9 +261,14 @@ export class CardComponent<T = any> extends CardFocusItem<T> implements HasEleme
     protected readonly ariaDescribedbyComputed = computed(() => {
         const ids: string[] = [];
 
-        // Add subtitle ID if they exist
+        // Add subtitle ID if it exists
         if (this.cardSubtitle()) {
             ids.push(this.cardSubtitle()!.id());
+        }
+
+        // Add second subtitle ID if it exists
+        if (this.cardSecondSubtitle()) {
+            ids.push(this.cardSecondSubtitle()!.id());
         }
 
         // Add counter ID if it exists
@@ -303,13 +316,12 @@ export class CardComponent<T = any> extends CardFocusItem<T> implements HasEleme
         return classes;
     });
 
-    /** @hidden */
     constructor() {
         super();
+        this.contentDensityObserver.subscribe();
     }
 
     /** @hidden */
-    @HostListener('keydown', ['$event'])
     keydownHandler(event: KeyboardEvent): void {
         this.keyDown.emit(event);
     }

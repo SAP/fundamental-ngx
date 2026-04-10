@@ -3,7 +3,6 @@ import { Directive, booleanAttribute, computed, input } from '@angular/core';
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-card-media-content-container]',
-    standalone: true,
     host: {
         '[class]': 'cssClass()'
     }
@@ -13,7 +12,7 @@ export class CardMediaContentContainerDirective {
      * Whether the media content container is an overlay
      * Default value: false
      */
-    isOverlay = input(false, {
+    readonly isOverlay = input(false, {
         transform: booleanAttribute
     });
 
@@ -21,13 +20,13 @@ export class CardMediaContentContainerDirective {
      * Shell Category Colors
      * Available values: number from 1 to 16
      */
-    shellColor = input<number | null | undefined>();
+    readonly shellColor = input<number | null | undefined>();
 
     /**
      * Legend Background Colors
      * Available values: number from 1 to 20
      */
-    legendColor = input<number | null | undefined>();
+    readonly legendColor = input<number | null | undefined>();
 
     /** @hidden */
     protected readonly cssClass = computed(() => {

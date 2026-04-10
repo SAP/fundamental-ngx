@@ -2,6 +2,26 @@
 @import 'fundamental-styles/dist/card.css';
 @import 'fundamental-styles/dist/badge.css';
 
+// These are added because of the newly added spans for screen readers in the card header and content. The spans are added to announce the role and description of the card to assistive technologies. They change the way we target the card header and content for focus styles (first-child, last-child and only-child), so we need to add these styles to ensure the card header and content are still styled correctly when they receive focus. They won't be added to fund-styles as they are Angular specific.
+
+.fd-card__header:has(+ .fd-card__content) {
+    --fdCard_Focus_Outline_Radius: var(--fdCard_Border_Corner_Radius) var(--fdCard_Border_Corner_Radius) 0 0;
+}
+
+.fd-card__content + .fd-card__header {
+    --fdCard_Focus_Outline_Radius: 0 0 var(--fdCard_Border_Corner_Radius) var(--fdCard_Border_Corner_Radius);
+}
+
+.fd-card__header:has(.fd-card__header-extended) {
+    .fd-card__header-main-container {
+        --fdCard_Focus_Outline_Radius: var(--fdCard_Border_Corner_Radius) var(--fdCard_Border_Corner_Radius) 0 0;
+    }
+}
+
+.fd-card:not(:has(.fd-card__header, .fd-card__content, .fd-card__footer)) .fd-card__media {
+    --fdCard_Media_Border_Radius: 1rem;
+}
+
 .fd-card__sr-only {
     position: absolute;
     clip: rect(0 0 0 0);

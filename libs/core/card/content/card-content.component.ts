@@ -1,29 +1,15 @@
-import { ChangeDetectionStrategy, Component, ElementRef, OnInit } from '@angular/core';
-import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
-
-import { CLASS_NAME } from '../constants';
+import { ChangeDetectionStrategy, Component, ElementRef, inject } from '@angular/core';
+import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fd-card-content',
     template: '<ng-content></ng-content>',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true
+    host: {
+        class: 'fd-card__content'
+    }
 })
-export class CardContentComponent implements OnInit, CssClassBuilder {
+export class CardContentComponent implements HasElementRef {
     /** @hidden */
-    class: string;
-
-    /** @hidden */
-    constructor(public readonly elementRef: ElementRef<HTMLElement>) {}
-
-    /** @hidden */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return [CLASS_NAME.cardContent];
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
+    readonly elementRef = inject(ElementRef);
 }

@@ -1,28 +1,14 @@
-import { Directive, ElementRef, OnInit } from '@angular/core';
-import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
-
-import { CLASS_NAME } from '../constants';
+import { Directive, ElementRef, inject } from '@angular/core';
+import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-card-kpi-analytics-content]',
-    standalone: true
+    host: {
+        class: 'fd-card__analytics-content'
+    }
 })
-export class CardKpiAnalyticsContentDirective implements OnInit, CssClassBuilder {
+export class CardKpiAnalyticsContentDirective implements HasElementRef {
     /** @hidden */
-    class: string;
-
-    /** @hidden */
-    constructor(public readonly elementRef: ElementRef<HTMLElement>) {}
-
-    /** @hidden */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return [CLASS_NAME.cardAnalyticsContent];
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
+    readonly elementRef = inject(ElementRef);
 }

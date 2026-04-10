@@ -32,10 +32,10 @@ export class CardFooterComponent implements AfterViewInit {
     actionItems: CardFooterActionItemDirective[];
 
     /** @hidden */
-    private _destroyed$ = inject(DestroyRef);
+    private readonly _changeDetectorRef = inject(ChangeDetectorRef);
 
     /** @hidden */
-    constructor(private _changeDetectorRef: ChangeDetectorRef) {}
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     ngAfterViewInit(): void {
@@ -45,7 +45,7 @@ export class CardFooterComponent implements AfterViewInit {
                 map(() => this.cardActionItems.toArray()),
                 tap((items) => (this.actionItems = items)),
                 tap(() => this._changeDetectorRef.detectChanges()),
-                takeUntilDestroyed(this._destroyed$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe();
     }

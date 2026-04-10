@@ -4,7 +4,6 @@ import { ChangeDetectionStrategy, Component, booleanAttribute, computed, input }
     selector: 'fd-card-media',
     template: '<ng-content></ng-content>',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     host: {
         role: 'group',
         '[class]': 'cssClass()',
@@ -16,13 +15,13 @@ export class CardMediaComponent {
      * aria-roledescription for the container
      * default: 'Card Media Block'
      */
-    ariaRoleDescription = input('Card Media Block');
+    readonly ariaRoleDescription = input('Card Media Block');
 
     /**
      * Whether the media container comes with a 1rem padding
      * Default value: false
      */
-    hasPadding = input(false, {
+    readonly hasPadding = input(false, {
         transform: booleanAttribute
     });
 
@@ -30,13 +29,13 @@ export class CardMediaComponent {
      * Shell Category Colors
      * Available values: number from 1 to 16
      */
-    shellColor = input<number | null | undefined>();
+    readonly shellColor = input<number | null | undefined>();
 
     /**
      * Legend Background Colors
      * Available values: number from 1 to 20
      */
-    legendColor = input<number | null | undefined>();
+    readonly legendColor = input<number | null | undefined>();
 
     /** @hidden */
     protected readonly cssClass = computed(() => {

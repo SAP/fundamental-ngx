@@ -11,15 +11,33 @@ import { CardTitleDirective } from './header-elements/card-title.directive';
 
 @Component({
     template: `
-        <fd-card [cardType]="cardType" [interactive]="interactive" [role]="role" [ariaDescription]="ariaDescription">
+        <fd-card
+            [cardType]="cardType"
+            [interactive]="interactive"
+            [role]="role"
+            [ariaDescription]="ariaDescription"
+            [badge]="badge"
+            [badgeIcon]="badgeIcon"
+            [secondBadge]="secondBadge"
+            [ariaDescribedby]="ariaDescribedby"
+            [ariaRoledescription]="ariaRoledescription"
+        >
             <fd-card-header>
                 <h2 fd-card-title>{{ titleText }}</h2>
+                @if (showSubtitle) {
+                    <h3 fd-card-subtitle>{{ subtitleText }}</h3>
+                }
+                @if (showSecondSubtitle) {
+                    <h4 fd-card-second-subtitle>{{ secondSubtitleText }}</h4>
+                }
+                @if (showCounter) {
+                    <span fd-card-counter>{{ counterText }}</span>
+                }
             </fd-card-header>
             <fd-card-content>{{ contentText }}</fd-card-content>
             <fd-card-loader>{{ loaderText }}</fd-card-loader>
         </fd-card>
     `,
-    standalone: true,
     imports: [CardModule]
 })
 class CardHostTestComponent {
@@ -28,11 +46,22 @@ class CardHostTestComponent {
     titleText = 'Card Title';
     contentText = 'Card Content';
     loaderText = 'Loading...';
+    subtitleText = 'Card Subtitle';
+    secondSubtitleText = 'Card Second Subtitle';
+    counterText = '5';
 
     cardType: CardType = 'standard';
     interactive = false;
     role = 'region';
     ariaDescription: string | null | undefined;
+    ariaDescribedby: string | null | undefined;
+    ariaRoledescription: string | null | undefined;
+    badge: string | null | undefined;
+    badgeIcon: string | null | undefined;
+    secondBadge: string | null | undefined;
+    showSubtitle = false;
+    showSecondSubtitle = false;
+    showCounter = false;
 }
 
 describe('CardComponent', () => {
@@ -119,5 +148,76 @@ describe('CardComponent', () => {
         const srSpans = fixture.debugElement.queryAll(By.css('.fd-card__sr-only'));
         const descSpan = srSpans.find((el) => el.nativeElement.textContent.includes('Custom description'));
         expect(descSpan).toBeTruthy();
+    });
+
+    it('should include badge IDs in aria-describedby when badges are present', () => {
+        host.badge = 'New';
+        host.secondBadge = 'Featured';
+        fixture.detectChanges();
+        const cardEl: HTMLElement = fixture.debugElement.query(By.directive(CardComponent)).nativeElement;
+        const ariaDescribedby = cardEl.getAttribute('aria-describedby');
+        expect(ariaDescribedby).toBeTruthy();
+        expect(ariaDescribedby).toContain(`${host.card.id()}-badge`);
+        expect(ariaDescribedby).toContain(`${host.card.id()}-second-badge`);
+    });
+
+    it('should include subtitle ID in aria-describedby when subtitle is present', () => {
+        host.showSubtitle = true;
+        fixture.detectChanges();
+        const cardEl: HTMLElement = fixture.debugElement.query(By.directive(CardComponent)).nativeElement;
+        const ariaDescribedby = cardEl.getAttribute('aria-describedby');
+        expect(ariaDescribedby).toBeTruthy();
+        const subtitleId = host.card.cardSubtitle()?.id();
+        expect(subtitleId).toBeTruthy();
+        expect(ariaDescribedby).toContain(subtitleId!);
+    });
+
+    it('should include second subtitle ID in aria-describedby when second subtitle is present', () => {
+        host.showSecondSubtitle = true;
+        fixture.detectChanges();
+        const cardEl: HTMLElement = fixture.debugElement.query(By.directive(CardComponent)).nativeElement;
+        const ariaDescribedby = cardEl.getAttribute('aria-describedby');
+        expect(ariaDescribedby).toBeTruthy();
+        const secondSubtitleId = host.card.cardSecondSubtitle()?.id();
+        expect(secondSubtitleId).toBeTruthy();
+        expect(ariaDescribedby).toContain(secondSubtitleId!);
+    });
+
+    it('should include counter ID in aria-describedby when counter is present', () => {
+        host.showCounter = true;
+        fixture.detectChanges();
+        const cardEl: HTMLElement = fixture.debugElement.query(By.directive(CardComponent)).nativeElement;
+        const ariaDescribedby = cardEl.getAttribute('aria-describedby');
+        expect(ariaDescribedby).toBeTruthy();
+        const counterId = host.card.cardCounter()?.id();
+        expect(counterId).toBeTruthy();
+        expect(ariaDescribedby).toContain(counterId!);
+    });
+
+    it('should include additional ariaDescribedby input in aria-describedby attribute', () => {
+        host.ariaDescribedby = 'custom-id-1 custom-id-2';
+        fixture.detectChanges();
+        const cardEl: HTMLElement = fixture.debugElement.query(By.directive(CardComponent)).nativeElement;
+        const ariaDescribedby = cardEl.getAttribute('aria-describedby');
+        expect(ariaDescribedby).toBeTruthy();
+        expect(ariaDescribedby).toContain('custom-id-1 custom-id-2');
+    });
+
+    it('should use translated role description with interpolated card type', () => {
+        host.cardType = 'analytical';
+        fixture.detectChanges();
+        const srSpans = fixture.debugElement.queryAll(By.css('.fd-card__sr-only'));
+        const roleDescSpan = srSpans.find((el) => el.nativeElement.textContent.includes('Card'));
+        expect(roleDescSpan).toBeTruthy();
+        expect(roleDescSpan!.nativeElement.textContent).toContain('analytical Card');
+    });
+
+    it('should use custom ariaRoledescription when provided', () => {
+        host.ariaRoledescription = 'Custom Product Card';
+        fixture.detectChanges();
+        const srSpans = fixture.debugElement.queryAll(By.css('.fd-card__sr-only'));
+        const roleDescSpan = srSpans.find((el) => el.nativeElement.textContent.includes('Custom Product Card'));
+        expect(roleDescSpan).toBeTruthy();
+        expect(roleDescSpan!.nativeElement.textContent).toContain('Custom Product Card');
     });
 });

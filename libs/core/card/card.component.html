@@ -1,12 +1,10 @@
 @if (!isLoading()) {
     <!-- Screen Reader Elements -->
     @if (role() === 'listitem') {
-        <span class="fd-card__sr-only" [attr.id]="ariaDescriptionId()" aria-hidden="true">{{
-            resolvedAriaDescription()
-        }}</span>
+        <span class="fd-card__sr-only" [attr.id]="ariaDescriptionId()">{{ resolvedAriaDescription() }}</span>
     }
 
-    <span class="fd-card__sr-only" [attr.id]="ariaRoleDescriptionId()" aria-hidden="true">
+    <span class="fd-card__sr-only" [attr.id]="ariaRoleDescriptionId()">
         {{
             ariaRoledescription()
                 ? ariaRoledescription()
@@ -57,6 +55,6 @@
     <!-- Footer -->
     <ng-content select="fd-card-footer"></ng-content>
 } @else {
+    <!-- Loader -->
     <ng-content select="fd-card-loader"></ng-content>
 }
-<!-- Loader -->
