@@ -83,9 +83,8 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
             // Handle English locale name as it's a default one and it is different
             locale = 'en';
         }
-        dayjs.locale(locale);
 
-        if (dayjs.locale() !== locale) {
+        if (!dayjs.Ls[locale]) {
             console.warn(
                 `Failed to load locale ${locale}. Falling back to 'en'. ` +
                     'Make sure it exists and is preloaded. See the imports at the top of the example file at ' +
@@ -93,10 +92,10 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
                     'List of supported locales can be found here: https://github.com/iamkun/dayjs/tree/dev/src/locale.'
             );
             locale = 'en';
-            dayjs.locale(locale);
         }
 
-        this._dayjsLocaleData = dayjs.localeData();
+        // Use a temporary instance to read locale data without mutating global dayjs state.
+        this._dayjsLocaleData = dayjs().locale(locale).localeData();
 
         this._localeData = {
             firstDayOfWeek: this._dayjsLocaleData.firstDayOfWeek(),
@@ -294,7 +293,7 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
             throw Error('DayjsDatetimeAdapter: Cannot format invalid date.');
         }
 
-        return date.locale(dayjs.locale()).format(displayFormat);
+        return date.locale(this.locale()).format(displayFormat);
     }
 
     /** Create date object from values */
@@ -430,7 +429,7 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
     private _prepareFormat(displayFormat: string): string {
         displayFormat = displayFormat.trim();
         try {
-            const formats: object = dayjs.Ls[dayjs.locale()].formats;
+            const formats: object = dayjs.Ls[this.locale()].formats;
             // this is the regular expression to parse format taken from dayjs repo
             // https://github.com/iamkun/dayjs/blob/dev/src/plugin/localizedFormat/utils.js
             return displayFormat.replace(
@@ -448,11 +447,14 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
         const method = useUtc ? dayjs.utc : dayjs;
 
         if (typeof date === 'string' && format) {
+            // Expand localized format tokens (e.g. 'L', 'LT') using the instance
+            // locale so that parsing does not depend on the global dayjs locale.
+            const expandedFormat = this._prepareFormat(format);
+
             const rawFormats: string[] = [
-                format, // original
-                format.replace(/ ?[Hh]{1,2}:?mm(?::?ss)?(?: ?[aA])?/, '').trim(), // remove time
-                'L',
-                dayjs.Ls[dayjs.locale()]?.formats?.['L'],
+                expandedFormat, // original (expanded)
+                expandedFormat.replace(/ ?[Hh]{1,2}:?mm(?::?ss)?(?: ?[aA])?/, '').trim(), // remove time
+                dayjs.Ls[this.locale()]?.formats?.['L'],
                 'YYYY-MM-DD'
             ].filter((f): f is string => !!f);
 

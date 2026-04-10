@@ -1,5 +1,5 @@
 import { Platform } from '@angular/cdk/platform';
-import { LOCALE_ID } from '@angular/core';
+import { Injector, LOCALE_ID } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import dayjs from 'dayjs';
 
@@ -1314,5 +1314,100 @@ describe('DayjsDatetimeAdapter with useUtc: true', () => {
         expect(created.date()).toBe(1);
         expect(created.hour()).toBe(0);
         expect(created.minute()).toBe(0);
+    });
+});
+
+describe('DayjsDatetimeAdapter locale isolation', () => {
+    let adapterA: DayjsDatetimeAdapter;
+    let adapterB: DayjsDatetimeAdapter;
+
+    beforeEach(() => {
+        // Reset global dayjs locale to a known state before each test
+        dayjs.locale('en');
+
+        TestBed.configureTestingModule({
+            providers: [provideDayjsDatetimeAdapter()]
+        });
+
+        // Get the first adapter from the module-level injector
+        adapterA = TestBed.inject(DatetimeAdapter) as DayjsDatetimeAdapter;
+
+        // Create a second independent adapter via a child injector
+        const childInjector = Injector.create({
+            providers: [
+                { provide: DatetimeAdapter, useClass: DayjsDatetimeAdapter },
+                { provide: DATE_TIME_FORMATS, useValue: DAYJS_DATETIME_FORMATS },
+                { provide: LOCALE_ID, useValue: 'en' }
+            ],
+            parent: TestBed.inject(Injector)
+        });
+        adapterB = childInjector.get(DatetimeAdapter) as DayjsDatetimeAdapter;
+    });
+
+    afterEach(() => {
+        // Restore global dayjs locale after each test
+        dayjs.locale('en');
+    });
+
+    it('should not affect another adapter instance when locale is changed on one', () => {
+        // Both adapters start in English
+        const date = dayjs(new Date(2026, MAR, 12));
+
+        const formatBefore = adapterB.format(date, 'MMMM');
+        expect(formatBefore).toBe('March');
+
+        // Change adapter A to French — adapter B should be unaffected
+        adapterA.setLocale('fr');
+
+        const formatAfter = adapterB.format(date, 'MMMM');
+        expect(formatAfter).toBe('March');
+    });
+
+    it('should not mutate global dayjs locale when setLocale is called', () => {
+        expect(dayjs.locale()).toBe('en');
+
+        adapterA.setLocale('fr');
+
+        // The adapter's own locale should be French
+        expect(adapterA.locale()).toBe('fr');
+        // But the global dayjs locale should remain English
+        expect(dayjs.locale()).toBe('en');
+    });
+
+    it('should not affect another adapter instance getMonthNames when locale is changed on one', () => {
+        adapterA.setLocale('fr');
+
+        // Adapter B should still return English month names
+        expect(adapterB.getMonthNames('long')[0]).toBe('January');
+    });
+
+    it('should not affect another adapter instance getDayOfWeekNames when locale is changed on one', () => {
+        adapterA.setLocale('fr');
+
+        // Adapter B should still return English day names
+        expect(adapterB.getDayOfWeekNames('long')[0]).toBe('Sunday');
+    });
+
+    it('should share locale when two consumers use the same global adapter instance', () => {
+        // Simulate two components both injecting the same global adapter (no component-level providers).
+        // They both get adapterA from the TestBed (environment) injector.
+        const globalConsumer1 = adapterA;
+        const globalConsumer2 = TestBed.inject(DatetimeAdapter) as DayjsDatetimeAdapter;
+
+        // They should be the exact same instance
+        expect(globalConsumer1).toBe(globalConsumer2);
+
+        const date = dayjs(new Date(2026, MAR, 12));
+
+        // Change locale via one consumer — the other should see the change too
+        globalConsumer1.setLocale('fr');
+
+        expect(globalConsumer2.locale()).toBe('fr');
+        expect(globalConsumer2.format(date, 'MMMM')).toBe('mars');
+        expect(globalConsumer2.getMonthNames('long')[0]).toBe('janvier');
+
+        // The component-level adapter (adapterB) should remain unaffected
+        expect(adapterB.locale()).toBe('en');
+        expect(adapterB.format(date, 'MMMM')).toBe('March');
     });
 });
