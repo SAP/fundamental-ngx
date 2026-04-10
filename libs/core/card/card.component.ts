@@ -15,6 +15,7 @@ import {
 import { ColorAccent, HasElementRef } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { ObjectStatus, ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
+import { FdTranslatePipe, resolveTranslationSignal } from '@fundamental-ngx/i18n';
 import { CardFocusItem } from './card-focus-item.model';
 import { CardType } from './constants';
 import { CardCounterDirective } from './header-elements/card-counter.directive';
@@ -42,7 +43,7 @@ let cardId = 0;
             useExisting: forwardRef(() => CardComponent)
         }
     ],
-    imports: [ObjectStatusComponent],
+    imports: [ObjectStatusComponent, FdTranslatePipe],
     host: {
         '[class]': 'cssClass()',
         '[attr.id]': 'id()',
@@ -167,9 +168,9 @@ export class CardComponent<T = any> extends CardFocusItem<T> implements HasEleme
 
     /**
      * card aria-description
-     * default: 'Active, Press Enter to activate'
+     * Overrides the default translated aria description.
      */
-    ariaDescription = input('Active, Press Enter to activate');
+    ariaDescription = input<string | null | undefined>();
 
     /**
      * card aria-label
@@ -225,6 +226,14 @@ export class CardComponent<T = any> extends CardFocusItem<T> implements HasEleme
 
     /** @hidden */
     class: string;
+
+    /** @hidden Default translated aria description */
+    protected readonly defaultAriaDescription = resolveTranslationSignal('coreCard.ariaDescription');
+
+    /** @hidden Resolved aria description: input overrides translated default */
+    protected readonly resolvedAriaDescription = computed(
+        () => this.ariaDescription() || this.defaultAriaDescription()
+    );
 
     /** @hidden ID for the visually hidden span announcing the card  description */
     protected readonly ariaDescriptionId = computed(() => `${this.id()}-description`);

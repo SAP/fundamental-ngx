@@ -52,6 +52,10 @@ export default {
         yearSelectionLabel: 'Vælg år',
         yearsRangeSelectionLabel: 'Vælg årsinterval'
     },
+    coreCard: {
+        ariaDescription: 'Active, Press Enter to activate',
+        roleDescription: '{cardType} Card'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: 'Gå til forrige element',
         pageIndicatorLabel: 'Element {itemNum} af {totalNum} vist',

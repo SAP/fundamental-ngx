@@ -1,11 +1,17 @@
 @if (!isLoading()) {
     <!-- Screen Reader Elements -->
     @if (role() === 'listitem') {
-        <span class="fd-card__sr-only" [attr.id]="ariaDescriptionId()" aria-hidden="true">{{ ariaDescription() }}</span>
+        <span class="fd-card__sr-only" [attr.id]="ariaDescriptionId()" aria-hidden="true">{{
+            resolvedAriaDescription()
+        }}</span>
     }
 
     <span class="fd-card__sr-only" [attr.id]="ariaRoleDescriptionId()" aria-hidden="true">
-        {{ ariaRoledescription() ? ariaRoledescription() : `${cardType()} Card` }}</span
+        {{
+            ariaRoledescription()
+                ? ariaRoledescription()
+                : ('coreCard.roleDescription' | fdTranslate: { cardType: cardType() })()
+        }}</span
     >
 
     <!-- Badge -->
