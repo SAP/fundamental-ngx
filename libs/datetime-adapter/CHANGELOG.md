@@ -1,3 +1,7 @@
+## 0.62.0-rc.68 (2026-04-11)
+
+This was a version bump only for datetime-adapter to align it with other projects, there were no code changes.
+
 ## 0.59.1-rc.15 (2026-04-11)
 
 This was a version bump only for datetime-adapter to align it with other projects, there were no code changes.
