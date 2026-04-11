@@ -1,0 +1,21 @@
+{
+    "name": "@fundamental-ngx/mcp",
+    "version": "0.62.0-rc.67",
+    "description": "MCP server exposing Fundamental NGX component metadata for AI coding assistants",
+    "license": "Apache-2.0",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/SAP/fundamental-ngx.git"
+    },
+    "type": "commonjs",
+    "main": "./src/index.js",
+    "types": "./src/index.d.ts",
+    "bin": {
+        "fundamental-ngx-mcp": "./src/index.js"
+    },
+    "dependencies": {
+        "@modelcontextprotocol/sdk": "^1.12.1",
+        "tslib": "^2.3.0",
+        "zod": "^3.24.0"
+    }
+}
