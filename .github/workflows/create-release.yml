@@ -66,6 +66,14 @@ jobs:
                   name: ${{ secrets.GH_NAME }}
                   email: ${{ secrets.GH_EMAIL }}
 
+            # npm 11.5.0+ auto-detects OIDC in GitHub Actions and handles trusted publishing.
+            # The bundled npm 10.x doesn't support this, so we upgrade.
+            # We cannot run `npm install -g npm@latest` directly because npm 10.9.7
+            # crashes with MODULE_NOT_FOUND when replacing its own files mid-execution.
+            # Instead, we use npx to run a fresh copy of npm@latest for the upgrade.
+            - name: Upgrade npm for OIDC trusted publishing
+              run: npx --yes npm@latest install -g npm@latest
+
             - name: Update npm for trusted publishing
               run: npm install -g npm@latest
 
