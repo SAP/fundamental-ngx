@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { By } from '@angular/platform-browser';
-import { OverflowListDirective, OverflowListItemDirective } from '@fundamental-ngx/cdk/utils';
+import { OverflowListDirective } from '@fundamental-ngx/cdk/utils';
 import { IconTabBarComponent } from '../../icon-tab-bar.component';
 import { _generateTabBarItems, generateTestConfig } from '../../tests-helper';
 import { IconTabBarProcessTypeComponent } from './icon-tab-bar-process-type.component';
