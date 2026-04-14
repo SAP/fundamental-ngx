@@ -15,7 +15,7 @@
         fd-panel-content
         [id]="_panelContentComponent?.id"
         [height]="_panelContentComponent?.contentHeight || null"
-        [ariaLabelledBy]="_panelTitleDirective?.id || null"
+        [ariaLabelledBy]="_panelTitleDirective?.id() || null"
     >
         <ng-content select="fdp-panel-content"></ng-content>
     </div>
