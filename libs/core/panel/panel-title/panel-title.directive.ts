@@ -1,4 +1,4 @@
-import { Directive, HostBinding, Input } from '@angular/core';
+import { Directive, input } from '@angular/core';
 
 let panelTitleUniqueId = 0;
 
@@ -12,15 +12,12 @@ let panelTitleUniqueId = 0;
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-panel-title]',
-    standalone: true
+    host: {
+        class: 'fd-panel__title',
+        '[attr.id]': 'id()'
+    }
 })
 export class PanelTitleDirective {
-    /** @hidden */
-    @HostBinding('class.fd-panel__title')
-    readonly fdPanelTitleClass: boolean = true;
-
     /** Id of the host element. */
-    @Input()
-    @HostBinding('attr.id')
-    id: string = 'fd-panel-title-' + panelTitleUniqueId++;
+    readonly id = input('fd-panel-title-' + panelTitleUniqueId++);
 }

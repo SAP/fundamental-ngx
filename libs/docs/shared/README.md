@@ -1,7 +1,15 @@
-# shared
+# docs-shared
 
-This library was generated with [Nx](https://nx.dev).
+Shared components, services, and utilities used across the Fundamental NGX documentation app. Includes the documentation layout, example rendering, API tables, and common page infrastructure.
+
+## Building
+
+```bash
+nx build docs-shared
+```
 
 ## Running unit tests
 
-Run `nx test shared` to execute the unit tests.
+```bash
+nx test docs-shared
+```

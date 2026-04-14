@@ -10,4 +10,8 @@ import { TextComponent } from '@fundamental-ngx/core/text';
 })
 export class PanelExpandableExampleComponent {
     expanded = true;
+
+    expandedChanged(expanded: boolean): void {
+        console.log(`Panel expanded: ${expanded}`);
+    }
 }
