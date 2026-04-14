@@ -1,22 +1,22 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    ElementRef,
-    ViewEncapsulation,
     computed,
     contentChild,
+    ElementRef,
     forwardRef,
     inject,
     input,
     model,
-    output
+    output,
+    ViewEncapsulation
 } from '@angular/core';
 import { ColorAccent, HasElementRef } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { ObjectStatus, ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { FdTranslatePipe, resolveTranslationSignal } from '@fundamental-ngx/i18n';
 import { CardFocusItem } from './card-focus-item.model';
-import { CardType } from './constants';
+import { CardType, CLASS_NAME } from './constants';
 import { CardCounterDirective } from './header-elements/card-counter.directive';
 import { CardSecondSubtitleDirective } from './header-elements/card-second-subtitle.directive';
 import { CardSubtitleDirective } from './header-elements/card-subtitle.directive';
@@ -67,95 +67,95 @@ let cardId = 0;
 })
 export class CardComponent<T = any> extends CardFocusItem<T> implements HasElementRef {
     /** @hidden */
-    cardTitle = contentChild<CardTitleDirective>(FD_CARD_TITLE);
+    readonly cardTitle = contentChild<CardTitleDirective>(FD_CARD_TITLE);
 
     /** @hidden */
-    cardSubtitle = contentChild<CardSubtitleDirective>(FD_CARD_SUBTITLE);
+    readonly cardSubtitle = contentChild<CardSubtitleDirective>(FD_CARD_SUBTITLE);
 
     /** @hidden */
-    cardSecondSubtitle = contentChild<CardSecondSubtitleDirective>(FD_CARD_SECOND_SUBTITLE);
+    readonly cardSecondSubtitle = contentChild<CardSecondSubtitleDirective>(FD_CARD_SECOND_SUBTITLE);
 
     /** @hidden */
-    cardCounter = contentChild<CardCounterDirective>(FD_CARD_COUNTER);
+    readonly cardCounter = contentChild<CardCounterDirective>(FD_CARD_COUNTER);
 
     /** @hidden */
-    cardMediaHeading = contentChild<CardMediaHeadingDirective>(FD_CARD_MEDIA_HEADING);
+    readonly cardMediaHeading = contentChild<CardMediaHeadingDirective>(FD_CARD_MEDIA_HEADING);
 
     /**
      * text for the card badge
      */
-    badge = input<string | null | undefined>();
+    readonly badge = input<string | null | undefined>();
 
     /**
      * icon/glyph for the card badge
      */
-    badgeIcon = input<string | null | undefined>();
+    readonly badgeIcon = input<string | null | undefined>();
 
     /**
      * Indication color for the card badge
      * Possible values: integers from 1 to 10
      */
-    badgeColor = input<ColorAccent | null | undefined>();
+    readonly badgeColor = input<ColorAccent | null | undefined>();
 
     /**
      * Whether to use secondary set of indication colors for the card badge
      * Default value: false
      */
-    badgeColorSecondary = input<boolean>(false);
+    readonly badgeColorSecondary = input<boolean>(false);
 
     /**
      * Color status for the card badge
      * Possible values: 'negative' | 'critical' | 'positive' | 'informative' | 'neutral'
      * Default value: null
      */
-    badgeStatus = input<ObjectStatus | null | undefined>();
+    readonly badgeStatus = input<ObjectStatus | null | undefined>();
 
     /**
      * aria-label for the card badge
      * Default value: null
      */
-    badgeAriaLabel = input<string | null | undefined>();
+    readonly badgeAriaLabel = input<string | null | undefined>();
 
     /**
      * text for the card second badge
      */
-    secondBadge = input<string | null | undefined>();
+    readonly secondBadge = input<string | null | undefined>();
 
     /**
      * icon/glyph for the card second badge
      */
-    secondBadgeIcon = input<string | null | undefined>();
+    readonly secondBadgeIcon = input<string | null | undefined>();
 
     /**
      * Indication color for the card second badge
      * Possible values: integers from 1 to 10
      */
-    secondBadgeColor = input<ColorAccent | null | undefined>();
+    readonly secondBadgeColor = input<ColorAccent | null | undefined>();
 
     /**
      * Whether to use secondary set of indication colors for the card second badge
      * Default value: false
      */
-    secondBadgeColorSecondary = input<boolean>(false);
+    readonly secondBadgeColorSecondary = input<boolean>(false);
 
     /**
      * Color status for the card second badge
      * Possible values: 'negative' | 'critical' | 'positive' | 'informative' | 'neutral'
      * Default value: null
      */
-    secondBadgeStatus = input<ObjectStatus | null | undefined>();
+    readonly secondBadgeStatus = input<ObjectStatus | null | undefined>();
 
     /**
      * aria-label for the card second badge
      * Default value: null
      */
-    secondBadgeAriaLabel = input<string | null | undefined>();
+    readonly secondBadgeAriaLabel = input<string | null | undefined>();
 
     /**
      * whether the card is in loading state
      * default: false
      */
-    isLoading = input(false);
+    readonly isLoading = input(false);
 
     /**
      * set the Card type
@@ -163,65 +163,65 @@ export class CardComponent<T = any> extends CardFocusItem<T> implements HasEleme
      * default: 'standard'
      *
      */
-    cardType = input<CardType>('standard');
+    readonly cardType = input<CardType>('standard');
 
     /**
      * card id
      * if not set, a default value is provided
      */
-    id = input('fd-card-id-' + cardId++);
+    readonly id = input('fd-card-id-' + cardId++);
 
     /**
      * card aria-roledescription
      * default: 'Card'
      */
-    ariaRoledescription = input<string | null | undefined>();
+    readonly ariaRoledescription = input<string | null | undefined>();
 
     /**
      * card aria-description
      * Overrides the default translated aria description.
      */
-    ariaDescription = input<string | null | undefined>();
+    readonly ariaDescription = input<string | null | undefined>();
 
     /**
      * card aria-label
      * used when there's no title describing the card
      */
-    ariaLabel = input<string | null | undefined>();
+    readonly ariaLabel = input<string | null | undefined>();
 
     /**
      * card role
      * default: 'region'
      */
-    role = input('region');
+    readonly role = input('region');
 
     /**
      * whether the card is interactive
      * default: false
      */
-    interactive = input(false);
+    readonly interactive = input(false);
 
     /**
      * whether the card is selected
      * default: false
      */
-    selected = input(false);
+    readonly selected = input(false);
 
     /**
      * value for aria-posinset
      */
-    ariaPosinset = model<number | null | undefined>();
+    readonly ariaPosinset = model<number | null | undefined>();
 
     /**
      * value for aria-setsize
      */
-    ariaSetsize = model<number | null | undefined>();
+    readonly ariaSetsize = model<number | null | undefined>();
 
     /**
      * Additional IDs to include in aria-describedby attribute
      * Can be used to reference additional descriptive content
      */
-    ariaDescribedby = input<string | null | undefined>();
+    readonly ariaDescribedby = input<string | null | undefined>();
 
     /** @hidden */
     readonly contentDensityObserver = inject(ContentDensityObserver);
@@ -302,15 +302,15 @@ export class CardComponent<T = any> extends CardFocusItem<T> implements HasEleme
     });
 
     protected readonly cssClass = computed(() => {
-        let classes = 'fd-card';
+        let classes = CLASS_NAME.card;
         const cardType = this.cardType();
 
         if (cardType) {
-            classes += ` fd-card--${cardType}`;
+            classes += ` ${CLASS_NAME.card}--${cardType}`;
         }
 
         if (this.interactive()) {
-            classes += ' fd-card--interactive';
+            classes += ` ${CLASS_NAME.card}--interactive`;
         }
 
         return classes;

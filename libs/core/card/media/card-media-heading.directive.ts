@@ -1,5 +1,6 @@
 import { Directive, input } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { CLASS_NAME } from '../constants';
 import { FD_CARD_MEDIA_HEADING } from '../token';
 
 let cardMediaHeadingId = 0;
@@ -15,7 +16,7 @@ let cardMediaHeadingId = 0;
     ],
     host: {
         role: 'group',
-        class: 'fd-card__media-heading',
+        class: CLASS_NAME.cardMediaHeading,
         '[attr.aria-level]': 'level()',
         '[attr.id]': 'id()'
     }

@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, booleanAttribute, computed, input } from '@angular/core';
+import { CLASS_NAME } from '../constants';
 
 @Component({
     selector: 'fd-card-media',
@@ -39,17 +40,17 @@ export class CardMediaComponent {
 
     /** @hidden */
     protected readonly cssClass = computed(() => {
-        let classes = 'fd-card__media';
+        let classes = CLASS_NAME.cardMedia;
         if (this.hasPadding()) {
-            classes += ' fd-card__media--with-padding';
+            classes += ` ${CLASS_NAME.cardMediaWithPadding}`;
         }
         const shell = this.shellColor();
         if (shell) {
-            classes += ` fd-card__media--bg-shell-${shell}`;
+            classes += ` ${CLASS_NAME.cardMedia}--bg-shell-${shell}`;
         }
         const legend = this.legendColor();
         if (legend) {
-            classes += ` fd-card__media--bg-legend-${legend}`;
+            classes += ` ${CLASS_NAME.cardMedia}--bg-legend-${legend}`;
         }
         return classes;
     });

@@ -10,6 +10,7 @@ import {
     QueryList,
     computed,
     contentChildren,
+    effect,
     inject,
     input
 } from '@angular/core';
@@ -84,10 +85,18 @@ export class CardListDirective implements OnInit, AfterContentInit, OnDestroy {
     private readonly _rtlService = inject(RtlService, { optional: true });
 
     /** @hidden */
+    private readonly _keyboardSupportService = inject(KeyboardSupportService<CardFocusItem>);
+
+    /** @hidden */
     private readonly _isRtl = computed(() => this._rtlService?.rtl() ?? false);
 
     /** @hidden */
-    constructor(private _keyboardSupportService: KeyboardSupportService<CardFocusItem>) {}
+    constructor() {
+        effect(() => {
+            const orientation = this._isRtl() ? 'rtl' : 'ltr';
+            this._keyboardSupportService.keyManager?.withHorizontalOrientation(orientation);
+        });
+    }
 
     /** @hidden */
     keyDownHandler(event: KeyboardEvent): void {

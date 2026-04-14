@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { CLASS_NAME } from '../constants';
 
 @Component({
     selector: 'fd-card-extended-header',
@@ -6,7 +7,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         role: 'group',
-        class: 'fd-card__header-extended',
+        class: CLASS_NAME.cardHeaderExtended,
         '[class.fd-card__header-extended--top-aligned]': 'align() === "top"',
         '[class.fd-card__header-extended--bottom-aligned]': 'align() === "bottom"',
         '[attr.aria-roledescription]': 'ariaRoleDescription()'

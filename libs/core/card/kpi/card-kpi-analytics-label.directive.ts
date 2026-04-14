@@ -1,11 +1,12 @@
 import { Directive, ElementRef, inject } from '@angular/core';
 import { HasElementRef } from '@fundamental-ngx/cdk/utils';
+import { CLASS_NAME } from '../constants';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-card-kpi-analytics-label]',
     host: {
-        class: 'fd-card__analytics-text'
+        class: CLASS_NAME.cardAnalyticsText
     }
 })
 export class CardKpiAnalyticsLabelDirective implements HasElementRef {

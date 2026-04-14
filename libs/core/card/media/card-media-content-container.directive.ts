@@ -1,4 +1,5 @@
 import { Directive, booleanAttribute, computed, input } from '@angular/core';
+import { CLASS_NAME } from '../constants';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
@@ -30,19 +31,19 @@ export class CardMediaContentContainerDirective {
 
     /** @hidden */
     protected readonly cssClass = computed(() => {
-        let classes = 'fd-card__media-content-container';
+        let classes = CLASS_NAME.cardMediaContentContainer;
         if (this.isOverlay()) {
-            classes += ' fd-card__media-content-container--overlay';
+            classes += ` ${CLASS_NAME.cardMediaContentContainerOverlay}`;
         }
 
         const shell = this.shellColor();
         if (shell) {
-            classes += ` fd-card__media-content-container--bg-shell-${shell}`;
+            classes += ` ${CLASS_NAME.cardMediaContentContainer}--bg-shell-${shell}`;
         }
 
         const legend = this.legendColor();
         if (legend) {
-            classes += ` fd-card__media-content-container--bg-legend-${legend}`;
+            classes += ` ${CLASS_NAME.cardMediaContentContainer}--bg-legend-${legend}`;
         }
 
         return classes;

@@ -24,7 +24,7 @@ let cardCounterId = 0;
 })
 export class CardCounterDirective implements HasElementRef {
     /** Card counter id, it has some default value if not set,  */
-    id = input('fd-card-counter-id-' + cardCounterId++);
+    readonly id = input('fd-card-counter-id-' + cardCounterId++);
 
     /**
      * the status represented by the Object Status.

@@ -1,5 +1,6 @@
 import { Directive, ElementRef, inject, input } from '@angular/core';
 import { HasElementRef } from '@fundamental-ngx/cdk/utils';
+import { CLASS_NAME } from '../constants';
 import { FD_CARD_SECOND_SUBTITLE } from '../token';
 
 let cardSecondSubtitleId = 0;
@@ -14,7 +15,7 @@ let cardSecondSubtitleId = 0;
         }
     ],
     host: {
-        class: 'fd-card__second-subtitle',
+        class: CLASS_NAME.cardSecondSubtitle,
         '[attr.id]': 'id()'
     }
 })

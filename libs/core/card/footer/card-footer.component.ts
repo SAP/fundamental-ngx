@@ -12,13 +12,14 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { map, startWith, tap } from 'rxjs';
+import { CLASS_NAME } from '../constants';
 import { CardFooterActionItemDirective } from './card-footer-action-item.directive';
 
 @Component({
     selector: 'fd-card-footer',
     templateUrl: './card-footer.component.html',
     host: {
-        class: 'fd-card__footer'
+        class: CLASS_NAME.cardFooter
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,

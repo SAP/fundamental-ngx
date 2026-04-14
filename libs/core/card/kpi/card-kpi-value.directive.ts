@@ -1,5 +1,6 @@
 import { computed, Directive, ElementRef, inject, input } from '@angular/core';
 import { HasElementRef } from '@fundamental-ngx/cdk/utils';
+import { CLASS_NAME } from '../constants';
 
 export type KpiStatus = 'positive' | 'negative' | 'critical' | 'informative';
 
@@ -19,11 +20,11 @@ export class CardKpiValueDirective implements HasElementRef {
 
     /** @hidden */
     protected readonly cssClass = computed(() => {
-        let classes = 'fd-numeric-content__kpi';
+        let classes = CLASS_NAME.cardAnalyticsKpiValue;
         const status = this.status();
 
         if (status) {
-            classes += ` fd-numeric-content__kpi--${status}`;
+            classes += ` ${CLASS_NAME.cardAnalyticsKpiValue}--${status}`;
         }
 
         return classes;

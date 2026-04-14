@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, ElementRef, inject } from '@angular/core';
 import { HasElementRef } from '@fundamental-ngx/cdk/utils';
+import { CLASS_NAME } from '../constants';
 import { FD_CARD_KPI_HEADER } from '../token';
 
 @Component({
@@ -7,7 +8,7 @@ import { FD_CARD_KPI_HEADER } from '../token';
     templateUrl: './card-kpi-header.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        class: 'fd-card__analytics-area'
+        class: CLASS_NAME.cardAnalyticalArea
     },
     providers: [
         {
