@@ -1,11 +1,23 @@
 # webc-generator
 
-This library was generated with [Nx](https://nx.dev).
+Code generator that produces Angular wrappers from UI5 Web Components. The output lives in `libs/ui5-webcomponents*` — those directories are auto-generated and should not be edited by hand.
 
 ## Building
 
-Run `nx build webc-generator` to build the library.
+```bash
+nx build webc-generator
+```
 
 ## Running unit tests
 
-Run `nx test webc-generator` to execute the unit tests via [Jest](https://jestjs.io).
+```bash
+nx test webc-generator
+```
+
+## Regenerating wrappers
+
+After modifying the generator, rebuild and run it to regenerate the UI5 wrapper libraries:
+
+```bash
+nx build webc-generator && nx run webc-generator:generate
+```

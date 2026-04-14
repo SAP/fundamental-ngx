@@ -1,7 +1,15 @@
-# shared
+# docs-schema
 
-This library was generated with [Nx](https://nx.dev).
+JSON schema definitions used by the Fundamental NGX documentation app to describe component metadata, examples, and navigation structure.
+
+## Building
+
+```bash
+nx build docs-schema
+```
 
 ## Running unit tests
 
-Run `nx test shared` to execute the unit tests.
+```bash
+nx test docs-schema
+```
