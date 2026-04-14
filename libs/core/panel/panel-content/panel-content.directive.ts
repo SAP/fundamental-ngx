@@ -1,7 +1,5 @@
 import { Directive, booleanAttribute, computed, input } from '@angular/core';
 
-import { Nullable } from '@fundamental-ngx/cdk/utils';
-
 let panelContentUniqueId = 0;
 
 /**
@@ -29,19 +27,19 @@ let panelContentUniqueId = 0;
 })
 export class PanelContentDirective {
     /** Custom height of the content container. */
-    readonly height = input<Nullable<string>>(null);
+    readonly height = input<string | null>(null);
 
     /** Custom min-height of the content container. */
-    readonly minHeight = input<Nullable<string>>(null);
+    readonly minHeight = input<string | null>(null);
 
     /** Custom max-height of the content container. */
-    readonly maxHeight = input<Nullable<string>>(null);
+    readonly maxHeight = input<string | null>(null);
 
     /** aria-label attribute of the host element element. */
-    readonly ariaLabel = input<Nullable<string>>(null);
+    readonly ariaLabel = input<string | null>(null);
 
     /** aria-labelledby attribute of the host element element. */
-    readonly ariaLabelledBy = input<Nullable<string>>(null);
+    readonly ariaLabelledBy = input<string | null>(null);
 
     /** role attribute of the host element. */
     readonly role = input('region');

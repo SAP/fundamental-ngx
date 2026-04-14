@@ -11,7 +11,7 @@ import {
     model
 } from '@angular/core';
 
-import { Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { PanelContentDirective } from './panel-content/panel-content.directive';
@@ -50,10 +50,10 @@ export class PanelComponent {
     readonly expandId = input('fd-panel-expand-' + panelExpandUniqueId++);
 
     /** aria-label of the expand button */
-    readonly expandAriaLabel = input<Nullable<string>>(null);
+    readonly expandAriaLabel = input<string | null>(null);
 
     /** aria-labelledby of the expand button */
-    readonly expandAriaLabelledBy = input<Nullable<string>>(null);
+    readonly expandAriaLabelledBy = input<string | null>(null);
 
     /** Whether the Panel Content is expanded */
     readonly expanded = model(false);
