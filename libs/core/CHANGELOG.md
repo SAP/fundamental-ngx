@@ -1,3 +1,14 @@
+## 0.62.0-rc.70 (2026-04-14)
+
+### 🩹 Fixes
+
+- **core:** items in fd-menu should not be activated on key down ([#14115](https://github.com/SAP/fundamental-ngx/pull/14115))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+- Maria Dineva @MariaIDineva
+
 ## 0.62.0-rc.69 (2026-04-14)
 
 ### 🩹 Fixes
