@@ -5,7 +5,9 @@ import {
     Component,
     ElementRef,
     ViewEncapsulation,
+    booleanAttribute,
     computed,
+    effect,
     inject,
     input,
     viewChild
@@ -69,6 +71,9 @@ export class BusyIndicatorComponent {
     /** Aria live attribute value. */
     readonly ariaLive = input<'assertive' | 'polite' | 'off' | null>(null);
 
+    /** Whether to stop mouse wheel events when the busy indicator is displayed via loading="true". */
+    readonly preventWheelEvents = input(false, { transform: booleanAttribute });
+
     /** @hidden */
     protected readonly fakeFocusElement = viewChild<ElementRef>('fakeFocusElement');
 
@@ -91,6 +96,23 @@ export class BusyIndicatorComponent {
     /** @hidden */
     private readonly _elementRef = inject(ElementRef);
 
+    constructor() {
+        // Reactively manage wheel event listener based on preventWheelEvents signal
+        effect((onCleanup) => {
+            if (this.preventWheelEvents()) {
+                this._elementRef.nativeElement.addEventListener('wheel', this._wheelListener, {
+                    passive: false
+                });
+
+                onCleanup(() => {
+                    this._elementRef.nativeElement.removeEventListener('wheel', this._wheelListener, {
+                        passive: false
+                    });
+                });
+            }
+        });
+    }
+
     /** @hidden If focus escapes busy container focus element after wrapped content */
     protected hostFocusChangeHandler(event: KeyboardEvent): void {
         if (this.loading() && KeyUtil.isKeyCode(event, TAB) && !event.shiftKey) {
@@ -109,4 +131,12 @@ export class BusyIndicatorComponent {
             this._elementRef.nativeElement.focus();
         }
     }
+
+    /** @hidden */
+    private _wheelListener = (event: WheelEvent): void => {
+        if (this.preventWheelEvents() && this.loading()) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+        }
+    };
 }

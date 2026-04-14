@@ -14,9 +14,12 @@ export abstract class TableDraggable<T = any> {
     abstract dropPredicate: DropPredicate<TableRow<T>>;
     abstract dragoverPredicate: DragoverPredicate<TableRow<T>>;
     abstract rowsRearrange: EventEmitter<TableRowsRearrangeEvent<T>>;
+    abstract draggedRow: TableRow<T> | null;
+    abstract draggedDndIndex: number | null;
+    abstract draggedRowGlobalIndex: number | null;
     abstract dragRowFromKeyboard(dir: string, event: Event, currentRowIndex: number, mode: 'shift' | 'group'): void;
     abstract dragDropItemDrop(event: FdDropEvent<TableRow>): void;
-    abstract dragDropStart(): void;
+    abstract dragDropStart(draggedItem?: TableRow<T>, dndIndex?: number, globalIndex?: number): void;
     abstract setTable(table: Table): void;
     abstract dropCancelled(): void;
 }
@@ -38,6 +41,7 @@ export abstract class TableVirtualScroll {
     abstract virtualScrollTransform$: Observable<number>;
     abstract virtualScroll: boolean;
     abstract virtualScrollTotalHeight: number;
+    abstract scrollWholeRows: boolean;
     abstract setTable(table: Table): void;
     abstract listenOnVirtualScroll(): void;
     abstract calculateVirtualScrollRows(): void;

@@ -82,8 +82,32 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> implemen
         return this.isTreeTable && this.enableRowReordering;
     }
 
+    /** Get the dragged row object during drag operation */
+    get draggedRow(): TableRow | null {
+        return this._draggedRowObject;
+    }
+
+    /** Get the DnD index of the dragged row */
+    get draggedDndIndex(): number | null {
+        return this._draggedRowDndIndex;
+    }
+
+    /** Get the global index (in _tableRowsVisible) of the dragged row */
+    get draggedRowGlobalIndex(): number | null {
+        return this._draggedRowGlobalIndex;
+    }
+
     /** @hidden */
     dragDropInProgress = false;
+
+    /** @hidden */
+    private _draggedRowObject: TableRow | null = null;
+
+    /** @hidden */
+    private _draggedRowDndIndex: number | null = null;
+
+    /** @hidden */
+    private _draggedRowGlobalIndex: number | null = null;
 
     /** @hidden */
     private _table: Table;
@@ -106,8 +130,17 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> implemen
     /**
      * Initiates drag&drop sequence.
      */
-    dragDropStart(): void {
+    dragDropStart(draggedItem?: TableRow, dndIndex?: number, globalIndex?: number): void {
         this._setDragInProgress(true);
+        if (draggedItem) {
+            this._draggedRowObject = draggedItem;
+        }
+        if (dndIndex || dndIndex === 0) {
+            this._draggedRowDndIndex = dndIndex;
+        }
+        if (globalIndex || globalIndex === 0) {
+            this._draggedRowGlobalIndex = globalIndex;
+        }
     }
 
     /** Method called when dnd performed with the keyboard. */
@@ -137,29 +170,53 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> implemen
     /** Method called when drag&drop event being cancelled. */
     dropCancelled(): void {
         /** After timeout to make click event handled first */
-        setTimeout(() => this._setDragInProgress(false));
+        setTimeout(() => {
+            this._setDragInProgress(false);
+            this._draggedRowObject = null;
+            this._draggedRowDndIndex = null;
+            this._draggedRowGlobalIndex = null;
+        });
     }
 
     /** Method called when dragged item being dropped. */
     dragDropItemDrop(event: FdDropEvent<TableRow>): void {
-        /** After timeout to make click event handled first */
-        setTimeout(() => {
-            this._setDragInProgress(false);
-        });
-
         if (this.isTreeTable && event.draggedItemIndex !== event.replacedItemIndex) {
-            event.draggedItemIndex = this._table._tableCurrentlyRenderedRowsPlaceholder[event.draggedItemIndex];
+            // Map DnD indices to actual table row indices
             event.replacedItemIndex = this._table._tableCurrentlyRenderedRowsPlaceholder[event.replacedItemIndex];
-            const dragRow = this._table._tableRows.find(
-                (row) => row === this._table._tableRowsVisible[event.draggedItemIndex]
-            );
+
+            // Use the tracked dragged row object instead of relying on the stale draggedItemIndex
+            let dragRow = this._draggedRowObject;
+            if (!dragRow) {
+                // Fallback to old behavior if tracking failed
+                // If virtual scroll with scrollWholeRows, map the DnD index to global index
+                if (this._table._virtualScrollDirective?.scrollWholeRows) {
+                    event.draggedItemIndex = this._table._tableCurrentlyRenderedRowsPlaceholder[event.draggedItemIndex];
+                }
+                dragRow =
+                    this._table._tableRows.find(
+                        (row) => row === this._table._tableRowsVisible[event.draggedItemIndex]
+                    ) ?? null;
+            }
+
             const dropRow = this._table._tableRows.find(
                 (row) => row === this._table._tableRowsVisible[event.replacedItemIndex]
             );
 
             if (!dragRow || !dropRow || this._isDroppedInsideItself(dropRow, dragRow)) {
+                // Clear drag state before returning
+                this._setDragInProgress(false);
+                this._draggedRowObject = null;
+                this._draggedRowDndIndex = null;
+                this._draggedRowGlobalIndex = null;
                 return;
             }
+
+            // Clear drag tracking state before updating the table
+            // This ensures setCurrentlyRenderedRows() doesn't preserve the dragged row
+            this._draggedRowObject = null;
+            this._draggedRowDndIndex = null;
+            this._draggedRowGlobalIndex = null;
+
             this._dragDropUpdateDragParentRowAttributes(dragRow);
             this._dragDropRearrangeTreeRows(dragRow, dropRow, event);
             this._dragDropUpdateDropRowAttributes(dragRow, dropRow, event.mode);
@@ -174,6 +231,11 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> implemen
             this._emitRowsRearrangeEvent(dragRow, dropRow, event);
             this._table.refreshDndList();
         }
+
+        /** After timeout to make click event handled first */
+        setTimeout(() => {
+            this._setDragInProgress(false);
+        });
     }
 
     /**
@@ -188,12 +250,16 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> implemen
             rows.push(r.value);
         });
 
+        // Find the actual indices in _tableRows for the dragged and dropped rows
+        const actualDraggedIndex = this._table._tableRows.indexOf(row);
+        const actualReplacedIndex = this._table._tableRows.indexOf(dropRow);
+
         this.rowsRearrange.emit(
             new TableRowsRearrangeEvent(
                 row.value,
                 dropRow.value,
-                event.draggedItemIndex,
-                event.replacedItemIndex,
+                actualDraggedIndex,
+                actualReplacedIndex,
                 event.insertAt,
                 event.mode,
                 rows
@@ -322,20 +388,25 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> implemen
     /** @hidden */
     private _blockScrolling(): void {
         this._table._focusableGrid._preventKeydown = true;
-        this._table.tableContainer.nativeElement.addEventListener('DOMMouseScroll', preventDefault, false);
-        this._table.tableContainer.nativeElement.addEventListener('wheel', preventDefault, { passive: false });
-        this._table.tableContainer.nativeElement.addEventListener('mousewheel', preventDefault, { passive: false });
-        this._table.tableContainer.nativeElement.addEventListener('touchmove', preventDefault, { passive: false });
+        // Don't block wheel events if scrollWholeRows is enabled - virtual scroll needs them
+        if (!this._table._virtualScrollDirective?.scrollWholeRows) {
+            this._table.tableContainer.nativeElement.addEventListener('DOMMouseScroll', preventDefault, false);
+            this._table.tableContainer.nativeElement.addEventListener('wheel', preventDefault, { passive: false });
+            this._table.tableContainer.nativeElement.addEventListener('mousewheel', preventDefault, { passive: false });
+            this._table.tableContainer.nativeElement.addEventListener('touchmove', preventDefault, { passive: false });
+        }
         this._table.tableContainer.nativeElement.addEventListener('keydown', preventDefaultForScrollKeys, false);
     }
 
     /** @hidden */
     private _enableScrolling(): void {
         this._table._focusableGrid._preventKeydown = false;
-        this._table.tableContainer.nativeElement.removeEventListener('DOMMouseScroll', preventDefault, false);
-        this._table.tableContainer.nativeElement.removeEventListener('wheel', preventDefault);
-        this._table.tableContainer.nativeElement.removeEventListener('mousewheel', preventDefault);
-        this._table.tableContainer.nativeElement.removeEventListener('touchmove', preventDefault);
+        if (!this._table._virtualScrollDirective?.scrollWholeRows) {
+            this._table.tableContainer.nativeElement.removeEventListener('DOMMouseScroll', preventDefault, false);
+            this._table.tableContainer.nativeElement.removeEventListener('wheel', preventDefault);
+            this._table.tableContainer.nativeElement.removeEventListener('mousewheel', preventDefault);
+            this._table.tableContainer.nativeElement.removeEventListener('touchmove', preventDefault);
+        }
         this._table.tableContainer.nativeElement.removeEventListener('keydown', preventDefaultForScrollKeys, false);
     }
 }

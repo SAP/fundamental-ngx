@@ -1,7 +1,6 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DialogConfig, DialogRef } from '@fundamental-ngx/core/dialog';
 import { FilterableColumnDataType } from '@fundamental-ngx/platform/table-helpers';
-import { PlatformTableModule } from '../../../table.module';
 import { FilterDialogData, P13FilteringDialogComponent } from './filtering.component';
 
 describe('PlatformTableP13FilterDialogComponent', () => {
@@ -40,12 +39,12 @@ describe('PlatformTableP13FilterDialogComponent', () => {
 
     dialogRef.data = dialogData;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [PlatformTableModule],
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            imports: [P13FilteringDialogComponent],
             providers: [{ provide: DialogRef, useValue: dialogRef }, DialogConfig]
         }).compileComponents();
-    }));
+    });
 
     beforeEach(() => {
         fixture = TestBed.createComponent(P13FilteringDialogComponent);

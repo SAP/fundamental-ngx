@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
@@ -49,12 +49,12 @@ describe('TableComponent Initial State', () => {
     let fixture: ComponentFixture<TableHostComponent>;
     let tableComponent: TableComponent<SourceItem>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
             imports: [TableHostComponent],
             providers: [RtlService]
         }).compileComponents();
-    }));
+    });
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TableHostComponent);
