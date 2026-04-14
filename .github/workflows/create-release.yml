@@ -103,6 +103,12 @@ jobs:
               run: |
                   npx nx release version ${{ steps.bumpVersion.outputs.newVersion }} --git-commit=false --git-tag=false
 
+            # Generate per-project CHANGELOG.md entries from conventional commits.
+            - name: Generate changelogs using NX Release
+              if: env.IS_MANUAL != 'true'
+              run: |
+                  npx nx release changelog ${{ steps.bumpVersion.outputs.newVersion }} --git-commit=false --git-tag=false
+
             # Reset dependency placeholders in source package.json files
             # NX Release updates both version AND dependencies, but we want to keep placeholders in source
             # Also run this for manual releases to ensure placeholders are always restored before building

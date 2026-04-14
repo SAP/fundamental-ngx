@@ -150,109 +150,190 @@ describe('MenuService', () => {
         expect(siblings?.length).toEqual(3);
     });
 
-    it('should open submenu on arrow right', fakeAsync(() => {
-        const setFocusedSpy = jest.spyOn(menuService, 'setFocused');
-        const activateSpy = jest.spyOn(menuItems.first, 'setSelected');
-        menuService.focusedNode = menuService.menuMap.get(menuItems.first);
+    describe('removeKeyboardSupport', () => {
+        it('should call the keydown destroy listener', () => {
+            const destroySpy = jest.fn();
+            menuService['_destroyKeyDownHandlerListener'] = destroySpy;
 
-        menuService['_handleKey'](new KeyboardEvent('keydown', { key: 'ArrowRight' }));
+            menuService.removeKeyboardSupport();
 
-        tick();
+            expect(destroySpy).toHaveBeenCalledTimes(1);
+        });
 
-        expect(setFocusedSpy).toHaveBeenCalled();
-        expect(activateSpy).toHaveBeenCalledWith(true);
-        expect(menuService.activeNodePath[menuService.activeNodePath.length - 1].item).toBe(menuItems.first);
-    }));
+        it('should call the keyup destroy listener', () => {
+            const destroySpy = jest.fn();
+            menuService['_destroyKeyUpHandlerListener'] = destroySpy;
 
-    it('should open submenu on arrow right', fakeAsync(() => {
-        const setFocusedSpy = jest.spyOn(menuService, 'setFocused');
-        const activateSpy = jest.spyOn(menuItems.first, 'setSelected');
-        menuService.focusedNode = menuService.menuMap.get(menuItems.first);
+            menuService.removeKeyboardSupport();
 
-        menuService['_handleKey'](new KeyboardEvent('keydown', { key: 'ArrowRight' }));
+            expect(destroySpy).toHaveBeenCalledTimes(1);
+        });
 
-        tick();
+        it('should not throw when called before keyboard support is added', () => {
+            menuService['_destroyKeyDownHandlerListener'] = undefined as any;
+            menuService['_destroyKeyUpHandlerListener'] = undefined as any;
 
-        expect(setFocusedSpy).toHaveBeenCalled();
-        expect(activateSpy).toHaveBeenCalledWith(true);
-        expect(menuService.activeNodePath[menuService.activeNodePath.length - 1].item).toBe(menuItems.first);
-    }));
-
-    it('should open submenu on arrow left', () => {
-        const setActiveSpy = jest.spyOn(menuService, 'setActive');
-        const setFocusedSpy = jest.spyOn(menuService, 'setFocused');
-
-        menuService.setActive(true, menuItems.first);
-        menuService.focusedNode = menuService.menuMap.get(nestedMenuItem);
-
-        menuService['_handleKey'](new KeyboardEvent('keydown', { key: 'ArrowLeft' }));
-
-        expect(setActiveSpy).toHaveBeenCalledWith(false, menuItems.first);
-        expect(setFocusedSpy).toHaveBeenCalledWith(menuItems.first);
+            expect(() => menuService.removeKeyboardSupport()).not.toThrow();
+        });
     });
 
-    it('should focus next menu item on arrow down', () => {
-        const setFocusedSpy = jest.spyOn(menuService, 'setFocused');
+    describe('_handleKeydown', () => {
+        it('should open submenu on arrow right', fakeAsync(() => {
+            const setFocusedSpy = jest.spyOn(menuService, 'setFocused');
+            const activateSpy = jest.spyOn(menuItems.first, 'setSelected');
+            menuService.focusedNode = menuService.menuMap.get(menuItems.first);
 
-        menuService.focusedNode = menuService.menuMap.get(menuItems.first);
+            menuService['_handleKeydown'](new KeyboardEvent('keydown', { key: 'ArrowRight' }));
 
-        menuService['_handleKey'](new KeyboardEvent('keydown', { key: 'ArrowDown' }));
+            tick();
 
-        expect(setFocusedSpy).toHaveBeenCalledWith(menuItems.toArray()[1]);
+            expect(setFocusedSpy).toHaveBeenCalled();
+            expect(activateSpy).toHaveBeenCalledWith(true);
+            expect(menuService.activeNodePath[menuService.activeNodePath.length - 1].item).toBe(menuItems.first);
+        }));
+
+        it('should close submenu on arrow left', () => {
+            const setActiveSpy = jest.spyOn(menuService, 'setActive');
+            const setFocusedSpy = jest.spyOn(menuService, 'setFocused');
+
+            menuService.setActive(true, menuItems.first);
+            menuService.focusedNode = menuService.menuMap.get(nestedMenuItem);
+
+            menuService['_handleKeydown'](new KeyboardEvent('keydown', { key: 'ArrowLeft' }));
+
+            expect(setActiveSpy).toHaveBeenCalledWith(false, menuItems.first);
+            expect(setFocusedSpy).toHaveBeenCalledWith(menuItems.first);
+        });
+
+        it('should focus next menu item on arrow down', () => {
+            const setFocusedSpy = jest.spyOn(menuService, 'setFocused');
+
+            menuService.focusedNode = menuService.menuMap.get(menuItems.first);
+
+            menuService['_handleKeydown'](new KeyboardEvent('keydown', { key: 'ArrowDown' }));
+
+            expect(setFocusedSpy).toHaveBeenCalledWith(menuItems.toArray()[1]);
+        });
+
+        it('should focus previous menu item on arrow up', () => {
+            const setFocusedSpy = jest.spyOn(menuService, 'setFocused');
+
+            menuService.focusedNode = menuService.menuMap.get(menuItems.toArray()[1]);
+
+            menuService['_handleKeydown'](new KeyboardEvent('keydown', { key: 'ArrowUp' }));
+
+            expect(setFocusedSpy).toHaveBeenCalledWith(menuItems.first);
+        });
+
+        it('should not trigger click on Space/Enter', () => {
+            const clickSpy = jest.spyOn(menuItems.first, 'click');
+
+            menuService.focusedNode = menuService.menuMap.get(menuItems.first);
+
+            menuService['_handleKeydown'](new KeyboardEvent('keydown', { key: 'Enter' }));
+            menuService['_handleKeydown'](new KeyboardEvent('keydown', { key: ' ' }));
+
+            expect(clickSpy).not.toHaveBeenCalled();
+        });
+
+        it('should close menu on Escape', () => {
+            const closeSpy = jest.spyOn(menu, 'close');
+
+            menuService.focusedNode = menuService.menuMap.get(menuItems.first);
+
+            menuService['_handleKeydown'](new KeyboardEvent('keydown', { key: 'Escape' }));
+
+            expect(closeSpy).toHaveBeenCalled();
+        });
+
+        it('should skip disabled item on arrow up', () => {
+            fixture.componentInstance.disabled = true;
+            fixture.detectChanges();
+            const menuItemsArray = menuItems.toArray();
+            const setFocusedSpy = jest.spyOn(menuService, 'setFocused');
+
+            menuService.focusedNode = menuService.menuMap.get(menuItemsArray[2]);
+            menuService['_handleKeydown'](new KeyboardEvent('keydown', { key: 'ArrowUp' }));
+
+            expect(setFocusedSpy).toHaveBeenCalledWith(menuItemsArray[0]);
+        });
+
+        it('should skip disabled item on arrow down', () => {
+            fixture.componentInstance.disabled = true;
+            fixture.detectChanges();
+            const menuItemsArray = menuItems.toArray();
+            const setFocusedSpy = jest.spyOn(menuService, 'setFocused');
+
+            menuService.focusedNode = menuService.menuMap.get(menuItemsArray[0]);
+            menuService['_handleKeydown'](new KeyboardEvent('keydown', { key: 'ArrowDown' }));
+
+            expect(setFocusedSpy).toHaveBeenCalledWith(menuItemsArray[2]);
+        });
     });
 
-    it('should focus next menu item on arrow up', () => {
-        const setFocusedSpy = jest.spyOn(menuService, 'setFocused');
+    describe('_handleKeyup', () => {
+        it('should click focused item on Enter', () => {
+            const clickSpy = jest.spyOn(menuItems.first, 'click');
 
-        menuService.focusedNode = menuService.menuMap.get(menuItems.toArray()[1]);
+            menuService.focusedNode = menuService.menuMap.get(menuItems.first);
 
-        menuService['_handleKey'](new KeyboardEvent('keydown', { key: 'ArrowUp' }));
+            menuService['_handleKeyup'](new KeyboardEvent('keyup', { key: 'Enter' }));
 
-        expect(setFocusedSpy).toHaveBeenCalledWith(menuItems.first);
-    });
+            expect(clickSpy).toHaveBeenCalledTimes(1);
+        });
 
-    it('should open submenu on space/enter', () => {
-        const clickSpy = jest.spyOn(menuItems.first, 'click');
+        it('should click focused item on Space', () => {
+            const clickSpy = jest.spyOn(menuItems.first, 'click');
 
-        menuService.focusedNode = menuService.menuMap.get(menuItems.first);
+            menuService.focusedNode = menuService.menuMap.get(menuItems.first);
 
-        menuService['_handleKey'](new KeyboardEvent('keydown', { key: 'Enter' }));
-        menuService['_handleKey'](new KeyboardEvent('keydown', { key: ' ' }));
+            menuService['_handleKeyup'](new KeyboardEvent('keyup', { key: ' ' }));
 
-        expect(clickSpy).toHaveBeenCalledTimes(2);
-    });
+            expect(clickSpy).toHaveBeenCalledTimes(1);
+        });
 
-    it('should close menu on Escape', () => {
-        const closeSpy = jest.spyOn(menu, 'close');
+        it('should set item active on Space/Enter', () => {
+            const setActiveSpy = jest.spyOn(menuService, 'setActive');
 
-        menuService.focusedNode = menuService.menuMap.get(menuItems.first);
+            menuService.focusedNode = menuService.menuMap.get(menuItems.first);
 
-        menuService['_handleKey'](new KeyboardEvent('keydown', { key: 'Escape' }));
+            menuService['_handleKeyup'](new KeyboardEvent('keyup', { key: 'Enter' }));
 
-        expect(closeSpy).toHaveBeenCalled();
-    });
+            expect(setActiveSpy).toHaveBeenCalledWith(true, menuItems.first);
+        });
 
-    it('should focus next available element on arrow up', () => {
-        fixture.componentInstance.disabled = true;
-        fixture.detectChanges();
-        const menuItemsArray = menuItems.toArray();
-        const setFocusedSpy = jest.spyOn(menuService, 'setFocused');
+        it('should focus first child on Space/Enter when item has submenu', fakeAsync(() => {
+            const setFocusedSpy = jest.spyOn(menuService, 'setFocused');
 
-        menuService.focusedNode = menuService.menuMap.get(menuItemsArray[2]);
-        menuService['_handleKey'](new KeyboardEvent('keydown', { key: 'ArrowUp' }));
+            menuService.focusedNode = menuService.menuMap.get(menuItems.first);
 
-        expect(setFocusedSpy).toHaveBeenCalledWith(menuItemsArray[0]);
-    });
+            menuService['_handleKeyup'](new KeyboardEvent('keyup', { key: 'Enter' }));
 
-    it('should focus next available element on arrow down', () => {
-        fixture.componentInstance.disabled = true;
-        fixture.detectChanges();
-        const menuItemsArray = menuItems.toArray();
-        const setFocusedSpy = jest.spyOn(menuService, 'setFocused');
+            tick();
 
-        menuService.focusedNode = menuService.menuMap.get(menuItemsArray[0]);
-        menuService['_handleKey'](new KeyboardEvent('keydown', { key: 'ArrowDown' }));
+            expect(setFocusedSpy).toHaveBeenCalledWith(nestedMenuItem);
+        }));
 
-        expect(setFocusedSpy).toHaveBeenCalledWith(menuItemsArray[2]);
+        it('should not focus child on Space/Enter when item has no submenu', fakeAsync(() => {
+            const setFocusedSpy = jest.spyOn(menuService, 'setFocused');
+
+            menuService.focusedNode = menuService.menuMap.get(menuItems.last);
+
+            menuService['_handleKeyup'](new KeyboardEvent('keyup', { key: 'Enter' }));
+
+            tick();
+
+            expect(setFocusedSpy).not.toHaveBeenCalled();
+        }));
+
+        it('should do nothing when no item is focused', () => {
+            const clickSpy = jest.spyOn(menuItems.first, 'click');
+
+            menuService.focusedNode = undefined;
+
+            menuService['_handleKeyup'](new KeyboardEvent('keyup', { key: 'Enter' }));
+
+            expect(clickSpy).not.toHaveBeenCalled();
+        });
     });
 });
