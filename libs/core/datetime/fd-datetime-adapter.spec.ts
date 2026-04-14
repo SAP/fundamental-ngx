@@ -698,27 +698,48 @@ describe('FdDatetimeAdapter', () => {
             expect(adapter.getWeekName(new FdDate(2017, 1, 5))).toBe('1');
         });
 
-        it('should return 5 weeks for a typical month', () => {
-            // October 2017 starts on Sunday, 31 days => 5 weeks (firstDayOfWeek=0)
-            expect(adapter.getAmountOfWeeks(2017, 10, 0)).toBe(5);
+        it('should return 5 weeks for a typical month (Sunday-first)', () => {
+            // October 2017 starts on Sunday, 31 days, firstDayOfWeek=1 (1=Sunday)
+            // S  M  T  W  T  F  S
+            // 1  2  3  4  5  6  7
+            // 8  9  10 11 12 13 14
+            // 15 16 17 18 19 20 21
+            // 22 23 24 25 26 27 28
+            // 29 30 31
+            // = 5 weeks
+            expect(adapter.getAmountOfWeeks(2017, 10, 1)).toBe(5);
         });
 
         it('should return 6 weeks when month starts on Saturday with 31 days', () => {
-            // Fixed: getAmountOfWeeks was using +8 instead of +7, causing off-by-one.
-            // July 2017 starts on Saturday (day 6), 31 days, firstDayOfWeek=0.
-            expect(adapter.getAmountOfWeeks(2017, 7, 0)).toBe(6);
+            // July 2017 starts on Saturday (day 6), 31 days, firstDayOfWeek=1 (1=Sunday)
+            // S  M  T  W  T  F  S
+            //                   1
+            // 2  3  4  5  6  7  8
+            // 9  10 11 12 13 14 15
+            // 16 17 18 19 20 21 22
+            // 23 24 25 26 27 28 29
+            // 30 31
+            // = 6 weeks
+            expect(adapter.getAmountOfWeeks(2017, 7, 1)).toBe(6);
         });
 
         it('should return 4 weeks for February starting on Monday in non-leap year', () => {
-            // Fixed: Same +7 correction. February 2021 starts on Monday, 28 days, firstDayOfWeek=1.
-            expect(adapter.getAmountOfWeeks(2021, 2, 1)).toBe(4);
+            // February 2021 starts on Monday, 28 days, firstDayOfWeek=2 (2=Monday)
+            // M  T  W  T  F  S  S
+            // 1  2  3  4  5  6  7
+            // 8  9  10 11 12 13 14
+            // 15 16 17 18 19 20 21
+            // 22 23 24 25 26 27 28
+            // = 4 weeks (perfect alignment)
+            expect(adapter.getAmountOfWeeks(2021, 2, 2)).toBe(4);
         });
 
         it('should account for different firstDayOfWeek values', () => {
             // July 2017: 31 days, starts on Saturday
-            // Both firstDayOfWeek=0 and firstDayOfWeek=1 should yield 6 weeks
-            expect(adapter.getAmountOfWeeks(2017, 7, 0)).toBe(6);
+            // Sunday-first (1): 6 weeks (Saturday is last column, day 1 fills it)
+            // Monday-first (2): 6 weeks (Saturday is 6th column, day 1 fills it, 30-31 overflow)
             expect(adapter.getAmountOfWeeks(2017, 7, 1)).toBe(6);
+            expect(adapter.getAmountOfWeeks(2017, 7, 2)).toBe(6);
         });
     });
 

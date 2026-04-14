@@ -358,14 +358,14 @@ export abstract class DatetimeAdapter<D> {
      * Get Amount of weeks in given month/year
      * @param year The year of the date
      * @param month The month of the date
-     * @param firstDayOfWeek The first day of week. 0 - Sunday, 1 - Monday, ..., 6 - Saturday
+     * @param firstDayOfWeek The first day of week. 1 - Sunday, 2 - Monday, ..., 7 - Saturday
      * @returns Number of weeks in the given month
      */
     getAmountOfWeeks(year: number, month: number, firstDayOfWeek: number): number {
         const firstOfMonth = new Date(year, month - 1, 1);
         const lastOfMonth = new Date(year, month, 0);
 
-        const dayOffset = (firstOfMonth.getDay() - firstDayOfWeek + 7) % 7;
+        const dayOffset = (firstOfMonth.getDay() - firstDayOfWeek + 8) % 7;
         const used = dayOffset + lastOfMonth.getDate();
 
         return Math.ceil(used / 7);

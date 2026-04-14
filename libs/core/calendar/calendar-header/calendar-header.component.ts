@@ -217,6 +217,9 @@ export class CalendarHeaderComponent<D> implements OnInit, OnChanges {
     private _amountOfYearsPerPeriod = 1;
 
     /** @hidden */
+    private _initiated = false;
+
+    /** @hidden */
     constructor(
         private _changeDetRef: ChangeDetectorRef,
         private _calendarService: CalendarService,
@@ -224,9 +227,11 @@ export class CalendarHeaderComponent<D> implements OnInit, OnChanges {
     ) {
         effect(() => {
             this._dateTimeAdapter.locale();
-            this._calculateMonthNames();
-            this._calculateLabels();
-            this._changeDetRef.markForCheck();
+            if (this._initiated) {
+                this._calculateMonthNames();
+                this._calculateLabels();
+                this._changeDetRef.markForCheck();
+            }
         });
     }
 
@@ -242,6 +247,7 @@ export class CalendarHeaderComponent<D> implements OnInit, OnChanges {
 
     /** @hidden */
     ngOnInit(): void {
+        this._initiated = true;
         this._calendarService.leftArrowId = this._prevButtonId;
 
         this._calculateMonthNames();
