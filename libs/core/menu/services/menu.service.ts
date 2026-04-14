@@ -33,7 +33,10 @@ export class MenuService implements OnDestroy {
     private _menuComponent: MenuComponent;
 
     /** @hidden */
-    private _destroyKeyboardHandlerListener: () => void;
+    private _destroyKeyDownHandlerListener: () => void;
+
+    /** @hidden */
+    private _destroyKeyUpHandlerListener: () => void;
 
     /** @hidden */
     private readonly _renderer = inject(Renderer2);
@@ -134,8 +137,11 @@ export class MenuService implements OnDestroy {
 
     /** Removes Menu keyboard support */
     removeKeyboardSupport(): void {
-        if (this._destroyKeyboardHandlerListener) {
-            this._destroyKeyboardHandlerListener();
+        if (this._destroyKeyDownHandlerListener) {
+            this._destroyKeyDownHandlerListener();
+        }
+        if (this._destroyKeyUpHandlerListener) {
+            this._destroyKeyUpHandlerListener();
         }
     }
 
@@ -235,20 +241,20 @@ export class MenuService implements OnDestroy {
 
     /** @hidden Adds keyboard support */
     private _setKeyboardSupport(elementRef: ElementRef): void {
-        this._destroyKeyboardHandlerListener = this._renderer.listen(
+        this._destroyKeyDownHandlerListener = this._renderer.listen(
             elementRef.nativeElement,
             'keydown',
-            (event: KeyboardEvent) => this._handleKey(event)
+            (event: KeyboardEvent) => this._handleKeydown(event)
+        );
+        this._destroyKeyUpHandlerListener = this._renderer.listen(
+            elementRef.nativeElement,
+            'keyup',
+            (event: KeyboardEvent) => this._handleKeyup(event)
         );
     }
 
-    /** @hidden */
-    private _handleKey(event: KeyboardEvent): void {
-        const focusRight = (node): void => {
-            setTimeout(() => this.setFocused(node.children[0].item));
-        };
-        let matched = true;
-
+    /** @hidden Handles keydown events: navigation and scroll prevention for Space/Enter */
+    private _handleKeydown(event: KeyboardEvent): void {
         if (!this.focusedNode) {
             return;
         }
@@ -259,7 +265,7 @@ export class MenuService implements OnDestroy {
         ) {
             if (this.focusedNode?.children.length) {
                 this.setActive(true, this.focusedNode.item);
-                focusRight(this.focusedNode);
+                setTimeout(() => this.setFocused(this.focusedNode!.children[0].item));
             }
         } else if (
             (KeyUtil.isKeyCode(event, LEFT_ARROW) && !this._isRtl) ||
@@ -279,20 +285,28 @@ export class MenuService implements OnDestroy {
             if (closest) {
                 this.setFocused(closest.item);
             }
-        } else if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
+        } else if (KeyUtil.isKeyCode(event, ESCAPE) && this.menuComponent.closeOnEscapeKey()) {
+            this.menuComponent.close();
+        } else if (!KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
+            return;
+        }
+
+        event.preventDefault();
+    }
+
+    /** @hidden Handles keyup events: activates focused item on Space/Enter (WCAG: activate on key release) */
+    private _handleKeyup(event: KeyboardEvent): void {
+        if (!this.focusedNode) {
+            return;
+        }
+
+        if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
             const focusedNode = this.focusedNode;
             this.setActive(true, focusedNode?.item);
             focusedNode.item?.click();
-            if (focusedNode.children.length) {
-                focusRight(focusedNode);
+            if (focusedNode?.children.length) {
+                setTimeout(() => this.setFocused(focusedNode.children[0].item));
             }
-        } else if (KeyUtil.isKeyCode(event, ESCAPE) && this.menuComponent.closeOnEscapeKey()) {
-            this.menuComponent.close();
-        } else {
-            matched = false;
-        }
-
-        if (matched) {
             event.preventDefault();
         }
     }
