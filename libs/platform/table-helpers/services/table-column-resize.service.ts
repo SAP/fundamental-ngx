@@ -101,6 +101,9 @@ export class TableColumnResizeService implements OnDestroy {
     private _tableRef: Table;
 
     /** @hidden */
+    private _initialTableWidth: number | null = null;
+
+    /** @hidden */
     private readonly _isRtl = computed(() => this._rtlService?.rtl() ?? false);
 
     /** @hidden */
@@ -241,8 +244,6 @@ export class TableColumnResizeService implements OnDestroy {
             this._resizerPosition = resizerPosition - TABLE_RESIZER_BORDER_WIDTH + scrollLeftOffset;
             this.resizerPosition$.next(this.resizerPosition);
         }
-
-        this._markForCheck.next();
     }
 
     /** Hide the column resizer. */
@@ -254,6 +255,11 @@ export class TableColumnResizeService implements OnDestroy {
         this._resizerPosition = null;
         this.resizerPosition$.next(this.resizerPosition);
         this._markForCheck.next();
+    }
+
+    /** @hidden */
+    _setInitialTableWidth(): void {
+        this._initialTableWidth = this._tableRef._tableWidthPx;
     }
 
     /** Handle start resizing. */
@@ -357,8 +363,6 @@ export class TableColumnResizeService implements OnDestroy {
 
                 this._resizerPosition = (this._startX ?? 0) + diffX;
                 this.resizerPosition$.next(this.resizerPosition);
-
-                this._markForCheck.next();
             });
     }
 

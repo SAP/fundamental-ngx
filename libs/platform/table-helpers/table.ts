@@ -4,12 +4,14 @@ import { PresetManagedComponent } from '@fundamental-ngx/platform/shared';
 import { Observable } from 'rxjs';
 
 import { FocusableGridDirective, Nullable } from '@fundamental-ngx/cdk/utils';
+import { ContentDensityObserver } from '@fundamental-ngx/core/content-density';
 import { TableDataSource } from './domain';
+import { SelectionModeValue } from './enums';
 import { CollectionFilter } from './interfaces/collection-filter.interface';
 import { CollectionGroup } from './interfaces/collection-group.interface';
 import { CollectionSort } from './interfaces/collection-sort.interface';
 import { TableState } from './interfaces/table-state.interface';
-import { PlatformTableManagedPreset, SaveRowsEvent, TableInitialState, TableRow } from './models';
+import { PlatformTableManagedPreset, SaveRowsEvent, TableInitialState, TableRow, TableVirtualScroll } from './models';
 import { TableScrollable } from './services/table-scroll-dispatcher.service';
 import { TableColumn } from './table-column';
 
@@ -56,7 +58,11 @@ export abstract class Table<T = any> implements PresetManagedComponent<PlatformT
 
     abstract readonly tableContainer: ElementRef;
 
+    abstract readonly tableScrollMockContainer: ElementRef;
+
     abstract readonly tableScrollable: TableScrollable;
+
+    abstract _virtualScrollDirective: TableVirtualScroll | null;
 
     abstract _tableRowsVisible: TableRow<T>[];
 
@@ -65,6 +71,10 @@ export abstract class Table<T = any> implements PresetManagedComponent<PlatformT
     abstract loadedRows$: Signal<number>;
 
     abstract _tableCurrentlyRenderedRowsPlaceholder: number[];
+
+    abstract _selectionMode: SelectionModeValue;
+
+    abstract contentDensityObserver: ContentDensityObserver;
 
     abstract minimumColumnWidth: number;
 
@@ -181,6 +191,8 @@ export abstract class Table<T = any> implements PresetManagedComponent<PlatformT
 
     abstract clearTableRows(): void;
 
+    abstract _onSpyIntersect(intersected: boolean): void;
+
     /** Toolbar Sort Settings button click event */
     readonly openTableSortSettings: EventEmitter<void> = new EventEmitter<void>();
 
@@ -204,4 +216,7 @@ export abstract class Table<T = any> implements PresetManagedComponent<PlatformT
 
     /** Event fired when cancel button pressed. */
     readonly cancel: EventEmitter<void>;
+
+    /** Event fired when table is scrolled while using pageScrolling. */
+    readonly tableScrolled: EventEmitter<number>;
 }

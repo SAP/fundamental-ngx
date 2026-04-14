@@ -212,4 +212,62 @@ describe('BusyIndicatorComponent', () => {
 
         expect(fixture.nativeElement.textContent).toContain('Processing...');
     });
+
+    describe('preventWheelEvents', () => {
+        it('should add wheel event listener when preventWheelEvents is true', () => {
+            const addEventListenerSpy = jest.spyOn(fixture.nativeElement, 'addEventListener');
+
+            fixture.componentRef.setInput('preventWheelEvents', true);
+            fixture.detectChanges();
+
+            expect(addEventListenerSpy).toHaveBeenCalledWith('wheel', expect.any(Function), { passive: false });
+        });
+
+        it('should not add wheel event listener when preventWheelEvents is false', () => {
+            const addEventListenerSpy = jest.spyOn(fixture.nativeElement, 'addEventListener');
+
+            fixture.componentRef.setInput('preventWheelEvents', false);
+            fixture.detectChanges();
+
+            expect(addEventListenerSpy).not.toHaveBeenCalledWith('wheel', expect.any(Function), { passive: false });
+        });
+
+        it('should prevent default on wheel events when preventWheelEvents is true', () => {
+            fixture.componentRef.setInput('preventWheelEvents', true);
+            fixture.componentRef.setInput('loading', true);
+            fixture.detectChanges();
+
+            const wheelEvent = new WheelEvent('wheel', { bubbles: true, cancelable: true });
+            const preventDefaultSpy = jest.spyOn(wheelEvent, 'preventDefault');
+
+            fixture.nativeElement.dispatchEvent(wheelEvent);
+
+            expect(preventDefaultSpy).toHaveBeenCalled();
+        });
+
+        it('should remove wheel event listener when preventWheelEvents changes to false', () => {
+            const removeEventListenerSpy = jest.spyOn(fixture.nativeElement, 'removeEventListener');
+
+            // Enable preventWheelEvents
+            fixture.componentRef.setInput('preventWheelEvents', true);
+            fixture.detectChanges();
+
+            // Disable preventWheelEvents
+            fixture.componentRef.setInput('preventWheelEvents', false);
+            fixture.detectChanges();
+
+            expect(removeEventListenerSpy).toHaveBeenCalledWith('wheel', expect.any(Function), { passive: false });
+        });
+
+        it('should clean up wheel event listener on component destroy', () => {
+            const removeEventListenerSpy = jest.spyOn(fixture.nativeElement, 'removeEventListener');
+
+            fixture.componentRef.setInput('preventWheelEvents', true);
+            fixture.detectChanges();
+
+            fixture.destroy();
+
+            expect(removeEventListenerSpy).toHaveBeenCalledWith('wheel', expect.any(Function), { passive: false });
+        });
+    });
 });
