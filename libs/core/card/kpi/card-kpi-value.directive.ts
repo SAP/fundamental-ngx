@@ -1,6 +1,5 @@
-import { Directive, ElementRef, Input, OnInit } from '@angular/core';
-import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
-
+import { computed, Directive, ElementRef, inject, input } from '@angular/core';
+import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 import { CLASS_NAME } from '../constants';
 
 export type KpiStatus = 'positive' | 'negative' | 'critical' | 'informative';
@@ -8,30 +7,26 @@ export type KpiStatus = 'positive' | 'negative' | 'critical' | 'informative';
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-card-kpi-value]',
-    standalone: true
+    host: {
+        '[class]': 'cssClass()'
+    }
 })
-export class CardKpiValueDirective implements OnInit, CssClassBuilder {
+export class CardKpiValueDirective implements HasElementRef {
     /** Set type of KPI value. eg: 'positive', 'negative', 'critical', 'informative' */
-    @Input()
-    status: KpiStatus;
+    readonly status = input<KpiStatus>();
 
     /** @hidden */
-    class: string;
+    readonly elementRef = inject(ElementRef);
 
     /** @hidden */
-    constructor(public readonly elementRef: ElementRef<HTMLElement>) {}
+    protected readonly cssClass = computed(() => {
+        let classes = CLASS_NAME.cardAnalyticsKpiValue;
+        const status = this.status();
 
-    /** @hidden */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return [
-            CLASS_NAME.cardAnalyticsKpiValue,
-            this.status ? `${CLASS_NAME.cardAnalyticsKpiValue}--${this.status}` : ''
-        ];
-    }
+        if (status) {
+            classes += ` ${CLASS_NAME.cardAnalyticsKpiValue}--${status}`;
+        }
 
-    /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
+        return classes;
+    });
 }

@@ -1,34 +1,28 @@
-import { Directive, ElementRef, OnInit } from '@angular/core';
-import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { Directive, ElementRef, inject, input } from '@angular/core';
+import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 import { CLASS_NAME } from '../constants';
 import { FD_CARD_SECOND_SUBTITLE } from '../token';
+
+let cardSecondSubtitleId = 0;
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-card-second-subtitle]',
-    standalone: true,
     providers: [
         {
             provide: FD_CARD_SECOND_SUBTITLE,
             useExisting: CardSecondSubtitleDirective
         }
-    ]
+    ],
+    host: {
+        class: CLASS_NAME.cardSecondSubtitle,
+        '[attr.id]': 'id()'
+    }
 })
-export class CardSecondSubtitleDirective implements OnInit, CssClassBuilder {
+export class CardSecondSubtitleDirective implements HasElementRef {
     /** @hidden */
-    class: string;
+    readonly elementRef = inject(ElementRef);
 
-    /** @hidden */
-    constructor(public readonly elementRef: ElementRef<HTMLElement>) {}
-
-    /** @hidden */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return [CLASS_NAME.cardSecondSubtitle];
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
+    /** Card second subtitle id, it has some default value if not set,  */
+    readonly id = input('fd-card-second-subtitle-id-' + cardSecondSubtitleId++);
 }

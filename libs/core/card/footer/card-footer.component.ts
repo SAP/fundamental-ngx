@@ -12,13 +12,14 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { map, startWith, tap } from 'rxjs';
+import { CLASS_NAME } from '../constants';
 import { CardFooterActionItemDirective } from './card-footer-action-item.directive';
 
 @Component({
     selector: 'fd-card-footer',
     templateUrl: './card-footer.component.html',
     host: {
-        class: 'fd-card__footer'
+        class: CLASS_NAME.cardFooter
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -32,10 +33,10 @@ export class CardFooterComponent implements AfterViewInit {
     actionItems: CardFooterActionItemDirective[];
 
     /** @hidden */
-    private _destroyed$ = inject(DestroyRef);
+    private readonly _changeDetectorRef = inject(ChangeDetectorRef);
 
     /** @hidden */
-    constructor(private _changeDetectorRef: ChangeDetectorRef) {}
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     ngAfterViewInit(): void {
@@ -45,7 +46,7 @@ export class CardFooterComponent implements AfterViewInit {
                 map(() => this.cardActionItems.toArray()),
                 tap((items) => (this.actionItems = items)),
                 tap(() => this._changeDetectorRef.detectChanges()),
-                takeUntilDestroyed(this._destroyed$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe();
     }

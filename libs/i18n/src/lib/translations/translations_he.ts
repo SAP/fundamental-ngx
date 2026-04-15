@@ -52,6 +52,10 @@ export default {
         yearSelectionLabel: 'בחר שנה',
         yearsRangeSelectionLabel: 'בחר טווחי שנים'
     },
+    coreCard: {
+        ariaDescription: 'Active, Press Enter to activate',
+        roleDescription: '{cardType} Card'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: 'עבור לפריט הקודם',
         pageIndicatorLabel: 'פריט {itemNum} מתוך {totalNum} מוצג',

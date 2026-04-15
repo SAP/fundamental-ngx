@@ -16,5 +16,5 @@ export class CardNumericHeaderComponent {
      * aria-roledescription for the container
      * default: 'Numeric content'
      */
-    ariaRoleDescription = input('Numeric content');
+    readonly ariaRoleDescription = input('Numeric content');
 }

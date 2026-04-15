@@ -52,6 +52,10 @@ export default {
         yearSelectionLabel: 'Valitse vuosi',
         yearsRangeSelectionLabel: 'Valitse vuosialue'
     },
+    coreCard: {
+        ariaDescription: 'Active, Press Enter to activate',
+        roleDescription: '{cardType} Card'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: 'Siirry edelliseen kohteeseen',
         pageIndicatorLabel: 'Nimike {itemNum} / {totalNum} näytetty',
