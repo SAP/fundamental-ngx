@@ -1,0 +1,32 @@
+@if (iconsLoaded()) {
+<section aria-labelledby="avatar-badge-default">
+    <h2 id="avatar-badge-default">Badge with Icon</h2>
+    <ui5-avatar initials="AB" size="L" shape="Circle" interactive>
+        <ui5-avatar-badge slot="badge" icon="edit"></ui5-avatar-badge>
+    </ui5-avatar>
+    <ui5-avatar initials="CD" size="L" shape="Circle" interactive>
+        <ui5-avatar-badge slot="badge" icon="camera"></ui5-avatar-badge>
+    </ui5-avatar>
+    <ui5-avatar icon="employee" size="L" shape="Circle" interactive>
+        <ui5-avatar-badge slot="badge" icon="add"></ui5-avatar-badge>
+    </ui5-avatar>
+</section>
+<section aria-labelledby="avatar-badge-states">
+    <h2 id="avatar-badge-states">Badge States</h2>
+    <ui5-avatar initials="AB" size="L" shape="Circle">
+        <ui5-avatar-badge slot="badge" state="None" icon="edit"></ui5-avatar-badge>
+    </ui5-avatar>
+    <ui5-avatar initials="CD" size="L" shape="Circle">
+        <ui5-avatar-badge slot="badge" state="Positive" icon="accept"></ui5-avatar-badge>
+    </ui5-avatar>
+    <ui5-avatar initials="EF" size="L" shape="Circle">
+        <ui5-avatar-badge slot="badge" state="Critical" icon="alert"></ui5-avatar-badge>
+    </ui5-avatar>
+    <ui5-avatar initials="GH" size="L" shape="Circle">
+        <ui5-avatar-badge slot="badge" state="Negative" icon="error"></ui5-avatar-badge>
+    </ui5-avatar>
+    <ui5-avatar initials="IJ" size="L" shape="Circle">
+        <ui5-avatar-badge slot="badge" state="Information" icon="hint"></ui5-avatar-badge>
+    </ui5-avatar>
+</section>
+}
