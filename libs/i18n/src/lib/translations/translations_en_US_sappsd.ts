@@ -54,8 +54,8 @@ export default {
         yearsRangeSelectionLabel: '[[[Ŝēĺēċţ ŷēąŗş ŗąŋğē∙∙∙∙∙∙]]]'
     },
     coreCard: {
-        ariaDescription: 'Active, Press Enter to activate',
-        roleDescription: '{cardType} Card'
+        ariaDescription: '[[[Āċţįʋē, Ƥŗēşş Ĕŋţēŗ ţŏ ąċţįʋąţē∙∙∙∙∙∙∙∙∙∙]]]',
+        roleDescription: '[[[{cardType} Ĉąŗƌ]]]'
     },
     coreCarousel: {
         leftNavigationBtnLabel: '[[[Ģŏ ţŏ ρŗēʋįŏűş įţēɱ∙∙∙∙∙]]]',
