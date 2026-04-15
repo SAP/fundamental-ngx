@@ -8,6 +8,7 @@ import {
     getAssetFromModuleAssets,
     SeparatorComponent
 } from '@fundamental-ngx/docs/shared';
+import { AvatarBadgeSample } from './examples/avatar-badge-sample';
 import { AvatarTypesSample } from './examples/avatar-types';
 import { BasicAvatarSample } from './examples/basic-sample';
 
@@ -24,6 +25,7 @@ const basicSampleTs = 'basic-sample.ts';
         DescriptionComponent,
         BasicAvatarSample,
         AvatarTypesSample,
+        AvatarBadgeSample,
         SeparatorComponent
     ]
 })
@@ -53,6 +55,20 @@ export class AvatarDocs {
             component: 'AvatarTypesSample',
             code: getAssetFromModuleAssets('avatar-types.ts'),
             originalFileName: 'avatar-types'
+        }
+    ];
+
+    avatarBadgeSamples: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets('avatar-badge-sample.html'),
+            originalFileName: 'avatar-badge-sample'
+        },
+        {
+            language: 'typescript',
+            component: 'AvatarBadgeSample',
+            code: getAssetFromModuleAssets('avatar-badge-sample.ts'),
+            originalFileName: 'avatar-badge-sample'
         }
     ];
 }
