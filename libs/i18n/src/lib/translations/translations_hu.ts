@@ -24,7 +24,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Útkövetési napló',
-        overflowTitleMore: 'Kattintson vagy nyomja le az entert a további részletek megjelenítéséhez'
+        overflowTitleMore: 'Kattintson vagy nyomja le az entert a további részletek megjelenítéséhez',
+        positionLabel: '{current} of {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Elfoglalt',

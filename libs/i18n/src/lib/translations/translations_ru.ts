@@ -24,7 +24,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Путь навигации',
-        overflowTitleMore: 'Щелкните или нажмите Enter, чтобы просмотреть подробности'
+        overflowTitleMore: 'Щелкните или нажмите Enter, чтобы просмотреть подробности',
+        positionLabel: '{current} of {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Занято',

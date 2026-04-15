@@ -23,7 +23,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: '階層連結軌跡',
-        overflowTitleMore: '按一下或按下 Enter 以檢視更多詳細資訊'
+        overflowTitleMore: '按一下或按下 Enter 以檢視更多詳細資訊',
+        positionLabel: '{current} of {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: '忙碌',

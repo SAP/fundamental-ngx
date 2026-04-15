@@ -24,7 +24,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Istoric de navigare',
-        overflowTitleMore: 'Faceți clic sau apăsați pe Enter pentru a afișa mai multe detalii'
+        overflowTitleMore: 'Faceți clic sau apăsați pe Enter pentru a afișa mai multe detalii',
+        positionLabel: '{current} of {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Ocupat',

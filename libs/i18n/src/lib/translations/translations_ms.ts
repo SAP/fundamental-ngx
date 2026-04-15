@@ -23,7 +23,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Jejak Tinggalan',
-        overflowTitleMore: 'Klik atau tekan enter untuk melihat butiran lanjut'
+        overflowTitleMore: 'Klik atau tekan enter untuk melihat butiran lanjut',
+        positionLabel: '{current} of {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Sibuk',

@@ -24,7 +24,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Navigeringsbane',
-        overflowTitleMore: 'Klikk eller trykk på Enter for å vise flere detaljer'
+        overflowTitleMore: 'Klikk eller trykk på Enter for å vise flere detaljer',
+        positionLabel: '{current} of {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Opptatt',

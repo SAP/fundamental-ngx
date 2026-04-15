@@ -23,7 +23,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'İçerik Haritası Yolu',
-        overflowTitleMore: "Daha fazla ayrıntı görüntülemek için Enter'a tıklayın veya basın"
+        overflowTitleMore: "Daha fazla ayrıntı görüntülemek için Enter'a tıklayın veya basın",
+        positionLabel: '{current} of {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Meşgul',

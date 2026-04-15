@@ -24,7 +24,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Navigatiepad',
-        overflowTitleMore: 'Klik of druk op Enter om meer gegevens te bekijken'
+        overflowTitleMore: 'Klik of druk op Enter om meer gegevens te bekijken',
+        positionLabel: '{current} of {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Bezet',

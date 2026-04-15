@@ -370,7 +370,13 @@ export interface FdLanguage {
         ariaLabel: FdLanguageKey;
     };
     coreBreadcrumb: {
+        breadcrumbTrailLabel: FdLanguageKey;
         overflowTitleMore: FdLanguageKey;
+        /**
+         * @param current
+         * @param total
+         */
+        positionLabel: FdLanguageKey<{ current: number; total: number }>;
     };
     coreTree: {
         expand: FdLanguageKey;

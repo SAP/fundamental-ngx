@@ -24,7 +24,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Өту тізбегінің жолы',
-        overflowTitleMore: 'Қосымша мәліметтерді көру үшін Enter пернесін басыңыз'
+        overflowTitleMore: 'Қосымша мәліметтерді көру үшін Enter пернесін басыңыз',
+        positionLabel: '{current} of {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Бос емес',

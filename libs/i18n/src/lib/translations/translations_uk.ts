@@ -23,7 +23,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Навігаційна стежка',
-        overflowTitleMore: 'Щоб переглянути докладнішу інформацію, клікніть або натисніть клавішу Enter'
+        overflowTitleMore: 'Щоб переглянути докладнішу інформацію, клікніть або натисніть клавішу Enter',
+        positionLabel: '{current} of {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Зайнято',

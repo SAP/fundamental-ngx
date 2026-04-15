@@ -26,18 +26,18 @@
                 >
                     <a fd-menu-interactive (click)="itemClicked(breadcrumbItem.item, $event)">
                         @if (breadcrumbItem?.item.breadcrumbLink) {
-                            @if (breadcrumbItem.item.breadcrumbLink._prefixIconName) {
+                            @if (breadcrumbItem.item.breadcrumbLink.prefixIconName()) {
                                 <fd-menu-addon
                                     position="before"
-                                    [glyph]="breadcrumbItem.item.breadcrumbLink._prefixIconName"
+                                    [glyph]="breadcrumbItem.item.breadcrumbLink.prefixIconName()"
                                 ></fd-menu-addon>
                             }
                             <span fd-menu-title>
                                 <ng-container [cdkPortalOutlet]="breadcrumbItem.item.linkContentPortal"></ng-container>
                             </span>
-                            @if (breadcrumbItem.item.breadcrumbLink._postfixIconName) {
+                            @if (breadcrumbItem.item.breadcrumbLink.postfixIconName()) {
                                 <fd-menu-addon
-                                    [glyph]="breadcrumbItem.item.breadcrumbLink._postfixIconName"
+                                    [glyph]="breadcrumbItem.item.breadcrumbLink.postfixIconName()"
                                 ></fd-menu-addon>
                             }
                         } @else {
@@ -52,15 +52,17 @@
             }
         </fd-menu>
         @if (breadcrumbs.length > 0) {
-            <span class="fd-breadcrumb__item" [fdMenuTrigger]="menu">
+            <span class="fd-breadcrumb__item" [fdMenuTrigger]="menu" #menuTriggerSpan>
                 <a
                     fd-link
                     [attr.aria-label]="('coreBreadcrumb.overflowTitleMore' | fdTranslate)()"
                     aria-haspopup="menu"
-                    tabindex="0"
+                    tabindex="-1"
                     class="fd-breadcrumb__collapsed"
-                    (keydown.enter)="_keyDownHandle($event)"
-                    (keydown.space)="_keyDownHandle($event)"
+                    (keyup.enter)="openOverflowMenu($event)"
+                    (keyup.space)="openOverflowMenu($event)"
+                    (keydown.enter)="$event.preventDefault()"
+                    (keydown.space)="$event.preventDefault()"
                 >
                     <fd-icon
                         glyph="overflow"

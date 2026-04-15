@@ -24,7 +24,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Навигационен път',
-        overflowTitleMore: 'Кликнете или натиснете Enter, за да видите повече подробности'
+        overflowTitleMore: 'Кликнете или натиснете Enter, за да видите повече подробности',
+        positionLabel: '{current} of {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Заето',
