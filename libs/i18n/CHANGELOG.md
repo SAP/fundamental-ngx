@@ -1,3 +1,13 @@
+## 0.62.0-rc.73 (2026-04-15)
+
+### 🩹 Fixes
+
+- **core:** add a11y improvements for Card component ([#14118](https://github.com/SAP/fundamental-ngx/pull/14118))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.62.0-rc.72 (2026-04-15)
 
 This was a version bump only for i18n to align it with other projects, there were no code changes.
