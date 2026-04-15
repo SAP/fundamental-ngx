@@ -53,6 +53,10 @@ export default {
         yearSelectionLabel: '[[[Ŝēĺēċţ ŷēąŗ∙∙∙∙∙∙∙∙]]]',
         yearsRangeSelectionLabel: '[[[Ŝēĺēċţ ŷēąŗş ŗąŋğē∙∙∙∙∙∙]]]'
     },
+    coreCard: {
+        ariaDescription: 'Active, Press Enter to activate',
+        roleDescription: '{cardType} Card'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: '[[[Ģŏ ţŏ ρŗēʋįŏűş įţēɱ∙∙∙∙∙]]]',
         pageIndicatorLabel: '[[[Ĭţēɱ {itemNum} ŏƒ {totalNum} ƌįşρĺąŷēƌ]]]',

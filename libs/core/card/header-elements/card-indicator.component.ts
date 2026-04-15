@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { CLASS_NAME } from '../constants';
 
 @Component({
     selector: 'fd-card-indicator',
@@ -6,7 +7,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
         <ng-content select="[fd-card-indicator-value]"></ng-content>`,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        class: 'fd-card__indicator'
+        class: CLASS_NAME.cardIndicator
     }
 })
 export class CardIndicatorComponent {}

@@ -53,6 +53,10 @@ export default {
         yearSelectionLabel: 'Selectați anul',
         yearsRangeSelectionLabel: 'Selectați intervalul de ani'
     },
+    coreCard: {
+        ariaDescription: 'Active, Press Enter to activate',
+        roleDescription: '{cardType} Card'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: 'Salt la articol anterior',
         pageIndicatorLabel: 'Se afișează articolul {itemNum} din {totalNum}',

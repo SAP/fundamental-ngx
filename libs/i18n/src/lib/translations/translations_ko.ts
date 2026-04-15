@@ -52,6 +52,10 @@ export default {
         yearSelectionLabel: '연도 선택',
         yearsRangeSelectionLabel: '연도 범위 선택'
     },
+    coreCard: {
+        ariaDescription: 'Active, Press Enter to activate',
+        roleDescription: '{cardType} Card'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: '이전 항목으로 이동',
         pageIndicatorLabel: '항목 {itemNum}/{totalNum}개 표시됨',
