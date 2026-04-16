@@ -1,26 +1,321 @@
-<div class="api-main-container">
-    <h2 class="api-main-header">{{ activeFile() }}</h2>
-    <span class="api-main-spacer"></span>
-    @if (files().length > 1) {
-        <button
-            fd-button
-            fdType="transparent"
-            [label]="'Select a file (' + files().length + ')'"
-            [fdMenu]="true"
-            [fdMenuTrigger]="menu"
-        ></button>
+<!-- Header -->
+<div class="api-header">
+    @if (apiModel(); as model) {
+        <h2 class="api-hero__name">{{ model.name }}</h2>
+        <div class="api-hero__badges">
+            <span class="api-badge api-badge--kind">{{ model.kind }}</span>
+            @if (model.selector) {
+                <span class="api-badge api-badge--selector">{{ model.selector }}</span>
+            }
+            @if (hasSignals()) {
+                <span class="api-badge api-badge--signal">Signals</span>
+            }
+        </div>
+    } @else {
+        <h2 class="api-hero__name">{{ activeFile() }}</h2>
     }
-    <fd-menu #menu [fillControlMode]="null" placement="bottom-start" additionalBodyClass="fd-docs-panel">
-        @for (file of files(); track file) {
-            <li fd-menu-item (click)="getFile(file)">
-                <div fd-menu-interactive [class.fd-docs-panel__item--selected]="file === activeFile()">
-                    <span fd-menu-title>{{ file }}</span>
-                    @if (file === activeFile()) {
-                        <fd-icon class="fd-docs-panel__check" glyph="accept"></fd-icon>
-                    }
-                </div>
-            </li>
-        }
-    </fd-menu>
 </div>
-<div [innerHTML]="result()"></div>
+
+<!-- File Switcher Tabs -->
+@if (files().length > 1) {
+    <nav class="api-file-tabs" role="tablist">
+        @for (file of files(); track file) {
+            <button
+                class="api-file-tab"
+                [class.api-file-tab--active]="file === activeFile()"
+                role="tab"
+                [attr.aria-selected]="file === activeFile()"
+                (click)="getFile(file)"
+            >
+                {{ file }}
+            </button>
+        }
+    </nav>
+}
+
+@if (apiModel(); as model) {
+    @if (model.description) {
+        <p class="api-description">{{ model.description }}</p>
+    }
+
+    <!-- Toolbar: pills + search + toggles -->
+    <div class="api-toolbar">
+        <!-- Category pills -->
+        <div class="api-pills">
+            <button class="api-pill" [class.api-pill--active]="activeCategory() === 'all'" (click)="setCategory('all')">
+                All <span class="api-pill__count">{{ categoryCounts().all }}</span>
+            </button>
+            <button
+                class="api-pill"
+                [class.api-pill--active]="activeCategory() === 'inputs'"
+                (click)="setCategory('inputs')"
+            >
+                Inputs <span class="api-pill__count">{{ categoryCounts().inputs }}</span>
+            </button>
+            <button
+                class="api-pill"
+                [class.api-pill--active]="activeCategory() === 'outputs'"
+                (click)="setCategory('outputs')"
+            >
+                Outputs <span class="api-pill__count">{{ categoryCounts().outputs }}</span>
+            </button>
+            <button
+                class="api-pill"
+                [class.api-pill--active]="activeCategory() === 'methods'"
+                (click)="setCategory('methods')"
+            >
+                Methods <span class="api-pill__count">{{ categoryCounts().methods }}</span>
+            </button>
+        </div>
+
+        <!-- Search -->
+        <div class="api-search">
+            <fd-icon class="api-search__icon" glyph="search"></fd-icon>
+            <input
+                #searchInput
+                class="api-search__input"
+                type="text"
+                placeholder="Search API..."
+                [value]="searchQuery()"
+                (input)="onSearchInput($event)"
+            />
+            @if (searchQuery()) {
+                <button class="api-search__clear" (click)="clearSearch()">
+                    <fd-icon glyph="decline"></fd-icon>
+                </button>
+            }
+            <kbd class="api-search__kbd">/</kbd>
+        </div>
+
+        <!-- Toggles -->
+        <div class="api-toggles">
+            <button class="api-toggle" [class.api-toggle--active]="showDeprecated()" (click)="toggleDeprecated()">
+                <fd-icon glyph="warning"></fd-icon>
+                Deprecated
+            </button>
+            <button class="api-toggle" (click)="toggleExpandAll()">
+                <fd-icon [glyph]="allExpanded ? 'collapse-all' : 'expand-all'"></fd-icon>
+                {{ allExpanded ? 'Collapse all' : 'Expand all' }}
+            </button>
+        </div>
+    </div>
+
+    <!-- API Table -->
+    @if (filteredMembers().length > 0) {
+        <div class="api-table-wrapper">
+            <table class="api-table">
+                <thead>
+                    <tr>
+                        <th class="api-th api-th--name" (click)="toggleSort('name')">
+                            Name
+                            <fd-icon class="api-th__sort" [glyph]="getSortIcon('name')"></fd-icon>
+                        </th>
+                        <th class="api-th api-th--kind">Kind</th>
+                        <th class="api-th api-th--type" (click)="toggleSort('type')">
+                            Type
+                            <fd-icon class="api-th__sort" [glyph]="getSortIcon('type')"></fd-icon>
+                        </th>
+                        <th class="api-th api-th--default" (click)="toggleSort('default')">
+                            Default
+                            <fd-icon class="api-th__sort" [glyph]="getSortIcon('default')"></fd-icon>
+                        </th>
+                        <th class="api-th api-th--desc">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (member of filteredMembers(); track member.name; let i = $index) {
+                        <!-- Member row -->
+                        <tr
+                            class="api-row"
+                            [class.api-row--expanded]="isExpanded(member.name)"
+                            [class.api-row--deprecated]="member.deprecated"
+                            [class.api-row--focused]="focusedRowIndex() === i"
+                            (click)="toggleRow(member.name)"
+                        >
+                            <td class="api-cell api-cell--name">
+                                <div class="api-name-wrap">
+                                    @if (member.isSignal) {
+                                        <span class="api-signal-dot" title="Signal-based"></span>
+                                    }
+                                    <code class="api-name" [class.api-name--deprecated]="member.deprecated">{{
+                                        member.name
+                                    }}</code>
+                                    <button
+                                        class="api-copy-btn"
+                                        [class.api-copy-btn--copied]="copiedName() === member.name"
+                                        (click)="copyBinding(member); $event.stopPropagation()"
+                                        title="Copy binding syntax"
+                                    >
+                                        <fd-icon [glyph]="copiedName() === member.name ? 'accept' : 'copy'"></fd-icon>
+                                    </button>
+                                </div>
+                            </td>
+                            <td class="api-cell api-cell--kind">
+                                <span class="api-badge" [class]="getKindBadgeClass(member.kind)">
+                                    {{ member.kind | uppercase }}
+                                </span>
+                            </td>
+                            <td class="api-cell api-cell--type">
+                                <code class="api-type">{{ member.type }}</code>
+                            </td>
+                            <td class="api-cell api-cell--default">
+                                @if (member.default) {
+                                    <code class="api-default">{{ member.default }}</code>
+                                } @else {
+                                    <span class="api-none">&mdash;</span>
+                                }
+                            </td>
+                            <td class="api-cell api-cell--desc">
+                                <span class="api-desc-text">{{ member.description }}</span>
+                                @if (member.deprecated) {
+                                    <span class="api-badge api-badge--deprecated">DEPRECATED</span>
+                                }
+                            </td>
+                        </tr>
+                        <!-- Expanded detail row -->
+                        @if (isExpanded(member.name)) {
+                            <tr class="api-detail-row">
+                                <td colspan="5" class="api-detail-cell">
+                                    <div class="api-detail">
+                                        @if (member.description) {
+                                            <p class="api-detail__desc">{{ member.description }}</p>
+                                        }
+                                        @if (member.deprecated) {
+                                            <div class="api-detail__deprecated">
+                                                <fd-icon glyph="warning"></fd-icon>
+                                                <strong>Deprecated:</strong> {{ member.deprecated }}
+                                            </div>
+                                        }
+                                        @if (member.parameters && member.parameters.length > 0) {
+                                            <div class="api-detail__params">
+                                                <strong>Parameters:</strong>
+                                                <ul>
+                                                    @for (param of member.parameters; track param.name) {
+                                                        <li>
+                                                            <code>{{ param.name }}</code>
+                                                            <span class="api-type">{{ param.type }}</span>
+                                                            @if (param.optional) {
+                                                                <span class="api-optional">(optional)</span>
+                                                            }
+                                                            @if (param.description) {
+                                                                &mdash; {{ param.description }}
+                                                            }
+                                                        </li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                        }
+                                        <div class="api-detail__meta">
+                                            @if (member.since) {
+                                                <span class="api-meta-tag">Since v{{ member.since }}</span>
+                                            }
+                                            @if (member.isSignal) {
+                                                <span class="api-meta-tag api-meta-tag--signal">Signal</span>
+                                            }
+                                            @if (getSourceUrl(member)) {
+                                                <a
+                                                    class="api-meta-tag api-meta-tag--link"
+                                                    [href]="getSourceUrl(member)"
+                                                    target="_blank"
+                                                    rel="noopener"
+                                                    (click)="$event.stopPropagation()"
+                                                >
+                                                    <fd-icon glyph="source-code"></fd-icon>
+                                                    Source :{{ member.sourceLine }}
+                                                </a>
+                                            }
+                                        </div>
+                                        <div class="api-detail__usage">
+                                            <div class="api-detail__usage-label">Usage</div>
+                                            <pre
+                                                class="api-detail__code"
+                                            ><code>{{ getUsageSnippet(member) }}</code></pre>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    } @else {
+        <div class="api-empty">
+            <fd-icon glyph="search" class="api-empty__icon"></fd-icon>
+            <p>No matching API members found.</p>
+            @if (searchQuery()) {
+                <button fd-button fdType="transparent" (click)="clearSearch()">Clear search</button>
+            }
+        </div>
+    }
+
+    <!-- Inherited members section -->
+    @if (inheritedMembers().length > 0) {
+        <div class="api-inherited">
+            <button class="api-inherited__toggle" (click)="toggleInherited()">
+                <fd-icon [glyph]="showInherited() ? 'navigation-down-arrow' : 'navigation-right-arrow'"></fd-icon>
+                Inherited from <strong>{{ apiModel()?.inherited?.from }}</strong>
+                <span class="api-pill__count">{{ inheritedMembers().length }}</span>
+            </button>
+            @if (showInherited()) {
+                <table class="api-table api-table--inherited">
+                    <thead>
+                        <tr>
+                            <th class="api-th api-th--name">Name</th>
+                            <th class="api-th api-th--kind">Kind</th>
+                            <th class="api-th api-th--type">Type</th>
+                            <th class="api-th api-th--default">Default</th>
+                            <th class="api-th api-th--desc">Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (member of inheritedMembers(); track member.name) {
+                            <tr class="api-row api-row--inherited">
+                                <td class="api-cell api-cell--name">
+                                    <code class="api-name">{{ member.name }}</code>
+                                </td>
+                                <td class="api-cell api-cell--kind">
+                                    <span class="api-badge" [class]="getKindBadgeClass(member.kind)">
+                                        {{ member.kind | uppercase }}
+                                    </span>
+                                </td>
+                                <td class="api-cell api-cell--type">
+                                    <code class="api-type">{{ member.type }}</code>
+                                </td>
+                                <td class="api-cell api-cell--default">
+                                    @if (member.default) {
+                                        <code class="api-default">{{ member.default }}</code>
+                                    } @else {
+                                        <span class="api-none">&mdash;</span>
+                                    }
+                                </td>
+                                <td class="api-cell api-cell--desc">{{ member.description }}</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+    }
+
+    <!-- Keyboard hints -->
+    <div class="api-keyboard-hints">
+        <kbd>&#8593;&#8595;</kbd> Navigate <kbd>Enter</kbd> Expand <kbd>/</kbd> Search <kbd>Esc</kbd> Close
+    </div>
+} @else if (loadError()) {
+    <div class="api-error">
+        <fd-icon glyph="message-warning" class="api-error__icon"></fd-icon>
+        <p>{{ loadError() }}</p>
+    </div>
+} @else if (activeFile()) {
+    <div class="api-empty">
+        <p>
+            <strong>{{ activeFile() }}</strong> has no public inputs, outputs, or methods.
+        </p>
+        @if (files().length > 1) {
+            <p class="api-empty__hint">Try selecting a different class from the file switcher above.</p>
+        }
+    </div>
+} @else {
+    <div class="api-loading">Loading API...</div>
+}

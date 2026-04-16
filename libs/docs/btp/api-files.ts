@@ -11,7 +11,6 @@ export const API_FILES = {
     toolHeader: [
         'ToolHeaderComponent',
         'ToolHeaderAutoModeDirective',
-        'ToolHeaderActionComponent',
         'ToolHeaderUserDirective',
         'ToolHeaderProductSwitchComponent',
         'ToolHeaderLogoDirective'

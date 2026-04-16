@@ -54,8 +54,7 @@ export const API_FILES = {
         'TableP13GroupComponent',
         'TableP13ColumnsComponent',
         'TableDataSource',
-        'TableDataProvider',
-        'PlatformTableCellResponsiveDirective'
+        'TableDataProvider'
     ],
     textarea: ['TextAreaComponent'],
     timePicker: ['PlatformTimePickerComponent'],
@@ -65,13 +64,13 @@ export const API_FILES = {
     inputGroup: ['InputGroupConfig', 'InputGroupComponent', 'InputGroupAddonComponent', 'InputGroupInputComponent'],
     combobox: ['ComboboxComponent', 'BaseCombobox', 'ComboboxConfig'],
     multiCombobox: ['MultiComboboxComponent', 'BaseMultiCombobox'],
-    list: ['ListComponent', 'StandardListItemComponent', 'ListFooter', 'ListGroupHeader', 'ListConfig'],
-    standardlistitem: ['ListComponent', 'StandardListItemComponent', 'ListFooter', 'ListGroupHeader', 'ListConfig'],
+    list: ['ListComponent', 'StandardListItemComponent', 'ListConfig'],
+    standardlistitem: ['ListComponent', 'StandardListItemComponent', 'ListConfig'],
     actionlistitem: ['ActionListItemComponent', 'ListComponent', 'ListConfig'],
-    displaylistitem: ['DisplayListItemComponent', 'ListComponent', 'ListFooter', 'ListGroupHeader', 'ListConfig'],
-    objectlistitem: ['ObjectListItemComponent', 'ListComponent', 'ListFooter', 'ListGroupHeader', 'ListConfig'],
+    displaylistitem: ['DisplayListItemComponent', 'ListComponent', 'ListConfig'],
+    objectlistitem: ['ObjectListItemComponent', 'ListComponent', 'ListConfig'],
     multiInput: ['PlatformMultiInputComponent'],
-    valueHelpDialog: ['PlatformValueHelpDialogComponent', 'VhdFilterComponent', 'VhdSearchComponent'],
+    valueHelpDialog: ['PlatformValueHelpDialogComponent', 'VhdFilterComponent'],
     feedInput: ['FeedInputComponent'],
     approvalFlow: ['ApprovalFlowComponent'],
     slider: ['SliderComponent'],
@@ -102,7 +101,6 @@ export const API_FILES = {
         'SmartFilterBarFieldDefinitionDirective',
         'SmartFilterBarService',
         'SmartFilterBarSubjectDirective',
-        'SmartFilterBarOptionsDataProvider',
         'SmartFilterBarSettingsDialogComponent'
     ],
     messagePopover: [

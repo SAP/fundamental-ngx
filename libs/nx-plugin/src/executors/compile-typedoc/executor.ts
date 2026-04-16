@@ -3,6 +3,7 @@ import { sync as fastGlobSync } from 'fast-glob';
 import { readFileSync, readdirSync, renameSync, writeFileSync } from 'fs';
 import { join, parse, resolve } from 'path';
 import { Application, DefaultTheme, PageEvent, Reflection, TSConfigReader, TypeDocOptions } from 'typedoc';
+import { generateApiJson } from './json-generator';
 import { CompileTypedocExecutorSchema } from './schema';
 import { FdThemeContext } from './theme';
 
@@ -68,6 +69,15 @@ export default async function compileTypedocs(_options: CompileTypedocExecutorSc
         writeFileSync(f, contents);
         renameSync(f, f.toLocaleLowerCase());
     }
+
+    // Generate structured API JSON files from TypeDoc JSON
+    // Output to sibling api-json/ directory: libs/docs/typedoc/api-json/{lib}/
+    const typedocJsonPath = join(outputDir, 'typedoc.json');
+    const typedocBaseDir = resolve(outputDir, '..');
+    const apiOutputDir = join(typedocBaseDir, 'api-json');
+    const lib = projectPath.split('/').pop() || parse(projectPath).name;
+    generateApiJson(typedocJsonPath, apiOutputDir, lib);
+
     return { success: true };
 }
 
