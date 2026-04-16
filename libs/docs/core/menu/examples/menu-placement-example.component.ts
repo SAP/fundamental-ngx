@@ -78,27 +78,6 @@ type PlacementOption =
             </fd-menu>
         </div>
 
-        <h4 class="fd-title fd-title--h5 fd-margin-top--md fd-margin-bottom--sm">Keyboard Activation (keyup fix)</h4>
-        <p class="fd-margin-bottom--sm">
-            Open the menu, navigate with arrow keys, then press <kbd>Space</kbd> or <kbd>Enter</kbd>. Activation should
-            fire on key <strong>release</strong>, not key press.
-        </p>
-        <div class="sap-flex sap-flex--gap-small sap-flex--align-items-center sap-margin-bottom-small">
-            <button fd-button label="Open (keyup test)" [fdMenuTrigger]="keyupTestMenu"></button>
-            <span style="font-size: 0.875rem; color: var(--sapContent_LabelColor)"
-                >Last event: <strong>{{ lastEvent() || '—' }}</strong></span
-            >
-        </div>
-        <fd-menu #keyupTestMenu>
-            @for (item of testItems; track item) {
-                <li fd-menu-item>
-                    <a (click)="onItemClick(item, $event)" fd-menu-interactive>
-                        <span fd-menu-title>{{ item }}</span>
-                    </a>
-                </li>
-            }
-        </fd-menu>
-
         <h4 class="fd-title fd-title--h5 fd-margin-top--md fd-margin-bottom--sm">Trigger Modes</h4>
         <p class="fd-margin-bottom--sm">
             The <code>[triggers]</code> input controls how the menu opens. Default is <code>['click']</code>.
@@ -173,12 +152,4 @@ export class MenuPlacementExampleComponent {
 
     /** Whether to prevent position flipping at viewport edges */
     fixedPosition = false;
-
-    readonly testItems = ['Alpha', 'Beta', 'Gamma'];
-
-    lastEvent = signal('');
-
-    onItemClick(item: string, event: MouseEvent): void {
-        this.lastEvent.set(`click on "${item}" (isTrusted: ${event.isTrusted})`);
-    }
 }
