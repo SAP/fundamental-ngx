@@ -72,7 +72,9 @@ for (const lib of LIBS) {
         // Group by component key
         const grouped = {};
         for (const { className, componentKey } of missing) {
-            if (!grouped[componentKey]) {grouped[componentKey] = [];}
+            if (!grouped[componentKey]) {
+                grouped[componentKey] = [];
+            }
             grouped[componentKey].push(className);
         }
         for (const [key, names] of Object.entries(grouped)) {

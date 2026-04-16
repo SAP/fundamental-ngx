@@ -8,21 +8,11 @@
 .api-file-tabs {
     display: flex;
     gap: 0;
-    overflow-x: auto;
+    flex-wrap: wrap;
     border-bottom: 2px solid var(--sapList_BorderColor, #e5e5e5);
     margin-block-end: 1.25rem;
     padding-block-start: 0.25rem;
     background: var(--sapBackgroundColor, #f5f6f7);
-    scrollbar-width: thin;
-
-    &::-webkit-scrollbar {
-        height: 3px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background: var(--sapScrollBar_FaceColor, #949494);
-        border-radius: 1.5px;
-    }
 }
 
 .api-file-tab {
@@ -98,52 +88,58 @@
 .api-badge {
     display: inline-flex;
     align-items: center;
-    padding: 0.25rem 0.75rem;
-    border-radius: 0.375rem;
+    padding: 0.1875rem 0.5rem;
+    border-radius: 0.25rem;
     border: 1px solid transparent;
-    font-size: 0.8125rem;
+    font-size: 0.6875rem;
     font-weight: 600;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.03em;
     white-space: nowrap;
+    text-transform: uppercase;
 }
 
 .api-badge--kind {
-    background: var(--sapInformationBackground, #e1f4ff);
+    background: linear-gradient(135deg, var(--sapInformationBackground, #e1f4ff), #f0f8ff);
     border-color: var(--sapInformativeColor, #0070f2);
     color: var(--sapInformativeColor, #0070f2);
 }
 
 .api-badge--selector {
-    background: var(--sapSuccessBackground, #f1fdf1);
+    background: linear-gradient(135deg, var(--sapSuccessBackground, #f1fdf1), #f8fff8);
     border-color: var(--sapPositiveElementColor);
     color: var(--sapPositiveElementColor);
     font-family: var(--sapFontMonoFamily, 'Consolas', monospace);
+    text-transform: none;
 }
 
 .api-badge--signal {
-    background: var(--sapInformationBackground, #e1f4ff);
+    background: linear-gradient(135deg, #e1f4ff, #f0f8ff);
     border-color: var(--sapInformativeColor, #0070f2);
     color: var(--sapInformativeColor, #0070f2);
 }
 
 .api-badge--input {
-    background: var(--sapInformationBackground, #e1f4ff);
+    background: linear-gradient(135deg, var(--sapInformationBackground, #e1f4ff), #f0f8ff);
     color: var(--sapInformativeColor, #0064d9);
+    border-color: var(--sapInformativeColor, #0064d9);
 }
 
 .api-badge--output {
-    background: var(--sapWarningBackground, #fff8e1);
+    background: linear-gradient(135deg, var(--sapWarningBackground, #fff8e1), #fffef5);
     color: var(--sapWarningColor, #e76500);
+    border-color: var(--sapWarningColor, #e76500);
 }
 
 .api-badge--method {
-    background: var(--sapSuccessBackground, #f1fdf1);
+    background: linear-gradient(135deg, var(--sapSuccessBackground, #f1fdf1), #f8fff8);
     color: var(--sapPositiveElementColor);
+    border-color: var(--sapPositiveElementColor);
 }
 
 .api-badge--deprecated {
-    background: var(--sapErrorBackground, #fff2f2);
+    background: linear-gradient(135deg, var(--sapErrorBackground, #fff2f2), #fff8f8);
     color: var(--sapNegativeElementColor);
+    border-color: var(--sapNegativeElementColor);
     font-size: 0.625rem;
     margin-inline-start: 0.5rem;
 }
@@ -184,10 +180,26 @@
         color: var(--sapBrandColor);
     }
 
+    &:focus-visible {
+        outline: 2px solid var(--sapBrandColor);
+        outline-offset: 2px;
+    }
+
     &--active {
         background: var(--sapBrandColor);
         border-color: var(--sapBrandColor);
         color: #fff;
+
+        &:hover {
+            background: #0854a0;
+            border-color: #0854a0;
+            color: #fff;
+        }
+
+        &:focus-visible {
+            outline: 2px solid var(--sapContent_FocusColor, #000);
+            outline-offset: 2px;
+        }
 
         .api-pill__count {
             background: rgba(255, 255, 255, 0.25);
@@ -319,13 +331,15 @@
 .api-table-wrapper {
     border: 1px solid var(--sapList_BorderColor, #e5e5e5);
     border-radius: 0.5rem;
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
     background: var(--sapList_Background, #fff);
     box-shadow: var(--sapContent_Shadow0, 0 0 2px rgba(0, 0, 0, 0.16), 0 2px 4px rgba(0, 0, 0, 0.08));
 }
 
 .api-table {
     width: 100%;
+    min-width: 700px;
     border-collapse: collapse;
     font-size: 0.8125rem;
 }
@@ -359,6 +373,10 @@
 
     &--default {
         width: 8rem;
+    }
+
+    &--desc {
+        min-width: 200px;
     }
 }
 

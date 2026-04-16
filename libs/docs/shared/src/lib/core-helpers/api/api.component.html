@@ -134,9 +134,6 @@
                         >
                             <td class="api-cell api-cell--name">
                                 <div class="api-name-wrap">
-                                    @if (member.isSignal) {
-                                        <span class="api-signal-dot" title="Signal-based"></span>
-                                    }
                                     <code class="api-name" [class.api-name--deprecated]="member.deprecated">{{
                                         member.name
                                     }}</code>

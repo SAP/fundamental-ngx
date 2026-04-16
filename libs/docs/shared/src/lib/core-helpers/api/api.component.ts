@@ -13,7 +13,7 @@ import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { IconComponent } from '@fundamental-ngx/core/icon';
-import { catchError, of, switchMap } from 'rxjs';
+import { catchError, forkJoin, map, of, switchMap } from 'rxjs';
 import { ApiDocsService } from '../../services/api-docs.service';
 import { ApiMemberCategory, ApiMethod, ApiModel, SortDirection, UnifiedApiMember } from './api.model';
 
@@ -254,12 +254,23 @@ export class ApiComponent {
     constructor() {
         // Initialize files from route data
         const routeFiles = this._route.snapshot.data['content'] as string[] | undefined;
-        if (routeFiles) {
-            const sortedFiles = [...routeFiles].sort();
-            this.files.set(sortedFiles);
-            if (sortedFiles.length > 0) {
-                this.activeFile.set(sortedFiles[0]);
-            }
+        if (routeFiles && routeFiles.length > 0) {
+            // Check each file for API data and filter out empty ones
+            const apiChecks = routeFiles.map((file) =>
+                this._apiService.getComponentApi(file).pipe(
+                    map((data) => ({ file, hasApi: this._hasApiMembers(data) })),
+                    catchError(() => of({ file, hasApi: false }))
+                )
+            );
+
+            forkJoin(apiChecks).subscribe((results) => {
+                const filesWithApi = results.filter((r) => r.hasApi).map((r) => r.file);
+                const sortedFiles = [...filesWithApi].sort();
+                this.files.set(sortedFiles);
+                if (sortedFiles.length > 0) {
+                    this.activeFile.set(sortedFiles[0]);
+                }
+            });
         }
 
         // Update apiModel when data arrives
@@ -477,5 +488,12 @@ export class ApiComponent {
             return methods.length;
         }
         return methods.filter((m) => !m.deprecated).length;
+    }
+
+    private _hasApiMembers(data: ApiModel | null): boolean {
+        if (!data) {
+            return false;
+        }
+        return data.inputs.length > 0 || data.outputs.length > 0 || data.methods.length > 0;
     }
 }

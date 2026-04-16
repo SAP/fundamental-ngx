@@ -29,7 +29,9 @@ const LIFECYCLE_HOOKS = new Set([
 ]);
 
 function extractCommentText(comment) {
-    if (!comment) {return '';}
+    if (!comment) {
+        return '';
+    }
     return (comment.summary || [])
         .map((p) => (p.kind === 'text' ? p.text : p.kind === 'code' ? p.text : ''))
         .join('')
@@ -37,7 +39,9 @@ function extractCommentText(comment) {
 }
 
 function extractTagText(content) {
-    if (!content) {return '';}
+    if (!content) {
+        return '';
+    }
     return content
         .map((p) => (p.kind === 'text' ? p.text : p.kind === 'code' ? p.text : ''))
         .join('')
@@ -45,24 +49,36 @@ function extractTagText(content) {
 }
 
 function getDeprecatedMessage(comment) {
-    if (!comment) {return null;}
-    for (const tag of comment.blockTags || []) {
-        if (tag.tag === '@deprecated') {return extractTagText(tag.content) || 'Deprecated';}
+    if (!comment) {
+        return null;
     }
-    if ((comment.modifierTags || []).includes('@deprecated')) {return 'Deprecated';}
+    for (const tag of comment.blockTags || []) {
+        if (tag.tag === '@deprecated') {
+            return extractTagText(tag.content) || 'Deprecated';
+        }
+    }
+    if ((comment.modifierTags || []).includes('@deprecated')) {
+        return 'Deprecated';
+    }
     return null;
 }
 
 function getSinceVersion(comment) {
-    if (!comment) {return null;}
+    if (!comment) {
+        return null;
+    }
     for (const tag of comment.blockTags || []) {
-        if (tag.tag === '@since') {return extractTagText(tag.content) || null;}
+        if (tag.tag === '@since') {
+            return extractTagText(tag.content) || null;
+        }
     }
     return null;
 }
 
 function resolveTypeName(t) {
-    if (!t) {return 'unknown';}
+    if (!t) {
+        return 'unknown';
+    }
     switch (t.type) {
         case 'intrinsic':
             return t.name;
@@ -84,7 +100,9 @@ function resolveTypeName(t) {
             return `${resolveTypeName(t.elementType)}[]`;
         case 'reflection': {
             const d = t.declaration;
-            if (!d) {return 'object';}
+            if (!d) {
+                return 'object';
+            }
             if (d.signatures) {
                 const s = d.signatures[0];
                 const p = (s.parameters || []).map((pp) => `${pp.name}: ${resolveTypeName(pp.type)}`).join(', ');
@@ -110,24 +128,42 @@ function resolveTypeName(t) {
 
 function extractInputType(member) {
     const t = member.type;
-    if (!t) {return 'unknown';}
-    if (t.typeArguments && t.typeArguments.length > 0) {return resolveTypeName(t.typeArguments[0]);}
+    if (!t) {
+        return 'unknown';
+    }
+    if (t.typeArguments && t.typeArguments.length > 0) {
+        return resolveTypeName(t.typeArguments[0]);
+    }
     return resolveTypeName(t);
 }
 
 function extractOutputType(member) {
     const t = member.type;
-    if (!t) {return 'void';}
-    if (t.typeArguments && t.typeArguments.length > 0) {return resolveTypeName(t.typeArguments[0]);}
+    if (!t) {
+        return 'void';
+    }
+    if (t.typeArguments && t.typeArguments.length > 0) {
+        return resolveTypeName(t.typeArguments[0]);
+    }
     return 'void';
 }
 
 function detectClassKind(name) {
-    if (name.endsWith('Component')) {return 'Component';}
-    if (name.endsWith('Directive')) {return 'Directive';}
-    if (name.endsWith('Service')) {return 'Service';}
-    if (name.endsWith('Pipe')) {return 'Pipe';}
-    if (name.endsWith('Module')) {return 'Module';}
+    if (name.endsWith('Component')) {
+        return 'Component';
+    }
+    if (name.endsWith('Directive')) {
+        return 'Directive';
+    }
+    if (name.endsWith('Service')) {
+        return 'Service';
+    }
+    if (name.endsWith('Pipe')) {
+        return 'Pipe';
+    }
+    if (name.endsWith('Module')) {
+        return 'Module';
+    }
     return 'Class';
 }
 
@@ -135,18 +171,24 @@ function extractSelector(comment, sourceFileName) {
     // Try from comment first
     if (comment) {
         for (const tag of comment.blockTags || []) {
-            if (tag.tag === '@selector') {return extractTagText(tag.content);}
+            if (tag.tag === '@selector') {
+                return extractTagText(tag.content);
+            }
         }
         const text = extractCommentText(comment);
         const match = text.match(/selector:\s*`?([^`\n]+)`?/i);
-        if (match) {return match[1].trim();}
+        if (match) {
+            return match[1].trim();
+        }
     }
     // Try reading selector from the source file
     if (sourceFileName && existsSync(sourceFileName)) {
         try {
             const src = readFileSync(sourceFileName, 'utf-8');
             const m = src.match(/selector:\s*['"]([^'"]+)['"]/);
-            if (m) {return m[1];}
+            if (m) {
+                return m[1];
+            }
         } catch {
             // ignore
         }
@@ -177,7 +219,9 @@ const SKIP_TYPES = new Set([
  */
 function extractDecoratorInfo(sourceFileName) {
     const result = { inputs: new Set(), outputs: new Set() };
-    if (!sourceFileName || !existsSync(sourceFileName)) {return result;}
+    if (!sourceFileName || !existsSync(sourceFileName)) {
+        return result;
+    }
     try {
         const src = readFileSync(sourceFileName, 'utf-8');
         // Match @Input() / @Input('alias') followed by property name
@@ -205,11 +249,15 @@ function generateApiJson(typedocJsonPath, apiOutputDir, lib) {
 
     const project = JSON.parse(readFileSync(typedocJsonPath, 'utf-8'));
     const libOutputDir = join(apiOutputDir, lib);
-    if (!existsSync(libOutputDir)) {mkdirSync(libOutputDir, { recursive: true });}
+    if (!existsSync(libOutputDir)) {
+        mkdirSync(libOutputDir, { recursive: true });
+    }
 
     let count = 0;
     for (const child of project.children || []) {
-        if (child.kind !== KIND_CLASS) {continue;}
+        if (child.kind !== KIND_CLASS) {
+            continue;
+        }
 
         const name = child.name;
         const members = child.children || [];
@@ -247,8 +295,11 @@ function generateApiJson(typedocJsonPath, apiOutputDir, lib) {
                         sourceLine: (m.sources || [])[0]?.line || 0,
                         since: getSinceVersion(m.comment)
                     };
-                    if (isInherited) {inheritedInputs.push(entry);}
-                    else {inputs.push(entry);}
+                    if (isInherited) {
+                        inheritedInputs.push(entry);
+                    } else {
+                        inputs.push(entry);
+                    }
                 } else if (SIGNAL_OUTPUT_TYPES.has(typeName)) {
                     if (!isInherited) {
                         outputs.push({
@@ -302,8 +353,11 @@ function generateApiJson(typedocJsonPath, apiOutputDir, lib) {
                         sourceLine: (m.sources || [])[0]?.line || 0,
                         since: getSinceVersion(m.comment)
                     };
-                    if (isInherited) {inheritedInputs.push(entry);}
-                    else {inputs.push(entry);}
+                    if (isInherited) {
+                        inheritedInputs.push(entry);
+                    } else {
+                        inputs.push(entry);
+                    }
                 } else if (decoratorInfo.outputs.has(m.name)) {
                     // Decorator-based @Output() property
                     if (!isInherited) {
@@ -320,10 +374,16 @@ function generateApiJson(typedocJsonPath, apiOutputDir, lib) {
                     }
                 }
             } else if (m.kind === KIND_METHOD) {
-                if (LIFECYCLE_HOOKS.has(m.name)) {continue;}
-                if (m.flags && (m.flags.isPrivate || m.flags.isProtected)) {continue;}
+                if (LIFECYCLE_HOOKS.has(m.name)) {
+                    continue;
+                }
+                if (m.flags && (m.flags.isPrivate || m.flags.isProtected)) {
+                    continue;
+                }
                 const sigs = m.signatures;
-                if (!sigs || !sigs.length) {continue;}
+                if (!sigs || !sigs.length) {
+                    continue;
+                }
                 const sig = sigs[0];
                 const params = (sig.parameters || []).map((p) => ({
                     name: p.name,
@@ -343,12 +403,17 @@ function generateApiJson(typedocJsonPath, apiOutputDir, lib) {
                     parameters: params,
                     returnType
                 };
-                if (isInherited) {inheritedMethods.push(entry);}
-                else {methods.push(entry);}
+                if (isInherited) {
+                    inheritedMethods.push(entry);
+                } else {
+                    methods.push(entry);
+                }
             }
         }
 
-        if (inputs.length === 0 && outputs.length === 0 && methods.length === 0) {continue;}
+        if (inputs.length === 0 && outputs.length === 0 && methods.length === 0) {
+            continue;
+        }
 
         const model = {
             name,
