@@ -19,8 +19,9 @@ export default {
         toolbarLabel: 'Handlingslinje'
     },
     coreAvatarGroup: {
-        ariaLabel:
+        ariaLabelGroup:
             'Has popup type dialog conjoined avatars, {count} avatars displayed, {hiddenCount} avatars hidden, activate for complete list',
+        ariaLabelIndividual: 'Individual avatars. {count} avatars displayed, {hiddenCount} avatars hidden',
         backButton: 'Tilbage',
         popupBodyAriaLabel: 'With {count} items'
     },

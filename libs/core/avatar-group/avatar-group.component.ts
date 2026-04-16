@@ -1,3 +1,4 @@
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Direction } from '@angular/cdk/bidi';
 import { NgTemplateOutlet } from '@angular/common';
 import {
@@ -15,7 +16,12 @@ import {
     signal,
     viewChild
 } from '@angular/core';
-import { FocusableListDirective, ResizeObserverDirective, RtlService } from '@fundamental-ngx/cdk/utils';
+import {
+    FocusableListDirective,
+    FocusableListItemFocusedEvent,
+    ResizeObserverDirective,
+    RtlService
+} from '@fundamental-ngx/cdk/utils';
 import { PopoverBodyDirective, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { resolveTranslationSignalFn } from '@fundamental-ngx/i18n';
 import { AvatarGroupHostComponent } from './components/avatar-group-host.component';
@@ -92,7 +98,8 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
 
     /**
      * Aria label for the avatar group container.
-     * When not provided, a default label is generated from the i18n `coreAvatarGroup.ariaLabel` key,
+     * When not provided, a default label is generated from the i18n `coreAvatarGroup.ariaLabelGroup` key
+     * for group type, or `coreAvatarGroup.ariaLabelIndividual` for individual type,
      * using the current displayed and hidden avatar counts as context.
      */
     @Input()
@@ -121,8 +128,13 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
     protected readonly contentDirection = computed<Direction>(() => (this._rtlService?.rtl() ? 'rtl' : 'ltr'));
 
     /** @hidden */
-    protected readonly _defaultAriaLabel = computed(() =>
-        this._translate('coreAvatarGroup.ariaLabel', this._ariaLabelContext)()
+    protected readonly _defaultAriaLabelGroup = computed(() =>
+        this._translate('coreAvatarGroup.ariaLabelGroup', this._ariaLabelContext)()
+    );
+
+    /** @hidden */
+    protected readonly _defaultAriaLabelIndividual = computed(() =>
+        this._translate('coreAvatarGroup.ariaLabelIndividual', this._ariaLabelContext)()
     );
 
     /** @hidden */
@@ -143,8 +155,16 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
     private readonly _rtlService = inject(RtlService, { optional: true });
 
     /** @hidden */
+    private readonly _liveAnnouncer = inject(LiveAnnouncer);
+
+    /** @hidden */
     _detectChanges(): void {
         this._cdr.detectChanges();
+    }
+
+    /** @hidden */
+    protected _onItemFocused(event: FocusableListItemFocusedEvent): void {
+        this._liveAnnouncer.announce(`${event.index + 1} of ${event.total}`);
     }
 
     /** @hidden */

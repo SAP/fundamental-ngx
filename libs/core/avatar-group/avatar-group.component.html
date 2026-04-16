@@ -11,7 +11,9 @@
         [wrap]="true"
         [navigationDirection]="orientation"
         [items]="_avatars"
+        [attr.aria-label]="ariaLabel || _defaultAriaLabelIndividual()"
         (resized)="_detectChanges()"
+        (itemFocused)="_onItemFocused($event)"
     >
         @for (item of _avatars; track item) {
             <fd-popover [noArrow]="false" [focusAutoCapture]="true">
@@ -40,10 +42,16 @@
                 [bodyAriaLabel]="_popupBodyAriaLabel(hiddenItems.length)"
             >
                 <fd-popover-control tabindex="-1">
-                    <ng-template
-                        [ngTemplateOutlet]="overflowButtonTemplate"
-                        [ngTemplateOutletContext]="{ $implicit: hiddenItems }"
-                    ></ng-template>
+                    @if (_overflowButton) {
+                        <ng-template
+                            [ngTemplateOutlet]="_overflowButton._templateRef"
+                            [ngTemplateOutletContext]="{ hiddenItems: hiddenItems }"
+                        />
+                    } @else {
+                        <fd-avatar-group-overflow-button [size]="size" [colorAccent]="1">
+                            +{{ hiddenItems.length }}
+                        </fd-avatar-group-overflow-button>
+                    }
                 </fd-popover-control>
                 <ng-template fdPopoverBody>
                     <ng-template
@@ -69,7 +77,7 @@
                 [type]="type"
                 [size]="size"
                 [orientation]="orientation"
-                [attr.aria-label]="ariaLabel || _defaultAriaLabel()"
+                [attr.aria-label]="ariaLabel || _defaultAriaLabelGroup()"
                 role="button"
                 tabindex="0"
             >
@@ -108,7 +116,7 @@
             [ngTemplateOutletContext]="{ hiddenItems: hiddenItems }"
         />
     } @else {
-        <fd-avatar-group-overflow-button [size]="size" [colorAccent]="1">
+        <fd-avatar-group-overflow-button [size]="size" [colorAccent]="1" [fdkFocusableItem]="false">
             +{{ hiddenItems.length }}
         </fd-avatar-group-overflow-button>
     }

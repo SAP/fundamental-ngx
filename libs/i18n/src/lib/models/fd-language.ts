@@ -364,8 +364,10 @@ export interface FdLanguage {
         ariaLabel: FdLanguageKey;
     };
     coreAvatarGroup: {
-        /** Aria label for the avatar group container. Supports placeholders: {{count}} (total visible), {{hiddenCount}} (overflow count). */
-        ariaLabel: FdLanguageKey<{ count: number; hiddenCount: number }>;
+        /** Aria label for the avatar group container group type. Supports placeholders: {{count}} (total visible), {{hiddenCount}} (overflow count). */
+        ariaLabelGroup: FdLanguageKey<{ count: number; hiddenCount: number }>;
+        /** Aria label for the avatar group container individual type. Supports placeholders: {{count}} (total visible), {{hiddenCount}} (overflow count). */
+        ariaLabelIndividual: FdLanguageKey<{ count: number; hiddenCount: number }>;
         /** Back button label in the overflow popover */
         backButton: FdLanguageKey;
         /** Aria label for the overflow popup dialog. Supports placeholder: {{count}} (number of items). */

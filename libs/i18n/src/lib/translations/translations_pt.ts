@@ -19,8 +19,9 @@ export default {
         toolbarLabel: 'Barra de ação'
     },
     coreAvatarGroup: {
-        ariaLabel:
+        ariaLabelGroup:
             'Has popup type dialog conjoined avatars, {count} avatars displayed, {hiddenCount} avatars hidden, activate for complete list',
+        ariaLabelIndividual: 'Individual avatars. {count} avatars displayed, {hiddenCount} avatars hidden',
         backButton: 'Voltar',
         popupBodyAriaLabel: 'With {count} items'
     },

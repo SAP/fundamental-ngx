@@ -20,8 +20,9 @@ export default {
         toolbarLabel: 'Panel akcií'
     },
     coreAvatarGroup: {
-        ariaLabel:
+        ariaLabelGroup:
             'Has popup type dialog conjoined avatars, {count} avatars displayed, {hiddenCount} avatars hidden, activate for complete list',
+        ariaLabelIndividual: 'Individual avatars. {count} avatars displayed, {hiddenCount} avatars hidden',
         backButton: 'Späť',
         popupBodyAriaLabel: 'With {count} items'
     },
