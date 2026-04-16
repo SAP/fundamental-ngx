@@ -1,28 +1,30 @@
-import { UpperCasePipe } from '@angular/common';
+import { LowerCasePipe, UpperCasePipe } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
     computed,
-    effect,
+    DestroyRef,
     ElementRef,
     inject,
+    linkedSignal,
     signal,
     viewChild
 } from '@angular/core';
-import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { catchError, forkJoin, map, of, switchMap } from 'rxjs';
+
 import { ApiDocsService } from '../../services/api-docs.service';
-import { ApiMemberCategory, ApiMethod, ApiModel, SortDirection, UnifiedApiMember } from './api.model';
+import { ApiMemberCategory, ApiModel, SortDirection, UnifiedApiMember } from './api.model';
 
 @Component({
     selector: 'fd-api',
     templateUrl: './api.component.html',
     styleUrls: ['./api.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [ButtonComponent, IconComponent, UpperCasePipe],
+    imports: [ButtonComponent, IconComponent, LowerCasePipe, UpperCasePipe],
     host: {
         '(keydown)': 'onKeydown($event)'
     }
@@ -34,26 +36,87 @@ export class ApiComponent {
     protected readonly activeFile = signal<string>('');
     protected readonly files = signal<string[]>([]);
 
-    // Filtering & search
-    protected readonly activeCategory = signal<ApiMemberCategory>('all');
-    protected readonly searchQuery = signal<string>('');
-    protected readonly showDeprecated = signal(false);
-    protected readonly showInherited = signal(false);
-
     // Sorting
     protected readonly sortColumn = signal<string | null>(null);
     protected readonly sortDirection = signal<SortDirection>(null);
 
-    // Expand state
-    protected readonly expandedRows = signal<Set<string>>(new Set());
-    protected readonly focusedRowIndex = signal(-1);
-
     // Copy toast
     protected readonly copiedName = signal<string | null>(null);
 
-    // API data
-    protected readonly apiModel = signal<ApiModel | null>(null);
+    // Error state
     protected readonly loadError = signal<string | null>(null);
+
+    // API data (derived from reactive fetch)
+    protected readonly apiModel = computed(() => this._apiData());
+
+    // UI state that resets when API data changes
+    protected readonly activeCategory = linkedSignal<ApiModel | null, ApiMemberCategory>({
+        source: this.apiModel,
+        computation: () => 'all'
+    });
+    protected readonly searchQuery = linkedSignal<ApiModel | null, string>({
+        source: this.apiModel,
+        computation: () => ''
+    });
+    protected readonly showDeprecated = linkedSignal<ApiModel | null, boolean>({
+        source: this.apiModel,
+        computation: () => false
+    });
+    protected readonly showInherited = linkedSignal<ApiModel | null, boolean>({
+        source: this.apiModel,
+        computation: () => false
+    });
+    protected readonly expandedRows = linkedSignal<ApiModel | null, Set<string>>({
+        source: this.apiModel,
+        computation: () => new Set()
+    });
+    protected readonly focusedRowIndex = linkedSignal<ApiModel | null, number>({
+        source: this.apiModel,
+        computation: () => -1
+    });
+
+    // Files grouped by kind for the chip rail
+    protected readonly groupedFiles = computed(() => {
+        const files = this.files();
+        const groups: { label: string; kind: string; files: string[] }[] = [];
+        const components: string[] = [];
+        const directives: string[] = [];
+        const services: string[] = [];
+        const pipes: string[] = [];
+        const other: string[] = [];
+
+        for (const file of files) {
+            if (file.endsWith('Component')) {
+                components.push(file);
+            } else if (file.endsWith('Directive')) {
+                directives.push(file);
+            } else if (file.endsWith('Service')) {
+                services.push(file);
+            } else if (file.endsWith('Pipe')) {
+                pipes.push(file);
+            } else {
+                other.push(file);
+            }
+        }
+
+        if (components.length) {
+            groups.push({ label: 'Components', kind: 'component', files: components });
+        }
+        if (directives.length) {
+            groups.push({ label: 'Directives', kind: 'directive', files: directives });
+        }
+        if (services.length) {
+            groups.push({ label: 'Services', kind: 'service', files: services });
+        }
+        if (pipes.length) {
+            groups.push({ label: 'Pipes', kind: 'pipe', files: pipes });
+        }
+        if (other.length) {
+            groups.push({ label: 'Other', kind: 'other', files: other });
+        }
+
+        return groups;
+    });
 
     // Whether the current model has any signal-based inputs/outputs
     protected readonly hasSignals = computed(() => {
@@ -72,7 +135,7 @@ export class ApiComponent {
         }
         const inputs = this._countVisible(model.inputs);
         const outputs = this._countVisible(model.outputs);
-        const methods = this._countVisibleMethods(model.methods);
+        const methods = this._countVisible(model.methods);
         return { all: inputs + outputs + methods, inputs, outputs, methods };
     });
 
@@ -230,8 +293,19 @@ export class ApiComponent {
         return members;
     });
 
+    protected readonly allExpanded = computed(() => {
+        const filtered = this.filteredMembers();
+        if (filtered.length === 0) {
+            return false;
+        }
+        const expanded = this.expandedRows();
+        return filtered.every((m) => expanded.has(m.name));
+    });
+
     private readonly _route = inject(ActivatedRoute);
     private readonly _apiService = inject(ApiDocsService);
+    private readonly _destroyRef = inject(DestroyRef);
+    private _copyTimeout: ReturnType<typeof setTimeout> | null = null;
 
     // Reactive fetch: loads API JSON whenever activeFile changes
     private readonly _apiData = toSignal(
@@ -263,27 +337,17 @@ export class ApiComponent {
                 )
             );
 
-            forkJoin(apiChecks).subscribe((results) => {
-                const filesWithApi = results.filter((r) => r.hasApi).map((r) => r.file);
-                const sortedFiles = [...filesWithApi].sort();
-                this.files.set(sortedFiles);
-                if (sortedFiles.length > 0) {
-                    this.activeFile.set(sortedFiles[0]);
-                }
-            });
+            forkJoin(apiChecks)
+                .pipe(takeUntilDestroyed(this._destroyRef))
+                .subscribe((results) => {
+                    const filesWithApi = results.filter((r) => r.hasApi).map((r) => r.file);
+                    const sortedFiles = [...filesWithApi].sort();
+                    this.files.set(sortedFiles);
+                    if (sortedFiles.length > 0) {
+                        this.activeFile.set(sortedFiles[0]);
+                    }
+                });
         }
-
-        // Update apiModel when data arrives
-        effect(() => {
-            const data = this._apiData();
-            this.loadError.set(null);
-            this.apiModel.set(data);
-            // Reset UI state on file change
-            this.expandedRows.set(new Set());
-            this.focusedRowIndex.set(-1);
-            this.searchQuery.set('');
-            this.activeCategory.set('all');
-        });
     }
 
     protected getFile(file: string): void {
@@ -344,17 +408,8 @@ export class ApiComponent {
         this.expandedRows.set(new Set());
     }
 
-    protected get allExpanded(): boolean {
-        const filtered = this.filteredMembers();
-        if (filtered.length === 0) {
-            return false;
-        }
-        const expanded = this.expandedRows();
-        return filtered.every((m) => expanded.has(m.name));
-    }
-
     protected toggleExpandAll(): void {
-        if (this.allExpanded) {
+        if (this.allExpanded()) {
             this.collapseAll();
         } else {
             this.expandAll();
@@ -385,8 +440,11 @@ export class ApiComponent {
 
         try {
             await navigator.clipboard.writeText(text);
+            if (this._copyTimeout) {
+                clearTimeout(this._copyTimeout);
+            }
             this.copiedName.set(member.name);
-            setTimeout(() => this.copiedName.set(null), 1500);
+            this._copyTimeout = setTimeout(() => this.copiedName.set(null), 1500);
         } catch {
             // clipboard API not available
         }
@@ -410,7 +468,6 @@ export class ApiComponent {
         if (!model?.sourceUrl) {
             return '';
         }
-        // Replace the line number in the URL
         return model.sourceUrl.replace(/#L\d+$/, `#L${member.sourceLine}`);
     }
 
@@ -443,10 +500,16 @@ export class ApiComponent {
                 this.searchInput()?.nativeElement?.focus();
                 break;
             case 'ArrowDown':
+                if ((event.target as HTMLElement).tagName === 'INPUT') {
+                    return;
+                }
                 event.preventDefault();
                 this.focusedRowIndex.update((i) => Math.min(i + 1, members.length - 1));
                 break;
             case 'ArrowUp':
+                if ((event.target as HTMLElement).tagName === 'INPUT') {
+                    return;
+                }
                 event.preventDefault();
                 this.focusedRowIndex.update((i) => Math.max(i - 1, 0));
                 break;
@@ -483,17 +546,10 @@ export class ApiComponent {
         return members.filter((m) => !m.deprecated).length;
     }
 
-    private _countVisibleMethods(methods: ApiMethod[]): number {
-        if (this.showDeprecated()) {
-            return methods.length;
-        }
-        return methods.filter((m) => !m.deprecated).length;
-    }
-
     private _hasApiMembers(data: ApiModel | null): boolean {
         if (!data) {
             return false;
         }
-        return data.inputs.length > 0 || data.outputs.length > 0 || data.methods.length > 0;
+        return data.inputs.length > 0 || data.outputs.length > 0 || data.methods.length > 0 || !!data.selector;
     }
 }

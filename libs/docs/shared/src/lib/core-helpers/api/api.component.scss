@@ -4,53 +4,101 @@
     color: var(--sapTextColor);
 }
 
-// ── File Tabs ──────────────────────────────────────────────
-.api-file-tabs {
+// ── File Switcher (grouped chips) ─────────────────────────
+.api-file-switcher {
     display: flex;
-    gap: 0;
-    flex-wrap: wrap;
-    border-bottom: 2px solid var(--sapList_BorderColor, #e5e5e5);
+    flex-direction: column;
+    gap: 0.5rem;
     margin-block-end: 1.25rem;
-    padding-block-start: 0.25rem;
-    background: var(--sapBackgroundColor, #f5f6f7);
+    padding: 0.75rem;
+    border: 1px solid var(--sapGroup_ContentBorderColor);
+    border-radius: 0.5rem;
+    background: var(--sapBackgroundColor);
 }
 
-.api-file-tab {
-    position: relative;
-    padding: 0.625rem 1.25rem;
-    border: none;
-    background: none;
-    font-family: inherit;
-    font-size: 0.9375rem;
-    font-weight: 400;
+.api-file-group {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+}
+
+.api-file-group__label {
+    flex-shrink: 0;
+    min-width: 5.5rem;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.25rem 0;
+
+    &--component {
+        color: var(--sapInformativeColor);
+    }
+
+    &--directive {
+        color: var(--sapPositiveElementColor);
+    }
+
+    &--service {
+        color: var(--sapWarningColor);
+    }
+
+    &--pipe {
+        color: var(--sapAccentColor7);
+    }
+
+    &--other {
+        color: var(--sapContent_LabelColor);
+    }
+}
+
+.api-file-group__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+}
+
+.api-file-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.3125rem 0.75rem;
+    border: 1px solid var(--sapGroup_ContentBorderColor);
+    border-radius: 1.25rem;
+    background: var(--sapBaseColor);
     color: var(--sapContent_LabelColor);
+    font-family: inherit;
+    font-size: 0.8125rem;
+    font-weight: 500;
     white-space: nowrap;
     cursor: pointer;
     transition:
-        color 180ms ease,
-        font-weight 180ms ease;
-
-    &::after {
-        content: '';
-        position: absolute;
-        bottom: -2px;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: transparent;
-        transition: background 180ms ease;
-    }
+        all 160ms ease,
+        transform 100ms ease;
 
     &:hover {
+        border-color: var(--sapBrandColor);
         color: var(--sapBrandColor);
+        transform: translateY(-1px);
+        box-shadow: var(--sapContent_Shadow0);
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--sapBrandColor);
+        outline-offset: 2px;
     }
 
     &--active {
-        color: var(--sapBrandColor);
-        font-weight: 700;
+        background: var(--sapBrandColor);
+        border-color: var(--sapBrandColor);
+        color: var(--sapContent_ContrastTextColor);
+        font-weight: 600;
+        box-shadow: var(--sapContent_Shadow1);
 
-        &::after {
-            background: var(--sapBrandColor);
+        &:hover {
+            background: var(--sapButton_Active_Background);
+            border-color: var(--sapButton_Active_BorderColor);
+            color: var(--sapContent_ContrastTextColor);
+            box-shadow: var(--sapContent_Shadow2);
         }
     }
 }
@@ -99,13 +147,13 @@
 }
 
 .api-badge--kind {
-    background: linear-gradient(135deg, var(--sapInformationBackground, #e1f4ff), #f0f8ff);
-    border-color: var(--sapInformativeColor, #0070f2);
-    color: var(--sapInformativeColor, #0070f2);
+    background: var(--sapInformationBackground);
+    border-color: var(--sapInformativeColor);
+    color: var(--sapInformativeColor);
 }
 
 .api-badge--selector {
-    background: linear-gradient(135deg, var(--sapSuccessBackground, #f1fdf1), #f8fff8);
+    background: var(--sapSuccessBackground);
     border-color: var(--sapPositiveElementColor);
     color: var(--sapPositiveElementColor);
     font-family: var(--sapFontMonoFamily, 'Consolas', monospace);
@@ -113,31 +161,31 @@
 }
 
 .api-badge--signal {
-    background: linear-gradient(135deg, #e1f4ff, #f0f8ff);
-    border-color: var(--sapInformativeColor, #0070f2);
-    color: var(--sapInformativeColor, #0070f2);
+    background: var(--sapInformationBackground);
+    border-color: var(--sapInformativeColor);
+    color: var(--sapInformativeColor);
 }
 
 .api-badge--input {
-    background: linear-gradient(135deg, var(--sapInformationBackground, #e1f4ff), #f0f8ff);
-    color: var(--sapInformativeColor, #0064d9);
-    border-color: var(--sapInformativeColor, #0064d9);
+    background: var(--sapInformationBackground);
+    color: var(--sapInformativeColor);
+    border-color: var(--sapInformativeColor);
 }
 
 .api-badge--output {
-    background: linear-gradient(135deg, var(--sapWarningBackground, #fff8e1), #fffef5);
-    color: var(--sapWarningColor, #e76500);
-    border-color: var(--sapWarningColor, #e76500);
+    background: var(--sapWarningBackground);
+    color: var(--sapWarningColor);
+    border-color: var(--sapWarningColor);
 }
 
 .api-badge--method {
-    background: linear-gradient(135deg, var(--sapSuccessBackground, #f1fdf1), #f8fff8);
+    background: var(--sapSuccessBackground);
     color: var(--sapPositiveElementColor);
     border-color: var(--sapPositiveElementColor);
 }
 
 .api-badge--deprecated {
-    background: linear-gradient(135deg, var(--sapErrorBackground, #fff2f2), #fff8f8);
+    background: var(--sapErrorBackground);
     color: var(--sapNegativeElementColor);
     border-color: var(--sapNegativeElementColor);
     font-size: 0.625rem;
@@ -165,9 +213,9 @@
     align-items: center;
     gap: 0.375rem;
     padding: 0.375rem 0.75rem;
-    border: 1px solid var(--sapGroup_ContentBorderColor, #d9d9d9);
+    border: 1px solid var(--sapGroup_ContentBorderColor);
     border-radius: 1.25rem;
-    background: var(--sapBaseColor, #fff);
+    background: var(--sapBaseColor);
     color: var(--sapContent_LabelColor);
     font-family: inherit;
     font-size: 0.8125rem;
@@ -188,22 +236,22 @@
     &--active {
         background: var(--sapBrandColor);
         border-color: var(--sapBrandColor);
-        color: #fff;
+        color: var(--sapContent_ContrastTextColor);
 
         &:hover {
-            background: #0854a0;
-            border-color: #0854a0;
-            color: #fff;
+            background: var(--sapButton_Active_Background);
+            border-color: var(--sapButton_Active_BorderColor);
+            color: var(--sapContent_ContrastTextColor);
         }
 
         &:focus-visible {
-            outline: 2px solid var(--sapContent_FocusColor, #000);
+            outline: 2px solid var(--sapContent_FocusColor);
             outline-offset: 2px;
         }
 
         .api-pill__count {
             background: rgba(255, 255, 255, 0.25);
-            color: #fff;
+            color: var(--sapContent_ContrastTextColor);
         }
     }
 }
@@ -216,7 +264,7 @@
     height: 1.25rem;
     padding: 0 0.25rem;
     border-radius: 0.625rem;
-    background: var(--sapNeutralBackground, #eaecee);
+    background: var(--sapNeutralBackground);
     color: var(--sapContent_LabelColor);
     font-size: 0.6875rem;
     font-weight: 700;
@@ -231,9 +279,9 @@
     max-width: 360px;
     height: 2rem;
     padding: 0 0.5rem;
-    border: 1px solid var(--sapGroup_ContentBorderColor, #d9d9d9);
+    border: 1px solid var(--sapGroup_ContentBorderColor);
     border-radius: 0.25rem;
-    background: var(--sapBaseColor, #fff);
+    background: var(--sapBaseColor);
     transition: border-color 180ms ease;
 
     &:focus-within {
@@ -243,7 +291,7 @@
 }
 
 .api-search__icon {
-    color: var(--sapContent_NonInteractiveIconColor, #788fa6);
+    color: var(--sapContent_NonInteractiveIconColor);
     font-size: 0.875rem;
     margin-inline-end: 0.375rem;
 }
@@ -282,12 +330,12 @@
     height: 1.25rem;
     padding: 0 0.25rem;
     margin-inline-start: 0.375rem;
-    border: 1px solid var(--sapGroup_ContentBorderColor, #d9d9d9);
+    border: 1px solid var(--sapGroup_ContentBorderColor);
     border-radius: 0.1875rem;
     font-family: inherit;
     font-size: 0.6875rem;
     color: var(--sapContent_LabelColor);
-    background: var(--sapBackgroundColor, #f5f6f7);
+    background: var(--sapBackgroundColor);
 }
 
 // ── Toggles ─────────────────────────────────────────────────
@@ -301,9 +349,9 @@
     align-items: center;
     gap: 0.375rem;
     padding: 0.375rem 0.625rem;
-    border: 1px solid var(--sapGroup_ContentBorderColor, #d9d9d9);
+    border: 1px solid var(--sapGroup_ContentBorderColor);
     border-radius: 0.25rem;
-    background: var(--sapBaseColor, #fff);
+    background: var(--sapBaseColor);
     color: var(--sapContent_LabelColor);
     font-family: inherit;
     font-size: 0.75rem;
@@ -321,7 +369,7 @@
     }
 
     &--active {
-        background: var(--sapList_SelectionBackgroundColor, #ebf5fe);
+        background: var(--sapList_SelectionBackgroundColor);
         border-color: var(--sapBrandColor);
         color: var(--sapBrandColor);
     }
@@ -329,12 +377,12 @@
 
 // ── Table ───────────────────────────────────────────────────
 .api-table-wrapper {
-    border: 1px solid var(--sapList_BorderColor, #e5e5e5);
+    border: 1px solid var(--sapList_BorderColor);
     border-radius: 0.5rem;
     overflow-x: auto;
     overflow-y: hidden;
-    background: var(--sapList_Background, #fff);
-    box-shadow: var(--sapContent_Shadow0, 0 0 2px rgba(0, 0, 0, 0.16), 0 2px 4px rgba(0, 0, 0, 0.08));
+    background: var(--sapList_Background);
+    box-shadow: var(--sapContent_Shadow0);
 }
 
 .api-table {
@@ -352,8 +400,8 @@
     color: var(--sapContent_LabelColor);
     text-transform: uppercase;
     letter-spacing: 0.04em;
-    border-bottom: 2px solid var(--sapList_BorderColor, #e5e5e5);
-    background: var(--sapBackgroundColor, #f5f6f7);
+    border-bottom: 2px solid var(--sapList_BorderColor);
+    background: var(--sapBackgroundColor);
     cursor: pointer;
     user-select: none;
     white-space: nowrap;
@@ -393,18 +441,18 @@
 .api-row {
     cursor: pointer;
     transition: background 120ms ease;
-    border-bottom: 1px solid var(--sapList_BorderColor, #e5e5e5);
+    border-bottom: 1px solid var(--sapList_BorderColor);
 
     &:last-child {
         border-bottom: none;
     }
 
     &:hover {
-        background: var(--sapList_Hover_Background, #eaecee);
+        background: var(--sapList_Hover_Background);
     }
 
     &--expanded {
-        background: var(--sapList_SelectionBackgroundColor, #ebf5fe);
+        background: var(--sapList_SelectionBackgroundColor);
     }
 
     &--deprecated {
@@ -438,20 +486,11 @@
     gap: 0.375rem;
 }
 
-.api-signal-dot {
-    display: inline-block;
-    width: 0.4375rem;
-    height: 0.4375rem;
-    border-radius: 50%;
-    background: var(--sapBrandColor);
-    flex-shrink: 0;
-}
-
 .api-name {
     font-family: var(--sapFontMonoFamily, 'Consolas', monospace);
     font-size: 0.8125rem;
     font-weight: 600;
-    color: var(--sapLinkColor, #0064d9);
+    color: var(--sapLinkColor);
 
     &--deprecated {
         text-decoration: line-through;
@@ -468,7 +507,7 @@
     border: none;
     border-radius: 0.1875rem;
     background: transparent;
-    color: var(--sapContent_NonInteractiveIconColor, #788fa6);
+    color: var(--sapContent_NonInteractiveIconColor);
     cursor: pointer;
     opacity: 0;
     transition: opacity 120ms ease;
@@ -482,7 +521,7 @@
     }
 
     &:hover {
-        background: var(--sapList_Hover_Background, #eaecee);
+        background: var(--sapList_Hover_Background);
         color: var(--sapContent_IconColor);
     }
 
@@ -506,7 +545,7 @@
 }
 
 .api-none {
-    color: var(--sapNeutralColor, #788fa6);
+    color: var(--sapNeutralColor);
 }
 
 .api-desc-text {
@@ -520,8 +559,8 @@
 
 // ── Detail row ──────────────────────────────────────────────
 .api-detail-row {
-    background: var(--sapBackgroundColor, #f5f6f7);
-    border-bottom: 1px solid var(--sapList_BorderColor, #e5e5e5);
+    background: var(--sapBackgroundColor);
+    border-bottom: 1px solid var(--sapList_BorderColor);
 }
 
 .api-detail-cell {
@@ -545,7 +584,7 @@
     gap: 0.375rem;
     padding: 0.5rem 0.75rem;
     margin-block-end: 0.75rem;
-    background: var(--sapErrorBackground, #fff2f2);
+    background: var(--sapErrorBackground);
     border-radius: 0.25rem;
     color: var(--sapNegativeElementColor);
     font-size: 0.8125rem;
@@ -600,12 +639,12 @@
     border-radius: 0.1875rem;
     font-size: 0.6875rem;
     font-weight: 600;
-    background: var(--sapNeutralBackground, #eaecee);
+    background: var(--sapNeutralBackground);
     color: var(--sapContent_LabelColor);
 
     &--signal {
-        background: var(--sapInformationBackground, #e1f4ff);
-        color: var(--sapInformativeColor, #0070f2);
+        background: var(--sapInformationBackground);
+        color: var(--sapInformativeColor);
     }
 
     &--link {
@@ -613,7 +652,7 @@
         cursor: pointer;
         color: var(--sapLinkColor);
         background: transparent;
-        border: 1px solid var(--sapGroup_ContentBorderColor, #d9d9d9);
+        border: 1px solid var(--sapGroup_ContentBorderColor);
 
         &:hover {
             border-color: var(--sapLinkColor);
@@ -626,7 +665,7 @@
 }
 
 .api-detail__usage {
-    border: 1px solid var(--sapList_BorderColor, #e5e5e5);
+    border: 1px solid var(--sapList_BorderColor);
     border-radius: 0.375rem;
     overflow: hidden;
 }
@@ -638,15 +677,15 @@
     text-transform: uppercase;
     letter-spacing: 0.04em;
     color: var(--sapContent_LabelColor);
-    background: var(--sapList_Background, #fff);
-    border-bottom: 1px solid var(--sapList_BorderColor, #e5e5e5);
+    background: var(--sapList_Background);
+    border-bottom: 1px solid var(--sapList_BorderColor);
 }
 
 .api-detail__code {
     margin: 0;
     padding: 0.75rem;
-    background: #1e2d3d;
-    color: #d4dae0;
+    background: var(--sapBackgroundColor);
+    color: var(--sapTextColor);
     font-family: var(--sapFontMonoFamily, 'Consolas', monospace);
     font-size: 0.8125rem;
     font-weight: 500;
@@ -687,9 +726,9 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.5rem 0.75rem;
-    border: 1px solid var(--sapGroup_ContentBorderColor, #d9d9d9);
+    border: 1px solid var(--sapGroup_ContentBorderColor);
     border-radius: 0.25rem;
-    background: var(--sapBaseColor, #fff);
+    background: var(--sapBaseColor);
     color: var(--sapContent_LabelColor);
     font-family: inherit;
     font-size: 0.8125rem;
@@ -708,7 +747,7 @@
 
 .api-table--inherited {
     opacity: 0.7;
-    border: 1px solid var(--sapList_BorderColor, #e5e5e5);
+    border: 1px solid var(--sapList_BorderColor);
     border-radius: 0.5rem;
     overflow: hidden;
 }
@@ -716,27 +755,85 @@
 // ── Keyboard hints ──────────────────────────────────────────
 .api-keyboard-hints {
     display: flex;
-    gap: 0.75rem;
-    justify-content: center;
-    padding: 0.75rem;
-    margin-block-start: 1rem;
-    font-size: 0.6875rem;
+    gap: 0.5rem;
+    justify-content: flex-end;
+    padding: 0.375rem 0.75rem;
+    margin-block-start: 0.25rem;
+    font-size: 0.625rem;
     color: var(--sapContent_LabelColor);
+    opacity: 0.6;
+    transition: opacity 180ms ease;
+
+    &:hover {
+        opacity: 1;
+    }
 
     kbd {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        min-width: 1.25rem;
-        height: 1.25rem;
-        padding: 0 0.25rem;
-        margin-inline-end: 0.25rem;
-        border: 1px solid var(--sapGroup_ContentBorderColor, #d9d9d9);
-        border-radius: 0.1875rem;
+        min-width: 1rem;
+        height: 1rem;
+        padding: 0 0.1875rem;
+        margin-inline-end: 0.125rem;
+        border: 1px solid var(--sapGroup_ContentBorderColor);
+        border-radius: 0.125rem;
         font-family: inherit;
-        font-size: 0.625rem;
-        background: var(--sapBackgroundColor, #f5f6f7);
+        font-size: 0.5625rem;
+        background: var(--sapBackgroundColor);
     }
+}
+
+// ── Structural class card ──────────────────────────────────
+.api-structural {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2.5rem 1.5rem;
+    margin-block-start: 0.5rem;
+    border: 1px dashed var(--sapGroup_ContentBorderColor);
+    border-radius: 0.5rem;
+    background: var(--sapBackgroundColor);
+    text-align: center;
+}
+
+.api-structural__icon {
+    font-size: 1.5rem;
+    color: var(--sapContent_NonInteractiveIconColor);
+    margin-block-end: 0.75rem;
+}
+
+.api-structural__text {
+    margin: 0 0 1rem;
+    font-size: 0.875rem;
+    color: var(--sapContent_LabelColor);
+    max-width: 40ch;
+    line-height: 1.5;
+}
+
+.api-structural__usage {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.625rem 1rem;
+    border-radius: 0.375rem;
+    background: var(--sapBaseColor);
+    border: 1px solid var(--sapGroup_ContentBorderColor);
+}
+
+.api-structural__usage-label {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--sapContent_LabelColor);
+}
+
+.api-structural__selector {
+    font-family: var(--sapFontMonoFamily, 'Consolas', monospace);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--sapPositiveElementColor);
 }
 
 // ── Error / Loading ─────────────────────────────────────────

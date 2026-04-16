@@ -1,3 +1,11 @@
+// BEING UPDATED WITH THE SAP-COMPONENT SCHEMATIC; DO NOT MODIFY THE STRUCTURE!
+
+/**
+ * Files to display in the API tab of each component.
+ * Names should be without hyphens, and capitalized where hyphens occur normally.
+ * Include the suffix i.e. Directive or Component.
+ * Names are sorted in the ApiComponent so order does not matter.
+ */
 export const API_FILES = {
     actionBar: [
         'ActionBarComponent',
@@ -15,8 +23,13 @@ export const API_FILES = {
         'ActionSheetBodyComponent'
     ],
     alert: [],
-    avatar: ['AvatarComponent'],
-    avatarGroup: ['AvatarGroupComponent'],
+    avatar: ['AvatarComponent', 'AvatarIconPipe'],
+    avatarGroup: [
+        'AvatarGroupComponent',
+        'AvatarGroupItemDirective',
+        'AvatarGroupOverflowBodyComponent',
+        'AvatarGroupOverflowButtonComponent'
+    ],
     avatarGroupLegacy: [
         'AvatarGroupLegacyComponent',
         'AvatarGroupLegacyItemDirective',
@@ -28,7 +41,14 @@ export const API_FILES = {
         'AvatarGroupLegacyOverflowButtonTextDirective'
     ],
     initialFocus: ['InitialFocusDirective'],
-    bar: ['BarComponent', 'BarElementDirective', 'BarLeftDirective', 'BarMiddleDirective', 'BarRightDirective'],
+    bar: [
+        'BarComponent',
+        'BarElementDirective',
+        'BarLeftDirective',
+        'BarMiddleDirective',
+        'BarRightDirective',
+        'ButtonBarComponent'
+    ],
     card: [
         'CardComponent',
         'CardHeaderComponent',
@@ -43,16 +63,25 @@ export const API_FILES = {
         'CardKpiScaleTextDirective',
         'CardKpiAnalyticsDirective',
         'CardKpiAnalyticsLabelDirective',
-        'CardKpiAnalyticsContentDirective'
+        'CardKpiAnalyticsContentDirective',
+        'CardCounterDirective',
+        'CardExtendedHeaderComponent',
+        'CardHeaderColumnDirective',
+        'CardListDirective',
+        'CardMainHeaderComponent',
+        'CardMediaComponent',
+        'CardMediaContentContainerDirective',
+        'CardMediaHeadingDirective',
+        'CardNumericHeaderComponent'
     ],
     dynamicSideContent: [
         'DynamicSideContentComponent',
         'DynamicSideContentSideComponent',
         'DynamicSideContentMainComponent'
     ],
-    breadcrumb: ['BreadcrumbComponent'],
+    breadcrumb: ['BreadcrumbComponent', 'BreadcrumbItemComponent'],
     busyIndicator: ['BusyIndicatorComponent', 'BusyIndicatorExtendedDirective'],
-    button: ['ButtonComponent'],
+    button: ['ButtonComponent', 'ButtonBadgeDirective'],
     segmentedButton: ['SegmentedButtonComponent'],
     calendar: [
         'CalendarComponent',
@@ -61,10 +90,21 @@ export const API_FILES = {
         'CalendarYearViewComponent',
         'CalendarI18nLabels',
         'FdDate',
-        'FdDatetimeAdapter'
+        'FdDatetimeAdapter',
+        'CalendarAggregatedYearViewComponent',
+        'CalendarHeaderComponent',
+        'CalendarLegendComponent',
+        'CalendarLegendFocusingService',
+        'CalendarService'
     ],
-    carousel: ['CarouselComponent', 'CarouselItemComponent', 'CarouselService'],
-    combobox: ['ComboboxComponent'],
+    carousel: [
+        'CarouselComponent',
+        'CarouselItemComponent',
+        'CarouselService',
+        'CarouselDirective',
+        'CarouselItemDirective'
+    ],
+    combobox: ['ComboboxComponent', 'ListGroupPipe'],
     checkbox: ['CheckboxComponent'],
     oldContentDensity: [],
     contentDensity: [
@@ -75,7 +115,17 @@ export const API_FILES = {
         'ContentDensityStorage',
         'ContentDensityMode'
     ],
-    datePicker: ['DatePickerComponent', 'FdDate', 'FdDatetimeAdapter'],
+    datePicker: [
+        'DatePickerComponent',
+        'FdDate',
+        'FdDatetimeAdapter',
+        'DatetimeAdapter',
+        'DateFormatPipe',
+        'DateFromNowPipe',
+        'DateTimeFormatPipe',
+        'DayPeriodFormatPipe',
+        'TranslateDayPeriodPipe'
+    ],
     datetimePicker: ['DatetimePickerComponent', 'FdDate', 'FdDatetimeAdapter'],
     dynamicPage: [
         'DynamicPageComponent',
@@ -85,9 +135,10 @@ export const API_FILES = {
         'DynamicPageLayoutActionsComponent',
         'DynamicPageGlobalActionsComponent',
         'DynamicPageFooterComponent',
-        'DynamicPageContentComponent'
+        'DynamicPageContentComponent',
+        'DynamicPageBaseActions'
     ],
-    facets: ['FacetComponent', 'FacetGroupComponent'],
+    facets: ['FacetComponent', 'FacetGroupComponent', 'FacetContainerComponent'],
     feedInput: [
         'FeedInputComponent',
         'FeedInputTextareaDirective',
@@ -111,7 +162,8 @@ export const API_FILES = {
         'FormHeaderComponent',
         'FormLegendDirective',
         'FormMessageComponent',
-        'FormInputMessageGroupComponent'
+        'FormInputMessageGroupComponent',
+        'PopoverFormMessageService'
     ],
     formattedText: ['FormattedTextComponent'],
     formMessage: ['FormInputMessageGroupComponent'],
@@ -121,7 +173,7 @@ export const API_FILES = {
     infoLabel: ['InfoLabelComponent'],
     infiniteScroll: ['InfiniteScrollDirective'],
     inlineHelp: ['InlineHelpDirective'],
-    inputGroup: ['InputGroupComponent'],
+    inputGroup: ['InputGroupComponent', 'InputGroupAddOnDirective', 'InputGroupInputDirective'],
     layoutGrid: ['LayoutGridComponent', 'LayoutGridColDirective', 'LayoutGridRowDirective'],
     layoutPanel: [
         'LayoutPanelComponent',
@@ -147,17 +199,47 @@ export const API_FILES = {
         'ListNavigationItemTextDirective',
         'ListNavigationItemComponent',
         'ListSublineDirective',
-        'ListInfoLabelDirective'
+        'ListInfoLabelDirective',
+        'ListBylineDirective',
+        'ListBylineLeftDirective',
+        'ListBylineRightDirective',
+        'ListFocusItem',
+        'ListItemComponent'
     ],
-    menu: ['MenuAddonDirective', 'MenuComponent', 'MenuTitleDirective', 'MenuKeyboardService'],
+    menu: [
+        'MenuAddonDirective',
+        'MenuComponent',
+        'MenuTitleDirective',
+        'MenuKeyboardService',
+        'DefaultMenuItem',
+        'MenuItemComponent',
+        'MenuItemInputDirective',
+        'MenuMobileComponent',
+        'MenuService',
+        'MenuShortcutDirective',
+        'MenuSubtitleDirective',
+        'SubmenuComponent',
+        'ToggleButtonDirective'
+    ],
     messageStrip: [
         'MessageStripComponent',
         'AutoDismissMessageStripDirective',
         'MessageStripAlertService',
         'MessageStripAlertRef'
     ],
-    messageToast: ['MessageToastComponent', 'MessageToastConfig', 'MessageToastService', 'MessageToastRef'],
-    microProcessFlow: ['MicroProcessFlowComponent', 'MicroProcessFlowItemComponent', 'MicroProcessFlowIconComponent'],
+    messageToast: [
+        'MessageToastComponent',
+        'MessageToastConfig',
+        'MessageToastService',
+        'MessageToastRef',
+        'ToastOverlayContainer'
+    ],
+    microProcessFlow: [
+        'MicroProcessFlowComponent',
+        'MicroProcessFlowItemComponent',
+        'MicroProcessFlowIconComponent',
+        'MicroProcessFlowFocusableItemDirective'
+    ],
     momentDatetimeAdapter: [],
     dayjsDatetimeAdapter: [],
     dialog: [
@@ -169,9 +251,16 @@ export const API_FILES = {
         'DialogBodyComponent',
         'DialogHeaderComponent',
         'DialogFooterComponent',
-        'DialogRef'
+        'DialogRef',
+        'DialogBaseService',
+        'DialogCloseButtonComponent',
+        'DialogDefaultComponent',
+        'DialogFullScreenTogglerButtonComponent',
+        'DialogOverlayContainer',
+        'DialogRefBase',
+        'DialogTemplateDirective'
     ],
-    multiInput: ['MultiInputComponent'],
+    multiInput: ['MultiInputComponent', 'MultiInputMobileComponent'],
     messageBox: [
         'MessageBoxRef',
         'MessageBoxConfig',
@@ -183,7 +272,8 @@ export const API_FILES = {
         'MessageBoxFooterComponent',
         'MessageBoxDefaultComponent',
         'MessageBoxSemanticIconComponent',
-        'MessageBoxContainerComponent'
+        'MessageBoxContainerComponent',
+        'MessageBoxTemplateDirective'
     ],
     notification: [
         'NotificationTitleDirective',
@@ -201,23 +291,30 @@ export const API_FILES = {
         'NotificationFooterComponent',
         'NotificationContainer',
         'NotificationConfig',
-        'NotificationRef'
+        'NotificationRef',
+        'NotificationGroupHeaderTitleDirective',
+        'NotificationLinkComponent',
+        'NotificationListDirective',
+        'NotificationService'
     ],
     objectAttribute: ['ObjectAttributeComponent'],
     objectIdentifier: ['ObjectIdentifierComponent'],
     objectMarker: ['ObjectMarkerComponent'],
-    objectStatus: ['ObjectStatusModule', 'ObjectStatusComponent'],
+    objectStatus: ['ObjectStatusComponent'],
     pagination: ['PaginationComponent', 'PaginationService'],
-    panel: ['PanelComponent', 'PanelTitleDirective'],
+    panel: ['PanelComponent', 'PanelTitleDirective', 'PanelContentDirective'],
     popover: [
         'PopoverComponent',
         'PopoverBodyComponent',
         'PopoverControlComponent',
         'PopoverBodyHeaderDirective',
-        'PopoverBodyFooterDirective'
+        'PopoverBodyFooterDirective',
+        'PopoverMobileComponent',
+        'PopoverPosition',
+        'PopoverService'
     ],
     objectNumber: ['ObjectNumberComponent'],
-    productSwitch: ['ProductSwitchComponent', 'ProductSwitchItem'],
+    productSwitch: ['ProductSwitchComponent', 'ProductSwitchItem', 'ProductSwitchBodyComponent'],
     progressIndicator: ['ProgressIndicatorComponent'],
     quickView: [
         'QuickViewComponent',
@@ -233,7 +330,13 @@ export const API_FILES = {
         'QuickViewGroupItemContentElementDirective'
     ],
     scrollSpy: ['ScrollSpyDirective'],
-    select: ['SelectComponent', 'OptionComponent'],
+    select: [
+        'SelectComponent',
+        'OptionComponent',
+        'SelectableItemDirective',
+        'SelectableItemToken',
+        'SelectionService'
+    ],
     shellbar: [
         'ProductMenuComponent',
         'ShellbarComponent',
@@ -243,8 +346,12 @@ export const API_FILES = {
         'ShellbarSubtitleComponent',
         'ShellbarTitleComponent',
         'ShellbarBrandingComponent',
-        'ShellbarContextAreaComponent'
+        'ShellbarContextAreaComponent',
+        'ShellbarActionsMobileComponent',
+        'ShellbarUserMenuButtonDirective',
+        'ShellbarUserMenuComponent'
     ],
+    radio: ['RadioButtonComponent'],
     sideNavigation: [
         'SideNavigationComponent',
         'SideNavigationModel',
@@ -256,7 +363,14 @@ export const API_FILES = {
         'NestedListItem',
         'NestedListModel',
         'NestedListLink',
-        'NestedItemService'
+        'NestedItemService',
+        'NestedItemDirective',
+        'NestedLinkDirective',
+        'NestedListContentDirective',
+        'NestedListExpandIconComponent',
+        'NestedListKeyboardService',
+        'NestedListTitleDirective',
+        'PreparedNestedListComponent'
     ],
     splitButton: ['SplitButtonComponent', 'SplitButtonActionTitle'],
     table: [
@@ -267,7 +381,11 @@ export const API_FILES = {
         'TableComponent',
         'TableResponsiveWrapperDirective',
         'TableWrapperComponent',
-        'TableFixedDirective'
+        'TableFixedDirective',
+        'TableContainerDirective',
+        'TableIconDirective',
+        'TableStatusIndicatorDirective',
+        'TableTextDirective'
     ],
     tabs: [
         'TabListComponent',
@@ -322,15 +440,22 @@ export const API_FILES = {
     time: ['TimeComponent', 'TimeColumnComponent'],
     timePicker: ['TimePickerComponent', 'FdDate', 'FdDatetimeAdapter'],
     title: ['TitleComponent'],
-    truncate: ['TruncateDirective'],
+    truncate: ['TruncateDirective', 'TruncatePipe'],
     switch: ['SwitchComponent'],
     stepInput: ['StepInputComponent'],
-    slider: ['SliderComponent'],
-    token: ['TokenComponent', 'TokenizerComponent'],
-    toolbar: ['ToolbarComponent'],
-    tree: ['TreeComponent', 'TreeItemComponent', 'TreeItemDefDirective'],
-    ratingIndicator: ['RatingIndicatorComponent'],
-    wizard: ['WizardComponent'],
+    slider: ['SliderComponent', 'SliderPositionDirective'],
+    token: ['TokenComponent', 'TokenizerComponent', 'TokenizerInputDirective'],
+    toolbar: ['ToolbarComponent', 'ToolbarItemDirective', 'ToolbarSpacerDirective'],
+    tree: ['TreeComponent', 'TreeItemComponent', 'TreeItemDefDirective', 'TreeDataSourceParser', 'TreeItemDirective'],
+    ratingIndicator: ['RatingIndicatorComponent', 'RatingStarLabelPipe'],
+    wizard: [
+        'WizardComponent',
+        'WizardContentComponent',
+        'WizardNextStepComponent',
+        'WizardProgressBarDirective',
+        'WizardStepComponent',
+        'WizardStepIndicatorComponent'
+    ],
     gridList: [
         'GridListComponent',
         'GridListItemComponent',
@@ -350,7 +475,7 @@ export const API_FILES = {
         'MessagePageTitleComponent',
         'MessagePageSubtitleComponent'
     ],
-    resizableCardLayout: ['ResizableCardLayoutComponent', 'ResizableCardItemComponent'],
+    resizableCardLayout: ['ResizableCardLayoutComponent', 'ResizableCardItemComponent', 'ResizedEvent'],
     verticalNavigation: [
         'VerticalNavigationComponent',
         'VerticalNavigationMainNavigationComponent',
@@ -375,9 +500,15 @@ export const API_FILES = {
         'TimelineNodeComponent',
         'TimelineNodeHeaderInfoTitleDirective',
         'TimelineNodeHeaderInfoTextDirective',
-        'TimelineHeaderInfoSubTitleDirective'
+        'TimelineHeaderInfoSubTitleDirective',
+        'HorizontalDoubleSidesStrategy',
+        'HorizontalSingleSideStrategy',
+        'PositionStrategyFactory',
+        'TimelinePositionControlService',
+        'VerticalDoubleSidesStrategy',
+        'VerticalSingleSideStrategy'
     ],
-    scrollbar: [],
+    scrollbar: ['ScrollbarDirective'],
     theming: ['ThemingService', 'BaseThemingConfig'],
     overflowLayout: [
         'OverflowLayoutComponent',
@@ -385,7 +516,9 @@ export const API_FILES = {
         'OverflowExpandDirective',
         'OverflowLayoutItemDirective',
         'OverflowItemContainerRefDirective',
-        'OverflowLayoutPopoverContentDirective'
+        'OverflowLayoutPopoverContentDirective',
+        'OverflowLayoutFocusableItemDirective',
+        'OverflowLayoutService'
     ],
     skeleton: ['SkeletonComponent'],
     multiCombobox: [
@@ -393,7 +526,8 @@ export const API_FILES = {
         'MobileMultiComboboxComponent',
         'MultiComboboxSelectionChangeEvent',
         'MultiComboboxDataSourceParser',
-        'FdMultiComboBoxDataSource'
+        'FdMultiComboBoxDataSource',
+        'SelectAllTogglerComponent'
     ],
     genericTag: ['GenericTagComponent'],
     settingsDialog: [
@@ -408,5 +542,13 @@ export const API_FILES = {
         'SettingsListAreaDirective',
         'SettingsListContainerDirective'
     ],
-    userMenu: ['UserMenuComponent']
-};
+    userMenu: [
+        'UserMenuComponent',
+        'UserMenuBodyComponent',
+        'UserMenuControlComponent',
+        'UserMenuListItemComponent',
+        'UserMenuSublineDirective',
+        'UserMenuSublistComponent',
+        'UserMenuUserNameDirective'
+    ]
+} as const;

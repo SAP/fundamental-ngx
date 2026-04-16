@@ -277,8 +277,8 @@ function extractClassApi(classReflection: any): ApiModel | null {
         }
     }
 
-    // Only generate API for classes that have inputs, outputs, or methods
-    if (inputs.length === 0 && outputs.length === 0 && methods.length === 0) {
+    // Generate API for classes that have inputs, outputs, methods, OR a selector
+    if (inputs.length === 0 && outputs.length === 0 && methods.length === 0 && !selector) {
         return null;
     }
 
