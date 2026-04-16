@@ -1,3 +1,14 @@
+## 0.62.0-rc.77 (2026-04-16)
+
+### 🩹 Fixes
+
+- **platform:** platform combobox can now be used inside dialog ([#14126](https://github.com/SAP/fundamental-ngx/pull/14126))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+- Maria Dineva @MariaIDineva
+
 ## 0.62.0-rc.76 (2026-04-15)
 
 ### 🩹 Fixes
