@@ -15,6 +15,7 @@ import { NavigationParentItemLinkComponent } from './examples/parent-item-link/n
 import { SelectionModeComponent } from './examples/selection-mode/selection-mode.component';
 
 @Component({
+    selector: 'fd-docs-btp-navigation',
     templateUrl: './navigation-docs.component.html',
     imports: [
         DocsSectionTitleComponent,

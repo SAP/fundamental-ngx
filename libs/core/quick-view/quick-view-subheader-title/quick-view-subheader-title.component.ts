@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 
 @Component({
@@ -7,4 +7,10 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [TitleComponent]
 })
-export class QuickViewSubheaderTitleComponent {}
+export class QuickViewSubheaderTitleComponent {
+    /** Whether the text should wrap on multiple lines. */
+    readonly allowWrap = input(false, { transform: booleanAttribute });
+
+    /** The header size to be applied to the title. */
+    readonly headerSize = input<1 | 2 | 3 | 4 | 5 | 6>(5);
+}

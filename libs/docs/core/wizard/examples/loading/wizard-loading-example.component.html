@@ -1,8 +1,8 @@
 <button fd-button (click)="enterFullscreenExample()">Click to open full screen</button>
-<div cdkScrollable cdkTrapFocus class="docs-wizard-example-overlay" #overlay>
+<div cdkScrollable cdkTrapFocus class="fd-docs-wizard-example-overlay" #overlay>
     @if (fullscreen) {
-        <div class="docs-wizard-example-overlay-content">
-            <div class="docs-wizard-example-button">
+        <div class="fd-docs-wizard-example-overlay-content">
+            <div class="fd-docs-wizard-example-button">
                 <button fd-button (click)="exitFullscreenExample($event)">Exit Example</button>
             </div>
             <!-- The Wizard -->

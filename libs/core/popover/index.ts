@@ -15,3 +15,4 @@ export * from './popover.component';
 export * from './popover.interface';
 export * from './popover.module';
 export * from './tokens';
+export * from './utils/build-popover-config';

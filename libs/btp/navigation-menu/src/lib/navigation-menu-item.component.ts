@@ -1,4 +1,12 @@
-import { Component, ElementRef, HostBinding, inject, Input } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    ElementRef,
+    HostBinding,
+    inject,
+    Input
+} from '@angular/core';
 import {
     FDK_FOCUSABLE_ITEM_DIRECTIVE,
     FocusableItem,
@@ -38,7 +46,8 @@ import { fromEvent, Observable } from 'rxjs';
     ],
     host: {
         class: 'fd-navigation-menu__item'
-    }
+    },
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavigationMenuItemComponent implements FocusableItem, HasElementRef {
     /**
@@ -71,6 +80,9 @@ export class NavigationMenuItemComponent implements FocusableItem, HasElementRef
     keydown: Observable<KeyboardEvent> = fromEvent<KeyboardEvent>(this.elementRef.nativeElement, 'keydown');
 
     /** @hidden */
+    private readonly _cdr = inject(ChangeDetectorRef);
+
+    /** @hidden */
     element = (): HTMLElement => this.elementRef.nativeElement;
 
     /** @hidden */
@@ -79,6 +91,7 @@ export class NavigationMenuItemComponent implements FocusableItem, HasElementRef
     /** @hidden */
     setTabbable(tabbable: boolean): void {
         this.tabindex = tabbable ? 0 : -1;
+        this._cdr.markForCheck();
     }
 
     /** @hidden */

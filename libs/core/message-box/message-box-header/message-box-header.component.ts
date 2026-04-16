@@ -1,6 +1,7 @@
 import { NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
+    ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     ContentChild,
@@ -33,6 +34,7 @@ import { MessageBoxConfig, MessageBoxHost } from '../utils/message-box-config.cl
 @Component({
     selector: 'fd-message-box-header',
     templateUrl: './message-box-header.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
         BarComponent,
         ContentDensityDirective,

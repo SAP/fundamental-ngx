@@ -56,6 +56,10 @@ export default {
         yearSelectionLabel: 'Pilih tahun',
         yearsRangeSelectionLabel: 'Pilih julat tahun'
     },
+    coreCard: {
+        ariaDescription: 'Active, Press Enter to activate',
+        roleDescription: '{cardType} Card'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: 'Pergi ke item sebelumnya',
         pageIndicatorLabel: 'Item {itemNum} daripada {totalNum} dipaparkan',

@@ -794,7 +794,8 @@ export class PopoverService {
         const closeEvents$ = merge(
             this._overlayRef.detachments(),
             outputToObservable(body.onClose),
-            this._outsideClicks$()
+            this._outsideClicks$(),
+            this._escapeKeydowns$()
         );
         // Only use _stopCloseListening$ to stop listening, not _refresh$
         // _refresh$ can emit due to signal effects and would complete the subscription prematurely
@@ -808,6 +809,13 @@ export class PopoverService {
         return merge(this._overlayRef.backdropClick(), this._overlayRef._outsidePointerEvents).pipe(
             filter((event) => this._shouldClose(event))
         );
+    }
+
+    /** Listener for Escape keydown via CDK overlay's document-level keyboard dispatcher. */
+    private _escapeKeydowns$(): Observable<KeyboardEvent> {
+        return this._overlayRef
+            .keydownEvents()
+            .pipe(filter((event) => this.closeOnEscapeKey() && event.key === 'Escape'));
     }
 
     /** @hidden */

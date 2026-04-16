@@ -79,6 +79,12 @@ export interface FdLanguage {
         /** Label for non-work days in the calendar legend. */
         nonWorkDayLabel: FdLanguageKey;
     };
+    coreCard: {
+        /** Aria description for an interactive card item in a list. */
+        ariaDescription: FdLanguageKey;
+        /** Visually hidden role description announcing the card type. Uses {cardType} placeholder. */
+        roleDescription: FdLanguageKey;
+    };
     coreMultiComboBox: {
         /** Label for the multi-combobox. */
         multiComboBoxAriaLabel: FdLanguageKey;

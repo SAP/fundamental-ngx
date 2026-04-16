@@ -13,7 +13,8 @@ import { RtlService } from '@fundamental-ngx/cdk/utils';
 import {
     ContentDensityDirective,
     ContentDensityMode,
-    contentDensityObserverProviders
+    contentDensityObserverProviders,
+    GlobalContentDensityService
 } from '@fundamental-ngx/core/content-density';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { IconComponent } from '@fundamental-ngx/core/icon';
@@ -48,7 +49,9 @@ export class ComponentExampleComponent {
 
     protected readonly rtlEnabled = signal(false);
     protected readonly showBackground = linkedSignal(() => this.hasBackground());
-    protected readonly compactMode = signal(false);
+    protected readonly compactMode = linkedSignal(
+        () => this._globalDensity.currentDensitySignal() === ContentDensityMode.COMPACT
+    );
     protected readonly responsiveEnabled = signal(false);
     protected readonly viewportWidth = signal<string | null>(null);
 
@@ -70,6 +73,7 @@ export class ComponentExampleComponent {
 
     private readonly _rtlService = inject(RtlService);
     private readonly _contentDensityDirective = inject(ContentDensityDirective);
+    private readonly _globalDensity = inject(GlobalContentDensityService);
 
     constructor() {
         effect(() => {

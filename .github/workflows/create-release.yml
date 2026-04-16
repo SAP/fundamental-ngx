@@ -6,9 +6,6 @@ on:
         branches:
             - main
             - tmp_hotfix_branch
-permissions:
-    contents: write
-    id-token: write
 env:
     NODE_VERSION: '22.x'
     # Package list for build, lint, pack, and publish operations
@@ -25,6 +22,7 @@ jobs:
     nx_agents:
         name: Nx Cloud Agent ${{ matrix.agent }}
         runs-on: ubuntu-latest
+        permissions: {}
         timeout-minutes: 60
         strategy:
             matrix:
@@ -44,6 +42,9 @@ jobs:
     create_release:
         name: Create release
         runs-on: ubuntu-latest
+        permissions:
+            contents: write
+            id-token: write
         outputs:
             npmTag: ${{ steps.releaseTags.outputs.npm }}
             ghTag: ${{ steps.releaseTags.outputs.gh }}
@@ -102,6 +103,12 @@ jobs:
               if: env.IS_MANUAL != 'true'
               run: |
                   npx nx release version ${{ steps.bumpVersion.outputs.newVersion }} --git-commit=false --git-tag=false
+
+            # Generate per-project CHANGELOG.md entries from conventional commits.
+            - name: Generate changelogs using NX Release
+              if: env.IS_MANUAL != 'true'
+              run: |
+                  npx nx release changelog ${{ steps.bumpVersion.outputs.newVersion }} --git-commit=false --git-tag=false
 
             # Reset dependency placeholders in source package.json files
             # NX Release updates both version AND dependencies, but we want to keep placeholders in source
@@ -226,6 +233,7 @@ jobs:
     gh_pages:
         name: Github Pages deploy
         runs-on: ubuntu-latest
+        permissions: {}
         needs: create_release
         if: ${{ needs.create_release.outputs.npmTag == 'latest' }}
         steps:
@@ -255,6 +263,7 @@ jobs:
         needs: create_release
         name: Nx Cloud - Stop Agents
         runs-on: ubuntu-latest
+        permissions: {}
         steps:
             - uses: actions/checkout@v4.2.2
               with:

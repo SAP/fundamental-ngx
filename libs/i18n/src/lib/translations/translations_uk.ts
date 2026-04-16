@@ -56,6 +56,10 @@ export default {
         yearSelectionLabel: 'Виберіть рік',
         yearsRangeSelectionLabel: 'Виберіть діапазон років'
     },
+    coreCard: {
+        ariaDescription: 'Active, Press Enter to activate',
+        roleDescription: '{cardType} Card'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: 'Перейти до попереднього елемента',
         pageIndicatorLabel: 'Відображено елемент {itemNum} з {totalNum}',

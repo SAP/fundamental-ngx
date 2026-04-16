@@ -1,25 +1,25 @@
 <div
     class="fd-panel"
-    [class.fd-panel--fixed]="fixed"
+    [class.fd-panel--fixed]="fixed()"
     [class.fd-panel--transparent]="transparent()"
     [class.fd-panel--no-radius]="noRadius()"
-    [class]="class"
+    [class]="class()"
 >
     <div class="fd-panel__header">
-        @if (!fixed) {
+        @if (!fixed()) {
             <div class="fd-panel__expand">
                 <button
                     fd-button
                     fdType="transparent"
                     class="fd-panel__button"
                     [glyph]="buttonIcon()"
-                    [id]="expandId"
-                    [class.is-expanded]="expanded"
-                    [attr.aria-expanded]="expanded"
-                    [attr.aria-controls]="panelContent?.id"
-                    [ariaLabel]="expandAriaLabel"
-                    [attr.aria-labelledby]="expandAriaLabelledBy + ' ' + expandId"
-                    [title]="expandAriaLabel"
+                    [id]="expandId()"
+                    [class.is-expanded]="expanded()"
+                    [attr.aria-expanded]="expanded()"
+                    [attr.aria-controls]="panelContent()?.id"
+                    [ariaLabel]="expandAriaLabel()"
+                    [attr.aria-labelledby]="expandAriaLabelledBy() + ' ' + expandId()"
+                    [title]="expandAriaLabel()"
                     (click)="toggleExpand()"
                 ></button>
             </div>
@@ -27,7 +27,7 @@
         <ng-content select="[fd-panel-title]"></ng-content>
         <ng-content></ng-content>
     </div>
-    @if (expanded || fixed) {
+    @if (expanded() || fixed()) {
         <ng-content select="[fd-panel-content]"></ng-content>
     }
 </div>

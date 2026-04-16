@@ -1,8 +1,8 @@
-import { Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 
 @Component({
     selector: 'fd-notification-link',
-    standalone: true,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     template: `<span class="fd-link__content">{{ showMore() ? 'Less' : 'More' }}</span>`,
     host: {
         class: 'fd-link fd-notification__link',

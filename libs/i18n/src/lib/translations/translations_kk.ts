@@ -57,6 +57,10 @@ export default {
         yearSelectionLabel: 'Жылды таңдау',
         yearsRangeSelectionLabel: 'Жылдар ауқымын таңдау'
     },
+    coreCard: {
+        ariaDescription: 'Active, Press Enter to activate',
+        roleDescription: '{cardType} Card'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: 'Алдыңғы тармаққа өту',
         pageIndicatorLabel: '{totalNum} ішінен {itemNum}-тармақ көрсетілген',

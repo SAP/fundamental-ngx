@@ -1,28 +1,15 @@
-import { Directive, ElementRef, OnInit } from '@angular/core';
-import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
-
+import { Directive, ElementRef, inject } from '@angular/core';
+import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 import { CLASS_NAME } from '../constants';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-card-kpi-scale-text]',
-    standalone: true
+    host: {
+        class: CLASS_NAME.cardAnalyticsScaleText
+    }
 })
-export class CardKpiScaleTextDirective implements OnInit, CssClassBuilder {
+export class CardKpiScaleTextDirective implements HasElementRef {
     /** @hidden */
-    class: string;
-
-    /** @hidden */
-    constructor(public readonly elementRef: ElementRef<HTMLElement>) {}
-
-    /** @hidden */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return [CLASS_NAME.cardAnalyticsScaleText];
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
+    readonly elementRef = inject(ElementRef);
 }

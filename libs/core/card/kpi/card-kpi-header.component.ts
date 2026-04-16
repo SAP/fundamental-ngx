@@ -1,6 +1,5 @@
-import { ChangeDetectionStrategy, Component, ElementRef, OnInit } from '@angular/core';
-import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
-
+import { ChangeDetectionStrategy, Component, ElementRef, inject } from '@angular/core';
+import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 import { CLASS_NAME } from '../constants';
 import { FD_CARD_KPI_HEADER } from '../token';
 
@@ -8,7 +7,9 @@ import { FD_CARD_KPI_HEADER } from '../token';
     selector: 'fd-card-kpi-header',
     templateUrl: './card-kpi-header.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
+    host: {
+        class: CLASS_NAME.cardAnalyticalArea
+    },
     providers: [
         {
             provide: FD_CARD_KPI_HEADER,
@@ -16,21 +17,7 @@ import { FD_CARD_KPI_HEADER } from '../token';
         }
     ]
 })
-export class CardKpiHeaderComponent implements OnInit, CssClassBuilder {
+export class CardKpiHeaderComponent implements HasElementRef {
     /** @hidden */
-    class: string;
-
-    /** @hidden */
-    constructor(public readonly elementRef: ElementRef<HTMLElement>) {}
-
-    /** @hidden */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return [CLASS_NAME.cardAnalyticalArea];
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
+    readonly elementRef = inject(ElementRef);
 }

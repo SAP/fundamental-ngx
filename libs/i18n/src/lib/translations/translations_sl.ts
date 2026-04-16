@@ -57,6 +57,10 @@ export default {
         yearSelectionLabel: 'Izbira leta',
         yearsRangeSelectionLabel: 'Izbira obsega let'
     },
+    coreCard: {
+        ariaDescription: 'Active, Press Enter to activate',
+        roleDescription: '{cardType} Card'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: 'Premik na prejšnjo postavko',
         pageIndicatorLabel: 'Prikazana postavka {itemNum} od {totalNum}',

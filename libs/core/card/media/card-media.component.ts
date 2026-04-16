@@ -1,40 +1,28 @@
-import { ChangeDetectionStrategy, Component, HostBinding, booleanAttribute, input } from '@angular/core';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { isTruthy } from '../utils';
+import { ChangeDetectionStrategy, Component, booleanAttribute, computed, input } from '@angular/core';
+import { CLASS_NAME } from '../constants';
 
 @Component({
     selector: 'fd-card-media',
     template: '<ng-content></ng-content>',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     host: {
         role: 'group',
-        class: 'fd-card__media',
-        '[class.fd-card__media--with-padding]': 'hasPadding()',
+        '[class]': 'cssClass()',
         '[attr.aria-roledescription]': 'ariaRoleDescription()'
     }
 })
 export class CardMediaComponent {
-    /** @hidden */
-    @HostBinding('class')
-    get cssClass(): string[] {
-        return [
-            this.shellColor() && `fd-card__media--bg-shell-${this.shellColor()}`,
-            this.legendColor() && `fd-card__media--bg-legend-${this.legendColor()}`
-        ].filter(isTruthy);
-    }
-
     /**
      * aria-roledescription for the container
      * default: 'Card Media Block'
      */
-    ariaRoleDescription = input('Card Media Block');
+    readonly ariaRoleDescription = input('Card Media Block');
 
     /**
      * Whether the media container comes with a 1rem padding
      * Default value: false
      */
-    hasPadding = input(false, {
+    readonly hasPadding = input(false, {
         transform: booleanAttribute
     });
 
@@ -42,11 +30,28 @@ export class CardMediaComponent {
      * Shell Category Colors
      * Available values: number from 1 to 16
      */
-    shellColor = input<Nullable<number>>();
+    readonly shellColor = input<number | null | undefined>();
 
     /**
      * Legend Background Colors
      * Available values: number from 1 to 20
      */
-    legendColor = input<Nullable<number>>();
+    readonly legendColor = input<number | null | undefined>();
+
+    /** @hidden */
+    protected readonly cssClass = computed(() => {
+        let classes = CLASS_NAME.cardMedia;
+        if (this.hasPadding()) {
+            classes += ` ${CLASS_NAME.cardMediaWithPadding}`;
+        }
+        const shell = this.shellColor();
+        if (shell) {
+            classes += ` ${CLASS_NAME.cardMedia}--bg-shell-${shell}`;
+        }
+        const legend = this.legendColor();
+        if (legend) {
+            classes += ` ${CLASS_NAME.cardMedia}--bg-legend-${legend}`;
+        }
+        return classes;
+    });
 }

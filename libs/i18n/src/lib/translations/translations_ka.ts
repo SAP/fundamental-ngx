@@ -56,6 +56,10 @@ export default {
         yearSelectionLabel: 'წელის არჩევა',
         yearsRangeSelectionLabel: 'წელთა შუალედის არჩევა'
     },
+    coreCard: {
+        ariaDescription: 'Active, Press Enter to activate',
+        roleDescription: '{cardType} Card'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: 'წინა ელემენტზე გადასვლა',
         pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',

@@ -1,4 +1,4 @@
-.docs-fcl-example-overlay {
+.fd-docs-fcl-example-overlay {
     height: 100%;
     width: 0;
     position: fixed;
@@ -9,20 +9,20 @@
     overflow-x: hidden;
 }
 
-.docs-fcl-example-overlay-content {
+.fd-docs-fcl-example-overlay-content {
     background: var(--sapGroup_ContentBackground);
     position: relative;
     width: 100%;
 }
 
-.docs-fcl-example-button {
+.fd-docs-fcl-example-button {
     display: flex;
     justify-content: flex-end;
     padding: 0.5rem 2rem;
     background: #394a5d;
 }
 
-.docs-fcl-example-section {
+.fd-docs-fcl-example-section {
     height: calc(100vh - 77px);
 
     h2 {

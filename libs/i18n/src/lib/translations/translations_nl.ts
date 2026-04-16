@@ -57,6 +57,10 @@ export default {
         yearSelectionLabel: 'Jaar selecteren',
         yearsRangeSelectionLabel: 'Bereik van jaren selecteren'
     },
+    coreCard: {
+        ariaDescription: 'Active, Press Enter to activate',
+        roleDescription: '{cardType} Card'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: 'Naar vorige item',
         pageIndicatorLabel: 'Item {itemNum} van {totalNum} weergegeven',

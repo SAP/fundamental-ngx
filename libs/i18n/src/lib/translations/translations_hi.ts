@@ -56,6 +56,10 @@ export default {
         yearSelectionLabel: 'वर्ष चुनें',
         yearsRangeSelectionLabel: 'वर्षों की सीमा चुनें'
     },
+    coreCard: {
+        ariaDescription: 'Active, Press Enter to activate',
+        roleDescription: '{cardType} Card'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: 'पिछले वस्तु पर जाएं',
         pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',

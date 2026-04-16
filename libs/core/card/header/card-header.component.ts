@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, contentChild, input } from '@angular/core';
+import { CLASS_NAME } from '../constants';
 import { FD_CARD_MAIN_HEADER } from '../token';
 
 @Component({
@@ -8,8 +9,8 @@ import { FD_CARD_MAIN_HEADER } from '../token';
     imports: [],
     host: {
         role: 'group',
-        class: 'fd-card__header',
-        '[class.fd-card__header--interactive]': '_cardMainHeader()?.interactive()',
+        class: CLASS_NAME.cardHeader,
+        '[class.fd-card__header--interactive]': 'cardMainHeader()?.interactive()',
         '[attr.aria-roledescription]': 'ariaRoleDescription()'
     }
 })
@@ -18,8 +19,8 @@ export class CardHeaderComponent {
      * aria-roledescription for the container
      * default: 'Card Header'
      */
-    ariaRoleDescription = input('Card Header');
+    readonly ariaRoleDescription = input('Card Header');
 
     /** @hidden */
-    readonly _cardMainHeader = contentChild(FD_CARD_MAIN_HEADER);
+    readonly cardMainHeader = contentChild(FD_CARD_MAIN_HEADER);
 }

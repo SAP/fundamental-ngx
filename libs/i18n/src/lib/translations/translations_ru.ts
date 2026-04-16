@@ -57,6 +57,10 @@ export default {
         yearSelectionLabel: 'Выберите год',
         yearsRangeSelectionLabel: 'Выберите диапазон годов'
     },
+    coreCard: {
+        ariaDescription: 'Active, Press Enter to activate',
+        roleDescription: '{cardType} Card'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: 'К предыдущей позиции',
         pageIndicatorLabel: 'Отображается позиция {itemNum} из {totalNum}',

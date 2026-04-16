@@ -56,6 +56,10 @@ export default {
         yearSelectionLabel: 'تحديد السنة',
         yearsRangeSelectionLabel: 'تحديد نطاق السنوات'
     },
+    coreCard: {
+        ariaDescription: 'Active, Press Enter to activate',
+        roleDescription: '{cardType} Card'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: 'انتقال إلى البند السابق',
         pageIndicatorLabel: 'تم عرض البند {itemNum} من {totalNum}',

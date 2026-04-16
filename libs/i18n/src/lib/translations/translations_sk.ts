@@ -57,6 +57,10 @@ export default {
         yearSelectionLabel: 'Vybrať rok',
         yearsRangeSelectionLabel: 'Vybrať rozsah rokov'
     },
+    coreCard: {
+        ariaDescription: 'Active, Press Enter to activate',
+        roleDescription: '{cardType} Card'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: 'Prejsť na predchádzajúcu položku',
         pageIndicatorLabel: 'Zobrazená položka {itemNum} z {totalNum}',

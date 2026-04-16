@@ -56,6 +56,10 @@ export default {
         yearSelectionLabel: '選擇年份',
         yearsRangeSelectionLabel: '選擇年份範圍'
     },
+    coreCard: {
+        ariaDescription: 'Active, Press Enter to activate',
+        roleDescription: '{cardType} Card'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: '移至先前項目',
         pageIndicatorLabel: '已顯示項目 {itemNum}/{totalNum}',

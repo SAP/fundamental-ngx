@@ -1,13 +1,18 @@
-.api-main-header {
-    margin: 0;
-    font-weight: bold;
-    text-rendering: optimizeLegibility;
-}
-
 .api-main-container {
-    margin-top: 2em;
+    margin-block-start: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.api-main-header {
+    margin: 0;
+    font-size: var(--sapFontHeader2Size);
+    color: var(--sapTitleColor);
+}
+
+.api-main-spacer {
+    flex: 1;
 }

@@ -1,16 +1,21 @@
 import {
     AfterContentInit,
     AfterViewInit,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ContentChild,
+    DestroyRef,
     HostBinding,
     HostListener,
+    inject,
     Input,
     OnInit,
     QueryList,
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import {
@@ -34,6 +39,7 @@ import { SideNavigationInterface } from './side-navigation.interface';
     selector: 'fd-side-nav',
     styleUrl: './side-navigation.component.scss',
     encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [MenuKeyboardService, NestedListKeyboardService, NestedListStateService],
     imports: [SideNavigationMainDirective, PreparedNestedListComponent, SideNavigationUtilityDirective]
 })
@@ -77,11 +83,17 @@ export class SideNavigationComponent implements AfterContentInit, AfterViewInit,
     additionalShellbarCssClass = 'fd-shellbar--side-nav';
 
     /** @hidden */
+    private readonly _cdr = inject(ChangeDetectorRef);
+
+    /** @hidden */
+    private readonly _destroyRef = inject(DestroyRef);
+
+    /** @hidden */
     constructor(
         private keyboardService: NestedListKeyboardService,
         private nestedListState: NestedListStateService
     ) {
-        this.keyboardService.refresh$.subscribe(() => {
+        this.keyboardService.refresh$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             /** Refresh list of elements, that are being supported by keyboard */
             this.keyboardService.refreshItems(this.getLists());
         });
@@ -98,6 +110,7 @@ export class SideNavigationComponent implements AfterContentInit, AfterViewInit,
         if (this.collapseWidth) {
             this.condensed = window.innerWidth <= this.collapseWidth;
         }
+        this._cdr.markForCheck();
     }
 
     /** @hidden */

@@ -1,13 +1,13 @@
-<h3 class="fd-playground__title sap-padding-top-large">Playground Example</h3>
+<h3 class="fd-docs-playground__title">Playground Example</h3>
 
-<div class="sap-flex sap-flex-wrap" [class.sap-display-block]="displayBlock()">
-    <div class="fd-playground__col sap-padding-x-small sap-padding-bottom-small">
+<div class="fd-docs-playground__body" [class.fd-docs-playground__body--block]="displayBlock()">
+    <div class="fd-docs-playground__col">
         <ng-content></ng-content>
     </div>
 
-    <div class="fd-playground__col sap-padding-x-small">
+    <div class="fd-docs-playground__col">
         <schema
-            class="fd-playground__schema"
+            class="fd-docs-playground__schema"
             [schema]="schema()"
             [resettable]="resettable()"
             [initialValues]="schemaInitialValues()"

@@ -34,7 +34,7 @@
     <ng-template [ngTemplateOutlet]="showMore"></ng-template>
 }
 <ng-template #showMore>
-    <div class="fd-overflow-layout__more" [style.display]="_showMore ? 'block' : 'none'" #showMoreContainer>
+    <div class="fd-overflow-layout__more" [style.display]="_showMore ? 'inline-flex' : 'none'" #showMoreContainer>
         <ng-template #defaultShowMore>
             <fd-popover
                 (isOpenChange)="_onPopoverStateChange($event)"

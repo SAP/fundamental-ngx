@@ -56,6 +56,10 @@ export default {
         yearSelectionLabel: 'Yıl seç',
         yearsRangeSelectionLabel: 'Yıl aralığı seç'
     },
+    coreCard: {
+        ariaDescription: 'Active, Press Enter to activate',
+        roleDescription: '{cardType} Card'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: 'Önceki öğeye git',
         pageIndicatorLabel: 'Kalem {itemNum}/{totalNum} görüntülendi',

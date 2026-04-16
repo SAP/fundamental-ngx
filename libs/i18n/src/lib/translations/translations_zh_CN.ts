@@ -56,6 +56,10 @@ export default {
         yearSelectionLabel: '选择年度',
         yearsRangeSelectionLabel: '选择年度范围'
     },
+    coreCard: {
+        ariaDescription: 'Active, Press Enter to activate',
+        roleDescription: '{cardType} Card'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: '转到上一个项目',
         pageIndicatorLabel: '显示 {itemNum}/{totalNum} 个项目',

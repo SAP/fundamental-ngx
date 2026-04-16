@@ -9,6 +9,7 @@ import {
 } from '@angular/cdk/portal';
 import {
     AfterViewInit,
+    ChangeDetectionStrategy,
     Component,
     ComponentRef,
     DestroyRef,
@@ -34,6 +35,7 @@ import { BehaviorSubject, filter, map, tap } from 'rxjs';
 @Component({
     selector: 'fdk-dynamic-portal',
     imports: [PortalModule],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     template: ` <ng-template cdkPortalOutlet></ng-template>`
 })
 export class DynamicPortalComponent implements AfterViewInit {
