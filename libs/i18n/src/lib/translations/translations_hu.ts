@@ -53,6 +53,10 @@ export default {
         yearSelectionLabel: 'Év kiválasztása',
         yearsRangeSelectionLabel: 'Évtartomány kiválasztása'
     },
+    coreCard: {
+        ariaDescription: 'Active, Press Enter to activate',
+        roleDescription: '{cardType} Card'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: 'Ugrás az előző elemre',
         pageIndicatorLabel: '{itemNum} / {totalNum}. tétel megjelenítve',

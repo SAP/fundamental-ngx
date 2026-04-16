@@ -1,28 +1,35 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    ElementRef,
-    HostListener,
-    OnChanges,
-    OnDestroy,
-    OnInit,
-    ViewEncapsulation,
+    computed,
     contentChild,
+    ElementRef,
     forwardRef,
+    inject,
     input,
     model,
-    output
+    output,
+    ViewEncapsulation
 } from '@angular/core';
-import { ColorAccent, CssClassBuilder, Nullable, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { ColorAccent, HasElementRef } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { ObjectStatus, ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
-import { Subscription } from 'rxjs';
+import { FdTranslatePipe, resolveTranslationSignal } from '@fundamental-ngx/i18n';
 import { CardFocusItem } from './card-focus-item.model';
-import { CLASS_NAME, CardType } from './constants';
+import { CardType, CLASS_NAME } from './constants';
+import { CardCounterDirective } from './header-elements/card-counter.directive';
+import { CardSecondSubtitleDirective } from './header-elements/card-second-subtitle.directive';
+import { CardSubtitleDirective } from './header-elements/card-subtitle.directive';
 import { CardTitleDirective } from './header-elements/card-title.directive';
 import { CardMediaHeadingDirective } from './media/card-media-heading.directive';
-import { FD_CARD, FD_CARD_MEDIA_HEADING, FD_CARD_TITLE } from './token';
-import { getCardModifierClassNameByCardType } from './utils';
+import {
+    FD_CARD,
+    FD_CARD_COUNTER,
+    FD_CARD_MEDIA_HEADING,
+    FD_CARD_SECOND_SUBTITLE,
+    FD_CARD_SUBTITLE,
+    FD_CARD_TITLE
+} from './token';
 
 let cardId = 0;
 
@@ -43,163 +50,184 @@ let cardId = 0;
             useExisting: forwardRef(() => CardComponent)
         }
     ],
-    imports: [ObjectStatusComponent],
+    imports: [ObjectStatusComponent, FdTranslatePipe],
     host: {
+        '[class]': 'cssClass()',
         '[attr.id]': 'id()',
         '[attr.role]': 'role()',
-        '[attr.aria-description]': 'role() === "listitem" ? ariaDescription() : null',
-        '[attr.aria-roledescription]': 'ariaRoledescription()',
         '[attr.aria-labelledby]': 'cardTitle()?.id() || cardMediaHeading()?.id()',
+        '[attr.aria-describedby]': 'ariaDescribedbyComputed()',
         '[attr.aria-label]': 'ariaLabel()',
         '[attr.aria-selected]': 'selected()',
-        '[class.fd-card--interactive]': 'interactive()',
         '[tabindex]': 'role() === "listitem" ? 0 : -1',
         '[attr.aria-posinset]': 'role() === "listitem" ? ariaPosinset() : null',
-        '[attr.aria-setsize]': 'role() === "listitem" ? ariaSetsize() : null'
+        '[attr.aria-setsize]': 'role() === "listitem" ? ariaSetsize() : null',
+        '(keydown)': 'keydownHandler($event)'
     }
 })
-export class CardComponent<T = any> extends CardFocusItem<T> implements OnChanges, OnInit, CssClassBuilder, OnDestroy {
+export class CardComponent<T = any> extends CardFocusItem<T> implements HasElementRef {
     /** @hidden */
-    cardTitle = contentChild<CardTitleDirective>(FD_CARD_TITLE);
+    readonly cardTitle = contentChild<CardTitleDirective>(FD_CARD_TITLE);
 
     /** @hidden */
-    cardMediaHeading = contentChild<CardMediaHeadingDirective>(FD_CARD_MEDIA_HEADING);
+    readonly cardSubtitle = contentChild<CardSubtitleDirective>(FD_CARD_SUBTITLE);
+
+    /** @hidden */
+    readonly cardSecondSubtitle = contentChild<CardSecondSubtitleDirective>(FD_CARD_SECOND_SUBTITLE);
+
+    /** @hidden */
+    readonly cardCounter = contentChild<CardCounterDirective>(FD_CARD_COUNTER);
+
+    /** @hidden */
+    readonly cardMediaHeading = contentChild<CardMediaHeadingDirective>(FD_CARD_MEDIA_HEADING);
 
     /**
      * text for the card badge
      */
-    badge = input<Nullable<string>>();
+    readonly badge = input<string | null | undefined>();
 
     /**
      * icon/glyph for the card badge
      */
-    badgeIcon = input<Nullable<string>>();
+    readonly badgeIcon = input<string | null | undefined>();
 
     /**
      * Indication color for the card badge
      * Possible values: integers from 1 to 10
      */
-    badgeColor = input<Nullable<ColorAccent>>();
+    readonly badgeColor = input<ColorAccent | null | undefined>();
 
     /**
      * Whether to use secondary set of indication colors for the card badge
      * Default value: false
      */
-    badgeColorSecondary = input<boolean>(false);
+    readonly badgeColorSecondary = input<boolean>(false);
 
     /**
      * Color status for the card badge
      * Possible values: 'negative' | 'critical' | 'positive' | 'informative' | 'neutral'
      * Default value: null
      */
-    badgeStatus = input<Nullable<ObjectStatus>>();
+    readonly badgeStatus = input<ObjectStatus | null | undefined>();
 
     /**
      * aria-label for the card badge
      * Default value: null
      */
-    badgeAriaLabel = input<Nullable<string>>();
+    readonly badgeAriaLabel = input<string | null | undefined>();
 
     /**
      * text for the card second badge
      */
-    secondBadge = input<Nullable<string>>();
+    readonly secondBadge = input<string | null | undefined>();
 
     /**
      * icon/glyph for the card second badge
      */
-    secondBadgeIcon = input<Nullable<string>>();
+    readonly secondBadgeIcon = input<string | null | undefined>();
 
     /**
      * Indication color for the card second badge
      * Possible values: integers from 1 to 10
      */
-    secondBadgeColor = input<Nullable<ColorAccent>>();
+    readonly secondBadgeColor = input<ColorAccent | null | undefined>();
 
     /**
      * Whether to use secondary set of indication colors for the card second badge
      * Default value: false
      */
-    secondBadgeColorSecondary = input<boolean>(false);
+    readonly secondBadgeColorSecondary = input<boolean>(false);
 
     /**
      * Color status for the card second badge
      * Possible values: 'negative' | 'critical' | 'positive' | 'informative' | 'neutral'
      * Default value: null
      */
-    secondBadgeStatus = input<Nullable<ObjectStatus>>();
+    readonly secondBadgeStatus = input<ObjectStatus | null | undefined>();
 
     /**
      * aria-label for the card second badge
      * Default value: null
      */
-    secondBadgeAriaLabel = input<Nullable<string>>();
+    readonly secondBadgeAriaLabel = input<string | null | undefined>();
 
     /**
      * whether the card is in loading state
      * default: false
      */
-    isLoading = input(false);
+    readonly isLoading = input(false);
 
     /**
-     * set the Caard type
+     * set the Card type
      * options: 'object' | 'standard' | 'component' | 'analytical' | 'list' | 'table' | 'quickView' | 'linkList' | 'banner'
      * default: 'standard'
      *
      */
-    cardType = input<CardType>('standard');
+    readonly cardType = input<CardType>('standard');
 
     /**
      * card id
      * if not set, a default value is provided
      */
-    id = input('fd-card-id-' + cardId++);
+    readonly id = input('fd-card-id-' + cardId++);
 
     /**
      * card aria-roledescription
      * default: 'Card'
      */
-    ariaRoledescription = input('Card');
+    readonly ariaRoledescription = input<string | null | undefined>();
 
     /**
      * card aria-description
-     * default: 'Activate for action or navigation'
+     * Overrides the default translated aria description.
      */
-    ariaDescription = input('Activate for action or navigation');
+    readonly ariaDescription = input<string | null | undefined>();
 
     /**
      * card aria-label
      * used when there's no title describing the card
      */
-    ariaLabel = input<Nullable<string>>();
+    readonly ariaLabel = input<string | null | undefined>();
 
     /**
      * card role
      * default: 'region'
      */
-    role = input('region');
+    readonly role = input('region');
 
     /**
      * whether the card is interactive
      * default: false
      */
-    interactive = input(false);
+    readonly interactive = input(false);
 
     /**
      * whether the card is selected
      * default: false
      */
-    selected = input(false);
+    readonly selected = input(false);
 
     /**
      * value for aria-posinset
      */
-    ariaPosinset = model<Nullable<number>>();
+    readonly ariaPosinset = model<number | null | undefined>();
 
     /**
      * value for aria-setsize
      */
-    ariaSetsize = model<Nullable<number>>();
+    readonly ariaSetsize = model<number | null | undefined>();
+
+    /**
+     * Additional IDs to include in aria-describedby attribute
+     * Can be used to reference additional descriptive content
+     */
+    readonly ariaDescribedby = input<string | null | undefined>();
+
+    /** @hidden */
+    readonly contentDensityObserver = inject(ContentDensityObserver);
+
+    /** @hidden */
+    readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
     /**
      * @hidden
@@ -207,45 +235,94 @@ export class CardComponent<T = any> extends CardFocusItem<T> implements OnChange
      */
     readonly keyDown = output<KeyboardEvent>();
 
-    /** @hidden */
-    class: string;
+    /** @hidden Default translated aria description */
+    protected readonly defaultAriaDescription = resolveTranslationSignal('coreCard.ariaDescription');
 
-    /** @hidden */
-    private _subscriptions = new Subscription();
+    /** @hidden Resolved aria description: input overrides translated default */
+    protected readonly resolvedAriaDescription = computed(
+        () => this.ariaDescription() || this.defaultAriaDescription()
+    );
 
-    /** @hidden */
-    constructor(
-        public readonly elementRef: ElementRef<HTMLElement>,
-        readonly _contentDensityObserver: ContentDensityObserver
-    ) {
+    /** @hidden ID for the visually hidden span announcing the card description */
+    protected readonly ariaDescriptionId = computed(() => `${this.id()}-description`);
+
+    /** @hidden ID for the visually hidden span announcing the card role description */
+    protected readonly ariaRoleDescriptionId = computed(() => `${this.id()}-role-description`);
+
+    /** @hidden Badge ID for first badge */
+    protected readonly badgeId = computed(() => (this.badge() || this.badgeIcon() ? `${this.id()}-badge` : null));
+
+    /** @hidden Second badge ID */
+    protected readonly secondBadgeId = computed(() =>
+        this.secondBadge() || this.secondBadgeIcon() ? `${this.id()}-second-badge` : null
+    );
+
+    /** @hidden Computed aria-describedby value */
+    protected readonly ariaDescribedbyComputed = computed(() => {
+        const ids: string[] = [];
+
+        // Add subtitle ID if it exists
+        if (this.cardSubtitle()) {
+            ids.push(this.cardSubtitle()!.id());
+        }
+
+        // Add second subtitle ID if it exists
+        if (this.cardSecondSubtitle()) {
+            ids.push(this.cardSecondSubtitle()!.id());
+        }
+
+        // Add counter ID if it exists
+        if (this.cardCounter()) {
+            ids.push(this.cardCounter()!.id());
+        }
+
+        // Add role description ID for screen readers to announce card type and role description
+        ids.push(this.ariaRoleDescriptionId());
+
+        // Add description ID if role is listitem
+        if (this.role() === 'listitem') {
+            ids.push(this.ariaDescriptionId());
+        }
+
+        // Add badge IDs if badges are present
+        if (this.badgeId()) {
+            ids.push(this.badgeId()!);
+        }
+
+        if (this.secondBadgeId()) {
+            ids.push(this.secondBadgeId()!);
+        }
+
+        // Add any additional IDs provided by user
+        if (this.ariaDescribedby()) {
+            ids.push(this.ariaDescribedby()!);
+        }
+
+        return ids.length > 0 ? ids.join(' ') : null;
+    });
+
+    protected readonly cssClass = computed(() => {
+        let classes = CLASS_NAME.card;
+        const cardType = this.cardType();
+
+        if (cardType) {
+            classes += ` ${CLASS_NAME.card}--${cardType}`;
+        }
+
+        if (this.interactive()) {
+            classes += ` ${CLASS_NAME.card}--interactive`;
+        }
+
+        return classes;
+    });
+
+    constructor() {
         super();
-        _contentDensityObserver.subscribe();
+        this.contentDensityObserver.subscribe();
     }
 
     /** @hidden */
-    @HostListener('keydown', ['$event'])
     keydownHandler(event: KeyboardEvent): void {
         this.keyDown.emit(event);
-    }
-
-    /** @hidden */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return [CLASS_NAME.card, this.cardType() ? getCardModifierClassNameByCardType(this.cardType()) : ''];
-    }
-
-    /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._subscriptions.unsubscribe();
     }
 }

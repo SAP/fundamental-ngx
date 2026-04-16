@@ -4,17 +4,24 @@ import {
     DestroyRef,
     Directive,
     EventEmitter,
-    HostListener,
     OnDestroy,
     OnInit,
     Output,
     QueryList,
+    computed,
     contentChildren,
+    effect,
     inject,
     input
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FocusEscapeDirection, KeyboardSupportService, Nullable, destroyObservable } from '@fundamental-ngx/cdk/utils';
+import {
+    FocusEscapeDirection,
+    KeyboardSupportService,
+    Nullable,
+    RtlService,
+    destroyObservable
+} from '@fundamental-ngx/cdk/utils';
 import { Observable, Subject, map, merge, startWith, takeUntil } from 'rxjs';
 import { CardFocusItem } from '../card-focus-item.model';
 import { CardComponent } from '../card.component';
@@ -23,11 +30,11 @@ import { FD_CARD } from '../token';
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-card-list]',
-    standalone: true,
     host: {
         role: 'list',
         '[attr.aria-roledescription]': 'ariaRoleDescription()',
-        '[attr.aria-label]': 'ariaLabel()'
+        '[attr.aria-label]': 'ariaLabel()',
+        '(keydown)': 'keyDownHandler($event)'
     },
     providers: [KeyboardSupportService]
 })
@@ -75,10 +82,23 @@ export class CardListDirective implements OnInit, AfterContentInit, OnDestroy {
     private readonly _onRefresh$: Subject<void> = new Subject<void>();
 
     /** @hidden */
-    constructor(private _keyboardSupportService: KeyboardSupportService<CardFocusItem>) {}
+    private readonly _rtlService = inject(RtlService, { optional: true });
 
     /** @hidden */
-    @HostListener('keydown', ['$event'])
+    private readonly _keyboardSupportService = inject(KeyboardSupportService<CardFocusItem>);
+
+    /** @hidden */
+    private readonly _isRtl = computed(() => this._rtlService?.rtl() ?? false);
+
+    /** @hidden */
+    constructor() {
+        effect(() => {
+            const orientation = this._isRtl() ? 'rtl' : 'ltr';
+            this._keyboardSupportService.keyManager?.withHorizontalOrientation(orientation);
+        });
+    }
+
+    /** @hidden */
     keyDownHandler(event: KeyboardEvent): void {
         if (this.keyboardSupport()) {
             this._keyboardSupportService.onKeyDown(event);
@@ -114,6 +134,7 @@ export class CardListDirective implements OnInit, AfterContentInit, OnDestroy {
     /** @hidden */
     ngAfterContentInit(): void {
         this._keyboardSupportService.setKeyboardService(this._focusItems, false, false);
+        this._keyboardSupportService.keyManager.withHorizontalOrientation(this._isRtl() ? 'rtl' : 'ltr');
         this._listenOnQueryChange();
     }
 

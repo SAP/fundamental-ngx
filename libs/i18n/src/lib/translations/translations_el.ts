@@ -52,6 +52,10 @@ export default {
         yearSelectionLabel: 'Επιλογή έτους',
         yearsRangeSelectionLabel: 'Επιλογή εύρους ετών'
     },
+    coreCard: {
+        ariaDescription: 'Active, Press Enter to activate',
+        roleDescription: '{cardType} Card'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: 'Προς προηγούμενο στοιχείο',
         pageIndicatorLabel: 'Είδος {itemNum} από {totalNum} εμφανίζεται',

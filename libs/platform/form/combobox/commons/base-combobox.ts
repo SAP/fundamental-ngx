@@ -32,12 +32,13 @@ import {
     Output,
     QueryList,
     TemplateRef,
-    ViewChild
+    ViewChild,
+    inject
 } from '@angular/core';
 import { Observable, Subject, Subscription, combineLatest, fromEvent, isObservable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
-import { FocusEscapeDirection, KeyUtil, TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import { FocusEscapeDirection, FocusTrapService, KeyUtil, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
 import { ListComponent } from '@fundamental-ngx/core/list';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
@@ -288,6 +289,9 @@ export abstract class BaseCombobox
     /** @hidden */
     private _element: HTMLElement = this.elementRef.nativeElement;
 
+    /** @hidden */
+    private readonly _focusTrapService = inject(FocusTrapService);
+
     /** Keys, that won't trigger the popover's open state, when dispatched on search input */
     private readonly _nonOpeningKeys: number[] = [
         ESCAPE,
@@ -394,6 +398,10 @@ export abstract class BaseCombobox
     _onOpenChange(isOpen: boolean): void {
         if (isOpen) {
             this.formMessage?._popover.close();
+            /** Allow combobox arrow keys to work properly when combobox is inside a dialog with a trapped focus */
+            this._focusTrapService.pauseCurrentFocusTrap();
+        } else {
+            this._focusTrapService.unpauseCurrentFocusTrap();
         }
         this.formMessage?._popover.setIgnoreTriggers(isOpen);
     }
