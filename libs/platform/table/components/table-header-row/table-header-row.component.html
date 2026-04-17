@@ -1,7 +1,7 @@
 @if (_fdpTableService._semanticHighlighting$()) {
     <th
         [class.fd-table__cell--fixed]="fixed"
-        fd-table-cell
+        class="fd-table__cell"
         [ngClass]="{
             'fd-table__cell--no-horizontal-border': noHorizontalBorders || noBorders,
             'fd-table__cell--no-vertical-border': noVerticalBorders || noBorders
@@ -123,13 +123,13 @@
 
 @if (_fdpTableService._isShownNavigationColumn$()) {
     <th
-        fd-table-cell
         [ngClass]="{
             'fd-table__cell--no-horizontal-border': noHorizontalBorders || noBorders,
             'fd-table__cell--no-vertical-border': noVerticalBorders || noBorders
         }"
-        class="fdp-table__cell--navigation is-last-child"
+        class="fd-table__cell fdp-table__cell--navigation is-last-child"
         role="columnheader"
+        tabindex="-1"
     >
         <span class="fd-table__sr-only">
             {{ ('platformTable.navigationColumnTitle' | fdTranslate)() }}
