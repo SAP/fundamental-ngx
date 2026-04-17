@@ -584,16 +584,19 @@ fdk-dynamic-portal {
         .fd-toolbar {
             position: sticky;
             top: 0;
-        }
-        .fd-toolbar:not(.fd-toolbar--info) {
-            z-index: 10;
-        }
-        .fd-toolbar.fd-toolbar--info {
-            z-index: 9;
-            top: 2.75rem;
-        }
-        .fd-toolbar.fd-toolbar--info + fd-busy-indicator thead {
-            top: 4.75rem;
+
+            &:not(.fd-toolbar--info) {
+                z-index: 10;
+            }
+
+            &.fd-toolbar--info {
+                z-index: 9;
+                top: 2.75rem;
+            }
+
+            &.fd-toolbar--info + fd-busy-indicator thead {
+                top: 4.75rem;
+            }
         }
 
         .fdp-table__body.fd-scrollbar {
