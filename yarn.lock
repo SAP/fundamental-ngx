@@ -3860,19 +3860,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fundamental-styles/common-css@npm:0.41.1":
-  version: 0.41.1
-  resolution: "@fundamental-styles/common-css@npm:0.41.1"
+"@fundamental-styles/common-css@npm:0.41.4":
+  version: 0.41.4
+  resolution: "@fundamental-styles/common-css@npm:0.41.4"
   dependencies:
-    "@sap-theming/theming-base-content": "npm:^11.34.0"
-  checksum: 10/b031435539a75b44df2819e20150daaf876f117350c3f1d077e56d24dc49561589c89839f1710c8fbd8001e6dacbd29a0df8da36c454fbab13bbe135bb4400c8
+    "@sap-theming/theming-base-content": "npm:^11.35.0"
+  checksum: 10/692895f0d95e856d1bec58e05adee5b6d63cacf8bc8fccbc86c9a297cbb905b797e60dc40741bf74fc4636abc42775ed18dbee194ae404cee07fdf8f6f075c9c
   languageName: node
   linkType: hard
 
-"@fundamental-styles/cx@npm:0.41.1":
-  version: 0.41.1
-  resolution: "@fundamental-styles/cx@npm:0.41.1"
-  checksum: 10/30061f8783e94e976de552d17b44e4a513652781a00ad0e7f6e2a73ac0abef8a408359327d06e91d25aadf4ceeeea7f8fa4f5dd1899c514eba9d86805e50b3c9
+"@fundamental-styles/cx@npm:0.41.4":
+  version: 0.41.4
+  resolution: "@fundamental-styles/cx@npm:0.41.4"
+  checksum: 10/6d00b865153a7d0aa9c9a4ba2b3d1ee155e310a172869bbba3a3cbf02b4e8b49a570fed4aef012682b514d090087d17f8190bd7ad223a6181b3cb11f89fd717b
   languageName: node
   linkType: hard
 
@@ -7604,17 +7604,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sap-theming/theming-base-content@npm:11.32.3":
-  version: 11.32.3
-  resolution: "@sap-theming/theming-base-content@npm:11.32.3"
-  checksum: 10/d7d52eef15de64b911095caa6822254d83f2572c97ab7803fa6286c6279b6111bd35326319775ad2541f6cbd62a8ac8c1d9e129bd44ca1cf4b9dfec84273693f
-  languageName: node
-  linkType: hard
-
-"@sap-theming/theming-base-content@npm:11.34.1, @sap-theming/theming-base-content@npm:^11.34.0":
+"@sap-theming/theming-base-content@npm:11.34.1":
   version: 11.34.1
   resolution: "@sap-theming/theming-base-content@npm:11.34.1"
   checksum: 10/ab25675cbb63f8d17e91246b5ab6d3e1a195642f1fd6ac36fed706e6a130e95bff76c8e41b4d56f50b9326e22ec52fe65c0d3bc3369f25b21695d55e482b66e8
+  languageName: node
+  linkType: hard
+
+"@sap-theming/theming-base-content@npm:11.35.0, @sap-theming/theming-base-content@npm:^11.35.0":
+  version: 11.35.0
+  resolution: "@sap-theming/theming-base-content@npm:11.35.0"
+  checksum: 10/ee2b434954b7ba3a9066dec10143840cb0899a151faf4f7b824d7b8dbb2eb51f5e74417401e4da3edd784cf30a3a3839723a482171d684a250879500f5e105e7
   languageName: node
   linkType: hard
 
@@ -18000,8 +18000,8 @@ __metadata:
     "@angular/router": "npm:21.1.0"
     "@commitlint/cli": "npm:18.6.1"
     "@commitlint/config-conventional": "npm:18.6.1"
-    "@fundamental-styles/common-css": "npm:0.41.1"
-    "@fundamental-styles/cx": "npm:0.41.1"
+    "@fundamental-styles/common-css": "npm:0.41.4"
+    "@fundamental-styles/cx": "npm:0.41.4"
     "@nx/angular": "npm:22.4.1"
     "@nx/devkit": "npm:22.4.1"
     "@nx/eslint": "npm:22.4.1"
@@ -18010,7 +18010,7 @@ __metadata:
     "@nx/js": "npm:22.4.1"
     "@nx/plugin": "npm:22.4.1"
     "@nx/workspace": "npm:22.4.1"
-    "@sap-theming/theming-base-content": "npm:11.32.3"
+    "@sap-theming/theming-base-content": "npm:11.35.0"
     "@schematics/angular": "npm:21.1.0"
     "@stackblitz/sdk": "npm:1.9.0"
     "@swc-node/register": "npm:1.9.2"
@@ -18060,7 +18060,7 @@ __metadata:
     focus-trap: "npm:7.1.0"
     focus-visible: "npm:5.2.1"
     fs-extra: "npm:^11.3.0"
-    fundamental-styles: "npm:0.41.1"
+    fundamental-styles: "npm:0.41.4"
     fuse.js: "npm:7.0.0"
     highlight.js: "npm:11.7.0"
     husky: "npm:8.0.2"
@@ -18106,13 +18106,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"fundamental-styles@npm:0.41.1":
-  version: 0.41.1
-  resolution: "fundamental-styles@npm:0.41.1"
+"fundamental-styles@npm:0.41.4":
+  version: 0.41.4
+  resolution: "fundamental-styles@npm:0.41.4"
   peerDependencies:
-    "@fundamental-styles/common-css": 0.41.1
-    "@sap-theming/theming-base-content": ^11.34.0
-  checksum: 10/2f59729235fb28ac4fe271e0964d00b22234bab955911143862611982c419990cd3c3342175181e62e6a90cc9101559f1fb5502c1b8e7888748607dfa01c9dd3
+    "@fundamental-styles/common-css": 0.41.4
+    "@sap-theming/theming-base-content": ^11.35.0
+  checksum: 10/3e2f7f80b2b12d6fe08db7225588727ee64581cba8b3a7e30f88293d5e2463c1f3e0acd73f007c4ccd533df13576eb54b9d79c716d5609d1ce83404f89252f45
   languageName: node
   linkType: hard
 
