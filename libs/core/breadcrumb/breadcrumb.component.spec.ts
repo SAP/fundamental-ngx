@@ -190,14 +190,13 @@ describe('BreadcrumbComponent', () => {
         it('should move focus to next link on ArrowRight', async () => {
             await whenStable(fixture);
             const links = fixture.nativeElement.querySelectorAll('a.fd-link') as NodeListOf<HTMLElement>;
-            if (links.length < 2) {
-                return;
-            }
+            expect(links.length).toBeGreaterThanOrEqual(2);
+
             links[0].focus();
             expect(document.activeElement).toBe(links[0]);
 
             const event = createKeyboardEvent(RIGHT_ARROW, 'ArrowRight');
-            component._onKeydown(event);
+            component.elementRef.nativeElement.dispatchEvent(event);
 
             expect(document.activeElement).toBe(links[1]);
         });
@@ -205,14 +204,13 @@ describe('BreadcrumbComponent', () => {
         it('should move focus to previous link on ArrowLeft', async () => {
             await whenStable(fixture);
             const links = fixture.nativeElement.querySelectorAll('a.fd-link') as NodeListOf<HTMLElement>;
-            if (links.length < 2) {
-                return;
-            }
+            expect(links.length).toBeGreaterThanOrEqual(2);
+
             links[1].focus();
             expect(document.activeElement).toBe(links[1]);
 
             const event = createKeyboardEvent(LEFT_ARROW, 'ArrowLeft');
-            component._onKeydown(event);
+            component.elementRef.nativeElement.dispatchEvent(event);
 
             expect(document.activeElement).toBe(links[0]);
         });
@@ -229,14 +227,14 @@ describe('BreadcrumbComponent', () => {
             await whenStable(fixture);
             const links = fixture.nativeElement.querySelectorAll('a.fd-link') as NodeListOf<HTMLElement>;
             const currentPageSpan = fixture.nativeElement.querySelector('[aria-current="page"]') as HTMLElement;
-            if (links.length === 0 || !currentPageSpan) {
-                return;
-            }
+            expect(links.length).toBeGreaterThan(0);
+            expect(currentPageSpan).toBeTruthy();
+
             const lastLink = links[links.length - 1];
             lastLink.focus();
 
             const event = createKeyboardEvent(RIGHT_ARROW, 'ArrowRight');
-            component._onKeydown(event);
+            component.elementRef.nativeElement.dispatchEvent(event);
 
             expect(document.activeElement).toBe(currentPageSpan);
         });
@@ -245,13 +243,13 @@ describe('BreadcrumbComponent', () => {
             await whenStable(fixture);
             const links = fixture.nativeElement.querySelectorAll('a.fd-link') as NodeListOf<HTMLElement>;
             const currentPageSpan = fixture.nativeElement.querySelector('[aria-current="page"]') as HTMLElement;
-            if (links.length === 0 || !currentPageSpan) {
-                return;
-            }
+            expect(links.length).toBeGreaterThan(0);
+            expect(currentPageSpan).toBeTruthy();
+
             currentPageSpan.focus();
 
             const event = createKeyboardEvent(LEFT_ARROW, 'ArrowLeft');
-            component._onKeydown(event);
+            component.elementRef.nativeElement.dispatchEvent(event);
 
             expect(document.activeElement).toBe(links[links.length - 1]);
         });
@@ -259,13 +257,12 @@ describe('BreadcrumbComponent', () => {
         it('should not move focus before the first link on ArrowLeft', async () => {
             await whenStable(fixture);
             const links = fixture.nativeElement.querySelectorAll('a.fd-link') as NodeListOf<HTMLElement>;
-            if (links.length === 0) {
-                return;
-            }
+            expect(links.length).toBeGreaterThan(0);
+
             links[0].focus();
 
             const event = createKeyboardEvent(LEFT_ARROW, 'ArrowLeft');
-            component._onKeydown(event);
+            component.elementRef.nativeElement.dispatchEvent(event);
 
             expect(document.activeElement).toBe(links[0]);
         });
@@ -273,13 +270,12 @@ describe('BreadcrumbComponent', () => {
         it('should move focus to next link on ArrowDown', async () => {
             await whenStable(fixture);
             const links = fixture.nativeElement.querySelectorAll('a.fd-link') as NodeListOf<HTMLElement>;
-            if (links.length < 2) {
-                return;
-            }
+            expect(links.length).toBeGreaterThanOrEqual(2);
+
             links[0].focus();
 
             const event = createKeyboardEvent(DOWN_ARROW, 'ArrowDown');
-            component._onKeydown(event);
+            component.elementRef.nativeElement.dispatchEvent(event);
 
             expect(document.activeElement).toBe(links[1]);
         });
@@ -287,13 +283,12 @@ describe('BreadcrumbComponent', () => {
         it('should move focus to previous link on ArrowUp', async () => {
             await whenStable(fixture);
             const links = fixture.nativeElement.querySelectorAll('a.fd-link') as NodeListOf<HTMLElement>;
-            if (links.length < 2) {
-                return;
-            }
+            expect(links.length).toBeGreaterThanOrEqual(2);
+
             links[1].focus();
 
             const event = createKeyboardEvent(UP_ARROW, 'ArrowUp');
-            component._onKeydown(event);
+            component.elementRef.nativeElement.dispatchEvent(event);
 
             expect(document.activeElement).toBe(links[0]);
         });

@@ -67,7 +67,7 @@ export type BreadcrumbSeparatorStyle =
         role: 'navigation',
         '[class]': '_cssClass()',
         '[attr.aria-label]': '_ariaLabel',
-        '(keydown)': '_onKeydown($event)'
+        '(keydown)': 'onKeydown($event)'
     },
     templateUrl: './breadcrumb.component.html',
     styleUrl: './breadcrumb.component.scss',
@@ -217,13 +217,39 @@ export class BreadcrumbComponent implements AfterViewInit, HasElementRef {
         this._updateAriaLabels();
     }
 
+    /** @hidden */
+    _onHiddenChange(isHidden: boolean, breadcrumb: BreadcrumbItemComponent): void {
+        if (!isHidden) {
+            breadcrumb._detach();
+        } else {
+            breadcrumb._attach();
+        }
+    }
+
+    /** @hidden */
+    _onVisibleItemsCountChange(visibleItemsCount: number): void {
+        this.visibleItemsCount.emit(visibleItemsCount);
+
+        /**
+         * Defer tabindex update: the overflow layout emits this event before detectChanges(),
+         * so soft-hidden CSS classes haven't been applied yet.
+         * A microtask ensures the DOM is up to date.
+         */
+        Promise.resolve().then(() => this._updateTabIndexes());
+    }
+
+    /** @hidden */
+    _onHiddenItemsCountChange(hiddenItemsCount: number): void {
+        this.hiddenItemsCount.emit(hiddenItemsCount);
+    }
+
     /**
      * @hidden
      * Opens the overflow menu on keyboard activation.
      * Bound to keyup (not keydown) so that by the time the menu opens and captures focus,
      * the key has been fully released and no stale key events reach the first menu item.
      */
-    openOverflowMenu(event: Event): void {
+    protected openOverflowMenu(event: Event): void {
         event.preventDefault();
         if (!this._menuComponent.isOpen()) {
             this._menuComponent.open();
@@ -231,7 +257,7 @@ export class BreadcrumbComponent implements AfterViewInit, HasElementRef {
     }
 
     /** @hidden */
-    _onKeydown(event: KeyboardEvent): void {
+    protected onKeydown(event: KeyboardEvent): void {
         if (!KeyUtil.isKeyCode(event, [LEFT_ARROW, RIGHT_ARROW, UP_ARROW, DOWN_ARROW])) {
             return;
         }
@@ -259,32 +285,6 @@ export class BreadcrumbComponent implements AfterViewInit, HasElementRef {
             links[nextIndex].focus();
             event.preventDefault();
         }
-    }
-
-    /** @hidden */
-    _onHiddenChange(isHidden: boolean, breadcrumb: BreadcrumbItemComponent): void {
-        if (!isHidden) {
-            breadcrumb._detach();
-        } else {
-            breadcrumb._attach();
-        }
-    }
-
-    /** @hidden */
-    _onVisibleItemsCountChange(visibleItemsCount: number): void {
-        this.visibleItemsCount.emit(visibleItemsCount);
-
-        /**
-         * Defer tabindex update: the overflow layout emits this event before detectChanges(),
-         * so soft-hidden CSS classes haven't been applied yet.
-         * A microtask ensures the DOM is up to date.
-         */
-        Promise.resolve().then(() => this._updateTabIndexes());
-    }
-
-    /** @hidden */
-    _onHiddenItemsCountChange(hiddenItemsCount: number): void {
-        this.hiddenItemsCount.emit(hiddenItemsCount);
     }
 
     /**
