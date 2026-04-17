@@ -68,6 +68,7 @@ nx reset
 - **DO NOT** use `effect()` to derive state from other signals -- use `computed()` (read-only) or `linkedSignal()` (writable/resettable). Effects are for **side effects only**: DOM manipulation, logging, external API calls.
 - **DO NOT** rely on conditional signal reads inside `effect()` / `computed()` -- if a signal is only read inside an `if` branch, it won't be tracked when that branch isn't taken. Read tracked signals before conditional logic, or restructure to ensure all dependencies are always read.
 - **DO NOT** use `ngClass` / `ngStyle` -- use direct `class` / `style` bindings.
+- **DO NOT** grep `node_modules/fundamental-styles/` for CSS classes -- use the `fundamental-styles` MCP tools (`get_css_classes`, `get_component_html`, etc.) which provide structured, complete data.
 - **DO NOT** use `afterNextRender()` / `afterRender()` to set properties on child components -- we hit NG0100 when `FormItemComponent` used `afterNextRender` to set `ariaLabelledBy` on a content child (PR #14045). Moving to `ngAfterContentInit` fixed it. Angular docs recommend `afterNextRender` for DOM operations (measuring layout, third-party library init), not for modifying component state.
 - ESLint enforces **member ordering**: decorated props, then signal inputs/outputs, then public, then protected, then private. Protected **before** private, always.
 
@@ -88,3 +89,4 @@ For in-depth patterns, read on demand (not auto-loaded):
 - `docs/agents/i18n-patterns.md` -- FD_LANGUAGE_SIGNAL, translation factories
 - `docs/agents/nx-workflow.md` -- workspace commands, incremental validation
 - `docs/agents/breaking-changes.md` -- what constitutes a breaking change
+- `docs/agents/fundamental-styles.md` -- CSS class naming (BEM), design tokens, accessibility, MCP tools

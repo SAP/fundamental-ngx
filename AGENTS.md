@@ -1,7 +1,7 @@
 <!--
 Document: Angular 21+ Development Guidelines for Fundamental NGX
-Last Updated: March 29, 2026
-Version: 5.0
+Last Updated: April 17, 2026
+Version: 5.1
 Purpose: Comprehensive guide for AI agents and developers working with Angular 21+ in NX monorepo
 Note: Detailed documentation has been split into separate files in docs/agents/
 -->
@@ -260,15 +260,16 @@ BREAKING CHANGE: DestroyedService removed. Use DestroyRef + takeUntilDestroyed()
 
 For comprehensive patterns and examples, see the detailed documentation:
 
-| Topic                    | File                                                                   |
-| ------------------------ | ---------------------------------------------------------------------- |
-| **Angular Patterns**     | [docs/agents/angular-patterns.md](docs/agents/angular-patterns.md)     |
-| **Dependency Injection** | [docs/agents/di-patterns.md](docs/agents/di-patterns.md)               |
-| **State Management**     | [docs/agents/state-management.md](docs/agents/state-management.md)     |
-| **Testing Guidelines**   | [docs/agents/testing-guidelines.md](docs/agents/testing-guidelines.md) |
-| **Internationalization** | [docs/agents/i18n-patterns.md](docs/agents/i18n-patterns.md)           |
-| **NX Workflow**          | [docs/agents/nx-workflow.md](docs/agents/nx-workflow.md)               |
-| **Breaking Changes**     | [docs/agents/breaking-changes.md](docs/agents/breaking-changes.md)     |
+| Topic                      | File                                                                   |
+| -------------------------- | ---------------------------------------------------------------------- |
+| **Angular Patterns**       | [docs/agents/angular-patterns.md](docs/agents/angular-patterns.md)     |
+| **Dependency Injection**   | [docs/agents/di-patterns.md](docs/agents/di-patterns.md)               |
+| **State Management**       | [docs/agents/state-management.md](docs/agents/state-management.md)     |
+| **Testing Guidelines**     | [docs/agents/testing-guidelines.md](docs/agents/testing-guidelines.md) |
+| **Internationalization**   | [docs/agents/i18n-patterns.md](docs/agents/i18n-patterns.md)           |
+| **NX Workflow**            | [docs/agents/nx-workflow.md](docs/agents/nx-workflow.md)               |
+| **Breaking Changes**       | [docs/agents/breaking-changes.md](docs/agents/breaking-changes.md)     |
+| **Fundamental Styles CSS** | [docs/agents/fundamental-styles.md](docs/agents/fundamental-styles.md) |
 
 ### Detailed Documentation Contents
 
@@ -333,6 +334,16 @@ For comprehensive patterns and examples, see the detailed documentation:
 - Breaking change commit format
 - Dead code removal process
 - Documentation file guidelines
+
+**[fundamental-styles.md](docs/agents/fundamental-styles.md)**
+
+- BEM naming convention (block, element, modifier, state classes)
+- CSS class building with computed signals
+- SCSS import patterns
+- Design tokens (SAP CSS custom properties)
+- Accessibility patterns per component
+- Common pitfalls (wrong state classes, hardcoded colors)
+- MCP server tools reference (Claude Code)
 
 ---
 
