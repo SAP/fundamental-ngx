@@ -53,6 +53,10 @@ export default {
         yearSelectionLabel: 'Seleziona anno',
         yearsRangeSelectionLabel: 'Seleziona intervallo anni'
     },
+    coreCard: {
+        ariaDescription: 'Active, Press Enter to activate',
+        roleDescription: '{cardType} Card'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: "Vai all'elemento precedente",
         pageIndicatorLabel: 'Elemento {itemNum} di {totalNum} visualizzato',

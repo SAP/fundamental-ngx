@@ -52,6 +52,10 @@ export default {
         yearSelectionLabel: 'Zgjidhni vitin',
         yearsRangeSelectionLabel: 'Zgjidhni shtrirjen e viteve'
     },
+    coreCard: {
+        ariaDescription: 'Active, Press Enter to activate',
+        roleDescription: '{cardType} Card'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: 'Shko te artikulli i mëparshëm',
         pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',

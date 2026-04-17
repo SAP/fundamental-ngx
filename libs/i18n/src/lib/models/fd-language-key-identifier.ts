@@ -39,6 +39,8 @@ export type FdLanguageKeyIdentifier =
     | 'coreCalendar.workDayLabel'
     | 'coreCalendar.yearSelectionLabel'
     | 'coreCalendar.yearsRangeSelectionLabel'
+    | 'coreCard.ariaDescription'
+    | 'coreCard.roleDescription'
     | 'coreCarousel.leftNavigationBtnLabel'
     | 'coreCarousel.pageIndicatorLabel'
     | 'coreCarousel.rightNavigationBtnLabel'

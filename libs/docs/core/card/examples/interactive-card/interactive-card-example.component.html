@@ -1,5 +1,14 @@
 <div fd-card-list style="display: flex; gap: 2rem; flex-wrap: wrap">
-    <fd-card [interactive]="true" role="listitem" style="max-width: 400px">
+    <fd-card
+        [interactive]="true"
+        role="listitem"
+        badge="New"
+        badgeIcon="example"
+        [badgeColor]="2"
+        badgeAriaLabel="New Card"
+        ariaRoledescription="Catalog Item Card"
+        style="max-width: 400px"
+    >
         <fd-card-header>
             <fd-card-main-header>
                 <fd-avatar
@@ -12,14 +21,6 @@
                 <h2 fd-card-title>Card Title</h2>
                 <h3 fd-card-subtitle>Card Subtitle</h3>
                 <span fd-card-counter status="positive">3 of 10</span>
-                <button
-                    fd-button
-                    fd-card-header-action
-                    fdType="transparent"
-                    glyph="overflow"
-                    ariaLabel="More"
-                    title="More"
-                ></button>
             </fd-card-main-header>
             <fd-card-extended-header>
                 <div fd-card-header-column>
@@ -50,21 +51,20 @@
         <fd-card-content></fd-card-content>
     </fd-card>
 
-    <fd-card [interactive]="true" role="listitem" style="max-width: 400px">
+    <fd-card
+        [interactive]="true"
+        role="listitem"
+        badgeIcon="example"
+        [badgeColor]="3"
+        badgeAriaLabel="Requires attention"
+        style="max-width: 400px"
+    >
         <fd-card-header>
             <fd-card-main-header>
                 <fd-avatar glyph="travel-expense" size="s" ariaLabel="avatar image" title="avatar image"></fd-avatar>
                 <h2 fd-card-title>Travel Request</h2>
                 <h3 fd-card-subtitle>Marie Johnson</h3>
                 <span fd-card-counter>2 hours ago</span>
-                <button
-                    fd-button
-                    fd-card-header-action
-                    fdType="transparent"
-                    glyph="overflow"
-                    ariaLabel="More"
-                    title="More"
-                ></button>
             </fd-card-main-header>
             <fd-card-extended-header [align]="'bottom'">
                 <div fd-card-header-column>

@@ -52,6 +52,10 @@ export default {
         yearSelectionLabel: '年を選択',
         yearsRangeSelectionLabel: '年範囲を選択'
     },
+    coreCard: {
+        ariaDescription: 'Active, Press Enter to activate',
+        roleDescription: '{cardType} Card'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: '前の項目へ',
         pageIndicatorLabel: '項目{itemNum}/{totalNum}件を表示中',

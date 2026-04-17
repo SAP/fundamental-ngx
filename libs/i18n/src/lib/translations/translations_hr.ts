@@ -53,6 +53,10 @@ export default {
         yearSelectionLabel: 'Odaberi godinu',
         yearsRangeSelectionLabel: 'Odaberi raspon godina'
     },
+    coreCard: {
+        ariaDescription: 'Active, Press Enter to activate',
+        roleDescription: '{cardType} Card'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: 'Idi na prethodnu stavku',
         pageIndicatorLabel: 'Prikazana je stavka {itemNum} od {totalNum}',
