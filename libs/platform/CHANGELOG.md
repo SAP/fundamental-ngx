@@ -1,3 +1,13 @@
+## 0.62.0-rc.81 (2026-04-17)
+
+### 🩹 Fixes
+
+- **platform:** table info toolbar bugs when using outerScroll ([#14128](https://github.com/SAP/fundamental-ngx/pull/14128))
+
+### ❤️ Thank You
+
+- Mike O'Donnell @mikerodonnell89
+
 ## 0.62.0-rc.80 (2026-04-17)
 
 ### 🩹 Fixes
