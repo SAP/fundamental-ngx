@@ -1,12 +1,12 @@
 import { Directive } from '@angular/core';
+import { CLASS_NAME } from '../constants';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-card-media-image]',
-    standalone: true,
     host: {
         role: 'presentation',
-        class: 'fd-card__media-image'
+        class: CLASS_NAME.cardMediaImage
     }
 })
 export class CardMediaImageDirective {}

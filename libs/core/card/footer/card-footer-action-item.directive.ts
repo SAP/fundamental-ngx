@@ -1,10 +1,9 @@
-import { Directive, TemplateRef } from '@angular/core';
+import { Directive, inject, TemplateRef } from '@angular/core';
 
 @Directive({
-    selector: '[fdCardFooterActionItem]',
-    standalone: true
+    selector: '[fdCardFooterActionItem]'
 })
 export class CardFooterActionItemDirective {
     /** @hidden */
-    constructor(readonly templateRef: TemplateRef<void>) {}
+    readonly templateRef = inject(TemplateRef<void>);
 }

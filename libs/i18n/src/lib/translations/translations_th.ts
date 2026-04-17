@@ -52,6 +52,10 @@ export default {
         yearSelectionLabel: 'เลือกปี',
         yearsRangeSelectionLabel: 'เลือกช่วงปี'
     },
+    coreCard: {
+        ariaDescription: 'Active, Press Enter to activate',
+        roleDescription: '{cardType} Card'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: 'ไปยังไอเท็มก่อนหน้า',
         pageIndicatorLabel: 'แสดงไอเท็ม {itemNum} จาก {totalNum} รายการ',

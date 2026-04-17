@@ -1,6 +1,6 @@
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { DatePipe } from '@angular/common';
-import { Component, TemplateRef, ViewEncapsulation } from '@angular/core';
+import { Component, TemplateRef, ViewEncapsulation, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -46,7 +46,7 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
     ]
 })
 export class CalendarMobileExampleComponent {
-    datePicked: FdDate = FdDate.getNow();
+    readonly datePicked = signal<FdDate>(FdDate.getNow());
 
     constructor(private _dialogService: DialogService) {}
 
@@ -71,7 +71,7 @@ export class CalendarMobileExampleComponent {
     }
 
     dateChanged(date: FdDate): void {
-        this.datePicked = date;
+        this.datePicked.set(date);
     }
 
     noop(): void {}

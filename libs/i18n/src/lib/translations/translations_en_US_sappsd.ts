@@ -53,6 +53,10 @@ export default {
         yearSelectionLabel: '[[[Ŝēĺēċţ ŷēąŗ∙∙∙∙∙∙∙∙]]]',
         yearsRangeSelectionLabel: '[[[Ŝēĺēċţ ŷēąŗş ŗąŋğē∙∙∙∙∙∙]]]'
     },
+    coreCard: {
+        ariaDescription: '[[[Āċţįʋē, Ƥŗēşş Ĕŋţēŗ ţŏ ąċţįʋąţē∙∙∙∙∙∙∙∙∙∙]]]',
+        roleDescription: '[[[{cardType} Ĉąŗƌ]]]'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: '[[[Ģŏ ţŏ ρŗēʋįŏűş įţēɱ∙∙∙∙∙]]]',
         pageIndicatorLabel: '[[[Ĭţēɱ {itemNum} ŏƒ {totalNum} ƌįşρĺąŷēƌ]]]',
