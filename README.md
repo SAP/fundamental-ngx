@@ -6,19 +6,18 @@
   <img src="https://www.netlify.com/img/global/badges/netlify-light.svg" alt="Deploys by Netlify" />
 </a>
 
-## <a name="1"></a>1. Description
+Angular component library implementing the SAP Design System. Ships 1000+ components across 14 packages, targeting Angular 21+.
 
-The Fundamental Library for Angular is an SAP Design System Angular component library used to build modern product user experiences with the SAP look and feel.
+[Documentation](https://sap.github.io/fundamental-ngx) | [Component Playground](https://sap.github.io/fundamental-ngx)
 
-This repository contains 2 libraries(npm packages),
+## Packages
 
-- [@fundamental-ngx/core](https://github.com/SAP/fundamental-ngx/tree/main/libs/core):
-  The Fundamental-NGX core provides base angular implementation of Fundamental Library Styles to offer developers a rich set of components
-  they can use when building angular applications. Fundamental-ngx core angular components provides the end developer with some degree of flexibility as most of the components allow finer customization directly on the HTML template level.
+### Core Libraries
 
-- [@fundamental-ngx/platform](https://github.com/SAP/fundamental-ngx/tree/main/libs/platform):
-  The Fundamental-NGX platform is built on top of the core to both enhance existing functionality with additional features
-  which are driven by application requirements and to provide higher abstraction for the components by hiding most of the internal implementation details which boosts productivity.
+| Package                                      | Description                                                                  |
+| -------------------------------------------- | ---------------------------------------------------------------------------- |
+| [`@fundamental-ngx/core`](libs/core)         | Base UI components (button, dialog, card, calendar, table, etc.)             |
+| [`@fundamental-ngx/platform`](libs/platform) | Higher-level composites built on core with form integration and data binding |
 
 ## AI Integration (MCP Server)
 
@@ -64,37 +63,116 @@ See the [full MCP server documentation](https://github.com/SAP/fundamental-ngx/t
 
 ## <a name="2"></a>2. Requirements
 
-To download and use Fundamental Library for Angular, you will first need to install the [node package manager](https://www.npmjs.com/get-npm) and [yarn package manager](https://yarnpkg.com/getting-started/install) (`corepack enable` and then `yarn`).
+### UI5 Web Components
 
-Fundamental Library for Angular is intended for use with Angular 15 or newer.
+| Package                                                                    | Description                             |
+| -------------------------------------------------------------------------- | --------------------------------------- |
+| [`@fundamental-ngx/ui5-webcomponents`](libs/ui5-webcomponents)             | Angular wrappers for UI5 Web Components |
+| [`@fundamental-ngx/ui5-webcomponents-fiori`](libs/ui5-webcomponents-fiori) | Fiori-specific UI5 component wrappers   |
+| [`@fundamental-ngx/ui5-webcomponents-ai`](libs/ui5-webcomponents-ai)       | AI-specific UI5 component wrappers      |
 
-Prior knowledge of Angular is recommended, to use the fundamental-ngx library.
+### Supporting Packages
 
-## <a name="3"></a>3. Known Issues
+| Package                                                      | Description                                |
+| ------------------------------------------------------------ | ------------------------------------------ |
+| [`@fundamental-ngx/cdk`](libs/cdk)                           | Utilities, forms, data-source abstractions |
+| [`@fundamental-ngx/i18n`](libs/i18n)                         | Signal-based internationalization          |
+| [`@fundamental-ngx/datetime-adapter`](libs/datetime-adapter) | Date/time adapter (Day.js)                 |
+| [`@fundamental-ngx/moment-adapter`](libs/moment-adapter)     | Date/time adapter (Moment.js, legacy)      |
 
-- Please see [Issues](https://github.com/SAP/fundamental-ngx/issues).
-- Contribution Known [Issues](https://github.com/SAP/fundamental-ngx/wiki/Known-Contribution-Issues)
+### Domain-Specific
 
-## <a name="4"></a>4. Support
+| Package                            | Description                             |
+| ---------------------------------- | --------------------------------------- |
+| [`@fundamental-ngx/btp`](libs/btp) | Business Technology Platform components |
+| [`@fundamental-ngx/cx`](libs/cx)   | Customer Experience components          |
+
+### Developer Tooling
+
+| Package                                        | Description                         |
+| ---------------------------------------------- | ----------------------------------- |
+| [`@fundamental-ngx/mcp`](libs/mcp-server)      | MCP server for AI coding assistants |
+| [`@fundamental-ngx/nx-plugin`](libs/nx-plugin) | NX generators and executors         |
+
+## AI Integration (MCP Server)
+
+[`@fundamental-ngx/mcp`](libs/mcp-server) is an MCP ([Model Context Protocol](https://modelcontextprotocol.io)) server that gives AI coding assistants structured access to the entire component catalog — APIs, examples, design tokens, accessibility guidance, and migration help from actual component metadata.
+
+### Quick Start
+
+**VS Code / Cursor** — create or edit `.vscode/mcp.json`:
+
+```json
+{
+    "servers": {
+        "fundamental-ngx": {
+            "command": "npx",
+            "args": ["-y", "@fundamental-ngx/mcp"]
+        }
+    }
+}
+```
+
+**Claude Code:**
+
+```bash
+claude mcp add fundamental-ngx -- npx -y @fundamental-ngx/mcp
+```
+
+**Windsurf** — add to `~/.codeium/windsurf/mcp_config.json`:
+
+```json
+{
+    "mcpServers": {
+        "fundamental-ngx": {
+            "command": "npx",
+            "args": ["-y", "@fundamental-ngx/mcp"]
+        }
+    }
+}
+```
+
+See the [full MCP server documentation](libs/mcp-server) for available tools and schema details.
+
+## Getting Started
+
+### Requirements
+
+- Angular 21 or newer
+- Node.js (LTS)
+- Yarn (`corepack enable`, then `yarn`)
+
+### Installation
+
+```bash
+ng add @fundamental-ngx/core
+```
+
+All components are standalone by default — import what you need:
+
+```typescript
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
+```
+
+See the [documentation site](https://sap.github.io/fundamental-ngx) for component examples and API details.
+
+## Known Issues
+
+See [Issues](https://github.com/SAP/fundamental-ngx/issues).
+
+## Support
 
 If you encounter an issue, you can [create a ticket](https://github.com/SAP/fundamental-ngx/issues).
 
-Angular Versions Support: Our versions offer Angular support. More information can be found [here](https://github.com/SAP/fundamental-ngx/wiki/Angular-Versions-Support).
+Angular version support: features and enhancements target the latest version. Bugfixes can be downported to the version compiled with the previous Angular release. More details on the [Angular Versions Support](https://github.com/SAP/fundamental-ngx/wiki/Angular-Versions-Support) wiki page.
 
-- Features and enhancements are developed to the latest version of fundamental-ngx.
+## Contributing
 
-- Bugfixes can be downported to the latest ngx version, which is compiled with the second last Angular version.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines and [NEW_COMPONENT.md](NEW_COMPONENT.md) for building new components.
 
-## <a name="5"></a>5. Contributing
+Please follow the [Angular commit message guidelines](https://github.com/angular/angular/blob/main/CONTRIBUTING.md#commit) and the [SAP Contribution Guidelines](https://github.com/SAP/.github/blob/main/CONTRIBUTING.md).
 
-If you want to contribute, please check the [SAP Contribution Guidelines](https://github.com/SAP/.github/blob/main/CONTRIBUTING.md), the [CONTRIBUTING.md](https://github.com/SAP/fundamental-ngx/blob/main/CONTRIBUTING.md) documentation for contribution guidelines. Please follow the [Angular commit message guidelines](https://github.com/angular/angular/blob/main/CONTRIBUTING.md#commit).
+## License
 
-Check out the [NEW_COMPONENT.md](https://github.com/SAP/fundamental-ngx/blob/main/NEW_COMPONENT.md) guide on building a new component for the library and creating the necessary documentation for your new component.
-
-## Similar Projects
-
-## <a name="7"></a>7. Similar Projects
-
-[Fundamental-react](https://github.com/SAP/fundamental-react) - React implementation of Fundamental Library Styles
-
-[Fundamental-vue](https://github.com/SAP/fundamental-vue) - Vue implementation of Fundamental Library Styles
+See [LICENSE.txt](LICENSE.txt).

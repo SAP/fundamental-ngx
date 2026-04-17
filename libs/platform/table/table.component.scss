@@ -583,8 +583,20 @@ fdk-dynamic-portal {
     &.fdp-table--outer-scroll {
         .fd-toolbar {
             position: sticky;
-            z-index: 10;
             top: 0;
+
+            &:not(.fd-toolbar--info) {
+                z-index: 10;
+            }
+
+            &.fd-toolbar--info {
+                z-index: 9;
+                top: 2.75rem;
+            }
+
+            &.fd-toolbar--info + fd-busy-indicator thead {
+                top: 4.75rem;
+            }
         }
 
         .fdp-table__body.fd-scrollbar {

@@ -1,11 +1,27 @@
-# Fundamental Moment date time adapter implementation
+# @fundamental-ngx/moment-adapter
 
-## Moment.js status
+[![npm version](https://badge.fury.io/js/%40fundamental-ngx%2Fmoment-adapter.svg)](//www.npmjs.com/package/@fundamental-ngx/moment-adapter)
+[![REUSE status](https://api.reuse.software/badge/github.com/SAP/fundamental-ngx)](https://api.reuse.software/info/github.com/SAP/fundamental-ngx)
 
-Moment.js is a legacy project, now in maintenance mode. Same applies to this adapter, which is based on Moment.js. Please consider using `@fundamental-ngx/datetime-adapter` instead.
+> **Legacy package.** Moment.js is in maintenance mode. Use [`@fundamental-ngx/datetime-adapter`](../datetime-adapter) (Day.js-based) instead for new projects.
 
 ## Description
 
-Fundamental Date Picker, Time Picker, Date Time Picker and similar components rely on provided datetime implementation (DatetimeAdapter) and datetime formats (DateTimeFormats).
+Date/time adapter based on [Moment.js](https://momentjs.com/) for Fundamental NGX date and time components (Date Picker, Time Picker, DateTime Picker, etc.).
 
-These components could be used with FdDatetimeAdapter, based on the JavaScript's native Date object, but one of the biggest shortcomings of the native Date object is the inability to set the parse format. As an alternative could be the MomentDateAdapter or a custom DateAdapter that works with the formatting/parsing library of your choice.
+These components rely on the `DatetimeAdapter` abstraction. This package provides `MomentDatetimeAdapter` as an alternative to the built-in `FdDatetimeAdapter` (based on native `Date`), adding reliable parse format support via Moment.js.
+
+## Installation
+
+```bash
+npm install @fundamental-ngx/moment-adapter moment
+```
+
+## Usage
+
+```typescript
+import { provideMomentDatetimeAdapter } from '@fundamental-ngx/moment-adapter';
+
+// In your application config or module providers:
+provideMomentDatetimeAdapter();
+```

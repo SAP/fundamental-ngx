@@ -1,3 +1,92 @@
+## 0.62.0-rc.81 (2026-04-17)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.62.0-rc.80 (2026-04-17)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.62.0-rc.79 (2026-04-17)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.62.0-rc.78 (2026-04-16)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.62.0-rc.77 (2026-04-16)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.62.0-rc.76 (2026-04-15)
+
+### 🩹 Fixes
+
+- **ci:** harden workflow security against injection and over-permissioning ([#14084](https://github.com/SAP/fundamental-ngx/pull/14084))
+
+### ❤️ Thank You
+
+- deno
+
+## 0.62.0-rc.75 (2026-04-15)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.62.0-rc.74 (2026-04-15)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.62.0-rc.73 (2026-04-15)
+
+### 🩹 Fixes
+
+- **core:** add a11y improvements for Card component ([#14118](https://github.com/SAP/fundamental-ngx/pull/14118))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
+## 0.62.0-rc.72 (2026-04-15)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.62.0-rc.71 (2026-04-14)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.62.0-rc.70 (2026-04-14)
+
+### 🩹 Fixes
+
+- **core:** items in fd-menu should not be activated on key down ([#14115](https://github.com/SAP/fundamental-ngx/pull/14115))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+- Maria Dineva @MariaIDineva
+
+## 0.62.0-rc.69 (2026-04-14)
+
+### 🩹 Fixes
+
+- ⚠️  **core:** signalify panel components ([#14109](https://github.com/SAP/fundamental-ngx/pull/14109))
+
+### ⚠️  Breaking Changes
+
+- **core:** signalify panel components  ([#14109](https://github.com/SAP/fundamental-ngx/pull/14109))
+  PanelComponent.expanded is now ModelSignal<boolean> — programmatic reads require expanded(). PanelComponent.expandedChange is now OutputRef<boolean> — programmatic subscriptions must use outputToObservable(panel.expandedChange). PanelComponent.panelContent is now Signal<PanelContentDirective | undefined> — access via panelContent(). PanelTitleDirective.id is now InputSignal<string> — access via id(). Template bindings [(expanded)], [expanded], and (expandedChange) are unchanged.
+  * refactor(core): signalify panel components
+  * fix(core): use model for expanded field, update example
+  * fix(core): remove Nullable
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
+## 0.62.0-rc.68 (2026-04-11)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
 ## 0.59.1-rc.15 (2026-04-11)
 
 ### 🩹 Fixes

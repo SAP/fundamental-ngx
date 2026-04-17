@@ -1,12 +1,12 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { PanelModule } from '../panel.module';
+import { PanelTitleDirective } from './panel-title.directive';
 
 @Component({
     template: `<h5 #directiveElement fd-panel-title>Test Panel Title Text</h5>`,
     standalone: true,
-    imports: [PanelModule]
+    imports: [PanelTitleDirective]
 })
 class TestComponent {
     @ViewChild('directiveElement')

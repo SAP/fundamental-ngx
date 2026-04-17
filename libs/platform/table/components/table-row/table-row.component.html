@@ -1,11 +1,10 @@
 @if (_fdpTableService._semanticHighlighting$(); as semanticHighlighting) {
     <td
-        fd-table-cell
+        class="fd-table__cell"
         fd-table-status-indicator
         fdkDisabled
         [addDisabledClass]="false"
         [status]="row.value[semanticHighlighting]"
-        [cellFocusedEventAnnouncer]="_itemFocusedEventAnnouncer"
     ></td>
 }
 <!-- hidden text for screenreader -->
