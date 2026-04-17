@@ -1,3 +1,13 @@
+## 0.62.0-rc.80 (2026-04-17)
+
+### 🩹 Fixes
+
+- **platform:** table pop-in keyboard improvements ([#14119](https://github.com/SAP/fundamental-ngx/pull/14119))
+
+### ❤️ Thank You
+
+- Mike O'Donnell @mikerodonnell89
+
 ## 0.62.0-rc.79 (2026-04-17)
 
 This was a version bump only for platform to align it with other projects, there were no code changes.
