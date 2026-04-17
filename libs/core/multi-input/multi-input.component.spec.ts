@@ -1,4 +1,4 @@
-import { SimpleChange } from '@angular/core';
+import { SimpleChange, signal } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { DynamicComponentService, RtlService } from '@fundamental-ngx/cdk/utils';
@@ -294,5 +294,207 @@ describe('MultiInputComponent', () => {
 
         expect(element.style.pointerEvents).toBe('auto');
         expect(element.tabIndex).toBe(0);
+    });
+
+    describe('token virtualization (A1: multi-input owned)', () => {
+        async function setSelected(count: number): Promise<void> {
+            await fixture.whenStable();
+            const values = Array.from({ length: count }, (_, i) => `item${i}`);
+            updateComponentInput('dropdownValues', values);
+            component.selected = values;
+            fixture.detectChanges();
+            await fixture.whenStable();
+            fixture.detectChanges();
+        }
+
+        function getInputEl(): HTMLInputElement {
+            return fixture.nativeElement.querySelector('input.fd-input') as HTMLInputElement;
+        }
+
+        function tokenCount(): number {
+            return fixture.nativeElement.querySelectorAll('fd-token').length;
+        }
+
+        function moreEl(): HTMLElement | null {
+            return fixture.nativeElement.querySelector('.fd-tokenizer-more') as HTMLElement | null;
+        }
+
+        it('maxVisibleTokens defaults to 12', () => {
+            expect(component.maxVisibleTokens()).toBe(12);
+        });
+
+        it('renders only the slice when over the limit (no focus): 50 selected → 12 tokens + "+N more"', async () => {
+            await setSelected(50);
+
+            expect(tokenCount()).toBe(12);
+            const indicator = moreEl();
+            expect(indicator).not.toBeNull();
+            expect(indicator!.textContent).toContain('38');
+        });
+
+        it('renders the full set when within the limit: 8 selected → 8 tokens, no "+N more"', async () => {
+            await setSelected(8);
+
+            expect(tokenCount()).toBe(8);
+            expect(moreEl()).toBeNull();
+        });
+
+        it('renders the full set on focus: 50 selected → focus event → 50 tokens, no "+N more"', async () => {
+            await setSelected(50);
+            expect(tokenCount()).toBe(12);
+
+            const inputEl = getInputEl();
+            inputEl.dispatchEvent(new FocusEvent('focus'));
+            fixture.detectChanges();
+            await fixture.whenStable();
+            fixture.detectChanges();
+
+            expect(tokenCount()).toBe(50);
+            expect(moreEl()).toBeNull();
+        });
+
+        it('collapses on blur when relatedTarget is outside the host: 50 → focus → focusout(external) → 12 + "+N more"', async () => {
+            await setSelected(50);
+            const inputEl = getInputEl();
+
+            inputEl.dispatchEvent(new FocusEvent('focus'));
+            fixture.detectChanges();
+            await fixture.whenStable();
+            fixture.detectChanges();
+            expect(tokenCount()).toBe(50);
+
+            const externalTarget = document.createElement('button');
+            document.body.appendChild(externalTarget);
+            try {
+                fixture.nativeElement.dispatchEvent(
+                    new FocusEvent('focusout', { relatedTarget: externalTarget, bubbles: true })
+                );
+                fixture.detectChanges();
+                await fixture.whenStable();
+                fixture.detectChanges();
+
+                expect(tokenCount()).toBe(12);
+                expect(moreEl()).not.toBeNull();
+            } finally {
+                document.body.removeChild(externalTarget);
+            }
+        });
+
+        it('keeps full set when relatedTarget is inside the host (e.g. clicking a token): 50 stays 50', async () => {
+            await setSelected(50);
+            const inputEl = getInputEl();
+
+            inputEl.dispatchEvent(new FocusEvent('focus'));
+            fixture.detectChanges();
+            await fixture.whenStable();
+            fixture.detectChanges();
+            expect(tokenCount()).toBe(50);
+
+            const internalTarget = fixture.nativeElement.querySelector('fd-token') as HTMLElement;
+            expect(internalTarget).toBeTruthy();
+
+            fixture.nativeElement.dispatchEvent(
+                new FocusEvent('focusout', { relatedTarget: internalTarget, bubbles: true })
+            );
+            fixture.detectChanges();
+            await fixture.whenStable();
+            fixture.detectChanges();
+
+            expect(tokenCount()).toBe(50);
+        });
+
+        it('does NOT render its own "+N more" when tokenizer already shows one (regression: double indicator bug)', async () => {
+            // Regression guard for the double-indicator bug (PR #14137).
+            // Old code: @if (hiddenCount() > 0) — fires even when tokenizer has its own indicator.
+            // Fix introduces showOwnMoreIndicator() which reads tokenizer.hasInternalOverflowIndicator().
+            // The test fails on pre-fix code because showOwnMoreIndicator does not exist there.
+            fixture.componentRef.setInput('maxVisibleTokens', 12);
+            await setSelected(20);
+
+            // Precondition: more tokens selected than maxVisibleTokens — hidden tokens exist.
+            expect(fixture.nativeElement.querySelectorAll('fd-token').length).toBeLessThan(20);
+
+            // Activate tokenizer's width-collapse: mark a rendered token as display:none (satisfies
+            // _hiddenTokens.length > 0) and set _showMoreElement signal to true.
+            // This makes tokenizer.hasInternalOverflowIndicator() → true.
+            const firstToken = component.tokenizer.tokenList.first;
+            firstToken.elementRef.nativeElement.style.display = 'none';
+            // _showMoreElement is a signal on the fix branch; set it to true to simulate width-collapse.
+            (component.tokenizer._showMoreElement as ReturnType<typeof signal>).set(true);
+
+            fixture.detectChanges();
+            await fixture.whenStable();
+            fixture.detectChanges();
+
+            // hasInternalOverflowIndicator() must now be true (tokenizer has a visible overflow span).
+            expect(component.tokenizer.hasInternalOverflowIndicator()).toBe(true);
+            // DOM: at most ONE .fd-tokenizer-more span total — the tokenizer's own.
+            // Multi-input must not add a second one. The bug rendered two simultaneously.
+            expect(fixture.nativeElement.querySelectorAll('.fd-tokenizer-more').length).toBeLessThanOrEqual(1);
+        });
+
+        it('"+N more" click expands the slice and calls tokenizer._showAllTokens()', async () => {
+            await setSelected(50);
+            const indicator = moreEl();
+            expect(indicator).not.toBeNull();
+
+            const showAllSpy = jest.spyOn(component.tokenizer, '_showAllTokens');
+
+            indicator!.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+            fixture.detectChanges();
+            await fixture.whenStable();
+            fixture.detectChanges();
+
+            expect(showAllSpy).toHaveBeenCalled();
+            expect(tokenCount()).toBe(50);
+            expect(moreEl()).toBeNull();
+        });
+
+        describe('a11y keyboard activation (Task 3.2)', () => {
+            it('"+N more" indicator is focusable: tabindex="0" and role="button"', async () => {
+                await setSelected(50);
+                const indicator = moreEl();
+                expect(indicator).not.toBeNull();
+                expect(indicator!.getAttribute('tabindex')).toBe('0');
+                expect(indicator!.getAttribute('role')).toBe('button');
+            });
+
+            it('Enter on "+N more" expands the slice and calls tokenizer._showAllTokens()', async () => {
+                await setSelected(50);
+                const indicator = moreEl();
+                expect(indicator).not.toBeNull();
+
+                const showAllSpy = jest.spyOn(component.tokenizer, '_showAllTokens');
+
+                indicator!.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+                fixture.detectChanges();
+                await fixture.whenStable();
+                fixture.detectChanges();
+
+                expect(showAllSpy).toHaveBeenCalled();
+                expect(tokenCount()).toBe(50);
+                expect(moreEl()).toBeNull();
+            });
+
+            it('Space on "+N more" expands the slice, calls tokenizer._showAllTokens(), and calls preventDefault()', async () => {
+                await setSelected(50);
+                const indicator = moreEl();
+                expect(indicator).not.toBeNull();
+
+                const showAllSpy = jest.spyOn(component.tokenizer, '_showAllTokens');
+                const spaceEvent = new KeyboardEvent('keydown', { key: ' ', bubbles: true, cancelable: true });
+                const preventSpy = jest.spyOn(spaceEvent, 'preventDefault');
+
+                indicator!.dispatchEvent(spaceEvent);
+                fixture.detectChanges();
+                await fixture.whenStable();
+                fixture.detectChanges();
+
+                expect(preventSpy).toHaveBeenCalled();
+                expect(showAllSpy).toHaveBeenCalled();
+                expect(tokenCount()).toBe(50);
+                expect(moreEl()).toBeNull();
+            });
+        });
     });
 });

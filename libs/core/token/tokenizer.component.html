@@ -11,8 +11,16 @@
         @if (showOverflowPopover && (_contentDensityObserver.isCompactSignal() || compactCollapse)) {
             <ng-template [ngTemplateOutlet]="tokensOverflow"></ng-template>
         } @else {
-            @if (_showMoreElement && _hiddenTokens.length > 0) {
-                <span (click)="moreClicked()" #moreElementSpan class="fd-tokenizer-more" role="button" tabindex="-1">
+            @if (_showMoreElement() && _hiddenTokens.length > 0) {
+                <span
+                    (click)="moreClicked()"
+                    (keydown.enter)="moreClicked()"
+                    (keydown.space)="$event.preventDefault(); moreClicked()"
+                    #moreElementSpan
+                    class="fd-tokenizer-more"
+                    role="button"
+                    tabindex="0"
+                >
                     @if (_contentDensityObserver.isCompactSignal() || compactCollapse) {
                         {{
                             (
@@ -27,6 +35,7 @@
                 </span>
             }
         }
+        <ng-content select="[fd-tokenizer-extra]"></ng-content>
         <ng-content select="[fd-form-control]"></ng-content>
     </div>
     @if (glyph) {
@@ -67,8 +76,16 @@
     </fd-popover>
 </ng-template>
 <ng-template #moreElement>
-    @if (_showMoreElement && _hiddenTokens.length > 0) {
-        <span (click)="moreClicked()" #moreElementSpan class="fd-tokenizer-more" role="button" tabindex="-1">
+    @if (_showMoreElement() && _hiddenTokens.length > 0) {
+        <span
+            (click)="moreClicked()"
+            (keydown.enter)="moreClicked()"
+            (keydown.space)="$event.preventDefault(); moreClicked()"
+            #moreElementSpan
+            class="fd-tokenizer-more"
+            role="button"
+            tabindex="0"
+        >
             @if (_contentDensityObserver.isCompactSignal() || compactCollapse) {
                 {{
                     (

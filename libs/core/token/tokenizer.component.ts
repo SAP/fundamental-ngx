@@ -26,8 +26,10 @@ import {
     ViewChildren,
     ViewContainerRef,
     ViewEncapsulation,
+    computed,
     forwardRef,
-    inject
+    inject,
+    signal
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
@@ -172,7 +174,10 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
     _tokenizerHasFocus = false;
 
     /** @hidden */
-    _showMoreElement = false;
+    readonly _showMoreElement = signal(false);
+
+    /** Whether tokenizer's own width-collapse "+N more" span is currently rendered. */
+    readonly hasInternalOverflowIndicator = computed(() => this._showMoreElement() && this._hiddenTokens.length > 0);
 
     /** @hidden */
     _tokensContainerWidth = 'auto';
@@ -462,8 +467,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
             token._viewContainer()!.createEmbeddedView(token._content()!);
         });
         this._tokensContainerWidth = 'auto';
-        this._showMoreElement = false;
-        this._cdRef.detectChanges();
+        this._showMoreElement.set(false);
         this.tokenizerInnerEl.nativeElement.scrollLeft = this.tokenizerInnerEl.nativeElement.scrollWidth;
     }
 
@@ -889,11 +893,11 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
             !this.open &&
             !this._tokenizerHasFocus;
 
-        if (showMoreElement === this._showMoreElement) {
+        if (showMoreElement === this._showMoreElement()) {
             return;
         }
 
-        this._showMoreElement = showMoreElement;
+        this._showMoreElement.set(showMoreElement);
 
         this._cdRef.detectChanges();
     }
