@@ -19,6 +19,50 @@ Angular component library implementing the SAP Design System. Ships 1000+ compon
 | [`@fundamental-ngx/core`](libs/core)         | Base UI components (button, dialog, card, calendar, table, etc.)             |
 | [`@fundamental-ngx/platform`](libs/platform) | Higher-level composites built on core with form integration and data binding |
 
+## AI Integration (MCP Server)
+
+The [`@fundamental-ngx/mcp`](https://github.com/SAP/fundamental-ngx/tree/main/libs/mcp-server) package is an MCP ([Model Context Protocol](https://modelcontextprotocol.io)) server that gives AI coding assistants structured access to the entire Fundamental NGX component catalog — 1000+ components across 8 libraries.
+
+With it, your AI assistant can look up component APIs, get usage examples, compare alternatives, check accessibility guidance, and receive migration help — all from actual component metadata, not hallucinated docs.
+
+### Quick Start
+
+**VS Code / Cursor** — create or edit `.vscode/mcp.json`:
+
+```json
+{
+    "servers": {
+        "fundamental-ngx": {
+            "command": "npx",
+            "args": ["-y", "@fundamental-ngx/mcp"]
+        }
+    }
+}
+```
+
+**Claude Code:**
+
+```bash
+claude mcp add fundamental-ngx -- npx -y @fundamental-ngx/mcp
+```
+
+**Windsurf** — add to `~/.codeium/windsurf/mcp_config.json`:
+
+```json
+{
+    "mcpServers": {
+        "fundamental-ngx": {
+            "command": "npx",
+            "args": ["-y", "@fundamental-ngx/mcp"]
+        }
+    }
+}
+```
+
+See the [full MCP server documentation](https://github.com/SAP/fundamental-ngx/tree/main/libs/mcp-server) for available tools and schema details.
+
+## <a name="2"></a>2. Requirements
+
 ### UI5 Web Components
 
 | Package                                                                    | Description                             |

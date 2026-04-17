@@ -92,6 +92,7 @@
         "@commitlint/cli": "18.6.1",
         "@commitlint/config-conventional": "18.6.1",
         "@fundamental-styles/common-css": "0.41.4",
+        "@modelcontextprotocol/sdk": "^1.29.0",
         "@nx/devkit": "22.4.1",
         "@nx/eslint": "22.4.1",
         "@nx/eslint-plugin": "22.4.1",
@@ -161,7 +162,8 @@
         "wait-on": "6.0.1",
         "wdio-axe": "2.2.3",
         "wdio-chromedriver-service": "6.0.4",
-        "webdriverio": "7.27.0"
+        "webdriverio": "7.27.0",
+        "zod": "^4.3.6"
     },
     "resolutions": {
         "nx": "22.4.1",

@@ -49,6 +49,7 @@
             "@fundamental-ngx/docs/cx": ["libs/docs/cx/index.ts"],
             "@fundamental-ngx/docs/cx/*": ["libs/docs/cx/*/index.ts", "libs/docs/cx/*/src/index.ts"],
             "@fundamental-ngx/docs/i18n": ["libs/docs/i18n/index.ts"],
+            "@fundamental-ngx/docs/mcp-server": ["libs/docs/mcp-server/index.ts"],
             "@fundamental-ngx/docs/platform": ["libs/docs/platform/index.ts"],
             "@fundamental-ngx/docs/platform/*": ["libs/docs/platform/*/index.ts", "libs/docs/platform/*/src/index.ts"],
             "@fundamental-ngx/docs/schema": ["libs/docs/schema/src/index.ts"],
@@ -83,6 +84,7 @@
             "@fundamental-ngx/ui5-webcomponents-fiori": ["libs/ui5-webcomponents-fiori/index.ts"],
             "@fundamental-ngx/ui5-webcomponents-fiori/*": ["libs/ui5-webcomponents-fiori/*/index.ts"],
             "@fundamental-ngx/ui5-webcomponents/*": ["libs/ui5-webcomponents/*/index.ts"],
+            "@fundamental-ngx/mcp-server": ["libs/mcp-server/src/index.ts"],
             "@fundamental-ngx/webc-generator": ["libs/webc-generator/src/index.ts"]
         },
         "skipLibCheck": true

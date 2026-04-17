@@ -203,7 +203,8 @@
             "ui5-webcomponents-base",
             "ui5-webcomponents",
             "ui5-webcomponents-fiori",
-            "ui5-webcomponents-ai"
+            "ui5-webcomponents-ai",
+            "mcp-server"
         ],
         "releaseTag": {
             "pattern": "v{version}"

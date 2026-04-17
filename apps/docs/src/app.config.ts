@@ -38,6 +38,7 @@ export const appConfig: ApplicationConfig = {
                 btp: () => import('@fundamental-ngx/docs/btp').then((m) => m.DOCS_DATA),
                 cx: () => import('@fundamental-ngx/docs/cx').then((m) => m.DOCS_DATA),
                 i18n: () => import('@fundamental-ngx/docs/i18n').then((m) => m.DOCS_DATA),
+                mcp: () => import('@fundamental-ngx/docs/mcp-server').then((m) => m.DOCS_DATA),
                 'ui5-webcomponents': () => import('@fundamental-ngx/docs/ui5-webcomponents').then((m) => m.DOCS_DATA),
                 'ui5-webcomponents-ai': () =>
                     import('@fundamental-ngx/docs/ui5-webcomponents-ai').then((m) => m.DOCS_DATA),
