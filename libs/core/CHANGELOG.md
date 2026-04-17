@@ -1,3 +1,13 @@
+## 0.62.0-rc.84 (2026-04-17)
+
+### 🩹 Fixes
+
+- **core:** a11y improvements for Breadcrumb component ([#14129](https://github.com/SAP/fundamental-ngx/pull/14129))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.62.0-rc.83 (2026-04-17)
 
 This was a version bump only for core to align it with other projects, there were no code changes.
