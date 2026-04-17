@@ -6,5 +6,16 @@
  * Names are sorted in the ApiComponent so order does not matter.
  */
 export const API_FILES = {
-    sideNavigation: ['SideNavigationComponent']
-};
+    sideNavigation: [
+        'SideNavigationComponent',
+        'NestedItemComponent',
+        'NestedLinkComponent',
+        'NestedListComponent',
+        'NestedListContentDirective',
+        'NestedListExpandIconComponent',
+        'NestedListKeyboardService',
+        'NestedListPopoverComponent',
+        'NestedListTitleDirective',
+        'PreparedNestedListComponent'
+    ]
+} as const;

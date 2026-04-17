@@ -7,16 +7,41 @@
  * Names are sorted in the ApiComponent so order does not matter.
  */
 export const API_FILES = {
-    navigation: [],
+    button: ['NestedButtonDirective'],
+    navigation: [
+        'FdbNavigationContentContainer',
+        'FdbNavigationListItem',
+        'NavigationComponent',
+        'NavigationContentEndComponent',
+        'NavigationContentStartComponent',
+        'NavigationDataSourceParser',
+        'NavigationLinkComponent',
+        'NavigationListComponent',
+        'NavigationListItemComponent',
+        'NavigationListItemDirective',
+        'NavigationListItemRefDirective',
+        'NavigationMenuItemComponent',
+        'NavigationMoreButtonComponent'
+    ],
     toolHeader: [
         'ToolHeaderComponent',
         'ToolHeaderAutoModeDirective',
-        'ToolHeaderActionComponent',
         'ToolHeaderUserDirective',
         'ToolHeaderProductSwitchComponent',
-        'ToolHeaderLogoDirective'
+        'ToolHeaderLogoDirective',
+        'ToolHeaderButtonDirective'
     ],
-    toolLayout: [],
-    splitter: ['SplitterComponent', 'SplitterPaneContainerComponent', 'SplitterSplitPaneComponent'],
+    toolLayout: [
+        'ToolLayoutComponent',
+        'ToolLayoutContentContainerDirective',
+        'ToolLayoutNavigationContainerDirective'
+    ],
+    splitter: [
+        'SplitterComponent',
+        'SplitterPaneContainerComponent',
+        'SplitterSplitPaneComponent',
+        'SplitterPaginationComponent',
+        'SplitterResizerComponent'
+    ],
     searchField: ['SearchFieldComponent']
 } as const;
