@@ -24,7 +24,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Ścieżka nawigacji',
-        overflowTitleMore: 'Kliknij lub naciśnij Enter, aby wyświetlić więcej szczegółów'
+        overflowTitleMore: 'Kliknij lub naciśnij Enter, aby wyświetlić więcej szczegółów',
+        positionLabel: '{current} of {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Zajęty',

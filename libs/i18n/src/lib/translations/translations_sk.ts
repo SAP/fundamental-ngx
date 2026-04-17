@@ -24,7 +24,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Navigačná cesta',
-        overflowTitleMore: 'Kliknutím alebo stlačením klávesu Enter zobrazíte ďalšie podrobnosti'
+        overflowTitleMore: 'Kliknutím alebo stlačením klávesu Enter zobrazíte ďalšie podrobnosti',
+        positionLabel: '{current} of {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Zaneprázdnené',

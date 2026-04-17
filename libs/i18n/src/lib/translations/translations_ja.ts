@@ -23,7 +23,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: '階層リンク',
-        overflowTitleMore: '詳細を表示するにはクリックするか Enter を押してください'
+        overflowTitleMore: '詳細を表示するにはクリックするか Enter を押してください',
+        positionLabel: '{current} of {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'ビジー',

@@ -24,7 +24,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Navigationspfad',
-        overflowTitleMore: 'Klicken Sie oder drücken Sie die Eingabetaste, um weitere Details zu sehen'
+        overflowTitleMore: 'Klicken Sie oder drücken Sie die Eingabetaste, um weitere Details zu sehen',
+        positionLabel: '{current} of {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Ausgelastet',

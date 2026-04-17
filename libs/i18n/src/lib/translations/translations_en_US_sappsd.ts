@@ -24,7 +24,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: '[[[Ɓŗēąƌċŗűɱƃ Ţŗąįĺ∙∙∙∙∙∙∙∙]]]',
-        overflowTitleMore: '[[[Ĉĺįċķ ŏŗ ρŗēşş ēŋţēŗ ţŏ ʋįēŵ ɱŏŗē ƌēţąįĺş∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]'
+        overflowTitleMore: '[[[Ĉĺįċķ ŏŗ ρŗēşş ēŋţēŗ ţŏ ʋįēŵ ɱŏŗē ƌēţąįĺş∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]',
+        positionLabel: '{current} of {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: '[[[Ɓűşŷ]]]',

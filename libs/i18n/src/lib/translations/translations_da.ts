@@ -23,7 +23,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Brødkrummespor',
-        overflowTitleMore: 'Klik eller tryk på Enter for at få vist flere detaljer'
+        overflowTitleMore: 'Klik eller tryk på Enter for at få vist flere detaljer',
+        positionLabel: '{current} of {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Optaget',

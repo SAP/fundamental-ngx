@@ -23,7 +23,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'เมนูนำทาง',
-        overflowTitleMore: 'คลิกหรือกด Enter เพื่อดูรายละเอียดเพิ่มเติม'
+        overflowTitleMore: 'คลิกหรือกด Enter เพื่อดูรายละเอียดเพิ่มเติม',
+        positionLabel: '{current} of {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'ไม่ว่าง',

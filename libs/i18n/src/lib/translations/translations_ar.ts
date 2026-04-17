@@ -23,7 +23,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'مسار التنقل',
-        overflowTitleMore: 'انقر أو اضغط ’Enter‘ لعرض مزيد من التفاصيل'
+        overflowTitleMore: 'انقر أو اضغط ’Enter‘ لعرض مزيد من التفاصيل',
+        positionLabel: '{current} of {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'مشغول',

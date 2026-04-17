@@ -24,7 +24,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Put usmeravanja',
-        overflowTitleMore: 'Kliknite ili pritisnite Enter da biste videli više detalja'
+        overflowTitleMore: 'Kliknite ili pritisnite Enter da biste videli više detalja',
+        positionLabel: '{current} of {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Zauzeto',

@@ -23,7 +23,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: '浏览记录',
-        overflowTitleMore: '单击或按回车以查看更多详细信息'
+        overflowTitleMore: '单击或按回车以查看更多详细信息',
+        positionLabel: '{current} of {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: '忙碌',

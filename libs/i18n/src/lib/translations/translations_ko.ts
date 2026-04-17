@@ -23,7 +23,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: '탐색 경로 추적',
-        overflowTitleMore: '클릭하거나 Enter를 눌러 자세한 내용을 확인할 수 있습니다.'
+        overflowTitleMore: '클릭하거나 Enter를 눌러 자세한 내용을 확인할 수 있습니다.',
+        positionLabel: '{current} of {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: '사용 중',

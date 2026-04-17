@@ -23,7 +23,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Breadcrumb Trail',
-        overflowTitleMore: 'और'
+        overflowTitleMore: 'और',
+        positionLabel: '{current} of {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Busy',

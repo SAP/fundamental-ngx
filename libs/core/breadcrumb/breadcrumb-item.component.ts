@@ -32,8 +32,7 @@ import { FD_BREADCRUMB_ITEM_COMPONENT } from './tokens';
         }
     ],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BreadcrumbItemComponent implements AfterViewInit {
     /** @hidden */

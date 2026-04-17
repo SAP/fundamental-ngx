@@ -16,7 +16,7 @@ import {
 } from './examples/breadcrumb-examples.component';
 
 const breadcrumbHrefExample = 'breadcrumb-href-example.component.html';
-const breadcrumbRouterLinkExample = 'breadcrumb-routerLink-example.component.html';
+const breadcrumbRouterLinkExample = 'breadcrumb-routerlink-example.component.html';
 const breadcrumbSeparatorExample = 'breadcrumb-separator-example.component.html';
 
 @Component({
@@ -38,7 +38,7 @@ export class BreadcrumbDocsComponent {
         {
             language: 'html',
             code: getAssetFromModuleAssets(breadcrumbRouterLinkExample),
-            fileName: 'breadcrumb-routerLink-example'
+            fileName: 'breadcrumb-routerlink-example'
         }
     ];
 

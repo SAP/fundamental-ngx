@@ -24,7 +24,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Sled poti',
-        overflowTitleMore: 'Za ogled več podrobnosti kliknite ali pritisnite Enter'
+        overflowTitleMore: 'Za ogled več podrobnosti kliknite ali pritisnite Enter',
+        positionLabel: '{current} of {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Zasedeno',

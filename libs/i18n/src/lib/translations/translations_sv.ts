@@ -23,7 +23,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Tillämpade datafiltreringssteg',
-        overflowTitleMore: 'Klicka eller tryck på Retur för att se fler detaljer'
+        overflowTitleMore: 'Klicka eller tryck på Retur för att se fler detaljer',
+        positionLabel: '{current} of {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Upptagen',

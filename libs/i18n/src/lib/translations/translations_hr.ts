@@ -24,7 +24,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Put hijerarhijske navigacije',
-        overflowTitleMore: 'Kliknite ili pristinite Enter kako biste prikazali više pojedinosti'
+        overflowTitleMore: 'Kliknite ili pristinite Enter kako biste prikazali više pojedinosti',
+        positionLabel: '{current} of {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Zauzeto',

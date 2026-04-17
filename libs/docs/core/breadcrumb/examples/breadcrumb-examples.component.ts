@@ -4,8 +4,8 @@ import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 
 @Component({
-    selector: 'fd-breadcrumb-routerLink-example',
-    templateUrl: './breadcrumb-routerLink-example.component.html',
+    selector: 'fd-breadcrumb-routerlink-example',
+    templateUrl: './breadcrumb-routerlink-example.component.html',
     styles: [
         `
             :host {

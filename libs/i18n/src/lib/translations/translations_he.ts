@@ -23,7 +23,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'שביל ניווט',
-        overflowTitleMore: "לחץ או הקש 'enter' כדי להציג פרטים נוספים"
+        overflowTitleMore: "לחץ או הקש 'enter' כדי להציג פרטים נוספים",
+        positionLabel: '{current} of {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'עסוק',

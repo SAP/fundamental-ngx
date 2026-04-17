@@ -23,7 +23,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Navigointipolku',
-        overflowTitleMore: 'Napsauta tai paina Enter nähdäksesi lisätietoja'
+        overflowTitleMore: 'Napsauta tai paina Enter nähdäksesi lisätietoja',
+        positionLabel: '{current} of {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Varattu',

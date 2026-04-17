@@ -23,7 +23,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Trilha de breadcrumb',
-        overflowTitleMore: 'Clique ou pressione Enter para exibir mais detalhes'
+        overflowTitleMore: 'Clique ou pressione Enter para exibir mais detalhes',
+        positionLabel: '{current} of {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Ocupado',

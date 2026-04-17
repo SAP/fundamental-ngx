@@ -24,7 +24,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: "Fil d'Ariane",
-        overflowTitleMore: 'Cliquer ou appuyer sur Entrée pour plus de détails'
+        overflowTitleMore: 'Cliquer ou appuyer sur Entrée pour plus de détails',
+        positionLabel: '{current} of {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Occupé',

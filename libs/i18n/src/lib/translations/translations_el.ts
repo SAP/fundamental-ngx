@@ -23,7 +23,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Διαδρομή Περιήγησης',
-        overflowTitleMore: 'Κάντε κλικ ή πατήστε enter για να δείτε περισσότερες λεπτομέρειες'
+        overflowTitleMore: 'Κάντε κλικ ή πατήστε enter για να δείτε περισσότερες λεπτομέρειες',
+        positionLabel: '{current} of {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Απασχολημένο',

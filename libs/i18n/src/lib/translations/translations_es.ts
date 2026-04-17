@@ -24,7 +24,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Ruta de navegación',
-        overflowTitleMore: 'Hacer clic o pulsar intro para ver más detalles'
+        overflowTitleMore: 'Hacer clic o pulsar intro para ver más detalles',
+        positionLabel: '{current} of {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Ocupado',
