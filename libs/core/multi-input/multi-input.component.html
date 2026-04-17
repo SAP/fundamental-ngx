@@ -66,7 +66,7 @@
                 fdMultiAnnouncer
                 [multiAnnouncerOptions]="filterFn(dropdownValues, searchTerm)"
             >
-                @for (option of viewModel.selectedOptions; track valueFn(option.item)) {
+                @for (option of renderedTokens(); track valueFn(option.item)) {
                     <fd-token
                         [disabled]="disabled"
                         (onCloseClick)="_onTokenCloseClick(option, false, $event)"
@@ -76,6 +76,19 @@
                     >
                         <span [innerHtml]="option.label"></span>
                     </fd-token>
+                }
+                @if (showOwnMoreIndicator()) {
+                    <span
+                        fd-tokenizer-extra
+                        class="fd-tokenizer-more"
+                        role="button"
+                        tabindex="0"
+                        (click)="_onMoreClicked()"
+                        (keydown.enter)="_onMoreClicked()"
+                        (keydown.space)="$event.preventDefault(); _onMoreClicked()"
+                    >
+                        {{ ('coreTokenizer.moreLabel' | fdTranslate: { count: hiddenCount() })() }}
+                    </span>
                 }
                 <input
                     type="text"
@@ -98,8 +111,7 @@
                     [ariaLabelledBy]="ariaLabelledBy"
                     (keydown)="_handleInputKeydown($event)"
                     [attr.id]="inputId"
-                    (focus)="tokenizer._showAllTokens()"
-                    (blur)="tokenizer._hideTokens()"
+                    (focus)="_onInputFocus()"
                     [attr.title]="title"
                 />
             </fd-tokenizer>
