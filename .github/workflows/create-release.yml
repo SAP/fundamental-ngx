@@ -9,7 +9,7 @@ on:
 env:
     NODE_VERSION: '22.x'
     # Package list for build, lint, pack, and publish operations
-    RELEASE_PACKAGES: 'i18n,cdk,core,platform,moment-adapter,datetime-adapter,cx,btp,ui5-webcomponents-base,ui5-webcomponents,ui5-webcomponents-fiori,ui5-webcomponents-ai'
+    RELEASE_PACKAGES: 'i18n,cdk,core,platform,moment-adapter,datetime-adapter,cx,btp,ui5-webcomponents-base,ui5-webcomponents,ui5-webcomponents-fiori,ui5-webcomponents-ai,mcp-server'
     IS_HOTFIX: ${{ github.ref == 'refs/heads/tmp_hotfix_branch' }}
     IS_PRERELEASE: ${{ github.event_name == 'push' && github.ref != 'refs/heads/tmp_hotfix_branch' }}
     IS_MANUAL: ${{ contains(github.event.head_commit.message, 'chore(release)') }}
