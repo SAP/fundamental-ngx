@@ -24,7 +24,7 @@ export default {
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Brødkrummespor',
         overflowTitleMore: 'Klik eller tryk på Enter for at få vist flere detaljer',
-        positionLabel: '{current} of {total}'
+        positionLabel: '{current} af {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Optaget',
@@ -54,12 +54,12 @@ export default {
         yearsRangeSelectionLabel: 'Vælg årsinterval'
     },
     coreCard: {
-        ariaDescription: 'Active, Press Enter to activate',
-        roleDescription: '{cardType} Card'
+        ariaDescription: 'Aktiv, tryk på Enter for at aktivere',
+        roleDescription: '{cardType}kort'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'Gå til forrige element',
-        pageIndicatorLabel: 'Element {itemNum} af {totalNum} vist',
+        pageIndicatorLabel: 'Element {itemNum} af {totalNum} vises',
         rightNavigationBtnLabel: 'Gå til næste element'
     },
     coreCombobox: {
@@ -98,7 +98,7 @@ export default {
         filterBarCancelButtonTitle: 'Annuller',
         listItemButtonDeleteTitle: 'Slet',
         listItemButtonDetailsTitle: 'Detaljer',
-        listItemCounterAriaLabel: 'Element har {count} underordnede.',
+        listItemCounterAriaLabel: 'Elementet har {count} underordnede elementer.',
         listItemStatusAriaLabel: 'Element har status. Status: {status}.',
         listItemStatusContainsErrors: 'Indeholder fejl',
         listItemStatusDraft: 'Udkast',
@@ -124,10 +124,10 @@ export default {
     coreMultiComboBox: {
         listGroupHeader: 'Gruppesidehoved',
         multiComboBoxAriaLabel: 'Multiværdikombinationsboks',
-        selectAllLabel: 'Vælg alle ({selectedItems} ud af {totalItems})'
+        selectAllLabel: 'Vælg alle ({selectedItems} af {totalItems})'
     },
     coreMultiInput: {
-        countListResultsPlural: '{count} resultatlisteelementer.',
+        countListResultsPlural: '{count} elementer på resultatlisten.',
         countListResultsSingular: '1 resultatlisteelement.',
         escapeNavigateTokens:
             'Tryk på Escape for at afslutte inputfeltet, og brug venstre og højre piletast til at navigere gennem de valgte muligheder.',
@@ -213,15 +213,15 @@ export default {
         search: 'Søg'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: 'Intervalskyderens minimumsværdi er {min}, maksimumsværdi er {max}',
+        multipleHandle1MinMaxDetails: 'Intervalskyderens minimumværdi er {min}, maksimumværdi er {max}',
         multipleHandle1ValuemaxDetails: 'Værdi er {value}',
         multipleHandle1ValueminDetails: 'Værdi er {value}',
         multipleHandle1ValueNowDetails: 'Aktuel værdi er {value}',
-        multipleHandle2MinMaxDetails: 'Intervalskyderens minimumsværdi er {min}, maksimumsværdi er {max}',
+        multipleHandle2MinMaxDetails: 'Intervalskyderens minimumværdi er {min}, maksimumværdi er {max}',
         multipleHandle2ValuemaxDetails: 'Værdi er {value}',
         multipleHandle2ValueminDetails: 'Værdi er {value}',
         multipleHandle2ValueNowDetails: 'Aktuel værdi er {value}',
-        singleMinMaxDetails: 'Skyderens minimumsværdi er {min}, maksimumsværdi er {max}',
+        singleMinMaxDetails: 'Skyderens minimumværdi er {min}, maksimumværdi er {max}',
         singleValuemaxDetails: 'Værdi er {value}',
         singleValueminDetails: 'Værdi er {value}',
         singleValueNowDetails: 'Aktuel værdi er {value}'
@@ -287,7 +287,7 @@ export default {
         deleteButtonLabel: 'Kan slettes'
     },
     coreTokenizer: {
-        moreLabel: '{count} flere',
+        moreLabel: '{count} mere',
         tokenizerLabel: 'Tokenizer'
     },
     coreToolbar: {
@@ -384,12 +384,12 @@ export default {
         userDetailsCancelBtnLabel: 'Annuller',
         userDetailsHeader: 'Detalje',
         userDetailsSendReminderBtnLabel: 'Send påmindelse',
-        userListSelectedItemsCountPlural: '{count} elementer valgt',
+        userListSelectedItemsCountPlural: '{count} artikler valgt',
         userListSelectedItemsCountSingular: '1 element valgt',
         watchersInputPlaceholder: 'Søg her..'
     },
     platformCombobox: {
-        countListResultsPlural: '{count} resultatlisteelementer',
+        countListResultsPlural: '{count} artikler på resultatlisten',
         countListResultsSingular: '1 resultatlisteelement'
     },
     platformFeedInput: {
@@ -434,7 +434,7 @@ export default {
         allButtonLabel: 'Alle',
         cancelLabel: 'Annuller',
         clearButtonTitle: 'Ryd søgning',
-        counterLabel: 'Resultater i alt: {count}',
+        counterLabel: 'Samlet antal resultater: {count}',
         deleteButtonAriaLabel: 'Fjern',
         deleteButtonTitle: 'Fjern forslag',
         groupHeader: 'Gruppesidehoved',
@@ -523,7 +523,7 @@ export default {
         filterDialogCancelBtnLabel: 'Annuller',
         filterDialogConfirmBtnLabel: 'OK',
         filterDialogFilterBy: 'Filtrér efter',
-        filterDialogFilterByLabel: 'Filtrér efter: {filterLabel}',
+        filterDialogFilterByLabel: 'Filtrer efter: {filterLabel}',
         filterDialogFilterTitle: 'Filtrér',
         filterDialogNotFilteredLabel: '(Ikke filtreret)',
         filteredBy: 'Filtreret efter',
@@ -545,7 +545,7 @@ export default {
         headerMenuUnfreeze: 'Frigør kolonne',
         headerMenuUnfreezePlural: 'Frigør kolonner',
         loadMore: 'Vis mere',
-        navigationColumnTitle: 'Row Actions',
+        navigationColumnTitle: 'Rækkehandlinger',
         noVisibleColumnsMessage:
             'Der er i øjeblikket ingen synlige kolonner i tabellen. Vælg de kolonner, du har brug for i tabelindstillingerne.',
         P13ColumnsDialogCancelBtnLabel: 'Annuller',
@@ -565,7 +565,7 @@ export default {
         P13FilterDialogAddFilterBtnTitle: 'Tilføj filter',
         P13FilterDialogCancelBtnLabel: 'Annuller',
         P13FilterDialogConfirmationBtnLabel: 'OK',
-        P13FilterDialogExcludePanelTitleWithCount: 'Udeluk ({count})',
+        P13FilterDialogExcludePanelTitleWithCount: 'Udelad ({count})',
         P13FilterDialogExcludePanelTitleWithoutCount: 'Udeluk',
         P13FilterDialogHeader: 'Filtrer efter',
         P13FilterDialogIncludePanelTitleWithCount: 'Medtag ({count})',
@@ -679,7 +679,7 @@ export default {
         defineConditionConditionStrategyLabelNotEqualTo: 'ikke lig med',
         defineConditionConditionStrategyLabelStartsWith: 'starter med',
         defineConditionFromPlaceholder: 'fra',
-        defineConditionMaxCountError: 'Indtast en værdi med maksimalt {count} tegn.',
+        defineConditionMaxCountError: 'Indtast en værdi med maksimalt {count} tegn',
         defineConditionRemoveConditionButtonTitle: 'Fjern betingelse',
         defineConditionSelectedValueHiddenA11yLabel: 'valgt værdi {value}',
         defineConditionTitle: 'Produkt',
@@ -701,9 +701,9 @@ export default {
         selectMobileConditionEmpty: 'Tom',
         selectMobileTabBackBtnTitle: 'Tilbage',
         selectMobileTabBtnOpenDialogLabel: 'Åbn dialogboks',
-        selectMobileTabTitle: 'Fanen {title}',
+        selectMobileTabTitle: 'fanen {title}',
         selectTabCountHiddenA11yLabel: 'indeholder {rowCount} rækker og {colCount} kolonner',
-        selectTabDisplayCountLabel: 'Elementer ({count})',
+        selectTabDisplayCountLabel: 'Artikler ({count})',
         selectTabMoreBtnLabel: 'Mere',
         selectTabTitle: 'Vælg fra liste',
         successButtonLabel: 'OK'

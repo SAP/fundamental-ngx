@@ -24,7 +24,7 @@ export default {
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Navigointipolku',
         overflowTitleMore: 'Napsauta tai paina Enter nähdäksesi lisätietoja',
-        positionLabel: '{current} of {total}'
+        positionLabel: '{current}/{total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Varattu',
@@ -54,12 +54,12 @@ export default {
         yearsRangeSelectionLabel: 'Valitse vuosialue'
     },
     coreCard: {
-        ariaDescription: 'Active, Press Enter to activate',
-        roleDescription: '{cardType} Card'
+        ariaDescription: 'Aktiivinen, aktivoi painamalla Enter-näppäintä.',
+        roleDescription: 'Kortti {cardType}'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'Siirry edelliseen kohteeseen',
-        pageIndicatorLabel: 'Nimike {itemNum} / {totalNum} näytetty',
+        pageIndicatorLabel: 'Kohde {itemNum} / {totalNum} näytetään',
         rightNavigationBtnLabel: 'SIirry seuraavaan kohteeseen'
     },
     coreCombobox: {
@@ -92,7 +92,7 @@ export default {
     },
     coreFeedListItem: {
         lessLabel: 'Vähemmän',
-        moreLabel: '{count} enemmän'
+        moreLabel: '{count} lisää'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'Peruuta',
@@ -142,7 +142,7 @@ export default {
         navigationPath: 'Navigation Path'
     },
     coreNestedList: {
-        linkItemAriaLabel: 'Puun kohde {itemDetails}, {selectedDescription}'
+        linkItemAriaLabel: 'Puuelementti {itemDetails}, {selectedDescription}'
     },
     coreNotification: {
         groupAriaDescription: 'Ilmoitusryhmä',
@@ -287,7 +287,7 @@ export default {
         deleteButtonLabel: 'Poistettavissa'
     },
     coreTokenizer: {
-        moreLabel: '{count} enemmän',
+        moreLabel: '{count} lisää',
         tokenizerLabel: 'Jäsentäjä'
     },
     coreToolbar: {
@@ -359,7 +359,7 @@ export default {
         nodeActionRemove: 'Poista',
         nodeMembersCount: '{count} jäsentä',
         nodeMenuButtonTitle: 'Valikko',
-        nodeStatusDueInXDays: 'Erääntyy {count} päivän kuluessa',
+        nodeStatusDueInXDays: 'Määräaika {count} päivän kuluttua',
         nodeStatusDueToday: 'Erääntyy tänään',
         nodeStatusXDaysOverdue: 'Viivästynyt {count} päivää',
         nodeVariousTeams: 'Eri tiimejä',
@@ -389,7 +389,7 @@ export default {
         watchersInputPlaceholder: 'Hae tästä...'
     },
     platformCombobox: {
-        countListResultsPlural: '{count} tulosluettelon kohdetta',
+        countListResultsPlural: '{count} tulosluettelonimikettä',
         countListResultsSingular: '1 tulosluettelon kohde'
     },
     platformFeedInput: {
@@ -434,7 +434,7 @@ export default {
         allButtonLabel: 'Kaikki',
         cancelLabel: 'Peruuta',
         clearButtonTitle: 'Tyhjennä haku',
-        counterLabel: 'Tuloksia yhteensä: {count}',
+        counterLabel: 'Kaikki tulokset: {count}',
         deleteButtonAriaLabel: 'Poista',
         deleteButtonTitle: 'Poista ehdotus',
         groupHeader: 'Ryhmäotsikko',
@@ -545,7 +545,7 @@ export default {
         headerMenuUnfreeze: 'Poista sarakkeen jäädytys',
         headerMenuUnfreezePlural: 'Poista sarakkeiden jäädytys',
         loadMore: 'Näytä enemmän',
-        navigationColumnTitle: 'Row Actions',
+        navigationColumnTitle: 'Rivin toimet',
         noVisibleColumnsMessage:
             'Taulukossa ei ole tällä hetkellä näkyviä sarakkeita. Valitse tarvitsemasi sarakkeet taulukon asetuksissa.',
         P13ColumnsDialogCancelBtnLabel: 'Peruuta',
@@ -565,10 +565,10 @@ export default {
         P13FilterDialogAddFilterBtnTitle: 'Lisää suodatin',
         P13FilterDialogCancelBtnLabel: 'Peruuta',
         P13FilterDialogConfirmationBtnLabel: 'OK',
-        P13FilterDialogExcludePanelTitleWithCount: 'Sulje pois ({count})',
+        P13FilterDialogExcludePanelTitleWithCount: 'Suljetaan pois ({count})',
         P13FilterDialogExcludePanelTitleWithoutCount: 'Sulje pois',
         P13FilterDialogHeader: 'Suodatusperuste:',
-        P13FilterDialogIncludePanelTitleWithCount: 'Sisällytä ({count})',
+        P13FilterDialogIncludePanelTitleWithCount: 'Sisältyy ({count})',
         P13FilterDialogIncludePanelTitleWithoutCount: 'Sisällytä',
         P13FilterDialogRemoveFilterBtnTitle: 'Poista suodatin',
         P13FilterStrategyLabelAfter: 'jälkeen',
@@ -701,9 +701,9 @@ export default {
         selectMobileConditionEmpty: 'Tyhjä',
         selectMobileTabBackBtnTitle: 'Paluu',
         selectMobileTabBtnOpenDialogLabel: 'Avaa valintaikkuna',
-        selectMobileTabTitle: 'Välilehti {title}',
-        selectTabCountHiddenA11yLabel: 'sisältää {rowCount} riviä ja  {colCount} saraketta',
-        selectTabDisplayCountLabel: 'Kohteet ({count})',
+        selectMobileTabTitle: '{title} -välilehti',
+        selectTabCountHiddenA11yLabel: 'sisältää {rowCount} riviä ja {colCount} saraketta',
+        selectTabDisplayCountLabel: 'Nimikkeet ({count})',
         selectTabMoreBtnLabel: 'Enemmän',
         selectTabTitle: 'Valitse luettelosta',
         successButtonLabel: 'OK'

@@ -25,7 +25,7 @@ export default {
     coreBreadcrumb: {
         breadcrumbTrailLabel: "Fil d'Ariane",
         overflowTitleMore: 'Cliquer ou appuyer sur Entrée pour plus de détails',
-        positionLabel: '{current} of {total}'
+        positionLabel: '{current} sur {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Occupé',
@@ -55,12 +55,12 @@ export default {
         yearsRangeSelectionLabel: "Sélectionner une plage d'années"
     },
     coreCard: {
-        ariaDescription: 'Active, Press Enter to activate',
-        roleDescription: '{cardType} Card'
+        ariaDescription: 'Active, Appuyer sur Entrée pour activer.',
+        roleDescription: 'Carte {cardType}'
     },
     coreCarousel: {
         leftNavigationBtnLabel: "Aller à l'élément précédent",
-        pageIndicatorLabel: 'Élément {itemNum} sur {totalNum} affiché',
+        pageIndicatorLabel: 'Élément {itemNum}/{totalNum} affiché',
         rightNavigationBtnLabel: "Aller à l'élément suivant"
     },
     coreCombobox: {
@@ -99,7 +99,7 @@ export default {
         filterBarCancelButtonTitle: 'Annuler',
         listItemButtonDeleteTitle: 'Supprimer',
         listItemButtonDetailsTitle: 'Détails',
-        listItemCounterAriaLabel: "L'élément a {count} enfants.",
+        listItemCounterAriaLabel: "L'élément a {count} enfants.",
         listItemStatusAriaLabel: "L'élément a un statut. Statut : {status}.",
         listItemStatusContainsErrors: 'Comporte des erreurs',
         listItemStatusDraft: 'Ébauche',
@@ -128,7 +128,7 @@ export default {
         selectAllLabel: 'Tout sélectionner ({selectedItems} sur {totalItems})'
     },
     coreMultiInput: {
-        countListResultsPlural: '{count} éléments dans la liste des résultats',
+        countListResultsPlural: '{count} éléments dans la liste des résultats',
         countListResultsSingular: '1 élément dans la liste des résultats',
         escapeNavigateTokens:
             'Appuyez sur Échap pour quitter le champ de saisie et utilisez les touches fléchées pointant vers la gauche ou la droite pour naviguer entre les options sélectionnées.',
@@ -144,7 +144,7 @@ export default {
         navigationPath: 'Navigation Path'
     },
     coreNestedList: {
-        linkItemAriaLabel: "Élément d'arborescence {itemDetails}, {selectedDescription}"
+        linkItemAriaLabel: 'Élément d’arborescence {itemDetails}, {selectedDescription}'
     },
     coreNotification: {
         groupAriaDescription: 'Groupe de notifications',
@@ -186,13 +186,13 @@ export default {
         firstLabel: 'Première',
         inputAriaLabel: 'Saisie de page, page actuelle, page {pageNumber} sur {totalCount}',
         itemsPerPageLabel: 'Résultats par page :',
-        labelAfterInputMobile: 'sur {totalCount}',
+        labelAfterInputMobile: 'de {totalCount}',
         labelBeforeInputMobile: 'Page :',
         lastLabel: 'Dernière',
         nextLabel: 'Suivante',
         pageLabel: 'Page {pageNumber}',
         previousLabel: 'Précédente',
-        totalResultsLabel: '{totalCount} résultats'
+        totalResultsLabel: '{totalCount} résultats'
     },
     coreProductSwitch: {
         ariaLabel: 'Changement de produit'
@@ -360,9 +360,9 @@ export default {
         nodeActionAddApproversParallel: 'Ajouter des approbateurs en parallèle',
         nodeActionEditApprover: 'Modifier un approbateur',
         nodeActionRemove: 'Supprimer',
-        nodeMembersCount: '{count} membres',
+        nodeMembersCount: '{count} membres',
         nodeMenuButtonTitle: 'Menu',
-        nodeStatusDueInXDays: 'À échéance dans {count} jours',
+        nodeStatusDueInXDays: 'Échéance dans {count} jours',
         nodeStatusDueToday: "À échéance aujourd'hui",
         nodeStatusXDaysOverdue: '{count} jours de retard',
         nodeVariousTeams: 'Plusieurs équipes',
@@ -392,7 +392,7 @@ export default {
         watchersInputPlaceholder: 'Rechercher ici...'
     },
     platformCombobox: {
-        countListResultsPlural: '{count} éléments dans la liste des résultats',
+        countListResultsPlural: '{count} éléments dans la liste des résultats',
         countListResultsSingular: '1 élément dans la liste des résultats'
     },
     platformFeedInput: {
@@ -442,7 +442,7 @@ export default {
         deleteButtonTitle: 'Supprimer la suggestion',
         groupHeader: 'En-tête de groupe',
         searchInputLabel: 'Rechercher',
-        searchSuggestionMessage: '{count} suggestions trouvées',
+        searchSuggestionMessage: '{count} suggestions trouvées',
         searchSuggestionNavigateMessage: 'utiliser les flèches pointant vers le haut ou le bas pour naviguer',
         selectScopeLabel: "Sélectionner le champ d'application",
         selectStateMessageLabel: 'Sélectionner',
@@ -548,7 +548,7 @@ export default {
         headerMenuUnfreeze: 'Débloquer la colonne',
         headerMenuUnfreezePlural: 'Débloquer les colonnes',
         loadMore: 'Afficher plus',
-        navigationColumnTitle: 'Row Actions',
+        navigationColumnTitle: 'Actions sur la ligne',
         noVisibleColumnsMessage:
             'Aucune colonne visible actuellement dans la table. Sélectionnez les colonnes requises dans les paramètres de table.',
         P13ColumnsDialogCancelBtnLabel: 'Annuler',
@@ -611,7 +611,7 @@ export default {
         selectAllCheckboxMixedLongLabel: 'Case à cocher, mixte, cliquer pour tout sélectionner',
         selectSingleRow: "Pour sélectionner la ligne, appuyer sur la BARRE D'ESPACEMENT",
         settingsDialogHeader: 'Paramètres',
-        showingBlankOfBlank: 'Affichage {totalGrowingItemsCount} sur {totalGrowingItemsCount}',
+        showingBlankOfBlank: 'Affichage de {totalGrowingItemsCount} sur {totalGrowingItemsCount}',
         sortDialogCancelBtnLabel: 'Annuler',
         sortDialogConfirmBtnLabel: 'OK',
         sortDialogHeader: 'Trier',
@@ -633,9 +633,9 @@ export default {
         toolbarSearchPlaceholder: 'Rechercher'
     },
     platformTextarea: {
-        counterMessageCharactersOverTheLimitPlural: '{count} caractères en trop',
-        counterMessageCharactersOverTheLimitSingular: '1 caractère en trop',
-        counterMessageCharactersRemainingPlural: '{count} caractères restants',
+        counterMessageCharactersOverTheLimitPlural: '{count} caractères au-dessus de la limite',
+        counterMessageCharactersOverTheLimitSingular: '1 caractère au-dessus de la limite',
+        counterMessageCharactersRemainingPlural: 'Il reste {count} caractères.',
         counterMessageCharactersRemainingSingular: '1 caractère restant'
     },
     platformVariantManagement: {
@@ -682,9 +682,9 @@ export default {
         defineConditionConditionStrategyLabelNotEqualTo: 'différent(e) de',
         defineConditionConditionStrategyLabelStartsWith: 'commence par',
         defineConditionFromPlaceholder: 'de',
-        defineConditionMaxCountError: 'Saisissez une valeur ne comportant pas plus de {count} caractères.',
+        defineConditionMaxCountError: 'Saisissez une valeur comportant au maximum {count} caractères.',
         defineConditionRemoveConditionButtonTitle: 'Supprimer la condition',
-        defineConditionSelectedValueHiddenA11yLabel: 'Valeur sélectionnée {value}',
+        defineConditionSelectedValueHiddenA11yLabel: 'valeur sélectionnée {value}',
         defineConditionTitle: 'Produit',
         defineConditionToPlaceholder: 'à',
         defineConditionValuePlaceholder: 'valeur',
@@ -705,8 +705,8 @@ export default {
         selectMobileTabBackBtnTitle: 'Retour',
         selectMobileTabBtnOpenDialogLabel: 'Ouvrir la boîte de dialogue',
         selectMobileTabTitle: 'Onglet {title}',
-        selectTabCountHiddenA11yLabel: 'contient {rowCount} lignes et {colCount} colonnes.',
-        selectTabDisplayCountLabel: 'Éléments ({count})',
+        selectTabCountHiddenA11yLabel: 'contient {rowCount} lignes et {colCount} colonnes',
+        selectTabDisplayCountLabel: 'Articles ({count})',
         selectTabMoreBtnLabel: 'Plus',
         selectTabTitle: 'Sélectionner dans la liste',
         successButtonLabel: 'OK'

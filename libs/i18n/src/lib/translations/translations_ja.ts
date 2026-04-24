@@ -24,7 +24,7 @@ export default {
     coreBreadcrumb: {
         breadcrumbTrailLabel: '階層リンク',
         overflowTitleMore: '詳細を表示するにはクリックするか Enter を押してください',
-        positionLabel: '{current} of {total}'
+        positionLabel: '{current}/{total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'ビジー',
@@ -54,12 +54,12 @@ export default {
         yearsRangeSelectionLabel: '年範囲を選択'
     },
     coreCard: {
-        ariaDescription: 'Active, Press Enter to activate',
-        roleDescription: '{cardType} Card'
+        ariaDescription: 'アクティブ: アクティブ化するには Enter を押します。',
+        roleDescription: '{cardType}カード'
     },
     coreCarousel: {
         leftNavigationBtnLabel: '前の項目へ',
-        pageIndicatorLabel: '項目{itemNum}/{totalNum}件を表示中',
+        pageIndicatorLabel: '{itemNum}/{totalNum}件を表示中',
         rightNavigationBtnLabel: '次の項目へ'
     },
     coreCombobox: {
@@ -92,7 +92,7 @@ export default {
     },
     coreFeedListItem: {
         lessLabel: '表示を減らす',
-        moreLabel: 'ほか{count}件'
+        moreLabel: 'さらに表示 ({count})'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'キャンセル',
@@ -135,14 +135,14 @@ export default {
         navigateSelectionsWithArrows: '上下の矢印で選択内容をナビゲートします。',
         noResults: '結果はありません。',
         showAll: 'すべて表示 ({count})',
-        tokensCountText: '含まれるトークンの合計: {length}'
+        tokensCountText: '合計{length}件のトークンが含まれます。'
     },
     coreNavigation: {
         mainNavigation: 'メインナビゲーション',
         navigationPath: 'Navigation Path'
     },
     coreNestedList: {
-        linkItemAriaLabel: 'ツリー項目: {itemDetails}、{selectedDescription}'
+        linkItemAriaLabel: 'ツリー項目 {itemDetails}、{selectedDescription}'
     },
     coreNotification: {
         groupAriaDescription: '通知グループ',
@@ -176,7 +176,7 @@ export default {
         positive: 'エントリが検証されました。'
     },
     coreOverflowLayout: {
-        moreItemsButton: 'ほか{count}件'
+        moreItemsButton: 'さらに表示 ({count})'
     },
     corePagination: {
         ariaLabel: 'ページネーション',
@@ -213,18 +213,18 @@ export default {
         search: '検索'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: '範囲スライダの最小値: {min}、最大値: {max}',
-        multipleHandle1ValuemaxDetails: '値: {value}',
-        multipleHandle1ValueminDetails: '値: {value}',
-        multipleHandle1ValueNowDetails: '現在の値: {value}',
-        multipleHandle2MinMaxDetails: '範囲スライダの最小値: {min}、最大値: {max}',
-        multipleHandle2ValuemaxDetails: '値: {value}',
-        multipleHandle2ValueminDetails: '値: {value}',
-        multipleHandle2ValueNowDetails: '現在の値: {value}',
-        singleMinMaxDetails: 'スライダの最小値: {min}、最大値: {max}',
-        singleValuemaxDetails: '値: {value}',
-        singleValueminDetails: '値: {value}',
-        singleValueNowDetails: '現在の値: {value}'
+        multipleHandle1MinMaxDetails: '範囲スライダの最小値は{min}、最大値は{max}',
+        multipleHandle1ValuemaxDetails: '値は{value}',
+        multipleHandle1ValueminDetails: '値は{value}',
+        multipleHandle1ValueNowDetails: '現在の値は{value}',
+        multipleHandle2MinMaxDetails: '範囲スライダの最小値は{min}、最大値は{max}',
+        multipleHandle2ValuemaxDetails: '値は{value}',
+        multipleHandle2ValueminDetails: '値は{value}',
+        multipleHandle2ValueNowDetails: '現在の値は{value}',
+        singleMinMaxDetails: 'スライダの最小値は{min}、最大値は{max}',
+        singleValuemaxDetails: '値は{value}',
+        singleValueminDetails: '値は{value}',
+        singleValueNowDetails: '現在の値は{value}'
     },
     coreSplitButton: {
         arialLabel: '分割ボタン',
@@ -287,7 +287,7 @@ export default {
         deleteButtonLabel: '削除可能'
     },
     coreTokenizer: {
-        moreLabel: 'ほか{count}件',
+        moreLabel: 'さらに表示 ({count})',
         tokenizerLabel: 'トークン化プログラム'
     },
     coreToolbar: {
@@ -357,9 +357,9 @@ export default {
         nodeActionAddApproversParallel: '並列承認者を追加',
         nodeActionEditApprover: '承認者を編集',
         nodeActionRemove: '削除',
-        nodeMembersCount: '{count}人のメンバ',
+        nodeMembersCount: '{count} のメンバ',
         nodeMenuButtonTitle: 'メニュー',
-        nodeStatusDueInXDays: '期限まで残り{count}日',
+        nodeStatusDueInXDays: '期限まで{count}日',
         nodeStatusDueToday: '今日が期限',
         nodeStatusXDaysOverdue: '期限を{count}日超過',
         nodeVariousTeams: 'さまざまなチーム',
@@ -384,7 +384,7 @@ export default {
         userDetailsCancelBtnLabel: 'キャンセル',
         userDetailsHeader: '詳細',
         userDetailsSendReminderBtnLabel: 'リマインダを送信',
-        userListSelectedItemsCountPlural: '{count}件の項目を選択',
+        userListSelectedItemsCountPlural: '{count}件選択済み',
         userListSelectedItemsCountSingular: '1件の項目を選択',
         watchersInputPlaceholder: 'ここで検索...'
     },
@@ -434,7 +434,7 @@ export default {
         allButtonLabel: 'すべて',
         cancelLabel: 'キャンセル',
         clearButtonTitle: '検索をクリア',
-        counterLabel: '結果の合計数: {count}件',
+        counterLabel: '結果の合計件数: {count}',
         deleteButtonAriaLabel: '削除',
         deleteButtonTitle: '候補を削除',
         groupHeader: 'グループヘッダー',
@@ -545,7 +545,7 @@ export default {
         headerMenuUnfreeze: '列の固定を解除',
         headerMenuUnfreezePlural: '列の固定を解除',
         loadMore: '表示を増やす',
-        navigationColumnTitle: 'Row Actions',
+        navigationColumnTitle: '行アクション',
         noVisibleColumnsMessage: '表に表示されている列はありません。必要な列を表の設定で選択してください。',
         P13ColumnsDialogCancelBtnLabel: 'キャンセル',
         P13ColumnsDialogConfirmationBtnLabel: 'OK',
@@ -567,7 +567,7 @@ export default {
         P13FilterDialogExcludePanelTitleWithCount: '除外 ({count})',
         P13FilterDialogExcludePanelTitleWithoutCount: '除外',
         P13FilterDialogHeader: 'フィルタ基準',
-        P13FilterDialogIncludePanelTitleWithCount: '含める ({count})',
+        P13FilterDialogIncludePanelTitleWithCount: '含む ({count})',
         P13FilterDialogIncludePanelTitleWithoutCount: '含める',
         P13FilterDialogRemoveFilterBtnTitle: 'フィルタを削除',
         P13FilterStrategyLabelAfter: '次の日付より後',
@@ -630,9 +630,9 @@ export default {
         toolbarSearchPlaceholder: '検索'
     },
     platformTextarea: {
-        counterMessageCharactersOverTheLimitPlural: '上限を{count}文字超えています。',
+        counterMessageCharactersOverTheLimitPlural: '上限を{count}文字超過しています。',
         counterMessageCharactersOverTheLimitSingular: '上限を1文字超えています。',
-        counterMessageCharactersRemainingPlural: '残り{count}文字入力できます。',
+        counterMessageCharactersRemainingPlural: '残り{count}文字',
         counterMessageCharactersRemainingSingular: '残り1文字入力できます。'
     },
     platformVariantManagement: {
@@ -702,8 +702,8 @@ export default {
         selectMobileTabBackBtnTitle: '戻る',
         selectMobileTabBtnOpenDialogLabel: 'ダイアログを開く',
         selectMobileTabTitle: '[{title}] タブ',
-        selectTabCountHiddenA11yLabel: '{rowCount}行および{colCount}列を含む',
-        selectTabDisplayCountLabel: '項目 ({count})',
+        selectTabCountHiddenA11yLabel: '{rowCount}行{colCount}列を含む',
+        selectTabDisplayCountLabel: '品目 ({count})',
         selectTabMoreBtnLabel: '表示を増やす',
         selectTabTitle: '一覧から選択',
         successButtonLabel: 'OK'

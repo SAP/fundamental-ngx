@@ -24,7 +24,7 @@ export default {
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'مسار التنقل',
         overflowTitleMore: 'انقر أو اضغط ’Enter‘ لعرض مزيد من التفاصيل',
-        positionLabel: '{current} of {total}'
+        positionLabel: '{current} من {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'مشغول',
@@ -54,8 +54,8 @@ export default {
         yearsRangeSelectionLabel: 'تحديد نطاق السنوات'
     },
     coreCard: {
-        ariaDescription: 'Active, Press Enter to activate',
-        roleDescription: '{cardType} Card'
+        ariaDescription: 'نشط، اضغط على Enter للتنشيط',
+        roleDescription: 'بطاقة {cardType}'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'انتقال إلى البند السابق',
@@ -92,13 +92,13 @@ export default {
     },
     coreFeedListItem: {
         lessLabel: 'أقل',
-        moreLabel: '{count} إضافية'
+        moreLabel: '{count} أكبر'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'إلغاء',
         listItemButtonDeleteTitle: 'حذف',
         listItemButtonDetailsTitle: 'التفاصيل',
-        listItemCounterAriaLabel: 'البند له {count} من البنود الفرعية.',
+        listItemCounterAriaLabel: 'يحتوي البند على {count} من البنود الفرعية.',
         listItemStatusAriaLabel: 'البند له حالة. الحالة: {status}.',
         listItemStatusContainsErrors: 'يحتوي على أخطاء',
         listItemStatusDraft: 'أولي',
@@ -176,7 +176,7 @@ export default {
         positive: 'تم التحقق من صحة الإدخال بنجاح'
     },
     coreOverflowLayout: {
-        moreItemsButton: '{count} إضافية'
+        moreItemsButton: '{count} أكبر'
     },
     corePagination: {
         ariaLabel: 'فصل الصفحات',
@@ -287,7 +287,7 @@ export default {
         deleteButtonLabel: 'قابل للحذف'
     },
     coreTokenizer: {
-        moreLabel: '{count} إضافية',
+        moreLabel: '{count} أكبر',
         tokenizerLabel: 'أداة التقسيم إلى رموز مميزة'
     },
     coreToolbar: {
@@ -383,12 +383,12 @@ export default {
         userDetailsCancelBtnLabel: 'إلغاء',
         userDetailsHeader: 'التفاصيل',
         userDetailsSendReminderBtnLabel: 'إرسال تذكير',
-        userListSelectedItemsCountPlural: 'تم تحديد {count} من البنود',
+        userListSelectedItemsCountPlural: 'تم تحديد {count} من العناصر',
         userListSelectedItemsCountSingular: 'تم تحديد بند واحد',
         watchersInputPlaceholder: 'ابحث هنا..'
     },
     platformCombobox: {
-        countListResultsPlural: '{count} من عناصر قائمة النتائج',
+        countListResultsPlural: '{count} من بنود قائمة النتائج',
         countListResultsSingular: 'عنصر قائمة نتائج واحد'
     },
     platformFeedInput: {
@@ -475,7 +475,7 @@ export default {
         filterConditionValueFromPlaceholder: 'من',
         filterConditionValuePlaceholder: 'القيمة',
         filterConditionValueToPlaceholder: 'إلى',
-        filtersButtonLabel: 'عوامل التصفية ({filtersCount})',
+        filtersButtonLabel: '‏{filtersCount} من عوامل التصفية',
         hideFiltersButtonLabel: 'إخفاء عوامل التصفية',
         manageFieldConditions: 'إدارة شروط الحقل',
         refreshButtonAriaLabel: 'تحديث',
@@ -544,7 +544,7 @@ export default {
         headerMenuUnfreeze: 'إلغاء تجميد العمود',
         headerMenuUnfreezePlural: 'إلغاء تجميد الأعمدة',
         loadMore: 'إظهار المزيد',
-        navigationColumnTitle: 'Row Actions',
+        navigationColumnTitle: 'إجراءات الصف',
         noVisibleColumnsMessage:
             'لا توجد الآن أعمدة مرئية في الجدول. يرجى تحديد الأعمدة التي تحتاج إليها في إعدادات الجدول.',
         P13ColumnsDialogCancelBtnLabel: 'إلغاء',
@@ -607,7 +607,7 @@ export default {
         selectAllCheckboxMixedLongLabel: 'خانة الاختيار، مختلطة، انقر لتحديد الكل',
         selectSingleRow: 'لتحديد الصف، اضغط مفتاح المسافة',
         settingsDialogHeader: 'الإعدادات',
-        showingBlankOfBlank: 'إظهار {totalGrowingItemsCount} من {totalGrowingItemsCount}',
+        showingBlankOfBlank: 'جارٍ إظهار {totalGrowingItemsCount} من {totalGrowingItemsCount}',
         sortDialogCancelBtnLabel: 'إلغاء',
         sortDialogConfirmBtnLabel: 'موافق',
         sortDialogHeader: 'ترتيب',
@@ -629,7 +629,7 @@ export default {
         toolbarSearchPlaceholder: 'بحث'
     },
     platformTextarea: {
-        counterMessageCharactersOverTheLimitPlural: 'تم تجاوز الحد بعدد {count} من الحروف',
+        counterMessageCharactersOverTheLimitPlural: '{count} من الحروف تتجاوز الحد',
         counterMessageCharactersOverTheLimitSingular: 'تم تجاوز الحد بحرف واحد',
         counterMessageCharactersRemainingPlural: '{count} من الحروف متبقية',
         counterMessageCharactersRemainingSingular: 'حرف واحد متبقٍ'
@@ -678,7 +678,7 @@ export default {
         defineConditionConditionStrategyLabelNotEqualTo: 'لا يساوي',
         defineConditionConditionStrategyLabelStartsWith: 'يبدأ بـ',
         defineConditionFromPlaceholder: 'من',
-        defineConditionMaxCountError: 'أدخل قيمة لا تزيد عن {count} من الحروف',
+        defineConditionMaxCountError: 'أدخل قيمة لا تزيد على {count} من الحروف',
         defineConditionRemoveConditionButtonTitle: 'إزالة الشرط',
         defineConditionSelectedValueHiddenA11yLabel: 'القيمة المحددة {value}',
         defineConditionTitle: 'المنتج',

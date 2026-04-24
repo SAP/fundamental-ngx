@@ -24,7 +24,7 @@ export default {
     coreBreadcrumb: {
         breadcrumbTrailLabel: '階層連結軌跡',
         overflowTitleMore: '按一下或按下 Enter 以檢視更多詳細資訊',
-        positionLabel: '{current} of {total}'
+        positionLabel: '{current}/{total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: '忙碌',
@@ -54,8 +54,8 @@ export default {
         yearsRangeSelectionLabel: '選擇年份範圍'
     },
     coreCard: {
-        ariaDescription: 'Active, Press Enter to activate',
-        roleDescription: '{cardType} Card'
+        ariaDescription: '作用中，按下 Enter 以啟用',
+        roleDescription: '{cardType} 卡片'
     },
     coreCarousel: {
         leftNavigationBtnLabel: '移至先前項目',
@@ -92,13 +92,13 @@ export default {
     },
     coreFeedListItem: {
         lessLabel: '較少',
-        moreLabel: '還有 {count} 個'
+        moreLabel: '超出 {count} 個字元'
     },
     coreGridList: {
         filterBarCancelButtonTitle: '取消',
         listItemButtonDeleteTitle: '刪除',
         listItemButtonDetailsTitle: '詳細資訊',
-        listItemCounterAriaLabel: '項目有 {count} 個子級。',
+        listItemCounterAriaLabel: '項目有 {count} 個子級',
         listItemStatusAriaLabel: '項目具有狀態。狀態：{status}。',
         listItemStatusContainsErrors: '包含錯誤',
         listItemStatusDraft: '草稿',
@@ -141,7 +141,7 @@ export default {
         navigationPath: 'Navigation Path'
     },
     coreNestedList: {
-        linkItemAriaLabel: '樹狀項目 {itemDetails}、{selectedDescription}'
+        linkItemAriaLabel: '樹狀結構項目 {itemDetails}、{selectedDescription}'
     },
     coreNotification: {
         groupAriaDescription: '通知群組',
@@ -175,11 +175,11 @@ export default {
         positive: '已成功驗證條目'
     },
     coreOverflowLayout: {
-        moreItemsButton: '還有 {count} 個'
+        moreItemsButton: '超出 {count} 個字元'
     },
     corePagination: {
         ariaLabel: '分頁',
-        currentPageAriaLabel: '目前頁面為第 {pageNumber} 頁',
+        currentPageAriaLabel: '第 {pageNumber} 頁為目前頁面',
         firstLabel: '首頁',
         inputAriaLabel: '頁面輸入、目前頁面、第 {pageNumber}/{totalCount} 頁',
         itemsPerPageLabel: '每頁結果：',
@@ -286,7 +286,7 @@ export default {
         deleteButtonLabel: '可刪除'
     },
     coreTokenizer: {
-        moreLabel: '還有 {count} 個',
+        moreLabel: '超出 {count} 個字元',
         tokenizerLabel: '賦予器'
     },
     coreToolbar: {
@@ -357,9 +357,9 @@ export default {
         nodeActionRemove: '移除',
         nodeMembersCount: '{count} 個成員',
         nodeMenuButtonTitle: '功能表',
-        nodeStatusDueInXDays: '在 {count} 天內到期',
+        nodeStatusDueInXDays: '{count} 天後到期',
         nodeStatusDueToday: '今天到期',
-        nodeStatusXDaysOverdue: '過期 {count} 天',
+        nodeStatusXDaysOverdue: '逾期 {count} 天',
         nodeVariousTeams: '各式小組',
         prevButtonAriaLabel: '移至上一張投影片',
         selectTypeDialogCancelButton: '取消',
@@ -387,7 +387,7 @@ export default {
         watchersInputPlaceholder: '在此搜尋...'
     },
     platformCombobox: {
-        countListResultsPlural: '{count} 個結果清單項目',
+        countListResultsPlural: '{count} 結果清單項目',
         countListResultsSingular: '1 個結果清單項目'
     },
     platformFeedInput: {
@@ -432,12 +432,12 @@ export default {
         allButtonLabel: '全部',
         cancelLabel: '取消',
         clearButtonTitle: '清除搜尋',
-        counterLabel: '總計結果：{count} 個',
+        counterLabel: '總計結果：{count}',
         deleteButtonAriaLabel: '刪除',
         deleteButtonTitle: '刪除建議',
         groupHeader: '群組標題',
         searchInputLabel: '搜尋',
-        searchSuggestionMessage: '找到 {count} 個建議。',
+        searchSuggestionMessage: '找不到 {count} 個建議。',
         searchSuggestionNavigateMessage: '使用向上和向下箭頭瀏覽',
         selectScopeLabel: '選擇範圍',
         selectStateMessageLabel: '選擇',
@@ -543,7 +543,7 @@ export default {
         headerMenuUnfreeze: '取消凍結欄',
         headerMenuUnfreezePlural: '取消凍結欄',
         loadMore: '顯示更多',
-        navigationColumnTitle: 'Row Actions',
+        navigationColumnTitle: '列動作',
         noVisibleColumnsMessage: '現在表格中沒有可見的欄，請在表格設定中選擇您需要的欄。',
         P13ColumnsDialogCancelBtnLabel: '取消',
         P13ColumnsDialogConfirmationBtnLabel: '確定',
@@ -553,7 +553,7 @@ export default {
         P13ColumnsDialogMoveToTopBtn: '移至頂端',
         P13ColumnsDialogMoveUpBtn: '上移',
         P13ColumnsDialogSearchPlaceholder: '搜尋',
-        P13ColumnsDialogSelectAll: '全選 ({selectedColumnsCount}/{selectableColumnsCount})',
+        P13ColumnsDialogSelectAll: '搜尋全部 ({selectedColumnsCount}/{selectableColumnsCount})',
         P13ColumnsDialogShowAll: '顯示全部',
         P13ColumnsDialogsShowSelected: '顯示所選',
         P13FilterBooleanOptionFalse: '否',
@@ -605,7 +605,7 @@ export default {
         selectAllCheckboxMixedLongLabel: '核取方塊、混合、按一下以全選',
         selectSingleRow: '若要選擇列，請按空白鍵',
         settingsDialogHeader: '設定',
-        showingBlankOfBlank: '顯示 {totalGrowingItemsCount}/{totalGrowingItemsCount} 個',
+        showingBlankOfBlank: '顯示 {totalGrowingItemsCount}/{totalGrowingItemsCount}',
         sortDialogCancelBtnLabel: '取消',
         sortDialogConfirmBtnLabel: '確定',
         sortDialogHeader: '排序',
@@ -627,7 +627,7 @@ export default {
         toolbarSearchPlaceholder: '搜尋'
     },
     platformTextarea: {
-        counterMessageCharactersOverTheLimitPlural: '超過上限 {count} 個字元',
+        counterMessageCharactersOverTheLimitPlural: '{count} 個字元超過限制',
         counterMessageCharactersOverTheLimitSingular: '超過上限 1 個字元',
         counterMessageCharactersRemainingPlural: '剩餘 {count} 個字元',
         counterMessageCharactersRemainingSingular: '剩餘 1 個字元'
@@ -676,7 +676,7 @@ export default {
         defineConditionConditionStrategyLabelNotEqualTo: '不等於',
         defineConditionConditionStrategyLabelStartsWith: '開頭為',
         defineConditionFromPlaceholder: '自',
-        defineConditionMaxCountError: '請輸入不超過 {count} 個字元的值',
+        defineConditionMaxCountError: '輸入不超過 {count} 個字元的值',
         defineConditionRemoveConditionButtonTitle: '刪除條件',
         defineConditionSelectedValueHiddenA11yLabel: '所選值 {value}',
         defineConditionTitle: '產品',

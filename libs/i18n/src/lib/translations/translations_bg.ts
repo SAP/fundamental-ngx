@@ -25,7 +25,7 @@ export default {
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Навигационен път',
         overflowTitleMore: 'Кликнете или натиснете Enter, за да видите повече подробности',
-        positionLabel: '{current} of {total}'
+        positionLabel: '{current} от {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Заето',
@@ -55,12 +55,12 @@ export default {
         yearsRangeSelectionLabel: 'Избор на диапазон от години'
     },
     coreCard: {
-        ariaDescription: 'Active, Press Enter to activate',
-        roleDescription: '{cardType} Card'
+        ariaDescription: 'Активно, натиснете „Enter“, за да активирате',
+        roleDescription: '{cardType} карта'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'Към предишната позиция',
-        pageIndicatorLabel: 'Показана е позицията {itemNum} от {totalNum}',
+        pageIndicatorLabel: 'Позиция {itemNum} от {totalNum} е показана',
         rightNavigationBtnLabel: 'Към следващата позиция'
     },
     coreCombobox: {
@@ -125,10 +125,10 @@ export default {
     coreMultiComboBox: {
         listGroupHeader: 'Заглавка на група',
         multiComboBoxAriaLabel: 'Комбинирано поле с множество стойности',
-        selectAllLabel: 'Избор на всички ({selectedItems} от {totalItems})'
+        selectAllLabel: 'Изберете всички ({selectedItems} от {totalItems})'
     },
     coreMultiInput: {
-        countListResultsPlural: '{count} позиции от списъка с резултати.',
+        countListResultsPlural: '{count} позиции от списък с резултати.',
         countListResultsSingular: '1 позиция от списъка с резултати.',
         escapeNavigateTokens:
             'За изход от полето за въвеждане, натиснете Escape и използвайте клавишите със стрелки наляво и надясно, за да преминете през избраните опции.',
@@ -136,7 +136,7 @@ export default {
         navigateSelectionsWithArrows: 'Със стрелките нагоре и надолу може да преминавате през избора.',
         noResults: 'Няма резултати.',
         showAll: 'Показване на всички ({count})',
-        tokensCountText: 'Общ брой на съдържащите се токени: {length}.'
+        tokensCountText: 'Съдържа общо {length} токена.'
     },
     coreNavigation: {
         mainNavigation: 'Основна навигация',
@@ -181,9 +181,9 @@ export default {
     },
     corePagination: {
         ariaLabel: 'Оформяне на страниците',
-        currentPageAriaLabel: 'Страница {pageNumber} е текущата страница',
+        currentPageAriaLabel: 'Текущата страница е {pageNumber}.',
         firstLabel: 'Първа',
-        inputAriaLabel: 'Въвеждане на страница, Текуща страница, Страница {pageNumber} от {totalCount}',
+        inputAriaLabel: 'Въвеждане на страница, текуща страница, страница {pageNumber} от {totalCount}',
         itemsPerPageLabel: 'Резултата на страница:',
         labelAfterInputMobile: 'от {totalCount}',
         labelBeforeInputMobile: 'Страница:',
@@ -214,7 +214,7 @@ export default {
         search: 'Търсене'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: 'Минималната стойност на плъзгача за диапазона  е {min}, а максималната е {max}',
+        multipleHandle1MinMaxDetails: 'Минималната стойност на плъзгача за диапазона е {min}, а максималната е {max}',
         multipleHandle1ValuemaxDetails: 'Стойността е {value}',
         multipleHandle1ValueminDetails: 'Стойността е {value}',
         multipleHandle1ValueNowDetails: 'Текущата стойност е {value}',
@@ -360,7 +360,7 @@ export default {
         nodeActionRemove: 'Премахване',
         nodeMembersCount: '{count} членове',
         nodeMenuButtonTitle: 'Меню',
-        nodeStatusDueInXDays: 'Краен срок след {count} дни',
+        nodeStatusDueInXDays: 'Срокът изтича след {count} дни',
         nodeStatusDueToday: 'Със срок днес',
         nodeStatusXDaysOverdue: 'Просрочено с {count} дни',
         nodeVariousTeams: 'Различни екипи',
@@ -385,12 +385,12 @@ export default {
         userDetailsCancelBtnLabel: 'Отказ',
         userDetailsHeader: 'Подробна информация',
         userDetailsSendReminderBtnLabel: 'Изпращане на напомняне',
-        userListSelectedItemsCountPlural: 'Избрани са {count} позиции',
+        userListSelectedItemsCountPlural: '{count} избрани позиции',
         userListSelectedItemsCountSingular: '1 избрана позиция',
         watchersInputPlaceholder: 'Потърсете тук...'
     },
     platformCombobox: {
-        countListResultsPlural: '{count} позиции от списъка с резултати',
+        countListResultsPlural: '{count} позиции от списък с резултати',
         countListResultsSingular: '1 позиция от списъка с резултати'
     },
     platformFeedInput: {
@@ -546,7 +546,7 @@ export default {
         headerMenuUnfreeze: 'Отмяна на фиксирането на колоната',
         headerMenuUnfreezePlural: 'Отмяна на фиксирането на колоните',
         loadMore: 'Покажи повече',
-        navigationColumnTitle: 'Row Actions',
+        navigationColumnTitle: 'Действия за реда',
         noVisibleColumnsMessage:
             'В момента в таблицата няма видими колони. Моля, изберете онези, които ви трябват, от настройките на таблицата.',
         P13ColumnsDialogCancelBtnLabel: 'Отказ',
@@ -566,10 +566,10 @@ export default {
         P13FilterDialogAddFilterBtnTitle: 'Добавяне на филтър',
         P13FilterDialogCancelBtnLabel: 'Отказ',
         P13FilterDialogConfirmationBtnLabel: 'ОК',
-        P13FilterDialogExcludePanelTitleWithCount: 'Изключващи ({count})',
+        P13FilterDialogExcludePanelTitleWithCount: 'Изключване на ({count})',
         P13FilterDialogExcludePanelTitleWithoutCount: 'Изключващи',
         P13FilterDialogHeader: 'Филтриране по',
-        P13FilterDialogIncludePanelTitleWithCount: 'Включващи ({count})',
+        P13FilterDialogIncludePanelTitleWithCount: 'Включване на ({count})',
         P13FilterDialogIncludePanelTitleWithoutCount: 'Включващи',
         P13FilterDialogRemoveFilterBtnTitle: 'Премахване на филтър',
         P13FilterStrategyLabelAfter: 'след',
@@ -609,7 +609,7 @@ export default {
         selectAllCheckboxMixedLongLabel: 'Поле за отметка: смесено. Кликнете, за да изберете всичко',
         selectSingleRow: 'За избор на ред, натиснете ИНТЕРВАЛ',
         settingsDialogHeader: 'Настройки',
-        showingBlankOfBlank: 'Показване: {totalGrowingItemsCount} от {totalGrowingItemsCount}',
+        showingBlankOfBlank: 'Виждате {totalGrowingItemsCount} от {totalGrowingItemsCount}',
         sortDialogCancelBtnLabel: 'Отказ',
         sortDialogConfirmBtnLabel: 'ОК',
         sortDialogHeader: 'Сортиране',
@@ -631,9 +631,9 @@ export default {
         toolbarSearchPlaceholder: 'Търсене'
     },
     platformTextarea: {
-        counterMessageCharactersOverTheLimitPlural: '{count} символа над ограничението',
+        counterMessageCharactersOverTheLimitPlural: 'Брой символи над ограничението: {count}',
         counterMessageCharactersOverTheLimitSingular: '1 символ над ограничението',
-        counterMessageCharactersRemainingPlural: 'Остават {count} символа',
+        counterMessageCharactersRemainingPlural: 'Оставащ брой символи: {count}',
         counterMessageCharactersRemainingSingular: 'Остава 1 символ'
     },
     platformVariantManagement: {
@@ -682,7 +682,7 @@ export default {
         defineConditionFromPlaceholder: 'от',
         defineConditionMaxCountError: 'Въведете стойност с не повече от {count} символа',
         defineConditionRemoveConditionButtonTitle: 'Премахване на условие',
-        defineConditionSelectedValueHiddenA11yLabel: 'Избрана стойност {value}',
+        defineConditionSelectedValueHiddenA11yLabel: 'избрана стойност {value}',
         defineConditionTitle: 'Продукт',
         defineConditionToPlaceholder: 'до',
         defineConditionValuePlaceholder: 'стойност',
@@ -702,9 +702,9 @@ export default {
         selectMobileConditionEmpty: 'Празно',
         selectMobileTabBackBtnTitle: 'Назад',
         selectMobileTabBtnOpenDialogLabel: 'Отвори диалогов прозорец',
-        selectMobileTabTitle: 'Таб {title}',
+        selectMobileTabTitle: '{title} таб',
         selectTabCountHiddenA11yLabel: 'съдържа {rowCount} реда и {colCount} колони',
-        selectTabDisplayCountLabel: 'Позиции: ({count})',
+        selectTabDisplayCountLabel: 'Позиции ({count})',
         selectTabMoreBtnLabel: 'Повече',
         selectTabTitle: 'Избор от списък',
         successButtonLabel: 'ОК'

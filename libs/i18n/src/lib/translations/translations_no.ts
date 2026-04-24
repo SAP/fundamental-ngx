@@ -25,7 +25,7 @@ export default {
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Navigeringsbane',
         overflowTitleMore: 'Klikk eller trykk på Enter for å vise flere detaljer',
-        positionLabel: '{current} of {total}'
+        positionLabel: '{current} av {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Opptatt',
@@ -55,8 +55,8 @@ export default {
         yearsRangeSelectionLabel: 'Velg årsintervall'
     },
     coreCard: {
-        ariaDescription: 'Active, Press Enter to activate',
-        roleDescription: '{cardType} Card'
+        ariaDescription: 'Aktiv, trykk Enter for å aktivere',
+        roleDescription: '{cardType}kort'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'Gå til forrige element',
@@ -93,14 +93,14 @@ export default {
     },
     coreFeedListItem: {
         lessLabel: 'Mindre',
-        moreLabel: '{count} mer'
+        moreLabel: '{count} til'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'Avbryt',
         listItemButtonDeleteTitle: 'Slett',
         listItemButtonDetailsTitle: 'Detaljer',
-        listItemCounterAriaLabel: 'Element har {count} underordnede elementer.',
-        listItemStatusAriaLabel: 'Element har status: {status}.',
+        listItemCounterAriaLabel: 'Elementet har {count} underordnede elementer.',
+        listItemStatusAriaLabel: 'Elementet har status: Status: {status}.',
         listItemStatusContainsErrors: 'Inneholder feil',
         listItemStatusDraft: 'Utkast',
         listItemStatusLocked: 'Sperret'
@@ -125,7 +125,7 @@ export default {
     coreMultiComboBox: {
         listGroupHeader: 'Gruppeoverskrift',
         multiComboBoxAriaLabel: 'Kombinasjonsboks for flere verdier',
-        selectAllLabel: 'Merk alle ({selectedItems} av {totalItems})'
+        selectAllLabel: 'Velg alle ({selectedItems} av {totalItems})'
     },
     coreMultiInput: {
         countListResultsPlural: '{count} resultatlisteelementer.',
@@ -177,7 +177,7 @@ export default {
         positive: 'Oppføringen er validert'
     },
     coreOverflowLayout: {
-        moreItemsButton: '{count} mer'
+        moreItemsButton: '{count} til'
     },
     corePagination: {
         ariaLabel: 'Sideinndeling',
@@ -215,17 +215,17 @@ export default {
     },
     coreSlider: {
         multipleHandle1MinMaxDetails: 'Minimumsverdi for intervallglidebryter er {min}, maksimumsverdi er {max}',
-        multipleHandle1ValuemaxDetails: 'Verdi er {value}',
-        multipleHandle1ValueminDetails: 'Verdi er {value}',
-        multipleHandle1ValueNowDetails: 'Gjeldende verdi er {value}',
+        multipleHandle1ValuemaxDetails: 'Verdien er {value}',
+        multipleHandle1ValueminDetails: 'Verdien er {value}',
+        multipleHandle1ValueNowDetails: 'Aktuell verdi er {value}',
         multipleHandle2MinMaxDetails: 'Minimumsverdi for intervallglidebryter er {min}, maksimumsverdi er {max}',
-        multipleHandle2ValuemaxDetails: 'Verdi er {value}',
-        multipleHandle2ValueminDetails: 'Verdi er {value}',
-        multipleHandle2ValueNowDetails: 'Gjeldende verdi er {value}',
+        multipleHandle2ValuemaxDetails: 'Verdien er {value}',
+        multipleHandle2ValueminDetails: 'Verdien er {value}',
+        multipleHandle2ValueNowDetails: 'Aktuell verdi er {value}',
         singleMinMaxDetails: 'Minimumsverdi for glidebryter er {min}, maksimumsverdi er {max}',
-        singleValuemaxDetails: 'Verdi er {value}',
-        singleValueminDetails: 'Verdi er {value}',
-        singleValueNowDetails: 'Gjeldende verdi er {value}'
+        singleValuemaxDetails: 'Verdien er {value}',
+        singleValueminDetails: 'Verdien er {value}',
+        singleValueNowDetails: 'Aktuell verdi er {value}'
     },
     coreSplitButton: {
         arialLabel: 'Oppdelt knapp',
@@ -288,7 +288,7 @@ export default {
         deleteButtonLabel: 'Kan slettes'
     },
     coreTokenizer: {
-        moreLabel: '{count} mer',
+        moreLabel: '{count} til',
         tokenizerLabel: 'Tokenizer'
     },
     coreToolbar: {
@@ -363,7 +363,7 @@ export default {
         nodeMenuButtonTitle: 'Meny',
         nodeStatusDueInXDays: 'Forfaller om {count} dager',
         nodeStatusDueToday: 'Forfaller i dag',
-        nodeStatusXDaysOverdue: '{count} dager etter forfall',
+        nodeStatusXDaysOverdue: 'Forfalt for {count} dager siden',
         nodeVariousTeams: 'Forskjellige team',
         prevButtonAriaLabel: 'Gå til forrige lysbilde',
         selectTypeDialogCancelButton: 'Avbryt',
@@ -441,7 +441,7 @@ export default {
         deleteButtonTitle: 'Fjern forslag',
         groupHeader: 'Gruppeoverskrift',
         searchInputLabel: 'Søk',
-        searchSuggestionMessage: '{count} forslag funnet.',
+        searchSuggestionMessage: '{count} forslag finnet.',
         searchSuggestionNavigateMessage: 'bruk oppover og nedover piler til å navigere',
         selectScopeLabel: 'Velg omfang',
         selectStateMessageLabel: 'Velg',
@@ -547,7 +547,7 @@ export default {
         headerMenuUnfreeze: 'Opphev frysing av kolonne',
         headerMenuUnfreezePlural: 'Opphev frysing av kolonner',
         loadMore: 'Vis flere',
-        navigationColumnTitle: 'Row Actions',
+        navigationColumnTitle: 'Radhandlinger',
         noVisibleColumnsMessage:
             'Det er ingen synlige kolonner i tabellen akkurat nå. Velg kolonnene som du trenger, i tabellinnstillingene.',
         P13ColumnsDialogCancelBtnLabel: 'Avbryt',
@@ -558,7 +558,7 @@ export default {
         P13ColumnsDialogMoveToTopBtn: 'Flytt til toppen',
         P13ColumnsDialogMoveUpBtn: 'Flytt opp',
         P13ColumnsDialogSearchPlaceholder: 'Søk',
-        P13ColumnsDialogSelectAll: 'Merk alle ({selectedColumnsCount}/{selectableColumnsCount})',
+        P13ColumnsDialogSelectAll: 'Velg alle ({selectedColumnsCount}/{selectableColumnsCount})',
         P13ColumnsDialogShowAll: 'Vis alle',
         P13ColumnsDialogsShowSelected: 'Vis valgte',
         P13FilterBooleanOptionFalse: 'Nei',
@@ -567,7 +567,7 @@ export default {
         P13FilterDialogAddFilterBtnTitle: 'Legg til filter',
         P13FilterDialogCancelBtnLabel: 'Avbryt',
         P13FilterDialogConfirmationBtnLabel: 'OK',
-        P13FilterDialogExcludePanelTitleWithCount: 'Utelukk ({count})',
+        P13FilterDialogExcludePanelTitleWithCount: 'Ekskluder ({count})',
         P13FilterDialogExcludePanelTitleWithoutCount: 'Utelukk',
         P13FilterDialogHeader: 'Filtrer etter',
         P13FilterDialogIncludePanelTitleWithCount: 'Inkluder ({count})',
@@ -681,7 +681,7 @@ export default {
         defineConditionConditionStrategyLabelNotEqualTo: 'ikke lik',
         defineConditionConditionStrategyLabelStartsWith: 'starter med',
         defineConditionFromPlaceholder: 'fra',
-        defineConditionMaxCountError: 'Oppgi en verdi med maksimalt {count} tegn',
+        defineConditionMaxCountError: 'Oppgi en verdi på maksimalt {count} tegn',
         defineConditionRemoveConditionButtonTitle: 'Fjern betingelse',
         defineConditionSelectedValueHiddenA11yLabel: 'valgt verdi {value}',
         defineConditionTitle: 'Produkt',
@@ -703,9 +703,9 @@ export default {
         selectMobileConditionEmpty: 'Tom',
         selectMobileTabBackBtnTitle: 'Tilbake',
         selectMobileTabBtnOpenDialogLabel: 'Åpne dialog',
-        selectMobileTabTitle: '{title} faneark',
+        selectMobileTabTitle: '{title}-faneark',
         selectTabCountHiddenA11yLabel: 'inneholder {rowCount} rader og {colCount} kolonner',
-        selectTabDisplayCountLabel: 'Elementer ({count})',
+        selectTabDisplayCountLabel: 'Artikler ({count})',
         selectTabMoreBtnLabel: 'Mer',
         selectTabTitle: 'Velg fra liste',
         successButtonLabel: 'OK'

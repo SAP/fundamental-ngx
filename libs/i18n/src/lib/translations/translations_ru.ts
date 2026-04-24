@@ -25,7 +25,7 @@ export default {
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Путь навигации',
         overflowTitleMore: 'Щелкните или нажмите Enter, чтобы просмотреть подробности',
-        positionLabel: '{current} of {total}'
+        positionLabel: '{current} из {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Занято',
@@ -55,8 +55,8 @@ export default {
         yearsRangeSelectionLabel: 'Выберите диапазон годов'
     },
     coreCard: {
-        ariaDescription: 'Active, Press Enter to activate',
-        roleDescription: '{cardType} Card'
+        ariaDescription: 'Активно, нажмите Enter, чтобы активировать',
+        roleDescription: 'Карта {cardType}'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'К предыдущей позиции',
@@ -93,14 +93,14 @@ export default {
     },
     coreFeedListItem: {
         lessLabel: 'Меньше',
-        moreLabel: 'Еще {count}'
+        moreLabel: 'больше {count}'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'Отмена',
         listItemButtonDeleteTitle: 'Удалить',
         listItemButtonDetailsTitle: 'Сведения',
-        listItemCounterAriaLabel: 'Позиция имеет нижестоящие: {count}',
-        listItemStatusAriaLabel: 'Позиция имеет статус {status}.',
+        listItemCounterAriaLabel: 'Позиция имеет нижестоящие: {count}.',
+        listItemStatusAriaLabel: 'Позиция имеет статус: {status}.',
         listItemStatusContainsErrors: 'Содержит ошибки',
         listItemStatusDraft: 'Черновик',
         listItemStatusLocked: 'Заблокировано'
@@ -143,7 +143,7 @@ export default {
         navigationPath: 'Navigation Path'
     },
     coreNestedList: {
-        linkItemAriaLabel: 'Элемент дерева {itemDetails}, {selectedDescription}'
+        linkItemAriaLabel: 'Позиция дерева {itemDetails}, {selectedDescription}'
     },
     coreNotification: {
         groupAriaDescription: 'Группа уведомлений',
@@ -177,7 +177,7 @@ export default {
         positive: 'Запись успешно проверена'
     },
     coreOverflowLayout: {
-        moreItemsButton: 'Еще {count}'
+        moreItemsButton: 'больше {count}'
     },
     corePagination: {
         ariaLabel: 'Разбиение на страницы',
@@ -214,15 +214,15 @@ export default {
         search: 'Поиск'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: 'Минимальное значение ползунка диапазона: {min}, макс.: {max}',
+        multipleHandle1MinMaxDetails: 'Минимальное значение ползунка диапазона: {min}, максимальное значение: {max}',
         multipleHandle1ValuemaxDetails: 'Значение: {value}',
         multipleHandle1ValueminDetails: 'Значение: {value}',
         multipleHandle1ValueNowDetails: 'Текущее значение: {value}',
-        multipleHandle2MinMaxDetails: 'Минимальное значение ползунка диапазона: {min}, макс.: {max}',
+        multipleHandle2MinMaxDetails: 'Минимальное значение ползунка диапазона: {min}, максимальное значение: {max}',
         multipleHandle2ValuemaxDetails: 'Значение: {value}',
         multipleHandle2ValueminDetails: 'Значение: {value}',
         multipleHandle2ValueNowDetails: 'Текущее значение: {value}',
-        singleMinMaxDetails: 'Минимальное значение ползунка: {min}, макс.: {max}',
+        singleMinMaxDetails: 'Минимальное значение ползунка: {min}, максимальное значение: {max}',
         singleValuemaxDetails: 'Значение: {value}',
         singleValueminDetails: 'Значение: {value}',
         singleValueNowDetails: 'Текущее значение: {value}'
@@ -288,7 +288,7 @@ export default {
         deleteButtonLabel: 'Можно удалить'
     },
     coreTokenizer: {
-        moreLabel: 'Еще {count}',
+        moreLabel: 'больше {count}',
         tokenizerLabel: 'Токенизатор'
     },
     coreToolbar: {
@@ -313,7 +313,7 @@ export default {
         previousButton: 'Назад'
     },
     coreWizard: {
-        ariaLabel: 'Ассистент'
+        ariaLabel: 'Мастер'
     },
     platformApprovalFlow: {
         addNodeAddActionBtnLabel: 'Добавить',
@@ -358,7 +358,7 @@ export default {
         nodeActionAddApproversParallel: 'Добавить параллельных утверждающих',
         nodeActionEditApprover: 'Изменить утверждающего',
         nodeActionRemove: 'Удалить',
-        nodeMembersCount: 'Членов: {count}',
+        nodeMembersCount: '{count} участн.',
         nodeMenuButtonTitle: 'Меню',
         nodeStatusDueInXDays: 'Срок через {count} дн.',
         nodeStatusDueToday: 'Срок сегодня',
@@ -385,7 +385,7 @@ export default {
         userDetailsCancelBtnLabel: 'Отмена',
         userDetailsHeader: 'Сведения',
         userDetailsSendReminderBtnLabel: 'Отправить напоминание',
-        userListSelectedItemsCountPlural: '{count} поз. выбрано',
+        userListSelectedItemsCountPlural: 'Выбрано {count} элементов',
         userListSelectedItemsCountSingular: '1 позиция выбрана',
         watchersInputPlaceholder: 'Поиск...'
     },
@@ -440,7 +440,7 @@ export default {
         deleteButtonTitle: 'Удалить предложение',
         groupHeader: 'Заголовок группы',
         searchInputLabel: 'Поиск',
-        searchSuggestionMessage: 'Найдено предложений: {count}',
+        searchSuggestionMessage: 'Найдено предложений: {count}.',
         searchSuggestionNavigateMessage: 'для навигации используйте стрелки вверх и вниз',
         selectScopeLabel: 'Выбор объема',
         selectStateMessageLabel: 'Выбрать',
@@ -546,7 +546,7 @@ export default {
         headerMenuUnfreeze: 'Отменить фиксацию столбца',
         headerMenuUnfreezePlural: 'Отменить фиксацию столбцов',
         loadMore: 'Показать больше',
-        navigationColumnTitle: 'Row Actions',
+        navigationColumnTitle: 'Действия со строкой',
         noVisibleColumnsMessage:
             'В настоящий момент в таблице нет видимых столбцов. Выберите нужные столбцы в настройках таблицы.',
         P13ColumnsDialogCancelBtnLabel: 'Отмена',
@@ -609,7 +609,7 @@ export default {
         selectAllCheckboxMixedLongLabel: 'Флажок, смешанный статус, щелкнуть, чтобы выбрать все',
         selectSingleRow: 'Для выбора строки нажмите пробел',
         settingsDialogHeader: 'Настройки',
-        showingBlankOfBlank: 'Показано {totalGrowingItemsCount} из {totalGrowingItemsCount}',
+        showingBlankOfBlank: 'Отображение {totalGrowingItemsCount} из {totalGrowingItemsCount}',
         sortDialogCancelBtnLabel: 'Отмена',
         sortDialogConfirmBtnLabel: 'ОК',
         sortDialogHeader: 'Сортировать',
@@ -633,7 +633,7 @@ export default {
     platformTextarea: {
         counterMessageCharactersOverTheLimitPlural: '{count} симв. сверх лимита',
         counterMessageCharactersOverTheLimitSingular: '1 символ сверх лимита',
-        counterMessageCharactersRemainingPlural: 'Осталось: {count} симв.',
+        counterMessageCharactersRemainingPlural: 'Осталось символов: {count}',
         counterMessageCharactersRemainingSingular: 'Осталось: 1 символ'
     },
     platformVariantManagement: {
@@ -680,7 +680,7 @@ export default {
         defineConditionConditionStrategyLabelNotEqualTo: 'не равно',
         defineConditionConditionStrategyLabelStartsWith: 'начинается на',
         defineConditionFromPlaceholder: 'с',
-        defineConditionMaxCountError: 'Введите значение с максимум {count} симв.',
+        defineConditionMaxCountError: 'Введите значение с максимум {count} символами',
         defineConditionRemoveConditionButtonTitle: 'Удалить условие',
         defineConditionSelectedValueHiddenA11yLabel: 'выбранное значение {value}',
         defineConditionTitle: 'Продукт',
@@ -703,7 +703,7 @@ export default {
         selectMobileTabBackBtnTitle: 'Назад',
         selectMobileTabBtnOpenDialogLabel: 'Открыть диалоговое окно',
         selectMobileTabTitle: 'Вкладка {title}',
-        selectTabCountHiddenA11yLabel: 'содержит строк: {rowCount}, столбцов: {colCount}',
+        selectTabCountHiddenA11yLabel: 'содержит {rowCount} стр. и {colCount} ст.',
         selectTabDisplayCountLabel: 'Позиции ({count})',
         selectTabMoreBtnLabel: 'Больше',
         selectTabTitle: 'Выберите из списка',
