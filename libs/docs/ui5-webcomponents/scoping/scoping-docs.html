@@ -1,0 +1,248 @@
+<fd-docs-section-title id="overview" componentName="scoping"> Overview </fd-docs-section-title>
+<description>
+    <p>
+        UI5 Web Components are registered as
+        <a href="https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry" target="_blank" rel="noopener"
+            >custom elements</a
+        >
+        in the browser. The custom element registry is global and allows only
+        <strong>one definition per tag name</strong>. This becomes a problem when multiple micro-frontends or
+        applications on the same page ship different versions of UI5 Web Components — they would try to register
+        <code>&lt;ui5-button&gt;</code> twice.
+    </p>
+    <p>
+        <strong>Scoping</strong> solves this by appending a suffix to every tag name. For example, with the suffix
+        <code>myapp</code>, the tag <code>&lt;ui5-button&gt;</code> becomes <code>&lt;ui5-button-myapp&gt;</code>. Each
+        application gets its own isolated set of custom element definitions.
+    </p>
+</description>
+
+<separator></separator>
+
+<fd-docs-section-title id="when" componentName="scoping"> When do you need scoping? </fd-docs-section-title>
+<description>
+    <p>
+        You need scoping when <strong>different versions</strong> of UI5 Web Components run on the same page. This
+        typically happens in:
+    </p>
+    <ul>
+        <li>Micro-frontend architectures (Module Federation, single-spa, iframe-less shell apps)</li>
+        <li>Multiple Angular apps composed into a single page</li>
+    </ul>
+    <p>
+        If all apps on the page use the <strong>same version</strong> of UI5 Web Components, they share the same custom
+        element registration and scoping is not needed.
+    </p>
+</description>
+
+<separator></separator>
+
+<fd-docs-section-title id="setup" componentName="scoping"> Setup </fd-docs-section-title>
+<description>
+    <p>
+        Add this call at the very top of your <code>main.ts</code>, before any UI5 component import. The suffix must
+        contain only alphanumeric characters, dashes, and underscores (<code>/^[a-zA-Z0-9_-]+$/</code>).
+    </p>
+    <pre><code>import &#123; setCustomElementsScopingSuffix &#125; from '&#64;ui5/webcomponents-base/dist/CustomElementsScope.js';
+
+setCustomElementsScopingSuffix('myapp');</code></pre>
+
+    <div class="fd-message-strip fd-message-strip--warning" role="alert" style="margin-top: 0.5rem">
+        <p class="fd-message-strip__text">
+            <strong>Order matters.</strong> <code>setCustomElementsScopingSuffix</code> must be called before any UI5
+            Web Components are imported or registered. If called too late, a console warning will appear and some
+            components may not be scoped.
+        </p>
+    </div>
+
+    <p>That's it. No other configuration is needed — UI5 handles the rest internally.</p>
+</description>
+
+<separator></separator>
+
+<fd-docs-section-title id="angular-templates" componentName="scoping">
+    Using scoped components in Angular templates
+</fd-docs-section-title>
+<description>
+    <p>
+        Once scoping is active, all UI5 custom element tags get the suffix appended (e.g.
+        <code>&lt;ui5-button&gt;</code> becomes <code>&lt;ui5-button-myapp&gt;</code>). The component behavior,
+        properties, events, and slots remain identical — only the HTML tag name changes.
+    </p>
+    <p>
+        Use the scoped tag name as the HTML element and add the original name as an attribute to activate the Angular
+        wrapper:
+    </p>
+    <pre><code>&lt;!-- With suffix "myapp" --&gt;
+&lt;ui5-button-myapp ui5-button [design]="'Emphasized'"&gt;Submit&lt;/ui5-button-myapp&gt;
+&lt;ui5-input-myapp ui5-input [placeholder]="'Search...'"&gt;&lt;/ui5-input-myapp&gt;
+&lt;ui5-dialog-myapp ui5-dialog [headerText]="'Confirm'"&gt;...&lt;/ui5-dialog-myapp&gt;</code></pre>
+
+    <div class="fd-message-strip fd-message-strip--warning" role="alert" style="margin-top: 0.5rem">
+        <p class="fd-message-strip__text">
+            Both parts are required: the <strong>scoped tag</strong> (<code>ui5-button-myapp</code>) registers the
+            custom element, and the <strong>attribute</strong> (<code>ui5-button</code>) activates the Angular wrapper.
+        </p>
+    </div>
+</description>
+
+<separator></separator>
+
+<fd-docs-section-title id="schemas" componentName="scoping">
+    Handling Angular's unknown element warnings
+</fd-docs-section-title>
+<description>
+    <p>
+        When you use scoped tag names like <code>&lt;ui5-button-myapp&gt;</code>, Angular does not recognize them as
+        known elements by default. To suppress the <code>NG8001</code> warnings, add <code>CUSTOM_ELEMENTS_SCHEMA</code>
+        to your component:
+    </p>
+    <pre><code>import &#123; CUSTOM_ELEMENTS_SCHEMA, Component &#125; from '&#64;angular/core';
+
+&#64;Component(&#123;
+    selector: 'app-my-feature',
+    template: `&lt;ui5-button-myapp ui5-button [design]="'Emphasized'"&gt;Submit&lt;/ui5-button-myapp&gt;`,
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    imports: [Button]
+&#125;)
+export class MyFeatureComponent &#123; &#125;</code></pre>
+    <p>This tells Angular to allow any unknown HTML element without throwing a compile error.</p>
+</description>
+
+<separator></separator>
+
+<fd-docs-section-title id="scoping-rules" componentName="scoping"> Advanced: Scoping rules </fd-docs-section-title>
+<description>
+    <p>
+        By default, all tags starting with <code>ui5-</code> are scoped. You can customize which tags get scoped using
+        <code>setCustomElementsScopingRules</code>:
+    </p>
+    <pre><code>import &#123;
+    setCustomElementsScopingSuffix,
+    setCustomElementsScopingRules
+&#125; from '&#64;ui5/webcomponents-base/dist/CustomElementsScope.js';
+
+// Set the suffix
+setCustomElementsScopingSuffix('myapp');
+
+// Only scope tags starting with "ui5-" but exclude "ui5-icon"
+setCustomElementsScopingRules(&#123;
+    include: [/^ui5-/],
+    exclude: [/^ui5-icon$/]
+&#125;);</code></pre>
+    <p>
+        <strong>include</strong> — array of regular expressions. A tag must match at least one to be scoped.<br />
+        <strong>exclude</strong> — array of regular expressions. A tag matching any exclude rule is not scoped, even if
+        it matches an include rule.
+    </p>
+</description>
+
+<separator></separator>
+
+<fd-docs-section-title id="css-selectors" componentName="scoping"> CSS considerations </fd-docs-section-title>
+<description>
+    <p>If you have global CSS rules targeting UI5 tag names, they need to be updated to match the scoped names:</p>
+    <pre><code>/* Before scoping */
+ui5-button &#123;
+    margin-right: 8px;
+&#125;
+
+/* After scoping (suffix: "myapp") */
+ui5-button-myapp &#123;
+    margin-right: 8px;
+&#125;
+
+/* Or use attribute selectors to work with any suffix */
+[ui5-button] &#123;
+    margin-right: 8px;
+&#125;</code></pre>
+    <p>
+        Using the <strong>attribute selector</strong> <code>[ui5-button]</code> in CSS is a good strategy because it
+        works regardless of whether scoping is enabled and what suffix is used.
+    </p>
+</description>
+
+<separator></separator>
+
+<fd-docs-section-title id="complete-example" componentName="scoping"> Complete example </fd-docs-section-title>
+<description>
+    <p>Putting it all together for a micro-frontend called <code>orders</code>:</p>
+
+    <h4>main.ts</h4>
+    <pre><code>// main.ts — scoping FIRST, before anything else
+import &#123; setCustomElementsScopingSuffix &#125; from '&#64;ui5/webcomponents-base/dist/CustomElementsScope.js';
+setCustomElementsScopingSuffix('orders');
+
+(async () =&gt; &#123;
+    const &#123; bootstrapApplication &#125; = await import('&#64;angular/platform-browser');
+    const &#123; appConfig &#125; = await import('./app/app.config');
+    const &#123; App &#125; = await import('./app/app');
+
+    await bootstrapApplication(App, appConfig);
+&#125;)().catch((err) =&gt; console.error(err));</code></pre>
+
+    <h4>order-list.ts</h4>
+    <pre><code>import &#123; CUSTOM_ELEMENTS_SCHEMA, Component &#125; from '&#64;angular/core';
+import &#123; Button &#125; from '&#64;fundamental-ngx/ui5-webcomponents/button';
+import &#123; Input &#125; from '&#64;fundamental-ngx/ui5-webcomponents/input';
+import &#123; Table &#125; from '&#64;fundamental-ngx/ui5-webcomponents/table';
+
+&#64;Component(&#123;
+    selector: 'app-order-list',
+    templateUrl: './order-list.html',
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    imports: [Button, Input, Table]
+&#125;)
+export class OrderList &#123;
+    onSearch(event: Event): void &#123;
+        // handle search
+    &#125;
+&#125;</code></pre>
+
+    <h4>order-list.html</h4>
+    <pre><code>&lt;!-- All tags use the scoped name + attribute selector --&gt;
+&lt;ui5-input-orders ui5-input
+    [placeholder]="'Search orders...'"
+    (ui5Input)="onSearch($event)"&gt;
+&lt;/ui5-input-orders&gt;
+
+&lt;ui5-table-orders ui5-table&gt;
+    &lt;!-- table content --&gt;
+&lt;/ui5-table-orders&gt;
+
+&lt;ui5-button-orders ui5-button [design]="'Emphasized'"&gt;
+    New Order
+&lt;/ui5-button-orders&gt;</code></pre>
+</description>
+
+<separator></separator>
+
+<fd-docs-section-title id="troubleshooting" componentName="scoping"> Troubleshooting </fd-docs-section-title>
+<description>
+    <h4>Console warning: "Setting the scoping suffix must be done before importing any components"</h4>
+    <p>
+        <code>setCustomElementsScopingSuffix</code> was called after a UI5 component was already imported. Move the call
+        to the very first lines of <code>main.ts</code>, before any other imports that might trigger component
+        registration.
+    </p>
+
+    <h4>Component does not render (empty element)</h4>
+    <p>
+        Make sure the HTML tag uses the <strong>scoped name</strong> (e.g. <code>&lt;ui5-button-myapp&gt;</code>), not
+        the original name (<code>&lt;ui5-button&gt;</code>). With scoping active, the original tag name is not
+        registered in the custom element registry.
+    </p>
+
+    <h4>Angular input/output bindings not working</h4>
+    <p>
+        Verify that the <code>ui5-button</code> (or equivalent) attribute is present on the element. The Angular wrapper
+        needs the attribute to activate. Also check that the wrapper component is listed in the
+        <code>imports</code> array of your component.
+    </p>
+
+    <h4>NG8001: Unknown element warning</h4>
+    <p>
+        Add <code>CUSTOM_ELEMENTS_SCHEMA</code> to the <code>schemas</code> array of your component decorator. See the
+        <strong>Handling Angular's unknown element warnings</strong> section above.
+    </p>
+</description>

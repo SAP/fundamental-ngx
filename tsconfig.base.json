@@ -72,6 +72,7 @@
             ],
             "@fundamental-ngx/e2e": ["e2e/index.ts"],
             "@fundamental-ngx/i18n": ["libs/i18n/src/index.ts"],
+            "@fundamental-ngx/mcp-server": ["libs/mcp-server/src/index.ts"],
             "@fundamental-ngx/moment-adapter": ["libs/moment-adapter/src/index.ts"],
             "@fundamental-ngx/nx-plugin": ["libs/nx-plugin/src/index.ts"],
             "@fundamental-ngx/platform": ["libs/platform/index.ts"],
@@ -84,7 +85,6 @@
             "@fundamental-ngx/ui5-webcomponents-fiori": ["libs/ui5-webcomponents-fiori/index.ts"],
             "@fundamental-ngx/ui5-webcomponents-fiori/*": ["libs/ui5-webcomponents-fiori/*/index.ts"],
             "@fundamental-ngx/ui5-webcomponents/*": ["libs/ui5-webcomponents/*/index.ts"],
-            "@fundamental-ngx/mcp-server": ["libs/mcp-server/src/index.ts"],
             "@fundamental-ngx/webc-generator": ["libs/webc-generator/src/index.ts"]
         },
         "skipLibCheck": true
