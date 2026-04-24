@@ -22,6 +22,9 @@
                 ]
             }
         },
+        "prepare": {
+            "command": "npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=mcp-server --files=dist/libs/mcp-server --verbose"
+        },
         "test": {
             "executor": "@nx/jest:jest",
             "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
