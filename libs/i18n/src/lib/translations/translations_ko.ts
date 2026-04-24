@@ -24,7 +24,7 @@ export default {
     coreBreadcrumb: {
         breadcrumbTrailLabel: '탐색 경로 추적',
         overflowTitleMore: '클릭하거나 Enter를 눌러 자세한 내용을 확인할 수 있습니다.',
-        positionLabel: '{current} of {total}'
+        positionLabel: '{current}/{total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: '사용 중',
@@ -54,12 +54,12 @@ export default {
         yearsRangeSelectionLabel: '연도 범위 선택'
     },
     coreCard: {
-        ariaDescription: 'Active, Press Enter to activate',
-        roleDescription: '{cardType} Card'
+        ariaDescription: '활성, 활성화하려면 Enter를 누르십시오.',
+        roleDescription: '{cardType} 카드'
     },
     coreCarousel: {
         leftNavigationBtnLabel: '이전 항목으로 이동',
-        pageIndicatorLabel: '항목 {itemNum}/{totalNum}개 표시됨',
+        pageIndicatorLabel: '항목 {itemNum}/{totalNum} 표시됨',
         rightNavigationBtnLabel: '다음 항목으로 이동'
     },
     coreCombobox: {
@@ -92,7 +92,7 @@ export default {
     },
     coreFeedListItem: {
         lessLabel: '간단히',
-        moreLabel: '{count}자 더 보기'
+        moreLabel: '{count} 이상'
     },
     coreGridList: {
         filterBarCancelButtonTitle: '취소',
@@ -124,17 +124,17 @@ export default {
     coreMultiComboBox: {
         listGroupHeader: '그룹 헤더',
         multiComboBoxAriaLabel: '다중 값 콤보 박스',
-        selectAllLabel: '모두 선택({totalItems}개 중 {selectedItems}개)'
+        selectAllLabel: '모두 선택({selectedItems}/{totalItems})'
     },
     coreMultiInput: {
-        countListResultsPlural: '{count}개의 결과 리스트 항목이 있습니다.',
+        countListResultsPlural: '{count}개 결과 목록 품목.',
         countListResultsSingular: '1개의 결과 리스트 항목이 있습니다.',
         escapeNavigateTokens:
             '입력 필드를 종료하려면 Esc 키를 누르고 왼쪽 및 오른쪽 화살표 키를 사용하여 선택한 옵션을 탐색합니다.',
         multiInputAriaLabel: '다중 값 입력',
         navigateSelectionsWithArrows: '위쪽 및 아래쪽 화살표를 사용하여 선택항목을 탐색합니다.',
         noResults: '결과가 없습니다.',
-        showAll: '모두 표시({count}개)',
+        showAll: '모두 표시({count})',
         tokensCountText: '총 토큰 수 포함: {length}.'
     },
     coreNavigation: {
@@ -176,7 +176,7 @@ export default {
         positive: '입력이 검증되었습니다.'
     },
     coreOverflowLayout: {
-        moreItemsButton: '{count}개 더 보기'
+        moreItemsButton: '{count} 이상'
     },
     corePagination: {
         ariaLabel: '페이지 매김',
@@ -214,17 +214,17 @@ export default {
     },
     coreSlider: {
         multipleHandle1MinMaxDetails: '범위 슬라이더 최소값은 {min}, 최대값은 {max}입니다.',
-        multipleHandle1ValuemaxDetails: '값: {value}',
-        multipleHandle1ValueminDetails: '값: {value}',
-        multipleHandle1ValueNowDetails: '현재 값: {value}',
+        multipleHandle1ValuemaxDetails: '값은 {value}입니다.',
+        multipleHandle1ValueminDetails: '값은 {value}입니다.',
+        multipleHandle1ValueNowDetails: '현재 값은 {value}입니다.',
         multipleHandle2MinMaxDetails: '범위 슬라이더 최소값은 {min}, 최대값은 {max}입니다.',
-        multipleHandle2ValuemaxDetails: '값: {value}',
-        multipleHandle2ValueminDetails: '값: {value}',
-        multipleHandle2ValueNowDetails: '현재 값: {value}',
+        multipleHandle2ValuemaxDetails: '값은 {value}입니다.',
+        multipleHandle2ValueminDetails: '값은 {value}입니다.',
+        multipleHandle2ValueNowDetails: '현재 값은 {value}입니다.',
         singleMinMaxDetails: '슬라이더 최소값은 {min}, 최대값은 {max}입니다.',
-        singleValuemaxDetails: '값: {value}',
-        singleValueminDetails: '값: {value}',
-        singleValueNowDetails: '현재 값: {value}'
+        singleValuemaxDetails: '값은 {value}입니다.',
+        singleValueminDetails: '값은 {value}입니다.',
+        singleValueNowDetails: '현재 값은 {value}입니다.'
     },
     coreSplitButton: {
         arialLabel: '분할 버튼',
@@ -287,7 +287,7 @@ export default {
         deleteButtonLabel: '삭제 가능'
     },
     coreTokenizer: {
-        moreLabel: '{count}개 더 보기',
+        moreLabel: '{count} 이상',
         tokenizerLabel: '토크나이저'
     },
     coreToolbar: {
@@ -358,9 +358,9 @@ export default {
         nodeActionRemove: '제거',
         nodeMembersCount: '{count}명의 멤버',
         nodeMenuButtonTitle: '메뉴',
-        nodeStatusDueInXDays: '{count}일 후 만기',
+        nodeStatusDueInXDays: '{count}일 후 마감',
         nodeStatusDueToday: '오늘 만기',
-        nodeStatusXDaysOverdue: '만기 {count}일 초과',
+        nodeStatusXDaysOverdue: '{count}일 기한 초과',
         nodeVariousTeams: '다양한 팀',
         prevButtonAriaLabel: '이전 슬라이드로 이동',
         selectTypeDialogCancelButton: '취소',
@@ -383,12 +383,12 @@ export default {
         userDetailsCancelBtnLabel: '취소',
         userDetailsHeader: '세부사항',
         userDetailsSendReminderBtnLabel: '미리 알림 전송',
-        userListSelectedItemsCountPlural: '{count}개 항목 선택됨',
+        userListSelectedItemsCountPlural: '{count}개의 품목이 선택됨',
         userListSelectedItemsCountSingular: '1개 항목 선택됨',
         watchersInputPlaceholder: '여기에서 검색...'
     },
     platformCombobox: {
-        countListResultsPlural: '{count}개의 결과 리스트 항목',
+        countListResultsPlural: '{count}개 결과 목록 품목',
         countListResultsSingular: '1개의 결과 리스트 항목'
     },
     platformFeedInput: {
@@ -433,7 +433,7 @@ export default {
         allButtonLabel: '모두',
         cancelLabel: '취소',
         clearButtonTitle: '검색 지우기',
-        counterLabel: '총 결과: {count}개',
+        counterLabel: '전체 결과: {count}',
         deleteButtonAriaLabel: '제거',
         deleteButtonTitle: '제안 제거',
         groupHeader: '그룹 헤더',
@@ -475,7 +475,7 @@ export default {
         filterConditionValueFromPlaceholder: '시작',
         filterConditionValuePlaceholder: '값',
         filterConditionValueToPlaceholder: '종료',
-        filtersButtonLabel: '필터 수({filtersCount})',
+        filtersButtonLabel: '필터({filtersCount})',
         hideFiltersButtonLabel: '필터 숨기기',
         manageFieldConditions: '필드 조건 관리',
         refreshButtonAriaLabel: '새로 고침',
@@ -544,7 +544,7 @@ export default {
         headerMenuUnfreeze: '열 고정 해제',
         headerMenuUnfreezePlural: '열 고정 해제',
         loadMore: '자세히 표시',
-        navigationColumnTitle: 'Row Actions',
+        navigationColumnTitle: '행 조치',
         noVisibleColumnsMessage: '현재는 테이블에 표시되는 열이 없습니다. 테이블 설정에서 필요한 열을 선택하십시오.',
         P13ColumnsDialogCancelBtnLabel: '취소',
         P13ColumnsDialogConfirmationBtnLabel: '확인',
@@ -554,7 +554,7 @@ export default {
         P13ColumnsDialogMoveToTopBtn: '맨 위로 이동',
         P13ColumnsDialogMoveUpBtn: '위로 이동',
         P13ColumnsDialogSearchPlaceholder: '검색',
-        P13ColumnsDialogSelectAll: '모두 표시({selectedColumnsCount}/{selectableColumnsCount})',
+        P13ColumnsDialogSelectAll: '모두 선택({selectedColumnsCount}/{selectableColumnsCount}개)',
         P13ColumnsDialogShowAll: '모두 표시',
         P13ColumnsDialogsShowSelected: '선택한 항목 표시',
         P13FilterBooleanOptionFalse: '아니요',
@@ -606,7 +606,7 @@ export default {
         selectAllCheckboxMixedLongLabel: '확인란, 혼합됨, 클릭하여 모두 선택',
         selectSingleRow: '행을 선택하려면 스페이스바를 누르십시오.',
         settingsDialogHeader: '설정',
-        showingBlankOfBlank: '{totalGrowingItemsCount}개 중 {totalGrowingItemsCount}개 표시 중',
+        showingBlankOfBlank: '{totalGrowingItemsCount}/{totalGrowingItemsCount} 표시',
         sortDialogCancelBtnLabel: '취소',
         sortDialogConfirmBtnLabel: '확인',
         sortDialogHeader: '정렬',
@@ -628,7 +628,7 @@ export default {
         toolbarSearchPlaceholder: '검색'
     },
     platformTextarea: {
-        counterMessageCharactersOverTheLimitPlural: '제한 {count}자 초과',
+        counterMessageCharactersOverTheLimitPlural: '제한을 {count}자 초과',
         counterMessageCharactersOverTheLimitSingular: '제한 1자 초과',
         counterMessageCharactersRemainingPlural: '{count}자 남음',
         counterMessageCharactersRemainingSingular: '1자 남음'
@@ -700,8 +700,8 @@ export default {
         selectMobileTabBackBtnTitle: '뒤로',
         selectMobileTabBtnOpenDialogLabel: '다이얼로그 열기',
         selectMobileTabTitle: '{title} 탭',
-        selectTabCountHiddenA11yLabel: '{rowCount}개 행 및 {colCount}개 열 포함',
-        selectTabDisplayCountLabel: '항목 수({count})',
+        selectTabCountHiddenA11yLabel: '{rowCount} 행 및 {colCount} 열을 포함합니다.',
+        selectTabDisplayCountLabel: '품목({count})',
         selectTabMoreBtnLabel: '더 보기',
         selectTabTitle: '리스트에서 선택',
         successButtonLabel: '확인'

@@ -25,7 +25,7 @@ export default {
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Ruta de navegación',
         overflowTitleMore: 'Hacer clic o pulsar intro para ver más detalles',
-        positionLabel: '{current} of {total}'
+        positionLabel: '{current} de {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Ocupado',
@@ -55,12 +55,12 @@ export default {
         yearsRangeSelectionLabel: 'Seleccionar rango de años'
     },
     coreCard: {
-        ariaDescription: 'Active, Press Enter to activate',
-        roleDescription: '{cardType} Card'
+        ariaDescription: 'Activar, Pulse Intro para activar.',
+        roleDescription: '{cardType} tarjeta'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'Ir a elemento anterior',
-        pageIndicatorLabel: 'Elemento {itemNum} de {totalNum} visualizado',
+        pageIndicatorLabel: 'Se visualiza el elemento {itemNum} de {totalNum}',
         rightNavigationBtnLabel: 'Ir a siguiente elemento'
     },
     coreCombobox: {
@@ -125,7 +125,7 @@ export default {
     coreMultiComboBox: {
         listGroupHeader: 'Cabecera de grupo',
         multiComboBoxAriaLabel: 'Cuadro combinado de varios valores',
-        selectAllLabel: 'Seleccionar todos ({selectedItems} de {totalItems})'
+        selectAllLabel: 'Seleccionar todo ({selectedItems} de {totalItems})'
     },
     coreMultiInput: {
         countListResultsPlural: '{count} elementos de la lista de resultados',
@@ -183,7 +183,7 @@ export default {
         ariaLabel: 'Paginación',
         currentPageAriaLabel: 'La página {pageNumber} es la página actual',
         firstLabel: 'Primero',
-        inputAriaLabel: 'Entrada de página, Página actual, Pagina {pageNumber} de {totalCount}',
+        inputAriaLabel: 'Entrada de página, Página actual, Página {pageNumber} de {totalCount}',
         itemsPerPageLabel: 'Resultados por página:',
         labelAfterInputMobile: 'de {totalCount}',
         labelBeforeInputMobile: 'Página:',
@@ -215,16 +215,16 @@ export default {
     },
     coreSlider: {
         multipleHandle1MinMaxDetails: 'El valor mínimo del slider de rango es {min}, el valor máximo es {max}',
-        multipleHandle1ValuemaxDetails: 'El valor es {value}',
-        multipleHandle1ValueminDetails: 'El valor es {value}',
+        multipleHandle1ValuemaxDetails: 'Valor es {value}',
+        multipleHandle1ValueminDetails: 'Valor es {value}',
         multipleHandle1ValueNowDetails: 'El valor actual es {value}',
         multipleHandle2MinMaxDetails: 'El valor mínimo del slider de rango es {min}, el valor máximo es {max}',
-        multipleHandle2ValuemaxDetails: 'El valor es {value}',
-        multipleHandle2ValueminDetails: 'El valor es {value}',
+        multipleHandle2ValuemaxDetails: 'Valor es {value}',
+        multipleHandle2ValueminDetails: 'Valor es {value}',
         multipleHandle2ValueNowDetails: 'El valor actual es {value}',
         singleMinMaxDetails: 'El valor mínimo del slider es {min}, el valor máximo es {max}',
-        singleValuemaxDetails: 'El valor es {value}',
-        singleValueminDetails: 'El valor es {value}',
+        singleValuemaxDetails: 'Valor es {value}',
+        singleValueminDetails: 'Valor es {value}',
         singleValueNowDetails: 'El valor actual es {value}'
     },
     coreSplitButton: {
@@ -386,7 +386,7 @@ export default {
         userDetailsCancelBtnLabel: 'Cancelar',
         userDetailsHeader: 'Detalle',
         userDetailsSendReminderBtnLabel: 'Enviar recordatorio',
-        userListSelectedItemsCountPlural: '{count} elementos seleccionados',
+        userListSelectedItemsCountPlural: '{count} artículos seleccionados',
         userListSelectedItemsCountSingular: '1 elemento seleccionado',
         watchersInputPlaceholder: 'Busque aquí...'
     },
@@ -402,7 +402,7 @@ export default {
         moreButton: 'Más'
     },
     platformLink: {
-        roleDescriptionWithMedia: 'Medios: {media}'
+        roleDescriptionWithMedia: 'Medios de comunicación: {media}'
     },
     platformList: {
         loadingAriaLabel: 'cargando'
@@ -436,12 +436,12 @@ export default {
         allButtonLabel: 'Todos',
         cancelLabel: 'Cancelar',
         clearButtonTitle: 'Borrar búsqueda',
-        counterLabel: 'Resultados totales: {count}',
+        counterLabel: 'Total de resultados: {count}',
         deleteButtonAriaLabel: 'Eliminar',
         deleteButtonTitle: 'Eliminar sugerencia',
         groupHeader: 'Cabecera de grupo',
         searchInputLabel: 'Buscar',
-        searchSuggestionMessage: '{count} sugerencias encontradas.',
+        searchSuggestionMessage: 'se han encontrado {count} sugerencias.',
         searchSuggestionNavigateMessage: 'use las flechas hacia arriba y hacia abajo para desplazarse',
         selectScopeLabel: 'Seleccionar alcance',
         selectStateMessageLabel: 'Seleccionar',
@@ -547,7 +547,7 @@ export default {
         headerMenuUnfreeze: 'Liberar columna',
         headerMenuUnfreezePlural: 'Liberar columnas',
         loadMore: 'Mostrar más',
-        navigationColumnTitle: 'Row Actions',
+        navigationColumnTitle: 'Acciones de fila',
         noVisibleColumnsMessage:
             'En estos momentos no hay columnas visibles en la tabla. Seleccione las columnas que necesita en las opciones de tabla.',
         P13ColumnsDialogCancelBtnLabel: 'Cancelar',
@@ -705,7 +705,7 @@ export default {
         selectMobileTabBtnOpenDialogLabel: 'Abrir cuadro de diálogo',
         selectMobileTabTitle: 'Pestaña {title}',
         selectTabCountHiddenA11yLabel: 'contiene {rowCount} filas y {colCount} columnas',
-        selectTabDisplayCountLabel: 'Elementos ({count})',
+        selectTabDisplayCountLabel: 'Artículos ({count})',
         selectTabMoreBtnLabel: 'Más',
         selectTabTitle: 'Seleccionar de la lista',
         successButtonLabel: 'Aceptar'

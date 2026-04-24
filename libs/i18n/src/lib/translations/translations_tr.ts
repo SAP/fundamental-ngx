@@ -24,7 +24,7 @@ export default {
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'İçerik Haritası Yolu',
         overflowTitleMore: "Daha fazla ayrıntı görüntülemek için Enter'a tıklayın veya basın",
-        positionLabel: '{current} of {total}'
+        positionLabel: '{current}/{total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Meşgul',
@@ -54,12 +54,12 @@ export default {
         yearsRangeSelectionLabel: 'Yıl aralığı seç'
     },
     coreCard: {
-        ariaDescription: 'Active, Press Enter to activate',
-        roleDescription: '{cardType} Card'
+        ariaDescription: 'Etkin, etkinleştirmek için Enter tuşuna basın',
+        roleDescription: '{cardType} Kart'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'Önceki öğeye git',
-        pageIndicatorLabel: 'Kalem {itemNum}/{totalNum} görüntülendi',
+        pageIndicatorLabel: '{totalNum} öğeden {itemNum}. öğe görüntüleniyor',
         rightNavigationBtnLabel: 'Sonraki öğeye git'
     },
     coreCombobox: {
@@ -127,14 +127,14 @@ export default {
         selectAllLabel: 'Tümünü seç ({selectedItems}/{totalItems})'
     },
     coreMultiInput: {
-        countListResultsPlural: '{0} sonuç listesi öğesi.',
+        countListResultsPlural: '{count} sonuç listesi öğesi.',
         countListResultsSingular: '1 sonuç listesi öğesi.',
         escapeNavigateTokens:
             'Giriş alanından çıkmak için escape tuşuna basın ve belirlenen seçenekler arasında gezinmek için sol ve sağ ok tuşlarını kullanın.',
         multiInputAriaLabel: 'Çoklu Değer Girdisi',
         navigateSelectionsWithArrows: 'Aşağı ve yukarı okları kullanarak seçimler arasında gezinin.',
         noResults: 'Sonuç yok.',
-        showAll: 'Tümünü Göster ({count})',
+        showAll: 'Hepsini Göster ({count})',
         tokensCountText: 'Toplam belirteç sayısını içerir: {length}.'
     },
     coreNavigation: {
@@ -142,7 +142,7 @@ export default {
         navigationPath: 'Navigation Path'
     },
     coreNestedList: {
-        linkItemAriaLabel: 'Ağaç Öğesi {itemDetails}, {selectedDescription}'
+        linkItemAriaLabel: 'Ağaç öğesi {itemDetails}, {selectedDescription}'
     },
     coreNotification: {
         groupAriaDescription: 'Bildirim Grubu',
@@ -180,7 +180,7 @@ export default {
     },
     corePagination: {
         ariaLabel: 'Sayfalandırma',
-        currentPageAriaLabel: 'Sayfa {pageNumber}, geçerli sayfadır',
+        currentPageAriaLabel: 'Geçerli sayfa: {pageNumber}',
         firstLabel: 'İlk',
         inputAriaLabel: 'Sayfa girişi, Geçerli sayfa, Sayfa {pageNumber}/{totalCount}',
         itemsPerPageLabel: 'Sayfa başına sonuç:',
@@ -213,18 +213,18 @@ export default {
         search: 'Ara'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: 'Aralık kaydırıcısı asgari değeri: {min}; azami değeri: {max}',
-        multipleHandle1ValuemaxDetails: 'Değer: {value}',
-        multipleHandle1ValueminDetails: 'Değer: {value}',
-        multipleHandle1ValueNowDetails: 'Mevcut değer: {value}',
-        multipleHandle2MinMaxDetails: 'Aralık kaydırıcısı asgari değeri: {min}; azami değeri: {max}',
-        multipleHandle2ValuemaxDetails: 'Değer: {value}',
-        multipleHandle2ValueminDetails: 'Değer: {value}',
-        multipleHandle2ValueNowDetails: 'Mevcut değer: {value}',
-        singleMinMaxDetails: 'Kaydırıcı asgari değeri: {min}; azami değeri: {max}',
-        singleValuemaxDetails: 'Değer: {value}',
-        singleValueminDetails: 'Değer: {value}',
-        singleValueNowDetails: 'Mevcut değer: {value}'
+        multipleHandle1MinMaxDetails: 'Aralık kaydırıcısı asgari değeri {min}, azami değeri {max}',
+        multipleHandle1ValuemaxDetails: 'Azami değer {value}',
+        multipleHandle1ValueminDetails: 'Asgari değer {value}',
+        multipleHandle1ValueNowDetails: 'Mevcut değer {value}',
+        multipleHandle2MinMaxDetails: 'Aralık kaydırıcısı asgari değeri {min}, azami değeri {max}',
+        multipleHandle2ValuemaxDetails: 'Azami değer {value}',
+        multipleHandle2ValueminDetails: 'Asgari değer {value}',
+        multipleHandle2ValueNowDetails: 'Mevcut değer {value}',
+        singleMinMaxDetails: 'Kaydırıcı asgari değeri {min}, azami değeri {max}',
+        singleValuemaxDetails: 'Azami değer {value}',
+        singleValueminDetails: 'Asgari değer {value}',
+        singleValueNowDetails: 'Mevcut değer {value}'
     },
     coreSplitButton: {
         arialLabel: 'İki bölümlü düğme',
@@ -360,9 +360,9 @@ export default {
         nodeActionRemove: 'Kaldır',
         nodeMembersCount: '{count} üye',
         nodeMenuButtonTitle: 'Menü',
-        nodeStatusDueInXDays: 'Son tarih {count} gün sonra',
+        nodeStatusDueInXDays: '{count} gün kaldı',
         nodeStatusDueToday: 'Son tarih bugün',
-        nodeStatusXDaysOverdue: 'Son tarihi {count} gün geçti',
+        nodeStatusXDaysOverdue: 'Süresi {count} gün geçti',
         nodeVariousTeams: 'Çeşitli ekipler',
         prevButtonAriaLabel: 'Önceki slayta git',
         selectTypeDialogCancelButton: 'İptal',
@@ -390,7 +390,7 @@ export default {
         watchersInputPlaceholder: 'Burada ara...'
     },
     platformCombobox: {
-        countListResultsPlural: '{count} sonuç listesi öğesi',
+        countListResultsPlural: '{count} sonuç listesi kalemleri',
         countListResultsSingular: '1 sonuç listesi öğesi'
     },
     platformFeedInput: {
@@ -435,7 +435,7 @@ export default {
         allButtonLabel: 'Tümü',
         cancelLabel: 'İptal',
         clearButtonTitle: 'Aramayı Temizle',
-        counterLabel: 'Toplam sonuç: {count}',
+        counterLabel: 'Toplam Sonuç: {count}',
         deleteButtonAriaLabel: 'Kaldır',
         deleteButtonTitle: 'Öneriyi Kaldır',
         groupHeader: 'Grup Üst Bilgisi',
@@ -546,7 +546,7 @@ export default {
         headerMenuUnfreeze: 'Sütunu serbest bırak',
         headerMenuUnfreezePlural: 'Sütunları serbest bırak',
         loadMore: 'Daha Fazla Göster',
-        navigationColumnTitle: 'Row Actions',
+        navigationColumnTitle: 'Satır İşlemleri',
         noVisibleColumnsMessage:
             'Şu anda tabloda görünür sütun yok. Lütfen tablo ayarlarında ihtiyacınız olan sütunları seçin.',
         P13ColumnsDialogCancelBtnLabel: 'İptal',
@@ -566,10 +566,10 @@ export default {
         P13FilterDialogAddFilterBtnTitle: 'Filtre Ekle',
         P13FilterDialogCancelBtnLabel: 'İptal',
         P13FilterDialogConfirmationBtnLabel: 'Tamam',
-        P13FilterDialogExcludePanelTitleWithCount: 'Hariç tut ({count})',
+        P13FilterDialogExcludePanelTitleWithCount: 'Hariç Tut ({count})',
         P13FilterDialogExcludePanelTitleWithoutCount: 'Hariç Tut',
         P13FilterDialogHeader: 'Filtreme Ölçütü',
-        P13FilterDialogIncludePanelTitleWithCount: 'Dahil et ({count})',
+        P13FilterDialogIncludePanelTitleWithCount: 'Dahil Et ({count})',
         P13FilterDialogIncludePanelTitleWithoutCount: 'Dahil Et',
         P13FilterDialogRemoveFilterBtnTitle: 'Filtreyi Kaldır',
         P13FilterStrategyLabelAfter: 'sonra',
@@ -609,7 +609,7 @@ export default {
         selectAllCheckboxMixedLongLabel: 'Onay kutusu, karışık, tümünü seçmek için tıklayın',
         selectSingleRow: 'Satırı seçmek için boşluk tuşuna basın',
         settingsDialogHeader: 'Ayarlar',
-        showingBlankOfBlank: '{totalGrowingItemsCount}/{totalGrowingItemsCount} gösteriliyor',
+        showingBlankOfBlank: 'Gösterilen: {totalGrowingItemsCount} / {totalGrowingItemsCount}',
         sortDialogCancelBtnLabel: 'İptal',
         sortDialogConfirmBtnLabel: 'Tamam',
         sortDialogHeader: 'Sıralama',
@@ -680,7 +680,7 @@ export default {
         defineConditionConditionStrategyLabelNotEqualTo: 'eşit değildir',
         defineConditionConditionStrategyLabelStartsWith: 'şununla başlar',
         defineConditionFromPlaceholder: 'başlangıç:',
-        defineConditionMaxCountError: 'En fazla {count} karakter içeren değer girin',
+        defineConditionMaxCountError: 'Azami {count} karakter içeren bir değer girin',
         defineConditionRemoveConditionButtonTitle: 'Koşulu Kaldır',
         defineConditionSelectedValueHiddenA11yLabel: 'seçilen değer {value}',
         defineConditionTitle: 'Ürün',
@@ -703,8 +703,8 @@ export default {
         selectMobileTabBackBtnTitle: 'Geri',
         selectMobileTabBtnOpenDialogLabel: 'İletişim kutusunu aç',
         selectMobileTabTitle: '{title} sekmesi',
-        selectTabCountHiddenA11yLabel: '{rowCount} satır ve {colCount} sütun içerir',
-        selectTabDisplayCountLabel: 'Öğe ({count})',
+        selectTabCountHiddenA11yLabel: '{rowCount} satır ve {colCount} sütun içeriyor',
+        selectTabDisplayCountLabel: 'Kalemler ({count})',
         selectTabMoreBtnLabel: 'Daha Fazla',
         selectTabTitle: 'Listeden seçin',
         successButtonLabel: 'Tamam'

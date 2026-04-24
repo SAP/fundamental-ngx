@@ -25,7 +25,7 @@ export default {
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Navigatiepad',
         overflowTitleMore: 'Klik of druk op Enter om meer gegevens te bekijken',
-        positionLabel: '{current} of {total}'
+        positionLabel: '{current} van {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Bezet',
@@ -55,12 +55,12 @@ export default {
         yearsRangeSelectionLabel: 'Bereik van jaren selecteren'
     },
     coreCard: {
-        ariaDescription: 'Active, Press Enter to activate',
-        roleDescription: '{cardType} Card'
+        ariaDescription: 'Actief, druk Enter om te activeren.',
+        roleDescription: '{cardType}-kaart'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'Naar vorige item',
-        pageIndicatorLabel: 'Item {itemNum} van {totalNum} weergegeven',
+        pageIndicatorLabel: 'Item {itemNum} van {totalNum} wordt weergegeven',
         rightNavigationBtnLabel: 'Naar volgende item'
     },
     coreCombobox: {
@@ -125,7 +125,7 @@ export default {
     coreMultiComboBox: {
         listGroupHeader: 'Groepskop',
         multiComboBoxAriaLabel: 'Keuzelijst met invoerveld met meerdere waarden',
-        selectAllLabel: 'Alle ({selectedItems} van {totalItems}) selecteren'
+        selectAllLabel: 'Alles selecteren ({selectedItems} van {totalItems})'
     },
     coreMultiInput: {
         countListResultsPlural: '{count} items in resultatenlijst',
@@ -441,7 +441,7 @@ export default {
         deleteButtonTitle: 'Suggestie verwijderen',
         groupHeader: 'Groepskop',
         searchInputLabel: 'Zoeken',
-        searchSuggestionMessage: '{count} suggesties gevonden',
+        searchSuggestionMessage: '{count} suggesties gevonden.',
         searchSuggestionNavigateMessage: 'gebruik pijl-omhoog en pijl-omlaag om te bladeren',
         selectScopeLabel: 'Scope selecteren',
         selectStateMessageLabel: 'Selecteren',
@@ -547,7 +547,7 @@ export default {
         headerMenuUnfreeze: 'Fixering van kolom opheffen',
         headerMenuUnfreezePlural: 'Fixering van kolommen opheffen',
         loadMore: 'Meer weergeven',
-        navigationColumnTitle: 'Row Actions',
+        navigationColumnTitle: 'Rijacties',
         noVisibleColumnsMessage:
             'De tabel bevat momenteel geen zichtbare kolommen. Selecteer de kolommen die u nodig hebt in de tabelinstellingen.',
         P13ColumnsDialogCancelBtnLabel: 'Annuleren',
@@ -558,7 +558,7 @@ export default {
         P13ColumnsDialogMoveToTopBtn: 'Naar boven',
         P13ColumnsDialogMoveUpBtn: 'Omhoog',
         P13ColumnsDialogSearchPlaceholder: 'Zoeken',
-        P13ColumnsDialogSelectAll: 'Alle ({selectedColumnsCount}/{selectableColumnsCount}) selecteren',
+        P13ColumnsDialogSelectAll: 'Alles selecteren ({selectedColumnsCount}/{selectableColumnsCount})',
         P13ColumnsDialogShowAll: 'Alle weergeven',
         P13ColumnsDialogsShowSelected: 'Geselecteerde weergeven',
         P13FilterBooleanOptionFalse: 'Nee',
@@ -567,10 +567,10 @@ export default {
         P13FilterDialogAddFilterBtnTitle: 'Filter toevoegen',
         P13FilterDialogCancelBtnLabel: 'Annuleren',
         P13FilterDialogConfirmationBtnLabel: 'OK',
-        P13FilterDialogExcludePanelTitleWithCount: 'Exclusief ({count})',
+        P13FilterDialogExcludePanelTitleWithCount: 'Uitsluiten ({count})',
         P13FilterDialogExcludePanelTitleWithoutCount: 'Exclusief',
         P13FilterDialogHeader: 'Filteren op',
-        P13FilterDialogIncludePanelTitleWithCount: 'Inclusief ({count})',
+        P13FilterDialogIncludePanelTitleWithCount: 'Opnemen ({count})',
         P13FilterDialogIncludePanelTitleWithoutCount: 'Inclusief',
         P13FilterDialogRemoveFilterBtnTitle: 'Filter verwijderen',
         P13FilterStrategyLabelAfter: 'na',
@@ -610,7 +610,7 @@ export default {
         selectAllCheckboxMixedLongLabel: 'Selectievakje, gemengd, klik om alles te selecteren',
         selectSingleRow: 'Druk op de spatiebalk om de rij te selecteren',
         settingsDialogHeader: 'Instellingen',
-        showingBlankOfBlank: '{totalGrowingItemsCount} van {totalGrowingItemsCount} weergegeven',
+        showingBlankOfBlank: '{totalGrowingItemsCount} van {totalGrowingItemsCount} weergeven',
         sortDialogCancelBtnLabel: 'Annuleren',
         sortDialogConfirmBtnLabel: 'OK',
         sortDialogHeader: 'Sorteren',
@@ -632,8 +632,8 @@ export default {
         toolbarSearchPlaceholder: 'Zoeken'
     },
     platformTextarea: {
-        counterMessageCharactersOverTheLimitPlural: '{count} tekens boven de limiet',
-        counterMessageCharactersOverTheLimitSingular: '1 teken boven de limiet',
+        counterMessageCharactersOverTheLimitPlural: '{count} tekens langer dan de limiet.',
+        counterMessageCharactersOverTheLimitSingular: '1 teken langer dan de limiet',
         counterMessageCharactersRemainingPlural: '{count} resterende tekens',
         counterMessageCharactersRemainingSingular: '1 resterend teken'
     },
@@ -681,7 +681,7 @@ export default {
         defineConditionConditionStrategyLabelNotEqualTo: 'niet gelijk aan',
         defineConditionConditionStrategyLabelStartsWith: 'begint met',
         defineConditionFromPlaceholder: 'van',
-        defineConditionMaxCountError: 'Voer een waarde van maximaal {count} tekens in',
+        defineConditionMaxCountError: 'Voer waarde met maximaal {count} tekens in',
         defineConditionRemoveConditionButtonTitle: 'Conditie verwijderen',
         defineConditionSelectedValueHiddenA11yLabel: 'geselecteerde waarde {value}',
         defineConditionTitle: 'Product',

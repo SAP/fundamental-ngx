@@ -24,7 +24,7 @@ export default {
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Navigační cesta',
         overflowTitleMore: 'Kliknutím nebo stisknutím enter zobrazíte další detaily',
-        positionLabel: '{current} of {total}'
+        positionLabel: '{current} z {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Zaneprázdněné',
@@ -54,12 +54,12 @@ export default {
         yearsRangeSelectionLabel: 'Vybrat rozsah let'
     },
     coreCard: {
-        ariaDescription: 'Active, Press Enter to activate',
-        roleDescription: '{cardType} Card'
+        ariaDescription: 'Aktivní, aktivujte stisknutím Enter',
+        roleDescription: 'Karta {cardType}'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'Přejít na předchozí položku',
-        pageIndicatorLabel: 'Položka {itemNum} z {totalNum} zobrazena',
+        pageIndicatorLabel: 'Položka {itemNum} z {totalNum} zobrazených',
         rightNavigationBtnLabel: 'Přejít na další položku'
     },
     coreCombobox: {
@@ -92,7 +92,7 @@ export default {
     },
     coreFeedListItem: {
         lessLabel: 'Méně',
-        moreLabel: 'další(ch) {count}'
+        moreLabel: 'o {count} více'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'Zrušit',
@@ -176,11 +176,11 @@ export default {
         positive: 'Záznam byl úspěšně ověřen'
     },
     coreOverflowLayout: {
-        moreItemsButton: 'další(ch) {count}'
+        moreItemsButton: 'o {count} více'
     },
     corePagination: {
         ariaLabel: 'Stránkování',
-        currentPageAriaLabel: 'Stránka {pageNumber} je aktuální',
+        currentPageAriaLabel: 'Aktuální stránkou je stránka {pageNumber}',
         firstLabel: 'První',
         inputAriaLabel: 'Zadaná stránka, aktuální stránka, stránka {pageNumber} z {totalCount}',
         itemsPerPageLabel: 'Výsledků na stránku:',
@@ -287,7 +287,7 @@ export default {
         deleteButtonLabel: 'Lze odstranit'
     },
     coreTokenizer: {
-        moreLabel: 'další(ch) {count}',
+        moreLabel: 'o {count} více',
         tokenizerLabel: 'Tokenizér'
     },
     coreToolbar: {
@@ -359,9 +359,9 @@ export default {
         nodeActionRemove: 'Odebrat',
         nodeMembersCount: 'Počet členů: {count}',
         nodeMenuButtonTitle: 'Menu',
-        nodeStatusDueInXDays: 'Termín za tento počet dnů: {count}',
+        nodeStatusDueInXDays: 'Termín je za tento počet dnů: {count}',
         nodeStatusDueToday: 'Termín dnes',
-        nodeStatusXDaysOverdue: 'Počet dní po termínu: {count}',
+        nodeStatusXDaysOverdue: 'Počet dnů po termínu: {count}',
         nodeVariousTeams: 'Různé týmy',
         prevButtonAriaLabel: 'Přejít na předchozí snímek',
         selectTypeDialogCancelButton: 'Zrušit',
@@ -439,7 +439,7 @@ export default {
         deleteButtonTitle: 'Odebrat návrhy',
         groupHeader: 'Hlavička skupiny',
         searchInputLabel: 'Hledat',
-        searchSuggestionMessage: 'Nalezené návrhy: {count}.',
+        searchSuggestionMessage: 'Počet nalezených návrhů: {count}',
         searchSuggestionNavigateMessage: 'k navigaci použijte šipky nahoru a dolů',
         selectScopeLabel: 'Vybrat rozsah',
         selectStateMessageLabel: 'Vybrat',
@@ -545,7 +545,7 @@ export default {
         headerMenuUnfreeze: 'Uvolnit sloupec',
         headerMenuUnfreezePlural: 'Uvolnit sloupce',
         loadMore: 'Zobrazit více',
-        navigationColumnTitle: 'Row Actions',
+        navigationColumnTitle: 'Akce řádku',
         noVisibleColumnsMessage:
             'Momentálně nejsou v tabulce žádné viditelné sloupce. Vyberte potřebné sloupce v nastavení tabulky.',
         P13ColumnsDialogCancelBtnLabel: 'Zrušit',
@@ -556,7 +556,7 @@ export default {
         P13ColumnsDialogMoveToTopBtn: 'Přesunout úplně nahoru',
         P13ColumnsDialogMoveUpBtn: 'Přesunout nahoru',
         P13ColumnsDialogSearchPlaceholder: 'Hledat',
-        P13ColumnsDialogSelectAll: 'Vybrat vše: ({selectedColumnsCount}/{selectableColumnsCount})',
+        P13ColumnsDialogSelectAll: 'Vybrat vše ({selectedColumnsCount}/{selectableColumnsCount})',
         P13ColumnsDialogShowAll: 'Zobrazit vše',
         P13ColumnsDialogsShowSelected: 'Zobrazit vybrané',
         P13FilterBooleanOptionFalse: 'Ne',
@@ -608,7 +608,7 @@ export default {
         selectAllCheckboxMixedLongLabel: 'Zaškrtávací pole, kombinované, kliknutím vyberete vše',
         selectSingleRow: 'Řádku vyberete stisknutím mezerníku',
         settingsDialogHeader: 'Nastavení',
-        showingBlankOfBlank: 'Zobrazení {totalGrowingItemsCount} z {totalGrowingItemsCount}',
+        showingBlankOfBlank: 'Zobrazuje se {totalGrowingItemsCount} z {totalGrowingItemsCount}',
         sortDialogCancelBtnLabel: 'Zrušit',
         sortDialogConfirmBtnLabel: 'OK',
         sortDialogHeader: 'Řadit',
@@ -632,7 +632,7 @@ export default {
     platformTextarea: {
         counterMessageCharactersOverTheLimitPlural: 'Počet znaků nad limit: {count}',
         counterMessageCharactersOverTheLimitSingular: '1 znak nad limit',
-        counterMessageCharactersRemainingPlural: 'Zbývající znaky: {count}',
+        counterMessageCharactersRemainingPlural: 'Počet zbývajících znaků: {count}',
         counterMessageCharactersRemainingSingular: 'Zbývá 1 znak'
     },
     platformVariantManagement: {
@@ -679,9 +679,9 @@ export default {
         defineConditionConditionStrategyLabelNotEqualTo: 'není rovno',
         defineConditionConditionStrategyLabelStartsWith: 'začíná na',
         defineConditionFromPlaceholder: 'od',
-        defineConditionMaxCountError: 'Zadejte hodnotu nejvýše s tímto počtem znaků: {count}',
+        defineConditionMaxCountError: 'Zadejte hodnotu s maximálním počtem znaků {count}',
         defineConditionRemoveConditionButtonTitle: 'Odebrat podmínku',
-        defineConditionSelectedValueHiddenA11yLabel: 'vybraná hodnota: {value}',
+        defineConditionSelectedValueHiddenA11yLabel: 'vybraná hodnota {value}',
         defineConditionTitle: 'Produkt',
         defineConditionToPlaceholder: 'do',
         defineConditionValuePlaceholder: 'hodnota',
@@ -702,7 +702,7 @@ export default {
         selectMobileTabBackBtnTitle: 'Zpět',
         selectMobileTabBtnOpenDialogLabel: 'Otevřít dialogové okno',
         selectMobileTabTitle: 'Karta {title}',
-        selectTabCountHiddenA11yLabel: 'obsahuje {rowCount} řád. a {colCount} sloup.',
+        selectTabCountHiddenA11yLabel: 'obsahuje řádky: {rowCount} a sloupce: {colCount}',
         selectTabDisplayCountLabel: 'Položky ({count})',
         selectTabMoreBtnLabel: 'Více',
         selectTabTitle: 'Vybrat ze seznamu',

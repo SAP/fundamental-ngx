@@ -24,7 +24,7 @@ export default {
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Навігаційна стежка',
         overflowTitleMore: 'Щоб переглянути докладнішу інформацію, клікніть або натисніть клавішу Enter',
-        positionLabel: '{current} of {total}'
+        positionLabel: '{current} з {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Зайнято',
@@ -54,12 +54,12 @@ export default {
         yearsRangeSelectionLabel: 'Виберіть діапазон років'
     },
     coreCard: {
-        ariaDescription: 'Active, Press Enter to activate',
-        roleDescription: '{cardType} Card'
+        ariaDescription: 'Активно, натисніть Enter, щоб активувати',
+        roleDescription: 'Картка {cardType}'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'Перейти до попереднього елемента',
-        pageIndicatorLabel: 'Відображено елемент {itemNum} з {totalNum}',
+        pageIndicatorLabel: 'Відображено {itemNum} з {totalNum} позицій',
         rightNavigationBtnLabel: 'Перейти до наступного елемента'
     },
     coreCombobox: {
@@ -124,25 +124,25 @@ export default {
     coreMultiComboBox: {
         listGroupHeader: 'Заголовок групи',
         multiComboBoxAriaLabel: 'Багатозначне поле зі списком',
-        selectAllLabel: 'Вибрати всі ({selectedItems} з {totalItems})'
+        selectAllLabel: 'Вибрати все ({selectedItems} з {totalItems})'
     },
     coreMultiInput: {
-        countListResultsPlural: 'Елементів списку результатів: {count}.',
+        countListResultsPlural: '{count} елементів списку результатів.',
         countListResultsSingular: '1 елемент списку результатів.',
         escapeNavigateTokens:
             'Натисніть клавішу escape, щоб вийти з поля введення, і використовуйте клавіші зі стрілками вліво й вправо для переходу між вибраними опціями.',
         multiInputAriaLabel: 'Багатозначне введення',
         navigateSelectionsWithArrows: 'Переміщайтеся між виділеними елементами за допомогою стрілок вгору та вниз.',
         noResults: 'Жодних результатів.',
-        showAll: 'Показати всі ({count})',
-        tokensCountText: 'Містить загалом токенів: {length}.'
+        showAll: 'Показати все ({count})',
+        tokensCountText: 'Містить загалом {length} міток.'
     },
     coreNavigation: {
         mainNavigation: 'Головна навігація',
         navigationPath: 'Navigation Path'
     },
     coreNestedList: {
-        linkItemAriaLabel: 'Елемент дерева {itemDetails}, {selectedDescription}'
+        linkItemAriaLabel: 'Позиція дерева {itemDetails}, {selectedDescription}'
     },
     coreNotification: {
         groupAriaDescription: 'Група сповіщень',
@@ -180,17 +180,17 @@ export default {
     },
     corePagination: {
         ariaLabel: 'Нумерація сторінок',
-        currentPageAriaLabel: 'Сторінка {pageNumber} - це поточна сторінка',
+        currentPageAriaLabel: 'Сторінка {pageNumber} – це поточна сторінка',
         firstLabel: 'Перший',
-        inputAriaLabel: 'Введення сторінки, Поточна сторінка, Сторінка {pageNumber} з {totalCount}',
+        inputAriaLabel: 'Введення сторінки, поточна сторінка, сторінка {pageNumber} з {totalCount}',
         itemsPerPageLabel: 'Результатів на сторінці:',
         labelAfterInputMobile: 'з {totalCount}',
         labelBeforeInputMobile: 'Сторінка:',
         lastLabel: 'Останній',
         nextLabel: 'Далі',
-        pageLabel: 'Сторінка {pageNumber}',
+        pageLabel: 'Стор. {pageNumber}',
         previousLabel: 'Назад',
-        totalResultsLabel: '{totalCount} результатів'
+        totalResultsLabel: 'Результатів: {totalCount}'
     },
     coreProductSwitch: {
         ariaLabel: 'Перемикач продуктів'
@@ -357,7 +357,7 @@ export default {
         nodeActionAddApproversParallel: 'Додати паралельну особу з правом затвердження',
         nodeActionEditApprover: 'Змінити особу з правом затвердження',
         nodeActionRemove: 'Видалити',
-        nodeMembersCount: 'Учасники ({count})',
+        nodeMembersCount: '{count} учасників',
         nodeMenuButtonTitle: 'Menu',
         nodeStatusDueInXDays: 'Термін виконання: через {count} дн.',
         nodeStatusDueToday: 'Термін виконання сьогодні',
@@ -384,12 +384,12 @@ export default {
         userDetailsCancelBtnLabel: 'Скасувати',
         userDetailsHeader: 'Подробиці',
         userDetailsSendReminderBtnLabel: 'Відправити нагадування',
-        userListSelectedItemsCountPlural: '{count} елементів вибрано',
+        userListSelectedItemsCountPlural: 'Вибрано елементів: {count}',
         userListSelectedItemsCountSingular: '1 елемент вибрано',
         watchersInputPlaceholder: 'Шукати тут…'
     },
     platformCombobox: {
-        countListResultsPlural: 'Елементів списку результатів: {count}.',
+        countListResultsPlural: '{count} елементів списку результатів',
         countListResultsSingular: '1 елемент списку результатів'
     },
     platformFeedInput: {
@@ -400,7 +400,7 @@ export default {
         moreButton: 'Більше'
     },
     platformLink: {
-        roleDescriptionWithMedia: 'Медіаресурс: {media}'
+        roleDescriptionWithMedia: 'Медіаресурси: {media}'
     },
     platformList: {
         loadingAriaLabel: 'Завантажується'
@@ -439,7 +439,7 @@ export default {
         deleteButtonTitle: 'Видалити пропозицію',
         groupHeader: 'Заголовок групи',
         searchInputLabel: 'Пошук',
-        searchSuggestionMessage: 'Знайдено пропозицій: {count}.',
+        searchSuggestionMessage: 'Знайдено пропозиції : {count}.',
         searchSuggestionNavigateMessage: 'використовуйте стрілки вгору і вниз для навігації',
         selectScopeLabel: 'Вибрати область',
         selectStateMessageLabel: 'Вибрати',
@@ -546,7 +546,7 @@ export default {
         headerMenuUnfreeze: 'Розблокувати стовпець',
         headerMenuUnfreezePlural: 'Розблокувати стовпці',
         loadMore: 'Показати більше',
-        navigationColumnTitle: 'Row Actions',
+        navigationColumnTitle: 'Операції з рядками',
         noVisibleColumnsMessage:
             'Наразі у таблиці немає видимих стовпців. Виберіть потрібні стовпці у налаштуваннях таблиці.',
         P13ColumnsDialogCancelBtnLabel: 'Скасувати',
@@ -557,7 +557,7 @@ export default {
         P13ColumnsDialogMoveToTopBtn: 'До початку',
         P13ColumnsDialogMoveUpBtn: 'Перемістити вгору',
         P13ColumnsDialogSearchPlaceholder: 'Пошук',
-        P13ColumnsDialogSelectAll: 'Вибрати все ({selectedColumnsCount}/{selectableColumnsCount})',
+        P13ColumnsDialogSelectAll: 'Виділити все ({selectedColumnsCount}/{selectableColumnsCount})',
         P13ColumnsDialogShowAll: 'Показати все',
         P13ColumnsDialogsShowSelected: 'Показати вибрані',
         P13FilterBooleanOptionFalse: 'Ні',
@@ -633,7 +633,7 @@ export default {
     platformTextarea: {
         counterMessageCharactersOverTheLimitPlural: 'Кількість символів, що перевищують максимально дозволену: {count}',
         counterMessageCharactersOverTheLimitSingular: 'Кількість символів, що перевищують максимально дозволену: 1',
-        counterMessageCharactersRemainingPlural: 'Залишилося символів: {count}',
+        counterMessageCharactersRemainingPlural: 'Залишилося {count} символів',
         counterMessageCharactersRemainingSingular: 'Залишилося символів: 1'
     },
     platformVariantManagement: {
@@ -680,7 +680,7 @@ export default {
         defineConditionConditionStrategyLabelNotEqualTo: 'не дорівнює',
         defineConditionConditionStrategyLabelStartsWith: 'починається з',
         defineConditionFromPlaceholder: 'від',
-        defineConditionMaxCountError: 'Введіть значення не більше ніж з {count} символами',
+        defineConditionMaxCountError: 'Введіть значення максимум з {count} симв.',
         defineConditionRemoveConditionButtonTitle: 'Видалити умову',
         defineConditionSelectedValueHiddenA11yLabel: 'вибране значення {value}',
         defineConditionTitle: 'Продукт',
@@ -702,9 +702,9 @@ export default {
         selectMobileConditionEmpty: 'Порожнє',
         selectMobileTabBackBtnTitle: 'Назад',
         selectMobileTabBtnOpenDialogLabel: 'Відкрити діалогове вікно',
-        selectMobileTabTitle: 'Вкладка {title}',
-        selectTabCountHiddenA11yLabel: 'містить рядків: {rowCount} та стовпців: {colCount}',
-        selectTabDisplayCountLabel: 'Елементи ({count})',
+        selectMobileTabTitle: '{title} вкладка',
+        selectTabCountHiddenA11yLabel: 'містить {rowCount} рядків і {colCount} стовпців',
+        selectTabDisplayCountLabel: 'Позиції ({count})',
         selectTabMoreBtnLabel: 'Більше',
         selectTabTitle: 'Вибрати зі списку',
         successButtonLabel: 'ОК'
