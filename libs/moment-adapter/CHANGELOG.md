@@ -1,3 +1,7 @@
+## 0.62.0-rc.92 (2026-04-24)
+
+This was a version bump only for moment-adapter to align it with other projects, there were no code changes.
+
 ## 0.62.0-rc.91 (2026-04-24)
 
 This was a version bump only for moment-adapter to align it with other projects, there were no code changes.
