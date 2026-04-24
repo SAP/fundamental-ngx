@@ -3,6 +3,10 @@
         {
             "url": "ui5-webcomponents/home",
             "name": "Home"
+        },
+        {
+            "url": "ui5-webcomponents/scoping",
+            "name": "Scoping"
         }
     ],
     "components": [
