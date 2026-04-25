@@ -37,6 +37,7 @@ export default {
     },
     coreCalendar: {
         calendarDayViewDescription: 'Naptár',
+        calendarLegendLabel: 'Calendar Legend',
         calendarMonthViewDescription: 'Hónapválasztó',
         calendarYearsRangeViewDescription: 'Évtartomány-választó',
         calendarYearsViewDescription: 'Évválasztó',
@@ -199,6 +200,9 @@ export default {
     },
     coreProductSwitch: {
         ariaLabel: 'Termékváltás'
+    },
+    coreRadio: {
+        readOnlyDescription: 'This radio button is read-only and cannot be changed.'
     },
     coreRatingIndicator: {
         ariaLabelReset: 'Visszaállítás nullára',

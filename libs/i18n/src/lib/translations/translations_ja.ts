@@ -36,6 +36,7 @@ export default {
     },
     coreCalendar: {
         calendarDayViewDescription: 'カレンダー',
+        calendarLegendLabel: 'Calendar Legend',
         calendarMonthViewDescription: '月選択',
         calendarYearsRangeViewDescription: '年範囲選択',
         calendarYearsViewDescription: '年選択',
@@ -198,6 +199,9 @@ export default {
     },
     coreProductSwitch: {
         ariaLabel: '製品切替'
+    },
+    coreRadio: {
+        readOnlyDescription: 'This radio button is read-only and cannot be changed.'
     },
     coreRatingIndicator: {
         ariaLabelReset: 'ゼロにリセット',

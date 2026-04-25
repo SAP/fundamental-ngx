@@ -94,6 +94,8 @@ let calendarUniqueId = 0;
     ],
     host: {
         '[attr.id]': 'id',
+        role: 'group',
+        '[attr.aria-roledescription]': "'Calendar'",
         class: 'fd-calendar fd-has-display-block'
     },
     changeDetection: ChangeDetectionStrategy.OnPush,

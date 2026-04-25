@@ -37,6 +37,7 @@ export default {
     },
     coreCalendar: {
         calendarDayViewDescription: 'Календарь',
+        calendarLegendLabel: 'Calendar Legend',
         calendarMonthViewDescription: 'Выбор месяца',
         calendarYearsRangeViewDescription: 'Выбор диапазона годов',
         calendarYearsViewDescription: 'Выбор года',
@@ -199,6 +200,9 @@ export default {
     },
     coreProductSwitch: {
         ariaLabel: 'Переключатель продуктов'
+    },
+    coreRadio: {
+        readOnlyDescription: 'This radio button is read-only and cannot be changed.'
     },
     coreRatingIndicator: {
         ariaLabelReset: 'Обнулить',

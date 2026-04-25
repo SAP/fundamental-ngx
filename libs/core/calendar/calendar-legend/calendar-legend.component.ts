@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { FocusableItemDirective, FocusableListDirective, Nullable } from '@fundamental-ngx/cdk/utils';
 import { SpecialDayRule } from '@fundamental-ngx/core/shared';
-import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { FdTranslatePipe, resolveTranslationSignalFn } from '@fundamental-ngx/i18n';
 import { CalendarLegendFocusingService } from './calendar-legend-focusing.service';
 import { CalendarLegendItemComponent } from './calendar-legend-item.component';
 
@@ -64,8 +64,10 @@ import { CalendarLegendItemComponent } from './calendar-legend-item.component';
         </ng-container>
     `,
     host: {
+        role: 'list',
         class: 'fd-calendar-legend',
-        '[class.fd-calendar-legend--auto-column]': 'col()'
+        '[class.fd-calendar-legend--auto-column]': 'col()',
+        '[attr.aria-label]': '_ariaLabel()'
     },
     imports: [CalendarLegendItemComponent, FocusableListDirective, FocusableItemDirective, FdTranslatePipe]
 })
@@ -91,6 +93,9 @@ export class CalendarLegendComponent<D> {
      * Special days rules to be displayed in the legend
      */
     specialDaysRules = input<SpecialDayRule<D>[]>([]);
+
+    /** @hidden */
+    protected readonly _ariaLabel = resolveTranslationSignalFn()('coreCalendar.calendarLegendLabel');
 
     /** @hidden */
     private readonly _focusingService = inject(CalendarLegendFocusingService, { optional: true });

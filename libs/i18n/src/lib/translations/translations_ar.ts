@@ -36,6 +36,7 @@ export default {
     },
     coreCalendar: {
         calendarDayViewDescription: 'التقويم',
+        calendarLegendLabel: 'Calendar Legend',
         calendarMonthViewDescription: 'أداة انتقاء الشهر',
         calendarYearsRangeViewDescription: 'أداة انتقاء نطاق السنوات',
         calendarYearsViewDescription: 'أداة انتقاء السنة',
@@ -198,6 +199,9 @@ export default {
     },
     coreProductSwitch: {
         ariaLabel: 'تبديل المنتج'
+    },
+    coreRadio: {
+        readOnlyDescription: 'This radio button is read-only and cannot be changed.'
     },
     coreRatingIndicator: {
         ariaLabelReset: 'إعادة تعيين إلى صفر',

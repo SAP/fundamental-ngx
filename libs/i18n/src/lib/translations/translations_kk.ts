@@ -37,6 +37,7 @@ export default {
     },
     coreCalendar: {
         calendarDayViewDescription: 'Күнтізбе',
+        calendarLegendLabel: 'Calendar Legend',
         calendarMonthViewDescription: 'Айды таңдау құралы',
         calendarYearsRangeViewDescription: 'Жылдар ауқымын таңдау құралы',
         calendarYearsViewDescription: 'Жылды таңдау құралы',
@@ -199,6 +200,9 @@ export default {
     },
     coreProductSwitch: {
         ariaLabel: 'Өнім ауыстырып-қосқышы'
+    },
+    coreRadio: {
+        readOnlyDescription: 'This radio button is read-only and cannot be changed.'
     },
     coreRatingIndicator: {
         ariaLabelReset: 'Нөлге бастапқы қалпына келтіру',

@@ -36,6 +36,7 @@ export default {
     },
     coreCalendar: {
         calendarDayViewDescription: 'Kalendar',
+        calendarLegendLabel: 'Calendar Legend',
         calendarMonthViewDescription: 'Zgjedhësi i muajit',
         calendarYearsRangeViewDescription: 'Zgjedhësi i shtrirjes së viteve',
         calendarYearsViewDescription: 'Zgjedhësi i vitit',
@@ -198,6 +199,9 @@ export default {
     },
     coreProductSwitch: {
         ariaLabel: 'Ndërprerësi i produktit'
+    },
+    coreRadio: {
+        readOnlyDescription: 'This radio button is read-only and cannot be changed.'
     },
     coreRatingIndicator: {
         ariaLabelReset: 'Reset to zero',

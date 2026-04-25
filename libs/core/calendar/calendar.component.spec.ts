@@ -27,6 +27,16 @@ describe('CalendarComponent', () => {
         expect(component).toBeTruthy();
     });
 
+    it('should have role="group" on the host element', () => {
+        const hostEl: HTMLElement = fixture.nativeElement;
+        expect(hostEl.getAttribute('role')).toBe('group');
+    });
+
+    it('should have aria-roledescription="Calendar" on the host element', () => {
+        const hostEl: HTMLElement = fixture.nativeElement;
+        expect(hostEl.getAttribute('aria-roledescription')).toBe('Calendar');
+    });
+
     it('Should handle selected date changed in single mode', () => {
         const date = new FdDate(2000, 10, 10);
         jest.spyOn(component.selectedDateChange, 'emit');

@@ -2,6 +2,8 @@
     class="fd-calendar__content fd-calendar__content--dates"
     role="grid"
     [attr.aria-roledescription]="('coreCalendar.calendarDayViewDescription' | fdTranslate)()"
+    [attr.aria-readonly]="false"
+    [attr.aria-multiselectable]="calType() === 'range' || allowMultipleSelection()"
 >
     <thead class="fd-calendar__group" role="rowgroup">
         <tr class="fd-calendar__row" role="row">
@@ -85,7 +87,6 @@
                         <div class="fd-calendar__text-wrapper">
                             <span
                                 class="fd-calendar__text"
-                                role="button"
                                 [attr.aria-labelledby]="
                                     cell.id +
                                     '-aria-label ' +

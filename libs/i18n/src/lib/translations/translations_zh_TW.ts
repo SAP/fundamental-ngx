@@ -36,6 +36,7 @@ export default {
     },
     coreCalendar: {
         calendarDayViewDescription: '行事曆',
+        calendarLegendLabel: 'Calendar Legend',
         calendarMonthViewDescription: '月份選擇器',
         calendarYearsRangeViewDescription: '年份範圍選擇器',
         calendarYearsViewDescription: '年份選擇器',
@@ -197,6 +198,9 @@ export default {
     },
     coreProductSwitch: {
         ariaLabel: '產品切換'
+    },
+    coreRadio: {
+        readOnlyDescription: 'This radio button is read-only and cannot be changed.'
     },
     coreRatingIndicator: {
         ariaLabelReset: '重設為零',

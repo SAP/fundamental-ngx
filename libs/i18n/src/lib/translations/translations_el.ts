@@ -36,6 +36,7 @@ export default {
     },
     coreCalendar: {
         calendarDayViewDescription: 'Ημερολόγιο',
+        calendarLegendLabel: 'Calendar Legend',
         calendarMonthViewDescription: 'Επιλογέας μήνα',
         calendarYearsRangeViewDescription: 'Επιλογέας εύρους ετών',
         calendarYearsViewDescription: 'Επιλογέας έτους',
@@ -198,6 +199,9 @@ export default {
     },
     coreProductSwitch: {
         ariaLabel: 'Διακόπτης Προϊόντος'
+    },
+    coreRadio: {
+        readOnlyDescription: 'This radio button is read-only and cannot be changed.'
     },
     coreRatingIndicator: {
         ariaLabelReset: 'Επαναφορά σε μηδέν',

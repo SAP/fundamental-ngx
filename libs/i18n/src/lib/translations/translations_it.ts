@@ -37,6 +37,7 @@ export default {
     },
     coreCalendar: {
         calendarDayViewDescription: 'Calendario',
+        calendarLegendLabel: 'Calendar Legend',
         calendarMonthViewDescription: 'Selettore mese',
         calendarYearsRangeViewDescription: 'Selettore intervallo di anni',
         calendarYearsViewDescription: 'Selettore anno',
@@ -199,6 +200,9 @@ export default {
     },
     coreProductSwitch: {
         ariaLabel: 'Switch prodotti'
+    },
+    coreRadio: {
+        readOnlyDescription: 'This radio button is read-only and cannot be changed.'
     },
     coreRatingIndicator: {
         ariaLabelReset: 'Reimposta su zero',

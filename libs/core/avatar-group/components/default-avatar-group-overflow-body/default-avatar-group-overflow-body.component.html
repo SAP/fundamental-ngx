@@ -10,9 +10,11 @@
                     [title]="('coreAvatarGroup.backButton' | fdTranslate)()"
                 ></fd-button-bar>
             }
-            <fd-bar-element>
-                {{ _isDetailStage ? _selectedItem.title : overflowPopoverTitle }}
-            </fd-bar-element>
+            <fd-bar-element
+                ><h1 class="fd-title fd-title--h5">
+                    {{ _isDetailStage ? _selectedItem.title : overflowPopoverTitle }}
+                </h1></fd-bar-element
+            >
             @if (_isDetailStage) {
                 <fd-bar-element>&nbsp;</fd-bar-element>
             }

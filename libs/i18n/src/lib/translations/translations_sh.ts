@@ -37,6 +37,7 @@ export default {
     },
     coreCalendar: {
         calendarDayViewDescription: 'Kalendar',
+        calendarLegendLabel: 'Calendar Legend',
         calendarMonthViewDescription: 'Birač meseca',
         calendarYearsRangeViewDescription: 'Birač raspona godina',
         calendarYearsViewDescription: 'Birač godine',
@@ -199,6 +200,9 @@ export default {
     },
     coreProductSwitch: {
         ariaLabel: 'Zamena proizvoda'
+    },
+    coreRadio: {
+        readOnlyDescription: 'This radio button is read-only and cannot be changed.'
     },
     coreRatingIndicator: {
         ariaLabelReset: 'Ponovo postavi na nulu',

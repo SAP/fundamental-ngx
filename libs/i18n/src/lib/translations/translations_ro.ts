@@ -37,6 +37,7 @@ export default {
     },
     coreCalendar: {
         calendarDayViewDescription: 'Calendar',
+        calendarLegendLabel: 'Calendar Legend',
         calendarMonthViewDescription: 'Selector lună',
         calendarYearsRangeViewDescription: 'Selector interval de ani',
         calendarYearsViewDescription: 'Selector an',
@@ -199,6 +200,9 @@ export default {
     },
     coreProductSwitch: {
         ariaLabel: 'Comutator produse'
+    },
+    coreRadio: {
+        readOnlyDescription: 'This radio button is read-only and cannot be changed.'
     },
     coreRatingIndicator: {
         ariaLabelReset: 'Resetare la zero',

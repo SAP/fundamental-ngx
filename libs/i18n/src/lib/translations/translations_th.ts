@@ -36,6 +36,7 @@ export default {
     },
     coreCalendar: {
         calendarDayViewDescription: 'ปฏิทิน',
+        calendarLegendLabel: 'Calendar Legend',
         calendarMonthViewDescription: 'ตัวเลือกเดือน',
         calendarYearsRangeViewDescription: 'ตัวเลือกช่วงปี',
         calendarYearsViewDescription: 'ตัวเลือกปี',
@@ -198,6 +199,9 @@ export default {
     },
     coreProductSwitch: {
         ariaLabel: 'การสลับผลิตภัณฑ์'
+    },
+    coreRadio: {
+        readOnlyDescription: 'This radio button is read-only and cannot be changed.'
     },
     coreRatingIndicator: {
         ariaLabelReset: 'รีเซ็ตเป็นศูนย์',

@@ -37,6 +37,7 @@ export default {
     },
     coreCalendar: {
         calendarDayViewDescription: '[[[Ĉąĺēŋƌąŗ∙∙∙∙∙∙]]]',
+        calendarLegendLabel: 'Calendar Legend',
         calendarMonthViewDescription: '[[[Μŏŋţĥ ρįċķēŗ∙∙∙∙∙∙∙]]]',
         calendarYearsRangeViewDescription: '[[[Ŷēąŗş ŗąŋğē ρįċķēŗ∙∙∙∙∙∙]]]',
         calendarYearsViewDescription: '[[[Ŷēąŗ ρįċķēŗ∙∙∙∙∙∙∙∙]]]',
@@ -199,6 +200,9 @@ export default {
     },
     coreProductSwitch: {
         ariaLabel: '[[[Ƥŗŏƌűċţ Ŝŵįţċĥ∙∙∙∙∙]]]'
+    },
+    coreRadio: {
+        readOnlyDescription: '[[[Ţĥįş ŗąƌįŏ ƀűţţŏŋ įş ŗēąƌ-ŏŋĺŷ ąŋƌ ċąŋŋŏţ ƀē ċĥąŋğēƌ.∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]'
     },
     coreRatingIndicator: {
         ariaLabelReset: '[[[Řēşēţ ţŏ žēŗŏ∙∙∙∙∙∙]]]',
