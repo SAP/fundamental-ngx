@@ -28,6 +28,8 @@ export type IconColor =
     | 'positive'
     | 'information';
 
+export type IconSize = 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
+
 const SAP_ICONS_PREFIX = 'sap-icon';
 
 export const FD_ICON_FONT_FAMILY: Record<IconFont, string> = {
@@ -48,11 +50,12 @@ export function fdBuildIconClass(
     font: IconFont,
     glyph: any,
     color?: IconColor | null,
-    background?: IconColor | null
+    background?: IconColor | null,
+    size?: IconSize | null
 ): string {
     const fontFamily = FD_ICON_FONT_FAMILY[font];
 
-    const returnIconClass = [`${fontFamily}--${glyph}`];
+    const returnIconClass = [fontFamily, `${fontFamily}--${glyph}`];
 
     if (color) {
         returnIconClass.push(`${fontFamily}--color-${color}`);
@@ -60,6 +63,10 @@ export function fdBuildIconClass(
 
     if (background) {
         returnIconClass.push(`${fontFamily}--background-${background}`);
+    }
+
+    if (size) {
+        returnIconClass.push(`${fontFamily}--${size}`);
     }
 
     return returnIconClass.join(' ');
@@ -85,8 +92,9 @@ export function fdBuildIconClass(
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
+        '[attr.role]': '_role()',
         '[attr.aria-label]': 'ariaLabel()',
-        '[attr.aria-hidden]': 'ariaHidden()',
+        '[attr.aria-hidden]': '_effectiveAriaHidden()',
         '[class.fd-list__navigation-item-icon]': '_navigationItemIcon()',
         '[class]': '_cssClasses()'
     }
@@ -109,6 +117,9 @@ export class IconComponent implements HasElementRef {
     /** Icon color */
     readonly background = input<IconColor | null>(null);
 
+    /** Icon size */
+    readonly size = input<IconSize | null>(null);
+
     /** user's custom classes */
     readonly class = input<string>();
 
@@ -123,6 +134,18 @@ export class IconComponent implements HasElementRef {
 
     /** Whether or not this icon is for a list navigation item. */
     readonly _navigationItemIcon = signal(false);
+
+    /** @hidden Computed role — "presentation" for decorative, "img" when ariaLabel is set. */
+    protected readonly _role = computed(() => (this.ariaLabel() ? 'img' : 'presentation'));
+
+    /** @hidden Default aria-hidden to true for decorative icons (no ariaLabel). */
+    protected readonly _effectiveAriaHidden = computed<Nullable<boolean>>(() => {
+        const explicit = this.ariaHidden();
+        if (explicit != null) {
+            return explicit;
+        }
+        return !this.ariaLabel() ? true : null;
+    });
 
     /** @hidden Computed CSS classes */
     protected readonly _cssClasses = computed<string>(() => {
@@ -139,6 +162,6 @@ export class IconComponent implements HasElementRef {
 
     /** @hidden */
     private readonly _fontIconClass = computed<string>(() =>
-        fdBuildIconClass(this.font(), this.glyph(), this.color(), this.background())
+        fdBuildIconClass(this.font(), this.glyph(), this.color(), this.background(), this.size())
     );
 }

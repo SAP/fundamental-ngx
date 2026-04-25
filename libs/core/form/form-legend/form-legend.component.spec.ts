@@ -3,27 +3,29 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormLegendDirective } from './form-legend.directive';
 
 @Component({
-    template: ` <legend #directiveElement fd-form-legend>Test Text</legend> `,
+    template: ` <legend #directiveElement fd-form-legend [disabled]="disabled">Test Text</legend> `,
     imports: [FormLegendDirective],
     standalone: true
 })
-class TestComponent {
+class FormLegendTestComponent {
     @ViewChild('directiveElement')
     ref: ElementRef;
+
+    disabled = false;
 }
 
 describe('FormLegendDirective', () => {
-    let component: TestComponent;
-    let fixture: ComponentFixture<TestComponent>;
+    let component: FormLegendTestComponent;
+    let fixture: ComponentFixture<FormLegendTestComponent>;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [TestComponent]
+            imports: [FormLegendTestComponent]
         }).compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(TestComponent);
+        fixture = TestBed.createComponent(FormLegendTestComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
@@ -33,6 +35,16 @@ describe('FormLegendDirective', () => {
     });
 
     it('should assign class', () => {
-        expect(component.ref.nativeElement.className).toBe('fd-fieldset__legend');
+        expect(component.ref.nativeElement.className).toContain('fd-fieldset__legend');
+    });
+
+    it('should not have is-disabled class by default', () => {
+        expect(component.ref.nativeElement.classList.contains('is-disabled')).toBe(false);
+    });
+
+    it('should add is-disabled class when disabled', () => {
+        component.disabled = true;
+        fixture.detectChanges();
+        expect(component.ref.nativeElement.classList.contains('is-disabled')).toBe(true);
     });
 });
