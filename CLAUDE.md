@@ -86,7 +86,7 @@ For in-depth patterns, read on demand (not auto-loaded):
 - `docs/agents/di-patterns.md` -- InjectionToken patterns, programmatic signal updates
 - `docs/agents/state-management.md` -- signal vs property decision guide
 - `docs/agents/testing-guidelines.md` -- realistic test scenarios, signal testing
-- `docs/agents/i18n-patterns.md` -- FD_LANGUAGE_SIGNAL, translation factories
+- `docs/agents/i18n-patterns.md` -- translation API usage, host bindings, testing
 - `docs/agents/nx-workflow.md` -- workspace commands, incremental validation
 - `docs/agents/breaking-changes.md` -- what constitutes a breaking change
 - `docs/agents/fundamental-styles.md` -- CSS class naming (BEM), design tokens, accessibility, MCP tools
