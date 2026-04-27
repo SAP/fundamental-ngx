@@ -12,6 +12,10 @@ export interface ComponentMetadata {
     name: string;
     /** CSS selector, e.g. "fd-button", "ui5-button", "button[fd-button]" */
     selector: string;
+    /** Whether the selector is used as an element, attribute, or both */
+    selectorType: 'element' | 'attribute' | 'both';
+    /** HTML snippet showing correct template usage, e.g. "<button fd-button>...</button>" */
+    templateUsage: string;
     /** npm package, e.g. "@fundamental-ngx/core", "@fundamental-ngx/ui5-webcomponents" */
     library: Library;
     /** Functional category for grouping/filtering */
@@ -224,3 +228,7 @@ export interface DesignToken {
     /** Usage example in CSS or HTML */
     example?: string;
 }
+
+// Re-export deriveSelectorInfo from its canonical location so existing
+// consumers that import from this module continue to work.
+export { deriveSelectorInfo } from '../utils/selector-utils';
