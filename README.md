@@ -6,7 +6,7 @@
   <img src="https://www.netlify.com/img/global/badges/netlify-light.svg" alt="Deploys by Netlify" />
 </a>
 
-Angular component library implementing the SAP Design System. Ships 1000+ components across 14 packages, targeting Angular 21+.
+**The official SAP-maintained Angular library for UI5 Web Components and the SAP design system.** Ships 1000+ components across 14 packages, targeting Angular 21+.
 
 [Documentation](https://sap.github.io/fundamental-ngx) | [Component Playground](https://sap.github.io/fundamental-ngx)
 

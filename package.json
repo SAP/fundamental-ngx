@@ -3,7 +3,21 @@
     "private": true,
     "license": "Apache-2.0",
     "main": "dist/libs/core/index.js",
-    "description": "Fundamental Library for Angular is a themeable Fiori Angular component library.",
+    "description": "The official SAP Angular library for UI5 Web Components and Fiori design system. 1000+ components for Angular 21+.",
+    "keywords": [
+        "angular",
+        "ui5",
+        "ui5-webcomponents",
+        "web-components",
+        "sap",
+        "fiori",
+        "ngx",
+        "design-system",
+        "btp",
+        "angular-components",
+        "sap-fiori",
+        "fundamental"
+    ],
     "homepage": "https://sap.github.io/fundamental-ngx",
     "repository": {
         "type": "git",
