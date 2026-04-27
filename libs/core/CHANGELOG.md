@@ -1,3 +1,13 @@
+## 0.62.0-rc.97 (2026-04-27)
+
+### 🩹 Fixes
+
+- **core:** match fundamental-styles combobox group styling ([#14150](https://github.com/SAP/fundamental-ngx/pull/14150))
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.62.0-rc.96 (2026-04-27)
 
 ### 🩹 Fixes
