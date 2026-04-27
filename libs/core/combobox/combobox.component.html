@@ -117,59 +117,70 @@
     </div>
 </ng-template>
 <ng-template #listTemplate>
-    <ul
-        fd-list
-        class="fd-combobox-custom-list"
-        [dropdownMode]="true"
-        [id]="comboboxId + '-result'"
-        role="listbox"
-        [attr.aria-labelledby]="comboboxId + '-search'"
-        [style.maxHeight]="!mobile && maxHeight"
-        [hasMessage]="listMessages && listMessages.length > 0"
-        [byline]="byline"
-        [tabindex]="0"
-        (keydown.tab)="_close()"
-        (keydown.shift.tab)="_close()"
-        (focusEscapeList)="handleListFocusEscape($event)"
-    >
-        <ng-content></ng-content>
-        @if (groupFn) {
+    @if (groupFn) {
+        <div
+            class="fd-combobox-custom-list"
+            [style.maxHeight]="!mobile && maxHeight"
+            (keydown.tab)="_close()"
+            (keydown.shift.tab)="_close()"
+        >
+            <ng-content></ng-content>
             @for (group of displayedValues | listGroupPipe: groupFn; track group.key; let groupIndex = $index) {
-                <li
-                    fd-list-item
-                    fd-list-group-header
-                    ariaRole="group"
-                    [attr.aria-roledescription]="('coreMultiComboBox.listGroupHeader' | fdTranslate)()"
-                    [attr.aria-owns]="_getGroupItemIds(groupIndex)"
-                    [attr.aria-label]="group.key"
-                >
+                <label class="fd-list__group-header" [id]="comboboxId + '-group-header-' + groupIndex">
                     <span fd-list-title>{{ group.key }}</span>
-                </li>
-                @for (term of group.value; track $index; let index = $index) {
-                    <li
-                        fd-list-item
-                        #item="fdListItem"
-                        ariaRole="option"
-                        [attr.aria-placeholder]="group.key"
-                        [attr.aria-setsize]="group.value.length"
-                        [attr.aria-posinset]="index + 1"
-                        [attr.id-with-group-index]="item.id + '-group-' + groupIndex"
-                        class="fd-combobox-list-item"
-                        [selected]="isSelected(term)"
-                        [value]="term"
-                        (keydown)="onItemKeyDownHandler($event, term)"
-                        (mousedown)="_itemMousedown = true"
-                        (click)="onMenuClickHandler(term)"
-                        (focus)="onItemFocused(term)"
-                    >
-                        <ng-template
-                            [ngTemplateOutlet]="itemSource"
-                            [ngTemplateOutletContext]="{ term: term }"
-                        ></ng-template>
-                    </li>
-                }
+                </label>
+                <ul
+                    fd-list
+                    [dropdownMode]="true"
+                    [id]="comboboxId + '-result-' + groupIndex"
+                    role="listbox"
+                    [attr.aria-labelledby]="comboboxId + '-group-header-' + groupIndex"
+                    [hasMessage]="listMessages && listMessages.length > 0"
+                    [byline]="byline"
+                    [tabindex]="groupIndex === 0 ? 0 : -1"
+                    (focusEscapeList)="handleListFocusEscape($event)"
+                >
+                    @for (term of group.value; track $index; let index = $index) {
+                        <li
+                            fd-list-item
+                            ariaRole="option"
+                            [attr.aria-placeholder]="group.key"
+                            [attr.aria-setsize]="group.value.length"
+                            [attr.aria-posinset]="index + 1"
+                            class="fd-combobox-list-item"
+                            [selected]="isSelected(term)"
+                            [value]="term"
+                            (keydown)="onItemKeyDownHandler($event, term)"
+                            (mousedown)="_itemMousedown = true"
+                            (click)="onMenuClickHandler(term)"
+                            (focus)="onItemFocused(term)"
+                        >
+                            <ng-template
+                                [ngTemplateOutlet]="itemSource"
+                                [ngTemplateOutletContext]="{ term: term }"
+                            ></ng-template>
+                        </li>
+                    }
+                </ul>
             }
-        } @else {
+        </div>
+    } @else {
+        <ul
+            fd-list
+            class="fd-combobox-custom-list"
+            [dropdownMode]="true"
+            [id]="comboboxId + '-result'"
+            role="listbox"
+            [attr.aria-labelledby]="comboboxId + '-search'"
+            [style.maxHeight]="!mobile && maxHeight"
+            [hasMessage]="listMessages && listMessages.length > 0"
+            [byline]="byline"
+            [tabindex]="0"
+            (keydown.tab)="_close()"
+            (keydown.shift.tab)="_close()"
+            (focusEscapeList)="handleListFocusEscape($event)"
+        >
+            <ng-content></ng-content>
             @for (term of displayedValues; track $index) {
                 <li
                     fd-list-item
@@ -189,6 +200,6 @@
                     ></ng-template>
                 </li>
             }
-        }
-    </ul>
+        </ul>
+    }
 </ng-template>
