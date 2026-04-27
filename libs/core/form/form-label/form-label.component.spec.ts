@@ -11,11 +11,10 @@ import { FormLabelComponent } from './form-label.component';
             [colon]="colon"
             [disabled]="disabled"
             [unitDescription]="unitDescription"
-            [standAlone]="standAlone"
+            [independent]="independent"
             >Test Text</label
         >
     `,
-    standalone: true,
     imports: [FormLabelComponent]
 })
 class FormLabelTestComponent {
@@ -26,7 +25,7 @@ class FormLabelTestComponent {
     colon = false;
     disabled = false;
     unitDescription = false;
-    standAlone = false;
+    independent = false;
 
     getLabelElement(): Element {
         return document.getElementsByClassName('fd-form-label')[0];
@@ -80,8 +79,8 @@ describe('FormLabelComponent', () => {
         expect(component.getLabelElement().classList.contains('fd-form-label--unit-description')).toBe(true);
     });
 
-    it('should apply fd-form-label--stand-alone when standAlone is true', () => {
-        component.standAlone = true;
+    it('should apply fd-form-label--stand-alone when independent is true', () => {
+        component.independent = true;
         fixture.detectChanges();
         expect(component.getLabelElement().classList.contains('fd-form-label--stand-alone')).toBe(true);
     });

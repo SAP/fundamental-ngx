@@ -6,7 +6,8 @@ import {
     Input,
     OnChanges,
     OnInit,
-    ViewEncapsulation
+    ViewEncapsulation,
+    booleanAttribute
 } from '@angular/core';
 import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 
@@ -41,7 +42,7 @@ export class FormGroupComponent implements CssClassBuilder, OnChanges, OnInit {
     isInline: boolean;
 
     /** Adds gap spacing between form items. */
-    @Input()
+    @Input({ transform: booleanAttribute })
     withSpacing = false;
 
     /** @hidden */

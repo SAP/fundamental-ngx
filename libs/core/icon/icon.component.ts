@@ -9,7 +9,7 @@ import {
     model,
     signal
 } from '@angular/core';
-import { HasElementRef, Nullable } from '@fundamental-ngx/cdk/utils';
+import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 import { FD_ICON_COMPONENT } from './tokens';
 
 export type IconFont = 'SAP-icons' | 'BusinessSuiteInAppSymbols' | 'SAP-icons-TNT';
@@ -92,11 +92,11 @@ export function fdBuildIconClass(
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        '[attr.role]': '_role()',
+        '[attr.role]': 'computedRole()',
         '[attr.aria-label]': 'ariaLabel()',
-        '[attr.aria-hidden]': '_effectiveAriaHidden()',
+        '[attr.aria-hidden]': 'effectiveAriaHidden()',
         '[class.fd-list__navigation-item-icon]': '_navigationItemIcon()',
-        '[class]': '_cssClasses()'
+        '[class]': 'cssClasses()'
     }
 })
 export class IconComponent implements HasElementRef {
@@ -124,10 +124,10 @@ export class IconComponent implements HasElementRef {
     readonly class = input<string>();
 
     /** Aria-label for Icon. */
-    readonly ariaLabel = input<Nullable<string>>();
+    readonly ariaLabel = input<string | null>();
 
     /** Aria-hidden attribute for Icon element. */
-    readonly ariaHidden = model<Nullable<boolean>>();
+    readonly ariaHidden = model<boolean | null>();
 
     /** @hidden */
     readonly elementRef = inject(ElementRef<HTMLElement>);
@@ -136,10 +136,10 @@ export class IconComponent implements HasElementRef {
     readonly _navigationItemIcon = signal(false);
 
     /** @hidden Computed role — "presentation" for decorative, "img" when ariaLabel is set. */
-    protected readonly _role = computed(() => (this.ariaLabel() ? 'img' : 'presentation'));
+    protected readonly computedRole = computed(() => (this.ariaLabel() ? 'img' : 'presentation'));
 
     /** @hidden Default aria-hidden to true for decorative icons (no ariaLabel). */
-    protected readonly _effectiveAriaHidden = computed<Nullable<boolean>>(() => {
+    protected readonly effectiveAriaHidden = computed<boolean | null>(() => {
         const explicit = this.ariaHidden();
         if (explicit != null) {
             return explicit;
@@ -148,7 +148,7 @@ export class IconComponent implements HasElementRef {
     });
 
     /** @hidden Computed CSS classes */
-    protected readonly _cssClasses = computed<string>(() => {
+    protected readonly cssClasses = computed<string>(() => {
         const returnClass = [this.class()];
 
         if (!this.glyph()) {

@@ -35,7 +35,6 @@ let formLabelIdCount = 0;
     styleUrl: './form-label.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [LinkComponent, IconComponent, InlineHelpDirective, NgTemplateOutlet],
     host: {
         '[class.fd-form-label--disabled]': 'disabled()'
@@ -132,7 +131,7 @@ export class FormLabelComponent implements OnChanges {
     readonly unitDescription = input(false, { transform: booleanAttribute });
 
     /** Whether this label stands alone (self-centering, no end margin). */
-    readonly standAlone = input(false, { transform: booleanAttribute });
+    readonly independent = input(false, { transform: booleanAttribute });
 
     /** @hidden */
     private _formLabelId = `fd-form-label-${++formLabelIdCount}`;
