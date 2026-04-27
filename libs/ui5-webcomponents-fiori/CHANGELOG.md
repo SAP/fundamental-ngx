@@ -1,3 +1,13 @@
+## 0.62.0-rc.96 (2026-04-27)
+
+### 🩹 Fixes
+
+- **ui5:** make webcomponents wrappers more visible ([#14156](https://github.com/SAP/fundamental-ngx/pull/14156))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
 ## 0.62.0-rc.95 (2026-04-25)
 
 This was a version bump only for ui5-webcomponents-fiori to align it with other projects, there were no code changes.
