@@ -55,13 +55,59 @@
 ### Requirements
 
 - Angular 21 or newer
+- TypeScript 5.9 or newer
 - Node.js (LTS)
 
+**Peer dependencies** (installed automatically by `ng add`, required for manual installs):
+
+| Package                | Notes                 |
+| ---------------------- | --------------------- |
+| `@angular/animations`  |                       |
+| `@angular/cdk`         |                       |
+| `@angular/router`      |                       |
+| `@fundamental-ngx/cdk` |                       |
+| `fundamental-styles`   | Provides the base CSS |
+
 ### Installation
+
+Install the Angular CLI if you don't have it:
+
+```bash
+npm install -g @angular/cli
+```
+
+Create an Angular app if you don't have one:
+
+```bash
+ng new my-app
+cd my-app
+```
+
+Then add the library:
 
 ```bash
 ng add @fundamental-ngx/core
 ```
+
+`ng add` handles everything automatically: peer dependencies, the core stylesheet, theming assets, and theming providers. It will prompt you to choose a theme — the default is `sap_horizon`.
+
+**Manual install** — if you are not using the Angular CLI, after installing all peer dependencies you must:
+
+1. Add to `angular.json` styles:
+    ```
+    ./node_modules/@fundamental-ngx/core/styles/fundamental-ngx-core.css
+    ```
+2. Add to `angular.json` assets:
+    ```json
+    { "glob": "**/css_variables.css", "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/", "output": "./assets/theming-base/" },
+    { "glob": "**/*", "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/baseTheme/fonts/", "output": "./assets/theming-base/baseTheme/fonts/" },
+    { "glob": "**/*", "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/sap_horizon/fonts/", "output": "./assets/theming-base/sap_horizon/fonts/" },
+    { "glob": "**/*", "input": "./node_modules/fundamental-styles/dist/theming/", "output": "./assets/fundamental-styles-theming/" }
+    ```
+3. Add to `app.config.ts` providers:
+    ```typescript
+    provideTheming({ defaultTheme: 'sap_horizon', changeThemeOnQueryParamChange: false }), themingInitializer();
+    ```
 
 All components are standalone by default — import what you need:
 
@@ -72,28 +118,44 @@ import { DialogModule } from '@fundamental-ngx/core/dialog';
 
 ### Hello World
 
-A minimal component using `@fundamental-ngx/core`:
+A minimal app using `@fundamental-ngx/core`:
 
 ```typescript
-// app.component.ts
+// src/main.ts
+import { bootstrapApplication } from '@angular/platform-browser';
+import { App } from './app/app';
+import { appConfig } from './app/app.config';
+
+bootstrapApplication(App, appConfig).catch(console.error);
+```
+
+```typescript
+// src/app/app.config.ts
+import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideTheming, themingInitializer } from '@fundamental-ngx/core/theming';
+
+export const appConfig: ApplicationConfig = {
+    providers: [
+        provideBrowserGlobalErrorListeners(),
+        provideAnimations(),
+        provideTheming({ defaultTheme: 'sap_horizon', changeThemeOnQueryParamChange: false }),
+        themingInitializer()
+    ]
+};
+```
+
+```typescript
+// src/app/app.ts
 import { Component } from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 
 @Component({
     selector: 'app-root',
     imports: [ButtonComponent],
-    template: `<fd-button label="Hello, Fundamental NGX!" />`
+    template: `<button fd-button>Hello, Fundamental NGX!</button>`
 })
-export class AppComponent {}
-```
-
-```typescript
-// app.config.ts
-import { ApplicationConfig } from '@angular/core';
-
-export const appConfig: ApplicationConfig = {
-    providers: []
-};
+export class App {}
 ```
 
 See the [documentation site](https://sap.github.io/fundamental-ngx) for component examples and full API details.
