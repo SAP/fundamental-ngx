@@ -29,6 +29,10 @@ describe('IconComponent', () => {
         expect(fixture.debugElement.nativeElement.className).toContain('sap-icon--' + ICON_NAME);
     });
 
+    it('should include the sap-icon base class', () => {
+        expect(fixture.debugElement.nativeElement.className).toContain('sap-icon');
+    });
+
     it('should apply SAP-icons-TNT icon font with font on input', () => {
         fixture.componentRef.setInput('font', 'SAP-icons-TNT');
         fixture.detectChanges();
@@ -41,5 +45,31 @@ describe('IconComponent', () => {
         expect(fixture.debugElement.nativeElement.className).toContain(
             'sap-icon-businessSuiteInAppSymbols--' + ICON_NAME
         );
+    });
+
+    it('should default role to "presentation" for decorative icons', () => {
+        expect(fixture.debugElement.nativeElement.getAttribute('role')).toBe('presentation');
+    });
+
+    it('should set role to "img" when ariaLabel is provided', () => {
+        fixture.componentRef.setInput('ariaLabel', 'Add item');
+        fixture.detectChanges();
+        expect(fixture.debugElement.nativeElement.getAttribute('role')).toBe('img');
+    });
+
+    it('should set aria-hidden to true by default when no ariaLabel', () => {
+        expect(fixture.debugElement.nativeElement.getAttribute('aria-hidden')).toBe('true');
+    });
+
+    it('should not set aria-hidden when ariaLabel is provided', () => {
+        fixture.componentRef.setInput('ariaLabel', 'Add item');
+        fixture.detectChanges();
+        expect(fixture.debugElement.nativeElement.getAttribute('aria-hidden')).toBeNull();
+    });
+
+    it('should apply size modifier class', () => {
+        fixture.componentRef.setInput('size', 'lg');
+        fixture.detectChanges();
+        expect(fixture.debugElement.nativeElement.className).toContain('sap-icon--lg');
     });
 });

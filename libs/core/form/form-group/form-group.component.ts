@@ -6,7 +6,8 @@ import {
     Input,
     OnChanges,
     OnInit,
-    ViewEncapsulation
+    ViewEncapsulation,
+    booleanAttribute
 } from '@angular/core';
 import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 
@@ -27,8 +28,7 @@ import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
     template: `<ng-content></ng-content>`,
     encapsulation: ViewEncapsulation.None,
     styleUrl: './form-group.component.scss',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormGroupComponent implements CssClassBuilder, OnChanges, OnInit {
     /** @hidden */
@@ -40,6 +40,10 @@ export class FormGroupComponent implements CssClassBuilder, OnChanges, OnInit {
      */
     @Input()
     isInline: boolean;
+
+    /** Adds gap spacing between form items. */
+    @Input({ transform: booleanAttribute })
+    withSpacing = false;
 
     /** @hidden */
     class: string;
@@ -53,7 +57,7 @@ export class FormGroupComponent implements CssClassBuilder, OnChanges, OnInit {
      */
     @applyCssClass
     buildComponentCssClass(): string[] {
-        return [this.isInline ? 'fd-form-group--inline' : ''];
+        return [this.isInline ? 'fd-form-group--inline' : '', this.withSpacing ? 'fd-form-group--with-spacing' : ''];
     }
 
     /** @hidden */

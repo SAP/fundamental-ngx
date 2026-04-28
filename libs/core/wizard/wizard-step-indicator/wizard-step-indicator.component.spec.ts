@@ -37,6 +37,8 @@ describe('WizardStepIndicatorComponent', () => {
 
     it('Should Add icon class with glyph on input', () => {
         const indicator = fixture.debugElement.nativeElement.querySelector('.fd-wizard__icon');
-        expect(indicator.className).toContain('fd-wizard__icon sap-icon--accept');
+        expect(indicator.classList).toContain('fd-wizard__icon');
+        expect(indicator.classList).toContain('sap-icon');
+        expect(indicator.classList).toContain('sap-icon--accept');
     });
 });
