@@ -93,3 +93,7 @@ libs/ui5-webcomponents-fiori/index.ts
 
 /libs/i18n/docs
 /libs/i18n/test-typedoc.json
+
+# Playwright
+/playwright-report/
+/test-results/

@@ -1,0 +1,54 @@
+name: E2E Tests
+
+on:
+    pull_request:
+        paths:
+            - 'libs/core/**'
+            - 'libs/platform/**'
+            - 'libs/cdk/**'
+            - 'apps/e2e-harness/**'
+            - 'playwright.config.ts'
+
+env:
+    NODE_VERSION: '22.x'
+
+concurrency:
+    group: e2e-${{ github.event.number || github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    e2e:
+        runs-on: ubuntu-latest
+        name: Playwright E2E Tests
+        steps:
+            - uses: actions/checkout@v4.2.2
+              with:
+                  fetch-depth: 1
+
+            - uses: ./.github/actions/nodejs
+              with:
+                  node-version: ${{ env.NODE_VERSION }}
+
+            - name: Install Playwright browsers
+              run: npx playwright install chromium --with-deps
+
+            - name: Run E2E tests
+              run: npx playwright test
+              env:
+                  CI: true
+
+            - name: Upload test results
+              if: failure()
+              uses: actions/upload-artifact@v4
+              with:
+                  name: playwright-report
+                  path: playwright-report/
+                  retention-days: 7
+
+            - name: Upload snapshot diffs
+              if: failure()
+              uses: actions/upload-artifact@v4
+              with:
+                  name: snapshot-diffs
+                  path: test-results/
+                  retention-days: 7

@@ -1,0 +1,15 @@
+{
+    "extends": "../../tsconfig.base.json",
+    "compilerOptions": {
+        "outDir": "../../dist/out-tsc",
+        "types": ["node"],
+        "target": "es2023",
+        "useDefineForClassFields": false,
+        "moduleResolution": "bundler",
+        "module": "preserve",
+        "lib": ["dom", "es2023"]
+    },
+    "files": ["src/main.ts"],
+    "include": ["src/**/*.ts"],
+    "exclude": ["**/*.spec.ts", "e2e/**/*.ts"]
+}
