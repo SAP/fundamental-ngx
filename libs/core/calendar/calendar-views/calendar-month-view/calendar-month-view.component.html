@@ -2,8 +2,8 @@
     class="fd-calendar__content fd-calendar__content--months"
     role="grid"
     [attr.aria-roledescription]="('coreCalendar.calendarMonthViewDescription' | fdTranslate)()"
-    [attr.aria-readonly]="false"
-    [attr.aria-multiselectable]="false"
+    aria-readonly="false"
+    aria-multiselectable="false"
 >
     <tbody class="fd-calendar__group" role="rowgroup">
         @for (colMonths of _calendarMonthListGrid; track colMonths + '' + rowIndex; let rowIndex = $index) {

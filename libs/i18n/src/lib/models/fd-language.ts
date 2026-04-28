@@ -81,6 +81,9 @@ export interface FdLanguage {
 
         /** Aria label for the calendar legend container. */
         calendarLegendLabel: FdLanguageKey;
+
+        /** Aria role description for the calendar component. */
+        calendarRoleDescription: FdLanguageKey;
     };
     coreCard: {
         /** Aria description for an interactive card item in a list. */

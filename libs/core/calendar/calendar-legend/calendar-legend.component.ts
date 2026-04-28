@@ -67,7 +67,7 @@ import { CalendarLegendItemComponent } from './calendar-legend-item.component';
         role: 'list',
         class: 'fd-calendar-legend',
         '[class.fd-calendar-legend--auto-column]': 'col()',
-        '[attr.aria-label]': '_ariaLabel()'
+        '[attr.aria-label]': 'ariaLabel()'
     },
     imports: [CalendarLegendItemComponent, FocusableListDirective, FocusableItemDirective, FdTranslatePipe]
 })
@@ -95,7 +95,7 @@ export class CalendarLegendComponent<D> {
     specialDaysRules = input<SpecialDayRule<D>[]>([]);
 
     /** @hidden */
-    protected readonly _ariaLabel = resolveTranslationSignalFn()('coreCalendar.calendarLegendLabel');
+    protected readonly ariaLabel = resolveTranslationSignalFn()('coreCalendar.calendarLegendLabel');
 
     /** @hidden */
     private readonly _focusingService = inject(CalendarLegendFocusingService, { optional: true });

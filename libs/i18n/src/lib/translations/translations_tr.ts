@@ -37,6 +37,7 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'Takvim',
         calendarLegendLabel: 'Calendar Legend',
+        calendarRoleDescription: 'Calendar',
         calendarMonthViewDescription: 'Ay seçici',
         calendarYearsRangeViewDescription: 'Yıl aralığı seçici',
         calendarYearsViewDescription: 'Yıl seçici',

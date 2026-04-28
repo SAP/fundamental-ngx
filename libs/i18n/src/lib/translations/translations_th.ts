@@ -37,6 +37,7 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'ปฏิทิน',
         calendarLegendLabel: 'Calendar Legend',
+        calendarRoleDescription: 'Calendar',
         calendarMonthViewDescription: 'ตัวเลือกเดือน',
         calendarYearsRangeViewDescription: 'ตัวเลือกช่วงปี',
         calendarYearsViewDescription: 'ตัวเลือกปี',

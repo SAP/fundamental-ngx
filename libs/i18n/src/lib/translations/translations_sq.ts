@@ -37,6 +37,7 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'Kalendar',
         calendarLegendLabel: 'Calendar Legend',
+        calendarRoleDescription: 'Calendar',
         calendarMonthViewDescription: 'Zgjedhësi i muajit',
         calendarYearsRangeViewDescription: 'Zgjedhësi i shtrirjes së viteve',
         calendarYearsViewDescription: 'Zgjedhësi i vitit',

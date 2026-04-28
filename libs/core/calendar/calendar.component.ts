@@ -30,7 +30,7 @@ import {
     ContentDensityObserver,
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
-import { FD_LANGUAGE_SIGNAL } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_SIGNAL, resolveTranslationSignal } from '@fundamental-ngx/i18n';
 import { createMissingDateImplementationError } from './calendar-errors';
 import { CalendarHeaderComponent } from './calendar-header/calendar-header.component';
 import { CalendarLegendFocusingService } from './calendar-legend/calendar-legend-focusing.service';
@@ -95,7 +95,7 @@ let calendarUniqueId = 0;
     host: {
         '[attr.id]': 'id',
         role: 'group',
-        '[attr.aria-roledescription]': "'Calendar'",
+        '[attr.aria-roledescription]': 'calendarRoleDescription()',
         class: 'fd-calendar fd-has-display-block'
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -320,6 +320,9 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
 
     /** @hidden */
     nextButtonDisabled: boolean;
+
+    /** @hidden */
+    protected readonly calendarRoleDescription = resolveTranslationSignal('coreCalendar.calendarRoleDescription');
 
     /** @hidden */
     private _subscriptions = new Subscription();

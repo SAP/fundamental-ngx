@@ -24,6 +24,7 @@ export type FdLanguageKeyIdentifier =
     | 'coreBusyIndicator.defaultTitle'
     | 'coreCalendar.calendarDayViewDescription'
     | 'coreCalendar.calendarLegendLabel'
+    | 'coreCalendar.calendarRoleDescription'
     | 'coreCalendar.calendarMonthViewDescription'
     | 'coreCalendar.calendarYearsRangeViewDescription'
     | 'coreCalendar.calendarYearsViewDescription'

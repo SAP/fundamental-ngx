@@ -2,7 +2,7 @@
     class="fd-calendar__content fd-calendar__content--dates"
     role="grid"
     [attr.aria-roledescription]="('coreCalendar.calendarDayViewDescription' | fdTranslate)()"
-    [attr.aria-readonly]="false"
+    aria-readonly="false"
     [attr.aria-multiselectable]="calType() === 'range' || allowMultipleSelection()"
 >
     <thead class="fd-calendar__group" role="rowgroup">

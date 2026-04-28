@@ -38,6 +38,7 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'Calendar',
         calendarLegendLabel: 'Calendar Legend',
+        calendarRoleDescription: 'Calendar',
         calendarMonthViewDescription: 'Selector lună',
         calendarYearsRangeViewDescription: 'Selector interval de ani',
         calendarYearsViewDescription: 'Selector an',

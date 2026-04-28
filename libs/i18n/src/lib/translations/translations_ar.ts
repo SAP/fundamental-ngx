@@ -37,6 +37,7 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'التقويم',
         calendarLegendLabel: 'Calendar Legend',
+        calendarRoleDescription: 'Calendar',
         calendarMonthViewDescription: 'أداة انتقاء الشهر',
         calendarYearsRangeViewDescription: 'أداة انتقاء نطاق السنوات',
         calendarYearsViewDescription: 'أداة انتقاء السنة',

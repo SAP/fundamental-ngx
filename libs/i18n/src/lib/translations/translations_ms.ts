@@ -37,6 +37,7 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'Kalendar',
         calendarLegendLabel: 'Calendar Legend',
+        calendarRoleDescription: 'Calendar',
         calendarMonthViewDescription: 'Pemilih bulan',
         calendarYearsRangeViewDescription: 'Pemilih julat tahun',
         calendarYearsViewDescription: 'Pemilih tahun',

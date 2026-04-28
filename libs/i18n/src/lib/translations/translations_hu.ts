@@ -38,6 +38,7 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'Naptár',
         calendarLegendLabel: 'Calendar Legend',
+        calendarRoleDescription: 'Calendar',
         calendarMonthViewDescription: 'Hónapválasztó',
         calendarYearsRangeViewDescription: 'Évtartomány-választó',
         calendarYearsViewDescription: 'Évválasztó',

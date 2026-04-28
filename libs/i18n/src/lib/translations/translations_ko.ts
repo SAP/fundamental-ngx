@@ -37,6 +37,7 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: '달력',
         calendarLegendLabel: 'Calendar Legend',
+        calendarRoleDescription: 'Calendar',
         calendarMonthViewDescription: '월 선택 도구',
         calendarYearsRangeViewDescription: '연도 범위 선택 도구',
         calendarYearsViewDescription: '연도 선택 도구',

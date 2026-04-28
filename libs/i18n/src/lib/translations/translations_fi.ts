@@ -37,6 +37,7 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'Kalenteri',
         calendarLegendLabel: 'Calendar Legend',
+        calendarRoleDescription: 'Calendar',
         calendarMonthViewDescription: 'Kuukausivalitsin',
         calendarYearsRangeViewDescription: 'Vuosialuevalitsin',
         calendarYearsViewDescription: 'Vuosivalitsin',

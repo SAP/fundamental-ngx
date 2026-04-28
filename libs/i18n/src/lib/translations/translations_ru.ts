@@ -38,6 +38,7 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'Календарь',
         calendarLegendLabel: 'Calendar Legend',
+        calendarRoleDescription: 'Calendar',
         calendarMonthViewDescription: 'Выбор месяца',
         calendarYearsRangeViewDescription: 'Выбор диапазона годов',
         calendarYearsViewDescription: 'Выбор года',

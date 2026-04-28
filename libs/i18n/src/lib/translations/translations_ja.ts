@@ -37,6 +37,7 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'カレンダー',
         calendarLegendLabel: 'Calendar Legend',
+        calendarRoleDescription: 'Calendar',
         calendarMonthViewDescription: '月選択',
         calendarYearsRangeViewDescription: '年範囲選択',
         calendarYearsViewDescription: '年選択',

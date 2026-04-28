@@ -204,6 +204,22 @@ export class CheckboxComponent<T = unknown> implements ControlValueAccessor, Aft
     _domPortal: DomPortal<HTMLElement>;
 
     /** @hidden */
+    protected get inputStateClasses(): string {
+        const classes: string[] = [];
+        if (this.displayOnly) {
+            classes.push('is-display');
+        } else if (this.readonly) {
+            classes.push('is-readonly');
+        } else if (this.disabled) {
+            classes.push('is-disabled');
+        }
+        if (this.state && this.state !== 'default') {
+            classes.push('is-' + this.state);
+        }
+        return classes.join(' ');
+    }
+
+    /** @hidden */
     private _subscriptions = new Subscription();
 
     /** @hidden values returned by control. */

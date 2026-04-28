@@ -37,6 +37,7 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'კალენდარი',
         calendarLegendLabel: 'Calendar Legend',
+        calendarRoleDescription: 'Calendar',
         calendarMonthViewDescription: 'თვის არჩევა',
         calendarYearsRangeViewDescription: 'წელთა შუალედის არჩევა',
         calendarYearsViewDescription: 'წელის არჩევა',

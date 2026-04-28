@@ -38,6 +38,7 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'Күнтізбе',
         calendarLegendLabel: 'Calendar Legend',
+        calendarRoleDescription: 'Calendar',
         calendarMonthViewDescription: 'Айды таңдау құралы',
         calendarYearsRangeViewDescription: 'Жылдар ауқымын таңдау құралы',
         calendarYearsViewDescription: 'Жылды таңдау құралы',

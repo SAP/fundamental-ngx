@@ -38,6 +38,7 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: '[[[Ĉąĺēŋƌąŗ∙∙∙∙∙∙]]]',
         calendarLegendLabel: 'Calendar Legend',
+        calendarRoleDescription: 'Calendar',
         calendarMonthViewDescription: '[[[Μŏŋţĥ ρįċķēŗ∙∙∙∙∙∙∙]]]',
         calendarYearsRangeViewDescription: '[[[Ŷēąŗş ŗąŋğē ρįċķēŗ∙∙∙∙∙∙]]]',
         calendarYearsViewDescription: '[[[Ŷēąŗ ρįċķēŗ∙∙∙∙∙∙∙∙]]]',

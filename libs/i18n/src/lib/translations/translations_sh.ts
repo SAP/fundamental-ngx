@@ -38,6 +38,7 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'Kalendar',
         calendarLegendLabel: 'Calendar Legend',
+        calendarRoleDescription: 'Calendar',
         calendarMonthViewDescription: 'Birač meseca',
         calendarYearsRangeViewDescription: 'Birač raspona godina',
         calendarYearsViewDescription: 'Birač godine',

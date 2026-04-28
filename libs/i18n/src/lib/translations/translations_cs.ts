@@ -37,6 +37,7 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'Kalendář',
         calendarLegendLabel: 'Calendar Legend',
+        calendarRoleDescription: 'Calendar',
         calendarMonthViewDescription: 'Výběr měsíce',
         calendarYearsRangeViewDescription: 'Výběr rozsahu let',
         calendarYearsViewDescription: 'Výběr roku',

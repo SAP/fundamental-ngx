@@ -37,6 +37,7 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'לוח שנה',
         calendarLegendLabel: 'Calendar Legend',
+        calendarRoleDescription: 'Calendar',
         calendarMonthViewDescription: 'בוחר חודש',
         calendarYearsRangeViewDescription: 'בוחר טווח שנים',
         calendarYearsViewDescription: 'בוחר שנה',

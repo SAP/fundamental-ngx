@@ -37,6 +37,7 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'Ημερολόγιο',
         calendarLegendLabel: 'Calendar Legend',
+        calendarRoleDescription: 'Calendar',
         calendarMonthViewDescription: 'Επιλογέας μήνα',
         calendarYearsRangeViewDescription: 'Επιλογέας εύρους ετών',
         calendarYearsViewDescription: 'Επιλογέας έτους',

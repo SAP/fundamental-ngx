@@ -37,6 +37,7 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'कैलेंडर',
         calendarLegendLabel: 'Calendar Legend',
+        calendarRoleDescription: 'Calendar',
         calendarMonthViewDescription: 'महीना चयनकर्ता',
         calendarYearsRangeViewDescription: 'वर्षों की सीमा चयनकर्ता',
         calendarYearsViewDescription: 'वर्ष चयनकर्ता',

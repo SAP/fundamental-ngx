@@ -11,9 +11,14 @@
                 ></fd-button-bar>
             }
             <fd-bar-element
-                ><h1 class="fd-title fd-title--h5">
+                ><span
+                    class="fd-title"
+                    [class]="'fd-title--h' + overflowHeadingLevel()"
+                    role="heading"
+                    [attr.aria-level]="overflowHeadingLevel()"
+                >
                     {{ _isDetailStage ? _selectedItem.title : overflowPopoverTitle }}
-                </h1></fd-bar-element
+                </span></fd-bar-element
             >
             @if (_isDetailStage) {
                 <fd-bar-element>&nbsp;</fd-bar-element>
