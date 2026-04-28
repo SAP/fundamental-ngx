@@ -5,27 +5,26 @@
 </ng-template>
 
 <ng-template #bodyTemplate>
-    <span
-        role="heading"
-        [attr.aria-level]="headingLevel + 1"
-        fd-list-group-header
-        id="platformTableInternalFilterListGroupHeader"
-    >
-        {{ ('platformTable.filterDialogFilterBy' | fdTranslate)() }}
-    </span>
-    <ul fd-list [navigationIndicator]="true" aria-labelledby="platformTableInternalFilterListGroupHeader">
-        @for (filter of filters; track filter) {
-            <li
-                fd-list-item
-                [interactive]="true"
-                (click)="selectFilter.emit(filter)"
-                (keydown.space)="selectFilter.emit(filter)"
-                (keydown.enter)="selectFilter.emit(filter)"
-            >
-                <a fd-list-link [navigationIndicator]="true">
-                    <span fd-list-title>{{ filter.label }}</span>
-                </a>
-            </li>
-        }
-    </ul>
+    <fieldset>
+        <legend fd-list-group-header>
+            <span fd-list-title id="platformTableInternalFilterListGroupHeader">
+                {{ ('platformTable.filterDialogFilterBy' | fdTranslate)() }}
+            </span>
+        </legend>
+        <ul fd-list aria-labelledby="platformTableInternalFilterListGroupHeader" [navigationIndicator]="true">
+            @for (filter of filters; track filter) {
+                <li
+                    fd-list-item
+                    [interactive]="true"
+                    (click)="selectFilter.emit(filter)"
+                    (keydown.space)="selectFilter.emit(filter)"
+                    (keydown.enter)="selectFilter.emit(filter)"
+                >
+                    <a fd-list-link [navigationIndicator]="true">
+                        <span fd-list-title>{{ filter.label }}</span>
+                    </a>
+                </li>
+            }
+        </ul>
+    </fieldset>
 </ng-template>
