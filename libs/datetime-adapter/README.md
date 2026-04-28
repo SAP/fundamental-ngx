@@ -8,7 +8,7 @@
 
 Date/time adapter based on [Day.js](https://day.js.org/) for Fundamental NGX date and time components (Date Picker, Time Picker, DateTime Picker, etc.).
 
-These components rely on the `DatetimeAdapter` abstraction. This package provides `DayjsDatetimeAdapter` as an alternative to the built-in `FdDatetimeAdapter` (based on native `Date`), adding reliable parse format support.
+Fundamental NGX date components rely on the `DatetimeAdapter` abstraction from `@fundamental-ngx/core/datetime`. By default they use the built-in `FdDatetimeAdapter` (native `Date`). This package provides `DayjsDatetimeAdapter` as an alternative, which adds reliable locale-aware parsing and formatting via Day.js.
 
 ## Installation
 
@@ -18,11 +18,55 @@ npm install @fundamental-ngx/datetime-adapter dayjs
 
 ## Usage
 
-```typescript
-import { provideDatetimeAdapter } from '@fundamental-ngx/datetime-adapter';
+Import `DayjsDatetimeAdapterModule` in the module or standalone component that hosts your date/time components:
 
-// In your application config or module providers:
-provideDatetimeAdapter();
+```typescript
+// app.config.ts
+import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import { DayjsDatetimeAdapterModule } from '@fundamental-ngx/datetime-adapter';
+
+export const appConfig: ApplicationConfig = {
+    providers: [importProvidersFrom(DayjsDatetimeAdapterModule)]
+};
+```
+
+Or import it directly in a standalone component:
+
+```typescript
+import { Component } from '@angular/core';
+import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
+import { DayjsDatetimeAdapterModule } from '@fundamental-ngx/datetime-adapter';
+import type { Dayjs } from 'dayjs';
+
+@Component({
+    selector: 'app-date-example',
+    imports: [DatePickerComponent, DayjsDatetimeAdapterModule],
+    template: `<fd-date-picker [(ngModel)]="date" />`
+})
+export class DateExampleComponent {
+    date: Dayjs | null = null;
+}
+```
+
+### Locale support
+
+Day.js locale plugins are loaded separately. Import the locale before bootstrapping:
+
+```typescript
+import 'dayjs/locale/de';
+import dayjs from 'dayjs';
+
+dayjs.locale('de');
+```
+
+### Strict parsing and UTC mode
+
+Configure the adapter via `DAYJS_DATE_TIME_ADAPTER_OPTIONS`:
+
+```typescript
+import { DAYJS_DATE_TIME_ADAPTER_OPTIONS } from '@fundamental-ngx/datetime-adapter';
+
+providers: [{ provide: DAYJS_DATE_TIME_ADAPTER_OPTIONS, useValue: { strict: true, useUtc: false } }];
 ```
 
 See the [documentation](https://sap.github.io/fundamental-ngx) for full configuration and format customization options.

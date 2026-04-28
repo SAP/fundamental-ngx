@@ -19,50 +19,6 @@
 | [`@fundamental-ngx/core`](libs/core)         | Base UI components (button, dialog, card, calendar, table, etc.)             |
 | [`@fundamental-ngx/platform`](libs/platform) | Higher-level composites built on core with form integration and data binding |
 
-## AI Integration (MCP Server)
-
-The [`@fundamental-ngx/mcp`](https://github.com/SAP/fundamental-ngx/tree/main/libs/mcp-server) package is an MCP ([Model Context Protocol](https://modelcontextprotocol.io)) server that gives AI coding assistants structured access to the entire Fundamental NGX component catalog — 1000+ components across 8 libraries.
-
-With it, your AI assistant can look up component APIs, get usage examples, compare alternatives, check accessibility guidance, and receive migration help — all from actual component metadata, not hallucinated docs.
-
-### Quick Start
-
-**VS Code / Cursor** — create or edit `.vscode/mcp.json`:
-
-```json
-{
-    "servers": {
-        "fundamental-ngx": {
-            "command": "npx",
-            "args": ["-y", "@fundamental-ngx/mcp"]
-        }
-    }
-}
-```
-
-**Claude Code:**
-
-```bash
-claude mcp add fundamental-ngx -- npx -y @fundamental-ngx/mcp
-```
-
-**Windsurf** — add to `~/.codeium/windsurf/mcp_config.json`:
-
-```json
-{
-    "mcpServers": {
-        "fundamental-ngx": {
-            "command": "npx",
-            "args": ["-y", "@fundamental-ngx/mcp"]
-        }
-    }
-}
-```
-
-See the [full MCP server documentation](https://github.com/SAP/fundamental-ngx/tree/main/libs/mcp-server) for available tools and schema details.
-
-## <a name="2"></a>2. Requirements
-
 ### UI5 Web Components
 
 | Package                                                                    | Description                             |
@@ -93,6 +49,54 @@ See the [full MCP server documentation](https://github.com/SAP/fundamental-ngx/t
 | ---------------------------------------------- | ----------------------------------- |
 | [`@fundamental-ngx/mcp`](libs/mcp-server)      | MCP server for AI coding assistants |
 | [`@fundamental-ngx/nx-plugin`](libs/nx-plugin) | NX generators and executors         |
+
+## Getting Started
+
+### Requirements
+
+- Angular 21 or newer
+- Node.js (LTS)
+
+### Installation
+
+```bash
+ng add @fundamental-ngx/core
+```
+
+All components are standalone by default — import what you need:
+
+```typescript
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
+```
+
+### Hello World
+
+A minimal component using `@fundamental-ngx/core`:
+
+```typescript
+// app.component.ts
+import { Component } from '@angular/core';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+
+@Component({
+    selector: 'app-root',
+    imports: [ButtonComponent],
+    template: `<fd-button label="Hello, Fundamental NGX!" />`
+})
+export class AppComponent {}
+```
+
+```typescript
+// app.config.ts
+import { ApplicationConfig } from '@angular/core';
+
+export const appConfig: ApplicationConfig = {
+    providers: []
+};
+```
+
+See the [documentation site](https://sap.github.io/fundamental-ngx) for component examples and full API details.
 
 ## AI Integration (MCP Server)
 
@@ -134,29 +138,6 @@ claude mcp add fundamental-ngx -- npx -y @fundamental-ngx/mcp
 
 See the [full MCP server documentation](libs/mcp-server) for available tools and schema details.
 
-## Getting Started
-
-### Requirements
-
-- Angular 21 or newer
-- Node.js (LTS)
-- Yarn (`corepack enable`, then `yarn`)
-
-### Installation
-
-```bash
-ng add @fundamental-ngx/core
-```
-
-All components are standalone by default — import what you need:
-
-```typescript
-import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { DialogModule } from '@fundamental-ngx/core/dialog';
-```
-
-See the [documentation site](https://sap.github.io/fundamental-ngx) for component examples and API details.
-
 ## Known Issues
 
 See [Issues](https://github.com/SAP/fundamental-ngx/issues).
@@ -169,7 +150,7 @@ Angular version support: features and enhancements target the latest version. Bu
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines and [NEW_COMPONENT.md](NEW_COMPONENT.md) for building new components.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines and [NEW_COMPONENT.md](NEW_COMPONENT.md) for a step-by-step guide to building new components.
 
 Please follow the [Angular commit message guidelines](https://github.com/angular/angular/blob/main/CONTRIBUTING.md#commit) and the [SAP Contribution Guidelines](https://github.com/SAP/.github/blob/main/CONTRIBUTING.md).
 
