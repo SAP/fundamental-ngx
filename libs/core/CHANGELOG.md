@@ -1,3 +1,13 @@
+## 0.62.0-rc.98 (2026-04-28)
+
+### 🩹 Fixes
+
+- adopt minor styles changes ([#14155](https://github.com/SAP/fundamental-ngx/pull/14155))
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.62.0-rc.97 (2026-04-27)
 
 ### 🩹 Fixes
