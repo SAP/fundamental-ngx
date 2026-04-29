@@ -1,3 +1,14 @@
+## 0.62.0-rc.99 (2026-04-29)
+
+### 🩹 Fixes
+
+- **core:** fix avatar group accessibility ([#14088](https://github.com/SAP/fundamental-ngx/pull/14088))
+
+### ❤️ Thank You
+
+- fundamental-bot
+- Maria Dineva @MariaIDineva
+
 ## 0.62.0-rc.98 (2026-04-28)
 
 This was a version bump only for i18n to align it with other projects, there were no code changes.
