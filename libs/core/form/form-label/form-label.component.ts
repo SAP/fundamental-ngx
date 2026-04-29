@@ -1,9 +1,11 @@
 import { NgTemplateOutlet } from '@angular/common';
 import {
+    booleanAttribute,
     ChangeDetectionStrategy,
     Component,
     HostBinding,
     Input,
+    input,
     OnChanges,
     TemplateRef,
     ViewEncapsulation
@@ -33,8 +35,10 @@ let formLabelIdCount = 0;
     styleUrl: './form-label.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [LinkComponent, IconComponent, InlineHelpDirective, NgTemplateOutlet]
+    imports: [LinkComponent, IconComponent, InlineHelpDirective, NgTemplateOutlet],
+    host: {
+        '[class.fd-form-label--disabled]': 'disabled()'
+    }
 })
 export class FormLabelComponent implements OnChanges {
     /** Whether form is required. */
@@ -119,6 +123,15 @@ export class FormLabelComponent implements OnChanges {
     get formLabelId(): string {
         return this._formLabelId;
     }
+
+    /** Whether the label is disabled. */
+    readonly disabled = input(false, { transform: booleanAttribute });
+
+    /** Whether this label is a unit description (e.g., "kg", "USD"). */
+    readonly unitDescription = input(false, { transform: booleanAttribute });
+
+    /** Whether this label stands alone (self-centering, no end margin). */
+    readonly independent = input(false, { transform: booleanAttribute });
 
     /** @hidden */
     private _formLabelId = `fd-form-label-${++formLabelIdCount}`;

@@ -11,6 +11,7 @@ import {
 import { IconBusinessSuiteInAppSymbolsExampleComponent } from './examples/icon-businessSuiteInAppSymbols-example.component';
 import { IconColorExampleComponent } from './examples/icon-color-example.component';
 import { IconExampleComponent } from './examples/icon-example.component';
+import { IconSizeExampleComponent } from './examples/icon-size-example.component';
 import { IconTNTExampleComponent } from './examples/icon-tnt-example.component';
 
 const iconSrc = 'icon-example.component.html';
@@ -21,6 +22,7 @@ const iconBusinessSuiteInAppSymbolsSrc = 'icon-businessSuiteInAppSymbols-example
 const iconBusinessSuiteInAppSymbolsTs = 'icon-businessSuiteInAppSymbols-example.component.ts';
 const iconColorExampleTs = 'icon-color-example.component.ts';
 const iconColorExampleScss = 'icon-example.component.scss';
+const iconSizeExampleTs = 'icon-size-example.component.ts';
 
 @Component({
     selector: 'app-icon',
@@ -34,6 +36,7 @@ const iconColorExampleScss = 'icon-example.component.scss';
         IconBusinessSuiteInAppSymbolsExampleComponent,
         IconTNTExampleComponent,
         IconColorExampleComponent,
+        IconSizeExampleComponent,
         SeparatorComponent
     ]
 })
@@ -97,6 +100,15 @@ export class IconDocsComponent {
             language: 'scss',
             code: getAssetFromModuleAssets(iconColorExampleScss),
             fileName: 'icon-color-example'
+        }
+    ];
+
+    iconSizeExample: ExampleFile[] = [
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(iconSizeExampleTs),
+            fileName: 'icon-size-example',
+            component: 'IconSizeExampleComponent'
         }
     ];
 }

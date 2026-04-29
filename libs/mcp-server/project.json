@@ -1,0 +1,50 @@
+{
+    "name": "mcp-server",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "libs/mcp-server/src",
+    "projectType": "library",
+    "tags": ["type:tools", "scope:tools"],
+    "targets": {
+        "build": {
+            "executor": "@nx/js:tsc",
+            "outputs": ["{options.outputPath}"],
+            "options": {
+                "outputPath": "dist/libs/mcp-server",
+                "main": "libs/mcp-server/src/index.ts",
+                "tsConfig": "libs/mcp-server/tsconfig.lib.json",
+                "assets": [
+                    "libs/mcp-server/README.md",
+                    {
+                        "input": "./libs/mcp-server/src",
+                        "glob": "**/*.json",
+                        "output": "./src"
+                    }
+                ]
+            }
+        },
+        "prepare": {
+            "command": "npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=mcp-server --files=dist/libs/mcp-server --verbose"
+        },
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "libs/mcp-server/jest.config.ts"
+            }
+        },
+        "extract-metadata": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "npx tsx libs/mcp-server/src/extractors/build-metadata.ts",
+                "cwd": "{workspaceRoot}"
+            }
+        },
+        "check-metadata": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "npx tsx libs/mcp-server/src/extractors/build-metadata.ts --dry-run",
+                "cwd": "{workspaceRoot}"
+            }
+        }
+    }
+}

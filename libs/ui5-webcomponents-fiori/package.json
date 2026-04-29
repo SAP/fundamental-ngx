@@ -1,8 +1,22 @@
 {
     "name": "@fundamental-ngx/ui5-webcomponents-fiori",
-    "version": "0.62.0-rc.78",
+    "version": "0.62.0-rc.98",
     "schematics": "./schematics/collection.json",
-    "description": "Fundamental Library for Angular - UI5 Webcomponents Fiori",
+    "description": "Official SAP Angular wrappers for UI5 Fiori Web Components – part of the Fundamental Library for Angular.",
+    "keywords": [
+        "angular",
+        "ui5",
+        "ui5-webcomponents",
+        "web-components",
+        "sap",
+        "fiori",
+        "ngx",
+        "design-system",
+        "btp",
+        "angular-components",
+        "sap-fiori",
+        "fundamental"
+    ],
     "license": "Apache-2.0",
     "homepage": "https://sap.github.io/fundamental-ngx",
     "repository": {

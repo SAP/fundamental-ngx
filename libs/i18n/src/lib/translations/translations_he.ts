@@ -27,7 +27,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'שביל ניווט',
-        overflowTitleMore: "לחץ או הקש 'enter' כדי להציג פרטים נוספים"
+        overflowTitleMore: "לחץ או הקש 'enter' כדי להציג פרטים נוספים",
+        positionLabel: '{current} מתוך {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'עסוק',
@@ -57,12 +58,12 @@ export default {
         yearsRangeSelectionLabel: 'בחר טווחי שנים'
     },
     coreCard: {
-        ariaDescription: 'Active, Press Enter to activate',
-        roleDescription: '{cardType} Card'
+        ariaDescription: 'פעיל, הקש על Enter כדי להפעיל',
+        roleDescription: 'כרטיס {cardType}'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'עבור לפריט הקודם',
-        pageIndicatorLabel: 'פריט {itemNum} מתוך {totalNum} מוצג',
+        pageIndicatorLabel: 'מוצג פריט {itemNum} מתוך {totalNum}',
         rightNavigationBtnLabel: 'עבור לפריט הבא'
     },
     coreCombobox: {
@@ -95,7 +96,7 @@ export default {
     },
     coreFeedListItem: {
         lessLabel: 'פחות',
-        moreLabel: '{count} נוספים'
+        moreLabel: '{count} יותר'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'בטל',
@@ -138,7 +139,7 @@ export default {
         navigateSelectionsWithArrows: 'נווט בבחירות עם החצים למעלה ולמטה.',
         noResults: 'אין תוצאות.',
         showAll: 'הצג הכול ({count})',
-        tokensCountText: 'מכיל סה"כ tokens: {length}.'
+        tokensCountText: 'מכיל סה"כ ערכי Token: {length}'
     },
     coreNavigation: {
         mainNavigation: 'ניווט ראשי',
@@ -179,7 +180,7 @@ export default {
         positive: 'הזנה אומתה בהצלחה'
     },
     coreOverflowLayout: {
-        moreItemsButton: '{count} נוספים'
+        moreItemsButton: '{count} יותר'
     },
     corePagination: {
         ariaLabel: 'עימוד',
@@ -224,7 +225,7 @@ export default {
         multipleHandle2ValuemaxDetails: 'הערך הוא {value}',
         multipleHandle2ValueminDetails: 'הערך הוא {value}',
         multipleHandle2ValueNowDetails: 'הערך הנוכחי הוא {value}',
-        singleMinMaxDetails: 'הערך המינימלי של המחוון הוא {min}, הערך המקסימלי הוא {max}',
+        singleMinMaxDetails: 'הערך המינימלי של מחוון הוא {min}, הערך המקסימלי הוא {max}',
         singleValuemaxDetails: 'הערך הוא {value}',
         singleValueminDetails: 'הערך הוא {value}',
         singleValueNowDetails: 'הערך הנוכחי הוא {value}'
@@ -290,7 +291,7 @@ export default {
         deleteButtonLabel: 'ניתן למחיקה'
     },
     coreTokenizer: {
-        moreLabel: '{count} נוספים',
+        moreLabel: '{count} יותר',
         tokenizerLabel: 'Tokenizer'
     },
     coreToolbar: {
@@ -359,11 +360,11 @@ export default {
         nodeActionAddApproversParallel: 'הוסף מאשרים מקבילים',
         nodeActionEditApprover: 'ערוך מאשר',
         nodeActionRemove: 'הסר',
-        nodeMembersCount: '{count} איברים',
+        nodeMembersCount: '{count} חברים',
         nodeMenuButtonTitle: 'תפריט',
-        nodeStatusDueInXDays: 'תאריך היעד בעוד {count} ימים',
+        nodeStatusDueInXDays: 'תאריך היעד חל בעוד {count} ימים',
         nodeStatusDueToday: 'תאריך היעד הוא היום',
-        nodeStatusXDaysOverdue: '{count} ימים באיחור',
+        nodeStatusXDaysOverdue: '{count} ימי איחור',
         nodeVariousTeams: 'צוותים שונים',
         prevButtonAriaLabel: 'עבור לשקופית הקודמת',
         selectTypeDialogCancelButton: 'בטל',
@@ -391,7 +392,7 @@ export default {
         watchersInputPlaceholder: 'חפש כאן..'
     },
     platformCombobox: {
-        countListResultsPlural: '{count} פריטי רשימת תוצאות',
+        countListResultsPlural: 'פריטי רשימת תוצאות {count}',
         countListResultsSingular: 'פריט רשימת תוצאות אחד'
     },
     platformFeedInput: {
@@ -402,7 +403,7 @@ export default {
         moreButton: 'עוד'
     },
     platformLink: {
-        roleDescriptionWithMedia: 'מדיה: {media}'
+        roleDescriptionWithMedia: 'תקשורת: {media}'
     },
     platformList: {
         loadingAriaLabel: 'טוען'
@@ -436,12 +437,12 @@ export default {
         allButtonLabel: 'הכול',
         cancelLabel: 'בטל',
         clearButtonTitle: 'נקה חיפוש',
-        counterLabel: 'סה"כ תוצאות: {count}',
+        counterLabel: 'תוצאות כוללות: {count}',
         deleteButtonAriaLabel: 'הסר',
         deleteButtonTitle: 'הסר הצעה',
         groupHeader: 'כותרת קבוצה',
         searchInputLabel: 'חפש',
-        searchSuggestionMessage: 'נמצאו {count} הצעות.',
+        searchSuggestionMessage: '{count} הצעות נמצאו.',
         searchSuggestionNavigateMessage: 'השתמש בחצים למעלה ולמטה כדי לנווט',
         selectScopeLabel: 'בחר טווח',
         selectStateMessageLabel: 'בחר',
@@ -547,7 +548,7 @@ export default {
         headerMenuUnfreeze: 'בטל הקפאת עמודה',
         headerMenuUnfreezePlural: 'בטל הקפאת עמודות',
         loadMore: 'הצג עוד',
-        navigationColumnTitle: 'Row Actions',
+        navigationColumnTitle: 'פעולות שורה',
         noVisibleColumnsMessage: 'כרגע, אין עמודות גלויות בטבלה. בחר את העמודות הנדרשות בהגדרות הטבלה.',
         P13ColumnsDialogCancelBtnLabel: 'בטל',
         P13ColumnsDialogConfirmationBtnLabel: 'OK',
@@ -566,10 +567,10 @@ export default {
         P13FilterDialogAddFilterBtnTitle: 'הוסף מסנן',
         P13FilterDialogCancelBtnLabel: 'בטל',
         P13FilterDialogConfirmationBtnLabel: 'OK',
-        P13FilterDialogExcludePanelTitleWithCount: 'אל תכלול ({count})',
+        P13FilterDialogExcludePanelTitleWithCount: 'לא כולל ({count})',
         P13FilterDialogExcludePanelTitleWithoutCount: 'אל תכלול',
         P13FilterDialogHeader: 'סנן לפי',
-        P13FilterDialogIncludePanelTitleWithCount: 'כלול ({count})',
+        P13FilterDialogIncludePanelTitleWithCount: 'כולל ({count})',
         P13FilterDialogIncludePanelTitleWithoutCount: 'כלול',
         P13FilterDialogRemoveFilterBtnTitle: 'הסר מסנן',
         P13FilterStrategyLabelAfter: 'לאחר',
@@ -609,7 +610,7 @@ export default {
         selectAllCheckboxMixedLongLabel: 'תיבת סימון, מעורבת, לחץ כדי לבחור הכול',
         selectSingleRow: 'על מנת לבחור שורה, הקש על מקש הרווח',
         settingsDialogHeader: 'הגדרות',
-        showingBlankOfBlank: 'מציג {totalGrowingItemsCount} של {totalGrowingItemsCount}',
+        showingBlankOfBlank: 'מציג {totalGrowingItemsCount} מתוך {totalGrowingItemsCount}',
         sortDialogCancelBtnLabel: 'בטל',
         sortDialogConfirmBtnLabel: 'OK',
         sortDialogHeader: 'מיין',
@@ -631,9 +632,9 @@ export default {
         toolbarSearchPlaceholder: 'חפש'
     },
     platformTextarea: {
-        counterMessageCharactersOverTheLimitPlural: '{count} תווים מעבר למגבלה',
+        counterMessageCharactersOverTheLimitPlural: '{count} תווים מעל למגבלה',
         counterMessageCharactersOverTheLimitSingular: 'תו אחד יותר מהמגבלה',
-        counterMessageCharactersRemainingPlural: 'נותרו {count} תווים',
+        counterMessageCharactersRemainingPlural: '{count} תווים נותרו',
         counterMessageCharactersRemainingSingular: 'נשאר תו אחד'
     },
     platformVariantManagement: {
@@ -680,7 +681,7 @@ export default {
         defineConditionConditionStrategyLabelNotEqualTo: 'לא שווה ל-',
         defineConditionConditionStrategyLabelStartsWith: 'מתחיל ב-',
         defineConditionFromPlaceholder: 'מ-',
-        defineConditionMaxCountError: 'הזן ערך {count} תווים לכל היותר.',
+        defineConditionMaxCountError: 'הזן ערך עם {count} תווים לכל היותר',
         defineConditionRemoveConditionButtonTitle: 'הסר תנאי',
         defineConditionSelectedValueHiddenA11yLabel: 'ערך שנבחר {value}',
         defineConditionTitle: 'מוצר',
@@ -702,7 +703,7 @@ export default {
         selectMobileConditionEmpty: 'ריק',
         selectMobileTabBackBtnTitle: 'חזור',
         selectMobileTabBtnOpenDialogLabel: 'פתח דיאלוג',
-        selectMobileTabTitle: '{title} כרטיסייה',
+        selectMobileTabTitle: 'לשונית {title}',
         selectTabCountHiddenA11yLabel: 'מכיל {rowCount} שורות ו-{colCount} עמודות',
         selectTabDisplayCountLabel: 'פריטים ({count})',
         selectTabMoreBtnLabel: 'עוד',

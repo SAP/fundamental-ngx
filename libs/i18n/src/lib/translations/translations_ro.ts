@@ -28,7 +28,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Istoric de navigare',
-        overflowTitleMore: 'Faceți clic sau apăsați pe Enter pentru a afișa mai multe detalii'
+        overflowTitleMore: 'Faceți clic sau apăsați pe Enter pentru a afișa mai multe detalii',
+        positionLabel: '{current} din {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Ocupat',
@@ -58,12 +59,12 @@ export default {
         yearsRangeSelectionLabel: 'Selectați intervalul de ani'
     },
     coreCard: {
-        ariaDescription: 'Active, Press Enter to activate',
-        roleDescription: '{cardType} Card'
+        ariaDescription: 'Activ, apăsați Enter pentru activare',
+        roleDescription: 'Cardul {cardType}'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'Salt la articol anterior',
-        pageIndicatorLabel: 'Se afișează articolul {itemNum} din {totalNum}',
+        pageIndicatorLabel: 'Este afișat articolul {itemNum} din {totalNum}',
         rightNavigationBtnLabel: 'Salt la articol următor'
     },
     coreCombobox: {
@@ -96,14 +97,14 @@ export default {
     },
     coreFeedListItem: {
         lessLabel: 'Mai puțin',
-        moreLabel: 'Încă {count}'
+        moreLabel: 'și încă {count}'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'Anulare',
         listItemButtonDeleteTitle: 'Ștergere',
         listItemButtonDetailsTitle: 'Detalii',
         listItemCounterAriaLabel: 'Articolul are {count} elemente subordonate.',
-        listItemStatusAriaLabel: 'Articolul are stare. Stare: {status}.',
+        listItemStatusAriaLabel: 'Articolul are situație. Situația: {status}.',
         listItemStatusContainsErrors: 'Conține erori',
         listItemStatusDraft: 'Schiță',
         listItemStatusLocked: 'Blocat'
@@ -131,7 +132,7 @@ export default {
         selectAllLabel: 'Selectare toate ({selectedItems} din {totalItems})'
     },
     coreMultiInput: {
-        countListResultsPlural: '{0} articole în lista de rezultate.',
+        countListResultsPlural: '{count} articole din lista de rezultate.',
         countListResultsSingular: '1 articol în lista de rezultate.',
         escapeNavigateTokens:
             'Apăsați tasta ESC pentru a ieși din câmpul de intrare și utilizați tastele săgeți la stânga și la dreapta pentru a naviga printre opțiunile selectate.',
@@ -139,7 +140,7 @@ export default {
         navigateSelectionsWithArrows: 'Navigați printre selecții cu săgețile în sus și în jos.',
         noResults: 'Niciun rezultat.',
         showAll: 'Afișare toate ({count})',
-        tokensCountText: 'Conține tokenuri totale: {length}.'
+        tokensCountText: 'Conține tokenuri în total: {length}.'
     },
     coreNavigation: {
         mainNavigation: 'Meniul principal',
@@ -180,7 +181,7 @@ export default {
         positive: 'Intrare validată cu succes'
     },
     coreOverflowLayout: {
-        moreItemsButton: 'Încă {count}'
+        moreItemsButton: 'și încă {count}'
     },
     corePagination: {
         ariaLabel: 'Paginație',
@@ -217,18 +218,20 @@ export default {
         search: 'Căutare'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: 'Valoare minimă cursor de reglare este {min}, valoare maximă este {max}',
+        multipleHandle1MinMaxDetails:
+            'Valoarea minimă a cursorului de intervale este {min}, valoarea maximă este {max}',
         multipleHandle1ValuemaxDetails: 'Valoarea este {value}',
         multipleHandle1ValueminDetails: 'Valoarea este {value}',
-        multipleHandle1ValueNowDetails: 'Valoare curentă este {value}',
-        multipleHandle2MinMaxDetails: 'Valoare minimă cursor de reglare este {min}, valoare maximă este {max}',
+        multipleHandle1ValueNowDetails: 'Valoarea actuală este {value}',
+        multipleHandle2MinMaxDetails:
+            'Valoarea minimă a cursorului de intervale este {min}, valoarea maximă este {max}',
         multipleHandle2ValuemaxDetails: 'Valoarea este {value}',
         multipleHandle2ValueminDetails: 'Valoarea este {value}',
-        multipleHandle2ValueNowDetails: 'Valoarea curentă este {value}',
-        singleMinMaxDetails: 'Valoare minimă cursor de reglare este {min}, valoare maximă este {max}',
+        multipleHandle2ValueNowDetails: 'Valoarea actuală este {value}',
+        singleMinMaxDetails: 'Valoarea minimă a cursorului este {min}, valoarea maximă este {max}',
         singleValuemaxDetails: 'Valoarea este {value}',
         singleValueminDetails: 'Valoarea este {value}',
-        singleValueNowDetails: 'Valoare curentă este {value}'
+        singleValueNowDetails: 'Valoarea actuală este {value}'
     },
     coreSplitButton: {
         arialLabel: 'Buton de divizare',
@@ -291,7 +294,7 @@ export default {
         deleteButtonLabel: 'Poate fi șters'
     },
     coreTokenizer: {
-        moreLabel: 'Încă {count}',
+        moreLabel: 'și încă {count}',
         tokenizerLabel: 'Generator de tokenuri'
     },
     coreToolbar: {
@@ -362,11 +365,11 @@ export default {
         nodeActionAddApproversParallel: 'Adăugare aprobatori în paralel',
         nodeActionEditApprover: 'Modificare aprobator',
         nodeActionRemove: 'Eliminare',
-        nodeMembersCount: '{count} membri',
+        nodeMembersCount: 'Membri {count}',
         nodeMenuButtonTitle: 'Meniu',
-        nodeStatusDueInXDays: 'Scadent în {count} zile',
+        nodeStatusDueInXDays: 'Scadentă în {count} de zile',
         nodeStatusDueToday: 'Scadent astăzi',
-        nodeStatusXDaysOverdue: '{count} zile întârziere',
+        nodeStatusXDaysOverdue: '{count} zile de întârziere',
         nodeVariousTeams: 'Diverse echipe',
         prevButtonAriaLabel: 'Salt la diapozitivul anterior',
         selectTypeDialogCancelButton: 'Anulare',
@@ -389,12 +392,12 @@ export default {
         userDetailsCancelBtnLabel: 'Anulare',
         userDetailsHeader: 'Detaliu',
         userDetailsSendReminderBtnLabel: 'Trimitere memento',
-        userListSelectedItemsCountPlural: '{count} articole selectate',
+        userListSelectedItemsCountPlural: '{count} (de) articole selectate',
         userListSelectedItemsCountSingular: '1 articol selectat',
         watchersInputPlaceholder: 'Căutați aici...'
     },
     platformCombobox: {
-        countListResultsPlural: '{count} articole în lista de rezultate',
+        countListResultsPlural: '{count} articole din lista de rezultate',
         countListResultsSingular: '1 articol în lista de rezultate'
     },
     platformFeedInput: {
@@ -550,7 +553,7 @@ export default {
         headerMenuUnfreeze: 'Anulare înghețare coloană',
         headerMenuUnfreezePlural: 'Anulare înghețare coloane',
         loadMore: 'Afișare mai mult',
-        navigationColumnTitle: 'Row Actions',
+        navigationColumnTitle: 'Acțiuni rând',
         noVisibleColumnsMessage:
             'În acest moment, nu există coloane vizibile în tabel. Selectați coloanele de care aveți nevoie în setările tabelului.',
         P13ColumnsDialogCancelBtnLabel: 'Anulare',
@@ -613,7 +616,7 @@ export default {
         selectAllCheckboxMixedLongLabel: 'Casetă de selectare, mixtă, efectuați click pentru a selecta tot',
         selectSingleRow: 'Pentru a selecta linia, apăsați pe BARA DE SPAȚIU',
         settingsDialogHeader: 'Setări',
-        showingBlankOfBlank: 'Afișare {totalGrowingItemsCount} din {totalGrowingItemsCount}',
+        showingBlankOfBlank: 'Se afișează {totalGrowingItemsCount} din {totalGrowingItemsCount}',
         sortDialogCancelBtnLabel: 'Anulare',
         sortDialogConfirmBtnLabel: 'OK',
         sortDialogHeader: 'Sortare',

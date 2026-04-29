@@ -27,7 +27,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Tillämpade datafiltreringssteg',
-        overflowTitleMore: 'Klicka eller tryck på Retur för att se fler detaljer'
+        overflowTitleMore: 'Klicka eller tryck på Retur för att se fler detaljer',
+        positionLabel: '{current} av {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Upptagen',
@@ -57,8 +58,8 @@ export default {
         yearsRangeSelectionLabel: 'Välj årsintervall'
     },
     coreCard: {
-        ariaDescription: 'Active, Press Enter to activate',
-        roleDescription: '{cardType} Card'
+        ariaDescription: 'Aktiv, tryck på RETUR för att aktivera',
+        roleDescription: 'Kort för {cardType}'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'Gå till föregående artikel',
@@ -95,7 +96,7 @@ export default {
     },
     coreFeedListItem: {
         lessLabel: 'Mindre',
-        moreLabel: '{count} mer'
+        moreLabel: '{count} fler'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'Avbryt',
@@ -145,7 +146,7 @@ export default {
         navigationPath: 'Navigation Path'
     },
     coreNestedList: {
-        linkItemAriaLabel: 'Trädelement {itemDetails}, {selectedDescription}'
+        linkItemAriaLabel: 'Trädobjekt {itemDetails}, {selectedDescription}'
     },
     coreNotification: {
         groupAriaDescription: 'Aviseringsgrupp',
@@ -183,9 +184,9 @@ export default {
     },
     corePagination: {
         ariaLabel: 'Sidnumrering',
-        currentPageAriaLabel: 'Sida {pageNumber} är aktuell sida',
+        currentPageAriaLabel: 'Sida {pageNumber} är den nuvarande sidan',
         firstLabel: 'Första',
-        inputAriaLabel: 'Angiven sida, aktuell sida, sida {pageNumber} av {totalCount}',
+        inputAriaLabel: 'Angiven sida, nuvarande sida, sida {pageNumber} av {totalCount}',
         itemsPerPageLabel: 'Resultat per sida:',
         labelAfterInputMobile: 'av {totalCount}',
         labelBeforeInputMobile: 'Sida:',
@@ -387,12 +388,12 @@ export default {
         userDetailsCancelBtnLabel: 'Avbryt',
         userDetailsHeader: 'Detalj',
         userDetailsSendReminderBtnLabel: 'Skicka påminnelse',
-        userListSelectedItemsCountPlural: '{count} artiklar har valts',
+        userListSelectedItemsCountPlural: '{count} valda objekt',
         userListSelectedItemsCountSingular: '1 artikel har valts',
         watchersInputPlaceholder: 'Sök här...'
     },
     platformCombobox: {
-        countListResultsPlural: '{count} resultatlistobjekt',
+        countListResultsPlural: '{count} listobjekt',
         countListResultsSingular: '1 resultatlistobjekt'
     },
     platformFeedInput: {
@@ -437,7 +438,7 @@ export default {
         allButtonLabel: 'Alla',
         cancelLabel: 'Avbryt',
         clearButtonTitle: 'Rensa sökning',
-        counterLabel: 'Totalt antal resultat: {count}',
+        counterLabel: 'Alla resultat: {count}',
         deleteButtonAriaLabel: 'Ta bort',
         deleteButtonTitle: 'Ta bort förslag',
         groupHeader: 'Grupphuvud',
@@ -548,7 +549,7 @@ export default {
         headerMenuUnfreeze: 'Häv frysning av kolumn',
         headerMenuUnfreezePlural: 'Häv frysning av kolumner',
         loadMore: 'Visa mer',
-        navigationColumnTitle: 'Row Actions',
+        navigationColumnTitle: 'Radåtgärder',
         noVisibleColumnsMessage:
             'Just nu finns inga synliga kolumner i tabellen. Välj de kolumner du behöver i tabellinställningarna.',
         P13ColumnsDialogCancelBtnLabel: 'Avbryt',
@@ -611,7 +612,7 @@ export default {
         selectAllCheckboxMixedLongLabel: 'Kryssruta, blandad, klicka för att markera alla',
         selectSingleRow: 'Tryck på BLANKSTEG för att välja rad',
         settingsDialogHeader: 'Inställningar',
-        showingBlankOfBlank: '{totalGrowingItemsCount} av {totalGrowingItemsCount} visas',
+        showingBlankOfBlank: 'Visar {totalGrowingItemsCount} av {totalGrowingItemsCount}',
         sortDialogCancelBtnLabel: 'Avbryt',
         sortDialogConfirmBtnLabel: 'OK',
         sortDialogHeader: 'Sortera',
@@ -635,7 +636,7 @@ export default {
     platformTextarea: {
         counterMessageCharactersOverTheLimitPlural: '{count} tecken över gränsen',
         counterMessageCharactersOverTheLimitSingular: '1 tecken över gränsen',
-        counterMessageCharactersRemainingPlural: '{count} tecken kvar',
+        counterMessageCharactersRemainingPlural: '{count} återstående tecken',
         counterMessageCharactersRemainingSingular: '1 tecken kvar'
     },
     platformVariantManagement: {
@@ -704,9 +705,9 @@ export default {
         selectMobileConditionEmpty: 'Tom',
         selectMobileTabBackBtnTitle: 'Tillbaka',
         selectMobileTabBtnOpenDialogLabel: 'Öppna dialog',
-        selectMobileTabTitle: 'Fliken {title}',
+        selectMobileTabTitle: 'Flik {title}',
         selectTabCountHiddenA11yLabel: 'innehåller {rowCount} rader och {colCount} kolumner',
-        selectTabDisplayCountLabel: 'Artiklar ({antal})',
+        selectTabDisplayCountLabel: 'Artiklar ({count})',
         selectTabMoreBtnLabel: 'Mer',
         selectTabTitle: 'Välj i lista',
         successButtonLabel: 'OK'

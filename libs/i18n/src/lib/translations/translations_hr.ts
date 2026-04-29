@@ -28,7 +28,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Put hijerarhijske navigacije',
-        overflowTitleMore: 'Kliknite ili pristinite Enter kako biste prikazali više pojedinosti'
+        overflowTitleMore: 'Kliknite ili pristinite Enter kako biste prikazali više pojedinosti',
+        positionLabel: '{current} od {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Zauzeto',
@@ -58,8 +59,8 @@ export default {
         yearsRangeSelectionLabel: 'Odaberi raspon godina'
     },
     coreCard: {
-        ariaDescription: 'Active, Press Enter to activate',
-        roleDescription: '{cardType} Card'
+        ariaDescription: 'Aktivno, pritisnite Enter za aktivaciju',
+        roleDescription: 'Kartica {cardType}'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'Idi na prethodnu stavku',
@@ -96,13 +97,13 @@ export default {
     },
     coreFeedListItem: {
         lessLabel: 'manje',
-        moreLabel: '{count} više'
+        moreLabel: 'još {count}'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'Otkaži',
         listItemButtonDeleteTitle: 'Izbriši',
         listItemButtonDetailsTitle: 'Pojedinosti',
-        listItemCounterAriaLabel: 'Stavka ima {count} podređenih stavki.',
+        listItemCounterAriaLabel: 'Stavka ima ovoliko podređenih elemenata: {count}.',
         listItemStatusAriaLabel: 'Stavka ima status. Status: {status}.',
         listItemStatusContainsErrors: 'Sadržava pogreške',
         listItemStatusDraft: 'Nacrt',
@@ -138,8 +139,8 @@ export default {
         multiInputAriaLabel: 'Unos s više vrijednosti',
         navigateSelectionsWithArrows: 'Odabirima navigirajte strelicama Gore i Dolje.',
         noResults: 'Nema rezultata.',
-        showAll: 'Prikaži sve ({count})',
-        tokensCountText: 'Sadržava ukupno tokena: {length}.'
+        showAll: 'Pokaži sve ({count})',
+        tokensCountText: 'Sadržava ukupno ovoliko tokena: {length}'
     },
     coreNavigation: {
         mainNavigation: 'Glavna navigacija',
@@ -180,7 +181,7 @@ export default {
         positive: 'Unos uspješno validiran'
     },
     coreOverflowLayout: {
-        moreItemsButton: '{count} više'
+        moreItemsButton: 'još {count}'
     },
     corePagination: {
         ariaLabel: 'Paginacija',
@@ -291,7 +292,7 @@ export default {
         deleteButtonLabel: 'Izbrisivo'
     },
     coreTokenizer: {
-        moreLabel: '{count} više',
+        moreLabel: 'još {count}',
         tokenizerLabel: 'Tokenizator'
     },
     coreToolbar: {
@@ -361,11 +362,11 @@ export default {
         nodeActionAddApproversParallel: 'Dodaj paralelne odobravatelje',
         nodeActionEditApprover: 'Uredi odobravatelja',
         nodeActionRemove: 'Ukloni',
-        nodeMembersCount: 'Broj članova: {count}',
+        nodeMembersCount: 'Članovi: {count}',
         nodeMenuButtonTitle: 'Izbornik',
-        nodeStatusDueInXDays: 'Rok je za {count} dana',
+        nodeStatusDueInXDays: 'Rok za {count} dana',
         nodeStatusDueToday: 'Rok je danas',
-        nodeStatusXDaysOverdue: 'Rok je prekoračen za {count} dana',
+        nodeStatusXDaysOverdue: '{count} dana prekoračenje',
         nodeVariousTeams: 'Razni timovi',
         prevButtonAriaLabel: 'Idi na prethodni slajd',
         selectTypeDialogCancelButton: 'Otkaži',
@@ -388,7 +389,7 @@ export default {
         userDetailsCancelBtnLabel: 'Otkaži',
         userDetailsHeader: 'Pojedinost',
         userDetailsSendReminderBtnLabel: 'Pošalji podsjetnik',
-        userListSelectedItemsCountPlural: 'Broj odabranih stavki: {count}',
+        userListSelectedItemsCountPlural: 'Broj odabranih stavki {count}',
         userListSelectedItemsCountSingular: 'Odabrana je 1 stavka',
         watchersInputPlaceholder: 'Pretraži ovdje..'
     },
@@ -443,7 +444,7 @@ export default {
         deleteButtonTitle: 'Ukloni prijedlog',
         groupHeader: 'Zaglavlje grupe',
         searchInputLabel: 'Pretraži',
-        searchSuggestionMessage: 'Pronađeno je {count} prijedloga.',
+        searchSuggestionMessage: 'Pronađeno je ovoliko prijedloga: {count}.',
         searchSuggestionNavigateMessage: 'za navigiranje upotrijebite strelice Gore i Dolje',
         selectScopeLabel: 'Odaberi opseg',
         selectStateMessageLabel: 'Odaberi',
@@ -480,7 +481,7 @@ export default {
         filterConditionValueFromPlaceholder: 'od',
         filterConditionValuePlaceholder: 'vrijednost',
         filterConditionValueToPlaceholder: 'do',
-        filtersButtonLabel: 'Broj filtra: ({filtersCount})',
+        filtersButtonLabel: 'Filtri ({filtersCount})',
         hideFiltersButtonLabel: 'Sakrij filtre',
         manageFieldConditions: 'Upravljanje uvjetima polja',
         refreshButtonAriaLabel: 'Osvježavanje',
@@ -549,7 +550,7 @@ export default {
         headerMenuUnfreeze: 'Odmrzni stupac',
         headerMenuUnfreezePlural: 'Odmrzni stupce',
         loadMore: 'Pokaži više',
-        navigationColumnTitle: 'Row Actions',
+        navigationColumnTitle: 'Radnje reda',
         noVisibleColumnsMessage:
             'Trenutačno nema vidljivih stupaca u tablici. Odaberite stupce koje trebate u postavkama tablice.',
         P13ColumnsDialogCancelBtnLabel: 'Otkaži',
@@ -560,7 +561,7 @@ export default {
         P13ColumnsDialogMoveToTopBtn: 'Premjesti na vrh',
         P13ColumnsDialogMoveUpBtn: 'Premjesti gore',
         P13ColumnsDialogSearchPlaceholder: 'Pretraži',
-        P13ColumnsDialogSelectAll: 'Odaberi sve ({selectedColumnsCount}/{selectableColumnsCount})',
+        P13ColumnsDialogSelectAll: 'Odaberi sve: ({selectedColumnsCount}/{selectableColumnsCount})',
         P13ColumnsDialogShowAll: 'Pokaži sve',
         P13ColumnsDialogsShowSelected: 'Pokaži odabrano',
         P13FilterBooleanOptionFalse: 'Ne',
@@ -634,9 +635,9 @@ export default {
         toolbarSearchPlaceholder: 'Pretraži'
     },
     platformTextarea: {
-        counterMessageCharactersOverTheLimitPlural: 'Broj znakova više od ograničenja: {count}',
+        counterMessageCharactersOverTheLimitPlural: 'Broj znakova preko ograničenja: {count}',
         counterMessageCharactersOverTheLimitSingular: 'Broj znakova više od ograničenja: 1',
-        counterMessageCharactersRemainingPlural: 'Preostaje {count} znakova',
+        counterMessageCharactersRemainingPlural: 'Preostalo znakova: {count}',
         counterMessageCharactersRemainingSingular: 'Preostaje 1 znak'
     },
     platformVariantManagement: {
@@ -683,7 +684,7 @@ export default {
         defineConditionConditionStrategyLabelNotEqualTo: 'nije jednako',
         defineConditionConditionStrategyLabelStartsWith: 'počinje s',
         defineConditionFromPlaceholder: 'od',
-        defineConditionMaxCountError: 'Unesite vrijednost s najviše {count} znakova',
+        defineConditionMaxCountError: 'Unesite vrijednost s najviše ovoliko znakova: {count}',
         defineConditionRemoveConditionButtonTitle: 'Ukloni uvjet',
         defineConditionSelectedValueHiddenA11yLabel: 'odabrana vrijednost {value}',
         defineConditionTitle: 'Proizvod',
@@ -706,8 +707,8 @@ export default {
         selectMobileTabBackBtnTitle: 'Natrag',
         selectMobileTabBtnOpenDialogLabel: 'Otvori dijalog',
         selectMobileTabTitle: 'Kartica {title}',
-        selectTabCountHiddenA11yLabel: 'sadržava {rowCount} redaka i {colCount} stupaca',
-        selectTabDisplayCountLabel: 'Broj stavki: ({count})',
+        selectTabCountHiddenA11yLabel: 'sadržava {rowCount} redova i {colCount} stupaca',
+        selectTabDisplayCountLabel: 'Stavke ({count})',
         selectTabMoreBtnLabel: 'Više',
         selectTabTitle: 'Odabir s popisa',
         successButtonLabel: 'OK'

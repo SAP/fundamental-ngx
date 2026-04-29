@@ -138,6 +138,11 @@
                         "output": "./assets/ui5-webcomponents-base"
                     },
                     {
+                        "input": "./libs/mcp-server",
+                        "glob": "README.md",
+                        "output": "./assets/mcp-server"
+                    },
+                    {
                         "input": "./libs/docs/typedoc",
                         "glob": "**/*",
                         "output": "./assets/typedoc"

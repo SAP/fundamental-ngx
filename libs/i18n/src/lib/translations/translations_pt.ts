@@ -27,7 +27,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Trilha de breadcrumb',
-        overflowTitleMore: 'Clique ou pressione Enter para exibir mais detalhes'
+        overflowTitleMore: 'Clique ou pressione Enter para exibir mais detalhes',
+        positionLabel: '{current} de {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Ocupado',
@@ -57,8 +58,8 @@ export default {
         yearsRangeSelectionLabel: 'Selecionar intervalo de anos'
     },
     coreCard: {
-        ariaDescription: 'Active, Press Enter to activate',
-        roleDescription: '{cardType} Card'
+        ariaDescription: 'Ativo, pressione Enter para ativar',
+        roleDescription: 'Cartão {cardType}'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'Ir para o item anterior',
@@ -95,7 +96,7 @@ export default {
     },
     coreFeedListItem: {
         lessLabel: 'Menos',
-        moreLabel: 'Mais {count}'
+        moreLabel: 'Mais de {count}'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'Cancelar',
@@ -127,7 +128,7 @@ export default {
     coreMultiComboBox: {
         listGroupHeader: 'Cabeçalho do grupo',
         multiComboBoxAriaLabel: 'Combobox de valores múltiplos',
-        selectAllLabel: 'Selecionar todos os ({selectedItems} de {totalItems})'
+        selectAllLabel: 'Selecionar tudo ({selectedItems} de {totalItems})'
     },
     coreMultiInput: {
         countListResultsPlural: '{count} itens da lista de resultados.',
@@ -145,7 +146,7 @@ export default {
         navigationPath: 'Navigation Path'
     },
     coreNestedList: {
-        linkItemAriaLabel: 'Item da árvore {itemDetails}, {selectedDescription}'
+        linkItemAriaLabel: 'Item de árvore {itemDetails}, {selectedDescription}'
     },
     coreNotification: {
         groupAriaDescription: 'Grupo de notificações',
@@ -179,7 +180,7 @@ export default {
         positive: 'Entrada validada com êxito'
     },
     coreOverflowLayout: {
-        moreItemsButton: 'Mais {count}'
+        moreItemsButton: 'Mais de {count}'
     },
     corePagination: {
         ariaLabel: 'Paginação',
@@ -216,15 +217,17 @@ export default {
         search: 'Pesquisar'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: 'O valor mínimo do cursor de intervalo é {min}, o valor máximo é {max}',
+        multipleHandle1MinMaxDetails:
+            'O valor mínimo do controle deslizante de intervalo é {min}, o valor máximo é {max}',
         multipleHandle1ValuemaxDetails: 'O valor é {value}',
         multipleHandle1ValueminDetails: 'O valor é {value}',
         multipleHandle1ValueNowDetails: 'O valor atual é {value}',
-        multipleHandle2MinMaxDetails: 'O valor mínimo do cursor de intervalo é {min}, o valor máximo é {max}',
+        multipleHandle2MinMaxDetails:
+            'O valor mínimo do controle deslizante de intervalo é {min}, o valor máximo é {max}',
         multipleHandle2ValuemaxDetails: 'O valor é {value}',
         multipleHandle2ValueminDetails: 'O valor é {value}',
         multipleHandle2ValueNowDetails: 'O valor atual é {value}',
-        singleMinMaxDetails: 'O valor mínimo do controle deslizante é {min}, o valor máximo é {max}',
+        singleMinMaxDetails: 'O valor mínimo do controle deslizante de intervalo é {min}, o valor máximo é {max}',
         singleValuemaxDetails: 'O valor é {value}',
         singleValueminDetails: 'O valor é {value}',
         singleValueNowDetails: 'O valor atual é {value}'
@@ -290,7 +293,7 @@ export default {
         deleteButtonLabel: 'Excluível'
     },
     coreTokenizer: {
-        moreLabel: 'Mais {count}',
+        moreLabel: 'Mais de {count}',
         tokenizerLabel: 'Tokenizador'
     },
     coreToolbar: {
@@ -548,7 +551,7 @@ export default {
         headerMenuUnfreeze: 'Descongelar coluna',
         headerMenuUnfreezePlural: 'Descongelar colunas',
         loadMore: 'Mostrar mais',
-        navigationColumnTitle: 'Row Actions',
+        navigationColumnTitle: 'Ações de linha',
         noVisibleColumnsMessage:
             'Neste momento, não existem colunas visíveis na tabela. Selecione as colunas de que você necessita nas configurações de tabela.',
         P13ColumnsDialogCancelBtnLabel: 'Cancelar',
@@ -682,7 +685,7 @@ export default {
         defineConditionConditionStrategyLabelNotEqualTo: 'não igual a',
         defineConditionConditionStrategyLabelStartsWith: 'começa com',
         defineConditionFromPlaceholder: 'de',
-        defineConditionMaxCountError: 'Inserir um valor com um máximo de {count} caracteres',
+        defineConditionMaxCountError: 'Insira um valor com um máximo de {count} caracteres',
         defineConditionRemoveConditionButtonTitle: 'Remover condição',
         defineConditionSelectedValueHiddenA11yLabel: 'valor selecionado {value}',
         defineConditionTitle: 'Produto',

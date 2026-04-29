@@ -28,7 +28,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Percorso di navigazione',
-        overflowTitleMore: 'Fare clic o premere Invio per visualizzare più dettagli'
+        overflowTitleMore: 'Fare clic o premere Invio per visualizzare più dettagli',
+        positionLabel: '{current} di {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Occupato',
@@ -58,12 +59,12 @@ export default {
         yearsRangeSelectionLabel: 'Seleziona intervallo anni'
     },
     coreCard: {
-        ariaDescription: 'Active, Press Enter to activate',
-        roleDescription: '{cardType} Card'
+        ariaDescription: 'Attiva, premi Invio per attivare',
+        roleDescription: 'Scheda {cardType}'
     },
     coreCarousel: {
         leftNavigationBtnLabel: "Vai all'elemento precedente",
-        pageIndicatorLabel: 'Elemento {itemNum} di {totalNum} visualizzato',
+        pageIndicatorLabel: "Viene visualizzato l'elemento {itemNum} di {totalNum}",
         rightNavigationBtnLabel: "Vai all'elemento successivo"
     },
     coreCombobox: {
@@ -96,14 +97,14 @@ export default {
     },
     coreFeedListItem: {
         lessLabel: 'Meno',
-        moreLabel: 'Altri {count}'
+        moreLabel: 'Altre {count}'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'Annulla',
         listItemButtonDeleteTitle: 'Elimina',
         listItemButtonDetailsTitle: 'Dettagli',
         listItemCounterAriaLabel: "L'elemento ha {count} subordinati.",
-        listItemStatusAriaLabel: "L'elemento ha stato {status}",
+        listItemStatusAriaLabel: "L'elemento ha stato {status}.",
         listItemStatusContainsErrors: 'Contiene errori',
         listItemStatusDraft: 'Bozza',
         listItemStatusLocked: 'Bloccato'
@@ -128,11 +129,11 @@ export default {
     coreMultiComboBox: {
         listGroupHeader: 'Intestazione gruppo',
         multiComboBoxAriaLabel: 'Casella combinata multivalore',
-        selectAllLabel: 'Seleziona tutti ({selectedItems} di {totalItems})'
+        selectAllLabel: 'Seleziona tutto ({selectedItems} di {totalItems})'
     },
     coreMultiInput: {
-        countListResultsPlural: '{0} voci elenco dei risultati',
-        countListResultsSingular: '1 voce elenco dei risultati.',
+        countListResultsPlural: "{count} elementi nell'elenco dei risultati.",
+        countListResultsSingular: "1 elemento nell'elenco dei risultati.",
         escapeNavigateTokens:
             'Premere Esc per chiudere il campo di immissione e utilizzare le frecce destra e sinistra per navigare tra le opzioni selezionate.',
         multiInputAriaLabel: 'Immissione multivalore',
@@ -180,13 +181,13 @@ export default {
         positive: "Convalida dell'immissione completata"
     },
     coreOverflowLayout: {
-        moreItemsButton: 'Altri {count}'
+        moreItemsButton: 'Altre {count}'
     },
     corePagination: {
         ariaLabel: 'Impaginazione',
-        currentPageAriaLabel: 'La pagina {pageNumber} è la pagina attuale',
+        currentPageAriaLabel: 'La pagina {pageNumber} è la pagina corrente',
         firstLabel: 'Prima',
-        inputAriaLabel: 'Input pagina, pagina attuale, pagina {pageNumber} di {totalCount}',
+        inputAriaLabel: 'Input pagina, pagina corrente, pagina {pageNumber} di {totalCount}',
         itemsPerPageLabel: 'Risultati per pagina',
         labelAfterInputMobile: 'di {totalCount}',
         labelBeforeInputMobile: 'Pagina:',
@@ -220,15 +221,15 @@ export default {
         multipleHandle1MinMaxDetails: "Il valore minimo del cursore dell'intervallo è {min}, quello massimo è {max}",
         multipleHandle1ValuemaxDetails: 'Il valore è {value}',
         multipleHandle1ValueminDetails: 'Il valore è {value}',
-        multipleHandle1ValueNowDetails: 'Il valore attuale è {value}',
+        multipleHandle1ValueNowDetails: 'Il valore corrente è {value}',
         multipleHandle2MinMaxDetails: "Il valore minimo del cursore dell'intervallo è {min}, quello massimo è {max}",
         multipleHandle2ValuemaxDetails: 'Il valore è {value}',
         multipleHandle2ValueminDetails: 'Il valore è {value}',
-        multipleHandle2ValueNowDetails: 'Il valore attuale è {value}',
+        multipleHandle2ValueNowDetails: 'Il valore corrente è {value}',
         singleMinMaxDetails: 'Il valore minimo del cursore è {min}, quello massimo è {max}',
         singleValuemaxDetails: 'Il valore è {value}',
         singleValueminDetails: 'Il valore è {value}',
-        singleValueNowDetails: 'Il valore attuale è {value}'
+        singleValueNowDetails: 'Il valore corrente è {value}'
     },
     coreSplitButton: {
         arialLabel: 'Pulsante Suddividi',
@@ -291,7 +292,7 @@ export default {
         deleteButtonLabel: 'Eliminabile'
     },
     coreTokenizer: {
-        moreLabel: 'Altri {count}',
+        moreLabel: 'Altre {count}',
         tokenizerLabel: 'Tokenizer'
     },
     coreToolbar: {
@@ -389,13 +390,13 @@ export default {
         userDetailsCancelBtnLabel: 'Annulla',
         userDetailsHeader: 'Dettagli',
         userDetailsSendReminderBtnLabel: 'Invia promemoria',
-        userListSelectedItemsCountPlural: '{count} voci selezionate',
-        userListSelectedItemsCountSingular: '1 voce selezionata',
+        userListSelectedItemsCountPlural: '{count} elementi selezionati',
+        userListSelectedItemsCountSingular: '1 elemento selezionato',
         watchersInputPlaceholder: 'Cerca qui...'
     },
     platformCombobox: {
-        countListResultsPlural: '{count} voci elenco dei risultati',
-        countListResultsSingular: '1 voce elenco dei risultati'
+        countListResultsPlural: "{count} elementi nell'elenco dei risultati",
+        countListResultsSingular: "1 elemento nell'elenco dei risultati"
     },
     platformFeedInput: {
         sendButton: 'Invia',
@@ -428,8 +429,8 @@ export default {
         inputGlyphAriaLabel: 'Seleziona opzioni',
         inputIconTitle: 'Seleziona opzioni',
         invalidEntryError: 'Immissione non valida',
-        mobileShowAllItemsButton: 'Mostra tutte le voci',
-        mobileShowSelectedItemsButton: 'Mostra le voci selezionate'
+        mobileShowAllItemsButton: 'Mostra tutti gli elementi',
+        mobileShowSelectedItemsButton: 'Mostra gli elementi selezionati'
     },
     platformObjectListItem: {
         deleteActionAriaLabel: 'elimina',
@@ -550,7 +551,7 @@ export default {
         headerMenuUnfreeze: 'Sblocca colonna',
         headerMenuUnfreezePlural: 'Sblocca colonne',
         loadMore: 'Espandi',
-        navigationColumnTitle: 'Row Actions',
+        navigationColumnTitle: 'Azioni riga',
         noVisibleColumnsMessage:
             'Al momento non esistono colonne visibili nella tabella. Selezionare le colonne necessarie nelle impostazioni tabella.',
         P13ColumnsDialogCancelBtnLabel: 'Annulla',
@@ -613,7 +614,7 @@ export default {
         selectAllCheckboxMixedLongLabel: 'Casella di controllo, mista, fare clic per selezionare tutto',
         selectSingleRow: 'Per selezionare la riga, premere la BARRA SPAZIATRICE',
         settingsDialogHeader: 'Impostazioni',
-        showingBlankOfBlank: 'Voci visualizzate: {totalGrowingItemsCount} di {totalGrowingItemsCount}',
+        showingBlankOfBlank: 'Elementi visualizzati: {totalGrowingItemsCount} di {totalGrowingItemsCount}',
         sortDialogCancelBtnLabel: 'Annulla',
         sortDialogConfirmBtnLabel: 'OK',
         sortDialogHeader: 'Ordina',
@@ -684,15 +685,15 @@ export default {
         defineConditionConditionStrategyLabelNotEqualTo: 'diverso da',
         defineConditionConditionStrategyLabelStartsWith: 'inizia con',
         defineConditionFromPlaceholder: 'da',
-        defineConditionMaxCountError: 'Immettere un valore con massimo {count} caratteri.',
+        defineConditionMaxCountError: 'Immettere un valore di massimo {count} caratteri',
         defineConditionRemoveConditionButtonTitle: 'Rimuovi condizione',
         defineConditionSelectedValueHiddenA11yLabel: 'valore selezionato {value}',
         defineConditionTitle: 'Prodotto',
         defineConditionToPlaceholder: 'a',
         defineConditionValuePlaceholder: 'valore',
         defineTabTitle: 'Definisci condizioni',
-        footerClearSelectedAriaLabel: 'cancella voci selezionate',
-        footerClearSelectedTitle: 'cancella voci selezionate',
+        footerClearSelectedAriaLabel: 'cancella elementi selezionati',
+        footerClearSelectedTitle: 'cancella elementi selezionati',
         searchAdvancedSearchLabel: 'Filtri',
         searchButtonLabel: 'Vai',
         searchHideAdvancedSearchLabel: 'Nascondi filtri',
@@ -701,14 +702,14 @@ export default {
         searchShowAdvancedSearchLabel: 'Mostra filtri',
         searchShowAllAdvancedSearchLabel: 'Mostra tutti i filtri',
         searchTableEmptyMessage: 'Utilizza la ricerca per ottenere dei risultati',
-        selectedAndConditionLabel: 'Voci e condizioni selezionate',
-        selectedEmptyLabel: 'Nessuna voce o condizione selezionata',
+        selectedAndConditionLabel: 'Elementi e condizioni selezionati',
+        selectedEmptyLabel: 'Nessun elemento o condizione selezionato',
         selectMobileConditionEmpty: 'Vuoto',
         selectMobileTabBackBtnTitle: 'Indietro',
         selectMobileTabBtnOpenDialogLabel: 'Apri finestra di dialogo',
         selectMobileTabTitle: 'Scheda {title}',
         selectTabCountHiddenA11yLabel: 'contiene {rowCount} righe e {colCount} colonne',
-        selectTabDisplayCountLabel: 'Voci ({count})',
+        selectTabDisplayCountLabel: 'Elementi ({count})',
         selectTabMoreBtnLabel: 'Mostra di più',
         selectTabTitle: "Seleziona dall'elenco",
         successButtonLabel: 'OK'

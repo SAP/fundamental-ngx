@@ -95,6 +95,20 @@ export const ROUTES: Routes = [
                     })
             },
             {
+                path: 'mcp',
+                loadChildren: () =>
+                    import('@fundamental-ngx/docs/mcp-server').then((m) => {
+                        const route = m.default[0];
+                        return [
+                            {
+                                path: '',
+                                providers: route.providers || [],
+                                children: route.children
+                            }
+                        ];
+                    })
+            },
+            {
                 path: 'ui5-webcomponents',
                 loadChildren: () =>
                     import('@fundamental-ngx/docs/ui5-webcomponents').then((m) => {

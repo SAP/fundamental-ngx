@@ -28,7 +28,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Ścieżka nawigacji',
-        overflowTitleMore: 'Kliknij lub naciśnij Enter, aby wyświetlić więcej szczegółów'
+        overflowTitleMore: 'Kliknij lub naciśnij Enter, aby wyświetlić więcej szczegółów',
+        positionLabel: '{current} z {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Zajęty',
@@ -58,12 +59,12 @@ export default {
         yearsRangeSelectionLabel: 'Wybierz zakres lat'
     },
     coreCard: {
-        ariaDescription: 'Active, Press Enter to activate',
-        roleDescription: '{cardType} Card'
+        ariaDescription: 'Aktywne, naciśnij klawisz Enter, aby aktywować',
+        roleDescription: 'Karta {cardType}'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'Przejdź do poprzedniej pozycji',
-        pageIndicatorLabel: 'Wyświetlono pozycję {itemNum} z {totalNum}',
+        pageIndicatorLabel: 'Pozycja {itemNum} z {totalNum} wyświetlonych',
         rightNavigationBtnLabel: 'Przejdź do następnej pozycji'
     },
     coreCombobox: {
@@ -102,7 +103,7 @@ export default {
         filterBarCancelButtonTitle: 'Anuluj',
         listItemButtonDeleteTitle: 'Usuń',
         listItemButtonDetailsTitle: 'Szczegóły',
-        listItemCounterAriaLabel: 'Pozycja ma {count} elementy(-ów) podrzędne(-ych).',
+        listItemCounterAriaLabel: 'Pozycja ma {count} pozycje podrzędne.',
         listItemStatusAriaLabel: 'Pozycja ma status. Status: {status}.',
         listItemStatusContainsErrors: 'Zawiera błędy',
         listItemStatusDraft: 'Wersja robocza',
@@ -131,7 +132,7 @@ export default {
         selectAllLabel: 'Wybierz wszystkie ({selectedItems} z {totalItems})'
     },
     coreMultiInput: {
-        countListResultsPlural: 'Pozycje listy wyników: {count}.',
+        countListResultsPlural: 'Pozycje listy wyników: {count}',
         countListResultsSingular: '1 pozycja listy wyników.',
         escapeNavigateTokens:
             'Naciśnij klawisz escape, aby opuścić pole do wprowadzania i użyj klawiszy strzałek w lewo i w prawo, aby poruszać się po wybranych opcjach.',
@@ -146,7 +147,7 @@ export default {
         navigationPath: 'Navigation Path'
     },
     coreNestedList: {
-        linkItemAriaLabel: 'Pozycja drzewa {itemDetails}, {selectedDescription}'
+        linkItemAriaLabel: 'Element drzewa {itemDetails}, {selectedDescription}'
     },
     coreNotification: {
         groupAriaDescription: 'Grupa zawiadomień',
@@ -220,15 +221,15 @@ export default {
         multipleHandle1MinMaxDetails: 'Minimalna wartość suwaka zakresu to {min}, maksymalna wartość to {max}',
         multipleHandle1ValuemaxDetails: 'Wartość to {value}',
         multipleHandle1ValueminDetails: 'Wartość to {value}',
-        multipleHandle1ValueNowDetails: 'Wartość bieżąca to {value}',
+        multipleHandle1ValueNowDetails: 'Bieżąca wartość to {value}',
         multipleHandle2MinMaxDetails: 'Minimalna wartość suwaka zakresu to {min}, maksymalna wartość to {max}',
         multipleHandle2ValuemaxDetails: 'Wartość to {value}',
         multipleHandle2ValueminDetails: 'Wartość to {value}',
-        multipleHandle2ValueNowDetails: 'Wartość bieżąca to {value}',
+        multipleHandle2ValueNowDetails: 'Bieżąca wartość to {value}',
         singleMinMaxDetails: 'Minimalna wartość suwaka to {min}, maksymalna wartość to {max}',
         singleValuemaxDetails: 'Wartość to {value}',
         singleValueminDetails: 'Wartość to {value}',
-        singleValueNowDetails: 'Wartość bieżąca to {value}'
+        singleValueNowDetails: 'Bieżąca wartość to {value}'
     },
     coreSplitButton: {
         arialLabel: 'Przycisk podzielony na dwie części',
@@ -363,9 +364,9 @@ export default {
         nodeActionRemove: 'Usuń',
         nodeMembersCount: 'Liczba członków: {count}',
         nodeMenuButtonTitle: 'Menu',
-        nodeStatusDueInXDays: 'Termin za {count} dni',
+        nodeStatusDueInXDays: 'Z terminem za {count} dni',
         nodeStatusDueToday: 'Termin na dzisiaj',
-        nodeStatusXDaysOverdue: '{count} dni po terminie',
+        nodeStatusXDaysOverdue: 'Dni zaległości: {count}',
         nodeVariousTeams: 'Różne zespoły',
         prevButtonAriaLabel: 'Przejdź do poprzedniego slajdu',
         selectTypeDialogCancelButton: 'Anuluj',
@@ -438,12 +439,12 @@ export default {
         allButtonLabel: 'Wszystko',
         cancelLabel: 'Anuluj',
         clearButtonTitle: 'Wyczyść wyszukiwanie',
-        counterLabel: 'Łącznie wyników: {count}',
+        counterLabel: 'Wyniki łącznie: {count}',
         deleteButtonAriaLabel: 'Usuń',
         deleteButtonTitle: 'Usuń sugestię',
         groupHeader: 'Nagłówek grupy',
         searchInputLabel: 'Wyszukiwanie',
-        searchSuggestionMessage: 'Liczba znalezionych podpowiedzi: {count}.',
+        searchSuggestionMessage: 'Znaleziono {count} propozycji.',
         searchSuggestionNavigateMessage: 'użyj strzałek w górę i w dół do nawigacji',
         selectScopeLabel: 'Wybierz zakres',
         selectStateMessageLabel: 'Wybierz',
@@ -549,7 +550,7 @@ export default {
         headerMenuUnfreeze: 'Odmroź kolumnę',
         headerMenuUnfreezePlural: 'Odmroź kolumny',
         loadMore: 'Pokaż więcej',
-        navigationColumnTitle: 'Row Actions',
+        navigationColumnTitle: 'Czynności dla wiersza',
         noVisibleColumnsMessage:
             'W tej chwili nie ma widocznych kolumn w tabeli. Wybierz wymagane kolumny w ustawieniach tabeli.',
         P13ColumnsDialogCancelBtnLabel: 'Anuluj',
@@ -612,7 +613,7 @@ export default {
         selectAllCheckboxMixedLongLabel: 'Pole wyboru, mieszane, kliknij, aby zaznaczyć wszystko',
         selectSingleRow: 'Aby zaznaczyć linię, naciśnij SPACJĘ',
         settingsDialogHeader: 'Ustawienia',
-        showingBlankOfBlank: 'Wyświetla {totalGrowingItemsCount} z {totalGrowingItemsCount}',
+        showingBlankOfBlank: 'Pokazuje {totalGrowingItemsCount} z {totalGrowingItemsCount}',
         sortDialogCancelBtnLabel: 'Anuluj',
         sortDialogConfirmBtnLabel: 'OK',
         sortDialogHeader: 'Sortuj',
@@ -634,9 +635,9 @@ export default {
         toolbarSearchPlaceholder: 'Wyszukiwanie'
     },
     platformTextarea: {
-        counterMessageCharactersOverTheLimitPlural: 'Liczba znaków powyżej limitu: {count}',
+        counterMessageCharactersOverTheLimitPlural: '{count} znaki(-ów) powyżej limitu',
         counterMessageCharactersOverTheLimitSingular: '1 znak ponad limit',
-        counterMessageCharactersRemainingPlural: 'Liczba pozostałych znaków: {count}',
+        counterMessageCharactersRemainingPlural: 'Pozostało {count} znaków',
         counterMessageCharactersRemainingSingular: 'Pozostał 1 znak'
     },
     platformVariantManagement: {
@@ -683,7 +684,7 @@ export default {
         defineConditionConditionStrategyLabelNotEqualTo: 'różne od',
         defineConditionConditionStrategyLabelStartsWith: 'rozpoczyna się od',
         defineConditionFromPlaceholder: 'od',
-        defineConditionMaxCountError: 'Wprowadź wartość złożoną z maksymalnie {count} znaków.',
+        defineConditionMaxCountError: 'Wprowadź wartość zawierającą maksymalnie następującą liczbę znaków: {count}',
         defineConditionRemoveConditionButtonTitle: 'Usuń warunek',
         defineConditionSelectedValueHiddenA11yLabel: 'wybrana wartość {value}',
         defineConditionTitle: 'Produkt',
@@ -706,7 +707,7 @@ export default {
         selectMobileTabBackBtnTitle: 'Wstecz',
         selectMobileTabBtnOpenDialogLabel: 'Otwórz okno dialogowe',
         selectMobileTabTitle: 'Karta {title}',
-        selectTabCountHiddenA11yLabel: 'zawiera {rowCount} wiersze(-y) i {colCount} kolumn(y)',
+        selectTabCountHiddenA11yLabel: 'zawiera {rowCount} wierszy i {colCount} kolumn',
         selectTabDisplayCountLabel: 'Pozycje ({count})',
         selectTabMoreBtnLabel: 'Więcej',
         selectTabTitle: 'Wybierz z listy',

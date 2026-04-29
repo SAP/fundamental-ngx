@@ -380,7 +380,13 @@ export interface FdLanguage {
         popupBodyAriaLabel: FdLanguageKey<{ count: number }>;
     };
     coreBreadcrumb: {
+        breadcrumbTrailLabel: FdLanguageKey;
         overflowTitleMore: FdLanguageKey;
+        /**
+         * @param current
+         * @param total
+         */
+        positionLabel: FdLanguageKey<{ current: number; total: number }>;
     };
     coreTree: {
         expand: FdLanguageKey;

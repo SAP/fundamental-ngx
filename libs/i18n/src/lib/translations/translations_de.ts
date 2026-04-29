@@ -28,7 +28,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Navigationspfad',
-        overflowTitleMore: 'Klicken Sie oder drücken Sie die Eingabetaste, um weitere Details zu sehen'
+        overflowTitleMore: 'Klicken Sie oder drücken Sie die Eingabetaste, um weitere Details zu sehen',
+        positionLabel: '{current} von {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Ausgelastet',
@@ -58,12 +59,12 @@ export default {
         yearsRangeSelectionLabel: 'Jahresbereich auswählen'
     },
     coreCard: {
-        ariaDescription: 'Active, Press Enter to activate',
-        roleDescription: '{cardType} Card'
+        ariaDescription: 'Aktiv; zum Aktivieren Eingabetaste drücken',
+        roleDescription: 'Karte ({cardType})'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'Zum vorherigen Element wechseln',
-        pageIndicatorLabel: 'Element {itemNum} von {totalNum} angezeigt',
+        pageIndicatorLabel: 'Element {itemNum} von {totalNum} wird angezeigt',
         rightNavigationBtnLabel: 'Zum nächsten Element wechseln'
     },
     coreCombobox: {
@@ -96,7 +97,7 @@ export default {
     },
     coreFeedListItem: {
         lessLabel: 'Weniger',
-        moreLabel: 'noch {count}'
+        moreLabel: '{count} weitere'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'Abbrechen',
@@ -128,7 +129,7 @@ export default {
     coreMultiComboBox: {
         listGroupHeader: 'Gruppenkopfzeile',
         multiComboBoxAriaLabel: 'Mehrwert-Combobox',
-        selectAllLabel: 'Alle ({selectedItems} von {totalItems}) auswählen'
+        selectAllLabel: 'Alle auswählen ({selectedItems} von {totalItems})'
     },
     coreMultiInput: {
         countListResultsPlural: '{count} Ergebnislistenelemente.',
@@ -180,11 +181,11 @@ export default {
         positive: 'Eintrag erfolgreich geprüft'
     },
     coreOverflowLayout: {
-        moreItemsButton: 'noch {count}'
+        moreItemsButton: '{count} weitere'
     },
     corePagination: {
         ariaLabel: 'Paginierung',
-        currentPageAriaLabel: 'Seite {pageNumber} ist die aktuelle Seite',
+        currentPageAriaLabel: 'Seite {pageNumber} ist aktuelle Seite',
         firstLabel: 'Anfang',
         inputAriaLabel: 'Seiteneingabe, Aktuelle Seite, Seite {pageNumber} von {totalCount}',
         itemsPerPageLabel: 'Ergebnisse pro Seite:',
@@ -291,7 +292,7 @@ export default {
         deleteButtonLabel: 'Löschbar'
     },
     coreTokenizer: {
-        moreLabel: 'noch {count}',
+        moreLabel: '{count} weitere',
         tokenizerLabel: 'Tokenizer'
     },
     coreToolbar: {
@@ -389,7 +390,7 @@ export default {
         userDetailsCancelBtnLabel: 'Abbrechen',
         userDetailsHeader: 'Detail',
         userDetailsSendReminderBtnLabel: 'Erinnerung senden',
-        userListSelectedItemsCountPlural: '{count} Elemente ausgewählt',
+        userListSelectedItemsCountPlural: '{count} Objekte ausgewählt',
         userListSelectedItemsCountSingular: '1 Element ausgewählt',
         watchersInputPlaceholder: 'Hier suchen...'
     },
@@ -550,7 +551,7 @@ export default {
         headerMenuUnfreeze: 'Fixierung der Spalte aufheben',
         headerMenuUnfreezePlural: 'Fixierung der Spalten aufheben',
         loadMore: 'Mehr anzeigen',
-        navigationColumnTitle: 'Row Actions',
+        navigationColumnTitle: 'Zeilenaktionen',
         noVisibleColumnsMessage:
             'Es gibt gerade keine sichtbaren Spalten in der Tabelle. Wählen Sie die Spalten, die Sie benötigen, in den Tabelleneinstellungen aus.',
         P13ColumnsDialogCancelBtnLabel: 'Abbrechen',
@@ -561,7 +562,7 @@ export default {
         P13ColumnsDialogMoveToTopBtn: 'An den Anfang verschieben',
         P13ColumnsDialogMoveUpBtn: 'Nach oben verschieben',
         P13ColumnsDialogSearchPlaceholder: 'Suchen',
-        P13ColumnsDialogSelectAll: 'Alles auswählen ({selectedColumnsCount}/{selectableColumnsCount})',
+        P13ColumnsDialogSelectAll: 'Alle auswählen ({selectedColumnsCount}/{selectableColumnsCount})',
         P13ColumnsDialogShowAll: 'Alle anzeigen',
         P13ColumnsDialogsShowSelected: 'Ausgewählte anzeigen',
         P13FilterBooleanOptionFalse: 'Nein',
@@ -570,10 +571,10 @@ export default {
         P13FilterDialogAddFilterBtnTitle: 'Filter hinzufügen',
         P13FilterDialogCancelBtnLabel: 'Abbrechen',
         P13FilterDialogConfirmationBtnLabel: 'OK',
-        P13FilterDialogExcludePanelTitleWithCount: 'Ausschließen ({count})',
+        P13FilterDialogExcludePanelTitleWithCount: '({count}) ausschließen',
         P13FilterDialogExcludePanelTitleWithoutCount: 'Ausschließen',
         P13FilterDialogHeader: 'Filtern nach',
-        P13FilterDialogIncludePanelTitleWithCount: 'Einschließen ({count})',
+        P13FilterDialogIncludePanelTitleWithCount: '({count}) einschließen',
         P13FilterDialogIncludePanelTitleWithoutCount: 'Einschließen',
         P13FilterDialogRemoveFilterBtnTitle: 'Filter entfernen',
         P13FilterStrategyLabelAfter: 'nach',
@@ -613,7 +614,7 @@ export default {
         selectAllCheckboxMixedLongLabel: 'Ankreuzfeld, gemischt, zur Auswahl aller Zeilen klicken',
         selectSingleRow: 'Um Zeile auszuwählen, Leertaste drücken',
         settingsDialogHeader: 'Einstellungen',
-        showingBlankOfBlank: 'Anzeige von {totalGrowingItemsCount} von {totalGrowingItemsCount}',
+        showingBlankOfBlank: '{totalGrowingItemsCount} von {totalGrowingItemsCount} werden angezeigt',
         sortDialogCancelBtnLabel: 'Abbrechen',
         sortDialogConfirmBtnLabel: 'OK',
         sortDialogHeader: 'Sortieren',
@@ -637,7 +638,7 @@ export default {
     platformTextarea: {
         counterMessageCharactersOverTheLimitPlural: '{count} Zeichen über dem Limit',
         counterMessageCharactersOverTheLimitSingular: '1 Zeichen über dem Limit',
-        counterMessageCharactersRemainingPlural: '{count} Zeichen übrig',
+        counterMessageCharactersRemainingPlural: 'Noch {count} Zeichen',
         counterMessageCharactersRemainingSingular: '1 Zeichen übrig'
     },
     platformVariantManagement: {
@@ -686,7 +687,7 @@ export default {
         defineConditionFromPlaceholder: 'von',
         defineConditionMaxCountError: 'Geben Sie einen Wert mit maximal {count} Zeichen ein',
         defineConditionRemoveConditionButtonTitle: 'Bedingung entfernen',
-        defineConditionSelectedValueHiddenA11yLabel: 'Ausgewählter Wert {value}',
+        defineConditionSelectedValueHiddenA11yLabel: 'ausgewählter Wert {value}',
         defineConditionTitle: 'Produkt',
         defineConditionToPlaceholder: 'bis',
         defineConditionValuePlaceholder: 'Wert',
@@ -708,7 +709,7 @@ export default {
         selectMobileTabBtnOpenDialogLabel: 'Dialogfeld öffnen',
         selectMobileTabTitle: 'Registerkarte {title}',
         selectTabCountHiddenA11yLabel: 'enthält {rowCount} Zeilen und {colCount} Spalten',
-        selectTabDisplayCountLabel: 'Elemente ({count})',
+        selectTabDisplayCountLabel: 'Artikel ({count})',
         selectTabMoreBtnLabel: 'Mehr',
         selectTabTitle: 'Aus Liste auswählen',
         successButtonLabel: 'OK'

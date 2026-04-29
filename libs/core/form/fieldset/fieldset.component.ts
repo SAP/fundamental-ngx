@@ -4,11 +4,11 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } fr
  * Used for easily displaying forms with a margin. Not necessary for fundamental forms to be functional.
  *
  * ```html
- * <div fd-fieldset
+ * <fieldset fd-fieldset>
  *     <div fd-form-item>
  *         ...
  *     </div>
- * </div>
+ * </fieldset>
  * ```
  */
 @Component({

@@ -28,7 +28,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Navigačná cesta',
-        overflowTitleMore: 'Kliknutím alebo stlačením klávesu Enter zobrazíte ďalšie podrobnosti'
+        overflowTitleMore: 'Kliknutím alebo stlačením klávesu Enter zobrazíte ďalšie podrobnosti',
+        positionLabel: '{current} z {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Zaneprázdnené',
@@ -58,12 +59,12 @@ export default {
         yearsRangeSelectionLabel: 'Vybrať rozsah rokov'
     },
     coreCard: {
-        ariaDescription: 'Active, Press Enter to activate',
-        roleDescription: '{cardType} Card'
+        ariaDescription: 'Aktívna, stlačením tlačidla Enter aktivujete.',
+        roleDescription: 'Karta {cardType}'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'Prejsť na predchádzajúcu položku',
-        pageIndicatorLabel: 'Zobrazená položka {itemNum} z {totalNum}',
+        pageIndicatorLabel: 'Je zobrazená položka {itemNum} z {totalNum}',
         rightNavigationBtnLabel: 'Prejsť na ďalšiu položku'
     },
     coreCombobox: {
@@ -102,7 +103,7 @@ export default {
         filterBarCancelButtonTitle: 'Zrušiť',
         listItemButtonDeleteTitle: 'Odstrániť',
         listItemButtonDetailsTitle: 'Detaily',
-        listItemCounterAriaLabel: 'Položka má {count} poradených položiek.',
+        listItemCounterAriaLabel: 'Položka má {count} podradených položiek.',
         listItemStatusAriaLabel: 'Položka má status. Status: {status}.',
         listItemStatusContainsErrors: 'Obsahuje chyby',
         listItemStatusDraft: 'Koncept',
@@ -139,7 +140,7 @@ export default {
         navigateSelectionsWithArrows: 'Prechádzajte výbermi pomocou šípok nahor a nadol.',
         noResults: 'Žiadne výsledky.',
         showAll: 'Zobraziť všetko ({count})',
-        tokensCountText: 'Obsahuje celkový počet tokenov: {length}.'
+        tokensCountText: 'Obsahuje celkový počet tokenov: {length}'
     },
     coreNavigation: {
         mainNavigation: 'Hlavná navigácia',
@@ -184,15 +185,15 @@ export default {
     },
     corePagination: {
         ariaLabel: 'Stránkovanie',
-        currentPageAriaLabel: 'Stránka {pageNumber} je aktuálna stránka',
+        currentPageAriaLabel: 'Strana {pageNumber} je aktuálna strana',
         firstLabel: 'Prvý',
-        inputAriaLabel: 'Zadanie stránky, aktuálna stránka, stránka {pageNumber} z {totalCount}',
+        inputAriaLabel: 'Vstup stránky, aktuálna stránka, stránka {pageNumber} z {totalCount}',
         itemsPerPageLabel: 'Počet výsledkov na stránku:',
         labelAfterInputMobile: 'z {totalCount}',
         labelBeforeInputMobile: 'Stránka:',
         lastLabel: 'Posledný',
         nextLabel: 'Nasledujúci',
-        pageLabel: 'Str. {pageNumber}',
+        pageLabel: 'Strana {pageNumber}',
         previousLabel: 'Predchádzajúci',
         totalResultsLabel: '{totalCount} výsledkov'
     },
@@ -217,11 +218,11 @@ export default {
         search: 'Vyhľadávanie'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: 'Minimálna hodnota rozsahu je {min}, maximálna hodnota je {max}',
+        multipleHandle1MinMaxDetails: 'Minimálna hodnota posúvača rozsahu je {min}, maximálna hodnota je {max}',
         multipleHandle1ValuemaxDetails: 'Hodnota je {value}',
         multipleHandle1ValueminDetails: 'Hodnota je {value}',
         multipleHandle1ValueNowDetails: 'Aktuálna hodnota je {value}',
-        multipleHandle2MinMaxDetails: 'Minimálna hodnota rozsahu je {min}, maximálna hodnota je {max}',
+        multipleHandle2MinMaxDetails: 'Minimálna hodnota posúvača rozsahu je {min}, maximálna hodnota je {max}',
         multipleHandle2ValuemaxDetails: 'Hodnota je {value}',
         multipleHandle2ValueminDetails: 'Hodnota je {value}',
         multipleHandle2ValueNowDetails: 'Aktuálna hodnota je {value}',
@@ -388,7 +389,7 @@ export default {
         userDetailsCancelBtnLabel: 'Zrušiť',
         userDetailsHeader: 'Detail',
         userDetailsSendReminderBtnLabel: 'Poslať pripomienku',
-        userListSelectedItemsCountPlural: '{count} vybraných položiek',
+        userListSelectedItemsCountPlural: '{count} položiek vybratých',
         userListSelectedItemsCountSingular: 'Vybraná 1 položka',
         watchersInputPlaceholder: 'Hľadať tu..'
     },
@@ -438,12 +439,12 @@ export default {
         allButtonLabel: 'Všetky',
         cancelLabel: 'Stornovať',
         clearButtonTitle: 'Vymazať hľadanie',
-        counterLabel: 'Celkové výsledky: {count}',
+        counterLabel: 'Celkový počet výsledkov: {count}',
         deleteButtonAriaLabel: 'Odstrániť',
         deleteButtonTitle: 'Odstrániť návrh',
         groupHeader: 'Hlavička skupiny',
         searchInputLabel: 'Vyhľadávanie',
-        searchSuggestionMessage: '{count} nájdených návrhov.',
+        searchSuggestionMessage: 'Nájdených {count} návrhov.',
         searchSuggestionNavigateMessage: 'na navigáciu použite šípky nahor a nadol',
         selectScopeLabel: 'Vybrať rozsah',
         selectStateMessageLabel: 'Vybrať',
@@ -549,7 +550,7 @@ export default {
         headerMenuUnfreeze: 'Zrušiť fixovanie stĺpca',
         headerMenuUnfreezePlural: 'Zrušiť fixovanie stĺpcov',
         loadMore: 'Zobraziť viac',
-        navigationColumnTitle: 'Row Actions',
+        navigationColumnTitle: 'Akcie riadka',
         noVisibleColumnsMessage:
             'Momentálne nie sú v tabuľke žiadne viditeľné stĺpce. Vyberte stĺpce, ktoré potrebujete, v nastaveniach tabuľky.',
         P13ColumnsDialogCancelBtnLabel: 'Zrušiť',
@@ -560,7 +561,7 @@ export default {
         P13ColumnsDialogMoveToTopBtn: 'Celkom hore',
         P13ColumnsDialogMoveUpBtn: 'Presunúť nahor',
         P13ColumnsDialogSearchPlaceholder: 'Vyhľadávanie',
-        P13ColumnsDialogSelectAll: 'Zobraziť všetko ({selectedColumnsCount}/{selectableColumnsCount})',
+        P13ColumnsDialogSelectAll: 'Vybrať všetky ({selectedColumnsCount}/{selectableColumnsCount})',
         P13ColumnsDialogShowAll: 'Zobraziť všetko',
         P13ColumnsDialogsShowSelected: 'Zobraziť vybrané',
         P13FilterBooleanOptionFalse: 'Nie',
@@ -634,9 +635,9 @@ export default {
         toolbarSearchPlaceholder: 'Vyhľadávanie'
     },
     platformTextarea: {
-        counterMessageCharactersOverTheLimitPlural: '{count} znakov nad limit',
+        counterMessageCharactersOverTheLimitPlural: '{count} znakov presahuje limit',
         counterMessageCharactersOverTheLimitSingular: 'Počet znakov nad limit',
-        counterMessageCharactersRemainingPlural: '{count} zostávajúcich znakov',
+        counterMessageCharactersRemainingPlural: 'Počet zostávajúcich znakov: {count}',
         counterMessageCharactersRemainingSingular: 'Zostáva 1 znak'
     },
     platformVariantManagement: {
@@ -685,7 +686,7 @@ export default {
         defineConditionFromPlaceholder: 'od',
         defineConditionMaxCountError: 'Zadajte hodnotu s maximálne {count} znakmi',
         defineConditionRemoveConditionButtonTitle: 'Odstrániť podmienku',
-        defineConditionSelectedValueHiddenA11yLabel: 'vybraná hodnota {value}',
+        defineConditionSelectedValueHiddenA11yLabel: 'vybratá hodnota {value}',
         defineConditionTitle: 'Produkt',
         defineConditionToPlaceholder: 'do',
         defineConditionValuePlaceholder: 'hodnota',

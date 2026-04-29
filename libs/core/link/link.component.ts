@@ -91,16 +91,16 @@ export class LinkComponent implements HasElementRef {
     readonly routerLink = inject<RouterLink>(LINK_ROUTER_TARGET);
 
     /** @hidden */
+    readonly prefixIconName = signal<string>('');
+
+    /** @hidden */
+    readonly postfixIconName = signal<string>('');
+
+    /** @hidden */
     protected readonly prefixPortal = signal<Portal<any> | null>(null);
 
     /** @hidden */
     protected readonly postfixPortal = signal<Portal<any> | null>(null);
-
-    /** @hidden */
-    protected readonly prefixIconName = signal<string>('');
-
-    /** @hidden */
-    protected readonly postfixIconName = signal<string>('');
 
     /** @hidden */
     private readonly _injector = inject(Injector);

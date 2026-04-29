@@ -19,6 +19,7 @@ export type FdLanguageKeyIdentifier =
     | 'coreAvatarGroup.popupBodyAriaLabel'
     | 'coreBreadcrumb.breadcrumbTrailLabel'
     | 'coreBreadcrumb.overflowTitleMore'
+    | 'coreBreadcrumb.positionLabel'
     | 'coreBusyIndicator.defaultAriaValueText'
     | 'coreBusyIndicator.defaultTitle'
     | 'coreCalendar.calendarDayViewDescription'

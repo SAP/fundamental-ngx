@@ -27,7 +27,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Breadcrumb Trail',
-        overflowTitleMore: 'მეტი'
+        overflowTitleMore: 'მეტი',
+        positionLabel: '{current} of {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Busy',

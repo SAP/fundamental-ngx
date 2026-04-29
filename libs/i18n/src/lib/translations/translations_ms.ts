@@ -27,7 +27,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Jejak Tinggalan',
-        overflowTitleMore: 'Klik atau tekan enter untuk melihat butiran lanjut'
+        overflowTitleMore: 'Klik atau tekan enter untuk melihat butiran lanjut',
+        positionLabel: '{current} daripada {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Sibuk',
@@ -57,8 +58,8 @@ export default {
         yearsRangeSelectionLabel: 'Pilih julat tahun'
     },
     coreCard: {
-        ariaDescription: 'Active, Press Enter to activate',
-        roleDescription: '{cardType} Card'
+        ariaDescription: 'Aktif, Tekan Enter untuk aktifkan',
+        roleDescription: '{cardType} Kad'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'Pergi ke item sebelumnya',
@@ -95,7 +96,7 @@ export default {
     },
     coreFeedListItem: {
         lessLabel: 'Kurang',
-        moreLabel: '{count} selanjutnya'
+        moreLabel: '{count} lagi'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'Batalkan',
@@ -137,7 +138,7 @@ export default {
         multiInputAriaLabel: 'Input Nilai Berbilang',
         navigateSelectionsWithArrows: 'Navigasi pemilihan dengan anak panah atas dan bawah.',
         noResults: 'Tiada hasil.',
-        showAll: 'Tunjuk Semua ({count})',
+        showAll: 'Tunjukkan Semua ({count})',
         tokensCountText: 'Mengandungi jumlah token: {length}.'
     },
     coreNavigation: {
@@ -179,13 +180,13 @@ export default {
         positive: 'Entri berjaya disahkan'
     },
     coreOverflowLayout: {
-        moreItemsButton: '{count} selanjutnya'
+        moreItemsButton: '{count} lagi'
     },
     corePagination: {
         ariaLabel: 'Penghalamanan',
-        currentPageAriaLabel: 'Halaman {pageNumber} merupakan halaman semasa',
+        currentPageAriaLabel: 'Halaman {pageNumber} ialah halaman semasa',
         firstLabel: 'Pertama',
-        inputAriaLabel: 'Input halaman, Halaman semasa, Halaman {pageNumber} daripada {totalCount}',
+        inputAriaLabel: 'Input halaman, halaman Semasa, Halaman {pageNumber} daripada {totalCount}',
         itemsPerPageLabel: 'Hasil setiap Halaman:',
         labelAfterInputMobile: 'daripada {totalCount}',
         labelBeforeInputMobile: 'Halaman:',
@@ -290,7 +291,7 @@ export default {
         deleteButtonLabel: 'Boleh Padam'
     },
     coreTokenizer: {
-        moreLabel: '{count} selanjutnya',
+        moreLabel: '{count} lagi',
         tokenizerLabel: 'Pengawal Token'
     },
     coreToolbar: {
@@ -547,7 +548,7 @@ export default {
         headerMenuUnfreeze: 'Nyahbekukan lajur',
         headerMenuUnfreezePlural: 'Nyahbekukan lajur',
         loadMore: 'Tunjukkan Selanjutnya',
-        navigationColumnTitle: 'Row Actions',
+        navigationColumnTitle: 'Tindakan Baris',
         noVisibleColumnsMessage:
             'Kini, tiada lajur boleh dilihat dalam jadual. Sila pilih lajur yang anda perlukan dalam tetapan jadual.',
         P13ColumnsDialogCancelBtnLabel: 'Batalkan',
@@ -567,7 +568,7 @@ export default {
         P13FilterDialogAddFilterBtnTitle: 'Tambah Penapis',
         P13FilterDialogCancelBtnLabel: 'Batalkan',
         P13FilterDialogConfirmationBtnLabel: 'OK',
-        P13FilterDialogExcludePanelTitleWithCount: 'Tidak Termasuk ({count})',
+        P13FilterDialogExcludePanelTitleWithCount: 'Kecualikan ({count})',
         P13FilterDialogExcludePanelTitleWithoutCount: 'Tidak termasuk',
         P13FilterDialogHeader: 'Tapis mengikut',
         P13FilterDialogIncludePanelTitleWithCount: 'Termasuk ({count})',
@@ -681,9 +682,9 @@ export default {
         defineConditionConditionStrategyLabelNotEqualTo: 'tidak sama dengan',
         defineConditionConditionStrategyLabelStartsWith: 'bermula dengan',
         defineConditionFromPlaceholder: 'daripada',
-        defineConditionMaxCountError: 'Masukkan nilai yang tidak melebihi {count} aksara',
+        defineConditionMaxCountError: 'Masukkan nilai tidak kurang daripada {count} aksara',
         defineConditionRemoveConditionButtonTitle: 'Keluarkan Syarat',
-        defineConditionSelectedValueHiddenA11yLabel: 'nilai yang dipilih {value}',
+        defineConditionSelectedValueHiddenA11yLabel: 'nilai {value} yang dipilih',
         defineConditionTitle: 'Produk',
         defineConditionToPlaceholder: 'hingga',
         defineConditionValuePlaceholder: 'nilai',
@@ -704,7 +705,7 @@ export default {
         selectMobileTabBackBtnTitle: 'Kembali',
         selectMobileTabBtnOpenDialogLabel: 'Buka dialog',
         selectMobileTabTitle: 'Tab {title}',
-        selectTabCountHiddenA11yLabel: 'mengandungi baris {rowCount} dan lajur {colCount}',
+        selectTabCountHiddenA11yLabel: 'mengandungi {rowCount} baris dan {colCount} lajur',
         selectTabDisplayCountLabel: 'Item ({count})',
         selectTabMoreBtnLabel: 'Selanjutnya',
         selectTabTitle: 'Pilih daripada senarai',

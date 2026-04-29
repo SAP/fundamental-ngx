@@ -28,7 +28,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Өту тізбегінің жолы',
-        overflowTitleMore: 'Қосымша мәліметтерді көру үшін Enter пернесін басыңыз'
+        overflowTitleMore: 'Қосымша мәліметтерді көру үшін Enter пернесін басыңыз',
+        positionLabel: '{current}/{total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Бос емес',
@@ -58,12 +59,12 @@ export default {
         yearsRangeSelectionLabel: 'Жылдар ауқымын таңдау'
     },
     coreCard: {
-        ariaDescription: 'Active, Press Enter to activate',
-        roleDescription: '{cardType} Card'
+        ariaDescription: 'Белсенді, белсендіру үшін Enter пернесін басыңыз.',
+        roleDescription: '{cardType} картасы'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'Алдыңғы тармаққа өту',
-        pageIndicatorLabel: '{totalNum} ішінен {itemNum}-тармақ көрсетілген',
+        pageIndicatorLabel: '{itemNum} / {totalNum} тармақ көрсетіледі',
         rightNavigationBtnLabel: 'Келесі тармаққа өту'
     },
     coreCombobox: {
@@ -96,13 +97,13 @@ export default {
     },
     coreFeedListItem: {
         lessLabel: 'Азырақ',
-        moreLabel: 'тағы {count}'
+        moreLabel: 'Тағы {count}'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'Болдырмау',
         listItemButtonDeleteTitle: 'Жою',
         listItemButtonDetailsTitle: 'Мәліметтер',
-        listItemCounterAriaLabel: 'Тармақта {count} туынды түйін бар.',
+        listItemCounterAriaLabel: 'Тармақта {count} бағыныңқы түйін бар.',
         listItemStatusAriaLabel: 'Тармақтың күйі бар. Күй: {status}.',
         listItemStatusContainsErrors: 'Қателері бар',
         listItemStatusDraft: 'Нобай',
@@ -128,7 +129,7 @@ export default {
     coreMultiComboBox: {
         listGroupHeader: 'Топ тақырыбы',
         multiComboBoxAriaLabel: 'Бірнеше мәннің құрама ұясы',
-        selectAllLabel: 'Барлық ({selectedItems}/{totalItems}) таңдаңыз'
+        selectAllLabel: 'Барлығын таңдау ({selectedItems}/{totalItems})'
     },
     coreMultiInput: {
         countListResultsPlural: '{count} нәтижелер тізімінің тармағы.',
@@ -139,7 +140,7 @@ export default {
         navigateSelectionsWithArrows: 'Жоғары және төмен көрсеткілерді пайдаланып, бөлімдерге өтіңіз.',
         noResults: 'Нәтижелер жоқ.',
         showAll: 'Барлығын көрсету ({count})',
-        tokensCountText: 'Ішіндегі жалпы маркерлер саны: {length}.'
+        tokensCountText: 'Жалпы қамтитын маркерлер: {length}.'
     },
     coreNavigation: {
         mainNavigation: 'Негізгі навигация',
@@ -180,13 +181,13 @@ export default {
         positive: 'Енгізілім сәтті расталды'
     },
     coreOverflowLayout: {
-        moreItemsButton: 'тағы {count}'
+        moreItemsButton: 'Тағы {count}'
     },
     corePagination: {
         ariaLabel: 'Беттерді нөмірлеу',
         currentPageAriaLabel: '{pageNumber}-бет — ағымдағы бет',
         firstLabel: 'Бірінші',
-        inputAriaLabel: 'Бетті енгізу, ағымдағы бет, {pageNumber}/{totalCount} бет',
+        inputAriaLabel: 'Бетті енгізу, ағымдағы бет, {pageNumber}/{totalCount}-бет',
         itemsPerPageLabel: 'Бет бойынша нәтижелер:',
         labelAfterInputMobile: '/{totalCount}',
         labelBeforeInputMobile: 'Бет:',
@@ -291,7 +292,7 @@ export default {
         deleteButtonLabel: 'Жоюға болатын'
     },
     coreTokenizer: {
-        moreLabel: 'тағы {count}',
+        moreLabel: 'Тағы {count}',
         tokenizerLabel: 'Маркер жасаушы'
     },
     coreToolbar: {
@@ -365,7 +366,7 @@ export default {
         nodeMenuButtonTitle: 'Мәзір',
         nodeStatusDueInXDays: 'Мерзімі {count} күнде өтеді',
         nodeStatusDueToday: 'Мерзімі бүгін өтеді',
-        nodeStatusXDaysOverdue: 'Мерзімі {count} күннен өтіп кетті',
+        nodeStatusXDaysOverdue: 'Мерзімінен {count} күн өтті',
         nodeVariousTeams: 'Әртүрлі топ',
         prevButtonAriaLabel: 'Алдыңғы слайдқа өту',
         selectTypeDialogCancelButton: 'Болдырмау',
@@ -404,7 +405,7 @@ export default {
         moreButton: 'Көбірек'
     },
     platformLink: {
-        roleDescriptionWithMedia: 'Медиа: {media}'
+        roleDescriptionWithMedia: 'Мультимедиа: {media}'
     },
     platformList: {
         loadingAriaLabel: 'жүктеу'
@@ -438,7 +439,7 @@ export default {
         allButtonLabel: 'Барлығы',
         cancelLabel: 'Болдырмау',
         clearButtonTitle: 'Іздеуді тазарту',
-        counterLabel: 'Жалпы нәтижелер саны: {count}',
+        counterLabel: 'Жалпы нәтижелер: {count}',
         deleteButtonAriaLabel: 'Жою',
         deleteButtonTitle: 'Ұсынысты жою',
         groupHeader: 'Топ тақырыбы',
@@ -549,7 +550,7 @@ export default {
         headerMenuUnfreeze: 'Бағанды босату',
         headerMenuUnfreezePlural: 'Бағандарды босату',
         loadMore: 'Көбірек көрсету',
-        navigationColumnTitle: 'Row Actions',
+        navigationColumnTitle: 'Жол операциялары',
         noVisibleColumnsMessage:
             'Дәл қазір кестеде көрінетін бағандар жоқ. Кесте параметрлерінде қажетті бағандарды таңдаңыз.',
         P13ColumnsDialogCancelBtnLabel: 'Болдырмау',
@@ -560,7 +561,7 @@ export default {
         P13ColumnsDialogMoveToTopBtn: 'Жоғарыға жылжыту',
         P13ColumnsDialogMoveUpBtn: 'Жоғары жылжыту',
         P13ColumnsDialogSearchPlaceholder: 'Іздеу',
-        P13ColumnsDialogSelectAll: 'Барлығын көрсету ({selectedColumnsCount}/{selectableColumnsCount})',
+        P13ColumnsDialogSelectAll: 'Барлығын таңдау ({selectedColumnsCount}/{selectableColumnsCount})',
         P13ColumnsDialogShowAll: 'Барлығын көрсету',
         P13ColumnsDialogsShowSelected: 'Таңдалғанды көрсету',
         P13FilterBooleanOptionFalse: 'Жоқ',
@@ -634,7 +635,7 @@ export default {
         toolbarSearchPlaceholder: 'Іздеу'
     },
     platformTextarea: {
-        counterMessageCharactersOverTheLimitPlural: '{count} таңбаға шектен асып кетті',
+        counterMessageCharactersOverTheLimitPlural: '{count} таңбаға асып кетті',
         counterMessageCharactersOverTheLimitSingular: '1 таңбаға шектен асып кетті',
         counterMessageCharactersRemainingPlural: '{count} таңба қалды',
         counterMessageCharactersRemainingSingular: '1 таңба қалды'
@@ -683,9 +684,9 @@ export default {
         defineConditionConditionStrategyLabelNotEqualTo: 'мынаған тең емес',
         defineConditionConditionStrategyLabelStartsWith: 'мынадан басталады',
         defineConditionFromPlaceholder: 'басы',
-        defineConditionMaxCountError: 'Ең көбі {count} таңба бар мән енгізіңіз',
+        defineConditionMaxCountError: 'Ең көбі {count} таңбасы бар мән енгізіңіз',
         defineConditionRemoveConditionButtonTitle: 'Шартты жою',
-        defineConditionSelectedValueHiddenA11yLabel: 'Таңдалған мән {value}',
+        defineConditionSelectedValueHiddenA11yLabel: 'таңдалған мән {value}',
         defineConditionTitle: 'Өнім',
         defineConditionToPlaceholder: 'соңы',
         defineConditionValuePlaceholder: 'мән',
@@ -706,7 +707,7 @@ export default {
         selectMobileTabBackBtnTitle: 'Артқа',
         selectMobileTabBtnOpenDialogLabel: 'Ашық диалог',
         selectMobileTabTitle: '{title} қойындысы',
-        selectTabCountHiddenA11yLabel: '{rowCount} қатар мен {colCount} бағанды қамтиды',
+        selectTabCountHiddenA11yLabel: '{rowCount} жол мен {colCount} бағанды қамтиды',
         selectTabDisplayCountLabel: 'Тармақтар ({count})',
         selectTabMoreBtnLabel: 'Көбірек',
         selectTabTitle: 'Тізімнен таңдау',

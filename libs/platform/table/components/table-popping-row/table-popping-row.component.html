@@ -1,15 +1,15 @@
 @if (_fdpTableService._semanticHighlighting$(); as semanticHighlighting) {
     <td
-        fd-table-cell
+        class="fd-table__cell"
         fd-table-status-indicator
-        fdkDisabled
-        [addDisabledClass]="false"
         [status]="row.value[semanticHighlighting]"
+        tabindex="-1"
+        aria-hidden="true"
     ></td>
 }
 
 @if (selectionMode !== SELECTION_MODE.NONE) {
-    <td fd-table-cell fdkDisabled [addDisabledClass]="false"></td>
+    <td class="fd-table__cell" tabindex="-1" aria-hidden="true"></td>
 }
 
 <td
@@ -19,6 +19,7 @@
     [attr.aria-expanded]="_isTreeRow(row) ? row.expanded : null"
     (click)="cellClicked.emit({ index: 0, row })"
     (keydown.enter)="_isTreeRowFirstCell(0, row, $event) && toggleGroupRow.emit(row)"
+    [focusable]="true"
 >
     @for (poppingColumn of _fdpTableService.poppingColumns$(); track poppingColumn.name) {
         <div fd-table-text>

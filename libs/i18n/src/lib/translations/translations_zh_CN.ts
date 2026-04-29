@@ -27,7 +27,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: '浏览记录',
-        overflowTitleMore: '单击或按回车以查看更多详细信息'
+        overflowTitleMore: '单击或按回车以查看更多详细信息',
+        positionLabel: '{current}/{total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: '忙碌',
@@ -57,12 +58,12 @@ export default {
         yearsRangeSelectionLabel: '选择年度范围'
     },
     coreCard: {
-        ariaDescription: 'Active, Press Enter to activate',
-        roleDescription: '{cardType} Card'
+        ariaDescription: '活动，按 Enter 激活',
+        roleDescription: '{cardType} 卡'
     },
     coreCarousel: {
         leftNavigationBtnLabel: '转到上一个项目',
-        pageIndicatorLabel: '显示 {itemNum}/{totalNum} 个项目',
+        pageIndicatorLabel: '显示项目 {itemNum}，共 {totalNum} 个',
         rightNavigationBtnLabel: '转到下一个项目'
     },
     coreCombobox: {
@@ -95,7 +96,7 @@ export default {
     },
     coreFeedListItem: {
         lessLabel: '更少',
-        moreLabel: '另外 {count} 个'
+        moreLabel: '超出 {count} 个字符'
     },
     coreGridList: {
         filterBarCancelButtonTitle: '取消',
@@ -127,16 +128,16 @@ export default {
     coreMultiComboBox: {
         listGroupHeader: '组标题',
         multiComboBoxAriaLabel: '多值组合框',
-        selectAllLabel: '全选（已选 {selectedItems} 个，共 {totalItems} 个）'
+        selectAllLabel: '全选 ({selectedItems}/{totalItems})'
     },
     coreMultiInput: {
-        countListResultsPlural: '{0} 个结果列表项目。',
+        countListResultsPlural: '{count} 个结果列表项目。',
         countListResultsSingular: '1 个结果列表项目。',
         escapeNavigateTokens: '按 escape 退出输入字段并使用向左和向右箭头键浏览所选选项。',
         multiInputAriaLabel: '多值输入',
         navigateSelectionsWithArrows: '使用向上和向下箭头导航选择。',
         noResults: '无结果。',
-        showAll: '显示所有 ({count})',
+        showAll: '全部显示 ({count})',
         tokensCountText: '包含的令牌总数：{length}。'
     },
     coreNavigation: {
@@ -178,7 +179,7 @@ export default {
         positive: '输入已成功验证'
     },
     coreOverflowLayout: {
-        moreItemsButton: '另外 {count} 个'
+        moreItemsButton: '超出 {count} 个字符'
     },
     corePagination: {
         ariaLabel: '分页',
@@ -186,7 +187,7 @@ export default {
         firstLabel: '首页',
         inputAriaLabel: '页面输入，当前页面，第 {pageNumber} 页，共 {totalCount} 页',
         itemsPerPageLabel: '每页结果数：',
-        labelAfterInputMobile: '共计 {totalCount}',
+        labelAfterInputMobile: '共 {totalCount} 页',
         labelBeforeInputMobile: '页：',
         lastLabel: '末页',
         nextLabel: '下一页',
@@ -289,7 +290,7 @@ export default {
         deleteButtonLabel: '可删除'
     },
     coreTokenizer: {
-        moreLabel: '另外 {count} 个',
+        moreLabel: '超出 {count} 个字符',
         tokenizerLabel: '分词器'
     },
     coreToolbar: {
@@ -390,7 +391,7 @@ export default {
         watchersInputPlaceholder: '在此搜索..'
     },
     platformCombobox: {
-        countListResultsPlural: '{0} 个结果列表项目',
+        countListResultsPlural: '{count} 结果列表项目',
         countListResultsSingular: '1 个结果列表项目'
     },
     platformFeedInput: {
@@ -524,7 +525,7 @@ export default {
         filterDialogCancelBtnLabel: '取消',
         filterDialogConfirmBtnLabel: '确定',
         filterDialogFilterBy: '筛选条件',
-        filterDialogFilterByLabel: '筛选条件：{filterLabel}',
+        filterDialogFilterByLabel: '筛选依据：{filterLabel}',
         filterDialogFilterTitle: '筛选器',
         filterDialogNotFilteredLabel: '（未筛选）',
         filteredBy: '过滤条件',
@@ -546,7 +547,7 @@ export default {
         headerMenuUnfreeze: '取消冻结列',
         headerMenuUnfreezePlural: '取消冻结列',
         loadMore: '显示更多',
-        navigationColumnTitle: 'Row Actions',
+        navigationColumnTitle: '行操作',
         noVisibleColumnsMessage: '此刻，表中没有可见的列。请在表设置中选择所需的列。',
         P13ColumnsDialogCancelBtnLabel: '取消',
         P13ColumnsDialogConfirmationBtnLabel: '确定',
@@ -568,7 +569,7 @@ export default {
         P13FilterDialogExcludePanelTitleWithCount: '排除 ({count})',
         P13FilterDialogExcludePanelTitleWithoutCount: '排除',
         P13FilterDialogHeader: '筛选条件',
-        P13FilterDialogIncludePanelTitleWithCount: '包含 ({count})',
+        P13FilterDialogIncludePanelTitleWithCount: '包括 ({count})',
         P13FilterDialogIncludePanelTitleWithoutCount: '包含',
         P13FilterDialogRemoveFilterBtnTitle: '删除筛选器',
         P13FilterStrategyLabelAfter: '之后',
@@ -630,7 +631,7 @@ export default {
         toolbarSearchPlaceholder: '搜索'
     },
     platformTextarea: {
-        counterMessageCharactersOverTheLimitPlural: '超出限制 {count} 个字符',
+        counterMessageCharactersOverTheLimitPlural: '超过限值 {count} 个字符',
         counterMessageCharactersOverTheLimitSingular: '超出限制 1 个字符',
         counterMessageCharactersRemainingPlural: '剩余 {count} 个字符',
         counterMessageCharactersRemainingSingular: '剩余 1 个字符'
@@ -679,7 +680,7 @@ export default {
         defineConditionConditionStrategyLabelNotEqualTo: '不等于',
         defineConditionConditionStrategyLabelStartsWith: '开始为',
         defineConditionFromPlaceholder: '发件人',
-        defineConditionMaxCountError: '输入不超过 {count} 个字符的值',
+        defineConditionMaxCountError: '输入长度不超过 {count} 个字符的值',
         defineConditionRemoveConditionButtonTitle: '删除条件',
         defineConditionSelectedValueHiddenA11yLabel: '所选值 {value}',
         defineConditionTitle: '产品',

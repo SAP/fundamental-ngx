@@ -27,7 +27,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'เมนูนำทาง',
-        overflowTitleMore: 'คลิกหรือกด Enter เพื่อดูรายละเอียดเพิ่มเติม'
+        overflowTitleMore: 'คลิกหรือกด Enter เพื่อดูรายละเอียดเพิ่มเติม',
+        positionLabel: '{current} จาก {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'ไม่ว่าง',
@@ -57,13 +58,13 @@ export default {
         yearsRangeSelectionLabel: 'เลือกช่วงปี'
     },
     coreCard: {
-        ariaDescription: 'Active, Press Enter to activate',
-        roleDescription: '{cardType} Card'
+        ariaDescription: 'แอคทีฟ กด Enter เพื่อเปิดใช้งาน',
+        roleDescription: 'บัตร{cardType}'
     },
     coreCarousel: {
-        leftNavigationBtnLabel: 'ไปยังไอเท็มก่อนหน้า',
+        leftNavigationBtnLabel: 'ไปที่ไอเท็มก่อนหน้า',
         pageIndicatorLabel: 'แสดงไอเท็ม {itemNum} จาก {totalNum} รายการ',
-        rightNavigationBtnLabel: 'ไปยังไอเท็มถัดไป'
+        rightNavigationBtnLabel: 'ไปที่ไอเท็มถัดไป'
     },
     coreCombobox: {
         clearButtonTitle: 'เคลียร์ข้อมูลที่ป้อน'
@@ -95,7 +96,7 @@ export default {
     },
     coreFeedListItem: {
         lessLabel: 'น้อยลง',
-        moreLabel: 'อีก {count} รายการ'
+        moreLabel: '{count} เพิ่มขึ้น'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'ยกเลิก',
@@ -127,7 +128,7 @@ export default {
     coreMultiComboBox: {
         listGroupHeader: 'ส่วนหัวของกลุ่ม',
         multiComboBoxAriaLabel: 'คอมโบบ็อกซ์แบบหลายค่า',
-        selectAllLabel: 'เลือกทั้งหมด ({selectedItems} จาก {totalItems}) รายการ'
+        selectAllLabel: 'เลือกทั้งหมด ({selectedItems} จาก {totalItems})'
     },
     coreMultiInput: {
         countListResultsPlural: 'ไอเท็มในรายการผลลัพธ์ {count} รายการ',
@@ -145,7 +146,7 @@ export default {
         navigationPath: 'Navigation Path'
     },
     coreNestedList: {
-        linkItemAriaLabel: 'ไอเท็มแบบทรี {itemDetails} {selectedDescription}'
+        linkItemAriaLabel: 'ไอเท็มแบบทรี {itemDetails}, {selectedDescription}'
     },
     coreNotification: {
         groupAriaDescription: 'กลุ่มการแจ้งให้ทราบ',
@@ -179,7 +180,7 @@ export default {
         positive: 'ตรวจสอบความถูกต้องของรายการได้สำเร็จ'
     },
     coreOverflowLayout: {
-        moreItemsButton: 'อีก {count} รายการ'
+        moreItemsButton: '{count} เพิ่มขึ้น'
     },
     corePagination: {
         ariaLabel: 'การแบ่งหน้า',
@@ -193,7 +194,7 @@ export default {
         nextLabel: 'ถัดไป',
         pageLabel: 'หน้า {pageNumber}',
         previousLabel: 'ก่อนหน้า',
-        totalResultsLabel: 'ผลลัพธ์ {totalCount} รายการ'
+        totalResultsLabel: '{totalCount} ผลลัพธ์'
     },
     coreProductSwitch: {
         ariaLabel: 'การสลับผลิตภัณฑ์'
@@ -290,7 +291,7 @@ export default {
         deleteButtonLabel: 'สามารถลบได้'
     },
     coreTokenizer: {
-        moreLabel: 'อีก {count} รายการ',
+        moreLabel: '{count} เพิ่มขึ้น',
         tokenizerLabel: 'ตัวแปลงเป็น Token'
     },
     coreToolbar: {
@@ -392,7 +393,7 @@ export default {
         watchersInputPlaceholder: 'เลือกที่นี่...'
     },
     platformCombobox: {
-        countListResultsPlural: 'ไอเท็มในรายการผลลัพธ์ {count} รายการ',
+        countListResultsPlural: '{count} ไอเท็มในรายการผลลัพธ์',
         countListResultsSingular: 'ไอเท็มในรายการผลลัพธ์ 1 รายการ'
     },
     platformFeedInput: {
@@ -548,7 +549,7 @@ export default {
         headerMenuUnfreeze: 'ยกเลิกการตรึงคอลัมน์',
         headerMenuUnfreezePlural: 'ยกเลิกการตรึงคอลัมน์',
         loadMore: 'แสดงเพิ่มเติม',
-        navigationColumnTitle: 'Row Actions',
+        navigationColumnTitle: 'การดำเนินการในแถว',
         noVisibleColumnsMessage:
             'ไม่มีคอลัมน์ที่มองเห็นได้ในตารางในขณะนี้ กรุณาเลือกคอลัมน์ที่คุณต้องการในการกำหนดค่าตาราง',
         P13ColumnsDialogCancelBtnLabel: 'ยกเลิก',
@@ -568,7 +569,7 @@ export default {
         P13FilterDialogAddFilterBtnTitle: 'เพิ่มตัวกรอง',
         P13FilterDialogCancelBtnLabel: 'ยกเลิก',
         P13FilterDialogConfirmationBtnLabel: 'ตกลง',
-        P13FilterDialogExcludePanelTitleWithCount: 'แยกออก ({count})',
+        P13FilterDialogExcludePanelTitleWithCount: 'ไม่รวม ({count})',
         P13FilterDialogExcludePanelTitleWithoutCount: 'แยกออก',
         P13FilterDialogHeader: 'กรองตาม',
         P13FilterDialogIncludePanelTitleWithCount: 'รวม ({count})',
@@ -682,7 +683,7 @@ export default {
         defineConditionConditionStrategyLabelNotEqualTo: 'ไม่เท่ากับ',
         defineConditionConditionStrategyLabelStartsWith: 'ขึ้นต้นด้วย',
         defineConditionFromPlaceholder: 'จาก',
-        defineConditionMaxCountError: 'ป้อนค่าที่มีอักขระไม่เกิน {count} ตัว',
+        defineConditionMaxCountError: 'ป้อนค่าที่มีไม่เกิน {count} อักขระ',
         defineConditionRemoveConditionButtonTitle: 'เอาเงื่อนไขออก',
         defineConditionSelectedValueHiddenA11yLabel: 'ค่าที่เลือก {value}',
         defineConditionTitle: 'ผลิตภัณฑ์',

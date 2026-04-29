@@ -1,0 +1,8 @@
+{
+    "mcpServers": {
+        "fundamental-styles": {
+            "command": "npx",
+            "args": ["-y", "@fundamental-styles/mcp"]
+        }
+    }
+}

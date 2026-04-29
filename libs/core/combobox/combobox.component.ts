@@ -30,7 +30,6 @@ import {
     SimpleChanges,
     TemplateRef,
     ViewChild,
-    ViewChildren,
     ViewContainerRef,
     ViewEncapsulation,
     forwardRef,
@@ -69,7 +68,6 @@ import { InputGroupComponent, InputGroupInputDirective } from '@fundamental-ngx/
 import {
     FD_LIST_MESSAGE_DIRECTIVE,
     ListComponent,
-    ListGroupHeaderDirective,
     ListItemComponent,
     ListMessageDirective,
     ListTitleDirective
@@ -132,7 +130,6 @@ let comboboxUniqueId = 0;
         ListComponent,
         ListItemComponent,
         ListTitleDirective,
-        ListGroupHeaderDirective,
         InputGroupComponent,
         InputGroupInputDirective,
         FormsModule,
@@ -411,10 +408,6 @@ export class ComboboxComponent<T = any>
     /** @hidden */
     @ContentChild(ComboboxItemDirective)
     private readonly _comboboxItemRenderer: ComboboxItemDirective;
-
-    /** @hidden */
-    @ViewChildren('item', { read: ElementRef })
-    private readonly items: QueryList<ElementRef>;
 
     /** When communicateByObject is true, specifies which property of the selected object
      * should be used as the form control value. If not specified, the entire object is returned.
@@ -806,23 +799,6 @@ export class ComboboxComponent<T = any>
     isSelected(term: any): boolean {
         const termValue = this.communicateByObject ? term : this.displayFn(term);
         return this.getValue() === termValue;
-    }
-
-    /** @hidden */
-    _getGroupItemIds(groupIndex: number): string {
-        if (!this.items?.length) {
-            return '';
-        }
-
-        const groupItemIds = this.items
-            .filter((el) => {
-                const idWithGroup = el.nativeElement.getAttribute('id-with-group-index');
-                const groupIdx = idWithGroup.split('-')[idWithGroup.split('-').length - 1];
-                return groupIdx === String(groupIndex);
-            })
-            .map((el) => el.nativeElement.getAttribute('id'));
-
-        return groupItemIds?.join(' ');
     }
 
     /** Method that picks other value moved from current one by offset, called only when combobox is closed */

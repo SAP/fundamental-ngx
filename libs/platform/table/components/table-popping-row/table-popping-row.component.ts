@@ -6,10 +6,19 @@ import {
     HostBinding,
     Input,
     Output,
+    QueryList,
+    ViewChildren,
     ViewEncapsulation,
     inject
 } from '@angular/core';
-import { DisabledBehaviorDirective, FDK_FOCUSABLE_LIST_DIRECTIVE, ValueByPathPipe } from '@fundamental-ngx/cdk/utils';
+import {
+    DisabledBehaviorDirective,
+    FDK_FOCUSABLE_ITEM_DIRECTIVE,
+    FDK_FOCUSABLE_LIST_DIRECTIVE,
+    FocusableItem,
+    FocusableItemDirective,
+    ValueByPathPipe
+} from '@fundamental-ngx/cdk/utils';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import {
     TableCellDirective,
@@ -75,6 +84,12 @@ export class TablePoppingRowComponent<T> extends TableRowDirective {
     cellClicked = new EventEmitter<{ index: number; row: TableRow<T> }>();
 
     /** @hidden */
+    @ViewChildren(FDK_FOCUSABLE_ITEM_DIRECTIVE)
+    private set _focusableCellItems(items: QueryList<FocusableItemDirective>) {
+        this.setItems(items.toArray());
+    }
+
+    /** @hidden */
     readonly SELECTION_MODE = SelectionMode;
 
     /** @hidden */
@@ -85,4 +100,9 @@ export class TablePoppingRowComponent<T> extends TableRowDirective {
 
     /** @hidden */
     readonly _fdpTableService = inject(TableService);
+
+    /** Set items programmatically. */
+    setItems(items: ReadonlyArray<FocusableItem>): void {
+        this._itemsOverride.set(items);
+    }
 }

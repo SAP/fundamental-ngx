@@ -28,7 +28,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Útkövetési napló',
-        overflowTitleMore: 'Kattintson vagy nyomja le az entert a további részletek megjelenítéséhez'
+        overflowTitleMore: 'Kattintson vagy nyomja le az entert a további részletek megjelenítéséhez',
+        positionLabel: '{current}/{total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Elfoglalt',
@@ -58,12 +59,12 @@ export default {
         yearsRangeSelectionLabel: 'Évtartomány kiválasztása'
     },
     coreCard: {
-        ariaDescription: 'Active, Press Enter to activate',
-        roleDescription: '{cardType} Card'
+        ariaDescription: 'Aktív; nyomja meg az Enter billentyűt az aktiváláshoz',
+        roleDescription: '{cardType} típusú kártya'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'Ugrás az előző elemre',
-        pageIndicatorLabel: '{itemNum} / {totalNum}. tétel megjelenítve',
+        pageIndicatorLabel: '{itemNum}/{totalNum} elem látható',
         rightNavigationBtnLabel: 'Ugrás a következő elemre'
     },
     coreCombobox: {
@@ -96,7 +97,7 @@ export default {
     },
     coreFeedListItem: {
         lessLabel: 'Kevesebb',
-        moreLabel: 'További {count}'
+        moreLabel: 'további {count}'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'Mégse',
@@ -128,7 +129,7 @@ export default {
     coreMultiComboBox: {
         listGroupHeader: 'Csoportfejléc',
         multiComboBoxAriaLabel: 'Többértékes kombinált lista',
-        selectAllLabel: 'Összes kiválasztása ({selectedItems} / {totalItems})'
+        selectAllLabel: 'Összes kiválasztása ({selectedItems}/{totalItems})'
     },
     coreMultiInput: {
         countListResultsPlural: '{count} listaelemet kapott eredményül.',
@@ -146,7 +147,7 @@ export default {
         navigationPath: 'Navigation Path'
     },
     coreNestedList: {
-        linkItemAriaLabel: '{itemDetails} struktúraelem, {selectedDescription}'
+        linkItemAriaLabel: 'Fastruktúra eleme — {itemDetails}, {selectedDescription}'
     },
     coreNotification: {
         groupAriaDescription: 'Értesítési csoport',
@@ -180,11 +181,11 @@ export default {
         positive: 'A bejegyzés sikeresen érvényesítve lett'
     },
     coreOverflowLayout: {
-        moreItemsButton: 'További {count}'
+        moreItemsButton: 'további {count}'
     },
     corePagination: {
         ariaLabel: 'Oldalakra tördelés',
-        currentPageAriaLabel: 'A(z) {pageNumber}. a jelenlegi oldal',
+        currentPageAriaLabel: 'A(z) {pageNumber}. oldal az aktuális oldal',
         firstLabel: 'Első',
         inputAriaLabel: 'Oldalbevitel, jelenlegi oldal, {pageNumber} / {totalCount} oldal',
         itemsPerPageLabel: 'Találatok száma oldalanként:',
@@ -218,17 +219,17 @@ export default {
     },
     coreSlider: {
         multipleHandle1MinMaxDetails: 'A tartománycsúszka minimális értéke {min}, maximális értéke {max}',
-        multipleHandle1ValuemaxDetails: 'Az értéke {value}',
-        multipleHandle1ValueminDetails: 'Az értéke {value}',
-        multipleHandle1ValueNowDetails: 'A jelenlegi érték {value}',
+        multipleHandle1ValuemaxDetails: 'Az érték {value}',
+        multipleHandle1ValueminDetails: 'Az érték {value}',
+        multipleHandle1ValueNowDetails: 'Az aktuális érték {value}',
         multipleHandle2MinMaxDetails: 'A tartománycsúszka minimális értéke {min}, maximális értéke {max}',
-        multipleHandle2ValuemaxDetails: 'Az értéke {value}',
-        multipleHandle2ValueminDetails: 'Az értéke {value}',
-        multipleHandle2ValueNowDetails: 'A jelenlegi érték {value}',
+        multipleHandle2ValuemaxDetails: 'Az érték {value}',
+        multipleHandle2ValueminDetails: 'Az érték {value}',
+        multipleHandle2ValueNowDetails: 'Az aktuális érték {value}',
         singleMinMaxDetails: 'A csúszka minimális értéke {min}, maximális értéke {max}',
-        singleValuemaxDetails: 'Az értéke {value}',
-        singleValueminDetails: 'Az értéke {value}',
-        singleValueNowDetails: 'A jelenlegi érték {value}'
+        singleValuemaxDetails: 'Az érték {value}',
+        singleValueminDetails: 'Az érték {value}',
+        singleValueNowDetails: 'Az aktuális érték {value}'
     },
     coreSplitButton: {
         arialLabel: 'Felosztott gomb',
@@ -291,7 +292,7 @@ export default {
         deleteButtonLabel: 'Törölhető'
     },
     coreTokenizer: {
-        moreLabel: 'További {count}',
+        moreLabel: 'további {count}',
         tokenizerLabel: 'Tokenizáló'
     },
     coreToolbar: {
@@ -363,9 +364,9 @@ export default {
         nodeActionRemove: 'Eltávolítás',
         nodeMembersCount: '{count} tag',
         nodeMenuButtonTitle: 'Menü',
-        nodeStatusDueInXDays: '{count} napon belül esedékes',
+        nodeStatusDueInXDays: '{count} nap múlva esedékes',
         nodeStatusDueToday: 'Ma esedékes',
-        nodeStatusXDaysOverdue: '{count} napja késedelmes',
+        nodeStatusXDaysOverdue: '{count} nappal a határidőn túl',
         nodeVariousTeams: 'Különböző csapatok',
         prevButtonAriaLabel: 'Vissza az előző diára',
         selectTypeDialogCancelButton: 'Mégse',
@@ -388,12 +389,12 @@ export default {
         userDetailsCancelBtnLabel: 'Mégse',
         userDetailsHeader: 'Részlet',
         userDetailsSendReminderBtnLabel: 'Emlékeztető küldése',
-        userListSelectedItemsCountPlural: '{count} elem kiválasztva',
+        userListSelectedItemsCountPlural: '{count} tétel kiválasztva',
         userListSelectedItemsCountSingular: '1 elem kiválasztva',
         watchersInputPlaceholder: 'Itt kereshet...'
     },
     platformCombobox: {
-        countListResultsPlural: '{count} listaelemet kapott eredményül',
+        countListResultsPlural: '{count} listaelem található',
         countListResultsSingular: '1 listaelemet kapott eredményül'
     },
     platformFeedInput: {
@@ -438,7 +439,7 @@ export default {
         allButtonLabel: 'Összes',
         cancelLabel: 'Mégse',
         clearButtonTitle: 'Keresés törlése',
-        counterLabel: 'Összes találat: {count}',
+        counterLabel: 'Találatok száma összesen: {count}',
         deleteButtonAriaLabel: 'Eltávolítás',
         deleteButtonTitle: 'Javaslat eltávolítása',
         groupHeader: 'Csoportfejléc',
@@ -527,7 +528,7 @@ export default {
         filterDialogCancelBtnLabel: 'Mégse',
         filterDialogConfirmBtnLabel: 'OK',
         filterDialogFilterBy: 'Szűrés alapja',
-        filterDialogFilterByLabel: 'Szűrés alapja: {filterLabel}',
+        filterDialogFilterByLabel: 'Szűrési szempont: {filterLabel}',
         filterDialogFilterTitle: 'Szűrő',
         filterDialogNotFilteredLabel: '(Nincs szűrve)',
         filteredBy: 'Alkalmazott szűrő:',
@@ -549,7 +550,7 @@ export default {
         headerMenuUnfreeze: 'Oszlop rögzítésének feloldása',
         headerMenuUnfreezePlural: 'Oszlop rögzítésének feloldása',
         loadMore: 'Több megjelenítése',
-        navigationColumnTitle: 'Row Actions',
+        navigationColumnTitle: 'Sorműveletek',
         noVisibleColumnsMessage:
             'Jelenleg nincs látható oszlop a táblában. Válassza ki a kívánt oszlopokat a táblabeállításokban.',
         P13ColumnsDialogCancelBtnLabel: 'Mégse',
@@ -569,10 +570,10 @@ export default {
         P13FilterDialogAddFilterBtnTitle: 'Szűrő hozzáadása',
         P13FilterDialogCancelBtnLabel: 'Mégse',
         P13FilterDialogConfirmationBtnLabel: 'OK',
-        P13FilterDialogExcludePanelTitleWithCount: 'Kizárás ({count})',
+        P13FilterDialogExcludePanelTitleWithCount: 'Kihagyás ({count})',
         P13FilterDialogExcludePanelTitleWithoutCount: 'Kizárás',
         P13FilterDialogHeader: 'Szűrés alapja:',
-        P13FilterDialogIncludePanelTitleWithCount: 'Beleszámítás ({count})',
+        P13FilterDialogIncludePanelTitleWithCount: 'Belefoglalás ({count})',
         P13FilterDialogIncludePanelTitleWithoutCount: 'Beleszámítás',
         P13FilterDialogRemoveFilterBtnTitle: 'Szűrő eltávolítása',
         P13FilterStrategyLabelAfter: 'ez után:',
@@ -612,7 +613,7 @@ export default {
         selectAllCheckboxMixedLongLabel: 'Jelölőnégyzet, vegyes, kattintson az összes kijelöléséhez',
         selectSingleRow: 'A sor kijelöléséhez nyomja meg a „szóköz” billentyűt',
         settingsDialogHeader: 'Beállítások',
-        showingBlankOfBlank: '{totalGrowingItemsCount} megjelenítve ennyiből: {totalGrowingItemsCount}',
+        showingBlankOfBlank: '{totalGrowingItemsCount} / {totalGrowingItemsCount} látható',
         sortDialogCancelBtnLabel: 'Mégse',
         sortDialogConfirmBtnLabel: 'OK',
         sortDialogHeader: 'Rendezés',
@@ -634,9 +635,9 @@ export default {
         toolbarSearchPlaceholder: 'Keresés'
     },
     platformTextarea: {
-        counterMessageCharactersOverTheLimitPlural: '{count} karakterrel több a megengedettnél',
+        counterMessageCharactersOverTheLimitPlural: '{count} karakterrel hosszabb a megengedettnél',
         counterMessageCharactersOverTheLimitSingular: '1 karakterrel több a megengedettnél',
-        counterMessageCharactersRemainingPlural: 'Még {count} karakter írható be',
+        counterMessageCharactersRemainingPlural: 'Még {count} karaktert írhat be',
         counterMessageCharactersRemainingSingular: 'Még 1 karakter írható be'
     },
     platformVariantManagement: {
@@ -683,9 +684,9 @@ export default {
         defineConditionConditionStrategyLabelNotEqualTo: 'nem egyenlő ezzel:',
         defineConditionConditionStrategyLabelStartsWith: 'ezzel kezdődik:',
         defineConditionFromPlaceholder: 'ettől:',
-        defineConditionMaxCountError: 'Legfeljebb {count} karakterből álló értéket adjon meg',
+        defineConditionMaxCountError: 'Adjon meg egy legfeljebb {count} karaktert tartalmazó értéket',
         defineConditionRemoveConditionButtonTitle: 'Feltétel eltávolítása',
-        defineConditionSelectedValueHiddenA11yLabel: 'kiválasztott érték {value}',
+        defineConditionSelectedValueHiddenA11yLabel: 'a(z) {value} érték lett kiválasztva',
         defineConditionTitle: 'Termék',
         defineConditionToPlaceholder: 'eddig:',
         defineConditionValuePlaceholder: 'érték',
@@ -705,9 +706,9 @@ export default {
         selectMobileConditionEmpty: 'Üres',
         selectMobileTabBackBtnTitle: 'Vissza',
         selectMobileTabBtnOpenDialogLabel: 'Párbeszédpanel megnyitása',
-        selectMobileTabTitle: '„{title}” lap',
+        selectMobileTabTitle: '{title} lap',
         selectTabCountHiddenA11yLabel: '{rowCount} sort és {colCount} oszlopot tartalmaz',
-        selectTabDisplayCountLabel: 'Elemek ({count})',
+        selectTabDisplayCountLabel: 'Tételek ({count})',
         selectTabMoreBtnLabel: 'Több',
         selectTabTitle: 'Válasszon a listáról',
         successButtonLabel: 'OK'

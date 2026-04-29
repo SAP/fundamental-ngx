@@ -27,7 +27,8 @@ export default {
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Breadcrumb Trail',
-        overflowTitleMore: 'Click or press enter to view more details'
+        overflowTitleMore: 'Click or press enter to view more details',
+        positionLabel: '{current} of {total}'
     },
     coreBusyIndicator: {
         defaultAriaValueText: 'Busy',

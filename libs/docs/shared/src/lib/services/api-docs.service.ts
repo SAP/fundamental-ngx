@@ -2,11 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
+import { ApiModel } from '../core-helpers/api/api.model';
 import { CURRENT_LIB, Libraries } from '../utilities/libraries';
 
 @Injectable()
 export class ApiDocsService {
     readonly BASE_URL = 'assets/typedoc/';
+    readonly API_JSON_URL = 'assets/typedoc/api-json/';
 
     constructor(
         private httpClient: HttpClient,
@@ -19,6 +21,12 @@ export class ApiDocsService {
         return this.httpClient.get<string>(url, {
             responseType: 'text' as 'json'
         });
+    }
+
+    getComponentApi(className: string): Observable<ApiModel> {
+        const filename = className.toLowerCase() + '.json';
+        const url = this.buildUrl(this.API_JSON_URL, this.currentLib || 'core', filename);
+        return this.httpClient.get<ApiModel>(url);
     }
 
     private buildUrl(...tokens: string[]): string {

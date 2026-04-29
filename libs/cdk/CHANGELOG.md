@@ -1,3 +1,95 @@
+## 0.62.0-rc.98 (2026-04-28)
+
+This was a version bump only for cdk to align it with other projects, there were no code changes.
+
+## 0.62.0-rc.97 (2026-04-27)
+
+This was a version bump only for cdk to align it with other projects, there were no code changes.
+
+## 0.62.0-rc.96 (2026-04-27)
+
+### 🩹 Fixes
+
+- **ui5:** make webcomponents wrappers more visible ([#14156](https://github.com/SAP/fundamental-ngx/pull/14156))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
+## 0.62.0-rc.95 (2026-04-25)
+
+This was a version bump only for cdk to align it with other projects, there were no code changes.
+
+## 0.62.0-rc.94 (2026-04-25)
+
+This was a version bump only for cdk to align it with other projects, there were no code changes.
+
+## 0.62.0-rc.93 (2026-04-24)
+
+This was a version bump only for cdk to align it with other projects, there were no code changes.
+
+## 0.62.0-rc.92 (2026-04-24)
+
+This was a version bump only for cdk to align it with other projects, there were no code changes.
+
+## 0.62.0-rc.91 (2026-04-24)
+
+This was a version bump only for cdk to align it with other projects, there were no code changes.
+
+## 0.62.0-rc.90 (2026-04-24)
+
+This was a version bump only for cdk to align it with other projects, there were no code changes.
+
+## 0.62.0-rc.89 (2026-04-21)
+
+This was a version bump only for cdk to align it with other projects, there were no code changes.
+
+## 0.62.0-rc.88 (2026-04-20)
+
+This was a version bump only for cdk to align it with other projects, there were no code changes.
+
+## 0.62.0-rc.87 (2026-04-18)
+
+This was a version bump only for cdk to align it with other projects, there were no code changes.
+
+## 0.62.0-rc.86 (2026-04-17)
+
+This was a version bump only for cdk to align it with other projects, there were no code changes.
+
+## 0.62.0-rc.85 (2026-04-17)
+
+### 🚀 Features
+
+- add mcp ([#14121](https://github.com/SAP/fundamental-ngx/pull/14121))
+
+### ❤️ Thank You
+
+- deno
+
+## 0.62.0-rc.84 (2026-04-17)
+
+This was a version bump only for cdk to align it with other projects, there were no code changes.
+
+## 0.62.0-rc.83 (2026-04-17)
+
+This was a version bump only for cdk to align it with other projects, there were no code changes.
+
+## 0.62.0-rc.82 (2026-04-17)
+
+This was a version bump only for cdk to align it with other projects, there were no code changes.
+
+## 0.62.0-rc.81 (2026-04-17)
+
+This was a version bump only for cdk to align it with other projects, there were no code changes.
+
+## 0.62.0-rc.80 (2026-04-17)
+
+This was a version bump only for cdk to align it with other projects, there were no code changes.
+
+## 0.62.0-rc.79 (2026-04-17)
+
+This was a version bump only for cdk to align it with other projects, there were no code changes.
+
 ## 0.62.0-rc.78 (2026-04-16)
 
 This was a version bump only for cdk to align it with other projects, there were no code changes.
