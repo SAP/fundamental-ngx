@@ -60,34 +60,16 @@ Custom WebdriverIO executor for running e2e tests in the NX environment (single 
 nx run docs-core-date-picker:e2e
 ```
 
----
-
-### `e2e-test-app`
-
-Custom WebdriverIO executor for running e2e tests against the entire docs application.
-The default configuration is `affected-local` — only specs for projects affected by current branch changes are run.
-
-```bash
-# Run specs for affected projects only (default)
-nx run docs:e2e-app
-nx run docs:e2e-app:affected-local
-
-# Run all specs regardless of affected status
-nx run docs:e2e-app:all-local
-```
-
----
-
 ### `i18n-manage`
 
 CLI for managing translation keys across all language files. Supports adding, removing, and syncing keys.
 
 ```bash
 # Add a new translation key
-nx run i18n:i18n-manage -- add-key FD_BUTTON_LABEL --defaultValue="Submit"
+nx run i18n:i18n-manage --command=add --key=coreButton.submit --value="Submit" --commentType=XBUT --comment="Submit button"
 
-# List all keys
-nx run i18n:i18n-manage -- list-keys
+# Search within existing keys
+nx run i18n:i18n-manage --command=search --searchTerm=save
 ```
 
 See [i18n-manage README](src/executors/i18n-manage/README.md) for the full command reference.
