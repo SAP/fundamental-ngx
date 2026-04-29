@@ -40,6 +40,26 @@ nx build webc-generator && nx run-many -t generate -p ui5-webcomponents ui5-webc
 
 This overwrites all files in `libs/ui5-webcomponents`, `libs/ui5-webcomponents-fiori`, and `libs/ui5-webcomponents-ai`. Commit the regenerated output as part of the same PR as your generator changes.
 
+Individual packages can be regenerated in isolation if you only need to update one library:
+
+```bash
+nx run ui5-webcomponents-base:generate --skip-nx-cache
+nx run ui5-webcomponents:generate --skip-nx-cache
+nx run ui5-webcomponents-ai:generate --skip-nx-cache
+nx run ui5-webcomponents-fiori:generate --skip-nx-cache
+```
+
+> **Note:** After running `yarn cleanup`, the generated output will be missing or stale. Always regenerate before building. It is also advised that you do `yarn cleanup` before you regenerate a package to avoid any intermittent errors.
+
+After regenerating, the packages must also be built before the documentation app (`yarn start`) can run:
+
+```bash
+nx run ui5-webcomponents-base:build --skip-nx-cache
+nx run ui5-webcomponents:build --skip-nx-cache
+nx run ui5-webcomponents-ai:build --skip-nx-cache
+nx run ui5-webcomponents-fiori:build --skip-nx-cache
+```
+
 ## Adding a new wrapper
 
 Wrappers are derived from UI5 component metadata — you do not add them manually. To expose a new UI5 Web Component:
