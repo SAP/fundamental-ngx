@@ -9,6 +9,9 @@ on:
             - 'apps/e2e-harness/**'
             - 'playwright.config.ts'
 
+permissions:
+    contents: read
+
 env:
     NODE_VERSION: '22.x'
 
@@ -19,10 +22,14 @@ concurrency:
 jobs:
     e2e:
         runs-on: ubuntu-latest
+        timeout-minutes: 15
         name: Playwright E2E Tests
+        permissions:
+            contents: write
         steps:
-            - uses: actions/checkout@v4.2.2
+            - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
               with:
+                  ref: ${{ github.head_ref }}
                   fetch-depth: 1
 
             - uses: ./.github/actions/nodejs
@@ -37,9 +44,30 @@ jobs:
               env:
                   CI: true
 
+            - name: Commit missing Linux baselines
+              if: failure() && github.event.pull_request.head.repo.full_name == github.repository
+              run: |
+                  SNAPDIR="apps/e2e-harness/e2e/visual-regression.spec.ts-snapshots"
+                  MISSING=false
+                  for f in test-results/**/*-actual.png; do
+                    [ -f "$f" ] || continue
+                    NAME=$(basename "$f" | sed 's/-actual\.png/-chromium-linux.png/')
+                    if [ ! -f "$SNAPDIR/$NAME" ]; then
+                      cp "$f" "$SNAPDIR/$NAME"
+                      MISSING=true
+                    fi
+                  done
+                  if [ "$MISSING" = "true" ]; then
+                    git config user.name "github-actions"
+                    git config user.email "github-actions@github.com"
+                    git add "$SNAPDIR"/*-linux.png
+                    git commit -m "test(e2e): add missing Linux visual baselines"
+                    git push
+                  fi
+
             - name: Upload test results
               if: failure()
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
               with:
                   name: playwright-report
                   path: playwright-report/
@@ -47,7 +75,7 @@ jobs:
 
             - name: Upload snapshot diffs
               if: failure()
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
               with:
                   name: snapshot-diffs
                   path: test-results/
