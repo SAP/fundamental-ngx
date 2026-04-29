@@ -1,6 +1,6 @@
 {
     "name": "@fundamental-ngx/mcp",
-    "version": "0.62.0-rc.100",
+    "version": "0.62.0-rc.101",
     "description": "MCP server exposing Fundamental NGX component metadata for AI coding assistants",
     "license": "Apache-2.0",
     "repository": {
