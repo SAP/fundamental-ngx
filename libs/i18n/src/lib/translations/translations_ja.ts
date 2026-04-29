@@ -19,7 +19,11 @@ export default {
         toolbarLabel: 'アクションバー'
     },
     coreAvatarGroup: {
-        backButton: '戻る'
+        ariaLabelGroup:
+            'Has popup type dialog conjoined avatars, {count} avatars displayed, {hiddenCount} avatars hidden, activate for complete list',
+        ariaLabelIndividual: 'Individual avatars. {count} avatars displayed, {hiddenCount} avatars hidden',
+        backButton: '戻る',
+        popupBodyAriaLabel: 'With {count} items'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: '階層リンク',

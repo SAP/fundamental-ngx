@@ -20,7 +20,11 @@ export default {
         toolbarLabel: 'Bară de acțiuni'
     },
     coreAvatarGroup: {
-        backButton: 'Înapoi'
+        ariaLabelGroup:
+            'Has popup type dialog conjoined avatars, {count} avatars displayed, {hiddenCount} avatars hidden, activate for complete list',
+        ariaLabelIndividual: 'Individual avatars. {count} avatars displayed, {hiddenCount} avatars hidden',
+        backButton: 'Înapoi',
+        popupBodyAriaLabel: 'With {count} items'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Istoric de navigare',

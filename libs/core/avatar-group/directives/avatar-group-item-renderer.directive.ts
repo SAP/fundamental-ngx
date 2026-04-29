@@ -5,7 +5,6 @@ import { BehaviorSubject, Observable, fromEvent } from 'rxjs';
 import { filter, switchMap } from 'rxjs/operators';
 import { AVATAR_GROUP_HOST_CONFIG } from '../tokens';
 import { AvatarGroupItemDirective } from './avatar-group-item.directive';
-
 @Directive({
     selector: '[fdAvatarGroupItemPortal]',
     exportAs: 'fdAvatarGroupItemPortal',
@@ -110,6 +109,12 @@ export class AvatarGroupItemRendererDirective implements OnInit, FocusableItem {
     private _lastSavedHeight = 0;
 
     /** @hidden */
+    private _posInSet = 0;
+
+    /** @hidden */
+    private _setSize = 0;
+
+    /** @hidden */
     private _hostConfig = inject(AVATAR_GROUP_HOST_CONFIG);
 
     /** @hidden */
@@ -150,6 +155,7 @@ export class AvatarGroupItemRendererDirective implements OnInit, FocusableItem {
         this._element$.next(this.element);
         this.setTabbable(this._hostConfig.type === 'individual');
         this._isFocusable = this._hostConfig.type === 'individual';
+        this._applyAriaPosition();
     }
 
     /**
@@ -164,8 +170,48 @@ export class AvatarGroupItemRendererDirective implements OnInit, FocusableItem {
         this.element.tabIndex = tabbable ? 0 : -1;
     }
 
+    /**
+     * Sets aria-posinset and aria-setsize on the rendered element.
+     * Stored values are applied immediately if the item is visible,
+     * and re-applied on the next show() call otherwise.
+     **/
+    @Input()
+    set posInSet(value: number) {
+        this._posInSet = value;
+        if (this.visible) {
+            this._applyAriaPosition();
+        }
+    }
+
+    get posInSet(): number {
+        return this._posInSet;
+    }
+
+    /** @hidden */
+    @Input()
+    set setSize(value: number) {
+        this._setSize = value;
+        if (this.visible) {
+            this._applyAriaPosition();
+        }
+    }
+
+    get setSize(): number {
+        return this._setSize;
+    }
+
     /** @hidden */
     focus(): void {
         this.element?.focus();
+    }
+
+    /** @hidden */
+    private _applyAriaPosition(): void {
+        const el = this.element;
+        if (!el || !this._posInSet || !this._setSize) {
+            return;
+        }
+        el.setAttribute('aria-posinset', String(this._posInSet));
+        el.setAttribute('aria-setsize', String(this._setSize));
     }
 }

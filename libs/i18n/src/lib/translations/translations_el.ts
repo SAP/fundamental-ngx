@@ -19,7 +19,11 @@ export default {
         toolbarLabel: 'Γραμμή Ενεργειών'
     },
     coreAvatarGroup: {
-        backButton: 'Πίσω'
+        ariaLabelGroup:
+            'Has popup type dialog conjoined avatars, {count} avatars displayed, {hiddenCount} avatars hidden, activate for complete list',
+        ariaLabelIndividual: 'Individual avatars. {count} avatars displayed, {hiddenCount} avatars hidden',
+        backButton: 'Πίσω',
+        popupBodyAriaLabel: 'With {count} items'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Διαδρομή Περιήγησης',

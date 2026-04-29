@@ -137,6 +137,12 @@ export class AvatarGroupHostComponent
                 takeUntilDestroyed(this._destroyRef)
             )
             .subscribe(({ hiddenItems, visibleItems }) => {
+                const allItems = this._portals.toArray();
+                const total = allItems.length;
+                allItems.forEach((item, index) => {
+                    item.posInSet = index + 1;
+                    item.setSize = total;
+                });
                 visibleItems.forEach((item) => item.show());
                 hiddenItems.forEach((item) => item.hide());
                 this._cdr.detectChanges();

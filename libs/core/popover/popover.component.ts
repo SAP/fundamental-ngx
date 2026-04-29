@@ -179,6 +179,9 @@ export class PopoverComponent implements AfterViewInit, AfterContentInit, OnDest
     /** Whether the popover body is resizable */
     readonly resizable = input(false, { transform: booleanAttribute });
 
+    /** ARIA label for the popover body */
+    readonly bodyAriaLabel = input<string | null>(null);
+
     /** Two-way binding for popover open state */
     readonly isOpen = model(false);
 
@@ -273,7 +276,8 @@ export class PopoverComponent implements AfterViewInit, AfterContentInit, OnDest
             additionalTriggerClass: this.additionalTriggerClass() ?? cfg.additionalTriggerClass ?? null,
             closeOnNavigation: this.closeOnNavigation() ?? cfg.closeOnNavigation ?? true,
             fixedPosition: this.fixedPosition() ?? cfg.fixedPosition ?? false,
-            resizable: this.resizable() ?? cfg.resizable ?? false
+            resizable: this.resizable() ?? cfg.resizable ?? false,
+            bodyAriaLabel: this.bodyAriaLabel() ?? cfg.bodyAriaLabel ?? null
         };
     });
 
@@ -333,8 +337,9 @@ export class PopoverComponent implements AfterViewInit, AfterContentInit, OnDest
             const effectiveConfig = this._effectiveConfig();
             const triggerValue = this.trigger();
 
-            // Always sync disabled state to service (for both trigger directive and control usage)
+            // Always sync these to service (for both trigger directive and control usage)
             this._popoverService.disabled.set(effectiveConfig.disabled);
+            this._popoverService.refreshConfiguration({ bodyAriaLabel: effectiveConfig.bodyAriaLabel });
 
             // Full sync only when trigger is set and not in mobile mode (for fdPopoverTrigger directive).
             // In mobile mode, the dialog handles open/close — the popover service should not be involved.

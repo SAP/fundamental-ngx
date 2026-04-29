@@ -20,7 +20,11 @@ export default {
         toolbarLabel: 'Actiebalk'
     },
     coreAvatarGroup: {
-        backButton: 'Terug'
+        ariaLabelGroup:
+            'Has popup type dialog conjoined avatars, {count} avatars displayed, {hiddenCount} avatars hidden, activate for complete list',
+        ariaLabelIndividual: 'Individual avatars. {count} avatars displayed, {hiddenCount} avatars hidden',
+        backButton: 'Terug',
+        popupBodyAriaLabel: 'With {count} items'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Navigatiepad',

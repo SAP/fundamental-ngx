@@ -19,7 +19,11 @@ export default {
         toolbarLabel: 'Eylem Çubuğu'
     },
     coreAvatarGroup: {
-        backButton: 'Geri'
+        ariaLabelGroup:
+            'Has popup type dialog conjoined avatars, {count} avatars displayed, {hiddenCount} avatars hidden, activate for complete list',
+        ariaLabelIndividual: 'Individual avatars. {count} avatars displayed, {hiddenCount} avatars hidden',
+        backButton: 'Geri',
+        popupBodyAriaLabel: 'With {count} items'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'İçerik Haritası Yolu',

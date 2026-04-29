@@ -20,7 +20,11 @@ export default {
         toolbarLabel: 'Aktionsleiste'
     },
     coreAvatarGroup: {
-        backButton: 'Zurück'
+        ariaLabelGroup:
+            'Has popup type dialog conjoined avatars, {count} avatars displayed, {hiddenCount} avatars hidden, activate for complete list',
+        ariaLabelIndividual: 'Individual avatars. {count} avatars displayed, {hiddenCount} avatars hidden',
+        backButton: 'Zurück',
+        popupBodyAriaLabel: 'With {count} items'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Navigationspfad',
