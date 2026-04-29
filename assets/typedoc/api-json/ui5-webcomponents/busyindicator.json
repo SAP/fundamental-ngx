@@ -1,0 +1,64 @@
+{
+  "name": "BusyIndicator",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 41,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "active",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines if the busy indicator is visible on the screen. By default it is not.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 46,
+      "since": null
+    },
+    {
+      "name": "delay",
+      "type": "number",
+      "default": null,
+      "description": "Defines the delay in milliseconds, after which the busy indicator will be visible on the screen.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 51,
+      "since": null
+    },
+    {
+      "name": "size",
+      "type": "'S' | 'M' | 'L'",
+      "default": null,
+      "description": "Defines the size of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 56,
+      "since": null
+    },
+    {
+      "name": "text",
+      "type": "string",
+      "default": null,
+      "description": "Defines text to be displayed below the component. It can be used to inform the user of the current operation.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 61,
+      "since": null
+    },
+    {
+      "name": "textPlacement",
+      "type": "'Top' | 'Bottom'",
+      "default": null,
+      "description": "Defines the placement of the text.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 66,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

@@ -1,0 +1,24 @@
+{
+  "name": "ListSecondaryDirective",
+  "selector": "[fd-list-secondary], [fdListSecondary]",
+  "kind": "Directive",
+  "sourceFile": "list-secondary.directive.ts",
+  "sourceLine": 13,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/list/directives/list-secondary.directive.ts#L13",
+  "description": "",
+  "inputs": [
+    {
+      "name": "type",
+      "type": "'critical' | 'negative' | 'positive' | 'informative'",
+      "default": null,
+      "description": "Type of the secondary list item.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 18,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

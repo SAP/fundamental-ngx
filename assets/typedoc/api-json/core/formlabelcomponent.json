@@ -1,0 +1,124 @@
+{
+  "name": "FormLabelComponent",
+  "selector": "[fd-form-label]",
+  "kind": "Component",
+  "sourceFile": "form-label.component.ts",
+  "sourceLine": 43,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/form/form-label/form-label.component.ts#L43",
+  "description": "Label to be linked to a form control.\n\n```html\n<label fd-form-label for=\"input-id\">Label Text</label>\n<input fd-form-control type=\"text\" id=\"input-id\" />\n```",
+  "inputs": [
+    {
+      "name": "allowWrap",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to allow the text of the form label to wrap.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 90,
+      "since": null
+    },
+    {
+      "name": "colon",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether label text should be appended with colon.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 50,
+      "since": null
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the label is disabled.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 128,
+      "since": null
+    },
+    {
+      "name": "independent",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether this label stands alone (self-centering, no end margin).",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 134,
+      "since": null
+    },
+    {
+      "name": "inlineHelpBodyPlacement",
+      "type": "Placement",
+      "default": null,
+      "description": "The placement of the inline help.\nIt can be one of:\ntop, top-start, top-end, bottom, bottom-start, bottom-end,\nright, right-start, right-end, left, left-start, left-end.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 82,
+      "since": null
+    },
+    {
+      "name": "inlineHelpContent",
+      "type": "Nullable<string | TemplateRef<any>>",
+      "default": "null",
+      "description": "Inline help content. Could be just a string or complex template",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 59,
+      "since": null
+    },
+    {
+      "name": "inlineHelpGlyph",
+      "type": "string",
+      "default": "'question-mark'",
+      "description": "Glyph of icon triggering inline help.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 63,
+      "since": null
+    },
+    {
+      "name": "inlineHelpPlacement",
+      "type": "InlineHelpFormPlacement",
+      "default": "'after'",
+      "description": "If inline help trigger icon should be placed after, or before text.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 86,
+      "since": null
+    },
+    {
+      "name": "inlineHelpTriggers",
+      "type": "string | TriggerConfig[]",
+      "default": null,
+      "description": "Trigger event names for the inline help.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 67,
+      "since": null
+    },
+    {
+      "name": "required",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether form is required.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 46,
+      "since": null
+    },
+    {
+      "name": "unitDescription",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether this label is a unit description (e.g., \"kg\", \"USD\").",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 131,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

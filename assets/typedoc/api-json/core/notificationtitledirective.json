@@ -1,0 +1,34 @@
+{
+  "name": "NotificationTitleDirective",
+  "selector": "[fdNotificationTitle], [fd-notification-title]",
+  "kind": "Directive",
+  "sourceFile": "notification-title.directive.ts",
+  "sourceLine": 21,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/notification/directives/notification-title.directive.ts#L21",
+  "description": "",
+  "inputs": [
+    {
+      "name": "id",
+      "type": "string",
+      "default": null,
+      "description": "id for the notification title\nif not set, a default value is provided",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 32,
+      "since": null
+    },
+    {
+      "name": "unread",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the notification title is unread.\ndefault is false",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 26,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

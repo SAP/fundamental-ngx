@@ -1,0 +1,700 @@
+{
+  "name": "Table",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "table.ts",
+  "sourceLine": 18,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/table-helpers/table.ts#L18",
+  "description": "",
+  "inputs": [],
+  "outputs": [
+    {
+      "name": "cancel",
+      "type": "void",
+      "default": null,
+      "description": "Event fired when cancel button pressed.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 218,
+      "since": null
+    },
+    {
+      "name": "emptyRowAdded",
+      "type": "void",
+      "default": null,
+      "description": "Event fired when empty row added.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 212,
+      "since": null
+    },
+    {
+      "name": "openTableColumnSettings",
+      "type": "void",
+      "default": null,
+      "description": "Toolbar Column Settings button click event",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 206,
+      "since": null
+    },
+    {
+      "name": "openTableFilterSettings",
+      "type": "void",
+      "default": null,
+      "description": "Toolbar Filter Settings button click event",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 200,
+      "since": null
+    },
+    {
+      "name": "openTableGroupSettings",
+      "type": "void",
+      "default": null,
+      "description": "Toolbar Group Settings button click event",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 203,
+      "since": null
+    },
+    {
+      "name": "openTableSortSettings",
+      "type": "void",
+      "default": null,
+      "description": "Toolbar Sort Settings button click event",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 197,
+      "since": null
+    },
+    {
+      "name": "presetChanged",
+      "type": "Partial<Omit<TableState, 'columnKeys'>>",
+      "default": null,
+      "description": "Event emitted when current preset configuration has been changed.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 36,
+      "since": null
+    },
+    {
+      "name": "save",
+      "type": "SaveRowsEvent<T>",
+      "default": null,
+      "description": "Event fired when save button pressed.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 215,
+      "since": null
+    },
+    {
+      "name": "tableColumnFilterChange",
+      "type": "any",
+      "default": null,
+      "description": "Event fired when table state changes.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 209,
+      "since": null
+    },
+    {
+      "name": "tableScrolled",
+      "type": "number",
+      "default": null,
+      "description": "Event fired when table is scrolled while using pageScrolling.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 221,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "_onSpyIntersect",
+      "signature": "(intersected: boolean) => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 194,
+      "since": null,
+      "parameters": [
+        {
+          "name": "intersected",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "addFilter",
+      "signature": "(filterRules: CollectionFilter[]) => void",
+      "description": "Add Filter rules to the existing ones",
+      "deprecated": null,
+      "sourceLine": 105,
+      "since": null,
+      "parameters": [
+        {
+          "name": "filterRules",
+          "type": "CollectionFilter[]",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "addGroup",
+      "signature": "(groupRules: CollectionGroup[]) => void",
+      "description": "Add Group rules to the existing ones",
+      "deprecated": null,
+      "sourceLine": 111,
+      "since": null,
+      "parameters": [
+        {
+          "name": "groupRules",
+          "type": "CollectionGroup[]",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "addRow",
+      "signature": "() => void",
+      "description": "Adds empty row for editing at the beginning of the rows array.",
+      "deprecated": null,
+      "sourceLine": 162,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "addSort",
+      "signature": "(sortRules: CollectionSort[]) => void",
+      "description": "Add Sorting rules to the existing ones",
+      "deprecated": null,
+      "sourceLine": 99,
+      "since": null,
+      "parameters": [
+        {
+          "name": "sortRules",
+          "type": "CollectionSort[]",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "cancelEditing",
+      "signature": "() => void",
+      "description": "Cancels editing and discards newly added rows",
+      "deprecated": null,
+      "sourceLine": 168,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "clearTableRows",
+      "signature": "() => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 192,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "collapseAll",
+      "signature": "() => void",
+      "description": "Collapse all the rows of the table",
+      "deprecated": null,
+      "sourceLine": 174,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "expandAll",
+      "signature": "() => void",
+      "description": "Expand all the rows of the table",
+      "deprecated": null,
+      "sourceLine": 171,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "fetch",
+      "signature": "() => void",
+      "description": "Fetch data source data.",
+      "deprecated": null,
+      "sourceLine": 159,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "filter",
+      "signature": "(filterRules: CollectionFilter[]) => void",
+      "description": "Set Filtering rules",
+      "deprecated": null,
+      "sourceLine": 102,
+      "since": null,
+      "parameters": [
+        {
+          "name": "filterRules",
+          "type": "CollectionFilter[]",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "freezeToColumn",
+      "signature": "(columnKey: string, end?: boolean) => void",
+      "description": "Freeze table columns to including",
+      "deprecated": null,
+      "sourceLine": 120,
+      "since": null,
+      "parameters": [
+        {
+          "name": "columnKey",
+          "type": "string",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "end",
+          "type": "boolean",
+          "description": "",
+          "optional": true
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "getCurrentPreset",
+      "signature": "() => Partial<Omit<TableState, 'columnKeys'>>",
+      "description": "Returns current preset.",
+      "deprecated": null,
+      "sourceLine": 180,
+      "since": null,
+      "parameters": [],
+      "returnType": "Partial<Omit<TableState, 'columnKeys'>>"
+    },
+    {
+      "name": "getCurrentlyRenderedRows",
+      "signature": "() => number[]",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 182,
+      "since": null,
+      "parameters": [],
+      "returnType": "number[]"
+    },
+    {
+      "name": "getDataSource",
+      "signature": "() => TableDataSource<T>",
+      "description": "Get table data source",
+      "deprecated": null,
+      "sourceLine": 153,
+      "since": null,
+      "parameters": [],
+      "returnType": "TableDataSource<T>"
+    },
+    {
+      "name": "getMaxAllowedFreezableColumnsWidth",
+      "signature": "() => number",
+      "description": "Gets the max allowed width for all freezable columns",
+      "deprecated": null,
+      "sourceLine": 150,
+      "since": null,
+      "parameters": [],
+      "returnType": "number"
+    },
+    {
+      "name": "getTableColumns",
+      "signature": "() => TableColumn[]",
+      "description": "Get table columns definition list",
+      "deprecated": null,
+      "sourceLine": 90,
+      "since": null,
+      "parameters": [],
+      "returnType": "TableColumn[]"
+    },
+    {
+      "name": "getTableState",
+      "signature": "() => TableState",
+      "description": "Get table state",
+      "deprecated": null,
+      "sourceLine": 84,
+      "since": null,
+      "parameters": [],
+      "returnType": "TableState"
+    },
+    {
+      "name": "getVisibleTableColumns",
+      "signature": "() => TableColumn[]",
+      "description": "Get a list of visible table columns.",
+      "deprecated": null,
+      "sourceLine": 93,
+      "since": null,
+      "parameters": [],
+      "returnType": "TableColumn[]"
+    },
+    {
+      "name": "group",
+      "signature": "(groupRules: CollectionGroup[]) => void",
+      "description": "Set grouping rules",
+      "deprecated": null,
+      "sourceLine": 108,
+      "since": null,
+      "parameters": [
+        {
+          "name": "groupRules",
+          "type": "CollectionGroup[]",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onTableRowsChanged",
+      "signature": "() => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 188,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "recalculateTableColumnWidth",
+      "signature": "() => void",
+      "description": "Manually triggers columns width recalculation",
+      "deprecated": null,
+      "sourceLine": 156,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "refreshDndList",
+      "signature": "() => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 190,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "saveRows",
+      "signature": "() => void",
+      "description": "Emits save event and resets editable rows array.",
+      "deprecated": null,
+      "sourceLine": 165,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "search",
+      "signature": "(searchInput: SearchInput) => void",
+      "description": "Search in all table columns",
+      "deprecated": null,
+      "sourceLine": 126,
+      "since": null,
+      "parameters": [
+        {
+          "name": "searchInput",
+          "type": "SearchInput",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setColumns",
+      "signature": "(columns: string[]) => void",
+      "description": "Set table columns",
+      "deprecated": null,
+      "sourceLine": 114,
+      "since": null,
+      "parameters": [
+        {
+          "name": "columns",
+          "type": "string[]",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setCurrentPage",
+      "signature": "(currentPage: number) => void",
+      "description": "Set current page",
+      "deprecated": null,
+      "sourceLine": 147,
+      "since": null,
+      "parameters": [
+        {
+          "name": "currentPage",
+          "type": "number",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setCurrentlyRenderedRows",
+      "signature": "(startIndex: number, length: number) => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 184,
+      "since": null,
+      "parameters": [
+        {
+          "name": "startIndex",
+          "type": "number",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "length",
+          "type": "number",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setHeaderColumnFilteringDisabled",
+      "signature": "(disabled: boolean) => void",
+      "description": "Disable filtering by header column menu",
+      "deprecated": null,
+      "sourceLine": 144,
+      "since": null,
+      "parameters": [
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setPreset",
+      "signature": "(data: Partial<Omit<TableState, 'columnKeys'>>) => void",
+      "description": "Sets selected preset.",
+      "deprecated": null,
+      "sourceLine": 177,
+      "since": null,
+      "parameters": [
+        {
+          "name": "data",
+          "type": "Partial<Omit<TableState, 'columnKeys'>>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setTableState",
+      "signature": "(tableState: TableState) => void",
+      "description": "Set table state",
+      "deprecated": null,
+      "sourceLine": 87,
+      "since": null,
+      "parameters": [
+        {
+          "name": "tableState",
+          "type": "TableState",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "showColumnSettingsInToolbar",
+      "signature": "(showColumnSettings: boolean) => void",
+      "description": "Toolbar Columns Settings button visibility",
+      "deprecated": null,
+      "sourceLine": 138,
+      "since": null,
+      "parameters": [
+        {
+          "name": "showColumnSettings",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "showFilterSettingsInToolbar",
+      "signature": "(showFilterSettings: boolean) => void",
+      "description": "Toolbar Filter Settings button visibility",
+      "deprecated": null,
+      "sourceLine": 132,
+      "since": null,
+      "parameters": [
+        {
+          "name": "showFilterSettings",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "showGroupSettingsInToolbar",
+      "signature": "(showGroupSettings: boolean) => void",
+      "description": "Toolbar Group Settings button visibility",
+      "deprecated": null,
+      "sourceLine": 135,
+      "since": null,
+      "parameters": [
+        {
+          "name": "showGroupSettings",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "showSettingsInToolbar",
+      "signature": "(showSettings: boolean) => void",
+      "description": "Toolbar Settings button visibility",
+      "deprecated": null,
+      "sourceLine": 141,
+      "since": null,
+      "parameters": [
+        {
+          "name": "showSettings",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "showSortSettingsInToolbar",
+      "signature": "(showSortSettings: boolean) => void",
+      "description": "Toolbar Sort Settings button visibility",
+      "deprecated": null,
+      "sourceLine": 129,
+      "since": null,
+      "parameters": [
+        {
+          "name": "showSortSettings",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "sort",
+      "signature": "(sortRules: CollectionSort[]) => void",
+      "description": "Set Sorting rules",
+      "deprecated": null,
+      "sourceLine": 96,
+      "since": null,
+      "parameters": [
+        {
+          "name": "sortRules",
+          "type": "CollectionSort[]",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "toggleExpandableTableRow",
+      "signature": "(row: TableRow<T>, forceFetch?: boolean) => any",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 186,
+      "since": null,
+      "parameters": [
+        {
+          "name": "row",
+          "type": "TableRow<T>",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "forceFetch",
+          "type": "boolean",
+          "description": "",
+          "optional": true
+        }
+      ],
+      "returnType": "any"
+    },
+    {
+      "name": "toggleSelectableRow",
+      "signature": "(rowIndex: number) => void",
+      "description": "Toggle row checked state.",
+      "deprecated": null,
+      "sourceLine": 117,
+      "since": null,
+      "parameters": [
+        {
+          "name": "rowIndex",
+          "type": "number",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "unfreeze",
+      "signature": "(columnKey: string, end?: boolean) => void",
+      "description": "Unfreeze column",
+      "deprecated": null,
+      "sourceLine": 123,
+      "since": null,
+      "parameters": [
+        {
+          "name": "columnKey",
+          "type": "string",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "end",
+          "type": "boolean",
+          "description": "",
+          "optional": true
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

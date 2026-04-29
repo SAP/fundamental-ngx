@@ -1,0 +1,44 @@
+{
+  "name": "ListTitleDirective",
+  "selector": "[fd-list-title], [fdListTitle]",
+  "kind": "Directive",
+  "sourceFile": "list-title.directive.ts",
+  "sourceLine": 12,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/list/directives/list-title.directive.ts#L12",
+  "description": "",
+  "inputs": [
+    {
+      "name": "scope",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether this title is used for scope in the shell search results.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 20,
+      "since": null
+    },
+    {
+      "name": "truncate",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the text should truncate with ellipsis.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 17,
+      "since": null
+    },
+    {
+      "name": "wrap",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether or not this should be wrapped, when too much text.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 14,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

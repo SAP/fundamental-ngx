@@ -1,0 +1,13 @@
+{
+  "name": "MessagePageSubtitleComponent",
+  "selector": "fd-message-page-subtitle",
+  "kind": "Component",
+  "sourceFile": "message-page-subtitle.component.ts",
+  "sourceLine": 10,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/message-page/message-page-subtitle/message-page-subtitle.component.ts#L10",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

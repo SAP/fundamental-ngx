@@ -1,0 +1,43 @@
+{
+  "name": "DayPeriodFormatPipe",
+  "selector": null,
+  "kind": "Pipe",
+  "sourceFile": "datetime-format.pipes.ts",
+  "sourceLine": 75,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/datetime/datetime-format.pipes.ts#L75",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "transform",
+      "signature": "(date: D, customFormat: any, noDateMessage: string) => string",
+      "description": "Format date object for day period",
+      "deprecated": null,
+      "sourceLine": 83,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "D",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "customFormat",
+          "type": "any",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "noDateMessage",
+          "type": "string",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "string"
+    }
+  ],
+  "inherited": null
+}

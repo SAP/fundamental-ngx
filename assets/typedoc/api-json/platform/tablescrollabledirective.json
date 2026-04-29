@@ -1,0 +1,156 @@
+{
+  "name": "TableScrollableDirective",
+  "selector": "[fdpTableScrollable]",
+  "kind": "Directive",
+  "sourceFile": "table-scrollable.directive.ts",
+  "sourceLine": 35,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/table-helpers/directives/table-scrollable.directive.ts#L35",
+  "description": "Table Scrollable.\nThat directive should be assigned to table scrollable area.\nIt registers itself in table scroll dispatcher\nand notify once element scrolled.\n\nFor internal usage.",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "getHorizontalScrollStream",
+      "signature": "() => Observable<Event>",
+      "description": "Returns observable that emits when a horizontal scroll event is happened on the host element.",
+      "deprecated": null,
+      "sourceLine": 109,
+      "since": null,
+      "parameters": [],
+      "returnType": "Observable<Event>"
+    },
+    {
+      "name": "getScrollLeft",
+      "signature": "() => number",
+      "description": "Returns scrollLeft position of the host element.",
+      "deprecated": null,
+      "sourceLine": 119,
+      "since": null,
+      "parameters": [],
+      "returnType": "number"
+    },
+    {
+      "name": "getScrollStream",
+      "signature": "() => Observable<Event>",
+      "description": "Returns observable that emits when a scroll event is fired on the host element.",
+      "deprecated": null,
+      "sourceLine": 99,
+      "since": null,
+      "parameters": [],
+      "returnType": "Observable<Event>"
+    },
+    {
+      "name": "getScrollTop",
+      "signature": "() => number",
+      "description": "Returns scrollTop position of the host element.",
+      "deprecated": null,
+      "sourceLine": 114,
+      "since": null,
+      "parameters": [],
+      "returnType": "number"
+    },
+    {
+      "name": "getVerticalScrollStream",
+      "signature": "() => Observable<Event>",
+      "description": "Returns observable that emits when a vertical scroll event is happened on the host element.",
+      "deprecated": null,
+      "sourceLine": 104,
+      "since": null,
+      "parameters": [],
+      "returnType": "Observable<Event>"
+    },
+    {
+      "name": "initializeScrollTop",
+      "signature": "(scrollTop: number) => void",
+      "description": "Set Scroll Position during component initialization.",
+      "deprecated": null,
+      "sourceLine": 197,
+      "since": null,
+      "parameters": [
+        {
+          "name": "scrollTop",
+          "type": "number",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "scrollToOverlappedCell",
+      "signature": "(rtl: boolean, freezableColumnsSize: number, freezableEndColumnSize: number) => void",
+      "description": "Scrolls to overlapped cell.",
+      "deprecated": null,
+      "sourceLine": 142,
+      "since": null,
+      "parameters": [
+        {
+          "name": "rtl",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "freezableColumnsSize",
+          "type": "number",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "freezableEndColumnSize",
+          "type": "number",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setScrollLeft",
+      "signature": "(scrollLeft: number, emitEvent: boolean) => void",
+      "description": "Set scrollLeft position of the host element.",
+      "deprecated": null,
+      "sourceLine": 133,
+      "since": null,
+      "parameters": [
+        {
+          "name": "scrollLeft",
+          "type": "number",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "emitEvent",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setScrollTop",
+      "signature": "(scrollTop: number, emitEvent: boolean) => void",
+      "description": "Set scrollTop position of the host element.",
+      "deprecated": null,
+      "sourceLine": 124,
+      "since": null,
+      "parameters": [
+        {
+          "name": "scrollTop",
+          "type": "number",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "emitEvent",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

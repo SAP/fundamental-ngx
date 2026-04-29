@@ -1,0 +1,31 @@
+{
+  "name": "MultiComboboxDataSourceParser",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "multi-combobox-data-source-parser.ts",
+  "sourceLine": 10,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/multi-combobox/data-source/multi-combobox-data-source-parser.ts#L10",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "parse",
+      "signature": "(source: FdMultiComboboxAcceptableDataSource<T>) => FdMultiComboBoxDataSource<T>",
+      "description": "Transforms plain array or observable into DataSource class.",
+      "deprecated": null,
+      "sourceLine": 15,
+      "since": null,
+      "parameters": [
+        {
+          "name": "source",
+          "type": "FdMultiComboboxAcceptableDataSource<T>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "FdMultiComboBoxDataSource<T>"
+    }
+  ],
+  "inherited": null
+}

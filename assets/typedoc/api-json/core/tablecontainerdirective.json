@@ -1,0 +1,24 @@
+{
+  "name": "TableContainerDirective",
+  "selector": "[fdTableContainer], [fd-table-container]",
+  "kind": "Directive",
+  "sourceFile": "table-container.directive.ts",
+  "sourceLine": 20,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/table/directives/table-container.directive.ts#L20",
+  "description": "",
+  "inputs": [
+    {
+      "name": "outerScroll",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the scroll is applied on the page and not on the table",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 23,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

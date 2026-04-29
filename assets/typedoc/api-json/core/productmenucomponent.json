@@ -1,0 +1,104 @@
+{
+  "name": "ProductMenuComponent",
+  "selector": "fd-product-menu",
+  "kind": "Component",
+  "sourceFile": "product-menu.component.ts",
+  "sourceLine": 41,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/shellbar/product-menu/product-menu.component.ts#L41",
+  "description": "The component that represents a product menu.\nProduct menu is used for navigating to applications within the product.\n```html\n<fd-product-menu [control]=\"productMenuControl\"\n                 [items]=\"productMenuItems\">\n</fd-product-menu>\n```",
+  "inputs": [
+    {
+      "name": "closeOnEscapeKey",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether the popover should close when the escape key is pressed.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 44,
+      "since": null
+    },
+    {
+      "name": "closeOnOutsideClick",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether the popover should close when a click is made outside its boundaries.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 48,
+      "since": null
+    },
+    {
+      "name": "closePopoverOnSelect",
+      "type": "boolean",
+      "default": "false",
+      "description": "When set to true, popover list will be closed after selecting the option",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 89,
+      "since": null
+    },
+    {
+      "name": "control",
+      "type": "string",
+      "default": null,
+      "description": "The control element to toggle the product menu,\nrepresented by the name of the current application.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 78,
+      "since": null
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the popover is disabled.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 62,
+      "since": null
+    },
+    {
+      "name": "fillControlMode",
+      "type": "null | PopoverFillMode",
+      "default": null,
+      "description": "Preset options for the popover body width.\n* `at-least` will apply a minimum width to the body equivalent to the width of the control.\n* `equal` will apply a width to the body equivalent to the width of the control.\n* Leave blank for no effect.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 71,
+      "since": null
+    },
+    {
+      "name": "items",
+      "type": "ShellbarMenuItem[]",
+      "default": null,
+      "description": "The items in the product menu. If the value is not passed or there is empty array,\nthe template changes and shows only control",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 85,
+      "since": null
+    },
+    {
+      "name": "placement",
+      "type": "Placement",
+      "default": "'bottom-end'",
+      "description": "The placement of the popover. It can be one of: top, top-start, top-end, bottom,\n bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 58,
+      "since": null
+    },
+    {
+      "name": "triggers",
+      "type": "string[]",
+      "default": null,
+      "description": "The trigger events that will open/close the popover.\n Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp).",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 53,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

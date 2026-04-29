@@ -1,0 +1,54 @@
+{
+  "name": "ExpandableText",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 41,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "emptyIndicatorMode",
+      "type": "'On' | 'Off'",
+      "default": null,
+      "description": "Specifies if an empty indicator should be displayed when there is no text.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 46,
+      "since": null
+    },
+    {
+      "name": "maxCharacters",
+      "type": "number",
+      "default": null,
+      "description": "Maximum number of characters to be displayed initially. If the text length exceeds this limit, the text will be truncated with an ellipsis, and the \"More\" link will be displayed.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 51,
+      "since": null
+    },
+    {
+      "name": "overflowMode",
+      "type": "'InPlace' | 'Popover'",
+      "default": null,
+      "description": "Determines how the full text will be displayed.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 56,
+      "since": null
+    },
+    {
+      "name": "text",
+      "type": "string",
+      "default": null,
+      "description": "Text of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 61,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

@@ -1,0 +1,13 @@
+{
+  "name": "TableWrapperComponent",
+  "selector": "fd-table-wrapper",
+  "kind": "Component",
+  "sourceFile": "table-wrapper.component.ts",
+  "sourceLine": 33,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/table/table-wrapper.component.ts#L33",
+  "description": "The component that represents a table wrapper, it will add fd-table class to its first child.\nA table is a set of tabular data. Line items can support data, images and actions.\n```html\n<table-wrapper>\n<table></table>\n</table-wrapper>\n```",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

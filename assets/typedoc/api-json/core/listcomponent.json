@@ -1,0 +1,109 @@
+{
+  "name": "ListComponent",
+  "selector": "[fd-list], [fdList]",
+  "kind": "Component",
+  "sourceFile": "list.component.ts",
+  "sourceLine": 72,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/list/list.component.ts#L72",
+  "description": "The directive that represents a list.\nIt is used to display a list of items with simple information such as scopes, names, etc.",
+  "inputs": [
+    {
+      "name": "keyboardSupport",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether internal keyboard support should be enabled. It's enabled by default",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 110,
+      "since": null
+    },
+    {
+      "name": "role",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "User-provided role.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 144,
+      "since": null
+    },
+    {
+      "name": "settingsList",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the list is used inside Settings Dialog",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 165,
+      "since": null
+    },
+    {
+      "name": "settingsListFooter",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the list is used inside Settings Dialog Footer",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 168,
+      "since": null
+    },
+    {
+      "name": "unreadIndicator",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to display unread notification indicator.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 130,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "focusEscapeList",
+      "type": "FocusEscapeDirection",
+      "default": null,
+      "description": "Event thrown, when focus escapes the list",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 134,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "getActiveItem",
+      "signature": "() => null | ListFocusItem<any>",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 234,
+      "since": null,
+      "parameters": [],
+      "returnType": "null | ListFocusItem<any>"
+    },
+    {
+      "name": "setItemActive",
+      "signature": "(index: number, updateOnly: boolean) => void",
+      "description": "Set fake focus on element with passed index",
+      "deprecated": null,
+      "sourceLine": 223,
+      "since": null,
+      "parameters": [
+        {
+          "name": "index",
+          "type": "number",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "updateOnly",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

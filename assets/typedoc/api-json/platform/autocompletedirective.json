@@ -1,0 +1,55 @@
+{
+  "name": "AutoCompleteDirective",
+  "selector": "[fdp-auto-complete]",
+  "kind": "Directive",
+  "sourceFile": "auto-complete.directive.ts",
+  "sourceLine": 19,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/auto-complete/auto-complete.directive.ts#L19",
+  "description": "",
+  "inputs": [
+    {
+      "name": "inputText",
+      "type": "string",
+      "default": null,
+      "description": "Input text, that is taken from ngModel of formControl,\nthere has to be difference between native input value and model value",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 29,
+      "since": null
+    },
+    {
+      "name": "mobile",
+      "type": "boolean",
+      "default": null,
+      "description": "Check is directive use in mobile view to prevent additional blur events",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 33,
+      "since": null
+    },
+    {
+      "name": "options",
+      "type": "OptionItem[]",
+      "default": null,
+      "description": "Values that will fill missing text in the input.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 22,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "onComplete",
+      "type": "AutoCompleteEvent",
+      "default": null,
+      "description": "Event thrown, when the auto ahead text is accepted",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 38,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

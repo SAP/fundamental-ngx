@@ -1,0 +1,113 @@
+{
+  "name": "NestedItemComponent",
+  "selector": "[cxNestedItem], [fdx-nested-list-item], li[fdx-nested-list-item]",
+  "kind": "Component",
+  "sourceFile": "nested-item.component.ts",
+  "sourceLine": 42,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cx/nested-list/nested-item/nested-item.component.ts#L42",
+  "description": "",
+  "inputs": [
+    {
+      "name": "display",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether this item is only meant for display purposes, meaning it cannot be used for navigation or shown as selected.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 80,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "expandedChange",
+      "type": "boolean",
+      "default": null,
+      "description": "Event thrown, when expanded state is changed",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 62,
+      "since": null
+    },
+    {
+      "name": "keyboardTriggered",
+      "type": "KeyboardEvent",
+      "default": null,
+      "description": "Event thrown, when any keyboard event is dispatched on this, or link element",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 66,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "click",
+      "signature": "() => void",
+      "description": "Method that dispatches `click` event on link item",
+      "deprecated": null,
+      "sourceLine": 221,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "containsId",
+      "signature": "(id: string) => boolean",
+      "description": "Method that provides information if element, or children of this element has passed id",
+      "deprecated": null,
+      "sourceLine": 241,
+      "since": null,
+      "parameters": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "boolean"
+    },
+    {
+      "name": "focus",
+      "signature": "() => void",
+      "description": "Method that focuses link item",
+      "deprecated": null,
+      "sourceLine": 232,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "toggle",
+      "signature": "() => void",
+      "description": "Method that toggle the item and propagate it to children",
+      "deprecated": null,
+      "sourceLine": 215,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "triggerClose",
+      "signature": "() => void",
+      "description": "Method that close the item and propagate it to children",
+      "deprecated": null,
+      "sourceLine": 207,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "triggerOpen",
+      "signature": "() => void",
+      "description": "Method that expand the item and propagate it to children",
+      "deprecated": null,
+      "sourceLine": 199,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

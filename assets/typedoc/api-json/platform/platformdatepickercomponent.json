@@ -1,0 +1,516 @@
+{
+  "name": "PlatformDatePickerComponent",
+  "selector": "fdp-date-picker",
+  "kind": "Component",
+  "sourceFile": "date-picker.component.ts",
+  "sourceLine": 55,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/date-picker/date-picker.component.ts#L55",
+  "description": "The Platform date picker component is a wrapper around fd-date-picker using platform form.\nIt is able to provide form field functionalities as well along with fd-date-picker functions.\n\n<fdp-form-group #ffg [formGroup]=\"datePickerForm\">\n     <fdp-form-field #ffl1 id=\"birthday\">\n         <fdp-date-picker name=\"birthday\" type=\"single\" [formControl]=\"ffl1.formControl\"></fdp-date-picker>\n     </fdp-form-field>\n</fdp-form-group>",
+  "inputs": [
+    {
+      "name": "activeView",
+      "type": "FdCalendarView",
+      "default": "FdCalendarViewEnum.Day",
+      "description": "Actually shown active view one of 'day' | 'month' | 'year' in calendar component",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 117,
+      "since": null
+    },
+    {
+      "name": "aggregatedYearGrid",
+      "type": "CalendarYearGrid",
+      "default": null,
+      "description": "Object to customize aggregated year grid,\nRow, Columns and method to display year can be modified",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 183,
+      "since": null
+    },
+    {
+      "name": "allowMultipleSelection",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the user wants to select multiple days or multiple range dates.\nIf `displayWeekNumbers` is true, the user can click on the week number to mark the related row.\nThe user can click on week days to mark the related column.\nNote: Clickable selection for week row or column does not work for range selections.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 208,
+      "since": null
+    },
+    {
+      "name": "allowNull",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether a null input is considered valid.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 113,
+      "since": null
+    },
+    {
+      "name": "appendTo",
+      "type": "ElementRef<any>",
+      "default": null,
+      "description": "The element to which the popover should be appended.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 128,
+      "since": null
+    },
+    {
+      "name": "buttonFocusable",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether AddOn Button should be focusable",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 155,
+      "since": null
+    },
+    {
+      "name": "closeOnDateChoose",
+      "type": "boolean",
+      "default": "true",
+      "description": "Defines if date picker should be closed after date choose",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 132,
+      "since": null
+    },
+    {
+      "name": "disableFunction",
+      "type": "(value: D) => boolean",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 324,
+      "since": null
+    },
+    {
+      "name": "disableRangeEndFunction",
+      "type": "(value: D) => boolean",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 336,
+      "since": null
+    },
+    {
+      "name": "disableRangeStartFunction",
+      "type": "(value: D) => boolean",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 330,
+      "since": null
+    },
+    {
+      "name": "inline",
+      "type": "boolean",
+      "default": "true",
+      "description": "Should date picker be inlined.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 216,
+      "since": null
+    },
+    {
+      "name": "isOpen",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the date picker is open. Can be used through two-way binding.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 212,
+      "since": null
+    },
+    {
+      "name": "legendCol",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether to display the calendar legend in column layout.\nWhen true, legend items are displayed vertically in a single column.\nWhen false, legend items are displayed horizontally in rows.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 293,
+      "since": null
+    },
+    {
+      "name": "markWeekends",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether user wants to mark sunday/saturday with `fd-calendar__item--weekend` class",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 193,
+      "since": null
+    },
+    {
+      "name": "mobile",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether date picker should rendered in mobile mode.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 234,
+      "since": null
+    },
+    {
+      "name": "mobileConfig",
+      "type": "MobileModeConfig",
+      "default": null,
+      "description": "Mobile mode configuration.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 238,
+      "since": null
+    },
+    {
+      "name": "mobileLandscape",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether calendar is used inside mobile in landscape mode, it also adds close button on right side",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 242,
+      "since": null
+    },
+    {
+      "name": "mobilePortrait",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether calendar is used inside mobile in portrait mode",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 246,
+      "since": null
+    },
+    {
+      "name": "placement",
+      "type": "Placement",
+      "default": "'bottom-start'",
+      "description": "The placement of the popover. It can be one of: top, top-start, top-end, bottom,\n bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 124,
+      "since": null
+    },
+    {
+      "name": "preventScrollOnFocus",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to prevent page scrolling when focusing date picker input field after calendar has been closed.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 230,
+      "since": null
+    },
+    {
+      "name": "processInputOnBlur",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to recalculate value from the input as user types or on blur.\nBy default, updates the value as user types.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 224,
+      "since": null
+    },
+    {
+      "name": "rangeHoverEffect",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether user wants to mark day cells on hover.\nWorks only on range mode, when start date is selected on Day View.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 97,
+      "since": null
+    },
+    {
+      "name": "selectedDate",
+      "type": "Nullable<D>",
+      "default": null,
+      "description": "The currently selected date model in single mode.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 74,
+      "since": null
+    },
+    {
+      "name": "selectedMultipleDateRanges",
+      "type": "DateRange<D>[]",
+      "default": "[]",
+      "description": "The currently selected date model with multiple ranges.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 86,
+      "since": null
+    },
+    {
+      "name": "selectedMultipleDates",
+      "type": "D[]",
+      "default": "[]",
+      "description": "The currently selected date model in multiple mode.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 78,
+      "since": null
+    },
+    {
+      "name": "selectedRangeDate",
+      "type": "DateRange<D>",
+      "default": null,
+      "description": "The currently selected date model with start and end in range mode.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 82,
+      "since": null
+    },
+    {
+      "name": "showCalendarLegend",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether to show the calendar legend for special days.\nWhen enabled, displays a legend below the calendar showing the special day markers and their descriptions.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 285,
+      "since": null
+    },
+    {
+      "name": "showTodayButton",
+      "type": "boolean",
+      "default": "false",
+      "description": "Enables Today-Selection-Button if true",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 105,
+      "since": null
+    },
+    {
+      "name": "showWeekNumbers",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether user wants to show week numbers next to days",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 199,
+      "since": null
+    },
+    {
+      "name": "specialDaysRules",
+      "type": "SpecialDayRule<D>[]",
+      "default": "[]",
+      "description": "Special days mark, it can be used by passing array of object with\nSpecial day number, list 1-20 [class:`fd-calendar__item--legend-{{number}}`] is available there:\nhttps://sap.github.io/fundamental-styles/components/calendar.html calendar special days section\nRule accepts method with FdDate object as a parameter. ex:\n`rule: (fdDate: FdDate) => fdDate.getDay() === 1`, which will mark all sundays as special day.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 165,
+      "since": null
+    },
+    {
+      "name": "startingDayOfWeek",
+      "type": "DaysOfWeek",
+      "default": null,
+      "description": "The day of the week the calendar should start on. 1 represents Sunday, 2 is Monday, 3 is Tuesday, and so on.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 90,
+      "since": null
+    },
+    {
+      "name": "todayButtonLabel",
+      "type": "string",
+      "default": "'Today'",
+      "description": "Label for Today-Selection-Button",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 109,
+      "since": null
+    },
+    {
+      "name": "type",
+      "type": "CalendarType",
+      "default": "'single'",
+      "description": "The type of calendar, 'single' for single date selection or 'range' for a range of dates.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 70,
+      "since": null
+    },
+    {
+      "name": "useValidation",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether to validate the date picker input.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 101,
+      "since": null
+    },
+    {
+      "name": "yearGrid",
+      "type": "CalendarYearGrid",
+      "default": null,
+      "description": "Object to customize year grid,\nRow, Columns and method to display year can be modified",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 172,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "activeViewChange",
+      "type": "FdCalendarView",
+      "default": null,
+      "description": "Event thrown every time calendar active view is changed",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 272,
+      "since": null
+    },
+    {
+      "name": "isOpenChange",
+      "type": "boolean",
+      "default": null,
+      "description": "Event emitted when the state of the isOpen property changes.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 250,
+      "since": null
+    },
+    {
+      "name": "selectedDateChange",
+      "type": "Nullable<D>",
+      "default": null,
+      "description": "Event thrown every time selected date in single mode is changed",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 254,
+      "since": null
+    },
+    {
+      "name": "selectedMultipleDateRangesChange",
+      "type": "DateRange<D>[]",
+      "default": null,
+      "description": "Event thrown every time the first or last date in multiple range mode is changed.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 266,
+      "since": null
+    },
+    {
+      "name": "selectedMultipleDatesChange",
+      "type": "D[]",
+      "default": null,
+      "description": "Event thrown every time the selected dates in multiple mode are changed.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 258,
+      "since": null
+    },
+    {
+      "name": "selectedRangeDateChange",
+      "type": "DateRange<D>",
+      "default": null,
+      "description": "Event thrown every time selected first or last date in range mode is changed",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 262,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "handleDateChange",
+      "signature": "(value: D | D[] | DateRange<D> | DateRange<D>[]) => void",
+      "description": "validates date on date change.",
+      "deprecated": null,
+      "sourceLine": 348,
+      "since": null,
+      "parameters": [
+        {
+          "name": "value",
+          "type": "D | D[] | DateRange<D> | DateRange<D>[]",
+          "description": "D | DateRange<D>",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "handleOpenChange",
+      "signature": "(open: boolean) => void",
+      "description": "Method that handles changes when popover is opened or closed.",
+      "deprecated": null,
+      "sourceLine": 392,
+      "since": null,
+      "parameters": [
+        {
+          "name": "open",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": {
+    "from": "BaseInput",
+    "inputs": [],
+    "methods": [
+      {
+        "name": "_onFocusChanged",
+        "signature": "(isFocused: boolean) => void",
+        "description": "Keeps track of element focus",
+        "deprecated": null,
+        "sourceLine": 389,
+        "since": null,
+        "parameters": [
+          {
+            "name": "isFocused",
+            "type": "boolean",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "focus",
+        "signature": "(event?: MouseEvent) => void",
+        "description": "In most of the cases when working with input element directly you should be just find to assing\nvariable to this element\n\n```\n<input #inputElementRef fd-form-control ...>\n```\n\nand this default behavior used. For other cases implement focus.",
+        "deprecated": null,
+        "sourceLine": 419,
+        "since": null,
+        "parameters": [
+          {
+            "name": "event",
+            "type": "MouseEvent",
+            "description": "",
+            "optional": true
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "onContainerClick",
+        "signature": "(event: MouseEvent) => void",
+        "description": "Handles even when we click on parent container which is the FormField Wrapping this\ncontrol",
+        "deprecated": null,
+        "sourceLine": 404,
+        "since": null,
+        "parameters": [
+          {
+            "name": "event",
+            "type": "MouseEvent",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      }
+    ]
+  }
+}

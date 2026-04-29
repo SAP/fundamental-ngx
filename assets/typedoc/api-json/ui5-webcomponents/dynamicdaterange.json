@@ -1,0 +1,45 @@
+{
+  "name": "DynamicDateRange",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "options",
+      "type": "string",
+      "default": null,
+      "description": "Defines the options listed as a string, separated by commas and using capital case.\nExample: \"TODAY, YESTERDAY, DATERANGE\"",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 46,
+      "since": null
+    },
+    {
+      "name": "value",
+      "type": "DynamicDateRangeValue",
+      "default": null,
+      "description": "Defines the value object.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 51,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5Change",
+      "type": "UI5CustomEvent<DynamicDateRange, 'change'>",
+      "default": null,
+      "description": "Fired when the input operation has finished by pressing Enter or on focusout or a value is selected in the popover.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 58,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

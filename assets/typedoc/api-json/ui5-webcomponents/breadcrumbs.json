@@ -1,0 +1,45 @@
+{
+  "name": "Breadcrumbs",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 41,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "design",
+      "type": "'Standard' | 'NoCurrentPage'",
+      "default": null,
+      "description": "Defines the visual appearance of the last BreadcrumbsItem.\n\nThe Breadcrumbs supports two visual appearances for the last BreadcrumbsItem:\n- \"Standard\" - displaying the last item as \"current page\" (bold and without separator)\n- \"NoCurrentPage\" - displaying the last item as a regular BreadcrumbsItem, followed by separator",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 50,
+      "since": null
+    },
+    {
+      "name": "separators",
+      "type": "'Slash' | 'BackSlash' | 'DoubleBackSlash' | 'DoubleGreaterThan' | 'DoubleSlash' | 'GreaterThan'",
+      "default": null,
+      "description": "Determines the visual style of the separator between the breadcrumb items.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 55,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5ItemClick",
+      "type": "UI5CustomEvent<Breadcrumbs, 'item-click'>",
+      "default": null,
+      "description": "Fires when a `BreadcrumbsItem` is clicked.\n\n*Note:** You can prevent browser location change by calling `event.preventDefault()`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 64,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

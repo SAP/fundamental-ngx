@@ -1,0 +1,55 @@
+{
+  "name": "TableSelectionMulti",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 41,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "behavior",
+      "type": "'RowSelector' | 'RowOnly'",
+      "default": null,
+      "description": "Defines the selection behavior.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 46,
+      "since": null
+    },
+    {
+      "name": "headerSelector",
+      "type": "'SelectAll' | 'ClearAll'",
+      "default": null,
+      "description": "Defines the selector of the header row.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 51,
+      "since": null
+    },
+    {
+      "name": "selected",
+      "type": "string",
+      "default": null,
+      "description": "Defines the `row-key` values of selected rows, with each value separated by a space.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 56,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5Change",
+      "type": "UI5CustomEvent<TableSelectionMulti, 'change'>",
+      "default": null,
+      "description": "Fired when the selection is changed by user interaction.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 63,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

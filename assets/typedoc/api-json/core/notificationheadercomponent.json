@@ -1,0 +1,24 @@
+{
+  "name": "NotificationHeaderComponent",
+  "selector": "fd-notification-header",
+  "kind": "Component",
+  "sourceFile": "notification-header.component.ts",
+  "sourceLine": 17,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/notification/notification-header/notification-header.component.ts#L17",
+  "description": "",
+  "inputs": [
+    {
+      "name": "uniqueId",
+      "type": "string",
+      "default": null,
+      "description": "Unique id for the notification header\nif not set, a default value is provided",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 22,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

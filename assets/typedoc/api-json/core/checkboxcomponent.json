@@ -1,0 +1,215 @@
+{
+  "name": "CheckboxComponent",
+  "selector": "fd-checkbox",
+  "kind": "Component",
+  "sourceFile": "checkbox.component.ts",
+  "sourceLine": 60,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/checkbox/checkbox/checkbox.component.ts#L60",
+  "description": "Set of fields of FormItemControl component",
+  "inputs": [
+    {
+      "name": "ariaDescribedBy",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "Sets the `aria-describedby` attribute to the element.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 102,
+      "since": null
+    },
+    {
+      "name": "ariaLabel",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "Sets the `aria-label` attribute to the element.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 77,
+      "since": null
+    },
+    {
+      "name": "ariaLabelledBy",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "Sets the `aria-labelledby` attribute to the element.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 98,
+      "since": null
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": null,
+      "description": "Allows to disable/enable control.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 126,
+      "since": null
+    },
+    {
+      "name": "displayOnly",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the checkbox should be rendered in display-only mode.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 150,
+      "since": null
+    },
+    {
+      "name": "inputId",
+      "type": "string",
+      "default": null,
+      "description": "Sets [id] property of input, binds input with input label using [for] property.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 110,
+      "since": null
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "default": null,
+      "description": "Sets text of control label.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 122,
+      "since": null
+    },
+    {
+      "name": "labelClass",
+      "type": "string",
+      "default": null,
+      "description": "Assigns given class to checkbox label element",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 142,
+      "since": null
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "default": null,
+      "description": "Sets [name] property of input.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 118,
+      "since": null
+    },
+    {
+      "name": "readonly",
+      "type": "boolean",
+      "default": null,
+      "description": "Disables editibility",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 130,
+      "since": null
+    },
+    {
+      "name": "required",
+      "type": "boolean",
+      "default": "false",
+      "description": "If it is mandatory field",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 146,
+      "since": null
+    },
+    {
+      "name": "role",
+      "type": "string",
+      "default": "'checkbox'",
+      "description": "Sets the `role` attribute to the element.\nDefault: checkbox",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 84,
+      "since": null
+    },
+    {
+      "name": "standalone",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether checkbox should be rendered standalone (without any text).",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 165,
+      "since": null
+    },
+    {
+      "name": "state",
+      "type": "'error' | 'default' | 'information' | 'warning' | 'success'",
+      "default": null,
+      "description": "State of control, changes visual appearance of control.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 114,
+      "since": null
+    },
+    {
+      "name": "title",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "sets checkbox tooltip",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 106,
+      "since": null
+    },
+    {
+      "name": "tristate",
+      "type": "boolean",
+      "default": "false",
+      "description": "Enables controls third state.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 134,
+      "since": null
+    },
+    {
+      "name": "tristateSelectable",
+      "type": "boolean",
+      "default": "false",
+      "description": "Allows to prevent user from manually selecting controls third state.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 138,
+      "since": null
+    },
+    {
+      "name": "valignLabel",
+      "type": "'top' | 'middle'",
+      "default": "'middle'",
+      "description": "Vertical position of the label compared to the checkbox box",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 73,
+      "since": null
+    },
+    {
+      "name": "wrapLabel",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether input label should be wrapped",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 70,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "focusChange",
+      "type": "boolean",
+      "default": null,
+      "description": "Emits event on focus change",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 176,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

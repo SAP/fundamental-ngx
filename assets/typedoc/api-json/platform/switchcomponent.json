@@ -1,0 +1,109 @@
+{
+  "name": "SwitchComponent",
+  "selector": "fdp-switch",
+  "kind": "Component",
+  "sourceFile": "switch.component.ts",
+  "sourceLine": 23,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/switch/switch/switch.component.ts#L23",
+  "description": "All form components share the same information (value, name, placeholder,.. ) as well as\nthe same behavior given by ControlValueAccessor.\n\nEven this is not ideal solution there is no other way then use inheritance to reuse some of the\ncommon logic. It should be possible to use some kind of compositions with Proxies but something\nsimilar that exists in Aspect Oriented Programing.\n\nUsually try to fire stateChange only for things that can change dynamically in runtime. We don't expect\nthat e.g. placeholder will change after component is created",
+  "inputs": [
+    {
+      "name": "semantic",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the switch is semantic",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 26,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "switchChange",
+      "type": "SwitchChangeEvent",
+      "default": null,
+      "description": "Event fired when the state of the switch changes.\n*$event* can be used to retrieve the new state of the switch.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 33,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "onValueChange",
+      "signature": "(modelValue: boolean) => void",
+      "description": "update controller on switch state change",
+      "deprecated": null,
+      "sourceLine": 54,
+      "since": null,
+      "parameters": [
+        {
+          "name": "modelValue",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": {
+    "from": "BaseInput",
+    "inputs": [],
+    "methods": [
+      {
+        "name": "_onFocusChanged",
+        "signature": "(isFocused: boolean) => void",
+        "description": "Keeps track of element focus",
+        "deprecated": null,
+        "sourceLine": 389,
+        "since": null,
+        "parameters": [
+          {
+            "name": "isFocused",
+            "type": "boolean",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "focus",
+        "signature": "(event?: MouseEvent) => void",
+        "description": "In most of the cases when working with input element directly you should be just find to assing\nvariable to this element\n\n```\n<input #inputElementRef fd-form-control ...>\n```\n\nand this default behavior used. For other cases implement focus.",
+        "deprecated": null,
+        "sourceLine": 419,
+        "since": null,
+        "parameters": [
+          {
+            "name": "event",
+            "type": "MouseEvent",
+            "description": "",
+            "optional": true
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "onContainerClick",
+        "signature": "(event: MouseEvent) => void",
+        "description": "Handles even when we click on parent container which is the FormField Wrapping this\ncontrol",
+        "deprecated": null,
+        "sourceLine": 404,
+        "since": null,
+        "parameters": [
+          {
+            "name": "event",
+            "type": "MouseEvent",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      }
+    ]
+  }
+}

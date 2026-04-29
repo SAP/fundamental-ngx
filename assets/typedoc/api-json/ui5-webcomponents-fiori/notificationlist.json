@@ -1,0 +1,55 @@
+{
+  "name": "NotificationList",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "noDataText",
+      "type": "string",
+      "default": null,
+      "description": "Defines the text that is displayed when the component contains no items.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 45,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5ItemClick",
+      "type": "UI5CustomEvent<NotificationList, 'item-click'>",
+      "default": null,
+      "description": "Fired when an item is clicked.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 52,
+      "since": null
+    },
+    {
+      "name": "ui5ItemClose",
+      "type": "UI5CustomEvent<NotificationList, 'item-close'>",
+      "default": null,
+      "description": "Fired when the `Close` button of any item is clicked.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 57,
+      "since": null
+    },
+    {
+      "name": "ui5ItemToggle",
+      "type": "UI5CustomEvent<NotificationList, 'item-toggle'>",
+      "default": null,
+      "description": "Fired when an item is toggled.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 62,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

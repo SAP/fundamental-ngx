@@ -1,0 +1,276 @@
+{
+  "name": "TimePickerComponent",
+  "selector": "fd-time-picker",
+  "kind": "Component",
+  "sourceFile": "time-picker.component.ts",
+  "sourceLine": 98,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/time-picker/time-picker.component.ts#L98",
+  "description": "Set of fields of FormItemControl component",
+  "inputs": [
+    {
+      "name": "allowNull",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether a null input is considered valid(success).",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 172,
+      "since": null
+    },
+    {
+      "name": "ariaLabelledBy",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "Aria-labelledby for the time picker toggle button.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 168,
+      "since": null
+    },
+    {
+      "name": "buttonFocusable",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether AddOn Button should be focusable",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 233,
+      "since": null
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": null,
+      "description": "Disables the component.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 113,
+      "since": null
+    },
+    {
+      "name": "displayFormat",
+      "type": "unknown",
+      "default": null,
+      "description": "Display format option to customize time format in input control.\nMust be a format option that is understandable by DatetimeAdapter.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 248,
+      "since": null
+    },
+    {
+      "name": "displayHours",
+      "type": "boolean",
+      "default": null,
+      "description": "When set to false, hides the input for hours.\nDefault value based on the current locale format option",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 149,
+      "since": null
+    },
+    {
+      "name": "displayMinutes",
+      "type": "boolean",
+      "default": null,
+      "description": "When set to false, hides the input for minutes.\nDefault value based on the current locale format option",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 142,
+      "since": null
+    },
+    {
+      "name": "displaySeconds",
+      "type": "boolean",
+      "default": null,
+      "description": "When set to false, hides the input for seconds.\nDefault value based on the current locale format option",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 135,
+      "since": null
+    },
+    {
+      "name": "inputId",
+      "type": "string",
+      "default": null,
+      "description": "Id attribute for input element inside TimePicker component",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 109,
+      "since": null
+    },
+    {
+      "name": "keepTwoDigitsTime",
+      "type": "boolean",
+      "default": "false",
+      "description": "When set to true, time inputs won't allow to have 1 digit\nfor example 9 will become 09\nbut 12 will be kept as 12.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 241,
+      "since": null
+    },
+    {
+      "name": "meridian",
+      "type": "boolean",
+      "default": null,
+      "description": "When set to false, uses the 24 hour clock (hours ranging from 0 to 23).\nDefault value based on the current locale format option",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 128,
+      "since": null
+    },
+    {
+      "name": "minuteStep",
+      "type": "number",
+      "default": null,
+      "description": "The interval between selectable minutes (e.g., 1 for every minute, 5 for 5-minute intervals, 15 for 15-minute intervals).\nDefaults to 1 (every minute).",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 281,
+      "since": null
+    },
+    {
+      "name": "parseFormat",
+      "type": "unknown",
+      "default": null,
+      "description": "Parse format option to customize time format in input control.\nMust be a format option that is understandable by DatetimeAdapter.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 255,
+      "since": null
+    },
+    {
+      "name": "placeholder",
+      "type": "string",
+      "default": null,
+      "description": "Default time picker placeholder which is set dependant on the hours, minutes and seconds.\nOtherwise It can be set to a default value",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 156,
+      "since": null
+    },
+    {
+      "name": "placement",
+      "type": "Placement",
+      "default": "'bottom-start'",
+      "description": "The placement of the popover. It can be one of: top, top-start, top-end, bottom,\n bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 205,
+      "since": null
+    },
+    {
+      "name": "required",
+      "type": "boolean",
+      "default": "false",
+      "description": "If it is mandatory field",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 117,
+      "since": null
+    },
+    {
+      "name": "spinnerButtons",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether to show spinner buttons",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 121,
+      "since": null
+    },
+    {
+      "name": "tablet",
+      "type": "boolean",
+      "default": "false",
+      "description": "Defines if time component should be used with tablet mode",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 176,
+      "since": null
+    },
+    {
+      "name": "time",
+      "type": "Nullable<D>",
+      "default": null,
+      "description": "Date time object representation",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 105,
+      "since": null
+    },
+    {
+      "name": "timePickerButtonLabel",
+      "type": "string",
+      "default": null,
+      "description": "Aria label for the time picker toggle button.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 164,
+      "since": null
+    },
+    {
+      "name": "timePickerInputLabel",
+      "type": "string",
+      "default": null,
+      "description": "Aria label for the time picker input.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 160,
+      "since": null
+    },
+    {
+      "name": "useValidation",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether to validate the time picker input.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 209,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "isOpenChange",
+      "type": "boolean",
+      "default": null,
+      "description": "Event emitted when the state of the isOpen property changes.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 259,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "getDisplayFormat",
+      "signature": "() => unknown",
+      "description": "Returns format options to be used during time formatting.",
+      "deprecated": null,
+      "sourceLine": 423,
+      "since": null,
+      "parameters": [],
+      "returnType": "unknown"
+    },
+    {
+      "name": "getParseFormat",
+      "signature": "() => unknown",
+      "description": "Returns format options to be used during time parsing.",
+      "deprecated": null,
+      "sourceLine": 430,
+      "since": null,
+      "parameters": [],
+      "returnType": "unknown"
+    },
+    {
+      "name": "getTime",
+      "signature": "() => Nullable<D>",
+      "description": "Returns the current value of the time input.",
+      "deprecated": null,
+      "sourceLine": 416,
+      "since": null,
+      "parameters": [],
+      "returnType": "Nullable<D>"
+    }
+  ],
+  "inherited": null
+}

@@ -1,0 +1,24 @@
+{
+  "name": "ToastOverlayContainer",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "toast-overlay-container.class.ts",
+  "sourceLine": 8,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/message-toast/toast-overlay-container.class.ts#L8",
+  "description": "Custom overlay container for CDK Overlay.",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "getContainerElement",
+      "signature": "() => HTMLElement",
+      "description": "This method returns the overlay container element. It will lazily\ncreate the element the first time it is called to facilitate using\nthe container in non-browser environments.",
+      "deprecated": null,
+      "sourceLine": 15,
+      "since": null,
+      "parameters": [],
+      "returnType": "HTMLElement"
+    }
+  ],
+  "inherited": null
+}

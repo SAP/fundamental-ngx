@@ -1,0 +1,44 @@
+{
+  "name": "P13FilteringDialogComponent",
+  "selector": null,
+  "kind": "Component",
+  "sourceFile": "filtering.component.ts",
+  "sourceLine": 65,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/table/components/table-p13-dialog/filtering/filtering.component.ts#L65",
+  "description": "Reset button.\n\nUsed to reset resettable state by click.",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "cancel",
+      "signature": "() => void",
+      "description": "Close dialog",
+      "deprecated": null,
+      "sourceLine": 132,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "confirm",
+      "signature": "() => void",
+      "description": "Confirm changes and close dialog",
+      "deprecated": null,
+      "sourceLine": 137,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "reset",
+      "signature": "() => void",
+      "description": "Reset changes to the initial state",
+      "deprecated": null,
+      "sourceLine": 124,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

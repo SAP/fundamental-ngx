@@ -1,0 +1,13 @@
+{
+  "name": "ShellbarLogoComponent",
+  "selector": "fd-shellbar-logo",
+  "kind": "Component",
+  "sourceFile": "shellbar-logo.component.ts",
+  "sourceLine": 19,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/shellbar/shellbar-logo/shellbar-logo.component.ts#L19",
+  "description": "The component that represents a shellbar logo.\nThe logo is a required element and is used for company branding.\n```html\n  <fd-shellbar-logo>\n     <a href=\"#\" class=\"fd-shellbar__logo fd-shellbar__logo--image-replaced\" aria-label=\"SAP\"></a>\n  </fd-shellbar-logo>\n```",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

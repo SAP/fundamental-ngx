@@ -1,0 +1,218 @@
+{
+  "name": "TextAreaComponent",
+  "selector": "fdp-textarea",
+  "kind": "Component",
+  "sourceFile": "text-area.component.ts",
+  "sourceLine": 46,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/text-area/text-area.component.ts#L46",
+  "description": "Textarea field implementation that is compliant with Platform's FormGroup/FormField design",
+  "inputs": [
+    {
+      "name": "cols",
+      "type": "number",
+      "default": null,
+      "description": "The textarea `cols` attribute wrapped- the number of letters visible per line.\nIf width is set to auto, this attribute has no effect.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 65,
+      "since": null
+    },
+    {
+      "name": "growing",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether this textarea can grow.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 93,
+      "since": null
+    },
+    {
+      "name": "growingMaxLines",
+      "type": "Nullable<number>",
+      "default": null,
+      "description": "The number of rows that will be visible when `growing` is set.\nIf both `growingMaxLines` and `height` are provided, `height` value takes precedence.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 58,
+      "since": null
+    },
+    {
+      "name": "height",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "The height to which the textarea will grow when `growing` is set.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 51,
+      "since": null
+    },
+    {
+      "name": "maxLength",
+      "type": "number",
+      "default": null,
+      "description": "The maximum number of characters allowed to enter.\nIf `showExceededText` is false, `maxLength` has native textarea's behavior of disallowing typing beyond `maxLength`.\nIf `showExceededText` is true, user is allowed to type beyond `maxLength`, but error states and counter messages showing\nthe exceeded count is displayed.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 79,
+      "since": null
+    },
+    {
+      "name": "showExceededText",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether counter message should be shown.\nIf `showExceededText` is false, no state changes or error messages are shown. User is simply not allowed to type\nbeyond the `maxLength` characters.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 87,
+      "since": null
+    },
+    {
+      "name": "wrapType",
+      "type": "WrapType",
+      "default": "'soft'",
+      "description": "The textarea `wrap` attribute - can be one of three: 'off', 'hard' or 'soft'.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 71,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "autoGrowTextArea",
+      "signature": "() => void",
+      "description": "handle auto growing of textarea",
+      "deprecated": null,
+      "sourceLine": 267,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "getTextareaLineHeight",
+      "signature": "() => number",
+      "description": "get line height of textarea",
+      "deprecated": null,
+      "sourceLine": 292,
+      "since": null,
+      "parameters": [],
+      "returnType": "number"
+    },
+    {
+      "name": "getUpdatedState",
+      "signature": "() => 'error' | 'default' | 'information' | 'success' | 'warning'",
+      "description": "get the updated state when character count breaches `maxLength`",
+      "deprecated": null,
+      "sourceLine": 306,
+      "since": null,
+      "parameters": [],
+      "returnType": "'error' | 'default' | 'information' | 'success' | 'warning'"
+    },
+    {
+      "name": "handleBackPress",
+      "signature": "(event: KeyboardEvent) => void",
+      "description": "when backpress or delete key is pressed when showExceededText field is not set, simply remove excess characters,\n/* else handle autogrow case",
+      "deprecated": null,
+      "sourceLine": 166,
+      "since": null,
+      "parameters": [
+        {
+          "name": "event",
+          "type": "KeyboardEvent",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "handlePasteInteraction",
+      "signature": "() => void",
+      "description": "handle exceeded maxlength case when text is pasted",
+      "deprecated": null,
+      "sourceLine": 259,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "updateCounterInteractions",
+      "signature": "() => void",
+      "description": "update the counter message and related interactions",
+      "deprecated": null,
+      "sourceLine": 231,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "validateLengthOnCustomSet",
+      "signature": "() => void",
+      "description": "if exceeded maxlength when set as a value in code, highlight the exceeded text.",
+      "deprecated": null,
+      "sourceLine": 241,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": {
+    "from": "BaseInput",
+    "inputs": [],
+    "methods": [
+      {
+        "name": "_onFocusChanged",
+        "signature": "(isFocused: boolean) => void",
+        "description": "Keeps track of element focus",
+        "deprecated": null,
+        "sourceLine": 389,
+        "since": null,
+        "parameters": [
+          {
+            "name": "isFocused",
+            "type": "boolean",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "focus",
+        "signature": "(event?: MouseEvent) => void",
+        "description": "In most of the cases when working with input element directly you should be just find to assing\nvariable to this element\n\n```\n<input #inputElementRef fd-form-control ...>\n```\n\nand this default behavior used. For other cases implement focus.",
+        "deprecated": null,
+        "sourceLine": 419,
+        "since": null,
+        "parameters": [
+          {
+            "name": "event",
+            "type": "MouseEvent",
+            "description": "",
+            "optional": true
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "onContainerClick",
+        "signature": "(event: MouseEvent) => void",
+        "description": "Handles even when we click on parent container which is the FormField Wrapping this\ncontrol",
+        "deprecated": null,
+        "sourceLine": 404,
+        "since": null,
+        "parameters": [
+          {
+            "name": "event",
+            "type": "MouseEvent",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      }
+    ]
+  }
+}

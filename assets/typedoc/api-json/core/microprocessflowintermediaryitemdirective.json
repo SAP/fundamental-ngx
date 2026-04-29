@@ -1,0 +1,13 @@
+{
+  "name": "MicroProcessFlowIntermediaryItemDirective",
+  "selector": "[fdMicroProcessFlowIntermediaryItem], [fd-micro-process-flow-intermediary-item]",
+  "kind": "Directive",
+  "sourceFile": "micro-process-flow-intermediary-item.directive.ts",
+  "sourceLine": 10,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/micro-process-flow/micro-process-flow-intermediary-item.directive.ts#L10",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

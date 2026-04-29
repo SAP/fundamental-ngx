@@ -1,0 +1,34 @@
+{
+  "name": "PreparedNestedListComponent",
+  "selector": "fdx-prepared-nested-list",
+  "kind": "Component",
+  "sourceFile": "prepared-nested-list.component.ts",
+  "sourceLine": 39,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cx/nested-list/prepared-nested-list/prepared-nested-list.component.ts#L39",
+  "description": "Component for internal usage, allows to generate the nested list from defined object.",
+  "inputs": [
+    {
+      "name": "condensed",
+      "type": "boolean",
+      "default": "false",
+      "description": "Defines if list should be displayed in condensed mode",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 50,
+      "since": null
+    },
+    {
+      "name": "list",
+      "type": "Nullable<NestedListModel>",
+      "default": null,
+      "description": "List configuration",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 54,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

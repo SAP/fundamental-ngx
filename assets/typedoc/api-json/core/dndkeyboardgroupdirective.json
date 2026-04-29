@@ -1,0 +1,138 @@
+{
+  "name": "DndKeyboardGroupDirective",
+  "selector": "[fdkDndKeyboardGroup], [fdDndKeyboardGroup]",
+  "kind": "Directive",
+  "sourceFile": "dnd-keyboard-group.directive.ts",
+  "sourceLine": 15,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cdk/utils/drag-and-drop/dnd-keyboard-group/dnd-keyboard-group.directive.ts#L15",
+  "description": "This directive is used to provide drag & drop with keyboard support.\nIt should be used together with directive fdDndKeyboardItem.",
+  "inputs": [
+    {
+      "name": "disableKeyboardDragDrop",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to disable drag & drop",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 22,
+      "since": null
+    },
+    {
+      "name": "groups",
+      "type": "any[][]",
+      "default": null,
+      "description": "Group of items",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 18,
+      "since": null
+    },
+    {
+      "name": "orientation",
+      "type": "'horizontal' | 'vertical'",
+      "default": "'vertical'",
+      "description": "Used to apply indexes when moving between groups",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 26,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "customMoveFn",
+      "signature": "(group: any[], fromIndex: number, toIndex: number) => void",
+      "description": "Custom function to call when moving item inside the group",
+      "deprecated": null,
+      "sourceLine": 39,
+      "since": null,
+      "parameters": [
+        {
+          "name": "group",
+          "type": "any[]",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "fromIndex",
+          "type": "number",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "toIndex",
+          "type": "number",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "customTransferFn",
+      "signature": "(group: any[], nextGroup: any[], fromIndex: number, toIndex: number) => void",
+      "description": "Custom function to call when moving item between groups",
+      "deprecated": null,
+      "sourceLine": 44,
+      "since": null,
+      "parameters": [
+        {
+          "name": "group",
+          "type": "any[]",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "nextGroup",
+          "type": "any[]",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "fromIndex",
+          "type": "number",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "toIndex",
+          "type": "number",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "processDragDrop",
+      "signature": "(event: KeyboardEvent, itemIndex: number, groupIndex: number) => void",
+      "description": "Process drag & drop",
+      "deprecated": null,
+      "sourceLine": 48,
+      "since": null,
+      "parameters": [
+        {
+          "name": "event",
+          "type": "KeyboardEvent",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "itemIndex",
+          "type": "number",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "groupIndex",
+          "type": "number",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

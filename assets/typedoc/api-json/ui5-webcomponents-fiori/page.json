@@ -1,0 +1,54 @@
+{
+  "name": "Page",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "backgroundDesign",
+      "type": "'List' | 'Solid' | 'Transparent'",
+      "default": null,
+      "description": "Defines the background color of the `ui5-page`.\n\n*Note:** When a ui5-list is placed inside the page, we recommend using “List” to ensure better color contrast.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 47,
+      "since": null
+    },
+    {
+      "name": "fixedFooter",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines if the footer is fixed at the very bottom of the page.\n\n*Note:** When set to true the footer is fixed at the very bottom of the page, otherwise it floats over the content with a slight offset from the bottom.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 54,
+      "since": null
+    },
+    {
+      "name": "hideFooter",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines the footer visibility.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 59,
+      "since": null
+    },
+    {
+      "name": "noScrolling",
+      "type": "boolean",
+      "default": null,
+      "description": "Disables vertical scrolling of page content.\nIf set to true, there will be no vertical scrolling at all.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 65,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

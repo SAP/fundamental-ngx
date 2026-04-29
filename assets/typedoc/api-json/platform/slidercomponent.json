@@ -1,0 +1,211 @@
+{
+  "name": "SliderComponent",
+  "selector": "fdp-slider",
+  "kind": "Component",
+  "sourceFile": "slider.component.ts",
+  "sourceLine": 28,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/slider/slider.component.ts#L28",
+  "description": "All form components share the same information (value, name, placeholder,.. ) as well as\nthe same behavior given by ControlValueAccessor.\n\nEven this is not ideal solution there is no other way then use inheritance to reuse some of the\ncommon logic. It should be possible to use some kind of compositions with Proxies but something\nsimilar that exists in Aspect Oriented Programing.\n\nUsually try to fire stateChange only for things that can change dynamically in runtime. We don't expect\nthat e.g. placeholder will change after component is created",
+  "inputs": [
+    {
+      "name": "class",
+      "type": "string",
+      "default": null,
+      "description": "User's custom classes",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 31,
+      "since": null
+    },
+    {
+      "name": "customValues",
+      "type": "SliderCustomValue[]",
+      "default": "[]",
+      "description": "Array of custom values to use for Slider.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 71,
+      "since": null
+    },
+    {
+      "name": "hideProgressBar",
+      "type": "boolean",
+      "default": "false",
+      "description": "Hides display of colored progress bar.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 79,
+      "since": null
+    },
+    {
+      "name": "jump",
+      "type": "number",
+      "default": "10",
+      "description": "Jump value.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 47,
+      "since": null
+    },
+    {
+      "name": "max",
+      "type": "number",
+      "default": "100",
+      "description": "Maximum value.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 39,
+      "since": null
+    },
+    {
+      "name": "min",
+      "type": "number",
+      "default": "0",
+      "description": "Minimum value.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 35,
+      "since": null
+    },
+    {
+      "name": "mode",
+      "type": "'single' | 'range'",
+      "default": "'single'",
+      "description": "Slider mode.\nOptions include: 'single' | 'range'\nThe default is set to 'single'",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 59,
+      "since": null
+    },
+    {
+      "name": "showTicks",
+      "type": "boolean",
+      "default": "false",
+      "description": "Toggles the visibility of tick marks.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 63,
+      "since": null
+    },
+    {
+      "name": "showTicksLabels",
+      "type": "boolean",
+      "default": "false",
+      "description": "Toggles the visibility of tick mark labels. Must be used in conjunction with 'showTicks'",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 67,
+      "since": null
+    },
+    {
+      "name": "step",
+      "type": "number",
+      "default": "1",
+      "description": "Step value.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 43,
+      "since": null
+    },
+    {
+      "name": "tickmarksBetweenLabels",
+      "type": "number",
+      "default": "1",
+      "description": "Put a label on every N-th tickmark.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 51,
+      "since": null
+    },
+    {
+      "name": "tooltipMode",
+      "type": "'readonly' | 'editable'",
+      "default": null,
+      "description": "Tooltip can be two types, 'readonly' to display value and 'editable' to make the ability to set and display value.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 75,
+      "since": null
+    },
+    {
+      "name": "vertical",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the slider should be rendered vertically.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 83,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "sliderChange",
+      "type": "SliderChangeEvent<any>",
+      "default": null,
+      "description": "Event fired when the state of the slider changes.\n*$event* can be used to retrieve the new state of the slider.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 89,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": {
+    "from": "BaseInput",
+    "inputs": [],
+    "methods": [
+      {
+        "name": "_onFocusChanged",
+        "signature": "(isFocused: boolean) => void",
+        "description": "Keeps track of element focus",
+        "deprecated": null,
+        "sourceLine": 389,
+        "since": null,
+        "parameters": [
+          {
+            "name": "isFocused",
+            "type": "boolean",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "focus",
+        "signature": "(event?: MouseEvent) => void",
+        "description": "In most of the cases when working with input element directly you should be just find to assing\nvariable to this element\n\n```\n<input #inputElementRef fd-form-control ...>\n```\n\nand this default behavior used. For other cases implement focus.",
+        "deprecated": null,
+        "sourceLine": 419,
+        "since": null,
+        "parameters": [
+          {
+            "name": "event",
+            "type": "MouseEvent",
+            "description": "",
+            "optional": true
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "onContainerClick",
+        "signature": "(event: MouseEvent) => void",
+        "description": "Handles even when we click on parent container which is the FormField Wrapping this\ncontrol",
+        "deprecated": null,
+        "sourceLine": 404,
+        "since": null,
+        "parameters": [
+          {
+            "name": "event",
+            "type": "MouseEvent",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      }
+    ]
+  }
+}

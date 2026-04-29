@@ -1,0 +1,44 @@
+{
+  "name": "P13ColumnsDialogComponent",
+  "selector": null,
+  "kind": "Component",
+  "sourceFile": "columns.component.ts",
+  "sourceLine": 109,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/table/components/table-p13-dialog/columns/columns.component.ts#L109",
+  "description": "Reset button.\n\nUsed to reset resettable state by click.",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "cancel",
+      "signature": "() => void",
+      "description": "Close dialog",
+      "deprecated": null,
+      "sourceLine": 177,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "confirm",
+      "signature": "() => void",
+      "description": "Confirm changes and close dialog",
+      "deprecated": null,
+      "sourceLine": 182,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "reset",
+      "signature": "() => void",
+      "description": "Reset to the initial state",
+      "deprecated": null,
+      "sourceLine": 171,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

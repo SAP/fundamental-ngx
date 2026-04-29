@@ -1,0 +1,135 @@
+{
+  "name": "NavigationMenu",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 41,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "headerText",
+      "type": "string",
+      "default": null,
+      "description": "Defines the header text of the menu (displayed on mobile).",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 46,
+      "since": null
+    },
+    {
+      "name": "horizontalAlign",
+      "type": "'End' | 'Start' | 'Center' | 'Stretch'",
+      "default": null,
+      "description": "Determines the horizontal alignment of the menu relative to its opener control.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 51,
+      "since": null
+    },
+    {
+      "name": "loading",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines if a loading indicator would be displayed inside the corresponding ui5-menu popover.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 56,
+      "since": null
+    },
+    {
+      "name": "loadingDelay",
+      "type": "number",
+      "default": null,
+      "description": "Defines the delay in milliseconds, after which the loading indicator will be displayed inside the corresponding ui5-menu popover.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 61,
+      "since": null
+    },
+    {
+      "name": "open",
+      "type": "boolean",
+      "default": null,
+      "description": "Indicates if the menu is open.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 66,
+      "since": null
+    },
+    {
+      "name": "opener",
+      "type": "null | string | HTMLElement",
+      "default": null,
+      "description": "Defines the ID or DOM Reference of the element at which the menu is shown.\nWhen using this attribute in a declarative way, you must only use the `id` (as a string) of the element at which you want to show the popover.\nYou can only set the `opener` attribute to a DOM Reference when using JavaScript.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 73,
+      "since": null
+    },
+    {
+      "name": "placement",
+      "type": "'End' | 'Start' | 'Top' | 'Bottom'",
+      "default": null,
+      "description": "Determines on which side the component is placed at.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 78,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5BeforeClose",
+      "type": "UI5CustomEvent<NavigationMenu, 'before-close'>",
+      "default": null,
+      "description": "Fired before the menu is closed. This event can be cancelled, which will prevent the menu from closing.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 85,
+      "since": null
+    },
+    {
+      "name": "ui5BeforeOpen",
+      "type": "UI5CustomEvent<NavigationMenu, 'before-open'>",
+      "default": null,
+      "description": "Fired before the menu is opened. This event can be cancelled, which will prevent the menu from opening.\n\n*Note:** Since 1.14.0 the event is also fired before a sub-menu opens.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 92,
+      "since": null
+    },
+    {
+      "name": "ui5Close",
+      "type": "UI5CustomEvent<NavigationMenu, 'close'>",
+      "default": null,
+      "description": "Fired after the menu is closed.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 97,
+      "since": null
+    },
+    {
+      "name": "ui5ItemClick",
+      "type": "UI5CustomEvent<NavigationMenu, 'item-click'>",
+      "default": null,
+      "description": "Fired when an item is being clicked.\n\n*Note:** Since 1.17.0 the event is preventable, allowing the menu to remain open after an item is pressed.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 104,
+      "since": null
+    },
+    {
+      "name": "ui5Open",
+      "type": "UI5CustomEvent<NavigationMenu, 'open'>",
+      "default": null,
+      "description": "Fired after the menu is opened.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 109,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

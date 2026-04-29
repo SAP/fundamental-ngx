@@ -1,0 +1,54 @@
+{
+  "name": "TableViewSettingsFilterComponent",
+  "selector": "fdp-table-view-settings-filter",
+  "kind": "Component",
+  "sourceFile": "table-view-settings-filter.component.ts",
+  "sourceLine": 40,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/table/components/table-view-settings-dialog/table-view-settings-filter.component.ts#L40",
+  "description": "View settings dialog filter component.\n\n```html\n<!-- With custom form -->\n<fdp-table-view-settings-filter\n    column=\"name\"\n    label=\"Name\"\n    type=\"custom\">\n        <ng-container *fdpViewSettingsFilterCustomDef=\"let model\">\n            <label>Enter name:</label>\n            <fdp-input type=\"text\" name=\"name\" [(ngModel)]=\"model.name\"></fdp-input>\n        </ng-container>\n</fdp-table-view-settings-filter>\n\n<!-- Single select -->\n<fdp-table-view-settings-filter\n    column=\"status\"\n    label=\"Status\"\n    type=\"single-select\"\n    values=\"[{value: 'OUT_OF_STOCK', label: 'Out of stock'}, { value: 'AVAILABLE', label: 'Available'}]\">\n</fdp-table-view-settings-filter>\n```",
+  "inputs": [
+    {
+      "name": "column",
+      "type": "string",
+      "default": null,
+      "description": "Table column name on which to filter.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 43,
+      "since": null
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "default": null,
+      "description": "Label for the column.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 47,
+      "since": null
+    },
+    {
+      "name": "type",
+      "type": "FilterType",
+      "default": null,
+      "description": "Type of filter interface.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 54,
+      "since": null
+    },
+    {
+      "name": "values",
+      "type": "TableFilterSelectOption[]",
+      "default": null,
+      "description": "Selection values for 'single-select' or 'multi-select' filter types.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 58,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

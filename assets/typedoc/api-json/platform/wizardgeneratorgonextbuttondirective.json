@@ -1,0 +1,13 @@
+{
+  "name": "WizardGeneratorGoNextButtonDirective",
+  "selector": "[fdpWizardGeneratorGoNextButton], [fdp-wizard-generator-go-next-button]",
+  "kind": "Directive",
+  "sourceFile": "wizard-generator-go-next-button.directive.ts",
+  "sourceLine": 7,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/wizard-generator/directives/wizard-generator-go-next-button.directive.ts#L7",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

@@ -1,0 +1,13 @@
+{
+  "name": "CardMediaImageDirective",
+  "selector": "[fd-card-media-image]",
+  "kind": "Directive",
+  "sourceFile": "card-media-image.directive.ts",
+  "sourceLine": 12,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/card/media/card-media-image.directive.ts#L12",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

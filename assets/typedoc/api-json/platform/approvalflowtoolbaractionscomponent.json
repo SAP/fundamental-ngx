@@ -1,0 +1,85 @@
+{
+  "name": "ApprovalFlowToolbarActionsComponent",
+  "selector": "fdp-approval-flow-toolbar-actions",
+  "kind": "Component",
+  "sourceFile": "approval-flow-toolbar-actions.component.ts",
+  "sourceLine": 26,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/approval-flow/approval-flow-toolbar-actions/approval-flow-toolbar-actions.component.ts#L26",
+  "description": "",
+  "inputs": [
+    {
+      "name": "graph",
+      "type": "ApprovalFlowGraph",
+      "default": null,
+      "description": "Approval flow graph",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 29,
+      "since": null
+    },
+    {
+      "name": "graphMetadata",
+      "type": "ApprovalGraphMetadata",
+      "default": null,
+      "description": "Approval flow graph metadata",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 33,
+      "since": null
+    },
+    {
+      "name": "isEditMode",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether approval flow in the edit mode",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 50,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "addNode",
+      "type": "{ node: ApprovalGraphNode; target: ApprovalFlowNodeTarget }",
+      "default": null,
+      "description": "Event emitted when node added",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 58,
+      "since": null
+    },
+    {
+      "name": "deleteSelectedNodes",
+      "type": "void",
+      "default": null,
+      "description": "Event emitted when selected nodes deleted (bulk)",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 66,
+      "since": null
+    },
+    {
+      "name": "editSelectedNode",
+      "type": "ApprovalGraphNode",
+      "default": null,
+      "description": "Event emitted when selected node edited",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 62,
+      "since": null
+    },
+    {
+      "name": "enterEditMode",
+      "type": "void",
+      "default": null,
+      "description": "Event emitted when edit mode toggled",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 54,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

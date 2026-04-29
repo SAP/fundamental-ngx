@@ -1,0 +1,13 @@
+{
+  "name": "MenuContentDirective",
+  "selector": "[fd-menu-content]",
+  "kind": "Directive",
+  "sourceFile": "menu-content.directive.ts",
+  "sourceLine": 13,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/menu/directives/menu-content.directive.ts#L13",
+  "description": "The directive that represents the menu title.",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

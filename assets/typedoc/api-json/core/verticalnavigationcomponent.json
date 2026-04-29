@@ -1,0 +1,37 @@
+{
+  "name": "VerticalNavigationComponent",
+  "selector": "fd-vertical-navigation",
+  "kind": "Component",
+  "sourceFile": "vertical-navigation.component.ts",
+  "sourceLine": 36,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/vertical-navigation/vertical-navigation.component.ts#L36",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "setItemActive",
+      "signature": "(index: number, updateOnly: boolean) => void",
+      "description": "Set fake focus on element with passed index",
+      "deprecated": null,
+      "sourceLine": 118,
+      "since": null,
+      "parameters": [
+        {
+          "name": "index",
+          "type": "number",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "updateOnly",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

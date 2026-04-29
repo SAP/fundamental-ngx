@@ -1,0 +1,35 @@
+{
+  "name": "Wizard",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "contentLayout",
+      "type": "'MultipleSteps' | 'SingleStep'",
+      "default": null,
+      "description": "Defines how the content of the `ui5-wizard` would be visualized.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 45,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5StepChange",
+      "type": "UI5CustomEvent<Wizard, 'step-change'>",
+      "default": null,
+      "description": "Fired when the step is changed by user interaction - either with scrolling,\nor by clicking on the steps within the component header.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 53,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

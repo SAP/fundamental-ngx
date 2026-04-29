@@ -1,0 +1,54 @@
+{
+  "name": "DropIndicator",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 41,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "orientation",
+      "type": "'Vertical' | 'Horizontal'",
+      "default": null,
+      "description": "Orientation of the indicator.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 46,
+      "since": null
+    },
+    {
+      "name": "ownerReference",
+      "type": "null | HTMLElement",
+      "default": null,
+      "description": "Owner of the indicator and the target.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 51,
+      "since": null
+    },
+    {
+      "name": "placement",
+      "type": "'On' | 'Before' | 'After'",
+      "default": null,
+      "description": "Placement of the indicator relative to the target.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 56,
+      "since": null
+    },
+    {
+      "name": "targetReference",
+      "type": "null | HTMLElement",
+      "default": null,
+      "description": "Element where the drop indicator will be shown.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 61,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

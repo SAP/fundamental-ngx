@@ -1,0 +1,45 @@
+{
+  "name": "LineClampDirective",
+  "selector": "[fdkLineClampTarget], [fdLineClampTarget], [fd-lineclamp-target]",
+  "kind": "Directive",
+  "sourceFile": "line-clamp.directive.ts",
+  "sourceLine": 73,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cdk/utils/directives/line-clamp/line-clamp.directive.ts#L73",
+  "description": "",
+  "inputs": [
+    {
+      "name": "fdLineClampLines",
+      "type": "number",
+      "default": null,
+      "description": "Count lines for clamping",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 77,
+      "since": null
+    },
+    {
+      "name": "fdLineclampState",
+      "type": "boolean",
+      "default": null,
+      "description": "Clamping state",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 82,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "lineCountUpdate",
+      "type": "number",
+      "default": null,
+      "description": "Event return count of lines from the target",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 87,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

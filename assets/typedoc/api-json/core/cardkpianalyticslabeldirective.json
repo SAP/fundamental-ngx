@@ -1,0 +1,13 @@
+{
+  "name": "CardKpiAnalyticsLabelDirective",
+  "selector": "[fd-card-kpi-analytics-label]",
+  "kind": "Directive",
+  "sourceFile": "card-kpi-analytics-label.directive.ts",
+  "sourceLine": 12,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/card/kpi/card-kpi-analytics-label.directive.ts#L12",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

@@ -6,28 +6,28 @@
 	"flags": {},
 	"children": [
 		{
-			"id": 1,
+			"id": 3,
 			"name": "UI5WrapperCustomEvent",
 			"variant": "declaration",
 			"kind": 2097152,
 			"flags": {},
 			"sources": [
 				{
-					"fileName": "index.ts",
+					"fileName": "types/index.ts",
 					"line": 14,
 					"character": 12
 				}
 			],
 			"typeParameters": [
 				{
-					"id": 2,
+					"id": 4,
 					"name": "T",
 					"variant": "typeParam",
 					"kind": 131072,
 					"flags": {}
 				},
 				{
-					"id": 3,
+					"id": 5,
 					"name": "N",
 					"variant": "typeParam",
 					"kind": 131072,
@@ -100,7 +100,7 @@
 		{
 			"title": "Type Aliases",
 			"children": [
-				1
+				3
 			]
 		}
 	],
@@ -136,19 +136,15 @@
 		}
 	],
 	"symbolIdMap": {
-		"0": {
-			"sourceFileName": "libs/ui5-webcomponents-base/types/index.ts",
-			"qualifiedName": ""
-		},
-		"1": {
+		"3": {
 			"sourceFileName": "libs/ui5-webcomponents-base/types/index.ts",
 			"qualifiedName": "UI5WrapperCustomEvent"
 		},
-		"2": {
+		"4": {
 			"sourceFileName": "libs/ui5-webcomponents-base/types/index.ts",
 			"qualifiedName": "T"
 		},
-		"3": {
+		"5": {
 			"sourceFileName": "libs/ui5-webcomponents-base/types/index.ts",
 			"qualifiedName": "N"
 		}

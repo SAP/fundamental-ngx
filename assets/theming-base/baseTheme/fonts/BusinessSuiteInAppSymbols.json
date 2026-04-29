@@ -2527,6 +2527,12 @@
 		"tags": ["packing","work", "center", "warehouse"],
 		"rtl": "flip"
 	},
+	"0xe13d": {
+		"names": ["icon-zoom-to-fit"],
+		"groups": ["actions"],
+		"tags": ["zoom","fit", "enlarge"],
+		"rtl": "flip"
+	},
 	"0xe140": {
 		"names": ["icon-ps-text"],
 		"groups": [],
@@ -3023,6 +3029,6 @@
 		"names": ["icon-entry-configurable-product"],
 		"groups": ["objects", "things", "status", "actions"],
 		"tags": ["product", "arrows", "configure", "configurable", "entry"],
-		"rtl": "flip"
+		"rtl": "flip"	
 	}
 }

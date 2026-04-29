@@ -1,0 +1,34 @@
+{
+  "name": "TimelineNodeBodyComponent",
+  "selector": "fd-timeline-node-body",
+  "kind": "Component",
+  "sourceFile": "timeline-node-body.component.ts",
+  "sourceLine": 23,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/timeline/components/timeline-node-body/timeline-node-body.component.ts#L23",
+  "description": "",
+  "inputs": [
+    {
+      "name": "content",
+      "type": "string",
+      "default": null,
+      "description": "Text content of timeline node",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 26,
+      "since": null
+    },
+    {
+      "name": "maxLines",
+      "type": "number",
+      "default": null,
+      "description": "The number of lines to be visible.\nIf user doesn't provide it, all lines will be visible",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 33,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

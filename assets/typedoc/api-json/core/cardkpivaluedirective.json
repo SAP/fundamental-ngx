@@ -1,0 +1,24 @@
+{
+  "name": "CardKpiValueDirective",
+  "selector": "[fd-card-kpi-value]",
+  "kind": "Directive",
+  "sourceFile": "card-kpi-value.directive.ts",
+  "sourceLine": 14,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/card/kpi/card-kpi-value.directive.ts#L14",
+  "description": "",
+  "inputs": [
+    {
+      "name": "status",
+      "type": "KpiStatus",
+      "default": null,
+      "description": "Set type of KPI value. eg: 'positive', 'negative', 'critical', 'informative'",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 16,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

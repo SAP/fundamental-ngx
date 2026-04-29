@@ -1,0 +1,164 @@
+{
+  "name": "InlineHelpDirective",
+  "selector": "[fd-inline-help]:not([fd-inline-help-template]), [fd-inline-help-template]:not([fd-inline-help])",
+  "kind": "Directive",
+  "sourceFile": "inline-help.directive.ts",
+  "sourceLine": 45,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/inline-help/inline-help.directive.ts#L45",
+  "description": "The component that represents an inline-help.\nInline help is used to display help text in a popover, often inline with headers, body text and form labels.",
+  "inputs": [
+    {
+      "name": "additionalBodyClass",
+      "type": "null | string",
+      "default": null,
+      "description": "Additional CSS class(es) to apply to the popover body.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 63,
+      "since": null
+    },
+    {
+      "name": "appendTo",
+      "type": "null | Element | ElementRef<any>",
+      "default": null,
+      "description": "The element to which the overlay is attached. By default it is body.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 87,
+      "since": null
+    },
+    {
+      "name": "bodyId",
+      "type": "string",
+      "default": null,
+      "description": "ID for the Inline Help Popover body",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 69,
+      "since": null
+    },
+    {
+      "name": "bodyRole",
+      "type": "string",
+      "default": null,
+      "description": "aria-role for the Inline Help Popover body",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 72,
+      "since": null
+    },
+    {
+      "name": "closeOnEscapeKey",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the popover should close when the escape key is pressed.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 78,
+      "since": null
+    },
+    {
+      "name": "closeOnNavigation",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether to close the popover on router navigation start.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 81,
+      "since": null
+    },
+    {
+      "name": "closeOnOutsideClick",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the popover should close when a click is made outside its boundaries.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 60,
+      "since": null
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the inline help is disabled.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 66,
+      "since": null
+    },
+    {
+      "name": "fixedPosition",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether position should remain fixed when approaching page corners.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 90,
+      "since": null
+    },
+    {
+      "name": "inlineHelpContent",
+      "type": "string | TemplateRef<any>",
+      "default": null,
+      "description": "Inline help text to display inside generated popover",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 47,
+      "since": null
+    },
+    {
+      "name": "maxWidth",
+      "type": "null | number",
+      "default": null,
+      "description": "Maximum width of popover body in px.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 93,
+      "since": null
+    },
+    {
+      "name": "noArrow",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the popover should have an arrow.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 75,
+      "since": null
+    },
+    {
+      "name": "placement",
+      "type": "null | Placement",
+      "default": null,
+      "description": "Popover placement",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 50,
+      "since": null
+    },
+    {
+      "name": "restoreFocusOnClose",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether to restore focus to the previously focused element when the popover closes.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 84,
+      "since": null
+    },
+    {
+      "name": "triggers",
+      "type": "string | TriggerConfig[]",
+      "default": null,
+      "description": "The trigger events that will open/close the inline help component.\nAccepts any HTML DOM Events or TriggerConfig objects.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 57,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

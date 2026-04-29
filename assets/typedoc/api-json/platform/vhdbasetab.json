@@ -1,0 +1,44 @@
+{
+  "name": "VhdBaseTab",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "vhd-base-tab.component.ts",
+  "sourceLine": 9,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/value-help-dialog/components/base-tab/vhd-base-tab.component.ts#L9",
+  "description": "",
+  "inputs": [
+    {
+      "name": "mobile",
+      "type": "boolean",
+      "default": "false",
+      "description": "Mobile view",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 20,
+      "since": null
+    },
+    {
+      "name": "tabTitle",
+      "type": "string",
+      "default": null,
+      "description": "Tab Title",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 16,
+      "since": null
+    },
+    {
+      "name": "uid",
+      "type": "string",
+      "default": null,
+      "description": "Tab Title",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 12,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

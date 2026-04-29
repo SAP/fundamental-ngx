@@ -1,0 +1,13 @@
+{
+  "name": "ShellbarSeparatorComponent",
+  "selector": "fd-shellbar-separator",
+  "kind": "Component",
+  "sourceFile": "shellbar-separator.component.ts",
+  "sourceLine": 23,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/shellbar/shellbar-separator/shellbar-separator.component.ts#L23",
+  "description": "The shellbar separator component.",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

@@ -1,0 +1,105 @@
+{
+  "name": "NotificationListItem",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 42,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "importance",
+      "type": "'Standard' | 'Important'",
+      "default": null,
+      "description": "Defines the `Important` label of the item.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 47,
+      "since": null
+    },
+    {
+      "name": "loading",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines if a busy indicator would be displayed over the item.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 52,
+      "since": null
+    },
+    {
+      "name": "loadingDelay",
+      "type": "number",
+      "default": null,
+      "description": "Defines the delay in milliseconds, after which the busy indicator will show up for this component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 57,
+      "since": null
+    },
+    {
+      "name": "read",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines if the `notification` is new or has been already read.\n\n*Note:** if set to `false` the `titleText` has bold font,\nif set to true - it has a normal font.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 65,
+      "since": null
+    },
+    {
+      "name": "showClose",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines if the `Close` button would be displayed.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 70,
+      "since": null
+    },
+    {
+      "name": "state",
+      "type": "'None' | 'Positive' | 'Critical' | 'Negative' | 'Information'",
+      "default": null,
+      "description": "Defines the status indicator of the item.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 75,
+      "since": null
+    },
+    {
+      "name": "titleText",
+      "type": "string",
+      "default": null,
+      "description": "Defines the `titleText` of the item.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 80,
+      "since": null
+    },
+    {
+      "name": "wrappingType",
+      "type": "'None' | 'Normal'",
+      "default": null,
+      "description": "Defines if the `titleText` and `description` should wrap,\nthey truncate by default.\n\n*Note:** by default the `titleText` and `description`,\nand a `ShowMore/Less` button would be displayed.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 89,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5Close",
+      "type": "UI5CustomEvent<NotificationListItem, 'close'>",
+      "default": null,
+      "description": "Fired when the `Close` button is pressed.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 96,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

@@ -1,0 +1,44 @@
+{
+  "name": "MediaGalleryItem",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines whether the component is in disabled state.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 45,
+      "since": null
+    },
+    {
+      "name": "layout",
+      "type": "'Square' | 'Wide'",
+      "default": null,
+      "description": "Determines the layout of the item container.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 50,
+      "since": null
+    },
+    {
+      "name": "selected",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines the selected state of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 55,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

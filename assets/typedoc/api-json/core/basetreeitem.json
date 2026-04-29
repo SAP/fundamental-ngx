@@ -1,0 +1,64 @@
+{
+  "name": "BaseTreeItem",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "base-tree-item.class.ts",
+  "sourceLine": 13,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/tree/models/base-tree-item.class.ts#L13",
+  "description": "Abstract base class for tree item components.\nDefines the contract for tree item implementations with navigation, selection, and hierarchy support.",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "focus",
+      "signature": "() => void",
+      "description": "Sets focus on the tree item.",
+      "deprecated": null,
+      "sourceLine": 109,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "setContainerTabIndex",
+      "signature": "(value: number) => void",
+      "description": "Sets the tabindex value for the item's container element.",
+      "deprecated": null,
+      "sourceLine": 122,
+      "since": null,
+      "parameters": [
+        {
+          "name": "value",
+          "type": "number",
+          "description": "The tabindex value (typically 0 for focusable, -1 for not focusable)",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setPosition",
+      "signature": "(totalItemsCount: number, currentIndex: number) => void",
+      "description": "Updates the ARIA position information for the item.",
+      "deprecated": null,
+      "sourceLine": 116,
+      "since": null,
+      "parameters": [
+        {
+          "name": "totalItemsCount",
+          "type": "number",
+          "description": "Total number of items in the set",
+          "optional": false
+        },
+        {
+          "name": "currentIndex",
+          "type": "number",
+          "description": "Current position index (0-based)",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

@@ -1,0 +1,115 @@
+{
+  "name": "SearchField",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "accessibleDescription",
+      "type": "string",
+      "default": null,
+      "description": "Defines the accessible ARIA description of the field.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 45,
+      "since": null
+    },
+    {
+      "name": "accessibleName",
+      "type": "string",
+      "default": null,
+      "description": "Defines the accessible ARIA name of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 50,
+      "since": null
+    },
+    {
+      "name": "fieldLoading",
+      "type": "boolean",
+      "default": null,
+      "description": "Indicates whether a loading indicator should be shown in the input field.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 55,
+      "since": null
+    },
+    {
+      "name": "placeholder",
+      "type": "string",
+      "default": null,
+      "description": "Defines a short hint intended to aid the user with data entry when the\ncomponent has no value.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 61,
+      "since": null
+    },
+    {
+      "name": "scopeValue",
+      "type": "string",
+      "default": null,
+      "description": "Defines the value of the component:\n\nApplications are responsible for setting the correct scope value.\n\n*Note:** If the given value does not match any existing scopes,\nno scope will be selected and the SearchField scope component will be displayed as empty.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 71,
+      "since": null
+    },
+    {
+      "name": "showClearIcon",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines whether the clear icon of the search will be shown.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 76,
+      "since": null
+    },
+    {
+      "name": "value",
+      "type": "string",
+      "default": null,
+      "description": "Defines the value of the component.\n\n*Note:** The property is updated upon typing.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 83,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5Input",
+      "type": "UI5CustomEvent<SearchField, 'input'>",
+      "default": null,
+      "description": "Fired when typing in input or clear icon is pressed.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 90,
+      "since": null
+    },
+    {
+      "name": "ui5ScopeChange",
+      "type": "UI5CustomEvent<SearchField, 'scope-change'>",
+      "default": null,
+      "description": "Fired when the scope has changed.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 95,
+      "since": null
+    },
+    {
+      "name": "ui5Search",
+      "type": "UI5CustomEvent<SearchField, 'search'>",
+      "default": null,
+      "description": "Fired when the user has triggered search with Enter key or Search Button press.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 100,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

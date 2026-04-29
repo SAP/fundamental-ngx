@@ -1,0 +1,65 @@
+{
+  "name": "TableP13DialogComponent",
+  "selector": "fdp-table-p13-dialog",
+  "kind": "Component",
+  "sourceFile": "table-p13-dialog.component.ts",
+  "sourceLine": 81,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/table/components/table-p13-dialog/table-p13-dialog.component.ts#L81",
+  "description": "View settings dialog component.\n\nUsed to link view settings filters options to the grid table.\n\n```html\n<fdp-table #myTable></fdp-table>\n...\n<fdp-table-p13-dialog [table]=\"myTable\">\n  <!-- Sort Panel -->\n  <fdp-table-p13-sort></fdp-table-p13-sort>\n\n  <!-- Filter Panel -->\n  <fdp-table-p13-filter></fdp-table-p13-filter>\n\n  <!-- Group Panel -->\n  <fdp-table-p13-group></fdp-table-p13-group>\n\n  <!-- Columns Panel -->\n  <fdp-table-p13-columns></fdp-table-p13-columns>\n</fdp-table-p13-dialog>\n```",
+  "inputs": [],
+  "outputs": [
+    {
+      "name": "dialogClosed",
+      "type": "string[]",
+      "default": null,
+      "description": "Event emitted when dialog is closed.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 93,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "showColumnsSettings",
+      "signature": "() => void",
+      "description": "Open Columns Settings Dialog",
+      "deprecated": null,
+      "sourceLine": 253,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "showFilteringSettings",
+      "signature": "() => void",
+      "description": "Open Filtering Settings Dialog",
+      "deprecated": null,
+      "sourceLine": 169,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "showGroupingSettings",
+      "signature": "() => void",
+      "description": "Open Grouping Settings Dialog",
+      "deprecated": null,
+      "sourceLine": 215,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "showSortingSettings",
+      "signature": "() => void",
+      "description": "Open Sort Settings Dialog",
+      "deprecated": null,
+      "sourceLine": 136,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

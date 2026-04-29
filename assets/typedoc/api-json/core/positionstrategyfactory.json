@@ -1,0 +1,31 @@
+{
+  "name": "PositionStrategyFactory",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "position-strategy-factory.ts",
+  "sourceLine": 8,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/timeline/services/position-strategies/position-strategy-factory.ts#L8",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "getStrategy",
+      "signature": "(strategy: 'horizontal-top' | 'horizontal-bottom' | 'horizontal-left' | 'horizontal-right' | 'horizontal-double' | 'vertical-top' | 'vertical-bottom' | 'vertical-left' | 'vertical-right' | 'vertical-double') => BaseStrategy",
+      "description": "Get timeline position strategy",
+      "deprecated": null,
+      "sourceLine": 10,
+      "since": null,
+      "parameters": [
+        {
+          "name": "strategy",
+          "type": "'horizontal-top' | 'horizontal-bottom' | 'horizontal-left' | 'horizontal-right' | 'horizontal-double' | 'vertical-top' | 'vertical-bottom' | 'vertical-left' | 'vertical-right' | 'vertical-double'",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "BaseStrategy"
+    }
+  ],
+  "inherited": null
+}

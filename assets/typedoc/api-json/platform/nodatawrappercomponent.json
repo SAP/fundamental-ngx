@@ -1,0 +1,13 @@
+{
+  "name": "NoDataWrapperComponent",
+  "selector": "fdp-table-no-data-wrapper",
+  "kind": "Component",
+  "sourceFile": "no-data-wrapper.component.ts",
+  "sourceLine": 16,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/table/components/no-data-wrapper/no-data-wrapper.component.ts#L16",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

@@ -7,18 +7,18 @@ import { patchLanguage } from '@fundamental-ngx/i18n';
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         patchLanguage({
-            // it's possible to partially override translations for component
-            // overriding only 3 out of all translation strings for textarea here
-            // also function can be used to provide complex translation logic
+            // Partially override translations for this component scope
+            // Overriding only 3 out of all translation strings for textarea
+            // Functions can be used for complex translation logic
             platformTextarea: {
                 counterMessageCharactersRemainingSingular: 'You can type 1 more character',
-                counterMessageCharactersRemainingPlural: 'You can type { count } more characters',
+                counterMessageCharactersRemainingPlural: 'You can type {count} more characters',
                 counterMessageCharactersOverTheLimitPlural: (params) => {
                     switch (+params.count) {
                         case 2:
-                            return 'Two charactes over the limit';
+                            return 'Two characters over the limit';
                         case 3:
-                            return 'Three charactes over the limit';
+                            return 'Three characters over the limit';
                     }
                     return `${params.count} characters over the limit`;
                 }

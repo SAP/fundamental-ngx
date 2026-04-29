@@ -1,0 +1,44 @@
+{
+  "name": "ObjectListItemRowComponent",
+  "selector": "fdp-object-list-item-row",
+  "kind": "Component",
+  "sourceFile": "object-list-item-row.component.ts",
+  "sourceLine": 26,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/list/object-list-item/object-list-item-row.component.ts#L26",
+  "description": "",
+  "inputs": [
+    {
+      "name": "attributeLabel",
+      "type": "string",
+      "default": null,
+      "description": "object attribute label",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 29,
+      "since": null
+    },
+    {
+      "name": "islink",
+      "type": "boolean",
+      "default": "false",
+      "description": "object attribute is a link",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 37,
+      "since": null
+    },
+    {
+      "name": "linkedText",
+      "type": "string",
+      "default": null,
+      "description": "object attribute link text",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 33,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

@@ -1,0 +1,13 @@
+{
+  "name": "ActionBarHeaderDirective",
+  "selector": "[fd-action-bar-header]",
+  "kind": "Directive",
+  "sourceFile": "action-bar-header.directive.ts",
+  "sourceLine": 20,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/action-bar/action-bar-header/action-bar-header.directive.ts#L20",
+  "description": "The action bar header, which contains the action bar's title and description components.\n\n```html\n<div fd-action-bar>\n    <div fd-action-bar-header>\n    </div>\n</div>\n```",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

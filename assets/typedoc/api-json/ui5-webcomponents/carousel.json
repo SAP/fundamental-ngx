@@ -1,0 +1,135 @@
+{
+  "name": "Carousel",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 43,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "accessibleName",
+      "type": "string",
+      "default": null,
+      "description": "Defines the accessible name of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 48,
+      "since": null
+    },
+    {
+      "name": "accessibleNameRef",
+      "type": "string",
+      "default": null,
+      "description": "Defines the IDs of the elements that label the input.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 53,
+      "since": null
+    },
+    {
+      "name": "arrowsPlacement",
+      "type": "'Content' | 'Navigation'",
+      "default": null,
+      "description": "Defines the position of arrows.\n\nAvailable options are:\n\n- `Content` - the arrows are placed on the sides of the current page.\n- `Navigation` - the arrows are placed on the sides of the page indicator.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 63,
+      "since": null
+    },
+    {
+      "name": "backgroundDesign",
+      "type": "'Transparent' | 'Solid' | 'Translucent'",
+      "default": null,
+      "description": "Defines the carousel's background design.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 68,
+      "since": null
+    },
+    {
+      "name": "cyclic",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines whether the carousel should loop, i.e show the first page after the last page is reached and vice versa.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 73,
+      "since": null
+    },
+    {
+      "name": "hideNavigationArrows",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines the visibility of the navigation arrows.\nIf set to true the navigation arrows will be hidden.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 79,
+      "since": null
+    },
+    {
+      "name": "hidePageIndicator",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines the visibility of the page indicator.\nIf set to true the page indicator will be hidden.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 85,
+      "since": null
+    },
+    {
+      "name": "itemsPerPage",
+      "type": "string",
+      "default": null,
+      "description": "Defines the number of items per page depending on the carousel width.\n\n- 'S' for screens smaller than 600 pixels.\n- 'M' for screens greater than or equal to 600 pixels and smaller than 1024 pixels.\n- 'L' for screens greater than or equal to 1024 pixels and smaller than 1440 pixels.\n- 'XL' for screens greater than or equal to 1440 pixels.\n\nOne item per page is shown by default.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 97,
+      "since": null
+    },
+    {
+      "name": "pageIndicatorBackgroundDesign",
+      "type": "'Transparent' | 'Solid' | 'Translucent'",
+      "default": null,
+      "description": "Defines the page indicator background design.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 102,
+      "since": null
+    },
+    {
+      "name": "pageIndicatorBorderDesign",
+      "type": "'None' | 'Solid'",
+      "default": null,
+      "description": "Defines the page indicator border design.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 107,
+      "since": null
+    },
+    {
+      "name": "pageIndicatorType",
+      "type": "'Default' | 'Numeric'",
+      "default": null,
+      "description": "Defines the style of the page indicator.\nAvailable options are:\n\n- `Default` - The page indicator will be visualized as dots if there are fewer than 9 pages. If there are more pages, the page indicator will switch to displaying the current page and the total number of pages. (e.g. X of Y)\n- `Numeric` - The page indicator will display the current page and the total number of pages. (e.g. X of Y)",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 116,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5Navigate",
+      "type": "UI5CustomEvent<Carousel, 'navigate'>",
+      "default": null,
+      "description": "Fired whenever the page changes due to user interaction,\nwhen the user clicks on the navigation arrows or while resizing,\nbased on the `items-per-page` property.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 132,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

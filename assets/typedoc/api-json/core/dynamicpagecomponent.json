@@ -1,0 +1,115 @@
+{
+  "name": "DynamicPageComponent",
+  "selector": "fd-dynamic-page",
+  "kind": "Component",
+  "sourceFile": "dynamic-page.component.ts",
+  "sourceLine": 62,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/dynamic-page/dynamic-page.component.ts#L62",
+  "description": "",
+  "inputs": [
+    {
+      "name": "ariaLabel",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "aria label for the page",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 67,
+      "since": null
+    },
+    {
+      "name": "ariaRoledescription",
+      "type": "string",
+      "default": "'Dynamic Page'",
+      "description": "aria roledescription for the page\ndefault: \"Dynamic Page\"",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 74,
+      "since": null
+    },
+    {
+      "name": "autoResponsive",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether DynamicPage should have responsive sides spacing changing with Page window width.\nmax-width: 599px                         - small\nmin-width: 600px and max-width: 1023px   - medium\nmin-width: 1024px and max-width: 1439px  - large\nmin-width: 1440px                        - extra large",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 88,
+      "since": null
+    },
+    {
+      "name": "background",
+      "type": "DynamicPageBackgroundType",
+      "default": "'solid'",
+      "description": "sets background for content to `list`, `transparent`, or `solid` background color.\nDefault is `solid`.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 80,
+      "since": null
+    },
+    {
+      "name": "disableSnapOnScroll",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether DynamicPage should snap on scroll",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 64,
+      "since": null
+    },
+    {
+      "name": "expandContent",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether dynamic page should be expanded in whole page.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 117,
+      "since": null
+    },
+    {
+      "name": "offset",
+      "type": "number",
+      "default": "0",
+      "description": "Offset in PX\nShould be added, when there is something else at the bottom and dynamic page is not expanded to bottom's corners",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 112,
+      "since": null
+    },
+    {
+      "name": "positionRelative",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether dynamic page has position relative.\nThis is needed in cases where Dynamic Page is used in Flexible Column Layout and has a floating footer",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 123,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "refreshSize",
+      "signature": "() => void",
+      "description": "Triggers recheck for spacing and sizing of elements inside DynamicPage.",
+      "deprecated": null,
+      "sourceLine": 215,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "toggleCollapse",
+      "signature": "() => void",
+      "description": "toggle the visibility of the header on click of title area.",
+      "deprecated": null,
+      "sourceLine": 205,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

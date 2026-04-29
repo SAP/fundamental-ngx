@@ -1,0 +1,13 @@
+{
+  "name": "IllustratedMessageFigcaptionComponent",
+  "selector": "[fd-illustrated-message-figcaption]",
+  "kind": "Component",
+  "sourceFile": "illustrated-message-figcaption.component.ts",
+  "sourceLine": 19,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/illustrated-message/components/illustrated-message-figcaption/illustrated-message-figcaption.component.ts#L19",
+  "description": "Component representing the figcaption section of an illustrated message.\nContains title and text content slots.",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

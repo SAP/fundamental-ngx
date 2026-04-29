@@ -1,0 +1,55 @@
+{
+  "name": "TableRowAction",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "icon",
+      "type": "string",
+      "default": null,
+      "description": "Defines the icon of the row action.\n\n*Note:** For row actions to work properly, this property is mandatory.\n\n*Note:** SAP-icons font provides numerous built-in icons. To find all the available icons, see the\n[Icon Explorer](https://sdk.openui5.org/test-resources/sap/m/demokit/iconExplorer/webapp/index.html).",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 50,
+      "since": null
+    },
+    {
+      "name": "invisible",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines the visibility of the row action.\n\n*Note:** Invisible row actions still take up space, allowing to hide the action while maintaining its position.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 57,
+      "since": null
+    },
+    {
+      "name": "text",
+      "type": "string",
+      "default": null,
+      "description": "Defines the text of the row action.\n\n*Note:** For row actions to work properly, this property is mandatory.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 64,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5Click",
+      "type": "UI5CustomEvent<TableRowAction, 'click'>",
+      "default": null,
+      "description": "Fired when a row action is clicked.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 71,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

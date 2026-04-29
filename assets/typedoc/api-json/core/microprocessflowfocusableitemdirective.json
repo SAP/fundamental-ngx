@@ -1,0 +1,48 @@
+{
+  "name": "MicroProcessFlowFocusableItemDirective",
+  "selector": "[fdMicroProcessFlowFocusableItem], [fd-micro-process-flow-focusable-item]",
+  "kind": "Directive",
+  "sourceFile": "micro-process-flow-focusable-item.directive.ts",
+  "sourceLine": 11,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/micro-process-flow/micro-process-flow-focusable-item.directive.ts#L11",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "focus",
+      "signature": "(options: FocusOptions) => void",
+      "description": "Focuses on the element without scrolling it to the viewport",
+      "deprecated": null,
+      "sourceLine": 45,
+      "since": null,
+      "parameters": [
+        {
+          "name": "options",
+          "type": "FocusOptions",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setFocusable",
+      "signature": "(focusable: boolean) => void",
+      "description": "Sets ability to focus on the element or not.",
+      "deprecated": null,
+      "sourceLine": 40,
+      "since": null,
+      "parameters": [
+        {
+          "name": "focusable",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

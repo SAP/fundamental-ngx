@@ -1,0 +1,13 @@
+{
+  "name": "TreeItemTextDirective",
+  "selector": "[fdTreeItemIcon]",
+  "kind": "Directive",
+  "sourceFile": "tree-item-icon.directive.ts",
+  "sourceLine": 27,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/tree/directives/tree-item-icon.directive.ts#L27",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

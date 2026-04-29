@@ -1,0 +1,31 @@
+{
+  "name": "ThemingModule",
+  "selector": null,
+  "kind": "Module",
+  "sourceFile": "theming.module.ts",
+  "sourceLine": 14,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/theming/theming.module.ts#L14",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "withConfig",
+      "signature": "(config: Partial<ThemingConfig>) => ModuleWithProviders<ThemingModule>",
+      "description": "Module with providers",
+      "deprecated": null,
+      "sourceLine": 16,
+      "since": null,
+      "parameters": [
+        {
+          "name": "config",
+          "type": "Partial<ThemingConfig>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "ModuleWithProviders<ThemingModule>"
+    }
+  ],
+  "inherited": null
+}

@@ -1,0 +1,44 @@
+{
+  "name": "BreadcrumbsItem",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "accessibleName",
+      "type": "string",
+      "default": null,
+      "description": "Defines the accessible ARIA name of the item.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 45,
+      "since": null
+    },
+    {
+      "name": "href",
+      "type": "string",
+      "default": null,
+      "description": "Defines the link href.\n\n*Note:** Standard hyperlink behavior is supported.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 52,
+      "since": null
+    },
+    {
+      "name": "target",
+      "type": "string",
+      "default": null,
+      "description": "Defines the link target.\n\nAvailable options are:\n\n- `_self`\n- `_top`\n- `_blank`\n- `_parent`\n- `_search`\n\n*Note:** This property must only be used when the `href` property is set.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 67,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

@@ -1,0 +1,13 @@
+{
+  "name": "DynamicSideContentSideComponent",
+  "selector": "fd-dynamic-side-content-side",
+  "kind": "Component",
+  "sourceFile": "dynamic-side-content-side.component.ts",
+  "sourceLine": 28,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/dynamic-side-content/dynamic-side-content-side.component.ts#L28",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

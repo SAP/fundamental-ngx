@@ -1,0 +1,253 @@
+{
+  "name": "BaseListItem",
+  "selector": "[fdpItemDef]",
+  "kind": "Class",
+  "sourceFile": "base-list-item.ts",
+  "sourceLine": 135,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/list/base-list-item.ts#L135",
+  "description": "This class contains common properties used across list Item components.\nthis can be extended to reduce the code duplication across list Item components.",
+  "inputs": [
+    {
+      "name": "ariaLevel",
+      "type": "number",
+      "default": null,
+      "description": "define level of item for screen reader",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 142,
+      "since": null
+    },
+    {
+      "name": "ariaPosinset",
+      "type": "number",
+      "default": null,
+      "description": "define position of item for screen reader",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 146,
+      "since": null
+    },
+    {
+      "name": "counter",
+      "type": "string",
+      "default": null,
+      "description": "attribute to hold counter value",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 164,
+      "since": null
+    },
+    {
+      "name": "description",
+      "type": "Nullable<ListDescription>",
+      "default": null,
+      "description": "Description of the title",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 168,
+      "since": null
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "default": null,
+      "description": "ID of the list item",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 138,
+      "since": null
+    },
+    {
+      "name": "inverted",
+      "type": "boolean",
+      "default": "false",
+      "description": "To invert the status of secondary text",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 172,
+      "since": null
+    },
+    {
+      "name": "link",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "Used for placeing navigation Link",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 202,
+      "since": null
+    },
+    {
+      "name": "listType",
+      "type": "ListType",
+      "default": "'active'",
+      "description": "By default selection mode is 'active'",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 254,
+      "since": null
+    },
+    {
+      "name": "navigated",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether Navigation mode is included to list component\nfor all the items",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 261,
+      "since": null
+    },
+    {
+      "name": "navigationIndicator",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether Navigation mode is included to list component\nonly a subset of the list items are navigable\nyou should indicate those by displaying a navigation arrow",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 269,
+      "since": null
+    },
+    {
+      "name": "noDataText",
+      "type": "string",
+      "default": null,
+      "description": "Whether there is no data inside list item",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 176,
+      "since": null
+    },
+    {
+      "name": "role",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "role",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 273,
+      "since": null
+    },
+    {
+      "name": "secondary",
+      "type": "Nullable<ListDescription>",
+      "default": null,
+      "description": "attribute to hold secondary text",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 187,
+      "since": null
+    },
+    {
+      "name": "secondaryWrap",
+      "type": "boolean",
+      "default": null,
+      "description": "Enabling this flag causes forcing secondary item directive to not wrap text,\ninstead of wrapping there will be text truncation",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 194,
+      "since": null
+    },
+    {
+      "name": "statusType",
+      "type": "StatusType",
+      "default": null,
+      "description": "The type of the secondary text.fd-list__byline-right--*\nCan be one of *positive*, *negative*, *informative*, *critical*, *neutral",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 183,
+      "since": null
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "default": null,
+      "description": "Tooltip text to show when focused for more than timeout value",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 198,
+      "since": null
+    },
+    {
+      "name": "titleWrap",
+      "type": "boolean",
+      "default": null,
+      "description": "Enabling this flag causes forcing title directive to not wrap text,\ninstead of wrapping there will be text truncation",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 209,
+      "since": null
+    },
+    {
+      "name": "unRead",
+      "type": "boolean",
+      "default": null,
+      "description": "sets the list item in bold text\nwhich respresents unread data",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 228,
+      "since": null
+    },
+    {
+      "name": "value",
+      "type": "string",
+      "default": null,
+      "description": "radio button value",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 239,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "buttonClicked",
+      "type": "ModifyItemEvent",
+      "default": null,
+      "description": "Event sent when delete, details or any other action buttons are clicked",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 290,
+      "since": null
+    },
+    {
+      "name": "itemCheckboxSelected",
+      "type": "ModifyItemEvent",
+      "default": null,
+      "description": "Event emitted for selected item through the checkbox.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 286,
+      "since": null
+    },
+    {
+      "name": "itemSelected",
+      "type": "ModifyItemEvent",
+      "default": null,
+      "description": "event emitter for selected item\nseprate PR for custom event",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 280,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "setSelected",
+      "signature": "(selected: boolean) => void",
+      "description": "Programmatically set selected state of the list item.",
+      "deprecated": null,
+      "sourceLine": 528,
+      "since": null,
+      "parameters": [
+        {
+          "name": "selected",
+          "type": "boolean",
+          "description": "Whether the list item is selected",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

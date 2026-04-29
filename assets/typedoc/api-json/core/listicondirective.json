@@ -1,0 +1,44 @@
+{
+  "name": "ListIconDirective",
+  "selector": "[fdListIcon], [fd-list-icon]",
+  "kind": "Directive",
+  "sourceFile": "list-icon.directive.ts",
+  "sourceLine": 9,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/list/directives/list-icon.directive.ts#L9",
+  "description": "",
+  "inputs": [
+    {
+      "name": "class",
+      "type": "string",
+      "default": null,
+      "description": "Apply user custom styles",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 22,
+      "since": null
+    },
+    {
+      "name": "glyph",
+      "type": "string",
+      "default": null,
+      "description": "The icon name to display. See the icon page for the list of icons\nhere: https://sap.github.io/fundamental-ngx/icon",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 14,
+      "since": null
+    },
+    {
+      "name": "glyphFont",
+      "type": "IconFont",
+      "default": "FD_DEFAULT_ICON_FONT_FAMILY",
+      "description": "Glyph font family",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 18,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

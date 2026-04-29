@@ -1,0 +1,126 @@
+{
+  "name": "TokenizerComponent",
+  "selector": "fd-tokenizer",
+  "kind": "Component",
+  "sourceFile": "tokenizer.component.ts",
+  "sourceLine": 72,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/token/tokenizer.component.ts#L72",
+  "description": "",
+  "inputs": [
+    {
+      "name": "class",
+      "type": "string",
+      "default": null,
+      "description": "user's custom classes",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 75,
+      "since": null
+    },
+    {
+      "name": "compactCollapse",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to use cozy visuals but compact collapsing behavior.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 113,
+      "since": null
+    },
+    {
+      "name": "disableKeyboardDeletion",
+      "type": "boolean",
+      "default": "false",
+      "description": "Disables possibility to remove tokens by keyboard",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 79,
+      "since": null
+    },
+    {
+      "name": "glyph",
+      "type": "string",
+      "default": null,
+      "description": "Icon of the button on the right of the input field.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 125,
+      "since": null
+    },
+    {
+      "name": "glyphFont",
+      "type": "IconFont",
+      "default": "FD_DEFAULT_ICON_FONT_FAMILY",
+      "description": "Glyph font family",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 129,
+      "since": null
+    },
+    {
+      "name": "inputValue",
+      "type": "string",
+      "default": null,
+      "description": "The value for the tokenizer input",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 121,
+      "since": null
+    },
+    {
+      "name": "moreTerm",
+      "type": "string",
+      "default": "'more'",
+      "description": "Word to use for when there are extra tokens.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 133,
+      "since": null
+    },
+    {
+      "name": "showOverflowPopover",
+      "type": "boolean",
+      "default": "true",
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 141,
+      "since": null
+    },
+    {
+      "name": "tokenizerFocusable",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether tokenizer should have fake focus indicator, when input is focused inside",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 117,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "moreClickedEvent",
+      "type": "any",
+      "default": null,
+      "description": "Event emitted when the search term changes. Use *$event* to access the new term.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 145,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "removeSelectedTokens",
+      "signature": "() => void",
+      "description": "Removes all selected tokens",
+      "deprecated": null,
+      "sourceLine": 451,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

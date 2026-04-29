@@ -1,0 +1,158 @@
+{
+  "name": "CarouselService",
+  "selector": null,
+  "kind": "Service",
+  "sourceFile": "carousel.service.ts",
+  "sourceLine": 46,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/carousel/carousel.service.ts#L46",
+  "description": "",
+  "inputs": [],
+  "outputs": [
+    {
+      "name": "activeChange$",
+      "type": "PanEndOutput",
+      "default": null,
+      "description": "Event thrown, when active element is changed",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 51,
+      "since": null
+    },
+    {
+      "name": "dragStateChange$",
+      "type": "boolean",
+      "default": null,
+      "description": "Event thrown when element is dragged. Emits \"true\" when drag starts and \"false\" when drag ends.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 48,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "goToItem",
+      "signature": "(item: CarouselItemInterface, smooth?: boolean) => void",
+      "description": "Change active element",
+      "deprecated": null,
+      "sourceLine": 149,
+      "since": null,
+      "parameters": [
+        {
+          "name": "item",
+          "type": "CarouselItemInterface",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "smooth",
+          "type": "boolean",
+          "description": "",
+          "optional": true
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "initialise",
+      "signature": "(config: CarouselConfig, items: QueryList<CarouselItemInterface>, listElementReference: ElementRef<any>) => void",
+      "description": "set initial values for the service",
+      "deprecated": null,
+      "sourceLine": 115,
+      "since": null,
+      "parameters": [
+        {
+          "name": "config",
+          "type": "CarouselConfig",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "items",
+          "type": "QueryList<CarouselItemInterface>",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "listElementReference",
+          "type": "ElementRef<any>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "pickNext",
+      "signature": "() => void",
+      "description": "pick next element and set it active",
+      "deprecated": null,
+      "sourceLine": 161,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "pickPrevious",
+      "signature": "() => void",
+      "description": "pick previous element and set it active",
+      "deprecated": null,
+      "sourceLine": 174,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "setElement",
+      "signature": "(elementRef: ElementRef<any>) => void",
+      "description": "set element ref",
+      "deprecated": null,
+      "sourceLine": 135,
+      "since": null,
+      "parameters": [
+        {
+          "name": "elementRef",
+          "type": "ElementRef<any>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setItems",
+      "signature": "(items: QueryList<CarouselItemInterface>) => void",
+      "description": "set items and assign active item, if not already there",
+      "deprecated": null,
+      "sourceLine": 140,
+      "since": null,
+      "parameters": [
+        {
+          "name": "items",
+          "type": "QueryList<CarouselItemInterface>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "updateConfig",
+      "signature": "(config: CarouselConfig) => void",
+      "description": "update config value for the service",
+      "deprecated": null,
+      "sourceLine": 130,
+      "since": null,
+      "parameters": [
+        {
+          "name": "config",
+          "type": "CarouselConfig",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

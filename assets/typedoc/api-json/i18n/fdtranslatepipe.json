@@ -1,0 +1,43 @@
+{
+  "name": "FdTranslatePipe",
+  "selector": null,
+  "kind": "Pipe",
+  "sourceFile": "fd-translate.pipe.ts",
+  "sourceLine": 35,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/i18n/src/lib/pipes/fd-translate.pipe.ts#L35",
+  "description": "Pure pipe that translates a key to a computed signal string.\n\n**IMPORTANT:** This pipe now returns a Signal<string> instead of a plain string.\nTemplates must call the signal to get the value: `{{ ('key' | fdTranslate)() }}`",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "transform",
+      "signature": "(key: null | FdLanguageKeyIdentifier, args?: Record<string, any> | FdLanguageKeyArgs, defaultValue: string) => Signal<string>",
+      "description": "Translate a key with arguments and, optionally, default value.",
+      "deprecated": null,
+      "sourceLine": 47,
+      "since": null,
+      "parameters": [
+        {
+          "name": "key",
+          "type": "null | FdLanguageKeyIdentifier",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "args",
+          "type": "Record<string, any> | FdLanguageKeyArgs",
+          "description": "",
+          "optional": true
+        },
+        {
+          "name": "defaultValue",
+          "type": "string",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "Signal<string>"
+    }
+  ],
+  "inherited": null
+}

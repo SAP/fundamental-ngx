@@ -1,0 +1,31 @@
+{
+  "name": "TreeItemDirective",
+  "selector": "[fdTreeItem]",
+  "kind": "Directive",
+  "sourceFile": "tree-item.directive.ts",
+  "sourceLine": 11,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/tree/directives/tree-item.directive.ts#L11",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "setTreeItem",
+      "signature": "(item: Nullable<BaseTreeItem<T, P>>) => void",
+      "description": "Sets tree item.",
+      "deprecated": null,
+      "sourceLine": 24,
+      "since": null,
+      "parameters": [
+        {
+          "name": "item",
+          "type": "Nullable<BaseTreeItem<T, P>>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

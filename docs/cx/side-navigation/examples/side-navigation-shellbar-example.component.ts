@@ -31,7 +31,6 @@ import {
     SideNavigationMainComponent,
     SideNavigationUtilityDirective
 } from '@fundamental-ngx/cx/side-navigation';
-import { I18nModule } from '@fundamental-ngx/i18n';
 import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
 
 @Component({
@@ -49,7 +48,6 @@ import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-fiel
         ShellbarActionComponent,
         ButtonComponent,
         ScrollbarDirective,
-        I18nModule,
         SideNavigationMainComponent,
         SideNavigationUtilityDirective,
         SideNavigationButtonDirective,

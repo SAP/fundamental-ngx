@@ -1,0 +1,24 @@
+{
+  "name": "TableHeaderCellActionAI",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [],
+  "outputs": [
+    {
+      "name": "ui5Click",
+      "type": "UI5CustomEvent<TableHeaderCellActionAI, 'click'>",
+      "default": null,
+      "description": "Fired when a header cell action is clicked.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 48,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

@@ -1,0 +1,13 @@
+{
+  "name": "PlatformObjectStatusTextDirective",
+  "selector": "[fdpObjectStatusText]",
+  "kind": "Directive",
+  "sourceFile": "object-status.component.ts",
+  "sourceLine": 24,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/object-status/object-status.component.ts#L24",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

@@ -1,0 +1,55 @@
+{
+  "name": "Toast",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "duration",
+      "type": "number",
+      "default": null,
+      "description": "Defines the duration in milliseconds for which component\nremains on the screen before it's automatically closed.\n\n*Note:** The minimum supported value is `500` ms\nand even if a lower value is set, the duration would remain `500` ms.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 49,
+      "since": null
+    },
+    {
+      "name": "open",
+      "type": "boolean",
+      "default": null,
+      "description": "Indicates whether the component is open (visible).",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 54,
+      "since": null
+    },
+    {
+      "name": "placement",
+      "type": "'TopStart' | 'TopCenter' | 'TopEnd' | 'MiddleStart' | 'MiddleCenter' | 'MiddleEnd' | 'BottomStart' | 'BottomCenter' | 'BottomEnd'",
+      "default": null,
+      "description": "Defines the placement of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 59,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5Close",
+      "type": "UI5CustomEvent<Toast, 'close'>",
+      "default": null,
+      "description": "Fired after the component is auto closed.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 66,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

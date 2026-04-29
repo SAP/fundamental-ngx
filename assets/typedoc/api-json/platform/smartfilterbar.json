@@ -1,0 +1,73 @@
+{
+  "name": "SmartFilterBar",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "smart-filter-bar.class.ts",
+  "sourceLine": 9,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/smart-filter-bar/smart-filter-bar.class.ts#L9",
+  "description": "",
+  "inputs": [
+    {
+      "name": "name",
+      "type": "string",
+      "default": "'platformSmartFilterBar'",
+      "description": "Component name used in Preset managed component.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 25,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "presetChanged",
+      "type": "SmartFilterBarManagedPreset",
+      "default": null,
+      "description": "Event emitted when smart filter bar configuration has been changed.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 29,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "getCurrentPreset",
+      "signature": "() => SmartFilterBarManagedPreset",
+      "description": "Returns current preset configuration.",
+      "deprecated": null,
+      "sourceLine": 19,
+      "since": null,
+      "parameters": [],
+      "returnType": "SmartFilterBarManagedPreset"
+    },
+    {
+      "name": "getFormattedConditions",
+      "signature": "() => Promise<CollectionFilterGroup[]>",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 21,
+      "since": null,
+      "parameters": [],
+      "returnType": "Promise<CollectionFilterGroup[]>"
+    },
+    {
+      "name": "setPreset",
+      "signature": "(data: SmartFilterBarManagedPreset) => void",
+      "description": "Method for setting predefined configuration preset.",
+      "deprecated": null,
+      "sourceLine": 16,
+      "since": null,
+      "parameters": [
+        {
+          "name": "data",
+          "type": "SmartFilterBarManagedPreset",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

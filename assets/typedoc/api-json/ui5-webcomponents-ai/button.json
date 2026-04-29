@@ -1,0 +1,85 @@
+{
+  "name": "Button",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 41,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "accessibilityAttributes",
+      "type": "AIButtonAccessibilityAttributes",
+      "default": null,
+      "description": "Defines the additional accessibility attributes that will be applied to the component.\n\nThis property allows for fine-tuned control of ARIA attributes for screen reader support.\nIt accepts an object with the following optional fields:\n\n- **root**: Accessibility attributes that will be applied to the root element.\n- **hasPopup**: Indicates the availability and type of interactive popup element (such as a menu or dialog).\nAccepts string values: `\"dialog\"`, `\"grid\"`, `\"listbox\"`, `\"menu\"`, or `\"tree\"`.\n- **roleDescription**: Defines a human-readable description for the button's role.\nAccepts any string value.\n- **title**: Specifies a tooltip or description for screen readers.\nAccepts any string value.\n- **ariaKeyShortcuts**: Defines keyboard shortcuts that activate or focus the button.\n\n- **arrowButton**: Accessibility attributes that will be applied to the arrow (split) button element.\n- **hasPopup**: Indicates the type of popup triggered by the arrow button.\nAccepts string values: `\"dialog\"`, `\"grid\"`, `\"listbox\"`, `\"menu\"`, or `\"tree\"`.\n- **expanded**: Indicates whether the popup controlled by the arrow button is currently expanded.\nAccepts boolean values: `true` or `false`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 64,
+      "since": null
+    },
+    {
+      "name": "arrowButtonPressed",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines the active state of the arrow button in split mode.\nSet to true when the button is in split mode and a menu with additional options\nis opened by the arrow button. Set back to false when the menu is closed.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 71,
+      "since": null
+    },
+    {
+      "name": "design",
+      "type": "'Default' | 'Positive' | 'Negative' | 'Transparent' | 'Emphasized' | 'Attention'",
+      "default": null,
+      "description": "Defines the component design.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 76,
+      "since": null
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines whether the component is disabled.\nA disabled component can't be pressed or\nfocused, and it is not in the tab chain.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 83,
+      "since": null
+    },
+    {
+      "name": "state",
+      "type": "string",
+      "default": null,
+      "description": "Defines the current state of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 88,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5ArrowButtonClick",
+      "type": "UI5CustomEvent<Button, 'arrow-button-click'>",
+      "default": null,
+      "description": "Fired when the component is in split mode and after the arrow button\nis activated either by clicking or tapping it or by using the [Arrow Up] / [Arrow Down],\n[Alt] + [Arrow Up]/ [Arrow Down], or [F4] keyboard keys.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 97,
+      "since": null
+    },
+    {
+      "name": "ui5Click",
+      "type": "UI5CustomEvent<Button, 'click'>",
+      "default": null,
+      "description": "Fired when the component is activated either with a\nmouse/tap or by using the Enter or Space key.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 103,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

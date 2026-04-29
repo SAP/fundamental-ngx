@@ -1,0 +1,864 @@
+{
+  "name": "DatetimeAdapter",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "datetime-adapter.ts",
+  "sourceLine": 10,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/datetime/datetime-adapter.ts#L10",
+  "description": "Datetime Adapter is an abstract class that must be implemented by each adapter.\nIt's used to encapsulate a date/time manipulations as result\nothers places that uses it remain date type agnostic.",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "addCalendarDays",
+      "signature": "(date: D, days: number) => D",
+      "description": "Adds the given number of days to the date. Days are counted as if moving one cell on the\ncalendar for each day.",
+      "deprecated": null,
+      "sourceLine": 230,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "D",
+          "description": "The date to add days to.",
+          "optional": false
+        },
+        {
+          "name": "days",
+          "type": "number",
+          "description": "The number of days to add (may be negative).",
+          "optional": false
+        }
+      ],
+      "returnType": "D"
+    },
+    {
+      "name": "addCalendarMonths",
+      "signature": "(date: D, months: number) => D",
+      "description": "Adds the given number of months to the date. Months are counted as if flipping a page on the\ncalendar for each month and then finding the closest date in the new month. For example when\nadding 1 month to Jan 31, 2017, the resulting date will be Feb 28, 2017.",
+      "deprecated": null,
+      "sourceLine": 221,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "D",
+          "description": "The date to add months to.",
+          "optional": false
+        },
+        {
+          "name": "months",
+          "type": "number",
+          "description": "The number of months to add (may be negative).",
+          "optional": false
+        }
+      ],
+      "returnType": "D"
+    },
+    {
+      "name": "addCalendarYears",
+      "signature": "(date: D, years: number) => D",
+      "description": "Adds the given number of years to the date. Years are counted as if flipping 12 pages on the\ncalendar for each year and then finding the closest date in the new month. For example when\nadding 1 year to Feb 29, 2016, the resulting date will be Feb 28, 2017.",
+      "deprecated": null,
+      "sourceLine": 211,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "D",
+          "description": "The date to add years to.",
+          "optional": false
+        },
+        {
+          "name": "years",
+          "type": "number",
+          "description": "The number of years to add (may be negative).",
+          "optional": false
+        }
+      ],
+      "returnType": "D"
+    },
+    {
+      "name": "clone",
+      "signature": "(date: D) => D",
+      "description": "Clones the given date.",
+      "deprecated": null,
+      "sourceLine": 237,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "D",
+          "description": "The date to clone",
+          "optional": false
+        }
+      ],
+      "returnType": "D"
+    },
+    {
+      "name": "compareDate",
+      "signature": "(first: D, second: D) => number",
+      "description": "Compares two dates.",
+      "deprecated": null,
+      "sourceLine": 374,
+      "since": null,
+      "parameters": [
+        {
+          "name": "first",
+          "type": "D",
+          "description": "The first date to compare.",
+          "optional": false
+        },
+        {
+          "name": "second",
+          "type": "D",
+          "description": "The second date to compare.",
+          "optional": false
+        }
+      ],
+      "returnType": "number"
+    },
+    {
+      "name": "createDate",
+      "signature": "(year: number, month?: number, date?: number) => D",
+      "description": "Creates a date with the given year, month, and date.",
+      "deprecated": null,
+      "sourceLine": 189,
+      "since": null,
+      "parameters": [
+        {
+          "name": "year",
+          "type": "number",
+          "description": "The full year of the date. (e.g. 1989).",
+          "optional": false
+        },
+        {
+          "name": "month",
+          "type": "number",
+          "description": "The month of the date (1 = January). Must be an integer 1 - 12.",
+          "optional": true
+        },
+        {
+          "name": "date",
+          "type": "number",
+          "description": "The month date. Must be an integer 1 - length of the given month.",
+          "optional": true
+        }
+      ],
+      "returnType": "D"
+    },
+    {
+      "name": "dateTimesEqual",
+      "signature": "(date1: Nullable<D>, date2: Nullable<D>) => boolean",
+      "description": "Method that check equality of 2 dates taking into account time value as well",
+      "deprecated": null,
+      "sourceLine": 254,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date1",
+          "type": "Nullable<D>",
+          "description": "The first date to compare with",
+          "optional": false
+        },
+        {
+          "name": "date2",
+          "type": "Nullable<D>",
+          "description": "The second date to compare with",
+          "optional": false
+        }
+      ],
+      "returnType": "boolean"
+    },
+    {
+      "name": "datesEqual",
+      "signature": "(date1: Nullable<D>, date2: Nullable<D>) => boolean",
+      "description": "Method that check equality of 2 dates.\nDoes not take into account time value",
+      "deprecated": null,
+      "sourceLine": 246,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date1",
+          "type": "Nullable<D>",
+          "description": "The first date to compare with",
+          "optional": false
+        },
+        {
+          "name": "date2",
+          "type": "Nullable<D>",
+          "description": "The second date to compare with",
+          "optional": false
+        }
+      ],
+      "returnType": "boolean"
+    },
+    {
+      "name": "format",
+      "signature": "(date: Nullable<D>, displayFormat: unknown) => string",
+      "description": "Formats a date as a string according to the given format.",
+      "deprecated": null,
+      "sourceLine": 180,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "Nullable<D>",
+          "description": "The value to format.",
+          "optional": false
+        },
+        {
+          "name": "displayFormat",
+          "type": "unknown",
+          "description": "The format to use to display the date as a string.",
+          "optional": false
+        }
+      ],
+      "returnType": "string"
+    },
+    {
+      "name": "fromNow",
+      "signature": "(date: D) => string",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 312,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "D",
+          "description": "The date being referenced.",
+          "optional": false
+        }
+      ],
+      "returnType": "string"
+    },
+    {
+      "name": "getAmountOfWeeks",
+      "signature": "(year: number, month: number, firstDayOfWeek: number) => number",
+      "description": "Get Amount of weeks in given month/year",
+      "deprecated": null,
+      "sourceLine": 357,
+      "since": null,
+      "parameters": [
+        {
+          "name": "year",
+          "type": "number",
+          "description": "The year of the date",
+          "optional": false
+        },
+        {
+          "name": "month",
+          "type": "number",
+          "description": "The month of the date",
+          "optional": false
+        },
+        {
+          "name": "firstDayOfWeek",
+          "type": "number",
+          "description": "The first day of week. 1 - Sunday, 2 - Monday...",
+          "optional": false
+        }
+      ],
+      "returnType": "number"
+    },
+    {
+      "name": "getDate",
+      "signature": "(date: D) => number",
+      "description": "Gets the day of month of the given date.",
+      "deprecated": null,
+      "sourceLine": 30,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "D",
+          "description": "The date to extract the date of the month from.",
+          "optional": false
+        }
+      ],
+      "returnType": "number"
+    },
+    {
+      "name": "getDateNames",
+      "signature": "() => string[]",
+      "description": "Gets a list of names for the dates of the month.",
+      "deprecated": null,
+      "sourceLine": 102,
+      "since": null,
+      "parameters": [],
+      "returnType": "string[]"
+    },
+    {
+      "name": "getDayOfWeek",
+      "signature": "(date: D) => number",
+      "description": "Gets the day of the week component of the given date.",
+      "deprecated": null,
+      "sourceLine": 37,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "D",
+          "description": "The date to extract the day of the week from.",
+          "optional": false
+        }
+      ],
+      "returnType": "number"
+    },
+    {
+      "name": "getDayOfWeekNames",
+      "signature": "(style: 'long' | 'short' | 'narrow') => string[]",
+      "description": "Gets a list of names for the days of the week.",
+      "deprecated": null,
+      "sourceLine": 109,
+      "since": null,
+      "parameters": [
+        {
+          "name": "style",
+          "type": "'long' | 'short' | 'narrow'",
+          "description": "The naming style (e.g. long = 'Sunday', short = 'Sun', narrow = 'S').",
+          "optional": false
+        }
+      ],
+      "returnType": "string[]"
+    },
+    {
+      "name": "getDayPeriodNames",
+      "signature": "() => [string, string]",
+      "description": "Gets a list of day periods.",
+      "deprecated": null,
+      "sourceLine": 150,
+      "since": null,
+      "parameters": [],
+      "returnType": "[string, string]"
+    },
+    {
+      "name": "getFirstDayOfWeek",
+      "signature": "() => number",
+      "description": "Gets the first day of the week.",
+      "deprecated": null,
+      "sourceLine": 156,
+      "since": null,
+      "parameters": [],
+      "returnType": "number"
+    },
+    {
+      "name": "getHourNames",
+      "signature": "(options: { meridian: boolean; twoDigit: boolean }) => string[]",
+      "description": "Gets a list of hour names.",
+      "deprecated": null,
+      "sourceLine": 129,
+      "since": null,
+      "parameters": [
+        {
+          "name": "options",
+          "type": "{ meridian: boolean; twoDigit: boolean }",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "string[]"
+    },
+    {
+      "name": "getHours",
+      "signature": "(date: D) => number",
+      "description": "Gets hours of the given date.",
+      "deprecated": null,
+      "sourceLine": 44,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "D",
+          "description": "The date to extract the hours from.",
+          "optional": false
+        }
+      ],
+      "returnType": "number"
+    },
+    {
+      "name": "getMinuteNames",
+      "signature": "(options: { minuteStep: number; twoDigit: boolean }) => string[]",
+      "description": "Gets a list of minute names.",
+      "deprecated": null,
+      "sourceLine": 138,
+      "since": null,
+      "parameters": [
+        {
+          "name": "options",
+          "type": "{ minuteStep: number; twoDigit: boolean }",
+          "description": "Configuration options for minute names",
+          "optional": false
+        }
+      ],
+      "returnType": "string[]"
+    },
+    {
+      "name": "getMinutes",
+      "signature": "(date: D) => number",
+      "description": "Gets minutes of the given date.",
+      "deprecated": null,
+      "sourceLine": 51,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "D",
+          "description": "The date to extract the minutes from.",
+          "optional": false
+        }
+      ],
+      "returnType": "number"
+    },
+    {
+      "name": "getMonth",
+      "signature": "(date: D) => number",
+      "description": "Gets the month of the given date.",
+      "deprecated": null,
+      "sourceLine": 23,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "D",
+          "description": "The date to extract the month from.",
+          "optional": false
+        }
+      ],
+      "returnType": "number"
+    },
+    {
+      "name": "getMonthNames",
+      "signature": "(style: 'long' | 'short' | 'narrow') => string[]",
+      "description": "Gets a list of names for the months.",
+      "deprecated": null,
+      "sourceLine": 96,
+      "since": null,
+      "parameters": [
+        {
+          "name": "style",
+          "type": "'long' | 'short' | 'narrow'",
+          "description": "The naming style (e.g. long = 'January', short = 'Jan', narrow = 'J').",
+          "optional": false
+        }
+      ],
+      "returnType": "string[]"
+    },
+    {
+      "name": "getNumDaysInMonth",
+      "signature": "(date: D) => number",
+      "description": "Gets the number of days in the month of the given date.",
+      "deprecated": null,
+      "sourceLine": 163,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "D",
+          "description": "The date whose month should be checked.",
+          "optional": false
+        }
+      ],
+      "returnType": "number"
+    },
+    {
+      "name": "getSecondNames",
+      "signature": "(options: { twoDigit: boolean }) => string[]",
+      "description": "Gets a list of second names.",
+      "deprecated": null,
+      "sourceLine": 144,
+      "since": null,
+      "parameters": [
+        {
+          "name": "options",
+          "type": "{ twoDigit: boolean }",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "string[]"
+    },
+    {
+      "name": "getSeconds",
+      "signature": "(date: D) => number",
+      "description": "Gets seconds of the given date.",
+      "deprecated": null,
+      "sourceLine": 58,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "D",
+          "description": "The date to extract the seconds from.",
+          "optional": false
+        }
+      ],
+      "returnType": "number"
+    },
+    {
+      "name": "getWeekName",
+      "signature": "(date: D) => string",
+      "description": "Gets the name for the week of the given date.",
+      "deprecated": null,
+      "sourceLine": 123,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "D",
+          "description": "The date to get the week name from.",
+          "optional": false
+        }
+      ],
+      "returnType": "string"
+    },
+    {
+      "name": "getWeekNumber",
+      "signature": "(date: D) => number",
+      "description": "Gets week number of the given date",
+      "deprecated": null,
+      "sourceLine": 89,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "D",
+          "description": "The date to extract the week number from.",
+          "optional": false
+        }
+      ],
+      "returnType": "number"
+    },
+    {
+      "name": "getYear",
+      "signature": "(date: D) => number",
+      "description": "Gets the year component of the given date.",
+      "deprecated": null,
+      "sourceLine": 16,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "D",
+          "description": "The date to extract the year from.",
+          "optional": false
+        }
+      ],
+      "returnType": "number"
+    },
+    {
+      "name": "getYearName",
+      "signature": "(date: D) => string",
+      "description": "Gets the name for the year of the given date.",
+      "deprecated": null,
+      "sourceLine": 116,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "D",
+          "description": "The date to get the year name from.",
+          "optional": false
+        }
+      ],
+      "returnType": "string"
+    },
+    {
+      "name": "isBetween",
+      "signature": "(dateToCheck: D, startDate: D, endDate: D) => boolean",
+      "description": "Method to check if date is between 2 dates",
+      "deprecated": null,
+      "sourceLine": 263,
+      "since": null,
+      "parameters": [
+        {
+          "name": "dateToCheck",
+          "type": "D",
+          "description": "The date to check if it's in a range",
+          "optional": false
+        },
+        {
+          "name": "startDate",
+          "type": "D",
+          "description": "The start date of a range",
+          "optional": false
+        },
+        {
+          "name": "endDate",
+          "type": "D",
+          "description": "The end date of a range",
+          "optional": false
+        }
+      ],
+      "returnType": "boolean"
+    },
+    {
+      "name": "isTimeFormatIncludesDayPeriod",
+      "signature": "(displayFormat: unknown) => boolean",
+      "description": "Format option includes period info.",
+      "deprecated": null,
+      "sourceLine": 285,
+      "since": null,
+      "parameters": [
+        {
+          "name": "displayFormat",
+          "type": "unknown",
+          "description": "The format to use to display the date as a string.",
+          "optional": false
+        }
+      ],
+      "returnType": "boolean"
+    },
+    {
+      "name": "isTimeFormatIncludesHours",
+      "signature": "(displayFormat: unknown) => boolean",
+      "description": "Format option includes hours info.",
+      "deprecated": null,
+      "sourceLine": 292,
+      "since": null,
+      "parameters": [
+        {
+          "name": "displayFormat",
+          "type": "unknown",
+          "description": "The format to use to display the date as a string.",
+          "optional": false
+        }
+      ],
+      "returnType": "boolean"
+    },
+    {
+      "name": "isTimeFormatIncludesMinutes",
+      "signature": "(displayFormat: unknown) => boolean",
+      "description": "Format option includes minutes info.",
+      "deprecated": null,
+      "sourceLine": 299,
+      "since": null,
+      "parameters": [
+        {
+          "name": "displayFormat",
+          "type": "unknown",
+          "description": "The format to use to display the date as a string.",
+          "optional": false
+        }
+      ],
+      "returnType": "boolean"
+    },
+    {
+      "name": "isTimeFormatIncludesSeconds",
+      "signature": "(displayFormat: unknown) => boolean",
+      "description": "Format option includes seconds info.",
+      "deprecated": null,
+      "sourceLine": 306,
+      "since": null,
+      "parameters": [
+        {
+          "name": "displayFormat",
+          "type": "unknown",
+          "description": "The format to use to display the date as a string.",
+          "optional": false
+        }
+      ],
+      "returnType": "boolean"
+    },
+    {
+      "name": "isValid",
+      "signature": "(date: Nullable<D>) => date is D",
+      "description": "Method that checks validity of current date.",
+      "deprecated": null,
+      "sourceLine": 269,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "Nullable<D>",
+          "description": "The date to be checked",
+          "optional": false
+        }
+      ],
+      "returnType": "date is D"
+    },
+    {
+      "name": "now",
+      "signature": "() => D",
+      "description": "Gets date and time at this moment.",
+      "deprecated": null,
+      "sourceLine": 201,
+      "since": null,
+      "parameters": [],
+      "returnType": "D"
+    },
+    {
+      "name": "parse",
+      "signature": "(value: unknown, parseFormat: unknown) => null | D",
+      "description": "Parses a date from a user-provided value.",
+      "deprecated": null,
+      "sourceLine": 172,
+      "since": null,
+      "parameters": [
+        {
+          "name": "value",
+          "type": "unknown",
+          "description": "The value to parse.",
+          "optional": false
+        },
+        {
+          "name": "parseFormat",
+          "type": "unknown",
+          "description": "The expected format of the value being parsed\n    (type is implementation-dependent).",
+          "optional": false
+        }
+      ],
+      "returnType": "null | D"
+    },
+    {
+      "name": "setHours",
+      "signature": "(date: D, hours: number) => D",
+      "description": "Set hours.",
+      "deprecated": null,
+      "sourceLine": 66,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "D",
+          "description": "The date to set hours to.",
+          "optional": false
+        },
+        {
+          "name": "hours",
+          "type": "number",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "D"
+    },
+    {
+      "name": "setLocale",
+      "signature": "(locale: string) => void",
+      "description": "Sets the locale used for all dates.",
+      "deprecated": null,
+      "sourceLine": 330,
+      "since": null,
+      "parameters": [
+        {
+          "name": "locale",
+          "type": "string",
+          "description": "The new locale.",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setMinutes",
+      "signature": "(date: D, minutes: number) => D",
+      "description": "Set minutes.",
+      "deprecated": null,
+      "sourceLine": 74,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "D",
+          "description": "The date to set minutes to.",
+          "optional": false
+        },
+        {
+          "name": "minutes",
+          "type": "number",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "D"
+    },
+    {
+      "name": "setSeconds",
+      "signature": "(date: D, seconds: number) => D",
+      "description": "Set seconds.",
+      "deprecated": null,
+      "sourceLine": 82,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "D",
+          "description": "The date to set seconds to.",
+          "optional": false
+        },
+        {
+          "name": "seconds",
+          "type": "number",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "D"
+    },
+    {
+      "name": "setTime",
+      "signature": "(date: D, hours: number, minutes: number, seconds: number) => D",
+      "description": "Set hours, minutes and seconds at once.",
+      "deprecated": null,
+      "sourceLine": 343,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "D",
+          "description": "The date to set time to.",
+          "optional": false
+        },
+        {
+          "name": "hours",
+          "type": "number",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "minutes",
+          "type": "number",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "seconds",
+          "type": "number",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "D"
+    },
+    {
+      "name": "toIso8601",
+      "signature": "(date: D) => string",
+      "description": "Gets the RFC 3339 compatible string (https://tools.ietf.org/html/rfc3339) for the given date.\nThis method is used to generate date strings that are compatible with native HTML attributes\nsuch as the `min` or `max` attribute of an `<input>`.",
+      "deprecated": null,
+      "sourceLine": 278,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "D",
+          "description": "The date to get the ISO date string for.",
+          "optional": false
+        }
+      ],
+      "returnType": "string"
+    },
+    {
+      "name": "today",
+      "signature": "() => D",
+      "description": "Gets today's date where time value is set to 0",
+      "deprecated": null,
+      "sourceLine": 195,
+      "since": null,
+      "parameters": [],
+      "returnType": "D"
+    }
+  ],
+  "inherited": null
+}

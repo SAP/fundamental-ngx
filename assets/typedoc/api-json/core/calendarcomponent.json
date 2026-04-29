@@ -1,0 +1,544 @@
+{
+  "name": "CalendarComponent",
+  "selector": "fd-calendar",
+  "kind": "Component",
+  "sourceFile": "calendar.component.ts",
+  "sourceLine": 110,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/calendar/calendar.component.ts#L110",
+  "description": "Months: 1 = January, 12 = december.\nDays: 1 = Sunday, 7 = Saturday\n\nCalendar component used for selecting dates, typically used by the DatePicker and DateTimePicker components.\nSupports the Angular forms module, enabling form validity, ngModel, etc.\n```html\n<fd-calendar></fd-calendar>\n```",
+  "inputs": [
+    {
+      "name": "activeView",
+      "type": "FdCalendarView",
+      "default": "FdCalendarViewEnum.Day",
+      "description": "Actually shown active view one of 'day' | 'month' | 'year'",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 160,
+      "since": null
+    },
+    {
+      "name": "aggregatedYearGrid",
+      "type": "CalendarYearGrid",
+      "default": null,
+      "description": "Object to customize aggregated year grid,\nRow, Columns and method to display year can be modified",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 203,
+      "since": null
+    },
+    {
+      "name": "allowMultipleSelection",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the user wants to select multiple days or multiple range dates.\nIf `displayWeekNumbers` is true, the user can click on the week number to mark the related row.\nThe user can click on week days to mark the related column.\nNote: Clickable selection for week row or column does not work for range selections.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 146,
+      "since": null
+    },
+    {
+      "name": "calType",
+      "type": "CalendarType",
+      "default": "CalendarTypeEnum.Single",
+      "description": "The type of calendar\n'single' for single date selection\n'range' for a range of dates.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 172,
+      "since": null
+    },
+    {
+      "name": "dateRangeFormat",
+      "type": "string",
+      "default": "''",
+      "description": "Whether to pick the date range in month or year or days format\nDay format will have a month and year including day\nMonth format will have year including month\nYear format will have just year\nValues can be 'month' for Month format, 'year' for Year format or nothing for day format",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 222,
+      "since": null
+    },
+    {
+      "name": "disableFunction",
+      "type": "DisableDateFunction<D>",
+      "default": null,
+      "description": "Function used to disable certain dates in the calendar.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 362,
+      "since": null
+    },
+    {
+      "name": "disableRangeEndFunction",
+      "type": "DisableDateFunction<D>",
+      "default": null,
+      "description": "Function used to disable certain dates in the calendar for the range end selection.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 374,
+      "since": null
+    },
+    {
+      "name": "disableRangeStartFunction",
+      "type": "DisableDateFunction<D>",
+      "default": null,
+      "description": "Function used to disable certain dates in the calendar for the range start selection.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 368,
+      "since": null
+    },
+    {
+      "name": "escapeFocusFunction",
+      "type": "EscapeFocusFunction",
+      "default": null,
+      "description": "That allows to define function that should happen, when focus should normally escape of component",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 353,
+      "since": null
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "default": null,
+      "description": "Id of the calendar. If none is provided, one will be generated.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 176,
+      "since": null
+    },
+    {
+      "name": "legendCol",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to display the legend in column layout (true) or row layout (false).\nColumn layout is useful when legend is displayed alongside the calendar.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 308,
+      "since": null
+    },
+    {
+      "name": "markWeekends",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether user wants to mark sunday/saturday with `fd-calendar__item--weekend` class",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 131,
+      "since": null
+    },
+    {
+      "name": "nextButtonDisableFunction",
+      "type": "NavigationButtonDisableFunction<D>",
+      "default": null,
+      "description": "Function used to disable next button in the calendar header.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 294,
+      "since": null
+    },
+    {
+      "name": "previousButtonDisableFunction",
+      "type": "NavigationButtonDisableFunction<D>",
+      "default": null,
+      "description": "Function used to disable previous button in the calendar header.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 285,
+      "since": null
+    },
+    {
+      "name": "rangeHoverEffect",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether user wants to mark day cells on hover.\nWorks only on range mode, when start date is selected on Day View.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 213,
+      "since": null
+    },
+    {
+      "name": "selectedDate",
+      "type": "Nullable<D>",
+      "default": null,
+      "description": "The currently selected date model in single mode.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 113,
+      "since": null
+    },
+    {
+      "name": "selectedMultipleDateRanges",
+      "type": "DateRange<D>[]",
+      "default": "[]",
+      "description": "The currently selected date model with multiple ranges.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 125,
+      "since": null
+    },
+    {
+      "name": "selectedMultipleDates",
+      "type": "D[]",
+      "default": null,
+      "description": "The currently selected date model in multiple mode.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 117,
+      "since": null
+    },
+    {
+      "name": "selectedRangeDate",
+      "type": "DateRange<D>",
+      "default": null,
+      "description": "The currently selected date model with start and end in range mode.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 121,
+      "since": null
+    },
+    {
+      "name": "showCalendarLegend",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to show the calendar legend below the calendar.\nThe legend displays special day markers and their meanings.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 301,
+      "since": null
+    },
+    {
+      "name": "showWeekNumbers",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether user wants to show week numbers next to days",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 137,
+      "since": null
+    },
+    {
+      "name": "specialDaysRules",
+      "type": "SpecialDayRule<D>[]",
+      "default": "[]",
+      "description": "Special days mark, it can be used by passing array of object with\nSpecial day number, list 1-20 [class:`fd-calendar__item--legend-{{number}}`] is available there:\nhttps://sap.github.io/fundamental-styles/components/calendar.html calendar special days section\nRule accepts method with D object as a parameter. ex:\n`rule: (fdDate: D) => fdDate.getDay() === 1`, which will mark all sundays as special day.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 186,
+      "since": null
+    },
+    {
+      "name": "startingDayOfWeek",
+      "type": "DaysOfWeek",
+      "default": null,
+      "description": "The day of the week the calendar should start on. 1 represents Sunday, 2 is Monday, 3 is Tuesday, and so on.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 164,
+      "since": null
+    },
+    {
+      "name": "yearGrid",
+      "type": "CalendarYearGrid",
+      "default": null,
+      "description": "Object to customize year grid,\nRow, Columns and method to display year can be modified",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 193,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "activeViewChange",
+      "type": "FdCalendarView",
+      "default": null,
+      "description": "Event thrown every time active view is changed",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 226,
+      "since": null
+    },
+    {
+      "name": "closeCalendar",
+      "type": "void",
+      "default": null,
+      "description": "Event thrown every time when calendar should be closed",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 252,
+      "since": null
+    },
+    {
+      "name": "closeClicked",
+      "type": "void",
+      "default": null,
+      "description": "Event thrown, when close button is clicked",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 256,
+      "since": null
+    },
+    {
+      "name": "isValidDateChange",
+      "type": "boolean",
+      "default": null,
+      "description": "Event thrown every time when value is overwritten from outside and throw back isValid",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 248,
+      "since": null
+    },
+    {
+      "name": "selectedDateChange",
+      "type": "D",
+      "default": null,
+      "description": "Event thrown every time selected date in single mode is changed",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 230,
+      "since": null
+    },
+    {
+      "name": "selectedMultipleDateRangesChange",
+      "type": "DateRange<D>[]",
+      "default": null,
+      "description": "Event thrown every time the first or last date in multiple range mode is changed.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 242,
+      "since": null
+    },
+    {
+      "name": "selectedMultipleDatesChange",
+      "type": "D[]",
+      "default": null,
+      "description": "Event thrown every time the selected dates in multiple mode are changed.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 234,
+      "since": null
+    },
+    {
+      "name": "selectedRangeDateChange",
+      "type": "DateRange<D>",
+      "default": null,
+      "description": "Event thrown every time selected first or last date in range mode is changed",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 238,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "displayNextMonth",
+      "signature": "() => void",
+      "description": "Function that allows to switch actual view to next month",
+      "deprecated": null,
+      "sourceLine": 604,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "displayNextYear",
+      "signature": "() => void",
+      "description": "Function that allows to switch actual view to next year",
+      "deprecated": null,
+      "sourceLine": 628,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "displayNextYearList",
+      "signature": "() => void",
+      "description": "Function that allows to switch actually displayed list of year to next year list",
+      "deprecated": null,
+      "sourceLine": 638,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "displayNextYearsList",
+      "signature": "() => void",
+      "description": "Function that allows to switch actually displayed list of year to next year list",
+      "deprecated": null,
+      "sourceLine": 656,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "displayPreviousMonth",
+      "signature": "() => void",
+      "description": "Function that allows to switch actual view to previous month",
+      "deprecated": null,
+      "sourceLine": 616,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "displayPreviousYear",
+      "signature": "() => void",
+      "description": "Function that allows to switch actual view to previous year",
+      "deprecated": null,
+      "sourceLine": 633,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "displayPreviousYearList",
+      "signature": "() => void",
+      "description": "Function that allows to switch actually displayed list of year to previous year list",
+      "deprecated": null,
+      "sourceLine": 647,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "displayPreviousYearsList",
+      "signature": "() => void",
+      "description": "Function that allows to switch actually displayed list of year to previous year list",
+      "deprecated": null,
+      "sourceLine": 661,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "handleActiveViewChange",
+      "signature": "(activeView: FdCalendarView) => void",
+      "description": "Method that handle active view change and throws event.\n\nFired by calendar header component.",
+      "deprecated": null,
+      "sourceLine": 493,
+      "since": null,
+      "parameters": [
+        {
+          "name": "activeView",
+          "type": "FdCalendarView",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "handleNextArrowClick",
+      "signature": "() => void",
+      "description": "Function that handles next arrow icon click, depending on current view it changes month, year or list of years",
+      "deprecated": null,
+      "sourceLine": 566,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "handlePreviousArrowClick",
+      "signature": "() => void",
+      "description": "Function that handles previous arrow icon click, depending on current view it changes month, year or list of years",
+      "deprecated": null,
+      "sourceLine": 585,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "initialFocus",
+      "signature": "() => void",
+      "description": "Set initial focus on one of the calendar's element",
+      "deprecated": null,
+      "sourceLine": 681,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "isDateRangeMonthFormat",
+      "signature": "() => boolean",
+      "description": "Whether the date range format is month",
+      "deprecated": null,
+      "sourceLine": 784,
+      "since": null,
+      "parameters": [],
+      "returnType": "boolean"
+    },
+    {
+      "name": "isDateRangeYearFormat",
+      "signature": "() => boolean",
+      "description": "Whether the date range format is year",
+      "deprecated": null,
+      "sourceLine": 789,
+      "since": null,
+      "parameters": [],
+      "returnType": "boolean"
+    },
+    {
+      "name": "isModelValid",
+      "signature": "() => boolean",
+      "description": "Method that provides information if model selected date/dates have properly types and are valid",
+      "deprecated": null,
+      "sourceLine": 753,
+      "since": null,
+      "parameters": [],
+      "returnType": "boolean"
+    },
+    {
+      "name": "selectedYear",
+      "signature": "(yearSelected: number) => void",
+      "description": "Select year",
+      "deprecated": null,
+      "sourceLine": 701,
+      "since": null,
+      "parameters": [
+        {
+          "name": "yearSelected",
+          "type": "number",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "selectedYears",
+      "signature": "(yearsSelected: AggregatedYear) => void",
+      "description": "Select year range",
+      "deprecated": null,
+      "sourceLine": 719,
+      "since": null,
+      "parameters": [
+        {
+          "name": "yearsSelected",
+          "type": "AggregatedYear",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setCurrentlyDisplayed",
+      "signature": "(date: Nullable<D>) => void",
+      "description": "Function that allows to change currently displayed month/year configuration,\nwhich are connected to days displayed",
+      "deprecated": null,
+      "sourceLine": 669,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "Nullable<D>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

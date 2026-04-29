@@ -1,0 +1,13 @@
+{
+  "name": "FdOptionSelectionChange",
+  "selector": "[fd-option], fd-option",
+  "kind": "Class",
+  "sourceFile": "option.component.ts",
+  "sourceLine": 34,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/select/option/option.component.ts#L34",
+  "description": "Event object emitted by OptionComponent when\nselected or deselected.",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

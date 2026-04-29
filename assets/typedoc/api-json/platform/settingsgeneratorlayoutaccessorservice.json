@@ -1,0 +1,54 @@
+{
+  "name": "SettingsGeneratorLayoutAccessorService",
+  "selector": null,
+  "kind": "Service",
+  "sourceFile": "settings-generator-layout-accessor.service.ts",
+  "sourceLine": 9,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/settings-generator/settings-generator-layout-accessor.service.ts#L9",
+  "description": "Service, used as a registry of the available layouts for Settings Generator Component.",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "addLayout",
+      "signature": "(layoutName: string, layoutComponent: Type<BaseSettingsGeneratorLayout>) => void",
+      "description": "Adds custom layout component to layouts registry for later usage with Settings Generator component.",
+      "deprecated": null,
+      "sourceLine": 18,
+      "since": null,
+      "parameters": [
+        {
+          "name": "layoutName",
+          "type": "string",
+          "description": "Name of the Layout",
+          "optional": false
+        },
+        {
+          "name": "layoutComponent",
+          "type": "Type<BaseSettingsGeneratorLayout>",
+          "description": "Component type to be used for defined layout.",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "getLayout",
+      "signature": "(layoutName: string) => Nullable<Type<BaseSettingsGeneratorLayout>>",
+      "description": "Gets Component type for defined layout.",
+      "deprecated": null,
+      "sourceLine": 26,
+      "since": null,
+      "parameters": [
+        {
+          "name": "layoutName",
+          "type": "string",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "Nullable<Type<BaseSettingsGeneratorLayout>>"
+    }
+  ],
+  "inherited": null
+}

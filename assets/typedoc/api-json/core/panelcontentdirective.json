@@ -1,0 +1,94 @@
+{
+  "name": "PanelContentDirective",
+  "selector": "[fd-panel-content]",
+  "kind": "Directive",
+  "sourceFile": "panel-content.directive.ts",
+  "sourceLine": 28,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/panel/panel-content/panel-content.directive.ts#L28",
+  "description": "Applies the panel content style to a div element.\n\n```html\n<div fd-panel-content>Panel Content</div>\n```",
+  "inputs": [
+    {
+      "name": "ariaLabel",
+      "type": "null | string",
+      "default": null,
+      "description": "aria-label attribute of the host element element.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 39,
+      "since": null
+    },
+    {
+      "name": "ariaLabelledBy",
+      "type": "null | string",
+      "default": null,
+      "description": "aria-labelledby attribute of the host element element.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 42,
+      "since": null
+    },
+    {
+      "name": "height",
+      "type": "null | string",
+      "default": null,
+      "description": "Custom height of the content container.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 30,
+      "since": null
+    },
+    {
+      "name": "maxHeight",
+      "type": "null | string",
+      "default": null,
+      "description": "Custom max-height of the content container.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 36,
+      "since": null
+    },
+    {
+      "name": "minHeight",
+      "type": "null | string",
+      "default": null,
+      "description": "Custom min-height of the content container.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 33,
+      "since": null
+    },
+    {
+      "name": "noPadding",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the content should have no padding.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 48,
+      "since": null
+    },
+    {
+      "name": "role",
+      "type": "string",
+      "default": null,
+      "description": "role attribute of the host element.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 45,
+      "since": null
+    },
+    {
+      "name": "transparent",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the content has transparent background.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 51,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

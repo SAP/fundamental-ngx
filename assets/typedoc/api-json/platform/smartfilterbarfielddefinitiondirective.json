@@ -1,0 +1,124 @@
+{
+  "name": "SmartFilterBarFieldDefinitionDirective",
+  "selector": "[fdpSmartFilterBarFieldDefinition], [fdp-smart-filter-bar-field-definition]",
+  "kind": "Directive",
+  "sourceFile": "smart-filter-bar-field-definition.directive.ts",
+  "sourceLine": 8,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/smart-filter-bar/directives/smart-filter-bar-field-definition.directive.ts#L8",
+  "description": "",
+  "inputs": [
+    {
+      "name": "conditionStrategy",
+      "type": "CollectionFilterGroupStrategy",
+      "default": "'or'",
+      "description": "Condition strategy",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 32,
+      "since": null
+    },
+    {
+      "name": "customFilterType",
+      "type": "string",
+      "default": null,
+      "description": "Field custom filter type",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 28,
+      "since": null
+    },
+    {
+      "name": "dataType",
+      "type": "FilterableColumnDataType",
+      "default": null,
+      "description": "Field data type",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 25,
+      "since": null
+    },
+    {
+      "name": "defaultSelected",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether this field filter is selected by default.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 44,
+      "since": null
+    },
+    {
+      "name": "filterType",
+      "type": "FilterType",
+      "default": null,
+      "description": "Field filter type",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 22,
+      "since": null
+    },
+    {
+      "name": "hasOptions",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether this field has autocomplete options",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 48,
+      "since": null
+    },
+    {
+      "name": "key",
+      "type": "string",
+      "default": null,
+      "description": "Field data accessor key.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 11,
+      "since": null
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "default": null,
+      "description": "Field label.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 19,
+      "since": null
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "default": null,
+      "description": "Unique field identifier.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 15,
+      "since": null
+    },
+    {
+      "name": "required",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether this field filter is mandatory.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 40,
+      "since": null
+    },
+    {
+      "name": "smartFilterBarFilterable",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether this field can be filtered. Default value is true.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 36,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

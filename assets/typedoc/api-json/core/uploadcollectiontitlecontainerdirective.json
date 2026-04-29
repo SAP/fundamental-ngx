@@ -1,0 +1,13 @@
+{
+  "name": "UploadCollectionTitleContainerDirective",
+  "selector": "[fd-upload-collection-thumbnail]",
+  "kind": "Directive",
+  "sourceFile": "upload-collection-simple.directives.ts",
+  "sourceLine": 81,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/upload-collection/upload-collection-simple.directives.ts#L81",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

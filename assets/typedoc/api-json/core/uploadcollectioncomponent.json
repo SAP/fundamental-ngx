@@ -1,0 +1,24 @@
+{
+  "name": "UploadCollectionComponent",
+  "selector": "fd-upload-collection",
+  "kind": "Component",
+  "sourceFile": "upload-collection.component.ts",
+  "sourceLine": 15,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/upload-collection/upload-collection.component.ts#L15",
+  "description": "",
+  "inputs": [
+    {
+      "name": "selection",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether or not this upload collection supports selection.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 23,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

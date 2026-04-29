@@ -1,0 +1,54 @@
+{
+  "name": "TimelineComponent",
+  "selector": "fd-timeline",
+  "kind": "Component",
+  "sourceFile": "timeline.component.ts",
+  "sourceLine": 61,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/timeline/timeline.component.ts#L61",
+  "description": "",
+  "inputs": [
+    {
+      "name": "axis",
+      "type": "TimelineAxis",
+      "default": "'vertical'",
+      "description": "Axis for timeline",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 78,
+      "since": null
+    },
+    {
+      "name": "dataSource",
+      "type": "T[]",
+      "default": null,
+      "description": "Data array to render",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 66,
+      "since": null
+    },
+    {
+      "name": "layout",
+      "type": "TimelineSidePosition",
+      "default": "'right'",
+      "description": "Layout for timeline",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 84,
+      "since": null
+    },
+    {
+      "name": "trackBy",
+      "type": "TrackByFunction<T>",
+      "default": null,
+      "description": "Tracking function that will be used to check the differences in data changes.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 72,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

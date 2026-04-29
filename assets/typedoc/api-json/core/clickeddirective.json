@@ -1,0 +1,24 @@
+{
+  "name": "ClickedDirective",
+  "selector": "[fdkClicked]",
+  "kind": "Directive",
+  "sourceFile": "clicked.directive.ts",
+  "sourceLine": 8,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cdk/utils/directives/clicked/clicked.directive.ts#L8",
+  "description": "",
+  "inputs": [],
+  "outputs": [
+    {
+      "name": "fdkClicked",
+      "type": "KeyboardEvent | MouseEvent",
+      "default": null,
+      "description": "Event emitted when user either clicks with mouse, or\nclicks on space or enter keys",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 18,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

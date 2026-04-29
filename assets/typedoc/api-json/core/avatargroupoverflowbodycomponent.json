@@ -1,0 +1,54 @@
+{
+  "name": "AvatarGroupOverflowBodyComponent",
+  "selector": "fd-avatar-group-overflow-body",
+  "kind": "Component",
+  "sourceFile": "avatar-group-overflow-body.component.ts",
+  "sourceLine": 17,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/avatar-group/components/avatar-group-overflow-body/avatar-group-overflow-body.component.ts#L17",
+  "description": "Avatar group overflow body component, used to provide a template for the avatar group overflow body.",
+  "inputs": [
+    {
+      "name": "additionalPopoverBodyClass",
+      "type": "string",
+      "default": "''",
+      "description": "Additional popover body class",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 32,
+      "since": null
+    },
+    {
+      "name": "noHorizontalScroll",
+      "type": "boolean",
+      "default": "true",
+      "description": "Hide horizontal scrollbar from the overflow body.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 24,
+      "since": null
+    },
+    {
+      "name": "noPadding",
+      "type": "boolean",
+      "default": "false",
+      "description": "Remove the padding from the overflow body.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 20,
+      "since": null
+    },
+    {
+      "name": "noVerticalScroll",
+      "type": "boolean",
+      "default": "true",
+      "description": "Hide vertical scrollbar from the overflow body.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 28,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

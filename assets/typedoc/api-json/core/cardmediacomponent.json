@@ -1,0 +1,54 @@
+{
+  "name": "CardMediaComponent",
+  "selector": "fd-card-media",
+  "kind": "Component",
+  "sourceFile": "card-media.component.ts",
+  "sourceLine": 14,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/card/media/card-media.component.ts#L14",
+  "description": "",
+  "inputs": [
+    {
+      "name": "ariaRoleDescription",
+      "type": "string",
+      "default": null,
+      "description": "aria-roledescription for the container\ndefault: 'Card Media Block'",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 19,
+      "since": null
+    },
+    {
+      "name": "hasPadding",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the media container comes with a 1rem padding\nDefault value: false",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 25,
+      "since": null
+    },
+    {
+      "name": "legendColor",
+      "type": "null | number",
+      "default": null,
+      "description": "Legend Background Colors\nAvailable values: number from 1 to 20",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 39,
+      "since": null
+    },
+    {
+      "name": "shellColor",
+      "type": "null | number",
+      "default": null,
+      "description": "Shell Category Colors\nAvailable values: number from 1 to 16",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 33,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

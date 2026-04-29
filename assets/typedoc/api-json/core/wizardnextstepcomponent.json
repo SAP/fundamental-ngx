@@ -1,0 +1,24 @@
+{
+  "name": "WizardNextStepComponent",
+  "selector": "fd-wizard-next-step",
+  "kind": "Component",
+  "sourceFile": "wizard-next-step.component.ts",
+  "sourceLine": 9,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/wizard/wizard-next-step/wizard-next-step.component.ts#L9",
+  "description": "",
+  "inputs": [
+    {
+      "name": "floating",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether or not the next step button should float directly above the footer.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 14,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

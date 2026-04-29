@@ -1,0 +1,107 @@
+{
+  "name": "DialogRef",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "dialog-ref.class.ts",
+  "sourceLine": 18,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/dialog/utils/dialog-ref.class.ts#L18",
+  "description": "Reference to a dialog component\nIt can be injected into the content component through the constructor.\nFor a template, it is declared as part of the implicit context, see examples.",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "hide",
+      "signature": "(isHidden: boolean) => void",
+      "description": "Visually hides the dialog.",
+      "deprecated": null,
+      "sourceLine": 50,
+      "since": null,
+      "parameters": [
+        {
+          "name": "isHidden",
+          "type": "boolean",
+          "description": "Value used to determine if dialog window should be hidden or visible.",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "loading",
+      "signature": "(loadingData: boolean | DialogRefLoadingConfiguration) => void",
+      "description": "Displays the dialog in loading state.",
+      "deprecated": null,
+      "sourceLine": 58,
+      "since": null,
+      "parameters": [
+        {
+          "name": "loadingData",
+          "type": "boolean | DialogRefLoadingConfiguration",
+          "description": "Value used to determine if dialog window should be displayed in loading state.",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "toggleFullScreen",
+      "signature": "() => void",
+      "description": "Toggles full-screen mode of the Dialog.",
+      "deprecated": null,
+      "sourceLine": 71,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": {
+    "from": "DialogRefBase",
+    "inputs": [],
+    "methods": [
+      {
+        "name": "close",
+        "signature": "(result?: P) => void",
+        "description": "Closes the dialog normally and returns a result value.\nUpdates signal state and emits to observables for backward compatibility.",
+        "deprecated": null,
+        "sourceLine": 136,
+        "since": null,
+        "parameters": [
+          {
+            "name": "result",
+            "type": "P",
+            "description": "Optional result value to return to the caller",
+            "optional": true
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "dismiss",
+        "signature": "(reason?: any) => void",
+        "description": "Dismisses the dialog without a result, typically due to user cancellation.\nUpdates signal state and emits error to observables for backward compatibility.",
+        "deprecated": null,
+        "sourceLine": 156,
+        "since": null,
+        "parameters": [
+          {
+            "name": "reason",
+            "type": "any",
+            "description": "Optional reason for dismissal (ESC key, backdrop click, etc.)",
+            "optional": true
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "loaded",
+        "signature": "() => void",
+        "description": "Marks the dialog as loaded and initialized.\nCalled internally after the dialog view has been created and rendered.\nUpdates signal state and emits to observables for backward compatibility.",
+        "deprecated": null,
+        "sourceLine": 176,
+        "since": null,
+        "parameters": [],
+        "returnType": "void"
+      }
+    ]
+  }
+}

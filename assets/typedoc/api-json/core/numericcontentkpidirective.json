@@ -1,0 +1,34 @@
+{
+  "name": "NumericContentKpiDirective",
+  "selector": "[fd-numeric-content]",
+  "kind": "Directive",
+  "sourceFile": "numeric-content.directives.ts",
+  "sourceLine": 104,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/tile/directives/numeric-content.directives.ts#L104",
+  "description": "",
+  "inputs": [
+    {
+      "name": "glyph",
+      "type": "string",
+      "default": null,
+      "description": "Glyph (icon) to display.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 109,
+      "since": null
+    },
+    {
+      "name": "state",
+      "type": "null | NumericContentState",
+      "default": null,
+      "description": "State of the KPI. Options are 'neutral' (default), 'positive', 'negative', 'critical', or 'informative'.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 106,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

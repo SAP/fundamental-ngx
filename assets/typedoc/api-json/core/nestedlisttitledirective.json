@@ -1,0 +1,24 @@
+{
+  "name": "NestedListTitleDirective",
+  "selector": "[fdNestedDirectivesHeader], [fd-nested-list-header]",
+  "kind": "Directive",
+  "sourceFile": "nested-list-directives.ts",
+  "sourceLine": 60,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/nested-list/nested-list-directives.ts#L60",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "getInnerText",
+      "signature": "() => string",
+      "description": "Returns element's InnerText",
+      "deprecated": null,
+      "sourceLine": 65,
+      "since": null,
+      "parameters": [],
+      "returnType": "string"
+    }
+  ],
+  "inherited": null
+}

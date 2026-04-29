@@ -1,0 +1,24 @@
+{
+  "name": "NumericContentScaleDirective",
+  "selector": "[fd-numeric-content]",
+  "kind": "Directive",
+  "sourceFile": "numeric-content.directives.ts",
+  "sourceLine": 177,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/tile/directives/numeric-content.directives.ts#L177",
+  "description": "",
+  "inputs": [
+    {
+      "name": "state",
+      "type": "null | NumericContentState",
+      "default": null,
+      "description": "State of the scale. Options are 'neutral' (default), 'positive', 'negative', 'critical', or 'informative'.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 179,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

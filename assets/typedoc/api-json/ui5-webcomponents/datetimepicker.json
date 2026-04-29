@@ -1,0 +1,285 @@
+{
+  "name": "DateTimePicker",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 51,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "accessibleDescription",
+      "type": "string",
+      "default": null,
+      "description": "Defines the accessible description of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 56,
+      "since": null
+    },
+    {
+      "name": "accessibleDescriptionRef",
+      "type": "string",
+      "default": null,
+      "description": "Receives id(or many ids) of the elements that describe the input.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 61,
+      "since": null
+    },
+    {
+      "name": "accessibleName",
+      "type": "string",
+      "default": null,
+      "description": "Defines the aria-label attribute for the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 66,
+      "since": null
+    },
+    {
+      "name": "accessibleNameRef",
+      "type": "string",
+      "default": null,
+      "description": "Receives id(or many ids) of the elements that label the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 71,
+      "since": null
+    },
+    {
+      "name": "calendarWeekNumbering",
+      "type": "'Default' | 'ISO_8601' | 'MiddleEastern' | 'WesternTraditional'",
+      "default": null,
+      "description": "Defines how to calculate calendar weeks and first day of the week.\nIf not set, the calendar will be displayed according to the currently set global configuration.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 77,
+      "since": null
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": null,
+      "description": "Determines whether the component is displayed as disabled.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 82,
+      "since": null
+    },
+    {
+      "name": "displayFormat",
+      "type": "string",
+      "default": null,
+      "description": "Determines the format, displayed in the input field.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 87,
+      "since": null
+    },
+    {
+      "name": "formatPattern",
+      "type": "string",
+      "default": null,
+      "description": "Determines the format, displayed in the input field.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 92,
+      "since": null
+    },
+    {
+      "name": "hideWeekNumbers",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines the visibility of the week numbers column.\n\n*Note:** For calendars other than Gregorian,\nthe week numbers are not displayed regardless of what is set.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 100,
+      "since": null
+    },
+    {
+      "name": "maxDate",
+      "type": "string",
+      "default": null,
+      "description": "Determines the maximum date available for selection.\n\n*Note:** If the formatPattern property is not set, the maxDate value must be provided in the ISO date format (yyyy-MM-dd).",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 107,
+      "since": null
+    },
+    {
+      "name": "minDate",
+      "type": "string",
+      "default": null,
+      "description": "Determines the minimum date available for selection.\n\n*Note:** If the formatPattern property is not set, the minDate value must be provided in the ISO date format (yyyy-MM-dd).",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 114,
+      "since": null
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "default": null,
+      "description": "Determines the name by which the component will be identified upon submission in an HTML form.\n\n*Note:** This property is only applicable within the context of an HTML Form element.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 121,
+      "since": null
+    },
+    {
+      "name": "open",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines the open or closed state of the popover.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 126,
+      "since": null
+    },
+    {
+      "name": "placeholder",
+      "type": "string",
+      "default": null,
+      "description": "Defines a short hint, intended to aid the user with data entry when the\ncomponent has no value.\n\n*Note:** When no placeholder is set, the format pattern is displayed as a placeholder.\nPassing an empty string as the value of this property will make the component appear empty - without placeholder or format pattern.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 135,
+      "since": null
+    },
+    {
+      "name": "primaryCalendarType",
+      "type": "'Gregorian' | 'Islamic' | 'Japanese' | 'Buddhist' | 'Persian'",
+      "default": null,
+      "description": "Sets a calendar type used for display.\nIf not set, the calendar type of the global configuration is used.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 141,
+      "since": null
+    },
+    {
+      "name": "readonly",
+      "type": "boolean",
+      "default": null,
+      "description": "Determines whether the component is displayed as read-only.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 146,
+      "since": null
+    },
+    {
+      "name": "required",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines whether the component is required.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 151,
+      "since": null
+    },
+    {
+      "name": "secondaryCalendarType",
+      "type": "'Gregorian' | 'Islamic' | 'Japanese' | 'Buddhist' | 'Persian'",
+      "default": null,
+      "description": "Defines the secondary calendar type.\nIf not set, the calendar will only show the primary calendar type.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 157,
+      "since": null
+    },
+    {
+      "name": "showClearIcon",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines whether the clear icon of the input will be shown.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 162,
+      "since": null
+    },
+    {
+      "name": "value",
+      "type": "string",
+      "default": null,
+      "description": "Defines a formatted date value.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 167,
+      "since": null
+    },
+    {
+      "name": "valueFormat",
+      "type": "string",
+      "default": null,
+      "description": "Determines the format, used for the value attribute.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 172,
+      "since": null
+    },
+    {
+      "name": "valueState",
+      "type": "'None' | 'Positive' | 'Critical' | 'Negative' | 'Information'",
+      "default": null,
+      "description": "Defines the value state of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 177,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5Change",
+      "type": "UI5CustomEvent<DateTimePicker, 'change'>",
+      "default": null,
+      "description": "Fired when the input operation has finished by pressing Enter or on focusout.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 200,
+      "since": null
+    },
+    {
+      "name": "ui5Close",
+      "type": "UI5CustomEvent<DateTimePicker, 'close'>",
+      "default": null,
+      "description": "Fired after the component's picker is closed.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 205,
+      "since": null
+    },
+    {
+      "name": "ui5Input",
+      "type": "UI5CustomEvent<DateTimePicker, 'input'>",
+      "default": null,
+      "description": "Fired when the value of the component is changed at each key stroke.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 210,
+      "since": null
+    },
+    {
+      "name": "ui5Open",
+      "type": "UI5CustomEvent<DateTimePicker, 'open'>",
+      "default": null,
+      "description": "Fired after the component's picker is opened.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 215,
+      "since": null
+    },
+    {
+      "name": "ui5ValueStateChange",
+      "type": "UI5CustomEvent<DateTimePicker, 'value-state-change'>",
+      "default": null,
+      "description": "Fired before the value state of the component is updated internally.\nThe event is preventable, meaning that if it's default action is\nprevented, the component will not update the value state.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 222,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

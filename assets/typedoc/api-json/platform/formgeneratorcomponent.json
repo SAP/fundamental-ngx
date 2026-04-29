@@ -1,0 +1,212 @@
+{
+  "name": "FormGeneratorComponent",
+  "selector": "fdp-form-generator",
+  "kind": "Component",
+  "sourceFile": "form-generator.component.ts",
+  "sourceLine": 113,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/form-generator/form-generator/form-generator.component.ts#L113",
+  "description": "",
+  "inputs": [
+    {
+      "name": "columnLayout",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 162,
+      "since": null
+    },
+    {
+      "name": "fieldColumnLayout",
+      "type": "ColumnLayout",
+      "default": "DefaultVerticalFieldLayout",
+      "description": "Defines field's column layout.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 174,
+      "since": null
+    },
+    {
+      "name": "formName",
+      "type": "string",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 116,
+      "since": null
+    },
+    {
+      "name": "gapColumnLayout",
+      "type": "ColumnLayout",
+      "default": "DefaultGapLayout",
+      "description": "Defines gap column layout.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 180,
+      "since": null
+    },
+    {
+      "name": "hideMainTItle",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to hide main title. Default is false.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 146,
+      "since": null
+    },
+    {
+      "name": "hint",
+      "type": "HintInput",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 153,
+      "since": null
+    },
+    {
+      "name": "inlineColumnLayout",
+      "type": "ColumnLayout",
+      "default": "DefaultVerticalFieldLayout",
+      "description": "Inline column layout",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 188,
+      "since": null
+    },
+    {
+      "name": "labelColumnLayout",
+      "type": "ColumnLayout",
+      "default": "DefaultVerticalLabelLayout",
+      "description": "Defines label's column layout.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 168,
+      "since": null
+    },
+    {
+      "name": "mainTitle",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 140,
+      "since": null
+    },
+    {
+      "name": "unifiedLayout",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether all form items should have identical layout provided for form group.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 184,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "formCreated",
+      "type": "DynamicFormGroup",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 203,
+      "since": null
+    },
+    {
+      "name": "formSubmitted",
+      "type": "DynamicFormValue",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 210,
+      "since": null
+    },
+    {
+      "name": "formSubmittedStatus",
+      "type": "SubmitFormEventResult",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 216,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "addControl",
+      "signature": "(control: DynamicFormItem, path?: string[]) => Promise<void>",
+      "description": "Adds new control to an existing form.",
+      "deprecated": null,
+      "sourceLine": 395,
+      "since": null,
+      "parameters": [
+        {
+          "name": "control",
+          "type": "DynamicFormItem",
+          "description": "Control configuration to add.",
+          "optional": false
+        },
+        {
+          "name": "path",
+          "type": "string[]",
+          "description": "Path of the control.",
+          "optional": true
+        }
+      ],
+      "returnType": "Promise<void>"
+    },
+    {
+      "name": "refreshStepsVisibility",
+      "signature": "() => Promise<void>",
+      "description": "Refreshes form items visibility with 'when' condition.",
+      "deprecated": null,
+      "sourceLine": 363,
+      "since": null,
+      "parameters": [],
+      "returnType": "Promise<void>"
+    },
+    {
+      "name": "removeControl",
+      "signature": "(name: string, path: string[]) => Promise<void>",
+      "description": "Removes the control with the given name by the given path.",
+      "deprecated": null,
+      "sourceLine": 409,
+      "since": null,
+      "parameters": [
+        {
+          "name": "name",
+          "type": "string",
+          "description": "Name of the control.",
+          "optional": false
+        },
+        {
+          "name": "path",
+          "type": "string[]",
+          "description": "Path of the control.",
+          "optional": false
+        }
+      ],
+      "returnType": "Promise<void>"
+    },
+    {
+      "name": "submit",
+      "signature": "() => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 435,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

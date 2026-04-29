@@ -1,0 +1,95 @@
+{
+  "name": "MediaGallery",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 42,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "interactiveDisplayArea",
+      "type": "boolean",
+      "default": null,
+      "description": "If enabled, a `display-area-click` event is fired\nwhen the user clicks or taps on the display area.\n\nThe display area is the central area that contains\nthe enlarged content of the currently selected item.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 51,
+      "since": null
+    },
+    {
+      "name": "layout",
+      "type": "'Auto' | 'Vertical' | 'Horizontal'",
+      "default": null,
+      "description": "Determines the layout of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 56,
+      "since": null
+    },
+    {
+      "name": "menuHorizontalAlign",
+      "type": "'Right' | 'Left'",
+      "default": null,
+      "description": "Determines the horizontal alignment of the thumbnails menu\nvs. the central display area.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 62,
+      "since": null
+    },
+    {
+      "name": "menuVerticalAlign",
+      "type": "'Top' | 'Bottom'",
+      "default": null,
+      "description": "Determines the vertical alignment of the thumbnails menu\nvs. the central display area.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 68,
+      "since": null
+    },
+    {
+      "name": "showAllThumbnails",
+      "type": "boolean",
+      "default": null,
+      "description": "If set to `true`, all thumbnails are rendered in a scrollable container.\nIf `false`, only up to five thumbnails are rendered, followed by\nan overflow button that shows the count of the remaining thumbnails.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 75,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5DisplayAreaClick",
+      "type": "UI5CustomEvent<MediaGallery, 'display-area-click'>",
+      "default": null,
+      "description": "Fired when the display area is clicked.\nThe display area is the central area that contains\nthe enlarged content of the currently selected item.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 84,
+      "since": null
+    },
+    {
+      "name": "ui5OverflowClick",
+      "type": "UI5CustomEvent<MediaGallery, 'overflow-click'>",
+      "default": null,
+      "description": "Fired when the thumbnails overflow button is clicked.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 89,
+      "since": null
+    },
+    {
+      "name": "ui5SelectionChange",
+      "type": "UI5CustomEvent<MediaGallery, 'selection-change'>",
+      "default": null,
+      "description": "Fired when selection is changed by user interaction.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 94,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

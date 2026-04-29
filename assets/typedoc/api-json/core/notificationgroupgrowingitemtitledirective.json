@@ -1,0 +1,13 @@
+{
+  "name": "NotificationGroupGrowingItemTitleDirective",
+  "selector": "[fdNotificationGroupGrowingItemTitle], [fd-notification-group-growing-item-title]",
+  "kind": "Directive",
+  "sourceFile": "notification-group-growing-item-title.directive.ts",
+  "sourceLine": 10,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/notification/directives/notification-group-growing-item-title.directive.ts#L10",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

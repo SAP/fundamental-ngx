@@ -1,0 +1,55 @@
+{
+  "name": "SideNavigation",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "accessibleName",
+      "type": "string",
+      "default": null,
+      "description": "Defines the accessible ARIA name of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 45,
+      "since": null
+    },
+    {
+      "name": "collapsed",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines whether the `ui5-side-navigation` is expanded or collapsed.\n\n*Note:** On small screens (screen width of 599px or less) the collapsed mode is not supported, and in\nexpanded mode the side navigation will take the whole width of the screen.\nThe `ui5-side-navigation` component is intended to be used within a `ui5-navigation-layout`\ncomponent to ensure proper responsive behavior. If you choose not to use the\n`ui5-navigation-layout`, you will need to implement the appropriate responsive patterns yourself,\nparticularly for smaller screens where the collapsed mode should not be used.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 57,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5ItemClick",
+      "type": "UI5CustomEvent<SideNavigation, 'item-click'>",
+      "default": null,
+      "description": "Fired when an item is clicked.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 64,
+      "since": null
+    },
+    {
+      "name": "ui5SelectionChange",
+      "type": "UI5CustomEvent<SideNavigation, 'selection-change'>",
+      "default": null,
+      "description": "Fired when the selection has changed via user interaction.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 69,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

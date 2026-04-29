@@ -1,0 +1,44 @@
+{
+  "name": "DisabledBehaviorDirective",
+  "selector": "[fdkDisabled]",
+  "kind": "Directive",
+  "sourceFile": "disabled-behavior.directive.ts",
+  "sourceLine": 20,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cdk/utils/directives/disabled/disabled-behavior.directive.ts#L20",
+  "description": "",
+  "inputs": [
+    {
+      "name": "addDisabledClass",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether to add `disabledClass` class to the element.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 32,
+      "since": null
+    },
+    {
+      "name": "disabledClass",
+      "type": "string",
+      "default": null,
+      "description": "Disabled css class to apply to the element.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 37,
+      "since": null
+    },
+    {
+      "name": "fdkDisabledInput",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the element is disabled.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 27,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

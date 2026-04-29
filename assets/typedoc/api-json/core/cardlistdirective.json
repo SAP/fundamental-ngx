@@ -1,0 +1,89 @@
+{
+  "name": "CardListDirective",
+  "selector": "[fd-card-list]",
+  "kind": "Directive",
+  "sourceFile": "card-list.directive.ts",
+  "sourceLine": 41,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/card/card-list/card-list.directive.ts#L41",
+  "description": "",
+  "inputs": [
+    {
+      "name": "ariaLabel",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "aria-label for the Card list",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 67,
+      "since": null
+    },
+    {
+      "name": "ariaRoleDescription",
+      "type": "string",
+      "default": null,
+      "description": "aria-roledescription for the Card list\ndefault: 'Card Container'",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 62,
+      "since": null
+    },
+    {
+      "name": "keyboardSupport",
+      "type": "boolean",
+      "default": null,
+      "description": "whether internal keyboard support should be enabled.\ndefault: true",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 56,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "focusEscapeList",
+      "type": "FocusEscapeDirection",
+      "default": null,
+      "description": "an event thrown, when focus escapes the list",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 46,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "getActiveItem",
+      "signature": "() => null | CardFocusItem<any>",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 120,
+      "since": null,
+      "parameters": [],
+      "returnType": "null | CardFocusItem<any>"
+    },
+    {
+      "name": "setItemActive",
+      "signature": "(index: number, updateOnly: boolean) => void",
+      "description": "Set fake focus on element with passed index",
+      "deprecated": null,
+      "sourceLine": 109,
+      "since": null,
+      "parameters": [
+        {
+          "name": "index",
+          "type": "number",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "updateOnly",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

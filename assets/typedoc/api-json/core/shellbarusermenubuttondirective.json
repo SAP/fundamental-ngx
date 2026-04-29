@@ -1,0 +1,24 @@
+{
+  "name": "ShellbarUserMenuButtonDirective",
+  "selector": "[fd-button][fdShellbarUserMenuButton]",
+  "kind": "Directive",
+  "sourceFile": "shellbar-user-menu-button.directive.ts",
+  "sourceLine": 12,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/shellbar/user-menu/shellbar-user-menu-button.directive.ts#L12",
+  "description": "",
+  "inputs": [
+    {
+      "name": "fdType",
+      "type": "'transparent'",
+      "default": null,
+      "description": "The type of the button. In case of the ShellbarUserMenuButtonDirective, the type is always 'transparent'.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 15,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

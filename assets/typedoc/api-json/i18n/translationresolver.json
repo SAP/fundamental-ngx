@@ -1,0 +1,55 @@
+{
+  "name": "TranslationResolver",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "translation-resolver.ts",
+  "sourceLine": 19,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/i18n/src/lib/utils/translation-resolver.ts#L19",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "resolve",
+      "signature": "(lang: FdLanguage, key: FdLanguageKeyIdentifier, args?: FdLanguageKeyArgs, locale?: Nullable<string>, fallbackLanguage: FdLanguage) => string",
+      "description": "Resolves the translation for the provided language by key and args",
+      "deprecated": null,
+      "sourceLine": 21,
+      "since": null,
+      "parameters": [
+        {
+          "name": "lang",
+          "type": "FdLanguage",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "key",
+          "type": "FdLanguageKeyIdentifier",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "args",
+          "type": "FdLanguageKeyArgs",
+          "description": "",
+          "optional": true
+        },
+        {
+          "name": "locale",
+          "type": "Nullable<string>",
+          "description": "",
+          "optional": true
+        },
+        {
+          "name": "fallbackLanguage",
+          "type": "FdLanguage",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "string"
+    }
+  ],
+  "inherited": null
+}

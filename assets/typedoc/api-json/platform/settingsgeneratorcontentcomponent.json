@@ -1,0 +1,63 @@
+{
+  "name": "SettingsGeneratorContentComponent",
+  "selector": "fdp-settings-generator-content",
+  "kind": "Component",
+  "sourceFile": "settings-generator-content.component.ts",
+  "sourceLine": 50,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/settings-generator/settings-generator-content/settings-generator-content.component.ts#L50",
+  "description": "",
+  "inputs": [
+    {
+      "name": "backButtonLabel",
+      "type": "string",
+      "default": null,
+      "description": "Optional alternative text for the settings generator dialog back button.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 78,
+      "since": null
+    },
+    {
+      "name": "mobile",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to render content component in mobile view.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 63,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "goBack",
+      "type": "void",
+      "default": null,
+      "description": "Event emits when user needs to be moved back to navigation screen.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 67,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "setActiveTab",
+      "signature": "(id: string) => void",
+      "description": "Activates tab by group ID.",
+      "deprecated": null,
+      "sourceLine": 134,
+      "since": null,
+      "parameters": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "ID of the group.",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

@@ -1,0 +1,54 @@
+{
+  "name": "DataProvider",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "abstract-data-provider.class.ts",
+  "sourceLine": 50,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cdk/data-source/base/abstract-data-provider.class.ts#L50",
+  "description": "Default data provider class used for other components to extend from.",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "getTotalItems",
+      "signature": "(params: Map<string, any>) => Observable<number>",
+      "description": "Returns observable with the number of total items that satisfy the search query.\nWarning: this is a naive implementation of the number of the filtered items.\nFor real-world scenarios, it is recommended to override this method with its own logic.",
+      "deprecated": null,
+      "sourceLine": 95,
+      "since": null,
+      "parameters": [
+        {
+          "name": "params",
+          "type": "Map<string, any>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "Observable<number>"
+    },
+    {
+      "name": "matches",
+      "signature": "(item: T, pattern: string) => boolean",
+      "description": "Warning: If you don't supply search Key and you want fulltext search, and you use this\ndefault implementation, be aware that it can perform poorly as it is a naive implementation\nthat does not do deep compare.",
+      "deprecated": null,
+      "sourceLine": 113,
+      "since": null,
+      "parameters": [
+        {
+          "name": "item",
+          "type": "T",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "pattern",
+          "type": "string",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "boolean"
+    }
+  ],
+  "inherited": null
+}

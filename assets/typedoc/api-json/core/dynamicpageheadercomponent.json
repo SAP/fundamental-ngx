@@ -1,0 +1,84 @@
+{
+  "name": "DynamicPageHeaderComponent",
+  "selector": "fd-dynamic-page-header",
+  "kind": "Component",
+  "sourceFile": "dynamic-page-header.component.ts",
+  "sourceLine": 53,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/dynamic-page/dynamic-page-header/header/dynamic-page-header.component.ts#L53",
+  "description": "",
+  "inputs": [
+    {
+      "name": "headingLevel",
+      "type": "HeadingLevel",
+      "default": null,
+      "description": "The heading level (h1-h6) for the dynamic page title.\nDetermines the semantic hierarchy for accessibility and SEO.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 83,
+      "since": null
+    },
+    {
+      "name": "subtitle",
+      "type": "string",
+      "default": null,
+      "description": "The subtitle text displayed below the title in the dynamic page header.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 70,
+      "since": null
+    },
+    {
+      "name": "subtitleHeadingLevel",
+      "type": "null | HeadingLevel",
+      "default": null,
+      "description": "The heading level (h1-h6) for the dynamic page subtitle.\nWhen provided, the subtitle will be rendered as a semantic heading with role=\"heading\".\nWhen not provided (undefined/null), the subtitle is rendered as plain text without a heading role.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 91,
+      "since": null
+    },
+    {
+      "name": "subtitleWrap",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the subtitle text should wrap to multiple lines instead of truncating with ellipsis.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 76,
+      "since": null
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "default": null,
+      "description": "The title text displayed in the dynamic page header.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 58,
+      "since": null
+    },
+    {
+      "name": "titleId",
+      "type": "string",
+      "default": null,
+      "description": "The unique ID for the dynamic page title element.\nUsed for ARIA relationships and programmatic reference.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 98,
+      "since": null
+    },
+    {
+      "name": "titleWrap",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the title text should wrap to multiple lines instead of truncating with ellipsis.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 64,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

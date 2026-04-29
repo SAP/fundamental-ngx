@@ -1,0 +1,13 @@
+{
+  "name": "DynamicPageContentHostComponent",
+  "selector": "fdp-dynamic-page-content-host",
+  "kind": "Component",
+  "sourceFile": "dynamic-page-content-host.component.ts",
+  "sourceLine": 20,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/dynamic-page/dynamic-page-content/dynamic-page-content-host.component.ts#L20",
+  "description": "Dynamic Page Content Host Component.\n\nAdds some styles to host element.\nFor internal usage only.",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

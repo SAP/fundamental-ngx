@@ -1,0 +1,160 @@
+{
+  "name": "OverflowLayoutComponent",
+  "selector": "fd-overflow-layout",
+  "kind": "Component",
+  "sourceFile": "overflow-layout.component.ts",
+  "sourceLine": 71,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/overflow-layout/overflow-layout.component.ts#L71",
+  "description": "",
+  "inputs": [
+    {
+      "name": "ariaRole",
+      "type": "string",
+      "default": null,
+      "description": "Aria role of the overflow layout.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 112,
+      "since": null
+    },
+    {
+      "name": "enableKeyboardNavigation",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether to enable keyboard navigation.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 108,
+      "since": null
+    },
+    {
+      "name": "moreItemsButtonText",
+      "type": "(hiddenItemsCount: number) => string",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 249,
+      "since": null
+    },
+    {
+      "name": "navigationTrigger",
+      "type": "'keyup' | 'keydown'",
+      "default": "'keyup'",
+      "description": "Keyboard event to listen for keyboard navigation through items.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 92,
+      "since": null
+    },
+    {
+      "name": "renderShowMoreButton",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether the show more button should be rendered",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 100,
+      "since": null
+    },
+    {
+      "name": "reverseHiddenItems",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to render hidden items in reverse order.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 104,
+      "since": null
+    },
+    {
+      "name": "showMorePosition",
+      "type": "'left' | 'right'",
+      "default": "'right'",
+      "description": "Direction of the fitting items calculation.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 96,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "hiddenItemsChange",
+      "type": "OverflowItemRef<any>[]",
+      "default": null,
+      "description": "Event, triggered when hidden items have been changed.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 130,
+      "since": null
+    },
+    {
+      "name": "hiddenItemsCount",
+      "type": "number",
+      "default": null,
+      "description": "Event, triggered when amount of hidden items has been changed.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 124,
+      "since": null
+    },
+    {
+      "name": "visibleItemsCount",
+      "type": "number",
+      "default": null,
+      "description": "Event, triggered when amount of visible items has been changed.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 118,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "registerPopoverContent",
+      "signature": "(content: OverflowPopoverContent) => void",
+      "description": "Registers popover content directive for main component.",
+      "deprecated": null,
+      "sourceLine": 347,
+      "since": null,
+      "parameters": [
+        {
+          "name": "content",
+          "type": "OverflowPopoverContent",
+          "description": "{OverflowPopoverContent} directive",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setFocusedElement",
+      "signature": "(element: OverflowLayoutFocusableItem) => void",
+      "description": "Sets current focused element.",
+      "deprecated": null,
+      "sourceLine": 335,
+      "since": null,
+      "parameters": [
+        {
+          "name": "element",
+          "type": "OverflowLayoutFocusableItem",
+          "description": "Element that needs to be focused.",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "triggerRecalculation",
+      "signature": "() => void",
+      "description": "Triggers layout recalculation of the items.",
+      "deprecated": null,
+      "sourceLine": 323,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

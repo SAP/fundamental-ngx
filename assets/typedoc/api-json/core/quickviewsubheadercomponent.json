@@ -1,0 +1,13 @@
+{
+  "name": "QuickViewSubheaderComponent",
+  "selector": "fd-quick-view-subheader",
+  "kind": "Component",
+  "sourceFile": "quick-view-subheader.component.ts",
+  "sourceLine": 10,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/quick-view/quick-view-subheader/quick-view-subheader.component.ts#L10",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

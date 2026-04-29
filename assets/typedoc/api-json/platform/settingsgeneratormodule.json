@@ -1,0 +1,31 @@
+{
+  "name": "SettingsGeneratorModule",
+  "selector": null,
+  "kind": "Module",
+  "sourceFile": "settings-generator.module.ts",
+  "sourceLine": 48,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/settings-generator/settings-generator.module.ts#L48",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "withConfig",
+      "signature": "(config: Partial<SettingsConfig>) => ModuleWithProviders<SettingsGeneratorModule>",
+      "description": "Allows configuring module on a global level with custom configuration.",
+      "deprecated": null,
+      "sourceLine": 53,
+      "since": null,
+      "parameters": [
+        {
+          "name": "config",
+          "type": "Partial<SettingsConfig>",
+          "description": "User's custom configuration.",
+          "optional": false
+        }
+      ],
+      "returnType": "ModuleWithProviders<SettingsGeneratorModule>"
+    }
+  ],
+  "inherited": null
+}

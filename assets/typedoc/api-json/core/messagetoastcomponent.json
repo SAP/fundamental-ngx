@@ -1,0 +1,72 @@
+{
+  "name": "MessageToastComponent",
+  "selector": "fd-message-toast",
+  "kind": "Component",
+  "sourceFile": "message-toast.component.ts",
+  "sourceLine": 28,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/message-toast/message-toast.component.ts#L28",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": {
+    "from": "BaseToastDurationDismissibleContainerComponent",
+    "inputs": [],
+    "methods": [
+      {
+        "name": "attachComponentPortal",
+        "signature": "(portal: ComponentPortal<C>) => ComponentRef<C>",
+        "description": "Attaches component to the portal.",
+        "deprecated": null,
+        "sourceLine": 77,
+        "since": null,
+        "parameters": [
+          {
+            "name": "portal",
+            "type": "ComponentPortal<C>",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "ComponentRef<C>"
+      },
+      {
+        "name": "attachTemplatePortal",
+        "signature": "(portal: TemplatePortal<T>) => EmbeddedViewRef<T>",
+        "description": "Attaches Template to the portal.",
+        "deprecated": null,
+        "sourceLine": 85,
+        "since": null,
+        "parameters": [
+          {
+            "name": "portal",
+            "type": "TemplatePortal<T>",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "EmbeddedViewRef<T>"
+      },
+      {
+        "name": "enter",
+        "signature": "() => void",
+        "description": "Begin animation of Message Toast entrance into view.",
+        "deprecated": null,
+        "sourceLine": 39,
+        "since": null,
+        "parameters": [],
+        "returnType": "void"
+      },
+      {
+        "name": "exit",
+        "signature": "() => void",
+        "description": "Begin animation of Message Toast removal.",
+        "deprecated": null,
+        "sourceLine": 78,
+        "since": null,
+        "parameters": [],
+        "returnType": "void"
+      }
+    ]
+  }
+}

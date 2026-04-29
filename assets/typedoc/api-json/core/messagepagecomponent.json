@@ -1,0 +1,54 @@
+{
+  "name": "MessagePageComponent",
+  "selector": "fd-message-page",
+  "kind": "Component",
+  "sourceFile": "message-page.component.ts",
+  "sourceLine": 23,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/message-page/message-page.component.ts#L23",
+  "description": "",
+  "inputs": [
+    {
+      "name": "class",
+      "type": "string",
+      "default": null,
+      "description": "User's custom class",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 26,
+      "since": null
+    },
+    {
+      "name": "glyphFont",
+      "type": "IconFont",
+      "default": "FD_DEFAULT_ICON_FONT_FAMILY",
+      "description": "Glyph font family",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 46,
+      "since": null
+    },
+    {
+      "name": "hasIcon",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether the Message Page has an icon.\nSet to true by default.\nIt's recommended to always show an icon with the Message Page.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 42,
+      "since": null
+    },
+    {
+      "name": "type",
+      "type": "MessagePageType",
+      "default": null,
+      "description": "The type of the Message Page.\nOptions include: filter, search, no-items, error and default.\nLeave empty for default.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 34,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

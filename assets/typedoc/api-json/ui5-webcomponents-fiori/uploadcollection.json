@@ -1,0 +1,95 @@
+{
+  "name": "UploadCollection",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 41,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "accessibleName",
+      "type": "string",
+      "default": null,
+      "description": "Defines the accessible ARIA name of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 46,
+      "since": null
+    },
+    {
+      "name": "hideDragOverlay",
+      "type": "boolean",
+      "default": null,
+      "description": "By default there will be drag and drop overlay shown over the `ui5-upload-collection` when files\nare dragged. If you don't intend to use drag and drop, set this property.\n\n*Note:** It is up to the application developer to add handler for `drop` event and handle it.\n`ui5-upload-collection` only displays an overlay.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 55,
+      "since": null
+    },
+    {
+      "name": "noDataDescription",
+      "type": "string",
+      "default": null,
+      "description": "Allows you to set your own text for the 'No data' description.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 60,
+      "since": null
+    },
+    {
+      "name": "noDataHeaderLevel",
+      "type": "'H1' | 'H2' | 'H3' | 'H4' | 'H5' | 'H6'",
+      "default": null,
+      "description": "Defines the header level of the 'No data' text.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 65,
+      "since": null
+    },
+    {
+      "name": "noDataText",
+      "type": "string",
+      "default": null,
+      "description": "Allows you to set your own text for the 'No data' text.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 70,
+      "since": null
+    },
+    {
+      "name": "selectionMode",
+      "type": "'None' | 'Single' | 'SingleStart' | 'SingleEnd' | 'SingleAuto' | 'Multiple'",
+      "default": null,
+      "description": "Defines the selection mode of the `ui5-upload-collection`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 75,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5ItemDelete",
+      "type": "UI5CustomEvent<UploadCollection, 'item-delete'>",
+      "default": null,
+      "description": "Fired when an element is dropped inside the drag and drop overlay.\n\n*Note:** The `drop` event is fired only when elements are dropped within the drag and drop overlay and ignored for the other parts of the `ui5-upload-collection`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 84,
+      "since": null
+    },
+    {
+      "name": "ui5SelectionChange",
+      "type": "UI5CustomEvent<UploadCollection, 'selection-change'>",
+      "default": null,
+      "description": "Fired when selection is changed by user interaction\nin `Single` and `Multiple` modes.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 90,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

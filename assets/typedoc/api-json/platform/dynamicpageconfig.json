@@ -1,0 +1,31 @@
+{
+  "name": "DynamicPageConfig",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "dynamic-page.config.ts",
+  "sourceLine": 10,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/dynamic-page/dynamic-page.config.ts#L10",
+  "description": "Default options for platform dynamic-page",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "createProviderFactory",
+      "signature": "(obj: Partial<DynamicPageConfig>) => (platformConfig: PlatformConfig) => DynamicPageConfig",
+      "description": "Create Provider factory function",
+      "deprecated": null,
+      "sourceLine": 40,
+      "since": null,
+      "parameters": [
+        {
+          "name": "obj",
+          "type": "Partial<DynamicPageConfig>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "(platformConfig: PlatformConfig) => DynamicPageConfig"
+    }
+  ],
+  "inherited": null
+}

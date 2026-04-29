@@ -1,0 +1,115 @@
+{
+  "name": "MicroProcessFlowComponent",
+  "selector": "fd-micro-process-flow",
+  "kind": "Component",
+  "sourceFile": "micro-process-flow.component.ts",
+  "sourceLine": 48,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/micro-process-flow/components/micro-process-flow/micro-process-flow.component.ts#L48",
+  "description": "",
+  "inputs": [
+    {
+      "name": "independentSteps",
+      "type": "boolean",
+      "default": "false",
+      "description": "Should connector between items be hidden.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 51,
+      "since": null
+    },
+    {
+      "name": "transitionSpeed",
+      "type": "number",
+      "default": "300",
+      "description": "Pagination transition speed in milliseconds",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 55,
+      "since": null
+    },
+    {
+      "name": "transitionTimingFunction",
+      "type": "string",
+      "default": "'ease'",
+      "description": "Pagination transition effect",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 59,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "goBack",
+      "signature": "() => void",
+      "description": "Scrolls to the previous item.",
+      "deprecated": null,
+      "sourceLine": 215,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "goNext",
+      "signature": "() => void",
+      "description": "Scrolls to the next item.",
+      "deprecated": null,
+      "sourceLine": 210,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "listenOnItemsChange",
+      "signature": "() => void",
+      "description": "Listens on items change and checks if navigation buttons should be visible.",
+      "deprecated": null,
+      "sourceLine": 195,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "onKeypressHandler",
+      "signature": "(offset: number, event: KeyboardEvent) => void",
+      "description": "Navigates to a specific page when the user presses 'Space' or 'Enter' key.",
+      "deprecated": null,
+      "sourceLine": 232,
+      "since": null,
+      "parameters": [
+        {
+          "name": "offset",
+          "type": "number",
+          "description": "How much items needs to be scrolled relatively to the hidden previous items.",
+          "optional": false
+        },
+        {
+          "name": "event",
+          "type": "KeyboardEvent",
+          "description": "The keyboard event.",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setFocusedElementIndex",
+      "signature": "(elm: HTMLElement) => void",
+      "description": "Sets last focused element index.",
+      "deprecated": null,
+      "sourceLine": 223,
+      "since": null,
+      "parameters": [
+        {
+          "name": "elm",
+          "type": "HTMLElement",
+          "description": "Focused HTML element.",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

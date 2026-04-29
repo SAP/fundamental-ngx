@@ -1,0 +1,195 @@
+{
+  "name": "InputGroupComponent",
+  "selector": "fd-input-group",
+  "kind": "Component",
+  "sourceFile": "input-group.component.ts",
+  "sourceLine": 79,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/input-group/input-group.component.ts#L79",
+  "description": "The component that represents an input group.\nThe input group includes form inputs with add-ons that allow the user to better understand the information being entered.\n\n```html\n<fd-input-group placement=\"after\" addOnText=\"$\" placeholder=\"Amount\">\n</fd-input-group>\n```",
+  "inputs": [
+    {
+      "name": "addOnText",
+      "type": "string",
+      "default": null,
+      "description": "The text for the add-on.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 97,
+      "since": null
+    },
+    {
+      "name": "addonButtonAriaHidden",
+      "type": "Nullable<boolean>",
+      "default": null,
+      "description": "Whether the input group addon button should be aria-hidden\nUseful in cases when the title is already applied on the\ninput group parent component",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 145,
+      "since": null
+    },
+    {
+      "name": "ariaLabel",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "aria-label for the input field",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 157,
+      "since": null
+    },
+    {
+      "name": "ariaLabelledBy",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "the associated ids for the input aria-labelledby field",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 153,
+      "since": null
+    },
+    {
+      "name": "button",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the icon add-on or the text add-on is a button.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 117,
+      "since": null
+    },
+    {
+      "name": "buttonFocusable",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether AddOn Button should be focusable",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 101,
+      "since": null
+    },
+    {
+      "name": "glyph",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "The icon value for the add-on.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 109,
+      "since": null
+    },
+    {
+      "name": "glyphAriaLabel",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "Label applied to button with glyph element.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 137,
+      "since": null
+    },
+    {
+      "name": "glyphFont",
+      "type": "IconFont",
+      "default": "FD_DEFAULT_ICON_FONT_FAMILY",
+      "description": "Glyph font family",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 113,
+      "since": null
+    },
+    {
+      "name": "iconTitle",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": "Title attributes are being removed from the library.",
+      "sourceLine": 149,
+      "since": null
+    },
+    {
+      "name": "inline",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the input group is inline.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 93,
+      "since": null
+    },
+    {
+      "name": "isControl",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the input group is a popover control",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 123,
+      "since": null
+    },
+    {
+      "name": "placement",
+      "type": "InputGroupPlacement",
+      "default": "'after'",
+      "description": "The placement of the add-on.\nOptions include *before* and *after*",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 85,
+      "since": null
+    },
+    {
+      "name": "required",
+      "type": "boolean",
+      "default": "false",
+      "description": "If it is mandatory field",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 89,
+      "since": null
+    },
+    {
+      "name": "showFocus",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether should show focus outline",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 129,
+      "since": null
+    },
+    {
+      "name": "type",
+      "type": "string",
+      "default": "'text'",
+      "description": "The type of the input, used in Input Group. By default, value is set to 'text'",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 105,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "addOnButtonClicked",
+      "type": "Event",
+      "default": null,
+      "description": "Event emitted when the add-on button is clicked.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 161,
+      "since": null
+    },
+    {
+      "name": "search",
+      "type": "Event",
+      "default": null,
+      "description": "Event emitted when the native clear button is clicked, or when native search is executed.\nWorks only for native search for input[type=\"search\"]",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 168,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

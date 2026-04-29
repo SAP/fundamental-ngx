@@ -1,0 +1,74 @@
+{
+  "name": "WizardStep",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "branching",
+      "type": "boolean",
+      "default": null,
+      "description": "When `branching` is enabled a dashed line would be displayed after the step,\nmeant to indicate that the next step is not yet known and depends on user choice in the current step.\n\n*Note:** It is recommended to use `branching` on the last known step\nand later add new steps when it becomes clear how the wizard flow should continue.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 49,
+      "since": null
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines if the step is `disabled`. When disabled the step is displayed,\nbut the user can't select the step by clicking or navigate to it with scrolling.\n\n*Note:** Step can't be `selected` and `disabled` at the same time.\nIn this case the `selected` property would take precedence.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 58,
+      "since": null
+    },
+    {
+      "name": "icon",
+      "type": "string",
+      "default": null,
+      "description": "Defines the `icon` of the step.\n\n*Note:** The icon is displayed in the `ui5-wizard` navigation header.\n\nThe SAP-icons font provides numerous options.\nSee all the available icons in the [Icon Explorer](https://sdk.openui5.org/test-resources/sap/m/demokit/iconExplorer/webapp/index.html).",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 68,
+      "since": null
+    },
+    {
+      "name": "selected",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines the step's `selected` state - the step that is currently active.\n\n*Note:** Step can't be `selected` and `disabled` at the same time.\nIn this case the `selected` property would take precedence.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 76,
+      "since": null
+    },
+    {
+      "name": "subtitleText",
+      "type": "string",
+      "default": null,
+      "description": "Defines the `subtitleText` of the step.\n\n*Note:** the text is displayed in the `ui5-wizard` navigation header.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 83,
+      "since": null
+    },
+    {
+      "name": "titleText",
+      "type": "string",
+      "default": null,
+      "description": "Defines the `titleText` of the step.\n\n*Note:** The text is displayed in the `ui5-wizard` navigation header.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 90,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

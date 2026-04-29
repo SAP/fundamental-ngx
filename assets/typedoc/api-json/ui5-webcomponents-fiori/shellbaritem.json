@@ -1,0 +1,65 @@
+{
+  "name": "ShellBarItem",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "accessibilityAttributes",
+      "type": "ShellBarItemAccessibilityAttributes",
+      "default": null,
+      "description": "Defines additional accessibility attributes on Shellbar Items.\n\nThe accessibility attributes support the following values:\n\n- **expanded**: Indicates whether the button, or another grouping element it controls,\nis currently expanded or collapsed.\nAccepts the following string values: `true` or `false`.\n\n- **hasPopup**: Indicates the availability and type of interactive popup element,\nsuch as menu or dialog, that can be triggered by the button.\n\n- **controls**: Identifies the element (or elements) whose contents\nor presence are controlled by the component.\nAccepts a lowercase string value, referencing the ID of the element it controls.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 58,
+      "since": null
+    },
+    {
+      "name": "count",
+      "type": "string",
+      "default": null,
+      "description": "Defines the count displayed in badge.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 63,
+      "since": null
+    },
+    {
+      "name": "icon",
+      "type": "string",
+      "default": null,
+      "description": "Defines the item's icon.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 68,
+      "since": null
+    },
+    {
+      "name": "text",
+      "type": "string",
+      "default": null,
+      "description": "Defines the item text.\n\n*Note:** The text is only displayed inside the overflow popover list view.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 75,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5Click",
+      "type": "UI5CustomEvent<ShellBarItem, 'click'>",
+      "default": null,
+      "description": "Fired when the item is clicked.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 82,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

@@ -1,0 +1,65 @@
+{
+  "name": "IconTabBarBase",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "icon-tab-bar-base.class.ts",
+  "sourceLine": 34,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/icon-tab-bar/components/icon-tab-bar-base.class.ts#L34",
+  "description": "",
+  "inputs": [
+    {
+      "name": "colorAssociations",
+      "type": "Partial<Record<SemanticColor, string>>",
+      "default": null,
+      "description": "",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 115,
+      "since": null
+    },
+    {
+      "name": "isRtl",
+      "type": "boolean",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 61,
+      "since": null
+    },
+    {
+      "name": "selectedUid",
+      "type": "string",
+      "default": null,
+      "description": "Currently selected tab Unique ID.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 77,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "selected",
+      "type": "IconTabBarItem",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 83,
+      "since": null
+    },
+    {
+      "name": "selectedUidChange",
+      "type": "string",
+      "default": null,
+      "description": "Emits when selected tab Unique ID changes.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 87,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

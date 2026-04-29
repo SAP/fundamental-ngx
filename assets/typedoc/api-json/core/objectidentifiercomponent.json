@@ -1,0 +1,64 @@
+{
+  "name": "ObjectIdentifierComponent",
+  "selector": "fd-object-identifier",
+  "kind": "Component",
+  "sourceFile": "object-identifier.component.ts",
+  "sourceLine": 46,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/object-identifier/object-identifier.component.ts#L46",
+  "description": "",
+  "inputs": [
+    {
+      "name": "ariaLabel",
+      "type": "string",
+      "default": null,
+      "description": "Accessible label for screen readers.\nUsed in the screen-reader-only span element to provide context for assistive technologies.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 63,
+      "since": null
+    },
+    {
+      "name": "bold",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether to apply bold styling to the title.\nWhen true, adds the `fd-object-identifier__title--bold` class to the title element.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 70,
+      "since": null
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "default": null,
+      "description": "Optional description text to display below the title.\nWhen provided, renders as a paragraph with the class `fd-object-identifier__text`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 57,
+      "since": null
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "default": null,
+      "description": "Object Identifier ID\nIf not set, a default value is provided",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 51,
+      "since": null
+    },
+    {
+      "name": "medium",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether to apply medium sizing to the component.\nWhen true, adds the `fd-object-identifier--medium` class to the host element.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 77,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

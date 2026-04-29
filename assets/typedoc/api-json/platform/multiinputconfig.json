@@ -1,0 +1,31 @@
+{
+  "name": "MultiInputConfig",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "multi-input.config.ts",
+  "sourceLine": 10,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/multi-input/multi-input.config.ts#L10",
+  "description": "Default options for Multi-Input",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "createProviderFactory",
+      "signature": "(obj: Partial<MultiInputConfig>) => (platformConfig: PlatformConfig) => MultiInputConfig",
+      "description": "Create Provider factory function",
+      "deprecated": null,
+      "sourceLine": 34,
+      "since": null,
+      "parameters": [
+        {
+          "name": "obj",
+          "type": "Partial<MultiInputConfig>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "(platformConfig: PlatformConfig) => MultiInputConfig"
+    }
+  ],
+  "inherited": null
+}

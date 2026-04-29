@@ -1,0 +1,266 @@
+{
+  "name": "WizardBodyComponent",
+  "selector": "fdp-wizard-body",
+  "kind": "Component",
+  "sourceFile": "wizard-body.component.ts",
+  "sourceLine": 49,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/wizard-generator/components/wizard-body/wizard-body.component.ts#L49",
+  "description": "",
+  "inputs": [
+    {
+      "name": "appendToWizard",
+      "type": "boolean",
+      "default": "true",
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 67,
+      "since": null
+    },
+    {
+      "name": "contentHeight",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 74,
+      "since": null
+    },
+    {
+      "name": "customSummaryStepTemplate",
+      "type": "TemplateRef<HTMLElement>",
+      "default": null,
+      "description": "User-defined template for summary step.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 116,
+      "since": null
+    },
+    {
+      "name": "displaySummaryStep",
+      "type": "boolean",
+      "default": "false",
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 98,
+      "since": null
+    },
+    {
+      "name": "finishButtonTemplate",
+      "type": "TemplateRef<any>",
+      "default": null,
+      "description": "User-defined template for \"Finish\" button.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 110,
+      "since": null
+    },
+    {
+      "name": "goNextButtonTemplate",
+      "type": "TemplateRef<any>",
+      "default": null,
+      "description": "User-defined template for \"Go Next\" button.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 104,
+      "since": null
+    },
+    {
+      "name": "isBranchingStep",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether current step is a branching step.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 138,
+      "since": null
+    },
+    {
+      "name": "isCurrentStepCompleted",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether current step is completed",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 142,
+      "since": null
+    },
+    {
+      "name": "isFirstStep",
+      "type": "boolean",
+      "default": "false",
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 80,
+      "since": null
+    },
+    {
+      "name": "isLastStep",
+      "type": "boolean",
+      "default": "false",
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 86,
+      "since": null
+    },
+    {
+      "name": "isNextStepSummary",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether next step is a Summary step.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 92,
+      "since": null
+    },
+    {
+      "name": "isSummaryStep",
+      "type": "boolean",
+      "default": "false",
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 126,
+      "since": null
+    },
+    {
+      "name": "navigationButtonLabels",
+      "type": "Required<WizardNavigationButtons>",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 60,
+      "since": null
+    },
+    {
+      "name": "navigationButtons",
+      "type": "boolean",
+      "default": "true",
+      "description": "If navigation buttons should be visible.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 130,
+      "since": null
+    },
+    {
+      "name": "responsivePaddings",
+      "type": "boolean",
+      "default": "true",
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 54,
+      "since": null
+    },
+    {
+      "name": "reviewButtonTemplate",
+      "type": "TemplateRef<HTMLElement>",
+      "default": null,
+      "description": "User-defined template for \"Review\" button",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 120,
+      "since": null
+    },
+    {
+      "name": "stepsOrderChanged",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether order of steps was changed",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 146,
+      "since": null
+    },
+    {
+      "name": "unifiedLayout",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether or not all form items should have identical layout provided for form group.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 134,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "finish",
+      "type": "void",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 164,
+      "since": null
+    },
+    {
+      "name": "goNext",
+      "type": "void",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 158,
+      "since": null
+    },
+    {
+      "name": "statusChange",
+      "type": "WizardStepChange",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 152,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "stepClickValidatorFn",
+      "signature": "(index: number) => () => Promise<boolean>",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 211,
+      "since": null,
+      "parameters": [
+        {
+          "name": "index",
+          "type": "number",
+          "description": "Current step index.",
+          "optional": false
+        }
+      ],
+      "returnType": "() => Promise<boolean>"
+    },
+    {
+      "name": "stepStatusChanged",
+      "signature": "(id: string, status: WizardStepStatus) => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 246,
+      "since": null,
+      "parameters": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "step ID.",
+          "optional": false
+        },
+        {
+          "name": "status",
+          "type": "WizardStepStatus",
+          "description": "new step status.",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

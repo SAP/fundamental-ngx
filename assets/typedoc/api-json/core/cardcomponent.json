@@ -1,0 +1,311 @@
+{
+  "name": "CardComponent",
+  "selector": "fd-card",
+  "kind": "Component",
+  "sourceFile": "card.component.ts",
+  "sourceLine": 68,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/card/card.component.ts#L68",
+  "description": "",
+  "inputs": [
+    {
+      "name": "ariaDescribedby",
+      "type": "null | string",
+      "default": null,
+      "description": "Additional IDs to include in aria-describedby attribute\nCan be used to reference additional descriptive content",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 224,
+      "since": null
+    },
+    {
+      "name": "ariaDescription",
+      "type": "null | string",
+      "default": null,
+      "description": "card aria-description\nOverrides the default translated aria description.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 184,
+      "since": null
+    },
+    {
+      "name": "ariaLabel",
+      "type": "null | string",
+      "default": null,
+      "description": "card aria-label\nused when there's no title describing the card",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 190,
+      "since": null
+    },
+    {
+      "name": "ariaPosinset",
+      "type": "null | number",
+      "default": null,
+      "description": "value for aria-posinset",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 213,
+      "since": null
+    },
+    {
+      "name": "ariaRoledescription",
+      "type": "null | string",
+      "default": null,
+      "description": "card aria-roledescription\ndefault: 'Card'",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 178,
+      "since": null
+    },
+    {
+      "name": "ariaSetsize",
+      "type": "null | number",
+      "default": null,
+      "description": "value for aria-setsize",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 218,
+      "since": null
+    },
+    {
+      "name": "badge",
+      "type": "null | string",
+      "default": null,
+      "description": "text for the card badge",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 87,
+      "since": null
+    },
+    {
+      "name": "badgeAriaLabel",
+      "type": "null | string",
+      "default": null,
+      "description": "aria-label for the card badge\nDefault value: null",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 117,
+      "since": null
+    },
+    {
+      "name": "badgeColor",
+      "type": "null | ColorAccent",
+      "default": null,
+      "description": "Indication color for the card badge\nPossible values: integers from 1 to 10",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 98,
+      "since": null
+    },
+    {
+      "name": "badgeColorSecondary",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether to use secondary set of indication colors for the card badge\nDefault value: false",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 104,
+      "since": null
+    },
+    {
+      "name": "badgeIcon",
+      "type": "null | string",
+      "default": null,
+      "description": "icon/glyph for the card badge",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 92,
+      "since": null
+    },
+    {
+      "name": "badgeStatus",
+      "type": "null | ObjectStatus",
+      "default": null,
+      "description": "Color status for the card badge\nPossible values: 'negative' | 'critical' | 'positive' | 'informative' | 'neutral'\nDefault value: null",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 111,
+      "since": null
+    },
+    {
+      "name": "cardType",
+      "type": "CardType",
+      "default": null,
+      "description": "set the Card type\noptions: 'object' | 'standard' | 'component' | 'analytical' | 'list' | 'table' | 'quickView' | 'linkList' | 'banner'\ndefault: 'standard'",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 166,
+      "since": null
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "default": null,
+      "description": "card id\nif not set, a default value is provided",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 172,
+      "since": null
+    },
+    {
+      "name": "interactive",
+      "type": "boolean",
+      "default": null,
+      "description": "whether the card is interactive\ndefault: false",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 202,
+      "since": null
+    },
+    {
+      "name": "isLoading",
+      "type": "boolean",
+      "default": null,
+      "description": "whether the card is in loading state\ndefault: false",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 158,
+      "since": null
+    },
+    {
+      "name": "role",
+      "type": "string",
+      "default": null,
+      "description": "card role\ndefault: 'region'",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 196,
+      "since": null
+    },
+    {
+      "name": "secondBadge",
+      "type": "null | string",
+      "default": null,
+      "description": "text for the card second badge",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 122,
+      "since": null
+    },
+    {
+      "name": "secondBadgeAriaLabel",
+      "type": "null | string",
+      "default": null,
+      "description": "aria-label for the card second badge\nDefault value: null",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 152,
+      "since": null
+    },
+    {
+      "name": "secondBadgeColor",
+      "type": "null | ColorAccent",
+      "default": null,
+      "description": "Indication color for the card second badge\nPossible values: integers from 1 to 10",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 133,
+      "since": null
+    },
+    {
+      "name": "secondBadgeColorSecondary",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether to use secondary set of indication colors for the card second badge\nDefault value: false",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 139,
+      "since": null
+    },
+    {
+      "name": "secondBadgeIcon",
+      "type": "null | string",
+      "default": null,
+      "description": "icon/glyph for the card second badge",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 127,
+      "since": null
+    },
+    {
+      "name": "secondBadgeStatus",
+      "type": "null | ObjectStatus",
+      "default": null,
+      "description": "Color status for the card second badge\nPossible values: 'negative' | 'critical' | 'positive' | 'informative' | 'neutral'\nDefault value: null",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 146,
+      "since": null
+    },
+    {
+      "name": "selected",
+      "type": "boolean",
+      "default": null,
+      "description": "whether the card is selected\ndefault: false",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 208,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ariaPosinsetChange",
+      "type": "EventEmitter<null | number>",
+      "default": null,
+      "description": "value for aria-posinset",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 213,
+      "since": null
+    },
+    {
+      "name": "ariaSetsizeChange",
+      "type": "EventEmitter<null | number>",
+      "default": null,
+      "description": "value for aria-setsize",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 218,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": {
+    "from": "CardFocusItem",
+    "inputs": [
+      {
+        "name": "tabindex",
+        "type": "number",
+        "default": null,
+        "description": "Tab index attribute",
+        "isSignal": true,
+        "deprecated": null,
+        "sourceLine": 15,
+        "since": null
+      },
+      {
+        "name": "value",
+        "type": "T",
+        "default": null,
+        "description": "Value of the list item.",
+        "isSignal": true,
+        "deprecated": null,
+        "sourceLine": 26,
+        "since": null
+      }
+    ],
+    "methods": [
+      {
+        "name": "getTabIndex",
+        "signature": "() => number",
+        "description": "Get the current tab index.\nReturns the internal tab index which may have been modified programmatically.\nThis getter is a replacement for directly binding to the `tabindex` input, which may not reflect the actual tab index if it was left unset and defaulted to 0 for the first item.",
+        "deprecated": null,
+        "sourceLine": 63,
+        "since": null,
+        "parameters": [],
+        "returnType": "number"
+      }
+    ]
+  }
+}

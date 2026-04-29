@@ -1,0 +1,31 @@
+{
+  "name": "WizardDialogGeneratorService",
+  "selector": null,
+  "kind": "Service",
+  "sourceFile": "wizard-dialog-generator.service.ts",
+  "sourceLine": 12,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/wizard-generator/wizard-dialog-generator.service.ts#L12",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "open",
+      "signature": "(config: DialogConfig<WizardDialogData>) => DialogRef<WizardDialogData, WizardGeneratorFormsValue>",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 21,
+      "since": null,
+      "parameters": [
+        {
+          "name": "config",
+          "type": "DialogConfig<WizardDialogData>",
+          "description": "Dialog options with wizard config.",
+          "optional": false
+        }
+      ],
+      "returnType": "DialogRef<WizardDialogData, WizardGeneratorFormsValue>"
+    }
+  ],
+  "inherited": null
+}

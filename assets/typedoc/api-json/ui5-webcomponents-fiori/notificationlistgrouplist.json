@@ -1,0 +1,265 @@
+{
+  "name": "NotificationListGroupList",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 45,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "accessibilityAttributes",
+      "type": "ListAccessibilityAttributes",
+      "default": null,
+      "description": "Defines additional accessibility attributes on different areas of the component.\n\nThe accessibilityAttributes object has the following field:\n\n- **growingButton**: `growingButton.name`, `growingButton.description`.\n\nThe accessibility attributes support the following values:\n\n- **name**: Defines the accessible ARIA name of the growing button.\nAccepts any string.\n\n- **description**: Defines the accessible ARIA description of the growing button.\nAccepts any string.\n\n*Note:** The `accessibilityAttributes` property is in an experimental state and is a subject to change.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 64,
+      "since": null
+    },
+    {
+      "name": "accessibleDescription",
+      "type": "string",
+      "default": null,
+      "description": "Defines the accessible description of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 69,
+      "since": null
+    },
+    {
+      "name": "accessibleDescriptionRef",
+      "type": "string",
+      "default": null,
+      "description": "Defines the IDs of the elements that describe the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 74,
+      "since": null
+    },
+    {
+      "name": "accessibleName",
+      "type": "string",
+      "default": null,
+      "description": "Defines the accessible name of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 79,
+      "since": null
+    },
+    {
+      "name": "accessibleNameRef",
+      "type": "string",
+      "default": null,
+      "description": "Defines the IDs of the elements that label the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 84,
+      "since": null
+    },
+    {
+      "name": "accessibleRole",
+      "type": "'List' | 'Menu' | 'Tree' | 'ListBox'",
+      "default": null,
+      "description": "Defines the accessible role of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 89,
+      "since": null
+    },
+    {
+      "name": "footerText",
+      "type": "string",
+      "default": null,
+      "description": "Defines the footer text.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 94,
+      "since": null
+    },
+    {
+      "name": "growing",
+      "type": "'Scroll' | 'None' | 'Button'",
+      "default": null,
+      "description": "Defines whether the component will have growing capability either by pressing a `More` button,\nor via user scroll. In both cases `load-more` event is fired.\n\n*Restrictions:** `growing=\"Scroll\"` is not supported for Internet Explorer,\non IE the component will fallback to `growing=\"Button\"`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 103,
+      "since": null
+    },
+    {
+      "name": "growingButtonText",
+      "type": "string",
+      "default": null,
+      "description": "Defines the text that will be displayed inside the growing button.\n\n*Note:** If not specified a built-in text will be displayed.\n\n*Note:** This property takes effect if the `growing` property is set to the `Button`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 112,
+      "since": null
+    },
+    {
+      "name": "headerText",
+      "type": "string",
+      "default": null,
+      "description": "Defines the component header text.\n\n*Note:** If `header` is set this property is ignored.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 119,
+      "since": null
+    },
+    {
+      "name": "indent",
+      "type": "boolean",
+      "default": null,
+      "description": "Determines whether the component is indented.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 124,
+      "since": null
+    },
+    {
+      "name": "loading",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines if the component would display a loading indicator over the list.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 129,
+      "since": null
+    },
+    {
+      "name": "loadingDelay",
+      "type": "number",
+      "default": null,
+      "description": "Defines the delay in milliseconds, after which the loading indicator will show up for this component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 134,
+      "since": null
+    },
+    {
+      "name": "noDataText",
+      "type": "string",
+      "default": null,
+      "description": "Defines the text that is displayed when the component contains no items.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 139,
+      "since": null
+    },
+    {
+      "name": "selectionMode",
+      "type": "'Delete' | 'None' | 'Single' | 'SingleStart' | 'SingleEnd' | 'SingleAuto' | 'Multiple'",
+      "default": null,
+      "description": "Defines the selection mode of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 144,
+      "since": null
+    },
+    {
+      "name": "separators",
+      "type": "'None' | 'All' | 'Inner'",
+      "default": null,
+      "description": "Defines the item separator style that is used.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 149,
+      "since": null
+    },
+    {
+      "name": "stickyHeader",
+      "type": "boolean",
+      "default": null,
+      "description": "Indicates whether the List header is sticky or not.\nIf stickyHeader is set to true, then whenever you scroll the content or\nthe application, the header of the list will be always visible.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 156,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5ItemClick",
+      "type": "UI5CustomEvent<NotificationListGroupList, 'item-click'>",
+      "default": null,
+      "description": "Fired when an item is activated, unless the item's `type` property\nis set to `Inactive`.\n\n*Note**: This event is not triggered by interactions with selection components such as the checkboxes and radio buttons,\nassociated with non-default `selectionMode` values, or if any other **interactive** component\n(such as a button or input) within the list item is directly clicked.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 175,
+      "since": null
+    },
+    {
+      "name": "ui5ItemClose",
+      "type": "UI5CustomEvent<NotificationListGroupList, 'item-close'>",
+      "default": null,
+      "description": "Fired when the `Close` button of any item is clicked\n\n*Note:** This event is only applicable to list items that can be closed (such as notification list items),\nnot to be confused with `item-delete`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 183,
+      "since": null
+    },
+    {
+      "name": "ui5ItemDelete",
+      "type": "UI5CustomEvent<NotificationListGroupList, 'item-delete'>",
+      "default": null,
+      "description": "Fired when the Delete button of any item is pressed.\n\n*Note:** A Delete button is displayed on each item,\nwhen the component `selectionMode` property is set to `Delete`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 191,
+      "since": null
+    },
+    {
+      "name": "ui5ItemToggle",
+      "type": "UI5CustomEvent<NotificationListGroupList, 'item-toggle'>",
+      "default": null,
+      "description": "Fired when the `Toggle` button of any item is clicked.\n\n*Note:** This event is only applicable to list items that can be toggled (such as notification group list items).",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 198,
+      "since": null
+    },
+    {
+      "name": "ui5LoadMore",
+      "type": "UI5CustomEvent<NotificationListGroupList, 'load-more'>",
+      "default": null,
+      "description": "Fired when the user scrolls to the bottom of the list.\n\n*Note:** The event is fired when the `growing='Scroll'` property is enabled.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 205,
+      "since": null
+    },
+    {
+      "name": "ui5Move",
+      "type": "UI5CustomEvent<NotificationListGroupList, 'move'>",
+      "default": null,
+      "description": "Fired when a movable list item is dropped onto a drop target.\n\n*Note:** `move` event is fired only if there was a preceding `move-over` with prevented default action.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 212,
+      "since": null
+    },
+    {
+      "name": "ui5MoveOver",
+      "type": "UI5CustomEvent<NotificationListGroupList, 'move-over'>",
+      "default": null,
+      "description": "Fired when a movable list item is moved over a potential drop target during a dragging operation.\n\nIf the new position is valid, prevent the default action of the event using `preventDefault()`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 219,
+      "since": null
+    },
+    {
+      "name": "ui5SelectionChange",
+      "type": "UI5CustomEvent<NotificationListGroupList, 'selection-change'>",
+      "default": null,
+      "description": "Fired when selection is changed by user interaction\nin `Single`, `SingleStart`, `SingleEnd` and `Multiple` selection modes.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 225,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

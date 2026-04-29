@@ -1,0 +1,13 @@
+{
+  "name": "NotificationActionsComponent",
+  "selector": "fd-notification-actions",
+  "kind": "Component",
+  "sourceFile": "notification-actions.component.ts",
+  "sourceLine": 14,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/notification/notification-actions/notification-actions.component.ts#L14",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

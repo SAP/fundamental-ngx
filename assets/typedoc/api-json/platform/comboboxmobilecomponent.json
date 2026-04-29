@@ -1,0 +1,13 @@
+{
+  "name": "ComboboxMobileComponent",
+  "selector": "fdp-combobox-mobile",
+  "kind": "Component",
+  "sourceFile": "combobox-mobile.component.ts",
+  "sourceLine": 37,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/combobox/combobox-mobile/combobox/combobox-mobile.component.ts#L37",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

@@ -1,0 +1,85 @@
+{
+  "name": "TextComponent",
+  "selector": "fd-text",
+  "kind": "Component",
+  "sourceFile": "text.component.ts",
+  "sourceLine": 35,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/text/text.component.ts#L35",
+  "description": "Text component for displaying text content with optional line clamping, hyphenation, and expand/collapse functionality.",
+  "inputs": [
+    {
+      "name": "expandable",
+      "type": "boolean",
+      "default": null,
+      "description": "Displays \"more\"/\"less\" links to expand/collapse text. Requires `maxLines` to be set.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 64,
+      "since": null
+    },
+    {
+      "name": "hyphenation",
+      "type": "HyphenationType",
+      "default": null,
+      "description": "Controls hyphenation behavior using CSS `hyphens` property.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 58,
+      "since": null
+    },
+    {
+      "name": "isCollapsed",
+      "type": "boolean",
+      "default": null,
+      "description": "Controls collapsed/expanded state. Two-way bindable via `[(isCollapsed)]`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 70,
+      "since": null
+    },
+    {
+      "name": "maxLines",
+      "type": "null | number",
+      "default": null,
+      "description": "Maximum number of visible lines before text is clamped. Set to `null` to disable.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 46,
+      "since": null
+    },
+    {
+      "name": "text",
+      "type": "string",
+      "default": null,
+      "description": "The text content to render.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 40,
+      "since": null
+    },
+    {
+      "name": "whitespaces",
+      "type": "boolean",
+      "default": null,
+      "description": "Preserves whitespace and line breaks using CSS `white-space: pre-wrap`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 52,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "isCollapsedChange",
+      "type": "EventEmitter<boolean>",
+      "default": null,
+      "description": "Controls collapsed/expanded state. Two-way bindable via `[(isCollapsed)]`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 70,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

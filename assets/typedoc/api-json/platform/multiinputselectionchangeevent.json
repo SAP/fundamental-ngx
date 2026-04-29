@@ -1,0 +1,13 @@
+{
+  "name": "MultiInputSelectionChangeEvent",
+  "selector": "fdp-multi-input",
+  "kind": "Class",
+  "sourceFile": "multi-input.component.ts",
+  "sourceLine": 63,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/multi-input/multi-input.component.ts#L63",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

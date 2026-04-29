@@ -1,0 +1,79 @@
+{
+  "name": "FormFieldErrorDirective",
+  "selector": "[fdpFormFieldError]",
+  "kind": "Directive",
+  "sourceFile": "form-field-error.directive.ts",
+  "sourceLine": 22,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/form-group/form-field-error/form-field-error.directive.ts#L22",
+  "description": "",
+  "inputs": [
+    {
+      "name": "error",
+      "type": "string",
+      "default": null,
+      "description": "Error name",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 29,
+      "since": null
+    },
+    {
+      "name": "fdpFormFieldErrorAs",
+      "type": "T",
+      "default": null,
+      "description": "Used to connect data with model for typings support.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 25,
+      "since": null
+    },
+    {
+      "name": "fdpFormFieldErrorType",
+      "type": "'error' | 'default' | 'information' | 'success' | 'warning'",
+      "default": "'error'",
+      "description": "Error type",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 33,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "registerDescription",
+      "signature": "(directive: FormErrorDescription<any>) => void",
+      "description": "Registers child description directive.",
+      "deprecated": null,
+      "sourceLine": 90,
+      "since": null,
+      "parameters": [
+        {
+          "name": "directive",
+          "type": "FormErrorDescription<any>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "registerHeading",
+      "signature": "(directive: FormErrorHeading<any>) => void",
+      "description": "Registers child heading directive.",
+      "deprecated": null,
+      "sourceLine": 84,
+      "since": null,
+      "parameters": [
+        {
+          "name": "directive",
+          "type": "FormErrorHeading<any>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

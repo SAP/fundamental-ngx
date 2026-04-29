@@ -1,0 +1,195 @@
+{
+  "name": "Dialog",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 41,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "accessibleDescription",
+      "type": "string",
+      "default": null,
+      "description": "Defines the accessible description of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 46,
+      "since": null
+    },
+    {
+      "name": "accessibleDescriptionRef",
+      "type": "string",
+      "default": null,
+      "description": "Receives id(or many ids) of the elements that describe the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 51,
+      "since": null
+    },
+    {
+      "name": "accessibleName",
+      "type": "string",
+      "default": null,
+      "description": "Defines the accessible name of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 56,
+      "since": null
+    },
+    {
+      "name": "accessibleNameRef",
+      "type": "string",
+      "default": null,
+      "description": "Defines the IDs of the elements that label the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 61,
+      "since": null
+    },
+    {
+      "name": "accessibleRole",
+      "type": "'None' | 'Dialog' | 'AlertDialog'",
+      "default": null,
+      "description": "Allows setting a custom role.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 66,
+      "since": null
+    },
+    {
+      "name": "draggable",
+      "type": "boolean",
+      "default": null,
+      "description": "Determines whether the component is draggable.\nIf this property is set to true, the Dialog will be draggable by its header.\n\n*Note:** The component can be draggable only in desktop mode.\n\n*Note:** This property overrides the default HTML \"draggable\" attribute native behavior.\nWhen \"draggable\" is set to true, the native browser \"draggable\"\nbehavior is prevented and only the Dialog custom logic (\"draggable by its header\") works.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 78,
+      "since": null
+    },
+    {
+      "name": "headerText",
+      "type": "string",
+      "default": null,
+      "description": "Defines the header text.\n\n*Note:** If `header` slot is provided, the `headerText` is ignored.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 85,
+      "since": null
+    },
+    {
+      "name": "initialFocus",
+      "type": "string",
+      "default": null,
+      "description": "Defines the ID of the HTML Element, which will get the initial focus.\n\n*Note:** If an element with `autofocus` attribute is added inside the component,\n`initialFocus` won't take effect.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 93,
+      "since": null
+    },
+    {
+      "name": "open",
+      "type": "boolean",
+      "default": null,
+      "description": "Indicates if the element is open",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 98,
+      "since": null
+    },
+    {
+      "name": "preventFocusRestore",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines if the focus should be returned to the previously focused element,\nwhen the popup closes.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 104,
+      "since": null
+    },
+    {
+      "name": "preventInitialFocus",
+      "type": "boolean",
+      "default": null,
+      "description": "Indicates whether initial focus should be prevented.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 109,
+      "since": null
+    },
+    {
+      "name": "resizable",
+      "type": "boolean",
+      "default": null,
+      "description": "Configures the component to be resizable.\nIf this property is set to true, the Dialog will have a resize handle in its bottom right corner in LTR languages.\nIn RTL languages, the resize handle will be placed in the bottom left corner.\n\n*Note:** The component can be resizable only in desktop mode.\n\n*Note:** Upon resizing, externally defined height and width styling will be ignored.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 120,
+      "since": null
+    },
+    {
+      "name": "state",
+      "type": "'None' | 'Positive' | 'Critical' | 'Negative' | 'Information'",
+      "default": null,
+      "description": "Defines the state of the `Dialog`.\n\n*Note:** If `\"Negative\"` and `\"Critical\"` states is set, it will change the\naccessibility role to \"alertdialog\", if the accessibleRole property is set to `\"Dialog\"`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 128,
+      "since": null
+    },
+    {
+      "name": "stretch",
+      "type": "boolean",
+      "default": null,
+      "description": "Determines if the dialog will be stretched to full screen on mobile. On desktop,\nthe dialog will be stretched to approximately 90% of the viewport.\n\n*Note:** For better usability of the component it is recommended to set this property to \"true\" when the dialog is opened on phone.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 136,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5BeforeClose",
+      "type": "UI5CustomEvent<Dialog, 'before-close'>",
+      "default": null,
+      "description": "Fired before the component is closed. This event can be cancelled, which will prevent the popup from closing.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 143,
+      "since": null
+    },
+    {
+      "name": "ui5BeforeOpen",
+      "type": "UI5CustomEvent<Dialog, 'before-open'>",
+      "default": null,
+      "description": "Fired before the component is opened. This event can be cancelled, which will prevent the popup from opening.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 148,
+      "since": null
+    },
+    {
+      "name": "ui5Close",
+      "type": "UI5CustomEvent<Dialog, 'close'>",
+      "default": null,
+      "description": "Fired after the component is closed.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 153,
+      "since": null
+    },
+    {
+      "name": "ui5Open",
+      "type": "UI5CustomEvent<Dialog, 'open'>",
+      "default": null,
+      "description": "Fired after the component is opened.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 158,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

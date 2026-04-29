@@ -1,0 +1,44 @@
+{
+  "name": "ApprovalFlowUserDetailsComponent",
+  "selector": "fdp-approval-flow-user-details",
+  "kind": "Component",
+  "sourceFile": "approval-flow-user-details.component.ts",
+  "sourceLine": 24,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/approval-flow/approval-flow-user-details/approval-flow-user-details.component.ts#L24",
+  "description": "",
+  "inputs": [
+    {
+      "name": "details",
+      "type": "Nullable<Observable<any>>",
+      "default": null,
+      "description": "Approval Flow user details",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 31,
+      "since": null
+    },
+    {
+      "name": "detailsTemplate",
+      "type": "TemplateRef<any>",
+      "default": null,
+      "description": "Approval Flow user details template",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 35,
+      "since": null
+    },
+    {
+      "name": "user",
+      "type": "ApprovalUser",
+      "default": null,
+      "description": "Approval Flow user",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 27,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

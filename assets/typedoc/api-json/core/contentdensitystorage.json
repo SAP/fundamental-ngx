@@ -1,0 +1,31 @@
+{
+  "name": "ContentDensityStorage",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "abstract-content-density-storage.ts",
+  "sourceLine": 16,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/content-density/classes/abstract-content-density-storage.ts#L16",
+  "description": "Abstract class for content density storage implementations.\nThe default implementation is MemoryContentDensityStorage.\n\nProvides a signal-based API for reactive content density tracking.",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "setContentDensity",
+      "signature": "(density: ContentDensityMode) => void",
+      "description": "Updates the content density.",
+      "deprecated": null,
+      "sourceLine": 27,
+      "since": null,
+      "parameters": [
+        {
+          "name": "density",
+          "type": "ContentDensityMode",
+          "description": "The new content density mode",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

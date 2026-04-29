@@ -1,0 +1,93 @@
+{
+  "name": "PanelComponent",
+  "selector": "fdp-panel",
+  "kind": "Component",
+  "sourceFile": "panel.component.ts",
+  "sourceLine": 73,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/panel/panel.component.ts#L73",
+  "description": "Fundamental Panel component\n\n```html\n<fdp-panel title=\"Panel Header\">\n    <fdp-panel-content>\n       Panel Content\n    </fdp-panel-content>\n</fdp-panel>\n```",
+  "inputs": [
+    {
+      "name": "collapseLabel",
+      "type": "string",
+      "default": null,
+      "description": "ARIA label for button when the Panel is expanded",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 102,
+      "since": null
+    },
+    {
+      "name": "expandLabel",
+      "type": "string",
+      "default": null,
+      "description": "ARIA label for button when the Panel is collapsed",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 96,
+      "since": null
+    },
+    {
+      "name": "expandable",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether the Panel is expandable",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 90,
+      "since": null
+    },
+    {
+      "name": "expanded",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether the Panel Content is expanded",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 84,
+      "since": null
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "default": null,
+      "description": "sets Panel title.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 78,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "panelExpandChange",
+      "type": "PanelExpandChangeEvent",
+      "default": null,
+      "description": "Output event triggered when the Expand button is clicked",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 106,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "onExpandedChange",
+      "signature": "(expanded: boolean) => void",
+      "description": "Handles expanded/collapsed event",
+      "deprecated": null,
+      "sourceLine": 148,
+      "since": null,
+      "parameters": [
+        {
+          "name": "expanded",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

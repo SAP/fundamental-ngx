@@ -1,0 +1,246 @@
+{
+  "name": "PlatformMultiInputComponent",
+  "selector": "fdp-multi-input",
+  "kind": "Component",
+  "sourceFile": "multi-input.component.ts",
+  "sourceLine": 109,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/multi-input/multi-input.component.ts#L109",
+  "description": "Defines specific behavior for Input controls which deals with list of values including:\n - Select\n - RadioGroup\n - CheckboxGroup\n - ComboBox\n ...",
+  "inputs": [
+    {
+      "name": "addOnButtonClickFn",
+      "type": "() => void",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 201,
+      "since": null
+    },
+    {
+      "name": "addonIconTitle",
+      "type": "string",
+      "default": null,
+      "description": "Title text for the add-on icon button.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 131,
+      "since": null
+    },
+    {
+      "name": "autofocus",
+      "type": "boolean",
+      "default": "false",
+      "description": "boolean type represents the focus set for the respective multi input",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 123,
+      "since": null
+    },
+    {
+      "name": "closeOnOutsideClick",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether the combobox should close, when a click is performed outside its boundaries. True by default",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 197,
+      "since": null
+    },
+    {
+      "name": "fillControlMode",
+      "type": "PopoverFillMode",
+      "default": "'at-least'",
+      "description": "Preset options for the Select body width, whatever is chosen, the body has a 600px limit.\n`at-least` will apply a minimum width to the body equivalent to the width of the control. - Default\n`equal` will apply a width to the body equivalent to the width of the control.\n'fit-content' will apply width needed to properly display items inside, independent of control.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 186,
+      "since": null
+    },
+    {
+      "name": "glyphAriaLabel",
+      "type": "string",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 127,
+      "since": null
+    },
+    {
+      "name": "hasByLine",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the list in byline mode.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 157,
+      "since": null
+    },
+    {
+      "name": "selectionMode",
+      "type": "SelectionType",
+      "default": "'none'",
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 153,
+      "since": null
+    },
+    {
+      "name": "tokenHiddenId",
+      "type": "string",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": "Now handled internally by tokenizer.",
+      "sourceLine": 115,
+      "since": null
+    },
+    {
+      "name": "triggers",
+      "type": "string[]",
+      "default": "[]",
+      "description": "The trigger events that will open/close the options popover.\nAccepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp).",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 193,
+      "since": null
+    },
+    {
+      "name": "type",
+      "type": "InputType",
+      "default": null,
+      "description": "type Represent the type of input used for the multi Input",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 119,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "selectionChange",
+      "type": "MultiInputSelectionChangeEvent",
+      "default": null,
+      "description": "Event emitted when item is selected.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 205,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "displayFn",
+      "signature": "(str: string) => string",
+      "description": "Display function. Accepts an object of the same type as the\nitems passed to dropdownValues as argument, and outputs a string.\nAn arrow function can be used to access the *this* keyword in the calling component.\nSee multi input examples for details.",
+      "deprecated": null,
+      "sourceLine": 243,
+      "since": null,
+      "parameters": [
+        {
+          "name": "str",
+          "type": "string",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "string"
+    }
+  ],
+  "inherited": {
+    "from": "BaseMultiInput",
+    "inputs": [],
+    "methods": [
+      {
+        "name": "_onFocusChanged",
+        "signature": "(isFocused: boolean) => void",
+        "description": "Keeps track of element focus",
+        "deprecated": null,
+        "sourceLine": 389,
+        "since": null,
+        "parameters": [
+          {
+            "name": "isFocused",
+            "type": "boolean",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "close",
+        "signature": "() => void",
+        "description": "Closes the select popover body.",
+        "deprecated": null,
+        "sourceLine": 362,
+        "since": null,
+        "parameters": [],
+        "returnType": "void"
+      },
+      {
+        "name": "focus",
+        "signature": "(event?: MouseEvent) => void",
+        "description": "In most of the cases when working with input element directly you should be just find to assing\nvariable to this element\n\n```\n<input #inputElementRef fd-form-control ...>\n```\n\nand this default behavior used. For other cases implement focus.",
+        "deprecated": null,
+        "sourceLine": 419,
+        "since": null,
+        "parameters": [
+          {
+            "name": "event",
+            "type": "MouseEvent",
+            "description": "",
+            "optional": true
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "handleListFocusEscape",
+        "signature": "(direction: FocusEscapeDirection) => void",
+        "description": "Method passed to list component",
+        "deprecated": null,
+        "sourceLine": 457,
+        "since": null,
+        "parameters": [
+          {
+            "name": "direction",
+            "type": "FocusEscapeDirection",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "onContainerClick",
+        "signature": "(event: MouseEvent) => void",
+        "description": "Handles even when we click on parent container which is the FormField Wrapping this\ncontrol",
+        "deprecated": null,
+        "sourceLine": 404,
+        "since": null,
+        "parameters": [
+          {
+            "name": "event",
+            "type": "MouseEvent",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "open",
+        "signature": "() => void",
+        "description": "Opens the select popover body.",
+        "deprecated": null,
+        "sourceLine": 349,
+        "since": null,
+        "parameters": [],
+        "returnType": "void"
+      }
+    ]
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "name": "TableVirtualScroll",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "directives.ts",
+  "sourceLine": 38,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/table-helpers/models/directives.ts#L38",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "calculateVirtualScrollRows",
+      "signature": "() => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 47,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "listenOnVirtualScroll",
+      "signature": "() => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 46,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "setTable",
+      "signature": "(table: Table<any>) => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 45,
+      "since": null,
+      "parameters": [
+        {
+          "name": "table",
+          "type": "Table<any>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

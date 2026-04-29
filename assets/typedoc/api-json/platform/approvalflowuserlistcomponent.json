@@ -1,0 +1,65 @@
+{
+  "name": "ApprovalFlowUserListComponent",
+  "selector": "fdp-approval-flow-user-list",
+  "kind": "Component",
+  "sourceFile": "approval-flow-user-list.component.ts",
+  "sourceLine": 50,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/approval-flow/approval-flow-user-list/approval-flow-user-list.component.ts#L50",
+  "description": "",
+  "inputs": [
+    {
+      "name": "isSelectable",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether the list is selectable",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 61,
+      "since": null
+    },
+    {
+      "name": "selectedUsers",
+      "type": "ApprovalUser[]",
+      "default": "[]",
+      "description": "Approval flow selected users",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 57,
+      "since": null
+    },
+    {
+      "name": "users",
+      "type": "ApprovalUser[]",
+      "default": "[]",
+      "description": "Approval flow users",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 53,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "onSelectionChange",
+      "type": "ApprovalUser[]",
+      "default": null,
+      "description": "Event emitted on selection change",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 71,
+      "since": null
+    },
+    {
+      "name": "onUserClick",
+      "type": "ApprovalUser",
+      "default": null,
+      "description": "Event emitted on user click",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 66,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

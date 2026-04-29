@@ -1,0 +1,24 @@
+{
+  "name": "UserMenuItemGroup",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "checkMode",
+      "type": "'None' | 'Single' | 'Multiple'",
+      "default": null,
+      "description": "Defines the component's check mode.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 45,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

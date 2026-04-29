@@ -1,0 +1,89 @@
+{
+  "name": "AutoCompleteDirective",
+  "selector": "[fdkAutoComplete]",
+  "kind": "Directive",
+  "sourceFile": "auto-complete.directive.ts",
+  "sourceLine": 16,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cdk/utils/directives/auto-complete/auto-complete.directive.ts#L16",
+  "description": "",
+  "inputs": [
+    {
+      "name": "displayFn",
+      "type": "(value: any) => string",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 37,
+      "since": null
+    },
+    {
+      "name": "enable",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether the auto complete directive should be enabled",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 30,
+      "since": null
+    },
+    {
+      "name": "inputText",
+      "type": "string",
+      "default": null,
+      "description": "Input text, that is taken from ngModel of formControl,\nthere has to be difference between native input value and model value",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 26,
+      "since": null
+    },
+    {
+      "name": "options",
+      "type": "any[]",
+      "default": null,
+      "description": "Values that will fill missing text in the input.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 19,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "onComplete",
+      "type": "AutoCompleteEvent",
+      "default": null,
+      "description": "Event thrown, when the auto ahead text is accepted",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 42,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "matcher",
+      "signature": "(str: string, searchTerm: string) => boolean",
+      "description": "Matcher function for testing the str for a search term",
+      "deprecated": null,
+      "sourceLine": 94,
+      "since": null,
+      "parameters": [
+        {
+          "name": "str",
+          "type": "string",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "searchTerm",
+          "type": "string",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "boolean"
+    }
+  ],
+  "inherited": null
+}

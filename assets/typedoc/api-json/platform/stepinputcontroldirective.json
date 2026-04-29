@@ -1,0 +1,13 @@
+{
+  "name": "StepInputControlDirective",
+  "selector": "[fdpStepInputControl]",
+  "kind": "Directive",
+  "sourceFile": "step-input-control.directive.ts",
+  "sourceLine": 14,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/step-input/step-input-control.directive.ts#L14",
+  "description": "This directive is intendant to be a bridge between input control and BaseStepInput Component.",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

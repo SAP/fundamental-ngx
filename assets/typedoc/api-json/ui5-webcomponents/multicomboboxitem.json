@@ -1,0 +1,54 @@
+{
+  "name": "MultiComboBoxItem",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "additionalText",
+      "type": "string",
+      "default": null,
+      "description": "Defines the additional text of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 45,
+      "since": null
+    },
+    {
+      "name": "selected",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines the selected state of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 50,
+      "since": null
+    },
+    {
+      "name": "text",
+      "type": "string",
+      "default": null,
+      "description": "Defines the text of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 55,
+      "since": null
+    },
+    {
+      "name": "value",
+      "type": "string",
+      "default": null,
+      "description": "Defines the value of the component.\n\nUse this property to associate a unique identifier with the item,\nseparate from the display text. This enables selecting items\nprogrammatically via `selectedValues` on the parent MultiComboBox.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 64,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

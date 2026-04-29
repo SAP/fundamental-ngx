@@ -1,0 +1,13 @@
+{
+  "name": "ListGroupHeaderDirective",
+  "selector": "[fdListGroupHeader], [fd-list-group-header]",
+  "kind": "Directive",
+  "sourceFile": "list-group-header.directive.ts",
+  "sourceLine": 14,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/list/directives/list-group-header.directive.ts#L14",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

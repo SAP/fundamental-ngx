@@ -1,0 +1,44 @@
+{
+  "name": "TabIconComponent",
+  "selector": "[fdTabTitleTemplate], [fd-tab-title-template]",
+  "kind": "Component",
+  "sourceFile": "tab-directives.ts",
+  "sourceLine": 62,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/tabs/tab-utils/tab-directives.ts#L62",
+  "description": "Directive for icon element, available in most of the modes on `tab` component",
+  "inputs": [
+    {
+      "name": "class",
+      "type": "string",
+      "default": null,
+      "description": "Apply user custom styles",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 65,
+      "since": null
+    },
+    {
+      "name": "icon",
+      "type": "string",
+      "default": null,
+      "description": "The icon to include inside the element\nSee the icon page for the list of icons.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 72,
+      "since": null
+    },
+    {
+      "name": "iconFont",
+      "type": "IconFont",
+      "default": "FD_DEFAULT_ICON_FONT_FAMILY",
+      "description": "Icon font family",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 76,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

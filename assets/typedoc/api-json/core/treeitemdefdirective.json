@@ -1,0 +1,13 @@
+{
+  "name": "TreeItemDefDirective",
+  "selector": "[fdTreeItemDef]",
+  "kind": "Directive",
+  "sourceFile": "tree-item-def.directive.ts",
+  "sourceLine": 9,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/tree/directives/tree-item-def.directive.ts#L9",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

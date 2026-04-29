@@ -1,0 +1,48 @@
+{
+  "name": "PlatformFormFieldControl",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "form-field.ts",
+  "sourceLine": 120,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/shared/form/form-field.ts#L120",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "focus",
+      "signature": "(event?: MouseEvent) => void",
+      "description": "Method for focusing on the element",
+      "deprecated": null,
+      "sourceLine": 131,
+      "since": null,
+      "parameters": [
+        {
+          "name": "event",
+          "type": "MouseEvent",
+          "description": "",
+          "optional": true
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onContainerClick",
+      "signature": "(event: MouseEvent) => void",
+      "description": "Handles even when we click on parent container which is the FormField Wrapping this\ncontrol",
+      "deprecated": null,
+      "sourceLine": 137,
+      "since": null,
+      "parameters": [
+        {
+          "name": "event",
+          "type": "MouseEvent",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

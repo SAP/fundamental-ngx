@@ -1,0 +1,55 @@
+{
+  "name": "ShellBarBranding",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "accessibleName",
+      "type": "string",
+      "default": null,
+      "description": "Defines the text alternative of the component.\nIf not provided a default text alternative will be set, if present.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 46,
+      "since": null
+    },
+    {
+      "name": "href",
+      "type": "string",
+      "default": null,
+      "description": "Defines the component href.\n\n*Note:** Standard hyperlink behavior is supported.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 53,
+      "since": null
+    },
+    {
+      "name": "target",
+      "type": "string",
+      "default": null,
+      "description": "Defines the component target.\n\n*Notes:**\n\n- `_self`\n- `_top`\n- `_blank`\n- `_parent`\n- `_search`\n\n*This property must only be used when the `href` property is set.**",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 68,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5Click",
+      "type": "UI5CustomEvent<ShellBarBranding, 'click'>",
+      "default": null,
+      "description": "Fired, when the logo is activated.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 75,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

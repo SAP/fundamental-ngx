@@ -1,0 +1,125 @@
+{
+  "name": "ComboboxComponent",
+  "selector": "fdp-combobox",
+  "kind": "Component",
+  "sourceFile": "combobox.component.ts",
+  "sourceLine": 78,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/combobox/combobox/combobox.component.ts#L78",
+  "description": "Combobox Interface to have typing and avoid circular dependency between\nComboboxComponent <==> ComboboxMobileComponent",
+  "inputs": [],
+  "outputs": [
+    {
+      "name": "selectionChange",
+      "type": "ComboboxSelectionChangeEvent",
+      "default": null,
+      "description": "Event emitted when item is selected.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 81,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "dialogApprove",
+      "signature": "() => void",
+      "description": "Handle dialog approval, closes popover and propagates data changes.",
+      "deprecated": null,
+      "sourceLine": 219,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "dialogDismiss",
+      "signature": "(term: string) => void",
+      "description": "Handle dialog dismissing, closes popover and sets backup data.",
+      "deprecated": null,
+      "sourceLine": 209,
+      "since": null,
+      "parameters": [
+        {
+          "name": "term",
+          "type": "string",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": {
+    "from": "BaseCombobox",
+    "inputs": [],
+    "methods": [
+      {
+        "name": "_onFocusChanged",
+        "signature": "(isFocused: boolean) => void",
+        "description": "Keeps track of element focus",
+        "deprecated": null,
+        "sourceLine": 389,
+        "since": null,
+        "parameters": [
+          {
+            "name": "isFocused",
+            "type": "boolean",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "focus",
+        "signature": "(event?: MouseEvent) => void",
+        "description": "In most of the cases when working with input element directly you should be just find to assing\nvariable to this element\n\n```\n<input #inputElementRef fd-form-control ...>\n```\n\nand this default behavior used. For other cases implement focus.",
+        "deprecated": null,
+        "sourceLine": 419,
+        "since": null,
+        "parameters": [
+          {
+            "name": "event",
+            "type": "MouseEvent",
+            "description": "",
+            "optional": true
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "handleListFocusEscape",
+        "signature": "(direction: FocusEscapeDirection) => void",
+        "description": "Method passed to list component",
+        "deprecated": null,
+        "sourceLine": 497,
+        "since": null,
+        "parameters": [
+          {
+            "name": "direction",
+            "type": "FocusEscapeDirection",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "onContainerClick",
+        "signature": "(event: MouseEvent) => void",
+        "description": "Handles even when we click on parent container which is the FormField Wrapping this\ncontrol",
+        "deprecated": null,
+        "sourceLine": 404,
+        "since": null,
+        "parameters": [
+          {
+            "name": "event",
+            "type": "MouseEvent",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      }
+    ]
+  }
+}

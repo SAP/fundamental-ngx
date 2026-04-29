@@ -1,0 +1,34 @@
+{
+  "name": "CardExtendedHeaderComponent",
+  "selector": "fd-card-extended-header",
+  "kind": "Component",
+  "sourceFile": "card-header-extended.component.ts",
+  "sourceLine": 16,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/card/header/card-header-extended.component.ts#L16",
+  "description": "",
+  "inputs": [
+    {
+      "name": "align",
+      "type": "null | 'top' | 'bottom'",
+      "default": null,
+      "description": "vertical alignment of the elements inside the header columns\npossible options: 'top' | 'bottom' | null\ndefault: null (middle)",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 28,
+      "since": null
+    },
+    {
+      "name": "ariaRoleDescription",
+      "type": "string",
+      "default": null,
+      "description": "aria-roledescription for the container\ndefault: 'Extended content'",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 21,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

@@ -1,0 +1,83 @@
+{
+  "name": "ProductSwitchBodyComponent",
+  "selector": "fd-product-switch-body",
+  "kind": "Component",
+  "sourceFile": "product-switch-body.component.ts",
+  "sourceLine": 35,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/product-switch/product-switch-body/product-switch-body.component.ts#L35",
+  "description": "",
+  "inputs": [
+    {
+      "name": "dragAndDropEnabled",
+      "type": "boolean",
+      "default": "true",
+      "description": "Defines if drag and drop functionality should be included in product switch",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 38,
+      "since": null
+    },
+    {
+      "name": "forceListMode",
+      "type": "boolean",
+      "default": "false",
+      "description": "Defines if the product switcher should be displayed in list mode, no matter what is the size of window",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 46,
+      "since": null
+    },
+    {
+      "name": "products",
+      "type": "ProductSwitchItem[]",
+      "default": null,
+      "description": "The product switch's product items.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 42,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "itemClicked",
+      "type": "void",
+      "default": null,
+      "description": "Event emitted on product click",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 54,
+      "since": null
+    },
+    {
+      "name": "productsChange",
+      "type": "any[]",
+      "default": null,
+      "description": "Event thrown on products array change",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 50,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "_productSwitchItemsChangeHandle",
+      "signature": "(dropEvent: FdDropEvent<ProductSwitchItem>) => void",
+      "description": "Method called on products change",
+      "deprecated": null,
+      "sourceLine": 103,
+      "since": null,
+      "parameters": [
+        {
+          "name": "dropEvent",
+          "type": "FdDropEvent<ProductSwitchItem>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

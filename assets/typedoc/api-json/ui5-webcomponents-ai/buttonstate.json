@@ -1,0 +1,64 @@
+{
+  "name": "ButtonState",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "endIcon",
+      "type": "string",
+      "default": null,
+      "description": "Defines the icon to be displayed as graphical element within the component after the text.\nThe SAP-icons font provides numerous options.\n\n*Example:**\n\nSee all the available icons in the [Icon Explorer](https://sdk.openui5.org/test-resources/sap/m/demokit/iconExplorer/webapp/index.html).",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 50,
+      "since": null
+    },
+    {
+      "name": "icon",
+      "type": "string",
+      "default": null,
+      "description": "Defines the icon to be displayed as graphical element within the component before the text.\nThe SAP-icons font provides numerous options.\n\n*Example:**\n\nSee all the available icons in the [Icon Explorer](https://sdk.openui5.org/test-resources/sap/m/demokit/iconExplorer/webapp/index.html).",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 60,
+      "since": null
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "default": null,
+      "description": "Defines the name of the button state.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 65,
+      "since": null
+    },
+    {
+      "name": "showArrowButton",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines if the component is in split button mode.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 70,
+      "since": null
+    },
+    {
+      "name": "text",
+      "type": "string",
+      "default": null,
+      "description": "Defines the text of the button in this state.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 75,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

@@ -1,0 +1,13 @@
+{
+  "name": "ResizeHandleDirective",
+  "selector": "[fdkResizeHandle]",
+  "kind": "Directive",
+  "sourceFile": "resize-handle.directive.ts",
+  "sourceLine": 7,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cdk/utils/directives/resize/resize-handle.directive.ts#L7",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

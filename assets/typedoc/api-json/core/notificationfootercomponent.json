@@ -1,0 +1,65 @@
+{
+  "name": "NotificationFooterComponent",
+  "selector": "fd-notification-footer",
+  "kind": "Component",
+  "sourceFile": "notification-footer.component.ts",
+  "sourceLine": 26,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/notification/notification-footer/notification-footer.component.ts#L26",
+  "description": "",
+  "inputs": [
+    {
+      "name": "lessLabel",
+      "type": "string",
+      "default": null,
+      "description": "Custom label for the collapse button.\nDefaults to `'Less'`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 52,
+      "since": null
+    },
+    {
+      "name": "manualExpanded",
+      "type": "boolean",
+      "default": null,
+      "description": "Manual control: Set expanded state externally.\nWhen set, takes precedence over internal expanded state.\nUse this for dynamically created notifications.\nSupports two-way binding with [(manualExpanded)].",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 40,
+      "since": null
+    },
+    {
+      "name": "manualShowTrigger",
+      "type": "boolean",
+      "default": null,
+      "description": "Manual control: Override to show/hide the expand/collapse button.\nWhen set, takes precedence over automatic truncation detection.\nUse this for dynamically created notifications where automatic detection doesn't work.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 32,
+      "since": null
+    },
+    {
+      "name": "moreLabel",
+      "type": "string",
+      "default": null,
+      "description": "Custom label for the expand button.\nDefaults to `'More'`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 46,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "manualExpandedChange",
+      "type": "EventEmitter<boolean>",
+      "default": null,
+      "description": "Manual control: Set expanded state externally.\nWhen set, takes precedence over internal expanded state.\nUse this for dynamically created notifications.\nSupports two-way binding with [(manualExpanded)].",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 40,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

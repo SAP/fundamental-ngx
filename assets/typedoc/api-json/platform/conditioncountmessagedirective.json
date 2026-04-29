@@ -1,0 +1,13 @@
+{
+  "name": "ConditionCountMessageDirective",
+  "selector": "[fdp-condition-count-message]",
+  "kind": "Directive",
+  "sourceFile": "condition-count-message.directive.ts",
+  "sourceLine": 11,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/value-help-dialog/directives/condition-count-message.directive.ts#L11",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

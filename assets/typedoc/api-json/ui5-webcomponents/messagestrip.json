@@ -1,0 +1,65 @@
+{
+  "name": "MessageStrip",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "colorScheme",
+      "type": "string",
+      "default": null,
+      "description": "Defines the color scheme of the component.\nThere are 10 predefined schemes.\nTo use one you can set a number from `\"1\"` to `\"10\"`. The `colorScheme` `\"1\"` will be set by default.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 47,
+      "since": null
+    },
+    {
+      "name": "design",
+      "type": "'Positive' | 'Critical' | 'Negative' | 'Information' | 'ColorSet1' | 'ColorSet2'",
+      "default": null,
+      "description": "Defines the component type.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 52,
+      "since": null
+    },
+    {
+      "name": "hideCloseButton",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines whether the MessageStrip renders close button.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 57,
+      "since": null
+    },
+    {
+      "name": "hideIcon",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines whether the MessageStrip will show an icon in the beginning.\nYou can directly provide an icon with the `icon` slot. Otherwise, the default icon for the type will be used.\n\n**Note:** If <code>MessageStripDesign.ColorSet1</code> or <code>MessageStripDesign.ColorSet2</code> value is set to the <code>design</code> property, default icon will not be presented.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 65,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5Close",
+      "type": "UI5CustomEvent<MessageStrip, 'close'>",
+      "default": null,
+      "description": "Fired when the close button is pressed either with a\nclick/tap or by using the Enter or Space key.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 73,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

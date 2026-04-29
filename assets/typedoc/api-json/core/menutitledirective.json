@@ -1,0 +1,24 @@
+{
+  "name": "MenuTitleDirective",
+  "selector": "[fd-menu-title]",
+  "kind": "Directive",
+  "sourceFile": "menu-title.directive.ts",
+  "sourceLine": 15,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/menu/directives/menu-title.directive.ts#L15",
+  "description": "The directive that represents the menu title.",
+  "inputs": [
+    {
+      "name": "truncate",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the title should truncate with ellipsis.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 17,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

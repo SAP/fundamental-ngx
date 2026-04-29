@@ -1,0 +1,74 @@
+{
+  "name": "TableCellHeaderPopoverComponent",
+  "selector": "fdp-table-cell-header-popover",
+  "kind": "Component",
+  "sourceFile": "table-cell-header-popover.component.ts",
+  "sourceLine": 60,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/table/components/table-cell-header-popover/table-cell-header-popover.component.ts#L60",
+  "description": "",
+  "inputs": [
+    {
+      "name": "column",
+      "type": "TableColumn",
+      "default": null,
+      "description": "Column definition.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 63,
+      "since": null
+    },
+    {
+      "name": "columnFrozen",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the column is frozen.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 75,
+      "since": null
+    },
+    {
+      "name": "columnIndex",
+      "type": "number",
+      "default": null,
+      "description": "Column index",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 83,
+      "since": null
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the popover is disabled.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 71,
+      "since": null
+    },
+    {
+      "name": "filteringFromHeaderDisabled",
+      "type": "Nullable<boolean>",
+      "default": "false",
+      "description": "Whether the filtering from header is disabled.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 79,
+      "since": null
+    },
+    {
+      "name": "popoverTemplate",
+      "type": "Nullable<TemplateRef<any>>",
+      "default": null,
+      "description": "Custom popover template.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 67,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

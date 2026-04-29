@@ -1,0 +1,61 @@
+{
+  "name": "ThemingService",
+  "selector": null,
+  "kind": "Service",
+  "sourceFile": "theming.service.ts",
+  "sourceLine": 29,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/theming/theming.service.ts#L29",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "getCurrentTheme",
+      "signature": "() => Nullable<ThemeDefinition>",
+      "description": "Returns current theme definition.",
+      "deprecated": null,
+      "sourceLine": 135,
+      "since": null,
+      "parameters": [],
+      "returnType": "Nullable<ThemeDefinition>"
+    },
+    {
+      "name": "getThemes",
+      "signature": "() => CompleteThemeDefinition[]",
+      "description": "Returns array of available themes.",
+      "deprecated": null,
+      "sourceLine": 128,
+      "since": null,
+      "parameters": [],
+      "returnType": "CompleteThemeDefinition[]"
+    },
+    {
+      "name": "init",
+      "signature": "() => void",
+      "description": "Initiates theme change based on query parameter or provided default theme in config.",
+      "deprecated": null,
+      "sourceLine": 95,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "setTheme",
+      "signature": "(themeId: string) => boolean",
+      "description": "Sets defined theme.",
+      "deprecated": null,
+      "sourceLine": 107,
+      "since": null,
+      "parameters": [
+        {
+          "name": "themeId",
+          "type": "string",
+          "description": "ID of theme that needs to be used by the application.",
+          "optional": false
+        }
+      ],
+      "returnType": "boolean"
+    }
+  ],
+  "inherited": null
+}

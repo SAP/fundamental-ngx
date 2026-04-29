@@ -1,0 +1,95 @@
+{
+  "name": "IconTabBarPopoverBase",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "icon-tab-bar-popover-base.class.ts",
+  "sourceLine": 21,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/icon-tab-bar/components/popovers/icon-tab-bar-popover-base.class.ts#L21",
+  "description": "",
+  "inputs": [
+    {
+      "name": "colorAssociations",
+      "type": "Partial<Record<SemanticColor, string>>",
+      "default": null,
+      "description": "",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 71,
+      "since": null
+    },
+    {
+      "name": "extraTabs",
+      "type": "IconTabBarItem[]",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 41,
+      "since": null
+    },
+    {
+      "name": "isRtl",
+      "type": "boolean",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 29,
+      "since": null
+    },
+    {
+      "name": "isSeparators",
+      "type": "boolean",
+      "default": "false",
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 47,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "closeTab",
+      "type": "string",
+      "default": null,
+      "description": "Event emits when user clicks on x button in tab.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 65,
+      "since": null
+    },
+    {
+      "name": "focusFirstVisibleItem",
+      "type": "void",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 57,
+      "since": null
+    },
+    {
+      "name": "focusLastVisibleItem",
+      "type": "void",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 61,
+      "since": null
+    },
+    {
+      "name": "selectedExtraItem",
+      "type": "IconTabBarItem",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 53,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

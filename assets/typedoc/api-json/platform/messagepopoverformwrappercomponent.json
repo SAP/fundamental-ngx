@@ -1,0 +1,65 @@
+{
+  "name": "MessagePopoverFormWrapperComponent",
+  "selector": "fdp-message-popover-form-wrapper",
+  "kind": "Component",
+  "sourceFile": "message-popover-form-wrapper.component.ts",
+  "sourceLine": 45,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/message-popover/components/message-popover-form-wrapper/message-popover-form-wrapper.component.ts#L45",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "addFormFields",
+      "signature": "(formFields: PlatformFormFieldControl<any>[]) => void",
+      "description": "Programmatically add new form fields to array of listened form fields.",
+      "deprecated": null,
+      "sourceLine": 147,
+      "since": null,
+      "parameters": [
+        {
+          "name": "formFields",
+          "type": "PlatformFormFieldControl<any>[]",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "addForms",
+      "signature": "(forms: MessagePopoverForm | MessagePopoverForm[]) => void",
+      "description": "Programmatically add new form to array of forms.",
+      "deprecated": null,
+      "sourceLine": 137,
+      "since": null,
+      "parameters": [
+        {
+          "name": "forms",
+          "type": "MessagePopoverForm | MessagePopoverForm[]",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setMessagePopover",
+      "signature": "(messagePopover: MessagePopover) => void",
+      "description": "Sets Message Popover component instance.",
+      "deprecated": null,
+      "sourceLine": 128,
+      "since": null,
+      "parameters": [
+        {
+          "name": "messagePopover",
+          "type": "MessagePopover",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

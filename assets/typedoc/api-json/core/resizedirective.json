@@ -1,0 +1,75 @@
+{
+  "name": "ResizeDirective",
+  "selector": "[fdkResize]",
+  "kind": "Directive",
+  "sourceFile": "resize.directive.ts",
+  "sourceLine": 29,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cdk/utils/directives/resize/resize.directive.ts#L29",
+  "description": "",
+  "inputs": [
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether resizable behaviour should be disabled",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 36,
+      "since": null
+    },
+    {
+      "name": "fdkResizeClass",
+      "type": "string",
+      "default": null,
+      "description": "Additional class to be applied to the Element ref during resize.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 40,
+      "since": null
+    },
+    {
+      "name": "resizeBoundary",
+      "type": "string | HTMLElement",
+      "default": "'body'",
+      "description": "Element limiting resizable container growth",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 32,
+      "since": null
+    },
+    {
+      "name": "resizeHandleLocation",
+      "type": "'top-right' | 'top-left' | 'bottom-right' | 'bottom-left'",
+      "default": "'bottom-right'",
+      "description": "Localization of resize handle inside resizable container",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 44,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "onResizeEnd",
+      "type": "void",
+      "default": null,
+      "description": "Emits event when resizing has ended",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 59,
+      "since": null
+    },
+    {
+      "name": "onResizeStart",
+      "type": "void",
+      "default": null,
+      "description": "Emits event when resizing has tarted",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 55,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

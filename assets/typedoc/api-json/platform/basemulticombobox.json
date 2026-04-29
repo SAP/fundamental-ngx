@@ -1,0 +1,329 @@
+{
+  "name": "BaseMultiCombobox",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "base-multi-combobox.ts",
+  "sourceLine": 90,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/multi-combobox/commons/base-multi-combobox.ts#L90",
+  "description": "Defines specific behavior for Input controls which deals with list of values including:\n - Select\n - RadioGroup\n - CheckboxGroup\n - ComboBox\n ...",
+  "inputs": [
+    {
+      "name": "addonIconTitle",
+      "type": "string",
+      "default": null,
+      "description": "Sets title attribute to addon button.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 195,
+      "since": null
+    },
+    {
+      "name": "autoComplete",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether the autocomplete should be enabled; Enabled by default.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 133,
+      "since": null
+    },
+    {
+      "name": "autoResize",
+      "type": "boolean",
+      "default": "false",
+      "description": "Turns on/off Adjustable Width feature.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 173,
+      "since": null
+    },
+    {
+      "name": "buttonFocusable",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether AddOn Button should be focusable",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 122,
+      "since": null
+    },
+    {
+      "name": "entityClass",
+      "type": "string",
+      "default": null,
+      "description": "TODO: Name of the entity for which DataProvider will be loaded. You can either pass list of\nitems or use this entityClass and internally we should be able to do lookup to some registry\nand retrieve the best matching DataProvider that is set on application level",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 141,
+      "since": null
+    },
+    {
+      "name": "fillControlMode",
+      "type": "PopoverFillMode",
+      "default": "'at-least'",
+      "description": "Preset options for the Select body width, whatever is chosen, the body has a 600px limit.\n* `at-least` will apply a minimum width to the body equivalent to the width of the control. - Default\n* `equal` will apply a width to the body equivalent to the width of the control.\n* 'fit-content' will apply width needed to properly display items inside, independent of control.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 191,
+      "since": null
+    },
+    {
+      "name": "group",
+      "type": "boolean",
+      "default": "false",
+      "description": "Tells the multi-combobox if we need to group items.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 153,
+      "since": null
+    },
+    {
+      "name": "groupKey",
+      "type": "string",
+      "default": null,
+      "description": "A field name to use to group data by (support dotted notation).",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 157,
+      "since": null
+    },
+    {
+      "name": "invalidEntryMessage",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": "Use the i18n module to modify the translation for this string.\nSets invalid entry message.",
+      "sourceLine": 202,
+      "since": null
+    },
+    {
+      "name": "limitless",
+      "type": "boolean",
+      "default": null,
+      "description": "Turns limitless mode, ON or OFF",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 206,
+      "since": null
+    },
+    {
+      "name": "maxHeight",
+      "type": "string",
+      "default": "'250px'",
+      "description": "Provides maximum height for the optionPanel.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 115,
+      "since": null
+    },
+    {
+      "name": "mobile",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the multi-combobox should be built on mobile mode.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 145,
+      "since": null
+    },
+    {
+      "name": "mobileConfig",
+      "type": "MobileModeConfig",
+      "default": null,
+      "description": "Multi Combobox Mobile Configuration, it's applied only, when mobile is enabled.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 149,
+      "since": null
+    },
+    {
+      "name": "openDropdownOnAddOnClicked",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether to open the dropdown when the addon button is clicked.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 210,
+      "since": null
+    },
+    {
+      "name": "secondaryKey",
+      "type": "string",
+      "default": null,
+      "description": "The field to show data in secondary column.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 161,
+      "since": null
+    },
+    {
+      "name": "secondaryTextAlignment",
+      "type": "TextAlignment",
+      "default": "'right'",
+      "description": "Horizontally align text inside the second column (applicable for two columns layout).",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 169,
+      "since": null
+    },
+    {
+      "name": "selectedItems",
+      "type": "any[]",
+      "default": "[]",
+      "description": "Provides selected items.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 111,
+      "since": null
+    },
+    {
+      "name": "showSecondaryText",
+      "type": "boolean",
+      "default": "false",
+      "description": "Show the second column (applicable for two columns layout).",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 165,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "addOnButtonClicked",
+      "type": "Event",
+      "default": null,
+      "description": "Emits event when the addon button is clicked.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 230,
+      "since": null
+    },
+    {
+      "name": "onDataReceived",
+      "type": "void",
+      "default": null,
+      "description": "Event emitted when data loading is finished.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 226,
+      "since": null
+    },
+    {
+      "name": "onDataRequested",
+      "type": "void",
+      "default": null,
+      "description": "Event emitted when data loading is started.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 222,
+      "since": null
+    },
+    {
+      "name": "selectionChange",
+      "type": "MultiComboboxSelectionChangeEvent",
+      "default": null,
+      "description": "Event emitted when item is selected.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 214,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "close",
+      "signature": "() => void",
+      "description": "Closes the select popover body.",
+      "deprecated": null,
+      "sourceLine": 482,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "handleListFocusEscape",
+      "signature": "(direction: FocusEscapeDirection) => void",
+      "description": "Method passed to list component",
+      "deprecated": null,
+      "sourceLine": 591,
+      "since": null,
+      "parameters": [
+        {
+          "name": "direction",
+          "type": "FocusEscapeDirection",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "open",
+      "signature": "() => void",
+      "description": "Opens the select popover body.",
+      "deprecated": null,
+      "sourceLine": 475,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": {
+    "from": "CollectionBaseInput",
+    "inputs": [],
+    "methods": [
+      {
+        "name": "_onFocusChanged",
+        "signature": "(isFocused: boolean) => void",
+        "description": "Keeps track of element focus",
+        "deprecated": null,
+        "sourceLine": 389,
+        "since": null,
+        "parameters": [
+          {
+            "name": "isFocused",
+            "type": "boolean",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "focus",
+        "signature": "(event?: MouseEvent) => void",
+        "description": "In most of the cases when working with input element directly you should be just find to assing\nvariable to this element\n\n```\n<input #inputElementRef fd-form-control ...>\n```\n\nand this default behavior used. For other cases implement focus.",
+        "deprecated": null,
+        "sourceLine": 419,
+        "since": null,
+        "parameters": [
+          {
+            "name": "event",
+            "type": "MouseEvent",
+            "description": "",
+            "optional": true
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "onContainerClick",
+        "signature": "(event: MouseEvent) => void",
+        "description": "Handles even when we click on parent container which is the FormField Wrapping this\ncontrol",
+        "deprecated": null,
+        "sourceLine": 404,
+        "since": null,
+        "parameters": [
+          {
+            "name": "event",
+            "type": "MouseEvent",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      }
+    ]
+  }
+}

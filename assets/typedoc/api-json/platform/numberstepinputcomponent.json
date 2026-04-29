@@ -1,0 +1,134 @@
+{
+  "name": "NumberStepInputComponent",
+  "selector": "fdp-number-step-input",
+  "kind": "Component",
+  "sourceFile": "number-step-input.component.ts",
+  "sourceLine": 53,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/step-input/number/number-step-input.component.ts#L53",
+  "description": "Fundamental number-step-input component\n\nExample of usage\n```html\n<fdp-number-step-input\n  name=\"number\"\n  [value]=\"value\"\n  (valueChange)=\"onValueChange($event)\"\n></fdp-number-step-input>\n```",
+  "inputs": [
+    {
+      "name": "description",
+      "type": "string",
+      "default": null,
+      "description": "Set description",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 55,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": {
+    "from": "StepInputComponent",
+    "inputs": [],
+    "methods": [
+      {
+        "name": "_onFocusChanged",
+        "signature": "(isFocused: boolean) => void",
+        "description": "Keeps track of element focus",
+        "deprecated": null,
+        "sourceLine": 389,
+        "since": null,
+        "parameters": [
+          {
+            "name": "isFocused",
+            "type": "boolean",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "decrease",
+        "signature": "(step: number) => void",
+        "description": "Decrease value",
+        "deprecated": null,
+        "sourceLine": 257,
+        "since": null,
+        "parameters": [
+          {
+            "name": "step",
+            "type": "number",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "focus",
+        "signature": "(event?: MouseEvent) => void",
+        "description": "In most of the cases when working with input element directly you should be just find to assing\nvariable to this element\n\n```\n<input #inputElementRef fd-form-control ...>\n```\n\nand this default behavior used. For other cases implement focus.",
+        "deprecated": null,
+        "sourceLine": 419,
+        "since": null,
+        "parameters": [
+          {
+            "name": "event",
+            "type": "MouseEvent",
+            "description": "",
+            "optional": true
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "increase",
+        "signature": "(step: number) => void",
+        "description": "Increase value",
+        "deprecated": null,
+        "sourceLine": 247,
+        "since": null,
+        "parameters": [
+          {
+            "name": "step",
+            "type": "number",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "largeStepDecrease",
+        "signature": "() => void",
+        "description": "Decrease value by large step",
+        "deprecated": null,
+        "sourceLine": 273,
+        "since": null,
+        "parameters": [],
+        "returnType": "void"
+      },
+      {
+        "name": "largeStepIncrease",
+        "signature": "() => void",
+        "description": "Increase value by large step",
+        "deprecated": null,
+        "sourceLine": 267,
+        "since": null,
+        "parameters": [],
+        "returnType": "void"
+      },
+      {
+        "name": "onContainerClick",
+        "signature": "(event: MouseEvent) => void",
+        "description": "Handles even when we click on parent container which is the FormField Wrapping this\ncontrol",
+        "deprecated": null,
+        "sourceLine": 404,
+        "since": null,
+        "parameters": [
+          {
+            "name": "event",
+            "type": "MouseEvent",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      }
+    ]
+  }
+}

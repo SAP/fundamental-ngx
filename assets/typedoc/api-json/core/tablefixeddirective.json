@@ -1,0 +1,13 @@
+{
+  "name": "TableFixedDirective",
+  "selector": "[fdTableFixed], [fd-table-fixed]",
+  "kind": "Directive",
+  "sourceFile": "table-fixed.directive.ts",
+  "sourceLine": 7,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/table/directives/table-fixed.directive.ts#L7",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

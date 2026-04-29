@@ -1,0 +1,60 @@
+{
+  "name": "CalendarService",
+  "selector": null,
+  "kind": "Service",
+  "sourceFile": "calendar.service.ts",
+  "sourceLine": 8,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/calendar/calendar.service.ts#L8",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "getId",
+      "signature": "(row: number, col: number) => number",
+      "description": "Standardized method to calculate grid [x][y] to index number",
+      "deprecated": null,
+      "sourceLine": 42,
+      "since": null,
+      "parameters": [
+        {
+          "name": "row",
+          "type": "number",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "col",
+          "type": "number",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "number"
+    },
+    {
+      "name": "onKeydownHandler",
+      "signature": "(event: KeyboardEvent, index: number) => void",
+      "description": "Method that handles keydown events, dedicated for All Calendar views, which have a list with row x col elements.\nTriggers the events, when the focus approaches start and end of list. Or when there is basic change of focus.\nTriggers also event, when the element is selected by enter key, or space bar.",
+      "deprecated": null,
+      "sourceLine": 53,
+      "since": null,
+      "parameters": [
+        {
+          "name": "event",
+          "type": "KeyboardEvent",
+          "description": "KeyboardEvent",
+          "optional": false
+        },
+        {
+          "name": "index",
+          "type": "number",
+          "description": "which is number (0 - (rowAmount * colAmount))",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

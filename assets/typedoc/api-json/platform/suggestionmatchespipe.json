@@ -1,0 +1,13 @@
+{
+  "name": "SuggestionMatchesPipe",
+  "selector": "[fdpSearchFieldSuggestion]",
+  "kind": "Pipe",
+  "sourceFile": "search-field.component.ts",
+  "sourceLine": 1008,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/search-field/search-field.component.ts#L1008",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

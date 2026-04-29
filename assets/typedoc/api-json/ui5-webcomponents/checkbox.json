@@ -1,0 +1,155 @@
+{
+  "name": "CheckBox",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 50,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "accessibleName",
+      "type": "string",
+      "default": null,
+      "description": "Defines the accessible ARIA name of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 55,
+      "since": null
+    },
+    {
+      "name": "accessibleNameRef",
+      "type": "string",
+      "default": null,
+      "description": "Receives id(or many ids) of the elements that label the component",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 60,
+      "since": null
+    },
+    {
+      "name": "checked",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines if the component is checked.\n\n*Note:** The property can be changed with user interaction,\neither by cliking/tapping on the component, or by\npressing the Enter or Space key.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 69,
+      "since": null
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines whether the component is disabled.\n\n*Note:** A disabled component is completely noninteractive.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 76,
+      "since": null
+    },
+    {
+      "name": "displayOnly",
+      "type": "boolean",
+      "default": null,
+      "description": "Determines whether the `ui5-checkbox` is in display only state.\n\nWhen set to `true`, the `ui5-checkbox` is not interactive, not editable, not focusable\nand not in the tab chain. This setting is used for forms in review mode.\n\n*Note:** When the property `disabled` is set to `true` this property has no effect.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 86,
+      "since": null
+    },
+    {
+      "name": "indeterminate",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines whether the component is displayed as partially checked.\n\n*Note:** The indeterminate state can be set only programmatically and can’t be achieved by user\ninteraction and the resulting visual state depends on the values of the `indeterminate`\nand `checked` properties:\n\n-  If the component is checked and indeterminate, it will be displayed as partially checked\n-  If the component is checked and it is not indeterminate, it will be displayed as checked\n-  If the component is not checked, it will be displayed as not checked regardless value of the indeterminate attribute",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 99,
+      "since": null
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "default": null,
+      "description": "Determines the name by which the component will be identified upon submission in an HTML form.\n\n*Note:** This property is only applicable within the context of an HTML Form element.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 106,
+      "since": null
+    },
+    {
+      "name": "readonly",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines whether the component is read-only.\n\n*Note:** A read-only component is not editable,\nbut still provides visual feedback upon user interaction.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 114,
+      "since": null
+    },
+    {
+      "name": "required",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines whether the component is required.\n\n*Note:** We advise against using the text property of the checkbox when there is a\nlabel associated with it to avoid having two required asterisks.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 122,
+      "since": null
+    },
+    {
+      "name": "text",
+      "type": "string",
+      "default": null,
+      "description": "Defines the text of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 127,
+      "since": null
+    },
+    {
+      "name": "value",
+      "type": "string",
+      "default": null,
+      "description": "Defines the form value of the component that is submitted when the checkbox is checked.\n\nWhen a form containing `ui5-checkbox` elements is submitted, only the values of the\n*checked** checkboxes are included in the form data sent to the server. Unchecked\ncheckboxes do not contribute any data to the form submission.\n\nThis property is particularly useful for **checkbox groups**, where multiple checkboxes with the same `name` but different `value` properties can be used to represent a set of related options.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 138,
+      "since": null
+    },
+    {
+      "name": "valueState",
+      "type": "'None' | 'Positive' | 'Critical' | 'Negative' | 'Information'",
+      "default": null,
+      "description": "Defines the value state of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 143,
+      "since": null
+    },
+    {
+      "name": "wrappingType",
+      "type": "'None' | 'Normal'",
+      "default": null,
+      "description": "Defines whether the component text wraps when there is not enough space.\n\n*Note:** for option \"Normal\" the text will wrap and the words will not be broken based on hyphenation.\n*Note:** for option \"None\" the text will be truncated with an ellipsis.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 151,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5Change",
+      "type": "UI5CustomEvent<CheckBox, 'change'>",
+      "default": null,
+      "description": "Fired when the component checked state changes.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 158,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

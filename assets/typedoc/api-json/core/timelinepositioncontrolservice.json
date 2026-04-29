@@ -1,0 +1,75 @@
+{
+  "name": "TimelinePositionControlService",
+  "selector": null,
+  "kind": "Service",
+  "sourceFile": "timeline-position-control.service.ts",
+  "sourceLine": 8,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/timeline/services/timeline-position-control.service.ts#L8",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "calculatePositions",
+      "signature": "() => void",
+      "description": "Calculate styles for timeline nodes",
+      "deprecated": null,
+      "sourceLine": 18,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "registerNode",
+      "signature": "(node: TimelineNodeComponentInterface) => void",
+      "description": "Register TimelineNodeComponent",
+      "deprecated": null,
+      "sourceLine": 28,
+      "since": null,
+      "parameters": [
+        {
+          "name": "node",
+          "type": "TimelineNodeComponentInterface",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "removeNode",
+      "signature": "(node: TimelineNodeComponentInterface) => void",
+      "description": "Remove TimelineNodeComponent",
+      "deprecated": null,
+      "sourceLine": 33,
+      "since": null,
+      "parameters": [
+        {
+          "name": "node",
+          "type": "TimelineNodeComponentInterface",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setStrategy",
+      "signature": "(strategy: 'horizontal-top' | 'horizontal-bottom' | 'horizontal-left' | 'horizontal-right' | 'horizontal-double' | 'vertical-top' | 'vertical-bottom' | 'vertical-left' | 'vertical-right' | 'vertical-double') => void",
+      "description": "Set strategy for current axis and layout",
+      "deprecated": null,
+      "sourceLine": 23,
+      "since": null,
+      "parameters": [
+        {
+          "name": "strategy",
+          "type": "'horizontal-top' | 'horizontal-bottom' | 'horizontal-left' | 'horizontal-right' | 'horizontal-double' | 'vertical-top' | 'vertical-bottom' | 'vertical-left' | 'vertical-right' | 'vertical-double'",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

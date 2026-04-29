@@ -1,0 +1,24 @@
+{
+  "name": "NotificationLinkComponent",
+  "selector": "fd-notification-link",
+  "kind": "Component",
+  "sourceFile": "notification-link.component.ts",
+  "sourceLine": 14,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/notification/notification-link/notification-link.component.ts#L14",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "toggleShowMore",
+      "signature": "() => void",
+      "description": "Method to toggle show more functionality",
+      "deprecated": null,
+      "sourceLine": 24,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

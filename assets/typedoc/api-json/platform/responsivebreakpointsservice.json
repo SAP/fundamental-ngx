@@ -1,0 +1,31 @@
+{
+  "name": "ResponsiveBreakpointsService",
+  "selector": null,
+  "kind": "Service",
+  "sourceFile": "inline-layout-collection-base.input.ts",
+  "sourceLine": 37,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/shared/form/inline-layout-collection-base.input.ts#L37",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "observeBreakpointByConfig",
+      "signature": "(config: ResponsiveBreakPointConfig) => Subject<any>",
+      "description": "subscribe to get current screen size based on config provided",
+      "deprecated": null,
+      "sourceLine": 53,
+      "since": null,
+      "parameters": [
+        {
+          "name": "config",
+          "type": "ResponsiveBreakPointConfig",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "Subject<any>"
+    }
+  ],
+  "inherited": null
+}

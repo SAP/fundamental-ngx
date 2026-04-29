@@ -1,0 +1,37 @@
+{
+  "name": "DynamicComponentInjector",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "dynamic-component-injector.ts",
+  "sourceLine": 3,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cdk/utils/dynamic-component/dynamic-component-injector.ts#L3",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "get",
+      "signature": "(token: any, notFoundValue?: any) => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 15,
+      "since": null,
+      "parameters": [
+        {
+          "name": "token",
+          "type": "any",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "notFoundValue",
+          "type": "any",
+          "description": "",
+          "optional": true
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

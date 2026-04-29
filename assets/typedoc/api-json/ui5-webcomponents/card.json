@@ -1,0 +1,54 @@
+{
+  "name": "Card",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "accessibleName",
+      "type": "string",
+      "default": null,
+      "description": "Defines the accessible name of the component, which is used as the name of the card region and should be unique per card.\n\n*Note:** `accessibleName` should be always set, unless `accessibleNameRef` is set.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 47,
+      "since": null
+    },
+    {
+      "name": "accessibleNameRef",
+      "type": "string",
+      "default": null,
+      "description": "Defines the IDs of the elements that label the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 52,
+      "since": null
+    },
+    {
+      "name": "loading",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines if a loading indicator would be displayed over the card.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 57,
+      "since": null
+    },
+    {
+      "name": "loadingDelay",
+      "type": "number",
+      "default": null,
+      "description": "Defines the delay in milliseconds, after which the loading indicator will show up for this card.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 62,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

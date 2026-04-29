@@ -1,0 +1,35 @@
+{
+  "name": "FreeContentListItemComponent",
+  "selector": "fdp-free-content-list-item, li[fdp-free-content-list-item]",
+  "kind": "Component",
+  "sourceFile": "free-content-list-item.component.ts",
+  "sourceLine": 18,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/list/free-content-list-item/free-content-list-item.component.ts#L18",
+  "description": "This class contains common properties used across list Item components.\nthis can be extended to reduce the code duplication across list Item components.",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": {
+    "from": "BaseListItem",
+    "inputs": [],
+    "methods": [
+      {
+        "name": "setSelected",
+        "signature": "(selected: boolean) => void",
+        "description": "Programmatically set selected state of the list item.",
+        "deprecated": null,
+        "sourceLine": 528,
+        "since": null,
+        "parameters": [
+          {
+            "name": "selected",
+            "type": "boolean",
+            "description": "Whether the list item is selected",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      }
+    ]
+  }
+}

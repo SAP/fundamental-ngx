@@ -1,0 +1,34 @@
+{
+  "name": "MessagePopoverFormItemDirective",
+  "selector": "[fdpMessagePopoverFormItem]",
+  "kind": "Directive",
+  "sourceFile": "message-popover-form-item.directive.ts",
+  "sourceLine": 9,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/message-popover/directives/message-popover-form-item.directive.ts#L9",
+  "description": "",
+  "inputs": [
+    {
+      "name": "errorTypes",
+      "type": "Record<string, string | MessagePopoverErrorConfig>",
+      "default": null,
+      "description": "Error type definition.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 16,
+      "since": null
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "default": null,
+      "description": "Form item name.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 12,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

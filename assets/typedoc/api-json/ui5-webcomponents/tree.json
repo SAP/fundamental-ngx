@@ -1,0 +1,175 @@
+{
+  "name": "Tree",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "accessibleDescription",
+      "type": "string",
+      "default": null,
+      "description": "Defines the accessible description of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 45,
+      "since": null
+    },
+    {
+      "name": "accessibleDescriptionRef",
+      "type": "string",
+      "default": null,
+      "description": "Defines the IDs of the elements that describe the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 50,
+      "since": null
+    },
+    {
+      "name": "accessibleName",
+      "type": "string",
+      "default": null,
+      "description": "Defines the accessible name of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 55,
+      "since": null
+    },
+    {
+      "name": "accessibleNameRef",
+      "type": "string",
+      "default": null,
+      "description": "Defines the IDs of the elements that label the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 60,
+      "since": null
+    },
+    {
+      "name": "footerText",
+      "type": "string",
+      "default": null,
+      "description": "Defines the component footer text.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 65,
+      "since": null
+    },
+    {
+      "name": "headerText",
+      "type": "string",
+      "default": null,
+      "description": "Defines the component header text.\n\n*Note:** If the `header` slot is set, this property is ignored.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 72,
+      "since": null
+    },
+    {
+      "name": "noDataText",
+      "type": "string",
+      "default": null,
+      "description": "Defines the text that is displayed when the component contains no items.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 77,
+      "since": null
+    },
+    {
+      "name": "selectionMode",
+      "type": "'Delete' | 'None' | 'Single' | 'Multiple' | 'SingleStart' | 'SingleEnd' | 'SingleAuto'",
+      "default": null,
+      "description": "Defines the selection mode of the component. Since the tree uses a `ui5-list` to display its structure,\nthe tree modes are exactly the same as the list modes, and are all applicable.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 83,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5ItemClick",
+      "type": "UI5CustomEvent<Tree, 'item-click'>",
+      "default": null,
+      "description": "Fired when a tree item is activated.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 90,
+      "since": null
+    },
+    {
+      "name": "ui5ItemDelete",
+      "type": "UI5CustomEvent<Tree, 'item-delete'>",
+      "default": null,
+      "description": "Fired when the Delete button of any tree item is pressed.\n\n*Note:** A Delete button is displayed on each item,\nwhen the component `selectionMode` property is set to `Delete`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 98,
+      "since": null
+    },
+    {
+      "name": "ui5ItemMouseout",
+      "type": "UI5CustomEvent<Tree, 'item-mouseout'>",
+      "default": null,
+      "description": "Fired when the mouse cursor leaves the tree item borders.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 103,
+      "since": null
+    },
+    {
+      "name": "ui5ItemMouseover",
+      "type": "UI5CustomEvent<Tree, 'item-mouseover'>",
+      "default": null,
+      "description": "Fired when the mouse cursor enters the tree item borders.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 108,
+      "since": null
+    },
+    {
+      "name": "ui5ItemToggle",
+      "type": "UI5CustomEvent<Tree, 'item-toggle'>",
+      "default": null,
+      "description": "Fired when a tree item is expanded or collapsed.\n\n*Note:** You can call `preventDefault()` on the event object to suppress the event, if needed.\nThis may be handy for example if you want to dynamically load tree items upon the user expanding a node.\nEven if you prevented the event's default behavior, you can always manually call `toggle()` on a tree item.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 117,
+      "since": null
+    },
+    {
+      "name": "ui5Move",
+      "type": "UI5CustomEvent<Tree, 'move'>",
+      "default": null,
+      "description": "Fired when a movable tree item is moved over a potential drop target during a drag-and-drop operation.\n\nIf the new position is valid, prevent the default action of the event using `preventDefault()`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 124,
+      "since": null
+    },
+    {
+      "name": "ui5MoveOver",
+      "type": "UI5CustomEvent<Tree, 'move-over'>",
+      "default": null,
+      "description": "Fired when a movable tree item is dropped onto a drop target.\n\n*Note:** The `move` event is fired only if there was a preceding `move-over` event with prevented default action.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 131,
+      "since": null
+    },
+    {
+      "name": "ui5SelectionChange",
+      "type": "UI5CustomEvent<Tree, 'selection-change'>",
+      "default": null,
+      "description": "Fired when selection is changed by user interaction\nin `Single`, `SingleStart`, `SingleEnd` and `Multiple` modes.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 137,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

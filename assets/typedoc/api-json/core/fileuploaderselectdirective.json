@@ -1,0 +1,35 @@
+{
+  "name": "FileUploaderSelectDirective",
+  "selector": "[fdFileSelect]",
+  "kind": "Directive",
+  "sourceFile": "file-uploader-select.directive.ts",
+  "sourceLine": 10,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/file-uploader/directives/file-uploader-select.directive.ts#L10",
+  "description": "Directive tool to facilitate interacting with a native file input element.",
+  "inputs": [
+    {
+      "name": "multiple",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether the input should accept multiple file selections.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 13,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "fileSelected",
+      "type": "File[]",
+      "default": null,
+      "description": "Event emitted when files are selected.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 17,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

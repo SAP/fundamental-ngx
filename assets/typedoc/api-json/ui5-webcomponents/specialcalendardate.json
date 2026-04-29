@@ -1,0 +1,34 @@
+{
+  "name": "SpecialCalendarDate",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "type",
+      "type": "'None' | 'Today' | 'Selected' | 'Working' | 'NonWorking' | 'Type01' | 'Type02' | 'Type03' | 'Type04' | 'Type05' | 'Type06' | 'Type07' | 'Type08' | 'Type09' | 'Type10' | 'Type11' | 'Type12' | 'Type13' | 'Type14' | 'Type15' | 'Type16' | 'Type17' | 'Type18' | 'Type19' | 'Type20'",
+      "default": null,
+      "description": "Defines the type of the special date.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 45,
+      "since": null
+    },
+    {
+      "name": "value",
+      "type": "string",
+      "default": null,
+      "description": "The date formatted according to the `formatPattern` property\nof the `ui5-calendar` that hosts the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 51,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

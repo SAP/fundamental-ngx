@@ -1,0 +1,13 @@
+{
+  "name": "FdpHeaderCellDef",
+  "selector": "fdp-table-header",
+  "kind": "Class",
+  "sourceFile": "table-header.directive.ts",
+  "sourceLine": 20,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/table-helpers/directives/table-header.directive.ts#L20",
+  "description": "Header cell definition for a platform table.\nCaptures the template of a column's data row cell as well as cell-specific properties.",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

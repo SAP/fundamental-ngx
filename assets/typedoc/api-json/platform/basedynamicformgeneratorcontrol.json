@@ -1,0 +1,74 @@
+{
+  "name": "BaseDynamicFormGeneratorControl",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "base-dynamic-form-generator-control.ts",
+  "sourceLine": 22,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/form-generator/base-dynamic-form-generator-control.ts#L22",
+  "description": "Abstract class that used as a base for the Dynamic Form Generator components.",
+  "inputs": [
+    {
+      "name": "form",
+      "type": "FormGroup<any>",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 43,
+      "since": null
+    },
+    {
+      "name": "formField",
+      "type": "PlatformFormField",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 48,
+      "since": null
+    },
+    {
+      "name": "formGroupName",
+      "type": "string",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 51,
+      "since": null
+    },
+    {
+      "name": "formItem",
+      "type": "PreparedDynamicFormFieldItem<T>",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 28,
+      "since": null
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 33,
+      "since": null
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 38,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

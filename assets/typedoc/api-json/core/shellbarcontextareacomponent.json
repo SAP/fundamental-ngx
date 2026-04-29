@@ -1,0 +1,45 @@
+{
+  "name": "ShellbarContextAreaComponent",
+  "selector": "fd-shellbar-context-area",
+  "kind": "Component",
+  "sourceFile": "shellbar-context-area.component.ts",
+  "sourceLine": 35,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/shellbar/shellbar-context-area/shellbar-context-area.component.ts#L35",
+  "description": "Component representing the context area of the shellbar.\nIt manages the visibility of its child elements based on the available width.",
+  "inputs": [],
+  "outputs": [
+    {
+      "name": "contentItemVisibilityChange",
+      "type": "HTMLElement[]",
+      "default": null,
+      "description": "Event emitted when items in the context area are hidden or shown. Event parameter is an array of all the items that are hidden.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 37,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "hideElementsIfNeeded",
+      "signature": "() => void",
+      "description": "Iteratively hides elements if the end of the actions exceed the end of the shellbar.",
+      "deprecated": null,
+      "sourceLine": 68,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "showElements",
+      "signature": "() => void",
+      "description": "Iteratively shows elements if they can be displayed in the shellbar without causing the actions\nto exceed the end of th eshellbar.",
+      "deprecated": null,
+      "sourceLine": 92,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

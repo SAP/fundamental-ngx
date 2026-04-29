@@ -1,0 +1,44 @@
+{
+  "name": "LayoutPanelComponent",
+  "selector": "fd-layout-panel",
+  "kind": "Component",
+  "sourceFile": "layout-panel.component.ts",
+  "sourceLine": 25,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/layout-panel/layout-panel.component.ts#L25",
+  "description": "",
+  "inputs": [
+    {
+      "name": "backgroundImage",
+      "type": "null | string",
+      "default": null,
+      "description": "Background image of the panel.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 27,
+      "since": null
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "default": null,
+      "description": "Id for the layout panel element.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 30,
+      "since": null
+    },
+    {
+      "name": "transparent",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the background of the panel should be transparent.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 33,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

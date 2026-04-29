@@ -1,0 +1,24 @@
+{
+  "name": "MultiComboboxSelectionChangeEvent",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "base-multi-combobox.ts",
+  "sourceLine": 77,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/multi-combobox/commons/base-multi-combobox.ts#L77",
+  "description": "",
+  "inputs": [
+    {
+      "name": "selectedItems",
+      "type": "any",
+      "default": null,
+      "description": "Selected items",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 85,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

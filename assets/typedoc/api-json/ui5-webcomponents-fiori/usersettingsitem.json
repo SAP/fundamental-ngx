@@ -1,0 +1,115 @@
+{
+  "name": "UserSettingsItem",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "accessibleName",
+      "type": "string",
+      "default": null,
+      "description": "Defines the accessible ARIA name of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 45,
+      "since": null
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines whether the component is in disabled state.\n\n*Note:** A disabled component is completely noninteractive.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 52,
+      "since": null
+    },
+    {
+      "name": "headerText",
+      "type": "string",
+      "default": null,
+      "description": "Defines the headerText of the item.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 57,
+      "since": null
+    },
+    {
+      "name": "icon",
+      "type": "string",
+      "default": null,
+      "description": "Defines the icon of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 62,
+      "since": null
+    },
+    {
+      "name": "loading",
+      "type": "boolean",
+      "default": null,
+      "description": "Indicates whether a loading indicator should be shown.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 67,
+      "since": null
+    },
+    {
+      "name": "loadingReason",
+      "type": "string",
+      "default": null,
+      "description": "Indicates why the control is in loading state.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 72,
+      "since": null
+    },
+    {
+      "name": "selected",
+      "type": "boolean",
+      "default": null,
+      "description": "Shows item tab.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 77,
+      "since": null
+    },
+    {
+      "name": "text",
+      "type": "string",
+      "default": null,
+      "description": "Defines the text of the user settings item.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 82,
+      "since": null
+    },
+    {
+      "name": "tooltip",
+      "type": "string",
+      "default": null,
+      "description": "Defines the tooltip of the component.\n\nA tooltip attribute should be provided to represent the meaning or function when the component is collapsed and only the icon is visible.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 89,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5SelectionChange",
+      "type": "UI5CustomEvent<UserSettingsItem, 'selection-change'>",
+      "default": null,
+      "description": "Fired when a selected view changed.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 96,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

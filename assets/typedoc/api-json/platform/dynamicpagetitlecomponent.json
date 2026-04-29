@@ -1,0 +1,74 @@
+{
+  "name": "DynamicPageTitleComponent",
+  "selector": "fdp-dynamic-page-title",
+  "kind": "Component",
+  "sourceFile": "dynamic-page-title.component.ts",
+  "sourceLine": 38,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/dynamic-page/dynamic-page-header/title/dynamic-page-title.component.ts#L38",
+  "description": "Dynamic Page Title Component.",
+  "inputs": [
+    {
+      "name": "background",
+      "type": "DynamicPageBackgroundType",
+      "default": null,
+      "description": "sets background for content to `list`, `transparent`, or `solid` background color.\nDefault is `solid`.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 64,
+      "since": null
+    },
+    {
+      "name": "size",
+      "type": "DynamicPageResponsiveSize",
+      "default": null,
+      "description": "sets size which in turn adds corresponding padding for the size type.\nsize can be `small`, `medium`, `large`, or `extra-large`.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 71,
+      "since": null
+    },
+    {
+      "name": "subtitle",
+      "type": "string",
+      "default": null,
+      "description": "Page Subtitle",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 53,
+      "since": null
+    },
+    {
+      "name": "subtitleWrap",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether subtitle should wrap instead of truncation.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 57,
+      "since": null
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "default": null,
+      "description": "Page Title",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 43,
+      "since": null
+    },
+    {
+      "name": "titleWrap",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether title should wrap instead of truncation.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 47,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

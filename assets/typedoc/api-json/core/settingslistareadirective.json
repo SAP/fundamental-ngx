@@ -1,0 +1,13 @@
+{
+  "name": "SettingsListAreaDirective",
+  "selector": "[fd-settings-list-area]",
+  "kind": "Directive",
+  "sourceFile": "settings-list-area.directive.ts",
+  "sourceLine": 11,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/settings/settings-list-area/settings-list-area.directive.ts#L11",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

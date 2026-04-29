@@ -1,0 +1,13 @@
+{
+  "name": "InputGroupAddonButtonDirective",
+  "selector": "[fdInputGroupInput], [fd-input-group-input]",
+  "kind": "Directive",
+  "sourceFile": "input-group-directives.ts",
+  "sourceLine": 169,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/input-group/input-group-directives.ts#L169",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

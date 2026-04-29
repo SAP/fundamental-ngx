@@ -1,0 +1,13 @@
+{
+  "name": "NotificationSeparatorDirective",
+  "selector": "[fdNotificationSeparator], [fd-notification-separator]",
+  "kind": "Directive",
+  "sourceFile": "notification-separator.directive.ts",
+  "sourceLine": 10,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/notification/directives/notification-separator.directive.ts#L10",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

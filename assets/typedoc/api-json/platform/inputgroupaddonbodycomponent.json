@@ -1,0 +1,13 @@
+{
+  "name": "InputGroupAddonBodyComponent",
+  "selector": "fdp-input-group-addon-body",
+  "kind": "Component",
+  "sourceFile": "addon-body.component.ts",
+  "sourceLine": 19,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/input-group/addon-body.component.ts#L19",
+  "description": "Fundamental input group addon body component",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

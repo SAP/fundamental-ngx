@@ -1,0 +1,13 @@
+{
+  "name": "SideNavigationMainComponent",
+  "selector": "fdx-side-nav-main, div[fdx-side-nav-main]",
+  "kind": "Component",
+  "sourceFile": "side-navigation-main.component.ts",
+  "sourceLine": 26,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cx/side-navigation/side-navigation-main.component.ts#L26",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

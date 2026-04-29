@@ -1,0 +1,24 @@
+{
+  "name": "DialogOverlayContainer",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "dialog-overlay.container.ts",
+  "sourceLine": 5,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/dialog/utils/dialog-overlay.container.ts#L5",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "getContainerElement",
+      "signature": "() => HTMLElement",
+      "description": "This method returns the overlay container element. It will lazily\ncreate the element the first time it is called to facilitate using\nthe container in non-browser environments.",
+      "deprecated": null,
+      "sourceLine": 12,
+      "since": null,
+      "parameters": [],
+      "returnType": "HTMLElement"
+    }
+  ],
+  "inherited": null
+}

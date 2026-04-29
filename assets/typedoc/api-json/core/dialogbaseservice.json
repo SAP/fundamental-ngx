@@ -1,0 +1,54 @@
+{
+  "name": "DialogBaseService",
+  "selector": null,
+  "kind": "Service",
+  "sourceFile": "dialog-base.service.ts",
+  "sourceLine": 11,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/dialog/base/dialog-base.service.ts#L11",
+  "description": "Service used to dynamically generate a dialog.",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "dismissAll",
+      "signature": "(reason?: string) => void",
+      "description": "Dismisses all currently open dialogs.",
+      "deprecated": null,
+      "sourceLine": 44,
+      "since": null,
+      "parameters": [
+        {
+          "name": "reason",
+          "type": "string",
+          "description": "",
+          "optional": true
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "open",
+      "signature": "(content: unknown, config: DialogConfigBase<D>) => DialogRefBase<D, any>",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 12,
+      "since": null,
+      "parameters": [
+        {
+          "name": "content",
+          "type": "unknown",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "config",
+          "type": "DialogConfigBase<D>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "DialogRefBase<D, any>"
+    }
+  ],
+  "inherited": null
+}

@@ -1,0 +1,319 @@
+{
+  "name": "BaseSelect",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "base-select.ts",
+  "sourceLine": 57,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/select/commons/base-select.ts#L57",
+  "description": "Defines specific behavior for Input controls which deals with list of values including:\n - Select\n - RadioGroup\n - CheckboxGroup\n - ComboBox\n ...",
+  "inputs": [
+    {
+      "name": "appendTo",
+      "type": "ElementRef<any>",
+      "default": null,
+      "description": "The element to which the popover should be appended.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 95,
+      "since": null
+    },
+    {
+      "name": "autoResize",
+      "type": "boolean",
+      "default": "false",
+      "description": "Turns on/off Adjustable Width feature",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 155,
+      "since": null
+    },
+    {
+      "name": "closeOnOutsideClick",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether close the popover on outside click.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 131,
+      "since": null
+    },
+    {
+      "name": "controlTemplate",
+      "type": "TemplateRef<any>",
+      "default": null,
+      "description": "Custom template used to build control body.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 135,
+      "since": null
+    },
+    {
+      "name": "fillControlMode",
+      "type": "PopoverFillMode",
+      "default": "'at-least'",
+      "description": "Preset options for the select body width.\n* `at-least` will apply a minimum width to the body equivalent to the width of the control.\n* `equal` will apply a width to the body equivalent to the width of the control.\n* Leave blank for no effect.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 108,
+      "since": null
+    },
+    {
+      "name": "glyph",
+      "type": "string",
+      "default": "'slim-arrow-down'",
+      "description": "Glyph to add icon in the select component.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 87,
+      "since": null
+    },
+    {
+      "name": "glyphFont",
+      "type": "IconFont",
+      "default": "FD_DEFAULT_ICON_FONT_FAMILY",
+      "description": "Glyph font family",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 91,
+      "since": null
+    },
+    {
+      "name": "group",
+      "type": "boolean",
+      "default": "false",
+      "description": "Tells the select if we need to group items",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 71,
+      "since": null
+    },
+    {
+      "name": "groupKey",
+      "type": "string",
+      "default": null,
+      "description": "A field name to use to group data by (support dotted notation)",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 75,
+      "since": null
+    },
+    {
+      "name": "maxHeight",
+      "type": "string",
+      "default": "'250px'",
+      "description": "Provides maximum default height for the optionPanel",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 63,
+      "since": null
+    },
+    {
+      "name": "maxWidth",
+      "type": "number",
+      "default": null,
+      "description": "Max width of list container",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 188,
+      "since": null
+    },
+    {
+      "name": "minWidth",
+      "type": "number",
+      "default": null,
+      "description": "Min width of list container",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 182,
+      "since": null
+    },
+    {
+      "name": "mobile",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the select should be built on mobile mode",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 67,
+      "since": null
+    },
+    {
+      "name": "mobileConfig",
+      "type": "MobileModeConfig",
+      "default": null,
+      "description": "Select Input Mobile Configuration",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 139,
+      "since": null
+    },
+    {
+      "name": "noValueLabel",
+      "type": "string",
+      "default": null,
+      "description": "String rendered as first value in the popup which let the user to make 'no selection' from\navailable list of values. When this option is active and use make this selection we save a\nNULL value",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 147,
+      "since": null
+    },
+    {
+      "name": "noWrapText",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether not to wrap text",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 151,
+      "since": null
+    },
+    {
+      "name": "readonly",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the select component is readonly.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 122,
+      "since": null
+    },
+    {
+      "name": "secondaryKey",
+      "type": "string",
+      "default": null,
+      "description": "The field to show data in secondary column",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 79,
+      "since": null
+    },
+    {
+      "name": "secondaryTextAlignment",
+      "type": "TextAlignment",
+      "default": "'right'",
+      "description": "Horizontally align text inside the second column (Applicable for two columns layout)",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 112,
+      "since": null
+    },
+    {
+      "name": "showSecondaryText",
+      "type": "boolean",
+      "default": "false",
+      "description": "Show the second column (Applicable for two columns layout)",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 83,
+      "since": null
+    },
+    {
+      "name": "tabOutStrategy",
+      "type": "'close' | 'closeAndSelect'",
+      "default": "'close'",
+      "description": "Action to perform when user shifts focus from the dropdown.\n- `close` will close the dropdown preserving previously selected value.\n- `closeAndSelect` will close the dropdown and select last focused dropdown item.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 196,
+      "since": null
+    },
+    {
+      "name": "triggerValue",
+      "type": "string",
+      "default": null,
+      "description": "Trigger value",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 99,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "selectionChange",
+      "type": "FdpSelectionChangeEvent",
+      "default": null,
+      "description": "Event emitted when item is selected.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 216,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "handleListFocusEscape",
+      "signature": "(direction: FocusEscapeDirection) => void",
+      "description": "Method passed to list component",
+      "deprecated": null,
+      "sourceLine": 345,
+      "since": null,
+      "parameters": [
+        {
+          "name": "direction",
+          "type": "FocusEscapeDirection",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": {
+    "from": "CollectionBaseInput",
+    "inputs": [],
+    "methods": [
+      {
+        "name": "_onFocusChanged",
+        "signature": "(isFocused: boolean) => void",
+        "description": "Keeps track of element focus",
+        "deprecated": null,
+        "sourceLine": 389,
+        "since": null,
+        "parameters": [
+          {
+            "name": "isFocused",
+            "type": "boolean",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "focus",
+        "signature": "(event?: MouseEvent) => void",
+        "description": "In most of the cases when working with input element directly you should be just find to assing\nvariable to this element\n\n```\n<input #inputElementRef fd-form-control ...>\n```\n\nand this default behavior used. For other cases implement focus.",
+        "deprecated": null,
+        "sourceLine": 419,
+        "since": null,
+        "parameters": [
+          {
+            "name": "event",
+            "type": "MouseEvent",
+            "description": "",
+            "optional": true
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "onContainerClick",
+        "signature": "(event: MouseEvent) => void",
+        "description": "Handles even when we click on parent container which is the FormField Wrapping this\ncontrol",
+        "deprecated": null,
+        "sourceLine": 404,
+        "since": null,
+        "parameters": [
+          {
+            "name": "event",
+            "type": "MouseEvent",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      }
+    ]
+  }
+}

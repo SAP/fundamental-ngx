@@ -1,0 +1,13 @@
+{
+  "name": "ValueHelpFilterDefDirective",
+  "selector": "[fdpValueHelpFilterDef]",
+  "kind": "Directive",
+  "sourceFile": "value-help-filter-def.directive.ts",
+  "sourceLine": 8,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/value-help-dialog/directives/value-help-filter-def.directive.ts#L8",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

@@ -1,0 +1,85 @@
+{
+  "name": "FilterStepComponent",
+  "selector": "fdp-filter-step",
+  "kind": "Component",
+  "sourceFile": "filter-step.component.ts",
+  "sourceLine": 48,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/table/components/table-view-settings-dialog/filtering/filter-step.component.ts#L48",
+  "description": "Filter dialog step.\n\nUsed to render selected filter options.",
+  "inputs": [
+    {
+      "name": "columnKey",
+      "type": "string",
+      "default": null,
+      "description": "Column key to apply this filter to",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 55,
+      "since": null
+    },
+    {
+      "name": "columnName",
+      "type": "string",
+      "default": null,
+      "description": "Column name to display in the filter",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 69,
+      "since": null
+    },
+    {
+      "name": "contentDensity",
+      "type": "ContentDensity",
+      "default": null,
+      "description": "Table's content density to be used",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 59,
+      "since": null
+    },
+    {
+      "name": "filter",
+      "type": "TableViewSettingsFilterComponent",
+      "default": null,
+      "description": "ViewSettingsFilter options the filter is created from",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 51,
+      "since": null
+    },
+    {
+      "name": "headingLevel",
+      "type": "number",
+      "default": "2",
+      "description": "Heading level of the dialog.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 73,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "back",
+      "type": "void",
+      "default": null,
+      "description": "Go back event",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 77,
+      "since": null
+    },
+    {
+      "name": "valueChange",
+      "type": "CollectionFilter",
+      "default": null,
+      "description": "Filter model change event",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 81,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

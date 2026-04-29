@@ -1,0 +1,184 @@
+{
+  "name": "TableDraggableDirective",
+  "selector": "fdp-table[isTreeTable], fdp-table[enableRowReordering]",
+  "kind": "Directive",
+  "sourceFile": "table-draggable.directive.ts",
+  "sourceLine": 49,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/table-helpers/directives/table-draggable.directive.ts#L49",
+  "description": "",
+  "inputs": [
+    {
+      "name": "dragoverPredicate",
+      "type": "DragoverPredicate<TableRow<T>>",
+      "default": null,
+      "description": "Predicate function that checks whether the item can be dragged over another item.\nIf the function returns `false`, dragged over item will not be highlighted, and drop event will be canceled.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 74,
+      "since": null
+    },
+    {
+      "name": "dropMode",
+      "type": "FdDndDropType",
+      "default": "'auto'",
+      "description": "Row drop mode.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 63,
+      "since": null
+    },
+    {
+      "name": "dropPredicate",
+      "type": "DropPredicate<TableRow<T>>",
+      "default": null,
+      "description": "Predicate function that checks whether the item can be dropped over another item.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 67,
+      "since": null
+    },
+    {
+      "name": "enableRowReordering",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether to allow for row reordering on tree tables via drag and drop.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 52,
+      "since": null
+    },
+    {
+      "name": "isTreeTable",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether tree mode is enabled.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 57,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "rowsRearrange",
+      "type": "TableRowsRearrangeEvent<T>",
+      "default": null,
+      "description": "Event fired when tree rows rearranged through drag & drop. Consider that rows rearranged with their children rows.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 78,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "dragDropItemDrop",
+      "signature": "(event: FdDropEvent<TableRow<any>>) => void",
+      "description": "Method called when dragged item being dropped.",
+      "deprecated": null,
+      "sourceLine": 182,
+      "since": null,
+      "parameters": [
+        {
+          "name": "event",
+          "type": "FdDropEvent<TableRow<any>>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "dragDropStart",
+      "signature": "(draggedItem?: TableRow<any>, dndIndex?: number, globalIndex?: number) => void",
+      "description": "Initiates drag&drop sequence.",
+      "deprecated": null,
+      "sourceLine": 133,
+      "since": null,
+      "parameters": [
+        {
+          "name": "draggedItem",
+          "type": "TableRow<any>",
+          "description": "",
+          "optional": true
+        },
+        {
+          "name": "dndIndex",
+          "type": "number",
+          "description": "",
+          "optional": true
+        },
+        {
+          "name": "globalIndex",
+          "type": "number",
+          "description": "",
+          "optional": true
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "dragRowFromKeyboard",
+      "signature": "(dir: string, event: Event, currentRowIndex: number, mode: 'shift' | 'group') => void",
+      "description": "Method called when dnd performed with the keyboard.",
+      "deprecated": null,
+      "sourceLine": 147,
+      "since": null,
+      "parameters": [
+        {
+          "name": "dir",
+          "type": "string",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "event",
+          "type": "Event",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "currentRowIndex",
+          "type": "number",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "mode",
+          "type": "'shift' | 'group'",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "dropCancelled",
+      "signature": "() => void",
+      "description": "Method called when drag&drop event being cancelled.",
+      "deprecated": null,
+      "sourceLine": 171,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "setTable",
+      "signature": "(table: Table<any>) => void",
+      "description": "Sets table reference.",
+      "deprecated": null,
+      "sourceLine": 126,
+      "since": null,
+      "parameters": [
+        {
+          "name": "table",
+          "type": "Table<any>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

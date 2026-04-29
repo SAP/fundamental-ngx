@@ -1,0 +1,44 @@
+{
+  "name": "ShellbarActionsMobileComponent",
+  "selector": "fd-shellbar-actions-mobile",
+  "kind": "Component",
+  "sourceFile": "shellbar-actions-mobile.component.ts",
+  "sourceLine": 40,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/shellbar/shellbar-actions-mobile/shellbar-actions-mobile.component.ts#L40",
+  "description": "",
+  "inputs": [
+    {
+      "name": "fdType",
+      "type": "ButtonType",
+      "default": null,
+      "description": "The button type for styling (e.g., 'transparent', 'emphasized').",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 63,
+      "since": null
+    },
+    {
+      "name": "searchExists",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the search is present in the shellbar.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 49,
+      "since": null
+    },
+    {
+      "name": "toggled",
+      "type": "null | boolean",
+      "default": null,
+      "description": "Whether the button is in toggled state.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 66,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

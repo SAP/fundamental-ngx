@@ -1,0 +1,155 @@
+{
+  "name": "TabListComponent",
+  "selector": "fd-tab-list",
+  "kind": "Component",
+  "sourceFile": "tab-list.component.ts",
+  "sourceLine": 122,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/tabs/tab-list.component.ts#L122",
+  "description": "Represents a list of tab-panels.",
+  "inputs": [
+    {
+      "name": "collapseOverflow",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether to move tabs overflowing in the tab bar to the dropdown",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 138,
+      "since": null
+    },
+    {
+      "name": "collapsibleTabs",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to enable collapsing expanded tab on expanded tab click",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 155,
+      "since": null
+    },
+    {
+      "name": "defaultTab",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "Initially selected tab (by id). First not disabled one if not specified.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 159,
+      "since": null
+    },
+    {
+      "name": "focusFirstFocusableElement",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether to focus the first focusable element in a tab panel when using stacked tabs.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 167,
+      "since": null
+    },
+    {
+      "name": "maxContentHeight",
+      "type": "string",
+      "default": "'100%'",
+      "description": "Maximum height of the content",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 151,
+      "since": null
+    },
+    {
+      "name": "maxVisibleTabs",
+      "type": "number",
+      "default": "Infinity",
+      "description": "Limits the maximum number of tabs visible in the tab bar in collapseOverflow mode.\nOther tabs will be moved to the collapsed tabs dropdown",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 143,
+      "since": null
+    },
+    {
+      "name": "mode",
+      "type": "TabModes",
+      "default": null,
+      "description": "Whether user wants to use tab component in certain mode. Modes available:\n'icon-only' | 'process' | 'filter'",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 134,
+      "since": null
+    },
+    {
+      "name": "selectDefaultOnTabsChange",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to try to keep selected tab (default value) on tabs change or to select default one (first if not specified).",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 163,
+      "since": null
+    },
+    {
+      "name": "size",
+      "type": "TabSizes",
+      "default": "'m'",
+      "description": "Size of tab, it's mostly about adding spacing on tab container, available sizes 's' | 'm' | 'l' | 'xl' | 'xxl'",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 127,
+      "since": null
+    },
+    {
+      "name": "stackContent",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to open tab content one under another without collapsing",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 147,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "hiddenItemsCount",
+      "type": "number",
+      "default": null,
+      "description": "Event emitted when hidden items count has been changed.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 183,
+      "since": null
+    },
+    {
+      "name": "selectedTabChange",
+      "type": "TabPanelComponent",
+      "default": null,
+      "description": "Event emitted when the selected panel changes.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 171,
+      "since": null
+    },
+    {
+      "name": "selectedTabIndexChange",
+      "type": "number",
+      "default": null,
+      "description": "Event emitted when the selected panel index changes.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 175,
+      "since": null
+    },
+    {
+      "name": "visibleItemsCount",
+      "type": "number",
+      "default": null,
+      "description": "Event emitted when visible items count has been changed.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 179,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

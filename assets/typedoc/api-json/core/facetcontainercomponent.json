@@ -1,0 +1,54 @@
+{
+  "name": "FacetContainerComponent",
+  "selector": "fd-facet-container",
+  "kind": "Component",
+  "sourceFile": "facet-container.component.ts",
+  "sourceLine": 45,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/facets/facet-container.component.ts#L45",
+  "description": "",
+  "inputs": [
+    {
+      "name": "alignItems",
+      "type": "ContainerFlexJustify",
+      "default": null,
+      "description": "Value for align-items of the flex container.\nPossible values:\n'start', 'center', 'end', 'flex-start', 'flex-end', 'space-between', 'space-around',\n'space-evenly', 'stretch', 'self-start', 'self-end', 'baseline'\nDefault: 'start'",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 60,
+      "since": null
+    },
+    {
+      "name": "flexDirection",
+      "type": "ContainerFlexDirection",
+      "default": null,
+      "description": "Value for the direction of the flex container.\nPossible values: 'row' | 'row-reverse' | 'column' | 'column-reverse'\nDefault: 'column'",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 51,
+      "since": null
+    },
+    {
+      "name": "flexGap",
+      "type": "number",
+      "default": null,
+      "description": "Value for the flex container gap in rem.\nAn integer number\nDefault: 1",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 76,
+      "since": null
+    },
+    {
+      "name": "justifyContent",
+      "type": "ContainerFlexAlign",
+      "default": null,
+      "description": "Value for justify-content of the flex container.\nPossible values:\n'start', 'center', 'end', 'flex-start', 'flex-end', 'space-between', 'space-around',\n'space-evenly', 'stretch'\nDefault: 'start'",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 69,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

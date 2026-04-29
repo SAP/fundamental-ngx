@@ -1,0 +1,104 @@
+{
+  "name": "UserMenuAccount",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "additionalInfo",
+      "type": "string",
+      "default": null,
+      "description": "Defines additional information for the user.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 45,
+      "since": null
+    },
+    {
+      "name": "avatarColorScheme",
+      "type": "'Auto' | 'Transparent' | 'Accent1' | 'Accent2' | 'Accent3' | 'Accent4' | 'Accent5' | 'Accent6' | 'Accent7' | 'Accent8' | 'Accent9' | 'Accent10' | 'Placeholder'",
+      "default": null,
+      "description": "Defines the background color of the desired image.\nIf `avatarColorScheme` is set to `Auto`, the avatar will be displayed with the `Accent6` color.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 51,
+      "since": null
+    },
+    {
+      "name": "avatarInitials",
+      "type": "string",
+      "default": null,
+      "description": "Defines the avatar initials of the user.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 56,
+      "since": null
+    },
+    {
+      "name": "avatarSrc",
+      "type": "string",
+      "default": null,
+      "description": "Defines the avatar image url of the user.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 61,
+      "since": null
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "default": null,
+      "description": "Defines description of the user.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 66,
+      "since": null
+    },
+    {
+      "name": "loading",
+      "type": "boolean",
+      "default": null,
+      "description": "Indicates whether a loading indicator should be shown.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 71,
+      "since": null
+    },
+    {
+      "name": "selected",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines if the user is selected.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 76,
+      "since": null
+    },
+    {
+      "name": "subtitleText",
+      "type": "string",
+      "default": null,
+      "description": "Defines additional text of the user.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 81,
+      "since": null
+    },
+    {
+      "name": "titleText",
+      "type": "string",
+      "default": null,
+      "description": "Defines the title text of the user.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 86,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

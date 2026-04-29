@@ -1,0 +1,55 @@
+{
+  "name": "GridListMoreBtnComponent",
+  "selector": "fd-grid-list-more-btn",
+  "kind": "Component",
+  "sourceFile": "grid-list-more-btn.component.ts",
+  "sourceLine": 15,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/grid-list/components/grid-list-more-btn/grid-list-more-btn.component.ts#L15",
+  "description": "",
+  "inputs": [
+    {
+      "name": "displayCount",
+      "type": "number",
+      "default": null,
+      "description": "Sets the number of display items.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 26,
+      "since": null
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "default": null,
+      "description": "Sets title of the button",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 18,
+      "since": null
+    },
+    {
+      "name": "totalCount",
+      "type": "number",
+      "default": null,
+      "description": "Sets the number of total items.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 22,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "showMore",
+      "type": "void",
+      "default": null,
+      "description": "Event is thrown, when the control button is clicked",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 30,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

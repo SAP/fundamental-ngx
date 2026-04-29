@@ -1,0 +1,57 @@
+{
+  "name": "NotificationService",
+  "selector": null,
+  "kind": "Service",
+  "sourceFile": "notification.service.ts",
+  "sourceLine": 9,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/notification/notification-service/notification.service.ts#L9",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "destroyAll",
+      "signature": "() => void",
+      "description": "Method to remove all of notifications from this service instance",
+      "deprecated": null,
+      "sourceLine": 103,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "isAnyOpened",
+      "signature": "() => boolean",
+      "description": "Method that informs if there is any notification opened in this service instance",
+      "deprecated": null,
+      "sourceLine": 110,
+      "since": null,
+      "parameters": [],
+      "returnType": "boolean"
+    },
+    {
+      "name": "open",
+      "signature": "(content: Type<any> | TemplateRef<any>, notificationConfig: NotificationConfig<any>) => NotificationRef<any, any>",
+      "description": "Opens a notification component with a content of type TemplateRef or Component Type",
+      "deprecated": null,
+      "sourceLine": 39,
+      "since": null,
+      "parameters": [
+        {
+          "name": "content",
+          "type": "Type<any> | TemplateRef<any>",
+          "description": "Content of the notification component.",
+          "optional": false
+        },
+        {
+          "name": "notificationConfig",
+          "type": "NotificationConfig<any>",
+          "description": "Configuration of the notification component.",
+          "optional": false
+        }
+      ],
+      "returnType": "NotificationRef<any, any>"
+    }
+  ],
+  "inherited": null
+}

@@ -1,0 +1,24 @@
+{
+  "name": "OverflowLayoutPopoverContentDirective",
+  "selector": "[fdOverflowLayoutPopoverContent]",
+  "kind": "Directive",
+  "sourceFile": "overflow-layout-popover-content.directive.ts",
+  "sourceLine": 29,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/overflow-layout/directives/overflow-layout-popover-content.directive.ts#L29",
+  "description": "Directive to wrap Overlay Layout \"More\" popover content.\nUsed to apply keyboard navigation through the items.",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "focusFirstTabbableElement",
+      "signature": "() => void",
+      "description": "Focuses on the first tabbable element inside directive's element.",
+      "deprecated": null,
+      "sourceLine": 95,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

@@ -1,0 +1,203 @@
+{
+  "name": "SmartFilterBarComponent",
+  "selector": "fdp-smart-filter-bar",
+  "kind": "Component",
+  "sourceFile": "smart-filter-bar.component.ts",
+  "sourceLine": 125,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/smart-filter-bar/smart-filter-bar.component.ts#L125",
+  "description": "",
+  "inputs": [
+    {
+      "name": "filtersColumnLayout",
+      "type": "Nullable<string>",
+      "default": "defaultColumnsLayout",
+      "description": "Columns layout.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 153,
+      "since": null
+    },
+    {
+      "name": "hideToolbar",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to hide Toolbar.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 165,
+      "since": null
+    },
+    {
+      "name": "liveUpdate",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to update filters when they are selected. Otherwise, filters will be applied only by pressing \"Go\" button.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 159,
+      "since": null
+    },
+    {
+      "name": "transparent",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether smart filter bar background should be transparent.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 147,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "searchInputChanged",
+      "type": "SearchInput",
+      "default": null,
+      "description": "Event emitted when search input field value has been changed.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 183,
+      "since": null
+    },
+    {
+      "name": "smartFiltersApplied",
+      "type": "SmartFilterChangeObject",
+      "default": null,
+      "description": "Event emitted when selected filters has been applied (User clicked on Go button).",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 177,
+      "since": null
+    },
+    {
+      "name": "smartFiltersChanged",
+      "type": "SmartFilterChangeObject",
+      "default": null,
+      "description": "Event emitted when the selected filters have been changed.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 171,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "cancelSearch",
+      "signature": "() => void",
+      "description": "Clear search query.",
+      "deprecated": null,
+      "sourceLine": 313,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "getCurrentPreset",
+      "signature": "() => SmartFilterBarManagedPreset",
+      "description": "Returns current preset configuration.",
+      "deprecated": null,
+      "sourceLine": 376,
+      "since": null,
+      "parameters": [],
+      "returnType": "SmartFilterBarManagedPreset"
+    },
+    {
+      "name": "getDisplayValue",
+      "signature": "(condition: SmartFilterBarCondition<any>, filterType: string) => Promise<string>",
+      "description": "Transforms condition value into human-readable text.",
+      "deprecated": null,
+      "sourceLine": 274,
+      "since": null,
+      "parameters": [
+        {
+          "name": "condition",
+          "type": "SmartFilterBarCondition<any>",
+          "description": "Smart filter bar condition.",
+          "optional": false
+        },
+        {
+          "name": "filterType",
+          "type": "string",
+          "description": "Condition filter type.",
+          "optional": false
+        }
+      ],
+      "returnType": "Promise<string>"
+    },
+    {
+      "name": "getFormattedConditions",
+      "signature": "() => Promise<CollectionFilterGroup[]>",
+      "description": "Formats raw filters object into array of grouped filters.",
+      "deprecated": null,
+      "sourceLine": 428,
+      "since": null,
+      "parameters": [],
+      "returnType": "Promise<CollectionFilterGroup[]>"
+    },
+    {
+      "name": "onSearchInputChange",
+      "signature": "(event: SearchInput) => void",
+      "description": "Callback function when search query changed.",
+      "deprecated": null,
+      "sourceLine": 307,
+      "since": null,
+      "parameters": [
+        {
+          "name": "event",
+          "type": "SearchInput",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setPreset",
+      "signature": "(data: SmartFilterBarManagedPreset) => Promise<void>",
+      "description": "Method for setting predefined configuration.",
+      "deprecated": null,
+      "sourceLine": 329,
+      "since": null,
+      "parameters": [
+        {
+          "name": "data",
+          "type": "SmartFilterBarManagedPreset",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "Promise<void>"
+    },
+    {
+      "name": "showFilteringSettings",
+      "signature": "() => void",
+      "description": "Open Filtering Settings Dialog",
+      "deprecated": null,
+      "sourceLine": 279,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "submitForm",
+      "signature": "() => void",
+      "description": "Submits filters and search form.",
+      "deprecated": null,
+      "sourceLine": 324,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "toggleFilterBar",
+      "signature": "() => void",
+      "description": "Toggles Smart Filter Bar filters section.",
+      "deprecated": null,
+      "sourceLine": 420,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

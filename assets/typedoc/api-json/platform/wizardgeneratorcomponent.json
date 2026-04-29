@@ -1,0 +1,88 @@
+{
+  "name": "WizardGeneratorComponent",
+  "selector": "fdp-wizard-generator",
+  "kind": "Component",
+  "sourceFile": "wizard-generator.component.ts",
+  "sourceLine": 24,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/wizard-generator/components/wizard-generator/wizard-generator.component.ts#L24",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": {
+    "from": "BaseWizardGenerator",
+    "inputs": [],
+    "methods": [
+      {
+        "name": "finish",
+        "signature": "() => Promise<void>",
+        "description": "",
+        "deprecated": null,
+        "sourceLine": 355,
+        "since": null,
+        "parameters": [],
+        "returnType": "Promise<void>"
+      },
+      {
+        "name": "goBack",
+        "signature": "() => void",
+        "description": "",
+        "deprecated": null,
+        "sourceLine": 277,
+        "since": null,
+        "parameters": [],
+        "returnType": "void"
+      },
+      {
+        "name": "goNext",
+        "signature": "() => Promise<void>",
+        "description": "",
+        "deprecated": null,
+        "sourceLine": 299,
+        "since": null,
+        "parameters": [],
+        "returnType": "Promise<void>"
+      },
+      {
+        "name": "stepStatusChanged",
+        "signature": "(stepId: string, status: WizardStepStatus) => Promise<void>",
+        "description": "",
+        "deprecated": null,
+        "sourceLine": 381,
+        "since": null,
+        "parameters": [
+          {
+            "name": "stepId",
+            "type": "string",
+            "description": "Step ID to be updated.",
+            "optional": false
+          },
+          {
+            "name": "status",
+            "type": "WizardStepStatus",
+            "description": "New step status.",
+            "optional": false
+          }
+        ],
+        "returnType": "Promise<void>"
+      },
+      {
+        "name": "submitStepForms",
+        "signature": "(currentStepIndex?: string) => Observable<null | WizardStepSubmittedForms>",
+        "description": "",
+        "deprecated": null,
+        "sourceLine": 342,
+        "since": null,
+        "parameters": [
+          {
+            "name": "currentStepIndex",
+            "type": "string",
+            "description": "current step index.",
+            "optional": true
+          }
+        ],
+        "returnType": "Observable<null | WizardStepSubmittedForms>"
+      }
+    ]
+  }
+}

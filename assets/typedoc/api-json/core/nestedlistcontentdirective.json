@@ -1,0 +1,126 @@
+{
+  "name": "NestedListContentDirective",
+  "selector": "[fdNestedListContent], [fd-nested-list-content]",
+  "kind": "Directive",
+  "sourceFile": "nested-list-content.directive.ts",
+  "sourceLine": 27,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/nested-list/nested-content/nested-list-content.directive.ts#L27",
+  "description": "",
+  "inputs": [],
+  "outputs": [
+    {
+      "name": "clicked",
+      "type": "MouseEvent",
+      "default": null,
+      "description": "Event that is thrown, when this element is clicked",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 51,
+      "since": null
+    },
+    {
+      "name": "keyboardTriggered",
+      "type": "KeyboardEvent",
+      "default": null,
+      "description": "Event that is thrown, when any keyboard event is dispatched on this element",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 47,
+      "since": null
+    },
+    {
+      "name": "selectedChange",
+      "type": "boolean",
+      "default": null,
+      "description": "Event thrown, when selected state is changed",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 43,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "changeExpandedState",
+      "signature": "(expanded: boolean) => void",
+      "description": "Expanded state change propagation method",
+      "deprecated": null,
+      "sourceLine": 108,
+      "since": null,
+      "parameters": [
+        {
+          "name": "expanded",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "changeSelected",
+      "signature": "(selected: boolean) => void",
+      "description": "Method to trigger selected state change",
+      "deprecated": null,
+      "sourceLine": 102,
+      "since": null,
+      "parameters": [
+        {
+          "name": "selected",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "click",
+      "signature": "() => void",
+      "description": "Dispatches the click event on the element",
+      "deprecated": null,
+      "sourceLine": 120,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "focus",
+      "signature": "() => void",
+      "description": "Set focus on the element.",
+      "deprecated": null,
+      "sourceLine": 115,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "onClick",
+      "signature": "() => void",
+      "description": "Handler for mouse events",
+      "deprecated": null,
+      "sourceLine": 91,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "onKeyDown",
+      "signature": "(event: KeyboardEvent) => void",
+      "description": "Keyboard Event Handler",
+      "deprecated": null,
+      "sourceLine": 84,
+      "since": null,
+      "parameters": [
+        {
+          "name": "event",
+          "type": "KeyboardEvent",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

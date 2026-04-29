@@ -1,0 +1,415 @@
+{
+  "name": "TableService",
+  "selector": null,
+  "kind": "Service",
+  "sourceFile": "table.service.ts",
+  "sourceLine": 40,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/table-helpers/services/table.service.ts#L40",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "addFilters",
+      "signature": "(rulesToAdd: CollectionFilter[]) => void",
+      "description": "Add filter rules to the existing ones",
+      "deprecated": null,
+      "sourceLine": 212,
+      "since": null,
+      "parameters": [
+        {
+          "name": "rulesToAdd",
+          "type": "CollectionFilter[]",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "addGroups",
+      "signature": "(groupsToAdd: CollectionGroup[]) => void",
+      "description": "Add group rules to the existing ones",
+      "deprecated": null,
+      "sourceLine": 276,
+      "since": null,
+      "parameters": [
+        {
+          "name": "groupsToAdd",
+          "type": "CollectionGroup[]",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "addSort",
+      "signature": "(sortRules: CollectionSort[]) => void",
+      "description": "Add sort rules to the existing ones",
+      "deprecated": null,
+      "sourceLine": 165,
+      "since": null,
+      "parameters": [
+        {
+          "name": "sortRules",
+          "type": "CollectionSort[]",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "buildFilterRulesMap",
+      "signature": "(state: TableState) => void",
+      "description": "Constructs filter rules based on the table state.",
+      "deprecated": null,
+      "sourceLine": 437,
+      "since": null,
+      "parameters": [
+        {
+          "name": "state",
+          "type": "TableState",
+          "description": "Table state.",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "buildGroupRulesMap",
+      "signature": "(state: TableState) => void",
+      "description": "Constructs grouping rules based on the table state.",
+      "deprecated": null,
+      "sourceLine": 420,
+      "since": null,
+      "parameters": [
+        {
+          "name": "state",
+          "type": "TableState",
+          "description": "Table state.",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "buildSortRulesMap",
+      "signature": "(state: TableState) => void",
+      "description": "Constructs sorting rules based on the table state.",
+      "deprecated": null,
+      "sourceLine": 429,
+      "since": null,
+      "parameters": [
+        {
+          "name": "state",
+          "type": "TableState",
+          "description": "Table state",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "constructTableMetadata",
+      "signature": "() => void",
+      "description": "Constructs base table config.",
+      "deprecated": null,
+      "sourceLine": 479,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "detectChanges",
+      "signature": "() => void",
+      "description": "Notify about changes in table subcomponents (mostly table column) and detect them immediately.",
+      "deprecated": null,
+      "sourceLine": 124,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "freezeTo",
+      "signature": "(columnName: null | string, end?: boolean) => void",
+      "description": "Freeze table to column",
+      "deprecated": null,
+      "sourceLine": 298,
+      "since": null,
+      "parameters": [
+        {
+          "name": "columnName",
+          "type": "null | string",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "end",
+          "type": "boolean",
+          "description": "",
+          "optional": true
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "getDefaultState",
+      "signature": "() => TableState",
+      "description": "Returns default table state.",
+      "deprecated": null,
+      "sourceLine": 377,
+      "since": null,
+      "parameters": [],
+      "returnType": "TableState"
+    },
+    {
+      "name": "getTableState",
+      "signature": "() => TableState",
+      "description": "Get current state/settings of the Table.",
+      "deprecated": null,
+      "sourceLine": 104,
+      "since": null,
+      "parameters": [],
+      "returnType": "TableState"
+    },
+    {
+      "name": "markForCheck",
+      "signature": "() => void",
+      "description": "Notify about changes in table subcomponents (mostly table column) and detect them on next detector check.",
+      "deprecated": null,
+      "sourceLine": 119,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "removeFilters",
+      "signature": "(fields: string[]) => void",
+      "description": "Removes filters for the provided fields",
+      "deprecated": null,
+      "sourceLine": 238,
+      "since": null,
+      "parameters": [
+        {
+          "name": "fields",
+          "type": "string[]",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "resetFilters",
+      "signature": "() => void",
+      "description": "Reset all filter rules",
+      "deprecated": null,
+      "sourceLine": 458,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "search",
+      "signature": "(searchInput: SearchInput) => void",
+      "description": "Search",
+      "deprecated": null,
+      "sourceLine": 129,
+      "since": null,
+      "parameters": [
+        {
+          "name": "searchInput",
+          "type": "SearchInput",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setColumns",
+      "signature": "(columns: string[], keys: string[]) => void",
+      "description": "Set table columns",
+      "deprecated": null,
+      "sourceLine": 317,
+      "since": null,
+      "parameters": [
+        {
+          "name": "columns",
+          "type": "string[]",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "keys",
+          "type": "string[]",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setCurrentPage",
+      "signature": "(currentPage: number) => void",
+      "description": "Set page.",
+      "deprecated": null,
+      "sourceLine": 335,
+      "since": null,
+      "parameters": [
+        {
+          "name": "currentPage",
+          "type": "number",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setFilters",
+      "signature": "(filterRules: CollectionFilter[]) => void",
+      "description": "Set new filter rules",
+      "deprecated": null,
+      "sourceLine": 188,
+      "since": null,
+      "parameters": [
+        {
+          "name": "filterRules",
+          "type": "CollectionFilter[]",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setGroups",
+      "signature": "(groups: CollectionGroup[]) => void",
+      "description": "Set group rules",
+      "deprecated": null,
+      "sourceLine": 258,
+      "since": null,
+      "parameters": [
+        {
+          "name": "groups",
+          "type": "CollectionGroup[]",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setItemsPerPage",
+      "signature": "(itemsPerPage: number, resetPageNumber: boolean) => void",
+      "description": "Set items per page.",
+      "deprecated": null,
+      "sourceLine": 354,
+      "since": null,
+      "parameters": [
+        {
+          "name": "itemsPerPage",
+          "type": "number",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "resetPageNumber",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setPoppingColumns",
+      "signature": "(columns: TableColumn[]) => void",
+      "description": "Shares popping columns array across listeners.",
+      "deprecated": null,
+      "sourceLine": 411,
+      "since": null,
+      "parameters": [
+        {
+          "name": "columns",
+          "type": "TableColumn[]",
+          "description": "Popping columns to share.",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setSort",
+      "signature": "(sortRules: CollectionSort[]) => void",
+      "description": "Set new sort rules",
+      "deprecated": null,
+      "sourceLine": 144,
+      "since": null,
+      "parameters": [
+        {
+          "name": "sortRules",
+          "type": "CollectionSort[]",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setTableLoading",
+      "signature": "(isLoading: boolean) => void",
+      "description": "Set current loading state of the Table.",
+      "deprecated": null,
+      "sourceLine": 114,
+      "since": null,
+      "parameters": [
+        {
+          "name": "isLoading",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setTableState",
+      "signature": "(state: TableState) => void",
+      "description": "Set current state/settings of the Table.",
+      "deprecated": null,
+      "sourceLine": 109,
+      "since": null,
+      "parameters": [
+        {
+          "name": "state",
+          "type": "TableState",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setVisibleColumns",
+      "signature": "(columns: TableColumn[]) => void",
+      "description": "Shares visible columns array across listeners.",
+      "deprecated": null,
+      "sourceLine": 403,
+      "since": null,
+      "parameters": [
+        {
+          "name": "columns",
+          "type": "TableColumn[]",
+          "description": "Visible columns to share.",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

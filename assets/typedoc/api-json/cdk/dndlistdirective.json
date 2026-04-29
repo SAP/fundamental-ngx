@@ -1,0 +1,183 @@
+{
+  "name": "DndListDirective",
+  "selector": "[fdkDndList], [fd-dnd-list]",
+  "kind": "Directive",
+  "sourceFile": "dnd-list.directive.ts",
+  "sourceLine": 41,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cdk/utils/drag-and-drop/dnd-list/dnd-list.directive.ts#L41",
+  "description": "",
+  "inputs": [
+    {
+      "name": "dragoverPredicate",
+      "type": "DragoverPredicate<T>",
+      "default": null,
+      "description": "Predicate function that checks whether the item can be dragged over another item.\nIf the function returns `false`, dragged over item will not be highlighted, and drop event will be canceled.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 88,
+      "since": null
+    },
+    {
+      "name": "dropMode",
+      "type": "FdDndDropType",
+      "default": "'shift'",
+      "description": "Defines drop strategy:\n* `shift` mode will create line after the closest drop element.\n* `group` mode will create replace indicator on a whole closest drop element.\n* `auto` mode will create a line after the closest drop element\nif dragged element coordinates are shifted for 30% from the center of the closest drop element.\nOtherwise, it will create replace indicator on a whole closest drop element.\n\n`shift` mode is the default.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 60,
+      "since": null
+    },
+    {
+      "name": "dropPredicate",
+      "type": "DropPredicate<T>",
+      "default": null,
+      "description": "Predicate function that checks whether the item can be dropped over another item.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 81,
+      "since": null
+    },
+    {
+      "name": "gridMode",
+      "type": "boolean",
+      "default": "false",
+      "description": "Defines if the element is allowed to be dragged in 2 dimensions,\nWhen true - replace indicator will be displayed vertically",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 47,
+      "since": null
+    },
+    {
+      "name": "items",
+      "type": "T[]",
+      "default": "[]",
+      "description": "Array of items, that will be sorted",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 70,
+      "since": null
+    },
+    {
+      "name": "threshold",
+      "type": "number",
+      "default": "0.3",
+      "description": "Threshold of dragged item over another item to define which type of `dropMode` should be used.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 66,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "dropCancelled",
+      "type": "void",
+      "default": null,
+      "description": "Event that is thrown when predicate function returned false.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 107,
+      "since": null
+    },
+    {
+      "name": "dropPredicateCalculating",
+      "type": "boolean",
+      "default": null,
+      "description": "Event emitted when `dropPredicate` function evaluation changes.\nEmits `true` when evaluation started, and `false` when completed.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 95,
+      "since": null
+    },
+    {
+      "name": "itemDropped",
+      "type": "FdDropEvent<T>",
+      "default": null,
+      "description": "Event that is thrown when the item is dropped",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 103,
+      "since": null
+    },
+    {
+      "name": "itemsChange",
+      "type": "T[]",
+      "default": null,
+      "description": "Event that is thrown when items are reordered",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 99,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "dragEnd",
+      "signature": "(draggedItemIndex: number) => Promise<void>",
+      "description": "Method called when an element is released",
+      "deprecated": null,
+      "sourceLine": 255,
+      "since": null,
+      "parameters": [
+        {
+          "name": "draggedItemIndex",
+          "type": "number",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "Promise<void>"
+    },
+    {
+      "name": "dragStart",
+      "signature": "(index: number) => void",
+      "description": "Method called when an element is started to be dragged",
+      "deprecated": null,
+      "sourceLine": 245,
+      "since": null,
+      "parameters": [
+        {
+          "name": "index",
+          "type": "number",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onMove",
+      "signature": "(mousePosition: ElementPosition, draggedItemIndex: number) => void",
+      "description": "Method called when the item is being moved by 1 px",
+      "deprecated": null,
+      "sourceLine": 186,
+      "since": null,
+      "parameters": [
+        {
+          "name": "mousePosition",
+          "type": "ElementPosition",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "draggedItemIndex",
+          "type": "number",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "refreshQueryList",
+      "signature": "() => void",
+      "description": "Refreshes the indexes of the items.",
+      "deprecated": null,
+      "sourceLine": 170,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

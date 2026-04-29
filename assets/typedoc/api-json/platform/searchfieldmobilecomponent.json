@@ -1,0 +1,13 @@
+{
+  "name": "SearchFieldMobileComponent",
+  "selector": "fdp-search-field-mobile",
+  "kind": "Component",
+  "sourceFile": "search-field-mobile.component.ts",
+  "sourceLine": 61,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/search-field/search-field-mobile/search-field/search-field-mobile.component.ts#L61",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

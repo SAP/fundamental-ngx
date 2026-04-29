@@ -1,0 +1,13 @@
+{
+  "name": "InputGroupTextareaDirective",
+  "selector": "[fdInputGroupInput], [fd-input-group-input]",
+  "kind": "Directive",
+  "sourceFile": "input-group-directives.ts",
+  "sourceLine": 69,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/input-group/input-group-directives.ts#L69",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

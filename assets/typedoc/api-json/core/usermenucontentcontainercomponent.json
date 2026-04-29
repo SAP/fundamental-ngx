@@ -1,0 +1,13 @@
+{
+  "name": "UserMenuContentContainerComponent",
+  "selector": "[fd-user-menu-content-container]",
+  "kind": "Component",
+  "sourceFile": "user-menu-content-container.component.ts",
+  "sourceLine": 13,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/user-menu/components/user-menu-content-container.component.ts#L13",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

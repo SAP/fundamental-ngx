@@ -1,0 +1,195 @@
+{
+  "name": "ShellBar",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "accessibilityAttributes",
+      "type": "ShellBarAccessibilityAttributes",
+      "default": null,
+      "description": "Defines additional accessibility attributes on different areas of the component.\n\nThe accessibilityAttributes object has the following fields,\nwhere each field is an object supporting one or more accessibility attributes:\n\n- **logo** - `logo.role` and `logo.name`.\n- **notifications** - `notifications.expanded` and `notifications.hasPopup`.\n- **profile** - `profile.expanded`, `profile.hasPopup` and `profile.name`.\n- **product** - `product.expanded` and `product.hasPopup`.\n- **search** - `search.hasPopup`.\n- **overflow** - `overflow.expanded` and `overflow.hasPopup`.\n- **branding** - `branding.name`.\n\nThe accessibility attributes support the following values:\n\n- **role**: Defines the accessible ARIA role of the logo area.\nAccepts the following string values: `button` or `link`.\n\n- **expanded**: Indicates whether the button, or another grouping element it controls,\nis currently expanded or collapsed.\nAccepts the following string values: `true` or `false`.\n\n- **hasPopup**: Indicates the availability and type of interactive popup element,\nsuch as menu or dialog, that can be triggered by the button.\n\nAccepts the following string values: `dialog`, `grid`, `listbox`, `menu` or `tree`.\n- **name**: Defines the accessible ARIA name of the area.\nAccepts any string.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 72,
+      "since": null
+    },
+    {
+      "name": "disableSearchCollapse",
+      "type": "boolean",
+      "default": null,
+      "description": "Disables the automatic search field expansion/collapse when the available space is not enough.\n\n*Note:** The `disableSearchCollapse` property is in an experimental state and is a subject to change.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 79,
+      "since": null
+    },
+    {
+      "name": "hideSearchButton",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines the visibility state of the search button.\n\n*Note:** The `hideSearchButton` property is in an experimental state and is a subject to change.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 86,
+      "since": null
+    },
+    {
+      "name": "notificationsCount",
+      "type": "string",
+      "default": null,
+      "description": "Defines the `notificationsCount`,\ndisplayed in the notification icon top-right corner.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 92,
+      "since": null
+    },
+    {
+      "name": "primaryTitle",
+      "type": "string",
+      "default": null,
+      "description": "Defines the `primaryTitle`.\n\n*Note:** The `primaryTitle` would be hidden on S screen size (less than approx. 700px).",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 99,
+      "since": null
+    },
+    {
+      "name": "secondaryTitle",
+      "type": "string",
+      "default": null,
+      "description": "Defines the `secondaryTitle`.\n\n*Note:** The `secondaryTitle` would be hidden on S and M screen sizes (less than approx. 1300px).",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 106,
+      "since": null
+    },
+    {
+      "name": "showNotifications",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines, if the notification icon would be displayed.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 111,
+      "since": null
+    },
+    {
+      "name": "showProductSwitch",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines, if the product switch icon would be displayed.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 116,
+      "since": null
+    },
+    {
+      "name": "showSearchField",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines, if the Search Field would be displayed when there is a valid `searchField` slot.\n\n*Note:** By default the Search Field is not displayed.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 123,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5ContentItemVisibilityChange",
+      "type": "UI5CustomEvent<ShellBar, 'content-item-visibility-change'>",
+      "default": null,
+      "description": "Fired, when an item from the content slot is hidden or shown.\n*Note:** The `content-item-visibility-change` event is in an experimental state and is a subject to change.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 170,
+      "since": null
+    },
+    {
+      "name": "ui5LogoClick",
+      "type": "UI5CustomEvent<ShellBar, 'logo-click'>",
+      "default": null,
+      "description": "Fired, when the logo is activated.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 175,
+      "since": null
+    },
+    {
+      "name": "ui5MenuItemClick",
+      "type": "UI5CustomEvent<ShellBar, 'menu-item-click'>",
+      "default": null,
+      "description": "Fired, when a menu item is activated\n\n*Note:** You can prevent closing of overflow popover by calling `event.preventDefault()`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 182,
+      "since": null
+    },
+    {
+      "name": "ui5NotificationsClick",
+      "type": "UI5CustomEvent<ShellBar, 'notifications-click'>",
+      "default": null,
+      "description": "Fired, when the notification icon is activated.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 187,
+      "since": null
+    },
+    {
+      "name": "ui5ProductSwitchClick",
+      "type": "UI5CustomEvent<ShellBar, 'product-switch-click'>",
+      "default": null,
+      "description": "Fired, when the product switch icon is activated.\n\n*Note:** You can prevent closing of overflow popover by calling `event.preventDefault()`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 194,
+      "since": null
+    },
+    {
+      "name": "ui5ProfileClick",
+      "type": "UI5CustomEvent<ShellBar, 'profile-click'>",
+      "default": null,
+      "description": "Fired, when the profile slot is present.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 199,
+      "since": null
+    },
+    {
+      "name": "ui5SearchButtonClick",
+      "type": "UI5CustomEvent<ShellBar, 'search-button-click'>",
+      "default": null,
+      "description": "Fired, when the search button is activated.\n\n*Note:** You can prevent expanding/collapsing of the search field by calling `event.preventDefault()`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 206,
+      "since": null
+    },
+    {
+      "name": "ui5SearchFieldClear",
+      "type": "UI5CustomEvent<ShellBar, 'search-field-clear'>",
+      "default": null,
+      "description": "Fired, when the search cancel button is activated.\n\n*Note:** You can prevent the default behavior (clearing the search field value) by calling `event.preventDefault()`. The search will still be closed.\n*Note:** The `search-field-clear` event is in an experimental state and is a subject to change.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 214,
+      "since": null
+    },
+    {
+      "name": "ui5SearchFieldToggle",
+      "type": "UI5CustomEvent<ShellBar, 'search-field-toggle'>",
+      "default": null,
+      "description": "Fired, when the search field is expanded or collapsed.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 219,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

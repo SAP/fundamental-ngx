@@ -1,0 +1,31 @@
+{
+  "name": "PlatformFormGeneratorModule",
+  "selector": null,
+  "kind": "Module",
+  "sourceFile": "fdp-form-generator.module.ts",
+  "sourceLine": 80,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/form-generator/fdp-form-generator.module.ts#L80",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "withConfig",
+      "signature": "(config: Partial<FormGeneratorModuleConfig>) => ModuleWithProviders<PlatformFormGeneratorModule>",
+      "description": "Allows configuring module on a global level with custom configuration.",
+      "deprecated": null,
+      "sourceLine": 85,
+      "since": null,
+      "parameters": [
+        {
+          "name": "config",
+          "type": "Partial<FormGeneratorModuleConfig>",
+          "description": "User's custom configuration.",
+          "optional": false
+        }
+      ],
+      "returnType": "ModuleWithProviders<PlatformFormGeneratorModule>"
+    }
+  ],
+  "inherited": null
+}

@@ -1,0 +1,24 @@
+{
+  "name": "FdPatchLanguageDirective",
+  "selector": null,
+  "kind": "Directive",
+  "sourceFile": "patch-language.directive.ts",
+  "sourceLine": 42,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/i18n/src/lib/directives/patch-language.directive.ts#L42",
+  "description": "Directive that patches the language for child components using signal composition.",
+  "inputs": [
+    {
+      "name": "fdPatchLanguage",
+      "type": "FdLanguagePatch | (lang: FdLanguage) => FdLanguagePatch",
+      "default": null,
+      "description": "Part of the language object to be overridden",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 44,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

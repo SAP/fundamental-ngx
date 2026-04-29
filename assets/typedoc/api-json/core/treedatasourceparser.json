@@ -1,0 +1,31 @@
+{
+  "name": "TreeDataSourceParser",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "tree-data-source-parser.ts",
+  "sourceLine": 10,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/tree/data-source/tree-data-source-parser.ts#L10",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "parse",
+      "signature": "(source: FdTreeAcceptableDataSource<T>) => FdTreeDataSource<T>",
+      "description": "Transforms plain array or observable into DataSource class.",
+      "deprecated": null,
+      "sourceLine": 15,
+      "since": null,
+      "parameters": [
+        {
+          "name": "source",
+          "type": "FdTreeAcceptableDataSource<T>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "FdTreeDataSource<T>"
+    }
+  ],
+  "inherited": null
+}

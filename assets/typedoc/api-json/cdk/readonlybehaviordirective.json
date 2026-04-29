@@ -1,0 +1,31 @@
+{
+  "name": "ReadonlyBehaviorDirective",
+  "selector": "[fdkReadonly]",
+  "kind": "Directive",
+  "sourceFile": "readonly-behavior.directive.ts",
+  "sourceLine": 19,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cdk/utils/directives/readonly/readonly-behavior.directive.ts#L19",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "setReadonlyState",
+      "signature": "(isReadonly: boolean) => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 45,
+      "since": null,
+      "parameters": [
+        {
+          "name": "isReadonly",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

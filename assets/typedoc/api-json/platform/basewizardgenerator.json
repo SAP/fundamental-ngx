@@ -1,0 +1,146 @@
+{
+  "name": "BaseWizardGenerator",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "base-wizard-generator.ts",
+  "sourceLine": 49,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/wizard-generator/base-wizard-generator.ts#L49",
+  "description": "",
+  "inputs": [
+    {
+      "name": "contentHeight",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "Custom height to use for the wizard's content pane. By default, this value is calc(100vh - 144px), where 144px\nis the combined height of the shellbar, wizard header and wizard footer.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 112,
+      "since": null
+    },
+    {
+      "name": "displaySummaryStep",
+      "type": "boolean",
+      "default": "false",
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 118,
+      "since": null
+    },
+    {
+      "name": "navigationButtons",
+      "type": "boolean",
+      "default": "true",
+      "description": "If navigation buttons should be visible.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 105,
+      "since": null
+    },
+    {
+      "name": "responsivePaddings",
+      "type": "boolean",
+      "default": "true",
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 54,
+      "since": null
+    },
+    {
+      "name": "unifiedLayout",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether all form items should have identical layout provided for form group.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 122,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "wizardFinished",
+      "type": "WizardGeneratorFormsValue",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 128,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "finish",
+      "signature": "() => Promise<void>",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 355,
+      "since": null,
+      "parameters": [],
+      "returnType": "Promise<void>"
+    },
+    {
+      "name": "goBack",
+      "signature": "() => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 277,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "goNext",
+      "signature": "() => Promise<void>",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 299,
+      "since": null,
+      "parameters": [],
+      "returnType": "Promise<void>"
+    },
+    {
+      "name": "stepStatusChanged",
+      "signature": "(stepId: string, status: WizardStepStatus) => Promise<void>",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 381,
+      "since": null,
+      "parameters": [
+        {
+          "name": "stepId",
+          "type": "string",
+          "description": "Step ID to be updated.",
+          "optional": false
+        },
+        {
+          "name": "status",
+          "type": "WizardStepStatus",
+          "description": "New step status.",
+          "optional": false
+        }
+      ],
+      "returnType": "Promise<void>"
+    },
+    {
+      "name": "submitStepForms",
+      "signature": "(currentStepIndex?: string) => Observable<null | WizardStepSubmittedForms>",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 342,
+      "since": null,
+      "parameters": [
+        {
+          "name": "currentStepIndex",
+          "type": "string",
+          "description": "current step index.",
+          "optional": true
+        }
+      ],
+      "returnType": "Observable<null | WizardStepSubmittedForms>"
+    }
+  ],
+  "inherited": null
+}

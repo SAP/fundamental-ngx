@@ -1,0 +1,204 @@
+{
+  "name": "StatusIndicatorComponent",
+  "selector": "fd-status-indicator",
+  "kind": "Component",
+  "sourceFile": "status-indicator.component.ts",
+  "sourceLine": 53,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/status-indicator/status-indicator.component.ts#L53",
+  "description": "",
+  "inputs": [
+    {
+      "name": "angle",
+      "type": "number",
+      "default": null,
+      "description": "represent the degree of angle to project the filling of the component",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 132,
+      "since": null
+    },
+    {
+      "name": "ariaLabel",
+      "type": "null | string",
+      "default": null,
+      "description": "Aria label for the Status Indicator.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 93,
+      "since": null
+    },
+    {
+      "name": "ariaRoleDescription",
+      "type": "null | string",
+      "default": null,
+      "description": "Aria defines role description for the Status Indicator.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 96,
+      "since": null
+    },
+    {
+      "name": "ariaValueText",
+      "type": "null | string",
+      "default": null,
+      "description": "Aria Value Text for the Status Indicator.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 105,
+      "since": null
+    },
+    {
+      "name": "clickable",
+      "type": "boolean",
+      "default": null,
+      "description": "boolean value to be marked as clickable",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 84,
+      "since": null
+    },
+    {
+      "name": "fillDirection",
+      "type": "FillingDirection",
+      "default": null,
+      "description": "value to define fill direction",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 124,
+      "since": null
+    },
+    {
+      "name": "fillPercentage",
+      "type": "number",
+      "default": null,
+      "description": "Offset value to be filled under the give percentatge value.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 119,
+      "since": null
+    },
+    {
+      "name": "fillingType",
+      "type": "FillingType",
+      "default": null,
+      "description": "FillingType to represent the fill pattern of the component",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 129,
+      "since": null
+    },
+    {
+      "name": "focusable",
+      "type": "boolean",
+      "default": null,
+      "description": "Aria Focusable for the Status Indicator.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 99,
+      "since": null
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "default": null,
+      "description": "value id defines the id of the object.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 57,
+      "since": null
+    },
+    {
+      "name": "labelPosition",
+      "type": "LablePosition",
+      "default": null,
+      "description": "defines the label position the value can be 'left' | 'right' | 'top' | 'bottom'",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 111,
+      "since": null
+    },
+    {
+      "name": "labelSize",
+      "type": "StatusIndicatorSize",
+      "default": null,
+      "description": "defines the size of the status indicator.\nCan be one of the following: 'sm' | 'md' | 'lg' | 'xl'",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 90,
+      "since": null
+    },
+    {
+      "name": "path",
+      "type": "string[]",
+      "default": null,
+      "description": "Path for the status indicator",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 114,
+      "since": null
+    },
+    {
+      "name": "role",
+      "type": "null | string",
+      "default": null,
+      "description": "Aria Role for the Status Indicator.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 102,
+      "since": null
+    },
+    {
+      "name": "size",
+      "type": "StatusIndicatorSize",
+      "default": null,
+      "description": "defines the size of the status indicator.\nCan be one of the following: 'sm' | 'md' | 'lg' | 'xl'\nDefault size is Medium(md).",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 64,
+      "since": null
+    },
+    {
+      "name": "status",
+      "type": "StatusIndicatorColor",
+      "default": null,
+      "description": "The status represented by the Status Indicator.\nCan be one of the following: 'negative' | 'critical' | 'informative'\nFor default Object Status omit this property",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 71,
+      "since": null
+    },
+    {
+      "name": "statusLabel",
+      "type": "string",
+      "default": null,
+      "description": "Define the text content of the Status indicator",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 74,
+      "since": null
+    },
+    {
+      "name": "title",
+      "type": "null | string",
+      "default": null,
+      "description": "Aria title for the status indicator.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 108,
+      "since": null
+    },
+    {
+      "name": "viewBox",
+      "type": "string",
+      "default": null,
+      "description": "positioning of the status indicator image within the defined height and width .",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 79,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

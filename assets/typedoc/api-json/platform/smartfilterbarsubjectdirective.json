@@ -1,0 +1,71 @@
+{
+  "name": "SmartFilterBarSubjectDirective",
+  "selector": "[fdpSmartFilterBarSubject], [fdp-smart-filter-bar-subject]",
+  "kind": "Directive",
+  "sourceFile": "smart-filter-bar-subject.directive.ts",
+  "sourceLine": 14,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/smart-filter-bar/directives/smart-filter-bar-subject.directive.ts#L14",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "getDataSource",
+      "signature": "() => TableDataSource<any>",
+      "description": "Retrieves data source of the subject.",
+      "deprecated": null,
+      "sourceLine": 44,
+      "since": null,
+      "parameters": [],
+      "returnType": "TableDataSource<any>"
+    },
+    {
+      "name": "getFieldVariants",
+      "signature": "(field: string) => Observable<SelectItem<any>[]>",
+      "description": "Get available field variants",
+      "deprecated": null,
+      "sourceLine": 57,
+      "since": null,
+      "parameters": [
+        {
+          "name": "field",
+          "type": "string",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "Observable<SelectItem<any>[]>"
+    },
+    {
+      "name": "getState",
+      "signature": "() => TableState",
+      "description": "Get subject state",
+      "deprecated": null,
+      "sourceLine": 69,
+      "since": null,
+      "parameters": [],
+      "returnType": "TableState"
+    },
+    {
+      "name": "getSubject",
+      "signature": "() => Table<any>",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 76,
+      "since": null,
+      "parameters": [],
+      "returnType": "Table<any>"
+    },
+    {
+      "name": "getSubjectFields",
+      "signature": "() => SmartFilterBarFieldDefinition[]",
+      "description": "Retrieves available fields of the subject.",
+      "deprecated": null,
+      "sourceLine": 52,
+      "since": null,
+      "parameters": [],
+      "returnType": "SmartFilterBarFieldDefinition[]"
+    }
+  ],
+  "inherited": null
+}

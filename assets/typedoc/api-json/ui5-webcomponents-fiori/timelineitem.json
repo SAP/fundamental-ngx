@@ -1,0 +1,85 @@
+{
+  "name": "TimelineItem",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "icon",
+      "type": "string",
+      "default": null,
+      "description": "Defines the icon to be displayed as graphical element within the `ui5-timeline-item`.\nSAP-icons font provides numerous options.\n\nSee all the available icons in the [Icon Explorer](https://sdk.openui5.org/test-resources/sap/m/demokit/iconExplorer/webapp/index.html).",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 48,
+      "since": null
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "default": null,
+      "description": "Defines the name of the item, displayed before the `title-text`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 53,
+      "since": null
+    },
+    {
+      "name": "nameClickable",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines if the `name` is clickable.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 58,
+      "since": null
+    },
+    {
+      "name": "state",
+      "type": "'None' | 'Positive' | 'Critical' | 'Negative' | 'Information'",
+      "default": null,
+      "description": "Defines the state of the icon displayed in the `ui5-timeline-item`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 63,
+      "since": null
+    },
+    {
+      "name": "subtitleText",
+      "type": "string",
+      "default": null,
+      "description": "Defines the subtitle text of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 68,
+      "since": null
+    },
+    {
+      "name": "titleText",
+      "type": "string",
+      "default": null,
+      "description": "Defines the title text of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 73,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5NameClick",
+      "type": "UI5CustomEvent<TimelineItem, 'name-click'>",
+      "default": null,
+      "description": "Fired when the item name is pressed either with a\nclick/tap or by using the Enter or Space key.\n\n*Note:** The event will not be fired if the `name-clickable`\nattribute is not set.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 84,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

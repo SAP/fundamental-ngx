@@ -1,0 +1,310 @@
+{
+  "name": "ButtonComponent",
+  "selector": "fdp-button",
+  "kind": "Component",
+  "sourceFile": "button.component.ts",
+  "sourceLine": 33,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/button/button.component.ts#L33",
+  "description": "",
+  "inputs": [
+    {
+      "name": "ariaControlsId",
+      "type": "string",
+      "default": null,
+      "description": "propagate aria-controls for accessibility to the native HTML button",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 102,
+      "since": null
+    },
+    {
+      "name": "ariaDescribedBy",
+      "type": "string",
+      "default": null,
+      "description": "Sets the `aria-describedby` attribute to the element",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 53,
+      "since": null
+    },
+    {
+      "name": "ariaDisabled",
+      "type": "boolean",
+      "default": null,
+      "description": "aria-disabled for accessibility to the native HTML button",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 96,
+      "since": null
+    },
+    {
+      "name": "ariaExpanded",
+      "type": "boolean",
+      "default": null,
+      "description": "propagate aria-expanded for accessibility to the native HTML button",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 99,
+      "since": null
+    },
+    {
+      "name": "ariaLabel",
+      "type": "string",
+      "default": null,
+      "description": "Sets the `aria-label` attribute to the element",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 47,
+      "since": null
+    },
+    {
+      "name": "ariaLabelledBy",
+      "type": "string",
+      "default": null,
+      "description": "Sets the `aria-labelledby` attribute to the element",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 50,
+      "since": null
+    },
+    {
+      "name": "ariaPressed",
+      "type": "boolean",
+      "default": null,
+      "description": "",
+      "isSignal": true,
+      "deprecated": "use toggled input property instead\npropagate aria-pressed for accessibility to the native HTML button",
+      "sourceLine": 107,
+      "since": null
+    },
+    {
+      "name": "ariaSelected",
+      "type": "boolean",
+      "default": null,
+      "description": "",
+      "isSignal": true,
+      "deprecated": "use toggled input property instead\naria-selected for accessibility to the native HTML button",
+      "sourceLine": 93,
+      "since": null
+    },
+    {
+      "name": "buttonType",
+      "type": "ButtonType",
+      "default": null,
+      "description": "",
+      "isSignal": true,
+      "deprecated": "Use `fdType` property.\nThe buttonType of the button. Types includes\n'standard','positive', 'negative', 'attention', 'ghost',\n'transparent', 'emphasized','menu'.\nLeave empty for default (standard button).",
+      "sourceLine": 82,
+      "since": null
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": null,
+      "description": "Disabled status of the element",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 44,
+      "since": null
+    },
+    {
+      "name": "fdType",
+      "type": "ButtonType",
+      "default": null,
+      "description": "The type of the button. Types include:\n'standard' | 'positive' | 'negative' | 'attention' | 'half' | 'ghost' | 'transparent' | 'emphasized' | 'menu'.\nLeave empty for default (Standard button).\nDefault value is set to 'standard'",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 72,
+      "since": null
+    },
+    {
+      "name": "glyph",
+      "type": "string",
+      "default": null,
+      "description": "The icon to include in the button. See the icon page for the list of icons",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 62,
+      "since": null
+    },
+    {
+      "name": "glyphFont",
+      "type": "IconFont",
+      "default": null,
+      "description": "Glyph font family",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 65,
+      "since": null
+    },
+    {
+      "name": "glyphPosition",
+      "type": "GlyphPosition",
+      "default": null,
+      "description": "Position of glyph related to text",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 56,
+      "since": null
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "default": null,
+      "description": "Button ID - default value is provided if not set",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 35,
+      "since": null
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "default": null,
+      "description": "Text rendered inside button component",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 59,
+      "since": null
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "default": null,
+      "description": "Name for the element",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 38,
+      "since": null
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "default": null,
+      "description": "arialabel, tooltip for button, intended to be used when the button only contains an icon",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 88,
+      "since": null
+    },
+    {
+      "name": "toggled",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether button is in toggled state",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 85,
+      "since": null
+    },
+    {
+      "name": "type",
+      "type": "string",
+      "default": null,
+      "description": "Specifies the type to the native HTML button",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 110,
+      "since": null
+    },
+    {
+      "name": "value",
+      "type": "string",
+      "default": null,
+      "description": "Specifies an initial value to the native HTML button",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 113,
+      "since": null
+    },
+    {
+      "name": "width",
+      "type": "string",
+      "default": null,
+      "description": "Width of the element",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 41,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "buttonClicked",
+      "type": "any",
+      "default": null,
+      "description": "Event sent when button is clicked",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 116,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "getFdType",
+      "signature": "() => ButtonType",
+      "description": "Get the current button type.\nImplements ButtonModel interface.",
+      "deprecated": null,
+      "sourceLine": 187,
+      "since": null,
+      "parameters": [],
+      "returnType": "ButtonType"
+    },
+    {
+      "name": "isDisabled",
+      "signature": "() => boolean",
+      "description": "Get the current disabled state.\nImplements ButtonModel interface.",
+      "deprecated": null,
+      "sourceLine": 170,
+      "since": null,
+      "parameters": [],
+      "returnType": "boolean"
+    },
+    {
+      "name": "markForCheck",
+      "signature": "() => void",
+      "description": "No-op method for interface compatibility.\nImplements ButtonModel interface.\nSignal-based components don't need manual change detection.",
+      "deprecated": null,
+      "sourceLine": 196,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "setDisabled",
+      "signature": "(_value: boolean) => void",
+      "description": "Programmatically set the disabled state.\nImplements ButtonModel interface.\nNote: Cannot directly set signal inputs. This method exists for interface compatibility.",
+      "deprecated": null,
+      "sourceLine": 162,
+      "since": null,
+      "parameters": [
+        {
+          "name": "_value",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setFdType",
+      "signature": "(_value: ButtonType) => void",
+      "description": "Programmatically set the button type.\nImplements ButtonModel interface.\nNote: Cannot directly set signal inputs. This method exists for interface compatibility.",
+      "deprecated": null,
+      "sourceLine": 179,
+      "since": null,
+      "parameters": [
+        {
+          "name": "_value",
+          "type": "ButtonType",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

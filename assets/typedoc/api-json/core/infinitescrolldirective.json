@@ -1,0 +1,45 @@
+{
+  "name": "InfiniteScrollDirective",
+  "selector": "[fdInfiniteScroll]",
+  "kind": "Directive",
+  "sourceFile": "infinite-scroll.directive.ts",
+  "sourceLine": 13,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/infinite-scroll/infinite-scroll.directive.ts#L13",
+  "description": "Tool directive used to achieve the infinite scroll mechanism.",
+  "inputs": [
+    {
+      "name": "scrollOffset",
+      "type": "Nullable<number>",
+      "default": null,
+      "description": "Scroll PX at which the onScrollAction event is fired.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 18,
+      "since": null
+    },
+    {
+      "name": "scrollPercent",
+      "type": "number",
+      "default": null,
+      "description": "Scroll percentage at which the onScrollAction event is fired.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 15,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "onScrollAction",
+      "type": "void",
+      "default": null,
+      "description": "Event emitted when the scrollPercent threshold is met.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 22,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

@@ -1,0 +1,34 @@
+{
+  "name": "ListMessageDirective",
+  "selector": "[fd-list-message], [fdListMessage]",
+  "kind": "Directive",
+  "sourceFile": "list-message.directive.ts",
+  "sourceLine": 16,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/list/list-message.directive.ts#L16",
+  "description": "",
+  "inputs": [
+    {
+      "name": "class",
+      "type": "string",
+      "default": null,
+      "description": "Apply user custom styles",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 23,
+      "since": null
+    },
+    {
+      "name": "type",
+      "type": "'error' | 'default' | 'information' | 'warning' | 'success'",
+      "default": null,
+      "description": "Type of the message. Can be 'success' | 'error' | 'warning' | 'information'",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 19,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

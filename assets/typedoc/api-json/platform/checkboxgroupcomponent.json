@@ -1,0 +1,115 @@
+{
+  "name": "CheckboxGroupComponent",
+  "selector": "fdp-checkbox-group",
+  "kind": "Component",
+  "sourceFile": "checkbox-group.component.ts",
+  "sourceLine": 36,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/checkbox-group/checkbox-group.component.ts#L36",
+  "description": "Checkbox group implementation based on the\nhttps://github.com/SAP/fundamental-ngx/wiki/Platform:-CheckboxGroup-Technical-Design\ndocuments.",
+  "inputs": [],
+  "outputs": [
+    {
+      "name": "valueChange",
+      "type": "string[]",
+      "default": null,
+      "description": "Emits checked change event",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 70,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "getDisplayValue",
+      "signature": "(item: any) => string",
+      "description": "access display value for objects, acts as checkbox label.",
+      "deprecated": null,
+      "sourceLine": 134,
+      "since": null,
+      "parameters": [
+        {
+          "name": "item",
+          "type": "any",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "string"
+    },
+    {
+      "name": "getLookupValue",
+      "signature": "(item: any) => string",
+      "description": "access lookup value for objects, acts as checkbox value.",
+      "deprecated": null,
+      "sourceLine": 141,
+      "since": null,
+      "parameters": [
+        {
+          "name": "item",
+          "type": "any",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "string"
+    }
+  ],
+  "inherited": {
+    "from": "InLineLayoutCollectionBaseInput",
+    "inputs": [],
+    "methods": [
+      {
+        "name": "_onFocusChanged",
+        "signature": "(isFocused: boolean) => void",
+        "description": "Keeps track of element focus",
+        "deprecated": null,
+        "sourceLine": 389,
+        "since": null,
+        "parameters": [
+          {
+            "name": "isFocused",
+            "type": "boolean",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "focus",
+        "signature": "(event?: MouseEvent) => void",
+        "description": "In most of the cases when working with input element directly you should be just find to assing\nvariable to this element\n\n```\n<input #inputElementRef fd-form-control ...>\n```\n\nand this default behavior used. For other cases implement focus.",
+        "deprecated": null,
+        "sourceLine": 419,
+        "since": null,
+        "parameters": [
+          {
+            "name": "event",
+            "type": "MouseEvent",
+            "description": "",
+            "optional": true
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "onContainerClick",
+        "signature": "(event: MouseEvent) => void",
+        "description": "Handles even when we click on parent container which is the FormField Wrapping this\ncontrol",
+        "deprecated": null,
+        "sourceLine": 404,
+        "since": null,
+        "parameters": [
+          {
+            "name": "event",
+            "type": "MouseEvent",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      }
+    ]
+  }
+}

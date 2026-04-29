@@ -1,0 +1,105 @@
+{
+  "name": "ShellbarComponent",
+  "selector": "fd-shellbar",
+  "kind": "Component",
+  "sourceFile": "shellbar.component.ts",
+  "sourceLine": 67,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/shellbar/shellbar.component.ts#L67",
+  "description": "The shellbar offers consistent, responsive navigation across all products and applications.\nIncludes support for branding, product navigation, search, notifications, and user settings.\nShellbar is a composite component comprised of mandatory and optional elements.",
+  "inputs": [
+    {
+      "name": "backButtonLabel",
+      "type": "string",
+      "default": null,
+      "description": "Label for the back button.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 135,
+      "since": null
+    },
+    {
+      "name": "navigationButtonLabel",
+      "type": "string",
+      "default": null,
+      "description": "Label for the navigation button.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 131,
+      "since": null
+    },
+    {
+      "name": "navigationButtonTemplate",
+      "type": "null | TemplateRef<any>",
+      "default": "null",
+      "description": "Custom template for navigation button. When provided, this template will be rendered instead of the default button.\nUse this when you need to render a complex component like a popover with a button inside.\nThe template should handle its own click events and accessibility attributes.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 123,
+      "since": null
+    },
+    {
+      "name": "showBackButton",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to show the back button.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 127,
+      "since": null
+    },
+    {
+      "name": "showNavigationButton",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to show the navigation button.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 115,
+      "since": null
+    },
+    {
+      "name": "showSearchFieldOnSizeSmall",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to show the search when the shellbar size is set to small.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 139,
+      "since": null
+    },
+    {
+      "name": "sideNav",
+      "type": "boolean | SideNavigationInterface",
+      "default": "false",
+      "description": "Whether the Shellbar is used with Side Navigation.\nWhen set to true, the responsive paddings are not applied.\nCan also accept a template variable referring to a SideNavigationInterface (fd-side-nav or fdx-side-nav), and\nwill add the corresponding class.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 94,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "backButtonClicked",
+      "type": "Event",
+      "default": null,
+      "description": "Emitted event when back button is clicked.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 147,
+      "since": null
+    },
+    {
+      "name": "navigationButtonClicked",
+      "type": "Event",
+      "default": null,
+      "description": "Emitted event when navigation button is clicked.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 143,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

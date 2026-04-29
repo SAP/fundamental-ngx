@@ -1,0 +1,13 @@
+{
+  "name": "FeedListFooterBylineDirective",
+  "selector": "[fd-item-footer-byline]",
+  "kind": "Directive",
+  "sourceFile": "byline.directive.ts",
+  "sourceLine": 8,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/feed-list-item/directives/byline.directive.ts#L8",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

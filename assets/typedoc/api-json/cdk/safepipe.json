@@ -1,0 +1,37 @@
+{
+  "name": "SafePipe",
+  "selector": null,
+  "kind": "Pipe",
+  "sourceFile": "safe.pipe.ts",
+  "sourceLine": 8,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cdk/utils/pipes/safe.pipe.ts#L8",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "transform",
+      "signature": "(value: any, type: string) => SafeHtml | SafeStyle | SafeScript | SafeUrl | SafeResourceUrl",
+      "description": "Sanitize HTML string.",
+      "deprecated": null,
+      "sourceLine": 13,
+      "since": null,
+      "parameters": [
+        {
+          "name": "value",
+          "type": "any",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "type",
+          "type": "string",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "SafeHtml | SafeStyle | SafeScript | SafeUrl | SafeResourceUrl"
+    }
+  ],
+  "inherited": null
+}

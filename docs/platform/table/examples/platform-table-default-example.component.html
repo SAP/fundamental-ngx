@@ -1,5 +1,11 @@
 <fdp-table [dataSource]="source" [trackBy]="trackBy" emptyTableMessage="No data found">
-    <fdp-table-toolbar title="Order Line Items" [shouldOverflow]="true" [disableRefresh]="true" headingLevel="3">
+    <fdp-table-toolbar
+        [titleTemplate]="customTitle"
+        [shouldOverflow]="true"
+        [disableRefresh]="true"
+        headingLevel="3"
+        ariaLabel="Platform table toolbar"
+    >
         <fdp-table-toolbar-actions>
             <fdp-button label="Action One" (click)="alert('Action One')"></fdp-button>
             <fdp-button label="Action Two" (click)="alert('Action Two')"></fdp-button>
@@ -13,4 +19,14 @@
     <fdp-column name="price" key="price.value" label="Price" align="end"> </fdp-column>
 
     <fdp-column [nonInteractive]="true" name="status" key="status" label="Status" align="center"> </fdp-column>
+
+    <fdp-column name="action" key="action" label="Action" align="end">
+        <fdp-table-cell *fdpCellDef="let item">
+            <fdp-button fdType="transparent" glyph="decline" title="delete"></fdp-button>
+        </fdp-table-cell>
+    </fdp-column>
 </fdp-table>
+
+<ng-template #customTitle let-counter="counter">
+    <fd-icon glyph="product" color="negative"></fd-icon> Products ({{ counter() }})
+</ng-template>

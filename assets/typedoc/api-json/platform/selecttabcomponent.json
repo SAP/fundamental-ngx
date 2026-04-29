@@ -1,0 +1,135 @@
+{
+  "name": "SelectTabComponent",
+  "selector": "fdp-select-tab",
+  "kind": "Component",
+  "sourceFile": "select-tab.component.ts",
+  "sourceLine": 78,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/value-help-dialog/components/select-tab/select-tab.component.ts#L78",
+  "description": "",
+  "inputs": [
+    {
+      "name": "allowSelectAll",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether to allow users to select all table entries with one checkbox.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 111,
+      "since": null
+    },
+    {
+      "name": "defaultMobileHeaders",
+      "type": "number",
+      "default": "2",
+      "description": "Count of default mobile header from search table",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 123,
+      "since": null
+    },
+    {
+      "name": "displayedData",
+      "type": "T[]",
+      "default": "[]",
+      "description": "Displayed data for search table",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 127,
+      "since": null
+    },
+    {
+      "name": "filters",
+      "type": "VhdFilter[]",
+      "default": "[]",
+      "description": "Actual filters",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 103,
+      "since": null
+    },
+    {
+      "name": "loading",
+      "type": "boolean",
+      "default": "false",
+      "description": "Loading state",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 99,
+      "since": null
+    },
+    {
+      "name": "pageSize",
+      "type": "number",
+      "default": null,
+      "description": "Items per page for pagination below search table",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 119,
+      "since": null
+    },
+    {
+      "name": "selectTabCountId",
+      "type": "string",
+      "default": null,
+      "description": "Select tab count element ID",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 91,
+      "since": null
+    },
+    {
+      "name": "selectTabTitleId",
+      "type": "string",
+      "default": null,
+      "description": "Select tab title element ID",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 87,
+      "since": null
+    },
+    {
+      "name": "selected",
+      "type": "T[]",
+      "default": "[]",
+      "description": "Selected items",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 95,
+      "since": null
+    },
+    {
+      "name": "selection",
+      "type": "VdhTableSelection",
+      "default": "'single'",
+      "description": "Close dialog immediately after select any row from search table. It'll be skipped if multi option is true",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 107,
+      "since": null
+    },
+    {
+      "name": "uniqueKey",
+      "type": "string",
+      "default": "'id'",
+      "description": "Uniq field from data source",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 115,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "select",
+      "type": "T[]",
+      "default": null,
+      "description": "Event emitted when row was selected.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 131,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

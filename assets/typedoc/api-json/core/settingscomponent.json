@@ -1,0 +1,13 @@
+{
+  "name": "SettingsComponent",
+  "selector": "[fd-settings]",
+  "kind": "Component",
+  "sourceFile": "settings.component.ts",
+  "sourceLine": 15,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/settings/settings.component.ts#L15",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

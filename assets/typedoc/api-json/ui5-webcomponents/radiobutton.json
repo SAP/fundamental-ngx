@@ -1,0 +1,135 @@
+{
+  "name": "RadioButton",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 50,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "accessibleName",
+      "type": "string",
+      "default": null,
+      "description": "Defines the accessible ARIA name of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 55,
+      "since": null
+    },
+    {
+      "name": "accessibleNameRef",
+      "type": "string",
+      "default": null,
+      "description": "Defines the IDs of the elements that label the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 60,
+      "since": null
+    },
+    {
+      "name": "checked",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines whether the component is checked or not.\n\n*Note:** The property value can be changed with user interaction,\neither by clicking/tapping on the component,\nor by using the Space or Enter key.\n\n*Note:** Only enabled radio buttons can be checked.\nRead-only radio buttons are not selectable, and therefore are always unchecked.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 72,
+      "since": null
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines whether the component is disabled.\n\n*Note:** A disabled component is completely noninteractive.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 79,
+      "since": null
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "default": null,
+      "description": "Determines the name by which the component will be identified upon submission in an HTML form.\n\nRadio buttons with the same `name` will form a radio button group.\n\n*Note:** By this name the component will be identified upon submission in an HTML form.\n\n*Note:** The selection can be changed with `ARROW_UP/DOWN` and `ARROW_LEFT/RIGHT` keys between radio buttons in same group.\n\n*Note:** Only one radio button can be selected per group.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 92,
+      "since": null
+    },
+    {
+      "name": "readonly",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines whether the component is read-only.\n\n*Note:** A read-only component isn't editable or selectable.\nHowever, because it's focusable, it still provides visual feedback upon user interaction.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 100,
+      "since": null
+    },
+    {
+      "name": "required",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines whether the component is required.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 105,
+      "since": null
+    },
+    {
+      "name": "text",
+      "type": "string",
+      "default": null,
+      "description": "Defines the text of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 110,
+      "since": null
+    },
+    {
+      "name": "value",
+      "type": "string",
+      "default": null,
+      "description": "Defines the form value of the component.\nWhen a form with a radio button group is submitted, the group's value\nwill be the value of the currently selected radio button.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 117,
+      "since": null
+    },
+    {
+      "name": "valueState",
+      "type": "'None' | 'Positive' | 'Critical' | 'Negative' | 'Information'",
+      "default": null,
+      "description": "Defines the value state of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 122,
+      "since": null
+    },
+    {
+      "name": "wrappingType",
+      "type": "'None' | 'Normal'",
+      "default": null,
+      "description": "Defines whether the component text wraps when there is not enough space.\n\n*Note:** for option \"Normal\" the text will wrap and the words will not be broken based on hyphenation.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 129,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5Change",
+      "type": "UI5CustomEvent<RadioButton, 'change'>",
+      "default": null,
+      "description": "Fired when the component checked state changes.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 136,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

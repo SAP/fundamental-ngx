@@ -1,8 +1,7 @@
 <div class="header-container">
     @for (item of items; track item) {
         <div class="header-item" [class.selected]="selectedSpy === item.id">
-            <span class="fd-scroll-spy-example-icon-class icon"> <fd-icon glyph="arrow-right"></fd-icon> </span
-            >{{ item.name }}
+            <span class="fd-docs-scroll-spy-icon icon"> <fd-icon glyph="arrow-right"></fd-icon> </span>{{ item.name }}
         </div>
     }
 </div>

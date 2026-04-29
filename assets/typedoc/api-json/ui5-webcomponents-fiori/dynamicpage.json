@@ -1,0 +1,75 @@
+{
+  "name": "DynamicPage",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "headerPinned",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines if the header is pinned.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 45,
+      "since": null
+    },
+    {
+      "name": "headerSnapped",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines if the header is snapped.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 50,
+      "since": null
+    },
+    {
+      "name": "hidePinButton",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines if the pin button is hidden.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 55,
+      "since": null
+    },
+    {
+      "name": "showFooter",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines if the footer is shown.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 60,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5PinButtonToggle",
+      "type": "UI5CustomEvent<DynamicPage, 'pin-button-toggle'>",
+      "default": null,
+      "description": "Fired when the pin header button is toggled.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 67,
+      "since": null
+    },
+    {
+      "name": "ui5TitleToggle",
+      "type": "UI5CustomEvent<DynamicPage, 'title-toggle'>",
+      "default": null,
+      "description": "Fired when the expand/collapse area of the title is toggled.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 72,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

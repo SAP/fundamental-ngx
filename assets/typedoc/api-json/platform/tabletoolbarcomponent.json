@@ -1,0 +1,205 @@
+{
+  "name": "TableToolbarComponent",
+  "selector": "[fdpTableToolbarTemplate]",
+  "kind": "Component",
+  "sourceFile": "table-toolbar.component.ts",
+  "sourceLine": 120,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/table/components/table-toolbar/table-toolbar.component.ts#L120",
+  "description": "The component that represents a table toolbar.\n\n```html\n<fdp-table-toolbar\n  title=\"Order Line Items\"\n  [hideItemCount]=\"false\">\n</fdp-table-toolbar>\n```",
+  "inputs": [
+    {
+      "name": "ariaDescribedBy",
+      "type": "string",
+      "default": null,
+      "description": "Toolbar Aria-describedby attribute.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 176,
+      "since": null
+    },
+    {
+      "name": "ariaLabel",
+      "type": "string",
+      "default": null,
+      "description": "Toolbar Aria-label attribute.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 168,
+      "since": null
+    },
+    {
+      "name": "ariaLabelledBy",
+      "type": "string",
+      "default": null,
+      "description": "Toolbar Aria-labelledby attribute.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 172,
+      "since": null
+    },
+    {
+      "name": "ariaOrientation",
+      "type": "'horizontal' | 'vertical'",
+      "default": "'horizontal'",
+      "description": "Toolbar Aria-orientation attribute.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 180,
+      "since": null
+    },
+    {
+      "name": "disableRefresh",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether display Refresh button in the search field",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 160,
+      "since": null
+    },
+    {
+      "name": "disableSearch",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether display search button in the search field",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 164,
+      "since": null
+    },
+    {
+      "name": "editMode",
+      "type": "EditMode",
+      "default": "'none'",
+      "description": "Table rows edit/add mode.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 156,
+      "since": null
+    },
+    {
+      "name": "headingLevel",
+      "type": "HeadingLevel",
+      "default": null,
+      "description": "Heading level of the table toolbar title.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 240,
+      "since": null
+    },
+    {
+      "name": "hideItemCount",
+      "type": "boolean",
+      "default": "false",
+      "description": "Toggle to show table item count.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 137,
+      "since": null
+    },
+    {
+      "name": "hideSearchInput",
+      "type": "boolean",
+      "default": "false",
+      "description": "Toggle to show search input.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 141,
+      "since": null
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "default": null,
+      "description": "The ID of the toolbar",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 186,
+      "since": null
+    },
+    {
+      "name": "searchFieldAriaLabel",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "Aria label for the search field.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 133,
+      "since": null
+    },
+    {
+      "name": "searchFieldPlaceholder",
+      "type": "string",
+      "default": null,
+      "description": "Set a customized placeholder",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 145,
+      "since": null
+    },
+    {
+      "name": "searchSuggestions",
+      "type": "SuggestionItem[]",
+      "default": "[]",
+      "description": "Suggestions for search field.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 152,
+      "since": null
+    },
+    {
+      "name": "shouldOverflow",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether the toolbar should hide elements in popover when they overflow.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 125,
+      "since": null
+    },
+    {
+      "name": "showExpandCollapseButtons",
+      "type": "boolean",
+      "default": "false",
+      "description": "Toggle to expand and collapse all feature",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 149,
+      "since": null
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "default": null,
+      "description": "Table title.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 129,
+      "since": null
+    },
+    {
+      "name": "titleTemplate",
+      "type": "null | TemplateRef<TableToolbarTitleTemplateContext>",
+      "default": null,
+      "description": "Custom title template. When provided, it replaces the default string title.\nThe template context provides a `counter` signal with the current item count.\n\n```html\n<fdp-table-toolbar [titleTemplate]=\"customTitleTpl\">\n  <ng-template #customTitleTpl let-counter=\"counter\">\n    <fd-icon glyph=\"product\"></fd-icon> Products ({{ counter() }})\n  </ng-template>\n</fdp-table-toolbar>\n```",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 235,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "searchFieldInputChange",
+      "type": "string",
+      "default": null,
+      "description": "Event emitted when the search field input is changed.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 200,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

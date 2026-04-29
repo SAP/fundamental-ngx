@@ -1,0 +1,44 @@
+{
+  "name": "ComboBoxItem",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "additionalText",
+      "type": "string",
+      "default": null,
+      "description": "Defines the additional text of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 45,
+      "since": null
+    },
+    {
+      "name": "text",
+      "type": "string",
+      "default": null,
+      "description": "Defines the text of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 50,
+      "since": null
+    },
+    {
+      "name": "value",
+      "type": "string",
+      "default": null,
+      "description": "Defines the value of the `ui5-cb-item`.\n\nUse this property to associate a unique identifier or machine-readable value with the item,\nseparate from the display text. This enables:\n- Selecting items programmatically via `selectedValue` on the ComboBox\n- Submitting machine-readable values in forms\n- Distinguishing between items with identical display text\n\n*When to use:**\n- **Recommended:** Use the `value` property on items together with `selectedValue` on the ComboBox when you need unique identifiers\n- Omit `value` if the display text (`text` property) is sufficient for your use case\n\n*Example:**\n```html\n<ui5-combobox selected-value=\"DE\">\n<ui5-cb-item text=\"Germany\" value=\"DE\"></ui5-cb-item>\n<ui5-cb-item text=\"France\" value=\"FR\"></ui5-cb-item>\n</ui5-combobox>\n```",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 73,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

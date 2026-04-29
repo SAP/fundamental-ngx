@@ -1,0 +1,56 @@
+{
+  "name": "MenuItemComponent",
+  "selector": "fdp-menu-item",
+  "kind": "Component",
+  "sourceFile": "menu-item.component.ts",
+  "sourceLine": 38,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/menu/menu-item.component.ts#L38",
+  "description": "",
+  "inputs": [
+    {
+      "name": "cascadeDirection",
+      "type": "'left' | 'right'",
+      "default": "'right'",
+      "description": "Menu direction",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 45,
+      "since": null
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "description": "Set the Menu Item as disabled/enabled",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 41,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "itemSelect",
+      "type": "void",
+      "default": null,
+      "description": "Event emitted when item is selected.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 49,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "focus",
+      "signature": "() => void",
+      "description": "Focus on option",
+      "deprecated": null,
+      "sourceLine": 125,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

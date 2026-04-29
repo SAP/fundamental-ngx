@@ -1,0 +1,253 @@
+{
+  "name": "GridListItemComponent",
+  "selector": "fd-grid-list-item",
+  "kind": "Component",
+  "sourceFile": "grid-list-item.component.ts",
+  "sourceLine": 77,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/grid-list/components/grid-list-item/grid-list-item.component.ts#L77",
+  "description": "",
+  "inputs": [
+    {
+      "name": "ariaLabel",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "Sets the `aria-label` attribute to the element.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 129,
+      "since": null
+    },
+    {
+      "name": "ariaLabelledBy",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "Sets the `aria-label` attribute to the element.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 133,
+      "since": null
+    },
+    {
+      "name": "autoHeight",
+      "type": "boolean",
+      "default": "false",
+      "description": "When set to true the grid list item's height will be set to auto",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 186,
+      "since": null
+    },
+    {
+      "name": "counter",
+      "type": "Nullable<number>",
+      "default": null,
+      "description": "Sets number of sub items",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 106,
+      "since": null
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "default": null,
+      "description": "Description of the item",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 182,
+      "since": null
+    },
+    {
+      "name": "disableToolbarClick",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether click on the custom toolbar is disabled",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 117,
+      "since": null
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "default": null,
+      "description": "id for the Element",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 80,
+      "since": null
+    },
+    {
+      "name": "isNavigated",
+      "type": "boolean",
+      "default": "false",
+      "description": "The navigated state of the list item.\nIf set to true, a navigation indicator is displayed at the end of the list item.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 166,
+      "since": null
+    },
+    {
+      "name": "noPadding",
+      "type": "boolean",
+      "default": "false",
+      "description": "Remove the padding from the Item body",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 125,
+      "since": null
+    },
+    {
+      "name": "selected",
+      "type": "boolean",
+      "default": "false",
+      "description": "Allows an item to be selected programmatically",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 121,
+      "since": null
+    },
+    {
+      "name": "state",
+      "type": "GridListItemState",
+      "default": null,
+      "description": "Sets the state of Grid List Item\n(States: unread | error | locked | draft)",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 159,
+      "since": null
+    },
+    {
+      "name": "status",
+      "type": "GridListItemStatus",
+      "default": null,
+      "description": "Defines the status of Grid List Item\n(Statuses: success | warning | error | neutral)",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 102,
+      "since": null
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "default": null,
+      "description": "Title of the item",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 170,
+      "since": null
+    },
+    {
+      "name": "titleLevel",
+      "type": "2 | 1 | 3 | 4 | 5 | 6",
+      "default": "4",
+      "description": "Aria-level of the title\nAvailable options: 1, 2, 3, 4, 5, 6\nDefault: 4",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 178,
+      "since": null
+    },
+    {
+      "name": "value",
+      "type": "T",
+      "default": null,
+      "description": "Value field stores information for radio button value, checkbox button and for GridListSelectionEvent\nThe field is mandatory for modes like singleSelect, singleSelectLeft, singleSelectRight or multiSelect",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 113,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "cardClick",
+      "type": "GridListItemOutputEvent<T>",
+      "default": null,
+      "description": "Event is thrown on grid list item click.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 220,
+      "since": null
+    },
+    {
+      "name": "delete",
+      "type": "GridListItemOutputEvent<T>",
+      "default": null,
+      "description": "Event is thrown, when mode delete\nand Delete button was pressed",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 207,
+      "since": null
+    },
+    {
+      "name": "detail",
+      "type": "GridListItemOutputEvent<T>",
+      "default": null,
+      "description": "Event is thrown, when type is detail or detailsAndActive\nand Detail button was pressed",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 200,
+      "since": null
+    },
+    {
+      "name": "draft",
+      "type": "GridListItemOutputEvent<T>",
+      "default": null,
+      "description": "Event is thrown, when state is error, not used GridListItemFooterBarComponent\nand Draft button was pressed",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 227,
+      "since": null
+    },
+    {
+      "name": "locked",
+      "type": "GridListItemOutputEvent<T>",
+      "default": null,
+      "description": "Event is thrown, when state is locked, not used GridListItemFooterBarComponent\nand Locked button was pressed",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 234,
+      "since": null
+    },
+    {
+      "name": "navigate",
+      "type": "GridListItemOutputEvent<T>",
+      "default": null,
+      "description": "Event is thrown, when type is navigation\nand Navigate button was pressed",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 214,
+      "since": null
+    },
+    {
+      "name": "press",
+      "type": "GridListItemOutputEvent<T>",
+      "default": null,
+      "description": "Event is thrown, when type is active\nand item is pressed",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 193,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "focus",
+      "signature": "(options?: FocusOptions) => void",
+      "description": "Focus grid list item programmatically",
+      "deprecated": null,
+      "sourceLine": 341,
+      "since": null,
+      "parameters": [
+        {
+          "name": "options",
+          "type": "FocusOptions",
+          "description": "",
+          "optional": true
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

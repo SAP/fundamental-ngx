@@ -1,0 +1,55 @@
+{
+  "name": "UploadCollectionItemDirective",
+  "selector": "[fd-upload-collection-item]",
+  "kind": "Directive",
+  "sourceFile": "upload-collection-item.directive.ts",
+  "sourceLine": 30,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/upload-collection/upload-collection-item.directive.ts#L30",
+  "description": "",
+  "inputs": [
+    {
+      "name": "extension",
+      "type": "string",
+      "default": null,
+      "description": "The file type extension.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 37,
+      "since": null
+    },
+    {
+      "name": "fileName",
+      "type": "string",
+      "default": null,
+      "description": "The name of the file, not including the type extension.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 33,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "deleteClicked",
+      "type": "any",
+      "default": null,
+      "description": "Event emitted when presses the delete button.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 61,
+      "since": null
+    },
+    {
+      "name": "fileNameChanged",
+      "type": "any",
+      "default": null,
+      "description": "Event emitted when the user changes a file name.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 57,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

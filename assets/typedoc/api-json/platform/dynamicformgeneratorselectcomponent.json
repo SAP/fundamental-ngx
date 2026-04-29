@@ -1,0 +1,13 @@
+{
+  "name": "DynamicFormGeneratorSelectComponent",
+  "selector": "fdp-dynamic-form-generator-select",
+  "kind": "Component",
+  "sourceFile": "dynamic-form-generator-select.component.ts",
+  "sourceLine": 17,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/form-generator/controls/dynamic-form-generator-select/dynamic-form-generator-select.component.ts#L17",
+  "description": "Abstract class that used as a base for the Dynamic Form Generator components.",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

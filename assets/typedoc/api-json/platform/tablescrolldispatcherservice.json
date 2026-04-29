@@ -1,0 +1,44 @@
+{
+  "name": "TableScrollDispatcherService",
+  "selector": null,
+  "kind": "Service",
+  "sourceFile": "table-scroll-dispatcher.service.ts",
+  "sourceLine": 39,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/table-helpers/services/table-scroll-dispatcher.service.ts#L39",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "horizontallyScrolled",
+      "signature": "() => Observable<TableScrollable>",
+      "description": "Horizontal scroll stream",
+      "deprecated": null,
+      "sourceLine": 78,
+      "since": null,
+      "parameters": [],
+      "returnType": "Observable<TableScrollable>"
+    },
+    {
+      "name": "scrolled",
+      "signature": "() => Observable<TableScrollable>",
+      "description": "Scroll stream",
+      "deprecated": null,
+      "sourceLine": 73,
+      "since": null,
+      "parameters": [],
+      "returnType": "Observable<TableScrollable>"
+    },
+    {
+      "name": "verticallyScrolled",
+      "signature": "() => Observable<TableScrollable>",
+      "description": "Vertical scroll stream",
+      "deprecated": null,
+      "sourceLine": 83,
+      "since": null,
+      "parameters": [],
+      "returnType": "Observable<TableScrollable>"
+    }
+  ],
+  "inherited": null
+}

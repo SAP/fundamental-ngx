@@ -1,0 +1,60 @@
+{
+  "name": "KeyUtil",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "key-util.ts",
+  "sourceLine": 83,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cdk/utils/functions/key-util.ts#L83",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "isKeyCode",
+      "signature": "(event: KeyboardEvent, keyCode: number | number[]) => boolean",
+      "description": "Function used to unify key identification across different browsers using KeyCodes",
+      "deprecated": null,
+      "sourceLine": 90,
+      "since": null,
+      "parameters": [
+        {
+          "name": "event",
+          "type": "KeyboardEvent",
+          "description": "KeyboardEvent",
+          "optional": false
+        },
+        {
+          "name": "keyCode",
+          "type": "number | number[]",
+          "description": "event.key name matching W3C specification / (ASSCI char. codes)",
+          "optional": false
+        }
+      ],
+      "returnType": "boolean"
+    },
+    {
+      "name": "isKeyType",
+      "signature": "(event: KeyboardEvent, keyType: 'alphabetical' | 'numeric' | 'control' | 'ime') => boolean",
+      "description": "Function used to unify key identification across different browsers",
+      "deprecated": null,
+      "sourceLine": 114,
+      "since": null,
+      "parameters": [
+        {
+          "name": "event",
+          "type": "KeyboardEvent",
+          "description": "KeyboardEvent",
+          "optional": false
+        },
+        {
+          "name": "keyType",
+          "type": "'alphabetical' | 'numeric' | 'control' | 'ime'",
+          "description": "Type of key",
+          "optional": false
+        }
+      ],
+      "returnType": "boolean"
+    }
+  ],
+  "inherited": null
+}

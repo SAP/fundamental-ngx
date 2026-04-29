@@ -1,0 +1,44 @@
+{
+  "name": "IconTabBarTextTypeTabItemComponent",
+  "selector": "[fdp-icon-tab-bar-text-type-tab-item]",
+  "kind": "Component",
+  "sourceFile": "icon-tab-bar-text-type-tab-item.component.ts",
+  "sourceLine": 19,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/icon-tab-bar/components/text-type-tab-item/icon-tab-bar-text-type-tab-item.component.ts#L19",
+  "description": "",
+  "inputs": [
+    {
+      "name": "colorAssociations",
+      "type": "Partial<Record<SemanticColor, string>>",
+      "default": null,
+      "description": "",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 34,
+      "since": null
+    },
+    {
+      "name": "item",
+      "type": "Nullable<IconTabBarItem>",
+      "default": null,
+      "description": "Tab item.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 22,
+      "since": null
+    },
+    {
+      "name": "layoutMode",
+      "type": "'row' | 'column'",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 28,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

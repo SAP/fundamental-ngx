@@ -1,0 +1,45 @@
+{
+  "name": "FilterRuleComponent",
+  "selector": "fdp-table-filter-rule",
+  "kind": "Component",
+  "sourceFile": "filter-rule.component.ts",
+  "sourceLine": 45,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/table/components/table-p13-dialog/filtering/filter-rule.component.ts#L45",
+  "description": "",
+  "inputs": [
+    {
+      "name": "rule",
+      "type": "FilterRule<any>",
+      "default": null,
+      "description": "Rule to be displayed *",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 47,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ruleChange",
+      "type": "void",
+      "default": null,
+      "description": "Emits when rule is changed",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 50,
+      "since": null
+    },
+    {
+      "name": "ruleStateChange",
+      "type": "boolean",
+      "default": null,
+      "description": "Emits when rule state is changed",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 53,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

@@ -1,0 +1,44 @@
+{
+  "name": "TableHeaderDirective",
+  "selector": "[fdTableHeader], [fd-table-header]",
+  "kind": "Directive",
+  "sourceFile": "table-header.directive.ts",
+  "sourceLine": 7,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/table/directives/table-header.directive.ts#L7",
+  "description": "",
+  "inputs": [
+    {
+      "name": "noBorderX",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether or not to show the table header's horizontal borders",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 15,
+      "since": null
+    },
+    {
+      "name": "noBorderY",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether or not to show the table header's vertical borders",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 20,
+      "since": null
+    },
+    {
+      "name": "nonInteractive",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether or not the header cells should be interactive\n(have hover and active states)\ndefault: false",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 29,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

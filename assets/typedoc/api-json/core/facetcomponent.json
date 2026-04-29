@@ -1,0 +1,54 @@
+{
+  "name": "FacetComponent",
+  "selector": "fd-facet",
+  "kind": "Component",
+  "sourceFile": "facet.component.ts",
+  "sourceLine": 33,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/facets/facet/facet.component.ts#L33",
+  "description": "",
+  "inputs": [
+    {
+      "name": "alignEnd",
+      "type": "boolean",
+      "default": "false",
+      "description": "property that allows the facet to be aligned to the end of the facet group, right-aligned.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 72,
+      "since": null
+    },
+    {
+      "name": "facetTitle",
+      "type": "string",
+      "default": null,
+      "description": "The facet title.\nFor eg: for key-value facet, facetTitle is the key and the underlying object status or object number\ncomponent is the value.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 43,
+      "since": null
+    },
+    {
+      "name": "subtitle",
+      "type": "string",
+      "default": null,
+      "description": "An optional subtitle to display in the rating-indicator facet",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 47,
+      "since": null
+    },
+    {
+      "name": "type",
+      "type": "FacetType",
+      "default": null,
+      "description": "the type of Facet: form, key-value, image, rating-indicator",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 36,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

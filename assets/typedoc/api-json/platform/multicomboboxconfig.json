@@ -1,0 +1,31 @@
+{
+  "name": "MultiComboboxConfig",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "multi-combobox.config.ts",
+  "sourceLine": 10,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/multi-combobox/multi-combobox.config.ts#L10",
+  "description": "Default options for Multi-Combobox",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "createProviderFactory",
+      "signature": "(obj: Partial<MultiComboboxConfig>) => (platformConfig: PlatformConfig) => MultiComboboxConfig",
+      "description": "Create Provider factory function",
+      "deprecated": null,
+      "sourceLine": 34,
+      "since": null,
+      "parameters": [
+        {
+          "name": "obj",
+          "type": "Partial<MultiComboboxConfig>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "(platformConfig: PlatformConfig) => MultiComboboxConfig"
+    }
+  ],
+  "inherited": null
+}

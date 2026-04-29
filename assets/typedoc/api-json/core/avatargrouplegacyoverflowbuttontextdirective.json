@@ -1,0 +1,13 @@
+{
+  "name": "AvatarGroupLegacyOverflowButtonTextDirective",
+  "selector": "[fd-avatar-group-legacy-overflow-button-text]",
+  "kind": "Directive",
+  "sourceFile": "avatar-group-legacy-overflow-button-text.directive.ts",
+  "sourceLine": 9,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/avatar-group-legacy/directives/avatar-group-legacy-overflow-button-text.directive.ts#L9",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

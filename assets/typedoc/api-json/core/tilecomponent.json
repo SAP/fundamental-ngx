@@ -1,0 +1,115 @@
+{
+  "name": "TileComponent",
+  "selector": "fd-tile, [fd-tile]",
+  "kind": "Component",
+  "sourceFile": "tile.component.ts",
+  "sourceLine": 37,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/tile/tile.component.ts#L37",
+  "description": "",
+  "inputs": [
+    {
+      "name": "action",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the tile is in action mode.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 48,
+      "since": null
+    },
+    {
+      "name": "ariaLabel",
+      "type": "null | string",
+      "default": null,
+      "description": "Aria-label for accessibility.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 57,
+      "since": null
+    },
+    {
+      "name": "ariaLabelledby",
+      "type": "null | string",
+      "default": null,
+      "description": "Aria-labelledby for accessibility.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 60,
+      "since": null
+    },
+    {
+      "name": "clickable",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether tile is focusable and clickable.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 51,
+      "since": null
+    },
+    {
+      "name": "double",
+      "type": "boolean",
+      "default": null,
+      "description": "Doubles the tile width.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 42,
+      "since": null
+    },
+    {
+      "name": "id",
+      "type": "null | string",
+      "default": null,
+      "description": "Unique identifier for the Tile.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 63,
+      "since": null
+    },
+    {
+      "name": "role",
+      "type": "null | string",
+      "default": null,
+      "description": "The role for the tile.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 54,
+      "since": null
+    },
+    {
+      "name": "size",
+      "type": "TileSize",
+      "default": null,
+      "description": "Size modifier. Options are 's' or null (default).",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 39,
+      "since": null
+    },
+    {
+      "name": "type",
+      "type": "TileType",
+      "default": null,
+      "description": "Type of tile. Options are 'kpi', 'launch', 'feed', or null (default).",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 45,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "tileClick",
+      "type": "void",
+      "default": null,
+      "description": "Emitted when tile is clicked or activated via space/enter keys.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 66,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

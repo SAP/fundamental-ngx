@@ -1,0 +1,85 @@
+{
+  "name": "SegmentedButton",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 41,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "accessibleDescription",
+      "type": "string",
+      "default": null,
+      "description": "Defines the accessible description of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 46,
+      "since": null
+    },
+    {
+      "name": "accessibleDescriptionRef",
+      "type": "string",
+      "default": null,
+      "description": "Defines the IDs of the HTML Elements that describe the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 51,
+      "since": null
+    },
+    {
+      "name": "accessibleName",
+      "type": "string",
+      "default": null,
+      "description": "Defines the accessible ARIA name of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 56,
+      "since": null
+    },
+    {
+      "name": "accessibleNameRef",
+      "type": "string",
+      "default": null,
+      "description": "Defines the IDs of the HTML Elements that label the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 61,
+      "since": null
+    },
+    {
+      "name": "itemsFitContent",
+      "type": "boolean",
+      "default": null,
+      "description": "Determines whether the segmented button items should be sized to fit their content.\n\nIf set to `true`, each item will be sized to fit its content, with any extra space distributed after the last item.\nIf set to `false` (the default), all items will be equally sized to fill the available space.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 69,
+      "since": null
+    },
+    {
+      "name": "selectionMode",
+      "type": "'Single' | 'Multiple'",
+      "default": null,
+      "description": "Defines the component selection mode.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 74,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5SelectionChange",
+      "type": "UI5CustomEvent<SegmentedButton, 'selection-change'>",
+      "default": null,
+      "description": "Fired when the selected item changes.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 87,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

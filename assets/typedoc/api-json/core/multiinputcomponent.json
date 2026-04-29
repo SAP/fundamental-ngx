@@ -1,0 +1,497 @@
+{
+  "name": "MultiInputComponent",
+  "selector": "fd-multi-input",
+  "kind": "Component",
+  "sourceFile": "multi-input.component.ts",
+  "sourceLine": 130,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/multi-input/multi-input.component.ts#L130",
+  "description": "Input field with multiple selection enabled. Should be used when a user can select between a\nlimited number of pre-defined options with a filter-enabled context.\n\nSupports Angular Forms.",
+  "inputs": [
+    {
+      "name": "addOnButtonAriaLabel",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "Aria-label for the addon button.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 387,
+      "since": null
+    },
+    {
+      "name": "addonIconTitle",
+      "type": "string",
+      "default": null,
+      "description": "Title text for the add-on icon button.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 179,
+      "since": null
+    },
+    {
+      "name": "allowNewTokens",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the multi-input allows the creation of new tokens.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 305,
+      "since": null
+    },
+    {
+      "name": "ariaLabel",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "aria-label attribute binding.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 274,
+      "since": null
+    },
+    {
+      "name": "ariaLabelledBy",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "aria-labelledby attribute binding.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 278,
+      "since": null
+    },
+    {
+      "name": "autoComplete",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether the autocomplete should be enabled; Enabled by default",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 367,
+      "since": null
+    },
+    {
+      "name": "bodyMaxWidth",
+      "type": "number | 'none' | 'container'",
+      "default": "'none'",
+      "description": "Max width of multi input body.\n`none` will not limit width of the dropdown.\n`container` will limit width of the dropdown to the width of the multi-input itself.\n`number` will limit width of the dropdown by provided number in pixels.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 322,
+      "since": null
+    },
+    {
+      "name": "buttonFocusable",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether AddOn Button should be focusable",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 301,
+      "since": null
+    },
+    {
+      "name": "byline",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether list item options should be rendered as byline.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 363,
+      "since": null
+    },
+    {
+      "name": "class",
+      "type": "string",
+      "default": null,
+      "description": "user's custom classes",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 222,
+      "since": null
+    },
+    {
+      "name": "compactCollapse",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether to use cozy visuals but compact collapsing behavior.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 155,
+      "since": null
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the input is disabled.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 147,
+      "since": null
+    },
+    {
+      "name": "displayAddonButton",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether to display the addon button.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 383,
+      "since": null
+    },
+    {
+      "name": "displayFn",
+      "type": "(item: ItemType) => string",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 249,
+      "since": null
+    },
+    {
+      "name": "dropdownValues",
+      "type": "ItemType | _OptionItem<ItemType, ValueType>[]",
+      "default": "[]",
+      "description": "Values to be displayed in the unfiltered dropdown.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 171,
+      "since": null
+    },
+    {
+      "name": "fillControlMode",
+      "type": "PopoverFillMode",
+      "default": "'at-least'",
+      "description": "Preset options for the Select body width, whatever is chosen, the body has a 600px limit.\n* `at-least` will apply a minimum width to the body equivalent to the width of the control. - Default\n* `equal` will apply a width to the body equivalent to the width of the control.\n* 'fit-content' will apply width needed to properly display items inside, independent of control.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 287,
+      "since": null
+    },
+    {
+      "name": "filterFn",
+      "type": "(contentArray: ItemType | _OptionItem<ItemType, ValueType>[], searchTerm: string) => ItemType | _OptionItem<ItemType, ValueType>[]",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 230,
+      "since": null
+    },
+    {
+      "name": "glyph",
+      "type": "string",
+      "default": "'value-help'",
+      "description": "Icon of the button on the right of the input field.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 163,
+      "since": null
+    },
+    {
+      "name": "glyphFont",
+      "type": "IconFont",
+      "default": "FD_DEFAULT_ICON_FONT_FAMILY",
+      "description": "Glyph font family",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 167,
+      "since": null
+    },
+    {
+      "name": "highlight",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether the search term should be highlighted in results.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 196,
+      "since": null
+    },
+    {
+      "name": "includes",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to return results where the input matches the entire string. By default, only results that start\nwith the input search term will be returned.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 346,
+      "since": null
+    },
+    {
+      "name": "inputId",
+      "type": "string",
+      "default": "''",
+      "description": "Id attribute for input element inside MultiInput component",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 192,
+      "since": null
+    },
+    {
+      "name": "itemTemplate",
+      "type": "TemplateRef<any>",
+      "default": null,
+      "description": "The template with which to display the individual listed items.\nUse it by passing an ng-template with implicit content. See examples for more info.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 353,
+      "since": null
+    },
+    {
+      "name": "maxHeight",
+      "type": "string",
+      "default": "'300px'",
+      "description": "Max height of the popover. Any overflowing elements will be accessible through scrolling.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 159,
+      "since": null
+    },
+    {
+      "name": "mobile",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the multi-input should be built on mobile mode",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 309,
+      "since": null
+    },
+    {
+      "name": "mobileConfig",
+      "type": "MobileModeConfig",
+      "default": null,
+      "description": "Multi Input Mobile Configuration, it's applied only, when mobile is enabled",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 339,
+      "since": null
+    },
+    {
+      "name": "newTokenParseFn",
+      "type": "(searchTerm: string) => any",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 257,
+      "since": null
+    },
+    {
+      "name": "newTokenValidateFn",
+      "type": "(str: string) => boolean",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 270,
+      "since": null
+    },
+    {
+      "name": "open",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether multi input popover body should be opened",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 379,
+      "since": null
+    },
+    {
+      "name": "openDropdownOnAddOnClicked",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether to open the dropdown when the addon button is clicked.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 175,
+      "since": null
+    },
+    {
+      "name": "optionItemIdentifier",
+      "type": "OptionItemIdentifierInput<ItemType>",
+      "default": null,
+      "description": "Identifier function or path to an identifier property.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 263,
+      "since": null
+    },
+    {
+      "name": "placeholder",
+      "type": "string",
+      "default": "''",
+      "description": "Placeholder for the input field.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 143,
+      "since": null
+    },
+    {
+      "name": "required",
+      "type": "boolean",
+      "default": "false",
+      "description": "If it is mandatory field",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 151,
+      "since": null
+    },
+    {
+      "name": "showAllButton",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether the multi-input should have show all button.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 313,
+      "since": null
+    },
+    {
+      "name": "state",
+      "type": "'error' | 'default' | 'information' | 'warning' | 'success'",
+      "default": null,
+      "description": "The state of the form control - applies css classes.\n Can be `success`, `error`, `warning`, `information` or blank for default.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 294,
+      "since": null
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "default": null,
+      "description": "The tooltip for the multi-input icon.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 359,
+      "since": null
+    },
+    {
+      "name": "valueFn",
+      "type": "(item: ItemType) => ValueType",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 240,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "addOnButtonClicked",
+      "type": "Event",
+      "default": null,
+      "description": "Emits event when the addon button is clicked.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 395,
+      "since": null
+    },
+    {
+      "name": "allItemsSelectedChange",
+      "type": "boolean",
+      "default": null,
+      "description": "Event emitted, when the multi input's all item checked or not",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 399,
+      "since": null
+    },
+    {
+      "name": "openChange",
+      "type": "boolean",
+      "default": null,
+      "description": "Event emitted, when the multi input's popover body is opened or closed",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 391,
+      "since": null
+    },
+    {
+      "name": "searchTermChange",
+      "type": "string",
+      "default": null,
+      "description": "Event emitted when the search term changes. Use *$event* to access the new term.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 371,
+      "since": null
+    },
+    {
+      "name": "selectedChange",
+      "type": "ValueType[]",
+      "default": null,
+      "description": "Event emitted when the selected items change. Use *$event* to access the new selected array.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 375,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "dialogApprove",
+      "signature": "() => void",
+      "description": "Handle dialog approval, closes popover and propagates data changes.",
+      "deprecated": null,
+      "sourceLine": 801,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "dialogDismiss",
+      "signature": "(selectedBackup: any[]) => void",
+      "description": "Handle dialog dismissing, closes popover and sets backup data.",
+      "deprecated": null,
+      "sourceLine": 792,
+      "since": null,
+      "parameters": [
+        {
+          "name": "selectedBackup",
+          "type": "any[]",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "handleListFocusEscape",
+      "signature": "(direction: FocusEscapeDirection) => void",
+      "description": "Method passed to list component",
+      "deprecated": null,
+      "sourceLine": 600,
+      "since": null,
+      "parameters": [
+        {
+          "name": "direction",
+          "type": "FocusEscapeDirection",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "selectAllItems",
+      "signature": "(selectAll: boolean) => void",
+      "description": "Method that selects all possible options.",
+      "deprecated": null,
+      "sourceLine": 639,
+      "since": null,
+      "parameters": [
+        {
+          "name": "selectAll",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

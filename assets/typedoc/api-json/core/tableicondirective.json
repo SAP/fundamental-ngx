@@ -1,0 +1,54 @@
+{
+  "name": "TableIconDirective",
+  "selector": "[fdTableIcon], [fd-table-icon]",
+  "kind": "Directive",
+  "sourceFile": "table-icon.directive.ts",
+  "sourceLine": 9,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/table/directives/table-icon.directive.ts#L9",
+  "description": "",
+  "inputs": [
+    {
+      "name": "class",
+      "type": "string",
+      "default": "''",
+      "description": "The property allows user to pass additional css classes",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 17,
+      "since": null
+    },
+    {
+      "name": "glyph",
+      "type": "string",
+      "default": "''",
+      "description": "The icon to include in the button. See the icon page for the list of icons.\nSetter is used to control when css class have to be rebuilded.\nDefault value is set to ''.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 24,
+      "since": null
+    },
+    {
+      "name": "glyphFont",
+      "type": "IconFont",
+      "default": "FD_DEFAULT_ICON_FONT_FAMILY",
+      "description": "Glyph font family",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 28,
+      "since": null
+    },
+    {
+      "name": "navigation",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether or no icon is used as navigation",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 32,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

@@ -1,0 +1,65 @@
+{
+  "name": "CardHeader",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "additionalText",
+      "type": "string",
+      "default": null,
+      "description": "Defines the additional text.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 45,
+      "since": null
+    },
+    {
+      "name": "interactive",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines if the component would be interactive,\ne.g gets hover effect and `click` event is fired, when pressed.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 51,
+      "since": null
+    },
+    {
+      "name": "subtitleText",
+      "type": "string",
+      "default": null,
+      "description": "Defines the subtitle text.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 56,
+      "since": null
+    },
+    {
+      "name": "titleText",
+      "type": "string",
+      "default": null,
+      "description": "Defines the title text.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 61,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5Click",
+      "type": "UI5CustomEvent<CardHeader, 'click'>",
+      "default": null,
+      "description": "Fired when the component is activated by mouse/tap or by using the Enter or Space key.\n\n*Note:** The event would be fired only if the `interactive` property is set to true.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 70,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

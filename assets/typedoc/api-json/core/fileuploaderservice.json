@@ -1,0 +1,49 @@
+{
+  "name": "FileUploaderService",
+  "selector": null,
+  "kind": "Service",
+  "sourceFile": "file-uploader.service.ts",
+  "sourceLine": 11,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/file-uploader/file-uploader.service.ts#L11",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "validateFiles",
+      "signature": "(files: File[], minFileSize: string, maxFileSize: string, acceptedExtensions: Nullable<string>) => FileUploadOutput",
+      "description": "Method that validates files passed. It is based on",
+      "deprecated": null,
+      "sourceLine": 19,
+      "since": null,
+      "parameters": [
+        {
+          "name": "files",
+          "type": "File[]",
+          "description": "File[]",
+          "optional": false
+        },
+        {
+          "name": "minFileSize",
+          "type": "string",
+          "description": "string",
+          "optional": false
+        },
+        {
+          "name": "maxFileSize",
+          "type": "string",
+          "description": "string",
+          "optional": false
+        },
+        {
+          "name": "acceptedExtensions",
+          "type": "Nullable<string>",
+          "description": "string",
+          "optional": false
+        }
+      ],
+      "returnType": "FileUploadOutput"
+    }
+  ],
+  "inherited": null
+}

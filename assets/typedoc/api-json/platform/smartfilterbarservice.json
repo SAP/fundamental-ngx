@@ -1,0 +1,134 @@
+{
+  "name": "SmartFilterBarService",
+  "selector": null,
+  "kind": "Service",
+  "sourceFile": "smart-filter-bar.service.ts",
+  "sourceLine": 21,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/smart-filter-bar/smart-filter-bar.service.ts#L21",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "addCustomFilter",
+      "signature": "(options: SmartFilterBarCustomFilterConfig) => boolean",
+      "description": "Adds custom filter type to the smart filter bar.",
+      "deprecated": null,
+      "sourceLine": 34,
+      "since": null,
+      "parameters": [
+        {
+          "name": "options",
+          "type": "SmartFilterBarCustomFilterConfig",
+          "description": "Configuration options.",
+          "optional": false
+        }
+      ],
+      "returnType": "boolean"
+    },
+    {
+      "name": "getApplicableFilterConditions",
+      "signature": "(type: string, dataType: FilterableColumnDataType) => FilterAllStrategy[]",
+      "description": "Returns applicable condition options of the filter.",
+      "deprecated": null,
+      "sourceLine": 80,
+      "since": null,
+      "parameters": [
+        {
+          "name": "type",
+          "type": "string",
+          "description": "Filter type.",
+          "optional": false
+        },
+        {
+          "name": "dataType",
+          "type": "FilterableColumnDataType",
+          "description": "Filter data type.",
+          "optional": false
+        }
+      ],
+      "returnType": "FilterAllStrategy[]"
+    },
+    {
+      "name": "getConditionFieldSelectedVariants",
+      "signature": "(formItem: PreparedDynamicFormFieldItem, conditions: SmartFilterBarCondition<any>[]) => Promise<SelectItem<any>[]>",
+      "description": "Returns formatted condition variants.",
+      "deprecated": null,
+      "sourceLine": 180,
+      "since": null,
+      "parameters": [
+        {
+          "name": "formItem",
+          "type": "PreparedDynamicFormFieldItem",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "conditions",
+          "type": "SmartFilterBarCondition<any>[]",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "Promise<SelectItem<any>[]>"
+    },
+    {
+      "name": "getCustomFilterConfiguration",
+      "signature": "(type: string) => SmartFilterBarCustomFilterConfig",
+      "description": "Returns provided configuration object of the custom filter.",
+      "deprecated": null,
+      "sourceLine": 64,
+      "since": null,
+      "parameters": [
+        {
+          "name": "type",
+          "type": "string",
+          "description": "Filter type.",
+          "optional": false
+        }
+      ],
+      "returnType": "SmartFilterBarCustomFilterConfig"
+    },
+    {
+      "name": "normalizeConditions",
+      "signature": "(formItem: PreparedDynamicFormFieldItem, conditions: SmartFilterBarCondition<any>[]) => Promise<SmartFilterBarCondition<any>[]>",
+      "description": "Method for normalizing generated conditions to display in human-readable format.",
+      "deprecated": null,
+      "sourceLine": 157,
+      "since": null,
+      "parameters": [
+        {
+          "name": "formItem",
+          "type": "PreparedDynamicFormFieldItem",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "conditions",
+          "type": "SmartFilterBarCondition<any>[]",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "Promise<SmartFilterBarCondition<any>[]>"
+    },
+    {
+      "name": "transformCollectionFilter",
+      "signature": "(filterGroup: CollectionFilterGroup) => SmartFilterBarCondition<any>[]",
+      "description": "Transforms collection filter into smart filter bar condition.",
+      "deprecated": null,
+      "sourceLine": 201,
+      "since": null,
+      "parameters": [
+        {
+          "name": "filterGroup",
+          "type": "CollectionFilterGroup",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "SmartFilterBarCondition<any>[]"
+    }
+  ],
+  "inherited": null
+}

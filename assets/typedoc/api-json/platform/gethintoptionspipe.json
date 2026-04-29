@@ -1,0 +1,31 @@
+{
+  "name": "GetHintOptionsPipe",
+  "selector": null,
+  "kind": "Pipe",
+  "sourceFile": "get-hint-options.pipe.ts",
+  "sourceLine": 11,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/form-generator/pipes/get-hint-options.pipe.ts#L11",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "transform",
+      "signature": "(hintOptions: BaseDynamicFormItemGuiOptions | DynamicFormItemGuiOptions) => FieldHintOptions",
+      "description": "Used for extracting hintOptions from GuiOptions. This will coerce string | HintOptions to FieldHintOptions,\nwill combine default value of hints for form generator with provided options.",
+      "deprecated": null,
+      "sourceLine": 27,
+      "since": null,
+      "parameters": [
+        {
+          "name": "hintOptions",
+          "type": "BaseDynamicFormItemGuiOptions | DynamicFormItemGuiOptions",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "FieldHintOptions"
+    }
+  ],
+  "inherited": null
+}

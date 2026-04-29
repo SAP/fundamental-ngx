@@ -1,0 +1,80 @@
+<div class="migration-example">
+    <!-- Info message explaining the example -->
+    <fd-message-strip [type]="'information'" [dismissible]="false">
+        <p>
+            <strong>Migration Example:</strong> This shows the MODERN signal-based approach. The old Observable-based
+            APIs (FD_LANGUAGE, resolveTranslationObservable, etc.) are deprecated and will be removed in a future
+            version.
+        </p>
+    </fd-message-strip>
+
+    <div class="fd-margin-top--sm">
+        <!-- Real-world use case: Action buttons with translated labels -->
+        <div class="sap-flex sap-flex--gap-small fd-margin-bottom--sm">
+            <button fd-button [label]="saveButtonLabel()"></button>
+            <button fd-button [label]="cancelButtonLabel()"></button>
+            <button fd-button [label]="dynamicLabel()"></button>
+        </div>
+
+        <!-- Show reactive computed signal -->
+        <div class="fd-margin-bottom--md">
+            <fd-form-label>Status computed from language signal:</fd-form-label>
+            <p>{{ statusMessage() }}</p>
+        </div>
+
+        <!-- Controls to test reactivity -->
+        <div class="sap-flex sap-flex--gap-small">
+            <button fd-button label="Switch to English" (click)="switchToEnglish()"></button>
+            <button fd-button label="Switch to Ukrainian" (click)="switchToUkrainian()"></button>
+        </div>
+    </div>
+
+    <!-- Migration guide -->
+    <div class="fd-margin-top--lg fd-padding--md" style="background-color: var(--sapBackgroundColor)">
+        <h4>Quick Migration Guide</h4>
+        <table style="width: 100%; border-collapse: collapse">
+            <thead>
+                <tr>
+                    <th
+                        class="fd-padding--sm"
+                        style="text-align: left; border-bottom: 1px solid var(--sapGroup_ContentBorderColor)"
+                    >
+                        Old (Deprecated)
+                    </th>
+                    <th
+                        class="fd-padding--sm"
+                        style="text-align: left; border-bottom: 1px solid var(--sapGroup_ContentBorderColor)"
+                    >
+                        New (Recommended)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="fd-padding--sm"><code>FD_LANGUAGE</code></td>
+                    <td class="fd-padding--sm"><code>FD_LANGUAGE_SIGNAL</code></td>
+                </tr>
+                <tr>
+                    <td class="fd-padding--sm"><code>new BehaviorSubject(...)</code></td>
+                    <td class="fd-padding--sm"><code>signal(...)</code></td>
+                </tr>
+                <tr>
+                    <td class="fd-padding--sm"><code>lang$.next(value)</code></td>
+                    <td class="fd-padding--sm"><code>langSignal.set(value)</code></td>
+                </tr>
+                <tr>
+                    <td class="fd-padding--sm"><code>lang$.subscribe(...)</code></td>
+                    <td class="fd-padding--sm"><code>computed(() => langSignal())</code></td>
+                </tr>
+                <tr>
+                    <td class="fd-padding--sm"><code>resolveTranslationObservable()</code></td>
+                    <td class="fd-padding--sm"><code>resolveTranslationSignal()</code></td>
+                </tr>
+                <tr>
+                    <td class="fd-padding--sm"><code>resolveTranslationSync()</code></td>
+                    <td class="fd-padding--sm"><code>resolveTranslationSignal()</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

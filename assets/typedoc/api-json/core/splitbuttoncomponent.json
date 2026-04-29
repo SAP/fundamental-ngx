@@ -1,0 +1,143 @@
+{
+  "name": "SplitButtonComponent",
+  "selector": "fd-split-button",
+  "kind": "Component",
+  "sourceFile": "split-button.component.ts",
+  "sourceLine": 72,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/split-button/split-button.component.ts#L72",
+  "description": "Split Button component, used to enhance standard HTML button and add possibility to put some dropdown with\nadditional options.\n\n```html\n<fd-split-button>\n  <fd-menu>\n      <li fd-menu-item>\n          <div fd-menu-interactive>\n              <span fd-menu-title>Option 1</span>\n          </div>\n      </li>\n      <li fd-menu-item>\n          <div fd-menu-interactive>\n              <span fd-menu-title>Option 2</span>\n          </div>\n      </li>\n   </fd-menu>\n</fd-split-button>\n```",
+  "inputs": [
+    {
+      "name": "arialLabel",
+      "type": "string",
+      "default": null,
+      "description": "aria-label attribute",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 111,
+      "since": null
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": null,
+      "description": "The icon to include in the button. See the icon page for the list of icons.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 83,
+      "since": null
+    },
+    {
+      "name": "expandButtonTitle",
+      "type": "string",
+      "default": null,
+      "description": "Title attribute used to describe expand button",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 92,
+      "since": null
+    },
+    {
+      "name": "fdType",
+      "type": "ButtonType",
+      "default": null,
+      "description": "The type of the button. Types include 'standard', 'positive', 'medium', and 'negative'.\nLeave empty for default (Action button).'",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 88,
+      "since": null
+    },
+    {
+      "name": "fixedWidth",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether or not the element should keep a fixed width. The width could change if the text changes length.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 100,
+      "since": null
+    },
+    {
+      "name": "glyph",
+      "type": "string",
+      "default": "'slim-arrow-down'",
+      "description": "The icon to include in the button. See the icon page for the list of icons.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 75,
+      "since": null
+    },
+    {
+      "name": "glyphFont",
+      "type": "IconFont",
+      "default": "FD_DEFAULT_ICON_FONT_FAMILY",
+      "description": "Glyph font family",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 79,
+      "since": null
+    },
+    {
+      "name": "mainAction",
+      "type": "MainAction",
+      "default": null,
+      "description": "The object that contains the mainActionTitle, keepMainAction option and the callback function that should be\nexecuted when the button is clicked.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 107,
+      "since": null
+    },
+    {
+      "name": "selected",
+      "type": "MenuItemComponent",
+      "default": null,
+      "description": "Selected menu item",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 96,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "primaryButtonClicked",
+      "type": "Event",
+      "default": null,
+      "description": "Event sent when primary button is clicked",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 115,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "_onGroupFocused",
+      "signature": "() => void",
+      "description": "Wrapper gets focused programmatically by menu\nwhen the \"escape\" button is pressed.\nIn this case we need to transit focus to the \"more actions\" button",
+      "deprecated": null,
+      "sourceLine": 244,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "selectMenuItem",
+      "signature": "(menuItem: MenuItemComponent) => void",
+      "description": "Function called to select a menu item for the split button.",
+      "deprecated": null,
+      "sourceLine": 233,
+      "since": null,
+      "parameters": [
+        {
+          "name": "menuItem",
+          "type": "MenuItemComponent",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

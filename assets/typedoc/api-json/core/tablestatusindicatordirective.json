@@ -1,0 +1,24 @@
+{
+  "name": "TableStatusIndicatorDirective",
+  "selector": "[fdTableStatusIndicator], [fd-table-status-indicator]",
+  "kind": "Directive",
+  "sourceFile": "table-status-indicator.directive.ts",
+  "sourceLine": 18,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/table/directives/table-status-indicator.directive.ts#L18",
+  "description": "",
+  "inputs": [
+    {
+      "name": "status",
+      "type": "Nullable<TableStatuses>",
+      "default": null,
+      "description": "The type of indicator. Options are 'valid', 'warning', 'information' and 'error'.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 21,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

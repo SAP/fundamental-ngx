@@ -1,0 +1,24 @@
+{
+  "name": "NestedListHeaderDirective",
+  "selector": "[fdNestedDirectivesHeader], [fd-nested-list-header]",
+  "kind": "Directive",
+  "sourceFile": "nested-list-directives.ts",
+  "sourceLine": 25,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/nested-list/nested-list-directives.ts#L25",
+  "description": "",
+  "inputs": [
+    {
+      "name": "id",
+      "type": "null | string",
+      "default": null,
+      "description": "Id of the element.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 28,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

@@ -1,0 +1,13 @@
+{
+  "name": "AvatarGroupLegacyPopoverControlDirective",
+  "selector": "[fd-avatar-group-legacy-popover-control]",
+  "kind": "Directive",
+  "sourceFile": "avatar-group-legacy-popover-control.directive.ts",
+  "sourceLine": 10,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/avatar-group-legacy/directives/avatar-group-legacy-popover-control.directive.ts#L10",
+  "description": "Needed to bind specific class to group type popover control.",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

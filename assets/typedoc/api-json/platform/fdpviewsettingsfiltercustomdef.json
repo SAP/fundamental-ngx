@@ -1,0 +1,13 @@
+{
+  "name": "FdpViewSettingsFilterCustomDef",
+  "selector": "[fdpViewSettingsFilterCustomDef]",
+  "kind": "Class",
+  "sourceFile": "table-view-settings-filter-custom.directive.ts",
+  "sourceLine": 12,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/table-helpers/directives/table-view-settings-filter-custom.directive.ts#L12",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

@@ -1,0 +1,13 @@
+{
+  "name": "DynamicPageBreadcrumbComponent",
+  "selector": "fd-dynamic-page-breadcrumb",
+  "kind": "Component",
+  "sourceFile": "dynamic-page-breadcrumb.component.ts",
+  "sourceLine": 17,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/dynamic-page/dynamic-page-header/breadcrumb/dynamic-page-breadcrumb.component.ts#L17",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

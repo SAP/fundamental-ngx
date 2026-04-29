@@ -1,0 +1,34 @@
+{
+  "name": "SubmenuComponent",
+  "selector": "li[fd-menu-item]",
+  "kind": "Component",
+  "sourceFile": "menu-item.component.ts",
+  "sourceLine": 301,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/menu/menu-item/menu-item.component.ts#L301",
+  "description": "",
+  "inputs": [
+    {
+      "name": "ariaLabel",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "Aria-label for navigation",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 304,
+      "since": null
+    },
+    {
+      "name": "ariaLabelledby",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "Aria-Labelledby for element describing navigation",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 308,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

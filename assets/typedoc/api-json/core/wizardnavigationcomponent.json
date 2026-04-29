@@ -1,0 +1,13 @@
+{
+  "name": "WizardNavigationComponent",
+  "selector": "fd-wizard-navigation",
+  "kind": "Component",
+  "sourceFile": "wizard-navigation.component.ts",
+  "sourceLine": 11,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/wizard/wizard-navigation/wizard-navigation.component.ts#L11",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

@@ -1,0 +1,45 @@
+{
+  "name": "WizardStepIndicatorComponent",
+  "selector": "fd-wizard-step-indicator",
+  "kind": "Component",
+  "sourceFile": "wizard-step-indicator.component.ts",
+  "sourceLine": 44,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/wizard/wizard-step-indicator/wizard-step-indicator.component.ts#L44",
+  "description": "",
+  "inputs": [
+    {
+      "name": "glyph",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "The icon to use for this step.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 49,
+      "since": null
+    },
+    {
+      "name": "glyphFont",
+      "type": "IconFont",
+      "default": "FD_DEFAULT_ICON_FONT_FAMILY",
+      "description": "Glyph font family",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 53,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "stepIndicatorItemClicked",
+      "type": "WizardStepComponent",
+      "default": null,
+      "description": "Event emitted when this step indicator is clicked.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 59,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

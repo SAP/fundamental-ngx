@@ -1,0 +1,13 @@
+{
+  "name": "ListIconConfig",
+  "selector": "[fdpItemDef]",
+  "kind": "Class",
+  "sourceFile": "base-list-item.ts",
+  "sourceLine": 34,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/list/base-list-item.ts#L34",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

@@ -1,0 +1,31 @@
+{
+  "name": "ContentDensityModule",
+  "selector": null,
+  "kind": "Module",
+  "sourceFile": "content-density.module.ts",
+  "sourceLine": 14,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/content-density/content-density.module.ts#L14",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "forRoot",
+      "signature": "(config?: ContentDensityModuleConfig) => ModuleWithProviders<ContentDensityModule>",
+      "description": "Module with providers",
+      "deprecated": null,
+      "sourceLine": 16,
+      "since": null,
+      "parameters": [
+        {
+          "name": "config",
+          "type": "ContentDensityModuleConfig",
+          "description": "",
+          "optional": true
+        }
+      ],
+      "returnType": "ModuleWithProviders<ContentDensityModule>"
+    }
+  ],
+  "inherited": null
+}

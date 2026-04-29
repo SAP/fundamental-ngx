@@ -1,0 +1,58 @@
+{
+  "name": "DialogRefBase",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "dialog-ref-base.class.ts",
+  "sourceLine": 41,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/dialog/base/dialog-ref-base.class.ts#L41",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "close",
+      "signature": "(result?: P) => void",
+      "description": "Closes the dialog normally and returns a result value.\nUpdates signal state and emits to observables for backward compatibility.",
+      "deprecated": null,
+      "sourceLine": 136,
+      "since": null,
+      "parameters": [
+        {
+          "name": "result",
+          "type": "P",
+          "description": "Optional result value to return to the caller",
+          "optional": true
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "dismiss",
+      "signature": "(reason?: any) => void",
+      "description": "Dismisses the dialog without a result, typically due to user cancellation.\nUpdates signal state and emits error to observables for backward compatibility.",
+      "deprecated": null,
+      "sourceLine": 156,
+      "since": null,
+      "parameters": [
+        {
+          "name": "reason",
+          "type": "any",
+          "description": "Optional reason for dismissal (ESC key, backdrop click, etc.)",
+          "optional": true
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "loaded",
+      "signature": "() => void",
+      "description": "Marks the dialog as loaded and initialized.\nCalled internally after the dialog view has been created and rendered.\nUpdates signal state and emits to observables for backward compatibility.",
+      "deprecated": null,
+      "sourceLine": 176,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

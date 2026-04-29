@@ -1,0 +1,13 @@
+{
+  "name": "QuickViewGroupItemContentComponent",
+  "selector": "fd-quick-view-group-item-content",
+  "kind": "Component",
+  "sourceFile": "quick-view-group-item-content.component.ts",
+  "sourceLine": 11,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/quick-view/quick-view-group-item-content/quick-view-group-item-content.component.ts#L11",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

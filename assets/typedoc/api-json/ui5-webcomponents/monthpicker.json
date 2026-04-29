@@ -1,0 +1,94 @@
+{
+  "name": "MonthPicker",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 41,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "calendarWeekNumbering",
+      "type": "'Default' | 'ISO_8601' | 'MiddleEastern' | 'WesternTraditional'",
+      "default": null,
+      "description": "Defines how to calculate calendar weeks and first day of the week.\nIf not set, the calendar will be displayed according to the currently set global configuration.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 47,
+      "since": null
+    },
+    {
+      "name": "displayFormat",
+      "type": "string",
+      "default": null,
+      "description": "Determines the format, displayed in the input field.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 52,
+      "since": null
+    },
+    {
+      "name": "formatPattern",
+      "type": "string",
+      "default": null,
+      "description": "Determines the format, displayed in the input field.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 57,
+      "since": null
+    },
+    {
+      "name": "maxDate",
+      "type": "string",
+      "default": null,
+      "description": "Determines the maximum date available for selection.\n\n*Note:** If the formatPattern property is not set, the maxDate value must be provided in the ISO date format (yyyy-MM-dd).",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 64,
+      "since": null
+    },
+    {
+      "name": "minDate",
+      "type": "string",
+      "default": null,
+      "description": "Determines the minimum date available for selection.\n\n*Note:** If the formatPattern property is not set, the minDate value must be provided in the ISO date format (yyyy-MM-dd).",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 71,
+      "since": null
+    },
+    {
+      "name": "primaryCalendarType",
+      "type": "'Gregorian' | 'Islamic' | 'Japanese' | 'Buddhist' | 'Persian'",
+      "default": null,
+      "description": "Sets a calendar type used for display.\nIf not set, the calendar type of the global configuration is used.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 77,
+      "since": null
+    },
+    {
+      "name": "secondaryCalendarType",
+      "type": "'Gregorian' | 'Islamic' | 'Japanese' | 'Buddhist' | 'Persian'",
+      "default": null,
+      "description": "Defines the secondary calendar type.\nIf not set, the calendar will only show the primary calendar type.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 83,
+      "since": null
+    },
+    {
+      "name": "valueFormat",
+      "type": "string",
+      "default": null,
+      "description": "Determines the format, used for the value attribute.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 88,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

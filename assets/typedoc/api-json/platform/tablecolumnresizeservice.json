@@ -1,0 +1,252 @@
+{
+  "name": "TableColumnResizeService",
+  "selector": null,
+  "kind": "Service",
+  "sourceFile": "table-column-resize.service.ts",
+  "sourceLine": 20,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/table-helpers/services/table-column-resize.service.ts#L20",
+  "description": "Service to handle all things related to column resizing:\n- Setting resizer\n- Processing resize\n- Calculating the real columns width",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "_processResize",
+      "signature": "(diffX: number) => void",
+      "description": "Update columns width after resizing, prevent from having too small columns.",
+      "deprecated": null,
+      "sourceLine": 299,
+      "since": null,
+      "parameters": [
+        {
+          "name": "diffX",
+          "type": "number",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "finishResize",
+      "signature": "(event: MouseEvent) => void",
+      "description": "Handle end resizing.",
+      "deprecated": null,
+      "sourceLine": 277,
+      "since": null,
+      "parameters": [
+        {
+          "name": "event",
+          "type": "MouseEvent",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "getColumnWidthStyle",
+      "signature": "(columnName: string) => string",
+      "description": "Retrieves custom column value or returns `unset`",
+      "deprecated": null,
+      "sourceLine": 181,
+      "since": null,
+      "parameters": [
+        {
+          "name": "columnName",
+          "type": "string",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "string"
+    },
+    {
+      "name": "getNextColumnName",
+      "signature": "(columnName: string) => string",
+      "description": "Previous column name",
+      "deprecated": null,
+      "sourceLine": 192,
+      "since": null,
+      "parameters": [
+        {
+          "name": "columnName",
+          "type": "string",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "string"
+    },
+    {
+      "name": "getNextColumnsWidth",
+      "signature": "(columnName: string) => number",
+      "description": "Overall next columns width. Used to calculate offset for the absolute positioned cells.",
+      "deprecated": null,
+      "sourceLine": 202,
+      "since": null,
+      "parameters": [
+        {
+          "name": "columnName",
+          "type": "string",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "number"
+    },
+    {
+      "name": "getPrevColumnsWidth",
+      "signature": "(columnName: string) => number",
+      "description": "Overall previous columns width. Used to calculate offset for the absolute positioned cells.",
+      "deprecated": null,
+      "sourceLine": 197,
+      "since": null,
+      "parameters": [
+        {
+          "name": "columnName",
+          "type": "string",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "number"
+    },
+    {
+      "name": "getPreviousColumnName",
+      "signature": "(columnName: string) => string",
+      "description": "Previous column name",
+      "deprecated": null,
+      "sourceLine": 187,
+      "since": null,
+      "parameters": [
+        {
+          "name": "columnName",
+          "type": "string",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "string"
+    },
+    {
+      "name": "hideResizer",
+      "signature": "() => void",
+      "description": "Hide the column resizer.",
+      "deprecated": null,
+      "sourceLine": 250,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "registerColumnCell",
+      "signature": "(columnName: string, cellElRef: ElementRef<any>) => void",
+      "description": "Register column's cell to get its dimensions in further.",
+      "deprecated": null,
+      "sourceLine": 207,
+      "since": null,
+      "parameters": [
+        {
+          "name": "columnName",
+          "type": "string",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "cellElRef",
+          "type": "ElementRef<any>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setCustomWidth",
+      "signature": "(columnName: string, value: string) => void",
+      "description": "Register the value of column width that changed from  input",
+      "deprecated": null,
+      "sourceLine": 227,
+      "since": null,
+      "parameters": [
+        {
+          "name": "columnName",
+          "type": "string",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setInitialResizerPosition",
+      "signature": "(resizerPosition: number, resizedColumn: string) => void",
+      "description": "Set the appropriate column resizer position.",
+      "deprecated": null,
+      "sourceLine": 233,
+      "since": null,
+      "parameters": [
+        {
+          "name": "resizerPosition",
+          "type": "number",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "resizedColumn",
+          "type": "string",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "startResize",
+      "signature": "(event: MouseEvent) => void",
+      "description": "Handle start resizing.",
+      "deprecated": null,
+      "sourceLine": 266,
+      "since": null,
+      "parameters": [
+        {
+          "name": "event",
+          "type": "MouseEvent",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "unregisterColumnCell",
+      "signature": "(columnName: string, cellElRef: ElementRef<any>) => void",
+      "description": "Unregister column's cell.",
+      "deprecated": null,
+      "sourceLine": 213,
+      "since": null,
+      "parameters": [
+        {
+          "name": "columnName",
+          "type": "string",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "cellElRef",
+          "type": "ElementRef<any>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

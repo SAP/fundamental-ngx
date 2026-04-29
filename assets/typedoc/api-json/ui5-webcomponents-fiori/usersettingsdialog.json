@@ -1,0 +1,85 @@
+{
+  "name": "UserSettingsDialog",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "headerText",
+      "type": "string",
+      "default": null,
+      "description": "Defines the headerText of the item.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 45,
+      "since": null
+    },
+    {
+      "name": "open",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines, if the User Settings Dialog is opened.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 50,
+      "since": null
+    },
+    {
+      "name": "showSearchField",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines if the Search Field would be displayed.\n\n*Note:** By default the Search Field is not displayed.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 57,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5BeforeClose",
+      "type": "UI5CustomEvent<UserSettingsDialog, 'before-close'>",
+      "default": null,
+      "description": "Fired before the settings dialog is closed.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 64,
+      "since": null
+    },
+    {
+      "name": "ui5Close",
+      "type": "UI5CustomEvent<UserSettingsDialog, 'close'>",
+      "default": null,
+      "description": "Fired when a settings dialog is closed.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 69,
+      "since": null
+    },
+    {
+      "name": "ui5Open",
+      "type": "UI5CustomEvent<UserSettingsDialog, 'open'>",
+      "default": null,
+      "description": "Fired when a settings dialog is open.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 74,
+      "since": null
+    },
+    {
+      "name": "ui5SelectionChange",
+      "type": "UI5CustomEvent<UserSettingsDialog, 'selection-change'>",
+      "default": null,
+      "description": "Fired when an item is selected.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 79,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

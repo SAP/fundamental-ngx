@@ -1,0 +1,146 @@
+{
+  "name": "MessageStripComponent",
+  "selector": "fd-message-strip",
+  "kind": "Component",
+  "sourceFile": "message-strip.component.ts",
+  "sourceLine": 57,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/message-strip/message-strip.component.ts#L57",
+  "description": "The component that represents a message-strip. It can only be used inline.",
+  "inputs": [
+    {
+      "name": "ariaLabel",
+      "type": "null | string",
+      "default": null,
+      "description": "Aria label for the message-strip component element.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 82,
+      "since": null
+    },
+    {
+      "name": "ariaLabelledBy",
+      "type": "null | string",
+      "default": null,
+      "description": "Id of the element that labels the message-strip.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 62,
+      "since": null
+    },
+    {
+      "name": "dismissBtnTitle",
+      "type": "string",
+      "default": null,
+      "description": "Title for dismiss button",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 65,
+      "since": null
+    },
+    {
+      "name": "dismissible",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the message strip is dismissible.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 59,
+      "since": null
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "default": null,
+      "description": "Id for the message-strip component. If omitted, a unique one is generated.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 79,
+      "since": null
+    },
+    {
+      "name": "indicationColor",
+      "type": "MessageStripIndicationColor",
+      "default": null,
+      "description": "indication color of the message-strip.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 94,
+      "since": null
+    },
+    {
+      "name": "marginBottom",
+      "type": "string",
+      "default": null,
+      "description": "Margin bottom of the message-strip.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 91,
+      "since": null
+    },
+    {
+      "name": "minWidth",
+      "type": "string",
+      "default": null,
+      "description": "Minimum width of the message-strip.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 88,
+      "since": null
+    },
+    {
+      "name": "noIcon",
+      "type": "boolean",
+      "default": null,
+      "description": "The default message strip does not have an icon.\nThe other types (warning, success, information and error) have icons by default.\nTo remove the icon set the property to true.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 71,
+      "since": null
+    },
+    {
+      "name": "type",
+      "type": "MessageStripType",
+      "default": null,
+      "description": "The type of the message strip.\nCan be one of *warning*, *success*, *information*, *error* or null.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 76,
+      "since": null
+    },
+    {
+      "name": "width",
+      "type": "string",
+      "default": null,
+      "description": "Width of the message-strip.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 85,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "onDismiss",
+      "type": "void",
+      "default": null,
+      "description": "Event fired when the message-strip is dismissed.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 98,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "dismiss",
+      "signature": "() => void",
+      "description": "Dismisses the message-strip.",
+      "deprecated": null,
+      "sourceLine": 242,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

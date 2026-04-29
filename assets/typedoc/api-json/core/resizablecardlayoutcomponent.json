@@ -1,0 +1,147 @@
+{
+  "name": "ResizableCardLayoutComponent",
+  "selector": "fd-resizable-card-layout",
+  "kind": "Component",
+  "sourceFile": "resizable-card-layout.component.ts",
+  "sourceLine": 46,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/resizable-card-layout/resizable-card-layout/resizable-card-layout.component.ts#L46",
+  "description": "",
+  "inputs": [
+    {
+      "name": "layoutConfig",
+      "type": "ResizableCardLayoutConfig",
+      "default": null,
+      "description": "Object for setting each card property",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 49,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "layoutChange",
+      "type": "ResizableCardLayoutConfig",
+      "default": null,
+      "description": "Emits when layout changes",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 73,
+      "since": null
+    },
+    {
+      "name": "miniContentReached",
+      "type": "ResizedEvent",
+      "default": null,
+      "description": "Emits when minimum height of card content area is reached",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 69,
+      "since": null
+    },
+    {
+      "name": "miniHeaderReached",
+      "type": "ResizedEvent",
+      "default": null,
+      "description": "Emits when card height is reduced to show only header",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 65,
+      "since": null
+    },
+    {
+      "name": "resized",
+      "type": "ResizedEvent",
+      "default": null,
+      "description": "Emits when card resize is completed",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 61,
+      "since": null
+    },
+    {
+      "name": "resizing",
+      "type": "ResizedEvent",
+      "default": null,
+      "description": "Emits when card is still resizing",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 57,
+      "since": null
+    },
+    {
+      "name": "stepChange",
+      "type": "ResizedEvent",
+      "default": null,
+      "description": "Emits when card resize is reached to one new step in horizontal or vertical direction",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 53,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "arrangeCards",
+      "signature": "(cards: ResizableCardItemComponent[]) => void",
+      "description": "Arranges cards in layout based on rank, width and height of card",
+      "deprecated": null,
+      "sourceLine": 186,
+      "since": null,
+      "parameters": [
+        {
+          "name": "cards",
+          "type": "ResizableCardItemComponent[]",
+          "description": "Array of ResizableCardItemComponent",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "cardResizeComplete",
+      "signature": "(event: ResizedEvent) => void",
+      "description": "Handles arrangement of cards in layout",
+      "deprecated": null,
+      "sourceLine": 216,
+      "since": null,
+      "parameters": [
+        {
+          "name": "event",
+          "type": "ResizedEvent",
+          "description": "{ResizedEvent}",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "cardResizing",
+      "signature": "(event: ResizedEvent) => void",
+      "description": "Handles shifting of cards with animation, while card is still resizing.",
+      "deprecated": null,
+      "sourceLine": 206,
+      "since": null,
+      "parameters": [
+        {
+          "name": "event",
+          "type": "ResizedEvent",
+          "description": "{ResizedEvent}",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "getWidthAvailable",
+      "signature": "() => number",
+      "description": "method to get screen width",
+      "deprecated": null,
+      "sourceLine": 234,
+      "since": null,
+      "parameters": [],
+      "returnType": "number"
+    }
+  ],
+  "inherited": null
+}

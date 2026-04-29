@@ -1,0 +1,13 @@
+{
+  "name": "ListInfoLabelDirective",
+  "selector": "[fd-list-info-label], [fdListInfoLabel]",
+  "kind": "Directive",
+  "sourceFile": "list-info-label.directive.ts",
+  "sourceLine": 9,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/list/directives/list-info-label.directive.ts#L9",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

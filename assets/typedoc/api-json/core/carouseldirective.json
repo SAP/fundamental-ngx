@@ -1,0 +1,99 @@
+{
+  "name": "CarouselDirective",
+  "selector": "[fdCarousel]",
+  "kind": "Directive",
+  "sourceFile": "carousel.directive.ts",
+  "sourceLine": 23,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/carousel/carousel.directive.ts#L23",
+  "description": "",
+  "inputs": [
+    {
+      "name": "active",
+      "type": "CarouselItemDirective<unknown>",
+      "default": null,
+      "description": "Initial active item of carousel, position first + offset",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 30,
+      "since": null
+    },
+    {
+      "name": "config",
+      "type": "CarouselConfig",
+      "default": null,
+      "description": "Configuration for carousel",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 26,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "activeChange",
+      "type": "PanEndOutput",
+      "default": null,
+      "description": "Event thrown, when active element is changed",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 39,
+      "since": null
+    },
+    {
+      "name": "dragStateChange",
+      "type": "boolean",
+      "default": null,
+      "description": "Event thrown when element is dragged. Emits \"true\" when drag starts and \"false\" when drag ends.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 43,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "goToItem",
+      "signature": "(item: CarouselItemDirective<unknown>, smooth?: boolean) => void",
+      "description": "Change active element",
+      "deprecated": null,
+      "sourceLine": 64,
+      "since": null,
+      "parameters": [
+        {
+          "name": "item",
+          "type": "CarouselItemDirective<unknown>",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "smooth",
+          "type": "boolean",
+          "description": "",
+          "optional": true
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "pickNext",
+      "signature": "() => void",
+      "description": "Pick next carousel item",
+      "deprecated": null,
+      "sourceLine": 74,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "pickPrevious",
+      "signature": "() => void",
+      "description": "Pick previous carousel item",
+      "deprecated": null,
+      "sourceLine": 69,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

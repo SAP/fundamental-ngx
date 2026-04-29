@@ -1,0 +1,46 @@
+{
+  "name": "InputMessageGroupWithTemplate",
+  "selector": "fdp-input-message-group",
+  "kind": "Class",
+  "sourceFile": "input-message-group-with-template.component.ts",
+  "sourceLine": 27,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/input-message-group-with-template/input-message-group-with-template.component.ts#L27",
+  "description": "This extends core implementation  to support richer extensibility and instead of relying\nonly on ng-content selector this will allow you to put any content as trigger.\n\nLet's think of u",
+  "inputs": [
+    {
+      "name": "triggers",
+      "type": "string | TriggerConfig[]",
+      "default": null,
+      "description": "To allow user to determine what event he wants to trigger the messages to show\nAccepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp).",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 33,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": {
+    "from": "FormInputMessageGroupComponent",
+    "inputs": [],
+    "methods": [
+      {
+        "name": "openChanged",
+        "signature": "(isOpen: boolean) => void",
+        "description": "Function is called every time message changes isOpen attribute",
+        "deprecated": null,
+        "sourceLine": 102,
+        "since": null,
+        "parameters": [
+          {
+            "name": "isOpen",
+            "type": "boolean",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      }
+    ]
+  }
+}

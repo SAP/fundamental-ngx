@@ -1,0 +1,176 @@
+{
+  "name": "TreeItemComponent",
+  "selector": "fd-tree-item",
+  "kind": "Component",
+  "sourceFile": "tree-item.component.ts",
+  "sourceLine": 80,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/tree/components/tree-item/tree-item.component.ts#L80",
+  "description": "Abstract base class for tree item components.\nDefines the contract for tree item implementations with navigation, selection, and hierarchy support.",
+  "inputs": [
+    {
+      "name": "ariaLabel",
+      "type": "string",
+      "default": null,
+      "description": "Tree item aria label.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 100,
+      "since": null
+    },
+    {
+      "name": "backgroundColor",
+      "type": "string",
+      "default": null,
+      "description": "Custom background color",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 260,
+      "since": null
+    },
+    {
+      "name": "childNodes",
+      "type": "FdTreeAcceptableDataSource<T>",
+      "default": "[]",
+      "description": "Tree item child nodes data source.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 130,
+      "since": null
+    },
+    {
+      "name": "customStyles",
+      "type": "object",
+      "default": null,
+      "description": "Custom styles",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 265,
+      "since": null
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "default": null,
+      "description": "Tree item ID.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 93,
+      "since": null
+    },
+    {
+      "name": "navigatable",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the tree item is navigatable.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 118,
+      "since": null
+    },
+    {
+      "name": "state",
+      "type": "Nullable<TreeItemState>",
+      "default": null,
+      "description": "Tree item state.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 124,
+      "since": null
+    },
+    {
+      "name": "value",
+      "type": "P",
+      "default": null,
+      "description": "Tree item value.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 88,
+      "since": null
+    },
+    {
+      "name": "wrapContent",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to wrap content.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 136,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "expandedChange",
+      "type": "boolean",
+      "default": null,
+      "description": "Event emitted when `expanded` state changes.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 190,
+      "since": null
+    },
+    {
+      "name": "treeItemClick",
+      "type": "KeyboardEvent | MouseEvent",
+      "default": null,
+      "description": "Event emitted when user clicks on tree item.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 184,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "focus",
+      "signature": "() => void",
+      "description": "Method to focus on the tree item.",
+      "deprecated": null,
+      "sourceLine": 366,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "setContainerTabIndex",
+      "signature": "(value: number) => void",
+      "description": "Method for setting the focusable tabindex.",
+      "deprecated": null,
+      "sourceLine": 371,
+      "since": null,
+      "parameters": [
+        {
+          "name": "value",
+          "type": "number",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setPosition",
+      "signature": "(totalItems: number, currentIndex: number) => void",
+      "description": "Sets position of the current item in the set.",
+      "deprecated": null,
+      "sourceLine": 360,
+      "since": null,
+      "parameters": [
+        {
+          "name": "totalItems",
+          "type": "number",
+          "description": "Total items amount in the set.",
+          "optional": false
+        },
+        {
+          "name": "currentIndex",
+          "type": "number",
+          "description": "Current item position in the set.",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

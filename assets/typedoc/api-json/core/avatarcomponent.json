@@ -1,0 +1,265 @@
+{
+  "name": "AvatarComponent",
+  "selector": "fd-avatar",
+  "kind": "Component",
+  "sourceFile": "avatar.component.ts",
+  "sourceLine": 66,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/avatar/avatar.component.ts#L66",
+  "description": "",
+  "inputs": [
+    {
+      "name": "alterIcon",
+      "type": "null | string",
+      "default": null,
+      "description": "Backup options to use when image hasn't been loaded successfully.\nOptions separated with \"|\" symbol.\nPossible options: content, alt, backup, default-icon",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 136,
+      "since": null
+    },
+    {
+      "name": "ariaLabel",
+      "type": "null | string",
+      "default": null,
+      "description": "Aria-label for Avatar.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 71,
+      "since": null
+    },
+    {
+      "name": "ariaLabelledby",
+      "type": "null | string",
+      "default": null,
+      "description": "Aria-Labelledby for element describing Avatar.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 74,
+      "since": null
+    },
+    {
+      "name": "backupImage",
+      "type": "null | string",
+      "default": null,
+      "description": "Backup image to load when image hasn't been loaded successfully.\nOnly applicable when using alterIcon input property.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 141,
+      "since": null
+    },
+    {
+      "name": "border",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether to apply a border to the Avatar.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 110,
+      "since": null
+    },
+    {
+      "name": "circle",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether to apply a circle style to the Avatar.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 92,
+      "since": null
+    },
+    {
+      "name": "clickable",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether component should be focusable & clicable",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 124,
+      "since": null
+    },
+    {
+      "name": "colorAccent",
+      "type": "null | ColorAccent",
+      "default": null,
+      "description": "A number from 1 to 10 representing the background color of the Avatar.\nThis property will override the colorIndication property.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 115,
+      "since": null
+    },
+    {
+      "name": "colorIndication",
+      "type": "null | IndicationColor",
+      "default": null,
+      "description": "A number from 1 to 10 representing the background color of the Avatar using the Indication Colors.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 118,
+      "since": null
+    },
+    {
+      "name": "contain",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether to apply background size contain style to the Avatar",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 101,
+      "since": null
+    },
+    {
+      "name": "font",
+      "type": "IconFont",
+      "default": null,
+      "description": "Font family of the icon.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 83,
+      "since": null
+    },
+    {
+      "name": "glyph",
+      "type": "null | string",
+      "default": null,
+      "description": "The glyph name.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 86,
+      "since": null
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "default": null,
+      "description": "Id of the Avatar.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 68,
+      "since": null
+    },
+    {
+      "name": "image",
+      "type": "null | string",
+      "default": null,
+      "description": "Background image resource: url or base64.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 130,
+      "since": null
+    },
+    {
+      "name": "interactive",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the Avatar should be interactive.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 95,
+      "since": null
+    },
+    {
+      "name": "label",
+      "type": "null | string",
+      "default": null,
+      "description": "Localized text for label",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 77,
+      "since": null
+    },
+    {
+      "name": "placeholder",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether to apply a placeholder background style to the Avatar.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 104,
+      "since": null
+    },
+    {
+      "name": "random",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether to apply random background color to the Avatar.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 121,
+      "since": null
+    },
+    {
+      "name": "size",
+      "type": "Size",
+      "default": null,
+      "description": "The size of the Avatar. Options include: *xs*, *s*, *m*, *l* and *xl*.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 80,
+      "since": null
+    },
+    {
+      "name": "tile",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether to apply a tile background style to the Avatar.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 107,
+      "since": null
+    },
+    {
+      "name": "transparent",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether to apply a transparent style to the Avatar.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 98,
+      "since": null
+    },
+    {
+      "name": "valueState",
+      "type": "null | AvatarValueStates",
+      "default": null,
+      "description": "Value state of the Avatar.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 127,
+      "since": null
+    },
+    {
+      "name": "zoomGlyph",
+      "type": "null | string",
+      "default": null,
+      "description": "The glyph name for zoom icon.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 89,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "avatarClicked",
+      "type": "Event",
+      "default": null,
+      "description": "Event emitted when avatar clicked. Only fires if clickable input property set to true.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 144,
+      "since": null
+    },
+    {
+      "name": "zoomGlyphClicked",
+      "type": "void",
+      "default": null,
+      "description": "Event emitted when zoom icon clicked. Only fires if zoomGlyph input property is set.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 147,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

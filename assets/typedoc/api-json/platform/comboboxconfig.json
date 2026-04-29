@@ -1,0 +1,31 @@
+{
+  "name": "ComboboxConfig",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "combobox.config.ts",
+  "sourceLine": 10,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/combobox/combobox.config.ts#L10",
+  "description": "Default options for Combobox",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "createProviderFactory",
+      "signature": "(obj: Partial<ComboboxConfig>) => (platformConfig: PlatformConfig) => ComboboxConfig",
+      "description": "Create Provider factory function",
+      "deprecated": null,
+      "sourceLine": 34,
+      "since": null,
+      "parameters": [
+        {
+          "name": "obj",
+          "type": "Partial<ComboboxConfig>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "(platformConfig: PlatformConfig) => ComboboxConfig"
+    }
+  ],
+  "inherited": null
+}

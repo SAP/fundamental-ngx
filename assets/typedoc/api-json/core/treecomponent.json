@@ -1,0 +1,85 @@
+{
+  "name": "TreeComponent",
+  "selector": "fd-tree",
+  "kind": "Component",
+  "sourceFile": "tree.component.ts",
+  "sourceLine": 86,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/tree/tree.component.ts#L86",
+  "description": "",
+  "inputs": [
+    {
+      "name": "independentSections",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the sections should be dependent for selection mode.\nIf true, selection control will shift, according to the level.\nIf false, selection control will stay on the same place ignoring the item level.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 113,
+      "since": null
+    },
+    {
+      "name": "noBorder",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the tree should be borderless.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 97,
+      "since": null
+    },
+    {
+      "name": "selection",
+      "type": "SelectionType",
+      "default": "'none'",
+      "description": "Type of tree items selection.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 101,
+      "since": null
+    },
+    {
+      "name": "selectionPlacement",
+      "type": "SelectionPlacement",
+      "default": "'none'",
+      "description": "Placement of the selection control.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 105,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "dataReceived",
+      "type": "boolean",
+      "default": null,
+      "description": "Event emitted when data loading is finished.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 137,
+      "since": null
+    },
+    {
+      "name": "dataRequested",
+      "type": "boolean",
+      "default": null,
+      "description": "Event emitted when data loading is started.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 133,
+      "since": null
+    },
+    {
+      "name": "selectedChange",
+      "type": "any",
+      "default": null,
+      "description": "Event emitted when selected state changed.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 141,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

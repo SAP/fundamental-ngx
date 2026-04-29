@@ -1,0 +1,166 @@
+{
+  "name": "ObjectListItemComponent",
+  "selector": "fdp-object-list-item",
+  "kind": "Component",
+  "sourceFile": "object-list-item.component.ts",
+  "sourceLine": 55,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/list/object-list-item/object-list-item.component.ts#L55",
+  "description": "This class contains common properties used across list Item components.\nthis can be extended to reduce the code duplication across list Item components.",
+  "inputs": [
+    {
+      "name": "amount",
+      "type": "number",
+      "default": null,
+      "description": "holds object number",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 62,
+      "since": null
+    },
+    {
+      "name": "circle",
+      "type": "boolean",
+      "default": null,
+      "description": "Avatar to be circle or not",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 86,
+      "since": null
+    },
+    {
+      "name": "colorAccent",
+      "type": "ColorAccent",
+      "default": null,
+      "description": "Is avatar has colorAccent",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 98,
+      "since": null
+    },
+    {
+      "name": "currency",
+      "type": "string",
+      "default": null,
+      "description": "holds object number unit",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 66,
+      "since": null
+    },
+    {
+      "name": "decimal",
+      "type": "number",
+      "default": null,
+      "description": "object number amount decimal limitation",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 70,
+      "since": null
+    },
+    {
+      "name": "glyph",
+      "type": "string",
+      "default": null,
+      "description": "holds avatar icon as image",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 82,
+      "since": null
+    },
+    {
+      "name": "image",
+      "type": "string",
+      "default": null,
+      "description": "Avatar image path",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 102,
+      "since": null
+    },
+    {
+      "name": "introductionText",
+      "type": "string",
+      "default": null,
+      "description": "define label for screen reader",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 58,
+      "since": null
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "default": null,
+      "description": "holds avatar label",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 78,
+      "since": null
+    },
+    {
+      "name": "numberStatus",
+      "type": "StatusType",
+      "default": null,
+      "description": "object number status",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 74,
+      "since": null
+    },
+    {
+      "name": "placeholder",
+      "type": "boolean",
+      "default": null,
+      "description": "Is avatar has placeholder",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 90,
+      "since": null
+    },
+    {
+      "name": "tile",
+      "type": "boolean",
+      "default": null,
+      "description": "Is avatar has tile",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 94,
+      "since": null
+    },
+    {
+      "name": "transparent",
+      "type": "boolean",
+      "default": null,
+      "description": "Avatar is transparent",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 106,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": {
+    "from": "BaseListItem",
+    "inputs": [],
+    "methods": [
+      {
+        "name": "setSelected",
+        "signature": "(selected: boolean) => void",
+        "description": "Programmatically set selected state of the list item.",
+        "deprecated": null,
+        "sourceLine": 528,
+        "since": null,
+        "parameters": [
+          {
+            "name": "selected",
+            "type": "boolean",
+            "description": "Whether the list item is selected",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      }
+    ]
+  }
+}

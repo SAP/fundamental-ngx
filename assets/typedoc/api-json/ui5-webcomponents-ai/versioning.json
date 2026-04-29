@@ -1,0 +1,65 @@
+{
+  "name": "Versioning",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "currentStep",
+      "type": "number",
+      "default": null,
+      "description": "Indicates the index of the currently displayed result version.\n\nThis property represents the current position in the version history.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 47,
+      "since": null
+    },
+    {
+      "name": "overflowPriority",
+      "type": "'Default' | 'NeverOverflow' | 'AlwaysOverflow'",
+      "default": null,
+      "description": "Property used to define the access of the item to the overflow Popover. If \"NeverOverflow\" option is set,\nthe item never goes in the Popover, if \"AlwaysOverflow\" - it never comes out of it.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 60,
+      "since": null
+    },
+    {
+      "name": "preventOverflowClosing",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines if the toolbar overflow popup should close upon interaction with the item.\nIt will close by default.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 66,
+      "since": null
+    },
+    {
+      "name": "totalSteps",
+      "type": "number",
+      "default": null,
+      "description": "The total number of available result versions.\n\nNote: Versioning is hidden if the value is `0`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 54,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5VersionChange",
+      "type": "UI5CustomEvent<Versioning, 'version-change'>",
+      "default": null,
+      "description": "Fired when the user clicks on version navigation buttons.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 73,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

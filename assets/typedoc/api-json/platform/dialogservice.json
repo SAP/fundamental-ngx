@@ -1,0 +1,65 @@
+{
+  "name": "DialogService",
+  "selector": null,
+  "kind": "Service",
+  "sourceFile": "dialog.service.ts",
+  "sourceLine": 17,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/dialog/dialog-service/dialog.service.ts#L17",
+  "description": "Service used to create a dialog.",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "open",
+      "signature": "(content: DialogContentType, dialogConfig?: DialogConfig<T>, parentInjector?: Injector) => DialogRef<T, any>",
+      "description": "Opens a dialog component with provided content.",
+      "deprecated": null,
+      "sourceLine": 42,
+      "since": null,
+      "parameters": [
+        {
+          "name": "content",
+          "type": "DialogContentType",
+          "description": "Content of the dialog component.",
+          "optional": false
+        },
+        {
+          "name": "dialogConfig",
+          "type": "DialogConfig<T>",
+          "description": "Configuration of the dialog component.",
+          "optional": true
+        },
+        {
+          "name": "parentInjector",
+          "type": "Injector",
+          "description": "Parent injector instance.",
+          "optional": true
+        }
+      ],
+      "returnType": "DialogRef<T, any>"
+    }
+  ],
+  "inherited": {
+    "from": "DialogBaseService",
+    "inputs": [],
+    "methods": [
+      {
+        "name": "dismissAll",
+        "signature": "(reason?: string) => void",
+        "description": "Dismisses all currently open dialogs.",
+        "deprecated": null,
+        "sourceLine": 44,
+        "since": null,
+        "parameters": [
+          {
+            "name": "reason",
+            "type": "string",
+            "description": "",
+            "optional": true
+          }
+        ],
+        "returnType": "void"
+      }
+    ]
+  }
+}

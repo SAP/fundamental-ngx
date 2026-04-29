@@ -1,0 +1,142 @@
+{
+  "name": "RadioButtonComponent",
+  "selector": "fdp-radio-button",
+  "kind": "Component",
+  "sourceFile": "radio.component.ts",
+  "sourceLine": 26,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/radio-group/radio/radio.component.ts#L26",
+  "description": "All form components share the same information (value, name, placeholder,.. ) as well as\nthe same behavior given by ControlValueAccessor.\n\nEven this is not ideal solution there is no other way then use inheritance to reuse some of the\ncommon logic. It should be possible to use some kind of compositions with Proxies but something\nsimilar that exists in Aspect Oriented Programing.\n\nUsually try to fire stateChange only for things that can change dynamically in runtime. We don't expect\nthat e.g. placeholder will change after component is created",
+  "inputs": [
+    {
+      "name": "forceRender",
+      "type": "boolean",
+      "default": "false",
+      "description": "used for radio button creation if list value present",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 48,
+      "since": null
+    },
+    {
+      "name": "tabIndex",
+      "type": "number",
+      "default": "-1",
+      "description": "Includes the Radio in the page tab sequence.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 35,
+      "since": null
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "default": null,
+      "description": "sets radio button tooltip",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 29,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "checked",
+      "type": "RadioButtonComponent",
+      "default": null,
+      "description": "click event to emit",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 56,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "focus",
+      "signature": "() => void",
+      "description": "method for cdk FocusKeymanager",
+      "deprecated": null,
+      "sourceLine": 111,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "select",
+      "signature": "() => void",
+      "description": "method to select radio button",
+      "deprecated": null,
+      "sourceLine": 116,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "setTabIndex",
+      "signature": "(index: 0 | -1) => void",
+      "description": "Setting tabIndex for radio accessibility",
+      "deprecated": null,
+      "sourceLine": 126,
+      "since": null,
+      "parameters": [
+        {
+          "name": "index",
+          "type": "0 | -1",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "unselect",
+      "signature": "() => void",
+      "description": "method to uncheck radio button",
+      "deprecated": null,
+      "sourceLine": 121,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": {
+    "from": "BaseInput",
+    "inputs": [],
+    "methods": [
+      {
+        "name": "_onFocusChanged",
+        "signature": "(isFocused: boolean) => void",
+        "description": "Keeps track of element focus",
+        "deprecated": null,
+        "sourceLine": 389,
+        "since": null,
+        "parameters": [
+          {
+            "name": "isFocused",
+            "type": "boolean",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "onContainerClick",
+        "signature": "(event: MouseEvent) => void",
+        "description": "Handles even when we click on parent container which is the FormField Wrapping this\ncontrol",
+        "deprecated": null,
+        "sourceLine": 404,
+        "since": null,
+        "parameters": [
+          {
+            "name": "event",
+            "type": "MouseEvent",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      }
+    ]
+  }
+}

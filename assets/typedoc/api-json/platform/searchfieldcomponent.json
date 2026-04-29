@@ -1,0 +1,473 @@
+{
+  "name": "SearchFieldComponent",
+  "selector": "[fdpSearchFieldSuggestion]",
+  "kind": "Component",
+  "sourceFile": "search-field.component.ts",
+  "sourceLine": 162,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/search-field/search-field.component.ts#L162",
+  "description": "",
+  "inputs": [
+    {
+      "name": "allowEmptySearch",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether to allow empty searches when using a data source, meaning all results will be displayed when the search input is empty.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 292,
+      "since": null
+    },
+    {
+      "name": "appearance",
+      "type": "Appearance",
+      "default": null,
+      "description": "Additional appearance configuration.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 209,
+      "since": null
+    },
+    {
+      "name": "busyIndicatorAriaValueText",
+      "type": "string",
+      "default": null,
+      "description": "Aria value text for the busy indicator.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 304,
+      "since": null
+    },
+    {
+      "name": "busyIndicatorTitle",
+      "type": "string",
+      "default": null,
+      "description": "Title for the busy indicator.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 301,
+      "since": null
+    },
+    {
+      "name": "categories",
+      "type": "ValueLabelItem[]",
+      "default": null,
+      "description": "List of categories.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 236,
+      "since": null
+    },
+    {
+      "name": "categoryLabel",
+      "type": "string",
+      "default": null,
+      "description": "Set label for category dropdown button.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 242,
+      "since": null
+    },
+    {
+      "name": "categoryMode",
+      "type": "'menu' | 'select'",
+      "default": null,
+      "description": "Type of component used to render the categories dropdown.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 206,
+      "since": null
+    },
+    {
+      "name": "currentCategory",
+      "type": "ValueLabelItem",
+      "default": null,
+      "description": "Current category, value should be present in categories array",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 239,
+      "since": null
+    },
+    {
+      "name": "dataSource",
+      "type": "SearchFieldDataSource<any>",
+      "default": null,
+      "description": "Datasource for suggestion list",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 230,
+      "since": null
+    },
+    {
+      "name": "disableRefresh",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether display Refresh button",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 221,
+      "since": null
+    },
+    {
+      "name": "disableSearch",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether display search button",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 224,
+      "since": null
+    },
+    {
+      "name": "disableSuggestionsFoundAnnouncer",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether to disable the \"suggestions found\" live announcer.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 254,
+      "since": null
+    },
+    {
+      "name": "enableSelection",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether to display a suggestion item as selected after it has been clicked.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 295,
+      "since": null
+    },
+    {
+      "name": "forceSearchButton",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether to always show search button.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 251,
+      "since": null
+    },
+    {
+      "name": "hideCategoryLabel",
+      "type": "boolean",
+      "default": null,
+      "description": "Hide display of category label",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 245,
+      "since": null
+    },
+    {
+      "name": "initialSuggestionEmptySubline",
+      "type": "string",
+      "default": null,
+      "description": "Title of the initial suggestion if the user has entered some text and there are no results to display, and an initial suggestion subline should be shown.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 277,
+      "since": null
+    },
+    {
+      "name": "initialSuggestionEmptyTitle",
+      "type": "string",
+      "default": null,
+      "description": "Title of the initial suggestion if the user has entered some text and there are no results to display, and an initial suggestion title should be shown.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 274,
+      "since": null
+    },
+    {
+      "name": "initialSuggestionSubline",
+      "type": "string",
+      "default": null,
+      "description": "Subline of the initial suggestion, if a suggestion list is displayed.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 271,
+      "since": null
+    },
+    {
+      "name": "initialSuggestionTitle",
+      "type": "string",
+      "default": null,
+      "description": "Title of the initial suggestion, if a suggestion list is displayed.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 268,
+      "since": null
+    },
+    {
+      "name": "inputText",
+      "type": "string",
+      "default": null,
+      "description": "Initial input text.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 233,
+      "since": null
+    },
+    {
+      "name": "isLoading",
+      "type": "boolean",
+      "default": null,
+      "description": "Toggle \"loading\" mode.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 248,
+      "since": null
+    },
+    {
+      "name": "mobile",
+      "type": "boolean",
+      "default": null,
+      "description": "Set Mobile Mode",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 215,
+      "since": null
+    },
+    {
+      "name": "mobileConfig",
+      "type": "MobileModeConfig",
+      "default": null,
+      "description": "Search Field Mobile configuration",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 218,
+      "since": null
+    },
+    {
+      "name": "placeholder",
+      "type": "string",
+      "default": null,
+      "description": "Placeholder text for search input field.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 212,
+      "since": null
+    },
+    {
+      "name": "searchResultsEmptyDefaultSuggestions",
+      "type": "null | SuggestionItem[]",
+      "default": null,
+      "description": "Options to display when the user has entered a string into the input that returns no results.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 286,
+      "since": null
+    },
+    {
+      "name": "searchResultsEmptyTemplate",
+      "type": "null | TemplateRef<any>",
+      "default": null,
+      "description": "Template to display when the search results list has no items to display.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 283,
+      "since": null
+    },
+    {
+      "name": "showAdvancedFilter",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether to show the advanced filter button, which emits the event `advancedFilterButtonClick`. If this input is set to true, it will override any other category button settings.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 289,
+      "since": null
+    },
+    {
+      "name": "showCategoryAllOption",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether to show the \"All\" option in the category select.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 257,
+      "since": null
+    },
+    {
+      "name": "suggestionFooter",
+      "type": "null | TemplateRef<any>",
+      "default": null,
+      "description": "Subline of the initial suggestion, if a suggestion list is displayed.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 280,
+      "since": null
+    },
+    {
+      "name": "suggestions",
+      "type": "SuggestionItem[] | Observable<SuggestionItem[]>",
+      "default": null,
+      "description": "List of string values to populate suggestion dropdown selection.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 227,
+      "since": null
+    },
+    {
+      "name": "suggestionsLoading",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether to display the busy indicator over the suggestion list.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 298,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "advancedFilterButtonClick",
+      "type": "void",
+      "default": null,
+      "description": "Event emitted when the advanced filter button is clicked.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 176,
+      "since": null
+    },
+    {
+      "name": "appearanceChange",
+      "type": "EventEmitter<Appearance>",
+      "default": null,
+      "description": "Additional appearance configuration.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 209,
+      "since": null
+    },
+    {
+      "name": "cancelSearch",
+      "type": "SearchInput",
+      "default": null,
+      "description": "Cancel search event.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 170,
+      "since": null
+    },
+    {
+      "name": "categoryModeChange",
+      "type": "EventEmitter<'menu' | 'select'>",
+      "default": null,
+      "description": "Type of component used to render the categories dropdown.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 206,
+      "since": null
+    },
+    {
+      "name": "disableRefreshChange",
+      "type": "EventEmitter<boolean>",
+      "default": null,
+      "description": "Whether display Refresh button",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 221,
+      "since": null
+    },
+    {
+      "name": "forceSearchButtonChange",
+      "type": "EventEmitter<boolean>",
+      "default": null,
+      "description": "Whether to always show search button.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 251,
+      "since": null
+    },
+    {
+      "name": "inputChange",
+      "type": "SearchInput",
+      "default": null,
+      "description": "Input change event.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 164,
+      "since": null
+    },
+    {
+      "name": "inputTextChange",
+      "type": "EventEmitter<string>",
+      "default": null,
+      "description": "Initial input text.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 233,
+      "since": null
+    },
+    {
+      "name": "isOpenChange",
+      "type": "boolean",
+      "default": null,
+      "description": "Open mobile mode event.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 173,
+      "since": null
+    },
+    {
+      "name": "searchSubmit",
+      "type": "SearchInput",
+      "default": null,
+      "description": "Search submit event.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 167,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "focus",
+      "signature": "() => void",
+      "description": "Focuses the search input field.",
+      "deprecated": null,
+      "sourceLine": 505,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "onKeydown",
+      "signature": "(event: KeyboardEvent) => void",
+      "description": "Capturing onKeydown of input element",
+      "deprecated": null,
+      "sourceLine": 511,
+      "since": null,
+      "parameters": [
+        {
+          "name": "event",
+          "type": "KeyboardEvent",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "openSuggestionMenu",
+      "signature": "() => void",
+      "description": "Open suggestion menu",
+      "deprecated": null,
+      "sourceLine": 654,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "resetCategory",
+      "signature": "() => void",
+      "description": "Resets the current category to its initial state.",
+      "deprecated": null,
+      "sourceLine": 698,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

@@ -1,0 +1,13 @@
+{
+  "name": "DialogFooterComponent",
+  "selector": "fd-dialog-footer",
+  "kind": "Component",
+  "sourceFile": "dialog-footer.component.ts",
+  "sourceLine": 31,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/dialog/dialog-footer/dialog-footer.component.ts#L31",
+  "description": "Building block of the dialog used to create dialog button.\n\n```html\n<fd-dialog-footer><!--Content--></fd-dialog-footer>\n\nComplex footer:\n<fd-dialog-footer>\n    <ng-template fdkTemplate=\"footer\"><!--Content--></ng-template>\n</fd-dialog-footer>\n```",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

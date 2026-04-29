@@ -1,0 +1,45 @@
+{
+  "name": "TimelineGroupItem",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "collapsed",
+      "type": "boolean",
+      "default": null,
+      "description": "Determines if the group is collapsed or expanded.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 45,
+      "since": null
+    },
+    {
+      "name": "groupName",
+      "type": "string",
+      "default": null,
+      "description": "Defines the text of the button that expands and collapses the group.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 50,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5Toggle",
+      "type": "UI5CustomEvent<TimelineGroupItem, 'toggle'>",
+      "default": null,
+      "description": "Fired when the group item is expanded or collapsed.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 57,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

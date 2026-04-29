@@ -1,0 +1,13 @@
+{
+  "name": "OverflowItemContainerRefDirective",
+  "selector": "[fdOverflowItemContainerRef]",
+  "kind": "Directive",
+  "sourceFile": "overflow-item-container-ref.directive.ts",
+  "sourceLine": 10,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/overflow-layout/directives/overflow-item-container-ref.directive.ts#L10",
+  "description": "Directive to hide component without actual destroying of the component instance.",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

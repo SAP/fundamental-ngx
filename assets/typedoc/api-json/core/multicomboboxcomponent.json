@@ -1,0 +1,364 @@
+{
+  "name": "MultiComboboxComponent",
+  "selector": "fd-multi-combobox",
+  "kind": "Component",
+  "sourceFile": "multi-combobox.component.ts",
+  "sourceLine": 138,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/multi-combobox/multi-combobox.component.ts#L138",
+  "description": "",
+  "inputs": [
+    {
+      "name": "addonIconTitle",
+      "type": "string",
+      "default": null,
+      "description": "Sets title attribute to addon button.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 319,
+      "since": null
+    },
+    {
+      "name": "autoComplete",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the autocomplete should be enabled; Enabled by default.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 199,
+      "since": null
+    },
+    {
+      "name": "autoResize",
+      "type": "boolean",
+      "default": null,
+      "description": "Enables automatic width adjustment of the dropdown.\nWhen enabled, the dropdown width automatically adjusts based on content.\nDisable for fixed-width dropdowns.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 302,
+      "since": null
+    },
+    {
+      "name": "bodyMaxWidth",
+      "type": "number | 'none' | 'container'",
+      "default": null,
+      "description": "Max width of multi combobox dropdown body.\n`none` will not limit width of the dropdown.\n`container` will limit width of the dropdown to the width of the multi-input itself.\n`number` will limit width of the dropdown by provided number in pixels.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 215,
+      "since": null
+    },
+    {
+      "name": "buttonFocusable",
+      "type": "boolean",
+      "default": null,
+      "description": "Controls whether the addon button can receive keyboard focus.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 193,
+      "since": null
+    },
+    {
+      "name": "byline",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether list item options should be rendered as byline.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 205,
+      "since": null
+    },
+    {
+      "name": "displayKey",
+      "type": "string",
+      "default": null,
+      "description": "When we deal with unknown object we can use `displayKey` to retrieve value from specific\nproperty of the object to act as display value.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 342,
+      "since": null
+    },
+    {
+      "name": "entityClass",
+      "type": "string",
+      "default": null,
+      "description": "TODO: Name of the entity for which DataProvider will be loaded. You can either pass list of\nitems or use this entityClass and internally we should be able to do lookup to some registry\nand retrieve the best matching DataProvider that is set on application level",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 239,
+      "since": null
+    },
+    {
+      "name": "fillControlMode",
+      "type": "PopoverFillMode",
+      "default": null,
+      "description": "Preset options for the Select body width, whatever is chosen, the body has a 600px limit.\n* `at-least` will apply a minimum width to the body equivalent to the width of the control. - Default\n* `equal` will apply a width to the body equivalent to the width of the control.\n* 'fit-content' will apply width needed to properly display items inside, independent of control.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 316,
+      "since": null
+    },
+    {
+      "name": "group",
+      "type": "boolean",
+      "default": null,
+      "description": "Controls whether items should be grouped in the dropdown.\nWhen enabled, items are organized by the property specified in `groupKey`.\nGroups display as headers with items nested underneath.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 257,
+      "since": null
+    },
+    {
+      "name": "groupKey",
+      "type": "string",
+      "default": null,
+      "description": "Property path for grouping items.\nSpecifies which property to use for grouping items when `group` is enabled.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 270,
+      "since": null
+    },
+    {
+      "name": "invalidEntryDisplayTime",
+      "type": "number",
+      "default": null,
+      "description": "Time in ms for how long message of invalid entry should be displayed.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 355,
+      "since": null
+    },
+    {
+      "name": "invalidEntryMessage",
+      "type": "null | string",
+      "default": null,
+      "description": "",
+      "isSignal": true,
+      "deprecated": "Use the i18n module to modify the translation for this string.\nSets invalid entry message.",
+      "sourceLine": 325,
+      "since": null
+    },
+    {
+      "name": "limitless",
+      "type": "boolean",
+      "default": null,
+      "description": "Turns limitless mode, ON or OFF",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 328,
+      "since": null
+    },
+    {
+      "name": "list",
+      "type": "string | object | SelectItem<any>[]",
+      "default": null,
+      "description": "List of values, it can be of type SelectItem, string or any object.\nGeneric object type is among the list of types,\nbecause we allow to get labels and values using `displayKey` and `lookupKey` inputs accordingly.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 349,
+      "since": null
+    },
+    {
+      "name": "lookupKey",
+      "type": "string",
+      "default": null,
+      "description": "Used in filters and any kind of comparators when we work with objects and this identify\nunique field name based on which we are going to do the job",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 334,
+      "since": null
+    },
+    {
+      "name": "matchingStrategy",
+      "type": "MatchingStrategy",
+      "default": null,
+      "description": "String matching strategy for typeahead list.\nAvailable options: 'starts with per term', 'starts with', 'contains'",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 362,
+      "since": null
+    },
+    {
+      "name": "maxHeight",
+      "type": "string",
+      "default": null,
+      "description": "Maximum height of the dropdown options panel.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 187,
+      "since": null
+    },
+    {
+      "name": "mobile",
+      "type": "boolean",
+      "default": null,
+      "description": "Enables mobile-optimized rendering mode.\nWhen enabled, displays the combobox in a full-screen dialog optimized for touch devices.\nRequires `mobileConfig` for full customization.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 248,
+      "since": null
+    },
+    {
+      "name": "mobileConfig",
+      "type": "MobileModeConfig",
+      "default": null,
+      "description": "Configuration object for mobile mode appearance and behavior.\nOnly applies when `mobile` is true.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 144,
+      "since": null
+    },
+    {
+      "name": "openDropdownOnAddOnClicked",
+      "type": "boolean",
+      "default": null,
+      "description": "Controls whether clicking the addon button opens the dropdown.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 308,
+      "since": null
+    },
+    {
+      "name": "secondaryKey",
+      "type": "string",
+      "default": null,
+      "description": "Property path for secondary text display.\nWhen `showSecondaryText` is enabled, displays this property as secondary text below the main label.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 278,
+      "since": null
+    },
+    {
+      "name": "secondaryTextAlignment",
+      "type": "'left' | 'right'",
+      "default": null,
+      "description": "Horizontally align text inside the second column (applicable for two columns layout).",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 293,
+      "since": null
+    },
+    {
+      "name": "showSecondaryText",
+      "type": "boolean",
+      "default": null,
+      "description": "Controls visibility of the secondary text column.\nWhen enabled, displays secondary text from the `secondaryKey` property in a two-column layout.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 286,
+      "since": null
+    },
+    {
+      "name": "showSelectAll",
+      "type": "boolean",
+      "default": null,
+      "description": "Show select all checkbox",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 181,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "addOnButtonClicked",
+      "type": "Event",
+      "default": null,
+      "description": "Emits event when the addon button is clicked.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 371,
+      "since": null
+    },
+    {
+      "name": "dataReceived",
+      "type": "boolean",
+      "default": null,
+      "description": "Event emitted when data loading is finished.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 377,
+      "since": null
+    },
+    {
+      "name": "dataRequested",
+      "type": "boolean",
+      "default": null,
+      "description": "Event emitted when data loading is started.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 374,
+      "since": null
+    },
+    {
+      "name": "limitlessChange",
+      "type": "EventEmitter<boolean>",
+      "default": null,
+      "description": "Turns limitless mode, ON or OFF",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 328,
+      "since": null
+    },
+    {
+      "name": "selectionChange",
+      "type": "MultiComboboxSelectionChangeEvent",
+      "default": null,
+      "description": "Event emitted when item is selected.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 365,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "close",
+      "signature": "() => void",
+      "description": "Closes the select popover body.",
+      "deprecated": null,
+      "sourceLine": 754,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "open",
+      "signature": "() => void",
+      "description": "Opens the select popover body.",
+      "deprecated": null,
+      "sourceLine": 747,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": {
+    "from": "BaseMultiCombobox",
+    "inputs": [],
+    "methods": [
+      {
+        "name": "setValue",
+        "signature": "(value: T[], emitOnChange: boolean) => void",
+        "description": "Used to change the value of a control.",
+        "deprecated": null,
+        "sourceLine": 395,
+        "since": null,
+        "parameters": [
+          {
+            "name": "value",
+            "type": "T[]",
+            "description": "the value to be applied",
+            "optional": false
+          },
+          {
+            "name": "emitOnChange",
+            "type": "boolean",
+            "description": "whether to emit \"onChange\" event.\nShould be \"false\", if the change is made programmatically (internally) by the control, \"true\" otherwise",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      }
+    ]
+  }
+}

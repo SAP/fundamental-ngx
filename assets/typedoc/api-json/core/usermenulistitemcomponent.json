@@ -1,0 +1,196 @@
+{
+  "name": "UserMenuListItemComponent",
+  "selector": "[fd-user-menu-list-item]",
+  "kind": "Component",
+  "sourceFile": "user-menu-list-item.component.ts",
+  "sourceLine": 47,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/user-menu/components/user-menu-list-item.component.ts#L47",
+  "description": "",
+  "inputs": [
+    {
+      "name": "hasSubmenu",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the item has a submenu",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 92,
+      "since": null
+    },
+    {
+      "name": "icon",
+      "type": "string",
+      "default": null,
+      "description": "Icon name for the menu list item (optional)",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 65,
+      "since": null
+    },
+    {
+      "name": "iconAfter",
+      "type": "string",
+      "default": null,
+      "description": "Icon name for the menu list item (optional)",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 68,
+      "since": null
+    },
+    {
+      "name": "iconAfterActive",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the icon after is in active state",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 71,
+      "since": null
+    },
+    {
+      "name": "selected",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the item is selected",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 98,
+      "since": null
+    },
+    {
+      "name": "submenu",
+      "type": "null | TemplateRef<any>",
+      "default": null,
+      "description": "Template ref for user menu list item submenu",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 95,
+      "since": null
+    },
+    {
+      "name": "subtitle",
+      "type": "string",
+      "default": null,
+      "description": "Subtitle text for the menu list item",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 83,
+      "since": null
+    },
+    {
+      "name": "subtitleId",
+      "type": "string",
+      "default": null,
+      "description": "Unique id for the subtitle. Default is provided.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 86,
+      "since": null
+    },
+    {
+      "name": "text",
+      "type": "string",
+      "default": null,
+      "description": "Required text for the menu list item",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 74,
+      "since": null
+    },
+    {
+      "name": "textId",
+      "type": "string",
+      "default": null,
+      "description": "Unique id for the title. Default is provided.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 77,
+      "since": null
+    },
+    {
+      "name": "truncateSubtitle",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the subtitle should be truncated",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 89,
+      "since": null
+    },
+    {
+      "name": "truncateText",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the text should be truncated",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 80,
+      "since": null
+    },
+    {
+      "name": "uniqueId",
+      "type": "string",
+      "default": null,
+      "description": "Unique id for the menu list item. Default is provided.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 62,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "isOpenChange",
+      "type": "boolean",
+      "default": null,
+      "description": "Event emitter for isOpenChange event that controls the submenu popover body",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 50,
+      "since": null
+    },
+    {
+      "name": "keyDown",
+      "type": "KeyboardEvent",
+      "default": null,
+      "description": "Event emitter for keyDown event",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 59,
+      "since": null
+    },
+    {
+      "name": "showSubmenu",
+      "type": "null | TemplateRef<any>",
+      "default": null,
+      "description": "Event emitter for showSubmenu event",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 53,
+      "since": null
+    },
+    {
+      "name": "updateTitle",
+      "type": "null | string",
+      "default": null,
+      "description": "Event emitter for updateTitle event",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 56,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "onShowDetailsView",
+      "signature": "() => void",
+      "description": "Handles submenu selection in mobile mode",
+      "deprecated": null,
+      "sourceLine": 229,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

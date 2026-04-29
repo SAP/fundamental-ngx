@@ -1,0 +1,215 @@
+{
+  "name": "UploadCollectionItem",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 43,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "accessibilityAttributes",
+      "type": "ListItemAccessibilityAttributes",
+      "default": null,
+      "description": "Defines the additional accessibility attributes that will be applied to the component.\nThe following fields are supported:\n\n- **ariaSetsize**: Defines the number of items in the current set  when not all items in the set are present in the DOM.\n*Note:** The value is an integer reflecting the number of items in the complete set. If the size of the entire set is unknown, set `-1`.\n\n- **ariaPosinset**: Defines an element's number or position in the current set when not all items are present in the DOM.\n*Note:** The value is an integer greater than or equal to 1, and less than or equal to the size of the set when that size is known.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 109,
+      "since": null
+    },
+    {
+      "name": "disableDeleteButton",
+      "type": "boolean",
+      "default": null,
+      "description": "Disables the delete button.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 48,
+      "since": null
+    },
+    {
+      "name": "file",
+      "type": "null | File",
+      "default": null,
+      "description": "Holds an instance of `File` associated with this item.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 53,
+      "since": null
+    },
+    {
+      "name": "fileName",
+      "type": "string",
+      "default": null,
+      "description": "The name of the file.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 58,
+      "since": null
+    },
+    {
+      "name": "fileNameClickable",
+      "type": "boolean",
+      "default": null,
+      "description": "If set to `true` the file name will be clickable and it will fire `file-name-click` event upon click.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 63,
+      "since": null
+    },
+    {
+      "name": "hideDeleteButton",
+      "type": "boolean",
+      "default": null,
+      "description": "Hides the delete button.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 68,
+      "since": null
+    },
+    {
+      "name": "hideRetryButton",
+      "type": "boolean",
+      "default": null,
+      "description": "Hides the retry button when `uploadState` property is `Error`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 73,
+      "since": null
+    },
+    {
+      "name": "hideTerminateButton",
+      "type": "boolean",
+      "default": null,
+      "description": "Hides the terminate button when `uploadState` property is `Uploading`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 78,
+      "since": null
+    },
+    {
+      "name": "highlight",
+      "type": "'None' | 'Positive' | 'Critical' | 'Negative' | 'Information'",
+      "default": null,
+      "description": "Defines the highlight state of the list items.\nAvailable options are: `\"None\"` (by default), `\"Positive\"`, `\"Critical\"`, `\"Information\"` and `\"Negative\"`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 115,
+      "since": null
+    },
+    {
+      "name": "navigated",
+      "type": "boolean",
+      "default": null,
+      "description": "The navigated state of the list item.\nIf set to `true`, a navigation indicator is displayed at the end of the list item.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 121,
+      "since": null
+    },
+    {
+      "name": "progress",
+      "type": "number",
+      "default": null,
+      "description": "The upload progress in percentage.\n\n*Note:** Expected values are in the interval [0, 100].",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 85,
+      "since": null
+    },
+    {
+      "name": "selected",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines the selected state of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 126,
+      "since": null
+    },
+    {
+      "name": "tooltip",
+      "type": "string",
+      "default": null,
+      "description": "Defines the text of the tooltip that would be displayed for the list item.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 131,
+      "since": null
+    },
+    {
+      "name": "type",
+      "type": "'Inactive' | 'Active' | 'Detail' | 'Navigation'",
+      "default": null,
+      "description": "Defines the visual indication and behavior of the list items.\nAvailable options are `Active` (by default), `Inactive`, `Detail` and `Navigation`.\n\n*Note:** When set to `Active` or `Navigation`, the item will provide visual response upon press and hover,\nwhile with type `Inactive` and `Detail` - will not.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 140,
+      "since": null
+    },
+    {
+      "name": "uploadState",
+      "type": "'Error' | 'Complete' | 'Ready' | 'Uploading'",
+      "default": null,
+      "description": "Upload state.\n\nDepending on this property, the item displays the following:\n\n- `Ready` - progress indicator is displayed.\n- `Uploading` - progress indicator and terminate button are displayed. When the terminate button is pressed, `terminate` event is fired.\n- `Error` - progress indicator and retry button are displayed. When the retry button is pressed, `retry` event is fired.\n- `Complete` - progress indicator is not displayed.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 97,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5DetailClick",
+      "type": "UI5CustomEvent<UploadCollectionItem, 'detail-click'>",
+      "default": null,
+      "description": "Fired when the user clicks on the detail button when type is `Detail`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 176,
+      "since": null
+    },
+    {
+      "name": "ui5FileNameClick",
+      "type": "UI5CustomEvent<UploadCollectionItem, 'file-name-click'>",
+      "default": null,
+      "description": "Fired when the file name is clicked.\n\n*Note:** This event is only available when `fileNameClickable` property is `true`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 149,
+      "since": null
+    },
+    {
+      "name": "ui5Rename",
+      "type": "UI5CustomEvent<UploadCollectionItem, 'rename'>",
+      "default": null,
+      "description": "Fired when the `fileName` property gets changed.\n\n*Note:** An edit button is displayed on each item,\nwhen the `ui5-upload-collection-item` `type` property is set to `Detail`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 157,
+      "since": null
+    },
+    {
+      "name": "ui5Retry",
+      "type": "UI5CustomEvent<UploadCollectionItem, 'retry'>",
+      "default": null,
+      "description": "Fired when the retry button is pressed.\n\n*Note:** Retry button is displayed when `uploadState` property is set to `Error`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 164,
+      "since": null
+    },
+    {
+      "name": "ui5Terminate",
+      "type": "UI5CustomEvent<UploadCollectionItem, 'terminate'>",
+      "default": null,
+      "description": "Fired when the terminate button is pressed.\n\n*Note:** Terminate button is displayed when `uploadState` property is set to `Uploading`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 171,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

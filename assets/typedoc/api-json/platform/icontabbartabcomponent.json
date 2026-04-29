@@ -1,0 +1,104 @@
+{
+  "name": "IconTabBarTabComponent",
+  "selector": "fdp-icon-tab-bar-tab-content",
+  "kind": "Component",
+  "sourceFile": "icon-tab-bar-tab.component.ts",
+  "sourceLine": 45,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/icon-tab-bar/components/icon-tab-bar-tab/icon-tab-bar-tab.component.ts#L45",
+  "description": "",
+  "inputs": [
+    {
+      "name": "active",
+      "type": "boolean",
+      "default": null,
+      "description": "whether the tab is selected",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 62,
+      "since": null
+    },
+    {
+      "name": "badge",
+      "type": "boolean",
+      "default": null,
+      "description": "if set to true, will show red circle in top-right corner of tab",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 65,
+      "since": null
+    },
+    {
+      "name": "closable",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the tab can be closed.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 68,
+      "since": null
+    },
+    {
+      "name": "color",
+      "type": "SemanticColor",
+      "default": null,
+      "description": "Tab text color.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 50,
+      "since": null
+    },
+    {
+      "name": "counter",
+      "type": "Nullable<number>",
+      "default": null,
+      "description": "Tab counter.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 59,
+      "since": null
+    },
+    {
+      "name": "icon",
+      "type": "string",
+      "default": null,
+      "description": "Tab icon.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 53,
+      "since": null
+    },
+    {
+      "name": "iconFont",
+      "type": "IconFont",
+      "default": null,
+      "description": "Tab icon font family.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 56,
+      "since": null
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "default": null,
+      "description": "Tab ID.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 71,
+      "since": null
+    },
+    {
+      "name": "label",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "Tab Label.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 47,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

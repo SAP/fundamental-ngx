@@ -1,0 +1,65 @@
+{
+  "name": "ShellbarActionsComponent",
+  "selector": "fd-shellbar-actions",
+  "kind": "Component",
+  "sourceFile": "shellbar-actions.component.ts",
+  "sourceLine": 71,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/shellbar/shellbar-actions/shellbar-actions.component.ts#L71",
+  "description": "The component that represents shellbar actions.\nIt is a container wrapper for all product actions and links (required element).\n```html\n<fd-shellbar-actions [user]=\"user\"\n                     [userMenu]=\"userMenu\"\n                     [productSwitcher]=\"productSwitcher\">\n       <button fd-button fdType=\"standard\">Custom Button</button>\n\n       <fd-shellbar-action *ngFor=\"let action of actions\"\n                           [glyph]=\"action.glyph\"\n                           [callback]=\"action.callback\"\n                           [label]=\"action.label\"\n                           [notificationCount]=\"action.notificationCount\"\n                           [notificationLabel]=\"action.notificationLabel\">\n       </fd-shellbar-action>\n</fd-shellbar-actions>\n```",
+  "inputs": [
+    {
+      "name": "assistiveTools",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to show the assistive tools icon.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 86,
+      "since": null
+    },
+    {
+      "name": "closePopoverOnSelect",
+      "type": "boolean",
+      "default": "false",
+      "description": "When set to true, popover list will be closed after selecting the option",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 82,
+      "since": null
+    },
+    {
+      "name": "user",
+      "type": "ShellbarUser",
+      "default": null,
+      "description": "The user data.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 74,
+      "since": null
+    },
+    {
+      "name": "userMenu",
+      "type": "ShellbarUserMenu[]",
+      "default": null,
+      "description": "The user menu data.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 78,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "searchOpen",
+      "type": "boolean",
+      "default": null,
+      "description": "Event emitted when search opened.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 96,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

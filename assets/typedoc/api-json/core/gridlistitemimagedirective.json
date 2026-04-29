@@ -1,0 +1,13 @@
+{
+  "name": "GridListItemImageDirective",
+  "selector": "[fd-grid-list-item-image]",
+  "kind": "Directive",
+  "sourceFile": "grid-list-item-image.directive.ts",
+  "sourceLine": 11,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/grid-list/directives/grid-list-item-image.directive.ts#L11",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

@@ -1,0 +1,24 @@
+{
+  "name": "TableP13FilterComponent",
+  "selector": "fdp-table-p13-filter",
+  "kind": "Component",
+  "sourceFile": "table-p13-filter.component.ts",
+  "sourceLine": 14,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/table/components/table-p13-dialog/table-p13-filter.component.ts#L14",
+  "description": "Personalization Dialog Filter Settings.",
+  "inputs": [
+    {
+      "name": "validator",
+      "type": "(rules: CollectionFilter[]) => boolean",
+      "default": null,
+      "description": "Function for handling validation of the filter rules in the table personalization dialog.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 19,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

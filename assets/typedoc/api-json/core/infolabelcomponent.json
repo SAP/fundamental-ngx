@@ -1,0 +1,104 @@
+{
+  "name": "InfoLabelComponent",
+  "selector": "fd-info-label",
+  "kind": "Component",
+  "sourceFile": "info-label.component.ts",
+  "sourceLine": 38,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/info-label/info-label.component.ts#L38",
+  "description": "",
+  "inputs": [
+    {
+      "name": "ariaLabel",
+      "type": "null | string",
+      "default": null,
+      "description": "ARIA label for accessibility.\nOverrides the visible label for screen readers when provided.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 82,
+      "since": null
+    },
+    {
+      "name": "ariaLabelledBy",
+      "type": "null | string",
+      "default": null,
+      "description": "ARIA labelledby for accessibility.\nUsed when the label is provided by another element.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 88,
+      "since": null
+    },
+    {
+      "name": "color",
+      "type": "null | InfoLabelColorInput",
+      "default": null,
+      "description": "Accent color of the info label, ranging from 1 to 10.\nInvalid values default to 7 with a console warning in development mode.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 65,
+      "since": null
+    },
+    {
+      "name": "font",
+      "type": "IconFont",
+      "default": null,
+      "description": "The icon font family to use for the icon.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 58,
+      "since": null
+    },
+    {
+      "name": "glyph",
+      "type": "null | string",
+      "default": null,
+      "description": "The icon name to display when `type` is set to `'icon'`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 52,
+      "since": null
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "default": null,
+      "description": "The text content displayed in the info label.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 70,
+      "since": null
+    },
+    {
+      "name": "srText",
+      "type": "string",
+      "default": null,
+      "description": "Screen reader only text for additional context.\nDefaults to translated \"Info Label\" if not provided.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 94,
+      "since": null
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "default": null,
+      "description": "Tooltip text displayed on hover.\nProvides additional context about the label.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 76,
+      "since": null
+    },
+    {
+      "name": "type",
+      "type": "LabelType",
+      "default": null,
+      "description": "The type of the info label.\n- `'numeric'`: Displays the label as a number with special numeric styling\n- `'icon'`: Displays an icon alongside the label text\n- `undefined`: Default text-only label (omit this property for default)",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 46,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

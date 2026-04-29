@@ -1,0 +1,320 @@
+{
+  "name": "ApprovalFlowComponent",
+  "selector": "fdp-approval-flow",
+  "kind": "Component",
+  "sourceFile": "approval-flow.component.ts",
+  "sourceLine": 152,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/approval-flow/approval-flow.component.ts#L152",
+  "description": "",
+  "inputs": [
+    {
+      "name": "allowAddParallelNodes",
+      "type": "boolean",
+      "default": "true",
+      "description": "Enables or disables ability to add parallel nodes",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 195,
+      "since": null
+    },
+    {
+      "name": "allowSendRemindersForStatuses",
+      "type": "string[]",
+      "default": null,
+      "description": "A list of approval statuses that allow sending reminders to their approvers",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 186,
+      "since": null
+    },
+    {
+      "name": "approvalStatusTemplate",
+      "type": "TemplateRef<any>",
+      "default": null,
+      "description": "A reference to the app custom statuses",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 172,
+      "since": null
+    },
+    {
+      "name": "checkDueDate",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to display due date warning in status",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 179,
+      "since": null
+    },
+    {
+      "name": "disableExitButton",
+      "type": "boolean",
+      "default": "false",
+      "description": "Disables exit button, exit button is enabled by default",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 201,
+      "since": null
+    },
+    {
+      "name": "disableSaveButton",
+      "type": "boolean",
+      "default": "false",
+      "description": "Disables save button, save button is enabled by default",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 198,
+      "since": null
+    },
+    {
+      "name": "dueDateThreshold",
+      "type": "number",
+      "default": "7",
+      "description": "Number of days before due date when status changes to `warning` with text 'Due in X days'.\n Not used if 'checkDueDate' equals false",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 183,
+      "since": null
+    },
+    {
+      "name": "isEditAvailable",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the approval flow is editable",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 189,
+      "since": null
+    },
+    {
+      "name": "removeSpaceNode",
+      "type": "boolean",
+      "default": "false",
+      "description": "Should remove the space node from the graph",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 227,
+      "since": null
+    },
+    {
+      "name": "statusColorMapping",
+      "type": "Record<string, ObjectStatus>",
+      "default": null,
+      "description": "Custom status to color mapping",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 176,
+      "since": null
+    },
+    {
+      "name": "teamDataSource",
+      "type": "ApprovalFlowTeamDataSource<ApprovalTeam>",
+      "default": null,
+      "description": "Data source for the teams of Approval Flow component.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 166,
+      "since": null
+    },
+    {
+      "name": "teamsDataProviderEntityKey",
+      "type": "string",
+      "default": null,
+      "description": "Name of the entity for which teams DataProvider will be loaded.\nInternally we should be able to do lookup to some registry\nand retrieve the best matching DataProvider that is set on application level",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 215,
+      "since": null
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "default": null,
+      "description": "Title which is displayed in the header of the Approval Flow component.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 154,
+      "since": null
+    },
+    {
+      "name": "userDataSource",
+      "type": "ApprovalFlowUserDataSource<ApprovalUser>",
+      "default": null,
+      "description": "Data source for the users of Approval Flow component.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 160,
+      "since": null
+    },
+    {
+      "name": "userDetailsTemplate",
+      "type": "TemplateRef<any>",
+      "default": null,
+      "description": "A reference to the user details template",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 169,
+      "since": null
+    },
+    {
+      "name": "usersDataProviderEntityKey",
+      "type": "string",
+      "default": null,
+      "description": "Name of the entity for which users DataProvider will be loaded.\nInternally we should be able to do lookup to some registry\nand retrieve the best matching DataProvider that is set on application level",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 208,
+      "since": null
+    },
+    {
+      "name": "value",
+      "type": "ApprovalProcess",
+      "default": null,
+      "description": "Value of the approval flow component.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 157,
+      "since": null
+    },
+    {
+      "name": "watcherDataSource",
+      "type": "ApprovalFlowUserDataSource<ApprovalUser>",
+      "default": null,
+      "description": "Data source for the watchers of Approval Flow component.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 163,
+      "since": null
+    },
+    {
+      "name": "watchersDataProviderEntityKey",
+      "type": "string",
+      "default": null,
+      "description": "Name of the entity for which approval flow DataProvider will be loaded.\nInternally we should be able to do lookup to some registry\nand retrieve the best matching DataProvider that is set on application level",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 222,
+      "since": null
+    },
+    {
+      "name": "watchersLabel",
+      "type": "string",
+      "default": null,
+      "description": "Text label for watchers list",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 192,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "afterNodeAdd",
+      "type": "ApprovalNode",
+      "default": null,
+      "description": "Event emitted on approval flow node add",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 233,
+      "since": null
+    },
+    {
+      "name": "afterNodeEdit",
+      "type": "ApprovalNode",
+      "default": null,
+      "description": "Event emitted on approval flow node edit",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 236,
+      "since": null
+    },
+    {
+      "name": "nodeClick",
+      "type": "ApprovalNode",
+      "default": null,
+      "description": "Event emitted on approval flow node click.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 230,
+      "since": null
+    },
+    {
+      "name": "onDataReceived",
+      "type": "void",
+      "default": null,
+      "description": "Event emitted when data loading is finished.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 250,
+      "since": null
+    },
+    {
+      "name": "onDataRequested",
+      "type": "void",
+      "default": null,
+      "description": "Event emitted when data loading is started.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 246,
+      "since": null
+    },
+    {
+      "name": "sendReminders",
+      "type": "SendRemindersData",
+      "default": null,
+      "description": "Event emitted whenever reminders should be sent",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 242,
+      "since": null
+    },
+    {
+      "name": "valueChange",
+      "type": "ApprovalProcess",
+      "default": null,
+      "description": "Event emitted whenver save is clicked in edit mode",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 239,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "getNodeMetadataByNodeId",
+      "signature": "(nodeId: string) => ApprovalGraphNodeMetadata",
+      "description": "Retrive metadata by node id",
+      "deprecated": null,
+      "sourceLine": 492,
+      "since": null,
+      "parameters": [
+        {
+          "name": "nodeId",
+          "type": "string",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "ApprovalGraphNodeMetadata"
+    },
+    {
+      "name": "nextSlide",
+      "signature": "(dir: number) => void",
+      "description": "Scroll to the next horizontal slide",
+      "deprecated": null,
+      "sourceLine": 497,
+      "since": null,
+      "parameters": [
+        {
+          "name": "dir",
+          "type": "number",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

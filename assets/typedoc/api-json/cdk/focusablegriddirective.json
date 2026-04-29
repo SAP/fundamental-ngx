@@ -1,0 +1,83 @@
+{
+  "name": "FocusableGridDirective",
+  "selector": "[fdkFocusableGrid]",
+  "kind": "Directive",
+  "sourceFile": "focusable-grid.directive.ts",
+  "sourceLine": 47,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cdk/utils/directives/focusable-grid/focusable-grid.directive.ts#L47",
+  "description": "",
+  "inputs": [
+    {
+      "name": "contentDirection",
+      "type": "null | 'ltr' | 'rtl'",
+      "default": "'ltr'",
+      "description": "Direction of the content.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 50,
+      "since": null
+    },
+    {
+      "name": "shortRowFocus",
+      "type": "Nullable<'first' | 'last'>",
+      "default": "null",
+      "description": "Specify which item to select in prev/next row if its length smaller than current index. Nullish value means do not select. Default is null.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 58,
+      "since": null
+    },
+    {
+      "name": "wrapHorizontally",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the item in the previous/next row should be selected when going out of the first/last cell in the row. Default is false.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 54,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "itemFocused",
+      "type": "FocusableItemPosition",
+      "default": null,
+      "description": "Event emitted when item focused, contains item's position info.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 62,
+      "since": null
+    },
+    {
+      "name": "rowFocused",
+      "type": "FocusableListPosition",
+      "default": null,
+      "description": "Event emitted when whole row focused, contains row's position info.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 66,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "focusCell",
+      "signature": "(position: FocusableCellPosition) => void",
+      "description": "Focus cell by position.",
+      "deprecated": null,
+      "sourceLine": 171,
+      "since": null,
+      "parameters": [
+        {
+          "name": "position",
+          "type": "FocusableCellPosition",
+          "description": "position of the cell",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

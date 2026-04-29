@@ -1,0 +1,95 @@
+{
+  "name": "ViewSettingsDialog",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "groupDescending",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines the initial group order.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 45,
+      "since": null
+    },
+    {
+      "name": "open",
+      "type": "boolean",
+      "default": null,
+      "description": "Indicates if the dialog is open.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 50,
+      "since": null
+    },
+    {
+      "name": "sortDescending",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines the initial sort order.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 55,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5BeforeOpen",
+      "type": "UI5CustomEvent<ViewSettingsDialog, 'before-open'>",
+      "default": null,
+      "description": "Fired before the component is opened.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 62,
+      "since": null
+    },
+    {
+      "name": "ui5Cancel",
+      "type": "UI5CustomEvent<ViewSettingsDialog, 'cancel'>",
+      "default": null,
+      "description": "Fired when cancel button is activated.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 67,
+      "since": null
+    },
+    {
+      "name": "ui5Close",
+      "type": "UI5CustomEvent<ViewSettingsDialog, 'close'>",
+      "default": null,
+      "description": "Fired after the dialog is closed.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 72,
+      "since": null
+    },
+    {
+      "name": "ui5Confirm",
+      "type": "UI5CustomEvent<ViewSettingsDialog, 'confirm'>",
+      "default": null,
+      "description": "Fired when confirmation button is activated.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 77,
+      "since": null
+    },
+    {
+      "name": "ui5Open",
+      "type": "UI5CustomEvent<ViewSettingsDialog, 'open'>",
+      "default": null,
+      "description": "Fired after the dialog is opened.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 82,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

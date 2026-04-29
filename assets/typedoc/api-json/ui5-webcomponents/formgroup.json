@@ -1,0 +1,64 @@
+{
+  "name": "FormGroup",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "accessibleName",
+      "type": "string",
+      "default": null,
+      "description": "Defines the accessible ARIA name of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 45,
+      "since": null
+    },
+    {
+      "name": "accessibleNameRef",
+      "type": "string",
+      "default": null,
+      "description": "Defines id (or many ids) of the element (or elements) that label the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 50,
+      "since": null
+    },
+    {
+      "name": "columnSpan",
+      "type": "number",
+      "default": null,
+      "description": "Defines column span of the component,\ne.g how many columns the group should span to.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 56,
+      "since": null
+    },
+    {
+      "name": "headerLevel",
+      "type": "'H1' | 'H2' | 'H3' | 'H4' | 'H5' | 'H6'",
+      "default": null,
+      "description": "Defines the compoennt heading level,\nset by the `headerText`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 62,
+      "since": null
+    },
+    {
+      "name": "headerText",
+      "type": "string",
+      "default": null,
+      "description": "Defines header text of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 67,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

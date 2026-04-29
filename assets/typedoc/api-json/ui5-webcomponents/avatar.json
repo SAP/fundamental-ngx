@@ -1,0 +1,135 @@
+{
+  "name": "Avatar",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 44,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "accessibilityAttributes",
+      "type": "AvatarAccessibilityAttributes",
+      "default": null,
+      "description": "Defines the additional accessibility attributes that will be applied to the component.\nThe following field is supported:\n\n- **hasPopup**: Indicates the availability and type of interactive popup element, such as menu or dialog, that can be triggered by the button.\nAccepts the following string values: `dialog`, `grid`, `listbox`, `menu` or `tree`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 53,
+      "since": null
+    },
+    {
+      "name": "accessibleName",
+      "type": "string",
+      "default": null,
+      "description": "Defines the text alternative of the component.\nIf not provided a default text alternative will be set, if present.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 59,
+      "since": null
+    },
+    {
+      "name": "colorScheme",
+      "type": "'Auto' | 'Accent1' | 'Accent2' | 'Accent3' | 'Accent4' | 'Accent5' | 'Accent6' | 'Accent7' | 'Accent8' | 'Accent9' | 'Accent10' | 'Placeholder' | 'Transparent'",
+      "default": null,
+      "description": "Defines the background color of the desired image.\nIf `colorScheme` is set to `Auto`, the avatar will be displayed with the `Accent6` color.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 65,
+      "since": null
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines whether the component is disabled.\nA disabled component can't be pressed or\nfocused, and it is not in the tab chain.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 72,
+      "since": null
+    },
+    {
+      "name": "fallbackIcon",
+      "type": "string",
+      "default": null,
+      "description": "Defines the name of the fallback icon, which should be displayed in the following cases:\n\n- If the initials are not valid (more than 3 letters, unsupported languages or empty initials).\n- If there are three initials and they do not fit in the shape (e.g. WWW for some of the sizes).\n- If the image src is wrong.\n\n*Note:** If not set, a default fallback icon \"employee\" is displayed.\n\n*Note:** You should import the desired icon first, then use its name as \"fallback-icon\".\n\n`import \"@ui5/webcomponents-icons/dist/{icon_name}.js\"`\n\n`<ui5-avatar fallback-icon=\"alert\">`\n\nSee all the available icons in the [Icon Explorer](https://sdk.openui5.org/test-resources/sap/m/demokit/iconExplorer/webapp/index.html).",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 91,
+      "since": null
+    },
+    {
+      "name": "icon",
+      "type": "string",
+      "default": null,
+      "description": "Defines the name of the UI5 Icon, that will be displayed.\n\n*Note:** If `image` slot is provided, the property will be ignored.\n\n*Note:** You should import the desired icon first, then use its name as \"icon\".\n\n`import \"@ui5/webcomponents-icons/dist/{icon_name}.js\"`\n\n`<ui5-avatar icon=\"employee\">`\n\n*Note:** If no icon or an empty one is provided, by default the \"employee\" icon should be displayed.\n\nSee all the available icons in the [Icon Explorer](https://sdk.openui5.org/test-resources/sap/m/demokit/iconExplorer/webapp/index.html).",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 108,
+      "since": null
+    },
+    {
+      "name": "initials",
+      "type": "string",
+      "default": null,
+      "description": "Defines the displayed initials.\n\nUp to three Latin letters can be displayed as initials.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 115,
+      "since": null
+    },
+    {
+      "name": "interactive",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines if the avatar is interactive (focusable and pressable).\n\n*Note:** When set to `true`, this property takes precedence over the `mode` property,\nand the avatar will be rendered as interactive (role=\"button\", focusable) regardless of the `mode` value.\n\n*Note:** This property won't have effect if the `disabled`\nproperty is set to `true`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 126,
+      "since": null
+    },
+    {
+      "name": "mode",
+      "type": "'Image' | 'Decorative' | 'Interactive'",
+      "default": null,
+      "description": "Defines the mode of the component.\n\n*Note:**\n- `Image` (default) - renders with role=\"img\"\n- `Decorative` - renders with role=\"presentation\" and aria-hidden=\"true\", making it purely decorative\n- `Interactive` - renders with role=\"button\", focusable (tabindex=\"0\"), and supports keyboard interaction\n\n*Note:** This property is ignored when the `interactive` property is set to `true`.\nIn that case, the avatar will always be rendered as interactive.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 139,
+      "since": null
+    },
+    {
+      "name": "shape",
+      "type": "'Circle' | 'Square'",
+      "default": null,
+      "description": "Defines the shape of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 144,
+      "since": null
+    },
+    {
+      "name": "size",
+      "type": "'S' | 'M' | 'L' | 'XL' | 'XS'",
+      "default": null,
+      "description": "Defines predefined size of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 149,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5Click",
+      "type": "UI5CustomEvent<Avatar, 'click'>",
+      "default": null,
+      "description": "Fired on mouseup, space and enter if avatar is interactive\n\n*Note:** The event will not be fired if the `disabled`\nproperty is set to `true`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 159,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

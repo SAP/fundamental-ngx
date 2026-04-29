@@ -1,0 +1,41 @@
+{
+  "name": "SettingsGeneratorService",
+  "selector": null,
+  "kind": "Service",
+  "sourceFile": "settings-generator.service.ts",
+  "sourceLine": 12,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/settings-generator/settings-generator.service.ts#L12",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "setMobileState",
+      "signature": "(isMobile: boolean) => void",
+      "description": "Sets mobile state.",
+      "deprecated": null,
+      "sourceLine": 98,
+      "since": null,
+      "parameters": [
+        {
+          "name": "isMobile",
+          "type": "boolean",
+          "description": "Whether mobile state should be applied.",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "submit",
+      "signature": "() => Observable<SettingsGeneratorReturnValue>",
+      "description": "Submits registered forms and emits result if submission status was successful (no errors).",
+      "deprecated": null,
+      "sourceLine": 72,
+      "since": null,
+      "parameters": [],
+      "returnType": "Observable<SettingsGeneratorReturnValue>"
+    }
+  ],
+  "inherited": null
+}

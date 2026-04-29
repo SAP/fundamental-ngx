@@ -1,0 +1,105 @@
+{
+  "name": "Panel",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 41,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "accessibleName",
+      "type": "string",
+      "default": null,
+      "description": "Defines the accessible ARIA name of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 46,
+      "since": null
+    },
+    {
+      "name": "accessibleRole",
+      "type": "'Complementary' | 'Form' | 'Region'",
+      "default": null,
+      "description": "Sets the accessible ARIA role of the component.\nDepending on the usage, you can change the role from the default `Form`\nto `Region` or `Complementary`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 53,
+      "since": null
+    },
+    {
+      "name": "collapsed",
+      "type": "boolean",
+      "default": null,
+      "description": "Indicates whether the component is collapsed and only the header is displayed.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 58,
+      "since": null
+    },
+    {
+      "name": "fixed",
+      "type": "boolean",
+      "default": null,
+      "description": "Determines whether the component is in a fixed state that is not\nexpandable/collapsible by user interaction.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 64,
+      "since": null
+    },
+    {
+      "name": "headerLevel",
+      "type": "'H1' | 'H2' | 'H3' | 'H4' | 'H5' | 'H6'",
+      "default": null,
+      "description": "Defines the \"aria-level\" of component heading,\nset by the `headerText`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 70,
+      "since": null
+    },
+    {
+      "name": "headerText",
+      "type": "string",
+      "default": null,
+      "description": "This property is used to set the header text of the component.\nThe text is visible in both expanded and collapsed states.\n\n*Note:** This property is overridden by the `header` slot.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 78,
+      "since": null
+    },
+    {
+      "name": "noAnimation",
+      "type": "boolean",
+      "default": null,
+      "description": "Indicates whether the transition between the expanded and the collapsed state of the component is animated. By default the animation is enabled.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 83,
+      "since": null
+    },
+    {
+      "name": "stickyHeader",
+      "type": "boolean",
+      "default": null,
+      "description": "Indicates whether the Panel header is sticky or not.\nIf stickyHeader is set to true, then whenever you scroll the content or\nthe application, the header of the panel will be always visible and\na solid color will be used for its design.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 91,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5Toggle",
+      "type": "UI5CustomEvent<Panel, 'toggle'>",
+      "default": null,
+      "description": "Fired when the component is expanded/collapsed by user interaction.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 98,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

@@ -1,0 +1,125 @@
+{
+  "name": "Calendar",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 42,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "calendarWeekNumbering",
+      "type": "'Default' | 'ISO_8601' | 'MiddleEastern' | 'WesternTraditional'",
+      "default": null,
+      "description": "Defines how to calculate calendar weeks and first day of the week.\nIf not set, the calendar will be displayed according to the currently set global configuration.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 48,
+      "since": null
+    },
+    {
+      "name": "displayFormat",
+      "type": "string",
+      "default": null,
+      "description": "Determines the format, displayed in the input field.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 53,
+      "since": null
+    },
+    {
+      "name": "formatPattern",
+      "type": "string",
+      "default": null,
+      "description": "Determines the format, displayed in the input field.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 58,
+      "since": null
+    },
+    {
+      "name": "hideWeekNumbers",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines the visibility of the week numbers column.\n\n*Note:** For calendars other than Gregorian,\nthe week numbers are not displayed regardless of what is set.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 66,
+      "since": null
+    },
+    {
+      "name": "maxDate",
+      "type": "string",
+      "default": null,
+      "description": "Determines the maximum date available for selection.\n\n*Note:** If the formatPattern property is not set, the maxDate value must be provided in the ISO date format (yyyy-MM-dd).",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 73,
+      "since": null
+    },
+    {
+      "name": "minDate",
+      "type": "string",
+      "default": null,
+      "description": "Determines the minimum date available for selection.\n\n*Note:** If the formatPattern property is not set, the minDate value must be provided in the ISO date format (yyyy-MM-dd).",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 80,
+      "since": null
+    },
+    {
+      "name": "primaryCalendarType",
+      "type": "'Gregorian' | 'Islamic' | 'Japanese' | 'Buddhist' | 'Persian'",
+      "default": null,
+      "description": "Sets a calendar type used for display.\nIf not set, the calendar type of the global configuration is used.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 86,
+      "since": null
+    },
+    {
+      "name": "secondaryCalendarType",
+      "type": "'Gregorian' | 'Islamic' | 'Japanese' | 'Buddhist' | 'Persian'",
+      "default": null,
+      "description": "Defines the secondary calendar type.\nIf not set, the calendar will only show the primary calendar type.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 92,
+      "since": null
+    },
+    {
+      "name": "selectionMode",
+      "type": "'Single' | 'Multiple' | 'Range'",
+      "default": null,
+      "description": "Defines the type of selection used in the calendar component.\nAccepted property values are:\n\n- `CalendarSelectionMode.Single` - enables a single date selection.(default value)\n- `CalendarSelectionMode.Range` - enables selection of a date range.\n- `CalendarSelectionMode.Multiple` - enables selection of multiple dates.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 102,
+      "since": null
+    },
+    {
+      "name": "valueFormat",
+      "type": "string",
+      "default": null,
+      "description": "Determines the format, used for the value attribute.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 107,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5SelectionChange",
+      "type": "UI5CustomEvent<Calendar, 'selection-change'>",
+      "default": null,
+      "description": "Fired when the selected dates change.\n\n*Note:** If you call `preventDefault()` for this event, the component will not\ncreate instances of `ui5-date` for the newly selected dates. In that case you should do this manually.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 117,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

@@ -1,0 +1,45 @@
+{
+  "name": "TableRowActionNavigation",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "interactive",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines the interactive state of the navigation action.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 45,
+      "since": null
+    },
+    {
+      "name": "invisible",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines the visibility of the row action.\n\n*Note:** Invisible row actions still take up space, allowing to hide the action while maintaining its position.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 52,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5Click",
+      "type": "UI5CustomEvent<TableRowActionNavigation, 'click'>",
+      "default": null,
+      "description": "Fired when a row action is clicked.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 59,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

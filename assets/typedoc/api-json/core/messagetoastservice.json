@@ -1,0 +1,148 @@
+{
+  "name": "MessageToastService",
+  "selector": null,
+  "kind": "Service",
+  "sourceFile": "message-toast.service.ts",
+  "sourceLine": 11,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/message-toast/message-toast.service.ts#L11",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "open",
+      "signature": "(message: string | TemplateRef<any> | Type<T>, config?: MessageToastConfig<P>) => MessageToastRef<EmbeddedViewRef<any> | MessageToastTextComponent | T>",
+      "description": "Opens toast with a provided message.",
+      "deprecated": null,
+      "sourceLine": 29,
+      "since": null,
+      "parameters": [
+        {
+          "name": "message",
+          "type": "string | TemplateRef<any> | Type<T>",
+          "description": "Message to display in a Message Toast.",
+          "optional": false
+        },
+        {
+          "name": "config",
+          "type": "MessageToastConfig<P>",
+          "description": "Toast configuration.",
+          "optional": true
+        }
+      ],
+      "returnType": "MessageToastRef<EmbeddedViewRef<any> | MessageToastTextComponent | T>"
+    },
+    {
+      "name": "openFromComponent",
+      "signature": "(component: Type<T>, config: MessageToastConfig<P>) => MessageToastRef<T>",
+      "description": "Opens a Toast with provided component inside.",
+      "deprecated": null,
+      "sourceLine": 61,
+      "since": null,
+      "parameters": [
+        {
+          "name": "component",
+          "type": "Type<T>",
+          "description": "Component to render inside a Toast.",
+          "optional": false
+        },
+        {
+          "name": "config",
+          "type": "MessageToastConfig<P>",
+          "description": "Toast configuration.",
+          "optional": false
+        }
+      ],
+      "returnType": "MessageToastRef<T>"
+    },
+    {
+      "name": "openFromString",
+      "signature": "(message: string, config?: MessageToastConfig<P>) => MessageToastRef<MessageToastTextComponent>",
+      "description": "Opens a Toast with provided message as a content.",
+      "deprecated": null,
+      "sourceLine": 46,
+      "since": null,
+      "parameters": [
+        {
+          "name": "message",
+          "type": "string",
+          "description": "string to render inside a Toast.",
+          "optional": false
+        },
+        {
+          "name": "config",
+          "type": "MessageToastConfig<P>",
+          "description": "Toast configuration",
+          "optional": true
+        }
+      ],
+      "returnType": "MessageToastRef<MessageToastTextComponent>"
+    },
+    {
+      "name": "openFromTemplate",
+      "signature": "(template: TemplateRef<any>, config: MessageToastConfig<P>) => MessageToastRef<EmbeddedViewRef<any>>",
+      "description": "Opens a Toast with provided Template Reference.",
+      "deprecated": null,
+      "sourceLine": 71,
+      "since": null,
+      "parameters": [
+        {
+          "name": "template",
+          "type": "TemplateRef<any>",
+          "description": "Template Reference to render inside a Toast.",
+          "optional": false
+        },
+        {
+          "name": "config",
+          "type": "MessageToastConfig<P>",
+          "description": "Toast configuration.",
+          "optional": false
+        }
+      ],
+      "returnType": "MessageToastRef<EmbeddedViewRef<any>>"
+    }
+  ],
+  "inherited": {
+    "from": "BaseDismissibleToastService",
+    "inputs": [],
+    "methods": [
+      {
+        "name": "hasOpenMessageToasts",
+        "signature": "() => boolean",
+        "description": "Returns `true` if there are some message toasts currently open. `False` otherwise.",
+        "deprecated": null,
+        "sourceLine": 127,
+        "since": null,
+        "parameters": [],
+        "returnType": "boolean"
+      },
+      {
+        "name": "hideAll",
+        "signature": "() => void",
+        "description": "Dismisses all Toasts.",
+        "deprecated": null,
+        "sourceLine": 120,
+        "since": null,
+        "parameters": [],
+        "returnType": "void"
+      },
+      {
+        "name": "setNewPositionStrategy",
+        "signature": "(newStrategy: BaseToastPosition) => void",
+        "description": "Sets new position strategy for all Toast items.",
+        "deprecated": null,
+        "sourceLine": 135,
+        "since": null,
+        "parameters": [
+          {
+            "name": "newStrategy",
+            "type": "BaseToastPosition",
+            "description": "New Position Strategy",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      }
+    ]
+  }
+}

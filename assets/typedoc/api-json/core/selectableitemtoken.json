@@ -1,0 +1,41 @@
+{
+  "name": "SelectableItemToken",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "selectable-item.token.ts",
+  "sourceLine": 5,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cdk/utils/directives/selectable-list/selectable-item.token.ts#L5",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "getSelected",
+      "signature": "() => boolean",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 17,
+      "since": null,
+      "parameters": [],
+      "returnType": "boolean"
+    },
+    {
+      "name": "setSelected",
+      "signature": "(isSelected: boolean) => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 15,
+      "since": null,
+      "parameters": [
+        {
+          "name": "isSelected",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

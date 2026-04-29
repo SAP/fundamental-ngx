@@ -1,0 +1,13 @@
+{
+  "name": "DatePickerMobileComponent",
+  "selector": "fd-date-picker-mobile",
+  "kind": "Component",
+  "sourceFile": "date-picker-mobile.component.ts",
+  "sourceLine": 36,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/date-picker/date-picker-mobile/date-picker-mobile.component.ts#L36",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

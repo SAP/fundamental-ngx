@@ -1,0 +1,13 @@
+{
+  "name": "CardDefinitionDirective",
+  "selector": "[fdCardDef]",
+  "kind": "Directive",
+  "sourceFile": "fixed-card-layout.component.ts",
+  "sourceLine": 65,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/fixed-card-layout/fixed-card-layout.component.ts#L65",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

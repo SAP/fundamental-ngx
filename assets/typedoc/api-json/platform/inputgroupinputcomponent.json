@@ -1,0 +1,24 @@
+{
+  "name": "InputGroupInputComponent",
+  "selector": "fdp-input-group-input",
+  "kind": "Component",
+  "sourceFile": "input.component.ts",
+  "sourceLine": 38,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/input-group/input.component.ts#L38",
+  "description": "Fundamental input group input component\n\nThis component is intended to be used inside `<fdp-input-group>`\n\nExample:\n```\n<fdp-input-group name=\"group\">\n  <fdp-input-group-input type=\"email\"></fdp-input-group-input>\n</fdp-input-group>\n```",
+  "inputs": [
+    {
+      "name": "type",
+      "type": "InputType",
+      "default": "'text'",
+      "description": "InputType 'text' | 'number' | 'email' | 'password'",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 41,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

@@ -1,0 +1,24 @@
+{
+  "name": "TileContainerDirective",
+  "selector": "[fdTileContent], [fd-tile-content]",
+  "kind": "Directive",
+  "sourceFile": "tile.directives.ts",
+  "sourceLine": 179,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/tile/directives/tile.directives.ts#L179",
+  "description": "",
+  "inputs": [
+    {
+      "name": "list",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the container uses list layout (applies on screens smaller than 450px).",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 181,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

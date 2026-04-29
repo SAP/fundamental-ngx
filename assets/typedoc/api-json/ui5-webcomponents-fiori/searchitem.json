@@ -1,0 +1,85 @@
+{
+  "name": "SearchItem",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "deletable",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines whether the search item is deletable.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 45,
+      "since": null
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "default": null,
+      "description": "Defines the description that appears right under the item text, if available.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 50,
+      "since": null
+    },
+    {
+      "name": "icon",
+      "type": "string",
+      "default": null,
+      "description": "Defines the icon name of the search item.\n*Note:** If provided, the image slot will be ignored.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 56,
+      "since": null
+    },
+    {
+      "name": "scopeName",
+      "type": "string",
+      "default": null,
+      "description": "Defines the scope of the search item",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 61,
+      "since": null
+    },
+    {
+      "name": "selected",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines whether the search item is selected.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 66,
+      "since": null
+    },
+    {
+      "name": "text",
+      "type": "string",
+      "default": null,
+      "description": "Defines the heading text of the search item.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 71,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5Delete",
+      "type": "UI5CustomEvent<SearchItem, 'delete'>",
+      "default": null,
+      "description": "Fired when delete button is pressed.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 78,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

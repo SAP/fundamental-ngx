@@ -1,0 +1,91 @@
+{
+  "name": "IconTabBarTemplateService",
+  "selector": null,
+  "kind": "Service",
+  "sourceFile": "icon-tab-bar-template.service.ts",
+  "sourceLine": 7,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/icon-tab-bar/services/icon-tab-bar-template.service.ts#L7",
+  "description": "Service to manage template registration across components",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "getAllTemplates",
+      "signature": "() => Map<string, TemplateRef<any>>",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 27,
+      "since": null,
+      "parameters": [],
+      "returnType": "Map<string, TemplateRef<any>>"
+    },
+    {
+      "name": "getAllTemplatesSignal",
+      "signature": "() => Signal<Map<string, TemplateRef<any>>>",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 31,
+      "since": null,
+      "parameters": [],
+      "returnType": "Signal<Map<string, TemplateRef<any>>>"
+    },
+    {
+      "name": "getTemplate",
+      "signature": "(id: string) => TemplateRef<any>",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 23,
+      "since": null,
+      "parameters": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "TemplateRef<any>"
+    },
+    {
+      "name": "registerTemplate",
+      "signature": "(id: string, template: TemplateRef<any>) => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 11,
+      "since": null,
+      "parameters": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "template",
+          "type": "TemplateRef<any>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "unregisterTemplate",
+      "signature": "(id: string) => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 17,
+      "since": null,
+      "parameters": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

@@ -1,0 +1,272 @@
+{
+  "name": "ListComponent",
+  "selector": "fdp-list",
+  "kind": "Component",
+  "sourceFile": "list.component.ts",
+  "sourceLine": 111,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/list/list.component.ts#L111",
+  "description": "The List component represents a container for list item types.\nIt is used to display a list features.",
+  "inputs": [
+    {
+      "name": "ariaMultiselectable",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines whether items are multiselectable for screen reader.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 125,
+      "since": null
+    },
+    {
+      "name": "ariaSetsize",
+      "type": "number",
+      "default": null,
+      "description": "define size of items for screen reader.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 121,
+      "since": null
+    },
+    {
+      "name": "delayTime",
+      "type": "number",
+      "default": null,
+      "description": "Wait time for new items.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 137,
+      "since": null
+    },
+    {
+      "name": "interceptTabKey",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether to intercept tab key navigation.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 282,
+      "since": null
+    },
+    {
+      "name": "itemSize",
+      "type": "number",
+      "default": "Infinity",
+      "description": "Items to be loaded at once. Intinity (no limit) by default.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 141,
+      "since": null
+    },
+    {
+      "name": "listType",
+      "type": "ListType",
+      "default": "'active'",
+      "description": "ListType 'inactive' | 'active' | 'navigation' | 'detail'",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 160,
+      "since": null
+    },
+    {
+      "name": "loadMore",
+      "type": "boolean",
+      "default": null,
+      "description": "Enables lazy loadMore of data.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 145,
+      "since": null
+    },
+    {
+      "name": "loadOnScroll",
+      "type": "boolean",
+      "default": null,
+      "description": "Enables data load on scroll for true\nfalse: enables data loading on button click.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 152,
+      "since": null
+    },
+    {
+      "name": "loadTitle",
+      "type": "string",
+      "default": null,
+      "description": "Title used on button when data loads on button click.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 129,
+      "since": null
+    },
+    {
+      "name": "loadingLabel",
+      "type": "string",
+      "default": "''",
+      "description": "Label used on announce message of data was loaded for screen readers.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 133,
+      "since": null
+    },
+    {
+      "name": "maxHeight",
+      "type": "string",
+      "default": null,
+      "description": "Max height for viewport to display scroll.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 164,
+      "since": null
+    },
+    {
+      "name": "noBorder",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether list component has removed borders.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 168,
+      "since": null
+    },
+    {
+      "name": "role",
+      "type": "string",
+      "default": "'list'",
+      "description": "define the role to custom requirement.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 156,
+      "since": null
+    },
+    {
+      "name": "scrollOffsetPercentage",
+      "type": "number",
+      "default": null,
+      "description": "Scroll offset percentage to trigger scroll event.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 172,
+      "since": null
+    },
+    {
+      "name": "selectedItems",
+      "type": "BaseListItem[]",
+      "default": null,
+      "description": "An array that holds a list of all selected items. *",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 117,
+      "since": null
+    },
+    {
+      "name": "selection",
+      "type": "boolean",
+      "default": "false",
+      "description": "Eenables selection styles.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 176,
+      "since": null
+    },
+    {
+      "name": "selectionMode",
+      "type": "SelectionType",
+      "default": "'none'",
+      "description": "The type of the selection. Types include:\n'none'| 'multi' | 'single'|'delete'.\nLeave empty for default ().'\nDefault value is set to 'none'.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 185,
+      "since": null
+    },
+    {
+      "name": "unreadIndicator",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to display unread notification indicator.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 278,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "selectedItemChange",
+      "type": "SelectionChangeEvent",
+      "default": null,
+      "description": "Event thrown, when selected item is changed",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 286,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "getLoadMoreContentContext",
+      "signature": "() => LoadMoreContentContext",
+      "description": "Get context for load more button",
+      "deprecated": null,
+      "sourceLine": 472,
+      "since": null,
+      "parameters": [],
+      "returnType": "LoadMoreContentContext"
+    }
+  ],
+  "inherited": {
+    "from": "CollectionBaseInput",
+    "inputs": [],
+    "methods": [
+      {
+        "name": "_onFocusChanged",
+        "signature": "(isFocused: boolean) => void",
+        "description": "Keeps track of element focus",
+        "deprecated": null,
+        "sourceLine": 389,
+        "since": null,
+        "parameters": [
+          {
+            "name": "isFocused",
+            "type": "boolean",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "focus",
+        "signature": "(event?: MouseEvent) => void",
+        "description": "In most of the cases when working with input element directly you should be just find to assing\nvariable to this element\n\n```\n<input #inputElementRef fd-form-control ...>\n```\n\nand this default behavior used. For other cases implement focus.",
+        "deprecated": null,
+        "sourceLine": 419,
+        "since": null,
+        "parameters": [
+          {
+            "name": "event",
+            "type": "MouseEvent",
+            "description": "",
+            "optional": true
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "onContainerClick",
+        "signature": "(event: MouseEvent) => void",
+        "description": "Handles even when we click on parent container which is the FormField Wrapping this\ncontrol",
+        "deprecated": null,
+        "sourceLine": 404,
+        "since": null,
+        "parameters": [
+          {
+            "name": "event",
+            "type": "MouseEvent",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      }
+    ]
+  }
+}

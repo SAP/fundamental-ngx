@@ -1,0 +1,34 @@
+{
+  "name": "NotificationGroupHeaderTitleDirective",
+  "selector": "[fdNotificationGroupHeaderTitle], [fd-notification-group-header-title]",
+  "kind": "Directive",
+  "sourceFile": "notification-group-header-title.directive.ts",
+  "sourceLine": 22,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/notification/directives/notification-group-header-title.directive.ts#L22",
+  "description": "",
+  "inputs": [
+    {
+      "name": "ariaLevel",
+      "type": "2 | 1 | 3 | 4 | 5 | 6",
+      "default": null,
+      "description": "aria-level for the title\na numeric value from 1 to 6\ndefault value is 3",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 28,
+      "since": null
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "default": null,
+      "description": "id for the notification group header title\nif not set, a default value is provided",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 34,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

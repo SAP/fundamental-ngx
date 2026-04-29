@@ -1,0 +1,54 @@
+{
+  "name": "TileProfileImgDirective",
+  "selector": "[fdTileContent], [fd-tile-content]",
+  "kind": "Directive",
+  "sourceFile": "tile.directives.ts",
+  "sourceLine": 142,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/tile/directives/tile.directives.ts#L142",
+  "description": "",
+  "inputs": [
+    {
+      "name": "ariaLabel",
+      "type": "null | string",
+      "default": null,
+      "description": "Aria label for accessibility.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 147,
+      "since": null
+    },
+    {
+      "name": "ariaLabelledby",
+      "type": "null | string",
+      "default": null,
+      "description": "Aria labelledby attribute referencing element(s) describing the tile.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 150,
+      "since": null
+    },
+    {
+      "name": "backgroundImage",
+      "type": "null | string",
+      "default": null,
+      "description": "Background image URL.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 153,
+      "since": null
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "default": null,
+      "description": "Unique identifier for the tile.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 144,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

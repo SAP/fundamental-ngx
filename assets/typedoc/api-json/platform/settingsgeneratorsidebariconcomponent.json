@@ -1,0 +1,13 @@
+{
+  "name": "SettingsGeneratorSidebarIconComponent",
+  "selector": "fdp-settings-generator-sidebar-icon",
+  "kind": "Component",
+  "sourceFile": "settings-generator-sidebar-icon.component.ts",
+  "sourceLine": 26,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/settings-generator/layouts/settings-generator-sidebar-layout/settings-generator-sidebar-icon/settings-generator-sidebar-icon.component.ts#L26",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

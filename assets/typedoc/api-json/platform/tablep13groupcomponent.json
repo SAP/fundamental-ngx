@@ -1,0 +1,13 @@
+{
+  "name": "TableP13GroupComponent",
+  "selector": "fdp-table-p13-group",
+  "kind": "Component",
+  "sourceFile": "table-p13-group.component.ts",
+  "sourceLine": 14,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/table/components/table-p13-dialog/table-p13-group.component.ts#L14",
+  "description": "Personalization Dialog Group Settings.",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

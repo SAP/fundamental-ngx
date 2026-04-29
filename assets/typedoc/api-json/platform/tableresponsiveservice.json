@@ -1,0 +1,37 @@
+{
+  "name": "TableResponsiveService",
+  "selector": null,
+  "kind": "Service",
+  "sourceFile": "table-responsive.service.ts",
+  "sourceLine": 18,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/table-helpers/services/table-responsive.service.ts#L18",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "registerResponsiveColumn",
+      "signature": "(column: TableColumn, breakpoints: Record<string, FdpColumnResponsiveState>) => void",
+      "description": "Registers responsive column with it's breakpoint configuration.",
+      "deprecated": null,
+      "sourceLine": 40,
+      "since": null,
+      "parameters": [
+        {
+          "name": "column",
+          "type": "TableColumn",
+          "description": "Table Column",
+          "optional": false
+        },
+        {
+          "name": "breakpoints",
+          "type": "Record<string, FdpColumnResponsiveState>",
+          "description": "Breakpoint configuration.",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

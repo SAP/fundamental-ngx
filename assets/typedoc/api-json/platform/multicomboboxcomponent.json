@@ -1,0 +1,106 @@
+{
+  "name": "MultiComboboxComponent",
+  "selector": "fdp-multi-combobox",
+  "kind": "Component",
+  "sourceFile": "multi-combobox.component.ts",
+  "sourceLine": 88,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/multi-combobox/multi-combobox/multi-combobox.component.ts#L88",
+  "description": "This component can work with both string primitives as well as with complex objects. In order\nto use objects user must provide an unique ID to lookupkey, which will be used in comparing\neach items of array. It is important to provide lookupkey value as there might be multiple\nitems with same name but different properties which is to be differently identified otherwise\nit will be treated as same objects.",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": {
+    "from": "BaseMultiCombobox",
+    "inputs": [],
+    "methods": [
+      {
+        "name": "_onFocusChanged",
+        "signature": "(isFocused: boolean) => void",
+        "description": "Keeps track of element focus",
+        "deprecated": null,
+        "sourceLine": 389,
+        "since": null,
+        "parameters": [
+          {
+            "name": "isFocused",
+            "type": "boolean",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "close",
+        "signature": "() => void",
+        "description": "Closes the select popover body.",
+        "deprecated": null,
+        "sourceLine": 482,
+        "since": null,
+        "parameters": [],
+        "returnType": "void"
+      },
+      {
+        "name": "focus",
+        "signature": "(event?: MouseEvent) => void",
+        "description": "In most of the cases when working with input element directly you should be just find to assing\nvariable to this element\n\n```\n<input #inputElementRef fd-form-control ...>\n```\n\nand this default behavior used. For other cases implement focus.",
+        "deprecated": null,
+        "sourceLine": 419,
+        "since": null,
+        "parameters": [
+          {
+            "name": "event",
+            "type": "MouseEvent",
+            "description": "",
+            "optional": true
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "handleListFocusEscape",
+        "signature": "(direction: FocusEscapeDirection) => void",
+        "description": "Method passed to list component",
+        "deprecated": null,
+        "sourceLine": 591,
+        "since": null,
+        "parameters": [
+          {
+            "name": "direction",
+            "type": "FocusEscapeDirection",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "onContainerClick",
+        "signature": "(event: MouseEvent) => void",
+        "description": "Handles even when we click on parent container which is the FormField Wrapping this\ncontrol",
+        "deprecated": null,
+        "sourceLine": 404,
+        "since": null,
+        "parameters": [
+          {
+            "name": "event",
+            "type": "MouseEvent",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "open",
+        "signature": "() => void",
+        "description": "Opens the select popover body.",
+        "deprecated": null,
+        "sourceLine": 475,
+        "since": null,
+        "parameters": [],
+        "returnType": "void"
+      }
+    ]
+  }
+}

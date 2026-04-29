@@ -1,0 +1,266 @@
+{
+  "name": "PlatformTimePickerComponent",
+  "selector": "fdp-time-picker",
+  "kind": "Component",
+  "sourceFile": "time-picker.component.ts",
+  "sourceLine": 28,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/time-picker/time-picker.component.ts#L28",
+  "description": "All form components share the same information (value, name, placeholder,.. ) as well as\nthe same behavior given by ControlValueAccessor.\n\nEven this is not ideal solution there is no other way then use inheritance to reuse some of the\ncommon logic. It should be possible to use some kind of compositions with Proxies but something\nsimilar that exists in Aspect Oriented Programing.\n\nUsually try to fire stateChange only for things that can change dynamically in runtime. We don't expect\nthat e.g. placeholder will change after component is created",
+  "inputs": [
+    {
+      "name": "allowNull",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether a null input is considered valid(success).",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 103,
+      "since": null
+    },
+    {
+      "name": "buttonFocusable",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether AddOn Button should be focusable",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 138,
+      "since": null
+    },
+    {
+      "name": "displayFormat",
+      "type": "unknown",
+      "default": null,
+      "description": "Display format option to customize time format in input control.\nMust be a format option that is understandable by DatetimeAdapter.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 157,
+      "since": null
+    },
+    {
+      "name": "displayHours",
+      "type": "boolean",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 89,
+      "since": null
+    },
+    {
+      "name": "displayMinutes",
+      "type": "boolean",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 82,
+      "since": null
+    },
+    {
+      "name": "displaySeconds",
+      "type": "boolean",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 75,
+      "since": null
+    },
+    {
+      "name": "keepTwoDigitsTime",
+      "type": "boolean",
+      "default": "false",
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 150,
+      "since": null
+    },
+    {
+      "name": "minuteStep",
+      "type": "number",
+      "default": null,
+      "description": "The interval between selectable minutes (e.g., 1 for every minute, 5 for 5-minute intervals, 15 for 15-minute intervals).\nDefaults to 1 (every minute).",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 178,
+      "since": null
+    },
+    {
+      "name": "parseFormat",
+      "type": "unknown",
+      "default": null,
+      "description": "Parse format option to customize time format in input control.\nMust be a format option that is understandable by DatetimeAdapter.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 164,
+      "since": null
+    },
+    {
+      "name": "placement",
+      "type": "Placement",
+      "default": "'bottom-start'",
+      "description": "The placement of the popover. It can be one of: top, top-start, top-end, bottom,\n bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 114,
+      "since": null
+    },
+    {
+      "name": "spinnerButtons",
+      "type": "boolean",
+      "default": "true",
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 48,
+      "since": null
+    },
+    {
+      "name": "tablet",
+      "type": "boolean",
+      "default": "false",
+      "description": "Defines if time component should be used with tablet mode",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 107,
+      "since": null
+    },
+    {
+      "name": "time",
+      "type": "D",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 44,
+      "since": null
+    },
+    {
+      "name": "timePickerInputLabel",
+      "type": "string",
+      "default": null,
+      "description": "Aria label for the time picker input.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 99,
+      "since": null
+    },
+    {
+      "name": "useValidation",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether to validate the time picker input.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 142,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "isOpenChange",
+      "type": "boolean",
+      "default": null,
+      "description": "Event emitted when the state of the isOpen property changes.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 168,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "handleOpenChange",
+      "signature": "(open: boolean) => void",
+      "description": "Method that handles changes when popover is opened or closed.",
+      "deprecated": null,
+      "sourceLine": 194,
+      "since": null,
+      "parameters": [
+        {
+          "name": "open",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "handleTimeChange",
+      "signature": "(value: D) => void",
+      "description": "logic to handle validation from both platform forms and core datetiimepicker",
+      "deprecated": null,
+      "sourceLine": 202,
+      "since": null,
+      "parameters": [
+        {
+          "name": "value",
+          "type": "D",
+          "description": "inputted",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": {
+    "from": "BaseInput",
+    "inputs": [],
+    "methods": [
+      {
+        "name": "_onFocusChanged",
+        "signature": "(isFocused: boolean) => void",
+        "description": "Keeps track of element focus",
+        "deprecated": null,
+        "sourceLine": 389,
+        "since": null,
+        "parameters": [
+          {
+            "name": "isFocused",
+            "type": "boolean",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "focus",
+        "signature": "(event?: MouseEvent) => void",
+        "description": "In most of the cases when working with input element directly you should be just find to assing\nvariable to this element\n\n```\n<input #inputElementRef fd-form-control ...>\n```\n\nand this default behavior used. For other cases implement focus.",
+        "deprecated": null,
+        "sourceLine": 419,
+        "since": null,
+        "parameters": [
+          {
+            "name": "event",
+            "type": "MouseEvent",
+            "description": "",
+            "optional": true
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "onContainerClick",
+        "signature": "(event: MouseEvent) => void",
+        "description": "Handles even when we click on parent container which is the FormField Wrapping this\ncontrol",
+        "deprecated": null,
+        "sourceLine": 404,
+        "since": null,
+        "parameters": [
+          {
+            "name": "event",
+            "type": "MouseEvent",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      }
+    ]
+  }
+}

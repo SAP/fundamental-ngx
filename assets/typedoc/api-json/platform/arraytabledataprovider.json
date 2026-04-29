@@ -1,0 +1,208 @@
+{
+  "name": "ArrayTableDataProvider",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "array-data-source.ts",
+  "sourceLine": 15,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/table-helpers/domain/array-data-source.ts#L15",
+  "description": "Table Data Provider based on an array.\n\nUsed to convert array source to the TableDataProvider interface.",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "fetch",
+      "signature": "(state?: TableState) => Observable<T[]>",
+      "description": "Method for retrieving the data.",
+      "deprecated": null,
+      "sourceLine": 33,
+      "since": null,
+      "parameters": [
+        {
+          "name": "state",
+          "type": "TableState",
+          "description": "",
+          "optional": true
+        }
+      ],
+      "returnType": "Observable<T[]>"
+    }
+  ],
+  "inherited": {
+    "from": "TableDataProvider",
+    "inputs": [],
+    "methods": [
+      {
+        "name": "applyFiltering",
+        "signature": "(items: T[], filters: CollectionFilterAndGroup[]) => T[]",
+        "description": "Method for filtering the data.",
+        "deprecated": null,
+        "sourceLine": 58,
+        "since": null,
+        "parameters": [
+          {
+            "name": "items",
+            "type": "T[]",
+            "description": "Array of data source items.",
+            "optional": false
+          },
+          {
+            "name": "filters",
+            "type": "CollectionFilterAndGroup[]",
+            "description": "Set of column filters.",
+            "optional": false
+          }
+        ],
+        "returnType": "T[]"
+      },
+      {
+        "name": "collectionFilterGroupStrategy",
+        "signature": "(item: T, filter: CollectionFilterGroup) => boolean",
+        "description": "Method which applies group filtering conditions for the item.",
+        "deprecated": null,
+        "sourceLine": 125,
+        "since": null,
+        "parameters": [
+          {
+            "name": "item",
+            "type": "T",
+            "description": "Item to apply conditions to.",
+            "optional": false
+          },
+          {
+            "name": "filter",
+            "type": "CollectionFilterGroup",
+            "description": "Filter group.",
+            "optional": false
+          }
+        ],
+        "returnType": "boolean"
+      },
+      {
+        "name": "collectionFilterStrategy",
+        "signature": "(item: T, filter: CollectionFilter) => boolean",
+        "description": "Method which filters item depending on applied condition result.\nDevelopers can override this method to extend its functionality",
+        "deprecated": null,
+        "sourceLine": 94,
+        "since": null,
+        "parameters": [
+          {
+            "name": "item",
+            "type": "T",
+            "description": "Item to apply conditions to.",
+            "optional": false
+          },
+          {
+            "name": "filter",
+            "type": "CollectionFilter",
+            "description": "Column filter.",
+            "optional": false
+          }
+        ],
+        "returnType": "boolean"
+      },
+      {
+        "name": "fetchData",
+        "signature": "(state: TableState) => Observable<T[]>",
+        "description": "Method for applying filtering and retrieving the data.",
+        "deprecated": null,
+        "sourceLine": 350,
+        "since": null,
+        "parameters": [
+          {
+            "name": "state",
+            "type": "TableState",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "Observable<T[]>"
+      },
+      {
+        "name": "getFieldOptions",
+        "signature": "(field: string) => Observable<SelectItem<any>[]>",
+        "description": "Method for getting all possible options for particular field.\nUsed for creating select options.\nDevelopers can override this method to extend the filtering functionality.",
+        "deprecated": null,
+        "sourceLine": 374,
+        "since": null,
+        "parameters": [
+          {
+            "name": "field",
+            "type": "string",
+            "description": "key of the data item.",
+            "optional": false
+          }
+        ],
+        "returnType": "Observable<SelectItem<any>[]>"
+      },
+      {
+        "name": "getFilteringStrategy",
+        "signature": "(item: T, filters: CollectionFilterAndGroup[]) => boolean",
+        "description": "Method which selects appropriate filtering strategy of the field depending on the filter type.\nDevelopers can override this method to extend the filtering functionality.",
+        "deprecated": null,
+        "sourceLine": 75,
+        "since": null,
+        "parameters": [
+          {
+            "name": "item",
+            "type": "T",
+            "description": "item of the data source.",
+            "optional": false
+          },
+          {
+            "name": "filters",
+            "type": "CollectionFilterAndGroup[]",
+            "description": "Set of column filters.",
+            "optional": false
+          }
+        ],
+        "returnType": "boolean"
+      },
+      {
+        "name": "search",
+        "signature": "(items: T[], tableState: TableState) => T[]",
+        "description": "Applies search of the search term for visible table columns.\nDevelopers can override this method to extend the filtering functionality.",
+        "deprecated": null,
+        "sourceLine": 138,
+        "since": null,
+        "parameters": [
+          {
+            "name": "items",
+            "type": "T[]",
+            "description": "data source items array.",
+            "optional": false
+          },
+          {
+            "name": "tableState",
+            "type": "TableState",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "T[]"
+      },
+      {
+        "name": "setFilters",
+        "signature": "(filterBy: CollectionFilterAndGroup[], searchInput?: SearchInput) => void",
+        "description": "Method for setting external filtering conditions.",
+        "deprecated": null,
+        "sourceLine": 47,
+        "since": null,
+        "parameters": [
+          {
+            "name": "filterBy",
+            "type": "CollectionFilterAndGroup[]",
+            "description": "Set of column filters.",
+            "optional": false
+          },
+          {
+            "name": "searchInput",
+            "type": "SearchInput",
+            "description": "Search condition from search field.",
+            "optional": true
+          }
+        ],
+        "returnType": "void"
+      }
+    ]
+  }
+}

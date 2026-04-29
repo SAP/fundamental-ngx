@@ -1,0 +1,115 @@
+{
+  "name": "ShellbarUserMenuComponent",
+  "selector": "fd-shellbar-user-menu",
+  "kind": "Component",
+  "sourceFile": "shellbar-user-menu.component.ts",
+  "sourceLine": 48,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/shellbar/user-menu/shellbar-user-menu.component.ts#L48",
+  "description": "This Component extends popover component and passes all the options and events from outside to popover component\nand Vice Versa",
+  "inputs": [
+    {
+      "name": "closeOnEscapeKey",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether the popover should close when the escape key is pressed.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 78,
+      "since": null
+    },
+    {
+      "name": "closeOnOutsideClick",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether the popover should close when a click is made outside its boundaries.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 82,
+      "since": null
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the popover is disabled.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 86,
+      "since": null
+    },
+    {
+      "name": "fillControlMode",
+      "type": "null | PopoverFillMode",
+      "default": null,
+      "description": "Preset options for the popover body width.\n* `at-least` will apply a minimum width to the body equivalent to the width of the control.\n* `equal` will apply a width to the body equivalent to the width of the control.\n* Leave blank for no effect.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 64,
+      "since": null
+    },
+    {
+      "name": "noArrow",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether or not to show the popover arrow",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 90,
+      "since": null
+    },
+    {
+      "name": "placement",
+      "type": "Placement",
+      "default": "'bottom-end'",
+      "description": "The placement of the popover. It can be one of: top, top-start, top-end, bottom,\n bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 69,
+      "since": null
+    },
+    {
+      "name": "triggers",
+      "type": "string[]",
+      "default": null,
+      "description": "The trigger events that will open/close the popover.\n Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp).",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 74,
+      "since": null
+    },
+    {
+      "name": "user",
+      "type": "ShellbarUser",
+      "default": null,
+      "description": "The user data.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 51,
+      "since": null
+    },
+    {
+      "name": "userMenu",
+      "type": "ShellbarUserMenu[]",
+      "default": null,
+      "description": "The user menu data.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 55,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "itemClicked",
+      "type": "void",
+      "default": null,
+      "description": "Event emitted on item click",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 94,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

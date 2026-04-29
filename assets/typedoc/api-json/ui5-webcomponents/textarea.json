@@ -1,0 +1,215 @@
+{
+  "name": "TextArea",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 49,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "accessibleDescription",
+      "type": "string",
+      "default": null,
+      "description": "Defines the accessible description of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 54,
+      "since": null
+    },
+    {
+      "name": "accessibleDescriptionRef",
+      "type": "string",
+      "default": null,
+      "description": "Receives id(or many ids) of the elements that describe the textarea.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 59,
+      "since": null
+    },
+    {
+      "name": "accessibleName",
+      "type": "string",
+      "default": null,
+      "description": "Defines the accessible ARIA name of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 64,
+      "since": null
+    },
+    {
+      "name": "accessibleNameRef",
+      "type": "string",
+      "default": null,
+      "description": "Receives id(or many ids) of the elements that label the textarea.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 69,
+      "since": null
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": null,
+      "description": "Indicates whether the user can interact with the component or not.\n\n*Note:** A disabled component is completely noninteractive.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 76,
+      "since": null
+    },
+    {
+      "name": "growing",
+      "type": "boolean",
+      "default": null,
+      "description": "Enables the component to automatically grow and shrink dynamically with its content.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 81,
+      "since": null
+    },
+    {
+      "name": "growingMaxRows",
+      "type": "number",
+      "default": null,
+      "description": "Defines the maximum number of rows that the component can grow.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 86,
+      "since": null
+    },
+    {
+      "name": "maxlength",
+      "type": "number",
+      "default": null,
+      "description": "Defines the maximum number of characters that the `value` can have.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 91,
+      "since": null
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "default": null,
+      "description": "Determines the name by which the component will be identified upon submission in an HTML form.\n\n*Note:** This property is only applicable within the context of an HTML Form element.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 98,
+      "since": null
+    },
+    {
+      "name": "placeholder",
+      "type": "string",
+      "default": null,
+      "description": "Defines a short hint intended to aid the user with data entry when the component has no value.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 103,
+      "since": null
+    },
+    {
+      "name": "readonly",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines whether the component is read-only.\n\n*Note:** A read-only component is not editable,\nbut still provides visual feedback upon user interaction.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 111,
+      "since": null
+    },
+    {
+      "name": "required",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines whether the component is required.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 116,
+      "since": null
+    },
+    {
+      "name": "rows",
+      "type": "number",
+      "default": null,
+      "description": "Defines the number of visible text rows for the component.\n\n*Notes:**\n\n- If the `growing` property is enabled, this property defines the minimum rows to be displayed\nin the textarea.\n- The CSS `height` property wins over the `rows` property, if both are set.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 127,
+      "since": null
+    },
+    {
+      "name": "showExceededText",
+      "type": "boolean",
+      "default": null,
+      "description": "Determines whether the characters exceeding the maximum allowed character count are visible\nin the component.\n\nIf set to `false`, the user is not allowed to enter more characters than what is set in the\n`maxlength` property.\nIf set to `true` the characters exceeding the `maxlength` value are selected on\npaste and the counter below the component displays their number.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 138,
+      "since": null
+    },
+    {
+      "name": "value",
+      "type": "string",
+      "default": null,
+      "description": "Defines the value of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 143,
+      "since": null
+    },
+    {
+      "name": "valueState",
+      "type": "'None' | 'Positive' | 'Critical' | 'Negative' | 'Information'",
+      "default": null,
+      "description": "Defines the value state of the component.\n\n*Note:** If `maxlength` property is set,\nthe component turns into \"Critical\" state once the characters exceeds the limit.\nIn this case, only the \"Negative\" state is considered and can be applied.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 152,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5Change",
+      "type": "UI5CustomEvent<TextArea, 'change'>",
+      "default": null,
+      "description": "Fired when the text has changed and the focus leaves the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 159,
+      "since": null
+    },
+    {
+      "name": "ui5Input",
+      "type": "UI5CustomEvent<TextArea, 'input'>",
+      "default": null,
+      "description": "Fired when the value of the component changes at each keystroke or when\nsomething is pasted.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 165,
+      "since": null
+    },
+    {
+      "name": "ui5Scroll",
+      "type": "UI5CustomEvent<TextArea, 'scroll'>",
+      "default": null,
+      "description": "Fired when textarea is scrolled.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 170,
+      "since": null
+    },
+    {
+      "name": "ui5Select",
+      "type": "UI5CustomEvent<TextArea, 'select'>",
+      "default": null,
+      "description": "Fired when some text has been selected.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 175,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

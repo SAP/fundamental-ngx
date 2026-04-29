@@ -1,0 +1,47 @@
+{
+  "name": "BaseTableDataSource",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "table-data-source.ts",
+  "sourceLine": 10,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/table-helpers/domain/table-data-source.ts#L10",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "fetch",
+      "signature": "(tableState: TableState, parentRows?: TableRow<T>[]) => void",
+      "description": "Method for retrieving the data of the provided data source.",
+      "deprecated": null,
+      "sourceLine": 16,
+      "since": null,
+      "parameters": [
+        {
+          "name": "tableState",
+          "type": "TableState",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "parentRows",
+          "type": "TableRow<T>[]",
+          "description": "",
+          "optional": true
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "unsubscribe",
+      "signature": "() => void",
+      "description": "Closes the stream",
+      "deprecated": null,
+      "sourceLine": 102,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

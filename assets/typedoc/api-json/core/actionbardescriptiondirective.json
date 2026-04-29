@@ -1,0 +1,24 @@
+{
+  "name": "ActionBarDescriptionDirective",
+  "selector": "[fd-action-bar-description]",
+  "kind": "Directive",
+  "sourceFile": "action-bar-description.directive.ts",
+  "sourceLine": 22,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/action-bar/action-bar-description/action-bar-description.directive.ts#L22",
+  "description": "The action bar description.\n\n```html\n<div fd-action-bar>\n    <div fd-action-bar-header>\n        <div fd-action-bar-description>Page Description</div>\n    </div>\n<div>\n```",
+  "inputs": [
+    {
+      "name": "withBackBtn",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the action bar also has a back button.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 24,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

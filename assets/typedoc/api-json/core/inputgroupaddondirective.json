@@ -1,0 +1,64 @@
+{
+  "name": "InputGroupAddOnDirective",
+  "selector": "[fdInputGroupInput], [fd-input-group-input]",
+  "kind": "Directive",
+  "sourceFile": "input-group-directives.ts",
+  "sourceLine": 76,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/input-group/input-group-directives.ts#L76",
+  "description": "",
+  "inputs": [
+    {
+      "name": "button",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the icon add-on or the text add-on is a button.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 108,
+      "since": null
+    },
+    {
+      "name": "class",
+      "type": "string",
+      "default": null,
+      "description": "user's custom classes",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 79,
+      "since": null
+    },
+    {
+      "name": "placement",
+      "type": "InputGroupPlacement",
+      "default": "'after'",
+      "description": "The placement of the add-on. Options include *before* and *after*",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 89,
+      "since": null
+    },
+    {
+      "name": "state",
+      "type": "'error' | 'default' | 'information' | 'warning' | 'success'",
+      "default": null,
+      "description": "The state of the form control - applies css classes.\n Can be `success`, `error`, `warning`, `information` or blank for default.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 102,
+      "since": null
+    },
+    {
+      "name": "type",
+      "type": "string",
+      "default": null,
+      "description": "The placement of the add-on. Options include *before* and *after*",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 95,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

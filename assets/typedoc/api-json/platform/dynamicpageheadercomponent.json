@@ -1,0 +1,145 @@
+{
+  "name": "DynamicPageHeaderComponent",
+  "selector": "fdp-dynamic-page-header",
+  "kind": "Component",
+  "sourceFile": "dynamic-page-header.component.ts",
+  "sourceLine": 39,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/dynamic-page/dynamic-page-header/header/dynamic-page-header.component.ts#L39",
+  "description": "Dynamic Page Header Component.\n\nThis component is part of Public API\nused by supplier to declare inputs and template",
+  "inputs": [
+    {
+      "name": "background",
+      "type": "DynamicPageBackgroundType",
+      "default": null,
+      "description": "sets background for content to `list`, `transparent`, or `solid` background color.\nDefault is `solid`.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 105,
+      "since": null
+    },
+    {
+      "name": "collapseLabel",
+      "type": "string",
+      "default": null,
+      "description": "ARIA label for button when the header is expanded",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 70,
+      "since": null
+    },
+    {
+      "name": "collapsed",
+      "type": "boolean",
+      "default": null,
+      "description": "the initial state of the header. Set to true if header should be collapsed.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 58,
+      "since": null
+    },
+    {
+      "name": "collapsible",
+      "type": "boolean",
+      "default": "true",
+      "description": "whether the header can be collapsed. True by default. If set to false, both pin/collapse buttons disappear\nand the header stays visible",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 45,
+      "since": null
+    },
+    {
+      "name": "expandLabel",
+      "type": "string",
+      "default": null,
+      "description": "ARIA label for button when the header is collapsed",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 64,
+      "since": null
+    },
+    {
+      "name": "headerAriaLabel",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "aria label for header",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 86,
+      "since": null
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "default": null,
+      "description": "id for header",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 80,
+      "since": null
+    },
+    {
+      "name": "pinAriaLabel",
+      "type": "string",
+      "default": null,
+      "description": "aria label for pin state of pin button",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 92,
+      "since": null
+    },
+    {
+      "name": "pinnable",
+      "type": "boolean",
+      "default": "false",
+      "description": "whether the header should be allowed to be pinned or unpinned. When set, the pin button shows up.\nPinning the header will make the header stay visible and the collapse button(if present) will disappear until unpinned.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 52,
+      "since": null
+    },
+    {
+      "name": "role",
+      "type": "string",
+      "default": "'region'",
+      "description": "Header role",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 74,
+      "since": null
+    },
+    {
+      "name": "size",
+      "type": "DynamicPageResponsiveSize",
+      "default": null,
+      "description": "sets size which in turn adds corresponding padding for the size type.\nsize can be `small`, `medium`, `large`, or `extra-large`.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 112,
+      "since": null
+    },
+    {
+      "name": "unpinAriaLabel",
+      "type": "string",
+      "default": null,
+      "description": "aria label for unpin state of pin button",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 98,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "collapsedChange",
+      "type": "DynamicPageCollapseChangeEvent",
+      "default": null,
+      "description": "Collapse/Expand change event raised",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 116,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

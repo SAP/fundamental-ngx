@@ -1,0 +1,24 @@
+{
+  "name": "TokenizerInputDirective",
+  "selector": "[fdTokenizerInput], [fd-tokenizer-input]",
+  "kind": "Directive",
+  "sourceFile": "token-input.directive.ts",
+  "sourceLine": 8,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/token/token-input.directive.ts#L8",
+  "description": "",
+  "inputs": [
+    {
+      "name": "class",
+      "type": "string",
+      "default": null,
+      "description": "user's custom classes",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 11,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

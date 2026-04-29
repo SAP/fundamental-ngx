@@ -1,0 +1,13 @@
+{
+  "name": "TableResponsiveWrapperDirective",
+  "selector": "[fd-table-responsive-wrapper]",
+  "kind": "Directive",
+  "sourceFile": "table-responsive-wrapper.directive.ts",
+  "sourceLine": 20,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/table/directives/table-responsive-wrapper.directive.ts#L20",
+  "description": "The directive that represents a table.\nA table is a set of tabular data. Line items can support data, images and actions.\n```html\n    <div fd-table-responsive-wrapper>\n        <table fd-table>\n        </table>\n    </div>\n```",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

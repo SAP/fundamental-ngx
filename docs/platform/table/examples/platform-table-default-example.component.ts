@@ -1,7 +1,9 @@
 import { ChangeDetectionStrategy, Component, ElementRef, ViewEncapsulation } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
+import { CdkDragPlaceholder } from '@angular/cdk/drag-drop';
 import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import { PlatformTableModule, TableDataProvider, TableDataSource, TableState } from '@fundamental-ngx/platform/table';
 import {
@@ -28,7 +30,9 @@ import {
         PlatformTableModule,
         TableInitialStateDirective,
         ButtonComponent,
-        FdDatetimeModule
+        FdDatetimeModule,
+        CdkDragPlaceholder,
+        IconComponent
     ]
 })
 export class PlatformTableDefaultExampleComponent {
@@ -135,7 +139,8 @@ const ITEMS: ExampleItem[] = [
     {
         id: 3,
         name: 'Astro Phone 6',
-        description: 'penatibus et magnis',
+        description:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
         price: {
             value: 154.1,
             currency: 'IDR'

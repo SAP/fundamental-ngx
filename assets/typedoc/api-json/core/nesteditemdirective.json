@@ -1,0 +1,102 @@
+{
+  "name": "NestedItemDirective",
+  "selector": "[fdNestedItem], [fd-nested-list-item]",
+  "kind": "Directive",
+  "sourceFile": "nested-item.directive.ts",
+  "sourceLine": 33,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/nested-list/nested-item/nested-item.directive.ts#L33",
+  "description": "",
+  "inputs": [],
+  "outputs": [
+    {
+      "name": "expandedChange",
+      "type": "boolean",
+      "default": null,
+      "description": "Event thrown, when expanded state is changed",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 48,
+      "since": null
+    },
+    {
+      "name": "keyboardTriggered",
+      "type": "KeyboardEvent",
+      "default": null,
+      "description": "Event thrown, when any keyboard event is dispatched on this, or link element",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 52,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "click",
+      "signature": "() => void",
+      "description": "Method that dispatches `click` event on link item",
+      "deprecated": null,
+      "sourceLine": 173,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "containsId",
+      "signature": "(id: string) => boolean",
+      "description": "Method that provides information if element, or children of this element has passed id",
+      "deprecated": null,
+      "sourceLine": 191,
+      "since": null,
+      "parameters": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "boolean"
+    },
+    {
+      "name": "focus",
+      "signature": "() => void",
+      "description": "Method that focuses link item",
+      "deprecated": null,
+      "sourceLine": 182,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "toggle",
+      "signature": "() => void",
+      "description": "Method that toggle the item and propagate it to children",
+      "deprecated": null,
+      "sourceLine": 167,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "triggerClose",
+      "signature": "() => void",
+      "description": "Method that close the item and propagate it to children",
+      "deprecated": null,
+      "sourceLine": 159,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "triggerOpen",
+      "signature": "() => void",
+      "description": "Method that expand the item and propagate it to children",
+      "deprecated": null,
+      "sourceLine": 151,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

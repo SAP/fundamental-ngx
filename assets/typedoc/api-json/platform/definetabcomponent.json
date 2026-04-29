@@ -1,0 +1,34 @@
+{
+  "name": "DefineTabComponent",
+  "selector": "fdp-define-tab",
+  "kind": "Component",
+  "sourceFile": "define-tab.component.ts",
+  "sourceLine": 80,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/value-help-dialog/components/define-tab/define-tab.component.ts#L80",
+  "description": "",
+  "inputs": [
+    {
+      "name": "selectedId",
+      "type": "string",
+      "default": null,
+      "description": "seelcted value id for the table",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 92,
+      "since": null
+    },
+    {
+      "name": "titleId",
+      "type": "string",
+      "default": null,
+      "description": "title id for the table",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 88,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

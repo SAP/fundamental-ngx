@@ -1,0 +1,279 @@
+{
+  "name": "BaseCombobox",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "base-combobox.ts",
+  "sourceLine": 72,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/combobox/commons/base-combobox.ts#L72",
+  "description": "Defines specific behavior for Input controls which deals with list of values including:\n - Select\n - RadioGroup\n - CheckboxGroup\n - ComboBox\n ...",
+  "inputs": [
+    {
+      "name": "autoComplete",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether the autocomplete should be enabled; Enabled by default",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 93,
+      "since": null
+    },
+    {
+      "name": "autoResize",
+      "type": "boolean",
+      "default": "false",
+      "description": "Turns on/off Adjustable Width feature",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 133,
+      "since": null
+    },
+    {
+      "name": "buttonFocusable",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether AddOn Button should be focusable",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 149,
+      "since": null
+    },
+    {
+      "name": "byline",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether list item options should be rendered as byline.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 164,
+      "since": null
+    },
+    {
+      "name": "closeOnOutsideClick",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether the combobox should close, when a click is performed outside its boundaries. True by default",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 160,
+      "since": null
+    },
+    {
+      "name": "entityClass",
+      "type": "string",
+      "default": null,
+      "description": "Todo: Name of the entity for which DataProvider will be loaded. You can either pass list of\nitems or use this entityClass and internally we should be able to do lookup to some registry\nand retrieve the best matching DataProvider that is set on application level",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 101,
+      "since": null
+    },
+    {
+      "name": "fillControlMode",
+      "type": "PopoverFillMode",
+      "default": "'at-least'",
+      "description": "Preset options for the Select body width, whatever is chosen, the body has a 600px limit.\n`at-least` will apply a minimum width to the body equivalent to the width of the control. - Default\n`equal` will apply a width to the body equivalent to the width of the control.\n'fit-content' will apply width needed to properly display items inside, independent of control.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 142,
+      "since": null
+    },
+    {
+      "name": "group",
+      "type": "boolean",
+      "default": "false",
+      "description": "Tells the combo if we need to group items",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 113,
+      "since": null
+    },
+    {
+      "name": "groupKey",
+      "type": "string",
+      "default": null,
+      "description": "A field name to use to group data by (support dotted notation)",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 117,
+      "since": null
+    },
+    {
+      "name": "maxHeight",
+      "type": "string",
+      "default": "'250px'",
+      "description": "Provides maximum height for the optionPanel",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 89,
+      "since": null
+    },
+    {
+      "name": "mobile",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the combobox should be built on mobile mode",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 105,
+      "since": null
+    },
+    {
+      "name": "mobileConfig",
+      "type": "MobileModeConfig",
+      "default": null,
+      "description": "Multi Input Mobile Configuration, it's applied only, when mobile is enabled",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 109,
+      "since": null
+    },
+    {
+      "name": "secondaryKey",
+      "type": "string",
+      "default": null,
+      "description": "The field to show data in secondary column",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 121,
+      "since": null
+    },
+    {
+      "name": "secondaryTextAlignment",
+      "type": "TextAlignment",
+      "default": null,
+      "description": "Horizontally align text inside the second column (Applicable for two columns layout)",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 129,
+      "since": null
+    },
+    {
+      "name": "showSecondaryText",
+      "type": "boolean",
+      "default": "false",
+      "description": "Show the second column (Applicable for two columns layout)",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 125,
+      "since": null
+    },
+    {
+      "name": "tabOutStrategy",
+      "type": "'close' | 'closeAndSelect'",
+      "default": "'closeAndSelect'",
+      "description": "Action to perform when user shifts focus from the dropdown.\n- `close` will close the dropdown preserving previously selected value.\n- `closeAndSelect` will close the dropdown and select last focused dropdown item.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 196,
+      "since": null
+    },
+    {
+      "name": "triggers",
+      "type": "string[]",
+      "default": "[]",
+      "description": "The trigger events that will open/close the options popover.\nAccepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp).",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 156,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "onDataReceived",
+      "type": "void",
+      "default": null,
+      "description": "Event emitted when data loading is finished.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 204,
+      "since": null
+    },
+    {
+      "name": "onDataRequested",
+      "type": "void",
+      "default": null,
+      "description": "Event emitted when data loading is started.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 200,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "handleListFocusEscape",
+      "signature": "(direction: FocusEscapeDirection) => void",
+      "description": "Method passed to list component",
+      "deprecated": null,
+      "sourceLine": 497,
+      "since": null,
+      "parameters": [
+        {
+          "name": "direction",
+          "type": "FocusEscapeDirection",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": {
+    "from": "CollectionBaseInput",
+    "inputs": [],
+    "methods": [
+      {
+        "name": "_onFocusChanged",
+        "signature": "(isFocused: boolean) => void",
+        "description": "Keeps track of element focus",
+        "deprecated": null,
+        "sourceLine": 389,
+        "since": null,
+        "parameters": [
+          {
+            "name": "isFocused",
+            "type": "boolean",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "focus",
+        "signature": "(event?: MouseEvent) => void",
+        "description": "In most of the cases when working with input element directly you should be just find to assing\nvariable to this element\n\n```\n<input #inputElementRef fd-form-control ...>\n```\n\nand this default behavior used. For other cases implement focus.",
+        "deprecated": null,
+        "sourceLine": 419,
+        "since": null,
+        "parameters": [
+          {
+            "name": "event",
+            "type": "MouseEvent",
+            "description": "",
+            "optional": true
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "onContainerClick",
+        "signature": "(event: MouseEvent) => void",
+        "description": "Handles even when we click on parent container which is the FormField Wrapping this\ncontrol",
+        "deprecated": null,
+        "sourceLine": 404,
+        "since": null,
+        "parameters": [
+          {
+            "name": "event",
+            "type": "MouseEvent",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      }
+    ]
+  }
+}

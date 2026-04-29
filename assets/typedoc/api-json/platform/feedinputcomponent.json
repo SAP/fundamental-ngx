@@ -1,0 +1,74 @@
+{
+  "name": "FeedInputComponent",
+  "selector": "fdp-feed-input",
+  "kind": "Component",
+  "sourceFile": "feed-input.component.ts",
+  "sourceLine": 36,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/feed-input/feed-input.component.ts#L36",
+  "description": "",
+  "inputs": [
+    {
+      "name": "ariaLabel",
+      "type": "string",
+      "default": null,
+      "description": "Value for aria label",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 67,
+      "since": null
+    },
+    {
+      "name": "avatarShow",
+      "type": "boolean",
+      "default": "true",
+      "description": "Set feed input without user image",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 47,
+      "since": null
+    },
+    {
+      "name": "avatarSrc",
+      "type": "string",
+      "default": null,
+      "description": "The user image source, If is not set, then the user image will display placeholder image.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 39,
+      "since": null
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "description": "Set disabled state",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 51,
+      "since": null
+    },
+    {
+      "name": "maxHeight",
+      "type": "number",
+      "default": null,
+      "description": "The max number of rows to allow textarea grow",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 55,
+      "since": null
+    },
+    {
+      "name": "placeholder",
+      "type": "string",
+      "default": null,
+      "description": "Set placeholder textarea text",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 43,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

@@ -1,0 +1,24 @@
+{
+  "name": "TemplateDirective",
+  "selector": "[fdkTemplate]",
+  "kind": "Directive",
+  "sourceFile": "template.directive.ts",
+  "sourceLine": 6,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cdk/utils/directives/template/template.directive.ts#L6",
+  "description": "",
+  "inputs": [
+    {
+      "name": "name",
+      "type": "string",
+      "default": null,
+      "description": "Name of the template",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 8,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

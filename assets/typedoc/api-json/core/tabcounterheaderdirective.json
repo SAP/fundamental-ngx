@@ -1,0 +1,13 @@
+{
+  "name": "TabCounterHeaderDirective",
+  "selector": "[fdTabTitleTemplate], [fd-tab-title-template]",
+  "kind": "Directive",
+  "sourceFile": "tab-directives.ts",
+  "sourceLine": 143,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/tabs/tab-utils/tab-directives.ts#L143",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

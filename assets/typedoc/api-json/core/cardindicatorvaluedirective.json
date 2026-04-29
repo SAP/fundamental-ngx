@@ -1,0 +1,13 @@
+{
+  "name": "CardIndicatorValueDirective",
+  "selector": "[fd-card-indicator-value]",
+  "kind": "Directive",
+  "sourceFile": "card-indicator-value.directive.ts",
+  "sourceLine": 12,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/card/header-elements/card-indicator-value.directive.ts#L12",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

@@ -1,0 +1,124 @@
+{
+  "name": "SliderComponent",
+  "selector": "fd-slider",
+  "kind": "Component",
+  "sourceFile": "slider.component.ts",
+  "sourceLine": 95,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/slider/slider.component.ts#L95",
+  "description": "Set of fields of FormItemControl component",
+  "inputs": [
+    {
+      "name": "ariaLabel",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "Aria label for the slider.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 113,
+      "since": null
+    },
+    {
+      "name": "ariaLabelledBy",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "ID of the element that labels slider.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 109,
+      "since": null
+    },
+    {
+      "name": "class",
+      "type": "string",
+      "default": null,
+      "description": "User's custom classes",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 105,
+      "since": null
+    },
+    {
+      "name": "customValues",
+      "type": "SliderCustomValue[]",
+      "default": "[]",
+      "description": "Array of custom values to use for Slider.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 190,
+      "since": null
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the control is disabled.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 202,
+      "since": null
+    },
+    {
+      "name": "hideProgressBar",
+      "type": "boolean",
+      "default": "false",
+      "description": "Hides display of colored progress bar.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 198,
+      "since": null
+    },
+    {
+      "name": "mode",
+      "type": "'single' | 'range'",
+      "default": "'single'",
+      "description": "Slider mode.\nOptions include: 'single' | 'range'\nThe default is set to 'single'",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 178,
+      "since": null
+    },
+    {
+      "name": "showTicks",
+      "type": "boolean",
+      "default": "false",
+      "description": "Toggles the visibility of tick marks.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 182,
+      "since": null
+    },
+    {
+      "name": "showTicksLabels",
+      "type": "boolean",
+      "default": "false",
+      "description": "Toggles the visibility of tick mark labels. Must be used in conjunction with 'showTicks'",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 186,
+      "since": null
+    },
+    {
+      "name": "tooltipMode",
+      "type": "'readonly' | 'editable'",
+      "default": null,
+      "description": "Tooltip can be two types, 'readonly' to display value and 'editable' to make the ability to set and display value.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 194,
+      "since": null
+    },
+    {
+      "name": "vertical",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether slider should have vertical alignment.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 208,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

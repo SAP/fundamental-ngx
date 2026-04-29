@@ -1,0 +1,44 @@
+{
+  "name": "QuickViewGroupTitleComponent",
+  "selector": "fd-quick-view-group-title",
+  "kind": "Component",
+  "sourceFile": "quick-view-group-title.component.ts",
+  "sourceLine": 11,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/quick-view/quick-view-group-title/quick-view-group-title.component.ts#L11",
+  "description": "",
+  "inputs": [
+    {
+      "name": "allowWrap",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the subtitle should wrap on multiple lines",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 13,
+      "since": null
+    },
+    {
+      "name": "headingLevel",
+      "type": "null | HeadingLevel",
+      "default": null,
+      "description": "Heading level of the title.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 19,
+      "since": null
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "default": null,
+      "description": "Id of the quick view group title.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 16,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

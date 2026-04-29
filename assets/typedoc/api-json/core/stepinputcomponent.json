@@ -1,0 +1,376 @@
+{
+  "name": "StepInputComponent",
+  "selector": "fd-step-input",
+  "kind": "Component",
+  "sourceFile": "step-input.component.ts",
+  "sourceLine": 64,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/step-input/step-input.component.ts#L64",
+  "description": "Set of fields of FormItemControl component",
+  "inputs": [
+    {
+      "name": "ariaLabel",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "Sets input aria-label attribute",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 103,
+      "since": null
+    },
+    {
+      "name": "ariaLabelledBy",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "Sets input aria-labelledby attribute",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 107,
+      "since": null
+    },
+    {
+      "name": "ariaRoleDescription",
+      "type": "string",
+      "default": null,
+      "description": "Aria defines role description for the Step Input.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 111,
+      "since": null
+    },
+    {
+      "name": "compact",
+      "type": "boolean",
+      "default": null,
+      "description": "Sets compact mode",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 67,
+      "since": null
+    },
+    {
+      "name": "currency",
+      "type": "string",
+      "default": null,
+      "description": "Currency used to format value. Check Intl.NumberFormat documentation for more information",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 196,
+      "since": null
+    },
+    {
+      "name": "currencyDisplay",
+      "type": "string",
+      "default": null,
+      "description": "Currency used to format value. Check Intl.NumberFormat documentation for more information",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 200,
+      "since": null
+    },
+    {
+      "name": "decrementButtonIcon",
+      "type": "string",
+      "default": "'less'",
+      "description": "Sets icon displayed in Decrement Button",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 99,
+      "since": null
+    },
+    {
+      "name": "disableWheel",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the wheel event should be disabled. Default value is false",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 164,
+      "since": null
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": null,
+      "description": "Sets control in disabled mode",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 75,
+      "since": null
+    },
+    {
+      "name": "hasStepButtons",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether StepInput should display Increase/Decrease buttons",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 204,
+      "since": null
+    },
+    {
+      "name": "incrementButtonIcon",
+      "type": "string",
+      "default": "'add'",
+      "description": "Sets icon displayed in Increment Button",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 95,
+      "since": null
+    },
+    {
+      "name": "inputId",
+      "type": "string",
+      "default": null,
+      "description": "Sets input id",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 115,
+      "since": null
+    },
+    {
+      "name": "inputTitle",
+      "type": "string",
+      "default": "''",
+      "description": "Sets input title attribute",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 160,
+      "since": null
+    },
+    {
+      "name": "isFullWidth",
+      "type": "boolean",
+      "default": "false",
+      "description": "Sets the Step Input to take the full width of the container element",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 87,
+      "since": null
+    },
+    {
+      "name": "locale",
+      "type": "string",
+      "default": null,
+      "description": "Sets locale used to format numeric value",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 83,
+      "since": null
+    },
+    {
+      "name": "localeMatcher",
+      "type": "Nullable<'lookup' | 'best fit'>",
+      "default": null,
+      "description": "Specifies algorithm used to match locale. Check Intl.NumberFormat documentation for more information",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 91,
+      "since": null
+    },
+    {
+      "name": "max",
+      "type": "number",
+      "default": null,
+      "description": "Sets maximum value boundary",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 148,
+      "since": null
+    },
+    {
+      "name": "maxFractionDigits",
+      "type": "number",
+      "default": null,
+      "description": "Defines maximal number of fractional digits for control value",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 192,
+      "since": null
+    },
+    {
+      "name": "min",
+      "type": "number",
+      "default": null,
+      "description": "Sets minimum value boundary",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 144,
+      "since": null
+    },
+    {
+      "name": "minFractionDigits",
+      "type": "number",
+      "default": null,
+      "description": "Defines minimal number of fractional digits for control value",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 188,
+      "since": null
+    },
+    {
+      "name": "mode",
+      "type": "'decimal' | 'currency'",
+      "default": "'decimal'",
+      "description": "Sets formatting mode",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 168,
+      "since": null
+    },
+    {
+      "name": "name",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "Sets input name attribute",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 156,
+      "since": null
+    },
+    {
+      "name": "placeholder",
+      "type": "string",
+      "default": "''",
+      "description": "Hint displayed inside input before user writes value",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 212,
+      "since": null
+    },
+    {
+      "name": "readonly",
+      "type": "boolean",
+      "default": null,
+      "description": "Sets control in readonly mode",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 71,
+      "since": null
+    },
+    {
+      "name": "required",
+      "type": "boolean",
+      "default": "false",
+      "description": "If it is mandatory field",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 79,
+      "since": null
+    },
+    {
+      "name": "state",
+      "type": "'error' | 'default' | 'information' | 'warning' | 'success'",
+      "default": "'default'",
+      "description": "Sets state of the control. Can be `success`, `error`, `warning`, `information` or blank for default.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 172,
+      "since": null
+    },
+    {
+      "name": "stateMessage",
+      "type": "string | SafeHtml",
+      "default": null,
+      "description": "Holds the message with respect to state",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 176,
+      "since": null
+    },
+    {
+      "name": "step",
+      "type": "number",
+      "default": "1",
+      "description": "Sets input step value",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 152,
+      "since": null
+    },
+    {
+      "name": "textAlign",
+      "type": "'center' | 'left' | 'right'",
+      "default": null,
+      "description": "Horizontally aligns value inside input",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 208,
+      "since": null
+    },
+    {
+      "name": "unit",
+      "type": "string",
+      "default": null,
+      "description": "Custom unit displayed as a label next to the input",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 180,
+      "since": null
+    },
+    {
+      "name": "useGrouping",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether to use grouping when formatting value",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 184,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "onFocusIn",
+      "type": "void",
+      "default": null,
+      "description": "Emits event when input gets focused",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 217,
+      "since": null
+    },
+    {
+      "name": "onFocusOut",
+      "type": "void",
+      "default": null,
+      "description": "Emits event when input loses focus",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 222,
+      "since": null
+    },
+    {
+      "name": "valueChange",
+      "type": "null | number",
+      "default": null,
+      "description": "Emits new value when control value has changed",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 226,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "decrement",
+      "signature": "() => void",
+      "description": "Decrement input value by step value",
+      "deprecated": null,
+      "sourceLine": 365,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "increment",
+      "signature": "() => void",
+      "description": "Increment input value by step value",
+      "deprecated": null,
+      "sourceLine": 357,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

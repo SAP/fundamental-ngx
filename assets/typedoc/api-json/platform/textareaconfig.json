@@ -1,0 +1,31 @@
+{
+  "name": "TextAreaConfig",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "text-area.config.ts",
+  "sourceLine": 9,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/text-area/text-area.config.ts#L9",
+  "description": "Default options for platform Text Area",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "createProviderFactory",
+      "signature": "(obj: Partial<TextAreaConfig>) => () => TextAreaConfig",
+      "description": "Create Provider factory function",
+      "deprecated": null,
+      "sourceLine": 18,
+      "since": null,
+      "parameters": [
+        {
+          "name": "obj",
+          "type": "Partial<TextAreaConfig>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "() => TextAreaConfig"
+    }
+  ],
+  "inherited": null
+}

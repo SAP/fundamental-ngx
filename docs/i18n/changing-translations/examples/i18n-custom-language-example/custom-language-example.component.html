@@ -1,0 +1,58 @@
+<div class="custom-language-example">
+    <div class="fd-margin-top--sm">
+        <label fd-form-label>Select Translation Type:</label>
+        <fd-segmented-button [(ngModel)]="selectedLanguage" (ngModelChange)="changeLanguage($event)">
+            <button fd-button label="Built-in (English)" value="english"></button>
+            <button fd-button label="Custom: String Interpolation" value="simple"></button>
+            <button fd-button label="Custom: Function-based" value="advanced"></button>
+        </fd-segmented-button>
+    </div>
+
+    <!-- Show translated labels -->
+    <div class="fd-margin-top--md">
+        <label fd-form-label>Translated Labels:</label>
+        <div class="fd-margin-top--sm">
+            <div
+                class="fd-padding--md fd-margin-bottom--md"
+                style="border: 1px solid var(--sapGroup_ContentBorderColor)"
+            >
+                <code>coreDatePicker.dateInputLabel:</code>
+                <div class="fd-margin-top--tiny" style="font-weight: bold">{{ dateInputLabel() }}</div>
+            </div>
+
+            <div
+                class="fd-padding--md fd-margin-bottom--md"
+                style="border: 1px solid var(--sapGroup_ContentBorderColor)"
+            >
+                <code>coreDatePicker.dateRangeInputLabel:</code>
+                <div class="fd-margin-top--tiny" style="font-weight: bold">{{ dateRangeLabel() }}</div>
+            </div>
+
+            <div class="fd-padding--md" style="border: 1px solid var(--sapGroup_ContentBorderColor)">
+                <code>Using in button:</code>
+                <div class="fd-margin-top--sm">
+                    <button fd-button [label]="('coreDatePicker.displayCalendarToggleLabel' | fdTranslate)()"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive textarea showing counter translations -->
+    <div class="fd-margin-top--md">
+        <label fd-form-label for="textarea-custom-lang"
+            >Platform Textarea (watch counter messages change with different translation types):</label
+        >
+        <fdp-textarea
+            [id]="'textarea-custom-lang'"
+            name="textarea-custom-lang"
+            [maxLength]="15"
+            [showExceededText]="true"
+            placeholder="Type to see counter messages..."
+        >
+        </fdp-textarea>
+        <div class="fd-margin-top--sm" style="font-size: 0.875rem; color: var(--sapContent_LabelColor)">
+            💡 <strong>Tip:</strong> Type different amounts of text and switch between translation types to see how the
+            counter messages change. The "Function-based" option shows conditional logic!
+        </div>
+    </div>
+</div>

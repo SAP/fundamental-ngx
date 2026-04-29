@@ -1,0 +1,104 @@
+{
+  "name": "LayoutGridColDirective",
+  "selector": "[fd-layout-grid-col], [fdLayoutGridCol]",
+  "kind": "Directive",
+  "sourceFile": "layout-grid-col.directive.ts",
+  "sourceLine": 12,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/layout-grid/directives/layout-grid-col.directive.ts#L12",
+  "description": "",
+  "inputs": [
+    {
+      "name": "colGrow",
+      "type": "boolean",
+      "default": null,
+      "description": "Weather the column should take all available width",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 17,
+      "since": null
+    },
+    {
+      "name": "colLg",
+      "type": "number",
+      "default": null,
+      "description": "Defines the width of the element on the layout grid for large screen devices.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 23,
+      "since": null
+    },
+    {
+      "name": "colMd",
+      "type": "number",
+      "default": null,
+      "description": "Defines the width of the element on the layout grid for middle-size screen devices.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 20,
+      "since": null
+    },
+    {
+      "name": "colOffset",
+      "type": "number",
+      "default": null,
+      "description": "Defines the offset width of the element on the layout grid.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 29,
+      "since": null
+    },
+    {
+      "name": "colOffsetLg",
+      "type": "number",
+      "default": null,
+      "description": "Defines the offset width of the element on the layout grid for large screen devices.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 35,
+      "since": null
+    },
+    {
+      "name": "colOffsetMd",
+      "type": "number",
+      "default": null,
+      "description": "Defines the offset width of the element on the layout grid for middle-sized screen devices.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 32,
+      "since": null
+    },
+    {
+      "name": "colOffsetXl",
+      "type": "number",
+      "default": null,
+      "description": "Defines the offset width of the element on the layout grid for extra-large screen devices.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 38,
+      "since": null
+    },
+    {
+      "name": "colXl",
+      "type": "number",
+      "default": null,
+      "description": "Defines the width of the element on the layout grid for extra-large screen devices.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 26,
+      "since": null
+    },
+    {
+      "name": "fdLayoutGridCol",
+      "type": "NumberInput",
+      "default": null,
+      "description": "Defines the width of the element on the layout grid.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 14,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

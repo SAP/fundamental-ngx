@@ -1,0 +1,13 @@
+{
+  "name": "CardKpiAnalyticsContentDirective",
+  "selector": "[fd-card-kpi-analytics-content]",
+  "kind": "Directive",
+  "sourceFile": "card-kpi-analytics-content.directive.ts",
+  "sourceLine": 12,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/card/kpi/card-kpi-analytics-content.directive.ts#L12",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

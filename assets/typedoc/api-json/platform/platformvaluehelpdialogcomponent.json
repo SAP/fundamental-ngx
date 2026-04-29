@@ -1,0 +1,421 @@
+{
+  "name": "PlatformValueHelpDialogComponent",
+  "selector": "fdp-value-help-dialog",
+  "kind": "Component",
+  "sourceFile": "value-help-dialog.component.ts",
+  "sourceLine": 145,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/value-help-dialog/value-help-dialog/value-help-dialog.component.ts#L145",
+  "description": "",
+  "inputs": [
+    {
+      "name": "allowSelectAll",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether to allow users to select all table entries with one checkbox.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 244,
+      "since": null
+    },
+    {
+      "name": "conditionDisplayFn",
+      "type": "(item: VhdIncludedEntity | VhdExcludedEntity, filters: VhdFilter[]) => null | string",
+      "default": "defaultConditionDisplayFn",
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 216,
+      "since": null
+    },
+    {
+      "name": "defineStrategyLabels",
+      "type": "object",
+      "default": null,
+      "description": "Custom strategies labels\nAllowed keys: contains, equalTo, between, startsWith, endsWith, lessThan, lessThanEqual, greaterThan, greaterThanEqual, empty",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 250,
+      "since": null
+    },
+    {
+      "name": "dialogConfig",
+      "type": "DialogConfig<any>",
+      "default": "{}",
+      "description": "Dialog's custom config",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 186,
+      "since": null
+    },
+    {
+      "name": "dialogTitle",
+      "type": "string",
+      "default": null,
+      "description": "Dialog title",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 159,
+      "since": null
+    },
+    {
+      "name": "formatToken",
+      "type": "(value: VhdValueChangeEvent<T>) => void",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 212,
+      "since": null
+    },
+    {
+      "name": "headerId",
+      "type": "string",
+      "default": null,
+      "description": "Id attribute for dialog title",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 194,
+      "since": null
+    },
+    {
+      "name": "headingLevel",
+      "type": "HeadingLevel",
+      "default": null,
+      "description": "Heading level of the dialog title.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 295,
+      "since": null
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "default": null,
+      "description": "Id of the popover",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 148,
+      "since": null
+    },
+    {
+      "name": "initialTab",
+      "type": "VhdTab",
+      "default": "VhdTab.selectFromList",
+      "description": "Select from list tab activation",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 163,
+      "since": null
+    },
+    {
+      "name": "isOpenAdvanced",
+      "type": "boolean",
+      "default": "false",
+      "description": "Initial expand state for advanced search panel",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 171,
+      "since": null
+    },
+    {
+      "name": "loading",
+      "type": "boolean",
+      "default": null,
+      "description": "Loading state",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 240,
+      "since": null
+    },
+    {
+      "name": "maxShownInitialFilters",
+      "type": "number",
+      "default": "4",
+      "description": "Max shown initial filters on open. Desktop only",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 236,
+      "since": null
+    },
+    {
+      "name": "mobile",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the value help dialog should be view in mobile mode",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 208,
+      "since": null
+    },
+    {
+      "name": "searchSelection",
+      "type": "VdhTableSelection",
+      "default": "'multi'",
+      "description": "Selection mode for search table",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 224,
+      "since": null
+    },
+    {
+      "name": "searchTableMobileHeaders",
+      "type": "number",
+      "default": "2",
+      "description": "Count of default mobile header from search table",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 232,
+      "since": null
+    },
+    {
+      "name": "searchTablePageSize",
+      "type": "number",
+      "default": "20",
+      "description": "Items per page for pagination below search table",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 228,
+      "since": null
+    },
+    {
+      "name": "tabs",
+      "type": "'select' | 'both' | 'define'",
+      "default": "'both'",
+      "description": "Visible tabs",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 167,
+      "since": null
+    },
+    {
+      "name": "tokenValidator",
+      "type": "(value: VhdValueChangeEvent<any>) => boolean | Observable<boolean>",
+      "default": null,
+      "description": "Validator function. Called when user submits VHD dialog.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 220,
+      "since": null
+    },
+    {
+      "name": "tokenViewField",
+      "type": "string",
+      "default": null,
+      "description": "Field name for default render from data.\nRequired field if tokenizerFn is not exist.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 199,
+      "since": null
+    },
+    {
+      "name": "tokenizerFn",
+      "type": "(item: T) => string",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 204,
+      "since": null
+    },
+    {
+      "name": "uniqueKey",
+      "type": "string",
+      "default": null,
+      "description": "Unique key from the source field names. Required field.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 190,
+      "since": null
+    },
+    {
+      "name": "value",
+      "type": "VhdValue<T>",
+      "default": null,
+      "description": "Initial state of Value help dialog",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 152,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "onDataReceived",
+      "type": "void",
+      "default": null,
+      "description": "Event emitted when data loading is finished.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 278,
+      "since": null
+    },
+    {
+      "name": "onDataRequested",
+      "type": "void",
+      "default": null,
+      "description": "Event emitted when data loading is started.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 274,
+      "since": null
+    },
+    {
+      "name": "valueChange",
+      "type": "VhdValueChangeEvent<T>",
+      "default": null,
+      "description": "Event emitted when filters/tokens were changed.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 270,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "clearSelectedAndConditionItems",
+      "signature": "() => void",
+      "description": "Clear all selected items",
+      "deprecated": null,
+      "sourceLine": 506,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "dismiss",
+      "signature": "() => void",
+      "description": "Hide advanced search on mobile view and if it's opened\nClose dialog with null value;",
+      "deprecated": null,
+      "sourceLine": 603,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "filter",
+      "signature": "(onlySearch: boolean) => void",
+      "description": "Search by all filled filters, including the search term.",
+      "deprecated": null,
+      "sourceLine": 520,
+      "since": null,
+      "parameters": [
+        {
+          "name": "onlySearch",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "open",
+      "signature": "() => void",
+      "description": "Open dialog",
+      "deprecated": null,
+      "sourceLine": 458,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "removeCondition",
+      "signature": "(index: number) => void",
+      "description": "Remove condition item",
+      "deprecated": null,
+      "sourceLine": 555,
+      "since": null,
+      "parameters": [
+        {
+          "name": "index",
+          "type": "number",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "removeSelected",
+      "signature": "(index: number) => void",
+      "description": "Remove item from selected array",
+      "deprecated": null,
+      "sourceLine": 547,
+      "since": null,
+      "parameters": [
+        {
+          "name": "index",
+          "type": "number",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "search",
+      "signature": "() => void",
+      "description": "Search by only the search term.",
+      "deprecated": null,
+      "sourceLine": 513,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "searchAdvanced",
+      "signature": "() => void",
+      "description": "Apply search from advanced filters view, using when mobile view is active",
+      "deprecated": null,
+      "sourceLine": 540,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "success",
+      "signature": "() => void",
+      "description": "Close dialog with value;",
+      "deprecated": null,
+      "sourceLine": 570,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "switchTab",
+      "signature": "(type: null | VhdTab) => void",
+      "description": "Switch tab by type",
+      "deprecated": null,
+      "sourceLine": 563,
+      "since": null,
+      "parameters": [
+        {
+          "name": "type",
+          "type": "null | VhdTab",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "toggleAdvancedSearch",
+      "signature": "(state?: boolean) => void",
+      "description": "Toggle advanced search panel",
+      "deprecated": null,
+      "sourceLine": 491,
+      "since": null,
+      "parameters": [
+        {
+          "name": "state",
+          "type": "boolean",
+          "description": "",
+          "optional": true
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

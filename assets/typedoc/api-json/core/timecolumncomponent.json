@@ -1,0 +1,180 @@
+{
+  "name": "TimeColumnComponent",
+  "selector": "fd-time-column",
+  "kind": "Component",
+  "sourceFile": "time-column.component.ts",
+  "sourceLine": 52,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/time/time-column/time-column.component.ts#L52",
+  "description": "",
+  "inputs": [
+    {
+      "name": "columnTranslationsPreset",
+      "type": "'seconds' | 'minutes' | 'hours' | 'period'",
+      "default": null,
+      "description": "I18n and labels",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 113,
+      "since": null
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "default": null,
+      "description": "Id of column, initiated with some default value",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 105,
+      "since": null
+    },
+    {
+      "name": "rows",
+      "type": "T[]",
+      "default": "[]",
+      "description": "items in row",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 57,
+      "since": null
+    },
+    {
+      "name": "spinners",
+      "type": "boolean",
+      "default": "true",
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 64,
+      "since": null
+    },
+    {
+      "name": "timeConfig",
+      "type": "Nullable<TimeColumnConfig>",
+      "default": null,
+      "description": "I18n and labels",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 109,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "activeStateChange",
+      "type": "void",
+      "default": null,
+      "description": "Event emitted, when certain column is activated",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 141,
+      "since": null
+    },
+    {
+      "name": "activeValueChange",
+      "type": "TimeColumnItemOutput<T>",
+      "default": null,
+      "description": "Event emitted, when active item is changed, by carousel",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 137,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "activeChangedHandle",
+      "signature": "(output: PanEndOutput) => void",
+      "description": "Method that handles active item change",
+      "deprecated": null,
+      "sourceLine": 341,
+      "since": null,
+      "parameters": [
+        {
+          "name": "output",
+          "type": "PanEndOutput",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "focus",
+      "signature": "() => void",
+      "description": "Focus on column",
+      "deprecated": null,
+      "sourceLine": 399,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "handleDrag",
+      "signature": "(isDragging: boolean) => void",
+      "description": "It prevents from accidentally change the item by click event",
+      "deprecated": null,
+      "sourceLine": 336,
+      "since": null,
+      "parameters": [
+        {
+          "name": "isDragging",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "pick",
+      "signature": "(item: CarouselItemDirective<T>, index: number) => void",
+      "description": "Method that changes active item and triggers carousel scroll",
+      "deprecated": null,
+      "sourceLine": 362,
+      "since": null,
+      "parameters": [
+        {
+          "name": "item",
+          "type": "CarouselItemDirective<T>",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "index",
+          "type": "number",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "scrollDown",
+      "signature": "() => void",
+      "description": "Method triggered by keyboard, or decrement button",
+      "deprecated": null,
+      "sourceLine": 387,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "scrollUp",
+      "signature": "(event?: MouseEvent) => void",
+      "description": "Method triggered by keyboard, or increment button",
+      "deprecated": null,
+      "sourceLine": 371,
+      "since": null,
+      "parameters": [
+        {
+          "name": "event",
+          "type": "MouseEvent",
+          "description": "",
+          "optional": true
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

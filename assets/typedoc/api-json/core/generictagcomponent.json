@@ -1,0 +1,54 @@
+{
+  "name": "GenericTagComponent",
+  "selector": "[fd-generic-tag]",
+  "kind": "Component",
+  "sourceFile": "generic-tag.component.ts",
+  "sourceLine": 37,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/generic-tag/generic-tag.component.ts#L37",
+  "description": "",
+  "inputs": [
+    {
+      "name": "ariaRoleDescription",
+      "type": "string",
+      "default": null,
+      "description": "Aria defines role description for the Generic Tag",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 61,
+      "since": null
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "default": null,
+      "description": "Required input\nThe KPI Name of the Generic tag. Standard text.\nAlways use a meaningful title. Keep it simple and try to use no more than 3 words.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 50,
+      "since": null
+    },
+    {
+      "name": "type",
+      "type": "null | GenericTagType",
+      "default": null,
+      "description": "The type of the Generic Tag.\nCan be one of the following: 'error' | 'success' | 'warning' | 'information'.\nFor default Generic Tag omit this property.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 43,
+      "since": null
+    },
+    {
+      "name": "value",
+      "type": "null | string",
+      "default": null,
+      "description": "The KPI Value of the Generic tag.\nThe value represents the numeric (key) attribute and its unit.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 56,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

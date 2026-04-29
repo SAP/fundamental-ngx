@@ -1,0 +1,28 @@
+{
+  "name": "AvatarGroupLegacyOverflowItemDirective",
+  "selector": "[fd-avatar-group-legacy-overflow-item]",
+  "kind": "Directive",
+  "sourceFile": "avatar-group-legacy-overflow-item.directive.ts",
+  "sourceLine": 10,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/avatar-group-legacy/directives/avatar-group-legacy-overflow-item.directive.ts#L10",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": {
+    "from": "AvatarGroupLegacyItemDirective",
+    "inputs": [],
+    "methods": [
+      {
+        "name": "onClick",
+        "signature": "() => void",
+        "description": "Handler for mouse events",
+        "deprecated": null,
+        "sourceLine": 29,
+        "since": null,
+        "parameters": [],
+        "returnType": "void"
+      }
+    ]
+  }
+}

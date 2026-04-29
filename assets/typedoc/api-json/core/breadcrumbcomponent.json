@@ -1,0 +1,89 @@
+{
+  "name": "BreadcrumbComponent",
+  "selector": "fd-breadcrumb",
+  "kind": "Component",
+  "sourceFile": "breadcrumb.component.ts",
+  "sourceLine": 100,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/breadcrumb/breadcrumb.component.ts#L100",
+  "description": "Breadcrumb parent wrapper directive. Must have breadcrumb item child directives.\n\n```html\n<fd-breadcrumb>\n    <fd-breadcrumb-item>\n        <a fd-link [routerLink]=\"'#'\">Breadcrumb Link</a>\n    </fd-breadcrumb-item>\n</fd-breadcrumb>\n```",
+  "inputs": [
+    {
+      "name": "reverse",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to append items to the overflow dropdown in reverse order. Default is true.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 103,
+      "since": null
+    },
+    {
+      "name": "separatorStyle",
+      "type": "BreadcrumbSeparatorStyle",
+      "default": null,
+      "description": "Separator style for the breadcrumb items.\nCan be 'backslash' | 'double-slash' | 'double-backslash' | 'greater-than' | 'double-greater-than'\nOmit for default (slash)",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 138,
+      "since": null
+    },
+    {
+      "name": "tabIndex",
+      "type": "string",
+      "default": "'0'",
+      "description": "Tabindex of the breadcrumb.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 107,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "hiddenItemsCount",
+      "type": "number",
+      "default": null,
+      "description": "Event emitted when hidden items count is changed.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 119,
+      "since": null
+    },
+    {
+      "name": "visibleItemsCount",
+      "type": "number",
+      "default": null,
+      "description": "Event emitted when visible items count is changed.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 113,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "itemClicked",
+      "signature": "(breadcrumbItem: BreadcrumbItemComponent, $event: Event) => void",
+      "description": "Function that handles click, touch, enter and space events.",
+      "deprecated": null,
+      "sourceLine": 195,
+      "since": null,
+      "parameters": [
+        {
+          "name": "breadcrumbItem",
+          "type": "BreadcrumbItemComponent",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "$event",
+          "type": "Event",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

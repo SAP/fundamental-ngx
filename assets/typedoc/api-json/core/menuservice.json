@@ -1,0 +1,152 @@
+{
+  "name": "MenuService",
+  "selector": null,
+  "kind": "Service",
+  "sourceFile": "menu.service.ts",
+  "sourceLine": 19,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/menu/services/menu.service.ts#L19",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "addKeyboardSupport",
+      "signature": "(elementRef: ElementRef<any>) => void",
+      "description": "Adds Menu keyboard support",
+      "deprecated": null,
+      "sourceLine": 133,
+      "since": null,
+      "parameters": [
+        {
+          "name": "elementRef",
+          "type": "ElementRef<any>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "rebuildMenu",
+      "signature": "() => void",
+      "description": "- Updates the structure of the menu\n - Validates Active Node Path\n - Validates Focused Node",
+      "deprecated": null,
+      "sourceLine": 117,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "removeKeyboardSupport",
+      "signature": "() => void",
+      "description": "Removes Menu keyboard support",
+      "deprecated": null,
+      "sourceLine": 139,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "resetMenuState",
+      "signature": "() => void",
+      "description": "Clears Active Node Path and resets Focused Node",
+      "deprecated": null,
+      "sourceLine": 108,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "setActive",
+      "signature": "(isActive: boolean, menuItem: null | MenuItemComponent) => void",
+      "description": "Sets state of a given menu item",
+      "deprecated": null,
+      "sourceLine": 78,
+      "since": null,
+      "parameters": [
+        {
+          "name": "isActive",
+          "type": "boolean",
+          "description": "Whether should be set as active or inactive",
+          "optional": false
+        },
+        {
+          "name": "menuItem",
+          "type": "null | MenuItemComponent",
+          "description": "`MenuItemComponent` that should be set as active or inactive",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setFocused",
+      "signature": "(menuItem: null | MenuItemComponent) => void",
+      "description": "Sets given menu item as focused",
+      "deprecated": null,
+      "sourceLine": 68,
+      "since": null,
+      "parameters": [
+        {
+          "name": "menuItem",
+          "type": "null | MenuItemComponent",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setInactiveSiblingMenuItem",
+      "signature": "(menuItem: MenuItemComponent) => void",
+      "description": "Close active sibling submenu if any",
+      "deprecated": null,
+      "sourceLine": 96,
+      "since": null,
+      "parameters": [
+        {
+          "name": "menuItem",
+          "type": "MenuItemComponent",
+          "description": "to look for active siblings",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setMenuComponent",
+      "signature": "(menu: MenuComponent) => void",
+      "description": "Initializes menu service based on given Menu Component",
+      "deprecated": null,
+      "sourceLine": 102,
+      "since": null,
+      "parameters": [
+        {
+          "name": "menu",
+          "type": "MenuComponent",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setMenuMode",
+      "signature": "(value: boolean) => void",
+      "description": "Sets menu mode",
+      "deprecated": null,
+      "sourceLine": 63,
+      "since": null,
+      "parameters": [
+        {
+          "name": "value",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

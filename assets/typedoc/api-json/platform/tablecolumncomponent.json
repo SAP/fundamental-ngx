@@ -1,0 +1,194 @@
+{
+  "name": "TableColumnComponent",
+  "selector": "fdp-column",
+  "kind": "Component",
+  "sourceFile": "table-column.component.ts",
+  "sourceLine": 58,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/table/components/table-column/table-column.component.ts#L58",
+  "description": "The component that represents a table column.\n```html\n<fdp-column\n name=\"name\"\n key=\"name\"\n label=\"Name\"\n align=\"start\">\n</fdp-column>\n\n<fdp-column\n name=\"price\"\n key=\"price.value\">\n <fdp-table-header *fdpHeaderCellDef>Price</fdp-table-header>\n <fdp-table-cell *fdpCellDef=\"let item\">\n  {{item.price.value}} {{item.price.currency}}\n </fdp-table-cell>\n</fdp-column>\n```",
+  "inputs": [
+    {
+      "name": "align",
+      "type": "ColumnAlignValue",
+      "default": "'start'",
+      "description": "Cell text alignment.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 86,
+      "since": null
+    },
+    {
+      "name": "announceEmptyCell",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether to announce empty cells to screen readers. Default is true.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 153,
+      "since": null
+    },
+    {
+      "name": "applyText",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether to apply fd-table-text (text-shadow) to the cell content, if disabled noWrap has no effect.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 146,
+      "since": null
+    },
+    {
+      "name": "dataType",
+      "type": "FilterableColumnDataType",
+      "default": "FilterableColumnDataType.STRING",
+      "description": "Data type the column represents. Default is 'string'",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 105,
+      "since": null
+    },
+    {
+      "name": "endFreezable",
+      "type": "boolean",
+      "default": "false",
+      "description": "Toggles freeze feature for the column.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 124,
+      "since": null
+    },
+    {
+      "name": "filterSelectOptions",
+      "type": "string[]",
+      "default": "[]",
+      "description": "Optional array of available filter options.\nProviding values to this input will cause the filter to change from a text-type input to a select-type input.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 112,
+      "since": null
+    },
+    {
+      "name": "filterable",
+      "type": "boolean",
+      "default": "false",
+      "description": "Toggles filter feature for the column.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 94,
+      "since": null
+    },
+    {
+      "name": "footerCellTemplate",
+      "type": "Nullable<TemplateRef<any>>",
+      "default": null,
+      "description": "Column footer cell template, to be used when the footer cell requires more complex content than only text.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 83,
+      "since": null
+    },
+    {
+      "name": "footerLabel",
+      "type": "string",
+      "default": null,
+      "description": "Column footer label, to be used when the footer contains only text.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 79,
+      "since": null
+    },
+    {
+      "name": "freezable",
+      "type": "boolean",
+      "default": "false",
+      "description": "Toggles freeze feature for the column.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 120,
+      "since": null
+    },
+    {
+      "name": "groupable",
+      "type": "boolean",
+      "default": "false",
+      "description": "Toggles grouping feature for the column.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 116,
+      "since": null
+    },
+    {
+      "name": "key",
+      "type": "string",
+      "default": null,
+      "description": "Column data accessor.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 65,
+      "since": null
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "default": null,
+      "description": "Column unique identifier.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 61,
+      "since": null
+    },
+    {
+      "name": "noWrap",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the text should wrap, when text is too long for 1 line",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 142,
+      "since": null
+    },
+    {
+      "name": "nonInteractive",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the table cell inside table header should be non-interactive.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 128,
+      "since": null
+    },
+    {
+      "name": "role",
+      "type": "'cell' | 'rowheader' | 'gridcell'",
+      "default": "'gridcell'",
+      "description": "Column role attribute.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 150,
+      "since": null
+    },
+    {
+      "name": "sortable",
+      "type": "boolean",
+      "default": "false",
+      "description": "Toggles sort feature for the column.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 90,
+      "since": null
+    },
+    {
+      "name": "visible",
+      "type": "boolean",
+      "default": "true",
+      "description": "Initial visibility state of the column. Default `true`.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 98,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

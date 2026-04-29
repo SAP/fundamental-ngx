@@ -1,0 +1,178 @@
+{
+  "name": "TableRowService",
+  "selector": null,
+  "kind": "Service",
+  "sourceFile": "table-row.service.ts",
+  "sourceLine": 31,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/table-helpers/services/table-row.service.ts#L31",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "cellClicked",
+      "signature": "(evt: CellClickedModel) => void",
+      "description": "`cellClicked$` stream trigger.",
+      "deprecated": null,
+      "sourceLine": 98,
+      "since": null,
+      "parameters": [
+        {
+          "name": "evt",
+          "type": "CellClickedModel",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "cellFocused",
+      "signature": "(evt: FocusableItemPosition) => void",
+      "description": "`cellFocused$` stream trigger.",
+      "deprecated": null,
+      "sourceLine": 108,
+      "since": null,
+      "parameters": [
+        {
+          "name": "evt",
+          "type": "FocusableItemPosition",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "groupTableRows",
+      "signature": "(sourceRows: TableRow<any>[], groups: Iterable<CollectionGroup, any, any>, groupRulesMap: Map<string, CollectionGroup>) => TableRow<any>[]",
+      "description": "Groups the table rows.",
+      "deprecated": null,
+      "sourceLine": 118,
+      "since": null,
+      "parameters": [
+        {
+          "name": "sourceRows",
+          "type": "TableRow<any>[]",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "groups",
+          "type": "Iterable<CollectionGroup, any, any>",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "groupRulesMap",
+          "type": "Map<string, CollectionGroup>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "TableRow<any>[]"
+    },
+    {
+      "name": "loadChildRows",
+      "signature": "(rows: TableRow<T> | TableRow<T>[]) => void",
+      "description": "Triggers stream to load child items for a particular rows.",
+      "deprecated": null,
+      "sourceLine": 158,
+      "since": null,
+      "parameters": [
+        {
+          "name": "rows",
+          "type": "TableRow<T> | TableRow<T>[]",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "removeEditableCells",
+      "signature": "(row: TableRow<any>) => void",
+      "description": "Removes editable cells of particular row.",
+      "deprecated": null,
+      "sourceLine": 153,
+      "since": null,
+      "parameters": [
+        {
+          "name": "row",
+          "type": "TableRow<any>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "scrollToOverlappedCell",
+      "signature": "() => void",
+      "description": "`scrollToOverlappedCell$` stream trigger.",
+      "deprecated": null,
+      "sourceLine": 93,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "toggleAllSelectableRows",
+      "signature": "(selectAll: boolean) => void",
+      "description": "`toggleAllSelectableRows$` stream trigger.",
+      "deprecated": null,
+      "sourceLine": 113,
+      "since": null,
+      "parameters": [
+        {
+          "name": "selectAll",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "toggleRow",
+      "signature": "(evt: ToggleRowModel) => void",
+      "description": "`toggleRow$` stream trigger.",
+      "deprecated": null,
+      "sourceLine": 88,
+      "since": null,
+      "parameters": [
+        {
+          "name": "evt",
+          "type": "ToggleRowModel",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "updateEditableCells",
+      "signature": "(row: TableRow<any>, cells: EditableTableCell[]) => void",
+      "description": "Sets editable cells for particular row.",
+      "deprecated": null,
+      "sourceLine": 148,
+      "since": null,
+      "parameters": [
+        {
+          "name": "row",
+          "type": "TableRow<any>",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "cells",
+          "type": "EditableTableCell[]",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

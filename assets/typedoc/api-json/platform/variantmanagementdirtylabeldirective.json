@@ -1,0 +1,13 @@
+{
+  "name": "VariantManagementDirtyLabelDirective",
+  "selector": "[fdpVariantManagementDirtyLabel]",
+  "kind": "Directive",
+  "sourceFile": "variant-management-dirty-label.directive.ts",
+  "sourceLine": 19,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/variant-management/directives/variant-management-dirty-label.directive.ts#L19",
+  "description": "Directive used to change dirty label of Variant Management component.\n\nUsage:\n\n```\nhtml\n<fdp-variant-management>\n    <span *fdpVariantManagementDirtyLabel>I'm dirty</span>\n</fdp-variant-management>\n```",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

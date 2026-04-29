@@ -1,0 +1,64 @@
+{
+  "name": "AvatarGroupComponent",
+  "selector": "fd-avatar-group",
+  "kind": "Component",
+  "sourceFile": "avatar-group.component.ts",
+  "sourceLine": 64,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/avatar-group/avatar-group.component.ts#L64",
+  "description": "",
+  "inputs": [
+    {
+      "name": "ariaLabel",
+      "type": "string",
+      "default": null,
+      "description": "Aria label for the avatar group container.\nWhen not provided, a default label is generated from the i18n `coreAvatarGroup.ariaLabelGroup` key\nfor group type, or `coreAvatarGroup.ariaLabelIndividual` for individual type,\nusing the current displayed and hidden avatar counts as context.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 106,
+      "since": null
+    },
+    {
+      "name": "orientation",
+      "type": "AvatarGroupOrientation",
+      "default": "'horizontal'",
+      "description": "Orientation of the AvatarGroup control.\n\n`horizontal`: The avatars are displayed horizontally.\n`vertical`: The avatars are displayed vertically.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 81,
+      "since": null
+    },
+    {
+      "name": "overflowPopoverTitle",
+      "type": "string",
+      "default": null,
+      "description": "The title which is displayed when user opens the overflow popover.\nThis takes effect only when default overflow popover body is used,\notherwise the title should be set on the custom overflow popover body component.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 97,
+      "since": null
+    },
+    {
+      "name": "size",
+      "type": "Size",
+      "default": "'l'",
+      "description": "The spacing between the items depends on the size of the avatars in the group.\nThe size is also used for the default overflow button.\n`xs`, `s`, `m`, `l`, `xl`",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 89,
+      "since": null
+    },
+    {
+      "name": "type",
+      "type": "AvatarGroupType",
+      "default": "'individual'",
+      "description": "The AvatarGroup control has two group types:\n\n`group`: The avatars are displayed as partially overlapped on top of each other and the entire group has one click/tap area.\n`individual`: The avatars are displayed side-by-side and each avatar has its own click/tap area.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 72,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

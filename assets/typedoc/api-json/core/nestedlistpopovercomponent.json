@@ -1,0 +1,31 @@
+{
+  "name": "NestedListPopoverComponent",
+  "selector": "fd-nested-list-popover",
+  "kind": "Component",
+  "sourceFile": "nested-list-popover.component.ts",
+  "sourceLine": 41,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/nested-list/nested-list-popover/nested-list-popover.component.ts#L41",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "handleOpenChange",
+      "signature": "(open: boolean) => void",
+      "description": "Method called, when open state is changed, from popover component (escape key, outside click).",
+      "deprecated": null,
+      "sourceLine": 99,
+      "since": null,
+      "parameters": [
+        {
+          "name": "open",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

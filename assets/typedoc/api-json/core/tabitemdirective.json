@@ -1,0 +1,54 @@
+{
+  "name": "TabItemDirective",
+  "selector": "[fd-tab-item]",
+  "kind": "Directive",
+  "sourceFile": "tab-item.directive.ts",
+  "sourceLine": 23,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/tabs/tab-item/tab-item.directive.ts#L23",
+  "description": "Tab Item is optional wrapper for Tab link\n\n```html\n<div fd-tab-item>\n   <a fd-tab-link>\n       link\n   </a>\n</div>\n```",
+  "inputs": [
+    {
+      "name": "class",
+      "type": "string",
+      "default": "''",
+      "description": "Apply user custom styles",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 26,
+      "since": null
+    },
+    {
+      "name": "fdTabItemClass",
+      "type": "boolean",
+      "default": "true",
+      "description": "Defines if there will be added fd-tabs__item class. Enabled by default.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 44,
+      "since": null
+    },
+    {
+      "name": "header",
+      "type": "boolean",
+      "default": null,
+      "description": "This should be used only on `filterMode`. Flag should be enable for first item",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 34,
+      "since": null
+    },
+    {
+      "name": "tabItemState",
+      "type": "Nullable<TabItemState>",
+      "default": null,
+      "description": "Semantic type of the tab item",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 30,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

@@ -1,0 +1,37 @@
+{
+  "name": "ValueByPathPipe",
+  "selector": null,
+  "kind": "Pipe",
+  "sourceFile": "value-by-path.pipe.ts",
+  "sourceLine": 5,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cdk/utils/pipes/value-by-path.pipe.ts#L5",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "transform",
+      "signature": "(value: any, key: string) => any",
+      "description": "Get value by path.",
+      "deprecated": null,
+      "sourceLine": 7,
+      "since": null,
+      "parameters": [
+        {
+          "name": "value",
+          "type": "any",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "key",
+          "type": "string",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "any"
+    }
+  ],
+  "inherited": null
+}

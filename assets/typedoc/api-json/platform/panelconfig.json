@@ -1,0 +1,31 @@
+{
+  "name": "PanelConfig",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "panel.config.ts",
+  "sourceLine": 10,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/panel/panel.config.ts#L10",
+  "description": "Default options for platform panel",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "createProviderFactory",
+      "signature": "(obj: Partial<PanelConfig>) => () => PanelConfig",
+      "description": "Create Provider factory function",
+      "deprecated": null,
+      "sourceLine": 35,
+      "since": null,
+      "parameters": [
+        {
+          "name": "obj",
+          "type": "Partial<PanelConfig>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "() => PanelConfig"
+    }
+  ],
+  "inherited": null
+}

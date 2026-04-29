@@ -1,0 +1,45 @@
+{
+  "name": "SettingsGeneratorComponent",
+  "selector": "fdp-settings-generator",
+  "kind": "Component",
+  "sourceFile": "settings-generator.component.ts",
+  "sourceLine": 53,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/settings-generator/settings-generator.component.ts#L53",
+  "description": "",
+  "inputs": [
+    {
+      "name": "height",
+      "type": "string",
+      "default": null,
+      "description": "Container height.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 86,
+      "since": null
+    },
+    {
+      "name": "width",
+      "type": "string",
+      "default": null,
+      "description": "Container width.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 91,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "submit",
+      "signature": "() => Observable<SettingsGeneratorReturnValue>",
+      "description": "Programmatically submit inner forms of the settings generator.",
+      "deprecated": null,
+      "sourceLine": 149,
+      "since": null,
+      "parameters": [],
+      "returnType": "Observable<SettingsGeneratorReturnValue>"
+    }
+  ],
+  "inherited": null
+}

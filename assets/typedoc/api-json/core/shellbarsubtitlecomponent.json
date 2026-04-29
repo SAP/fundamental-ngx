@@ -1,0 +1,13 @@
+{
+  "name": "ShellbarSubtitleComponent",
+  "selector": "fd-shellbar-subtitle",
+  "kind": "Component",
+  "sourceFile": "shellbar-subtitle.component.ts",
+  "sourceLine": 28,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/shellbar/shellbar-subtitle/shellbar-subtitle.component.ts#L28",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

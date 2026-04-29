@@ -1,0 +1,74 @@
+{
+  "name": "FeedListComponent",
+  "selector": "fd-feed-list",
+  "kind": "Component",
+  "sourceFile": "feed-list.component.ts",
+  "sourceLine": 29,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/feed-list-item/components/list/feed-list.component.ts#L29",
+  "description": "",
+  "inputs": [
+    {
+      "name": "ariaLabel",
+      "type": "string",
+      "default": "''",
+      "description": "Sets the `aria-label` attribute to the element.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 37,
+      "since": null
+    },
+    {
+      "name": "ariaLabelledby",
+      "type": "string",
+      "default": null,
+      "description": "aria-labelledby for element describing.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 42,
+      "since": null
+    },
+    {
+      "name": "borderLess",
+      "type": "boolean",
+      "default": "false",
+      "description": "It removes border if items are displaying in a group.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 57,
+      "since": null
+    },
+    {
+      "name": "class",
+      "type": "string",
+      "default": null,
+      "description": "User's custom classes",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 32,
+      "since": null
+    },
+    {
+      "name": "isGroup",
+      "type": "boolean",
+      "default": "true",
+      "description": "Feed list items will be display in a group.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 52,
+      "since": null
+    },
+    {
+      "name": "mobile",
+      "type": "boolean",
+      "default": "false",
+      "description": "Apply mobile view",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 47,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

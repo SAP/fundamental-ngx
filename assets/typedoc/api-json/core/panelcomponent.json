@@ -1,0 +1,126 @@
+{
+  "name": "PanelComponent",
+  "selector": "fd-panel",
+  "kind": "Component",
+  "sourceFile": "panel.component.ts",
+  "sourceLine": 39,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/panel/panel.component.ts#L39",
+  "description": "The panel is a container for grouping and displaying information\nTypes: Expandable (default) and Fixed\nModes: Tablet/Mobile (default) and Desktop (compact)",
+  "inputs": [
+    {
+      "name": "class",
+      "type": "string",
+      "default": null,
+      "description": "User's custom classes",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 41,
+      "since": null
+    },
+    {
+      "name": "expandAriaLabel",
+      "type": "null | string",
+      "default": null,
+      "description": "aria-label of the expand button",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 53,
+      "since": null
+    },
+    {
+      "name": "expandAriaLabelledBy",
+      "type": "null | string",
+      "default": null,
+      "description": "aria-labelledby of the expand button",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 56,
+      "since": null
+    },
+    {
+      "name": "expandId",
+      "type": "string",
+      "default": null,
+      "description": "Id of the expand button",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 50,
+      "since": null
+    },
+    {
+      "name": "expanded",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the Panel Content is expanded",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 59,
+      "since": null
+    },
+    {
+      "name": "fixed",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the Panel is fixed",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 44,
+      "since": null
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "default": null,
+      "description": "Id of the panel element.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 47,
+      "since": null
+    },
+    {
+      "name": "noRadius",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the panel has no border radius",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 65,
+      "since": null
+    },
+    {
+      "name": "transparent",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the panel (header and content) is transparent",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 62,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "expandedChange",
+      "type": "EventEmitter<boolean>",
+      "default": null,
+      "description": "Whether the Panel Content is expanded",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 59,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "toggleExpand",
+      "signature": "() => void",
+      "description": "Methods that toggles the Panel Content",
+      "deprecated": null,
+      "sourceLine": 87,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

@@ -1,0 +1,34 @@
+{
+  "name": "SideNavigationComponent",
+  "selector": "fd-side-nav",
+  "kind": "Component",
+  "sourceFile": "side-navigation.component.ts",
+  "sourceLine": 46,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/side-navigation/side-navigation.component.ts#L46",
+  "description": "",
+  "inputs": [
+    {
+      "name": "collapseWidth",
+      "type": "number",
+      "default": null,
+      "description": "The screen width, in pixels, at which to automatically collapse the side navigation on window resize.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 62,
+      "since": null
+    },
+    {
+      "name": "sideNavigationConfiguration",
+      "type": "Nullable<SideNavigationModel>",
+      "default": null,
+      "description": "Side navigation configuration, to pass whole model object, instead of creating HTML from scratch",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 51,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

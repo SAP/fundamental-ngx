@@ -1,0 +1,59 @@
+{
+  "name": "MessageBoxService",
+  "selector": null,
+  "kind": "Service",
+  "sourceFile": "message-box.service.ts",
+  "sourceLine": 16,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/message-box/services/message-box.service.ts#L16",
+  "description": "Service used to create a message box.",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "open",
+      "signature": "(content: MessageBoxContentType, config?: MessageBoxConfig<T>) => MessageBoxRef<T>",
+      "description": "Opens a message box component with provided content.",
+      "deprecated": null,
+      "sourceLine": 31,
+      "since": null,
+      "parameters": [
+        {
+          "name": "content",
+          "type": "MessageBoxContentType",
+          "description": "Content of the message box component.",
+          "optional": false
+        },
+        {
+          "name": "config",
+          "type": "MessageBoxConfig<T>",
+          "description": "Configuration of the message box component.",
+          "optional": true
+        }
+      ],
+      "returnType": "MessageBoxRef<T>"
+    }
+  ],
+  "inherited": {
+    "from": "DialogBaseService",
+    "inputs": [],
+    "methods": [
+      {
+        "name": "dismissAll",
+        "signature": "(reason?: string) => void",
+        "description": "Dismisses all currently open dialogs.",
+        "deprecated": null,
+        "sourceLine": 44,
+        "since": null,
+        "parameters": [
+          {
+            "name": "reason",
+            "type": "string",
+            "description": "",
+            "optional": true
+          }
+        ],
+        "returnType": "void"
+      }
+    ]
+  }
+}

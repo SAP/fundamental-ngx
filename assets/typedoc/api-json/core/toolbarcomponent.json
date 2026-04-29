@@ -1,0 +1,115 @@
+{
+  "name": "ToolbarComponent",
+  "selector": "fd-toolbar",
+  "kind": "Component",
+  "sourceFile": "toolbar.component.ts",
+  "sourceLine": 95,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/toolbar/toolbar.component.ts#L95",
+  "description": "",
+  "inputs": [
+    {
+      "name": "active",
+      "type": "boolean",
+      "default": "false",
+      "description": "Determines if toolbar should has active state (only when fdType == 'info')\nDefault value: false",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 135,
+      "since": null
+    },
+    {
+      "name": "class",
+      "type": "string",
+      "default": null,
+      "description": "Property allows user to pass additional class",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 105,
+      "since": null
+    },
+    {
+      "name": "clearBorder",
+      "type": "boolean",
+      "default": "false",
+      "description": "Determines if toolbar should clear border bottom\nDefault value: false",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 141,
+      "since": null
+    },
+    {
+      "name": "fdType",
+      "type": "ToolbarType",
+      "default": "'solid'",
+      "description": "Determines the type of toolbar\nAvailable options: 'solid' | 'transparent' | 'auto' | 'info'\nDefault value: 'solid'",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 125,
+      "since": null
+    },
+    {
+      "name": "forceOverflow",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether all items should be inside overflow",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 145,
+      "since": null
+    },
+    {
+      "name": "tabindex",
+      "type": "number",
+      "default": "-1",
+      "description": "Tabindex of the toolbar element, to be used when fdType=\"info\"",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 149,
+      "since": null
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "default": null,
+      "description": "The title for the toolbar.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 129,
+      "since": null
+    },
+    {
+      "name": "titleId",
+      "type": "string",
+      "default": null,
+      "description": "The ID of the toolbar title",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 100,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "detectChanges",
+      "signature": "() => void",
+      "description": "Change detection reference",
+      "deprecated": null,
+      "sourceLine": 387,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "updateCollapsibleItems",
+      "signature": "() => void",
+      "description": "Method triggering collapsible toolbar",
+      "deprecated": null,
+      "sourceLine": 392,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

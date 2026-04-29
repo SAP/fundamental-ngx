@@ -1,0 +1,13 @@
+{
+  "name": "TileSubtitleDirective",
+  "selector": "[fdTileContent], [fd-tile-content]",
+  "kind": "Directive",
+  "sourceFile": "tile.directives.ts",
+  "sourceLine": 78,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/tile/directives/tile.directives.ts#L78",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

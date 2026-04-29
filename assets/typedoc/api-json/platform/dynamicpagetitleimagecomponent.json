@@ -1,0 +1,13 @@
+{
+  "name": "DynamicPageTitleImageComponent",
+  "selector": "fdp-dynamic-page-title-image",
+  "kind": "Component",
+  "sourceFile": "dynamic-page-title-image.component.ts",
+  "sourceLine": 14,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/dynamic-page/dynamic-page-header/title/dynamic-page-title-image.component.ts#L14",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

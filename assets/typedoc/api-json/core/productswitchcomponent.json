@@ -1,0 +1,145 @@
+{
+  "name": "ProductSwitchComponent",
+  "selector": "fd-product-switch",
+  "kind": "Component",
+  "sourceFile": "product-switch.component.ts",
+  "sourceLine": 49,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/product-switch/product-switch/product-switch.component.ts#L49",
+  "description": "",
+  "inputs": [
+    {
+      "name": "closeOnEscapeKey",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the product switch should close when the escape key is pressed.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 57,
+      "since": null
+    },
+    {
+      "name": "closeOnOutsideClick",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the product switch should close when a click is made outside its boundaries.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 60,
+      "since": null
+    },
+    {
+      "name": "disableScrollbar",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether to wrap content with fd-scrollbar directive.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 66,
+      "since": null
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the product switch is disabled.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 54,
+      "since": null
+    },
+    {
+      "name": "focusAutoCapture",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the product switch should automatically move focus into the trapped region.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 75,
+      "since": null
+    },
+    {
+      "name": "focusTrapped",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the product switch should trap focus within its boundaries.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 72,
+      "since": null
+    },
+    {
+      "name": "isOpen",
+      "type": "boolean",
+      "default": null,
+      "description": "Two-way binding for product switch open state.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 78,
+      "since": null
+    },
+    {
+      "name": "noArrow",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the product switch dropdown should have an arrow.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 63,
+      "since": null
+    },
+    {
+      "name": "placement",
+      "type": "Placement",
+      "default": null,
+      "description": "Placement of the product switch dropdown.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 51,
+      "since": null
+    },
+    {
+      "name": "triggers",
+      "type": "string | TriggerConfig[]",
+      "default": null,
+      "description": "The trigger events that will open/close the product switch.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 69,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "beforeOpen",
+      "type": "void",
+      "default": null,
+      "description": "Event emitted right before the product switch is being opened.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 81,
+      "since": null
+    },
+    {
+      "name": "isOpenChange",
+      "type": "EventEmitter<boolean>",
+      "default": null,
+      "description": "Two-way binding for product switch open state.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 78,
+      "since": null
+    },
+    {
+      "name": "isOpenChange",
+      "type": "boolean",
+      "default": null,
+      "description": "Event emitted when the product switch open state changes.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 84,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

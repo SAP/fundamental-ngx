@@ -1,0 +1,74 @@
+{
+  "name": "CalendarLegendComponent",
+  "selector": "fd-calendar-legend",
+  "kind": "Component",
+  "sourceFile": "calendar-legend.component.ts",
+  "sourceLine": 72,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/calendar/calendar-legend/calendar-legend.component.ts#L72",
+  "description": "",
+  "inputs": [
+    {
+      "name": "col",
+      "type": "boolean",
+      "default": null,
+      "description": "Make it a column instead",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 76,
+      "since": null
+    },
+    {
+      "name": "displayNonWorkDayLegendItem",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether to display the legend item for non-work days.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 88,
+      "since": null
+    },
+    {
+      "name": "displaySelectedLegendItem",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether to display the legend item for the currently selected date.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 82,
+      "since": null
+    },
+    {
+      "name": "displayTodayLegendItem",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether to display the legend item for today's date.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 79,
+      "since": null
+    },
+    {
+      "name": "displayWorkDayLegendItem",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether to display the legend item for work days.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 85,
+      "since": null
+    },
+    {
+      "name": "specialDaysRules",
+      "type": "SpecialDayRule<D>[]",
+      "default": null,
+      "description": "Special days rules to be displayed in the legend",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 93,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

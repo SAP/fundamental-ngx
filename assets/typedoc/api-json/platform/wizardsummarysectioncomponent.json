@@ -1,0 +1,35 @@
+{
+  "name": "WizardSummarySectionComponent",
+  "selector": "fdp-wizard-summary-section",
+  "kind": "Component",
+  "sourceFile": "wizard-summary-section.component.ts",
+  "sourceLine": 28,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/wizard-generator/components/wizard-summary-step/wizard-summary-section/wizard-summary-section.component.ts#L28",
+  "description": "",
+  "inputs": [
+    {
+      "name": "step",
+      "type": "WizardGeneratorSummaryItem",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 33,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "editStep",
+      "type": "string",
+      "default": null,
+      "description": "Emits when step edit button clicked.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 39,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

@@ -1,0 +1,169 @@
+{
+  "name": "WizardGeneratorStepComponent",
+  "selector": "fdp-wizard-generator-step",
+  "kind": "Component",
+  "sourceFile": "wizard-generator-step.component.ts",
+  "sourceLine": 48,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/wizard-generator/components/wizard-generator-step/wizard-generator-step.component.ts#L48",
+  "description": "",
+  "inputs": [
+    {
+      "name": "item",
+      "type": "WizardGeneratorItem",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 58,
+      "since": null
+    },
+    {
+      "name": "stepStatus",
+      "type": "WizardStepStatus",
+      "default": null,
+      "description": "Wizard step status.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 64,
+      "since": null
+    },
+    {
+      "name": "unifiedLayout",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether all form items should have identical layout provided for form group.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 68,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "formsCreated",
+      "type": "WizardStepForms",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 80,
+      "since": null
+    },
+    {
+      "name": "formsSubmitted",
+      "type": "DynamicFormValue[]",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 74,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "addComponentToParent",
+      "signature": "() => Promise<void>",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 176,
+      "since": null,
+      "parameters": [],
+      "returnType": "Promise<void>"
+    },
+    {
+      "name": "getVisibleForms",
+      "signature": "() => WizardStepForms",
+      "description": "Returns visible forms in the step.",
+      "deprecated": null,
+      "sourceLine": 197,
+      "since": null,
+      "parameters": [],
+      "returnType": "WizardStepForms"
+    },
+    {
+      "name": "onFormCreated",
+      "signature": "(form: DynamicFormGroup, key: string) => Promise<void>",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 153,
+      "since": null,
+      "parameters": [
+        {
+          "name": "form",
+          "type": "DynamicFormGroup",
+          "description": "Form instance",
+          "optional": false
+        },
+        {
+          "name": "key",
+          "type": "string",
+          "description": "Form ID from",
+          "optional": false
+        }
+      ],
+      "returnType": "Promise<void>"
+    },
+    {
+      "name": "onFormSubmitted",
+      "signature": "(result: SubmitFormEventResult, index: string) => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 185,
+      "since": null,
+      "parameters": [
+        {
+          "name": "result",
+          "type": "SubmitFormEventResult",
+          "description": "Form submission result.",
+          "optional": false
+        },
+        {
+          "name": "index",
+          "type": "string",
+          "description": "Form index in the step.",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "refreshFormsVisibility",
+      "signature": "() => Promise<void>",
+      "description": "Refreshes step form group visibility.",
+      "deprecated": null,
+      "sourceLine": 244,
+      "since": null,
+      "parameters": [],
+      "returnType": "Promise<void>"
+    },
+    {
+      "name": "submitForms",
+      "signature": "(skipIfUntouched: boolean) => Subject<null | WizardStepSubmittedForms>",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 210,
+      "since": null,
+      "parameters": [
+        {
+          "name": "skipIfUntouched",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "Subject<null | WizardStepSubmittedForms>"
+    },
+    {
+      "name": "updateFormsState",
+      "signature": "() => Promise<void>",
+      "description": "Triggers form value revalidation and checks if field in form should be visible.",
+      "deprecated": null,
+      "sourceLine": 233,
+      "since": null,
+      "parameters": [],
+      "returnType": "Promise<void>"
+    }
+  ],
+  "inherited": null
+}

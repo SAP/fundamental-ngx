@@ -1,0 +1,175 @@
+{
+  "name": "TreeItem",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 43,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "accessibilityAttributes",
+      "type": "ListItemAccessibilityAttributes",
+      "default": null,
+      "description": "Defines the additional accessibility attributes that will be applied to the component.\nThe following fields are supported:\n\n- **ariaSetsize**: Defines the number of items in the current set  when not all items in the set are present in the DOM.\n*Note:** The value is an integer reflecting the number of items in the complete set. If the size of the entire set is unknown, set `-1`.\n\n- **ariaPosinset**: Defines an element's number or position in the current set when not all items are present in the DOM.\n*Note:** The value is an integer greater than or equal to 1, and less than or equal to the size of the set when that size is known.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 55,
+      "since": null
+    },
+    {
+      "name": "accessibleName",
+      "type": "string",
+      "default": null,
+      "description": "Defines the accessible name of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 60,
+      "since": null
+    },
+    {
+      "name": "additionalText",
+      "type": "string",
+      "default": null,
+      "description": "Defines the `additionalText`, displayed in the end of the tree item.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 65,
+      "since": null
+    },
+    {
+      "name": "additionalTextState",
+      "type": "'None' | 'Positive' | 'Critical' | 'Negative' | 'Information'",
+      "default": null,
+      "description": "Defines the state of the `additionalText`.\n\nAvailable options are: `\"None\"` (by default), `\"Positive\"`, `\"Critical\"`, `\"Information\"` and `\"Negative\"`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 72,
+      "since": null
+    },
+    {
+      "name": "expanded",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines whether the tree list item will show a collapse or expand icon inside its toggle button.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 77,
+      "since": null
+    },
+    {
+      "name": "hasChildren",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines whether the tree node has children, even if currently no other tree nodes are slotted inside.\n\n*Note:** This property is useful for showing big tree structures where not all nodes are initially loaded due to performance reasons.\nSet this to `true` for nodes you intend to load lazily, when the user clicks the expand button.\nIt is not necessary to set this property otherwise. If a tree item has children, the expand button will be displayed anyway.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 86,
+      "since": null
+    },
+    {
+      "name": "highlight",
+      "type": "'None' | 'Positive' | 'Critical' | 'Negative' | 'Information'",
+      "default": null,
+      "description": "Defines the highlight state of the list items.\nAvailable options are: `\"None\"` (by default), `\"Positive\"`, `\"Critical\"`, `\"Information\"` and `\"Negative\"`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 92,
+      "since": null
+    },
+    {
+      "name": "icon",
+      "type": "string",
+      "default": null,
+      "description": "If set, an icon will be displayed before the text of the tree list item.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 97,
+      "since": null
+    },
+    {
+      "name": "indeterminate",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines whether the selection of a tree node is displayed as partially selected.\n\n*Note:** The indeterminate state can be set only programmatically and can’t be achieved by user\ninteraction, meaning that the resulting visual state depends on the values of the `indeterminate`\nand `selected` properties:\n\n-  If a tree node has both `selected` and `indeterminate` set to `true`, it is displayed as partially selected.\n-  If a tree node has `selected` set to `true` and `indeterminate` set to `false`, it is displayed as selected.\n-  If a tree node has `selected` set to `false`, it is displayed as not selected regardless of the value of the `indeterminate` property.\n\n*Note:** This property takes effect only when the `ui5-tree` is in `Multiple` mode.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 112,
+      "since": null
+    },
+    {
+      "name": "movable",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines whether the item is movable.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 117,
+      "since": null
+    },
+    {
+      "name": "navigated",
+      "type": "boolean",
+      "default": null,
+      "description": "The navigated state of the list item.\nIf set to `true`, a navigation indicator is displayed at the end of the list item.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 123,
+      "since": null
+    },
+    {
+      "name": "selected",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines the selected state of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 128,
+      "since": null
+    },
+    {
+      "name": "text",
+      "type": "string",
+      "default": null,
+      "description": "Defines the text of the tree item.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 133,
+      "since": null
+    },
+    {
+      "name": "tooltip",
+      "type": "string",
+      "default": null,
+      "description": "Defines the text of the tooltip that would be displayed for the list item.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 138,
+      "since": null
+    },
+    {
+      "name": "type",
+      "type": "'Navigation' | 'Inactive' | 'Active' | 'Detail'",
+      "default": null,
+      "description": "Defines the visual indication and behavior of the list items.\nAvailable options are `Active` (by default), `Inactive`, `Detail` and `Navigation`.\n\n*Note:** When set to `Active` or `Navigation`, the item will provide visual response upon press and hover,\nwhile with type `Inactive` and `Detail` - will not.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 147,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5DetailClick",
+      "type": "UI5CustomEvent<TreeItem, 'detail-click'>",
+      "default": null,
+      "description": "Fired when the user clicks on the detail button when type is `Detail`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 154,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

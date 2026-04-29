@@ -1,0 +1,13 @@
+{
+  "name": "NestedListButtonDirective",
+  "selector": "[cxNestedDirectivesHeader], [fdx-nested-list-header]",
+  "kind": "Directive",
+  "sourceFile": "nested-list-directives.ts",
+  "sourceLine": 145,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cx/nested-list/nested-list-directives.ts#L145",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

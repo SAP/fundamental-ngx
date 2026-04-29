@@ -1,0 +1,13 @@
+{
+  "name": "ToolbarSeparatorComponent",
+  "selector": "fd-toolbar-separator",
+  "kind": "Component",
+  "sourceFile": "toolbar-separator.component.ts",
+  "sourceLine": 13,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/toolbar/toolbar-separator.component.ts#L13",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

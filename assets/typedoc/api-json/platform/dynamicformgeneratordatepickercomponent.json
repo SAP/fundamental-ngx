@@ -1,0 +1,13 @@
+{
+  "name": "DynamicFormGeneratorDatepickerComponent",
+  "selector": "fdp-dynamic-form-generator-datepicker",
+  "kind": "Component",
+  "sourceFile": "dynamic-form-generator-datepicker.component.ts",
+  "sourceLine": 16,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/form-generator/controls/dynamic-form-generator-datepicker/dynamic-form-generator-datepicker.component.ts#L16",
+  "description": "Abstract class that used as a base for the Dynamic Form Generator components.",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

@@ -1,0 +1,13 @@
+{
+  "name": "ListAvatarConfig",
+  "selector": "[fdpItemDef]",
+  "kind": "Class",
+  "sourceFile": "base-list-item.ts",
+  "sourceLine": 50,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/list/base-list-item.ts#L50",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

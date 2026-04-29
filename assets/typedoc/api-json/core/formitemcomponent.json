@@ -1,0 +1,13 @@
+{
+  "name": "FormItemComponent",
+  "selector": "[fd-form-item]",
+  "kind": "Component",
+  "sourceFile": "form-item.component.ts",
+  "sourceLine": 31,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/form/form-item/form-item.component.ts#L31",
+  "description": "Directive to be applied to the parent of a form control.\n\n```html\n<div fd-form-item>\n    <input fd-form-control type=\"text\" />\n</div>\n```",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

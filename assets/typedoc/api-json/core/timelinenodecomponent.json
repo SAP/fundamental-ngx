@@ -1,0 +1,44 @@
+{
+  "name": "TimelineNodeComponent",
+  "selector": "fd-timeline-node",
+  "kind": "Component",
+  "sourceFile": "timeline-node.component.ts",
+  "sourceLine": 26,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/timeline/components/timeline-node/timeline-node.component.ts#L26",
+  "description": "",
+  "inputs": [
+    {
+      "name": "ariaLabel",
+      "type": "string",
+      "default": "'timelineitem'",
+      "description": "Aria label for the current timeline node.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 37,
+      "since": null
+    },
+    {
+      "name": "glyph",
+      "type": "string",
+      "default": null,
+      "description": "Glyph of the current timeline node.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 29,
+      "since": null
+    },
+    {
+      "name": "glyphFont",
+      "type": "IconFont",
+      "default": "FD_DEFAULT_ICON_FONT_FAMILY",
+      "description": "Glyph font family",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 33,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

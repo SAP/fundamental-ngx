@@ -1,15 +1,60 @@
-<div
-    [style.display]="'flex'"
-    [style.flex-direction]="'row'"
-    [style.justify-content]="'space-around'"
-    [style.align-items]="'center'"
->
-    <fd-segmented-button [ngModel]="locale$ | async" (ngModelChange)="changeLocale($event)">
-        <button fd-button [label]="initialLocaleValue" [value]="initialLocaleValue"></button>
-        <button fd-button label="uk-UA" value="uk-UA"></button>
-        <button fd-button label="ka-GE" value="ka-GE"></button>
-    </fd-segmented-button>
-    <input type="number" min="0" fd-form-control [ngModel]="count()" (ngModelChange)="count.set($event)" />
-</div>
+<div class="locale-change-example">
+    <div class="fd-margin-top--sm">
+        <label fd-form-label>Select Locale:</label>
+        <fd-segmented-button [ngModel]="locale" (ngModelChange)="changeLocale($event)">
+            <button fd-button label="English (en-US)" [value]="'en-US'"></button>
+            <button fd-button label="Ukrainian (uk-UA)" value="uk-UA"></button>
+            <button fd-button label="Georgian (ka-GE)" value="ka-GE"></button>
+        </fd-segmented-button>
 
-<div>{{ pluralizationExample() }}</div>
+        <div class="fd-margin-top--md fd-padding--md" style="background-color: var(--sapBackgroundColor)">
+            <strong>Current Locale:</strong> {{ currentLocaleName() }}
+        </div>
+    </div>
+
+    <!-- Demonstrate date formatting -->
+    <div class="fd-margin-top--md">
+        <label fd-form-label>Date Formatting (same date, different locales):</label>
+        <div class="fd-padding--md fd-margin-top--sm" style="border: 1px solid var(--sapGroup_ContentBorderColor)">
+            <div><strong>Short Date:</strong> {{ shortDate() }}</div>
+            <div class="fd-margin-top--sm"><strong>Medium Date:</strong> {{ mediumDate() }}</div>
+            <div class="fd-margin-top--sm"><strong>Long Date:</strong> {{ longDate() }}</div>
+        </div>
+    </div>
+
+    <!-- Demonstrate number formatting -->
+    <div class="fd-margin-top--md">
+        <label fd-form-label>Number Formatting (same number, different locales):</label>
+        <div class="fd-padding--md fd-margin-top--sm" style="border: 1px solid var(--sapGroup_ContentBorderColor)">
+            <div><strong>Decimal:</strong> {{ decimalNumber() }}</div>
+            <div class="fd-margin-top--sm"><strong>Currency (USD):</strong> {{ currencyNumber() }}</div>
+            <div class="fd-margin-top--sm"><strong>Percent:</strong> {{ percentNumber() }}</div>
+        </div>
+    </div>
+
+    <!-- Demonstrate pluralization -->
+    <div class="fd-margin-top--md">
+        <label fd-form-label>Pluralization Rules (vary by locale):</label>
+        <div class="fd-padding--md fd-margin-top--sm" style="border: 1px solid var(--sapGroup_ContentBorderColor)">
+            <div class="fd-margin-bottom--md">
+                <label>Item Count:</label>
+                <input
+                    type="number"
+                    min="0"
+                    max="100"
+                    fd-form-control
+                    [ngModel]="count()"
+                    (ngModelChange)="count.set($event)"
+                    style="width: 100px"
+                />
+            </div>
+            <div style="font-size: 1.1rem; font-weight: bold; color: var(--sapButton_Emphasized_Background)">
+                {{ itemsCountText() }}
+            </div>
+            <div class="fd-margin-top--sm" style="font-size: 0.875rem; color: var(--sapContent_LabelColor)">
+                💡 Try different counts (0, 1, 2, 5, 21, 22, etc.) and switch locales to see different pluralization
+                rules
+            </div>
+        </div>
+    </div>
+</div>

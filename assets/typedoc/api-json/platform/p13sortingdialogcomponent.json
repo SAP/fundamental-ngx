@@ -1,0 +1,44 @@
+{
+  "name": "P13SortingDialogComponent",
+  "selector": null,
+  "kind": "Component",
+  "sourceFile": "sorting.component.ts",
+  "sourceLine": 104,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/table/components/table-p13-dialog/sorting/sorting.component.ts#L104",
+  "description": "Reset button.\n\nUsed to reset resettable state by click.",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "cancel",
+      "signature": "() => void",
+      "description": "Close dialog",
+      "deprecated": null,
+      "sourceLine": 136,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "confirm",
+      "signature": "() => void",
+      "description": "Confirm changes and close dialog",
+      "deprecated": null,
+      "sourceLine": 141,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "reset",
+      "signature": "() => void",
+      "description": "Reset changes to the initial state",
+      "deprecated": null,
+      "sourceLine": 130,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

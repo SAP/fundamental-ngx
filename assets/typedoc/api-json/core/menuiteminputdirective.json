@@ -1,0 +1,31 @@
+{
+  "name": "MenuItemInputDirective",
+  "selector": "input[fd-form-control][fd-menu-item-input]",
+  "kind": "Directive",
+  "sourceFile": "menu-item-input.directive.ts",
+  "sourceLine": 12,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/menu/directives/menu-item-input.directive.ts#L12",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "onInteraction",
+      "signature": "($event: KeyboardEvent | MouseEvent) => void",
+      "description": "This is needed to prevent the click event from bubbling up to the menu item\nand potentially closing the menu or triggering other actions.",
+      "deprecated": null,
+      "sourceLine": 22,
+      "since": null,
+      "parameters": [
+        {
+          "name": "$event",
+          "type": "KeyboardEvent | MouseEvent",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

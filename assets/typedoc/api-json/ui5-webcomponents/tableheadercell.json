@@ -1,0 +1,84 @@
+{
+  "name": "TableHeaderCell",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 41,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "horizontalAlign",
+      "type": "'Right' | 'Left' | 'End' | 'Start' | 'Center'",
+      "default": null,
+      "description": "Determines the horizontal alignment of table cells.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 46,
+      "since": null
+    },
+    {
+      "name": "importance",
+      "type": "number",
+      "default": null,
+      "description": "Defines the importance of the column.\n\nThis property affects the popin behaviour.\nColumns with higher importance will move into the popin area later then less important\ncolumns.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 55,
+      "since": null
+    },
+    {
+      "name": "minWidth",
+      "type": "string",
+      "default": null,
+      "description": "Defines the minimum width of the column.\n\nIf the table is in `Popin` mode and the minimum width does not fit anymore,\nthe column will move into the popin.\n\nBy default, the table prevents the column from becoming too small.\nChanging this value to a small value might lead to accessibility issues.\n\n*Note:** This property only takes effect for columns with a [\\<percentage\\>](https://developer.mozilla.org/en-US/docs/Web/CSS/percentage) value\nor the default width.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 69,
+      "since": null
+    },
+    {
+      "name": "popinHidden",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines if the column is hidden in the popin.\n\n*Note:** Please be aware that hiding the column in the popin might lead to accessibility issues as\nusers might not be able to access the content of the column on small screens.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 77,
+      "since": null
+    },
+    {
+      "name": "popinText",
+      "type": "string",
+      "default": null,
+      "description": "The text for the column when it pops in.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 82,
+      "since": null
+    },
+    {
+      "name": "sortIndicator",
+      "type": "'None' | 'Ascending' | 'Descending'",
+      "default": null,
+      "description": "Defines the sort indicator of the column.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 87,
+      "since": null
+    },
+    {
+      "name": "width",
+      "type": "string",
+      "default": null,
+      "description": "Defines the width of the column.\n\nBy default, the column will grow and shrink according to the available space.\nThis will distribute the space proportionally among all columns with no specific width set.\n\nSee [\\<length\\>](https://developer.mozilla.org/en-US/docs/Web/CSS/length) and\n[\\<percentage\\>](https://developer.mozilla.org/en-US/docs/Web/CSS/percentage) for possible width values.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 98,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

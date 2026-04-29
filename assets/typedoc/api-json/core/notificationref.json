@@ -1,0 +1,48 @@
+{
+  "name": "NotificationRef",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "notification-ref.ts",
+  "sourceLine": 8,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/notification/notification-utils/notification-ref.ts#L8",
+  "description": "Reference to a notification component generated via the NotificationService.\nIt can be injected into the content component through the constructor.\nFor a template, it is declared as part of the implicit context, see examples.",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "close",
+      "signature": "(result?: P) => void",
+      "description": "Closes the notification and passes the argument to the afterClosed observable.",
+      "deprecated": null,
+      "sourceLine": 30,
+      "since": null,
+      "parameters": [
+        {
+          "name": "result",
+          "type": "P",
+          "description": "Value passed back to the observable as a result.",
+          "optional": true
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "dismiss",
+      "signature": "(reason?: P) => void",
+      "description": "Dismisses the notification and passes the argument to the afterClosed observable as an error.",
+      "deprecated": null,
+      "sourceLine": 39,
+      "since": null,
+      "parameters": [
+        {
+          "name": "reason",
+          "type": "P",
+          "description": "Value passed back to the observable as an error.",
+          "optional": true
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

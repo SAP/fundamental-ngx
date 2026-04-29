@@ -1,0 +1,45 @@
+{
+  "name": "TableSelection",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "mode",
+      "type": "'None' | 'Single' | 'Multiple'",
+      "default": null,
+      "description": "Defines the selection mode.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 45,
+      "since": null
+    },
+    {
+      "name": "selected",
+      "type": "string",
+      "default": null,
+      "description": "Defines the selected rows separated by a space.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 50,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5Change",
+      "type": "UI5CustomEvent<TableSelection, 'change'>",
+      "default": null,
+      "description": "Fired when the selection is changed by user interaction.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 57,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

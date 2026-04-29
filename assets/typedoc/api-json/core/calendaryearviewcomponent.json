@@ -1,0 +1,149 @@
+{
+  "name": "CalendarYearViewComponent",
+  "selector": "fd-calendar-year-view",
+  "kind": "Component",
+  "sourceFile": "calendar-year-view.component.ts",
+  "sourceLine": 41,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/calendar/calendar-views/calendar-year-view/calendar-year-view.component.ts#L41",
+  "description": "Component representing the YearView of the Calendar Component.",
+  "inputs": [
+    {
+      "name": "focusEscapeFunction",
+      "type": "EscapeFocusFunction",
+      "default": null,
+      "description": "Function that is called when the focus would escape the element.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 48,
+      "since": null
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "default": null,
+      "description": "The id of the calendar passed from the parent component",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 44,
+      "since": null
+    },
+    {
+      "name": "isDateRangeYearFormat",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the date range is year format only excluding month and day",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 62,
+      "since": null
+    },
+    {
+      "name": "rangeHoverEffect",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether user wants to mark year cells on hover.\nWorks only on range mode, when start year is selected.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 69,
+      "since": null
+    },
+    {
+      "name": "yearSelected",
+      "type": "number",
+      "default": null,
+      "description": "Parameter holding the year that is currently selected.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 52,
+      "since": null
+    },
+    {
+      "name": "yearViewGrid",
+      "type": "CalendarYearGrid",
+      "default": null,
+      "description": "Object to customize year grid",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 58,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "selectedRangeDateChange",
+      "type": "DateRange<D>",
+      "default": null,
+      "description": "Event thrown every time selected first or last date in range mode is changed",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 77,
+      "since": null
+    },
+    {
+      "name": "yearClicked",
+      "type": "number",
+      "default": null,
+      "description": "Event fired when a year is selected.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 73,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "loadNextYearList",
+      "signature": "() => void",
+      "description": "Method used to load the previous {{col * row}} years to be displayed.",
+      "deprecated": null,
+      "sourceLine": 220,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "loadPreviousYearList",
+      "signature": "() => void",
+      "description": "Method used to load the next {{col * row}} years to be displayed.",
+      "deprecated": null,
+      "sourceLine": 226,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "selectYear",
+      "signature": "(selectedYear: CalendarYear<D>, event?: KeyboardEvent | MouseEvent) => void",
+      "description": "Method that sends the year to the parent component when it is clicked.",
+      "deprecated": null,
+      "sourceLine": 232,
+      "since": null,
+      "parameters": [
+        {
+          "name": "selectedYear",
+          "type": "CalendarYear<D>",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "event",
+          "type": "KeyboardEvent | MouseEvent",
+          "description": "",
+          "optional": true
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setFocusOnCell",
+      "signature": "() => void",
+      "description": "Set focus on month cell.\nIt can be a selected cell, current month cell or first cell in the list",
+      "deprecated": null,
+      "sourceLine": 249,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

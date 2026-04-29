@@ -1,0 +1,65 @@
+{
+  "name": "ApprovalFlowTeamListComponent",
+  "selector": "fdp-approval-flow-team-list",
+  "kind": "Component",
+  "sourceFile": "approval-flow-team-list.component.ts",
+  "sourceLine": 37,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/approval-flow/approval-flow-team-list/approval-flow-team-list.component.ts#L37",
+  "description": "",
+  "inputs": [
+    {
+      "name": "isRtl",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether in RTL mode",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 44,
+      "since": null
+    },
+    {
+      "name": "selectedTeamId",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "Selected team ID",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 48,
+      "since": null
+    },
+    {
+      "name": "teams",
+      "type": "ApprovalTeam[]",
+      "default": "[]",
+      "description": "Approval flow teams",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 40,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "onTeamClick",
+      "type": "ApprovalTeam",
+      "default": null,
+      "description": "Event emitted on team click",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 53,
+      "since": null
+    },
+    {
+      "name": "onTeamRadioClick",
+      "type": "ApprovalTeam",
+      "default": null,
+      "description": "Event emitted on team selection change",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 58,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

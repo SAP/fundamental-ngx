@@ -1,0 +1,28 @@
+{
+  "name": "IconTabBarProcessTypeComponent",
+  "selector": "fdp-icon-tab-bar-process-type",
+  "kind": "Component",
+  "sourceFile": "icon-tab-bar-process-type.component.ts",
+  "sourceLine": 41,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/icon-tab-bar/components/icon-tab-bar-process-type/icon-tab-bar-process-type.component.ts#L41",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": {
+    "from": "ClosableIconTabBar",
+    "inputs": [
+      {
+        "name": "colorAssociations",
+        "type": "Partial<Record<SemanticColor, string>>",
+        "default": null,
+        "description": "",
+        "isSignal": true,
+        "deprecated": null,
+        "sourceLine": 115,
+        "since": null
+      }
+    ],
+    "methods": []
+  }
+}

@@ -1,0 +1,160 @@
+{
+  "name": "FdDate",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "fd-date.ts",
+  "sourceLine": 11,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/datetime/fd-date.ts#L11",
+  "description": "FdDate class is used to represent date and time.\n\nIt's a simplified analog of native Date instance.\nIt gives some convenience methods to work with date or time data.",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "getDayOfWeek",
+      "signature": "() => number",
+      "description": "Get number of weekday ex. Sunday = 1, Monday = 2, Tuesday = 3 etc.",
+      "deprecated": null,
+      "sourceLine": 162,
+      "since": null,
+      "parameters": [],
+      "returnType": "number"
+    },
+    {
+      "name": "getTimeStamp",
+      "signature": "() => number",
+      "description": "Get amount of milliseconds from 01.01.1970",
+      "deprecated": null,
+      "sourceLine": 155,
+      "since": null,
+      "parameters": [],
+      "returnType": "number"
+    },
+    {
+      "name": "isDateValid",
+      "signature": "() => boolean",
+      "description": "Method that checks validity of current FdDate instance.",
+      "deprecated": null,
+      "sourceLine": 182,
+      "since": null,
+      "parameters": [],
+      "returnType": "boolean"
+    },
+    {
+      "name": "setTime",
+      "signature": "(hour: number, minute?: number, second?: number) => FdDate",
+      "description": "Set hour, minute and second data",
+      "deprecated": null,
+      "sourceLine": 129,
+      "since": null,
+      "parameters": [
+        {
+          "name": "hour",
+          "type": "number",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "minute",
+          "type": "number",
+          "description": "",
+          "optional": true
+        },
+        {
+          "name": "second",
+          "type": "number",
+          "description": "",
+          "optional": true
+        }
+      ],
+      "returnType": "FdDate"
+    },
+    {
+      "name": "toDate",
+      "signature": "() => Date",
+      "description": "Get native date object from FdDate.",
+      "deprecated": null,
+      "sourceLine": 169,
+      "since": null,
+      "parameters": [],
+      "returnType": "Date"
+    },
+    {
+      "name": "toDateString",
+      "signature": "() => string",
+      "description": "Get date string in yyyy-mm-dd format",
+      "deprecated": null,
+      "sourceLine": 211,
+      "since": null,
+      "parameters": [],
+      "returnType": "string"
+    },
+    {
+      "name": "toString",
+      "signature": "() => string",
+      "description": "Get string representation in yyyy-mm-ddThh:mm:ss format",
+      "deprecated": null,
+      "sourceLine": 189,
+      "since": null,
+      "parameters": [],
+      "returnType": "string"
+    },
+    {
+      "name": "toTimeString",
+      "signature": "() => string",
+      "description": "Get time string in hh:mm:ss format",
+      "deprecated": null,
+      "sourceLine": 225,
+      "since": null,
+      "parameters": [],
+      "returnType": "string"
+    },
+    {
+      "name": "valueOf",
+      "signature": "() => number",
+      "description": "The valueOf() method returns the primitive value of a FdDate.\nReturns: The number of milliseconds between 1 January 1970 00:00:00 UTC and the given date.",
+      "deprecated": null,
+      "sourceLine": 204,
+      "since": null,
+      "parameters": [],
+      "returnType": "number"
+    },
+    {
+      "name": "getFdDateByDate",
+      "signature": "(date: Date) => FdDate",
+      "description": "Convert js date object to FdDate model",
+      "deprecated": null,
+      "sourceLine": 112,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "Date",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "FdDate"
+    },
+    {
+      "name": "getNow",
+      "signature": "() => FdDate",
+      "description": "Create FdDate instance of the current moment",
+      "deprecated": null,
+      "sourceLine": 98,
+      "since": null,
+      "parameters": [],
+      "returnType": "FdDate"
+    },
+    {
+      "name": "getToday",
+      "signature": "() => FdDate",
+      "description": "Gets today's FdDate where hour, minute and second is set to 0",
+      "deprecated": null,
+      "sourceLine": 105,
+      "since": null,
+      "parameters": [],
+      "returnType": "FdDate"
+    }
+  ],
+  "inherited": null
+}

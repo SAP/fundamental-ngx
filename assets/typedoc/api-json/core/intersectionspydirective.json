@@ -1,0 +1,45 @@
+{
+  "name": "IntersectionSpyDirective",
+  "selector": "[fdkIntersectionSpy]",
+  "kind": "Directive",
+  "sourceFile": "intersection-spy.directive.ts",
+  "sourceLine": 10,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cdk/utils/directives/intersection-spy/intersection-spy.directive.ts#L10",
+  "description": "",
+  "inputs": [
+    {
+      "name": "offset",
+      "type": "number",
+      "default": "20",
+      "description": "Intersection offset in px.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 13,
+      "since": null
+    },
+    {
+      "name": "viewportOptions",
+      "type": "IntersectionObserverInit",
+      "default": null,
+      "description": "Intersection observer options.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 16,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "intersected",
+      "type": "boolean",
+      "default": null,
+      "description": "Event emitted when intersection observer emits with the current element.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 20,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

@@ -1,0 +1,75 @@
+{
+  "name": "ScrollSpyDirective",
+  "selector": "[fdScrollSpy]",
+  "kind": "Directive",
+  "sourceFile": "scroll-spy.directive.ts",
+  "sourceLine": 16,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/scroll-spy/scroll-spy.directive.ts#L16",
+  "description": "A directive designed to help navigation elements determine the element currently in view of the user.",
+  "inputs": [
+    {
+      "name": "fireEmpty",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether events are still fired if there is no tag present on the user's screen.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 25,
+      "since": null
+    },
+    {
+      "name": "scrollSpyDisabled",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether to disable scroll spy",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 43,
+      "since": null
+    },
+    {
+      "name": "targetOffset",
+      "type": "number",
+      "default": null,
+      "description": "Number that represents the offset in pixels for fired target. `100` value means that the event will be fired for\ntarget that is 100 pixels below the spy container.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 38,
+      "since": null
+    },
+    {
+      "name": "targetPercent",
+      "type": "number",
+      "default": null,
+      "description": "A number that represent at what location in the container the event is fired.\n0.5 would fire the events in the middle of the container,\n0 for the top and 1 for the bottom.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 32,
+      "since": null
+    },
+    {
+      "name": "trackedTags",
+      "type": "string[]",
+      "default": null,
+      "description": "An array of tags to track.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 20,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "spyChange",
+      "type": "HTMLElement",
+      "default": null,
+      "description": "Event fired on the scroll element when a new item becomes activated by the scrollspy .\nThe returned value is the HTMLElement itself, or undefined when no element is active.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 49,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

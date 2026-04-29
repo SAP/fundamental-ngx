@@ -1,0 +1,13 @@
+{
+  "name": "DynamicFormControlFieldDirective",
+  "selector": "[fdpDynamicFormControlField]",
+  "kind": "Directive",
+  "sourceFile": "dynamic-form-control-field.directive.ts",
+  "sourceLine": 15,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/form-generator/dynamic-form-control-field.directive.ts#L15",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

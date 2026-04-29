@@ -1,0 +1,155 @@
+{
+  "name": "FlexibleColumnLayoutComponent",
+  "selector": "fd-flexible-column-layout",
+  "kind": "Component",
+  "sourceFile": "flexible-column-layout.component.ts",
+  "sourceLine": 59,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/flexible-column-layout/flexible-column-layout.component.ts#L59",
+  "description": "",
+  "inputs": [
+    {
+      "name": "backgroundDesign",
+      "type": "'transparent' | 'translucent' | 'solid'",
+      "default": "'solid'",
+      "description": "The background design of the component\nOptions include: 'solid' | 'translucent' | 'transparent'\nThe default is set to 'solid'",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 84,
+      "since": null
+    },
+    {
+      "name": "collapseTitle",
+      "type": "string",
+      "default": null,
+      "description": "title for collapsed button",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 138,
+      "since": null
+    },
+    {
+      "name": "collapseTitleEndBtn",
+      "type": "string",
+      "default": null,
+      "description": "title for collapsed state of the button between mid and end column",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 154,
+      "since": null
+    },
+    {
+      "name": "collapseTitleStartBtn",
+      "type": "string",
+      "default": null,
+      "description": "title for collapsed state of the button between start and mid column",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 146,
+      "since": null
+    },
+    {
+      "name": "customOnResizeFunction",
+      "type": "() => void",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 126,
+      "since": null
+    },
+    {
+      "name": "expandTitle",
+      "type": "string",
+      "default": null,
+      "description": "title for expanded button",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 134,
+      "since": null
+    },
+    {
+      "name": "expandTitleEndBtn",
+      "type": "string",
+      "default": null,
+      "description": "title for expanded state of the button between mid and end column",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 150,
+      "since": null
+    },
+    {
+      "name": "expandTitleStartBtn",
+      "type": "string",
+      "default": null,
+      "description": "title for expanded state of the button between start and mid column",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 142,
+      "since": null
+    },
+    {
+      "name": "layout",
+      "type": "FlexibleColumnLayout",
+      "default": "ONE_COLUMN_START_FULL_SCREEN",
+      "description": "The layout of the component\nOptions include: 'OneColumnStartFullScreen' | 'OneColumnMidFullScreen' |\n'OneColumnEndFullScreen' | 'TwoColumnsStartExpanded' | 'TwoColumnsMidExpanded' |\n'TwoColumnsEndExpanded' | 'ThreeColumnsMidExpanded' | 'ThreeColumnsEndExpanded' |\n'ThreeColumnsStartMinimized' | 'ThreeColumnsEndMinimized'",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 94,
+      "since": null
+    },
+    {
+      "name": "layoutDefinitions",
+      "type": "FlexibleColumnLayoutDefinition",
+      "default": null,
+      "description": "Mapping of the layout name and the column layout in %",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 100,
+      "since": null
+    },
+    {
+      "name": "lgBreakPoint",
+      "type": "number",
+      "default": "1280",
+      "description": "User-defined break point for LG screens\nthe default (Fiori 3) value is 1280",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 120,
+      "since": null
+    },
+    {
+      "name": "separatorAriaLabel",
+      "type": "string",
+      "default": null,
+      "description": "aria-label for separator",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 130,
+      "since": null
+    },
+    {
+      "name": "smBreakPoint",
+      "type": "number",
+      "default": "960",
+      "description": "User defined break point for SM screens\nDefault (Fiori 3) value is 960",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 113,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "layoutChange",
+      "type": "FlexibleColumnLayout",
+      "default": null,
+      "description": "The event emitted on layout value change.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 106,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

@@ -1,0 +1,65 @@
+{
+  "name": "CarouselItemDirective",
+  "selector": "[fd-carousel-item], [fdCarouselItem]",
+  "kind": "Directive",
+  "sourceFile": "carousel-item.directive.ts",
+  "sourceLine": 10,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/carousel/carousel-item.directive.ts#L10",
+  "description": "",
+  "inputs": [
+    {
+      "name": "initialHeight",
+      "type": "number",
+      "default": null,
+      "description": "Initial height value, needed when carousel is inside popover",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 17,
+      "since": null
+    },
+    {
+      "name": "initialWidth",
+      "type": "number",
+      "default": null,
+      "description": "Initial height value, needed when carousel is inside popover",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 21,
+      "since": null
+    },
+    {
+      "name": "value",
+      "type": "T",
+      "default": null,
+      "description": "Value of the item , to keep some information inside",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 13,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "getHeight",
+      "signature": "() => number",
+      "description": "Height of element",
+      "deprecated": null,
+      "sourceLine": 42,
+      "since": null,
+      "parameters": [],
+      "returnType": "number"
+    },
+    {
+      "name": "getWidth",
+      "signature": "() => number",
+      "description": "Width of element",
+      "deprecated": null,
+      "sourceLine": 37,
+      "since": null,
+      "parameters": [],
+      "returnType": "number"
+    }
+  ],
+  "inherited": null
+}

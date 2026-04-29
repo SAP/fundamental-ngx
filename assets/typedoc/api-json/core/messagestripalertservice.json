@@ -1,0 +1,54 @@
+{
+  "name": "MessageStripAlertService",
+  "selector": null,
+  "kind": "Service",
+  "sourceFile": "message-strip-alert.service.ts",
+  "sourceLine": 27,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/message-strip/alert/message-strip-alert.service.ts#L27",
+  "description": "Service that is responsible for opening and closing message strip alerts.\nThis should be only created once in entire application.\nService is responsible for creating and managing the overlays for the\nmessage strip alerts. This also manages the footer components for any\ngiven position.",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "open",
+      "signature": "(c: OpenMessageStripAlertConfig<ComponentType>) => MessageStripAlertRef",
+      "description": "Open a message strip alert with given configuration.",
+      "deprecated": null,
+      "sourceLine": 99,
+      "since": null,
+      "parameters": [
+        {
+          "name": "c",
+          "type": "OpenMessageStripAlertConfig<ComponentType>",
+          "description": "Configuration for the message strip alert",
+          "optional": false
+        }
+      ],
+      "returnType": "MessageStripAlertRef"
+    },
+    {
+      "name": "setFooterComponent",
+      "signature": "(position: 'top-start' | 'top-end' | 'bottom-start' | 'bottom-end' | 'top-middle' | 'bottom-middle', component: Type<any>) => void",
+      "description": "Set the footer component for a given position.",
+      "deprecated": null,
+      "sourceLine": 87,
+      "since": null,
+      "parameters": [
+        {
+          "name": "position",
+          "type": "'top-start' | 'top-end' | 'bottom-start' | 'bottom-end' | 'top-middle' | 'bottom-middle'",
+          "description": "The position where the footer should be displayed",
+          "optional": false
+        },
+        {
+          "name": "component",
+          "type": "Type<any>",
+          "description": "The component type to be rendered as footer",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

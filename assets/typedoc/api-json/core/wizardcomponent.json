@@ -1,0 +1,54 @@
+{
+  "name": "WizardComponent",
+  "selector": "fd-wizard",
+  "kind": "Component",
+  "sourceFile": "wizard.component.ts",
+  "sourceLine": 79,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/wizard/wizard.component.ts#L79",
+  "description": "",
+  "inputs": [
+    {
+      "name": "appendToWizard",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether or not to append the step to the wizard. If false, each step will be displayed on a different page.\nDefault is true.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 85,
+      "since": null
+    },
+    {
+      "name": "ariaLabel",
+      "type": "string",
+      "default": null,
+      "description": "adding aria label to the component\nIf not provided, is being translated by i18n package",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 110,
+      "since": null
+    },
+    {
+      "name": "contentHeight",
+      "type": "Nullable<null | string>",
+      "default": null,
+      "description": "Custom height to use for the wizard's content pane. By default, this value is calc(100vh - 144px), where 144px\nis the combined height of the shellbar, wizard header and wizard footer.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 92,
+      "since": null
+    },
+    {
+      "name": "displaySummaryStep",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to display a summary step.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 103,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

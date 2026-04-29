@@ -1,0 +1,62 @@
+{
+  "name": "TabNavComponent",
+  "selector": "[fd-tab-nav]",
+  "kind": "Component",
+  "sourceFile": "tab-nav.component.ts",
+  "sourceLine": 38,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/tabs/tab-nav/tab-nav.component.ts#L38",
+  "description": "",
+  "inputs": [
+    {
+      "name": "class",
+      "type": "string",
+      "default": null,
+      "description": "Apply user custom styles",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 41,
+      "since": null
+    },
+    {
+      "name": "mode",
+      "type": "TabModes",
+      "default": null,
+      "description": "Whether user wants to use tab component in certain mode. Modes available:\n'icon-only' | 'process' | 'filter'",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 48,
+      "since": null
+    },
+    {
+      "name": "size",
+      "type": "TabSizes",
+      "default": "'m'",
+      "description": "Size of tab, it's mostly about adding spacing on tab container, available sizes 's' | 'm' | 'l' | 'xl' | 'xxl'",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 52,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "selectTab",
+      "signature": "(tabIndex: number) => void",
+      "description": "Function to select a new tab from an index.",
+      "deprecated": null,
+      "sourceLine": 150,
+      "since": null,
+      "parameters": [
+        {
+          "name": "tabIndex",
+          "type": "number",
+          "description": "Index of the tab to select.",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

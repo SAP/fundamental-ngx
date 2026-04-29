@@ -1,0 +1,126 @@
+{
+  "name": "BaseInput",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "base.input.ts",
+  "sourceLine": 52,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/shared/form/base.input.ts#L52",
+  "description": "All form components share the same information (value, name, placeholder,.. ) as well as\nthe same behavior given by ControlValueAccessor.\n\nEven this is not ideal solution there is no other way then use inheritance to reuse some of the\ncommon logic. It should be possible to use some kind of compositions with Proxies but something\nsimilar that exists in Aspect Oriented Programing.\n\nUsually try to fire stateChange only for things that can change dynamically in runtime. We don't expect\nthat e.g. placeholder will change after component is created",
+  "inputs": [
+    {
+      "name": "placeholder",
+      "type": "string",
+      "default": null,
+      "description": "Input placeholder",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 58,
+      "since": null
+    },
+    {
+      "name": "readonly",
+      "type": "boolean",
+      "default": null,
+      "description": "readOnly Value to Mark component read only",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 128,
+      "since": null
+    },
+    {
+      "name": "stateMessage",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "Holds the message with respect to state",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 106,
+      "since": null
+    },
+    {
+      "name": "stateMessageConfig",
+      "type": "Nullable<TemplateRef<any>>",
+      "default": null,
+      "description": "Advanced form message configuration. Used for components that can render form messages in its template.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 110,
+      "since": null
+    },
+    {
+      "name": "triggers",
+      "type": "string | TriggerConfig[]",
+      "default": null,
+      "description": "To allow user to determine what event he wants to trigger the messages to show\nAccepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp).",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 65,
+      "since": null
+    },
+    {
+      "name": "validationStrategy",
+      "type": "'dirty' | 'touched' | 'submitted'[]",
+      "default": null,
+      "description": "Form control validation event strategy.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 148,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "_onFocusChanged",
+      "signature": "(isFocused: boolean) => void",
+      "description": "Keeps track of element focus",
+      "deprecated": null,
+      "sourceLine": 389,
+      "since": null,
+      "parameters": [
+        {
+          "name": "isFocused",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "focus",
+      "signature": "(event?: MouseEvent) => void",
+      "description": "In most of the cases when working with input element directly you should be just find to assing\nvariable to this element\n\n```\n<input #inputElementRef fd-form-control ...>\n```\n\nand this default behavior used. For other cases implement focus.",
+      "deprecated": null,
+      "sourceLine": 419,
+      "since": null,
+      "parameters": [
+        {
+          "name": "event",
+          "type": "MouseEvent",
+          "description": "",
+          "optional": true
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onContainerClick",
+      "signature": "(event: MouseEvent) => void",
+      "description": "Handles even when we click on parent container which is the FormField Wrapping this\ncontrol",
+      "deprecated": null,
+      "sourceLine": 404,
+      "since": null,
+      "parameters": [
+        {
+          "name": "event",
+          "type": "MouseEvent",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

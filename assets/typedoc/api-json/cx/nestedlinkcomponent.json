@@ -1,0 +1,120 @@
+{
+  "name": "NestedLinkComponent",
+  "selector": null,
+  "kind": "Component",
+  "sourceFile": "nested-link.component.ts",
+  "sourceLine": 51,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cx/nested-list/nested-link/nested-link.component.ts#L51",
+  "description": "",
+  "inputs": [
+    {
+      "name": "onClickCallback",
+      "type": "() => void",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 54,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "selectedChange",
+      "type": "boolean",
+      "default": null,
+      "description": "Event thrown, when selected state is changed",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 73,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "changeSelected",
+      "signature": "(selected: boolean) => void",
+      "description": "Method to trigger selected state change",
+      "deprecated": null,
+      "sourceLine": 137,
+      "since": null,
+      "parameters": [
+        {
+          "name": "selected",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "click",
+      "signature": "() => void",
+      "description": "Dispatches the click event on the element",
+      "deprecated": null,
+      "sourceLine": 149,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "focus",
+      "signature": "() => void",
+      "description": "Set focus on the element.",
+      "deprecated": null,
+      "sourceLine": 144,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "getTitle",
+      "signature": "() => string",
+      "description": "Returns the title value of the title directive",
+      "deprecated": null,
+      "sourceLine": 154,
+      "since": null,
+      "parameters": [],
+      "returnType": "string"
+    },
+    {
+      "name": "onClick",
+      "signature": "() => void",
+      "description": "Handler for mouse events",
+      "deprecated": null,
+      "sourceLine": 119,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "onFocus",
+      "signature": "() => void",
+      "description": "Handler for focus events",
+      "deprecated": null,
+      "sourceLine": 132,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "onKeyDown",
+      "signature": "(event: Event) => void",
+      "description": "Handler for keyboard events",
+      "deprecated": null,
+      "sourceLine": 113,
+      "since": null,
+      "parameters": [
+        {
+          "name": "event",
+          "type": "Event",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

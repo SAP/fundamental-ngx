@@ -1,0 +1,24 @@
+{
+  "name": "OverflowLayoutService",
+  "selector": null,
+  "kind": "Service",
+  "sourceFile": "overflow-layout.service.ts",
+  "sourceLine": 36,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/overflow-layout/overflow-layout.service.ts#L36",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "fitVisibleItems",
+      "signature": "() => void",
+      "description": "Calculates available space for items and hides items that are not fitting into the container.",
+      "deprecated": null,
+      "sourceLine": 102,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

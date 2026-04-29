@@ -1,0 +1,13 @@
+{
+  "name": "MessageBoxContainerComponent",
+  "selector": "fd-message-box-container",
+  "kind": "Component",
+  "sourceFile": "message-box-container.component.ts",
+  "sourceLine": 38,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/message-box/message-box-container/message-box-container.component.ts#L38",
+  "description": "Message box container where the message box content is embedded.",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

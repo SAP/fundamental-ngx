@@ -1,0 +1,95 @@
+{
+  "name": "SplitButton",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 41,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "accessibilityAttributes",
+      "type": "SplitButtonAccessibilityAttributes",
+      "default": null,
+      "description": "Defines the additional accessibility attributes that will be applied to the component.\nThe `accessibilityAttributes` property accepts an object with the following optional fields:\n\n- **root**: Attributes that will be applied to the main (text) button.\n- **hasPopup**: Indicates the presence and type of popup triggered by the button.\n Accepts string values: `\"dialog\"`, `\"grid\"`, `\"listbox\"`, `\"menu\"`, or `\"tree\"`.\n- **roleDescription**: Provides a human-readable description for the role of the button.\n Accepts any string value.\n- **title**: Specifies a tooltip or description for screen readers.\n Accepts any string value.\n- **ariaKeyShortcuts**: Defines keyboard shortcuts that activate or give focus to the button.\n\n- **arrowButton**: Attributes applied specifically to the arrow (split) button.\n- **hasPopup**: Indicates the presence and type of popup triggered by the arrow button.\n Accepts string values: `\"dialog\"`, `\"grid\"`, `\"listbox\"`, `\"menu\"`, or `\"tree\"`.\n- **expanded**: Indicates whether the popup triggered by the arrow button is currently expanded.\n Accepts boolean values: `true` or `false`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 62,
+      "since": null
+    },
+    {
+      "name": "accessibleName",
+      "type": "string",
+      "default": null,
+      "description": "Defines the accessible ARIA name of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 67,
+      "since": null
+    },
+    {
+      "name": "activeArrowButton",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines whether the arrow button should have the active state styles or not.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 72,
+      "since": null
+    },
+    {
+      "name": "design",
+      "type": "'Transparent' | 'Positive' | 'Negative' | 'Default' | 'Emphasized' | 'Attention'",
+      "default": null,
+      "description": "Defines the component design.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 77,
+      "since": null
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines whether the component is disabled.\nA disabled component can't be pressed or\nfocused, and it is not in the tab chain.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 84,
+      "since": null
+    },
+    {
+      "name": "icon",
+      "type": "string",
+      "default": null,
+      "description": "Defines the icon to be displayed as graphical element within the component.\nThe SAP-icons font provides numerous options.\n\nExample:\n\nSee all available icons in the [Icon Explorer](https://sdk.openui5.org/test-resources/sap/m/demokit/iconExplorer/webapp/index.html).",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 94,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5ArrowClick",
+      "type": "UI5CustomEvent<SplitButton, 'arrow-click'>",
+      "default": null,
+      "description": "Fired when the user clicks on the arrow action.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 101,
+      "since": null
+    },
+    {
+      "name": "ui5Click",
+      "type": "UI5CustomEvent<SplitButton, 'click'>",
+      "default": null,
+      "description": "Fired when the user clicks on the default action.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 106,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

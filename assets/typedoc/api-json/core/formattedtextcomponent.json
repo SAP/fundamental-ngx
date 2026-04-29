@@ -1,0 +1,54 @@
+{
+  "name": "FormattedTextComponent",
+  "selector": "fd-formatted-text",
+  "kind": "Component",
+  "sourceFile": "formatted-text.component.ts",
+  "sourceLine": 53,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/formatted-text/formatted-text.component.ts#L53",
+  "description": "Formatted-text component renders sanitized HTML content with configurable link behavior.\n\nThis component accepts HTML text input and renders it after sanitization.\nOnly safe HTML tags are preserved; potentially dangerous content is stripped.",
+  "inputs": [
+    {
+      "name": "convertedLinksDefaultTarget",
+      "type": "LinkTargetType",
+      "default": null,
+      "description": "Target attribute for anchor tags in the formatted content.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 63,
+      "since": null
+    },
+    {
+      "name": "height",
+      "type": "string",
+      "default": null,
+      "description": "Height style for component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 68,
+      "since": null
+    },
+    {
+      "name": "htmlText",
+      "type": "string",
+      "default": null,
+      "description": "HTML text content to be formatted and rendered.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 57,
+      "since": null
+    },
+    {
+      "name": "width",
+      "type": "string",
+      "default": null,
+      "description": "Width style for component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 73,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

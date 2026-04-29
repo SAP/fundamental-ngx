@@ -1,0 +1,70 @@
+{
+  "name": "IconTabBarTextTypeComponent",
+  "selector": "fdp-icon-tab-bar-text-type",
+  "kind": "Component",
+  "sourceFile": "icon-tab-bar-text-type.component.ts",
+  "sourceLine": 59,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/icon-tab-bar/components/icon-tab-bar-text-type/icon-tab-bar-text-type.component.ts#L59",
+  "description": "",
+  "inputs": [
+    {
+      "name": "enableTabReordering",
+      "type": "boolean",
+      "default": "false",
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 70,
+      "since": null
+    },
+    {
+      "name": "layoutMode",
+      "type": "'row' | 'column'",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 76,
+      "since": null
+    },
+    {
+      "name": "multiClick",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to render icon tab item as multi-click variant.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 80,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "reordered",
+      "type": "IconTabBarItem[]",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 86,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": {
+    "from": "ClosableIconTabBar",
+    "inputs": [
+      {
+        "name": "colorAssociations",
+        "type": "Partial<Record<SemanticColor, string>>",
+        "default": null,
+        "description": "",
+        "isSignal": true,
+        "deprecated": null,
+        "sourceLine": 115,
+        "since": null
+      }
+    ],
+    "methods": []
+  }
+}

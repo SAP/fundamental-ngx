@@ -1,0 +1,86 @@
+{
+  "name": "GridListComponent",
+  "selector": "fd-grid-list",
+  "kind": "Component",
+  "sourceFile": "grid-list.component.ts",
+  "sourceLine": 52,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/grid-list/components/grid-list/grid-list.component.ts#L52",
+  "description": "",
+  "inputs": [
+    {
+      "name": "ariaLabel",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "Sets the `aria-label` attribute to the element.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 63,
+      "since": null
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "default": null,
+      "description": "id for the Element",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 55,
+      "since": null
+    },
+    {
+      "name": "layoutPattern",
+      "type": "string",
+      "default": null,
+      "description": "specify the column layout in the format `XLn-Ln-Mn-Sn` where n is the number of columns and can be different for each size.\neg: XL2-L2-M2-S1 would create 2-column layouts for XL, L, and M sizes and single-column layout for S size.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 83,
+      "since": null
+    },
+    {
+      "name": "selectionMode",
+      "type": "GridListSelectionMode",
+      "default": "'none'",
+      "description": "Defines the mode of Grid List\nModes:\n- none: Default mode (no selection)\n- delete: Delete mode (only one list item can be deleted via provided delete button)\n- singleSelect: Selected item is highlighted but no selection control is visible (only one list item can be selected)\n- singleSelectLeft: Left-positioned single selection mode (only one list item can be selected)\n- singleSelectRight: Right-positioned single selection mode (only one list item can be selected)\n- multiSelect: Multi-selection mode (more than one list item can be selected)",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 76,
+      "since": null
+    },
+    {
+      "name": "width",
+      "type": "string",
+      "default": null,
+      "description": "width of the element",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 59,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "selectionChange",
+      "type": "GridListSelectionEvent<T>",
+      "default": null,
+      "description": "Event is thrown, when mode is singleSelect, singleSelectLeft, singleSelectRight or multiSelect and item was selected",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 87,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "clearSelection",
+      "signature": "() => void",
+      "description": "Clears previous selection of the items.",
+      "deprecated": null,
+      "sourceLine": 186,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

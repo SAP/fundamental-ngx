@@ -1,0 +1,143 @@
+{
+  "name": "TabPanelComponent",
+  "selector": "fd-tab",
+  "kind": "Component",
+  "sourceFile": "tab-panel.component.ts",
+  "sourceLine": 54,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/tabs/tab-panel/tab-panel.component.ts#L54",
+  "description": "Represents the body of a tab element. It also contains elements pertaining to the associated tab header.",
+  "inputs": [
+    {
+      "name": "ariaLabel",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "Aria-label of the tab.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 61,
+      "since": null
+    },
+    {
+      "name": "ariaLabelledBy",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "Id of the element that labels the tab.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 65,
+      "since": null
+    },
+    {
+      "name": "count",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "The count of tab, depending on mode used, it will be placed in different position",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 73,
+      "since": null
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "description": "Disabled state for tab item",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 85,
+      "since": null
+    },
+    {
+      "name": "glyph",
+      "type": "string",
+      "default": null,
+      "description": "Glyph icon, it can be used only on",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 77,
+      "since": null
+    },
+    {
+      "name": "header",
+      "type": "boolean",
+      "default": "false",
+      "description": "Glyph icon, it can be used only on",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 81,
+      "since": null
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "default": null,
+      "description": "Id of the tab. If none is provided, one will be generated.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 57,
+      "since": null
+    },
+    {
+      "name": "tabState",
+      "type": "Nullable<TabItemState>",
+      "default": null,
+      "description": "Semantic type of the tab item",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 89,
+      "since": null
+    },
+    {
+      "name": "title",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "The title of tab, depending on mode used, it will be placed in different position",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 69,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "closed",
+      "type": "void",
+      "default": null,
+      "description": "Event that is emitted when the tab panel has been closed.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 97,
+      "since": null
+    },
+    {
+      "name": "opened",
+      "type": "void",
+      "default": null,
+      "description": "Event that is emitted when the tab panel has been opened.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 93,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "open",
+      "signature": "(open: boolean) => void",
+      "description": "Whether to expand tab panel content",
+      "deprecated": null,
+      "sourceLine": 140,
+      "since": null,
+      "parameters": [
+        {
+          "name": "open",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

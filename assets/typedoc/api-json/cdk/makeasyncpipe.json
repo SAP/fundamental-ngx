@@ -1,0 +1,31 @@
+{
+  "name": "MakeAsyncPipe",
+  "selector": null,
+  "kind": "Pipe",
+  "sourceFile": "make-async.pipe.ts",
+  "sourceLine": 10,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cdk/utils/pipes/make-async.pipe.ts#L10",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "transform",
+      "signature": "(value: T | Promise<T> | Observable<T>) => Promise<T> | Observable<T>",
+      "description": "Transforms raw value into observable.",
+      "deprecated": null,
+      "sourceLine": 15,
+      "since": null,
+      "parameters": [
+        {
+          "name": "value",
+          "type": "T | Promise<T> | Observable<T>",
+          "description": "raw value. Can be either a static value, or Promise-like, or Observable-like.",
+          "optional": false
+        }
+      ],
+      "returnType": "Promise<T> | Observable<T>"
+    }
+  ],
+  "inherited": null
+}

@@ -1,0 +1,175 @@
+{
+  "name": "FileUploader",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 49,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "accept",
+      "type": "string",
+      "default": null,
+      "description": "Comma-separated list of file types that the component should accept.\n\n*Note:** Please make sure you are adding the `.` in front on the file type, e.g. `.png` in case you want to accept png's only.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 56,
+      "since": null
+    },
+    {
+      "name": "accessibleDescription",
+      "type": "string",
+      "default": null,
+      "description": "Defines the accessible description of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 61,
+      "since": null
+    },
+    {
+      "name": "accessibleDescriptionRef",
+      "type": "string",
+      "default": null,
+      "description": "Receives id(or many ids) of the elements that describe the input.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 66,
+      "since": null
+    },
+    {
+      "name": "accessibleName",
+      "type": "string",
+      "default": null,
+      "description": "Defines the accessible ARIA name of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 71,
+      "since": null
+    },
+    {
+      "name": "accessibleNameRef",
+      "type": "string",
+      "default": null,
+      "description": "Receives id(or many ids) of the elements that label the input.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 76,
+      "since": null
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines whether the component is in disabled state.\n\n*Note:** A disabled component is completely noninteractive.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 83,
+      "since": null
+    },
+    {
+      "name": "hideInput",
+      "type": "boolean",
+      "default": null,
+      "description": "If set to \"true\", the input field of component will not be rendered. Only the default slot that is passed will be rendered.\n\n*Note:** Use this property in combination with the default slot to achieve a button-only file uploader design.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 90,
+      "since": null
+    },
+    {
+      "name": "maxFileSize",
+      "type": "number",
+      "default": null,
+      "description": "Defines the maximum file size in megabytes which prevents the upload if at least one file exceeds it.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 95,
+      "since": null
+    },
+    {
+      "name": "multiple",
+      "type": "boolean",
+      "default": null,
+      "description": "Allows multiple files to be chosen.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 100,
+      "since": null
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "default": null,
+      "description": "Determines the name by which the component will be identified upon submission in an HTML form.\n\n*Note:** This property is only applicable within the context of an HTML Form element.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 107,
+      "since": null
+    },
+    {
+      "name": "placeholder",
+      "type": "string",
+      "default": null,
+      "description": "Defines a short hint intended to aid the user with data entry when the component has no value.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 112,
+      "since": null
+    },
+    {
+      "name": "required",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines whether the component is required.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 117,
+      "since": null
+    },
+    {
+      "name": "value",
+      "type": "string",
+      "default": null,
+      "description": "Defines the name/names of the file/files to upload.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 122,
+      "since": null
+    },
+    {
+      "name": "valueState",
+      "type": "'None' | 'Positive' | 'Critical' | 'Negative' | 'Information'",
+      "default": null,
+      "description": "Defines the value state of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 127,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5Change",
+      "type": "UI5CustomEvent<FileUploader, 'change'>",
+      "default": null,
+      "description": "Event is fired when the value of the file path has been changed.\n\n*Note:** Keep in mind that because of the HTML input element of type file, the event is also fired in Chrome browser when the Cancel button of the uploads window is pressed.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 142,
+      "since": null
+    },
+    {
+      "name": "ui5FileSizeExceed",
+      "type": "UI5CustomEvent<FileUploader, 'file-size-exceed'>",
+      "default": null,
+      "description": "Event is fired when the size of a file is above the `maxFileSize` property value.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 147,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

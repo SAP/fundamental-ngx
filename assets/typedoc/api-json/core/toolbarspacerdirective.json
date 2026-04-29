@@ -1,0 +1,44 @@
+{
+  "name": "ToolbarSpacerDirective",
+  "selector": "fd-toolbar-spacer",
+  "kind": "Directive",
+  "sourceFile": "toolbar-spacer.directive.ts",
+  "sourceLine": 8,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/toolbar/toolbar-spacer.directive.ts#L8",
+  "description": "",
+  "inputs": [
+    {
+      "name": "class",
+      "type": "string",
+      "default": "''",
+      "description": "Property allows user to pass additional class",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 20,
+      "since": null
+    },
+    {
+      "name": "fixed",
+      "type": "boolean",
+      "default": "false",
+      "description": "Determines if spacer should take only size taken from width property\nDefault value: false\nDefault behaviour: spacer takes remaining space automatically",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 27,
+      "since": null
+    },
+    {
+      "name": "width",
+      "type": "string",
+      "default": "'0px'",
+      "description": "Determines the width of spacer when fixed property is set to true\nAllowed values: absolute and relative metrics\nDefault value: 0px",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 15,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

@@ -1,0 +1,135 @@
+{
+  "name": "Table",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "accessibleName",
+      "type": "string",
+      "default": null,
+      "description": "Defines the accessible ARIA name of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 45,
+      "since": null
+    },
+    {
+      "name": "accessibleNameRef",
+      "type": "string",
+      "default": null,
+      "description": "Identifies the element (or elements) that labels the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 50,
+      "since": null
+    },
+    {
+      "name": "alternateRowColors",
+      "type": "boolean",
+      "default": null,
+      "description": "Determines whether the table rows are displayed with alternating background colors.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 55,
+      "since": null
+    },
+    {
+      "name": "loading",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines if the loading indicator should be shown.\n\n*Note:** When the component is loading, it is not interactive.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 62,
+      "since": null
+    },
+    {
+      "name": "loadingDelay",
+      "type": "number",
+      "default": null,
+      "description": "Defines the delay in milliseconds, after which the loading indicator will show up for this component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 67,
+      "since": null
+    },
+    {
+      "name": "noDataText",
+      "type": "string",
+      "default": null,
+      "description": "Defines the text to be displayed when there are no rows in the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 72,
+      "since": null
+    },
+    {
+      "name": "overflowMode",
+      "type": "'Scroll' | 'Popin'",
+      "default": null,
+      "description": "Defines the mode of the <code>ui5-table</code> overflow behavior.\n\nAvailable options are:\n\n<code>Scroll</code> - Columns are shown as regular columns and horizontal scrolling is enabled.\n<code>Popin</code> - Columns are shown as pop-ins instead of regular columns.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 82,
+      "since": null
+    },
+    {
+      "name": "rowActionCount",
+      "type": "number",
+      "default": null,
+      "description": "Defines the maximum number of row actions that is displayed, which determines the width of the row action column.\n\n*Note:** It is recommended to use a maximum of 3 row actions, as exceeding this limit may take up too much space on smaller screens.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 89,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5Move",
+      "type": "UI5CustomEvent<Table, 'move'>",
+      "default": null,
+      "description": "Fired when a movable list item is dropped onto a drop target.\n\n*Notes:**\n\nThe `move` event is fired only if there was a preceding `move-over` with prevented default action.\n\nIf the dragging operation is a cross-browser operation or files are moved to a potential drop target,\nthe `source` parameter will be `null`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 103,
+      "since": null
+    },
+    {
+      "name": "ui5MoveOver",
+      "type": "UI5CustomEvent<Table, 'move-over'>",
+      "default": null,
+      "description": "Fired when a movable item is moved over a potential drop target during a dragging operation.\n\nIf the new position is valid, prevent the default action of the event using `preventDefault()`.\n\n*Note:** If the dragging operation is a cross-browser operation or files are moved to a potential drop target,\nthe `source` parameter will be `null`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 113,
+      "since": null
+    },
+    {
+      "name": "ui5RowActionClick",
+      "type": "UI5CustomEvent<Table, 'row-action-click'>",
+      "default": null,
+      "description": "Fired when a row action is clicked.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 118,
+      "since": null
+    },
+    {
+      "name": "ui5RowClick",
+      "type": "UI5CustomEvent<Table, 'row-click'>",
+      "default": null,
+      "description": "Fired when an interactive row is clicked.\n\n*Note:** This event is not fired if the `behavior` property of the selection component is set to `RowOnly`.\nIn that case, use the `change` event of the selection component instead.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 126,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

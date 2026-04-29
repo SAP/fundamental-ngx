@@ -1,0 +1,13 @@
+{
+  "name": "AvatarGroupOverflowBodyDirective",
+  "selector": "[fdAvatarGroupOverflowBody]",
+  "kind": "Directive",
+  "sourceFile": "avatar-group-overflow-body.directive.ts",
+  "sourceLine": 12,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/avatar-group/directives/avatar-group-overflow-body.directive.ts#L12",
+  "description": "Avatar group overflow body directive, used to provide a template for the avatar group overflow body.\nIf nothing is provided, default overflow body will be used.",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

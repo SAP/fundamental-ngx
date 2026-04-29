@@ -1,0 +1,13 @@
+{
+  "name": "SegmentedButtonHeaderDirective",
+  "selector": "li[fd-menu-item][fdMenuSegmentedButtonHeader]",
+  "kind": "Directive",
+  "sourceFile": "segmented-button-header.directive.ts",
+  "sourceLine": 26,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/menu/directives/segmented-button/segmented-button-header.directive.ts#L26",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

@@ -1,0 +1,54 @@
+{
+  "name": "FormMessageComponent",
+  "selector": "fd-form-message",
+  "kind": "Component",
+  "sourceFile": "form-message.component.ts",
+  "sourceLine": 29,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/form/form-message/form-message.component.ts#L29",
+  "description": "Form message. Intended to be displayed with a form control for validation purposes.",
+  "inputs": [
+    {
+      "name": "class",
+      "type": "string",
+      "default": null,
+      "description": "User's custom classes",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 47,
+      "since": null
+    },
+    {
+      "name": "embedded",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether message is used inside popovers or dialogs.\nWhen it is enabled box shadow is removed and message is expanded to whole container width",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 43,
+      "since": null
+    },
+    {
+      "name": "static",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether message should be in static mode, without popover. It's mostly used for forms component, that contain dropdown",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 36,
+      "since": null
+    },
+    {
+      "name": "type",
+      "type": "'error' | 'default' | 'information' | 'warning' | 'success'",
+      "default": null,
+      "description": "Type of the message.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 32,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

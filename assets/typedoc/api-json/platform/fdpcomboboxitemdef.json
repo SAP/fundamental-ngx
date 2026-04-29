@@ -1,0 +1,13 @@
+{
+  "name": "FdpComboboxItemDef",
+  "selector": "[fdpComboboxItem]",
+  "kind": "Class",
+  "sourceFile": "combobox-item.directive.ts",
+  "sourceLine": 12,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/combobox/directives/combobox-item.directive.ts#L12",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

@@ -1,0 +1,92 @@
+{
+  "name": "TableInitialStateDirective",
+  "selector": null,
+  "kind": "Directive",
+  "sourceFile": "table-initial-state.directive.ts",
+  "sourceLine": 19,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/table-helpers/directives/table-initial-state.directive.ts#L19",
+  "description": "",
+  "inputs": [
+    {
+      "name": "initialFilterBy",
+      "type": "CollectionFilter[]",
+      "default": "[]",
+      "description": "Initial filter options.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 30,
+      "since": null
+    },
+    {
+      "name": "initialGroupBy",
+      "type": "CollectionGroup[]",
+      "default": "[]",
+      "description": "Initial group options.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 34,
+      "since": null
+    },
+    {
+      "name": "initialPage",
+      "type": "number",
+      "default": "1",
+      "description": "Initial page.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 38,
+      "since": null
+    },
+    {
+      "name": "initialSortBy",
+      "type": "CollectionSort[]",
+      "default": "[]",
+      "description": "Initial sort options.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 26,
+      "since": null
+    },
+    {
+      "name": "initialVisibleColumns",
+      "type": "string[]",
+      "default": null,
+      "description": "Initial visible columns. Consist of a list of unique column names",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 22,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "getTableState",
+      "signature": "() => TableState",
+      "description": "Get current state/settings of the Table.",
+      "deprecated": null,
+      "sourceLine": 104,
+      "since": null,
+      "parameters": [],
+      "returnType": "TableState"
+    },
+    {
+      "name": "setTableState",
+      "signature": "(state: TableState) => void",
+      "description": "Set current state/settings of the Table.",
+      "deprecated": null,
+      "sourceLine": 109,
+      "since": null,
+      "parameters": [
+        {
+          "name": "state",
+          "type": "TableState",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

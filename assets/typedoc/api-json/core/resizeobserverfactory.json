@@ -1,0 +1,31 @@
+{
+  "name": "ResizeObserverFactory",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "resize-observer.service.ts",
+  "sourceLine": 12,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cdk/utils/services/resize-observer.service.ts#L12",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "create",
+      "signature": "(callback: ResizeObserverCallback) => null | ResizeObserver",
+      "description": "Factory to create ResizeObserver if it's present in browser.",
+      "deprecated": null,
+      "sourceLine": 14,
+      "since": null,
+      "parameters": [
+        {
+          "name": "callback",
+          "type": "ResizeObserverCallback",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "null | ResizeObserver"
+    }
+  ],
+  "inherited": null
+}

@@ -1,0 +1,95 @@
+{
+  "name": "DynamicSideContent",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 43,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "accessibilityAttributes",
+      "type": "DynamicSideContentAccessibilityAttributes",
+      "default": null,
+      "description": "Defines additional accessibility attributes on different areas of the component.\n\nThe accessibilityAttributes object has the following fields:\n\n- **mainContent**: `mainContent.ariaLabel` defines the aria-label of the main content area. Accepts any string.\n- **sideContent**: `sideContent.ariaLabel` defines the aria-label of the side content area. Accepts any string.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 53,
+      "since": null
+    },
+    {
+      "name": "equalSplit",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines whether the component is in equal split mode. In this mode, the side and\nthe main content take 50:50 percent of the container on all screen sizes\nexcept for phone, where the main and side contents are switching visibility\nusing the toggle method.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 61,
+      "since": null
+    },
+    {
+      "name": "hideMainContent",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines the visibility of the main content.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 66,
+      "since": null
+    },
+    {
+      "name": "hideSideContent",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines the visibility of the side content.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 71,
+      "since": null
+    },
+    {
+      "name": "sideContentFallDown",
+      "type": "'BelowXL' | 'BelowL' | 'BelowM' | 'OnMinimumWidth'",
+      "default": null,
+      "description": "Defines on which breakpoints the side content falls down below the main content.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 76,
+      "since": null
+    },
+    {
+      "name": "sideContentPosition",
+      "type": "'End' | 'Start'",
+      "default": null,
+      "description": "Defines whether the side content is positioned before the main content (left side\nin LTR mode), or after the the main content (right side in LTR mode).",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 82,
+      "since": null
+    },
+    {
+      "name": "sideContentVisibility",
+      "type": "'AlwaysShow' | 'ShowAboveL' | 'ShowAboveM' | 'ShowAboveS' | 'NeverShow'",
+      "default": null,
+      "description": "Defines on which breakpoints the side content is visible.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 87,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5LayoutChange",
+      "type": "UI5CustomEvent<DynamicSideContent, 'layout-change'>",
+      "default": null,
+      "description": "Fires when the current breakpoint has been changed.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 94,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

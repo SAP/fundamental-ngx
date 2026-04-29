@@ -1,0 +1,76 @@
+{
+  "name": "BaseToastDurationDismissibleRef",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "base-toast-duration-dismissible-ref.ts",
+  "sourceLine": 12,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cdk/utils/toast/classes/duration-dismissible/base-toast-duration-dismissible-ref.ts#L12",
+  "description": "Base toast reference for toasts that can be dismissed after a duration and support mouse hover persistence.\nExtends BaseToastRef with timer management capabilities for auto-dismissing toasts.",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "cancelDismiss",
+      "signature": "() => void",
+      "description": "Cancels current dismiss timeout",
+      "deprecated": null,
+      "sourceLine": 36,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "dismiss",
+      "signature": "() => void",
+      "description": "Dismisses the toast and clears the timeout.",
+      "deprecated": null,
+      "sourceLine": 24,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "dismissAfter",
+      "signature": "(duration: number) => void",
+      "description": "Dismisses the Toast component after some duration",
+      "deprecated": null,
+      "sourceLine": 31,
+      "since": null,
+      "parameters": [
+        {
+          "name": "duration",
+          "type": "number",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": {
+    "from": "BaseToastRef",
+    "inputs": [],
+    "methods": [
+      {
+        "name": "afterDismissed",
+        "signature": "() => Observable<void>",
+        "description": "Gets an observable that is notified when the Toast is finished closing.",
+        "deprecated": null,
+        "sourceLine": 45,
+        "since": null,
+        "parameters": [],
+        "returnType": "Observable<void>"
+      },
+      {
+        "name": "afterOpened",
+        "signature": "() => Observable<void>",
+        "description": "Gets an observable that is notified when the Toast has opened and appeared.",
+        "deprecated": null,
+        "sourceLine": 50,
+        "since": null,
+        "parameters": [],
+        "returnType": "Observable<void>"
+      }
+    ]
+  }
+}

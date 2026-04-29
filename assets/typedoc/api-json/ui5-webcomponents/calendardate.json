@@ -1,0 +1,24 @@
+{
+  "name": "CalendarDate",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "value",
+      "type": "string",
+      "default": null,
+      "description": "The date formatted according to the `formatPattern` property\nof the `ui5-calendar` that hosts the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 46,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

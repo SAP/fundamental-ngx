@@ -1,0 +1,44 @@
+{
+  "name": "TitleComponent",
+  "selector": "[fd-title], [fdTitle]",
+  "kind": "Component",
+  "sourceFile": "title.component.ts",
+  "sourceLine": 72,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/title/title.component.ts#L72",
+  "description": "Title component for rendering semantic headings with Fundamental styles.\n\nApplied as an attribute directive to heading elements (h1-h6).\nAutomatically detects heading level from the tag name or can be explicitly set via `headerSize`.",
+  "inputs": [
+    {
+      "name": "headerSize",
+      "type": "null | HeaderSizes",
+      "default": null,
+      "description": "Explicit header size (1-6) for the title styling.\nIf not provided, uses the injected DEFAULT_TITLE_SIZE or automatically detected from the host element's tag name.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 81,
+      "since": null
+    },
+    {
+      "name": "twoLineClamp",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether this title should clamp at two lines of text.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 74,
+      "since": null
+    },
+    {
+      "name": "wrap",
+      "type": "boolean",
+      "default": null,
+      "description": "Enables text wrapping. When `false`, text truncates with ellipsis.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 87,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

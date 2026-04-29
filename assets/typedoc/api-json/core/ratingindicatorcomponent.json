@@ -1,0 +1,215 @@
+{
+  "name": "RatingIndicatorComponent",
+  "selector": "fd-rating-indicator",
+  "kind": "Component",
+  "sourceFile": "rating-indicator.component.ts",
+  "sourceLine": 64,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/rating-indicator/components/rating-indicator.component.ts#L64",
+  "description": "Set of fields of FormItemControl component",
+  "inputs": [
+    {
+      "name": "allowHalves",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether or not to display half values.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 113,
+      "since": null
+    },
+    {
+      "name": "ariaLabel",
+      "type": "null | string",
+      "default": null,
+      "description": "Sets the aria-label attribute to the element.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 71,
+      "since": null
+    },
+    {
+      "name": "ariaLabelledBy",
+      "type": "null | string",
+      "default": null,
+      "description": "Sets the aria-labelledby attribute to the element.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 76,
+      "since": null
+    },
+    {
+      "name": "ariaRoledescription",
+      "type": "null | string",
+      "default": null,
+      "description": "Sets the aria-roledescription attribute to the element.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 81,
+      "since": null
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": null,
+      "description": "Input for disabled state from parent component.\nSets the aria-disabled attribute to the element.\nSets the is-disabled class to the element.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 88,
+      "since": null
+    },
+    {
+      "name": "displayAllRatings",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether or not to display the popover that shows the sum of each rating. Requires [ratings] object.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 139,
+      "since": null
+    },
+    {
+      "name": "displayMode",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the rating indicator is in displayMode",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 93,
+      "since": null
+    },
+    {
+      "name": "dynamicTextIndicator",
+      "type": "string",
+      "default": null,
+      "description": "Text divider label between view value and indicator count.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 159,
+      "since": null
+    },
+    {
+      "name": "indicatorCapacity",
+      "type": "number",
+      "default": null,
+      "description": "Number of rates to display",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 103,
+      "since": null
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "default": null,
+      "description": "Sets [name] attribute of input.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 66,
+      "since": null
+    },
+    {
+      "name": "nonInteractive",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the rating indicator is in non-interactive state.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 98,
+      "since": null
+    },
+    {
+      "name": "ratedIcon",
+      "type": "string",
+      "default": null,
+      "description": "Icon class for rated icon from fundamental-styles lib https://sap.github.io/fundamental-styles/?path=/docs/components-icon--sizes",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 144,
+      "since": null
+    },
+    {
+      "name": "ratingAverage",
+      "type": "null | number",
+      "default": null,
+      "description": "Rating average",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 128,
+      "since": null
+    },
+    {
+      "name": "ratings",
+      "type": "null | NumberKey<number>",
+      "default": null,
+      "description": "Object containing key-value pairs where the key is the rating and the value is the total sum of those ratings.\nOverrides totalRatings and ratingAverage.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 134,
+      "since": null
+    },
+    {
+      "name": "showDynamicText",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether to display the dynamic text (rating value and count) after the rating indicator.\nWhen false, only the star rating UI is shown without any text.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 165,
+      "since": null
+    },
+    {
+      "name": "size",
+      "type": "RatingIndicatorSize",
+      "default": null,
+      "description": "Possible values are 'xs', 'sm', 'md', 'lg', 'cozy', 'compact', 'condensed'",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 154,
+      "since": null
+    },
+    {
+      "name": "totalRatings",
+      "type": "null | number",
+      "default": null,
+      "description": "Total number of ratings. If provided, will display text showing the total number of ratings.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 123,
+      "since": null
+    },
+    {
+      "name": "unratedIcon",
+      "type": "string",
+      "default": null,
+      "description": "Icon class for unrated icon from fundamental-styles lib https://sap.github.io/fundamental-styles/?path=/docs/components-icon--sizes",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 149,
+      "since": null
+    },
+    {
+      "name": "value",
+      "type": "number",
+      "default": null,
+      "description": "User's value number of ratings. If provided, Overrides ratingAverage.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 118,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ratingChanged",
+      "type": "number",
+      "default": null,
+      "description": "Fired when the user sets or changes their rating.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 170,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

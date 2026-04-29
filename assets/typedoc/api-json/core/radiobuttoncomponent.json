@@ -1,0 +1,165 @@
+{
+  "name": "RadioButtonComponent",
+  "selector": "fd-radio-button",
+  "kind": "Component",
+  "sourceFile": "radio-button.component.ts",
+  "sourceLine": 50,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/radio/radio-button/radio-button.component.ts#L50",
+  "description": "Set of fields of FormItemControl component",
+  "inputs": [
+    {
+      "name": "ariaDescribedBy",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "Sets the `aria-describedby` attribute to the element.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 67,
+      "since": null
+    },
+    {
+      "name": "ariaLabel",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "Sets the `aria-label` attribute to the element.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 59,
+      "since": null
+    },
+    {
+      "name": "ariaLabelledBy",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "Sets the `aria-labelledby` attribute to the element.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 63,
+      "since": null
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "description": "The field is used to tell if radio button should be disabled\nValue: true or false\nby default disabled state is set to false",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 97,
+      "since": null
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "default": null,
+      "description": "uniqueId to a radio button",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 123,
+      "since": null
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "default": null,
+      "description": "The name of the radio button\nThe field is mandatory",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 117,
+      "since": null
+    },
+    {
+      "name": "readOnly",
+      "type": "boolean",
+      "default": "false",
+      "description": "The field is used to tell if radio button should be read only",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 101,
+      "since": null
+    },
+    {
+      "name": "required",
+      "type": "boolean",
+      "default": "false",
+      "description": "If it is a mandatory field",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 133,
+      "since": null
+    },
+    {
+      "name": "standalone",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the control is a standalone.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 137,
+      "since": null
+    },
+    {
+      "name": "state",
+      "type": "stateType",
+      "default": "'default'",
+      "description": "The field to set state of radio button using:\n'success' | 'error' | 'warning' | 'default' | 'information'\nby default value is set to 'default'",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 90,
+      "since": null
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "default": null,
+      "description": "sets radio tooltip",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 71,
+      "since": null
+    },
+    {
+      "name": "valignLabel",
+      "type": "'top' | 'middle'",
+      "default": "'middle'",
+      "description": "Vertical position of the label compared to the radio button",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 143,
+      "since": null
+    },
+    {
+      "name": "value",
+      "type": "T",
+      "default": null,
+      "description": "Value field stores information about holding value by radio button\nThe field is mandatory",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 129,
+      "since": null
+    },
+    {
+      "name": "wrapLabel",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether input label should be wrapped",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 140,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "buildComponentCssClass",
+      "signature": "() => string[]",
+      "description": "This method is responsible for building a css class based on current state\n It is implementation of CssClassBuilder interface and\n should be used with",
+      "deprecated": null,
+      "sourceLine": 176,
+      "since": null,
+      "parameters": [],
+      "returnType": "string[]"
+    }
+  ],
+  "inherited": null
+}

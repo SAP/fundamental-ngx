@@ -1,0 +1,55 @@
+{
+  "name": "OptionComponent",
+  "selector": "[fd-option], fd-option",
+  "kind": "Component",
+  "sourceFile": "option.component.ts",
+  "sourceLine": 83,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/select/option/option.component.ts#L83",
+  "description": "Used to represent an option of the select component.",
+  "inputs": [
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to disable this option specifically.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 94,
+      "since": null
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "default": null,
+      "description": "Option id attribute",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 86,
+      "since": null
+    },
+    {
+      "name": "value",
+      "type": "any",
+      "default": null,
+      "description": "Value of the option. Similar to how a native select operates.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 90,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "selectionChange",
+      "type": "FdOptionSelectionChange",
+      "default": null,
+      "description": "Emits event when option is selected or deselected.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 100,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

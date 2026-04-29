@@ -1,0 +1,31 @@
+{
+  "name": "TableRowImpl",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "table-row.model.ts",
+  "sourceLine": 108,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/table-helpers/models/table-row.model.ts#L108",
+  "description": "Table row entity\nUsed to represent table row in the template",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "setRowType",
+      "signature": "(type: TableRowType) => void",
+      "description": "Sets the row type and checks whether the row is a tree.",
+      "deprecated": null,
+      "sourceLine": 200,
+      "since": null,
+      "parameters": [
+        {
+          "name": "type",
+          "type": "TableRowType",
+          "description": "Row type.",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

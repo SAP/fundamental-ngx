@@ -1,0 +1,54 @@
+{
+  "name": "FormGeneratorComponentsAccessorService",
+  "selector": null,
+  "kind": "Service",
+  "sourceFile": "form-generator-components-accessor.service.ts",
+  "sourceLine": 14,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/form-generator/form-generator-components-accessor.service.ts#L14",
+  "description": "Since form generator service most probably will be provided by parent component,\nso that forms map does not interfere with other form generators,\nComponents Accessor is a separate service with a global scope, which can be also provided per component.",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "addComponent",
+      "signature": "(component: Type<BaseDynamicFormGeneratorControl<BaseDynamicFormFieldItem<any>>>, types: string[]) => boolean",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 25,
+      "since": null,
+      "parameters": [
+        {
+          "name": "component",
+          "type": "Type<BaseDynamicFormGeneratorControl<BaseDynamicFormFieldItem<any>>>",
+          "description": "Angular component.",
+          "optional": false
+        },
+        {
+          "name": "types",
+          "type": "string[]",
+          "description": "types of the form item.",
+          "optional": false
+        }
+      ],
+      "returnType": "boolean"
+    },
+    {
+      "name": "getComponentDefinitionByType",
+      "signature": "(type: string) => FormComponentDefinition",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 58,
+      "since": null,
+      "parameters": [
+        {
+          "name": "type",
+          "type": "string",
+          "description": "form item type",
+          "optional": false
+        }
+      ],
+      "returnType": "FormComponentDefinition"
+    }
+  ],
+  "inherited": null
+}

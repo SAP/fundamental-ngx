@@ -1,0 +1,108 @@
+{
+  "name": "FocusTrapService",
+  "selector": null,
+  "kind": "Service",
+  "sourceFile": "focus-trap.service.ts",
+  "sourceLine": 8,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cdk/utils/services/focus-trap.service.ts#L8",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "activateFocusTrap",
+      "signature": "(id: string) => void",
+      "description": "Activates focus trap for defined ID",
+      "deprecated": null,
+      "sourceLine": 37,
+      "since": null,
+      "parameters": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Unique ID of focus trap instance",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "createFocusTrap",
+      "signature": "(element: string | HTMLElement | SVGElement | string | HTMLElement | SVGElement[], userOptions?: Options) => string",
+      "description": "Creates focus trap instance for defined element",
+      "deprecated": null,
+      "sourceLine": 18,
+      "since": null,
+      "parameters": [
+        {
+          "name": "element",
+          "type": "string | HTMLElement | SVGElement | string | HTMLElement | SVGElement[]",
+          "description": "Container for which to create focus trap",
+          "optional": false
+        },
+        {
+          "name": "userOptions",
+          "type": "Options",
+          "description": "Focus-trap specific configuration",
+          "optional": true
+        }
+      ],
+      "returnType": "string"
+    },
+    {
+      "name": "deactivateFocusTrap",
+      "signature": "(id: string) => void",
+      "description": "Deactivates focus trap for defined ID",
+      "deprecated": null,
+      "sourceLine": 51,
+      "since": null,
+      "parameters": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Unique ID of focus trap instance",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "getFocusTrapInstance",
+      "signature": "(id: string) => FocusTrap",
+      "description": "Get focus trap instance by ID.",
+      "deprecated": null,
+      "sourceLine": 94,
+      "since": null,
+      "parameters": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "ID of the instance.",
+          "optional": false
+        }
+      ],
+      "returnType": "FocusTrap"
+    },
+    {
+      "name": "pauseCurrentFocusTrap",
+      "signature": "() => void",
+      "description": "Pauses current focus trap.",
+      "deprecated": null,
+      "sourceLine": 66,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "unpauseCurrentFocusTrap",
+      "signature": "() => void",
+      "description": "Unpauses current focus trap.",
+      "deprecated": null,
+      "sourceLine": 79,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

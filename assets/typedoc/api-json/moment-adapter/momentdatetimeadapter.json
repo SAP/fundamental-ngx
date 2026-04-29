@@ -1,0 +1,876 @@
+{
+  "name": "MomentDatetimeAdapter",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "moment-datetime-adapter.ts",
+  "sourceLine": 41,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L41",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "addCalendarDays",
+      "signature": "(date: Moment, days: number) => Moment",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 270,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "Moment",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "days",
+          "type": "number",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "Moment"
+    },
+    {
+      "name": "addCalendarMonths",
+      "signature": "(date: Moment, months: number) => Moment",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 266,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "Moment",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "months",
+          "type": "number",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "Moment"
+    },
+    {
+      "name": "addCalendarYears",
+      "signature": "(date: Moment, years: number) => Moment",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 262,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "Moment",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "years",
+          "type": "number",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "Moment"
+    },
+    {
+      "name": "clone",
+      "signature": "(date: Moment) => Moment",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 274,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "Moment",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "Moment"
+    },
+    {
+      "name": "createDate",
+      "signature": "(year: number, month?: number, date?: number) => Moment",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 228,
+      "since": null,
+      "parameters": [
+        {
+          "name": "year",
+          "type": "number",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "month",
+          "type": "number",
+          "description": "",
+          "optional": true
+        },
+        {
+          "name": "date",
+          "type": "number",
+          "description": "",
+          "optional": true
+        }
+      ],
+      "returnType": "Moment"
+    },
+    {
+      "name": "dateTimesEqual",
+      "signature": "(date1: Moment, date2: Moment) => boolean",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 290,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date1",
+          "type": "Moment",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "date2",
+          "type": "Moment",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "boolean"
+    },
+    {
+      "name": "datesEqual",
+      "signature": "(date1: Moment, date2: Moment) => boolean",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 282,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date1",
+          "type": "Moment",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "date2",
+          "type": "Moment",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "boolean"
+    },
+    {
+      "name": "format",
+      "signature": "(date: Moment, displayFormat: string) => string",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 214,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "Moment",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "displayFormat",
+          "type": "string",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "string"
+    },
+    {
+      "name": "fromNow",
+      "signature": "(date: Moment) => string",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 64,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "Moment",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "string"
+    },
+    {
+      "name": "getDate",
+      "signature": "(date: Moment) => number",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 90,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "Moment",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "number"
+    },
+    {
+      "name": "getDateNames",
+      "signature": "() => string[]",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 138,
+      "since": null,
+      "parameters": [],
+      "returnType": "string[]"
+    },
+    {
+      "name": "getDayOfWeek",
+      "signature": "(date: Moment) => number",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 94,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "Moment",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "number"
+    },
+    {
+      "name": "getDayOfWeekNames",
+      "signature": "(style: 'long' | 'short' | 'narrow') => string[]",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 142,
+      "since": null,
+      "parameters": [
+        {
+          "name": "style",
+          "type": "'long' | 'short' | 'narrow'",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "string[]"
+    },
+    {
+      "name": "getDayPeriodNames",
+      "signature": "(isLower: boolean) => [string, string]",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 188,
+      "since": null,
+      "parameters": [
+        {
+          "name": "isLower",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "[string, string]"
+    },
+    {
+      "name": "getFirstDayOfWeek",
+      "signature": "() => number",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 195,
+      "since": null,
+      "parameters": [],
+      "returnType": "number"
+    },
+    {
+      "name": "getHourNames",
+      "signature": "(__namedParameters: { meridian: boolean; twoDigit: boolean }) => string[]",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 162,
+      "since": null,
+      "parameters": [
+        {
+          "name": "__namedParameters",
+          "type": "{ meridian: boolean; twoDigit: boolean }",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "string[]"
+    },
+    {
+      "name": "getHours",
+      "signature": "(date: Moment) => number",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 98,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "Moment",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "number"
+    },
+    {
+      "name": "getMinuteNames",
+      "signature": "(__namedParameters: { minuteStep: number; twoDigit: boolean }) => string[]",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 169,
+      "since": null,
+      "parameters": [
+        {
+          "name": "__namedParameters",
+          "type": "{ minuteStep: number; twoDigit: boolean }",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "string[]"
+    },
+    {
+      "name": "getMinutes",
+      "signature": "(date: Moment) => number",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 102,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "Moment",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "number"
+    },
+    {
+      "name": "getMonth",
+      "signature": "(date: Moment) => number",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 86,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "Moment",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "number"
+    },
+    {
+      "name": "getMonthNames",
+      "signature": "(style: 'long' | 'short' | 'narrow') => string[]",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 126,
+      "since": null,
+      "parameters": [
+        {
+          "name": "style",
+          "type": "'long' | 'short' | 'narrow'",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "string[]"
+    },
+    {
+      "name": "getNumDaysInMonth",
+      "signature": "(date: Moment) => number",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 199,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "Moment",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "number"
+    },
+    {
+      "name": "getSecondNames",
+      "signature": "(__namedParameters: { twoDigit: boolean }) => string[]",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 180,
+      "since": null,
+      "parameters": [
+        {
+          "name": "__namedParameters",
+          "type": "{ twoDigit: boolean }",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "string[]"
+    },
+    {
+      "name": "getSeconds",
+      "signature": "(date: Moment) => number",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 106,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "Moment",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "number"
+    },
+    {
+      "name": "getWeekName",
+      "signature": "(date: Moment) => string",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 158,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "Moment",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "string"
+    },
+    {
+      "name": "getWeekNumber",
+      "signature": "(date: Moment) => number",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 122,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "Moment",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "number"
+    },
+    {
+      "name": "getYear",
+      "signature": "(date: Moment) => number",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 82,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "Moment",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "number"
+    },
+    {
+      "name": "getYearName",
+      "signature": "(date: Moment) => string",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 154,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "Moment",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "string"
+    },
+    {
+      "name": "isBetween",
+      "signature": "(dateToCheck: Moment, startDate: Moment, endDate: Moment) => boolean",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 298,
+      "since": null,
+      "parameters": [
+        {
+          "name": "dateToCheck",
+          "type": "Moment",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "startDate",
+          "type": "Moment",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "endDate",
+          "type": "Moment",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "boolean"
+    },
+    {
+      "name": "isTimeFormatIncludesDayPeriod",
+      "signature": "(displayFormat: string) => boolean",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 314,
+      "since": null,
+      "parameters": [
+        {
+          "name": "displayFormat",
+          "type": "string",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "boolean"
+    },
+    {
+      "name": "isTimeFormatIncludesHours",
+      "signature": "(displayFormat: string) => boolean",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 320,
+      "since": null,
+      "parameters": [
+        {
+          "name": "displayFormat",
+          "type": "string",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "boolean"
+    },
+    {
+      "name": "isTimeFormatIncludesMinutes",
+      "signature": "(displayFormat: string) => boolean",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 326,
+      "since": null,
+      "parameters": [
+        {
+          "name": "displayFormat",
+          "type": "string",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "boolean"
+    },
+    {
+      "name": "isTimeFormatIncludesSeconds",
+      "signature": "(displayFormat: string) => boolean",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 332,
+      "since": null,
+      "parameters": [
+        {
+          "name": "displayFormat",
+          "type": "string",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "boolean"
+    },
+    {
+      "name": "isValid",
+      "signature": "(date: Nullable<Moment>) => date is Moment",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 306,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "Nullable<Moment>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "date is Moment"
+    },
+    {
+      "name": "now",
+      "signature": "() => Moment",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 258,
+      "since": null,
+      "parameters": [],
+      "returnType": "Moment"
+    },
+    {
+      "name": "parse",
+      "signature": "(value: any, parseFormat: MomentFormatSpecification) => null | Moment",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 203,
+      "since": null,
+      "parameters": [
+        {
+          "name": "value",
+          "type": "any",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "parseFormat",
+          "type": "MomentFormatSpecification",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "null | Moment"
+    },
+    {
+      "name": "setHours",
+      "signature": "(date: Moment, hours: number) => Moment",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 110,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "Moment",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "hours",
+          "type": "number",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "Moment"
+    },
+    {
+      "name": "setLocale",
+      "signature": "(locale: string) => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 66,
+      "since": null,
+      "parameters": [
+        {
+          "name": "locale",
+          "type": "string",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setMinutes",
+      "signature": "(date: Moment, minutes: number) => Moment",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 114,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "Moment",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "minutes",
+          "type": "number",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "Moment"
+    },
+    {
+      "name": "setSeconds",
+      "signature": "(date: Moment, seconds: number) => Moment",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 118,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "Moment",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "seconds",
+          "type": "number",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "Moment"
+    },
+    {
+      "name": "toIso8601",
+      "signature": "(date: Moment) => string",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 310,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "Moment",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "string"
+    },
+    {
+      "name": "today",
+      "signature": "() => Moment",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 254,
+      "since": null,
+      "parameters": [],
+      "returnType": "Moment"
+    }
+  ],
+  "inherited": {
+    "from": "DatetimeAdapter",
+    "inputs": [],
+    "methods": [
+      {
+        "name": "compareDate",
+        "signature": "(first: Moment, second: Moment) => number",
+        "description": "Compares two dates.",
+        "deprecated": null,
+        "sourceLine": 374,
+        "since": null,
+        "parameters": [
+          {
+            "name": "first",
+            "type": "Moment",
+            "description": "The first date to compare.",
+            "optional": false
+          },
+          {
+            "name": "second",
+            "type": "Moment",
+            "description": "The second date to compare.",
+            "optional": false
+          }
+        ],
+        "returnType": "number"
+      },
+      {
+        "name": "getAmountOfWeeks",
+        "signature": "(year: number, month: number, firstDayOfWeek: number) => number",
+        "description": "Get Amount of weeks in given month/year",
+        "deprecated": null,
+        "sourceLine": 357,
+        "since": null,
+        "parameters": [
+          {
+            "name": "year",
+            "type": "number",
+            "description": "The year of the date",
+            "optional": false
+          },
+          {
+            "name": "month",
+            "type": "number",
+            "description": "The month of the date",
+            "optional": false
+          },
+          {
+            "name": "firstDayOfWeek",
+            "type": "number",
+            "description": "The first day of week. 1 - Sunday, 2 - Monday...",
+            "optional": false
+          }
+        ],
+        "returnType": "number"
+      },
+      {
+        "name": "setTime",
+        "signature": "(date: Moment, hours: number, minutes: number, seconds: number) => Moment",
+        "description": "Set hours, minutes and seconds at once.",
+        "deprecated": null,
+        "sourceLine": 343,
+        "since": null,
+        "parameters": [
+          {
+            "name": "date",
+            "type": "Moment",
+            "description": "The date to set time to.",
+            "optional": false
+          },
+          {
+            "name": "hours",
+            "type": "number",
+            "description": "",
+            "optional": false
+          },
+          {
+            "name": "minutes",
+            "type": "number",
+            "description": "",
+            "optional": false
+          },
+          {
+            "name": "seconds",
+            "type": "number",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "Moment"
+      }
+    ]
+  }
+}

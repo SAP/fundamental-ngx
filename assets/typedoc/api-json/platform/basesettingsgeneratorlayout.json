@@ -1,0 +1,37 @@
+{
+  "name": "BaseSettingsGeneratorLayout",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "base-settings-generator-layout.ts",
+  "sourceLine": 9,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/settings-generator/layouts/base-settings-generator-layout.ts#L9",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "focusElementByPath",
+      "signature": "(path: string, element: ElementRef<HTMLElement>) => void",
+      "description": "Method for focusing inner form control.\nIt is responsible for activating the section and placing focus on the element.",
+      "deprecated": null,
+      "sourceLine": 21,
+      "since": null,
+      "parameters": [
+        {
+          "name": "path",
+          "type": "string",
+          "description": "path of the control joined by dot(.). Usually represents section ID and inner group ID.",
+          "optional": false
+        },
+        {
+          "name": "element",
+          "type": "ElementRef<HTMLElement>",
+          "description": "ElementRef of native element to focus.",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

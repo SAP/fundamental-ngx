@@ -1,0 +1,129 @@
+{
+  "name": "CalendarMonthViewComponent",
+  "selector": "fd-calendar-month-view",
+  "kind": "Component",
+  "sourceFile": "calendar-month-view.component.ts",
+  "sourceLine": 41,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/calendar/calendar-views/calendar-month-view/calendar-month-view.component.ts#L41",
+  "description": "Component representing the month view of the calendar.",
+  "inputs": [
+    {
+      "name": "focusEscapeFunction",
+      "type": "EscapeFocusFunction",
+      "default": null,
+      "description": "A function that handles escape focus",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 52,
+      "since": null
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "default": null,
+      "description": "The id of the calendar passed from the parent component",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 44,
+      "since": null
+    },
+    {
+      "name": "isDateRangeMonthYearFormat",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether to pick the date range in month year format without picking days",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 60,
+      "since": null
+    },
+    {
+      "name": "monthSelected",
+      "type": "number",
+      "default": null,
+      "description": "A number (1-12) representing the selected month",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 48,
+      "since": null
+    },
+    {
+      "name": "rangeHoverEffect",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether user wants to mark month cells on hover.\nWorks only on range mode, when start month is selected.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 75,
+      "since": null
+    },
+    {
+      "name": "year",
+      "type": "number",
+      "default": null,
+      "description": "A year the month view is referring to",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 56,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "monthClicked",
+      "type": "number",
+      "default": null,
+      "description": "An event fired when a new month is selected",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 64,
+      "since": null
+    },
+    {
+      "name": "selectedRangeDateChange",
+      "type": "DateRange<D>",
+      "default": null,
+      "description": "Event thrown every time selected first or last date in range mode is changed",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 68,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "selectMonth",
+      "signature": "(monthCell: CalendarMonth<D>, event?: KeyboardEvent | MouseEvent) => void",
+      "description": "Method for handling the mouse click event when a month is selected",
+      "deprecated": null,
+      "sourceLine": 265,
+      "since": null,
+      "parameters": [
+        {
+          "name": "monthCell",
+          "type": "CalendarMonth<D>",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "event",
+          "type": "KeyboardEvent | MouseEvent",
+          "description": "",
+          "optional": true
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setFocusOnCell",
+      "signature": "() => void",
+      "description": "Set focus on month cell.\nIt can be a selected cell, current month cell or first cell in the list",
+      "deprecated": null,
+      "sourceLine": 284,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

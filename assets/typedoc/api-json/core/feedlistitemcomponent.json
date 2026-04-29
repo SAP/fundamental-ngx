@@ -1,0 +1,104 @@
+{
+  "name": "FeedListItemComponent",
+  "selector": "fd-feed-list-item",
+  "kind": "Component",
+  "sourceFile": "feed-list-item.component.ts",
+  "sourceLine": 29,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/feed-list-item/components/item/feed-list-item.component.ts#L29",
+  "description": "",
+  "inputs": [
+    {
+      "name": "ariaLabel",
+      "type": "string",
+      "default": "''",
+      "description": "Sets the `aria-label` attribute to the element.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 62,
+      "since": null
+    },
+    {
+      "name": "ariaLabelledby",
+      "type": "string",
+      "default": null,
+      "description": "aria-labelledby for element describing.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 68,
+      "since": null
+    },
+    {
+      "name": "authorLink",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "Link to Author of feed",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 44,
+      "since": null
+    },
+    {
+      "name": "authorTitle",
+      "type": "string",
+      "default": null,
+      "description": "Author of feed",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 38,
+      "since": null
+    },
+    {
+      "name": "class",
+      "type": "string",
+      "default": null,
+      "description": "User's custom classes",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 32,
+      "since": null
+    },
+    {
+      "name": "isRichText",
+      "type": "boolean",
+      "default": "false",
+      "description": "Apply rich feed text, please note - we use a formatted text component with this option, it has a list of controlled tags and attibutes.\nThis feature should be handled with care as it allows for countless custom layouts.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 75,
+      "since": null
+    },
+    {
+      "name": "maxChars",
+      "type": "number",
+      "default": null,
+      "description": "Max preview characters of Feed text. If you have more than max characters text, you can toggle preview/full text with more/less button.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 56,
+      "since": null
+    },
+    {
+      "name": "mobile",
+      "type": "boolean",
+      "default": "false",
+      "description": "Apply mobile view",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 81,
+      "since": null
+    },
+    {
+      "name": "text",
+      "type": "string",
+      "default": null,
+      "description": "Feed text",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 50,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

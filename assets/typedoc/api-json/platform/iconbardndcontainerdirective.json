@@ -1,0 +1,137 @@
+{
+  "name": "IconBarDndContainerDirective",
+  "selector": "[fdpIconBarDndContainer], [fdp-icon-bar-dnd-container]",
+  "kind": "Directive",
+  "sourceFile": "icon-bar-dnd-container.directive.ts",
+  "sourceLine": 22,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/icon-tab-bar/directives/dnd/icon-bar-dnd-container.directive.ts#L22",
+  "description": "",
+  "inputs": [],
+  "outputs": [
+    {
+      "name": "dropped",
+      "type": "FdDnDEvent",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 36,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "dragEnd",
+      "signature": "(dragDir: IconTabBarDndItem) => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 146,
+      "since": null,
+      "parameters": [
+        {
+          "name": "dragDir",
+          "type": "IconTabBarDndItem",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "dragStart",
+      "signature": "() => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 71,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "onMove",
+      "signature": "(mousePosition: Point) => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 83,
+      "since": null,
+      "parameters": [
+        {
+          "name": "mousePosition",
+          "type": "Point",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "registerDndList",
+      "signature": "(listDir: IconTabBarDndList) => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 195,
+      "since": null,
+      "parameters": [
+        {
+          "name": "listDir",
+          "type": "IconTabBarDndList",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "registerDragItem",
+      "signature": "(dragItem: IconTabBarDndItem) => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 174,
+      "since": null,
+      "parameters": [
+        {
+          "name": "dragItem",
+          "type": "IconTabBarDndItem",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "removeDndList",
+      "signature": "(listDir: IconTabBarDndList) => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 204,
+      "since": null,
+      "parameters": [
+        {
+          "name": "listDir",
+          "type": "IconTabBarDndList",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "removeDragItem",
+      "signature": "(dragItem: IconTabBarDndItem) => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 186,
+      "since": null,
+      "parameters": [
+        {
+          "name": "dragItem",
+          "type": "IconTabBarDndItem",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

@@ -1,0 +1,41 @@
+{
+  "name": "NestedListExpandIconComponent",
+  "selector": "[fdNestedDirectivesHeader], [fd-nested-list-header]",
+  "kind": "Component",
+  "sourceFile": "nested-list-directives.ts",
+  "sourceLine": 91,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/nested-list/nested-list-directives.ts#L91",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "onClick",
+      "signature": "(event: MouseEvent) => void",
+      "description": "Mouse event handler",
+      "deprecated": null,
+      "sourceLine": 113,
+      "since": null,
+      "parameters": [
+        {
+          "name": "event",
+          "type": "MouseEvent",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onFocus",
+      "signature": "() => void",
+      "description": "Handler for focus events",
+      "deprecated": null,
+      "sourceLine": 120,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

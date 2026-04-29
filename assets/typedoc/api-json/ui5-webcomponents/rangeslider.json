@@ -1,0 +1,155 @@
+{
+  "name": "RangeSlider",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 49,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "accessibleName",
+      "type": "string",
+      "default": null,
+      "description": "Defines the accessible ARIA name of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 54,
+      "since": null
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines whether the slider is in disabled state.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 59,
+      "since": null
+    },
+    {
+      "name": "editableTooltip",
+      "type": "boolean",
+      "default": null,
+      "description": "Indicates whether input fields should be used as tooltips for the handles.\n\n*Note:** Setting this option to true will only work if showTooltip is set to true.\n*Note:** In order for the component to comply with the accessibility standard, it is recommended to set the editableTooltip property to true.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 68,
+      "since": null
+    },
+    {
+      "name": "endValue",
+      "type": "number",
+      "default": null,
+      "description": "Defines end point of a selection - position of a second handle on the slider.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 73,
+      "since": null
+    },
+    {
+      "name": "labelInterval",
+      "type": "number",
+      "default": null,
+      "description": "Displays a label with a value on every N-th step.\n\n*Note:** The step and tickmarks properties must be enabled.\nExample - if the step value is set to 2 and the label interval is also specified to 2 - then every second\ntickmark will be labelled, which means every 4th value number.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 82,
+      "since": null
+    },
+    {
+      "name": "max",
+      "type": "number",
+      "default": null,
+      "description": "Defines the maximum value of the slider.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 87,
+      "since": null
+    },
+    {
+      "name": "min",
+      "type": "number",
+      "default": null,
+      "description": "Defines the minimum value of the slider.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 92,
+      "since": null
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "default": null,
+      "description": "Determines the name by which the component will be identified upon submission in an HTML form.\n\n*Note:** This property is only applicable within the context of an HTML Form element.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 99,
+      "since": null
+    },
+    {
+      "name": "showTickmarks",
+      "type": "boolean",
+      "default": null,
+      "description": "Enables tickmarks visualization for each step.\n\n*Note:** The step must be a positive number.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 106,
+      "since": null
+    },
+    {
+      "name": "showTooltip",
+      "type": "boolean",
+      "default": null,
+      "description": "Enables handle tooltip displaying the current value.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 111,
+      "since": null
+    },
+    {
+      "name": "startValue",
+      "type": "number",
+      "default": null,
+      "description": "Defines start point of a selection - position of a first handle on the slider.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 116,
+      "since": null
+    },
+    {
+      "name": "step",
+      "type": "number",
+      "default": null,
+      "description": "Defines the size of the slider's selection intervals (e.g. min = 0, max = 10, step = 5 would result in possible selection of the values 0, 5, 10).\n\n*Note:** If set to 0 the slider handle movement is disabled. When negative number or value other than a number, the component fallbacks to its default value.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 123,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5Change",
+      "type": "UI5CustomEvent<RangeSlider, 'change'>",
+      "default": null,
+      "description": "Fired when the value changes and the user has finished interacting with the slider.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 130,
+      "since": null
+    },
+    {
+      "name": "ui5Input",
+      "type": "UI5CustomEvent<RangeSlider, 'input'>",
+      "default": null,
+      "description": "Fired when the value changes due to user interaction that is not yet finished - during mouse/touch dragging.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 135,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

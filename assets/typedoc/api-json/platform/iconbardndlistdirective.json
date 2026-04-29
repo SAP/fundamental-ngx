@@ -1,0 +1,86 @@
+{
+  "name": "IconBarDndListDirective",
+  "selector": "[fdpIconBarDndList], [fdp-icon-bar-dnd-list]",
+  "kind": "Directive",
+  "sourceFile": "icon-bar-dnd-list.directive.ts",
+  "sourceLine": 14,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/icon-tab-bar/directives/dnd/icon-bar-dnd-list.directive.ts#L14",
+  "description": "",
+  "inputs": [
+    {
+      "name": "dndAutoScroll",
+      "type": "boolean",
+      "default": "true",
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 25,
+      "since": null
+    },
+    {
+      "name": "dndOrientation",
+      "type": "'horizontal' | 'vertical'",
+      "default": "'vertical'",
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 19,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "changeDraggableState",
+      "signature": "(draggable: boolean) => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 88,
+      "since": null,
+      "parameters": [
+        {
+          "name": "draggable",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "registerDragItem",
+      "signature": "(dragItem: IconTabBarDndItem) => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 71,
+      "since": null,
+      "parameters": [
+        {
+          "name": "dragItem",
+          "type": "IconTabBarDndItem",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "removeDragItem",
+      "signature": "(dragItem: IconTabBarDndItem) => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 80,
+      "since": null,
+      "parameters": [
+        {
+          "name": "dragItem",
+          "type": "IconTabBarDndItem",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

@@ -1,0 +1,13 @@
+{
+  "name": "NotificationFooterContentDirective",
+  "selector": "[fdNotificationFooterContent], [fd-notification-footer-content]",
+  "kind": "Directive",
+  "sourceFile": "notification-footer-content.directive.ts",
+  "sourceLine": 10,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/notification/directives/notification-footer-content.directive.ts#L10",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

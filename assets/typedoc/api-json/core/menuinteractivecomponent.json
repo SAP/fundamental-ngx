@@ -1,0 +1,13 @@
+{
+  "name": "MenuInteractiveComponent",
+  "selector": "[fd-menu-interactive]",
+  "kind": "Component",
+  "sourceFile": "menu-interactive.component.ts",
+  "sourceLine": 30,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/menu/menu-interactive.component.ts#L30",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

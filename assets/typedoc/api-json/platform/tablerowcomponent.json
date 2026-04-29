@@ -1,0 +1,225 @@
+{
+  "name": "TableRowComponent",
+  "selector": "[fdp-table-row]",
+  "kind": "Component",
+  "sourceFile": "table-row.component.ts",
+  "sourceLine": 110,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/table/components/table-row/table-row.component.ts#L110",
+  "description": "",
+  "inputs": [
+    {
+      "name": "enableTristateMode",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether to enable checkbox tristate mode.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 133,
+      "since": null
+    },
+    {
+      "name": "fixed",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether to fix the table header and footer. Default is true.\nNote that if the table contains freezable columns, the header and\nfooter will be fixed automatically, regardless of this input value.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 141,
+      "since": null
+    },
+    {
+      "name": "freezeColumnsTo",
+      "type": "string",
+      "default": null,
+      "description": "The column `name` to freeze columns up to and including.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 149,
+      "since": null
+    },
+    {
+      "name": "freezeEndColumnsTo",
+      "type": "string",
+      "default": null,
+      "description": "The column `name` to freeze columns after and including.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 153,
+      "since": null
+    },
+    {
+      "name": "index",
+      "type": "number",
+      "default": null,
+      "description": "Row index.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 121,
+      "since": null
+    },
+    {
+      "name": "row",
+      "type": "TableRow<T>",
+      "default": null,
+      "description": "Table Row.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 117,
+      "since": null
+    },
+    {
+      "name": "rowId",
+      "type": "string",
+      "default": null,
+      "description": "Row ID.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 113,
+      "since": null
+    },
+    {
+      "name": "selectableKey",
+      "type": "string",
+      "default": null,
+      "description": "Selectable flag key.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 129,
+      "since": null
+    },
+    {
+      "name": "selectionColumnWidth",
+      "type": "number",
+      "default": null,
+      "description": "Selection column width.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 145,
+      "since": null
+    },
+    {
+      "name": "selectionMode",
+      "type": "SelectionModeValue",
+      "default": null,
+      "description": "Selection mode.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 125,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "keyboardDrag",
+      "type": "TableRowKeyboardDrag",
+      "default": null,
+      "description": "Event emitted when keyboard drag performed.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 159,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": {
+    "from": "TableRowDirective",
+    "inputs": [
+      {
+        "name": "listFocusedEventAnnouncer",
+        "type": "(position: FocusableListPosition) => string",
+        "default": null,
+        "description": "Function, which returns a string to be announced by screen-reader whenever an row which is in grid receives focus.",
+        "isSignal": true,
+        "deprecated": null,
+        "sourceLine": 102,
+        "since": null
+      },
+      {
+        "name": "wrap",
+        "type": "boolean",
+        "default": null,
+        "description": "Configures wrapping mode which determines whether the active item will wrap to the other end of list when there are no more items in the given direction.",
+        "isSignal": true,
+        "deprecated": null,
+        "sourceLine": 99,
+        "since": null
+      }
+    ],
+    "methods": [
+      {
+        "name": "focus",
+        "signature": "(scrollPosition?: ScrollPosition) => void",
+        "description": "Focus whole list",
+        "deprecated": null,
+        "sourceLine": 296,
+        "since": null,
+        "parameters": [
+          {
+            "name": "scrollPosition",
+            "type": "ScrollPosition",
+            "description": "",
+            "optional": true
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "setActiveItem",
+        "signature": "(index: number, scrollPosition?: ScrollPosition) => void",
+        "description": "Set active item in list",
+        "deprecated": null,
+        "sourceLine": 277,
+        "since": null,
+        "parameters": [
+          {
+            "name": "index",
+            "type": "number",
+            "description": "",
+            "optional": false
+          },
+          {
+            "name": "scrollPosition",
+            "type": "ScrollPosition",
+            "description": "",
+            "optional": true
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "setItems",
+        "signature": "(items: readonly FocusableItem[]) => void",
+        "description": "Set items programmatically.",
+        "deprecated": null,
+        "sourceLine": 267,
+        "since": null,
+        "parameters": [
+          {
+            "name": "items",
+            "type": "readonly FocusableItem[]",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "setTabbable",
+        "signature": "(state: boolean) => void",
+        "description": "Set tabbable state",
+        "deprecated": null,
+        "sourceLine": 304,
+        "since": null,
+        "parameters": [
+          {
+            "name": "state",
+            "type": "boolean",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      }
+    ]
+  }
+}

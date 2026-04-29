@@ -1,0 +1,143 @@
+{
+  "name": "DynamicPageComponent",
+  "selector": "fdp-dynamic-page",
+  "kind": "Component",
+  "sourceFile": "dynamic-page.component.ts",
+  "sourceLine": 110,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/dynamic-page/dynamic-page.component.ts#L110",
+  "description": "",
+  "inputs": [
+    {
+      "name": "autoResponsive",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether DynamicPage should have responsive sides spacing changing with Page window width.\nmax-width: 599px                         - small\nmin-width: 600px and max-width: 1023px   - medium\nmin-width: 1024px and max-width: 1439px  - large\nmin-width: 1440px                        - extra large",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 154,
+      "since": null
+    },
+    {
+      "name": "background",
+      "type": "DynamicPageBackgroundType",
+      "default": "'solid'",
+      "description": "sets background for content to `list`, `transparent`, or `solid` background color.\nDefault is `solid`.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 131,
+      "since": null
+    },
+    {
+      "name": "disableSnapOnScroll",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether DynamicPage should snap on scroll",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 116,
+      "since": null
+    },
+    {
+      "name": "expandContent",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether dynamic page should be expanded in whole page.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 160,
+      "since": null
+    },
+    {
+      "name": "headingLevel",
+      "type": "HeadingLevel",
+      "default": null,
+      "description": "Heading level of the dynamic page header title.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 222,
+      "since": null
+    },
+    {
+      "name": "offset",
+      "type": "number",
+      "default": "0",
+      "description": "provided offset in px\nShould be added, when there is something else at the bottom and dynamic page is not expanded to bottom's corners",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 145,
+      "since": null
+    },
+    {
+      "name": "size",
+      "type": "DynamicPageResponsiveSize",
+      "default": "'extra-large'",
+      "description": "sets size which in turn adds corresponding padding for the size type.\nsize can be `small`, `medium`, `large`, or `extra-large`.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 138,
+      "since": null
+    },
+    {
+      "name": "stackContent",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether or not tabs should be stacked.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 124,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "tabChange",
+      "type": "DynamicPageTabChangeEvent",
+      "default": null,
+      "description": "Tab Change event",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 166,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "refreshSize",
+      "signature": "() => void",
+      "description": "Triggers recheck for spacing and sizing of elements inside DynamicPage.",
+      "deprecated": null,
+      "sourceLine": 239,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "setSelectedTab",
+      "signature": "(id: string) => void",
+      "description": "marks the dynamic page tab as selected when the id of the tab is passed",
+      "deprecated": null,
+      "sourceLine": 267,
+      "since": null,
+      "parameters": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "toggleCollapse",
+      "signature": "() => void",
+      "description": "toggle the visibility of the header on click of title area.",
+      "deprecated": null,
+      "sourceLine": 234,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

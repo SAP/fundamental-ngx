@@ -1,0 +1,54 @@
+{
+  "name": "TableTextDirective",
+  "selector": "[fdTableText], [fd-table-text]",
+  "kind": "Directive",
+  "sourceFile": "table-text.directive.ts",
+  "sourceLine": 7,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/table/directives/table-text.directive.ts#L7",
+  "description": "",
+  "inputs": [
+    {
+      "name": "fdTableTextClass",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether the text should have shadow (halo) & overflow should be hidden.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 11,
+      "since": null
+    },
+    {
+      "name": "maxWidth",
+      "type": "string",
+      "default": null,
+      "description": "Maximum width of a text element",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 26,
+      "since": null
+    },
+    {
+      "name": "noWrap",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the text should wrap when the text is too long for 1 line",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 16,
+      "since": null
+    },
+    {
+      "name": "title",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the text should be bolded and marked as a title",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 21,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

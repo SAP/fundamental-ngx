@@ -1,0 +1,154 @@
+{
+  "name": "TableCellDirective",
+  "selector": "[fdTableCell], [fd-table-cell]",
+  "kind": "Directive",
+  "sourceFile": "table-cell.directive.ts",
+  "sourceLine": 24,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/table/directives/table-cell.directive.ts#L24",
+  "description": "",
+  "inputs": [
+    {
+      "name": "activable",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the table cell is activable",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 38,
+      "since": null
+    },
+    {
+      "name": "fitContent",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the table cell's width should fit to content",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 58,
+      "since": null
+    },
+    {
+      "name": "hoverable",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the table cell is hoverable",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 53,
+      "since": null
+    },
+    {
+      "name": "key",
+      "type": "string",
+      "default": null,
+      "description": "Key of a cell element, it's used to identify this cell with certain column",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 77,
+      "since": null
+    },
+    {
+      "name": "noBorderX",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to show the table cell's horizontal borders",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 28,
+      "since": null
+    },
+    {
+      "name": "noBorderY",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to show the table cell's vertical borders",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 33,
+      "since": null
+    },
+    {
+      "name": "noData",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the table cell indicates that there is no data",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 68,
+      "since": null
+    },
+    {
+      "name": "noPadding",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the table cell shouldn't have padding on sides",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 63,
+      "since": null
+    },
+    {
+      "name": "nonInteractive",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the table cell inside table header should be non-interactive",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 73,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": {
+    "from": "FocusableItemDirective",
+    "inputs": [
+      {
+        "name": "cellFocusedEventAnnouncer",
+        "type": "CellFocusedEventAnnouncer",
+        "default": null,
+        "description": "Function, which returns a string to be announced by screen-reader whenever an item which is in grid receives focus.",
+        "isSignal": true,
+        "deprecated": null,
+        "sourceLine": 54,
+        "since": null
+      }
+    ],
+    "methods": [
+      {
+        "name": "setFocusable",
+        "signature": "(state: boolean) => void",
+        "description": "Programmatically set the _focusable state.\nThis allows parent components to update the _focusable state.",
+        "deprecated": null,
+        "sourceLine": 132,
+        "since": null,
+        "parameters": [
+          {
+            "name": "state",
+            "type": "boolean",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "setTabbable",
+        "signature": "(state: boolean) => void",
+        "description": "Set tabbable state",
+        "deprecated": null,
+        "sourceLine": 151,
+        "since": null,
+        "parameters": [
+          {
+            "name": "state",
+            "type": "boolean",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      }
+    ]
+  }
+}

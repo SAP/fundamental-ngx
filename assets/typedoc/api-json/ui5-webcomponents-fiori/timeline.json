@@ -1,0 +1,75 @@
+{
+  "name": "Timeline",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 41,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "accessibleName",
+      "type": "string",
+      "default": null,
+      "description": "Defines the accessible ARIA name of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 46,
+      "since": null
+    },
+    {
+      "name": "growing",
+      "type": "'Scroll' | 'None' | 'Button'",
+      "default": null,
+      "description": "Defines whether the Timeline will have growing capability either by pressing a \"More\" button,\nor via user scroll. In both cases a `load-more` event is fired.\n\nAvailable options:\n\n`Button` - Displays a button at the end of the Timeline, which when pressed triggers the `load-more` event.\n\n`Scroll` -Triggers the `load-more` event when the user scrolls to the end of the Timeline.\n\n`None` (default) - The growing functionality is off.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 60,
+      "since": null
+    },
+    {
+      "name": "layout",
+      "type": "'Vertical' | 'Horizontal'",
+      "default": null,
+      "description": "Defines the items orientation.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 65,
+      "since": null
+    },
+    {
+      "name": "loading",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines if the component should display a loading indicator over the Timeline.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 70,
+      "since": null
+    },
+    {
+      "name": "loadingDelay",
+      "type": "number",
+      "default": null,
+      "description": "Defines the delay in milliseconds, after which the loading indicator will show up for this component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 75,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5LoadMore",
+      "type": "UI5CustomEvent<Timeline, 'load-more'>",
+      "default": null,
+      "description": "Fired when the user presses the `More` button or scrolls to the Timeline's end.\n\n*Note:** The event will be fired if `growing` is set to `Button` or `Scroll`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 84,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

@@ -1,0 +1,24 @@
+{
+  "name": "ApprovalFlowDropZoneDirective",
+  "selector": "[fdp-approval-flow-drop-zone]",
+  "kind": "Directive",
+  "sourceFile": "approval-flow-drop-zone.directive.ts",
+  "sourceLine": 11,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/approval-flow/approval-flow-node/approval-flow-drop-zone.directive.ts#L11",
+  "description": "",
+  "inputs": [
+    {
+      "name": "placement",
+      "type": "ApprovalFlowNewNodePlacement",
+      "default": null,
+      "description": "Approval flow new node placement",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 14,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

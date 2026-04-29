@@ -1,0 +1,84 @@
+{
+  "name": "SideNavigationComponent",
+  "selector": "fdx-side-nav",
+  "kind": "Component",
+  "sourceFile": "side-navigation.component.ts",
+  "sourceLine": 62,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cx/side-navigation/side-navigation.component.ts#L62",
+  "description": "The side-navigation is a wrapping component representing\na left navigation that can always display or expand/collapse using the menu icon within the global navigation.",
+  "inputs": [
+    {
+      "name": "collapseWidth",
+      "type": "number",
+      "default": null,
+      "description": "The screen width, in pixels, at which to automatically collapse the side navigation on window resize.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 95,
+      "since": null
+    },
+    {
+      "name": "dynamicWidth",
+      "type": "boolean",
+      "default": "false",
+      "description": "Prevents the side navigation from truncating or wrapping, extending the width to its longest label.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 89,
+      "since": null
+    },
+    {
+      "name": "inShellbar",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the sidenav is used with shellbar.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 79,
+      "since": null
+    },
+    {
+      "name": "mobile",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether this side nav should display in mobile (fullscreen) mode.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 105,
+      "since": null
+    },
+    {
+      "name": "narrow",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether this side nav should display as narrow. Note this can only be used with side nav items that have icons.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 101,
+      "since": null
+    },
+    {
+      "name": "showScrollButtons",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether to show the scroll buttons in narrow mode. When set to false, default scrollbar behavior will be used.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 109,
+      "since": null
+    },
+    {
+      "name": "sideNavigationConfiguration",
+      "type": "Nullable<SideNavigationModel>",
+      "default": null,
+      "description": "Side navigation configuration, to pass whole model object, instead of creating HTML from scratch",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 85,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

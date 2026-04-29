@@ -1,0 +1,61 @@
+{
+  "name": "P13GroupingDialogComponent",
+  "selector": null,
+  "kind": "Component",
+  "sourceFile": "grouping.component.ts",
+  "sourceLine": 92,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/table/components/table-p13-dialog/grouping/grouping.component.ts#L92",
+  "description": "Reset button.\n\nUsed to reset resettable state by click.",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "cancel",
+      "signature": "() => void",
+      "description": "Close dialog",
+      "deprecated": null,
+      "sourceLine": 117,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "confirm",
+      "signature": "() => void",
+      "description": "Confirm changes and close dialog",
+      "deprecated": null,
+      "sourceLine": 122,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "getAvailableColumns",
+      "signature": "(rule: GroupRule) => GroupDialogColumn[]",
+      "description": "Get available columns for a rule",
+      "deprecated": null,
+      "sourceLine": 164,
+      "since": null,
+      "parameters": [
+        {
+          "name": "rule",
+          "type": "GroupRule",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "GroupDialogColumn[]"
+    },
+    {
+      "name": "reset",
+      "signature": "() => void",
+      "description": "Reset changes to the initial state",
+      "deprecated": null,
+      "sourceLine": 111,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

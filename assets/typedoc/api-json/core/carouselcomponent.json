@@ -1,0 +1,226 @@
+{
+  "name": "CarouselComponent",
+  "selector": "fd-carousel",
+  "kind": "Component",
+  "sourceFile": "carousel.component.ts",
+  "sourceLine": 75,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/carousel/carousel.component.ts#L75",
+  "description": "",
+  "inputs": [
+    {
+      "name": "ariaDescribedBy",
+      "type": "string",
+      "default": null,
+      "description": "Sets aria-describedby attribute for carousel",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 91,
+      "since": null
+    },
+    {
+      "name": "ariaLabel",
+      "type": "null",
+      "default": "null",
+      "description": "Sets aria-label attribute for carousel",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 83,
+      "since": null
+    },
+    {
+      "name": "ariaLabelledBy",
+      "type": "string",
+      "default": null,
+      "description": "Sets aria-labelledby attribute for carousel",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 87,
+      "since": null
+    },
+    {
+      "name": "contentBackground",
+      "type": "CarouselBackgroundOptions",
+      "default": "'translucent'",
+      "description": "Background configuration for the Content container.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 163,
+      "since": null
+    },
+    {
+      "name": "height",
+      "type": "string",
+      "default": null,
+      "description": "Height for carousel container",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 99,
+      "since": null
+    },
+    {
+      "name": "loop",
+      "type": "boolean",
+      "default": "false",
+      "description": "If carousel is in circular loop",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 107,
+      "since": null
+    },
+    {
+      "name": "navigation",
+      "type": "boolean",
+      "default": "true",
+      "description": "Shows/hides optional navigation button",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 111,
+      "since": null
+    },
+    {
+      "name": "navigatorInPageIndicator",
+      "type": "boolean",
+      "default": "true",
+      "description": "Show navigation button in page indicator container or inside content. Default is page indicator container on true value",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 115,
+      "since": null
+    },
+    {
+      "name": "noPaginationContainerBorder",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to hide top border of the Pagination Container.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 159,
+      "since": null
+    },
+    {
+      "name": "numericIndicator",
+      "type": "boolean",
+      "default": "false",
+      "description": "Convert to Numeric page indicator",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 119,
+      "since": null
+    },
+    {
+      "name": "pageIndicator",
+      "type": "boolean",
+      "default": "true",
+      "description": "Shows/hides optional page indicator",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 127,
+      "since": null
+    },
+    {
+      "name": "pageIndicatorBackground",
+      "type": "CarouselBackgroundOptions",
+      "default": "'solid'",
+      "description": "Background configuration for the Pagination container",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 167,
+      "since": null
+    },
+    {
+      "name": "pageIndicatorContainer",
+      "type": "boolean",
+      "default": "true",
+      "description": "Shows/hides optional page indicator container",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 123,
+      "since": null
+    },
+    {
+      "name": "pageIndicatorsOrientation",
+      "type": "PageIndicatorsOrientation",
+      "default": "'bottom'",
+      "description": "Sets position of page indicator container. Default position is bottom.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 95,
+      "since": null
+    },
+    {
+      "name": "slideTransitionDuration",
+      "type": "number",
+      "default": "150",
+      "description": "Sets sliding duration in millie seconds. Default is 150",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 147,
+      "since": null
+    },
+    {
+      "name": "swipeEnabled",
+      "type": "boolean",
+      "default": "true",
+      "description": "Is swipe enabled",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 151,
+      "since": null
+    },
+    {
+      "name": "vertical",
+      "type": "boolean",
+      "default": "false",
+      "description": "Is carousel is vertical. Default value is false.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 155,
+      "since": null
+    },
+    {
+      "name": "width",
+      "type": "string",
+      "default": "'100%'",
+      "description": "Width for carousel container",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 103,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "slideChange",
+      "type": "CarouselActiveSlides",
+      "default": null,
+      "description": "An event that is emitted after a slide transition has happened",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 182,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "next",
+      "signature": "() => void",
+      "description": "Transitions to the next slide in the carousel.",
+      "deprecated": null,
+      "sourceLine": 433,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "previous",
+      "signature": "() => void",
+      "description": "Transitions to the previous slide in the carousel.",
+      "deprecated": null,
+      "sourceLine": 420,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

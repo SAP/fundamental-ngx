@@ -1,0 +1,547 @@
+{
+  "name": "DatetimePickerComponent",
+  "selector": "fd-datetime-picker",
+  "kind": "Component",
+  "sourceFile": "datetime-picker.component.ts",
+  "sourceLine": 132,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/datetime-picker/datetime-picker.component.ts#L132",
+  "description": "The datetime picker component is an opinionated composition of the fd-popover,\nfd-calendar and fd-time components to accomplish the UI pattern for picking a date and time.\nSupports Angular Forms.\n```html\n<fd-date-time-picker [(ngModel)]=\"dateTime\"></fd-date-time-picker>\n```",
+  "inputs": [
+    {
+      "name": "activeView",
+      "type": "FdCalendarView",
+      "default": "FdCalendarViewEnum.Day",
+      "description": "Actually shown active view one of 'day' | 'month' | 'year' in calendar component",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 237,
+      "since": null
+    },
+    {
+      "name": "aggregatedYearGrid",
+      "type": "CalendarYearGrid",
+      "default": null,
+      "description": "Object to customize aggregated year grid,\nRow, Columns and method to display year can be modified",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 290,
+      "since": null
+    },
+    {
+      "name": "allowNull",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether a null input is considered valid.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 241,
+      "since": null
+    },
+    {
+      "name": "appendTo",
+      "type": "ElementRef<any>",
+      "default": null,
+      "description": "The element to which the popover should be appended.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 156,
+      "since": null
+    },
+    {
+      "name": "ariaLabelledBy",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "aria-labelledby for element describing date-picker.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 190,
+      "since": null
+    },
+    {
+      "name": "buttonFocusable",
+      "type": "boolean",
+      "default": "false",
+      "description": "",
+      "isSignal": false,
+      "deprecated": "Popover is toggled with f4 key",
+      "sourceLine": 273,
+      "since": null
+    },
+    {
+      "name": "customDateTimeFormat",
+      "type": "unknown",
+      "default": null,
+      "description": "Define a custom datetime format. Can be a string for DayjsDatetimeAdapter or object for FdDatetimeAdapter",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 172,
+      "since": null
+    },
+    {
+      "name": "date",
+      "type": "Nullable<D>",
+      "default": null,
+      "description": "Current selected date. Two-way binding is supported.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 225,
+      "since": null
+    },
+    {
+      "name": "disableFunction",
+      "type": "(value: D) => boolean",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 527,
+      "since": null
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the component is disabled.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 160,
+      "since": null
+    },
+    {
+      "name": "displayHours",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the time component shows hours.\nDefault value is based on the current locale format option",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 217,
+      "since": null
+    },
+    {
+      "name": "displayMinutes",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the time component shows minutes.\nDefault value is based on the current locale format option",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 210,
+      "since": null
+    },
+    {
+      "name": "displaySeconds",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the time component shows seconds.\nDefault value is based on the current locale format option",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 186,
+      "since": null
+    },
+    {
+      "name": "inputId",
+      "type": "string",
+      "default": null,
+      "description": "Id attribute for input element inside DateTimePicker component",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 164,
+      "since": null
+    },
+    {
+      "name": "isFullWidth",
+      "type": "boolean",
+      "default": "false",
+      "description": "To set input width 100%",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 346,
+      "since": null
+    },
+    {
+      "name": "isOpen",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the popover is open. Two-way binding is supported.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 229,
+      "since": null
+    },
+    {
+      "name": "keepTwoDigitsTime",
+      "type": "boolean",
+      "default": "false",
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 250,
+      "since": null
+    },
+    {
+      "name": "legendCol",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the calendar legend should display in a single column layout.\nWhen false (default), the legend items flow into multiple columns automatically.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 416,
+      "since": null
+    },
+    {
+      "name": "markWeekends",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether user wants to mark sunday/saturday with `fd-calendar__item--weekend` class",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 299,
+      "since": null
+    },
+    {
+      "name": "meridian",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the time component should be meridian (am/pm).\nDefault value is based on the current locale format option",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 179,
+      "since": null
+    },
+    {
+      "name": "mobile",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to render datetime picker in mobile mode.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 331,
+      "since": null
+    },
+    {
+      "name": "mobileConfig",
+      "type": "MobileModeConfig",
+      "default": null,
+      "description": "Mobile mode configuration.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 335,
+      "since": null
+    },
+    {
+      "name": "mobileLandscape",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether calendar is used inside mobile in landscape mode, it also adds close button on right side",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 339,
+      "since": null
+    },
+    {
+      "name": "mobilePortrait",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether calendar is used inside mobile in portrait mode",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 343,
+      "since": null
+    },
+    {
+      "name": "placeholder",
+      "type": "string",
+      "default": "''",
+      "description": "Placeholder for the inner input element.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 145,
+      "since": null
+    },
+    {
+      "name": "placement",
+      "type": "Placement",
+      "default": "'bottom-start'",
+      "description": "The placement of the popover. It can be one of: top, top-start, top-end, bottom,\n bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 152,
+      "since": null
+    },
+    {
+      "name": "preventScrollOnFocus",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to prevent page scrolling when focusing date picker input field after calendar has been closed.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 327,
+      "since": null
+    },
+    {
+      "name": "processInputOnBlur",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to recalculate value from the input as user types or on blur.\nBy default, updates the value as user types.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 321,
+      "since": null
+    },
+    {
+      "name": "required",
+      "type": "boolean",
+      "default": "false",
+      "description": "If it is mandatory field",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 168,
+      "since": null
+    },
+    {
+      "name": "showCalendarLegend",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether to show the calendar legend below the calendar.\nThe legend displays explanations for special day markers.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 410,
+      "since": null
+    },
+    {
+      "name": "showFooter",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether or not to show the datetime picker footer with OK/cancel buttons.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 313,
+      "since": null
+    },
+    {
+      "name": "showWeekNumbers",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether user wants to show week numbers next to days",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 309,
+      "since": null
+    },
+    {
+      "name": "specialDaysRules",
+      "type": "SpecialDayRule<D>[]",
+      "default": null,
+      "description": "Special days mark, it can be used by passing array of object with\nSpecial day number, list 1-20 [class:`fd-calendar__item--legend-{{number}}`] is available there:\nhttps://sap.github.io/fundamental-styles/components/calendar.html calendar special days section\nRule accepts method with FdDate object as a parameter. ex:\n`rule: (fdDate: FdDate) => fdDate.getDay() === 1`, which will mark all sundays as special day.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 404,
+      "since": null
+    },
+    {
+      "name": "spinnerButtons",
+      "type": "boolean",
+      "default": "true",
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 303,
+      "since": null
+    },
+    {
+      "name": "startingDayOfWeek",
+      "type": "DaysOfWeek",
+      "default": "1",
+      "description": "The disableFunction for the calendar.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 233,
+      "since": null
+    },
+    {
+      "name": "useValidation",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether to perform visual validation on the picker input.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 221,
+      "since": null
+    },
+    {
+      "name": "yearGrid",
+      "type": "CalendarYearGrid",
+      "default": null,
+      "description": "Object to customize year grid,\nRow, Columns and method to display year can be modified",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 280,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "activeViewChange",
+      "type": "FdCalendarView",
+      "default": null,
+      "description": "Event thrown every time calendar active view is changed",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 354,
+      "since": null
+    },
+    {
+      "name": "calendarChange",
+      "type": "D",
+      "default": null,
+      "description": "Event emitted when the day changes from the calendar.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 362,
+      "since": null
+    },
+    {
+      "name": "dateChange",
+      "type": "D",
+      "default": null,
+      "description": "Event emitted when the date changes. This can be a time or day change.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 358,
+      "since": null
+    },
+    {
+      "name": "isOpenChange",
+      "type": "boolean",
+      "default": null,
+      "description": "Event emitted when the state of the isOpen property changes.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 350,
+      "since": null
+    },
+    {
+      "name": "onClose",
+      "type": "void",
+      "default": null,
+      "description": "Event emitted when popover closes.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 371,
+      "since": null
+    },
+    {
+      "name": "timeChange",
+      "type": "D",
+      "default": null,
+      "description": "Event emitted when the time changes from the time component.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 366,
+      "since": null
+    },
+    {
+      "name": "touched",
+      "type": "void",
+      "default": null,
+      "description": "Event emitted when datepicker changes it's \"touched\" state.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 375,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "closePopover",
+      "signature": "() => void",
+      "description": "Closes the popover and refresh model",
+      "deprecated": null,
+      "sourceLine": 641,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "dialogDismiss",
+      "signature": "(value: D) => void",
+      "description": "Method used to restore original value for mobile mode.",
+      "deprecated": null,
+      "sourceLine": 808,
+      "since": null,
+      "parameters": [
+        {
+          "name": "value",
+          "type": "D",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "handleCalendarActiveViewChange",
+      "signature": "(activeView: FdCalendarView) => void",
+      "description": "Method that handles calendar active view change and throws event.",
+      "deprecated": null,
+      "sourceLine": 615,
+      "since": null,
+      "parameters": [
+        {
+          "name": "activeView",
+          "type": "FdCalendarView",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "handleOnTouched",
+      "signature": "(event?: FocusEvent) => void",
+      "description": "Method that handles blur events on datetime picker input",
+      "deprecated": null,
+      "sourceLine": 620,
+      "since": null,
+      "parameters": [
+        {
+          "name": "event",
+          "type": "FocusEvent",
+          "description": "",
+          "optional": true
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "isCurrentModelValid",
+      "signature": "() => boolean",
+      "description": "Method that provides information if model selected date/dates have properly types and are valid",
+      "deprecated": null,
+      "sourceLine": 842,
+      "since": null,
+      "parameters": [],
+      "returnType": "boolean"
+    },
+    {
+      "name": "openPopover",
+      "signature": "() => void",
+      "description": "Opens the popover.",
+      "deprecated": null,
+      "sourceLine": 630,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "togglePopover",
+      "signature": "() => void",
+      "description": "Toggles the popover.",
+      "deprecated": null,
+      "sourceLine": 604,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

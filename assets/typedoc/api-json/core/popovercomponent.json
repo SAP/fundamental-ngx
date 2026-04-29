@@ -1,0 +1,464 @@
+{
+  "name": "PopoverComponent",
+  "selector": "fd-popover",
+  "kind": "Component",
+  "sourceFile": "popover.component.ts",
+  "sourceLine": 81,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/popover/popover.component.ts#L81",
+  "description": "The popover is a wrapping component that accepts a *control* as well as a *body*.\nThe control is what will trigger the opening of the actual popover, which is called the body.\nBy default, popovers are triggered by click. This can be customized through the *triggers* input.",
+  "inputs": [
+    {
+      "name": "additionalBodyClass",
+      "type": "null | string",
+      "default": null,
+      "description": "Additional CSS class for the popover body container",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 168,
+      "since": null
+    },
+    {
+      "name": "additionalTriggerClass",
+      "type": "null | string",
+      "default": null,
+      "description": "Additional CSS class for the popover trigger element",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 171,
+      "since": null
+    },
+    {
+      "name": "appendTo",
+      "type": "null | Element | ElementRef<any>",
+      "default": null,
+      "description": "The element to which the overlay is attached. By default it is body",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 153,
+      "since": null
+    },
+    {
+      "name": "applyOverlay",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether to apply a background overlay",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 165,
+      "since": null
+    },
+    {
+      "name": "bodyAriaLabel",
+      "type": "null | string",
+      "default": null,
+      "description": "ARIA label for the popover body",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 183,
+      "since": null
+    },
+    {
+      "name": "cdkPositions",
+      "type": "null | ConnectedPosition[]",
+      "default": null,
+      "description": "List of position options for CDK overlay",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 162,
+      "since": null
+    },
+    {
+      "name": "closeOnEscapeKey",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether escape key should close the popover",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 127,
+      "since": null
+    },
+    {
+      "name": "closeOnNavigation",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether to close the popover on router navigation start",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 174,
+      "since": null
+    },
+    {
+      "name": "closeOnOutsideClick",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether clicking outside popover should close it",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 124,
+      "since": null
+    },
+    {
+      "name": "config",
+      "type": "PopoverConfig",
+      "default": null,
+      "description": "Configuration object for popover settings.\nWhen provided, these settings will be merged with individual input properties.\nIndividual inputs take precedence over config object values.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 87,
+      "since": null
+    },
+    {
+      "name": "disableScrollbar",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether scrollbar should be disabled",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 150,
+      "since": null
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the popover is disabled",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 130,
+      "since": null
+    },
+    {
+      "name": "fillControlMode",
+      "type": "null | PopoverFillMode",
+      "default": null,
+      "description": "Preset options for the popover body width.\n* `at-least` will apply a minimum width to the body equivalent to the width of the control.\n* `equal` will apply a width to the body equivalent to the width of the control.\n* Leave blank for no effect.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 121,
+      "since": null
+    },
+    {
+      "name": "fixedPosition",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether position shouldn't change when popover approaches the corner of page",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 177,
+      "since": null
+    },
+    {
+      "name": "focusAutoCapture",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether focus should be automatically captured when popover opens",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 139,
+      "since": null
+    },
+    {
+      "name": "focusTrapped",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the popover should trap focus",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 136,
+      "since": null
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "default": null,
+      "description": "Id of the popover. If none is provided, one will be generated.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 96,
+      "since": null
+    },
+    {
+      "name": "isOpen",
+      "type": "boolean",
+      "default": null,
+      "description": "Two-way binding for popover open state",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 186,
+      "since": null
+    },
+    {
+      "name": "maxWidth",
+      "type": "null | number",
+      "default": null,
+      "description": "Maximum width of popover body in px, prevents from overextending body by `fillControlMode`",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 113,
+      "since": null
+    },
+    {
+      "name": "mobile",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the popover component should be displayed in mobile mode.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 99,
+      "since": null
+    },
+    {
+      "name": "mobileConfig",
+      "type": "MobileModeConfig",
+      "default": null,
+      "description": "Config for the popover in mobile mode",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 102,
+      "since": null
+    },
+    {
+      "name": "noArrow",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the arrow should be hidden",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 147,
+      "since": null
+    },
+    {
+      "name": "placement",
+      "type": "Placement",
+      "default": null,
+      "description": "Popover placement",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 110,
+      "since": null
+    },
+    {
+      "name": "placementContainer",
+      "type": "null | Element | ElementRef<any>",
+      "default": null,
+      "description": "Placement of the popover element",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 156,
+      "since": null
+    },
+    {
+      "name": "preventSpaceKeyScroll",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the popover should prevent page scrolling when space key is pressed.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 107,
+      "since": null
+    },
+    {
+      "name": "resizable",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the popover body is resizable",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 180,
+      "since": null
+    },
+    {
+      "name": "restoreFocusOnClose",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether to move the focus after popover is closed to the last focused element before popover was opened.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 144,
+      "since": null
+    },
+    {
+      "name": "scrollStrategy",
+      "type": "any",
+      "default": null,
+      "description": "Scroll strategy for the overlay",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 159,
+      "since": null
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "default": null,
+      "description": "Tooltip for popover",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 90,
+      "since": null
+    },
+    {
+      "name": "trigger",
+      "type": "null | HTMLElement | ElementRef<any>",
+      "default": null,
+      "description": "Reference to popover trigger element",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 93,
+      "since": null
+    },
+    {
+      "name": "triggers",
+      "type": "string | TriggerConfig[]",
+      "default": null,
+      "description": "Popover trigger events configuration",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 133,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "beforeOpen",
+      "type": "void",
+      "default": null,
+      "description": "Event emitted right before the popover is being opened.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 192,
+      "since": null
+    },
+    {
+      "name": "isOpenChange",
+      "type": "EventEmitter<boolean>",
+      "default": null,
+      "description": "Two-way binding for popover open state",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 186,
+      "since": null
+    },
+    {
+      "name": "isOpenChange",
+      "type": "boolean",
+      "default": null,
+      "description": "Event emitted when the state of the isOpen property changes.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 189,
+      "since": null
+    },
+    {
+      "name": "triggerChange",
+      "type": "EventEmitter<null | HTMLElement | ElementRef<any>>",
+      "default": null,
+      "description": "Reference to popover trigger element",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 93,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "applyNewPosition",
+      "signature": "(positions: ConnectedPosition[]) => void",
+      "description": "Method called to change position of popover,\nrecommended to be used only when popover is opened, otherwise change position or cdkPlacement",
+      "deprecated": null,
+      "sourceLine": 409,
+      "since": null,
+      "parameters": [
+        {
+          "name": "positions",
+          "type": "ConnectedPosition[]",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "close",
+      "signature": "(focusActiveElement: boolean) => void",
+      "description": "Closes the popover.",
+      "deprecated": null,
+      "sourceLine": 391,
+      "since": null,
+      "parameters": [
+        {
+          "name": "focusActiveElement",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "open",
+      "signature": "() => void",
+      "description": "Opens the popover.",
+      "deprecated": null,
+      "sourceLine": 381,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "refreshPosition",
+      "signature": "() => void",
+      "description": "Method called to refresh position of opened popover",
+      "deprecated": null,
+      "sourceLine": 414,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "setIgnoreTriggers",
+      "signature": "(ignore: boolean) => void",
+      "description": "Temporary sets the ignoring of the event triggers.",
+      "deprecated": null,
+      "sourceLine": 401,
+      "since": null,
+      "parameters": [
+        {
+          "name": "ignore",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "toggle",
+      "signature": "() => void",
+      "description": "Toggles menu open/close state",
+      "deprecated": null,
+      "sourceLine": 372,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "triggerKeyDownHandler",
+      "signature": "(event: KeyboardEvent) => void",
+      "description": "Handler for alt + arrow down keydown",
+      "deprecated": null,
+      "sourceLine": 419,
+      "since": null,
+      "parameters": [
+        {
+          "name": "event",
+          "type": "KeyboardEvent",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

@@ -1,0 +1,13 @@
+{
+  "name": "SegmentedButtonOptionDirective",
+  "selector": "li[fd-menu-item][fdMenuSegmentedButtonOption]",
+  "kind": "Directive",
+  "sourceFile": "segmented-button-option.directive.ts",
+  "sourceLine": 17,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/menu/directives/segmented-button/segmented-button-option.directive.ts#L17",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

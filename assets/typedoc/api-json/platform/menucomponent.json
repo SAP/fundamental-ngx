@@ -1,0 +1,80 @@
+{
+  "name": "MenuComponent",
+  "selector": "fdp-menu",
+  "kind": "Component",
+  "sourceFile": "menu.component.ts",
+  "sourceLine": 48,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/menu/menu.component.ts#L48",
+  "description": "",
+  "inputs": [
+    {
+      "name": "openByArrowKeys",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether menu can be opened using arrow keys",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 66,
+      "since": null
+    },
+    {
+      "name": "xPosition",
+      "type": "'after' | 'before'",
+      "default": "'after'",
+      "description": "Horizontal position of menu in relation to trigger element.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 72,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "close",
+      "type": "MenuCloseMethod",
+      "default": null,
+      "description": "Emitted event when menu closes",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 91,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "closeMenu",
+      "signature": "(method: MenuCloseMethod) => void",
+      "description": "Close menu",
+      "deprecated": null,
+      "sourceLine": 156,
+      "since": null,
+      "parameters": [
+        {
+          "name": "method",
+          "type": "MenuCloseMethod",
+          "description": "menu close method",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "focusOnFirstItem",
+      "signature": "(origin: FocusOrigin) => void",
+      "description": "Set focus on first item",
+      "deprecated": null,
+      "sourceLine": 148,
+      "since": null,
+      "parameters": [
+        {
+          "name": "origin",
+          "type": "FocusOrigin",
+          "description": "FocusOrigin",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

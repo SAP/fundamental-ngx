@@ -1,0 +1,105 @@
+{
+  "name": "FileUploaderDragndropDirective",
+  "selector": "[fdFileDragnDrop], [fd-file-drag-n-drop]",
+  "kind": "Directive",
+  "sourceFile": "file-uploader-dragndrop.directive.ts",
+  "sourceLine": 11,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/file-uploader/directives/file-uploader-dragndrop.directive.ts#L11",
+  "description": "Directive that handles the drag and drop feature of the file input.",
+  "inputs": [
+    {
+      "name": "accept",
+      "type": "string",
+      "default": null,
+      "description": "Accepted file extensions. Format: `'.png,.jpg'`.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 18,
+      "since": null
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether selecting of new files is disabled.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 30,
+      "since": null
+    },
+    {
+      "name": "dragndrop",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether drag and drop is enabled. Disables this directive.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 34,
+      "since": null
+    },
+    {
+      "name": "maxFileSize",
+      "type": "string",
+      "default": "''",
+      "description": "Max file size in bytes that the input will accept.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 22,
+      "since": null
+    },
+    {
+      "name": "minFileSize",
+      "type": "string",
+      "default": "''",
+      "description": "Min file size in bytes that the input will accept.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 26,
+      "since": null
+    },
+    {
+      "name": "multiple",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether multiple files can be dropped at once.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 14,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "dragEntered",
+      "type": "void",
+      "default": null,
+      "description": "Event emitted when the dragged file enters the dropzone.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 42,
+      "since": null
+    },
+    {
+      "name": "dragLeave",
+      "type": "void",
+      "default": null,
+      "description": "Event emitted when the dragged file exits the dropzone.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 46,
+      "since": null
+    },
+    {
+      "name": "fileChanged",
+      "type": "FileUploadOutput",
+      "default": null,
+      "description": "Event emitted when files are dropped. Passes back an array of files.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 38,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

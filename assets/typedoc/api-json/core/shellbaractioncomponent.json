@@ -1,0 +1,114 @@
+{
+  "name": "ShellbarActionComponent",
+  "selector": "fd-shellbar-action",
+  "kind": "Component",
+  "sourceFile": "shellbar-action.component.ts",
+  "sourceLine": 35,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/shellbar/shellbar-action/shellbar-action.component.ts#L35",
+  "description": "The component that represents a shellbar action.\n```html\n <fd-shellbar-action *ngFor=\"let action of actions\"\n                     [glyph]=\"action.glyph\"\n                     [callback]=\"action.callback\"\n                     [label]=\"action.label\"\n                     [ariaLabel]=\"action.ariaLabel\"\n                     [title]=\"action.title\"\n                     [notificationCount]=\"action.notificationCount\"\n                     [notificationLabel]=\"action.notificationLabel\">\n </fd-shellbar-action>\n```",
+  "inputs": [
+    {
+      "name": "ariaLabel",
+      "type": "string",
+      "default": null,
+      "description": "ARIA label for screen readers.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 49,
+      "since": null
+    },
+    {
+      "name": "callback",
+      "type": "Nullable<(event: MouseEvent) => void>",
+      "default": null,
+      "description": "Function to call when the action is clicked.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 43,
+      "since": null
+    },
+    {
+      "name": "fdType",
+      "type": "ButtonType",
+      "default": null,
+      "description": "The button type for styling (e.g., 'transparent', 'emphasized').",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 61,
+      "since": null
+    },
+    {
+      "name": "glyph",
+      "type": "string",
+      "default": null,
+      "description": "Icon name for the button.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 37,
+      "since": null
+    },
+    {
+      "name": "glyphFont",
+      "type": "IconFont",
+      "default": null,
+      "description": "Icon font family.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 40,
+      "since": null
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "default": null,
+      "description": "Accessible label for the action.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 46,
+      "since": null
+    },
+    {
+      "name": "notificationCount",
+      "type": "number",
+      "default": null,
+      "description": "Number of notifications to display in badge.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 58,
+      "since": null
+    },
+    {
+      "name": "notificationLabel",
+      "type": "string",
+      "default": null,
+      "description": "ARIA label for the notification badge.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 55,
+      "since": null
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "default": null,
+      "description": "Tooltip text shown on hover.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 52,
+      "since": null
+    },
+    {
+      "name": "toggled",
+      "type": "null | boolean",
+      "default": null,
+      "description": "Whether the button is in toggled state.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 64,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

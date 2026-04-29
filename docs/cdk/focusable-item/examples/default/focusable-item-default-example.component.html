@@ -1,0 +1,8 @@
+<div class="focusable-items-container">
+    @for (item of items; track item; let index = $index) {
+        <div class="focusable-item" fdkFocusableItem>
+            <span>{{ item }}</span>
+            <button fd-button>Action</button>
+        </div>
+    }
+</div>

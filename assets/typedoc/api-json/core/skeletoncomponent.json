@@ -1,0 +1,64 @@
+{
+  "name": "SkeletonComponent",
+  "selector": "fd-skeleton",
+  "kind": "Component",
+  "sourceFile": "skeleton.component.ts",
+  "sourceLine": 33,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/skeleton/components/skeleton.component.ts#L33",
+  "description": "Skeleton component for displaying loading placeholders with animated pulse effect.",
+  "inputs": [
+    {
+      "name": "animated",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the skeleton displays animated pulse effect.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 40,
+      "since": null
+    },
+    {
+      "name": "height",
+      "type": "null | string",
+      "default": null,
+      "description": "Height of skeleton.\n\nAccepts any valid CSS height value (e.g., `'100px'`, `'50%'`, `'10rem'`).\nAuto-calculated for text and circle types if not provided.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 87,
+      "since": null
+    },
+    {
+      "name": "textLines",
+      "type": "number",
+      "default": null,
+      "description": "Number of lines when type is `'text'`. Last line is 60% width if more than 1 line.\n\nAccepts numbers or coercible number values (e.g., `'3'` will be coerced to `3`).",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 63,
+      "since": null
+    },
+    {
+      "name": "type",
+      "type": "SkeletonType",
+      "default": null,
+      "description": "Type of the skeleton visualization.\n\nAvailable types:\n- `'rectangle'` - Rectangular skeleton with rounded corners\n- `'circle'` - Circular skeleton\n- `'text'` - Multi-line text skeleton\n- `null` - No predefined shape, allows custom SVG projection",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 53,
+      "since": null
+    },
+    {
+      "name": "width",
+      "type": "null | string",
+      "default": null,
+      "description": "Width of skeleton.\n\nAccepts any valid CSS width value (e.g., `'100px'`, `'50%'`, `'10rem'`).\nAuto-calculated for text and circle types if not provided.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 76,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

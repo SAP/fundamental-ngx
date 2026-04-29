@@ -1,0 +1,84 @@
+{
+  "name": "ProgressIndicatorComponent",
+  "selector": "fd-progress-indicator",
+  "kind": "Component",
+  "sourceFile": "progress-indicator.component.ts",
+  "sourceLine": 32,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/progress-indicator/progress-indicator.component.ts#L32",
+  "description": "",
+  "inputs": [
+    {
+      "name": "animate",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether or not to animate changes to the progress bar's valueNow.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 59,
+      "since": null
+    },
+    {
+      "name": "state",
+      "type": "ProgressIndicatorState",
+      "default": null,
+      "description": "The state for the progress indicator.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 55,
+      "since": null
+    },
+    {
+      "name": "unit",
+      "type": "string",
+      "default": "'%'",
+      "description": "Custom unit if you would like to override the default percentage.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 39,
+      "since": null
+    },
+    {
+      "name": "valueMax",
+      "type": "number",
+      "default": "100",
+      "description": "The maximum value possible for the progress indicator.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 47,
+      "since": null
+    },
+    {
+      "name": "valueMin",
+      "type": "number",
+      "default": "0",
+      "description": "The minimum value possible for the progress indicator.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 43,
+      "since": null
+    },
+    {
+      "name": "valueNow",
+      "type": "number",
+      "default": "0",
+      "description": "The current value for the progress indicator.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 51,
+      "since": null
+    },
+    {
+      "name": "valueText",
+      "type": "string",
+      "default": null,
+      "description": "The text to display if you would like to override the default percentage text.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 35,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

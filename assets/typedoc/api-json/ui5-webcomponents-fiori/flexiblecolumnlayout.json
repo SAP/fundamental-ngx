@@ -1,0 +1,75 @@
+{
+  "name": "FlexibleColumnLayout",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 43,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "accessibilityAttributes",
+      "type": "FCLAccessibilityAttributes",
+      "default": null,
+      "description": "Defines additional accessibility attributes on different areas of the component.\n\nThe accessibilityAttributes object has the following fields,\nwhere each field is an object supporting one or more accessibility attributes:\n\n- **startColumn**: `startColumn.role` and `startColumn.name`.\n- **midColumn**: `midColumn.role` and `midColumn.name`.\n- **endColumn**: `endColumn.role` and `endColumn.name`.\n- **startSeparator**: `startSeparator.role` and `startSeparator.name`.\n- **endSeparator**: `endSeparator.role` and `endSeparator.name`.\n\nThe accessibility attributes support the following values:\n\n- **role**: Defines the accessible ARIA landmark role of the area.\nAccepts the following values: `none`, `complementary`, `contentinfo`, `main` or `region`.\n\n- **name**: Defines the accessible ARIA name of the area.\nAccepts any string.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 65,
+      "since": null
+    },
+    {
+      "name": "disableResizing",
+      "type": "boolean",
+      "default": null,
+      "description": "Specifies if the user is allowed to change the columns layout by dragging the separator between the columns.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 70,
+      "since": null
+    },
+    {
+      "name": "layout",
+      "type": "'OneColumn' | 'TwoColumnsStartExpanded' | 'TwoColumnsMidExpanded' | 'ThreeColumnsMidExpanded' | 'ThreeColumnsEndExpanded' | 'ThreeColumnsStartExpandedEndHidden' | 'ThreeColumnsMidExpandedEndHidden' | 'ThreeColumnsStartHiddenMidExpanded' | 'ThreeColumnsStartHiddenEndExpanded' | 'MidColumnFullScreen' | 'EndColumnFullScreen'",
+      "default": null,
+      "description": "Defines the columns layout and their proportion.\n\n*Note:** The layout also depends on the screen size - one column for screens smaller than 599px,\ntwo columns between 599px and 1023px and three columns for sizes bigger than 1023px.\n\n*For example:** layout=`TwoColumnsStartExpanded` means the layout will display up to two columns\nin 67%/33% proportion.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 81,
+      "since": null
+    },
+    {
+      "name": "layoutsConfiguration",
+      "type": "LayoutConfiguration",
+      "default": null,
+      "description": "Allows to customize the column proportions per screen size and layout.\nIf no custom proportion provided for a specific layout, the default will be used.\n\n*Notes:**\n\n- The proportions should be given in percentages. For example [\"30%\", \"40%\", \"30%\"], [\"70%\", \"30%\", 0], etc.\n- The proportions should add up to 100%.\n- Hidden columns are marked as \"0px\", e.g. [\"0px\", \"70%\", \"30%\"]. Specifying 0 or \"0%\" for hidden columns is also valid.\n- If the proportions do not match the layout (e.g. if provided proportions [\"70%\", \"30%\", \"0px\"] for \"OneColumn\" layout), then the default proportions will be used instead.\n- Whenever the user drags the columns separator to resize the columns, the `layoutsConfiguration` object will be updated with the user-specified proportions for the given layout (and the `layout-configuration-change` event will be fired).\n- No custom configuration available for the phone screen size, as the default of 100% column width is always used there.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 96,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5LayoutChange",
+      "type": "UI5CustomEvent<FlexibleColumnLayout, 'layout-change'>",
+      "default": null,
+      "description": "Fired when the layout changes via user interaction by dragging the separators\nor by changing the component size due to resizing.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 142,
+      "since": null
+    },
+    {
+      "name": "ui5LayoutConfigurationChange",
+      "type": "UI5CustomEvent<FlexibleColumnLayout, 'layout-configuration-change'>",
+      "default": null,
+      "description": "Fired when the `layoutsConfiguration` changes via user interaction by dragging the separators.\n\n*Note:** The `layout-configuration-change` event is in an experimental state and is a subject to change.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 149,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

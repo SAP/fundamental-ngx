@@ -1,0 +1,13 @@
+{
+  "name": "ListLinkDirective",
+  "selector": "[fd-list-link], [fdListLink]",
+  "kind": "Directive",
+  "sourceFile": "list-link.directive.ts",
+  "sourceLine": 18,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/list/directives/list-link.directive.ts#L18",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

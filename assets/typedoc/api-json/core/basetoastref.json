@@ -1,0 +1,44 @@
+{
+  "name": "BaseToastRef",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "base-toast-ref.ts",
+  "sourceLine": 6,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cdk/utils/toast/classes/base-toast-ref.ts#L6",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "afterDismissed",
+      "signature": "() => Observable<void>",
+      "description": "Gets an observable that is notified when the Toast is finished closing.",
+      "deprecated": null,
+      "sourceLine": 45,
+      "since": null,
+      "parameters": [],
+      "returnType": "Observable<void>"
+    },
+    {
+      "name": "afterOpened",
+      "signature": "() => Observable<void>",
+      "description": "Gets an observable that is notified when the Toast has opened and appeared.",
+      "deprecated": null,
+      "sourceLine": 50,
+      "since": null,
+      "parameters": [],
+      "returnType": "Observable<void>"
+    },
+    {
+      "name": "dismiss",
+      "signature": "() => void",
+      "description": "Dismisses the Toast.",
+      "deprecated": null,
+      "sourceLine": 38,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

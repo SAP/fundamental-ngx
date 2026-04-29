@@ -1,0 +1,13 @@
+{
+  "name": "DynamicPageTabChangeEvent",
+  "selector": "fdp-dynamic-page",
+  "kind": "Class",
+  "sourceFile": "dynamic-page.component.ts",
+  "sourceLine": 63,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/dynamic-page/dynamic-page.component.ts#L63",
+  "description": "Dynamic Page tab change event",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

@@ -1,0 +1,65 @@
+{
+  "name": "AutoDismissMessageStripDirective",
+  "selector": "fd-message-strip[mousePersist], fd-message-strip[duration], fd-message-strip[autoDismiss]",
+  "kind": "Directive",
+  "sourceFile": "auto-dismiss-message-strip.directive.ts",
+  "sourceLine": 18,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/message-strip/auto-dismiss-message-strip.directive.ts#L18",
+  "description": "",
+  "inputs": [
+    {
+      "name": "autoDismiss",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the alert should be automatically dismissed.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 23,
+      "since": null
+    },
+    {
+      "name": "dismissible",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the message strip is dismissible",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 20,
+      "since": null
+    },
+    {
+      "name": "duration",
+      "type": "number",
+      "default": null,
+      "description": "Duration of time *in milliseconds* that the alert will be visible. Set to -1 for indefinite.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 26,
+      "since": null
+    },
+    {
+      "name": "mousePersist",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the alert should stay open if the mouse is hovering over it.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 29,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "open",
+      "signature": "() => void",
+      "description": "Opens the message strip and starts auto-dismiss timer if configured.\nThis method is part of the public API via exportAs.",
+      "deprecated": null,
+      "sourceLine": 74,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

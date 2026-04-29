@@ -1,0 +1,52 @@
+{
+  "name": "MicroProcessFlowItemComponent",
+  "selector": "fd-micro-process-flow-item",
+  "kind": "Component",
+  "sourceFile": "micro-process-flow-item.component.ts",
+  "sourceLine": 34,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/micro-process-flow/components/micro-process-flow-item/micro-process-flow-item.component.ts#L34",
+  "description": "",
+  "inputs": [
+    {
+      "name": "intermediate",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether or not display connector line",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 41,
+      "since": null
+    },
+    {
+      "name": "state",
+      "type": "MicroProcessFlowItemType",
+      "default": "'none'",
+      "description": "Item state",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 37,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "setLastItem",
+      "signature": "(value: boolean) => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 59,
+      "since": null,
+      "parameters": [
+        {
+          "name": "value",
+          "type": "boolean",
+          "description": "Is current item the last one",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

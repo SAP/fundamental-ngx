@@ -1,0 +1,54 @@
+{
+  "name": "DynamicPageContentComponent",
+  "selector": "fdp-dynamic-page-content",
+  "kind": "Component",
+  "sourceFile": "dynamic-page-content.component.ts",
+  "sourceLine": 19,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/dynamic-page/dynamic-page-content/dynamic-page-content.component.ts#L19",
+  "description": "Dynamic Page Content Component.",
+  "inputs": [
+    {
+      "name": "background",
+      "type": "DynamicPageBackgroundType",
+      "default": null,
+      "description": "sets background for content to `list`, `transparent`, or `solid` background color.\nDefault is `solid`.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 37,
+      "since": null
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "default": null,
+      "description": "a unique identifier for this content",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 30,
+      "since": null
+    },
+    {
+      "name": "size",
+      "type": "DynamicPageResponsiveSize",
+      "default": null,
+      "description": "sets size which in turn adds corresponding padding for the size type.\nsize can be `small`, `medium`, `large`, or `extra-large`.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 44,
+      "since": null
+    },
+    {
+      "name": "tabLabel",
+      "type": "string",
+      "default": null,
+      "description": "label for the tab. If label is provided, tab navigation will be internally set up.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 24,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

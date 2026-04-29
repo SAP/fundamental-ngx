@@ -1,0 +1,13 @@
+{
+  "name": "GridListTitleBarAdditionalTitleItemDirective",
+  "selector": "[fd-grid-list-title-bar-additional-title-item]",
+  "kind": "Directive",
+  "sourceFile": "grid-list-title-bar.directive.ts",
+  "sourceLine": 8,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/grid-list/components/grid-list-title-bar/grid-list-title-bar.directive.ts#L8",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

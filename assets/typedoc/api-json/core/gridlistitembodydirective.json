@@ -1,0 +1,13 @@
+{
+  "name": "GridListItemBodyDirective",
+  "selector": "[fd-grid-list-item-body]",
+  "kind": "Directive",
+  "sourceFile": "grid-list-item-body.directive.ts",
+  "sourceLine": 8,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/grid-list/directives/grid-list-item-body.directive.ts#L8",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

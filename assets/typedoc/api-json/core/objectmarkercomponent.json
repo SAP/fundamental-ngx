@@ -1,0 +1,94 @@
+{
+  "name": "ObjectMarkerComponent",
+  "selector": "[fd-object-marker]",
+  "kind": "Component",
+  "sourceFile": "object-marker.component.ts",
+  "sourceLine": 33,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/object-marker/object-marker.component.ts#L33",
+  "description": "",
+  "inputs": [
+    {
+      "name": "ariaLabelledBy",
+      "type": "string",
+      "default": null,
+      "description": "Sets aria-labelledby attribute for object marker",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 41,
+      "since": null
+    },
+    {
+      "name": "clickable",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the Object Status is clickable.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 53,
+      "since": null
+    },
+    {
+      "name": "glyph",
+      "type": "string",
+      "default": null,
+      "description": "Glyph (icon) of the Object Status.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 47,
+      "since": null
+    },
+    {
+      "name": "glyphFont",
+      "type": "IconFont",
+      "default": null,
+      "description": "Glyph font family",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 50,
+      "since": null
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "default": null,
+      "description": "Object Marker ID\nIf not set, a default value is provided",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 38,
+      "since": null
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "default": null,
+      "description": "Define the text content of the Object Status",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 56,
+      "since": null
+    },
+    {
+      "name": "statusText",
+      "type": "string",
+      "default": null,
+      "description": "Status text for the Object Status.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 44,
+      "since": null
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "default": null,
+      "description": "Title attribute for the Object Status",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 59,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

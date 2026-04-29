@@ -1,0 +1,44 @@
+{
+  "name": "AvatarGroupLegacyOverflowBodyDirective",
+  "selector": "[fd-avatar-group-legacy-overflow-body]",
+  "kind": "Directive",
+  "sourceFile": "avatar-group-legacy-overflow-body.directive.ts",
+  "sourceLine": 32,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/avatar-group-legacy/directives/avatar-group-legacy-overflow-body.directive.ts#L32",
+  "description": "",
+  "inputs": [
+    {
+      "name": "noHorizontalScroll",
+      "type": "boolean",
+      "default": "true",
+      "description": "Hide horizontal scrollbar from the overflow body.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 39,
+      "since": null
+    },
+    {
+      "name": "noPadding",
+      "type": "boolean",
+      "default": "false",
+      "description": "Remove the padding from the overflow body.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 35,
+      "since": null
+    },
+    {
+      "name": "noVerticalScroll",
+      "type": "boolean",
+      "default": "true",
+      "description": "Hide vertical scrollbar from the overflow body.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 43,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

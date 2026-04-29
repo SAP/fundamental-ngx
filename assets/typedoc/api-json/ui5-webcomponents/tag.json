@@ -1,0 +1,85 @@
+{
+  "name": "Tag",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 42,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "colorScheme",
+      "type": "string",
+      "default": null,
+      "description": "Defines the color scheme of the component.\nThere are 10 predefined schemes.\nTo use one you can set a number from `\"1\"` to `\"10\"`. The `colorScheme` `\"1\"` will be set by default.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 49,
+      "since": null
+    },
+    {
+      "name": "design",
+      "type": "'Positive' | 'Critical' | 'Negative' | 'Information' | 'Neutral' | 'Set1' | 'Set2'",
+      "default": null,
+      "description": "Defines the design type of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 54,
+      "since": null
+    },
+    {
+      "name": "hideStateIcon",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines if the default state icon is shown.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 59,
+      "since": null
+    },
+    {
+      "name": "interactive",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines if the component is interactive (focusable and pressable).",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 64,
+      "since": null
+    },
+    {
+      "name": "size",
+      "type": "'S' | 'L'",
+      "default": null,
+      "description": "Defines predefined size of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 69,
+      "since": null
+    },
+    {
+      "name": "wrappingType",
+      "type": "'None' | 'Normal'",
+      "default": null,
+      "description": "Defines how the text of a component will be displayed when there is not enough space.\n\n*Note:** For option \"Normal\" the text will wrap and the\nwords will not be broken based on hyphenation.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 77,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5Click",
+      "type": "UI5CustomEvent<Tag, 'click'>",
+      "default": null,
+      "description": "Fired when the user clicks on an interactive tag.\n\n*Note:** The event will be fired if the `interactive` property is `true`",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 86,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

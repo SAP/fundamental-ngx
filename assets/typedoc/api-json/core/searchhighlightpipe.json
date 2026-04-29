@@ -1,0 +1,49 @@
+{
+  "name": "SearchHighlightPipe",
+  "selector": null,
+  "kind": "Pipe",
+  "sourceFile": "search-highlight.pipe.ts",
+  "sourceLine": 8,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cdk/utils/pipes/search-highlight.pipe.ts#L8",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "transform",
+      "signature": "(value: string, matches: string | [number, number][], active: boolean, includeSpans: boolean) => string",
+      "description": "Highlight search term in string.",
+      "deprecated": null,
+      "sourceLine": 10,
+      "since": null,
+      "parameters": [
+        {
+          "name": "value",
+          "type": "string",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "matches",
+          "type": "string | [number, number][]",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "active",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "includeSpans",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "string"
+    }
+  ],
+  "inherited": null
+}

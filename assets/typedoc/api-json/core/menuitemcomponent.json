@@ -1,0 +1,86 @@
+{
+  "name": "MenuItemComponent",
+  "selector": "li[fd-menu-item]",
+  "kind": "Component",
+  "sourceFile": "menu-item.component.ts",
+  "sourceLine": 74,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/menu/menu-item/menu-item.component.ts#L74",
+  "description": "",
+  "inputs": [
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "description": "Set the Menu Item as disabled/enabled",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 77,
+      "since": null
+    },
+    {
+      "name": "itemId",
+      "type": "string",
+      "default": null,
+      "description": "Menu Item id attribute value",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 81,
+      "since": null
+    },
+    {
+      "name": "parentSubmenu",
+      "type": "BaseSubmenu",
+      "default": null,
+      "description": "Reference to the parent submenu if nested menus created dynamically",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 89,
+      "since": null
+    },
+    {
+      "name": "submenu",
+      "type": "BaseSubmenu",
+      "default": null,
+      "description": "Reference to sub-menu component",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 85,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "onSelect",
+      "type": "void",
+      "default": null,
+      "description": "Emitted when the menu item is selected.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 99,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "click",
+      "signature": "() => void",
+      "description": "Clicks Menu Item interactive element",
+      "deprecated": null,
+      "sourceLine": 180,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "focus",
+      "signature": "() => void",
+      "description": "Focuses Menu Item interactive element",
+      "deprecated": null,
+      "sourceLine": 173,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

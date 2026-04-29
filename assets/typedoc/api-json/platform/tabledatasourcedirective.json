@@ -1,0 +1,44 @@
+{
+  "name": "TableDataSourceDirective",
+  "selector": "[fdpTableDataSource]",
+  "kind": "Directive",
+  "sourceFile": "table-data-source.directive.ts",
+  "sourceLine": 22,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/table-helpers/directives/table-data-source.directive.ts#L22",
+  "description": "",
+  "inputs": [],
+  "outputs": [
+    {
+      "name": "childDataSourceChanged",
+      "type": "void",
+      "default": null,
+      "description": "Event emitted when child data source instance being changed.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 40,
+      "since": null
+    },
+    {
+      "name": "onDataReceived",
+      "type": "void",
+      "default": null,
+      "description": "Event emitted when data loading is finished.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 48,
+      "since": null
+    },
+    {
+      "name": "onDataRequested",
+      "type": "void",
+      "default": null,
+      "description": "Event emitted when data loading is started.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 44,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

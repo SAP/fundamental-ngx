@@ -1,0 +1,34 @@
+{
+  "name": "CardMainHeaderComponent",
+  "selector": "fd-card-main-header",
+  "kind": "Component",
+  "sourceFile": "card-header-main.component.ts",
+  "sourceLine": 25,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/card/header/card-header-main.component.ts#L25",
+  "description": "",
+  "inputs": [
+    {
+      "name": "interactive",
+      "type": "boolean",
+      "default": null,
+      "description": "whether the main header is interactive\ndefault: false",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 30,
+      "since": null
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "default": null,
+      "description": "Text for the title, aria-label and aria-description\nof the main container with role button\nwhen the card main header is interactive\ndefault: \"Activate for action/navigation\"",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 38,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

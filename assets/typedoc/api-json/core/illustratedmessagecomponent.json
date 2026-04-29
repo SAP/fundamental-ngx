@@ -1,0 +1,64 @@
+{
+  "name": "IllustratedMessageComponent",
+  "selector": "[fd-illustrated-message]",
+  "kind": "Component",
+  "sourceFile": "illustrated-message.component.ts",
+  "sourceLine": 127,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/illustrated-message/illustrated-message.component.ts#L127",
+  "description": "Component representing an illustrated message with responsive SVG illustration.\n\nThe component automatically adjusts its illustration size based on container width:\n- Large (>= 682px)\n- Medium (361px - 681px)\n- Small (261px - 360px)\n- Extra Small (161px - 260px)\n- Base (< 161px)\n\nSupports both URL-based SVG sprites and inline SVG content.",
+  "inputs": [
+    {
+      "name": "id",
+      "type": "string",
+      "default": null,
+      "description": "Unique identifier for the illustrated message component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 151,
+      "since": null
+    },
+    {
+      "name": "noSvg",
+      "type": "boolean",
+      "default": null,
+      "description": "When true, hides the SVG illustration entirely.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 146,
+      "since": null
+    },
+    {
+      "name": "svgAriaLabel",
+      "type": "null | string",
+      "default": null,
+      "description": "Accessible label for the SVG illustration.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 141,
+      "since": null
+    },
+    {
+      "name": "svgConfig",
+      "type": "SvgConfig",
+      "default": null,
+      "description": "Configuration for SVG illustrations at different sizes.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 136,
+      "since": null
+    },
+    {
+      "name": "type",
+      "type": "IllustratedMessageType",
+      "default": null,
+      "description": "Explicitly set the illustration type. If not provided, type is determined by container width.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 131,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

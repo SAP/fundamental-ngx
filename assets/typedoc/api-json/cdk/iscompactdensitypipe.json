@@ -1,0 +1,31 @@
+{
+  "name": "IsCompactDensityPipe",
+  "selector": null,
+  "kind": "Pipe",
+  "sourceFile": "is-compact.pipe.ts",
+  "sourceLine": 6,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cdk/utils/pipes/is-compact.pipe.ts#L6",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "transform",
+      "signature": "(size: ContentDensity) => boolean",
+      "description": "Check if the content density is compact.",
+      "deprecated": null,
+      "sourceLine": 8,
+      "since": null,
+      "parameters": [
+        {
+          "name": "size",
+          "type": "ContentDensity",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "boolean"
+    }
+  ],
+  "inherited": null
+}

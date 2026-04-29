@@ -1,0 +1,174 @@
+{
+  "name": "TableRowDirective",
+  "selector": "[fdTableRow], [fd-table-row]",
+  "kind": "Directive",
+  "sourceFile": "table-row.directive.ts",
+  "sourceLine": 36,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/table/directives/table-row.directive.ts#L36",
+  "description": "",
+  "inputs": [
+    {
+      "name": "activable",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the table row is activable",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 48,
+      "since": null
+    },
+    {
+      "name": "active",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the table row is active.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 85,
+      "since": null
+    },
+    {
+      "name": "highlightActive",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to highlight active row when clicked.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 53,
+      "since": null
+    },
+    {
+      "name": "hoverable",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the table row is hoverable",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 58,
+      "since": null
+    },
+    {
+      "name": "main",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the table row is main row, it's concerned only on pop in mode",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 75,
+      "since": null
+    },
+    {
+      "name": "secondary",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the table row is secondary row, it's concerned only on pop in mode",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 80,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": {
+    "from": "FocusableListDirective",
+    "inputs": [
+      {
+        "name": "listFocusedEventAnnouncer",
+        "type": "(position: FocusableListPosition) => string",
+        "default": null,
+        "description": "Function, which returns a string to be announced by screen-reader whenever an row which is in grid receives focus.",
+        "isSignal": true,
+        "deprecated": null,
+        "sourceLine": 102,
+        "since": null
+      },
+      {
+        "name": "wrap",
+        "type": "boolean",
+        "default": null,
+        "description": "Configures wrapping mode which determines whether the active item will wrap to the other end of list when there are no more items in the given direction.",
+        "isSignal": true,
+        "deprecated": null,
+        "sourceLine": 99,
+        "since": null
+      }
+    ],
+    "methods": [
+      {
+        "name": "focus",
+        "signature": "(scrollPosition?: ScrollPosition) => void",
+        "description": "Focus whole list",
+        "deprecated": null,
+        "sourceLine": 296,
+        "since": null,
+        "parameters": [
+          {
+            "name": "scrollPosition",
+            "type": "ScrollPosition",
+            "description": "",
+            "optional": true
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "setActiveItem",
+        "signature": "(index: number, scrollPosition?: ScrollPosition) => void",
+        "description": "Set active item in list",
+        "deprecated": null,
+        "sourceLine": 277,
+        "since": null,
+        "parameters": [
+          {
+            "name": "index",
+            "type": "number",
+            "description": "",
+            "optional": false
+          },
+          {
+            "name": "scrollPosition",
+            "type": "ScrollPosition",
+            "description": "",
+            "optional": true
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "setItems",
+        "signature": "(items: readonly FocusableItem[]) => void",
+        "description": "Set items programmatically.",
+        "deprecated": null,
+        "sourceLine": 267,
+        "since": null,
+        "parameters": [
+          {
+            "name": "items",
+            "type": "readonly FocusableItem[]",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "setTabbable",
+        "signature": "(state: boolean) => void",
+        "description": "Set tabbable state",
+        "deprecated": null,
+        "sourceLine": 304,
+        "since": null,
+        "parameters": [
+          {
+            "name": "state",
+            "type": "boolean",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      }
+    ]
+  }
+}

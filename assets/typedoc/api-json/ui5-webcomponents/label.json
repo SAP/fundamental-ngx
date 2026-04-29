@@ -1,0 +1,54 @@
+{
+  "name": "Label",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "for",
+      "type": "string",
+      "default": null,
+      "description": "Defines the labeled input by providing its ID.\n\n*Note:** Can be used with both `ui5-input` and native input.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 47,
+      "since": null
+    },
+    {
+      "name": "required",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines whether an asterisk character is added to the component text.\n\n*Note:** Usually indicates that user input (bound with the `for` property) is required.\nIn that case the `required` property of\nthe corresponding input should also be set.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 56,
+      "since": null
+    },
+    {
+      "name": "showColon",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines whether colon is added to the component text.\n\n*Note:** Usually used in forms.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 63,
+      "since": null
+    },
+    {
+      "name": "wrappingType",
+      "type": "'None' | 'Normal'",
+      "default": null,
+      "description": "Defines how the text of a component will be displayed when there is not enough space.\n\n*Note:** for option \"Normal\" the text will wrap and the words will not be broken based on hyphenation.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 70,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

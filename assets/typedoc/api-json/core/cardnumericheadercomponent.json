@@ -1,0 +1,24 @@
+{
+  "name": "CardNumericHeaderComponent",
+  "selector": "fd-card-numeric-header",
+  "kind": "Component",
+  "sourceFile": "card-header-numeric.component.ts",
+  "sourceLine": 14,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/card/header/card-header-numeric.component.ts#L14",
+  "description": "",
+  "inputs": [
+    {
+      "name": "ariaRoleDescription",
+      "type": "string",
+      "default": null,
+      "description": "aria-roledescription for the container\ndefault: 'Numeric content'",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 19,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

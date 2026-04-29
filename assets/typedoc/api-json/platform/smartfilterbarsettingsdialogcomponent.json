@@ -1,0 +1,44 @@
+{
+  "name": "SmartFilterBarSettingsDialogComponent",
+  "selector": "fdp-smart-filter-bar-settings-dialog",
+  "kind": "Component",
+  "sourceFile": "smart-filter-bar-settings-dialog.component.ts",
+  "sourceLine": 105,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/smart-filter-bar/components/smart-filter-bar-settings-dialog/smart-filter-bar-settings-dialog.component.ts#L105",
+  "description": "Reset button.\n\nUsed to reset resettable state by click.",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "reset",
+      "signature": "() => void",
+      "description": "Resets filters selection.",
+      "deprecated": null,
+      "sourceLine": 189,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "setInitialTableState",
+      "signature": "() => void",
+      "description": "Sets initial state of the table.",
+      "deprecated": null,
+      "sourceLine": 197,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "setSelectedFilters",
+      "signature": "() => void",
+      "description": "Checks the checkbox in the table row if the field is selected.",
+      "deprecated": null,
+      "sourceLine": 172,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

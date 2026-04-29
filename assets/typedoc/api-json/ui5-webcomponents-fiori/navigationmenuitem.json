@@ -1,0 +1,235 @@
+{
+  "name": "NavigationMenuItem",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 42,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "accessibilityAttributes",
+      "type": "MenuItemAccessibilityAttributes",
+      "default": null,
+      "description": "Defines the additional accessibility attributes that will be applied to the component.\nThe following fields are supported:\n\n- **ariaKeyShortcuts**: Indicated the availability of a keyboard shortcuts defined for the menu item.\n\n- **role**: Defines the role of the menu item. If not set, menu item will have default role=\"menuitem\".",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 75,
+      "since": null
+    },
+    {
+      "name": "accessibleName",
+      "type": "string",
+      "default": null,
+      "description": "Defines the accessible ARIA name of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 80,
+      "since": null
+    },
+    {
+      "name": "additionalText",
+      "type": "string",
+      "default": null,
+      "description": "Defines the `additionalText`, displayed in the end of the menu item.\n\n*Note:** The additional text will not be displayed if there are items added in `items` slot or there are\ncomponents added to `endContent` slot.\n\nThe priority of what will be displayed at the end of the menu item is as follows:\nsub-menu arrow (if there are items added in `items` slot) -> components added in `endContent` -> text set to `additionalText`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 91,
+      "since": null
+    },
+    {
+      "name": "checked",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines whether menu item is in checked state.\n\n*Note:** checked state is only taken into account when menu item is added to menu item group\nwith `checkMode` other than `None`.\n\n*Note:** A checked menu item has a checkmark displayed at its end.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 101,
+      "since": null
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines whether menu item is in disabled state.\n\n*Note:** A disabled menu item is noninteractive.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 108,
+      "since": null
+    },
+    {
+      "name": "highlight",
+      "type": "'None' | 'Positive' | 'Critical' | 'Negative' | 'Information'",
+      "default": null,
+      "description": "Defines the highlight state of the list items.\nAvailable options are: `\"None\"` (by default), `\"Positive\"`, `\"Critical\"`, `\"Information\"` and `\"Negative\"`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 114,
+      "since": null
+    },
+    {
+      "name": "href",
+      "type": "string",
+      "default": null,
+      "description": "Defines the link target URI. Supports standard hyperlink behavior.\nIf a JavaScript action should be triggered,\nthis should not be set, but instead an event handler\nfor the `click` event should be registered.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 50,
+      "since": null
+    },
+    {
+      "name": "icon",
+      "type": "string",
+      "default": null,
+      "description": "Defines the icon to be displayed as graphical element within the component.\nThe SAP-icons font provides numerous options.\n\n*Example:**\n\nSee all the available icons in the [Icon Explorer](https://sdk.openui5.org/test-resources/sap/m/demokit/iconExplorer/webapp/index.html).",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 124,
+      "since": null
+    },
+    {
+      "name": "loading",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines the delay in milliseconds, after which the loading indicator will be displayed inside the corresponding menu popover.\n\n*Note:** If set to `true` a busy indicator component will be displayed into the related one to the current menu item sub-menu popover.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 131,
+      "since": null
+    },
+    {
+      "name": "loadingDelay",
+      "type": "number",
+      "default": null,
+      "description": "Defines the delay in milliseconds, after which the loading indicator will be displayed inside the corresponding menu popover.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 136,
+      "since": null
+    },
+    {
+      "name": "navigated",
+      "type": "boolean",
+      "default": null,
+      "description": "The navigated state of the list item.\nIf set to `true`, a navigation indicator is displayed at the end of the list item.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 142,
+      "since": null
+    },
+    {
+      "name": "selected",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines the selected state of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 147,
+      "since": null
+    },
+    {
+      "name": "target",
+      "type": "string",
+      "default": null,
+      "description": "Defines the component target.\n\n*Notes:**\n\n- `_self`\n- `_top`\n- `_blank`\n- `_parent`\n- `_search`\n\n*This property must only be used when the `href` property is set.**",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 65,
+      "since": null
+    },
+    {
+      "name": "text",
+      "type": "string",
+      "default": null,
+      "description": "Defines the text of the tree item.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 152,
+      "since": null
+    },
+    {
+      "name": "tooltip",
+      "type": "string",
+      "default": null,
+      "description": "Defines the text of the tooltip for the menu item.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 157,
+      "since": null
+    },
+    {
+      "name": "type",
+      "type": "'Inactive' | 'Active' | 'Detail' | 'Navigation'",
+      "default": null,
+      "description": "Defines the visual indication and behavior of the list items.\nAvailable options are `Active` (by default), `Inactive`, `Detail` and `Navigation`.\n\n*Note:** When set to `Active` or `Navigation`, the item will provide visual response upon press and hover,\nwhile with type `Inactive` and `Detail` - will not.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 166,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5BeforeClose",
+      "type": "UI5CustomEvent<NavigationMenuItem, 'before-close'>",
+      "default": null,
+      "description": "Fired before the menu is closed. This event can be cancelled, which will prevent the menu from closing.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 173,
+      "since": null
+    },
+    {
+      "name": "ui5BeforeOpen",
+      "type": "UI5CustomEvent<NavigationMenuItem, 'before-open'>",
+      "default": null,
+      "description": "Fired before the menu is opened. This event can be cancelled, which will prevent the menu from opening.\n\n*Note:** Since 1.14.0 the event is also fired before a sub-menu opens.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 180,
+      "since": null
+    },
+    {
+      "name": "ui5Check",
+      "type": "UI5CustomEvent<NavigationMenuItem, 'check'>",
+      "default": null,
+      "description": "Fired when an item is checked or unchecked.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 185,
+      "since": null
+    },
+    {
+      "name": "ui5Close",
+      "type": "UI5CustomEvent<NavigationMenuItem, 'close'>",
+      "default": null,
+      "description": "Fired after the menu is closed.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 190,
+      "since": null
+    },
+    {
+      "name": "ui5DetailClick",
+      "type": "UI5CustomEvent<NavigationMenuItem, 'detail-click'>",
+      "default": null,
+      "description": "Fired when the user clicks on the detail button when type is `Detail`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 195,
+      "since": null
+    },
+    {
+      "name": "ui5Open",
+      "type": "UI5CustomEvent<NavigationMenuItem, 'open'>",
+      "default": null,
+      "description": "Fired after the menu is opened.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 200,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

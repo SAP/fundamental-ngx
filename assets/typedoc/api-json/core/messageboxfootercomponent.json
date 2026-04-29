@@ -1,0 +1,13 @@
+{
+  "name": "MessageBoxFooterComponent",
+  "selector": "fd-message-box-footer",
+  "kind": "Component",
+  "sourceFile": "message-box-footer.component.ts",
+  "sourceLine": 28,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/message-box/message-box-footer/message-box-footer.component.ts#L28",
+  "description": "Building block of the message box used to create message box header.\n\n```html\n<fd-message-box-footer><!--Content--></fd-message-box-footer>\n\nComplex footer:\n<fd-message-box-footer>\n    <ng-template fdkTemplate=\"footer\"><!--Content--></ng-template>\n</fd-message-box-footer>\n```",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

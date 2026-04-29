@@ -1,0 +1,13 @@
+{
+  "name": "MenuAddonDirective",
+  "selector": "fd-menu-addon",
+  "kind": "Directive",
+  "sourceFile": "menu-addon.directive.ts",
+  "sourceLine": 11,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/menu/directives/menu-addon.directive.ts#L11",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

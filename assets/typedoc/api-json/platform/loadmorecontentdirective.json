@@ -1,0 +1,13 @@
+{
+  "name": "LoadMoreContentDirective",
+  "selector": "[fdpListLoadMoreContent]",
+  "kind": "Directive",
+  "sourceFile": "load-more-content.directive.ts",
+  "sourceLine": 8,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/list/load-more-content.directive.ts#L8",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

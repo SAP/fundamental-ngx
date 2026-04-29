@@ -1,0 +1,105 @@
+{
+  "name": "TokenComponent",
+  "selector": "fd-token",
+  "kind": "Component",
+  "sourceFile": "token.component.ts",
+  "sourceLine": 42,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/token/token.component.ts#L42",
+  "description": "A token is used to represent contextualizing information.\nThey can be useful to show applied filters, selected values for form fields or object metadata.",
+  "inputs": [
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the token is disabled.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 72,
+      "since": null
+    },
+    {
+      "name": "readOnly",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the token is read-only.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 78,
+      "since": null
+    },
+    {
+      "name": "selected",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the token is selected. Supports two-way binding via [(selected)].",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 75,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "elementFocused",
+      "type": "boolean",
+      "default": null,
+      "description": "Emitted when token element received or lost focus.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 69,
+      "since": null
+    },
+    {
+      "name": "onCloseClick",
+      "type": "MouseEvent",
+      "default": null,
+      "description": "Emitted when the *x* icon is clicked. Specifically, any pseudo-element.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 54,
+      "since": null
+    },
+    {
+      "name": "onRemove",
+      "type": "void",
+      "default": null,
+      "description": "Emitted when token should be removed",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 58,
+      "since": null
+    },
+    {
+      "name": "onTokenClick",
+      "type": "MouseEvent",
+      "default": null,
+      "description": "Emitted when a token is clicked.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 62,
+      "since": null
+    },
+    {
+      "name": "onTokenKeydown",
+      "type": "KeyboardEvent",
+      "default": null,
+      "description": "Emitted when a there's a keydown registered on the token.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 66,
+      "since": null
+    },
+    {
+      "name": "selectedChange",
+      "type": "EventEmitter<boolean>",
+      "default": null,
+      "description": "Whether the token is selected. Supports two-way binding via [(selected)].",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 75,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

@@ -1,0 +1,89 @@
+{
+  "name": "IconBarDndItemDirective",
+  "selector": "[fdpIconBarDndItem], [fdp-icon-bar-dnd-item]",
+  "kind": "Directive",
+  "sourceFile": "icon-bar-dnd-item.directive.ts",
+  "sourceLine": 14,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/icon-tab-bar/directives/dnd/icon-bar-dnd-item.directive.ts#L14",
+  "description": "",
+  "inputs": [
+    {
+      "name": "dndHoveredClass",
+      "type": "string[]",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 31,
+      "since": null
+    },
+    {
+      "name": "dndItemData",
+      "type": "IconTabBarItem",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 19,
+      "since": null
+    },
+    {
+      "name": "dndSeparatorClass",
+      "type": "string[]",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 37,
+      "since": null
+    },
+    {
+      "name": "previewClass",
+      "type": "string[]",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 25,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "toggleHoveredStyles",
+      "signature": "(force: boolean) => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 132,
+      "since": null,
+      "parameters": [
+        {
+          "name": "force",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "toggleSeparatorStyles",
+      "signature": "(force: boolean) => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 123,
+      "since": null,
+      "parameters": [
+        {
+          "name": "force",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

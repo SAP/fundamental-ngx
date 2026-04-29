@@ -1,0 +1,45 @@
+{
+  "name": "SearchItemShowMore",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "itemsToShowCount",
+      "type": "number",
+      "default": null,
+      "description": "Specifies the number of additional items available to show.\nIf no value is defined, the control shows \"Show more\" (without any counter).\nIf a number is provided, it displays \"Show more (N)\", where N is that number.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 47,
+      "since": null
+    },
+    {
+      "name": "selected",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines whether the show more item is selected.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 52,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5Click",
+      "type": "UI5CustomEvent<SearchItemShowMore, 'click'>",
+      "default": null,
+      "description": "Fired when the component is activated, either with a mouse/tap\nor by pressing the Enter or Space keys.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 60,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

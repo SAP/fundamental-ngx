@@ -1,0 +1,13 @@
+{
+  "name": "PopoverContainerDirective",
+  "selector": "[fdPopoverContainer]",
+  "kind": "Directive",
+  "sourceFile": "popover-container.directive.ts",
+  "sourceLine": 10,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/popover/popover-container/popover-container.directive.ts#L10",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

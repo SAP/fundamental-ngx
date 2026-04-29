@@ -1,0 +1,102 @@
+{
+  "name": "TableComponent",
+  "selector": "table[fd-table]",
+  "kind": "Component",
+  "sourceFile": "table.component.ts",
+  "sourceLine": 49,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/table/table.component.ts#L49",
+  "description": "The component that represents a table.\nA table is a set of tabular data. Line items can support data, images and actions.\n```html\n<table fd-table></table>\n```",
+  "inputs": [
+    {
+      "name": "keys",
+      "type": "string[]",
+      "default": null,
+      "description": "List of keys that identifies single columns",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 86,
+      "since": null
+    },
+    {
+      "name": "noBorderX",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether or not to show the table's horizontal borders",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 57,
+      "since": null
+    },
+    {
+      "name": "noBorderY",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether or not to show the table's vertical borders",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 62,
+      "since": null
+    },
+    {
+      "name": "noOuterBorder",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether or not to show the table's outer border",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 67,
+      "since": null
+    },
+    {
+      "name": "popIn",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether or not to display the table in pop in mode, it also require change of markup",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 77,
+      "since": null
+    },
+    {
+      "name": "responsive",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether or not to display the table in responsive mode.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 82,
+      "since": null
+    },
+    {
+      "name": "topBorder",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether or not to show the table's top border",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 72,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "reset",
+      "signature": "(keys: string[]) => void",
+      "description": "Method that sorts and changes visible state of particular cells",
+      "deprecated": null,
+      "sourceLine": 128,
+      "since": null,
+      "parameters": [
+        {
+          "name": "keys",
+          "type": "string[]",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

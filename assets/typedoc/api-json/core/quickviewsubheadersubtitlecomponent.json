@@ -1,0 +1,24 @@
+{
+  "name": "QuickViewSubheaderSubtitleComponent",
+  "selector": "fd-quick-view-subheader-subtitle",
+  "kind": "Component",
+  "sourceFile": "quick-view-subheader-subtitle.component.ts",
+  "sourceLine": 7,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/quick-view/quick-view-subheader-subtitle/quick-view-subheader-subtitle.component.ts#L7",
+  "description": "",
+  "inputs": [
+    {
+      "name": "allowWrap",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the subtitle should wrap on multiple lines",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 9,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

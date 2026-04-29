@@ -1,0 +1,13 @@
+{
+  "name": "ListNavigationItemArrowDirective",
+  "selector": "[fd-list-navigation-item-arrow], [fdListNavigaitonItemArrow]",
+  "kind": "Directive",
+  "sourceFile": "list-navigation-item-arrow.directive.ts",
+  "sourceLine": 12,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/list/directives/list-navigation-item-arrow.directive.ts#L12",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

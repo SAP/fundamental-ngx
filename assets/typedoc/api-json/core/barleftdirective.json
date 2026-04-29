@@ -1,0 +1,24 @@
+{
+  "name": "BarLeftDirective",
+  "selector": "[fd-bar-left]",
+  "kind": "Directive",
+  "sourceFile": "bar-left.directive.ts",
+  "sourceLine": 15,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/bar/directives/bar-left.directive.ts#L15",
+  "description": "The left side area of the Bar component.",
+  "inputs": [
+    {
+      "name": "stackContentsVertically",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether to stack the contents of this portion of the bar vertically.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 17,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

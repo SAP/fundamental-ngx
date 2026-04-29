@@ -1,0 +1,225 @@
+{
+  "name": "PopoverService",
+  "selector": null,
+  "kind": "Service",
+  "sourceFile": "popover.service.ts",
+  "sourceLine": 48,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/popover/popover-service/popover.service.ts#L48",
+  "description": "",
+  "inputs": [],
+  "outputs": [
+    {
+      "name": "isOpenChange",
+      "type": "boolean",
+      "default": null,
+      "description": "Emits when popover open state changes",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 122,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "_refreshTriggerListeners",
+      "signature": "() => void",
+      "description": "Refresh listeners on trigger element events",
+      "deprecated": null,
+      "sourceLine": 555,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "applyNewPosition",
+      "signature": "(positions: ConnectedPosition[]) => void",
+      "description": "Method called to change position of popover,\nrecommended to be used only when popover is opened, otherwise change position or cdkPlacement",
+      "deprecated": null,
+      "sourceLine": 424,
+      "since": null,
+      "parameters": [
+        {
+          "name": "positions",
+          "type": "ConnectedPosition[]",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "close",
+      "signature": "(focusActiveElement: boolean) => void",
+      "description": "Closes the popover.",
+      "deprecated": null,
+      "sourceLine": 327,
+      "since": null,
+      "parameters": [
+        {
+          "name": "focusActiveElement",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "deactivate",
+      "signature": "() => void",
+      "description": "This method is intended to be called in order\nto postpone the main functionality but be able\nto enable it back in the future by initialise()",
+      "deprecated": null,
+      "sourceLine": 546,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "initialise",
+      "signature": "(triggerElement: HTMLElement | ElementRef<any>, config?: PopoverConfig, templateData?: null | TemplateRef<void> | PopoverTemplate) => void",
+      "description": "Method initialising the popover service - should be called, after view is initialised, params:\n- triggerElement - element, which is equivalent for cdkOverlayOrigin, or fd-popover-control,\n  by default to this element the popover body will lbe appended and events on this element will trigger\n  popover's  toggle\n- config - configuration object using PopoverConfig interface\n- templateData - in case of having already PopoverBodyComponent, there is way to pass container, template containing\n  PopoverComponent and PopoverComponent instance",
+      "deprecated": null,
+      "sourceLine": 298,
+      "since": null,
+      "parameters": [
+        {
+          "name": "triggerElement",
+          "type": "HTMLElement | ElementRef<any>",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "config",
+          "type": "PopoverConfig",
+          "description": "",
+          "optional": true
+        },
+        {
+          "name": "templateData",
+          "type": "null | TemplateRef<void> | PopoverTemplate",
+          "description": "",
+          "optional": true
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "open",
+      "signature": "() => void",
+      "description": "Opens the popover.",
+      "deprecated": null,
+      "sourceLine": 342,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "refreshConfiguration",
+      "signature": "(config: PopoverConfig) => void",
+      "description": "Method that sets configuration/options, it detects if there is something changed and overwrites them",
+      "deprecated": null,
+      "sourceLine": 443,
+      "since": null,
+      "parameters": [
+        {
+          "name": "config",
+          "type": "PopoverConfig",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "refreshPosition",
+      "signature": "() => void",
+      "description": "Method called to refresh position of opened popover",
+      "deprecated": null,
+      "sourceLine": 431,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "setIgnoreTriggers",
+      "signature": "(ignore: boolean) => void",
+      "description": "Temporary sets the ignoring of the event triggers.",
+      "deprecated": null,
+      "sourceLine": 436,
+      "since": null,
+      "parameters": [
+        {
+          "name": "ignore",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "toggle",
+      "signature": "(openAction: boolean, closeAction: boolean) => void",
+      "description": "Toggles the popover open state",
+      "deprecated": null,
+      "sourceLine": 411,
+      "since": null,
+      "parameters": [
+        {
+          "name": "openAction",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "closeAction",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "updateContent",
+      "signature": "(stringContent: null | string | TemplateRef<any>, templateContent: Nullable<TemplateRef<any>>) => void",
+      "description": "method updating template or text inside rendered PopoverBody",
+      "deprecated": null,
+      "sourceLine": 382,
+      "since": null,
+      "parameters": [
+        {
+          "name": "stringContent",
+          "type": "null | string | TemplateRef<any>",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "templateContent",
+          "type": "Nullable<TemplateRef<any>>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "updateTriggerElement",
+      "signature": "(trigger: HTMLElement | ElementRef<any>) => void",
+      "description": "Updates trigger element and refreshes the listeners.",
+      "deprecated": null,
+      "sourceLine": 601,
+      "since": null,
+      "parameters": [
+        {
+          "name": "trigger",
+          "type": "HTMLElement | ElementRef<any>",
+          "description": "Trigger element ref.",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

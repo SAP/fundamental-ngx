@@ -1,31 +1,4993 @@
 {
 	"id": 0,
-	"name": "fundamental-ngx",
+	"name": "@fundamental-ngx/datetime-adapter",
 	"variant": "project",
 	"kind": 1,
 	"flags": {},
-	"packageName": "fundamental-ngx",
+	"children": [
+		{
+			"id": 7,
+			"name": "DayjsDatetimeAdapter",
+			"variant": "declaration",
+			"kind": 128,
+			"flags": {},
+			"comment": {
+				"summary": [
+					{
+						"kind": "text",
+						"text": "DatetimeAdapter implementation based on dayjs.\n\nThis uses dayjs as a date model instance.\nIt relies on dayjs implementation for formatting and translation purposes."
+					}
+				]
+			},
+			"children": [
+				{
+					"id": 168,
+					"name": "locale",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isProtected": true
+					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "current locale"
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "core/datetime/datetime-adapter.ts",
+							"line": 318,
+							"character": 14,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/datetime/datetime-adapter.ts#L318"
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.locale"
+					}
+				},
+				{
+					"id": 167,
+					"name": "localeChanges",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "locale changes stream"
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "core/datetime/datetime-adapter.ts",
+							"line": 315,
+							"character": 13,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/datetime/datetime-adapter.ts#L315"
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/rxjs/src/internal/Observable.ts",
+							"qualifiedName": "Observable"
+						},
+						"typeArguments": [
+							{
+								"type": "intrinsic",
+								"name": "void"
+							}
+						],
+						"name": "Observable",
+						"package": "rxjs"
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.localeChanges"
+					}
+				},
+				{
+					"id": 121,
+					"name": "addCalendarDays",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+							"line": 312,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L312"
+						}
+					],
+					"signatures": [
+						{
+							"id": 122,
+							"name": "addCalendarDays",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Add days to date"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+									"line": 312,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L312"
+								}
+							],
+							"parameters": [
+								{
+									"id": 123,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/dayjs/index.d.ts",
+											"qualifiedName": "dayjs.Dayjs"
+										},
+										"name": "Dayjs",
+										"package": "dayjs",
+										"qualifiedName": "dayjs.Dayjs"
+									}
+								},
+								{
+									"id": 124,
+									"name": "days",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/dayjs/index.d.ts",
+									"qualifiedName": "dayjs.Dayjs"
+								},
+								"name": "Dayjs",
+								"package": "dayjs",
+								"qualifiedName": "dayjs.Dayjs"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.addCalendarDays"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.addCalendarDays"
+					}
+				},
+				{
+					"id": 117,
+					"name": "addCalendarMonths",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+							"line": 307,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L307"
+						}
+					],
+					"signatures": [
+						{
+							"id": 118,
+							"name": "addCalendarMonths",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Add months to date"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+									"line": 307,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L307"
+								}
+							],
+							"parameters": [
+								{
+									"id": 119,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/dayjs/index.d.ts",
+											"qualifiedName": "dayjs.Dayjs"
+										},
+										"name": "Dayjs",
+										"package": "dayjs",
+										"qualifiedName": "dayjs.Dayjs"
+									}
+								},
+								{
+									"id": 120,
+									"name": "months",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/dayjs/index.d.ts",
+									"qualifiedName": "dayjs.Dayjs"
+								},
+								"name": "Dayjs",
+								"package": "dayjs",
+								"qualifiedName": "dayjs.Dayjs"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.addCalendarMonths"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.addCalendarMonths"
+					}
+				},
+				{
+					"id": 113,
+					"name": "addCalendarYears",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+							"line": 302,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L302"
+						}
+					],
+					"signatures": [
+						{
+							"id": 114,
+							"name": "addCalendarYears",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Add years to date"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+									"line": 302,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L302"
+								}
+							],
+							"parameters": [
+								{
+									"id": 115,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/dayjs/index.d.ts",
+											"qualifiedName": "dayjs.Dayjs"
+										},
+										"name": "Dayjs",
+										"package": "dayjs",
+										"qualifiedName": "dayjs.Dayjs"
+									}
+								},
+								{
+									"id": 116,
+									"name": "years",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/dayjs/index.d.ts",
+									"qualifiedName": "dayjs.Dayjs"
+								},
+								"name": "Dayjs",
+								"package": "dayjs",
+								"qualifiedName": "dayjs.Dayjs"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.addCalendarYears"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.addCalendarYears"
+					}
+				},
+				{
+					"id": 125,
+					"name": "clone",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+							"line": 317,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L317"
+						}
+					],
+					"signatures": [
+						{
+							"id": 126,
+							"name": "clone",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Clone date"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+									"line": 317,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L317"
+								}
+							],
+							"parameters": [
+								{
+									"id": 127,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/dayjs/index.d.ts",
+											"qualifiedName": "dayjs.Dayjs"
+										},
+										"name": "Dayjs",
+										"package": "dayjs",
+										"qualifiedName": "dayjs.Dayjs"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/dayjs/index.d.ts",
+									"qualifiedName": "dayjs.Dayjs"
+								},
+								"name": "Dayjs",
+								"package": "dayjs",
+								"qualifiedName": "dayjs.Dayjs"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.clone"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.clone"
+					}
+				},
+				{
+					"id": 180,
+					"name": "compareDate",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "core/datetime/datetime-adapter.ts",
+							"line": 374,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/datetime/datetime-adapter.ts#L374"
+						}
+					],
+					"signatures": [
+						{
+							"id": 181,
+							"name": "compareDate",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Compares two dates."
+									}
+								],
+								"blockTags": [
+									{
+										"tag": "@returns",
+										"content": [
+											{
+												"kind": "text",
+												"text": "0 if the dates are equal, a number less than 0 if the first date is earlier,\n    a number greater than 0 if the first date is later."
+											}
+										]
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "core/datetime/datetime-adapter.ts",
+									"line": 374,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/datetime/datetime-adapter.ts#L374"
+								}
+							],
+							"parameters": [
+								{
+									"id": 182,
+									"name": "first",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "The first date to compare."
+											}
+										]
+									},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/dayjs/index.d.ts",
+											"qualifiedName": "dayjs.Dayjs"
+										},
+										"name": "Dayjs",
+										"package": "dayjs",
+										"qualifiedName": "dayjs.Dayjs"
+									}
+								},
+								{
+									"id": 183,
+									"name": "second",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "The second date to compare."
+											}
+										]
+									},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/dayjs/index.d.ts",
+											"qualifiedName": "dayjs.Dayjs"
+										},
+										"name": "Dayjs",
+										"package": "dayjs",
+										"qualifiedName": "dayjs.Dayjs"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.compareDate"
+							}
+						}
+					],
+					"inheritedFrom": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.compareDate"
+					}
+				},
+				{
+					"id": 104,
+					"name": "createDate",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+							"line": 277,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L277"
+						}
+					],
+					"signatures": [
+						{
+							"id": 105,
+							"name": "createDate",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Create date object from values"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+									"line": 277,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L277"
+								}
+							],
+							"parameters": [
+								{
+									"id": 106,
+									"name": "year",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								},
+								{
+									"id": 107,
+									"name": "month",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								},
+								{
+									"id": 108,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/dayjs/index.d.ts",
+									"qualifiedName": "dayjs.Dayjs"
+								},
+								"name": "Dayjs",
+								"package": "dayjs",
+								"qualifiedName": "dayjs.Dayjs"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.createDate"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.createDate"
+					}
+				},
+				{
+					"id": 132,
+					"name": "dateTimesEqual",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+							"line": 340,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L340"
+						}
+					],
+					"signatures": [
+						{
+							"id": 133,
+							"name": "dateTimesEqual",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Compare if dates and time are equal"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+									"line": 340,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L340"
+								}
+							],
+							"parameters": [
+								{
+									"id": 134,
+									"name": "date1",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/dayjs/index.d.ts",
+											"qualifiedName": "dayjs.Dayjs"
+										},
+										"name": "Dayjs",
+										"package": "dayjs",
+										"qualifiedName": "dayjs.Dayjs"
+									}
+								},
+								{
+									"id": 135,
+									"name": "date2",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/dayjs/index.d.ts",
+											"qualifiedName": "dayjs.Dayjs"
+										},
+										"name": "Dayjs",
+										"package": "dayjs",
+										"qualifiedName": "dayjs.Dayjs"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "boolean"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.dateTimesEqual"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.dateTimesEqual"
+					}
+				},
+				{
+					"id": 128,
+					"name": "datesEqual",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+							"line": 330,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L330"
+						}
+					],
+					"signatures": [
+						{
+							"id": 129,
+							"name": "datesEqual",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Compare if dates are equal"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+									"line": 330,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L330"
+								}
+							],
+							"parameters": [
+								{
+									"id": 130,
+									"name": "date1",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/dayjs/index.d.ts",
+											"qualifiedName": "dayjs.Dayjs"
+										},
+										"name": "Dayjs",
+										"package": "dayjs",
+										"qualifiedName": "dayjs.Dayjs"
+									}
+								},
+								{
+									"id": 131,
+									"name": "date2",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/dayjs/index.d.ts",
+											"qualifiedName": "dayjs.Dayjs"
+										},
+										"name": "Dayjs",
+										"package": "dayjs",
+										"qualifiedName": "dayjs.Dayjs"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "boolean"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.datesEqual"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.datesEqual"
+					}
+				},
+				{
+					"id": 100,
+					"name": "format",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+							"line": 264,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L264"
+						}
+					],
+					"signatures": [
+						{
+							"id": 101,
+							"name": "format",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Format a date as a string"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+									"line": 264,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L264"
+								}
+							],
+							"parameters": [
+								{
+									"id": 102,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/dayjs/index.d.ts",
+											"qualifiedName": "dayjs.Dayjs"
+										},
+										"name": "Dayjs",
+										"package": "dayjs",
+										"qualifiedName": "dayjs.Dayjs"
+									}
+								},
+								{
+									"id": 103,
+									"name": "displayFormat",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.format"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.format"
+					}
+				},
+				{
+					"id": 15,
+					"name": "fromNow",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {
+						"isOptional": true
+					},
+					"sources": [
+						{
+							"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+							"line": 72,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L72"
+						}
+					],
+					"signatures": [
+						{
+							"id": 16,
+							"name": "fromNow",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [],
+								"blockTags": [
+									{
+										"tag": "@hiden",
+										"content": []
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+									"line": 72,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L72"
+								}
+							],
+							"parameters": [
+								{
+									"id": 17,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/dayjs/index.d.ts",
+											"qualifiedName": "dayjs.Dayjs"
+										},
+										"name": "Dayjs",
+										"package": "dayjs",
+										"qualifiedName": "dayjs.Dayjs"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.fromNow"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.fromNow"
+					}
+				},
+				{
+					"id": 175,
+					"name": "getAmountOfWeeks",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "core/datetime/datetime-adapter.ts",
+							"line": 357,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/datetime/datetime-adapter.ts#L357"
+						}
+					],
+					"signatures": [
+						{
+							"id": 176,
+							"name": "getAmountOfWeeks",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Get Amount of weeks in given month/year"
+									}
+								],
+								"blockTags": [
+									{
+										"tag": "@returns",
+										"content": [
+											{
+												"kind": "text",
+												"text": "Number of weeks in the given month"
+											}
+										]
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "core/datetime/datetime-adapter.ts",
+									"line": 357,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/datetime/datetime-adapter.ts#L357"
+								}
+							],
+							"parameters": [
+								{
+									"id": 177,
+									"name": "year",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "The year of the date"
+											}
+										]
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								},
+								{
+									"id": 178,
+									"name": "month",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "The month of the date"
+											}
+										]
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								},
+								{
+									"id": 179,
+									"name": "firstDayOfWeek",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "The first day of week. 1 - Sunday, 2 - Monday..."
+											}
+										]
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.getAmountOfWeeks"
+							}
+						}
+					],
+					"inheritedFrom": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.getAmountOfWeeks"
+					}
+				},
+				{
+					"id": 27,
+					"name": "getDate",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+							"line": 117,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L117"
+						}
+					],
+					"signatures": [
+						{
+							"id": 28,
+							"name": "getDate",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Get date"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+									"line": 117,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L117"
+								}
+							],
+							"parameters": [
+								{
+									"id": 29,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/dayjs/index.d.ts",
+											"qualifiedName": "dayjs.Dayjs"
+										},
+										"name": "Dayjs",
+										"package": "dayjs",
+										"qualifiedName": "dayjs.Dayjs"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.getDate"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.getDate"
+					}
+				},
+				{
+					"id": 60,
+					"name": "getDateNames",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+							"line": 175,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L175"
+						}
+					],
+					"signatures": [
+						{
+							"id": 61,
+							"name": "getDateNames",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Get date names"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+									"line": 175,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L175"
+								}
+							],
+							"type": {
+								"type": "array",
+								"elementType": {
+									"type": "intrinsic",
+									"name": "string"
+								}
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.getDateNames"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.getDateNames"
+					}
+				},
+				{
+					"id": 30,
+					"name": "getDayOfWeek",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+							"line": 122,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L122"
+						}
+					],
+					"signatures": [
+						{
+							"id": 31,
+							"name": "getDayOfWeek",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Get day of the week"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+									"line": 122,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L122"
+								}
+							],
+							"parameters": [
+								{
+									"id": 32,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/dayjs/index.d.ts",
+											"qualifiedName": "dayjs.Dayjs"
+										},
+										"name": "Dayjs",
+										"package": "dayjs",
+										"qualifiedName": "dayjs.Dayjs"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.getDayOfWeek"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.getDayOfWeek"
+					}
+				},
+				{
+					"id": 62,
+					"name": "getDayOfWeekNames",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+							"line": 180,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L180"
+						}
+					],
+					"signatures": [
+						{
+							"id": 63,
+							"name": "getDayOfWeekNames",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Get days of week names"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+									"line": 180,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L180"
+								}
+							],
+							"parameters": [
+								{
+									"id": 64,
+									"name": "style",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "union",
+										"types": [
+											{
+												"type": "literal",
+												"value": "long"
+											},
+											{
+												"type": "literal",
+												"value": "short"
+											},
+											{
+												"type": "literal",
+												"value": "narrow"
+											}
+										]
+									}
+								}
+							],
+							"type": {
+								"type": "array",
+								"elementType": {
+									"type": "intrinsic",
+									"name": "string"
+								}
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.getDayOfWeekNames"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.getDayOfWeekNames"
+					}
+				},
+				{
+					"id": 88,
+					"name": "getDayPeriodNames",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+							"line": 234,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L234"
+						}
+					],
+					"signatures": [
+						{
+							"id": 89,
+							"name": "getDayPeriodNames",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Get day period names"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+									"line": 234,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L234"
+								}
+							],
+							"parameters": [
+								{
+									"id": 90,
+									"name": "isLower",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "responsible for the lower and upper cases of the result"
+											}
+										]
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "boolean"
+									},
+									"defaultValue": "false"
+								}
+							],
+							"type": {
+								"type": "tuple",
+								"elements": [
+									{
+										"type": "intrinsic",
+										"name": "string"
+									},
+									{
+										"type": "intrinsic",
+										"name": "string"
+									}
+								]
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.getDayPeriodNames"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.getDayPeriodNames"
+					}
+				},
+				{
+					"id": 91,
+					"name": "getFirstDayOfWeek",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+							"line": 242,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L242"
+						}
+					],
+					"signatures": [
+						{
+							"id": 92,
+							"name": "getFirstDayOfWeek",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Get first day of the week"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+									"line": 242,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L242"
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.getFirstDayOfWeek"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.getFirstDayOfWeek"
+					}
+				},
+				{
+					"id": 71,
+					"name": "getHourNames",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+							"line": 203,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L203"
+						}
+					],
+					"signatures": [
+						{
+							"id": 72,
+							"name": "getHourNames",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Get hour names"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+									"line": 203,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L203"
+								}
+							],
+							"parameters": [
+								{
+									"id": 73,
+									"name": "__namedParameters",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reflection",
+										"declaration": {
+											"id": 74,
+											"name": "__type",
+											"variant": "declaration",
+											"kind": 65536,
+											"flags": {},
+											"children": [
+												{
+													"id": 76,
+													"name": "meridian",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+															"line": 203,
+															"character": 62,
+															"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L203"
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "boolean"
+													}
+												},
+												{
+													"id": 75,
+													"name": "twoDigit",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+															"line": 203,
+															"character": 43,
+															"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L203"
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "boolean"
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Properties",
+													"children": [
+														76,
+														75
+													]
+												}
+											],
+											"sources": [
+												{
+													"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+													"line": 203,
+													"character": 41,
+													"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L203"
+												}
+											]
+										}
+									}
+								}
+							],
+							"type": {
+								"type": "array",
+								"elementType": {
+									"type": "intrinsic",
+									"name": "string"
+								}
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.getHourNames"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.getHourNames"
+					}
+				},
+				{
+					"id": 33,
+					"name": "getHours",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+							"line": 127,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L127"
+						}
+					],
+					"signatures": [
+						{
+							"id": 34,
+							"name": "getHours",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Get hours"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+									"line": 127,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L127"
+								}
+							],
+							"parameters": [
+								{
+									"id": 35,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/dayjs/index.d.ts",
+											"qualifiedName": "dayjs.Dayjs"
+										},
+										"name": "Dayjs",
+										"package": "dayjs",
+										"qualifiedName": "dayjs.Dayjs"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.getHours"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.getHours"
+					}
+				},
+				{
+					"id": 77,
+					"name": "getMinuteNames",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+							"line": 211,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L211"
+						}
+					],
+					"signatures": [
+						{
+							"id": 78,
+							"name": "getMinuteNames",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Get minute names"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+									"line": 211,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L211"
+								}
+							],
+							"parameters": [
+								{
+									"id": 79,
+									"name": "__namedParameters",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reflection",
+										"declaration": {
+											"id": 80,
+											"name": "__type",
+											"variant": "declaration",
+											"kind": 65536,
+											"flags": {},
+											"children": [
+												{
+													"id": 82,
+													"name": "minuteStep",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isOptional": true
+													},
+													"sources": [
+														{
+															"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+															"line": 211,
+															"character": 70,
+															"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L211"
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "number"
+													}
+												},
+												{
+													"id": 81,
+													"name": "twoDigit",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+															"line": 211,
+															"character": 51,
+															"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L211"
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "boolean"
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Properties",
+													"children": [
+														82,
+														81
+													]
+												}
+											],
+											"sources": [
+												{
+													"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+													"line": 211,
+													"character": 49,
+													"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L211"
+												}
+											]
+										}
+									}
+								}
+							],
+							"type": {
+								"type": "array",
+								"elementType": {
+									"type": "intrinsic",
+									"name": "string"
+								}
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.getMinuteNames"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.getMinuteNames"
+					}
+				},
+				{
+					"id": 36,
+					"name": "getMinutes",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+							"line": 132,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L132"
+						}
+					],
+					"signatures": [
+						{
+							"id": 37,
+							"name": "getMinutes",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Get minutes"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+									"line": 132,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L132"
+								}
+							],
+							"parameters": [
+								{
+									"id": 38,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/dayjs/index.d.ts",
+											"qualifiedName": "dayjs.Dayjs"
+										},
+										"name": "Dayjs",
+										"package": "dayjs",
+										"qualifiedName": "dayjs.Dayjs"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.getMinutes"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.getMinutes"
+					}
+				},
+				{
+					"id": 24,
+					"name": "getMonth",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+							"line": 112,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L112"
+						}
+					],
+					"signatures": [
+						{
+							"id": 25,
+							"name": "getMonth",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Get month"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+									"line": 112,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L112"
+								}
+							],
+							"parameters": [
+								{
+									"id": 26,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/dayjs/index.d.ts",
+											"qualifiedName": "dayjs.Dayjs"
+										},
+										"name": "Dayjs",
+										"package": "dayjs",
+										"qualifiedName": "dayjs.Dayjs"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.getMonth"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.getMonth"
+					}
+				},
+				{
+					"id": 57,
+					"name": "getMonthNames",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+							"line": 162,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L162"
+						}
+					],
+					"signatures": [
+						{
+							"id": 58,
+							"name": "getMonthNames",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Get months names"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+									"line": 162,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L162"
+								}
+							],
+							"parameters": [
+								{
+									"id": 59,
+									"name": "style",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "union",
+										"types": [
+											{
+												"type": "literal",
+												"value": "long"
+											},
+											{
+												"type": "literal",
+												"value": "short"
+											},
+											{
+												"type": "literal",
+												"value": "narrow"
+											}
+										]
+									}
+								}
+							],
+							"type": {
+								"type": "array",
+								"elementType": {
+									"type": "intrinsic",
+									"name": "string"
+								}
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.getMonthNames"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.getMonthNames"
+					}
+				},
+				{
+					"id": 93,
+					"name": "getNumDaysInMonth",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+							"line": 247,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L247"
+						}
+					],
+					"signatures": [
+						{
+							"id": 94,
+							"name": "getNumDaysInMonth",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Get number of days in the month"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+									"line": 247,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L247"
+								}
+							],
+							"parameters": [
+								{
+									"id": 95,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/dayjs/index.d.ts",
+											"qualifiedName": "dayjs.Dayjs"
+										},
+										"name": "Dayjs",
+										"package": "dayjs",
+										"qualifiedName": "dayjs.Dayjs"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.getNumDaysInMonth"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.getNumDaysInMonth"
+					}
+				},
+				{
+					"id": 83,
+					"name": "getSecondNames",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+							"line": 223,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L223"
+						}
+					],
+					"signatures": [
+						{
+							"id": 84,
+							"name": "getSecondNames",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Get second names"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+									"line": 223,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L223"
+								}
+							],
+							"parameters": [
+								{
+									"id": 85,
+									"name": "__namedParameters",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reflection",
+										"declaration": {
+											"id": 86,
+											"name": "__type",
+											"variant": "declaration",
+											"kind": 65536,
+											"flags": {},
+											"children": [
+												{
+													"id": 87,
+													"name": "twoDigit",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+															"line": 223,
+															"character": 35,
+															"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L223"
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "boolean"
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Properties",
+													"children": [
+														87
+													]
+												}
+											],
+											"sources": [
+												{
+													"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+													"line": 223,
+													"character": 33,
+													"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L223"
+												}
+											]
+										}
+									}
+								}
+							],
+							"type": {
+								"type": "array",
+								"elementType": {
+									"type": "intrinsic",
+									"name": "string"
+								}
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.getSecondNames"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.getSecondNames"
+					}
+				},
+				{
+					"id": 39,
+					"name": "getSeconds",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+							"line": 137,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L137"
+						}
+					],
+					"signatures": [
+						{
+							"id": 40,
+							"name": "getSeconds",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Get seconds"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+									"line": 137,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L137"
+								}
+							],
+							"parameters": [
+								{
+									"id": 41,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/dayjs/index.d.ts",
+											"qualifiedName": "dayjs.Dayjs"
+										},
+										"name": "Dayjs",
+										"package": "dayjs",
+										"qualifiedName": "dayjs.Dayjs"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.getSeconds"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.getSeconds"
+					}
+				},
+				{
+					"id": 68,
+					"name": "getWeekName",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+							"line": 198,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L198"
+						}
+					],
+					"signatures": [
+						{
+							"id": 69,
+							"name": "getWeekName",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Get week name"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+									"line": 198,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L198"
+								}
+							],
+							"parameters": [
+								{
+									"id": 70,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/dayjs/index.d.ts",
+											"qualifiedName": "dayjs.Dayjs"
+										},
+										"name": "Dayjs",
+										"package": "dayjs",
+										"qualifiedName": "dayjs.Dayjs"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.getWeekName"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.getWeekName"
+					}
+				},
+				{
+					"id": 54,
+					"name": "getWeekNumber",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+							"line": 157,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L157"
+						}
+					],
+					"signatures": [
+						{
+							"id": 55,
+							"name": "getWeekNumber",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Get week number"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+									"line": 157,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L157"
+								}
+							],
+							"parameters": [
+								{
+									"id": 56,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/dayjs/index.d.ts",
+											"qualifiedName": "dayjs.Dayjs"
+										},
+										"name": "Dayjs",
+										"package": "dayjs",
+										"qualifiedName": "dayjs.Dayjs"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.getWeekNumber"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.getWeekNumber"
+					}
+				},
+				{
+					"id": 21,
+					"name": "getYear",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+							"line": 107,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L107"
+						}
+					],
+					"signatures": [
+						{
+							"id": 22,
+							"name": "getYear",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Get year"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+									"line": 107,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L107"
+								}
+							],
+							"parameters": [
+								{
+									"id": 23,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/dayjs/index.d.ts",
+											"qualifiedName": "dayjs.Dayjs"
+										},
+										"name": "Dayjs",
+										"package": "dayjs",
+										"qualifiedName": "dayjs.Dayjs"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.getYear"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.getYear"
+					}
+				},
+				{
+					"id": 65,
+					"name": "getYearName",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+							"line": 193,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L193"
+						}
+					],
+					"signatures": [
+						{
+							"id": 66,
+							"name": "getYearName",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Get year name"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+									"line": 193,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L193"
+								}
+							],
+							"parameters": [
+								{
+									"id": 67,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/dayjs/index.d.ts",
+											"qualifiedName": "dayjs.Dayjs"
+										},
+										"name": "Dayjs",
+										"package": "dayjs",
+										"qualifiedName": "dayjs.Dayjs"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.getYearName"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.getYearName"
+					}
+				},
+				{
+					"id": 136,
+					"name": "isBetween",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+							"line": 349,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L349"
+						}
+					],
+					"signatures": [
+						{
+							"id": 137,
+							"name": "isBetween",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Check if date is in range"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+									"line": 349,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L349"
+								}
+							],
+							"parameters": [
+								{
+									"id": 138,
+									"name": "dateToCheck",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/dayjs/index.d.ts",
+											"qualifiedName": "dayjs.Dayjs"
+										},
+										"name": "Dayjs",
+										"package": "dayjs",
+										"qualifiedName": "dayjs.Dayjs"
+									}
+								},
+								{
+									"id": 139,
+									"name": "startDate",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/dayjs/index.d.ts",
+											"qualifiedName": "dayjs.Dayjs"
+										},
+										"name": "Dayjs",
+										"package": "dayjs",
+										"qualifiedName": "dayjs.Dayjs"
+									}
+								},
+								{
+									"id": 140,
+									"name": "endDate",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/dayjs/index.d.ts",
+											"qualifiedName": "dayjs.Dayjs"
+										},
+										"name": "Dayjs",
+										"package": "dayjs",
+										"qualifiedName": "dayjs.Dayjs"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "boolean"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.isBetween"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.isBetween"
+					}
+				},
+				{
+					"id": 147,
+					"name": "isTimeFormatIncludesDayPeriod",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+							"line": 368,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L368"
+						}
+					],
+					"signatures": [
+						{
+							"id": 148,
+							"name": "isTimeFormatIncludesDayPeriod",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Check if time format includes day period"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+									"line": 368,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L368"
+								}
+							],
+							"parameters": [
+								{
+									"id": 149,
+									"name": "displayFormat",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "boolean"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.isTimeFormatIncludesDayPeriod"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.isTimeFormatIncludesDayPeriod"
+					}
+				},
+				{
+					"id": 150,
+					"name": "isTimeFormatIncludesHours",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+							"line": 375,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L375"
+						}
+					],
+					"signatures": [
+						{
+							"id": 151,
+							"name": "isTimeFormatIncludesHours",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Check if time format includes hours"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+									"line": 375,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L375"
+								}
+							],
+							"parameters": [
+								{
+									"id": 152,
+									"name": "displayFormat",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "boolean"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.isTimeFormatIncludesHours"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.isTimeFormatIncludesHours"
+					}
+				},
+				{
+					"id": 153,
+					"name": "isTimeFormatIncludesMinutes",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+							"line": 382,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L382"
+						}
+					],
+					"signatures": [
+						{
+							"id": 154,
+							"name": "isTimeFormatIncludesMinutes",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Check if time format includes minutes"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+									"line": 382,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L382"
+								}
+							],
+							"parameters": [
+								{
+									"id": 155,
+									"name": "displayFormat",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "boolean"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.isTimeFormatIncludesMinutes"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.isTimeFormatIncludesMinutes"
+					}
+				},
+				{
+					"id": 156,
+					"name": "isTimeFormatIncludesSeconds",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+							"line": 389,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L389"
+						}
+					],
+					"signatures": [
+						{
+							"id": 157,
+							"name": "isTimeFormatIncludesSeconds",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Check if time format includes seconds"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+									"line": 389,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L389"
+								}
+							],
+							"parameters": [
+								{
+									"id": 158,
+									"name": "displayFormat",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "boolean"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.isTimeFormatIncludesSeconds"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.isTimeFormatIncludesSeconds"
+					}
+				},
+				{
+					"id": 141,
+					"name": "isValid",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+							"line": 358,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L358"
+						}
+					],
+					"signatures": [
+						{
+							"id": 142,
+							"name": "isValid",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Check if date is valid date object"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+									"line": 358,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L358"
+								}
+							],
+							"parameters": [
+								{
+									"id": 143,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "libs/cdk/utils/models/nullable.ts",
+											"qualifiedName": "Nullable"
+										},
+										"typeArguments": [
+											{
+												"type": "reference",
+												"target": {
+													"sourceFileName": "node_modules/dayjs/index.d.ts",
+													"qualifiedName": "dayjs.Dayjs"
+												},
+												"name": "Dayjs",
+												"package": "dayjs",
+												"qualifiedName": "dayjs.Dayjs"
+											}
+										],
+										"name": "Nullable",
+										"package": "@fundamental-ngx/cdk"
+									}
+								}
+							],
+							"type": {
+								"type": "predicate",
+								"name": "date",
+								"asserts": false,
+								"targetType": {
+									"type": "reference",
+									"target": {
+										"sourceFileName": "node_modules/dayjs/index.d.ts",
+										"qualifiedName": "dayjs.Dayjs"
+									},
+									"name": "Dayjs",
+									"package": "dayjs",
+									"qualifiedName": "dayjs.Dayjs"
+								}
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.isValid"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.isValid"
+					}
+				},
+				{
+					"id": 111,
+					"name": "now",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+							"line": 297,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L297"
+						}
+					],
+					"signatures": [
+						{
+							"id": 112,
+							"name": "now",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Get now"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+									"line": 297,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L297"
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/dayjs/index.d.ts",
+									"qualifiedName": "dayjs.Dayjs"
+								},
+								"name": "Dayjs",
+								"package": "dayjs",
+								"qualifiedName": "dayjs.Dayjs"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.now"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.now"
+					}
+				},
+				{
+					"id": 96,
+					"name": "parse",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+							"line": 252,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L252"
+						}
+					],
+					"signatures": [
+						{
+							"id": 97,
+							"name": "parse",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Try to parse a string to a date object"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+									"line": 252,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L252"
+								}
+							],
+							"parameters": [
+								{
+									"id": 98,
+									"name": "value",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "any"
+									}
+								},
+								{
+									"id": 99,
+									"name": "parseFormat",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									},
+									"defaultValue": "''"
+								}
+							],
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "literal",
+										"value": null
+									},
+									{
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/dayjs/index.d.ts",
+											"qualifiedName": "dayjs.Dayjs"
+										},
+										"name": "Dayjs",
+										"package": "dayjs",
+										"qualifiedName": "dayjs.Dayjs"
+									}
+								]
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.parse"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.parse"
+					}
+				},
+				{
+					"id": 42,
+					"name": "setHours",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+							"line": 142,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L142"
+						}
+					],
+					"signatures": [
+						{
+							"id": 43,
+							"name": "setHours",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Set hours in date object"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+									"line": 142,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L142"
+								}
+							],
+							"parameters": [
+								{
+									"id": 44,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/dayjs/index.d.ts",
+											"qualifiedName": "dayjs.Dayjs"
+										},
+										"name": "Dayjs",
+										"package": "dayjs",
+										"qualifiedName": "dayjs.Dayjs"
+									}
+								},
+								{
+									"id": 45,
+									"name": "hours",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/dayjs/index.d.ts",
+									"qualifiedName": "dayjs.Dayjs"
+								},
+								"name": "Dayjs",
+								"package": "dayjs",
+								"qualifiedName": "dayjs.Dayjs"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.setHours"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.setHours"
+					}
+				},
+				{
+					"id": 18,
+					"name": "setLocale",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+							"line": 75,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L75"
+						}
+					],
+					"signatures": [
+						{
+							"id": 19,
+							"name": "setLocale",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Set locale"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+									"line": 75,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L75"
+								}
+							],
+							"parameters": [
+								{
+									"id": 20,
+									"name": "locale",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "void"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.setLocale"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.setLocale"
+					}
+				},
+				{
+					"id": 46,
+					"name": "setMinutes",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+							"line": 147,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L147"
+						}
+					],
+					"signatures": [
+						{
+							"id": 47,
+							"name": "setMinutes",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Set minutes in date object"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+									"line": 147,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L147"
+								}
+							],
+							"parameters": [
+								{
+									"id": 48,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/dayjs/index.d.ts",
+											"qualifiedName": "dayjs.Dayjs"
+										},
+										"name": "Dayjs",
+										"package": "dayjs",
+										"qualifiedName": "dayjs.Dayjs"
+									}
+								},
+								{
+									"id": 49,
+									"name": "minutes",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/dayjs/index.d.ts",
+									"qualifiedName": "dayjs.Dayjs"
+								},
+								"name": "Dayjs",
+								"package": "dayjs",
+								"qualifiedName": "dayjs.Dayjs"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.setMinutes"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.setMinutes"
+					}
+				},
+				{
+					"id": 50,
+					"name": "setSeconds",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+							"line": 152,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L152"
+						}
+					],
+					"signatures": [
+						{
+							"id": 51,
+							"name": "setSeconds",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Set seconds in date object"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+									"line": 152,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L152"
+								}
+							],
+							"parameters": [
+								{
+									"id": 52,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/dayjs/index.d.ts",
+											"qualifiedName": "dayjs.Dayjs"
+										},
+										"name": "Dayjs",
+										"package": "dayjs",
+										"qualifiedName": "dayjs.Dayjs"
+									}
+								},
+								{
+									"id": 53,
+									"name": "seconds",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/dayjs/index.d.ts",
+									"qualifiedName": "dayjs.Dayjs"
+								},
+								"name": "Dayjs",
+								"package": "dayjs",
+								"qualifiedName": "dayjs.Dayjs"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.setSeconds"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.setSeconds"
+					}
+				},
+				{
+					"id": 169,
+					"name": "setTime",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "core/datetime/datetime-adapter.ts",
+							"line": 343,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/datetime/datetime-adapter.ts#L343"
+						}
+					],
+					"signatures": [
+						{
+							"id": 170,
+							"name": "setTime",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Set hours, minutes and seconds at once."
+									}
+								],
+								"blockTags": [
+									{
+										"tag": "@returns",
+										"content": [
+											{
+												"kind": "text",
+												"text": "The new date instance."
+											}
+										]
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "core/datetime/datetime-adapter.ts",
+									"line": 343,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/datetime/datetime-adapter.ts#L343"
+								}
+							],
+							"parameters": [
+								{
+									"id": 171,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "The date to set time to."
+											}
+										]
+									},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/dayjs/index.d.ts",
+											"qualifiedName": "dayjs.Dayjs"
+										},
+										"name": "Dayjs",
+										"package": "dayjs",
+										"qualifiedName": "dayjs.Dayjs"
+									}
+								},
+								{
+									"id": 172,
+									"name": "hours",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								},
+								{
+									"id": 173,
+									"name": "minutes",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								},
+								{
+									"id": 174,
+									"name": "seconds",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/dayjs/index.d.ts",
+									"qualifiedName": "dayjs.Dayjs"
+								},
+								"name": "Dayjs",
+								"package": "dayjs",
+								"qualifiedName": "dayjs.Dayjs"
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.setTime"
+							}
+						}
+					],
+					"inheritedFrom": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.setTime"
+					}
+				},
+				{
+					"id": 144,
+					"name": "toIso8601",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+							"line": 363,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L363"
+						}
+					],
+					"signatures": [
+						{
+							"id": 145,
+							"name": "toIso8601",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Convert date to ISO8601 string"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+									"line": 363,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L363"
+								}
+							],
+							"parameters": [
+								{
+									"id": 146,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/dayjs/index.d.ts",
+											"qualifiedName": "dayjs.Dayjs"
+										},
+										"name": "Dayjs",
+										"package": "dayjs",
+										"qualifiedName": "dayjs.Dayjs"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.toIso8601"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.toIso8601"
+					}
+				},
+				{
+					"id": 109,
+					"name": "today",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+							"line": 292,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L292"
+						}
+					],
+					"signatures": [
+						{
+							"id": 110,
+							"name": "today",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Get today"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+									"line": 292,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L292"
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/dayjs/index.d.ts",
+									"qualifiedName": "dayjs.Dayjs"
+								},
+								"name": "Dayjs",
+								"package": "dayjs",
+								"qualifiedName": "dayjs.Dayjs"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.today"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.today"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Properties",
+					"children": [
+						168,
+						167
+					]
+				},
+				{
+					"title": "Methods",
+					"children": [
+						121,
+						117,
+						113,
+						125,
+						180,
+						104,
+						132,
+						128,
+						100,
+						15,
+						175,
+						27,
+						60,
+						30,
+						62,
+						88,
+						91,
+						71,
+						33,
+						77,
+						36,
+						24,
+						57,
+						93,
+						83,
+						39,
+						68,
+						54,
+						21,
+						65,
+						136,
+						147,
+						150,
+						153,
+						156,
+						141,
+						111,
+						96,
+						42,
+						18,
+						46,
+						50,
+						169,
+						144,
+						109
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+					"line": 46,
+					"character": 13,
+					"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L46"
+				}
+			],
+			"extendedTypes": [
+				{
+					"type": "reference",
+					"target": {
+						"sourceFileName": "libs/core/datetime/datetime-adapter.ts",
+						"qualifiedName": "DatetimeAdapter"
+					},
+					"typeArguments": [
+						{
+							"type": "reference",
+							"target": {
+								"sourceFileName": "node_modules/dayjs/index.d.ts",
+								"qualifiedName": "dayjs.Dayjs"
+							},
+							"name": "Dayjs",
+							"package": "dayjs",
+							"qualifiedName": "dayjs.Dayjs"
+						}
+					],
+					"name": "DatetimeAdapter",
+					"package": "@fundamental-ngx/core"
+				}
+			]
+		},
+		{
+			"id": 187,
+			"name": "DayjsDatetimeAdapterModule",
+			"variant": "declaration",
+			"kind": 128,
+			"flags": {},
+			"children": [
+				{
+					"id": 188,
+					"name": "constructor",
+					"variant": "declaration",
+					"kind": 512,
+					"flags": {},
+					"signatures": [
+						{
+							"id": 189,
+							"name": "new DayjsDatetimeAdapterModule",
+							"variant": "signature",
+							"kind": 16384,
+							"flags": {},
+							"type": {
+								"type": "reference",
+								"target": 187,
+								"name": "DayjsDatetimeAdapterModule",
+								"package": "@fundamental-ngx/datetime-adapter"
+							}
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Constructors",
+					"children": [
+						188
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.module.ts",
+					"line": 20,
+					"character": 13,
+					"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.module.ts#L20"
+				}
+			]
+		},
+		{
+			"id": 184,
+			"name": "DayjsDatetimeAdapterRawModule",
+			"variant": "declaration",
+			"kind": 128,
+			"flags": {},
+			"comment": {
+				"summary": [],
+				"blockTags": [
+					{
+						"tag": "@deprecated",
+						"content": [
+							{
+								"kind": "text",
+								"text": "Use direct imports of components and directives."
+							}
+						]
+					}
+				]
+			},
+			"children": [
+				{
+					"id": 185,
+					"name": "constructor",
+					"variant": "declaration",
+					"kind": 512,
+					"flags": {},
+					"signatures": [
+						{
+							"id": 186,
+							"name": "new DayjsDatetimeAdapterRawModule",
+							"variant": "signature",
+							"kind": 16384,
+							"flags": {},
+							"type": {
+								"type": "reference",
+								"target": 184,
+								"name": "DayjsDatetimeAdapterRawModule",
+								"package": "@fundamental-ngx/datetime-adapter"
+							}
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Constructors",
+					"children": [
+						185
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.module.ts",
+					"line": 14,
+					"character": 13,
+					"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.module.ts#L14"
+				}
+			]
+		},
+		{
+			"id": 3,
+			"name": "DayjsDatetimeAdapterOptions",
+			"variant": "declaration",
+			"kind": 256,
+			"flags": {},
+			"children": [
+				{
+					"id": 4,
+					"name": "strict",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isOptional": true
+					},
+					"sources": [
+						{
+							"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+							"line": 19,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L19"
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "boolean"
+					}
+				},
+				{
+					"id": 5,
+					"name": "useUtc",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isOptional": true
+					},
+					"sources": [
+						{
+							"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+							"line": 20,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L20"
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "boolean"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Properties",
+					"children": [
+						4,
+						5
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+					"line": 18,
+					"character": 17,
+					"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L18"
+				}
+			]
+		},
+		{
+			"id": 190,
+			"name": "DAYJS_DATETIME_FORMATS",
+			"variant": "declaration",
+			"kind": 32,
+			"flags": {
+				"isConst": true
+			},
+			"sources": [
+				{
+					"fileName": "datetime-adapter/src/lib/dayjs-datetime-formats.ts",
+					"line": 3,
+					"character": 13,
+					"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-formats.ts#L3"
+				}
+			],
+			"type": {
+				"type": "reference",
+				"target": {
+					"sourceFileName": "libs/core/datetime/datetime-formats.ts",
+					"qualifiedName": "DateTimeFormats"
+				},
+				"name": "DateTimeFormats",
+				"package": "@fundamental-ngx/core"
+			},
+			"defaultValue": "..."
+		},
+		{
+			"id": 6,
+			"name": "DAYJS_DATE_TIME_ADAPTER_OPTIONS",
+			"variant": "declaration",
+			"kind": 32,
+			"flags": {
+				"isConst": true
+			},
+			"sources": [
+				{
+					"fileName": "datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+					"line": 23,
+					"character": 13,
+					"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L23"
+				}
+			],
+			"type": {
+				"type": "reference",
+				"target": {
+					"sourceFileName": "node_modules/@angular/core/types/_chrome_dev_tools_performance-chunk.d.ts",
+					"qualifiedName": "InjectionToken"
+				},
+				"typeArguments": [
+					{
+						"type": "reference",
+						"target": 3,
+						"name": "DayjsDatetimeAdapterOptions",
+						"package": "@fundamental-ngx/datetime-adapter"
+					}
+				],
+				"name": "InjectionToken",
+				"package": "@angular/core"
+			},
+			"defaultValue": "..."
+		}
+	],
+	"groups": [
+		{
+			"title": "Classes",
+			"children": [
+				7,
+				187,
+				184
+			]
+		},
+		{
+			"title": "Interfaces",
+			"children": [
+				3
+			]
+		},
+		{
+			"title": "Variables",
+			"children": [
+				190,
+				6
+			]
+		}
+	],
+	"packageName": "@fundamental-ngx/datetime-adapter",
 	"readme": [
 		{
 			"kind": "text",
-			"text": "# Fundamental Library for Angular\n\n[![REUSE status](https://api.reuse.software/badge/github.com/SAP/fundamental-ngx)](https://api.reuse.software/info/github.com/SAP/fundamental-ngx)\n\n<a href=\"https://www.netlify.com\">\n  <img src=\"https://www.netlify.com/img/global/badges/netlify-light.svg\" alt=\"Deploys by Netlify\" />\n</a>\n\n## <a name=\"1\"></a>1. Description\n\nThe Fundamental Library for Angular is an SAP Design System Angular component library used to build modern product user experiences with the SAP look and feel.\n\nThis repository contains 2 libraries(npm packages),\n\n- [@fundamental-ngx/core](https://github.com/SAP/fundamental-ngx/tree/main/libs/core):\n  The Fundamental-NGX core provides base angular implementation of Fundamental Library Styles to offer developers a rich set of components\n  they can use when building angular applications. Fundamental-ngx core angular components provides the end developer with some degree of flexibility as most of the components allow finer customization directly on the HTML template level.\n\n- [@fundamental-ngx/platform](https://github.com/SAP/fundamental-ngx/tree/main/libs/platform):\n  The Fundamental-NGX platform is built on top of the core to both enhance existing functionality with additional features\n  which are driven by application requirements and to provide higher abstraction for the components by hiding most of the internal implementation details which boosts productivity.\n\n## <a name=\"2\"></a>2. Requirements\n\nTo download and use Fundamental Library for Angular, you will first need to install the [node package manager](https://www.npmjs.com/get-npm) and [yarn package manager](https://yarnpkg.com/getting-started/install) ("
+			"text": "# @fundamental-ngx/datetime-adapter\n\n[![npm version](https://badge.fury.io/js/%40fundamental-ngx%2Fdatetime-adapter.svg)](//www.npmjs.com/package/@fundamental-ngx/datetime-adapter)\n![npm](https://img.shields.io/npm/dm/@fundamental-ngx/datetime-adapter?label=npm%20downloads)\n[![REUSE status](https://api.reuse.software/badge/github.com/SAP/fundamental-ngx)](https://api.reuse.software/info/github.com/SAP/fundamental-ngx)\n\n## Description\n\nDate/time adapter based on [Day.js](https://day.js.org/) for Fundamental NGX date and time components (Date Picker, Time Picker, DateTime Picker, etc.).\n\nThese components rely on the "
 		},
 		{
 			"kind": "code",
-			"text": "`corepack enable`"
+			"text": "`DatetimeAdapter`"
 		},
 		{
 			"kind": "text",
-			"text": " and then "
+			"text": " abstraction. This package provides "
 		},
 		{
 			"kind": "code",
-			"text": "`yarn`"
+			"text": "`DayjsDatetimeAdapter`"
 		},
 		{
 			"kind": "text",
-			"text": ").\n\nFundamental Library for Angular is intended for use with Angular 15 or newer.\n\nPrior knowledge of Angular is recommended, to use the fundamental-ngx library.\n\n## <a name=\"3\"></a>3. Known Issues\n\n- Please see [Issues](https://github.com/SAP/fundamental-ngx/issues).\n- Contribution Known [Issues](https://github.com/SAP/fundamental-ngx/wiki/Known-Contribution-Issues)\n\n## <a name=\"4\"></a>4. Support\n\nIf you encounter an issue, you can [create a ticket](https://github.com/SAP/fundamental-ngx/issues).\n\nAngular Versions Support: Our versions offer Angular support. More information can be found [here](https://github.com/SAP/fundamental-ngx/wiki/Angular-Versions-Support).\n\n- Features and enhancements are developed to the latest version of fundamental-ngx.\n\n- Bugfixes can be downported to the latest ngx version, which is compiled with the second last Angular version.\n\n## <a name=\"5\"></a>5. Contributing\n\nIf you want to contribute, please check the [SAP Contribution Guidelines](https://github.com/SAP/.github/blob/main/CONTRIBUTING.md), the [CONTRIBUTING.md](https://github.com/SAP/fundamental-ngx/blob/main/CONTRIBUTING.md) documentation for contribution guidelines. Please follow the [Angular commit message guidelines](https://github.com/angular/angular/blob/main/CONTRIBUTING.md#commit).\n\nCheck out the [NEW_COMPONENT.md](https://github.com/SAP/fundamental-ngx/blob/main/NEW_COMPONENT.md) guide on building a new component for the library and creating the necessary documentation for your new component.\n\n## Similar Projects\n\n## <a name=\"7\"></a>7. Similar Projects\n\n[Fundamental-react](https://github.com/SAP/fundamental-react) - React implementation of Fundamental Library Styles\n\n[Fundamental-vue](https://github.com/SAP/fundamental-vue) - Vue implementation of Fundamental Library Styles"
+			"text": " as an alternative to the built-in "
+		},
+		{
+			"kind": "code",
+			"text": "`FdDatetimeAdapter`"
+		},
+		{
+			"kind": "text",
+			"text": " (based on native "
+		},
+		{
+			"kind": "code",
+			"text": "`Date`"
+		},
+		{
+			"kind": "text",
+			"text": "), adding reliable parse format support.\n\n## Installation\n\n"
+		},
+		{
+			"kind": "code",
+			"text": "```bash\nnpm install @fundamental-ngx/datetime-adapter dayjs\n```"
+		},
+		{
+			"kind": "text",
+			"text": "\n\n## Usage\n\n"
+		},
+		{
+			"kind": "code",
+			"text": "```typescript\nimport { provideDatetimeAdapter } from '@fundamental-ngx/datetime-adapter';\n\n// In your application config or module providers:\nprovideDatetimeAdapter();\n```"
+		},
+		{
+			"kind": "text",
+			"text": "\n\nSee the [documentation](https://sap.github.io/fundamental-ngx) for full configuration and format customization options."
 		}
 	],
-	"symbolIdMap": {}
+	"symbolIdMap": {
+		"0": {
+			"sourceFileName": "libs/datetime-adapter/src/index.ts",
+			"qualifiedName": ""
+		},
+		"3": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapterOptions"
+		},
+		"4": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapterOptions.strict"
+		},
+		"5": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapterOptions.useUtc"
+		},
+		"6": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DAYJS_DATE_TIME_ADAPTER_OPTIONS"
+		},
+		"7": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter"
+		},
+		"15": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.fromNow"
+		},
+		"16": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.fromNow"
+		},
+		"17": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"18": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.setLocale"
+		},
+		"19": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.setLocale"
+		},
+		"20": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "locale"
+		},
+		"21": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.getYear"
+		},
+		"22": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.getYear"
+		},
+		"23": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"24": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.getMonth"
+		},
+		"25": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.getMonth"
+		},
+		"26": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"27": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.getDate"
+		},
+		"28": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.getDate"
+		},
+		"29": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"30": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.getDayOfWeek"
+		},
+		"31": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.getDayOfWeek"
+		},
+		"32": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"33": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.getHours"
+		},
+		"34": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.getHours"
+		},
+		"35": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"36": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.getMinutes"
+		},
+		"37": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.getMinutes"
+		},
+		"38": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"39": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.getSeconds"
+		},
+		"40": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.getSeconds"
+		},
+		"41": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"42": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.setHours"
+		},
+		"43": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.setHours"
+		},
+		"44": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"45": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "hours"
+		},
+		"46": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.setMinutes"
+		},
+		"47": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.setMinutes"
+		},
+		"48": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"49": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "minutes"
+		},
+		"50": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.setSeconds"
+		},
+		"51": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.setSeconds"
+		},
+		"52": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"53": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "seconds"
+		},
+		"54": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.getWeekNumber"
+		},
+		"55": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.getWeekNumber"
+		},
+		"56": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"57": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.getMonthNames"
+		},
+		"58": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.getMonthNames"
+		},
+		"59": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "style"
+		},
+		"60": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.getDateNames"
+		},
+		"61": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.getDateNames"
+		},
+		"62": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.getDayOfWeekNames"
+		},
+		"63": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.getDayOfWeekNames"
+		},
+		"64": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "style"
+		},
+		"65": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.getYearName"
+		},
+		"66": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.getYearName"
+		},
+		"67": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"68": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.getWeekName"
+		},
+		"69": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.getWeekName"
+		},
+		"70": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"71": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.getHourNames"
+		},
+		"72": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.getHourNames"
+		},
+		"73": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "__0"
+		},
+		"74": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "__type"
+		},
+		"75": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "__type.twoDigit"
+		},
+		"76": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "__type.meridian"
+		},
+		"77": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.getMinuteNames"
+		},
+		"78": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.getMinuteNames"
+		},
+		"79": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "__0"
+		},
+		"80": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "__type"
+		},
+		"81": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "__type.twoDigit"
+		},
+		"82": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "__type.minuteStep"
+		},
+		"83": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.getSecondNames"
+		},
+		"84": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.getSecondNames"
+		},
+		"85": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "__0"
+		},
+		"86": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "__type"
+		},
+		"87": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "__type.twoDigit"
+		},
+		"88": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.getDayPeriodNames"
+		},
+		"89": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.getDayPeriodNames"
+		},
+		"90": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "isLower"
+		},
+		"91": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.getFirstDayOfWeek"
+		},
+		"92": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.getFirstDayOfWeek"
+		},
+		"93": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.getNumDaysInMonth"
+		},
+		"94": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.getNumDaysInMonth"
+		},
+		"95": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"96": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.parse"
+		},
+		"97": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.parse"
+		},
+		"98": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "value"
+		},
+		"99": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "parseFormat"
+		},
+		"100": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.format"
+		},
+		"101": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.format"
+		},
+		"102": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"103": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "displayFormat"
+		},
+		"104": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.createDate"
+		},
+		"105": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.createDate"
+		},
+		"106": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "year"
+		},
+		"107": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "month"
+		},
+		"108": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"109": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.today"
+		},
+		"110": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.today"
+		},
+		"111": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.now"
+		},
+		"112": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.now"
+		},
+		"113": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.addCalendarYears"
+		},
+		"114": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.addCalendarYears"
+		},
+		"115": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"116": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "years"
+		},
+		"117": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.addCalendarMonths"
+		},
+		"118": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.addCalendarMonths"
+		},
+		"119": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"120": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "months"
+		},
+		"121": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.addCalendarDays"
+		},
+		"122": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.addCalendarDays"
+		},
+		"123": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"124": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "days"
+		},
+		"125": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.clone"
+		},
+		"126": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.clone"
+		},
+		"127": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"128": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.datesEqual"
+		},
+		"129": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.datesEqual"
+		},
+		"130": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "date1"
+		},
+		"131": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "date2"
+		},
+		"132": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.dateTimesEqual"
+		},
+		"133": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.dateTimesEqual"
+		},
+		"134": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "date1"
+		},
+		"135": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "date2"
+		},
+		"136": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.isBetween"
+		},
+		"137": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.isBetween"
+		},
+		"138": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "dateToCheck"
+		},
+		"139": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "startDate"
+		},
+		"140": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "endDate"
+		},
+		"141": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.isValid"
+		},
+		"142": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.isValid"
+		},
+		"143": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"144": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.toIso8601"
+		},
+		"145": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.toIso8601"
+		},
+		"146": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"147": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.isTimeFormatIncludesDayPeriod"
+		},
+		"148": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.isTimeFormatIncludesDayPeriod"
+		},
+		"149": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "displayFormat"
+		},
+		"150": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.isTimeFormatIncludesHours"
+		},
+		"151": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.isTimeFormatIncludesHours"
+		},
+		"152": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "displayFormat"
+		},
+		"153": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.isTimeFormatIncludesMinutes"
+		},
+		"154": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.isTimeFormatIncludesMinutes"
+		},
+		"155": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "displayFormat"
+		},
+		"156": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.isTimeFormatIncludesSeconds"
+		},
+		"157": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "DayjsDatetimeAdapter.isTimeFormatIncludesSeconds"
+		},
+		"158": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts",
+			"qualifiedName": "displayFormat"
+		},
+		"167": {
+			"sourceFileName": "libs/core/datetime/datetime-adapter.ts",
+			"qualifiedName": "DatetimeAdapter.localeChanges"
+		},
+		"168": {
+			"sourceFileName": "libs/core/datetime/datetime-adapter.ts",
+			"qualifiedName": "DatetimeAdapter.locale"
+		},
+		"169": {
+			"sourceFileName": "libs/core/datetime/datetime-adapter.ts",
+			"qualifiedName": "DatetimeAdapter.setTime"
+		},
+		"170": {
+			"sourceFileName": "libs/core/datetime/datetime-adapter.ts",
+			"qualifiedName": "DatetimeAdapter.setTime"
+		},
+		"171": {
+			"sourceFileName": "libs/core/datetime/datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"172": {
+			"sourceFileName": "libs/core/datetime/datetime-adapter.ts",
+			"qualifiedName": "hours"
+		},
+		"173": {
+			"sourceFileName": "libs/core/datetime/datetime-adapter.ts",
+			"qualifiedName": "minutes"
+		},
+		"174": {
+			"sourceFileName": "libs/core/datetime/datetime-adapter.ts",
+			"qualifiedName": "seconds"
+		},
+		"175": {
+			"sourceFileName": "libs/core/datetime/datetime-adapter.ts",
+			"qualifiedName": "DatetimeAdapter.getAmountOfWeeks"
+		},
+		"176": {
+			"sourceFileName": "libs/core/datetime/datetime-adapter.ts",
+			"qualifiedName": "DatetimeAdapter.getAmountOfWeeks"
+		},
+		"177": {
+			"sourceFileName": "libs/core/datetime/datetime-adapter.ts",
+			"qualifiedName": "year"
+		},
+		"178": {
+			"sourceFileName": "libs/core/datetime/datetime-adapter.ts",
+			"qualifiedName": "month"
+		},
+		"179": {
+			"sourceFileName": "libs/core/datetime/datetime-adapter.ts",
+			"qualifiedName": "firstDayOfWeek"
+		},
+		"180": {
+			"sourceFileName": "libs/core/datetime/datetime-adapter.ts",
+			"qualifiedName": "DatetimeAdapter.compareDate"
+		},
+		"181": {
+			"sourceFileName": "libs/core/datetime/datetime-adapter.ts",
+			"qualifiedName": "DatetimeAdapter.compareDate"
+		},
+		"182": {
+			"sourceFileName": "libs/core/datetime/datetime-adapter.ts",
+			"qualifiedName": "first"
+		},
+		"183": {
+			"sourceFileName": "libs/core/datetime/datetime-adapter.ts",
+			"qualifiedName": "second"
+		},
+		"184": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.module.ts",
+			"qualifiedName": "DayjsDatetimeAdapterRawModule"
+		},
+		"187": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-adapter.module.ts",
+			"qualifiedName": "DayjsDatetimeAdapterModule"
+		},
+		"190": {
+			"sourceFileName": "libs/datetime-adapter/src/lib/dayjs-datetime-formats.ts",
+			"qualifiedName": "DAYJS_DATETIME_FORMATS"
+		}
+	}
 }

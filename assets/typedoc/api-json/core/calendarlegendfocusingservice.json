@@ -1,0 +1,41 @@
+{
+  "name": "CalendarLegendFocusingService",
+  "selector": null,
+  "kind": "Service",
+  "sourceFile": "calendar-legend-focusing.service.ts",
+  "sourceLine": 5,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/calendar/calendar-legend/calendar-legend-focusing.service.ts#L5",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "clearFocusedElement",
+      "signature": "() => void",
+      "description": "Clearing the focused element",
+      "deprecated": null,
+      "sourceLine": 10,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "handleLegendItemFocus",
+      "signature": "(specialDayNumber: Nullable<number>) => void",
+      "description": "Setting the special day number that is currently focused",
+      "deprecated": null,
+      "sourceLine": 15,
+      "since": null,
+      "parameters": [
+        {
+          "name": "specialDayNumber",
+          "type": "Nullable<number>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

@@ -1,0 +1,246 @@
+{
+  "name": "FileUploaderComponent",
+  "selector": "fd-file-uploader",
+  "kind": "Component",
+  "sourceFile": "file-uploader.component.ts",
+  "sourceLine": 54,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/file-uploader/file-uploader.component.ts#L54",
+  "description": "Tool to facilitate the input of files from the user.\nIt supports drag and drop, multiple input, max file size and more.\nThe drag events make it very easy to create and style elements like a dropzone.",
+  "inputs": [
+    {
+      "name": "accept",
+      "type": "string",
+      "default": null,
+      "description": "Accepted file extensions. Format: `'.png,.jpg'`.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 77,
+      "since": null
+    },
+    {
+      "name": "ariaLabel",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "aria-label value for input element.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 97,
+      "since": null
+    },
+    {
+      "name": "ariaLabelledBy",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "aria-label-by value for input element.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 101,
+      "since": null
+    },
+    {
+      "name": "buttonAriaLabel",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "value for input element.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 113,
+      "since": null
+    },
+    {
+      "name": "buttonLabel",
+      "type": "string",
+      "default": null,
+      "description": "button value",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 109,
+      "since": null
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the file input is disabled.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 65,
+      "since": null
+    },
+    {
+      "name": "dragndrop",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether the file input accepts drag and dropped files.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 81,
+      "since": null
+    },
+    {
+      "name": "fileLimit",
+      "type": "number",
+      "default": null,
+      "description": "specifies number of files to allow to select",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 124,
+      "since": null
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "default": null,
+      "description": "Id for the input element.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 93,
+      "since": null
+    },
+    {
+      "name": "inputHidden",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether or not to hide the input, leaving only the upload/browse button.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 128,
+      "since": null
+    },
+    {
+      "name": "maxFileSize",
+      "type": "string",
+      "default": "''",
+      "description": "Max file size in bytes that the input will accept.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 85,
+      "since": null
+    },
+    {
+      "name": "minFileSize",
+      "type": "string",
+      "default": "''",
+      "description": "Min file size in bytes that the input will accept.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 89,
+      "since": null
+    },
+    {
+      "name": "multiple",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether the file input should accept multiple files.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 73,
+      "since": null
+    },
+    {
+      "name": "placeholder",
+      "type": "string",
+      "default": null,
+      "description": "placeholder for input element.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 105,
+      "since": null
+    },
+    {
+      "name": "required",
+      "type": "boolean",
+      "default": "false",
+      "description": "If it is mandatory field",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 69,
+      "since": null
+    },
+    {
+      "name": "state",
+      "type": "stateType",
+      "default": "'default'",
+      "description": "The field to set state of radio button using:\n'success' | 'error' | 'warning' | 'default' | 'information'\nby default value is set to 'default'",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 120,
+      "since": null
+    },
+    {
+      "name": "width",
+      "type": "string",
+      "default": null,
+      "description": "Width of the file uploader",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 132,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "onDragEnter",
+      "type": "void",
+      "default": null,
+      "description": "Event fired when the dragged file enters the component boundaries.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 145,
+      "since": null
+    },
+    {
+      "name": "onDragLeave",
+      "type": "void",
+      "default": null,
+      "description": "Event fired when the dragged file exits the component boundaries.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 150,
+      "since": null
+    },
+    {
+      "name": "selectedFilesChanged",
+      "type": "File[]",
+      "default": null,
+      "description": "Event fired when files are selected. Passed object is the array of files selected.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 136,
+      "since": null
+    },
+    {
+      "name": "selectedInvalidFiles",
+      "type": "File[]",
+      "default": null,
+      "description": "Event fired when some invalid files are selected. Passed object is the array of invalid files.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 140,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "clear",
+      "signature": "() => void",
+      "description": "Clears the files from the input.",
+      "deprecated": null,
+      "sourceLine": 276,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "open",
+      "signature": "() => void",
+      "description": "Opens the file selector.",
+      "deprecated": null,
+      "sourceLine": 269,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

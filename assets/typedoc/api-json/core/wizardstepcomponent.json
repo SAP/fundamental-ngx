@@ -1,0 +1,125 @@
+{
+  "name": "WizardStepComponent",
+  "selector": "[fd-wizard-step]",
+  "kind": "Component",
+  "sourceFile": "wizard-step.component.ts",
+  "sourceLine": 44,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/wizard/wizard-step/wizard-step.component.ts#L44",
+  "description": "",
+  "inputs": [
+    {
+      "name": "ariaLabel",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "The aria-label for the step container.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 49,
+      "since": null
+    },
+    {
+      "name": "ariaRoleDecription",
+      "type": "string",
+      "default": "'Navigation'",
+      "description": "",
+      "isSignal": false,
+      "deprecated": "Deprecated",
+      "sourceLine": 55,
+      "since": null
+    },
+    {
+      "name": "branching",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether or not this is a 'branching' step.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 67,
+      "since": null
+    },
+    {
+      "name": "isSummary",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether or not this step is the summary page.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 85,
+      "since": null
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "default": null,
+      "description": "The label text.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 73,
+      "since": null
+    },
+    {
+      "name": "optionalText",
+      "type": "string",
+      "default": null,
+      "description": "The smaller text for labeling the step as optional.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 79,
+      "since": null
+    },
+    {
+      "name": "status",
+      "type": "WizardStepStatus",
+      "default": null,
+      "description": "The type of step ('completed', 'current', 'upcoming', and 'active'.)",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 61,
+      "since": null
+    },
+    {
+      "name": "stepClickValidator",
+      "type": "(visited: boolean, completed: boolean) => boolean | Promise<boolean>",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 91,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "statusChange",
+      "type": "WizardStepStatus",
+      "default": null,
+      "description": "Event emitted when the wizard step's status changes.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 97,
+      "since": null
+    },
+    {
+      "name": "stepClicked",
+      "type": "WizardStepComponent",
+      "default": null,
+      "description": "Event emitted when a step is clicked.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 103,
+      "since": null
+    },
+    {
+      "name": "stepIndicatorItemClicked",
+      "type": "WizardStepComponent",
+      "default": null,
+      "description": "Event emitted when a step indicator is clicked.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 109,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

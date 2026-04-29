@@ -1,0 +1,233 @@
+{
+  "name": "IconTabBarComponent",
+  "selector": "fdp-icon-tab-bar",
+  "kind": "Component",
+  "sourceFile": "icon-tab-bar.component.ts",
+  "sourceLine": 77,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/icon-tab-bar/icon-tab-bar.component.ts#L77",
+  "description": "",
+  "inputs": [
+    {
+      "name": "colorAssociations",
+      "type": "Partial<Record<SemanticColor, string>>",
+      "default": null,
+      "description": "",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 124,
+      "since": null
+    },
+    {
+      "name": "densityMode",
+      "type": "TabDensityMode",
+      "default": null,
+      "description": "",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 97,
+      "since": null
+    },
+    {
+      "name": "enableTabReordering",
+      "type": "boolean",
+      "default": null,
+      "description": "",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 103,
+      "since": null
+    },
+    {
+      "name": "iconTabBackground",
+      "type": "IconTabBarBackground",
+      "default": null,
+      "description": "",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 115,
+      "since": null
+    },
+    {
+      "name": "iconTabFont",
+      "type": "IconFont",
+      "default": null,
+      "description": "",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 100,
+      "since": null
+    },
+    {
+      "name": "iconTabSize",
+      "type": "IconTabBarSize",
+      "default": null,
+      "description": "",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 118,
+      "since": null
+    },
+    {
+      "name": "iconTabType",
+      "type": "TabType",
+      "default": null,
+      "description": "",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 89,
+      "since": null
+    },
+    {
+      "name": "layoutMode",
+      "type": "'row' | 'column'",
+      "default": null,
+      "description": "",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 112,
+      "since": null
+    },
+    {
+      "name": "maxContentHeight",
+      "type": "string",
+      "default": null,
+      "description": "Maximum height of the content.\nWorks only for content-projected tab content.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 133,
+      "since": null
+    },
+    {
+      "name": "multiClick",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether to render icon tab item as multi-click variant.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 109,
+      "since": null
+    },
+    {
+      "name": "settings",
+      "type": "boolean",
+      "default": null,
+      "description": "",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 127,
+      "since": null
+    },
+    {
+      "name": "showTotalTab",
+      "type": "boolean",
+      "default": null,
+      "description": "",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 106,
+      "since": null
+    },
+    {
+      "name": "stackContent",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to open tab content one under another without collapsing.\nWorks only for content-projected tab content.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 83,
+      "since": null
+    },
+    {
+      "name": "tabHeadingLevel",
+      "type": "null | number",
+      "default": null,
+      "description": "Heading level of the tab.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 86,
+      "since": null
+    },
+    {
+      "name": "tabsConfig",
+      "type": "NullableObject<{ active: boolean; badge: boolean; closable: boolean; color: FdkAsyncProperty<SemanticColor>; contentTemplateId: string; ... }>[]",
+      "default": null,
+      "description": "",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 94,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "closeTab",
+      "type": "IconTabBarItem",
+      "default": null,
+      "description": "Event emitted when user clicks on x icon in tab.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 142,
+      "since": null
+    },
+    {
+      "name": "densityModeChange",
+      "type": "EventEmitter<TabDensityMode>",
+      "default": null,
+      "description": "",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 97,
+      "since": null
+    },
+    {
+      "name": "iconTabReordered",
+      "type": "IconTabBarItem[]",
+      "default": null,
+      "description": "",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 139,
+      "since": null
+    },
+    {
+      "name": "iconTabSelected",
+      "type": "IconTabBarItem",
+      "default": null,
+      "description": "",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 136,
+      "since": null
+    },
+    {
+      "name": "tabsConfigChange",
+      "type": "EventEmitter<NullableObject<{ active: boolean; badge: boolean; closable: boolean; color: FdkAsyncProperty<SemanticColor>; contentTemplateId: string; ... }>[]>",
+      "default": null,
+      "description": "",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 94,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "selectTab",
+      "signature": "(id: Nullable<string>) => void",
+      "description": "Programmatically select tab.",
+      "deprecated": null,
+      "sourceLine": 302,
+      "since": null,
+      "parameters": [
+        {
+          "name": "id",
+          "type": "Nullable<string>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

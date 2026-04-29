@@ -1,0 +1,37 @@
+{
+  "name": "DateFormatPipe",
+  "selector": null,
+  "kind": "Pipe",
+  "sourceFile": "datetime-format.pipes.ts",
+  "sourceLine": 10,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/datetime/datetime-format.pipes.ts#L10",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "transform",
+      "signature": "(date: D, noDateMessage: string) => string",
+      "description": "Format date object",
+      "deprecated": null,
+      "sourceLine": 18,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "D",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "noDateMessage",
+          "type": "string",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "string"
+    }
+  ],
+  "inherited": null
+}

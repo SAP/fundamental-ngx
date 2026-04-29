@@ -1,0 +1,13 @@
+{
+  "name": "ComboboxSelectionChangeEvent",
+  "selector": "fdp-combobox",
+  "kind": "Class",
+  "sourceFile": "combobox.component.ts",
+  "sourceLine": 38,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/combobox/combobox/combobox.component.ts#L38",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

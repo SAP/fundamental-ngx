@@ -1,0 +1,65 @@
+{
+  "name": "SuggestionItemGroup",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "headerAccessibleName",
+      "type": "string",
+      "default": null,
+      "description": "Defines the accessible name of the header.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 45,
+      "since": null
+    },
+    {
+      "name": "headerText",
+      "type": "string",
+      "default": null,
+      "description": "Defines the header text of the <code>ui5-li-group</code>.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 50,
+      "since": null
+    },
+    {
+      "name": "wrappingType",
+      "type": "'None' | 'Normal'",
+      "default": null,
+      "description": "Defines if the text of the component should wrap when it's too long.\nWhen set to \"Normal\", the content (title, description) will be wrapped\nusing the `ui5-expandable-text` component.<br/>\n\nThe text can wrap up to 100 characters on small screens (size S) and\nup to 300 characters on larger screens (size M and above). When text exceeds\nthese limits, it truncates with an ellipsis followed by a text expansion trigger.\n\nAvailable options are:\n- `None` (default) - The text will truncate with an ellipsis.\n- `Normal` - The text will wrap (without truncation).",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 65,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5Move",
+      "type": "UI5CustomEvent<SuggestionItemGroup, 'move'>",
+      "default": null,
+      "description": "Fired when a movable list item is dropped onto a drop target.\n\n*Note:** `move` event is fired only if there was a preceding `move-over` with prevented default action.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 74,
+      "since": null
+    },
+    {
+      "name": "ui5MoveOver",
+      "type": "UI5CustomEvent<SuggestionItemGroup, 'move-over'>",
+      "default": null,
+      "description": "Fired when a movable list item is moved over a potential drop target during a dragging operation.\n\nIf the new position is valid, prevent the default action of the event using `preventDefault()`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 81,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

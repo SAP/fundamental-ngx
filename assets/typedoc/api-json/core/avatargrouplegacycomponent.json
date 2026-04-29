@@ -1,0 +1,64 @@
+{
+  "name": "AvatarGroupLegacyComponent",
+  "selector": "fd-avatar-group-legacy",
+  "kind": "Component",
+  "sourceFile": "avatar-group-legacy.component.ts",
+  "sourceLine": 49,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/avatar-group-legacy/avatar-group-legacy.component.ts#L49",
+  "description": "",
+  "inputs": [
+    {
+      "name": "ariaLabel",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "Aria-label for Avatar Group.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 70,
+      "since": null
+    },
+    {
+      "name": "class",
+      "type": "string",
+      "default": null,
+      "description": "Apply user custom class.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 58,
+      "since": null
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "default": null,
+      "description": "Id of the Avatar Group.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 54,
+      "since": null
+    },
+    {
+      "name": "size",
+      "type": "Size",
+      "default": "'s'",
+      "description": "The size of the Avatar Group. Options include: *xs*, *s*, *m*, *l* and *xl* (default: *s*).",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 62,
+      "since": null
+    },
+    {
+      "name": "type",
+      "type": "AvatarGroupLegacyType",
+      "default": "'group'",
+      "description": "The type of the Avatar Group. Options include: *group* and *individual* (default: *group*).",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 66,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

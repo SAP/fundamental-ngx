@@ -1,0 +1,46 @@
+{
+  "name": "ListGroupHeaderComponent",
+  "selector": "fdp-list-group-header",
+  "kind": "Component",
+  "sourceFile": "list-group-header.component.ts",
+  "sourceLine": 28,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/list/list-group-header.component.ts#L28",
+  "description": "This class contains common properties used across list Item components.\nthis can be extended to reduce the code duplication across list Item components.",
+  "inputs": [
+    {
+      "name": "groupHeaderTitle",
+      "type": "string",
+      "default": null,
+      "description": "Displays list group header title",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 31,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": {
+    "from": "BaseListItem",
+    "inputs": [],
+    "methods": [
+      {
+        "name": "setSelected",
+        "signature": "(selected: boolean) => void",
+        "description": "Programmatically set selected state of the list item.",
+        "deprecated": null,
+        "sourceLine": 528,
+        "since": null,
+        "parameters": [
+          {
+            "name": "selected",
+            "type": "boolean",
+            "description": "Whether the list item is selected",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      }
+    ]
+  }
+}

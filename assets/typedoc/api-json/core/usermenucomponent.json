@@ -1,0 +1,73 @@
+{
+  "name": "UserMenuComponent",
+  "selector": "fd-user-menu",
+  "kind": "Component",
+  "sourceFile": "user-menu.component.ts",
+  "sourceLine": 69,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/user-menu/user-menu.component.ts#L69",
+  "description": "",
+  "inputs": [
+    {
+      "name": "mobile",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the user menu is in mobile mode",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 74,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "isOpenChange",
+      "type": "boolean",
+      "default": null,
+      "description": "Event thrown, when the user menu is opened or closed",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 71,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "close",
+      "signature": "() => void",
+      "description": "Method that closes the user menu",
+      "deprecated": null,
+      "sourceLine": 190,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "open",
+      "signature": "() => void",
+      "description": "Method that opens the user menu",
+      "deprecated": null,
+      "sourceLine": 185,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "openDialog",
+      "signature": "(dialogTemplate: TemplateRef<any>) => void",
+      "description": "Method that opens the user menu in dialog (for mobile mode)",
+      "deprecated": null,
+      "sourceLine": 207,
+      "since": null,
+      "parameters": [
+        {
+          "name": "dialogTemplate",
+          "type": "TemplateRef<any>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

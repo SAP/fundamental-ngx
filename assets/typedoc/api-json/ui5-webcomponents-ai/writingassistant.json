@@ -1,0 +1,75 @@
+{
+  "name": "WritingAssistant",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "currentVersion",
+      "type": "number",
+      "default": null,
+      "description": "Indicates the index of the currently displayed result version.\n\nThe index is **0-based** (i.e. `0` represents the first result).\nThis property is synchronized with the parent AI TextArea component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 48,
+      "since": null
+    },
+    {
+      "name": "promptDescription",
+      "type": "string",
+      "default": null,
+      "description": "Defines the prompt description of the Writing Assistant.\n\nThis text is displayed in the toolbar to indicate the current or last\nperformed AI action (e.g., \"Generated text\", \"Simplified text\").",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 56,
+      "since": null
+    },
+    {
+      "name": "totalVersions",
+      "type": "number",
+      "default": null,
+      "description": "Indicates the total number of result versions available.\n\nThis property determines whether version navigation controls are displayed.\nWhen totalVersions > 0, previous/next buttons become available.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 64,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5ButtonClick",
+      "type": "UI5CustomEvent<WritingAssistant, 'button-click'>",
+      "default": null,
+      "description": "Fired when the user clicks on the AI button.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 71,
+      "since": null
+    },
+    {
+      "name": "ui5StopGeneration",
+      "type": "UI5CustomEvent<WritingAssistant, 'stop-generation'>",
+      "default": null,
+      "description": "Fired when the user clicks on the \"Stop\" button to stop ongoing AI text generation.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 76,
+      "since": null
+    },
+    {
+      "name": "ui5VersionChange",
+      "type": "UI5CustomEvent<WritingAssistant, 'version-change'>",
+      "default": null,
+      "description": "Fired when the user clicks on version navigation buttons.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 81,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

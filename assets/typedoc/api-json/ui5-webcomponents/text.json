@@ -1,0 +1,34 @@
+{
+  "name": "Text",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "emptyIndicatorMode",
+      "type": "'On' | 'Off'",
+      "default": null,
+      "description": "Specifies if an empty indicator should be displayed when there is no text.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 45,
+      "since": null
+    },
+    {
+      "name": "maxLines",
+      "type": "number",
+      "default": null,
+      "description": "Defines the number of lines the text should wrap before it truncates.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 50,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

@@ -1,0 +1,13 @@
+{
+  "name": "ShellbarTitleComponent",
+  "selector": "fd-shellbar-title",
+  "kind": "Component",
+  "sourceFile": "shellbar-title.component.ts",
+  "sourceLine": 19,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/shellbar/shellbar-title/shellbar-title.component.ts#L19",
+  "description": "The component that represents a shellbar title.\nThe title is a required element and displays the current application name.\n```html\n  <fd-shellbar-title>\n     Corporate Portal\n  </fd-shellbar-title>\n```",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

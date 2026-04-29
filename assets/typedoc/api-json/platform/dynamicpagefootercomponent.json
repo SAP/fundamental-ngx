@@ -1,0 +1,13 @@
+{
+  "name": "DynamicPageFooterComponent",
+  "selector": "fdp-dynamic-page-footer",
+  "kind": "Component",
+  "sourceFile": "dynamic-page-footer.component.ts",
+  "sourceLine": 10,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/dynamic-page/dynamic-page-footer/dynamic-page-footer.component.ts#L10",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

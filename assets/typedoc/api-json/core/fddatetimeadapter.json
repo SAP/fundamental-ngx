@@ -1,0 +1,852 @@
+{
+  "name": "FdDatetimeAdapter",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "fd-datetime-adapter.ts",
+  "sourceLine": 26,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/datetime/fd-datetime-adapter.ts#L26",
+  "description": "DatetimeAdapter implementation based on FdDate.\n\nThis uses FdDate as a date model and relies on Intl.DateTimeFormat\nfor formatting and translation purposes.",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "addCalendarDays",
+      "signature": "(fdDate: FdDate, days: number) => FdDate",
+      "description": "Add days to a date",
+      "deprecated": null,
+      "sourceLine": 302,
+      "since": null,
+      "parameters": [
+        {
+          "name": "fdDate",
+          "type": "FdDate",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "days",
+          "type": "number",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "FdDate"
+    },
+    {
+      "name": "addCalendarMonths",
+      "signature": "(fdDate: FdDate, months: number) => FdDate",
+      "description": "Add months to a date",
+      "deprecated": null,
+      "sourceLine": 287,
+      "since": null,
+      "parameters": [
+        {
+          "name": "fdDate",
+          "type": "FdDate",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "months",
+          "type": "number",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "FdDate"
+    },
+    {
+      "name": "addCalendarYears",
+      "signature": "(date: FdDate, years: number) => FdDate",
+      "description": "Add years to a date",
+      "deprecated": null,
+      "sourceLine": 282,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "FdDate",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "years",
+          "type": "number",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "FdDate"
+    },
+    {
+      "name": "clone",
+      "signature": "(date: FdDate) => FdDate",
+      "description": "Clone a date object",
+      "deprecated": null,
+      "sourceLine": 309,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "FdDate",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "FdDate"
+    },
+    {
+      "name": "createDate",
+      "signature": "(year: number, month: number, date: number) => FdDate",
+      "description": "Create a date object",
+      "deprecated": null,
+      "sourceLine": 215,
+      "since": null,
+      "parameters": [
+        {
+          "name": "year",
+          "type": "number",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "month",
+          "type": "number",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "date",
+          "type": "number",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "FdDate"
+    },
+    {
+      "name": "dateTimesEqual",
+      "signature": "(date1: FdDate, date2: FdDate) => boolean",
+      "description": "Check if dates and time are equal",
+      "deprecated": null,
+      "sourceLine": 341,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date1",
+          "type": "FdDate",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "date2",
+          "type": "FdDate",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "boolean"
+    },
+    {
+      "name": "datesEqual",
+      "signature": "(date1: FdDate, date2: FdDate) => boolean",
+      "description": "Check if dates are equal",
+      "deprecated": null,
+      "sourceLine": 330,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date1",
+          "type": "FdDate",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "date2",
+          "type": "FdDate",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "boolean"
+    },
+    {
+      "name": "format",
+      "signature": "(date: FdDate, displayFormat: CustomDateTimeFormatOptions) => string",
+      "description": "Format date object to string",
+      "deprecated": null,
+      "sourceLine": 263,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "FdDate",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "displayFormat",
+          "type": "CustomDateTimeFormatOptions",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "string"
+    },
+    {
+      "name": "getDate",
+      "signature": "(date: FdDate) => number",
+      "description": "Get date",
+      "deprecated": null,
+      "sourceLine": 51,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "FdDate",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "number"
+    },
+    {
+      "name": "getDateNames",
+      "signature": "() => string[]",
+      "description": "Get date names",
+      "deprecated": null,
+      "sourceLine": 99,
+      "since": null,
+      "parameters": [],
+      "returnType": "string[]"
+    },
+    {
+      "name": "getDayOfWeek",
+      "signature": "(date: FdDate) => number",
+      "description": "Get day of week",
+      "deprecated": null,
+      "sourceLine": 56,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "FdDate",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "number"
+    },
+    {
+      "name": "getDayOfWeekNames",
+      "signature": "(style: 'long' | 'short' | 'narrow') => string[]",
+      "description": "Get day of week names",
+      "deprecated": null,
+      "sourceLine": 107,
+      "since": null,
+      "parameters": [
+        {
+          "name": "style",
+          "type": "'long' | 'short' | 'narrow'",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "string[]"
+    },
+    {
+      "name": "getDayPeriodNames",
+      "signature": "() => [string, string]",
+      "description": "Get day period names",
+      "deprecated": null,
+      "sourceLine": 152,
+      "since": null,
+      "parameters": [],
+      "returnType": "[string, string]"
+    },
+    {
+      "name": "getFirstDayOfWeek",
+      "signature": "() => number",
+      "description": "Get first day of week",
+      "deprecated": null,
+      "sourceLine": 201,
+      "since": null,
+      "parameters": [],
+      "returnType": "number"
+    },
+    {
+      "name": "getHourNames",
+      "signature": "(__namedParameters: { meridian: boolean; twoDigit: boolean }) => string[]",
+      "description": "Get hour names",
+      "deprecated": null,
+      "sourceLine": 128,
+      "since": null,
+      "parameters": [
+        {
+          "name": "__namedParameters",
+          "type": "{ meridian: boolean; twoDigit: boolean }",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "string[]"
+    },
+    {
+      "name": "getHours",
+      "signature": "(date: FdDate) => number",
+      "description": "Get hours",
+      "deprecated": null,
+      "sourceLine": 61,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "FdDate",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "number"
+    },
+    {
+      "name": "getMinuteNames",
+      "signature": "(__namedParameters: { minuteStep: number; twoDigit: boolean }) => string[]",
+      "description": "Get minute names",
+      "deprecated": null,
+      "sourceLine": 138,
+      "since": null,
+      "parameters": [
+        {
+          "name": "__namedParameters",
+          "type": "{ minuteStep: number; twoDigit: boolean }",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "string[]"
+    },
+    {
+      "name": "getMinutes",
+      "signature": "(date: FdDate) => number",
+      "description": "Get minutes",
+      "deprecated": null,
+      "sourceLine": 66,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "FdDate",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "number"
+    },
+    {
+      "name": "getMonth",
+      "signature": "(date: FdDate) => number",
+      "description": "Get month",
+      "deprecated": null,
+      "sourceLine": 46,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "FdDate",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "number"
+    },
+    {
+      "name": "getMonthNames",
+      "signature": "(style: 'long' | 'short' | 'narrow') => string[]",
+      "description": "Get month names",
+      "deprecated": null,
+      "sourceLine": 91,
+      "since": null,
+      "parameters": [
+        {
+          "name": "style",
+          "type": "'long' | 'short' | 'narrow'",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "string[]"
+    },
+    {
+      "name": "getNumDaysInMonth",
+      "signature": "(fdDate: FdDate) => number",
+      "description": "Get number of days in a month",
+      "deprecated": null,
+      "sourceLine": 207,
+      "since": null,
+      "parameters": [
+        {
+          "name": "fdDate",
+          "type": "FdDate",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "number"
+    },
+    {
+      "name": "getSecondNames",
+      "signature": "(__namedParameters: { twoDigit: boolean }) => string[]",
+      "description": "Get second names",
+      "deprecated": null,
+      "sourceLine": 147,
+      "since": null,
+      "parameters": [
+        {
+          "name": "__namedParameters",
+          "type": "{ twoDigit: boolean }",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "string[]"
+    },
+    {
+      "name": "getSeconds",
+      "signature": "(date: FdDate) => number",
+      "description": "Get seconds",
+      "deprecated": null,
+      "sourceLine": 71,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "FdDate",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "number"
+    },
+    {
+      "name": "getWeekName",
+      "signature": "(date: FdDate) => string",
+      "description": "Get week name",
+      "deprecated": null,
+      "sourceLine": 122,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "FdDate",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "string"
+    },
+    {
+      "name": "getWeekNumber",
+      "signature": "(fdDate: FdDate) => number",
+      "description": "Get week number",
+      "deprecated": null,
+      "sourceLine": 76,
+      "since": null,
+      "parameters": [
+        {
+          "name": "fdDate",
+          "type": "FdDate",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "number"
+    },
+    {
+      "name": "getYear",
+      "signature": "(date: FdDate) => number",
+      "description": "Get year",
+      "deprecated": null,
+      "sourceLine": 41,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "FdDate",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "number"
+    },
+    {
+      "name": "getYearName",
+      "signature": "(date: FdDate) => string",
+      "description": "Get year name",
+      "deprecated": null,
+      "sourceLine": 115,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "FdDate",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "string"
+    },
+    {
+      "name": "isBetween",
+      "signature": "(dateToCheck: FdDate, startDate: FdDate, endDate: FdDate) => boolean",
+      "description": "Check if date between given dates",
+      "deprecated": null,
+      "sourceLine": 322,
+      "since": null,
+      "parameters": [
+        {
+          "name": "dateToCheck",
+          "type": "FdDate",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "startDate",
+          "type": "FdDate",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "endDate",
+          "type": "FdDate",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "boolean"
+    },
+    {
+      "name": "isTimeFormatIncludesDayPeriod",
+      "signature": "(displayFormat: CustomDateTimeFormatOptions) => boolean",
+      "description": "Check if a time format includes a day period",
+      "deprecated": null,
+      "sourceLine": 354,
+      "since": null,
+      "parameters": [
+        {
+          "name": "displayFormat",
+          "type": "CustomDateTimeFormatOptions",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "boolean"
+    },
+    {
+      "name": "isTimeFormatIncludesHours",
+      "signature": "(displayFormat: DateTimeFormatOptions) => boolean",
+      "description": "Check if a time format includes hours",
+      "deprecated": null,
+      "sourceLine": 364,
+      "since": null,
+      "parameters": [
+        {
+          "name": "displayFormat",
+          "type": "DateTimeFormatOptions",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "boolean"
+    },
+    {
+      "name": "isTimeFormatIncludesMinutes",
+      "signature": "(displayFormat: DateTimeFormatOptions) => boolean",
+      "description": "Check if a time format includes minutes",
+      "deprecated": null,
+      "sourceLine": 369,
+      "since": null,
+      "parameters": [
+        {
+          "name": "displayFormat",
+          "type": "DateTimeFormatOptions",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "boolean"
+    },
+    {
+      "name": "isTimeFormatIncludesSeconds",
+      "signature": "(displayFormat: DateTimeFormatOptions) => boolean",
+      "description": "Check if a time format includes seconds",
+      "deprecated": null,
+      "sourceLine": 374,
+      "since": null,
+      "parameters": [
+        {
+          "name": "displayFormat",
+          "type": "DateTimeFormatOptions",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "boolean"
+    },
+    {
+      "name": "isValid",
+      "signature": "(date: FdDate) => date is FdDate",
+      "description": "Check if date object is valid",
+      "deprecated": null,
+      "sourceLine": 314,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "FdDate",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "date is FdDate"
+    },
+    {
+      "name": "now",
+      "signature": "() => FdDate",
+      "description": "Get a now date object",
+      "deprecated": null,
+      "sourceLine": 225,
+      "since": null,
+      "parameters": [],
+      "returnType": "FdDate"
+    },
+    {
+      "name": "parse",
+      "signature": "(value: any, parseFormat: DateTimeFormatOptions) => null | FdDate",
+      "description": "Parse any value to date object",
+      "deprecated": null,
+      "sourceLine": 230,
+      "since": null,
+      "parameters": [
+        {
+          "name": "value",
+          "type": "any",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "parseFormat",
+          "type": "DateTimeFormatOptions",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "null | FdDate"
+    },
+    {
+      "name": "setHours",
+      "signature": "(date: FdDate, hours: number) => FdDate",
+      "description": "Set hours",
+      "deprecated": null,
+      "sourceLine": 180,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "FdDate",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "hours",
+          "type": "number",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "FdDate"
+    },
+    {
+      "name": "setMinutes",
+      "signature": "(date: FdDate, hours: number) => FdDate",
+      "description": "Set minutes",
+      "deprecated": null,
+      "sourceLine": 187,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "FdDate",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "hours",
+          "type": "number",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "FdDate"
+    },
+    {
+      "name": "setSeconds",
+      "signature": "(date: FdDate, hours: number) => FdDate",
+      "description": "Set seconds",
+      "deprecated": null,
+      "sourceLine": 194,
+      "since": null,
+      "parameters": [
+        {
+          "name": "date",
+          "type": "FdDate",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "hours",
+          "type": "number",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "FdDate"
+    },
+    {
+      "name": "toIso8601",
+      "signature": "(fdDate: FdDate) => string",
+      "description": "Format date object to ISO8601 string",
+      "deprecated": null,
+      "sourceLine": 349,
+      "since": null,
+      "parameters": [
+        {
+          "name": "fdDate",
+          "type": "FdDate",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "string"
+    },
+    {
+      "name": "today",
+      "signature": "() => FdDate",
+      "description": "Get a today date object",
+      "deprecated": null,
+      "sourceLine": 220,
+      "since": null,
+      "parameters": [],
+      "returnType": "FdDate"
+    }
+  ],
+  "inherited": {
+    "from": "DatetimeAdapter",
+    "inputs": [],
+    "methods": [
+      {
+        "name": "compareDate",
+        "signature": "(first: FdDate, second: FdDate) => number",
+        "description": "Compares two dates.",
+        "deprecated": null,
+        "sourceLine": 374,
+        "since": null,
+        "parameters": [
+          {
+            "name": "first",
+            "type": "FdDate",
+            "description": "The first date to compare.",
+            "optional": false
+          },
+          {
+            "name": "second",
+            "type": "FdDate",
+            "description": "The second date to compare.",
+            "optional": false
+          }
+        ],
+        "returnType": "number"
+      },
+      {
+        "name": "getAmountOfWeeks",
+        "signature": "(year: number, month: number, firstDayOfWeek: number) => number",
+        "description": "Get Amount of weeks in given month/year",
+        "deprecated": null,
+        "sourceLine": 357,
+        "since": null,
+        "parameters": [
+          {
+            "name": "year",
+            "type": "number",
+            "description": "The year of the date",
+            "optional": false
+          },
+          {
+            "name": "month",
+            "type": "number",
+            "description": "The month of the date",
+            "optional": false
+          },
+          {
+            "name": "firstDayOfWeek",
+            "type": "number",
+            "description": "The first day of week. 1 - Sunday, 2 - Monday...",
+            "optional": false
+          }
+        ],
+        "returnType": "number"
+      },
+      {
+        "name": "setLocale",
+        "signature": "(locale: string) => void",
+        "description": "Sets the locale used for all dates.",
+        "deprecated": null,
+        "sourceLine": 330,
+        "since": null,
+        "parameters": [
+          {
+            "name": "locale",
+            "type": "string",
+            "description": "The new locale.",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "setTime",
+        "signature": "(date: FdDate, hours: number, minutes: number, seconds: number) => FdDate",
+        "description": "Set hours, minutes and seconds at once.",
+        "deprecated": null,
+        "sourceLine": 343,
+        "since": null,
+        "parameters": [
+          {
+            "name": "date",
+            "type": "FdDate",
+            "description": "The date to set time to.",
+            "optional": false
+          },
+          {
+            "name": "hours",
+            "type": "number",
+            "description": "",
+            "optional": false
+          },
+          {
+            "name": "minutes",
+            "type": "number",
+            "description": "",
+            "optional": false
+          },
+          {
+            "name": "seconds",
+            "type": "number",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "FdDate"
+      }
+    ]
+  }
+}

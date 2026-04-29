@@ -1,0 +1,13 @@
+{
+  "name": "TitleToken",
+  "selector": "[fd-title], [fdTitle]",
+  "kind": "Class",
+  "sourceFile": "title.component.ts",
+  "sourceLine": 47,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/title/title.component.ts#L47",
+  "description": "Abstract token for providing access to the title component's element reference.\nUsed for dependency injection when components need to access the title element.",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

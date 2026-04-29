@@ -1,0 +1,85 @@
+{
+  "name": "DndItemDirective",
+  "selector": "[fdkDndItem], [fd-dnd-item]",
+  "kind": "Directive",
+  "sourceFile": "dnd-item.directive.ts",
+  "sourceLine": 25,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cdk/utils/drag-and-drop/dnd-item/dnd-item.directive.ts#L25",
+  "description": "",
+  "inputs": [
+    {
+      "name": "classWhenElementDragged",
+      "type": "string",
+      "default": "'fd-dnd-on-drag'",
+      "description": "Class added to element, when it's dragged.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 69,
+      "since": null
+    },
+    {
+      "name": "containerSelector",
+      "type": "string",
+      "default": null,
+      "description": "Container selector",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 39,
+      "since": null
+    },
+    {
+      "name": "item",
+      "type": "Nullable<T>",
+      "default": null,
+      "description": "Item reference. Used for cases when `[items]` array of dnd list is different than `dndItems` content children.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 28,
+      "since": null
+    },
+    {
+      "name": "stickInPlace",
+      "type": "boolean",
+      "default": "false",
+      "description": "Defines if the item is prevented from being moved by other elements.\nSo nothing can be placed just before and just after it",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 58,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "moved",
+      "type": "ElementPosition",
+      "default": null,
+      "description": "Event thrown when the element is moved by 1px",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 43,
+      "since": null
+    },
+    {
+      "name": "released",
+      "type": "void",
+      "default": null,
+      "description": "Event thrown when the element is released",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 47,
+      "since": null
+    },
+    {
+      "name": "started",
+      "type": "void",
+      "default": null,
+      "description": "Event thrown when the element is started to be dragged",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 51,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

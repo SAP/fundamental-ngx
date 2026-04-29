@@ -1,0 +1,13 @@
+{
+  "name": "TableToolbarLeftActionsComponent",
+  "selector": "fdp-table-toolbar-left-actions",
+  "kind": "Component",
+  "sourceFile": "table-toolbar-left-actions.component.ts",
+  "sourceLine": 14,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/table/components/table-toolbar/table-toolbar-left-actions.component.ts#L14",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

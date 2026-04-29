@@ -1,0 +1,54 @@
+{
+  "name": "LocalStorageService",
+  "selector": null,
+  "kind": "Service",
+  "sourceFile": "local-storage.service.ts",
+  "sourceLine": 22,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cdk/utils/services/local-storage.service.ts#L22",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "get",
+      "signature": "(key: string) => any",
+      "description": "Get item from local storage.",
+      "deprecated": null,
+      "sourceLine": 32,
+      "since": null,
+      "parameters": [
+        {
+          "name": "key",
+          "type": "string",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "any"
+    },
+    {
+      "name": "set",
+      "signature": "(key: string, value: any) => void",
+      "description": "Set item in local storage.",
+      "deprecated": null,
+      "sourceLine": 41,
+      "since": null,
+      "parameters": [
+        {
+          "name": "key",
+          "type": "string",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "value",
+          "type": "any",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

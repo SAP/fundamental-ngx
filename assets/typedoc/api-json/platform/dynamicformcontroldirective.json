@@ -1,0 +1,74 @@
+{
+  "name": "DynamicFormControlDirective",
+  "selector": "[fdpDynamicFormControl]",
+  "kind": "Directive",
+  "sourceFile": "dynamic-form-control.directive.ts",
+  "sourceLine": 23,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/form-generator/dynamic-form-control.directive.ts#L23",
+  "description": "Dynamic form control directive represents a renderer of the dynamic components\nbased on the information provided in `formItem` input",
+  "inputs": [
+    {
+      "name": "form",
+      "type": "FormGroup<any>",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 43,
+      "since": null
+    },
+    {
+      "name": "formField",
+      "type": "PlatformFormField",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 51,
+      "since": null
+    },
+    {
+      "name": "formGroupNamePath",
+      "type": "string",
+      "default": null,
+      "description": "Form group name path",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 46,
+      "since": null
+    },
+    {
+      "name": "formItem",
+      "type": "PreparedDynamicFormFieldItem",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 27,
+      "since": null
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 33,
+      "since": null
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 38,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

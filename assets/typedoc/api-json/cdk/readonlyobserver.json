@@ -1,0 +1,48 @@
+{
+  "name": "ReadonlyObserver",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "readonly.observer.ts",
+  "sourceLine": 11,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cdk/utils/directives/readonly/readonly.observer.ts#L11",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "unobserve",
+      "signature": "(element: Element | ElementRef<Element> | HasElementRef<Element>) => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 29,
+      "since": null,
+      "parameters": [
+        {
+          "name": "element",
+          "type": "Element | ElementRef<Element> | HasElementRef<Element>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "isReadonly",
+      "signature": "(element: Element) => boolean",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 16,
+      "since": null,
+      "parameters": [
+        {
+          "name": "element",
+          "type": "Element",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "boolean"
+    }
+  ],
+  "inherited": null
+}

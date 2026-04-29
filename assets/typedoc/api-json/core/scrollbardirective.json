@@ -1,0 +1,62 @@
+{
+  "name": "ScrollbarDirective",
+  "selector": "[fdScrollbar], [fd-scrollbar]",
+  "kind": "Directive",
+  "sourceFile": "scrollbar.directive.ts",
+  "sourceLine": 46,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/scrollbar/scrollbar.directive.ts#L46",
+  "description": "The scrollbar directive.\n\nChildren usage:\n```html\n<div fd-scrollbar>\n<div fd-scrollbar noVerticalScroll>\n<div fd-scrollbar [noVerticalScroll]=\"true\">\n<div fd-scrollbar noHorizontalScroll>\n<div fd-scrollbar [noHorizontalScroll]=\"true\">\n```",
+  "inputs": [
+    {
+      "name": "alwaysVisible",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether scrollbars should be visible even if content fits.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 54,
+      "since": null
+    },
+    {
+      "name": "noHorizontalScroll",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether overflow horizontal content should be hidden.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 48,
+      "since": null
+    },
+    {
+      "name": "noVerticalScroll",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether overflow vertical content should be hidden.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 51,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "scroll",
+      "signature": "(options: ScrollToOptions) => void",
+      "description": "method to invoke scroll",
+      "deprecated": null,
+      "sourceLine": 112,
+      "since": null,
+      "parameters": [
+        {
+          "name": "options",
+          "type": "ScrollToOptions",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

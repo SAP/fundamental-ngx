@@ -1,0 +1,425 @@
+{
+  "name": "WizardGeneratorService",
+  "selector": null,
+  "kind": "Service",
+  "sourceFile": "wizard-generator.service.ts",
+  "sourceLine": 45,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/wizard-generator/wizard-generator.service.ts#L45",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "addWizardStepComponent",
+      "signature": "(component: WizardGeneratorStep, key: string) => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 283,
+      "since": null,
+      "parameters": [
+        {
+          "name": "component",
+          "type": "WizardGeneratorStep",
+          "description": "Wizard Step component to add.",
+          "optional": false
+        },
+        {
+          "name": "key",
+          "type": "string",
+          "description": "Wizard Step ID.",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "clearWizardStepComponents",
+      "signature": "() => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 265,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "editStep",
+      "signature": "(stepId: string) => void",
+      "description": "Reverts wizard to defined step.",
+      "deprecated": null,
+      "sourceLine": 386,
+      "since": null,
+      "parameters": [
+        {
+          "name": "stepId",
+          "type": "string",
+          "description": "Step ID to edit",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "getCurrentStepId",
+      "signature": "() => string",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 101,
+      "since": null,
+      "parameters": [],
+      "returnType": "string"
+    },
+    {
+      "name": "getCurrentStepIndex",
+      "signature": "() => number",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 111,
+      "since": null,
+      "parameters": [],
+      "returnType": "number"
+    },
+    {
+      "name": "getStepDependencyFields",
+      "signature": "(step: string) => DependencySteps",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 301,
+      "since": null,
+      "parameters": [
+        {
+          "name": "step",
+          "type": "string",
+          "description": "Step ID which includes dependency fields.",
+          "optional": false
+        }
+      ],
+      "returnType": "DependencySteps"
+    },
+    {
+      "name": "getStepIndex",
+      "signature": "(stepId?: string) => number",
+      "description": "Searches for the index of the step based on it's ID",
+      "deprecated": null,
+      "sourceLine": 121,
+      "since": null,
+      "parameters": [
+        {
+          "name": "stepId",
+          "type": "string",
+          "description": "Step ID",
+          "optional": true
+        }
+      ],
+      "returnType": "number"
+    },
+    {
+      "name": "getVisibleSteps",
+      "signature": "() => Observable<PreparedWizardGeneratorItem[]>",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 186,
+      "since": null,
+      "parameters": [],
+      "returnType": "Observable<PreparedWizardGeneratorItem[]>"
+    },
+    {
+      "name": "getWizardFormValue",
+      "signature": "(formatted: boolean) => Promise<WizardGeneratorFormsValue>",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 328,
+      "since": null,
+      "parameters": [
+        {
+          "name": "formatted",
+          "type": "boolean",
+          "description": "Flag defining whether form value should be formatted by form control\ntransformers, or return raw value",
+          "optional": false
+        }
+      ],
+      "returnType": "Promise<WizardGeneratorFormsValue>"
+    },
+    {
+      "name": "isStepsUntouched",
+      "signature": "() => boolean",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 375,
+      "since": null,
+      "parameters": [],
+      "returnType": "boolean"
+    },
+    {
+      "name": "notifyStepsToRevalidateForms",
+      "signature": "(stepIds: string[]) => void",
+      "description": "Notifies step components to revalidate inner forms.",
+      "deprecated": null,
+      "sourceLine": 309,
+      "since": null,
+      "parameters": [
+        {
+          "name": "stepIds",
+          "type": "string[]",
+          "description": "Step ID's which needs to be revalidated.",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "prepareWizardItems",
+      "signature": "(items: WizardGeneratorItem[]) => Promise<PreparedWizardGeneratorItem[]>",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 195,
+      "since": null,
+      "parameters": [
+        {
+          "name": "items",
+          "type": "WizardGeneratorItem[]",
+          "description": "All Wizard steps.",
+          "optional": false
+        }
+      ],
+      "returnType": "Promise<PreparedWizardGeneratorItem[]>"
+    },
+    {
+      "name": "refreshFormVisibility",
+      "signature": "(formGroup: WizardGeneratorFormGroup) => Promise<boolean>",
+      "description": "Checks whether current form group should be visible.",
+      "deprecated": null,
+      "sourceLine": 254,
+      "since": null,
+      "parameters": [
+        {
+          "name": "formGroup",
+          "type": "WizardGeneratorFormGroup",
+          "description": "Form Group.",
+          "optional": false
+        }
+      ],
+      "returnType": "Promise<boolean>"
+    },
+    {
+      "name": "refreshFormsVisibility",
+      "signature": "(stepIds: string[]) => Promise<void>",
+      "description": "Notifies step components to refresh form groups visibility.",
+      "deprecated": null,
+      "sourceLine": 317,
+      "since": null,
+      "parameters": [
+        {
+          "name": "stepIds",
+          "type": "string[]",
+          "description": "Step ID's which needs to be checked.",
+          "optional": false
+        }
+      ],
+      "returnType": "Promise<void>"
+    },
+    {
+      "name": "refreshStepVisibility",
+      "signature": "() => Promise<void>",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 231,
+      "since": null,
+      "parameters": [],
+      "returnType": "Promise<void>"
+    },
+    {
+      "name": "removeWizardStepComponent",
+      "signature": "(key: string) => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 292,
+      "since": null,
+      "parameters": [
+        {
+          "name": "key",
+          "type": "string",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "restoreAppendToWizardState",
+      "signature": "() => void",
+      "description": "Resets modified 'appendToWizard' property to original one.",
+      "deprecated": null,
+      "sourceLine": 456,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "setNextStepIndex",
+      "signature": "(index: number) => void",
+      "description": "Set next step index.",
+      "deprecated": null,
+      "sourceLine": 426,
+      "since": null,
+      "parameters": [
+        {
+          "name": "index",
+          "type": "number",
+          "description": "Next step index.",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setOriginalAppendToWizardState",
+      "signature": "(value: boolean) => void",
+      "description": "Stores original 'appendToWizard' input property.",
+      "deprecated": null,
+      "sourceLine": 448,
+      "since": null,
+      "parameters": [
+        {
+          "name": "value",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setVisibleSteps",
+      "signature": "(steps: PreparedWizardGeneratorItem[]) => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 175,
+      "since": null,
+      "parameters": [
+        {
+          "name": "steps",
+          "type": "PreparedWizardGeneratorItem[]",
+          "description": "steps that needs to be shown in Wizard.",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setWizardStepIds",
+      "signature": "(ids: string[]) => void",
+      "description": "Set's current set of step ID's",
+      "deprecated": null,
+      "sourceLine": 410,
+      "since": null,
+      "parameters": [
+        {
+          "name": "ids",
+          "type": "string[]",
+          "description": "step ID's",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "stepSubmitted",
+      "signature": "(stepId: string) => boolean",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 367,
+      "since": null,
+      "parameters": [
+        {
+          "name": "stepId",
+          "type": "string",
+          "description": "Step ID to check.",
+          "optional": false
+        }
+      ],
+      "returnType": "boolean"
+    },
+    {
+      "name": "submitStepForms",
+      "signature": "(stepId?: string, skipIfUntouched: boolean) => Observable<null | WizardStepSubmittedForms>",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 133,
+      "since": null,
+      "parameters": [
+        {
+          "name": "stepId",
+          "type": "string",
+          "description": "Step ID for which forms need's to be submitted.",
+          "optional": true
+        },
+        {
+          "name": "skipIfUntouched",
+          "type": "boolean",
+          "description": "Skip validation if form haven't been touched.",
+          "optional": false
+        }
+      ],
+      "returnType": "Observable<null | WizardStepSubmittedForms>"
+    },
+    {
+      "name": "trackAppendToWizardState",
+      "signature": "() => Observable<boolean>",
+      "description": "Returns observable which emits when 'appendToWizard' property has been changed.",
+      "deprecated": null,
+      "sourceLine": 463,
+      "since": null,
+      "parameters": [],
+      "returnType": "Observable<boolean>"
+    },
+    {
+      "name": "trackNextStepIndex",
+      "signature": "() => Observable<number>",
+      "description": "Returns observable of next step index which emits when index is changed.",
+      "deprecated": null,
+      "sourceLine": 433,
+      "since": null,
+      "parameters": [],
+      "returnType": "Observable<number>"
+    },
+    {
+      "name": "trackStepsComponents",
+      "signature": "() => Observable<StepsComponents>",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 274,
+      "since": null,
+      "parameters": [],
+      "returnType": "Observable<StepsComponents>"
+    },
+    {
+      "name": "trackStepsOrder",
+      "signature": "() => Observable<number>",
+      "description": "Returns observable which emits when steps order has been changed.",
+      "deprecated": null,
+      "sourceLine": 440,
+      "since": null,
+      "parameters": [],
+      "returnType": "Observable<number>"
+    },
+    {
+      "name": "validateStepForms",
+      "signature": "(skipIfUntouched: boolean) => Observable<boolean>",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 159,
+      "since": null,
+      "parameters": [
+        {
+          "name": "skipIfUntouched",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "Observable<boolean>"
+    }
+  ],
+  "inherited": null
+}

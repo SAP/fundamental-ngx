@@ -1,0 +1,95 @@
+{
+  "name": "NotificationListGroupItem",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "collapsed",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines if the group is collapsed or expanded.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 45,
+      "since": null
+    },
+    {
+      "name": "growing",
+      "type": "'None' | 'Button'",
+      "default": null,
+      "description": "Defines whether the component will have growing capability by pressing a `More` button.\nWhen button is pressed `load-more` event will be fired.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 51,
+      "since": null
+    },
+    {
+      "name": "loading",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines if a busy indicator would be displayed over the item.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 56,
+      "since": null
+    },
+    {
+      "name": "loadingDelay",
+      "type": "number",
+      "default": null,
+      "description": "Defines the delay in milliseconds, after which the busy indicator will show up for this component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 61,
+      "since": null
+    },
+    {
+      "name": "read",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines if the `notification` is new or has been already read.\n\n*Note:** if set to `false` the `titleText` has bold font,\nif set to true - it has a normal font.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 69,
+      "since": null
+    },
+    {
+      "name": "titleText",
+      "type": "string",
+      "default": null,
+      "description": "Defines the `titleText` of the item.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 74,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5LoadMore",
+      "type": "UI5CustomEvent<NotificationListGroupItem, 'load-more'>",
+      "default": null,
+      "description": "Fired when additional items are requested.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 81,
+      "since": null
+    },
+    {
+      "name": "ui5Toggle",
+      "type": "UI5CustomEvent<NotificationListGroupItem, 'toggle'>",
+      "default": null,
+      "description": "Fired when the `ui5-li-notification-group` is expanded/collapsed by user interaction.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 86,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

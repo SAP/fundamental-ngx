@@ -1,0 +1,51 @@
+{
+  "name": "PopoverFormMessageService",
+  "selector": null,
+  "kind": "Service",
+  "sourceFile": "popover-form-message.service.ts",
+  "sourceLine": 6,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/form/form-message/popover-form-message.service.ts#L6",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "hide",
+      "signature": "() => void",
+      "description": "Forces hidden state onto popover, without any collision with triggering events",
+      "deprecated": null,
+      "sourceLine": 34,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "init",
+      "signature": "(triggerElement: ElementRef<any>) => void",
+      "description": "Initialise popover service with trigger element",
+      "deprecated": null,
+      "sourceLine": 29,
+      "since": null,
+      "parameters": [
+        {
+          "name": "triggerElement",
+          "type": "ElementRef<any>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "show",
+      "signature": "() => void",
+      "description": "Removes hidden state onto popover, without any collision with triggering events",
+      "deprecated": null,
+      "sourceLine": 40,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

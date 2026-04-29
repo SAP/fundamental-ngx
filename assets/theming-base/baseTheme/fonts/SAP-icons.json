@@ -11,7 +11,7 @@
       "emergency",
       "hospital"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe001": {
     "names": ["account"],
@@ -23,19 +23,19 @@
     "names": ["wrench"],
     "groups": ["action", "thing"],
     "tags": ["wrench", "control", "configuration", "settings", "tool"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe003": {
     "names": ["windows-doors"],
     "groups": ["objects"],
     "tags": ["window", "door", "entry"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe004": {
     "names": ["washing-machine"],
     "groups": ["devices", "thing", "objects"],
     "tags": ["washing", "machine", "laundry", "clean", "wash", "purify"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe005": {
     "names": ["visits"],
@@ -47,7 +47,7 @@
     "names": ["video"],
     "groups": ["devices", "action", "thing", "objects"],
     "tags": ["camera", "recorder", "video", "movie", "clip"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe007": {
     "names": ["travel-expense"],
@@ -88,14 +88,14 @@
   "0xe009": {
     "names": ["task"],
     "groups": ["clipboard"],
-    "tags": ["clipboard", "task", "checkbox", "checklist", "list", "checkmark"],
+    "tags": ["clipboard", "task", "work item", "checklist", "checkmark"],
     "rtl": "none"
   },
   "0xe00a": {
     "names": ["synchronize"],
     "groups": ["arrow", "action"],
     "tags": ["synchronize", "reload", "refresh", "arrow"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe00b": {
     "names": ["survey"],
@@ -122,7 +122,7 @@
       "modify",
       "customize"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe00d": {
     "names": ["search"],
@@ -140,13 +140,13 @@
     "names": ["retail-store"],
     "groups": ["shopping", "place"],
     "tags": ["shop", "store", "retail", "market"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe010": {
     "names": ["refresh"],
     "groups": ["arrow", "action"],
-    "tags": ["reload", "refresh", "arrow"],
-    "rtl": "flip"
+    "tags": ["reload", "refresh", "update", "arrow"],
+    "rtl": "none"
   },
   "0xe011": {
     "names": ["product"],
@@ -159,37 +159,37 @@
       "merchandise",
       "package"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe012": {
     "names": ["present"],
     "groups": ["time"],
     "tags": ["time", "clock", "star", "current", "present"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe013": {
     "names": ["ppt-attachment"],
     "groups": ["documents"],
     "tags": ["document", "page", "file", "attachment", "ppt", "powerpoint"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe014": {
     "names": ["pool"],
     "groups": ["objects", "place"],
     "tags": ["pool", "basin", "swim"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe015": {
     "names": ["pie-chart"],
     "groups": ["charts"],
     "tags": ["analytics", "chart", "display", "data", "pie", "segments"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe016": {
     "names": ["picture"],
     "groups": ["thing", "objects"],
     "tags": ["picture", "photo", "photograph", "shot", "image"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe017": {
     "names": ["photo-voltaic"],
@@ -203,13 +203,13 @@
       "panel",
       "sun"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe018": {
     "names": ["phone"],
     "groups": ["devices", "action", "thing", "objects"],
     "tags": ["phone", "telephone", "landline", "number", "call", "dial"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe019": {
     "names": ["pending"],
@@ -223,7 +223,7 @@
       "unresolved",
       "unsettled"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe01a": {
     "names": ["pdf-attachment"],
@@ -256,7 +256,7 @@
       "exchange",
       "trade"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe01e": {
     "names": ["opportunities"],
@@ -280,31 +280,31 @@
     "names": ["map"],
     "groups": ["objects", "place"],
     "tags": ["map", "pin", "location", "place", "area"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe022": {
     "names": ["log"],
     "groups": ["action"],
     "tags": ["log", "logout", "log on", "log off"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe023": {
     "names": ["line-charts"],
     "groups": ["charts"],
     "tags": ["analytics", "chart", "display", "data"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe024": {
     "names": ["lightbulb"],
     "groups": ["objects"],
     "tags": ["lightbulb", "light", "lamp", "idea"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe025": {
     "names": ["leads"],
     "groups": ["people"],
     "tags": ["user", "person", "leads", "star", "equal to"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe026": {
     "names": ["lead"],
@@ -316,7 +316,7 @@
     "names": ["laptop"],
     "groups": ["devices", "thing", "objects"],
     "tags": ["laptop", "device", "computer"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe028": {
     "names": ["kpi-managing-my-area"],
@@ -340,19 +340,19 @@
     "names": ["inbox"],
     "groups": ["arrow", "action"],
     "tags": ["inbox", "in", "arrow"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe02c": {
     "names": ["horizontal-bar-chart"],
     "groups": ["charts"],
     "tags": ["analytics", "chart", "display", "data", "bar", "horizontal"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe02d": {
     "names": ["history"],
     "groups": ["time", "status"],
     "tags": ["time", "clock", "history", "past", "chronicle"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe02e": {
     "names": ["heating-cooling"],
@@ -366,13 +366,13 @@
       "sun",
       "snowflake"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe02f": {
     "names": ["gantt-bars"],
     "groups": ["charts", "calendar", "objects"],
     "tags": ["calendar", "gantt", "bars", "gantt bars", "chart", "schedule"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe030": {
     "names": ["future"],
@@ -391,7 +391,7 @@
       "cooler",
       "appliance"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe032": {
     "names": ["fallback"],
@@ -417,13 +417,13 @@
       "spreadsheet",
       "accounting"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe035": {
     "names": ["energy-saving-lightbulb"],
     "groups": ["thing", "objects"],
     "tags": ["lightbulb", "light", "lamp", "idea", "eco", "energy saving"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe036": {
     "names": ["employee"],
@@ -436,7 +436,7 @@
       "operator",
       "representative"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe037": {
     "names": ["email"],
@@ -447,27 +447,29 @@
       "e-mail",
       "electronic mail",
       "mail",
-      "correspondence"
+      "correspondence",
+      "contact",
+      "support"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe038": {
     "names": ["edit"],
     "groups": ["action"],
     "tags": ["pencil", "pen", "write", "edit", "modify", "text"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe039": {
     "names": ["duplicate"],
     "groups": ["arrow", "action"],
     "tags": ["duplicate", "objects", "arrow"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe03a": {
     "names": ["download"],
     "groups": ["arrow", "action"],
     "tags": ["download", "arrow"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe03b": {
     "names": ["doc-attachment"],
@@ -479,19 +481,19 @@
     "names": ["dishwasher"],
     "groups": ["devices", "thing", "objects"],
     "tags": ["dishwasher", "dish", "wash", "appliance"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe03d": {
     "names": ["delete"],
     "groups": ["action"],
     "tags": ["bin", "trash can", "rubbish", "delete"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe03e": {
     "names": ["decline"],
     "groups": ["action"],
     "tags": ["reject", "close", "remove", "cancel", "x", "delete", "decline"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe03f": {
     "names": ["complete"],
@@ -503,7 +505,7 @@
     "names": ["competitor"],
     "groups": ["thing", "objects"],
     "tags": ["competitor", "winner", "prize", "award", "trophy", "cup"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe041": {
     "names": ["collections-management"],
@@ -516,7 +518,7 @@
       "total",
       "accounting"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe042": {
     "names": ["chalkboard"],
@@ -536,7 +538,7 @@
     "names": ["cart"],
     "groups": ["shopping", "thing"],
     "tags": ["cart", "trolley", "basket", "shopping"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe044": {
     "names": ["card"],
@@ -550,13 +552,13 @@
       "sun",
       "card"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe045": {
     "names": ["camera"],
     "groups": ["action", "thing", "objects"],
     "tags": ["camera", "photograph", "device", "image", "snap shot"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe046": {
     "names": ["calendar"],
@@ -574,25 +576,25 @@
     "names": ["basket"],
     "groups": ["shopping", "thing"],
     "tags": ["basket", "shopping"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe049": {
     "names": ["bar-chart"],
     "groups": ["charts"],
     "tags": ["analytics", "chart", "display", "data", "column"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe04a": {
     "names": ["attachment"],
     "groups": ["action"],
     "tags": ["attach", "file", "paper clip"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe04b": {
     "names": ["arrow-top"],
     "groups": ["arrow"],
     "tags": ["arrow top", "up"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe04c": {
     "names": ["arrow-right"],
@@ -610,7 +612,7 @@
     "names": ["arrow-bottom"],
     "groups": ["arrow"],
     "tags": ["arrow bottom", "down"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe04f": {
     "names": ["approvals"],
@@ -622,7 +624,7 @@
     "names": ["appointment"],
     "groups": ["calendar"],
     "tags": ["date picker", "calendar", "month", "week", "day", "appointment"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe051": {
     "names": ["alphabetical-order"],
@@ -642,13 +644,13 @@
     "names": ["along-stacked-chart"],
     "groups": ["charts"],
     "tags": ["analytics", "chart", "display", "data", "bar"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe053": {
     "names": ["alert"],
     "groups": ["status"],
     "tags": ["message", "warning", "critical", "notifications", "status"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe054": {
     "names": ["addresses"],
@@ -664,7 +666,7 @@
       "houses",
       "homes"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe055": {
     "names": ["address-book"],
@@ -687,7 +689,7 @@
     "groups": ["action"],
     "tags": [
       "filter",
-      "organise",
+      "organize",
       "aggregate",
       "data",
       "add",
@@ -696,7 +698,7 @@
       "another",
       "more"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe057": {
     "names": ["add-favorite"],
@@ -711,7 +713,7 @@
       "another",
       "more"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe058": {
     "names": ["add"],
@@ -726,7 +728,7 @@
       "add object",
       "add item"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe059": {
     "names": ["activities"],
@@ -740,7 +742,9 @@
     "tags": [
       "actions",
       "collection",
-      "share options",
+      "share actions",
+      "send",
+      "share",
       "forward actions",
       "more actions",
       "arrow"
@@ -785,7 +789,7 @@
       "audience",
       "category"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe05e": {
     "names": ["check-availability"],
@@ -809,7 +813,7 @@
     "names": ["weather-proofing"],
     "groups": ["objects"],
     "tags": ["weather", "proofing", "protection"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe060": {
     "names": ["payment-approval"],
@@ -847,7 +851,7 @@
       "snooze",
       "night"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe063": {
     "names": ["arobase"],
@@ -859,13 +863,13 @@
     "names": ["family-care"],
     "groups": ["people"],
     "tags": ["family", "protection", "people"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe065": {
     "names": ["favorite"],
     "groups": ["action"],
     "tags": ["favorite", "favourite", "star", "full", "filled", "starred"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe066": {
     "names": ["navigation-right-arrow"],
@@ -901,13 +905,13 @@
       "health",
       "environment"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe069": {
     "names": ["less"],
     "groups": ["action"],
     "tags": ["less", "minus", "subtract"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe06a": {
     "names": ["lateness"],
@@ -922,7 +926,7 @@
       "sand",
       "out of time"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe06b": {
     "names": ["lab"],
@@ -936,7 +940,7 @@
       "science",
       "laboratory"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe06c": {
     "names": ["internet-browser"],
@@ -951,7 +955,7 @@
       "www",
       "html"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe06d": {
     "names": ["instance"],
@@ -963,7 +967,7 @@
     "names": ["inspection"],
     "groups": ["documents", "action"],
     "tags": ["search", "document", "inspect"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe06f": {
     "names": ["image-viewer"],
@@ -979,25 +983,25 @@
       "carousel",
       "lightbox"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe070": {
     "names": ["home"],
     "groups": ["action", "travel", "place"],
     "tags": ["home", "house", "index", "landing page", "start", "main"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe071": {
     "names": ["grid"],
     "groups": ["objects"],
     "tags": ["grid", "layout", "boxes", "squares", "modular", "waffle"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe072": {
     "names": ["goalseek"],
     "groups": ["status", "objects"],
     "tags": ["goal", "goalseek", "target", "result", "objective", "aim"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe073": {
     "names": ["general-leave-request"],
@@ -1012,7 +1016,7 @@
       "sun",
       "create"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe074": {
     "names": ["create-leave-request"],
@@ -1031,7 +1035,7 @@
       "another",
       "more"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe075": {
     "names": ["flight"],
@@ -1046,13 +1050,13 @@
       "transit",
       "shipment"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe076": {
     "names": ["filter"],
     "groups": ["action"],
-    "tags": ["filter", "organise", "aggregate", "data"],
-    "rtl": "flip"
+    "tags": ["filter", "organize", "aggregate", "data"],
+    "rtl": "none"
   },
   "0xe077": {
     "names": ["favorite-list"],
@@ -1064,13 +1068,13 @@
     "names": ["factory"],
     "groups": ["objects", "place"],
     "tags": ["factory", "production", "supplier", "manufacturing"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe079": {
     "names": ["endoscopy"],
     "groups": ["medical", "objects"],
     "tags": ["endoscopy", "medical", "procedure"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe07a": {
     "names": ["employee-pane"],
@@ -1085,7 +1089,7 @@
       "profile",
       "me"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe07b": {
     "names": ["employee-approvals"],
@@ -1104,19 +1108,19 @@
     "names": ["email-read"],
     "groups": ["action"],
     "tags": ["mail", "letter", "e-mail", "envelope", "open", "read"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe07d": {
     "names": ["electrocardiogram"],
     "groups": ["medical"],
     "tags": ["electrocardiogram", "heart", "scan", "monitor", "medical"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe07e": {
     "names": ["documents"],
     "groups": ["documents"],
     "tags": ["document", "page", "file", "attachment", "documents"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe07f": {
     "names": ["decision"],
@@ -1129,7 +1133,7 @@
       "colleagues",
       "contract"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe080": {
     "names": ["database"],
@@ -1144,13 +1148,13 @@
       "information",
       "backend"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe081": {
     "names": ["customer-history"],
     "groups": ["people", "time"],
     "tags": ["person", "history", "customer", "user", "clock", "account"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe082": {
     "names": ["customer"],
@@ -1165,7 +1169,7 @@
       "profile",
       "me"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe083": {
     "names": ["credit-card"],
@@ -1181,7 +1185,7 @@
       "shopping",
       "book online"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe084": {
     "names": ["create-entry-time"],
@@ -1203,7 +1207,7 @@
       "another",
       "more"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe085": {
     "names": ["contacts"],
@@ -1219,7 +1223,7 @@
       "phone numbers",
       "companies"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe086": {
     "names": ["compare"],
@@ -1233,34 +1237,33 @@
       "measure",
       "weight",
       "balance",
-      "compare",
       "comparison"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe087": {
     "names": ["clinical-order"],
     "groups": ["medical", "documents"],
     "tags": ["document", "page", "file", "text", "medical", "clinical"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe088": {
     "names": ["chain-link"],
     "groups": ["action"],
     "tags": ["link", "chain", "hyperlink"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe089": {
     "names": ["pull-down"],
     "groups": ["arrow", "action"],
     "tags": ["navigation", "pull down", "refresh", "arrow"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe08a": {
     "names": ["cargo-train"],
     "groups": ["travel", "transport"],
     "tags": ["train", "cargo", "delivery", "transit"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe08b": {
     "names": ["car-rental"],
@@ -1274,7 +1277,7 @@
       "vehicle",
       "transportation"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe08c": {
     "names": ["business-card"],
@@ -1296,19 +1299,19 @@
     "names": ["bar-code"],
     "groups": ["documents", "objects"],
     "tags": ["bar code", "document", "file", "scan", "verify"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe08e": {
     "names": ["folder-blank"],
     "groups": ["folder"],
     "tags": ["folder", "directory", "library", "blank"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe08f": {
     "names": ["passenger-train"],
     "groups": ["travel", "transport"],
     "tags": ["train", "public transportation", "passenger"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe090": {
     "names": ["question-mark"],
@@ -1328,7 +1331,7 @@
       "international",
       "global"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe092": {
     "names": ["iphone"],
@@ -1343,25 +1346,25 @@
       "responsive",
       "cozy"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe093": {
     "names": ["ipad"],
     "groups": ["devices", "thing", "objects"],
     "tags": ["ipad", "tablet", "portrait", "mobile", "responsive", "cozy"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe094": {
     "names": ["warning"],
     "groups": ["status"],
     "tags": ["warning", "exclamation mark", "indicator", "information"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe095": {
     "names": ["sort"],
     "groups": ["arrow", "action"],
     "tags": ["sort", "aggregate", "ascending", "descending", "arrow"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe096": {
     "names": ["course-book"],
@@ -1377,7 +1380,7 @@
       "course book",
       "program"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe097": {
     "names": ["course-program"],
@@ -1397,7 +1400,7 @@
       "coursebook",
       "program"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe098": {
     "names": ["add-coursebook"],
@@ -1418,7 +1421,7 @@
       "another",
       "more"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe099": {
     "names": ["print"],
@@ -1433,13 +1436,13 @@
       "document",
       "file"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe09a": {
     "names": ["save"],
     "groups": ["action", "objects"],
     "tags": ["save", "diskette", "floppy disc", "local disc", "hard disc"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe09b": {
     "names": ["play"],
@@ -1450,14 +1453,14 @@
   "0xe09c": {
     "names": ["pause"],
     "groups": ["action"],
-    "tags": ["pause"],
-    "rtl": "flip"
+    "tags": ["pause", "stop", "break"],
+    "rtl": "none"
   },
   "0xe09d": {
     "names": ["record"],
     "groups": ["action"],
     "tags": ["record"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe09e": {
     "names": ["response"],
@@ -1483,7 +1486,7 @@
       "off",
       "on"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0a0": {
     "names": ["pushpin-off"],
@@ -1499,7 +1502,7 @@
       "off",
       "on"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0a1": {
     "names": ["unfavorite"],
@@ -1515,7 +1518,7 @@
       "unfavorite",
       "star"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0a2": {
     "names": ["learning-assistant"],
@@ -1536,7 +1539,7 @@
       "teacher",
       "professor"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0a3": {
     "names": ["timesheet"],
@@ -1552,13 +1555,13 @@
       "days",
       "workday"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0a4": {
     "names": ["time-entry-request"],
     "groups": ["time"],
     "tags": ["time", "entry", "request", "clock", "list"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0a5": {
     "names": ["list"],
@@ -1577,13 +1580,13 @@
       "modify",
       "customize"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0a7": {
     "names": ["share"],
     "groups": ["arrow", "action"],
     "tags": ["share", "reshare", "distribute", "arrow"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0a8": {
     "names": ["feed"],
@@ -1597,7 +1600,7 @@
       "latest",
       "real-time"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0a9": {
     "names": ["role"],
@@ -1614,18 +1617,18 @@
       "restrictions",
       "unlocked"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0aa": {
     "names": ["flag"],
     "groups": ["action", "status"],
-    "tags": ["flag", "mark", "marker", "important"],
+    "tags": ["flag", "mark", "marker", "important", "full", "filled"],
     "rtl": "none"
   },
   "0xe0ab": {
     "names": ["post"],
     "groups": ["action", "callout", "thing"],
-    "tags": ["speech", "bubble", "comment", "post"],
+    "tags": ["speech", "bubble", "comment", "post", "chat", "message"],
     "rtl": "flip"
   },
   "0xe0ac": {
@@ -1644,7 +1647,7 @@
     "names": ["appointment-2"],
     "groups": ["calendar"],
     "tags": ["date picker", "calendar", "month", "week", "day", "appointment"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0af": {
     "names": ["target-group"],
@@ -1658,7 +1661,7 @@
       "audience",
       "specific"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0b0": {
     "names": ["marketing-campaign"],
@@ -1671,13 +1674,13 @@
       "announcement",
       "public address"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0b1": {
     "names": ["message-error"],
     "groups": ["status", "message"],
     "tags": ["message", "error", "negative", "notifications", "status"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0b2": {
     "names": ["comment"],
@@ -1699,7 +1702,7 @@
       "van",
       "shipment"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0b4": {
     "names": ["collaborate"],
@@ -1718,7 +1721,7 @@
       "together",
       "project"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0b5": {
     "names": ["shortcut"],
@@ -1745,7 +1748,7 @@
       "org",
       "tree"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0b8": {
     "names": ["permission"],
@@ -1761,7 +1764,7 @@
       "restrictions",
       "unlocked"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0b9": {
     "names": ["supplier"],
@@ -1779,7 +1782,7 @@
       "buyer",
       "inventory"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0ba": {
     "names": ["table-view"],
@@ -1796,7 +1799,7 @@
       "rows",
       "waffle"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0bb": {
     "names": ["table-chart"],
@@ -1813,13 +1816,13 @@
       "view",
       "waffle"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0bc": {
     "names": ["switch-views"],
     "groups": ["action"],
     "tags": ["switch", "views", "objects", "arrange"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0bd": {
     "names": ["e-learning"],
@@ -1837,7 +1840,7 @@
       "computer",
       "screen"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0be": {
     "names": ["manager"],
@@ -1855,13 +1858,13 @@
       "speech",
       "presentation"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0bf": {
     "names": ["switch-classes"],
     "groups": ["people", "action"],
     "tags": ["switch", "views", "objects", "arrange", "classes"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0c0": {
     "names": ["simple-payment"],
@@ -1941,7 +1944,7 @@
       "objects",
       "challenge"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0c7": {
     "names": ["process"],
@@ -1965,13 +1968,13 @@
       "private",
       "forbidden"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0c9": {
     "names": ["popup-window"],
     "groups": ["devices", "action"],
     "tags": ["computer", "dialog", "popup", "window", "screen", "popout"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0ca": {
     "names": ["person-placeholder"],
@@ -1985,7 +1988,7 @@
       "profile",
       "me"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0cb": {
     "names": ["per-diem"],
@@ -2017,20 +2020,20 @@
   "0xe0ce": {
     "names": ["pdf-reader"],
     "groups": ["documents", "action"],
-    "tags": ["pdf reader", "document", "display", "file"],
+    "tags": ["pdf", "pdf reader", "document", "display", "file"],
     "rtl": "none"
   },
   "0xe0cf": {
     "names": ["overview-chart"],
     "groups": ["charts"],
     "tags": ["analytics", "chart", "display", "data", "overview", "map", "org"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0d0": {
     "names": ["overlay"],
     "groups": ["objects"],
     "tags": ["overlay", "circle", "dot"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0d1": {
     "names": ["org-chart"],
@@ -2045,13 +2048,13 @@
       "org",
       "tree"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0d2": {
     "names": ["number-sign"],
     "groups": ["objects"],
     "tags": ["number sign", "hash", "#'"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0d3": {
     "names": ["notification-2"],
@@ -2087,7 +2090,7 @@
       "dine",
       "expenses"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0d6": {
     "names": ["loan"],
@@ -2119,7 +2122,7 @@
     "names": ["performance"],
     "groups": ["objects"],
     "tags": ["gauge", "measure", "speed", "monitor", "performance"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0da": {
     "names": ["menu"],
@@ -2140,7 +2143,7 @@
       "find",
       "search"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0dc": {
     "names": ["education"],
@@ -2156,7 +2159,7 @@
       "school",
       "college"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0dd": {
     "names": ["customer-briefing"],
@@ -2172,7 +2175,7 @@
       "e-mail",
       "briefing"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0de": {
     "names": ["customer-and-contacts"],
@@ -2187,7 +2190,7 @@
       "email",
       "e-mail"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0df": {
     "names": ["my-view"],
@@ -2203,25 +2206,25 @@
       "cutomer",
       "user"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0e0": {
     "names": ["accelerated"],
     "groups": ["calendar"],
     "tags": ["calendar", "time", "speed"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0e1": {
     "names": ["to-be-reviewed"],
     "groups": ["status", "message"],
     "tags": ["to be reviewed", "indicator", "information"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0e2": {
     "names": ["warning2"],
     "groups": ["status", "message"],
     "tags": ["warning", "to be reviewed", "indicator", "information"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0e3": {
     "names": ["feeder-arrow"],
@@ -2252,7 +2255,7 @@
     "names": ["create"],
     "groups": ["documents", "action"],
     "tags": ["document", "page", "file", "attachment", "create", "new"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0e7": {
     "names": ["home-share"],
@@ -2299,7 +2302,7 @@
     "names": ["x-ray"],
     "groups": ["medical"],
     "tags": ["x ray", "procedure", "scan", "medical"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0ec": {
     "names": ["wounds-doc"],
@@ -2316,13 +2319,13 @@
       "illness",
       "cross"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0ed": {
     "names": ["web-cam"],
     "groups": ["devices", "action", "thing", "objects"],
     "tags": ["web cam", "camera", "live", "video", "visual"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0ee": {
     "names": ["waiver"],
@@ -2342,7 +2345,7 @@
       "vertical",
       "column"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0f0": {
     "names": ["upstacked-chart"],
@@ -2356,7 +2359,7 @@
       "vertical",
       "column"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0f1": {
     "names": ["trip-report"],
@@ -2371,7 +2374,7 @@
       "report",
       "business trip"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0f2": {
     "names": ["microphone"],
@@ -2387,7 +2390,7 @@
       "dictate",
       "record"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0f3": {
     "names": ["unpaid-leave"],
@@ -2408,13 +2411,13 @@
       "org",
       "tree"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0f5": {
     "names": ["toaster-up"],
     "groups": ["action", "objects"],
     "tags": ["toaster", "up", "details"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0f6": {
     "names": ["toaster-top"],
@@ -2426,31 +2429,31 @@
     "names": ["toaster-down"],
     "groups": ["action", "objects"],
     "tags": ["toaster", "down", "details"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0f8": {
     "names": ["time-account"],
     "groups": ["time"],
     "tags": ["time", "account", "clock", "list"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0f9": {
     "names": ["theater"],
     "groups": ["objects", "place"],
     "tags": ["theater", "show", "play", "masks"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0fa": {
     "names": ["taxi"],
     "groups": ["travel", "transport"],
     "tags": ["car", "taxi", "cab", "transportation"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0fb": {
     "names": ["subway-train"],
     "groups": ["travel", "transport"],
     "tags": ["subway train", "underground", "tube"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0fc": {
     "names": ["study-leave"],
@@ -2464,13 +2467,13 @@
       "student",
       "qualification"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0fd": {
     "names": ["stethoscope"],
     "groups": ["medical", "thing"],
     "tags": ["stethoscope", "medical", "health", "doctor", "hospital", "nurse"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe0fe": {
     "names": ["step"],
@@ -2482,14 +2485,14 @@
     "names": ["sonography"],
     "groups": ["medical"],
     "tags": ["sonography", "medical", "ultrasound", "ultrasonography"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe100": {
     "names": ["soccer"],
     "deprecatedNames": ["soccor"],
     "groups": ["thing", "objects"],
     "tags": ["soccer", "ball", "football", "world cup"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe101": {
     "names": ["physical-activity"],
@@ -2501,7 +2504,7 @@
     "names": ["pharmacy"],
     "groups": ["medical", "thing"],
     "tags": ["medicine", "pills", "drugs", "pharmacy", "pain", "medication"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe103": {
     "names": ["official-service"],
@@ -2515,7 +2518,7 @@
       "legal",
       "authority"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe104": {
     "names": ["offsite-work"],
@@ -2527,7 +2530,7 @@
     "names": ["nutrition-activity"],
     "groups": ["medical", "thing", "objects"],
     "tags": ["apple", "nutrition", "activity", "health", "fruit"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe106": {
     "names": ["newspaper"],
@@ -2557,19 +2560,19 @@
     "names": ["map-2"],
     "groups": ["objects", "place"],
     "tags": ["map", "card", "navigation", "hunt", "destination", "location"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe109": {
     "names": ["machine"],
     "groups": ["devices", "thing", "objects"],
     "tags": ["machine", "factory", "production", "supplier", "technical"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe10a": {
     "names": ["mri-scan"],
     "groups": ["medical"],
     "tags": ["mri", "scan", "medical"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe10b": {
     "names": ["end-user-experience-monitoring"],
@@ -2581,13 +2584,13 @@
       "speed",
       "monitor"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe10c": {
     "names": ["unwired"],
     "groups": ["objects"],
     "tags": ["unwired", "gauge", "measure", "speed", "monitor", "performance"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe10d": {
     "names": ["customer-financial-fact-sheet"],
@@ -2607,14 +2610,14 @@
   "0xe10e": {
     "names": ["retail-store-manager"],
     "groups": ["shopping"],
-    "tags": ["retail store manager"],
-    "rtl": "flip"
+    "tags": ["retail", "store", "manager"],
+    "rtl": "none"
   },
   "0xe10f": {
     "names": ["Netweaver-business-client"],
     "groups": ["objects"],
     "tags": ["netweaver business client", "bird"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe110": {
     "names": ["electronic-medical-record"],
@@ -2626,7 +2629,7 @@
       "emergency",
       "hospital"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe111": {
     "names": ["eam-work-order"],
@@ -2651,7 +2654,7 @@
     "names": ["crm-service-manager"],
     "groups": ["clipboard"],
     "tags": ["crm service manager", "task", "dropdown", "list"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe114": {
     "names": ["crm-sales"],
@@ -2737,7 +2740,7 @@
       "together",
       "project"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe11a": {
     "names": ["cart-approval"],
@@ -2765,7 +2768,7 @@
     "names": ["bo-strategy-management"],
     "groups": ["objects"],
     "tags": ["bo strategy management", "business", "object", "circle"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe11d": {
     "names": ["business-objects-mobile"],
@@ -2777,13 +2780,13 @@
       "display",
       "data"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe11e": {
     "names": ["business-objects-explorer"],
     "groups": ["objects"],
     "tags": ["business objects explorer", "compass"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe11f": {
     "names": ["business-objects-experience"],
@@ -2800,13 +2803,13 @@
       "bar",
       "vertical"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe120": {
     "names": ["bbyd-dashboard"],
     "groups": ["objects"],
     "tags": ["business by design", "dashboard"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe121": {
     "names": ["bbyd-active-sales"],
@@ -2848,7 +2851,7 @@
       "directory",
       "storage"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe125": {
     "names": ["manager-insight"],
@@ -2863,7 +2866,7 @@
       "board",
       "report"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe126": {
     "names": ["accounting-document-verification"],
@@ -2899,19 +2902,19 @@
       "project",
       "improve"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe129": {
     "names": ["Chart-Tree-Map"],
     "groups": ["charts"],
     "tags": ["analytics", "chart", "display", "data"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe12a": {
     "names": ["cart-5"],
     "groups": ["shopping"],
     "tags": ["cart", "trolley", "basket", "shopping", "item", "sap"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe12b": {
     "names": ["cart-4"],
@@ -2930,7 +2933,7 @@
       "another",
       "more"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe12c": {
     "names": ["wallet"],
@@ -2947,7 +2950,7 @@
       "cash",
       "notes"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe12d": {
     "names": ["vehicle-repair"],
@@ -2962,13 +2965,13 @@
       "garage",
       "vehicle"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe12e": {
     "names": ["upload"],
     "groups": ["arrow", "action"],
     "tags": ["upload", "arrow"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe12f": {
     "names": ["unlocked"],
@@ -2982,13 +2985,13 @@
       "access",
       "unrestricted"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe130": {
     "names": ["umbrella"],
     "groups": ["thing", "objects"],
     "tags": ["rain", "umbrella", "brolly", "shelter", "keep dry"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe131": {
     "names": ["travel-request"],
@@ -2999,7 +3002,11 @@
       "exclamation",
       "notifications",
       "status",
-      "help"
+      "help",
+      "request",
+      "travel",
+      "plane",
+      "airplane"
     ],
     "rtl": "none"
   },
@@ -3061,7 +3068,7 @@
       "work",
       "component"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe137": {
     "names": ["tag"],
@@ -3081,13 +3088,13 @@
       "shot",
       "injection"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe139": {
     "names": ["syntax"],
     "groups": ["text", "action"],
     "tags": ["source", "code", "develop", "write", "syntax"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe13a": {
     "names": ["suitcase"],
@@ -3102,7 +3109,7 @@
       "items",
       "collection"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe13b": {
     "names": ["simulate"],
@@ -3122,7 +3129,7 @@
       "mathematician",
       "mathematics"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe13c": {
     "names": ["shield"],
@@ -3136,13 +3143,13 @@
       "defense",
       "security"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe13d": {
     "names": ["share-2"],
     "groups": ["action"],
     "tags": ["share", "distribute", "share with connections"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe13e": {
     "names": ["sales-quote"],
@@ -3164,7 +3171,7 @@
     "names": ["repost"],
     "groups": ["arrow", "action"],
     "tags": ["post again", "circulate"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe140": {
     "names": ["provision"],
@@ -3183,13 +3190,13 @@
       "customize",
       "waffle"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe141": {
     "names": ["projector"],
     "groups": ["devices", "action", "thing", "objects"],
     "tags": ["beamer", "projector", "show", "movie", "presentation", "keynote"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe142": {
     "names": ["add-product"],
@@ -3206,13 +3213,13 @@
       "another",
       "more"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe143": {
     "names": ["pipeline-analysis"],
     "groups": ["charts", "objects"],
     "tags": ["analytics", "chart", "display", "data", "kebab"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe144": {
     "names": ["add-photo"],
@@ -3229,7 +3236,7 @@
       "another",
       "more"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe145": {
     "names": ["palette"],
@@ -3244,13 +3251,13 @@
       "theme",
       "design"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe146": {
     "names": ["nurse"],
     "groups": ["people", "medical"],
     "tags": ["nurse", "medical", "cross", "emergency", "hospital"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe147": {
     "names": ["sales-notification"],
@@ -3262,7 +3269,7 @@
     "names": ["mileage"],
     "groups": ["thing", "objects", "place"],
     "tags": ["mileage", "tank", "petrol", "fuel", "fill up", "gas", "station"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe149": {
     "names": ["meeting-room"],
@@ -3293,7 +3300,7 @@
     "names": ["media-pause"],
     "groups": ["arrow", "action"],
     "tags": ["pause", "media", "arrow"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe14d": {
     "names": ["media-reverse"],
@@ -3341,7 +3348,7 @@
       "calibration",
       "calculation"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe152": {
     "names": ["map-3"],
@@ -3357,7 +3364,7 @@
       "destination",
       "location"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe153": {
     "names": ["locked"],
@@ -3372,7 +3379,7 @@
       "restricted",
       "safe"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe154": {
     "names": ["letter"],
@@ -3419,7 +3426,7 @@
       "device",
       "system"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe159": {
     "names": ["it-instance"],
@@ -3433,7 +3440,7 @@
       "device",
       "instance"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe15a": {
     "names": ["it-host"],
@@ -3447,7 +3454,7 @@
       "device",
       "host"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe15b": {
     "names": ["iphone-2"],
@@ -3462,13 +3469,13 @@
       "responsive",
       "cozy"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe15c": {
     "names": ["ipad-2"],
     "groups": ["devices", "thing", "objects"],
     "tags": ["ipad", "landscape", "tablet", "mobile", "responsive", "cozy"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe15d": {
     "names": ["inventory"],
@@ -3480,19 +3487,19 @@
     "names": ["insurance-house"],
     "groups": ["documents"],
     "tags": ["document", "page", "file", "attachment", "insurance", "house"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe15f": {
     "names": ["insurance-life"],
     "groups": ["documents"],
     "tags": ["document", "page", "file", "attachment", "insurance", "life"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe160": {
     "names": ["insurance-car"],
     "groups": ["documents"],
     "tags": ["document", "page", "file", "attachment", "insurance", "car"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe161": {
     "names": ["initiative"],
@@ -3524,7 +3531,7 @@
     "names": ["goal"],
     "groups": ["status", "message", "objects"],
     "tags": ["goal", "target", "result", "objective", "aim"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe165": {
     "names": ["functional-location"],
@@ -3539,7 +3546,7 @@
       "navigation",
       "functional"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe166": {
     "names": ["full-screen"],
@@ -3557,7 +3564,7 @@
     "names": ["fob-watch"],
     "groups": ["time", "devices", "objects"],
     "tags": ["fob watch", "time", "stop watch", "timer", "countdown"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe169": {
     "names": ["blank-tag"],
@@ -3569,7 +3576,7 @@
     "names": ["family-protection"],
     "groups": ["people"],
     "tags": ["family", "protection", "people", "house", "roof"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe16b": {
     "names": ["folder"],
@@ -3581,13 +3588,13 @@
     "names": ["fax-machine"],
     "groups": ["devices", "action"],
     "tags": ["fax", "machine", "communicate"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe16d": {
     "names": ["example"],
     "groups": ["objects"],
-    "tags": ["example", "dots", "cicles", "individual", "odd"],
-    "rtl": "flip"
+    "tags": ["example", "dots", "cycles", "individual", "odd"],
+    "rtl": "none"
   },
   "0xe16e": {
     "names": ["eraser"],
@@ -3619,25 +3626,25 @@
       "settings",
       "megamenu"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe171": {
     "names": ["draw-rectangle"],
     "groups": ["action", "objects"],
     "tags": ["draw", "rectangle", "resize", "shape", "create"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe172": {
     "names": ["document"],
     "groups": ["documents"],
     "tags": ["document", "page", "file", "attachment", "blank", "new"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe173": {
     "names": ["doctor"],
     "groups": ["people", "medical", "travel", "place"],
     "tags": ["doctor", "medical", "cross", "emergency", "hospital"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe174": {
     "names": ["discussion-2"],
@@ -3655,7 +3662,7 @@
     "names": ["dimension"],
     "groups": ["objects"],
     "tags": ["dimension", "layers", "stacked"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe177": {
     "names": ["customer-and-supplier"],
@@ -3672,7 +3679,7 @@
       "buyer",
       "inventory"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe178": {
     "names": ["crop"],
@@ -3687,7 +3694,7 @@
       "shape",
       "object"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe179": {
     "names": ["add-contact"],
@@ -3706,7 +3713,7 @@
       "another",
       "more"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe17a": {
     "names": ["compare-2"],
@@ -3722,25 +3729,25 @@
       "balance",
       "comparison"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe17b": {
     "names": ["color-fill"],
     "groups": ["objects"],
-    "tags": ["square", "filled", "color"],
-    "rtl": "flip"
+    "tags": ["square", "filled", "color", "full"],
+    "rtl": "none"
   },
   "0xe17c": {
     "names": ["collision"],
     "groups": ["transport", "objects"],
     "tags": ["car", "crash", "accident", "damage"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe17d": {
     "names": ["curriculum"],
     "groups": ["folder"],
     "tags": ["folder", "curriculum", "learning", "documents", "content"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe17e": {
     "names": ["chart-axis"],
@@ -3754,13 +3761,13 @@
       "arrows",
       "directions"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe17f": {
     "names": ["full-stacked-chart"],
     "groups": ["charts"],
     "tags": ["analytics", "chart", "display", "data", "full stacked chart"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe180": {
     "names": ["full-stacked-column-chart"],
@@ -3772,7 +3779,7 @@
       "data",
       "full stacked column chart"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe181": {
     "names": ["vertical-bar-chart-2"],
@@ -3785,13 +3792,13 @@
       "vertical bar chart",
       "column"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe182": {
     "names": ["horizontal-bar-chart-2"],
     "groups": ["charts"],
     "tags": ["analytics", "chart", "display", "data", "horizontal bar chart"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe183": {
     "names": ["horizontal-stacked-chart"],
@@ -3803,13 +3810,13 @@
       "data",
       "horizontal stacked chart"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe184": {
     "names": ["vertical-stacked-chart"],
     "groups": ["charts"],
     "tags": ["analytics", "chart", "display", "data", "vertical stacked chart"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe185": {
     "names": ["choropleth-chart"],
@@ -3845,37 +3852,37 @@
     "names": ["multiple-radar-chart"],
     "groups": ["charts"],
     "tags": ["analytics", "chart", "display", "data", "multiple radar chart"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe188": {
     "names": ["radar-chart"],
     "groups": ["charts"],
     "tags": ["analytics", "chart", "display", "data", "radar-chart"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe189": {
     "names": ["crossed-line-chart"],
     "groups": ["charts"],
     "tags": ["analytics", "chart", "display", "data", "crossed line chart"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe18a": {
     "names": ["multiple-line-chart"],
     "groups": ["charts"],
     "tags": ["analytics", "chart", "display", "data", "multiple line chart"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe18b": {
     "names": ["multiple-bar-chart"],
     "groups": ["charts"],
     "tags": ["analytics", "chart", "display", "data", "multiple bar chart"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe18c": {
     "names": ["line-chart"],
     "groups": ["charts"],
     "tags": ["analytics", "chart", "display", "data", "line chart"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe18d": {
     "names": ["line-chart-dual-axis"],
@@ -3888,43 +3895,43 @@
       "line chart",
       "dual axis"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe18e": {
     "names": ["bubble-chart"],
     "groups": ["charts"],
     "tags": ["analytics", "chart", "display", "data", "bubble chart"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe18f": {
     "names": ["scatter-chart"],
     "groups": ["charts"],
     "tags": ["analytics", "chart", "display", "data", "scatter chart"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe190": {
     "names": ["multiple-pie-chart"],
     "groups": ["charts"],
     "tags": ["analytics", "chart", "display", "data", "multiple", "pie chart"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe191": {
     "names": ["column-chart-dual-axis"],
     "groups": ["charts"],
     "tags": ["analytics", "chart", "display", "data", "column", "dual axis"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe192": {
     "names": ["tag-cloud-chart"],
     "groups": ["charts", "callout"],
     "tags": ["analytics", "chart", "display", "data", "speech", "tag", "cloud"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe193": {
     "names": ["area-chart"],
     "groups": ["charts"],
     "tags": ["analytics", "chart", "display", "data", "area"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe194": {
     "names": ["cause"],
@@ -3947,7 +3954,7 @@
       "down",
       "arrow"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe196": {
     "names": ["cart-2"],
@@ -3964,13 +3971,13 @@
       "up",
       "arrow"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe197": {
     "names": ["bus-public-transport"],
     "groups": ["travel", "transport"],
     "tags": ["bus", "public", "traffic", "vehicle"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe198": {
     "names": ["burglary"],
@@ -3986,25 +3993,25 @@
       "robbery",
       "bank"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe199": {
     "names": ["building"],
     "groups": ["objects", "place"],
     "tags": ["building", "company", "firm", "factory", "office"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe19a": {
     "names": ["border"],
     "groups": ["objects"],
     "tags": ["border", "square", "outline"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe19b": {
     "names": ["bookmark"],
     "groups": ["action", "status", "message"],
-    "tags": ["bookmark", "later", "marker", "save"],
-    "rtl": "flip"
+    "tags": ["bookmark", "later", "marker", "save", "full", "filled"],
+    "rtl": "none"
   },
   "0xe19c": {
     "names": ["badge"],
@@ -4022,13 +4029,13 @@
       "award",
       "rank"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe19d": {
     "names": ["attachment-audio"],
     "groups": ["documents"],
     "tags": ["document", "page", "file", "attachment", "audio", "sound"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe19e": {
     "names": ["attachment-video"],
@@ -4042,7 +4049,7 @@
       "film",
       "movie"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe19f": {
     "names": ["attachment-html"],
@@ -4056,13 +4063,13 @@
       "web",
       "website"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1a0": {
     "names": ["attachment-photo"],
     "groups": ["documents"],
     "tags": ["document", "page", "file", "attachment", "photo", "image"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1a1": {
     "names": ["attachment-e-pub"],
@@ -4075,19 +4082,19 @@
       "electronic publication",
       "e book"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1a2": {
     "names": ["attachment-zip-file"],
     "groups": ["documents"],
     "tags": ["document", "page", "file", "zip", "compressed"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1a3": {
     "names": ["attachment-text-file"],
     "groups": ["documents"],
     "tags": ["document", "page", "file", "text"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1a4": {
     "names": ["add-equipment"],
@@ -4104,7 +4111,7 @@
       "another",
       "more"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1a5": {
     "names": ["add-activity"],
@@ -4135,7 +4142,7 @@
       "individual",
       "person"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1a7": {
     "names": ["activity-2"],
@@ -4192,7 +4199,7 @@
       "target",
       "objective"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1ab": {
     "names": ["status-positive"],
@@ -4206,7 +4213,7 @@
       "street sign",
       "lifecycle"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1ac": {
     "names": ["status-negative"],
@@ -4219,7 +4226,7 @@
       "street sign",
       "lifecycle"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1ad": {
     "names": ["status-inactive"],
@@ -4233,7 +4240,7 @@
       "street sign",
       "lifecycle"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1ae": {
     "names": ["status-critical"],
@@ -4247,7 +4254,7 @@
       "street sign",
       "lifecycle"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1af": {
     "names": ["blank-tag-2"],
@@ -4265,9 +4272,10 @@
       "shopping",
       "full",
       "capacity",
-      "load"
+      "load",
+      "filled"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1b1": {
     "names": ["locate-me"],
@@ -4281,7 +4289,7 @@
       "pointer",
       "navigation"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1b2": {
     "names": ["paging"],
@@ -4293,43 +4301,43 @@
     "names": ["company-view"],
     "groups": ["people"],
     "tags": ["view", "group", "company", "personnel", "firm", "overview"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1b4": {
     "names": ["document-text"],
     "groups": ["documents"],
     "tags": ["document", "page", "file", "text"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1b5": {
     "names": ["explorer"],
     "groups": ["thing", "objects"],
     "tags": ["explorer", "compass"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1b6": {
     "names": ["personnel-view"],
     "groups": ["people"],
     "tags": ["view", "person", "profile", "personnel", "overview"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1b7": {
     "names": ["sorting-ranking"],
     "groups": ["arrow", "action"],
     "tags": ["sort", "ranking", "ascending", "descending", "arrow"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1b8": {
     "names": ["drill-down"],
     "groups": ["arrow", "action"],
     "tags": ["drill down", "arrow", "detail", "hierarchy", "level", "megamenu"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1b9": {
     "names": ["drill-up"],
     "groups": ["arrow", "action"],
     "tags": ["drill up", "arrow", "detail", "hierarchy", "level"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1ba": {
     "names": ["vds-file"],
@@ -4343,7 +4351,7 @@
       "Visual Design Stream",
       "vds"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1bb": {
     "names": ["sap-logo-shape"],
@@ -4363,19 +4371,19 @@
       "content",
       "detail"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1bd": {
     "names": ["system-exit"],
     "groups": ["arrow", "action"],
     "tags": ["system", "exit"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1be": {
     "names": ["system-exit-2"],
     "groups": ["arrow", "action"],
     "tags": ["system", "exit"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1bf": {
     "names": ["close-command-field"],
@@ -4448,7 +4456,7 @@
   "0xe1c3": {
     "names": ["sys-help-2"],
     "groups": ["action", "status", "message"],
-    "tags": ["system", "help", "circle", "question", "filled"],
+    "tags": ["system", "help", "circle", "question", "filled", "full"],
     "rtl": "none"
   },
   "0xe1c4": {
@@ -4483,7 +4491,7 @@
       "message-error",
       "notification"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1c8": {
     "names": ["sys-cancel-2"],
@@ -4500,13 +4508,13 @@
       "message-error",
       "notification"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1c9": {
     "names": ["open-folder"],
     "groups": ["folder"],
     "tags": ["folder", "open"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1ca": {
     "names": ["sys-find-next"],
@@ -4521,55 +4529,55 @@
       "another",
       "more"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1cb": {
     "names": ["sys-find"],
     "groups": ["action", "thing"],
     "tags": ["find", "binoculars", "look up"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1cc": {
     "names": ["sys-monitor"],
     "groups": ["devices", "thing", "objects"],
     "tags": ["screen", "monitor", "tv"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1cd": {
     "names": ["sys-prev-page"],
     "groups": ["documents", "action"],
     "tags": ["system", "previous", "page", "up", "arrows"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1ce": {
     "names": ["sys-first-page"],
     "groups": ["documents", "action"],
     "tags": ["system", "first", "page", "up", "top", "arrows"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1cf": {
     "names": ["sys-next-page"],
     "groups": ["documents", "action"],
     "tags": ["system", "next", "page", "down", "arrows"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1d0": {
     "names": ["sys-last-page"],
     "groups": ["documents", "action"],
     "tags": ["system", "last", "page", "down", "bottom", "arrows"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1d1": {
     "names": ["generate-shortcut"],
     "groups": ["action"],
     "tags": ["generate", "shortcut", "arrow"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1d2": {
     "names": ["create-session"],
     "groups": ["action"],
     "tags": ["create", "session"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1d3": {
     "names": ["display-more"],
@@ -4587,61 +4595,61 @@
     "names": ["zoom-in"],
     "groups": ["action"],
     "tags": ["zoom", "in", "magnify", "glass", "plus", "enlarge", "bigger"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1d6": {
     "names": ["zoom-out"],
     "groups": ["action"],
     "tags": ["zoom", "out", "glass", "minus", "reduce", "smaller"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1d7": {
     "names": ["header"],
     "groups": ["objects"],
     "tags": ["maximize", "header", "screen"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1d8": {
     "names": ["detail-view", "show-edit"],
     "groups": ["form", "action"],
-    "tags": ["search", "form", "look up", "find", "view", "detail"],
-    "rtl": "flip"
+    "tags": ["search", "form", "look up", "find", "view", "detail", "edit", "magnify", "show"],
+    "rtl": "none"
   },
   "0xe1d9": {
     "names": ["collapse"],
     "groups": ["action"],
     "tags": ["collapse all", "minus", "ungroup all", "arrow"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1da": {
     "names": ["expand"],
     "groups": ["action"],
     "tags": ["expand all", "plus", "group all", "arrow"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1db": {
     "names": ["positive"],
     "groups": ["action"],
     "tags": ["plus", "positive"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1dc": {
     "names": ["negative"],
     "groups": ["action"],
     "tags": ["minus", "remove", "subtract", "negative"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1dd": {
     "names": ["display"],
     "groups": ["action", "thing"],
     "tags": ["display", "details", "inspect", "spectacles", "glasses"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1de": {
     "names": ["menu2"],
     "groups": ["action"],
-    "tags": ["menu", "hamburger menu", "main menu"],
-    "rtl": "flip"
+    "tags": ["menu", "hamburger menu", "main menu", "navigation"],
+    "rtl": "none"
   },
   "0xe1df": {
     "names": ["redo"],
@@ -4659,7 +4667,7 @@
     "names": ["navigation-up-arrow"],
     "groups": ["arrow", "action"],
     "tags": ["navigation", "up", "arrow"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1e2": {
     "names": ["navigation-down-arrow"],
@@ -4673,31 +4681,31 @@
       "arrow",
       "megamenu"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1e3": {
     "names": ["down"],
     "groups": ["arrow", "action"],
     "tags": ["down", "triangle", "megamenu"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1e4": {
     "names": ["up"],
     "groups": ["arrow", "action"],
     "tags": ["up", "triangle"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1e5": {
     "names": ["shelf"],
     "groups": ["objects"],
     "tags": ["shelf", "storage", "drawers", "compartments"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1e6": {
     "names": ["background"],
     "groups": ["objects"],
     "tags": ["image", "placeholder", "picture", "hills", "mountains", "sun"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1e7": {
     "names": ["resize"],
@@ -4709,19 +4717,19 @@
     "names": ["move"],
     "groups": ["arrow", "action"],
     "tags": ["move", "relocate", "left", "right", "up", "down"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1e9": {
     "names": ["show"],
     "groups": ["action"],
     "tags": ["show", "eye"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1ea": {
     "names": ["hide"],
     "groups": ["action"],
     "tags": ["hide", "eye"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1eb": {
     "names": ["nav-back"],
@@ -4740,7 +4748,7 @@
       "status",
       "solid"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1ed": {
     "names": ["slim-arrow-right"],
@@ -4767,13 +4775,13 @@
       "combobox",
       "multi combobox"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1f0": {
     "names": ["slim-arrow-up"],
     "groups": ["arrow", "action"],
     "tags": ["slim", "thin", "skinny", "arrow", "up"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1f1": {
     "names": ["forward"],
@@ -4785,13 +4793,13 @@
     "names": ["overflow"],
     "groups": ["action"],
     "tags": ["overflow", "dots", "ellipsis", "more"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1f3": {
     "names": ["value-help"],
     "groups": ["action"],
     "tags": ["value", "help", "popup", "assistance", "multi input"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1f4": {
     "names": ["multi-select"],
@@ -4820,49 +4828,49 @@
       "add object",
       "add item"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1f7": {
     "names": ["sys-minus"],
     "groups": ["action"],
     "tags": ["minus", "remove", "subtract"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1f8": {
     "names": ["dropdown"],
     "groups": ["arrow", "action"],
     "tags": ["dropdown", "menu", "menu button", "arrow", "megamenu"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1f9": {
     "names": ["expand-group"],
     "groups": ["arrow", "action"],
     "tags": ["expand", "group", "move to bottom", "arrow"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1fa": {
     "names": ["vertical-grip"],
     "groups": ["action", "objects"],
     "tags": ["vertical", "grip", "move left", "move right", "splitter"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1fb": {
     "names": ["horizontal-grip"],
     "groups": ["action", "objects"],
     "tags": ["horizontal", "grip", "move up", "move down", "splitter"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1fc": {
     "names": ["sort-descending"],
     "groups": ["arrow", "action"],
     "tags": ["sort", "descending", "down", "table", "aggregate"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1fd": {
     "names": ["sort-ascending"],
     "groups": ["arrow", "action"],
     "tags": ["sort", "ascending", "up", "table", "aggregate"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1fe": {
     "names": ["arrow-down"],
@@ -4877,7 +4885,7 @@
       "options",
       "megamenu"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe1ff": {
     "names": ["legend"],
@@ -4897,13 +4905,13 @@
     "names": ["collapse-group"],
     "groups": ["arrow", "action"],
     "tags": ["collapse", "group", "move to top", "arrow"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe201": {
     "names": ["message-warning"],
     "groups": ["status", "message"],
     "tags": ["message", "warning", "critical", "notifications", "status"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe202": {
     "names": ["message-information"],
@@ -4921,13 +4929,13 @@
     "names": ["restart"],
     "groups": ["arrow", "action"],
     "tags": ["restart", "process", "play"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe205": {
     "names": ["stop"],
     "groups": ["action"],
     "tags": ["stop", "process", "play"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe206": {
     "names": ["add-process"],
@@ -4952,7 +4960,7 @@
     "names": ["activate"],
     "groups": ["action"],
     "tags": ["activate", "ignite", "initiate", "magic", "wand", "spark"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe209": {
     "names": ["resize-horizontal"],
@@ -4970,7 +4978,7 @@
       "lines",
       "side to side"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe20a": {
     "names": ["resize-vertical"],
@@ -4988,19 +4996,19 @@
       "lines",
       "up and down"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe20b": {
     "names": ["connected"],
     "groups": ["status", "message"],
     "tags": ["plug", "connected", "on", "state"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe20c": {
     "names": ["disconnected"],
     "groups": ["action", "status", "message"],
     "tags": ["plug", "disconnected", "unplug", "state"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe20d": {
     "names": ["edit-outside"],
@@ -5021,85 +5029,85 @@
     "names": ["key"],
     "groups": ["thing", "objects"],
     "tags": ["key", "foreign", "data", "lock", "important"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe20f": {
     "names": ["minimize"],
     "groups": ["action", "objects"],
     "tags": ["minimize", "screen", "window", "reduce", "hide"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe210": {
     "names": ["back-to-top"],
     "groups": ["arrow", "action"],
     "tags": ["back to top", "jump", "beginning", "arrow", "up"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe211": {
     "names": ["hello-world"],
     "groups": ["callout", "objects"],
     "tags": ["bubble", "ui5", "hello", "world"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe212": {
     "names": ["outbox"],
     "groups": ["action"],
     "tags": ["outbox", "out", "arrow"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe213": {
     "names": ["donut-chart"],
     "groups": ["charts"],
     "tags": ["analytics", "chart", "display", "data"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe214": {
     "names": ["heatmap-chart"],
     "groups": ["charts"],
     "tags": ["analytics", "chart", "display", "data"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe215": {
     "names": ["horizontal-bullet-chart"],
     "groups": ["charts"],
     "tags": ["analytics", "chart", "display", "data"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe216": {
     "names": ["vertical-bullet-chart"],
     "groups": ["charts"],
     "tags": ["analytics", "chart", "display", "data"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe217": {
     "names": ["call"],
     "groups": ["action"],
     "tags": ["call", "communicate", "phone", "telephone"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe218": {
     "names": ["download-from-cloud"],
     "groups": ["arrow", "action"],
     "tags": ["download", "cloud", "arrow"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe219": {
     "names": ["upload-to-cloud"],
     "groups": ["arrow", "action"],
     "tags": ["save", "upload", "cloud", "arrow"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe21a": {
     "names": ["jam"],
     "groups": ["thing", "objects", "place"],
     "tags": ["sap", "logo", "jam", "social", "collaborate", "share"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe21b": {
     "names": ["sap-ui5"],
     "groups": ["thing", "objects"],
     "tags": ["ui5", "framework", "development", "sap"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe21c": {
     "names": ["message-popup"],
@@ -5119,7 +5127,7 @@
     "names": ["cloud"],
     "groups": ["thing", "objects", "place"],
     "tags": ["cloud", "platform", "storage", "big data", "sap"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe21e": {
     "names": ["horizontal-waterfall-chart"],
@@ -5137,13 +5145,13 @@
     "names": ["broken-link"],
     "groups": ["status", "message", "objects"],
     "tags": ["unlink", "broken", "chain", "hyperlink"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe221": {
     "names": ["headset"],
     "groups": ["objects"],
     "tags": ["headset", "call", "help", "support", "talk", "mic", "listen"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe222": {
     "names": ["thumb-up"],
@@ -5173,7 +5181,7 @@
     "names": ["scissors"],
     "groups": ["action", "objects"],
     "tags": ["cut", "scissors", "document", "clipboards", "file", "text"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe227": {
     "names": ["sound"],
@@ -5206,7 +5214,6 @@
       "settings",
       "cogwheel",
       "configuration",
-      "settings",
       "tools",
       "modify",
       "customize",
@@ -5214,7 +5221,7 @@
       "user",
       "runtime authoring"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe22c": {
     "names": ["key-user-settings"],
@@ -5230,7 +5237,7 @@
       "key user",
       "runtime authoring"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe22d": {
     "names": ["developer-settings"],
@@ -5245,7 +5252,7 @@
       "developer",
       "runtime authoring"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe22e": {
     "names": ["text-formatting"],
@@ -5333,7 +5340,7 @@
     "names": ["bullet-text"],
     "groups": ["text", "action"],
     "tags": ["bullet", "text", "dots", "text edit", "rich-text"],
-    "rtl": "none"
+    "rtl": "flip"
   },
   "0xe237": {
     "names": ["numbered-text"],
@@ -5345,7 +5352,7 @@
     "names": ["co"],
     "groups": ["objects"],
     "tags": ["co pilot", "mnemonics", "assistant", "launchpad"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe239": {
     "names": ["ui-notifications"],
@@ -5356,8 +5363,8 @@
   "0xe23a": {
     "names": ["bell"],
     "groups": ["objects"],
-    "tags": ["bell", "alarm", "notify", "alerts"],
-    "rtl": "flip"
+    "tags": ["bell", "notifications", "notify"],
+    "rtl": "none"
   },
   "0xe23b": {
     "names": ["cancel-share"],
@@ -5367,7 +5374,7 @@
       "cancel distribution",
       "do not share with connections"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe23c": {
     "names": ["write-new-document"],
@@ -5383,13 +5390,13 @@
       "pencil",
       "pen"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe23d": {
     "names": ["write-new"],
     "groups": ["action"],
     "tags": ["write", "new", "create", "pencil", "pen"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe23e": {
     "names": ["cancel"],
@@ -5401,19 +5408,19 @@
     "names": ["screen-split-one"],
     "groups": ["objects"],
     "tags": ["screen", "split", "two", "master", "detail", "split app"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe240": {
     "names": ["screen-split-two"],
     "groups": ["objects"],
     "tags": ["screen", "split", "two", "half"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe241": {
     "names": ["screen-split-three"],
     "groups": ["objects"],
     "tags": ["screen", "split", "three", "columns"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe242": {
     "names": ["customize"],
@@ -5421,37 +5428,36 @@
     "tags": [
       "settings",
       "configuration",
-      "settings",
       "modify",
       "customize",
       "equaliser",
       "fine tune"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe243": {
     "names": ["user-edit"],
     "groups": ["people", "action"],
     "tags": ["user", "edit", "person", "pencil", "pen"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe244": {
     "names": ["source-code"],
     "groups": ["arrow"],
     "tags": ["source", "code", "develop", "write", "syntax"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe245": {
     "names": ["copy"],
     "groups": ["action"],
     "tags": ["copy", "document", "file", "duplicate", "text"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe246": {
     "names": ["paste"],
     "groups": ["action", "clipboard"],
     "tags": ["paste", "document", "clipboards", "file", "text"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe247": {
     "names": ["line-chart-time-axis"],
@@ -5464,7 +5470,7 @@
     "groups": ["action"],
     "tags": [
       "filter",
-      "organise",
+      "organize",
       "aggregate",
       "data",
       "clear",
@@ -5478,25 +5484,25 @@
     "names": ["reset"],
     "groups": ["arrow", "action"],
     "tags": ["reset", "x", "cancel"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe24a": {
     "names": ["trend-up"],
     "groups": ["arrow", "action"],
     "tags": ["trend", "up", "diagonal", "increase", "improve", "arrow"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe24b": {
     "names": ["trend-down"],
     "groups": ["arrow", "action"],
     "tags": ["trend", "down", "diagonal", "decrease", "decline", "arrow"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe24c": {
     "names": ["cursor-arrow"],
     "groups": ["action", "objects", "text"],
     "tags": ["cursor", "arrow", "mouse", "pointer", "select"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe24d": {
     "names": ["add-document"],
@@ -5513,7 +5519,7 @@
       "another",
       "more"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe24e": {
     "names": ["create-form"],
@@ -5528,7 +5534,7 @@
       "another",
       "more"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe24f": {
     "names": ["resize-corner"],
@@ -5562,7 +5568,9 @@
       "gantt",
       "shape",
       "chevron",
-      "phase"
+      "phase",
+      "full",
+      "filled"
     ],
     "rtl": "flip"
   },
@@ -5579,7 +5587,7 @@
       "rhombus",
       "milestone"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe253": {
     "names": ["rhombus-milestone-2"],
@@ -5594,7 +5602,7 @@
       "rhombus",
       "milestone"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe254": {
     "names": ["circle-task"],
@@ -5609,7 +5617,7 @@
       "circle",
       "task"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe255": {
     "names": ["circle-task-2"],
@@ -5622,9 +5630,11 @@
       "gantt",
       "shape",
       "circle",
-      "task"
+      "task",
+      "full",
+      "filled"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe256": {
     "names": ["project-definition-triangle"],
@@ -5640,7 +5650,7 @@
       "project",
       "definition"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe257": {
     "names": ["project-definition-triangle-2"],
@@ -5656,7 +5666,7 @@
       "project",
       "definition"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe258": {
     "names": ["master-task-triangle"],
@@ -5672,7 +5682,7 @@
       "task",
       "master"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe259": {
     "names": ["master-task-triangle-2"],
@@ -5686,9 +5696,11 @@
       "shape",
       "triangle",
       "task",
-      "master"
+      "master",
+      "full",
+      "filled"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe25a": {
     "names": ["program-triangles"],
@@ -5703,7 +5715,7 @@
       "triangle",
       "program"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe25b": {
     "names": ["program-triangles-2"],
@@ -5718,7 +5730,7 @@
       "triangle",
       "program"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe25c": {
     "names": ["mirrored-task-circle"],
@@ -5748,7 +5760,9 @@
       "shape",
       "mirrored",
       "circle",
-      "task"
+      "task",
+      "full",
+      "filled"
     ],
     "rtl": "flip"
   },
@@ -5765,7 +5779,7 @@
       "checklist",
       "item"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe25f": {
     "names": ["checklist-item-2"],
@@ -5778,9 +5792,11 @@
       "gantt",
       "shape",
       "checklist",
-      "item"
+      "item",
+      "full",
+      "filled"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe260": {
     "names": ["checklist"],
@@ -5794,7 +5810,7 @@
       "shape",
       "checklist"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe261": {
     "names": ["checklist-2"],
@@ -5806,9 +5822,11 @@
       "data",
       "gantt",
       "shape",
-      "checklist"
+      "checklist",
+      "full",
+      "filled"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe262": {
     "names": ["chart-table-view"],
@@ -5833,13 +5851,13 @@
     "tags": [
       "analytics",
       "filter",
-      "organise",
+      "organize",
       "chart",
       "customize",
       "display",
       "data"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe264": {
     "names": ["filter-facets"],
@@ -5847,13 +5865,13 @@
     "tags": [
       "analytics",
       "filter",
-      "organise",
+      "organize",
       "chart",
       "customize",
       "display",
       "data"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe265": {
     "names": ["filter-fields"],
@@ -5861,7 +5879,7 @@
     "tags": [
       "analytics",
       "filter",
-      "organise",
+      "organize",
       "chart",
       "customize",
       "display",
@@ -6001,7 +6019,7 @@
     "names": ["add-folder"],
     "groups": ["action"],
     "tags": ["folder", "add", "directory", "additional", "library"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe26f": {
     "names": ["away"],
@@ -6017,7 +6035,7 @@
       "off work",
       "me"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe270": {
     "names": ["busy"],
@@ -6032,13 +6050,13 @@
       "me",
       "working"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe271": {
     "names": ["appear-offline"],
     "groups": ["status", "message"],
     "tags": ["appear-offline", "offline", "hide", "blocked", "circle", "me"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe272": {
     "names": ["blur"],
@@ -6056,7 +6074,7 @@
       "filter",
       "effects"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe273": {
     "names": ["pixelate"],
@@ -6075,7 +6093,7 @@
       "resolution",
       "noise"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe274": {
     "names": ["horizontal-combination-chart"],
@@ -6090,7 +6108,7 @@
       "bar",
       "horizontal"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe275": {
     "names": ["add-employee"],
@@ -6108,7 +6126,7 @@
       "human resources",
       "plus"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe276": {
     "names": ["text-color"],
@@ -6138,19 +6156,19 @@
       "library",
       "find"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe278": {
     "names": ["primary-key"],
     "groups": ["objects"],
     "tags": ["key", "primary", "data", "lock", "important"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe279": {
     "names": ["two-keys"],
     "groups": ["objects"],
     "tags": ["key", "primary", "foreign", "data", "lock", "important"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe27a": {
     "names": ["strikethrough"],
@@ -6166,7 +6184,7 @@
       "options",
       "review"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe27b": {
     "names": ["text"],
@@ -6180,7 +6198,7 @@
       "rich",
       "rich-text"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe27c": {
     "names": ["responsive"],
@@ -6195,7 +6213,7 @@
       "compact",
       "web app"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe27d": {
     "names": ["desktop-mobile"],
@@ -6211,7 +6229,7 @@
       "web app",
       "responsive"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe27e": {
     "names": ["table-row"],
@@ -6226,7 +6244,7 @@
       "rows",
       "waffle"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe27f": {
     "names": ["table-column"],
@@ -6241,7 +6259,7 @@
       "columns",
       "waffle"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe280": {
     "names": ["validate"],
@@ -6272,7 +6290,7 @@
       "controls",
       "devices"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe282": {
     "names": ["touch"],
@@ -6287,7 +6305,7 @@
       "controls",
       "devices"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe283": {
     "names": ["expand-all"],
@@ -6376,7 +6394,7 @@
       "shell",
       "arrow"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe288": {
     "names": ["feedback"],
@@ -6394,9 +6412,10 @@
       "message-information",
       "i",
       "filled",
-      "notification"
+      "notification",
+      "full"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe28a": {
     "names": ["s4hana"],
@@ -6479,13 +6498,13 @@
     "names": ["space-navigation"],
     "groups": ["place"],
     "tags": ["space", "navigation", "circle", "shape", "line"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe291": {
     "names": ["in-progress"],
     "groups": ["time", "status"],
     "tags": [
-      "in process",
+      "in progress",
       "status",
       "working",
       "current",
@@ -6524,7 +6543,7 @@
       "filled",
       "content"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe294": {
     "names": ["heart-2"],
@@ -6544,7 +6563,7 @@
       "not selected",
       "unfilled"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe295": {
     "names": ["tri-state"],
@@ -6563,7 +6582,7 @@
       "tri",
       "tri-state"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe296": {
     "names": ["bookmark-2"],
@@ -6578,7 +6597,7 @@
       "not selected",
       "unfilled"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe297": {
     "names": ["detail-less"],
@@ -6642,31 +6661,31 @@
       "selected",
       "filled"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe29b": {
     "names": ["paint-bucket"],
     "groups": ["action"],
     "tags": ["filled", "color", "colour", "bucket", "spill", "drop", "fill"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe29c": {
     "names": ["direction-arrows"],
     "groups": ["arrow"],
     "tags": ["arrow", "slider", "direction", "left", "right"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe29d": {
     "names": ["non-binary"],
     "groups": ["people"],
     "tags": ["non-binary", "shapes", "symbol", "gender"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe29e": {
     "names": ["female"],
     "groups": ["people"],
     "tags": ["female", "woman", "girl", "shapes", "symbol", "gender"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe29f": {
     "names": ["male"],
@@ -6678,7 +6697,7 @@
     "names": ["bell-2"],
     "groups": ["objects"],
     "tags": ["bell", "alarm", "notify", "alerts", "full", "filled"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe2a1": {
     "names": ["accessibility"],
@@ -6692,7 +6711,7 @@
       "inclusion",
       "people"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe2a2": {
     "names": ["high-priority"],
@@ -6707,28 +6726,20 @@
       "notification",
       "exclamation"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe2a3": {
     "names": ["da"],
     "groups": ["objects"],
     "tags": [
+      "Joule",
       "artificial intelligence",
-      "voice recognition",
-      "npl",
-      "NPL",
       "assistant",
       "chatbot",
-      "machine learning",
       "ai",
-      "digital",
       "assistance",
-      "virtual",
       "intelligence",
-      "conversational ai",
-      "contextual understanding",
-      "artificial",
-      "machine"
+      "conversational ai"
     ],
     "rtl": "none"
   },
@@ -6736,22 +6747,14 @@
     "names": ["da-2"],
     "groups": ["objects"],
     "tags": [
+      "Joule",
       "artificial intelligence",
-      "voice recognition",
-      "npl",
-      "NPL",
       "assistant",
       "chatbot",
-      "machine learning",
       "ai",
-      "digital",
       "assistance",
-      "virtual",
       "intelligence",
       "conversational ai",
-      "contextual understanding",
-      "artificial",
-      "machine",
       "filled",
       "full"
     ],
@@ -6788,7 +6791,7 @@
     "names": ["in-progress-2"],
     "groups": ["time", "status"],
     "tags": [
-      "in process",
+      "in progress",
       "status",
       "working",
       "current",
@@ -6819,7 +6822,7 @@
       "validation",
       "approved"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe2a9": {
     "names": ["walk-me"],
@@ -6833,7 +6836,7 @@
       "help",
       "guidance"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe2aa": {
     "names": ["smart-watch"],
@@ -6867,7 +6870,7 @@
     "names": ["rotate"],
     "groups": ["action"],
     "tags": ["arrow", "square", "object", "rotate", "around", "direction"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe302": {
     "names": ["locate-me-2"],
@@ -6882,7 +6885,7 @@
       "navigation",
       "filled"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe303": {
     "names": ["map-fill"],
@@ -6894,10 +6897,10 @@
       "place",
       "area",
       "solid",
-      "fill",
+      "full",
       "filled"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe304": {
     "names": ["cloud-check"],
@@ -6924,13 +6927,13 @@
     "names": ["biometric-thumb"],
     "groups": ["people"],
     "tags": ["fingerprint", "finger", "thumb", "id", "recognition"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe307": {
     "names": ["biometric-face"],
     "groups": ["people"],
     "tags": ["face", "faceid", "viewfinder", "id", "recognition"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe308": {
     "names": ["people-connected"],
@@ -6945,19 +6948,19 @@
       "collaborate",
       "work"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe309": {
     "names": ["light-mode"],
     "groups": ["action"],
     "tags": ["light", "sun", "sunny", "mode", "day"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe30a": {
     "names": ["dark-mode"],
     "groups": ["action"],
     "tags": ["dark", "moon", "night", "mode"],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe30b": {
     "names": ["select-appointments"],
@@ -6988,7 +6991,7 @@
       "appointment",
       "calendar"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe30d": {
     "names": ["add-calendar"],
@@ -7002,12 +7005,12 @@
       "plus",
       "calendar"
     ],
-    "rtl": "flip"
+    "rtl": "none"
   },
   "0xe30e": {
     "names": ["currency"],
     "groups": ["money"],
     "tags": ["money", "bills", "currency", "payment", "cash"],
-    "rtl": "flip"
+    "rtl": "none"
   }
 }

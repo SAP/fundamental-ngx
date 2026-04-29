@@ -1,0 +1,104 @@
+{
+  "name": "BusyIndicatorComponent",
+  "selector": "fd-busy-indicator",
+  "kind": "Component",
+  "sourceFile": "busy-indicator.component.ts",
+  "sourceLine": 49,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/busy-indicator/busy-indicator.component.ts#L49",
+  "description": "",
+  "inputs": [
+    {
+      "name": "ariaLabel",
+      "type": "null | string",
+      "default": null,
+      "description": "Aria label attribute value.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 60,
+      "since": null
+    },
+    {
+      "name": "ariaLive",
+      "type": "null | 'assertive' | 'polite' | 'off'",
+      "default": null,
+      "description": "Aria live attribute value.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 72,
+      "since": null
+    },
+    {
+      "name": "ariaValueText",
+      "type": "null | string",
+      "default": null,
+      "description": "Aria-valuetext attribute value.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 63,
+      "since": null
+    },
+    {
+      "name": "block",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether to use loader as block element",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 57,
+      "since": null
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "default": null,
+      "description": "add loading label value",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 69,
+      "since": null
+    },
+    {
+      "name": "loading",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether to display the loading indicator animation.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 51,
+      "since": null
+    },
+    {
+      "name": "preventWheelEvents",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether to stop mouse wheel events when the busy indicator is displayed via loading=\"true\".",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 75,
+      "since": null
+    },
+    {
+      "name": "size",
+      "type": "BusyIndicatorSize",
+      "default": null,
+      "description": "The size of the loading indicator, default will be medium",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 54,
+      "since": null
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "default": null,
+      "description": "title attribute value for tooltip.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 66,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

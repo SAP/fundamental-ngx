@@ -1,0 +1,44 @@
+{
+  "name": "DialogCloseButtonComponent",
+  "selector": "[fd-dialog-close-button]",
+  "kind": "Component",
+  "sourceFile": "dialog-close-button.component.ts",
+  "sourceLine": 26,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/dialog/dialog-close-button/dialog-close-button.component.ts#L26",
+  "description": "Directive that applies fundamental dialog styling to a dialog close button.\n\n```html\n<button fd-dialog-close-button></button>\n```",
+  "inputs": [
+    {
+      "name": "ariaLabel",
+      "type": "string",
+      "default": null,
+      "description": "add aria label dynamically to add to the button",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 34,
+      "since": null
+    },
+    {
+      "name": "mobile",
+      "type": "boolean",
+      "default": null,
+      "description": "Displays dialog close button in mobile mode",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 28,
+      "since": null
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "default": null,
+      "description": "add title dynamically to add a tooltip",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 31,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

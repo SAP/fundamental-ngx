@@ -1,0 +1,51 @@
+{
+  "name": "SmartFilterBarConditionsDialogComponent",
+  "selector": "fdp-smart-filter-bar-conditions-dialog",
+  "kind": "Component",
+  "sourceFile": "smart-filter-bar-conditions-dialog.component.ts",
+  "sourceLine": 63,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/smart-filter-bar/components/smart-filter-bar-conditions-dialog/smart-filter-bar-conditions-dialog.component.ts#L63",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "addCondition",
+      "signature": "() => void",
+      "description": "Adds empty condition.",
+      "deprecated": null,
+      "sourceLine": 117,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "applyConditions",
+      "signature": "() => void",
+      "description": "Submits all condition forms.",
+      "deprecated": null,
+      "sourceLine": 136,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "removeCondition",
+      "signature": "(index: number) => void",
+      "description": "Removes condition at defined index",
+      "deprecated": null,
+      "sourceLine": 125,
+      "since": null,
+      "parameters": [
+        {
+          "name": "index",
+          "type": "number",
+          "description": "Index of the condition in the array.",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

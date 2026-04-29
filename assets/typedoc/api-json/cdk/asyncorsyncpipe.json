@@ -1,0 +1,31 @@
+{
+  "name": "AsyncOrSyncPipe",
+  "selector": null,
+  "kind": "Pipe",
+  "sourceFile": "async-or-sync.pipe.ts",
+  "sourceLine": 13,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cdk/utils/pipes/async-or-sync.pipe.ts#L13",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "transform",
+      "signature": "(value: FdkAsyncProperty<T>) => null | T",
+      "description": "Transforms raw async-like value into static one.",
+      "deprecated": null,
+      "sourceLine": 29,
+      "since": null,
+      "parameters": [
+        {
+          "name": "value",
+          "type": "FdkAsyncProperty<T>",
+          "description": "raw value. Can be either a static value, or Promise-like, or Observable-like.",
+          "optional": false
+        }
+      ],
+      "returnType": "null | T"
+    }
+  ],
+  "inherited": null
+}

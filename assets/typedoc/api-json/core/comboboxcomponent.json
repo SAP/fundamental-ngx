@@ -1,0 +1,537 @@
+{
+  "name": "ComboboxComponent",
+  "selector": "fd-combobox",
+  "kind": "Component",
+  "sourceFile": "combobox.component.ts",
+  "sourceLine": 147,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/combobox/combobox.component.ts#L147",
+  "description": "Allows users to filter through results and select a value.\n\nSupports Angular Forms.\n```html\n<fd-combobox\n     [(ngModel)]=\"searchTerm\"\n     [dropdownValues]=\"dropdownValues\"\n     placeholder=\"Type some text...\">\n</fd-combobox>\n```",
+  "inputs": [
+    {
+      "name": "ariaLabel",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "Aria-label for Combobox.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 168,
+      "since": null
+    },
+    {
+      "name": "ariaLabelledBy",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "Aria-Labelledby for element describing Combobox.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 172,
+      "since": null
+    },
+    {
+      "name": "autoComplete",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether the autocomplete should be enabled; Enabled by default",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 289,
+      "since": null
+    },
+    {
+      "name": "buttonFocusable",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether AddOn Button should be focusable",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 318,
+      "since": null
+    },
+    {
+      "name": "byline",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether list item options should be rendered as byline.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 358,
+      "since": null
+    },
+    {
+      "name": "clearButtonFocusable",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether clear button should be focusable.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 325,
+      "since": null
+    },
+    {
+      "name": "closeOnOutsideClick",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether the combobox should close, when a click is performed outside its boundaries. True by default",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 224,
+      "since": null
+    },
+    {
+      "name": "closeOnSelect",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether the popover should close when a user selects a result.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 281,
+      "since": null
+    },
+    {
+      "name": "comboboxId",
+      "type": "string",
+      "default": null,
+      "description": "Id for the Combobox.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 160,
+      "since": null
+    },
+    {
+      "name": "communicateByObject",
+      "type": "boolean",
+      "default": "false",
+      "description": "Defines if combobox should behave same as dropdown. When it's enabled writing inside text input won't\ntrigger onChange function, until it matches one of displayed dropdown values. Also communicating with combobox\ncan be achieved only by objects with same type as dropdownValue",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 304,
+      "since": null
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the search input is disabled. *",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 189,
+      "since": null
+    },
+    {
+      "name": "displayFn",
+      "type": "(str: any) => string",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 311,
+      "since": null
+    },
+    {
+      "name": "dropDownMaxWidthPx",
+      "type": "number",
+      "default": "640",
+      "description": "Max width of the dropdown in pixels. Default is 640px (40rem).",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 258,
+      "since": null
+    },
+    {
+      "name": "dropdownValues",
+      "type": "T[]",
+      "default": "[]",
+      "description": "Values to be filtered in the search input.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 180,
+      "since": null
+    },
+    {
+      "name": "fillControlMode",
+      "type": "PopoverFillMode",
+      "default": "'at-least'",
+      "description": "Preset options for the Select body width, whatever is chosen, the body has a 600px limit.\n* `at-least` will apply a minimum width to the body equivalent to the width of the control. - Default\n* `equal` will apply a width to the body equivalent to the width of the control.\n* 'fit-content' will apply width needed to properly display items inside, independent of control.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 298,
+      "since": null
+    },
+    {
+      "name": "fillOnSelect",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether the input field should be populated with the result picked by the user.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 285,
+      "since": null
+    },
+    {
+      "name": "filterFn",
+      "type": "(contentArray: any[], searchTerm: any) => any[]",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 185,
+      "since": null
+    },
+    {
+      "name": "glyph",
+      "type": "string",
+      "default": "'navigation-down-arrow'",
+      "description": "Icon to display in the right-side button.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 203,
+      "since": null
+    },
+    {
+      "name": "glyphFont",
+      "type": "IconFont",
+      "default": "FD_DEFAULT_ICON_FONT_FAMILY",
+      "description": "Glyph font family",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 207,
+      "since": null
+    },
+    {
+      "name": "groupFn",
+      "type": "Nullable<GroupFunction>",
+      "default": null,
+      "description": "Function used to handle grouping of items.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 250,
+      "since": null
+    },
+    {
+      "name": "highlighting",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether the matching string should be highlighted during filtration.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 277,
+      "since": null
+    },
+    {
+      "name": "includes",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to return results where the input matches the entire string. By default, only results that start\nwith the input search term will be returned.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 348,
+      "since": null
+    },
+    {
+      "name": "inputId",
+      "type": "string",
+      "default": "''",
+      "description": "Id attribute for input element inside Combobox component",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 164,
+      "since": null
+    },
+    {
+      "name": "isSearch",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the Combobox is a Search Field",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 199,
+      "since": null
+    },
+    {
+      "name": "itemTemplate",
+      "type": "TemplateRef<ComboboxItemDirectiveContext<T>>",
+      "default": null,
+      "description": "The template with which to display the individual listed items.\nUse it by passing an ng-template with implicit content. See examples for more info.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 244,
+      "since": null
+    },
+    {
+      "name": "maxHeight",
+      "type": "string",
+      "default": "'50vh'",
+      "description": "Max height of the popover. Any overflowing elements will be accessible through scrolling.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 254,
+      "since": null
+    },
+    {
+      "name": "mobile",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the combobox should be built on mobile mode",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 333,
+      "since": null
+    },
+    {
+      "name": "mobileConfig",
+      "type": "MobileModeConfig",
+      "default": null,
+      "description": "Multi Input Mobile Configuration, it's applied only, when mobile is enabled",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 337,
+      "since": null
+    },
+    {
+      "name": "noDropDownMaxWidth",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the dropdown should have max width.\nSet to true if you want the dropdown to take the width of the control.\nDefault is false",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 265,
+      "since": null
+    },
+    {
+      "name": "openOnKeyboardEvent",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether the combobox should open, when any key is pressed in input (except Escape, Space, Enter). True by default",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 230,
+      "since": null
+    },
+    {
+      "name": "placeholder",
+      "type": "string",
+      "default": null,
+      "description": "Placeholder of the search input. *",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 193,
+      "since": null
+    },
+    {
+      "name": "readOnly",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the combobox is readonly.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 329,
+      "since": null
+    },
+    {
+      "name": "required",
+      "type": "boolean",
+      "default": "false",
+      "description": "If it is mandatory field",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 176,
+      "since": null
+    },
+    {
+      "name": "searchFn",
+      "type": "() => void",
+      "default": null,
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 273,
+      "since": null
+    },
+    {
+      "name": "showClearButton",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to show the clear search term button",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 213,
+      "since": null
+    },
+    {
+      "name": "showDropdownButton",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether to display the addon button.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 341,
+      "since": null
+    },
+    {
+      "name": "state",
+      "type": "'error' | 'default' | 'information' | 'warning' | 'success'",
+      "default": null,
+      "description": "The state of the form control - applies css classes.\n Can be `success`, `error`, `warning`, `information` or blank for default.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 237,
+      "since": null
+    },
+    {
+      "name": "tabOutStrategy",
+      "type": "'close' | 'closeAndSelect'",
+      "default": "'closeAndSelect'",
+      "description": "Action to perform when user shifts focus from the dropdown.\n- `close` will close the dropdown preserving previously selected value.\n- `closeAndSelect` will close the dropdown and select last focused dropdown item.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 366,
+      "since": null
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "default": null,
+      "description": "The tooltip for the multi-input icon.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 354,
+      "since": null
+    },
+    {
+      "name": "triggers",
+      "type": "string[]",
+      "default": "[]",
+      "description": "The trigger events that will open/close the options popover.\n Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp).",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 220,
+      "since": null
+    },
+    {
+      "name": "valueProperty",
+      "type": "null | string",
+      "default": null,
+      "description": "When communicateByObject is true, specifies which property of the selected object\nshould be used as the form control value. If not specified, the entire object is returned.\nExample: if dropdownValues = [{ displayedValue: 'Apple', code: 'A1' }] and valueProperty = 'code',\nthe form control value will be 'A1' instead of the entire object.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 418,
+      "since": null
+    },
+    {
+      "name": "width",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "Custom width of the control.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 269,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "inputTextChange",
+      "type": "string",
+      "default": null,
+      "description": "Event emitted when the input text changes.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 378,
+      "since": null
+    },
+    {
+      "name": "itemClicked",
+      "type": "ComboboxItem",
+      "default": null,
+      "description": "Event emitted when an item is clicked. Use *$event* to retrieve it.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 370,
+      "since": null
+    },
+    {
+      "name": "openChange",
+      "type": "boolean",
+      "default": null,
+      "description": "Event emitted, when the combobox's popover body is opened or closed",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 374,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "dialogApprove",
+      "signature": "() => void",
+      "description": "Handle dialog approval, closes popover and propagates data changes.",
+      "deprecated": null,
+      "sourceLine": 610,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "dialogDismiss",
+      "signature": "(term: any) => void",
+      "description": "Handle dialog dismissing, closes popover and sets backup data.",
+      "deprecated": null,
+      "sourceLine": 603,
+      "since": null,
+      "parameters": [
+        {
+          "name": "term",
+          "type": "any",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "getValue",
+      "signature": "() => any",
+      "description": "Current select value",
+      "deprecated": null,
+      "sourceLine": 780,
+      "since": null,
+      "parameters": [],
+      "returnType": "any"
+    },
+    {
+      "name": "handleAutoComplete",
+      "signature": "(event: AutoCompleteEvent) => void",
+      "description": "Method that handles complete event from auto complete directive, setting the new value, and closing popover",
+      "deprecated": null,
+      "sourceLine": 748,
+      "since": null,
+      "parameters": [
+        {
+          "name": "event",
+          "type": "AutoCompleteEvent",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "handleListFocusEscape",
+      "signature": "(direction: FocusEscapeDirection) => void",
+      "description": "Method passed to list component",
+      "deprecated": null,
+      "sourceLine": 684,
+      "since": null,
+      "parameters": [
+        {
+          "name": "direction",
+          "type": "FocusEscapeDirection",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

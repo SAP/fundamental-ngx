@@ -1,0 +1,24 @@
+{
+  "name": "MessageBoxTemplateDirective",
+  "selector": "[fdMessageBoxTemplate]",
+  "kind": "Directive",
+  "sourceFile": "message-box-template.directive.ts",
+  "sourceLine": 16,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/message-box/directives/message-box-template.directive.ts#L16",
+  "description": "",
+  "inputs": [
+    {
+      "name": "fdMessageBoxTemplateConfig",
+      "type": "T",
+      "default": null,
+      "description": "Custom dialog config model.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 19,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

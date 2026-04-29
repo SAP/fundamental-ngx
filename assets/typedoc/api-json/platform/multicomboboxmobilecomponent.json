@@ -1,0 +1,13 @@
+{
+  "name": "MultiComboboxMobileComponent",
+  "selector": "fdp-multi-combobox-mobile",
+  "kind": "Component",
+  "sourceFile": "multi-combobox-mobile.component.ts",
+  "sourceLine": 33,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/multi-combobox/multi-combobox-mobile/multi-combobox/multi-combobox-mobile.component.ts#L33",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

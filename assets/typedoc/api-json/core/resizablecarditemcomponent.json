@@ -1,0 +1,193 @@
+{
+  "name": "ResizableCardItemComponent",
+  "selector": "fd-resizable-card-item",
+  "kind": "Component",
+  "sourceFile": "resizable-card-item.component.ts",
+  "sourceLine": 52,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/resizable-card-layout/resizable-card-layout/resizable-card-item/resizable-card-item.component.ts#L52",
+  "description": "",
+  "inputs": [
+    {
+      "name": "itemId",
+      "type": "string",
+      "default": null,
+      "description": "set uinque id for the card",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 66,
+      "since": null
+    },
+    {
+      "name": "resizable",
+      "type": "boolean",
+      "default": "true",
+      "description": "Card can be set to resizable=false, to restrict card resize",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 145,
+      "since": null
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "default": null,
+      "description": "set title of the card",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 70,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "miniContentReached",
+      "type": "ResizedEvent",
+      "default": null,
+      "description": "Emits when minimum height of card content area is reached",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 188,
+      "since": null
+    },
+    {
+      "name": "miniHeaderReached",
+      "type": "ResizedEvent",
+      "default": null,
+      "description": "Emits when card height is reduced to show only header",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 184,
+      "since": null
+    },
+    {
+      "name": "resized",
+      "type": "ResizedEvent",
+      "default": null,
+      "description": "Emits when card resize is completed",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 180,
+      "since": null
+    },
+    {
+      "name": "resizing",
+      "type": "ResizedEvent",
+      "default": null,
+      "description": "Emits when card is still resizing",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 176,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "focus",
+      "signature": "() => void",
+      "description": "Sets focus on the element",
+      "deprecated": null,
+      "sourceLine": 411,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "getMaxColSpan",
+      "signature": "(layoutSize: string) => number",
+      "description": "Returns max width for card, based on layout size passed",
+      "deprecated": null,
+      "sourceLine": 432,
+      "since": null,
+      "parameters": [
+        {
+          "name": "layoutSize",
+          "type": "string",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "number"
+    },
+    {
+      "name": "getResizedEventObject",
+      "signature": "() => ResizedEvent",
+      "description": "Returns ResizedEvent object to emit.",
+      "deprecated": null,
+      "sourceLine": 474,
+      "since": null,
+      "parameters": [],
+      "returnType": "ResizedEvent"
+    },
+    {
+      "name": "hideResizeIcon",
+      "signature": "() => void",
+      "description": "Hides resize icon",
+      "deprecated": null,
+      "sourceLine": 425,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "onMouseDown",
+      "signature": "(event: MouseEvent, resizeDirection: ResizeDirection) => void",
+      "description": "When resize handler is pressed and resizing may start.",
+      "deprecated": null,
+      "sourceLine": 395,
+      "since": null,
+      "parameters": [
+        {
+          "name": "event",
+          "type": "MouseEvent",
+          "description": "{MouseEvent}",
+          "optional": false
+        },
+        {
+          "name": "resizeDirection",
+          "type": "ResizeDirection",
+          "description": "which handler is pressed to resize",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onMouseUp",
+      "signature": "() => void",
+      "description": "when resizing of card stops",
+      "deprecated": null,
+      "sourceLine": 362,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "showResizeIcon",
+      "signature": "() => void",
+      "description": "Shows resize icon",
+      "deprecated": null,
+      "sourceLine": 417,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "verifyUpdateCardWidth",
+      "signature": "(layoutSize: string) => void",
+      "description": "Update card width if it exceeds column span based on layout",
+      "deprecated": null,
+      "sourceLine": 453,
+      "since": null,
+      "parameters": [
+        {
+          "name": "layoutSize",
+          "type": "string",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

@@ -1,0 +1,34 @@
+{
+  "name": "CalendarDateRange",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "endValue",
+      "type": "string",
+      "default": null,
+      "description": "End of date range formatted according to the `formatPattern` property\nof the `ui5-calendar` that hosts the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 46,
+      "since": null
+    },
+    {
+      "name": "startValue",
+      "type": "string",
+      "default": null,
+      "description": "Start of date range formatted according to the `formatPattern` property\nof the `ui5-calendar` that hosts the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 52,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

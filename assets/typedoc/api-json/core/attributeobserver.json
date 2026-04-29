@@ -1,0 +1,48 @@
+{
+  "name": "AttributeObserver",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "attribute.observer.ts",
+  "sourceLine": 11,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cdk/utils/services/observers/attribute.observer.ts#L11",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "observe",
+      "signature": "(elementOrRef: Element | ElementRef<Element> | HasElementRef<Element>) => Observable<MutationRecord[]>",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 31,
+      "since": null,
+      "parameters": [
+        {
+          "name": "elementOrRef",
+          "type": "Element | ElementRef<Element> | HasElementRef<Element>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "Observable<MutationRecord[]>"
+    },
+    {
+      "name": "unobserve",
+      "signature": "(element: Element | ElementRef<Element> | HasElementRef<Element>) => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 45,
+      "since": null,
+      "parameters": [
+        {
+          "name": "element",
+          "type": "Element | ElementRef<Element> | HasElementRef<Element>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

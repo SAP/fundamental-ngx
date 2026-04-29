@@ -1,0 +1,70 @@
+{
+  "name": "BaseDataSource",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "base-data-source.class.ts",
+  "sourceLine": 6,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cdk/data-source/base/base-data-source.class.ts#L6",
+  "description": "Data source provider class controls the data stream.",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "getTotalItems",
+      "signature": "(predicate: string | Map<string, string>) => Observable<number>",
+      "description": "Returns the Observable of a total items number filtered by the `predicate` param.",
+      "deprecated": null,
+      "sourceLine": 95,
+      "since": null,
+      "parameters": [
+        {
+          "name": "predicate",
+          "type": "string | Map<string, string>",
+          "description": "Search query.",
+          "optional": false
+        }
+      ],
+      "returnType": "Observable<number>"
+    },
+    {
+      "name": "match",
+      "signature": "(predicate: string | Map<string, string>, start: number, end: number) => void",
+      "description": "Searches through the data source with defined parameters.",
+      "deprecated": null,
+      "sourceLine": 70,
+      "since": null,
+      "parameters": [
+        {
+          "name": "predicate",
+          "type": "string | Map<string, string>",
+          "description": "Search query.",
+          "optional": false
+        },
+        {
+          "name": "start",
+          "type": "number",
+          "description": "start index.",
+          "optional": false
+        },
+        {
+          "name": "end",
+          "type": "number",
+          "description": "end index.",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "unsubscribe",
+      "signature": "() => void",
+      "description": "Closes the stream",
+      "deprecated": null,
+      "sourceLine": 104,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

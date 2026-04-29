@@ -1,0 +1,45 @@
+{
+  "name": "FormGroupComponent",
+  "selector": "fd-form-group",
+  "kind": "Component",
+  "sourceFile": "form-group.component.ts",
+  "sourceLine": 33,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/form/form-group/form-group.component.ts#L33",
+  "description": "Represents a form group element.\n\n```html\n<fd-form-group>\n    <div fd-form-item>\n        <input fd-form-control type=\"radio\" checked>\n        <fd-form-label>Option One</fd-form-label>\n    </div>\n</fd-form-group>\n```",
+  "inputs": [
+    {
+      "name": "isInline",
+      "type": "boolean",
+      "default": null,
+      "description": "Determines if form items should be displayed inline or not\nDefault value is set to false;",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 42,
+      "since": null
+    },
+    {
+      "name": "withSpacing",
+      "type": "boolean",
+      "default": "false",
+      "description": "Adds gap spacing between form items.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 46,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "buildComponentCssClass",
+      "signature": "() => string[]",
+      "description": "This method is responsible for building a css class based on current state\n It is implementation of CssClassBuilder interface and\n should be used with",
+      "deprecated": null,
+      "sourceLine": 59,
+      "since": null,
+      "parameters": [],
+      "returnType": "string[]"
+    }
+  ],
+  "inherited": null
+}

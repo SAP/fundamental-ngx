@@ -1,31 +1,4812 @@
 {
 	"id": 0,
-	"name": "fundamental-ngx",
+	"name": "@fundamental-ngx/moment-adapter",
 	"variant": "project",
 	"kind": 1,
 	"flags": {},
-	"packageName": "fundamental-ngx",
+	"children": [
+		{
+			"id": 7,
+			"name": "MomentDatetimeAdapter",
+			"variant": "declaration",
+			"kind": 128,
+			"flags": {},
+			"comment": {
+				"summary": [],
+				"blockTags": [
+					{
+						"tag": "@deprecated",
+						"content": [
+							{
+								"kind": "text",
+								"text": "Use "
+							},
+							{
+								"kind": "code",
+								"text": "`DayjsDatetimeAdapter`"
+							},
+							{
+								"kind": "text",
+								"text": " from "
+							},
+							{
+								"kind": "code",
+								"text": "`@fundamental-ngx/datetime-adapter`"
+							},
+							{
+								"kind": "text",
+								"text": " package instead.\n\nDatetimeAdapter implementation based on moment.\n\nThis uses moment.js as a date model instance.\nIt relies on moment implementation for formatting and translation purposes."
+							}
+						]
+					}
+				]
+			},
+			"children": [
+				{
+					"id": 8,
+					"name": "constructor",
+					"variant": "declaration",
+					"kind": 512,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 48,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L48"
+						}
+					],
+					"signatures": [
+						{
+							"id": 9,
+							"name": "new MomentDatetimeAdapter",
+							"variant": "signature",
+							"kind": 16384,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+									"line": 48,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L48"
+								}
+							],
+							"parameters": [
+								{
+									"id": 10,
+									"name": "localeId",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								},
+								{
+									"id": 11,
+									"name": "_options",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "reference",
+										"target": 3,
+										"name": "MomentDatetimeAdapterOptions",
+										"package": "@fundamental-ngx/moment-adapter"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": 7,
+								"name": "MomentDatetimeAdapter",
+								"package": "@fundamental-ngx/moment-adapter"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter<Moment>.constructor"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter<Moment>.constructor"
+					}
+				},
+				{
+					"id": 168,
+					"name": "locale",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isProtected": true
+					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "current locale"
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "core/datetime/datetime-adapter.ts",
+							"line": 318,
+							"character": 14,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/datetime/datetime-adapter.ts#L318"
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.locale"
+					}
+				},
+				{
+					"id": 167,
+					"name": "localeChanges",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "locale changes stream"
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "core/datetime/datetime-adapter.ts",
+							"line": 315,
+							"character": 13,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/datetime/datetime-adapter.ts#L315"
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/rxjs/src/internal/Observable.ts",
+							"qualifiedName": "Observable"
+						},
+						"typeArguments": [
+							{
+								"type": "intrinsic",
+								"name": "void"
+							}
+						],
+						"name": "Observable",
+						"package": "rxjs"
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.localeChanges"
+					}
+				},
+				{
+					"id": 121,
+					"name": "addCalendarDays",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 270,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L270"
+						}
+					],
+					"signatures": [
+						{
+							"id": 122,
+							"name": "addCalendarDays",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+									"line": 270,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L270"
+								}
+							],
+							"parameters": [
+								{
+									"id": 123,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+											"qualifiedName": "moment.Moment"
+										},
+										"name": "Moment",
+										"package": "moment",
+										"qualifiedName": "moment.Moment"
+									}
+								},
+								{
+									"id": 124,
+									"name": "days",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+									"qualifiedName": "moment.Moment"
+								},
+								"name": "Moment",
+								"package": "moment",
+								"qualifiedName": "moment.Moment"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.addCalendarDays"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.addCalendarDays"
+					}
+				},
+				{
+					"id": 117,
+					"name": "addCalendarMonths",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 266,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L266"
+						}
+					],
+					"signatures": [
+						{
+							"id": 118,
+							"name": "addCalendarMonths",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+									"line": 266,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L266"
+								}
+							],
+							"parameters": [
+								{
+									"id": 119,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+											"qualifiedName": "moment.Moment"
+										},
+										"name": "Moment",
+										"package": "moment",
+										"qualifiedName": "moment.Moment"
+									}
+								},
+								{
+									"id": 120,
+									"name": "months",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+									"qualifiedName": "moment.Moment"
+								},
+								"name": "Moment",
+								"package": "moment",
+								"qualifiedName": "moment.Moment"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.addCalendarMonths"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.addCalendarMonths"
+					}
+				},
+				{
+					"id": 113,
+					"name": "addCalendarYears",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 262,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L262"
+						}
+					],
+					"signatures": [
+						{
+							"id": 114,
+							"name": "addCalendarYears",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+									"line": 262,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L262"
+								}
+							],
+							"parameters": [
+								{
+									"id": 115,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+											"qualifiedName": "moment.Moment"
+										},
+										"name": "Moment",
+										"package": "moment",
+										"qualifiedName": "moment.Moment"
+									}
+								},
+								{
+									"id": 116,
+									"name": "years",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+									"qualifiedName": "moment.Moment"
+								},
+								"name": "Moment",
+								"package": "moment",
+								"qualifiedName": "moment.Moment"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.addCalendarYears"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.addCalendarYears"
+					}
+				},
+				{
+					"id": 125,
+					"name": "clone",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 274,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L274"
+						}
+					],
+					"signatures": [
+						{
+							"id": 126,
+							"name": "clone",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+									"line": 274,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L274"
+								}
+							],
+							"parameters": [
+								{
+									"id": 127,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+											"qualifiedName": "moment.Moment"
+										},
+										"name": "Moment",
+										"package": "moment",
+										"qualifiedName": "moment.Moment"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+									"qualifiedName": "moment.Moment"
+								},
+								"name": "Moment",
+								"package": "moment",
+								"qualifiedName": "moment.Moment"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.clone"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.clone"
+					}
+				},
+				{
+					"id": 180,
+					"name": "compareDate",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "core/datetime/datetime-adapter.ts",
+							"line": 374,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/datetime/datetime-adapter.ts#L374"
+						}
+					],
+					"signatures": [
+						{
+							"id": 181,
+							"name": "compareDate",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Compares two dates."
+									}
+								],
+								"blockTags": [
+									{
+										"tag": "@returns",
+										"content": [
+											{
+												"kind": "text",
+												"text": "0 if the dates are equal, a number less than 0 if the first date is earlier,\n    a number greater than 0 if the first date is later."
+											}
+										]
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "core/datetime/datetime-adapter.ts",
+									"line": 374,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/datetime/datetime-adapter.ts#L374"
+								}
+							],
+							"parameters": [
+								{
+									"id": 182,
+									"name": "first",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "The first date to compare."
+											}
+										]
+									},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+											"qualifiedName": "moment.Moment"
+										},
+										"name": "Moment",
+										"package": "moment",
+										"qualifiedName": "moment.Moment"
+									}
+								},
+								{
+									"id": 183,
+									"name": "second",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "The second date to compare."
+											}
+										]
+									},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+											"qualifiedName": "moment.Moment"
+										},
+										"name": "Moment",
+										"package": "moment",
+										"qualifiedName": "moment.Moment"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.compareDate"
+							}
+						}
+					],
+					"inheritedFrom": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.compareDate"
+					}
+				},
+				{
+					"id": 104,
+					"name": "createDate",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 228,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L228"
+						}
+					],
+					"signatures": [
+						{
+							"id": 105,
+							"name": "createDate",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+									"line": 228,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L228"
+								}
+							],
+							"parameters": [
+								{
+									"id": 106,
+									"name": "year",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								},
+								{
+									"id": 107,
+									"name": "month",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								},
+								{
+									"id": 108,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+									"qualifiedName": "moment.Moment"
+								},
+								"name": "Moment",
+								"package": "moment",
+								"qualifiedName": "moment.Moment"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.createDate"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.createDate"
+					}
+				},
+				{
+					"id": 132,
+					"name": "dateTimesEqual",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 290,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L290"
+						}
+					],
+					"signatures": [
+						{
+							"id": 133,
+							"name": "dateTimesEqual",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+									"line": 290,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L290"
+								}
+							],
+							"parameters": [
+								{
+									"id": 134,
+									"name": "date1",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+											"qualifiedName": "moment.Moment"
+										},
+										"name": "Moment",
+										"package": "moment",
+										"qualifiedName": "moment.Moment"
+									}
+								},
+								{
+									"id": 135,
+									"name": "date2",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+											"qualifiedName": "moment.Moment"
+										},
+										"name": "Moment",
+										"package": "moment",
+										"qualifiedName": "moment.Moment"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "boolean"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.dateTimesEqual"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.dateTimesEqual"
+					}
+				},
+				{
+					"id": 128,
+					"name": "datesEqual",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 282,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L282"
+						}
+					],
+					"signatures": [
+						{
+							"id": 129,
+							"name": "datesEqual",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+									"line": 282,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L282"
+								}
+							],
+							"parameters": [
+								{
+									"id": 130,
+									"name": "date1",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+											"qualifiedName": "moment.Moment"
+										},
+										"name": "Moment",
+										"package": "moment",
+										"qualifiedName": "moment.Moment"
+									}
+								},
+								{
+									"id": 131,
+									"name": "date2",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+											"qualifiedName": "moment.Moment"
+										},
+										"name": "Moment",
+										"package": "moment",
+										"qualifiedName": "moment.Moment"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "boolean"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.datesEqual"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.datesEqual"
+					}
+				},
+				{
+					"id": 100,
+					"name": "format",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 214,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L214"
+						}
+					],
+					"signatures": [
+						{
+							"id": 101,
+							"name": "format",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+									"line": 214,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L214"
+								}
+							],
+							"parameters": [
+								{
+									"id": 102,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+											"qualifiedName": "moment.Moment"
+										},
+										"name": "Moment",
+										"package": "moment",
+										"qualifiedName": "moment.Moment"
+									}
+								},
+								{
+									"id": 103,
+									"name": "displayFormat",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.format"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.format"
+					}
+				},
+				{
+					"id": 15,
+					"name": "fromNow",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {
+						"isOptional": true
+					},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 64,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L64"
+						}
+					],
+					"signatures": [
+						{
+							"id": 16,
+							"name": "fromNow",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+									"line": 64,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L64"
+								}
+							],
+							"parameters": [
+								{
+									"id": 17,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+											"qualifiedName": "moment.Moment"
+										},
+										"name": "Moment",
+										"package": "moment",
+										"qualifiedName": "moment.Moment"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.fromNow"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.fromNow"
+					}
+				},
+				{
+					"id": 175,
+					"name": "getAmountOfWeeks",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "core/datetime/datetime-adapter.ts",
+							"line": 357,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/datetime/datetime-adapter.ts#L357"
+						}
+					],
+					"signatures": [
+						{
+							"id": 176,
+							"name": "getAmountOfWeeks",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Get Amount of weeks in given month/year"
+									}
+								],
+								"blockTags": [
+									{
+										"tag": "@returns",
+										"content": [
+											{
+												"kind": "text",
+												"text": "Number of weeks in the given month"
+											}
+										]
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "core/datetime/datetime-adapter.ts",
+									"line": 357,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/datetime/datetime-adapter.ts#L357"
+								}
+							],
+							"parameters": [
+								{
+									"id": 177,
+									"name": "year",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "The year of the date"
+											}
+										]
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								},
+								{
+									"id": 178,
+									"name": "month",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "The month of the date"
+											}
+										]
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								},
+								{
+									"id": 179,
+									"name": "firstDayOfWeek",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "The first day of week. 1 - Sunday, 2 - Monday..."
+											}
+										]
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.getAmountOfWeeks"
+							}
+						}
+					],
+					"inheritedFrom": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.getAmountOfWeeks"
+					}
+				},
+				{
+					"id": 27,
+					"name": "getDate",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 90,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L90"
+						}
+					],
+					"signatures": [
+						{
+							"id": 28,
+							"name": "getDate",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+									"line": 90,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L90"
+								}
+							],
+							"parameters": [
+								{
+									"id": 29,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+											"qualifiedName": "moment.Moment"
+										},
+										"name": "Moment",
+										"package": "moment",
+										"qualifiedName": "moment.Moment"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.getDate"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.getDate"
+					}
+				},
+				{
+					"id": 60,
+					"name": "getDateNames",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 138,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L138"
+						}
+					],
+					"signatures": [
+						{
+							"id": 61,
+							"name": "getDateNames",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+									"line": 138,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L138"
+								}
+							],
+							"type": {
+								"type": "array",
+								"elementType": {
+									"type": "intrinsic",
+									"name": "string"
+								}
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.getDateNames"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.getDateNames"
+					}
+				},
+				{
+					"id": 30,
+					"name": "getDayOfWeek",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 94,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L94"
+						}
+					],
+					"signatures": [
+						{
+							"id": 31,
+							"name": "getDayOfWeek",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+									"line": 94,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L94"
+								}
+							],
+							"parameters": [
+								{
+									"id": 32,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+											"qualifiedName": "moment.Moment"
+										},
+										"name": "Moment",
+										"package": "moment",
+										"qualifiedName": "moment.Moment"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.getDayOfWeek"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.getDayOfWeek"
+					}
+				},
+				{
+					"id": 62,
+					"name": "getDayOfWeekNames",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 142,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L142"
+						}
+					],
+					"signatures": [
+						{
+							"id": 63,
+							"name": "getDayOfWeekNames",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+									"line": 142,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L142"
+								}
+							],
+							"parameters": [
+								{
+									"id": 64,
+									"name": "style",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "union",
+										"types": [
+											{
+												"type": "literal",
+												"value": "long"
+											},
+											{
+												"type": "literal",
+												"value": "short"
+											},
+											{
+												"type": "literal",
+												"value": "narrow"
+											}
+										]
+									}
+								}
+							],
+							"type": {
+								"type": "array",
+								"elementType": {
+									"type": "intrinsic",
+									"name": "string"
+								}
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.getDayOfWeekNames"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.getDayOfWeekNames"
+					}
+				},
+				{
+					"id": 88,
+					"name": "getDayPeriodNames",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 188,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L188"
+						}
+					],
+					"signatures": [
+						{
+							"id": 89,
+							"name": "getDayPeriodNames",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+									"line": 188,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L188"
+								}
+							],
+							"parameters": [
+								{
+									"id": 90,
+									"name": "isLower",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "boolean"
+									},
+									"defaultValue": "false"
+								}
+							],
+							"type": {
+								"type": "tuple",
+								"elements": [
+									{
+										"type": "intrinsic",
+										"name": "string"
+									},
+									{
+										"type": "intrinsic",
+										"name": "string"
+									}
+								]
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.getDayPeriodNames"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.getDayPeriodNames"
+					}
+				},
+				{
+					"id": 91,
+					"name": "getFirstDayOfWeek",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 195,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L195"
+						}
+					],
+					"signatures": [
+						{
+							"id": 92,
+							"name": "getFirstDayOfWeek",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+									"line": 195,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L195"
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.getFirstDayOfWeek"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.getFirstDayOfWeek"
+					}
+				},
+				{
+					"id": 71,
+					"name": "getHourNames",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 162,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L162"
+						}
+					],
+					"signatures": [
+						{
+							"id": 72,
+							"name": "getHourNames",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+									"line": 162,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L162"
+								}
+							],
+							"parameters": [
+								{
+									"id": 73,
+									"name": "__namedParameters",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reflection",
+										"declaration": {
+											"id": 74,
+											"name": "__type",
+											"variant": "declaration",
+											"kind": 65536,
+											"flags": {},
+											"children": [
+												{
+													"id": 76,
+													"name": "meridian",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+															"line": 162,
+															"character": 62,
+															"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L162"
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "boolean"
+													}
+												},
+												{
+													"id": 75,
+													"name": "twoDigit",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+															"line": 162,
+															"character": 43,
+															"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L162"
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "boolean"
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Properties",
+													"children": [
+														76,
+														75
+													]
+												}
+											],
+											"sources": [
+												{
+													"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+													"line": 162,
+													"character": 41,
+													"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L162"
+												}
+											]
+										}
+									}
+								}
+							],
+							"type": {
+								"type": "array",
+								"elementType": {
+									"type": "intrinsic",
+									"name": "string"
+								}
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.getHourNames"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.getHourNames"
+					}
+				},
+				{
+					"id": 33,
+					"name": "getHours",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 98,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L98"
+						}
+					],
+					"signatures": [
+						{
+							"id": 34,
+							"name": "getHours",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+									"line": 98,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L98"
+								}
+							],
+							"parameters": [
+								{
+									"id": 35,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+											"qualifiedName": "moment.Moment"
+										},
+										"name": "Moment",
+										"package": "moment",
+										"qualifiedName": "moment.Moment"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.getHours"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.getHours"
+					}
+				},
+				{
+					"id": 77,
+					"name": "getMinuteNames",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 169,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L169"
+						}
+					],
+					"signatures": [
+						{
+							"id": 78,
+							"name": "getMinuteNames",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+									"line": 169,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L169"
+								}
+							],
+							"parameters": [
+								{
+									"id": 79,
+									"name": "__namedParameters",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reflection",
+										"declaration": {
+											"id": 80,
+											"name": "__type",
+											"variant": "declaration",
+											"kind": 65536,
+											"flags": {},
+											"children": [
+												{
+													"id": 82,
+													"name": "minuteStep",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isOptional": true
+													},
+													"sources": [
+														{
+															"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+															"line": 169,
+															"character": 70,
+															"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L169"
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "number"
+													}
+												},
+												{
+													"id": 81,
+													"name": "twoDigit",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+															"line": 169,
+															"character": 51,
+															"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L169"
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "boolean"
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Properties",
+													"children": [
+														82,
+														81
+													]
+												}
+											],
+											"sources": [
+												{
+													"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+													"line": 169,
+													"character": 49,
+													"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L169"
+												}
+											]
+										}
+									}
+								}
+							],
+							"type": {
+								"type": "array",
+								"elementType": {
+									"type": "intrinsic",
+									"name": "string"
+								}
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.getMinuteNames"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.getMinuteNames"
+					}
+				},
+				{
+					"id": 36,
+					"name": "getMinutes",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 102,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L102"
+						}
+					],
+					"signatures": [
+						{
+							"id": 37,
+							"name": "getMinutes",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+									"line": 102,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L102"
+								}
+							],
+							"parameters": [
+								{
+									"id": 38,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+											"qualifiedName": "moment.Moment"
+										},
+										"name": "Moment",
+										"package": "moment",
+										"qualifiedName": "moment.Moment"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.getMinutes"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.getMinutes"
+					}
+				},
+				{
+					"id": 24,
+					"name": "getMonth",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 86,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L86"
+						}
+					],
+					"signatures": [
+						{
+							"id": 25,
+							"name": "getMonth",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+									"line": 86,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L86"
+								}
+							],
+							"parameters": [
+								{
+									"id": 26,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+											"qualifiedName": "moment.Moment"
+										},
+										"name": "Moment",
+										"package": "moment",
+										"qualifiedName": "moment.Moment"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.getMonth"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.getMonth"
+					}
+				},
+				{
+					"id": 57,
+					"name": "getMonthNames",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 126,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L126"
+						}
+					],
+					"signatures": [
+						{
+							"id": 58,
+							"name": "getMonthNames",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+									"line": 126,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L126"
+								}
+							],
+							"parameters": [
+								{
+									"id": 59,
+									"name": "style",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "union",
+										"types": [
+											{
+												"type": "literal",
+												"value": "long"
+											},
+											{
+												"type": "literal",
+												"value": "short"
+											},
+											{
+												"type": "literal",
+												"value": "narrow"
+											}
+										]
+									}
+								}
+							],
+							"type": {
+								"type": "array",
+								"elementType": {
+									"type": "intrinsic",
+									"name": "string"
+								}
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.getMonthNames"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.getMonthNames"
+					}
+				},
+				{
+					"id": 93,
+					"name": "getNumDaysInMonth",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 199,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L199"
+						}
+					],
+					"signatures": [
+						{
+							"id": 94,
+							"name": "getNumDaysInMonth",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+									"line": 199,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L199"
+								}
+							],
+							"parameters": [
+								{
+									"id": 95,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+											"qualifiedName": "moment.Moment"
+										},
+										"name": "Moment",
+										"package": "moment",
+										"qualifiedName": "moment.Moment"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.getNumDaysInMonth"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.getNumDaysInMonth"
+					}
+				},
+				{
+					"id": 83,
+					"name": "getSecondNames",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 180,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L180"
+						}
+					],
+					"signatures": [
+						{
+							"id": 84,
+							"name": "getSecondNames",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+									"line": 180,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L180"
+								}
+							],
+							"parameters": [
+								{
+									"id": 85,
+									"name": "__namedParameters",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reflection",
+										"declaration": {
+											"id": 86,
+											"name": "__type",
+											"variant": "declaration",
+											"kind": 65536,
+											"flags": {},
+											"children": [
+												{
+													"id": 87,
+													"name": "twoDigit",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+															"line": 180,
+															"character": 35,
+															"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L180"
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "boolean"
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Properties",
+													"children": [
+														87
+													]
+												}
+											],
+											"sources": [
+												{
+													"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+													"line": 180,
+													"character": 33,
+													"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L180"
+												}
+											]
+										}
+									}
+								}
+							],
+							"type": {
+								"type": "array",
+								"elementType": {
+									"type": "intrinsic",
+									"name": "string"
+								}
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.getSecondNames"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.getSecondNames"
+					}
+				},
+				{
+					"id": 39,
+					"name": "getSeconds",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 106,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L106"
+						}
+					],
+					"signatures": [
+						{
+							"id": 40,
+							"name": "getSeconds",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+									"line": 106,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L106"
+								}
+							],
+							"parameters": [
+								{
+									"id": 41,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+											"qualifiedName": "moment.Moment"
+										},
+										"name": "Moment",
+										"package": "moment",
+										"qualifiedName": "moment.Moment"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.getSeconds"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.getSeconds"
+					}
+				},
+				{
+					"id": 68,
+					"name": "getWeekName",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 158,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L158"
+						}
+					],
+					"signatures": [
+						{
+							"id": 69,
+							"name": "getWeekName",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+									"line": 158,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L158"
+								}
+							],
+							"parameters": [
+								{
+									"id": 70,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+											"qualifiedName": "moment.Moment"
+										},
+										"name": "Moment",
+										"package": "moment",
+										"qualifiedName": "moment.Moment"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.getWeekName"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.getWeekName"
+					}
+				},
+				{
+					"id": 54,
+					"name": "getWeekNumber",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 122,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L122"
+						}
+					],
+					"signatures": [
+						{
+							"id": 55,
+							"name": "getWeekNumber",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+									"line": 122,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L122"
+								}
+							],
+							"parameters": [
+								{
+									"id": 56,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+											"qualifiedName": "moment.Moment"
+										},
+										"name": "Moment",
+										"package": "moment",
+										"qualifiedName": "moment.Moment"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.getWeekNumber"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.getWeekNumber"
+					}
+				},
+				{
+					"id": 21,
+					"name": "getYear",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 82,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L82"
+						}
+					],
+					"signatures": [
+						{
+							"id": 22,
+							"name": "getYear",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+									"line": 82,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L82"
+								}
+							],
+							"parameters": [
+								{
+									"id": 23,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+											"qualifiedName": "moment.Moment"
+										},
+										"name": "Moment",
+										"package": "moment",
+										"qualifiedName": "moment.Moment"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.getYear"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.getYear"
+					}
+				},
+				{
+					"id": 65,
+					"name": "getYearName",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 154,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L154"
+						}
+					],
+					"signatures": [
+						{
+							"id": 66,
+							"name": "getYearName",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+									"line": 154,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L154"
+								}
+							],
+							"parameters": [
+								{
+									"id": 67,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+											"qualifiedName": "moment.Moment"
+										},
+										"name": "Moment",
+										"package": "moment",
+										"qualifiedName": "moment.Moment"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.getYearName"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.getYearName"
+					}
+				},
+				{
+					"id": 136,
+					"name": "isBetween",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 298,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L298"
+						}
+					],
+					"signatures": [
+						{
+							"id": 137,
+							"name": "isBetween",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+									"line": 298,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L298"
+								}
+							],
+							"parameters": [
+								{
+									"id": 138,
+									"name": "dateToCheck",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+											"qualifiedName": "moment.Moment"
+										},
+										"name": "Moment",
+										"package": "moment",
+										"qualifiedName": "moment.Moment"
+									}
+								},
+								{
+									"id": 139,
+									"name": "startDate",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+											"qualifiedName": "moment.Moment"
+										},
+										"name": "Moment",
+										"package": "moment",
+										"qualifiedName": "moment.Moment"
+									}
+								},
+								{
+									"id": 140,
+									"name": "endDate",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+											"qualifiedName": "moment.Moment"
+										},
+										"name": "Moment",
+										"package": "moment",
+										"qualifiedName": "moment.Moment"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "boolean"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.isBetween"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.isBetween"
+					}
+				},
+				{
+					"id": 147,
+					"name": "isTimeFormatIncludesDayPeriod",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 314,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L314"
+						}
+					],
+					"signatures": [
+						{
+							"id": 148,
+							"name": "isTimeFormatIncludesDayPeriod",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+									"line": 314,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L314"
+								}
+							],
+							"parameters": [
+								{
+									"id": 149,
+									"name": "displayFormat",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "boolean"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.isTimeFormatIncludesDayPeriod"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.isTimeFormatIncludesDayPeriod"
+					}
+				},
+				{
+					"id": 150,
+					"name": "isTimeFormatIncludesHours",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 320,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L320"
+						}
+					],
+					"signatures": [
+						{
+							"id": 151,
+							"name": "isTimeFormatIncludesHours",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+									"line": 320,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L320"
+								}
+							],
+							"parameters": [
+								{
+									"id": 152,
+									"name": "displayFormat",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "boolean"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.isTimeFormatIncludesHours"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.isTimeFormatIncludesHours"
+					}
+				},
+				{
+					"id": 153,
+					"name": "isTimeFormatIncludesMinutes",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 326,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L326"
+						}
+					],
+					"signatures": [
+						{
+							"id": 154,
+							"name": "isTimeFormatIncludesMinutes",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+									"line": 326,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L326"
+								}
+							],
+							"parameters": [
+								{
+									"id": 155,
+									"name": "displayFormat",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "boolean"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.isTimeFormatIncludesMinutes"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.isTimeFormatIncludesMinutes"
+					}
+				},
+				{
+					"id": 156,
+					"name": "isTimeFormatIncludesSeconds",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 332,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L332"
+						}
+					],
+					"signatures": [
+						{
+							"id": 157,
+							"name": "isTimeFormatIncludesSeconds",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+									"line": 332,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L332"
+								}
+							],
+							"parameters": [
+								{
+									"id": 158,
+									"name": "displayFormat",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "boolean"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.isTimeFormatIncludesSeconds"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.isTimeFormatIncludesSeconds"
+					}
+				},
+				{
+					"id": 141,
+					"name": "isValid",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 306,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L306"
+						}
+					],
+					"signatures": [
+						{
+							"id": 142,
+							"name": "isValid",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+									"line": 306,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L306"
+								}
+							],
+							"parameters": [
+								{
+									"id": 143,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "libs/cdk/utils/models/nullable.ts",
+											"qualifiedName": "Nullable"
+										},
+										"typeArguments": [
+											{
+												"type": "reference",
+												"target": {
+													"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+													"qualifiedName": "moment.Moment"
+												},
+												"name": "Moment",
+												"package": "moment",
+												"qualifiedName": "moment.Moment"
+											}
+										],
+										"name": "Nullable",
+										"package": "@fundamental-ngx/cdk"
+									}
+								}
+							],
+							"type": {
+								"type": "predicate",
+								"name": "date",
+								"asserts": false,
+								"targetType": {
+									"type": "reference",
+									"target": {
+										"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+										"qualifiedName": "moment.Moment"
+									},
+									"name": "Moment",
+									"package": "moment",
+									"qualifiedName": "moment.Moment"
+								}
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.isValid"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.isValid"
+					}
+				},
+				{
+					"id": 111,
+					"name": "now",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 258,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L258"
+						}
+					],
+					"signatures": [
+						{
+							"id": 112,
+							"name": "now",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+									"line": 258,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L258"
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+									"qualifiedName": "moment.Moment"
+								},
+								"name": "Moment",
+								"package": "moment",
+								"qualifiedName": "moment.Moment"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.now"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.now"
+					}
+				},
+				{
+					"id": 96,
+					"name": "parse",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 203,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L203"
+						}
+					],
+					"signatures": [
+						{
+							"id": 97,
+							"name": "parse",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+									"line": 203,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L203"
+								}
+							],
+							"parameters": [
+								{
+									"id": 98,
+									"name": "value",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "any"
+									}
+								},
+								{
+									"id": 99,
+									"name": "parseFormat",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+											"qualifiedName": "moment.MomentFormatSpecification"
+										},
+										"name": "MomentFormatSpecification",
+										"package": "moment",
+										"qualifiedName": "moment.MomentFormatSpecification"
+									},
+									"defaultValue": "''"
+								}
+							],
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "literal",
+										"value": null
+									},
+									{
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+											"qualifiedName": "moment.Moment"
+										},
+										"name": "Moment",
+										"package": "moment",
+										"qualifiedName": "moment.Moment"
+									}
+								]
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.parse"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.parse"
+					}
+				},
+				{
+					"id": 42,
+					"name": "setHours",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 110,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L110"
+						}
+					],
+					"signatures": [
+						{
+							"id": 43,
+							"name": "setHours",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+									"line": 110,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L110"
+								}
+							],
+							"parameters": [
+								{
+									"id": 44,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+											"qualifiedName": "moment.Moment"
+										},
+										"name": "Moment",
+										"package": "moment",
+										"qualifiedName": "moment.Moment"
+									}
+								},
+								{
+									"id": 45,
+									"name": "hours",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+									"qualifiedName": "moment.Moment"
+								},
+								"name": "Moment",
+								"package": "moment",
+								"qualifiedName": "moment.Moment"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.setHours"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.setHours"
+					}
+				},
+				{
+					"id": 18,
+					"name": "setLocale",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 66,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L66"
+						}
+					],
+					"signatures": [
+						{
+							"id": 19,
+							"name": "setLocale",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+									"line": 66,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L66"
+								}
+							],
+							"parameters": [
+								{
+									"id": 20,
+									"name": "locale",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "void"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.setLocale"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.setLocale"
+					}
+				},
+				{
+					"id": 46,
+					"name": "setMinutes",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 114,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L114"
+						}
+					],
+					"signatures": [
+						{
+							"id": 47,
+							"name": "setMinutes",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+									"line": 114,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L114"
+								}
+							],
+							"parameters": [
+								{
+									"id": 48,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+											"qualifiedName": "moment.Moment"
+										},
+										"name": "Moment",
+										"package": "moment",
+										"qualifiedName": "moment.Moment"
+									}
+								},
+								{
+									"id": 49,
+									"name": "minutes",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+									"qualifiedName": "moment.Moment"
+								},
+								"name": "Moment",
+								"package": "moment",
+								"qualifiedName": "moment.Moment"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.setMinutes"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.setMinutes"
+					}
+				},
+				{
+					"id": 50,
+					"name": "setSeconds",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 118,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L118"
+						}
+					],
+					"signatures": [
+						{
+							"id": 51,
+							"name": "setSeconds",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+									"line": 118,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L118"
+								}
+							],
+							"parameters": [
+								{
+									"id": 52,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+											"qualifiedName": "moment.Moment"
+										},
+										"name": "Moment",
+										"package": "moment",
+										"qualifiedName": "moment.Moment"
+									}
+								},
+								{
+									"id": 53,
+									"name": "seconds",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+									"qualifiedName": "moment.Moment"
+								},
+								"name": "Moment",
+								"package": "moment",
+								"qualifiedName": "moment.Moment"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.setSeconds"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.setSeconds"
+					}
+				},
+				{
+					"id": 169,
+					"name": "setTime",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "core/datetime/datetime-adapter.ts",
+							"line": 343,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/datetime/datetime-adapter.ts#L343"
+						}
+					],
+					"signatures": [
+						{
+							"id": 170,
+							"name": "setTime",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Set hours, minutes and seconds at once."
+									}
+								],
+								"blockTags": [
+									{
+										"tag": "@returns",
+										"content": [
+											{
+												"kind": "text",
+												"text": "The new date instance."
+											}
+										]
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "core/datetime/datetime-adapter.ts",
+									"line": 343,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/datetime/datetime-adapter.ts#L343"
+								}
+							],
+							"parameters": [
+								{
+									"id": 171,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "The date to set time to."
+											}
+										]
+									},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+											"qualifiedName": "moment.Moment"
+										},
+										"name": "Moment",
+										"package": "moment",
+										"qualifiedName": "moment.Moment"
+									}
+								},
+								{
+									"id": 172,
+									"name": "hours",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								},
+								{
+									"id": 173,
+									"name": "minutes",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								},
+								{
+									"id": 174,
+									"name": "seconds",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+									"qualifiedName": "moment.Moment"
+								},
+								"name": "Moment",
+								"package": "moment",
+								"qualifiedName": "moment.Moment"
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.setTime"
+							}
+						}
+					],
+					"inheritedFrom": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.setTime"
+					}
+				},
+				{
+					"id": 144,
+					"name": "toIso8601",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 310,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L310"
+						}
+					],
+					"signatures": [
+						{
+							"id": 145,
+							"name": "toIso8601",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+									"line": 310,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L310"
+								}
+							],
+							"parameters": [
+								{
+									"id": 146,
+									"name": "date",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+											"qualifiedName": "moment.Moment"
+										},
+										"name": "Moment",
+										"package": "moment",
+										"qualifiedName": "moment.Moment"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.toIso8601"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.toIso8601"
+					}
+				},
+				{
+					"id": 109,
+					"name": "today",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 254,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L254"
+						}
+					],
+					"signatures": [
+						{
+							"id": 110,
+							"name": "today",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+									"line": 254,
+									"character": 4,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L254"
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+									"qualifiedName": "moment.Moment"
+								},
+								"name": "Moment",
+								"package": "moment",
+								"qualifiedName": "moment.Moment"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "DatetimeAdapter.today"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "DatetimeAdapter.today"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Constructors",
+					"children": [
+						8
+					]
+				},
+				{
+					"title": "Properties",
+					"children": [
+						168,
+						167
+					]
+				},
+				{
+					"title": "Methods",
+					"children": [
+						121,
+						117,
+						113,
+						125,
+						180,
+						104,
+						132,
+						128,
+						100,
+						15,
+						175,
+						27,
+						60,
+						30,
+						62,
+						88,
+						91,
+						71,
+						33,
+						77,
+						36,
+						24,
+						57,
+						93,
+						83,
+						39,
+						68,
+						54,
+						21,
+						65,
+						136,
+						147,
+						150,
+						153,
+						156,
+						141,
+						111,
+						96,
+						42,
+						18,
+						46,
+						50,
+						169,
+						144,
+						109
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+					"line": 41,
+					"character": 13,
+					"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L41"
+				}
+			],
+			"extendedTypes": [
+				{
+					"type": "reference",
+					"target": {
+						"sourceFileName": "libs/core/datetime/datetime-adapter.ts",
+						"qualifiedName": "DatetimeAdapter"
+					},
+					"typeArguments": [
+						{
+							"type": "reference",
+							"target": {
+								"sourceFileName": "node_modules/moment/ts3.1-typings/moment.d.ts",
+								"qualifiedName": "moment.Moment"
+							},
+							"name": "Moment",
+							"package": "moment",
+							"qualifiedName": "moment.Moment"
+						}
+					],
+					"name": "DatetimeAdapter",
+					"package": "@fundamental-ngx/core"
+				}
+			]
+		},
+		{
+			"id": 185,
+			"name": "MomentDatetimeAdapterModule",
+			"variant": "declaration",
+			"kind": 128,
+			"flags": {},
+			"comment": {
+				"summary": [],
+				"blockTags": [
+					{
+						"tag": "@deprecated",
+						"content": [
+							{
+								"kind": "text",
+								"text": "Use "
+							},
+							{
+								"kind": "code",
+								"text": "`DatetimeAdapterRawModule`"
+							},
+							{
+								"kind": "text",
+								"text": " from "
+							},
+							{
+								"kind": "code",
+								"text": "`@fundamental-ngx/datetime-adapter`"
+							},
+							{
+								"kind": "text",
+								"text": " package instead."
+							}
+						]
+					}
+				]
+			},
+			"sources": [
+				{
+					"fileName": "moment-adapter/src/lib/moment-datetime.module.ts",
+					"line": 14,
+					"character": 13,
+					"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime.module.ts#L14"
+				}
+			]
+		},
+		{
+			"id": 190,
+			"name": "MomentDatetimeModule",
+			"variant": "declaration",
+			"kind": 128,
+			"flags": {},
+			"comment": {
+				"summary": [],
+				"blockTags": [
+					{
+						"tag": "@deprecated",
+						"content": [
+							{
+								"kind": "text",
+								"text": "Use "
+							},
+							{
+								"kind": "code",
+								"text": "`DatetimeAdapterModule`"
+							},
+							{
+								"kind": "text",
+								"text": " from "
+							},
+							{
+								"kind": "code",
+								"text": "`@fundamental-ngx/datetime-adapter`"
+							},
+							{
+								"kind": "text",
+								"text": " package instead."
+							}
+						]
+					}
+				]
+			},
+			"sources": [
+				{
+					"fileName": "moment-adapter/src/lib/moment-datetime.module.ts",
+					"line": 31,
+					"character": 13,
+					"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime.module.ts#L31"
+				}
+			]
+		},
+		{
+			"id": 3,
+			"name": "MomentDatetimeAdapterOptions",
+			"variant": "declaration",
+			"kind": 256,
+			"flags": {},
+			"children": [
+				{
+					"id": 4,
+					"name": "strict",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isOptional": true
+					},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 12,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L12"
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "boolean"
+					}
+				},
+				{
+					"id": 5,
+					"name": "useUtc",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isOptional": true
+					},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 13,
+							"character": 4,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L13"
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "boolean"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Properties",
+					"children": [
+						4,
+						5
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+					"line": 11,
+					"character": 17,
+					"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L11"
+				}
+			]
+		},
+		{
+			"id": 184,
+			"name": "MOMENT_DATETIME_FORMATS",
+			"variant": "declaration",
+			"kind": 32,
+			"flags": {
+				"isConst": true
+			},
+			"sources": [
+				{
+					"fileName": "moment-adapter/src/lib/moment-datetime-formats.ts",
+					"line": 3,
+					"character": 13,
+					"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-formats.ts#L3"
+				}
+			],
+			"type": {
+				"type": "reference",
+				"target": {
+					"sourceFileName": "libs/core/datetime/datetime-formats.ts",
+					"qualifiedName": "DateTimeFormats"
+				},
+				"name": "DateTimeFormats",
+				"package": "@fundamental-ngx/core"
+			},
+			"defaultValue": "..."
+		},
+		{
+			"id": 6,
+			"name": "MOMENT_DATE_TIME_ADAPTER_OPTIONS",
+			"variant": "declaration",
+			"kind": 32,
+			"flags": {
+				"isConst": true
+			},
+			"sources": [
+				{
+					"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+					"line": 16,
+					"character": 13,
+					"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L16"
+				}
+			],
+			"type": {
+				"type": "reference",
+				"target": {
+					"sourceFileName": "node_modules/@angular/core/types/_chrome_dev_tools_performance-chunk.d.ts",
+					"qualifiedName": "InjectionToken"
+				},
+				"typeArguments": [
+					{
+						"type": "reference",
+						"target": 3,
+						"name": "MomentDatetimeAdapterOptions",
+						"package": "@fundamental-ngx/moment-adapter"
+					}
+				],
+				"name": "InjectionToken",
+				"package": "@angular/core"
+			},
+			"defaultValue": "..."
+		},
+		{
+			"id": 1,
+			"name": "MOMENT_DATE_TIME_ADAPTER_OPTIONS_FACTORY",
+			"variant": "declaration",
+			"kind": 64,
+			"flags": {},
+			"sources": [
+				{
+					"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+					"line": 24,
+					"character": 16,
+					"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L24"
+				}
+			],
+			"signatures": [
+				{
+					"id": 2,
+					"name": "MOMENT_DATE_TIME_ADAPTER_OPTIONS_FACTORY",
+					"variant": "signature",
+					"kind": 4096,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "moment-adapter/src/lib/moment-datetime-adapter.ts",
+							"line": 24,
+							"character": 16,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L24"
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": 3,
+						"name": "MomentDatetimeAdapterOptions",
+						"package": "@fundamental-ngx/moment-adapter"
+					}
+				}
+			]
+		}
+	],
+	"groups": [
+		{
+			"title": "Classes",
+			"children": [
+				7,
+				185,
+				190
+			]
+		},
+		{
+			"title": "Interfaces",
+			"children": [
+				3
+			]
+		},
+		{
+			"title": "Variables",
+			"children": [
+				184,
+				6
+			]
+		},
+		{
+			"title": "Functions",
+			"children": [
+				1
+			]
+		}
+	],
+	"packageName": "@fundamental-ngx/moment-adapter",
 	"readme": [
 		{
 			"kind": "text",
-			"text": "# Fundamental Library for Angular\n\n[![REUSE status](https://api.reuse.software/badge/github.com/SAP/fundamental-ngx)](https://api.reuse.software/info/github.com/SAP/fundamental-ngx)\n\n<a href=\"https://www.netlify.com\">\n  <img src=\"https://www.netlify.com/img/global/badges/netlify-light.svg\" alt=\"Deploys by Netlify\" />\n</a>\n\n## <a name=\"1\"></a>1. Description\n\nThe Fundamental Library for Angular is an SAP Design System Angular component library used to build modern product user experiences with the SAP look and feel.\n\nThis repository contains 2 libraries(npm packages),\n\n- [@fundamental-ngx/core](https://github.com/SAP/fundamental-ngx/tree/main/libs/core):\n  The Fundamental-NGX core provides base angular implementation of Fundamental Library Styles to offer developers a rich set of components\n  they can use when building angular applications. Fundamental-ngx core angular components provides the end developer with some degree of flexibility as most of the components allow finer customization directly on the HTML template level.\n\n- [@fundamental-ngx/platform](https://github.com/SAP/fundamental-ngx/tree/main/libs/platform):\n  The Fundamental-NGX platform is built on top of the core to both enhance existing functionality with additional features\n  which are driven by application requirements and to provide higher abstraction for the components by hiding most of the internal implementation details which boosts productivity.\n\n## <a name=\"2\"></a>2. Requirements\n\nTo download and use Fundamental Library for Angular, you will first need to install the [node package manager](https://www.npmjs.com/get-npm) and [yarn package manager](https://yarnpkg.com/getting-started/install) ("
+			"text": "# @fundamental-ngx/moment-adapter\n\n[![npm version](https://badge.fury.io/js/%40fundamental-ngx%2Fmoment-adapter.svg)](//www.npmjs.com/package/@fundamental-ngx/moment-adapter)\n[![REUSE status](https://api.reuse.software/badge/github.com/SAP/fundamental-ngx)](https://api.reuse.software/info/github.com/SAP/fundamental-ngx)\n\n> **Legacy package.** Moment.js is in maintenance mode. Use ["
 		},
 		{
 			"kind": "code",
-			"text": "`corepack enable`"
+			"text": "`@fundamental-ngx/datetime-adapter`"
 		},
 		{
 			"kind": "text",
-			"text": " and then "
+			"text": "](../datetime-adapter) (Day.js-based) instead for new projects.\n\n## Description\n\nDate/time adapter based on [Moment.js](https://momentjs.com/) for Fundamental NGX date and time components (Date Picker, Time Picker, DateTime Picker, etc.).\n\nThese components rely on the "
 		},
 		{
 			"kind": "code",
-			"text": "`yarn`"
+			"text": "`DatetimeAdapter`"
 		},
 		{
 			"kind": "text",
-			"text": ").\n\nFundamental Library for Angular is intended for use with Angular 15 or newer.\n\nPrior knowledge of Angular is recommended, to use the fundamental-ngx library.\n\n## <a name=\"3\"></a>3. Known Issues\n\n- Please see [Issues](https://github.com/SAP/fundamental-ngx/issues).\n- Contribution Known [Issues](https://github.com/SAP/fundamental-ngx/wiki/Known-Contribution-Issues)\n\n## <a name=\"4\"></a>4. Support\n\nIf you encounter an issue, you can [create a ticket](https://github.com/SAP/fundamental-ngx/issues).\n\nAngular Versions Support: Our versions offer Angular support. More information can be found [here](https://github.com/SAP/fundamental-ngx/wiki/Angular-Versions-Support).\n\n- Features and enhancements are developed to the latest version of fundamental-ngx.\n\n- Bugfixes can be downported to the latest ngx version, which is compiled with the second last Angular version.\n\n## <a name=\"5\"></a>5. Contributing\n\nIf you want to contribute, please check the [SAP Contribution Guidelines](https://github.com/SAP/.github/blob/main/CONTRIBUTING.md), the [CONTRIBUTING.md](https://github.com/SAP/fundamental-ngx/blob/main/CONTRIBUTING.md) documentation for contribution guidelines. Please follow the [Angular commit message guidelines](https://github.com/angular/angular/blob/main/CONTRIBUTING.md#commit).\n\nCheck out the [NEW_COMPONENT.md](https://github.com/SAP/fundamental-ngx/blob/main/NEW_COMPONENT.md) guide on building a new component for the library and creating the necessary documentation for your new component.\n\n## Similar Projects\n\n## <a name=\"7\"></a>7. Similar Projects\n\n[Fundamental-react](https://github.com/SAP/fundamental-react) - React implementation of Fundamental Library Styles\n\n[Fundamental-vue](https://github.com/SAP/fundamental-vue) - Vue implementation of Fundamental Library Styles"
+			"text": " abstraction. This package provides "
+		},
+		{
+			"kind": "code",
+			"text": "`MomentDatetimeAdapter`"
+		},
+		{
+			"kind": "text",
+			"text": " as an alternative to the built-in "
+		},
+		{
+			"kind": "code",
+			"text": "`FdDatetimeAdapter`"
+		},
+		{
+			"kind": "text",
+			"text": " (based on native "
+		},
+		{
+			"kind": "code",
+			"text": "`Date`"
+		},
+		{
+			"kind": "text",
+			"text": "), adding reliable parse format support via Moment.js.\n\n## Installation\n\n"
+		},
+		{
+			"kind": "code",
+			"text": "```bash\nnpm install @fundamental-ngx/moment-adapter moment\n```"
+		},
+		{
+			"kind": "text",
+			"text": "\n\n## Usage\n\n"
+		},
+		{
+			"kind": "code",
+			"text": "```typescript\nimport { provideMomentDatetimeAdapter } from '@fundamental-ngx/moment-adapter';\n\n// In your application config or module providers:\nprovideMomentDatetimeAdapter();\n```"
 		}
 	],
-	"symbolIdMap": {}
+	"symbolIdMap": {
+		"0": {
+			"sourceFileName": "libs/moment-adapter/src/index.ts",
+			"qualifiedName": ""
+		},
+		"1": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MOMENT_DATE_TIME_ADAPTER_OPTIONS_FACTORY"
+		},
+		"2": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MOMENT_DATE_TIME_ADAPTER_OPTIONS_FACTORY"
+		},
+		"3": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapterOptions"
+		},
+		"4": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapterOptions.strict"
+		},
+		"5": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapterOptions.useUtc"
+		},
+		"6": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MOMENT_DATE_TIME_ADAPTER_OPTIONS"
+		},
+		"7": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter"
+		},
+		"8": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.__constructor"
+		},
+		"9": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter"
+		},
+		"10": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "localeId"
+		},
+		"11": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "_options"
+		},
+		"15": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.fromNow"
+		},
+		"16": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.fromNow"
+		},
+		"17": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"18": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.setLocale"
+		},
+		"19": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.setLocale"
+		},
+		"20": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "locale"
+		},
+		"21": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.getYear"
+		},
+		"22": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.getYear"
+		},
+		"23": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"24": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.getMonth"
+		},
+		"25": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.getMonth"
+		},
+		"26": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"27": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.getDate"
+		},
+		"28": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.getDate"
+		},
+		"29": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"30": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.getDayOfWeek"
+		},
+		"31": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.getDayOfWeek"
+		},
+		"32": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"33": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.getHours"
+		},
+		"34": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.getHours"
+		},
+		"35": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"36": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.getMinutes"
+		},
+		"37": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.getMinutes"
+		},
+		"38": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"39": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.getSeconds"
+		},
+		"40": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.getSeconds"
+		},
+		"41": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"42": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.setHours"
+		},
+		"43": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.setHours"
+		},
+		"44": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"45": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "hours"
+		},
+		"46": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.setMinutes"
+		},
+		"47": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.setMinutes"
+		},
+		"48": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"49": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "minutes"
+		},
+		"50": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.setSeconds"
+		},
+		"51": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.setSeconds"
+		},
+		"52": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"53": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "seconds"
+		},
+		"54": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.getWeekNumber"
+		},
+		"55": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.getWeekNumber"
+		},
+		"56": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"57": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.getMonthNames"
+		},
+		"58": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.getMonthNames"
+		},
+		"59": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "style"
+		},
+		"60": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.getDateNames"
+		},
+		"61": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.getDateNames"
+		},
+		"62": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.getDayOfWeekNames"
+		},
+		"63": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.getDayOfWeekNames"
+		},
+		"64": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "style"
+		},
+		"65": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.getYearName"
+		},
+		"66": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.getYearName"
+		},
+		"67": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"68": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.getWeekName"
+		},
+		"69": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.getWeekName"
+		},
+		"70": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"71": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.getHourNames"
+		},
+		"72": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.getHourNames"
+		},
+		"73": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "__0"
+		},
+		"74": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "__type"
+		},
+		"75": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "__type.twoDigit"
+		},
+		"76": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "__type.meridian"
+		},
+		"77": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.getMinuteNames"
+		},
+		"78": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.getMinuteNames"
+		},
+		"79": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "__0"
+		},
+		"80": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "__type"
+		},
+		"81": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "__type.twoDigit"
+		},
+		"82": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "__type.minuteStep"
+		},
+		"83": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.getSecondNames"
+		},
+		"84": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.getSecondNames"
+		},
+		"85": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "__0"
+		},
+		"86": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "__type"
+		},
+		"87": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "__type.twoDigit"
+		},
+		"88": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.getDayPeriodNames"
+		},
+		"89": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.getDayPeriodNames"
+		},
+		"90": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "isLower"
+		},
+		"91": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.getFirstDayOfWeek"
+		},
+		"92": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.getFirstDayOfWeek"
+		},
+		"93": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.getNumDaysInMonth"
+		},
+		"94": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.getNumDaysInMonth"
+		},
+		"95": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"96": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.parse"
+		},
+		"97": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.parse"
+		},
+		"98": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "value"
+		},
+		"99": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "parseFormat"
+		},
+		"100": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.format"
+		},
+		"101": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.format"
+		},
+		"102": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"103": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "displayFormat"
+		},
+		"104": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.createDate"
+		},
+		"105": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.createDate"
+		},
+		"106": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "year"
+		},
+		"107": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "month"
+		},
+		"108": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"109": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.today"
+		},
+		"110": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.today"
+		},
+		"111": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.now"
+		},
+		"112": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.now"
+		},
+		"113": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.addCalendarYears"
+		},
+		"114": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.addCalendarYears"
+		},
+		"115": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"116": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "years"
+		},
+		"117": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.addCalendarMonths"
+		},
+		"118": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.addCalendarMonths"
+		},
+		"119": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"120": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "months"
+		},
+		"121": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.addCalendarDays"
+		},
+		"122": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.addCalendarDays"
+		},
+		"123": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"124": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "days"
+		},
+		"125": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.clone"
+		},
+		"126": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.clone"
+		},
+		"127": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"128": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.datesEqual"
+		},
+		"129": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.datesEqual"
+		},
+		"130": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "date1"
+		},
+		"131": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "date2"
+		},
+		"132": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.dateTimesEqual"
+		},
+		"133": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.dateTimesEqual"
+		},
+		"134": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "date1"
+		},
+		"135": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "date2"
+		},
+		"136": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.isBetween"
+		},
+		"137": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.isBetween"
+		},
+		"138": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "dateToCheck"
+		},
+		"139": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "startDate"
+		},
+		"140": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "endDate"
+		},
+		"141": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.isValid"
+		},
+		"142": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.isValid"
+		},
+		"143": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"144": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.toIso8601"
+		},
+		"145": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.toIso8601"
+		},
+		"146": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"147": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.isTimeFormatIncludesDayPeriod"
+		},
+		"148": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.isTimeFormatIncludesDayPeriod"
+		},
+		"149": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "displayFormat"
+		},
+		"150": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.isTimeFormatIncludesHours"
+		},
+		"151": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.isTimeFormatIncludesHours"
+		},
+		"152": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "displayFormat"
+		},
+		"153": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.isTimeFormatIncludesMinutes"
+		},
+		"154": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.isTimeFormatIncludesMinutes"
+		},
+		"155": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "displayFormat"
+		},
+		"156": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.isTimeFormatIncludesSeconds"
+		},
+		"157": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "MomentDatetimeAdapter.isTimeFormatIncludesSeconds"
+		},
+		"158": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-adapter.ts",
+			"qualifiedName": "displayFormat"
+		},
+		"167": {
+			"sourceFileName": "libs/core/datetime/datetime-adapter.ts",
+			"qualifiedName": "DatetimeAdapter.localeChanges"
+		},
+		"168": {
+			"sourceFileName": "libs/core/datetime/datetime-adapter.ts",
+			"qualifiedName": "DatetimeAdapter.locale"
+		},
+		"169": {
+			"sourceFileName": "libs/core/datetime/datetime-adapter.ts",
+			"qualifiedName": "DatetimeAdapter.setTime"
+		},
+		"170": {
+			"sourceFileName": "libs/core/datetime/datetime-adapter.ts",
+			"qualifiedName": "DatetimeAdapter.setTime"
+		},
+		"171": {
+			"sourceFileName": "libs/core/datetime/datetime-adapter.ts",
+			"qualifiedName": "date"
+		},
+		"172": {
+			"sourceFileName": "libs/core/datetime/datetime-adapter.ts",
+			"qualifiedName": "hours"
+		},
+		"173": {
+			"sourceFileName": "libs/core/datetime/datetime-adapter.ts",
+			"qualifiedName": "minutes"
+		},
+		"174": {
+			"sourceFileName": "libs/core/datetime/datetime-adapter.ts",
+			"qualifiedName": "seconds"
+		},
+		"175": {
+			"sourceFileName": "libs/core/datetime/datetime-adapter.ts",
+			"qualifiedName": "DatetimeAdapter.getAmountOfWeeks"
+		},
+		"176": {
+			"sourceFileName": "libs/core/datetime/datetime-adapter.ts",
+			"qualifiedName": "DatetimeAdapter.getAmountOfWeeks"
+		},
+		"177": {
+			"sourceFileName": "libs/core/datetime/datetime-adapter.ts",
+			"qualifiedName": "year"
+		},
+		"178": {
+			"sourceFileName": "libs/core/datetime/datetime-adapter.ts",
+			"qualifiedName": "month"
+		},
+		"179": {
+			"sourceFileName": "libs/core/datetime/datetime-adapter.ts",
+			"qualifiedName": "firstDayOfWeek"
+		},
+		"180": {
+			"sourceFileName": "libs/core/datetime/datetime-adapter.ts",
+			"qualifiedName": "DatetimeAdapter.compareDate"
+		},
+		"181": {
+			"sourceFileName": "libs/core/datetime/datetime-adapter.ts",
+			"qualifiedName": "DatetimeAdapter.compareDate"
+		},
+		"182": {
+			"sourceFileName": "libs/core/datetime/datetime-adapter.ts",
+			"qualifiedName": "first"
+		},
+		"183": {
+			"sourceFileName": "libs/core/datetime/datetime-adapter.ts",
+			"qualifiedName": "second"
+		},
+		"184": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime-formats.ts",
+			"qualifiedName": "MOMENT_DATETIME_FORMATS"
+		},
+		"185": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime.module.ts",
+			"qualifiedName": "MomentDatetimeAdapterModule"
+		},
+		"190": {
+			"sourceFileName": "libs/moment-adapter/src/lib/moment-datetime.module.ts",
+			"qualifiedName": "MomentDatetimeModule"
+		}
+	}
 }

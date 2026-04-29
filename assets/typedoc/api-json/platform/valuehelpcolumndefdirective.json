@@ -1,0 +1,34 @@
+{
+  "name": "ValueHelpColumnDefDirective",
+  "selector": "[fdpValueHelpColumnDef]",
+  "kind": "Directive",
+  "sourceFile": "value-help-column-def.directive.ts",
+  "sourceLine": 13,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/value-help-dialog/directives/value-help-column-def.directive.ts#L13",
+  "description": "",
+  "inputs": [
+    {
+      "name": "as",
+      "type": "T",
+      "default": null,
+      "description": "Type support.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 16,
+      "since": null
+    },
+    {
+      "name": "column",
+      "type": "string",
+      "default": null,
+      "description": "Column key to render custom template.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 20,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

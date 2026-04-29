@@ -1,0 +1,159 @@
+{
+  "name": "PaginationComponent",
+  "selector": "fd-pagination",
+  "kind": "Component",
+  "sourceFile": "pagination.component.ts",
+  "sourceLine": 87,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/pagination/pagination.component.ts#L87",
+  "description": "The component that is used to provide navigation between paged information.\n```html\n<fd-pagination\n         [totalItems]=\"50\"\n         [itemsPerPage]=\"10\"\n         [currentPage]=\"3\">\n</fd-pagination>\n```",
+  "inputs": [
+    {
+      "name": "displayTextTemplate",
+      "type": "TemplateRef<any>",
+      "default": null,
+      "description": "The template show range of item by current page of items.\nDefault view: Showing {{ from }}-{{ to }} of {{ of }}",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 169,
+      "since": null
+    },
+    {
+      "name": "displayTotalItems",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether to display the total number of items.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 162,
+      "since": null
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "default": null,
+      "description": "Id for the pagination component. If omitted, a unique one is generated.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 106,
+      "since": null
+    },
+    {
+      "name": "itemsPerPageTemplate",
+      "type": "TemplateRef<any>",
+      "default": null,
+      "description": "The custom template show range of item by current page of items.\nIt has higher priority than `itemsPerPageOptions` property.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 143,
+      "since": null
+    },
+    {
+      "name": "mobile",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether component should be shown in the mobile mode.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 110,
+      "since": null
+    },
+    {
+      "name": "totalItems",
+      "type": "number",
+      "default": null,
+      "description": "Represents the total number of items.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 114,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "itemsPerPageChange",
+      "type": "number",
+      "default": null,
+      "description": "Event emitted when items per page option is changed.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 177,
+      "since": null
+    },
+    {
+      "name": "pageChangeStart",
+      "type": "number",
+      "default": null,
+      "description": "Event emitted when the page is changed.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 173,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "goToFirstPage",
+      "signature": "() => void",
+      "description": "Navigates to the first page",
+      "deprecated": null,
+      "sourceLine": 331,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "goToLastPage",
+      "signature": "() => void",
+      "description": "Navigates to the last page",
+      "deprecated": null,
+      "sourceLine": 350,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "goToPage",
+      "signature": "(page: number, event?: Event) => void",
+      "description": "Navigates to a specific page.",
+      "deprecated": null,
+      "sourceLine": 314,
+      "since": null,
+      "parameters": [
+        {
+          "name": "page",
+          "type": "number",
+          "description": "The page to navigate to.",
+          "optional": false
+        },
+        {
+          "name": "event",
+          "type": "Event",
+          "description": "The mouse event (optional).",
+          "optional": true
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "nextPage",
+      "signature": "() => void",
+      "description": "Navigates to the next page.",
+      "deprecated": null,
+      "sourceLine": 345,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "previousPage",
+      "signature": "() => void",
+      "description": "Navigates to a previous page.",
+      "deprecated": null,
+      "sourceLine": 338,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

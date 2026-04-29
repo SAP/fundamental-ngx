@@ -1,0 +1,80 @@
+{
+  "name": "GroupingComponent",
+  "selector": "fdp-grouping",
+  "kind": "Component",
+  "sourceFile": "grouping.component.ts",
+  "sourceLine": 39,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/table/components/table-view-settings-dialog/grouping/grouping.component.ts#L39",
+  "description": "",
+  "inputs": [
+    {
+      "name": "groupingData",
+      "type": "SettingsGroupDialogData",
+      "default": null,
+      "description": "Input data for grouping",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 41,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "groupChange",
+      "type": "SettingsGroupDialogResultData",
+      "default": null,
+      "description": "Event emitter for group changes",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 50,
+      "since": null
+    },
+    {
+      "name": "resetAvailabilityChange",
+      "type": "boolean",
+      "default": null,
+      "description": "Event emitter for reset availability changes",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 53,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "_groupFieldChange",
+      "signature": "(field: string) => void",
+      "description": "Handle changes to the grouping field.",
+      "deprecated": null,
+      "sourceLine": 99,
+      "since": null,
+      "parameters": [
+        {
+          "name": "field",
+          "type": "string",
+          "description": "New grouping field.",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "_groupOrderChange",
+      "signature": "(direction: SortDirection) => void",
+      "description": "Handle changes to grouping direction.",
+      "deprecated": null,
+      "sourceLine": 90,
+      "since": null,
+      "parameters": [
+        {
+          "name": "direction",
+          "type": "SortDirection",
+          "description": "New grouping direction.",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

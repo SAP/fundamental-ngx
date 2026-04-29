@@ -1,0 +1,24 @@
+{
+  "name": "NavigationLayout",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "mode",
+      "type": "'Auto' | 'Collapsed' | 'Expanded'",
+      "default": null,
+      "description": "Specifies the navigation layout mode.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 45,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

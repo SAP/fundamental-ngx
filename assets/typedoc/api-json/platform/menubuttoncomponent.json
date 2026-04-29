@@ -1,0 +1,93 @@
+{
+  "name": "MenuButtonComponent",
+  "selector": "fdp-menu-button",
+  "kind": "Component",
+  "sourceFile": "menu-button.component.ts",
+  "sourceLine": 27,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/menu-button/menu-button.component.ts#L27",
+  "description": "",
+  "inputs": [
+    {
+      "name": "icon",
+      "type": "string",
+      "default": null,
+      "description": "The Icon to include in the menu-button",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 38,
+      "since": null
+    },
+    {
+      "name": "iconFont",
+      "type": "IconFont",
+      "default": "FD_DEFAULT_ICON_FONT_FAMILY",
+      "description": "Glyph font family",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 42,
+      "since": null
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "default": null,
+      "description": "Label for menu button",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 30,
+      "since": null
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "default": null,
+      "description": "text for tooltip",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 34,
+      "since": null
+    },
+    {
+      "name": "type",
+      "type": "ButtonType",
+      "default": null,
+      "description": "The type of the button. Types include 'standard', 'positive', 'negative', 'transparent', 'attention', 'emphasized', 'ghost'.\nLeave empty for default.'",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 47,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "buttonClicked",
+      "type": "KeyboardEvent | MouseEvent | TouchEvent",
+      "default": null,
+      "description": "Event sent when menu-button is clicked",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 51,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "onButtonClick",
+      "signature": "($event: any) => void",
+      "description": "Handles menu-button click",
+      "deprecated": null,
+      "sourceLine": 79,
+      "since": null,
+      "parameters": [
+        {
+          "name": "$event",
+          "type": "any",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

@@ -1,0 +1,124 @@
+{
+  "name": "ObjectNumberComponent",
+  "selector": "fd-object-number",
+  "kind": "Component",
+  "sourceFile": "object-number.component.ts",
+  "sourceLine": 32,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/object-number/object-number.component.ts#L32",
+  "description": "",
+  "inputs": [
+    {
+      "name": "ariaLabel",
+      "type": "string",
+      "default": null,
+      "description": "Aria label for the object number.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 62,
+      "since": null
+    },
+    {
+      "name": "ariaLabelledBy",
+      "type": "string",
+      "default": null,
+      "description": "Id of the element that labels object number.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 59,
+      "since": null
+    },
+    {
+      "name": "decimal",
+      "type": "number",
+      "default": null,
+      "description": "Number of decimal places to show",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 41,
+      "since": null
+    },
+    {
+      "name": "emphasized",
+      "type": "boolean",
+      "default": null,
+      "description": "Set the value to true to display the object number in bold text",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 47,
+      "since": null
+    },
+    {
+      "name": "interactive",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the object number is interactive",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 65,
+      "since": null
+    },
+    {
+      "name": "inverted",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the object number is inverted.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 68,
+      "since": null
+    },
+    {
+      "name": "large",
+      "type": "boolean",
+      "default": null,
+      "description": "Set the value to true to display the object number in large text",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 50,
+      "since": null
+    },
+    {
+      "name": "number",
+      "type": "number",
+      "default": null,
+      "description": "Numerical value of the object number.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 36,
+      "since": null
+    },
+    {
+      "name": "status",
+      "type": "ObjectStatus",
+      "default": null,
+      "description": "Sets status/semantic color  'negative' / 'critical' / 'positive' / 'informative'",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 53,
+      "since": null
+    },
+    {
+      "name": "statusMessage",
+      "type": "string",
+      "default": null,
+      "description": "An optional status message for the object number",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 56,
+      "since": null
+    },
+    {
+      "name": "unit",
+      "type": "string",
+      "default": null,
+      "description": "Sets unit of measure displayed.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 44,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

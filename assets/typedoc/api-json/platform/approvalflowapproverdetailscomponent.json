@@ -1,0 +1,13 @@
+{
+  "name": "ApprovalFlowApproverDetailsComponent",
+  "selector": "fdp-approval-flow-approver-details",
+  "kind": "Component",
+  "sourceFile": "approval-flow-approver-details.component.ts",
+  "sourceLine": 73,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/approval-flow/approval-flow-approver-details/approval-flow-approver-details.component.ts#L73",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

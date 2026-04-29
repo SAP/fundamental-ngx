@@ -1,0 +1,54 @@
+{
+  "name": "CalendarLegend",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "hideNonWorkingDay",
+      "type": "boolean",
+      "default": null,
+      "description": "Hides the Non-Working day item in the legend.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 45,
+      "since": null
+    },
+    {
+      "name": "hideSelectedDay",
+      "type": "boolean",
+      "default": null,
+      "description": "Hides the Selected day item in the legend.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 50,
+      "since": null
+    },
+    {
+      "name": "hideToday",
+      "type": "boolean",
+      "default": null,
+      "description": "Hides the Today item in the legend.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 55,
+      "since": null
+    },
+    {
+      "name": "hideWorkingDay",
+      "type": "boolean",
+      "default": null,
+      "description": "Hides the Working day item in the legend.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 60,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

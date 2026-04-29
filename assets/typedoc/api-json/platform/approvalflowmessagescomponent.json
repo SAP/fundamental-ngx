@@ -1,0 +1,55 @@
+{
+  "name": "ApprovalFlowMessagesComponent",
+  "selector": "fdp-approval-flow-messages",
+  "kind": "Component",
+  "sourceFile": "approval-flow-messages.component.ts",
+  "sourceLine": 36,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/approval-flow/approval-flow-messages/approval-flow-messages.component.ts#L36",
+  "description": "",
+  "inputs": [
+    {
+      "name": "messages",
+      "type": "ApprovalFlowMessage[]",
+      "default": "[]",
+      "description": "Array of messages",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 39,
+      "since": null
+    },
+    {
+      "name": "undoLastActionAvailable",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether undo action is available",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 43,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "messagesChange",
+      "type": "ApprovalFlowMessage[]",
+      "default": null,
+      "description": "Event emitted when messages array change",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 47,
+      "since": null
+    },
+    {
+      "name": "undoLastAction",
+      "type": "void",
+      "default": null,
+      "description": "Event emitted when user click undo button",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 51,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

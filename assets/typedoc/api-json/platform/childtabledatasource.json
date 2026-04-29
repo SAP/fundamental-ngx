@@ -1,0 +1,52 @@
+{
+  "name": "ChildTableDataSource",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "table-data-source.ts",
+  "sourceLine": 141,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/table-helpers/domain/table-data-source.ts#L141",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "fetch",
+      "signature": "(tableState: TableState, parentRows?: TableRow<T>[]) => void",
+      "description": "Method responsible for retrieving the items from the data provider.\nAdditionaly, it sets the loading state along with the dataLoading and dataChanges streams.",
+      "deprecated": null,
+      "sourceLine": 159,
+      "since": null,
+      "parameters": [
+        {
+          "name": "tableState",
+          "type": "TableState",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "parentRows",
+          "type": "TableRow<T>[]",
+          "description": "",
+          "optional": true
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": {
+    "from": "BaseTableDataSource",
+    "inputs": [],
+    "methods": [
+      {
+        "name": "unsubscribe",
+        "signature": "() => void",
+        "description": "Closes the stream",
+        "deprecated": null,
+        "sourceLine": 102,
+        "since": null,
+        "parameters": [],
+        "returnType": "void"
+      }
+    ]
+  }
+}

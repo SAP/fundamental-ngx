@@ -1,0 +1,74 @@
+{
+  "name": "BreakpointDirective",
+  "selector": "[fdkBreakpoint], [fdkBreakpointS], [fdkBreakpointM], [fdkBreakpointL], [fdkBreakpointXL], [fdkBreakpointLt], [fdkBreakpointGt]",
+  "kind": "Directive",
+  "sourceFile": "breakpoint.directive.ts",
+  "sourceLine": 33,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cdk/utils/directives/breakpoints/breakpoint.directive.ts#L33",
+  "description": "Directive to show/hide element on specific breakpoint or range of window width.\nUses native ngIf directive to show/hide element.",
+  "inputs": [
+    {
+      "name": "fdkBreakpointGt",
+      "type": "number",
+      "default": null,
+      "description": "Show element on breakpoint greater than provided value.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 83,
+      "since": null
+    },
+    {
+      "name": "fdkBreakpointLt",
+      "type": "number",
+      "default": null,
+      "description": "Show element on breakpoint less than provided value.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 77,
+      "since": null
+    },
+    {
+      "name": "showOnL",
+      "type": "boolean",
+      "default": "false",
+      "description": "Show element on L breakpoint.\nL - 0 - 1439px",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 65,
+      "since": null
+    },
+    {
+      "name": "showOnM",
+      "type": "boolean",
+      "default": "false",
+      "description": "Show element on M breakpoint.\nM - 0 - 1023px",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 58,
+      "since": null
+    },
+    {
+      "name": "showOnS",
+      "type": "boolean",
+      "default": "false",
+      "description": "Show element on S breakpoint.\nS - 0 - 599px",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 51,
+      "since": null
+    },
+    {
+      "name": "showOnXL",
+      "type": "boolean",
+      "default": "false",
+      "description": "Show element on XL breakpoint.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 71,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

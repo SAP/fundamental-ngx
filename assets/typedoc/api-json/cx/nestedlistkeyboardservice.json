@@ -1,0 +1,31 @@
+{
+  "name": "NestedListKeyboardService",
+  "selector": null,
+  "kind": "Service",
+  "sourceFile": "nested-list-keyboard.service.ts",
+  "sourceLine": 15,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cx/nested-list/nested-list-keyboard.service.ts#L15",
+  "description": "Nested list keyboard service, which uses MenuKeyboardService, to deal with ArrowUp, ArrowDown, Space, Enter.\nAlso has own handling of ArrowLeft and ArrowRight, to open/close the menu if it has any children.",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "refreshItems",
+      "signature": "(lists: NestedListInterface[]) => void",
+      "description": "Function called after refresh$ event is triggered.\nRefresh the list of NestedItems, that the keyboard support should be provided for",
+      "deprecated": null,
+      "sourceLine": 32,
+      "since": null,
+      "parameters": [
+        {
+          "name": "lists",
+          "type": "NestedListInterface[]",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

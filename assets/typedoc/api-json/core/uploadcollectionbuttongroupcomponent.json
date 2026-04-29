@@ -1,0 +1,85 @@
+{
+  "name": "UploadCollectionButtonGroupComponent",
+  "selector": "fd-upload-collection-button-group",
+  "kind": "Component",
+  "sourceFile": "upload-collection-button-group.component.ts",
+  "sourceLine": 21,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/upload-collection/upload-collection-button-group/upload-collection-button-group.component.ts#L21",
+  "description": "",
+  "inputs": [
+    {
+      "name": "allowFileDeletion",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether or not to show the delete button. Default is true.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 40,
+      "since": null
+    },
+    {
+      "name": "allowFileNameEdit",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether or not to allow file name editing. Default is true.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 36,
+      "since": null
+    },
+    {
+      "name": "disableFileDeletion",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether or not to disable the delete button. Default is false.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 48,
+      "since": null
+    },
+    {
+      "name": "disableFileNameEdit",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether or not to disable the file name edit button. Default is false.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 44,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "deleteClicked",
+      "type": "any",
+      "default": null,
+      "description": "Event emitted when the user clicks the delete button.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 32,
+      "since": null
+    },
+    {
+      "name": "editClicked",
+      "type": "boolean",
+      "default": null,
+      "description": "Event emitted when the user clicks the edit button.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 24,
+      "since": null
+    },
+    {
+      "name": "okClicked",
+      "type": "any",
+      "default": null,
+      "description": "Event emitted when the user clicks the OK button to conform a file name change.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 28,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

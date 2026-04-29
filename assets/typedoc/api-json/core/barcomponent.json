@@ -1,0 +1,94 @@
+{
+  "name": "BarComponent",
+  "selector": "[fd-bar]",
+  "kind": "Component",
+  "sourceFile": "bar.component.ts",
+  "sourceLine": 41,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/bar/bar.component.ts#L41",
+  "description": "The Bar component is a container that holds titles, buttons and input controls.\nIts content is distributed in three areas - left, middle and right.\nThe Bar has 2 modes - Desktop (default) and Tablet/Mobile (cozy).",
+  "inputs": [
+    {
+      "name": "barDesign",
+      "type": "BarDesignType",
+      "default": null,
+      "description": "Whether the Bar component is used as a header, subheader, header-with-subheader,\nfooter or floating-footer.\nTypes available: 'header' | 'subheader' | 'header-with-subheader' | 'footer' | 'floating-footer'",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 45,
+      "since": null
+    },
+    {
+      "name": "clear",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the Bar component should remove the box-shadow on the bottom.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 54,
+      "since": null
+    },
+    {
+      "name": "inHomePage",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the Bar component is used in Home Page Layout.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 51,
+      "since": null
+    },
+    {
+      "name": "inPage",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the Bar component is used in Page Layout.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 48,
+      "since": null
+    },
+    {
+      "name": "initialSuggestionSubline",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether this bar is to be used for the search results initial suggestion subline.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 65,
+      "since": null
+    },
+    {
+      "name": "initialSuggestionTitle",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether this bar is to be used for the search results initial suggestion title.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 62,
+      "since": null
+    },
+    {
+      "name": "role",
+      "type": "string",
+      "default": null,
+      "description": "Aria role for the Bar\ndefault is toolbar",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 70,
+      "since": null
+    },
+    {
+      "name": "size",
+      "type": "SizeType",
+      "default": null,
+      "description": "The size of the Page in Page responsive design.\nAvailable sizes: 's' | 'm_l' | 'xl'",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 59,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

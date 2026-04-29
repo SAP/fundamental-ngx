@@ -1,0 +1,68 @@
+{
+  "name": "BaseToastContainerComponent",
+  "selector": null,
+  "kind": "Component",
+  "sourceFile": "base-toast-container.component.ts",
+  "sourceLine": 12,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cdk/utils/toast/classes/base-toast-container.component.ts#L12",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "attachComponentPortal",
+      "signature": "(portal: ComponentPortal<C>) => ComponentRef<C>",
+      "description": "Attaches component to the portal.",
+      "deprecated": null,
+      "sourceLine": 77,
+      "since": null,
+      "parameters": [
+        {
+          "name": "portal",
+          "type": "ComponentPortal<C>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "ComponentRef<C>"
+    },
+    {
+      "name": "attachTemplatePortal",
+      "signature": "(portal: TemplatePortal<T>) => EmbeddedViewRef<T>",
+      "description": "Attaches Template to the portal.",
+      "deprecated": null,
+      "sourceLine": 85,
+      "since": null,
+      "parameters": [
+        {
+          "name": "portal",
+          "type": "TemplatePortal<T>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "EmbeddedViewRef<T>"
+    },
+    {
+      "name": "enter",
+      "signature": "() => void",
+      "description": "Method, which is triggered when the Toast component is ready to be shown. Used to trigger animations.",
+      "deprecated": null,
+      "sourceLine": 17,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "exit",
+      "signature": "() => void",
+      "description": "Method, which is triggered when the Toast component is ready to be removed. Used to trigger animations.",
+      "deprecated": null,
+      "sourceLine": 20,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

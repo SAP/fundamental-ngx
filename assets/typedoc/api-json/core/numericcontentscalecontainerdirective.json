@@ -1,0 +1,13 @@
+{
+  "name": "NumericContentScaleContainerDirective",
+  "selector": "[fd-numeric-content]",
+  "kind": "Directive",
+  "sourceFile": "numeric-content.directives.ts",
+  "sourceLine": 134,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/tile/directives/numeric-content.directives.ts#L134",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

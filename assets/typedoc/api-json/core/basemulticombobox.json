@@ -1,0 +1,159 @@
+{
+  "name": "BaseMultiCombobox",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "base-multi-combobox.class.ts",
+  "sourceLine": 59,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/multi-combobox/base-multi-combobox.class.ts#L59",
+  "description": "",
+  "inputs": [
+    {
+      "name": "displayKey",
+      "type": "string",
+      "default": null,
+      "description": "The property name used to display item labels in the dropdown.\nFor primitive types (strings, numbers), this is ignored and the value itself is displayed.\nFor objects, this specifies which property to use as the display text.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 94,
+      "since": null
+    },
+    {
+      "name": "group",
+      "type": "boolean",
+      "default": null,
+      "description": "Determines whether items should be grouped in the dropdown.\nWhen enabled, items will be organized into groups based on the `groupKey` property.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 70,
+      "since": null
+    },
+    {
+      "name": "groupKey",
+      "type": "string",
+      "default": null,
+      "description": "The property name used to group items when `group` is enabled.\nThis key is used to extract the grouping value from each item object.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 82,
+      "since": null
+    },
+    {
+      "name": "invalidEntryMessage",
+      "type": "null | string",
+      "default": null,
+      "description": "Signal containing the error message displayed when an invalid entry is detected.\nDisplayed temporarily when the user enters text that doesn't match any available options.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 119,
+      "since": null
+    },
+    {
+      "name": "limitless",
+      "type": "boolean",
+      "default": null,
+      "description": "Model signal controlling whether limitless mode is enabled.\nIn limitless mode, all available items are loaded without pagination limits.\nUse with caution for large datasets as it may impact performance.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 132,
+      "since": null
+    },
+    {
+      "name": "lookupKey",
+      "type": "string",
+      "default": null,
+      "description": "The property name used as a unique identifier for each item.\nUsed for item comparison, deduplication, and tracking selections.\nIf not specified, the entire object is compared.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 113,
+      "since": null
+    },
+    {
+      "name": "secondaryKey",
+      "type": "string",
+      "default": null,
+      "description": "The property name used to display secondary text below the main label.\nOnly displayed when `showSecondaryText` is enabled.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 100,
+      "since": null
+    },
+    {
+      "name": "showSecondaryText",
+      "type": "boolean",
+      "default": null,
+      "description": "Controls whether secondary text should be displayed for each item.\nWhen enabled, uses the `secondaryKey` property to extract and display secondary text.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 106,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "dataReceived",
+      "type": "boolean",
+      "default": null,
+      "description": "Output emitter for data received events.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 162,
+      "since": null
+    },
+    {
+      "name": "dataRequested",
+      "type": "boolean",
+      "default": null,
+      "description": "Output emitter for data request events.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 167,
+      "since": null
+    },
+    {
+      "name": "limitlessChange",
+      "type": "EventEmitter<boolean>",
+      "default": null,
+      "description": "Model signal controlling whether limitless mode is enabled.\nIn limitless mode, all available items are loaded without pagination limits.\nUse with caution for large datasets as it may impact performance.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 132,
+      "since": null
+    },
+    {
+      "name": "selectionChange",
+      "type": "MultiComboboxSelectionChangeEvent",
+      "default": null,
+      "description": "Output emitter for selection change events.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 157,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "setValue",
+      "signature": "(value: T[], emitOnChange: boolean) => void",
+      "description": "Used to change the value of a control.",
+      "deprecated": null,
+      "sourceLine": 395,
+      "since": null,
+      "parameters": [
+        {
+          "name": "value",
+          "type": "T[]",
+          "description": "the value to be applied",
+          "optional": false
+        },
+        {
+          "name": "emitOnChange",
+          "type": "boolean",
+          "description": "whether to emit \"onChange\" event.\nShould be \"false\", if the change is made programmatically (internally) by the control, \"true\" otherwise",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

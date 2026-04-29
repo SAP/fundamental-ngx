@@ -1,0 +1,257 @@
+{
+  "name": "FormFieldComponent",
+  "selector": "fdp-form-field",
+  "kind": "Component",
+  "sourceFile": "form-field.component.ts",
+  "sourceLine": 120,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/form-group/form-field/form-field.component.ts#L120",
+  "description": "Form Field represent actual row and aggregates common behavior for the input field such as\nerror, label or hint.\nHint is also responsible for listening for FieldControl changes and trigger necessary\nchange detection",
+  "inputs": [
+    {
+      "name": "colon",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether label text should be appended with colon.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 275,
+      "since": null
+    },
+    {
+      "name": "column",
+      "type": "number",
+      "default": null,
+      "description": "Form Container column it belongs to",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 164,
+      "since": null
+    },
+    {
+      "name": "columns",
+      "type": "Column",
+      "default": "6",
+      "description": "Form field custom width in columns must be between 1 - 12",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 265,
+      "since": null
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "description": "marks field as disabled. used in reactive form approach.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 271,
+      "since": null
+    },
+    {
+      "name": "formGroupContainer",
+      "type": "FormGroupContainer",
+      "default": null,
+      "description": "Form Group Container to bind the Form-Field to.\nThis will override default value injected by constructor",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 282,
+      "since": null
+    },
+    {
+      "name": "hint",
+      "type": "Nullable<FieldHintInput>",
+      "default": null,
+      "description": "Hint to be placed next to label",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 135,
+      "since": null
+    },
+    {
+      "name": "i18Strings",
+      "type": "TemplateRef<any>",
+      "default": null,
+      "description": "Translations template reference.\nThis is in most of the cases set from parent container (form-group)",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 239,
+      "since": null
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "default": null,
+      "description": "Suffix for ids of control elements inside this form field",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 131,
+      "since": null
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "default": null,
+      "description": "Form field label",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 125,
+      "since": null
+    },
+    {
+      "name": "noLabelLayout",
+      "type": "boolean",
+      "default": "false",
+      "description": "Indicates when form field label should not be displayed",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 141,
+      "since": null
+    },
+    {
+      "name": "placeholder",
+      "type": "string",
+      "default": null,
+      "description": "Placeholder for the field",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 160,
+      "since": null
+    },
+    {
+      "name": "rank",
+      "type": "number",
+      "default": null,
+      "description": "Rank is used for ordering.\nFirst lower number, then - higher",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 154,
+      "since": null
+    },
+    {
+      "name": "required",
+      "type": "boolean",
+      "default": "false",
+      "description": "Set when form field is a mandatory one.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 243,
+      "since": null
+    },
+    {
+      "name": "validators",
+      "type": "ValidatorFn[]",
+      "default": null,
+      "description": "The list of validators applied to the form field.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 147,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "onChange",
+      "type": "string",
+      "default": null,
+      "description": "Emits whenever formFieldControl's state changes",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 287,
+      "since": null
+    },
+    {
+      "name": "onColumnChange",
+      "type": "boolean",
+      "default": null,
+      "description": "Emits whenever column layout is changed",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 292,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "getPriorityState",
+      "signature": "() => 'error' | 'default' | 'information' | 'success' | 'warning'",
+      "description": "Gets prioritized control state based on the error types it has.",
+      "deprecated": null,
+      "sourceLine": 739,
+      "since": null,
+      "parameters": [],
+      "returnType": "'error' | 'default' | 'information' | 'success' | 'warning'"
+    },
+    {
+      "name": "groupErrors",
+      "signature": "() => void",
+      "description": "Groups",
+      "deprecated": null,
+      "sourceLine": 712,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "registerFormFieldControl",
+      "signature": "(formFieldControl: FormFieldControl<any>) => void",
+      "description": "Register underlying form control",
+      "deprecated": null,
+      "sourceLine": 631,
+      "since": null,
+      "parameters": [
+        {
+          "name": "formFieldControl",
+          "type": "FormFieldControl<any>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setDefaultColumnLayout",
+      "signature": "() => void",
+      "description": "Sets initial values for label, field and gap columns",
+      "deprecated": null,
+      "sourceLine": 519,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "setErrorDirectives",
+      "signature": "(directives: QueryList<FormError<any>>) => void",
+      "description": "Sets error directives.",
+      "deprecated": null,
+      "sourceLine": 750,
+      "since": null,
+      "parameters": [
+        {
+          "name": "directives",
+          "type": "QueryList<FormError<any>>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "unregisterFormFieldControl",
+      "signature": "(formFieldControl: FormFieldControl<any>) => void",
+      "description": "Unregister underlying form control",
+      "deprecated": null,
+      "sourceLine": 699,
+      "since": null,
+      "parameters": [
+        {
+          "name": "formFieldControl",
+          "type": "FormFieldControl<any>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

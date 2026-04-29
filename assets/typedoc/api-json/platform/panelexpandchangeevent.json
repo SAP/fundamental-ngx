@@ -1,0 +1,13 @@
+{
+  "name": "PanelExpandChangeEvent",
+  "selector": "fdp-panel",
+  "kind": "Class",
+  "sourceFile": "panel.component.ts",
+  "sourceLine": 32,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/panel/panel.component.ts#L32",
+  "description": "Panel change event instance",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

@@ -1,0 +1,366 @@
+{
+  "name": "SelectComponent",
+  "selector": "fd-select",
+  "kind": "Component",
+  "sourceFile": "select.component.ts",
+  "sourceLine": 122,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/select/select.component.ts#L122",
+  "description": "Select component intended to mimic\nthe behaviour of the native select element.",
+  "inputs": [
+    {
+      "name": "advancedStateMessage",
+      "type": "Nullable<FormFieldAdvancedStateMessage>",
+      "default": null,
+      "description": "Holds advanced message renderer with respect to state.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 275,
+      "since": null
+    },
+    {
+      "name": "appendTo",
+      "type": "ElementRef<any>",
+      "default": null,
+      "description": "The element to which the popover should be appended.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 235,
+      "since": null
+    },
+    {
+      "name": "ariaDescription",
+      "type": "string",
+      "default": null,
+      "description": "Value for aria-description",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 291,
+      "since": null
+    },
+    {
+      "name": "ariaHasPopup",
+      "type": "string",
+      "default": "'listbox'",
+      "description": "Value for aria-haspopup",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 287,
+      "since": null
+    },
+    {
+      "name": "ariaLabel",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "Sets control aria-label attribute value",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 255,
+      "since": null
+    },
+    {
+      "name": "ariaLabelledBy",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "Binds to control aria-labelledBy attribute",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 251,
+      "since": null
+    },
+    {
+      "name": "closeOnOutsideClick",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether close the popover on outside click.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 218,
+      "since": null
+    },
+    {
+      "name": "controlId",
+      "type": "string",
+      "default": null,
+      "description": "The ID of the control.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 162,
+      "since": null
+    },
+    {
+      "name": "controlTemplate",
+      "type": "TemplateRef<any>",
+      "default": null,
+      "description": "Custom template used to build control body.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 231,
+      "since": null
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the select component is disabled.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 178,
+      "since": null
+    },
+    {
+      "name": "fillControlMode",
+      "type": "PopoverFillMode",
+      "default": "'at-least'",
+      "description": "Preset options for the Select body width, whatever is chosen, the body has a 600px limit.\n* `at-least` will apply a minimum width to the body equivalent to the width of the control. - Default\n* `equal` will apply a width to the body equivalent to the width of the control.\n* 'fit-content' will apply width needed to properly display items inside, independent of control.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 227,
+      "since": null
+    },
+    {
+      "name": "glyph",
+      "type": "string",
+      "default": "'slim-arrow-down'",
+      "description": "Glyph to add icon in the select component.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 210,
+      "since": null
+    },
+    {
+      "name": "glyphFont",
+      "type": "IconFont",
+      "default": "FD_DEFAULT_ICON_FONT_FAMILY",
+      "description": "Glyph font family",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 214,
+      "since": null
+    },
+    {
+      "name": "inline",
+      "type": "boolean",
+      "default": "true",
+      "description": "Should select be inlined.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 263,
+      "since": null
+    },
+    {
+      "name": "maxHeight",
+      "type": "string",
+      "default": null,
+      "description": "Max height of the popover. Any overflowing elements will be accessible through scrolling.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 206,
+      "since": null
+    },
+    {
+      "name": "mobile",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the select component should be displayed in mobile mode.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 170,
+      "since": null
+    },
+    {
+      "name": "mobileConfig",
+      "type": "MobileModeConfig",
+      "default": null,
+      "description": "Select Input Mobile Configuration",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 259,
+      "since": null
+    },
+    {
+      "name": "placeholder",
+      "type": "string",
+      "default": null,
+      "description": "Placeholder for the select. Appears in the triggerbox if no option is selected.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 190,
+      "since": null
+    },
+    {
+      "name": "readonly",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the select component is readonly.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 186,
+      "since": null
+    },
+    {
+      "name": "required",
+      "type": "boolean",
+      "default": "false",
+      "description": "If it is mandatory field",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 182,
+      "since": null
+    },
+    {
+      "name": "scrollStrategy",
+      "type": "ScrollStrategy",
+      "default": null,
+      "description": "Scrolling strategy to be used for popover.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 149,
+      "since": null
+    },
+    {
+      "name": "selectControlClass",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "Additional classname for the select control element.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 267,
+      "since": null
+    },
+    {
+      "name": "selectDropdownButtonClass",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "Additional classname for the select dropdown button element.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 271,
+      "since": null
+    },
+    {
+      "name": "state",
+      "type": "Nullable<'error' | 'default' | 'information' | 'warning' | 'success'>",
+      "default": null,
+      "description": "Holds the control state of select",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 166,
+      "since": null
+    },
+    {
+      "name": "stateMessage",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "Holds the message with respect to state",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 174,
+      "since": null
+    },
+    {
+      "name": "tabOutStrategy",
+      "type": "'close' | 'closeAndSelect'",
+      "default": "'close'",
+      "description": "Action to perform when user shifts focus from the dropdown.\n- `close` will close the dropdown preserving previously selected value.\n- `closeAndSelect` will close the dropdown and select last focused dropdown item.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 283,
+      "since": null
+    },
+    {
+      "name": "textOverflow",
+      "type": "TextOverflowMode",
+      "default": "'ellipsis'",
+      "description": "Controls how long text is displayed in the dropdown list of the Select component.\n\n- `'ellipsis'`: Truncates the text with an ellipsis (`...`) if it exceeds a certain length.\n- `'full'`: Displays the entire text on multiple lines, ensuring full visibility.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 158,
+      "since": null
+    },
+    {
+      "name": "typeaheadDebounceInterval",
+      "type": "number",
+      "default": "250",
+      "description": "Time to wait in milliseconds after the last keydown before focusing or selecting option based on alphanumeric keys.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 247,
+      "since": null
+    },
+    {
+      "name": "unselectMissingOption",
+      "type": "boolean",
+      "default": "true",
+      "description": "If the option should be unselected and value changed to undefined, when the current value is\nnot presented in option array. Switching it off can be handy, when there is some delay between providing\npossible options and chosen value.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 243,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "isOpenChange",
+      "type": "boolean",
+      "default": null,
+      "description": "Event emitted when the popover open state changes.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 295,
+      "since": null
+    },
+    {
+      "name": "valueChange",
+      "type": "T",
+      "default": null,
+      "description": "Event emitted when the selected value of the select changes.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 299,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "blur",
+      "signature": "() => void",
+      "description": "Blurs select control.",
+      "deprecated": null,
+      "sourceLine": 608,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "focus",
+      "signature": "() => void",
+      "description": "Focuses select control.",
+      "deprecated": null,
+      "sourceLine": 603,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "open",
+      "signature": "() => void",
+      "description": "Opens the select popover body.",
+      "deprecated": null,
+      "sourceLine": 569,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "toggle",
+      "signature": "() => void",
+      "description": "Toggles the open state of the select.",
+      "deprecated": null,
+      "sourceLine": 518,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

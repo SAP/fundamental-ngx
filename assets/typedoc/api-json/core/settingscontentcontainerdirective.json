@@ -1,0 +1,13 @@
+{
+  "name": "SettingsContentContainerDirective",
+  "selector": "[fd-settings-content-container]",
+  "kind": "Directive",
+  "sourceFile": "settings-content-container.directive.ts",
+  "sourceLine": 11,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/settings/settings-content-container/settings-content-container.directive.ts#L11",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

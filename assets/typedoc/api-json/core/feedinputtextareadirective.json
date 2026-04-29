@@ -1,0 +1,35 @@
+{
+  "name": "FeedInputTextareaDirective",
+  "selector": "textarea[fdFeedInputTextarea]",
+  "kind": "Directive",
+  "sourceFile": "feed-input-textarea.directive.ts",
+  "sourceLine": 26,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/feed-input/directives/feed-input-textarea.directive.ts#L26",
+  "description": "Applies text area auto resize and set maximum rows to grow",
+  "inputs": [
+    {
+      "name": "fdFeedInputTextareaMaxRows",
+      "type": "number",
+      "default": null,
+      "description": "The maximum rows allowed to grow",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 29,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "valueChange",
+      "type": "string",
+      "default": null,
+      "description": "Event emitted when the textarea value changed",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 37,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

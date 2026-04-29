@@ -1,0 +1,85 @@
+{
+  "name": "SelectionService",
+  "selector": null,
+  "kind": "Service",
+  "sourceFile": "selection.service.ts",
+  "sourceLine": 17,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cdk/utils/directives/selectable-list/selection.service.ts#L17",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "clear",
+      "signature": "() => void",
+      "description": "Clear listeners",
+      "deprecated": null,
+      "sourceLine": 61,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "initialize",
+      "signature": "(list: SelectionItemsList<ElementType, ValueType>) => void",
+      "description": "Initialize watcher for selection changes and user interactions",
+      "deprecated": null,
+      "sourceLine": 68,
+      "since": null,
+      "parameters": [
+        {
+          "name": "list",
+          "type": "SelectionItemsList<ElementType, ValueType>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "listenToItemInteractions",
+      "signature": "() => void",
+      "description": "Start listening for item interactions. Will destroy() first.\nWill silently continue if service was not initialized first.",
+      "deprecated": null,
+      "sourceLine": 97,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "registerRootComponent",
+      "signature": "(rootComponent: SelectComponentRootToken<ElementType>) => void",
+      "description": "Register main select component, which holds config",
+      "deprecated": null,
+      "sourceLine": 54,
+      "since": null,
+      "parameters": [
+        {
+          "name": "rootComponent",
+          "type": "SelectComponentRootToken<ElementType>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setValue",
+      "signature": "(v: SelectableListValueType<ElementType>) => void",
+      "description": "Sets Value, on which service looks at and updates UI accordingly",
+      "deprecated": null,
+      "sourceLine": 84,
+      "since": null,
+      "parameters": [
+        {
+          "name": "v",
+          "type": "SelectableListValueType<ElementType>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

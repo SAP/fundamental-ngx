@@ -1,0 +1,13 @@
+{
+  "name": "TimelineNodeHeaderInfoTextDirective",
+  "selector": "[fdTimelineNodeHeaderInfoText], [fd-timeline-node-header-info-text]",
+  "kind": "Directive",
+  "sourceFile": "timeline-node-header-info-text.directive.ts",
+  "sourceLine": 7,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/timeline/directives/class-bindings/timeline-node-header-info-text.directive.ts#L7",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

@@ -1,0 +1,35 @@
+{
+  "name": "FilterMultiSelectComponent",
+  "selector": "fdp-filter-multi-select",
+  "kind": "Component",
+  "sourceFile": "filter-multi-select.component.ts",
+  "sourceLine": 21,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/table/components/table-view-settings-dialog/filtering/filter-multi-select.component.ts#L21",
+  "description": "",
+  "inputs": [
+    {
+      "name": "options",
+      "type": "TableFilterSelectOption[]",
+      "default": "[]",
+      "description": "Selectable filter options",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 24,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "valueChange",
+      "type": "any[]",
+      "default": null,
+      "description": "Filter model change event",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 41,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

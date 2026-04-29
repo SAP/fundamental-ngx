@@ -1,0 +1,255 @@
+{
+  "name": "FormGeneratorService",
+  "selector": null,
+  "kind": "Service",
+  "sourceFile": "form-generator.service.ts",
+  "sourceLine": 31,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/form-generator/form-generator.service.ts#L31",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "addComponent",
+      "signature": "(component: Type<BaseDynamicFormGeneratorControl<BaseDynamicFormFieldItem<any>>>, types: string[]) => boolean",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 251,
+      "since": null,
+      "parameters": [
+        {
+          "name": "component",
+          "type": "Type<BaseDynamicFormGeneratorControl<BaseDynamicFormFieldItem<any>>>",
+          "description": "Angular component.",
+          "optional": false
+        },
+        {
+          "name": "types",
+          "type": "string[]",
+          "description": "types of the form item.",
+          "optional": false
+        }
+      ],
+      "returnType": "boolean"
+    },
+    {
+      "name": "addControl",
+      "signature": "(control: DynamicFormItem, form: DynamicFormGroup, path: string[]) => Promise<void>",
+      "description": "Adds new control to a form.",
+      "deprecated": null,
+      "sourceLine": 178,
+      "since": null,
+      "parameters": [
+        {
+          "name": "control",
+          "type": "DynamicFormItem",
+          "description": "Control to add",
+          "optional": false
+        },
+        {
+          "name": "form",
+          "type": "DynamicFormGroup",
+          "description": "Form of the control to be added.",
+          "optional": false
+        },
+        {
+          "name": "path",
+          "type": "string[]",
+          "description": "Group path.",
+          "optional": false
+        }
+      ],
+      "returnType": "Promise<void>"
+    },
+    {
+      "name": "addValidationErrorHint",
+      "signature": "(type: string, value: string) => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 277,
+      "since": null,
+      "parameters": [
+        {
+          "name": "type",
+          "type": "string",
+          "description": "error type from validator.",
+          "optional": false
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "description": "display text.",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "checkVisibleFormItems",
+      "signature": "(form: DynamicFormGroup) => Promise<object>",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 287,
+      "since": null,
+      "parameters": [
+        {
+          "name": "form",
+          "type": "DynamicFormGroup",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "Promise<object>"
+    },
+    {
+      "name": "generateForm",
+      "signature": "(formName: string, formItems: Map<string, DynamicFormItemMap>) => Promise<DynamicFormGroup>",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 74,
+      "since": null,
+      "parameters": [
+        {
+          "name": "formName",
+          "type": "string",
+          "description": "Form name.",
+          "optional": false
+        },
+        {
+          "name": "formItems",
+          "type": "Map<string, DynamicFormItemMap>",
+          "description": "the list of form items which used for form control generation.",
+          "optional": false
+        }
+      ],
+      "returnType": "Promise<DynamicFormGroup>"
+    },
+    {
+      "name": "getComponentDefinitionByType",
+      "signature": "(type: string) => FormComponentDefinition",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 260,
+      "since": null,
+      "parameters": [
+        {
+          "name": "type",
+          "type": "string",
+          "description": "form item type",
+          "optional": false
+        }
+      ],
+      "returnType": "FormComponentDefinition"
+    },
+    {
+      "name": "getFormControl",
+      "signature": "(form: DynamicFormGroup, controlNames: string[]) => DynamicFormGroupControl",
+      "description": "Method for searching a form control inside form group. Can also search inside ungrouped form group.",
+      "deprecated": null,
+      "sourceLine": 298,
+      "since": null,
+      "parameters": [
+        {
+          "name": "form",
+          "type": "DynamicFormGroup",
+          "description": "Form group.",
+          "optional": false
+        },
+        {
+          "name": "controlNames",
+          "type": "string[]",
+          "description": "Name of the form control.",
+          "optional": false
+        }
+      ],
+      "returnType": "DynamicFormGroupControl"
+    },
+    {
+      "name": "getFormValue",
+      "signature": "(form: DynamicFormGroup | DynamicFormControlGroup, renderValue: boolean) => Promise<DynamicFormValue>",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 207,
+      "since": null,
+      "parameters": [
+        {
+          "name": "form",
+          "type": "DynamicFormGroup | DynamicFormControlGroup",
+          "description": "Form generator form",
+          "optional": false
+        },
+        {
+          "name": "renderValue",
+          "type": "boolean",
+          "description": "Whether or not form value will be used for rendering purposes.",
+          "optional": false
+        }
+      ],
+      "returnType": "Promise<DynamicFormValue>"
+    },
+    {
+      "name": "getValidationErrorHints",
+      "signature": "(key: string) => string",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 268,
+      "since": null,
+      "parameters": [
+        {
+          "name": "key",
+          "type": "string",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "string"
+    },
+    {
+      "name": "removeControl",
+      "signature": "(controlName: string, form: DynamicFormGroup, path: string[]) => void",
+      "description": "Removes the control with given name from the form.",
+      "deprecated": null,
+      "sourceLine": 193,
+      "since": null,
+      "parameters": [
+        {
+          "name": "controlName",
+          "type": "string",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "form",
+          "type": "DynamicFormGroup",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "path",
+          "type": "string[]",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "resetForm",
+      "signature": "(form: DynamicFormGroup) => void",
+      "description": "Resets the form to it's initial state.",
+      "deprecated": null,
+      "sourceLine": 316,
+      "since": null,
+      "parameters": [
+        {
+          "name": "form",
+          "type": "DynamicFormGroup",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

@@ -1,0 +1,102 @@
+{
+  "name": "TableVirtualScrollDirective",
+  "selector": "fdp-table[virtualScroll]",
+  "kind": "Directive",
+  "sourceFile": "table-virtual-scroll.directive.ts",
+  "sourceLine": 29,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/table-helpers/directives/table-virtual-scroll.directive.ts#L29",
+  "description": "",
+  "inputs": [
+    {
+      "name": "bodyHeight",
+      "type": "string",
+      "default": null,
+      "description": "Body height.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 42,
+      "since": null
+    },
+    {
+      "name": "renderAhead",
+      "type": "number",
+      "default": "40",
+      "description": "Cache size for the virtualScroll, default is 40 in each direction",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 38,
+      "since": null
+    },
+    {
+      "name": "rowHeight",
+      "type": "number",
+      "default": null,
+      "description": "Minimum height of the row, required for the virtualScroll,\ndefault is 44px in cozy, 32px in compact and 24px in condensed (set automatically)",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 49,
+      "since": null
+    },
+    {
+      "name": "secondaryRowHeight",
+      "type": "number",
+      "default": null,
+      "description": "Minimum height of the popping column when displayed in pop-in mode. Required when using popping columns and virtual scroll.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 55,
+      "since": null
+    },
+    {
+      "name": "virtualScroll",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to show only visible rows in matter of performance\nfalse by default, when true setting bodyHeight and rowHeight is required.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 34,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "calculateVirtualScrollRows",
+      "signature": "() => void",
+      "description": "Calculates rows to be rendered in the table.",
+      "deprecated": null,
+      "sourceLine": 159,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "listenOnVirtualScroll",
+      "signature": "() => void",
+      "description": "Initialises scroll listener.",
+      "deprecated": null,
+      "sourceLine": 243,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "setTable",
+      "signature": "(table: Table<any>) => void",
+      "description": "Sets table reference.",
+      "deprecated": null,
+      "sourceLine": 152,
+      "since": null,
+      "parameters": [
+        {
+          "name": "table",
+          "type": "Table<any>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

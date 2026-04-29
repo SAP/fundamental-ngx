@@ -1,0 +1,179 @@
+{
+  "name": "VariantManagementComponent",
+  "selector": "fdp-variant-management",
+  "kind": "Component",
+  "sourceFile": "variant-management.component.ts",
+  "sourceLine": 89,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/variant-management/variant-management.component.ts#L89",
+  "description": "",
+  "inputs": [
+    {
+      "name": "displaySearch",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to display search field for variants list.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 117,
+      "since": null
+    },
+    {
+      "name": "headerSize",
+      "type": "HeaderSizes",
+      "default": "4",
+      "description": "Header size.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 103,
+      "since": null
+    },
+    {
+      "name": "popoverTriggers",
+      "type": "string | TriggerConfig[]",
+      "default": null,
+      "description": "Popover trigger events.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 107,
+      "since": null
+    },
+    {
+      "name": "readonly",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the variant management component is in readonly mode.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 121,
+      "since": null
+    },
+    {
+      "name": "userName",
+      "type": "string",
+      "default": null,
+      "description": "User's name which will be applied to all new variants user creates.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 113,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "activeVariantChange",
+      "type": "Variant<T>",
+      "default": null,
+      "description": "Event emitted when new variant selected.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 129,
+      "since": null
+    },
+    {
+      "name": "variantsChange",
+      "type": "Variant<T>[]",
+      "default": null,
+      "description": "Event emitted when variants data has been updated.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 125,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "_trackFn",
+      "signature": "(index: number, item: VariantItem<T>) => string",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 294,
+      "since": null,
+      "parameters": [
+        {
+          "name": "index",
+          "type": "number",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "item",
+          "type": "VariantItem<T>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "string"
+    },
+    {
+      "name": "getActiveVariantData",
+      "signature": "() => T",
+      "description": "Returns current active variant data with applied changes.",
+      "deprecated": null,
+      "sourceLine": 207,
+      "since": null,
+      "parameters": [],
+      "returnType": "T"
+    },
+    {
+      "name": "getOriginalActiveVariantData",
+      "signature": "() => T",
+      "description": "Returns original variant data.",
+      "deprecated": null,
+      "sourceLine": 202,
+      "since": null,
+      "parameters": [],
+      "returnType": "T"
+    },
+    {
+      "name": "saveCurrentVariant",
+      "signature": "() => void",
+      "description": "Saves current variant with its configuration.",
+      "deprecated": null,
+      "sourceLine": 214,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "selectVariant",
+      "signature": "(variant: VariantItem<T>) => void",
+      "description": "Manually select variant.",
+      "deprecated": null,
+      "sourceLine": 193,
+      "since": null,
+      "parameters": [
+        {
+          "name": "variant",
+          "type": "VariantItem<T>",
+          "description": "Variant to select.",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "updateActivePreset",
+      "signature": "(preset: T, componentName: string) => void",
+      "description": "Updates current active preset with new configuration.",
+      "deprecated": null,
+      "sourceLine": 255,
+      "since": null,
+      "parameters": [
+        {
+          "name": "preset",
+          "type": "T",
+          "description": "Preset configuration.",
+          "optional": false
+        },
+        {
+          "name": "componentName",
+          "type": "string",
+          "description": "component to which this preset belongs to.",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

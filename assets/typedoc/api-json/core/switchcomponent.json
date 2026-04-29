@@ -1,0 +1,106 @@
+{
+  "name": "SwitchComponent",
+  "selector": "fd-switch",
+  "kind": "Component",
+  "sourceFile": "switch.component.ts",
+  "sourceLine": 54,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/switch/switch.component.ts#L54",
+  "description": "The Switch component is used to activate or deactivate an element.\nIt uses a visual metaphor to inform the user of the state of the switch.",
+  "inputs": [
+    {
+      "name": "activeText",
+      "type": "string",
+      "default": "''",
+      "description": "Optional text for the active state of the switch.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 61,
+      "since": null
+    },
+    {
+      "name": "ariaLabel",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "aria-label attribute of the inner input element.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 90,
+      "since": null
+    },
+    {
+      "name": "ariaLabelledBy",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "aria-labelledby attribute of the inner input element.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 94,
+      "since": null
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "default": null,
+      "description": "Id for the switch component. If omitted, a unique one is generated.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 69,
+      "since": null
+    },
+    {
+      "name": "inactiveText",
+      "type": "string",
+      "default": "''",
+      "description": "Optional text for the inactive state of the switch.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 65,
+      "since": null
+    },
+    {
+      "name": "required",
+      "type": "boolean",
+      "default": "false",
+      "description": "If it is mandatory field",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 73,
+      "since": null
+    },
+    {
+      "name": "semantic",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the switch is semantic",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 86,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "checkedChange",
+      "type": "boolean",
+      "default": null,
+      "description": "Event fired when the state of the switch changes.\n*$event* can be used to retrieve the new state of the switch.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 101,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "focus",
+      "signature": "() => void",
+      "description": "Set focus on the input element.",
+      "deprecated": null,
+      "sourceLine": 133,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

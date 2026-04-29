@@ -1,0 +1,13 @@
+{
+  "name": "NotificationMessageStripContainerDirective",
+  "selector": "[fdNotificationMessageStripContainer], [fd-notification-message-strip-container]",
+  "kind": "Directive",
+  "sourceFile": "notification-message-strip-container.directive.ts",
+  "sourceLine": 10,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/notification/directives/notification-message-strip-container.directive.ts#L10",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

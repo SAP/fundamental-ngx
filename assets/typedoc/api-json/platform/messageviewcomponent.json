@@ -1,0 +1,65 @@
+{
+  "name": "MessageViewComponent",
+  "selector": "fdp-message-view",
+  "kind": "Component",
+  "sourceFile": "message-view.component.ts",
+  "sourceLine": 49,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/message-popover/components/message-view/message-view.component.ts#L49",
+  "description": "",
+  "inputs": [
+    {
+      "name": "currentEntry",
+      "type": "Nullable<MessagePopoverEntry>",
+      "default": null,
+      "description": "Current error entry. Used for details view.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 69,
+      "since": null
+    },
+    {
+      "name": "filteredErrors",
+      "type": "MessagePopoverErrorGroup[]",
+      "default": null,
+      "description": "Filtered errors to render.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 65,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "closePopover",
+      "type": "boolean",
+      "default": null,
+      "description": "Event emitted when user clicks on the field link to focus on the field itself.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 81,
+      "since": null
+    },
+    {
+      "name": "focusItem",
+      "type": "MessagePopoverEntry",
+      "default": null,
+      "description": "Event emitted when user clicks on error entry and item's element should be focused.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 77,
+      "since": null
+    },
+    {
+      "name": "openDetails",
+      "type": "MessagePopoverEntry",
+      "default": null,
+      "description": "Event emitted when user clicks on error entry containing additional description.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 73,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

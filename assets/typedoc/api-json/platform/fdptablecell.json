@@ -1,0 +1,13 @@
+{
+  "name": "FdpTableCell",
+  "selector": "fdp-table-cell",
+  "kind": "Class",
+  "sourceFile": "table-cell.directive.ts",
+  "sourceLine": 15,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/table-helpers/directives/table-cell.directive.ts#L15",
+  "description": "Column cell container.",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

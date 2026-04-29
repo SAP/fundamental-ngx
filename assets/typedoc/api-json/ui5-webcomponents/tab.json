@@ -1,0 +1,84 @@
+{
+  "name": "Tab",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "additionalText",
+      "type": "string",
+      "default": null,
+      "description": "Represents the \"additionalText\" text, which is displayed in the tab. In the cases when in the same time there are tabs with icons and tabs without icons, if a tab has no icon the \"additionalText\" is displayed larger.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 45,
+      "since": null
+    },
+    {
+      "name": "design",
+      "type": "'Positive' | 'Critical' | 'Negative' | 'Default' | 'Neutral'",
+      "default": null,
+      "description": "Defines the component's design color.\n\nThe design is applied to:\n\n- the component icon\n- the `text` when the component overflows\n- the tab selection line\n\nAvailable designs are: `\"Default\"`, `\"Neutral\"`, `\"Positive\"`, `\"Critical\"` and `\"Negative\"`.\n\n*Note:** The design depends on the current theme.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 60,
+      "since": null
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": null,
+      "description": "Disabled tabs can't be selected.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 65,
+      "since": null
+    },
+    {
+      "name": "icon",
+      "type": "string",
+      "default": null,
+      "description": "Defines the icon source URI to be displayed as graphical element within the component.\nThe SAP-icons font provides numerous built-in icons.\nSee all the available icons in the [Icon Explorer](https://sdk.openui5.org/test-resources/sap/m/demokit/iconExplorer/webapp/index.html).",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 72,
+      "since": null
+    },
+    {
+      "name": "movable",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines if the tab is movable.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 77,
+      "since": null
+    },
+    {
+      "name": "selected",
+      "type": "boolean",
+      "default": null,
+      "description": "Specifies if the component is selected.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 82,
+      "since": null
+    },
+    {
+      "name": "text",
+      "type": "string",
+      "default": null,
+      "description": "The text to be displayed for the item.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 87,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

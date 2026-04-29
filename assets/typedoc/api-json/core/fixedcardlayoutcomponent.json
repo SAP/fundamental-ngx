@@ -1,0 +1,86 @@
+{
+  "name": "FixedCardLayoutComponent",
+  "selector": "[fdCardDef]",
+  "kind": "Component",
+  "sourceFile": "fixed-card-layout.component.ts",
+  "sourceLine": 129,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/fixed-card-layout/fixed-card-layout.component.ts#L129",
+  "description": "",
+  "inputs": [
+    {
+      "name": "columnsWidthConfig",
+      "type": "ColumnsWidthConfig",
+      "default": null,
+      "description": "Config with the width ratios that should take every column. Flex-grow principe. Missed values set to 0. s",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 155,
+      "since": null
+    },
+    {
+      "name": "disableDragDrop",
+      "type": "boolean",
+      "default": null,
+      "description": "Drag drop behavior can be disabled",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 132,
+      "since": null
+    },
+    {
+      "name": "dragStartDelay",
+      "type": "number",
+      "default": "DRAG_START_DELAY",
+      "description": "Drag start delay in milliseconds, default to 200ms for safe scrolling on mobile with touchscreen",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 136,
+      "since": null
+    },
+    {
+      "name": "maxColumns",
+      "type": "number",
+      "default": "MAX_COLUMNS",
+      "description": "Limit the number of columns. Default is 10.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 159,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "cardDraggedDropped",
+      "type": "CardDropped",
+      "default": null,
+      "description": "Event to emit on Card dragged and dropped",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 167,
+      "since": null
+    },
+    {
+      "name": "layoutChange",
+      "type": "Layout",
+      "default": null,
+      "description": "Event to emit, when layout changes",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 163,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "updateLayout",
+      "signature": "() => void",
+      "description": "Distribute cards on window resize",
+      "deprecated": null,
+      "sourceLine": 284,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

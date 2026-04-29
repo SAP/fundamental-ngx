@@ -1,0 +1,13 @@
+{
+  "name": "PopoverBodyFooterDirective",
+  "selector": "[fdPopoverBodyFooter], [fd-popover-body-footer]",
+  "kind": "Directive",
+  "sourceFile": "popover-body-footer.directive.ts",
+  "sourceLine": 7,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/popover/popover-body/popover-body-directives/popover-body-footer.directive.ts#L7",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

@@ -1,0 +1,75 @@
+{
+  "name": "UserMenuBodyComponent",
+  "selector": "fd-user-menu-body",
+  "kind": "Component",
+  "sourceFile": "user-menu-body.component.ts",
+  "sourceLine": 56,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/user-menu/components/user-menu-body.component.ts#L56",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "clearSubmenu",
+      "signature": "() => void",
+      "description": "Clears the submenu template ref and the selected item title\nCloses the submenu and returns to the main view",
+      "deprecated": null,
+      "sourceLine": 194,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "closeDialog",
+      "signature": "(dialogRef: any) => void",
+      "description": "Closes the dialog in mobile mode",
+      "deprecated": null,
+      "sourceLine": 211,
+      "since": null,
+      "parameters": [
+        {
+          "name": "dialogRef",
+          "type": "any",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "selectItem",
+      "signature": "(submenuTpl: null | TemplateRef<any>) => void",
+      "description": "Selects the item and sets the submenu template ref",
+      "deprecated": null,
+      "sourceLine": 179,
+      "since": null,
+      "parameters": [
+        {
+          "name": "submenuTpl",
+          "type": "null | TemplateRef<any>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "updateTitle",
+      "signature": "(title: null | string) => void",
+      "description": "Updates the title of the selected item",
+      "deprecated": null,
+      "sourceLine": 186,
+      "since": null,
+      "parameters": [
+        {
+          "name": "title",
+          "type": "null | string",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}
