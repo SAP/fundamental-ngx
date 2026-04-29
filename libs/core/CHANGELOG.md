@@ -1,3 +1,87 @@
+## 0.62.0 (2026-04-29)
+
+### 🚀 Features
+
+- add mcp ([#14121](https://github.com/SAP/fundamental-ngx/pull/14121))
+- **platform:** bring scrollWholeRows platform table scrolling feature to main ([#14058](https://github.com/SAP/fundamental-ngx/pull/14058))
+- **i18n,ui5:** implement ui5 locale support ([#13981](https://github.com/SAP/fundamental-ngx/pull/13981))
+- **i18n:** introduce i18n cli commands and GHAction for translation ([#13968](https://github.com/SAP/fundamental-ngx/pull/13968))
+- **core,platform:** search field complex results ([#13762](https://github.com/SAP/fundamental-ngx/pull/13762))
+- i18n migration ([#13937](https://github.com/SAP/fundamental-ngx/pull/13937))
+
+### 🩹 Fixes
+
+- **core:** fix avatar group accessibility ([#14088](https://github.com/SAP/fundamental-ngx/pull/14088))
+- adopt minor styles changes ([#14155](https://github.com/SAP/fundamental-ngx/pull/14155))
+- **core:** match fundamental-styles combobox group styling ([#14150](https://github.com/SAP/fundamental-ngx/pull/14150))
+- **ui5:** make webcomponents wrappers more visible ([#14156](https://github.com/SAP/fundamental-ngx/pull/14156))
+- **core:** a11y improvements for Breadcrumb component ([#14129](https://github.com/SAP/fundamental-ngx/pull/14129))
+- **ci:** harden workflow security against injection and over-permissioning ([#14084](https://github.com/SAP/fundamental-ngx/pull/14084))
+- **core:** add a11y improvements for Card component ([#14118](https://github.com/SAP/fundamental-ngx/pull/14118))
+- **core:** items in fd-menu should not be activated on key down ([#14115](https://github.com/SAP/fundamental-ngx/pull/14115))
+- ⚠️  **core:** signalify panel components ([#14109](https://github.com/SAP/fundamental-ngx/pull/14109))
+- **core:** bring back more inline help inputs ([#14066](https://github.com/SAP/fundamental-ngx/pull/14066))
+- **core:** signalify bar component ([#14101](https://github.com/SAP/fundamental-ngx/pull/14101))
+- **core, platform:** adopt latest fund-styles changes ([#14102](https://github.com/SAP/fundamental-ngx/pull/14102))
+- **core:** a11y fix for Fixed Card Layout ([#14093](https://github.com/SAP/fundamental-ngx/pull/14093))
+- **core,platform,btp,cx:** migrate remaining Default strategy components to OnPush ([#14071](https://github.com/SAP/fundamental-ngx/pull/14071))
+- **core:** fix mobile popover/menu reopen and form-item NG0100 ([#14087](https://github.com/SAP/fundamental-ngx/pull/14087))
+- ⚠️  **core:** remove Angular animation dependncy + redesign example cards with density toggle, responsive preview, and keyboard hints ([#14077](https://github.com/SAP/fundamental-ngx/pull/14077))
+- **core:** reconfigure multi-combobox data provider when dataSource changes ([#14065](https://github.com/SAP/fundamental-ngx/pull/14065))
+- **core, platform:** a11y improvements for Toolbar and Table Toolbar ([#14074](https://github.com/SAP/fundamental-ngx/pull/14074))
+- **core:** add fix for Inline Help focus outline ([#14073](https://github.com/SAP/fundamental-ngx/pull/14073))
+- **core,cdk:** combobox, multi-input, autocomplete bugs ([#14070](https://github.com/SAP/fundamental-ngx/pull/14070))
+- **core:** support both signal and plain property types in MobileMode ([#14069](https://github.com/SAP/fundamental-ngx/pull/14069))
+- **core:** add fix for flickering Inline Help ([#14055](https://github.com/SAP/fundamental-ngx/pull/14055))
+- **core:** remove NgZone usage from Segmented Burron ([#14053](https://github.com/SAP/fundamental-ngx/pull/14053))
+- **core:** Remove NgZone usage from User Menu Item component ([#14046](https://github.com/SAP/fundamental-ngx/pull/14046))
+- **core:** remove NgZone from Form Item ([#14045](https://github.com/SAP/fundamental-ngx/pull/14045))
+- **core:** remove NgZone usage from menu segmented-button-option directive for zoneless compatibility ([#14043](https://github.com/SAP/fundamental-ngx/pull/14043))
+- **ci:** allow .ts files in i18n fork PR validation ([#14062](https://github.com/SAP/fundamental-ngx/pull/14062))
+- **platform,core:** fdp-table-toolbar does not update well when modifying a title ([#14040](https://github.com/SAP/fundamental-ngx/pull/14040))
+- **core:** remove NgZone dependency from tab-list and tab-panel components ([#14042](https://github.com/SAP/fundamental-ngx/pull/14042))
+- **core:** add dynamic accessible text to expand/collapse button in dynamic page subheader ([#14033](https://github.com/SAP/fundamental-ngx/pull/14033))
+- **core:** fix the problem with the missing buttons and indicators in Carousel ([#14028](https://github.com/SAP/fundamental-ngx/pull/14028))
+- **core:** remove outline and event from disabled segmented button ([#14026](https://github.com/SAP/fundamental-ngx/pull/14026))
+- **core:** fix the problem with jumping Product Switch items ([#14029](https://github.com/SAP/fundamental-ngx/pull/14029))
+- **core:** fix overflow functionality for Breadcrumb and Overflow Layout components ([#14014](https://github.com/SAP/fundamental-ngx/pull/14014))
+- **core,platform:** fix list item tabindex ([#14009](https://github.com/SAP/fundamental-ngx/pull/14009))
+- ⚠️  **core:** migrate TokenComponent to signals ([#13983](https://github.com/SAP/fundamental-ngx/pull/13983))
+- **core:** prevent NG0600 error and site unresponsiveness ([#13998](https://github.com/SAP/fundamental-ngx/pull/13998))
+- **core:** finish Button migration to signals ([#13986](https://github.com/SAP/fundamental-ngx/pull/13986))
+- **core:** restore missing popover inputs for menu and product-switch ([#13976](https://github.com/SAP/fundamental-ngx/pull/13976))
+- **cdk:** migrate LineClampDirective and LineClampTargetDirective to signals ([#13954](https://github.com/SAP/fundamental-ngx/pull/13954))
+- ⚠️  **cdk, core:** migrate Toast infrastructure to signals and Web   Animations API ([#13965](https://github.com/SAP/fundamental-ngx/pull/13965))
+- **core,platform:** remove code that moves focus to search field when deselecting items in multi-combobox ([#13967](https://github.com/SAP/fundamental-ngx/pull/13967))
+- **core:** bring back missing inputs for Inline Help ([#13973](https://github.com/SAP/fundamental-ngx/pull/13973))
+- **cdk, core:** migrate TemplateDirective to signals ([#13956](https://github.com/SAP/fundamental-ngx/pull/13956))
+- **cdk, core:** update ResizeObserverDirective to signals ([#13957](https://github.com/SAP/fundamental-ngx/pull/13957))
+
+### ⚠️  Breaking Changes
+
+- **core:** signalify panel components  ([#14109](https://github.com/SAP/fundamental-ngx/pull/14109))
+  PanelComponent.expanded is now ModelSignal<boolean> — programmatic reads require expanded(). PanelComponent.expandedChange is now OutputRef<boolean> — programmatic subscriptions must use outputToObservable(panel.expandedChange). PanelComponent.panelContent is now Signal<PanelContentDirective | undefined> — access via panelContent(). PanelTitleDirective.id is now InputSignal<string> — access via id(). Template bindings [(expanded)], [expanded], and (expandedChange) are unchanged.
+  * refactor(core): signalify panel components
+  * fix(core): use model for expanded field, update example
+  * fix(core): remove Nullable
+- **core:** remove Angular animation dependncy + redesign example cards with density toggle, responsive preview, and keyboard hints  ([#14077](https://github.com/SAP/fundamental-ngx/pull/14077))
+  @angular/animations is no longer required by @fundamental-ngx/core. The add-animations schematic has been removed.
+- **core:** migrate TokenComponent to signals  ([#13983](https://github.com/SAP/fundamental-ngx/pull/13983))
+  Token component migrated to Angular signals - selected is now a model signal requiring .set()/() for access, view queries like tokenWrapperElement require function calls, output subscriptions return OutputRefSubscription instead of Subscription, onCloseClick.emit() requires a value parameter, and ngOnDestroy()/_subscriptions members have been removed in favor of automatic cleanup.
+  * fix(core): migrate token to signals
+  * fix(core): fix unit test format
+  * refactor(core): address PR comments
+- **cdk, core:** migrate Toast infrastructure to signals and Web   Animations API  ([#13965](https://github.com/SAP/fundamental-ngx/pull/13965))
+  removed BaseToastActionDismissibleRef, BaseToastOverlayContainer, BaseAnimatedToastConfig, baseToastAnimations
+
+### ❤️ Thank You
+
+- deno
+- fundamental-bot
+- Inna Atanasova @InnaAtanasova
+- Maria Dineva @MariaIDineva
+- Mike O'Donnell @mikerodonnell89
+
 ## 0.62.0-rc.101 (2026-04-29)
 
 This was a version bump only for core to align it with other projects, there were no code changes.

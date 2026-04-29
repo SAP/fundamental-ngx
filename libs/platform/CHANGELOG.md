@@ -1,3 +1,69 @@
+## 0.62.0 (2026-04-29)
+
+### 🚀 Features
+
+- add mcp ([#14121](https://github.com/SAP/fundamental-ngx/pull/14121))
+- **platform:** bring scrollWholeRows platform table scrolling feature to main ([#14058](https://github.com/SAP/fundamental-ngx/pull/14058))
+- **i18n,ui5:** implement ui5 locale support ([#13981](https://github.com/SAP/fundamental-ngx/pull/13981))
+- **i18n:** introduce i18n cli commands and GHAction for translation ([#13968](https://github.com/SAP/fundamental-ngx/pull/13968))
+- **core,platform:** search field complex results ([#13762](https://github.com/SAP/fundamental-ngx/pull/13762))
+- i18n migration ([#13937](https://github.com/SAP/fundamental-ngx/pull/13937))
+
+### 🩹 Fixes
+
+- **ui5:** make webcomponents wrappers more visible ([#14156](https://github.com/SAP/fundamental-ngx/pull/14156))
+- **platform:** table info toolbar bugs when using outerScroll ([#14128](https://github.com/SAP/fundamental-ngx/pull/14128))
+- **platform:** table pop-in keyboard improvements ([#14119](https://github.com/SAP/fundamental-ngx/pull/14119))
+- **platform:** platform combobox can now be used inside dialog ([#14126](https://github.com/SAP/fundamental-ngx/pull/14126))
+- **ci:** harden workflow security against injection and over-permissioning ([#14084](https://github.com/SAP/fundamental-ngx/pull/14084))
+- ⚠️  **core:** signalify panel components ([#14109](https://github.com/SAP/fundamental-ngx/pull/14109))
+- **platform:** table with pageScrolling should show skeleton row instead of busy indicator over whole table when loading ([#14103](https://github.com/SAP/fundamental-ngx/pull/14103))
+- **core, platform:** adopt latest fund-styles changes ([#14102](https://github.com/SAP/fundamental-ngx/pull/14102))
+- **core,platform,btp,cx:** migrate remaining Default strategy components to OnPush ([#14071](https://github.com/SAP/fundamental-ngx/pull/14071))
+- **core:** fix mobile popover/menu reopen and form-item NG0100 ([#14087](https://github.com/SAP/fundamental-ngx/pull/14087))
+- ⚠️  **core:** remove Angular animation dependncy + redesign example cards with density toggle, responsive preview, and keyboard hints ([#14077](https://github.com/SAP/fundamental-ngx/pull/14077))
+- **platform:** remove NgZone usage from icon-tab-bar for zoneless compatibility ([#14051](https://github.com/SAP/fundamental-ngx/pull/14051))
+- **core, platform:** a11y improvements for Toolbar and Table Toolbar ([#14074](https://github.com/SAP/fundamental-ngx/pull/14074))
+- **platform:** remove NgZone usage in auto complete directive ([#14054](https://github.com/SAP/fundamental-ngx/pull/14054))
+- **ci:** allow .ts files in i18n fork PR validation ([#14062](https://github.com/SAP/fundamental-ngx/pull/14062))
+- **platform,core:** fdp-table-toolbar does not update well when modifying a title ([#14040](https://github.com/SAP/fundamental-ngx/pull/14040))
+- **platform:** fdp-table should provide an invisible label for the navigation column header ([#14032](https://github.com/SAP/fundamental-ngx/pull/14032))
+- **platform:** fdp-table should not read additional info "empty" when there is a button inside a table cell ([#14017](https://github.com/SAP/fundamental-ngx/pull/14017))
+- **platform:** improvements to table popping row visuals ([#13985](https://github.com/SAP/fundamental-ngx/pull/13985))
+- **core,platform:** fix list item tabindex ([#14009](https://github.com/SAP/fundamental-ngx/pull/14009))
+- **platform:** multi-input popover width default to 0 bug ([#14004](https://github.com/SAP/fundamental-ngx/pull/14004))
+- ⚠️  **core:** migrate TokenComponent to signals ([#13983](https://github.com/SAP/fundamental-ngx/pull/13983))
+- **platform:** table dnd and virtual scroll ([#13994](https://github.com/SAP/fundamental-ngx/pull/13994))
+- **platform:** table group row and no data message need colspan="100%" ([#13984](https://github.com/SAP/fundamental-ngx/pull/13984))
+- **platform:** allow title template in Platform Table Toolbar ([#13966](https://github.com/SAP/fundamental-ngx/pull/13966))
+- **platform:** setTableState should update what the user sees as well ([#13960](https://github.com/SAP/fundamental-ngx/pull/13960))
+- **cdk, platform:** platform icon tab bar does not detect overflow ([#13964](https://github.com/SAP/fundamental-ngx/pull/13964))
+- **core,platform:** remove code that moves focus to search field when deselecting items in multi-combobox ([#13967](https://github.com/SAP/fundamental-ngx/pull/13967))
+- **platform:** update table pagination ([#13959](https://github.com/SAP/fundamental-ngx/pull/13959))
+- **cdk, core:** migrate TemplateDirective to signals ([#13956](https://github.com/SAP/fundamental-ngx/pull/13956))
+
+### ⚠️  Breaking Changes
+
+- **core:** signalify panel components  ([#14109](https://github.com/SAP/fundamental-ngx/pull/14109))
+  PanelComponent.expanded is now ModelSignal<boolean> — programmatic reads require expanded(). PanelComponent.expandedChange is now OutputRef<boolean> — programmatic subscriptions must use outputToObservable(panel.expandedChange). PanelComponent.panelContent is now Signal<PanelContentDirective | undefined> — access via panelContent(). PanelTitleDirective.id is now InputSignal<string> — access via id(). Template bindings [(expanded)], [expanded], and (expandedChange) are unchanged.
+  * refactor(core): signalify panel components
+  * fix(core): use model for expanded field, update example
+  * fix(core): remove Nullable
+- **core:** remove Angular animation dependncy + redesign example cards with density toggle, responsive preview, and keyboard hints  ([#14077](https://github.com/SAP/fundamental-ngx/pull/14077))
+  @angular/animations is no longer required by @fundamental-ngx/core. The add-animations schematic has been removed.
+- **core:** migrate TokenComponent to signals  ([#13983](https://github.com/SAP/fundamental-ngx/pull/13983))
+  Token component migrated to Angular signals - selected is now a model signal requiring .set()/() for access, view queries like tokenWrapperElement require function calls, output subscriptions return OutputRefSubscription instead of Subscription, onCloseClick.emit() requires a value parameter, and ngOnDestroy()/_subscriptions members have been removed in favor of automatic cleanup.
+  * fix(core): migrate token to signals
+  * fix(core): fix unit test format
+  * refactor(core): address PR comments
+
+### ❤️ Thank You
+
+- deno
+- Inna Atanasova @InnaAtanasova
+- Maria Dineva @MariaIDineva
+- Mike O'Donnell @mikerodonnell89
+
 ## 0.62.0-rc.101 (2026-04-29)
 
 This was a version bump only for platform to align it with other projects, there were no code changes.

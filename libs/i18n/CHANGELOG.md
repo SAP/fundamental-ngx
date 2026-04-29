@@ -1,3 +1,42 @@
+## 0.62.0 (2026-04-29)
+
+### 🚀 Features
+
+- add mcp ([#14121](https://github.com/SAP/fundamental-ngx/pull/14121))
+- **i18n,ui5:** implement ui5 locale support ([#13981](https://github.com/SAP/fundamental-ngx/pull/13981))
+- **i18n:** introduce i18n cli commands and GHAction for translation ([#13968](https://github.com/SAP/fundamental-ngx/pull/13968))
+- **core,platform:** search field complex results ([#13762](https://github.com/SAP/fundamental-ngx/pull/13762))
+- i18n migration ([#13937](https://github.com/SAP/fundamental-ngx/pull/13937))
+
+### 🩹 Fixes
+
+- **core:** fix avatar group accessibility ([#14088](https://github.com/SAP/fundamental-ngx/pull/14088))
+- **ui5:** make webcomponents wrappers more visible ([#14156](https://github.com/SAP/fundamental-ngx/pull/14156))
+- **core:** a11y improvements for Breadcrumb component ([#14129](https://github.com/SAP/fundamental-ngx/pull/14129))
+- **ci:** harden workflow security against injection and over-permissioning ([#14084](https://github.com/SAP/fundamental-ngx/pull/14084))
+- **core:** add a11y improvements for Card component ([#14118](https://github.com/SAP/fundamental-ngx/pull/14118))
+- **core, platform:** adopt latest fund-styles changes ([#14102](https://github.com/SAP/fundamental-ngx/pull/14102))
+- **core:** fix mobile popover/menu reopen and form-item NG0100 ([#14087](https://github.com/SAP/fundamental-ngx/pull/14087))
+- ⚠️  **core:** remove Angular animation dependncy + redesign example cards with density toggle, responsive preview, and keyboard hints ([#14077](https://github.com/SAP/fundamental-ngx/pull/14077))
+- **i18n:** add new translation delivery ([#14034](https://github.com/SAP/fundamental-ngx/pull/14034))
+- **ci:** allow .ts files in i18n fork PR validation ([#14062](https://github.com/SAP/fundamental-ngx/pull/14062))
+- **platform:** fdp-table should provide an invisible label for the navigation column header ([#14032](https://github.com/SAP/fundamental-ngx/pull/14032))
+- translation delivery: commit by LX Lab ([#13951](https://github.com/SAP/fundamental-ngx/pull/13951))
+
+### ⚠️  Breaking Changes
+
+- **core:** remove Angular animation dependncy + redesign example cards with density toggle, responsive preview, and keyboard hints  ([#14077](https://github.com/SAP/fundamental-ngx/pull/14077))
+  @angular/animations is no longer required by @fundamental-ngx/core. The add-animations schematic has been removed.
+
+### ❤️ Thank You
+
+- deno
+- fundamental-bot
+- Inna Atanasova @InnaAtanasova
+- Maria Dineva @MariaIDineva
+- Mike O'Donnell @mikerodonnell89
+- SAP LX Lab Service Account
+
 ## 0.62.0-rc.101 (2026-04-29)
 
 This was a version bump only for i18n to align it with other projects, there were no code changes.

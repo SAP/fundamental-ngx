@@ -1,3 +1,51 @@
+## 0.62.0 (2026-04-29)
+
+### 🚀 Features
+
+- add mcp ([#14121](https://github.com/SAP/fundamental-ngx/pull/14121))
+- **i18n,ui5:** implement ui5 locale support ([#13981](https://github.com/SAP/fundamental-ngx/pull/13981))
+- **i18n:** introduce i18n cli commands and GHAction for translation ([#13968](https://github.com/SAP/fundamental-ngx/pull/13968))
+- **core,platform:** search field complex results ([#13762](https://github.com/SAP/fundamental-ngx/pull/13762))
+- i18n migration ([#13937](https://github.com/SAP/fundamental-ngx/pull/13937))
+
+### 🩹 Fixes
+
+- **ui5:** make webcomponents wrappers more visible ([#14156](https://github.com/SAP/fundamental-ngx/pull/14156))
+- **ci:** harden workflow security against injection and over-permissioning ([#14084](https://github.com/SAP/fundamental-ngx/pull/14084))
+- **core, platform:** adopt latest fund-styles changes ([#14102](https://github.com/SAP/fundamental-ngx/pull/14102))
+- **core,platform,btp,cx:** migrate remaining Default strategy components to OnPush ([#14071](https://github.com/SAP/fundamental-ngx/pull/14071))
+- **core:** fix mobile popover/menu reopen and form-item NG0100 ([#14087](https://github.com/SAP/fundamental-ngx/pull/14087))
+- ⚠️  **core:** remove Angular animation dependncy + redesign example cards with density toggle, responsive preview, and keyboard hints ([#14077](https://github.com/SAP/fundamental-ngx/pull/14077))
+- **cdk:** remove NgZone from autocomplete directive ([#14081](https://github.com/SAP/fundamental-ngx/pull/14081))
+- **cdk:** remove ngZone from overflow list directive ([#14079](https://github.com/SAP/fundamental-ngx/pull/14079))
+- **btp,cdk:** migrate tool-header to zoneless and fix Angular 21 focusable list regression ([#14076](https://github.com/SAP/fundamental-ngx/pull/14076))
+- **cdk:** remove NgZone usage in FdkDisabledProvider ([#14059](https://github.com/SAP/fundamental-ngx/pull/14059))
+- **core,cdk:** combobox, multi-input, autocomplete bugs ([#14070](https://github.com/SAP/fundamental-ngx/pull/14070))
+- **cdk:** remove NgZone usage from FdkReadonlyProvider ([#14067](https://github.com/SAP/fundamental-ngx/pull/14067))
+- **ci:** allow .ts files in i18n fork PR validation ([#14062](https://github.com/SAP/fundamental-ngx/pull/14062))
+- **cdk:** migrate LineClampDirective and LineClampTargetDirective to signals ([#13954](https://github.com/SAP/fundamental-ngx/pull/13954))
+- ⚠️  **cdk, core:** migrate Toast infrastructure to signals and Web   Animations API ([#13965](https://github.com/SAP/fundamental-ngx/pull/13965))
+- **cdk, platform:** platform icon tab bar does not detect overflow ([#13964](https://github.com/SAP/fundamental-ngx/pull/13964))
+- **cdk, core:** migrate TemplateDirective to signals ([#13956](https://github.com/SAP/fundamental-ngx/pull/13956))
+- **cdk, core:** update ResizeObserverDirective to signals ([#13957](https://github.com/SAP/fundamental-ngx/pull/13957))
+- **cdk:** migrate TruncateDirective to signals ([#13948](https://github.com/SAP/fundamental-ngx/pull/13948))
+- **cdk:** focusable grid/list/item performance improvements ([#13946](https://github.com/SAP/fundamental-ngx/pull/13946))
+- **cdk:** migrate ClickedDirective to signals ([#13921](https://github.com/SAP/fundamental-ngx/pull/13921))
+
+### ⚠️  Breaking Changes
+
+- **core:** remove Angular animation dependncy + redesign example cards with density toggle, responsive preview, and keyboard hints  ([#14077](https://github.com/SAP/fundamental-ngx/pull/14077))
+  @angular/animations is no longer required by @fundamental-ngx/core. The add-animations schematic has been removed.
+- **cdk, core:** migrate Toast infrastructure to signals and Web   Animations API  ([#13965](https://github.com/SAP/fundamental-ngx/pull/13965))
+  removed BaseToastActionDismissibleRef, BaseToastOverlayContainer, BaseAnimatedToastConfig, baseToastAnimations
+
+### ❤️ Thank You
+
+- deno
+- Inna Atanasova @InnaAtanasova
+- Maria Dineva @MariaIDineva
+- Mike O'Donnell @mikerodonnell89
+
 ## 0.62.0-rc.101 (2026-04-29)
 
 This was a version bump only for cdk to align it with other projects, there were no code changes.
