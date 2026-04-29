@@ -32,10 +32,10 @@ nx test webc-generator
 
 ## Regenerating wrappers
 
-After modifying the generator, rebuild it and run the `generate` executor to regenerate all UI5 wrapper libraries:
+After modifying the generator, rebuild it and run the `generate` target across all UI5 wrapper libraries:
 
 ```bash
-nx build webc-generator && nx run webc-generator:generate
+nx build webc-generator && nx run-many -t generate -p ui5-webcomponents ui5-webcomponents-fiori ui5-webcomponents-ai
 ```
 
 This overwrites all files in `libs/ui5-webcomponents`, `libs/ui5-webcomponents-fiori`, and `libs/ui5-webcomponents-ai`. Commit the regenerated output as part of the same PR as your generator changes.
@@ -45,7 +45,7 @@ This overwrites all files in `libs/ui5-webcomponents`, `libs/ui5-webcomponents-f
 Wrappers are derived from UI5 component metadata — you do not add them manually. To expose a new UI5 Web Component:
 
 1. Ensure the component is included in the CEM of the relevant `@ui5/webcomponents-*` package (this happens upstream in the UI5 repository).
-2. Run `nx run webc-generator:generate` — the new wrapper will appear automatically.
+2. Run `nx build webc-generator && nx run-many -t generate -p ui5-webcomponents ui5-webcomponents-fiori ui5-webcomponents-ai` — the new wrapper will appear automatically.
 3. If the generated output needs customization (e.g. custom CVA logic), update the templates in `src/executors/generate/` and regenerate.
 
 ## Modifying generated component behavior
@@ -55,4 +55,4 @@ All customization goes through the generator templates in `src/executors/generat
 - `component-template.ts` — Angular component class template
 - `utils/` — shared utilities (theming, CVA stubs)
 
-After editing templates, run `nx build webc-generator && nx run webc-generator:generate` to apply the changes.
+After editing templates, run `nx build webc-generator && nx run-many -t generate -p ui5-webcomponents ui5-webcomponents-fiori ui5-webcomponents-ai` to apply the changes.
