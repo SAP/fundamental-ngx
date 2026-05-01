@@ -4,8 +4,8 @@
             {{ ('platformTable.groupDialogGroupOrderHeader' | fdTranslate)() }}
         </span>
     </legend>
-    <ul fd-list [selection]="true">
-        <li fd-list-item [selected]="direction() === SORT_DIRECTION.ASC" [attr.aria-describedby]="groupOrderHeaderId">
+    <ul fd-list [selection]="true" [attr.aria-labelledby]="groupOrderHeaderId">
+        <li fd-list-item [selected]="direction() === SORT_DIRECTION.ASC">
             <fd-radio-button
                 name="sort-order"
                 value="asc"
@@ -15,7 +15,7 @@
             ></fd-radio-button>
             <span fd-list-title>{{ ('platformTable.groupDialogGroupOrderAsc' | fdTranslate)() }}</span>
         </li>
-        <li fd-list-item [selected]="direction() === SORT_DIRECTION.DESC" [attr.aria-describedby]="groupOrderHeaderId">
+        <li fd-list-item [selected]="direction() === SORT_DIRECTION.DESC">
             <fd-radio-button
                 name="sort-order"
                 value="desc"
@@ -34,8 +34,8 @@
             {{ ('platformTable.groupDialogGroupByHeader' | fdTranslate)() }}
         </span>
     </legend>
-    <ul fd-list [selection]="true">
-        <li fd-list-item [selected]="NOT_GROUPED_OPTION_VALUE === field()" [attr.aria-describedby]="groupByHeaderId">
+    <ul fd-list [selection]="true" [attr.aria-labelledby]="groupByHeaderId">
+        <li fd-list-item [selected]="NOT_GROUPED_OPTION_VALUE === field()">
             <fd-radio-button
                 name="sort-by"
                 [value]="NOT_GROUPED_OPTION_VALUE"
@@ -46,7 +46,7 @@
             <span fd-list-title>{{ ('platformTable.groupDialogNotGroupedLabel' | fdTranslate)() }}</span>
         </li>
         @for (column of columns(); track column) {
-            <li fd-list-item [selected]="column.key === field()" [attr.aria-describedby]="groupByHeaderId">
+            <li fd-list-item [selected]="column.key === field()">
                 <fd-radio-button
                     name="sort-by"
                     [value]="column.key"

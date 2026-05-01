@@ -4,8 +4,8 @@
             {{ ('platformTable.sortDialogSortOrderHeader' | fdTranslate)() }}
         </span>
     </legend>
-    <ul fd-list [selection]="true">
-        <li fd-list-item [selected]="direction() === SORT_DIRECTION.ASC" [attr.aria-describedby]="sortOrderHeaderId">
+    <ul fd-list [selection]="true" [attr.aria-labelledby]="sortOrderHeaderId">
+        <li fd-list-item [selected]="direction() === SORT_DIRECTION.ASC">
             <fd-radio-button
                 name="sort-order"
                 value="asc"
@@ -15,7 +15,7 @@
             ></fd-radio-button>
             <span fd-list-title>{{ ('platformTable.sortDialogSortOrderAsc' | fdTranslate)() }}</span>
         </li>
-        <li fd-list-item [selected]="direction() === SORT_DIRECTION.DESC" [attr.aria-describedby]="sortOrderHeaderId">
+        <li fd-list-item [selected]="direction() === SORT_DIRECTION.DESC">
             <fd-radio-button
                 name="sort-order"
                 value="desc"
@@ -34,13 +34,9 @@
             {{ ('platformTable.sortDialogSortByHeader' | fdTranslate)() }}
         </span>
     </legend>
-    <ul fd-list [selection]="true">
+    <ul fd-list [selection]="true" [attr.aria-labelledby]="sortDialogSortByHeaderId">
         @if (allowDisablingSorting()) {
-            <li
-                fd-list-item
-                [selected]="field() === NOT_SORTED_OPTION_VALUE"
-                [attr.aria-describedby]="sortDialogSortByHeaderId"
-            >
+            <li fd-list-item [selected]="field() === NOT_SORTED_OPTION_VALUE">
                 <fd-radio-button
                     name="sort-by"
                     [value]="NOT_SORTED_OPTION_VALUE"
@@ -52,7 +48,7 @@
             </li>
         }
         @for (column of columns(); track column) {
-            <li fd-list-item [selected]="column.key === field()" [attr.aria-describedby]="sortDialogSortByHeaderId">
+            <li fd-list-item [selected]="column.key === field()">
                 <fd-radio-button
                     name="sort-by"
                     [value]="column.key"
