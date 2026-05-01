@@ -1,3 +1,13 @@
+## 0.62.1-rc.0 (2026-05-01)
+
+### 🩹 Fixes
+
+- **platform:** add missing chevrons to filter dialog in table ([#14172](https://github.com/SAP/fundamental-ngx/pull/14172))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
 ## 0.62.0 (2026-04-29)
 
 ### 🚀 Features
