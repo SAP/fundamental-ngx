@@ -13,7 +13,7 @@
     >
         {{ ('platformTable.filterDialogFilterBy' | fdTranslate)() }}
     </span>
-    <ul fd-list aria-labelledby="platformTableInternalFilterListGroupHeader">
+    <ul fd-list [navigationIndicator]="true" aria-labelledby="platformTableInternalFilterListGroupHeader">
         @for (filter of filters; track filter) {
             <li
                 fd-list-item
@@ -22,7 +22,9 @@
                 (keydown.space)="selectFilter.emit(filter)"
                 (keydown.enter)="selectFilter.emit(filter)"
             >
-                <span fd-list-title>{{ filter.label }}</span>
+                <a fd-list-link [navigationIndicator]="true">
+                    <span fd-list-title>{{ filter.label }}</span>
+                </a>
             </li>
         }
     </ul>

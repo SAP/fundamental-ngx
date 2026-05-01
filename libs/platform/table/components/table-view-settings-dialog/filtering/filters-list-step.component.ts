@@ -14,6 +14,7 @@ import {
     ListComponent,
     ListGroupHeaderDirective,
     ListItemComponent,
+    ListLinkDirective,
     ListTitleDirective
 } from '@fundamental-ngx/core/list';
 import { TitleComponent } from '@fundamental-ngx/core/title';
@@ -42,6 +43,7 @@ export interface SelectableFilter {
         ListComponent,
         ListGroupHeaderDirective,
         ListItemComponent,
+        ListLinkDirective,
         ListTitleDirective,
         FdTranslatePipe
     ]
