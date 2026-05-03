@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "tab-panel.component.ts",
   "sourceLine": 54,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/tabs/tab-panel/tab-panel.component.ts#L54",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/tabs/tab-panel/tab-panel.component.ts#L54",
   "description": "Represents the body of a tab element. It also contains elements pertaining to the associated tab header.",
   "inputs": [
     {

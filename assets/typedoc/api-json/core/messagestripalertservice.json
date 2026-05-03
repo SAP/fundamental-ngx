@@ -4,7 +4,7 @@
   "kind": "Service",
   "sourceFile": "message-strip-alert.service.ts",
   "sourceLine": 27,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/message-strip/alert/message-strip-alert.service.ts#L27",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/message-strip/alert/message-strip-alert.service.ts#L27",
   "description": "Service that is responsible for opening and closing message strip alerts.\nThis should be only created once in entire application.\nService is responsible for creating and managing the overlays for the\nmessage strip alerts. This also manages the footer components for any\ngiven position.",
   "inputs": [],
   "outputs": [],

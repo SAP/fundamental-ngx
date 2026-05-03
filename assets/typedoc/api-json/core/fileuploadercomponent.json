@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "file-uploader.component.ts",
   "sourceLine": 54,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/file-uploader/file-uploader.component.ts#L54",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/file-uploader/file-uploader.component.ts#L54",
   "description": "Tool to facilitate the input of files from the user.\nIt supports drag and drop, multiple input, max file size and more.\nThe drag events make it very easy to create and style elements like a dropzone.",
   "inputs": [
     {

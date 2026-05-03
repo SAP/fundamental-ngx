@@ -4,7 +4,7 @@
   "kind": "Service",
   "sourceFile": "global-content-density.service.ts",
   "sourceLine": 12,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/content-density/services/global-content-density.service.ts#L12",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/content-density/services/global-content-density.service.ts#L12",
   "description": "Service for managing global content density state.\nProvides a signal-based API for reactive content density tracking.",
   "inputs": [],
   "outputs": [],

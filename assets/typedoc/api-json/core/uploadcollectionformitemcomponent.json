@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "upload-collection-form-item.component.ts",
   "sourceLine": 14,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/upload-collection/upload-collection-form-item/upload-collection-form-item.component.ts#L14",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/upload-collection/upload-collection-form-item/upload-collection-form-item.component.ts#L14",
   "description": "",
   "inputs": [],
   "outputs": [

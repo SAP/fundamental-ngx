@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "calendar-header.component.ts",
   "sourceLine": 43,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/calendar/calendar-header/calendar-header.component.ts#L43",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/calendar/calendar-header/calendar-header.component.ts#L43",
   "description": "Internal use only.\nHeader of the calendar component.",
   "inputs": [
     {

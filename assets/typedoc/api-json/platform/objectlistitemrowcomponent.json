@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "object-list-item-row.component.ts",
   "sourceLine": 26,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/list/object-list-item/object-list-item-row.component.ts#L26",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/platform/list/object-list-item/object-list-item-row.component.ts#L26",
   "description": "",
   "inputs": [
     {

@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "action-bar-actions.directive.ts",
   "sourceLine": 23,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/action-bar/action-bar-actions/action-bar-actions.directive.ts#L23",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/action-bar/action-bar-actions/action-bar-actions.directive.ts#L23",
   "description": "This component holds the right-aligned action buttons for the action bar.\n\n```html\n<div fd-action-bar>\n    <div fd-action-bar-actions>\n        <button fd-button [fdType]=\"'primary'\">Cancel</button>\n        <button fd-button [fdType]=\"'main'\">Save</button>\n    </div>\n</div>\n```",
   "inputs": [],
   "outputs": [],

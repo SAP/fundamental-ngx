@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "dynamic-page-title.component.ts",
   "sourceLine": 38,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/dynamic-page/dynamic-page-header/title/dynamic-page-title.component.ts#L38",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/platform/dynamic-page/dynamic-page-header/title/dynamic-page-title.component.ts#L38",
   "description": "Dynamic Page Title Component.",
   "inputs": [
     {

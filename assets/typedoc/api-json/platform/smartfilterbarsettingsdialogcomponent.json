@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "smart-filter-bar-settings-dialog.component.ts",
   "sourceLine": 105,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/smart-filter-bar/components/smart-filter-bar-settings-dialog/smart-filter-bar-settings-dialog.component.ts#L105",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/platform/smart-filter-bar/components/smart-filter-bar-settings-dialog/smart-filter-bar-settings-dialog.component.ts#L105",
   "description": "Reset button.\n\nUsed to reset resettable state by click.",
   "inputs": [],
   "outputs": [],

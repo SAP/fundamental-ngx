@@ -4,7 +4,7 @@
   "kind": "Service",
   "sourceFile": "table-scroll-dispatcher.service.ts",
   "sourceLine": 39,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/table-helpers/services/table-scroll-dispatcher.service.ts#L39",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/platform/table-helpers/services/table-scroll-dispatcher.service.ts#L39",
   "description": "",
   "inputs": [],
   "outputs": [],

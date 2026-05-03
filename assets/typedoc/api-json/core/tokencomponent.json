@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "token.component.ts",
   "sourceLine": 42,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/token/token.component.ts#L42",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/token/token.component.ts#L42",
   "description": "A token is used to represent contextualizing information.\nThey can be useful to show applied filters, selected values for form fields or object metadata.",
   "inputs": [
     {

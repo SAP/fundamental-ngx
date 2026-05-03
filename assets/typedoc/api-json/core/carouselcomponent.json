@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "carousel.component.ts",
   "sourceLine": 75,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/carousel/carousel.component.ts#L75",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/carousel/carousel.component.ts#L75",
   "description": "",
   "inputs": [
     {

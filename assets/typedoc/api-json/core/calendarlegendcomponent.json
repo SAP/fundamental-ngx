@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "calendar-legend.component.ts",
   "sourceLine": 72,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/calendar/calendar-legend/calendar-legend.component.ts#L72",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/calendar/calendar-legend/calendar-legend.component.ts#L72",
   "description": "",
   "inputs": [
     {

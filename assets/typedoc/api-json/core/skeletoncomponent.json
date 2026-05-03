@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "skeleton.component.ts",
   "sourceLine": 33,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/skeleton/components/skeleton.component.ts#L33",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/skeleton/components/skeleton.component.ts#L33",
   "description": "Skeleton component for displaying loading placeholders with animated pulse effect.",
   "inputs": [
     {

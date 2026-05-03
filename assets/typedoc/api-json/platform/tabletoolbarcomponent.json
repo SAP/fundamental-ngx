@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "table-toolbar.component.ts",
   "sourceLine": 120,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/table/components/table-toolbar/table-toolbar.component.ts#L120",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/platform/table/components/table-toolbar/table-toolbar.component.ts#L120",
   "description": "The component that represents a table toolbar.\n\n```html\n<fdp-table-toolbar\n  title=\"Order Line Items\"\n  [hideItemCount]=\"false\">\n</fdp-table-toolbar>\n```",
   "inputs": [
     {

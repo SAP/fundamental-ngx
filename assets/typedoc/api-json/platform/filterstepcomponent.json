@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "filter-step.component.ts",
   "sourceLine": 48,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/table/components/table-view-settings-dialog/filtering/filter-step.component.ts#L48",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/platform/table/components/table-view-settings-dialog/filtering/filter-step.component.ts#L48",
   "description": "Filter dialog step.\n\nUsed to render selected filter options.",
   "inputs": [
     {

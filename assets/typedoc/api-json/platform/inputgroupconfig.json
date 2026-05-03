@@ -4,7 +4,7 @@
   "kind": "Class",
   "sourceFile": "input-group.config.ts",
   "sourceLine": 10,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/input-group/input-group.config.ts#L10",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/platform/form/input-group/input-group.config.ts#L10",
   "description": "Default options for platform input group",
   "inputs": [],
   "outputs": [],

@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "checkbox-group.component.ts",
   "sourceLine": 36,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/checkbox-group/checkbox-group.component.ts#L36",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/platform/form/checkbox-group/checkbox-group.component.ts#L36",
   "description": "Checkbox group implementation based on the\nhttps://github.com/SAP/fundamental-ngx/wiki/Platform:-CheckboxGroup-Technical-Design\ndocuments.",
   "inputs": [],
   "outputs": [

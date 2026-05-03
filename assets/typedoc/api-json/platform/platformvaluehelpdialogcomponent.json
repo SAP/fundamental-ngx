@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "value-help-dialog.component.ts",
   "sourceLine": 145,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/value-help-dialog/value-help-dialog/value-help-dialog.component.ts#L145",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/platform/value-help-dialog/value-help-dialog/value-help-dialog.component.ts#L145",
   "description": "",
   "inputs": [
     {

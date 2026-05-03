@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "layout-grid-col.directive.ts",
   "sourceLine": 12,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/layout-grid/directives/layout-grid-col.directive.ts#L12",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/layout-grid/directives/layout-grid-col.directive.ts#L12",
   "description": "",
   "inputs": [
     {

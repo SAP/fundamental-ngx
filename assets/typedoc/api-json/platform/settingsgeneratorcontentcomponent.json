@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "settings-generator-content.component.ts",
   "sourceLine": 50,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/settings-generator/settings-generator-content/settings-generator-content.component.ts#L50",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/platform/settings-generator/settings-generator-content/settings-generator-content.component.ts#L50",
   "description": "",
   "inputs": [
     {

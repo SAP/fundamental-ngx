@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "list-group-header.component.ts",
   "sourceLine": 28,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/list/list-group-header.component.ts#L28",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/platform/list/list-group-header.component.ts#L28",
   "description": "This class contains common properties used across list Item components.\nthis can be extended to reduce the code duplication across list Item components.",
   "inputs": [
     {

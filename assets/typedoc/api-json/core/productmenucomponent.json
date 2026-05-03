@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "product-menu.component.ts",
   "sourceLine": 41,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/shellbar/product-menu/product-menu.component.ts#L41",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/shellbar/product-menu/product-menu.component.ts#L41",
   "description": "The component that represents a product menu.\nProduct menu is used for navigating to applications within the product.\n```html\n<fd-product-menu [control]=\"productMenuControl\"\n                 [items]=\"productMenuItems\">\n</fd-product-menu>\n```",
   "inputs": [
     {

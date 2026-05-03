@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "panel-title.directive.ts",
   "sourceLine": 20,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/panel/panel-title/panel-title.directive.ts#L20",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/panel/panel-title/panel-title.directive.ts#L20",
   "description": "Applies the panel title style to a header element. It can be used with any header level.\n\n```html\n<h5 fd-panel-title>Panel Title</h5>\n```",
   "inputs": [
     {

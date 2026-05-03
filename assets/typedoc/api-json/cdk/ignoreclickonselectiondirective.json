@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "ignore-click-on-selection.directive.ts",
   "sourceLine": 19,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cdk/utils/directives/ignore-click-on-selection/ignore-click-on-selection.directive.ts#L19",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/cdk/utils/directives/ignore-click-on-selection/ignore-click-on-selection.directive.ts#L19",
   "description": "Directive will stop propagation and prevent default of click, if selected area is coming from\ndirective's host element. This gives ability to not cancel all clicks on element, just the ones\nwhich include selection",
   "inputs": [],
   "outputs": [],

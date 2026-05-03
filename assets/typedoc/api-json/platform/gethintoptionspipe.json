@@ -4,7 +4,7 @@
   "kind": "Pipe",
   "sourceFile": "get-hint-options.pipe.ts",
   "sourceLine": 11,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/form-generator/pipes/get-hint-options.pipe.ts#L11",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/platform/form/form-generator/pipes/get-hint-options.pipe.ts#L11",
   "description": "",
   "inputs": [],
   "outputs": [],

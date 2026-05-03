@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "side-navigation-utility.directive.ts",
   "sourceLine": 8,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/side-navigation/side-navigation-utility.directive.ts#L8",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/side-navigation/side-navigation-utility.directive.ts#L8",
   "description": "",
   "inputs": [],
   "outputs": [],

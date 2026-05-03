@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "radio-button.component.ts",
   "sourceLine": 50,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/radio/radio-button/radio-button.component.ts#L50",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/radio/radio-button/radio-button.component.ts#L50",
   "description": "Set of fields of FormItemControl component",
   "inputs": [
     {

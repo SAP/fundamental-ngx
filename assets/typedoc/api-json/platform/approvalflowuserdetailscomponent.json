@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "approval-flow-user-details.component.ts",
   "sourceLine": 24,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/approval-flow/approval-flow-user-details/approval-flow-user-details.component.ts#L24",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/platform/approval-flow/approval-flow-user-details/approval-flow-user-details.component.ts#L24",
   "description": "",
   "inputs": [
     {

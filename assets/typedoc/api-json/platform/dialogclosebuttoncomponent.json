@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "dialog-close-button.component.ts",
   "sourceLine": 26,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/dialog/dialog-close-button/dialog-close-button.component.ts#L26",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/dialog/dialog-close-button/dialog-close-button.component.ts#L26",
   "description": "Directive that applies fundamental dialog styling to a dialog close button.\n\n```html\n<button fd-dialog-close-button></button>\n```",
   "inputs": [
     {

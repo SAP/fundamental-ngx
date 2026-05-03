@@ -4,7 +4,7 @@
   "kind": "Class",
   "sourceFile": "data-source.ts",
   "sourceLine": 113,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/shared/domain/data-source.ts#L113",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/platform/shared/domain/data-source.ts#L113",
   "description": "Provider is a data driver that can access data and retrieve them. It knows how to get 1\nor more records, maybe do paging and some other things.",
   "inputs": [],
   "outputs": [],

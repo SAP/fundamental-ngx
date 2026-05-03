@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "bar.component.ts",
   "sourceLine": 41,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/bar/bar.component.ts#L41",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/bar/bar.component.ts#L41",
   "description": "The Bar component is a container that holds titles, buttons and input controls.\nIts content is distributed in three areas - left, middle and right.\nThe Bar has 2 modes - Desktop (default) and Tablet/Mobile (cozy).",
   "inputs": [
     {

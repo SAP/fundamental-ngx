@@ -4,7 +4,7 @@
   "kind": "Class",
   "sourceFile": "position-strategy-factory.ts",
   "sourceLine": 8,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/timeline/services/position-strategies/position-strategy-factory.ts#L8",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/timeline/services/position-strategies/position-strategy-factory.ts#L8",
   "description": "",
   "inputs": [],
   "outputs": [],

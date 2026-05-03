@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "dynamic-page-subheader.component.ts",
   "sourceLine": 37,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/dynamic-page/dynamic-page-header/subheader/dynamic-page-subheader.component.ts#L37",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/dynamic-page/dynamic-page-header/subheader/dynamic-page-subheader.component.ts#L37",
   "description": "",
   "inputs": [
     {

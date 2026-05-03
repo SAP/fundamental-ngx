@@ -4,7 +4,7 @@
   "kind": "Class",
   "sourceFile": "focusable.observer.ts",
   "sourceLine": 13,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cdk/utils/directives/focusable-item/focusable.observer.ts#L13",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/cdk/utils/directives/focusable-item/focusable.observer.ts#L13",
   "description": "",
   "inputs": [],
   "outputs": [],

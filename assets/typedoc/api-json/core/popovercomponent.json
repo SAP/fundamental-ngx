@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "popover.component.ts",
   "sourceLine": 81,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/popover/popover.component.ts#L81",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/popover/popover.component.ts#L81",
   "description": "The popover is a wrapping component that accepts a *control* as well as a *body*.\nThe control is what will trigger the opening of the actual popover, which is called the body.\nBy default, popovers are triggered by click. This can be customized through the *triggers* input.",
   "inputs": [
     {

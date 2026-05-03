@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "checkbox.component.ts",
   "sourceLine": 60,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/checkbox/checkbox/checkbox.component.ts#L60",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/checkbox/checkbox/checkbox.component.ts#L60",
   "description": "Set of fields of FormItemControl component",
   "inputs": [
     {

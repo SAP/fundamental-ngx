@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "nested-item.component.ts",
   "sourceLine": 42,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cx/nested-list/nested-item/nested-item.component.ts#L42",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/cx/nested-list/nested-item/nested-item.component.ts#L42",
   "description": "",
   "inputs": [
     {

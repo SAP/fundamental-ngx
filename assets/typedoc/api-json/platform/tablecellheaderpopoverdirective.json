@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "table-cell-header-popover.directive.ts",
   "sourceLine": 11,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/table-helpers/directives/table-cell-header-popover.directive.ts#L11",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/platform/table-helpers/directives/table-cell-header-popover.directive.ts#L11",
   "description": "",
   "inputs": [],
   "outputs": [],

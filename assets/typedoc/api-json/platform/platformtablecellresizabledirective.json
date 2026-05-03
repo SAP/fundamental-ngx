@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "table-cell-resizable.directive.ts",
   "sourceLine": 35,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/table-helpers/directives/table-cell-resizable.directive.ts#L35",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/platform/table-helpers/directives/table-cell-resizable.directive.ts#L35",
   "description": "Tracks mouse movement over the cell if the mouse pointer near the side of the cell, informs resize service.",
   "inputs": [
     {

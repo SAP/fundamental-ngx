@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "product-switch.component.ts",
   "sourceLine": 49,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/product-switch/product-switch/product-switch.component.ts#L49",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/product-switch/product-switch/product-switch.component.ts#L49",
   "description": "",
   "inputs": [
     {

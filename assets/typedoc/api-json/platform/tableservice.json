@@ -4,7 +4,7 @@
   "kind": "Service",
   "sourceFile": "table.service.ts",
   "sourceLine": 40,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/table-helpers/services/table.service.ts#L40",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/platform/table-helpers/services/table.service.ts#L40",
   "description": "",
   "inputs": [],
   "outputs": [],

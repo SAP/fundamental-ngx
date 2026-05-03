@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "form-group.component.ts",
   "sourceLine": 33,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/form/form-group/form-group.component.ts#L33",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/form/form-group/form-group.component.ts#L33",
   "description": "Represents a form group element.\n\n```html\n<fd-form-group>\n    <div fd-form-item>\n        <input fd-form-control type=\"radio\" checked>\n        <fd-form-label>Option One</fd-form-label>\n    </div>\n</fd-form-group>\n```",
   "inputs": [
     {

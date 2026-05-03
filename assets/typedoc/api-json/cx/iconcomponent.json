@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "icon.component.ts",
   "sourceLine": 102,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/icon/icon.component.ts#L102",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/icon/icon.component.ts#L102",
   "description": "The component that represents an icon.\n\n```html\n<fd-icon font=\"SAP-icons-TNT\" glyph=\"exceptions\"></fd-icon>\n```",
   "inputs": [
     {

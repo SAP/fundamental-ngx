@@ -4,7 +4,7 @@
   "kind": "Pipe",
   "sourceFile": "async-or-sync.pipe.ts",
   "sourceLine": 13,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cdk/utils/pipes/async-or-sync.pipe.ts#L13",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/cdk/utils/pipes/async-or-sync.pipe.ts#L13",
   "description": "",
   "inputs": [],
   "outputs": [],

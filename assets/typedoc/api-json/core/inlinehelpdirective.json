@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "inline-help.directive.ts",
   "sourceLine": 45,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/inline-help/inline-help.directive.ts#L45",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/inline-help/inline-help.directive.ts#L45",
   "description": "The component that represents an inline-help.\nInline help is used to display help text in a popover, often inline with headers, body text and form labels.",
   "inputs": [
     {

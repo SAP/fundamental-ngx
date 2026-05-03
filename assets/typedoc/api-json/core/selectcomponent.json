@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "select.component.ts",
   "sourceLine": 122,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/select/select.component.ts#L122",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/select/select.component.ts#L122",
   "description": "Select component intended to mimic\nthe behaviour of the native select element.",
   "inputs": [
     {

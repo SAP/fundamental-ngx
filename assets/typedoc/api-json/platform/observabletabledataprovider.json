@@ -4,7 +4,7 @@
   "kind": "Class",
   "sourceFile": "observable-data-source.ts",
   "sourceLine": 15,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/table-helpers/domain/observable-data-source.ts#L15",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/platform/table-helpers/domain/observable-data-source.ts#L15",
   "description": "Table Data Provider based on an Observable.\n\nUsed to convert observable source to the TableDataProvider interface.",
   "inputs": [],
   "outputs": [],

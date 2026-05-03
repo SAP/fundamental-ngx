@@ -4,7 +4,7 @@
   "kind": "Class",
   "sourceFile": "dayjs-datetime-adapter.ts",
   "sourceLine": 46,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L46",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L46",
   "description": "DatetimeAdapter implementation based on dayjs.\n\nThis uses dayjs as a date model instance.\nIt relies on dayjs implementation for formatting and translation purposes.",
   "inputs": [],
   "outputs": [],

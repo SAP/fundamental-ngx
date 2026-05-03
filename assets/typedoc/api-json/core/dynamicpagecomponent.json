@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "dynamic-page.component.ts",
   "sourceLine": 62,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/dynamic-page/dynamic-page.component.ts#L62",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/dynamic-page/dynamic-page.component.ts#L62",
   "description": "",
   "inputs": [
     {

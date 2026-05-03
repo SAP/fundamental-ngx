@@ -4,7 +4,7 @@
   "kind": "Class",
   "sourceFile": "multi-input.config.ts",
   "sourceLine": 10,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/multi-input/multi-input.config.ts#L10",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/platform/form/multi-input/multi-input.config.ts#L10",
   "description": "Default options for Multi-Input",
   "inputs": [],
   "outputs": [],

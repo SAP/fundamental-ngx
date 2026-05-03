@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "focusable-grid.directive.ts",
   "sourceLine": 47,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cdk/utils/directives/focusable-grid/focusable-grid.directive.ts#L47",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/cdk/utils/directives/focusable-grid/focusable-grid.directive.ts#L47",
   "description": "",
   "inputs": [
     {

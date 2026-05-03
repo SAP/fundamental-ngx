@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "side-navigation.component.ts",
   "sourceLine": 62,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cx/side-navigation/side-navigation.component.ts#L62",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/cx/side-navigation/side-navigation.component.ts#L62",
   "description": "The side-navigation is a wrapping component representing\na left navigation that can always display or expand/collapse using the menu icon within the global navigation.",
   "inputs": [
     {

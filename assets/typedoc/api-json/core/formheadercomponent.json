@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "form-header.component.ts",
   "sourceLine": 19,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/form/form-header/form-header.component.ts#L19",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/form/form-header/form-header.component.ts#L19",
   "description": "```html\n<h4 fd-form-header>Form Header</h4>\n```",
   "inputs": [],
   "outputs": [],

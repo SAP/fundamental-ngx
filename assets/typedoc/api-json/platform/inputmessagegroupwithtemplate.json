@@ -4,7 +4,7 @@
   "kind": "Class",
   "sourceFile": "input-message-group-with-template.component.ts",
   "sourceLine": 27,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/input-message-group-with-template/input-message-group-with-template.component.ts#L27",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/platform/form/input-message-group-with-template/input-message-group-with-template.component.ts#L27",
   "description": "This extends core implementation  to support richer extensibility and instead of relying\nonly on ng-content selector this will allow you to put any content as trigger.\n\nLet's think of u",
   "inputs": [
     {

@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "nested-list-directives.ts",
   "sourceLine": 23,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/cx/nested-list/nested-list-directives.ts#L23",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/cx/nested-list/nested-list-directives.ts#L23",
   "description": "",
   "inputs": [],
   "outputs": [],

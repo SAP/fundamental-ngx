@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "search-field.component.ts",
   "sourceLine": 162,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/search-field/search-field.component.ts#L162",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/platform/search-field/search-field.component.ts#L162",
   "description": "",
   "inputs": [
     {

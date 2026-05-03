@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "dialog-body.component.ts",
   "sourceLine": 54,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/dialog/dialog-body/dialog-body.component.ts#L54",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/dialog/dialog-body/dialog-body.component.ts#L54",
   "description": "Applies fundamental layout and styling to the contents of a dialog body.\n\n```html\n<fd-dialog-body>\n    <!-- Content -->\n</fd-dialog-body>\n```",
   "inputs": [
     {

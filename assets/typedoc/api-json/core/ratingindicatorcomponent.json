@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "rating-indicator.component.ts",
   "sourceLine": 64,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/rating-indicator/components/rating-indicator.component.ts#L64",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/rating-indicator/components/rating-indicator.component.ts#L64",
   "description": "Set of fields of FormItemControl component",
   "inputs": [
     {

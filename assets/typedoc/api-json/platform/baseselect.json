@@ -4,7 +4,7 @@
   "kind": "Class",
   "sourceFile": "base-select.ts",
   "sourceLine": 57,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/form/select/commons/base-select.ts#L57",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/platform/form/select/commons/base-select.ts#L57",
   "description": "Defines specific behavior for Input controls which deals with list of values including:\n - Select\n - RadioGroup\n - CheckboxGroup\n - ComboBox\n ...",
   "inputs": [
     {

@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "split-menu-button.component.ts",
   "sourceLine": 39,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/split-menu-button/split-menu-button.component.ts#L39",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/platform/split-menu-button/split-menu-button.component.ts#L39",
   "description": "<fdp-split-menu-button [menu]=\"menu\" [buttonLabel]=\"Default button\" (primaryButtonClick)=\"onPrimaryButtonClick1()\">\n</fdp-split-menu-button>\n\n<fdp-menu #menu xPosition=\"after|before\">\n     <fdp-menu-item (itemSelect)=\"onItemSelect1('Option 1')\">Option 1</fdp-menu-item>\n     <fdp-menu-item (itemSelect)=\"onItemSelect1('Option 2')\">Option 2</fdp-menu-item>\n     <fdp-menu-item (itemSelect)=\"onItemSelect1('Option 3')\">Option 3</fdp-menu-item>\n</fdp-menu>",
   "inputs": [
     {

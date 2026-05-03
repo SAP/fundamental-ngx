@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "calendar-year-view.component.ts",
   "sourceLine": 41,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/calendar/calendar-views/calendar-year-view/calendar-year-view.component.ts#L41",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/calendar/calendar-views/calendar-year-view/calendar-year-view.component.ts#L41",
   "description": "Component representing the YearView of the Calendar Component.",
   "inputs": [
     {

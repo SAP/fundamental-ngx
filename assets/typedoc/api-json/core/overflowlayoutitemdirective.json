@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "overflow-layout-item.directive.ts",
   "sourceLine": 22,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/overflow-layout/directives/overflow-layout-item.directive.ts#L22",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/overflow-layout/directives/overflow-layout-item.directive.ts#L22",
   "description": "Directive to mark element as part of for Overflow Layout Component items.",
   "inputs": [],
   "outputs": [

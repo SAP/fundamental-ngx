@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "toggle-button.directive.ts",
   "sourceLine": 23,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/menu/directives/toggle-button.directive.ts#L23",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/menu/directives/toggle-button.directive.ts#L23",
   "description": "",
   "inputs": [],
   "outputs": [],

@@ -4,7 +4,7 @@
   "kind": "Class",
   "sourceFile": "content-density-observer.service.ts",
   "sourceLine": 79,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/core/content-density/services/content-density-observer.service.ts#L79",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/content-density/services/content-density-observer.service.ts#L79",
   "description": "Service for observing and managing content density in components.\n\nProvides signal-based API for reactive content density tracking.\nUses linkedSignal (Angular 21+) for derived state with validation.",
   "inputs": [],
   "outputs": [],

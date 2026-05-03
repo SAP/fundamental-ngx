@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "table-scrollable.directive.ts",
   "sourceLine": 35,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/be0ae12/libs/platform/table-helpers/directives/table-scrollable.directive.ts#L35",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/platform/table-helpers/directives/table-scrollable.directive.ts#L35",
   "description": "Table Scrollable.\nThat directive should be assigned to table scrollable area.\nIt registers itself in table scroll dispatcher\nand notify once element scrolled.\n\nFor internal usage.",
   "inputs": [],
   "outputs": [],
