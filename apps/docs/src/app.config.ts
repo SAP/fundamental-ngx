@@ -1,5 +1,5 @@
 import { HttpClient, provideHttpClient } from '@angular/common/http';
-import { ApplicationConfig, importProvidersFrom, signal } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, inject, provideEnvironmentInitializer, signal } from '@angular/core';
 import { PreloadAllModules, provideRouter, withHashLocation, withPreloading } from '@angular/router';
 import { provideContentDensity } from '@fundamental-ngx/core/content-density';
 import { provideDialogService } from '@fundamental-ngx/core/dialog';
@@ -13,6 +13,9 @@ import {
 } from '@fundamental-ngx/docs/shared';
 import { FD_LANGUAGE_ENGLISH, FD_LANGUAGE_SIGNAL } from '@fundamental-ngx/i18n';
 import { provideUi5LanguageBridge } from '@fundamental-ngx/ui5-webcomponents-base/i18n';
+import { provideUi5ThemingBridge } from '@fundamental-ngx/ui5-webcomponents-base/theming';
+// eslint-disable-next-line @nx/enforce-module-boundaries
+import { Ui5WebcomponentsMainThemingService } from '@fundamental-ngx/ui5-webcomponents/theming';
 import { MarkdownModule } from 'ngx-markdown';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import packageJson from '../../../package.json';
@@ -27,6 +30,8 @@ export const appConfig: ApplicationConfig = {
         provideRouter(applicationRoutes, withPreloading(PreloadAllModules), withHashLocation()),
         provideTheming({ defaultTheme: 'sap_horizon' }),
         themingInitializer(),
+        provideUi5ThemingBridge(),
+        provideEnvironmentInitializer(() => inject(Ui5WebcomponentsMainThemingService)),
         provideContentDensity({ storage: 'localStorage' }),
         provideDialogService(),
         provideUi5LanguageBridge(),
