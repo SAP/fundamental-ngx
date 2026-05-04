@@ -165,6 +165,11 @@ Use this when you need to know how to use a specific component.`,
             result.deprecationWarning = `This component is deprecated: ${component.deprecated}`;
         }
 
+        const selectorType = detectSelectorType(component.selector);
+        result.selectorType = selectorType;
+        result.templateUsage = buildTemplateSnippet(component.selector, selectorType);
+        result.importPath = deriveImportPath(component);
+
         return {
             content: [
                 {
@@ -632,6 +637,90 @@ Use this when building accessible UIs or auditing existing components.`,
 );
 
 // ---------------------------------------------------------------------------
+// Tool: get_usage_guide
+// ---------------------------------------------------------------------------
+server.tool(
+    'get_usage_guide',
+    `Get a comprehensive usage guide for a Fundamental NGX component.
+Returns the import path, selector type (element vs attribute directive), correct
+template snippet, key inputs, example code, and common pitfalls.
+Use this as the first step before writing code with any component.`,
+    {
+        name: z
+            .string()
+            .describe('Component name or selector (e.g., "ButtonComponent", "fd-button", "button[fd-button]")')
+    },
+    async ({ name }) => {
+        const component = findComponent(name);
+
+        if (!component) {
+            return {
+                content: [
+                    {
+                        type: 'text' as const,
+                        text: `Component "${name}" not found. Use search_components to find available components.`
+                    }
+                ]
+            };
+        }
+
+        const selectorType = detectSelectorType(component.selector);
+        const importPath = deriveImportPath(component);
+        const templateUsage = buildTemplateSnippet(component.selector, selectorType);
+        const pitfalls = buildPitfalls(component, selectorType);
+
+        const keyInputs = component.inputs
+            .filter((i) => !i.deprecated)
+            .slice(0, 10)
+            .map((i) => ({
+                name: i.name,
+                type: i.type,
+                defaultValue: i.defaultValue,
+                description: truncate(i.description, 100),
+                required: i.required
+            }));
+
+        const result = {
+            component: component.name,
+            selector: component.selector,
+            library: component.library,
+            selectorType,
+            import: {
+                path: importPath,
+                statement: `import { ${component.name} } from '${importPath}';`
+            },
+            templateUsage,
+            description: truncate(component.description, 300),
+            keyInputs,
+            outputs: component.outputs.slice(0, 5).map((o) => ({
+                name: o.name,
+                type: o.type,
+                description: truncate(o.description, 100)
+            })),
+            exampleCount: component.examples?.length ?? 0,
+            firstExample: component.examples?.[0]
+                ? {
+                      name: component.examples[0].description,
+                      typescript: component.examples[0].typescript,
+                      html: component.examples[0].html
+                  }
+                : null,
+            pitfalls,
+            docsUrl: component.docsUrl
+        };
+
+        return {
+            content: [
+                {
+                    type: 'text' as const,
+                    text: JSON.stringify(result, null, 2)
+                }
+            ]
+        };
+    }
+);
+
+// ---------------------------------------------------------------------------
 // Tool: compare_components
 // ---------------------------------------------------------------------------
 server.tool(
@@ -782,6 +871,118 @@ server.resource('component-catalog', 'fundamental-ngx://components/catalog', asy
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
+
+/**
+ * Determines whether a selector is an element component, attribute directive,
+ * or a mixed directive that can be applied to multiple host element types.
+ *
+ * Examples:
+ *   "fd-button"                              → 'element'
+ *   "button[fd-button], a[fd-button]"        → 'attribute'  (attribute on specific elements)
+ *   "[fd-compact]"                           → 'attribute'  (pure attribute, any host)
+ */
+function detectSelectorType(selector: string): 'element' | 'attribute' | 'mixed' {
+    const parts = selector.split(',').map((s) => s.trim());
+    let hasElement = false;
+    let hasAttribute = false;
+    for (const part of parts) {
+        if (/^\[/.test(part)) {
+            // Pure attribute selector: [fd-thing]
+            hasAttribute = true;
+        } else if (/\[/.test(part)) {
+            // Element with attribute constraint: button[fd-button]
+            hasAttribute = true;
+        } else {
+            // Plain element selector: fd-button
+            hasElement = true;
+        }
+    }
+    if (hasElement && hasAttribute) {
+        return 'mixed';
+    }
+    return hasAttribute ? 'attribute' : 'element';
+}
+
+/**
+ * Derives the deep import subpath for a component from its library and selector.
+ * e.g. fd-button → @fundamental-ngx/core/button
+ *      fdp-table → @fundamental-ngx/platform/table
+ *      ui5-button → @fundamental-ngx/ui5-webcomponents (flat)
+ */
+function deriveImportPath(component: ComponentMetadata): string {
+    const { library, selector } = component;
+    const firstSelector = selector.split(',')[0].trim();
+
+    // Attribute on element: button[fd-button] → extract attribute name
+    const attrOnElement = firstSelector.match(/\[(?:fd|fdp|fdb|cx|fdk)-([^\]]+)\]/);
+    if (attrOnElement) {
+        return `${library}/${attrOnElement[1].toLowerCase()}`;
+    }
+
+    // Element selector: fd-button → button, ui5-toggle-button → toggle-button
+    const elementMatch = firstSelector.match(/^(?:fd|fdp|fdb|cx|fdk|ui5)-(.+)/);
+    if (elementMatch) {
+        return `${library}/${elementMatch[1].toLowerCase()}`;
+    }
+
+    return library;
+}
+
+/**
+ * Builds a minimal correct template snippet illustrating how to use the selector.
+ * Attribute directives show the host element; element components show the tag directly.
+ */
+function buildTemplateSnippet(selector: string, selectorType: 'element' | 'attribute' | 'mixed'): string {
+    if (selectorType === 'element') {
+        const tag = selector.split(',')[0].trim();
+        return `<${tag}></${tag}>`;
+    }
+
+    const firstPart = selector.split(',')[0].trim();
+
+    // Attribute on specific element: button[fd-button] → <button fd-button></button>
+    const attrOnElement = firstPart.match(/^([a-z][-a-z0-9]*)\[([^\]]+)\]/);
+    if (attrOnElement) {
+        return `<${attrOnElement[1]} ${attrOnElement[2]}></${attrOnElement[1]}>`;
+    }
+
+    // Pure attribute: [fd-thing] → <div fd-thing></div>
+    const pureAttr = firstPart.match(/^\[([^\]]+)\]/);
+    if (pureAttr) {
+        return `<div ${pureAttr[1]}></div>`;
+    }
+
+    return `<!-- Selector: ${selector} -->`;
+}
+
+/**
+ * Returns an array of actionable pitfall strings for common mistakes when using a component.
+ */
+function buildPitfalls(component: ComponentMetadata, selectorType: 'element' | 'attribute' | 'mixed'): string[] {
+    const pitfalls: string[] = [];
+
+    if (selectorType === 'attribute' || selectorType === 'mixed') {
+        const firstPart = component.selector.split(',')[0].trim();
+        const attrOnElement = firstPart.match(/^([a-z][-a-z0-9]*)\[([^\]]+)\]/);
+        if (attrOnElement) {
+            pitfalls.push(
+                `Attribute directive: use <${attrOnElement[1]} ${attrOnElement[2]}> — NOT <${attrOnElement[2]}> as a standalone element.`
+            );
+        }
+    }
+
+    if (component.deprecated) {
+        pitfalls.push(`Deprecated: ${component.deprecated}`);
+    }
+
+    const requiredInputs = component.inputs.filter((i) => i.required && !i.deprecated);
+    if (requiredInputs.length > 0) {
+        pitfalls.push(`Required inputs: ${requiredInputs.map((i) => i.name).join(', ')}`);
+    }
+
+    return pitfalls;
+}
+
 function findComponent(nameOrSelector: string): ComponentMetadata | undefined {
     const lower = nameOrSelector.toLowerCase();
 
