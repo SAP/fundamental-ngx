@@ -148,6 +148,9 @@ export class TableHeaderRowComponent extends TableRowDirective implements OnInit
     }
 
     /** @hidden */
+    _selectionColumnAriaHidden = true;
+
+    /** @hidden */
     readonly _rtl$ = computed(() => !!this._rtlService?.rtlSignal());
 
     /** @hidden */
