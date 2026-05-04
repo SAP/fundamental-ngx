@@ -1,0 +1,75 @@
+<fd-docs-section-title id="overview" componentName="theming"> Overview </fd-docs-section-title>
+<description>
+    <p>
+        Call <code>provideUi5ThemingBridge()</code> once and fundamental-ngx theme changes automatically propagate to
+        UI5 Web Components — both light/dark switches and high-contrast modes.
+    </p>
+</description>
+
+<separator></separator>
+
+<fd-docs-section-title id="setup" componentName="theming"> Setup </fd-docs-section-title>
+<description>
+    <p>Two steps are required:</p>
+    <p><strong>Step 1:</strong> Register UI5 theming assets in <code>main.ts</code> (before Angular bootstrap):</p>
+    <pre><code>// main.ts
+import '&#64;ui5/webcomponents-theming/dist/Assets.js';</code></pre>
+    <p>
+        This registers the CSS variable sets for all SAP themes. Without it, <code>setTheme()</code> calls inside UI5
+        won't find the theme data. The assets are loaded lazily on first use — no upfront bundle size impact.
+    </p>
+    <p><strong>Step 2:</strong> Add the theming bridge to your app providers:</p>
+    <pre><code>// app.config.ts
+import &#123; provideTheming, themingInitializer &#125; from '&#64;fundamental-ngx/core/theming';
+import &#123; provideUi5ThemingBridge &#125; from '&#64;fundamental-ngx/ui5-webcomponents-base/theming';
+
+export const appConfig: ApplicationConfig = &#123;
+  providers: [
+    provideTheming(&#123; defaultTheme: 'sap_horizon' &#125;),
+    themingInitializer(),
+    provideUi5ThemingBridge(),
+  ]
+&#125;;</code></pre>
+    <p>
+        Now switching themes via <code>ThemingService.setTheme()</code>, the toolbar selector, or the
+        <code>?theme=</code> URL parameter updates both fundamental-ngx and UI5 components together.
+    </p>
+</description>
+
+<separator></separator>
+
+<fd-docs-section-title id="how-it-works" componentName="theming"> How it works </fd-docs-section-title>
+<description>
+    <p>The data flow:</p>
+    <pre><code>ThemingService.currentTheme   (Observable, set by provideTheming + init)
+        |
+        |  Ui5ThemingBridgeService subscribes
+        v
+Ui5ThemingService.setTheme()  (calls UI5's setTheme — shadow DOM re-renders)
+</code></pre>
+    <p>
+        <code>Ui5ThemingBridgeService</code> is an Angular service activated by <code>provideUi5ThemingBridge()</code>.
+        It subscribes to the core <code>ThemingService.currentTheme</code> Observable and calls
+        <code>Ui5ThemingService.setTheme()</code> whenever the theme changes. This is explicit opt-in — apps not using
+        UI5 components don't pay for this bridge.
+    </p>
+    <p>
+        The bridge handles both initial theme (from URL <code>?theme=</code> parameter or config default) and runtime
+        theme switches. It uses <code>takeUntilDestroyed()</code> for automatic cleanup.
+    </p>
+</description>
+
+<separator></separator>
+
+<fd-docs-section-title id="example" componentName="theming"> Live example </fd-docs-section-title>
+<description>
+    <p>
+        The example below shows a fundamental-ngx button and a UI5 button side by side. Use the
+        <strong>toolbar theme selector</strong> (palette icon, top-right) to switch themes — both buttons update
+        together automatically via the bridge.
+    </p>
+</description>
+<component-example>
+    <ui5-theming-bridge-sample></ui5-theming-bridge-sample>
+</component-example>
+<code-example [exampleFiles]="bridgeExample"></code-example>
