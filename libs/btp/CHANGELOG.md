@@ -1,3 +1,62 @@
+## 0.62.1 (2026-05-03)
+
+This was a version bump only for btp to align it with other projects, there were no code changes.
+
+## 0.62.1-rc.0 (2026-05-01)
+
+This was a version bump only for btp to align it with other projects, there were no code changes.
+
+## 0.62.0 (2026-04-29)
+
+### 🚀 Features
+
+- add mcp ([#14121](https://github.com/SAP/fundamental-ngx/pull/14121))
+- **i18n,ui5:** implement ui5 locale support ([#13981](https://github.com/SAP/fundamental-ngx/pull/13981))
+- **i18n:** introduce i18n cli commands and GHAction for translation ([#13968](https://github.com/SAP/fundamental-ngx/pull/13968))
+- i18n migration ([#13937](https://github.com/SAP/fundamental-ngx/pull/13937))
+
+### 🩹 Fixes
+
+- **ui5:** make webcomponents wrappers more visible ([#14156](https://github.com/SAP/fundamental-ngx/pull/14156))
+- **ci:** harden workflow security against injection and over-permissioning ([#14084](https://github.com/SAP/fundamental-ngx/pull/14084))
+- **core, platform:** adopt latest fund-styles changes ([#14102](https://github.com/SAP/fundamental-ngx/pull/14102))
+- **core,platform,btp,cx:** migrate remaining Default strategy components to OnPush ([#14071](https://github.com/SAP/fundamental-ngx/pull/14071))
+- **core:** fix mobile popover/menu reopen and form-item NG0100 ([#14087](https://github.com/SAP/fundamental-ngx/pull/14087))
+- ⚠️  **core:** remove Angular animation dependncy + redesign example cards with density toggle, responsive preview, and keyboard hints ([#14077](https://github.com/SAP/fundamental-ngx/pull/14077))
+- **btp,cdk:** migrate tool-header to zoneless and fix Angular 21 focusable list regression ([#14076](https://github.com/SAP/fundamental-ngx/pull/14076))
+- **btp:** remove NgZone usage from BTP Splitter ([#14052](https://github.com/SAP/fundamental-ngx/pull/14052))
+- **btp:** remove NgZone usage from Navigation List Item ([#14047](https://github.com/SAP/fundamental-ngx/pull/14047))
+- **ci:** allow .ts files in i18n fork PR validation ([#14062](https://github.com/SAP/fundamental-ngx/pull/14062))
+- **btp:** remove NgZone usage from navigation-content-start for zoneless compatibility ([#14049](https://github.com/SAP/fundamental-ngx/pull/14049))
+- **btp:** add fix for unreachable menu items in BTP vertical navigation ([#13949](https://github.com/SAP/fundamental-ngx/pull/13949))
+
+### ⚠️  Breaking Changes
+
+- **core:** remove Angular animation dependncy + redesign example cards with density toggle, responsive preview, and keyboard hints  ([#14077](https://github.com/SAP/fundamental-ngx/pull/14077))
+  @angular/animations is no longer required by @fundamental-ngx/core. The add-animations schematic has been removed.
+
+### ❤️ Thank You
+
+- deno
+- Inna Atanasova @InnaAtanasova
+- Maria Dineva @MariaIDineva
+
+## 0.62.0-rc.101 (2026-04-29)
+
+This was a version bump only for btp to align it with other projects, there were no code changes.
+
+## 0.62.0-rc.100 (2026-04-29)
+
+This was a version bump only for btp to align it with other projects, there were no code changes.
+
+## 0.62.0-rc.99 (2026-04-29)
+
+This was a version bump only for btp to align it with other projects, there were no code changes.
+
+## 0.62.0-rc.98 (2026-04-28)
+
+This was a version bump only for btp to align it with other projects, there were no code changes.
+
 ## 0.62.0-rc.97 (2026-04-27)
 
 This was a version bump only for btp to align it with other projects, there were no code changes.

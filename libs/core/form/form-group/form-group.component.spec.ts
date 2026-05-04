@@ -21,4 +21,18 @@ describe('FormGroupComponent', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
     });
+
+    it('should apply fd-form-group--with-spacing when withSpacing is true', () => {
+        component.withSpacing = true;
+        component.ngOnChanges();
+        fixture.detectChanges();
+        expect(fixture.nativeElement.classList.contains('fd-form-group--with-spacing')).toBe(true);
+    });
+
+    it('should not apply fd-form-group--with-spacing when withSpacing is false', () => {
+        component.withSpacing = false;
+        component.ngOnChanges();
+        fixture.detectChanges();
+        expect(fixture.nativeElement.classList.contains('fd-form-group--with-spacing')).toBe(false);
+    });
 });

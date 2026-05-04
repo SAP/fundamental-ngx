@@ -19,7 +19,11 @@ export default {
         toolbarLabel: '動作列'
     },
     coreAvatarGroup: {
-        backButton: '返回'
+        ariaLabelGroup:
+            'Has popup type dialog conjoined avatars, {count} avatars displayed, {hiddenCount} avatars hidden, activate for complete list',
+        ariaLabelIndividual: 'Individual avatars. {count} avatars displayed, {hiddenCount} avatars hidden',
+        backButton: '返回',
+        popupBodyAriaLabel: 'With {count} items'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: '階層連結軌跡',

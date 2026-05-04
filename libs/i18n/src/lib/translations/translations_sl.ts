@@ -20,7 +20,11 @@ export default {
         toolbarLabel: 'Orodna vrstica'
     },
     coreAvatarGroup: {
-        backButton: 'Nazaj'
+        ariaLabelGroup:
+            'Has popup type dialog conjoined avatars, {count} avatars displayed, {hiddenCount} avatars hidden, activate for complete list',
+        ariaLabelIndividual: 'Individual avatars. {count} avatars displayed, {hiddenCount} avatars hidden',
+        backButton: 'Nazaj',
+        popupBodyAriaLabel: 'With {count} items'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Sled poti',

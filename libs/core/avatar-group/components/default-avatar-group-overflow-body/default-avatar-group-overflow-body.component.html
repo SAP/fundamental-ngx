@@ -24,6 +24,7 @@
     [class.fd-avatar-group__overflow-body--no-padding]="_isDetailStage"
     [class.fd-avatar-group__overflow-body--no-horizontal-scroll]="_isDetailStage"
     fdkFocusableList
+    role="list"
     navigationDirection="horizontal"
 >
     @if (_overflowPopoverStage === 'main') {
@@ -33,6 +34,8 @@
                 fdAvatarGroupItemPortal
                 [avatarGroupItem]="item.avatarGroupItem"
                 [forceVisibility]="true"
+                [posInSet]="item.posInSet"
+                [setSize]="item.setSize"
             >
             </ng-template>
         }

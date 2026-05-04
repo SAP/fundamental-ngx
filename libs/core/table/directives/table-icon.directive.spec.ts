@@ -35,6 +35,10 @@ describe('TableIconDirective', () => {
     });
 
     it('should assign classes', () => {
-        expect(component.icon.elementRef.nativeElement.classList.length).toBe(3);
+        const el = component.icon.elementRef.nativeElement;
+        expect(el.classList).toContain('fd-table__icon');
+        expect(el.classList).toContain('sap-icon');
+        expect(el.classList).toContain('sap-icon--glyph');
+        expect(el.classList).toContain('fd-table__icon--navigation');
     });
 });

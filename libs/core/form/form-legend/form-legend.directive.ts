@@ -1,4 +1,4 @@
-import { Directive, HostBinding } from '@angular/core';
+import { booleanAttribute, Directive, input } from '@angular/core';
 
 /**
  * Applies css to a legend html element.
@@ -9,10 +9,12 @@ import { Directive, HostBinding } from '@angular/core';
     // TODO to be discussed
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-form-legend]',
-    standalone: true
+    host: {
+        class: 'fd-fieldset__legend',
+        '[class.is-disabled]': 'disabled()'
+    }
 })
 export class FormLegendDirective {
-    /** @hidden */
-    @HostBinding('class.fd-fieldset__legend')
-    fdFormLegendClass = true;
+    /** Whether the legend is disabled. */
+    readonly disabled = input(false, { transform: booleanAttribute });
 }

@@ -20,7 +20,11 @@ export default {
         toolbarLabel: 'Лента с действия'
     },
     coreAvatarGroup: {
-        backButton: 'Назад'
+        ariaLabelGroup:
+            'Has popup type dialog conjoined avatars, {count} avatars displayed, {hiddenCount} avatars hidden, activate for complete list',
+        ariaLabelIndividual: 'Individual avatars. {count} avatars displayed, {hiddenCount} avatars hidden',
+        backButton: 'Назад',
+        popupBodyAriaLabel: 'With {count} items'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Навигационен път',

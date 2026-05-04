@@ -19,7 +19,11 @@ export default {
         toolbarLabel: '액션 바'
     },
     coreAvatarGroup: {
-        backButton: '뒤로'
+        ariaLabelGroup:
+            'Has popup type dialog conjoined avatars, {count} avatars displayed, {hiddenCount} avatars hidden, activate for complete list',
+        ariaLabelIndividual: 'Individual avatars. {count} avatars displayed, {hiddenCount} avatars hidden',
+        backButton: '뒤로',
+        popupBodyAriaLabel: 'With {count} items'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: '탐색 경로 추적',
