@@ -162,6 +162,9 @@ export class TableHeaderRowComponent extends TableRowDirective implements OnInit
     }
 
     /** @hidden */
+    _selectionColumnHeaderDisableTitle = true;
+
+    /** @hidden */
     readonly SELECTION_MODE = SelectionMode;
 
     /** @hidden */
