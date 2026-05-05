@@ -1,3 +1,7 @@
+## 0.62.2-rc.3 (2026-05-05)
+
+This was a version bump only for cdk to align it with other projects, there were no code changes.
+
 ## 0.62.2-rc.2 (2026-05-05)
 
 ### 🚀 Features

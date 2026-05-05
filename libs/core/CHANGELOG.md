@@ -1,3 +1,13 @@
+## 0.62.2-rc.3 (2026-05-05)
+
+### 🩹 Fixes
+
+- **core:** update L size Illustrated message figcaption max-width ([#14180](https://github.com/SAP/fundamental-ngx/pull/14180))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.62.2-rc.2 (2026-05-05)
 
 ### 🚀 Features
