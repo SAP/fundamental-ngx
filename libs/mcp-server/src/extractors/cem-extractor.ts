@@ -11,6 +11,7 @@ import {
     OutputMetadata,
     SlotMetadata
 } from '../types/component-metadata';
+import { deriveSelectorInfo } from '../utils/selector-utils';
 
 // ---------------------------------------------------------------------------
 // CEM JSON type definitions (subset needed for extraction)
@@ -300,9 +301,13 @@ function mapDeclaration(
     enumMap: EnumMap
 ): ComponentMetadata {
     const rawDescription = decl.description ?? '';
+    const selector = decl.tagName!;
+    const { selectorType, templateUsage } = deriveSelectorInfo(selector);
     return {
         name: decl.name,
-        selector: decl.tagName!,
+        selector,
+        selectorType,
+        templateUsage,
         library,
         category: inferCategory(modulePath, library),
         description: cleanCemDescription(rawDescription),

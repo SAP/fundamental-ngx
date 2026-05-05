@@ -1,3 +1,4 @@
+import { readFileSync } from 'fs';
 import { readFile } from 'fs/promises';
 import { resolve } from 'path';
 import {
@@ -8,6 +9,7 @@ import {
     MethodParam,
     OutputMetadata
 } from '../types/component-metadata';
+import { deriveSelectorInfo } from '../utils/selector-utils';
 
 // ---------------------------------------------------------------------------
 // TypeDoc JSON shape (minimal subset we need)
@@ -146,6 +148,11 @@ export async function extractFromTypeDoc(typeDocPath: string, library: Library):
     const raw = await readFile(typeDocPath, 'utf-8');
     const root: TypeDocRoot = JSON.parse(raw);
 
+    // Derive the repository root from the TypeDoc JSON path.
+    // TypeDoc paths follow: <basePath>/libs/docs/typedoc/<lib>/typedoc.json
+    // Go up 5 levels from the file to reach the repo root.
+    const basePath = resolve(typeDocPath, '../../../../..');
+
     const results: ComponentMetadata[] = [];
 
     for (const declaration of root.children ?? []) {
@@ -153,7 +160,7 @@ export async function extractFromTypeDoc(typeDocPath: string, library: Library):
             continue;
         }
 
-        const metadata = extractClassMetadata(declaration, library, prefix);
+        const metadata = extractClassMetadata(declaration, library, prefix, basePath);
         if (metadata) {
             results.push(metadata);
         }
@@ -209,10 +216,15 @@ function isComponentOrDirective(decl: TypeDocDeclaration): boolean {
 /**
  * Build a {@link ComponentMetadata} from a TypeDoc class declaration.
  */
-function extractClassMetadata(decl: TypeDocDeclaration, library: Library, prefix: string): ComponentMetadata | null {
+function extractClassMetadata(
+    decl: TypeDocDeclaration,
+    library: Library,
+    prefix: string,
+    basePath: string
+): ComponentMetadata | null {
     const sourceFile = decl.sources?.[0]?.fileName;
     const description = flattenComment(decl.comment);
-    const selector = resolveSelector(decl, prefix);
+    const selector = resolveSelector(decl, prefix, basePath);
     const category = inferCategory(sourceFile, library);
 
     const inputs: InputMetadata[] = [];
@@ -234,9 +246,13 @@ function extractClassMetadata(decl: TypeDocDeclaration, library: Library, prefix
         }
     }
 
+    const { selectorType, templateUsage } = deriveSelectorInfo(selector);
+
     return {
         name: decl.name,
         selector,
+        selectorType,
+        templateUsage,
         library,
         category,
         description:
@@ -632,9 +648,10 @@ function isRequiredInput(innerType: TypeDocType | undefined): boolean {
  * Strategy (in priority order):
  * 1. `@selector` block tag in the JSDoc comment.
  * 2. Inline `` selector: ... `` in the comment summary text.
- * 3. Derived from the class name using the library prefix convention.
+ * 3. Read the actual `selector:` property from the Angular decorator in source.
+ * 4. Derived from the class name using the library prefix convention.
  */
-function resolveSelector(decl: TypeDocDeclaration, prefix: string): string {
+function resolveSelector(decl: TypeDocDeclaration, prefix: string, basePath: string): string {
     // 1. @selector block tag.
     const selectorTag = decl.comment?.blockTags?.find((t) => t.tag === '@selector');
     if (selectorTag?.content?.length) {
@@ -656,30 +673,83 @@ function resolveSelector(decl: TypeDocDeclaration, prefix: string): string {
         return selectorMatch[1].trim();
     }
 
-    // 3. Derive from class name.
+    // 3. Read selector from the Angular decorator in the source file.
+    const sourceSelector = extractSelectorFromSource(decl, basePath);
+    if (sourceSelector) {
+        return sourceSelector;
+    }
+
+    // 4. Derive from class name.
     return deriveSelectorFromClassName(decl.name, prefix);
+}
+
+/**
+ * Read the `selector:` property from the Angular `@Component` / `@Directive` decorator
+ * in the TypeScript source file referenced by the TypeDoc declaration.
+ *
+ * Handles both single-line and multiline selector strings:
+ *   selector: 'button[fd-button], a[fd-button]'
+ *   selector:
+ *       '[fdkBreakpoint], [fdkBreakpointS]',
+ *
+ * Returns `undefined` if the source file cannot be read or the selector cannot be parsed.
+ */
+function extractSelectorFromSource(decl: TypeDocDeclaration, basePath: string): string | undefined {
+    const relativeFile = decl.sources?.[0]?.fileName;
+    if (!relativeFile) {
+        return undefined;
+    }
+
+    const absolutePath = resolve(basePath, relativeFile);
+
+    let source: string;
+    try {
+        source = readFileSync(absolutePath, 'utf-8');
+    } catch {
+        return undefined;
+    }
+
+    // Match selector on the same line: selector: 'value' or selector: "value" or selector: `value`
+    const singleLineMatch = source.match(/selector:\s*['"`]([^'"`]+)['"`]/);
+    if (singleLineMatch) {
+        return singleLineMatch[1].trim();
+    }
+
+    // Match multiline: selector:\n   'value' or selector:\n   // comment\n   'value'
+    const multiLineMatch = source.match(/selector:\s*\n\s*(?:\/\/[^\n]*\n\s*)?['"`]([^'"`]+)['"`]/);
+    if (multiLineMatch) {
+        return multiLineMatch[1].trim();
+    }
+
+    return undefined;
 }
 
 /**
  * Derive a CSS selector from a class name.
  *
  * Examples:
- * - `ButtonComponent`          → `fd-button`       (prefix "fd")
- * - `ActionBarComponent`       → `fd-action-bar`   (prefix "fd")
- * - `ActionListItemComponent`  → `fdp-action-list-item` (prefix "fdp")
- * - `AutoCompleteDirective`    → `fdk-auto-complete`(prefix "fdk")
+ * - `ButtonComponent`          -> `fd-button`          (prefix "fd")
+ * - `ActionBarComponent`       -> `fd-action-bar`      (prefix "fd")
+ * - `ActionListItemComponent`  -> `fdp-action-list-item` (prefix "fdp")
+ * - `AutoCompleteDirective`    -> `[fdk-auto-complete]` (prefix "fdk")
+ * - `CardTitleDirective`       -> `[fd-card-title]`    (prefix "fd")
  *
  * The class name is converted from PascalCase to kebab-case, with the
  * `Component` / `Directive` suffix stripped and the library prefix prepended.
+ * Classes ending with `Directive` produce attribute selectors (wrapped in brackets).
  */
 function deriveSelectorFromClassName(className: string, prefix: string): string {
+    const isDirective = className.endsWith('Directive');
+
     // Strip Component / Directive suffix.
     const baseName = className.replace(/Component$|Directive$/, '');
 
-    // PascalCase → kebab-case.
+    // PascalCase -> kebab-case.
     const kebab = baseName.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
 
-    return `${prefix}-${kebab}`;
+    const elementSelector = `${prefix}-${kebab}`;
+
+    return isDirective ? `[${elementSelector}]` : elementSelector;
 }
 
 // ---------------------------------------------------------------------------

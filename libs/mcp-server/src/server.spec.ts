@@ -503,7 +503,10 @@ describe('Real catalog validation', () => {
     });
 
     (skip ? it.skip : it)('should find specific well-known components', () => {
-        const fdButton = findComponent('fd-button', catalog.components);
+        // Search by class name to avoid ambiguity with BTP directives that also use fd-button in their selector.
+        const fdButton = catalog.components.find(
+            (c) => c.name === 'ButtonComponent' && c.library === '@fundamental-ngx/core'
+        );
         expect(fdButton).toBeDefined();
         expect(fdButton!.library).toBe('@fundamental-ngx/core');
 
