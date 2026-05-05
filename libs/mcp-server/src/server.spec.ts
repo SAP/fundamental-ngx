@@ -807,7 +807,9 @@ function detectSelectorType(selector: string): 'element' | 'attribute' | 'mixed'
             hasElement = true;
         }
     }
-    if (hasElement && hasAttribute) {return 'mixed';}
+    if (hasElement && hasAttribute) {
+        return 'mixed';
+    }
     return hasAttribute ? 'attribute' : 'element';
 }
 
@@ -832,9 +834,13 @@ function deriveImportPath(component: ComponentMetadata): string {
     const { library, selector } = component;
     const firstSelector = selector.split(',')[0].trim();
     const attrOnElement = firstSelector.match(/\[(?:fd|fdp|fdb|cx|fdk)-([^\]]+)\]/);
-    if (attrOnElement) {return `${library}/${attrOnElement[1].toLowerCase()}`;}
+    if (attrOnElement) {
+        return `${library}/${attrOnElement[1].toLowerCase()}`;
+    }
     const elementMatch = firstSelector.match(/^(?:fd|fdp|fdb|cx|fdk|ui5)-(.+)/);
-    if (elementMatch) {return `${library}/${elementMatch[1].toLowerCase()}`;}
+    if (elementMatch) {
+        return `${library}/${elementMatch[1].toLowerCase()}`;
+    }
     return library;
 }
 
@@ -849,7 +855,9 @@ function buildPitfalls(component: ComponentMetadata, selectorType: 'element' | '
             );
         }
     }
-    if (component.deprecated) {pitfalls.push(`Deprecated: ${component.deprecated}`);}
+    if (component.deprecated) {
+        pitfalls.push(`Deprecated: ${component.deprecated}`);
+    }
     const requiredInputs = component.inputs.filter((i) => i.required && !i.deprecated);
     if (requiredInputs.length > 0) {
         pitfalls.push(`Required inputs: ${requiredInputs.map((i) => i.name).join(', ')}`);

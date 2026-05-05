@@ -165,9 +165,8 @@ Use this when you need to know how to use a specific component.`,
             result.deprecationWarning = `This component is deprecated: ${component.deprecated}`;
         }
 
-        const selectorType = detectSelectorType(component.selector);
-        result.selectorType = selectorType;
-        result.templateUsage = buildTemplateSnippet(component.selector, selectorType);
+        result.selectorType = getSelectorType(component.selector);
+        result.templateUsage = buildTemplate(component);
         result.importPath = deriveImportPath(component);
 
         return {
@@ -641,73 +640,56 @@ Use this when building accessible UIs or auditing existing components.`,
 // ---------------------------------------------------------------------------
 server.tool(
     'get_usage_guide',
-    `Get a comprehensive usage guide for a Fundamental NGX component.
-Returns the import path, selector type (element vs attribute directive), correct
-template snippet, key inputs, example code, and common pitfalls.
-Use this as the first step before writing code with any component.`,
+    `Get a practical usage guide for a Fundamental NGX component.
+Returns the correct import path, a minimal template snippet showing proper selector usage,
+required inputs that must be provided, and common pitfalls to avoid.
+Use this as the first step when adding a new component to an Angular template.`,
     {
-        name: z
-            .string()
-            .describe('Component name or selector (e.g., "ButtonComponent", "fd-button", "button[fd-button]")')
+        component: z.string().describe('Component name or selector (e.g., "fd-button", "fdp-table", "ui5-input")')
     },
-    async ({ name }) => {
-        const component = findComponent(name);
+    async ({ component }) => {
+        const found = findComponent(component);
 
-        if (!component) {
+        if (!found) {
             return {
                 content: [
                     {
                         type: 'text' as const,
-                        text: `Component "${name}" not found. Use search_components to find available components.`
+                        text: `Component "${component}" not found. Use search_components to find available components.`
                     }
                 ]
             };
         }
 
-        const selectorType = detectSelectorType(component.selector);
-        const importPath = deriveImportPath(component);
-        const templateUsage = buildTemplateSnippet(component.selector, selectorType);
-        const pitfalls = buildPitfalls(component, selectorType);
+        const importPath = deriveImportPath(found);
+        const templateUsage = buildTemplate(found);
+        const pitfalls = buildPitfalls(found, importPath);
+        const requiredInputs = found.inputs.filter((i) => i.required && !i.defaultValue);
+        const firstExample = found.examples && found.examples.length > 0 ? found.examples[0] : null;
 
-        const keyInputs = component.inputs
-            .filter((i) => !i.deprecated)
-            .slice(0, 10)
-            .map((i) => ({
-                name: i.name,
-                type: i.type,
-                defaultValue: i.defaultValue,
-                description: truncate(i.description, 100),
-                required: i.required
-            }));
-
-        const result = {
-            component: component.name,
-            selector: component.selector,
-            library: component.library,
-            selectorType,
-            import: {
-                path: importPath,
-                statement: `import { ${component.name} } from '${importPath}';`
-            },
+        const result: Record<string, unknown> = {
+            component: found.name,
+            selector: found.selector,
+            library: found.library,
+            importPath,
+            selectorType: getSelectorType(found.selector),
             templateUsage,
-            description: truncate(component.description, 300),
-            keyInputs,
-            outputs: component.outputs.slice(0, 5).map((o) => ({
-                name: o.name,
-                type: o.type,
-                description: truncate(o.description, 100)
-            })),
-            exampleCount: component.examples?.length ?? 0,
-            firstExample: component.examples?.[0]
-                ? {
-                      name: component.examples[0].description,
-                      typescript: component.examples[0].typescript,
-                      html: component.examples[0].html
-                  }
-                : null,
+            requiredInputs: requiredInputs.map((i) => ({ name: i.name, type: i.type, description: i.description })),
             pitfalls,
-            docsUrl: component.docsUrl
+            docsUrl: found.docsUrl
         };
+
+        if (found.deprecated) {
+            result.deprecated = found.deprecated;
+        }
+
+        if (firstExample) {
+            result.example = {
+                name: firstExample.description,
+                typescript: firstExample.typescript,
+                html: firstExample.html
+            };
+        }
 
         return {
             content: [
@@ -873,111 +855,72 @@ server.resource('component-catalog', 'fundamental-ngx://components/catalog', asy
 // ---------------------------------------------------------------------------
 
 /**
- * Determines whether a selector is an element component, attribute directive,
- * or a mixed directive that can be applied to multiple host element types.
- *
- * Examples:
- *   "fd-button"                              → 'element'
- *   "button[fd-button], a[fd-button]"        → 'attribute'  (attribute on specific elements)
- *   "[fd-compact]"                           → 'attribute'  (pure attribute, any host)
- */
-function detectSelectorType(selector: string): 'element' | 'attribute' | 'mixed' {
-    const parts = selector.split(',').map((s) => s.trim());
-    let hasElement = false;
-    let hasAttribute = false;
-    for (const part of parts) {
-        if (/^\[/.test(part)) {
-            // Pure attribute selector: [fd-thing]
-            hasAttribute = true;
-        } else if (/\[/.test(part)) {
-            // Element with attribute constraint: button[fd-button]
-            hasAttribute = true;
-        } else {
-            // Plain element selector: fd-button
-            hasElement = true;
-        }
-    }
-    if (hasElement && hasAttribute) {
-        return 'mixed';
-    }
-    return hasAttribute ? 'attribute' : 'element';
-}
-
-/**
- * Derives the deep import subpath for a component from its library and selector.
- * e.g. fd-button → @fundamental-ngx/core/button
- *      fdp-table → @fundamental-ngx/platform/table
- *      ui5-button → @fundamental-ngx/ui5-webcomponents (flat)
+ * Derive the npm deep-import subpath for a component.
+ * Falls back to the library root when no prefix match is found.
  */
 function deriveImportPath(component: ComponentMetadata): string {
     const { library, selector } = component;
     const firstSelector = selector.split(',')[0].trim();
-
-    // Attribute on element: button[fd-button] → extract attribute name
-    const attrOnElement = firstSelector.match(/\[(?:fd|fdp|fdb|cx|fdk)-([^\]]+)\]/);
-    if (attrOnElement) {
-        return `${library}/${attrOnElement[1].toLowerCase()}`;
-    }
-
-    // Element selector: fd-button → button, ui5-toggle-button → toggle-button
-    const elementMatch = firstSelector.match(/^(?:fd|fdp|fdb|cx|fdk|ui5)-(.+)/);
-    if (elementMatch) {
-        return `${library}/${elementMatch[1].toLowerCase()}`;
-    }
-
-    return library;
+    // Strip brackets for attribute directives: [fd-form-item] → fd-form-item
+    // Also handles element+attribute: input[fd-form-control] → fd-form-control
+    const cleaned = firstSelector
+        .replace(/^[^[]*\[([^\]]+)\].*/, '$1')
+        .replace(/^\[([^\]]+)\].*/, '$1')
+        .trim();
+    const elementMatch = cleaned.match(/^(fd|fdp|fdb|cx|fdk|ui5)-(.+)/);
+    if (!elementMatch) {return library;}
+    const rawSubpath = elementMatch[2].toLowerCase();
+    const overrideKey = `${library}/${rawSubpath}`;
+    const consolidatedSubpath = SUBPATH_OVERRIDES[overrideKey] ?? rawSubpath;
+    return `${library}/${consolidatedSubpath}`;
 }
 
-/**
- * Builds a minimal correct template snippet illustrating how to use the selector.
- * Attribute directives show the host element; element components show the tag directly.
- */
-function buildTemplateSnippet(selector: string, selectorType: 'element' | 'attribute' | 'mixed'): string {
-    if (selectorType === 'element') {
-        const tag = selector.split(',')[0].trim();
-        return `<${tag}></${tag}>`;
-    }
-
-    const firstPart = selector.split(',')[0].trim();
-
-    // Attribute on specific element: button[fd-button] → <button fd-button></button>
-    const attrOnElement = firstPart.match(/^([a-z][-a-z0-9]*)\[([^\]]+)\]/);
-    if (attrOnElement) {
-        return `<${attrOnElement[1]} ${attrOnElement[2]}></${attrOnElement[1]}>`;
-    }
-
-    // Pure attribute: [fd-thing] → <div fd-thing></div>
-    const pureAttr = firstPart.match(/^\[([^\]]+)\]/);
-    if (pureAttr) {
-        return `<div ${pureAttr[1]}></div>`;
-    }
-
-    return `<!-- Selector: ${selector} -->`;
-}
-
-/**
- * Returns an array of actionable pitfall strings for common mistakes when using a component.
- */
-function buildPitfalls(component: ComponentMetadata, selectorType: 'element' | 'attribute' | 'mixed'): string[] {
+/** Build a list of pitfalls and usage warnings for a component. */
+function buildPitfalls(component: ComponentMetadata, importPath: string): string[] {
     const pitfalls: string[] = [];
 
-    if (selectorType === 'attribute' || selectorType === 'mixed') {
-        const firstPart = component.selector.split(',')[0].trim();
-        const attrOnElement = firstPart.match(/^([a-z][-a-z0-9]*)\[([^\]]+)\]/);
-        if (attrOnElement) {
+    if (component.deprecated) {
+        pitfalls.push(`DEPRECATED: ${component.deprecated}`);
+    }
+
+    const type = getSelectorType(component.selector);
+    if (type === 'attribute') {
+        pitfalls.push(
+            `This is an attribute directive — apply it as an attribute on an HTML element, not as a custom element tag. ` +
+                `Correct: <div ${component.selector
+                    .split(',')[0]
+                    .trim()
+                    .replace(/^\[([^\]]+)\].*/, '$1')}>. ` +
+                `Wrong: <${component.selector
+                    .split(',')[0]
+                    .trim()
+                    .replace(/^\[([^\]]+)\].*/, '$1')}>.`
+        );
+    }
+
+    if (type === 'element-attribute') {
+        const m = component.selector
+            .split(',')[0]
+            .trim()
+            .match(/^([a-z-]+)\[([^\]]+)\]/);
+        if (m) {
             pitfalls.push(
-                `Attribute directive: use <${attrOnElement[1]} ${attrOnElement[2]}> — NOT <${attrOnElement[2]}> as a standalone element.`
+                `This directive applies to a specific host element. Use it as an attribute on <${m[1]}>, not as a standalone tag.`
             );
         }
     }
 
-    if (component.deprecated) {
-        pitfalls.push(`Deprecated: ${component.deprecated}`);
+    const requiredInputs = component.inputs.filter((i) => i.required && !i.defaultValue);
+    if (requiredInputs.length > 0) {
+        pitfalls.push(
+            `Required inputs with no default: ${requiredInputs.map((i) => i.name).join(', ')}. Omitting these will cause runtime errors.`
+        );
     }
 
-    const requiredInputs = component.inputs.filter((i) => i.required && !i.deprecated);
-    if (requiredInputs.length > 0) {
-        pitfalls.push(`Required inputs: ${requiredInputs.map((i) => i.name).join(', ')}`);
+    if (importPath === component.library) {
+        pitfalls.push(
+            `Could not derive a specific sub-entry point. Import from the library root: "${component.library}".`
+        );
     }
 
     return pitfalls;
@@ -1064,6 +1007,47 @@ function truncate(text: string, maxLength: number): string {
     return firstLine.slice(0, maxLength - 3) + '...';
 }
 
+/** Return whether a selector is an element, attribute, or element+attribute selector. */
+function getSelectorType(selector: string): 'element' | 'attribute' | 'element-attribute' {
+    const first = selector.split(',')[0].trim();
+    if (/^\[/.test(first)) {return 'attribute';}
+    if (/\[/.test(first)) {return 'element-attribute';}
+    return 'element';
+}
+
+/** Build a minimal template usage snippet from catalog metadata. */
+function buildTemplate(component: ComponentMetadata): string {
+    const type = getSelectorType(component.selector);
+    const first = component.selector.split(',')[0].trim();
+
+    if (type === 'attribute') {
+        // [fd-form-item] → <div fd-form-item></div>
+        const attr = first.replace(/^\[([^\]]+)\].*/, '$1');
+        return `<div ${attr}>\n  <!-- content -->\n</div>`;
+    }
+
+    if (type === 'element-attribute') {
+        // input[fd-form-control] → <input fd-form-control />
+        const elementMatch = first.match(/^([a-z-]+)\[([^\]]+)\]/);
+        if (elementMatch) {
+            return `<${elementMatch[1]} ${elementMatch[2]} />`;
+        }
+    }
+
+    // Plain element selector
+    const tag = first;
+    const required = component.inputs.filter((i) => i.required && !i.defaultValue);
+    const attrs = required
+        .slice(0, 3)
+        .map((i) => `[${i.name}]="/* ${i.type} */"`)
+        .join(' ');
+    const attrsStr = attrs ? ` ${attrs}` : '';
+    if (component.slots.length > 0 || component.inputs.length > 0) {
+        return `<${tag}${attrsStr}>\n  <!-- content -->\n</${tag}>`;
+    }
+    return `<${tag}${attrsStr} />`;
+}
+
 /** Find alternative components from UI_PATTERNS that share a category with either selector. */
 function findAlternatives(selectorA: string, selectorB: string): string[] {
     const alternatives = new Set<string>();
@@ -1115,6 +1099,29 @@ function compareVersions(a: string, b: string): number {
 function baseVersion(version: string): string {
     return version.replace(/-.*$/, '');
 }
+
+// ---------------------------------------------------------------------------
+// Subpath consolidation: selectors that don't map 1:1 to package export entries
+// ---------------------------------------------------------------------------
+const SUBPATH_OVERRIDES: Record<string, string> = {
+    // Core — all form sub-components live under a single ./form entry point
+    '@fundamental-ngx/core/form-group': 'form',
+    '@fundamental-ngx/core/form-item': 'form',
+    '@fundamental-ngx/core/form-label': 'form',
+    '@fundamental-ngx/core/form-control': 'form',
+    '@fundamental-ngx/core/form-header': 'form',
+    '@fundamental-ngx/core/form-legend': 'form',
+    // Core — selector is fd-side-nav but export entry is ./side-navigation
+    '@fundamental-ngx/core/side-nav': 'side-navigation',
+    // Core — nested-list sub-parts share the ./nested-list entry point
+    '@fundamental-ngx/core/nested-list-item': 'nested-list',
+    '@fundamental-ngx/core/nested-list-title': 'nested-list',
+    '@fundamental-ngx/core/nested-list-message': 'nested-list',
+    // Platform — form sub-components share ./form
+    '@fundamental-ngx/platform/form-group': 'form',
+    '@fundamental-ngx/platform/form-field': 'form',
+    '@fundamental-ngx/platform/form-generator': 'form'
+};
 
 // ---------------------------------------------------------------------------
 // UI Pattern recommendations

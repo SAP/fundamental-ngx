@@ -139,9 +139,16 @@ const TYPEDOC_LIBRARIES: LibraryConfig[] = [
  *
  * @param typeDocPath Absolute path to the typedoc.json file.
  * @param library     The `@fundamental-ngx/*` library identifier.
+ * @param basePath    Absolute repo root path. When provided, selectors are read
+ *                    from the actual Angular source files, preserving bracket syntax
+ *                    for attribute directives (e.g. `[fd-form-item]`). Omit in tests.
  * @returns An array of {@link ComponentMetadata} for every public Component / Directive class found.
  */
-export async function extractFromTypeDoc(typeDocPath: string, library: Library): Promise<ComponentMetadata[]> {
+export async function extractFromTypeDoc(
+    typeDocPath: string,
+    library: Library,
+    basePath?: string
+): Promise<ComponentMetadata[]> {
     const prefix = TYPEDOC_LIBRARIES.find((l) => l.library === library)?.prefix ?? 'fd';
     const raw = await readFile(typeDocPath, 'utf-8');
     const root: TypeDocRoot = JSON.parse(raw);
@@ -153,7 +160,7 @@ export async function extractFromTypeDoc(typeDocPath: string, library: Library):
             continue;
         }
 
-        const metadata = extractClassMetadata(declaration, library, prefix);
+        const metadata = await extractClassMetadata(declaration, library, prefix, basePath);
         if (metadata) {
             results.push(metadata);
         }
@@ -174,7 +181,7 @@ export async function extractAllTypeDocComponents(basePath: string): Promise<Com
     for (const config of TYPEDOC_LIBRARIES) {
         const fullPath = resolve(basePath, config.relativePath);
         try {
-            const components = await extractFromTypeDoc(fullPath, config.library);
+            const components = await extractFromTypeDoc(fullPath, config.library, basePath);
             allComponents.push(...components);
         } catch {
             // TypeDoc JSON may not exist for a library — skip silently.
@@ -209,10 +216,15 @@ function isComponentOrDirective(decl: TypeDocDeclaration): boolean {
 /**
  * Build a {@link ComponentMetadata} from a TypeDoc class declaration.
  */
-function extractClassMetadata(decl: TypeDocDeclaration, library: Library, prefix: string): ComponentMetadata | null {
+async function extractClassMetadata(
+    decl: TypeDocDeclaration,
+    library: Library,
+    prefix: string,
+    basePath?: string
+): Promise<ComponentMetadata | null> {
     const sourceFile = decl.sources?.[0]?.fileName;
     const description = flattenComment(decl.comment);
-    const selector = resolveSelector(decl, prefix);
+    const selector = await resolveSelector(decl, prefix, sourceFile, basePath);
     const category = inferCategory(sourceFile, library);
 
     const inputs: InputMetadata[] = [];
@@ -631,10 +643,19 @@ function isRequiredInput(innerType: TypeDocType | undefined): boolean {
  *
  * Strategy (in priority order):
  * 1. `@selector` block tag in the JSDoc comment.
- * 2. Inline `` selector: ... `` in the comment summary text.
- * 3. Derived from the class name using the library prefix convention.
+ * 2. Read `selector:` directly from the Angular `@Component`/`@Directive` decorator
+ *    in the source `.ts` file. This preserves the exact value including bracket syntax
+ *    for attribute directives (e.g. `[fd-form-item]`, `input[fd-form-control]`).
+ *    Only attempted when `basePath` is provided.
+ * 3. Inline `` selector: ... `` in the comment summary text.
+ * 4. Derived from the class name using the library prefix convention.
  */
-function resolveSelector(decl: TypeDocDeclaration, prefix: string): string {
+async function resolveSelector(
+    decl: TypeDocDeclaration,
+    prefix: string,
+    sourceFile: string | undefined,
+    basePath?: string
+): Promise<string> {
     // 1. @selector block tag.
     const selectorTag = decl.comment?.blockTags?.find((t) => t.tag === '@selector');
     if (selectorTag?.content?.length) {
@@ -647,7 +668,21 @@ function resolveSelector(decl: TypeDocDeclaration, prefix: string): string {
         }
     }
 
-    // 2. Parse from inline comment: ``` selector: button[fd-button], a[fd-button] ```
+    // 2. Read selector from the Angular decorator in the source file.
+    if (basePath !== undefined && sourceFile) {
+        const fullPath = resolve(basePath, sourceFile);
+        try {
+            const content = await readFile(fullPath, 'utf-8');
+            const fromSource = extractSelectorFromSource(content, decl.name);
+            if (fromSource) {
+                return fromSource;
+            }
+        } catch {
+            // File not found or unreadable — fall through.
+        }
+    }
+
+    // 3. Parse from inline comment: ``` selector: ... ```
     //    Only match when the text appears inside backtick fences (not in example code blocks).
     const commentText = flattenComment(decl.comment);
     const selectorMatch = commentText.match(/```\s*selector:\s*([^`]+)```/);
@@ -656,8 +691,36 @@ function resolveSelector(decl: TypeDocDeclaration, prefix: string): string {
         return selectorMatch[1].trim();
     }
 
-    // 3. Derive from class name.
+    // 4. Derive from class name.
     return deriveSelectorFromClassName(decl.name, prefix);
+}
+
+/**
+ * Extract the `selector` value from an Angular `@Component` or `@Directive` decorator
+ * in the source file that defines `className`.
+ *
+ * Finds the class declaration, then searches backwards through the preceding ~2 KB of
+ * source text for the last `selector: '...'` assignment. This correctly handles
+ * multi-line decorators and preserves the full selector string including brackets
+ * (e.g. `[fd-form-item]`, `input[fd-form-control], textarea[fd-form-control]`).
+ */
+function extractSelectorFromSource(content: string, className: string): string | null {
+    const classIndex = content.search(new RegExp(`\\bclass\\s+${className}\\b`));
+    if (classIndex === -1) {
+        return null;
+    }
+
+    // Look at the 2000 chars before the class keyword — the decorator lives there.
+    const decoratorSection = content.slice(Math.max(0, classIndex - 2000), classIndex);
+
+    // Match selector: '...' or selector: "..." or selector: `...`
+    const matches = [...decoratorSection.matchAll(/selector:\s*['"`]([^'"`]+)['"`]/g)];
+    if (matches.length === 0) {
+        return null;
+    }
+
+    // Take the last match (closest to the class declaration).
+    return matches[matches.length - 1][1].trim();
 }
 
 /**

@@ -621,6 +621,118 @@ describe('typedoc-extractor', () => {
             expect(result[0].inputs[1].deprecated).toBe('Use newProp instead');
         });
 
+        it('should read bracket selector from Angular source file when basePath is provided', async () => {
+            // Write a minimal Angular source file with an attribute-directive selector.
+            const srcDir = resolve(TEMP_DIR, 'libs/core/form/form-item');
+            await mkdir(srcDir, { recursive: true });
+            const srcFile = resolve(srcDir, 'form-item.component.ts');
+            await writeFile(
+                srcFile,
+                `
+@Directive({
+    selector: '[fd-form-item]',
+})
+export class FormItemComponent {}
+`,
+                'utf-8'
+            );
+
+            const doc = makeTypeDocRoot([
+                makeClassDecl({
+                    name: 'FormItemComponent',
+                    comment: { summary: [{ kind: 'text', text: 'Form item directive' }] },
+                    sources: [{ fileName: 'libs/core/form/form-item/form-item.component.ts', line: 5, character: 0 }]
+                })
+            ]);
+            const filePath = await writeTempTypeDoc(doc);
+
+            const result = await extractFromTypeDoc(filePath, '@fundamental-ngx/core', TEMP_DIR);
+
+            expect(result[0].selector).toBe('[fd-form-item]');
+        });
+
+        it('should read compound selector (element+attribute) from source file', async () => {
+            const srcDir = resolve(TEMP_DIR, 'libs/core/form/form-control');
+            await mkdir(srcDir, { recursive: true });
+            const srcFile = resolve(srcDir, 'form-control.component.ts');
+            await writeFile(
+                srcFile,
+                `
+@Directive({
+    selector: 'input[fd-form-control], textarea[fd-form-control]',
+})
+export class FormControlComponent {}
+`,
+                'utf-8'
+            );
+
+            const doc = makeTypeDocRoot([
+                makeClassDecl({
+                    name: 'FormControlComponent',
+                    comment: { summary: [{ kind: 'text', text: 'Form control directive' }] },
+                    sources: [
+                        { fileName: 'libs/core/form/form-control/form-control.component.ts', line: 5, character: 0 }
+                    ]
+                })
+            ]);
+            const filePath = await writeTempTypeDoc(doc);
+
+            const result = await extractFromTypeDoc(filePath, '@fundamental-ngx/core', TEMP_DIR);
+
+            expect(result[0].selector).toBe('input[fd-form-control], textarea[fd-form-control]');
+        });
+
+        it('should fall back to class-name derivation when basePath is omitted', async () => {
+            const doc = makeTypeDocRoot([
+                makeClassDecl({
+                    name: 'FormItemComponent',
+                    comment: { summary: [{ kind: 'text', text: 'Form item directive' }] },
+                    sources: [{ fileName: 'libs/core/form/form-item/form-item.component.ts', line: 5, character: 0 }]
+                })
+            ]);
+            const filePath = await writeTempTypeDoc(doc);
+
+            // No basePath — must fall through to class-name derivation.
+            const result = await extractFromTypeDoc(filePath, '@fundamental-ngx/core');
+
+            expect(result[0].selector).toBe('fd-form-item');
+        });
+
+        it('@selector JSDoc tag takes priority over source file reading', async () => {
+            const srcDir = resolve(TEMP_DIR, 'libs/core/button-override');
+            await mkdir(srcDir, { recursive: true });
+            await writeFile(
+                resolve(srcDir, 'button.component.ts'),
+                `
+@Component({ selector: 'wrong-selector' })
+export class ButtonComponent {}
+`,
+                'utf-8'
+            );
+
+            const doc = makeTypeDocRoot([
+                makeClassDecl({
+                    name: 'ButtonComponent',
+                    comment: {
+                        summary: [{ kind: 'text', text: 'A button' }],
+                        blockTags: [
+                            {
+                                tag: '@selector',
+                                content: [{ kind: 'text', text: 'button[fd-button], a[fd-button]' }]
+                            }
+                        ]
+                    },
+                    sources: [{ fileName: 'libs/core/button-override/button.component.ts', line: 5, character: 0 }]
+                })
+            ]);
+            const filePath = await writeTempTypeDoc(doc);
+
+            const result = await extractFromTypeDoc(filePath, '@fundamental-ngx/core', TEMP_DIR);
+
+            // JSDoc @selector tag wins.
+            expect(result[0].selector).toBe('button[fd-button], a[fd-button]');
+        });
+
         it('should not set deprecated when no @deprecated tag exists', async () => {
             const doc = makeTypeDocRoot([makeClassDecl()]);
             const filePath = await writeTempTypeDoc(doc);
