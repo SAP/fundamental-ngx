@@ -43,14 +43,11 @@ function findComponent(nameOrSelector: string, components: ComponentMetadata[]):
         return byName;
     }
 
-    const byPartialSelector = components.find((c) => c.selector.toLowerCase().includes(lower));
-    if (byPartialSelector) {
-        return byPartialSelector;
-    }
-
-    const byPartialName = components.find((c) => c.name.toLowerCase().includes(lower));
-    if (byPartialName) {
-        return byPartialName;
+    const partialMatches = components.filter(
+        (c) => c.selector.toLowerCase().includes(lower) || c.name.toLowerCase().includes(lower)
+    );
+    if (partialMatches.length > 0) {
+        return partialMatches.sort((a, b) => scoreMatch(b, lower) - scoreMatch(a, lower))[0];
     }
 
     return undefined;
@@ -63,6 +60,12 @@ function scoreMatch(component: ComponentMetadata, query: string): number {
         score += 100;
     } else if (component.selector.toLowerCase().includes(query)) {
         score += 50;
+        const selectorParts = component.selector.split(',').map((p) => p.trim().toLowerCase());
+        const matchingParts = selectorParts.filter((p) => p.includes(query));
+        if (matchingParts.length > 0) {
+            const shortestPart = Math.min(...matchingParts.map((p) => p.length));
+            score += Math.max(0, 20 - (shortestPart - query.length));
+        }
     }
 
     if (component.name.toLowerCase() === query) {
@@ -316,6 +319,41 @@ describe('MCP Server helpers', () => {
         it('should prefer exact selector over partial name match', () => {
             const result = findComponent('ui5-button', FIXTURE_COMPONENTS);
             expect(result?.name).toBe('Button');
+        });
+
+        it('should prefer primary component over compound directive with same attribute', () => {
+            // Regression: searching "fd-button" previously returned NestedButtonDirective
+            // ([fd-button][fdbNestedButton]) instead of ButtonComponent (button[fd-button])
+            // because the directive appeared first in the catalog.
+            const primaryButton: ComponentMetadata = {
+                name: 'ButtonComponent',
+                selector: 'button[fd-button], a[fd-button]',
+                library: '@fundamental-ngx/core',
+                category: 'Actions',
+                description: 'Standard button',
+                inputs: [],
+                outputs: [],
+                slots: [],
+                methods: [],
+                cssProperties: [],
+                source: 'typedoc'
+            };
+            const nestedDirective: ComponentMetadata = {
+                name: 'NestedButtonDirective',
+                selector: '[fd-button][fdbNestedButton]',
+                library: '@fundamental-ngx/btp',
+                category: 'Actions',
+                description: 'Nested button directive',
+                inputs: [],
+                outputs: [],
+                slots: [],
+                methods: [],
+                cssProperties: [],
+                source: 'typedoc'
+            };
+            // Directive appears first — scorer must still rank ButtonComponent higher
+            const result = findComponent('fd-button', [nestedDirective, primaryButton]);
+            expect(result?.name).toBe('ButtonComponent');
         });
     });
 

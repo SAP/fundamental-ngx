@@ -880,16 +880,13 @@ function findComponent(nameOrSelector: string): ComponentMetadata | undefined {
         return byName;
     }
 
-    // Partial match on selector
-    const byPartialSelector = catalog.components.find((c) => c.selector.toLowerCase().includes(lower));
-    if (byPartialSelector) {
-        return byPartialSelector;
-    }
-
-    // Partial match on name
-    const byPartialName = catalog.components.find((c) => c.name.toLowerCase().includes(lower));
-    if (byPartialName) {
-        return byPartialName;
+    // Partial match on selector or name — rank by score to avoid compound
+    // directives beating the primary component when selectors share a substring.
+    const partialMatches = catalog.components.filter(
+        (c) => c.selector.toLowerCase().includes(lower) || c.name.toLowerCase().includes(lower)
+    );
+    if (partialMatches.length > 0) {
+        return partialMatches.sort((a, b) => scoreMatch(b, lower) - scoreMatch(a, lower))[0];
     }
 
     return undefined;
@@ -902,6 +899,15 @@ function scoreMatch(component: ComponentMetadata, query: string): number {
         score += 100;
     } else if (component.selector.toLowerCase().includes(query)) {
         score += 50;
+        // Prefer selectors where the query covers most of the primary part.
+        // Avoids picking compound directives (e.g. [fd-button][fdbNestedButton])
+        // over the primary component (e.g. button[fd-button], a[fd-button]).
+        const selectorParts = component.selector.split(',').map((p) => p.trim().toLowerCase());
+        const matchingParts = selectorParts.filter((p) => p.includes(query));
+        if (matchingParts.length > 0) {
+            const shortestPart = Math.min(...matchingParts.map((p) => p.length));
+            score += Math.max(0, 20 - (shortestPart - query.length));
+        }
     }
 
     if (component.name.toLowerCase() === query) {
