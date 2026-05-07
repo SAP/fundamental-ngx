@@ -12,7 +12,8 @@ import {
     ViewEncapsulation,
     computed,
     forwardRef,
-    inject
+    inject,
+    signal
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
@@ -167,6 +168,12 @@ export class TableHeaderRowComponent extends TableRowDirective implements OnInit
 
     /** @hidden */
     readonly _tableRowService = inject(TableRowService);
+
+    /**
+     * @hidden
+     * Used to remove the selection column title, to prevent screenreader from reading "Select All" when focusing non-header cells
+     * */
+    readonly _selectionColumnHeaderDisableTitle = signal(true);
 
     /** @hidden */
     private readonly _rtlService = inject(RtlService, {
