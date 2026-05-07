@@ -160,6 +160,68 @@ describe('SegmentedButtonComponent', () => {
     });
 });
 
+@Component({
+    selector: 'fd-test-individual-disabled',
+    template: `
+        <fd-segmented-button>
+            <button #first fd-button label="Button" value="first"></button>
+            <button #second fd-button label="Button" value="second" [disabled]="true"></button>
+            <button #third fd-button label="Button" value="third"></button>
+        </fd-segmented-button>
+    `,
+    standalone: true,
+    imports: [ButtonComponent, SegmentedButtonComponent]
+})
+class HostWithIndividuallyDisabledButtonComponent {
+    @ViewChild('first', { read: ButtonComponent }) firstButton: ButtonComponent;
+    @ViewChild('second', { read: ButtonComponent }) secondButton: ButtonComponent;
+    @ViewChild('third', { read: ButtonComponent }) thirdButton: ButtonComponent;
+    @ViewChild(SegmentedButtonComponent) segmentedButton: SegmentedButtonComponent;
+}
+
+describe('SegmentedButtonComponent — individual button disabled state', () => {
+    let component: HostWithIndividuallyDisabledButtonComponent;
+    let fixture: ComponentFixture<HostWithIndividuallyDisabledButtonComponent>;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [HostWithIndividuallyDisabledButtonComponent]
+        }).compileComponents();
+    }));
+
+    beforeEach(waitForAsync(() => {
+        fixture = TestBed.createComponent(HostWithIndividuallyDisabledButtonComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+        return fixture.whenStable();
+    }));
+
+    it('should preserve [disabled]="true" on an individual button after view init (issue #14182)', () => {
+        expect(component.secondButton.elementRef.nativeElement.hasAttribute('disabled')).toBe(true);
+        expect(component.firstButton.elementRef.nativeElement.hasAttribute('disabled')).toBe(false);
+        expect(component.thirdButton.elementRef.nativeElement.hasAttribute('disabled')).toBe(false);
+    });
+
+    it('should keep individually disabled button disabled after group setDisabledState(false)', () => {
+        component.segmentedButton.setDisabledState(true);
+        fixture.detectChanges();
+
+        component.segmentedButton.setDisabledState(false);
+        fixture.detectChanges();
+
+        expect(component.secondButton.elementRef.nativeElement.hasAttribute('disabled')).toBe(true);
+        expect(component.firstButton.elementRef.nativeElement.hasAttribute('disabled')).toBe(false);
+        expect(component.thirdButton.elementRef.nativeElement.hasAttribute('disabled')).toBe(false);
+    });
+
+    it('should not change selection when clicking an individually disabled button', () => {
+        component.secondButton.elementRef.nativeElement.dispatchEvent(new MouseEvent('click'));
+        fixture.detectChanges();
+
+        expect(component.secondButton.elementRef.nativeElement.getAttribute('aria-selected')).toBeNull();
+    });
+});
+
 describe('Segmented button component CVA', () => {
     runValueAccessorTests<SegmentedButtonComponent, HostComponent>({
         component: SegmentedButtonComponent,
