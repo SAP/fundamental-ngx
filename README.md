@@ -12,6 +12,16 @@
 
 ## Packages
 
+### UI5 Web Components
+
+Angular wrappers for the [@ui5/webcomponents](https://sap.github.io/ui5-webcomponents) project, letting you use UI5 Web Components in Angular without needing [CUSTOM_ELEMENTS_SCHEMA](https://angular.io/api/core/CUSTOM_ELEMENTS_SCHEMA) or [NO_ERRORS_SCHEMA](https://angular.io/api/core/NO_ERRORS_SCHEMA). Provides full type safety and access to the underlying web components in a type-safe environment. Everything available on the [@ui5/webcomponents](https://sap.github.io/ui5-webcomponents) side is available here.
+
+| Package                                                                    | Description                               |
+| -------------------------------------------------------------------------- | ----------------------------------------- |
+| [`@fundamental-ngx/ui5-webcomponents`](libs/ui5-webcomponents)             | Angular wrappers for UI5 Web Components   |
+| [`@fundamental-ngx/ui5-webcomponents-fiori`](libs/ui5-webcomponents-fiori) | Angular wrappers for UI5 Fiori components |
+| [`@fundamental-ngx/ui5-webcomponents-ai`](libs/ui5-webcomponents-ai)       | Angular wrappers for UI5 AI components    |
+
 ### Core Libraries
 
 | Package                                      | Description                                                                  |
