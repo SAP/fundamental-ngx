@@ -1,3 +1,25 @@
+## 0.62.2-rc.3 (2026-05-05)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.62.2-rc.2 (2026-05-05)
+
+### 🚀 Features
+
+- **core:** improve MCP server metadata and add usage guide tool ([#14159](https://github.com/SAP/fundamental-ngx/pull/14159))
+
+### ❤️ Thank You
+
+- deno
+
+## 0.62.2-rc.1 (2026-05-05)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.62.2-rc.0 (2026-05-05)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
 ## 0.62.1 (2026-05-03)
 
 This was a version bump only for cx to align it with other projects, there were no code changes.

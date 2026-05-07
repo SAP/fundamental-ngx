@@ -75,12 +75,19 @@ Audit the code at `$ARGUMENTS` against the project's conventions. Unlike `/revie
 - [ ] No inline styles (use common-css)
 - [ ] Individual imports in examples
 
+### 8. Selector Usage
+
+- [ ] Attribute directive selectors used on host elements, not as standalone elements (e.g., `<h2 fd-title>` not `<fd-title>`)
+- [ ] Element selectors used as elements (e.g., `<fd-card>` not `<div fd-card>`)
+- [ ] `fdLayoutGridCol` directive value used for small breakpoint (there is no `colSm` — the default/small breakpoint is set via the `fdLayoutGridCol` input itself)
+- [ ] No guessing selectors — check if selectors like `[fd-card-title]`, `[fd-card-subtitle]` are attribute directives before using them as elements
+
 ## Output
 
 ```
 ## Best Practices Audit: [component name]
 
-**Overall Score:** X / 7 sections passing
+**Overall Score:** X / 8 sections passing
 
 ### Section Scores
 | Section            | Status | Issues |
@@ -92,6 +99,7 @@ Audit the code at `$ARGUMENTS` against the project's conventions. Unlike `/revie
 | Code Quality       | PASS   | 0      |
 | Testing            | WARN   | 1      |
 | Documentation      | FAIL   | 2      |
+| Selector Usage     | PASS   | 0      |
 
 ### Findings (by severity)
 

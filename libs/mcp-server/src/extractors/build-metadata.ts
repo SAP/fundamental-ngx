@@ -1,5 +1,6 @@
+import { readdirSync } from 'fs';
 import { mkdir, writeFile } from 'fs/promises';
-import { dirname, resolve } from 'path';
+import { dirname, join, resolve } from 'path';
 import { ComponentCatalog } from '../types/component-metadata';
 import { extractAllUi5Components } from './cem-extractor';
 import { extractDescriptions } from './description-extractor';
@@ -12,7 +13,10 @@ const LIBRARY_TO_DIR: Record<string, string> = {
     '@fundamental-ngx/platform': 'platform',
     '@fundamental-ngx/btp': 'btp',
     '@fundamental-ngx/cx': 'cx',
-    '@fundamental-ngx/cdk': 'cdk'
+    '@fundamental-ngx/cdk': 'cdk',
+    '@fundamental-ngx/ui5-webcomponents': 'ui5-webcomponents',
+    '@fundamental-ngx/ui5-webcomponents-fiori': 'ui5-webcomponents-fiori',
+    '@fundamental-ngx/ui5-webcomponents-ai': 'ui5-webcomponents-ai'
 };
 
 /** Derive the example directory name from a selector.
@@ -44,6 +48,167 @@ function selectorToDir(selector: string): string {
 }
 
 /**
+ * Build a normalized-name → actual-directory-name index for all docs directories.
+ * Normalization strips all hyphens so that "checkbox" matches "check-box",
+ * "combobox" matches "combo-box", "tabcontainer" matches "tab-container", etc.
+ */
+function buildDirIndex(basePath: string, libDirs: string[]): Map<string, string[]> {
+    const index = new Map<string, string[]>();
+
+    for (const libDir of libDirs) {
+        const docsPath = join(basePath, 'libs', 'docs', libDir);
+        let entries: string[];
+        try {
+            entries = readdirSync(docsPath, { withFileTypes: true })
+                .filter((e) => e.isDirectory())
+                .map((e) => e.name);
+        } catch {
+            continue;
+        }
+
+        for (const dir of entries) {
+            const key = `${libDir}/${dir}`;
+            const normalized = dir.replace(/-/g, '');
+            const indexKey = `${libDir}/${normalized}`;
+            const existing = index.get(indexKey) ?? [];
+            existing.push(key);
+            index.set(indexKey, existing);
+        }
+    }
+
+    return index;
+}
+
+/**
+ * Manual mapping for UI5 sub-component selectors whose abbreviated CEM names
+ * don't correspond to any docs directory via prefix stripping.
+ *
+ * Maps: selectorSuffix (after stripping "ui5-") → docs directory name.
+ * Only entries that cannot be resolved algorithmically belong here.
+ */
+const UI5_SELECTOR_TO_DIR: Record<string, string> = {
+    // ComboBox item children
+    'cb-item': 'combo-box',
+    // List item variants
+    li: 'list',
+    'li-custom': 'list',
+    'li-group': 'list',
+    // Notification list item variants
+    'li-notification': 'notification-list',
+    'li-notification-group': 'notification-list',
+    // MultiComboBox item children
+    'mcb-item': 'multi-combobox',
+    'mcb-item-group': 'multi-combobox',
+    // Select children
+    option: 'select',
+    'option-custom': 'select',
+    // Input / ComboBox suggestion children
+    'suggestion-item-custom': 'input',
+    'suggestion-item-group': 'input',
+    // UserSettingsDialog sub-views
+    'user-settings-account-view': 'user-settings-dialog',
+    'user-settings-appearance-view': 'user-settings-dialog',
+    'user-settings-appearance-view-group': 'user-settings-dialog',
+    'user-settings-appearance-view-item': 'user-settings-dialog',
+    'user-settings-item': 'user-settings-dialog',
+    'user-settings-view': 'user-settings-dialog'
+};
+
+/**
+ * Resolve a component selector to one or more example map keys.
+ *
+ * Returns candidate keys in priority order:
+ * 1. Exact match: libDir/compDir
+ * 2. Normalized match (hyphens stripped): e.g. "checkbox" → "check-box"
+ * 3. Manual mapping for abbreviated sub-components: e.g. "li" → "list"
+ * 4. Sub-component parent fallback: e.g. "card-header" → "card",
+ *    "table-row" → "table"
+ *
+ * For UI5 AI library, also strips the "ai-" prefix since the directory
+ * just uses the base name (e.g. "ai-button" → "button").
+ */
+function resolveExampleKeys(
+    libDir: string,
+    compDir: string,
+    exampleKeys: Set<string>,
+    dirIndex: Map<string, string[]>
+): string[] {
+    const candidates: string[] = [];
+
+    // 1. Exact match
+    const exactKey = `${libDir}/${compDir}`;
+    if (exampleKeys.has(exactKey)) {
+        return [exactKey];
+    }
+
+    // For UI5 AI, strip "ai-" prefix: "ai-button" → "button"
+    if (libDir === 'ui5-webcomponents-ai' && compDir.startsWith('ai-')) {
+        const stripped = compDir.slice(3);
+        const strippedKey = `${libDir}/${stripped}`;
+        if (exampleKeys.has(strippedKey)) {
+            return [strippedKey];
+        }
+    }
+
+    // 2. Normalized match (strip hyphens): "checkbox" → "check-box"
+    const normalizedCompDir = compDir.replace(/-/g, '');
+    const normalizedKey = `${libDir}/${normalizedCompDir}`;
+    const normalizedMatches = dirIndex.get(normalizedKey);
+    if (normalizedMatches) {
+        const matched = normalizedMatches.filter((k) => exampleKeys.has(k));
+        if (matched.length > 0) {
+            return matched;
+        }
+    }
+
+    // 3. Manual mapping for abbreviated sub-component selectors
+    const mappedDir = UI5_SELECTOR_TO_DIR[compDir];
+    if (mappedDir) {
+        const mappedKey = `${libDir}/${mappedDir}`;
+        if (exampleKeys.has(mappedKey)) {
+            return [mappedKey];
+        }
+        // Also try normalized version of the mapped directory
+        const normalizedMapped = mappedDir.replace(/-/g, '');
+        const normalizedMappedKey = `${libDir}/${normalizedMapped}`;
+        const normalizedMappedMatches = dirIndex.get(normalizedMappedKey);
+        if (normalizedMappedMatches) {
+            const matched = normalizedMappedMatches.filter((k) => exampleKeys.has(k));
+            if (matched.length > 0) {
+                return matched;
+            }
+        }
+    }
+
+    // 4. Sub-component parent fallback: try progressively shorter prefixes.
+    // "table-header-cell" → try "table-header", then "table"
+    // "card-header" → try "card"
+    const parts = compDir.split('-');
+    for (let i = parts.length - 1; i >= 1; i--) {
+        const parentDir = parts.slice(0, i).join('-');
+        const parentKey = `${libDir}/${parentDir}`;
+        if (exampleKeys.has(parentKey)) {
+            candidates.push(parentKey);
+            break;
+        }
+
+        // Also try normalized parent
+        const normalizedParent = parentDir.replace(/-/g, '');
+        const normalizedParentKey = `${libDir}/${normalizedParent}`;
+        const parentMatches = dirIndex.get(normalizedParentKey);
+        if (parentMatches) {
+            const matched = parentMatches.filter((k) => exampleKeys.has(k));
+            if (matched.length > 0) {
+                candidates.push(...matched);
+                break;
+            }
+        }
+    }
+
+    return candidates;
+}
+
+/**
  * Build the complete MCP metadata catalog.
  *
  * Orchestrates all extractors and writes the unified components.json.
@@ -72,6 +237,12 @@ export async function buildMetadata(basePath: string, outputPath: string): Promi
     const examples = await extractExamples(basePath);
     console.log(`  Examples: found ${examples.size} components with examples`);
 
+    // Build a directory index for fuzzy matching (handles naming mismatches
+    // like "checkbox" → "check-box", "combobox" → "combo-box", etc.)
+    const libDirs = [...new Set(Object.values(LIBRARY_TO_DIR))];
+    const dirIndex = buildDirIndex(basePath, libDirs);
+    const exampleKeys = new Set(examples.keys());
+
     // Attach examples to matching components
     let enrichedCount = 0;
     for (const component of allComponents) {
@@ -81,11 +252,13 @@ export async function buildMetadata(basePath: string, outputPath: string): Promi
         }
 
         const compDir = selectorToDir(component.selector);
-        const key = `${libDir}/${compDir}`;
-        const compExamples = examples.get(key);
+        const keys = resolveExampleKeys(libDir, compDir, exampleKeys, dirIndex);
 
-        if (compExamples && compExamples.length > 0) {
-            component.examples = compExamples.map((ex) => ({
+        // Collect examples from all matched keys (e.g. sub-component inherits parent)
+        const allExamples = keys.flatMap((key) => examples.get(key) ?? []);
+
+        if (allExamples.length > 0) {
+            component.examples = allExamples.map((ex) => ({
                 name: ex.name,
                 description: ex.description,
                 typescript: ex.typescript,
@@ -100,6 +273,7 @@ export async function buildMetadata(basePath: string, outputPath: string): Promi
     const descriptions = await extractDescriptions(basePath);
     console.log(`  Descriptions: found ${descriptions.size} docs descriptions`);
 
+    const descriptionKeys = new Set(descriptions.keys());
     let descriptionEnrichedCount = 0;
     for (const component of allComponents) {
         // Skip components that already have a real description (from JSDoc)
@@ -113,12 +287,15 @@ export async function buildMetadata(basePath: string, outputPath: string): Promi
         }
 
         const compDir = selectorToDir(component.selector);
-        const key = `${libDir}/${compDir}`;
-        const docsDesc = descriptions.get(key);
+        const keys = resolveExampleKeys(libDir, compDir, descriptionKeys, dirIndex);
 
-        if (docsDesc) {
-            component.description = docsDesc;
-            descriptionEnrichedCount++;
+        for (const key of keys) {
+            const docsDesc = descriptions.get(key);
+            if (docsDesc) {
+                component.description = docsDesc;
+                descriptionEnrichedCount++;
+                break;
+            }
         }
     }
     console.log(`  Descriptions: enriched ${descriptionEnrichedCount} components`);

@@ -4,7 +4,10 @@
 
 ## Overview
 
-Fundamental NGX is the SAP set of Angular component libraries implementing the SAP Design System. Build modern, enterprise-grade applications with the SAP look and feel.
+Fundamental NGX is the SAP set of Angular component libraries implementing the SAP Design System. Build modern, enterprise-grade applications with the SAP look and feel:
+
+- **Native Angular components** built on [Fundamental Library Styles](https://sap.github.io/fundamental-styles/), covering core UI, platform-level composites, BTP, and CX patterns.
+- **Angular wrappers for UI5 Web Components** — a wrapper around the [@ui5/webcomponents](https://sap.github.io/ui5-webcomponents) project to make it work with Angular without needing to use the [CUSTOM_ELEMENTS_SCHEMA](https://angular.io/api/core/CUSTOM_ELEMENTS_SCHEMA) or [NO_ERRORS_SCHEMA](https://angular.io/api/core/NO_ERRORS_SCHEMA) schemas, while providing full type safety and access to underlying web components in a type-safe environment. Everything that works and is available on the [@ui5/webcomponents](https://sap.github.io/ui5-webcomponents) side.
 
 ## Packages
 

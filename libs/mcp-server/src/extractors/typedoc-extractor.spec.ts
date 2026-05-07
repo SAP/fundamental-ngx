@@ -561,7 +561,7 @@ describe('typedoc-extractor', () => {
 
             const result = await extractFromTypeDoc(filePath, '@fundamental-ngx/core');
 
-            expect(result[0].description).toContain('Initial Focus directive (fd-initial-focus).');
+            expect(result[0].description).toContain('Initial Focus directive ([fd-initial-focus]).');
         });
 
         it('should use JSDoc description when present (not fallback)', async () => {

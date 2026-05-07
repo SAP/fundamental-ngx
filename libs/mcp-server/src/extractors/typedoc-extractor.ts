@@ -727,22 +727,28 @@ function extractSelectorFromSource(content: string, className: string): string |
  * Derive a CSS selector from a class name.
  *
  * Examples:
- * - `ButtonComponent`          → `fd-button`       (prefix "fd")
- * - `ActionBarComponent`       → `fd-action-bar`   (prefix "fd")
- * - `ActionListItemComponent`  → `fdp-action-list-item` (prefix "fdp")
- * - `AutoCompleteDirective`    → `fdk-auto-complete`(prefix "fdk")
+ * - `ButtonComponent`          -> `fd-button`          (prefix "fd")
+ * - `ActionBarComponent`       -> `fd-action-bar`      (prefix "fd")
+ * - `ActionListItemComponent`  -> `fdp-action-list-item` (prefix "fdp")
+ * - `AutoCompleteDirective`    -> `[fdk-auto-complete]` (prefix "fdk")
+ * - `CardTitleDirective`       -> `[fd-card-title]`    (prefix "fd")
  *
  * The class name is converted from PascalCase to kebab-case, with the
  * `Component` / `Directive` suffix stripped and the library prefix prepended.
+ * Classes ending with `Directive` produce attribute selectors (wrapped in brackets).
  */
 function deriveSelectorFromClassName(className: string, prefix: string): string {
+    const isDirective = className.endsWith('Directive');
+
     // Strip Component / Directive suffix.
     const baseName = className.replace(/Component$|Directive$/, '');
 
-    // PascalCase → kebab-case.
+    // PascalCase -> kebab-case.
     const kebab = baseName.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
 
-    return `${prefix}-${kebab}`;
+    const elementSelector = `${prefix}-${kebab}`;
+
+    return isDirective ? `[${elementSelector}]` : elementSelector;
 }
 
 // ---------------------------------------------------------------------------

@@ -3,6 +3,7 @@ import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
 import { z } from 'zod';
+import { USAGE_GUIDES } from './data/usage-guides';
 import { extractChangelogs } from './extractors/changelog-extractor';
 import { extractDesignTokens } from './extractors/token-extractor';
 import {
@@ -13,6 +14,7 @@ import {
     LIBRARY_ALIAS_MAP,
     LibraryAlias
 } from './types/component-metadata';
+import { buildPitfalls, buildTemplate, deriveImportPath, getSelectorType } from './utils/selector-utils';
 
 // Load component catalog from pre-built JSON
 let catalog: ComponentCatalog;
@@ -651,6 +653,12 @@ Use this as the first step when adding a new component to an Angular template.`,
         component: z.string().describe('Component name or selector (e.g., "fd-button", "fdp-table", "ui5-input")')
     },
     async ({ component }) => {
+        const lowerComponent = component.toLowerCase().replace(/\s+/g, '-');
+        const curatedGuide = USAGE_GUIDES[lowerComponent];
+        if (curatedGuide) {
+            return { content: [{ type: 'text' as const, text: JSON.stringify(curatedGuide, null, 2) }] };
+        }
+
         const found = findComponent(component);
 
         if (!found) {
@@ -857,77 +865,6 @@ server.resource('component-catalog', 'fundamental-ngx://components/catalog', asy
 // Helpers
 // ---------------------------------------------------------------------------
 
-/** Derive the npm deep-import subpath for a component. */
-function deriveImportPath(component: ComponentMetadata): string {
-    const { library, selector } = component;
-    const firstSelector = selector.split(',')[0].trim();
-    // Strip brackets for attribute directives: [fd-form-item] → fd-form-item
-    // Also handles element+attribute: input[fd-form-control] → fd-form-control
-    const cleaned = firstSelector
-        .replace(/^[^[]*\[([^\]]+)\].*/, '$1')
-        .replace(/^\[([^\]]+)\].*/, '$1')
-        .trim();
-    const elementMatch = cleaned.match(/^(fd|fdp|fdb|cx|fdk|ui5)-(.+)/);
-    if (!elementMatch) {
-        return library;
-    }
-    const rawSubpath = elementMatch[2].toLowerCase();
-    const overrideKey = `${library}/${rawSubpath}`;
-    const subpath = SUBPATH_OVERRIDES[overrideKey] ?? rawSubpath;
-    return `${library}/${subpath}`;
-}
-
-/** Build a list of pitfalls and usage warnings for a component. */
-function buildPitfalls(component: ComponentMetadata, importPath: string): string[] {
-    const pitfalls: string[] = [];
-
-    if (component.deprecated) {
-        pitfalls.push(`DEPRECATED: ${component.deprecated}`);
-    }
-
-    const type = getSelectorType(component.selector);
-    if (type === 'attribute') {
-        pitfalls.push(
-            `This is an attribute directive — apply it as an attribute on an HTML element, not as a custom element tag. ` +
-                `Correct: <div ${component.selector
-                    .split(',')[0]
-                    .trim()
-                    .replace(/^\[([^\]]+)\].*/, '$1')}>. ` +
-                `Wrong: <${component.selector
-                    .split(',')[0]
-                    .trim()
-                    .replace(/^\[([^\]]+)\].*/, '$1')}>.`
-        );
-    }
-
-    if (type === 'element-attribute') {
-        const m = component.selector
-            .split(',')[0]
-            .trim()
-            .match(/^([a-z-]+)\[([^\]]+)\]/);
-        if (m) {
-            pitfalls.push(
-                `This directive applies to a specific host element. Use it as an attribute on <${m[1]}>, not as a standalone tag.`
-            );
-        }
-    }
-
-    const requiredInputs = component.inputs.filter((i) => i.required && !i.defaultValue);
-    if (requiredInputs.length > 0) {
-        pitfalls.push(
-            `Required inputs with no default: ${requiredInputs.map((i) => i.name).join(', ')}. Omitting these will cause runtime errors.`
-        );
-    }
-
-    if (importPath === component.library) {
-        pitfalls.push(
-            `Could not derive a specific sub-entry point. Import from the library root: "${component.library}".`
-        );
-    }
-
-    return pitfalls;
-}
-
 function findComponent(nameOrSelector: string): ComponentMetadata | undefined {
     const lower = nameOrSelector.toLowerCase();
 
@@ -1009,51 +946,6 @@ function truncate(text: string, maxLength: number): string {
     return firstLine.slice(0, maxLength - 3) + '...';
 }
 
-/** Return whether a selector is an element, attribute, or element+attribute selector. */
-function getSelectorType(selector: string): 'element' | 'attribute' | 'element-attribute' {
-    const first = selector.split(',')[0].trim();
-    if (/^\[/.test(first)) {
-        return 'attribute';
-    }
-    if (/\[/.test(first)) {
-        return 'element-attribute';
-    }
-    return 'element';
-}
-
-/** Build a minimal template usage snippet from catalog metadata. */
-function buildTemplate(component: ComponentMetadata): string {
-    const type = getSelectorType(component.selector);
-    const first = component.selector.split(',')[0].trim();
-
-    if (type === 'attribute') {
-        // [fd-form-item] → <div fd-form-item></div>
-        const attr = first.replace(/^\[([^\]]+)\].*/, '$1');
-        return `<div ${attr}>\n  <!-- content -->\n</div>`;
-    }
-
-    if (type === 'element-attribute') {
-        // input[fd-form-control] → <input fd-form-control />
-        const elementMatch = first.match(/^([a-z-]+)\[([^\]]+)\]/);
-        if (elementMatch) {
-            return `<${elementMatch[1]} ${elementMatch[2]} />`;
-        }
-    }
-
-    // Plain element selector
-    const tag = first;
-    const required = component.inputs.filter((i) => i.required && !i.defaultValue);
-    const attrs = required
-        .slice(0, 3)
-        .map((i) => `[${i.name}]="/* ${i.type} */"`)
-        .join(' ');
-    const attrsStr = attrs ? ` ${attrs}` : '';
-    if (component.slots.length > 0 || component.inputs.length > 0) {
-        return `<${tag}${attrsStr}>\n  <!-- content -->\n</${tag}>`;
-    }
-    return `<${tag}${attrsStr} />`;
-}
-
 /** Find alternative components from UI_PATTERNS that share a category with either selector. */
 function findAlternatives(selectorA: string, selectorB: string): string[] {
     const alternatives = new Set<string>();
@@ -1105,29 +997,6 @@ function compareVersions(a: string, b: string): number {
 function baseVersion(version: string): string {
     return version.replace(/-.*$/, '');
 }
-
-// ---------------------------------------------------------------------------
-// Subpath consolidation: selectors that don't map 1:1 to package export entries
-// ---------------------------------------------------------------------------
-const SUBPATH_OVERRIDES: Record<string, string> = {
-    // Core — all form sub-components live under a single ./form entry point
-    '@fundamental-ngx/core/form-group': 'form',
-    '@fundamental-ngx/core/form-item': 'form',
-    '@fundamental-ngx/core/form-label': 'form',
-    '@fundamental-ngx/core/form-control': 'form',
-    '@fundamental-ngx/core/form-header': 'form',
-    '@fundamental-ngx/core/form-legend': 'form',
-    // Core — selector is fd-side-nav but export entry is ./side-navigation
-    '@fundamental-ngx/core/side-nav': 'side-navigation',
-    // Core — nested-list sub-parts share the ./nested-list entry point
-    '@fundamental-ngx/core/nested-list-item': 'nested-list',
-    '@fundamental-ngx/core/nested-list-title': 'nested-list',
-    '@fundamental-ngx/core/nested-list-message': 'nested-list',
-    // Platform — form sub-components share ./form
-    '@fundamental-ngx/platform/form-group': 'form',
-    '@fundamental-ngx/platform/form-field': 'form',
-    '@fundamental-ngx/platform/form-generator': 'form'
-};
 
 // ---------------------------------------------------------------------------
 // UI Pattern recommendations

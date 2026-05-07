@@ -300,9 +300,10 @@ function mapDeclaration(
     enumMap: EnumMap
 ): ComponentMetadata {
     const rawDescription = decl.description ?? '';
+    const selector = decl.tagName!;
     return {
         name: decl.name,
-        selector: decl.tagName!,
+        selector,
         library,
         category: inferCategory(modulePath, library),
         description: cleanCemDescription(rawDescription),

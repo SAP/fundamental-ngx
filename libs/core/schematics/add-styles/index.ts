@@ -8,7 +8,7 @@ import { getProjectBuildTarget, getWorkspaceDefinition, updateWorkspaceDefinitio
  * @param options
  */
 export function addStyles(options: Schema): Rule {
-    return chain([addStylesToConfig(options), addAssetsToConfig(options)]);
+    return chain([addStylesToConfig(options), addAssetsToConfig(options), updateBudgets(options)]);
 }
 
 function handleError(context: SchematicContext, error: Error, message: string): void {
@@ -91,6 +91,79 @@ function addAssetsToConfig(options: Schema): Rule {
             await updateWorkspaceDefinition(tree, workspace);
         } catch (error) {
             handleError(context, error, 'Failed to add assets configuration');
+        }
+    };
+}
+
+interface BudgetEntry {
+    type: string;
+    maximumWarning?: string;
+    maximumError?: string;
+}
+
+const CLI_DEFAULT_WARNING = '500kB';
+const CLI_DEFAULT_ERROR = '1MB';
+
+function parseSize(size: string): number {
+    const match = size.match(/^([\d.]+)\s*(kB|MB|GB)$/i);
+    if (!match) {
+        return Infinity;
+    }
+    const value = parseFloat(match[1]);
+    switch (match[2].toLowerCase()) {
+        case 'kb':
+            return value * 1000;
+        case 'mb':
+            return value * 1000 * 1000;
+        case 'gb':
+            return value * 1000 * 1000 * 1000;
+        default:
+            return Infinity;
+    }
+}
+
+function updateBudgets(options: Schema): Rule {
+    return async (tree: Tree, context: SchematicContext): Promise<void> => {
+        try {
+            const buildTarget = await getProjectBuildTarget(tree, options.project);
+            const configurations = buildTarget.configurations ?? {};
+            const prodConfig = configurations['production'] ?? {};
+            const budgets: BudgetEntry[] = (prodConfig.budgets as unknown as BudgetEntry[]) ?? [];
+
+            const initialBudget = budgets.find((b: BudgetEntry) => b.type === 'initial');
+
+            if (initialBudget) {
+                const warningSize = parseSize(initialBudget.maximumWarning ?? '0');
+                const errorSize = parseSize(initialBudget.maximumError ?? '0');
+                const defaultWarning = parseSize(CLI_DEFAULT_WARNING);
+                const defaultError = parseSize(CLI_DEFAULT_ERROR);
+
+                if (warningSize <= defaultWarning && errorSize <= defaultError) {
+                    initialBudget.maximumWarning = '1.5MB';
+                    initialBudget.maximumError = '2MB';
+                    context.logger.info(
+                        `✅️ Updated initial bundle budget to 1.5MB warning / 2MB error (was ${CLI_DEFAULT_WARNING} / ${CLI_DEFAULT_ERROR}).`
+                    );
+                } else {
+                    context.logger.info(`✅️ Custom bundle budgets detected. Skipping budget update.`);
+                }
+            } else {
+                budgets.push({
+                    type: 'initial',
+                    maximumWarning: '1.5MB',
+                    maximumError: '2MB'
+                });
+                context.logger.info(`✅️ Added initial bundle budget: 1.5MB warning / 2MB error.`);
+            }
+
+            prodConfig.budgets = budgets as unknown as typeof prodConfig.budgets;
+            configurations['production'] = prodConfig;
+            buildTarget.configurations = configurations;
+
+            const workspace = await getWorkspaceDefinition(tree);
+            await updateWorkspaceDefinition(tree, workspace);
+        } catch (error) {
+            handleError(context, error, 'Failed to update bundle budgets');
         }
     };
 }
