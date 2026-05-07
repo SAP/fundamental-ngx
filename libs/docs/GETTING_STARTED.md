@@ -62,7 +62,6 @@ Fundamental NGX is the SAP set of Angular component libraries implementing the S
 
 | Package                | Notes                 |
 | ---------------------- | --------------------- |
-| `@angular/animations`  |                       |
 | `@angular/cdk`         |                       |
 | `@angular/router`      |                       |
 | `@fundamental-ngx/cdk` |                       |
@@ -104,8 +103,12 @@ ng add @fundamental-ngx/core
     { "glob": "**/*", "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/sap_horizon/fonts/", "output": "./assets/theming-base/sap_horizon/fonts/" },
     { "glob": "**/*", "input": "./node_modules/fundamental-styles/dist/theming/", "output": "./assets/fundamental-styles-theming/" }
     ```
-3. Add to `app.config.ts` providers:
+3. Add to `app.config.ts`:
+
     ```typescript
+    import { provideTheming, themingInitializer } from '@fundamental-ngx/core/theming';
+
+    // In the providers array:
     provideTheming({ defaultTheme: 'sap_horizon', changeThemeOnQueryParamChange: false }), themingInitializer();
     ```
 
@@ -132,13 +135,11 @@ bootstrapApplication(App, appConfig).catch(console.error);
 ```typescript
 // src/app/app.config.ts
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideTheming, themingInitializer } from '@fundamental-ngx/core/theming';
 
 export const appConfig: ApplicationConfig = {
     providers: [
         provideBrowserGlobalErrorListeners(),
-        provideAnimations(),
         provideTheming({ defaultTheme: 'sap_horizon', changeThemeOnQueryParamChange: false }),
         themingInitializer()
     ]
