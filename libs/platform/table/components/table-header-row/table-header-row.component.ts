@@ -12,7 +12,8 @@ import {
     ViewEncapsulation,
     computed,
     forwardRef,
-    inject
+    inject,
+    signal
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
@@ -161,8 +162,11 @@ export class TableHeaderRowComponent extends TableRowDirective implements OnInit
         this.setItems(items.toArray());
     }
 
-    /** @hidden */
-    _selectionColumnHeaderDisableTitle = true;
+    /**
+     * @hidden
+     * Used to remove the selection column title, to prevent screenreader from reading "Select All" when focusing non-header cells
+     * */
+    _selectionColumnHeaderDisableTitle = signal(true);
 
     /** @hidden */
     readonly SELECTION_MODE = SelectionMode;
