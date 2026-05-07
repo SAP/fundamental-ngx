@@ -296,13 +296,16 @@ libraries, and how they compose together.`,
         // Also do a keyword search for anything not caught by patterns
         if (recommendations.length < 3) {
             const words = lowerDesc.split(/\s+/).filter((w) => w.length > 3);
+            const wantsAi = lowerDesc.includes('ai');
             for (const word of words) {
                 const matches = catalog.components
                     .filter(
                         (c) =>
-                            c.selector.includes(word) ||
-                            c.name.toLowerCase().includes(word) ||
-                            c.category.toLowerCase().includes(word)
+                            // Suppress AI-library components unless the query explicitly mentions AI
+                            (wantsAi || c.library !== '@fundamental-ngx/ui5-webcomponents-ai') &&
+                            (c.selector.includes(word) ||
+                                c.name.toLowerCase().includes(word) ||
+                                c.category.toLowerCase().includes(word))
                     )
                     .slice(0, 3);
 
@@ -854,10 +857,7 @@ server.resource('component-catalog', 'fundamental-ngx://components/catalog', asy
 // Helpers
 // ---------------------------------------------------------------------------
 
-/**
- * Derive the npm deep-import subpath for a component.
- * Falls back to the library root when no prefix match is found.
- */
+/** Derive the npm deep-import subpath for a component. */
 function deriveImportPath(component: ComponentMetadata): string {
     const { library, selector } = component;
     const firstSelector = selector.split(',')[0].trim();
@@ -868,11 +868,13 @@ function deriveImportPath(component: ComponentMetadata): string {
         .replace(/^\[([^\]]+)\].*/, '$1')
         .trim();
     const elementMatch = cleaned.match(/^(fd|fdp|fdb|cx|fdk|ui5)-(.+)/);
-    if (!elementMatch) {return library;}
+    if (!elementMatch) {
+        return library;
+    }
     const rawSubpath = elementMatch[2].toLowerCase();
     const overrideKey = `${library}/${rawSubpath}`;
-    const consolidatedSubpath = SUBPATH_OVERRIDES[overrideKey] ?? rawSubpath;
-    return `${library}/${consolidatedSubpath}`;
+    const subpath = SUBPATH_OVERRIDES[overrideKey] ?? rawSubpath;
+    return `${library}/${subpath}`;
 }
 
 /** Build a list of pitfalls and usage warnings for a component. */
@@ -1010,8 +1012,12 @@ function truncate(text: string, maxLength: number): string {
 /** Return whether a selector is an element, attribute, or element+attribute selector. */
 function getSelectorType(selector: string): 'element' | 'attribute' | 'element-attribute' {
     const first = selector.split(',')[0].trim();
-    if (/^\[/.test(first)) {return 'attribute';}
-    if (/\[/.test(first)) {return 'element-attribute';}
+    if (/^\[/.test(first)) {
+        return 'attribute';
+    }
+    if (/\[/.test(first)) {
+        return 'element-attribute';
+    }
     return 'element';
 }
 
@@ -1128,11 +1134,30 @@ const SUBPATH_OVERRIDES: Record<string, string> = {
 // ---------------------------------------------------------------------------
 const UI_PATTERNS: Record<string, string[]> = {
     'table|data table|grid': ['fd-table', 'fdp-table', 'ui5-table'],
-    'form|input form': ['fd-form', 'fd-input-group', 'fd-checkbox', 'fd-radio', 'fd-select', 'fd-switch'],
+    // login/register are common form-building queries; replaced non-existent fd-form and fd-radio with real selectors
+    'form|input form|login|register|registration': [
+        'fd-form-group',
+        'fd-form-item',
+        'fd-form-label',
+        'fd-form-control',
+        'fd-input-group',
+        'fd-checkbox',
+        'fd-radio-button',
+        'fd-select',
+        'fd-switch'
+    ],
     'dialog|modal|popup': ['fd-dialog', 'ui5-dialog', 'fd-message-box'],
     'date|calendar|date picker': ['fd-date-picker', 'fd-calendar', 'ui5-date-picker', 'ui5-calendar'],
-    'navigation|nav|sidebar': ['fd-side-navigation', 'fd-vertical-navigation', 'ui5-side-navigation'],
-    'button|action': ['fd-button', 'ui5-button', 'fd-split-button', 'fd-segmented-button'],
+    // fd-side-navigation is deprecated — use fd-vertical-navigation
+    'navigation|nav|sidebar': ['fd-vertical-navigation', 'ui5-side-navigation'],
+    // fd-button does not exist as an element selector; real selector is button[fd-button], a[fd-button]
+    'button|action': [
+        'button[fd-button], a[fd-button]',
+        'fdp-button',
+        'ui5-button',
+        'fd-split-button',
+        'fd-segmented-button'
+    ],
     'list|items': ['fd-list', 'ui5-list', 'fd-grid-list'],
     'menu|dropdown': ['fd-menu', 'fd-popover', 'ui5-menu'],
     'tabs|tab': ['fd-tabs', 'ui5-tab-container'],
