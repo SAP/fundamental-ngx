@@ -2,13 +2,63 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { AvatarGroupComponent } from './avatar-group.component';
+import { AvatarGroupItemDirective } from './directives/avatar-group-item.directive';
+
+@Component({
+    selector: 'fd-avatar-group-individual-test',
+    template: `
+        <fd-avatar-group type="individual" size="s">
+            <fd-avatar
+                *fdAvatarGroupItem="''; title: 'Person 1'"
+                [circle]="true"
+                [border]="true"
+                size="s"
+                label="P1"
+            ></fd-avatar>
+            <fd-avatar
+                *fdAvatarGroupItem="''; title: 'Person 2'"
+                [circle]="true"
+                [border]="true"
+                size="s"
+                label="P2"
+            ></fd-avatar>
+        </fd-avatar-group>
+    `,
+    imports: [AvatarGroupComponent, AvatarGroupItemDirective, AvatarComponent]
+})
+class AvatarGroupIndividualTestComponent {}
+
+@Component({
+    selector: 'fd-avatar-group-group-test',
+    template: `
+        <fd-avatar-group type="group" size="s">
+            <fd-avatar
+                *fdAvatarGroupItem="''; title: 'Person 1'"
+                [circle]="true"
+                [border]="true"
+                size="s"
+                label="P1"
+            ></fd-avatar>
+            <fd-avatar
+                *fdAvatarGroupItem="''; title: 'Person 2'"
+                [circle]="true"
+                [border]="true"
+                size="s"
+                label="P2"
+            ></fd-avatar>
+        </fd-avatar-group>
+    `,
+    imports: [AvatarGroupComponent, AvatarGroupItemDirective, AvatarComponent]
+})
+class AvatarGroupGroupTypeTestComponent {}
 
 @Component({
     template: `<fd-avatar-group type="group" [ariaLabel]="label"></fd-avatar-group>`,
     imports: [AvatarGroupComponent]
 })
-class AvatarGroupGroupTypeTestComponent {
+class AvatarGroupGroupTypeWithLabelTestComponent {
     label: string | undefined;
 }
 
@@ -32,15 +82,15 @@ describe('AvatarGroupComponent', () => {
     });
 
     describe('group type', () => {
-        let fixture: ComponentFixture<AvatarGroupGroupTypeTestComponent>;
-        let wrapper: AvatarGroupGroupTypeTestComponent;
+        let fixture: ComponentFixture<AvatarGroupGroupTypeWithLabelTestComponent>;
+        let wrapper: AvatarGroupGroupTypeWithLabelTestComponent;
 
         beforeEach(async () => {
             await TestBed.configureTestingModule({
-                imports: [AvatarGroupGroupTypeTestComponent]
+                imports: [AvatarGroupGroupTypeWithLabelTestComponent]
             }).compileComponents();
 
-            fixture = TestBed.createComponent(AvatarGroupGroupTypeTestComponent);
+            fixture = TestBed.createComponent(AvatarGroupGroupTypeWithLabelTestComponent);
             wrapper = fixture.componentInstance;
             fixture.detectChanges();
         });
@@ -116,6 +166,48 @@ describe('AvatarGroupComponent', () => {
             hostDebugEl.triggerEventHandler('itemFocused', { index: 2, total: 10 });
 
             expect(announceSpy).toHaveBeenCalledWith('3 of 10');
+        });
+    });
+});
+
+describe('AvatarGroupComponent with individual type', () => {
+    let fixture: ComponentFixture<AvatarGroupIndividualTestComponent>;
+
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            imports: [AvatarGroupIndividualTestComponent]
+        }).compileComponents();
+
+        fixture = TestBed.createComponent(AvatarGroupIndividualTestComponent);
+        fixture.detectChanges();
+    });
+
+    it('should apply fd-avatar-group__popover-control class to popover controls', () => {
+        const popoverControls = fixture.nativeElement.querySelectorAll('fd-popover-control');
+        expect(popoverControls.length).toBeGreaterThan(0);
+        popoverControls.forEach((control: HTMLElement) => {
+            expect(control.classList).toContain('fd-avatar-group__popover-control');
+        });
+    });
+});
+
+describe('AvatarGroupComponent with group type', () => {
+    let fixture: ComponentFixture<AvatarGroupGroupTypeTestComponent>;
+
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            imports: [AvatarGroupGroupTypeTestComponent]
+        }).compileComponents();
+
+        fixture = TestBed.createComponent(AvatarGroupGroupTypeTestComponent);
+        fixture.detectChanges();
+    });
+
+    it('should apply fd-avatar-group__popover-control class to popover control', () => {
+        const popoverControls = fixture.nativeElement.querySelectorAll('fd-popover-control');
+        expect(popoverControls.length).toBeGreaterThan(0);
+        popoverControls.forEach((control: HTMLElement) => {
+            expect(control.classList).toContain('fd-avatar-group__popover-control');
         });
     });
 });

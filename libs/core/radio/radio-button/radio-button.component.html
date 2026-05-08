@@ -15,6 +15,7 @@
     [attr.aria-checked]="checked"
     [attr.aria-required]="required"
     [attr.aria-readonly]="readOnly"
+    [attr.aria-description]="readOnly ? ('coreRadio.readOnlyDescription' | fdTranslate)() : null"
     [ngModel]="currentValue"
     (ngModelChange)="valueChange($event)"
     [ngModelOptions]="{ standalone: standalone }"

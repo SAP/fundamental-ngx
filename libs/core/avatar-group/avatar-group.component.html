@@ -17,7 +17,11 @@
     >
         @for (item of _avatars; track item) {
             <fd-popover [noArrow]="false" [focusAutoCapture]="true">
-                <fd-popover-control tabindex="-1" (click)="outletItem.element.focus()">
+                <fd-popover-control
+                    class="fd-avatar-group__popover-control"
+                    tabindex="-1"
+                    (click)="outletItem.element.focus()"
+                >
                     <ng-template
                         #outletItem="fdAvatarGroupItemPortal"
                         cdkPortalOutlet
@@ -41,7 +45,7 @@
                 [focusAutoCapture]="true"
                 [bodyAriaLabel]="_popupBodyAriaLabel(hiddenItems.length)"
             >
-                <fd-popover-control tabindex="-1">
+                <fd-popover-control class="fd-avatar-group__popover-control" tabindex="-1">
                     @if (_overflowButton) {
                         <ng-template
                             [ngTemplateOutlet]="_overflowButton._templateRef"
@@ -71,7 +75,7 @@
         fdkResizeObserver
         (resized)="_detectChanges()"
     >
-        <fd-popover-control>
+        <fd-popover-control class="fd-avatar-group__popover-control">
             <fd-avatar-group-host
                 #avatarGroupHostComponent
                 [type]="type"
@@ -131,6 +135,7 @@
         <fd-default-avatar-group-overflow-body
             [avatars]="hiddenItems"
             [overflowPopoverTitle]="overflowPopoverTitle"
+            [overflowHeadingLevel]="overflowHeadingLevel()"
             (escapePressed)="popoverRef?.close()"
         />
     }

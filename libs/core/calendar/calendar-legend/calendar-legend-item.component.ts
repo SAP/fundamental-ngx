@@ -21,6 +21,7 @@ import {
         </span>
     `,
     host: {
+        role: 'listitem',
         tabindex: '0',
         '[class]': '_componentClasses()'
     }

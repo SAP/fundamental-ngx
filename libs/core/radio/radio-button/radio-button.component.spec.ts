@@ -1,7 +1,8 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { Component, ViewChild } from '@angular/core';
+import { Component, signal, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { FD_LANGUAGE_ENGLISH, FD_LANGUAGE_SIGNAL } from '@fundamental-ngx/i18n';
 import { RadioButtonComponent } from './radio-button.component';
 
 @Component({
@@ -15,6 +16,13 @@ import { RadioButtonComponent } from './radio-button.component';
             [value]="3"
             name="radio"
         ></fd-radio-button>
+        <fd-radio-button
+            #radio4
+            [readOnly]="true"
+            [(ngModel)]="selectedValue"
+            [value]="4"
+            name="radio"
+        ></fd-radio-button>
     `,
     standalone: true,
     imports: [FormsModule, RadioButtonComponent]
@@ -23,6 +31,7 @@ class TestRadioButtonComponent {
     @ViewChild('radio1') radioButton1: RadioButtonComponent;
     @ViewChild('radio2') radioButton2: RadioButtonComponent;
     @ViewChild('radio3') radioButton3: RadioButtonComponent;
+    @ViewChild('radio4') radioButton4: RadioButtonComponent;
 
     selectedValue = 1;
 }
@@ -33,7 +42,8 @@ describe('RadioButtonComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [TestRadioButtonComponent]
+            imports: [TestRadioButtonComponent],
+            providers: [{ provide: FD_LANGUAGE_SIGNAL, useValue: signal(FD_LANGUAGE_ENGLISH) }]
         }).compileComponents();
     }));
 
@@ -81,5 +91,23 @@ describe('RadioButtonComponent', () => {
 
         expect(component.radioButton3.disabled).toBeTruthy();
         expect(component.radioButton3.inputElement.nativeElement.disabled).toBeTruthy();
+    });
+
+    it('should have aria-readonly on readonly radio', async () => {
+        await wait(fixture);
+
+        expect(component.radioButton4.inputElement.nativeElement.getAttribute('aria-readonly')).toBe('true');
+    });
+
+    it('should have aria-description on readonly radio', async () => {
+        await wait(fixture);
+
+        expect(component.radioButton4.inputElement.nativeElement.getAttribute('aria-description')).toBeTruthy();
+    });
+
+    it('should not have aria-description on non-readonly radio', async () => {
+        await wait(fixture);
+
+        expect(component.radioButton1.inputElement.nativeElement.getAttribute('aria-description')).toBeNull();
     });
 });

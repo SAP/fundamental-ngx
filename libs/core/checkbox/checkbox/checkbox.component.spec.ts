@@ -248,6 +248,16 @@ describe('CheckboxComponent', () => {
         expect(hostComponent.value).toBe('Yes');
     });
 
+    it('should apply is-readonly class when readonly', async () => {
+        checkbox.setReadOnlyState(true);
+        await whenStable(fixture);
+
+        const input = getCheckboxInput(fixture);
+        expect(input.classList.contains('is-readonly')).toBe(true);
+        expect(input.classList.contains('is-disabled')).toBe(false);
+        expect(input.classList.contains('is-display')).toBe(false);
+    });
+
     it('should render display-only mode', async () => {
         hostComponent.displayOnly = true;
         fixture.detectChanges();
