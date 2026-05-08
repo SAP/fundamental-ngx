@@ -22,7 +22,9 @@ describe('index.js - run()', () => {
         const stream = new PassThrough();
         conventionalChangelog.mockReturnValue(stream);
         process.nextTick(() => {
-            if (content) {stream.push(content);}
+            if (content) {
+                stream.push(content);
+            }
             stream.end();
         });
     }
