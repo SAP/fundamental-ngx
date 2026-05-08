@@ -75,6 +75,26 @@ act workflow_dispatch -W .github/workflows/create-release.yml -n
 | **Release actions (dry run)** | `./.github/actions/test-release-actions.sh`                    |
 | **Helper functions**          | `./.github/actions/helpers/test-helpers.sh`                    |
 
+### Jest Unit Tests
+
+These tests use a standalone jest config (not part of NX) and cover the JavaScript logic in `.github/actions/`:
+
+```bash
+# Run all .github unit tests
+npx jest --config .github/jest.config.js
+
+# Run a specific spec file
+npx jest --config .github/jest.config.js -- closest-version.spec
+npx jest --config .github/jest.config.js -- index.spec
+```
+
+| Spec file                                                             | Covers                                           |
+| --------------------------------------------------------------------- | ------------------------------------------------ |
+| `actions/generate-conventional-release-notes/closest-version.spec.js` | Version finding, current tag exclusion           |
+| `actions/generate-conventional-release-notes/index.spec.js`           | Tag deletion guard, changelog generation trigger |
+| `actions/helpers/get-release-tag.spec.js`                             | NPM/GitHub release tag determination             |
+| `actions/helpers/get-version.spec.js`                                 | Version retrieval from git/package.json          |
+
 ### Helper Function Tests
 
 ✅ `get-version` - Version retrieval from git tags/package.json  
@@ -86,6 +106,8 @@ act workflow_dispatch -W .github/workflows/create-release.yml -n
 ✅ `current-version` - Current version detection  
 ✅ Jest unit tests for `get-release-tag` (5 scenarios)  
 ✅ Jest unit tests for `get-version` (23 scenarios: git tags, prerelease/RC handling, package.json fallback, failed tag recovery, branch-specific versions, hotfix branches)
+✅ Jest unit tests for `closest-version` (6 scenarios: stable/prerelease version finding, current tag exclusion)
+✅ Jest unit tests for `index.js` (2 scenarios: empty tagsTillClosest guard, tag deletion with tags)
 ✅ Interactive playground for release scenarios (`release-scenario.playground.js`)
 
 ### Release Scenario Playground
