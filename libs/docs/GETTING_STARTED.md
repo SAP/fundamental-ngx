@@ -106,10 +106,15 @@ ng add @fundamental-ngx/core
 3. Add to `app.config.ts`:
 
     ```typescript
+    import { ApplicationConfig } from '@angular/core';
     import { provideTheming, themingInitializer } from '@fundamental-ngx/core/theming';
 
-    // In the providers array:
-    provideTheming({ defaultTheme: 'sap_horizon', changeThemeOnQueryParamChange: false }), themingInitializer();
+    export const appConfig: ApplicationConfig = {
+        providers: [
+            provideTheming({ defaultTheme: 'sap_horizon', changeThemeOnQueryParamChange: false }),
+            themingInitializer()
+        ]
+    };
     ```
 
 All components are standalone by default — import what you need:
