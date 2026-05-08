@@ -1,8 +1,8 @@
 <fd-docs-section-title id="overview" componentName="theming"> Overview </fd-docs-section-title>
 <description>
     <p>
-        Call <code>provideUi5ThemingBridge()</code> once and fundamental-ngx theme changes automatically propagate to
-        UI5 Web Components — both light/dark switches and high-contrast modes.
+        The UI5 theming bridge keeps fundamental-ngx and UI5 Web Components in sync — when you switch themes
+        (light/dark, high-contrast), both sides update together automatically.
     </p>
 </description>
 
@@ -10,7 +10,8 @@
 
 <fd-docs-section-title id="setup" componentName="theming"> Setup </fd-docs-section-title>
 <description>
-    <p>Two steps are required:</p>
+    <p>Three steps are required:</p>
+
     <p><strong>Step 1:</strong> Register UI5 theming assets in <code>main.ts</code> (before Angular bootstrap):</p>
     <pre><code>// main.ts
 import '&#64;ui5/webcomponents-theming/dist/Assets.js';</code></pre>
@@ -18,10 +19,11 @@ import '&#64;ui5/webcomponents-theming/dist/Assets.js';</code></pre>
         This registers the CSS variable sets for all SAP themes. Without it, <code>setTheme()</code> calls inside UI5
         won't find the theme data. The assets are loaded lazily on first use — no upfront bundle size impact.
     </p>
-    <p><strong>Step 2:</strong> Add the theming bridge to your app providers:</p>
+
+    <p><strong>Step 2:</strong> Add the theming bridge and core theming to your app providers:</p>
     <pre><code>// app.config.ts
 import &#123; provideTheming, themingInitializer &#125; from '&#64;fundamental-ngx/core/theming';
-import &#123; provideUi5ThemingBridge &#125; from '&#64;fundamental-ngx/ui5-webcomponents-base/theming';
+import &#123; provideUi5ThemingBridge &#125; from '&#64;fundamental-ngx/ui5-webcomponents-base/theming-bridge';
 
 export const appConfig: ApplicationConfig = &#123;
   providers: [
@@ -30,9 +32,48 @@ export const appConfig: ApplicationConfig = &#123;
     provideUi5ThemingBridge(),
   ]
 &#125;;</code></pre>
+
+    <p><strong>Step 3:</strong> Instantiate the theming provider for each UI5 package you use:</p>
+    <pre><code>// app.config.ts (continued)
+import &#123; inject, provideEnvironmentInitializer &#125; from '&#64;angular/core';
+import &#123; Ui5WebcomponentsMainThemingService &#125; from '&#64;fundamental-ngx/ui5-webcomponents/theming';
+
+export const appConfig: ApplicationConfig = &#123;
+  providers: [
+    // ... steps 1-2 above ...
+    provideEnvironmentInitializer(() =&gt; inject(Ui5WebcomponentsMainThemingService)),
+  ]
+&#125;;</code></pre>
     <p>
-        Now switching themes via <code>ThemingService.setTheme()</code>, the toolbar selector, or the
-        <code>?theme=</code> URL parameter updates both fundamental-ngx and UI5 components together.
+        Each UI5 package (<code>&#64;ui5/webcomponents</code>, <code>&#64;ui5/webcomponents-fiori</code>,
+        <code>&#64;ui5/webcomponents-ai</code>) ships its own theming provider that registers theme assets for that
+        package's components. Angular's tree-shaking removes <code>providedIn: 'root'</code> services that are never
+        injected, so you must explicitly instantiate each provider your app needs.
+    </p>
+    <p>
+        Without Step 3, the bridge has no registered providers to call — theme switches will have no effect on UI5
+        components.
+    </p>
+</description>
+
+<separator></separator>
+
+<fd-docs-section-title id="multiple-packages" componentName="theming"> Multiple UI5 packages </fd-docs-section-title>
+<description>
+    <p>If your app uses components from multiple UI5 packages, instantiate a provider for each one:</p>
+    <pre><code>import &#123; Ui5WebcomponentsMainThemingService &#125; from '&#64;fundamental-ngx/ui5-webcomponents/theming';
+import &#123; Ui5WebcomponentsFioriThemingService &#125; from '&#64;fundamental-ngx/ui5-webcomponents-fiori/theming';
+import &#123; Ui5WebcomponentsAiThemingService &#125; from '&#64;fundamental-ngx/ui5-webcomponents-ai/theming';
+
+providers: [
+  provideUi5ThemingBridge(),
+  provideEnvironmentInitializer(() =&gt; inject(Ui5WebcomponentsMainThemingService)),
+  provideEnvironmentInitializer(() =&gt; inject(Ui5WebcomponentsFioriThemingService)),
+  provideEnvironmentInitializer(() =&gt; inject(Ui5WebcomponentsAiThemingService)),
+]</code></pre>
+    <p>
+        Only include the packages you actually use — each provider lazily imports its own theme JSON, so unused
+        providers won't add to your bundle.
     </p>
 </description>
 
@@ -45,17 +86,22 @@ export const appConfig: ApplicationConfig = &#123;
         |
         |  Ui5ThemingBridgeService subscribes
         v
-Ui5ThemingService.setTheme()  (calls UI5's setTheme — shadow DOM re-renders)
+Ui5ThemingService.setTheme()  (calls each registered provider — shadow DOM re-renders)
 </code></pre>
     <p>
-        <code>Ui5ThemingBridgeService</code> is an Angular service activated by <code>provideUi5ThemingBridge()</code>.
-        It subscribes to the core <code>ThemingService.currentTheme</code> Observable and calls
-        <code>Ui5ThemingService.setTheme()</code> whenever the theme changes. This is explicit opt-in — apps not using
-        UI5 components don't pay for this bridge.
+        <code>Ui5ThemingBridgeService</code> is activated by <code>provideUi5ThemingBridge()</code>. It subscribes to
+        the core <code>ThemingService.currentTheme</code> Observable and calls
+        <code>Ui5ThemingService.setTheme()</code> whenever the theme changes. The <code>Ui5ThemingService</code> then
+        delegates to all registered providers (one per UI5 package).
     </p>
     <p>
         The bridge handles both initial theme (from URL <code>?theme=</code> parameter or config default) and runtime
         theme switches. It uses <code>takeUntilDestroyed()</code> for automatic cleanup.
+    </p>
+    <p>
+        Apps not using UI5 components don't need this bridge at all — it lives in its own entrypoint
+        (<code>&#64;fundamental-ngx/ui5-webcomponents-base/theming-bridge</code>) so the core
+        <code>&#64;fundamental-ngx/core</code> dependency is never pulled in unless you explicitly import it.
     </p>
 </description>
 

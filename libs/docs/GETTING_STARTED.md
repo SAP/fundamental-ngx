@@ -151,7 +151,7 @@ export const appConfig: ApplicationConfig = {
 };
 ```
 
-> **Using UI5 Web Components?** Add `provideUi5ThemingBridge()` from `@fundamental-ngx/ui5-webcomponents-base/theming` to keep UI5 components in sync with your theme. See the [UI5 Theming guide](#/ui5-webcomponents/theming) for details.
+> **Using UI5 Web Components?** Add `provideUi5ThemingBridge()` from `@fundamental-ngx/ui5-webcomponents-base/theming-bridge` and instantiate your theming provider(s) (e.g. `provideEnvironmentInitializer(() => inject(Ui5WebcomponentsMainThemingService))`). See the [UI5 Theming guide](#/ui5-webcomponents/theming) for details.
 
 ```typescript
 // src/app/app.ts

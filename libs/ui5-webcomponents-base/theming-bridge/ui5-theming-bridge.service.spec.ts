@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { ThemingService } from '@fundamental-ngx/core/theming';
 import { Ui5ThemingBridgeService } from './ui5-theming-bridge.service';
 import { provideUi5ThemingBridge } from './ui5-theming-bridge.initializer';
-import { Ui5ThemingService } from './ui5-theming-api';
+import { Ui5ThemingService } from '@fundamental-ngx/ui5-webcomponents-base/theming';
 
 const mockSetTheme = jest.fn();
 jest.mock('@ui5/webcomponents-base/dist/config/Theme.js', () => ({

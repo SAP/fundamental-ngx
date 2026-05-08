@@ -13,9 +13,13 @@ import {
 } from '@fundamental-ngx/docs/shared';
 import { FD_LANGUAGE_ENGLISH, FD_LANGUAGE_SIGNAL } from '@fundamental-ngx/i18n';
 import { provideUi5LanguageBridge } from '@fundamental-ngx/ui5-webcomponents-base/i18n';
-import { provideUi5ThemingBridge } from '@fundamental-ngx/ui5-webcomponents-base/theming';
+import { provideUi5ThemingBridge } from '@fundamental-ngx/ui5-webcomponents-base/theming-bridge';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { Ui5WebcomponentsMainThemingService } from '@fundamental-ngx/ui5-webcomponents/theming';
+// eslint-disable-next-line @nx/enforce-module-boundaries
+import { Ui5WebcomponentsFioriThemingService } from '@fundamental-ngx/ui5-webcomponents-fiori/theming';
+// eslint-disable-next-line @nx/enforce-module-boundaries
+import { Ui5WebcomponentsAiThemingService } from '@fundamental-ngx/ui5-webcomponents-ai/theming';
 import { MarkdownModule } from 'ngx-markdown';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import packageJson from '../../../package.json';
@@ -32,6 +36,8 @@ export const appConfig: ApplicationConfig = {
         themingInitializer(),
         provideUi5ThemingBridge(),
         provideEnvironmentInitializer(() => inject(Ui5WebcomponentsMainThemingService)),
+        provideEnvironmentInitializer(() => inject(Ui5WebcomponentsFioriThemingService)),
+        provideEnvironmentInitializer(() => inject(Ui5WebcomponentsAiThemingService)),
         provideContentDensity({ storage: 'localStorage' }),
         provideDialogService(),
         provideUi5LanguageBridge(),
