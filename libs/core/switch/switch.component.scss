@@ -2,6 +2,10 @@
 
 .fd-switch-custom {
     display: block;
+
+    .fd-switch {
+        padding-inline: 0.3125rem;
+    }
 }
 
 .fd-switch__invisible-text {
