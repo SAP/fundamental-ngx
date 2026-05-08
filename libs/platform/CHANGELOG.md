@@ -1,3 +1,13 @@
+## 0.62.2-rc.4 (2026-05-08)
+
+### 🩹 Fixes
+
+- **platform:** improve a11y for Platform Table View Settings dialog ([#14161](https://github.com/SAP/fundamental-ngx/pull/14161))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.62.2-rc.3 (2026-05-05)
 
 This was a version bump only for platform to align it with other projects, there were no code changes.

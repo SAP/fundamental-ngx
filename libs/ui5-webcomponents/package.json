@@ -1,6 +1,6 @@
 {
     "name": "@fundamental-ngx/ui5-webcomponents",
-    "version": "0.62.2-rc.3",
+    "version": "0.62.2-rc.4",
     "schematics": "./schematics/collection.json",
     "description": "Official SAP Angular wrappers for UI5 Web Components – part of the Fundamental Library for Angular.",
     "keywords": [
