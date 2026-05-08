@@ -372,7 +372,7 @@
 
     &:hover {
         background: color-mix(in srgb, var(--sapList_Hover_Background) 70%, var(--sapGroup_ContentBorderColor));
-        color: var(--sapList_Active_TextColor);
+        color: var(--sapTextColor);
     }
 
     &:focus-visible {
