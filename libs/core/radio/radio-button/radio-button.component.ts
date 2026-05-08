@@ -17,6 +17,7 @@ import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/f
 import { applyCssClass, CssClassBuilder, Nullable } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { Subscription } from 'rxjs';
 import { FD_RADIO_BUTTON_COMPONENT } from '../tokens';
 
@@ -45,7 +46,7 @@ let uniqueId = 0;
     host: {
         '(focusout)': 'onTouched()'
     },
-    imports: [FormsModule]
+    imports: [FormsModule, FdTranslatePipe]
 })
 export class RadioButtonComponent<T = any>
     implements OnChanges, AfterViewInit, CssClassBuilder, ControlValueAccessor, OnDestroy, FormItemControl

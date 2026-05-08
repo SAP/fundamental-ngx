@@ -33,6 +33,43 @@ describe('CalendarDayViewComponent', () => {
         expect(component).toBeTruthy();
     });
 
+    it('should have aria-readonly="false" on the table element', () => {
+        const table: HTMLTableElement = fixture.nativeElement.querySelector('table');
+        expect(table.getAttribute('aria-readonly')).toBe('false');
+    });
+
+    it('should have aria-multiselectable="false" on the table when calType is single and allowMultipleSelection is false', () => {
+        component.calType.set('single');
+        component.allowMultipleSelection.set(false);
+        fixture.detectChanges();
+        const table: HTMLTableElement = fixture.nativeElement.querySelector('table');
+        expect(table.getAttribute('aria-multiselectable')).toBe('false');
+    });
+
+    it('should have aria-multiselectable="true" on the table when calType is range', () => {
+        component.calType.set('range');
+        fixture.detectChanges();
+        const table: HTMLTableElement = fixture.nativeElement.querySelector('table');
+        expect(table.getAttribute('aria-multiselectable')).toBe('true');
+    });
+
+    it('should have aria-multiselectable="true" on the table when allowMultipleSelection is true', () => {
+        component.allowMultipleSelection.set(true);
+        fixture.detectChanges();
+        const table: HTMLTableElement = fixture.nativeElement.querySelector('table');
+        expect(table.getAttribute('aria-multiselectable')).toBe('true');
+    });
+
+    it('should not have role="button" on day cell text spans', () => {
+        const textSpans: NodeListOf<HTMLSpanElement> = fixture.nativeElement.querySelectorAll(
+            'td.fd-calendar__item span.fd-calendar__text'
+        );
+        expect(textSpans.length).toBeGreaterThan(0);
+        textSpans.forEach((span) => {
+            expect(span.getAttribute('role')).not.toBe('button');
+        });
+    });
+
     it('Should Select Proper Date', (done) => {
         component.currentlyDisplayed = { month: 10, year: 2018 };
         component.ngOnInit();
