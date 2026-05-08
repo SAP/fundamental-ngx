@@ -32,7 +32,7 @@
         font-family: var(--sapFontFamily);
         font-size: var(--sapFontHeader4Size);
         font-weight: 700;
-        color: var(--sapShell_TextColor);
+        color: var(--sapButton_TextColor);
         text-decoration: none;
         white-space: nowrap;
         transition: opacity 200ms ease;
@@ -67,7 +67,7 @@
         border-radius: 1.125rem;
         border: 0.0625rem solid transparent;
         background: transparent;
-        color: var(--sapShell_TextColor);
+        color: var(--sapButton_TextColor);
         font-family: var(--sapFontFamily);
         font-size: var(--sapFontLargeSize);
         line-height: 1;
@@ -80,12 +80,12 @@
             box-shadow 200ms ease;
 
         &:hover {
-            background: color-mix(in srgb, var(--sapShell_TextColor) 10%, transparent);
-            border-color: color-mix(in srgb, var(--sapShell_TextColor) 18%, transparent);
+            background: color-mix(in srgb, var(--sapButton_TextColor) 10%, transparent);
+            border-color: color-mix(in srgb, var(--sapButton_TextColor) 18%, transparent);
         }
 
         &:active {
-            background: color-mix(in srgb, var(--sapShell_TextColor) 16%, transparent);
+            background: color-mix(in srgb, var(--sapButton_TextColor) 16%, transparent);
         }
 
         &:focus-visible {
@@ -127,8 +127,8 @@
         // ── GitHub variant ─────────────────────────────────────
         &--github {
             &:hover {
-                background: color-mix(in srgb, var(--sapShell_TextColor) 10%, transparent);
-                border-color: color-mix(in srgb, var(--sapShell_TextColor) 18%, transparent);
+                background: color-mix(in srgb, var(--sapButton_TextColor) 10%, transparent);
+                border-color: color-mix(in srgb, var(--sapButton_TextColor) 18%, transparent);
             }
         }
     }
@@ -145,7 +145,7 @@
         display: block;
         width: 0.0625rem;
         height: 1.25rem;
-        background: color-mix(in srgb, var(--sapShell_TextColor) 20%, transparent);
+        background: color-mix(in srgb, var(--sapButton_TextColor) 20%, transparent);
         margin: 0 0.25rem;
         flex-shrink: 0;
     }
