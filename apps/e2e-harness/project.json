@@ -5,9 +5,16 @@
     "projectType": "application",
     "prefix": "e2e",
     "tags": ["scope:docs", "type:app"],
-    "implicitDependencies": ["core", "platform"],
+    "implicitDependencies": ["core", "platform", "cdk", "btp", "cx", "i18n"],
     "targets": {
+        "generate-routes": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "node_modules/.bin/ts-node --project apps/e2e-harness/scripts/tsconfig.json apps/e2e-harness/scripts/generate-routes.ts"
+            }
+        },
         "build": {
+            "dependsOn": ["generate-routes"],
             "executor": "@angular-devkit/build-angular:application",
             "options": {
                 "outputPath": "dist/apps/e2e-harness",

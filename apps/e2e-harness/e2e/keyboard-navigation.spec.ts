@@ -1,10 +1,9 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from './fixtures/base.fixture';
 
 test.describe('Keyboard Navigation', () => {
     test.describe('Button', () => {
-        test.beforeEach(async ({ page }) => {
-            await page.goto('/button/types');
-            await page.waitForLoadState('networkidle');
+        test.beforeEach(async ({ goto }) => {
+            await goto('core/button/types');
         });
 
         test('Tab focuses the first button', async ({ page }) => {
@@ -18,11 +17,9 @@ test.describe('Keyboard Navigation', () => {
             const count = await buttons.count();
             expect(count).toBe(7);
 
-            // Tab into the first button
             await page.keyboard.press('Tab');
             await expect(buttons.nth(0)).toBeFocused();
 
-            // Tab through the remaining buttons
             for (let i = 1; i < count; i++) {
                 await page.keyboard.press('Tab');
                 await expect(buttons.nth(i)).toBeFocused();
@@ -32,7 +29,6 @@ test.describe('Keyboard Navigation', () => {
         test('Enter on a focused button fires a click event', async ({ page }) => {
             const firstButton = page.locator('button.fd-button').first();
 
-            // Attach a click listener that sets a data attribute as proof of activation
             await firstButton.evaluate((el) => {
                 el.addEventListener('click', () => el.setAttribute('data-clicked', 'true'));
             });
@@ -60,9 +56,8 @@ test.describe('Keyboard Navigation', () => {
     });
 
     test.describe('Combobox', () => {
-        test.beforeEach(async ({ page }) => {
-            await page.goto('/combobox/basic');
-            await page.waitForLoadState('networkidle');
+        test.beforeEach(async ({ goto }) => {
+            await goto('core/combobox/combobox');
         });
 
         test('Tab focuses the first combobox input', async ({ page }) => {
@@ -86,7 +81,6 @@ test.describe('Keyboard Navigation', () => {
             const comboboxInput = page.locator('input[role="combobox"]').first();
             await comboboxInput.click();
 
-            // Alt+ArrowDown opens the dropdown
             await page.keyboard.press('Alt+ArrowDown');
 
             const options = page.locator('.fd-combobox-list-item:visible');
@@ -101,11 +95,9 @@ test.describe('Keyboard Navigation', () => {
             const options = page.locator('.fd-combobox-list-item:visible');
             await expect(options.first()).toBeVisible();
 
-            // ArrowDown to move focus to list, then Enter to select
             await page.keyboard.press('ArrowDown');
             await page.keyboard.press('Enter');
 
-            // The input should contain the selected value
             await expect(comboboxInput).toHaveValue('Apple');
         });
 
@@ -124,9 +116,8 @@ test.describe('Keyboard Navigation', () => {
     });
 
     test.describe('Form Container', () => {
-        test.beforeEach(async ({ page }) => {
-            await page.goto('/form-container/basic');
-            await page.waitForLoadState('networkidle');
+        test.beforeEach(async ({ goto }) => {
+            await goto('platform/form-container/form-basic');
         });
 
         test('Tab moves through form fields in sequence', async ({ page }) => {
@@ -134,12 +125,10 @@ test.describe('Keyboard Navigation', () => {
             const count = await textareas.count();
             expect(count).toBe(6);
 
-            // Tab into first focusable textarea
             await page.keyboard.press('Tab');
             const firstFocused = page.locator('textarea:focus');
             await expect(firstFocused).toBeVisible();
 
-            // Continue tabbing — each Tab should focus the next textarea
             for (let i = 1; i < count; i++) {
                 await page.keyboard.press('Tab');
                 await expect(page.locator('textarea:focus')).toBeVisible();

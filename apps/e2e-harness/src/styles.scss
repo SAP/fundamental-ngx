@@ -6,3 +6,13 @@ body {
     font-family: var(--sapFontFamily);
     color: var(--sapTextColor);
 }
+
+.e2e-no-animations *,
+.e2e-no-animations *::before,
+.e2e-no-animations *::after {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+    scroll-behavior: auto !important;
+}

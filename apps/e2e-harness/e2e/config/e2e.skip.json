@@ -1,0 +1,20 @@
+{
+    "skipped": [
+        {
+            "route": "i18n/translation-resolver/pipe-parameters",
+            "reason": "PipeParametersExampleComponent has broken imports (fd-form-label not in imports array)"
+        },
+        {
+            "route": "i18n/changing-translations/i18n-migration-example",
+            "reason": "MigrationExampleComponent has broken template references"
+        },
+        {
+            "route": "i18n/patching-translations/i18n-patch-language-provider-example",
+            "reason": "PatchLanguageProviderExampleComponent has broken template references"
+        },
+        {
+            "route": "core/date-picker/special-day",
+            "reason": "Not standalone (NG04014)"
+        }
+    ]
+}

@@ -1,31 +1,15 @@
-import { expect, test } from '@playwright/test';
-
-const routes = [
-    { path: '/button/types', name: 'button-types' },
-    { path: '/combobox/basic', name: 'combobox-basic' },
-    { path: '/form-container/basic', name: 'form-container-basic' }
-];
+import { expect, test } from './fixtures/base.fixture';
 
 test.describe('Visual Regression', () => {
-    for (const route of routes) {
-        test(`${route.name} should match baseline screenshot`, async ({ page }) => {
-            await page.goto(route.path);
-            await page.waitForLoadState('networkidle');
+    const sampleRoutes = [
+        { path: 'core/button/types', name: 'core-button-types' },
+        { path: 'core/combobox/combobox', name: 'core-combobox-basic' },
+        { path: 'platform/form-container/form-basic', name: 'platform-form-container-basic' }
+    ];
 
-            // Disable animations/transitions for stable screenshots
-            await page.addStyleTag({
-                content: `
-                    *, *::before, *::after {
-                        animation-duration: 0s !important;
-                        animation-delay: 0s !important;
-                        transition-duration: 0s !important;
-                        transition-delay: 0s !important;
-                    }
-                `
-            });
-
-            // Small wait for style injection to take effect
-            await page.waitForTimeout(100);
+    for (const route of sampleRoutes) {
+        test(`${route.name} should match baseline screenshot`, async ({ page, goto }) => {
+            await goto(route.path);
 
             await expect(page).toHaveScreenshot(`${route.name}.png`, {
                 fullPage: true,
