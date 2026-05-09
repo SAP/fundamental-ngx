@@ -32,15 +32,21 @@ export function discoverExamples(workspaceRoot: string): ExampleMetadata[] {
         const files = globSync(pattern, { cwd: workspaceRoot });
 
         for (const file of files) {
-            if (seen.has(file)) {continue;}
+            if (seen.has(file)) {
+                continue;
+            }
             seen.add(file);
 
             const absPath = resolve(workspaceRoot, file);
             const className = extractClassName(absPath);
-            if (!className) {continue;}
+            if (!className) {
+                continue;
+            }
 
             const metadata = parseFilePath(file, libHint);
-            if (!metadata) {continue;}
+            if (!metadata) {
+                continue;
+            }
 
             results.push({
                 ...metadata,
@@ -97,7 +103,9 @@ function parseFilePath(
     // filePath: libs/docs/<library>/<component>/examples/.../<filename>
     const parts = filePath.split('/');
     const docsIdx = parts.indexOf('docs');
-    if (docsIdx === -1) {return null;}
+    if (docsIdx === -1) {
+        return null;
+    }
 
     const rawLibrary = parts[docsIdx + 1]; // e.g. 'core', 'platform', 'ui5-webcomponents'
     const component = parts[docsIdx + 2]; // e.g. 'button', 'combobox'
