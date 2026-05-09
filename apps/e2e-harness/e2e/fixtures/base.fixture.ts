@@ -39,7 +39,8 @@ export const test = base.extend<E2EFixtures>({
     goto: async ({ page }, use) => {
         const fn = async (route: string): Promise<void> => {
             await page.goto(`/${route}`);
-            await page.waitForLoadState('networkidle');
+            await page.waitForLoadState('domcontentloaded');
+            await page.waitForTimeout(1000);
             await disableAnimations(page);
             await page.locator('html.e2e-no-animations').waitFor({ state: 'attached' });
         };

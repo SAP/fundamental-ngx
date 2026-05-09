@@ -1,0 +1,101 @@
+{
+    "comment": "Routes skipped from visual regression due to non-deterministic rendering (external images, auto-rotating content, timing-dependent layouts). These still get accessibility and interaction testing.",
+    "skipped": [
+        {
+            "route": "core/avatar-group-legacy/group-type",
+            "reason": "Loads random avatar images from external URLs"
+        },
+        {
+            "route": "core/avatar-group/default",
+            "reason": "Loads random avatar images from external URLs"
+        },
+        {
+            "route": "core/avatar-group/group-type",
+            "reason": "Loads random avatar images from external URLs"
+        },
+        {
+            "route": "core/avatar-group-legacy/individual-type",
+            "reason": "Loads random avatar images from external URLs"
+        },
+        {
+            "route": "core/avatar/default-image-with-alternative-options",
+            "reason": "Loads random avatar images from external URLs"
+        },
+        {
+            "route": "core/card/card",
+            "reason": "Loads external media images (placeholder service)"
+        },
+        {
+            "route": "core/card/media-banner-card",
+            "reason": "Loads external media images (placeholder service)"
+        },
+        {
+            "route": "core/card/media-card",
+            "reason": "Loads external media images (placeholder service)"
+        },
+        {
+            "route": "core/card/link-list-card",
+            "reason": "Loads external media images (placeholder service)"
+        },
+        {
+            "route": "core/feed-input/circle-avatar",
+            "reason": "Loads random avatar images from external URLs"
+        },
+        {
+            "route": "core/bar/default",
+            "reason": "Non-deterministic overflow layout calculation"
+        },
+        {
+            "route": "core/bar/with-title",
+            "reason": "Non-deterministic overflow layout calculation"
+        },
+        {
+            "route": "core/bar/page",
+            "reason": "Timeout during networkidle (long-lived HTTP connection)"
+        },
+        {
+            "route": "core/bar/page-responsive",
+            "reason": "Non-deterministic responsive layout calculation"
+        },
+        {
+            "route": "core/grid-list/states",
+            "reason": "Timeout (heavy rendering with intersection observer)"
+        },
+        {
+            "route": "core/grid-list/layout",
+            "reason": "Non-deterministic intersection observer timing"
+        },
+        {
+            "route": "core/overflow-layout/complex",
+            "reason": "Non-deterministic overflow calculation timing"
+        },
+        {
+            "route": "core/card/object-card",
+            "reason": "Loads external media images (placeholder service)"
+        },
+        {
+            "route": "core/grid-list/footer",
+            "reason": "Timeout (heavy rendering with intersection observer)"
+        },
+        {
+            "route": "core/grid-list/focusing",
+            "reason": "Timeout (heavy rendering with intersection observer)"
+        },
+        {
+            "route": "core/tile/misc-tile",
+            "reason": "Non-deterministic external image loading"
+        },
+        {
+            "route": "core/quick-view/popover",
+            "reason": "Timeout (popover positioning calculation)"
+        },
+        {
+            "route": "core/wizard/mobile",
+            "reason": "Non-deterministic step animation timing"
+        },
+        {
+            "route": "ui5/carousel/carousel",
+            "reason": "Auto-rotating carousel with timing-dependent state"
+        }
+    ]
+}

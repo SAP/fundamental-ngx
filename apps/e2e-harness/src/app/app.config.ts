@@ -14,7 +14,7 @@ export const appConfig: ApplicationConfig = {
         provideHttpClient(),
         provideTheming({ defaultTheme: 'sap_horizon' }),
         themingInitializer(),
-        provideContentDensity(),
+        provideContentDensity({ storage: 'url', storageKey: 'density' }),
         {
             provide: FD_LANGUAGE_SIGNAL,
             useValue: signal(FD_LANGUAGE_ENGLISH)
