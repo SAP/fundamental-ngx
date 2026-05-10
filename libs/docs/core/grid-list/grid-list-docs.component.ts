@@ -14,11 +14,14 @@ import { GridListDndExampleComponent } from './examples/dnd/grid-list-dnd-exampl
 import { GridListFocusingItemExampleComponent } from './examples/focusing/grid-list-focusing-example.component';
 import { GridListFooterExampleComponent } from './examples/footer/grid-list-footer-example.component';
 import { GridListGroupExampleComponent } from './examples/group/grid-list-group-example.component';
+import { GridListHeadingLevelExampleComponent } from './examples/heading-level/grid-list-heading-level-example.component';
 import { GridListLayoutExampleComponent } from './examples/layout/grid-list-layout-example.component';
 import { GridListMoreExampleComponent } from './examples/more/grid-list-more-example.component';
 import { GridListStatesExampleComponent } from './examples/states/grid-list-states-example.component';
 import { GridListStatusesExampleComponent } from './examples/statuses/grid-list-statuses-example.component';
 
+const gridListHeadingLevelTs = 'heading-level/grid-list-heading-level-example.component.ts';
+const gridListHeadingLevelHtml = 'heading-level/grid-list-heading-level-example.component.html';
 const gridListGroupTs = 'group/grid-list-group-example.component.ts';
 const gridListStatesTs = 'states/grid-list-states-example.component.ts';
 const gridListStatusesTs = 'statuses/grid-list-statuses-example.component.ts';
@@ -60,7 +63,8 @@ const gridListComboSelectHtml = 'combo-select/grid-list-combo-select-example.com
         GridListLayoutExampleComponent,
         GridListFocusingItemExampleComponent,
         GridListAutoHeightExampleComponent,
-        GridListComboSelectComponent
+        GridListComboSelectComponent,
+        GridListHeadingLevelExampleComponent
     ]
 })
 export class GridListDocsComponent {
@@ -221,6 +225,22 @@ export class GridListDocsComponent {
             code: getAssetFromModuleAssets(gridListAutoHeightTs),
             fileName: 'grid-list-auto-height-example',
             component: 'GridListAutoHeightExampleComponent',
+            scssFileCode: getAssetFromModuleAssets(scssFileCode)
+        }
+    ];
+
+    gridListHeadingLevelExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(gridListHeadingLevelHtml),
+            scssFileCode: this._scssFileCode,
+            fileName: 'grid-list-heading-level-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(gridListHeadingLevelTs),
+            fileName: 'grid-list-heading-level-example',
+            component: 'GridListHeadingLevelExampleComponent',
             scssFileCode: getAssetFromModuleAssets(scssFileCode)
         }
     ];
