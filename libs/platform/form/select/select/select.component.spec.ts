@@ -228,6 +228,87 @@ describe('Select component Reactive Form Test', () => {
     });
 });
 
+interface Country {
+    id: number;
+    name: string;
+    region: string;
+}
+
+@Component({
+    selector: 'fdp-select-lookup-key-test',
+    template: `
+        <fdp-form-group [noLabelLayout]="false">
+            <fdp-form-field id="country" label="Country" rank="4">
+                <fdp-select
+                    name="country"
+                    placeholder="Select a country"
+                    [list]="countries"
+                    displayKey="name"
+                    lookupKey="id"
+                    [(ngModel)]="selectedCountry"
+                ></fdp-select>
+            </fdp-form-field>
+        </fdp-form-group>
+    `,
+    standalone: true,
+    imports: [FormsModule, FdpFormGroupModule, FormModule, PlatformSelectModule]
+})
+class SelectLookupKeyTestComponent {
+    @ViewChild(SelectComponent)
+    select: SelectComponent;
+
+    countries: Country[] = [
+        { id: 1, name: 'Germany', region: 'Europe' },
+        { id: 2, name: 'France', region: 'Europe' },
+        { id: 3, name: 'Japan', region: 'Asia' },
+        { id: 4, name: 'Brazil', region: 'Americas' }
+    ];
+
+    selectedCountry: Country | null = null;
+}
+
+describe('Select Component with lookupKey', () => {
+    let component: SelectLookupKeyTestComponent;
+    let fixture: ComponentFixture<SelectLookupKeyTestComponent>;
+    let select: SelectComponent;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [SelectLookupKeyTestComponent],
+            providers: [DynamicComponentService, MenuKeyboardService]
+        }).compileComponents();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(SelectLookupKeyTestComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+        select = component.select;
+    });
+
+    it('should identify selected item when ngModel is set to a separate object reference with same lookupKey value', async () => {
+        // Set ngModel to a DIFFERENT object reference that has the same id
+        component.selectedCountry = { id: 2, name: 'France', region: 'Europe' };
+        fixture.detectChanges();
+        await fixture.whenStable();
+        fixture.detectChanges();
+
+        // The option item for France (id=2) should be recognized as selected
+        const franceOptionItem = select._optionItems[1]; // { label: 'France', value: {id:2, ...} }
+        expect(select._isSelectedOptionItem(franceOptionItem)).toBe(true);
+    });
+
+    it('should not identify non-matching item as selected when using lookupKey', async () => {
+        component.selectedCountry = { id: 2, name: 'France', region: 'Europe' };
+        fixture.detectChanges();
+        await fixture.whenStable();
+        fixture.detectChanges();
+
+        const germanyOptionItem = select._optionItems[0]; // { label: 'Germany', value: {id:1, ...} }
+        expect(select._isSelectedOptionItem(germanyOptionItem)).toBe(false);
+    });
+});
+
 const SELECT_IDENTIFIER = 'platform-select-unit-test';
 
 runValueAccessorTests({
