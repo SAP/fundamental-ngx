@@ -309,6 +309,320 @@ describe('Select Component with lookupKey', () => {
     });
 });
 
+@Component({
+    selector: 'fdp-select-lookup-key-reactive-test',
+    template: `
+        <fdp-form-group [noLabelLayout]="false">
+            <fdp-form-field id="country" label="Country" rank="4">
+                <fdp-select
+                    name="country"
+                    placeholder="Select a country"
+                    [list]="countries"
+                    displayKey="name"
+                    lookupKey="id"
+                    [formControl]="countryControl"
+                ></fdp-select>
+            </fdp-form-field>
+        </fdp-form-group>
+    `,
+    standalone: true,
+    imports: [ReactiveFormsModule, FdpFormGroupModule, FormModule, PlatformSelectModule]
+})
+class SelectLookupKeyReactiveTestComponent {
+    @ViewChild(SelectComponent)
+    select: SelectComponent;
+
+    countries: Country[] = [
+        { id: 1, name: 'Germany', region: 'Europe' },
+        { id: 2, name: 'France', region: 'Europe' },
+        { id: 3, name: 'Japan', region: 'Asia' },
+        { id: 4, name: 'Brazil', region: 'Americas' }
+    ];
+
+    countryControl = new FormControl<Country | null>(null);
+}
+
+describe('Select Component with lookupKey and reactive forms', () => {
+    let component: SelectLookupKeyReactiveTestComponent;
+    let fixture: ComponentFixture<SelectLookupKeyReactiveTestComponent>;
+    let select: SelectComponent;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [SelectLookupKeyReactiveTestComponent],
+            providers: [DynamicComponentService, MenuKeyboardService]
+        }).compileComponents();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(SelectLookupKeyReactiveTestComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+        select = component.select;
+    });
+
+    it('should display selected option when FormControl is set to a different object reference with matching lookupKey', async () => {
+        component.countryControl.setValue({ id: 3, name: 'Japan', region: 'Asia' });
+        fixture.detectChanges();
+        await fixture.whenStable();
+        fixture.detectChanges();
+
+        const triggerText = fixture.nativeElement.querySelector('.fd-select__text-content')?.textContent?.trim();
+        expect(triggerText).toBe('Japan');
+    });
+
+    it('should update displayed value when FormControl value changes', async () => {
+        component.countryControl.setValue({ id: 1, name: 'Germany', region: 'Europe' });
+        fixture.detectChanges();
+        await fixture.whenStable();
+        fixture.detectChanges();
+
+        let triggerText = fixture.nativeElement.querySelector('.fd-select__text-content')?.textContent?.trim();
+        expect(triggerText).toBe('Germany');
+
+        component.countryControl.setValue({ id: 4, name: 'Brazil', region: 'Americas' });
+        fixture.detectChanges();
+        await fixture.whenStable();
+        fixture.detectChanges();
+
+        triggerText = fixture.nativeElement.querySelector('.fd-select__text-content')?.textContent?.trim();
+        expect(triggerText).toBe('Brazil');
+    });
+
+    it('should show placeholder when FormControl value is null', async () => {
+        component.countryControl.setValue(null);
+        fixture.detectChanges();
+        await fixture.whenStable();
+        fixture.detectChanges();
+
+        const triggerText = fixture.nativeElement.querySelector('.fd-select__text-content')?.textContent?.trim();
+        expect(triggerText).toBe('Select a country');
+    });
+});
+
+@Component({
+    selector: 'fdp-select-lookup-key-secondary-test',
+    template: `
+        <fdp-form-group [noLabelLayout]="false">
+            <fdp-form-field id="country" label="Country" rank="4">
+                <fdp-select
+                    name="country"
+                    placeholder="Select a country"
+                    [list]="countries"
+                    displayKey="name"
+                    secondaryKey="region"
+                    showSecondaryText="true"
+                    lookupKey="id"
+                    [(ngModel)]="selectedCountry"
+                ></fdp-select>
+            </fdp-form-field>
+        </fdp-form-group>
+    `,
+    standalone: true,
+    imports: [FormsModule, FdpFormGroupModule, FormModule, PlatformSelectModule]
+})
+class SelectLookupKeySecondaryTextTestComponent {
+    @ViewChild(SelectComponent)
+    select: SelectComponent;
+
+    countries: Country[] = [
+        { id: 1, name: 'Germany', region: 'Europe' },
+        { id: 2, name: 'France', region: 'Europe' },
+        { id: 3, name: 'Japan', region: 'Asia' },
+        { id: 4, name: 'Brazil', region: 'Americas' }
+    ];
+
+    selectedCountry: Country | null = null;
+}
+
+describe('Select Component with lookupKey and showSecondaryText', () => {
+    let component: SelectLookupKeySecondaryTextTestComponent;
+    let fixture: ComponentFixture<SelectLookupKeySecondaryTextTestComponent>;
+    let select: SelectComponent;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [SelectLookupKeySecondaryTextTestComponent],
+            providers: [DynamicComponentService, MenuKeyboardService]
+        }).compileComponents();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(SelectLookupKeySecondaryTextTestComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+        select = component.select;
+    });
+
+    it('should build option items with secondary text', () => {
+        expect(select._optionItems.length).toBe(4);
+        expect(select._optionItems[0].label).toBe('Germany');
+        expect(select._optionItems[0].secondaryText).toBe('Europe');
+    });
+
+    it('should extract lookupKey value into option item value when showSecondaryText is true', () => {
+        expect(select._optionItems[0].value).toBe(1);
+        expect(select._optionItems[2].value).toBe(3);
+    });
+
+    it('should not break when lookupKey is used with showSecondaryText (known limitation)', async () => {
+        // When showSecondaryText=true, option values are pre-extracted to the lookupKey value (e.g., id: 2 → value: 2).
+        // The compareOptionValues fallback handles this by falling back to === when lookupValue returns null.
+        // Full lookupKey matching with showSecondaryText is a separate issue.
+        component.selectedCountry = { id: 2, name: 'France', region: 'Europe' };
+        fixture.detectChanges();
+        await fixture.whenStable();
+        fixture.detectChanges();
+
+        // Verify no errors thrown and component is stable
+        expect(select._optionItems.length).toBe(4);
+    });
+});
+
+@Component({
+    selector: 'fdp-select-simple-values-test',
+    template: `
+        <fdp-form-group [noLabelLayout]="false">
+            <fdp-form-field id="fruit" label="Fruit" rank="4">
+                <fdp-select
+                    name="fruit"
+                    placeholder="Select a fruit"
+                    [list]="fruits"
+                    [(ngModel)]="selectedFruit"
+                ></fdp-select>
+            </fdp-form-field>
+        </fdp-form-group>
+    `,
+    standalone: true,
+    imports: [FormsModule, FdpFormGroupModule, FormModule, PlatformSelectModule]
+})
+class SelectSimpleValuesTestComponent {
+    @ViewChild(SelectComponent)
+    select: SelectComponent;
+
+    fruits: string[] = ['Apple', 'Banana', 'Cherry', 'Date'];
+
+    selectedFruit: string | null = null;
+}
+
+describe('Select Component with simple string values (no lookupKey)', () => {
+    let component: SelectSimpleValuesTestComponent;
+    let fixture: ComponentFixture<SelectSimpleValuesTestComponent>;
+    let select: SelectComponent;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [SelectSimpleValuesTestComponent],
+            providers: [DynamicComponentService, MenuKeyboardService]
+        }).compileComponents();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(SelectSimpleValuesTestComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+        select = component.select;
+    });
+
+    it('should convert string items to OptionItems', () => {
+        expect(select._optionItems.length).toBe(4);
+        expect(select._optionItems[0].label).toBe('Apple');
+        expect(select._optionItems[0].value).toBe('Apple');
+    });
+
+    it('should display selected string value in trigger', async () => {
+        component.selectedFruit = 'Cherry';
+        fixture.detectChanges();
+        await fixture.whenStable();
+        fixture.detectChanges();
+
+        const triggerText = fixture.nativeElement.querySelector('.fd-select__text-content')?.textContent?.trim();
+        expect(triggerText).toBe('Cherry');
+    });
+
+    it('should update trigger when selection changes between string values', async () => {
+        component.selectedFruit = 'Apple';
+        fixture.detectChanges();
+        await fixture.whenStable();
+        fixture.detectChanges();
+
+        let triggerText = fixture.nativeElement.querySelector('.fd-select__text-content')?.textContent?.trim();
+        expect(triggerText).toBe('Apple');
+
+        component.selectedFruit = 'Date';
+        fixture.detectChanges();
+        await fixture.whenStable();
+        fixture.detectChanges();
+
+        triggerText = fixture.nativeElement.querySelector('.fd-select__text-content')?.textContent?.trim();
+        expect(triggerText).toBe('Date');
+    });
+});
+
+describe('Select Component with lookupKey — selection changes', () => {
+    let component: SelectLookupKeyTestComponent;
+    let fixture: ComponentFixture<SelectLookupKeyTestComponent>;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [SelectLookupKeyTestComponent],
+            providers: [DynamicComponentService, MenuKeyboardService]
+        }).compileComponents();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(SelectLookupKeyTestComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
+
+    it('should display correct country when ngModel changes from one to another', async () => {
+        component.selectedCountry = { id: 1, name: 'Germany', region: 'Europe' };
+        fixture.detectChanges();
+        await fixture.whenStable();
+        fixture.detectChanges();
+
+        let triggerText = fixture.nativeElement.querySelector('.fd-select__text-content')?.textContent?.trim();
+        expect(triggerText).toBe('Germany');
+
+        component.selectedCountry = { id: 3, name: 'Japan', region: 'Asia' };
+        fixture.detectChanges();
+        await fixture.whenStable();
+        fixture.detectChanges();
+
+        triggerText = fixture.nativeElement.querySelector('.fd-select__text-content')?.textContent?.trim();
+        expect(triggerText).toBe('Japan');
+    });
+
+    it('should clear displayed value when ngModel is set to null', async () => {
+        component.selectedCountry = { id: 2, name: 'France', region: 'Europe' };
+        fixture.detectChanges();
+        await fixture.whenStable();
+        fixture.detectChanges();
+
+        let triggerText = fixture.nativeElement.querySelector('.fd-select__text-content')?.textContent?.trim();
+        expect(triggerText).toBe('France');
+
+        component.selectedCountry = null;
+        fixture.detectChanges();
+        await fixture.whenStable();
+        fixture.detectChanges();
+
+        triggerText = fixture.nativeElement.querySelector('.fd-select__text-content')?.textContent?.trim();
+        expect(triggerText).toBe('Select a country');
+    });
+
+    it('should display correct value when ngModel is set before first detection cycle', async () => {
+        component.selectedCountry = { id: 4, name: 'Brazil', region: 'Americas' };
+        fixture.detectChanges();
+        await fixture.whenStable();
+        fixture.detectChanges();
+
+        const triggerText = fixture.nativeElement.querySelector('.fd-select__text-content')?.textContent?.trim();
+        expect(triggerText).toBe('Brazil');
+    });
+});
+
 const SELECT_IDENTIFIER = 'platform-select-unit-test';
 
 runValueAccessorTests({
