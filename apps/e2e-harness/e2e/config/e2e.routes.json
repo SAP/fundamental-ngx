@@ -1,6 +1,6 @@
 {
-    "generated": "2026-05-09T15:56:04.295Z",
-    "count": 1051,
+    "generated": "2026-05-11T18:48:41.502Z",
+    "count": 1055,
     "routes": [
         {
             "path": "btp/button/nested",
@@ -1247,6 +1247,13 @@
             "component": "date-picker",
             "example": "single",
             "className": "DatePickerSingleExampleComponent"
+        },
+        {
+            "path": "core/date-picker/special-day",
+            "library": "core",
+            "component": "date-picker",
+            "example": "special-day",
+            "className": "DatePickerSpecialDayExampleComponent"
         },
         {
             "path": "core/date-picker/today-button",
@@ -4203,6 +4210,13 @@
             "className": "LocaleOverrideExampleComponent"
         },
         {
+            "path": "i18n/changing-translations/i18n-migration-example",
+            "library": "i18n",
+            "component": "changing-translations",
+            "example": "i18n-migration-example",
+            "className": "MigrationExampleComponent"
+        },
+        {
             "path": "i18n/getting-started/getting-started",
             "library": "i18n",
             "component": "getting-started",
@@ -4231,6 +4245,13 @@
             "className": "PropertiesLoadingExampleComponent"
         },
         {
+            "path": "i18n/patching-translations/i18n-patch-language-provider-example",
+            "library": "i18n",
+            "component": "patching-translations",
+            "example": "i18n-patch-language-provider-example",
+            "className": "PatchLanguageProviderExampleComponent"
+        },
+        {
             "path": "i18n/patching-translations/i18n-translation-customization",
             "library": "i18n",
             "component": "patching-translations",
@@ -4243,6 +4264,13 @@
             "component": "translation-resolver",
             "example": "basic-usage",
             "className": "BasicUsageExampleComponent"
+        },
+        {
+            "path": "i18n/translation-resolver/pipe-parameters",
+            "library": "i18n",
+            "component": "translation-resolver",
+            "example": "pipe-parameters",
+            "className": "PipeParametersExampleComponent"
         },
         {
             "path": "i18n/translation-resolver/using-translation-pipe",

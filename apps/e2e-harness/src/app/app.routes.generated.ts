@@ -1250,6 +1250,13 @@ export const generatedRoutes: Routes = [
             )
     },
     {
+        path: 'core/date-picker/special-day',
+        loadComponent: () =>
+            import(
+                '../../../../libs/docs/core/date-picker/examples/date-picker-special-day-example/date-picker-special-day-example.component'
+            ).then((m) => m.DatePickerSpecialDayExampleComponent)
+    },
+    {
         path: 'core/date-picker/today-button',
         loadComponent: () =>
             import('../../../../libs/docs/core/date-picker/examples/date-picker-today-button-example.component').then(
@@ -4204,6 +4211,13 @@ export const generatedRoutes: Routes = [
             ).then((m) => m.LocaleOverrideExampleComponent)
     },
     {
+        path: 'i18n/changing-translations/i18n-migration-example',
+        loadComponent: () =>
+            import(
+                '../../../../libs/docs/i18n/changing-translations/examples/i18n-migration-example/migration-example.component'
+            ).then((m) => m.MigrationExampleComponent)
+    },
+    {
         path: 'i18n/getting-started/getting-started',
         loadComponent: () =>
             import('../../../../libs/docs/i18n/getting-started/examples/getting-started-example.component').then(
@@ -4232,6 +4246,13 @@ export const generatedRoutes: Routes = [
             ).then((m) => m.PropertiesLoadingExampleComponent)
     },
     {
+        path: 'i18n/patching-translations/i18n-patch-language-provider-example',
+        loadComponent: () =>
+            import(
+                '../../../../libs/docs/i18n/patching-translations/examples/i18n-patch-language-provider-example/patch-language-provider-example.component'
+            ).then((m) => m.PatchLanguageProviderExampleComponent)
+    },
+    {
         path: 'i18n/patching-translations/i18n-translation-customization',
         loadComponent: () =>
             import(
@@ -4244,6 +4265,13 @@ export const generatedRoutes: Routes = [
             import('../../../../libs/docs/i18n/translation-resolver/examples/basic-usage-example.component').then(
                 (m) => m.BasicUsageExampleComponent
             )
+    },
+    {
+        path: 'i18n/translation-resolver/pipe-parameters',
+        loadComponent: () =>
+            import(
+                '../../../../libs/docs/i18n/translation-resolver/examples/pipe-parameters-example/pipe-parameters-example.component'
+            ).then((m) => m.PipeParametersExampleComponent)
     },
     {
         path: 'i18n/translation-resolver/using-translation-pipe',
