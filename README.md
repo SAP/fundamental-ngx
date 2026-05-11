@@ -72,7 +72,6 @@ Angular wrappers for the [@ui5/webcomponents](https://sap.github.io/ui5-webcompo
 
 | Package                | Notes                 |
 | ---------------------- | --------------------- |
-| `@angular/animations`  |                       |
 | `@angular/cdk`         |                       |
 | `@angular/router`      |                       |
 | `@fundamental-ngx/cdk` |                       |
@@ -114,9 +113,18 @@ ng add @fundamental-ngx/core
     { "glob": "**/*", "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/sap_horizon/fonts/", "output": "./assets/theming-base/sap_horizon/fonts/" },
     { "glob": "**/*", "input": "./node_modules/fundamental-styles/dist/theming/", "output": "./assets/fundamental-styles-theming/" }
     ```
-3. Add to `app.config.ts` providers:
+3. Add to `app.config.ts`:
+
     ```typescript
-    provideTheming({ defaultTheme: 'sap_horizon', changeThemeOnQueryParamChange: false }), themingInitializer();
+    import { ApplicationConfig } from '@angular/core';
+    import { provideTheming, themingInitializer } from '@fundamental-ngx/core/theming';
+
+    export const appConfig: ApplicationConfig = {
+        providers: [
+            provideTheming({ defaultTheme: 'sap_horizon', changeThemeOnQueryParamChange: false }),
+            themingInitializer()
+        ]
+    };
     ```
 
 All components are standalone by default — import what you need:
