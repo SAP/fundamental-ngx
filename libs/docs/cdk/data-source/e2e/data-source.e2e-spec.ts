@@ -1,3 +1,0 @@
-describe('DataSource test', () => {
-    // Placeholder for writing helpful e2e tests
-});

@@ -45,22 +45,11 @@ testem.log
 report.*.json
 migrations.json
 
-# e2e
-/e2e/*.map
-allure-report
-allure-results
-unit-tests-allure-report
-libs/core/reports
-.tmp
-e2e/tmp
-axe-reports
 
 # System Files
 .DS_Store
 Thumbs.db
 
-# SauceLabs
-sauce_connect.log
 .firebase
 
 .angular

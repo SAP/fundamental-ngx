@@ -1,1 +1,0 @@
-describe('dayjs-datetime-adapter', () => {});
