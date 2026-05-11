@@ -261,3 +261,12 @@ $block: fd-navigation;
 .fd-navigation.fd-navigation--snapped .fd-navigation__list-container {
     display: flex;
 }
+
+.fd-popover__body.fd-popover__body--left:has(.fd-navigation) {
+    margin-inline-start: -0.875rem;
+
+    &::after,
+    &::before {
+        margin-inline-start: 0.875rem;
+    }
+}
