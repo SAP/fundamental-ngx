@@ -1,3 +1,7 @@
+## 0.62.2-rc.9 (2026-05-11)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
 ## 0.62.2-rc.8 (2026-05-08)
 
 This was a version bump only for platform to align it with other projects, there were no code changes.
