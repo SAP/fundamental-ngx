@@ -127,7 +127,7 @@ jobs:
                   node-version: ${{ env.NODE_VERSION }}
 
             - name: Generate ui5-webcomponents
-              run: yarn generate:ui5
+              run: npx nx run-many --target=generate --projects=ui5-webcomponents,ui5-webcomponents-ai,ui5-webcomponents-fiori,ui5-webcomponents-base
 
             - name: Install Playwright browsers
               run: npx playwright install chromium --with-deps
