@@ -1,6 +1,6 @@
-import { test, expect } from '../../fixtures/base.fixture';
+import { expect, test } from '../../fixtures/base.fixture';
 
-test.describe('Wizard Interaction', () => {
+test.describe('core/wizard', () => {
     test.beforeEach(async ({ goto, page }) => {
         await goto('core/wizard/wizard');
         const openButton = page.locator('button').filter({ hasText: /open full screen/i });
@@ -16,12 +16,17 @@ test.describe('Wizard Interaction', () => {
     });
 
     test('first step is active by default', async ({ page }) => {
-        const activeStep = page.locator('.fd-wizard__step--current, .fd-wizard__step--active, li[fd-wizard-step][status="current"]');
+        const activeStep = page.locator(
+            '.fd-wizard__step--current, .fd-wizard__step--active, li[fd-wizard-step][status="current"]'
+        );
         await expect(activeStep.first()).toBeVisible();
     });
 
     test('navigates to next step via button', async ({ page }) => {
-        const nextButton = page.locator('fd-wizard-next-step button, button').filter({ hasText: /go to step 2/i }).first();
+        const nextButton = page
+            .locator('fd-wizard-next-step button, button')
+            .filter({ hasText: /go to step 2/i })
+            .first();
         await expect(nextButton).toBeVisible();
         await nextButton.click();
         const completedSteps = page.locator('.fd-wizard__step--completed');
@@ -29,7 +34,10 @@ test.describe('Wizard Interaction', () => {
     });
 
     test('completed steps are clickable for navigation back', async ({ page }) => {
-        const nextButton = page.locator('fd-wizard-next-step button, button').filter({ hasText: /go to step 2/i }).first();
+        const nextButton = page
+            .locator('fd-wizard-next-step button, button')
+            .filter({ hasText: /go to step 2/i })
+            .first();
         await expect(nextButton).toBeVisible();
         await nextButton.click();
         const completedStep = page.locator('.fd-wizard__step--completed').first();

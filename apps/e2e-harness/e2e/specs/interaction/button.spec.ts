@@ -1,6 +1,6 @@
-import { test, expect } from '../../fixtures/base.fixture';
+import { expect, test } from '../../fixtures/base.fixture';
 
-test.describe('Button Interaction', () => {
+test.describe('core/button', () => {
     test('button receives focus on click', async ({ page, goto }) => {
         await goto('core/button/types');
         const button = page.locator('button[fd-button]').first();

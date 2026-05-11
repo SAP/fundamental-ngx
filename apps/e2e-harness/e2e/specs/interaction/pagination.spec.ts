@@ -1,6 +1,6 @@
-import { test, expect } from '../../fixtures/base.fixture';
+import { expect, test } from '../../fixtures/base.fixture';
 
-test.describe('Pagination Interaction', () => {
+test.describe('core/pagination', () => {
     test.beforeEach(async ({ goto }) => {
         await goto('core/pagination/pagination');
     });

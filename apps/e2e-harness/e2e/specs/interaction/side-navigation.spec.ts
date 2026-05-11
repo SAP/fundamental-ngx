@@ -1,6 +1,6 @@
-import { test, expect } from '../../fixtures/base.fixture';
+import { expect, test } from '../../fixtures/base.fixture';
 
-test.describe('Side Navigation Interaction', () => {
+test.describe('core/side-navigation', () => {
     test.beforeEach(async ({ goto }) => {
         await goto('core/side-navigation/object');
     });

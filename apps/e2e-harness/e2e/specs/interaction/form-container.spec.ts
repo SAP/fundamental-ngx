@@ -1,6 +1,6 @@
-import { test, expect } from '../../fixtures/base.fixture';
+import { expect, test } from '../../fixtures/base.fixture';
 
-test.describe('Form Container Interaction', () => {
+test.describe('platform/form-container', () => {
     test.beforeEach(async ({ goto }) => {
         await goto('platform/form-container/complex');
     });

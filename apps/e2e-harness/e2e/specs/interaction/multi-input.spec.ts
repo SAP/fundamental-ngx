@@ -1,6 +1,6 @@
-import { test, expect } from '../../fixtures/base.fixture';
+import { expect, test } from '../../fixtures/base.fixture';
 
-test.describe('Multi Input Interaction', () => {
+test.describe('core/multi-input', () => {
     test.beforeEach(async ({ goto }) => {
         await goto('core/multi-input/multi-input');
     });

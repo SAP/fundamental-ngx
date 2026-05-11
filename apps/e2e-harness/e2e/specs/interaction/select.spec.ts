@@ -1,6 +1,6 @@
-import { test, expect } from '../../fixtures/base.fixture';
+import { expect, test } from '../../fixtures/base.fixture';
 
-test.describe('Select Interaction', () => {
+test.describe('core/select', () => {
     test.beforeEach(async ({ goto }) => {
         await goto('core/select/mode');
     });

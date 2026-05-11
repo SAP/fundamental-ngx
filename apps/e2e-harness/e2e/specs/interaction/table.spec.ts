@@ -1,6 +1,6 @@
-import { test, expect } from '../../fixtures/base.fixture';
+import { expect, test } from '../../fixtures/base.fixture';
 
-test.describe('Table Interaction', () => {
+test.describe('core/table', () => {
     test.beforeEach(async ({ goto }) => {
         await goto('core/table/column-sorting');
     });

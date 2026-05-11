@@ -1,6 +1,6 @@
-import { test, expect } from '../../fixtures/base.fixture';
+import { expect, test } from '../../fixtures/base.fixture';
 
-test.describe('Date Picker Interaction', () => {
+test.describe('core/date-picker', () => {
     test.beforeEach(async ({ goto }) => {
         await goto('core/date-picker/single');
     });

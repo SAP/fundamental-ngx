@@ -1,6 +1,6 @@
-import { test, expect } from '../../fixtures/base.fixture';
+import { expect, test } from '../../fixtures/base.fixture';
 
-test.describe('Menu Interaction', () => {
+test.describe('core/menu', () => {
     test.beforeEach(async ({ goto }) => {
         await goto('core/menu/with-submenu');
     });
@@ -36,8 +36,11 @@ test.describe('Menu Interaction', () => {
         await trigger.click();
         const menu = page.locator('.cdk-overlay-container [role="menu"], fd-menu [role="menu"]').first();
         await expect(menu).toBeVisible();
-        const submenuItem = menu.locator('[role="menuitem"]').filter({ has: page.locator('.fd-menu__addon-after') }).first();
-        if (await submenuItem.count() > 0) {
+        const submenuItem = menu
+            .locator('[role="menuitem"]')
+            .filter({ has: page.locator('.fd-menu__addon-after') })
+            .first();
+        if ((await submenuItem.count()) > 0) {
             await submenuItem.hover();
             const submenu = page.locator('.cdk-overlay-container [role="menu"]').nth(1);
             await expect(submenu).toBeVisible();

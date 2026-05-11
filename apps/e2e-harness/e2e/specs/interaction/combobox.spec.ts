@@ -1,6 +1,6 @@
-import { test, expect } from '../../fixtures/base.fixture';
+import { expect, test } from '../../fixtures/base.fixture';
 
-test.describe('Combobox Interaction', () => {
+test.describe('core/combobox', () => {
     test.beforeEach(async ({ goto }) => {
         await goto('core/combobox/combobox');
     });

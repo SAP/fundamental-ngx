@@ -1,6 +1,6 @@
-import { test, expect } from '../../fixtures/base.fixture';
+import { expect, test } from '../../fixtures/base.fixture';
 
-test.describe('Tree Interaction', () => {
+test.describe('core/tree', () => {
     test.beforeEach(async ({ goto }) => {
         await goto('core/tree/simple-tree');
     });
@@ -37,7 +37,9 @@ test.describe('Tree Interaction', () => {
         const firstItem = page.locator('[role="treeitem"], fd-tree-item').first();
         await firstItem.click();
         await page.keyboard.press('ArrowDown');
-        const activeRole = await page.evaluate(() => document.activeElement?.getAttribute('role') || document.activeElement?.tagName.toLowerCase());
+        const activeRole = await page.evaluate(
+            () => document.activeElement?.getAttribute('role') || document.activeElement?.tagName.toLowerCase()
+        );
         expect(activeRole).toBeTruthy();
     });
 });

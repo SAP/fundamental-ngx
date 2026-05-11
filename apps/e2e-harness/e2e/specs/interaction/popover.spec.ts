@@ -1,6 +1,6 @@
-import { test, expect } from '../../fixtures/base.fixture';
+import { expect, test } from '../../fixtures/base.fixture';
 
-test.describe('Popover Interaction', () => {
+test.describe('core/popover', () => {
     test.beforeEach(async ({ goto }) => {
         await goto('core/popover/simple');
     });

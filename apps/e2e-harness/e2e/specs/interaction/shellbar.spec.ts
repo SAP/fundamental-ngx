@@ -1,6 +1,6 @@
-import { test, expect } from '../../fixtures/base.fixture';
+import { expect, test } from '../../fixtures/base.fixture';
 
-test.describe('Shellbar Interaction', () => {
+test.describe('cx/shellbar', () => {
     test.beforeEach(async ({ goto }) => {
         await goto('cx/side-navigation/shellbar');
     });
