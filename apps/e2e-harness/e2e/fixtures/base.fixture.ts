@@ -38,9 +38,8 @@ async function disableAnimations(page: Page): Promise<void> {
 export const test = base.extend<E2EFixtures>({
     goto: async ({ page }, use) => {
         const fn = async (route: string): Promise<void> => {
-            await page.goto(`/${route}`);
-            await page.waitForLoadState('domcontentloaded');
-            await page.waitForTimeout(1000);
+            await page.goto(`/${route}`, { waitUntil: 'domcontentloaded' });
+            await page.locator('e2e-root').waitFor({ state: 'visible' });
             await disableAnimations(page);
             await page.locator('html.e2e-no-animations').waitFor({ state: 'attached' });
         };
