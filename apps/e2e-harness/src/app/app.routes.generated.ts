@@ -235,13 +235,6 @@ export const generatedRoutes: Routes = [
             )
     },
     {
-        path: 'cdk/rtl-service/basic',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/cdk/rtl-service/examples/rtl-service-basic-example/rtl-service-basic-example.component'
-            ).then((m) => m.RtlServiceBasicExampleComponent)
-    },
-    {
         path: 'cdk/selectable-list/advanced-usage',
         loadComponent: () =>
             import('../../../../libs/docs/cdk/selectable-list/examples/advanced-usage/advanced-usage.component').then(

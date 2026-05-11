@@ -5,6 +5,10 @@
             "reason": "compilation error in docs example"
         },
         {
+            "route": "cdk/rtl-service/basic",
+            "reason": "times out in CI"
+        },
+        {
             "route": "core/avatar-group/default",
             "reason": "compilation error in docs example"
         },

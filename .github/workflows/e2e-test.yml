@@ -199,7 +199,11 @@ jobs:
                     git config user.email "github-actions@github.com"
                     git add "$SNAPDIR"
                     git commit -m "test(e2e): add missing Linux visual baselines [$SHARD]"
-                    git push
+                    # Retry push with rebase to handle parallel shard commits
+                    for i in 1 2 3; do
+                      git pull --rebase origin "${{ github.head_ref }}" && git push && break
+                      sleep 5
+                    done
                   fi
 
             - name: Upload snapshot diffs

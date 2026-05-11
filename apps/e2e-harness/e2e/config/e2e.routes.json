@@ -1,5 +1,5 @@
 {
-    "count": 795,
+    "count": 794,
     "routes": [
         {
             "path": "btp/button/nested",
@@ -231,13 +231,6 @@
             "component": "line-clamp",
             "example": "default",
             "className": "LineClampDefaultExampleComponent"
-        },
-        {
-            "path": "cdk/rtl-service/basic",
-            "library": "cdk",
-            "component": "rtl-service",
-            "example": "basic",
-            "className": "RtlServiceBasicExampleComponent"
         },
         {
             "path": "cdk/selectable-list/advanced-usage",

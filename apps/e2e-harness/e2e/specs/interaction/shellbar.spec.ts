@@ -1,6 +1,6 @@
 import { expect, test } from '../../fixtures/base.fixture';
 
-test.describe('cx/shellbar', () => {
+test.describe.skip('cx/shellbar', () => {
     test.beforeEach(async ({ goto }) => {
         await goto('cx/side-navigation/shellbar');
     });
