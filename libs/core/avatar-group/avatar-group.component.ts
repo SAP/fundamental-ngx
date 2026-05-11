@@ -13,6 +13,7 @@ import {
     ViewEncapsulation,
     computed,
     inject,
+    input,
     signal,
     viewChild
 } from '@angular/core';
@@ -120,6 +121,12 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
     /** @hidden */
     @ContentChild(AvatarGroupOverflowBodyDirective)
     _avatarGroupPopoverBody: AvatarGroupOverflowBodyDirective;
+
+    /**
+     * Heading level for the overflow popover title.
+     * @default 5
+     */
+    readonly overflowHeadingLevel = input<1 | 2 | 3 | 4 | 5 | 6>(5);
 
     /** @hidden */
     readonly _avatarGroupHost = viewChild(AvatarGroupHostComponent);

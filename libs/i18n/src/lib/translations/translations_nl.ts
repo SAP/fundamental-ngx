@@ -37,6 +37,8 @@ export default {
     },
     coreCalendar: {
         calendarDayViewDescription: 'Kalender',
+        calendarLegendLabel: 'Calendar Legend',
+        calendarRoleDescription: 'Calendar',
         calendarMonthViewDescription: 'Maandenkiezer',
         calendarYearsRangeViewDescription: 'Jarenbereikkiezer',
         calendarYearsViewDescription: 'Jaarkiezer',
@@ -199,6 +201,9 @@ export default {
     },
     coreProductSwitch: {
         ariaLabel: 'Overstappen op ander product'
+    },
+    coreRadio: {
+        readOnlyDescription: 'This radio button is read-only and cannot be changed.'
     },
     coreRatingIndicator: {
         ariaLabelReset: 'Terugzetten naar nul',

@@ -14,6 +14,7 @@ import {
     ViewEncapsulation,
     computed,
     inject,
+    input,
     output
 } from '@angular/core';
 import { FocusableListDirective, RtlService, elementClick$ } from '@fundamental-ngx/cdk/utils';
@@ -79,6 +80,12 @@ export class DefaultAvatarGroupOverflowBodyComponent implements AfterViewInit, O
 
     /** Emitted when the Escape key is pressed inside the overflow body. */
     readonly escapePressed = output<void>();
+
+    /**
+     * Heading level for the overflow popover title.
+     * @default 5
+     */
+    readonly overflowHeadingLevel = input<1 | 2 | 3 | 4 | 5 | 6>(5);
 
     /** @hidden */
     _overflowPopoverStage: 'main' | 'details' = 'main';

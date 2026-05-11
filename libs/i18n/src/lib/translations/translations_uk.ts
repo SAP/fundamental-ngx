@@ -36,6 +36,8 @@ export default {
     },
     coreCalendar: {
         calendarDayViewDescription: 'Календар',
+        calendarLegendLabel: 'Calendar Legend',
+        calendarRoleDescription: 'Calendar',
         calendarMonthViewDescription: 'Вибір місяця',
         calendarYearsRangeViewDescription: 'Вибір діапазону років',
         calendarYearsViewDescription: 'Вибір року',
@@ -198,6 +200,9 @@ export default {
     },
     coreProductSwitch: {
         ariaLabel: 'Перемикач продуктів'
+    },
+    coreRadio: {
+        readOnlyDescription: 'This radio button is read-only and cannot be changed.'
     },
     coreRatingIndicator: {
         ariaLabelReset: 'Скинути до нуля',

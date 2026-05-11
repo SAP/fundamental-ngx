@@ -2,6 +2,8 @@
     class="fd-calendar__content fd-calendar__content--months"
     role="grid"
     [attr.aria-roledescription]="('coreCalendar.calendarMonthViewDescription' | fdTranslate)()"
+    aria-readonly="false"
+    aria-multiselectable="false"
 >
     <tbody class="fd-calendar__group" role="rowgroup">
         @for (colMonths of _calendarMonthListGrid; track colMonths + '' + rowIndex; let rowIndex = $index) {
@@ -21,18 +23,15 @@
                         (mouseenter)="_handleRangeHover(monthCell)"
                         (click)="selectMonth(monthCell, $event)"
                     >
-                        <button
-                            fd-button
-                            fdType="transparent"
+                        <span
                             [class.fd-button--toggled]="
                                 monthCell.selectedRange ||
                                 monthCell.hoverRange ||
                                 monthCell.selectedFirst ||
                                 monthCell.selectedLast
                             "
-                            class="fd-calendar__my-item-button"
+                            class="fd-button fd-button--transparent fd-calendar__my-item-button"
                             [class.is-active]="monthCell.current"
-                            tabindex="-1"
                         >
                             <span
                                 class="fd-calendar__text"
@@ -45,7 +44,7 @@
                             >
                                 {{ monthCell.label }}
                             </span>
-                        </button>
+                        </span>
                         <span hidden aria-hidden="true" [attr.id]="monthCell.id + '-aria-label'">
                             {{ monthCell.ariaLabel }}
                         </span>

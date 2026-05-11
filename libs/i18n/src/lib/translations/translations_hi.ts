@@ -36,6 +36,8 @@ export default {
     },
     coreCalendar: {
         calendarDayViewDescription: 'कैलेंडर',
+        calendarLegendLabel: 'Calendar Legend',
+        calendarRoleDescription: 'Calendar',
         calendarMonthViewDescription: 'महीना चयनकर्ता',
         calendarYearsRangeViewDescription: 'वर्षों की सीमा चयनकर्ता',
         calendarYearsViewDescription: 'वर्ष चयनकर्ता',
@@ -198,6 +200,9 @@ export default {
     },
     coreProductSwitch: {
         ariaLabel: 'उत्पाद स्विच'
+    },
+    coreRadio: {
+        readOnlyDescription: 'This radio button is read-only and cannot be changed.'
     },
     coreRatingIndicator: {
         ariaLabelReset: 'Reset to zero',
