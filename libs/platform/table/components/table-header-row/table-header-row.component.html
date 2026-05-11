@@ -41,14 +41,14 @@
         (focusout)="_selectionColumnHeaderDisableTitle.set(true)"
         [attr.title]="
             selectionMode === SELECTION_MODE.SINGLE || _selectionColumnHeaderDisableTitle()
-                ? ''
+                ? null
                 : !checkedState
                   ? ('platformTable.selectAllCheckboxLabel' | fdTranslate)()
                   : ('platformTable.deselectAllCheckboxLabel' | fdTranslate)()
         "
         [attr.aria-description]="
             selectionMode === SELECTION_MODE.SINGLE
-                ? ''
+                ? null
                 : checkedState
                   ? ('platformTable.deselectAllCheckboxLongLabel' | fdTranslate)()
                   : checkedState === null
