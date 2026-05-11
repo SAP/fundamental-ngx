@@ -5546,5 +5546,1212 @@ export const generatedRoutes: Routes = [
             import(
                 '../../../../libs/docs/platform/wizard-generator/examples/wizard-generator-visible-summary-branching-example.component'
             ).then((m) => m.WizardGeneratorVisibleSummaryBranchingExampleComponent)
+    },
+    {
+        path: 'ui5-ai/button/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents-ai/button/examples/basic-sample').then(
+                (m) => m.BasicAiButtonSample
+            )
+    },
+    {
+        path: 'ui5-fiori/barcode-scanner-dialog/barcode-scanner-dialog',
+        loadComponent: () =>
+            import(
+                '../../../../libs/docs/ui5-webcomponents-fiori/barcode-scanner-dialog/examples/barcode-scanner-dialog-sample'
+            ).then((m) => m.BarcodeScannerDialogExample)
+    },
+    {
+        path: 'ui5-fiori/dynamic-page/dynamic-page',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents-fiori/dynamic-page/examples/dynamic-page-sample').then(
+                (m) => m.DynamicPageExample
+            )
+    },
+    {
+        path: 'ui5-fiori/dynamic-side-content/dynamic-side-content',
+        loadComponent: () =>
+            import(
+                '../../../../libs/docs/ui5-webcomponents-fiori/dynamic-side-content/examples/dynamic-side-content-sample'
+            ).then((m) => m.DynamicSideContentSample)
+    },
+    {
+        path: 'ui5-fiori/flexible-column-layout/flexible-column-layout',
+        loadComponent: () =>
+            import(
+                '../../../../libs/docs/ui5-webcomponents-fiori/flexible-column-layout/examples/flexible-column-layout-sample'
+            ).then((m) => m.FlexibleColumnLayoutSample)
+    },
+    {
+        path: 'ui5-fiori/illustrated-message/illustrated-message',
+        loadComponent: () =>
+            import(
+                '../../../../libs/docs/ui5-webcomponents-fiori/illustrated-message/examples/illustrated-message-sample'
+            ).then((m) => m.IllustratedMessageSample)
+    },
+    {
+        path: 'ui5-fiori/media-gallery/media-gallery',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents-fiori/media-gallery/examples/media-gallery-sample').then(
+                (m) => m.MediaGallerySample
+            )
+    },
+    {
+        path: 'ui5-fiori/notification-list/actions',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents-fiori/notification-list/examples/actions-sample').then(
+                (m) => m.ActionsSample
+            )
+    },
+    {
+        path: 'ui5-fiori/notification-list/group-items',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents-fiori/notification-list/examples/group-items-sample').then(
+                (m) => m.GroupItemsSample
+            )
+    },
+    {
+        path: 'ui5-fiori/notification-list/read',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents-fiori/notification-list/examples/read-sample').then(
+                (m) => m.ReadSample
+            )
+    },
+    {
+        path: 'ui5-fiori/notification-list/states',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents-fiori/notification-list/examples/states-sample').then(
+                (m) => m.StatesSample
+            )
+    },
+    {
+        path: 'ui5-fiori/page/background',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents-fiori/page/examples/background-sample').then(
+                (m) => m.BackgroundSample
+            )
+    },
+    {
+        path: 'ui5-fiori/page/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents-fiori/page/examples/basic-sample').then(
+                (m) => m.BasicSample
+            )
+    },
+    {
+        path: 'ui5-fiori/page/footer',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents-fiori/page/examples/footer-sample').then(
+                (m) => m.FooterSample
+            )
+    },
+    {
+        path: 'ui5-fiori/page/scrolling',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents-fiori/page/examples/scrolling-sample').then(
+                (m) => m.ScrollingSample
+            )
+    },
+    {
+        path: 'ui5-fiori/product-switch/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents-fiori/product-switch/examples/basic-sample').then(
+                (m) => m.BasicSample
+            )
+    },
+    {
+        path: 'ui5-fiori/product-switch/icons',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents-fiori/product-switch/examples/icons-sample').then(
+                (m) => m.IconsSample
+            )
+    },
+    {
+        path: 'ui5-fiori/product-switch/in-shell-bar',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents-fiori/product-switch/examples/in-shell-bar-sample').then(
+                (m) => m.InShellBarSample
+            )
+    },
+    {
+        path: 'ui5-fiori/search/actions',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents-fiori/search/examples/actions-sample').then(
+                (m) => m.ActionsSample
+            )
+    },
+    {
+        path: 'ui5-fiori/search/advanced-filtering',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents-fiori/search/examples/advanced-filtering-sample').then(
+                (m) => m.AdvancedFilteringSample
+            )
+    },
+    {
+        path: 'ui5-fiori/search/byline-items',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents-fiori/search/examples/byline-items-sample').then(
+                (m) => m.BylineItemsSample
+            )
+    },
+    {
+        path: 'ui5-fiori/search/loading',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents-fiori/search/examples/loading-sample').then(
+                (m) => m.LoadingSample
+            )
+    },
+    {
+        path: 'ui5-fiori/search/scopes',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents-fiori/search/examples/scopes-sample').then(
+                (m) => m.ScopesSample
+            )
+    },
+    {
+        path: 'ui5-fiori/search/show-more',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents-fiori/search/examples/show-more-sample').then(
+                (m) => m.ShowMoreSample
+            )
+    },
+    {
+        path: 'ui5-fiori/search/suggestions',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents-fiori/search/examples/suggestions-sample').then(
+                (m) => m.SuggestionsSample
+            )
+    },
+    {
+        path: 'ui5-fiori/shellbar/all-features',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents-fiori/shellbar/examples/all-features-sample').then(
+                (m) => m.AllFeaturesSample
+            )
+    },
+    {
+        path: 'ui5-fiori/shellbar/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents-fiori/shellbar/examples/basic-sample').then(
+                (m) => m.BasicSample
+            )
+    },
+    {
+        path: 'ui5-fiori/shellbar/embedded-back-navigation',
+        loadComponent: () =>
+            import(
+                '../../../../libs/docs/ui5-webcomponents-fiori/shellbar/examples/embedded-back-navigation-sample'
+            ).then((m) => m.EmbeddedBackNavigationSample)
+    },
+    {
+        path: 'ui5-fiori/shellbar/events',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents-fiori/shellbar/examples/events-sample').then(
+                (m) => m.EventsSample
+            )
+    },
+    {
+        path: 'ui5-fiori/shellbar/trial',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents-fiori/shellbar/examples/trial-sample').then(
+                (m) => m.TrialSample
+            )
+    },
+    {
+        path: 'ui5-fiori/shellbar/with-search',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents-fiori/shellbar/examples/with-search-sample').then(
+                (m) => m.WithSearchSample
+            )
+    },
+    {
+        path: 'ui5-fiori/side-navigation/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents-fiori/side-navigation/examples/basic-sample').then(
+                (m) => m.BasicSample
+            )
+    },
+    {
+        path: 'ui5-fiori/side-navigation/collapsed',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents-fiori/side-navigation/examples/collapsed-sample').then(
+                (m) => m.CollapsedSample
+            )
+    },
+    {
+        path: 'ui5-fiori/side-navigation/custom-width',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents-fiori/side-navigation/examples/custom-width-sample').then(
+                (m) => m.CustomWidthSample
+            )
+    },
+    {
+        path: 'ui5-fiori/side-navigation/fixed-items',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents-fiori/side-navigation/examples/fixed-items-sample').then(
+                (m) => m.FixedItemsSample
+            )
+    },
+    {
+        path: 'ui5-fiori/side-navigation/nested',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents-fiori/side-navigation/examples/nested-sample').then(
+                (m) => m.NestedSample
+            )
+    },
+    {
+        path: 'ui5-fiori/side-navigation/overlay-mode',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents-fiori/side-navigation/examples/overlay-mode-sample').then(
+                (m) => m.OverlayModeSample
+            )
+    },
+    {
+        path: 'ui5-fiori/timeline/timeline',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents-fiori/timeline/examples/timeline-sample').then(
+                (m) => m.TimelineExample
+            )
+    },
+    {
+        path: 'ui5-fiori/upload-collection/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents-fiori/upload-collection/examples/basic-sample').then(
+                (m) => m.BasicSample
+            )
+    },
+    {
+        path: 'ui5-fiori/upload-collection/custom-header',
+        loadComponent: () =>
+            import(
+                '../../../../libs/docs/ui5-webcomponents-fiori/upload-collection/examples/custom-header-sample'
+            ).then((m) => m.CustomHeaderSample)
+    },
+    {
+        path: 'ui5-fiori/upload-collection/drag-drop',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents-fiori/upload-collection/examples/drag-drop-sample').then(
+                (m) => m.DragDropSample
+            )
+    },
+    {
+        path: 'ui5-fiori/upload-collection/selection',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents-fiori/upload-collection/examples/selection-sample').then(
+                (m) => m.SelectionSample
+            )
+    },
+    {
+        path: 'ui5-fiori/upload-collection/upload-states',
+        loadComponent: () =>
+            import(
+                '../../../../libs/docs/ui5-webcomponents-fiori/upload-collection/examples/upload-states-sample'
+            ).then((m) => m.UploadStatesSample)
+    },
+    {
+        path: 'ui5-fiori/user-menu/accounts',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents-fiori/user-menu/examples/accounts-sample').then(
+                (m) => m.AccountsSample
+            )
+    },
+    {
+        path: 'ui5-fiori/user-menu/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents-fiori/user-menu/examples/basic-sample').then(
+                (m) => m.BasicSample
+            )
+    },
+    {
+        path: 'ui5-fiori/user-menu/menu-items',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents-fiori/user-menu/examples/menu-items-sample').then(
+                (m) => m.MenuItemsSample
+            )
+    },
+    {
+        path: 'ui5-fiori/user-settings-dialog/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents-fiori/user-settings-dialog/examples/basic-sample').then(
+                (m) => m.BasicSample
+            )
+    },
+    {
+        path: 'ui5-fiori/view-settings-dialog/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents-fiori/view-settings-dialog/examples/basic-sample').then(
+                (m) => m.BasicSample
+            )
+    },
+    {
+        path: 'ui5-fiori/wizard/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents-fiori/wizard/examples/basic-sample').then(
+                (m) => m.BasicSample
+            )
+    },
+    {
+        path: 'ui5/avatar-group/avatar-group',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/avatar-group/examples/avatar-group-sample').then(
+                (m) => m.AvatarGroupExample
+            )
+    },
+    {
+        path: 'ui5/avatar/badge',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/avatar/examples/avatar-badge-sample').then(
+                (m) => m.AvatarBadgeSample
+            )
+    },
+    {
+        path: 'ui5/avatar/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/avatar/examples/basic-sample').then(
+                (m) => m.BasicAvatarSample
+            )
+    },
+    {
+        path: 'ui5/bar/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/bar/examples/basic-sample').then((m) => m.BasicBarSample)
+    },
+    {
+        path: 'ui5/breadcrumbs/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/breadcrumbs/examples/basic-sample').then(
+                (m) => m.BreadcrumbsBasicSample
+            )
+    },
+    {
+        path: 'ui5/busy-indicator/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/busy-indicator/examples/basic-sample').then(
+                (m) => m.BasicBusyIndicatorSample
+            )
+    },
+    {
+        path: 'ui5/button/button',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/button/examples/button-sample').then((m) => m.ButtonExample)
+    },
+    {
+        path: 'ui5/calendar-legend/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/calendar-legend/examples/basic-sample').then(
+                (m) => m.CalendarLegendBasicExample
+            )
+    },
+    {
+        path: 'ui5/calendar/calendar',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/calendar/examples/calendar-sample').then(
+                (m) => m.CalendarExample
+            )
+    },
+    {
+        path: 'ui5/card/card',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/card/examples/card-sample').then((m) => m.CardExample)
+    },
+    {
+        path: 'ui5/carousel/carousel',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/carousel/examples/carousel-sample').then(
+                (m) => m.CarouselExample
+            )
+    },
+    {
+        path: 'ui5/check-box/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/check-box/examples/basic-sample').then(
+                (m) => m.BasicCheckBoxSample
+            )
+    },
+    {
+        path: 'ui5/check-box/reactive-forms',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/check-box/examples/reactive-forms-sample').then(
+                (m) => m.ReactiveFormsSample
+            )
+    },
+    {
+        path: 'ui5/color-palette-popover/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/color-palette-popover/examples/basic-sample').then(
+                (m) => m.ColorPalettePopoverBasicSample
+            )
+    },
+    {
+        path: 'ui5/color-palette/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/color-palette/examples/basic-sample').then(
+                (m) => m.BasicColorPaletteSample
+            )
+    },
+    {
+        path: 'ui5/color-picker/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/color-picker/examples/basic-sample').then(
+                (m) => m.ColorPickerBasicExample
+            )
+    },
+    {
+        path: 'ui5/combo-box/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/combo-box/examples/basic-sample').then(
+                (m) => m.ComboBoxBasicSample
+            )
+    },
+    {
+        path: 'ui5/content-density/basic',
+        loadComponent: () =>
+            import(
+                '../../../../libs/docs/ui5-webcomponents/content-density/examples/content-density-basic-sample'
+            ).then((m) => m.ContentDensityBasicSampleComponent)
+    },
+    {
+        path: 'ui5/date-picker/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/date-picker/examples/basic-sample').then(
+                (m) => m.DatePickerBasicSample
+            )
+    },
+    {
+        path: 'ui5/date-picker/calendar-types',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/date-picker/examples/calendar-types-sample').then(
+                (m) => m.DatePickerCalendarTypesSample
+            )
+    },
+    {
+        path: 'ui5/date-picker/component-states',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/date-picker/examples/component-states-sample').then(
+                (m) => m.DatePickerComponentStatesSample
+            )
+    },
+    {
+        path: 'ui5/date-picker/format',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/date-picker/examples/format-sample').then(
+                (m) => m.DatePickerFormatSample
+            )
+    },
+    {
+        path: 'ui5/date-picker/min-max',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/date-picker/examples/min-max-sample').then(
+                (m) => m.DatePickerMinMaxSample
+            )
+    },
+    {
+        path: 'ui5/date-picker/value-state',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/date-picker/examples/value-state-sample').then(
+                (m) => m.DatePickerValueStateSample
+            )
+    },
+    {
+        path: 'ui5/date-range-picker/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/date-range-picker/examples/basic-sample').then(
+                (m) => m.DateRangePickerBasicSample
+            )
+    },
+    {
+        path: 'ui5/date-range-picker/component-states',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/date-range-picker/examples/component-states-sample').then(
+                (m) => m.DateRangePickerComponentStatesSample
+            )
+    },
+    {
+        path: 'ui5/date-range-picker/delimiter',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/date-range-picker/examples/delimiter-sample').then(
+                (m) => m.DateRangePickerDelimiterSample
+            )
+    },
+    {
+        path: 'ui5/date-range-picker/format',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/date-range-picker/examples/format-sample').then(
+                (m) => m.DateRangePickerFormatSample
+            )
+    },
+    {
+        path: 'ui5/date-range-picker/min-max',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/date-range-picker/examples/min-max-sample').then(
+                (m) => m.DateRangePickerMinMaxSample
+            )
+    },
+    {
+        path: 'ui5/date-range-picker/value-state',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/date-range-picker/examples/value-state-sample').then(
+                (m) => m.DateRangePickerValueStateSample
+            )
+    },
+    {
+        path: 'ui5/date-time-picker/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/date-time-picker/examples/basic-sample').then(
+                (m) => m.BasicSample
+            )
+    },
+    {
+        path: 'ui5/date-time-picker/events',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/date-time-picker/examples/events-sample').then(
+                (m) => m.EventsSample
+            )
+    },
+    {
+        path: 'ui5/date-time-picker/formats',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/date-time-picker/examples/formats-sample').then(
+                (m) => m.FormatsSample
+            )
+    },
+    {
+        path: 'ui5/date-time-picker/min-max',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/date-time-picker/examples/min-max-sample').then(
+                (m) => m.MinMaxSample
+            )
+    },
+    {
+        path: 'ui5/date-time-picker/value-state',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/date-time-picker/examples/value-state-sample').then(
+                (m) => m.ValueStateSample
+            )
+    },
+    {
+        path: 'ui5/dialog/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/dialog/examples/basic-sample').then(
+                (m) => m.DialogBasicSample
+            )
+    },
+    {
+        path: 'ui5/dialog/draggable-resizable',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/dialog/examples/draggable-resizable-sample').then(
+                (m) => m.DialogDraggableResizableSample
+            )
+    },
+    {
+        path: 'ui5/dialog/events',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/dialog/examples/events-sample').then(
+                (m) => m.DialogEventsSample
+            )
+    },
+    {
+        path: 'ui5/dialog/header-footer',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/dialog/examples/header-footer-sample').then(
+                (m) => m.DialogHeaderFooterSample
+            )
+    },
+    {
+        path: 'ui5/dialog/stretch',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/dialog/examples/stretch-sample').then(
+                (m) => m.DialogStretchSample
+            )
+    },
+    {
+        path: 'ui5/dialog/value-state',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/dialog/examples/value-state-sample').then(
+                (m) => m.DialogValueStateSample
+            )
+    },
+    {
+        path: 'ui5/dynamic-date-range/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/dynamic-date-range/examples/basic-sample').then(
+                (m) => m.BasicSample
+            )
+    },
+    {
+        path: 'ui5/dynamic-date-range/value-handling',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/dynamic-date-range/examples/value-handling-sample').then(
+                (m) => m.ValueHandlingSample
+            )
+    },
+    {
+        path: 'ui5/file-uploader/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/file-uploader/examples/basic-sample').then(
+                (m) => m.BasicSample
+            )
+    },
+    {
+        path: 'ui5/file-uploader/custom-button',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/file-uploader/examples/custom-button-sample').then(
+                (m) => m.CustomButtonSample
+            )
+    },
+    {
+        path: 'ui5/file-uploader/file-size-restrictions',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/file-uploader/examples/file-size-restrictions-sample').then(
+                (m) => m.FileSizeRestrictionsSample
+            )
+    },
+    {
+        path: 'ui5/file-uploader/multiple-files',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/file-uploader/examples/multiple-files-sample').then(
+                (m) => m.MultipleFilesSample
+            )
+    },
+    {
+        path: 'ui5/file-uploader/type-restrictions',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/file-uploader/examples/type-restrictions-sample').then(
+                (m) => m.FileTypeRestrictionsSample
+            )
+    },
+    {
+        path: 'ui5/file-uploader/value-state',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/file-uploader/examples/value-state-sample').then(
+                (m) => m.ValueStateSample
+            )
+    },
+    {
+        path: 'ui5/form/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/form/examples/basic-sample').then((m) => m.FormBasicSample)
+    },
+    {
+        path: 'ui5/i18n/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/i18n/examples/i18n-basic-sample').then(
+                (m) => m.I18nBasicSampleComponent
+            )
+    },
+    {
+        path: 'ui5/icon/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/icon/examples/basic-sample').then((m) => m.IconBasicExample)
+    },
+    {
+        path: 'ui5/input/input',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/input/examples/input-sample').then((m) => m.InputExample)
+    },
+    {
+        path: 'ui5/label/label',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/label/examples/label-sample').then((m) => m.LabelExample)
+    },
+    {
+        path: 'ui5/link/link',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/link/examples/link-sample').then((m) => m.LinkExample)
+    },
+    {
+        path: 'ui5/list/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/list/examples/basic-sample').then((m) => m.ListBasicExample)
+    },
+    {
+        path: 'ui5/menu/additional-text',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/menu/examples/additional-text-sample').then(
+                (m) => m.AdditionalTextSample
+            )
+    },
+    {
+        path: 'ui5/menu/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/menu/examples/basic-sample').then((m) => m.BasicSample)
+    },
+    {
+        path: 'ui5/menu/loading',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/menu/examples/loading-sample').then((m) => m.LoadingSample)
+    },
+    {
+        path: 'ui5/menu/placement',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/menu/examples/placement-sample').then(
+                (m) => m.PlacementSample
+            )
+    },
+    {
+        path: 'ui5/menu/sub-menus',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/menu/examples/sub-menus-sample').then(
+                (m) => m.SubMenusSample
+            )
+    },
+    {
+        path: 'ui5/menu/with-icons',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/menu/examples/with-icons-sample').then(
+                (m) => m.WithIconsSample
+            )
+    },
+    {
+        path: 'ui5/message-strip/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/message-strip/examples/basic-sample').then(
+                (m) => m.MessageStripBasicSample
+            )
+    },
+    {
+        path: 'ui5/multi-combobox/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/multi-combobox/examples/basic-sample').then(
+                (m) => m.MultiComboBoxBasicExample
+            )
+    },
+    {
+        path: 'ui5/multi-combobox/clear-icon',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/multi-combobox/examples/clear-icon-sample').then(
+                (m) => m.MultiComboBoxClearIconExample
+            )
+    },
+    {
+        path: 'ui5/multi-combobox/disabled-and-readonly',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/multi-combobox/examples/disabled-and-readonly-sample').then(
+                (m) => m.MultiComboBoxDisabledAndReadonlyExample
+            )
+    },
+    {
+        path: 'ui5/multi-combobox/grouped-items',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/multi-combobox/examples/grouped-items-sample').then(
+                (m) => m.MultiComboBoxGroupedItemsExample
+            )
+    },
+    {
+        path: 'ui5/multi-combobox/text-wrapping',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/multi-combobox/examples/text-wrapping-sample').then(
+                (m) => m.MultiComboBoxTextWrappingExample
+            )
+    },
+    {
+        path: 'ui5/multi-combobox/value-state',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/multi-combobox/examples/value-state-sample').then(
+                (m) => m.MultiComboBoxValueStateExample
+            )
+    },
+    {
+        path: 'ui5/multi-input/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/multi-input/examples/basic-sample').then(
+                (m) => m.BasicSample
+            )
+    },
+    {
+        path: 'ui5/multi-input/disabled',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/multi-input/examples/disabled-sample').then(
+                (m) => m.DisabledSample
+            )
+    },
+    {
+        path: 'ui5/multi-input/events',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/multi-input/examples/events-sample').then(
+                (m) => m.EventsSample
+            )
+    },
+    {
+        path: 'ui5/multi-input/value-state',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/multi-input/examples/value-state-sample').then(
+                (m) => m.ValueStateSample
+            )
+    },
+    {
+        path: 'ui5/panel/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/panel/examples/basic-sample').then(
+                (m) => m.BasicPanelExample
+            )
+    },
+    {
+        path: 'ui5/radio-button/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/radio-button/examples/basic-sample').then(
+                (m) => m.BasicSample
+            )
+    },
+    {
+        path: 'ui5/radio-button/disabled',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/radio-button/examples/disabled-sample').then(
+                (m) => m.DisabledSample
+            )
+    },
+    {
+        path: 'ui5/radio-button/reactive-forms',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/radio-button/examples/reactive-forms-sample').then(
+                (m) => m.ReactiveFormsSample
+            )
+    },
+    {
+        path: 'ui5/radio-button/text-wrapping',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/radio-button/examples/text-wrapping-sample').then(
+                (m) => m.TextWrappingSample
+            )
+    },
+    {
+        path: 'ui5/radio-button/value-state',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/radio-button/examples/value-state-sample').then(
+                (m) => m.ValueStateSample
+            )
+    },
+    {
+        path: 'ui5/range-slider/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/range-slider/examples/basic-sample').then(
+                (m) => m.BasicSample
+            )
+    },
+    {
+        path: 'ui5/range-slider/disabled',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/range-slider/examples/disabled-sample').then(
+                (m) => m.DisabledSample
+            )
+    },
+    {
+        path: 'ui5/range-slider/step-tickmarks',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/range-slider/examples/step-tickmarks-sample').then(
+                (m) => m.StepTickmarksSample
+            )
+    },
+    {
+        path: 'ui5/range-slider/tooltip',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/range-slider/examples/tooltip-sample').then(
+                (m) => m.TooltipSample
+            )
+    },
+    {
+        path: 'ui5/rating-indicator/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/rating-indicator/examples/basic-sample').then(
+                (m) => m.BasicRatingIndicatorExample
+            )
+    },
+    {
+        path: 'ui5/responsive-popover/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/responsive-popover/examples/basic-sample').then(
+                (m) => m.BasicSample
+            )
+    },
+    {
+        path: 'ui5/responsive-popover/events',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/responsive-popover/examples/events-sample').then(
+                (m) => m.EventsSample
+            )
+    },
+    {
+        path: 'ui5/responsive-popover/header-footer',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/responsive-popover/examples/header-footer-sample').then(
+                (m) => m.HeaderFooterSample
+            )
+    },
+    {
+        path: 'ui5/responsive-popover/modal',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/responsive-popover/examples/modal-sample').then(
+                (m) => m.ModalSample
+            )
+    },
+    {
+        path: 'ui5/responsive-popover/placement',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/responsive-popover/examples/placement-sample').then(
+                (m) => m.PlacementSample
+            )
+    },
+    {
+        path: 'ui5/segmented-button/segmented-button',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/segmented-button/examples/segmented-button-sample').then(
+                (m) => m.SegmentedButtonExample
+            )
+    },
+    {
+        path: 'ui5/select/additional-text',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/select/examples/additional-text-sample').then(
+                (m) => m.AdditionalTextSample
+            )
+    },
+    {
+        path: 'ui5/select/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/select/examples/basic-sample').then((m) => m.BasicSample)
+    },
+    {
+        path: 'ui5/select/custom-options',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/select/examples/custom-options-sample').then(
+                (m) => m.CustomOptionsSample
+            )
+    },
+    {
+        path: 'ui5/select/disabled-readonly',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/select/examples/disabled-readonly-sample').then(
+                (m) => m.DisabledReadonlySample
+            )
+    },
+    {
+        path: 'ui5/select/reactive',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/select/examples/reactive-sample').then(
+                (m) => m.ReactiveSample
+            )
+    },
+    {
+        path: 'ui5/select/value-state',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/select/examples/value-state-sample').then(
+                (m) => m.ValueStateSample
+            )
+    },
+    {
+        path: 'ui5/slider/slider',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/slider/examples/slider-sample').then((m) => m.SliderExample)
+    },
+    {
+        path: 'ui5/split-button/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/split-button/examples/basic-sample').then(
+                (m) => m.BasicSample
+            )
+    },
+    {
+        path: 'ui5/split-button/design-variants',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/split-button/examples/design-variants-sample').then(
+                (m) => m.DesignVariantsSample
+            )
+    },
+    {
+        path: 'ui5/split-button/icon',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/split-button/examples/icon-sample').then(
+                (m) => m.IconSample
+            )
+    },
+    {
+        path: 'ui5/switch/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/switch/examples/basic-sample').then(
+                (m) => m.BasicSwitchExample
+            )
+    },
+    {
+        path: 'ui5/switch/reactive-forms',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/switch/examples/reactive-forms-sample').then(
+                (m) => m.ReactiveFormSwitchExample
+            )
+    },
+    {
+        path: 'ui5/tab-container/background-design',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/tab-container/examples/background-design-sample').then(
+                (m) => m.BackgroundDesignSample
+            )
+    },
+    {
+        path: 'ui5/tab-container/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/tab-container/examples/basic-sample').then(
+                (m) => m.BasicSample
+            )
+    },
+    {
+        path: 'ui5/tab-container/design',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/tab-container/examples/design-sample').then(
+                (m) => m.DesignSample
+            )
+    },
+    {
+        path: 'ui5/tab-container/layout',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/tab-container/examples/layout-sample').then(
+                (m) => m.LayoutSample
+            )
+    },
+    {
+        path: 'ui5/tab-container/overflow',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/tab-container/examples/overflow-sample').then(
+                (m) => m.OverflowSample
+            )
+    },
+    {
+        path: 'ui5/tab-container/reorder',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/tab-container/examples/reorder-sample').then(
+                (m) => m.ReorderSample
+            )
+    },
+    {
+        path: 'ui5/table/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/table/examples/basic-sample').then(
+                (m) => m.BasicTableSample
+            )
+    },
+    {
+        path: 'ui5/table/drag-and-drop',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/table/examples/drag-and-drop-sample').then(
+                (m) => m.DragAndDropTableSample
+            )
+    },
+    {
+        path: 'ui5/table/header-cell-ai',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/table/examples/header-cell-ai-sample').then(
+                (m) => m.HeaderCellAISample
+            )
+    },
+    {
+        path: 'ui5/table/interactive-rows',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/table/examples/interactive-rows-sample').then(
+                (m) => m.InteractiveRowsTableSample
+            )
+    },
+    {
+        path: 'ui5/table/no-data',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/table/examples/no-data-sample').then(
+                (m) => m.NoDataTableSample
+            )
+    },
+    {
+        path: 'ui5/table/overflow-mode',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/table/examples/overflow-mode-sample').then(
+                (m) => m.OverflowModeTableSample
+            )
+    },
+    {
+        path: 'ui5/table/row-action',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/table/examples/row-action-sample').then(
+                (m) => m.RowActionTableSample
+            )
+    },
+    {
+        path: 'ui5/table/selectable',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/table/examples/selectable-sample').then(
+                (m) => m.SelectableTableSample
+            )
+    },
+    {
+        path: 'ui5/table/sticky-header',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/table/examples/sticky-header-sample').then(
+                (m) => m.StickyHeaderTableSample
+            )
+    },
+    {
+        path: 'ui5/tag/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/tag/examples/basic-sample').then((m) => m.TagBasicSample)
+    },
+    {
+        path: 'ui5/text-area/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/text-area/examples/basic-sample').then(
+                (m) => m.TextAreaBasicSample
+            )
+    },
+    {
+        path: 'ui5/text/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/text/examples/basic-sample').then((m) => m.TextBasicSample)
+    },
+    {
+        path: 'ui5/time-picker/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/time-picker/examples/basic-sample').then(
+                (m) => m.TimePickerBasicSample
+            )
+    },
+    {
+        path: 'ui5/title/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/title/examples/basic-sample').then(
+                (m) => m.TitleBasicSample
+            )
+    },
+    {
+        path: 'ui5/toast/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/toast/examples/basic-sample').then(
+                (m) => m.ToastBasicSample
+            )
+    },
+    {
+        path: 'ui5/toggle-button/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/toggle-button/examples/basic-sample').then(
+                (m) => m.ToggleButtonBasicSample
+            )
+    },
+    {
+        path: 'ui5/token/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/token/examples/basic-sample').then(
+                (m) => m.TokenBasicSample
+            )
+    },
+    {
+        path: 'ui5/tokenizer/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/tokenizer/examples/basic-sample').then(
+                (m) => m.TokenizerBasicSample
+            )
+    },
+    {
+        path: 'ui5/toolbar/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/toolbar/examples/basic-sample').then(
+                (m) => m.ToolbarBasicSample
+            )
+    },
+    {
+        path: 'ui5/tree/basic',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/tree/examples/basic-sample').then((m) => m.TreeBasicSample)
     }
 ];

@@ -327,6 +327,22 @@
         {
             "route": "platform/vhd/strategy-labels",
             "reason": "compilation error in docs example"
+        },
+        {
+            "route": "ui5-fiori/navigation-layout/navigation-layout",
+            "reason": "compilation error in docs example"
+        },
+        {
+            "route": "ui5-fiori/notification-list/basic",
+            "reason": "compilation error in docs example"
+        },
+        {
+            "route": "ui5/expandable-text/basic",
+            "reason": "compilation error in docs example"
+        },
+        {
+            "route": "ui5/table/growing",
+            "reason": "compilation error in docs example"
         }
     ]
 }

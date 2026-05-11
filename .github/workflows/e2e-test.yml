@@ -109,7 +109,7 @@ jobs:
     e2e:
         needs: [detect-scope, verify-routes]
         runs-on: ubuntu-latest
-        timeout-minutes: 25
+        timeout-minutes: 40
         name: 'Playwright E2E (${{ matrix.shard }})'
         permissions:
             contents: write
@@ -125,6 +125,9 @@ jobs:
             - uses: ./.github/actions/nodejs
               with:
                   node-version: ${{ env.NODE_VERSION }}
+
+            - name: Generate ui5-webcomponents
+              run: yarn generate:ui5
 
             - name: Install Playwright browsers
               run: npx playwright install chromium --with-deps

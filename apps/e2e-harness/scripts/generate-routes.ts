@@ -50,26 +50,15 @@ function buildRoutesJson(examples: ExampleMetadata[]): object {
     };
 }
 
-const UI5_LIBRARY_PREFIX = 'ui5';
-
 function main(): void {
     console.log('Discovering example components...');
     const allExamples = discoverExamples(WORKSPACE_ROOT);
     console.log(`Found ${allExamples.length} example components.`);
 
     const skipList = loadSkipList();
-    const examples = allExamples.filter((ex) => {
-        if (ex.library.startsWith(UI5_LIBRARY_PREFIX)) {return false;}
-        if (skipList.has(ex.routePath)) {return false;}
-        return true;
-    });
-    const ui5Count = allExamples.filter((ex) => ex.library.startsWith(UI5_LIBRARY_PREFIX)).length;
-    const skipCount = allExamples.length - examples.length - ui5Count;
-    if (ui5Count > 0) {
-        console.log(`Excluded ${ui5Count} ui5-webcomponents routes (source is auto-generated/gitignored).`);
-    }
-    if (skipCount > 0) {
-        console.log(`Skipped ${skipCount} routes (see e2e.skip.json).`);
+    const examples = allExamples.filter((ex) => !skipList.has(ex.routePath));
+    if (skipList.size > 0) {
+        console.log(`Skipped ${allExamples.length - examples.length} routes (see e2e.skip.json).`);
     }
 
     // Write generated routes TS file
