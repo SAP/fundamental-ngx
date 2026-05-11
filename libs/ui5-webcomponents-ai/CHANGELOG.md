@@ -1,3 +1,27 @@
+## 0.62.2-rc.9 (2026-05-11)
+
+This was a version bump only for ui5-webcomponents-ai to align it with other projects, there were no code changes.
+
+## 0.62.2-rc.8 (2026-05-08)
+
+This was a version bump only for ui5-webcomponents-ai to align it with other projects, there were no code changes.
+
+## 0.62.2-rc.7 (2026-05-08)
+
+This was a version bump only for ui5-webcomponents-ai to align it with other projects, there were no code changes.
+
+## 0.62.2-rc.6 (2026-05-08)
+
+This was a version bump only for ui5-webcomponents-ai to align it with other projects, there were no code changes.
+
+## 0.62.2-rc.5 (2026-05-08)
+
+This was a version bump only for ui5-webcomponents-ai to align it with other projects, there were no code changes.
+
+## 0.62.2-rc.4 (2026-05-08)
+
+This was a version bump only for ui5-webcomponents-ai to align it with other projects, there were no code changes.
+
 ## 0.62.2-rc.3 (2026-05-05)
 
 This was a version bump only for ui5-webcomponents-ai to align it with other projects, there were no code changes.

@@ -65,8 +65,9 @@ export function addEntryToDocsRoutes(
                                     span,
                                     callee: {
                                         type: 'Import',
-                                        span
-                                    },
+                                        span,
+                                        phase: 'evaluation'
+                                    } as any,
                                     arguments: [
                                         {
                                             expression: {

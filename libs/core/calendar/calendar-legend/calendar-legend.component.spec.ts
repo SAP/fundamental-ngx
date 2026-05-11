@@ -181,6 +181,18 @@ describe('CalendarLegendComponent', () => {
         });
     });
 
+    describe('accessibility', () => {
+        it('should have role="list" on the host element', () => {
+            const legendElement = fixture.debugElement.query(By.directive(CalendarLegendComponent));
+            expect(legendElement.nativeElement.getAttribute('role')).toBe('list');
+        });
+
+        it('should have an aria-label on the host element', () => {
+            const legendElement = fixture.debugElement.query(By.directive(CalendarLegendComponent));
+            expect(legendElement.nativeElement.getAttribute('aria-label')).toBeTruthy();
+        });
+    });
+
     describe('CSS classes and styling', () => {
         it('should apply column layout class when col is true', () => {
             host.col.set(true);

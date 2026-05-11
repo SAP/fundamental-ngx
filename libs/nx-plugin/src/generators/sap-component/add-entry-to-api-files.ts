@@ -1,5 +1,12 @@
 import { ProjectGraphProjectNode, Tree } from '@nx/devkit';
-import { ExportDeclaration, ObjectExpression, VariableDeclaration, parseSync, printSync } from '@swc/core';
+import {
+    ExportDeclaration,
+    ObjectExpression,
+    TsConstAssertion,
+    VariableDeclaration,
+    parseSync,
+    printSync
+} from '@swc/core';
 import { join } from 'path';
 import { GenerationContext } from './generation-context';
 
@@ -20,9 +27,12 @@ export function addEntryToApiFiles(
             n.declaration.declarations[0].id.value === 'API_FILES'
     ) as ExportDeclaration;
 
-    (
-        (apiFilesVariableDeclaration.declaration as VariableDeclaration).declarations[0].init as ObjectExpression
-    ).properties.push({
+    const init = (apiFilesVariableDeclaration.declaration as VariableDeclaration).declarations[0].init;
+    const objectExpression = (
+        init?.type === 'TsConstAssertion' ? (init as TsConstAssertion).expression : init
+    ) as ObjectExpression;
+
+    objectExpression.properties.push({
         type: 'KeyValueProperty',
         key: {
             type: 'Identifier',

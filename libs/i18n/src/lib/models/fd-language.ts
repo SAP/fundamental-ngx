@@ -78,6 +78,12 @@ export interface FdLanguage {
 
         /** Label for non-work days in the calendar legend. */
         nonWorkDayLabel: FdLanguageKey;
+
+        /** Aria label for the calendar legend container. */
+        calendarLegendLabel: FdLanguageKey;
+
+        /** Aria role description for the calendar component. */
+        calendarRoleDescription: FdLanguageKey;
     };
     coreCard: {
         /** Aria description for an interactive card item in a list. */
@@ -827,6 +833,10 @@ export interface FdLanguage {
     };
     coreInfoLabel: {
         srOnlyText: FdLanguageKey;
+    };
+    coreRadio: {
+        /** Description for read-only radio buttons. */
+        readOnlyDescription: FdLanguageKey;
     };
     coreRatingIndicator: {
         ariaLabelReset: FdLanguageKey;

@@ -155,6 +155,10 @@ describe('CalendarLegendItemComponent', () => {
         it('should have tabindex attribute', () => {
             expect(nativeElement.getAttribute('tabindex')).toBe('0');
         });
+
+        it('should have role="listitem" on the host element', () => {
+            expect(nativeElement.getAttribute('role')).toBe('listitem');
+        });
     });
 
     describe('inject() usage', () => {
