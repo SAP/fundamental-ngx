@@ -30,7 +30,11 @@ export default defineConfig({
         {
             name: 'mobile',
             use: {
-                ...devices['iPhone SE']
+                ...devices['Desktop Chrome'],
+                viewport: { width: 375, height: 667 },
+                deviceScaleFactor: 2,
+                isMobile: true,
+                hasTouch: true
             },
             testMatch: /visual-responsive/
         },
