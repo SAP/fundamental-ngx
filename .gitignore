@@ -97,3 +97,5 @@ libs/ui5-webcomponents-fiori/index.ts
 # Playwright
 /playwright-report/
 /test-results/
+/test-results-*/
+/blob-report*/

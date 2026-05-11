@@ -12,6 +12,7 @@ on:
             - 'libs/ui5-webcomponents/**'
             - 'libs/ui5-webcomponents-fiori/**'
             - 'libs/ui5-webcomponents-ai/**'
+            - 'libs/docs/**'
             - 'apps/e2e-harness/**'
             - 'playwright.config.ts'
 
@@ -60,7 +61,7 @@ jobs:
                     if echo "$CHANGED" | grep -qE '^libs/(platform|docs/platform)/'; then
                       SHARDS+=("platform")
                     fi
-                    if echo "$CHANGED" | grep -qE '^libs/(cdk|btp|cx|i18n|ui5-webcomponents|docs/(cdk|btp|cx|i18n|ui5-webcomponents))/'; then
+                    if echo "$CHANGED" | grep -qE '^libs/(cdk|btp|cx|i18n|ui5-webcomponents(-fiori|-ai|-base)?|docs/(cdk|btp|cx|i18n|ui5-webcomponents(-fiori|-ai)?))/'; then
                       SHARDS+=("other")
                     fi
                   fi
@@ -106,7 +107,7 @@ jobs:
     e2e:
         needs: [detect-scope, verify-routes]
         runs-on: ubuntu-latest
-        timeout-minutes: 15
+        timeout-minutes: 25
         name: 'Playwright E2E (${{ matrix.shard }})'
         permissions:
             contents: write
@@ -141,6 +142,7 @@ jobs:
             - name: Run E2E tests
               env:
                   CI: true
+                  SHARD: ${{ matrix.shard }}
               run: npx playwright test --grep "${{ steps.filter.outputs.grep }}"
 
             - name: Upload blob report
@@ -156,7 +158,7 @@ jobs:
               uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
               with:
                   name: test-results-${{ matrix.shard }}
-                  path: test-results.json
+                  path: test-results-${{ matrix.shard }}.json
                   retention-days: 3
 
             - name: Commit missing Linux baselines
@@ -169,17 +171,26 @@ jobs:
                   shopt -s nullglob
                   for f in test-results/**/*-actual.png; do
                     BASENAME=$(basename "$f" | sed 's/-actual\.png/.png/')
-                    # Determine project from the test-results directory structure
+                    # Extract project name from test-results directory structure
+                    # Playwright creates dirs like: test-results/<test-path>-<projectName>/
                     TESTDIR=$(dirname "$f")
-                    for PROJECT in chromium high-contrast compact mobile tablet; do
-                      TARGET="$SNAPDIR/$PROJECT/$BASENAME"
-                      if [ ! -f "$TARGET" ]; then
-                        mkdir -p "$SNAPDIR/$PROJECT"
-                        cp "$f" "$TARGET"
-                        MISSING=true
+                    DIRNAME=$(basename "$TESTDIR")
+                    PROJECT=""
+                    for P in chromium high-contrast compact mobile tablet; do
+                      if [[ "$DIRNAME" == *"-$P" ]]; then
+                        PROJECT="$P"
                         break
                       fi
                     done
+                    if [ -z "$PROJECT" ]; then
+                      continue
+                    fi
+                    TARGET="$SNAPDIR/$PROJECT/$BASENAME"
+                    if [ ! -f "$TARGET" ]; then
+                      mkdir -p "$SNAPDIR/$PROJECT"
+                      cp "$f" "$TARGET"
+                      MISSING=true
+                    fi
                   done
                   if [ "$MISSING" = "true" ]; then
                     git config user.name "github-actions"
@@ -285,7 +296,7 @@ jobs:
                     }
                   }
 
-                  let body = '## :accessibility: Accessibility Report\n\n';
+                  let body = '## ♿ Accessibility Report\n\n';
                   if (totalTests === 0) {
                     body += '_No a11y tests ran in this PR._\n';
                   } else {

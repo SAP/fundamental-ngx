@@ -5,8 +5,10 @@ export default defineConfig({
     fullyParallel: true,
     forbidOnly: !!process.env['CI'],
     retries: process.env['CI'] ? 2 : 1,
-    workers: process.env['CI'] ? 1 : undefined,
-    reporter: process.env['CI'] ? [['blob'], ['json', { outputFile: 'test-results.json' }]] : [['html']],
+    workers: process.env['CI'] ? 2 : undefined,
+    reporter: process.env['CI']
+        ? [['blob'], ['json', { outputFile: `test-results-${process.env['SHARD'] || 'default'}.json` }]]
+        : [['html']],
     snapshotPathTemplate: '{testDir}/snapshots/{platform}/{projectName}/{arg}{ext}',
     use: {
         baseURL: 'http://localhost:4400',
