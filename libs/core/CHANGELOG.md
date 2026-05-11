@@ -1,3 +1,13 @@
+## 0.62.2-rc.10 (2026-05-11)
+
+### 🩹 Fixes
+
+- **core:** allow disabled state for individual buttons inside a non-disabled segmented button ([#14187](https://github.com/SAP/fundamental-ngx/pull/14187))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
 ## 0.62.2-rc.9 (2026-05-11)
 
 This was a version bump only for core to align it with other projects, there were no code changes.
