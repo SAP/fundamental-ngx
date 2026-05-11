@@ -102,13 +102,6 @@ export const generatedRoutes: Routes = [
             ).then((m) => m.ToolLayoutBasicExampleComponent)
     },
     {
-        path: 'btp/tool-layout/phone-example',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/btp/tool-layout/examples/phone-example/tool-layout-phone-example.component'
-            ).then((m) => m.ToolLayoutPhoneExampleComponent)
-    },
-    {
         path: 'btp/tool-layout/tablet-example',
         loadComponent: () =>
             import(
@@ -331,13 +324,6 @@ export const generatedRoutes: Routes = [
             import(
                 '../../../../libs/docs/core/avatar-group-legacy/examples/avatar-group-legacy-individual-type-example.component'
             ).then((m) => m.AvatarGroupLegacyIndividualTypeExampleComponent)
-    },
-    {
-        path: 'core/avatar-group/default',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/core/avatar-group/examples/default/avatar-group-default-example.component'
-            ).then((m) => m.AvatarGroupDefaultExampleComponent)
     },
     {
         path: 'core/avatar-group/group-type',
@@ -620,20 +606,6 @@ export const generatedRoutes: Routes = [
             )
     },
     {
-        path: 'core/calendar/multi',
-        loadComponent: () =>
-            import('../../../../libs/docs/core/calendar/examples/calendar-multi-example.component').then(
-                (m) => m.CalendarMultiExampleComponent
-            )
-    },
-    {
-        path: 'core/calendar/multi-range',
-        loadComponent: () =>
-            import('../../../../libs/docs/core/calendar/examples/calendar-multi-range-example.component').then(
-                (m) => m.CalendarMultiRangeExampleComponent
-            )
-    },
-    {
         path: 'core/calendar/options',
         loadComponent: () =>
             import(
@@ -750,20 +722,6 @@ export const generatedRoutes: Routes = [
         loadComponent: () =>
             import('../../../../libs/docs/core/card/examples/card-loading/card-loading-example.component').then(
                 (m) => m.CardLoadingExampleComponent
-            )
-    },
-    {
-        path: 'core/card/media-banner-card',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/core/card/examples/media-banner-card/media-banner-card-example.component'
-            ).then((m) => m.MediaBannerCardExampleComponent)
-    },
-    {
-        path: 'core/card/media-card',
-        loadComponent: () =>
-            import('../../../../libs/docs/core/card/examples/media-card/media-card-example.component').then(
-                (m) => m.MediaCardExampleComponent
             )
     },
     {
@@ -1201,13 +1159,6 @@ export const generatedRoutes: Routes = [
             ).then((m) => m.DatePickerMobileModeExampleComponent)
     },
     {
-        path: 'core/date-picker/multi',
-        loadComponent: () =>
-            import('../../../../libs/docs/core/date-picker/examples/date-picker-multi-example.component').then(
-                (m) => m.DatePickerMultiExampleComponent
-            )
-    },
-    {
         path: 'core/date-picker/multi-disable-func',
         loadComponent: () =>
             import(
@@ -1241,27 +1192,6 @@ export const generatedRoutes: Routes = [
             import(
                 '../../../../libs/docs/core/date-picker/examples/date-picker-range-disabled-example/date-picker-range-disabled-example.component'
             ).then((m) => m.DatePickerRangeDisabledExampleComponent)
-    },
-    {
-        path: 'core/date-picker/single',
-        loadComponent: () =>
-            import('../../../../libs/docs/core/date-picker/examples/date-picker-single-example.component').then(
-                (m) => m.DatePickerSingleExampleComponent
-            )
-    },
-    {
-        path: 'core/date-picker/special-day',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/core/date-picker/examples/date-picker-special-day-example/date-picker-special-day-example.component'
-            ).then((m) => m.DatePickerSpecialDayExampleComponent)
-    },
-    {
-        path: 'core/date-picker/today-button',
-        loadComponent: () =>
-            import('../../../../libs/docs/core/date-picker/examples/date-picker-today-button-example.component').then(
-                (m) => m.DatePickerTodayButtonExampleComponent
-            )
     },
     {
         path: 'core/date-picker/update-on-blur',
@@ -1304,13 +1234,6 @@ export const generatedRoutes: Routes = [
             import(
                 '../../../../libs/docs/core/datetime-picker/examples/datetime-form-example/datetime-form-example.component'
             ).then((m) => m.DatetimeFormExampleComponent)
-    },
-    {
-        path: 'core/datetime-picker/datetime-format',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/core/datetime-picker/examples/datetime-format-example/datetime-format-example.component'
-            ).then((m) => m.DatetimeFormatExampleComponent)
     },
     {
         path: 'core/datetime-picker/datetime-mobile',
@@ -1460,13 +1383,6 @@ export const generatedRoutes: Routes = [
             )
     },
     {
-        path: 'core/dialog/template-based-dialog',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/core/dialog/examples/template-based/template-based-dialog-example.component'
-            ).then((m) => m.TemplateBasedDialogExampleComponent)
-    },
-    {
         path: 'core/dynamic-page/column-layout',
         loadComponent: () =>
             import(
@@ -1488,13 +1404,6 @@ export const generatedRoutes: Routes = [
             ).then((m) => m.DynamicPageDynamicContainerHeightExampleComponent)
     },
     {
-        path: 'core/dynamic-page/dynamic-page',
-        loadComponent: () =>
-            import('../../../../libs/docs/core/dynamic-page/examples/dynamic-page-example.component').then(
-                (m) => m.DynamicPageExampleComponent
-            )
-    },
-    {
         path: 'core/dynamic-page/facets',
         loadComponent: () =>
             import(
@@ -1507,20 +1416,6 @@ export const generatedRoutes: Routes = [
             import(
                 '../../../../libs/docs/core/dynamic-page/examples/dynamic-page-responsive-example/dynamic-page-responsive-example.component'
             ).then((m) => m.DynamicPageResponsiveExampleComponent)
-    },
-    {
-        path: 'core/dynamic-page/routing',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/core/dynamic-page/examples/dynamic-page-routing/dynamic-page-routing-example.component'
-            ).then((m) => m.DummyComponent)
-    },
-    {
-        path: 'core/dynamic-page/tabs',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/core/dynamic-page/examples/dynamic-page-tabs-example/dynamic-page-tabs-example.component'
-            ).then((m) => m.DynamicPageTabsExampleComponent)
     },
     {
         path: 'core/dynamic-side-content/basic',
@@ -1551,31 +1446,10 @@ export const generatedRoutes: Routes = [
             )
     },
     {
-        path: 'core/facets/facet-alignment',
-        loadComponent: () =>
-            import('../../../../libs/docs/core/facets/examples/facet-alignment-example.component').then(
-                (m) => m.FacetAlignmentExampleComponent
-            )
-    },
-    {
-        path: 'core/facets/facet-group',
-        loadComponent: () =>
-            import('../../../../libs/docs/core/facets/examples/facet-group-example.component').then(
-                (m) => m.FacetGroupExampleComponent
-            )
-    },
-    {
         path: 'core/facets/facet-loading',
         loadComponent: () =>
             import('../../../../libs/docs/core/facets/examples/facet-loading-example.component').then(
                 (m) => m.FacetLoadingExampleComponent
-            )
-    },
-    {
-        path: 'core/facets/form-facet',
-        loadComponent: () =>
-            import('../../../../libs/docs/core/facets/examples/form-facet-example.component').then(
-                (m) => m.FormFacetExampleComponent
             )
     },
     {
@@ -2118,13 +1992,6 @@ export const generatedRoutes: Routes = [
             ).then((m) => m.ListBylineStandardExampleComponent)
     },
     {
-        path: 'core/list-byline/unread',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/core/list-byline/examples/list-byline-unread-example/list-byline-unread-example.component'
-            ).then((m) => m.ListBylineUnreadExampleComponent)
-    },
-    {
         path: 'core/list-byline/wrap',
         loadComponent: () =>
             import(
@@ -2326,13 +2193,6 @@ export const generatedRoutes: Routes = [
             import(
                 '../../../../libs/docs/core/message-box/examples/template-based/template-based-message-box-example.component'
             ).then((m) => m.TemplateBasedMessageBoxExampleComponent)
-    },
-    {
-        path: 'core/message-strip/alert',
-        loadComponent: () =>
-            import('../../../../libs/docs/core/message-strip/examples/message-strip-alert-example.component').then(
-                (m) => m.MessageStripAlertExampleComponent
-            )
     },
     {
         path: 'core/message-strip/auto-dismiss',
@@ -2580,13 +2440,6 @@ export const generatedRoutes: Routes = [
             ).then((m) => m.MultiInputDisplaywithExampleComponent)
     },
     {
-        path: 'core/multi-input/dropdown-width',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/core/multi-input/examples/multi-input-dropdown-width-example/multi-input-dropdown-width-example.component'
-            ).then((m) => m.MultiInputDropdownWidthExampleComponent)
-    },
-    {
         path: 'core/multi-input/filter',
         loadComponent: () =>
             import(
@@ -2641,13 +2494,6 @@ export const generatedRoutes: Routes = [
             import(
                 '../../../../libs/docs/core/notification/examples/component-as-content/notification-component-as-content-example.component'
             ).then((m) => m.NotificationComponentAsContentExampleComponent)
-    },
-    {
-        path: 'core/notification/group',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/core/notification/examples/notification-group/notification-group-example.component'
-            ).then((m) => m.NotificationGroupExampleComponent)
     },
     {
         path: 'core/notification/options',
@@ -2797,27 +2643,6 @@ export const generatedRoutes: Routes = [
             )
     },
     {
-        path: 'core/popover/closing',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/core/popover/examples/popover-closing-example/popover-closing-example.component'
-            ).then((m) => m.PopoverClosingExampleComponent)
-    },
-    {
-        path: 'core/popover/complex',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/core/popover/examples/popover-complex-example/popover-complex-example.component'
-            ).then((m) => m.PopoverComplexExampleComponent)
-    },
-    {
-        path: 'core/popover/container',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/core/popover/examples/popover-container-example/popover-container-example.component'
-            ).then((m) => m.PopoverContainerExampleComponent)
-    },
-    {
         path: 'core/popover/dialog',
         loadComponent: () =>
             import('../../../../libs/docs/core/popover/examples/popover-dialog/popover-dialog-example.component').then(
@@ -2844,20 +2669,6 @@ export const generatedRoutes: Routes = [
             import(
                 '../../../../libs/docs/core/popover/examples/popover-dynamic-container-height/popover-dynamic-container-height-example.component'
             ).then((m) => m.PopoverDynamicContainerHeightExampleComponent)
-    },
-    {
-        path: 'core/popover/focus',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/core/popover/examples/popover-focus-example/popover-focus-example.component'
-            ).then((m) => m.PopoverFocusExampleComponent)
-    },
-    {
-        path: 'core/popover/inside-popover',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/core/popover/examples/popover-inside-popover/popover-inside-popover-example.component'
-            ).then((m) => m.PopoverInsidePopoverExampleComponent)
     },
     {
         path: 'core/popover/lazy-init-of-body',
@@ -3126,13 +2937,6 @@ export const generatedRoutes: Routes = [
             ).then((m) => m.SelectSemanticStateExampleComponent)
     },
     {
-        path: 'core/settings-dialog/template-based-settings-byline',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/core/settings-dialog/examples/template-based-settings-byline/template-based-settings-dialog-byline-example.component'
-            ).then((m) => m.TemplateBasedSettingsDialogBylineExampleComponent)
-    },
-    {
         path: 'core/settings-dialog/template-based-settings-dialog',
         loadComponent: () =>
             import(
@@ -3154,32 +2958,11 @@ export const generatedRoutes: Routes = [
             ).then((m) => m.ShellbarBrandingContextAreaExampleComponent)
     },
     {
-        path: 'core/shellbar/collapsible',
-        loadComponent: () =>
-            import('../../../../libs/docs/core/shellbar/examples/shellbar-collapsible-example.component').then(
-                (m) => m.ShellbarCollapsibleExampleComponent
-            )
-    },
-    {
-        path: 'core/shellbar/complex-search-results',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/core/shellbar/examples/shellbar-complex-search-results-example.component'
-            ).then((m) => m.ShellbarComplexSearchResultsExampleComponent)
-    },
-    {
         path: 'core/shellbar/growing-group',
         loadComponent: () =>
             import(
                 '../../../../libs/docs/core/shellbar/examples/shellbar-growing-group-example/shellbar-growing-group-example.component'
             ).then((m) => m.ShellbarGrowingGroupExampleComponent)
-    },
-    {
-        path: 'core/shellbar/responsive',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/core/shellbar/examples/shellbar-responsive-example/shellbar-responsive-example.component'
-            ).then((m) => m.ShellbarResponsiveExampleComponent)
     },
     {
         path: 'core/side-navigation/condensed',
@@ -3490,20 +3273,6 @@ export const generatedRoutes: Routes = [
             )
     },
     {
-        path: 'core/table/no-data',
-        loadComponent: () =>
-            import('../../../../libs/docs/core/table/examples/no-data/no-data-example.component').then(
-                (m) => m.NoDataExampleComponent
-            )
-    },
-    {
-        path: 'core/table/page-scroll',
-        loadComponent: () =>
-            import('../../../../libs/docs/core/table/examples/table-page-scroll-example.component').then(
-                (m) => m.TablePageScrollExampleComponent
-            )
-    },
-    {
         path: 'core/table/pagination',
         loadComponent: () =>
             import('../../../../libs/docs/core/table/examples/table-pagination-example.component').then(
@@ -3588,39 +3357,11 @@ export const generatedRoutes: Routes = [
             ).then((m) => m.TabCollapsibleOverflowExampleComponent)
     },
     {
-        path: 'core/tabs/tab-counter',
-        loadComponent: () =>
-            import('../../../../libs/docs/core/tabs/examples/tab-counter-example/tab-counter-example.component').then(
-                (m) => m.TabCounterComponent
-            )
-    },
-    {
-        path: 'core/tabs/tab-filter',
-        loadComponent: () =>
-            import('../../../../libs/docs/core/tabs/examples/tab-filter-example/tab-filter-example.component').then(
-                (m) => m.TabFilterExampleComponent
-            )
-    },
-    {
         path: 'core/tabs/tab-form-element',
         loadComponent: () =>
             import(
                 '../../../../libs/docs/core/tabs/examples/tab-form-element-example/tab-form-element-example.component'
             ).then((m) => m.TabFormElementExampleComponent)
-    },
-    {
-        path: 'core/tabs/tab-icon-only',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/core/tabs/examples/tab-icon-only-example/tab-icon-only-example.component'
-            ).then((m) => m.TabIconOnlyExampleComponent)
-    },
-    {
-        path: 'core/tabs/tab-process',
-        loadComponent: () =>
-            import('../../../../libs/docs/core/tabs/examples/tab-process-example/tab-process-example.component').then(
-                (m) => m.TabProcessExampleComponent
-            )
     },
     {
         path: 'core/tabs/tab-selection',
@@ -3635,13 +3376,6 @@ export const generatedRoutes: Routes = [
             import(
                 '../../../../libs/docs/core/tabs/examples/tab-stacked-content-example/tab-stacked-content-example.component'
             ).then((m) => m.TabStackedContentExampleComponent)
-    },
-    {
-        path: 'core/tabs/tabs',
-        loadComponent: () =>
-            import('../../../../libs/docs/core/tabs/examples/tabs-example/tabs-example.component').then(
-                (m) => m.TabsExampleComponent
-            )
     },
     {
         path: 'core/textarea/form-group',
@@ -3686,13 +3420,6 @@ export const generatedRoutes: Routes = [
             )
     },
     {
-        path: 'core/tile/kpi-tile',
-        loadComponent: () =>
-            import('../../../../libs/docs/core/tile/examples/kpi-tile-example.component').then(
-                (m) => m.KpiTileExampleComponent
-            )
-    },
-    {
         path: 'core/tile/launch-tile',
         loadComponent: () =>
             import('../../../../libs/docs/core/tile/examples/launch-tile-example.component').then(
@@ -3732,13 +3459,6 @@ export const generatedRoutes: Routes = [
         loadComponent: () =>
             import('../../../../libs/docs/core/time-picker/examples/time-picker-form-example.component').then(
                 (m) => m.TimePickerFormExampleComponent
-            )
-    },
-    {
-        path: 'core/time-picker/format',
-        loadComponent: () =>
-            import('../../../../libs/docs/core/time-picker/examples/time-picker-format-example.component').then(
-                (m) => m.TimePickerFormatExampleComponent
             )
     },
     {
@@ -4099,81 +3819,11 @@ export const generatedRoutes: Routes = [
             )
     },
     {
-        path: 'cx/side-navigation/cozy-wide-icon-3-level',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/cx/side-navigation/examples/side-navigation-cozy-wide-icon-3-level-example.component'
-            ).then((m) => m.SideNavigationCozyWideIcon3LevelExampleComponent)
-    },
-    {
         path: 'cx/side-navigation/cozy-wide-text-only-1-level',
         loadComponent: () =>
             import(
                 '../../../../libs/docs/cx/side-navigation/examples/side-navigation-cozy-wide-text-only-1-level-example.component'
             ).then((m) => m.SideNavigationCozyWideTextOnly1LevelExampleComponent)
-    },
-    {
-        path: 'cx/side-navigation/cozy-wide-text-only-3-level',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/cx/side-navigation/examples/side-navigation-cozy-wide-text-only-3-level-example.component'
-            ).then((m) => m.SideNavigationCozyWideTextOnly3LevelExampleComponent)
-    },
-    {
-        path: 'cx/side-navigation/dynamic-width',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/cx/side-navigation/examples/side-navigation-dynamic-width-example.component'
-            ).then((m) => m.SideNavigationDynamicWidthExampleComponent)
-    },
-    {
-        path: 'cx/side-navigation/expand-collapse',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/cx/side-navigation/examples/side-navigation-expand-collapse-example.component'
-            ).then((m) => m.SideNavigationCollapseExampleComponent)
-    },
-    {
-        path: 'cx/side-navigation/filter',
-        loadComponent: () =>
-            import('../../../../libs/docs/cx/side-navigation/examples/side-navigation-filter-example.component').then(
-                (m) => m.SideNavigationFilterExampleComponent
-            )
-    },
-    {
-        path: 'cx/side-navigation/mobile',
-        loadComponent: () =>
-            import('../../../../libs/docs/cx/side-navigation/examples/side-navigation-mobile-example.component').then(
-                (m) => m.SideNavigationMobileExampleComponent
-            )
-    },
-    {
-        path: 'cx/side-navigation/narrow',
-        loadComponent: () =>
-            import('../../../../libs/docs/cx/side-navigation/examples/side-navigation-narrow-example.component').then(
-                (m) => m.SideNavigationNarrowExampleComponent
-            )
-    },
-    {
-        path: 'cx/side-navigation/overflow',
-        loadComponent: () =>
-            import('../../../../libs/docs/cx/side-navigation/examples/side-navigation-overflow-example.component').then(
-                (m) => m.SideNavigationOverflowExampleComponent
-            )
-    },
-    {
-        path: 'cx/side-navigation/shellbar',
-        loadComponent: () =>
-            import('../../../../libs/docs/cx/side-navigation/examples/side-navigation-shellbar-example.component').then(
-                (m) => m.SideNavigationShellbarExampleComponent
-            )
-    },
-    {
-        path: 'cx/side-navigation/wide-icon-1-level',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/cx/side-navigation/examples/side-navigation-wide-icon-1-level-example.component'
-            ).then((m) => m.SideNavigationWideIcon1LevelExampleComponent)
     },
     {
         path: 'i18n/changing-translations/i18n-auto-detect-example',
@@ -4211,20 +3861,6 @@ export const generatedRoutes: Routes = [
             ).then((m) => m.LocaleOverrideExampleComponent)
     },
     {
-        path: 'i18n/changing-translations/i18n-migration-example',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/i18n/changing-translations/examples/i18n-migration-example/migration-example.component'
-            ).then((m) => m.MigrationExampleComponent)
-    },
-    {
-        path: 'i18n/getting-started/getting-started',
-        loadComponent: () =>
-            import('../../../../libs/docs/i18n/getting-started/examples/getting-started-example.component').then(
-                (m) => m.GettingStartedExampleComponent
-            )
-    },
-    {
         path: 'i18n/loading-translations/basic-usage',
         loadComponent: () =>
             import(
@@ -4246,13 +3882,6 @@ export const generatedRoutes: Routes = [
             ).then((m) => m.PropertiesLoadingExampleComponent)
     },
     {
-        path: 'i18n/patching-translations/i18n-patch-language-provider-example',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/i18n/patching-translations/examples/i18n-patch-language-provider-example/patch-language-provider-example.component'
-            ).then((m) => m.PatchLanguageProviderExampleComponent)
-    },
-    {
         path: 'i18n/patching-translations/i18n-translation-customization',
         loadComponent: () =>
             import(
@@ -4265,13 +3894,6 @@ export const generatedRoutes: Routes = [
             import('../../../../libs/docs/i18n/translation-resolver/examples/basic-usage-example.component').then(
                 (m) => m.BasicUsageExampleComponent
             )
-    },
-    {
-        path: 'i18n/translation-resolver/pipe-parameters',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/i18n/translation-resolver/examples/pipe-parameters-example/pipe-parameters-example.component'
-            ).then((m) => m.PipeParametersExampleComponent)
     },
     {
         path: 'i18n/translation-resolver/using-translation-pipe',
@@ -4293,13 +3915,6 @@ export const generatedRoutes: Routes = [
             import(
                 '../../../../libs/docs/platform/action-list-item/examples/platform-action-list-item-example.component'
             ).then((m) => m.PlatformActionListItemExampleComponent)
-    },
-    {
-        path: 'platform/action-list-item/border-less',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/platform/action-list-item/examples/platform-action-list-item-border-less-example.component'
-            ).then((m) => m.PlatformActionListItemBorderLessExampleComponent)
     },
     {
         path: 'platform/approval-flow/approval-flow',
@@ -4370,13 +3985,6 @@ export const generatedRoutes: Routes = [
             import(
                 '../../../../libs/docs/platform/combobox/examples/combobox-states/combobox-states-example.component'
             ).then((m) => m.ComboboxStateComponent)
-    },
-    {
-        path: 'platform/combobox/templates',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/platform/combobox/examples/combobox-templates/combobox-templates-example.component'
-            ).then((m) => m.ComboboxTemplatesExampleComponent)
     },
     {
         path: 'platform/date-picker/date-picker',
@@ -4489,13 +4097,6 @@ export const generatedRoutes: Routes = [
             import('../../../../libs/docs/platform/dynamic-page/examples/platform-dynamic-page-example.component').then(
                 (m) => m.PlatformDynamicPageExampleComponent
             )
-    },
-    {
-        path: 'platform/dynamic-page/facets',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/platform/dynamic-page/examples/platform-dynamic-page-facets-example.component'
-            ).then((m) => m.PlatformDynamicPageFacetsExampleComponent)
     },
     {
         path: 'platform/dynamic-page/flexible-column',
@@ -4743,13 +4344,6 @@ export const generatedRoutes: Routes = [
             ).then((m) => m.PlatformIconTabBarIconTypeExampleComponent)
     },
     {
-        path: 'platform/icon-tab-bar/process-type',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/platform/icon-tab-bar/examples/platform-icon-tab-bar-process-type-example/platform-icon-tab-bar-process-type-example.component'
-            ).then((m) => m.PlatformIconTabBarProcessTypeExampleComponent)
-    },
-    {
         path: 'platform/icon-tab-bar/tabs-content',
         loadComponent: () =>
             import(
@@ -4862,13 +4456,6 @@ export const generatedRoutes: Routes = [
             )
     },
     {
-        path: 'platform/list/list',
-        loadComponent: () =>
-            import('../../../../libs/docs/platform/list/examples/platform-list-example.component').then(
-                (m) => m.PlatformListExampleComponent
-            )
-    },
-    {
         path: 'platform/list/loading',
         loadComponent: () =>
             import('../../../../libs/docs/platform/list/examples/loading/platform-list-loading-example.component').then(
@@ -4890,13 +4477,6 @@ export const generatedRoutes: Routes = [
             ).then((m) => m.PlatformListWithDeleteButtonExampleComponent)
     },
     {
-        path: 'platform/list/with-footer',
-        loadComponent: () =>
-            import('../../../../libs/docs/platform/list/examples/platform-list-with-footer-example.component').then(
-                (m) => m.PlatformListWithFooterExampleComponent
-            )
-    },
-    {
         path: 'platform/list/with-infinite-scroll',
         loadComponent: () =>
             import(
@@ -4904,25 +4484,11 @@ export const generatedRoutes: Routes = [
             ).then((m) => m.PlatformListWithInfiniteScrollExampleComponent)
     },
     {
-        path: 'platform/list/with-item-counter',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/platform/list/examples/platform-list-with-item-counter-example.component'
-            ).then((m) => m.PlatformListWithItemCounterExampleComponent)
-    },
-    {
         path: 'platform/list/with-more-button',
         loadComponent: () =>
             import(
                 '../../../../libs/docs/platform/list/examples/platform-list-with-more-button-example.component'
             ).then((m) => m.PlatformListWithMoreButtonExampleComponent)
-    },
-    {
-        path: 'platform/list/with-navigation',
-        loadComponent: () =>
-            import('../../../../libs/docs/platform/list/examples/platform-list-with-navigation-example.component').then(
-                (m) => m.PlatformListWithNavigationExampleComponent
-            )
     },
     {
         path: 'platform/list/with-selection',
@@ -4944,13 +4510,6 @@ export const generatedRoutes: Routes = [
             import('../../../../libs/docs/platform/menu-button/examples/platform-menu-button-example.component').then(
                 (m) => m.PlatformMenuButtonExampleComponent
             )
-    },
-    {
-        path: 'platform/menu-button/state',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/platform/menu-button/examples/platform-menu-button-state-example.component'
-            ).then((m) => m.PlatformMenuButtonStateExampleComponent)
     },
     {
         path: 'platform/menu/basic',
@@ -5317,13 +4876,6 @@ export const generatedRoutes: Routes = [
             ).then((m) => m.PlatformSelectMobileExampleComponent)
     },
     {
-        path: 'platform/select/mode',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/platform/select/examples/platform-select-mode-example/platform-select-mode-example.component'
-            ).then((m) => m.PlatformSelectModeExampleComponent)
-    },
-    {
         path: 'platform/select/none',
         loadComponent: () =>
             import(
@@ -5336,13 +4888,6 @@ export const generatedRoutes: Routes = [
             import(
                 '../../../../libs/docs/platform/select/examples/platform-select-nowrap/platform-select-nowrap-example.component'
             ).then((m) => m.PlatformSelectNoWrapExampleComponent)
-    },
-    {
-        path: 'platform/select/semantic-state',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/platform/select/examples/platform-select-semantic-state-example/platform-select-semantic-state-example.component'
-            ).then((m) => m.PlatformSelectSemanticStateExampleComponent)
     },
     {
         path: 'platform/settings-generator/custom-control',
@@ -5499,27 +5044,6 @@ export const generatedRoutes: Routes = [
             ).then((m) => m.PlatformDocsSplitMenuButtonTypesComponent)
     },
     {
-        path: 'platform/standard-list-item/border-less',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/platform/standard-list-item/examples/platform-standard-list-item-border-less-example.component'
-            ).then((m) => m.PlatformStandardListItemBorderLessExampleComponent)
-    },
-    {
-        path: 'platform/standard-list-item/standard-list-item',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/platform/standard-list-item/examples/platform-standard-list-item-example.component'
-            ).then((m) => m.PlatformStandardListItemExampleComponent)
-    },
-    {
-        path: 'platform/standard-list-item/standard-list-unread',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/platform/standard-list-item/examples/platform-standard-list-unread-example.component'
-            ).then((m) => m.PlatformStandardListUnreadExampleComponent)
-    },
-    {
         path: 'platform/standard-list-item/with-footer',
         loadComponent: () =>
             import(
@@ -5632,27 +5156,6 @@ export const generatedRoutes: Routes = [
             )
     },
     {
-        path: 'platform/table/custom-column',
-        loadComponent: () =>
-            import('../../../../libs/docs/platform/table/examples/platform-table-custom-column-example.component').then(
-                (m) => m.PlatformTableCustomColumnExampleComponent
-            )
-    },
-    {
-        path: 'platform/table/custom-pagination/custom-pagination',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/platform/table/examples/custom-pagination/table-custom-pagination-example.component'
-            ).then((m) => m.TableCustomPaginationExampleComponent)
-    },
-    {
-        path: 'platform/table/custom-pagination/custom-pagination-outer-scroll',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/platform/table/examples/custom-pagination/table-custom-pagination-outer-scroll-example.component'
-            ).then((m) => m.TableCustomPaginationOuterScrollExampleComponent)
-    },
-    {
         path: 'platform/table/custom-title',
         loadComponent: () =>
             import('../../../../libs/docs/platform/table/examples/platform-table-custom-title-example.component').then(
@@ -5664,13 +5167,6 @@ export const generatedRoutes: Routes = [
         loadComponent: () =>
             import('../../../../libs/docs/platform/table/examples/platform-table-custom-width-example.component').then(
                 (m) => m.PlatformTableCustomWidthExampleComponent
-            )
-    },
-    {
-        path: 'platform/table/default',
-        loadComponent: () =>
-            import('../../../../libs/docs/platform/table/examples/platform-table-default-example.component').then(
-                (m) => m.PlatformTableDefaultExampleComponent
             )
     },
     {
@@ -5758,13 +5254,6 @@ export const generatedRoutes: Routes = [
             ).then((m) => m.PlatformTableNoOuterBordersExampleComponent)
     },
     {
-        path: 'platform/table/outer-scroll',
-        loadComponent: () =>
-            import('../../../../libs/docs/platform/table/examples/platform-table-outer-scroll-example.component').then(
-                (m) => m.PlatformTableOuterScrollExampleComponent
-            )
-    },
-    {
         path: 'platform/table/p13-columns',
         loadComponent: () =>
             import('../../../../libs/docs/platform/table/examples/platform-table-p13-columns-example.component').then(
@@ -5847,13 +5336,6 @@ export const generatedRoutes: Routes = [
             import('../../../../libs/docs/platform/table/examples/platform-table-sortable-example.component').then(
                 (m) => m.PlatformTableSortableExampleComponent
             )
-    },
-    {
-        path: 'platform/table/standard-pagination',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/platform/table/examples/standard-pagination/platform-table-standard-pagination-example.component'
-            ).then((m) => m.PlatformTableStandardPaginationComponent)
     },
     {
         path: 'platform/table/tree',
@@ -5954,34 +5436,6 @@ export const generatedRoutes: Routes = [
             ).then((m) => m.VariantManagementTableExampleComponent)
     },
     {
-        path: 'platform/vhd/basic',
-        loadComponent: () =>
-            import('../../../../libs/docs/platform/vhd/examples/platform-vhd-basic-example.component').then(
-                (m) => m.PlatformVhdBasicExampleComponent
-            )
-    },
-    {
-        path: 'platform/vhd/column-template',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/platform/vhd/examples/column-template/platform-vhd-column-template-example.component'
-            ).then((m) => m.PlatformVhdColumnTemplateExampleComponent)
-    },
-    {
-        path: 'platform/vhd/initial-loading',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/platform/vhd/examples/initial-loading/platform-vhd-initial-loading-example.component'
-            ).then((m) => m.PlatformVhdInitialLoadingExampleComponent)
-    },
-    {
-        path: 'platform/vhd/input',
-        loadComponent: () =>
-            import('../../../../libs/docs/platform/vhd/examples/platform-vhd-input-example.component').then(
-                (m) => m.PlatformVhdInputExampleComponent
-            )
-    },
-    {
         path: 'platform/vhd/loading',
         loadComponent: () =>
             import('../../../../libs/docs/platform/vhd/examples/platform-vhd-loading-example.component').then(
@@ -6000,13 +5454,6 @@ export const generatedRoutes: Routes = [
         loadComponent: () =>
             import('../../../../libs/docs/platform/vhd/examples/platform-vhd-multi-input-example.component').then(
                 (m) => m.PlatformVhdMultiInputExampleComponent
-            )
-    },
-    {
-        path: 'platform/vhd/strategy-labels',
-        loadComponent: () =>
-            import('../../../../libs/docs/platform/vhd/examples/platform-vhd-strategy-labels-example.component').then(
-                (m) => m.PlatformVhdStrategyLabelExampleComponent
             )
     },
     {
@@ -6122,13 +5569,6 @@ export const generatedRoutes: Routes = [
             ).then((m) => m.WizardGeneratorVisibleSummaryBranchingExampleComponent)
     },
     {
-        path: 'ui5-ai/button/basic',
-        loadComponent: () =>
-            import('../../../../libs/docs/ui5-webcomponents-ai/button/examples/basic-sample').then(
-                (m) => m.BasicAiButtonSample
-            )
-    },
-    {
         path: 'ui5-fiori/barcode-scanner-dialog/barcode-scanner-dialog',
         loadComponent: () =>
             import(
@@ -6171,24 +5611,10 @@ export const generatedRoutes: Routes = [
             )
     },
     {
-        path: 'ui5-fiori/navigation-layout/navigation-layout',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/ui5-webcomponents-fiori/navigation-layout/examples/navigation-layout-sample'
-            ).then((m) => m.NavigationLayoutSample)
-    },
-    {
         path: 'ui5-fiori/notification-list/actions',
         loadComponent: () =>
             import('../../../../libs/docs/ui5-webcomponents-fiori/notification-list/examples/actions-sample').then(
                 (m) => m.ActionsSample
-            )
-    },
-    {
-        path: 'ui5-fiori/notification-list/basic',
-        loadComponent: () =>
-            import('../../../../libs/docs/ui5-webcomponents-fiori/notification-list/examples/basic-sample').then(
-                (m) => m.BasicSample
             )
     },
     {
@@ -6455,13 +5881,6 @@ export const generatedRoutes: Routes = [
         loadComponent: () =>
             import('../../../../libs/docs/ui5-webcomponents-fiori/user-menu/examples/menu-items-sample').then(
                 (m) => m.MenuItemsSample
-            )
-    },
-    {
-        path: 'ui5-fiori/user-settings-dialog/basic',
-        loadComponent: () =>
-            import('../../../../libs/docs/ui5-webcomponents-fiori/user-settings-dialog/examples/basic-sample').then(
-                (m) => m.BasicSample
             )
     },
     {
@@ -6771,13 +6190,6 @@ export const generatedRoutes: Routes = [
         loadComponent: () =>
             import('../../../../libs/docs/ui5-webcomponents/dynamic-date-range/examples/value-handling-sample').then(
                 (m) => m.ValueHandlingSample
-            )
-    },
-    {
-        path: 'ui5/expandable-text/basic',
-        loadComponent: () =>
-            import('../../../../libs/docs/ui5-webcomponents/expandable-text/examples/basic-sample').then(
-                (m) => m.ExpandableTextBasicExample
             )
     },
     {
@@ -7227,13 +6639,6 @@ export const generatedRoutes: Routes = [
         loadComponent: () =>
             import('../../../../libs/docs/ui5-webcomponents/table/examples/drag-and-drop-sample').then(
                 (m) => m.DragAndDropTableSample
-            )
-    },
-    {
-        path: 'ui5/table/growing',
-        loadComponent: () =>
-            import('../../../../libs/docs/ui5-webcomponents/table/examples/growing-sample').then(
-                (m) => m.GrowingTableSample
             )
     },
     {

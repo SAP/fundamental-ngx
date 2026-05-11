@@ -1,5 +1,5 @@
 {
-    "count": 1055,
+    "count": 970,
     "routes": [
         {
             "path": "btp/button/nested",
@@ -98,13 +98,6 @@
             "component": "tool-layout",
             "example": "basic-example",
             "className": "ToolLayoutBasicExampleComponent"
-        },
-        {
-            "path": "btp/tool-layout/phone-example",
-            "library": "btp",
-            "component": "tool-layout",
-            "example": "phone-example",
-            "className": "ToolLayoutPhoneExampleComponent"
         },
         {
             "path": "btp/tool-layout/tablet-example",
@@ -329,13 +322,6 @@
             "component": "avatar-group-legacy",
             "example": "individual-type",
             "className": "AvatarGroupLegacyIndividualTypeExampleComponent"
-        },
-        {
-            "path": "core/avatar-group/default",
-            "library": "core",
-            "component": "avatar-group",
-            "example": "default",
-            "className": "AvatarGroupDefaultExampleComponent"
         },
         {
             "path": "core/avatar-group/group-type",
@@ -618,20 +604,6 @@
             "className": "CalendarMondayStartExampleComponent"
         },
         {
-            "path": "core/calendar/multi",
-            "library": "core",
-            "component": "calendar",
-            "example": "multi",
-            "className": "CalendarMultiExampleComponent"
-        },
-        {
-            "path": "core/calendar/multi-range",
-            "library": "core",
-            "component": "calendar",
-            "example": "multi-range",
-            "className": "CalendarMultiRangeExampleComponent"
-        },
-        {
             "path": "core/calendar/options",
             "library": "core",
             "component": "calendar",
@@ -749,20 +721,6 @@
             "component": "card",
             "example": "loading",
             "className": "CardLoadingExampleComponent"
-        },
-        {
-            "path": "core/card/media-banner-card",
-            "library": "core",
-            "component": "card",
-            "example": "media-banner-card",
-            "className": "MediaBannerCardExampleComponent"
-        },
-        {
-            "path": "core/card/media-card",
-            "library": "core",
-            "component": "card",
-            "example": "media-card",
-            "className": "MediaCardExampleComponent"
         },
         {
             "path": "core/card/non-interactive-card",
@@ -1199,13 +1157,6 @@
             "className": "DatePickerMobileModeExampleComponent"
         },
         {
-            "path": "core/date-picker/multi",
-            "library": "core",
-            "component": "date-picker",
-            "example": "multi",
-            "className": "DatePickerMultiExampleComponent"
-        },
-        {
             "path": "core/date-picker/multi-disable-func",
             "library": "core",
             "component": "date-picker",
@@ -1239,27 +1190,6 @@
             "component": "date-picker",
             "example": "range-disabled",
             "className": "DatePickerRangeDisabledExampleComponent"
-        },
-        {
-            "path": "core/date-picker/single",
-            "library": "core",
-            "component": "date-picker",
-            "example": "single",
-            "className": "DatePickerSingleExampleComponent"
-        },
-        {
-            "path": "core/date-picker/special-day",
-            "library": "core",
-            "component": "date-picker",
-            "example": "special-day",
-            "className": "DatePickerSpecialDayExampleComponent"
-        },
-        {
-            "path": "core/date-picker/today-button",
-            "library": "core",
-            "component": "date-picker",
-            "example": "today-button",
-            "className": "DatePickerTodayButtonExampleComponent"
         },
         {
             "path": "core/date-picker/update-on-blur",
@@ -1302,13 +1232,6 @@
             "component": "datetime-picker",
             "example": "datetime-form",
             "className": "DatetimeFormExampleComponent"
-        },
-        {
-            "path": "core/datetime-picker/datetime-format",
-            "library": "core",
-            "component": "datetime-picker",
-            "example": "datetime-format",
-            "className": "DatetimeFormatExampleComponent"
         },
         {
             "path": "core/datetime-picker/datetime-mobile",
@@ -1458,13 +1381,6 @@
             "className": "DialogStateExampleComponent"
         },
         {
-            "path": "core/dialog/template-based-dialog",
-            "library": "core",
-            "component": "dialog",
-            "example": "template-based-dialog",
-            "className": "TemplateBasedDialogExampleComponent"
-        },
-        {
             "path": "core/dynamic-page/column-layout",
             "library": "core",
             "component": "dynamic-page",
@@ -1486,13 +1402,6 @@
             "className": "DynamicPageDynamicContainerHeightExampleComponent"
         },
         {
-            "path": "core/dynamic-page/dynamic-page",
-            "library": "core",
-            "component": "dynamic-page",
-            "example": "dynamic-page",
-            "className": "DynamicPageExampleComponent"
-        },
-        {
             "path": "core/dynamic-page/facets",
             "library": "core",
             "component": "dynamic-page",
@@ -1505,20 +1414,6 @@
             "component": "dynamic-page",
             "example": "responsive",
             "className": "DynamicPageResponsiveExampleComponent"
-        },
-        {
-            "path": "core/dynamic-page/routing",
-            "library": "core",
-            "component": "dynamic-page",
-            "example": "routing",
-            "className": "DummyComponent"
-        },
-        {
-            "path": "core/dynamic-page/tabs",
-            "library": "core",
-            "component": "dynamic-page",
-            "example": "tabs",
-            "className": "DynamicPageTabsExampleComponent"
         },
         {
             "path": "core/dynamic-side-content/basic",
@@ -1549,32 +1444,11 @@
             "className": "CustomFacetExampleComponent"
         },
         {
-            "path": "core/facets/facet-alignment",
-            "library": "core",
-            "component": "facets",
-            "example": "facet-alignment",
-            "className": "FacetAlignmentExampleComponent"
-        },
-        {
-            "path": "core/facets/facet-group",
-            "library": "core",
-            "component": "facets",
-            "example": "facet-group",
-            "className": "FacetGroupExampleComponent"
-        },
-        {
             "path": "core/facets/facet-loading",
             "library": "core",
             "component": "facets",
             "example": "facet-loading",
             "className": "FacetLoadingExampleComponent"
-        },
-        {
-            "path": "core/facets/form-facet",
-            "library": "core",
-            "component": "facets",
-            "example": "form-facet",
-            "className": "FormFacetExampleComponent"
         },
         {
             "path": "core/feed-input/circle-avatar",
@@ -2116,13 +1990,6 @@
             "className": "ListBylineStandardExampleComponent"
         },
         {
-            "path": "core/list-byline/unread",
-            "library": "core",
-            "component": "list-byline",
-            "example": "unread",
-            "className": "ListBylineUnreadExampleComponent"
-        },
-        {
             "path": "core/list-byline/wrap",
             "library": "core",
             "component": "list-byline",
@@ -2324,13 +2191,6 @@
             "component": "message-box",
             "example": "template-based-message-box",
             "className": "TemplateBasedMessageBoxExampleComponent"
-        },
-        {
-            "path": "core/message-strip/alert",
-            "library": "core",
-            "component": "message-strip",
-            "example": "alert",
-            "className": "MessageStripAlertExampleComponent"
         },
         {
             "path": "core/message-strip/auto-dismiss",
@@ -2578,13 +2438,6 @@
             "className": "MultiInputDisplaywithExampleComponent"
         },
         {
-            "path": "core/multi-input/dropdown-width",
-            "library": "core",
-            "component": "multi-input",
-            "example": "dropdown-width",
-            "className": "MultiInputDropdownWidthExampleComponent"
-        },
-        {
             "path": "core/multi-input/filter",
             "library": "core",
             "component": "multi-input",
@@ -2639,13 +2492,6 @@
             "component": "notification",
             "example": "component-as-content",
             "className": "NotificationComponentAsContentExampleComponent"
-        },
-        {
-            "path": "core/notification/group",
-            "library": "core",
-            "component": "notification",
-            "example": "group",
-            "className": "NotificationGroupExampleComponent"
         },
         {
             "path": "core/notification/options",
@@ -2795,27 +2641,6 @@
             "className": "PanelTransparentExampleComponent"
         },
         {
-            "path": "core/popover/closing",
-            "library": "core",
-            "component": "popover",
-            "example": "closing",
-            "className": "PopoverClosingExampleComponent"
-        },
-        {
-            "path": "core/popover/complex",
-            "library": "core",
-            "component": "popover",
-            "example": "complex",
-            "className": "PopoverComplexExampleComponent"
-        },
-        {
-            "path": "core/popover/container",
-            "library": "core",
-            "component": "popover",
-            "example": "container",
-            "className": "PopoverContainerExampleComponent"
-        },
-        {
             "path": "core/popover/dialog",
             "library": "core",
             "component": "popover",
@@ -2842,20 +2667,6 @@
             "component": "popover",
             "example": "dynamic-container-height",
             "className": "PopoverDynamicContainerHeightExampleComponent"
-        },
-        {
-            "path": "core/popover/focus",
-            "library": "core",
-            "component": "popover",
-            "example": "focus",
-            "className": "PopoverFocusExampleComponent"
-        },
-        {
-            "path": "core/popover/inside-popover",
-            "library": "core",
-            "component": "popover",
-            "example": "inside-popover",
-            "className": "PopoverInsidePopoverExampleComponent"
         },
         {
             "path": "core/popover/lazy-init-of-body",
@@ -3124,13 +2935,6 @@
             "className": "SelectSemanticStateExampleComponent"
         },
         {
-            "path": "core/settings-dialog/template-based-settings-byline",
-            "library": "core",
-            "component": "settings-dialog",
-            "example": "template-based-settings-byline",
-            "className": "TemplateBasedSettingsDialogBylineExampleComponent"
-        },
-        {
             "path": "core/settings-dialog/template-based-settings-dialog",
             "library": "core",
             "component": "settings-dialog",
@@ -3152,32 +2956,11 @@
             "className": "ShellbarBrandingContextAreaExampleComponent"
         },
         {
-            "path": "core/shellbar/collapsible",
-            "library": "core",
-            "component": "shellbar",
-            "example": "collapsible",
-            "className": "ShellbarCollapsibleExampleComponent"
-        },
-        {
-            "path": "core/shellbar/complex-search-results",
-            "library": "core",
-            "component": "shellbar",
-            "example": "complex-search-results",
-            "className": "ShellbarComplexSearchResultsExampleComponent"
-        },
-        {
             "path": "core/shellbar/growing-group",
             "library": "core",
             "component": "shellbar",
             "example": "growing-group",
             "className": "ShellbarGrowingGroupExampleComponent"
-        },
-        {
-            "path": "core/shellbar/responsive",
-            "library": "core",
-            "component": "shellbar",
-            "example": "responsive",
-            "className": "ShellbarResponsiveExampleComponent"
         },
         {
             "path": "core/side-navigation/condensed",
@@ -3488,20 +3271,6 @@
             "className": "TableNavigatableRowExampleComponent"
         },
         {
-            "path": "core/table/no-data",
-            "library": "core",
-            "component": "table",
-            "example": "no-data",
-            "className": "NoDataExampleComponent"
-        },
-        {
-            "path": "core/table/page-scroll",
-            "library": "core",
-            "component": "table",
-            "example": "page-scroll",
-            "className": "TablePageScrollExampleComponent"
-        },
-        {
             "path": "core/table/pagination",
             "library": "core",
             "component": "table",
@@ -3586,39 +3355,11 @@
             "className": "TabCollapsibleOverflowExampleComponent"
         },
         {
-            "path": "core/tabs/tab-counter",
-            "library": "core",
-            "component": "tabs",
-            "example": "tab-counter",
-            "className": "TabCounterComponent"
-        },
-        {
-            "path": "core/tabs/tab-filter",
-            "library": "core",
-            "component": "tabs",
-            "example": "tab-filter",
-            "className": "TabFilterExampleComponent"
-        },
-        {
             "path": "core/tabs/tab-form-element",
             "library": "core",
             "component": "tabs",
             "example": "tab-form-element",
             "className": "TabFormElementExampleComponent"
-        },
-        {
-            "path": "core/tabs/tab-icon-only",
-            "library": "core",
-            "component": "tabs",
-            "example": "tab-icon-only",
-            "className": "TabIconOnlyExampleComponent"
-        },
-        {
-            "path": "core/tabs/tab-process",
-            "library": "core",
-            "component": "tabs",
-            "example": "tab-process",
-            "className": "TabProcessExampleComponent"
         },
         {
             "path": "core/tabs/tab-selection",
@@ -3633,13 +3374,6 @@
             "component": "tabs",
             "example": "tab-stacked-content",
             "className": "TabStackedContentExampleComponent"
-        },
-        {
-            "path": "core/tabs/tabs",
-            "library": "core",
-            "component": "tabs",
-            "example": "tabs",
-            "className": "TabsExampleComponent"
         },
         {
             "path": "core/textarea/form-group",
@@ -3684,13 +3418,6 @@
             "className": "TileGenericExampleComponent"
         },
         {
-            "path": "core/tile/kpi-tile",
-            "library": "core",
-            "component": "tile",
-            "example": "kpi-tile",
-            "className": "KpiTileExampleComponent"
-        },
-        {
             "path": "core/tile/launch-tile",
             "library": "core",
             "component": "tile",
@@ -3731,13 +3458,6 @@
             "component": "time-picker",
             "example": "form",
             "className": "TimePickerFormExampleComponent"
-        },
-        {
-            "path": "core/time-picker/format",
-            "library": "core",
-            "component": "time-picker",
-            "example": "format",
-            "className": "TimePickerFormatExampleComponent"
         },
         {
             "path": "core/time-picker/locale",
@@ -4097,81 +3817,11 @@
             "className": "WizardExampleComponent"
         },
         {
-            "path": "cx/side-navigation/cozy-wide-icon-3-level",
-            "library": "cx",
-            "component": "side-navigation",
-            "example": "cozy-wide-icon-3-level",
-            "className": "SideNavigationCozyWideIcon3LevelExampleComponent"
-        },
-        {
             "path": "cx/side-navigation/cozy-wide-text-only-1-level",
             "library": "cx",
             "component": "side-navigation",
             "example": "cozy-wide-text-only-1-level",
             "className": "SideNavigationCozyWideTextOnly1LevelExampleComponent"
-        },
-        {
-            "path": "cx/side-navigation/cozy-wide-text-only-3-level",
-            "library": "cx",
-            "component": "side-navigation",
-            "example": "cozy-wide-text-only-3-level",
-            "className": "SideNavigationCozyWideTextOnly3LevelExampleComponent"
-        },
-        {
-            "path": "cx/side-navigation/dynamic-width",
-            "library": "cx",
-            "component": "side-navigation",
-            "example": "dynamic-width",
-            "className": "SideNavigationDynamicWidthExampleComponent"
-        },
-        {
-            "path": "cx/side-navigation/expand-collapse",
-            "library": "cx",
-            "component": "side-navigation",
-            "example": "expand-collapse",
-            "className": "SideNavigationCollapseExampleComponent"
-        },
-        {
-            "path": "cx/side-navigation/filter",
-            "library": "cx",
-            "component": "side-navigation",
-            "example": "filter",
-            "className": "SideNavigationFilterExampleComponent"
-        },
-        {
-            "path": "cx/side-navigation/mobile",
-            "library": "cx",
-            "component": "side-navigation",
-            "example": "mobile",
-            "className": "SideNavigationMobileExampleComponent"
-        },
-        {
-            "path": "cx/side-navigation/narrow",
-            "library": "cx",
-            "component": "side-navigation",
-            "example": "narrow",
-            "className": "SideNavigationNarrowExampleComponent"
-        },
-        {
-            "path": "cx/side-navigation/overflow",
-            "library": "cx",
-            "component": "side-navigation",
-            "example": "overflow",
-            "className": "SideNavigationOverflowExampleComponent"
-        },
-        {
-            "path": "cx/side-navigation/shellbar",
-            "library": "cx",
-            "component": "side-navigation",
-            "example": "shellbar",
-            "className": "SideNavigationShellbarExampleComponent"
-        },
-        {
-            "path": "cx/side-navigation/wide-icon-1-level",
-            "library": "cx",
-            "component": "side-navigation",
-            "example": "wide-icon-1-level",
-            "className": "SideNavigationWideIcon1LevelExampleComponent"
         },
         {
             "path": "i18n/changing-translations/i18n-auto-detect-example",
@@ -4209,20 +3859,6 @@
             "className": "LocaleOverrideExampleComponent"
         },
         {
-            "path": "i18n/changing-translations/i18n-migration-example",
-            "library": "i18n",
-            "component": "changing-translations",
-            "example": "i18n-migration-example",
-            "className": "MigrationExampleComponent"
-        },
-        {
-            "path": "i18n/getting-started/getting-started",
-            "library": "i18n",
-            "component": "getting-started",
-            "example": "getting-started",
-            "className": "GettingStartedExampleComponent"
-        },
-        {
             "path": "i18n/loading-translations/basic-usage",
             "library": "i18n",
             "component": "loading-translations",
@@ -4244,13 +3880,6 @@
             "className": "PropertiesLoadingExampleComponent"
         },
         {
-            "path": "i18n/patching-translations/i18n-patch-language-provider-example",
-            "library": "i18n",
-            "component": "patching-translations",
-            "example": "i18n-patch-language-provider-example",
-            "className": "PatchLanguageProviderExampleComponent"
-        },
-        {
             "path": "i18n/patching-translations/i18n-translation-customization",
             "library": "i18n",
             "component": "patching-translations",
@@ -4263,13 +3892,6 @@
             "component": "translation-resolver",
             "example": "basic-usage",
             "className": "BasicUsageExampleComponent"
-        },
-        {
-            "path": "i18n/translation-resolver/pipe-parameters",
-            "library": "i18n",
-            "component": "translation-resolver",
-            "example": "pipe-parameters",
-            "className": "PipeParametersExampleComponent"
         },
         {
             "path": "i18n/translation-resolver/using-translation-pipe",
@@ -4291,13 +3913,6 @@
             "component": "action-list-item",
             "example": "action-list-item",
             "className": "PlatformActionListItemExampleComponent"
-        },
-        {
-            "path": "platform/action-list-item/border-less",
-            "library": "platform",
-            "component": "action-list-item",
-            "example": "border-less",
-            "className": "PlatformActionListItemBorderLessExampleComponent"
         },
         {
             "path": "platform/approval-flow/approval-flow",
@@ -4368,13 +3983,6 @@
             "component": "combobox",
             "example": "states",
             "className": "ComboboxStateComponent"
-        },
-        {
-            "path": "platform/combobox/templates",
-            "library": "platform",
-            "component": "combobox",
-            "example": "templates",
-            "className": "ComboboxTemplatesExampleComponent"
         },
         {
             "path": "platform/date-picker/date-picker",
@@ -4487,13 +4095,6 @@
             "component": "dynamic-page",
             "example": "dynamic-page",
             "className": "PlatformDynamicPageExampleComponent"
-        },
-        {
-            "path": "platform/dynamic-page/facets",
-            "library": "platform",
-            "component": "dynamic-page",
-            "example": "facets",
-            "className": "PlatformDynamicPageFacetsExampleComponent"
         },
         {
             "path": "platform/dynamic-page/flexible-column",
@@ -4741,13 +4342,6 @@
             "className": "PlatformIconTabBarIconTypeExampleComponent"
         },
         {
-            "path": "platform/icon-tab-bar/process-type",
-            "library": "platform",
-            "component": "icon-tab-bar",
-            "example": "process-type",
-            "className": "PlatformIconTabBarProcessTypeExampleComponent"
-        },
-        {
             "path": "platform/icon-tab-bar/tabs-content",
             "library": "platform",
             "component": "icon-tab-bar",
@@ -4860,13 +4454,6 @@
             "className": "PlatformListFreeContentExampleComponent"
         },
         {
-            "path": "platform/list/list",
-            "library": "platform",
-            "component": "list",
-            "example": "list",
-            "className": "PlatformListExampleComponent"
-        },
-        {
             "path": "platform/list/loading",
             "library": "platform",
             "component": "list",
@@ -4888,13 +4475,6 @@
             "className": "PlatformListWithDeleteButtonExampleComponent"
         },
         {
-            "path": "platform/list/with-footer",
-            "library": "platform",
-            "component": "list",
-            "example": "with-footer",
-            "className": "PlatformListWithFooterExampleComponent"
-        },
-        {
             "path": "platform/list/with-infinite-scroll",
             "library": "platform",
             "component": "list",
@@ -4902,25 +4482,11 @@
             "className": "PlatformListWithInfiniteScrollExampleComponent"
         },
         {
-            "path": "platform/list/with-item-counter",
-            "library": "platform",
-            "component": "list",
-            "example": "with-item-counter",
-            "className": "PlatformListWithItemCounterExampleComponent"
-        },
-        {
             "path": "platform/list/with-more-button",
             "library": "platform",
             "component": "list",
             "example": "with-more-button",
             "className": "PlatformListWithMoreButtonExampleComponent"
-        },
-        {
-            "path": "platform/list/with-navigation",
-            "library": "platform",
-            "component": "list",
-            "example": "with-navigation",
-            "className": "PlatformListWithNavigationExampleComponent"
         },
         {
             "path": "platform/list/with-selection",
@@ -4942,13 +4508,6 @@
             "component": "menu-button",
             "example": "menu-button",
             "className": "PlatformMenuButtonExampleComponent"
-        },
-        {
-            "path": "platform/menu-button/state",
-            "library": "platform",
-            "component": "menu-button",
-            "example": "state",
-            "className": "PlatformMenuButtonStateExampleComponent"
         },
         {
             "path": "platform/menu/basic",
@@ -5315,13 +4874,6 @@
             "className": "PlatformSelectMobileExampleComponent"
         },
         {
-            "path": "platform/select/mode",
-            "library": "platform",
-            "component": "select",
-            "example": "mode",
-            "className": "PlatformSelectModeExampleComponent"
-        },
-        {
             "path": "platform/select/none",
             "library": "platform",
             "component": "select",
@@ -5334,13 +4886,6 @@
             "component": "select",
             "example": "nowrap",
             "className": "PlatformSelectNoWrapExampleComponent"
-        },
-        {
-            "path": "platform/select/semantic-state",
-            "library": "platform",
-            "component": "select",
-            "example": "semantic-state",
-            "className": "PlatformSelectSemanticStateExampleComponent"
         },
         {
             "path": "platform/settings-generator/custom-control",
@@ -5497,27 +5042,6 @@
             "className": "PlatformDocsSplitMenuButtonTypesComponent"
         },
         {
-            "path": "platform/standard-list-item/border-less",
-            "library": "platform",
-            "component": "standard-list-item",
-            "example": "border-less",
-            "className": "PlatformStandardListItemBorderLessExampleComponent"
-        },
-        {
-            "path": "platform/standard-list-item/standard-list-item",
-            "library": "platform",
-            "component": "standard-list-item",
-            "example": "standard-list-item",
-            "className": "PlatformStandardListItemExampleComponent"
-        },
-        {
-            "path": "platform/standard-list-item/standard-list-unread",
-            "library": "platform",
-            "component": "standard-list-item",
-            "example": "standard-list-unread",
-            "className": "PlatformStandardListUnreadExampleComponent"
-        },
-        {
             "path": "platform/standard-list-item/with-footer",
             "library": "platform",
             "component": "standard-list-item",
@@ -5630,27 +5154,6 @@
             "className": "PlatformTableColumnsNgforExampleComponent"
         },
         {
-            "path": "platform/table/custom-column",
-            "library": "platform",
-            "component": "table",
-            "example": "custom-column",
-            "className": "PlatformTableCustomColumnExampleComponent"
-        },
-        {
-            "path": "platform/table/custom-pagination/custom-pagination",
-            "library": "platform",
-            "component": "table",
-            "example": "custom-pagination/custom-pagination",
-            "className": "TableCustomPaginationExampleComponent"
-        },
-        {
-            "path": "platform/table/custom-pagination/custom-pagination-outer-scroll",
-            "library": "platform",
-            "component": "table",
-            "example": "custom-pagination/custom-pagination-outer-scroll",
-            "className": "TableCustomPaginationOuterScrollExampleComponent"
-        },
-        {
             "path": "platform/table/custom-title",
             "library": "platform",
             "component": "table",
@@ -5663,13 +5166,6 @@
             "component": "table",
             "example": "custom-width",
             "className": "PlatformTableCustomWidthExampleComponent"
-        },
-        {
-            "path": "platform/table/default",
-            "library": "platform",
-            "component": "table",
-            "example": "default",
-            "className": "PlatformTableDefaultExampleComponent"
         },
         {
             "path": "platform/table/editable-rows",
@@ -5756,13 +5252,6 @@
             "className": "PlatformTableNoOuterBordersExampleComponent"
         },
         {
-            "path": "platform/table/outer-scroll",
-            "library": "platform",
-            "component": "table",
-            "example": "outer-scroll",
-            "className": "PlatformTableOuterScrollExampleComponent"
-        },
-        {
             "path": "platform/table/p13-columns",
             "library": "platform",
             "component": "table",
@@ -5845,13 +5334,6 @@
             "component": "table",
             "example": "sortable",
             "className": "PlatformTableSortableExampleComponent"
-        },
-        {
-            "path": "platform/table/standard-pagination",
-            "library": "platform",
-            "component": "table",
-            "example": "standard-pagination",
-            "className": "PlatformTableStandardPaginationComponent"
         },
         {
             "path": "platform/table/tree",
@@ -5952,34 +5434,6 @@
             "className": "VariantManagementTableExampleComponent"
         },
         {
-            "path": "platform/vhd/basic",
-            "library": "platform",
-            "component": "vhd",
-            "example": "basic",
-            "className": "PlatformVhdBasicExampleComponent"
-        },
-        {
-            "path": "platform/vhd/column-template",
-            "library": "platform",
-            "component": "vhd",
-            "example": "column-template",
-            "className": "PlatformVhdColumnTemplateExampleComponent"
-        },
-        {
-            "path": "platform/vhd/initial-loading",
-            "library": "platform",
-            "component": "vhd",
-            "example": "initial-loading",
-            "className": "PlatformVhdInitialLoadingExampleComponent"
-        },
-        {
-            "path": "platform/vhd/input",
-            "library": "platform",
-            "component": "vhd",
-            "example": "input",
-            "className": "PlatformVhdInputExampleComponent"
-        },
-        {
             "path": "platform/vhd/loading",
             "library": "platform",
             "component": "vhd",
@@ -5999,13 +5453,6 @@
             "component": "vhd",
             "example": "multi-input",
             "className": "PlatformVhdMultiInputExampleComponent"
-        },
-        {
-            "path": "platform/vhd/strategy-labels",
-            "library": "platform",
-            "component": "vhd",
-            "example": "strategy-labels",
-            "className": "PlatformVhdStrategyLabelExampleComponent"
         },
         {
             "path": "platform/vhd/token",
@@ -6120,13 +5567,6 @@
             "className": "WizardGeneratorVisibleSummaryBranchingExampleComponent"
         },
         {
-            "path": "ui5-ai/button/basic",
-            "library": "ui5-ai",
-            "component": "button",
-            "example": "basic",
-            "className": "BasicAiButtonSample"
-        },
-        {
             "path": "ui5-fiori/barcode-scanner-dialog/barcode-scanner-dialog",
             "library": "ui5-fiori",
             "component": "barcode-scanner-dialog",
@@ -6169,25 +5609,11 @@
             "className": "MediaGallerySample"
         },
         {
-            "path": "ui5-fiori/navigation-layout/navigation-layout",
-            "library": "ui5-fiori",
-            "component": "navigation-layout",
-            "example": "navigation-layout",
-            "className": "NavigationLayoutSample"
-        },
-        {
             "path": "ui5-fiori/notification-list/actions",
             "library": "ui5-fiori",
             "component": "notification-list",
             "example": "actions",
             "className": "ActionsSample"
-        },
-        {
-            "path": "ui5-fiori/notification-list/basic",
-            "library": "ui5-fiori",
-            "component": "notification-list",
-            "example": "basic",
-            "className": "BasicSample"
         },
         {
             "path": "ui5-fiori/notification-list/group-items",
@@ -6454,13 +5880,6 @@
             "component": "user-menu",
             "example": "menu-items",
             "className": "MenuItemsSample"
-        },
-        {
-            "path": "ui5-fiori/user-settings-dialog/basic",
-            "library": "ui5-fiori",
-            "component": "user-settings-dialog",
-            "example": "basic",
-            "className": "BasicSample"
         },
         {
             "path": "ui5-fiori/view-settings-dialog/basic",
@@ -6776,13 +6195,6 @@
             "component": "dynamic-date-range",
             "example": "value-handling",
             "className": "ValueHandlingSample"
-        },
-        {
-            "path": "ui5/expandable-text/basic",
-            "library": "ui5",
-            "component": "expandable-text",
-            "example": "basic",
-            "className": "ExpandableTextBasicExample"
         },
         {
             "path": "ui5/file-uploader/basic",
@@ -7252,13 +6664,6 @@
             "component": "table",
             "example": "drag-and-drop",
             "className": "DragAndDropTableSample"
-        },
-        {
-            "path": "ui5/table/growing",
-            "library": "ui5",
-            "component": "table",
-            "example": "growing",
-            "className": "GrowingTableSample"
         },
         {
             "path": "ui5/table/header-cell-ai",
