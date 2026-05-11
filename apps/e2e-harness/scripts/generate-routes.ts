@@ -39,7 +39,6 @@ ${imports.join(',\n')}
 
 function buildRoutesJson(examples: ExampleMetadata[]): object {
     return {
-        generated: new Date().toISOString(),
         count: examples.length,
         routes: examples.map((ex) => ({
             path: ex.routePath,

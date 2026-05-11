@@ -92,12 +92,14 @@ jobs:
                   node-version: ${{ env.NODE_VERSION }}
 
             - name: Regenerate routes
-              run: npx tsx apps/e2e-harness/scripts/generate-routes.ts
+              run: |
+                  npx tsx apps/e2e-harness/scripts/generate-routes.ts
+                  npx prettier --write apps/e2e-harness/src/app/app.routes.generated.ts apps/e2e-harness/e2e/config/e2e.routes.json
 
             - name: Check for uncommitted route changes
               run: |
                   if ! git diff --exit-code apps/e2e-harness/src/app/app.routes.generated.ts apps/e2e-harness/e2e/config/e2e.routes.json; then
-                    echo "::error::Generated routes are out of date. Run 'npx tsx apps/e2e-harness/scripts/generate-routes.ts' and commit the result."
+                    echo "::error::Generated routes are out of date. Run 'npx tsx apps/e2e-harness/scripts/generate-routes.ts && yarn format' and commit the result."
                     exit 1
                   fi
 
