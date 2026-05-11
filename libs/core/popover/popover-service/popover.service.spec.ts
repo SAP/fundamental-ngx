@@ -412,6 +412,87 @@ describe('PopoverService', () => {
         });
     });
 
+    describe('focusout trigger handling', () => {
+        it('should not restore focus when closing via focusout trigger', fakeAsync(() => {
+            service.triggers.set(['focusin', 'focusout']);
+            service.focusAutoCapture.set(true);
+            service.restoreFocusOnClose.set(true);
+            service.initialise(component.triggerRef, undefined, component.getPopoverTemplateData());
+            fixture.detectChanges();
+
+            // Create a second focusable element to receive focus
+            const externalInput = document.createElement('input');
+            document.body.appendChild(externalInput);
+
+            // Open via focusin
+            component.triggerRef.nativeElement.dispatchEvent(new FocusEvent('focusin', { bubbles: true }));
+            fixture.detectChanges();
+            tick();
+            expect(service.isOpen()).toBe(true);
+
+            // Focus external input (simulating browser focus transfer)
+            externalInput.focus();
+
+            // Close via focusout — this should NOT restore focus to trigger
+            component.triggerRef.nativeElement.dispatchEvent(
+                new FocusEvent('focusout', { bubbles: true, relatedTarget: externalInput })
+            );
+            fixture.detectChanges();
+            tick();
+
+            expect(service.isOpen()).toBe(false);
+            // The external input should still have focus (not stolen back)
+            expect(document.activeElement).toBe(externalInput);
+
+            // Cleanup
+            document.body.removeChild(externalInput);
+        }));
+
+        it('should restore focus when closing via non-focusout triggers', fakeAsync(() => {
+            service.triggers.set(['click']);
+            service.focusAutoCapture.set(true);
+            service.restoreFocusOnClose.set(true);
+            service.initialise(component.triggerRef, undefined, component.getPopoverTemplateData());
+            fixture.detectChanges();
+
+            // Focus the trigger (sets _lastActiveElement)
+            component.triggerRef.nativeElement.focus();
+
+            // Open via click
+            component.triggerRef.nativeElement.click();
+            fixture.detectChanges();
+            tick();
+            expect(service.isOpen()).toBe(true);
+
+            // Close via click (toggle) — this SHOULD restore focus
+            component.triggerRef.nativeElement.click();
+            fixture.detectChanges();
+            tick();
+
+            expect(service.isOpen()).toBe(false);
+            expect(document.activeElement).toBe(component.triggerRef.nativeElement);
+        }));
+
+        it('should close via toggle with focusActiveElement=false on focusout', () => {
+            service.triggers.set(['focusin', 'focusout']);
+            service.initialise(component.triggerRef, undefined, component.getPopoverTemplateData());
+            fixture.detectChanges();
+
+            // Spy on toggle to verify arguments
+            const toggleSpy = jest.spyOn(service, 'toggle');
+
+            // Open via focusin
+            component.triggerRef.nativeElement.dispatchEvent(new FocusEvent('focusin', { bubbles: true }));
+            expect(toggleSpy).toHaveBeenCalledWith(true, false, undefined);
+
+            toggleSpy.mockClear();
+
+            // Close via focusout — should pass focusActiveElement=false
+            component.triggerRef.nativeElement.dispatchEvent(new FocusEvent('focusout', { bubbles: true }));
+            expect(toggleSpy).toHaveBeenCalledWith(false, true, false);
+        });
+    });
+
     describe('safe signal writes (NG0600 handling)', () => {
         beforeEach(() => {
             service.initialise(component.triggerRef, undefined, component.getPopoverTemplateData());

@@ -405,9 +405,9 @@ export class PopoverService {
     }
 
     /** Toggles the popover open state */
-    toggle(openAction = true, closeAction = true): void {
+    toggle(openAction = true, closeAction = true, focusActiveElement?: boolean): void {
         if (this.isOpen()) {
-            closeAction && this.close();
+            closeAction && this.close(focusActiveElement ?? true);
         } else {
             openAction && this.open();
             this.checkModalBackground();
@@ -576,7 +576,10 @@ export class PopoverService {
                         } else if (hasHoverTrigger && trigger.trigger === 'mouseleave' && closeAction) {
                             this._scheduleHoverClose();
                         } else {
-                            this.toggle(openAction, closeAction);
+                            // When closing due to focusout, don't restore focus — the browser
+                            // is already transferring focus to the next element.
+                            const isFocusOut = trigger.trigger === 'focusout';
+                            this.toggle(openAction, closeAction, isFocusOut ? false : undefined);
                         }
 
                         if (trigger.stopPropagation) {
