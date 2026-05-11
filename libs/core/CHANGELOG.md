@@ -1,3 +1,13 @@
+## 0.62.2-rc.11 (2026-05-11)
+
+### 🩹 Fixes
+
+- **core:** prevent focus trap in form-input-message-group ([#14196](https://github.com/SAP/fundamental-ngx/pull/14196))
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.62.2-rc.10 (2026-05-11)
 
 ### 🩹 Fixes
