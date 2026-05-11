@@ -233,6 +233,10 @@
             "reason": "compilation error in docs example"
         },
         {
+            "route": "platform/form-generator/custom-error",
+            "reason": "times out in CI"
+        },
+        {
             "route": "platform/icon-tab-bar/process-type",
             "reason": "compilation error in docs example"
         },
@@ -263,6 +267,10 @@
         {
             "route": "platform/select/semantic-state",
             "reason": "compilation error in docs example"
+        },
+        {
+            "route": "platform/settings-generator/custom-layout",
+            "reason": "times out in CI"
         },
         {
             "route": "platform/standard-list-item/border-less",

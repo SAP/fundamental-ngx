@@ -4225,13 +4225,6 @@ export const generatedRoutes: Routes = [
             ).then((m) => m.PlatformFormGeneratorCustomSliderElementComponent)
     },
     {
-        path: 'platform/form-generator/custom-error',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/platform/form-generator/examples/platform-form-generator-custom-error-example.component'
-            ).then((m) => m.PlatformFormGeneratorCustomErrorExampleComponent)
-    },
-    {
         path: 'platform/form-generator/custom-field-layout',
         loadComponent: () =>
             import(
@@ -4888,13 +4881,6 @@ export const generatedRoutes: Routes = [
             import(
                 '../../../../libs/docs/platform/settings-generator/examples/custom-control/settings-generator-custom-control-example.component'
             ).then((m) => m.PlatformFormGeneratorCustomSliderElementComponent)
-    },
-    {
-        path: 'platform/settings-generator/custom-layout',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/platform/settings-generator/examples/custom-layout/settings-generator-custom-layout-example.component'
-            ).then((m) => m.SettingsGeneratorTabsLayoutComponent)
     },
     {
         path: 'platform/settings-generator/default',

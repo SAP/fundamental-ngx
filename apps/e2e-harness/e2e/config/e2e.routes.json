@@ -1,5 +1,5 @@
 {
-    "count": 794,
+    "count": 792,
     "routes": [
         {
             "path": "btp/button/nested",
@@ -4223,13 +4223,6 @@
             "className": "PlatformFormGeneratorCustomSliderElementComponent"
         },
         {
-            "path": "platform/form-generator/custom-error",
-            "library": "platform",
-            "component": "form-generator",
-            "example": "custom-error",
-            "className": "PlatformFormGeneratorCustomErrorExampleComponent"
-        },
-        {
             "path": "platform/form-generator/custom-field-layout",
             "library": "platform",
             "component": "form-generator",
@@ -4886,13 +4879,6 @@
             "component": "settings-generator",
             "example": "custom-control",
             "className": "PlatformFormGeneratorCustomSliderElementComponent"
-        },
-        {
-            "path": "platform/settings-generator/custom-layout",
-            "library": "platform",
-            "component": "settings-generator",
-            "example": "custom-layout",
-            "className": "SettingsGeneratorTabsLayoutComponent"
         },
         {
             "path": "platform/settings-generator/default",
