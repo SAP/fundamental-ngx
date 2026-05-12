@@ -175,8 +175,10 @@ jobs:
               run: |
                   SNAPDIR="apps/e2e-harness/e2e/snapshots/linux"
                   MISSING=false
-                  shopt -s nullglob
-                  for f in test-results/**/*-actual.png; do
+                  shopt -s nullglob globstar
+                  ACTUALS=(test-results/**/*-actual.png)
+                  echo "Found ${#ACTUALS[@]} actual snapshot(s) in test-results/"
+                  for f in "${ACTUALS[@]}"; do
                     BASENAME=$(basename "$f" | sed 's/-actual\.png/.png/')
                     # Extract project name from test-results directory structure
                     # Playwright creates dirs like: test-results/<test-path>-<projectName>/
@@ -204,11 +206,8 @@ jobs:
                     git config user.email "github-actions@github.com"
                     git add "$SNAPDIR"
                     git commit -m "test(e2e): add missing Linux visual baselines [$SHARD]"
-                    # Retry push with rebase to handle parallel shard commits
-                    for i in 1 2 3; do
-                      git pull --rebase origin "${{ github.head_ref }}" && git push && break
-                      sleep 5
-                    done
+                    git pull --rebase || true
+                    git push
                   fi
 
             - name: Upload snapshot diffs
