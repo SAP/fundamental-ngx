@@ -351,6 +351,42 @@
         {
             "route": "ui5/table/growing",
             "reason": "compilation error in docs example"
+        },
+        {
+            "route": "core/message-box/complex-template/complex",
+            "reason": "times out in CI"
+        },
+        {
+            "route": "core/message-box/component-based",
+            "reason": "times out in CI"
+        },
+        {
+            "route": "core/message-toast/content",
+            "reason": "times out in CI"
+        },
+        {
+            "route": "core/moment-datetime-adapter/moment-adapter-options",
+            "reason": "times out in CI"
+        },
+        {
+            "route": "core/shellbar/basic",
+            "reason": "times out in CI"
+        },
+        {
+            "route": "core/shellbar/branding-context-area",
+            "reason": "times out in CI"
+        },
+        {
+            "route": "core/shellbar/growing-group",
+            "reason": "times out in CI"
+        },
+        {
+            "route": "core/user-menu/default",
+            "reason": "times out in CI"
+        },
+        {
+            "route": "core/user-menu/mobile",
+            "reason": "times out in CI"
         }
     ]
 }

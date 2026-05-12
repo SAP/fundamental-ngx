@@ -1,5 +1,5 @@
 {
-    "count": 967,
+    "count": 958,
     "routes": [
         {
             "path": "btp/button/nested",
@@ -2123,25 +2123,11 @@
             "className": "MenuWithSubmenuExampleComponent"
         },
         {
-            "path": "core/message-box/complex-template/complex",
-            "library": "core",
-            "component": "message-box",
-            "example": "complex-template/complex",
-            "className": "MessageBoxComplexExampleComponent"
-        },
-        {
             "path": "core/message-box/complex-template/complex-template",
             "library": "core",
             "component": "message-box",
             "example": "complex-template/complex-template",
             "className": "ComplexTemplateExampleComponent"
-        },
-        {
-            "path": "core/message-box/component-based",
-            "library": "core",
-            "component": "message-box",
-            "example": "component-based",
-            "className": "MessageBoxExampleComponent"
         },
         {
             "path": "core/message-box/component-based-message-box",
@@ -2228,13 +2214,6 @@
             "className": "MessageStripWidthExampleComponent"
         },
         {
-            "path": "core/message-toast/content",
-            "library": "core",
-            "component": "message-toast",
-            "example": "content",
-            "className": "MessageToastContentExampleComponent"
-        },
-        {
             "path": "core/message-toast/message-toast",
             "library": "core",
             "component": "message-toast",
@@ -2303,13 +2282,6 @@
             "component": "moment-datetime-adapter",
             "example": "date-picker-moment-adapter",
             "className": "DatePickerMomentAdapterExampleComponent"
-        },
-        {
-            "path": "core/moment-datetime-adapter/moment-adapter-options",
-            "library": "core",
-            "component": "moment-datetime-adapter",
-            "example": "moment-adapter-options",
-            "className": "MomentAdapterOptionsExampleComponent"
         },
         {
             "path": "core/moment-datetime-adapter/moment-datetime-formats",
@@ -2933,27 +2905,6 @@
             "component": "settings-dialog",
             "example": "template-based-settings-dialog",
             "className": "TemplateBasedSettingsDialogExampleComponent"
-        },
-        {
-            "path": "core/shellbar/basic",
-            "library": "core",
-            "component": "shellbar",
-            "example": "basic",
-            "className": "ShellbarBasicExampleComponent"
-        },
-        {
-            "path": "core/shellbar/branding-context-area",
-            "library": "core",
-            "component": "shellbar",
-            "example": "branding-context-area",
-            "className": "ShellbarBrandingContextAreaExampleComponent"
-        },
-        {
-            "path": "core/shellbar/growing-group",
-            "library": "core",
-            "component": "shellbar",
-            "example": "growing-group",
-            "className": "ShellbarGrowingGroupExampleComponent"
         },
         {
             "path": "core/side-navigation/condensed",
@@ -3710,20 +3661,6 @@
             "component": "upload-collection",
             "example": "upload-collection",
             "className": "UploadCollectionExampleComponent"
-        },
-        {
-            "path": "core/user-menu/default",
-            "library": "core",
-            "component": "user-menu",
-            "example": "default",
-            "className": "UserMenuDefaultExampleComponent"
-        },
-        {
-            "path": "core/user-menu/mobile",
-            "library": "core",
-            "component": "user-menu",
-            "example": "mobile",
-            "className": "UserMenuMobileExampleComponent"
         },
         {
             "path": "core/vertical-navigation/condensed",

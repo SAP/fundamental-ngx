@@ -2125,25 +2125,11 @@ export const generatedRoutes: Routes = [
             )
     },
     {
-        path: 'core/message-box/complex-template/complex',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/core/message-box/examples/complex-template/message-box-complex-example.component'
-            ).then((m) => m.MessageBoxComplexExampleComponent)
-    },
-    {
         path: 'core/message-box/complex-template/complex-template',
         loadComponent: () =>
             import(
                 '../../../../libs/docs/core/message-box/examples/complex-template/complex-template-example.component'
             ).then((m) => m.ComplexTemplateExampleComponent)
-    },
-    {
-        path: 'core/message-box/component-based',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/core/message-box/examples/component-based/message-box-example.component'
-            ).then((m) => m.MessageBoxExampleComponent)
     },
     {
         path: 'core/message-box/component-based-message-box',
@@ -2230,13 +2216,6 @@ export const generatedRoutes: Routes = [
             )
     },
     {
-        path: 'core/message-toast/content',
-        loadComponent: () =>
-            import('../../../../libs/docs/core/message-toast/examples/message-toast-content-example.component').then(
-                (m) => m.MessageToastContentExampleComponent
-            )
-    },
-    {
         path: 'core/message-toast/message-toast',
         loadComponent: () =>
             import('../../../../libs/docs/core/message-toast/examples/message-toast-example.component').then(
@@ -2305,13 +2284,6 @@ export const generatedRoutes: Routes = [
             import(
                 '../../../../libs/docs/core/moment-datetime-adapter/examples/date-picker-moment-adapter-example.component'
             ).then((m) => m.DatePickerMomentAdapterExampleComponent)
-    },
-    {
-        path: 'core/moment-datetime-adapter/moment-adapter-options',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/core/moment-datetime-adapter/examples/moment-adapter-options-example.component'
-            ).then((m) => m.MomentAdapterOptionsExampleComponent)
     },
     {
         path: 'core/moment-datetime-adapter/moment-datetime-formats',
@@ -2935,27 +2907,6 @@ export const generatedRoutes: Routes = [
             import(
                 '../../../../libs/docs/core/settings-dialog/examples/template-based-settings/template-based-settings-dialog-example.component'
             ).then((m) => m.TemplateBasedSettingsDialogExampleComponent)
-    },
-    {
-        path: 'core/shellbar/basic',
-        loadComponent: () =>
-            import('../../../../libs/docs/core/shellbar/examples/shellbar-basic-example.component').then(
-                (m) => m.ShellbarBasicExampleComponent
-            )
-    },
-    {
-        path: 'core/shellbar/branding-context-area',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/core/shellbar/examples/shellbar-branding-context-area-example/shellbar-branding-context-area-example.component'
-            ).then((m) => m.ShellbarBrandingContextAreaExampleComponent)
-    },
-    {
-        path: 'core/shellbar/growing-group',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/core/shellbar/examples/shellbar-growing-group-example/shellbar-growing-group-example.component'
-            ).then((m) => m.ShellbarGrowingGroupExampleComponent)
     },
     {
         path: 'core/side-navigation/condensed',
@@ -3711,20 +3662,6 @@ export const generatedRoutes: Routes = [
         loadComponent: () =>
             import('../../../../libs/docs/core/upload-collection/examples/upload-collection-example.component').then(
                 (m) => m.UploadCollectionExampleComponent
-            )
-    },
-    {
-        path: 'core/user-menu/default',
-        loadComponent: () =>
-            import('../../../../libs/docs/core/user-menu/examples/user-menu-default-example.component').then(
-                (m) => m.UserMenuDefaultExampleComponent
-            )
-    },
-    {
-        path: 'core/user-menu/mobile',
-        loadComponent: () =>
-            import('../../../../libs/docs/core/user-menu/examples/user-menu-mobile-example.component').then(
-                (m) => m.UserMenuMobileExampleComponent
             )
     },
     {

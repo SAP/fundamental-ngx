@@ -52,11 +52,11 @@ jobs:
 
                   # If e2e infrastructure itself changed, run everything
                   if echo "$CHANGED" | grep -qE '^(apps/e2e-harness/|playwright\.config\.ts)'; then
-                    SHARDS=("core-1" "core-2" "platform" "other")
+                    SHARDS=("core-1" "core-2" "core-3" "platform" "other")
                     echo "::notice::E2E infra changed — running all shards"
                   else
                     if echo "$CHANGED" | grep -qE '^libs/(core|docs/core)/'; then
-                      SHARDS+=("core-1" "core-2")
+                      SHARDS+=("core-1" "core-2" "core-3")
                     fi
                     if echo "$CHANGED" | grep -qE '^libs/(platform|docs/platform)/'; then
                       SHARDS+=("platform")
@@ -68,7 +68,7 @@ jobs:
 
                   # Fallback: if path trigger fired but no lib matched, run all
                   if [ ${#SHARDS[@]} -eq 0 ]; then
-                    SHARDS=("core-1" "core-2" "platform" "other")
+                    SHARDS=("core-1" "core-2" "core-3" "platform" "other")
                   fi
 
                   # Output as JSON array
@@ -140,8 +140,9 @@ jobs:
                   SHARD: ${{ matrix.shard }}
               run: |
                   case "$SHARD" in
-                    core-1)   GREP="core/[a-l]" ;;
-                    core-2)   GREP="core/[m-z]" ;;
+                    core-1)   GREP="core/[a-e]" ;;
+                    core-2)   GREP="core/[f-o]" ;;
+                    core-3)   GREP="core/[p-z]" ;;
                     platform) GREP="platform/" ;;
                     other)    GREP="(cdk|btp|cx|i18n|ui5|ui5-fiori|ui5-ai)/" ;;
                   esac
