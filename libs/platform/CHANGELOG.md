@@ -1,3 +1,33 @@
+## 0.62.2-rc.15 (2026-05-12)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
+## 0.62.2-rc.14 (2026-05-12)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
+## 0.62.2-rc.13 (2026-05-11)
+
+### 🩹 Fixes
+
+- **platform:** lookupKey now correctly matches complex objects in fdp-select ([#14193](https://github.com/SAP/fundamental-ngx/pull/14193))
+
+### ❤️ Thank You
+
+- deno
+
+## 0.62.2-rc.12 (2026-05-11)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
+## 0.62.2-rc.11 (2026-05-11)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
+## 0.62.2-rc.10 (2026-05-11)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
 ## 0.62.2-rc.9 (2026-05-11)
 
 This was a version bump only for platform to align it with other projects, there were no code changes.

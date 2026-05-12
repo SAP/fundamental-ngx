@@ -1,3 +1,45 @@
+## 0.62.2-rc.15 (2026-05-12)
+
+### 🚀 Features
+
+- **core:** add headingLevel support to grid-list title bar ([#14192](https://github.com/SAP/fundamental-ngx/pull/14192))
+
+### ❤️ Thank You
+
+- deno
+
+## 0.62.2-rc.14 (2026-05-12)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.62.2-rc.13 (2026-05-11)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.62.2-rc.12 (2026-05-11)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.62.2-rc.11 (2026-05-11)
+
+### 🩹 Fixes
+
+- **core:** prevent focus trap in form-input-message-group ([#14196](https://github.com/SAP/fundamental-ngx/pull/14196))
+
+### ❤️ Thank You
+
+- deno
+
+## 0.62.2-rc.10 (2026-05-11)
+
+### 🩹 Fixes
+
+- **core:** allow disabled state for individual buttons inside a non-disabled segmented button ([#14187](https://github.com/SAP/fundamental-ngx/pull/14187))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
 ## 0.62.2-rc.9 (2026-05-11)
 
 This was a version bump only for core to align it with other projects, there were no code changes.
