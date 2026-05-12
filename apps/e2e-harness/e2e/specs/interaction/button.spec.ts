@@ -16,8 +16,8 @@ test.describe('core/button', () => {
         await page.keyboard.press('Enter');
         await expect(toggleButton).toBeFocused();
         if (pressedBefore !== null) {
-            const pressedAfter = await toggleButton.getAttribute('aria-pressed');
-            expect(pressedAfter).not.toBe(pressedBefore);
+            const expected = pressedBefore === 'true' ? 'false' : 'true';
+            await expect(toggleButton).toHaveAttribute('aria-pressed', expected);
         }
     });
 
@@ -26,9 +26,9 @@ test.describe('core/button', () => {
         const toggleButton = page.locator('button[fd-button]').first();
         const initialPressed = await toggleButton.getAttribute('aria-pressed');
         await toggleButton.click();
-        const newPressed = await toggleButton.getAttribute('aria-pressed');
         if (initialPressed !== null) {
-            expect(newPressed).not.toBe(initialPressed);
+            const expected = initialPressed === 'true' ? 'false' : 'true';
+            await expect(toggleButton).toHaveAttribute('aria-pressed', expected);
         }
     });
 

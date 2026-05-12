@@ -37,9 +37,7 @@ test.describe('core/tree', () => {
         const firstItem = page.locator('[role="treeitem"], fd-tree-item').first();
         await firstItem.click();
         await page.keyboard.press('ArrowDown');
-        const activeRole = await page.evaluate(
-            () => document.activeElement?.getAttribute('role') || document.activeElement?.tagName.toLowerCase()
-        );
-        expect(activeRole).toBeTruthy();
+        const secondItem = page.locator('[role="treeitem"], fd-tree-item').nth(1);
+        await expect(secondItem).toBeFocused();
     });
 });

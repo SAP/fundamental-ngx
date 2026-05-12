@@ -23,12 +23,13 @@ test.describe('core/side-navigation', () => {
     });
 
     test('navigates items with keyboard', async ({ page }) => {
-        const firstItem = page.locator('.fd-nested-list__link, .fd-navigation-list__item-link').first();
+        const items = page.locator('.fd-nested-list__link, .fd-navigation-list__item-link');
+        const firstItem = items.first();
         await firstItem.focus();
         await expect(firstItem).toBeFocused();
         await page.keyboard.press('ArrowDown');
-        const focusedTag = await page.evaluate(() => document.activeElement?.tagName.toLowerCase());
-        expect(focusedTag).toBe('a');
+        const secondItem = items.nth(1);
+        await expect(secondItem).toBeFocused();
     });
 
     test('highlights selected item', async ({ page }) => {
