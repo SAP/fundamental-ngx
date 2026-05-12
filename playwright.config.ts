@@ -58,6 +58,7 @@ export default defineConfig({
     webServer: {
         command: 'npx nx serve e2e-harness',
         url: 'http://localhost:4400',
-        reuseExistingServer: !process.env['CI']
+        reuseExistingServer: !process.env['CI'],
+        timeout: 180_000
     }
 });
