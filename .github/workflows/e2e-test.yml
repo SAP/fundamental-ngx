@@ -173,6 +173,7 @@ jobs:
               env:
                   SHARD: ${{ matrix.shard }}
               run: |
+                  set -x
                   SNAPDIR="apps/e2e-harness/e2e/snapshots/linux"
                   MISSING=false
                   shopt -s nullglob globstar
@@ -180,8 +181,6 @@ jobs:
                   echo "Found ${#ACTUALS[@]} actual snapshot(s) in test-results/"
                   for f in "${ACTUALS[@]}"; do
                     BASENAME=$(basename "$f" | sed 's/-actual\.png/.png/')
-                    # Extract project name from test-results directory structure
-                    # Playwright creates dirs like: test-results/<test-path>-<projectName>/
                     TESTDIR=$(dirname "$f")
                     DIRNAME=$(basename "$TESTDIR")
                     PROJECT=""
@@ -201,6 +200,7 @@ jobs:
                       MISSING=true
                     fi
                   done
+                  echo "MISSING=$MISSING"
                   if [ "$MISSING" = "true" ]; then
                     git config user.name "github-actions"
                     git config user.email "github-actions@github.com"
