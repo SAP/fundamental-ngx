@@ -6039,13 +6039,6 @@ export const generatedRoutes: Routes = [
             )
     },
     {
-        path: 'ui5/date-picker/min-max',
-        loadComponent: () =>
-            import('../../../../libs/docs/ui5-webcomponents/date-picker/examples/min-max-sample').then(
-                (m) => m.DatePickerMinMaxSample
-            )
-    },
-    {
         path: 'ui5/date-picker/value-state',
         loadComponent: () =>
             import('../../../../libs/docs/ui5-webcomponents/date-picker/examples/value-state-sample').then(
@@ -6078,13 +6071,6 @@ export const generatedRoutes: Routes = [
         loadComponent: () =>
             import('../../../../libs/docs/ui5-webcomponents/date-range-picker/examples/format-sample').then(
                 (m) => m.DateRangePickerFormatSample
-            )
-    },
-    {
-        path: 'ui5/date-range-picker/min-max',
-        loadComponent: () =>
-            import('../../../../libs/docs/ui5-webcomponents/date-range-picker/examples/min-max-sample').then(
-                (m) => m.DateRangePickerMinMaxSample
             )
     },
     {

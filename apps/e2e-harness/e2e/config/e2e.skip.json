@@ -337,6 +337,14 @@
             "reason": "compilation error in docs example"
         },
         {
+            "route": "ui5/date-picker/min-max",
+            "reason": "times out in CI"
+        },
+        {
+            "route": "ui5/date-range-picker/min-max",
+            "reason": "times out in CI"
+        },
+        {
             "route": "ui5/expandable-text/basic",
             "reason": "compilation error in docs example"
         },

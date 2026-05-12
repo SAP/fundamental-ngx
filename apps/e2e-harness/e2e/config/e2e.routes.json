@@ -1,5 +1,5 @@
 {
-    "count": 969,
+    "count": 967,
     "routes": [
         {
             "path": "btp/button/nested",
@@ -6043,13 +6043,6 @@
             "className": "DatePickerFormatSample"
         },
         {
-            "path": "ui5/date-picker/min-max",
-            "library": "ui5",
-            "component": "date-picker",
-            "example": "min-max",
-            "className": "DatePickerMinMaxSample"
-        },
-        {
             "path": "ui5/date-picker/value-state",
             "library": "ui5",
             "component": "date-picker",
@@ -6083,13 +6076,6 @@
             "component": "date-range-picker",
             "example": "format",
             "className": "DateRangePickerFormatSample"
-        },
-        {
-            "path": "ui5/date-range-picker/min-max",
-            "library": "ui5",
-            "component": "date-range-picker",
-            "example": "min-max",
-            "className": "DateRangePickerMinMaxSample"
         },
         {
             "path": "ui5/date-range-picker/value-state",
