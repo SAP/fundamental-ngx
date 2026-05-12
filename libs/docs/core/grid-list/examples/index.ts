@@ -4,6 +4,7 @@ import { GridListDndExampleComponent } from './dnd/grid-list-dnd-example.compone
 import { GridListFocusingItemExampleComponent } from './focusing/grid-list-focusing-example.component';
 import { GridListFooterExampleComponent } from './footer/grid-list-footer-example.component';
 import { GridListGroupExampleComponent } from './group/grid-list-group-example.component';
+import { GridListHeadingLevelExampleComponent } from './heading-level/grid-list-heading-level-example.component';
 import { GridListLayoutExampleComponent } from './layout/grid-list-layout-example.component';
 import { GridListMoreExampleComponent } from './more/grid-list-more-example.component';
 import { GridListStatesExampleComponent } from './states/grid-list-states-example.component';
@@ -19,5 +20,6 @@ export const COMPONENTS = [
     GridListLayoutExampleComponent,
     GridListFocusingItemExampleComponent,
     GridListAutoHeightExampleComponent,
-    GridListComboSelectComponent
+    GridListComboSelectComponent,
+    GridListHeadingLevelExampleComponent
 ];
