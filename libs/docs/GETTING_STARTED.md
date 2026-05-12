@@ -4,95 +4,169 @@
 
 ## Overview
 
-Fundamental NGX is the SAP set of Angular component libraries implementing the SAP Design System. Build modern, enterprise-grade applications with the SAP look and feel.
+Fundamental NGX is the SAP set of Angular component libraries implementing the SAP Design System. Build modern, enterprise-grade applications with the SAP look and feel:
+
+- **Native Angular components** built on [Fundamental Library Styles](https://sap.github.io/fundamental-styles/), covering core UI, platform-level composites, BTP, and CX patterns.
+- **Angular wrappers for UI5 Web Components** — a wrapper around the [@ui5/webcomponents](https://sap.github.io/ui5-webcomponents) project to make it work with Angular without needing to use the [CUSTOM_ELEMENTS_SCHEMA](https://angular.io/api/core/CUSTOM_ELEMENTS_SCHEMA) or [NO_ERRORS_SCHEMA](https://angular.io/api/core/NO_ERRORS_SCHEMA) schemas, while providing full type safety and access to underlying web components in a type-safe environment. Everything that works and is available on the [@ui5/webcomponents](https://sap.github.io/ui5-webcomponents) side.
 
 ## Packages
 
-| Package                                      | Description                                             | Install                                                |
-| -------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------ |
-| **@fundamental-ngx/ui5-webcomponents**       | Angular wrappers for UI5 Web Components                 | `npm install @fundamental-ngx/ui5-webcomponents`       |
-| **@fundamental-ngx/ui5-webcomponents-fiori** | Angular wrappers for UI5 Web Components Fiori           | `npm install @fundamental-ngx/ui5-webcomponents-fiori` |
-| **@fundamental-ngx/ui5-webcomponents-ai**    | Angular wrappers for UI5 Web Components AI              | `npm install @fundamental-ngx/ui5-webcomponents-ai`    |
-| **@fundamental-ngx/core**                    | Core components built on Fundamental Library Styles     | `ng add @fundamental-ngx/core`                         |
-| **@fundamental-ngx/platform**                | Higher-level components with built-in data binding      | `ng add @fundamental-ngx/platform`                     |
-| **@fundamental-ngx/cdk**                     | Utilities and directives for building custom components | `ng add @fundamental-ngx/cdk`                          |
-| **@fundamental-ngx/btp**                     | BTP-specific components and patterns                    | `ng add @fundamental-ngx/btp`                          |
-| **@fundamental-ngx/cx**                      | Customer Experience components                          | `ng add @fundamental-ngx/cx`                           |
-| **@fundamental-ngx/i18n**                    | Internationalization with 37+ languages                 | `npm install @fundamental-ngx/i18n`                    |
+### Core Libraries
 
-## Requirements
+| Package                                      | Description                                                                                                                                                                             |
+| -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`@fundamental-ngx/core`](libs/core)         | The foundational UI component library built using [Fundamental Library Styles](https://sap.github.io/fundamental-styles/). Includes buttons, forms, dialogs, tables, and 80+ components |
+| [`@fundamental-ngx/platform`](libs/platform) | Higher-level composites built on core with form integration and data binding                                                                                                            |
+
+### UI5 Web Components
+
+| Package                                                                    | Description                             |
+| -------------------------------------------------------------------------- | --------------------------------------- |
+| [`@fundamental-ngx/ui5-webcomponents`](libs/ui5-webcomponents)             | Angular wrappers for UI5 Web Components |
+| [`@fundamental-ngx/ui5-webcomponents-fiori`](libs/ui5-webcomponents-fiori) | Fiori-specific UI5 component wrappers   |
+| [`@fundamental-ngx/ui5-webcomponents-ai`](libs/ui5-webcomponents-ai)       | AI-specific UI5 component wrappers      |
+
+### Supporting Packages
+
+| Package                                                      | Description                                                                                                                                                                                       |
+| ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`@fundamental-ngx/cdk`](libs/cdk)                           | Component Development Kit providing utilities for building custom components - DataSource patterns, ControlValueAccessor helpers, Focusable/selectable list helpers, RxJS subscription management |
+| [`@fundamental-ngx/i18n`](libs/i18n)                         | Signal-based internationalization                                                                                                                                                                 |
+| [`@fundamental-ngx/datetime-adapter`](libs/datetime-adapter) | Date/time adapter (Day.js)                                                                                                                                                                        |
+| [`@fundamental-ngx/moment-adapter`](libs/moment-adapter)     | Date/time adapter (Moment.js, legacy)                                                                                                                                                             |
+
+### Domain-Specific
+
+| Package                            | Description                             |
+| ---------------------------------- | --------------------------------------- |
+| [`@fundamental-ngx/btp`](libs/btp) | Business Technology Platform components |
+| [`@fundamental-ngx/cx`](libs/cx)   | Customer Experience components          |
+
+### Developer Tooling
+
+| Package                                        | Description                         |
+| ---------------------------------------------- | ----------------------------------- |
+| [`@fundamental-ngx/mcp`](libs/mcp-server)      | MCP server for AI coding assistants |
+| [`@fundamental-ngx/nx-plugin`](libs/nx-plugin) | NX generators and executors         |
+
+## Quick Start
+
+### Requirements
 
 - **Node.js**: LTS version recommended
 - **Angular**: Version 21 or newer
 - **npm**: Included with Node.js
+- **TypeScript**: 5.9 or newer
 
-## Quick Start
+**Peer dependencies** (installed automatically by `ng add`, required for manual installs):
 
-### 1. Install a Package
+| Package                | Notes                 |
+| ---------------------- | --------------------- |
+| `@angular/cdk`         |                       |
+| `@angular/router`      |                       |
+| `@fundamental-ngx/cdk` |                       |
+| `fundamental-styles`   | Provides the base CSS |
+
+### Installation
+
+Install the Angular CLI if you don't have it:
+
+```bash
+npm install -g @angular/cli
+```
+
+Create an Angular app if you don't have one:
+
+```bash
+ng new my-app
+cd my-app
+```
+
+Then add the library:
 
 ```bash
 ng add @fundamental-ngx/core
 ```
 
-### 2. Import Components
+`ng add` handles everything automatically: peer dependencies, the core stylesheet, theming assets, and theming providers. It will prompt you to choose a theme — the default is `sap_horizon`.
+
+**Manual install** — if you are not using the Angular CLI, after installing all peer dependencies you must:
+
+1. Add to `angular.json` styles:
+    ```
+    ./node_modules/@fundamental-ngx/core/styles/fundamental-ngx-core.css
+    ```
+2. Add to `angular.json` assets:
+    ```json
+    { "glob": "**/css_variables.css", "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/", "output": "./assets/theming-base/" },
+    { "glob": "**/*", "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/baseTheme/fonts/", "output": "./assets/theming-base/baseTheme/fonts/" },
+    { "glob": "**/*", "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/sap_horizon/fonts/", "output": "./assets/theming-base/sap_horizon/fonts/" },
+    { "glob": "**/*", "input": "./node_modules/fundamental-styles/dist/theming/", "output": "./assets/fundamental-styles-theming/" }
+    ```
+3. Add to `app.config.ts`:
+
+    ```typescript
+    import { ApplicationConfig } from '@angular/core';
+    import { provideTheming, themingInitializer } from '@fundamental-ngx/core/theming';
+
+    export const appConfig: ApplicationConfig = {
+        providers: [
+            provideTheming({ defaultTheme: 'sap_horizon', changeThemeOnQueryParamChange: false }),
+            themingInitializer()
+        ]
+    };
+    ```
+
+All components are standalone by default — import what you need:
 
 ```typescript
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
-
-@Component({
-    selector: 'app-example',
-    imports: [ButtonComponent, CheckboxComponent],
-    template: `
-        <button fd-button label="Click Me"></button>
-        <fd-checkbox label="Accept terms"></fd-checkbox>
-    `
-})
-export class ExampleComponent {}
+import { DialogModule } from '@fundamental-ngx/core/dialog';
 ```
 
-### 3. Configure Theming
+### Hello World
+
+A minimal app using `@fundamental-ngx/core`:
 
 ```typescript
+// src/main.ts
+import { bootstrapApplication } from '@angular/platform-browser';
+import { App } from './app/app';
+import { appConfig } from './app/app.config';
+
+bootstrapApplication(App, appConfig).catch(console.error);
+```
+
+```typescript
+// src/app/app.config.ts
+import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideTheming, themingInitializer } from '@fundamental-ngx/core/theming';
 
 export const appConfig: ApplicationConfig = {
-    providers: [provideTheming({ defaultTheme: 'sap_horizon' }), themingInitializer()]
+    providers: [
+        provideBrowserGlobalErrorListeners(),
+        provideTheming({ defaultTheme: 'sap_horizon', changeThemeOnQueryParamChange: false }),
+        themingInitializer()
+    ]
 };
 ```
 
-## Package Details
-
-### Core (`@fundamental-ngx/core`)
-
-The foundational UI component library built using [Fundamental Library Styles](https://sap.github.io/fundamental-styles/). Includes buttons, forms, dialogs, tables, and 80+ components.
-
 ```typescript
-import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
-// Or import individual components
+// src/app/app.ts
+import { Component } from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
+
+@Component({
+    selector: 'app-root',
+    imports: [ButtonComponent],
+    template: `<button fd-button>Hello, Fundamental NGX!</button>`
+})
+export class App {}
 ```
 
-### Platform (`@fundamental-ngx/platform`)
+See the [documentation site](https://sap.github.io/fundamental-ngx) for component examples and full API details.
 
-Higher-level components with advanced features like built-in data binding, form generation, and complex layouts.
-
-```typescript
-import { FundamentalNgxPlatformModule } from '@fundamental-ngx/platform';
-```
-
-### CDK (`@fundamental-ngx/cdk`)
-
-Component Development Kit providing utilities for building custom components:
-
-- DataSource patterns
-- ControlValueAccessor helpers
-- Focusable/selectable list helpers
-- RxJS subscription management
-
-```typescript
-import { DragAndDropModule } from '@fundamental-ngx/cdk/utils';
-```
+## Essential Services
 
 ### i18n (`@fundamental-ngx/i18n`)
 
@@ -106,21 +180,6 @@ Centralized internationalization with:
 ```typescript
 import { FD_LANGUAGE, FD_LANGUAGE_ENGLISH, FD_LANGUAGE_GERMAN } from '@fundamental-ngx/i18n';
 ```
-
-### UI5 Web Components (`@fundamental-ngx/ui5-webcomponents`)
-
-Angular wrappers for [@ui5/webcomponents](https://www.npmjs.com/package/@ui5/webcomponents):
-
-```typescript
-import { Button } from '@fundamental-ngx/ui5-webcomponents/button';
-
-@Component({
-    imports: [Button],
-    template: `<ui5-button (ui5Click)="handleClick()">Click Me</ui5-button>`
-})
-```
-
-## Essential Services
 
 ### RTL Support
 
@@ -140,132 +199,6 @@ import { provideContentDensity } from '@fundamental-ngx/core/content-density';
 providers: [provideContentDensity({ storage: 'localStorage' })];
 ```
 
-## Resources
-
-- [GitHub Repository](https://github.com/SAP/fundamental-ngx)
-- [Full Installation Guide](https://github.com/SAP/fundamental-ngx/wiki/Full-Installation-Guide)
-- [Breaking Changes](https://github.com/SAP/fundamental-ngx/wiki#breaking-changes)
-
-## Support
-
-If you encounter an issue, [create a ticket](https://github.com/SAP/fundamental-ngx/issues).
-
-## Contributing
-
-See [CONTRIBUTING.md](https://github.com/SAP/fundamental-ngx/blob/main/CONTRIBUTING.md) for guidelines.
-
----
-
-## Adding Documentation for a New Component
-
-For contributors adding component documentation, see the checklist below.
-
-### Quick Checklist
-
-#### 1. Create docs folder
-
-📁 `libs/docs/{package}/{component-name}/`
-
-```
-{component-name}/
-├── index.ts                        # Route exports
-├── {component}-docs.component.ts   # Main docs page
-├── {component}-docs.component.html # Docs template
-├── {component}-header/             # Header component
-│   └── {component}-header.component.ts
-├── examples/                       # Example components
-│   └── {component}-example.component.ts
-├── project.json
-└── tsconfig.json
-```
-
-#### 2. Register in navigation
-
-📄 `libs/docs/{package}/docs-data.json`
-
-```json
-{
-    "components": [{ "url": "core/my-component", "name": "My Component" }]
-}
-```
-
-#### 3. Register route
-
-📄 `libs/docs/{package}/docs-routes.ts`
-
-```typescript
-const componentRoutes = [
-    {
-        path: 'my-component',
-        loadChildren: () => import('@fundamental-ngx/docs/core/my-component').then(configureLibRoutes)
-    }
-];
-```
-
-#### 4. Add API reference
-
-📄 `libs/docs/{package}/api-files.ts`
-
-```typescript
-export const API_FILES = {
-    myComponent: ['MyComponentComponent', 'MyComponentDirective']
-};
-```
-
-#### 5. Create content
-
-**`index.ts`** - Define routes and metadata:
-
-```typescript
-import { Routes } from '@angular/router';
-import { MyComponentDocsComponent } from './my-component-docs.component';
-import { MyComponentHeaderComponent } from './my-component-header/my-component-header.component';
-
-export const ROUTES: Routes = [
-    {
-        path: '',
-        component: MyComponentHeaderComponent,
-        children: [{ path: '', component: MyComponentDocsComponent }],
-        data: { primary: true }
-    }
-];
-export const LIBRARY_NAME = 'my-component';
-export const API_FILE_KEY = 'myComponent';
-```
-
-**`examples/{component}-example.component.ts`** - Create example components:
-
-```typescript
-@Component({
-    selector: 'fd-my-component-basic-example',
-    template: `<fd-my-component>Hello</fd-my-component>`,
-    imports: [MyComponentComponent]
-})
-export class MyComponentBasicExampleComponent {}
-```
-
-**`{component}-docs.component.ts`** - Import examples and define files:
-
-```typescript
-@Component({
-    selector: 'app-my-component',
-    templateUrl: './my-component-docs.component.html',
-    imports: [
-        DocsSectionTitleComponent,
-        DescriptionComponent,
-        ComponentExampleComponent,
-        CodeExampleComponent,
-        MyComponentBasicExampleComponent
-    ]
-})
-export class MyComponentDocsComponent {
-    basicExample: ExampleFile[] = [
-        getExampleFile('my-component-basic-example.component.ts'),
-        getExampleFile('my-component-basic-example.component.html')
-    ];
-}
-```
-
 ## Running the Documentation App
 
 ```bash
@@ -280,3 +213,25 @@ npx nx serve docs --configuration=core
 ```
 
 Navigate to `http://localhost:4200` to view the documentation.
+
+## Support
+
+If you encounter an issue, [create a ticket](https://github.com/SAP/fundamental-ngx/issues).
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines and [NEW_COMPONENT.md](NEW_COMPONENT.md) for a step-by-step guide to building new components.
+
+Please follow the [Angular commit message guidelines](https://github.com/angular/angular/blob/main/CONTRIBUTING.md#commit) and the [SAP Contribution Guidelines](https://github.com/SAP/.github/blob/main/CONTRIBUTING.md).
+
+---
+
+## License
+
+See [LICENSE.txt](LICENSE.txt).
+
+## Resources
+
+- [GitHub Repository](https://github.com/SAP/fundamental-ngx)
+- [Full Installation Guide](https://github.com/SAP/fundamental-ngx/wiki/Full-Installation-Guide)
+- [Breaking Changes](https://github.com/SAP/fundamental-ngx/wiki#breaking-changes)

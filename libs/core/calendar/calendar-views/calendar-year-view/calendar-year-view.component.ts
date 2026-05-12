@@ -19,7 +19,6 @@ import { DATE_TIME_FORMATS, DateTimeFormats, DatetimeAdapter } from '@fundamenta
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { CalendarService } from '../../calendar.service';
 import { CalendarYear, CalendarYearGrid } from '../../models/calendar-year-grid';
@@ -36,7 +35,7 @@ import { DateRange } from '../../models/date-range';
         '[attr.id]': 'viewId'
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [ButtonComponent, FdTranslatePipe]
+    imports: [FdTranslatePipe]
 })
 export class CalendarYearViewComponent<D> implements OnInit, OnChanges, FocusableCalendarView {
     /** The id of the calendar passed from the parent component */

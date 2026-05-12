@@ -699,3 +699,13 @@ th.fd-table__cell .fd-table__inner {
     display: flex;
     align-items: center;
 }
+
+fdp-settings-dialog-settings fieldset {
+    margin: 0;
+    padding: 0;
+    border: none;
+
+    legend {
+        width: 100%;
+    }
+}

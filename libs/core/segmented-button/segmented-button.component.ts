@@ -383,7 +383,7 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
             return;
         }
 
-        this._buttons.forEach((button) => button.setDisabled(disable));
+        this._buttons.forEach((button) => button.setDisabled(disable || button.disabled()));
 
         this._focusableItems.forEach((focusableItemDirective) => {
             focusableItemDirective.setTabbable(!disable);

@@ -15,6 +15,9 @@
     [isOpen]="isOpen"
     [placementContainer]="_popoverPlacementContainer"
     [preventSpaceKeyScroll]="preventSpaceKeyScroll"
+    [focusAutoCapture]="false"
+    [focusTrapped]="false"
+    [restoreFocusOnClose]="false"
     (isOpenChange)="openChanged($event)"
 >
     <fd-popover-control>

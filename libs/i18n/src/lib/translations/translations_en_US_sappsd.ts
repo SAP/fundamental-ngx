@@ -21,10 +21,10 @@ export default {
     },
     coreAvatarGroup: {
         ariaLabelGroup:
-            'Has popup type dialog conjoined avatars, {count} avatars displayed, {hiddenCount} avatars hidden, activate for complete list',
-        ariaLabelIndividual: 'Individual avatars. {count} avatars displayed, {hiddenCount} avatars hidden',
+            '[[[Ĥąş ρŏρűρ ţŷρē ƌįąĺŏğ ċŏŋĵŏįŋēƌ ąʋąţąŗş, {count} ąʋąţąŗş ƌįşρĺąŷēƌ, {hiddenCount} ąʋąţąŗş ĥįƌƌēŋ, ąċţįʋąţē ƒŏŗ ċŏɱρĺēţē ĺįşţ]]]',
+        ariaLabelIndividual: '[[[Ĭŋƌįʋįƌűąĺ ąʋąţąŗş. {count} ąʋąţąŗş ƌįşρĺąŷēƌ, {hiddenCount} ąʋąţąŗş ĥįƌƌēŋ]]]',
         backButton: '[[[Ɓąċķ]]]',
-        popupBodyAriaLabel: 'With {count} items'
+        popupBodyAriaLabel: '[[[Ŵįţĥ {count} įţēɱş]]]'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: '[[[Ɓŗēąƌċŗűɱƃ Ţŗąįĺ∙∙∙∙∙∙∙∙]]]',
@@ -37,6 +37,8 @@ export default {
     },
     coreCalendar: {
         calendarDayViewDescription: '[[[Ĉąĺēŋƌąŗ∙∙∙∙∙∙]]]',
+        calendarLegendLabel: 'Calendar Legend',
+        calendarRoleDescription: 'Calendar',
         calendarMonthViewDescription: '[[[Μŏŋţĥ ρįċķēŗ∙∙∙∙∙∙∙]]]',
         calendarYearsRangeViewDescription: '[[[Ŷēąŗş ŗąŋğē ρįċķēŗ∙∙∙∙∙∙]]]',
         calendarYearsViewDescription: '[[[Ŷēąŗ ρįċķēŗ∙∙∙∙∙∙∙∙]]]',
@@ -199,6 +201,9 @@ export default {
     },
     coreProductSwitch: {
         ariaLabel: '[[[Ƥŗŏƌűċţ Ŝŵįţċĥ∙∙∙∙∙]]]'
+    },
+    coreRadio: {
+        readOnlyDescription: '[[[Ţĥįş ŗąƌįŏ ƀűţţŏŋ įş ŗēąƌ-ŏŋĺŷ ąŋƌ ċąŋŋŏţ ƀē ċĥąŋğēƌ.∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]'
     },
     coreRatingIndicator: {
         ariaLabelReset: '[[[Řēşēţ ţŏ žēŗŏ∙∙∙∙∙∙]]]',

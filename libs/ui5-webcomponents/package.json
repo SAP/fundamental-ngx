@@ -1,6 +1,6 @@
 {
     "name": "@fundamental-ngx/ui5-webcomponents",
-    "version": "0.62.1",
+    "version": "0.62.2-rc.16",
     "schematics": "./schematics/collection.json",
     "description": "Official SAP Angular wrappers for UI5 Web Components – part of the Fundamental Library for Angular.",
     "keywords": [
@@ -15,7 +15,12 @@
         "btp",
         "angular-components",
         "sap-fiori",
-        "fundamental"
+        "fundamental",
+        "angular-wrapper",
+        "angular-ui5",
+        "ui5-angular",
+        "webcomponents-angular",
+        "type-safe"
     ],
     "license": "Apache-2.0",
     "homepage": "https://sap.github.io/fundamental-ngx",

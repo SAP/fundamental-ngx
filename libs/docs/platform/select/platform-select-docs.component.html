@@ -116,3 +116,19 @@
     <fdp-platform-select-forms></fdp-platform-select-forms>
 </component-example>
 <code-example [exampleFiles]="selectForm"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="lookup-key" componentName="select"> Select With Lookup Key</fd-docs-section-title>
+<description>
+    Imagine you load a user's saved country from an API and pass it to the form. The object looks identical to one in
+    your list (<code>{{ '{' }} id: 2, name: "France" {{ '}' }}</code
+    >), but JavaScript treats them as different because they are two separate objects in memory. Without
+    <code>[lookupKey]</code>, the select cannot find a match and shows nothing. Setting
+    <code>lookupKey="id"</code> tells the select to compare items by their <code>id</code> property instead. Now it sees
+    that both objects have <code>id: 2</code> and correctly shows "France" as selected.
+</description>
+<component-example>
+    <fdp-platform-select-lookup-key-example></fdp-platform-select-lookup-key-example>
+</component-example>
+<code-example [exampleFiles]="selectLookupKey"></code-example>

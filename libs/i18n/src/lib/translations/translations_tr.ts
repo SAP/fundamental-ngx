@@ -36,6 +36,8 @@ export default {
     },
     coreCalendar: {
         calendarDayViewDescription: 'Takvim',
+        calendarLegendLabel: 'Calendar Legend',
+        calendarRoleDescription: 'Calendar',
         calendarMonthViewDescription: 'Ay seçici',
         calendarYearsRangeViewDescription: 'Yıl aralığı seçici',
         calendarYearsViewDescription: 'Yıl seçici',
@@ -198,6 +200,9 @@ export default {
     },
     coreProductSwitch: {
         ariaLabel: 'Ürün Anahtarı'
+    },
+    coreRadio: {
+        readOnlyDescription: 'This radio button is read-only and cannot be changed.'
     },
     coreRatingIndicator: {
         ariaLabelReset: 'Sıfırla',

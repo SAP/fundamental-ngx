@@ -6,7 +6,9 @@ const childProcess = require('child_process');
 
 const run = async () => {
     const { closest, tagsTillClosest } = await closestVersion();
-    childProcess.execSync(`git tag -d ${tagsTillClosest.join(' ')}`);
+    if (tagsTillClosest.length > 0) {
+        childProcess.execSync(`git tag -d ${tagsTillClosest.join(' ')}`);
+    }
     const changelog = await conventionalChangelog(
         {
             preset: 'angular',

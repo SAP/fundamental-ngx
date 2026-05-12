@@ -93,7 +93,7 @@ export class SelectComponent extends BaseSelect implements AfterViewInit, AfterV
      * @hidden
      */
     _isSelectedOptionItem(selectedItem: any): boolean {
-        return this.value === this.lookupValue(selectedItem);
+        return this.lookupValue(this.value) === this.lookupValue(selectedItem);
     }
 
     /** @hidden */
@@ -108,6 +108,18 @@ export class SelectComponent extends BaseSelect implements AfterViewInit, AfterV
         }
         this.formMessage?._popover?.setIgnoreTriggers(isOpen);
     }
+
+    /** @hidden */
+    protected compareOptionValues = (o1: any, o2: any): boolean => {
+        if (this.lookupKey) {
+            const v1 = this.lookupValue(o1);
+            const v2 = this.lookupValue(o2);
+            if (v1 != null && v2 != null) {
+                return v1 === v2;
+            }
+        }
+        return o1 === o2;
+    };
 
     /** @hidden */
     private _setColumnsRatio(firstColumnRatio: number, secondColumnRatio: number): void {

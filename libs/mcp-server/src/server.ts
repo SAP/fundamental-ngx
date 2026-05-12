@@ -3,6 +3,7 @@ import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
 import { z } from 'zod';
+import { USAGE_GUIDES } from './data/usage-guides';
 import { extractChangelogs } from './extractors/changelog-extractor';
 import { extractDesignTokens } from './extractors/token-extractor';
 import {
@@ -760,6 +761,57 @@ or comparing alternative components for the same use case.`,
                 {
                     type: 'text' as const,
                     text: JSON.stringify(result, null, 2)
+                }
+            ]
+        };
+    }
+);
+
+// ---------------------------------------------------------------------------
+// Tool: get_usage_guide
+// ---------------------------------------------------------------------------
+server.tool(
+    'get_usage_guide',
+    `Get a structured usage guide for a Fundamental NGX component or pattern.
+Returns a decision tree for choosing between variants, composition patterns showing
+correct parent/child nesting, common pitfalls, and related components.
+Use this when you need to understand WHICH component variant to use and HOW to compose
+components together. Available guides: dialog, table, button, layout-grid, card.`,
+    {
+        component: z
+            .string()
+            .describe('Component or pattern name (e.g., "dialog", "table", "button", "layout-grid", "card")')
+    },
+    async ({ component }) => {
+        const lowerComponent = component.toLowerCase().replace(/\s+/g, '-');
+        const guide = USAGE_GUIDES[lowerComponent];
+
+        if (!guide) {
+            const available = Object.keys(USAGE_GUIDES).join(', ');
+            return {
+                content: [
+                    {
+                        type: 'text' as const,
+                        text: JSON.stringify(
+                            {
+                                component,
+                                error: `No usage guide found for "${component}".`,
+                                availableGuides: available,
+                                note: 'Use recommend_components to find the right component, then get_component_api for its API.'
+                            },
+                            null,
+                            2
+                        )
+                    }
+                ]
+            };
+        }
+
+        return {
+            content: [
+                {
+                    type: 'text' as const,
+                    text: JSON.stringify(guide, null, 2)
                 }
             ]
         };

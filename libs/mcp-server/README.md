@@ -13,6 +13,8 @@ AI coding assistants (Claude Code, Cursor, VS Code Copilot, Windsurf, etc.) can 
 - **Migration guidance** — breaking changes and upgrade paths from changelogs
 - **Accessibility guidance** — ARIA inputs, keyboard handling, and a11y examples
 - **Component comparison** — side-by-side comparison of alternative components
+- **Usage guides** — decision trees and composition patterns for complex components (dialog, table, card, etc.)
+- **Selector classification** — whether a component is an element, attribute directive, or both, with correct template usage
 
 This eliminates hallucinated APIs and outdated documentation — the assistant works from the actual component metadata.
 
@@ -83,6 +85,7 @@ That's it — your AI assistant now has full access to the Fundamental NGX compo
 | `get_design_tokens`       | SAP theming tokens and utility classes                           | `{ "query": "background color", "category": "color" }`         |
 | `get_accessibility_guide` | ARIA inputs, keyboard handling, and a11y examples                | `{ "name": "ui5-dialog" }`                                     |
 | `compare_components`      | Side-by-side comparison of two components                        | `{ "component_a": "fd-button", "component_b": "ui5-button" }`  |
+| `get_usage_guide`         | Decision tree and composition patterns for a component           | `{ "component": "dialog" }`                                    |
 
 ## Metadata Schema
 
@@ -92,6 +95,8 @@ Each component in the catalog follows this structure:
 interface ComponentMetadata {
     name: string; // "ButtonComponent"
     selector: string; // "fd-button" or "ui5-button"
+    selectorType: 'element' | 'attribute' | 'both'; // how to use in templates
+    templateUsage: string; // "<button fd-button>...</button>"
     library: Library; // "@fundamental-ngx/core"
     category: string; // "Actions", "Form", "Layout"
     description: string;
@@ -107,3 +112,33 @@ interface ComponentMetadata {
 ```
 
 See `src/types/component-metadata.ts` for full type definitions.
+
+## AI Onboarding
+
+The MCP server is designed as the primary AI-assisted onboarding path for Fundamental NGX. Here's the recommended workflow:
+
+1. **Discover** — Use `recommend_components` to find the right components for your UI
+2. **Decide** — Use `get_usage_guide` to choose the right variant (e.g., which dialog API surface)
+3. **Learn** — Use `get_component_api` and `get_component_examples` for API details and working code
+4. **Build** — Use `get_design_tokens` and `get_accessibility_guide` while implementing
+5. **Compare** — Use `compare_components` when choosing between alternatives (e.g., `fd-table` vs `fdp-table`)
+
+### Usage Guides
+
+The `get_usage_guide` tool provides structured decision trees for components with multiple API surfaces or variants:
+
+- **Dialog** — template-based vs component-based vs object-based; fd-dialog vs ui5-dialog vs fd-message-box
+- **Table** — fd-table (core, lightweight) vs fdp-table (platform, feature-rich) vs ui5-table (Web Components)
+- **Button** — standard vs split-button vs segmented-button
+- **Card** — fd-card (core) vs ui5-card (Web Components)
+- **Layout Grid** — fd-layout-grid vs fd-flexible-column-layout
+
+### Selector Classification
+
+Each component now includes `selectorType` and `templateUsage` fields to prevent incorrect template usage:
+
+| selectorType | Meaning                               | Example                          |
+| ------------ | ------------------------------------- | -------------------------------- |
+| `element`    | Use as an HTML element                | `<fd-card>...</fd-card>`         |
+| `attribute`  | Use as an attribute on a host element | `<h2 fd-title>...</h2>`          |
+| `both`       | Element + attribute combined          | `<button fd-button>...</button>` |
