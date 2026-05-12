@@ -1,5 +1,5 @@
 {
-    "count": 953,
+    "count": 952,
     "routes": [
         {
             "path": "btp/button/nested",
@@ -672,13 +672,6 @@
             "component": "card",
             "example": "interactive-card-header",
             "className": "InteractiveCardHeaderExampleComponent"
-        },
-        {
-            "path": "core/card/kpi",
-            "library": "core",
-            "component": "card",
-            "example": "kpi",
-            "className": "CardKpiExampleComponent"
         },
         {
             "path": "core/card/link-list-card",

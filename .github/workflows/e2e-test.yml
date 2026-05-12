@@ -55,16 +55,30 @@ jobs:
                     SHARDS=("core-1" "core-2" "core-3" "platform" "other")
                     echo "::notice::E2E infra changed — running all shards"
                   else
-                    if echo "$CHANGED" | grep -qE '^libs/(core|docs/core)/'; then
-                      SHARDS+=("core-1" "core-2" "core-3")
-                    fi
-                    if echo "$CHANGED" | grep -qE '^libs/(platform|docs/platform)/'; then
-                      SHARDS+=("platform")
-                    fi
-                    if echo "$CHANGED" | grep -qE '^libs/(cdk|btp|cx|i18n|ui5-webcomponents(-fiori|-ai|-base)?|docs/(cdk|btp|cx|i18n|ui5-webcomponents(-fiori|-ai)?))/'; then
-                      SHARDS+=("other")
+                    # cdk is the base layer — everything depends on it
+                    if echo "$CHANGED" | grep -qE '^libs/(cdk|docs/cdk)/'; then
+                      SHARDS=("core-1" "core-2" "core-3" "platform" "other")
+                    else
+                      if echo "$CHANGED" | grep -qE '^libs/(core|docs/core)/'; then
+                        SHARDS+=("core-1" "core-2" "core-3" "platform")
+                      fi
+                      if echo "$CHANGED" | grep -qE '^libs/(platform|docs/platform)/'; then
+                        SHARDS+=("platform")
+                      fi
+                      if echo "$CHANGED" | grep -qE '^libs/(ui5-webcomponents|docs/ui5-webcomponents)/[^-]'; then
+                        SHARDS+=("other")
+                      fi
+                      if echo "$CHANGED" | grep -qE '^libs/(ui5-webcomponents-(fiori|ai|base)|docs/ui5-webcomponents-(fiori|ai))/'; then
+                        SHARDS+=("other")
+                      fi
+                      if echo "$CHANGED" | grep -qE '^libs/(btp|cx|i18n|docs/(btp|cx|i18n))/'; then
+                        SHARDS+=("other")
+                      fi
                     fi
                   fi
+
+                  # Deduplicate
+                  SHARDS=($(printf '%s\n' "${SHARDS[@]}" | sort -u))
 
                   # Fallback: if path trigger fired but no lib matched, run all
                   if [ ${#SHARDS[@]} -eq 0 ]; then

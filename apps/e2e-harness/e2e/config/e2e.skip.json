@@ -415,6 +415,10 @@
         {
             "route": "core/date-picker/single",
             "reason": "times out in CI"
+        },
+        {
+            "route": "core/card/kpi",
+            "reason": "depends on Google Charts CDN — unreliable in CI"
         }
     ]
 }

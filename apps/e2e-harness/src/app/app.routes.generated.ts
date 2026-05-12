@@ -676,13 +676,6 @@ export const generatedRoutes: Routes = [
             ).then((m) => m.InteractiveCardHeaderExampleComponent)
     },
     {
-        path: 'core/card/kpi',
-        loadComponent: () =>
-            import('../../../../libs/docs/core/card/examples/card-kpi-example.component').then(
-                (m) => m.CardKpiExampleComponent
-            )
-    },
-    {
         path: 'core/card/link-list-card',
         loadComponent: () =>
             import('../../../../libs/docs/core/card/examples/link-list-card/card-link-list-example.component').then(
