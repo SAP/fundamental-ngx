@@ -10,6 +10,7 @@
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
 import { ComponentCatalog, ComponentExample, ComponentMetadata, InputMetadata } from './types/component-metadata';
+import { buildPitfalls, buildTemplate, deriveImportPath, getSelectorType } from './utils/selector-utils';
 
 // ---------------------------------------------------------------------------
 // We test the server's helper functions by re-implementing the lookup logic
@@ -831,81 +832,6 @@ describe('compare_components logic', () => {
     });
 });
 
-// ---------------------------------------------------------------------------
-// get_usage_guide helpers
-// ---------------------------------------------------------------------------
-
-function detectSelectorType(selector: string): 'element' | 'attribute' | 'mixed' {
-    const parts = selector.split(',').map((s) => s.trim());
-    let hasElement = false;
-    let hasAttribute = false;
-    for (const part of parts) {
-        if (/^\[/.test(part)) {
-            hasAttribute = true;
-        } else if (/\[/.test(part)) {
-            hasAttribute = true;
-        } else {
-            hasElement = true;
-        }
-    }
-    if (hasElement && hasAttribute) {
-        return 'mixed';
-    }
-    return hasAttribute ? 'attribute' : 'element';
-}
-
-function buildTemplateSnippet(selector: string, selectorType: 'element' | 'attribute' | 'mixed'): string {
-    if (selectorType === 'element') {
-        const tag = selector.split(',')[0].trim();
-        return `<${tag}></${tag}>`;
-    }
-    const firstPart = selector.split(',')[0].trim();
-    const attrOnElement = firstPart.match(/^([a-z][-a-z0-9]*)\[([^\]]+)\]/);
-    if (attrOnElement) {
-        return `<${attrOnElement[1]} ${attrOnElement[2]}></${attrOnElement[1]}>`;
-    }
-    const pureAttr = firstPart.match(/^\[([^\]]+)\]/);
-    if (pureAttr) {
-        return `<div ${pureAttr[1]}></div>`;
-    }
-    return `<!-- Selector: ${selector} -->`;
-}
-
-function deriveImportPath(component: ComponentMetadata): string {
-    const { library, selector } = component;
-    const firstSelector = selector.split(',')[0].trim();
-    const attrOnElement = firstSelector.match(/\[(?:fd|fdp|fdb|cx|fdk)-([^\]]+)\]/);
-    if (attrOnElement) {
-        return `${library}/${attrOnElement[1].toLowerCase()}`;
-    }
-    const elementMatch = firstSelector.match(/^(?:fd|fdp|fdb|cx|fdk|ui5)-(.+)/);
-    if (elementMatch) {
-        return `${library}/${elementMatch[1].toLowerCase()}`;
-    }
-    return library;
-}
-
-function buildPitfalls(component: ComponentMetadata, selectorType: 'element' | 'attribute' | 'mixed'): string[] {
-    const pitfalls: string[] = [];
-    if (selectorType === 'attribute' || selectorType === 'mixed') {
-        const firstPart = component.selector.split(',')[0].trim();
-        const attrOnElement = firstPart.match(/^([a-z][-a-z0-9]*)\[([^\]]+)\]/);
-        if (attrOnElement) {
-            pitfalls.push(
-                `Attribute directive: use <${attrOnElement[1]} ${attrOnElement[2]}> — NOT <${attrOnElement[2]}> as a standalone element.`
-            );
-        }
-    }
-    if (component.deprecated) {
-        pitfalls.push(`Deprecated: ${component.deprecated}`);
-    }
-    const requiredInputs = component.inputs.filter((i) => i.required && !i.deprecated);
-    if (requiredInputs.length > 0) {
-        pitfalls.push(`Required inputs: ${requiredInputs.map((i) => i.name).join(', ')}`);
-    }
-    return pitfalls;
-}
-
 const ATTRIBUTE_FIXTURE: ComponentMetadata = {
     name: 'ButtonComponent',
     selector: 'button[fd-button], a[fd-button], span[fd-button]',
@@ -954,42 +880,50 @@ const REQUIRED_INPUTS_FIXTURE: ComponentMetadata = {
     source: 'typedoc'
 };
 
-describe('detectSelectorType', () => {
+describe('getSelectorType', () => {
     it('should return "element" for plain element selectors', () => {
-        expect(detectSelectorType('fd-button')).toBe('element');
-        expect(detectSelectorType('fdp-table')).toBe('element');
-        expect(detectSelectorType('ui5-button')).toBe('element');
+        expect(getSelectorType('fd-button')).toBe('element');
+        expect(getSelectorType('fdp-table')).toBe('element');
+        expect(getSelectorType('ui5-button')).toBe('element');
     });
 
-    it('should return "attribute" for element-with-attribute selectors', () => {
-        expect(detectSelectorType('button[fd-button]')).toBe('attribute');
-        expect(detectSelectorType('button[fd-button], a[fd-button], span[fd-button]')).toBe('attribute');
+    it('should return "element-attribute" for element-with-attribute selectors', () => {
+        expect(getSelectorType('button[fd-button]')).toBe('element-attribute');
+        expect(getSelectorType('button[fd-button], a[fd-button], span[fd-button]')).toBe('element-attribute');
     });
 
     it('should return "attribute" for pure attribute selectors', () => {
-        expect(detectSelectorType('[fdCompact]')).toBe('attribute');
-        expect(detectSelectorType('[fd-busy-indicator-extended]')).toBe('attribute');
+        expect(getSelectorType('[fdCompact]')).toBe('attribute');
+        expect(getSelectorType('[fd-busy-indicator-extended]')).toBe('attribute');
     });
 
-    it('should return "mixed" when selector mixes elements and attributes', () => {
-        expect(detectSelectorType('fd-input, [fdInput]')).toBe('mixed');
+    it('should return "element" when first part is an element selector', () => {
+        // Production only inspects the first comma-separated part.
+        expect(getSelectorType('fd-input, [fdInput]')).toBe('element');
     });
 });
 
-describe('buildTemplateSnippet', () => {
-    it('should wrap element selectors in open/close tags', () => {
-        expect(buildTemplateSnippet('fd-button', 'element')).toBe('<fd-button></fd-button>');
-        expect(buildTemplateSnippet('fdp-table', 'element')).toBe('<fdp-table></fdp-table>');
+describe('buildTemplate', () => {
+    it('should wrap element selector in open/close tags when component has inputs', () => {
+        // FIXTURE_COMPONENTS[0] = ButtonComponent (fd-button) — has 3 non-required inputs.
+        expect(buildTemplate(FIXTURE_COMPONENTS[0])).toBe('<fd-button>\n  <!-- content -->\n</fd-button>');
     });
 
-    it('should build attribute snippet using first host element', () => {
-        const snippet = buildTemplateSnippet('button[fd-button], a[fd-button]', 'attribute');
-        expect(snippet).toBe('<button fd-button></button>');
+    it('should use self-closing tag for element component with no inputs and no slots', () => {
+        const comp: ComponentMetadata = { ...FIXTURE_COMPONENTS[0], inputs: [], slots: [] };
+        expect(buildTemplate(comp)).toBe('<fd-button />');
     });
 
-    it('should build pure attribute snippet using <div> as host', () => {
-        const snippet = buildTemplateSnippet('[fdCompact]', 'attribute');
-        expect(snippet).toBe('<div fdCompact></div>');
+    it('should build self-closing snippet for element-attribute selector', () => {
+        expect(buildTemplate(ATTRIBUTE_FIXTURE)).toBe('<button fd-button />');
+    });
+
+    it('should build attribute snippet using <div> as host for pure attribute selector', () => {
+        expect(buildTemplate(PURE_ATTR_FIXTURE)).toBe('<div fdCompact>\n  <!-- content -->\n</div>');
+    });
+
+    it('should include required inputs as bound attributes', () => {
+        expect(buildTemplate(REQUIRED_INPUTS_FIXTURE)).toContain('[dataSource]');
     });
 });
 
@@ -1014,58 +948,59 @@ describe('deriveImportPath', () => {
 });
 
 describe('buildPitfalls', () => {
-    it('should warn about attribute directive misuse', () => {
-        const pitfalls = buildPitfalls(ATTRIBUTE_FIXTURE, 'attribute');
+    it('should warn about element-attribute directive misuse', () => {
+        const importPath = deriveImportPath(ATTRIBUTE_FIXTURE);
+        const pitfalls = buildPitfalls(ATTRIBUTE_FIXTURE, importPath);
         expect(pitfalls).toHaveLength(1);
-        expect(pitfalls[0]).toContain('Attribute directive');
-        expect(pitfalls[0]).toContain('<button fd-button>');
-        expect(pitfalls[0]).toContain('NOT <fd-button>');
+        expect(pitfalls[0]).toContain('specific host element');
+        expect(pitfalls[0]).toContain('<button>');
     });
 
     it('should warn about deprecated components', () => {
         const comp = findComponent('fd-deprecated', FIXTURE_COMPONENTS)!;
-        const pitfalls = buildPitfalls(comp, 'element');
-        expect(pitfalls.some((p) => p.startsWith('Deprecated:'))).toBe(true);
+        const pitfalls = buildPitfalls(comp, deriveImportPath(comp));
+        expect(pitfalls.some((p) => p.startsWith('DEPRECATED:'))).toBe(true);
     });
 
     it('should list required inputs', () => {
-        const pitfalls = buildPitfalls(REQUIRED_INPUTS_FIXTURE, 'element');
+        const pitfalls = buildPitfalls(REQUIRED_INPUTS_FIXTURE, deriveImportPath(REQUIRED_INPUTS_FIXTURE));
         expect(pitfalls.some((p) => p.includes('dataSource'))).toBe(true);
     });
 
     it('should return empty pitfalls for a simple element component with no issues', () => {
         const comp = findComponent('fd-button', FIXTURE_COMPONENTS)!;
-        const pitfalls = buildPitfalls(comp, 'element');
+        const pitfalls = buildPitfalls(comp, deriveImportPath(comp));
         expect(pitfalls).toHaveLength(0);
     });
 
-    it('should not include pure-attr components in pitfall for attribute', () => {
-        const pitfalls = buildPitfalls(PURE_ATTR_FIXTURE, 'attribute');
-        // Pure [fdCompact] has no attrOnElement match, so no directive pitfall
-        expect(pitfalls.filter((p) => p.includes('Attribute directive'))).toHaveLength(0);
+    it('should warn about pure attribute directive misuse', () => {
+        const pitfalls = buildPitfalls(PURE_ATTR_FIXTURE, deriveImportPath(PURE_ATTR_FIXTURE));
+        expect(pitfalls.some((p) => p.includes('attribute directive'))).toBe(true);
     });
 });
 
 describe('get_usage_guide result shape', () => {
     it('should include selectorType, importPath, templateUsage, and pitfalls for element component', () => {
         const comp = findComponent('fdp-table', FIXTURE_COMPONENTS)!;
-        const selectorType = detectSelectorType(comp.selector);
+        const selectorType = getSelectorType(comp.selector);
         const importPath = deriveImportPath(comp);
-        const templateUsage = buildTemplateSnippet(comp.selector, selectorType);
-        const pitfalls = buildPitfalls(comp, selectorType);
+        const templateUsage = buildTemplate(comp);
+        const pitfalls = buildPitfalls(comp, importPath);
 
         expect(selectorType).toBe('element');
         expect(importPath).toBe('@fundamental-ngx/platform/table');
-        expect(templateUsage).toBe('<fdp-table></fdp-table>');
+        expect(templateUsage).toContain('fdp-table');
+        expect(templateUsage).toContain('[dataSource]');
         expect(pitfalls.some((p) => p.includes('dataSource'))).toBe(true);
     });
 
-    it('should surface attribute pitfall for the real ButtonComponent selector', () => {
-        const selectorType = detectSelectorType(ATTRIBUTE_FIXTURE.selector);
-        const pitfalls = buildPitfalls(ATTRIBUTE_FIXTURE, selectorType);
+    it('should surface element-attribute pitfall for the real ButtonComponent selector', () => {
+        const selectorType = getSelectorType(ATTRIBUTE_FIXTURE.selector);
+        const importPath = deriveImportPath(ATTRIBUTE_FIXTURE);
+        const pitfalls = buildPitfalls(ATTRIBUTE_FIXTURE, importPath);
 
-        expect(selectorType).toBe('attribute');
-        expect(pitfalls[0]).toContain('NOT <fd-button>');
+        expect(selectorType).toBe('element-attribute');
+        expect(pitfalls[0]).toContain('specific host element');
     });
 
     it('should produce correct import statement string', () => {
