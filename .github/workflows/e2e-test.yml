@@ -52,11 +52,11 @@ jobs:
 
                   # If e2e infrastructure itself changed, run everything
                   if echo "$CHANGED" | grep -qE '^(apps/e2e-harness/|playwright\.config\.ts)'; then
-                    SHARDS=("core" "platform" "other")
+                    SHARDS=("core-1" "core-2" "platform" "other")
                     echo "::notice::E2E infra changed — running all shards"
                   else
                     if echo "$CHANGED" | grep -qE '^libs/(core|docs/core)/'; then
-                      SHARDS+=("core")
+                      SHARDS+=("core-1" "core-2")
                     fi
                     if echo "$CHANGED" | grep -qE '^libs/(platform|docs/platform)/'; then
                       SHARDS+=("platform")
@@ -68,7 +68,7 @@ jobs:
 
                   # Fallback: if path trigger fired but no lib matched, run all
                   if [ ${#SHARDS[@]} -eq 0 ]; then
-                    SHARDS=("core" "platform" "other")
+                    SHARDS=("core-1" "core-2" "platform" "other")
                   fi
 
                   # Output as JSON array
@@ -140,7 +140,8 @@ jobs:
                   SHARD: ${{ matrix.shard }}
               run: |
                   case "$SHARD" in
-                    core)     GREP="core/" ;;
+                    core-1)   GREP="core/[a-l]" ;;
+                    core-2)   GREP="core/[m-z]" ;;
                     platform) GREP="platform/" ;;
                     other)    GREP="(cdk|btp|cx|i18n|ui5|ui5-fiori|ui5-ai)/" ;;
                   esac
@@ -173,41 +174,18 @@ jobs:
               env:
                   SHARD: ${{ matrix.shard }}
               run: |
-                  set -x
                   SNAPDIR="apps/e2e-harness/e2e/snapshots/linux"
-                  MISSING=false
-                  shopt -s nullglob globstar
-                  ACTUALS=(test-results/**/*-actual.png)
-                  echo "Found ${#ACTUALS[@]} actual snapshot(s) in test-results/"
-                  for f in "${ACTUALS[@]}"; do
-                    BASENAME=$(basename "$f" | sed 's/-actual\.png/.png/')
-                    TESTDIR=$(dirname "$f")
-                    DIRNAME=$(basename "$TESTDIR")
-                    PROJECT=""
-                    for P in chromium high-contrast compact mobile tablet; do
-                      if [[ "$DIRNAME" == *"-$P" ]]; then
-                        PROJECT="$P"
-                        break
-                      fi
-                    done
-                    if [ -z "$PROJECT" ]; then
-                      continue
-                    fi
-                    TARGET="$SNAPDIR/$PROJECT/$BASENAME"
-                    if [ ! -f "$TARGET" ]; then
-                      mkdir -p "$SNAPDIR/$PROJECT"
-                      cp "$f" "$TARGET"
-                      MISSING=true
-                    fi
-                  done
-                  echo "MISSING=$MISSING"
-                  if [ "$MISSING" = "true" ]; then
+                  git add --intent-to-add "$SNAPDIR" 2>/dev/null || true
+                  if ! git diff --quiet "$SNAPDIR"; then
                     git config user.name "github-actions"
                     git config user.email "github-actions@github.com"
                     git add "$SNAPDIR"
                     git commit -m "test(e2e): add missing Linux visual baselines [$SHARD]"
                     git pull --rebase || true
                     git push
+                    echo "Pushed new baselines"
+                  else
+                    echo "No new baselines to commit"
                   fi
 
             - name: Upload snapshot diffs
