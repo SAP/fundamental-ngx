@@ -1,6 +1,7 @@
 name: E2E Tests
 
 on:
+    workflow_dispatch:
     pull_request:
         paths:
             - 'libs/core/**'
@@ -15,6 +16,7 @@ on:
             - 'libs/docs/**'
             - 'apps/e2e-harness/**'
             - 'playwright.config.ts'
+            - '.github/workflows/e2e-test.yml'
 
 permissions:
     contents: read
