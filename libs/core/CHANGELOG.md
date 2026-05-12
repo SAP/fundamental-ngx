@@ -1,3 +1,13 @@
+## 0.62.2-rc.15 (2026-05-12)
+
+### 🚀 Features
+
+- **core:** add headingLevel support to grid-list title bar ([#14192](https://github.com/SAP/fundamental-ngx/pull/14192))
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.62.2-rc.14 (2026-05-12)
 
 This was a version bump only for core to align it with other projects, there were no code changes.
