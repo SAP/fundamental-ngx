@@ -63,13 +63,11 @@
                 <ui5-li
                     [text]="product.name"
                     [description]="product.category + ' • ' + formatPrice(product.price)"
+                    [additionalText]="getStockStatus(product.stock)"
                     type="Active"
                     (click)="selectProduct(product)"
                     [class.selected]="selectedProduct()?.id === product.id"
                 >
-                    <div slot="additionalText" class="sap-text" [class.sap-text-color--negative]="product.stock < 10">
-                        {{ getStockStatus(product.stock) }}
-                    </div>
                 </ui5-li>
                 }
             </ui5-list>
