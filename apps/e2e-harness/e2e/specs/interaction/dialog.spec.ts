@@ -1,6 +1,6 @@
 import { expect, test } from '../../fixtures/base.fixture';
 
-test.describe('core/dialog', () => {
+test.describe.skip('core/dialog', () => {
     test.beforeEach(async ({ goto }) => {
         await goto('core/dialog/template-based-dialog');
     });

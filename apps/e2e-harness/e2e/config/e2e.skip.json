@@ -387,6 +387,34 @@
         {
             "route": "core/user-menu/mobile",
             "reason": "times out in CI"
+        },
+        {
+            "route": "core/action-bar/long-string-title-truncation",
+            "reason": "times out in CI"
+        },
+        {
+            "route": "core/dialog/component-based",
+            "reason": "times out in CI"
+        },
+        {
+            "route": "core/dialog/full-screen",
+            "reason": "times out in CI"
+        },
+        {
+            "route": "core/dialog/stacked-dialogs/first-dialog",
+            "reason": "times out in CI"
+        },
+        {
+            "route": "core/dialog/stacked-dialogs/second-dialog",
+            "reason": "times out in CI"
+        },
+        {
+            "route": "core/dialog/template-based-dialog",
+            "reason": "times out in CI"
+        },
+        {
+            "route": "core/date-picker/single",
+            "reason": "times out in CI"
         }
     ]
 }

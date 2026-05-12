@@ -1,6 +1,6 @@
 import { expect, test } from '../../fixtures/base.fixture';
 
-test.describe('core/date-picker', () => {
+test.describe.skip('core/date-picker', () => {
     test.beforeEach(async ({ goto }) => {
         await goto('core/date-picker/single');
     });

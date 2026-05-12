@@ -270,13 +270,6 @@ export const generatedRoutes: Routes = [
             )
     },
     {
-        path: 'core/action-bar/long-string-title-truncation',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/core/action-bar/examples/action-bar-long-string-title-truncation-example.component'
-            ).then((m) => m.ActionBarLongStringTitleTruncationExampleComponent)
-    },
-    {
         path: 'core/action-bar/mobile',
         loadComponent: () =>
             import('../../../../libs/docs/core/action-bar/examples/action-bar-mobile-example.component').then(
@@ -1292,13 +1285,6 @@ export const generatedRoutes: Routes = [
             )
     },
     {
-        path: 'core/dialog/component-based',
-        loadComponent: () =>
-            import('../../../../libs/docs/core/dialog/examples/component-based/dialog-example.component').then(
-                (m) => m.DialogExampleComponent
-            )
-    },
-    {
         path: 'core/dialog/component-based-dialog',
         loadComponent: () =>
             import(
@@ -1320,13 +1306,6 @@ export const generatedRoutes: Routes = [
             )
     },
     {
-        path: 'core/dialog/full-screen',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/core/dialog/examples/dialog-full-screen/dialog-full-screen-example.component'
-            ).then((m) => m.DialogFullScreenInnerExampleComponent)
-    },
-    {
         path: 'core/dialog/mobile',
         loadComponent: () =>
             import('../../../../libs/docs/core/dialog/examples/dialog-mobile/dialog-mobile-example.component').then(
@@ -1345,20 +1324,6 @@ export const generatedRoutes: Routes = [
         loadComponent: () =>
             import('../../../../libs/docs/core/dialog/examples/dialog-position/dialog-position-example.component').then(
                 (m) => m.DialogPositionExampleComponent
-            )
-    },
-    {
-        path: 'core/dialog/stacked-dialogs/first-dialog',
-        loadComponent: () =>
-            import('../../../../libs/docs/core/dialog/examples/stacked-dialogs/first-dialog-example.component').then(
-                (m) => m.FirstDialogExampleComponent
-            )
-    },
-    {
-        path: 'core/dialog/stacked-dialogs/second-dialog',
-        loadComponent: () =>
-            import('../../../../libs/docs/core/dialog/examples/stacked-dialogs/second-dialog-example.component').then(
-                (m) => m.SecondDialogExampleComponent
             )
     },
     {

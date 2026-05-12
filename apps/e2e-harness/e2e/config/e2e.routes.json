@@ -1,5 +1,5 @@
 {
-    "count": 958,
+    "count": 953,
     "routes": [
         {
             "path": "btp/button/nested",
@@ -266,13 +266,6 @@
             "component": "action-bar",
             "example": "back",
             "className": "ActionBarBackExampleComponent"
-        },
-        {
-            "path": "core/action-bar/long-string-title-truncation",
-            "library": "core",
-            "component": "action-bar",
-            "example": "long-string-title-truncation",
-            "className": "ActionBarLongStringTitleTruncationExampleComponent"
         },
         {
             "path": "core/action-bar/mobile",
@@ -1290,13 +1283,6 @@
             "className": "DialogComplexExampleComponent"
         },
         {
-            "path": "core/dialog/component-based",
-            "library": "core",
-            "component": "dialog",
-            "example": "component-based",
-            "className": "DialogExampleComponent"
-        },
-        {
             "path": "core/dialog/component-based-dialog",
             "library": "core",
             "component": "dialog",
@@ -1318,13 +1304,6 @@
             "className": "FormDialogExampleComponent"
         },
         {
-            "path": "core/dialog/full-screen",
-            "library": "core",
-            "component": "dialog",
-            "example": "full-screen",
-            "className": "DialogFullScreenInnerExampleComponent"
-        },
-        {
             "path": "core/dialog/mobile",
             "library": "core",
             "component": "dialog",
@@ -1344,20 +1323,6 @@
             "component": "dialog",
             "example": "position",
             "className": "DialogPositionExampleComponent"
-        },
-        {
-            "path": "core/dialog/stacked-dialogs/first-dialog",
-            "library": "core",
-            "component": "dialog",
-            "example": "stacked-dialogs/first-dialog",
-            "className": "FirstDialogExampleComponent"
-        },
-        {
-            "path": "core/dialog/stacked-dialogs/second-dialog",
-            "library": "core",
-            "component": "dialog",
-            "example": "stacked-dialogs/second-dialog",
-            "className": "SecondDialogExampleComponent"
         },
         {
             "path": "core/dialog/stacked-dialogs/stacked",
