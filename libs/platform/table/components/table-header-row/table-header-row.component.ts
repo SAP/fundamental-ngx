@@ -166,7 +166,7 @@ export class TableHeaderRowComponent extends TableRowDirective implements OnInit
      * @hidden
      * Used to remove the selection column title, to prevent screenreader from reading "Select All" when focusing non-header cells
      * */
-    _selectionColumnHeaderDisableTitle = signal(true);
+    readonly selectionColumnHeaderDisableTitle = signal(true);
 
     /** @hidden */
     readonly SELECTION_MODE = SelectionMode;
