@@ -20,7 +20,8 @@ const Configuration = {
                 'shared',
                 'i18n',
                 'datetime-adapter',
-                'ui5'
+                'ui5',
+                'mcp'
             ]
         ],
         'body-max-line-length': [2, 'always', 400],
