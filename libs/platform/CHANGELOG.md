@@ -1,3 +1,13 @@
+## 0.62.3-rc.1 (2026-05-13)
+
+### 🩹 Fixes
+
+- **platform:** table with selection reading select all column header … ([#14181](https://github.com/SAP/fundamental-ngx/pull/14181))
+
+### ❤️ Thank You
+
+- Mike O'Donnell @mikerodonnell89
+
 ## 0.62.3-rc.0 (2026-05-13)
 
 ### 🚀 Features
