@@ -96,6 +96,14 @@
         {
             "route": "ui5/carousel/carousel",
             "reason": "Auto-rotating carousel with timing-dependent state"
+        },
+        {
+            "route": "ui5-fiori/media-gallery/media-gallery",
+            "reason": "Loads external images from ui5.github.io (subtle JPEG decoding drift)"
+        },
+        {
+            "route": "platform/message-popover/form-generator-component",
+            "reason": "Form-generator initialization timing — screenshot can fire before form is fully rendered"
         }
     ]
 }

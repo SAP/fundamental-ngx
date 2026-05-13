@@ -12,7 +12,7 @@ npx playwright test
 # Run tests for one component
 npx playwright test --grep "core/button"
 
-# Run only one project (faster iteration)
+# Run only one project (default project — skips compact/HC/responsive visuals)
 npx playwright test --project chromium
 
 # Run only interaction tests
@@ -114,35 +114,37 @@ Update baselines when you intentionally changed a component's appearance:
 npx playwright test --update-snapshots
 ```
 
-| Situation         | What happens                                              |
-| ----------------- | --------------------------------------------------------- |
-| Local dev (macOS) | Updates `snapshots/darwin/` baselines                     |
-| CI (Linux)        | Auto-commits missing Linux baselines to your PR branch    |
-| Visual diff in PR | Download the `playwright-report` artifact to review diffs |
+| Situation         | What happens                                                                                        |
+| ----------------- | --------------------------------------------------------------------------------------------------- |
+| Local dev (macOS) | Updates `snapshots/darwin/` baselines                                                               |
+| CI (Linux)        | Auto-commits **missing** Linux baselines to your PR branch (existing baselines are not regenerated) |
+| Visual diff in PR | Download the `playwright-report` artifact to review diffs                                           |
 
-Only commit baselines for your platform. CI generates Linux baselines automatically on first run.
+Only commit baselines for your platform. CI fills in missing Linux baselines on first run; intentional visual changes still require a local `--update-snapshots` pass.
 
 ## 5. Troubleshooting
 
-| Problem                                       | Fix                                                                                                                                                                             |
-| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Test fails locally, passes in CI              | Platform font rendering differs. Only Linux baselines are canonical. Use `--update-snapshots` for local dev.                                                                    |
-| "Route not found" or component doesn't render | Regenerate routes: `npx tsx apps/e2e-harness/scripts/generate-routes.ts`                                                                                                        |
-| Component throws DI error                     | Add missing provider to `apps/e2e-harness/src/app/app.config.ts`, or add to `e2e.skip.json`                                                                                     |
-| Flaky visual test (1px diffs)                 | Ensure `goto()` is used (disables animations). If still flaky, add `page.locator('.fd-specific-element').waitFor()` before screenshot. Last resort: `page.waitForTimeout(300)`. |
-| New component not picked up                   | Ensure filename matches `*-example.component.ts` (core/platform) or `*-sample.ts` (UI5 WC)                                                                                      |
+| Problem                                       | Fix                                                                                                                                                          |
+| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Test fails locally, passes in CI              | Platform font rendering differs. Only Linux baselines are canonical. Use `--update-snapshots` for local dev.                                                 |
+| "Route not found" or component doesn't render | Regenerate routes: `npx tsx apps/e2e-harness/scripts/generate-routes.ts`                                                                                     |
+| Component throws DI error                     | Add missing provider to `apps/e2e-harness/src/app/app.config.ts`, or add to `e2e.skip.json`                                                                  |
+| Flaky visual test (1px diffs)                 | Ensure `goto()` is used (disables animations). If still flaky, add `await expect(locator).toBeVisible()` before the screenshot — never use `waitForTimeout`. |
+| New component not picked up                   | Ensure filename matches `*-example.component.ts` (core/platform) or `*-sample.ts` (UI5 WC)                                                                   |
 
 ## 6. CI Behavior
 
-**Triggers:** PRs changing `libs/core/**`, `libs/platform/**`, `libs/cdk/**`, `libs/btp/**`, `libs/cx/**`, `libs/i18n/**`, `libs/ui5-webcomponents*/**`, `libs/docs/**`, `apps/e2e-harness/**`, or `playwright.config.ts`.
+**Triggers:** PRs changing `libs/core/**`, `libs/platform/**`, `libs/cdk/**`, `libs/btp/**`, `libs/cx/**`, `libs/i18n/**`, `libs/ui5-webcomponents/**`, `libs/ui5-webcomponents-fiori/**`, `libs/ui5-webcomponents-ai/**`, `libs/docs/**`, `apps/e2e-harness/**`, `playwright.config.ts`, or the workflow file itself (`.github/workflows/e2e-test.yml`).
 
 **Sharding:** CI detects which libraries changed and runs only affected shards:
 
-| Shard      | Scope                                   |
-| ---------- | --------------------------------------- |
-| `core`     | `libs/core/`, `libs/docs/core/`         |
-| `platform` | `libs/platform/`, `libs/docs/platform/` |
-| `other`    | `cdk`, `btp`, `cx`, `i18n`, `ui5-*`     |
+| Shard      | Scope                                       |
+| ---------- | ------------------------------------------- |
+| `core-1`   | `libs/core/[a-e]*`, `libs/docs/core/[a-e]*` |
+| `core-2`   | `libs/core/[f-o]*`, `libs/docs/core/[f-o]*` |
+| `core-3`   | `libs/core/[p-z]*`, `libs/docs/core/[p-z]*` |
+| `platform` | `libs/platform/`, `libs/docs/platform/`     |
+| `other`    | `cdk`, `btp`, `cx`, `i18n`, `ui5-*`         |
 
 If e2e infrastructure itself changed, all shards run.
 
