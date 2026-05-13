@@ -111,9 +111,13 @@ describe('TableHeaderRowComponent', () => {
         fixture = TestBed.createComponent(TestTableHeaderRowComponent);
         fixture.detectChanges();
 
-        component = fixture.debugElement.query(
+        const debugElement = fixture.debugElement.query(
             (el) => el.componentInstance instanceof TableHeaderRowComponent
-        ).componentInstance;
+        );
+        if (!debugElement) {
+            throw new Error('TableHeaderRowComponent not found in fixture');
+        }
+        component = debugElement.componentInstance;
         selectionCellElement = fixture.nativeElement.querySelector('.fd-table__cell--checkbox') as HTMLElement;
     });
 
@@ -121,49 +125,49 @@ describe('TableHeaderRowComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    describe('_selectionColumnHeaderDisableTitle signal', () => {
+    describe('selectionColumnHeaderDisableTitle signal', () => {
         it('should initialize to true', () => {
-            expect(component._selectionColumnHeaderDisableTitle()).toBe(true);
+            expect(component.selectionColumnHeaderDisableTitle()).toBe(true);
         });
 
         it('should set to false on mouseenter', () => {
             selectionCellElement.dispatchEvent(new MouseEvent('mouseenter'));
             fixture.detectChanges();
 
-            expect(component._selectionColumnHeaderDisableTitle()).toBe(false);
+            expect(component.selectionColumnHeaderDisableTitle()).toBe(false);
         });
 
         it('should set to true on mouseleave', () => {
             // First set to false
-            component._selectionColumnHeaderDisableTitle.set(false);
+            component.selectionColumnHeaderDisableTitle.set(false);
             fixture.detectChanges();
 
             selectionCellElement.dispatchEvent(new MouseEvent('mouseleave'));
             fixture.detectChanges();
 
-            expect(component._selectionColumnHeaderDisableTitle()).toBe(true);
+            expect(component.selectionColumnHeaderDisableTitle()).toBe(true);
         });
 
         it('should set to false on focusin', () => {
             selectionCellElement.dispatchEvent(new FocusEvent('focusin'));
             fixture.detectChanges();
 
-            expect(component._selectionColumnHeaderDisableTitle()).toBe(false);
+            expect(component.selectionColumnHeaderDisableTitle()).toBe(false);
         });
 
         it('should set to true on focusout', () => {
             // First set to false
-            component._selectionColumnHeaderDisableTitle.set(false);
+            component.selectionColumnHeaderDisableTitle.set(false);
             fixture.detectChanges();
 
             selectionCellElement.dispatchEvent(new FocusEvent('focusout'));
             fixture.detectChanges();
 
-            expect(component._selectionColumnHeaderDisableTitle()).toBe(true);
+            expect(component.selectionColumnHeaderDisableTitle()).toBe(true);
         });
 
         it('should show title when signal is false', () => {
-            component._selectionColumnHeaderDisableTitle.set(false);
+            component.selectionColumnHeaderDisableTitle.set(false);
             fixture.detectChanges();
 
             const title = selectionCellElement.getAttribute('title');
@@ -171,7 +175,7 @@ describe('TableHeaderRowComponent', () => {
         });
 
         it('should hide title when signal is true', () => {
-            component._selectionColumnHeaderDisableTitle.set(true);
+            component.selectionColumnHeaderDisableTitle.set(true);
             fixture.detectChanges();
 
             const title = selectionCellElement.getAttribute('title');
@@ -180,7 +184,7 @@ describe('TableHeaderRowComponent', () => {
 
         it('should hide title in single selection mode regardless of signal value', () => {
             fixture.componentInstance.selectionMode = SelectionMode.SINGLE;
-            component._selectionColumnHeaderDisableTitle.set(false);
+            component.selectionColumnHeaderDisableTitle.set(false);
             fixture.detectChanges();
 
             const title = selectionCellElement.getAttribute('title');
