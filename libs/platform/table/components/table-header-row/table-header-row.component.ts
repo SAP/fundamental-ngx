@@ -12,7 +12,8 @@ import {
     ViewEncapsulation,
     computed,
     forwardRef,
-    inject
+    inject,
+    signal
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
@@ -160,6 +161,12 @@ export class TableHeaderRowComponent extends TableRowDirective implements OnInit
     private set _focusableCellItems(items: QueryList<FocusableItemDirective>) {
         this.setItems(items.toArray());
     }
+
+    /**
+     * @hidden
+     * Used to remove the selection column title, to prevent screenreader from reading "Select All" when focusing non-header cells
+     * */
+    readonly selectionColumnHeaderDisableTitle = signal(true);
 
     /** @hidden */
     readonly SELECTION_MODE = SelectionMode;
