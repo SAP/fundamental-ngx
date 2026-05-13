@@ -885,18 +885,12 @@ export class ComboboxComponent<T = any>
     private _propagateChange(): void {
         if (this.communicateByObject) {
             const values = this._getOptionObjectByDisplayedValue(this.inputText);
-            // Do not set new value if theres multiple items that have same label.
             if (values.length === 1 && this.displayFn(values[0]) !== this.displayFn(this.getValue())) {
                 this.setValue(values[0]);
             } else if (values.length === 0) {
-                this.setValue(this.inputText);
+                this.setValue(null);
             }
-            const thisValue = this.getValue();
-            // If valueProperty is not specified and value is an object, emit the object
-            // If valueProperty is specified, the extracted value is already set by setValue
-            if (typeof thisValue === 'object' || this.valueProperty()) {
-                this.onChange(thisValue);
-            }
+            this.onChange(this.getValue());
         } else {
             this.onChange(this.inputText);
         }

@@ -90,7 +90,7 @@ describe('ComboboxComponent', () => {
         expect(component.onChange).toHaveBeenCalledWith('otherDisplayedValue');
     });
 
-    it('should not call onChange when using wrong input entry on dropdown mode with communicateByObject', () => {
+    it('should call onChange with null when using non-matching input in communicateByObject mode', () => {
         jest.spyOn(component, 'onChange');
         component.communicateByObject = true;
         component.displayFn = (item: any): string => {
@@ -101,7 +101,7 @@ describe('ComboboxComponent', () => {
             }
         };
         component.inputText = 'otherDisplayedValue';
-        expect(component.onChange).not.toHaveBeenCalled();
+        expect(component.onChange).toHaveBeenCalledWith(null);
     });
 
     it('should handle write value from outside on dropdown mode', () => {
@@ -411,6 +411,113 @@ describe('ComboboxComponent', () => {
             component.inputText = '';
 
             expect(component.onChange).toHaveBeenCalledWith('');
+        });
+    });
+
+    describe('communicateByObject propagateChange edge cases', () => {
+        interface Item {
+            displayedValue: string;
+            value: string;
+        }
+
+        let items: Item[];
+
+        beforeEach(() => {
+            fixture = TestBed.createComponent(ComboboxComponent<Item>);
+            component = fixture.componentInstance;
+            items = [
+                { displayedValue: 'Apple', value: 'apple-val' },
+                { displayedValue: 'Banana', value: 'banana-val' },
+                { displayedValue: 'Cherry', value: 'cherry-val' }
+            ];
+            component.dropdownValues = items;
+            component.communicateByObject = true;
+            component.displayFn = (item: Item): string => item?.displayedValue ?? '';
+            component.searchFn = () => {};
+            fixture.detectChanges();
+        });
+
+        it('should emit null when clearing input to empty string', () => {
+            jest.spyOn(component, 'onChange');
+            component.onMenuClickHandler(items[0]);
+            expect(component.onChange).toHaveBeenCalledWith(items[0]);
+
+            (component.onChange as jest.Mock).mockClear();
+            component.inputText = '';
+            expect(component.onChange).toHaveBeenCalledWith(null);
+        });
+
+        it('should emit the full object when input matches an item exactly', () => {
+            jest.spyOn(component, 'onChange');
+            component.inputText = 'Banana';
+            expect(component.onChange).toHaveBeenCalledWith(items[1]);
+        });
+
+        it('should emit null when switching from valid selection to non-matching text', () => {
+            jest.spyOn(component, 'onChange');
+            component.onMenuClickHandler(items[2]);
+            expect(component.onChange).toHaveBeenCalledWith(items[2]);
+
+            (component.onChange as jest.Mock).mockClear();
+            component.inputText = 'NonExistent';
+            expect(component.onChange).toHaveBeenCalledWith(null);
+        });
+
+        it('should not emit stale object when multiple items share the same display value', () => {
+            const duplicates: Item[] = [
+                { displayedValue: 'Apple', value: 'apple-1' },
+                { displayedValue: 'Apple', value: 'apple-2' },
+                { displayedValue: 'Banana', value: 'banana-val' }
+            ];
+            component.dropdownValues = duplicates;
+            jest.spyOn(component, 'onChange');
+
+            component.inputText = 'Apple';
+            // Multiple matches → should NOT emit a single item, should emit current getValue()
+            // The key assertion: onChange IS called (contract fulfilled) but NOT with a single stale object
+            expect(component.onChange).toHaveBeenCalled();
+            const emittedValue = (component.onChange as jest.Mock).mock.calls[0][0];
+            // With multiple matches, it should not prematurely pick one item
+            expect(emittedValue).not.toEqual(duplicates[0]);
+            expect(emittedValue).not.toEqual(duplicates[1]);
+        });
+
+        it('should emit extracted property value when valueProperty is set and input matches', () => {
+            jest.spyOn(component, 'onChange');
+            fixture.componentRef.setInput('valueProperty', 'value');
+            fixture.detectChanges();
+
+            component.inputText = 'Cherry';
+            expect(component.onChange).toHaveBeenCalledWith('cherry-val');
+        });
+
+        it('should emit null when valueProperty is set and input does not match', () => {
+            jest.spyOn(component, 'onChange');
+            fixture.componentRef.setInput('valueProperty', 'value');
+            fixture.detectChanges();
+
+            component.inputText = 'Grape';
+            expect(component.onChange).toHaveBeenCalledWith(null);
+        });
+
+        it('should not duplicate emissions when setting inputText to the same non-matching value', () => {
+            jest.spyOn(component, 'onChange');
+            component.inputText = 'xyz';
+            expect(component.onChange).toHaveBeenCalledTimes(1);
+            expect(component.onChange).toHaveBeenCalledWith(null);
+        });
+
+        it('should emit null via _handleClearSearchTerm when used as search field', () => {
+            jest.spyOn(component, 'onChange');
+            component.onMenuClickHandler(items[0]);
+            (component.onChange as jest.Mock).mockClear();
+
+            component.isSearch = true;
+            component.mobile = false;
+            fixture.detectChanges();
+
+            (component as any)._handleClearSearchTerm();
+            expect(component.onChange).toHaveBeenCalledWith(null);
         });
     });
 

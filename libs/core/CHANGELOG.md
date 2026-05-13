@@ -1,3 +1,17 @@
+## 0.62.2-rc.17 (2026-05-12)
+
+### 🩹 Fixes
+
+- **core:** restore ngModelChange emission in combobox communicateByObject mode ([#14200](https://github.com/SAP/fundamental-ngx/pull/14200))
+
+### ❤️ Thank You
+
+- deno
+
+## 0.62.2-rc.16 (2026-05-12)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
 ## 0.62.2-rc.15 (2026-05-12)
 
 ### 🚀 Features
