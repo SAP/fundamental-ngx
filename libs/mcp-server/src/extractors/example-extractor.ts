@@ -19,18 +19,19 @@ export interface ComponentExample {
 
 /**
  * Extract example components from the docs folder.
- * Core/platform examples: libs/docs/{library}/{component}/examples/*-example.component.ts
- * UI5 examples (named):   libs/docs/{library}/{component}/examples/*-sample.ts
- * UI5 examples (plain):   libs/docs/ui5-webcomponents/{component}/examples/*.ts  (excluding index.ts)
+ * Core/platform examples: libs/docs/{library}/{component}/examples/**‌/*-example.component.ts
+ *   (may be nested in subdirectories, e.g. examples/dialog-complex/dialog-complex-example.component.ts)
+ * UI5 examples (named):   libs/docs/{library}/{component}/examples/**‌/*-sample.ts
+ * UI5 examples (plain):   libs/docs/ui5-webcomponents/{component}/examples/**‌/*.ts  (excluding index.ts)
  */
 export async function extractExamples(basePath: string): Promise<Map<string, ComponentExample[]>> {
     const patterns = [
-        'libs/docs/*/*/examples/*-example.component.ts',
-        'libs/docs/*/*/examples/*-sample.ts',
+        'libs/docs/*/*/examples/**/*-example.component.ts',
+        'libs/docs/*/*/examples/**/*-sample.ts',
         // UI5 docs also use plain .ts files (e.g. "basic-popover.ts", "states.ts")
-        'libs/docs/ui5-webcomponents/*/examples/*.ts',
-        'libs/docs/ui5-webcomponents-fiori/*/examples/*.ts',
-        'libs/docs/ui5-webcomponents-ai/*/examples/*.ts'
+        'libs/docs/ui5-webcomponents/*/examples/**/*.ts',
+        'libs/docs/ui5-webcomponents-fiori/*/examples/**/*.ts',
+        'libs/docs/ui5-webcomponents-ai/*/examples/**/*.ts'
     ];
     const files = await glob(patterns, { cwd: basePath, absolute: false });
 
@@ -48,7 +49,10 @@ export async function extractExamples(basePath: string): Promise<Map<string, Com
 
         const libraryDir = parts[2]; // e.g. "core", "platform", "ui5-webcomponents"
         const componentDir = parts[3]; // e.g. "button", "dialog"
-        const fileName = parts[5]; // e.g. "button-types-example.component.ts" or "button-sample.ts"
+        // Use last segment: works for both flat and subdirectory layouts
+        // flat:  examples/button-types-example.component.ts   → parts[5]
+        // subdir: examples/dialog-complex/dialog-complex-example.component.ts → parts[6]
+        const fileName = parts[parts.length - 1];
 
         // Skip non-example files
         if (

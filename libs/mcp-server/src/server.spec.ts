@@ -10,6 +10,7 @@
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
 import { ComponentCatalog, ComponentExample, ComponentMetadata, InputMetadata } from './types/component-metadata';
+import { buildPitfalls, buildTemplate, deriveImportPath, getSelectorType } from './utils/selector-utils';
 
 // ---------------------------------------------------------------------------
 // We test the server's helper functions by re-implementing the lookup logic
@@ -43,14 +44,11 @@ function findComponent(nameOrSelector: string, components: ComponentMetadata[]):
         return byName;
     }
 
-    const byPartialSelector = components.find((c) => c.selector.toLowerCase().includes(lower));
-    if (byPartialSelector) {
-        return byPartialSelector;
-    }
-
-    const byPartialName = components.find((c) => c.name.toLowerCase().includes(lower));
-    if (byPartialName) {
-        return byPartialName;
+    const partialMatches = components.filter(
+        (c) => c.selector.toLowerCase().includes(lower) || c.name.toLowerCase().includes(lower)
+    );
+    if (partialMatches.length > 0) {
+        return partialMatches.sort((a, b) => scoreMatch(b, lower) - scoreMatch(a, lower))[0];
     }
 
     return undefined;
@@ -63,6 +61,12 @@ function scoreMatch(component: ComponentMetadata, query: string): number {
         score += 100;
     } else if (component.selector.toLowerCase().includes(query)) {
         score += 50;
+        const selectorParts = component.selector.split(',').map((p) => p.trim().toLowerCase());
+        const matchingParts = selectorParts.filter((p) => p.includes(query));
+        if (matchingParts.length > 0) {
+            const shortestPart = Math.min(...matchingParts.map((p) => p.length));
+            score += Math.max(0, 20 - (shortestPart - query.length));
+        }
     }
 
     if (component.name.toLowerCase() === query) {
@@ -316,6 +320,41 @@ describe('MCP Server helpers', () => {
         it('should prefer exact selector over partial name match', () => {
             const result = findComponent('ui5-button', FIXTURE_COMPONENTS);
             expect(result?.name).toBe('Button');
+        });
+
+        it('should prefer primary component over compound directive with same attribute', () => {
+            // Regression: searching "fd-button" previously returned NestedButtonDirective
+            // ([fd-button][fdbNestedButton]) instead of ButtonComponent (button[fd-button])
+            // because the directive appeared first in the catalog.
+            const primaryButton: ComponentMetadata = {
+                name: 'ButtonComponent',
+                selector: 'button[fd-button], a[fd-button]',
+                library: '@fundamental-ngx/core',
+                category: 'Actions',
+                description: 'Standard button',
+                inputs: [],
+                outputs: [],
+                slots: [],
+                methods: [],
+                cssProperties: [],
+                source: 'typedoc'
+            };
+            const nestedDirective: ComponentMetadata = {
+                name: 'NestedButtonDirective',
+                selector: '[fd-button][fdbNestedButton]',
+                library: '@fundamental-ngx/btp',
+                category: 'Actions',
+                description: 'Nested button directive',
+                inputs: [],
+                outputs: [],
+                slots: [],
+                methods: [],
+                cssProperties: [],
+                source: 'typedoc'
+            };
+            // Directive appears first — scorer must still rank ButtonComponent higher
+            const result = findComponent('fd-button', [nestedDirective, primaryButton]);
+            expect(result?.name).toBe('ButtonComponent');
         });
     });
 
@@ -790,5 +829,184 @@ describe('compare_components logic', () => {
         expect(compA.slots).toHaveLength(0);
         expect(compB.slots).toHaveLength(1);
         expect(compB.slots[0].name).toBe('default');
+    });
+});
+
+const ATTRIBUTE_FIXTURE: ComponentMetadata = {
+    name: 'ButtonComponent',
+    selector: 'button[fd-button], a[fd-button], span[fd-button]',
+    library: '@fundamental-ngx/core',
+    category: 'Actions',
+    description: 'Button attribute directive.',
+    inputs: [
+        { name: 'fdType', type: 'string', description: 'Button type', required: false },
+        { name: 'label', type: 'string', description: 'Button label', required: false }
+    ],
+    outputs: [],
+    slots: [],
+    methods: [],
+    cssProperties: [],
+    source: 'typedoc'
+};
+
+const PURE_ATTR_FIXTURE: ComponentMetadata = {
+    name: 'CompactDirective',
+    selector: '[fdCompact]',
+    library: '@fundamental-ngx/core',
+    category: 'Utility',
+    description: 'Compact mode directive.',
+    inputs: [],
+    outputs: [],
+    slots: [],
+    methods: [],
+    cssProperties: [],
+    source: 'typedoc'
+};
+
+const REQUIRED_INPUTS_FIXTURE: ComponentMetadata = {
+    name: 'TableComponent',
+    selector: 'fdp-table',
+    library: '@fundamental-ngx/platform',
+    category: 'Data Display',
+    description: 'Platform table.',
+    inputs: [
+        { name: 'dataSource', type: 'TableDataSource', description: 'Data source', required: true },
+        { name: 'selectionMode', type: 'string', description: 'Selection mode', required: false }
+    ],
+    outputs: [],
+    slots: [],
+    methods: [],
+    cssProperties: [],
+    source: 'typedoc'
+};
+
+describe('getSelectorType', () => {
+    it('should return "element" for plain element selectors', () => {
+        expect(getSelectorType('fd-button')).toBe('element');
+        expect(getSelectorType('fdp-table')).toBe('element');
+        expect(getSelectorType('ui5-button')).toBe('element');
+    });
+
+    it('should return "element-attribute" for element-with-attribute selectors', () => {
+        expect(getSelectorType('button[fd-button]')).toBe('element-attribute');
+        expect(getSelectorType('button[fd-button], a[fd-button], span[fd-button]')).toBe('element-attribute');
+    });
+
+    it('should return "attribute" for pure attribute selectors', () => {
+        expect(getSelectorType('[fdCompact]')).toBe('attribute');
+        expect(getSelectorType('[fd-busy-indicator-extended]')).toBe('attribute');
+    });
+
+    it('should return "element" when first part is an element selector', () => {
+        // Production only inspects the first comma-separated part.
+        expect(getSelectorType('fd-input, [fdInput]')).toBe('element');
+    });
+});
+
+describe('buildTemplate', () => {
+    it('should wrap element selector in open/close tags when component has inputs', () => {
+        // FIXTURE_COMPONENTS[0] = ButtonComponent (fd-button) — has 3 non-required inputs.
+        expect(buildTemplate(FIXTURE_COMPONENTS[0])).toBe('<fd-button>\n  <!-- content -->\n</fd-button>');
+    });
+
+    it('should use self-closing tag for element component with no inputs and no slots', () => {
+        const comp: ComponentMetadata = { ...FIXTURE_COMPONENTS[0], inputs: [], slots: [] };
+        expect(buildTemplate(comp)).toBe('<fd-button />');
+    });
+
+    it('should build self-closing snippet for element-attribute selector', () => {
+        expect(buildTemplate(ATTRIBUTE_FIXTURE)).toBe('<button fd-button />');
+    });
+
+    it('should build attribute snippet using <div> as host for pure attribute selector', () => {
+        expect(buildTemplate(PURE_ATTR_FIXTURE)).toBe('<div fdCompact>\n  <!-- content -->\n</div>');
+    });
+
+    it('should include required inputs as bound attributes', () => {
+        expect(buildTemplate(REQUIRED_INPUTS_FIXTURE)).toContain('[dataSource]');
+    });
+});
+
+describe('deriveImportPath', () => {
+    it('should derive core subpath from fd- element selector', () => {
+        const comp: ComponentMetadata = { ...FIXTURE_COMPONENTS[0], selector: 'fd-dialog' };
+        expect(deriveImportPath(comp)).toBe('@fundamental-ngx/core/dialog');
+    });
+
+    it('should derive platform subpath from fdp- selector', () => {
+        expect(deriveImportPath(REQUIRED_INPUTS_FIXTURE)).toBe('@fundamental-ngx/platform/table');
+    });
+
+    it('should derive subpath from attribute selector', () => {
+        expect(deriveImportPath(ATTRIBUTE_FIXTURE)).toBe('@fundamental-ngx/core/button');
+    });
+
+    it('should return deep subpath for UI5 components', () => {
+        const comp = findComponent('ui5-button', FIXTURE_COMPONENTS)!;
+        expect(deriveImportPath(comp)).toBe('@fundamental-ngx/ui5-webcomponents/button');
+    });
+});
+
+describe('buildPitfalls', () => {
+    it('should warn about element-attribute directive misuse', () => {
+        const importPath = deriveImportPath(ATTRIBUTE_FIXTURE);
+        const pitfalls = buildPitfalls(ATTRIBUTE_FIXTURE, importPath);
+        expect(pitfalls).toHaveLength(1);
+        expect(pitfalls[0]).toContain('specific host element');
+        expect(pitfalls[0]).toContain('<button>');
+    });
+
+    it('should warn about deprecated components', () => {
+        const comp = findComponent('fd-deprecated', FIXTURE_COMPONENTS)!;
+        const pitfalls = buildPitfalls(comp, deriveImportPath(comp));
+        expect(pitfalls.some((p) => p.startsWith('DEPRECATED:'))).toBe(true);
+    });
+
+    it('should list required inputs', () => {
+        const pitfalls = buildPitfalls(REQUIRED_INPUTS_FIXTURE, deriveImportPath(REQUIRED_INPUTS_FIXTURE));
+        expect(pitfalls.some((p) => p.includes('dataSource'))).toBe(true);
+    });
+
+    it('should return empty pitfalls for a simple element component with no issues', () => {
+        const comp = findComponent('fd-button', FIXTURE_COMPONENTS)!;
+        const pitfalls = buildPitfalls(comp, deriveImportPath(comp));
+        expect(pitfalls).toHaveLength(0);
+    });
+
+    it('should warn about pure attribute directive misuse', () => {
+        const pitfalls = buildPitfalls(PURE_ATTR_FIXTURE, deriveImportPath(PURE_ATTR_FIXTURE));
+        expect(pitfalls.some((p) => p.includes('attribute directive'))).toBe(true);
+    });
+});
+
+describe('get_usage_guide result shape', () => {
+    it('should include selectorType, importPath, templateUsage, and pitfalls for element component', () => {
+        const comp = findComponent('fdp-table', FIXTURE_COMPONENTS)!;
+        const selectorType = getSelectorType(comp.selector);
+        const importPath = deriveImportPath(comp);
+        const templateUsage = buildTemplate(comp);
+        const pitfalls = buildPitfalls(comp, importPath);
+
+        expect(selectorType).toBe('element');
+        expect(importPath).toBe('@fundamental-ngx/platform/table');
+        expect(templateUsage).toContain('fdp-table');
+        expect(templateUsage).toContain('[dataSource]');
+        expect(pitfalls.some((p) => p.includes('dataSource'))).toBe(true);
+    });
+
+    it('should surface element-attribute pitfall for the real ButtonComponent selector', () => {
+        const selectorType = getSelectorType(ATTRIBUTE_FIXTURE.selector);
+        const importPath = deriveImportPath(ATTRIBUTE_FIXTURE);
+        const pitfalls = buildPitfalls(ATTRIBUTE_FIXTURE, importPath);
+
+        expect(selectorType).toBe('element-attribute');
+        expect(pitfalls[0]).toContain('specific host element');
+    });
+
+    it('should produce correct import statement string', () => {
+        const comp = findComponent('fd-dialog', FIXTURE_COMPONENTS)!;
+        const importPath = deriveImportPath(comp);
+        const statement = `import { ${comp.name} } from '${importPath}';`;
+        expect(statement).toBe("import { DialogComponent } from '@fundamental-ngx/core/dialog';");
     });
 });

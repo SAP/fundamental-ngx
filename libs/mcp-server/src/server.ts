@@ -14,6 +14,7 @@ import {
     LIBRARY_ALIAS_MAP,
     LibraryAlias
 } from './types/component-metadata';
+import { buildPitfalls, buildTemplate, deriveImportPath, getSelectorType } from './utils/selector-utils';
 
 // Load component catalog from pre-built JSON
 let catalog: ComponentCatalog;
@@ -166,6 +167,10 @@ Use this when you need to know how to use a specific component.`,
             result.deprecationWarning = `This component is deprecated: ${component.deprecated}`;
         }
 
+        result.selectorType = getSelectorType(component.selector);
+        result.templateUsage = buildTemplate(component);
+        result.importPath = deriveImportPath(component);
+
         return {
             content: [
                 {
@@ -293,13 +298,16 @@ libraries, and how they compose together.`,
         // Also do a keyword search for anything not caught by patterns
         if (recommendations.length < 3) {
             const words = lowerDesc.split(/\s+/).filter((w) => w.length > 3);
+            const wantsAi = lowerDesc.includes('ai');
             for (const word of words) {
                 const matches = catalog.components
                     .filter(
                         (c) =>
-                            c.selector.includes(word) ||
-                            c.name.toLowerCase().includes(word) ||
-                            c.category.toLowerCase().includes(word)
+                            // Suppress AI-library components unless the query explicitly mentions AI
+                            (wantsAi || c.library !== '@fundamental-ngx/ui5-webcomponents-ai') &&
+                            (c.selector.includes(word) ||
+                                c.name.toLowerCase().includes(word) ||
+                                c.category.toLowerCase().includes(word))
                     )
                     .slice(0, 3);
 
@@ -633,6 +641,79 @@ Use this when building accessible UIs or auditing existing components.`,
 );
 
 // ---------------------------------------------------------------------------
+// Tool: get_usage_guide
+// ---------------------------------------------------------------------------
+server.tool(
+    'get_usage_guide',
+    `Get a practical usage guide for a Fundamental NGX component.
+Returns the correct import path, a minimal template snippet showing proper selector usage,
+required inputs that must be provided, and common pitfalls to avoid.
+Use this as the first step when adding a new component to an Angular template.`,
+    {
+        component: z.string().describe('Component name or selector (e.g., "fd-button", "fdp-table", "ui5-input")')
+    },
+    async ({ component }) => {
+        const lowerComponent = component.toLowerCase().replace(/\s+/g, '-');
+        const curatedGuide = USAGE_GUIDES[lowerComponent];
+        if (curatedGuide) {
+            return { content: [{ type: 'text' as const, text: JSON.stringify(curatedGuide, null, 2) }] };
+        }
+
+        const found = findComponent(component);
+
+        if (!found) {
+            return {
+                content: [
+                    {
+                        type: 'text' as const,
+                        text: `Component "${component}" not found. Use search_components to find available components.`
+                    }
+                ]
+            };
+        }
+
+        const importPath = deriveImportPath(found);
+        const templateUsage = buildTemplate(found);
+        const pitfalls = buildPitfalls(found, importPath);
+        const requiredInputs = found.inputs.filter((i) => i.required && !i.defaultValue);
+        const firstExample = found.examples && found.examples.length > 0 ? found.examples[0] : null;
+
+        const result: Record<string, unknown> = {
+            component: found.name,
+            selector: found.selector,
+            library: found.library,
+            importPath,
+            selectorType: getSelectorType(found.selector),
+            templateUsage,
+            requiredInputs: requiredInputs.map((i) => ({ name: i.name, type: i.type, description: i.description })),
+            pitfalls,
+            docsUrl: found.docsUrl
+        };
+
+        if (found.deprecated) {
+            result.deprecated = found.deprecated;
+        }
+
+        if (firstExample) {
+            result.example = {
+                name: firstExample.description,
+                typescript: firstExample.typescript,
+                html: firstExample.html
+            };
+        }
+
+        return {
+            content: [
+                {
+                    type: 'text' as const,
+                    text: JSON.stringify(result, null, 2)
+                }
+            ]
+        };
+    }
+);
+
+// ---------------------------------------------------------------------------
 // Tool: compare_components
 // ---------------------------------------------------------------------------
 server.tool(
@@ -768,57 +849,6 @@ or comparing alternative components for the same use case.`,
 );
 
 // ---------------------------------------------------------------------------
-// Tool: get_usage_guide
-// ---------------------------------------------------------------------------
-server.tool(
-    'get_usage_guide',
-    `Get a structured usage guide for a Fundamental NGX component or pattern.
-Returns a decision tree for choosing between variants, composition patterns showing
-correct parent/child nesting, common pitfalls, and related components.
-Use this when you need to understand WHICH component variant to use and HOW to compose
-components together. Available guides: dialog, table, button, layout-grid, card.`,
-    {
-        component: z
-            .string()
-            .describe('Component or pattern name (e.g., "dialog", "table", "button", "layout-grid", "card")')
-    },
-    async ({ component }) => {
-        const lowerComponent = component.toLowerCase().replace(/\s+/g, '-');
-        const guide = USAGE_GUIDES[lowerComponent];
-
-        if (!guide) {
-            const available = Object.keys(USAGE_GUIDES).join(', ');
-            return {
-                content: [
-                    {
-                        type: 'text' as const,
-                        text: JSON.stringify(
-                            {
-                                component,
-                                error: `No usage guide found for "${component}".`,
-                                availableGuides: available,
-                                note: 'Use recommend_components to find the right component, then get_component_api for its API.'
-                            },
-                            null,
-                            2
-                        )
-                    }
-                ]
-            };
-        }
-
-        return {
-            content: [
-                {
-                    type: 'text' as const,
-                    text: JSON.stringify(guide, null, 2)
-                }
-            ]
-        };
-    }
-);
-
-// ---------------------------------------------------------------------------
 // Resource: component catalog
 // ---------------------------------------------------------------------------
 server.resource('component-catalog', 'fundamental-ngx://components/catalog', async (uri) => ({
@@ -834,6 +864,7 @@ server.resource('component-catalog', 'fundamental-ngx://components/catalog', asy
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
+
 function findComponent(nameOrSelector: string): ComponentMetadata | undefined {
     const lower = nameOrSelector.toLowerCase();
 
@@ -849,16 +880,13 @@ function findComponent(nameOrSelector: string): ComponentMetadata | undefined {
         return byName;
     }
 
-    // Partial match on selector
-    const byPartialSelector = catalog.components.find((c) => c.selector.toLowerCase().includes(lower));
-    if (byPartialSelector) {
-        return byPartialSelector;
-    }
-
-    // Partial match on name
-    const byPartialName = catalog.components.find((c) => c.name.toLowerCase().includes(lower));
-    if (byPartialName) {
-        return byPartialName;
+    // Partial match on selector or name — rank by score to avoid compound
+    // directives beating the primary component when selectors share a substring.
+    const partialMatches = catalog.components.filter(
+        (c) => c.selector.toLowerCase().includes(lower) || c.name.toLowerCase().includes(lower)
+    );
+    if (partialMatches.length > 0) {
+        return partialMatches.sort((a, b) => scoreMatch(b, lower) - scoreMatch(a, lower))[0];
     }
 
     return undefined;
@@ -871,6 +899,15 @@ function scoreMatch(component: ComponentMetadata, query: string): number {
         score += 100;
     } else if (component.selector.toLowerCase().includes(query)) {
         score += 50;
+        // Prefer selectors where the query covers most of the primary part.
+        // Avoids picking compound directives (e.g. [fd-button][fdbNestedButton])
+        // over the primary component (e.g. button[fd-button], a[fd-button]).
+        const selectorParts = component.selector.split(',').map((p) => p.trim().toLowerCase());
+        const matchingParts = selectorParts.filter((p) => p.includes(query));
+        if (matchingParts.length > 0) {
+            const shortestPart = Math.min(...matchingParts.map((p) => p.length));
+            score += Math.max(0, 20 - (shortestPart - query.length));
+        }
     }
 
     if (component.name.toLowerCase() === query) {
@@ -972,11 +1009,30 @@ function baseVersion(version: string): string {
 // ---------------------------------------------------------------------------
 const UI_PATTERNS: Record<string, string[]> = {
     'table|data table|grid': ['fd-table', 'fdp-table', 'ui5-table'],
-    'form|input form': ['fd-form', 'fd-input-group', 'fd-checkbox', 'fd-radio', 'fd-select', 'fd-switch'],
+    // login/register are common form-building queries; replaced non-existent fd-form and fd-radio with real selectors
+    'form|input form|login|register|registration': [
+        'fd-form-group',
+        'fd-form-item',
+        'fd-form-label',
+        'fd-form-control',
+        'fd-input-group',
+        'fd-checkbox',
+        'fd-radio-button',
+        'fd-select',
+        'fd-switch'
+    ],
     'dialog|modal|popup': ['fd-dialog', 'ui5-dialog', 'fd-message-box'],
     'date|calendar|date picker': ['fd-date-picker', 'fd-calendar', 'ui5-date-picker', 'ui5-calendar'],
-    'navigation|nav|sidebar': ['fd-side-navigation', 'fd-vertical-navigation', 'ui5-side-navigation'],
-    'button|action': ['fd-button', 'ui5-button', 'fd-split-button', 'fd-segmented-button'],
+    // fd-side-navigation is deprecated — use fd-vertical-navigation
+    'navigation|nav|sidebar': ['fd-vertical-navigation', 'ui5-side-navigation'],
+    // fd-button does not exist as an element selector; real selector is button[fd-button], a[fd-button]
+    'button|action': [
+        'button[fd-button], a[fd-button]',
+        'fdp-button',
+        'ui5-button',
+        'fd-split-button',
+        'fd-segmented-button'
+    ],
     'list|items': ['fd-list', 'ui5-list', 'fd-grid-list'],
     'menu|dropdown': ['fd-menu', 'fd-popover', 'ui5-menu'],
     'tabs|tab': ['fd-tabs', 'ui5-tab-container'],

@@ -80,32 +80,38 @@ function buildDirIndex(basePath: string, libDirs: string[]): Map<string, string[
 }
 
 /**
- * Manual mapping for UI5 sub-component selectors whose abbreviated CEM names
- * don't correspond to any docs directory via prefix stripping.
+ * Manual mapping for component selectors whose abbreviated names don't correspond
+ * to any docs directory via prefix stripping or parent-prefix fallback.
  *
- * Maps: selectorSuffix (after stripping "ui5-") → docs directory name.
+ * Maps: selectorSuffix (after stripping library prefix) → docs directory name.
  * Only entries that cannot be resolved algorithmically belong here.
  */
-const UI5_SELECTOR_TO_DIR: Record<string, string> = {
-    // ComboBox item children
+const COMPONENT_DIR_OVERRIDES: Record<string, string> = {
+    // Core form sub-components — attribute directives with no standalone docs page;
+    // their canonical usage examples live in the input page.
+    'form-item': 'input',
+    'form-group': 'input',
+    'form-label': 'input',
+    'form-control': 'input',
+    // UI5 ComboBox item children
     'cb-item': 'combo-box',
-    // List item variants
+    // UI5 List item variants
     li: 'list',
     'li-custom': 'list',
     'li-group': 'list',
-    // Notification list item variants
+    // UI5 Notification list item variants
     'li-notification': 'notification-list',
     'li-notification-group': 'notification-list',
-    // MultiComboBox item children
+    // UI5 MultiComboBox item children
     'mcb-item': 'multi-combobox',
     'mcb-item-group': 'multi-combobox',
-    // Select children
+    // UI5 Select children
     option: 'select',
     'option-custom': 'select',
-    // Input / ComboBox suggestion children
+    // UI5 Input / ComboBox suggestion children
     'suggestion-item-custom': 'input',
     'suggestion-item-group': 'input',
-    // UserSettingsDialog sub-views
+    // UI5 UserSettingsDialog sub-views
     'user-settings-account-view': 'user-settings-dialog',
     'user-settings-appearance-view': 'user-settings-dialog',
     'user-settings-appearance-view-group': 'user-settings-dialog',
@@ -162,7 +168,7 @@ function resolveExampleKeys(
     }
 
     // 3. Manual mapping for abbreviated sub-component selectors
-    const mappedDir = UI5_SELECTOR_TO_DIR[compDir];
+    const mappedDir = COMPONENT_DIR_OVERRIDES[compDir];
     if (mappedDir) {
         const mappedKey = `${libDir}/${mappedDir}`;
         if (exampleKeys.has(mappedKey)) {
