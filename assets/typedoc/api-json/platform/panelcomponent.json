@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "panel.component.ts",
   "sourceLine": 73,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/platform/panel/panel.component.ts#L73",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/platform/panel/panel.component.ts#L73",
   "description": "Fundamental Panel component\n\n```html\n<fdp-panel title=\"Panel Header\">\n    <fdp-panel-content>\n       Panel Content\n    </fdp-panel-content>\n</fdp-panel>\n```",
   "inputs": [
     {

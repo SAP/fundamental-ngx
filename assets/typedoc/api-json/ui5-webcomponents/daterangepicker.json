@@ -208,13 +208,23 @@
       "since": null
     },
     {
+      "name": "showTwoMonths",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines whether the component displays two months side by side in the picker popup.\n\nWhen enabled, two consecutive months are shown, making it easier to select date ranges\nthat span multiple months without the need to navigate between months.\n\n*Note:** On mobile devices only a single month\nwill be displayed regardless of this setting.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 179,
+      "since": null
+    },
+    {
       "name": "value",
       "type": "string",
       "default": null,
       "description": "Defines a formatted date value.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 173,
+      "sourceLine": 184,
       "since": null
     },
     {
@@ -224,7 +234,7 @@
       "description": "Determines the format, used for the value attribute.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 178,
+      "sourceLine": 189,
       "since": null
     },
     {
@@ -234,7 +244,7 @@
       "description": "Defines the value state of the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 183,
+      "sourceLine": 194,
       "since": null
     }
   ],
@@ -246,7 +256,7 @@
       "description": "Fired when the input operation has finished by pressing Enter or on focusout.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 229,
+      "sourceLine": 240,
       "since": null
     },
     {
@@ -256,7 +266,7 @@
       "description": "Fired after the component's picker is closed.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 234,
+      "sourceLine": 245,
       "since": null
     },
     {
@@ -266,7 +276,7 @@
       "description": "Fired when the value of the component is changed at each key stroke.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 239,
+      "sourceLine": 250,
       "since": null
     },
     {
@@ -276,7 +286,7 @@
       "description": "Fired after the component's picker is opened.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 244,
+      "sourceLine": 255,
       "since": null
     },
     {
@@ -286,7 +296,7 @@
       "description": "Fired before the value state of the component is updated internally.\nThe event is preventable, meaning that if it's default action is\nprevented, the component will not update the value state.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 251,
+      "sourceLine": 262,
       "since": null
     }
   ],

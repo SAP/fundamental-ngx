@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "icon-tab-bar-content-template.directive.ts",
   "sourceLine": 15,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/platform/icon-tab-bar/directives/icon-tab-bar-content-template.directive.ts#L15",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/platform/icon-tab-bar/directives/icon-tab-bar-content-template.directive.ts#L15",
   "description": "Directive to mark a template as a content template for icon tab bar.\nThis allows you to define templates with IDs that can be referenced in tab configurations.\nUse this directive when you want to define tab content using templates with IDs instead of\nprojecting content directly into fdp-icon-tab-bar-tab components.",
   "inputs": [
     {

@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "table-column.component.ts",
   "sourceLine": 58,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/platform/table/components/table-column/table-column.component.ts#L58",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/platform/table/components/table-column/table-column.component.ts#L58",
   "description": "The component that represents a table column.\n```html\n<fdp-column\n name=\"name\"\n key=\"name\"\n label=\"Name\"\n align=\"start\">\n</fdp-column>\n\n<fdp-column\n name=\"price\"\n key=\"price.value\">\n <fdp-table-header *fdpHeaderCellDef>Price</fdp-table-header>\n <fdp-table-cell *fdpCellDef=\"let item\">\n  {{item.price.value}} {{item.price.currency}}\n </fdp-table-cell>\n</fdp-column>\n```",
   "inputs": [
     {

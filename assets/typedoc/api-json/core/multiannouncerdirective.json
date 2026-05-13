@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "multi-announcer.directive.ts",
   "sourceLine": 12,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/multi-combobox/multi-announcer/multi-announcer.directive.ts#L12",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/multi-combobox/multi-announcer/multi-announcer.directive.ts#L12",
   "description": "",
   "inputs": [],
   "outputs": [],

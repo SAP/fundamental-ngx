@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "list-item.component.ts",
   "sourceLine": 69,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/list/list-item/list-item.component.ts#L69",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/list/list-item/list-item.component.ts#L69",
   "description": "The component that represents a list item.\nThe list item can contain plain text, links or actions.",
   "inputs": [
     {

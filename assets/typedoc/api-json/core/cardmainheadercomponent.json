@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "card-header-main.component.ts",
   "sourceLine": 25,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/card/header/card-header-main.component.ts#L25",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/card/header/card-header-main.component.ts#L25",
   "description": "",
   "inputs": [
     {

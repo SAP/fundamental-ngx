@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "table.component.ts",
   "sourceLine": 49,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/table/table.component.ts#L49",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/table/table.component.ts#L49",
   "description": "The component that represents a table.\nA table is a set of tabular data. Line items can support data, images and actions.\n```html\n<table fd-table></table>\n```",
   "inputs": [
     {

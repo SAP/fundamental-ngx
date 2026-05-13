@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "facet-group.component.ts",
   "sourceLine": 18,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/facets/facet-group.component.ts#L18",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/facets/facet-group.component.ts#L18",
   "description": "",
   "inputs": [
     {

@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "action-bar-header.directive.ts",
   "sourceLine": 20,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/action-bar/action-bar-header/action-bar-header.directive.ts#L20",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/action-bar/action-bar-header/action-bar-header.directive.ts#L20",
   "description": "The action bar header, which contains the action bar's title and description components.\n\n```html\n<div fd-action-bar>\n    <div fd-action-bar-header>\n    </div>\n</div>\n```",
   "inputs": [],
   "outputs": [],

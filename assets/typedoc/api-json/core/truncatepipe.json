@@ -4,7 +4,7 @@
   "kind": "Pipe",
   "sourceFile": "truncate.pipe.ts",
   "sourceLine": 7,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/cdk/utils/pipes/truncate.pipe.ts#L7",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/cdk/utils/pipes/truncate.pipe.ts#L7",
   "description": "",
   "inputs": [],
   "outputs": [],

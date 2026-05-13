@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "fixed-card-layout.component.ts",
   "sourceLine": 65,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/fixed-card-layout/fixed-card-layout.component.ts#L65",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/fixed-card-layout/fixed-card-layout.component.ts#L65",
   "description": "",
   "inputs": [],
   "outputs": [],

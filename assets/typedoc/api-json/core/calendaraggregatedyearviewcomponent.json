@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "calendar-aggregated-year-view.component.ts",
   "sourceLine": 39,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/calendar/calendar-views/calendar-aggregated-year-view/calendar-aggregated-year-view.component.ts#L39",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/calendar/calendar-views/calendar-aggregated-year-view/calendar-aggregated-year-view.component.ts#L39",
   "description": "",
   "inputs": [
     {

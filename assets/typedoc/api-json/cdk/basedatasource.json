@@ -4,7 +4,7 @@
   "kind": "Class",
   "sourceFile": "base-data-source.class.ts",
   "sourceLine": 6,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/cdk/data-source/base/base-data-source.class.ts#L6",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/cdk/data-source/base/base-data-source.class.ts#L6",
   "description": "Data source provider class controls the data stream.",
   "inputs": [],
   "outputs": [],

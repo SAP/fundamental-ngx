@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "toolbar.component.ts",
   "sourceLine": 95,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/toolbar/toolbar.component.ts#L95",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/toolbar/toolbar.component.ts#L95",
   "description": "",
   "inputs": [
     {

@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "switch.component.ts",
   "sourceLine": 23,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/platform/form/switch/switch/switch.component.ts#L23",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/platform/form/switch/switch/switch.component.ts#L23",
   "description": "All form components share the same information (value, name, placeholder,.. ) as well as\nthe same behavior given by ControlValueAccessor.\n\nEven this is not ideal solution there is no other way then use inheritance to reuse some of the\ncommon logic. It should be possible to use some kind of compositions with Proxies but something\nsimilar that exists in Aspect Oriented Programing.\n\nUsually try to fire stateChange only for things that can change dynamically in runtime. We don't expect\nthat e.g. placeholder will change after component is created",
   "inputs": [
     {

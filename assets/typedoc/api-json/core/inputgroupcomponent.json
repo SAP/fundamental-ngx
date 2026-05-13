@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "input-group.component.ts",
   "sourceLine": 79,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/input-group/input-group.component.ts#L79",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/input-group/input-group.component.ts#L79",
   "description": "The component that represents an input group.\nThe input group includes form inputs with add-ons that allow the user to better understand the information being entered.\n\n```html\n<fd-input-group placement=\"after\" addOnText=\"$\" placeholder=\"Amount\">\n</fd-input-group>\n```",
   "inputs": [
     {

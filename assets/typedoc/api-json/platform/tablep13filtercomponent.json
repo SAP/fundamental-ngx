@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "table-p13-filter.component.ts",
   "sourceLine": 14,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/platform/table/components/table-p13-dialog/table-p13-filter.component.ts#L14",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/platform/table/components/table-p13-dialog/table-p13-filter.component.ts#L14",
   "description": "Personalization Dialog Filter Settings.",
   "inputs": [
     {

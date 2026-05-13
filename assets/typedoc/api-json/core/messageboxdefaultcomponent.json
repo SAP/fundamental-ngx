@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "message-box-default.component.ts",
   "sourceLine": 42,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/message-box/message-box-default/message-box-default.component.ts#L42",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/message-box/message-box-default/message-box-default.component.ts#L42",
   "description": "Message box component used to create the message box in object based approach",
   "inputs": [],
   "outputs": [],

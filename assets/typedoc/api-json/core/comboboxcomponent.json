@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "combobox.component.ts",
   "sourceLine": 147,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/combobox/combobox.component.ts#L147",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/combobox/combobox.component.ts#L147",
   "description": "Allows users to filter through results and select a value.\n\nSupports Angular Forms.\n```html\n<fd-combobox\n     [(ngModel)]=\"searchTerm\"\n     [dropdownValues]=\"dropdownValues\"\n     placeholder=\"Type some text...\">\n</fd-combobox>\n```",
   "inputs": [
     {

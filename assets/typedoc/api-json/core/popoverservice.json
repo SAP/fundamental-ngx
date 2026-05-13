@@ -4,7 +4,7 @@
   "kind": "Service",
   "sourceFile": "popover.service.ts",
   "sourceLine": 48,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/popover/popover-service/popover.service.ts#L48",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/popover/popover-service/popover.service.ts#L48",
   "description": "",
   "inputs": [],
   "outputs": [
@@ -159,7 +159,7 @@
     },
     {
       "name": "toggle",
-      "signature": "(openAction: boolean, closeAction: boolean) => void",
+      "signature": "(openAction: boolean, closeAction: boolean, focusActiveElement?: boolean) => void",
       "description": "Toggles the popover open state",
       "deprecated": null,
       "sourceLine": 411,
@@ -176,6 +176,12 @@
           "type": "boolean",
           "description": "",
           "optional": false
+        },
+        {
+          "name": "focusActiveElement",
+          "type": "boolean",
+          "description": "",
+          "optional": true
         }
       ],
       "returnType": "void"
@@ -208,7 +214,7 @@
       "signature": "(trigger: HTMLElement | ElementRef<any>) => void",
       "description": "Updates trigger element and refreshes the listeners.",
       "deprecated": null,
-      "sourceLine": 601,
+      "sourceLine": 604,
       "since": null,
       "parameters": [
         {

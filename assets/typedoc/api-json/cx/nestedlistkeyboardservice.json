@@ -4,7 +4,7 @@
   "kind": "Service",
   "sourceFile": "nested-list-keyboard.service.ts",
   "sourceLine": 15,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/cx/nested-list/nested-list-keyboard.service.ts#L15",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/cx/nested-list/nested-list-keyboard.service.ts#L15",
   "description": "Nested list keyboard service, which uses MenuKeyboardService, to deal with ArrowUp, ArrowDown, Space, Enter.\nAlso has own handling of ArrowLeft and ArrowRight, to open/close the menu if it has any children.",
   "inputs": [],
   "outputs": [],

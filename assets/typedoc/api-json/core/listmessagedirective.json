@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "list-message.directive.ts",
   "sourceLine": 16,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/list/list-message.directive.ts#L16",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/list/list-message.directive.ts#L16",
   "description": "",
   "inputs": [
     {

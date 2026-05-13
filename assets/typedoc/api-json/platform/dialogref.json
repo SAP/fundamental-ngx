@@ -4,7 +4,7 @@
   "kind": "Class",
   "sourceFile": "dialog-ref.class.ts",
   "sourceLine": 18,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/dialog/utils/dialog-ref.class.ts#L18",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/dialog/utils/dialog-ref.class.ts#L18",
   "description": "Reference to a dialog component\nIt can be injected into the content component through the constructor.\nFor a template, it is declared as part of the implicit context, see examples.",
   "inputs": [],
   "outputs": [],

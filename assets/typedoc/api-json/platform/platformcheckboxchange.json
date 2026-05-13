@@ -4,7 +4,7 @@
   "kind": "Class",
   "sourceFile": "checkbox.component.ts",
   "sourceLine": 25,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/platform/form/checkbox/checkbox.component.ts#L25",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/platform/form/checkbox/checkbox.component.ts#L25",
   "description": "Change event object emitted by Platform Checkbox.",
   "inputs": [],
   "outputs": [],

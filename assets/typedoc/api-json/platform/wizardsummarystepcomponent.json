@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "wizard-summary-step.component.ts",
   "sourceLine": 30,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/platform/wizard-generator/components/wizard-summary-step/wizard-summary-step.component.ts#L30",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/platform/wizard-generator/components/wizard-summary-step/wizard-summary-step.component.ts#L30",
   "description": "",
   "inputs": [
     {

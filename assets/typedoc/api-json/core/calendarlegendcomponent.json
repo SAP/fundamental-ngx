@@ -3,8 +3,8 @@
   "selector": "fd-calendar-legend",
   "kind": "Component",
   "sourceFile": "calendar-legend.component.ts",
-  "sourceLine": 72,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/calendar/calendar-legend/calendar-legend.component.ts#L72",
+  "sourceLine": 74,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/calendar/calendar-legend/calendar-legend.component.ts#L74",
   "description": "",
   "inputs": [
     {
@@ -14,7 +14,7 @@
       "description": "Make it a column instead",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 76,
+      "sourceLine": 78,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Whether to display the legend item for non-work days.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 88,
+      "sourceLine": 90,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Whether to display the legend item for the currently selected date.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 82,
+      "sourceLine": 84,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "Whether to display the legend item for today's date.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 79,
+      "sourceLine": 81,
       "since": null
     },
     {
@@ -54,7 +54,7 @@
       "description": "Whether to display the legend item for work days.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 85,
+      "sourceLine": 87,
       "since": null
     },
     {
@@ -64,7 +64,7 @@
       "description": "Special days rules to be displayed in the legend",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 93,
+      "sourceLine": 95,
       "since": null
     }
   ],

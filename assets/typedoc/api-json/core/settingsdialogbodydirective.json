@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "settings-dialog-body.directive.ts",
   "sourceLine": 11,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/settings/settings-dialog-body/settings-dialog-body.directive.ts#L11",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/settings/settings-dialog-body/settings-dialog-body.directive.ts#L11",
   "description": "",
   "inputs": [],
   "outputs": [],

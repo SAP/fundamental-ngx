@@ -46,6 +46,16 @@
       "deprecated": null,
       "sourceLine": 61,
       "since": null
+    },
+    {
+      "name": "overflowButtonAccessibleName",
+      "type": "string",
+      "default": null,
+      "description": "Defines the accessible ARIA name of the overflow button of the component.\n\n*Note:** When not set, the built-in translation for \"Additional Options\" is used.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 68,
+      "since": null
     }
   ],
   "outputs": [],

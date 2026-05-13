@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "settings-list-area.directive.ts",
   "sourceLine": 11,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/settings/settings-list-area/settings-list-area.directive.ts#L11",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/settings/settings-list-area/settings-list-area.directive.ts#L11",
   "description": "",
   "inputs": [],
   "outputs": [],

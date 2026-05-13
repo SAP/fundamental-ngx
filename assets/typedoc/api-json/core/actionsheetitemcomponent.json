@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "action-sheet-item.component.ts",
   "sourceLine": 47,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/action-sheet/action-sheet-item/action-sheet-item.component.ts#L47",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/action-sheet/action-sheet-item/action-sheet-item.component.ts#L47",
   "description": "A component used to enforce a certain layout for the action sheet.\n```html\n<fd-action-sheet>\n    <fd-action-sheet-control>Control Element</fd-action-sheet-control>\n    <fd-action-sheet-body>\n         <fd-action-sheet-item>Action Sheet Body</fd-action-sheet-item>\n         <fd-action-sheet-item>Action Sheet Body</fd-action-sheet-item>\n         <fd-action-sheet-item>Action Sheet Body</fd-action-sheet-item>\n    </fd-action-sheet-body>\n</fd-action-sheet>\n```",
   "inputs": [
     {

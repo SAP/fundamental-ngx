@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "avatar-group-legacy-item.directive.ts",
   "sourceLine": 12,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/avatar-group-legacy/directives/avatar-group-legacy-item.directive.ts#L12",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/avatar-group-legacy/directives/avatar-group-legacy-item.directive.ts#L12",
   "description": "",
   "inputs": [],
   "outputs": [],

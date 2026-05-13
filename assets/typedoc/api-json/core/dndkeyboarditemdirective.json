@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "dnd-keyboard-item.directive.ts",
   "sourceLine": 47,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/cdk/utils/drag-and-drop/dnd-keyboard-item/dnd-keyboard-item.directive.ts#L47",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/cdk/utils/drag-and-drop/dnd-keyboard-item/dnd-keyboard-item.directive.ts#L47",
   "description": "This directive is used to provide drag & drop with keyboard support.\nIt should be used together with directive fdDndKeyboardGroup.\nWe are using _groups from fdDndKeyboardGroup and adding a possibility to move cards.\nPlease see example below:\n@Component({\nselector: 'cdk-drag-drop-example',\ntemplate: `<div\n              cdkDragListGroup\n              fdDndKeyboardGroup\n              [groups]=\"groups\"\n          >\n              <div\n                  *ngFor=\"let group of groups; let groupIndex = index\"\n                  cdkDragList\n              >\n                  Group #{{ groupIndex }}\n                  <div\n                      *ngFor=\"let item of group; let index = index\"\n                      cdkDrag\n                      fdDndKeyboardItem\n                      [itemIndex]=\"index\"\n                      [groupIndex]=\"groupIndex\"\n                      [dndKeyboardDisabled]=\"flag for disable/enable keyboard navigation if needed\"\n                      tabindex=\"0\"\n                  >\n                      Item #{{ item }}\n                  </div>\n              </div>\n          </div>`,\n})\nexport class CdkDragDropExample {\n  groups = [\n       [1, 2, 3],\n       [4, 5, 6],\n     ];\n  }",
   "inputs": [
     {

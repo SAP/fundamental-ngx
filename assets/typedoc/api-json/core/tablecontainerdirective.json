@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "table-container.directive.ts",
   "sourceLine": 20,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/table/directives/table-container.directive.ts#L20",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/table/directives/table-container.directive.ts#L20",
   "description": "",
   "inputs": [
     {

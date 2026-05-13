@@ -4,7 +4,7 @@
   "kind": "Class",
   "sourceFile": "range-selector.ts",
   "sourceLine": 48,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/cdk/utils/helpers/range-selector.ts#L48",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/cdk/utils/helpers/range-selector.ts#L48",
   "description": "Utility type, that allows to track and select ranges of elements while using multi-selection.",
   "inputs": [],
   "outputs": [],

@@ -4,7 +4,7 @@
   "kind": "Pipe",
   "sourceFile": "fd-translate.pipe.ts",
   "sourceLine": 35,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/i18n/src/lib/pipes/fd-translate.pipe.ts#L35",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/i18n/src/lib/pipes/fd-translate.pipe.ts#L35",
   "description": "Pure pipe that translates a key to a computed signal string.\n\n**IMPORTANT:** This pipe now returns a Signal<string> instead of a plain string.\nTemplates must call the signal to get the value: `{{ ('key' | fdTranslate)() }}`",
   "inputs": [],
   "outputs": [],

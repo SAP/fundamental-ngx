@@ -2188,7 +2188,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/input/index.ts",
-							"line": 294,
+							"line": 297,
 							"character": 9
 						}
 					],
@@ -2284,7 +2284,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/input/index.ts",
-							"line": 295,
+							"line": 298,
 							"character": 9
 						}
 					],
@@ -2826,7 +2826,15 @@
 							},
 							{
 								"kind": "text",
-								"text": " are recommended to be used as suggestion items.\n- **icon**: Defines the icon to be displayed in the component.\n- **valueStateMessage**: Defines the value state message that will be displayed as pop up under the component.\nThe value state message slot should contain only one root element.\n\n*Note:** If not specified, a default text (in the respective language) will be displayed.\n\n*Note:** The "
+								"text": " are recommended to be used as suggestion items.\n\n*Note:** Input with type "
+							},
+							{
+								"kind": "code",
+								"text": "`Number`"
+							},
+							{
+								"kind": "text",
+								"text": " does not support suggestions.\n- **icon**: Defines the icon to be displayed in the component.\n- **valueStateMessage**: Defines the value state message that will be displayed as pop up under the component.\nThe value state message slot should contain only one root element.\n\n*Note:** If not specified, a default text (in the respective language) will be displayed.\n\n*Note:** The "
 							},
 							{
 								"kind": "code",
@@ -2903,7 +2911,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/input/index.ts",
-							"line": 273,
+							"line": 276,
 							"character": 11
 						}
 					],
@@ -2930,7 +2938,7 @@
 												"sources": [
 													{
 														"fileName": "ui5-webcomponents-ai/input/index.ts",
-														"line": 276,
+														"line": 279,
 														"character": 10
 													}
 												],
@@ -2949,7 +2957,7 @@
 												"sources": [
 													{
 														"fileName": "ui5-webcomponents-ai/input/index.ts",
-														"line": 275,
+														"line": 278,
 														"character": 10
 													}
 												],
@@ -2970,7 +2978,7 @@
 												"sources": [
 													{
 														"fileName": "ui5-webcomponents-ai/input/index.ts",
-														"line": 289,
+														"line": 292,
 														"character": 10
 													}
 												],
@@ -2994,7 +3002,7 @@
 										"sources": [
 											{
 												"fileName": "ui5-webcomponents-ai/input/index.ts",
-												"line": 274,
+												"line": 277,
 												"character": 6
 											}
 										]
@@ -3018,7 +3026,7 @@
 												"sources": [
 													{
 														"fileName": "ui5-webcomponents-ai/input/index.ts",
-														"line": 288,
+														"line": 291,
 														"character": 10
 													}
 												],
@@ -3037,7 +3045,7 @@
 												"sources": [
 													{
 														"fileName": "ui5-webcomponents-ai/input/index.ts",
-														"line": 287,
+														"line": 290,
 														"character": 10
 													}
 												],
@@ -3056,7 +3064,7 @@
 												"sources": [
 													{
 														"fileName": "ui5-webcomponents-ai/input/index.ts",
-														"line": 289,
+														"line": 292,
 														"character": 10
 													}
 												],
@@ -3080,7 +3088,7 @@
 										"sources": [
 											{
 												"fileName": "ui5-webcomponents-ai/input/index.ts",
-												"line": 286,
+												"line": 289,
 												"character": 6
 											}
 										]
@@ -3156,14 +3164,22 @@
 							},
 							{
 								"kind": "text",
-								"text": ".\n- The property is mostly intended to be used with touch devices\nthat use different soft keyboard layouts depending on the given input type."
+								"text": ".\n- The property is mostly intended to be used with touch devices\nthat use different soft keyboard layouts depending on the given input type.\n- Type "
+							},
+							{
+								"kind": "code",
+								"text": "`Number`"
+							},
+							{
+								"kind": "text",
+								"text": " does not support suggestions."
 							}
 						]
 					},
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/input/index.ts",
-							"line": 169,
+							"line": 170,
 							"character": 2
 						}
 					],
@@ -3234,7 +3250,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/input/index.ts",
-							"line": 188,
+							"line": 189,
 							"character": 2
 						}
 					],
@@ -3292,7 +3308,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/input/index.ts",
-							"line": 208,
+							"line": 209,
 							"character": 2
 						}
 					],
@@ -3350,7 +3366,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/input/index.ts",
-							"line": 213,
+							"line": 214,
 							"character": 2
 						}
 					],
@@ -3408,7 +3424,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/input/index.ts",
-							"line": 219,
+							"line": 220,
 							"character": 2
 						}
 					],
@@ -3466,7 +3482,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/input/index.ts",
-							"line": 193,
+							"line": 194,
 							"character": 2
 						}
 					],
@@ -3524,7 +3540,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/input/index.ts",
-							"line": 224,
+							"line": 225,
 							"character": 2
 						}
 					],
@@ -3582,7 +3598,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/input/index.ts",
-							"line": 229,
+							"line": 230,
 							"character": 2
 						}
 					],
@@ -3640,7 +3656,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/input/index.ts",
-							"line": 235,
+							"line": 236,
 							"character": 2
 						}
 					],
@@ -3698,7 +3714,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/input/index.ts",
-							"line": 198,
+							"line": 199,
 							"character": 2
 						}
 					],
@@ -3756,7 +3772,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/input/index.ts",
-							"line": 203,
+							"line": 204,
 							"character": 2
 						}
 					],
@@ -3814,7 +3830,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/input/index.ts",
-							"line": 176,
+							"line": 177,
 							"character": 2
 						}
 					],
@@ -3861,7 +3877,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/input/index.ts",
-							"line": 181,
+							"line": 182,
 							"character": 2
 						}
 					],
@@ -3916,7 +3932,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/input/index.ts",
-							"line": 304,
+							"line": 307,
 							"character": 6
 						}
 					],
@@ -3929,7 +3945,7 @@
 						"sources": [
 							{
 								"fileName": "ui5-webcomponents-ai/input/index.ts",
-								"line": 304,
+								"line": 307,
 								"character": 6
 							}
 						],
@@ -3953,7 +3969,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/input/index.ts",
-							"line": 308,
+							"line": 311,
 							"character": 2
 						}
 					],
@@ -3967,7 +3983,7 @@
 							"sources": [
 								{
 									"fileName": "ui5-webcomponents-ai/input/index.ts",
-									"line": 308,
+									"line": 311,
 									"character": 2
 								}
 							],
@@ -4730,7 +4746,7 @@
 												"sources": [
 													{
 														"fileName": "ui5-webcomponents-ai/input/index.ts",
-														"line": 289,
+														"line": 292,
 														"character": 10
 													}
 												],
@@ -6382,7 +6398,7 @@
 												"sources": [
 													{
 														"fileName": "ui5-webcomponents-ai/input/index.ts",
-														"line": 289,
+														"line": 292,
 														"character": 10
 													}
 												],
@@ -7781,7 +7797,7 @@
 							"fileName": "ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
 							"line": 49,
 							"character": 12,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L49"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L49"
 						}
 					],
 					"type": {
@@ -7844,7 +7860,7 @@
 							"fileName": "ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
 							"line": 42,
 							"character": 12,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L42"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L42"
 						}
 					],
 					"type": {
@@ -7909,7 +7925,7 @@
 							"fileName": "ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
 							"line": 53,
 							"character": 14,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L53"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L53"
 						}
 					],
 					"type": {
@@ -7925,7 +7941,7 @@
 									"fileName": "ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
 									"line": 53,
 									"character": 30,
-									"url": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L53"
+									"url": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L53"
 								}
 							],
 							"signatures": [
@@ -7940,7 +7956,7 @@
 											"fileName": "ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
 											"line": 53,
 											"character": 30,
-											"url": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L53"
+											"url": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L53"
 										}
 									],
 									"type": {
@@ -7979,7 +7995,7 @@
 							"fileName": "ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
 							"line": 80,
 							"character": 2,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L80"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L80"
 						}
 					],
 					"signatures": [
@@ -8017,7 +8033,7 @@
 									"fileName": "ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
 									"line": 80,
 									"character": 2,
-									"url": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L80"
+									"url": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L80"
 								}
 							],
 							"type": {
@@ -8074,7 +8090,7 @@
 							"fileName": "ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
 							"line": 94,
 							"character": 8,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L94"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L94"
 						}
 					],
 					"signatures": [
@@ -8128,7 +8144,7 @@
 									"fileName": "ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
 									"line": 94,
 									"character": 8,
-									"url": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L94"
+									"url": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L94"
 								}
 							],
 							"parameters": [
@@ -8191,7 +8207,7 @@
 							"fileName": "ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
 							"line": 71,
 							"character": 2,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L71"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L71"
 						}
 					],
 					"signatures": [
@@ -8241,7 +8257,7 @@
 									"fileName": "ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
 									"line": 71,
 									"character": 2,
-									"url": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L71"
+									"url": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L71"
 								}
 							],
 							"parameters": [

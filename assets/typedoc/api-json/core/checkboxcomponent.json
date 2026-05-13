@@ -3,8 +3,8 @@
   "selector": "fd-checkbox",
   "kind": "Component",
   "sourceFile": "checkbox.component.ts",
-  "sourceLine": 60,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/checkbox/checkbox/checkbox.component.ts#L60",
+  "sourceLine": 59,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/checkbox/checkbox/checkbox.component.ts#L59",
   "description": "Set of fields of FormItemControl component",
   "inputs": [
     {
@@ -14,7 +14,7 @@
       "description": "Sets the `aria-describedby` attribute to the element.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 102,
+      "sourceLine": 101,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Sets the `aria-label` attribute to the element.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 77,
+      "sourceLine": 76,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Sets the `aria-labelledby` attribute to the element.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 98,
+      "sourceLine": 97,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "Allows to disable/enable control.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 126,
+      "sourceLine": 125,
       "since": null
     },
     {
@@ -54,7 +54,7 @@
       "description": "Whether the checkbox should be rendered in display-only mode.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 150,
+      "sourceLine": 149,
       "since": null
     },
     {
@@ -64,7 +64,7 @@
       "description": "Sets [id] property of input, binds input with input label using [for] property.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 110,
+      "sourceLine": 109,
       "since": null
     },
     {
@@ -74,7 +74,7 @@
       "description": "Sets text of control label.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 122,
+      "sourceLine": 121,
       "since": null
     },
     {
@@ -84,7 +84,7 @@
       "description": "Assigns given class to checkbox label element",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 142,
+      "sourceLine": 141,
       "since": null
     },
     {
@@ -94,7 +94,7 @@
       "description": "Sets [name] property of input.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 118,
+      "sourceLine": 117,
       "since": null
     },
     {
@@ -104,7 +104,7 @@
       "description": "Disables editibility",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 130,
+      "sourceLine": 129,
       "since": null
     },
     {
@@ -114,7 +114,7 @@
       "description": "If it is mandatory field",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 146,
+      "sourceLine": 145,
       "since": null
     },
     {
@@ -124,7 +124,7 @@
       "description": "Sets the `role` attribute to the element.\nDefault: checkbox",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 84,
+      "sourceLine": 83,
       "since": null
     },
     {
@@ -134,7 +134,7 @@
       "description": "Whether checkbox should be rendered standalone (without any text).",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 165,
+      "sourceLine": 164,
       "since": null
     },
     {
@@ -144,7 +144,7 @@
       "description": "State of control, changes visual appearance of control.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 114,
+      "sourceLine": 113,
       "since": null
     },
     {
@@ -154,7 +154,7 @@
       "description": "sets checkbox tooltip",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 106,
+      "sourceLine": 105,
       "since": null
     },
     {
@@ -164,7 +164,7 @@
       "description": "Enables controls third state.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 134,
+      "sourceLine": 133,
       "since": null
     },
     {
@@ -174,7 +174,7 @@
       "description": "Allows to prevent user from manually selecting controls third state.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 138,
+      "sourceLine": 137,
       "since": null
     },
     {
@@ -184,7 +184,7 @@
       "description": "Vertical position of the label compared to the checkbox box",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 73,
+      "sourceLine": 72,
       "since": null
     },
     {
@@ -194,7 +194,7 @@
       "description": "Whether input label should be wrapped",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 70,
+      "sourceLine": 69,
       "since": null
     }
   ],
@@ -206,7 +206,7 @@
       "description": "Emits event on focus change",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 176,
+      "sourceLine": 175,
       "since": null
     }
   ],

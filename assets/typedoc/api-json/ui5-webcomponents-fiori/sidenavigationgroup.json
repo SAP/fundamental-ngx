@@ -8,13 +8,23 @@
   "description": "",
   "inputs": [
     {
+      "name": "accessibleName",
+      "type": "string",
+      "default": null,
+      "description": "Defines the accessible ARIA name of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 45,
+      "since": null
+    },
+    {
       "name": "disabled",
       "type": "boolean",
       "default": null,
       "description": "Defines whether the component is disabled.\nA disabled component can't be pressed or\nfocused, and it is not in the tab chain.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 47,
+      "sourceLine": 52,
       "since": null
     },
     {
@@ -24,7 +34,7 @@
       "description": "Defines if the item is expanded",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 52,
+      "sourceLine": 57,
       "since": null
     },
     {
@@ -34,7 +44,7 @@
       "description": "Defines the text of the item.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 57,
+      "sourceLine": 62,
       "since": null
     },
     {
@@ -44,7 +54,7 @@
       "description": "Defines the tooltip of the component.\n\nA tooltip attribute should be provided, in order to represent meaning/function,\nwhen the component is collapsed (\"icon only\" design is visualized) or the item text is truncated.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 65,
+      "sourceLine": 70,
       "since": null
     }
   ],

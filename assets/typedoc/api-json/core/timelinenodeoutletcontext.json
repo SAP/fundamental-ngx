@@ -4,7 +4,7 @@
   "kind": "Class",
   "sourceFile": "timeline-node-def.directive.ts",
   "sourceLine": 4,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/timeline/directives/timeline-node-def.directive.ts#L4",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/timeline/directives/timeline-node-def.directive.ts#L4",
   "description": "Context provided to the timeline node component.",
   "inputs": [],
   "outputs": [],

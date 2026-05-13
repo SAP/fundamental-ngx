@@ -3,8 +3,8 @@
   "selector": "fd-calendar-year-view",
   "kind": "Component",
   "sourceFile": "calendar-year-view.component.ts",
-  "sourceLine": 41,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/calendar/calendar-views/calendar-year-view/calendar-year-view.component.ts#L41",
+  "sourceLine": 40,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/calendar/calendar-views/calendar-year-view/calendar-year-view.component.ts#L40",
   "description": "Component representing the YearView of the Calendar Component.",
   "inputs": [
     {
@@ -14,7 +14,7 @@
       "description": "Function that is called when the focus would escape the element.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 48,
+      "sourceLine": 47,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "The id of the calendar passed from the parent component",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 44,
+      "sourceLine": 43,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Whether the date range is year format only excluding month and day",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 62,
+      "sourceLine": 61,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "Whether user wants to mark year cells on hover.\nWorks only on range mode, when start year is selected.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 69,
+      "sourceLine": 68,
       "since": null
     },
     {
@@ -54,7 +54,7 @@
       "description": "Parameter holding the year that is currently selected.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 52,
+      "sourceLine": 51,
       "since": null
     },
     {
@@ -64,7 +64,7 @@
       "description": "Object to customize year grid",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 58,
+      "sourceLine": 57,
       "since": null
     }
   ],
@@ -76,7 +76,7 @@
       "description": "Event thrown every time selected first or last date in range mode is changed",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 77,
+      "sourceLine": 76,
       "since": null
     },
     {
@@ -86,7 +86,7 @@
       "description": "Event fired when a year is selected.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 73,
+      "sourceLine": 72,
       "since": null
     }
   ],
@@ -96,7 +96,7 @@
       "signature": "() => void",
       "description": "Method used to load the previous {{col * row}} years to be displayed.",
       "deprecated": null,
-      "sourceLine": 220,
+      "sourceLine": 219,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -106,7 +106,7 @@
       "signature": "() => void",
       "description": "Method used to load the next {{col * row}} years to be displayed.",
       "deprecated": null,
-      "sourceLine": 226,
+      "sourceLine": 225,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -116,7 +116,7 @@
       "signature": "(selectedYear: CalendarYear<D>, event?: KeyboardEvent | MouseEvent) => void",
       "description": "Method that sends the year to the parent component when it is clicked.",
       "deprecated": null,
-      "sourceLine": 232,
+      "sourceLine": 231,
       "since": null,
       "parameters": [
         {
@@ -139,7 +139,7 @@
       "signature": "() => void",
       "description": "Set focus on month cell.\nIt can be a selected cell, current month cell or first cell in the list",
       "deprecated": null,
-      "sourceLine": 249,
+      "sourceLine": 248,
       "since": null,
       "parameters": [],
       "returnType": "void"

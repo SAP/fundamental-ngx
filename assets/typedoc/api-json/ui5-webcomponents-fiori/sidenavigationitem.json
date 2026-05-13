@@ -18,13 +18,23 @@
       "since": null
     },
     {
+      "name": "accessibleName",
+      "type": "string",
+      "default": null,
+      "description": "Defines the accessible ARIA name of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 57,
+      "since": null
+    },
+    {
       "name": "design",
       "type": "'Default' | 'Action'",
       "default": null,
       "description": "Item design.\n\n*Note:** Items with \"Action\" design must not have sub-items.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 59,
+      "sourceLine": 64,
       "since": null
     },
     {
@@ -34,7 +44,7 @@
       "description": "Defines whether the component is disabled.\nA disabled component can't be pressed or\nfocused, and it is not in the tab chain.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 66,
+      "sourceLine": 71,
       "since": null
     },
     {
@@ -44,7 +54,7 @@
       "description": "Defines if the item is expanded",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 71,
+      "sourceLine": 76,
       "since": null
     },
     {
@@ -54,7 +64,7 @@
       "description": "Defines the link target URI. Supports standard hyperlink behavior.\nIf a JavaScript action should be triggered,\nthis should not be set, but instead an event handler\nfor the `click` event should be registered.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 79,
+      "sourceLine": 84,
       "since": null
     },
     {
@@ -64,7 +74,7 @@
       "description": "Defines the icon of the item.\n\n*Note:** Icons on second-level (child) navigation items are not recommended according to the design specification.\n\nThe SAP-icons font provides numerous options.\n\nSee all the available icons in the [Icon Explorer](https://sdk.openui5.org/test-resources/sap/m/demokit/iconExplorer/webapp/index.html).",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 90,
+      "sourceLine": 95,
       "since": null
     },
     {
@@ -74,7 +84,7 @@
       "description": "Defines whether the item is selected.\n\n*Note:** Items that have a set `href` and `target` set to `_blank` should not be selectable.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 97,
+      "sourceLine": 102,
       "since": null
     },
     {
@@ -84,7 +94,7 @@
       "description": "Defines the component target.\n\nPossible values:\n\n- `_self`\n- `_top`\n- `_blank`\n- `_parent`\n- `framename`\n\n*Note:** Items that have a defined `href` and `target`\nattribute set to `_blank` should not be selectable.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 113,
+      "sourceLine": 118,
       "since": null
     },
     {
@@ -94,7 +104,7 @@
       "description": "Defines the text of the item.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 118,
+      "sourceLine": 123,
       "since": null
     },
     {
@@ -104,7 +114,7 @@
       "description": "Defines the tooltip of the component.\n\nA tooltip attribute should be provided, in order to represent meaning/function,\nwhen the component is collapsed (\"icon only\" design is visualized) or the item text is truncated.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 126,
+      "sourceLine": 131,
       "since": null
     },
     {
@@ -114,7 +124,7 @@
       "description": "Indicates whether the navigation item is selectable. By default, all items are selectable unless specifically marked as unselectable.\n\nWhen a parent item is marked as unselectable, selecting it will only expand or collapse its sub-items.\nTo improve user experience do not mix unselectable parent items with selectable parent items in a single side navigation.\n\n\n*Guidelines**:\n- Items with an assigned `href` and a target of `_blank` should be marked as unselectable.\n- Items that trigger actions (with design \"Action\") should be marked as unselectable.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 139,
+      "sourceLine": 144,
       "since": null
     }
   ],
@@ -126,7 +136,7 @@
       "description": "Fired when the component is activated either with a click/tap or by using the [Enter] or [Space] keys.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 146,
+      "sourceLine": 151,
       "since": null
     }
   ],

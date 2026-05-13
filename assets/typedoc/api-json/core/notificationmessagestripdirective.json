@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "notification-message-strip.directive.ts",
   "sourceLine": 10,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/notification/directives/notification-message-strip.directive.ts#L10",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/notification/directives/notification-message-strip.directive.ts#L10",
   "description": "",
   "inputs": [],
   "outputs": [],

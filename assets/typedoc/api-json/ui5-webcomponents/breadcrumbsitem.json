@@ -38,7 +38,18 @@
       "since": null
     }
   ],
-  "outputs": [],
+  "outputs": [
+    {
+      "name": "ui5Click",
+      "type": "UI5CustomEvent<BreadcrumbsItem, 'click'>",
+      "default": null,
+      "description": "Fired when the component is activated either with a mouse/tap or by using the Enter or Space key.\n\n*Note:** The event is also fired for the current page location item (the last item), which is not a link by design.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 76,
+      "since": null
+    }
+  ],
   "methods": [],
   "inherited": null
 }

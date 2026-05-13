@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "table-header-cell-content.component.ts",
   "sourceLine": 28,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/platform/table/components/table-header-cell-content/table-header-cell-content.component.ts#L28",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/platform/table/components/table-header-cell-content/table-header-cell-content.component.ts#L28",
   "description": "",
   "inputs": [
     {

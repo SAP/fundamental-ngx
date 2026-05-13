@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "overflow-layout-focusable-item.directive.ts",
   "sourceLine": 18,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/overflow-layout/directives/overflow-layout-focusable-item.directive.ts#L18",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/overflow-layout/directives/overflow-layout-focusable-item.directive.ts#L18",
   "description": "",
   "inputs": [
     {

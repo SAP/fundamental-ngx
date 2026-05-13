@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "action-bar.component.ts",
   "sourceLine": 26,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/action-bar/action-bar.component.ts#L26",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/action-bar/action-bar.component.ts#L26",
   "description": "Children usage:\n```html\n<div fd-action-bar-actions>\n<div fd-action-bar-back>\n<div fd-action-bar-description>\n<div fd-action-bar-header>\n<div fd-action-bar-mobile>\n<div fd-action-bar-title>\n```",
   "inputs": [],
   "outputs": [],

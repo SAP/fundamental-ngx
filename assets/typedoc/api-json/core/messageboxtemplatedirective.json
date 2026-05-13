@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "message-box-template.directive.ts",
   "sourceLine": 16,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/message-box/directives/message-box-template.directive.ts#L16",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/message-box/directives/message-box-template.directive.ts#L16",
   "description": "",
   "inputs": [
     {

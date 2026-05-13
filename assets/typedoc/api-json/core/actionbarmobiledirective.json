@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "action-bar-mobile.directive.ts",
   "sourceLine": 20,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/action-bar/action-bar-mobile/action-bar-mobile.directive.ts#L20",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/action-bar/action-bar-mobile/action-bar-mobile.directive.ts#L20",
   "description": "The action bar mobile component. This component should wrap all other action bar components, including the `[fd-action-bar]`.\n\n```html\n<div fd-action-bar-mobile>\n    <div fd-action-bar>\n    </div>\n</div>\n```",
   "inputs": [],
   "outputs": [],

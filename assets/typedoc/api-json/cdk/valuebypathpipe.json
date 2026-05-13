@@ -4,7 +4,7 @@
   "kind": "Pipe",
   "sourceFile": "value-by-path.pipe.ts",
   "sourceLine": 5,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/cdk/utils/pipes/value-by-path.pipe.ts#L5",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/cdk/utils/pipes/value-by-path.pipe.ts#L5",
   "description": "",
   "inputs": [],
   "outputs": [],

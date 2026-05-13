@@ -191,10 +191,10 @@
       "name": "type",
       "type": "'Search' | 'Text' | 'Email' | 'Number' | 'Password' | 'Tel' | 'URL'",
       "default": null,
-      "description": "Defines the HTML type of the component.\n\n*Notes:**\n\n- The particular effect of this property differs depending on the browser\nand the current language settings, especially for type `Number`.\n- The property is mostly intended to be used with touch devices\nthat use different soft keyboard layouts depending on the given input type.",
+      "description": "Defines the HTML type of the component.\n\n*Notes:**\n\n- The particular effect of this property differs depending on the browser\nand the current language settings, especially for type `Number`.\n- The property is mostly intended to be used with touch devices\nthat use different soft keyboard layouts depending on the given input type.\n- Type `Number` does not support suggestions.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 169,
+      "sourceLine": 170,
       "since": null
     },
     {
@@ -204,7 +204,7 @@
       "description": "Defines the value of the component.\n\n*Note:** The property is updated upon typing.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 176,
+      "sourceLine": 177,
       "since": null
     },
     {
@@ -214,7 +214,7 @@
       "description": "Defines the value state of the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 181,
+      "sourceLine": 182,
       "since": null
     }
   ],
@@ -226,7 +226,7 @@
       "description": "Fired when the user selects the AI button.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 188,
+      "sourceLine": 189,
       "since": null
     },
     {
@@ -236,7 +236,7 @@
       "description": "Fired when the input operation has finished by pressing Enter or on focusout.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 208,
+      "sourceLine": 209,
       "since": null
     },
     {
@@ -246,7 +246,7 @@
       "description": "Fired when the suggestions picker is closed.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 213,
+      "sourceLine": 214,
       "since": null
     },
     {
@@ -256,7 +256,7 @@
       "description": "Fired when the value of the component changes at each keystroke,\nand when a suggestion item has been selected.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 219,
+      "sourceLine": 220,
       "since": null
     },
     {
@@ -266,7 +266,7 @@
       "description": "Fired when an item from the AI actions menu is clicked.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 193,
+      "sourceLine": 194,
       "since": null
     },
     {
@@ -276,7 +276,7 @@
       "description": "Fired when the suggestions picker is open.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 224,
+      "sourceLine": 225,
       "since": null
     },
     {
@@ -286,7 +286,7 @@
       "description": "Fired when some text has been selected.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 229,
+      "sourceLine": 230,
       "since": null
     },
     {
@@ -296,7 +296,7 @@
       "description": "Fired when the user navigates to a suggestion item via the ARROW keys,\nas a preview, before the final selection.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 235,
+      "sourceLine": 236,
       "since": null
     },
     {
@@ -306,7 +306,7 @@
       "description": "Fired when the user selects the \"Stop\" button to stop ongoing AI text generation.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 198,
+      "sourceLine": 199,
       "since": null
     },
     {
@@ -316,7 +316,7 @@
       "description": "Fired when the user selects the version navigation buttons.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 203,
+      "sourceLine": 204,
       "since": null
     }
   ],

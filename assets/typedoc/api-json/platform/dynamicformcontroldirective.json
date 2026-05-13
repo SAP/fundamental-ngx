@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "dynamic-form-control.directive.ts",
   "sourceLine": 23,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/platform/form/form-generator/dynamic-form-control.directive.ts#L23",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/platform/form/form-generator/dynamic-form-control.directive.ts#L23",
   "description": "Dynamic form control directive represents a renderer of the dynamic components\nbased on the information provided in `formItem` input",
   "inputs": [
     {

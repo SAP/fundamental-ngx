@@ -26,6 +26,16 @@
       "deprecated": null,
       "sourceLine": 61,
       "since": null
+    },
+    {
+      "name": "tooltip",
+      "type": "string",
+      "default": null,
+      "description": "Defines the tooltip text of the badge icon.\n\n*Note:** If not provided, the badge uses the icon accessible name.\nIf no icon accessible name is available, a generic fallback text is used.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 69,
+      "since": null
     }
   ],
   "outputs": [],

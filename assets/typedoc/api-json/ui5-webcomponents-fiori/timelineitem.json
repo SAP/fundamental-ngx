@@ -18,13 +18,23 @@
       "since": null
     },
     {
+      "name": "iconTooltip",
+      "type": "string",
+      "default": null,
+      "description": "Defines the tooltip of the graphical icon.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 53,
+      "since": null
+    },
+    {
       "name": "name",
       "type": "string",
       "default": null,
       "description": "Defines the name of the item, displayed before the `title-text`.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 53,
+      "sourceLine": 58,
       "since": null
     },
     {
@@ -34,7 +44,7 @@
       "description": "Defines if the `name` is clickable.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 58,
+      "sourceLine": 63,
       "since": null
     },
     {
@@ -44,7 +54,7 @@
       "description": "Defines the state of the icon displayed in the `ui5-timeline-item`.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 63,
+      "sourceLine": 68,
       "since": null
     },
     {
@@ -54,7 +64,7 @@
       "description": "Defines the subtitle text of the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 68,
+      "sourceLine": 73,
       "since": null
     },
     {
@@ -64,7 +74,7 @@
       "description": "Defines the title text of the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 73,
+      "sourceLine": 78,
       "since": null
     }
   ],
@@ -76,7 +86,7 @@
       "description": "Fired when the item name is pressed either with a\nclick/tap or by using the Enter or Space key.\n\n*Note:** The event will not be fired if the `name-clickable`\nattribute is not set.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 84,
+      "sourceLine": 89,
       "since": null
     }
   ],

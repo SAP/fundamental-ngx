@@ -1,19 +1,30 @@
-<!DOCTYPE html><div class="doc-tsdoc-container"><div class="tsd-panel tsd-typography"><a id="md:ui5-webcomponents-base" class="tsd-anchor"></a><h1><a href="#md:ui5-webcomponents-base">ui5-webcomponents-base</a></h1><p>Base utilities and types for UI5 Web Components Angular wrappers.</p>
-<a id="md:overview" class="tsd-anchor"></a><h2><a href="#md:overview">Overview</a></h2><p>This library provides core utilities, TypeScript types, and common functionality used across all UI5 Web Components Angular wrapper libraries. It is typically installed automatically as a peer dependency of other <code>@fundamental-ngx/ui5-webcomponents-*</code> packages.</p>
+<!DOCTYPE html><div class="doc-tsdoc-container"><div class="tsd-panel tsd-typography"><a id="md:fundamental-ngxui5-webcomponents-base" class="tsd-anchor"></a><h1><a href="#md:fundamental-ngxui5-webcomponents-base">@fundamental-ngx/ui5-webcomponents-base</a></h1><p>Base utilities and types shared across all <code>@fundamental-ngx/ui5-webcomponents-*</code> packages.</p>
+<a id="md:overview" class="tsd-anchor"></a><h2><a href="#md:overview">Overview</a></h2><p>This library provides the shared infrastructure used by the Angular wrappers for UI5 Web Components. It is installed automatically as a peer dependency of <code>@fundamental-ngx/ui5-webcomponents</code>, <code>@fundamental-ngx/ui5-webcomponents-fiori</code>, and <code>@fundamental-ngx/ui5-webcomponents-ai</code>.</p>
+<p><strong>What&#39;s included:</strong></p>
 <ul>
-<li>Common TypeScript types and interfaces</li>
-<li>Shared utilities for UI5 Web Components integration</li>
-<li>Theming support</li>
-<li>Base configuration</li>
+<li>Re-exported UI5 Web Components type enums (<code>ValueState</code>, <code>CalendarType</code>, <code>AnimationMode</code>, etc.)</li>
+<li><code>UI5WrapperCustomEvent&lt;T, N&gt;</code> — TypeScript helper for typed custom event payloads from wrapper components</li>
+<li>Theming API (<code>provideUi5Theming</code>, <code>Ui5ThemingProvider</code>) for SAP theming integration</li>
+<li>Language bridge (<code>provideUi5LanguageBridge</code>) — syncs Fundamental NGX locale to UI5 Web Components</li>
 </ul>
-<a id="md:installation" class="tsd-anchor"></a><h2><a href="#md:installation">Installation</a></h2><p>This package is usually installed automatically as a dependency:</p>
+<a id="md:installation" class="tsd-anchor"></a><h2><a href="#md:installation">Installation</a></h2><p>This package is installed automatically as a dependency of the UI5 wrapper libraries:</p>
+<pre><code class="language-bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">install</span><span class="hl-1"> </span><span class="hl-2">@fundamental-ngx/ui5-webcomponents</span>
+</code><button>Copy</button></pre>
+<p>If you need it standalone:</p>
 <pre><code class="language-bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">install</span><span class="hl-1"> </span><span class="hl-2">@fundamental-ngx/ui5-webcomponents-base</span>
 </code><button>Copy</button></pre>
-<a id="md:usage" class="tsd-anchor"></a><h2><a href="#md:usage">Usage</a></h2><p>This package is primarily used internally by other UI5 Web Components packages. You typically don&#39;t need to import from it directly unless you&#39;re building custom wrappers or need access to shared types.</p>
-<pre><code class="language-typescript"><span class="hl-3">import</span><span class="hl-1"> { </span><span class="hl-4">UI5CustomEvent</span><span class="hl-1"> } </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&#39;@ui5/webcomponents-base&#39;</span><span class="hl-1">;</span>
+<a id="md:usage" class="tsd-anchor"></a><h2><a href="#md:usage">Usage</a></h2><a id="md:typed-custom-events" class="tsd-anchor"></a><h3><a href="#md:typed-custom-events">Typed custom events</a></h3><p>Use <code>UI5WrapperCustomEvent&lt;T, N&gt;</code> to get the strongly-typed payload of a UI5 wrapper output:</p>
+<pre><code class="language-typescript"><span class="hl-3">import</span><span class="hl-1"> { </span><span class="hl-4">UI5WrapperCustomEvent</span><span class="hl-1"> } </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&#39;@fundamental-ngx/ui5-webcomponents-base&#39;</span><span class="hl-1">;</span><br/><span class="hl-3">import</span><span class="hl-1"> { </span><span class="hl-4">ButtonComponent</span><span class="hl-1"> } </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&#39;@fundamental-ngx/ui5-webcomponents&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-5">// Get the event payload type for the &quot;click&quot; output of ButtonComponent</span><br/><span class="hl-6">type</span><span class="hl-1"> </span><span class="hl-7">ClickEvent</span><span class="hl-1"> = </span><span class="hl-7">UI5WrapperCustomEvent</span><span class="hl-1">&lt;</span><span class="hl-7">ButtonComponent</span><span class="hl-1">, </span><span class="hl-2">&#39;ui5Click&#39;</span><span class="hl-1">&gt;;</span>
 </code><button>Copy</button></pre>
+<a id="md:re-exported-ui5-types" class="tsd-anchor"></a><h3><a href="#md:re-exported-ui5-types">Re-exported UI5 types</a></h3><p>Common UI5 enums are re-exported so you don&#39;t need to import from <code>@ui5/webcomponents-base</code> directly:</p>
+<pre><code class="language-typescript"><span class="hl-3">import</span><span class="hl-1"> { </span><span class="hl-4">ValueState</span><span class="hl-1">, </span><span class="hl-4">CalendarType</span><span class="hl-1">, </span><span class="hl-4">AnimationMode</span><span class="hl-1"> } </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&#39;@fundamental-ngx/ui5-webcomponents-base&#39;</span><span class="hl-1">;</span>
+</code><button>Copy</button></pre>
+<a id="md:language-bridge" class="tsd-anchor"></a><h3><a href="#md:language-bridge">Language bridge</a></h3><p>The language bridge keeps UI5 Web Components in sync with the Fundamental NGX locale signal. Add it once in your root providers:</p>
+<pre><code class="language-typescript"><span class="hl-5">// app.config.ts</span><br/><span class="hl-3">import</span><span class="hl-1"> { </span><span class="hl-4">ApplicationConfig</span><span class="hl-1"> } </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&#39;@angular/core&#39;</span><span class="hl-1">;</span><br/><span class="hl-3">import</span><span class="hl-1"> { </span><span class="hl-4">provideUi5LanguageBridge</span><span class="hl-1"> } </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&#39;@fundamental-ngx/ui5-webcomponents-base/i18n&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-3">export</span><span class="hl-1"> </span><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-8">appConfig</span><span class="hl-1">: </span><span class="hl-7">ApplicationConfig</span><span class="hl-1"> = {</span><br/><span class="hl-1">    </span><span class="hl-4">providers:</span><span class="hl-1"> [</span><span class="hl-0">provideUi5LanguageBridge</span><span class="hl-1">()],</span><br/><span class="hl-1">};</span>
+</code><button>Copy</button></pre>
+<p>After this, changing the <code>FD_LANGUAGE_SIGNAL</code> will automatically update the locale used by UI5 Web Components.</p>
 <a id="md:resources" class="tsd-anchor"></a><h2><a href="#md:resources">Resources</a></h2><ul>
-<li><a href="https://ui5.github.io/webcomponents/">UI5 Web Components Documentation</a></li>
+<li><a href="https://sap.github.io/ui5-webcomponents/">UI5 Web Components Documentation</a></li>
 <li><a href="https://sap.github.io/fundamental-ngx">Fundamental NGX Documentation</a></li>
 <li><a href="https://github.com/SAP/fundamental-ngx">GitHub Repository</a></li>
 </ul>

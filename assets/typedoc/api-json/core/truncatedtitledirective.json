@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "truncate.directive.ts",
   "sourceLine": 94,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/cdk/utils/directives/truncate/truncate.directive.ts#L94",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/cdk/utils/directives/truncate/truncate.directive.ts#L94",
   "description": "",
   "inputs": [],
   "outputs": [],

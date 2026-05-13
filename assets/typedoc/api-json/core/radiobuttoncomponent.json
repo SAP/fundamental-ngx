@@ -3,8 +3,8 @@
   "selector": "fd-radio-button",
   "kind": "Component",
   "sourceFile": "radio-button.component.ts",
-  "sourceLine": 50,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/core/radio/radio-button/radio-button.component.ts#L50",
+  "sourceLine": 51,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/radio/radio-button/radio-button.component.ts#L51",
   "description": "Set of fields of FormItemControl component",
   "inputs": [
     {
@@ -14,7 +14,7 @@
       "description": "Sets the `aria-describedby` attribute to the element.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 67,
+      "sourceLine": 68,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Sets the `aria-label` attribute to the element.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 59,
+      "sourceLine": 60,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Sets the `aria-labelledby` attribute to the element.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 63,
+      "sourceLine": 64,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "The field is used to tell if radio button should be disabled\nValue: true or false\nby default disabled state is set to false",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 97,
+      "sourceLine": 98,
       "since": null
     },
     {
@@ -54,7 +54,7 @@
       "description": "uniqueId to a radio button",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 123,
+      "sourceLine": 124,
       "since": null
     },
     {
@@ -64,7 +64,7 @@
       "description": "The name of the radio button\nThe field is mandatory",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 117,
+      "sourceLine": 118,
       "since": null
     },
     {
@@ -74,7 +74,7 @@
       "description": "The field is used to tell if radio button should be read only",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 101,
+      "sourceLine": 102,
       "since": null
     },
     {
@@ -84,7 +84,7 @@
       "description": "If it is a mandatory field",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 133,
+      "sourceLine": 134,
       "since": null
     },
     {
@@ -94,7 +94,7 @@
       "description": "Whether the control is a standalone.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 137,
+      "sourceLine": 138,
       "since": null
     },
     {
@@ -104,7 +104,7 @@
       "description": "The field to set state of radio button using:\n'success' | 'error' | 'warning' | 'default' | 'information'\nby default value is set to 'default'",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 90,
+      "sourceLine": 91,
       "since": null
     },
     {
@@ -114,7 +114,7 @@
       "description": "sets radio tooltip",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 71,
+      "sourceLine": 72,
       "since": null
     },
     {
@@ -124,7 +124,7 @@
       "description": "Vertical position of the label compared to the radio button",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 143,
+      "sourceLine": 144,
       "since": null
     },
     {
@@ -134,7 +134,7 @@
       "description": "Value field stores information about holding value by radio button\nThe field is mandatory",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 129,
+      "sourceLine": 130,
       "since": null
     },
     {
@@ -144,7 +144,7 @@
       "description": "Whether input label should be wrapped",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 140,
+      "sourceLine": 141,
       "since": null
     }
   ],
@@ -155,7 +155,7 @@
       "signature": "() => string[]",
       "description": "This method is responsible for building a css class based on current state\n It is implementation of CssClassBuilder interface and\n should be used with",
       "deprecated": null,
-      "sourceLine": 176,
+      "sourceLine": 177,
       "since": null,
       "parameters": [],
       "returnType": "string[]"

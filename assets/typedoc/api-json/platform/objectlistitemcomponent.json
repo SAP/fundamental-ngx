@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "object-list-item.component.ts",
   "sourceLine": 55,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5cff572/libs/platform/list/object-list-item/object-list-item.component.ts#L55",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/platform/list/object-list-item/object-list-item.component.ts#L55",
   "description": "This class contains common properties used across list Item components.\nthis can be extended to reduce the code duplication across list Item components.",
   "inputs": [
     {

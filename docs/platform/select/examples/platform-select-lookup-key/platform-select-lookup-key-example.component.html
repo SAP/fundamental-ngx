@@ -1,0 +1,13 @@
+<fdp-form-group [noLabelLayout]="false" [formGroup]="form">
+    <fdp-form-field id="country" label="Country" [rank]="4">
+        <fdp-select
+            name="country"
+            placeholder="Select a country"
+            [list]="countries"
+            displayKey="name"
+            lookupKey="id"
+            formControlName="country"
+        ></fdp-select>
+    </fdp-form-field>
+</fdp-form-group>
+<p>Form value: {{ form.get('country')?.value | json }}</p>

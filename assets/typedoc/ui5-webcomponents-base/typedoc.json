@@ -108,7 +108,7 @@
 	"readme": [
 		{
 			"kind": "text",
-			"text": "# ui5-webcomponents-base\n\nBase utilities and types for UI5 Web Components Angular wrappers.\n\n## Overview\n\nThis library provides core utilities, TypeScript types, and common functionality used across all UI5 Web Components Angular wrapper libraries. It is typically installed automatically as a peer dependency of other "
+			"text": "# @fundamental-ngx/ui5-webcomponents-base\n\nBase utilities and types shared across all "
 		},
 		{
 			"kind": "code",
@@ -116,7 +116,95 @@
 		},
 		{
 			"kind": "text",
-			"text": " packages.\n\n- Common TypeScript types and interfaces\n- Shared utilities for UI5 Web Components integration\n- Theming support\n- Base configuration\n\n## Installation\n\nThis package is usually installed automatically as a dependency:\n\n"
+			"text": " packages.\n\n## Overview\n\nThis library provides the shared infrastructure used by the Angular wrappers for UI5 Web Components. It is installed automatically as a peer dependency of "
+		},
+		{
+			"kind": "code",
+			"text": "`@fundamental-ngx/ui5-webcomponents`"
+		},
+		{
+			"kind": "text",
+			"text": ", "
+		},
+		{
+			"kind": "code",
+			"text": "`@fundamental-ngx/ui5-webcomponents-fiori`"
+		},
+		{
+			"kind": "text",
+			"text": ", and "
+		},
+		{
+			"kind": "code",
+			"text": "`@fundamental-ngx/ui5-webcomponents-ai`"
+		},
+		{
+			"kind": "text",
+			"text": ".\n\n**What's included:**\n\n- Re-exported UI5 Web Components type enums ("
+		},
+		{
+			"kind": "code",
+			"text": "`ValueState`"
+		},
+		{
+			"kind": "text",
+			"text": ", "
+		},
+		{
+			"kind": "code",
+			"text": "`CalendarType`"
+		},
+		{
+			"kind": "text",
+			"text": ", "
+		},
+		{
+			"kind": "code",
+			"text": "`AnimationMode`"
+		},
+		{
+			"kind": "text",
+			"text": ", etc.)\n- "
+		},
+		{
+			"kind": "code",
+			"text": "`UI5WrapperCustomEvent<T, N>`"
+		},
+		{
+			"kind": "text",
+			"text": " — TypeScript helper for typed custom event payloads from wrapper components\n- Theming API ("
+		},
+		{
+			"kind": "code",
+			"text": "`provideUi5Theming`"
+		},
+		{
+			"kind": "text",
+			"text": ", "
+		},
+		{
+			"kind": "code",
+			"text": "`Ui5ThemingProvider`"
+		},
+		{
+			"kind": "text",
+			"text": ") for SAP theming integration\n- Language bridge ("
+		},
+		{
+			"kind": "code",
+			"text": "`provideUi5LanguageBridge`"
+		},
+		{
+			"kind": "text",
+			"text": ") — syncs Fundamental NGX locale to UI5 Web Components\n\n## Installation\n\nThis package is installed automatically as a dependency of the UI5 wrapper libraries:\n\n"
+		},
+		{
+			"kind": "code",
+			"text": "```bash\nnpm install @fundamental-ngx/ui5-webcomponents\n```"
+		},
+		{
+			"kind": "text",
+			"text": "\n\nIf you need it standalone:\n\n"
 		},
 		{
 			"kind": "code",
@@ -124,15 +212,55 @@
 		},
 		{
 			"kind": "text",
-			"text": "\n\n## Usage\n\nThis package is primarily used internally by other UI5 Web Components packages. You typically don't need to import from it directly unless you're building custom wrappers or need access to shared types.\n\n"
+			"text": "\n\n## Usage\n\n### Typed custom events\n\nUse "
 		},
 		{
 			"kind": "code",
-			"text": "```typescript\nimport { UI5CustomEvent } from '@ui5/webcomponents-base';\n```"
+			"text": "`UI5WrapperCustomEvent<T, N>`"
 		},
 		{
 			"kind": "text",
-			"text": "\n\n## Resources\n\n- [UI5 Web Components Documentation](https://ui5.github.io/webcomponents/)\n- [Fundamental NGX Documentation](https://sap.github.io/fundamental-ngx)\n- [GitHub Repository](https://github.com/SAP/fundamental-ngx)"
+			"text": " to get the strongly-typed payload of a UI5 wrapper output:\n\n"
+		},
+		{
+			"kind": "code",
+			"text": "```typescript\nimport { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';\nimport { ButtonComponent } from '@fundamental-ngx/ui5-webcomponents';\n\n// Get the event payload type for the \"click\" output of ButtonComponent\ntype ClickEvent = UI5WrapperCustomEvent<ButtonComponent, 'ui5Click'>;\n```"
+		},
+		{
+			"kind": "text",
+			"text": "\n\n### Re-exported UI5 types\n\nCommon UI5 enums are re-exported so you don't need to import from "
+		},
+		{
+			"kind": "code",
+			"text": "`@ui5/webcomponents-base`"
+		},
+		{
+			"kind": "text",
+			"text": " directly:\n\n"
+		},
+		{
+			"kind": "code",
+			"text": "```typescript\nimport { ValueState, CalendarType, AnimationMode } from '@fundamental-ngx/ui5-webcomponents-base';\n```"
+		},
+		{
+			"kind": "text",
+			"text": "\n\n### Language bridge\n\nThe language bridge keeps UI5 Web Components in sync with the Fundamental NGX locale signal. Add it once in your root providers:\n\n"
+		},
+		{
+			"kind": "code",
+			"text": "```typescript\n// app.config.ts\nimport { ApplicationConfig } from '@angular/core';\nimport { provideUi5LanguageBridge } from '@fundamental-ngx/ui5-webcomponents-base/i18n';\n\nexport const appConfig: ApplicationConfig = {\n    providers: [provideUi5LanguageBridge()],\n};\n```"
+		},
+		{
+			"kind": "text",
+			"text": "\n\nAfter this, changing the "
+		},
+		{
+			"kind": "code",
+			"text": "`FD_LANGUAGE_SIGNAL`"
+		},
+		{
+			"kind": "text",
+			"text": " will automatically update the locale used by UI5 Web Components.\n\n## Resources\n\n- [UI5 Web Components Documentation](https://sap.github.io/ui5-webcomponents/)\n- [Fundamental NGX Documentation](https://sap.github.io/fundamental-ngx)\n- [GitHub Repository](https://github.com/SAP/fundamental-ngx)"
 		}
 	],
 	"symbolIdMap": {
