@@ -1,8 +1,8 @@
 <fd-toolbar fdType="solid">
-    <label fd-toolbar-label>
+    <span fd-toolbar-label role="heading" [attr.aria-level]="normalizedLevel()">
         {{ title }}
         <ng-content select="[fd-grid-list-title-bar-additional-title-item]"></ng-content>
-    </label>
+    </span>
 
     <ng-content></ng-content>
 </fd-toolbar>

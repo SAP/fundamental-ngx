@@ -37,6 +37,8 @@ export default {
     },
     coreCalendar: {
         calendarDayViewDescription: 'Koledar',
+        calendarLegendLabel: 'Calendar Legend',
+        calendarRoleDescription: 'Calendar',
         calendarMonthViewDescription: 'Izbirnik meseca',
         calendarYearsRangeViewDescription: 'Izbirnik števila let',
         calendarYearsViewDescription: 'Izbirnik leta',
@@ -199,6 +201,9 @@ export default {
     },
     coreProductSwitch: {
         ariaLabel: 'Preklop med proizvodi'
+    },
+    coreRadio: {
+        readOnlyDescription: 'This radio button is read-only and cannot be changed.'
     },
     coreRatingIndicator: {
         ariaLabelReset: 'Ponastavitev na nič',

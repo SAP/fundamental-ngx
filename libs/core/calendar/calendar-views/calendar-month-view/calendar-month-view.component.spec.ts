@@ -124,4 +124,24 @@ describe('CalendarMonthViewComponent', () => {
 
         expect(sizes).toEqual([3, 3, 3, 3]);
     });
+
+    it('should have aria-readonly="false" on the table element', () => {
+        const table: HTMLTableElement = fixture.nativeElement.querySelector('table');
+        expect(table.getAttribute('aria-readonly')).toBe('false');
+    });
+
+    it('should have aria-multiselectable="false" on the table element', () => {
+        const table: HTMLTableElement = fixture.nativeElement.querySelector('table');
+        expect(table.getAttribute('aria-multiselectable')).toBe('false');
+    });
+
+    it('should render month cell content as a span, not a button', () => {
+        const buttons = fixture.nativeElement.querySelectorAll('td.fd-calendar__my-item button');
+        expect(buttons.length).toBe(0);
+
+        const spans = fixture.nativeElement.querySelectorAll(
+            'td.fd-calendar__my-item > span.fd-calendar__my-item-button'
+        );
+        expect(spans.length).toBe(12);
+    });
 });

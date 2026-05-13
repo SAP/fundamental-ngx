@@ -36,6 +36,8 @@ export default {
     },
     coreCalendar: {
         calendarDayViewDescription: 'Kalender',
+        calendarLegendLabel: 'Calendar Legend',
+        calendarRoleDescription: 'Calendar',
         calendarMonthViewDescription: 'Månedsvælger',
         calendarYearsRangeViewDescription: 'Vælger af årsinterval',
         calendarYearsViewDescription: 'Årsvælger',
@@ -198,6 +200,9 @@ export default {
     },
     coreProductSwitch: {
         ariaLabel: 'Produktskift'
+    },
+    coreRadio: {
+        readOnlyDescription: 'This radio button is read-only and cannot be changed.'
     },
     coreRatingIndicator: {
         ariaLabelReset: 'Nulstil',

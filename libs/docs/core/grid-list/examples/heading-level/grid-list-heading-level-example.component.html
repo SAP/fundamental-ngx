@@ -1,0 +1,10 @@
+<fd-grid-list>
+    <fd-grid-list-title-bar title="Products (Heading Level 3)" [headingLevel]="3">
+        <span fd-grid-list-title-bar-additional-title-item>(5)</span>
+    </fd-grid-list-title-bar>
+    @for (item of list; track item) {
+        <fd-grid-list-item [title]="item.title" [description]="item.description">
+            <fd-avatar fd-grid-list-item-image image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
+        </fd-grid-list-item>
+    }
+</fd-grid-list>

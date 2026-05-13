@@ -2,8 +2,8 @@ name: Generate changelog
 description: Generates changelog from nearest release to current commit
 
 outputs:
-    generatedChangelog:
-        description: Generated changelog
+    generatedReleaseNotes:
+        description: Generated release notes body
 
 runs:
     using: node20

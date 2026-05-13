@@ -36,6 +36,8 @@ export default {
     },
     coreCalendar: {
         calendarDayViewDescription: '달력',
+        calendarLegendLabel: 'Calendar Legend',
+        calendarRoleDescription: 'Calendar',
         calendarMonthViewDescription: '월 선택 도구',
         calendarYearsRangeViewDescription: '연도 범위 선택 도구',
         calendarYearsViewDescription: '연도 선택 도구',
@@ -198,6 +200,9 @@ export default {
     },
     coreProductSwitch: {
         ariaLabel: '제품 전환'
+    },
+    coreRadio: {
+        readOnlyDescription: 'This radio button is read-only and cannot be changed.'
     },
     coreRatingIndicator: {
         ariaLabelReset: '0으로 재설정',

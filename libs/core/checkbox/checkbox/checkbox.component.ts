@@ -1,5 +1,4 @@
 import { CdkPortalOutlet, DomPortal, PortalModule } from '@angular/cdk/portal';
-import { NgClass } from '@angular/common';
 import {
     AfterViewInit,
     Attribute,
@@ -55,7 +54,7 @@ export type FdCheckboxTypes = 'checked' | 'unchecked' | 'indeterminate' | 'force
         contentDensityObserverProviders()
     ],
     host: { '[attr.tabindex]': '-1' },
-    imports: [FormsModule, NgClass, ContentDensityModule, PortalModule]
+    imports: [FormsModule, ContentDensityModule, PortalModule]
 })
 export class CheckboxComponent<T = unknown> implements ControlValueAccessor, AfterViewInit, OnDestroy, FormItemControl {
     /** @hidden */
@@ -203,6 +202,22 @@ export class CheckboxComponent<T = unknown> implements ControlValueAccessor, Aft
 
     /** @hidden */
     _domPortal: DomPortal<HTMLElement>;
+
+    /** @hidden */
+    protected get inputStateClasses(): string {
+        const classes: string[] = [];
+        if (this.displayOnly) {
+            classes.push('is-display');
+        } else if (this.readonly) {
+            classes.push('is-readonly');
+        } else if (this.disabled) {
+            classes.push('is-disabled');
+        }
+        if (this.state && this.state !== 'default') {
+            classes.push('is-' + this.state);
+        }
+        return classes.join(' ');
+    }
 
     /** @hidden */
     private _subscriptions = new Subscription();

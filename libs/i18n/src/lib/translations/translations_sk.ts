@@ -37,6 +37,8 @@ export default {
     },
     coreCalendar: {
         calendarDayViewDescription: 'Kalendár',
+        calendarLegendLabel: 'Calendar Legend',
+        calendarRoleDescription: 'Calendar',
         calendarMonthViewDescription: 'Výber mesiaca',
         calendarYearsRangeViewDescription: 'Výber rozsahu rokov',
         calendarYearsViewDescription: 'Výber roka',
@@ -199,6 +201,9 @@ export default {
     },
     coreProductSwitch: {
         ariaLabel: 'Prepínač produktov'
+    },
+    coreRadio: {
+        readOnlyDescription: 'This radio button is read-only and cannot be changed.'
     },
     coreRatingIndicator: {
         ariaLabelReset: 'Resetovať na nulu',

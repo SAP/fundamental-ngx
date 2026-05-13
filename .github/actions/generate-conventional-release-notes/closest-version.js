@@ -12,8 +12,9 @@ module.exports = async () => {
     const closestIndex = availableVersions.findIndex(
         isPrerelease ? previousVersionPredicateForPrerelease : previousVersionPredicateForRelease
     );
+    const currentTag = `v${currentVersion}`;
     return {
         closest: availableVersions[closestIndex],
-        tagsTillClosest: availableVersions.slice(0, closestIndex)
+        tagsTillClosest: availableVersions.slice(0, closestIndex).filter((tag) => tag !== currentTag)
     };
 };

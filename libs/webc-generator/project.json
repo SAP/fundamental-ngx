@@ -37,13 +37,6 @@
                 ]
             }
         },
-        "generate": {
-            "executor": "@fundamental-ngx/webc-generator:generate",
-            "options": {
-                "packageName": "@ui5/webcomponents-ai",
-                "customElementSchemaPath": "/dist/custom-elements-internal.json"
-            }
-        },
         "test": {
             "executor": "@nx/jest:jest",
             "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],

@@ -5,15 +5,12 @@
 </ng-template>
 
 <ng-template #bodyTemplate>
-    <span
-        role="heading"
-        [attr.aria-level]="headingLevel + 1"
-        fd-list-group-header
-        id="platformTableInternalFilterListGroupHeader"
-    >
-        {{ ('platformTable.filterDialogFilterBy' | fdTranslate)() }}
-    </span>
-    <ul fd-list [navigationIndicator]="true" aria-labelledby="platformTableInternalFilterListGroupHeader">
+    <div fd-list-group-header>
+        <span fd-list-title id="platformTableInternalFilterListGroupHeader">
+            {{ ('platformTable.filterDialogFilterBy' | fdTranslate)() }}
+        </span>
+    </div>
+    <ul fd-list aria-labelledby="platformTableInternalFilterListGroupHeader" [navigationIndicator]="true">
         @for (filter of filters; track filter) {
             <li
                 fd-list-item

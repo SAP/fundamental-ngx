@@ -13,6 +13,7 @@ import { PlatformSelectColumnsExampleComponent } from './examples/platform-selec
 import { PlatformSelectCustomTriggerComponent } from './examples/platform-select-custom-trigger/platform-select-custom-trigger.component';
 import { PlatformSelectFormsComponent } from './examples/platform-select-forms/platform-select-forms.component';
 import { PlatformSelectMaxHeightExampleComponent } from './examples/platform-select-height/platform-select-max-height-example.component';
+import { PlatformSelectLookupKeyExampleComponent } from './examples/platform-select-lookup-key/platform-select-lookup-key-example.component';
 import { PlatformSelectMobileExampleComponent } from './examples/platform-select-mobile-example/platform-select-mobile-example.component';
 import { PlatformSelectModeExampleComponent } from './examples/platform-select-mode-example/platform-select-mode-example.component';
 import { PlatformSelectNoneExampleComponent } from './examples/platform-select-none/platform-select-none-example.component';
@@ -48,6 +49,9 @@ const selectNoneTs = 'platform-select-none/platform-select-none-example.componen
 const selectNoWrapHtml = 'platform-select-nowrap/platform-select-nowrap-example.component.html';
 const selectNoWrapTs = 'platform-select-nowrap/platform-select-nowrap-example.component.ts';
 
+const selectLookupKeyHtml = 'platform-select-lookup-key/platform-select-lookup-key-example.component.html';
+const selectLookupKeyTs = 'platform-select-lookup-key/platform-select-lookup-key-example.component.ts';
+
 @Component({
     selector: 'fdp-select-docs',
     templateUrl: './platform-select-docs.component.html',
@@ -73,6 +77,7 @@ const selectNoWrapTs = 'platform-select-nowrap/platform-select-nowrap-example.co
         PlatformSelectMaxHeightExampleComponent,
         PlatformSelectNoneExampleComponent,
         PlatformSelectNoWrapExampleComponent,
+        PlatformSelectLookupKeyExampleComponent,
         PlatformSelectFormsComponent
     ]
 })
@@ -158,6 +163,20 @@ export class PlatformSelectDocsComponent {
             component: 'PlatformSelectFormsComponent',
             code: getAssetFromModuleAssets(selectFormTs),
             fileName: 'platform-select-forms'
+        }
+    ];
+
+    selectLookupKey: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(selectLookupKeyHtml),
+            fileName: 'platform-select-lookup-key-example'
+        },
+        {
+            language: 'typescript',
+            component: 'PlatformSelectLookupKeyExampleComponent',
+            code: getAssetFromModuleAssets(selectLookupKeyTs),
+            fileName: 'platform-select-lookup-key-example'
         }
     ];
 
