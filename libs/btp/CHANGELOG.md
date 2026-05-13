@@ -1,3 +1,18 @@
+## 0.62.2 (2026-05-13)
+
+### 🚀 Features
+
+- **core:** improve MCP server metadata and add usage guide tool ([#14159](https://github.com/SAP/fundamental-ngx/pull/14159))
+
+### 🩹 Fixes
+
+- **btp:** center vertically the Side Nav icons with nav button in Overlay Mode ([#14197](https://github.com/SAP/fundamental-ngx/pull/14197))
+
+### ❤️ Thank You
+
+- deno
+- Inna Atanasova @InnaAtanasova
+
 ## 0.62.2-rc.17 (2026-05-12)
 
 This was a version bump only for btp to align it with other projects, there were no code changes.

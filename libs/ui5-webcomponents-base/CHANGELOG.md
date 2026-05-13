@@ -1,3 +1,13 @@
+## 0.62.2 (2026-05-13)
+
+### 🚀 Features
+
+- **core:** improve MCP server metadata and add usage guide tool ([#14159](https://github.com/SAP/fundamental-ngx/pull/14159))
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.62.2-rc.17 (2026-05-12)
 
 This was a version bump only for ui5-webcomponents-base to align it with other projects, there were no code changes.
