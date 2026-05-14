@@ -527,6 +527,24 @@ describe('typedoc-extractor', () => {
             expect(result[0].inputs).toHaveLength(0);
         });
 
+        it('should skip Signal<T> and WritableSignal<T> properties (internal state, not inputs)', async () => {
+            const doc = makeTypeDocRoot([
+                makeClassDecl({
+                    children: [
+                        makeProperty('collapsed', { type: 'reference', name: 'Signal' }),
+                        makeProperty('isOpen', { type: 'reference', name: 'WritableSignal' }),
+                        makeSignalInput('label', { type: 'intrinsic', name: 'string' })
+                    ]
+                })
+            ]);
+            const filePath = await writeTempTypeDoc(doc);
+
+            const result = await extractFromTypeDoc(filePath, '@fundamental-ngx/core');
+
+            expect(result[0].inputs).toHaveLength(1);
+            expect(result[0].inputs[0].name).toBe('label');
+        });
+
         it('should generate a fallback description when no JSDoc is present', async () => {
             const doc = makeTypeDocRoot([
                 makeClassDecl({

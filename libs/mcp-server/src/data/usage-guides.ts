@@ -358,5 +358,121 @@ this._dialogService.open(MyDialogComponent, {
   </fd-card-content>
 </fd-card>`,
         relatedComponents: ['fd-card-header', 'fd-card-content', 'fd-avatar', 'fd-tile', 'ui5-card']
+    },
+
+    'fd-flexible-column-layout': {
+        component: 'fd-flexible-column-layout',
+        summary:
+            'SAP Fiori master-detail layout that transitions between 1, 2, and 3 columns. Controlled by the FlexibleColumnLayout enum via the layout input. Content is projected via #startColumn, #midColumn, and #endColumn template reference variables.',
+        decisionTree: [
+            {
+                question: 'How many columns does your layout need?',
+                options: [
+                    {
+                        answer: 'Single full-screen column (initial/focused state)',
+                        recommendation:
+                            'Use layout="OneColumnStartFullScreen", "OneColumnMidFullScreen", or "OneColumnEndFullScreen" depending on which panel is active.',
+                        example: `<fd-flexible-column-layout layout="OneColumnStartFullScreen"
+  [layoutDefinitions]="layoutDefs"
+  collapseTitle="Collapse" collapseTitleStartBtn="Collapse start"
+  collapseTitleEndBtn="Collapse end"
+  expandTitle="Expand" expandTitleStartBtn="Expand start"
+  expandTitleEndBtn="Expand end"
+  separatorAriaLabel="Column separator">
+  <ng-template #startColumn>
+    <!-- Master list -->
+  </ng-template>
+</fd-flexible-column-layout>`
+                    },
+                    {
+                        answer: 'Two-column master-detail',
+                        recommendation:
+                            '"TwoColumnsStartExpanded" gives 67/33 split (list dominant). "TwoColumnsMidExpanded" gives 33/67 split (detail dominant). "TwoColumnsEndExpanded" gives 33/67 with end panel.',
+                        example: `<fd-flexible-column-layout [layout]="layout()"
+  [layoutDefinitions]="layoutDefs"
+  collapseTitle="Collapse" collapseTitleStartBtn="Collapse start"
+  collapseTitleEndBtn="Collapse end"
+  expandTitle="Expand" expandTitleStartBtn="Expand start"
+  expandTitleEndBtn="Expand end"
+  separatorAriaLabel="Column separator">
+  <ng-template #startColumn><!-- Master list --></ng-template>
+  <ng-template #midColumn><!-- Detail view --></ng-template>
+</fd-flexible-column-layout>`
+                    },
+                    {
+                        answer: 'Three-column master-detail-extra',
+                        recommendation:
+                            '"ThreeColumnsMidExpanded" gives 25/50/25. "ThreeColumnsEndExpanded" gives 25/25/50. "ThreeColumnsStartMinimized" gives 0/67/33. "ThreeColumnsEndMinimized" gives 67/33/0.',
+                        example: `<fd-flexible-column-layout [layout]="layout()"
+  [layoutDefinitions]="layoutDefs"
+  collapseTitle="Collapse" collapseTitleStartBtn="Collapse start"
+  collapseTitleEndBtn="Collapse end"
+  expandTitle="Expand" expandTitleStartBtn="Expand start"
+  expandTitleEndBtn="Expand end"
+  separatorAriaLabel="Column separator">
+  <ng-template #startColumn><!-- Master list --></ng-template>
+  <ng-template #midColumn><!-- Detail --></ng-template>
+  <ng-template #endColumn><!-- Extra detail --></ng-template>
+</fd-flexible-column-layout>`
+                    }
+                ]
+            },
+            {
+                question: 'fd-flexible-column-layout vs ui5-flexible-column-layout?',
+                options: [
+                    {
+                        answer: 'Angular-native with full control over layout percentages',
+                        recommendation:
+                            'Use fd-flexible-column-layout. Customize column widths via layoutDefinitions (FlexibleColumnLayoutDefinition array).',
+                        example: `import { FlexibleColumnLayout } from '@fundamental-ngx/core/flexible-column-layout';`
+                    },
+                    {
+                        answer: 'SAP UI5 design system compliance out of the box',
+                        recommendation:
+                            'Use ui5-flexible-column-layout from @fundamental-ngx/ui5-webcomponents. Slots are start-column, mid-column, end-column attributes.',
+                        example: `<ui5-flexible-column-layout layout="TwoColumnsMidExpanded">
+  <div slot="startColumn">Master</div>
+  <div slot="midColumn">Detail</div>
+</ui5-flexible-column-layout>`
+                    }
+                ]
+            }
+        ],
+        commonPitfalls: [
+            'All six title inputs are required for accessibility: collapseTitle, collapseTitleStartBtn, collapseTitleEndBtn, expandTitle, expandTitleStartBtn, expandTitleEndBtn. Omitting any causes runtime errors.',
+            'separatorAriaLabel is required for screen reader accessibility of the column resize handles.',
+            'layoutDefinitions input is required — provide a FlexibleColumnLayoutDefinition[] that maps each FlexibleColumnLayout value to column width percentages.',
+            'Content projection uses template reference variables (#startColumn, #midColumn, #endColumn) inside ng-template elements — NOT named slot attributes. The ng-template must be a direct child of fd-flexible-column-layout.',
+            '#midColumn and #endColumn are only rendered when the active layout includes those columns. Do not assume they are always mounted.',
+            'FlexibleColumnLayout enum values: OneColumnStartFullScreen | OneColumnMidFullScreen | OneColumnEndFullScreen | TwoColumnsStartExpanded | TwoColumnsMidExpanded | TwoColumnsEndExpanded | ThreeColumnsMidExpanded | ThreeColumnsEndExpanded | ThreeColumnsStartMinimized | ThreeColumnsEndMinimized.',
+            'Import FlexibleColumnLayout enum from @fundamental-ngx/core/flexible-column-layout, not a deep path.'
+        ],
+        compositionPattern: `import { FlexibleColumnLayout } from '@fundamental-ngx/core/flexible-column-layout';
+
+// In component
+layout = signal<FlexibleColumnLayout>(FlexibleColumnLayout.OneColumnStartFullScreen);
+
+// Template
+<fd-flexible-column-layout
+  [layout]="layout()"
+  [layoutDefinitions]="layoutDefs"
+  collapseTitle="Collapse panel"
+  collapseTitleStartBtn="Collapse start panel"
+  collapseTitleEndBtn="Collapse end panel"
+  expandTitle="Expand panel"
+  expandTitleStartBtn="Expand start panel"
+  expandTitleEndBtn="Expand end panel"
+  separatorAriaLabel="Resize column separator">
+  <ng-template #startColumn>
+    <!-- Master / list panel -->
+  </ng-template>
+  <ng-template #midColumn>
+    <!-- Detail panel -->
+  </ng-template>
+  <ng-template #endColumn>
+    <!-- Extra detail panel (3-column layouts only) -->
+  </ng-template>
+</fd-flexible-column-layout>`,
+        relatedComponents: ['ui5-flexible-column-layout', 'fd-layout-grid', 'fd-dynamic-page', 'fd-shellbar']
     }
 };
