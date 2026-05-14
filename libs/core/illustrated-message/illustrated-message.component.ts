@@ -4,17 +4,15 @@ import {
     ChangeDetectionStrategy,
     Component,
     computed,
-    effect,
+    DestroyRef,
     ElementRef,
     inject,
     input,
     signal,
     ViewEncapsulation
 } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HasElementRef, RequireOnlyOne } from '@fundamental-ngx/cdk/utils';
-import { debounceTime, fromEvent } from 'rxjs';
 
 /**
  * Configuration for an SVG item in the illustrated message.
@@ -229,24 +227,16 @@ export class IllustratedMessageComponent implements HasElementRef {
     private readonly _sanitizer = inject(DomSanitizer);
 
     /** @hidden */
+    private readonly _destroyRef = inject(DestroyRef);
+
+    /** @hidden */
     constructor() {
-        // Setup resize listener for responsive behavior with automatic cleanup
-        const resize$ = toSignal(fromEvent(window, 'resize').pipe(debounceTime(200)));
-
-        // Measure container width after render
         afterNextRender(() => {
-            this._measureContainerWidth();
-        });
-
-        // React to resize events and input changes
-        effect(() => {
-            // Track resize events
-            resize$();
-            this.type();
-            this.svgConfig();
-
-            // Remeasure on changes
-            this._measureContainerWidth();
+            const observer = new ResizeObserver(() => {
+                this._measureContainerWidth();
+            });
+            observer.observe(this.elementRef.nativeElement);
+            this._destroyRef.onDestroy(() => observer.disconnect());
         });
     }
 
