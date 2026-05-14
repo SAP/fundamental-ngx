@@ -23,6 +23,19 @@ export const SUBPATH_OVERRIDES: Record<string, string> = {
     '@fundamental-ngx/platform/form-generator': 'form'
 };
 
+/**
+ * Returns true when the type is trivially optional and should not be flagged as a
+ * "crash-if-omitted" required input:
+ *   - boolean  — Angular treats missing booleans as false; no runtime crash
+ *   - union with undefined — explicitly nullable/optional by the type author
+ */
+function isTriviallyOptionalType(type: string | undefined): boolean {
+    if (!type) {
+        return false;
+    }
+    return type.includes('boolean') || type.includes('undefined');
+}
+
 /** Return whether a selector is an element, attribute, or element+attribute selector. */
 export function getSelectorType(selector: string): 'element' | 'attribute' | 'element-attribute' {
     const first = selector.split(',')[0].trim();
@@ -56,7 +69,7 @@ export function buildTemplate(component: ComponentMetadata): string {
 
     // Plain element selector
     const tag = first;
-    const required = component.inputs.filter((i) => i.required && !i.defaultValue);
+    const required = component.inputs.filter((i) => i.required && !i.defaultValue && !isTriviallyOptionalType(i.type));
     const attrs = required
         .slice(0, 3)
         .map((i) => `[${i.name}]="/* ${i.type} */"`)
@@ -123,7 +136,9 @@ export function buildPitfalls(component: ComponentMetadata, importPath: string):
         }
     }
 
-    const requiredInputs = component.inputs.filter((i) => i.required && !i.defaultValue);
+    const requiredInputs = component.inputs.filter(
+        (i) => i.required && !i.defaultValue && !isTriviallyOptionalType(i.type)
+    );
     if (requiredInputs.length > 0) {
         pitfalls.push(
             `Required inputs with no default: ${requiredInputs.map((i) => i.name).join(', ')}. Omitting these will cause runtime errors.`
