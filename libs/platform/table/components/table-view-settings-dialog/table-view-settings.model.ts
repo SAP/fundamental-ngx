@@ -62,5 +62,23 @@ export enum ACTIVE_STEP {
 export enum ActiveTab {
     SORT = 'sort',
     FILTER = 'filter',
-    GROUP = 'group'
+    GROUP = 'group',
+    COLUMNS = 'columns'
+}
+
+export interface SettingsColumnsDialogColumn {
+    label: string;
+    key: string;
+    name: string;
+    visible: boolean;
+}
+
+export interface SettingsColumnsDialogData extends TableDialogCommonData {
+    columns: SettingsColumnsDialogColumn[];
+}
+
+export interface SettingsColumnsDialogResultData {
+    visibleColumns: string[];
+    columnOrder: string[];
+    columns: SettingsColumnsDialogColumn[];
 }

@@ -28,6 +28,16 @@
         @if (showSubheader()) {
             <ng-template fdkTemplate="subheader">
                 <fd-segmented-button [(ngModel)]="activeTab" [style.height]="'fit-content'">
+                    @if (columnsData()) {
+                        <button
+                            fd-button
+                            fdkFocusableItem
+                            value="columns"
+                            glyph="column-chart-dual-axis"
+                            [title]="('platformTable.toolbarActionColumnsButtonTitle' | fdTranslate)()"
+                            [ariaLabel]="('platformTable.toolbarActionColumnsButtonTitle' | fdTranslate)()"
+                        ></button>
+                    }
                     @if (sortingData()) {
                         <button
                             fd-button
@@ -92,6 +102,15 @@
                     (groupChange)="onGroupChange($event)"
                     (resetAvailabilityChange)="onResetAvailabilityChange($event)"
                 ></fdp-grouping>
+            }
+            @case ('columns') {
+                <fdp-columns
+                    [headingLevel]="headingLevel"
+                    [columnsData]="columnsData()!"
+                    [initialColumns]="_initialColumns()"
+                    (columnsChange)="onColumnsChange($event)"
+                    (resetAvailabilityChange)="onResetAvailabilityChange($event)"
+                ></fdp-columns>
             }
         }
     </fd-dialog-body>

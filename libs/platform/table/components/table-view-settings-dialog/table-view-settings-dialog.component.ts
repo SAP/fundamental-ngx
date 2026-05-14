@@ -24,18 +24,25 @@ import {
 } from '@fundamental-ngx/platform/table-helpers';
 import { SettingsDialogComponent } from './settings-dialog/settings-dialog.component';
 import { TableViewSettingsFilterComponent } from './table-view-settings-filter.component';
-import { FiltersDialogData, SettingsGroupDialogData, SettingsSortDialogData } from './table-view-settings.model';
+import {
+    FiltersDialogData,
+    SettingsColumnsDialogColumn,
+    SettingsColumnsDialogData,
+    SettingsGroupDialogData,
+    SettingsSortDialogData
+} from './table-view-settings.model';
 
 export const dialogConfig: DialogConfig = {
     responsivePadding: false,
     verticalPadding: false,
-    width: '340px'
+    width: '368px'
 };
 
 export interface CombinedTableDialogData {
     sortingData: SettingsSortDialogData | null;
     filteringData: FiltersDialogData | null;
     groupingData: SettingsGroupDialogData | null;
+    columnsData: SettingsColumnsDialogData | null;
 }
 
 /**
@@ -92,6 +99,9 @@ export class TableViewSettingsDialogComponent implements AfterViewInit {
     /** @hidden */
     _dialogRef: DialogRef<TableDialogCommonData | CombinedTableDialogData, any>;
 
+    /** @hidden Stores the last known full column order (visible + hidden) */
+    private _lastColumnOrder: SettingsColumnsDialogColumn[] | null = null;
+
     private readonly destroyRef = inject(DestroyRef);
 
     /** @hidden */
@@ -126,6 +136,50 @@ export class TableViewSettingsDialogComponent implements AfterViewInit {
             field: state.groupBy?.[0]?.field
         };
 
+        // Get visible columns from table state
+        const visibleColumnNames = state.columns || [];
+
+        // Use last known column order if available, otherwise use table's natural order
+        let allColumns: SettingsColumnsDialogColumn[];
+
+        if (this._lastColumnOrder && this._lastColumnOrder.length > 0) {
+            // Use the last known order and update visibility based on current state
+            allColumns = this._lastColumnOrder.map((col) => ({
+                ...col,
+                visible: visibleColumnNames.includes(col.name)
+            }));
+        } else {
+            // First time opening - use table's natural column order
+            // Get all columns and determine their current order and visibility
+            const allColumnNames = [...visibleColumnNames];
+
+            // Add any columns that aren't in the visible list (hidden columns)
+            columns.forEach((col) => {
+                if (!allColumnNames.includes(col.name)) {
+                    allColumnNames.push(col.name);
+                }
+            });
+
+            allColumns = allColumnNames
+                .map((name) => {
+                    const col = columns.find((c) => c.name === name);
+                    if (!col) {
+                        return null;
+                    }
+                    return {
+                        label: col.label,
+                        key: col.key,
+                        name: col.name,
+                        visible: visibleColumnNames.includes(col.name)
+                    };
+                })
+                .filter((col): col is NonNullable<typeof col> => col !== null);
+        }
+
+        const currentColumnsData: SettingsColumnsDialogData = {
+            columns: allColumns
+        };
+
         if (this._dialogRef) {
             this._dialogRef.dismiss();
         }
@@ -138,6 +192,7 @@ export class TableViewSettingsDialogComponent implements AfterViewInit {
                     sortingData: sortData.columns.length > 0 ? sortData : null,
                     filteringData: filterData.viewSettingsFilters.length > 0 ? filterData : null,
                     groupingData: groupData.columns.length > 0 ? groupData : null,
+                    columnsData: currentColumnsData.columns.length > 0 ? currentColumnsData : null,
                     headingLevel: this.headingLevel
                 }
             },
@@ -149,7 +204,7 @@ export class TableViewSettingsDialogComponent implements AfterViewInit {
                 filter((result) => !!result),
                 takeUntilDestroyed(this.destroyRef)
             )
-            .subscribe(({ sortingData, filteringData, groupingData }) => {
+            .subscribe(({ sortingData, filteringData, groupingData, columnsData }) => {
                 if (sortingData) {
                     this._applySorting(sortingData.field, sortingData.direction);
                 }
@@ -158,6 +213,9 @@ export class TableViewSettingsDialogComponent implements AfterViewInit {
                 }
                 if (groupingData) {
                     this._applyGrouping(groupingData.field, groupingData.direction);
+                }
+                if (columnsData) {
+                    this._applyColumns(columnsData);
                 }
             });
     }
@@ -224,5 +282,17 @@ export class TableViewSettingsDialogComponent implements AfterViewInit {
     /** @hidden */
     private _applyGrouping(field: string | null, direction: SortDirection): void {
         this._table?.group(field ? [{ field, direction, showAsColumn: true }] : []);
+    }
+
+    /** @hidden */
+    private _applyColumns(columnsData: SettingsColumnsDialogData): void {
+        // Store the full column order (including hidden) so we can restore it on next open
+        this._lastColumnOrder = columnsData.columns;
+
+        // Get the visible columns in the order specified by the user
+        const visibleColumnNames = columnsData.columns.filter((col) => col.visible).map((col) => col.name);
+
+        // Use the table's setColumns method which handles both visibility and ordering
+        this._table?.setColumns(visibleColumnNames);
     }
 }
