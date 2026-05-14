@@ -20,7 +20,16 @@ import { buildPitfalls, buildTemplate, deriveImportPath, getSelectorType } from 
 let catalog: ComponentCatalog;
 try {
     const dataPath = resolve(__dirname, 'data', 'components.json');
-    catalog = JSON.parse(readFileSync(dataPath, 'utf-8'));
+    const raw = JSON.parse(readFileSync(dataPath, 'utf-8')) as ComponentCatalog;
+    // Strip Signal<T> / WritableSignal<T> inputs — these are internal state properties
+    // that TypeDoc exposes as public, not bindable Angular @Input() properties.
+    catalog = {
+        ...raw,
+        components: raw.components.map((c) => ({
+            ...c,
+            inputs: c.inputs.filter((i) => !isSignalWrapperType(i.type))
+        }))
+    };
 } catch {
     catalog = { generatedAt: new Date().toISOString(), version: 'unknown', components: [] };
     console.error('Warning: components.json not found. Run `nx run mcp-server:extract-metadata` first.');
@@ -110,8 +119,18 @@ Use this when you need to find a component by a partial name or feature keyword.
             }
         }
 
+        // Multi-word queries: sum the per-word scores so that components matching
+        // more words rank higher. Single-word queries use the existing path.
+        const queryWords = lowerQuery.split(/\s+/).filter((w) => w.length > 2);
+        const isMultiWord = queryWords.length > 1;
+
         const scored = components
-            .map((c) => ({ component: c, score: scoreMatch(c, lowerQuery) }))
+            .map((c) => ({
+                component: c,
+                score: isMultiWord
+                    ? queryWords.reduce((sum, word) => sum + scoreMatch(c, word), 0)
+                    : scoreMatch(c, lowerQuery)
+            }))
             .filter((s) => s.score > 0)
             .sort((a, b) => b.score - a.score)
             .slice(0, 20);
@@ -280,7 +299,7 @@ libraries, and how they compose together.`,
         // Pattern-based recommendations
         for (const [pattern, componentSelectors] of Object.entries(UI_PATTERNS)) {
             const keywords = pattern.split('|');
-            if (keywords.some((kw) => lowerDesc.includes(kw))) {
+            if (keywords.some((kw) => patternKeywordMatches(kw, lowerDesc))) {
                 for (const sel of componentSelectors) {
                     const comp = catalog.components.find((c) => c.selector === sel);
                     if (comp && !recommendations.some((r) => r.selector === sel)) {
@@ -595,10 +614,32 @@ Use this when building accessible UIs or auditing existing components.`,
                     `The "${roleInput.name}" input overrides the default ARIA role. Only change it when the component is used in a non-standard context.`
                 );
             }
-        } else {
-            tips.push(
-                'This component has no explicit ARIA inputs. It likely handles accessibility internally or relies on native HTML semantics.'
+        }
+
+        // Surface ARIA pitfalls from the curated usage guide when available
+        const selectorKey = component.selector.toLowerCase();
+        const strippedKey = selectorKey.replace(/^[a-z]+-/, '');
+        const curatedGuide = USAGE_GUIDES[selectorKey] ?? USAGE_GUIDES[strippedKey];
+        if (curatedGuide) {
+            const ariaPitfalls = curatedGuide.commonPitfalls.filter(
+                (p) => p.toLowerCase().includes('aria') || p.toLowerCase().includes('accessible')
             );
+            tips.push(...ariaPitfalls);
+        }
+
+        // For components that pass all config (incl. ARIA) via a single *Config input
+        if (ariaInputs.length === 0) {
+            const configInput = component.inputs.find((i) => i.type && i.type.includes('Config'));
+            if (configInput) {
+                const configTypeName = configInput.type.replace(/<.*>/, '');
+                tips.push(
+                    `Accessibility properties (ariaLabelledBy, ariaDescribedBy, etc.) are set on the "${configInput.name}" input via ${configTypeName}. Check the ${configTypeName} interface for available ARIA properties.`
+                );
+            } else if (tips.length === 0) {
+                tips.push(
+                    'This component has no explicit ARIA inputs. It likely handles accessibility internally or relies on native HTML semantics.'
+                );
+            }
         }
 
         if (component.keyboardHandling) {
@@ -882,14 +923,50 @@ function findComponent(nameOrSelector: string): ComponentMetadata | undefined {
 
     // Partial match on selector or name — rank by score to avoid compound
     // directives beating the primary component when selectors share a substring.
+    // Selector matching requires a dash-boundary: "fd-input" must NOT match
+    // "fd-input-group" because the query is a prefix segment of a longer name.
     const partialMatches = catalog.components.filter(
-        (c) => c.selector.toLowerCase().includes(lower) || c.name.toLowerCase().includes(lower)
+        (c) => selectorHasBoundaryMatch(c.selector.toLowerCase(), lower) || c.name.toLowerCase().includes(lower)
     );
     if (partialMatches.length > 0) {
         return partialMatches.sort((a, b) => scoreMatch(b, lower) - scoreMatch(a, lower))[0];
     }
 
     return undefined;
+}
+
+/**
+ * Returns true if `query` appears in `selector` and is NOT immediately followed
+ * by a dash. A trailing dash would mean the query is merely a prefix segment of
+ * a longer compound name (e.g. "fd-input" in "fd-input-group"), which should not
+ * count as a match.
+ */
+function selectorHasBoundaryMatch(selector: string, query: string): boolean {
+    const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    return new RegExp(escaped + '(?!-)').test(selector);
+}
+
+/**
+ * Returns true when a type string is a plain Signal or WritableSignal wrapper
+ * (e.g. "Signal<boolean>", "WritableSignal<number>").
+ * These are internal state properties exposed by TypeDoc, not bindable @Input() members.
+ */
+function isSignalWrapperType(type: string | undefined): boolean {
+    return !!type && /^(Writable)?Signal</.test(type);
+}
+
+/**
+ * Tests whether a UI_PATTERNS keyword matches a user-provided description string.
+ * Single-word keywords require whole-word matching to prevent "user" from firing
+ * on "username". Multi-word phrases (e.g. "data table") use a plain substring
+ * check since a two-word phrase is already specific enough.
+ */
+function patternKeywordMatches(keyword: string, text: string): boolean {
+    if (keyword.includes(' ')) {
+        return text.includes(keyword);
+    }
+    const escaped = keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    return new RegExp(`\\b${escaped}\\b`).test(text);
 }
 
 function scoreMatch(component: ComponentMetadata, query: string): number {
