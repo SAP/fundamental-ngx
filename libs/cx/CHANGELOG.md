@@ -1,3 +1,27 @@
+## 0.62.3-rc.1 (2026-05-13)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.62.3-rc.0 (2026-05-13)
+
+### 🚀 Features
+
+- MCP server evaluation - part 1 ([#14178](https://github.com/SAP/fundamental-ngx/pull/14178), [#14159](https://github.com/SAP/fundamental-ngx/issues/14159))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
+## 0.62.2 (2026-05-13)
+
+### 🚀 Features
+
+- **core:** improve MCP server metadata and add usage guide tool ([#14159](https://github.com/SAP/fundamental-ngx/pull/14159))
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.62.2-rc.17 (2026-05-12)
 
 This was a version bump only for cx to align it with other projects, there were no code changes.

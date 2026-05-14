@@ -35,17 +35,25 @@
             $event.preventDefault()
         "
         (cellFocused)="_tableRowService.cellFocused($event)"
+        (mouseenter)="selectionColumnHeaderDisableTitle.set(false)"
+        (mouseleave)="selectionColumnHeaderDisableTitle.set(true)"
+        (focusin)="selectionColumnHeaderDisableTitle.set(false)"
+        (focusout)="selectionColumnHeaderDisableTitle.set(true)"
         [attr.title]="
-            !checkedState
-                ? ('platformTable.selectAllCheckboxLabel' | fdTranslate)()
-                : ('platformTable.deselectAllCheckboxLabel' | fdTranslate)()
+            selectionMode === SELECTION_MODE.SINGLE || selectionColumnHeaderDisableTitle()
+                ? null
+                : !checkedState
+                  ? ('platformTable.selectAllCheckboxLabel' | fdTranslate)()
+                  : ('platformTable.deselectAllCheckboxLabel' | fdTranslate)()
         "
         [attr.aria-description]="
-            checkedState
-                ? ('platformTable.deselectAllCheckboxLongLabel' | fdTranslate)()
-                : checkedState === null
-                  ? ('platformTable.selectAllCheckboxMixedLongLabel' | fdTranslate)()
-                  : ('platformTable.selectAllCheckboxLongLabel' | fdTranslate)()
+            selectionMode === SELECTION_MODE.SINGLE
+                ? null
+                : checkedState
+                  ? ('platformTable.deselectAllCheckboxLongLabel' | fdTranslate)()
+                  : checkedState === null
+                    ? ('platformTable.selectAllCheckboxMixedLongLabel' | fdTranslate)()
+                    : ('platformTable.selectAllCheckboxLongLabel' | fdTranslate)()
         "
     >
         @if (selectionMode === SELECTION_MODE.MULTIPLE) {

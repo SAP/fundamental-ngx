@@ -1,3 +1,38 @@
+## 0.62.3-rc.1 (2026-05-13)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.62.3-rc.0 (2026-05-13)
+
+### 🚀 Features
+
+- MCP server evaluation - part 1 ([#14178](https://github.com/SAP/fundamental-ngx/pull/14178), [#14159](https://github.com/SAP/fundamental-ngx/issues/14159))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
+## 0.62.2 (2026-05-13)
+
+### 🚀 Features
+
+- **core:** add headingLevel support to grid-list title bar ([#14192](https://github.com/SAP/fundamental-ngx/pull/14192))
+- **core:** improve MCP server metadata and add usage guide tool ([#14159](https://github.com/SAP/fundamental-ngx/pull/14159))
+
+### 🩹 Fixes
+
+- **core:** restore ngModelChange emission in combobox communicateByObject mode ([#14200](https://github.com/SAP/fundamental-ngx/pull/14200))
+- **core:** prevent focus trap in form-input-message-group ([#14196](https://github.com/SAP/fundamental-ngx/pull/14196))
+- **core:** allow disabled state for individual buttons inside a non-disabled segmented button ([#14187](https://github.com/SAP/fundamental-ngx/pull/14187))
+- **core:** adopt fundamental-styles markup and a11y improvements ([#14152](https://github.com/SAP/fundamental-ngx/pull/14152))
+- **core:** update L size Illustrated message figcaption max-width ([#14180](https://github.com/SAP/fundamental-ngx/pull/14180))
+
+### ❤️ Thank You
+
+- deno
+- Inna Atanasova @InnaAtanasova
+- Maria Dineva @MariaIDineva
+
 ## 0.62.2-rc.17 (2026-05-12)
 
 ### 🩹 Fixes
