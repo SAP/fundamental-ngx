@@ -1,3 +1,13 @@
+## 0.62.3-rc.2 (2026-05-14)
+
+### 🩹 Fixes
+
+- **platform:** [Platform] [fdp-smart-filter-bar] Incorrect filter logic and row selection reset when switching visibility categories ([#14195](https://github.com/SAP/fundamental-ngx/pull/14195))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
 ## 0.62.3-rc.1 (2026-05-13)
 
 ### 🩹 Fixes
