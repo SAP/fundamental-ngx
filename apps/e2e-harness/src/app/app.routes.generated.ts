@@ -1649,6 +1649,13 @@ export const generatedRoutes: Routes = [
             )
     },
     {
+        path: 'core/grid-list/heading-level',
+        loadComponent: () =>
+            import(
+                '../../../../libs/docs/core/grid-list/examples/heading-level/grid-list-heading-level-example.component'
+            ).then((m) => m.GridListHeadingLevelExampleComponent)
+    },
+    {
         path: 'core/grid-list/layout',
         loadComponent: () =>
             import('../../../../libs/docs/core/grid-list/examples/layout/grid-list-layout-example.component').then(
@@ -4748,6 +4755,13 @@ export const generatedRoutes: Routes = [
             import(
                 '../../../../libs/docs/platform/select/examples/platform-select-height/platform-select-max-height-example.component'
             ).then((m) => m.PlatformSelectMaxHeightExampleComponent)
+    },
+    {
+        path: 'platform/select/lookup-key',
+        loadComponent: () =>
+            import(
+                '../../../../libs/docs/platform/select/examples/platform-select-lookup-key/platform-select-lookup-key-example.component'
+            ).then((m) => m.PlatformSelectLookupKeyExampleComponent)
     },
     {
         path: 'platform/select/mobile',

@@ -1,5 +1,5 @@
 {
-    "count": 952,
+    "count": 954,
     "routes": [
         {
             "path": "btp/button/nested",
@@ -1645,6 +1645,13 @@
             "component": "grid-list",
             "example": "group",
             "className": "GridListGroupExampleComponent"
+        },
+        {
+            "path": "core/grid-list/heading-level",
+            "library": "core",
+            "component": "grid-list",
+            "example": "heading-level",
+            "className": "GridListHeadingLevelExampleComponent"
         },
         {
             "path": "core/grid-list/layout",
@@ -4746,6 +4753,13 @@
             "component": "select",
             "example": "height",
             "className": "PlatformSelectMaxHeightExampleComponent"
+        },
+        {
+            "path": "platform/select/lookup-key",
+            "library": "platform",
+            "component": "select",
+            "example": "lookup-key",
+            "className": "PlatformSelectLookupKeyExampleComponent"
         },
         {
             "path": "platform/select/mobile",
