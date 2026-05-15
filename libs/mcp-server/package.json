@@ -1,7 +1,7 @@
 {
     "name": "@fundamental-ngx/mcp",
     "version": "0.62.3-rc.3",
-    "description": "MCP server exposing Fundamental NGX component metadata for AI coding assistants",
+    "description": "MCP server exposing Fundamental NGX component metadata for AI coding assistants — includes companion Claude Code skills for project setup, forms, tables, page layouts, and more",
     "license": "Apache-2.0",
     "repository": {
         "type": "git",
