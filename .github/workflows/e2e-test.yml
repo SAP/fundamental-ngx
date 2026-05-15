@@ -164,11 +164,25 @@ jobs:
                   esac
                   echo "grep=$GREP" >> "$GITHUB_OUTPUT"
 
+            - name: Detect snapshot update
+              id: marker
+              env:
+                  BASE_SHA: ${{ github.event.pull_request.base.sha }}
+                  HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+              run: node .github/actions/helpers/detect-snapshot-update.js
+
             - name: Run E2E tests
               env:
                   CI: true
                   SHARD: ${{ matrix.shard }}
-              run: npx playwright test --grep "${{ steps.filter.outputs.grep }}"
+                  UPDATE_MODE: ${{ steps.marker.outputs.update }}
+                  GREP_FILTER: ${{ steps.filter.outputs.grep }}
+              run: |
+                  UPDATE_FLAG=""
+                  if [ "$UPDATE_MODE" = "1" ]; then
+                    UPDATE_FLAG="--update-snapshots"
+                  fi
+                  npx playwright test --grep "$GREP_FILTER" $UPDATE_FLAG
 
             - name: Upload blob report
               if: always()
@@ -186,10 +200,11 @@ jobs:
                   path: test-results-${{ matrix.shard }}.json
                   retention-days: 3
 
-            - name: Commit missing Linux baselines
-              if: failure() && github.event.pull_request.head.repo.full_name == github.repository
+            - name: Commit Linux baselines
+              if: (failure() || steps.marker.outputs.update == '1') && github.event.pull_request.head.repo.full_name == github.repository
               env:
                   SHARD: ${{ matrix.shard }}
+                  UPDATE_MODE: ${{ steps.marker.outputs.update }}
               run: |
                   SNAPDIR="apps/e2e-harness/e2e/snapshots/linux"
                   git add --intent-to-add "$SNAPDIR" 2>/dev/null || true
@@ -197,12 +212,16 @@ jobs:
                     git config user.name "github-actions"
                     git config user.email "github-actions@github.com"
                     git add "$SNAPDIR"
-                    git commit -m "test(e2e): add missing Linux visual baselines [$SHARD]"
+                    if [ "$UPDATE_MODE" = "1" ]; then
+                      git commit -m "test(e2e): update Linux visual baselines [$SHARD]"
+                    else
+                      git commit -m "test(e2e): add missing Linux visual baselines [$SHARD]"
+                    fi
                     git pull --rebase || true
                     git push
-                    echo "Pushed new baselines"
+                    echo "Pushed baselines"
                   else
-                    echo "No new baselines to commit"
+                    echo "No baselines to commit"
                   fi
 
             - name: Upload snapshot diffs

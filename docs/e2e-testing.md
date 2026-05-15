@@ -106,21 +106,67 @@ All routes are scanned automatically by `specs/a11y/accessibility.spec.ts`. No a
 
 **To remove a suppression**, delete the entry from the JSON file.
 
-## 4. Updating Baselines
+## 4. Updating Visual Baselines
 
-Update baselines when you intentionally changed a component's appearance:
+Visual tests compare your component against PNG baselines. When a test fails, the question is always the same: **was the change intentional?**
+
+### One rule
+
+> Update Mac locally and commit. CI handles Linux.
+
+### Decision tree
+
+A visual test failed. Pick one:
+
+**The change is intentional (you styled the component, or it's new):**
+
+1. `yarn e2e:update --grep "<library>/<component>"` — regenerates `snapshots/darwin/...`
+2. Review the new PNGs. They look right? Good.
+3. Commit the updated `snapshots/darwin/` files and push.
+4. CI sees the darwin changes in the PR diff, runs Playwright with `--update-snapshots` on Linux, and pushes a follow-up commit with the matching `snapshots/linux/` files to your branch.
+5. `git pull` before your next push.
+
+**The change is unintentional (you didn't expect a visual diff):**
+
+It's a regression. Don't update baselines.
+
+1. `yarn e2e:report` to view the diff. Look at the actual vs expected PNGs.
+2. Fix the code.
+3. Re-run `yarn e2e --grep "<library>/<component>"`. Tests pass → you're done.
+
+### How CI knows to regenerate Linux
+
+Whenever a PR contains changes under `apps/e2e-harness/e2e/snapshots/darwin/`, CI runs Playwright with `--update-snapshots` and commits the matching Linux baselines back to your branch. No labels, no commit markers — committing the darwin update **is** the signal.
+
+This means:
+
+- ✅ Updating darwin → CI updates linux. Always.
+- ✅ Re-runs are safe: regenerating an already-correct linux baseline is a no-op.
+- ❌ Editing only `snapshots/linux/` from a Mac won't trigger anything useful — and you shouldn't do it anyway (see Don'ts).
+
+### Yarn scripts
+
+| Script            | What it does                                           |
+| ----------------- | ------------------------------------------------------ |
+| `yarn e2e`        | Run the e2e suite                                      |
+| `yarn e2e:update` | Run and regenerate baselines for whatever ran          |
+| `yarn e2e:report` | Open the last HTML report (diffs, traces, screenshots) |
+
+All three forward extra args to Playwright, so you can scope them: `yarn e2e:update --grep "core/button"`, `yarn e2e --project high-contrast`, etc.
+
+### Targeting one project
+
+Five visual projects run by default: `chromium`, `compact`, `high-contrast`, `mobile`, `tablet`. If you only changed something specific to one (e.g. an HC theme override), scope the update to keep the diff small:
 
 ```bash
-npx playwright test --update-snapshots
+yarn e2e:update --project high-contrast --grep "core/button"
 ```
 
-| Situation         | What happens                                                                                        |
-| ----------------- | --------------------------------------------------------------------------------------------------- |
-| Local dev (macOS) | Updates `snapshots/darwin/` baselines                                                               |
-| CI (Linux)        | Auto-commits **missing** Linux baselines to your PR branch (existing baselines are not regenerated) |
-| Visual diff in PR | Download the `playwright-report` artifact to review diffs                                           |
+### Don'ts
 
-Only commit baselines for your platform. CI fills in missing Linux baselines on first run; intentional visual changes still require a local `--update-snapshots` pass.
+- **Don't run `yarn e2e:update` to silence a failure you don't understand.** Open the report first.
+
+> **Note:** A pre-commit hook on macOS rejects staged `snapshots/linux/` files. Linux baselines are CI's job; if the hook fires, unstage them.
 
 ## 5. Troubleshooting
 
