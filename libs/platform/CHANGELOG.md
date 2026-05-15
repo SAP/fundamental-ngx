@@ -1,3 +1,27 @@
+## 0.62.3-rc.3 (2026-05-15)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
+## 0.62.3-rc.2 (2026-05-14)
+
+### 🩹 Fixes
+
+- **platform:** [Platform] [fdp-smart-filter-bar] Incorrect filter logic and row selection reset when switching visibility categories ([#14195](https://github.com/SAP/fundamental-ngx/pull/14195))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
+## 0.62.3-rc.1 (2026-05-13)
+
+### 🩹 Fixes
+
+- **platform:** table with selection reading select all column header … ([#14181](https://github.com/SAP/fundamental-ngx/pull/14181))
+
+### ❤️ Thank You
+
+- Mike O'Donnell @mikerodonnell89
+
 ## 0.62.3-rc.0 (2026-05-13)
 
 ### 🚀 Features

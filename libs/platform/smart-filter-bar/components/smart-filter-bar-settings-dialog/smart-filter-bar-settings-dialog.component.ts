@@ -140,6 +140,12 @@ export class SmartFilterBarSettingsDialogComponent implements Resettable, AfterV
     /** @hidden */
     private _selectedFilters: string[] = [];
 
+    /** @hidden */
+    private _currentViewItems: FieldFilterItem[] = [];
+
+    /** @hidden */
+    private _isRestoringSelection = false;
+
     /**
      * @hidden
      * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
@@ -175,11 +181,16 @@ export class SmartFilterBarSettingsDialogComponent implements Resettable, AfterV
             .open()
             .pipe(observeOn(asyncScheduler), takeUntilDestroyed(this._destroyRef))
             .subscribe((items) => {
+                this._currentViewItems = items;
+                this._isRestoringSelection = true;
                 items.forEach((field, index) => {
-                    if (field.visible) {
+                    const shouldBeSelected = this._selectedFilters.includes(field.name);
+                    const isCurrentlySelected = Boolean(this.table._tableRowsVisible[index]?.checked);
+                    if (shouldBeSelected !== isCurrentlySelected) {
                         this.table.toggleSelectableRow(index);
                     }
                 });
+                this._isRestoringSelection = false;
             });
     }
 
@@ -206,6 +217,7 @@ export class SmartFilterBarSettingsDialogComponent implements Resettable, AfterV
                 name: c.name
             }));
 
+        this._selectedFilters = this._availableFields.filter((f) => f.visible).map((f) => f.name);
         this.source = new TableDataSource(new SmartFilterBarOptionsDataProvider(this._availableFields));
     }
 
@@ -221,7 +233,14 @@ export class SmartFilterBarSettingsDialogComponent implements Resettable, AfterV
 
     /** @hidden */
     _onRowSelectionChange(event: TableRowSelectionChangeEvent<FieldFilterItem>): void {
-        this._selectedFilters = event.selection.map((c) => c.name);
+        if (this._isRestoringSelection) {
+            return;
+        }
+        const currentViewNames = new Set(this._currentViewItems.map((i) => i.name));
+        this._selectedFilters = [
+            ...this._selectedFilters.filter((name) => !currentViewNames.has(name)),
+            ...event.selection.map((c) => c.name)
+        ];
         this.isResetAvailable$.set(true);
     }
 
@@ -230,6 +249,7 @@ export class SmartFilterBarSettingsDialogComponent implements Resettable, AfterV
         if (!this.table) {
             return;
         }
+        this._isRestoringSelection = true;
         (this.source.dataProvider as SmartFilterBarOptionsDataProvider).filter(event.payload);
         this.source.fetch(this.table.getTableState());
     }

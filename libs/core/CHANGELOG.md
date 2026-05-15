@@ -1,3 +1,21 @@
+## 0.62.3-rc.3 (2026-05-15)
+
+### 🩹 Fixes
+
+- **core:** use a ResizeObserver to update illustration size on tab switch ([#14209](https://github.com/SAP/fundamental-ngx/pull/14209))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
+## 0.62.3-rc.2 (2026-05-14)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.62.3-rc.1 (2026-05-13)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
 ## 0.62.3-rc.0 (2026-05-13)
 
 ### 🚀 Features

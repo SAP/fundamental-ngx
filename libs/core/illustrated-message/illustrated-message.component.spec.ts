@@ -4,7 +4,26 @@ import { By } from '@angular/platform-browser';
 import { IllustratedMessageFigcaptionComponent } from './components/illustrated-message-figcaption/illustrated-message-figcaption.component';
 import { IllustratedMessageTextDirective } from './directives/illustrated-message-text/illustrated-message-text.directive';
 import { IllustratedMessageTitleDirective } from './directives/illustrated-message-title/illustrated-message-title.directive';
-import { IllustratedMessageComponent, IllustratedMessageType, SvgConfig } from './illustrated-message.component';
+import {
+    IllustratedMessageComponent,
+    IllustratedMessageType,
+    IllustratedMessageTypes,
+    SvgConfig
+} from './illustrated-message.component';
+
+@Component({
+    template: `<figure fd-illustrated-message [svgConfig]="svgConfig"></figure>`,
+    standalone: true,
+    imports: [IllustratedMessageComponent]
+})
+class HiddenContainerTestComponent {
+    readonly svgConfig: SvgConfig = {
+        large: { url: 'large-url', id: 'large-id' },
+        medium: { url: 'medium-url', id: 'medium-id' },
+        small: { url: 'small-url', id: 'small-id' },
+        xsmall: { url: 'xsmall-url', id: 'xsmall-id' }
+    };
+}
 
 /**
  * Mock component for testing illustrated message with signals
@@ -197,5 +216,77 @@ describe('IllustratedMessageComponent', () => {
         const inlineSvgDiv = container.querySelector('div[style*="display"]');
         expect(inlineSvgDiv).toBeTruthy();
         expect(inlineSvgDiv.innerHTML).toContain('circle');
+    }));
+});
+
+describe('IllustratedMessageComponent - hidden container (tab switch scenario)', () => {
+    let resizeCallback: ResizeObserverCallback;
+    let fixture: ComponentFixture<HiddenContainerTestComponent>;
+    let illustratedEl: HTMLElement;
+
+    beforeEach(waitForAsync(() => {
+        (window as any).ResizeObserver = jest.fn((cb: ResizeObserverCallback) => {
+            resizeCallback = cb;
+            return { observe: jest.fn(), disconnect: jest.fn() };
+        });
+
+        TestBed.configureTestingModule({
+            imports: [HiddenContainerTestComponent]
+        }).compileComponents();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(HiddenContainerTestComponent);
+        illustratedEl = fixture.debugElement.query(By.directive(IllustratedMessageComponent)).nativeElement;
+        Object.defineProperty(illustratedEl, 'offsetWidth', { get: () => 0, configurable: true });
+    });
+
+    afterEach(() => {
+        delete (window as any).ResizeObserver;
+    });
+
+    it('should render with base type when initially hidden (offsetWidth = 0)', fakeAsync(() => {
+        fixture.detectChanges();
+        tick();
+        fixture.detectChanges();
+
+        expect(illustratedEl.classList.contains('fd-illustrated-message--base')).toBe(true);
+    }));
+
+    it('should update to the correct type when the element becomes visible', fakeAsync(() => {
+        fixture.detectChanges();
+        tick(); // flush afterNextRender — ResizeObserver.observe() is now called, resizeCallback is captured
+        fixture.detectChanges();
+
+        expect(illustratedEl.classList.contains('fd-illustrated-message--base')).toBe(true);
+
+        // Simulate tab becoming active: element now has a real width (>= 682px → large)
+        Object.defineProperty(illustratedEl, 'offsetWidth', { get: () => 700, configurable: true });
+        resizeCallback([], {} as ResizeObserver);
+        fixture.detectChanges();
+
+        expect(illustratedEl.classList.contains('fd-illustrated-message--large')).toBe(true);
+        expect(illustratedEl.classList.contains('fd-illustrated-message--base')).toBe(false);
+    }));
+
+    it('should select the correct breakpoint type based on element width when becoming visible', fakeAsync(() => {
+        fixture.detectChanges();
+        tick();
+        fixture.detectChanges();
+
+        const cases: Array<[number, IllustratedMessageType]> = [
+            [700, IllustratedMessageTypes.LARGE], // >= 682
+            [500, IllustratedMessageTypes.MEDIUM], // 361–681
+            [300, IllustratedMessageTypes.SMALL], // 261–360
+            [200, IllustratedMessageTypes.EXTRA_SMALL] // 161–260
+        ];
+
+        for (const [width, expectedType] of cases) {
+            Object.defineProperty(illustratedEl, 'offsetWidth', { get: () => width, configurable: true });
+            resizeCallback([], {} as ResizeObserver);
+            fixture.detectChanges();
+
+            expect(illustratedEl.classList.contains(`fd-illustrated-message--${expectedType}`)).toBe(true);
+        }
     }));
 });
