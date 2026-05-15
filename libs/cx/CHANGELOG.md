@@ -1,3 +1,7 @@
+## 0.62.3-rc.3 (2026-05-15)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
 ## 0.62.3-rc.2 (2026-05-14)
 
 This was a version bump only for cx to align it with other projects, there were no code changes.
