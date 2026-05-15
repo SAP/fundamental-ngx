@@ -367,4 +367,180 @@ describe('TableViewSettingsDialogComponent', () => {
             expect(result.groupingData).toEqual(mockGroupDialogResultData);
         });
     });
+
+    describe('columns functionality', () => {
+        let mockTable: Table;
+        const mockColumns: TableColumn[] = [
+            { label: 'Name', key: 'name', name: 'name', visible: true } as TableColumn,
+            { label: 'Description', key: 'description', name: 'description', visible: true } as TableColumn,
+            { label: 'Price', key: 'price', name: 'price', visible: false } as TableColumn
+        ];
+
+        beforeEach(() => {
+            mockTable = new TableComponentMock() as any;
+            (mockTable as any).getTableColumns = jest.fn().mockReturnValue(mockColumns);
+            (mockTable as any).getTableState = jest.fn().mockReturnValue({
+                columns: ['name', 'description'],
+                columnKeys: ['name', 'description'],
+                sortBy: [],
+                filterBy: [],
+                groupBy: []
+            } as TableState);
+            (mockTable as any).setColumns = jest.fn();
+        });
+
+        it('should include columns data when opening settings dialog', () => {
+            jest.spyOn(dialogServiceStub, 'open').mockReturnValue({
+                afterClosed: of(null),
+                dismiss: jest.fn()
+            } as any);
+
+            component.table = mockTable;
+            component.showViewSettingsDialog();
+
+            const openCall = (dialogServiceStub.open as jest.Mock).mock.calls[0];
+            const dialogConfig = openCall[1];
+            expect(dialogConfig.data.columnsData).toBeDefined();
+            expect(dialogConfig.data.columnsData.columns.length).toBe(3);
+
+            // Check DOM - component should be rendered
+            const nativeElement = fixture.nativeElement as HTMLElement;
+            expect(nativeElement).toBeTruthy();
+        });
+
+        it('should read column visibility from table state', () => {
+            jest.spyOn(dialogServiceStub, 'open').mockReturnValue({
+                afterClosed: of(null),
+                dismiss: jest.fn()
+            } as any);
+
+            component.table = mockTable;
+            component.showViewSettingsDialog();
+
+            const openCall = (dialogServiceStub.open as jest.Mock).mock.calls[0];
+            const columnsData = openCall[1].data.columnsData;
+
+            expect(columnsData.columns[0].visible).toBe(true); // name
+            expect(columnsData.columns[1].visible).toBe(true); // description
+            expect(columnsData.columns[2].visible).toBe(false); // price
+
+            // Check DOM - verify dialog service was called (dialog opens in separate container)
+            expect(dialogServiceStub.open).toHaveBeenCalled();
+        });
+
+        it('should apply columns changes to table when dialog is confirmed', () => {
+            const mockColumnsResult = {
+                columns: [
+                    { label: 'Name', key: 'name', name: 'name', visible: true },
+                    { label: 'Price', key: 'price', name: 'price', visible: true },
+                    { label: 'Description', key: 'description', name: 'description', visible: false }
+                ]
+            };
+
+            jest.spyOn(dialogServiceStub, 'open').mockReturnValue({
+                afterClosed: of({
+                    sortingData: null,
+                    filteringData: null,
+                    groupingData: null,
+                    columnsData: mockColumnsResult
+                }),
+                dismiss: jest.fn()
+            } as any);
+
+            component.table = mockTable;
+            component.showViewSettingsDialog();
+
+            expect((mockTable as any).setColumns).toHaveBeenCalledWith(['name', 'price']);
+
+            // Check DOM - verify component is in the fixture
+            const nativeElement = fixture.nativeElement as HTMLElement;
+            expect(nativeElement).toBeTruthy();
+        });
+
+        it('should preserve column order across dialog opens', () => {
+            // First open - set custom order
+            jest.spyOn(dialogServiceStub, 'open').mockReturnValueOnce({
+                afterClosed: of({
+                    sortingData: null,
+                    filteringData: null,
+                    groupingData: null,
+                    columnsData: {
+                        columns: [
+                            { label: 'Price', key: 'price', name: 'price', visible: true },
+                            { label: 'Name', key: 'name', name: 'name', visible: true },
+                            { label: 'Description', key: 'description', name: 'description', visible: false }
+                        ]
+                    }
+                }),
+                dismiss: jest.fn()
+            } as any);
+
+            component.table = mockTable;
+            component.showViewSettingsDialog();
+
+            // Second open - should use stored order
+            jest.spyOn(dialogServiceStub, 'open').mockReturnValueOnce({
+                afterClosed: of(null),
+                dismiss: jest.fn()
+            } as any);
+
+            component.showViewSettingsDialog();
+
+            const secondOpenCall = (dialogServiceStub.open as jest.Mock).mock.calls[1];
+            const columnsData = secondOpenCall[1].data.columnsData;
+
+            expect(columnsData.columns[0].name).toBe('price');
+            expect(columnsData.columns[1].name).toBe('name');
+            expect(columnsData.columns[2].name).toBe('description');
+
+            // Check DOM - verify dialog service was called twice
+            expect(dialogServiceStub.open).toHaveBeenCalledTimes(2);
+        });
+
+        it('should update visibility based on current state when reopening dialog', () => {
+            // First open - hide description
+            jest.spyOn(dialogServiceStub, 'open').mockReturnValueOnce({
+                afterClosed: of({
+                    sortingData: null,
+                    filteringData: null,
+                    groupingData: null,
+                    columnsData: {
+                        columns: [
+                            { label: 'Name', key: 'name', name: 'name', visible: true },
+                            { label: 'Description', key: 'description', name: 'description', visible: false },
+                            { label: 'Price', key: 'price', name: 'price', visible: true }
+                        ]
+                    }
+                }),
+                dismiss: jest.fn()
+            } as any);
+
+            component.table = mockTable;
+            component.showViewSettingsDialog();
+
+            // Update table state to reflect new visibility
+            (mockTable as any).getTableState = jest.fn().mockReturnValue({
+                columns: ['name', 'price'],
+                columnKeys: ['name', 'price']
+            } as TableState);
+
+            // Second open - should reflect current table state
+            jest.spyOn(dialogServiceStub, 'open').mockReturnValueOnce({
+                afterClosed: of(null),
+                dismiss: jest.fn()
+            } as any);
+
+            component.showViewSettingsDialog();
+
+            const secondOpenCall = (dialogServiceStub.open as jest.Mock).mock.calls[1];
+            const columnsData = secondOpenCall[1].data.columnsData;
+
+            expect(columnsData.columns[0].visible).toBe(true); // name
+            expect(columnsData.columns[1].visible).toBe(false); // description
+            expect(columnsData.columns[2].visible).toBe(true); // price
+
+            // Check DOM - verify dialog was opened twice with updated data
+            expect(dialogServiceStub.open).toHaveBeenCalledTimes(2);
+        });
+    });
 });

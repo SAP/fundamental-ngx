@@ -7,6 +7,8 @@ import {
     ActiveTab,
     FiltersDialogData,
     FiltersDialogResultData,
+    SettingsColumnsDialogData,
+    SettingsColumnsDialogResultData,
     SettingsGroupDialogData,
     SettingsGroupDialogResultData,
     SettingsSortDialogData,
@@ -170,5 +172,139 @@ describe('SettingsDialogComponent', () => {
     it('should handle changes to reset availability', () => {
         component.onResetAvailabilityChange(true);
         expect(component.isResetAvailable$()).toBe(true);
+    });
+
+    describe('columns functionality', () => {
+        const mockColumnsData: SettingsColumnsDialogData = {
+            columns: [
+                { label: 'Name', key: 'name', name: 'name', visible: true },
+                { label: 'Description', key: 'description', name: 'description', visible: true },
+                { label: 'Price', key: 'price', name: 'price', visible: false }
+            ]
+        };
+
+        beforeEach(() => {
+            dialogRef.data = {
+                sortingData: null,
+                filteringData: null,
+                groupingData: null,
+                columnsData: mockColumnsData,
+                headingLevel: 2
+            };
+            fixture = TestBed.createComponent(SettingsDialogComponent);
+            component = fixture.componentInstance;
+            fixture.detectChanges();
+        });
+
+        it('should set initial columns data from dialog data', () => {
+            expect(component.columnsData()).toEqual(mockColumnsData);
+
+            // Check DOM - columns component should be rendered
+            const nativeElement = fixture.nativeElement as HTMLElement;
+            const columnsComponent = nativeElement.querySelector('fdp-columns');
+            expect(columnsComponent).toBeTruthy();
+        });
+
+        it('should set active tab to columns when only columns data is present', () => {
+            expect(component.activeTab()).toEqual(ActiveTab.COLUMNS);
+
+            // Check DOM - no subheader should be shown when only one tab
+            const nativeElement = fixture.nativeElement as HTMLElement;
+            const segmentedButton = nativeElement.querySelector('fd-segmented-button');
+            expect(segmentedButton).toBeFalsy();
+        });
+
+        it('should update columns data on columns change', () => {
+            const newColumnsData: SettingsColumnsDialogResultData = {
+                visibleColumns: ['name', 'price'],
+                columnOrder: ['name', 'price', 'description'],
+                columns: [
+                    { label: 'Name', key: 'name', name: 'name', visible: true },
+                    { label: 'Price', key: 'price', name: 'price', visible: true },
+                    { label: 'Description', key: 'description', name: 'description', visible: false }
+                ]
+            };
+            component.onColumnsChange(newColumnsData);
+
+            expect(component.columnsData()?.columns).toEqual(newColumnsData.columns);
+
+            // Check DOM - columns component should still be rendered
+            const nativeElement = fixture.nativeElement as HTMLElement;
+            const columnsComponent = nativeElement.querySelector('fdp-columns');
+            expect(columnsComponent).toBeTruthy();
+        });
+
+        it('should reset columns data to initial values', () => {
+            const initialColumns: SettingsColumnsDialogResultData = {
+                visibleColumns: ['name', 'description'],
+                columnOrder: ['name', 'description', 'price'],
+                columns: mockColumnsData.columns
+            };
+            component._initialColumns.set(initialColumns);
+
+            // Change columns
+            component.columnsData.set({
+                columns: [
+                    { label: 'Name', key: 'name', name: 'name', visible: false },
+                    { label: 'Description', key: 'description', name: 'description', visible: true },
+                    { label: 'Price', key: 'price', name: 'price', visible: true }
+                ]
+            });
+            fixture.detectChanges();
+
+            component.activeTab.set(ActiveTab.COLUMNS);
+            component.reset();
+            fixture.detectChanges();
+
+            const resetColumns = component.columnsData()?.columns;
+            expect(resetColumns?.[0].visible).toBe(true); // name
+            expect(resetColumns?.[1].visible).toBe(true); // description
+            expect(resetColumns?.[2].visible).toBe(false); // price
+
+            // Check DOM - columns component should still be rendered after reset
+            const nativeElement = fixture.nativeElement as HTMLElement;
+            const columnsComponent = nativeElement.querySelector('fdp-columns');
+            expect(columnsComponent).toBeTruthy();
+        });
+
+        it('should include columns data in confirm result', () => {
+            const closeSpy = jest.spyOn(dialogRef, 'close');
+            component.confirm();
+
+            expect(closeSpy).toHaveBeenCalledWith({
+                sortingData: null,
+                filteringData: null,
+                groupingData: null,
+                columnsData: mockColumnsData
+            });
+
+            // Check DOM - dialog should have confirm button
+            const nativeElement = fixture.nativeElement as HTMLElement;
+            const buttonBars = nativeElement.querySelectorAll('fd-button-bar');
+            expect(buttonBars.length).toBeGreaterThanOrEqual(1);
+        });
+
+        it('should show subheader when columns and sorting data are present', () => {
+            dialogRef.data = {
+                sortingData: { direction: SortDirection.ASC, field: 'name' } as SettingsSortDialogData,
+                filteringData: null,
+                groupingData: null,
+                columnsData: mockColumnsData,
+                headingLevel: 2
+            };
+            fixture = TestBed.createComponent(SettingsDialogComponent);
+            component = fixture.componentInstance;
+            fixture.detectChanges();
+
+            expect(component.showSubheader()).toBe(true);
+
+            // Check DOM - should render segmented button with both tabs
+            const nativeElement = fixture.nativeElement as HTMLElement;
+            const segmentedButton = nativeElement.querySelector('fd-segmented-button');
+            expect(segmentedButton).toBeTruthy();
+
+            const tabButtons = nativeElement.querySelectorAll('fd-segmented-button button[fd-button]');
+            expect(tabButtons.length).toBe(2); // columns and sort tabs
+        });
     });
 });
