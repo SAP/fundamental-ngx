@@ -2,7 +2,6 @@
 name: setup-project
 description: Set up a new Angular project with @fundamental-ngx installed, themed, and a working first component
 argument-hint: <project-name> [theme: horizon|horizon-dark|quartz|quartz-dark|hcb|hcw]
-disable-model-invocation: true
 context: fork
 agent: general-purpose
 allowed-tools: Read, Bash(node --version), Bash(npm *), Bash(npx *), Bash(yarn *), Bash(ng *), Write, Edit

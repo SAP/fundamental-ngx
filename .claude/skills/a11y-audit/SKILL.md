@@ -2,7 +2,6 @@
 name: a11y-audit
 description: Audit a component for WCAG AA accessibility compliance
 argument-hint: [component-path-or-folder]
-disable-model-invocation: true
 context: fork
 agent: general-purpose
 allowed-tools: Read, Grep, Glob

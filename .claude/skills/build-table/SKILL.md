@@ -2,7 +2,6 @@
 name: build-table
 description: Build a @fundamental-ngx/platform data table with FdpTableDataSource, sorting, filtering, pagination, and row selection
 argument-hint: <table-name> [sort] [filter] [paginate] [select=single|multiple]
-disable-model-invocation: true
 context: fork
 agent: general-purpose
 allowed-tools: Read, Grep, Glob, Bash(nx *), Bash(ng build*), Write, Edit

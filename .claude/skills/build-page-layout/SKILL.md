@@ -2,7 +2,6 @@
 name: build-page-layout
 description: Build a page layout using fd-dynamic-page or fdp-dynamic-page — collapsing header, subheader, content area, footer, and optional tabs
 argument-hint: <page-name> [tabs] [subheader] [footer] [fcl]
-disable-model-invocation: true
 context: fork
 agent: general-purpose
 allowed-tools: Read, Grep, Glob, Bash(nx *), Bash(ng build*), Write, Edit

@@ -2,7 +2,6 @@
 name: build-form
 description: Build a reactive form with @fundamental-ngx/platform form components, FormGroup wiring, validation, and error states
 argument-hint: <form-name> [field:type ...]
-disable-model-invocation: true
 context: fork
 agent: general-purpose
 allowed-tools: Read, Grep, Glob, Bash(nx *), Bash(ng build*), Write, Edit

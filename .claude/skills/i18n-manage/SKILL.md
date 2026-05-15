@@ -2,7 +2,6 @@
 name: i18n-manage
 description: Add, rename, or remove i18n translation keys in fundamental-ngx (updates FdLanguage interface, .properties files, and generated types)
 argument-hint: [add|rename|remove] key [value]
-disable-model-invocation: true
 ---
 
 # i18n Key Management: $ARGUMENTS
