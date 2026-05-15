@@ -16,6 +16,7 @@ export interface UsageGuide {
     commonPitfalls: string[];
     compositionPattern: string;
     relatedComponents: string[];
+    resources?: string[];
 }
 
 export const USAGE_GUIDES: Record<string, UsageGuide> = {
@@ -366,54 +367,119 @@ this._dialogService.open(MyDialogComponent, {
             'SAP Fiori master-detail layout that transitions between 1, 2, and 3 columns. Controlled by the FlexibleColumnLayout enum via the layout input. Content is projected via #startColumn, #midColumn, and #endColumn template reference variables.',
         decisionTree: [
             {
-                question: 'How many columns does your layout need?',
+                question:
+                    'Is the Flexible Column Layout the right choice for this use case? (Per UX specs: use it only for drill-down / list-detail navigation)',
                 options: [
                     {
-                        answer: 'Single full-screen column (initial/focused state)',
+                        answer: 'List-detail or list-detail-detail drill-down navigation',
                         recommendation:
-                            'Use layout="OneColumnStartFullScreen", "OneColumnMidFullScreen", or "OneColumnEndFullScreen" depending on which panel is active.',
-                        example: `<fd-flexible-column-layout layout="OneColumnStartFullScreen"
-  [layoutDefinitions]="layoutDefs"
-  collapseTitle="Collapse" collapseTitleStartBtn="Collapse start"
-  collapseTitleEndBtn="Collapse end"
-  expandTitle="Expand" expandTitleStartBtn="Expand start"
-  expandTitleEndBtn="Expand end"
-  separatorAriaLabel="Column separator">
-  <ng-template #startColumn>
-    <!-- Master list -->
-  </ng-template>
-</fd-flexible-column-layout>`
+                            'Yes, use fd-flexible-column-layout. It is designed exactly for hierarchical drill-down flows where the user navigates deeper into detail columns.',
+                        example: `// Typical flow: list → detail → sub-detail
+layout = signal(FlexibleColumnLayout.OneColumnStartFullScreen);
+// User selects item → TwoColumnsMidExpanded
+// User drills further → ThreeColumnsEndExpanded`
                     },
                     {
-                        answer: 'Two-column master-detail',
+                        answer: 'Workbench or tools layout (main column + side panels)',
                         recommendation:
-                            '"TwoColumnsStartExpanded" gives 67/33 split (list dominant). "TwoColumnsMidExpanded" gives 33/67 split (detail dominant). "TwoColumnsEndExpanded" gives 33/67 with end panel.',
-                        example: `<fd-flexible-column-layout [layout]="layout()"
-  [layoutDefinitions]="layoutDefs"
-  collapseTitle="Collapse" collapseTitleStartBtn="Collapse start"
-  collapseTitleEndBtn="Collapse end"
-  expandTitle="Expand" expandTitleStartBtn="Expand start"
-  expandTitleEndBtn="Expand end"
-  separatorAriaLabel="Column separator">
-  <ng-template #startColumn><!-- Master list --></ng-template>
-  <ng-template #midColumn><!-- Detail view --></ng-template>
-</fd-flexible-column-layout>`
+                            'Do NOT use fd-flexible-column-layout. Use fd-dynamic-side-content instead. FCL is not meant for a main column with additional side columns.',
+                        example: `// Use fd-dynamic-side-content for tool/workbench layouts`
                     },
                     {
-                        answer: 'Three-column master-detail-extra',
+                        answer: 'Dashboard with context-independent pages',
                         recommendation:
-                            '"ThreeColumnsMidExpanded" gives 25/50/25. "ThreeColumnsEndExpanded" gives 25/25/50. "ThreeColumnsStartMinimized" gives 0/67/33. "ThreeColumnsEndMinimized" gives 67/33/0.',
-                        example: `<fd-flexible-column-layout [layout]="layout()"
-  [layoutDefinitions]="layoutDefs"
-  collapseTitle="Collapse" collapseTitleStartBtn="Collapse start"
-  collapseTitleEndBtn="Collapse end"
-  expandTitle="Expand" expandTitleStartBtn="Expand start"
-  expandTitleEndBtn="Expand end"
-  separatorAriaLabel="Column separator">
-  <ng-template #startColumn><!-- Master list --></ng-template>
-  <ng-template #midColumn><!-- Detail --></ng-template>
-  <ng-template #endColumn><!-- Extra detail --></ng-template>
-</fd-flexible-column-layout>`
+                            'Do NOT use fd-flexible-column-layout. Dashboards with independent tiles or cards do not fit the drill-down model FCL is built for.',
+                        example: `// Use a grid layout (fd-layout-grid) for dashboards`
+                    },
+                    {
+                        answer: 'Multiple instances of the same object type side by side',
+                        recommendation:
+                            'Do NOT use fd-flexible-column-layout. Use the multi-instance handling floor plan instead. FCL is for hierarchical drill-down, not parallel instances.',
+                        example: `// Multi-instance handling floor plan for same-type parallel objects`
+                    }
+                ]
+            },
+            {
+                question: 'What should the initial layout be when the app first loads?',
+                options: [
+                    {
+                        answer: 'Start with one column (recommended default) — user drills in by selecting an item',
+                        recommendation:
+                            'Use OneColumnStartFullScreen as the initial layout. This is the UX-spec recommended default. The user opens new columns by navigating forward. Do not start with 3 columns — too much information at once confuses users.',
+                        example: `layout = signal(FlexibleColumnLayout.OneColumnStartFullScreen);
+
+// On item select → navigate to 2-column layout:
+onItemSelect() {
+  this.layout.set(FlexibleColumnLayout.TwoColumnsMidExpanded);
+}`
+                    },
+                    {
+                        answer: 'Start with two columns (list always visible alongside a default detail)',
+                        recommendation:
+                            'Acceptable when your use case requires always showing a default detail. Ensure size S shows the FIRST column — FCL always shows the last (rightmost) column in size S by default, so starting at TwoColumnsStartExpanded or TwoColumnsMidExpanded may hide the list on phone.',
+                        example: `layout = signal(FlexibleColumnLayout.TwoColumnsMidExpanded);
+// Must verify size-S behavior shows startColumn, not midColumn`
+                    }
+                ]
+            },
+            {
+                question:
+                    'You need a 2-column layout — which ratio fits the use case? (UX spec defaults: 33:67 or 67:33)',
+                options: [
+                    {
+                        answer: 'List is primary — user browses and selects items frequently',
+                        recommendation:
+                            'Use TwoColumnsStartExpanded (67% start / 33% mid). The list column is dominant. Ratio is fixed by default but the user can drag the splitter.',
+                        example: `layout = signal(FlexibleColumnLayout.TwoColumnsStartExpanded);
+// startColumn: 67%, midColumn: 33%`
+                    },
+                    {
+                        answer: 'Detail is primary — user mainly reads or edits the detail view',
+                        recommendation:
+                            'Use TwoColumnsMidExpanded (33% start / 67% mid). The detail column is dominant. This is the most common 2-column layout for object pages.',
+                        example: `layout = signal(FlexibleColumnLayout.TwoColumnsMidExpanded);
+// startColumn: 33%, midColumn: 67%`
+                    },
+                    {
+                        answer: 'End column is the primary detail (start is the list, mid is a sub-list)',
+                        recommendation:
+                            'Use TwoColumnsEndExpanded (33% start / 67% end). Use when mid column acts as a navigation step rather than a destination.',
+                        example: `layout = signal(FlexibleColumnLayout.TwoColumnsEndExpanded);
+// startColumn: 33%, endColumn: 67%`
+                    }
+                ]
+            },
+            {
+                question:
+                    'You need a 3-column layout — which ratio? (Only available on desktop L/XL; tablet M shows 2 of the 3 columns at a time; phone S always shows a single column)',
+                options: [
+                    {
+                        answer: 'Mid (detail) column is primary content — equal side columns',
+                        recommendation:
+                            'Use ThreeColumnsMidExpanded (25% : 50% : 25%). Mid column gets half the width. Good when the detail view is the main work area.',
+                        example: `layout = signal(FlexibleColumnLayout.ThreeColumnsMidExpanded);
+// startColumn: 25%, midColumn: 50%, endColumn: 25%`
+                    },
+                    {
+                        answer: 'End (sub-detail) column is primary content',
+                        recommendation:
+                            'Use ThreeColumnsEndExpanded (25% : 25% : 50%). End column gets half the width. Use when the user has drilled to the deepest level and needs space there.',
+                        example: `layout = signal(FlexibleColumnLayout.ThreeColumnsEndExpanded);
+// startColumn: 25%, midColumn: 25%, endColumn: 50%`
+                    },
+                    {
+                        answer: 'Start (list) column is minimized — focus is on mid and end columns',
+                        recommendation:
+                            'Use ThreeColumnsStartMinimized (0% : 67% : 33%). Start column is hidden. Close and Full Screen actions appear on the right border of mid column to let users restore the layout.',
+                        example: `layout = signal(FlexibleColumnLayout.ThreeColumnsStartMinimized);
+// startColumn: 0%, midColumn: 67%, endColumn: 33%`
+                    },
+                    {
+                        answer: 'End (sub-detail) column is minimized — focus is on start and mid columns',
+                        recommendation:
+                            'Use ThreeColumnsEndMinimized (67% : 33% : 0%). End column is hidden. Use when the user has navigated back from the deepest level but keeps the 3-column state.',
+                        example: `layout = signal(FlexibleColumnLayout.ThreeColumnsEndMinimized);
+// startColumn: 67%, midColumn: 33%, endColumn: 0%`
                     }
                 ]
             },
@@ -473,6 +539,9 @@ layout = signal<FlexibleColumnLayout>(FlexibleColumnLayout.OneColumnStartFullScr
     <!-- Extra detail panel (3-column layouts only) -->
   </ng-template>
 </fd-flexible-column-layout>`,
-        relatedComponents: ['ui5-flexible-column-layout', 'fd-layout-grid', 'fd-dynamic-page', 'fd-shellbar']
+        relatedComponents: ['ui5-flexible-column-layout', 'fd-layout-grid', 'fd-dynamic-page', 'fd-shellbar'],
+        resources: [
+            'UX specs: https://www.sap.com/design-system/fiori-design-web/v1-145/page-types/page-layouts/flexible-column-layout'
+        ]
     }
 };
