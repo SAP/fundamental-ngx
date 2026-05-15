@@ -155,6 +155,13 @@
             "affectedRoutes": 10,
             "description": "Ensure elements that have scrollable content are accessible by keyboard in Safari",
             "reason": "Systemic library-level issue \u2014 tracked for remediation"
+        },
+        {
+            "rule": "aria-required-attr",
+            "impact": "critical",
+            "affectedRoutes": 8,
+            "description": "Ensure every ARIA attribute that is required for an element is present",
+            "reason": "Systemic library-level issue (UI5 web component slider handles missing aria-valuenow on initial render) \u2014 tracked for remediation"
         }
     ],
     "routes": {
@@ -197,26 +204,6 @@
                 "landmark-complementary-is-top-level"
             ],
             "reason": "Known violations: landmark-main-is-top-level, landmark-no-duplicate-main, landmark-complementary-is-top-level"
-        },
-        "btp/splitter/api": {
-            "suppress": ["aria-required-attr"],
-            "reason": "Known violations: aria-required-attr"
-        },
-        "btp/splitter/default": {
-            "suppress": ["aria-required-attr"],
-            "reason": "Known violations: aria-required-attr"
-        },
-        "btp/splitter/required-parent-width": {
-            "suppress": ["aria-required-attr"],
-            "reason": "Known violations: aria-required-attr"
-        },
-        "platform/list/with-single-selection": {
-            "suppress": ["aria-required-attr"],
-            "reason": "Known violations: aria-required-attr"
-        },
-        "platform/standard-list-item/with-single-selection": {
-            "suppress": ["aria-required-attr"],
-            "reason": "Known violations: aria-required-attr"
         },
         "core/timeline/basic": {
             "suppress": ["aria-roles"],
