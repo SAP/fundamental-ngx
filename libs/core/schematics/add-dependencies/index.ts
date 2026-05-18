@@ -22,7 +22,10 @@ const desiredVersions = {
 // Sibling fundamental-ngx packages that share core's version. Only upgraded if already installed.
 const siblingPackages = [
     '@fundamental-ngx/platform',
+    '@fundamental-ngx/btp',
+    '@fundamental-ngx/cx',
     '@fundamental-ngx/datetime-adapter',
+    '@fundamental-ngx/moment-adapter',
     '@fundamental-ngx/ui5-webcomponents',
     '@fundamental-ngx/ui5-webcomponents-base',
     '@fundamental-ngx/ui5-webcomponents-fiori',
