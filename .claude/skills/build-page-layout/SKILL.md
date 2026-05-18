@@ -63,20 +63,19 @@ npm show @fundamental-ngx/core peerDependencies
 { "type": "initial", "maximumWarning": "2.5MB", "maximumError": "4MB" }
 ```
 
-**Theming** — the SAP theming CSS file contains JSON metadata embedded in a custom property value; esbuild rejects it with a parse error if imported through the SCSS bundler. Instead:
+**Theming** — add the SAP theme files to the `angular.json` `"styles"` array. esbuild emits `css-syntax-error` warnings about JSON metadata embedded in `css_variables.css`, but these are non-blocking — the styles work correctly.
 
-1. Copy the theme file to `public/`:
-    ```bash
-    cp node_modules/@sap-theming/theming-base-content/content/Base/baseLib/sap_horizon/css_variables.css public/sap-horizon.css
-    ```
-2. Add a `<link>` in `src/index.html`:
-    ```html
-    <link rel="stylesheet" href="sap-horizon.css" />
-    ```
+In `angular.json`, add to the `"styles"` array before `src/styles.scss`:
 
-> The Angular build tool emits `"Unable to locate stylesheet: /sap-horizon.css"` during build — this is a false positive. The file is resolved from `public/` at runtime, not the source tree. The build still succeeds and the file is present in `dist/`.
+```json
+"styles": [
+  "node_modules/@sap-theming/theming-base-content/content/Base/baseLib/sap_horizon/css_variables.css",
+  "node_modules/fundamental-styles/dist/theming/sap_horizon.css",
+  "src/styles.scss"
+]
+```
 
-**Do NOT** `@import` the SAP theming CSS in `styles.scss` — it will break the build.
+**Do NOT** `@import` the SAP theming CSS in `styles.scss` — the SCSS bundler cannot process the embedded JSON metadata and will error.
 
 **Global styles** (`src/styles.scss`) — import the fundamental-styles CSS files for the sections you are building. Always start with:
 

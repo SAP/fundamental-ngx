@@ -114,16 +114,16 @@ export class [Name]FormComponent {
 
 **Standalone component imports reference:**
 
-| Template element                         | Import from `@fundamental-ngx/platform/form`        |
-| ---------------------------------------- | --------------------------------------------------- |
-| `fdp-form-group`                         | `FormGroupComponent`                                |
-| `fdp-form-field`                         | `FormFieldComponent`                                |
-| `fdp-input`                              | `InputComponent`                                    |
-| `fdp-select`                             | `SelectComponent`                                   |
-| `fdp-textarea`                           | `TextAreaComponent`                                 |
-| `fdp-date-picker`                        | `PlatformDatePickerComponent`                       |
-| `fdp-checkbox`                           | `CheckboxComponent` (from `PlatformCheckboxModule`) |
-| `fdpFormFieldError` (template directive) | `FormFieldErrorDirective`                           |
+| Template element                         | Import from `@fundamental-ngx/platform/form` |
+| ---------------------------------------- | -------------------------------------------- |
+| `fdp-form-group`                         | `FormGroupComponent`                         |
+| `fdp-form-field`                         | `FormFieldComponent`                         |
+| `fdp-input`                              | `InputComponent`                             |
+| `fdp-select`                             | `SelectComponent`                            |
+| `fdp-textarea`                           | `TextAreaComponent`                          |
+| `fdp-date-picker`                        | `PlatformDatePickerComponent`                |
+| `fdp-checkbox`                           | `CheckboxComponent`                          |
+| `fdpFormFieldError` (template directive) | `FormFieldErrorDirective`                    |
 
 ### HTML Template (`.component.html`)
 
