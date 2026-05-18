@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "progress-indicator.component.ts",
   "sourceLine": 32,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/progress-indicator/progress-indicator.component.ts#L32",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/progress-indicator/progress-indicator.component.ts#L32",
   "description": "",
   "inputs": [
     {

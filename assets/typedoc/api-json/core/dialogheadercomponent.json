@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "dialog-header.component.ts",
   "sourceLine": 40,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/dialog/dialog-header/dialog-header.component.ts#L40",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/dialog/dialog-header/dialog-header.component.ts#L40",
   "description": "Applies fundamental layout and styling to the contents of a dialog header.\n\n```html\n<fd-dialog-header>\n    <h1 fd-title>Title</h1>\n    <button fd-dialog-close-button></button>\n</fd-dialog-header>\n```",
   "inputs": [],
   "outputs": [],

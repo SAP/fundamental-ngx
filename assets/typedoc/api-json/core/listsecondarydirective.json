@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "list-secondary.directive.ts",
   "sourceLine": 13,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/list/directives/list-secondary.directive.ts#L13",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/list/directives/list-secondary.directive.ts#L13",
   "description": "",
   "inputs": [
     {

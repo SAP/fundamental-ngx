@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "card-kpi-header.component.ts",
   "sourceLine": 20,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/card/kpi/card-kpi-header.component.ts#L20",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/card/kpi/card-kpi-header.component.ts#L20",
   "description": "",
   "inputs": [],
   "outputs": [],

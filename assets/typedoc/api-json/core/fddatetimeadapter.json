@@ -4,7 +4,7 @@
   "kind": "Class",
   "sourceFile": "fd-datetime-adapter.ts",
   "sourceLine": 26,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/datetime/fd-datetime-adapter.ts#L26",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/datetime/fd-datetime-adapter.ts#L26",
   "description": "DatetimeAdapter implementation based on FdDate.\n\nThis uses FdDate as a date model and relies on Intl.DateTimeFormat\nfor formatting and translation purposes.",
   "inputs": [],
   "outputs": [],

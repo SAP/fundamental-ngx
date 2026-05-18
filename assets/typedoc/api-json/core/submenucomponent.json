@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "menu-item.component.ts",
   "sourceLine": 301,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/menu/menu-item/menu-item.component.ts#L301",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/menu/menu-item/menu-item.component.ts#L301",
   "description": "",
   "inputs": [
     {

@@ -3,8 +3,8 @@
   "selector": "[fdp-table-header-row]",
   "kind": "Component",
   "sourceFile": "table-header-row.component.ts",
-  "sourceLine": 97,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/platform/table/components/table-header-row/table-header-row.component.ts#L97",
+  "sourceLine": 98,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/platform/table/components/table-header-row/table-header-row.component.ts#L98",
   "description": "",
   "inputs": [
     {
@@ -14,7 +14,7 @@
       "description": "Row checked state.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 120,
+      "sourceLine": 121,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Whether to fix the table header and footer. Default is true.\nNote that if the table contains freezable columns, the header and\nfooter will be fixed automatically, regardless of this input value.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 108,
+      "sourceLine": 109,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "The column `name` to freeze columns up to and including.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 136,
+      "sourceLine": 137,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "The column `name` to freeze columns after and including.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 152,
+      "sourceLine": 153,
       "since": null
     },
     {
@@ -54,7 +54,7 @@
       "description": "Whether to show selection column.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 114,
+      "sourceLine": 115,
       "since": null
     },
     {
@@ -64,7 +64,7 @@
       "description": "Table without borders.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 148,
+      "sourceLine": 149,
       "since": null
     },
     {
@@ -74,7 +74,7 @@
       "description": "Table without horizontal borders.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 140,
+      "sourceLine": 141,
       "since": null
     },
     {
@@ -84,7 +84,7 @@
       "description": "Table without vertical borders.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 144,
+      "sourceLine": 145,
       "since": null
     },
     {
@@ -94,7 +94,7 @@
       "description": "Table ID.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 100,
+      "sourceLine": 101,
       "since": null
     },
     {
@@ -104,7 +104,7 @@
       "description": "Selection column width.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 132,
+      "sourceLine": 133,
       "since": null
     },
     {
@@ -114,7 +114,7 @@
       "description": "Selection mode.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 126,
+      "sourceLine": 127,
       "since": null
     }
   ],

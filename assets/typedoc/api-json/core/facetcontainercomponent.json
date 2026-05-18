@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "facet-container.component.ts",
   "sourceLine": 45,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/facets/facet-container.component.ts#L45",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/facets/facet-container.component.ts#L45",
   "description": "",
   "inputs": [
     {

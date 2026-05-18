@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "readonly-behavior.directive.ts",
   "sourceLine": 19,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/cdk/utils/directives/readonly/readonly-behavior.directive.ts#L19",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/cdk/utils/directives/readonly/readonly-behavior.directive.ts#L19",
   "description": "",
   "inputs": [],
   "outputs": [],

@@ -4,7 +4,7 @@
   "kind": "Class",
   "sourceFile": "slider.component.ts",
   "sourceLine": 13,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/platform/slider/slider.component.ts#L13",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/platform/slider/slider.component.ts#L13",
   "description": "Switch change event instance",
   "inputs": [],
   "outputs": [],

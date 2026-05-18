@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "link.component.ts",
   "sourceLine": 62,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/link/link.component.ts#L62",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/link/link.component.ts#L62",
   "description": "",
   "inputs": [
     {

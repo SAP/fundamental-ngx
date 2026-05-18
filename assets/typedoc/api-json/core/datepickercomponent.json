@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "date-picker.component.ts",
   "sourceLine": 126,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/date-picker/date-picker.component.ts#L126",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/date-picker/date-picker.component.ts#L126",
   "description": "The datetime picker component is an opinionated composition of the fd-popover and\nfd-calendar components to accomplish the UI pattern for picking a date.\n\nSupports Angular Forms.\n```html\n<fd-date-picker [(ngModel)]=\"date\"></fd-date-picker>\n```",
   "inputs": [
     {

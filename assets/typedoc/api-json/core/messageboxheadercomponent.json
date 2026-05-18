@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "message-box-header.component.ts",
   "sourceLine": 47,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/message-box/message-box-header/message-box-header.component.ts#L47",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/message-box/message-box-header/message-box-header.component.ts#L47",
   "description": "Building block of the message box used to create message box header.\n\n```html\n<fd-message-box-header>\n    <fd-message-box-semantic-icon></fd-message-box-semantic-icon>\n    <h1 fd-title><!-- Content --></h1>\n</fd-message-box-header>\n\nComplex header:\n<fd-message-box-header>\n    <ng-template fdkTemplate=\"header\"><!--Content--></ng-template>\n    <ng-template fdkTemplate=\"subheader\"><!--Content--></ng-template>\n</fd-message-box-header>\n```",
   "inputs": [],
   "outputs": [],

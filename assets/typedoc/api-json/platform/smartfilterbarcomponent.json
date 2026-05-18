@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "smart-filter-bar.component.ts",
   "sourceLine": 125,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/platform/smart-filter-bar/smart-filter-bar.component.ts#L125",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/platform/smart-filter-bar/smart-filter-bar.component.ts#L125",
   "description": "",
   "inputs": [
     {

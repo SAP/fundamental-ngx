@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "sorting.component.ts",
   "sourceLine": 104,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/platform/table/components/table-p13-dialog/sorting/sorting.component.ts#L104",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/platform/table/components/table-p13-dialog/sorting/sorting.component.ts#L104",
   "description": "Reset button.\n\nUsed to reset resettable state by click.",
   "inputs": [],
   "outputs": [],

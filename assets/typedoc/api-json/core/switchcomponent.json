@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "switch.component.ts",
   "sourceLine": 54,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/switch/switch.component.ts#L54",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/switch/switch.component.ts#L54",
   "description": "The Switch component is used to activate or deactivate an element.\nIt uses a visual metaphor to inform the user of the state of the switch.",
   "inputs": [
     {

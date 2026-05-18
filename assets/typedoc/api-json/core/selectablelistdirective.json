@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "selectable-list.directive.ts",
   "sourceLine": 27,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/cdk/utils/directives/selectable-list/selectable-list.directive.ts#L27",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/cdk/utils/directives/selectable-list/selectable-list.directive.ts#L27",
   "description": "",
   "inputs": [],
   "outputs": [],

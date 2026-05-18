@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "search-field.component.ts",
   "sourceLine": 108,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/platform/search-field/search-field.component.ts#L108",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/platform/search-field/search-field.component.ts#L108",
   "description": "",
   "inputs": [],
   "outputs": [],

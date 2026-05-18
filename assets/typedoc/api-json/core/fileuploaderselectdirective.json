@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "file-uploader-select.directive.ts",
   "sourceLine": 10,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/file-uploader/directives/file-uploader-select.directive.ts#L10",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/file-uploader/directives/file-uploader-select.directive.ts#L10",
   "description": "Directive tool to facilitate interacting with a native file input element.",
   "inputs": [
     {

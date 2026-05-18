@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "popover-body.component.ts",
   "sourceLine": 47,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/popover/popover-body/popover-body.component.ts#L47",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/popover/popover-body/popover-body.component.ts#L47",
   "description": "A component used to enforce a certain layout for the popover.\n```html\n<fd-popover>\n    <fd-popover-control>Control Element</fd-popover-control>\n    <fd-popover-body>Popover Body</fd-popover-body>\n</fd-popover>\n```",
   "inputs": [
     {

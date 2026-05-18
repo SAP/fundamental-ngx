@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "condition-count-message.directive.ts",
   "sourceLine": 11,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/platform/value-help-dialog/directives/condition-count-message.directive.ts#L11",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/platform/value-help-dialog/directives/condition-count-message.directive.ts#L11",
   "description": "",
   "inputs": [],
   "outputs": [],

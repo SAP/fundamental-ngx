@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "form-input-message-group.component.ts",
   "sourceLine": 30,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/form/form-input-message-group/form-input-message-group.component.ts#L30",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/form/form-input-message-group/form-input-message-group.component.ts#L30",
   "description": "",
   "inputs": [
     {

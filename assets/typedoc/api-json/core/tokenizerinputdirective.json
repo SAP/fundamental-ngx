@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "token-input.directive.ts",
   "sourceLine": 8,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/token/token-input.directive.ts#L8",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/token/token-input.directive.ts#L8",
   "description": "",
   "inputs": [
     {

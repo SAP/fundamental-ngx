@@ -4,7 +4,7 @@
   "kind": "Class",
   "sourceFile": "switch.config.ts",
   "sourceLine": 9,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/platform/form/switch/switch/switch.config.ts#L9",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/platform/form/switch/switch/switch.config.ts#L9",
   "description": "Default options for platform Switch",
   "inputs": [],
   "outputs": [],

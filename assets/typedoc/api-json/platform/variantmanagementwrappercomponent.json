@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "variant-management-wrapper.component.ts",
   "sourceLine": 58,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/platform/variant-management/components/variant-management-wrapper/variant-management-wrapper.component.ts#L58",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/platform/variant-management/components/variant-management-wrapper/variant-management-wrapper.component.ts#L58",
   "description": "Wrapper component used to wrap components that implement `PresetManagedComponent`.\nIt automatically bounds existing presets from `Variant Management` component to `PresetManagedComponent`.\nWrapper component supports two ways of providing Variant Management component.\nFirst one is to pass reference via Input property.\nSecond one is to put Variant Management component inside wrapper component so it would be accessible via @ContentChild.\nUsage example:\n\n```html\n Usage outside wrapper component:\n <fdp-variant-management #variantManagement [variants]=\"...\"></fdp-variant-management>\n <fdp-variant-management-wrapper [variantManager]=\"variantManagement\">\n     <fdp-smart-filter-bar>...</fdp-smart-filter-bar>\n     <fdp-table>...</fdp-table>\n </fdp-variant-management-wrapper>\n\n Usage inside wrapper component:\n <fdp-variant-management-wrapper>\n     <fdp-variant-management [variants]=\"...\"></fdp-variant-management>\n     <fdp-smart-filter-bar>...</fdp-smart-filter-bar>\n     <fdp-table>...</fdp-table>\n </fdp-variant-management-wrapper>\n```",
   "inputs": [
     {

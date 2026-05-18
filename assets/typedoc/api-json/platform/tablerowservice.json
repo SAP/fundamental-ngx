@@ -4,7 +4,7 @@
   "kind": "Service",
   "sourceFile": "table-row.service.ts",
   "sourceLine": 31,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/platform/table-helpers/services/table-row.service.ts#L31",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/platform/table-helpers/services/table-row.service.ts#L31",
   "description": "",
   "inputs": [],
   "outputs": [],

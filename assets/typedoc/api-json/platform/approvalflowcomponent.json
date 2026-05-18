@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "approval-flow.component.ts",
   "sourceLine": 152,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/platform/approval-flow/approval-flow.component.ts#L152",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/platform/approval-flow/approval-flow.component.ts#L152",
   "description": "",
   "inputs": [
     {

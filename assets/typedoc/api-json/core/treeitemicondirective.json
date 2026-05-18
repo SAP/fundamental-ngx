@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "tree-item-icon.directive.ts",
   "sourceLine": 10,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/tree/directives/tree-item-icon.directive.ts#L10",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/tree/directives/tree-item-icon.directive.ts#L10",
   "description": "",
   "inputs": [],
   "outputs": [],

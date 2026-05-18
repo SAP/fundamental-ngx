@@ -4,7 +4,7 @@
   "kind": "Class",
   "sourceFile": "collection-base.input.ts",
   "sourceLine": 17,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/platform/shared/form/collection-base.input.ts#L17",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/platform/shared/form/collection-base.input.ts#L17",
   "description": "Defines specific behavior for Input controls which deals with list of values including:\n - Select\n - RadioGroup\n - CheckboxGroup\n - ComboBox\n ...",
   "inputs": [
     {

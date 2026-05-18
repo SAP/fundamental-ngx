@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "notification-group-growing-item-title.directive.ts",
   "sourceLine": 10,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/notification/directives/notification-group-growing-item-title.directive.ts#L10",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/notification/directives/notification-group-growing-item-title.directive.ts#L10",
   "description": "",
   "inputs": [],
   "outputs": [],

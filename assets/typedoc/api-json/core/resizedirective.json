@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "resize.directive.ts",
   "sourceLine": 29,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/cdk/utils/directives/resize/resize.directive.ts#L29",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/cdk/utils/directives/resize/resize.directive.ts#L29",
   "description": "",
   "inputs": [
     {

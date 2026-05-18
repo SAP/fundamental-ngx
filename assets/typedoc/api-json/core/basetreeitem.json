@@ -4,7 +4,7 @@
   "kind": "Class",
   "sourceFile": "base-tree-item.class.ts",
   "sourceLine": 13,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/tree/models/base-tree-item.class.ts#L13",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/tree/models/base-tree-item.class.ts#L13",
   "description": "Abstract base class for tree item components.\nDefines the contract for tree item implementations with navigation, selection, and hierarchy support.",
   "inputs": [],
   "outputs": [],

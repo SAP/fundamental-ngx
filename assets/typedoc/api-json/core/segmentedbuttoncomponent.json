@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "segmented-button.component.ts",
   "sourceLine": 77,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/segmented-button/segmented-button.component.ts#L77",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/segmented-button/segmented-button.component.ts#L77",
   "description": "Container for grouped buttons.\n\n```html\n<fd-segmented-button [(ngModel)]=\"value\">\n    <button fd-button value=\"first\">Button</button>\n    <button fd-button value=\"second\">Button</button>\n    <button fd-button value=\"third\">Button</button>\n</fd-segmented-button>\n```",
   "inputs": [
     {

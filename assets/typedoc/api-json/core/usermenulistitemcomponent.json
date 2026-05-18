@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "user-menu-list-item.component.ts",
   "sourceLine": 47,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/user-menu/components/user-menu-list-item.component.ts#L47",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/user-menu/components/user-menu-list-item.component.ts#L47",
   "description": "",
   "inputs": [
     {

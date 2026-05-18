@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "dynamic-page-header-title.directive.ts",
   "sourceLine": 8,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/platform/dynamic-page/directives/dynamic-page-header-title.directive.ts#L8",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/platform/dynamic-page/directives/dynamic-page-header-title.directive.ts#L8",
   "description": "",
   "inputs": [],
   "outputs": [],

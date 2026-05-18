@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "content-density.directive.ts",
   "sourceLine": 51,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/content-density/directives/content-density.directive.ts#L51",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/content-density/directives/content-density.directive.ts#L51",
   "description": "Directive to control the content density of elements.\nUsed by density controllers and consumers.\n\nProvides signal-based state management for reactive content density tracking.\nAlso applies UI5 `data-ui5-compact-size` attribute for UI5 Web Components compatibility.",
   "inputs": [
     {

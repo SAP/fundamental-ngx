@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "dnd-keyboard-group.directive.ts",
   "sourceLine": 15,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/cdk/utils/drag-and-drop/dnd-keyboard-group/dnd-keyboard-group.directive.ts#L15",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/cdk/utils/drag-and-drop/dnd-keyboard-group/dnd-keyboard-group.directive.ts#L15",
   "description": "This directive is used to provide drag & drop with keyboard support.\nIt should be used together with directive fdDndKeyboardItem.",
   "inputs": [
     {

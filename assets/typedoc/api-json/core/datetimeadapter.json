@@ -4,7 +4,7 @@
   "kind": "Class",
   "sourceFile": "datetime-adapter.ts",
   "sourceLine": 10,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/datetime/datetime-adapter.ts#L10",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/datetime/datetime-adapter.ts#L10",
   "description": "Datetime Adapter is an abstract class that must be implemented by each adapter.\nIt's used to encapsulate a date/time manipulations as result\nothers places that uses it remain date type agnostic.",
   "inputs": [],
   "outputs": [],

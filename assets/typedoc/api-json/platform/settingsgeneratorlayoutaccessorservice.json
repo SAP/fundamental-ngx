@@ -4,7 +4,7 @@
   "kind": "Service",
   "sourceFile": "settings-generator-layout-accessor.service.ts",
   "sourceLine": 9,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/platform/settings-generator/settings-generator-layout-accessor.service.ts#L9",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/platform/settings-generator/settings-generator-layout-accessor.service.ts#L9",
   "description": "Service, used as a registry of the available layouts for Settings Generator Component.",
   "inputs": [],
   "outputs": [],

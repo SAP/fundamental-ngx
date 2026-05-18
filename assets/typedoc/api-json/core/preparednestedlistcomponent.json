@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "prepared-nested-list.component.ts",
   "sourceLine": 42,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/nested-list/prepared-nested-list/prepared-nested-list.component.ts#L42",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/nested-list/prepared-nested-list/prepared-nested-list.component.ts#L42",
   "description": "Component for internal usage, allows to generate the nested list from defined object.",
   "inputs": [
     {

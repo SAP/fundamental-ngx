@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "focus-key-manager-list.directive.ts",
   "sourceLine": 26,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/cdk/utils/directives/focus-key-manager/focus-key-manager-list.directive.ts#L26",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/cdk/utils/directives/focus-key-manager/focus-key-manager-list.directive.ts#L26",
   "description": "Directive to apply Angular Material FocusKeyManager to lists.\nTo be used with FocusKeyManagerItemDirective",
   "inputs": [
     {

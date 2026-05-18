@@ -4,7 +4,7 @@
   "kind": "Class",
   "sourceFile": "abstract-data-provider.class.ts",
   "sourceLine": 50,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/cdk/data-source/base/abstract-data-provider.class.ts#L50",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/cdk/data-source/base/abstract-data-provider.class.ts#L50",
   "description": "Default data provider class used for other components to extend from.",
   "inputs": [],
   "outputs": [],

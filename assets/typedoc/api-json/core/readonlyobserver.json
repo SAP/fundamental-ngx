@@ -4,7 +4,7 @@
   "kind": "Class",
   "sourceFile": "readonly.observer.ts",
   "sourceLine": 11,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/cdk/utils/directives/readonly/readonly.observer.ts#L11",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/cdk/utils/directives/readonly/readonly.observer.ts#L11",
   "description": "",
   "inputs": [],
   "outputs": [],

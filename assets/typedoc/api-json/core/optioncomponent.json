@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "option.component.ts",
   "sourceLine": 83,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/select/option/option.component.ts#L83",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/select/option/option.component.ts#L83",
   "description": "Used to represent an option of the select component.",
   "inputs": [
     {

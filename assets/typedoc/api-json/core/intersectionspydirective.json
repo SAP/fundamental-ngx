@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "intersection-spy.directive.ts",
   "sourceLine": 10,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/cdk/utils/directives/intersection-spy/intersection-spy.directive.ts#L10",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/cdk/utils/directives/intersection-spy/intersection-spy.directive.ts#L10",
   "description": "",
   "inputs": [
     {

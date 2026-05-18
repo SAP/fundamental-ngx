@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "fieldset.component.ts",
   "sourceLine": 23,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/form/fieldset/fieldset.component.ts#L23",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/form/fieldset/fieldset.component.ts#L23",
   "description": "Used for easily displaying forms with a margin. Not necessary for fundamental forms to be functional.\n\n```html\n<fieldset fd-fieldset>\n    <div fd-form-item>\n        ...\n    </div>\n</fieldset>\n```",
   "inputs": [],
   "outputs": [],

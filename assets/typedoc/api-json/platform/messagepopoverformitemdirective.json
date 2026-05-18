@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "message-popover-form-item.directive.ts",
   "sourceLine": 9,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/platform/message-popover/directives/message-popover-form-item.directive.ts#L9",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/platform/message-popover/directives/message-popover-form-item.directive.ts#L9",
   "description": "",
   "inputs": [
     {

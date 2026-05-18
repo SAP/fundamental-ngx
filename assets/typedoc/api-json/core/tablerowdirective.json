@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "table-row.directive.ts",
   "sourceLine": 36,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/table/directives/table-row.directive.ts#L36",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/table/directives/table-row.directive.ts#L36",
   "description": "",
   "inputs": [
     {

@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "illustrated-message-title.directive.ts",
   "sourceLine": 13,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/illustrated-message/directives/illustrated-message-title/illustrated-message-title.directive.ts#L13",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/illustrated-message/directives/illustrated-message-title/illustrated-message-title.directive.ts#L13",
   "description": "Directive for the title element within an illustrated message figcaption.",
   "inputs": [],
   "outputs": [],

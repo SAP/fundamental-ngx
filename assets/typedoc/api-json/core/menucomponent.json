@@ -3,8 +3,8 @@
   "selector": "fd-menu",
   "kind": "Component",
   "sourceFile": "menu.component.ts",
-  "sourceLine": 71,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/menu/menu.component.ts#L71",
+  "sourceLine": 72,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/menu/menu.component.ts#L72",
   "description": "The component that represents a menu.",
   "inputs": [
     {
@@ -14,7 +14,7 @@
       "description": "Additional CSS classes for the menu body container",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 137,
+      "sourceLine": 138,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "The element to which the menu overlay is attached",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 146,
+      "sourceLine": 147,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Aria-label for navigation",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 76,
+      "sourceLine": 77,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "Aria-Labelledby for element describing navigation",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 79,
+      "sourceLine": 80,
       "since": null
     },
     {
@@ -54,7 +54,7 @@
       "description": "Whether to close menu on escape key",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 105,
+      "sourceLine": 106,
       "since": null
     },
     {
@@ -64,7 +64,7 @@
       "description": "Whether to close the menu on router navigation start",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 140,
+      "sourceLine": 141,
       "since": null
     },
     {
@@ -74,7 +74,7 @@
       "description": "Whether to close on outside click",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 128,
+      "sourceLine": 129,
       "since": null
     },
     {
@@ -84,7 +84,7 @@
       "description": "Configuration object for popover settings.\nWhen provided, these settings will be merged with individual input properties.\nIndividual inputs take precedence over config object values.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 89,
+      "sourceLine": 90,
       "since": null
     },
     {
@@ -94,7 +94,7 @@
       "description": "Whether to disable scrollbar",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 114,
+      "sourceLine": 115,
       "since": null
     },
     {
@@ -104,7 +104,7 @@
       "description": "Whether the menu is disabled",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 111,
+      "sourceLine": 112,
       "since": null
     },
     {
@@ -114,7 +114,7 @@
       "description": "Preset options for the menu body width.\n* `at-least` will apply a minimum width to the body equivalent to the width of the control.\n* `equal` will apply a width to the body equivalent to the width of the control.\n* Leave blank for no effect.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 125,
+      "sourceLine": 126,
       "since": null
     },
     {
@@ -124,7 +124,7 @@
       "description": "Whether position shouldn't change when the menu approaches the corner of the page",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 149,
+      "sourceLine": 150,
       "since": null
     },
     {
@@ -134,7 +134,7 @@
       "description": "Whether to auto-capture focus when opened",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 108,
+      "sourceLine": 109,
       "since": null
     },
     {
@@ -144,7 +144,7 @@
       "description": "Whether the menu should trap focus within its boundaries",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 134,
+      "sourceLine": 135,
       "since": null
     },
     {
@@ -154,7 +154,7 @@
       "description": "Id of the control.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 82,
+      "sourceLine": 83,
       "since": null
     },
     {
@@ -164,7 +164,7 @@
       "description": "Two-way binding for menu open state",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 152,
+      "sourceLine": 156,
       "since": null
     },
     {
@@ -174,7 +174,7 @@
       "description": "Whether the menu should be displayed in mobile mode",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 92,
+      "sourceLine": 93,
       "since": null
     },
     {
@@ -184,7 +184,7 @@
       "description": "Mobile mode configuration",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 95,
+      "sourceLine": 96,
       "since": null
     },
     {
@@ -194,7 +194,7 @@
       "description": "Whether to hide the arrow",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 131,
+      "sourceLine": 132,
       "since": null
     },
     {
@@ -204,7 +204,7 @@
       "description": "Open submenu on hover after given milliseconds",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 73,
+      "sourceLine": 74,
       "since": null
     },
     {
@@ -214,7 +214,7 @@
       "description": "Menu placement",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 102,
+      "sourceLine": 103,
       "since": null
     },
     {
@@ -224,7 +224,17 @@
       "description": "Whether to move focus back to the trigger after the menu is closed",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 143,
+      "sourceLine": 144,
+      "since": null
+    },
+    {
+      "name": "scrollStrategy",
+      "type": "null | ScrollStrategy",
+      "default": null,
+      "description": "CDK scroll strategy applied to the menu overlay.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 153,
       "since": null
     },
     {
@@ -234,7 +244,7 @@
       "description": "Trigger events for opening/closing",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 117,
+      "sourceLine": 118,
       "since": null
     }
   ],
@@ -246,7 +256,7 @@
       "description": "Emits array of active menu items",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 158,
+      "sourceLine": 162,
       "since": null
     },
     {
@@ -256,7 +266,7 @@
       "description": "Event emitted right before the menu is being opened.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 161,
+      "sourceLine": 165,
       "since": null
     },
     {
@@ -266,7 +276,7 @@
       "description": "Two-way binding for menu open state",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 152,
+      "sourceLine": 156,
       "since": null
     },
     {
@@ -276,7 +286,7 @@
       "description": "Emits when menu open state changes - required for MenuInterface compatibility",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 155,
+      "sourceLine": 159,
       "since": null
     }
   ],
@@ -286,7 +296,7 @@
       "signature": "() => void",
       "description": "Closes the menu",
       "deprecated": null,
-      "sourceLine": 474,
+      "sourceLine": 479,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -296,7 +306,7 @@
       "signature": "() => void",
       "description": "Opens the menu",
       "deprecated": null,
-      "sourceLine": 462,
+      "sourceLine": 467,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -306,7 +316,7 @@
       "signature": "() => void",
       "description": "Method called to refresh position of opened menu",
       "deprecated": null,
-      "sourceLine": 493,
+      "sourceLine": 498,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -316,7 +326,7 @@
       "signature": "(addon: unknown) => void",
       "description": "Register addon",
       "deprecated": null,
-      "sourceLine": 418,
+      "sourceLine": 423,
       "since": null,
       "parameters": [
         {
@@ -333,7 +343,7 @@
       "signature": "() => void",
       "description": "Toggles menu open/close state",
       "deprecated": null,
-      "sourceLine": 488,
+      "sourceLine": 493,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -343,7 +353,7 @@
       "signature": "(addon: unknown) => void",
       "description": "Unregister addon",
       "deprecated": null,
-      "sourceLine": 425,
+      "sourceLine": 430,
       "since": null,
       "parameters": [
         {

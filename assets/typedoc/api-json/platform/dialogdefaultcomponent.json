@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "dialog-default.component.ts",
   "sourceLine": 46,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/dialog/dialog-default/dialog-default.component.ts#L46",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/dialog/dialog-default/dialog-default.component.ts#L46",
   "description": "Dialog component used to create the dialog in object based approach",
   "inputs": [],
   "outputs": [],

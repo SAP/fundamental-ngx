@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "settings-profile-card-subline.directive.ts",
   "sourceLine": 11,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/settings/settings-profile-card-subline/settings-profile-card-subline.directive.ts#L11",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/settings/settings-profile-card-subline/settings-profile-card-subline.directive.ts#L11",
   "description": "",
   "inputs": [],
   "outputs": [],

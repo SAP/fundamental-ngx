@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "numeric-content.directives.ts",
   "sourceLine": 134,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/tile/directives/numeric-content.directives.ts#L134",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/tile/directives/numeric-content.directives.ts#L134",
   "description": "",
   "inputs": [],
   "outputs": [],

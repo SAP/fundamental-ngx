@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "focusable-item.directive.ts",
   "sourceLine": 49,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/cdk/utils/directives/focusable-item/focusable-item.directive.ts#L49",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/cdk/utils/directives/focusable-item/focusable-item.directive.ts#L49",
   "description": "",
   "inputs": [
     {

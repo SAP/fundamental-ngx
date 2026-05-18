@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "info-label.component.ts",
   "sourceLine": 38,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/info-label/info-label.component.ts#L38",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/info-label/info-label.component.ts#L38",
   "description": "",
   "inputs": [
     {

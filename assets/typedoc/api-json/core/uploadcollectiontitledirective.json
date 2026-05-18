@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "upload-collection-simple.directives.ts",
   "sourceLine": 29,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/upload-collection/upload-collection-simple.directives.ts#L29",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/upload-collection/upload-collection-simple.directives.ts#L29",
   "description": "",
   "inputs": [],
   "outputs": [],

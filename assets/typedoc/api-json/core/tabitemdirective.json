@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "tab-item.directive.ts",
   "sourceLine": 23,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/tabs/tab-item/tab-item.directive.ts#L23",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/tabs/tab-item/tab-item.directive.ts#L23",
   "description": "Tab Item is optional wrapper for Tab link\n\n```html\n<div fd-tab-item>\n   <a fd-tab-link>\n       link\n   </a>\n</div>\n```",
   "inputs": [
     {

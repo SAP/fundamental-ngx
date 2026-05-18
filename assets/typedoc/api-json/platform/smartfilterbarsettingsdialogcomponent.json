@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "smart-filter-bar-settings-dialog.component.ts",
   "sourceLine": 105,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/platform/smart-filter-bar/components/smart-filter-bar-settings-dialog/smart-filter-bar-settings-dialog.component.ts#L105",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/platform/smart-filter-bar/components/smart-filter-bar-settings-dialog/smart-filter-bar-settings-dialog.component.ts#L105",
   "description": "Reset button.\n\nUsed to reset resettable state by click.",
   "inputs": [],
   "outputs": [],
@@ -14,7 +14,7 @@
       "signature": "() => void",
       "description": "Resets filters selection.",
       "deprecated": null,
-      "sourceLine": 189,
+      "sourceLine": 200,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -24,7 +24,7 @@
       "signature": "() => void",
       "description": "Sets initial state of the table.",
       "deprecated": null,
-      "sourceLine": 197,
+      "sourceLine": 208,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -34,7 +34,7 @@
       "signature": "() => void",
       "description": "Checks the checkbox in the table row if the field is selected.",
       "deprecated": null,
-      "sourceLine": 172,
+      "sourceLine": 178,
       "since": null,
       "parameters": [],
       "returnType": "void"

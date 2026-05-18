@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "dialog-title.directive.ts",
   "sourceLine": 15,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/dialog/directives/dialog-title.directive.ts#L15",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/dialog/directives/dialog-title.directive.ts#L15",
   "description": "",
   "inputs": [
     {

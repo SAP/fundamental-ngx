@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "cva.directive.ts",
   "sourceLine": 34,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/cdk/forms/cva/cva.directive.ts#L34",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/cdk/forms/cva/cva.directive.ts#L34",
   "description": "",
   "inputs": [
     {

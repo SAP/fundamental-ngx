@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "auto-dismiss-message-strip.directive.ts",
   "sourceLine": 18,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/message-strip/auto-dismiss-message-strip.directive.ts#L18",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/message-strip/auto-dismiss-message-strip.directive.ts#L18",
   "description": "",
   "inputs": [
     {

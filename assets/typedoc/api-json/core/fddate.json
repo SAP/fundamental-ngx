@@ -4,7 +4,7 @@
   "kind": "Class",
   "sourceFile": "fd-date.ts",
   "sourceLine": 11,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/9318050/libs/core/datetime/fd-date.ts#L11",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/datetime/fd-date.ts#L11",
   "description": "FdDate class is used to represent date and time.\n\nIt's a simplified analog of native Date instance.\nIt gives some convenience methods to work with date or time data.",
   "inputs": [],
   "outputs": [],
