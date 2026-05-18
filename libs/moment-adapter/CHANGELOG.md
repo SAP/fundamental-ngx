@@ -1,3 +1,13 @@
+## 0.62.4-rc.0 (2026-05-18)
+
+### 🩹 Fixes
+
+- **ui5:** bridge ThemingService to UI5 Web Components and fix theme propagation ([#14188](https://github.com/SAP/fundamental-ngx/pull/14188))
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.62.3 (2026-05-18)
 
 ### 🚀 Features
