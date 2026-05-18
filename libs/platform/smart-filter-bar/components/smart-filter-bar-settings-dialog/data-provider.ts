@@ -54,7 +54,7 @@ export class SmartFilterBarOptionsDataProvider extends ArrayTableDataProvider<Fi
 
     /** @hidden */
     private _getVisibleAndActiveItems(): FieldFilterItem[] {
-        return this.items.filter((i) => i.visible || i.active);
+        return this.items.filter((i) => i.visible && i.active);
     }
 
     /** @hidden */
