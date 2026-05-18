@@ -1,3 +1,4 @@
+import { Overlay, ScrollStrategy } from '@angular/cdk/overlay';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -32,6 +33,7 @@ class InlineHelpDefaultTestComponent {
             [fixedPosition]="fixedPosition"
             [maxWidth]="maxWidth"
             [appendTo]="appendTo"
+            [scrollStrategy]="scrollStrategy"
         ></div>
     `,
     imports: [InlineHelpModule]
@@ -47,6 +49,7 @@ class InlineHelpInputsTestComponent {
     fixedPosition = false;
     maxWidth: number | null = null;
     appendTo: Element | null = null;
+    scrollStrategy: ScrollStrategy | null = null;
 }
 
 describe('InlineHelpDirective', () => {
@@ -183,6 +186,15 @@ describe('InlineHelpDirective popover inputs', () => {
         fixture.detectChanges();
         expect(popoverService.appendTo()).toBe(container);
         document.body.removeChild(container);
+    });
+
+    it('should pass scrollStrategy to popover service (regression #14210)', () => {
+        const overlay = TestBed.inject(Overlay);
+        expect(popoverService.scrollStrategy()).toBeNull();
+        const closeStrategy = overlay.scrollStrategies.close();
+        component.scrollStrategy = closeStrategy;
+        fixture.detectChanges();
+        expect(popoverService.scrollStrategy()).toBe(closeStrategy);
     });
 
     it('should close on escape key when closeOnEscapeKey is true (focus on trigger)', fakeAsync(() => {
