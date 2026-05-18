@@ -449,7 +449,11 @@ const INTERNAL_REFERENCE_NAMES = new Set([
     'Renderer2',
     'FormControl',
     'FormGroup',
-    'QueryList'
+    'QueryList',
+    // Plain Signal / WritableSignal are internal state — not bindable Angular inputs.
+    // Actual Angular inputs use InputSignal<T> / InputSignalWithTransform<T,U> (handled above).
+    'Signal',
+    'WritableSignal'
 ]);
 
 function isInternalReferenceName(name: string): boolean {

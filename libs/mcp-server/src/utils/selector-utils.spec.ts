@@ -94,6 +94,38 @@ describe('buildPitfalls', () => {
         expect(pitfalls.some((p) => p.includes('dataSource'))).toBe(true);
     });
 
+    it('should not flag a boolean required input with no default (implicit false default)', () => {
+        const comp = makeComp({
+            inputs: [{ name: 'isInline', type: 'boolean', description: '', required: true }]
+        });
+        const pitfalls = buildPitfalls(comp, '@fundamental-ngx/core/test');
+        expect(pitfalls.some((p) => p.includes('isInline'))).toBe(false);
+    });
+
+    it('should not flag a boolean-union required input (e.g. active: boolean | undefined)', () => {
+        const comp = makeComp({
+            inputs: [{ name: 'active', type: 'boolean | undefined', description: '', required: true }]
+        });
+        const pitfalls = buildPitfalls(comp, '@fundamental-ngx/core/test');
+        expect(pitfalls.some((p) => p.includes('active'))).toBe(false);
+    });
+
+    it('should not flag a string | undefined required input', () => {
+        const comp = makeComp({
+            inputs: [{ name: 'label', type: 'string | undefined', description: '', required: true }]
+        });
+        const pitfalls = buildPitfalls(comp, '@fundamental-ngx/core/test');
+        expect(pitfalls.some((p) => p.includes('label'))).toBe(false);
+    });
+
+    it('should still flag a genuinely required non-boolean non-optional input', () => {
+        const comp = makeComp({
+            inputs: [{ name: 'dataSource', type: 'DataSource', description: '', required: true }]
+        });
+        const pitfalls = buildPitfalls(comp, '@fundamental-ngx/core/test');
+        expect(pitfalls.some((p) => p.includes('dataSource'))).toBe(true);
+    });
+
     it('should warn when import path falls back to library root', () => {
         const comp = makeComp({ selector: 'fd-test', library: '@fundamental-ngx/core' });
         const pitfalls = buildPitfalls(comp, '@fundamental-ngx/core');

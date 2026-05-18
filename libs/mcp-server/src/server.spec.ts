@@ -9,6 +9,7 @@
 
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
+import { USAGE_GUIDES } from './data/usage-guides';
 import { ComponentCatalog, ComponentExample, ComponentMetadata, InputMetadata } from './types/component-metadata';
 import { buildPitfalls, buildTemplate, deriveImportPath, getSelectorType } from './utils/selector-utils';
 
@@ -31,6 +32,11 @@ try {
 // Mirror of server.ts helper functions (extracted for testability)
 // ---------------------------------------------------------------------------
 
+function selectorHasBoundaryMatch(selector: string, query: string): boolean {
+    const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    return new RegExp(escaped + '(?!-)').test(selector);
+}
+
 function findComponent(nameOrSelector: string, components: ComponentMetadata[]): ComponentMetadata | undefined {
     const lower = nameOrSelector.toLowerCase();
 
@@ -45,7 +51,7 @@ function findComponent(nameOrSelector: string, components: ComponentMetadata[]):
     }
 
     const partialMatches = components.filter(
-        (c) => c.selector.toLowerCase().includes(lower) || c.name.toLowerCase().includes(lower)
+        (c) => selectorHasBoundaryMatch(c.selector.toLowerCase(), lower) || c.name.toLowerCase().includes(lower)
     );
     if (partialMatches.length > 0) {
         return partialMatches.sort((a, b) => scoreMatch(b, lower) - scoreMatch(a, lower))[0];
@@ -356,6 +362,59 @@ describe('MCP Server helpers', () => {
             const result = findComponent('fd-button', [nestedDirective, primaryButton]);
             expect(result?.name).toBe('ButtonComponent');
         });
+
+        it('should not resolve a prefix segment to a longer compound selector', () => {
+            // Regression: "fd-input" must NOT resolve to InputGroupComponent (selector: "fd-input-group")
+            // because "fd-input" is a prefix of "fd-input-group", not the same component.
+            const inputGroup: ComponentMetadata = {
+                name: 'InputGroupComponent',
+                selector: 'fd-input-group',
+                library: '@fundamental-ngx/core',
+                category: 'input-group',
+                description: 'Input group wrapper.',
+                inputs: [],
+                outputs: [],
+                slots: [],
+                methods: [],
+                cssProperties: [],
+                source: 'typedoc'
+            };
+            expect(findComponent('fd-input', [inputGroup])).toBeUndefined();
+        });
+
+        it('should still find a component by its full compound selector', () => {
+            const inputGroup: ComponentMetadata = {
+                name: 'InputGroupComponent',
+                selector: 'fd-input-group',
+                library: '@fundamental-ngx/core',
+                category: 'input-group',
+                description: 'Input group wrapper.',
+                inputs: [],
+                outputs: [],
+                slots: [],
+                methods: [],
+                cssProperties: [],
+                source: 'typedoc'
+            };
+            expect(findComponent('fd-input-group', [inputGroup])?.name).toBe('InputGroupComponent');
+        });
+
+        it('should not resolve fd-table to fd-table-cell', () => {
+            const tableCell: ComponentMetadata = {
+                name: 'TableCellDirective',
+                selector: 'td[fd-table-cell], th[fd-table-cell]',
+                library: '@fundamental-ngx/core',
+                category: 'table',
+                description: 'Table cell directive.',
+                inputs: [],
+                outputs: [],
+                slots: [],
+                methods: [],
+                cssProperties: [],
+                source: 'typedoc'
+            };
+            expect(findComponent('fd-table', [tableCell])).toBeUndefined();
+        });
     });
 
     describe('scoreMatch', () => {
@@ -474,6 +533,88 @@ describe('MCP Server helpers', () => {
             expect(scored).toHaveLength(1);
             expect(scored[0].component.name).toBe('TableComponent');
         });
+
+        it('should rank multi-word query results by summing per-word scores', () => {
+            // A component whose selector/name/description matches more words should rank higher.
+            const flexLayout: ComponentMetadata = {
+                name: 'FlexibleColumnLayoutComponent',
+                selector: 'fd-flexible-column-layout',
+                library: '@fundamental-ngx/core',
+                category: 'flexible-column-layout',
+                description: 'Flexible column layout for master-detail patterns.',
+                inputs: [],
+                outputs: [],
+                slots: [],
+                methods: [],
+                cssProperties: [],
+                source: 'typedoc'
+            };
+            const listComp: ComponentMetadata = {
+                name: 'ListComponent',
+                selector: 'fd-list',
+                library: '@fundamental-ngx/core',
+                category: 'List',
+                description: 'A list component for displaying homogeneous data.',
+                inputs: [],
+                outputs: [],
+                slots: [],
+                methods: [],
+                cssProperties: [],
+                source: 'typedoc'
+            };
+
+            const queryWords = ['flexible', 'column'];
+            const flexScore = queryWords.reduce((sum, w) => sum + scoreMatch(flexLayout, w), 0);
+            const listScore = queryWords.reduce((sum, w) => sum + scoreMatch(listComp, w), 0);
+
+            expect(flexScore).toBeGreaterThan(listScore);
+            expect(flexScore).toBeGreaterThan(0);
+        });
+
+        it('should return zero score for a multi-word query when no word matches', () => {
+            const queryWords = ['flexible', 'column'];
+            const score = queryWords.reduce((sum, w) => sum + scoreMatch(FIXTURE_COMPONENTS[4], w), 0); // DeprecatedComponent
+            expect(score).toBe(0);
+        });
+    });
+});
+
+// ---------------------------------------------------------------------------
+// patternKeywordMatches
+// ---------------------------------------------------------------------------
+
+describe('patternKeywordMatches', () => {
+    function patternKeywordMatches(keyword: string, text: string): boolean {
+        if (keyword.includes(' ')) {
+            return text.includes(keyword);
+        }
+        const escaped = keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        return new RegExp(`\\b${escaped}\\b`).test(text);
+    }
+
+    it('should match a whole word', () => {
+        expect(patternKeywordMatches('user', 'user profile page')).toBe(true);
+    });
+
+    it('should not match a word that is a prefix of another word', () => {
+        // Regression: "user" must not fire for "username"
+        expect(patternKeywordMatches('user', 'a login form with username and password')).toBe(false);
+    });
+
+    it('should not match a word embedded inside another word', () => {
+        expect(patternKeywordMatches('form', 'platform settings')).toBe(false);
+    });
+
+    it('should match a word adjacent to punctuation', () => {
+        expect(patternKeywordMatches('date', 'pick a date, any date')).toBe(true);
+    });
+
+    it('should match a multi-word phrase as a substring', () => {
+        expect(patternKeywordMatches('data table', 'a filterable data table with sorting')).toBe(true);
+    });
+
+    it('should not match a multi-word phrase when only one word is present', () => {
+        expect(patternKeywordMatches('data table', 'show a table of users')).toBe(false);
     });
 });
 
@@ -552,6 +693,30 @@ describe('Real catalog validation', () => {
         const ui5Button = findComponent('ui5-button', catalog.components);
         expect(ui5Button).toBeDefined();
         expect(ui5Button!.source).toBe('cem');
+    });
+
+    (skip ? it.skip : it)('multi-word search should surface fd-flexible-column-layout for "flexible column"', () => {
+        const queryWords = ['flexible', 'column'];
+        const scored = catalog.components
+            .map((c) => ({ c, score: queryWords.reduce((sum, w) => sum + scoreMatch(c, w), 0) }))
+            .filter((s) => s.score > 0)
+            .sort((a, b) => b.score - a.score);
+
+        expect(scored.length).toBeGreaterThan(0);
+        expect(scored[0].c.selector).toMatch(/flexible-column/);
+    });
+
+    (skip ? it.skip : it)('multi-word search "master detail flexible column" should not return zero results', () => {
+        const queryWords = 'master detail flexible column'.split(/\s+/).filter((w) => w.length > 2);
+        const scored = catalog.components
+            .map((c) => ({ c, score: queryWords.reduce((sum, w) => sum + scoreMatch(c, w), 0) }))
+            .filter((s) => s.score > 0)
+            .sort((a, b) => b.score - a.score);
+
+        expect(scored.length).toBeGreaterThan(0);
+        // Flexible column layout components should be in the top 3
+        const top3Selectors = scored.slice(0, 3).map((s) => s.c.selector);
+        expect(top3Selectors.some((sel) => sel.includes('flexible-column'))).toBe(true);
     });
 });
 
@@ -767,6 +932,42 @@ describe('get_accessibility_guide logic', () => {
 });
 
 // ---------------------------------------------------------------------------
+// get_accessibility_guide — curated pitfalls & config-input tips
+// ---------------------------------------------------------------------------
+
+describe('isSignalWrapperType', () => {
+    function isSignalWrapperType(type: string | undefined): boolean {
+        return !!type && /^(Writable)?Signal</.test(type);
+    }
+
+    it('should match Signal<boolean>', () => expect(isSignalWrapperType('Signal<boolean>')).toBe(true));
+    it('should match WritableSignal<number>', () => expect(isSignalWrapperType('WritableSignal<number>')).toBe(true));
+    it('should match WritableSignal<Nullable<string>>', () =>
+        expect(isSignalWrapperType('WritableSignal<Nullable<string>>')).toBe(true));
+    it('should not match InputSignal<string> (that is a real input)', () =>
+        expect(isSignalWrapperType('InputSignal<string>')).toBe(false));
+    it('should not match plain boolean', () => expect(isSignalWrapperType('boolean')).toBe(false));
+    it('should not match undefined', () => expect(isSignalWrapperType(undefined)).toBe(false));
+});
+
+describe('get_accessibility_guide — supplementary tips', () => {
+    it('should use real fd-dialog from catalog: only dialogConfig input, no direct ARIA inputs', () => {
+        const dialog = catalog.components.find((c) => c.selector === 'fd-dialog');
+        expect(dialog).toBeDefined();
+        const ariaInputs = dialog!.inputs.filter(
+            (i) =>
+                i.name.toLowerCase().startsWith('aria') ||
+                i.name.toLowerCase() === 'role' ||
+                i.name.toLowerCase().startsWith('accessible')
+        );
+        expect(ariaInputs).toHaveLength(0);
+        const configInput = dialog!.inputs.find((i) => i.type && i.type.includes('Config'));
+        expect(configInput).toBeDefined();
+        expect(configInput!.name).toBe('dialogConfig');
+    });
+});
+
+// ---------------------------------------------------------------------------
 // compare_components logic
 // ---------------------------------------------------------------------------
 
@@ -976,6 +1177,52 @@ describe('buildPitfalls', () => {
     it('should warn about pure attribute directive misuse', () => {
         const pitfalls = buildPitfalls(PURE_ATTR_FIXTURE, deriveImportPath(PURE_ATTR_FIXTURE));
         expect(pitfalls.some((p) => p.includes('attribute directive'))).toBe(true);
+    });
+});
+
+describe('USAGE_GUIDES — fd-flexible-column-layout curated guide', () => {
+    it('should have an entry keyed by fd-flexible-column-layout', () => {
+        expect(USAGE_GUIDES['fd-flexible-column-layout']).toBeDefined();
+    });
+
+    it('should list all 10 FlexibleColumnLayout enum values in commonPitfalls', () => {
+        const guide = USAGE_GUIDES['fd-flexible-column-layout'];
+        const pitfallText = guide.commonPitfalls.join(' ');
+        const enumValues = [
+            'OneColumnStartFullScreen',
+            'OneColumnMidFullScreen',
+            'OneColumnEndFullScreen',
+            'TwoColumnsStartExpanded',
+            'TwoColumnsMidExpanded',
+            'TwoColumnsEndExpanded',
+            'ThreeColumnsMidExpanded',
+            'ThreeColumnsEndExpanded',
+            'ThreeColumnsStartMinimized',
+            'ThreeColumnsEndMinimized'
+        ];
+        for (const value of enumValues) {
+            expect(pitfallText).toContain(value);
+        }
+    });
+
+    it('should mention template reference projection in compositionPattern', () => {
+        const guide = USAGE_GUIDES['fd-flexible-column-layout'];
+        expect(guide.compositionPattern).toContain('#startColumn');
+        expect(guide.compositionPattern).toContain('#midColumn');
+        expect(guide.compositionPattern).toContain('#endColumn');
+        expect(guide.compositionPattern).toContain('ng-template');
+    });
+
+    it('should warn about required title/aria inputs in commonPitfalls', () => {
+        const guide = USAGE_GUIDES['fd-flexible-column-layout'];
+        const pitfallText = guide.commonPitfalls.join(' ');
+        expect(pitfallText).toContain('collapseTitle');
+        expect(pitfallText).toContain('separatorAriaLabel');
+    });
+
+    it('should list ui5-flexible-column-layout as a related component', () => {
+        const guide = USAGE_GUIDES['fd-flexible-column-layout'];
+        expect(guide.relatedComponents).toContain('ui5-flexible-column-layout');
     });
 });
 
