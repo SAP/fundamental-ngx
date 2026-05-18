@@ -1,3 +1,4 @@
+import { ScrollStrategy } from '@angular/cdk/overlay';
 import {
     AfterContentInit,
     afterNextRender,
@@ -148,6 +149,9 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
     /** Whether position shouldn't change when the menu approaches the corner of the page */
     readonly fixedPosition = input(false, { transform: booleanAttribute });
 
+    /** CDK scroll strategy applied to the menu overlay. */
+    readonly scrollStrategy = input<ScrollStrategy | null>(null);
+
     /** Two-way binding for menu open state */
     readonly isOpen = model(false);
 
@@ -271,6 +275,7 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
             this._popoverService.restoreFocusOnClose.set(this.restoreFocusOnClose() ?? cfg.restoreFocusOnClose ?? true);
             this._popoverService.appendTo.set(this.appendTo() ?? cfg.appendTo ?? null);
             this._popoverService.fixedPosition.set(this.fixedPosition() ?? cfg.fixedPosition ?? false);
+            this._popoverService.scrollStrategy.set(this.scrollStrategy() ?? cfg.scrollStrategy ?? null);
 
             const bodyClass = this.additionalBodyClass() ?? cfg.additionalBodyClass ?? '';
             this._popoverService.additionalBodyClass.set(bodyClass + ' fd-popover--menu');
@@ -537,6 +542,7 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
                 restoreFocusOnClose: this.restoreFocusOnClose() ?? cfg.restoreFocusOnClose,
                 appendTo: this.appendTo() ?? cfg.appendTo,
                 fixedPosition: this.fixedPosition() ?? cfg.fixedPosition,
+                scrollStrategy: this.scrollStrategy() ?? cfg.scrollStrategy,
                 additionalBodyClass: (
                     (this.additionalBodyClass() ?? cfg.additionalBodyClass ?? '') + ' fd-popover--menu'
                 ).trim()
