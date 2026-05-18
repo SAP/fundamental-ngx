@@ -1,3 +1,33 @@
+## 0.62.4-rc.0 (2026-05-18)
+
+### 🩹 Fixes
+
+- **ui5:** bridge ThemingService to UI5 Web Components and fix theme propagation ([#14188](https://github.com/SAP/fundamental-ngx/pull/14188))
+
+### ❤️ Thank You
+
+- deno
+
+## 0.62.3 (2026-05-18)
+
+### 🚀 Features
+
+- MCP server evaluation - part 1 ([#14178](https://github.com/SAP/fundamental-ngx/pull/14178), [#14159](https://github.com/SAP/fundamental-ngx/issues/14159))
+
+### 🩹 Fixes
+
+- **platform:** [Platform] [fdp-smart-filter-bar] Incorrect filter logic and row selection reset when switching visibility categories ([#14195](https://github.com/SAP/fundamental-ngx/pull/14195))
+- **platform:** table with selection reading select all column header … ([#14181](https://github.com/SAP/fundamental-ngx/pull/14181))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+- Mike O'Donnell @mikerodonnell89
+
+## 0.62.3-rc.5 (2026-05-18)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
 ## 0.62.3-rc.4 (2026-05-18)
 
 This was a version bump only for platform to align it with other projects, there were no code changes.

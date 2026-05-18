@@ -89,4 +89,30 @@ describe('ThemingService', () => {
             expect(currentTheme?.id).toEqual(customConfig.defaultTheme);
         });
     });
+
+    describe('URL-based theme initialization', () => {
+        it('should use defaultTheme from config when no URL parameter is present', () => {
+            const config = new BaseThemingConfig();
+            config.defaultTheme = 'sap_horizon_dark';
+            service = setupService(config);
+            expect(service.getCurrentTheme()?.id).toEqual('sap_horizon_dark');
+        });
+
+        it('should allow setTheme to override init theme (documents toolbar bug pattern)', () => {
+            const config = new BaseThemingConfig();
+            config.defaultTheme = 'sap_horizon_dark';
+            service = setupService(config);
+            expect(service.getCurrentTheme()?.id).toEqual('sap_horizon_dark');
+            service.setTheme('sap_horizon');
+            expect(service.getCurrentTheme()?.id).toEqual('sap_horizon');
+        });
+
+        it('should return false for invalid theme IDs without changing current theme', () => {
+            const config = new BaseThemingConfig();
+            config.defaultTheme = 'sap_horizon_dark';
+            service = setupService(config);
+            expect(service.setTheme('nonexistent_theme')).toBe(false);
+            expect(service.getCurrentTheme()?.id).toEqual('sap_horizon_dark');
+        });
+    });
 });

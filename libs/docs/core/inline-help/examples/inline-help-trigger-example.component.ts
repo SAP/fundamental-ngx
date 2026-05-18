@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Overlay, ScrollStrategy } from '@angular/cdk/overlay';
+import { Component, inject } from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
 
@@ -7,4 +8,7 @@ import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
     templateUrl: './inline-help-trigger-example.component.html',
     imports: [ButtonComponent, InlineHelpModule]
 })
-export class InlineHelpTriggerExampleComponent {}
+export class InlineHelpTriggerExampleComponent {
+    /** CDK scroll strategy that closes the overlay when an ancestor scrolls. */
+    readonly closeOnScroll: ScrollStrategy = inject(Overlay).scrollStrategies.close();
+}

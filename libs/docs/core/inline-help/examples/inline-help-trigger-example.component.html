@@ -7,3 +7,23 @@
 >
     Click on me, to display inline help
 </button>
+
+<div class="sap-margin-top-medium">
+    <p class="fd-margin-bottom--xs">
+        <strong>Scroll Strategy:</strong> open the help, then scroll the box below — the overlay closes because
+        <code>[scrollStrategy]</code> is bound to <code>closeOnScroll</code>.
+    </p>
+    <div style="height: 120px; overflow: auto; border: 1px solid var(--sapList_BorderColor); padding: 1rem">
+        <div style="height: 400px">
+            <button
+                role="button"
+                fd-button
+                fd-inline-help="Closes when you scroll this container"
+                [triggers]="['click']"
+                [scrollStrategy]="closeOnScroll"
+            >
+                Open me, then scroll
+            </button>
+        </div>
+    </div>
+</div>
