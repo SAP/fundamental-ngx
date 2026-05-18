@@ -1,3 +1,14 @@
+## 0.62.3 (2026-05-18)
+
+### 🚀 Features
+
+- **mcp:** MCP server evaluation part 2 ([#14208](https://github.com/SAP/fundamental-ngx/pull/14208), [#1](https://github.com/SAP/fundamental-ngx/issues/1), [#2](https://github.com/SAP/fundamental-ngx/issues/2), [#3](https://github.com/SAP/fundamental-ngx/issues/3), [#4](https://github.com/SAP/fundamental-ngx/issues/4), [#5](https://github.com/SAP/fundamental-ngx/issues/5), [#6](https://github.com/SAP/fundamental-ngx/issues/6), [#7](https://github.com/SAP/fundamental-ngx/issues/7))
+- MCP server evaluation - part 1 ([#14178](https://github.com/SAP/fundamental-ngx/pull/14178), [#14159](https://github.com/SAP/fundamental-ngx/issues/14159))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
 ## 0.62.3-rc.5 (2026-05-18)
 
 This was a version bump only for mcp-server to align it with other projects, there were no code changes.

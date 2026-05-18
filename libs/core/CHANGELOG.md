@@ -1,3 +1,19 @@
+## 0.62.3 (2026-05-18)
+
+### 🚀 Features
+
+- MCP server evaluation - part 1 ([#14178](https://github.com/SAP/fundamental-ngx/pull/14178), [#14159](https://github.com/SAP/fundamental-ngx/issues/14159))
+
+### 🩹 Fixes
+
+- **core:** forward scrollStrategy through fd-menu and fd-inline-help ([#14218](https://github.com/SAP/fundamental-ngx/pull/14218))
+- **core:** use a ResizeObserver to update illustration size on tab switch ([#14209](https://github.com/SAP/fundamental-ngx/pull/14209))
+
+### ❤️ Thank You
+
+- deno
+- Maria Dineva @MariaIDineva
+
 ## 0.62.3-rc.5 (2026-05-18)
 
 ### 🩹 Fixes

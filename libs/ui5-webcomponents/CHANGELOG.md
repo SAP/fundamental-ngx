@@ -1,3 +1,13 @@
+## 0.62.3 (2026-05-18)
+
+### 🚀 Features
+
+- MCP server evaluation - part 1 ([#14178](https://github.com/SAP/fundamental-ngx/pull/14178), [#14159](https://github.com/SAP/fundamental-ngx/issues/14159))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
 ## 0.62.3-rc.5 (2026-05-18)
 
 This was a version bump only for ui5-webcomponents to align it with other projects, there were no code changes.
