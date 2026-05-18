@@ -6,5 +6,5 @@
     "lib": {
         "entryFile": "./index.ts"
     },
-    "allowedNonPeerDependencies": ["focus-trap", "lodash-es", "fast-equals", "compare-versions"]
+    "allowedNonPeerDependencies": ["focus-trap", "lodash-es", "fast-equals", "compare-versions", "@fundamental-ngx/core"]
 }

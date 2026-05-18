@@ -105,9 +105,6 @@ export class ToolbarDocsComponent {
         return [current, ...fetched];
     });
 
-    /** Initial theme to apply */
-    protected readonly initialTheme = 'sap_horizon';
-
     /** Current theme name for display */
     protected readonly currentThemeName = computed(() => {
         const theme = this._currentTheme();
@@ -117,7 +114,7 @@ export class ToolbarDocsComponent {
     /** Current theme ID for selected state tracking */
     protected readonly currentThemeId = computed(() => {
         const theme = this._currentTheme();
-        return theme?.id ?? this.initialTheme;
+        return theme?.id ?? this._themingService.config.defaultTheme;
     });
 
     /** Current content density for display */
@@ -170,7 +167,6 @@ export class ToolbarDocsComponent {
 
         // Initialize themes from theming service (readonly after construction)
         this.themes = this._themingService.getThemes();
-        this._themingService.setTheme(this.initialTheme);
 
         // Set initial English translation once when translations are loaded
         effect(() => {
