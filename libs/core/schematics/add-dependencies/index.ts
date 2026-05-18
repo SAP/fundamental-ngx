@@ -19,6 +19,17 @@ const desiredVersions = {
         process.env.FD_ENV_VERSION_PLACEHOLDER || libraryPackageJson.peerDependencies['@fundamental-ngx/cdk']
 };
 
+// Sibling fundamental-ngx packages that share core's version. Only upgraded if already installed.
+const siblingPackages = [
+    '@fundamental-ngx/platform',
+    '@fundamental-ngx/datetime-adapter',
+    '@fundamental-ngx/ui5-webcomponents',
+    '@fundamental-ngx/ui5-webcomponents-base',
+    '@fundamental-ngx/ui5-webcomponents-fiori',
+    '@fundamental-ngx/ui5-webcomponents-ai'
+];
+const siblingVersion = process.env.FD_ENV_VERSION_PLACEHOLDER || libraryPackageJson.version;
+
 /**
  * Adds dependencies to the project
  * @param options
@@ -131,6 +142,25 @@ function addExternalLibraries(): Rule {
                 },
                 context
             );
+        }
+
+        // Upgrade sibling fundamental-ngx packages only if already installed.
+        // Avoids forcing them on consumers who only depend on core.
+        for (const name of siblingPackages) {
+            const existing = getPackageJsonDependency(tree, name);
+            if (existing && compare(existing.version, siblingVersion, '<')) {
+                addPackageDependency(
+                    tree,
+                    {
+                        type: existing.type,
+                        // Will be replaced with the real version during sync-version script run
+                        version: siblingVersion,
+                        name,
+                        overwrite: true
+                    },
+                    context
+                );
+            }
         }
 
         return tree;
