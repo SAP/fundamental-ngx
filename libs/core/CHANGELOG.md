@@ -1,3 +1,13 @@
+## 0.62.3-rc.5 (2026-05-18)
+
+### 🩹 Fixes
+
+- **core:** forward scrollStrategy through fd-menu and fd-inline-help ([#14218](https://github.com/SAP/fundamental-ngx/pull/14218))
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.62.3-rc.4 (2026-05-18)
 
 This was a version bump only for core to align it with other projects, there were no code changes.
