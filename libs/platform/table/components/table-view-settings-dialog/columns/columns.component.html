@@ -7,13 +7,13 @@
     <fd-toolbar>
         <fdp-search-field
             [placeholder]="('platformTable.P13ColumnsDialogSearchPlaceholder' | fdTranslate)()"
-            [inputText]="_searchQuery()"
+            [inputText]="searchQuery()"
             [suggestions]="[]"
-            (inputChange)="_searchInputChange($event)"
+            (inputChange)="searchInputChange($event)"
         ></fdp-search-field>
         <fd-toolbar-spacer></fd-toolbar-spacer>
-        <button fd-toolbar-item fd-button fdType="transparent" (click)="_toggleShowAll()">
-            @if (_showAllItems() === true) {
+        <button fd-toolbar-item fd-button fdType="transparent" (click)="toggleShowAll()">
+            @if (showAllItems() === true) {
                 {{ ('platformTable.P13ColumnsDialogsShowSelected' | fdTranslate)() }}
             } @else {
                 {{ ('platformTable.P13ColumnsDialogShowAll' | fdTranslate)() }}
@@ -23,13 +23,13 @@
     <ul fd-list [selection]="true" aria-multiselectable="true" [attr.aria-labelledby]="columnsHeaderId">
         <li
             fd-list-item
-            (focus)="_setActiveColumn(null)"
-            [selected]="_selectedColumnsCount() === _selectableColumns().length"
+            (focus)="setActiveColumn(null)"
+            [selected]="selectedColumnsCount() === selectableColumns().length"
         >
             <fd-checkbox
-                [ngModel]="_selectedColumnsCount() === _selectableColumns().length"
-                (ngModelChange)="_toggleSelectAll($event)"
-                [disabled]="_selectAllDisabled"
+                [ngModel]="selectedColumnsCount() === selectableColumns().length"
+                (ngModelChange)="toggleSelectAll($event)"
+                [disabled]="selectAllDisabled"
             ></fd-checkbox>
             <span fd-list-title>
                 {{
@@ -37,74 +37,74 @@
                         'platformTable.P13ColumnsDialogSelectAll'
                         | fdTranslate
                             : {
-                                  selectedColumnsCount: _selectedColumnsCount(),
-                                  selectableColumnsCount: _selectableColumns().length
+                                  selectedColumnsCount: selectedColumnsCount(),
+                                  selectableColumnsCount: selectableColumns().length
                               }
                     )()
                 }}
             </span>
         </li>
-        @for (item of _filteredColumns(); track _filterByColumnKey($index, item)) {
+        @for (item of filteredColumns(); track filterByColumnKey($index, item)) {
             <li
                 fd-list-item
                 [preventClick]="true"
                 [class.fd-select-item--selected]="item.selected"
                 [selected]="item.selected"
                 [class.fd-select-item--active]="item.active"
-                (focus)="_setActiveColumn(item)"
+                (focus)="setActiveColumn(item)"
             >
-                <fd-checkbox [(ngModel)]="item.selected" (ngModelChange)="_onToggleColumn()"></fd-checkbox>
+                <fd-checkbox [(ngModel)]="item.selected" (ngModelChange)="onToggleColumn()"></fd-checkbox>
                 <span fd-list-title>
                     {{ item.column.label }}
                 </span>
 
                 <!-- Active Button Movement -->
-                @if (_isReorderColumnButtonShowable(item)) {
+                @if (isReorderColumnButtonShowable(item)) {
                     <button
                         fd-button
                         fdType="transparent"
                         glyph="collapse-group"
-                        [disabled]="_moveUpDisabled()"
+                        [disabled]="moveUpDisabled()"
                         [attr.aria-label]="('platformTable.P13ColumnsDialogMoveToTopBtn' | fdTranslate)()"
                         [title]="('platformTable.P13ColumnsDialogMoveToTopBtn' | fdTranslate)()"
-                        (click)="_moveActiveToTop($event)"
-                        (keydown.enter)="_moveActiveToTop($event)"
+                        (click)="moveActiveToTop($event)"
+                        (keydown.enter)="moveActiveToTop($event)"
                     ></button>
                 }
-                @if (_isReorderColumnButtonShowable(item)) {
+                @if (isReorderColumnButtonShowable(item)) {
                     <button
                         fd-button
                         fdType="transparent"
                         glyph="slim-arrow-up"
-                        [disabled]="_moveUpDisabled()"
+                        [disabled]="moveUpDisabled()"
                         [attr.aria-label]="('platformTable.P13ColumnsDialogMoveUpBtn' | fdTranslate)()"
                         [title]="('platformTable.P13ColumnsDialogMoveUpBtn' | fdTranslate)()"
-                        (click)="_moveActiveUp($event)"
-                        (keydown.enter)="_moveActiveUp($event)"
+                        (click)="moveActiveUp($event)"
+                        (keydown.enter)="moveActiveUp($event)"
                     ></button>
                 }
-                @if (_isReorderColumnButtonShowable(item)) {
+                @if (isReorderColumnButtonShowable(item)) {
                     <button
                         fd-button
                         fdType="transparent"
                         glyph="slim-arrow-down"
-                        [disabled]="_moveDownDisabled()"
+                        [disabled]="moveDownDisabled()"
                         [attr.aria-label]="('platformTable.P13ColumnsDialogMoveDownBtn' | fdTranslate)()"
                         [title]="('platformTable.P13ColumnsDialogMoveDownBtn' | fdTranslate)()"
-                        (click)="_moveActiveDown($event)"
-                        (keydown.enter)="_moveActiveDown($event)"
+                        (click)="moveActiveDown($event)"
+                        (keydown.enter)="moveActiveDown($event)"
                     ></button>
                 }
-                @if (_isReorderColumnButtonShowable(item)) {
+                @if (isReorderColumnButtonShowable(item)) {
                     <button
                         fd-button
                         fdType="transparent"
                         glyph="expand-group"
-                        [disabled]="_moveDownDisabled()"
+                        [disabled]="moveDownDisabled()"
                         [attr.aria-label]="('platformTable.P13ColumnsDialogMoveToBottomBtn' | fdTranslate)()"
                         [title]="('platformTable.P13ColumnsDialogMoveToBottomBtn' | fdTranslate)()"
-                        (click)="_moveActiveToBottom($event)"
-                        (keydown.enter)="_moveActiveToBottom($event)"
+                        (click)="moveActiveToBottom($event)"
+                        (keydown.enter)="moveActiveToBottom($event)"
                     ></button>
                 }
             </li>

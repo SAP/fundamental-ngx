@@ -8,7 +8,6 @@ export interface FdpHeaderCellDefContext<T = any> {
 /** Column header container. */
 // eslint-disable-next-line @angular-eslint/directive-selector
 @Directive({ selector: 'fdp-table-header', standalone: true })
-// eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class FdpTableHeader {}
 
 /**
@@ -16,7 +15,6 @@ export class FdpTableHeader {}
  * Captures the template of a column's data row cell as well as cell-specific properties.
  */
 @Directive({ selector: '[fdpHeaderCellDef]', standalone: true })
-// eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class FdpHeaderCellDef<T = any> {
     /** @hidden */
     constructor(public templateRef: TemplateRef<FdpCellDefContext<T>>) {}

@@ -35,7 +35,7 @@ import {
 export const dialogConfig: DialogConfig = {
     responsivePadding: false,
     verticalPadding: false,
-    width: '368px'
+    width: 'auto'
 };
 
 export interface CombinedTableDialogData {

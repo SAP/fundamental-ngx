@@ -187,18 +187,10 @@ export class SettingsDialogComponent implements Resettable {
         if (this.activeTab() === ActiveTab.COLUMNS && this.columnsData()) {
             const initialColumns = this._initialColumns();
             if (initialColumns) {
-                // Reset columns to initial state
-                this.columnsData.update((data) => {
-                    if (!data) {
-                        return data;
-                    }
-                    return {
-                        ...data,
-                        columns: data.columns.map((col) => ({
-                            ...col,
-                            visible: initialColumns.visibleColumns.includes(col.key)
-                        }))
-                    };
+                // Reset columns to initial state (both order and visibility)
+                this.columnsData.set({
+                    ...this.columnsData()!,
+                    columns: initialColumns.columns
                 });
             }
         }

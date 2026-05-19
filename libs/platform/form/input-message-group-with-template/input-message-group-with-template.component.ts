@@ -23,7 +23,6 @@ import {
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [PopoverComponent, PopoverControlComponent, NgTemplateOutlet, PopoverBodyComponent]
 })
-// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class InputMessageGroupWithTemplate extends FormInputMessageGroupComponent {
     /**
      * To allow user to determine what event he wants to trigger the messages to show

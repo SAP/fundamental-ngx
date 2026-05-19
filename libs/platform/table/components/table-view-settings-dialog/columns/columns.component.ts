@@ -4,7 +4,6 @@ import {
     computed,
     effect,
     input,
-    OnInit,
     output,
     signal,
     ViewEncapsulation
@@ -65,7 +64,7 @@ let columnsHeaderUniqueId = 0;
         FdTranslatePipe
     ]
 })
-export class ColumnsComponent implements OnInit {
+export class ColumnsComponent {
     /** Input data for columns configuration */
     columnsData = input<SettingsColumnsDialogData>();
 
@@ -81,29 +80,29 @@ export class ColumnsComponent implements OnInit {
     /** Event emitter for reset availability changes */
     resetAvailabilityChange = output<boolean>();
 
-    /** All available columns for interacting */
-    _selectableColumns = signal<SelectableColumn[]>([]);
+    /** @hidden All available columns for interacting */
+    protected selectableColumns = signal<SelectableColumn[]>([]);
 
-    /** Search Query */
-    _searchQuery = signal<string>(INITIAL_SEARCH_TEXT);
+    /** @hidden Search Query */
+    protected searchQuery = signal<string>(INITIAL_SEARCH_TEXT);
 
-    /** Show All flag */
-    _showAllItems = signal<boolean>(INITIAL_SHOW_ALL_ITEMS);
+    /** @hidden Show All flag */
+    protected showAllItems = signal<boolean>(INITIAL_SHOW_ALL_ITEMS);
 
-    /** Selected columns count */
-    _selectedColumnsCount = signal<number>(0);
+    /** @hidden Selected columns count */
+    protected selectedColumnsCount = signal<number>(0);
 
-    /** Flag to track disabled state for move-up button */
-    _moveUpDisabled = signal<boolean>(true);
+    /** @hidden Flag to track disabled state for move-up button */
+    protected moveUpDisabled = signal<boolean>(true);
 
-    /** Flag to track disabled state for move-down button */
-    _moveDownDisabled = signal<boolean>(true);
+    /** @hidden Flag to track disabled state for move-down button */
+    protected moveDownDisabled = signal<boolean>(true);
 
-    /** filtered columns that are rendered in the list */
-    _filteredColumns = computed(() => {
-        const searchQuery = this._searchQuery();
-        const showAll = this._showAllItems();
-        return this._selectableColumns().filter((item) => {
+    /** @hidden filtered columns that are rendered in the list */
+    protected filteredColumns = computed(() => {
+        const searchQuery = this.searchQuery();
+        const showAll = this.showAllItems();
+        return this.selectableColumns().filter((item) => {
             const matchesSearchQuery = item.column.label.toLocaleLowerCase().includes(searchQuery.toLocaleLowerCase());
             const matchesShowAll = showAll || item.selected;
             return matchesSearchQuery && matchesShowAll;
@@ -111,86 +110,88 @@ export class ColumnsComponent implements OnInit {
     });
 
     /** @hidden */
-    columnsHeaderId = `fdp-table-columns-header-${columnsHeaderUniqueId++}`;
+    protected columnsHeaderId = `fdp-table-columns-header-${columnsHeaderUniqueId++}`;
 
     /** @hidden */
-    get _selectAllDisabled(): boolean {
-        return !this._showAllItems() || this._filteredColumns().length === 0;
+    protected get selectAllDisabled(): boolean {
+        return !this.showAllItems() || this.filteredColumns().length === 0;
     }
+
+    /** @hidden Track the last data reference to detect real changes */
+    private _lastColumnsDataRef: SettingsColumnsDialogData | undefined;
 
     /** @hidden */
     constructor() {
         effect(() => {
             // Recalculate button states when filtered columns change
-            this._filteredColumns();
+            this.filteredColumns();
             this._calculateMovementButtonsState();
+        });
+
+        effect(() => {
+            // React to columnsData input changes (e.g., from reset button)
+            // Only reinitialize if the data reference actually changed
+            const data = this.columnsData();
+            if (data && data !== this._lastColumnsDataRef) {
+                this._lastColumnsDataRef = data;
+                this._initiateColumns(data);
+                // Only compare if initialColumns is actually set
+                if (this.initialColumns()) {
+                    this._compareInitialColumns();
+                }
+            }
         });
     }
 
     /** @hidden */
-    ngOnInit(): void {
-        const data = this.columnsData();
-        if (data) {
-            this._initiateColumns(data);
-        }
-
-        this._compareInitialColumns();
-    }
-
-    /** @hidden */
-    _toggleSelectAll(selectAll: boolean): void {
-        this._selectableColumns.update((columns) => {
+    protected toggleSelectAll(selectAll: boolean): void {
+        this.selectableColumns.update((columns) => {
             columns.forEach((column) => (column.selected = selectAll));
             return [...columns];
         });
-        this._onToggleColumn();
+        this.onToggleColumn();
     }
 
     /** @hidden */
-    _onToggleColumn(): void {
+    protected onToggleColumn(): void {
         this._countSelectedColumns();
         this._onModelChange();
     }
 
     /** @hidden */
-    _searchInputChange({ text }: SearchInput): void {
-        this._searchQuery.set(text || '');
+    protected searchInputChange({ text }: SearchInput): void {
+        this.searchQuery.set(text || '');
     }
 
     /** @hidden */
-    _toggleShowAll(): void {
-        this._showAllItems.update((val) => !val);
+    protected toggleShowAll(): void {
+        this.showAllItems.update((val) => !val);
     }
 
     /** @hidden */
-    _setActiveColumn(column: SelectableColumn | null): void {
-        this._selectableColumns.update((columns) => {
-            columns.forEach((_column) => {
-                _column.active = _column === column;
-            });
-            return [...columns];
-        });
+    protected setActiveColumn(column: SelectableColumn | null): void {
+        this.selectableColumns.update((columns) => columns.map((col) => ({ ...col, active: col === column })));
 
         this._calculateMovementButtonsState();
     }
 
     /** @hidden */
-    _moveActiveToTop(event: Event): void {
+    protected moveActiveToTop(event: Event): void {
         event.stopPropagation();
         event.preventDefault();
         this._moveColumnInFilteredListByIndex(this._getActiveColumnIndexInFilteredList(), 0);
     }
 
     /** @hidden */
-    _moveActiveToBottom(event: Event): void {
+    protected moveActiveToBottom(event: Event): void {
         event.stopPropagation();
         event.preventDefault();
-        const filteredColumns = this._filteredColumns();
+        const filteredColumns = this.filteredColumns();
         this._moveColumnInFilteredListByIndex(this._getActiveColumnIndexInFilteredList(), filteredColumns.length - 1);
     }
 
     /** @hidden */
-    _moveActiveUp(event: Event): void {
+    protected moveActiveUp(event: Event): void {
         event.stopPropagation();
         event.preventDefault();
         const activeColumnIndex = this._getActiveColumnIndexInFilteredList();
@@ -198,13 +199,13 @@ export class ColumnsComponent implements OnInit {
 
         // keep the focus back to the move up button as it gets lost on click
         setTimeout(() => {
-            const moveUpBtn = event.target as HTMLElement;
-            moveUpBtn.focus();
+            const moveUpBtn = event.target as HTMLElement | null;
+            moveUpBtn?.focus();
         }, 0);
     }
 
     /** @hidden */
-    _moveActiveDown(event: Event): void {
+    protected moveActiveDown(event: Event): void {
         event.stopPropagation();
         event.preventDefault();
         const activeColumnIndex = this._getActiveColumnIndexInFilteredList();
@@ -212,12 +213,12 @@ export class ColumnsComponent implements OnInit {
     }
 
     /** @hidden */
-    _isReorderColumnButtonShowable(item: SelectableColumn): boolean {
+    protected isReorderColumnButtonShowable(item: SelectableColumn): boolean {
         return item.active && item.selected;
     }
 
     /** @hidden */
-    _filterByColumnKey(index: number, item: SelectableColumn): string {
+    protected filterByColumnKey(index: number, item: SelectableColumn): string {
         return item?.column.key;
     }
 
@@ -227,7 +228,7 @@ export class ColumnsComponent implements OnInit {
      */
     private _initiateColumns(columnsData: SettingsColumnsDialogData): void {
         const allColumns = columnsData.columns || [];
-        this._selectableColumns.set(
+        this.selectableColumns.set(
             allColumns.map(
                 (column, index): SelectableColumn => ({
                     column,
@@ -238,8 +239,8 @@ export class ColumnsComponent implements OnInit {
         );
 
         this._countSelectedColumns();
-        this._searchQuery.set(INITIAL_SEARCH_TEXT);
-        this._showAllItems.set(INITIAL_SHOW_ALL_ITEMS);
+        this.searchQuery.set(INITIAL_SEARCH_TEXT);
+        this.showAllItems.set(INITIAL_SHOW_ALL_ITEMS);
     }
 
     /** @hidden */
@@ -254,12 +255,12 @@ export class ColumnsComponent implements OnInit {
 
     /** @hidden */
     private _getActiveColumnIndexInFilteredList(): number {
-        return this._filteredColumns().findIndex(({ active }) => active);
+        return this.filteredColumns().findIndex(({ active }) => active);
     }
 
     /** @hidden */
     private _moveColumnInFilteredListByIndex(from: number, to: number): void {
-        const filteredColumns = this._filteredColumns();
+        const filteredColumns = this.filteredColumns();
         const { movedItem, replacedItem } = this._moveElementInTheListByIndex(filteredColumns, from, to);
         /**
          * need to reflect analogical movement in the original list
@@ -276,7 +277,7 @@ export class ColumnsComponent implements OnInit {
      * Move column in selectable list.
      */
     private _moveColumnInSelectableList(itemToMove: SelectableColumn, targetItem: SelectableColumn): void {
-        this._selectableColumns.update((columns) => {
+        this.selectableColumns.update((columns) => {
             this._moveElementInTheListByIndex(columns, columns.indexOf(itemToMove), columns.indexOf(targetItem));
             return [...columns];
         });
@@ -307,15 +308,15 @@ export class ColumnsComponent implements OnInit {
 
     /** @hidden */
     private _countSelectedColumns(): void {
-        this._selectedColumnsCount.set(this._selectableColumns().filter(({ selected }) => selected).length);
+        this.selectedColumnsCount.set(this.selectableColumns().filter(({ selected }) => selected).length);
     }
 
     /** @hidden */
     private _calculateMovementButtonsState(): void {
         const activeIndex = this._getActiveColumnIndexInFilteredList();
-        const filteredColumns = this._filteredColumns();
-        this._moveUpDisabled.set(activeIndex < 1);
-        this._moveDownDisabled.set(activeIndex < 0 || activeIndex >= filteredColumns.length - 1);
+        const filteredColumns = this.filteredColumns();
+        this.moveUpDisabled.set(activeIndex < 1);
+        this.moveDownDisabled.set(activeIndex < 0 || activeIndex >= filteredColumns.length - 1);
     }
 
     /**
@@ -323,18 +324,9 @@ export class ColumnsComponent implements OnInit {
      * @hidden
      */
     private _onModelChange(): void {
-        const initialColumns = this.initialColumns();
-        if (!initialColumns) {
-            return;
-        }
-
-        const selectableColumns = this._selectableColumns();
+        const selectableColumns = this.selectableColumns();
         const currentVisibleColumns = this._getVisibleColumnsFromSelectedColumns(selectableColumns);
         const currentColumnOrder = this._getColumnOrder(selectableColumns);
-
-        const isInitialDiffers =
-            !shallowEqual(currentVisibleColumns, initialColumns.visibleColumns) ||
-            !shallowEqual(currentColumnOrder, initialColumns.columnOrder);
 
         // Build the full columns array with updated order and visibility
         const reorderedColumns = selectableColumns.map((selectable) => ({
@@ -349,7 +341,15 @@ export class ColumnsComponent implements OnInit {
         };
 
         this.columnsChange.emit(result);
-        this.resetAvailabilityChange.emit(isInitialDiffers);
+
+        // Only emit reset availability if initialColumns is set
+        const initialColumns = this.initialColumns();
+        if (initialColumns) {
+            const isInitialDiffers =
+                !shallowEqual(currentVisibleColumns, initialColumns.visibleColumns) ||
+                !shallowEqual(currentColumnOrder, initialColumns.columnOrder);
+            this.resetAvailabilityChange.emit(isInitialDiffers);
+        }
     }
 
     /**
@@ -357,7 +357,7 @@ export class ColumnsComponent implements OnInit {
      * @hidden
      */
     private _compareInitialColumns(): void {
-        const selectableColumns = this._selectableColumns();
+        const selectableColumns = this.selectableColumns();
         const reorderedColumns = selectableColumns.map((selectable) => ({
             ...selectable.column,
             visible: selectable.selected
