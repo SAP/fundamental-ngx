@@ -17,6 +17,7 @@ import { InlineHelpTriggerExampleComponent } from './examples/inline-help-trigge
 const inlineHelpTs = 'inline-help-example.component.ts';
 const inlineHelpSrc = 'inline-help-example.component.html';
 const inlineHelpTriggerHtml = 'inline-help-trigger-example.component.html';
+const inlineHelpTriggerTs = 'inline-help-trigger-example.component.ts';
 const inlineHelpStylesTs = 'inline-help-styled-example.component.ts';
 const inlineHelpStylesHtml = 'inline-help-styled-example.component.html';
 const inlineHelpTemplateHtml = 'inline-help-template-example/inline-help-template-example.component.html';
@@ -56,6 +57,12 @@ export class InlineHelpDocsComponent {
             language: 'html',
             code: getAssetFromModuleAssets(inlineHelpTriggerHtml),
             fileName: 'inline-help-trigger-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(inlineHelpTriggerTs),
+            fileName: 'inline-help-trigger-example',
+            component: 'InlineHelpTriggerExampleComponent'
         }
     ];
 

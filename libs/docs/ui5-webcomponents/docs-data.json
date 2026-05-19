@@ -79,6 +79,10 @@
             "name": "i18n"
         },
         {
+            "url": "ui5-webcomponents/theming",
+            "name": "Theming"
+        },
+        {
             "url": "ui5-webcomponents/date-picker",
             "name": "Date Picker"
         },

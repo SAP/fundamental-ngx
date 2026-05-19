@@ -10,7 +10,8 @@
         "useDefineForClassFields": false,
         "moduleResolution": "bundler",
         "paths": {
-            "@fundamental-ngx/i18n": ["dist/libs/i18n"]
+            "@fundamental-ngx/i18n": ["dist/libs/i18n"],
+            "@fundamental-ngx/core/theming": ["dist/libs/core/theming"]
         }
     },
     "angularCompilerOptions": {

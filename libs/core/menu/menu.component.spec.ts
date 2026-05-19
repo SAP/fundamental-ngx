@@ -1,6 +1,9 @@
 import { ComponentFixture, fakeAsync, flush, TestBed, tick, waitForAsync } from '@angular/core/testing';
 
+import { Overlay, ScrollStrategy } from '@angular/cdk/overlay';
 import { Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { By } from '@angular/platform-browser';
+import { PopoverService } from '@fundamental-ngx/core/popover';
 import { MenuTitleDirective } from './directives/menu-title.directive';
 import { MenuTriggerDirective } from './directives/menu-trigger.directive';
 import { MenuInteractiveComponent } from './menu-interactive.component';
@@ -568,5 +571,75 @@ describe('MenuComponent advanced options', () => {
             expect(menu.appendTo()).toBeTruthy();
             expect(menu.appendTo()).toBe(testComponent.appendTarget.nativeElement);
         });
+    });
+});
+
+describe('MenuComponent scrollStrategy (regression #14210)', () => {
+    @Component({
+        selector: 'fd-menu-scroll-strategy-test',
+        template: `
+            <fd-menu #menu [config]="menuConfig" [scrollStrategy]="directScrollStrategy">
+                <li fd-menu-item>
+                    <a href="#" fd-menu-interactive>
+                        <span fd-menu-title>Option 1</span>
+                    </a>
+                </li>
+            </fd-menu>
+            <button #trigger [fdMenuTrigger]="menu">Open Menu</button>
+        `,
+        imports: [MenuComponent, MenuItemComponent, MenuInteractiveComponent, MenuTitleDirective, MenuTriggerDirective]
+    })
+    class TestMenuScrollStrategyComponent {
+        @ViewChild(MenuComponent) menu: MenuComponent;
+
+        menuConfig: { scrollStrategy?: ScrollStrategy | null } = {};
+        directScrollStrategy: ScrollStrategy | null = null;
+    }
+
+    let fixture: ComponentFixture<TestMenuScrollStrategyComponent>;
+    let testComponent: TestMenuScrollStrategyComponent;
+    let popoverService: PopoverService;
+    let overlay: Overlay;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [TestMenuScrollStrategyComponent]
+        }).compileComponents();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(TestMenuScrollStrategyComponent);
+        testComponent = fixture.componentInstance;
+        fixture.detectChanges();
+
+        const menuDebugEl = fixture.debugElement.query(By.directive(MenuComponent));
+        popoverService = menuDebugEl.injector.get(PopoverService);
+        overlay = TestBed.inject(Overlay);
+    });
+
+    it('should forward config.scrollStrategy to the popover service', () => {
+        const closeStrategy = overlay.scrollStrategies.close();
+        testComponent.menuConfig = { scrollStrategy: closeStrategy };
+        fixture.detectChanges();
+
+        expect(popoverService.scrollStrategy()).toBe(closeStrategy);
+    });
+
+    it('should forward direct [scrollStrategy] input to the popover service', () => {
+        const closeStrategy = overlay.scrollStrategies.close();
+        testComponent.directScrollStrategy = closeStrategy;
+        fixture.detectChanges();
+
+        expect(popoverService.scrollStrategy()).toBe(closeStrategy);
+    });
+
+    it('should let the direct [scrollStrategy] input win over config.scrollStrategy', () => {
+        const configStrategy = overlay.scrollStrategies.noop();
+        const directStrategy = overlay.scrollStrategies.close();
+        testComponent.menuConfig = { scrollStrategy: configStrategy };
+        testComponent.directScrollStrategy = directStrategy;
+        fixture.detectChanges();
+
+        expect(popoverService.scrollStrategy()).toBe(directStrategy);
     });
 });

@@ -1,4 +1,5 @@
-import { Component, signal } from '@angular/core';
+import { Overlay, ScrollStrategy } from '@angular/cdk/overlay';
+import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
@@ -12,6 +13,8 @@ import {
 } from '@fundamental-ngx/core/menu';
 import { SelectModule } from '@fundamental-ngx/core/select';
 import { PopoverFillMode } from '@fundamental-ngx/core/shared';
+
+type ScrollStrategyOption = 'reposition' | 'close' | 'noop';
 
 type PlacementOption =
     | 'top'
@@ -49,6 +52,14 @@ type PlacementOption =
                 </fd-select>
             </div>
             <fd-checkbox label="fixedPosition" [(ngModel)]="fixedPosition"></fd-checkbox>
+            <div>
+                <label fd-form-label for="scrollStrategy">Scroll Strategy:</label>
+                <fd-select id="scrollStrategy" [(ngModel)]="scrollStrategyOption" style="width: 10rem;">
+                    @for (option of scrollStrategyOptions; track option) {
+                        <fd-option [value]="option">{{ option }}</fd-option>
+                    }
+                </fd-select>
+            </div>
         </div>
 
         <div class="sap-flex sap-flex--justify-center sap-padding-x-large sap-margin-y-large">
@@ -59,6 +70,7 @@ type PlacementOption =
                 [placement]="placement()"
                 [fillControlMode]="fillMode()"
                 [fixedPosition]="fixedPosition"
+                [scrollStrategy]="scrollStrategy()"
             >
                 <li fd-menu-item>
                     <a href="#" fd-menu-interactive>
@@ -152,4 +164,26 @@ export class MenuPlacementExampleComponent {
 
     /** Whether to prevent position flipping at viewport edges */
     fixedPosition = false;
+
+    /** Available CDK scroll strategies */
+    readonly scrollStrategyOptions: ScrollStrategyOption[] = ['reposition', 'close', 'noop'];
+
+    /** Current scroll strategy selection */
+    scrollStrategyOption = signal<ScrollStrategyOption>('reposition');
+
+    /** CDK ScrollStrategy resolved from the selected option */
+    readonly scrollStrategy = computed<ScrollStrategy>(() => {
+        const strategies = this._overlay.scrollStrategies;
+        switch (this.scrollStrategyOption()) {
+            case 'close':
+                return strategies.close();
+            case 'noop':
+                return strategies.noop();
+            case 'reposition':
+            default:
+                return strategies.reposition();
+        }
+    });
+
+    private readonly _overlay = inject(Overlay);
 }
