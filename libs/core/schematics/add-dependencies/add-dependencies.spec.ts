@@ -61,4 +61,52 @@ describe('ng-add schematic', () => {
             expect(e.message).toBe('Could not find @angular/core in package.json');
         }
     });
+
+    it('should upgrade sibling fundamental-ngx packages if already installed', async () => {
+        tree.overwrite(
+            'package.json',
+            JSON.stringify({
+                dependencies: {
+                    '@angular/core': '^17.0.4',
+                    '@fundamental-ngx/platform': '0.1.0',
+                    '@fundamental-ngx/btp': '0.1.0',
+                    '@fundamental-ngx/cx': '0.1.0',
+                    '@fundamental-ngx/datetime-adapter': '0.1.0',
+                    '@fundamental-ngx/moment-adapter': '0.1.0',
+                    '@fundamental-ngx/ui5-webcomponents': '0.1.0',
+                    '@fundamental-ngx/ui5-webcomponents-base': '0.1.0',
+                    '@fundamental-ngx/ui5-webcomponents-fiori': '0.1.0',
+                    '@fundamental-ngx/ui5-webcomponents-ai': '0.1.0'
+                }
+            })
+        );
+
+        tree = await runner.runExternalSchematic('schematics', 'add-dependencies', undefined, tree);
+        const { dependencies } = tree.readJson('package.json') as { dependencies: Record<string, string> };
+
+        expect(dependencies['@fundamental-ngx/platform']).toBe('3');
+        expect(dependencies['@fundamental-ngx/btp']).toBe('3');
+        expect(dependencies['@fundamental-ngx/cx']).toBe('3');
+        expect(dependencies['@fundamental-ngx/datetime-adapter']).toBe('3');
+        expect(dependencies['@fundamental-ngx/moment-adapter']).toBe('3');
+        expect(dependencies['@fundamental-ngx/ui5-webcomponents']).toBe('3');
+        expect(dependencies['@fundamental-ngx/ui5-webcomponents-base']).toBe('3');
+        expect(dependencies['@fundamental-ngx/ui5-webcomponents-fiori']).toBe('3');
+        expect(dependencies['@fundamental-ngx/ui5-webcomponents-ai']).toBe('3');
+    });
+
+    it('should not add sibling fundamental-ngx packages if not already installed', async () => {
+        tree = await runner.runExternalSchematic('schematics', 'add-dependencies', undefined, tree);
+        const { dependencies } = tree.readJson('package.json') as { dependencies: Record<string, string> };
+
+        expect(dependencies['@fundamental-ngx/platform']).toBeUndefined();
+        expect(dependencies['@fundamental-ngx/btp']).toBeUndefined();
+        expect(dependencies['@fundamental-ngx/cx']).toBeUndefined();
+        expect(dependencies['@fundamental-ngx/datetime-adapter']).toBeUndefined();
+        expect(dependencies['@fundamental-ngx/moment-adapter']).toBeUndefined();
+        expect(dependencies['@fundamental-ngx/ui5-webcomponents']).toBeUndefined();
+        expect(dependencies['@fundamental-ngx/ui5-webcomponents-base']).toBeUndefined();
+        expect(dependencies['@fundamental-ngx/ui5-webcomponents-fiori']).toBeUndefined();
+        expect(dependencies['@fundamental-ngx/ui5-webcomponents-ai']).toBeUndefined();
+    });
 });
