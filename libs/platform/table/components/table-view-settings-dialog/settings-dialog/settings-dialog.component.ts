@@ -44,7 +44,6 @@ import {
 
 @Component({
     selector: 'fdp-settings-dialog-settings',
-    standalone: true,
     providers: [{ provide: RESETTABLE_TOKEN, useExisting: forwardRef(() => SettingsDialogComponent) }],
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
@@ -114,6 +113,9 @@ export class SettingsDialogComponent implements Resettable {
     /** @hidden Initial columns configurations */
     _initialColumns = signal<Nullable<SettingsColumnsDialogResultData>>(null);
 
+    /** @hidden Current columns result from user changes */
+    private _currentColumnsResult: Nullable<SettingsColumnsDialogResultData> = null;
+
     /**
      * Constructor that initializes dialog data and sets initial values for sorting, filtering, grouping, and columns.
      */
@@ -149,7 +151,9 @@ export class SettingsDialogComponent implements Resettable {
             sortingData: this.sortingData(),
             filteringData: this.filteringData(),
             groupingData: this.groupingData(),
-            columnsData: this.columnsData()
+            columnsData: this._currentColumnsResult
+                ? { columns: this._currentColumnsResult.columns }
+                : this.columnsData()
         });
     }
 
@@ -192,6 +196,8 @@ export class SettingsDialogComponent implements Resettable {
                     ...this.columnsData()!,
                     columns: initialColumns.columns
                 });
+                // Clear the stored result
+                this._currentColumnsResult = null;
             }
         }
         this.isResetAvailable$.set(false);
@@ -237,12 +243,9 @@ export class SettingsDialogComponent implements Resettable {
      * @param event Updated columns data.
      */
     onColumnsChange(event: SettingsColumnsDialogResultData): void {
-        // Simply use the columns array from the event which is already
-        // in the correct order with correct visibility flags
-        this.columnsData.set({
-            ...this.columnsData()!,
-            columns: event.columns
-        });
+        // Store the current result without updating the columnsData signal
+        // This prevents triggering the child component's effect and resetting its state
+        this._currentColumnsResult = event;
     }
 
     /**

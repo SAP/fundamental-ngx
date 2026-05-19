@@ -70,8 +70,6 @@
                         (click)="moveActiveToTop($event)"
                         (keydown.enter)="moveActiveToTop($event)"
                     ></button>
-                }
-                @if (isReorderColumnButtonShowable(item)) {
                     <button
                         fd-button
                         fdType="transparent"
@@ -82,8 +80,6 @@
                         (click)="moveActiveUp($event)"
                         (keydown.enter)="moveActiveUp($event)"
                     ></button>
-                }
-                @if (isReorderColumnButtonShowable(item)) {
                     <button
                         fd-button
                         fdType="transparent"
@@ -94,8 +90,6 @@
                         (click)="moveActiveDown($event)"
                         (keydown.enter)="moveActiveDown($event)"
                     ></button>
-                }
-                @if (isReorderColumnButtonShowable(item)) {
                     <button
                         fd-button
                         fdType="transparent"

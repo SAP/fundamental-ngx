@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
 import { SortDirection, Table } from '@fundamental-ngx/platform/table-helpers';
 
-import { PlatformTableModule } from '../../../table.module';
 import {
     ActiveTab,
     FiltersDialogData,
@@ -27,14 +26,18 @@ describe('SettingsDialogComponent', () => {
     };
 
     beforeEach(waitForAsync(() => {
+        const mockTable = {
+            getTableColumns: () => [],
+            initialState: {}
+        };
         TestBed.configureTestingModule({
             providers: [
                 { provide: DialogRef, useValue: dialogRef },
-                { provide: Table, useValue: {} },
+                { provide: Table, useValue: mockTable },
                 DialogService,
                 DialogConfig
             ],
-            imports: [PlatformTableModule]
+            imports: [SettingsDialogComponent]
         }).compileComponents();
     }));
 
@@ -214,7 +217,8 @@ describe('SettingsDialogComponent', () => {
             expect(segmentedButton).toBeFalsy();
         });
 
-        it('should update columns data on columns change', () => {
+        it('should store columns changes without updating columnsData signal', () => {
+            const originalColumnsData = component.columnsData();
             const newColumnsData: SettingsColumnsDialogResultData = {
                 visibleColumns: ['name', 'price'],
                 columnOrder: ['name', 'price', 'description'],
@@ -226,7 +230,18 @@ describe('SettingsDialogComponent', () => {
             };
             component.onColumnsChange(newColumnsData);
 
-            expect(component.columnsData()?.columns).toEqual(newColumnsData.columns);
+            // columnsData signal should NOT be updated (to avoid triggering child effect)
+            expect(component.columnsData()).toBe(originalColumnsData);
+
+            // But confirm() should return the new data
+            const closeSpy = jest.spyOn(component['dialogRef'], 'close');
+            component.confirm();
+            expect(closeSpy).toHaveBeenCalledWith({
+                sortingData: null,
+                filteringData: null,
+                groupingData: null,
+                columnsData: { columns: newColumnsData.columns }
+            });
 
             // Check DOM - columns component should still be rendered
             const nativeElement = fixture.nativeElement as HTMLElement;

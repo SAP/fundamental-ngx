@@ -95,10 +95,19 @@ describe('ColumnsComponent', () => {
         });
 
         it('should toggle column selection', () => {
-            const selectableColumns = component.selectableColumns();
-            const initialSelected = selectableColumns[0].selected;
+            const initialSelected = component.selectableColumns()[0].selected;
 
-            selectableColumns[0].selected = !initialSelected;
+            // Toggle via the signal update pattern
+            component.selectableColumns.update((columns) =>
+                columns.map((col, idx) =>
+                    idx === 0
+                        ? {
+                              ...col,
+                              selected: !col.selected
+                          }
+                        : col
+                )
+            );
             component.onToggleColumn();
 
             expect(component.selectedColumnsCount()).toBe(initialSelected ? 2 : 4);
@@ -153,9 +162,11 @@ describe('ColumnsComponent', () => {
 
             component.setActiveColumn(targetColumn);
 
-            expect(selectableColumns[0].active).toBe(false);
-            expect(selectableColumns[1].active).toBe(true);
-            expect(selectableColumns[2].active).toBe(false);
+            // Get fresh reference after update
+            const updatedColumns = component.selectableColumns();
+            expect(updatedColumns[0].active).toBe(false);
+            expect(updatedColumns[1].active).toBe(true);
+            expect(updatedColumns[2].active).toBe(false);
         });
 
         it('should move active column up', () => {

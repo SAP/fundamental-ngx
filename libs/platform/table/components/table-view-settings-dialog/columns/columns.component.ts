@@ -89,15 +89,6 @@ export class ColumnsComponent {
     /** @hidden Show All flag */
     protected showAllItems = signal<boolean>(INITIAL_SHOW_ALL_ITEMS);
 
-    /** @hidden Selected columns count */
-    protected selectedColumnsCount = signal<number>(0);
-
-    /** @hidden Flag to track disabled state for move-up button */
-    protected moveUpDisabled = signal<boolean>(true);
-
-    /** @hidden Flag to track disabled state for move-down button */
-    protected moveDownDisabled = signal<boolean>(true);
-
     /** @hidden filtered columns that are rendered in the list */
     protected filteredColumns = computed(() => {
         const searchQuery = this.searchQuery();
@@ -107,6 +98,19 @@ export class ColumnsComponent {
             const matchesShowAll = showAll || item.selected;
             return matchesSearchQuery && matchesShowAll;
         });
+    });
+
+    /** @hidden Selected columns count */
+    protected selectedColumnsCount = computed(() => this.selectableColumns().filter(({ selected }) => selected).length);
+
+    /** @hidden Flag to track disabled state for move-up button */
+    protected moveUpDisabled = computed(() => this._activeColumnIndexInFilteredList() < 1);
+
+    /** @hidden Flag to track disabled state for move-down button */
+    protected moveDownDisabled = computed(() => {
+        const activeIndex = this._activeColumnIndexInFilteredList();
+        const filteredLength = this.filteredColumns().length;
+        return activeIndex < 0 || activeIndex >= filteredLength - 1;
     });
 
     /** @hidden */
@@ -120,14 +124,11 @@ export class ColumnsComponent {
     /** @hidden Track the last data reference to detect real changes */
     private _lastColumnsDataRef: SettingsColumnsDialogData | undefined;
 
+    /** @hidden Index of active column in filtered list */
+    private _activeColumnIndexInFilteredList = computed(() => this.filteredColumns().findIndex(({ active }) => active));
+
     /** @hidden */
     constructor() {
-        effect(() => {
-            // Recalculate button states when filtered columns change
-            this.filteredColumns();
-            this._calculateMovementButtonsState();
-        });
-
         effect(() => {
             // React to columnsData input changes (e.g., from reset button)
             // Only reinitialize if the data reference actually changed
@@ -145,16 +146,17 @@ export class ColumnsComponent {
 
     /** @hidden */
     protected toggleSelectAll(selectAll: boolean): void {
-        this.selectableColumns.update((columns) => {
-            columns.forEach((column) => (column.selected = selectAll));
-            return [...columns];
-        });
+        this.selectableColumns.update((columns) =>
+            columns.map((column) => ({
+                ...column,
+                selected: selectAll
+            }))
+        );
         this.onToggleColumn();
     }
 
     /** @hidden */
     protected onToggleColumn(): void {
-        this._countSelectedColumns();
         this._onModelChange();
     }
 
@@ -170,16 +172,19 @@ export class ColumnsComponent {
 
     /** @hidden */
     protected setActiveColumn(column: SelectableColumn | null): void {
-        this.selectableColumns.update((columns) => columns.map((col) => ({ ...col, active: col === column })));
-
-        this._calculateMovementButtonsState();
+        this.selectableColumns.update((columns) =>
+            columns.map((col) => ({
+                ...col,
+                active: col === column
+            }))
+        );
     }
 
     /** @hidden */
     protected moveActiveToTop(event: Event): void {
         event.stopPropagation();
         event.preventDefault();
-        this._moveColumnInFilteredListByIndex(this._getActiveColumnIndexInFilteredList(), 0);
+        this._moveColumnInFilteredListByIndex(this._activeColumnIndexInFilteredList(), 0);
     }
 
     /** @hidden */
@@ -187,14 +192,14 @@ export class ColumnsComponent {
         event.stopPropagation();
         event.preventDefault();
         const filteredColumns = this.filteredColumns();
-        this._moveColumnInFilteredListByIndex(this._getActiveColumnIndexInFilteredList(), filteredColumns.length - 1);
+        this._moveColumnInFilteredListByIndex(this._activeColumnIndexInFilteredList(), filteredColumns.length - 1);
     }
 
     /** @hidden */
     protected moveActiveUp(event: Event): void {
         event.stopPropagation();
         event.preventDefault();
-        const activeColumnIndex = this._getActiveColumnIndexInFilteredList();
+        const activeColumnIndex = this._activeColumnIndexInFilteredList();
         this._moveColumnInFilteredListByIndex(activeColumnIndex, activeColumnIndex - 1);
 
         // keep the focus back to the move up button as it gets lost on click
@@ -208,7 +213,7 @@ export class ColumnsComponent {
     protected moveActiveDown(event: Event): void {
         event.stopPropagation();
         event.preventDefault();
-        const activeColumnIndex = this._getActiveColumnIndexInFilteredList();
+        const activeColumnIndex = this._activeColumnIndexInFilteredList();
         this._moveColumnInFilteredListByIndex(activeColumnIndex, activeColumnIndex + 1);
     }
 
@@ -238,7 +243,6 @@ export class ColumnsComponent {
             )
         );
 
-        this._countSelectedColumns();
         this.searchQuery.set(INITIAL_SEARCH_TEXT);
         this.showAllItems.set(INITIAL_SHOW_ALL_ITEMS);
     }
@@ -254,11 +258,6 @@ export class ColumnsComponent {
     }
 
     /** @hidden */
-    private _getActiveColumnIndexInFilteredList(): number {
-        return this.filteredColumns().findIndex(({ active }) => active);
-    }
-
-    /** @hidden */
     private _moveColumnInFilteredListByIndex(from: number, to: number): void {
         const filteredColumns = this.filteredColumns();
         const { movedItem, replacedItem } = this._moveElementInTheListByIndex(filteredColumns, from, to);
@@ -268,7 +267,6 @@ export class ColumnsComponent {
          */
         this._moveColumnInSelectableList(movedItem, replacedItem);
 
-        this._calculateMovementButtonsState();
         this._onModelChange();
     }
 
@@ -304,19 +302,6 @@ export class ColumnsComponent {
         list.splice(toIndex, 0, movedItem);
 
         return { movedItem, replacedItem };
-    }
-
-    /** @hidden */
-    private _countSelectedColumns(): void {
-        this.selectedColumnsCount.set(this.selectableColumns().filter(({ selected }) => selected).length);
-    }
-
-    /** @hidden */
-    private _calculateMovementButtonsState(): void {
-        const activeIndex = this._getActiveColumnIndexInFilteredList();
-        const filteredColumns = this.filteredColumns();
-        this.moveUpDisabled.set(activeIndex < 1);
-        this.moveDownDisabled.set(activeIndex < 0 || activeIndex >= filteredColumns.length - 1);
     }
 
     /**
