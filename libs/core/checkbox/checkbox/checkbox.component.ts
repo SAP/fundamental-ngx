@@ -297,7 +297,7 @@ export class CheckboxComponent<T = unknown> implements ControlValueAccessor, Aft
     }
 
     /** @hidden */
-    setStyleState(state: FormStates): void {
+    setStyleState(state: FormStates | null): void {
         this.state = state;
         this._detectChanges();
     }
