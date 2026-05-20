@@ -5,7 +5,18 @@
     "projectType": "application",
     "prefix": "e2e",
     "tags": ["scope:docs", "type:app"],
-    "implicitDependencies": ["core", "platform", "cdk", "btp", "cx", "i18n"],
+    "implicitDependencies": [
+        "core",
+        "platform",
+        "cdk",
+        "btp",
+        "cx",
+        "i18n",
+        "ui5-webcomponents",
+        "ui5-webcomponents-fiori",
+        "ui5-webcomponents-ai",
+        "ui5-webcomponents-base"
+    ],
     "targets": {
         "generate-routes": {
             "executor": "nx:run-commands",
