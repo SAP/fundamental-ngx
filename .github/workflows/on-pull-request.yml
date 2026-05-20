@@ -16,11 +16,16 @@ concurrency:
     group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
     cancel-in-progress: true
 
+permissions:
+    contents: read
+
 jobs:
     nx_agents:
         name: Nx Cloud Agent ${{ matrix.agent }}
         runs-on: ubuntu-latest
         timeout-minutes: 60
+        permissions:
+            contents: read
         strategy:
             matrix:
                 agent: [1, 2, 3]
@@ -43,6 +48,9 @@ jobs:
     build_test:
         runs-on: ubuntu-latest
         name: Run affected Build, Lint and test commands
+        permissions:
+            contents: read
+            pull-requests: read
         defaults:
             run:
                 working-directory: ${{ github.workspace }}
@@ -146,6 +154,8 @@ jobs:
             # - e2e_test
         name: Nx Cloud - Stop Agents
         runs-on: ubuntu-latest
+        permissions:
+            contents: read
         steps:
             - uses: actions/checkout@v4.2.2
               with:
