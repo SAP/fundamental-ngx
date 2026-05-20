@@ -2,7 +2,6 @@
 name: create-test
 description: Generate or update unit tests for a component following project testing conventions
 argument-hint: [component-path]
-disable-model-invocation: true
 context: fork
 agent: general-purpose
 ---
