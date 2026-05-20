@@ -2,7 +2,6 @@
 name: scaffold
 description: Generate a working component using fundamental-ngx patterns (dialog, table, card, form, shell, layout-grid)
 argument-hint: <pattern> [variant]
-disable-model-invocation: true
 context: fork
 agent: general-purpose
 allowed-tools: Read, Grep, Glob, Bash(nx *), Write, Edit

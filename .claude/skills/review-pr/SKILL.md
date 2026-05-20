@@ -2,7 +2,6 @@
 name: review-pr
 description: Review a pull request against project conventions and Angular 21+ best practices
 argument-hint: [PR-number]
-disable-model-invocation: true
 context: fork
 agent: general-purpose
 allowed-tools: Read, Grep, Glob, Bash(gh *), Bash(nx *)
