@@ -41,9 +41,6 @@ export class SortingComponent implements OnInit {
     /** Input data for sorting */
     sortingData = input<SettingsSortDialogData>();
 
-    /** @hidden Heading level */
-    headingLevel = input<number>(2);
-
     /** @hidden Initial sorting state */
     initialSorting = input<Nullable<CollectionSort>>();
 

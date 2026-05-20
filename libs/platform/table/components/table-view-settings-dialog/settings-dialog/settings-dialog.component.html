@@ -77,7 +77,6 @@
         @switch (activeTab()) {
             @case ('sort') {
                 <fdp-sorting
-                    [headingLevel]="headingLevel"
                     [sortingData]="sortingData()!"
                     [initialSorting]="_initialSorting()"
                     (sortChange)="onSortChange($event)"
@@ -96,7 +95,6 @@
             }
             @case ('group') {
                 <fdp-grouping
-                    [headingLevel]="headingLevel"
                     [groupingData]="groupingData()!"
                     [initialGrouping]="_initialGrouping()"
                     (groupChange)="onGroupChange($event)"
@@ -105,7 +103,6 @@
             }
             @case ('columns') {
                 <fdp-columns
-                    [headingLevel]="headingLevel"
                     [columnsData]="columnsData()!"
                     [initialColumns]="_initialColumns()"
                     (columnsChange)="onColumnsChange($event)"

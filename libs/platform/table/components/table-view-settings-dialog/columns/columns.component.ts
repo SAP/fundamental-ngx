@@ -28,15 +28,13 @@ import {
     SettingsColumnsDialogResultData
 } from '../table-view-settings.model';
 
-class SelectableColumn {
-    constructor(
-        /** Selected */
-        public selected: boolean,
-        /** Active */
-        public active: boolean,
-        /** Table Column it belongs to */
-        public column: SettingsColumnsDialogColumn
-    ) {}
+export interface SelectableColumn {
+    /** Selected */
+    selected: boolean;
+    /** Active */
+    active: boolean;
+    /** Table Column it belongs to */
+    column: SettingsColumnsDialogColumn;
 }
 
 const INITIAL_SEARCH_TEXT = '';
@@ -70,9 +68,6 @@ export class ColumnsComponent {
 
     /** @hidden Initial columns state */
     initialColumns = input<Nullable<SettingsColumnsDialogResultData>>();
-
-    /** @hidden Heading level */
-    headingLevel = input<number>(2);
 
     /** Event emitter for columns changes */
     columnsChange = output<SettingsColumnsDialogResultData>();
@@ -133,13 +128,10 @@ export class ColumnsComponent {
             // React to columnsData input changes (e.g., from reset button)
             // Only reinitialize if the data reference actually changed
             const data = this.columnsData();
-            if (data && data !== this._lastColumnsDataRef) {
+            if (data !== this._lastColumnsDataRef) {
                 this._lastColumnsDataRef = data;
                 this._initiateColumns(data);
-                // Only compare if initialColumns is actually set
-                if (this.initialColumns()) {
-                    this._compareInitialColumns();
-                }
+                this._compareInitialColumns();
             }
         });
     }
@@ -231,8 +223,8 @@ export class ColumnsComponent {
      * @hidden
      * Initialize columns data and signals.
      */
-    private _initiateColumns(columnsData: SettingsColumnsDialogData): void {
-        const allColumns = columnsData.columns || [];
+    private _initiateColumns(columnsData: SettingsColumnsDialogData | undefined): void {
+        const allColumns = columnsData?.columns || [];
         this.selectableColumns.set(
             allColumns.map(
                 (column, index): SelectableColumn => ({
