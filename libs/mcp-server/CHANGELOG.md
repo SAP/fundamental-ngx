@@ -1,3 +1,61 @@
+## 0.62.4-rc.4 (2026-05-20)
+
+This was a version bump only for mcp-server to align it with other projects, there were no code changes.
+
+## 0.62.4-rc.3 (2026-05-20)
+
+This was a version bump only for mcp-server to align it with other projects, there were no code changes.
+
+## 0.62.4-rc.2 (2026-05-20)
+
+### 🚀 Features
+
+- **mcp:** MCP server evaluation part 3 - Skills ([#14211](https://github.com/SAP/fundamental-ngx/pull/14211))
+
+### ❤️ Thank You
+
+- Copilot
+- Maria Dineva @MariaIDineva
+
+## 0.62.4-rc.1 (2026-05-19)
+
+This was a version bump only for mcp-server to align it with other projects, there were no code changes.
+
+## 0.62.4-rc.0 (2026-05-18)
+
+### 🩹 Fixes
+
+- **ui5:** bridge ThemingService to UI5 Web Components and fix theme propagation ([#14188](https://github.com/SAP/fundamental-ngx/pull/14188))
+
+### ❤️ Thank You
+
+- deno
+
+## 0.62.3 (2026-05-18)
+
+### 🚀 Features
+
+- **mcp:** MCP server evaluation part 2 ([#14208](https://github.com/SAP/fundamental-ngx/pull/14208), [#1](https://github.com/SAP/fundamental-ngx/issues/1), [#2](https://github.com/SAP/fundamental-ngx/issues/2), [#3](https://github.com/SAP/fundamental-ngx/issues/3), [#4](https://github.com/SAP/fundamental-ngx/issues/4), [#5](https://github.com/SAP/fundamental-ngx/issues/5), [#6](https://github.com/SAP/fundamental-ngx/issues/6), [#7](https://github.com/SAP/fundamental-ngx/issues/7))
+- MCP server evaluation - part 1 ([#14178](https://github.com/SAP/fundamental-ngx/pull/14178), [#14159](https://github.com/SAP/fundamental-ngx/issues/14159))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
+## 0.62.3-rc.5 (2026-05-18)
+
+This was a version bump only for mcp-server to align it with other projects, there were no code changes.
+
+## 0.62.3-rc.4 (2026-05-18)
+
+### 🚀 Features
+
+- **mcp:** MCP server evaluation part 2 ([#14208](https://github.com/SAP/fundamental-ngx/pull/14208), [#1](https://github.com/SAP/fundamental-ngx/issues/1), [#2](https://github.com/SAP/fundamental-ngx/issues/2), [#3](https://github.com/SAP/fundamental-ngx/issues/3), [#4](https://github.com/SAP/fundamental-ngx/issues/4), [#5](https://github.com/SAP/fundamental-ngx/issues/5), [#6](https://github.com/SAP/fundamental-ngx/issues/6), [#7](https://github.com/SAP/fundamental-ngx/issues/7))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
 ## 0.62.3-rc.3 (2026-05-15)
 
 This was a version bump only for mcp-server to align it with other projects, there were no code changes.

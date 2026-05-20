@@ -2,7 +2,6 @@
 name: adopt-styles
 description: Adopt breaking changes from fundamental-styles into Angular components
 argument-hint: <component-names> (e.g., calendar, checkbox, radio)
-disable-model-invocation: true
 ---
 
 # Adopt Fundamental-Styles Changes: $ARGUMENTS

@@ -2,7 +2,6 @@
 name: best-practices
 description: Audit existing code against project conventions and Angular 21+ best practices
 argument-hint: [component-path-or-folder]
-disable-model-invocation: true
 context: fork
 agent: general-purpose
 allowed-tools: Read, Grep, Glob, Bash(nx *), Bash(wc *)

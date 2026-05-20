@@ -88,6 +88,10 @@ const componentRoutes = [
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/i18n').then(configureLibRoutes)
     },
     {
+        path: 'theming',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/theming').then(configureLibRoutes)
+    },
+    {
         path: 'scoping',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/scoping').then(configureLibRoutes)
     },

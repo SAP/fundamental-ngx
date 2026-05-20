@@ -2,7 +2,6 @@
 name: migrate
 description: Migrate a component or directive to Angular 21+ signal-based patterns
 argument-hint: [component-path-or-folder]
-disable-model-invocation: true
 ---
 
 # Angular 21+ Migration: $ARGUMENTS

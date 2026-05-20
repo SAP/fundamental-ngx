@@ -1,1 +1,10 @@
-export default ["node_modules/@ui5/webcomponents-theming/dist/generated/assets/themes/sap_fiori_3/parameters-bundle.css.json","node_modules/@ui5/webcomponents-theming/dist/generated/assets/themes/sap_fiori_3_dark/parameters-bundle.css.json","node_modules/@ui5/webcomponents-theming/dist/generated/assets/themes/sap_fiori_3_hcb/parameters-bundle.css.json","node_modules/@ui5/webcomponents-theming/dist/generated/assets/themes/sap_fiori_3_hcw/parameters-bundle.css.json","node_modules/@ui5/webcomponents-theming/dist/generated/assets/themes/sap_horizon/parameters-bundle.css.json","node_modules/@ui5/webcomponents-theming/dist/generated/assets/themes/sap_horizon_dark/parameters-bundle.css.json","node_modules/@ui5/webcomponents-theming/dist/generated/assets/themes/sap_horizon_hcb/parameters-bundle.css.json","node_modules/@ui5/webcomponents-theming/dist/generated/assets/themes/sap_horizon_hcw/parameters-bundle.css.json"];
+export default [
+    'sap_fiori_3',
+    'sap_fiori_3_dark',
+    'sap_fiori_3_hcb',
+    'sap_fiori_3_hcw',
+    'sap_horizon',
+    'sap_horizon_dark',
+    'sap_horizon_hcb',
+    'sap_horizon_hcw'
+];
