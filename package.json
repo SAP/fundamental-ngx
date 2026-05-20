@@ -39,6 +39,7 @@
         "e2e": "playwright test",
         "e2e:update": "playwright test --update-snapshots",
         "e2e:report": "playwright show-report",
+        "e2e:routes": "npx tsx apps/e2e-harness/scripts/generate-routes.ts && prettier --write apps/e2e-harness/src/app/app.routes.generated.ts apps/e2e-harness/e2e/config/e2e.routes.json",
         "cleanup": "find libs/ui5-webcomponents -mindepth 1 -type d -exec rm -r {} + && rm libs/ui5-webcomponents/index.ts && find libs/ui5-webcomponents-ai -mindepth 1 -type d -exec rm -r {} + && rm libs/ui5-webcomponents-ai/index.ts && find libs/ui5-webcomponents-fiori -mindepth 1 -type d -exec rm -r {} + && rm libs/ui5-webcomponents-fiori/index.ts && rm -rf libs/ui5-webcomponents-base/types && rm -rf dist",
         "generate:ui5": "echo Generating UI5 Webcomponents Wrappers && nx run-many --target=generate --projects=ui5-webcomponents,ui5-webcomponents-ai,ui5-webcomponents-fiori,ui5-webcomponents-base",
         "ng": "ng",

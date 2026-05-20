@@ -6596,6 +6596,13 @@ export const generatedRoutes: Routes = [
             import('../../../../libs/docs/ui5-webcomponents/text/examples/basic-sample').then((m) => m.TextBasicSample)
     },
     {
+        path: 'ui5/theming/bridge',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/theming/examples/theming-bridge-sample').then(
+                (m) => m.ThemingBridgeSampleComponent
+            )
+    },
+    {
         path: 'ui5/time-picker/basic',
         loadComponent: () =>
             import('../../../../libs/docs/ui5-webcomponents/time-picker/examples/basic-sample').then(

@@ -1,5 +1,5 @@
 {
-    "count": 954,
+    "count": 955,
     "routes": [
         {
             "path": "btp/button/nested",
@@ -6622,6 +6622,13 @@
             "component": "text",
             "example": "basic",
             "className": "TextBasicSample"
+        },
+        {
+            "path": "ui5/theming/bridge",
+            "library": "ui5",
+            "component": "theming",
+            "example": "bridge",
+            "className": "ThemingBridgeSampleComponent"
         },
         {
             "path": "ui5/time-picker/basic",
