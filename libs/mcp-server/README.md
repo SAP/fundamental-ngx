@@ -15,6 +15,7 @@ AI coding assistants (Claude Code, Cursor, VS Code Copilot, Windsurf, etc.) can 
 - **Component comparison** — side-by-side comparison of alternative components
 - **Usage guides** — decision trees and composition patterns for complex components (dialog, table, card, etc.)
 - **Selector classification** — whether a component is an element, attribute directive, or both, with correct template usage
+- **Companion skills** — installable Claude Code skills for project setup, form generation, table scaffolding, and page layout (`/setup-project`, `/build-form`, `/build-table`, `/build-page-layout`, and more)
 
 This eliminates hallucinated APIs and outdated documentation — the assistant works from the actual component metadata.
 
@@ -142,3 +143,27 @@ Each component now includes `selectorType` and `templateUsage` fields to prevent
 | `element`    | Use as an HTML element                | `<fd-card>...</fd-card>`         |
 | `attribute`  | Use as an attribute on a host element | `<h2 fd-title>...</h2>`          |
 | `both`       | Element + attribute combined          | `<button fd-button>...</button>` |
+
+## Complementary Skills
+
+The MCP server answers _what_ Fundamental NGX components exist and _how_ their APIs work. For the procedural _how do I compose these together_ knowledge, a set of installable Claude Code skills is available in the repository.
+
+Install them with:
+
+```bash
+npx skills add sap/fundamental-ngx
+```
+
+Or copy the skills directory into your project's `.claude/skills/` folder.
+
+| Skill               | Invocation                                                 | What It Does                                                                                                                                |
+| ------------------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `setup-project`     | `/setup-project my-app horizon`                            | Creates a new Angular app, installs `@fundamental-ngx/core`, applies a SAP Fiori theme, and verifies the setup with a smoke-test component  |
+| `build-form`        | `/build-form UserProfile firstName:text role:select`       | Generates a reactive form with `FormGroup` wiring, `fdp-form-field` composition, typed interface, and automatic error message setup         |
+| `build-table`       | `/build-table Orders sort filter paginate select=multiple` | Generates a platform data table with `FdpTableDataSource`, column definitions, sort/filter directives, pagination, and row selection        |
+| `build-page-layout` | `/build-page-layout ProductDetail subheader footer`        | Generates an `fd-dynamic-page` with collapsing header, subheader, scrollable content, floating footer, and optional tabs or FCL integration |
+| `scaffold`          | `/scaffold dialog component-ref`                           | Generates a working component for any supported pattern (dialog, table, card, form, shell, layout-grid) using live MCP data                 |
+| `migrate`           | `/migrate src/app/my-component`                            | Migrates a component to Angular 21+ signal-based patterns (`@Input→input()`, `@HostBinding→host`, `*ngIf→@if`, `BehaviorSubject→signal()`)  |
+| `a11y-audit`        | `/a11y-audit fd-menu`                                      | Audits a component for WCAG AA compliance — semantic HTML, ARIA, keyboard navigation, focus management                                      |
+
+The skills call back into the MCP server (`get_usage_guide`, `get_component_api`, `get_component_examples`) so the procedural guidance is always backed by up-to-date component metadata.

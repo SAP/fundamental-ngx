@@ -1,6 +1,7 @@
 # Fundamental Library for Angular
 
 [![REUSE status](https://api.reuse.software/badge/github.com/SAP/fundamental-ngx)](https://api.reuse.software/info/github.com/SAP/fundamental-ngx)
+[![skills.sh](https://skills.sh/b/SAP/fundamental-ngx)](https://skills.sh/SAP/fundamental-ngx)
 
 <a href="https://www.netlify.com">
   <img src="https://www.netlify.com/img/global/badges/netlify-light.svg" alt="Deploys by Netlify" />
@@ -215,6 +216,12 @@ claude mcp add fundamental-ngx -- npx -y @fundamental-ngx/mcp
     }
 }
 ```
+
+### Agent Skills Quick Start
+
+List skills: `npx skills add SAP/fundamental-ngx --list`.
+Install all: `npx skills add SAP/fundamental-ngx --skill '*'`.
+Install one: `npx skills add SAP/fundamental-ngx --skill build-page-layout`.
 
 See the [full MCP server documentation](libs/mcp-server) for available tools and schema details.
 

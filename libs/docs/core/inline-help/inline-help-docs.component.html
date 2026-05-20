@@ -16,7 +16,9 @@
     Inline Help with Changed Trigger Event
 </fd-docs-section-title>
 <description>
-    To change trigger event, same as in popover component, you need to pass events to <code>[triggers]</code> input.
+    To change trigger event, same as in popover component, you need to pass events to <code>[triggers]</code> input. Use
+    <code>[scrollStrategy]</code> to control how the overlay reacts when an ancestor scrolls — typical CDK strategies
+    are <code>reposition()</code> (default), <code>close()</code>, <code>block()</code>, and <code>noop()</code>.
 </description>
 <component-example>
     <p class="fd-docs-centered-content">

@@ -1,6 +1,6 @@
 {
     "name": "@fundamental-ngx/ui5-webcomponents-base",
-    "version": "0.62.3-rc.3",
+    "version": "0.62.4-rc.3",
     "schematics": "./schematics/collection.json",
     "description": "Official SAP Angular base library for UI5 Web Component wrappers – part of the Fundamental Library for Angular.",
     "keywords": [
@@ -38,10 +38,16 @@
         "@angular/forms": "ANGULAR_VER_PLACEHOLDER",
         "@angular/platform-browser": "ANGULAR_VER_PLACEHOLDER",
         "@angular/router": "ANGULAR_VER_PLACEHOLDER",
+        "@fundamental-ngx/core": "VERSION_PLACEHOLDER",
         "@fundamental-ngx/i18n": "VERSION_PLACEHOLDER",
         "@ui5/webcomponents-base": "UI5_WEBCOMPONENTS_VER_PLACEHOLDER",
         "fundamental-styles": "FDSTYLES_VER_PLACEHOLDER",
         "rxjs": "^7.8.0"
+    },
+    "peerDependenciesMeta": {
+        "@fundamental-ngx/core": {
+            "optional": true
+        }
     },
     "dependencies": {
         "compare-versions": "^6.1.0",

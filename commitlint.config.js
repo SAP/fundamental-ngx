@@ -21,7 +21,8 @@ const Configuration = {
                 'i18n',
                 'datetime-adapter',
                 'ui5',
-                'mcp'
+                'mcp',
+                'skills'
             ]
         ],
         'body-max-line-length': [2, 'always', 400],
