@@ -74,13 +74,23 @@ jobs:
             - uses: wagoid/commitlint-github-action@v6.1.2
               name: Commit lint
 
+            - name: Generate ui5-webcomponents wrappers
+              run: npx nx run-many --target=generate --projects=ui5-webcomponents,ui5-webcomponents-ai,ui5-webcomponents-fiori,ui5-webcomponents-base
+              env:
+                  NX_CLOUD_DISTRIBUTED_EXECUTION: false
+
             - name: Run Build, Lint and test commands
               uses: ./.github/actions/parallel-commands
               with:
                   parallel-commands: |
-                      npx nx affected --target=build --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD --exclude=docs --parallel=1
+                      npx nx affected --target=build --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD --exclude=docs,e2e-harness --parallel=1
                       npx nx run-many --target=test --all --skip-nx-cache --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD --exclude=nx-plugin --parallel=1
                       npx nx affected --target=lint --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD --exclude=core,platform,cx,btp --parallel=1
+
+            - name: Build e2e-harness (non-DTE; needs generated ui5 sources locally)
+              run: npx nx run e2e-harness:build:development
+              env:
+                  NX_CLOUD_DISTRIBUTED_EXECUTION: false
 
             - name: Text workspace tags
               run: npx nx run nx-plugin:test --skip-nx-cache
