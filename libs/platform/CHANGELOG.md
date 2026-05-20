@@ -1,3 +1,13 @@
+## 0.62.4-rc.3 (2026-05-20)
+
+### 🩹 Fixes
+
+- **platform:** fdp-input inside fdp-form-field requires double click outside to lose focus ([#14217](https://github.com/SAP/fundamental-ngx/pull/14217))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
 ## 0.62.4-rc.2 (2026-05-20)
 
 ### 🚀 Features
