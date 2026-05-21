@@ -210,17 +210,3 @@ export interface ChangelogEntry {
     /** Component affected, if applicable */
     component?: string;
 }
-
-/** Design token metadata. */
-export interface DesignToken {
-    /** Token name, e.g. "--sapBackgroundColor" or "fd-margin-top--sm" */
-    name: string;
-    /** Token category */
-    category: 'color' | 'spacing' | 'typography' | 'elevation' | 'border' | 'size';
-    /** Human-readable description */
-    description: string;
-    /** Default/example value */
-    value?: string;
-    /** Usage example in CSS or HTML */
-    example?: string;
-}

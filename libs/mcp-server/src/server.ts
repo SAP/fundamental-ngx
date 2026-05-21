@@ -5,12 +5,10 @@ import { resolve } from 'path';
 import { z } from 'zod';
 import { USAGE_GUIDES } from './data/usage-guides';
 import { extractChangelogs } from './extractors/changelog-extractor';
-import { extractDesignTokens } from './extractors/token-extractor';
 import {
     ChangelogEntry,
     ComponentCatalog,
     ComponentMetadata,
-    DesignToken,
     LIBRARY_ALIAS_MAP,
     LibraryAlias
 } from './types/component-metadata';
@@ -36,7 +34,6 @@ try {
 }
 
 // Design tokens and changelog loaded async at startup
-let designTokens: DesignToken[] = [];
 let changelogEntries: ChangelogEntry[] = [];
 
 const server = new McpServer({
@@ -276,93 +273,6 @@ Use this when you need real usage patterns for a component.`,
 );
 
 // ---------------------------------------------------------------------------
-// Tool: recommend_components
-// ---------------------------------------------------------------------------
-server.tool(
-    'recommend_components',
-    `Given a UI description or use case, recommend which Fundamental NGX components to use.
-Describe what you want to build (e.g., "a filterable data table", "a login form",
-"a master-detail layout") and get a list of recommended components with their selectors,
-libraries, and how they compose together.`,
-    {
-        description: z.string().describe('What you want to build (e.g., "a form with date picker and validation")')
-    },
-    async ({ description }) => {
-        const lowerDesc = description.toLowerCase();
-        const recommendations: Array<{
-            component: string;
-            selector: string;
-            library: string;
-            reason: string;
-        }> = [];
-
-        // Pattern-based recommendations
-        for (const [pattern, componentSelectors] of Object.entries(UI_PATTERNS)) {
-            const keywords = pattern.split('|');
-            if (keywords.some((kw) => patternKeywordMatches(kw, lowerDesc))) {
-                for (const sel of componentSelectors) {
-                    const comp = catalog.components.find((c) => c.selector === sel);
-                    if (comp && !recommendations.some((r) => r.selector === sel)) {
-                        recommendations.push({
-                            component: comp.name,
-                            selector: comp.selector,
-                            library: comp.library,
-                            reason: `Matches "${pattern.split('|')[0]}" pattern`
-                        });
-                    }
-                }
-            }
-        }
-
-        // Also do a keyword search for anything not caught by patterns
-        if (recommendations.length < 3) {
-            const words = lowerDesc.split(/\s+/).filter((w) => w.length > 3);
-            const wantsAi = lowerDesc.includes('ai');
-            for (const word of words) {
-                const matches = catalog.components
-                    .filter(
-                        (c) =>
-                            // Suppress AI-library components unless the query explicitly mentions AI
-                            (wantsAi || c.library !== '@fundamental-ngx/ui5-webcomponents-ai') &&
-                            (c.selector.includes(word) ||
-                                c.name.toLowerCase().includes(word) ||
-                                c.category.toLowerCase().includes(word))
-                    )
-                    .slice(0, 3);
-
-                for (const comp of matches) {
-                    if (!recommendations.some((r) => r.selector === comp.selector)) {
-                        recommendations.push({
-                            component: comp.name,
-                            selector: comp.selector,
-                            library: comp.library,
-                            reason: `Name/category matches "${word}"`
-                        });
-                    }
-                }
-            }
-        }
-
-        return {
-            content: [
-                {
-                    type: 'text' as const,
-                    text: JSON.stringify(
-                        {
-                            description,
-                            recommendations: recommendations.slice(0, 15),
-                            note: 'Use get_component_api for full details on each component.'
-                        },
-                        null,
-                        2
-                    )
-                }
-            ]
-        };
-    }
-);
-
-// ---------------------------------------------------------------------------
 // Tool: get_migration_guide
 // ---------------------------------------------------------------------------
 server.tool(
@@ -473,76 +383,6 @@ Use this when helping users upgrade between versions.`,
                             filters: { name, from_version, to_version },
                             totalEntries: entries.length,
                             versions: result
-                        },
-                        null,
-                        2
-                    )
-                }
-            ]
-        };
-    }
-);
-
-// ---------------------------------------------------------------------------
-// Tool: get_design_tokens
-// ---------------------------------------------------------------------------
-server.tool(
-    'get_design_tokens',
-    `Look up SAP design tokens (CSS custom properties) and utility classes.
-Search for colors, spacing (margins/paddings), typography, elevation, and border tokens.
-Returns CSS variable names, descriptions, and usage examples.
-Use this when styling Fundamental NGX components or building custom layouts.`,
-    {
-        query: z.string().describe('What to look for (e.g., "background color", "margin", "font size")'),
-        category: z
-            .enum(['color', 'spacing', 'typography', 'elevation', 'border', 'size'] as const)
-            .optional()
-            .describe('Filter by token category')
-    },
-    async ({ query, category }) => {
-        const lowerQuery = query.toLowerCase();
-        let tokens = designTokens;
-
-        if (category) {
-            tokens = tokens.filter((t) => t.category === category);
-        }
-
-        const matches = tokens
-            .filter(
-                (t) => t.name.toLowerCase().includes(lowerQuery) || t.description.toLowerCase().includes(lowerQuery)
-            )
-            .slice(0, 50);
-
-        if (matches.length === 0) {
-            return {
-                content: [
-                    {
-                        type: 'text' as const,
-                        text: JSON.stringify(
-                            {
-                                query,
-                                category,
-                                matches: 0,
-                                note: 'No tokens found. Try broader terms like "color", "spacing", "font", or "margin".'
-                            },
-                            null,
-                            2
-                        )
-                    }
-                ]
-            };
-        }
-
-        return {
-            content: [
-                {
-                    type: 'text' as const,
-                    text: JSON.stringify(
-                        {
-                            query,
-                            category,
-                            matches: matches.length,
-                            tokens: matches
                         },
                         null,
                         2
@@ -964,20 +804,6 @@ function isSignalWrapperType(type: string | undefined): boolean {
     return !!type && /^(Writable)?Signal</.test(type);
 }
 
-/**
- * Tests whether a UI_PATTERNS keyword matches a user-provided description string.
- * Single-word keywords require whole-word matching to prevent "user" from firing
- * on "username". Multi-word phrases (e.g. "data table") use a plain substring
- * check since a two-word phrase is already specific enough.
- */
-function patternKeywordMatches(keyword: string, text: string): boolean {
-    if (keyword.includes(' ')) {
-        return text.includes(keyword);
-    }
-    const escaped = keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    return new RegExp(`\\b${escaped}\\b`).test(text);
-}
-
 function scoreMatch(component: ComponentMetadata, query: string): number {
     let score = 0;
 
@@ -1158,15 +984,10 @@ const UI_PATTERNS: Record<string, string[]> = {
 // Start server
 // ---------------------------------------------------------------------------
 
-/** Load design tokens and changelog data. Must be called before tool handlers that use them. */
+/** Load changelog data. Must be called before tool handlers that use it. */
 export async function loadData(): Promise<void> {
     const basePath = resolve(__dirname, '..', '..', '..');
-    const [tokens, changelog] = await Promise.all([
-        extractDesignTokens(basePath).catch(() => [] as DesignToken[]),
-        extractChangelogs(basePath).catch(() => [] as ChangelogEntry[])
-    ]);
-    designTokens = tokens;
-    changelogEntries = changelog;
+    changelogEntries = await extractChangelogs(basePath).catch(() => [] as ChangelogEntry[]);
 }
 
 /** Start in MCP stdio transport mode (normal operation). */
