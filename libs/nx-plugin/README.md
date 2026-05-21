@@ -8,7 +8,7 @@ NX plugin for internal use in the Fundamental NGX monorepo. Provides generators 
 
 ### `sap-component`
 
-Scaffolds a new Angular component with full setup: component file, public API barrel, documentation page, usage examples, and e2e tests. Creates the component as a sub-library within `core`, `platform`, `cx`, `cdk`, or `btp`.
+Scaffolds a new Angular component with full setup: component file, public API barrel, documentation page, and usage examples. Creates the component as a sub-library within `core`, `platform`, `cx`, `cdk`, or `btp`.
 
 **Usage:**
 
@@ -51,14 +51,6 @@ nx run core:compile-typedoc
 ```
 
 ---
-
-### `e2e-test`
-
-Custom WebdriverIO executor for running e2e tests in the NX environment (single component library).
-
-```bash
-nx run docs-core-date-picker:e2e
-```
 
 ### `i18n-manage`
 

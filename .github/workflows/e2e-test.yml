@@ -1,0 +1,380 @@
+name: E2E Tests
+
+on:
+    workflow_dispatch:
+    pull_request:
+        paths:
+            - 'libs/core/**'
+            - 'libs/platform/**'
+            - 'libs/cdk/**'
+            - 'libs/btp/**'
+            - 'libs/cx/**'
+            - 'libs/i18n/**'
+            - 'libs/ui5-webcomponents/**'
+            - 'libs/ui5-webcomponents-fiori/**'
+            - 'libs/ui5-webcomponents-ai/**'
+            - 'libs/docs/**'
+            - 'apps/e2e-harness/**'
+            - 'playwright.config.ts'
+            - '.github/workflows/e2e-test.yml'
+
+permissions:
+    contents: read
+
+env:
+    NODE_VERSION: '22.x'
+    FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+concurrency:
+    group: e2e-${{ github.event.number || github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    # ─────────────────────────────────────────────────────────────
+    # Job 1: Detect which libraries changed → decide which shards run
+    # ─────────────────────────────────────────────────────────────
+    detect-scope:
+        runs-on: ubuntu-latest
+        timeout-minutes: 3
+        outputs:
+            matrix: ${{ steps.scope.outputs.matrix }}
+        steps:
+            - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+              with:
+                  fetch-depth: 0
+
+            - name: Determine affected scope
+              id: scope
+              env:
+                  BASE_SHA: ${{ github.event.pull_request.base.sha }}
+                  HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+              run: |
+                  CHANGED=$(git diff --name-only "$BASE_SHA"..."$HEAD_SHA")
+                  SHARDS=()
+
+                  # If e2e infrastructure itself changed, run everything
+                  if echo "$CHANGED" | grep -qE '^(apps/e2e-harness/|playwright\.config\.ts)'; then
+                    SHARDS=("core-1" "core-2" "core-3" "platform" "other")
+                    echo "::notice::E2E infra changed — running all shards"
+                  else
+                    # cdk is the base layer — everything depends on it
+                    if echo "$CHANGED" | grep -qE '^libs/(cdk|docs/cdk)/'; then
+                      SHARDS=("core-1" "core-2" "core-3" "platform" "other")
+                    else
+                      if echo "$CHANGED" | grep -qE '^libs/(core|docs/core)/'; then
+                        SHARDS+=("core-1" "core-2" "core-3" "platform")
+                      fi
+                      if echo "$CHANGED" | grep -qE '^libs/(platform|docs/platform)/'; then
+                        SHARDS+=("platform")
+                      fi
+                      if echo "$CHANGED" | grep -qE '^libs/(ui5-webcomponents|docs/ui5-webcomponents)/[^-]'; then
+                        SHARDS+=("other")
+                      fi
+                      if echo "$CHANGED" | grep -qE '^libs/(ui5-webcomponents-(fiori|ai|base)|docs/ui5-webcomponents-(fiori|ai))/'; then
+                        SHARDS+=("other")
+                      fi
+                      if echo "$CHANGED" | grep -qE '^libs/(btp|cx|i18n|docs/(btp|cx|i18n))/'; then
+                        SHARDS+=("other")
+                      fi
+                    fi
+                  fi
+
+                  # Deduplicate
+                  SHARDS=($(printf '%s\n' "${SHARDS[@]}" | sort -u))
+
+                  # Fallback: if path trigger fired but no lib matched, run all
+                  if [ ${#SHARDS[@]} -eq 0 ]; then
+                    SHARDS=("core-1" "core-2" "core-3" "platform" "other")
+                  fi
+
+                  # Output as JSON array
+                  JSON=$(printf '%s\n' "${SHARDS[@]}" | jq -R . | jq -sc '{"shard": .}')
+                  echo "matrix=$JSON" >> "$GITHUB_OUTPUT"
+                  echo "Shards to run: ${SHARDS[*]}"
+
+    # ─────────────────────────────────────────────────────────────
+    # Job 2: Verify generated routes are not stale
+    # ─────────────────────────────────────────────────────────────
+    verify-routes:
+        runs-on: ubuntu-latest
+        timeout-minutes: 5
+        steps:
+            - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+              with:
+                  ref: ${{ github.head_ref }}
+
+            - uses: ./.github/actions/nodejs
+              with:
+                  node-version: ${{ env.NODE_VERSION }}
+
+            - name: Regenerate routes
+              run: |
+                  npx tsx apps/e2e-harness/scripts/generate-routes.ts
+                  npx prettier --write apps/e2e-harness/src/app/app.routes.generated.ts apps/e2e-harness/e2e/config/e2e.routes.json
+
+            - name: Check for uncommitted route changes
+              run: |
+                  if ! git diff --exit-code apps/e2e-harness/src/app/app.routes.generated.ts apps/e2e-harness/e2e/config/e2e.routes.json; then
+                    echo "::error::Generated routes are out of date. Run 'npx tsx apps/e2e-harness/scripts/generate-routes.ts && yarn format' and commit the result."
+                    exit 1
+                  fi
+
+    # ─────────────────────────────────────────────────────────────
+    # Job 3: Sharded Playwright tests
+    # ─────────────────────────────────────────────────────────────
+    e2e:
+        needs: [detect-scope, verify-routes]
+        runs-on: ubuntu-latest
+        timeout-minutes: 40
+        name: 'Playwright E2E (${{ matrix.shard }})'
+        permissions:
+            contents: write
+        strategy:
+            fail-fast: false
+            matrix: ${{ fromJson(needs.detect-scope.outputs.matrix) }}
+        steps:
+            - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+              with:
+                  ref: ${{ github.head_ref }}
+                  fetch-depth: 0
+
+            - uses: ./.github/actions/nodejs
+              with:
+                  node-version: ${{ env.NODE_VERSION }}
+
+            - name: Generate ui5-webcomponents
+              run: |
+                  npx nx run-many --target=generate --projects=ui5-webcomponents,ui5-webcomponents-ai,ui5-webcomponents-fiori,ui5-webcomponents-base
+                  npx nx build ui5-webcomponents-base
+
+            - name: Install Playwright browsers
+              run: npx playwright install chromium --with-deps
+
+            - name: Determine grep filter
+              id: filter
+              env:
+                  SHARD: ${{ matrix.shard }}
+              run: |
+                  case "$SHARD" in
+                    core-1)   GREP="core/[a-e]" ;;
+                    core-2)   GREP="core/[f-o]" ;;
+                    core-3)   GREP="core/[p-z]" ;;
+                    platform) GREP="platform/" ;;
+                    other)    GREP="(cdk|btp|cx|i18n|ui5|ui5-fiori|ui5-ai)/" ;;
+                  esac
+                  echo "grep=$GREP" >> "$GITHUB_OUTPUT"
+
+            - name: Detect snapshot update
+              id: marker
+              env:
+                  BASE_SHA: ${{ github.event.pull_request.base.sha }}
+                  HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+              run: node .github/actions/helpers/detect-snapshot-update.js
+
+            - name: Run E2E tests
+              env:
+                  CI: true
+                  SHARD: ${{ matrix.shard }}
+                  UPDATE_MODE: ${{ steps.marker.outputs.update }}
+                  GREP_FILTER: ${{ steps.filter.outputs.grep }}
+              run: |
+                  UPDATE_FLAG=""
+                  if [ "$UPDATE_MODE" = "1" ]; then
+                    UPDATE_FLAG="--update-snapshots"
+                  fi
+                  npx playwright test --grep "$GREP_FILTER" $UPDATE_FLAG
+
+            - name: Upload blob report
+              if: always()
+              uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+              with:
+                  name: blob-report-${{ matrix.shard }}
+                  path: blob-report/
+                  retention-days: 3
+
+            - name: Upload test results JSON
+              if: always()
+              uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+              with:
+                  name: test-results-${{ matrix.shard }}
+                  path: test-results-${{ matrix.shard }}.json
+                  retention-days: 3
+
+            - name: Commit Linux baselines
+              if: (failure() || steps.marker.outputs.update == '1') && github.event.pull_request.head.repo.full_name == github.repository
+              env:
+                  SHARD: ${{ matrix.shard }}
+                  UPDATE_MODE: ${{ steps.marker.outputs.update }}
+              run: |
+                  SNAPDIR="apps/e2e-harness/e2e/snapshots/linux"
+                  git add --intent-to-add "$SNAPDIR" 2>/dev/null || true
+                  if ! git diff --quiet "$SNAPDIR"; then
+                    git config user.name "github-actions"
+                    git config user.email "github-actions@github.com"
+                    git add "$SNAPDIR"
+                    if [ "$UPDATE_MODE" = "1" ]; then
+                      git commit -m "test(e2e): update Linux visual baselines [$SHARD]"
+                    else
+                      git commit -m "test(e2e): add missing Linux visual baselines [$SHARD]"
+                    fi
+                    git pull --rebase || true
+                    git push
+                    echo "Pushed baselines"
+                  else
+                    echo "No baselines to commit"
+                  fi
+
+            - name: Upload snapshot diffs
+              if: failure()
+              uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+              with:
+                  name: snapshot-diffs-${{ matrix.shard }}
+                  path: |
+                      test-results/**/*-actual.png
+                      test-results/**/*-expected.png
+                      test-results/**/*-diff.png
+                  retention-days: 7
+
+    # ─────────────────────────────────────────────────────────────
+    # Job 4: Merge reports from all shards + post a11y summary
+    # ─────────────────────────────────────────────────────────────
+    report:
+        needs: [e2e]
+        if: always() && needs.e2e.result != 'cancelled'
+        runs-on: ubuntu-latest
+        timeout-minutes: 5
+        permissions:
+            contents: read
+            pull-requests: write
+        steps:
+            - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+            - uses: ./.github/actions/nodejs
+              with:
+                  node-version: ${{ env.NODE_VERSION }}
+
+            - name: Download blob reports
+              uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+              with:
+                  pattern: blob-report-*
+                  path: all-blob-reports
+                  merge-multiple: true
+
+            - name: Merge reports
+              run: npx playwright merge-reports --reporter=html ./all-blob-reports
+
+            - name: Upload merged HTML report
+              uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+              with:
+                  name: playwright-report
+                  path: playwright-report/
+                  retention-days: 14
+
+            - name: Download test results
+              uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+              with:
+                  pattern: test-results-*
+                  path: all-results
+                  merge-multiple: true
+
+            - name: Generate a11y summary
+              run: |
+                  node << 'SCRIPT'
+                  const fs = require('fs');
+                  const path = require('path');
+                  const resultsDir = './all-results';
+                  const files = fs.readdirSync(resultsDir).filter(f => f.endsWith('.json'));
+
+                  let totalTests = 0;
+                  let totalPassed = 0;
+                  let totalFailed = 0;
+                  const a11yFailures = [];
+
+                  function walkSuites(suites) {
+                    for (const suite of suites) {
+                      if (suite.suites) walkSuites(suite.suites);
+                      for (const spec of suite.specs || []) {
+                        if (spec.title && spec.title.startsWith('a11y:')) {
+                          totalTests++;
+                          const passed = spec.tests?.every(t => t.status === 'expected' || t.status === 'skipped');
+                          if (passed) {
+                            totalPassed++;
+                          } else {
+                            totalFailed++;
+                            a11yFailures.push({
+                              title: spec.title.replace('a11y: ', ''),
+                              error: (spec.tests?.[0]?.results?.[0]?.error?.message || 'Unknown').slice(0, 200)
+                            });
+                          }
+                        }
+                      }
+                    }
+                  }
+
+                  for (const file of files) {
+                    try {
+                      const data = JSON.parse(fs.readFileSync(path.join(resultsDir, file), 'utf-8'));
+                      if (data.suites) walkSuites(data.suites);
+                    } catch (e) {
+                      // skip malformed JSON
+                    }
+                  }
+
+                  let body = '## ♿ Accessibility Report\n\n';
+                  if (totalTests === 0) {
+                    body += '_No a11y tests ran in this PR._\n';
+                  } else {
+                    const icon = totalFailed > 0 ? ':warning:' : ':white_check_mark:';
+                    body += `${icon} **${totalPassed}/${totalTests}** routes passed axe-core audit\n\n`;
+                    if (totalFailed > 0) {
+                      body += `### Failures (${totalFailed})\n\n`;
+                      body += '| Route | Issue |\n|-------|-------|\n';
+                      for (const f of a11yFailures.slice(0, 20)) {
+                        const safeTitle = f.title.replace(/\|/g, '\\|');
+                        const safeError = f.error.replace(/\|/g, '\\|').replace(/\n/g, ' ').slice(0, 100);
+                        body += `| ${safeTitle} | ${safeError} |\n`;
+                      }
+                      if (a11yFailures.length > 20) {
+                        body += `\n_...and ${a11yFailures.length - 20} more. See full report in artifacts._\n`;
+                      }
+                    }
+                  }
+
+                  fs.writeFileSync('a11y-comment.md', body);
+                  console.log(body);
+                  SCRIPT
+
+            - name: Post a11y comment on PR
+              uses: marocchino/sticky-pull-request-comment@52423e01640425a022ef5fd42c6fb5f633a02728 # v2.9.1
+              with:
+                  header: e2e-a11y-report
+                  path: a11y-comment.md
+
+    # ─────────────────────────────────────────────────────────────
+    # Job 5: Final status check (single gate for branch protection)
+    # ─────────────────────────────────────────────────────────────
+    e2e-status:
+        needs: [verify-routes, e2e, report]
+        if: always()
+        runs-on: ubuntu-latest
+        timeout-minutes: 2
+        name: 'Playwright E2E Tests'
+        steps:
+            - name: Check results
+              env:
+                  ROUTES_RESULT: ${{ needs.verify-routes.result }}
+                  E2E_RESULT: ${{ needs.e2e.result }}
+              run: |
+                  if [ "$ROUTES_RESULT" != "success" ]; then
+                    echo "::error::Route verification failed"
+                    exit 1
+                  fi
+                  if [ "$E2E_RESULT" = "failure" ]; then
+                    echo "::error::E2E tests failed"
+                    exit 1
+                  fi
+                  if [ "$E2E_RESULT" = "cancelled" ]; then
+                    echo "::error::E2E tests were cancelled"
+                    exit 1
+                  fi
+                  echo "All E2E checks passed"

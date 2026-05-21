@@ -2,7 +2,7 @@
     "$schema": "http://json-schema.org/schema",
     "$id": "sap-component",
     "title": "SAP Component Generator",
-    "description": "Generates a new Angular component with documentation, examples, and e2e tests as a sub-library of core, platform, cdk, cx, or btp",
+    "description": "Generates a new Angular component with documentation and examples as a sub-library of core, platform, cdk, cx, or btp",
     "type": "object",
     "properties": {
         "name": {

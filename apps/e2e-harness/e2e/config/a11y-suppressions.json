@@ -1,0 +1,305 @@
+{
+    "_meta": "TODO(stream-5): batch-file tickets for each suppression before CI enforcement. Each globalComponentLibrary entry and route suppression must reference a tracking issue.",
+    "global": ["region", "page-has-heading-one"],
+    "globalComponentLibrary": [
+        {
+            "rule": "aria-allowed-attr",
+            "impact": "critical",
+            "affectedRoutes": 195,
+            "description": "Ensure an element's role supports its ARIA attributes",
+            "reason": "Systemic library-level issue \u2014 tracked for remediation"
+        },
+        {
+            "rule": "aria-required-children",
+            "impact": "critical",
+            "affectedRoutes": 106,
+            "description": "Ensure elements with an ARIA role that require child roles contain them",
+            "reason": "Systemic library-level issue \u2014 tracked for remediation"
+        },
+        {
+            "rule": "aria-input-field-name",
+            "impact": "serious",
+            "affectedRoutes": 92,
+            "description": "Ensure every ARIA input field has an accessible name",
+            "reason": "Systemic library-level issue \u2014 tracked for remediation"
+        },
+        {
+            "rule": "aria-valid-attr-value",
+            "impact": "critical",
+            "affectedRoutes": 92,
+            "description": "Ensure all ARIA attributes have valid values",
+            "reason": "Systemic library-level issue \u2014 tracked for remediation"
+        },
+        {
+            "rule": "nested-interactive",
+            "impact": "serious",
+            "affectedRoutes": 61,
+            "description": "Ensure interactive controls are not nested as they are not always announced by screen readers or can cause focus problems for assistive technologies",
+            "reason": "Systemic library-level issue \u2014 tracked for remediation"
+        },
+        {
+            "rule": "aria-valid-attr",
+            "impact": "critical",
+            "affectedRoutes": 59,
+            "description": "Ensure attributes that begin with aria- are valid ARIA attributes",
+            "reason": "Systemic library-level issue \u2014 tracked for remediation"
+        },
+        {
+            "rule": "aria-required-parent",
+            "impact": "critical",
+            "affectedRoutes": 48,
+            "description": "Ensure elements with an ARIA role that require parent roles are contained by them",
+            "reason": "Systemic library-level issue \u2014 tracked for remediation"
+        },
+        {
+            "rule": "color-contrast",
+            "impact": "serious",
+            "affectedRoutes": 47,
+            "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+            "reason": "Systemic library-level issue \u2014 tracked for remediation"
+        },
+        {
+            "rule": "label",
+            "impact": "critical",
+            "affectedRoutes": 43,
+            "description": "Ensure every form element has a label",
+            "reason": "Systemic library-level issue \u2014 tracked for remediation"
+        },
+        {
+            "rule": "role-img-alt",
+            "impact": "serious",
+            "affectedRoutes": 41,
+            "description": "Ensure [role=\"img\"] elements have alternative text",
+            "reason": "Systemic library-level issue \u2014 tracked for remediation"
+        },
+        {
+            "rule": "landmark-unique",
+            "impact": "moderate",
+            "affectedRoutes": 33,
+            "description": "Ensure landmarks are unique",
+            "reason": "Systemic library-level issue \u2014 tracked for remediation"
+        },
+        {
+            "rule": "button-name",
+            "impact": "critical",
+            "affectedRoutes": 32,
+            "description": "Ensure buttons have discernible text",
+            "reason": "Systemic library-level issue \u2014 tracked for remediation"
+        },
+        {
+            "rule": "label-title-only",
+            "impact": "serious",
+            "affectedRoutes": 30,
+            "description": "Ensure that every form element has a visible label and is not solely labeled using hidden labels, or the title or aria-describedby attributes",
+            "reason": "Systemic library-level issue \u2014 tracked for remediation"
+        },
+        {
+            "rule": "aria-hidden-focus",
+            "impact": "serious",
+            "affectedRoutes": 30,
+            "description": "Ensure aria-hidden elements are not focusable nor contain focusable elements",
+            "reason": "Systemic library-level issue \u2014 tracked for remediation"
+        },
+        {
+            "rule": "aria-allowed-role",
+            "impact": "minor",
+            "affectedRoutes": 30,
+            "description": "Ensure role attribute has an appropriate value for the element",
+            "reason": "Systemic library-level issue \u2014 tracked for remediation"
+        },
+        {
+            "rule": "listitem",
+            "impact": "serious",
+            "affectedRoutes": 19,
+            "description": "Ensure <li> elements are used semantically",
+            "reason": "Systemic library-level issue \u2014 tracked for remediation"
+        },
+        {
+            "rule": "empty-table-header",
+            "impact": "minor",
+            "affectedRoutes": 18,
+            "description": "Ensure table headers have discernible text",
+            "reason": "Systemic library-level issue \u2014 tracked for remediation"
+        },
+        {
+            "rule": "heading-order",
+            "impact": "moderate",
+            "affectedRoutes": 13,
+            "description": "Ensure the order of headings is semantically correct",
+            "reason": "Systemic library-level issue \u2014 tracked for remediation"
+        },
+        {
+            "rule": "aria-prohibited-attr",
+            "impact": "serious",
+            "affectedRoutes": 13,
+            "description": "Ensure ARIA attributes are not prohibited for an element's role",
+            "reason": "Systemic library-level issue \u2014 tracked for remediation"
+        },
+        {
+            "rule": "presentation-role-conflict",
+            "impact": "minor",
+            "affectedRoutes": 13,
+            "description": "Ensure elements marked as presentational do not have global ARIA or tabindex so that all screen readers ignore them",
+            "reason": "Systemic library-level issue \u2014 tracked for remediation"
+        },
+        {
+            "rule": "aria-toggle-field-name",
+            "impact": "serious",
+            "affectedRoutes": 12,
+            "description": "Ensure every ARIA toggle field has an accessible name",
+            "reason": "Systemic library-level issue \u2014 tracked for remediation"
+        },
+        {
+            "rule": "scrollable-region-focusable",
+            "impact": "serious",
+            "affectedRoutes": 10,
+            "description": "Ensure elements that have scrollable content are accessible by keyboard in Safari",
+            "reason": "Systemic library-level issue \u2014 tracked for remediation"
+        },
+        {
+            "rule": "aria-required-attr",
+            "impact": "critical",
+            "affectedRoutes": 8,
+            "description": "Ensure every ARIA attribute that is required for an element is present",
+            "reason": "Systemic library-level issue (UI5 web component slider handles missing aria-valuenow on initial render) \u2014 tracked for remediation"
+        }
+    ],
+    "routes": {
+        "platform/form-container/possible": {
+            "suppress": ["landmark-main-is-top-level", "landmark-no-duplicate-main"],
+            "reason": "Known violations: landmark-main-is-top-level, landmark-no-duplicate-main"
+        },
+        "platform/input-group/form": {
+            "suppress": ["landmark-main-is-top-level", "landmark-no-duplicate-main"],
+            "reason": "Known violations: landmark-main-is-top-level, landmark-no-duplicate-main"
+        },
+        "platform/step-input/number-step-input-reactive": {
+            "suppress": ["landmark-main-is-top-level", "landmark-no-duplicate-main"],
+            "reason": "Known violations: landmark-main-is-top-level, landmark-no-duplicate-main"
+        },
+        "platform/step-input/number-step-input-template": {
+            "suppress": ["landmark-main-is-top-level", "landmark-no-duplicate-main"],
+            "reason": "Known violations: landmark-main-is-top-level, landmark-no-duplicate-main"
+        },
+        "platform/textarea/autogrow": {
+            "suppress": ["landmark-main-is-top-level", "landmark-no-duplicate-main"],
+            "reason": "Known violations: landmark-main-is-top-level, landmark-no-duplicate-main"
+        },
+        "platform/textarea/basic": {
+            "suppress": ["landmark-main-is-top-level", "landmark-no-duplicate-main"],
+            "reason": "Known violations: landmark-main-is-top-level, landmark-no-duplicate-main"
+        },
+        "platform/textarea/counter": {
+            "suppress": ["landmark-main-is-top-level", "landmark-no-duplicate-main"],
+            "reason": "Known violations: landmark-main-is-top-level, landmark-no-duplicate-main"
+        },
+        "platform/textarea/counter-template": {
+            "suppress": ["landmark-main-is-top-level", "landmark-no-duplicate-main"],
+            "reason": "Known violations: landmark-main-is-top-level, landmark-no-duplicate-main"
+        },
+        "ui5-fiori/dynamic-side-content/dynamic-side-content": {
+            "suppress": [
+                "landmark-main-is-top-level",
+                "landmark-no-duplicate-main",
+                "landmark-complementary-is-top-level"
+            ],
+            "reason": "Known violations: landmark-main-is-top-level, landmark-no-duplicate-main, landmark-complementary-is-top-level"
+        },
+        "core/timeline/basic": {
+            "suppress": ["aria-roles"],
+            "reason": "Known violations: aria-roles"
+        },
+        "core/timeline/horizontal-axis": {
+            "suppress": ["aria-roles"],
+            "reason": "Known violations: aria-roles"
+        },
+        "core/timeline/horizontal-double-side": {
+            "suppress": ["aria-roles"],
+            "reason": "Known violations: aria-roles"
+        },
+        "core/timeline/loading": {
+            "suppress": ["aria-roles"],
+            "reason": "Known violations: aria-roles"
+        },
+        "core/timeline/vertical-double-side": {
+            "suppress": ["aria-roles"],
+            "reason": "Known violations: aria-roles"
+        },
+        "btp/tool-header/auto-mode": {
+            "suppress": ["aria-command-name"],
+            "reason": "Known violations: aria-command-name"
+        },
+        "btp/tool-header/basic-example": {
+            "suppress": ["aria-command-name"],
+            "reason": "Known violations: aria-command-name"
+        },
+        "core/avatar/icon": {
+            "suppress": ["aria-command-name"],
+            "reason": "Known violations: aria-command-name"
+        },
+        "core/avatar/zoom-icon": {
+            "suppress": ["aria-command-name"],
+            "reason": "Known violations: aria-command-name"
+        },
+        "core/popover/new-placement": {
+            "suppress": ["aria-dialog-name"],
+            "reason": "Known violations: aria-dialog-name"
+        },
+        "platform/multi-input/multi-input": {
+            "suppress": ["aria-dialog-name"],
+            "reason": "Known violations: aria-dialog-name"
+        },
+        "core/tree/lazily-loaded-tree-items": {
+            "suppress": ["aria-treeitem-name"],
+            "reason": "Known violations: aria-treeitem-name"
+        },
+        "core/vertical-navigation/condensed": {
+            "suppress": ["aria-treeitem-name"],
+            "reason": "Known violations: aria-treeitem-name"
+        },
+        "platform/approval-flow/approval-flow": {
+            "suppress": ["select-name"],
+            "reason": "Known violations: select-name"
+        },
+        "platform/approval-flow/custom-status": {
+            "suppress": ["select-name"],
+            "reason": "Known violations: select-name"
+        },
+        "ui5-fiori/navigation-layout/navigation-layout": {
+            "suppress": ["landmark-complementary-is-top-level"],
+            "reason": "Known violations: landmark-complementary-is-top-level"
+        },
+        "ui5-fiori/upload-collection/upload-states": {
+            "suppress": ["aria-progressbar-name"],
+            "reason": "Known violations: aria-progressbar-name"
+        },
+        "ui5/card/card": {
+            "suppress": ["aria-progressbar-name"],
+            "reason": "Known violations: aria-progressbar-name"
+        },
+        "ui5/form/basic": {
+            "suppress": ["definition-list", "dlitem"],
+            "reason": "Known violations: definition-list, dlitem"
+        },
+        "ui5/label/label": {
+            "suppress": ["definition-list", "dlitem"],
+            "reason": "Known violations: definition-list, dlitem"
+        },
+        "core/card/loading": {
+            "suppress": ["empty-heading"],
+            "reason": "Known violations: empty-heading"
+        },
+        "core/carousel/background": {
+            "suppress": ["image-alt"],
+            "reason": "Known violations: image-alt"
+        },
+        "platform/table/initial-state": {
+            "suppress": ["aria-conditional-attr"],
+            "reason": "Known violations: aria-conditional-attr"
+        },
+        "ui5-fiori/media-gallery/media-gallery": {
+            "suppress": ["list"],
+            "reason": "Known violations: list"
+        }
+    }
+}

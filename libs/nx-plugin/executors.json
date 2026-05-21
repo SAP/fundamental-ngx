@@ -6,16 +6,6 @@
             "schema": "./src/executors/compile-typedoc/schema.json",
             "description": "compile-typedoc executor"
         },
-        "e2e-test-app": {
-            "implementation": "./src/executors/e2e-test-app/executor",
-            "schema": "./src/executors/e2e-test-app/schema.json",
-            "description": "e2e-test-app executor"
-        },
-        "e2e-test": {
-            "implementation": "./src/executors/e2e-test/executor",
-            "schema": "./src/executors/e2e-test/schema.json",
-            "description": "e2e-test executor"
-        },
         "transform-translations": {
             "implementation": "./src/executors/transform-translations/executor",
             "schema": "./src/executors/transform-translations/schema.json",

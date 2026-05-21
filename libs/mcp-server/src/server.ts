@@ -371,15 +371,18 @@ server.tool(
 Returns breaking changes, deprecated APIs, and migration steps.
 Use this when helping users upgrade between versions.`,
     {
-        component: z.string().optional().describe('Specific component to get migration info for'),
+        name: z
+            .string()
+            .optional()
+            .describe('Component name to get migration info for (e.g., "fd-button", "fd-dialog")'),
         from_version: z.string().optional().describe('Version migrating from (e.g., "0.58.0")'),
         to_version: z.string().optional().describe('Version migrating to (defaults to latest)')
     },
-    async ({ component, from_version, to_version }) => {
+    async ({ name, from_version, to_version }) => {
         let entries = changelogEntries;
 
-        if (component) {
-            const lowerComp = component.toLowerCase();
+        if (name) {
+            const lowerComp = name.toLowerCase();
             entries = entries.filter(
                 (e) => e.component?.toLowerCase().includes(lowerComp) || e.description.toLowerCase().includes(lowerComp)
             );
@@ -400,7 +403,7 @@ Use this when helping users upgrade between versions.`,
                         type: 'text' as const,
                         text: JSON.stringify(
                             {
-                                filters: { component, from_version, to_version },
+                                filters: { name, from_version, to_version },
                                 matches: 0,
                                 note: 'No changelog entries found for the given filters. Try broader version ranges or omit the component filter.'
                             },
@@ -467,7 +470,7 @@ Use this when helping users upgrade between versions.`,
                     type: 'text' as const,
                     text: JSON.stringify(
                         {
-                            filters: { component, from_version, to_version },
+                            filters: { name, from_version, to_version },
                             totalEntries: entries.length,
                             versions: result
                         },
@@ -689,25 +692,31 @@ server.tool(
     `Get a practical usage guide for a Fundamental NGX component.
 Returns the correct import path, a minimal template snippet showing proper selector usage,
 required inputs that must be provided, and common pitfalls to avoid.
-Use this as the first step when adding a new component to an Angular template.`,
+Use this as the first step when adding a new component to an Angular template.
+Use "setup" or "installation" as the component name to get the complete project setup guide
+(angular.json configuration, ThemingService wiring, and ng add instructions).
+Use "ui5" or "ui5-webcomponents" to get the UI5 package setup guide (correct package name,
+peer dependencies, import paths).`,
     {
-        component: z.string().describe('Component name or selector (e.g., "fd-button", "fdp-table", "ui5-input")')
+        name: z
+            .string()
+            .describe('Component name or selector. Examples: "fd-button", "fdp-table", "ui5-input", "setup", "ui5"')
     },
-    async ({ component }) => {
-        const lowerComponent = component.toLowerCase().replace(/\s+/g, '-');
+    async ({ name }) => {
+        const lowerComponent = name.toLowerCase().replace(/\s+/g, '-');
         const curatedGuide = USAGE_GUIDES[lowerComponent];
         if (curatedGuide) {
             return { content: [{ type: 'text' as const, text: JSON.stringify(curatedGuide, null, 2) }] };
         }
 
-        const found = findComponent(component);
+        const found = findComponent(name);
 
         if (!found) {
             return {
                 content: [
                     {
                         type: 'text' as const,
-                        text: `Component "${component}" not found. Use search_components to find available components.`
+                        text: `Component "${name}" not found. Use search_components to find available components.`
                     }
                 ]
             };
@@ -1148,8 +1157,9 @@ const UI_PATTERNS: Record<string, string[]> = {
 // ---------------------------------------------------------------------------
 // Start server
 // ---------------------------------------------------------------------------
-async function main(): Promise<void> {
-    // Load design tokens and changelog entries in parallel
+
+/** Load design tokens and changelog data. Must be called before tool handlers that use them. */
+export async function loadData(): Promise<void> {
     const basePath = resolve(__dirname, '..', '..', '..');
     const [tokens, changelog] = await Promise.all([
         extractDesignTokens(basePath).catch(() => [] as DesignToken[]),
@@ -1157,12 +1167,13 @@ async function main(): Promise<void> {
     ]);
     designTokens = tokens;
     changelogEntries = changelog;
+}
 
+/** Start in MCP stdio transport mode (normal operation). */
+export async function startStdioServer(): Promise<void> {
+    await loadData();
     const transport = new StdioServerTransport();
     await server.connect(transport);
 }
 
-main().catch((error) => {
-    console.error('MCP server failed to start:', error);
-    process.exit(1);
-});
+export { server };

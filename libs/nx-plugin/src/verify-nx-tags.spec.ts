@@ -11,7 +11,6 @@ const knownScopes = new Set([
     'cx',
     'tools',
     'datetime-adapter',
-    'components-e2e',
     'i18n',
     'ui5'
 ]);

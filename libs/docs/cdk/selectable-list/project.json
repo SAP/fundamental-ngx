@@ -5,15 +5,5 @@
     "projectType": "library",
     "prefix": "fdp-doc",
     "tags": ["type:lib", "scope:docs"],
-    "targets": {
-        "e2e-noop": {
-            "executor": "@fundamental-ngx/nx-plugin:e2e-test",
-            "options": {
-                "e2eTsConfig": "libs/docs/fn/selectable-list/e2e/tsconfig.json",
-                "baseUrl": "http://localhost:4200",
-                "configFile": "libs/docs/fn/selectable-list/wdio.conf.js"
-            },
-            "outputs": ["{workspaceRoot}/allure-results/docs-fn-selectable-list"]
-        }
-    }
+    "targets": {}
 }
