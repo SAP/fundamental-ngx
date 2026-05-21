@@ -1,3 +1,13 @@
+## 0.62.4-rc.5 (2026-05-21)
+
+### 🚀 Features
+
+- **mcp:** MCP server evaluation - part 4 ([#14221](https://github.com/SAP/fundamental-ngx/pull/14221))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
 ## 0.62.4-rc.4 (2026-05-20)
 
 This was a version bump only for mcp-server to align it with other projects, there were no code changes.
