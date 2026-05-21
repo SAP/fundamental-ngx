@@ -246,47 +246,40 @@ function makePathsSameLength(paths: ApprovalGraphNode[][]): ApprovalGraphNode[][
     const processedPaths: ApprovalGraphNode[][] = [];
     const pathLengths = paths.map((path) => path.length);
     const longestPathLength = Math.max(...pathLengths);
-
     paths.forEach((path) => {
         if (path.length === longestPathLength) {
             processedPaths.push(path);
             return;
         }
-
-        path.forEach((node, nodeIndex) => {
+        for (let nodeIndex = 0; nodeIndex < path.length; nodeIndex++) {
+            if (nodeIndex >= longestPathLength - 1) {
+                continue;
+            }
+            const node = path[nodeIndex];
             /** Try to get blank nodes from already processed paths as paths may be the same within some part */
             let blankNodes = getBlankNodesAfterNode(node, processedPaths);
             if (blankNodes.length && blankNodes[0].id !== path[nodeIndex + 1]?.id) {
                 path.splice(nodeIndex + 1, 0, ...blankNodes);
-                return;
+                continue;
             }
-
             const nodeIndexInPaths = paths.map((_path) => _path.indexOf(node));
             const mostFarNodeIndexInPaths = Math.max(...nodeIndexInPaths);
-
             if (nodeIndex < mostFarNodeIndexInPaths) {
                 blankNodes = getBlankNodes(mostFarNodeIndexInPaths - nodeIndex, path[nodeIndex - 1].status);
-
                 blankNodes[blankNodes.length - 1].targets = [node.id];
                 path[nodeIndex - 1].targets = [blankNodes[0].id];
-
                 path.splice(nodeIndex, 0, ...blankNodes);
-                return;
+                continue;
             }
-
             if (nodeIndex === mostFarNodeIndexInPaths && nodeIndex === path.length - 1) {
                 blankNodes = getBlankNodes(longestPathLength - path.length, path[nodeIndex].status);
-
                 path[nodeIndex].targets = [blankNodes[0].id];
-
                 path.splice(nodeIndex + 1, 0, ...blankNodes);
-                return;
+                continue;
             }
-        });
-
+        }
         processedPaths.push(path);
     });
-
     return processedPaths;
 }
 
