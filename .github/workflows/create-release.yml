@@ -126,7 +126,7 @@ jobs:
               with:
                   parallel-commands: |
                       npx nx run-many --target=lint --skip-nx-cache --projects=${{ env.RELEASE_PACKAGES }} --parallel=3
-                      npx nx run-many --target=build --all --parallel=1
+                      npx nx run-many --target=build --projects=${{ env.RELEASE_PACKAGES }} --parallel=1
 
             - name: Extract Angular version
               id: angularVersion
