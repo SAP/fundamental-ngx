@@ -163,7 +163,10 @@ function updateBudgets(options: Schema): Rule {
             const workspace = await getWorkspaceDefinition(tree);
             await updateWorkspaceDefinition(tree, workspace);
         } catch (error) {
-            handleError(context, error, 'Failed to update bundle budgets');
+            context.logger.warn(
+                `⚠️ Could not update bundle budgets (non-fatal): ${(error as Error).message}. ` +
+                    `Styles and assets were still configured. Update angular.json budgets manually if needed.`
+            );
         }
     };
 }
