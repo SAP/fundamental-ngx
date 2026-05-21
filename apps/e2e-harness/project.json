@@ -1,0 +1,109 @@
+{
+    "name": "e2e-harness",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "apps/e2e-harness/src",
+    "projectType": "application",
+    "prefix": "e2e",
+    "tags": ["scope:docs", "type:app"],
+    "implicitDependencies": [
+        "core",
+        "platform",
+        "cdk",
+        "btp",
+        "cx",
+        "i18n",
+        "ui5-webcomponents",
+        "ui5-webcomponents-fiori",
+        "ui5-webcomponents-ai",
+        "ui5-webcomponents-base"
+    ],
+    "targets": {
+        "generate-routes": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "node_modules/.bin/ts-node --project apps/e2e-harness/scripts/tsconfig.json apps/e2e-harness/scripts/generate-routes.ts"
+            }
+        },
+        "build": {
+            "dependsOn": ["generate-routes"],
+            "executor": "@angular-devkit/build-angular:application",
+            "options": {
+                "outputPath": "dist/apps/e2e-harness",
+                "index": "apps/e2e-harness/src/index.html",
+                "browser": "apps/e2e-harness/src/main.ts",
+                "tsConfig": "apps/e2e-harness/tsconfig.app.json",
+                "assets": [
+                    "apps/e2e-harness/src/assets",
+                    {
+                        "glob": "**/css_variables.css",
+                        "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/",
+                        "output": "./assets/theming-base/"
+                    },
+                    {
+                        "glob": "**/*",
+                        "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/sap_horizon/fonts",
+                        "output": "./assets/theming-base/sap_horizon/fonts/"
+                    },
+                    {
+                        "glob": "**/*",
+                        "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/baseTheme/fonts/",
+                        "output": "./assets/theming-base/baseTheme/fonts/"
+                    },
+                    {
+                        "glob": "**/*",
+                        "input": "./node_modules/fundamental-styles/dist/theming/",
+                        "output": "./assets/fundamental-styles-theming/"
+                    }
+                ],
+                "styles": [
+                    "node_modules/fundamental-styles/dist/icon.css",
+                    "node_modules/fundamental-styles/dist/form-layout-grid.css",
+                    "node_modules/@fundamental-styles/common-css/dist/common-css.css",
+                    "apps/e2e-harness/src/styles.scss"
+                ],
+                "stylePreprocessorOptions": {
+                    "includePaths": ["node_modules"]
+                },
+                "allowedCommonJsDependencies": ["focus-trap"]
+            },
+            "configurations": {
+                "development": {
+                    "optimization": false,
+                    "extractLicenses": false,
+                    "sourceMap": true
+                },
+                "production": {
+                    "optimization": true,
+                    "outputHashing": "all",
+                    "sourceMap": false,
+                    "extractLicenses": true
+                }
+            },
+            "defaultConfiguration": "development"
+        },
+        "serve": {
+            "executor": "@angular-devkit/build-angular:dev-server",
+            "options": {
+                "port": 4400,
+                "buildTarget": "e2e-harness:build"
+            },
+            "configurations": {
+                "development": {
+                    "buildTarget": "e2e-harness:build:development"
+                },
+                "production": {
+                    "buildTarget": "e2e-harness:build:production"
+                }
+            },
+            "defaultConfiguration": "development",
+            "continuous": true
+        },
+        "e2e": {
+            "executor": "@nx/playwright:playwright",
+            "options": {
+                "config": "playwright.config.ts"
+            },
+            "outputs": ["{workspaceRoot}/playwright-report"]
+        }
+    }
+}

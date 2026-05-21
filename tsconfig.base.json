@@ -70,7 +70,6 @@
                 "libs/docs/ui5-webcomponents/*/index.ts",
                 "libs/docs/ui5-webcomponents/*/src/index.ts"
             ],
-            "@fundamental-ngx/e2e": ["e2e/index.ts"],
             "@fundamental-ngx/i18n": ["libs/i18n/src/index.ts"],
             "@fundamental-ngx/mcp-server": ["libs/mcp-server/src/index.ts"],
             "@fundamental-ngx/moment-adapter": ["libs/moment-adapter/src/index.ts"],
