@@ -1,16 +1,16 @@
 .fd-docs-popover-resizable-example {
-    padding: var(--sapContent_PaddingM, 1rem);
+    padding: var(--sapContent_PaddingM);
 }
 
 .fd-docs-popover-resizable-example__content {
     display: flex;
     flex-direction: column;
-    gap: var(--sapContent_PaddingS, 0.5rem);
-    padding: var(--sapContent_PaddingM, 1rem);
+    gap: var(--sapContent_PaddingS);
+    padding: var(--sapContent_PaddingM);
 }
 
 .fd-docs-popover-resizable-example__title {
     margin: 0;
-    font-size: var(--sapFontHeader5Size, 1rem);
-    font-weight: var(--sapFontHeaderWeight, 600);
+    font-size: var(--sapFontHeader5Size);
+    font-weight: var(--sapFontHeaderWeight);
 }
