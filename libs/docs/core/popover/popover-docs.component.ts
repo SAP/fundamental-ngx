@@ -379,6 +379,11 @@ export class PopoverDocsComponent {
             code: getAssetFromModuleAssets(resizablePopoverTsSrc),
             fileName: 'popover-resizable-example',
             scssFileCode: getAssetFromModuleAssets(resizablePopoverScss)
+        },
+        {
+            language: 'scss',
+            code: getAssetFromModuleAssets(resizablePopoverScss),
+            fileName: 'popover-resizable-example'
         }
     ];
 }
