@@ -199,14 +199,15 @@ export interface ComponentCatalog {
 
 /** Changelog entry for migration guide. */
 export interface ChangelogEntry {
-    /** Library this change belongs to */
-    library: Library;
+    /** npm package this change belongs to (e.g. "@fundamental-ngx/core") */
+    library: string;
     /** Version where the change was introduced */
     version: string;
     /** Type of change */
     type: 'breaking' | 'feature' | 'fix' | 'deprecation';
     /** Description of the change (markdown) */
     description: string;
-    /** Component affected, if applicable */
-    component?: string;
 }
+
+/** Raw extractor output — carries the commit scope before it is resolved to a library. */
+export type RawChangelogEntry = ChangelogEntry & { component: string };

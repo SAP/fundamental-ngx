@@ -1,6 +1,6 @@
 import { readFile } from 'fs/promises';
 import { resolve } from 'path';
-import { ChangelogEntry, Library } from '../types/component-metadata';
+import { RawChangelogEntry as ChangelogEntry, Library } from '../types/component-metadata';
 
 interface LibraryConfig {
     path: string;
@@ -13,7 +13,12 @@ const LIBRARY_CHANGELOGS: LibraryConfig[] = [
     { path: 'libs/btp/CHANGELOG.md', library: '@fundamental-ngx/btp' },
     { path: 'libs/cx/CHANGELOG.md', library: '@fundamental-ngx/cx' },
     { path: 'libs/cdk/CHANGELOG.md', library: '@fundamental-ngx/cdk' },
-    { path: 'libs/i18n/CHANGELOG.md', library: '@fundamental-ngx/i18n' }
+    { path: 'libs/i18n/CHANGELOG.md', library: '@fundamental-ngx/i18n' },
+    { path: 'libs/datetime-adapter/CHANGELOG.md', library: '@fundamental-ngx/datetime-adapter' },
+    { path: 'libs/moment-adapter/CHANGELOG.md', library: '@fundamental-ngx/moment-adapter' },
+    { path: 'libs/ui5-webcomponents/CHANGELOG.md', library: '@fundamental-ngx/ui5-webcomponents' },
+    { path: 'libs/ui5-webcomponents-fiori/CHANGELOG.md', library: '@fundamental-ngx/ui5-webcomponents-fiori' },
+    { path: 'libs/ui5-webcomponents-ai/CHANGELOG.md', library: '@fundamental-ngx/ui5-webcomponents-ai' }
 ];
 
 /**
@@ -121,7 +126,7 @@ function parseChangelog(content: string, library: Library): ChangelogEntry[] {
                     version: currentVersion,
                     type: currentSection,
                     description: rawDescription,
-                    component: scope !== library.split('/')[1] ? scope : undefined
+                    component: scope
                 });
             }
         }

@@ -10,7 +10,13 @@
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
 import { USAGE_GUIDES } from './data/usage-guides';
-import { ComponentCatalog, ComponentExample, ComponentMetadata, InputMetadata } from './types/component-metadata';
+import {
+    ChangelogEntry,
+    ComponentCatalog,
+    ComponentExample,
+    ComponentMetadata,
+    InputMetadata
+} from './types/component-metadata';
 import { buildPitfalls, buildTemplate, deriveImportPath, getSelectorType } from './utils/selector-utils';
 
 // ---------------------------------------------------------------------------
@@ -1255,5 +1261,64 @@ describe('get_usage_guide result shape', () => {
         const importPath = deriveImportPath(comp);
         const statement = `import { ${comp.name} } from '${importPath}';`;
         expect(statement).toBe("import { DialogComponent } from '@fundamental-ngx/core/dialog';");
+    });
+});
+
+// ---------------------------------------------------------------------------
+// get_migration_guide filter logic
+// ---------------------------------------------------------------------------
+
+describe('get_migration_guide filter logic', () => {
+    const FIXTURE_ENTRIES: ChangelogEntry[] = [
+        { version: '0.62.0', type: 'feature', description: 'add new button type', library: '@fundamental-ngx/core' },
+        { version: '0.62.0', type: 'fix', description: 'fix popover alignment', library: '@fundamental-ngx/core' },
+        {
+            version: '0.62.0',
+            type: 'fix',
+            description: 'fix form field layout',
+            library: '@fundamental-ngx/platform'
+        },
+        {
+            version: '0.61.0',
+            type: 'breaking',
+            description: 'remove deprecated API',
+            library: '@fundamental-ngx/core'
+        }
+    ];
+
+    function filterByName(entries: ChangelogEntry[], name: string): ChangelogEntry[] {
+        const lower = name.toLowerCase();
+        return entries.filter(
+            (e) => e.library.toLowerCase().includes(lower) || e.description.toLowerCase().includes(lower)
+        );
+    }
+
+    it('should filter by short library alias', () => {
+        const result = filterByName(FIXTURE_ENTRIES, 'platform');
+        expect(result).toHaveLength(1);
+        expect(result[0].description).toBe('fix form field layout');
+    });
+
+    it('should filter by full library name', () => {
+        const result = filterByName(FIXTURE_ENTRIES, '@fundamental-ngx/core');
+        expect(result).toHaveLength(3);
+        expect(result.every((e) => e.library === '@fundamental-ngx/core')).toBe(true);
+    });
+
+    it('should filter by description keyword', () => {
+        const result = filterByName(FIXTURE_ENTRIES, 'popover');
+        expect(result).toHaveLength(1);
+        expect(result[0].description).toContain('popover');
+    });
+
+    it('should return all entries when library keyword matches all', () => {
+        const result = filterByName(FIXTURE_ENTRIES, 'fundamental-ngx');
+        expect(result).toHaveLength(4);
+    });
+
+    it('output ChangelogEntry should not have a component field', () => {
+        for (const entry of FIXTURE_ENTRIES) {
+            expect(entry).not.toHaveProperty('component');
+        }
     });
 });

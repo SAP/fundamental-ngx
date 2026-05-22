@@ -284,7 +284,7 @@ Use this when helping users upgrade between versions.`,
         name: z
             .string()
             .optional()
-            .describe('Component name to get migration info for (e.g., "fd-button", "fd-dialog")'),
+            .describe('Library (e.g., "core", "@fundamental-ngx/platform") or keyword to filter migration info'),
         from_version: z.string().optional().describe('Version migrating from (e.g., "0.58.0")'),
         to_version: z.string().optional().describe('Version migrating to (defaults to latest)')
     },
@@ -294,7 +294,7 @@ Use this when helping users upgrade between versions.`,
         if (name) {
             const lowerComp = name.toLowerCase();
             entries = entries.filter(
-                (e) => e.component?.toLowerCase().includes(lowerComp) || e.description.toLowerCase().includes(lowerComp)
+                (e) => e.library.toLowerCase().includes(lowerComp) || e.description.toLowerCase().includes(lowerComp)
             );
         }
 
@@ -324,18 +324,6 @@ Use this when helping users upgrade between versions.`,
                 ]
             };
         }
-
-        // Deduplicate: the same commit appears in multiple library CHANGELOGs
-        // (fixed-version monorepo). Keep one entry per unique description+type+version.
-        const seen = new Set<string>();
-        entries = entries.filter((e) => {
-            const key = `${e.version}|${e.type}|${e.description}`;
-            if (seen.has(key)) {
-                return false;
-            }
-            seen.add(key);
-            return true;
-        });
 
         // Collapse RC entries into their stable release. Stable releases (e.g. 0.61.0)
         // aggregate all changes from their RCs (e.g. 0.61.0-rc.2), producing duplicates.
@@ -369,7 +357,6 @@ Use this when helping users upgrade between versions.`,
             changes: byVersion[version].map((e) => ({
                 type: e.type,
                 library: e.library,
-                component: e.component,
                 description: e.description
             }))
         }));
@@ -986,8 +973,17 @@ const UI_PATTERNS: Record<string, string[]> = {
 
 /** Load changelog data. Must be called before tool handlers that use it. */
 export async function loadData(): Promise<void> {
-    const basePath = resolve(__dirname, '..', '..', '..');
-    changelogEntries = await extractChangelogs(basePath).catch(() => [] as ChangelogEntry[]);
+    try {
+        const raw = readFileSync(resolve(__dirname, 'data', 'changelogs.json'), 'utf-8');
+        changelogEntries = JSON.parse(raw) as ChangelogEntry[];
+    } catch {
+        // Fallback for local monorepo development where the bundled file may not exist yet
+        const basePath = resolve(__dirname, '..', '..', '..');
+        changelogEntries = await extractChangelogs(basePath).catch(() => []);
+        if (changelogEntries.length === 0) {
+            console.error('Warning: no changelog data found. Run `nx run mcp-server:extract-changelogs` first.');
+        }
+    }
 }
 
 /** Start in MCP stdio transport mode (normal operation). */
