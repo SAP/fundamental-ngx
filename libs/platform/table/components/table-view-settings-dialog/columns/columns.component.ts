@@ -2,8 +2,8 @@ import {
     ChangeDetectionStrategy,
     Component,
     computed,
-    effect,
     input,
+    linkedSignal,
     output,
     signal,
     ViewEncapsulation
@@ -75,8 +75,23 @@ export class ColumnsComponent {
     /** Event emitter for reset availability changes */
     resetAvailabilityChange = output<boolean>();
 
-    /** @hidden All available columns for interacting */
-    protected selectableColumns = signal<SelectableColumn[]>([]);
+    /** @hidden All available columns for interacting - resets when columnsData changes */
+    protected selectableColumns = linkedSignal<SelectableColumn[]>(() => {
+        const data = this.columnsData();
+        const allColumns = data?.columns || [];
+        const initialCols = allColumns.map(
+            (column, index): SelectableColumn => ({
+                column,
+                selected: column.visible,
+                active: index === 0
+            })
+        );
+        // Trigger reset availability check when columnsData changes
+        if (initialCols.length > 0) {
+            this._compareInitialColumnsNextTick();
+        }
+        return initialCols;
+    });
 
     /** @hidden Search Query */
     protected searchQuery = signal<string>(INITIAL_SEARCH_TEXT);
@@ -116,25 +131,8 @@ export class ColumnsComponent {
         return !this.showAllItems() || this.filteredColumns().length === 0;
     }
 
-    /** @hidden Track the last data reference to detect real changes */
-    private _lastColumnsDataRef: SettingsColumnsDialogData | undefined;
-
     /** @hidden Index of active column in filtered list */
     private _activeColumnIndexInFilteredList = computed(() => this.filteredColumns().findIndex(({ active }) => active));
-
-    /** @hidden */
-    constructor() {
-        effect(() => {
-            // React to columnsData input changes (e.g., from reset button)
-            // Only reinitialize if the data reference actually changed
-            const data = this.columnsData();
-            if (data !== this._lastColumnsDataRef) {
-                this._lastColumnsDataRef = data;
-                this._initiateColumns(data);
-                this._compareInitialColumns();
-            }
-        });
-    }
 
     /** @hidden */
     protected toggleSelectAll(selectAll: boolean): void {
@@ -237,6 +235,15 @@ export class ColumnsComponent {
 
         this.searchQuery.set(INITIAL_SEARCH_TEXT);
         this.showAllItems.set(INITIAL_SHOW_ALL_ITEMS);
+    }
+
+    /**
+     * Compare the initial columns state with the current state and emit reset availability change if needed.
+     * Scheduled via setTimeout to avoid triggering during signal computation.
+     * @hidden
+     */
+    private _compareInitialColumnsNextTick(): void {
+        setTimeout(() => this._compareInitialColumns(), 0);
     }
 
     /** @hidden */

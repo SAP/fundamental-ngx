@@ -89,6 +89,10 @@ export class TableViewSettingsDialogComponent implements AfterViewInit {
     @Input()
     headingLevel: 1 | 2 | 3 | 4 | 5 | 6 = 2;
 
+    /** Whether to allow the user to configure column show/hide, as well as column order. */
+    @Input()
+    allowColumnConfiguration = false;
+
     /** @hidden */
     @ContentChildren(forwardRef(() => TableViewSettingsFilterComponent))
     filters: QueryList<TableViewSettingsFilterComponent>;
@@ -193,7 +197,8 @@ export class TableViewSettingsDialogComponent implements AfterViewInit {
                     filteringData: filterData.viewSettingsFilters.length > 0 ? filterData : null,
                     groupingData: groupData.columns.length > 0 ? groupData : null,
                     columnsData: currentColumnsData.columns.length > 0 ? currentColumnsData : null,
-                    headingLevel: this.headingLevel
+                    headingLevel: this.headingLevel,
+                    allowColumnConfiguration: this.allowColumnConfiguration
                 }
             },
             this.table.injector

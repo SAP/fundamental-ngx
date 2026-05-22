@@ -43,7 +43,7 @@
 </fdp-table>
 
 <!-- View Settings Dialog-->
-<fdp-table-view-settings-dialog [table]="table">
+<fdp-table-view-settings-dialog [table]="table" [allowColumnConfiguration]="true">
     <fdp-table-view-settings-filter column="price" label="Price" [type]="filterTypeEnum.CUSTOM">
         <ng-container *fdpViewSettingsFilterCustomDef="let model">
             <fdp-form-group #fg1 columnLayout="XL1-L1-M1-S1" labelLayout="vertical">

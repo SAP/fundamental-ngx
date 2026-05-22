@@ -113,8 +113,11 @@ export class SettingsDialogComponent implements Resettable {
     /** @hidden Initial columns configurations */
     _initialColumns = signal<Nullable<SettingsColumnsDialogResultData>>(null);
 
-    /** @hidden Current columns result from user changes */
-    private _currentColumnsResult: Nullable<SettingsColumnsDialogResultData> = null;
+    /** @hidden */
+    protected showColumns = false;
+
+    /** @hidden Pending columns changes (not applied to signal to avoid triggering child effects) */
+    private _pendingColumnsChanges: Nullable<SettingsColumnsDialogResultData> = null;
 
     /**
      * Constructor that initializes dialog data and sets initial values for sorting, filtering, grouping, and columns.
@@ -126,6 +129,7 @@ export class SettingsDialogComponent implements Resettable {
             groupingData: Nullable<SettingsGroupDialogData>;
             columnsData: Nullable<SettingsColumnsDialogData>;
             headingLevel: 1 | 2 | 3 | 4 | 5 | 6;
+            allowColumnConfiguration: boolean;
         }>,
         private readonly _table: Table
     ) {
@@ -133,7 +137,10 @@ export class SettingsDialogComponent implements Resettable {
         this.sortingData.set(data.sortingData);
         this.filteringData.set(data.filteringData);
         this.groupingData.set(data.groupingData);
-        this.columnsData.set(data.columnsData);
+        this.showColumns = data.allowColumnConfiguration;
+        if (this.showColumns) {
+            this.columnsData.set(data.columnsData);
+        }
         this.headingLevel = data.headingLevel;
         this.activeTab.set(this._getInitialActiveTab());
         this._shouldRenderSubheader();
@@ -147,13 +154,15 @@ export class SettingsDialogComponent implements Resettable {
      * Confirm the dialog action and close the dialog, returning updated settings data.
      */
     confirm(): void {
+        const columnsData = this._pendingColumnsChanges
+            ? { columns: this._pendingColumnsChanges.columns }
+            : this.columnsData();
+
         this.dialogRef.close({
             sortingData: this.sortingData(),
             filteringData: this.filteringData(),
             groupingData: this.groupingData(),
-            columnsData: this._currentColumnsResult
-                ? { columns: this._currentColumnsResult.columns }
-                : this.columnsData()
+            columnsData
         });
     }
 
@@ -196,8 +205,6 @@ export class SettingsDialogComponent implements Resettable {
                     ...this.columnsData()!,
                     columns: initialColumns.columns
                 });
-                // Clear the stored result
-                this._currentColumnsResult = null;
             }
         }
         this.isResetAvailable$.set(false);
@@ -240,12 +247,11 @@ export class SettingsDialogComponent implements Resettable {
 
     /**
      * Handle columns change event and update columns data.
+     * Store pending changes without updating the signal to avoid triggering child effects.
      * @param event Updated columns data.
      */
     onColumnsChange(event: SettingsColumnsDialogResultData): void {
-        // Store the current result without updating the columnsData signal
-        // This prevents triggering the child component's effect and resetting its state
-        this._currentColumnsResult = event;
+        this._pendingColumnsChanges = event;
     }
 
     /**

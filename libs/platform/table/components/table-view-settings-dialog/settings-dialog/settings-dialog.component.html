@@ -28,7 +28,7 @@
         @if (showSubheader()) {
             <ng-template fdkTemplate="subheader">
                 <fd-segmented-button [(ngModel)]="activeTab" [style.height]="'fit-content'">
-                    @if (columnsData()) {
+                    @if (columnsData() && showColumns) {
                         <button
                             fd-button
                             fdkFocusableItem

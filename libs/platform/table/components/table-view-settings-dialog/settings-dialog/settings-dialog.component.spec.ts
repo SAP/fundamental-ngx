@@ -192,7 +192,8 @@ describe('SettingsDialogComponent', () => {
                 filteringData: null,
                 groupingData: null,
                 columnsData: mockColumnsData,
-                headingLevel: 2
+                headingLevel: 2,
+                allowColumnConfiguration: true
             };
             fixture = TestBed.createComponent(SettingsDialogComponent);
             component = fixture.componentInstance;
@@ -305,7 +306,8 @@ describe('SettingsDialogComponent', () => {
                 filteringData: null,
                 groupingData: null,
                 columnsData: mockColumnsData,
-                headingLevel: 2
+                headingLevel: 2,
+                allowColumnConfiguration: true
             };
             fixture = TestBed.createComponent(SettingsDialogComponent);
             component = fixture.componentInstance;
