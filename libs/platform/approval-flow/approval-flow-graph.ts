@@ -275,7 +275,6 @@ function makePathsSameLength(paths: ApprovalGraphNode[][]): ApprovalGraphNode[][
                 blankNodes = getBlankNodes(longestPathLength - path.length, path[nodeIndex].status);
                 path[nodeIndex].targets = [blankNodes[0].id];
                 path.splice(nodeIndex + 1, 0, ...blankNodes);
-                continue;
             }
         }
         processedPaths.push(path);
