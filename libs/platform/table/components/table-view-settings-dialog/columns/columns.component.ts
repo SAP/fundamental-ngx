@@ -172,39 +172,24 @@ export class ColumnsComponent {
 
     /** @hidden */
     protected moveActiveToTop(event: Event): void {
-        event.stopPropagation();
-        event.preventDefault();
-        this._moveColumnInFilteredListByIndex(this._activeColumnIndexInFilteredList(), 0);
+        this._moveActiveColumn(event, 0);
     }
 
     /** @hidden */
     protected moveActiveToBottom(event: Event): void {
-        event.stopPropagation();
-        event.preventDefault();
-        const filteredColumns = this.filteredColumns();
-        this._moveColumnInFilteredListByIndex(this._activeColumnIndexInFilteredList(), filteredColumns.length - 1);
+        this._moveActiveColumn(event, this.filteredColumns().length - 1);
     }
 
     /** @hidden */
     protected moveActiveUp(event: Event): void {
-        event.stopPropagation();
-        event.preventDefault();
-        const activeColumnIndex = this._activeColumnIndexInFilteredList();
-        this._moveColumnInFilteredListByIndex(activeColumnIndex, activeColumnIndex - 1);
-
-        // keep the focus back to the move up button as it gets lost on click
-        setTimeout(() => {
-            const moveUpBtn = event.target as HTMLElement | null;
-            moveUpBtn?.focus();
-        }, 0);
+        const activeIndex = this._activeColumnIndexInFilteredList();
+        this._moveActiveColumn(event, activeIndex - 1, true);
     }
 
     /** @hidden */
     protected moveActiveDown(event: Event): void {
-        event.stopPropagation();
-        event.preventDefault();
-        const activeColumnIndex = this._activeColumnIndexInFilteredList();
-        this._moveColumnInFilteredListByIndex(activeColumnIndex, activeColumnIndex + 1);
+        const activeIndex = this._activeColumnIndexInFilteredList();
+        this._moveActiveColumn(event, activeIndex + 1);
     }
 
     /** @hidden */
@@ -217,43 +202,24 @@ export class ColumnsComponent {
         return item?.column.key;
     }
 
-    /**
-     * @hidden
-     * Initialize columns data and signals.
-     */
-    private _initiateColumns(columnsData: SettingsColumnsDialogData | undefined): void {
-        const allColumns = columnsData?.columns || [];
-        this.selectableColumns.set(
-            allColumns.map(
-                (column, index): SelectableColumn => ({
-                    column,
-                    selected: column.visible,
-                    active: index === 0
-                })
-            )
-        );
+    /** @hidden Move active column to target index */
+    private _moveActiveColumn(event: Event, targetIndex: number, refocusButton = false): void {
+        event.stopPropagation();
+        event.preventDefault();
+        this._moveColumnInFilteredListByIndex(this._activeColumnIndexInFilteredList(), targetIndex);
 
-        this.searchQuery.set(INITIAL_SEARCH_TEXT);
-        this.showAllItems.set(INITIAL_SHOW_ALL_ITEMS);
+        if (refocusButton) {
+            setTimeout(() => (event.target as HTMLElement | null)?.focus(), 0);
+        }
     }
 
-    /**
-     * Compare the initial columns state with the current state and emit reset availability change if needed.
-     * Scheduled via setTimeout to avoid triggering during signal computation.
-     * @hidden
-     */
-    private _compareInitialColumnsNextTick(): void {
-        setTimeout(() => this._compareInitialColumns(), 0);
-    }
-
-    /** @hidden */
-    private _getVisibleColumnsFromSelectedColumns(columns: SelectableColumn[]): string[] {
-        return columns.filter(({ selected }) => selected).map(({ column }) => column.name);
-    }
-
-    /** @hidden */
-    private _getColumnOrder(columns: SelectableColumn[]): string[] {
-        return columns.map((column) => column.column.name);
+    /** @hidden Build result data from current selectable columns */
+    private _buildResultData(columns: SelectableColumn[]): SettingsColumnsDialogResultData {
+        return {
+            visibleColumns: columns.filter(({ selected }) => selected).map(({ column }) => column.name),
+            columnOrder: columns.map(({ column }) => column.name),
+            columns: columns.map((selectable) => ({ ...selectable.column, visible: selectable.selected }))
+        };
     }
 
     /** @hidden */
@@ -308,58 +274,36 @@ export class ColumnsComponent {
      * @hidden
      */
     private _onModelChange(): void {
-        const selectableColumns = this.selectableColumns();
-        const currentVisibleColumns = this._getVisibleColumnsFromSelectedColumns(selectableColumns);
-        const currentColumnOrder = this._getColumnOrder(selectableColumns);
-
-        // Build the full columns array with updated order and visibility
-        const reorderedColumns = selectableColumns.map((selectable) => ({
-            ...selectable.column,
-            visible: selectable.selected
-        }));
-
-        const result: SettingsColumnsDialogResultData = {
-            visibleColumns: currentVisibleColumns,
-            columnOrder: currentColumnOrder,
-            columns: reorderedColumns
-        };
-
+        const result = this._buildResultData(this.selectableColumns());
         this.columnsChange.emit(result);
 
-        // Only emit reset availability if initialColumns is set
         const initialColumns = this.initialColumns();
         if (initialColumns) {
-            const isInitialDiffers =
-                !shallowEqual(currentVisibleColumns, initialColumns.visibleColumns) ||
-                !shallowEqual(currentColumnOrder, initialColumns.columnOrder);
-            this.resetAvailabilityChange.emit(isInitialDiffers);
+            const isChanged =
+                !shallowEqual(result.visibleColumns, initialColumns.visibleColumns) ||
+                !shallowEqual(result.columnOrder, initialColumns.columnOrder);
+            this.resetAvailabilityChange.emit(isChanged);
         }
     }
 
     /**
-     * Compare the initial columns state with the current state and emit reset availability change if needed.
+     * Compare initial columns with current state on next tick.
+     * Scheduled via setTimeout to avoid triggering during signal computation.
      * @hidden
      */
-    private _compareInitialColumns(): void {
-        const selectableColumns = this.selectableColumns();
-        const reorderedColumns = selectableColumns.map((selectable) => ({
-            ...selectable.column,
-            visible: selectable.selected
-        }));
+    private _compareInitialColumnsNextTick(): void {
+        setTimeout(() => {
+            const initialColumns = this.initialColumns();
+            if (!initialColumns) {return;}
 
-        const appliedColumns: SettingsColumnsDialogResultData = {
-            visibleColumns: this._getVisibleColumnsFromSelectedColumns(selectableColumns),
-            columnOrder: this._getColumnOrder(selectableColumns),
-            columns: reorderedColumns
-        };
+            const current = this._buildResultData(this.selectableColumns());
+            const isChanged =
+                !shallowEqual(current.visibleColumns, initialColumns.visibleColumns) ||
+                !shallowEqual(current.columnOrder, initialColumns.columnOrder);
 
-        const initialColumns = this.initialColumns();
-        if (
-            initialColumns &&
-            (!shallowEqual(initialColumns.visibleColumns, appliedColumns.visibleColumns) ||
-                !shallowEqual(initialColumns.columnOrder, appliedColumns.columnOrder))
-        ) {
-            this.resetAvailabilityChange.emit(true);
-        }
+            if (isChanged) {
+                this.resetAvailabilityChange.emit(true);
+            }
+        }, 0);
     }
 }
