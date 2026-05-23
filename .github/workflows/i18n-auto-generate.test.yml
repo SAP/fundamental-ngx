@@ -22,6 +22,9 @@ jobs:
     test_generation:
         name: Test TypeScript file generation
         runs-on: ubuntu-latest
+        environment: i18n-automation
+        permissions:
+            contents: read
         steps:
             - name: Checkout
               uses: actions/checkout@v4.2.2
