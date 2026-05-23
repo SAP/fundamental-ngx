@@ -22,7 +22,8 @@ jobs:
     nx_agents:
         name: Nx Cloud Agent ${{ matrix.agent }}
         runs-on: ubuntu-latest
-        permissions: {}
+        permissions:
+            contents: read
         timeout-minutes: 60
         strategy:
             matrix:
@@ -264,7 +265,8 @@ jobs:
         needs: create_release
         name: Nx Cloud - Stop Agents
         runs-on: ubuntu-latest
-        permissions: {}
+        permissions:
+            contents: read
         steps:
             - uses: actions/checkout@v4.2.2
               with:
