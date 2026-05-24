@@ -25,7 +25,18 @@
             }
         },
         "build": {
-            "dependsOn": ["generate-routes"],
+            "dependsOn": [
+                "generate-routes",
+                {
+                    "projects": [
+                        "ui5-webcomponents-base",
+                        "ui5-webcomponents",
+                        "ui5-webcomponents-fiori",
+                        "ui5-webcomponents-ai"
+                    ],
+                    "target": "build"
+                }
+            ],
             "executor": "@angular-devkit/build-angular:application",
             "options": {
                 "outputPath": "dist/apps/e2e-harness",
