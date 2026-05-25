@@ -253,7 +253,7 @@ function makePathsSameLength(paths: ApprovalGraphNode[][]): ApprovalGraphNode[][
         }
         for (let nodeIndex = 0; nodeIndex < path.length; nodeIndex++) {
             if (nodeIndex >= longestPathLength - 1) {
-                continue;
+                break;
             }
             const node = path[nodeIndex];
             /** Try to get blank nodes from already processed paths as paths may be the same within some part */
