@@ -1,20 +1,7 @@
 {
     "name": "<%= projectName %>",
     "projectType": "library",
-    "targets": {
-        "e2e": {
-            "executor": "@fundamental-ngx/nx-plugin:e2e-test",
-            "options": {
-                "e2eFiles": [
-                    "{projectRoot}/e2e/**/*.e2e-spec.ts"
-                ],
-                "devServerTarget": "docs:serve:e2e"
-            },
-            "outputs": [
-                "allure-results/<%= projectName %>"
-            ]
-        }
-    },
+    "targets": {},
     "tags": [
         "type:lib",
         "scope:docs"

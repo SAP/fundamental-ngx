@@ -241,6 +241,11 @@
         position when it reaches the edge of the viewport. By default, the menu automatically repositions to stay
         visible.
     </p>
+    <p>
+        <strong>Scroll strategy:</strong> Use <code>[scrollStrategy]</code> to control how the overlay reacts when an
+        ancestor scrolls. Pass any CDK <code>ScrollStrategy</code> obtained from <code>Overlay.scrollStrategies</code> —
+        typical choices are <code>reposition()</code> (default), <code>close()</code>, and <code>noop()</code>.
+    </p>
 </description>
 <component-example>
     <fd-menu-placement-example></fd-menu-placement-example>

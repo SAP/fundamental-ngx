@@ -49,6 +49,12 @@ yarn start
 
 # Clear NX cache if stale
 nx reset
+
+# E2E / integration tests (see docs/e2e-testing.md)
+npx playwright test                    # Run all
+npx playwright test --grep "core/button"    # Run specific
+npx playwright test --update-snapshots # Update baselines
+npx playwright show-report             # View results
 ```
 
 **IMPORTANT:** Always run `yarn format` after finishing code changes, before running build/lint/test.
@@ -77,6 +83,27 @@ nx reset
 - **New** components/directives/pipes: use `input()`, `output()`, `model()`, `computed()`, `linkedSignal()`, `host: {}`.
 - **Existing** code: both `@Input()`/`@Output()` decorators and signal functions are fine.
 - When modifying existing `@Input()`/`@Output()`: prefer migrating to signal functions if the change is already in scope, but don't refactor just for the sake of it.
+
+## Skills
+
+Invoke with `/skill-name` (e.g. `/preflight`). Skills live in `.claude/skills/`.
+
+| Skill               | What it does                                                                       |
+| ------------------- | ---------------------------------------------------------------------------------- |
+| `setup-project`     | Set up a new Angular app with `@fundamental-ngx` installed, themed, and verified   |
+| `build-form`        | Build a reactive form with `fdp-form-group`, field validation, and error messages  |
+| `build-table`       | Build a platform data table with sorting, filtering, pagination, and row selection |
+| `build-page-layout` | Build a page layout using `fd-dynamic-page` or `fdp-dynamic-page`                  |
+| `scaffold`          | Generate a working component (dialog, table, card, form, shell, layout-grid)       |
+| `migrate`           | Migrate a component or directive to Angular 21+ signal-based patterns              |
+| `create-test`       | Generate or update unit tests following project testing conventions                |
+| `i18n-manage`       | Add, rename, or remove i18n translation keys across the codebase                   |
+| `adopt-styles`      | Adopt breaking changes from `fundamental-styles` into Angular components           |
+| `update-docs`       | Verify and update documentation examples against the current public API            |
+| `best-practices`    | Audit code against project conventions and Angular 21+ best practices              |
+| `a11y-audit`        | Audit a component for WCAG AA accessibility compliance                             |
+| `review-pr`         | Review a pull request against project conventions                                  |
+| `preflight`         | Run local quality gates before creating a PR                                       |
 
 ## Detailed Reference
 

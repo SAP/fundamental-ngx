@@ -12,11 +12,15 @@ concurrency:
     group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
     cancel-in-progress: true
 
+permissions:
+    contents: read
+
 jobs:
     auto_generate:
         name: Generate TypeScript files from .properties changes
         runs-on: ubuntu-latest
         timeout-minutes: 10
+        environment: i18n-automation
         permissions:
             contents: write
             pull-requests: write

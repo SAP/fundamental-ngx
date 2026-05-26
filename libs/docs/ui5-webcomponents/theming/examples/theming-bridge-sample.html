@@ -1,0 +1,22 @@
+<div class="theming-bridge-sample">
+    <div class="sap-margin-bottom-medium fd-padding--md sap-bg-color-backgroundColor">
+        <strong>Current theme:</strong> {{ currentThemeName() }} (<code>{{ currentThemeId() }}</code>)
+    </div>
+
+    <div class="sap-flex sap-flex--gap-medium sap-flex--wrap">
+        <div class="fd-padding--md example-card sap-border-radius-element">
+            <strong class="sap-margin-bottom-small sap-display-block">Fundamental-ngx button:</strong>
+            <button fd-button label="FD Button"></button>
+        </div>
+        <div class="fd-padding--md example-card sap-border-radius-element">
+            <strong class="sap-margin-bottom-small sap-display-block">UI5 Web Component button:</strong>
+            <ui5-button>UI5 Button</ui5-button>
+        </div>
+    </div>
+
+    <p class="sap-margin-top-small sap-font-size-small sap-color-content_LabelColor">
+        <strong>Try it:</strong> Use the <strong>toolbar theme selector</strong> (palette icon, top-right) to switch
+        themes. Both the fundamental-ngx button and the UI5 button update together — the bridge calls UI5's
+        <code>setTheme()</code> automatically when <code>ThemingService.currentTheme</code> changes.
+    </p>
+</div>

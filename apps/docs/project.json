@@ -23,28 +23,6 @@
         }
     },
     "targets": {
-        "e2e-app": {
-            "executor": "@fundamental-ngx/nx-plugin:e2e-test-app",
-            "configurations": {
-                "affected-local": {
-                    "affected": true,
-                    "devServerTarget": "docs:serve:e2e",
-                    "base": "origin/main",
-                    "head": "HEAD"
-                },
-                "all-local": {
-                    "affected": false,
-                    "devServerTarget": "docs:serve:e2e"
-                },
-                "affected-remote": {
-                    "affected": true
-                },
-                "all-remote": {
-                    "affected": false
-                }
-            },
-            "defaultConfiguration": "affected-local"
-        },
         "compile": {
             "executor": "@angular-devkit/build-angular:browser-esbuild",
             "options": {

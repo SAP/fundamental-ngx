@@ -22,7 +22,8 @@ jobs:
     nx_agents:
         name: Nx Cloud Agent ${{ matrix.agent }}
         runs-on: ubuntu-latest
-        permissions: {}
+        permissions:
+            contents: read
         timeout-minutes: 60
         strategy:
             matrix:
@@ -42,6 +43,7 @@ jobs:
     create_release:
         name: Create release
         runs-on: ubuntu-latest
+        environment: release
         permissions:
             contents: write
             id-token: write
@@ -126,7 +128,7 @@ jobs:
               with:
                   parallel-commands: |
                       npx nx run-many --target=lint --skip-nx-cache --projects=${{ env.RELEASE_PACKAGES }} --parallel=3
-                      npx nx run-many --target=build --all --parallel=1
+                      npx nx run-many --target=build --projects=${{ env.RELEASE_PACKAGES }} --parallel=1
 
             - name: Extract Angular version
               id: angularVersion
@@ -263,7 +265,8 @@ jobs:
         needs: create_release
         name: Nx Cloud - Stop Agents
         runs-on: ubuntu-latest
-        permissions: {}
+        permissions:
+            contents: read
         steps:
             - uses: actions/checkout@v4.2.2
               with:

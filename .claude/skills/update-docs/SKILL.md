@@ -2,7 +2,6 @@
 name: update-docs
 description: Verify and update documentation examples to match a component's current public API
 argument-hint: [component-path-or-folder]
-disable-model-invocation: true
 context: fork
 agent: general-purpose
 ---

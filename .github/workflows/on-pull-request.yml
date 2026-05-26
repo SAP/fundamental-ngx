@@ -10,17 +10,21 @@ env:
     NX_BRANCH: ${{ github.event.number || github.ref_name }}
     NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
     NX_CLOUD_AUTH_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
-    FIREBASE_SERVICE_ACCOUNT_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_TOKEN }}
 
 concurrency:
     group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
     cancel-in-progress: true
+
+permissions:
+    contents: read
 
 jobs:
     nx_agents:
         name: Nx Cloud Agent ${{ matrix.agent }}
         runs-on: ubuntu-latest
         timeout-minutes: 60
+        permissions:
+            contents: read
         strategy:
             matrix:
                 agent: [1, 2, 3]
@@ -43,6 +47,9 @@ jobs:
     build_test:
         runs-on: ubuntu-latest
         name: Run affected Build, Lint and test commands
+        permissions:
+            contents: read
+            pull-requests: read
         defaults:
             run:
                 working-directory: ${{ github.workspace }}
@@ -74,13 +81,23 @@ jobs:
             - uses: wagoid/commitlint-github-action@v6.1.2
               name: Commit lint
 
+            - name: Generate ui5-webcomponents wrappers
+              run: npx nx run-many --target=generate --projects=ui5-webcomponents,ui5-webcomponents-ai,ui5-webcomponents-fiori,ui5-webcomponents-base
+              env:
+                  NX_CLOUD_DISTRIBUTED_EXECUTION: false
+
             - name: Run Build, Lint and test commands
               uses: ./.github/actions/parallel-commands
               with:
                   parallel-commands: |
-                      npx nx affected --target=build --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD --exclude=docs --parallel=1
+                      npx nx affected --target=build --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD --exclude=docs,e2e-harness --parallel=1
                       npx nx run-many --target=test --all --skip-nx-cache --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD --exclude=nx-plugin --parallel=1
                       npx nx affected --target=lint --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD --exclude=core,platform,cx,btp --parallel=1
+
+            - name: Build e2e-harness (non-DTE; needs generated ui5 sources locally)
+              run: npx nx run e2e-harness:build:development
+              env:
+                  NX_CLOUD_DISTRIBUTED_EXECUTION: false
 
             - name: Text workspace tags
               run: npx nx run nx-plugin:test --skip-nx-cache
@@ -146,6 +163,8 @@ jobs:
             # - e2e_test
         name: Nx Cloud - Stop Agents
         runs-on: ubuntu-latest
+        permissions:
+            contents: read
         steps:
             - uses: actions/checkout@v4.2.2
               with:

@@ -136,6 +136,32 @@ describe('CheckboxComponent', () => {
         }
     });
 
+    it('should clear state class when setStyleState is called with null', async () => {
+        checkbox.setStyleState('error');
+        checkboxDetectChanges(checkbox);
+        await whenStable(fixture);
+
+        let input = getCheckboxInput(fixture);
+        expect(input.classList.contains('is-error')).toBe(true);
+
+        checkbox.setStyleState(null);
+        checkboxDetectChanges(checkbox);
+        await whenStable(fixture);
+
+        input = getCheckboxInput(fixture);
+        expect(input.classList.contains('is-error')).toBe(false);
+    });
+
+    it('should not add any state class when state is null', async () => {
+        checkbox.state = null;
+        checkboxDetectChanges(checkbox);
+        await whenStable(fixture);
+
+        const input = getCheckboxInput(fixture);
+        const stateClasses = Array.from(input.classList).filter((c) => c.startsWith('is-'));
+        expect(stateClasses.length).toBe(0);
+    });
+
     it('should be disabled', async () => {
         checkbox.setDisabledState(true);
 

@@ -377,8 +377,12 @@ export class PopoverDocsComponent {
             language: 'typescript',
             component: 'PopoverResizableExampleComponent',
             code: getAssetFromModuleAssets(resizablePopoverTsSrc),
-            fileName: 'popover-resizable-example',
-            scssFileCode: getAssetFromModuleAssets(resizablePopoverScss)
+            fileName: 'popover-resizable-example'
+        },
+        {
+            language: 'scss',
+            code: getAssetFromModuleAssets(resizablePopoverScss),
+            fileName: 'popover-resizable-example'
         }
     ];
 }

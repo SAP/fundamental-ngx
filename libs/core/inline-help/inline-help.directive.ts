@@ -1,3 +1,4 @@
+import { ScrollStrategy } from '@angular/cdk/overlay';
 import {
     booleanAttribute,
     computed,
@@ -92,6 +93,9 @@ export class InlineHelpDirective {
     /** Maximum width of popover body in px. */
     readonly maxWidth = input<number | null | undefined>(null);
 
+    /** CDK scroll strategy applied to the inline help overlay. */
+    readonly scrollStrategy = input<ScrollStrategy | null>(null);
+
     /** @hidden Combined internal + user-provided body classes. */
     readonly combinedBodyClass = computed(() => {
         const parts = [this._additionalBodyClass];
@@ -114,6 +118,7 @@ export class InlineHelpDirective {
         appendTo: this.appendTo,
         fixedPosition: this.fixedPosition,
         maxWidth: this.maxWidth,
+        scrollStrategy: this.scrollStrategy,
         additionalBodyClass: this.combinedBodyClass,
         disabled: this.disabled,
         bodyRole: this.bodyRole,

@@ -1,0 +1,9 @@
+{
+    "name": "docs-ui5-webcomponents-theming",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "libs/docs/ui5-webcomponents/theming",
+    "projectType": "library",
+    "prefix": "ui5-doc",
+    "tags": ["type:lib", "scope:docs"],
+    "targets": {}
+}

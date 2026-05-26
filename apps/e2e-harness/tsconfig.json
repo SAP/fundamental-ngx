@@ -1,0 +1,12 @@
+{
+    "extends": "../../tsconfig.base.json",
+    "angularCompilerOptions": {
+        "strictTemplates": true
+    },
+    "compilerOptions": {
+        "target": "es2023",
+        "module": "preserve",
+        "moduleResolution": "bundler",
+        "lib": ["dom", "es2023"]
+    }
+}
