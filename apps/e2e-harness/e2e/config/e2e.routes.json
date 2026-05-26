@@ -1,5 +1,5 @@
 {
-    "count": 955,
+    "count": 956,
     "routes": [
         {
             "path": "btp/button/nested",
@@ -588,6 +588,13 @@
             "component": "calendar",
             "example": "monday-start",
             "className": "CalendarMondayStartExampleComponent"
+        },
+        {
+            "path": "core/calendar/multi-month-playground",
+            "library": "core",
+            "component": "calendar",
+            "example": "multi-month-playground",
+            "className": "CalendarMultiMonthPlaygroundExampleComponent"
         },
         {
             "path": "core/calendar/options",
