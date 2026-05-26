@@ -20,6 +20,7 @@ jobs:
         name: Generate TypeScript files from .properties changes
         runs-on: ubuntu-latest
         timeout-minutes: 10
+        environment: i18n-automation
         permissions:
             contents: write
             pull-requests: write
