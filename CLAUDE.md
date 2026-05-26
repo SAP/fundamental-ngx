@@ -118,7 +118,6 @@ Use the `fundamental-ngx` MCP server to discover and understand components. Avai
 | `get_usage_guide`         | Import path, minimal template, required inputs, and pitfalls. **Use bare keys for best results**: `"dialog"`, `"table"`, `"button"`, `"card"`, `"setup"` (project setup), `"ui5"` (UI5 setup). Selector names like `"fd-dialog"` bypass the curated guides and return lower-quality auto-generated output |
 | `get_accessibility_guide` | ARIA inputs, keyboard handling notes, and a11y code examples for a component                                                                                                                                                                                                                              |
 | `compare_components`      | Side-by-side API diff and alternatives between two components                                                                                                                                                                                                                                             |
-| `get_migration_guide`     | Breaking-change notes between versions                                                                                                                                                                                                                                                                    |
 
 **Discovery workflow**: `search_components` → `list_components(library=...)` → `get_component_api` → `get_component_examples`
 

@@ -4,14 +4,7 @@ import { readFileSync } from 'fs';
 import { resolve } from 'path';
 import { z } from 'zod';
 import { USAGE_GUIDES } from './data/usage-guides';
-import { extractChangelogs } from './extractors/changelog-extractor';
-import {
-    ChangelogEntry,
-    ComponentCatalog,
-    ComponentMetadata,
-    LIBRARY_ALIAS_MAP,
-    LibraryAlias
-} from './types/component-metadata';
+import { ComponentCatalog, ComponentMetadata, LIBRARY_ALIAS_MAP, LibraryAlias } from './types/component-metadata';
 import { buildPitfalls, buildTemplate, deriveImportPath, getSelectorType } from './utils/selector-utils';
 
 // Load component catalog from pre-built JSON
@@ -32,9 +25,6 @@ try {
     catalog = { generatedAt: new Date().toISOString(), version: 'unknown', components: [] };
     console.error('Warning: components.json not found. Run `nx run mcp-server:extract-metadata` first.');
 }
-
-// Design tokens and changelog loaded async at startup
-let changelogEntries: ChangelogEntry[] = [];
 
 const server = new McpServer({
     name: 'fundamental-ngx',
@@ -262,114 +252,6 @@ Use this when you need real usage patterns for a component.`,
                             selector: component.selector,
                             exampleCount: formatted.length,
                             examples: formatted
-                        },
-                        null,
-                        2
-                    )
-                }
-            ]
-        };
-    }
-);
-
-// ---------------------------------------------------------------------------
-// Tool: get_migration_guide
-// ---------------------------------------------------------------------------
-server.tool(
-    'get_migration_guide',
-    `Get migration guidance for upgrading Fundamental NGX.
-Returns breaking changes, deprecated APIs, and migration steps.
-Use this when helping users upgrade between versions.`,
-    {
-        name: z
-            .string()
-            .optional()
-            .describe('Library (e.g., "core", "@fundamental-ngx/platform") or keyword to filter migration info'),
-        from_version: z.string().optional().describe('Version migrating from (e.g., "0.58.0")'),
-        to_version: z.string().optional().describe('Version migrating to (defaults to latest)')
-    },
-    async ({ name, from_version, to_version }) => {
-        let entries = changelogEntries;
-
-        if (name) {
-            const lowerComp = name.toLowerCase();
-            entries = entries.filter(
-                (e) => e.library.toLowerCase().includes(lowerComp) || e.description.toLowerCase().includes(lowerComp)
-            );
-        }
-
-        if (from_version) {
-            entries = entries.filter((e) => compareVersions(e.version, from_version) >= 0);
-        }
-
-        if (to_version) {
-            entries = entries.filter((e) => compareVersions(e.version, to_version) <= 0);
-        }
-
-        if (entries.length === 0) {
-            return {
-                content: [
-                    {
-                        type: 'text' as const,
-                        text: JSON.stringify(
-                            {
-                                filters: { name, from_version, to_version },
-                                matches: 0,
-                                note: 'No changelog entries found for the given filters. Try broader version ranges or omit the component filter.'
-                            },
-                            null,
-                            2
-                        )
-                    }
-                ]
-            };
-        }
-
-        // Collapse RC entries into their stable release. Stable releases (e.g. 0.61.0)
-        // aggregate all changes from their RCs (e.g. 0.61.0-rc.2), producing duplicates.
-        // If the same type+description exists in both RC and stable, keep only the stable entry.
-        const stableKeys = new Set<string>();
-        for (const e of entries) {
-            if (!e.version.includes('-')) {
-                stableKeys.add(`${baseVersion(e.version)}|${e.type}|${e.description}`);
-            }
-        }
-        entries = entries.filter((e) => {
-            if (!e.version.includes('-')) {
-                return true;
-            } // keep all stable entries
-            const key = `${baseVersion(e.version)}|${e.type}|${e.description}`;
-            return !stableKeys.has(key); // drop RC entry if stable has same change
-        });
-
-        // Group by version
-        const byVersion: Record<string, ChangelogEntry[]> = {};
-        for (const entry of entries) {
-            (byVersion[entry.version] ??= []).push(entry);
-        }
-
-        // Sort versions descending, limit output
-        const sortedVersions = Object.keys(byVersion).sort((a, b) => compareVersions(b, a));
-        const limitedVersions = sortedVersions.slice(0, 20);
-
-        const result = limitedVersions.map((version) => ({
-            version,
-            changes: byVersion[version].map((e) => ({
-                type: e.type,
-                library: e.library,
-                description: e.description
-            }))
-        }));
-
-        return {
-            content: [
-                {
-                    type: 'text' as const,
-                    text: JSON.stringify(
-                        {
-                            filters: { name, from_version, to_version },
-                            totalEntries: entries.length,
-                            versions: result
                         },
                         null,
                         2
@@ -868,41 +750,6 @@ function findAlternatives(selectorA: string, selectorB: string): string[] {
     return [...alternatives];
 }
 
-/** Simple version comparison: "0.60.0" vs "0.61.0". Returns negative/0/positive. */
-function compareVersions(a: string, b: string): number {
-    const [aBase, aPre] = a.split('-');
-    const [bBase, bPre] = b.split('-');
-    const pa = aBase.split('.').map(Number);
-    const pb = bBase.split('.').map(Number);
-    for (let i = 0; i < Math.max(pa.length, pb.length); i++) {
-        const diff = (pa[i] ?? 0) - (pb[i] ?? 0);
-        if (diff !== 0) {
-            return diff;
-        }
-    }
-    // Same base version: stable (no pre-release) > RC
-    if (!aPre && bPre) {
-        return 1;
-    }
-    if (aPre && !bPre) {
-        return -1;
-    }
-    if (aPre && bPre) {
-        // Compare RC numbers: rc.2 vs rc.10
-        const aRc = parseInt(aPre.replace(/\D+/g, ''), 10) || 0;
-        const bRc = parseInt(bPre.replace(/\D+/g, ''), 10) || 0;
-        return aRc - bRc;
-    }
-    return 0;
-}
-
-/**
- * Get the base version from a version string (strips -rc.N suffix).
- */
-function baseVersion(version: string): string {
-    return version.replace(/-.*$/, '');
-}
-
 // ---------------------------------------------------------------------------
 // UI Pattern recommendations
 // ---------------------------------------------------------------------------
@@ -971,24 +818,8 @@ const UI_PATTERNS: Record<string, string[]> = {
 // Start server
 // ---------------------------------------------------------------------------
 
-/** Load changelog data. Must be called before tool handlers that use it. */
-export async function loadData(): Promise<void> {
-    try {
-        const raw = readFileSync(resolve(__dirname, 'data', 'changelogs.json'), 'utf-8');
-        changelogEntries = JSON.parse(raw) as ChangelogEntry[];
-    } catch {
-        // Fallback for local monorepo development where the bundled file may not exist yet
-        const basePath = resolve(__dirname, '..', '..', '..');
-        changelogEntries = await extractChangelogs(basePath).catch(() => []);
-        if (changelogEntries.length === 0) {
-            console.error('Warning: no changelog data found. Run `nx run mcp-server:extract-changelogs` first.');
-        }
-    }
-}
-
 /** Start in MCP stdio transport mode (normal operation). */
 export async function startStdioServer(): Promise<void> {
-    await loadData();
     const transport = new StdioServerTransport();
     await server.connect(transport);
 }

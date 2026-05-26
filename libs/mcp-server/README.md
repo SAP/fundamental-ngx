@@ -75,18 +75,15 @@ That's it — your AI assistant now has full access to the Fundamental NGX compo
 
 ## Available Tools
 
-| Tool                      | Purpose                                                          | Example Query                                                  |
-| ------------------------- | ---------------------------------------------------------------- | -------------------------------------------------------------- |
-| `list_components`         | List all components, filter by library/category                  | `{ "library": "core", "category": "Form" }`                    |
-| `search_components`       | Keyword search across names, selectors, descriptions, properties | `{ "query": "date picker" }`                                   |
-| `get_component_api`       | Full API details for a specific component                        | `{ "name": "fd-button" }` or `{ "name": "ui5-table" }`         |
-| `get_component_examples`  | Usage examples from the docs app                                 | `{ "name": "fd-dialog" }`                                      |
-| `recommend_components`    | Suggest components for a UI description                          | `{ "description": "a filterable data table with pagination" }` |
-| `get_migration_guide`     | Breaking changes and upgrade guidance                            | `{ "from_version": "0.58.0" }`                                 |
-| `get_design_tokens`       | SAP theming tokens and utility classes                           | `{ "query": "background color", "category": "color" }`         |
-| `get_accessibility_guide` | ARIA inputs, keyboard handling, and a11y examples                | `{ "name": "ui5-dialog" }`                                     |
-| `compare_components`      | Side-by-side comparison of two components                        | `{ "component_a": "fd-button", "component_b": "ui5-button" }`  |
-| `get_usage_guide`         | Decision tree and composition patterns for a component           | `{ "component": "dialog" }`                                    |
+| Tool                      | Purpose                                                          | Example Query                                                 |
+| ------------------------- | ---------------------------------------------------------------- | ------------------------------------------------------------- |
+| `list_components`         | List all components, filter by library/category                  | `{ "library": "core", "category": "Form" }`                   |
+| `search_components`       | Keyword search across names, selectors, descriptions, properties | `{ "query": "date picker" }`                                  |
+| `get_component_api`       | Full API details for a specific component                        | `{ "name": "fd-button" }` or `{ "name": "ui5-table" }`        |
+| `get_component_examples`  | Usage examples from the docs app                                 | `{ "name": "fd-dialog" }`                                     |
+| `get_accessibility_guide` | ARIA inputs, keyboard handling, and a11y examples                | `{ "name": "ui5-dialog" }`                                    |
+| `compare_components`      | Side-by-side comparison of two components                        | `{ "component_a": "fd-button", "component_b": "ui5-button" }` |
+| `get_usage_guide`         | Decision tree and composition patterns for a component           | `{ "component": "dialog" }`                                   |
 
 ## Metadata Schema
 

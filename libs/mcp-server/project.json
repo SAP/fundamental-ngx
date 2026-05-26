@@ -45,20 +45,6 @@
                 "command": "npx tsx libs/mcp-server/src/extractors/build-metadata.ts --dry-run",
                 "cwd": "{workspaceRoot}"
             }
-        },
-        "extract-changelogs": {
-            "executor": "nx:run-commands",
-            "options": {
-                "command": "npx tsx libs/mcp-server/src/extractors/build-changelogs.ts",
-                "cwd": "{workspaceRoot}"
-            }
-        },
-        "check-changelogs": {
-            "executor": "nx:run-commands",
-            "options": {
-                "command": "npx tsx libs/mcp-server/src/extractors/build-changelogs.ts --dry-run",
-                "cwd": "{workspaceRoot}"
-            }
         }
     }
 }

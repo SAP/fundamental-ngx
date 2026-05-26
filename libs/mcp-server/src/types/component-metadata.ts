@@ -196,18 +196,3 @@ export interface ComponentCatalog {
     /** All component metadata entries */
     components: ComponentMetadata[];
 }
-
-/** Changelog entry for migration guide. */
-export interface ChangelogEntry {
-    /** npm package this change belongs to (e.g. "@fundamental-ngx/core") */
-    library: string;
-    /** Version where the change was introduced */
-    version: string;
-    /** Type of change */
-    type: 'breaking' | 'feature' | 'fix' | 'deprecation';
-    /** Description of the change (markdown) */
-    description: string;
-}
-
-/** Raw extractor output — carries the commit scope before it is resolved to a library. */
-export type RawChangelogEntry = ChangelogEntry & { component: string };

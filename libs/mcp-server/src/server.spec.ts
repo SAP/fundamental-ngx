@@ -11,7 +11,6 @@ import { readFileSync } from 'fs';
 import { resolve } from 'path';
 import { USAGE_GUIDES } from './data/usage-guides';
 import {
-    ChangelogEntry,
     ComponentCatalog,
     ComponentExample,
     ComponentMetadata,
@@ -119,39 +118,6 @@ function truncate(text: string, maxLength: number): string {
         return firstLine;
     }
     return firstLine.slice(0, maxLength - 3) + '...';
-}
-
-// ---------------------------------------------------------------------------
-// Version comparison helpers (mirror of server.ts)
-// ---------------------------------------------------------------------------
-
-function compareVersions(a: string, b: string): number {
-    const [aBase, aPre] = a.split('-');
-    const [bBase, bPre] = b.split('-');
-    const pa = aBase.split('.').map(Number);
-    const pb = bBase.split('.').map(Number);
-    for (let i = 0; i < Math.max(pa.length, pb.length); i++) {
-        const diff = (pa[i] ?? 0) - (pb[i] ?? 0);
-        if (diff !== 0) {
-            return diff;
-        }
-    }
-    if (!aPre && bPre) {
-        return 1;
-    }
-    if (aPre && !bPre) {
-        return -1;
-    }
-    if (aPre && bPre) {
-        const aRc = parseInt(aPre.replace(/\D+/g, ''), 10) || 0;
-        const bRc = parseInt(bPre.replace(/\D+/g, ''), 10) || 0;
-        return aRc - bRc;
-    }
-    return 0;
-}
-
-function baseVersion(version: string): string {
-    return version.replace(/-.*$/, '');
 }
 
 // ---------------------------------------------------------------------------
@@ -727,144 +693,6 @@ describe('Real catalog validation', () => {
 });
 
 // ---------------------------------------------------------------------------
-// Version helpers
-// ---------------------------------------------------------------------------
-
-describe('compareVersions', () => {
-    it('should sort major versions', () => {
-        expect(compareVersions('1.0.0', '0.9.0')).toBeGreaterThan(0);
-        expect(compareVersions('0.9.0', '1.0.0')).toBeLessThan(0);
-    });
-
-    it('should sort minor versions', () => {
-        expect(compareVersions('0.61.0', '0.60.0')).toBeGreaterThan(0);
-    });
-
-    it('should sort patch versions', () => {
-        expect(compareVersions('0.61.1', '0.61.0')).toBeGreaterThan(0);
-    });
-
-    it('should rank stable above RC of same base', () => {
-        expect(compareVersions('0.61.0', '0.61.0-rc.2')).toBeGreaterThan(0);
-        expect(compareVersions('0.61.0-rc.2', '0.61.0')).toBeLessThan(0);
-    });
-
-    it('should sort RC numbers numerically', () => {
-        expect(compareVersions('0.61.0-rc.10', '0.61.0-rc.2')).toBeGreaterThan(0);
-        expect(compareVersions('0.61.0-rc.1', '0.61.0-rc.2')).toBeLessThan(0);
-    });
-
-    it('should return 0 for identical versions', () => {
-        expect(compareVersions('0.61.0', '0.61.0')).toBe(0);
-        expect(compareVersions('0.61.0-rc.2', '0.61.0-rc.2')).toBe(0);
-    });
-});
-
-describe('baseVersion', () => {
-    it('should strip RC suffix', () => {
-        expect(baseVersion('0.61.0-rc.2')).toBe('0.61.0');
-    });
-
-    it('should return stable versions unchanged', () => {
-        expect(baseVersion('0.61.0')).toBe('0.61.0');
-    });
-});
-
-describe('RC-to-stable deduplication logic', () => {
-    const entries = [
-        {
-            version: '0.61.0-rc.2',
-            type: 'feature' as const,
-            description: 'add new card layout mode',
-            library: '@fundamental-ngx/core' as const
-        },
-        {
-            version: '0.61.0-rc.2',
-            type: 'breaking' as const,
-            description: 'migrate popover to signals',
-            library: '@fundamental-ngx/core' as const
-        },
-        {
-            version: '0.61.0',
-            type: 'feature' as const,
-            description: 'add new card layout mode',
-            library: '@fundamental-ngx/core' as const
-        },
-        {
-            version: '0.61.0',
-            type: 'breaking' as const,
-            description: 'migrate popover to signals',
-            library: '@fundamental-ngx/core' as const
-        },
-        {
-            version: '0.61.0-rc.1',
-            type: 'fix' as const,
-            description: 'restore missing popover inputs',
-            library: '@fundamental-ngx/core' as const
-        },
-        {
-            version: '0.61.0',
-            type: 'fix' as const,
-            description: 'restore missing popover inputs',
-            library: '@fundamental-ngx/core' as const
-        }
-    ];
-
-    it('should drop RC entries when same change exists in stable release', () => {
-        // Build stable keys set
-        const stableKeys = new Set<string>();
-        for (const e of entries) {
-            if (!e.version.includes('-')) {
-                stableKeys.add(`${baseVersion(e.version)}|${e.type}|${e.description}`);
-            }
-        }
-
-        const deduped = entries.filter((e) => {
-            if (!e.version.includes('-')) {
-                return true;
-            }
-            const key = `${baseVersion(e.version)}|${e.type}|${e.description}`;
-            return !stableKeys.has(key);
-        });
-
-        // Only the 3 stable entries should remain
-        expect(deduped).toHaveLength(3);
-        expect(deduped.every((e) => !e.version.includes('-'))).toBe(true);
-    });
-
-    it('should keep RC entries that have no matching stable release', () => {
-        const entriesWithOrphanRc = [
-            ...entries,
-            {
-                version: '0.62.0-rc.1',
-                type: 'fix' as const,
-                description: 'unique RC fix',
-                library: '@fundamental-ngx/core' as const
-            }
-        ];
-
-        const stableKeys = new Set<string>();
-        for (const e of entriesWithOrphanRc) {
-            if (!e.version.includes('-')) {
-                stableKeys.add(`${baseVersion(e.version)}|${e.type}|${e.description}`);
-            }
-        }
-
-        const deduped = entriesWithOrphanRc.filter((e) => {
-            if (!e.version.includes('-')) {
-                return true;
-            }
-            const key = `${baseVersion(e.version)}|${e.type}|${e.description}`;
-            return !stableKeys.has(key);
-        });
-
-        // 3 stable + 1 orphan RC
-        expect(deduped).toHaveLength(4);
-        expect(deduped.find((e) => e.version === '0.62.0-rc.1')).toBeDefined();
-    });
-});
-
-// ---------------------------------------------------------------------------
 // get_accessibility_guide logic
 // ---------------------------------------------------------------------------
 
@@ -1261,64 +1089,5 @@ describe('get_usage_guide result shape', () => {
         const importPath = deriveImportPath(comp);
         const statement = `import { ${comp.name} } from '${importPath}';`;
         expect(statement).toBe("import { DialogComponent } from '@fundamental-ngx/core/dialog';");
-    });
-});
-
-// ---------------------------------------------------------------------------
-// get_migration_guide filter logic
-// ---------------------------------------------------------------------------
-
-describe('get_migration_guide filter logic', () => {
-    const FIXTURE_ENTRIES: ChangelogEntry[] = [
-        { version: '0.62.0', type: 'feature', description: 'add new button type', library: '@fundamental-ngx/core' },
-        { version: '0.62.0', type: 'fix', description: 'fix popover alignment', library: '@fundamental-ngx/core' },
-        {
-            version: '0.62.0',
-            type: 'fix',
-            description: 'fix form field layout',
-            library: '@fundamental-ngx/platform'
-        },
-        {
-            version: '0.61.0',
-            type: 'breaking',
-            description: 'remove deprecated API',
-            library: '@fundamental-ngx/core'
-        }
-    ];
-
-    function filterByName(entries: ChangelogEntry[], name: string): ChangelogEntry[] {
-        const lower = name.toLowerCase();
-        return entries.filter(
-            (e) => e.library.toLowerCase().includes(lower) || e.description.toLowerCase().includes(lower)
-        );
-    }
-
-    it('should filter by short library alias', () => {
-        const result = filterByName(FIXTURE_ENTRIES, 'platform');
-        expect(result).toHaveLength(1);
-        expect(result[0].description).toBe('fix form field layout');
-    });
-
-    it('should filter by full library name', () => {
-        const result = filterByName(FIXTURE_ENTRIES, '@fundamental-ngx/core');
-        expect(result).toHaveLength(3);
-        expect(result.every((e) => e.library === '@fundamental-ngx/core')).toBe(true);
-    });
-
-    it('should filter by description keyword', () => {
-        const result = filterByName(FIXTURE_ENTRIES, 'popover');
-        expect(result).toHaveLength(1);
-        expect(result[0].description).toContain('popover');
-    });
-
-    it('should return all entries when library keyword matches all', () => {
-        const result = filterByName(FIXTURE_ENTRIES, 'fundamental-ngx');
-        expect(result).toHaveLength(4);
-    });
-
-    it('output ChangelogEntry should not have a component field', () => {
-        for (const entry of FIXTURE_ENTRIES) {
-            expect(entry).not.toHaveProperty('component');
-        }
     });
 });
