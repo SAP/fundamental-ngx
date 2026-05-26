@@ -7,8 +7,7 @@ MCP (Model Context Protocol) server that exposes the entire Fundamental NGX comp
 AI coding assistants (Claude Code, Cursor, VS Code Copilot, Windsurf, etc.) can connect to this MCP server and get structured access to:
 
 - **1000+ components** across 8 libraries (core, platform, btp, cx, cdk, ui5-webcomponents, ui5-webcomponents-fiori, ui5-webcomponents-ai)
-- **Full API metadata** — inputs, outputs, slots, methods, enum values, CSS properties
-- **Accessibility guidance** — ARIA inputs, keyboard handling, and a11y examples
+- **Full API metadata** — inputs, outputs, slots, methods, enum values, CSS properties, and keyboard interactions
 - **Component comparison** — side-by-side comparison of alternative components
 - **Usage guides** — decision trees and composition patterns for complex components (dialog, table, card, etc.)
 - **Selector classification** — whether a component is an element, attribute directive, or both, with correct template usage
