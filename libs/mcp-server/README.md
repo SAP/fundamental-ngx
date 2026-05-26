@@ -72,15 +72,14 @@ That's it — your AI assistant now has full access to the Fundamental NGX compo
 
 ## Available Tools
 
-| Tool                      | Purpose                                                          | Example Query                                                 |
-| ------------------------- | ---------------------------------------------------------------- | ------------------------------------------------------------- |
-| `list_components`         | List all components, filter by library/category                  | `{ "library": "core", "category": "Form" }`                   |
-| `search_components`       | Keyword search across names, selectors, descriptions, properties | `{ "query": "date picker" }`                                  |
-| `get_component_api`       | Full API details for a specific component                        | `{ "name": "fd-button" }` or `{ "name": "ui5-table" }`        |
-| `get_component_examples`  | Usage examples from the docs app                                 | `{ "name": "fd-dialog" }`                                     |
-| `get_accessibility_guide` | ARIA inputs, keyboard handling, and a11y examples                | `{ "name": "ui5-dialog" }`                                    |
-| `compare_components`      | Side-by-side comparison of two components                        | `{ "component_a": "fd-button", "component_b": "ui5-button" }` |
-| `get_usage_guide`         | Decision tree and composition patterns for a component           | `{ "component": "dialog" }`                                   |
+| Tool                     | Purpose                                                          | Example Query                                                 |
+| ------------------------ | ---------------------------------------------------------------- | ------------------------------------------------------------- |
+| `list_components`        | List all components, filter by library/category                  | `{ "library": "core", "category": "Form" }`                   |
+| `search_components`      | Keyword search across names, selectors, descriptions, properties | `{ "query": "date picker" }`                                  |
+| `get_component_api`      | Full API details for a specific component                        | `{ "name": "fd-button" }` or `{ "name": "ui5-table" }`        |
+| `get_component_examples` | Usage examples from the docs app                                 | `{ "name": "fd-dialog" }`                                     |
+| `compare_components`     | Side-by-side comparison of two components                        | `{ "component_a": "fd-button", "component_b": "ui5-button" }` |
+| `get_usage_guide`        | Decision tree and composition patterns for a component           | `{ "component": "dialog" }`                                   |
 
 ## Metadata Schema
 
@@ -115,8 +114,7 @@ The MCP server is designed as the primary AI-assisted onboarding path for Fundam
 1. **Discover** — Use `search_components` or `list_components` to find the right components for your UI
 2. **Decide** — Use `get_usage_guide` to choose the right variant (e.g., which dialog API surface)
 3. **Learn** — Use `get_component_api` and `get_component_examples` for API details and working code
-4. **Build** — Use `get_accessibility_guide` while implementing
-5. **Compare** — Use `compare_components` when choosing between alternatives (e.g., `fd-table` vs `fdp-table`)
+4. **Compare** — Use `compare_components` when choosing between alternatives (e.g., `fd-table` vs `fdp-table`)
 
 ### Usage Guides
 

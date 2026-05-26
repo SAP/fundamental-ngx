@@ -12,7 +12,6 @@ import { resolve } from 'path';
 import { USAGE_GUIDES } from './data/usage-guides';
 import {
     ComponentCatalog,
-    ComponentExample,
     ComponentMetadata,
     InputMetadata
 } from './types/component-metadata';
@@ -692,83 +691,6 @@ describe('Real catalog validation', () => {
     });
 });
 
-// ---------------------------------------------------------------------------
-// get_accessibility_guide logic
-// ---------------------------------------------------------------------------
-
-describe('get_accessibility_guide logic', () => {
-    function getAriaInputs(component: ComponentMetadata): InputMetadata[] {
-        return component.inputs.filter(
-            (i) =>
-                i.name.toLowerCase().startsWith('aria') ||
-                i.name.toLowerCase() === 'role' ||
-                i.name.toLowerCase().startsWith('accessible')
-        );
-    }
-
-    function getA11yExamples(component: ComponentMetadata): ComponentExample[] {
-        return (component.examples ?? []).filter(
-            (ex) =>
-                ex.name.toLowerCase().includes('a11y') ||
-                ex.name.toLowerCase().includes('accessibility') ||
-                ex.name.toLowerCase().includes('accessible')
-        );
-    }
-
-    it('should extract ARIA inputs (ariaLabel)', () => {
-        const comp = findComponent('fd-button', FIXTURE_COMPONENTS)!;
-        const ariaInputs = getAriaInputs(comp);
-        expect(ariaInputs).toHaveLength(1);
-        expect(ariaInputs[0].name).toBe('ariaLabel');
-    });
-
-    it('should extract accessible* inputs for UI5 components', () => {
-        const comp = findComponent('ui5-button', FIXTURE_COMPONENTS)!;
-        const ariaInputs = getAriaInputs(comp);
-        expect(ariaInputs.map((i) => i.name)).toEqual(expect.arrayContaining(['accessibleName', 'accessibleNameRef']));
-    });
-
-    it('should extract ARIA, role, and ariaDescribedBy inputs', () => {
-        const comp = findComponent('fd-dialog', FIXTURE_COMPONENTS)!;
-        const ariaInputs = getAriaInputs(comp);
-        expect(ariaInputs).toHaveLength(3);
-        expect(ariaInputs.map((i) => i.name).sort()).toEqual(['ariaDescribedBy', 'ariaLabel', 'role']);
-    });
-
-    it('should return empty array for components with no ARIA inputs', () => {
-        const comp = findComponent('fdp-table', FIXTURE_COMPONENTS)!;
-        const ariaInputs = getAriaInputs(comp);
-        expect(ariaInputs).toHaveLength(0);
-    });
-
-    it('should find a11y examples when present', () => {
-        const comp = findComponent('fd-dialog', FIXTURE_COMPONENTS)!;
-        const examples = getA11yExamples(comp);
-        expect(examples).toHaveLength(1);
-        expect(examples[0].name).toContain('a11y');
-    });
-
-    it('should return empty examples for components without a11y examples', () => {
-        const comp = findComponent('fd-button', FIXTURE_COMPONENTS)!;
-        const examples = getA11yExamples(comp);
-        expect(examples).toHaveLength(0);
-    });
-
-    it('should include keyboard handling from CEM components', () => {
-        const comp = findComponent('ui5-button', FIXTURE_COMPONENTS)!;
-        expect(comp.keyboardHandling).toBe('Press ENTER or SPACE to trigger the button.');
-    });
-
-    it('should have no keyboard handling for typedoc components', () => {
-        const comp = findComponent('fd-button', FIXTURE_COMPONENTS)!;
-        expect(comp.keyboardHandling).toBeUndefined();
-    });
-});
-
-// ---------------------------------------------------------------------------
-// get_accessibility_guide — curated pitfalls & config-input tips
-// ---------------------------------------------------------------------------
-
 describe('isSignalWrapperType', () => {
     function isSignalWrapperType(type: string | undefined): boolean {
         return !!type && /^(Writable)?Signal</.test(type);
@@ -782,23 +704,6 @@ describe('isSignalWrapperType', () => {
         expect(isSignalWrapperType('InputSignal<string>')).toBe(false));
     it('should not match plain boolean', () => expect(isSignalWrapperType('boolean')).toBe(false));
     it('should not match undefined', () => expect(isSignalWrapperType(undefined)).toBe(false));
-});
-
-describe('get_accessibility_guide — supplementary tips', () => {
-    it('should use real fd-dialog from catalog: only dialogConfig input, no direct ARIA inputs', () => {
-        const dialog = catalog.components.find((c) => c.selector === 'fd-dialog');
-        expect(dialog).toBeDefined();
-        const ariaInputs = dialog!.inputs.filter(
-            (i) =>
-                i.name.toLowerCase().startsWith('aria') ||
-                i.name.toLowerCase() === 'role' ||
-                i.name.toLowerCase().startsWith('accessible')
-        );
-        expect(ariaInputs).toHaveLength(0);
-        const configInput = dialog!.inputs.find((i) => i.type && i.type.includes('Config'));
-        expect(configInput).toBeDefined();
-        expect(configInput!.name).toBe('dialogConfig');
-    });
 });
 
 // ---------------------------------------------------------------------------
