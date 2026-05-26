@@ -141,6 +141,38 @@
 
 <separator></separator>
 
+<fd-docs-section-title id="multiMonth" componentName="calendar"> Multi-Month Calendar Container </fd-docs-section-title>
+<description>
+    The <code>fd-calendar-container</code> component renders one or more calendar months side-by-side, with synchronized
+    navigation and range selection that spans across all rendered months. Use the playground below to explore the
+    configuration options.
+    <ul>
+        <li>
+            <strong><code>[months]</code></strong
+            >: how many months to render. Clamped to 1–4 (5+ → 4, 0 / negatives → 1, fractions truncated). Default is 2.
+        </li>
+        <li>
+            <strong><code>[layout]</code></strong
+            >: <code>horizontal</code> (side-by-side) or <code>vertical</code>
+            (stacked). Default is horizontal.
+        </li>
+        <li>
+            <strong><code>[rangeHoverEffect]</code></strong
+            >: when true, hovering during range selection highlights preview cells across all calendars in the
+            container.
+        </li>
+    </ul>
+    Inner-boundary navigation arrows are hidden — only the leftmost left-arrow and rightmost right-arrow are active, and
+    they advance every calendar in lockstep by one month. "Other month" days are hidden via the
+    <code>fd-calendar-container</code> wrapper.
+</description>
+<component-example>
+    <fd-calendar-multi-month-playground-example></fd-calendar-multi-month-playground-example>
+</component-example>
+<code-example [exampleFiles]="calendarMultiMonthPlaygroundSource"></code-example>
+
+<separator></separator>
+
 <fd-docs-section-title id="multiRange" componentName="calendar"> Multi Range Selection Calendar</fd-docs-section-title>
 <description>
     Allows the selection of a range of dates. Only the first and last days of the range are passed back.

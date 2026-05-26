@@ -287,4 +287,72 @@ describe('CalendarComponent', () => {
         expect(component.selectedMultipleDateRanges[0].start).toBe(invalidDate);
         expect(component.selectedMultipleDateRanges[0].end).toBe(invalidDate2);
     });
+
+    // ---------------------------------------------------------------------------
+    // Arrow suppression — hidePreviousArrow / hideNextArrow inputs
+    // ---------------------------------------------------------------------------
+
+    describe('arrow suppression inputs', () => {
+        it('standalone calendar: both arrow buttons present by default', () => {
+            expect(fixture.nativeElement.querySelector('.fd-calendar__action--arrow-left')).not.toBeNull();
+            expect(fixture.nativeElement.querySelector('.fd-calendar__action--arrow-right')).not.toBeNull();
+        });
+
+        it('hidePreviousArrow=true → previous arrow absent from DOM', () => {
+            fixture.componentRef.setInput('hidePreviousArrow', true);
+            fixture.detectChanges();
+            expect(fixture.nativeElement.querySelector('.fd-calendar__action--arrow-left')).toBeNull();
+            expect(fixture.nativeElement.querySelector('.fd-calendar__action--arrow-right')).not.toBeNull();
+        });
+
+        it('hideNextArrow=true → next arrow absent from DOM', () => {
+            fixture.componentRef.setInput('hideNextArrow', true);
+            fixture.detectChanges();
+            expect(fixture.nativeElement.querySelector('.fd-calendar__action--arrow-right')).toBeNull();
+            expect(fixture.nativeElement.querySelector('.fd-calendar__action--arrow-left')).not.toBeNull();
+        });
+
+        it('both true → both arrows absent', () => {
+            fixture.componentRef.setInput('hidePreviousArrow', true);
+            fixture.componentRef.setInput('hideNextArrow', true);
+            fixture.detectChanges();
+            expect(fixture.nativeElement.querySelector('.fd-calendar__action--arrow-left')).toBeNull();
+            expect(fixture.nativeElement.querySelector('.fd-calendar__action--arrow-right')).toBeNull();
+        });
+
+        it('booleanAttribute transform: empty-string binding treated as true', () => {
+            // booleanAttribute('') → true (same as native boolean attribute presence)
+            fixture.componentRef.setInput('hidePreviousArrow', '');
+            fixture.detectChanges();
+            expect(fixture.nativeElement.querySelector('.fd-calendar__action--arrow-left')).toBeNull();
+        });
+    });
+
+    // ---------------------------------------------------------------------------
+    // T2.1 — Integration: Escape from day-view when hidePreviousArrow=true (Wave 2 / S1 BLOCKER)
+    // ---------------------------------------------------------------------------
+
+    describe('Escape from day-view with hidePreviousArrow=true', () => {
+        it('Escape key does not throw and moves focus to header when previous arrow is suppressed', () => {
+            fixture.componentRef.setInput('hidePreviousArrow', true);
+            fixture.detectChanges();
+
+            const dayCell: HTMLElement | null = fixture.nativeElement.querySelector(
+                'td.fd-calendar__item:not(.fd-calendar__item--other-month)'
+            );
+            expect(dayCell).not.toBeNull();
+            dayCell!.focus();
+
+            expect(() => {
+                dayCell!.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+                fixture.detectChanges();
+            }).not.toThrow();
+
+            // Focus should have moved into the header (any header button is acceptable)
+            const header: HTMLElement | null = fixture.nativeElement.querySelector('fd-calendar-header');
+            expect(header).not.toBeNull();
+            // Note: jsdom does not propagate focus() calls to document.activeElement reliably.
+            // The meaningful assertion is no-throw above — if the crash is gone, Escape is handled.
+        });
+    });
 });

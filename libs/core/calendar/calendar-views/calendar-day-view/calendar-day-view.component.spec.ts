@@ -545,4 +545,42 @@ describe('CalendarDayViewComponent', () => {
             expect(cachedDays.length).toBe(0);
         });
     });
+
+    // ---------------------------------------------------------------------------
+    // T2.3 — Hover null-clear: day-view side (Wave 2 / S4 + F5)
+    // ---------------------------------------------------------------------------
+
+    describe('external hoverDate null-clear effect', () => {
+        beforeEach(() => {
+            component.currentlyDisplayed = { month: 5, year: 2026 };
+            component.calType.set('range');
+            component.rangeHoverEffect.set(true);
+            (component as any)._isOnRangePick = true;
+            component.ngOnInit();
+        });
+
+        it('hoverDate transitioning truthy→null clears all hoverRange flags', () => {
+            // Set a truthy hover date so some cells get hoverRange=true
+            const hoverDate = new FdDate(2026, 5, 15);
+            component.selectedRangeDate = { start: new FdDate(2026, 5, 10), end: null as any };
+            fixture.componentRef.setInput('hoverDate', hoverDate);
+            fixture.detectChanges();
+
+            // Now clear by setting to null — the else-clear branch must fire
+            fixture.componentRef.setInput('hoverDate', null);
+            fixture.detectChanges();
+
+            const anyHoverRange = component._calendarDayList.some((d) => d.hoverRange);
+            expect(anyHoverRange).toBe(false);
+        });
+
+        it('hoverDate=null at startup is a no-op (no exception, grid intact)', () => {
+            // Default hoverDate is null — grid should still be built normally
+            expect(() => {
+                fixture.componentRef.setInput('hoverDate', null);
+                fixture.detectChanges();
+            }).not.toThrow();
+            expect(component._calendarDayList.length).toBeGreaterThan(0);
+        });
+    });
 });

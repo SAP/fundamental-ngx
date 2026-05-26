@@ -1,0 +1,22 @@
+fd-calendar-container {
+    display: block;
+    overflow: hidden;
+
+    .fd-calendar {
+        box-shadow: none;
+        border-radius: 0;
+    }
+
+    // Reason: CSS custom properties cannot be used as @media query bounds — --sapBreakpoint_M_Min
+    // exists as a SCSS/LESS variable only, not as a runtime-usable media query value.
+    // At N≥3 the natural horizontal width is 3×18rem + 2×1rem = 56rem (3 calendars + 2 gaps).
+    // Below 56rem any N≥3 layout overflows; collapsing to vertical is the safe fallback.
+    // 55.9375rem = 895px (1px below 56rem to avoid triggering at exact boundary).
+    @media (max-width: 55.9375rem) {
+        &:not(.fd-calendar-container--vertical) {
+            .fd-calendar-container-inner {
+                flex-direction: column;
+            }
+        }
+    }
+}

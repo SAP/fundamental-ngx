@@ -9,6 +9,8 @@
     [previousButtonDisabled]="previousButtonDisabled"
     [nextButtonDisabled]="nextButtonDisabled"
     (activeViewChange)="handleActiveViewChange($event)"
+    [hidePreviousArrow]="hidePreviousArrow()"
+    [hideNextArrow]="hideNextArrow()"
 ></fd-calendar-header>
 @if (_currentlyDisplayed) {
     @if (activeView === 'day') {
@@ -34,6 +36,8 @@
             [rangeHoverEffect]="rangeHoverEffect"
             [specialDaysRules]="specialDaysRules"
             [focusEscapeFunction]="escapeFocusFunction"
+            [hoverDate]="hoverDate()"
+            (hoverDateChange)="hoverDateChange.emit($event)"
             (nextMonthSelect)="displayNextMonth()"
             (previousMonthSelect)="displayPreviousMonth()"
         ></fd-calendar-day-view>

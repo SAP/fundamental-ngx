@@ -1,0 +1,27 @@
+<div class="fd-calendar-container-inner" (mouseleave)="onHoverChange(null)">
+    @let isVertical = layout() === 'vertical';
+    @for (m of calendarMonths(); track $index; let last = $last) {
+        <fd-calendar
+            [calType]="calType()"
+            [selectedRangeDate]="selectedRangeDate()"
+            [selectedDate]="selectedDate()"
+            [rangeHoverEffect]="rangeHoverEffect()"
+            [markWeekends]="markWeekends()"
+            [showWeekNumbers]="showWeekNumbers()"
+            [startingDayOfWeek]="startingDayOfWeek()!"
+            [disableFunction]="disableFunction()!"
+            [disableRangeStartFunction]="disableRangeStartFunction()!"
+            [disableRangeEndFunction]="disableRangeEndFunction()!"
+            [specialDaysRules]="specialDaysRules()"
+            [currentMonth]="m"
+            [hoverDate]="hoverDate()"
+            (hoverDateChange)="onHoverChange($event)"
+            (selectedRangeDateChange)="onRangeChange($event)"
+            (selectedDateChange)="onDateChange($event)"
+            (navigated)="onCalendarNavigated($event, $index)"
+            [attr.aria-label]="getSlotAriaLabel(m, $index)"
+            [hidePreviousArrow]="$index > 0"
+            [hideNextArrow]="isVertical ? $index > 0 : !last"
+        ></fd-calendar>
+    }
+</div>

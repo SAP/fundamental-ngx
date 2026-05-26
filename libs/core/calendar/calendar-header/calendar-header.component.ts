@@ -12,7 +12,9 @@ import {
     SimpleChanges,
     ViewChild,
     ViewEncapsulation,
-    inject
+    booleanAttribute,
+    inject,
+    input
 } from '@angular/core';
 
 import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
@@ -89,6 +91,20 @@ export class CalendarHeaderComponent<D> implements OnInit, OnChanges {
     /** @hidden */
     @ViewChild('prevButton', { read: ElementRef })
     _prevButtonComponent: ElementRef;
+
+    /** @hidden */
+    @ViewChild('currentMonthButton', { read: ElementRef })
+    _currentMonthButton: ElementRef;
+
+    /** @hidden */
+    @ViewChild('nextButton', { read: ElementRef })
+    _nextButtonComponent: ElementRef;
+
+    /** Suppress the previous-month arrow button. Defaults to false. */
+    readonly hidePreviousArrow = input(false, { transform: booleanAttribute });
+
+    /** Suppress the next-month arrow button. Defaults to false. */
+    readonly hideNextArrow = input(false, { transform: booleanAttribute });
 
     /** Aria label for the previous button. Depends on the active view. */
     get previousAriaLabel(): 'coreCalendar.previousMonthLabel' | 'coreCalendar.previousYearLabel' {
@@ -253,7 +269,11 @@ export class CalendarHeaderComponent<D> implements OnInit, OnChanges {
      * Focus on focusable control within the header
      */
     focus(): void {
-        this._prevButtonComponent.nativeElement?.focus();
+        (
+            this._prevButtonComponent?.nativeElement ??
+            this._currentMonthButton?.nativeElement ??
+            this._nextButtonComponent?.nativeElement
+        )?.focus();
     }
 
     /** @hidden */

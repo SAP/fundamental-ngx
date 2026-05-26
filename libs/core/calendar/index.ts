@@ -1,3 +1,4 @@
+export * from './calendar-container/calendar-container.component';
 export * from './calendar-directives';
 export * from './calendar-header/calendar-header.component';
 export * from './calendar-legend/calendar-legend-focusing.service';
