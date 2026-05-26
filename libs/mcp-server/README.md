@@ -8,9 +8,6 @@ AI coding assistants (Claude Code, Cursor, VS Code Copilot, Windsurf, etc.) can 
 
 - **1000+ components** across 8 libraries (core, platform, btp, cx, cdk, ui5-webcomponents, ui5-webcomponents-fiori, ui5-webcomponents-ai)
 - **Full API metadata** — inputs, outputs, slots, methods, enum values, CSS properties
-- **Component recommendations** — describe what you want to build and get matching components
-- **Design tokens** — SAP theming CSS custom properties and utility classes
-- **Migration guidance** — breaking changes and upgrade paths from changelogs
 - **Accessibility guidance** — ARIA inputs, keyboard handling, and a11y examples
 - **Component comparison** — side-by-side comparison of alternative components
 - **Usage guides** — decision trees and composition patterns for complex components (dialog, table, card, etc.)
@@ -115,10 +112,10 @@ See `src/types/component-metadata.ts` for full type definitions.
 
 The MCP server is designed as the primary AI-assisted onboarding path for Fundamental NGX. Here's the recommended workflow:
 
-1. **Discover** — Use `recommend_components` to find the right components for your UI
+1. **Discover** — Use `search_components` or `list_components` to find the right components for your UI
 2. **Decide** — Use `get_usage_guide` to choose the right variant (e.g., which dialog API surface)
 3. **Learn** — Use `get_component_api` and `get_component_examples` for API details and working code
-4. **Build** — Use `get_design_tokens` and `get_accessibility_guide` while implementing
+4. **Build** — Use `get_accessibility_guide` while implementing
 5. **Compare** — Use `compare_components` when choosing between alternatives (e.g., `fd-table` vs `fdp-table`)
 
 ### Usage Guides
