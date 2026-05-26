@@ -1,4 +1,5 @@
 import {
+    booleanAttribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -10,10 +11,12 @@ import {
     HostListener,
     Inject,
     Input,
+    input,
     OnChanges,
     OnInit,
     Optional,
     Output,
+    output,
     SimpleChanges,
     ViewChild,
     ViewEncapsulation
@@ -23,7 +26,6 @@ import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } fro
 import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { SpecialDayRule } from '@fundamental-ngx/core/shared';
 
-import { Nullable } from '@fundamental-ngx/cdk/utils';
 import {
     ContentDensityModule,
     ContentDensityObserver,
@@ -111,7 +113,7 @@ let calendarUniqueId = 0;
 export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAccessor, Validator {
     /** The currently selected date model in single mode. */
     @Input()
-    selectedDate: Nullable<D>;
+    selectedDate: D | null | undefined;
 
     /** The currently selected date model in multiple mode. */
     @Input()
@@ -294,8 +296,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     @Input()
     nextButtonDisableFunction: NavigationButtonDisableFunction<D>;
 
-    /**
-     * Whether to show the calendar legend below the calendar.
+    /** Whether to show the calendar legend below the calendar.
      * The legend displays special day markers and their meanings.
      */
     @Input()
@@ -307,6 +308,27 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
      */
     @Input()
     legendCol = false;
+
+    /** Suppress the previous-month arrow button. Defaults to false. */
+    readonly hidePreviousArrow = input(false, { transform: booleanAttribute });
+
+    /** Suppress the next-month arrow button. Defaults to false. */
+    readonly hideNextArrow = input(false, { transform: booleanAttribute });
+
+    /**
+     * Externally-controlled displayed month/year. When set, overrides internal navigation state.
+     * Used by fd-calendar-container to synchronize multiple calendars.
+     */
+    readonly currentMonth = input<CalendarCurrent | undefined>(undefined);
+
+    /** External hover date for cross-calendar hover coordination. */
+    readonly hoverDate = input<D | null | undefined>(null);
+
+    /** Emitted when the user navigates (prev/next) and the displayed month/year changes. */
+    readonly navigated = output<CalendarCurrent>();
+
+    /** Emitted when the user hovers over a day cell. Used for cross-calendar hover coordination. */
+    readonly hoverDateChange = output<D | null | undefined>();
 
     /**
      * @hidden
@@ -326,6 +348,9 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
 
     /** @hidden */
     private _adapterStartingDayOfWeek: DaysOfWeek;
+
+    /** @hidden Whether the displayed month is being controlled externally (via currentMonth input). */
+    private _currentMonthExternallyControlled = false;
 
     /** @hidden */
     private _shiftAnchorDate: D | null = null;
@@ -355,6 +380,18 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
             this._dateTimeAdapter.locale();
             this._adapterStartingDayOfWeek = (this._dateTimeAdapter.getFirstDayOfWeek() + 1) as DaysOfWeek;
             this._changeDetectorRef.markForCheck();
+        });
+
+        effect(() => {
+            const value = this.currentMonth();
+            if (
+                value &&
+                (value.month !== this._currentlyDisplayed?.month || value.year !== this._currentlyDisplayed?.year)
+            ) {
+                this._currentlyDisplayed = { month: value.month, year: value.year };
+                this._currentMonthExternallyControlled = true;
+                this._changeDetectorRef.markForCheck();
+            }
         });
     }
 
@@ -643,6 +680,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
                 month: this._currentlyDisplayed.month + 1
             };
         }
+        this.navigated.emit(this._currentlyDisplayed);
     }
 
     /** Function that allows to switch actual view to previous month */
@@ -655,6 +693,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
                 month: this._currentlyDisplayed.month - 1
             };
         }
+        this.navigated.emit(this._currentlyDisplayed);
     }
 
     /** Function that allows to switch actual view to next year */
@@ -699,7 +738,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
      * Function that allows to change currently displayed month/year configuration,
      * which are connected to days displayed
      */
-    setCurrentlyDisplayed(date: Nullable<D>): void {
+    setCurrentlyDisplayed(date: D | null | undefined): void {
         if (this._dateTimeAdapter.isValid(date)) {
             this._currentlyDisplayed = {
                 month: this._dateTimeAdapter.getMonth(date!),
@@ -728,6 +767,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
         }
 
         this.activeViewChange.emit(this.activeView);
+        this.navigated.emit(this._currentlyDisplayed);
     }
 
     /** Select year */
@@ -746,6 +786,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
             this.activeView = FdCalendarViewEnum.Day;
             this.onDaysViewSelected();
         }
+        this.navigated.emit(this._currentlyDisplayed);
     }
 
     /** Select year range */
@@ -756,6 +797,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
             year: yearsSelected.startYear
         };
         this.onYearViewSelected();
+        this.navigated.emit(this._currentlyDisplayed);
     }
 
     /** @hidden */
@@ -829,6 +871,9 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
      * Day grid is based on currently displayed month and year
      */
     private _prepareDisplayedView(): void {
+        if (this._currentMonthExternallyControlled) {
+            return;
+        }
         const { selectedDate, selectedRangeDate, selectedMultipleDates, selectedMultipleDateRanges } = this;
 
         if (

@@ -39,7 +39,7 @@ alwaysApply: false
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [OtherComponent],
     host: {
-        '[class]': '_cssClass()',
+        '[class]': 'cssClass()',
         '(click)': 'handleClick($event)'
     }
 })
@@ -51,14 +51,14 @@ export class ExampleComponent {
     readonly clicked = output<MouseEvent>();
 
     // 3. Public fields
-    // 4. Protected fields (computed, injected services for template)
-    protected readonly _cssClass = computed(() => {
+    // 4. Protected fields (computed, injected services for template) -- no leading underscore
+    protected readonly cssClass = computed(() => {
         const classes = ['fd-example'];
         if (this.disabled()) classes.push('fd-example--disabled');
         return classes.join(' ');
     });
 
-    // 5. Private fields
+    // 5. Private fields -- leading underscore
     private readonly _elementRef = inject(ElementRef);
 
     // 6. Constructor
@@ -68,14 +68,25 @@ export class ExampleComponent {
 
 **Member ordering** (ESLint enforced): decorated props, then signal inputs/outputs, then public, then protected, then private. Protected always before private.
 
+## Member naming
+
+- **`private` members**: leading underscore. Example: `private readonly _elementRef`, `private _onChange`.
+- **`protected` members**: plain camelCase, **no leading underscore**. Example: `protected readonly cssClass`, `protected onClick()`.
+- **`public` members**: plain camelCase, no underscore.
+- **Signal inputs/outputs/models**: plain camelCase, no underscore (regardless of visibility — they are public by definition).
+
+The convention reflects access intent: `_` signals "internal-only, do not touch from outside this class." `protected` members are reachable from the template (which is the _outside_ in TS terms), so they must not be `_`-prefixed. Some legacy code uses `protected _foo`; do not retroactively rename, but do not introduce new occurrences.
+
+This rule is **not lint-enforced** — it lives by convention. When authoring a new component, scan your `protected` members before submitting.
+
 ## CSS Class Building
 
 Replace `CssClassBuilder` + `@applyCssClass` with `computed()` + `host`:
 
 ```typescript
-host: { '[class]': '_cssClass()' }
+host: { '[class]': 'cssClass()' }
 
-protected readonly _cssClass = computed(() => {
+protected readonly cssClass = computed(() => {
     const classes = ['fd-example'];
     if (this.emphasized()) classes.push('fd-example--emphasized');
     classes.push(`fd-example--${this.size()}`);

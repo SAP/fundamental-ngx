@@ -14,6 +14,7 @@ import {
     model,
     OnChanges,
     OnInit,
+    output,
     Output,
     SimpleChanges,
     ViewEncapsulation
@@ -236,6 +237,12 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
      */
     specialDaysRules = input<SpecialDayRule<D>[]>([]);
 
+    /** External hover date for cross-calendar hover coordination. When set, refreshes hover range visualization. */
+    readonly hoverDate = input<D | null | undefined>(null);
+
+    /** Emitted when user hovers over a day cell. Used for cross-calendar hover coordination. */
+    readonly hoverDateChange = output<D | null>();
+
     /**
      * @hidden
      * Actual day grid with previous/current/next month days
@@ -339,6 +346,23 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
             if (this._isInitiated) {
                 this._refreshShortWeekDays();
                 this._buildDayViewGrid();
+                this.changeDetRef.markForCheck();
+            }
+        });
+
+        // Effect to handle external hover date for cross-calendar coordination
+        effect(() => {
+            const externalHoverDate = this.hoverDate();
+            if (this._dayViewGrid && this._isInitiated && this._isOnRangePick && externalHoverDate) {
+                const fakeDay = this._calendarDayList.find((d) => this._isSameDay(d.date, externalHoverDate));
+                if (fakeDay) {
+                    this._refreshHoverRange(fakeDay);
+                } else {
+                    this._refreshHoverRangeFromExternalDate(externalHoverDate);
+                }
+                this.changeDetRef.markForCheck();
+            } else if (this._dayViewGrid && this._isInitiated && !externalHoverDate) {
+                this._calendarDayList.forEach((d) => (d.hoverRange = false));
                 this.changeDetRef.markForCheck();
             }
         });
@@ -450,6 +474,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
 
     /** @hidden */
     _refreshHoverRange(day: CalendarDay<D>): void {
+        this.hoverDateChange.emit(day.date);
         if (this.allowMultipleSelection()) {
             this._handleMultiRangeHover(day);
         } else {
@@ -1532,6 +1557,31 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
             // No start date, clear hover
             this._calendarDayList.forEach((_day) => {
                 _day.hoverRange = false;
+            });
+        }
+    }
+
+    /**
+     * @hidden
+     * Refreshes hover range from an external date that may not exist in this calendar's grid.
+     * Used for cross-calendar hover coordination.
+     */
+    private _refreshHoverRangeFromExternalDate(date: D): void {
+        const start = this.selectedRangeDate?.start;
+        if (!start) {
+            return;
+        }
+        if (this._dateTimeAdapter.compareDate(date, start) < 0) {
+            this._calendarDayList.forEach((_day) => {
+                _day.hoverRange =
+                    this._dateTimeAdapter.compareDate(_day.date, date) > 0 &&
+                    this._dateTimeAdapter.compareDate(_day.date, start) < 0;
+            });
+        } else {
+            this._calendarDayList.forEach((_day) => {
+                _day.hoverRange =
+                    this._dateTimeAdapter.compareDate(_day.date, date) < 0 &&
+                    this._dateTimeAdapter.compareDate(_day.date, start) > 0;
             });
         }
     }

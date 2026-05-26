@@ -1,18 +1,20 @@
 <header class="fd-calendar__navigation" [class.fd-calendar__navigation--main]="mobileLandscape">
-    <div class="fd-calendar__action fd-calendar__action--arrow-left">
-        <button
-            #prevButton
-            fd-button
-            fdType="transparent"
-            glyph="slim-arrow-left"
-            [attr.id]="_prevButtonId"
-            [disabled]="previousButtonDisabled"
-            [attr.title]="(previousAriaLabel | fdTranslate)()"
-            [ariaLabel]="(previousAriaLabel | fdTranslate)()"
-            type="button"
-            (click)="previousClicked.emit()"
-        ></button>
-    </div>
+    @if (!hidePreviousArrow()) {
+        <div class="fd-calendar__action fd-calendar__action--arrow-left">
+            <button
+                #prevButton
+                fd-button
+                fdType="transparent"
+                glyph="slim-arrow-left"
+                [attr.id]="_prevButtonId"
+                [disabled]="previousButtonDisabled"
+                [attr.title]="(previousAriaLabel | fdTranslate)()"
+                [ariaLabel]="(previousAriaLabel | fdTranslate)()"
+                type="button"
+                (click)="previousClicked.emit()"
+            ></button>
+        </div>
+    }
     @if (isOnDayView || isOnMonthView) {
         @if (!isOnMonthView) {
             <div class="fd-calendar__action">
@@ -32,6 +34,7 @@
         <div class="fd-calendar__action">
             <!-- Select year button -->
             <button
+                #currentMonthButton
                 fd-button
                 type="button"
                 fdType="transparent"
@@ -56,19 +59,22 @@
             </button>
         </div>
     }
-    <div class="fd-calendar__action fd-calendar__action--arrow-right">
-        <button
-            fd-button
-            fdType="transparent"
-            glyph="slim-arrow-right"
-            [attr.id]="_nextButtonId"
-            [disabled]="nextButtonDisabled"
-            [attr.title]="(nextAriaLabel | fdTranslate)()"
-            [ariaLabel]="(nextAriaLabel | fdTranslate)()"
-            (click)="nextClicked.emit()"
-            type="button"
-        ></button>
-    </div>
+    @if (!hideNextArrow()) {
+        <div class="fd-calendar__action fd-calendar__action--arrow-right">
+            <button
+                #nextButton
+                fd-button
+                fdType="transparent"
+                glyph="slim-arrow-right"
+                [attr.id]="_nextButtonId"
+                [disabled]="nextButtonDisabled"
+                [attr.title]="(nextAriaLabel | fdTranslate)()"
+                [ariaLabel]="(nextAriaLabel | fdTranslate)()"
+                (click)="nextClicked.emit()"
+                type="button"
+            ></button>
+        </div>
+    }
 </header>
 <!-- Hidden elements for aria purposes -->
 <div hidden aria-hidden="true">
