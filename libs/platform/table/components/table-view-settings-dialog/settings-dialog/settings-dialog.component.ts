@@ -140,6 +140,7 @@ export class SettingsDialogComponent implements Resettable {
         this.showColumns = data.allowColumnConfiguration;
         if (this.showColumns) {
             this.columnsData.set(data.columnsData);
+            this._setInitialColumns();
         }
         this.headingLevel = data.headingLevel;
         this.activeTab.set(this._getInitialActiveTab());
@@ -147,7 +148,6 @@ export class SettingsDialogComponent implements Resettable {
         this._setInitialSorting();
         this._setInitialFilters();
         this._setInitialGrouping();
-        this._setInitialColumns();
     }
 
     /**
@@ -206,6 +206,7 @@ export class SettingsDialogComponent implements Resettable {
                     columns: initialColumns.columns
                 });
             }
+            this._pendingColumnsChanges = initialColumns;
         }
         this.isResetAvailable$.set(false);
     }
