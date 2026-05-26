@@ -335,13 +335,12 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
         // Effect to handle external hover date for cross-calendar coordination
         effect(() => {
             const externalHoverDate = this.hoverDate();
-            if (this._dayViewGrid && this._isInitiated && this._isOnRangePick && externalHoverDate) {
-                const fakeDay = this._calendarDayList.find((d) => this._isSameDay(d.date, externalHoverDate));
-                if (fakeDay) {
-                    this._refreshHoverRange(fakeDay);
-                } else {
-                    this._refreshHoverRangeFromExternalDate(externalHoverDate);
-                }
+            const rangePickInProgress =
+                this.calType() === CalendarTypeEnum.Range &&
+                this.selectedRangeDate?.start != null &&
+                this.selectedRangeDate?.end == null;
+            if (this._dayViewGrid && this._isInitiated && rangePickInProgress && externalHoverDate) {
+                this._refreshHoverRangeFromExternalDate(externalHoverDate);
                 this.changeDetRef.markForCheck();
             } else if (this._dayViewGrid && this._isInitiated && !externalHoverDate) {
                 this._calendarDayList.forEach((d) => (d.hoverRange = false));

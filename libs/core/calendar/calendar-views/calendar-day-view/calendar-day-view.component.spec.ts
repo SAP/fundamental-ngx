@@ -5,6 +5,7 @@ import { DatetimeAdapter, FdDate, FdDatetimeAdapter, FdDatetimeModule } from '@f
 import { CalendarLegendFocusingService } from '../../calendar-legend/calendar-legend-focusing.service';
 import { CalendarService } from '../../calendar.service';
 import { CalendarDay } from '../../models/calendar-day';
+import { DateRange } from '../../models/date-range';
 import { CalendarDayViewComponent } from './calendar-day-view.component';
 
 describe('CalendarDayViewComponent', () => {
@@ -581,6 +582,40 @@ describe('CalendarDayViewComponent', () => {
                 fixture.detectChanges();
             }).not.toThrow();
             expect(component._calendarDayList.length).toBeGreaterThan(0);
+        });
+    });
+
+    // ---------------------------------------------------------------------------
+    // T2.3b — Broadcast-driven hover: non-source calendar (no _isOnRangePick set)
+    // ---------------------------------------------------------------------------
+
+    describe('external hoverDate broadcast on non-source calendar', () => {
+        beforeEach(() => {
+            component.currentlyDisplayed = { month: 6, year: 2026 };
+            component.calType.set('range');
+            component.rangeHoverEffect.set(true);
+            // _isOnRangePick stays false — simulating a non-source calendar
+            component.ngOnInit();
+        });
+
+        it('paints hover range cells when rangePickInProgress is derivable from selectedRangeDate', () => {
+            // start is set (user clicked in another calendar), end is null → range pick in progress
+            component.selectedRangeDate = new DateRange(new FdDate(2026, 6, 5), null);
+            fixture.componentRef.setInput('hoverDate', new FdDate(2026, 6, 20));
+            fixture.detectChanges();
+
+            const hoveredCells = component._calendarDayList.filter((d) => d.hoverRange);
+            expect(hoveredCells.length).toBeGreaterThan(0);
+        });
+
+        it('does NOT paint hover range when selectedRangeDate.end is already set (range complete)', () => {
+            // Both start and end set → range pick is done, no hover preview
+            component.selectedRangeDate = new DateRange(new FdDate(2026, 6, 5), new FdDate(2026, 6, 10));
+            fixture.componentRef.setInput('hoverDate', new FdDate(2026, 6, 20));
+            fixture.detectChanges();
+
+            const hoveredCells = component._calendarDayList.filter((d) => d.hoverRange);
+            expect(hoveredCells.length).toBe(0);
         });
     });
 });
