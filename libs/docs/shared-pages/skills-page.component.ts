@@ -5,7 +5,7 @@ import { MarkdownModule } from 'ngx-markdown';
     template: `
         <markdown
             class="fd-docs-playground--markdown"
-            src="assets/skills/README.md"
+            src="assets/docs/skills/README.md"
             (load)="onLoad()"
             (error)="onError()"
         ></markdown>

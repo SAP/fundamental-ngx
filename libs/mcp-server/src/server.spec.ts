@@ -10,11 +10,7 @@
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
 import { USAGE_GUIDES } from './data/usage-guides';
-import {
-    ComponentCatalog,
-    ComponentMetadata,
-    InputMetadata
-} from './types/component-metadata';
+import { ComponentCatalog, ComponentMetadata } from './types/component-metadata';
 import { buildPitfalls, buildTemplate, deriveImportPath, getSelectorType } from './utils/selector-utils';
 
 // ---------------------------------------------------------------------------

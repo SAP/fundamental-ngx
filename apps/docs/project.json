@@ -61,6 +61,11 @@
                         "output": "./assets/docs"
                     },
                     {
+                        "input": "./libs/docs/skills",
+                        "glob": "README.md",
+                        "output": "./assets/docs/skills"
+                    },
+                    {
                         "input": "./libs/docs/shared",
                         "glob": "NEW_COMPONENT.md",
                         "output": "./assets"
