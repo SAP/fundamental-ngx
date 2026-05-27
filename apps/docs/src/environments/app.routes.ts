@@ -151,6 +151,20 @@ export const ROUTES: Routes = [
                     })
             },
             {
+                path: 'skills',
+                loadChildren: () =>
+                    import('@fundamental-ngx/docs/skills').then((m) => {
+                        const route = m.default[0];
+                        return [
+                            {
+                                path: '',
+                                providers: route.providers || [],
+                                children: route.children
+                            }
+                        ];
+                    })
+            },
+            {
                 path: 'home',
                 loadComponent: () =>
                     import('@fundamental-ngx/docs/shared-pages').then((m) => m.UnifiedHomePageComponent)
