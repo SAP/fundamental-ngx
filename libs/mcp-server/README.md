@@ -17,46 +17,24 @@ This eliminates hallucinated APIs and outdated documentation — the assistant w
 
 ## Quick Start
 
-### VS Code / Cursor
+### With Claude Code
 
-Create or edit `.vscode/mcp.json` in your project root:
-
-```json
-{
-    "servers": {
-        "fundamental-ngx": {
-            "command": "npx",
-            "args": ["-y", "@fundamental-ngx/mcp"]
-        }
-    }
-}
-```
-
-### Claude Code
-
-Run this command in your terminal to register the server for the current project:
+**Option 1: Using claude mcp add (Recommended)**
 
 ```bash
+# Install latest version
 claude mcp add fundamental-ngx -- npx -y @fundamental-ngx/mcp
+
+# Or install a specific version
+claude mcp add fundamental-ngx -- npx -y @fundamental-ngx/mcp@0.62.4
 ```
 
-Or to make it available across all your projects:
+This command automatically adds the MCP server to your `.claude/mcp.json` configuration.
 
-```bash
-claude mcp add --scope user fundamental-ngx -- npx -y @fundamental-ngx/mcp
-```
-
-You can verify it was added with:
-
-```bash
-claude mcp list
-```
-
-### Windsurf
-
-Add to `~/.codeium/windsurf/mcp_config.json`:
+**Option 2: Manual configuration**
 
 ```json
+// .claude/mcp.json
 {
     "mcpServers": {
         "fundamental-ngx": {
@@ -67,9 +45,59 @@ Add to `~/.codeium/windsurf/mcp_config.json`:
 }
 ```
 
-That's it — your AI assistant now has full access to the Fundamental NGX component catalog.
+### With Cursor
 
-## Available Tools
+```json
+// .cursor/mcp.json
+{
+    "mcpServers": {
+        "fundamental-ngx": {
+            "command": "npx",
+            "args": ["-y", "@fundamental-ngx/mcp"]
+        }
+    }
+}
+```
+
+### With VS Code (Copilot)
+
+```json
+// .vscode/mcp.json
+{
+    "servers": {
+        "fundamental-ngx": {
+            "command": "npx",
+            "args": ["-y", "@fundamental-ngx/mcp"],
+            "type": "stdio"
+        }
+    }
+}
+```
+
+### How it works
+
+`npx -y @fundamental-ngx/mcp` starts a Node.js process that listens on **stdio** for JSON-RPC messages following the [Model Context Protocol](https://modelcontextprotocol.io/). Running it directly in a terminal will appear to hang — that is intentional. The process is idle, waiting for a client to send tool requests over stdin. It is designed to be launched and managed by an MCP client (Claude Code, Cursor, VS Code Copilot), not run interactively.
+
+To explore the server's tools from a browser UI, use the MCP Inspector instead (see below).
+
+**Debugging with MCP Inspector:**
+
+The [MCP Inspector](https://github.com/modelcontextprotocol/inspector) is a web UI for testing MCP servers interactively:
+
+```bash
+npx @modelcontextprotocol/inspector npx -y @fundamental-ngx/mcp
+```
+
+This opens a browser UI where you can:
+
+- Browse all 10 available tools
+- Send test requests with custom parameters
+- View formatted JSON responses
+- Debug tool behavior without an AI client
+
+The server communicates over **stdio** using the MCP JSON-RPC protocol.
+
+## Tools
 
 | Tool                     | Purpose                                                          | Example Query                                                 |
 | ------------------------ | ---------------------------------------------------------------- | ------------------------------------------------------------- |
@@ -80,35 +108,46 @@ That's it — your AI assistant now has full access to the Fundamental NGX compo
 | `compare_components`     | Side-by-side comparison of two components                        | `{ "component_a": "fd-button", "component_b": "ui5-button" }` |
 | `get_usage_guide`        | Decision tree and composition patterns for a component           | `{ "component": "dialog" }`                                   |
 
-## Metadata Schema
+## Example Queries
 
-Each component in the catalog follows this structure:
+```
+"What components are available in the core library?"
+  → list_components with library "core"
 
-```typescript
-interface ComponentMetadata {
-    name: string; // "ButtonComponent"
-    selector: string; // "fd-button" or "ui5-button"
-    selectorType: 'element' | 'attribute' | 'both'; // how to use in templates
-    templateUsage: string; // "<button fd-button>...</button>"
-    library: Library; // "@fundamental-ngx/core"
-    category: string; // "Actions", "Form", "Layout"
-    description: string;
-    deprecated?: string; // deprecation message
-    inputs: InputMetadata[];
-    outputs: OutputMetadata[];
-    slots: SlotMetadata[]; // UI5 components
-    methods: MethodMetadata[];
-    cssProperties: CssPropertyMetadata[];
-    keyboardHandling?: string; // keyboard interaction notes (UI5 components)
-    source: 'cem' | 'typedoc';
-}
+"Find a component for selecting a date range"
+  → search_components with query "date range"
+
+"What inputs does fd-button accept?"
+  → get_component_api with name "fd-button"
+
+"Show me HTML examples for fd-dialog"
+  → get_component_examples with name "fd-dialog"
+
+"I need to build a filterable data table with pagination"
+  → recommend_components with description "filterable data table with pagination"
+
+"What broke between 0.60.0 and 0.62.0?"
+  → get_migration_guide with from_version "0.60.0", to_version "0.62.0"
+
+"What SAP design tokens are available for background colors?"
+  → get_design_tokens with query "background color", category "color"
+
+"How do I handle keyboard navigation in fd-menu?"
+  → get_accessibility_guide with name "fd-menu"
+
+"What is the difference between fd-table and fdp-table?"
+  → compare_components with component_a "fd-table", component_b "fdp-table"
+
+"Which dialog API should I use?"
+  → get_usage_guide with component "dialog"
 ```
 
-See `src/types/component-metadata.ts` for full type definitions.
+## Contributing
 
-## AI Onboarding
+### Prerequisites
 
-The MCP server is designed as the primary AI-assisted onboarding path for Fundamental NGX. Here's the recommended workflow:
+- Node.js 18+
+- Yarn 4.x (the monorepo uses Yarn workspaces)
 
 1. **Discover** — Use `search_components` or `list_components` to find the right components for your UI
 2. **Decide** — Use `get_usage_guide` to choose the right variant (e.g., which dialog API surface)
@@ -135,26 +174,35 @@ Each component now includes `selectorType` and `templateUsage` fields to prevent
 | `attribute`  | Use as an attribute on a host element | `<h2 fd-title>...</h2>`          |
 | `both`       | Element + attribute combined          | `<button fd-button>...</button>` |
 
-## Complementary Skills
-
-The MCP server answers _what_ Fundamental NGX components exist and _how_ their APIs work. For the procedural _how do I compose these together_ knowledge, a set of installable Claude Code skills is available in the repository.
-
-Install them with:
-
 ```bash
-npx skills add sap/fundamental-ngx
+# From the repo root
+yarn install
 ```
 
-Or copy the skills directory into your project's `.claude/skills/` folder.
+### Build
 
-| Skill               | Invocation                                                 | What It Does                                                                                                                                |
-| ------------------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `setup-project`     | `/setup-project my-app horizon`                            | Creates a new Angular app, installs `@fundamental-ngx/core`, applies a SAP Fiori theme, and verifies the setup with a smoke-test component  |
-| `build-form`        | `/build-form UserProfile firstName:text role:select`       | Generates a reactive form with `FormGroup` wiring, `fdp-form-field` composition, typed interface, and automatic error message setup         |
-| `build-table`       | `/build-table Orders sort filter paginate select=multiple` | Generates a platform data table with `FdpTableDataSource`, column definitions, sort/filter directives, pagination, and row selection        |
-| `build-page-layout` | `/build-page-layout ProductDetail subheader footer`        | Generates an `fd-dynamic-page` with collapsing header, subheader, scrollable content, floating footer, and optional tabs or FCL integration |
-| `scaffold`          | `/scaffold dialog component-ref`                           | Generates a working component for any supported pattern (dialog, table, card, form, shell, layout-grid) using live MCP data                 |
-| `migrate`           | `/migrate src/app/my-component`                            | Migrates a component to Angular 21+ signal-based patterns (`@Input→input()`, `@HostBinding→host`, `*ngIf→@if`, `BehaviorSubject→signal()`)  |
-| `a11y-audit`        | `/a11y-audit fd-menu`                                      | Audits a component for WCAG AA compliance — semantic HTML, ARIA, keyboard navigation, focus management                                      |
+```bash
+npx nx build mcp-server
+```
 
-The skills call back into the MCP server (`get_usage_guide`, `get_component_api`, `get_component_examples`) so the procedural guidance is always backed by up-to-date component metadata.
+This compiles TypeScript and copies data assets (JSON files) into `dist/libs/mcp-server/`.
+
+### Extract metadata
+
+The server's component catalog is generated from the built library artifacts. Re-run this after changing component source files:
+
+```bash
+npx nx run mcp-server:extract-metadata
+```
+
+Use `--dry-run` to validate without writing:
+
+```bash
+npx nx run mcp-server:check-metadata
+```
+
+### Test
+
+```bash
+npx nx test mcp-server
+```
