@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, input, OnInit, output, signal, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    computed,
+    input,
+    linkedSignal,
+    output,
+    ViewEncapsulation
+} from '@angular/core';
+import { outputFromObservable, toObservable } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import {
@@ -10,11 +19,10 @@ import {
 import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { CollectionSort, SortDirection } from '@fundamental-ngx/platform/table-helpers';
-import { shallowEqual } from 'fast-equals';
+import { distinctUntilChanged } from 'rxjs';
 import {
     INITIAL_DIRECTION,
     NOT_SORTED_OPTION_VALUE,
-    SettingsSortDialogColumn,
     SettingsSortDialogData,
     SettingsSortDialogResultData
 } from '../table-view-settings.model';
@@ -37,7 +45,7 @@ let sortDialogSortByHeaderUniqueId = 0;
         FdTranslatePipe
     ]
 })
-export class SortingComponent implements OnInit {
+export class SortingComponent {
     /** Input data for sorting */
     sortingData = input<SettingsSortDialogData>();
 
@@ -47,20 +55,11 @@ export class SortingComponent implements OnInit {
     /** Event emitter for sort changes */
     sortChange = output<SettingsSortDialogResultData>();
 
-    /** Event emitter for reset availability changes */
-    resetAvailabilityChange = output<boolean>();
+    /** Current selected sorting direction - resets when sortingData changes */
+    direction = linkedSignal(() => this.sortingData()?.direction ?? INITIAL_DIRECTION);
 
-    /** Current selected sorting direction */
-    direction = signal<SortDirection>(INITIAL_DIRECTION);
-
-    /** Current selected sorting field */
-    field = signal<string | null>(NOT_SORTED_OPTION_VALUE);
-
-    /** Whether disabling sorting is allowed */
-    allowDisablingSorting = signal<boolean>(false);
-
-    /** Available table columns for sorting */
-    columns = signal<SettingsSortDialogColumn[]>([]);
+    /** Current selected sorting field - resets when sortingData changes */
+    field = linkedSignal(() => this.sortingData()?.field ?? NOT_SORTED_OPTION_VALUE);
 
     /** @hidden */
     sortOrderHeaderId = `fdp-table-sort-order-header-${sortOrderHeaderUniqueId++}`;
@@ -74,15 +73,24 @@ export class SortingComponent implements OnInit {
     /** @hidden Constant for 'Not sorted' option value */
     readonly NOT_SORTED_OPTION_VALUE = NOT_SORTED_OPTION_VALUE;
 
-    /** hidden */
-    ngOnInit(): void {
-        const sortingData = this.sortingData();
-        if (sortingData) {
-            this._initSortingData(sortingData);
-        }
+    /** Whether disabling sorting is allowed */
+    allowDisablingSorting = computed(() => this.sortingData()?.allowDisablingSorting ?? false);
 
-        this._compareInitialSorting();
-    }
+    /** Available table columns for sorting */
+    columns = computed(() => this.sortingData()?.columns ?? []);
+
+    /** Event emitter for reset availability changes */
+    resetAvailabilityChange = outputFromObservable(
+        toObservable(
+            computed(() => {
+                const initial = this.initialSorting();
+                if (!initial) {
+                    return false;
+                }
+                return this.direction() !== initial.direction || this.field() !== initial.field;
+            })
+        ).pipe(distinctUntilChanged())
+    );
 
     /**
      * Handle sort direction changes.
@@ -103,46 +111,10 @@ export class SortingComponent implements OnInit {
     }
 
     /**
-     * Initialize sorting data and signals.
-     * @param sortingData Input sorting data.
-     * @hidden
-     */
-    private _initSortingData(sortingData: SettingsSortDialogData): void {
-        this.columns.set(sortingData.columns || []);
-        this.direction.set(sortingData.direction ?? INITIAL_DIRECTION);
-        this.field.set(sortingData.field ?? NOT_SORTED_OPTION_VALUE);
-        this.allowDisablingSorting.set(sortingData.allowDisablingSorting);
-    }
-
-    /**
-     * Emit changes to the model and compare with initial sorting.
+     * Emit changes to the model.
      * @hidden
      */
     private _onModelChange(): void {
-        const initialSorting = this.initialSorting();
-        if (!initialSorting) {
-            return;
-        }
-        const isInitialDiffers = this.direction() !== initialSorting.direction || this.field() !== initialSorting.field;
-
-        this.resetAvailabilityChange.emit(isInitialDiffers);
         this.sortChange.emit({ direction: this.direction(), field: this.field() });
-    }
-
-    /**
-     * Compare the current sorting state with the initial state.
-     * Emit reset availability if the sorting has changed.
-     * @hidden
-     */
-    private _compareInitialSorting(): void {
-        const appliedSorting: CollectionSort = {
-            field: this.field(),
-            direction: this.direction()
-        };
-
-        const isEqual = shallowEqual(this.initialSorting(), appliedSorting);
-        if (!isEqual) {
-            this.resetAvailabilityChange.emit(true);
-        }
     }
 }

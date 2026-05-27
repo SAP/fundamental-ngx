@@ -209,6 +209,7 @@ export class ColumnsComponent {
         this._moveColumnInFilteredListByIndex(this._activeColumnIndexInFilteredList(), targetIndex);
 
         if (refocusButton) {
+            // setTimeout is needed to allow the new button to render for focusing
             setTimeout(() => (event.target as HTMLElement | null)?.focus(), 0);
         }
     }
@@ -294,7 +295,9 @@ export class ColumnsComponent {
     private _compareInitialColumnsNextTick(): void {
         setTimeout(() => {
             const initialColumns = this.initialColumns();
-            if (!initialColumns) {return;}
+            if (!initialColumns) {
+                return;
+            }
 
             const current = this._buildResultData(this.selectableColumns());
             const isChanged =
