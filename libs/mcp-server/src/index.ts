@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { InMemoryTransport } from '@modelcontextprotocol/sdk/inMemory.js';
-import { loadData, server, startStdioServer } from './server';
+import { server, startStdioServer } from './server';
 
 const args = process.argv.slice(2);
 
@@ -29,7 +29,6 @@ if (args[0] === '--list-tools') {
 }
 
 async function runListTools(): Promise<void> {
-    await loadData();
     const [serverTransport, clientTransport] = InMemoryTransport.createLinkedPair();
     await server.connect(serverTransport);
     const client = new Client({ name: 'cli', version: '1.0' });
@@ -53,7 +52,6 @@ async function runCallTool(toolName: string, rawArgs: string): Promise<void> {
         console.error(`Invalid JSON arguments: ${rawArgs}`);
         process.exit(1);
     }
-    await loadData();
     const [serverTransport, clientTransport] = InMemoryTransport.createLinkedPair();
     await server.connect(serverTransport);
     const client = new Client({ name: 'cli', version: '1.0' });
