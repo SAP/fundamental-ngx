@@ -1,3 +1,30 @@
+## 0.63.0-rc.0 (2026-05-28)
+
+### 🚀 Features
+
+- ⚠️  **mcp:** MCP server evaluation - part 5 ([#14224](https://github.com/SAP/fundamental-ngx/pull/14224))
+
+### ⚠️  Breaking Changes
+
+- **mcp:** MCP server evaluation - part 5  ([#14224](https://github.com/SAP/fundamental-ngx/pull/14224))
+  recommend_components removed. It used a hardcoded
+  23-entry UI_PATTERNS dict that missed the entire platform form layer
+  (fdp-form-group, fdp-form-field). Use search_components with relevant
+  keywords instead.
+  BREAKING CHANGE: get_design_tokens removed. The corpus was only 92
+  tokens (42 hardcoded SAP theme vars + 50 spacing utility classes);
+  focus, disabled, and hover tokens were absent, making it unusable for
+  component styling. Use @fundamental-styles/mcp get_design_tokens
+  (1500+ tokens) instead.
+  BREAKING CHANGE: get_migration_guide tool removed from @fundamental-ngx/mcp.
+  BREAKING CHANGE: get_accessibility_guide tool removed from @fundamental-ngx/mcp.
+  Use get_component_api — it returns all inputs (including ARIA inputs with
+  descriptions) and the keyboardHandling field.
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
 ## 0.62.4-rc.9 (2026-05-27)
 
 This was a version bump only for ui5-webcomponents to align it with other projects, there were no code changes.
