@@ -196,31 +196,3 @@ export interface ComponentCatalog {
     /** All component metadata entries */
     components: ComponentMetadata[];
 }
-
-/** Changelog entry for migration guide. */
-export interface ChangelogEntry {
-    /** Library this change belongs to */
-    library: Library;
-    /** Version where the change was introduced */
-    version: string;
-    /** Type of change */
-    type: 'breaking' | 'feature' | 'fix' | 'deprecation';
-    /** Description of the change (markdown) */
-    description: string;
-    /** Component affected, if applicable */
-    component?: string;
-}
-
-/** Design token metadata. */
-export interface DesignToken {
-    /** Token name, e.g. "--sapBackgroundColor" or "fd-margin-top--sm" */
-    name: string;
-    /** Token category */
-    category: 'color' | 'spacing' | 'typography' | 'elevation' | 'border' | 'size';
-    /** Human-readable description */
-    description: string;
-    /** Default/example value */
-    value?: string;
-    /** Usage example in CSS or HTML */
-    example?: string;
-}

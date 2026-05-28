@@ -25,6 +25,7 @@ jobs:
     test_generation:
         name: Test TypeScript file generation
         runs-on: ubuntu-latest
+        environment: i18n-automation
         permissions:
             contents: read
         steps:
