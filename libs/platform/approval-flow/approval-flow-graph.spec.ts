@@ -27,67 +27,139 @@ describe('approval-flow-graph: makePathsSameLength (multiple parallel blocks)', 
             id: 'AAAAAFjK!Kz1',
             name: 'A/P - Expenses',
             description: '',
-            approvers: [{ id: 'A/P - Expenses', teamId: 'A/P - Expenses', name: 'A/P - Expenses', description: 'Team User', imgUrl: '' }],
+            approvers: [
+                {
+                    id: 'A/P - Expenses',
+                    teamId: 'A/P - Expenses',
+                    name: 'A/P - Expenses',
+                    description: 'Team User',
+                    imgUrl: ''
+                }
+            ],
             status: 'Pending',
             targets: ['AAAAAFjK!Kz7', 'AAAAAFjK!K0B'],
             isEveryoneApprovalNeeded: true,
             disableActions: false,
-            actionsConfig: { disableAddBefore: false, disableAddAfter: false, disableAddParallel: false, disableEdit: true, disableRemove: true }
+            actionsConfig: {
+                disableAddBefore: false,
+                disableAddAfter: false,
+                disableAddParallel: false,
+                disableEdit: true,
+                disableRemove: true
+            }
         },
         {
             id: 'AAAAAFjK!Kz7',
             name: 'Category Buyer',
             description: '',
-            approvers: [{ id: 'Category Buyer', teamId: 'Category Buyer', name: 'Category Buyer', description: 'Team User', imgUrl: '' }],
+            approvers: [
+                {
+                    id: 'Category Buyer',
+                    teamId: 'Category Buyer',
+                    name: 'Category Buyer',
+                    description: 'Team User',
+                    imgUrl: ''
+                }
+            ],
             status: 'Pending',
             targets: [],
             isEveryoneApprovalNeeded: true,
             disableActions: false,
-            actionsConfig: { disableAddBefore: false, disableAddAfter: false, disableAddParallel: true, disableEdit: true, disableRemove: true }
+            actionsConfig: {
+                disableAddBefore: false,
+                disableAddAfter: false,
+                disableAddParallel: true,
+                disableEdit: true,
+                disableRemove: true
+            }
         },
         {
             id: 'AAAAAFjK!K0B',
             name: 'Category Attribute Admin',
             description: '',
-            approvers: [{ id: 'CategoryAttributeAdmin', teamId: 'CategoryAttributeAdmin', name: 'Category Attribute Admin', description: 'Team User', imgUrl: '' }],
+            approvers: [
+                {
+                    id: 'CategoryAttributeAdmin',
+                    teamId: 'CategoryAttributeAdmin',
+                    name: 'Category Attribute Admin',
+                    description: 'Team User',
+                    imgUrl: ''
+                }
+            ],
             status: 'Pending',
             targets: ['AAAAAFjK!K0E'],
             isEveryoneApprovalNeeded: true,
             disableActions: false,
-            actionsConfig: { disableAddBefore: false, disableAddAfter: false, disableAddParallel: true, disableEdit: true, disableRemove: true }
+            actionsConfig: {
+                disableAddBefore: false,
+                disableAddAfter: false,
+                disableAddParallel: true,
+                disableEdit: true,
+                disableRemove: true
+            }
         },
         {
             id: 'AAAAAFjK!K0E',
             name: 'Development',
             description: '',
-            approvers: [{ id: 'Development', teamId: 'Development', name: 'Development', description: 'Team User', imgUrl: '' }],
+            approvers: [
+                { id: 'Development', teamId: 'Development', name: 'Development', description: 'Team User', imgUrl: '' }
+            ],
             status: 'Pending',
             targets: [],
             isEveryoneApprovalNeeded: true,
             disableActions: false,
-            actionsConfig: { disableAddBefore: false, disableAddAfter: false, disableAddParallel: true, disableEdit: true, disableRemove: true }
+            actionsConfig: {
+                disableAddBefore: false,
+                disableAddAfter: false,
+                disableAddParallel: true,
+                disableEdit: true,
+                disableRemove: true
+            }
         },
         {
             id: 'AAAAAFjK!Kz+',
             name: 'A/P - Supplier Payment',
             description: '',
-            approvers: [{ id: 'A/P - Supplier Payment', teamId: 'A/P - Supplier Payment', name: 'A/P - Supplier Payment', description: 'Team User', imgUrl: '' }],
+            approvers: [
+                {
+                    id: 'A/P - Supplier Payment',
+                    teamId: 'A/P - Supplier Payment',
+                    name: 'A/P - Supplier Payment',
+                    description: 'Team User',
+                    imgUrl: ''
+                }
+            ],
             status: 'Pending',
             targets: ['AAAAAFjK!Kz4'],
             isEveryoneApprovalNeeded: true,
             disableActions: false,
-            actionsConfig: { disableAddBefore: false, disableAddAfter: false, disableAddParallel: false, disableEdit: true, disableRemove: true }
+            actionsConfig: {
+                disableAddBefore: false,
+                disableAddAfter: false,
+                disableAddParallel: false,
+                disableEdit: true,
+                disableRemove: true
+            }
         },
         {
             id: 'AAAAAFjK!Kz4',
             name: 'BOM Manager',
             description: '',
-            approvers: [{ id: 'BOM Manager', teamId: 'BOM Manager', name: 'BOM Manager', description: 'Team User', imgUrl: '' }],
+            approvers: [
+                { id: 'BOM Manager', teamId: 'BOM Manager', name: 'BOM Manager', description: 'Team User', imgUrl: '' }
+            ],
             status: 'Pending',
             targets: ['AAAAAFjK!Kz7', 'AAAAAFjK!K0B'],
             isEveryoneApprovalNeeded: true,
             disableActions: false,
-            actionsConfig: { disableAddBefore: false, disableAddAfter: false, disableAddParallel: true, disableEdit: true, disableRemove: true }
+            actionsConfig: {
+                disableAddBefore: false,
+                disableAddAfter: false,
+                disableAddParallel: true,
+                disableEdit: true,
+                disableRemove: true
+            }
         }
     ];
 
