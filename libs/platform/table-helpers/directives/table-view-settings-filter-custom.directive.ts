@@ -8,7 +8,6 @@ export interface FdpViewSettingsFilterCustomDefContext {
 }
 
 @Directive({ selector: '[fdpViewSettingsFilterCustomDef]', standalone: true })
-// eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class FdpViewSettingsFilterCustomDef {
     /** @hidden */
     constructor(public templateRef: TemplateRef<FdpViewSettingsFilterCustomDefContext>) {}
