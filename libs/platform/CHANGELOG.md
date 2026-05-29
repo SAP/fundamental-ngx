@@ -1,3 +1,13 @@
+## 0.63.0-rc.1 (2026-05-29)
+
+### 🚀 Features
+
+- **platform:** add column configuration to table combined settings dialog ([#14212](https://github.com/SAP/fundamental-ngx/pull/14212))
+
+### ❤️ Thank You
+
+- Mike O'Donnell @mikerodonnell89
+
 ## 0.63.0-rc.0 (2026-05-28)
 
 ### 🚀 Features

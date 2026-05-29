@@ -1,3 +1,7 @@
+## 0.63.0-rc.1 (2026-05-29)
+
+This was a version bump only for mcp-server to align it with other projects, there were no code changes.
+
 ## 0.63.0-rc.0 (2026-05-28)
 
 ### 🚀 Features
