@@ -147,11 +147,31 @@ export class TableViewSettingsDialogComponent implements AfterViewInit {
         let allColumns: SettingsColumnsDialogColumn[];
 
         if (this._lastColumnOrder && this._lastColumnOrder.length > 0) {
-            // Use the last known order and update visibility based on current state
-            allColumns = this._lastColumnOrder.map((col) => ({
-                ...col,
-                visible: visibleColumnNames.includes(col.name)
-            }));
+            // Filter cached columns to only include those that still exist in live column definitions
+            const validCachedColumns = this._lastColumnOrder.filter((cachedCol) =>
+                columns.some((liveCol) => liveCol.name === cachedCol.name)
+            );
+
+            // Check if any new columns were added that aren't in the cache
+            const newColumns = columns.filter(
+                (liveCol) => !validCachedColumns.some((cachedCol) => cachedCol.name === liveCol.name)
+            );
+
+            // Combine valid cached columns (preserving order) with new columns (appended at end)
+            const combinedColumns = [
+                ...validCachedColumns.map((col) => ({
+                    ...col,
+                    visible: visibleColumnNames.includes(col.name)
+                })),
+                ...newColumns.map((col) => ({
+                    label: col.label,
+                    key: col.key,
+                    name: col.name,
+                    visible: visibleColumnNames.includes(col.name)
+                }))
+            ];
+
+            allColumns = combinedColumns;
         } else {
             // First time opening - use table's natural column order
             // Get all columns and determine their current order and visibility
@@ -260,7 +280,7 @@ export class TableViewSettingsDialogComponent implements AfterViewInit {
 
         this._table.tableColumnsStream.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((columns: TableColumn[]) => {
             const show = columns.some(({ sortable }) => sortable) || columns.some(({ groupable }) => groupable);
-            this._table?.showSettingsInToolbar(show);
+            this._table?.showSettingsInToolbar(show && this.allowColumnConfiguration);
         });
     }
 

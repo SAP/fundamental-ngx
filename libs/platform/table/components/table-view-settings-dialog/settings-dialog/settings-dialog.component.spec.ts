@@ -315,13 +315,10 @@ describe('SettingsDialogComponent', () => {
 
             expect(component.showSubheader()).toBe(true);
 
-            // Check DOM - should render segmented button with both tabs
+            // Check DOM - should render icon tab bar
             const nativeElement = fixture.nativeElement as HTMLElement;
-            const segmentedButton = nativeElement.querySelector('fd-segmented-button');
-            expect(segmentedButton).toBeTruthy();
-
-            const tabButtons = nativeElement.querySelectorAll('fd-segmented-button button[fd-button]');
-            expect(tabButtons.length).toBe(2); // columns and sort tabs
+            const iconTabBar = nativeElement.querySelector('fdp-icon-tab-bar');
+            expect(iconTabBar).toBeTruthy();
         });
     });
 });
