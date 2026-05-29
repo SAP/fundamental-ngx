@@ -279,8 +279,11 @@ export class TableViewSettingsDialogComponent implements AfterViewInit {
             .subscribe(() => this.showViewSettingsDialog());
 
         this._table.tableColumnsStream.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((columns: TableColumn[]) => {
-            const show = columns.some(({ sortable }) => sortable) || columns.some(({ groupable }) => groupable);
-            this._table?.showSettingsInToolbar(show && this.allowColumnConfiguration);
+            const show =
+                columns.some(({ sortable }) => sortable) ||
+                columns.some(({ groupable }) => groupable) ||
+                this.allowColumnConfiguration;
+            this._table?.showSettingsInToolbar(show);
         });
     }
 
