@@ -52,7 +52,8 @@ export const DOCS_PACKAGES_META: DocsPackageMeta[] = [
     { id: 'cdk', name: 'CDK' },
     { id: 'i18n', name: 'i18n' },
     { id: 'cx', name: 'CX' },
-    { id: 'mcp', name: 'MCP Server' }
+    { id: 'mcp', name: 'MCP Server' },
+    { id: 'skills', name: 'Skills' }
 ];
 
 /**

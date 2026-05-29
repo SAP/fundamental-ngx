@@ -1,6 +1,6 @@
 {
     "name": "@fundamental-ngx/ui5-webcomponents-ai",
-    "version": "0.62.4-rc.8",
+    "version": "0.63.0-rc.0",
     "schematics": "./schematics/collection.json",
     "description": "Official SAP Angular wrappers for UI5 AI Web Components – part of the Fundamental Library for Angular.",
     "keywords": [

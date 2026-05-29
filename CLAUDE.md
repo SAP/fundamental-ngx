@@ -105,6 +105,28 @@ Invoke with `/skill-name` (e.g. `/preflight`). Skills live in `.claude/skills/`.
 | `review-pr`         | Review a pull request against project conventions                                  |
 | `preflight`         | Run local quality gates before creating a PR                                       |
 
+## MCP Tools (`@fundamental-ngx/mcp`)
+
+Use the `fundamental-ngx` MCP server to discover and understand components. Available tools:
+
+| Tool                     | When to use                                                                                                                                                                                                                                                                                               |
+| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `list_components`        | Browse all components; filter by `library` (e.g. `@fundamental-ngx/core`) or `category`                                                                                                                                                                                                                   |
+| `search_components`      | Keyword search across names, selectors, descriptions                                                                                                                                                                                                                                                      |
+| `get_component_api`      | Full inputs/outputs/methods for a specific component                                                                                                                                                                                                                                                      |
+| `get_component_examples` | Working code examples from the docs app                                                                                                                                                                                                                                                                   |
+| `get_usage_guide`        | Import path, minimal template, required inputs, and pitfalls. **Use bare keys for best results**: `"dialog"`, `"table"`, `"button"`, `"card"`, `"setup"` (project setup), `"ui5"` (UI5 setup). Selector names like `"fd-dialog"` bypass the curated guides and return lower-quality auto-generated output |
+| `compare_components`     | Side-by-side API diff and alternatives between two components                                                                                                                                                                                                                                             |
+
+**Discovery workflow**: `search_components` → `list_components(library=...)` → `get_component_api` → `get_component_examples`
+
+### Core vs Platform form layer
+
+For data-entry forms, prefer the **platform** form layer over bare core components:
+
+- Use `fdp-form-group` + `fdp-form-field` from `@fundamental-ngx/platform/form` — they wire up labels, validation messages, layout, and accessibility automatically.
+- Use bare `fd-form-group` / `fd-form-item` from `@fundamental-ngx/core/form` only when building a custom form abstraction or when the platform layer is explicitly too heavy.
+
 ## Detailed Reference
 
 For in-depth patterns, read on demand (not auto-loaded):
