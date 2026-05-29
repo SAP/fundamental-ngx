@@ -17,9 +17,9 @@ import {
     DialogHeaderComponent,
     DialogRef
 } from '@fundamental-ngx/core/dialog';
-import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { IconTabBarComponent, IconTabBarTabComponent } from '@fundamental-ngx/platform/icon-tab-bar';
 import { CollectionFilter, CollectionSort, Table } from '@fundamental-ngx/platform/table-helpers';
 import { RESETTABLE_TOKEN, ResetButtonComponent, Resettable } from '../../reset-button/reset-button.component';
 import { ColumnsComponent } from '../columns/columns.component';
@@ -64,12 +64,13 @@ import {
         GroupingComponent,
         ColumnsComponent,
         NgTemplateOutlet,
-        SegmentedButtonComponent,
         TemplateDirective,
         TitleComponent,
         ButtonBarComponent,
         InitialFocusDirective,
-        FocusableItemDirective
+        FocusableItemDirective,
+        IconTabBarComponent,
+        IconTabBarTabComponent
     ],
     templateUrl: './settings-dialog.component.html'
 })
@@ -119,6 +120,9 @@ export class SettingsDialogComponent implements Resettable {
     /** @hidden Pending columns changes (not applied to signal to avoid triggering child effects) */
     private _pendingColumnsChanges: Nullable<SettingsColumnsDialogResultData> = null;
 
+    /** @hidden Tracks reset availability per tab */
+    private _resetAvailabilityByTab = signal<Record<string, boolean>>({});
+
     /**
      * Constructor that initializes dialog data and sets initial values for sorting, filtering, grouping, and columns.
      */
@@ -148,6 +152,8 @@ export class SettingsDialogComponent implements Resettable {
         this._setInitialSorting();
         this._setInitialFilters();
         this._setInitialGrouping();
+        // Initialize reset availability to false for the active tab
+        this._updateResetAvailabilityForActiveTab();
     }
 
     /**
@@ -272,6 +278,80 @@ export class SettingsDialogComponent implements Resettable {
     }
 
     /**
+     * Handle changes to columns reset availability.
+     * @param event Boolean indicating if reset is available.
+     */
+    onColumnsResetAvailabilityChange(event: boolean): void {
+        this._updateResetAvailability(ActiveTab.COLUMNS, event);
+    }
+
+    /**
+     * Handle changes to sort reset availability.
+     * @param event Boolean indicating if reset is available.
+     */
+    onSortResetAvailabilityChange(event: boolean): void {
+        this._updateResetAvailability(ActiveTab.SORT, event);
+    }
+
+    /**
+     * Handle changes to filter reset availability.
+     * @param event Boolean indicating if reset is available.
+     */
+    onFilterResetAvailabilityChange(event: boolean): void {
+        this._updateResetAvailability(ActiveTab.FILTER, event);
+    }
+
+    /**
+     * Handle changes to group reset availability.
+     * @param event Boolean indicating if reset is available.
+     */
+    onGroupResetAvailabilityChange(event: boolean): void {
+        this._updateResetAvailability(ActiveTab.GROUP, event);
+    }
+
+    /** @hidden */
+    tabClick(event: string): void {
+        if (event === 'columns') {
+            this.activeTab.set(ActiveTab.COLUMNS);
+        } else if (event === 'sort') {
+            this.activeTab.set(ActiveTab.SORT);
+        } else if (event === 'group') {
+            this.activeTab.set(ActiveTab.GROUP);
+        } else if (event === 'filter') {
+            this.activeTab.set(ActiveTab.FILTER);
+        }
+        console.log(this.activeTab());
+    }
+
+    /**
+     * Handle tab selection changes from the icon tab bar.
+     * @param event The selected tab item.
+     */
+    onTabSelected(event: any): void {
+        // Map tab index to ActiveTab enum based on which tabs are rendered
+        // The order is: columns (if showColumns), sort, filter, group
+        const tabOrder: ActiveTab[] = [];
+        if (this.columnsData() && this.showColumns) {
+            tabOrder.push(ActiveTab.COLUMNS);
+        }
+        if (this.sortingData()) {
+            tabOrder.push(ActiveTab.SORT);
+        }
+        if (this.filteringData()) {
+            tabOrder.push(ActiveTab.FILTER);
+        }
+        if (this.groupingData()) {
+            tabOrder.push(ActiveTab.GROUP);
+        }
+
+        const selectedTab = tabOrder[event.index];
+        if (selectedTab) {
+            this.activeTab.set(selectedTab);
+            this._updateResetAvailabilityForActiveTab();
+        }
+    }
+
+    /**
      * Determine the initial active tab based on available data.
      * @returns The name of the active tab to display.
      */
@@ -351,5 +431,32 @@ export class SettingsDialogComponent implements Resettable {
             columnOrder,
             columns: initialColumnsArray
         });
+    }
+
+    /**
+     * Update reset availability for a specific tab and update the global reset availability
+     * if the tab is currently active.
+     * @param tab The tab to update.
+     * @param available Whether reset is available for this tab.
+     */
+    private _updateResetAvailability(tab: ActiveTab, available: boolean): void {
+        // Update the tracking for this specific tab
+        this._resetAvailabilityByTab.update((state) => ({ ...state, [tab]: available }));
+
+        // If this is the active tab, update the global reset availability
+        if (this.activeTab() === tab) {
+            this.isResetAvailable$.set(available);
+        }
+    }
+
+    /**
+     * Update the global reset availability based on the currently active tab.
+     */
+    private _updateResetAvailabilityForActiveTab(): void {
+        const currentTab = this.activeTab();
+        if (currentTab) {
+            const available = this._resetAvailabilityByTab()[currentTab] ?? false;
+            this.isResetAvailable$.set(available);
+        }
     }
 }

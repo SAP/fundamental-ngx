@@ -24,90 +24,88 @@
                 </fd-bar-element>
             </div>
         </ng-template>
-
-        @if (showSubheader()) {
-            <ng-template fdkTemplate="subheader">
-                <fd-segmented-button [(ngModel)]="activeTab" [style.height]="'fit-content'">
-                    @if (columnsData() && showColumns) {
-                        <button
-                            fd-button
-                            fdkFocusableItem
-                            value="columns"
-                            glyph="column-chart-dual-axis"
-                            [title]="('platformTable.toolbarActionColumnsButtonTitle' | fdTranslate)()"
-                            [ariaLabel]="('platformTable.toolbarActionColumnsButtonTitle' | fdTranslate)()"
-                        ></button>
-                    }
-                    @if (sortingData()) {
-                        <button
-                            fd-button
-                            fdkFocusableItem
-                            value="sort"
-                            glyph="sort"
-                            [title]="('platformTable.toolbarActionSortButtonTitle' | fdTranslate)()"
-                            [ariaLabel]="('platformTable.toolbarActionSortButtonTitle' | fdTranslate)()"
-                        ></button>
-                    }
-                    @if (filteringData()) {
-                        <button
-                            fd-button
-                            fdkFocusableItem
-                            value="filter"
-                            glyph="filter"
-                            [title]="('platformTable.toolbarActionFilterButtonTitle' | fdTranslate)()"
-                            [ariaLabel]="('platformTable.toolbarActionFilterButtonTitle' | fdTranslate)()"
-                        ></button>
-                    }
-                    @if (groupingData()) {
-                        <button
-                            fd-button
-                            fdkFocusableItem
-                            value="group"
-                            glyph="group-2"
-                            [title]="('platformTable.toolbarActionGroupButtonTitle' | fdTranslate)()"
-                            [ariaLabel]="('platformTable.toolbarActionGroupButtonTitle' | fdTranslate)()"
-                        ></button>
-                    }
-                </fd-segmented-button>
-            </ng-template>
-        }
     </fd-dialog-header>
 
     <fd-dialog-body disablePaddings>
-        @switch (activeTab()) {
-            @case ('sort') {
+        @if (showSubheader()) {
+            <fdp-icon-tab-bar layoutMode="row" iconTabSize="sm" (iconTabSelected)="onTabSelected($event)">
+                @if (columnsData() && showColumns) {
+                    <fdp-icon-tab-bar-tab [label]="('platformTable.toolbarActionColumnsButtonTitle' | fdTranslate)()">
+                        <fdp-columns
+                            [columnsData]="columnsData()!"
+                            [initialColumns]="_initialColumns()"
+                            (columnsChange)="onColumnsChange($event)"
+                            (resetAvailabilityChange)="onColumnsResetAvailabilityChange($event)"
+                        ></fdp-columns>
+                    </fdp-icon-tab-bar-tab>
+                }
+                @if (sortingData()) {
+                    <fdp-icon-tab-bar-tab [label]="('platformTable.toolbarActionSortButtonTitle' | fdTranslate)()">
+                        <fdp-sorting
+                            [sortingData]="sortingData()!"
+                            [initialSorting]="_initialSorting()"
+                            (sortChange)="onSortChange($event)"
+                            (resetAvailabilityChange)="onSortResetAvailabilityChange($event)"
+                        ></fdp-sorting>
+                    </fdp-icon-tab-bar-tab>
+                }
+                @if (filteringData()) {
+                    <fdp-icon-tab-bar-tab [label]="('platformTable.toolbarActionFilterButtonTitle' | fdTranslate)()">
+                        <fdp-filters
+                            [headingLevel]="headingLevel"
+                            [filteringData]="filteringData()!"
+                            [initialFilters]="_initialFilters()"
+                            (activeFilterStepViewChange)="onActiveFilterStepViewChange($event)"
+                            (filterChange)="onFilterChange($event)"
+                            (resetAvailabilityChange)="onFilterResetAvailabilityChange($event)"
+                        ></fdp-filters>
+                    </fdp-icon-tab-bar-tab>
+                }
+                @if (groupingData()) {
+                    <fdp-icon-tab-bar-tab [label]="('platformTable.toolbarActionGroupButtonTitle' | fdTranslate)()">
+                        <fdp-grouping
+                            [groupingData]="groupingData()!"
+                            [initialGrouping]="_initialGrouping()"
+                            (groupChange)="onGroupChange($event)"
+                            (resetAvailabilityChange)="onGroupResetAvailabilityChange($event)"
+                        ></fdp-grouping>
+                    </fdp-icon-tab-bar-tab>
+                }
+            </fdp-icon-tab-bar>
+        } @else {
+            @if (columnsData() && showColumns) {
+                <fdp-columns
+                    [columnsData]="columnsData()!"
+                    [initialColumns]="_initialColumns()"
+                    (columnsChange)="onColumnsChange($event)"
+                    (resetAvailabilityChange)="onColumnsResetAvailabilityChange($event)"
+                ></fdp-columns>
+            }
+            @if (sortingData()) {
                 <fdp-sorting
                     [sortingData]="sortingData()!"
                     [initialSorting]="_initialSorting()"
                     (sortChange)="onSortChange($event)"
-                    (resetAvailabilityChange)="onResetAvailabilityChange($event)"
+                    (resetAvailabilityChange)="onSortResetAvailabilityChange($event)"
                 ></fdp-sorting>
             }
-            @case ('filter') {
+            @if (filteringData()) {
                 <fdp-filters
                     [headingLevel]="headingLevel"
                     [filteringData]="filteringData()!"
                     [initialFilters]="_initialFilters()"
                     (activeFilterStepViewChange)="onActiveFilterStepViewChange($event)"
                     (filterChange)="onFilterChange($event)"
-                    (resetAvailabilityChange)="onResetAvailabilityChange($event)"
+                    (resetAvailabilityChange)="onFilterResetAvailabilityChange($event)"
                 ></fdp-filters>
             }
-            @case ('group') {
+            @if (groupingData()) {
                 <fdp-grouping
                     [groupingData]="groupingData()!"
                     [initialGrouping]="_initialGrouping()"
                     (groupChange)="onGroupChange($event)"
-                    (resetAvailabilityChange)="onResetAvailabilityChange($event)"
+                    (resetAvailabilityChange)="onGroupResetAvailabilityChange($event)"
                 ></fdp-grouping>
-            }
-            @case ('columns') {
-                <fdp-columns
-                    [columnsData]="columnsData()!"
-                    [initialColumns]="_initialColumns()"
-                    (columnsChange)="onColumnsChange($event)"
-                    (resetAvailabilityChange)="onResetAvailabilityChange($event)"
-                ></fdp-columns>
             }
         }
     </fd-dialog-body>

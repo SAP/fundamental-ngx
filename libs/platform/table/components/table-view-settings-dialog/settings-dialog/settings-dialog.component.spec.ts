@@ -177,6 +177,144 @@ describe('SettingsDialogComponent', () => {
         expect(component.isResetAvailable$()).toBe(true);
     });
 
+    describe('per-tab reset availability tracking', () => {
+        beforeEach(() => {
+            dialogRef.data = {
+                sortingData: {
+                    columns: [],
+                    direction: SortDirection.ASC,
+                    field: 'name',
+                    allowDisablingSorting: true
+                } as SettingsSortDialogData,
+                filteringData: { filterBy: [], columns: [], viewSettingsFilters: [] } as FiltersDialogData,
+                groupingData: {
+                    direction: SortDirection.ASC,
+                    field: 'category',
+                    columns: []
+                } as SettingsGroupDialogData,
+                columnsData: null,
+                headingLevel: 2,
+                allowColumnConfiguration: false
+            };
+            fixture = TestBed.createComponent(SettingsDialogComponent);
+            component = fixture.componentInstance;
+            fixture.detectChanges();
+        });
+
+        it('should track reset availability independently per tab', () => {
+            // Set active tab to sort
+            component.activeTab.set(ActiveTab.SORT);
+
+            // Simulate sort tab emitting reset availability
+            component.onSortResetAvailabilityChange(true);
+            expect(component.isResetAvailable$()).toBe(true);
+
+            // Simulate filter tab emitting reset availability (should not affect global state)
+            component.onFilterResetAvailabilityChange(false);
+            expect(component.isResetAvailable$()).toBe(true); // Still true because SORT is active
+
+            // Switch to filter tab
+            component.activeTab.set(ActiveTab.FILTER);
+            component['_updateResetAvailabilityForActiveTab']();
+            expect(component.isResetAvailable$()).toBe(false); // Now false because FILTER is active
+
+            // Switch back to sort tab
+            component.activeTab.set(ActiveTab.SORT);
+            component['_updateResetAvailabilityForActiveTab']();
+            expect(component.isResetAvailable$()).toBe(true); // Back to true
+        });
+
+        it('should update reset availability when tab changes via onTabSelected', () => {
+            // Set initial state
+            component.onSortResetAvailabilityChange(true);
+            component.onFilterResetAvailabilityChange(false);
+            component.onGroupResetAvailabilityChange(true);
+
+            // Simulate tab selection - sort tab (index 0)
+            component.onTabSelected({ index: 0 });
+            expect(component.activeTab()).toBe(ActiveTab.SORT);
+            expect(component.isResetAvailable$()).toBe(true);
+
+            // Simulate tab selection - filter tab (index 1)
+            component.onTabSelected({ index: 1 });
+            expect(component.activeTab()).toBe(ActiveTab.FILTER);
+            expect(component.isResetAvailable$()).toBe(false);
+
+            // Simulate tab selection - group tab (index 2)
+            component.onTabSelected({ index: 2 });
+            expect(component.activeTab()).toBe(ActiveTab.GROUP);
+            expect(component.isResetAvailable$()).toBe(true);
+        });
+
+        it('should correctly map tab indices when columns are present', () => {
+            dialogRef.data = {
+                sortingData: {
+                    columns: [],
+                    direction: SortDirection.ASC,
+                    field: 'name',
+                    allowDisablingSorting: true
+                } as SettingsSortDialogData,
+                filteringData: { filterBy: [], columns: [], viewSettingsFilters: [] } as FiltersDialogData,
+                groupingData: null,
+                columnsData: { columns: [] } as SettingsColumnsDialogData,
+                headingLevel: 2,
+                allowColumnConfiguration: true
+            };
+            const newFixture = TestBed.createComponent(SettingsDialogComponent);
+            const newComponent = newFixture.componentInstance;
+            newFixture.detectChanges();
+
+            // Set reset availability for each tab
+            newComponent.onColumnsResetAvailabilityChange(true);
+            newComponent.onSortResetAvailabilityChange(false);
+            newComponent.onFilterResetAvailabilityChange(true);
+
+            // Tab order: columns (0), sort (1), filter (2)
+            newComponent.onTabSelected({ index: 0 });
+            expect(newComponent.activeTab()).toBe(ActiveTab.COLUMNS);
+            expect(newComponent.isResetAvailable$()).toBe(true);
+
+            newComponent.onTabSelected({ index: 1 });
+            expect(newComponent.activeTab()).toBe(ActiveTab.SORT);
+            expect(newComponent.isResetAvailable$()).toBe(false);
+
+            newComponent.onTabSelected({ index: 2 });
+            expect(newComponent.activeTab()).toBe(ActiveTab.FILTER);
+            expect(newComponent.isResetAvailable$()).toBe(true);
+        });
+
+        it('should update reset availability only for the active tab', () => {
+            component.activeTab.set(ActiveTab.SORT);
+
+            // Update sort reset availability while sort is active
+            component.onSortResetAvailabilityChange(true);
+            expect(component.isResetAvailable$()).toBe(true);
+
+            // Update filter reset availability while sort is still active
+            component.onFilterResetAvailabilityChange(true);
+            expect(component.isResetAvailable$()).toBe(true); // Should remain true from sort
+
+            // Change sort reset availability
+            component.onSortResetAvailabilityChange(false);
+            expect(component.isResetAvailable$()).toBe(false);
+        });
+
+        it('should initialize reset availability correctly on component creation', () => {
+            // The initial reset availability depends on whether the initial state differs from current state
+            // Since the component initializes with sorting data and initial values, child components
+            // will emit their reset availability which gets tracked
+            const initialValue = component.isResetAvailable$();
+            expect(typeof initialValue).toBe('boolean');
+
+            // Verify that updating reset availability for the active tab works
+            component.onSortResetAvailabilityChange(true);
+            expect(component.isResetAvailable$()).toBe(true);
+
+            component.onSortResetAvailabilityChange(false);
+            expect(component.isResetAvailable$()).toBe(false);
+        });
+    });
+
     describe('columns functionality', () => {
         const mockColumnsData: SettingsColumnsDialogData = {
             columns: [
@@ -315,13 +453,10 @@ describe('SettingsDialogComponent', () => {
 
             expect(component.showSubheader()).toBe(true);
 
-            // Check DOM - should render segmented button with both tabs
+            // Check DOM - should render icon tab bar
             const nativeElement = fixture.nativeElement as HTMLElement;
-            const segmentedButton = nativeElement.querySelector('fd-segmented-button');
-            expect(segmentedButton).toBeTruthy();
-
-            const tabButtons = nativeElement.querySelectorAll('fd-segmented-button button[fd-button]');
-            expect(tabButtons.length).toBe(2); // columns and sort tabs
+            const iconTabBar = nativeElement.querySelector('fdp-icon-tab-bar');
+            expect(iconTabBar).toBeTruthy();
         });
     });
 });
