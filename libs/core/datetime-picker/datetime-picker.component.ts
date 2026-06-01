@@ -733,6 +733,7 @@ export class DatetimePickerComponent<D>
                 this._dateTimeAdapter.getMinutes(currentTime),
                 this._dateTimeAdapter.getSeconds(currentTime)
             );
+            this._refreshCurrentlyDisplayedCalendarDate(this.date);
         } catch {
             this.date = null;
         }
