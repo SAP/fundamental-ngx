@@ -16,12 +16,14 @@ env:
     NX_CLOUD_DISTRIBUTED_EXECUTION: true
     NX_CLOUD_DISTRIBUTED_EXECUTION_AGENT_COUNT: 5
     NX_BRANCH: ${{ github.event.number || github.ref_name }}
-    NX_CLOUD_AUTH_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
 
 jobs:
     nx_agents:
         name: Nx Cloud Agent ${{ matrix.agent }}
         runs-on: ubuntu-latest
+        environment: release
+        env:
+            NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
         permissions:
             contents: read
         timeout-minutes: 60
@@ -235,6 +237,7 @@ jobs:
     gh_pages:
         name: Github Pages deploy
         runs-on: ubuntu-latest
+        environment: release
         permissions: {}
         needs: create_release
         if: ${{ needs.create_release.outputs.npmTag == 'latest' }}
@@ -265,6 +268,7 @@ jobs:
         needs: create_release
         name: Nx Cloud - Stop Agents
         runs-on: ubuntu-latest
+        environment: ci
         permissions:
             contents: read
         steps:
