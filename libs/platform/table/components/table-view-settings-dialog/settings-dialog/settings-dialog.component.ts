@@ -22,6 +22,7 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { CollectionFilter, CollectionSort, Table } from '@fundamental-ngx/platform/table-helpers';
 import { RESETTABLE_TOKEN, ResetButtonComponent, Resettable } from '../../reset-button/reset-button.component';
+import { ColumnsComponent } from '../columns/columns.component';
 import { FiltersViewStep } from '../filtering/filters-active-step';
 import { FiltersComponent } from '../filtering/filters.component';
 import { GroupingComponent } from '../grouping/grouping.component';
@@ -33,6 +34,8 @@ import {
     INITIAL_DIRECTION,
     NOT_GROUPED_OPTION_VALUE,
     NOT_SORTED_OPTION_VALUE,
+    SettingsColumnsDialogData,
+    SettingsColumnsDialogResultData,
     SettingsGroupDialogData,
     SettingsGroupDialogResultData,
     SettingsSortDialogData,
@@ -41,7 +44,6 @@ import {
 
 @Component({
     selector: 'fdp-settings-dialog-settings',
-    standalone: true,
     providers: [{ provide: RESETTABLE_TOKEN, useExisting: forwardRef(() => SettingsDialogComponent) }],
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
@@ -60,6 +62,7 @@ import {
         SortingComponent,
         FiltersComponent,
         GroupingComponent,
+        ColumnsComponent,
         NgTemplateOutlet,
         SegmentedButtonComponent,
         TemplateDirective,
@@ -80,7 +83,10 @@ export class SettingsDialogComponent implements Resettable {
     /** Data for grouping */
     groupingData = signal<Nullable<SettingsGroupDialogData>>(null);
 
-    /** The active tab to display ('sort', 'filter', or 'group') */
+    /** Data for columns */
+    columnsData = signal<Nullable<SettingsColumnsDialogData>>(null);
+
+    /** The active tab to display ('sort', 'filter', 'group', or 'columns') */
     activeTab = signal<Nullable<ActiveTab>>(null);
 
     /** Flag indicating whether the subheader should be shown */
@@ -104,15 +110,26 @@ export class SettingsDialogComponent implements Resettable {
     /** @hidden Initial grouping configurations */
     _initialGrouping = signal<Nullable<SettingsGroupDialogResultData>>(null);
 
+    /** @hidden Initial columns configurations */
+    _initialColumns = signal<Nullable<SettingsColumnsDialogResultData>>(null);
+
+    /** @hidden */
+    protected showColumns = false;
+
+    /** @hidden Pending columns changes (not applied to signal to avoid triggering child effects) */
+    private _pendingColumnsChanges: Nullable<SettingsColumnsDialogResultData> = null;
+
     /**
-     * Constructor that initializes dialog data and sets initial values for sorting, filtering, and grouping.
+     * Constructor that initializes dialog data and sets initial values for sorting, filtering, grouping, and columns.
      */
     constructor(
         private readonly dialogRef: DialogRef<{
             sortingData: Nullable<SettingsSortDialogData>;
             filteringData: Nullable<FiltersDialogData>;
             groupingData: Nullable<SettingsGroupDialogData>;
+            columnsData: Nullable<SettingsColumnsDialogData>;
             headingLevel: 1 | 2 | 3 | 4 | 5 | 6;
+            allowColumnConfiguration: boolean;
         }>,
         private readonly _table: Table
     ) {
@@ -120,6 +137,11 @@ export class SettingsDialogComponent implements Resettable {
         this.sortingData.set(data.sortingData);
         this.filteringData.set(data.filteringData);
         this.groupingData.set(data.groupingData);
+        this.showColumns = data.allowColumnConfiguration;
+        if (this.showColumns) {
+            this.columnsData.set(data.columnsData);
+            this._setInitialColumns();
+        }
         this.headingLevel = data.headingLevel;
         this.activeTab.set(this._getInitialActiveTab());
         this._shouldRenderSubheader();
@@ -132,10 +154,15 @@ export class SettingsDialogComponent implements Resettable {
      * Confirm the dialog action and close the dialog, returning updated settings data.
      */
     confirm(): void {
+        const columnsData = this._pendingColumnsChanges
+            ? { columns: this._pendingColumnsChanges.columns }
+            : this.columnsData();
+
         this.dialogRef.close({
             sortingData: this.sortingData(),
             filteringData: this.filteringData(),
-            groupingData: this.groupingData()
+            groupingData: this.groupingData(),
+            columnsData
         });
     }
 
@@ -147,7 +174,7 @@ export class SettingsDialogComponent implements Resettable {
     }
 
     /**
-     * Reset the settings based on the currently active tab (sort, filter, group).
+     * Reset the settings based on the currently active tab (sort, filter, group, columns).
      */
     reset(): void {
         if (this.activeTab() === ActiveTab.SORT && this.sortingData()) {
@@ -169,6 +196,17 @@ export class SettingsDialogComponent implements Resettable {
                 field: this._initialGrouping()!.field,
                 direction: this._initialGrouping()!.direction
             });
+        }
+        if (this.activeTab() === ActiveTab.COLUMNS && this.columnsData()) {
+            const initialColumns = this._initialColumns();
+            if (initialColumns) {
+                // Reset columns to initial state (both order and visibility)
+                this.columnsData.set({
+                    ...this.columnsData()!,
+                    columns: initialColumns.columns
+                });
+            }
+            this._pendingColumnsChanges = initialColumns;
         }
         this.isResetAvailable$.set(false);
     }
@@ -209,6 +247,15 @@ export class SettingsDialogComponent implements Resettable {
     }
 
     /**
+     * Handle columns change event and update columns data.
+     * Store pending changes without updating the signal to avoid triggering child effects.
+     * @param event Updated columns data.
+     */
+    onColumnsChange(event: SettingsColumnsDialogResultData): void {
+        this._pendingColumnsChanges = event;
+    }
+
+    /**
      * Update the active filter step view when a change occurs.
      * @param event The new active filter step view.
      */
@@ -229,7 +276,9 @@ export class SettingsDialogComponent implements Resettable {
      * @returns The name of the active tab to display.
      */
     private _getInitialActiveTab(): Nullable<ActiveTab> {
-        if (this.sortingData()) {
+        if (this.columnsData()) {
+            return ActiveTab.COLUMNS;
+        } else if (this.sortingData()) {
             return ActiveTab.SORT;
         } else if (this.filteringData()) {
             return ActiveTab.FILTER;
@@ -240,12 +289,15 @@ export class SettingsDialogComponent implements Resettable {
     }
 
     /**
-     * Determine if the subheader should be shown based on the availability of sorting, filtering, and grouping data.
+     * Determine if the subheader should be shown based on the availability of sorting, filtering, grouping, and columns data.
      */
     private _shouldRenderSubheader(): void {
-        const validDataCount = [this.sortingData(), this.filteringData(), this.groupingData()].filter(
-            (data) => data !== null
-        ).length;
+        const validDataCount = [
+            this.sortingData(),
+            this.filteringData(),
+            this.groupingData(),
+            this.columnsData()
+        ].filter((data) => data !== null).length;
         this.showSubheader.set(validDataCount >= 2);
     }
 
@@ -275,6 +327,29 @@ export class SettingsDialogComponent implements Resettable {
         this._initialGrouping.set({
             field: initialGrouping?.field ?? NOT_GROUPED_OPTION_VALUE,
             direction: initialGrouping?.direction ?? INITIAL_DIRECTION
+        });
+    }
+
+    /**
+     * Set initial columns configuration from the table's state.
+     */
+    private _setInitialColumns(): void {
+        const allColumns = this._table.getTableColumns();
+        const initialVisibleColumns = allColumns.filter((col) => col.visible).map((col) => col.name);
+        const columnOrder = allColumns.map((col) => col.name);
+
+        // Build initial columns array
+        const initialColumnsArray = allColumns.map((col) => ({
+            label: col.label,
+            key: col.key,
+            name: col.name,
+            visible: col.visible
+        }));
+
+        this._initialColumns.set({
+            visibleColumns: initialVisibleColumns,
+            columnOrder,
+            columns: initialColumnsArray
         });
     }
 }

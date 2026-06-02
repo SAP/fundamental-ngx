@@ -50,6 +50,7 @@
             "@fundamental-ngx/docs/cx/*": ["libs/docs/cx/*/index.ts", "libs/docs/cx/*/src/index.ts"],
             "@fundamental-ngx/docs/i18n": ["libs/docs/i18n/index.ts"],
             "@fundamental-ngx/docs/mcp-server": ["libs/docs/mcp-server/index.ts"],
+            "@fundamental-ngx/docs/skills": ["libs/docs/skills/index.ts"],
             "@fundamental-ngx/docs/platform": ["libs/docs/platform/index.ts"],
             "@fundamental-ngx/docs/platform/*": ["libs/docs/platform/*/index.ts", "libs/docs/platform/*/src/index.ts"],
             "@fundamental-ngx/docs/schema": ["libs/docs/schema/src/index.ts"],
