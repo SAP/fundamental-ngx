@@ -1,3 +1,17 @@
+## 0.63.0-rc.2 (2026-06-01)
+
+### 🩹 Fixes
+
+- **core:** fix datetime picker selection ([#14243](https://github.com/SAP/fundamental-ngx/pull/14243))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
+## 0.63.0-rc.1 (2026-05-29)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
 ## 0.63.0-rc.0 (2026-05-28)
 
 ### 🚀 Features

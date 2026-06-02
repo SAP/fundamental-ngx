@@ -28,6 +28,16 @@
         @if (showSubheader()) {
             <ng-template fdkTemplate="subheader">
                 <fd-segmented-button [(ngModel)]="activeTab" [style.height]="'fit-content'">
+                    @if (columnsData() && showColumns) {
+                        <button
+                            fd-button
+                            fdkFocusableItem
+                            value="columns"
+                            glyph="column-chart-dual-axis"
+                            [title]="('platformTable.toolbarActionColumnsButtonTitle' | fdTranslate)()"
+                            [ariaLabel]="('platformTable.toolbarActionColumnsButtonTitle' | fdTranslate)()"
+                        ></button>
+                    }
                     @if (sortingData()) {
                         <button
                             fd-button
@@ -67,7 +77,6 @@
         @switch (activeTab()) {
             @case ('sort') {
                 <fdp-sorting
-                    [headingLevel]="headingLevel"
                     [sortingData]="sortingData()!"
                     [initialSorting]="_initialSorting()"
                     (sortChange)="onSortChange($event)"
@@ -86,12 +95,19 @@
             }
             @case ('group') {
                 <fdp-grouping
-                    [headingLevel]="headingLevel"
                     [groupingData]="groupingData()!"
                     [initialGrouping]="_initialGrouping()"
                     (groupChange)="onGroupChange($event)"
                     (resetAvailabilityChange)="onResetAvailabilityChange($event)"
                 ></fdp-grouping>
+            }
+            @case ('columns') {
+                <fdp-columns
+                    [columnsData]="columnsData()!"
+                    [initialColumns]="_initialColumns()"
+                    (columnsChange)="onColumnsChange($event)"
+                    (resetAvailabilityChange)="onResetAvailabilityChange($event)"
+                ></fdp-columns>
             }
         }
     </fd-dialog-body>

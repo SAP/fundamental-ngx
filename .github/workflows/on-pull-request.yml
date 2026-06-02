@@ -8,8 +8,6 @@ env:
     NX_CLOUD_DISTRIBUTED_EXECUTION: true
     NX_CLOUD_DISTRIBUTED_EXECUTION_AGENT_COUNT: 3
     NX_BRANCH: ${{ github.event.number || github.ref_name }}
-    NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
-    NX_CLOUD_AUTH_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
 
 concurrency:
     group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
@@ -22,6 +20,9 @@ jobs:
     nx_agents:
         name: Nx Cloud Agent ${{ matrix.agent }}
         runs-on: ubuntu-latest
+        environment: ci
+        env:
+            NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
         timeout-minutes: 60
         permissions:
             contents: read
@@ -47,6 +48,9 @@ jobs:
     build_test:
         runs-on: ubuntu-latest
         name: Run affected Build, Lint and test commands
+        environment: ci
+        env:
+            NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
         permissions:
             contents: read
             pull-requests: read
@@ -163,6 +167,7 @@ jobs:
             # - e2e_test
         name: Nx Cloud - Stop Agents
         runs-on: ubuntu-latest
+        environment: ci
         permissions:
             contents: read
         steps:
