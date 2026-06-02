@@ -333,16 +333,16 @@ describe('SettingsDialogComponent', () => {
             expect(component.activeTab()).toBe(ActiveTab.COLUMNS);
 
             // Simulate tab selection via icon tab bar
-            component.onTabSelected({ index: 1 }); // Sort tab
+            component['onTabSelected']({ index: 1 }); // Sort tab
             expect(component.activeTab()).toBe(ActiveTab.SORT);
 
-            component.onTabSelected({ index: 2 }); // Filter tab
+            component['onTabSelected']({ index: 2 }); // Filter tab
             expect(component.activeTab()).toBe(ActiveTab.FILTER);
 
-            component.onTabSelected({ index: 3 }); // Group tab
+            component['onTabSelected']({ index: 3 }); // Group tab
             expect(component.activeTab()).toBe(ActiveTab.GROUP);
 
-            component.onTabSelected({ index: 0 }); // Back to columns
+            component['onTabSelected']({ index: 0 }); // Back to columns
             expect(component.activeTab()).toBe(ActiveTab.COLUMNS);
         });
     });
@@ -375,59 +375,59 @@ describe('SettingsDialogComponent', () => {
             expect(component.isResetAvailable$()).toBe(false);
 
             // Set reset availability for columns tab
-            component.updateResetAvailability(ActiveTab.COLUMNS, true);
+            component['updateResetAvailability'](ActiveTab.COLUMNS, true);
             expect(component.isResetAvailable$()).toBe(true);
 
             // Switch to sort tab
-            component.onTabSelected({ index: 1 }); // Sort is index 1 (columns, sort, filter, group)
+            component['onTabSelected']({ index: 1 }); // Sort is index 1 (columns, sort, filter, group)
             expect(component.activeTab()).toBe(ActiveTab.SORT);
             // Reset availability should match whatever the sort tab has (which may be true from initialization)
             const sortResetAvailability = component['_resetAvailabilityByTab']()[ActiveTab.SORT] ?? false;
             expect(component.isResetAvailable$()).toBe(sortResetAvailability);
 
             // Set reset availability for sort tab explicitly
-            component.updateResetAvailability(ActiveTab.SORT, true);
+            component['updateResetAvailability'](ActiveTab.SORT, true);
             expect(component.isResetAvailable$()).toBe(true);
 
             // Set sort reset to false
-            component.updateResetAvailability(ActiveTab.SORT, false);
+            component['updateResetAvailability'](ActiveTab.SORT, false);
             expect(component.isResetAvailable$()).toBe(false);
 
             // Switch back to columns - should restore columns reset state
-            component.onTabSelected({ index: 0 }); // Columns is index 0
+            component['onTabSelected']({ index: 0 }); // Columns is index 0
             expect(component.activeTab()).toBe(ActiveTab.COLUMNS);
             expect(component.isResetAvailable$()).toBe(true);
         });
 
         it('should update global reset availability when active tab changes', () => {
             component.activeTab.set(ActiveTab.SORT);
-            component.updateResetAvailability(ActiveTab.SORT, true);
+            component['updateResetAvailability'](ActiveTab.SORT, true);
             expect(component.isResetAvailable$()).toBe(true);
 
             // Switch to filter tab (no changes)
-            component.onTabSelected({ index: 2 }); // Filter is index 2 (columns, sort, filter, group)
+            component['onTabSelected']({ index: 2 }); // Filter is index 2 (columns, sort, filter, group)
             expect(component.isResetAvailable$()).toBe(false);
 
             // Mark filter as having changes
-            component.updateResetAvailability(ActiveTab.FILTER, true);
+            component['updateResetAvailability'](ActiveTab.FILTER, true);
             expect(component.isResetAvailable$()).toBe(true);
         });
 
         it('should handle reset availability for all tabs', () => {
-            component.onTabSelected({ index: 0 }); // Columns tab
-            component.updateResetAvailability(ActiveTab.COLUMNS, true);
+            component['onTabSelected']({ index: 0 }); // Columns tab
+            component['updateResetAvailability'](ActiveTab.COLUMNS, true);
             expect(component.isResetAvailable$()).toBe(true);
 
-            component.onTabSelected({ index: 1 }); // Sort tab
-            component.updateResetAvailability(ActiveTab.SORT, true);
+            component['onTabSelected']({ index: 1 }); // Sort tab
+            component['updateResetAvailability'](ActiveTab.SORT, true);
             expect(component.isResetAvailable$()).toBe(true);
 
-            component.onTabSelected({ index: 2 }); // Filter tab
-            component.updateResetAvailability(ActiveTab.FILTER, true);
+            component['onTabSelected']({ index: 2 }); // Filter tab
+            component['updateResetAvailability'](ActiveTab.FILTER, true);
             expect(component.isResetAvailable$()).toBe(true);
 
-            component.onTabSelected({ index: 3 }); // Group tab
-            component.updateResetAvailability(ActiveTab.GROUP, true);
+            component['onTabSelected']({ index: 3 }); // Group tab
+            component['updateResetAvailability'](ActiveTab.GROUP, true);
             expect(component.isResetAvailable$()).toBe(true);
         });
 

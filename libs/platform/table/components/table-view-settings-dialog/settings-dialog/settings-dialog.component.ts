@@ -1,15 +1,13 @@
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, forwardRef, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { FocusableItemDirective, InitialFocusDirective, Nullable, TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import { InitialFocusDirective, Nullable, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import {
     BarElementDirective,
     BarLeftDirective,
     BarRightDirective,
     ButtonBarComponent
 } from '@fundamental-ngx/core/bar';
-import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
     DialogBodyComponent,
     DialogComponent,
@@ -19,7 +17,7 @@ import {
 } from '@fundamental-ngx/core/dialog';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
-import { IconTabBarComponent, IconTabBarTabComponent } from '@fundamental-ngx/platform/icon-tab-bar';
+import { IconTabBarComponent, IconTabBarItem, IconTabBarTabComponent } from '@fundamental-ngx/platform/icon-tab-bar';
 import { CollectionFilter, CollectionSort, Table } from '@fundamental-ngx/platform/table-helpers';
 import { RESETTABLE_TOKEN, ResetButtonComponent, Resettable } from '../../reset-button/reset-button.component';
 import { ColumnsComponent } from '../columns/columns.component';
@@ -57,8 +55,6 @@ import {
         DialogBodyComponent,
         DialogFooterComponent,
         FdTranslatePipe,
-        FormsModule,
-        ButtonComponent,
         SortingComponent,
         FiltersComponent,
         GroupingComponent,
@@ -68,7 +64,6 @@ import {
         TitleComponent,
         ButtonBarComponent,
         InitialFocusDirective,
-        FocusableItemDirective,
         IconTabBarComponent,
         IconTabBarTabComponent
     ],
@@ -155,7 +150,6 @@ export class SettingsDialogComponent implements Resettable {
         this._setInitialSorting();
         this._setInitialFilters();
         this._setInitialGrouping();
-        this.updateResetAvailability();
     }
 
     /**
@@ -216,7 +210,7 @@ export class SettingsDialogComponent implements Resettable {
             }
             this._pendingColumnsChanges = initialColumns;
         }
-        this.isResetAvailable$.set(false);
+        this.updateResetAvailability(this.activeTab()!, false);
     }
 
     /**
@@ -275,7 +269,7 @@ export class SettingsDialogComponent implements Resettable {
      * Handle tab selection changes from the icon tab bar.
      * @param event The selected tab item.
      */
-    onTabSelected(event: any): void {
+    protected onTabSelected(event: IconTabBarItem): void {
         // Map tab index to ActiveTab enum based on which tabs are rendered
         // The order is: columns (if showColumns), sort, filter, group
         const tabOrder: ActiveTab[] = [];
@@ -305,7 +299,7 @@ export class SettingsDialogComponent implements Resettable {
      *            If not provided, updates the global state based on the currently active tab.
      * @param available Whether reset is available (only used when tab is provided).
      */
-    updateResetAvailability(tab?: ActiveTab, available?: boolean): void {
+    protected updateResetAvailability(tab?: ActiveTab, available?: boolean): void {
         if (tab !== undefined && available !== undefined) {
             // Update tracking for the specific tab
             this._resetAvailabilityByTab.update((state) => ({ ...state, [tab]: available }));
