@@ -1,9 +1,9 @@
 // Do not modify, it's automatically created. Modify translations_sv.properties instead
 export default {
     btpNavigation: {
-        expanderAriaLabel: 'expandera/komprimera underpositioner',
-        moreButtonAriaLabel: 'Visa ytterligare navigeringspositioner som är dolda på grund av begränsat skärmutrymme',
-        overflowMenuAriaLabel: 'Ytterligare navigeringspositioner',
+        expanderAriaLabel: 'expandera/komprimera underordnade objekt',
+        moreButtonAriaLabel: 'Visa ytterligare navigeringsobjekt som är dolda på grund av begränsat skärmutrymme',
+        overflowMenuAriaLabel: 'Ytterligare navigeringsobjekt',
         snappedPopoverRoleDescription: 'Träd i navigeringslista'
     },
     btpSearchField: {
@@ -20,10 +20,10 @@ export default {
     },
     coreAvatarGroup: {
         ariaLabelGroup:
-            'Has popup type dialog conjoined avatars, {count} avatars displayed, {hiddenCount} avatars hidden, activate for complete list',
-        ariaLabelIndividual: 'Individual avatars. {count} avatars displayed, {hiddenCount} avatars hidden',
+            'Har sammankopplade avatarer för dialog av typ popup, {count} avatarer visas, {hiddenCount} avatarer har dolts, aktivera för komplett lista',
+        ariaLabelIndividual: 'Individuella avatarer. {count} avatarer visas, {hiddenCount} avatarer är dolda',
         backButton: 'Tillbaka',
-        popupBodyAriaLabel: 'With {count} items'
+        popupBodyAriaLabel: 'Med {count} objekt'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Tillämpade datafiltreringssteg',
@@ -36,8 +36,8 @@ export default {
     },
     coreCalendar: {
         calendarDayViewDescription: 'Kalender',
-        calendarLegendLabel: 'Calendar Legend',
-        calendarRoleDescription: 'Calendar',
+        calendarLegendLabel: 'Kalenderförklaring',
+        calendarRoleDescription: 'Kalender',
         calendarMonthViewDescription: 'Månadsväljare',
         calendarYearsRangeViewDescription: 'Årsintervallväljare',
         calendarYearsViewDescription: 'Årsväljare',
@@ -202,7 +202,7 @@ export default {
         ariaLabel: 'Product Switch'
     },
     coreRadio: {
-        readOnlyDescription: 'This radio button is read-only and cannot be changed.'
+        readOnlyDescription: 'Den här alternativknappen är skrivskyddad och kan inte ändras.'
     },
     coreRatingIndicator: {
         ariaLabelReset: 'Återställ till noll',

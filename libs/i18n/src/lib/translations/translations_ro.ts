@@ -21,10 +21,10 @@ export default {
     },
     coreAvatarGroup: {
         ariaLabelGroup:
-            'Has popup type dialog conjoined avatars, {count} avatars displayed, {hiddenCount} avatars hidden, activate for complete list',
-        ariaLabelIndividual: 'Individual avatars. {count} avatars displayed, {hiddenCount} avatars hidden',
+            'Are avataruri îmbinate în dialog de tip popup, {count} avataruri afișate, {hiddenCount} avataruri ascunse, activați pentru lista completă',
+        ariaLabelIndividual: 'Avataruri individuale. {count} avataruri afișate, {hiddenCount} avataruri ascunse',
         backButton: 'Înapoi',
-        popupBodyAriaLabel: 'With {count} items'
+        popupBodyAriaLabel: 'Cu {count} articole'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Istoric de navigare',
@@ -37,7 +37,7 @@ export default {
     },
     coreCalendar: {
         calendarDayViewDescription: 'Calendar',
-        calendarLegendLabel: 'Calendar Legend',
+        calendarLegendLabel: 'Legendă calendar',
         calendarRoleDescription: 'Calendar',
         calendarMonthViewDescription: 'Selector lună',
         calendarYearsRangeViewDescription: 'Selector interval de ani',
@@ -203,7 +203,7 @@ export default {
         ariaLabel: 'Comutator produse'
     },
     coreRadio: {
-        readOnlyDescription: 'This radio button is read-only and cannot be changed.'
+        readOnlyDescription: 'Acest buton radio este numai pentru citire și nu poate fi modificat.'
     },
     coreRatingIndicator: {
         ariaLabelReset: 'Resetare la zero',

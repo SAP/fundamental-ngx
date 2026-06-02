@@ -20,10 +20,10 @@ export default {
     },
     coreAvatarGroup: {
         ariaLabelGroup:
-            'Has popup type dialog conjoined avatars, {count} avatars displayed, {hiddenCount} avatars hidden, activate for complete list',
-        ariaLabelIndividual: 'Individual avatars. {count} avatars displayed, {hiddenCount} avatars hidden',
+            'Sisältää kohoikkunatyyppisen valintaikkunan - yhdistetyt avatarit, {count} avataria näytetty, {hiddenCount} avataria piilotettu, aktivoi täydellinen luettelo',
+        ariaLabelIndividual: 'Yksittäiset avatarit. {count} avataria näytetty, {hiddenCount} avataria piilotettu',
         backButton: 'Paluu',
-        popupBodyAriaLabel: 'With {count} items'
+        popupBodyAriaLabel: '{count} rivin kanssa'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Navigointipolku',
@@ -36,8 +36,8 @@ export default {
     },
     coreCalendar: {
         calendarDayViewDescription: 'Kalenteri',
-        calendarLegendLabel: 'Calendar Legend',
-        calendarRoleDescription: 'Calendar',
+        calendarLegendLabel: 'Kalenterin selitys',
+        calendarRoleDescription: 'Kalenteri',
         calendarMonthViewDescription: 'Kuukausivalitsin',
         calendarYearsRangeViewDescription: 'Vuosialuevalitsin',
         calendarYearsViewDescription: 'Vuosivalitsin',
@@ -202,7 +202,7 @@ export default {
         ariaLabel: 'Tuotteen vaihto'
     },
     coreRadio: {
-        readOnlyDescription: 'This radio button is read-only and cannot be changed.'
+        readOnlyDescription: 'Tämä valintanappi on kirjoitussuojattu, eikä sitä voi muuttaa.'
     },
     coreRatingIndicator: {
         ariaLabelReset: 'Palauta nollaksi',

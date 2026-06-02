@@ -20,10 +20,10 @@ export default {
     },
     coreAvatarGroup: {
         ariaLabelGroup:
-            'Has popup type dialog conjoined avatars, {count} avatars displayed, {hiddenCount} avatars hidden, activate for complete list',
-        ariaLabelIndividual: 'Individual avatars. {count} avatars displayed, {hiddenCount} avatars hidden',
+            'Diyalog birleşik avatarlar açılır pencere türüne sahip, {count} avatar görüntüleniyor, {hiddenCount} avatar gizlendi, tam liste için etkinleştirin',
+        ariaLabelIndividual: 'Bireysel avatarlar. {count} avatar görüntüleniyor, {hiddenCount} avatar gizlendi',
         backButton: 'Geri',
-        popupBodyAriaLabel: 'With {count} items'
+        popupBodyAriaLabel: '{count} kalem ile'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'İçerik Haritası Yolu',
@@ -36,8 +36,8 @@ export default {
     },
     coreCalendar: {
         calendarDayViewDescription: 'Takvim',
-        calendarLegendLabel: 'Calendar Legend',
-        calendarRoleDescription: 'Calendar',
+        calendarLegendLabel: 'Takvim açıklaması',
+        calendarRoleDescription: 'Takvim',
         calendarMonthViewDescription: 'Ay seçici',
         calendarYearsRangeViewDescription: 'Yıl aralığı seçici',
         calendarYearsViewDescription: 'Yıl seçici',
@@ -202,7 +202,7 @@ export default {
         ariaLabel: 'Ürün Anahtarı'
     },
     coreRadio: {
-        readOnlyDescription: 'This radio button is read-only and cannot be changed.'
+        readOnlyDescription: 'Bu radyo düğmesi salt okunurdur ve değiştirilemez.'
     },
     coreRatingIndicator: {
         ariaLabelReset: 'Sıfırla',

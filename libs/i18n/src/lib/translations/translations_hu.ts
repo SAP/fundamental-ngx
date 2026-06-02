@@ -21,10 +21,10 @@ export default {
     },
     coreAvatarGroup: {
         ariaLabelGroup:
-            'Has popup type dialog conjoined avatars, {count} avatars displayed, {hiddenCount} avatars hidden, activate for complete list',
-        ariaLabelIndividual: 'Individual avatars. {count} avatars displayed, {hiddenCount} avatars hidden',
+            'Előugró típusú dialógusa van, összevont avatarok, {count} avatar megjelenítve, {hiddenCount} avatar rejtett, a teljes listához aktiválja',
+        ariaLabelIndividual: 'Egyéni avatarok. {count} avatar megjelenítve, {hiddenCount} avatar rejtett',
         backButton: 'Vissza',
-        popupBodyAriaLabel: 'With {count} items'
+        popupBodyAriaLabel: '{count} tétellel'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Útkövetési napló',
@@ -37,8 +37,8 @@ export default {
     },
     coreCalendar: {
         calendarDayViewDescription: 'Naptár',
-        calendarLegendLabel: 'Calendar Legend',
-        calendarRoleDescription: 'Calendar',
+        calendarLegendLabel: 'Naptármagyarázat',
+        calendarRoleDescription: 'Naptár',
         calendarMonthViewDescription: 'Hónapválasztó',
         calendarYearsRangeViewDescription: 'Évtartomány-választó',
         calendarYearsViewDescription: 'Évválasztó',
@@ -203,7 +203,7 @@ export default {
         ariaLabel: 'Termékváltás'
     },
     coreRadio: {
-        readOnlyDescription: 'This radio button is read-only and cannot be changed.'
+        readOnlyDescription: 'Ez a választókapcsoló írásvédett, ezért nem módosítható.'
     },
     coreRatingIndicator: {
         ariaLabelReset: 'Visszaállítás nullára',
