@@ -53,6 +53,30 @@ Customer experience components.
 
 ### Component Examples
 
+#### Machine-Readable Catalog
+
+For static analysis and component discovery, see the comprehensive machine-readable catalog:
+
+**[components.json](https://sap.github.io/fundamental-ngx/components.json)** - All 1,000+ components with selectors, inputs, outputs, methods, and examples.
+
+Format:
+```
+{
+  "version": "0.63.0-rc.2",
+  "components": [
+    {
+      "name": "ButtonComponent",
+      "selector": "[fd-button], fd-button",
+      "library": "@fundamental-ngx/core",
+      "category": "button",
+      "inputs": [...],
+      "outputs": [...],
+      "examples": [...]
+    }
+  ]
+}
+```
+
 #### Core Components
 Common UI components including: Button, Checkbox, Dialog, Form, Icon, Input, List, Menu, Popover, Select, Switch, Table, Tabs, Toast, Toolbar, and many more.
 
@@ -113,6 +137,10 @@ Base utilities and shared types for all UI5 Web Components Angular wrappers. Typ
 - [npm](https://www.npmjs.com/package/@fundamental-ngx/ui5-webcomponents-base)
 
 ### Component Examples
+
+#### Machine-Readable Catalog
+
+For static analysis and component discovery, see [components.json](https://sap.github.io/fundamental-ngx/components.json) - includes all UI5 Web Component wrappers with full selector information.
 
 #### Core UI5 Components
 Common UI elements including: Button, Input, Dialog, List, Table, Card, Panel, DatePicker, TimePicker, Select, ComboBox, MultiComboBox, and more.
