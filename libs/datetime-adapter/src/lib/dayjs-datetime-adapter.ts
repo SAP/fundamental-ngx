@@ -421,10 +421,15 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
                 format, // original
                 format.replace(/ ?[Hh]:?mm[aA]?/, ''), // remove time
                 format.replace(/ ?[Hh]:?mm/, ''), // remove time (no meridiem),
+                format.replace(/h:mm ?[aA]/i, 'HH:mm'),
+                format.replace(/h:mm ?[aA]/i, 'H:mm'),
                 'L',
                 dayjs.Ls[dayjs.locale()].formats['L'],
                 'DD/MM/YYYY',
-                'YYYY-MM-DD'
+                // Only fall back to ISO format when the string actually starts with a 4-digit year,
+                // otherwise a US-locale string like "5/25/2025 15:30" gets mis-parsed as a valid
+                // ISO date with the wrong year and hour=0 (the original bug).
+                ...(typeof date === 'string' && /^\d{4}-/.test(date) ? ['YYYY-MM-DD'] : [])
             ];
 
             for (const f of fallbackFormats) {
