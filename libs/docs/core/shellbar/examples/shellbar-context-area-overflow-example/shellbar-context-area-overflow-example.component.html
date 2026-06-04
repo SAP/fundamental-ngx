@@ -1,0 +1,109 @@
+<div [style.width.%]="shellbarWidth()">
+    <fd-shellbar [showNavigationButton]="true">
+        <fd-shellbar-branding>
+            <fd-shellbar-logo>
+                <a class="fd-shellbar__logo fd-shellbar__logo--image-replaced" role="link" aria-label="SAP"></a>
+            </fd-shellbar-logo>
+            <fd-shellbar-title>Product Name</fd-shellbar-title>
+        </fd-shellbar-branding>
+
+        <fd-shellbar-context-area (contentItemVisibilityChange)="onVisibilityChange($event)">
+            <span
+                fdShellbarHidePriority="1"
+                fd-button
+                fdType="transparent"
+                label="Customer Rainbird"
+                ariaLabel="Customer Rainbird"
+            ></span>
+            <div
+                fdShellbarHidePriority="2"
+                fd-generic-tag
+                glyph="example"
+                type="success"
+                name="Development - System 1"
+                ariaRoleDescription="Development - System 1"
+            ></div>
+            <fd-popover
+                fdShellbarHidePriority="0"
+                [(isOpen)]="isOverflowOpen"
+                [noArrow]="true"
+                placement="bottom-end"
+                [triggers]="[]"
+                [style.visibility]="hiddenItems().length > 0 ? 'visible' : 'hidden'"
+            >
+                <fd-popover-control>
+                    <button
+                        fd-button
+                        fdType="transparent"
+                        glyph="slim-arrow-down"
+                        class="fd-shellbar__button"
+                        ariaLabel="Show hidden context items"
+                        title="More items"
+                        (click)="isOverflowOpen.set(!isOverflowOpen())"
+                    ></button>
+                </fd-popover-control>
+                <fd-popover-body>
+                    <div
+                        #overflowContainer
+                        class="sap-padding--tiny"
+                        style="padding: 0.5rem; display: flex; flex-direction: column; gap: 0.5rem"
+                    ></div>
+                </fd-popover-body>
+            </fd-popover>
+        </fd-shellbar-context-area>
+
+        <fd-shellbar-actions>
+            @for (action of actions; track action) {
+                <fd-shellbar-action
+                    [glyph]="action.glyph"
+                    [callback]="action.callback"
+                    [label]="action.label"
+                    [ariaLabel]="action.ariaLabel"
+                    [title]="action.title"
+                    [fdType]="action.type"
+                ></fd-shellbar-action>
+            }
+
+            <fd-user-menu>
+                <fd-user-menu-control>
+                    <fd-avatar
+                        fd-user-menu-control-element
+                        size="xs"
+                        [circle]="true"
+                        [interactive]="true"
+                        ariaLabel="User menu"
+                        image="https://picsum.photos/id/1018/400"
+                    ></fd-avatar>
+                </fd-user-menu-control>
+                <fd-user-menu-body>
+                    <div fd-user-menu-header>
+                        <fd-avatar
+                            [circle]="true"
+                            size="l"
+                            label="Lisa Miller"
+                            zoomGlyph="edit"
+                            title="Edit avatar"
+                        ></fd-avatar>
+                        <div fd-user-menu-header-container>
+                            <div fd-user-menu-user-name>Lisa Miller</div>
+                            <div fd-user-menu-subline>lisa.miller&#64;test.com</div>
+                            <div fd-user-menu-subline>User Experience Designer</div>
+                            <div fd-user-menu-subline>Primary Employment</div>
+                        </div>
+                    </div>
+                </fd-user-menu-body>
+            </fd-user-menu>
+        </fd-shellbar-actions>
+    </fd-shellbar>
+</div>
+
+<div class="sap-margin-top--small">
+    <label class="fd-form-label">Shellbar width: {{ shellbarWidth() }}%</label>
+    <fd-slider
+        [ngModel]="shellbarWidth()"
+        (ngModelChange)="shellbarWidth.set($event)"
+        [min]="20"
+        [max]="100"
+        [step]="1"
+    ></fd-slider>
+</div>
