@@ -552,5 +552,16 @@ describe('MomentDatetimeAdapter with LOCALE_ID override', () => {
             expect(result.month()).toBe(MAY);
             expect(result.date()).toBe(25);
         });
+
+        it('should not produce an invalid HHH:mm token when format already uses uppercase HH', () => {
+            // Regression: case-insensitive /h:mm ?[aA]/i matched 'H:mm A' inside 'HH:mm A',
+            // leaving the first H in place and producing 'HHH:mm' — an unrecognised dayjs token.
+            const result = adapter['_createDayjsDate']('05/25/2025 15:30', 'MM/DD/YYYY HH:mm A');
+            expect(result.isValid()).toBe(true);
+            expect(result.year()).toBe(2025);
+            expect(result.month()).toBe(MAY);
+            expect(result.date()).toBe(25);
+            expect(result.hour()).toBe(15);
+        });
     });
 });

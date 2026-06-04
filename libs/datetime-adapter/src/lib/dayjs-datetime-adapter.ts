@@ -421,8 +421,10 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
                 format, // original
                 format.replace(/ ?[Hh]:?mm[aA]?/, ''), // remove time
                 format.replace(/ ?[Hh]:?mm/, ''), // remove time (no meridiem),
-                format.replace(/h:mm ?[aA]/i, 'HH:mm'),
-                format.replace(/h:mm ?[aA]/i, 'H:mm'),
+                format.replace(/h:mm ?[aA]/, 'HH:mm'),
+                format.replace(/h:mm ?[aA]/, 'H:mm'),
+                format.replace(/HH:mm ?[aA]/, 'HH:mm'),
+                format.replace(/H:mm ?[aA]/, 'H:mm'),
                 'L',
                 dayjs.Ls[dayjs.locale()].formats['L'],
                 'DD/MM/YYYY',
