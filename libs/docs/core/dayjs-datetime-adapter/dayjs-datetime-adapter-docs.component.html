@@ -50,3 +50,19 @@
     <fd-dayjs-datetime-formats-example></fd-dayjs-datetime-formats-example>
 </component-example>
 <code-example [exampleFiles]="dayjsDatetimeFormats"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="datetime-24h" componentName="dayjs-datetime-adapter">
+    24-hour time format
+</fd-docs-section-title>
+<description>
+    Use the <code>DAYJS_DATETIME_FORMATS_24H</code> preset (exported from
+    <code>&#64;fundamental-ngx/datetime-adapter</code>) to configure the datetime picker for 24-hour time input and
+    display. Set <code>[meridian]="false"</code> on the picker to hide the AM/PM spinner. Users can type time values
+    such as <code>15:30</code> directly into the input field.
+</description>
+<component-example>
+    <fd-dayjs-datetime-24h-example></fd-dayjs-datetime-24h-example>
+</component-example>
+<code-example [exampleFiles]="dayjsDatetime24h"></code-example>
