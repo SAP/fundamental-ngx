@@ -56,6 +56,12 @@ export class GenericTagComponent implements HasElementRef {
     readonly value = input<string | null | undefined>();
 
     /**
+     * Custom icon glyph. When provided, overrides the icon derived from `type`.
+     * Use any valid SAP icon name (e.g. `'product'`, `'world'`).
+     */
+    readonly glyph = input<string | null | undefined>();
+
+    /**
      *  Aria defines role description for the Generic Tag
      */
     readonly ariaRoleDescription = input('Generic Tag');
@@ -68,6 +74,10 @@ export class GenericTagComponent implements HasElementRef {
      * @hidden
      */
     protected readonly iconGlyph = computed(() => {
+        const customGlyph = this.glyph();
+        if (customGlyph) {
+            return customGlyph;
+        }
         const tagType = this.type();
         return tagType ? `message-${tagType}` : '';
     });
