@@ -590,6 +590,13 @@
             "className": "CalendarMondayStartExampleComponent"
         },
         {
+            "path": "core/calendar/multi-month-playground",
+            "library": "core",
+            "component": "calendar",
+            "example": "multi-month-playground",
+            "className": "CalendarMultiMonthPlaygroundExampleComponent"
+        },
+        {
             "path": "core/calendar/options",
             "library": "core",
             "component": "calendar",

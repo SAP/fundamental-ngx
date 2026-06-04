@@ -21,6 +21,7 @@ import { CalendarMarkHoverComponent } from './examples/calendar-mark-hover/calen
 import { CalendarMobileExampleComponent } from './examples/calendar-mobile-example/calendar-mobile-example.component';
 import { CalendarMondayStartExampleComponent } from './examples/calendar-monday-start-example.component';
 import { CalendarMultiExampleComponent } from './examples/calendar-multi-example.component';
+import { CalendarMultiMonthPlaygroundExampleComponent } from './examples/calendar-multi-month-playground-example.component';
 import { CalendarMultiRangeExampleComponent } from './examples/calendar-multi-range-example.component';
 import { CalendarOptionsExampleComponent } from './examples/calendar-options-example/calendar-options-example.component';
 import { CalendarProgrammaticallyChangeExampleComponent } from './examples/calendar-programmatically-change-example.component';
@@ -31,6 +32,7 @@ import { CalendarSpecialDayExampleComponent } from './examples/calendar-special-
 const calendarFormSourceScss = 'calendar-form-example/calendar-form-example.component.scss';
 
 const calendarRangeSrc = 'calendar-range-example.component.ts';
+const calendarMultiMonthPlaygroundSrc = 'calendar-multi-month-playground-example.component.ts';
 const calendarMultiRangeSrc = 'calendar-multi-range-example.component.ts';
 const calendarOptionHtml = 'calendar-options-example/calendar-options-example.component.html';
 const calendarOptionSrc = 'calendar-options-example/calendar-options-example.component.ts';
@@ -85,6 +87,7 @@ const calendarBCPHTML = 'calendar-bcp/calendar-bcp.html';
         CalendarMultiExampleComponent,
         CalendarMultiRangeExampleComponent,
         CalendarLegendExampleComponent,
+        CalendarMultiMonthPlaygroundExampleComponent,
         CalendarBcp
     ]
 })
@@ -209,6 +212,15 @@ specialDay: SpecialDayRule[] = [
             component: 'CalendarRangeExampleComponent',
             fileName: 'calendar-range-example',
             code: getAssetFromModuleAssets(calendarRangeSrc)
+        }
+    ];
+
+    calendarMultiMonthPlaygroundSource: ExampleFile[] = [
+        {
+            language: 'typescript',
+            component: 'CalendarMultiMonthPlaygroundExampleComponent',
+            fileName: 'calendar-multi-month-playground-example',
+            code: getAssetFromModuleAssets(calendarMultiMonthPlaygroundSrc)
         }
     ];
 

@@ -592,6 +592,13 @@ export const generatedRoutes: Routes = [
             )
     },
     {
+        path: 'core/calendar/multi-month-playground',
+        loadComponent: () =>
+            import(
+                '../../../../libs/docs/core/calendar/examples/calendar-multi-month-playground-example.component'
+            ).then((m) => m.CalendarMultiMonthPlaygroundExampleComponent)
+    },
+    {
         path: 'core/calendar/options',
         loadComponent: () =>
             import(
