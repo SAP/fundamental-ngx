@@ -327,7 +327,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
 
         // Fallback: try locale-aware date parsing when Date.parse() fails
         if (Number.isNaN(date.valueOf()) && typeof value === 'string') {
-            const parsed = this._parseDateString(value);
+            const parsed = this._parseDateString(value) ?? this._parseDateTimeString(value);
             if (parsed) {
                 date = parsed;
             }
@@ -688,6 +688,43 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         date.setFullYear(year, month - 1, day);
         date.setHours(0, 0, 0, 0);
         return date;
+    }
+
+    /**
+     * @hidden
+     *
+     * Parse a locale-native datetime string that contains both a date and a time
+     * component (e.g. "20/05/2026 16:33" fr-FR, "20.5.2026, 16:33" de-DE).
+     *
+     * Strategy: split on the first 4-digit year boundary (everything before+including
+     * the year is the date part; everything after the optional ", " separator is the
+     * time part), delegate each half to the existing helpers, then combine.
+     *
+     * @param value Datetime string to parse
+     * @returns Native Date instance or null if parsing fails
+     */
+    private _parseDateTimeString(value: string): Date | null {
+        // Match: <date-with-4-digit-year> <optional-comma> <whitespace> <time>
+        // Captures: [1] = date portion, [2] = time portion
+        const m = value.trim().match(/^(.*?\d{4}),?\s+(.+)$/);
+        if (!m) {
+            return null;
+        }
+        const datePart = m[1].trim();
+        const timePart = m[2].trim();
+
+        const dateOnly = this._parseDateString(datePart);
+        if (!dateOnly) {
+            return null;
+        }
+
+        const timeParsed = this._parseTimeString(timePart);
+        if (Number.isNaN(timeParsed.valueOf())) {
+            return null;
+        }
+
+        dateOnly.setHours(timeParsed.getHours(), timeParsed.getMinutes(), timeParsed.getSeconds(), 0);
+        return dateOnly;
     }
 
     /**

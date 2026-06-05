@@ -1474,4 +1474,34 @@ describe('DayjsDatetimeAdapter — M-4 round-trip regression (PR #14016)', () =>
         const parsed = adapter.parse('21.05.2026 4:33 PM', dateTimeInputFormat);
         expect(adapter.isValid(parsed)).toBe(true);
     });
+
+    // Reproduce the actual handleInputChange path: convertToDesiredFormat strips AM/PM
+    // and converts to 24h BEFORE adapter.parse() is called, so the format 'L h:mm A'
+    // must also accept 24h input such as '05/21/2026 16:33' (en) or '21/05/2026 16:33' (fr).
+    it('parses en input after convertToDesiredFormat strips PM (24h result)', () => {
+        adapter.setLocale('en');
+        // handleInputChange('05/21/2026 4:33 PM') → convertToDesiredFormat → '05/21/2026 16:33'
+        const parsed = adapter.parse('05/21/2026 16:33', dateTimeInputFormat);
+        expect(adapter.isValid(parsed)).toBe(true);
+        expect(parsed!.hour()).toBe(16);
+        expect(parsed!.minute()).toBe(33);
+    });
+
+    it('parses fr input with 24h time against 12h format (fr native is 24h)', () => {
+        adapter.setLocale('fr');
+        // fr user types '21/05/2026 16:33' — no AM/PM, format is still 'L h:mm A'
+        const parsed = adapter.parse('21/05/2026 16:33', dateTimeInputFormat);
+        expect(adapter.isValid(parsed)).toBe(true);
+        expect(parsed!.hour()).toBe(16);
+        expect(parsed!.minute()).toBe(33);
+    });
+
+    it('parses de input with 24h time against 12h format (de native is 24h)', () => {
+        adapter.setLocale('de');
+        // de user types '21.05.2026 16:33' — no AM/PM, format is still 'L h:mm A'
+        const parsed = adapter.parse('21.05.2026 16:33', dateTimeInputFormat);
+        expect(adapter.isValid(parsed)).toBe(true);
+        expect(parsed!.hour()).toBe(16);
+        expect(parsed!.minute()).toBe(33);
+    });
 });

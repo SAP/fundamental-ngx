@@ -451,8 +451,17 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
             // locale so that parsing does not depend on the global dayjs locale.
             const expandedFormat = this._prepareFormat(format);
 
+            // Normalize 12h patterns (h:mm A, hh:mm A, h:mm a, etc.) to 24h (HH:mm).
+            // Also strip stray AM/PM marker from already-uppercase HH patterns (HH:mm A → HH:mm).
+            // This handles inputs where convertToDesiredFormat already stripped AM/PM
+            // and converted to 24h before parse() was called (e.g. '14:30' against 'h:mm A').
+            const normalized24h = expandedFormat
+                .replace(/h{1,2}(:mm(?::ss)?) ?[aA]/g, 'HH$1') // lowercase h → HH
+                .replace(/(HH?)(:mm(?::ss)?) ?[aA]/g, 'HH$2'); // uppercase HH + stray A → HH
+
             const rawFormats: string[] = [
                 expandedFormat, // original (expanded)
+                normalized24h, // 24h variant for inputs where AM/PM was pre-stripped
                 expandedFormat.replace(/ ?[Hh]{1,2}:?mm(?::?ss)?(?: ?[aA])?/, '').trim(), // remove time
                 dayjs.Ls[this.locale()]?.formats?.['L'],
                 'YYYY-MM-DD'
