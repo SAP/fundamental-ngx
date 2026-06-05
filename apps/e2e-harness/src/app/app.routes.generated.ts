@@ -2881,6 +2881,13 @@ export const generatedRoutes: Routes = [
             ).then((m) => m.TemplateBasedSettingsDialogExampleComponent)
     },
     {
+        path: 'core/shellbar/context-area-overflow',
+        loadComponent: () =>
+            import(
+                '../../../../libs/docs/core/shellbar/examples/shellbar-context-area-overflow-example/shellbar-context-area-overflow-example.component'
+            ).then((m) => m.ShellbarContextAreaOverflowExampleComponent)
+    },
+    {
         path: 'core/side-navigation/condensed',
         loadComponent: () =>
             import(

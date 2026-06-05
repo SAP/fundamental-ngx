@@ -104,6 +104,10 @@
         {
             "route": "platform/message-popover/form-generator-component",
             "reason": "Form-generator initialization timing — screenshot can fire before form is fully rendered"
+        },
+        {
+            "route": "core/shellbar/context-area-overflow",
+            "reason": "Covered by visual-shellbar-context-area-overflow.spec.ts with fixed viewports and avatar masking"
         }
     ]
 }

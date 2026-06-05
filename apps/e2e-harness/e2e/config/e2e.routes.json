@@ -1,5 +1,5 @@
 {
-    "count": 956,
+    "count": 957,
     "routes": [
         {
             "path": "btp/button/nested",
@@ -2877,6 +2877,13 @@
             "component": "settings-dialog",
             "example": "template-based-settings-dialog",
             "className": "TemplateBasedSettingsDialogExampleComponent"
+        },
+        {
+            "path": "core/shellbar/context-area-overflow",
+            "library": "core",
+            "component": "shellbar",
+            "example": "context-area-overflow",
+            "className": "ShellbarContextAreaOverflowExampleComponent"
         },
         {
             "path": "core/side-navigation/condensed",
