@@ -12,6 +12,7 @@ import { DAYJS_DATETIME_FORMATS } from './dayjs-datetime-formats';
 // preload locales that are used in tests
 import 'dayjs/locale/ar-ma';
 import 'dayjs/locale/da';
+import 'dayjs/locale/de';
 import 'dayjs/locale/fr';
 import 'dayjs/locale/ja';
 
@@ -1408,5 +1409,69 @@ describe('DayjsDatetimeAdapter locale isolation', () => {
         // The component-level adapter (adapterB) should remain unaffected
         expect(adapterB.locale()).toBe('en');
         expect(adapterB.format(date, 'MMMM')).toBe('March');
+    });
+});
+
+/**
+ * M-4 round-trip regression specs (PR #14016)
+ *
+ * Mike O'Donnell's reproduction steps (CHANGES_REQUESTED review):
+ *   1. Open <fd-datetime-picker> and click the input.
+ *   2. Pick a date+time via the picker UI (e.g. May 20 2026, 4:33 PM).
+ *   3. Picker closes; input renders the chosen value cleanly.
+ *   4. Manually edit the input text to a different valid datetime
+ *      (e.g. change "05/20/2026 4:33 PM" → "05/21/2026 4:33 PM").
+ *   5. BUG: input gains an error border even though the typed value is valid
+ *      and is in the exact same format the picker wrote moments before.
+ *
+ * NOTE: DayjsDatetimeAdapter already handles round-trips correctly via its
+ * _createDayjsDate() multi-format fallback strategy.  These specs serve as a
+ * regression guard to ensure future changes do not regress this behaviour.
+ * The M-4 bug is isolated to FdDatetimeAdapter (see fd-datetime-adapter.spec.ts).
+ */
+describe('DayjsDatetimeAdapter — M-4 round-trip regression (PR #14016)', () => {
+    let adapter: DayjsDatetimeAdapter;
+
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            providers: [provideDayjsDatetimeAdapter()]
+        });
+        adapter = TestBed.inject(DatetimeAdapter) as DayjsDatetimeAdapter;
+    });
+
+    const dateTimeInputFormat = DAYJS_DATETIME_FORMATS.parse.dateTimeInput; // 'L h:mm A'
+
+    for (const locale of ['en', 'fr', 'de']) {
+        it(`round-trips a picker-formatted value through parse() — ${locale} locale`, () => {
+            adapter.setLocale(locale);
+            const picked = dayjs.utc
+                ? dayjs('2026-05-20T16:33:00Z')
+                : dayjs(new Date(Date.UTC(2026, MAY, 20, 16, 33, 0)));
+            const formatted = adapter.format(picked, dateTimeInputFormat);
+            const reparsed = adapter.parse(formatted, dateTimeInputFormat);
+            expect(adapter.isValid(reparsed)).toBe(true, `parse("${formatted}") returned invalid date for ${locale}`);
+            expect(adapter.format(reparsed!, dateTimeInputFormat)).toBe(formatted);
+        });
+    }
+
+    it("parses a manually-typed valid datetime in en locale (Mike's step 4)", () => {
+        adapter.setLocale('en');
+        // en picker writes "05/20/2026 4:33 PM"; user edits day to 21
+        const parsed = adapter.parse('05/21/2026 4:33 PM', dateTimeInputFormat);
+        expect(adapter.isValid(parsed)).toBe(true);
+    });
+
+    it('parses a manually-typed valid datetime in fr locale', () => {
+        adapter.setLocale('fr');
+        // fr picker writes "20/05/2026 4:33 PM"; user edits day to 21
+        const parsed = adapter.parse('21/05/2026 4:33 PM', dateTimeInputFormat);
+        expect(adapter.isValid(parsed)).toBe(true);
+    });
+
+    it('parses a manually-typed valid datetime in de locale', () => {
+        adapter.setLocale('de');
+        // de picker writes "20.05.2026 4:33 PM"; user edits day to 21
+        const parsed = adapter.parse('21.05.2026 4:33 PM', dateTimeInputFormat);
+        expect(adapter.isValid(parsed)).toBe(true);
     });
 });

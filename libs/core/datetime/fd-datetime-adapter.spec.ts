@@ -1217,3 +1217,77 @@ describe('FdDatetimeAdapter locale isolation', () => {
         expect(adapterB.getDayOfWeekNames('long')[0]).toBe('Sunday');
     });
 });
+
+/**
+ * M-4 round-trip regression specs (PR #14016)
+ *
+ * Mike O'Donnell's reproduction steps (CHANGES_REQUESTED review):
+ *   1. Open <fd-datetime-picker> and click the input.
+ *   2. Pick a date+time via the picker UI (e.g. May 20 2026, 4:33 PM).
+ *   3. Picker closes; input renders the chosen value cleanly.
+ *   4. Manually edit the input text to a different valid datetime
+ *      (e.g. change "5/20/2026, 4:33 PM" → "5/21/2026, 4:33 PM").
+ *   5. BUG: input gains an error border even though the typed value is valid
+ *      and is in the exact same format the picker wrote moments before.
+ *
+ * Root cause: format() uses Intl.DateTimeFormat with timeZone:'utc' and produces
+ * locale-native strings such as "20/05/2026 16:33" (fr-FR) or "20.5.2026, 16:33"
+ * (de-DE).  parse() tries Date.parse() first — which returns NaN for those strings —
+ * then falls through to _parseDateString() whose regex only matches 4-part date-only
+ * strings (no comma, no time component), so it also returns null.  The adapter ends
+ * up returning an invalid FdDate, which the picker interprets as an error state.
+ */
+describe('FdDatetimeAdapter — M-4 round-trip regression (PR #14016)', () => {
+    let adapter: FdDatetimeAdapter;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [FdDatetimeAdapterModule]
+        }).compileComponents();
+    }));
+
+    beforeEach(inject([DatetimeAdapter], (dateAdapter: FdDatetimeAdapter) => {
+        adapter = dateAdapter;
+    }));
+
+    const picked = new FdDate(2026, 5, 20, 16, 33, 0); // May 20 2026 4:33 PM UTC
+    const dateTimeInput = {
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit'
+    } as Intl.DateTimeFormatOptions;
+
+    for (const locale of ['en', 'fr', 'de']) {
+        it(`round-trips a picker-formatted value through parse() — ${locale} locale`, () => {
+            adapter.setLocale(locale);
+            const formatted = adapter.format(picked, dateTimeInput);
+            const reparsed = adapter.parse(formatted, dateTimeInput);
+            expect(adapter.isValid(reparsed)).toBe(true, `parse("${formatted}") returned invalid FdDate`);
+            expect(adapter.format(reparsed!, dateTimeInput)).toBe(formatted);
+        });
+    }
+
+    it("parses a manually-typed valid datetime in en locale (Mike's step 4)", () => {
+        adapter.setLocale('en');
+        // The string "5/21/2026, 4:33 PM" is the exact format the en-US picker writes,
+        // with one day advanced — this is what Mike typed that triggered the error border.
+        const parsed = adapter.parse('5/21/2026, 4:33 PM', dateTimeInput);
+        expect(adapter.isValid(parsed)).toBe(true);
+    });
+
+    it('parses a manually-typed valid datetime in fr locale', () => {
+        adapter.setLocale('fr');
+        // fr-FR picker writes "20/05/2026 16:33"; user edits to "21/05/2026 16:33"
+        const parsed = adapter.parse('21/05/2026 16:33', dateTimeInput);
+        expect(adapter.isValid(parsed)).toBe(true);
+    });
+
+    it('parses a manually-typed valid datetime in de locale', () => {
+        adapter.setLocale('de');
+        // de-DE picker writes "20.5.2026, 16:33"; user edits to "21.5.2026, 16:33"
+        const parsed = adapter.parse('21.5.2026, 16:33', dateTimeInput);
+        expect(adapter.isValid(parsed)).toBe(true);
+    });
+});
