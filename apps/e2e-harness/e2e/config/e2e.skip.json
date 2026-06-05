@@ -377,10 +377,6 @@
             "reason": "times out in CI"
         },
         {
-            "route": "core/shellbar/context-area-overflow",
-            "reason": "times out in CI"
-        },
-        {
             "route": "core/shellbar/growing-group",
             "reason": "times out in CI"
         },
