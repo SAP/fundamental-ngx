@@ -365,6 +365,8 @@ export abstract class DatetimeAdapter<D> {
         const firstOfMonth = new Date(year, month - 1, 1);
         const lastOfMonth = new Date(year, month, 0);
 
+        // firstDayOfWeek is 1-based (1=Sunday, …, 7=Saturday); getDay() is 0-based —
+        // `+ 8` normalizes both into the 0–6 mod-7 space.
         const dayOffset = (firstOfMonth.getDay() - firstDayOfWeek + 8) % 7;
         const used = dayOffset + lastOfMonth.getDate();
 

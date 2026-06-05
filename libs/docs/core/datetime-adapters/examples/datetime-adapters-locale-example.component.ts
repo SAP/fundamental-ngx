@@ -12,12 +12,14 @@ import 'dayjs/locale/ar';
 import 'dayjs/locale/de';
 import 'dayjs/locale/en';
 import 'dayjs/locale/fr';
+import 'dayjs/locale/ja';
 
 const LOCALE_OPTIONS = [
     { value: 'en', label: 'English' },
     { value: 'fr', label: 'French' },
     { value: 'de', label: 'German' },
-    { value: 'ar', label: 'Arabic' }
+    { value: 'ar', label: 'Arabic' },
+    { value: 'ja', label: 'Japanese' }
 ];
 
 /**
