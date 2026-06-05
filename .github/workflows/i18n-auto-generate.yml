@@ -59,7 +59,7 @@ jobs:
                   git fetch origin "$BASE_REF"
 
                   # Get list of changed files (using two-dot diff for direct comparison)
-                  FILES=$(git diff --name-only "origin/${BASE_REF}..HEAD")
+                  FILES=$(git diff --name-only "origin/${BASE_REF}...HEAD")
 
                   echo "Files changed in this PR:"
                   echo "$FILES"
