@@ -368,7 +368,8 @@ this._dialogService.open(MyDialogComponent, {
             'Focus not trapped inside dialog — ensure focusTrapped: true in DialogConfig (default is true).',
             'Dialog not closing on Escape — check that escKeyClosable is not set to false in config.',
             'ARIA warnings — always provide ariaLabelledBy pointing to the dialog title element ID.',
-            'Dialog footer buttons must use <fd-button-bar> (from @fundamental-ngx/core/bar), NOT <button fd-button>. fd-button-bar is a standalone component that wraps a button with the fd-bar__element host class and correct dialog padding. Import ButtonBarComponent, not ButtonComponent, in the dialog component.'
+            'Dialog footer buttons must use <fd-button-bar> (from @fundamental-ngx/core/bar), NOT <button fd-button>. fd-button-bar is a standalone component that wraps a button with the fd-bar__element host class and correct dialog padding. Import ButtonBarComponent, not ButtonComponent, in the dialog component.',
+            "NG0309 runtime error — do NOT add cdkScrollable or fdScrollbar attributes to <fd-dialog-body>. Doing so triggers Angular CDK's CdkScrollable which requires a scroll strategy parent that is not present in the dialog context, causing an NG0309 injection error at runtime. fd-dialog-body manages its own scrolling internally; no extra scroll directives are needed."
         ],
         compositionPattern: `<fd-dialog>
   <fd-dialog-header>
