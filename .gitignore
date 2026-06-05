@@ -85,6 +85,7 @@ libs/ui5-webcomponents-fiori/index.ts
 
 # Playwright
 /playwright-report/
+/.playwright-mcp/
 /test-results/
 /test-results-*/
 /blob-report*/
