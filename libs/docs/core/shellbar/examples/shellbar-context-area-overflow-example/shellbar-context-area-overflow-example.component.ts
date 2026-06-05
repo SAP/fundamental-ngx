@@ -1,11 +1,9 @@
 import { ChangeDetectionStrategy, Component, ElementRef, effect, signal, viewChild } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonComponent, ButtonType } from '@fundamental-ngx/core/button';
-import { GenericTagComponent } from '@fundamental-ngx/core/generic-tag';
+import { InfoLabelComponent } from '@fundamental-ngx/core/info-label';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { ShellbarModule } from '@fundamental-ngx/core/shellbar';
-import { SliderComponent } from '@fundamental-ngx/core/slider';
 import {
     UserMenuBodyComponent,
     UserMenuComponent,
@@ -24,8 +22,7 @@ import {
     imports: [
         ShellbarModule,
         ButtonComponent,
-        FormsModule,
-        GenericTagComponent,
+        InfoLabelComponent,
         PopoverComponent,
         PopoverControlComponent,
         PopoverBodyComponent,
@@ -37,13 +34,10 @@ import {
         UserMenuHeaderContainerDirective,
         UserMenuHeaderDirective,
         UserMenuUserNameDirective,
-        UserMenuSublineDirective,
-        SliderComponent
+        UserMenuSublineDirective
     ]
 })
 export class ShellbarContextAreaOverflowExampleComponent {
-    shellbarWidth = signal(100);
-
     hiddenItems = signal<HTMLElement[]>([]);
 
     isOverflowOpen = signal(false);

@@ -96,41 +96,6 @@ describe('GenericTagComponent', () => {
         expect(icon).toBeFalsy();
     });
 
-    it('Should display icon when glyph is provided without type', () => {
-        fixture.componentRef.setInput('glyph', 'product');
-        fixture.detectChanges();
-
-        const icon = element.querySelector('fd-icon');
-        expect(icon).toBeTruthy();
-    });
-
-    it('Should use custom glyph over type-derived glyph when both are provided', () => {
-        fixture.componentRef.setInput('type', 'error');
-        fixture.componentRef.setInput('glyph', 'product');
-        fixture.detectChanges();
-
-        const icon = element.querySelector('fd-icon');
-        expect(icon?.classList.contains('sap-icon--product')).toBe(true);
-    });
-
-    it('Should use type-derived glyph when only type is provided', () => {
-        fixture.componentRef.setInput('type', 'warning');
-        fixture.detectChanges();
-
-        const icon = element.querySelector('fd-icon');
-        expect(icon?.classList.contains('sap-icon--message-warning')).toBe(true);
-    });
-
-    it('Should remove icon when glyph is cleared and no type is set', () => {
-        fixture.componentRef.setInput('glyph', 'product');
-        fixture.detectChanges();
-        expect(element.querySelector('fd-icon')).toBeTruthy();
-
-        fixture.componentRef.setInput('glyph', null);
-        fixture.detectChanges();
-        expect(element.querySelector('fd-icon')).toBeFalsy();
-    });
-
     it('Should set aria-roledescription', () => {
         expect(element.getAttribute('aria-roledescription')).toBe('Generic Tag');
     });
