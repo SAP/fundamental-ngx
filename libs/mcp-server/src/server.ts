@@ -3,8 +3,10 @@ import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
 import { z } from 'zod';
+import { SETUP_GUIDES } from './data/setup-guides';
 import { USAGE_GUIDES } from './data/usage-guides';
 import { ComponentCatalog, ComponentMetadata, LIBRARY_ALIAS_MAP, LibraryAlias } from './types/component-metadata';
+import type { SetupGuide } from './types/setup-guide';
 import { buildPitfalls, buildTemplate, deriveImportPath, getSelectorType } from './utils/selector-utils';
 
 // Load component catalog from pre-built JSON
@@ -470,6 +472,56 @@ or comparing alternative components for the same use case.`,
                 {
                     type: 'text' as const,
                     text: JSON.stringify(result, null, 2)
+                }
+            ]
+        };
+    }
+);
+
+// ---------------------------------------------------------------------------
+// Tool: get_setup_guide
+// ---------------------------------------------------------------------------
+server.tool(
+    'get_setup_guide',
+    `Get a complete Angular project setup guide for @fundamental-ngx.
+Returns the full theming dependency chain, the exact angular.json styles array in load order,
+font fix steps for the esbuild application builder, and known issues with fixes.
+
+Use this tool when:
+- Setting up a new Angular project with @fundamental-ngx/core
+- Diagnosing unstyled components, missing CSS variables, or empty-square icons
+- Adding @fundamental-ngx/ui5-webcomponents to an existing project
+
+Pass "core" for a project using only @fundamental-ngx/core.
+Pass "core+ui5" or "ui5" for a project that also uses @fundamental-ngx/ui5-webcomponents.`,
+    {
+        packages: z
+            .enum(['core', 'core+ui5', 'ui5'])
+            .describe(
+                'Which packages are being set up. ' +
+                    '"core" — @fundamental-ngx/core only. ' +
+                    '"core+ui5" (or the alias "ui5") — @fundamental-ngx/core plus @fundamental-ngx/ui5-webcomponents.'
+            )
+    },
+    async ({ packages }) => {
+        const guide: SetupGuide | undefined = SETUP_GUIDES[packages];
+
+        if (!guide) {
+            return {
+                content: [
+                    {
+                        type: 'text' as const,
+                        text: `No setup guide found for "${packages}". Valid options: "core", "core+ui5", "ui5".`
+                    }
+                ]
+            };
+        }
+
+        return {
+            content: [
+                {
+                    type: 'text' as const,
+                    text: JSON.stringify(guide, null, 2)
                 }
             ]
         };

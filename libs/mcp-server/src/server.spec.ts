@@ -9,6 +9,7 @@
 
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
+import { SETUP_GUIDES } from './data/setup-guides';
 import { USAGE_GUIDES } from './data/usage-guides';
 import { ComponentCatalog, ComponentMetadata } from './types/component-metadata';
 import { buildPitfalls, buildTemplate, deriveImportPath, getSelectorType } from './utils/selector-utils';
@@ -990,5 +991,82 @@ describe('get_usage_guide result shape', () => {
         const importPath = deriveImportPath(comp);
         const statement = `import { ${comp.name} } from '${importPath}';`;
         expect(statement).toBe("import { DialogComponent } from '@fundamental-ngx/core/dialog';");
+    });
+});
+
+// ---------------------------------------------------------------------------
+// SETUP_GUIDES data tests
+// ---------------------------------------------------------------------------
+
+describe('SETUP_GUIDES', () => {
+    it('should have a "core" entry', () => {
+        expect(SETUP_GUIDES['core']).toBeDefined();
+    });
+
+    it('should have a "core+ui5" entry', () => {
+        expect(SETUP_GUIDES['core+ui5']).toBeDefined();
+    });
+
+    it('ui5 entry should be the same object as core+ui5 (alias, not a copy)', () => {
+        expect(SETUP_GUIDES['ui5']).toBe(SETUP_GUIDES['core+ui5']);
+    });
+
+    it('core entry angularJsonStyles should start with @sap-theming', () => {
+        const first = SETUP_GUIDES['core'].angularJsonStyles[0];
+        expect(first.path).toContain('@sap-theming/theming-base-content');
+    });
+
+    it('core+ui5 entry angularJsonStyles should start with @ui5/webcomponents-theming', () => {
+        const first = SETUP_GUIDES['core+ui5'].angularJsonStyles[0];
+        expect(first.path).toContain('@ui5/webcomponents-theming');
+    });
+
+    it('core entry should have an esbuild font-fix manual step', () => {
+        const hasFontStep = SETUP_GUIDES['core'].manualSteps.some((s) => s.title.toLowerCase().includes('font'));
+        expect(hasFontStep).toBe(true);
+    });
+
+    it('core+ui5 entry should have at least one known issue', () => {
+        expect(SETUP_GUIDES['core+ui5'].knownIssues.length).toBeGreaterThan(0);
+    });
+
+    it('angularJsonStylesSnippet should be a non-empty string', () => {
+        expect(typeof SETUP_GUIDES['core'].angularJsonStylesSnippet).toBe('string');
+        expect(SETUP_GUIDES['core'].angularJsonStylesSnippet.length).toBeGreaterThan(0);
+    });
+
+    it('core+ui5 angularJsonStylesSnippet should include @ui5/webcomponents-theming path', () => {
+        expect(SETUP_GUIDES['core+ui5'].angularJsonStylesSnippet).toContain('@ui5/webcomponents-theming');
+    });
+});
+
+// ---------------------------------------------------------------------------
+// get_setup_guide tool tests
+// ---------------------------------------------------------------------------
+describe('get_setup_guide tool data', () => {
+    it('core guide styles snippet contains sap-theming before fundamental-styles', () => {
+        const guide = SETUP_GUIDES['core'];
+        const snippet = guide.angularJsonStylesSnippet;
+        const sapThemingIdx = snippet.indexOf('@sap-theming');
+        const fundStylesIdx = snippet.indexOf('fundamental-styles/dist/fundamental-styles');
+        expect(sapThemingIdx).toBeGreaterThan(-1);
+        expect(fundStylesIdx).toBeGreaterThan(-1);
+        expect(sapThemingIdx).toBeLessThan(fundStylesIdx);
+    });
+
+    it('core+ui5 guide styles snippet contains @ui5/webcomponents-theming before @sap-theming', () => {
+        const guide = SETUP_GUIDES['core+ui5'];
+        const snippet = guide.angularJsonStylesSnippet;
+        const ui5Idx = snippet.indexOf('@ui5/webcomponents-theming');
+        const sapThemingIdx = snippet.indexOf('@sap-theming');
+        expect(ui5Idx).toBeGreaterThan(-1);
+        expect(sapThemingIdx).toBeGreaterThan(-1);
+        expect(ui5Idx).toBeLessThan(sapThemingIdx);
+    });
+
+    it('installCommand for core+ui5 lists @ui5/webcomponents-theming after @fundamental-ngx packages', () => {
+        const cmd = SETUP_GUIDES['core+ui5'].installCommand;
+        expect(cmd).toContain('@ui5/webcomponents-theming');
+        expect(cmd).toContain('@sap-theming/theming-base-content');
     });
 });
