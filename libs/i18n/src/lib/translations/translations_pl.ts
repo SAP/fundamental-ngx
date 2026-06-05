@@ -21,10 +21,10 @@ export default {
     },
     coreAvatarGroup: {
         ariaLabelGroup:
-            'Has popup type dialog conjoined avatars, {count} avatars displayed, {hiddenCount} avatars hidden, activate for complete list',
-        ariaLabelIndividual: 'Individual avatars. {count} avatars displayed, {hiddenCount} avatars hidden',
+            'Zawiera wyskakujące okno dialogowe połączone awatary, wyświetlono awatarów: {count}, ukryto awatarów: {hiddenCount}, aktywuj, aby uzyskać kompletną listę',
+        ariaLabelIndividual: 'Indywidualne awatary. wyświetlone awatary: {count}, ukryte awatary: {hiddenCount}',
         backButton: 'Wstecz',
-        popupBodyAriaLabel: 'With {count} items'
+        popupBodyAriaLabel: 'Z {count} pozycjami'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Ścieżka nawigacji',
@@ -37,8 +37,8 @@ export default {
     },
     coreCalendar: {
         calendarDayViewDescription: 'Kalendarz',
-        calendarLegendLabel: 'Calendar Legend',
-        calendarRoleDescription: 'Calendar',
+        calendarLegendLabel: 'Legenda kalendarza',
+        calendarRoleDescription: 'Kalendarz',
         calendarMonthViewDescription: 'Selektor miesiąca',
         calendarYearsRangeViewDescription: 'Selektor zakresu lat',
         calendarYearsViewDescription: 'Selektor roku',
@@ -203,7 +203,7 @@ export default {
         ariaLabel: 'Przełącznik produktu'
     },
     coreRadio: {
-        readOnlyDescription: 'This radio button is read-only and cannot be changed.'
+        readOnlyDescription: 'Ten przycisk jest tylko do odczytu i nie można go zmienić.'
     },
     coreRatingIndicator: {
         ariaLabelReset: 'Resetuj do zera',

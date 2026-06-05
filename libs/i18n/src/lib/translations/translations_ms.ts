@@ -20,10 +20,10 @@ export default {
     },
     coreAvatarGroup: {
         ariaLabelGroup:
-            'Has popup type dialog conjoined avatars, {count} avatars displayed, {hiddenCount} avatars hidden, activate for complete list',
-        ariaLabelIndividual: 'Individual avatars. {count} avatars displayed, {hiddenCount} avatars hidden',
+            'Mempunyai dialog jenis pop timbul dengan avatar yang digabungkan, {count} avatar yang dipaparkan, {hiddenCount} avatar yang disembunyikan, aktifkan untuk senarai lengkap',
+        ariaLabelIndividual: 'Avatar individu. {count} avatar dipaparkan, {hiddenCount} avatar yang disembunyikan',
         backButton: 'Kembali',
-        popupBodyAriaLabel: 'With {count} items'
+        popupBodyAriaLabel: 'Dengan {count} item'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Jejak Tinggalan',
@@ -36,8 +36,8 @@ export default {
     },
     coreCalendar: {
         calendarDayViewDescription: 'Kalendar',
-        calendarLegendLabel: 'Calendar Legend',
-        calendarRoleDescription: 'Calendar',
+        calendarLegendLabel: 'Petunjuk Kalendar',
+        calendarRoleDescription: 'Kalendar',
         calendarMonthViewDescription: 'Pemilih bulan',
         calendarYearsRangeViewDescription: 'Pemilih julat tahun',
         calendarYearsViewDescription: 'Pemilih tahun',
@@ -202,7 +202,7 @@ export default {
         ariaLabel: 'Suis Produk'
     },
     coreRadio: {
-        readOnlyDescription: 'This radio button is read-only and cannot be changed.'
+        readOnlyDescription: 'Butang radio ini adalah baca sahaja dan tidak boleh diubah.'
     },
     coreRatingIndicator: {
         ariaLabelReset: 'Tetapkan semula kepada sifar',

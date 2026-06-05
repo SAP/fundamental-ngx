@@ -21,10 +21,10 @@ export default {
     },
     coreAvatarGroup: {
         ariaLabelGroup:
-            'Has popup type dialog conjoined avatars, {count} avatars displayed, {hiddenCount} avatars hidden, activate for complete list',
-        ariaLabelIndividual: 'Individual avatars. {count} avatars displayed, {hiddenCount} avatars hidden',
+            "Ha finestra di dialogo di tipo a comparsa avatar congiunti, {count} avatar visualizzati, {hiddenCount} avatar nascosti; attivare per l'elenco completo",
+        ariaLabelIndividual: 'Avatar individuali. {count} avatar visualizzati, {hiddenCount} avatar nascosti',
         backButton: 'Indietro',
-        popupBodyAriaLabel: 'With {count} items'
+        popupBodyAriaLabel: 'Con {count} voci'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Percorso di navigazione',
@@ -37,8 +37,8 @@ export default {
     },
     coreCalendar: {
         calendarDayViewDescription: 'Calendario',
-        calendarLegendLabel: 'Calendar Legend',
-        calendarRoleDescription: 'Calendar',
+        calendarLegendLabel: 'Legenda del calendario',
+        calendarRoleDescription: 'Calendario',
         calendarMonthViewDescription: 'Selettore mese',
         calendarYearsRangeViewDescription: 'Selettore intervallo di anni',
         calendarYearsViewDescription: 'Selettore anno',
@@ -203,7 +203,7 @@ export default {
         ariaLabel: 'Switch prodotti'
     },
     coreRadio: {
-        readOnlyDescription: 'This radio button is read-only and cannot be changed.'
+        readOnlyDescription: 'Questo pulsante di opzione è di sola lettura e non può essere modificato.'
     },
     coreRatingIndicator: {
         ariaLabelReset: 'Reimposta su zero',

@@ -1,4 +1,4 @@
-// Do not modify, it's automatically created. Modify translations_he.properties instead
+// Do not modify, it's automatically created. Modify translations_iw.properties instead
 export default {
     btpNavigation: {
         expanderAriaLabel: 'הרחב/צמצם פריטי משנה',

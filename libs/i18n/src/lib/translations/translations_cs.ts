@@ -20,10 +20,10 @@ export default {
     },
     coreAvatarGroup: {
         ariaLabelGroup:
-            'Has popup type dialog conjoined avatars, {count} avatars displayed, {hiddenCount} avatars hidden, activate for complete list',
-        ariaLabelIndividual: 'Individual avatars. {count} avatars displayed, {hiddenCount} avatars hidden',
+            'Má vyskakovací dialogové okno s avatary ve shodě, {count} zobrazenými avatary a {hiddenCount} skrytými avatary, aktivujte pro úplný seznam',
+        ariaLabelIndividual: 'Jednotlivé avatary. Zobrazené avatary: {count}, skryté avatary: {hiddenCount}',
         backButton: 'Zpět',
-        popupBodyAriaLabel: 'With {count} items'
+        popupBodyAriaLabel: 'S {count} položkami'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Navigační cesta',
@@ -36,8 +36,8 @@ export default {
     },
     coreCalendar: {
         calendarDayViewDescription: 'Kalendář',
-        calendarLegendLabel: 'Calendar Legend',
-        calendarRoleDescription: 'Calendar',
+        calendarLegendLabel: 'Legenda ke kalendáři',
+        calendarRoleDescription: 'Kalendář',
         calendarMonthViewDescription: 'Výběr měsíce',
         calendarYearsRangeViewDescription: 'Výběr rozsahu let',
         calendarYearsViewDescription: 'Výběr roku',
@@ -202,7 +202,7 @@ export default {
         ariaLabel: 'Přepínač produktů'
     },
     coreRadio: {
-        readOnlyDescription: 'This radio button is read-only and cannot be changed.'
+        readOnlyDescription: 'Tento přepínač je jen ke čtení a nelze jej změnit.'
     },
     coreRatingIndicator: {
         ariaLabelReset: 'Resetovat na nulu',

@@ -21,10 +21,10 @@ export default {
     },
     coreAvatarGroup: {
         ariaLabelGroup:
-            'Has popup type dialog conjoined avatars, {count} avatars displayed, {hiddenCount} avatars hidden, activate for complete list',
-        ariaLabelIndividual: 'Individual avatars. {count} avatars displayed, {hiddenCount} avatars hidden',
+            'Ima dijalog spojenih avatara tipa iskačućeg prozora, {count} avatari prikazani, {hiddenCount} avatari skriveni, aktiviraj za potpunu listu',
+        ariaLabelIndividual: 'Pojedinačni avatari. {count}avatara prikazano, avatari {hiddenCount} sakriveni',
         backButton: 'Nazad',
-        popupBodyAriaLabel: 'With {count} items'
+        popupBodyAriaLabel: 'Sa {count} stavki'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Put usmeravanja',
@@ -37,8 +37,8 @@ export default {
     },
     coreCalendar: {
         calendarDayViewDescription: 'Kalendar',
-        calendarLegendLabel: 'Calendar Legend',
-        calendarRoleDescription: 'Calendar',
+        calendarLegendLabel: 'Legenda kalendara',
+        calendarRoleDescription: 'Kalendar',
         calendarMonthViewDescription: 'Birač meseca',
         calendarYearsRangeViewDescription: 'Birač raspona godina',
         calendarYearsViewDescription: 'Birač godine',
@@ -203,7 +203,7 @@ export default {
         ariaLabel: 'Zamena proizvoda'
     },
     coreRadio: {
-        readOnlyDescription: 'This radio button is read-only and cannot be changed.'
+        readOnlyDescription: 'Ovo dugme odabira je samo za čitanje i ne može se promeniti.'
     },
     coreRatingIndicator: {
         ariaLabelReset: 'Ponovo postavi na nulu',

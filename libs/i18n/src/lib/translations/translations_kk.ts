@@ -21,10 +21,10 @@ export default {
     },
     coreAvatarGroup: {
         ariaLabelGroup:
-            'Has popup type dialog conjoined avatars, {count} avatars displayed, {hiddenCount} avatars hidden, activate for complete list',
-        ariaLabelIndividual: 'Individual avatars. {count} avatars displayed, {hiddenCount} avatars hidden',
+            'Байланыстырылған аватарлар қалқымалы диалогтік терезесі бар, {count} аватар көрсетіледі, {hiddenCount} аватар жасырылған, толық тізім үшін белсендір',
+        ariaLabelIndividual: 'Жеке аватарлар. {count} аватар көрсетілген, {hiddenCount} аватар жасырылған',
         backButton: 'Артқа',
-        popupBodyAriaLabel: 'With {count} items'
+        popupBodyAriaLabel: '{count} тармақ бар'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Өту тізбегінің жолы',
@@ -37,8 +37,8 @@ export default {
     },
     coreCalendar: {
         calendarDayViewDescription: 'Күнтізбе',
-        calendarLegendLabel: 'Calendar Legend',
-        calendarRoleDescription: 'Calendar',
+        calendarLegendLabel: 'Күнтізбе шартты белгісі',
+        calendarRoleDescription: 'Күнтізбе',
         calendarMonthViewDescription: 'Айды таңдау құралы',
         calendarYearsRangeViewDescription: 'Жылдар ауқымын таңдау құралы',
         calendarYearsViewDescription: 'Жылды таңдау құралы',
@@ -203,7 +203,7 @@ export default {
         ariaLabel: 'Өнім ауыстырып-қосқышы'
     },
     coreRadio: {
-        readOnlyDescription: 'This radio button is read-only and cannot be changed.'
+        readOnlyDescription: 'Бұл ауыстырып-қосқыш жазудан қорғалған және оны өзгерту мүмкін емес.'
     },
     coreRatingIndicator: {
         ariaLabelReset: 'Нөлге бастапқы қалпына келтіру',

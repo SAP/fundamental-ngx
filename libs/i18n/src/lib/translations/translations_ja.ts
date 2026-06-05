@@ -20,10 +20,11 @@ export default {
     },
     coreAvatarGroup: {
         ariaLabelGroup:
-            'Has popup type dialog conjoined avatars, {count} avatars displayed, {hiddenCount} avatars hidden, activate for complete list',
-        ariaLabelIndividual: 'Individual avatars. {count} avatars displayed, {hiddenCount} avatars hidden',
+            'ポップアップタイプのダイアログに結合されたアバターがあります。{count}個のアバターが表示されており、{hiddenCount}個のアバターが非表示です。すべてのアバターを表示するにはアクティブ化してください。',
+        ariaLabelIndividual:
+            '個別のアバター。{count}個のアバターが表示されており、{hiddenCount}個のアバターは非表示です。',
         backButton: '戻る',
-        popupBodyAriaLabel: 'With {count} items'
+        popupBodyAriaLabel: '{count}件の項目あり'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: '階層リンク',
@@ -36,8 +37,8 @@ export default {
     },
     coreCalendar: {
         calendarDayViewDescription: 'カレンダー',
-        calendarLegendLabel: 'Calendar Legend',
-        calendarRoleDescription: 'Calendar',
+        calendarLegendLabel: 'カレンダーの凡例',
+        calendarRoleDescription: 'カレンダー',
         calendarMonthViewDescription: '月選択',
         calendarYearsRangeViewDescription: '年範囲選択',
         calendarYearsViewDescription: '年選択',
@@ -202,7 +203,7 @@ export default {
         ariaLabel: '製品切替'
     },
     coreRadio: {
-        readOnlyDescription: 'This radio button is read-only and cannot be changed.'
+        readOnlyDescription: 'このラジオボタンは読み取り専用のため変更できません。'
     },
     coreRatingIndicator: {
         ariaLabelReset: 'ゼロにリセット',
