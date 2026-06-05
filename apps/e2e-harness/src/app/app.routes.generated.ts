@@ -1250,6 +1250,13 @@ export const generatedRoutes: Routes = [
             ).then((m) => m.DayjsAdapterOptionsExampleComponent)
     },
     {
+        path: 'core/dayjs-datetime-adapter/dayjs-datetime-24h',
+        loadComponent: () =>
+            import(
+                '../../../../libs/docs/core/dayjs-datetime-adapter/examples/dayjs-datetime-24h-example.component'
+            ).then((m) => m.DayjsDatetime24hExampleComponent)
+    },
+    {
         path: 'core/dayjs-datetime-adapter/dayjs-datetime-formats',
         loadComponent: () =>
             import(
