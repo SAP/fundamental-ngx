@@ -249,6 +249,34 @@
             "suppress": ["aria-dialog-name"],
             "reason": "Known violations: aria-dialog-name"
         },
+        "platform/wizard-generator/customizable-embeded": {
+            "suppress": ["aria-dialog-name"],
+            "reason": "fdp-input-message-group popover opened by wizard init focus has role=dialog with no accessible name — tracked in #14260"
+        },
+        "platform/wizard-generator/external-navigation": {
+            "suppress": ["aria-dialog-name"],
+            "reason": "fdp-input-message-group popover opened by wizard init focus has role=dialog with no accessible name — tracked in #14260"
+        },
+        "platform/wizard-generator/onchange": {
+            "suppress": ["aria-dialog-name"],
+            "reason": "fdp-input-message-group popover opened by wizard init focus has role=dialog with no accessible name — tracked in #14260"
+        },
+        "platform/wizard-generator/responsive-paddings": {
+            "suppress": ["aria-dialog-name"],
+            "reason": "fdp-input-message-group popover opened by wizard init focus has role=dialog with no accessible name — tracked in #14260"
+        },
+        "platform/wizard-generator/special-elements": {
+            "suppress": ["aria-dialog-name"],
+            "reason": "fdp-input-message-group popover opened by wizard init focus has role=dialog with no accessible name — tracked in #14260"
+        },
+        "platform/wizard-generator/summary-objects": {
+            "suppress": ["aria-dialog-name"],
+            "reason": "fdp-input-message-group popover opened by wizard init focus has role=dialog with no accessible name — tracked in #14260"
+        },
+        "platform/wizard-generator/visible-summary": {
+            "suppress": ["aria-dialog-name"],
+            "reason": "fdp-input-message-group popover opened by wizard init focus has role=dialog with no accessible name — tracked in #14260"
+        },
         "core/tree/lazily-loaded-tree-items": {
             "suppress": ["aria-treeitem-name"],
             "reason": "Known violations: aria-treeitem-name"
