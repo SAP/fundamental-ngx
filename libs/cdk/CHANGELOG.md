@@ -1,3 +1,19 @@
+## 0.63.0-rc.7 (2026-06-05)
+
+This was a version bump only for cdk to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.6 (2026-06-05)
+
+This was a version bump only for cdk to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.5 (2026-06-05)
+
+This was a version bump only for cdk to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.4 (2026-06-05)
+
+This was a version bump only for cdk to align it with other projects, there were no code changes.
+
 ## 0.63.0-rc.3 (2026-06-04)
 
 This was a version bump only for cdk to align it with other projects, there were no code changes.

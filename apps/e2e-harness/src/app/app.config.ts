@@ -1,7 +1,7 @@
 import { provideHttpClient } from '@angular/common/http';
 import { ApplicationConfig, signal } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
+import { DynamicComponentService, RtlService } from '@fundamental-ngx/cdk/utils';
 import { provideContentDensity } from '@fundamental-ngx/core/content-density';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { provideTheming, themingInitializer } from '@fundamental-ngx/core/theming';
@@ -20,6 +20,7 @@ export const appConfig: ApplicationConfig = {
             useValue: signal(FD_LANGUAGE_ENGLISH)
         },
         DialogService,
-        DynamicComponentService
+        DynamicComponentService,
+        RtlService
     ]
 };

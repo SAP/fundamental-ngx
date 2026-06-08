@@ -20,10 +20,10 @@ export default {
     },
     coreAvatarGroup: {
         ariaLabelGroup:
-            'Has popup type dialog conjoined avatars, {count} avatars displayed, {hiddenCount} avatars hidden, activate for complete list',
-        ariaLabelIndividual: 'Individual avatars. {count} avatars displayed, {hiddenCount} avatars hidden',
+            '팝업 유형 대화 상자 있음, 결합된 아바타, {count}개 아바타가 표시됨, {hiddenCount}개 아바타가 숨겨짐, 전체 리스트에 대해 활성화',
+        ariaLabelIndividual: '개별 아바타. {count}개 아바타가 표시됨, {hiddenCount}개 아바타가 숨겨짐',
         backButton: '뒤로',
-        popupBodyAriaLabel: 'With {count} items'
+        popupBodyAriaLabel: '{count}개 항목 포함'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: '탐색 경로 추적',
@@ -36,8 +36,8 @@ export default {
     },
     coreCalendar: {
         calendarDayViewDescription: '달력',
-        calendarLegendLabel: 'Calendar Legend',
-        calendarRoleDescription: 'Calendar',
+        calendarLegendLabel: '달력 범례',
+        calendarRoleDescription: '달력',
         calendarMonthViewDescription: '월 선택 도구',
         calendarYearsRangeViewDescription: '연도 범위 선택 도구',
         calendarYearsViewDescription: '연도 선택 도구',
@@ -202,7 +202,7 @@ export default {
         ariaLabel: '제품 전환'
     },
     coreRadio: {
-        readOnlyDescription: 'This radio button is read-only and cannot be changed.'
+        readOnlyDescription: '이 라디오 버튼은 읽기 전용이므로 변경할 수 없습니다.'
     },
     coreRatingIndicator: {
         ariaLabelReset: '0으로 재설정',

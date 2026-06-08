@@ -20,10 +20,10 @@ export default {
     },
     coreAvatarGroup: {
         ariaLabelGroup:
-            'Has popup type dialog conjoined avatars, {count} avatars displayed, {hiddenCount} avatars hidden, activate for complete list',
-        ariaLabelIndividual: 'Individual avatars. {count} avatars displayed, {hiddenCount} avatars hidden',
+            'มีไดอะลอกประเภทป็อปอัพที่ภาพสัญลักษณ์ติดกัน {count} รายการถูกแสดง {hiddenCount} รายการถูกซ่อน เปิดใช้งานสำหรับรายการทั้งหมด',
+        ariaLabelIndividual: 'ภาพสัญลักษณ์รายบุคคล {count} รายการถูกแสดง {hiddenCount} รายการถูกซ่อน',
         backButton: 'ย้อนกลับ',
-        popupBodyAriaLabel: 'With {count} items'
+        popupBodyAriaLabel: 'มี {count} ไอเท็ม'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'เมนูนำทาง',
@@ -36,8 +36,8 @@ export default {
     },
     coreCalendar: {
         calendarDayViewDescription: 'ปฏิทิน',
-        calendarLegendLabel: 'Calendar Legend',
-        calendarRoleDescription: 'Calendar',
+        calendarLegendLabel: 'คำอธิบายสัญลักษณ์ของปฏิทิน',
+        calendarRoleDescription: 'ปฏิทิน',
         calendarMonthViewDescription: 'ตัวเลือกเดือน',
         calendarYearsRangeViewDescription: 'ตัวเลือกช่วงปี',
         calendarYearsViewDescription: 'ตัวเลือกปี',
@@ -202,7 +202,7 @@ export default {
         ariaLabel: 'การสลับผลิตภัณฑ์'
     },
     coreRadio: {
-        readOnlyDescription: 'This radio button is read-only and cannot be changed.'
+        readOnlyDescription: 'ปุ่มตัวเลือกนี้เป็นแบบอ่านอย่างเดียวและไม่สามารถเปลี่ยนแปลงได้'
     },
     coreRatingIndicator: {
         ariaLabelReset: 'รีเซ็ตเป็นศูนย์',

@@ -21,10 +21,10 @@ export default {
     },
     coreAvatarGroup: {
         ariaLabelGroup:
-            'Has popup type dialog conjoined avatars, {count} avatars displayed, {hiddenCount} avatars hidden, activate for complete list',
-        ariaLabelIndividual: 'Individual avatars. {count} avatars displayed, {hiddenCount} avatars hidden',
+            'Har dialogboksen for popuptype sammenkoblede avatarer, {count} avatarer vist, {hiddenCount} avatarer skjult, aktiver for fullstendig liste',
+        ariaLabelIndividual: 'Individuelle avatarer. {count} avatarer vist, {hiddenCount} avatarer skjult',
         backButton: 'Tilbake',
-        popupBodyAriaLabel: 'With {count} items'
+        popupBodyAriaLabel: 'Med {count} elementer'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Navigeringsbane',
@@ -37,8 +37,8 @@ export default {
     },
     coreCalendar: {
         calendarDayViewDescription: 'Kalender',
-        calendarLegendLabel: 'Calendar Legend',
-        calendarRoleDescription: 'Calendar',
+        calendarLegendLabel: 'Kalenderforklaring',
+        calendarRoleDescription: 'Kalender',
         calendarMonthViewDescription: 'Månedsvelger',
         calendarYearsRangeViewDescription: 'Velger av årsintervall',
         calendarYearsViewDescription: 'Velger av år',
@@ -203,7 +203,7 @@ export default {
         ariaLabel: 'Produktindikator'
     },
     coreRadio: {
-        readOnlyDescription: 'This radio button is read-only and cannot be changed.'
+        readOnlyDescription: 'Denne valgknappen er skrivebeskyttet og kan ikke endres.'
     },
     coreRatingIndicator: {
         ariaLabelReset: 'Tilbakestill til null',

@@ -20,10 +20,10 @@ export default {
     },
     coreAvatarGroup: {
         ariaLabelGroup:
-            'Has popup type dialog conjoined avatars, {count} avatars displayed, {hiddenCount} avatars hidden, activate for complete list',
-        ariaLabelIndividual: 'Individual avatars. {count} avatars displayed, {hiddenCount} avatars hidden',
+            'Є у діалоговому виринаючому вікні з’єднані аватари, аватарів відображено: {count}, аватарів приховано: {hiddenCount}, активуйте для повного списку',
+        ariaLabelIndividual: 'Індивідуальні аватари. Аватарів відображено: {count}, аватарів приховано: {hiddenCount}',
         backButton: 'Назад',
-        popupBodyAriaLabel: 'With {count} items'
+        popupBodyAriaLabel: 'З позиціями: {count}'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Навігаційна стежка',
@@ -36,8 +36,8 @@ export default {
     },
     coreCalendar: {
         calendarDayViewDescription: 'Календар',
-        calendarLegendLabel: 'Calendar Legend',
-        calendarRoleDescription: 'Calendar',
+        calendarLegendLabel: 'Умовні позначення календаря',
+        calendarRoleDescription: 'Календар',
         calendarMonthViewDescription: 'Вибір місяця',
         calendarYearsRangeViewDescription: 'Вибір діапазону років',
         calendarYearsViewDescription: 'Вибір року',
@@ -202,7 +202,7 @@ export default {
         ariaLabel: 'Перемикач продуктів'
     },
     coreRadio: {
-        readOnlyDescription: 'This radio button is read-only and cannot be changed.'
+        readOnlyDescription: 'Цей перемикач доступний тільки для читання і не може бути змінений.'
     },
     coreRatingIndicator: {
         ariaLabelReset: 'Скинути до нуля',

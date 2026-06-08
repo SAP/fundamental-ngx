@@ -21,10 +21,10 @@ export default {
     },
     coreAvatarGroup: {
         ariaLabelGroup:
-            'Has popup type dialog conjoined avatars, {count} avatars displayed, {hiddenCount} avatars hidden, activate for complete list',
-        ariaLabelIndividual: 'Individual avatars. {count} avatars displayed, {hiddenCount} avatars hidden',
+            "Имеет связанные аватары диалога типа 'всплывающее окно', отображается {count}, скрыто {hiddenCount}, активируйте для полного списка",
+        ariaLabelIndividual: 'Индивидуальные аватары. {count}отображается, {hiddenCount} скрыто',
         backButton: 'Назад',
-        popupBodyAriaLabel: 'With {count} items'
+        popupBodyAriaLabel: 'С {count} позициями'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Путь навигации',
@@ -37,8 +37,8 @@ export default {
     },
     coreCalendar: {
         calendarDayViewDescription: 'Календарь',
-        calendarLegendLabel: 'Calendar Legend',
-        calendarRoleDescription: 'Calendar',
+        calendarLegendLabel: 'Условные обозначения календаря',
+        calendarRoleDescription: 'Календарь',
         calendarMonthViewDescription: 'Выбор месяца',
         calendarYearsRangeViewDescription: 'Выбор диапазона годов',
         calendarYearsViewDescription: 'Выбор года',
@@ -203,7 +203,7 @@ export default {
         ariaLabel: 'Переключатель продуктов'
     },
     coreRadio: {
-        readOnlyDescription: 'This radio button is read-only and cannot be changed.'
+        readOnlyDescription: 'Эта зависимая кнопка доступна только для чтения и не может быть изменена.'
     },
     coreRatingIndicator: {
         ariaLabelReset: 'Обнулить',

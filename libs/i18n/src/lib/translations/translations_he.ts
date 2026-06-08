@@ -20,10 +20,10 @@ export default {
     },
     coreAvatarGroup: {
         ariaLabelGroup:
-            'Has popup type dialog conjoined avatars, {count} avatars displayed, {hiddenCount} avatars hidden, activate for complete list',
-        ariaLabelIndividual: 'Individual avatars. {count} avatars displayed, {hiddenCount} avatars hidden',
+            'בעל אוואטרים משותפים של דיאלוג מסוג חלון Popup, {count} אוואטארים מוצגים, {hiddenCount} אוואטארים מוסתרים, הפעל לקבלת רשימה מלאה',
+        ariaLabelIndividual: 'אוואטארים יחידים {count}אוואטארים מוצגים, {hiddenCount} אוואטארים מוסתרים',
         backButton: 'חזרה',
-        popupBodyAriaLabel: 'With {count} items'
+        popupBodyAriaLabel: 'עם {count} פריטים'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'שביל ניווט',
@@ -36,8 +36,8 @@ export default {
     },
     coreCalendar: {
         calendarDayViewDescription: 'לוח שנה',
-        calendarLegendLabel: 'Calendar Legend',
-        calendarRoleDescription: 'Calendar',
+        calendarLegendLabel: 'מקרא לוח שנה',
+        calendarRoleDescription: 'לוח שנה',
         calendarMonthViewDescription: 'בוחר חודש',
         calendarYearsRangeViewDescription: 'בוחר טווח שנים',
         calendarYearsViewDescription: 'בוחר שנה',
@@ -202,7 +202,7 @@ export default {
         ariaLabel: 'מתג מוצר'
     },
     coreRadio: {
-        readOnlyDescription: 'This radio button is read-only and cannot be changed.'
+        readOnlyDescription: 'לחצן הבחירה הוא לקריאה בלבד ולא ניתן לשנות אותו.'
     },
     coreRatingIndicator: {
         ariaLabelReset: 'אפס לאפס',
