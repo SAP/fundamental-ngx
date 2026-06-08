@@ -172,11 +172,6 @@ describe('SettingsDialogComponent', () => {
         } as any);
     });
 
-    it('should handle changes to reset availability', () => {
-        component.onResetAvailabilityChange(true);
-        expect(component.isResetAvailable$()).toBe(true);
-    });
-
     describe('columns functionality', () => {
         const mockColumnsData: SettingsColumnsDialogData = {
             columns: [
@@ -214,8 +209,8 @@ describe('SettingsDialogComponent', () => {
 
             // Check DOM - no subheader should be shown when only one tab
             const nativeElement = fixture.nativeElement as HTMLElement;
-            const segmentedButton = nativeElement.querySelector('fd-segmented-button');
-            expect(segmentedButton).toBeFalsy();
+            const iconTabBar = nativeElement.querySelector('fdp-icon-tab-bar');
+            expect(iconTabBar).toBeFalsy();
         });
 
         it('should store columns changes without updating columnsData signal', () => {
@@ -300,7 +295,7 @@ describe('SettingsDialogComponent', () => {
             expect(buttonBars.length).toBeGreaterThanOrEqual(1);
         });
 
-        it('should show subheader when columns and sorting data are present', () => {
+        it('should show subheader with icon tab bar when columns and sorting data are present', () => {
             dialogRef.data = {
                 sortingData: { direction: SortDirection.ASC, field: 'name' } as SettingsSortDialogData,
                 filteringData: null,
@@ -315,10 +310,218 @@ describe('SettingsDialogComponent', () => {
 
             expect(component.showSubheader()).toBe(true);
 
-            // Check DOM - should render segmented button
+            // Check DOM - should render icon tab bar
             const nativeElement = fixture.nativeElement as HTMLElement;
-            const segmentedButton = nativeElement.querySelector('fd-segmented-button');
-            expect(segmentedButton).toBeTruthy();
+            const iconTabBar = nativeElement.querySelector('fdp-icon-tab-bar');
+            expect(iconTabBar).toBeTruthy();
+        });
+
+        it('should handle tab selection correctly with icon tab bar', () => {
+            dialogRef.data = {
+                sortingData: { direction: SortDirection.ASC, field: 'name', columns: [] } as SettingsSortDialogData,
+                filteringData: { filterBy: [], columns: [], viewSettingsFilters: [] } as FiltersDialogData,
+                groupingData: { direction: SortDirection.ASC, field: 'name', columns: [] } as SettingsGroupDialogData,
+                columnsData: mockColumnsData,
+                headingLevel: 2,
+                allowColumnConfiguration: true
+            };
+            fixture = TestBed.createComponent(SettingsDialogComponent);
+            component = fixture.componentInstance;
+            fixture.detectChanges();
+
+            // Initially should be on columns tab (first available)
+            expect(component.activeTab()).toBe(ActiveTab.COLUMNS);
+
+            // Simulate tab selection via icon tab bar
+            component['onTabSelected']({ index: 1 }); // Sort tab
+            expect(component.activeTab()).toBe(ActiveTab.SORT);
+
+            component['onTabSelected']({ index: 2 }); // Filter tab
+            expect(component.activeTab()).toBe(ActiveTab.FILTER);
+
+            component['onTabSelected']({ index: 3 }); // Group tab
+            expect(component.activeTab()).toBe(ActiveTab.GROUP);
+
+            component['onTabSelected']({ index: 0 }); // Back to columns
+            expect(component.activeTab()).toBe(ActiveTab.COLUMNS);
+        });
+    });
+
+    describe('tab-based reset availability', () => {
+        const mockData = {
+            sortingData: { direction: SortDirection.ASC, field: 'name', columns: [] } as SettingsSortDialogData,
+            filteringData: { filterBy: [], columns: [], viewSettingsFilters: [] } as FiltersDialogData,
+            groupingData: { direction: SortDirection.ASC, field: 'name', columns: [] } as SettingsGroupDialogData,
+            columnsData: {
+                columns: [
+                    { label: 'Name', key: 'name', name: 'name', visible: true },
+                    { label: 'Price', key: 'price', name: 'price', visible: true }
+                ]
+            } as SettingsColumnsDialogData,
+            headingLevel: 2 as const,
+            allowColumnConfiguration: true
+        };
+
+        beforeEach(() => {
+            dialogRef.data = mockData;
+            fixture = TestBed.createComponent(SettingsDialogComponent);
+            component = fixture.componentInstance;
+            fixture.detectChanges();
+        });
+
+        it('should track reset availability per tab independently', () => {
+            // Initially on columns tab
+            expect(component.activeTab()).toBe(ActiveTab.COLUMNS);
+            expect(component.isResetAvailable$()).toBe(false);
+
+            // Set reset availability for columns tab
+            component['updateResetAvailability'](ActiveTab.COLUMNS, true);
+            expect(component.isResetAvailable$()).toBe(true);
+
+            // Switch to sort tab
+            component['onTabSelected']({ index: 1 }); // Sort is index 1 (columns, sort, filter, group)
+            expect(component.activeTab()).toBe(ActiveTab.SORT);
+            // Reset availability should match whatever the sort tab has (which may be true from initialization)
+            const sortResetAvailability = component['_resetAvailabilityByTab']()[ActiveTab.SORT] ?? false;
+            expect(component.isResetAvailable$()).toBe(sortResetAvailability);
+
+            // Set reset availability for sort tab explicitly
+            component['updateResetAvailability'](ActiveTab.SORT, true);
+            expect(component.isResetAvailable$()).toBe(true);
+
+            // Set sort reset to false
+            component['updateResetAvailability'](ActiveTab.SORT, false);
+            expect(component.isResetAvailable$()).toBe(false);
+
+            // Switch back to columns - should restore columns reset state
+            component['onTabSelected']({ index: 0 }); // Columns is index 0
+            expect(component.activeTab()).toBe(ActiveTab.COLUMNS);
+            expect(component.isResetAvailable$()).toBe(true);
+        });
+
+        it('should update global reset availability when active tab changes', () => {
+            component.activeTab.set(ActiveTab.SORT);
+            component['updateResetAvailability'](ActiveTab.SORT, true);
+            expect(component.isResetAvailable$()).toBe(true);
+
+            // Switch to filter tab (no changes)
+            component['onTabSelected']({ index: 2 }); // Filter is index 2 (columns, sort, filter, group)
+            expect(component.isResetAvailable$()).toBe(false);
+
+            // Mark filter as having changes
+            component['updateResetAvailability'](ActiveTab.FILTER, true);
+            expect(component.isResetAvailable$()).toBe(true);
+        });
+
+        it('should handle reset availability for all tabs', () => {
+            component['onTabSelected']({ index: 0 }); // Columns tab
+            component['updateResetAvailability'](ActiveTab.COLUMNS, true);
+            expect(component.isResetAvailable$()).toBe(true);
+
+            component['onTabSelected']({ index: 1 }); // Sort tab
+            component['updateResetAvailability'](ActiveTab.SORT, true);
+            expect(component.isResetAvailable$()).toBe(true);
+
+            component['onTabSelected']({ index: 2 }); // Filter tab
+            component['updateResetAvailability'](ActiveTab.FILTER, true);
+            expect(component.isResetAvailable$()).toBe(true);
+
+            component['onTabSelected']({ index: 3 }); // Group tab
+            component['updateResetAvailability'](ActiveTab.GROUP, true);
+            expect(component.isResetAvailable$()).toBe(true);
+        });
+
+        it('should reset columns to initial values and update pending changes', () => {
+            const initialColumns: SettingsColumnsDialogResultData = {
+                visibleColumns: ['name'],
+                columnOrder: ['name', 'price'],
+                columns: [
+                    { label: 'Name', key: 'name', name: 'name', visible: true },
+                    { label: 'Price', key: 'price', name: 'price', visible: false }
+                ]
+            };
+            component._initialColumns.set(initialColumns);
+
+            // Make changes
+            component.columnsData.set({
+                columns: [
+                    { label: 'Name', key: 'name', name: 'name', visible: false },
+                    { label: 'Price', key: 'price', name: 'price', visible: true }
+                ]
+            });
+
+            component.activeTab.set(ActiveTab.COLUMNS);
+            component.reset();
+
+            // Signal should be reset
+            expect(component.columnsData()?.columns).toEqual(initialColumns.columns);
+
+            // Pending changes should also be reset
+            const closeSpy = jest.spyOn(component['dialogRef'], 'close');
+            component.confirm();
+            expect(closeSpy).toHaveBeenCalledWith(
+                expect.objectContaining({
+                    columnsData: { columns: initialColumns.columns }
+                })
+            );
+        });
+    });
+
+    describe('confirm with pending columns changes', () => {
+        const mockColumnsData: SettingsColumnsDialogData = {
+            columns: [
+                { label: 'Name', key: 'name', name: 'name', visible: true },
+                { label: 'Price', key: 'price', name: 'price', visible: true }
+            ]
+        };
+
+        beforeEach(() => {
+            dialogRef.data = {
+                sortingData: null,
+                filteringData: null,
+                groupingData: null,
+                columnsData: mockColumnsData,
+                headingLevel: 2,
+                allowColumnConfiguration: true
+            };
+            fixture = TestBed.createComponent(SettingsDialogComponent);
+            component = fixture.componentInstance;
+            fixture.detectChanges();
+        });
+
+        it('should prefer pending columns changes over signal value when confirming', () => {
+            const pendingColumns: SettingsColumnsDialogResultData = {
+                visibleColumns: ['price'],
+                columnOrder: ['price', 'name'],
+                columns: [
+                    { label: 'Price', key: 'price', name: 'price', visible: true },
+                    { label: 'Name', key: 'name', name: 'name', visible: false }
+                ]
+            };
+
+            // Trigger columns change (stores in pending, doesn't update signal)
+            component.onColumnsChange(pendingColumns);
+
+            // Confirm should use pending changes
+            const closeSpy = jest.spyOn(component['dialogRef'], 'close');
+            component.confirm();
+            expect(closeSpy).toHaveBeenCalledWith({
+                sortingData: null,
+                filteringData: null,
+                groupingData: null,
+                columnsData: { columns: pendingColumns.columns }
+            });
+        });
+
+        it('should use signal value when no pending changes exist', () => {
+            const closeSpy = jest.spyOn(component['dialogRef'], 'close');
+            component.confirm();
+            expect(closeSpy).toHaveBeenCalledWith({
+                sortingData: null,
+                filteringData: null,
+                groupingData: null,
+                columnsData: mockColumnsData
+            });
         });
     });
 });

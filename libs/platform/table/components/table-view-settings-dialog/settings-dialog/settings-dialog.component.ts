@@ -1,15 +1,13 @@
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, forwardRef, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { FocusableItemDirective, InitialFocusDirective, Nullable, TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import { InitialFocusDirective, Nullable, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import {
     BarElementDirective,
     BarLeftDirective,
     BarRightDirective,
     ButtonBarComponent
 } from '@fundamental-ngx/core/bar';
-import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
     DialogBodyComponent,
     DialogComponent,
@@ -17,9 +15,9 @@ import {
     DialogHeaderComponent,
     DialogRef
 } from '@fundamental-ngx/core/dialog';
-import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { IconTabBarComponent, IconTabBarItem, IconTabBarTabComponent } from '@fundamental-ngx/platform/icon-tab-bar';
 import { CollectionFilter, CollectionSort, Table } from '@fundamental-ngx/platform/table-helpers';
 import { RESETTABLE_TOKEN, ResetButtonComponent, Resettable } from '../../reset-button/reset-button.component';
 import { ColumnsComponent } from '../columns/columns.component';
@@ -57,19 +55,17 @@ import {
         DialogBodyComponent,
         DialogFooterComponent,
         FdTranslatePipe,
-        FormsModule,
-        ButtonComponent,
         SortingComponent,
         FiltersComponent,
         GroupingComponent,
         ColumnsComponent,
         NgTemplateOutlet,
-        SegmentedButtonComponent,
         TemplateDirective,
         TitleComponent,
         ButtonBarComponent,
         InitialFocusDirective,
-        FocusableItemDirective
+        IconTabBarComponent,
+        IconTabBarTabComponent
     ],
     templateUrl: './settings-dialog.component.html'
 })
@@ -116,8 +112,14 @@ export class SettingsDialogComponent implements Resettable {
     /** @hidden */
     protected showColumns = false;
 
+    /** @hidden Expose ActiveTab enum to template */
+    protected readonly ActiveTab = ActiveTab;
+
     /** @hidden Pending columns changes (not applied to signal to avoid triggering child effects) */
     private _pendingColumnsChanges: Nullable<SettingsColumnsDialogResultData> = null;
+
+    /** @hidden Tracks reset availability per tab */
+    private _resetAvailabilityByTab = signal<Record<string, boolean>>({});
 
     /**
      * Constructor that initializes dialog data and sets initial values for sorting, filtering, grouping, and columns.
@@ -208,7 +210,7 @@ export class SettingsDialogComponent implements Resettable {
             }
             this._pendingColumnsChanges = initialColumns;
         }
-        this.isResetAvailable$.set(false);
+        this.updateResetAvailability(this.activeTab()!, false);
     }
 
     /**
@@ -264,11 +266,56 @@ export class SettingsDialogComponent implements Resettable {
     }
 
     /**
-     * Handle changes to the reset availability.
-     * @param event Boolean indicating if reset is available.
+     * Handle tab selection changes from the icon tab bar.
+     * @param event The selected tab item.
      */
-    onResetAvailabilityChange(event: boolean): void {
-        this.isResetAvailable$.set(event);
+    protected onTabSelected(event: IconTabBarItem): void {
+        // Map tab index to ActiveTab enum based on which tabs are rendered
+        // The order is: columns (if showColumns), sort, filter, group
+        const tabOrder: ActiveTab[] = [];
+        if (this.columnsData() && this.showColumns) {
+            tabOrder.push(ActiveTab.COLUMNS);
+        }
+        if (this.sortingData()) {
+            tabOrder.push(ActiveTab.SORT);
+        }
+        if (this.filteringData()) {
+            tabOrder.push(ActiveTab.FILTER);
+        }
+        if (this.groupingData()) {
+            tabOrder.push(ActiveTab.GROUP);
+        }
+
+        const selectedTab = tabOrder[event.index];
+        if (selectedTab) {
+            this.activeTab.set(selectedTab);
+            this.updateResetAvailability();
+        }
+    }
+
+    /**
+     * Update reset availability for a specific tab or the currently active tab.
+     * @param tab Optional tab to update. If provided, updates that specific tab and the global state if it's active.
+     *            If not provided, updates the global state based on the currently active tab.
+     * @param available Whether reset is available (only used when tab is provided).
+     */
+    protected updateResetAvailability(tab?: ActiveTab, available?: boolean): void {
+        if (tab !== undefined && available !== undefined) {
+            // Update tracking for the specific tab
+            this._resetAvailabilityByTab.update((state) => ({ ...state, [tab]: available }));
+
+            // If this is the active tab, update the global reset availability
+            if (this.activeTab() === tab) {
+                this.isResetAvailable$.set(available);
+            }
+        } else {
+            // Update global reset availability based on the currently active tab
+            const currentTab = this.activeTab();
+            if (currentTab) {
+                const tabAvailable = this._resetAvailabilityByTab()[currentTab] ?? false;
+                this.isResetAvailable$.set(tabAvailable);
+            }
+        }
     }
 
     /**
