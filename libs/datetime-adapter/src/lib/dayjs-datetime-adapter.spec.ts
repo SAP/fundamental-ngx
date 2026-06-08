@@ -1109,6 +1109,36 @@ describe('DayjsDatetimeAdapter', () => {
 
         // GAP #13: see dedicated 'DayjsDatetimeAdapter with useUtc: true' describe block below
     });
+
+    // M2 (PR #14016): time-only format overflow
+    // Bug: _hasNoOverflow skips validation for time-only formats, so dayjs non-strict
+    // parsing silently wraps invalid input ("25:99" → 02:39, "23:60" → 00:00).
+    // These specs must FAIL on the current branch, proving the bug exists.
+    describe('time-only format overflow', () => {
+        it('should reject hour overflow in HH:mm', () => {
+            const result = adapter.parse('25:99', 'HH:mm');
+            expect(result).not.toBeNull();
+            expect(result?.isValid()).toBe(false);
+        });
+
+        it('should reject minute overflow in HH:mm', () => {
+            const result = adapter.parse('23:60', 'HH:mm');
+            expect(result).not.toBeNull();
+            expect(result?.isValid()).toBe(false);
+        });
+
+        it('should reject second overflow in HH:mm:ss', () => {
+            const result = adapter.parse('23:30:75', 'HH:mm:ss');
+            expect(result).not.toBeNull();
+            expect(result?.isValid()).toBe(false);
+        });
+
+        it('should accept valid time-only input', () => {
+            const result = adapter.parse('23:30', 'HH:mm');
+            expect(result).not.toBeNull();
+            expect(result?.isValid()).toBe(true);
+        });
+    });
 });
 
 describe('DayjsDatetimeAdapter with LOCALE_ID override', () => {
