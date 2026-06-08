@@ -276,11 +276,18 @@ Use this as the first step when adding a new component to an Angular template.
 Use "setup" or "installation" as the component name to get the complete project setup guide
 (angular.json configuration, ThemingService wiring, and ng add instructions).
 Use "ui5" or "ui5-webcomponents" to get the UI5 package setup guide (correct package name,
-peer dependencies, import paths).`,
+peer dependencies, import paths).
+Use "i18n" or "FdTranslatePipe" to get the translation guide (FD_LANGUAGE_SIGNAL, fdTranslate pipe,
+patchLanguage, runtime language switching).
+Use "migrate-from-ui5-webcomponents-ngx" to get the migration guide from the deprecated
+@ui5/webcomponents-ngx package (camelCase inputs, ValueState renames, ThemingService bridge,
+additionalText replacing status).`,
     {
         name: z
             .string()
-            .describe('Component name or selector. Examples: "fd-button", "fdp-table", "ui5-input", "setup", "ui5"')
+            .describe(
+                'Component name or selector. Examples: "fd-button", "fdp-table", "ui5-input", "setup", "ui5", "i18n", "FdTranslatePipe", "migrate-from-ui5-webcomponents-ngx"'
+            )
     },
     async ({ name }) => {
         const lowerComponent = name.toLowerCase().replace(/\s+/g, '-');

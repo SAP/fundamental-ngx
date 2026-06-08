@@ -421,6 +421,143 @@ export class MyFormComponent {}`,
         relatedComponents: []
     },
 
+    'migrate-from-ui5-webcomponents-ngx': {
+        component: 'migrate-from-ui5-webcomponents-ngx',
+        summary:
+            'Migration guide from the deprecated @ui5/webcomponents-ngx package to @fundamental-ngx/ui5-webcomponents. ' +
+            'Four categories of breaking changes: camelCase Angular property bindings (vs kebab-case HTML attributes), ' +
+            'ValueState enum renames, automatic ThemingService bridge, and additionalText replacing status on list items.',
+        decisionTree: [
+            {
+                question: 'What do you need to migrate?',
+                options: [
+                    {
+                        answer: 'Property/attribute binding names (camelCase vs kebab-case)',
+                        recommendation:
+                            '@ui5/webcomponents-ngx bound HTML attributes using kebab-case in templates. ' +
+                            '@fundamental-ngx/ui5-webcomponents exposes proper Angular @Input() signals with camelCase names. ' +
+                            'All bindings must switch from attribute form to Angular property binding form.',
+                        example: `// BEFORE — @ui5/webcomponents-ngx (kebab-case attribute binding)
+<ui5-input value-state="Error" no-typeahead accessible-name="Search"></ui5-input>
+<ui5-button accessible-name-ref="labelId"></ui5-button>
+<ui5-table no-data-text="No results"></ui5-table>
+
+// AFTER — @fundamental-ngx/ui5-webcomponents (camelCase Angular inputs)
+<ui5-input [valueState]="'Negative'" [noTypeahead]="true" [accessibleName]="'Search'"></ui5-input>
+<ui5-button [accessibleNameRef]="'labelId'"></ui5-button>
+<ui5-table [noDataText]="'No results'"></ui5-table>
+
+// Rule: convert-kebab-to-camel for every attribute.
+// Static values that don't change still need [] binding for type safety.
+// Exception: standard HTML attributes (id, class, style, slot) stay as-is.`
+                    },
+                    {
+                        answer: 'ValueState enum values',
+                        recommendation:
+                            'The UI5 ValueState enum was renamed in UI5 Web Components 2.x. ' +
+                            'Error → Negative, Warning → Critical, Success → Positive. ' +
+                            'None and Information are unchanged.',
+                        example: `// BEFORE — @ui5/webcomponents-ngx ValueState values
+[valueState]="'Error'"      // validation error (red)
+[valueState]="'Warning'"    // caution (orange/yellow)
+[valueState]="'Success'"    // valid (green)
+[valueState]="'Information'" // informational (blue) — unchanged
+[valueState]="'None'"        // default — unchanged
+
+// AFTER — @fundamental-ngx/ui5-webcomponents ValueState values
+[valueState]="'Negative'"    // was Error
+[valueState]="'Critical'"    // was Warning
+[valueState]="'Positive'"    // was Success
+[valueState]="'Information'" // unchanged
+[valueState]="'None'"        // unchanged
+
+// Type: valueState accepts ValueState enum or its string literals.
+// Import if you want the enum: import { ValueState } from '@ui5/webcomponents/dist/enums/ValueState.js';
+// Or just pass the string literal directly — Angular templates accept both.`
+                    },
+                    {
+                        answer: 'ThemingService and SAP theme propagation',
+                        recommendation:
+                            "@ui5/webcomponents-ngx required calling UI5's setTheme() and setLanguage() manually " +
+                            'to keep UI5 components in sync with the app theme. ' +
+                            '@fundamental-ngx/ui5-webcomponents automatically bridges ThemingService to UI5 Web Components — ' +
+                            'no manual calls needed. Remove any manual setTheme() / setLanguage() calls from your app.',
+                        example: `// BEFORE — @ui5/webcomponents-ngx: manual theme sync required
+import { setTheme } from '@ui5/webcomponents-base/dist/config/Theme.js';
+import { setLanguage } from '@ui5/webcomponents-base/dist/config/Language.js';
+
+// Called on startup and whenever theme changes:
+setTheme('sap_horizon');
+setLanguage('de');
+
+// AFTER — @fundamental-ngx/ui5-webcomponents: nothing needed
+// ThemingService is automatically bridged (PR #14188).
+// UI5 components receive the active theme and FD_LANGUAGE_SIGNAL locale automatically.
+// Simply configure ThemingService as usual in app.config.ts:
+provideTheming({ defaultTheme: 'sap_horizon' }),
+themingInitializer()
+// That's it — UI5 components will match the app theme.`
+                    },
+                    {
+                        answer: 'additionalText on list and option items (replaces status)',
+                        recommendation:
+                            'In @ui5/webcomponents-ngx, ui5-li (list item) had a "status" input for secondary text. ' +
+                            'In @fundamental-ngx/ui5-webcomponents, ui5-option and ui5-combobox-item use "additionalText" for the same purpose.',
+                        example: `// BEFORE — @ui5/webcomponents-ngx list item
+<ui5-li [status]="'Active'">Alice Johnson</ui5-li>
+
+// AFTER — @fundamental-ngx/ui5-webcomponents option
+<ui5-option [additionalText]="'Active'">Alice Johnson</ui5-option>
+
+// For combobox items:
+// BEFORE
+<ui5-combobox-item [status]="'Available'">Engineering</ui5-combobox-item>
+
+// AFTER
+<ui5-combobox-item [additionalText]="'Available'">Engineering</ui5-combobox-item>
+
+// Note: additionalText is displayed in the trailing section of the option row.`
+                    }
+                ]
+            }
+        ],
+        commonPitfalls: [
+            'Package name change: replace @ui5/webcomponents-ngx with @fundamental-ngx/ui5-webcomponents. The old package declares peerDependencies on @angular/core ^20 and is incompatible with Angular 21. Do not use --legacy-peer-deps to force it in.',
+            'Import paths changed: old package used @ui5/webcomponents-ngx/dist/generated/... New package uses @fundamental-ngx/ui5-webcomponents/<component-name> (e.g. @fundamental-ngx/ui5-webcomponents/input, @fundamental-ngx/ui5-webcomponents/button).',
+            'All kebab-case attribute bindings must become camelCase Angular property bindings. A template like value-state="Error" will silently pass "Error" as a string to the web component\'s HTML attribute (not the Angular input), bypassing type checking and possibly having no effect.',
+            'ValueState "Error" no longer exists — the type now only accepts "None" | "Positive" | "Critical" | "Negative" | "Information". Passing the old string "Error" compiles but produces no visual error state at runtime. Always use "Negative" for validation errors.',
+            'Do not call setTheme() or setLanguage() from @ui5/webcomponents-base manually. ThemingService now owns the UI5 theme; calling setTheme() directly will cause theme drift between fd- and ui5- components in the same app.',
+            '@fundamental-ngx/cdk is a required peer dependency of @fundamental-ngx/ui5-webcomponents that npm does not always install automatically. If you see import resolution errors after migration, run: npm install @fundamental-ngx/cdk.',
+            'All three @fundamental-ngx packages (core, cdk, ui5-webcomponents) must be the same semver minor version. Mixing 0.61.x with 0.62.x causes peer-dep conflicts at install time.'
+        ],
+        compositionPattern: `// ── Full migration checklist ──────────────────────────────────────────
+// 1. Replace package
+npm uninstall @ui5/webcomponents-ngx
+npm install @fundamental-ngx/ui5-webcomponents @fundamental-ngx/cdk
+
+// 2. Replace imports in TypeScript files
+// Old:  import { Ui5InputComponent } from '@ui5/webcomponents-ngx/dist/generated/...'
+// New:  import { InputComponent } from '@fundamental-ngx/ui5-webcomponents/input'
+//       import { ButtonComponent } from '@fundamental-ngx/ui5-webcomponents/button'
+//       import { SelectComponent, OptionComponent } from '@fundamental-ngx/ui5-webcomponents/select'
+
+// 3. Convert template bindings from kebab to camelCase
+// Old:  <ui5-input value-state="Error" accessible-name="Email">
+// New:  <ui5-input [valueState]="'Negative'" [accessibleName]="'Email'">
+
+// 4. Rename ValueState values
+// Error → Negative | Warning → Critical | Success → Positive
+
+// 5. Remove manual setTheme() / setLanguage() calls
+
+// 6. Rename status → additionalText on ui5-option and ui5-combobox-item`,
+        relatedComponents: ['ui5-input', 'ui5-button', 'ui5-select', 'ui5-option', 'ui5-combobox-item'],
+        resources: [
+            'New package: @fundamental-ngx/ui5-webcomponents',
+            'UI5 Web Components 2.x migration: https://sap.github.io/ui5-webcomponents/docs/migration-guides/to-version-2/'
+        ]
+    },
+
     ui5: {
         component: 'ui5-webcomponents',
         summary:
