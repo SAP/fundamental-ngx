@@ -211,6 +211,9 @@ export class PopoverService {
     /** @hidden */
     private readonly _injector = inject(Injector);
 
+    /** @hidden Watches DOM mutations within the scroll container when the popover is open to reposition after layout shifts (e.g. display:none on siblings). */
+    private _ancestorMutationObserver: MutationObserver | null = null;
+
     /** @hidden */
     private get _triggerHtmlElement(): HTMLElement {
         return this._triggerElement instanceof ElementRef ? this._triggerElement.nativeElement : this._triggerElement;
@@ -275,6 +278,8 @@ export class PopoverService {
             this._clearHoverCloseTimer();
             this._removeOverlayHoverListeners();
             this._removeTriggerListeners();
+            this._ancestorMutationObserver?.disconnect();
+            this._ancestorMutationObserver = null;
             if (this._overlayRef) {
                 this._overlayRef.detach();
                 this._overlayRef.dispose();
@@ -325,6 +330,9 @@ export class PopoverService {
 
     /** Closes the popover. */
     close(focusActiveElement = true): void {
+        this._ancestorMutationObserver?.disconnect();
+        this._ancestorMutationObserver = null;
+
         this._clearHoverCloseTimer();
         this._removeOverlayHoverListeners();
 
@@ -343,6 +351,7 @@ export class PopoverService {
         if ((!this._overlayRef || !this._overlayRef.hasAttached()) && !this.disabled() && this._triggerElement) {
             const position = this._getPositionStrategy();
             this._overlayRef = this._overlay.create(this._getOverlayConfig(position));
+            this._startAncestorResizeObserver();
 
             if (this._placementContainerValue) {
                 const placementElement =
@@ -558,7 +567,6 @@ export class PopoverService {
         }
 
         this._removeTriggerListeners();
-
         if (this.triggers()?.length) {
             const hasHoverTrigger = this._hasHoverTriggers();
 
@@ -928,5 +936,62 @@ export class PopoverService {
         if (focusLastElement && this.restoreFocusOnClose() && this.focusAutoCapture() && this._lastActiveElement) {
             this._lastActiveElement.focus();
         }
+    }
+
+    /**
+     * @hidden
+     * Starts a MutationObserver on the nearest scrollable ancestor of the trigger element (falling
+     * back to document.body) to detect layout shifts that would invalidate the overlay position.
+     * Two mutation types are observed within the subtree:
+     *  - `childList`: catches elements being added to or removed from the DOM (e.g. a banner/toast
+     *    that is fully removed after its timer expires).
+     *  - `attributes` with `attributeFilter: ['style', 'class']`: catches visibility toggling via
+     *    CSS (e.g. `display: none` applied inline or through a utility class, as the
+     *    `fd-message-strip` autoDismiss directive does).
+     * The callback is debounced through `requestAnimationFrame` so that rapid batched mutations
+     * (Angular rendering a whole subtree at once) only trigger a single `updatePosition()` call.
+     */
+    private _startAncestorResizeObserver(): void {
+        const trigger = this._triggerHtmlElement;
+        if (!trigger) {
+            return;
+        }
+
+        let animationFrame: number | null = null;
+        const scheduleUpdate = (): void => {
+            if (animationFrame !== null) {
+                return;
+            }
+            animationFrame = window.requestAnimationFrame(() => {
+                animationFrame = null;
+                this._overlayRef?.updatePosition();
+            });
+        };
+
+        this._ancestorMutationObserver = new MutationObserver(scheduleUpdate);
+
+        const container = this._findScrollableAncestor(trigger);
+        this._ancestorMutationObserver.observe(container, {
+            subtree: true,
+            childList: true,
+            attributes: true,
+            attributeFilter: ['style', 'class']
+        });
+    }
+
+    /**
+     * @hidden
+     * Returns the nearest scrollable ancestor, or document.body when none is found.
+     */
+    private _findScrollableAncestor(el: HTMLElement): HTMLElement {
+        let parent = el.parentElement;
+        while (parent && parent !== document.body) {
+            const { overflow, overflowX, overflowY } = getComputedStyle(parent);
+            if (/auto|scroll|overlay/.test(overflow + overflowX + overflowY)) {
+                return parent;
+            }
+            parent = parent.parentElement;
+        }
+        return document.body;
     }
 }
