@@ -1,5 +1,5 @@
 {
-    "count": 955,
+    "count": 957,
     "routes": [
         {
             "path": "btp/button/nested",
@@ -1246,6 +1246,13 @@
             "component": "dayjs-datetime-adapter",
             "example": "dayjs-adapter-options",
             "className": "DayjsAdapterOptionsExampleComponent"
+        },
+        {
+            "path": "core/dayjs-datetime-adapter/dayjs-datetime-24h",
+            "library": "core",
+            "component": "dayjs-datetime-adapter",
+            "example": "dayjs-datetime-24h",
+            "className": "DayjsDatetime24hExampleComponent"
         },
         {
             "path": "core/dayjs-datetime-adapter/dayjs-datetime-formats",
@@ -2870,6 +2877,13 @@
             "component": "settings-dialog",
             "example": "template-based-settings-dialog",
             "className": "TemplateBasedSettingsDialogExampleComponent"
+        },
+        {
+            "path": "core/shellbar/context-area-overflow",
+            "library": "core",
+            "component": "shellbar",
+            "example": "context-area-overflow",
+            "className": "ShellbarContextAreaOverflowExampleComponent"
         },
         {
             "path": "core/side-navigation/condensed",

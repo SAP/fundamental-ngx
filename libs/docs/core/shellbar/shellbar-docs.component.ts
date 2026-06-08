@@ -14,6 +14,7 @@ import { ShellbarBasicExampleComponent } from './examples/shellbar-basic-example
 import { ShellbarBrandingContextAreaExampleComponent } from './examples/shellbar-branding-context-area-example/shellbar-branding-context-area-example.component';
 import { ShellbarCollapsibleExampleComponent } from './examples/shellbar-collapsible-example.component';
 import { ShellbarComplexSearchResultsExampleComponent } from './examples/shellbar-complex-search-results-example.component';
+import { ShellbarContextAreaOverflowExampleComponent } from './examples/shellbar-context-area-overflow-example/shellbar-context-area-overflow-example.component';
 import { ShellbarGrowingGroupExampleComponent } from './examples/shellbar-growing-group-example/shellbar-growing-group-example.component';
 import { ShellbarResponsiveExampleComponent } from './examples/shellbar-responsive-example/shellbar-responsive-example.component';
 
@@ -36,6 +37,7 @@ const shellbarCollapsibleTSSrc = 'shellbar-collapsible-example.component.ts';
         ShellbarResponsiveExampleComponent,
         ShellbarGrowingGroupExampleComponent,
         ShellbarBrandingContextAreaExampleComponent,
+        ShellbarContextAreaOverflowExampleComponent,
         ShellbarComplexSearchResultsExampleComponent
     ]
 })
@@ -100,6 +102,16 @@ export class ShellbarDocsComponent {
         }),
         getExampleFile('shellbar-branding-context-area-example/shellbar-branding-context-area-example.component.html', {
             name: 'shellbar-branding-context-area-example.html'
+        })
+    ];
+
+    shellbarContextAreaOverflowExample: ExampleFile[] = [
+        getExampleFile('shellbar-context-area-overflow-example/shellbar-context-area-overflow-example.component.ts', {
+            selector: 'shellbar-context-area-overflow-example',
+            component: 'ShellbarContextAreaOverflowExampleComponent'
+        }),
+        getExampleFile('shellbar-context-area-overflow-example/shellbar-context-area-overflow-example.component.html', {
+            name: 'shellbar-context-area-overflow-example.html'
         })
     ];
 
