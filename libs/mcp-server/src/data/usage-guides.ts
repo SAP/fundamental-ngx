@@ -210,6 +210,217 @@ export const USAGE_GUIDES: Record<string, UsageGuide> = {
     setup: _setupGuide,
     installation: _setupGuide,
 
+    i18n: {
+        component: 'i18n',
+        summary:
+            '@fundamental-ngx/i18n provides signal-based translations via FD_LANGUAGE_SIGNAL. ' +
+            'FdTranslatePipe returns a Signal<string> — call it in templates: {{ ("key" | fdTranslate)() }}. ' +
+            'Override translations globally with a custom FD_LANGUAGE_SIGNAL provider, ' +
+            'or locally per component/subtree using patchLanguage().',
+        decisionTree: [
+            {
+                question: 'What do you need to do?',
+                options: [
+                    {
+                        answer: 'Translate a key in a template',
+                        recommendation:
+                            'Import FdTranslatePipe and use the fdTranslate pipe. ' +
+                            'The pipe returns a Signal<string> — you MUST call it with () in the template.',
+                        example: `// component.ts
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+
+@Component({
+    imports: [FdTranslatePipe],
+    template: \`
+        <!-- Simple key -->
+        <button>{{ ('coreButton.save' | fdTranslate)() }}</button>
+
+        <!-- With interpolation arguments -->
+        <span>{{ ('coreList.itemCount' | fdTranslate: { count: items.length })() }}</span>
+    \`
+})
+export class MyComponent {}`
+                    },
+                    {
+                        answer: 'Switch the language at runtime',
+                        recommendation:
+                            'Inject FD_LANGUAGE_SIGNAL (a WritableSignal<FdLanguage>) and call .set() with a built-in language object. ' +
+                            'Built-in languages are exported from @fundamental-ngx/i18n (e.g. FD_LANGUAGE_GERMAN, FD_LANGUAGE_FRENCH).',
+                        example: `import { inject } from '@angular/core';
+import { FD_LANGUAGE_SIGNAL, FD_LANGUAGE_GERMAN, FD_LANGUAGE_FRENCH } from '@fundamental-ngx/i18n';
+
+@Component({ ... })
+export class AppComponent {
+    private readonly langSignal = inject(FD_LANGUAGE_SIGNAL);
+
+    switchToGerman(): void {
+        this.langSignal.set(FD_LANGUAGE_GERMAN);
+    }
+
+    switchToFrench(): void {
+        this.langSignal.set(FD_LANGUAGE_FRENCH);
+    }
+}`
+                    },
+                    {
+                        answer: 'Provide custom translations for the whole app',
+                        recommendation:
+                            'Provide a custom WritableSignal<FdLanguage> for FD_LANGUAGE_SIGNAL in app.config.ts. ' +
+                            'Start from FD_LANGUAGE_ENGLISH and spread your overrides. ' +
+                            'Only override the keys you need — FdLanguage has hundreds of keys.',
+                        example: `// app.config.ts
+import { ApplicationConfig, signal } from '@angular/core';
+import { FD_LANGUAGE_SIGNAL, FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n';
+
+const myLanguage = {
+    ...FD_LANGUAGE_ENGLISH,
+    locale: 'en',
+    // Override specific component translations
+    coreButton: {
+        ...FD_LANGUAGE_ENGLISH.coreButton,
+        save: 'Save Changes',
+        cancel: 'Discard'
+    }
+};
+
+export const appConfig: ApplicationConfig = {
+    providers: [
+        {
+            provide: FD_LANGUAGE_SIGNAL,
+            useValue: signal(myLanguage)
+        }
+    ]
+};`
+                    },
+                    {
+                        answer: 'Override translations for a single component or subtree',
+                        recommendation:
+                            'Use patchLanguage() in the component providers array. ' +
+                            'It creates a computed signal that inherits the parent language and merges your patch on top. ' +
+                            'Changing the parent language propagates through — the patch stays applied.',
+                        example: `import { patchLanguage } from '@fundamental-ngx/i18n';
+
+@Component({
+    selector: 'app-my-form',
+    template: '...',
+    providers: [
+        patchLanguage({
+            // Only override what you need for this subtree
+            platformButton: {
+                save: 'Submit Form',
+                cancel: 'Go Back'
+            }
+        })
+    ]
+})
+export class MyFormComponent {}
+
+// Dynamic patch based on current language values:
+@Component({
+    providers: [
+        patchLanguage((currentLang) => ({
+            coreButton: {
+                save: currentLang.coreButton.save.toUpperCase()
+            }
+        }))
+    ]
+})
+export class MyUppercaseComponent {}`
+                    },
+                    {
+                        answer: 'Read a translation key in TypeScript (not in a template)',
+                        recommendation:
+                            'Inject FD_LANGUAGE_SIGNAL and use computed() to derive the translated string. ' +
+                            'Use TranslationResolver to resolve a key against a language object.',
+                        example: `import { computed, inject } from '@angular/core';
+import { FD_LANGUAGE_SIGNAL, TranslationResolver } from '@fundamental-ngx/i18n';
+
+@Component({ ... })
+export class MyComponent {
+    private readonly langSignal = inject(FD_LANGUAGE_SIGNAL);
+    private readonly resolver = new TranslationResolver();
+
+    // Reactive computed string — updates when language changes
+    readonly saveLabel = computed(() =>
+        this.resolver.resolve(this.langSignal(), 'coreButton.save') || 'Save'
+    );
+}`
+                    }
+                ]
+            }
+        ],
+        commonPitfalls: [
+            'FdTranslatePipe returns Signal<string>, NOT a plain string. In templates you MUST add () to invoke the signal: {{ ("key" | fdTranslate)() }}. Omitting () renders "[object Object]" instead of the translation.',
+            'FD_LANGUAGE is the old Observable-based token — it is deprecated. Always use FD_LANGUAGE_SIGNAL (the WritableSignal<FdLanguage> token) in new code.',
+            "Auto-detection is on by default: FD_LANGUAGE_SIGNAL reads Angular's LOCALE_ID at bootstrap and picks the closest built-in language. If you want to suppress this and always start with English, provide FD_LANGUAGE_AUTO_DETECT with value false.",
+            'When providing a custom FD_LANGUAGE_SIGNAL via useValue, wrap your language object in signal(): { provide: FD_LANGUAGE_SIGNAL, useValue: signal(myLanguage) }. Providing a plain object (not a signal) will break all FdTranslatePipe consumers.',
+            "patchLanguage() uses SkipSelf to look up the parent FD_LANGUAGE_SIGNAL. It must be placed in a component's providers array, not in the root injector. If you add it to app.config.ts providers, SkipSelf will find nothing and throw.",
+            'FdLanguage has hundreds of deeply nested keys (coreButton, coreCalendar, platformTable, etc.). When creating a full custom language, spread from FD_LANGUAGE_ENGLISH first and override only the keys you need — do not construct the object from scratch.',
+            'Translation keys with interpolation use {{ param }} syntax in the string values (e.g. "{{ count }} items selected"). Pass the params as the second argument to fdTranslate: ("key" | fdTranslate: { count: 5 })(). The resolver replaces {{ param }} with the provided value.',
+            "FdTranslatePipe is standalone — import it directly in each component's imports array. There is no shared module that re-exports it."
+        ],
+        compositionPattern: `// ── Minimal template usage ────────────────────────────────────────────
+// 1. Import the pipe
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+
+@Component({
+    imports: [FdTranslatePipe],
+    template: \`
+        <button>{{ ('coreButton.save' | fdTranslate)() }}</button>
+        <span>{{ ('coreList.itemCount' | fdTranslate: { count: 3 })() }}</span>
+    \`
+})
+export class MyComponent {}
+
+// ── App-wide language switch ───────────────────────────────────────────
+// app.config.ts: provide a custom language signal
+import { signal } from '@angular/core';
+import { FD_LANGUAGE_SIGNAL, FD_LANGUAGE_ENGLISH, FD_LANGUAGE_GERMAN } from '@fundamental-ngx/i18n';
+
+export const appConfig: ApplicationConfig = {
+    providers: [
+        { provide: FD_LANGUAGE_SIGNAL, useValue: signal(FD_LANGUAGE_ENGLISH) }
+    ]
+};
+
+// In a language-switcher component:
+private readonly lang = inject(FD_LANGUAGE_SIGNAL);
+switchToGerman(): void { this.lang.set(FD_LANGUAGE_GERMAN); }
+
+// ── Subtree override with patchLanguage ────────────────────────────────
+import { patchLanguage } from '@fundamental-ngx/i18n';
+
+@Component({
+    providers: [
+        patchLanguage({
+            coreButton: { save: 'Save Changes', cancel: 'Discard' }
+        })
+    ]
+})
+export class MyFormComponent {}`,
+        relatedComponents: [],
+        resources: [
+            'i18n source — libs/i18n/src/lib/utils/tokens.ts',
+            'Available languages — libs/i18n/src/lib/languages/ (40+ built-in)',
+            'FdLanguage model — libs/i18n/src/lib/models/fd-language.ts',
+            'patchLanguage utility — libs/i18n/src/lib/utils/patch-language.ts'
+        ]
+    },
+
+    fdtranslatepipe: {
+        component: 'FdTranslatePipe',
+        summary:
+            'Alias for the i18n usage guide. FdTranslatePipe translates a key to a Signal<string>. ' +
+            'Call it in templates with (): {{ ("coreButton.save" | fdTranslate)() }}.',
+        decisionTree: [],
+        commonPitfalls: [
+            'Returns Signal<string> — must be invoked with () in templates. See the i18n guide for full details: get_usage_guide("i18n")'
+        ],
+        compositionPattern: `{{ ('coreButton.save' | fdTranslate)() }}
+{{ ('coreList.itemCount' | fdTranslate: { count: n })() }}`,
+        relatedComponents: []
+    },
+
     ui5: {
         component: 'ui5-webcomponents',
         summary:
