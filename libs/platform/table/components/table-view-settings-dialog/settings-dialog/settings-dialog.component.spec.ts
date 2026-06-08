@@ -457,7 +457,6 @@ describe('SettingsDialogComponent', () => {
             expect(component.columnsData()?.columns).toEqual(initialColumns.columns);
 
             // Pending changes should also be reset
-            component.confirm();
             const closeSpy = jest.spyOn(component['dialogRef'], 'close');
             component.confirm();
             expect(closeSpy).toHaveBeenCalledWith(
