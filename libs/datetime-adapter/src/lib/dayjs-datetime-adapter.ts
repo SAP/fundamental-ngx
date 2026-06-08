@@ -506,9 +506,25 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
         // Expand localized format tokens (e.g. 'L' → 'MM/DD/YYYY') before checking
         const expandedFormat = this._prepareFormat(format);
 
-        // If the format is time-only (no date components), skip overflow check
+        // If the format is time-only (no date components), check time overflow too
         if (!expandedFormat.match(/[YMDd]/)) {
-            return true;
+            const timeReformatted = parsed.format(expandedFormat);
+            const timeInputNums = input.match(/\d+/g) ?? [];
+            const timeOutputNums = timeReformatted.match(/\d+/g) ?? [];
+
+            // If format includes meridiem, hour can legitimately differ (10 PM → 22).
+            // Only compare minute/second segments (skip first digit = hour).
+            if (expandedFormat.match(/[aA]/)) {
+                return (
+                    timeInputNums.length === timeOutputNums.length &&
+                    timeInputNums.slice(1).every((n, i) => n === timeOutputNums[i + 1])
+                );
+            }
+
+            // Otherwise compare all numeric segments positionally
+            return (
+                timeInputNums.length === timeOutputNums.length && timeInputNums.every((n, i) => n === timeOutputNums[i])
+            );
         }
 
         // Re-format the parsed date and compare numeric segments positionally
