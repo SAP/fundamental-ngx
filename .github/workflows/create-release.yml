@@ -127,6 +127,13 @@ jobs:
               if: env.IS_MANUAL != 'true'
               run: node scripts/update-lerna-version.js ${{ steps.bumpVersion.outputs.newVersion }}
 
+            # Regenerate the component metadata catalog with the new version
+            - name: Regenerate component metadata catalog
+              if: env.IS_MANUAL != 'true'
+              run: npx nx run mcp-server:extract-metadata
+              env:
+                  NX_CLOUD_DISTRIBUTED_EXECUTION: false
+
             - name: Lint and build
               uses: ./.github/actions/parallel-commands
               with:
