@@ -56,6 +56,11 @@
                 "assets": [
                     "apps/docs/src/favicon.ico",
                     "apps/docs/src/llms.txt",
+                    {
+                        "input": "libs/mcp-server/src/data",
+                        "glob": "components.json",
+                        "output": "."
+                    },
                     "apps/docs/src/assets",
                     {
                         "glob": "**/css_variables.css",

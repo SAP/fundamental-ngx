@@ -4,6 +4,20 @@
     "sourceRoot": "libs/mcp-server/src",
     "projectType": "library",
     "tags": ["type:tools", "scope:tools"],
+    "implicitDependencies": [
+        "cdk",
+        "core",
+        "platform",
+        "btp",
+        "cx",
+        "i18n",
+        "datetime-adapter",
+        "moment-adapter",
+        "ui5-webcomponents-fiori",
+        "ui5-webcomponents-base",
+        "ui5-webcomponents-ai",
+        "ui5-webcomponents"
+    ],
     "targets": {
         "build": {
             "executor": "@nx/js:tsc",
@@ -37,14 +51,16 @@
             "options": {
                 "command": "npx tsx libs/mcp-server/src/extractors/build-metadata.ts",
                 "cwd": "{workspaceRoot}"
-            }
+            },
+            "dependsOn": ["^compile-typedoc"]
         },
         "check-metadata": {
             "executor": "nx:run-commands",
             "options": {
                 "command": "npx tsx libs/mcp-server/src/extractors/build-metadata.ts --dry-run",
                 "cwd": "{workspaceRoot}"
-            }
+            },
+            "dependsOn": ["^compile-typedoc"]
         }
     }
 }
