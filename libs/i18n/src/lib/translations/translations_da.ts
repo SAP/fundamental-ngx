@@ -20,10 +20,10 @@ export default {
     },
     coreAvatarGroup: {
         ariaLabelGroup:
-            'Has popup type dialog conjoined avatars, {count} avatars displayed, {hiddenCount} avatars hidden, activate for complete list',
-        ariaLabelIndividual: 'Individual avatars. {count} avatars displayed, {hiddenCount} avatars hidden',
+            'Har forbundne avatars til pop op-vinduestypens dialogboks, {count} avatars vist, {hiddenCount} avatars skjult, aktivér for hele listen',
+        ariaLabelIndividual: 'Individuelle avatars. {count} avatars vist, {hiddenCount} avatars skjult',
         backButton: 'Tilbage',
-        popupBodyAriaLabel: 'With {count} items'
+        popupBodyAriaLabel: 'Med {count} elementer'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Brødkrummespor',
@@ -36,8 +36,8 @@ export default {
     },
     coreCalendar: {
         calendarDayViewDescription: 'Kalender',
-        calendarLegendLabel: 'Calendar Legend',
-        calendarRoleDescription: 'Calendar',
+        calendarLegendLabel: 'Kalenderforklaring',
+        calendarRoleDescription: 'Kalender',
         calendarMonthViewDescription: 'Månedsvælger',
         calendarYearsRangeViewDescription: 'Vælger af årsinterval',
         calendarYearsViewDescription: 'Årsvælger',
@@ -202,7 +202,7 @@ export default {
         ariaLabel: 'Produktskift'
     },
     coreRadio: {
-        readOnlyDescription: 'This radio button is read-only and cannot be changed.'
+        readOnlyDescription: 'Denne valgknap er skrivebeskyttet og kan ikke ændres.'
     },
     coreRatingIndicator: {
         ariaLabelReset: 'Nulstil',

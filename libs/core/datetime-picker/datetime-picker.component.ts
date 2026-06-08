@@ -733,6 +733,7 @@ export class DatetimePickerComponent<D>
                 this._dateTimeAdapter.getMinutes(currentTime),
                 this._dateTimeAdapter.getSeconds(currentTime)
             );
+            this._refreshCurrentlyDisplayedCalendarDate(this.date);
         } catch {
             this.date = null;
         }
@@ -879,7 +880,8 @@ export class DatetimePickerComponent<D>
 
     /** @hidden */
     private _parseDate(date: unknown): D | null {
-        return this._dateTimeAdapter.parse(date, this._dateTimeFormats.parse.dateTimeInput);
+        const format = this.customDateTimeFormat ?? this._dateTimeFormats.parse.dateTimeInput;
+        return this._dateTimeAdapter.parse(date, format);
     }
 
     /** @hidden */

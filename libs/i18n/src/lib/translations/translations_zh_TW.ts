@@ -20,10 +20,10 @@ export default {
     },
     coreAvatarGroup: {
         ariaLabelGroup:
-            'Has popup type dialog conjoined avatars, {count} avatars displayed, {hiddenCount} avatars hidden, activate for complete list',
-        ariaLabelIndividual: 'Individual avatars. {count} avatars displayed, {hiddenCount} avatars hidden',
+            '有快顯示窗類型對話，結合虛擬個人頭像、顯示 {count} 個虛擬個人頭像、隱藏 {hiddenCount} 個虛擬個人頭像、啟用完整清單',
+        ariaLabelIndividual: '個別虛擬個人頭像。顯示 {count} 個虛擬個人頭像、隱藏 {hiddenCount} 個虛擬個人頭像',
         backButton: '返回',
-        popupBodyAriaLabel: 'With {count} items'
+        popupBodyAriaLabel: '含 {count} 個項目'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: '階層連結軌跡',
@@ -36,8 +36,8 @@ export default {
     },
     coreCalendar: {
         calendarDayViewDescription: '行事曆',
-        calendarLegendLabel: 'Calendar Legend',
-        calendarRoleDescription: 'Calendar',
+        calendarLegendLabel: '行事曆圖例',
+        calendarRoleDescription: '行事曆',
         calendarMonthViewDescription: '月份選擇器',
         calendarYearsRangeViewDescription: '年份範圍選擇器',
         calendarYearsViewDescription: '年份選擇器',
@@ -201,7 +201,7 @@ export default {
         ariaLabel: '產品切換'
     },
     coreRadio: {
-        readOnlyDescription: 'This radio button is read-only and cannot be changed.'
+        readOnlyDescription: '此選項按鈕為唯讀且無法變更。'
     },
     coreRatingIndicator: {
         ariaLabelReset: '重設為零',

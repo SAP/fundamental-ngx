@@ -1250,6 +1250,13 @@ export const generatedRoutes: Routes = [
             ).then((m) => m.DayjsAdapterOptionsExampleComponent)
     },
     {
+        path: 'core/dayjs-datetime-adapter/dayjs-datetime-24h',
+        loadComponent: () =>
+            import(
+                '../../../../libs/docs/core/dayjs-datetime-adapter/examples/dayjs-datetime-24h-example.component'
+            ).then((m) => m.DayjsDatetime24hExampleComponent)
+    },
+    {
         path: 'core/dayjs-datetime-adapter/dayjs-datetime-formats',
         loadComponent: () =>
             import(
@@ -2872,6 +2879,13 @@ export const generatedRoutes: Routes = [
             import(
                 '../../../../libs/docs/core/settings-dialog/examples/template-based-settings/template-based-settings-dialog-example.component'
             ).then((m) => m.TemplateBasedSettingsDialogExampleComponent)
+    },
+    {
+        path: 'core/shellbar/context-area-overflow',
+        loadComponent: () =>
+            import(
+                '../../../../libs/docs/core/shellbar/examples/shellbar-context-area-overflow-example/shellbar-context-area-overflow-example.component'
+            ).then((m) => m.ShellbarContextAreaOverflowExampleComponent)
     },
     {
         path: 'core/side-navigation/condensed',

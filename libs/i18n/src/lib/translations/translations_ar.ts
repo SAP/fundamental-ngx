@@ -20,10 +20,11 @@ export default {
     },
     coreAvatarGroup: {
         ariaLabelGroup:
-            'Has popup type dialog conjoined avatars, {count} avatars displayed, {hiddenCount} avatars hidden, activate for complete list',
-        ariaLabelIndividual: 'Individual avatars. {count} avatars displayed, {hiddenCount} avatars hidden',
+            'يحتوي على صور رمزية بمربع حوار نوع النافذة المنبثقة، تم عرض {count} من الصور الرمزية، وتم إخفاء {hiddenCount} من الصور الرمزية، وتنشيط للقائمة الكاملة',
+        ariaLabelIndividual:
+            'الصور الرمزية الفردية. تم عرض {count} من الصور الرمزية، وتم إخفاء {hiddenCount} من الصور الرمزية (avatars)',
         backButton: 'الخلف',
-        popupBodyAriaLabel: 'With {count} items'
+        popupBodyAriaLabel: 'ببنود {count}'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'مسار التنقل',
@@ -36,8 +37,8 @@ export default {
     },
     coreCalendar: {
         calendarDayViewDescription: 'التقويم',
-        calendarLegendLabel: 'Calendar Legend',
-        calendarRoleDescription: 'Calendar',
+        calendarLegendLabel: 'وسيلة إيضاح التقويم',
+        calendarRoleDescription: 'التقويم',
         calendarMonthViewDescription: 'أداة انتقاء الشهر',
         calendarYearsRangeViewDescription: 'أداة انتقاء نطاق السنوات',
         calendarYearsViewDescription: 'أداة انتقاء السنة',
@@ -202,7 +203,7 @@ export default {
         ariaLabel: 'تبديل المنتج'
     },
     coreRadio: {
-        readOnlyDescription: 'This radio button is read-only and cannot be changed.'
+        readOnlyDescription: 'زر الاختيار هذا للقراءة فقط ولا يمكن تغييره.'
     },
     coreRatingIndicator: {
         ariaLabelReset: 'إعادة تعيين إلى صفر',

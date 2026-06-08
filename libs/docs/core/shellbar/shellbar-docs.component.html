@@ -112,6 +112,29 @@
 
 <separator></separator>
 
+<fd-docs-section-title id="context-area-overflow" componentName="shellbar">
+    Context Area Overflow
+</fd-docs-section-title>
+<description>
+    <p>
+        When the shellbar becomes too narrow to show all context area items, they can be hidden by the application and
+        rendered in a custom popover. This example shows hiding them behind a button. Clicking the button opens a
+        popover listing the hidden items. When enough space is restored, the items reappear in the context area and the
+        overflow button disappears.
+    </p>
+    <p>
+        This behavior is driven by listening to the <code>(contentItemVisibilityChange)</code> event emitted by
+        <code>fd-shellbar-context-area</code>. Use the "Responsive preview" button on the top right corner of the
+        example to go into responsive mode and resize the shellbar to observe the effect.
+    </p>
+</description>
+<component-example>
+    <fd-shellbar-context-area-overflow-example></fd-shellbar-context-area-overflow-example>
+</component-example>
+<code-example [exampleFiles]="shellbarContextAreaOverflowExample"></code-example>
+
+<separator></separator>
+
 <fd-docs-section-title id="complex-search-results" componentName="shellbar">
     Shellbar with complex search results
 </fd-docs-section-title>

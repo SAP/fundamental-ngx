@@ -19,11 +19,10 @@ export default {
         toolbarLabel: '操作栏'
     },
     coreAvatarGroup: {
-        ariaLabelGroup:
-            'Has popup type dialog conjoined avatars, {count} avatars displayed, {hiddenCount} avatars hidden, activate for complete list',
-        ariaLabelIndividual: 'Individual avatars. {count} avatars displayed, {hiddenCount} avatars hidden',
+        ariaLabelGroup: '具有联合头像的弹出式对话框，{count} 个头像显示，{hiddenCount} 个头像隐藏，激活以获取完整列表',
+        ariaLabelIndividual: '单个头像。 {count} 个头像显示，{hiddenCount} 个头像隐藏',
         backButton: '返回',
-        popupBodyAriaLabel: 'With {count} items'
+        popupBodyAriaLabel: '包含 {count} 个项目'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: '浏览记录',
@@ -36,8 +35,8 @@ export default {
     },
     coreCalendar: {
         calendarDayViewDescription: '日历',
-        calendarLegendLabel: 'Calendar Legend',
-        calendarRoleDescription: 'Calendar',
+        calendarLegendLabel: '日历图例',
+        calendarRoleDescription: '日历',
         calendarMonthViewDescription: '月份选取器',
         calendarYearsRangeViewDescription: '年度范围选取器',
         calendarYearsViewDescription: '年度选取器',
@@ -201,7 +200,7 @@ export default {
         ariaLabel: '产品切换'
     },
     coreRadio: {
-        readOnlyDescription: 'This radio button is read-only and cannot be changed.'
+        readOnlyDescription: '此单选按钮为只读，无法更改。'
     },
     coreRatingIndicator: {
         ariaLabelReset: '重置为零',

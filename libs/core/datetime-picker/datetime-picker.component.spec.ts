@@ -186,6 +186,27 @@ describe('DatetimePickerComponent', () => {
         expect(component.togglePopover).toHaveBeenCalled();
     });
 
+    describe('customDateTimeFormat parsing (fix #14250)', () => {
+        it('should use customDateTimeFormat as the parse format when typing into the input', () => {
+            const adapter = (component as any)._dateTimeAdapter;
+            const parseSpy = jest.spyOn(adapter, 'parse').mockReturnValue(new FdDate(2025, 5, 25, 15, 30));
+
+            component.customDateTimeFormat = 'YYYY-MM-DD HH:mm';
+            component.handleInputChange('2025-05-25 15:30', true);
+
+            expect(parseSpy).toHaveBeenCalledWith('2025-05-25 15:30', 'YYYY-MM-DD HH:mm');
+        });
+
+        it('should fall back to the provider parse format when customDateTimeFormat is not set', () => {
+            const adapter = (component as any)._dateTimeAdapter;
+            const parseSpy = jest.spyOn(adapter, 'parse').mockReturnValue(new FdDate(2025, 5, 25));
+
+            component.customDateTimeFormat = undefined;
+            component.handleInputChange('5/25/2025', true);
+
+            expect(parseSpy).toHaveBeenCalledWith('5/25/2025', datetimeFormats.parse.dateTimeInput);
+        });
+    });
     describe('Calendar Legend Feature', () => {
         beforeEach(() => {
             component.isOpen = true;
@@ -303,6 +324,24 @@ describe('DatetimePickerComponent', () => {
 
             expect(component.onChange).toHaveBeenCalled();
             expect(component.date).toBeDefined();
+        });
+
+        it('should update _calendarPendingDate on submit so reopening shows the selected month', () => {
+            // Simulate: picker opened with June date, user navigates to August and selects Aug 15
+            const juneDate = new FdDate(2024, 6, 5);
+            const augustDate = new FdDate(2024, 8, 15);
+
+            component.date = juneDate;
+            component._tempDate = augustDate;
+            component._tempTime = augustDate;
+
+            component.submit();
+
+            // _calendarPendingDate must reflect the newly submitted date so that
+            // when the ViewChild setter calls setCurrentlyDisplayed(_calendarPendingDate)
+            // after reopening, it shows August, not June.
+            expect((component as any)._calendarPendingDate?.month).toBe(augustDate.month);
+            expect((component as any)._calendarPendingDate?.day).toBe(augustDate.day);
         });
     });
 
