@@ -1,3 +1,16 @@
+## 0.63.0-rc.11 (2026-06-09)
+
+### 🩹 Fixes
+
+- **core:** fix fd-select dropdown reposition upon DOM changes ([#14265](https://github.com/SAP/fundamental-ngx/pull/14265), [#14252](https://github.com/SAP/fundamental-ngx/issues/14252), [#14244](https://github.com/SAP/fundamental-ngx/issues/14244), [#14267](https://github.com/SAP/fundamental-ngx/issues/14267))
+
+### ❤️ Thank You
+
+- fundamental-bot
+- Inna Atanasova @InnaAtanasova
+- Maria Dineva @MariaIDineva
+- Mike O'Donnell @mikerodonnell89
+
 ## 0.63.0-rc.10 (2026-06-09)
 
 This was a version bump only for core to align it with other projects, there were no code changes.
