@@ -1,3 +1,17 @@
+## 0.63.0-rc.9 (2026-06-08)
+
+### 🩹 Fixes
+
+- **platform:** use tabs instead of segmented button in combined table settings dialog ([#14244](https://github.com/SAP/fundamental-ngx/pull/14244))
+
+### ❤️ Thank You
+
+- Mike O'Donnell @mikerodonnell89
+
+## 0.63.0-rc.8 (2026-06-08)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
 ## 0.63.0-rc.7 (2026-06-05)
 
 This was a version bump only for platform to align it with other projects, there were no code changes.

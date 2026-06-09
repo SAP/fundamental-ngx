@@ -215,6 +215,20 @@ function resolveExampleKeys(
 }
 
 /**
+ * Read the version from lerna.json.
+ */
+function readVersion(basePath: string): string {
+    const lernaPath = join(basePath, 'lerna.json');
+    try {
+        const lernaContent = require(lernaPath);
+        return lernaContent.version;
+    } catch (error) {
+        console.error(`Failed to read version from ${lernaPath}:`, error);
+        throw new Error('Could not determine version from lerna.json');
+    }
+}
+
+/**
  * Build the complete MCP metadata catalog.
  *
  * Orchestrates all extractors and writes the unified components.json.
@@ -223,6 +237,10 @@ function resolveExampleKeys(
 export async function buildMetadata(basePath: string, outputPath: string): Promise<ComponentCatalog> {
     console.log('Starting metadata extraction...');
     const startTime = Date.now();
+
+    // Read version from lerna.json
+    const version = readVersion(basePath);
+    console.log(`  Version: ${version}`);
 
     // Run CEM and TypeDoc extraction in parallel
     const [cemComponents, typeDocComponents] = await Promise.all([
@@ -311,7 +329,7 @@ export async function buildMetadata(basePath: string, outputPath: string): Promi
 
     const catalog: ComponentCatalog = {
         generatedAt: new Date().toISOString(),
-        version: '0.62.0-rc.67',
+        version,
         components: allComponents
     };
 
