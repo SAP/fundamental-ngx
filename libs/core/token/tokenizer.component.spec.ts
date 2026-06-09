@@ -12,7 +12,7 @@ import { TokenizerComponent } from './tokenizer.component';
 @Component({
     selector: 'fd-tokenizer-test-component',
     template: `
-        <fd-tokenizer [fdCompact]="compact">
+        <fd-tokenizer [fdCompact]="compact" [externalHiddenCount]="externalHiddenCount">
             <fd-token>Token 1</fd-token>
             <fd-token>Token 2</fd-token>
             <fd-token>Token 3</fd-token>
@@ -30,6 +30,7 @@ class HostComponent {
     tokenList: QueryList<TokenComponent>;
 
     compact: boolean | undefined = undefined;
+    externalHiddenCount = 0;
 }
 
 describe('TokenizerComponent', () => {
@@ -264,5 +265,219 @@ describe('TokenizerComponent', () => {
         await whenStable(fixture);
 
         expect(component.hiddenCozyTokenCount).toBe(3);
+    });
+
+    describe('externalHiddenCount input', () => {
+        it('adds externalHiddenCount to the "+N more" label in compact mode', async () => {
+            fixture.componentInstance.compact = true;
+            fixture.detectChanges();
+
+            // Force width-collapse to hide 2 tokens
+            jest.spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').mockReturnValue({
+                width: 1
+            } as DOMRect);
+            jest.spyOn(component, 'getCombinedTokenWidth').mockReturnValue(100);
+            component.onResize();
+            fixture.detectChanges();
+            await whenStable(fixture);
+
+            // Set externalHiddenCount = 100
+            fixture.componentInstance.externalHiddenCount = 100;
+            fixture.detectChanges();
+            await whenStable(fixture);
+
+            const labelElement = fixture.nativeElement.querySelector('.fd-tokenizer-more');
+            expect(labelElement).toBeTruthy();
+            const labelText = labelElement?.textContent?.trim();
+            // Expected: 2 width-hidden + 100 external = 102
+            expect(labelText).toContain('102');
+        });
+
+        it('adds externalHiddenCount to the "+N more" label in cozy mode', async () => {
+            fixture.componentInstance.compact = false;
+            fixture.detectChanges();
+
+            // Force hiddenCozyTokenCount = 3
+            jest.spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').mockReturnValue({
+                left: 10
+            } as DOMRect);
+            component.tokenList.forEach((token, index) => {
+                jest.spyOn(token.tokenWrapperElement()!.nativeElement, 'getBoundingClientRect').mockReturnValue({
+                    right: index < 0 ? 5 : 15 // all tokens have right > containerLeft, so hiddenCozyTokenCount = 3
+                } as DOMRect);
+            });
+            jest.spyOn(component.tokenizerInnerEl.nativeElement, 'scrollWidth', 'get').mockReturnValue(50);
+            jest.spyOn(component.tokenizerInnerEl.nativeElement, 'clientWidth', 'get').mockReturnValue(10);
+
+            component.ngAfterViewInit();
+            await whenStable(fixture);
+
+            // Set externalHiddenCount = 50
+            fixture.componentInstance.externalHiddenCount = 50;
+            fixture.detectChanges();
+            await whenStable(fixture);
+
+            const labelElement = fixture.nativeElement.querySelector('.fd-tokenizer-more');
+            expect(labelElement).toBeTruthy();
+            const labelText = labelElement?.textContent?.trim();
+            // Expected: 3 hiddenCozyTokenCount + 50 external = 53
+            expect(labelText).toContain('53');
+        });
+
+        it('renders "+N more" indicator when externalHiddenCount > 0 even with no width-hidden tokens', async () => {
+            fixture.componentInstance.compact = true;
+            fixture.detectChanges();
+
+            // Wide viewport - no tokens width-hidden
+            jest.spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').mockReturnValue({
+                width: 1000
+            } as DOMRect);
+            jest.spyOn(component, 'getCombinedTokenWidth').mockReturnValue(100);
+            component.onResize();
+            fixture.detectChanges();
+            await whenStable(fixture);
+
+            // Set externalHiddenCount = 988
+            fixture.componentInstance.externalHiddenCount = 988;
+            fixture.detectChanges();
+            await whenStable(fixture);
+
+            const indicator = fixture.nativeElement.querySelector('.fd-tokenizer-more');
+            expect(indicator).not.toBeNull();
+            const labelText = indicator?.textContent?.trim();
+            expect(labelText).toContain('988');
+        });
+
+        it('does NOT render "+N more" indicator when externalHiddenCount === 0 and no width-hidden tokens', async () => {
+            fixture.componentInstance.compact = true;
+            fixture.detectChanges();
+
+            // Wide viewport - no width-collapse
+            jest.spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').mockReturnValue({
+                width: 1000
+            } as DOMRect);
+            jest.spyOn(component, 'getCombinedTokenWidth').mockReturnValue(100);
+            component.onResize();
+            fixture.detectChanges();
+            await whenStable(fixture);
+
+            // externalHiddenCount defaults to 0
+            const indicator = fixture.nativeElement.querySelector('.fd-tokenizer-more');
+            expect(indicator).toBeNull();
+        });
+
+        it('does NOT open internal popover when externalHiddenCount > 0 (compact mode)', async () => {
+            component.compactCollapse = true;
+            component.showOverflowPopover = true;
+            fixture.detectChanges();
+
+            // Force width-collapse
+            jest.spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').mockReturnValue({
+                width: 1
+            } as DOMRect);
+            jest.spyOn(component, 'getCombinedTokenWidth').mockReturnValue(100);
+            component.onResize();
+            fixture.detectChanges();
+            await whenStable(fixture);
+
+            // Set externalHiddenCount = 100
+            fixture.componentInstance.externalHiddenCount = 100;
+            fixture.detectChanges();
+            await whenStable(fixture);
+
+            const indicator = fixture.nativeElement.querySelector('.fd-tokenizer-more');
+            expect(indicator).not.toBeNull();
+
+            // Click the indicator
+            indicator?.click();
+            fixture.detectChanges();
+            await whenStable(fixture);
+
+            // Popover should NOT open
+            const popoverBody = document.querySelector('fd-popover-body');
+            expect(popoverBody).toBeNull();
+        });
+
+        it('emits moreClickedEvent when externalHiddenCount > 0 and indicator is clicked', async () => {
+            component.compactCollapse = true;
+            component.showOverflowPopover = true;
+            fixture.detectChanges();
+
+            // Force width-collapse
+            jest.spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').mockReturnValue({
+                width: 1
+            } as DOMRect);
+            jest.spyOn(component, 'getCombinedTokenWidth').mockReturnValue(100);
+            component.onResize();
+            fixture.detectChanges();
+            await whenStable(fixture);
+
+            // Set externalHiddenCount = 100
+            fixture.componentInstance.externalHiddenCount = 100;
+            fixture.detectChanges();
+            await whenStable(fixture);
+
+            let emitted = false;
+            component.moreClickedEvent.subscribe(() => {
+                emitted = true;
+            });
+
+            const indicator = fixture.nativeElement.querySelector('.fd-tokenizer-more');
+            indicator?.click();
+            fixture.detectChanges();
+
+            expect(emitted).toBe(true);
+        });
+
+        it('STILL opens internal popover when externalHiddenCount === 0 (default-preserving)', async () => {
+            component.compactCollapse = true;
+            component.showOverflowPopover = true;
+            fixture.detectChanges();
+
+            // Force width-collapse
+            jest.spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').mockReturnValue({
+                width: 1
+            } as DOMRect);
+            jest.spyOn(component, 'getCombinedTokenWidth').mockReturnValue(100);
+            component.onResize();
+            fixture.detectChanges();
+            await whenStable(fixture);
+
+            // externalHiddenCount defaults to 0 - no setInput call
+            const indicator = fixture.nativeElement.querySelector('.fd-tokenizer-more');
+            indicator?.click();
+            fixture.detectChanges();
+            await whenStable(fixture);
+
+            // Popover SHOULD open
+            const popoverBody = document.querySelector('fd-popover-body');
+            expect(popoverBody).not.toBeNull();
+        });
+
+        it('clears _showMoreElement when externalHiddenCount flips back to 0 (no width-collapse)', async () => {
+            fixture.componentInstance.compact = true;
+            fixture.detectChanges();
+
+            // Wide viewport — no width-hidden tokens
+            jest.spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').mockReturnValue({
+                width: 1000
+            } as DOMRect);
+            jest.spyOn(component, 'getCombinedTokenWidth').mockReturnValue(100);
+            component.onResize();
+            fixture.detectChanges();
+            await whenStable(fixture);
+
+            // Set externalHiddenCount = 988 — _showMoreElement flips to true
+            fixture.componentInstance.externalHiddenCount = 988;
+            fixture.detectChanges();
+            await whenStable(fixture);
+            expect(component._showMoreElement()).toBe(true);
+
+            // Flip back to 0 — _showMoreElement MUST flip back to false (currently stays stuck)
+            fixture.componentInstance.externalHiddenCount = 0;
+            fixture.detectChanges();
+            await whenStable(fixture);
+            expect(component._showMoreElement()).toBe(false);
+        });
     });
 });

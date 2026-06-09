@@ -60,6 +60,7 @@
                 [showOverflowPopover]="false"
                 [open]="open"
                 [tokenizerFocusable]="false"
+                [externalHiddenCount]="hiddenCount()"
                 (moreClickedEvent)="_moreClicked()"
                 class="fd-multi-input-tokenizer-custom"
                 tabindex="-1"
@@ -76,19 +77,6 @@
                     >
                         <span [innerHtml]="option.label"></span>
                     </fd-token>
-                }
-                @if (showOwnMoreIndicator()) {
-                    <span
-                        fd-tokenizer-extra
-                        class="fd-tokenizer-more"
-                        role="button"
-                        tabindex="0"
-                        (click)="_onMoreClicked()"
-                        (keydown.enter)="_onMoreClicked()"
-                        (keydown.space)="$event.preventDefault(); _onMoreClicked()"
-                    >
-                        {{ ('coreTokenizer.moreLabel' | fdTranslate: { count: hiddenCount() })() }}
-                    </span>
                 }
                 <input
                     type="text"

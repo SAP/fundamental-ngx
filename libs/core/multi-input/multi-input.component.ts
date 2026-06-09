@@ -466,14 +466,9 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         return all.slice(0, this.maxVisibleTokens());
     });
 
-    /** @hidden — count of selected tokens not currently rendered. Drives the "+N more" indicator. */
+    /** @hidden — count of selected tokens not currently rendered. Fed into tokenizer's externalHiddenCount input. */
     protected readonly hiddenCount = computed(
         () => this._selectedOptionsSignal().length - this.renderedTokens().length
-    );
-
-    /** @hidden — true when multi-input should show its own "+N more" indicator (tokenizer has no overflow indicator of its own). */
-    protected readonly showOwnMoreIndicator = computed(
-        () => this.hiddenCount() > 0 && !this.tokenizer?.hasInternalOverflowIndicator()
     );
 
     /** @hidden — the selected option list as a signal, derived from the view model. */

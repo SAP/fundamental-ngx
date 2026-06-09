@@ -8,10 +8,14 @@
         >
             <ng-content select="fd-token"></ng-content>
         </div>
-        @if (showOverflowPopover && (_contentDensityObserver.isCompactSignal() || compactCollapse)) {
+        @if (
+            showOverflowPopover &&
+            (_contentDensityObserver.isCompactSignal() || compactCollapse) &&
+            externalHiddenCount() === 0
+        ) {
             <ng-template [ngTemplateOutlet]="tokensOverflow"></ng-template>
         } @else {
-            @if (_showMoreElement() && _hiddenTokens.length > 0) {
+            @if (hasInternalOverflowIndicator()) {
                 <span
                     (click)="moreClicked()"
                     (keydown.enter)="moreClicked()"
@@ -25,12 +29,18 @@
                         {{
                             (
                                 'coreTokenizer.moreLabel'
-                                | fdTranslate: { count: moreTokensLeft.length + moreTokensRight.length }
+                                | fdTranslate
+                                    : { count: moreTokensLeft.length + moreTokensRight.length + externalHiddenCount() }
                             )()
                         }}
                     }
                     @if (!_contentDensityObserver.isCompactSignal() && !compactCollapse) {
-                        {{ ('coreTokenizer.moreLabel' | fdTranslate: { count: hiddenCozyTokenCount })() }}
+                        {{
+                            (
+                                'coreTokenizer.moreLabel'
+                                | fdTranslate: { count: hiddenCozyTokenCount + externalHiddenCount() }
+                            )()
+                        }}
                     }
                 </span>
             }
@@ -76,7 +86,7 @@
     </fd-popover>
 </ng-template>
 <ng-template #moreElement>
-    @if (_showMoreElement() && _hiddenTokens.length > 0) {
+    @if (hasInternalOverflowIndicator()) {
         <span
             (click)="moreClicked()"
             (keydown.enter)="moreClicked()"
@@ -90,12 +100,14 @@
                 {{
                     (
                         'coreTokenizer.moreLabel'
-                        | fdTranslate: { count: moreTokensLeft.length + moreTokensRight.length }
+                        | fdTranslate: { count: moreTokensLeft.length + moreTokensRight.length + externalHiddenCount() }
                     )()
                 }}
             }
             @if (!_contentDensityObserver.isCompactSignal() && !compactCollapse) {
-                {{ ('coreTokenizer.moreLabel' | fdTranslate: { count: hiddenCozyTokenCount })() }}
+                {{
+                    ('coreTokenizer.moreLabel' | fdTranslate: { count: hiddenCozyTokenCount + externalHiddenCount() })()
+                }}
             }
         </span>
     }
