@@ -7,7 +7,8 @@ Fundamental Library for Angular (fundamental-ngx) is a comprehensive Angular com
 ## Documentation
 
 - [Home](https://sap.github.io/fundamental-ngx/): Main documentation site with live examples with installation and setup guide
-- [Getting Started](https://sap.github.io/fundamental-ngx/#/core/new-component): Implementing A New Component For Fundamental Library For Angular
+- [Getting Started](https://sap.github.io/fundamental-ngx/#/core/home): Installation, setup, and quick-start guide
+- [Adding a New Component](https://sap.github.io/fundamental-ngx/#/core/new-component): Step-by-step guide for scaffolding and implementing a new component in the monorepo
 - [GitHub Repository](https://github.com/SAP/fundamental-ngx): Source code and issue tracking
 
 ## Packages
