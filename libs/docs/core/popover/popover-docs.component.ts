@@ -23,6 +23,7 @@ import { PopoverInsidePopoverExampleComponent } from './examples/popover-inside-
 import { PopoverLazyInitOfBodyExampleComponent } from './examples/popover-lazy-init-of-body/popover-lazy-init-of-body-example.component';
 import { PopoverMobileExampleComponent } from './examples/popover-mobile/popover-mobile-example.component';
 import { PopoverCdkPlacementExampleComponent } from './examples/popover-new-placement/popover-cdk-placement-example.component';
+import { PopoverNonDialogExampleComponent } from './examples/popover-non-dialog/popover-non-dialog-example.component';
 import { PopoverPlacementExampleComponent } from './examples/popover-placement/popover-placement-example.component';
 import { PopoverProgrammaticOpenExampleComponent } from './examples/popover-programmatic/popover-programmatic-open-example.component';
 import { PopoverResizableExampleComponent } from './examples/popover-resizable/popover-resizable-example.component';
@@ -47,6 +48,8 @@ const popoverPlacementTsSrc = 'popover-placement/popover-placement-example.compo
 const popoverPlacementScss = 'popover-placement/popover-placement-example.component.scss';
 const popoverDialogHtmlSrc = 'popover-dialog/popover-dialog-example.component.html';
 const popoverDialogTsSrc = 'popover-dialog/popover-dialog-example.component.ts';
+const popoverNonDialogHtmlSrc = 'popover-non-dialog/popover-non-dialog-example.component.html';
+const popoverNonDialogTsSrc = 'popover-non-dialog/popover-non-dialog-example.component.ts';
 const popoverInsidePopoverHtmlSrc = 'popover-inside-popover/popover-inside-popover-example.component.html';
 const popoverInsidePopoverTsSrc = 'popover-inside-popover/popover-inside-popover-example.component.ts';
 const popoverFillHSrc = 'popover-c-fill/popover-c-fill.component.html';
@@ -94,6 +97,7 @@ const dynamicContainerHeightTsSrc =
         PopoverPlacementExampleComponent,
         PopoverProgrammaticOpenExampleComponent,
         PopoverDialogExampleComponent,
+        PopoverNonDialogExampleComponent,
         PopoverCFillComponent,
         PopoverContainerExampleComponent,
         PopoverFocusExampleComponent,
@@ -258,6 +262,20 @@ export class PopoverDocsComponent {
             component: 'PopoverDialogExampleComponent',
             code: getAssetFromModuleAssets(popoverDialogTsSrc),
             fileName: 'popover-dialog-example'
+        }
+    ];
+
+    popoverNonDialogExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(popoverNonDialogHtmlSrc),
+            fileName: 'popover-non-dialog-example'
+        },
+        {
+            language: 'typescript',
+            component: 'PopoverNonDialogExampleComponent',
+            code: getAssetFromModuleAssets(popoverNonDialogTsSrc),
+            fileName: 'popover-non-dialog-example'
         }
     ];
 

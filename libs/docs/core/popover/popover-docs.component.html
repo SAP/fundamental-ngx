@@ -157,6 +157,34 @@
 
 <separator></separator>
 
+<fd-docs-section-title id="non-dialog" componentName="popover">
+    Non-dialog popover (region role)
+</fd-docs-section-title>
+<description>
+    <p>
+        Use <code>[bodyRole]="'region'"</code> (or <code>null</code>) when the popover is a non-modal disclosure rather
+        than a dialog. Match the role to the popover's actual ARIA semantics.
+    </p>
+    <p>
+        <strong>When to use:</strong> The default <code>role="dialog"</code> is appropriate for modal-ish surfaces that
+        interrupt the user's flow. For inline disclosure widgets — quick filters, info popovers, dropdowns —
+        <code>'region'</code> with <code>[bodyAriaLabel]</code> describes the surface accurately. When the trigger's
+        <code>aria-haspopup</code> already carries the relationship, <code>null</code> removes the role attribute
+        entirely.
+    </p>
+    <p>
+        <strong>Accessibility:</strong> When <code>bodyRole="dialog"</code>, WCAG requires an accessible name — provide
+        one via <code>[bodyAriaLabel]</code> or <code>[bodyAriaLabelledBy]</code>. Without a name, axe-core raises
+        <code>aria-dialog-name</code> violations.
+    </p>
+</description>
+<component-example>
+    <fd-popover-non-dialog-example></fd-popover-non-dialog-example>
+</component-example>
+<code-example [exampleFiles]="popoverNonDialogExample"></code-example>
+
+<separator></separator>
+
 <fd-docs-section-title id="popovers-inside-popover" componentName="popover"> Nested Popovers </fd-docs-section-title>
 <description>
     <p>
