@@ -210,6 +210,354 @@ export const USAGE_GUIDES: Record<string, UsageGuide> = {
     setup: _setupGuide,
     installation: _setupGuide,
 
+    i18n: {
+        component: 'i18n',
+        summary:
+            '@fundamental-ngx/i18n provides signal-based translations via FD_LANGUAGE_SIGNAL. ' +
+            'FdTranslatePipe returns a Signal<string> — call it in templates: {{ ("key" | fdTranslate)() }}. ' +
+            'Override translations globally with a custom FD_LANGUAGE_SIGNAL provider, ' +
+            'or locally per component/subtree using patchLanguage().',
+        decisionTree: [
+            {
+                question: 'What do you need to do?',
+                options: [
+                    {
+                        answer: 'Translate a key in a template',
+                        recommendation:
+                            'Import FdTranslatePipe and use the fdTranslate pipe. ' +
+                            'The pipe returns a Signal<string> — you MUST call it with () in the template.',
+                        example: `// component.ts
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+
+@Component({
+    imports: [FdTranslatePipe],
+    template: \`
+        <!-- Simple key -->
+        <button>{{ ('coreButton.save' | fdTranslate)() }}</button>
+
+        <!-- With interpolation arguments -->
+        <span>{{ ('coreList.itemCount' | fdTranslate: { count: items.length })() }}</span>
+    \`
+})
+export class MyComponent {}`
+                    },
+                    {
+                        answer: 'Switch the language at runtime',
+                        recommendation:
+                            'Inject FD_LANGUAGE_SIGNAL (a WritableSignal<FdLanguage>) and call .set() with a built-in language object. ' +
+                            'Built-in languages are exported from @fundamental-ngx/i18n (e.g. FD_LANGUAGE_GERMAN, FD_LANGUAGE_FRENCH).',
+                        example: `import { inject } from '@angular/core';
+import { FD_LANGUAGE_SIGNAL, FD_LANGUAGE_GERMAN, FD_LANGUAGE_FRENCH } from '@fundamental-ngx/i18n';
+
+@Component({ ... })
+export class AppComponent {
+    private readonly langSignal = inject(FD_LANGUAGE_SIGNAL);
+
+    switchToGerman(): void {
+        this.langSignal.set(FD_LANGUAGE_GERMAN);
+    }
+
+    switchToFrench(): void {
+        this.langSignal.set(FD_LANGUAGE_FRENCH);
+    }
+}`
+                    },
+                    {
+                        answer: 'Provide custom translations for the whole app',
+                        recommendation:
+                            'Provide a custom WritableSignal<FdLanguage> for FD_LANGUAGE_SIGNAL in app.config.ts. ' +
+                            'Start from FD_LANGUAGE_ENGLISH and spread your overrides. ' +
+                            'Only override the keys you need — FdLanguage has hundreds of keys.',
+                        example: `// app.config.ts
+import { ApplicationConfig, signal } from '@angular/core';
+import { FD_LANGUAGE_SIGNAL, FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n';
+
+const myLanguage = {
+    ...FD_LANGUAGE_ENGLISH,
+    locale: 'en',
+    // Override specific component translations
+    coreButton: {
+        ...FD_LANGUAGE_ENGLISH.coreButton,
+        save: 'Save Changes',
+        cancel: 'Discard'
+    }
+};
+
+export const appConfig: ApplicationConfig = {
+    providers: [
+        {
+            provide: FD_LANGUAGE_SIGNAL,
+            useValue: signal(myLanguage)
+        }
+    ]
+};`
+                    },
+                    {
+                        answer: 'Override translations for a single component or subtree',
+                        recommendation:
+                            'Use patchLanguage() in the component providers array. ' +
+                            'It creates a computed signal that inherits the parent language and merges your patch on top. ' +
+                            'Changing the parent language propagates through — the patch stays applied.',
+                        example: `import { patchLanguage } from '@fundamental-ngx/i18n';
+
+@Component({
+    selector: 'app-my-form',
+    template: '...',
+    providers: [
+        patchLanguage({
+            // Only override what you need for this subtree
+            platformButton: {
+                save: 'Submit Form',
+                cancel: 'Go Back'
+            }
+        })
+    ]
+})
+export class MyFormComponent {}
+
+// Dynamic patch based on current language values:
+@Component({
+    providers: [
+        patchLanguage((currentLang) => ({
+            coreButton: {
+                save: currentLang.coreButton.save.toUpperCase()
+            }
+        }))
+    ]
+})
+export class MyUppercaseComponent {}`
+                    },
+                    {
+                        answer: 'Read a translation key in TypeScript (not in a template)',
+                        recommendation:
+                            'Inject FD_LANGUAGE_SIGNAL and use computed() to derive the translated string. ' +
+                            'Use TranslationResolver to resolve a key against a language object.',
+                        example: `import { computed, inject } from '@angular/core';
+import { FD_LANGUAGE_SIGNAL, TranslationResolver } from '@fundamental-ngx/i18n';
+
+@Component({ ... })
+export class MyComponent {
+    private readonly langSignal = inject(FD_LANGUAGE_SIGNAL);
+    private readonly resolver = new TranslationResolver();
+
+    // Reactive computed string — updates when language changes
+    readonly saveLabel = computed(() =>
+        this.resolver.resolve(this.langSignal(), 'coreButton.save') || 'Save'
+    );
+}`
+                    }
+                ]
+            }
+        ],
+        commonPitfalls: [
+            'FdTranslatePipe returns Signal<string>, NOT a plain string. In templates you MUST add () to invoke the signal: {{ ("key" | fdTranslate)() }}. Omitting () renders "[object Object]" instead of the translation.',
+            'FD_LANGUAGE is the old Observable-based token — it is deprecated. Always use FD_LANGUAGE_SIGNAL (the WritableSignal<FdLanguage> token) in new code.',
+            "Auto-detection is on by default: FD_LANGUAGE_SIGNAL reads Angular's LOCALE_ID at bootstrap and picks the closest built-in language. If you want to suppress this and always start with English, provide FD_LANGUAGE_AUTO_DETECT with value false.",
+            'When providing a custom FD_LANGUAGE_SIGNAL via useValue, wrap your language object in signal(): { provide: FD_LANGUAGE_SIGNAL, useValue: signal(myLanguage) }. Providing a plain object (not a signal) will break all FdTranslatePipe consumers.',
+            "patchLanguage() uses SkipSelf to look up the parent FD_LANGUAGE_SIGNAL. It must be placed in a component's providers array, not in the root injector. If you add it to app.config.ts providers, SkipSelf will find nothing and throw.",
+            'FdLanguage has hundreds of deeply nested keys (coreButton, coreCalendar, platformTable, etc.). When creating a full custom language, spread from FD_LANGUAGE_ENGLISH first and override only the keys you need — do not construct the object from scratch.',
+            'Translation keys with interpolation use {{ param }} syntax in the string values (e.g. "{{ count }} items selected"). Pass the params as the second argument to fdTranslate: ("key" | fdTranslate: { count: 5 })(). The resolver replaces {{ param }} with the provided value.',
+            "FdTranslatePipe is standalone — import it directly in each component's imports array. There is no shared module that re-exports it."
+        ],
+        compositionPattern: `// ── Minimal template usage ────────────────────────────────────────────
+// 1. Import the pipe
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+
+@Component({
+    imports: [FdTranslatePipe],
+    template: \`
+        <button>{{ ('coreButton.save' | fdTranslate)() }}</button>
+        <span>{{ ('coreList.itemCount' | fdTranslate: { count: 3 })() }}</span>
+    \`
+})
+export class MyComponent {}
+
+// ── App-wide language switch ───────────────────────────────────────────
+// app.config.ts: provide a custom language signal
+import { signal } from '@angular/core';
+import { FD_LANGUAGE_SIGNAL, FD_LANGUAGE_ENGLISH, FD_LANGUAGE_GERMAN } from '@fundamental-ngx/i18n';
+
+export const appConfig: ApplicationConfig = {
+    providers: [
+        { provide: FD_LANGUAGE_SIGNAL, useValue: signal(FD_LANGUAGE_ENGLISH) }
+    ]
+};
+
+// In a language-switcher component:
+private readonly lang = inject(FD_LANGUAGE_SIGNAL);
+switchToGerman(): void { this.lang.set(FD_LANGUAGE_GERMAN); }
+
+// ── Subtree override with patchLanguage ────────────────────────────────
+import { patchLanguage } from '@fundamental-ngx/i18n';
+
+@Component({
+    providers: [
+        patchLanguage({
+            coreButton: { save: 'Save Changes', cancel: 'Discard' }
+        })
+    ]
+})
+export class MyFormComponent {}`,
+        relatedComponents: [],
+        resources: [
+            'i18n source — libs/i18n/src/lib/utils/tokens.ts',
+            'Available languages — libs/i18n/src/lib/languages/ (40+ built-in)',
+            'FdLanguage model — libs/i18n/src/lib/models/fd-language.ts',
+            'patchLanguage utility — libs/i18n/src/lib/utils/patch-language.ts'
+        ]
+    },
+
+    fdtranslatepipe: {
+        component: 'FdTranslatePipe',
+        summary:
+            'Alias for the i18n usage guide. FdTranslatePipe translates a key to a Signal<string>. ' +
+            'Call it in templates with (): {{ ("coreButton.save" | fdTranslate)() }}.',
+        decisionTree: [],
+        commonPitfalls: [
+            'Returns Signal<string> — must be invoked with () in templates. See the i18n guide for full details: get_usage_guide("i18n")'
+        ],
+        compositionPattern: `{{ ('coreButton.save' | fdTranslate)() }}
+{{ ('coreList.itemCount' | fdTranslate: { count: n })() }}`,
+        relatedComponents: []
+    },
+
+    'migrate-from-ui5-webcomponents-ngx': {
+        component: 'migrate-from-ui5-webcomponents-ngx',
+        summary:
+            'Migration guide from the deprecated @ui5/webcomponents-ngx package to @fundamental-ngx/ui5-webcomponents. ' +
+            'Four categories of breaking changes: camelCase Angular property bindings (vs kebab-case HTML attributes), ' +
+            'ValueState enum renames, automatic ThemingService bridge, and additionalText replacing status on list items.',
+        decisionTree: [
+            {
+                question: 'What do you need to migrate?',
+                options: [
+                    {
+                        answer: 'Property/attribute binding names (camelCase vs kebab-case)',
+                        recommendation:
+                            '@ui5/webcomponents-ngx bound HTML attributes using kebab-case in templates. ' +
+                            '@fundamental-ngx/ui5-webcomponents exposes proper Angular @Input() signals with camelCase names. ' +
+                            'All bindings must switch from attribute form to Angular property binding form.',
+                        example: `// BEFORE — @ui5/webcomponents-ngx (kebab-case attribute binding)
+<ui5-input value-state="Error" no-typeahead accessible-name="Search"></ui5-input>
+<ui5-button accessible-name-ref="labelId"></ui5-button>
+<ui5-table no-data-text="No results"></ui5-table>
+
+// AFTER — @fundamental-ngx/ui5-webcomponents (camelCase Angular inputs)
+<ui5-input [valueState]="'Negative'" [noTypeahead]="true" [accessibleName]="'Search'"></ui5-input>
+<ui5-button [accessibleNameRef]="'labelId'"></ui5-button>
+<ui5-table [noDataText]="'No results'"></ui5-table>
+
+// Rule: convert-kebab-to-camel for every attribute.
+// Static values that don't change still need [] binding for type safety.
+// Exception: standard HTML attributes (id, class, style, slot) stay as-is.`
+                    },
+                    {
+                        answer: 'ValueState enum values',
+                        recommendation:
+                            'The UI5 ValueState enum was renamed in UI5 Web Components 2.x. ' +
+                            'Error → Negative, Warning → Critical, Success → Positive. ' +
+                            'None and Information are unchanged.',
+                        example: `// BEFORE — @ui5/webcomponents-ngx ValueState values
+[valueState]="'Error'"      // validation error (red)
+[valueState]="'Warning'"    // caution (orange/yellow)
+[valueState]="'Success'"    // valid (green)
+[valueState]="'Information'" // informational (blue) — unchanged
+[valueState]="'None'"        // default — unchanged
+
+// AFTER — @fundamental-ngx/ui5-webcomponents ValueState values
+[valueState]="'Negative'"    // was Error
+[valueState]="'Critical'"    // was Warning
+[valueState]="'Positive'"    // was Success
+[valueState]="'Information'" // unchanged
+[valueState]="'None'"        // unchanged
+
+// Type: valueState accepts ValueState enum or its string literals.
+// Import if you want the enum: import { ValueState } from '@ui5/webcomponents/dist/enums/ValueState.js';
+// Or just pass the string literal directly — Angular templates accept both.`
+                    },
+                    {
+                        answer: 'ThemingService and SAP theme propagation',
+                        recommendation:
+                            "@ui5/webcomponents-ngx required calling UI5's setTheme() and setLanguage() manually " +
+                            'to keep UI5 components in sync with the app theme. ' +
+                            '@fundamental-ngx/ui5-webcomponents automatically bridges ThemingService to UI5 Web Components — ' +
+                            'no manual calls needed. Remove any manual setTheme() / setLanguage() calls from your app.',
+                        example: `// BEFORE — @ui5/webcomponents-ngx: manual theme sync required
+import { setTheme } from '@ui5/webcomponents-base/dist/config/Theme.js';
+import { setLanguage } from '@ui5/webcomponents-base/dist/config/Language.js';
+
+// Called on startup and whenever theme changes:
+setTheme('sap_horizon');
+setLanguage('de');
+
+// AFTER — @fundamental-ngx/ui5-webcomponents: nothing needed
+// ThemingService is automatically bridged (PR #14188).
+// UI5 components receive the active theme and FD_LANGUAGE_SIGNAL locale automatically.
+// Simply configure ThemingService as usual in app.config.ts:
+provideTheming({ defaultTheme: 'sap_horizon' }),
+themingInitializer()
+// That's it — UI5 components will match the app theme.`
+                    },
+                    {
+                        answer: 'additionalText on list and option items (replaces status)',
+                        recommendation:
+                            'In @ui5/webcomponents-ngx, ui5-li (list item) had a "status" input for secondary text. ' +
+                            'In @fundamental-ngx/ui5-webcomponents, ui5-option and ui5-combobox-item use "additionalText" for the same purpose.',
+                        example: `// BEFORE — @ui5/webcomponents-ngx list item
+<ui5-li [status]="'Active'">Alice Johnson</ui5-li>
+
+// AFTER — @fundamental-ngx/ui5-webcomponents option
+<ui5-option [additionalText]="'Active'">Alice Johnson</ui5-option>
+
+// For combobox items:
+// BEFORE
+<ui5-combobox-item [status]="'Available'">Engineering</ui5-combobox-item>
+
+// AFTER
+<ui5-combobox-item [additionalText]="'Available'">Engineering</ui5-combobox-item>
+
+// Note: additionalText is displayed in the trailing section of the option row.`
+                    }
+                ]
+            }
+        ],
+        commonPitfalls: [
+            'Package name change: replace @ui5/webcomponents-ngx with @fundamental-ngx/ui5-webcomponents. The old package declares peerDependencies on @angular/core ^20 and is incompatible with Angular 21. Do not use --legacy-peer-deps to force it in.',
+            'Import paths changed: old package used @ui5/webcomponents-ngx/dist/generated/... New package uses @fundamental-ngx/ui5-webcomponents/<component-name> (e.g. @fundamental-ngx/ui5-webcomponents/input, @fundamental-ngx/ui5-webcomponents/button).',
+            'All kebab-case attribute bindings must become camelCase Angular property bindings. A template like value-state="Error" will silently pass "Error" as a string to the web component\'s HTML attribute (not the Angular input), bypassing type checking and possibly having no effect.',
+            'ValueState "Error" no longer exists — the type now only accepts "None" | "Positive" | "Critical" | "Negative" | "Information". Passing the old string "Error" compiles but produces no visual error state at runtime. Always use "Negative" for validation errors.',
+            'Do not call setTheme() or setLanguage() from @ui5/webcomponents-base manually. ThemingService now owns the UI5 theme; calling setTheme() directly will cause theme drift between fd- and ui5- components in the same app.',
+            '@fundamental-ngx/cdk is a required peer dependency of @fundamental-ngx/ui5-webcomponents that npm does not always install automatically. If you see import resolution errors after migration, run: npm install @fundamental-ngx/cdk.',
+            'All three @fundamental-ngx packages (core, cdk, ui5-webcomponents) must be the same semver minor version. Mixing 0.61.x with 0.62.x causes peer-dep conflicts at install time.'
+        ],
+        compositionPattern: `// ── Full migration checklist ──────────────────────────────────────────
+// 1. Replace package
+npm uninstall @ui5/webcomponents-ngx
+npm install @fundamental-ngx/ui5-webcomponents @fundamental-ngx/cdk
+
+// 2. Replace imports in TypeScript files
+// Old:  import { Ui5InputComponent } from '@ui5/webcomponents-ngx/dist/generated/...'
+// New:  import { InputComponent } from '@fundamental-ngx/ui5-webcomponents/input'
+//       import { ButtonComponent } from '@fundamental-ngx/ui5-webcomponents/button'
+//       import { SelectComponent, OptionComponent } from '@fundamental-ngx/ui5-webcomponents/select'
+
+// 3. Convert template bindings from kebab to camelCase
+// Old:  <ui5-input value-state="Error" accessible-name="Email">
+// New:  <ui5-input [valueState]="'Negative'" [accessibleName]="'Email'">
+
+// 4. Rename ValueState values
+// Error → Negative | Warning → Critical | Success → Positive
+
+// 5. Remove manual setTheme() / setLanguage() calls
+
+// 6. Rename status → additionalText on ui5-option and ui5-combobox-item`,
+        relatedComponents: ['ui5-input', 'ui5-button', 'ui5-select', 'ui5-option', 'ui5-combobox-item'],
+        resources: [
+            'New package: @fundamental-ngx/ui5-webcomponents',
+            'UI5 Web Components 2.x migration: https://sap.github.io/ui5-webcomponents/docs/migration-guides/to-version-2/'
+        ]
+    },
+
     ui5: {
         component: 'ui5-webcomponents',
         summary:
@@ -368,7 +716,8 @@ this._dialogService.open(MyDialogComponent, {
             'Focus not trapped inside dialog — ensure focusTrapped: true in DialogConfig (default is true).',
             'Dialog not closing on Escape — check that escKeyClosable is not set to false in config.',
             'ARIA warnings — always provide ariaLabelledBy pointing to the dialog title element ID.',
-            'Dialog footer buttons must use <fd-button-bar> (from @fundamental-ngx/core/bar), NOT <button fd-button>. fd-button-bar is a standalone component that wraps a button with the fd-bar__element host class and correct dialog padding. Import ButtonBarComponent, not ButtonComponent, in the dialog component.'
+            'Dialog footer buttons must use <fd-button-bar> (from @fundamental-ngx/core/bar), NOT <button fd-button>. fd-button-bar is a standalone component that wraps a button with the fd-bar__element host class and correct dialog padding. Import ButtonBarComponent, not ButtonComponent, in the dialog component.',
+            "NG0309 runtime error — do NOT add cdkScrollable or fdScrollbar attributes to <fd-dialog-body>. Doing so triggers Angular CDK's CdkScrollable which requires a scroll strategy parent that is not present in the dialog context, causing an NG0309 injection error at runtime. fd-dialog-body manages its own scrolling internally; no extra scroll directives are needed."
         ],
         compositionPattern: `<fd-dialog>
   <fd-dialog-header>
