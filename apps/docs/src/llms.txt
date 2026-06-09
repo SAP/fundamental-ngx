@@ -7,7 +7,8 @@ Fundamental Library for Angular (fundamental-ngx) is a comprehensive Angular com
 ## Documentation
 
 - [Home](https://sap.github.io/fundamental-ngx/): Main documentation site with live examples with installation and setup guide
-- [Getting Started](https://sap.github.io/fundamental-ngx/#/core/new-component): Implementing A New Component For Fundamental Library For Angular
+- [Getting Started](https://sap.github.io/fundamental-ngx/#/core/home): Installation, setup, and quick-start guide
+- [Adding a New Component](https://sap.github.io/fundamental-ngx/#/core/new-component): Step-by-step guide for scaffolding and implementing a new component in the monorepo
 - [GitHub Repository](https://github.com/SAP/fundamental-ngx): Source code and issue tracking
 
 ## Packages
@@ -52,6 +53,30 @@ Customer experience components.
 - [Documentation](https://sap.github.io/fundamental-ngx/#/cx)
 
 ### Component Examples
+
+#### Machine-Readable Catalog
+
+For static analysis and component discovery, see the comprehensive machine-readable catalog:
+
+**[components.json](https://sap.github.io/fundamental-ngx/components.json)** - All 1,000+ components with selectors, inputs, outputs, methods, and examples.
+
+Format:
+```
+{
+  "version": "0.63.0-rc.2",
+  "components": [
+    {
+      "name": "ButtonComponent",
+      "selector": "[fd-button], fd-button",
+      "library": "@fundamental-ngx/core",
+      "category": "button",
+      "inputs": [...],
+      "outputs": [...],
+      "examples": [...]
+    }
+  ]
+}
+```
 
 #### Core Components
 Common UI components including: Button, Checkbox, Dialog, Form, Icon, Input, List, Menu, Popover, Select, Switch, Table, Tabs, Toast, Toolbar, and many more.
@@ -113,6 +138,10 @@ Base utilities and shared types for all UI5 Web Components Angular wrappers. Typ
 - [npm](https://www.npmjs.com/package/@fundamental-ngx/ui5-webcomponents-base)
 
 ### Component Examples
+
+#### Machine-Readable Catalog
+
+For static analysis and component discovery, see [components.json](https://sap.github.io/fundamental-ngx/components.json) - includes all UI5 Web Component wrappers with full selector information.
 
 #### Core UI5 Components
 Common UI elements including: Button, Input, Dialog, List, Table, Card, Panel, DatePicker, TimePicker, Select, ComboBox, MultiComboBox, and more.

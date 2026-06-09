@@ -5,12 +5,15 @@ import { PopoverService, PopoverTemplate } from './popover.service';
 
 @Component({
     template: `
-        <fd-popover-body></fd-popover-body>
-        <ng-template #templateRef>
-            <div class="template-content">Template Content</div>
-        </ng-template>
-        <ng-container #container></ng-container>
-        <button #triggerElement class="trigger-button">Open Popover</button>
+        <div #scrollContainer style="overflow: auto; height: 300px">
+            <div #sibling class="sibling">Sibling element</div>
+            <fd-popover-body></fd-popover-body>
+            <ng-template #templateRef>
+                <div class="template-content">Template Content</div>
+            </ng-template>
+            <ng-container #container></ng-container>
+            <button #triggerElement class="trigger-button">Open Popover</button>
+        </div>
     `,
     standalone: true,
     imports: [PopoverBodyComponent],
@@ -21,6 +24,8 @@ class PopoverTestComponent {
     @ViewChild('container', { read: ViewContainerRef }) container: ViewContainerRef;
     @ViewChild('templateRef') template: TemplateRef<any>;
     @ViewChild('triggerElement', { read: ElementRef }) triggerRef: ElementRef;
+    @ViewChild('sibling', { read: ElementRef }) siblingRef: ElementRef;
+    @ViewChild('scrollContainer', { read: ElementRef }) scrollContainerRef: ElementRef;
 
     constructor(public popoverService: PopoverService) {}
 
@@ -560,6 +565,136 @@ describe('PopoverService', () => {
 
             service.close();
             expect(service.isOpen()).toBe(false);
+        });
+    });
+
+    describe('layout shift repositioning (MutationObserver)', () => {
+        let mutationCallback: MutationCallback;
+        let observeSpy: jest.Mock;
+        let disconnectSpy: jest.Mock;
+        let updatePositionSpy: jest.SpyInstance;
+
+        beforeEach(() => {
+            observeSpy = jest.fn();
+            disconnectSpy = jest.fn();
+
+            // Capture the MutationObserver callback so tests can trigger it manually.
+            jest.spyOn(window, 'MutationObserver' as any).mockImplementation((...args: unknown[]) => {
+                const [cb] = args as [MutationCallback];
+                mutationCallback = cb;
+                return { observe: observeSpy, disconnect: disconnectSpy, takeRecords: jest.fn() };
+            });
+
+            // Make requestAnimationFrame synchronous so mutation callbacks resolve immediately.
+            jest.spyOn(window, 'requestAnimationFrame').mockImplementation((cb) => {
+                cb(0);
+                return 0;
+            });
+
+            service.initialise(component.triggerRef, undefined, component.getPopoverTemplateData());
+            fixture.detectChanges();
+        });
+
+        afterEach(() => {
+            jest.restoreAllMocks();
+        });
+
+        it('should start observing the scrollable ancestor when the popover opens', () => {
+            service.open();
+            fixture.detectChanges();
+
+            expect(observeSpy).toHaveBeenCalled();
+            const [target, opts] = observeSpy.mock.calls[0];
+            expect(target).toBe(component.scrollContainerRef.nativeElement);
+            expect(opts.subtree).toBe(true);
+            expect(opts.childList).toBe(true);
+            expect(opts.attributes).toBe(true);
+        });
+
+        it('should observe only style and class attributes to avoid unnecessary callbacks', () => {
+            service.open();
+            fixture.detectChanges();
+
+            const opts = observeSpy.mock.calls[0][1];
+            expect(opts.attributeFilter).toEqual(['style', 'class']);
+        });
+
+        it('should disconnect the observer when the popover closes', () => {
+            service.open();
+            fixture.detectChanges();
+
+            service.close();
+            fixture.detectChanges();
+
+            expect(disconnectSpy).toHaveBeenCalled();
+        });
+
+        it('should call updatePosition when a child element is removed from the DOM', () => {
+            service.open();
+            fixture.detectChanges();
+
+            updatePositionSpy = jest.spyOn(service['_overlayRef'], 'updatePosition');
+
+            // Simulate childList mutation (element removed from DOM above the trigger).
+            mutationCallback([{ type: 'childList' } as MutationRecord], {} as MutationObserver);
+
+            expect(updatePositionSpy).toHaveBeenCalled();
+        });
+
+        it('should call updatePosition when a sibling style attribute changes (display:none)', () => {
+            service.open();
+            fixture.detectChanges();
+
+            updatePositionSpy = jest.spyOn(service['_overlayRef'], 'updatePosition');
+
+            // Simulate attribute mutation (e.g. display:none set inline by autoDismiss directive).
+            mutationCallback(
+                [{ type: 'attributes', attributeName: 'style' } as MutationRecord],
+                {} as MutationObserver
+            );
+
+            expect(updatePositionSpy).toHaveBeenCalled();
+        });
+
+        it('should call updatePosition when a sibling class attribute changes', () => {
+            service.open();
+            fixture.detectChanges();
+
+            updatePositionSpy = jest.spyOn(service['_overlayRef'], 'updatePosition');
+
+            mutationCallback(
+                [{ type: 'attributes', attributeName: 'class' } as MutationRecord],
+                {} as MutationObserver
+            );
+
+            expect(updatePositionSpy).toHaveBeenCalled();
+        });
+
+        it('should not start the observer when no trigger element is set', () => {
+            // Reinitialise without a trigger (deactivate first to clear the existing one).
+            service.deactivate();
+            // Reset service trigger element by opening without initialising a new trigger.
+            service['_triggerElement'] = null as any;
+
+            service.open();
+
+            expect(observeSpy).not.toHaveBeenCalled();
+        });
+
+        it('should fall back to document.body when no scrollable ancestor exists', () => {
+            // The triggerElement in the default template has a scrollable parent (scrollContainer).
+            // Point the trigger directly at document.body's child to test the fallback.
+            const orphan = document.createElement('button');
+            document.body.appendChild(orphan);
+            service.updateTriggerElement(orphan);
+
+            service.open();
+            fixture.detectChanges();
+
+            const observedTarget = observeSpy.mock.calls[0]?.[0];
+            expect(observedTarget).toBe(document.body);
+
+            document.body.removeChild(orphan);
         });
     });
 });

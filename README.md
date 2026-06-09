@@ -225,6 +225,18 @@ Install one: `npx skills add SAP/fundamental-ngx --skill build-page-layout`.
 
 See the [full MCP server documentation](libs/mcp-server) for available tools and schema details.
 
+### Component Catalog
+
+A machine-readable JSON catalog of all 1,000+ components is published at:
+
+```
+https://sap.github.io/fundamental-ngx/components.json
+```
+
+The catalog includes component selectors, inputs, outputs, methods, and code examples. It's regenerated with every release and enables static analysis, component discovery, and documentation generation.
+
+See [CATALOG.md](CATALOG.md) for format details and usage examples.
+
 ## Known Issues
 
 See [Issues](https://github.com/SAP/fundamental-ngx/issues).
