@@ -71,7 +71,7 @@
                         "output": "./assets/docs/skills"
                     },
                     {
-                        "input": "./libs/docs/shared",
+                        "input": ".",
                         "glob": "NEW_COMPONENT.md",
                         "output": "./assets"
                     },
