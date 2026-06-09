@@ -273,3 +273,33 @@ describe('InputMessageGroupWithTemplate — focus transfer between two groups', 
         expect(host.group1._popover.isOpen()).toBe(true);
     }));
 });
+
+describe('InputMessageGroupWithTemplate — popover aria-label (#14260)', () => {
+    let fixture: ComponentFixture<SingleGroupHostComponent>;
+    let groupInput: HTMLInputElement;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [SingleGroupHostComponent]
+        }).compileComponents();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(SingleGroupHostComponent);
+        fixture.detectChanges();
+        groupInput = fixture.nativeElement.querySelector('#group-input');
+    });
+
+    it('renders the popover body with a non-empty aria-label', fakeAsync(() => {
+        focusin(groupInput);
+        fixture.detectChanges();
+        tick();
+        fixture.detectChanges();
+
+        const body = document.querySelector('.cdk-overlay-container fd-popover-body');
+        expect(body?.getAttribute('role')).toBe('dialog');
+        const label = body?.getAttribute('aria-label');
+        expect(label).toBeTruthy();
+        expect(label?.length).toBeGreaterThan(0);
+    }));
+});
