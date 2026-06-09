@@ -558,7 +558,7 @@ describe('PopoverComponent bodyRole and bodyAriaLabelledBy inputs (#14260)', () 
         fixture.detectChanges();
         tick();
 
-        const body = document.querySelector('fd-popover-body');
+        const body = document.querySelector('.cdk-overlay-container fd-popover-body');
         expect(body?.getAttribute('role')).toBe('dialog');
     }));
 
@@ -570,7 +570,7 @@ describe('PopoverComponent bodyRole and bodyAriaLabelledBy inputs (#14260)', () 
         fixture.detectChanges();
         tick();
 
-        expect(document.querySelector('fd-popover-body')?.getAttribute('role')).toBe('region');
+        expect(document.querySelector('.cdk-overlay-container fd-popover-body')?.getAttribute('role')).toBe('region');
     }));
 
     it('binds [bodyRole]="null" so no role attribute is rendered', fakeAsync(() => {
@@ -581,7 +581,7 @@ describe('PopoverComponent bodyRole and bodyAriaLabelledBy inputs (#14260)', () 
         fixture.detectChanges();
         tick();
 
-        expect(document.querySelector('fd-popover-body')?.hasAttribute('role')).toBe(false);
+        expect(document.querySelector('.cdk-overlay-container fd-popover-body')?.hasAttribute('role')).toBe(false);
     }));
 
     it('binds [bodyAriaLabelledBy] to popover-body [attr.aria-labelledby]', fakeAsync(() => {
@@ -592,7 +592,7 @@ describe('PopoverComponent bodyRole and bodyAriaLabelledBy inputs (#14260)', () 
         fixture.detectChanges();
         tick();
 
-        expect(document.querySelector('fd-popover-body')?.getAttribute('aria-labelledby')).toBe('my-label-id');
+        expect(document.querySelector('.cdk-overlay-container fd-popover-body')?.getAttribute('aria-labelledby')).toBe('my-label-id');
     }));
 });
 

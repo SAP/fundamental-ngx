@@ -182,6 +182,29 @@ export class PopoverComponent implements AfterViewInit, AfterContentInit, OnDest
     /** ARIA label for the popover body */
     readonly bodyAriaLabel = input<string | null>(null);
 
+    /**
+     * ARIA role for the popover body. Default: 'dialog' (back-compat).
+     *
+     * When 'dialog', WCAG requires an accessible name — provide one via
+     * [bodyAriaLabel] or [bodyAriaLabelledBy]. Without a name, axe-core
+     * raises aria-dialog-name violations.
+     *
+     * Set to null when the popover is a non-modal disclosure widget and
+     * the trigger's aria-haspopup already carries the relationship (no role
+     * attribute is rendered). Other valid values: 'region', 'menu', 'listbox',
+     * 'tooltip' — match the role to the popover's actual semantics.
+     *
+     * See https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/ for guidance.
+     */
+    readonly bodyRole = input<string | null>('dialog');
+
+    /**
+     * ID of the element that labels the popover body. Alternative to
+     * [bodyAriaLabel] when the label already exists in the DOM (e.g. the
+     * trigger's text). Sets aria-labelledby on the popover body.
+     */
+    readonly bodyAriaLabelledBy = input<string | null>(null);
+
     /** Two-way binding for popover open state */
     readonly isOpen = model(false);
 
@@ -277,7 +300,9 @@ export class PopoverComponent implements AfterViewInit, AfterContentInit, OnDest
             closeOnNavigation: this.closeOnNavigation() ?? cfg.closeOnNavigation ?? true,
             fixedPosition: this.fixedPosition() ?? cfg.fixedPosition ?? false,
             resizable: this.resizable() ?? cfg.resizable ?? false,
-            bodyAriaLabel: this.bodyAriaLabel() ?? cfg.bodyAriaLabel ?? null
+            bodyAriaLabel: this.bodyAriaLabel() ?? cfg.bodyAriaLabel ?? null,
+            bodyRole: this.bodyRole() ?? cfg.bodyRole ?? 'dialog',
+            bodyAriaLabelledBy: this.bodyAriaLabelledBy() ?? cfg.bodyAriaLabelledBy ?? null
         };
     });
 
@@ -339,7 +364,11 @@ export class PopoverComponent implements AfterViewInit, AfterContentInit, OnDest
 
             // Always sync these to service (for both trigger directive and control usage)
             this._popoverService.disabled.set(effectiveConfig.disabled);
-            this._popoverService.refreshConfiguration({ bodyAriaLabel: effectiveConfig.bodyAriaLabel });
+            this._popoverService.refreshConfiguration({
+                bodyAriaLabel: effectiveConfig.bodyAriaLabel,
+                bodyRole: effectiveConfig.bodyRole,
+                bodyAriaLabelledBy: effectiveConfig.bodyAriaLabelledBy
+            });
 
             // Full sync only when trigger is set and not in mobile mode (for fdPopoverTrigger directive).
             // In mobile mode, the dialog handles open/close — the popover service should not be involved.

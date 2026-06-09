@@ -143,6 +143,9 @@ export interface PopoverConfig {
     /** ARIA label for the popover body. */
     bodyAriaLabel?: string | null;
 
+    /** ID of the element that labels the popover body. */
+    bodyAriaLabelledBy?: string | null;
+
     /** ID for the popover body. */
     bodyId?: string | null;
 }
