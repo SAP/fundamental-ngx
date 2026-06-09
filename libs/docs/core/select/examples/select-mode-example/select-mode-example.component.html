@@ -1,37 +1,9 @@
-<div>
-    <h4>Default select</h4>
-    <button fd-button (click)="messageStripComponent.open()">Open message strip</button>
-    <button fd-button (click)="addBanner()">Add DOM element (removed after 5s)</button>
-    <fd-message-strip
-        #messageStripComponent="fdAutoDismissMessageStrip"
-        mousePersist
-        autoDismiss
-        dismissible
-        [duration]="5000"
-    >
-        Will be auto dismissed in 5 seconds, if mouse will not be over the message strip. If it's over it, then it will
-        be dismissed in 5 seconds after mouse leaves.
-    </fd-message-strip>
-    @if (showBanner()) {
-        <div
-            style="
-                padding: 1rem;
-                background: var(--sapInformationBackground);
-                border: 1px solid var(--sapInformationBorderColor);
-                margin-bottom: 0.5rem;
-            "
-        >
-            This element will be removed from the DOM in 5 seconds.
-        </div>
+<h4>Default select</h4>
+<fd-select placeholder="Select an option" [(value)]="selectedValue1">
+    @for (option of options; track option) {
+        <li fd-option [value]="option">{{ option }}</li>
     }
-    <div>
-        <fd-select placeholder="Select an option" [(value)]="selectedValue1">
-            @for (option of options; track option) {
-                <li fd-option [value]="option">{{ option }}</li>
-            }
-        </fd-select>
-    </div>
-</div>
+</fd-select>
 <small [style.display]="'block'">Selected value: {{ selectedValue1 }}</small>
 <h4>Compact select</h4>
 <fd-select placeholder="Select an option" fdCompact [(value)]="selectedValue2">
