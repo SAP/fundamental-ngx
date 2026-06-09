@@ -726,5 +726,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Segmentierte Schaltfläche',
         groupRoleDescription: 'Segmentierte Schaltflächengruppe'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Field validation messages'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Field validation messages'
     }
 };

@@ -723,5 +723,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Butang Disegmenkan',
         groupRoleDescription: 'Kumpulan Butang Disegmenkan'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Field validation messages'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Field validation messages'
     }
 };

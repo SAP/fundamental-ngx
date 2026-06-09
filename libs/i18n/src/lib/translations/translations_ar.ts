@@ -724,5 +724,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'زر مقسَّم',
         groupRoleDescription: 'مجموعة الأزرار المقسَّمة'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Field validation messages'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Field validation messages'
     }
 };

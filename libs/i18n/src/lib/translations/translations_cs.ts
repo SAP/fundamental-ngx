@@ -724,5 +724,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Segmentované tlačítko',
         groupRoleDescription: 'Skupina segmentovaných tlačítek'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Field validation messages'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Field validation messages'
     }
 };

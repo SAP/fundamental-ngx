@@ -724,5 +724,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Segmentoitu painike',
         groupRoleDescription: 'Segmentoitu painikeryhmä'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Field validation messages'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Field validation messages'
     }
 };
