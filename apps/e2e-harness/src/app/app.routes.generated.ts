@@ -2398,6 +2398,13 @@ export const generatedRoutes: Routes = [
             ).then((m) => m.MultiInputIncludesExampleComponent)
     },
     {
+        path: 'core/multi-input/mass-perf',
+        loadComponent: () =>
+            import(
+                '../../../../libs/docs/core/multi-input/examples/multi-input-mass-perf-example/multi-input-mass-perf-example.component'
+            ).then((m) => m.MultiInputMassPerfExampleComponent)
+    },
+    {
         path: 'core/multi-input/mobile',
         loadComponent: () =>
             import(

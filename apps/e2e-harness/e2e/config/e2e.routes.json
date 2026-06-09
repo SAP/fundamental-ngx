@@ -1,5 +1,5 @@
 {
-    "count": 957,
+    "count": 958,
     "routes": [
         {
             "path": "btp/button/nested",
@@ -2394,6 +2394,13 @@
             "component": "multi-input",
             "example": "includes",
             "className": "MultiInputIncludesExampleComponent"
+        },
+        {
+            "path": "core/multi-input/mass-perf",
+            "library": "core",
+            "component": "multi-input",
+            "example": "mass-perf",
+            "className": "MultiInputMassPerfExampleComponent"
         },
         {
             "path": "core/multi-input/mobile",

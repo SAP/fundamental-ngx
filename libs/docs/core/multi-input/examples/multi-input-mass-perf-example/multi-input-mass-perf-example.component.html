@@ -1,0 +1,19 @@
+<div>
+    <fd-segmented-button>
+        <button fd-button (click)="setCount(10)" [class.is-selected]="tokenCount() === 10">10</button>
+        <button fd-button (click)="setCount(100)" [class.is-selected]="tokenCount() === 100">100</button>
+        <button fd-button (click)="setCount(200)" [class.is-selected]="tokenCount() === 200">200</button>
+        <button fd-button (click)="setCount(1000)" [class.is-selected]="tokenCount() === 1000">1000</button>
+    </fd-segmented-button>
+
+    <fd-multi-input
+        #multiInput
+        placeholder="Type to search"
+        [dropdownValues]="options()"
+        [(ngModel)]="selected"
+    ></fd-multi-input>
+
+    <button fd-button (click)="measureFocus()">Measure focus reflow</button>
+
+    <p>Set tokens: {{ setTokensMs() ?? '—' }} ms | Focus reflow: {{ focusReflowMs() ?? '—' }} ms</p>
+</div>
