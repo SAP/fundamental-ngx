@@ -1,3 +1,13 @@
+## 0.63.0-rc.14 (2026-06-10)
+
+### 🚀 Features
+
+- **core:** add header content area to User Menu, adopt latest fund-styles ([#14268](https://github.com/SAP/fundamental-ngx/pull/14268))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.63.0-rc.13 (2026-06-10)
 
 ### 🩹 Fixes
