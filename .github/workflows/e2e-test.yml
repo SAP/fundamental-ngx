@@ -240,7 +240,7 @@ jobs:
     # ─────────────────────────────────────────────────────────────
     report:
         needs: [e2e]
-        if: always() && needs.e2e.result != 'cancelled'
+        if: always() && needs.e2e.result != 'cancelled' && needs.e2e.result != 'skipped'
         runs-on: ubuntu-latest
         timeout-minutes: 5
         permissions:
