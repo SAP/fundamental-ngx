@@ -1,3 +1,14 @@
+## 0.63.0-rc.12 (2026-06-10)
+
+### 🩹 Fixes
+
+- datetime adapters migration ([#14016](https://github.com/SAP/fundamental-ngx/pull/14016))
+
+### ❤️ Thank You
+
+- deno
+- github-actions
+
 ## 0.63.0-rc.11 (2026-06-09)
 
 This was a version bump only for ui5-webcomponents-base to align it with other projects, there were no code changes.
