@@ -10,6 +10,7 @@ package-lock.json
 
 # these files are autogenereated and there's no point in taking the time to format them
 /apps/docs/src/assets/typedoc
+/libs/mcp-server/src/data/components.json
 
 # e2e
 /e2e/*.map
