@@ -2634,6 +2634,13 @@
             "className": "PopoverCdkPlacementExampleComponent"
         },
         {
+            "path": "core/popover/non-dialog",
+            "library": "core",
+            "component": "popover",
+            "example": "non-dialog",
+            "className": "PopoverNonDialogExampleComponent"
+        },
+        {
             "path": "core/popover/placement",
             "library": "core",
             "component": "popover",

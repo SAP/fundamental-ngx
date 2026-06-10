@@ -2636,6 +2636,13 @@ export const generatedRoutes: Routes = [
             ).then((m) => m.PopoverCdkPlacementExampleComponent)
     },
     {
+        path: 'core/popover/non-dialog',
+        loadComponent: () =>
+            import(
+                '../../../../libs/docs/core/popover/examples/popover-non-dialog/popover-non-dialog-example.component'
+            ).then((m) => m.PopoverNonDialogExampleComponent)
+    },
+    {
         path: 'core/popover/placement',
         loadComponent: () =>
             import(

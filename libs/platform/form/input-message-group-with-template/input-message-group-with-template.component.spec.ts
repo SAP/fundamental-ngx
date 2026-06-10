@@ -296,7 +296,7 @@ describe('InputMessageGroupWithTemplate — popover aria-label (#14260)', () => 
         tick();
         fixture.detectChanges();
 
-        const body = document.querySelector('.cdk-overlay-container fd-popover-body');
+        const body = document.querySelector('.cdk-overlay-container .fd-popover__body');
         expect(body?.getAttribute('role')).toBe('dialog');
         const label = body?.getAttribute('aria-label');
         expect(label).toBeTruthy();

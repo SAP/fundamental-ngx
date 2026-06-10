@@ -194,6 +194,11 @@ export class PopoverComponent implements AfterViewInit, AfterContentInit, OnDest
      * attribute is rendered). Other valid values: 'region', 'menu', 'listbox',
      * 'tooltip' — match the role to the popover's actual semantics.
      *
+     * @remarks When set via this input (including when unbound — defaults to 'dialog'),
+     * the PopoverConfig object's `bodyRole` field is ignored. Config-only usage
+     * is not supported for `bodyRole` because the input has a concrete default.
+     * To override, bind the input explicitly: `[bodyRole]="'region'"` or `[bodyRole]="null"`.
+     *
      * See https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/ for guidance.
      */
     readonly bodyRole = input<string | null>('dialog');
