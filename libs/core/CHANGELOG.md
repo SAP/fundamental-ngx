@@ -1,3 +1,13 @@
+## 0.63.0-rc.13 (2026-06-10)
+
+### 🩹 Fixes
+
+- **core:** fix Message Strip btn misalignment ([#14269](https://github.com/SAP/fundamental-ngx/pull/14269))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.63.0-rc.12 (2026-06-10)
 
 ### 🩹 Fixes
