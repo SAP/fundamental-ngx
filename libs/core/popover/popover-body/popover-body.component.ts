@@ -101,7 +101,7 @@ export class PopoverBodyComponent {
     readonly _bodyAriaLabel = signal<Nullable<string>>(null);
 
     /** @hidden ID of the element that labels the popover body. */
-    readonly _bodyAriaLabelledBy = signal<Nullable<string>>(null);
+    readonly _bodyAriaLabelledBy = signal<string | null>(null);
 
     /** @hidden ID for the popover body. */
     readonly _bodyId = signal<string | null>(null);

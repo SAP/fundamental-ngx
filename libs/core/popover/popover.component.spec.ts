@@ -55,7 +55,6 @@ class TestPopoverComponent {
             </fd-popover-body>
         </fd-popover>
     `,
-    standalone: true,
     imports: [PopoverModule]
 })
 class TestPopoverConfigComponent {
@@ -595,6 +594,53 @@ describe('PopoverComponent bodyRole and bodyAriaLabelledBy inputs (#14260)', () 
         expect(
             document.querySelector('.cdk-overlay-container .fd-popover__body')?.getAttribute('aria-labelledby')
         ).toBe('my-label-id');
+    }));
+
+    it('accepts PopoverBodyRole union values (type safety test)', fakeAsync(() => {
+        // Test that all enumerated union values are accepted
+        const validRoles: Array<'dialog' | 'region' | 'menu' | 'listbox' | 'tooltip' | 'alertdialog'> = [
+            'dialog',
+            'region',
+            'menu',
+            'listbox',
+            'tooltip',
+            'alertdialog'
+        ];
+
+        validRoles.forEach((role) => {
+            hostComponent.bodyRole = role;
+            fixture.detectChanges();
+
+            hostComponent.popover.open();
+            fixture.detectChanges();
+            tick();
+
+            expect(document.querySelector('.cdk-overlay-container .fd-popover__body')?.getAttribute('role')).toBe(role);
+
+            hostComponent.popover.close();
+            fixture.detectChanges();
+            tick();
+        });
+    }));
+
+    it('accepts arbitrary ARIA role strings via escape hatch (type safety test)', fakeAsync(() => {
+        // Test that non-union valid ARIA roles are still accepted
+        const edgeCaseRoles = ['tree', 'status', 'alert', 'presentation', 'none'];
+
+        edgeCaseRoles.forEach((role) => {
+            hostComponent.bodyRole = role;
+            fixture.detectChanges();
+
+            hostComponent.popover.open();
+            fixture.detectChanges();
+            tick();
+
+            expect(document.querySelector('.cdk-overlay-container .fd-popover__body')?.getAttribute('role')).toBe(role);
+
+            hostComponent.popover.close();
+            fixture.detectChanges();
+            tick();
+        });
     }));
 });
 

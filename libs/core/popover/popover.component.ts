@@ -28,6 +28,12 @@ import { DOWN_ARROW } from '@angular/cdk/keycodes';
 import { CdkOverlayOrigin, ConnectedPosition } from '@angular/cdk/overlay';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
+/**
+ * ARIA role values commonly used for popover bodies. Provides autocomplete for
+ * the most frequent cases while allowing any valid ARIA role via the string escape hatch.
+ */
+export type PopoverBodyRole = 'dialog' | 'region' | 'menu' | 'listbox' | 'tooltip' | 'alertdialog';
+
 import { A11yModule } from '@angular/cdk/a11y';
 import { DynamicComponentService, KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
@@ -192,7 +198,8 @@ export class PopoverComponent implements AfterViewInit, AfterContentInit, OnDest
      * Set to null when the popover is a non-modal disclosure widget and
      * the trigger's aria-haspopup already carries the relationship (no role
      * attribute is rendered). Other valid values: 'region', 'menu', 'listbox',
-     * 'tooltip' — match the role to the popover's actual semantics.
+     * 'tooltip', 'alertdialog' — match the role to the popover's actual semantics.
+     * Any valid ARIA role is accepted; the type provides autocomplete for common cases.
      *
      * @remarks When set via this input (including when unbound — defaults to 'dialog'),
      * the PopoverConfig object's `bodyRole` field is ignored. Config-only usage
@@ -201,7 +208,7 @@ export class PopoverComponent implements AfterViewInit, AfterContentInit, OnDest
      *
      * See https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/ for guidance.
      */
-    readonly bodyRole = input<string | null>('dialog');
+    readonly bodyRole = input<PopoverBodyRole | (string & {}) | null>('dialog');
 
     /**
      * ID of the element that labels the popover body. Alternative to
