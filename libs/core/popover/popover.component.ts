@@ -301,7 +301,7 @@ export class PopoverComponent implements AfterViewInit, AfterContentInit, OnDest
             fixedPosition: this.fixedPosition() ?? cfg.fixedPosition ?? false,
             resizable: this.resizable() ?? cfg.resizable ?? false,
             bodyAriaLabel: this.bodyAriaLabel() ?? cfg.bodyAriaLabel ?? null,
-            bodyRole: this.bodyRole() ?? cfg.bodyRole ?? 'dialog',
+            bodyRole: this.bodyRole(),
             bodyAriaLabelledBy: this.bodyAriaLabelledBy() ?? cfg.bodyAriaLabelledBy ?? null
         };
     });
