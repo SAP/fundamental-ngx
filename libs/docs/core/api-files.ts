@@ -240,8 +240,13 @@ export const API_FILES = {
         'MicroProcessFlowIconComponent',
         'MicroProcessFlowFocusableItemDirective'
     ],
-    momentDatetimeAdapter: [],
-    dayjsDatetimeAdapter: [],
+    datetimeAdapters: [
+        'FdDatetimeAdapter',
+        'DayjsDatetimeAdapter',
+        'MomentDatetimeAdapter',
+        'DatetimeAdapter',
+        'DateTimeFormats'
+    ],
     dialog: [
         'DialogService',
         'DialogContainerComponent',

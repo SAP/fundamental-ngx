@@ -1180,6 +1180,55 @@ export const generatedRoutes: Routes = [
             )
     },
     {
+        path: 'core/datetime-adapters/dayjs-basic',
+        loadComponent: () =>
+            import(
+                '../../../../libs/docs/core/datetime-adapters/examples/datetime-adapters-dayjs-basic-example.component'
+            ).then((m) => m.DatetimeAdaptersDayjsBasicExampleComponent)
+    },
+    {
+        path: 'core/datetime-adapters/dayjs-datetime-24h',
+        loadComponent: () =>
+            import('../../../../libs/docs/core/datetime-adapters/examples/dayjs-datetime-24h-example.component').then(
+                (m) => m.DayjsDatetime24hExampleComponent
+            )
+    },
+    {
+        path: 'core/datetime-adapters/dayjs-formats',
+        loadComponent: () =>
+            import(
+                '../../../../libs/docs/core/datetime-adapters/examples/datetime-adapters-dayjs-formats-example.component'
+            ).then((m) => m.DatetimeAdaptersDayjsFormatsExampleComponent)
+    },
+    {
+        path: 'core/datetime-adapters/dayjs-options',
+        loadComponent: () =>
+            import(
+                '../../../../libs/docs/core/datetime-adapters/examples/datetime-adapters-dayjs-options-example.component'
+            ).then((m) => m.DatetimeAdaptersDayjsOptionsExampleComponent)
+    },
+    {
+        path: 'core/datetime-adapters/fddate',
+        loadComponent: () =>
+            import(
+                '../../../../libs/docs/core/datetime-adapters/examples/datetime-adapters-fddate-example.component'
+            ).then((m) => m.DatetimeAdaptersFddateExampleComponent)
+    },
+    {
+        path: 'core/datetime-adapters/locale',
+        loadComponent: () =>
+            import(
+                '../../../../libs/docs/core/datetime-adapters/examples/datetime-adapters-locale-example.component'
+            ).then((m) => m.DatetimeAdaptersIsolatedPickerInternalComponent)
+    },
+    {
+        path: 'core/datetime-adapters/moment',
+        loadComponent: () =>
+            import(
+                '../../../../libs/docs/core/datetime-adapters/examples/datetime-adapters-moment-example.component'
+            ).then((m) => m.DatetimeAdaptersMomentExampleComponent)
+    },
+    {
         path: 'core/datetime-picker/complex-i18n',
         loadComponent: () =>
             import(
@@ -1234,34 +1283,6 @@ export const generatedRoutes: Routes = [
             import(
                 '../../../../libs/docs/core/datetime-picker/examples/datetime-picker-update-on-blur-example/datetime-picker-update-on-blur-example.component'
             ).then((m) => m.DateTimePickerUpdateOnBlurExampleComponent)
-    },
-    {
-        path: 'core/dayjs-datetime-adapter/date-picker-dayjs-adapter',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/core/dayjs-datetime-adapter/examples/date-picker-dayjs-adapter-example.component'
-            ).then((m) => m.DatePickerDayjsAdapterExampleComponent)
-    },
-    {
-        path: 'core/dayjs-datetime-adapter/dayjs-adapter-options',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/core/dayjs-datetime-adapter/examples/dayjs-adapter-options-example.component'
-            ).then((m) => m.DayjsAdapterOptionsExampleComponent)
-    },
-    {
-        path: 'core/dayjs-datetime-adapter/dayjs-datetime-24h',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/core/dayjs-datetime-adapter/examples/dayjs-datetime-24h-example.component'
-            ).then((m) => m.DayjsDatetime24hExampleComponent)
-    },
-    {
-        path: 'core/dayjs-datetime-adapter/dayjs-datetime-formats',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/core/dayjs-datetime-adapter/examples/dayjs-datetime-formats-example.component'
-            ).then((m) => m.DayjsDatetimeFormatsExampleComponent)
     },
     {
         path: 'core/dialog/auto-label-dialog',
@@ -2249,20 +2270,6 @@ export const generatedRoutes: Routes = [
             import(
                 '../../../../libs/docs/core/micro-process-flow/examples/micro-process-flow-popover-example.component'
             ).then((m) => m.MicroProcessFlowPopoverExampleComponent)
-    },
-    {
-        path: 'core/moment-datetime-adapter/date-picker-moment-adapter',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/core/moment-datetime-adapter/examples/date-picker-moment-adapter-example.component'
-            ).then((m) => m.DatePickerMomentAdapterExampleComponent)
-    },
-    {
-        path: 'core/moment-datetime-adapter/moment-datetime-formats',
-        loadComponent: () =>
-            import(
-                '../../../../libs/docs/core/moment-datetime-adapter/examples/moment-datetime-formats-example.component'
-            ).then((m) => m.MomentDatetimeFormatsExampleComponent)
     },
     {
         path: 'core/multi-combobox/byline',

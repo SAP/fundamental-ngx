@@ -2,6 +2,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    effect,
     ElementRef,
     EventEmitter,
     forwardRef,
@@ -10,7 +11,6 @@ import {
     Inject,
     Input,
     OnChanges,
-    OnDestroy,
     OnInit,
     Optional,
     Output,
@@ -19,7 +19,6 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
-import { Subscription } from 'rxjs';
 
 import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { SpecialDayRule } from '@fundamental-ngx/core/shared';
@@ -109,7 +108,7 @@ let calendarUniqueId = 0;
         CalendarLegendComponent
     ]
 })
-export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAccessor, Validator, OnDestroy {
+export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAccessor, Validator {
     /** The currently selected date model in single mode. */
     @Input()
     selectedDate: Nullable<D>;
@@ -322,10 +321,8 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     nextButtonDisabled: boolean;
 
     /** @hidden */
-    protected readonly calendarRoleDescription = resolveTranslationSignal('coreCalendar.calendarRoleDescription');
-
     /** @hidden */
-    private _subscriptions = new Subscription();
+    protected readonly calendarRoleDescription = resolveTranslationSignal('coreCalendar.calendarRoleDescription');
 
     /** @hidden */
     private _adapterStartingDayOfWeek: DaysOfWeek;
@@ -350,7 +347,12 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
         this._adapterStartingDayOfWeek = (this._dateTimeAdapter.getFirstDayOfWeek() + 1) as DaysOfWeek;
         this.selectedDate = this._dateTimeAdapter.today();
         this._changeDetectorRef.markForCheck();
-        this._listenToLocaleChanges();
+
+        effect(() => {
+            this._dateTimeAdapter.locale();
+            this._adapterStartingDayOfWeek = (this._dateTimeAdapter.getFirstDayOfWeek() + 1) as DaysOfWeek;
+            this._changeDetectorRef.markForCheck();
+        });
     }
 
     /** That allows to define function that should happen, when focus should normally escape of component */
@@ -411,11 +413,6 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     /** @hidden */
     getWeekStartDay(): DaysOfWeek {
         return this.startingDayOfWeek === undefined ? this._adapterStartingDayOfWeek : this.startingDayOfWeek;
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._subscriptions.unsubscribe();
     }
 
     /**
@@ -793,16 +790,6 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     /** Whether the date range format is year */
     isDateRangeYearFormat(): boolean {
         return this.dateRangeFormat === 'year';
-    }
-
-    /** @hidden */
-    private _listenToLocaleChanges(): void {
-        this._subscriptions.add(
-            this._dateTimeAdapter.localeChanges.subscribe(() => {
-                this._adapterStartingDayOfWeek = (this._dateTimeAdapter.getFirstDayOfWeek() + 1) as DaysOfWeek;
-                this._changeDetectorRef.markForCheck();
-            })
-        );
     }
 
     /**

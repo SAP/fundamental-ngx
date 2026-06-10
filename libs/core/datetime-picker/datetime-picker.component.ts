@@ -5,6 +5,7 @@ import {
     ChangeDetectorRef,
     Component,
     ComponentRef,
+    effect,
     ElementRef,
     EventEmitter,
     forwardRef,
@@ -23,8 +24,6 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
 
 import {
     CalendarComponent,
@@ -494,9 +493,6 @@ export class DatetimePickerComponent<D>
     private _mobileComponentRef: Nullable<ComponentRef<DatetimePickerMobileComponent<D>>>;
 
     /** @hidden */
-    private _subscriptions = new Subscription();
-
-    /** @hidden */
     private _touched = false;
 
     /** @hidden */
@@ -517,6 +513,17 @@ export class DatetimePickerComponent<D>
 
         // default model value
         this.date = _dateTimeAdapter.now();
+
+        let localeEffectInitialized = false;
+        effect(() => {
+            this._dateTimeAdapter.locale();
+            if (localeEffectInitialized && this._inputFieldDate) {
+                this._setInput(this.date);
+                this._calculateTimeOptions();
+                this._changeDetRef.markForCheck();
+            }
+            localeEffectInitialized = true;
+        });
     }
 
     /**
@@ -555,19 +562,10 @@ export class DatetimePickerComponent<D>
         }
 
         this._calculateTimeOptions();
-
-        this._subscriptions.add(
-            this._dateTimeAdapter.localeChanges.pipe(filter(() => this._inputFieldDate !== '')).subscribe(() => {
-                this._setInput(this.date);
-                this._calculateTimeOptions();
-                this._changeDetRef.detectChanges();
-            })
-        );
     }
 
     /** @hidden */
     ngOnDestroy(): void {
-        this._subscriptions.unsubscribe();
         this._mobileComponentRef?.destroy();
     }
 

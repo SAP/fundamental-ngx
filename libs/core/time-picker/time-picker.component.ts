@@ -3,16 +3,14 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    DestroyRef,
+    effect,
     ElementRef,
     EventEmitter,
     forwardRef,
-    inject,
     Inject,
     input,
     Input,
     OnChanges,
-    OnDestroy,
     OnInit,
     Optional,
     Output,
@@ -22,7 +20,6 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
-import { Subscription } from 'rxjs';
 
 import {
     DATE_TIME_FORMATS,
@@ -47,7 +44,6 @@ import { Placement } from '@fundamental-ngx/core/shared';
 import { TimeComponent } from '@fundamental-ngx/core/time';
 
 import { NgTemplateOutlet } from '@angular/common';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
@@ -96,7 +92,7 @@ let timePickerCounter = 0;
     ]
 })
 export class TimePickerComponent<D>
-    implements ControlValueAccessor, OnInit, AfterViewInit, OnChanges, OnDestroy, Validator, FormItemControl
+    implements ControlValueAccessor, OnInit, AfterViewInit, OnChanges, Validator, FormItemControl
 {
     /**
      * Date time object representation
@@ -326,12 +322,6 @@ export class TimePickerComponent<D>
     private _state: FormStates | null = null;
 
     /** @hidden */
-    private readonly _destroyRef = inject(DestroyRef);
-
-    /** @hidden */
-    private _subscriptions = new Subscription();
-
-    /** @hidden */
     get _placeholder(): string {
         return this.placeholder || this._getPlaceholder();
     }
@@ -351,6 +341,13 @@ export class TimePickerComponent<D>
         if (!this._dateTimeFormats) {
             throw createMissingDateImplementationError('DATE_TIME_FORMATS');
         }
+
+        effect(() => {
+            this._dateTimeAdapter.locale();
+            this._calculateTimeOptions();
+            this._formatTimeInputField();
+            this._changeDetectorRef.markForCheck();
+        });
     }
 
     /** @hidden */
@@ -362,12 +359,6 @@ export class TimePickerComponent<D>
     ngOnInit(): void {
         this._calculateTimeOptions();
         this._formatTimeInputField();
-
-        this._dateTimeAdapter.localeChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
-            this._calculateTimeOptions();
-            this._formatTimeInputField();
-            this._changeDetectorRef.detectChanges();
-        });
     }
 
     /** @hidden */
@@ -382,11 +373,6 @@ export class TimePickerComponent<D>
         if (changes.displayFormat) {
             this._formatTimeInputField();
         }
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._subscriptions.unsubscribe();
     }
 
     /** @hidden */

@@ -1,5 +1,5 @@
 import { Platform } from '@angular/cdk/platform';
-import { Inject, Injectable, LOCALE_ID, Optional } from '@angular/core';
+import { inject, Injectable, LOCALE_ID } from '@angular/core';
 
 import { INVALID_DATE_ERROR, LETTERS_UNICODE_RANGE, range } from '@fundamental-ngx/cdk/utils';
 
@@ -27,15 +27,73 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     /** Whether to clamp the date between 1 and 9999 to avoid IE and Edge errors. */
     private readonly _fixYearsRangeIssue: boolean;
 
+    /** Cached Intl.RelativeTimeFormat instance, invalidated on locale change. */
+    private _relativeTimeFormatter: Intl.RelativeTimeFormat | null = null;
+
+    /** Cached result of _isFormatDayFirst(), invalidated on locale change. */
+    private _dayFirstCache: boolean | null = null;
+
     /** @hidden */
-    constructor(@Optional() @Inject(LOCALE_ID) localeId: string, platform: Platform) {
+    constructor() {
         super();
-        super.setLocale(localeId);
+        const localeId = inject(LOCALE_ID, { optional: true });
+        const platform = inject(Platform);
+        this.setLocale(localeId || 'en-US');
         this._fixYearsRangeIssue = platform.TRIDENT || platform.EDGE;
     }
 
     /** @hidden */
-    fromNow?(date: FdDate): string;
+    override setLocale(locale: string): void {
+        super.setLocale(locale);
+        this._relativeTimeFormatter = null;
+        this._dayFirstCache = null;
+    }
+
+    /** @hidden */
+    fromNow(date: FdDate): string {
+        if (!this.isValid(date)) {
+            return INVALID_DATE_ERROR;
+        }
+
+        const now = new Date();
+        const target = this._createDateInstanceByFdDate(date);
+        const diffMs = target.getTime() - now.getTime();
+        const absDiffSec = Math.abs(diffMs / 1000);
+
+        let value: number;
+        let unit: Intl.RelativeTimeFormatUnit;
+
+        if (absDiffSec < 60) {
+            value = Math.round(diffMs / 1000);
+            unit = 'second';
+        } else if (absDiffSec < 3600) {
+            value = Math.round(diffMs / 60000);
+            unit = 'minute';
+        } else if (absDiffSec < 86400) {
+            value = Math.round(diffMs / 3600000);
+            unit = 'hour';
+        } else if (absDiffSec < 2592000) {
+            value = Math.round(diffMs / 86400000);
+            unit = 'day';
+        } else if (absDiffSec < 31536000) {
+            value = Math.round(diffMs / 2592000000);
+            unit = 'month';
+        } else {
+            value = Math.round(diffMs / 31536000000);
+            unit = 'year';
+        }
+
+        try {
+            if (!this._relativeTimeFormatter) {
+                this._relativeTimeFormatter = new Intl.RelativeTimeFormat(this.locale(), { numeric: 'auto' });
+            }
+            return this._relativeTimeFormatter.format(value, unit);
+        } catch {
+            const absValue = Math.abs(value);
+            const suffix = value < 0 ? 'ago' : 'from now';
+            return `${absValue} ${unit}${absValue !== 1 ? 's' : ''} ${suffix}`;
+        }
+    }
 
     /** Get year */
     getYear(date: FdDate): number {
@@ -89,7 +147,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
 
     /** Get month names */
     getMonthNames(style: 'long' | 'short' | 'narrow'): string[] {
-        const dateTimeFormat = new Intl.DateTimeFormat(this.locale, { month: style, timeZone: 'utc' });
+        const dateTimeFormat = new Intl.DateTimeFormat(this.locale(), { month: style, timeZone: 'utc' });
         return range(12, (i) =>
             this._stripDirectionalityCharacters(this._format(dateTimeFormat, new Date(2017, i, 1)))
         );
@@ -97,7 +155,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
 
     /** Get date names */
     getDateNames(): string[] {
-        const dateTimeFormat = new Intl.DateTimeFormat(this.locale, { day: 'numeric', timeZone: 'utc' });
+        const dateTimeFormat = new Intl.DateTimeFormat(this.locale(), { day: 'numeric', timeZone: 'utc' });
         return range(31, (i) =>
             this._stripDirectionalityCharacters(this._format(dateTimeFormat, new Date(2017, 0, i + 1)))
         );
@@ -105,7 +163,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
 
     /** Get day of week names */
     getDayOfWeekNames(style: 'long' | 'short' | 'narrow'): string[] {
-        const dateTimeFormat = new Intl.DateTimeFormat(this.locale, { weekday: style, timeZone: 'utc' });
+        const dateTimeFormat = new Intl.DateTimeFormat(this.locale(), { weekday: style, timeZone: 'utc' });
         return range(7, (i) =>
             this._stripDirectionalityCharacters(this._format(dateTimeFormat, new Date(2017, 0, i + 1)))
         );
@@ -113,7 +171,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
 
     /** Get year name */
     getYearName(date: FdDate): string {
-        const dateTimeFormat = new Intl.DateTimeFormat(this.locale, { year: 'numeric', timeZone: 'utc' });
+        const dateTimeFormat = new Intl.DateTimeFormat(this.locale(), { year: 'numeric', timeZone: 'utc' });
         const dateInstance = this._createDateInstanceByFdDate(date);
         return this._stripDirectionalityCharacters(this._format(dateTimeFormat, dateInstance));
     }
@@ -121,7 +179,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     /** Get week name */
     getWeekName(date: FdDate): string {
         const weekNumber = this.getWeekNumber(date);
-        return weekNumber.toLocaleString(this.locale);
+        return weekNumber.toLocaleString(this.locale());
     }
 
     /** Get hour names */
@@ -130,7 +188,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
             if (meridian) {
                 hour = hour === 0 || hour === 12 ? 12 : hour % 12;
             }
-            return hour.toLocaleString(this.locale, { minimumIntegerDigits: twoDigit ? 2 : 1 });
+            return hour.toLocaleString(this.locale(), { minimumIntegerDigits: twoDigit ? 2 : 1 });
         });
     }
 
@@ -139,20 +197,20 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         const length = Math.ceil(60 / minuteStep);
         return range(length, (index) => {
             const minute = index * minuteStep;
-            return minute.toLocaleString(this.locale, { minimumIntegerDigits: twoDigit ? 2 : 1 });
+            return minute.toLocaleString(this.locale(), { minimumIntegerDigits: twoDigit ? 2 : 1 });
         });
     }
 
     /** Get second names */
     getSecondNames({ twoDigit }: { twoDigit: boolean }): string[] {
-        return range(60, (second) => second.toLocaleString(this.locale, { minimumIntegerDigits: twoDigit ? 2 : 1 }));
+        return range(60, (second) => second.toLocaleString(this.locale(), { minimumIntegerDigits: twoDigit ? 2 : 1 }));
     }
 
     /** Get day period names */
     getDayPeriodNames(): [string, string] {
         const DEFAULT_PERIODS: [string, string] = [AM_DAY_PERIOD_DEFAULT, PM_DAY_PERIOD_DEFAULT];
 
-        const formatter = new Intl.DateTimeFormat(this.locale, {
+        const formatter = new Intl.DateTimeFormat(this.locale(), {
             hour: 'numeric',
             minute: 'numeric',
             hour12: true
@@ -184,22 +242,33 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     }
 
     /** Set minutes */
-    setMinutes(date: FdDate, hours: number): FdDate {
+    setMinutes(date: FdDate, minutes: number): FdDate {
         const dateInstance = this._createDateInstanceByFdDate(date);
-        dateInstance.setMinutes(hours);
+        dateInstance.setMinutes(minutes);
         return this._createFdDateFromDateInstance(dateInstance);
     }
 
     /** Set seconds */
-    setSeconds(date: FdDate, hours: number): FdDate {
+    setSeconds(date: FdDate, seconds: number): FdDate {
         const dateInstance = this._createDateInstanceByFdDate(date);
-        dateInstance.setSeconds(hours);
+        dateInstance.setSeconds(seconds);
         return this._createFdDateFromDateInstance(dateInstance);
     }
 
     /** Get first day of week */
     getFirstDayOfWeek(): number {
-        // can't retrieve this info from Intl object or Date object, default to Sunday.
+        try {
+            const locale = new Intl.Locale(this.locale());
+            const weekInfo: { firstDay: number } | undefined =
+                (locale as any).weekInfo ?? (locale as any).getWeekInfo?.();
+            if (weekInfo) {
+                // Intl.Locale weekInfo uses 1=Monday..7=Sunday
+                // Adapter convention is 0=Sunday..6=Saturday
+                return weekInfo.firstDay === 7 ? 0 : weekInfo.firstDay;
+            }
+        } catch {
+            // Fallback for environments without Intl.Locale.weekInfo
+        }
         return 0;
     }
 
@@ -256,6 +325,14 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
             date = this._parseTimeString(value);
         }
 
+        // Fallback: try locale-aware date parsing when Date.parse() fails
+        if (Number.isNaN(date.valueOf()) && typeof value === 'string') {
+            const parsed = this._parseDateString(value) ?? this._parseDateTimeString(value);
+            if (parsed) {
+                date = parsed;
+            }
+        }
+
         return this._createFdDateFromDateInstance(date);
     }
 
@@ -307,6 +384,9 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
 
     /** Clone a date object */
     clone(date: FdDate): FdDate {
+        if (!date) {
+            throw new Error('FdDatetimeAdapter: Cannot clone a null/undefined date.');
+        }
         return new FdDate(date.year, date.month, date.day, date.hour, date.minute, date.second);
     }
 
@@ -320,6 +400,9 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
 
     /** Check if date between given dates */
     isBetween(dateToCheck: FdDate, startDate: FdDate, endDate: FdDate): boolean {
+        if (!dateToCheck || !startDate || !endDate) {
+            return false;
+        }
         const date = this._createDateInstanceByFdDate(dateToCheck);
         const start = this._createDateInstanceByFdDate(startDate);
         const end = this._createDateInstanceByFdDate(endDate);
@@ -345,7 +428,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         return this.toIso8601(date1) === this.toIso8601(date2);
     }
 
-    /** Format date object to ISO8601 string */
+    /** {@inheritDoc DatetimeAdapter.toIso8601} */
     toIso8601(fdDate: FdDate): string {
         return toIso8601(fdDate);
     }
@@ -414,7 +497,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
 
     /** Format date using Intl.DateTimeFormat */
     private _formatWithIntl(date: FdDate, displayFormat: any): string {
-        const formatter = new Intl.DateTimeFormat(this.locale, displayFormat);
+        const formatter = new Intl.DateTimeFormat(this.locale(), displayFormat);
         const dateInstance = this._createDateInstanceByFdDate(date);
         return this._stripDirectionalityCharacters(this._format(formatter, dateInstance));
     }
@@ -477,7 +560,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
      * @param hours The hours as a number between 0 - 24
      * @param minutes The minutes as a number between 0 - 59
      * @param seconds The seconds as a number between 0 - 59
-     * @param milliseconds The milliseconds as a number between 0 - 59
+     * @param milliseconds The milliseconds as a number between 0 - 999
      */
     private _createUTCDateInstance(
         year: number,
@@ -509,21 +592,169 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     /**
      * @hidden
      *
-     * Since FdDatetimeAdapter can parse only "en-US" locale
-     * there is no reason to create comprehensive time parse
-     * that can understand plenty of locales.
+     * Parse a time string into hours, minutes, seconds and apply to today's date.
+     * Supports: "14:30", "14:30:45", "10:30 PM", "10:30PM", "14.30" (dot separator).
      *
-     * @param timeStr Time string to parse (E.g. '10:30 PM')
-     * @returns date Native date instance
-     *
+     * @param timeStr Time string to parse
+     * @returns date Native date instance (Invalid Date if parsing fails)
      */
     private _parseTimeString(timeStr: string): Date {
-        /**
-         * Date.parse('10:30 AM') doesn't work so we need do a trick
-         * and prepend it by a date string.
-         */
-        const dateStr = new Intl.DateTimeFormat('en-US').format(new Date());
-        const dateTimeString = `${dateStr} ${timeStr}`;
-        return new Date(Date.parse(dateTimeString));
+        const match = timeStr.trim().match(/^(\d{1,2})[:.](\d{2})(?:[:.](\d{2}))?\s*([AaPp][Mm])?$/);
+        if (!match) {
+            return new Date(NaN);
+        }
+
+        let hours = parseInt(match[1], 10);
+        const minutes = parseInt(match[2], 10);
+        const seconds = match[3] ? parseInt(match[3], 10) : 0;
+        const period = match[4]?.toUpperCase();
+
+        if (period) {
+            // 12-hour format: hours must be 1-12
+            if (hours < 1 || hours > 12) {
+                return new Date(NaN);
+            }
+            if (period === 'AM') {
+                hours = hours === 12 ? 0 : hours;
+            } else {
+                hours = hours === 12 ? 12 : hours + 12;
+            }
+        }
+
+        if (hours < 0 || hours > 23 || minutes < 0 || minutes > 59 || seconds < 0 || seconds > 59) {
+            return new Date(NaN);
+        }
+
+        const now = new Date();
+        now.setHours(hours, minutes, seconds, 0);
+        return now;
+    }
+
+    /**
+     * @hidden
+     *
+     * Try to parse a date string with common separators (/, -, .)
+     * using locale awareness for day/month ordering.
+     *
+     * @param value Date string (e.g. "12.03.2026", "03/12/2026", "2026-03-12")
+     * @returns Native Date instance or null if parsing fails
+     */
+    private _parseDateString(value: string): Date | null {
+        const match = value.trim().match(/^(\d{1,4})([/\-.])(\d{1,2})\2(\d{1,4})$/);
+        if (!match) {
+            return null;
+        }
+
+        const g1 = parseInt(match[1], 10);
+        const g2 = parseInt(match[3], 10);
+        const g3 = parseInt(match[4], 10);
+
+        let year: number;
+        let month: number;
+        let day: number;
+
+        if (match[1].length === 4) {
+            // YYYY-MM-DD
+            year = g1;
+            month = g2;
+            day = g3;
+        } else if (match[4].length === 4) {
+            // DD/MM/YYYY or MM/DD/YYYY — use locale to disambiguate
+            year = g3;
+            if (this._isFormatDayFirst()) {
+                day = g1;
+                month = g2;
+            } else {
+                month = g1;
+                day = g2;
+            }
+        } else {
+            // Two-digit years are ambiguous — reject
+            return null;
+        }
+
+        // Validate ranges
+        if (month < 1 || month > 12 || day < 1) {
+            return null;
+        }
+
+        // Validate day for the given month/year (catches Feb 30, etc.)
+        const maxDay = new Date(year, month, 0).getDate();
+        if (day > maxDay) {
+            return null;
+        }
+
+        const date = new Date();
+        date.setFullYear(year, month - 1, day);
+        date.setHours(0, 0, 0, 0);
+        return date;
+    }
+
+    /**
+     * @hidden
+     *
+     * Parse a locale-native datetime string that contains both a date and a time
+     * component (e.g. "20/05/2026 16:33" fr-FR, "20.5.2026, 16:33" de-DE).
+     *
+     * Strategy: split on the first 4-digit year boundary (everything before+including
+     * the year is the date part; everything after the optional ", " separator is the
+     * time part), delegate each half to the existing helpers, then combine.
+     *
+     * @param value Datetime string to parse
+     * @returns Native Date instance or null if parsing fails
+     */
+    private _parseDateTimeString(value: string): Date | null {
+        // Match: <date-with-4-digit-year> <optional-comma> <whitespace> <time>
+        // Captures: [1] = date portion, [2] = time portion
+        const m = value.trim().match(/^(.*?\d{4}),?\s+(.+)$/);
+        if (!m) {
+            return null;
+        }
+        const datePart = m[1].trim();
+        const timePart = m[2].trim();
+
+        const dateOnly = this._parseDateString(datePart);
+        if (!dateOnly) {
+            return null;
+        }
+
+        const timeParsed = this._parseTimeString(timePart);
+        if (Number.isNaN(timeParsed.valueOf())) {
+            return null;
+        }
+
+        dateOnly.setHours(timeParsed.getHours(), timeParsed.getMinutes(), timeParsed.getSeconds(), 0);
+        return dateOnly;
+    }
+
+    /**
+     * @hidden
+     *
+     * Detect whether the current locale formats dates with day before month.
+     * Uses Intl.DateTimeFormat.formatToParts to inspect the locale's ordering.
+     *
+     * @returns true if locale puts day before month (e.g. de-DE, en-GB)
+     */
+    private _isFormatDayFirst(): boolean {
+        if (this._dayFirstCache !== null) {
+            return this._dayFirstCache;
+        }
+        try {
+            const parts = new Intl.DateTimeFormat(this.locale()).formatToParts(new Date(2020, 0, 2));
+            for (const part of parts) {
+                if (part.type === 'day') {
+                    this._dayFirstCache = true;
+                    return true;
+                }
+                if (part.type === 'month') {
+                    this._dayFirstCache = false;
+                    return false;
+                }
+            }
+        } catch {
+            // Fallback: month-first (US convention)
+        }
+        this._dayFirstCache = false;
+        return false;
     }
 }

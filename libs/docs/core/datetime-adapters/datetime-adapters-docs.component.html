@@ -1,0 +1,122 @@
+<fd-docs-section-title id="fddate-quick-start" componentName="datetime-adapters">
+    FdDate (Built-in)
+</fd-docs-section-title>
+<description>
+    <code>FdDate</code> is the built-in date model. It works out of the box with no extra dependencies &mdash; just add
+    <code>provideDateTimeFormats()</code> to your providers. <br /><br />
+    For advanced needs like locale-aware formatting, UTC handling, or custom parse/display formats, use the Dayjs
+    adapter instead (see below).
+</description>
+<component-example>
+    <fd-datetime-adapters-fddate-example></fd-datetime-adapters-fddate-example>
+</component-example>
+<code-example [exampleFiles]="fddateExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="dayjs-quick-start" componentName="datetime-adapters"> Dayjs Adapter </fd-docs-section-title>
+<description>
+    The Dayjs adapter lets you use <a href="https://day.js.org" target="_blank">Day.js</a> objects directly with
+    date/time components. It supports locale switching, custom formats, UTC mode, and strict parsing. <br /><br />
+    For application-wide setup, add <code>provideDayjsDatetimeAdapter()</code> to your app or route providers. The
+    example below shows the equivalent manual approach with explicit <code>DatetimeAdapter</code> and
+    <code>DATE_TIME_FORMATS</code> providers &mdash; useful when you only need it in a specific component.
+</description>
+<component-example>
+    <fd-datetime-adapters-dayjs-basic-example></fd-datetime-adapters-dayjs-basic-example>
+</component-example>
+<code-example [exampleFiles]="dayjsBasicExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="dayjs-locale" componentName="datetime-adapters"> Switching Locale </fd-docs-section-title>
+<description>
+    Call <code>setLocale()</code> on the adapter to change the language. Every picker that shares that adapter instance
+    updates together. <br /><br />
+    If you need a picker to stay in a different locale, give it a separate adapter by adding
+    <code>DatetimeAdapter</code> to that component's <code>providers</code>. That picker becomes independent.
+    <br /><br />
+    <strong>Try it:</strong> Change the locale at the top &mdash; both pickers update. Then change the locale at the
+    bottom &mdash; only the isolated picker changes. <br /><br />
+    Remember to import the corresponding dayjs locale (e.g. <code>import 'dayjs/locale/fr'</code>) before switching to
+    it.
+</description>
+<component-example>
+    <fd-datetime-adapters-locale-example></fd-datetime-adapters-locale-example>
+</component-example>
+<code-example [exampleFiles]="localeExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="dayjs-options" componentName="datetime-adapters">
+    UTC &amp; Strict Mode
+</fd-docs-section-title>
+<description>
+    By default, dates use the local time zone and the parser accepts loosely formatted input. You can change both
+    behaviours with <code>DAYJS_DATE_TIME_ADAPTER_OPTIONS</code>: <br /><br />
+    <strong>UTC mode</strong> (<code>useUtc: true</code>) &mdash; all dates are stored and displayed in UTC. Useful when
+    every user should see the same date regardless of time zone. <br /><br />
+    <strong>Strict mode</strong> (<code>strict: true</code>) &mdash; input must match the expected format exactly.
+    <code>"3-1-2026"</code> would be rejected when the format is <code>"MM/DD/YYYY"</code>.
+</description>
+<component-example>
+    <fd-datetime-adapters-dayjs-options-example></fd-datetime-adapters-dayjs-options-example>
+</component-example>
+<code-example [exampleFiles]="dayjsOptionsExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="dayjs-formats" componentName="datetime-adapters"> Custom Formats </fd-docs-section-title>
+<description>
+    The <code>DATE_TIME_FORMATS</code> token controls how dates are parsed from user input and displayed back. It has
+    two groups: <br /><br />
+    <strong>parse</strong> &mdash; how user input is read. For example, <code>dateInput: 'l'</code> accepts the locale's
+    short date format. <br /><br />
+    <strong>display</strong> &mdash; how dates appear in the input field and to screen readers. For example,
+    <code>dateA11yLabel: 'YYYY MMMM DD'</code> announces "2026 March 12". <br /><br />
+    The first picker below uses the global format defined in <code>providers</code>. The second picker uses
+    <code>[customDateTimeFormat]</code> to override the format per component &mdash; select a format from the dropdown
+    to see it update in real time. <br /><br />
+    See the Dayjs docs for available
+    <a href="https://day.js.org/docs/en/parse/string-format">parse tokens</a> and
+    <a href="https://day.js.org/docs/en/display/format">display tokens</a>.
+</description>
+<component-example>
+    <fd-datetime-adapters-dayjs-formats-example></fd-datetime-adapters-dayjs-formats-example>
+</component-example>
+<code-example [exampleFiles]="dayjsFormatsExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="moment-adapter" componentName="datetime-adapters">
+    Moment Adapter (Deprecated)
+</fd-docs-section-title>
+<description>
+    The <code>MomentDatetimeAdapter</code> from <code>&#64;fundamental-ngx/moment-adapter</code> works the same way as
+    the Dayjs adapter but uses <a href="https://momentjs.com/" target="_blank">Moment.js</a> objects. <br /><br />
+    <strong>This adapter is deprecated.</strong> Moment.js is
+    <a href="https://momentjs.com/docs/#/-project-status/" target="_blank">considered legacy</a> by its maintainers. New
+    projects should use the Dayjs adapter. Existing projects can follow the migration guide below.
+</description>
+<component-example>
+    <fd-datetime-adapters-moment-example></fd-datetime-adapters-moment-example>
+</component-example>
+<code-example [exampleFiles]="momentExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="migration-from-moment" componentName="datetime-adapters">
+    Migrating from Moment to Dayjs
+</fd-docs-section-title>
+<description>
+    <strong>1.</strong> Install: <code>npm i &#64;fundamental-ngx/datetime-adapter dayjs</code> <br /><br />
+    <strong>2.</strong> Replace imports and providers:
+    <fd-code-snippet [file]="migrationSnippet"></fd-code-snippet>
+    <strong>3.</strong> Replace <code>Moment</code> types with <code>Dayjs</code> and <code>moment()</code> calls with
+    <code>dayjs()</code>. <br /><br />
+    <strong>4.</strong> Update locale imports from <code>moment/locale/xx</code> to <code>dayjs/locale/xx</code>.
+    <br /><br />
+    <strong>5.</strong> Verify your format strings are
+    <a href="https://day.js.org/docs/en/parse/string-format">compatible with Dayjs</a> (most Moment tokens are
+    identical).
+</description>

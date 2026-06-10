@@ -324,6 +324,16 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
                 this._updateLegendFocusState(focusedNumber);
             }
         });
+
+        // Effect to react to locale changes
+        effect(() => {
+            this._dateTimeAdapter.locale();
+            if (this._isInitiated) {
+                this._refreshShortWeekDays();
+                this._buildDayViewGrid();
+                this.changeDetRef.markForCheck();
+            }
+        });
     }
 
     /** @hidden */
@@ -337,12 +347,6 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
         this._buildDayViewGrid();
 
         this._computeWeekHeaderClasses();
-
-        this._dateTimeAdapter.localeChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
-            this._refreshShortWeekDays();
-            this._buildDayViewGrid();
-            this.changeDetRef.markForCheck();
-        });
     }
 
     /** @hidden */

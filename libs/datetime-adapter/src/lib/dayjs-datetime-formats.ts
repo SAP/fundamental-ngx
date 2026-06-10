@@ -3,8 +3,8 @@ import { DateTimeFormats } from '@fundamental-ngx/core/datetime';
 export const DAYJS_DATETIME_FORMATS: DateTimeFormats = {
     parse: {
         dateInput: 'L',
-        timeInput: 'h:mm',
-        dateTimeInput: 'L h:mm'
+        timeInput: 'h:mm A',
+        dateTimeInput: 'L h:mm A'
     },
     display: {
         dateInput: 'L',

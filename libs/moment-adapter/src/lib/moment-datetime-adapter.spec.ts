@@ -1,5 +1,5 @@
 import { Platform } from '@angular/cdk/platform';
-import { LOCALE_ID } from '@angular/core';
+import { Injector, LOCALE_ID } from '@angular/core';
 import { TestBed, inject, waitForAsync } from '@angular/core/testing';
 import moment from 'moment';
 
@@ -544,5 +544,74 @@ describe('MomentDatetimeAdapter with LOCALE_ID override', () => {
             'fredag',
             'lørdag'
         ]);
+    });
+});
+
+describe('MomentDatetimeAdapter locale isolation', () => {
+    let adapterA: MomentDatetimeAdapter;
+    let adapterB: MomentDatetimeAdapter;
+
+    beforeEach(waitForAsync(() => {
+        // Reset global moment locale to a known state
+        moment.locale('en');
+
+        TestBed.configureTestingModule({
+            imports: [MomentDatetimeModule]
+        }).compileComponents();
+    }));
+
+    beforeEach(inject([DatetimeAdapter], (_adapter: MomentDatetimeAdapter) => {
+        adapterA = _adapter;
+
+        // Create a second independent adapter via a child injector
+        const childInjector = Injector.create({
+            providers: [
+                { provide: DatetimeAdapter, useClass: MomentDatetimeAdapter },
+                { provide: LOCALE_ID, useValue: 'en' }
+            ],
+            parent: TestBed.inject(Injector)
+        });
+        adapterB = childInjector.get(DatetimeAdapter) as MomentDatetimeAdapter;
+    }));
+
+    afterEach(() => {
+        moment.locale('en');
+    });
+
+    it('should not affect another adapter instance when locale is changed on one', () => {
+        const date = moment(new Date(2026, 2, 12));
+
+        const formatBefore = adapterB.format(date, 'MMMM');
+        expect(formatBefore).toBe('March');
+
+        // Change adapter A to French — adapter B should be unaffected
+        adapterA.setLocale('fr');
+
+        const formatAfter = adapterB.format(date, 'MMMM');
+        expect(formatAfter).toBe('March');
+    });
+
+    it('should not mutate global moment locale when setLocale is called', () => {
+        expect(moment.locale()).toBe('en');
+
+        adapterA.setLocale('fr');
+
+        expect(adapterA.locale()).toBe('fr');
+        // Global moment locale should remain English
+        expect(moment.locale()).toBe('en');
+    });
+
+    it('should not affect another adapter instance getMonthNames when locale is changed on one', () => {
+        adapterA.setLocale('fr');
+
+        // Adapter B should still return English month names
+        expect(adapterB.getMonthNames('long')[0]).toBe('January');
+    });
+
+    it('should not affect another adapter instance getDayOfWeekNames when locale is changed on one', () => {
+        adapterA.setLocale('fr');
+
+        // Adapter B should still return English day names
+        expect(adapterB.getDayOfWeekNames('long')[0]).toBe('Sunday');
     });
 });

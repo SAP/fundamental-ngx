@@ -1,5 +1,5 @@
 {
-    "count": 957,
+    "count": 958,
     "routes": [
         {
             "path": "btp/button/nested",
@@ -1178,6 +1178,55 @@
             "className": "DatePickerUpdateOnBlurExampleComponent"
         },
         {
+            "path": "core/datetime-adapters/dayjs-basic",
+            "library": "core",
+            "component": "datetime-adapters",
+            "example": "dayjs-basic",
+            "className": "DatetimeAdaptersDayjsBasicExampleComponent"
+        },
+        {
+            "path": "core/datetime-adapters/dayjs-datetime-24h",
+            "library": "core",
+            "component": "datetime-adapters",
+            "example": "dayjs-datetime-24h",
+            "className": "DayjsDatetime24hExampleComponent"
+        },
+        {
+            "path": "core/datetime-adapters/dayjs-formats",
+            "library": "core",
+            "component": "datetime-adapters",
+            "example": "dayjs-formats",
+            "className": "DatetimeAdaptersDayjsFormatsExampleComponent"
+        },
+        {
+            "path": "core/datetime-adapters/dayjs-options",
+            "library": "core",
+            "component": "datetime-adapters",
+            "example": "dayjs-options",
+            "className": "DatetimeAdaptersDayjsOptionsExampleComponent"
+        },
+        {
+            "path": "core/datetime-adapters/fddate",
+            "library": "core",
+            "component": "datetime-adapters",
+            "example": "fddate",
+            "className": "DatetimeAdaptersFddateExampleComponent"
+        },
+        {
+            "path": "core/datetime-adapters/locale",
+            "library": "core",
+            "component": "datetime-adapters",
+            "example": "locale",
+            "className": "DatetimeAdaptersIsolatedPickerInternalComponent"
+        },
+        {
+            "path": "core/datetime-adapters/moment",
+            "library": "core",
+            "component": "datetime-adapters",
+            "example": "moment",
+            "className": "DatetimeAdaptersMomentExampleComponent"
+        },
+        {
             "path": "core/datetime-picker/complex-i18n",
             "library": "core",
             "component": "datetime-picker",
@@ -1232,34 +1281,6 @@
             "component": "datetime-picker",
             "example": "update-on-blur",
             "className": "DateTimePickerUpdateOnBlurExampleComponent"
-        },
-        {
-            "path": "core/dayjs-datetime-adapter/date-picker-dayjs-adapter",
-            "library": "core",
-            "component": "dayjs-datetime-adapter",
-            "example": "date-picker-dayjs-adapter",
-            "className": "DatePickerDayjsAdapterExampleComponent"
-        },
-        {
-            "path": "core/dayjs-datetime-adapter/dayjs-adapter-options",
-            "library": "core",
-            "component": "dayjs-datetime-adapter",
-            "example": "dayjs-adapter-options",
-            "className": "DayjsAdapterOptionsExampleComponent"
-        },
-        {
-            "path": "core/dayjs-datetime-adapter/dayjs-datetime-24h",
-            "library": "core",
-            "component": "dayjs-datetime-adapter",
-            "example": "dayjs-datetime-24h",
-            "className": "DayjsDatetime24hExampleComponent"
-        },
-        {
-            "path": "core/dayjs-datetime-adapter/dayjs-datetime-formats",
-            "library": "core",
-            "component": "dayjs-datetime-adapter",
-            "example": "dayjs-datetime-formats",
-            "className": "DayjsDatetimeFormatsExampleComponent"
         },
         {
             "path": "core/dialog/auto-label-dialog",
@@ -2247,20 +2268,6 @@
             "component": "micro-process-flow",
             "example": "popover",
             "className": "MicroProcessFlowPopoverExampleComponent"
-        },
-        {
-            "path": "core/moment-datetime-adapter/date-picker-moment-adapter",
-            "library": "core",
-            "component": "moment-datetime-adapter",
-            "example": "date-picker-moment-adapter",
-            "className": "DatePickerMomentAdapterExampleComponent"
-        },
-        {
-            "path": "core/moment-datetime-adapter/moment-datetime-formats",
-            "library": "core",
-            "component": "moment-datetime-adapter",
-            "example": "moment-datetime-formats",
-            "className": "MomentDatetimeFormatsExampleComponent"
         },
         {
             "path": "core/multi-combobox/byline",

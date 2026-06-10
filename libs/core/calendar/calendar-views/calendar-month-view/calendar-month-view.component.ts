@@ -12,6 +12,7 @@ import {
     Output,
     SimpleChanges,
     ViewEncapsulation,
+    effect,
     inject
 } from '@angular/core';
 
@@ -109,18 +110,21 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnChanges, Focusab
         private _calendarService: CalendarService,
         @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats,
         private _dateTimeAdapter: DatetimeAdapter<D>
-    ) {}
+    ) {
+        effect(() => {
+            this._dateTimeAdapter.locale();
+            if (this._initiated) {
+                this._constructMonthGrid();
+                this._changeDetectorRef.markForCheck();
+            }
+        });
+    }
 
     /** @hidden */
     ngOnInit(): void {
         this._initiated = true;
         this._setupKeyboardService();
         this._constructMonthGrid();
-
-        this._dateTimeAdapter.localeChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
-            this._constructMonthGrid();
-            this._changeDetectorRef.markForCheck();
-        });
     }
 
     /** @hidden */
