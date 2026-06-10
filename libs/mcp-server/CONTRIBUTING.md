@@ -54,6 +54,33 @@ nx run mcp-server:extract-metadata
 
 This reads from CEM files (`node_modules/@ui5/webcomponents*/dist/custom-elements-internal.json`) and TypeDoc JSON (`libs/docs/typedoc/*/typedoc.json`), then writes `libs/mcp-server/src/data/components.json`.
 
+### Handling Merge Conflicts
+
+`components.json` is a **generated file** that frequently conflicts during merges. **Never merge it manually.**
+
+When conflicts occur:
+
+1. **Accept one side** (doesn't matter which):
+
+    ```bash
+    git checkout --ours libs/mcp-server/src/data/components.json
+    # or: git checkout --theirs libs/mcp-server/src/data/components.json
+    ```
+
+2. **Regenerate** from source:
+
+    ```bash
+    nx run mcp-server:extract-metadata
+    ```
+
+3. **Stage and continue**:
+    ```bash
+    git add libs/mcp-server/src/data/components.json
+    git merge --continue  # or: git rebase --continue
+    ```
+
+The `.gitattributes` merge driver (`merge=ours`) auto-accepts your version during conflicts, so you only need to regenerate.
+
 ## Check for Stale Metadata (CI)
 
 ```bash
