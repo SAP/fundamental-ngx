@@ -1,6 +1,6 @@
 {
     "name": "@fundamental-ngx/ui5-webcomponents-fiori",
-    "version": "0.63.0-rc.15",
+    "version": "0.63.0-rc.16",
     "schematics": "./schematics/collection.json",
     "description": "Official SAP Angular wrappers for UI5 Fiori Web Components – part of the Fundamental Library for Angular.",
     "keywords": [
