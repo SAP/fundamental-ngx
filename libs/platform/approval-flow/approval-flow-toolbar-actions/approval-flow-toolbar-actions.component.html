@@ -1,12 +1,12 @@
 <ng-container fdCompact>
-    @if (!graph?.columns?.length && !graph?.errors) {
+    @if (!graph.columns?.length && !graph.errors) {
         <button
             fd-button
             [label]="('platformApprovalFlow.toolbarAddStepButton' | fdTranslate)()"
             (click)="_addNode('empty')"
         ></button>
     }
-    @if (!!graph?.columns?.length && !isEditMode) {
+    @if (!!graph.columns?.length && !isEditMode) {
         <button
             fd-button
             [label]="('platformApprovalFlow.toolbarEditButton' | fdTranslate)()"
