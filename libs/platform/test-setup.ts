@@ -4,7 +4,7 @@ import { setupZoneTestEnv } from 'jest-preset-angular/setup-env/zone';
 globalThis.structuredClone = (val) => {
     try {
         return JSON.parse(JSON.stringify(val));
-    } catch (e) {
+    } catch {
         return val as any;
     }
 };
