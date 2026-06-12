@@ -46,11 +46,7 @@ import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import {
-    ContentDensityDirective,
-    ContentDensityObserver,
-    contentDensityObserverProviders
-} from '@fundamental-ngx/core/content-density';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { InfoLabelComponent } from '@fundamental-ngx/core/info-label';
 import { ListComponent, ListItemComponent, ListModule } from '@fundamental-ngx/core/list';
@@ -154,7 +150,6 @@ let searchFieldIdCount = 0;
         ButtonComponent,
         AutoCompleteDirective,
         BusyIndicatorComponent,
-        ContentDensityDirective,
         CdkTrapFocus,
         forwardRef(() => SuggestionMatchesPipe)
     ]

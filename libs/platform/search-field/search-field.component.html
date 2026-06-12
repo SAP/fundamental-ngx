@@ -465,7 +465,7 @@
                             glyph="decline"
                             (fdkClicked)="_performButtonClick($event, deleteCallback)"
                             (keydown.f2)="_focusParentListItem($event, suggestionListItem)"
-                            [attr.tabindex]="_actionButtonTabIndex"
+                            [attr.tabindex]="_actionButtonTabIndex()"
                         ></button>
                     }
                 </div>

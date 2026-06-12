@@ -71,7 +71,7 @@
             <div fd-list-link role="button" [focusable]="true" (click)="_freeze()" (keydown.enter)="_freeze()">
                 <span fd-list-title>{{
                     (
-                        (!column.endFreezable
+                        (!column?.endFreezable
                             ? columnIndex > 0
                                 ? 'platformTable.headerMenuFreezePlural'
                                 : 'platformTable.headerMenuFreeze'
