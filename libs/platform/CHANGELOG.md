@@ -1,3 +1,13 @@
+## 0.63.0-rc.18 (2026-06-12)
+
+### 🩹 Fixes
+
+- **platform:** remove Angular compiler warnings ([#14280](https://github.com/SAP/fundamental-ngx/pull/14280))
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.63.0-rc.17 (2026-06-11)
 
 This was a version bump only for platform to align it with other projects, there were no code changes.
