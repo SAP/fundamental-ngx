@@ -20,7 +20,8 @@
             },
             "outputs": [
                 "{options.outputPath}"
-            ]
+            ],
+            "dependsOn": ["generate"]
         },
         "generate": {
             "executor": "@fundamental-ngx/webc-generator:generate",

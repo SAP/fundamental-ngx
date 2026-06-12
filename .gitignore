@@ -68,6 +68,9 @@ Thumbs.db
 .cursor/rules/nx-rules.mdc
 .github/instructions/nx.instructions.md
 
+# mcp-server generated catalog (generated on release via extract-metadata)
+libs/mcp-server/src/data/components.json
+
 # generation
 libs/ui5-webcomponents/**/
 libs/ui5-webcomponents/index.ts
