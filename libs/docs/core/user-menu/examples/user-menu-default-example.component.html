@@ -114,7 +114,32 @@
                         iconAfterActive
                         (click)="actionPicked('Sub-menu Item 1')"
                     ></li>
-                    <li fd-user-menu-list-item text="Sub-menu Item" (click)="actionPicked('Sub-menu Item 2')"></li>
+                    <li
+                        fd-user-menu-list-item
+                        text="Sub-menu Item"
+                        (click)="actionPicked('Sub-menu Item 2')"
+                        hasSubmenu
+                        [submenu]="secondMenuSublist"
+                    ></li>
+                </div>
+            </ng-template>
+
+            <ng-template #secondMenuSublist>
+                <div fd-user-menu-sublist hasIcons>
+                    <li
+                        fd-user-menu-list-item
+                        icon="card"
+                        text="Second Sub-menu Item"
+                        subtitle="Second Sub-menu Item Subtitle"
+                        iconAfter="accept"
+                        iconAfterActive
+                        (click)="actionPicked('Second Sub-menu Item 1')"
+                    ></li>
+                    <li
+                        fd-user-menu-list-item
+                        text="Second Sub-menu Item"
+                        (click)="actionPicked('Second Sub-menu Item 2')"
+                    ></li>
                 </div>
             </ng-template>
         </div>
