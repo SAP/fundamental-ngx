@@ -71,15 +71,6 @@ There are two important things to consider:
 2. run `yarn` to install (`npm i` without a package.lock probably won't work)
 3. (run `yarn prepare`)
 4. check if the app works by `yarn start`
-5. **Configure merge strategy for generated files** (one-time setup):
-
-    ```bash
-    ./scripts/setup-git-config.sh
-    ```
-
-    Or manually: `git config merge.ours.driver true`
-
-    This prevents merge conflicts in `libs/mcp-server/src/data/components.json`. When conflicts occur, your version is kept and you regenerate with `npx nx run mcp-server:extract-metadata`.
 
 ### Contributor License Agreement
 
