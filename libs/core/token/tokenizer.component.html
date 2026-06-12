@@ -8,25 +8,44 @@
         >
             <ng-content select="fd-token"></ng-content>
         </div>
-        @if (showOverflowPopover && (_contentDensityObserver.isCompactSignal() || compactCollapse)) {
+        @if (
+            showOverflowPopover &&
+            (_contentDensityObserver.isCompactSignal() || compactCollapse) &&
+            externalHiddenCount() === 0
+        ) {
             <ng-template [ngTemplateOutlet]="tokensOverflow"></ng-template>
         } @else {
-            @if (_showMoreElement && _hiddenTokens.length > 0) {
-                <span (click)="moreClicked()" #moreElementSpan class="fd-tokenizer-more" role="button" tabindex="-1">
+            @if (hasInternalOverflowIndicator()) {
+                <span
+                    (click)="moreClicked()"
+                    (keydown.enter)="moreClicked()"
+                    (keydown.space)="$event.preventDefault(); moreClicked()"
+                    #moreElementSpan
+                    class="fd-tokenizer-more"
+                    role="button"
+                    tabindex="0"
+                >
                     @if (_contentDensityObserver.isCompactSignal() || compactCollapse) {
                         {{
                             (
                                 'coreTokenizer.moreLabel'
-                                | fdTranslate: { count: moreTokensLeft.length + moreTokensRight.length }
+                                | fdTranslate
+                                    : { count: moreTokensLeft.length + moreTokensRight.length + externalHiddenCount() }
                             )()
                         }}
                     }
                     @if (!_contentDensityObserver.isCompactSignal() && !compactCollapse) {
-                        {{ ('coreTokenizer.moreLabel' | fdTranslate: { count: hiddenCozyTokenCount })() }}
+                        {{
+                            (
+                                'coreTokenizer.moreLabel'
+                                | fdTranslate: { count: hiddenCozyTokenCount + externalHiddenCount() }
+                            )()
+                        }}
                     }
                 </span>
             }
         }
+        <ng-content select="[fd-tokenizer-extra]"></ng-content>
         <ng-content select="[fd-form-control]"></ng-content>
     </div>
     @if (glyph) {
@@ -67,18 +86,28 @@
     </fd-popover>
 </ng-template>
 <ng-template #moreElement>
-    @if (_showMoreElement && _hiddenTokens.length > 0) {
-        <span (click)="moreClicked()" #moreElementSpan class="fd-tokenizer-more" role="button" tabindex="-1">
+    @if (hasInternalOverflowIndicator()) {
+        <span
+            (click)="moreClicked()"
+            (keydown.enter)="moreClicked()"
+            (keydown.space)="$event.preventDefault(); moreClicked()"
+            #moreElementSpan
+            class="fd-tokenizer-more"
+            role="button"
+            tabindex="0"
+        >
             @if (_contentDensityObserver.isCompactSignal() || compactCollapse) {
                 {{
                     (
                         'coreTokenizer.moreLabel'
-                        | fdTranslate: { count: moreTokensLeft.length + moreTokensRight.length }
+                        | fdTranslate: { count: moreTokensLeft.length + moreTokensRight.length + externalHiddenCount() }
                     )()
                 }}
             }
             @if (!_contentDensityObserver.isCompactSignal() && !compactCollapse) {
-                {{ ('coreTokenizer.moreLabel' | fdTranslate: { count: hiddenCozyTokenCount })() }}
+                {{
+                    ('coreTokenizer.moreLabel' | fdTranslate: { count: hiddenCozyTokenCount + externalHiddenCount() })()
+                }}
             }
         </span>
     }

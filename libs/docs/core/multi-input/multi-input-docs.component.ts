@@ -20,6 +20,7 @@ import { MultiInputExampleComponent } from './examples/multi-input-example/multi
 import { MultiInputFilterExampleComponent } from './examples/multi-input-filter-example/multi-input-filter-example.component';
 import { MultiInputFormExampleComponent } from './examples/multi-input-form-example/multi-input-form-example.component';
 import { MultiInputIncludesExampleComponent } from './examples/multi-input-includes-example/multi-input-includes-example.component';
+import { MultiInputMassPerfExampleComponent } from './examples/multi-input-mass-perf-example/multi-input-mass-perf-example.component';
 import { MultiInputMobileExampleComponent } from './examples/multi-input-mobile-example/multi-input-mobile-example.component';
 import { MultiInputNewTokensExampleComponent } from './examples/multi-input-new-tokens-example/multi-input-new-tokens-example.component';
 import { MultiInputOptionItemExampleComponent } from './examples/multi-input-option-item-example/multi-input-option-item-example.component';
@@ -62,6 +63,9 @@ const addonT = 'multi-input-addon-clicked-example/multi-input-addon-clicked-exam
 
 const optionItemT = 'multi-input-option-item-example/multi-input-option-item-example.component.ts';
 
+const massPerfH = 'multi-input-mass-perf-example/multi-input-mass-perf-example.component.html';
+const massPerfT = 'multi-input-mass-perf-example/multi-input-mass-perf-example.component.ts';
+
 @Component({
     selector: 'app-multi-input-docs',
     templateUrl: './multi-input-docs.component.html',
@@ -85,7 +89,8 @@ const optionItemT = 'multi-input-option-item-example/multi-input-option-item-exa
         MultiInputCustomItemExampleComponent,
         MultiInputDropdownWidthExampleComponent,
         MultiInputAddonClickedExampleComponent,
-        MultiInputOptionItemExampleComponent
+        MultiInputOptionItemExampleComponent,
+        MultiInputMassPerfExampleComponent
     ]
 })
 export class MultiInputDocsComponent {
@@ -262,6 +267,19 @@ export class MultiInputDocsComponent {
             fileName: 'multi-input-option-item-example',
             component: 'MultiInputOptionItemExampleComponent',
             language: 'typescript'
+        }
+    ];
+    massPerf: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(massPerfH),
+            fileName: 'multi-input-mass-perf-example'
+        },
+        {
+            language: 'typescript',
+            component: 'MultiInputMassPerfExampleComponent',
+            code: getAssetFromModuleAssets(massPerfT),
+            fileName: 'multi-input-mass-perf-example'
         }
     ];
 }

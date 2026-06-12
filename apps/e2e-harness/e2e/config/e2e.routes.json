@@ -2403,6 +2403,13 @@
             "className": "MultiInputIncludesExampleComponent"
         },
         {
+            "path": "core/multi-input/mass-perf",
+            "library": "core",
+            "component": "multi-input",
+            "example": "mass-perf",
+            "className": "MultiInputMassPerfExampleComponent"
+        },
+        {
             "path": "core/multi-input/mobile",
             "library": "core",
             "component": "multi-input",
