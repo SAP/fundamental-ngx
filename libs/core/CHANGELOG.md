@@ -1,3 +1,13 @@
+## 0.63.0-rc.20 (2026-06-12)
+
+### 🩹 Fixes
+
+- **ci:** generate components.json before netlify docs build ([#14285](https://github.com/SAP/fundamental-ngx/pull/14285))
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.63.0-rc.19 (2026-06-12)
 
 This was a version bump only for core to align it with other projects, there were no code changes.
