@@ -5941,6 +5941,20 @@ export const generatedRoutes: Routes = [
             )
     },
     {
+        path: 'ui5/color-palette/item-click',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/color-palette/examples/item-click-sample').then(
+                (m) => m.ItemClickColorPaletteSample
+            )
+    },
+    {
+        path: 'ui5/color-palette/tooltip',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/color-palette/examples/tooltip-sample').then(
+                (m) => m.TooltipColorPaletteSample
+            )
+    },
+    {
         path: 'ui5/color-picker/basic',
         loadComponent: () =>
             import('../../../../libs/docs/ui5-webcomponents/color-picker/examples/basic-sample').then(
