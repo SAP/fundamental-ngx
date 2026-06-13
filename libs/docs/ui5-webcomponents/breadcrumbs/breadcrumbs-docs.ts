@@ -9,6 +9,7 @@ import {
 } from '@fundamental-ngx/docs/shared';
 import { BreadcrumbsBasicSample } from './examples/basic-sample';
 import { BreadcrumbsDesignSample } from './examples/design';
+import { BreadcrumbsEventsSample } from './examples/events-sample';
 import { BreadcrumbsOverflowSample } from './examples/overflow';
 import { BreadcrumbsSeparatorsSample } from './examples/separators';
 
@@ -20,6 +21,8 @@ const designHtml = 'design.html';
 const designTs = 'design.ts';
 const separatorsHtml = 'separators.html';
 const separatorsTs = 'separators.ts';
+const eventsHtml = 'events-sample.html';
+const eventsTs = 'events-sample.ts';
 
 @Component({
     selector: 'ui5-breadcrumbs-docs',
@@ -33,7 +36,8 @@ const separatorsTs = 'separators.ts';
         BreadcrumbsBasicSample,
         BreadcrumbsOverflowSample,
         BreadcrumbsDesignSample,
-        BreadcrumbsSeparatorsSample
+        BreadcrumbsSeparatorsSample,
+        BreadcrumbsEventsSample
     ]
 })
 export class BreadcrumbsDocs {
@@ -93,8 +97,23 @@ export class BreadcrumbsDocs {
         }
     ]);
 
+    private readonly eventsExampleFiles = signal<ExampleFile[]>([
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(eventsHtml),
+            originalFileName: 'events-sample'
+        },
+        {
+            language: 'typescript',
+            component: 'BreadcrumbsEventsSample',
+            code: getAssetFromModuleAssets(eventsTs),
+            originalFileName: 'events-sample'
+        }
+    ]);
+
     basicExamples = computed(() => this.basicExampleFiles());
     overflowExamples = computed(() => this.overflowExampleFiles());
     designExamples = computed(() => this.designExampleFiles());
     separatorsExamples = computed(() => this.separatorsExampleFiles());
+    eventsExamples = computed(() => this.eventsExampleFiles());
 }
