@@ -7,3 +7,18 @@
     <ui5-doc-view-settings-dialog-basic-sample />
 </component-example>
 <code-example [exampleFiles]="basicExample" />
+
+<separator />
+
+<fd-docs-section-title id="custom-tabs" componentName="view-settings-dialog"> Custom Tabs </fd-docs-section-title>
+<description>
+    The View Settings Dialog supports custom tabs alongside the built-in Sort, Filter, and Group tabs. Custom tabs are
+    rendered after the built-in tabs and allow application-specific settings (e.g. column visibility, row density). Use
+    the <code>ui5-view-settings-dialog-custom-tab</code> component in the <code>customTabs</code> slot to define
+    additional tabs with custom content. The <code>resetEnabled</code> property and <code>ui5Reset</code> event must be
+    managed by the application since the dialog cannot detect changes in custom tab content.
+</description>
+<component-example>
+    <ui5-doc-view-settings-dialog-custom-tabs-sample />
+</component-example>
+<code-example [exampleFiles]="customTabsExample" />
