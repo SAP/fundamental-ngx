@@ -1,0 +1,71 @@
+<ui5-button (ui5Click)="onOpenDialog()">Open ViewSettingsDialog with Custom Tabs</ui5-button>
+
+<ui5-view-settings-dialog
+    [open]="dialogOpen()"
+    [sortDescending]="sortDescending()"
+    [resetEnabled]="resetEnabled()"
+    (ui5Confirm)="onConfirm($event)"
+    (ui5Cancel)="onCancel()"
+    (ui5Close)="onClose()"
+    (ui5Reset)="onReset()"
+>
+    @for (sortItem of sortItems(); track sortItem.text) {
+    <ui5-sort-item slot="sortItems" [text]="sortItem.text" [selected]="sortItem.selected"></ui5-sort-item>
+    }
+
+    <ui5-view-settings-dialog-custom-tab
+        slot="customTabs"
+        icon="multi-select"
+        titleText="Columns"
+        tooltip="Configure visible columns"
+    >
+        <div class="custom-tab-content">
+            <ui5-title level="H5" class="custom-tab-title">Select Visible Columns</ui5-title>
+            @for (column of columnOptions(); track column.key) {
+            <ui5-checkbox
+                [text]="column.label"
+                [checked]="column.visible"
+                (ui5Change)="onColumnToggle(column.key)"
+            ></ui5-checkbox>
+            }
+        </div>
+    </ui5-view-settings-dialog-custom-tab>
+
+    <ui5-view-settings-dialog-custom-tab
+        slot="customTabs"
+        icon="number-sign"
+        titleText="Density"
+        tooltip="Configure row density"
+    >
+        <div class="custom-tab-content">
+            <ui5-title level="H5" class="custom-tab-title">Row Density</ui5-title>
+            <ui5-radio-button
+                name="density"
+                text="Compact"
+                [checked]="currentDensity() === 'compact'"
+                (ui5Change)="onDensityChange('compact')"
+            ></ui5-radio-button>
+            <ui5-radio-button
+                name="density"
+                text="Cozy"
+                [checked]="currentDensity() === 'cozy'"
+                (ui5Change)="onDensityChange('cozy')"
+            ></ui5-radio-button>
+            <ui5-radio-button
+                name="density"
+                text="Condensed"
+                [checked]="currentDensity() === 'condensed'"
+                (ui5Change)="onDensityChange('condensed')"
+            ></ui5-radio-button>
+        </div>
+    </ui5-view-settings-dialog-custom-tab>
+</ui5-view-settings-dialog>
+
+@if (resultText()) {
+<div class="results-container">
+    <ui5-title level="H5" class="result-title">View Settings Results:</ui5-title>
+    @for (line of resultText().split('\n'); track $index) {
+    <ui5-text class="result-item">{{ line }}</ui5-text>
+    }
+</div>
+}

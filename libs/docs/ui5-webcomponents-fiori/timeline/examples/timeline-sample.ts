@@ -27,6 +27,7 @@ interface TimelineEventData {
     timestamp: string;
     description: string;
     icon?: string;
+    iconTooltip?: string;
     userName?: string;
     status?: 'success' | 'warning' | 'error' | 'information' | 'neutral';
 }
@@ -64,6 +65,7 @@ export class TimelineExample {
             description:
                 'Project requirements gathered and team roles assigned. All stakeholders aligned on project scope and timeline.',
             icon: 'map',
+            iconTooltip: 'Kickoff event',
             userName: 'Sarah Johnson',
             status: 'success'
         },
@@ -75,6 +77,7 @@ export class TimelineExample {
             description:
                 'Final design mockups reviewed and approved by all stakeholders. Ready to proceed with development.',
             icon: 'palette',
+            iconTooltip: 'Design event',
             userName: 'Mike Chen',
             status: 'success'
         },
@@ -85,6 +88,7 @@ export class TimelineExample {
             timestamp: '2024-02-05T16:45:00Z',
             description: 'Core API endpoints implemented with authentication and basic CRUD operations.',
             icon: 'settings',
+            iconTooltip: 'Development event',
             userName: 'Alex Rodriguez',
             status: 'success'
         },
@@ -96,6 +100,7 @@ export class TimelineExample {
             description:
                 'Frontend components integrated with backend APIs. User interface is functional and responsive.',
             icon: 'chain-link',
+            iconTooltip: 'Integration event',
             userName: 'Lisa Park',
             status: 'information'
         },
@@ -106,6 +111,7 @@ export class TimelineExample {
             timestamp: '2024-02-18T10:00:00Z',
             description: 'Comprehensive testing cycle initiated. Several edge cases identified and being addressed.',
             icon: 'checklist',
+            iconTooltip: 'Testing event',
             userName: 'David Kim',
             status: 'warning'
         }
@@ -171,6 +177,7 @@ export class TimelineExample {
                     timestamp: new Date().toISOString(),
                     description: 'This event was loaded dynamically when the load more action was triggered.',
                     icon: 'add',
+                    iconTooltip: 'Dynamically loaded event',
                     userName: 'System',
                     status: 'neutral'
                 }
@@ -190,6 +197,7 @@ export class TimelineExample {
             timestamp: new Date().toISOString(),
             description: 'This event was added programmatically using Angular signals.',
             icon: 'add-activity',
+            iconTooltip: 'Manually added',
             userName: 'Current User',
             status: 'information'
         };
@@ -214,6 +222,7 @@ export class TimelineExample {
                 timestamp: '2024-01-15T09:00:00Z',
                 description: 'Project requirements gathered and team roles assigned.',
                 icon: 'rocket',
+                iconTooltip: 'Kickoff event',
                 userName: 'Sarah Johnson',
                 status: 'success'
             }

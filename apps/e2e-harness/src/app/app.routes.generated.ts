@@ -5821,6 +5821,13 @@ export const generatedRoutes: Routes = [
             )
     },
     {
+        path: 'ui5-fiori/view-settings-dialog/custom-tabs',
+        loadComponent: () =>
+            import(
+                '../../../../libs/docs/ui5-webcomponents-fiori/view-settings-dialog/examples/custom-tabs-sample'
+            ).then((m) => m.CustomTabsSample)
+    },
+    {
         path: 'ui5-fiori/wizard/basic',
         loadComponent: () =>
             import('../../../../libs/docs/ui5-webcomponents-fiori/wizard/examples/basic-sample').then(
