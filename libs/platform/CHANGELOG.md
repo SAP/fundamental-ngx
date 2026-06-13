@@ -1,3 +1,14 @@
+## 0.63.0-rc.21 (2026-06-13)
+
+### 🩹 Fixes
+
+- **core:** expose bodyRole + bodyAriaLabelledBy inputs on fd-popover ([#14260](https://github.com/SAP/fundamental-ngx/pull/14260), [#14270](https://github.com/SAP/fundamental-ngx/pull/14270))
+
+### ❤️ Thank You
+
+- deno
+- github-actions
+
 ## 0.63.0-rc.20 (2026-06-12)
 
 ### 🩹 Fixes
