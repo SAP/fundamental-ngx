@@ -1,5 +1,5 @@
 {
-    "count": 958,
+    "count": 959,
     "routes": [
         {
             "path": "btp/button/nested",
@@ -5852,6 +5852,13 @@
             "component": "breadcrumbs",
             "example": "basic",
             "className": "BreadcrumbsBasicSample"
+        },
+        {
+            "path": "ui5/breadcrumbs/events",
+            "library": "ui5",
+            "component": "breadcrumbs",
+            "example": "events",
+            "className": "BreadcrumbsEventsSample"
         },
         {
             "path": "ui5/busy-indicator/basic",
