@@ -1,5 +1,5 @@
 {
-    "count": 958,
+    "count": 960,
     "routes": [
         {
             "path": "btp/button/nested",
@@ -5922,6 +5922,20 @@
             "component": "color-palette",
             "example": "basic",
             "className": "BasicColorPaletteSample"
+        },
+        {
+            "path": "ui5/color-palette/item-click",
+            "library": "ui5",
+            "component": "color-palette",
+            "example": "item-click",
+            "className": "ItemClickColorPaletteSample"
+        },
+        {
+            "path": "ui5/color-palette/tooltip",
+            "library": "ui5",
+            "component": "color-palette",
+            "example": "tooltip",
+            "className": "TooltipColorPaletteSample"
         },
         {
             "path": "ui5/color-picker/basic",
