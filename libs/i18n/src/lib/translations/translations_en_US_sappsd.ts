@@ -729,9 +729,9 @@ export default {
         groupRoleDescription: '[[[Ŝēğɱēŋţēƌ Ɓűţţŏŋ Ģŗŏűρ∙∙∙∙∙]]]'
     },
     coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: '[[[Ƒįēĺƌ ʋąĺįƌąţįŏŋ ɱēşşąğēş∙∙∙∙∙∙∙]]]'
     },
     platformInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: '[[[Ƒįēĺƌ ʋąĺįƌąţįŏŋ ɱēşşąğēş∙∙∙∙∙∙∙]]]'
     }
 };
