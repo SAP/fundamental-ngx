@@ -221,8 +221,23 @@ export class UserMenuListItemComponent implements KeyboardSupportItemInterface {
     }
 
     /** @hidden Schedule close when mouse leaves the submenu popover body */
-    onSubmenuMouseLeave(): void {
-        this._scheduleHoverClose();
+    onSubmenuMouseLeave(event: MouseEvent): void {
+        const relatedTarget = event.relatedTarget as HTMLElement;
+        if (!relatedTarget) {
+            this._scheduleHoverClose();
+            return;
+        }
+
+        // Get the native DOM element of this item's submenu popover body
+        const thisItemsPopoverBody = this.popover()?.popoverBody?.()?._elementRef?.nativeElement;
+
+        // Don't close if mouse is still in this item's popover or moved to any nested popover
+        const mouseStillInThisPopover = thisItemsPopoverBody?.contains(relatedTarget);
+        const mouseEnteredAnyPopover = relatedTarget.closest('fd-popover-body') !== null;
+
+        if (!mouseStillInThisPopover && !mouseEnteredAnyPopover) {
+            this._scheduleHoverClose();
+        }
     }
 
     /** Handles submenu selection in mobile mode */
