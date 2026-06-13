@@ -722,5 +722,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'סרגל לחצנים',
         groupRoleDescription: 'קבוצת סרגלי לחצנים'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Field validation messages'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Field validation messages'
     }
 };

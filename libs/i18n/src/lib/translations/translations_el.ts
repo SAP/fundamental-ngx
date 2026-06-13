@@ -725,5 +725,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Τμηματοποιημένο Κουμπί',
         groupRoleDescription: 'Ομάδα Τμηματοποιημένου Κουμπιού'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Field validation messages'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Field validation messages'
     }
 };

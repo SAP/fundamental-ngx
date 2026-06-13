@@ -572,4 +572,6 @@ export type FdLanguageKeyIdentifier =
     | 'platformWizardGenerator.stepsLabel'
     | 'platformWizardGenerator.summarySectionEditStep'
     | 'segmentedButton.buttonRoleDescription'
-    | 'segmentedButton.groupRoleDescription';
+    | 'segmentedButton.groupRoleDescription'
+    | 'coreFormInputMessageGroup.popoverAriaLabel'
+    | 'platformInputMessageGroup.popoverAriaLabel';

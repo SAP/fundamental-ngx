@@ -139,6 +139,9 @@ export class PopoverService {
     /** @hidden Aria label for the popover body. */
     protected _bodyAriaLabel: string | null = null;
 
+    /** @hidden ID of the element that labels the popover body. */
+    protected _bodyAriaLabelledBy: string | null = null;
+
     /** @hidden ID for the popover body. */
     protected readonly _bodyId = signal<string | null>(null);
 
@@ -524,12 +527,19 @@ export class PopoverService {
         }
         if (config.bodyRole !== undefined) {
             this._bodyRole = unwrap(config.bodyRole);
+            this._getPopoverBody()?._bodyRole.set(this._bodyRole);
         }
         if (config.bodyAriaLabel !== undefined) {
             this._bodyAriaLabel = unwrap(config.bodyAriaLabel);
+            this._getPopoverBody()?._bodyAriaLabel.set(this._bodyAriaLabel);
+        }
+        if (config.bodyAriaLabelledBy !== undefined) {
+            this._bodyAriaLabelledBy = unwrap(config.bodyAriaLabelledBy);
+            this._getPopoverBody()?._bodyAriaLabelledBy.set(this._bodyAriaLabelledBy);
         }
         if (config.bodyId !== undefined) {
             this._bodyId.set(unwrap(config.bodyId));
+            this._getPopoverBody()?._bodyId.set(this._bodyId());
         }
 
         if (config.isOpen !== undefined) {
@@ -908,6 +918,7 @@ export class PopoverService {
         body._closeOnEscapeKey.set(this.closeOnEscapeKey());
         body._bodyRole.set(this._bodyRole);
         body._bodyAriaLabel.set(this._bodyAriaLabel);
+        body._bodyAriaLabelledBy.set(this._bodyAriaLabelledBy);
         body._bodyId.set(this._bodyId());
         body._resizable.set(this.resizable());
         body._setBodyComponentClasses(this.additionalBodyComponentClasses());

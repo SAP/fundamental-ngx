@@ -722,5 +722,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: '세그멘테이션된 버튼',
         groupRoleDescription: '세그멘테이션된 버튼 그룹'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Field validation messages'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Field validation messages'
     }
 };

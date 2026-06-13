@@ -1,5 +1,5 @@
 {
-    "count": 958,
+    "count": 959,
     "routes": [
         {
             "path": "btp/button/nested",
@@ -2632,6 +2632,13 @@
             "component": "popover",
             "example": "new-placement",
             "className": "PopoverCdkPlacementExampleComponent"
+        },
+        {
+            "path": "core/popover/non-dialog",
+            "library": "core",
+            "component": "popover",
+            "example": "non-dialog",
+            "className": "PopoverNonDialogExampleComponent"
         },
         {
             "path": "core/popover/placement",

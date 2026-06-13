@@ -18,6 +18,7 @@ import {
 } from '@fundamental-ngx/core/popover';
 
 import { Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
+import { resolveTranslationSignalFn } from '@fundamental-ngx/i18n';
 
 @Component({
     selector: 'fd-form-input-message-group',
@@ -95,6 +96,9 @@ export class FormInputMessageGroupComponent {
 
     /** @hidden */
     readonly _elementRef = inject(ElementRef);
+
+    /** @hidden Translated aria-label for the popover body (#14260). */
+    protected readonly _popoverAriaLabel = resolveTranslationSignalFn()('coreFormInputMessageGroup.popoverAriaLabel');
 
     /**
      * Function is called every time message changes isOpen attribute

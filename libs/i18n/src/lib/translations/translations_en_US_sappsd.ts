@@ -727,5 +727,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: '[[[Ŝēğɱēŋţēƌ Ɓűţţŏŋ∙∙∙∙∙∙∙∙]]]',
         groupRoleDescription: '[[[Ŝēğɱēŋţēƌ Ɓűţţŏŋ Ģŗŏűρ∙∙∙∙∙]]]'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Field validation messages'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Field validation messages'
     }
 };

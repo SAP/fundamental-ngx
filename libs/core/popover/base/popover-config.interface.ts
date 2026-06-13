@@ -2,6 +2,7 @@ import { ConnectedPosition, ScrollStrategy } from '@angular/cdk/overlay';
 import { ElementRef } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
+import { PopoverBodyRole } from '../popover.component';
 
 /**
  * Configuration object for popover trigger events.
@@ -137,11 +138,14 @@ export interface PopoverConfig {
     /** Whether the popover body is resizable. */
     resizable?: boolean;
 
-    /** ARIA role for the popover body. */
-    bodyRole?: string | null;
+    /** ARIA role for the popover body. Common values: 'dialog', 'region', 'menu', 'listbox', 'tooltip', 'alertdialog'. */
+    bodyRole?: PopoverBodyRole | (string & {}) | null;
 
     /** ARIA label for the popover body. */
     bodyAriaLabel?: string | null;
+
+    /** ID of the element that labels the popover body. */
+    bodyAriaLabelledBy?: string | null;
 
     /** ID for the popover body. */
     bodyId?: string | null;

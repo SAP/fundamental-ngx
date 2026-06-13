@@ -8,6 +8,7 @@ import {
     PopoverControlComponent,
     TriggerConfig
 } from '@fundamental-ngx/core/popover';
+import { resolveTranslationSignalFn } from '@fundamental-ngx/i18n';
 
 /**
  * This extends core implementation  to support richer extensibility and instead of relying
@@ -46,4 +47,9 @@ export class InputMessageGroupWithTemplate extends FormInputMessageGroupComponen
      */
     @ContentChild('triggerItem', { static: false })
     triggerItemTemplate: TemplateRef<any>;
+
+    /** @hidden Translated aria-label for the popover body (#14260). Overrides the core key with the platform key. */
+    protected override readonly _popoverAriaLabel = resolveTranslationSignalFn()(
+        'platformInputMessageGroup.popoverAriaLabel'
+    );
 }
