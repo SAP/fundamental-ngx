@@ -5861,6 +5861,13 @@
             "className": "BreadcrumbsBasicSample"
         },
         {
+            "path": "ui5/breadcrumbs/events",
+            "library": "ui5",
+            "component": "breadcrumbs",
+            "example": "events",
+            "className": "BreadcrumbsEventsSample"
+        },
+        {
             "path": "ui5/busy-indicator/basic",
             "library": "ui5",
             "component": "busy-indicator",

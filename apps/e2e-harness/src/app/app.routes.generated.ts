@@ -5861,6 +5861,13 @@ export const generatedRoutes: Routes = [
             )
     },
     {
+        path: 'ui5/breadcrumbs/events',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/breadcrumbs/examples/events-sample').then(
+                (m) => m.BreadcrumbsEventsSample
+            )
+    },
+    {
         path: 'ui5/busy-indicator/basic',
         loadComponent: () =>
             import('../../../../libs/docs/ui5-webcomponents/busy-indicator/examples/basic-sample').then(
