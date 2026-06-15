@@ -1,5 +1,5 @@
 {
-    "count": 959,
+    "count": 961,
     "routes": [
         {
             "path": "btp/button/nested",
@@ -5817,6 +5817,13 @@
             "component": "view-settings-dialog",
             "example": "basic",
             "className": "BasicSample"
+        },
+        {
+            "path": "ui5-fiori/view-settings-dialog/custom-tabs",
+            "library": "ui5-fiori",
+            "component": "view-settings-dialog",
+            "example": "custom-tabs",
+            "className": "CustomTabsSample"
         },
         {
             "path": "ui5-fiori/wizard/basic",

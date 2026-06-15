@@ -8,6 +8,7 @@
             [titleText]="event.title"
             [subtitleText]="event.subtitle"
             [icon]="event.icon"
+            [iconTooltip]="event.iconTooltip"
             [name]="event.userName"
         >
             <div slot="default">
@@ -74,6 +75,7 @@
             [titleText]="event.title"
             [subtitleText]="event.subtitle"
             [icon]="event.icon"
+            [iconTooltip]="event.iconTooltip"
             [name]="event.userName"
         >
             <div slot="default">
@@ -128,25 +130,40 @@
         <h2 id="timeline-horizontal" class="fd-section__title">Horizontal Timeline</h2>
     </div>
     <ui5-timeline layout="Horizontal" accessibleName="Horizontal timeline demonstration">
-        <ui5-timeline-item titleText="Q1 2024" subtitleText="Planning Phase" icon="calendar">
+        <ui5-timeline-item
+            titleText="Q1 2024"
+            subtitleText="Planning Phase"
+            icon="calendar"
+            iconTooltip="Planning milestone"
+        >
             <div slot="default">
                 <ui5-text>January - March 2024</ui5-text>
                 <p class="fd-margin-top--tiny">Strategic planning and resource allocation for the upcoming year.</p>
             </div>
         </ui5-timeline-item>
-        <ui5-timeline-item titleText="Q2 2024" subtitleText="Development Phase" icon="developer-settings">
+        <ui5-timeline-item
+            titleText="Q2 2024"
+            subtitleText="Development Phase"
+            icon="developer-settings"
+            iconTooltip="Development milestone"
+        >
             <div slot="default">
                 <ui5-text>April - June 2024</ui5-text>
                 <p class="fd-margin-top--tiny">Core development work and feature implementation.</p>
             </div>
         </ui5-timeline-item>
-        <ui5-timeline-item titleText="Q3 2024" subtitleText="Testing Phase" icon="checklist-2">
+        <ui5-timeline-item
+            titleText="Q3 2024"
+            subtitleText="Testing Phase"
+            icon="checklist-2"
+            iconTooltip="Testing milestone"
+        >
             <div slot="default">
                 <ui5-text>July - September 2024</ui5-text>
                 <p class="fd-margin-top--tiny">Comprehensive testing and quality assurance activities.</p>
             </div>
         </ui5-timeline-item>
-        <ui5-timeline-item titleText="Q4 2024" subtitleText="Launch Phase" icon="play">
+        <ui5-timeline-item titleText="Q4 2024" subtitleText="Launch Phase" icon="play" iconTooltip="Launch milestone">
             <div slot="default">
                 <ui5-text>October - December 2024</ui5-text>
                 <p class="fd-margin-top--tiny">Product launch and market rollout activities.</p>
