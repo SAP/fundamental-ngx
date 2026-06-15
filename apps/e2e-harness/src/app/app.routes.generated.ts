@@ -6025,6 +6025,13 @@ export const generatedRoutes: Routes = [
             )
     },
     {
+        path: 'ui5/date-range-picker/two-months',
+        loadComponent: () =>
+            import('../../../../libs/docs/ui5-webcomponents/date-range-picker/examples/two-months-sample').then(
+                (m) => m.DateRangePickerTwoMonthsSample
+            )
+    },
+    {
         path: 'ui5/date-range-picker/value-state',
         loadComponent: () =>
             import('../../../../libs/docs/ui5-webcomponents/date-range-picker/examples/value-state-sample').then(
