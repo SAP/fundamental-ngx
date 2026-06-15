@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import type { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base/types';
 import { SortItem } from '@fundamental-ngx/ui5-webcomponents-fiori/sort-item';
 import { ViewSettingsDialog } from '@fundamental-ngx/ui5-webcomponents-fiori/view-settings-dialog';
@@ -59,7 +59,6 @@ type Density = 'compact' | 'cozy' | 'condensed';
 export class CustomTabsSample {
     dialogOpen = signal(false);
     sortDescending = signal(false);
-    resetEnabled = signal(false);
     resultText = signal('');
 
     private readonly defaultDensity: Density = 'cozy';
@@ -80,6 +79,12 @@ export class CustomTabsSample {
     columnOptions = signal<ColumnOption[]>(structuredClone(this.defaultColumns));
     currentDensity = signal<Density>(this.defaultDensity);
 
+    readonly resetEnabled = computed(() => {
+        const columnsChanged = JSON.stringify(this.columnOptions()) !== JSON.stringify(this.defaultColumns);
+        const densityChanged = this.currentDensity() !== this.defaultDensity;
+        return columnsChanged || densityChanged;
+    });
+
     onOpenDialog(): void {
         this.dialogOpen.set(true);
     }
@@ -88,12 +93,10 @@ export class CustomTabsSample {
         this.columnOptions.update((columns) =>
             columns.map((col) => (col.key === key ? { ...col, visible: !col.visible } : col))
         );
-        this.updateResetEnabled();
     }
 
     onDensityChange(density: Density): void {
         this.currentDensity.set(density);
-        this.updateResetEnabled();
     }
 
     onConfirm(event: UI5WrapperCustomEvent<ViewSettingsDialog, 'ui5Confirm'>): void {
@@ -113,7 +116,6 @@ export class CustomTabsSample {
 
         this.resultText.set(resultLines.join('\n'));
         this.dialogOpen.set(false);
-        this.resetEnabled.set(false);
     }
 
     onCancel(): void {
@@ -127,12 +129,5 @@ export class CustomTabsSample {
     onReset(): void {
         this.columnOptions.set(structuredClone(this.defaultColumns));
         this.currentDensity.set(this.defaultDensity);
-        this.resetEnabled.set(false);
-    }
-
-    private updateResetEnabled(): void {
-        const columnsChanged = JSON.stringify(this.columnOptions()) !== JSON.stringify(this.defaultColumns);
-        const densityChanged = this.currentDensity() !== this.defaultDensity;
-        this.resetEnabled.set(columnsChanged || densityChanged);
     }
 }
