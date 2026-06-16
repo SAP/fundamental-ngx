@@ -90,7 +90,7 @@
                 (mouseenter)="onSubmenuMouseEnter()"
                 (mouseleave)="onSubmenuMouseLeave($event)"
             >
-                <ng-container *ngTemplateOutlet="submenu()"></ng-container>
+                <ng-container [ngTemplateOutlet]="submenu()"></ng-container>
             </fd-popover-body>
         </fd-popover>
     }

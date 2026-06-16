@@ -7,6 +7,7 @@ import {
     ChangeDetectorRef,
     Component,
     computed,
+    DestroyRef,
     ElementRef,
     EventEmitter,
     HostListener,
@@ -45,6 +46,8 @@ let uniqueSubtitleId = 0;
     imports: [PopoverBodyComponent, PopoverComponent, PopoverControlComponent, CommonModule]
 })
 export class UserMenuListItemComponent implements KeyboardSupportItemInterface {
+    /** @hidden Event name for child menu item state changes */
+    private static readonly STATE_CHANGE_EVENT = 'fdMenuItemStateChange';
     /** Event emitter for isOpenChange event that controls the submenu popover body */
     @Output()
     readonly isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -121,6 +124,9 @@ export class UserMenuListItemComponent implements KeyboardSupportItemInterface {
     /** @hidden */
     private _changeDetectionRef = inject(ChangeDetectorRef);
 
+    /** @hidden */
+    private readonly _destroyRef = inject(DestroyRef);
+
     /** @hidden RTL service for direction detection */
     private readonly _rtlService = inject(RtlService, {
         optional: true
@@ -135,8 +141,25 @@ export class UserMenuListItemComponent implements KeyboardSupportItemInterface {
     /** @hidden Timer for delayed close on mouseleave */
     private _hoverCloseTimer: ReturnType<typeof setTimeout> | null = null;
 
+    /** @hidden Track number of open child submenus */
+    private _openChildCount = 0;
+
+    /** @hidden Flag indicating mouse has left the popover and close is pending */
+    private _pendingClose = false;
+
+    /** @hidden Cleanup function for child state listener */
+    private _childStateListenerCleanup: (() => void) | null = null;
+
     /** @hidden Grace period in ms before closing submenu on mouseleave */
     private readonly _hoverCloseDelay = 150;
+
+    constructor() {
+        this._destroyRef.onDestroy(() => {
+            this._childStateListenerCleanup?.();
+            this._childStateListenerCleanup = null;
+            this._cancelHoverCloseTimer();
+        });
+    }
 
     /** @hidden */
     @HostListener('focusin')
@@ -218,26 +241,33 @@ export class UserMenuListItemComponent implements KeyboardSupportItemInterface {
     /** @hidden Cancel close when mouse enters the submenu popover body */
     onSubmenuMouseEnter(): void {
         this._cancelHoverCloseTimer();
+        this._pendingClose = false;
     }
 
     /** @hidden Schedule close when mouse leaves the submenu popover body */
     onSubmenuMouseLeave(event: MouseEvent): void {
-        const relatedTarget = event.relatedTarget as HTMLElement;
-        if (!relatedTarget) {
-            this._scheduleHoverClose();
+        if (!this.hasSubmenu() || this.mobile()) {
             return;
         }
 
-        // Get the native DOM element of this item's submenu popover body
+        const relatedTarget = event.relatedTarget as HTMLElement;
+        // Navigate: popover() -> popoverBody signal -> PopoverBodyComponent -> ElementRef -> nativeElement
         const thisItemsPopoverBody = this.popover()?.popoverBody?.()?._elementRef?.nativeElement;
 
-        // Don't close if mouse is still in this item's popover or moved to any nested popover
-        const mouseStillInThisPopover = thisItemsPopoverBody?.contains(relatedTarget);
-        const mouseEnteredAnyPopover = relatedTarget.closest('fd-popover-body') !== null;
-
-        if (!mouseStillInThisPopover && !mouseEnteredAnyPopover) {
-            this._scheduleHoverClose();
+        // Don't close if mouse is still in this item's popover
+        if (thisItemsPopoverBody && relatedTarget && thisItemsPopoverBody.contains(relatedTarget)) {
+            return;
         }
+
+        // Mark that we want to close, but wait if children are open
+        this._pendingClose = true;
+
+        // If any child submenu is open, wait for it to close
+        if (this._openChildCount > 0) {
+            return;
+        }
+
+        this._scheduleHoverClose();
     }
 
     /** Handles submenu selection in mobile mode */
@@ -279,6 +309,20 @@ export class UserMenuListItemComponent implements KeyboardSupportItemInterface {
 
         this.isOpenChange.emit(isOpen);
 
+        // Notify parent item (if any) about child state change
+        this._notifyParentOfStateChange(isOpen);
+
+        // Setup listener for child state changes if opening
+        if (isOpen) {
+            this._setupChildStateListener(popoverBodyEl?._elementRef.nativeElement);
+        } else {
+            // Reset state when closing
+            this._openChildCount = 0;
+            this._pendingClose = false;
+            this._childStateListenerCleanup?.();
+            this._childStateListenerCleanup = null;
+        }
+
         afterNextRender(
             () => {
                 this.isOpen() ? linkElement.classList.add('is-selected') : linkElement.classList.remove('is-selected');
@@ -296,6 +340,52 @@ export class UserMenuListItemComponent implements KeyboardSupportItemInterface {
         this._changeDetectionRef.detectChanges();
     }
 
+    /** @hidden Notify parent menu item of this item's state change */
+    private _notifyParentOfStateChange(isOpen: boolean): void {
+        // Dispatch custom event that bubbles up to parent popover bodies
+        const event = new CustomEvent(UserMenuListItemComponent.STATE_CHANGE_EVENT, {
+            detail: { isOpen },
+            bubbles: true
+        });
+        this._elementRef.nativeElement.dispatchEvent(event);
+    }
+
+    /** @hidden Setup listener for child menu item state changes */
+    private _setupChildStateListener(popoverBody: HTMLElement): void {
+        if (!popoverBody) {
+            return;
+        }
+
+        // Clean up previous listener if any
+        this._childStateListenerCleanup?.();
+
+        // Listen for state changes from child menu items
+        const handleChildStateChange = (event: Event): void => {
+            const customEvent = event as CustomEvent<{ isOpen: boolean }>;
+            // Stop propagation to prevent parent popover bodies from double-counting
+            // this event. Each level re-emits its own state change via _notifyParentOfStateChange.
+            event.stopPropagation();
+
+            if (customEvent.detail.isOpen) {
+                this._openChildCount++;
+            } else {
+                this._openChildCount = Math.max(0, this._openChildCount - 1);
+
+                // If no more children are open and we have a pending close, execute it
+                if (this._openChildCount === 0 && this._pendingClose) {
+                    this._scheduleHoverClose();
+                }
+            }
+        };
+
+        popoverBody.addEventListener(UserMenuListItemComponent.STATE_CHANGE_EVENT, handleChildStateChange);
+
+        // Store cleanup function (destroyed via constructor-registered onDestroy)
+        this._childStateListenerCleanup = () => {
+            popoverBody.removeEventListener(UserMenuListItemComponent.STATE_CHANGE_EVENT, handleChildStateChange);
+        };
+    }
+
     /** @hidden Schedule a delayed close of the submenu popover */
     private _scheduleHoverClose(): void {
         this._cancelHoverCloseTimer();
@@ -304,6 +394,7 @@ export class UserMenuListItemComponent implements KeyboardSupportItemInterface {
             if (popoverInstance && this.isOpen()) {
                 popoverInstance.close();
             }
+            this._pendingClose = false;
         }, this._hoverCloseDelay);
     }
 
