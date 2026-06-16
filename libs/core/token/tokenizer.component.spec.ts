@@ -272,7 +272,7 @@ describe('TokenizerComponent', () => {
             fixture.componentInstance.compact = true;
             fixture.detectChanges();
 
-            // Force width-collapse to hide 2 tokens
+            // Force width-collapse to hide all 3 tokens (elementWidth=1 < combinedTokenWidth=100)
             jest.spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').mockReturnValue({
                 width: 1
             } as DOMRect);
@@ -289,23 +289,15 @@ describe('TokenizerComponent', () => {
             const labelElement = fixture.nativeElement.querySelector('.fd-tokenizer-more');
             expect(labelElement).toBeTruthy();
             const labelText = labelElement?.textContent?.trim();
-            // Expected: 2 width-hidden + 100 external = 102
-            expect(labelText).toContain('102');
+            // Expected: 3 width-hidden (all 3 fixture tokens collapsed) + 100 external = 103
+            expect(labelText).toContain('103');
         });
 
         it('adds externalHiddenCount to the "+N more" label in cozy mode', async () => {
             fixture.componentInstance.compact = false;
             fixture.detectChanges();
 
-            // Force hiddenCozyTokenCount = 3
-            jest.spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').mockReturnValue({
-                left: 10
-            } as DOMRect);
-            component.tokenList.forEach((token, index) => {
-                jest.spyOn(token.tokenWrapperElement()!.nativeElement, 'getBoundingClientRect').mockReturnValue({
-                    right: index < 0 ? 5 : 15 // all tokens have right > containerLeft, so hiddenCozyTokenCount = 3
-                } as DOMRect);
-            });
+            // externalHiddenCount drives the indicator in cozy mode (no width-collapse path)
             jest.spyOn(component.tokenizerInnerEl.nativeElement, 'scrollWidth', 'get').mockReturnValue(50);
             jest.spyOn(component.tokenizerInnerEl.nativeElement, 'clientWidth', 'get').mockReturnValue(10);
 
@@ -320,8 +312,8 @@ describe('TokenizerComponent', () => {
             const labelElement = fixture.nativeElement.querySelector('.fd-tokenizer-more');
             expect(labelElement).toBeTruthy();
             const labelText = labelElement?.textContent?.trim();
-            // Expected: 3 hiddenCozyTokenCount + 50 external = 53
-            expect(labelText).toContain('53');
+            // Expected: 0 cozy-hidden (no tokens out of view) + 50 external = 50
+            expect(labelText).toContain('50');
         });
 
         it('renders "+N more" indicator when externalHiddenCount > 0 even with no width-hidden tokens', async () => {
@@ -478,6 +470,32 @@ describe('TokenizerComponent', () => {
             fixture.detectChanges();
             await whenStable(fixture);
             expect(component._showMoreElement()).toBe(false);
+        });
+
+        it('does NOT show "0 more" when externalHiddenCount drops to 0 and no width-hidden tokens', async () => {
+            fixture.componentInstance.compact = true;
+            fixture.detectChanges();
+
+            // Wide viewport — no width-collapse
+            jest.spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').mockReturnValue({
+                width: 1000
+            } as DOMRect);
+            jest.spyOn(component, 'getCombinedTokenWidth').mockReturnValue(100);
+            component.onResize();
+            fixture.detectChanges();
+            await whenStable(fixture);
+
+            // Start with externalHiddenCount > 0 — indicator shows
+            fixture.componentInstance.externalHiddenCount = 5;
+            fixture.detectChanges();
+            await whenStable(fixture);
+            expect(fixture.nativeElement.querySelector('.fd-tokenizer-more')).not.toBeNull();
+
+            // Drop to 0 — indicator must disappear entirely (no "0 more")
+            fixture.componentInstance.externalHiddenCount = 0;
+            fixture.detectChanges();
+            await whenStable(fixture);
+            expect(fixture.nativeElement.querySelector('.fd-tokenizer-more')).toBeNull();
         });
     });
 });

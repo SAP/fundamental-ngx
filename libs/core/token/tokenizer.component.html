@@ -15,7 +15,10 @@
         ) {
             <ng-template [ngTemplateOutlet]="tokensOverflow"></ng-template>
         } @else {
-            @if (hasInternalOverflowIndicator()) {
+            @if (
+                hasInternalOverflowIndicator() &&
+                moreTokensLeft.length + moreTokensRight.length + hiddenCozyTokenCount + externalHiddenCount() > 0
+            ) {
                 <span
                     (click)="moreClicked()"
                     (keydown.enter)="moreClicked()"
@@ -86,7 +89,10 @@
     </fd-popover>
 </ng-template>
 <ng-template #moreElement>
-    @if (hasInternalOverflowIndicator()) {
+    @if (
+        hasInternalOverflowIndicator() &&
+        moreTokensLeft.length + moreTokensRight.length + hiddenCozyTokenCount + externalHiddenCount() > 0
+    ) {
         <span
             (click)="moreClicked()"
             (keydown.enter)="moreClicked()"
