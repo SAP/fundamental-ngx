@@ -39,6 +39,10 @@ const componentRoutes = [
             import('@fundamental-ngx/docs/ui5-webcomponents-fiori/flexible-column-layout').then(configureLibRoutes)
     },
     {
+        path: 'hero-banner',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents-fiori/hero-banner').then(configureLibRoutes)
+    },
+    {
         path: 'illustrated-message',
         loadChildren: () =>
             import('@fundamental-ngx/docs/ui5-webcomponents-fiori/illustrated-message').then(configureLibRoutes)
