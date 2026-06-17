@@ -295,7 +295,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
         }
 
         // watch for changes to the tokenList and attempt to expand/collapse tokens as needed
-        this.tokenList.changes.pipe(startWith(null)).subscribe(() => {
+        this.tokenList.changes.pipe(startWith(null), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this.tokenListChangesSubscription?.unsubscribe();
             this.tokenListChangesSubscription = new Subscription();
             this._unsubscribeTokenOutputs();
