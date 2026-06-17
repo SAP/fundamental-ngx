@@ -1,3 +1,13 @@
+## 0.63.0-rc.29 (2026-06-17)
+
+### 🩹 Fixes
+
+- **platform:** fix the exception that occurs in fdp-approval-flow for multiple blocks ([#14228](https://github.com/SAP/fundamental-ngx/pull/14228))
+
+### ❤️ Thank You
+
+- Kevin.Zhu @zhuwentao0724
+
 ## 0.63.0-rc.28 (2026-06-16)
 
 This was a version bump only for platform to align it with other projects, there were no code changes.
