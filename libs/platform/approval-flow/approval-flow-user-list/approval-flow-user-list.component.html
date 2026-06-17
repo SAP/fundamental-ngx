@@ -12,6 +12,7 @@
         }
     </div>
 }
+@if(_displayUsers.length > 0){
 <fdp-list
     [selectionMode]="isSelectable ? 'multi' : 'none'"
     [selection]="isSelectable"
@@ -33,3 +34,9 @@
         ></fdp-standard-list-item>
     }
 </fdp-list>
+}
+@else {
+    <fdp-list>
+        <fdp-standard-list-item noDataText="No Data Found"></fdp-standard-list-item>
+    </fdp-list>
+}
