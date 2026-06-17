@@ -27,6 +27,7 @@ import {
     ViewChild,
     ViewContainerRef,
     ViewEncapsulation,
+    afterNextRender,
     computed,
     inject,
     isDevMode
@@ -582,6 +583,15 @@ export class SelectComponent<T = any>
         this._changeDetectorRef.markForCheck();
         this._controlElementRef.nativeElement.focus();
         this.isOpenChange.emit(true);
+        // _optionPanel is null until the CDK overlay portal renders. Scroll after the next render.
+        afterNextRender(
+            () => {
+                if (this._isOpen && this._optionPanel) {
+                    this._keyManagerService._scrollActiveOptionIntoView();
+                }
+            },
+            { injector: this._injector }
+        );
     }
 
     /** @hidden */
