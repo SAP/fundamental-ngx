@@ -73,6 +73,8 @@ describe('MessageBoxDefaultComponent — focusTrapped: false', () => {
         document.body.appendChild(fixture.nativeElement);
         await fixture.whenStable();
         const approveBtn = fixture.nativeElement.querySelector('fd-button-bar button');
+        // Intentionally weak: we assert the button was not focused, not where focus landed.
+        // Asserting === document.body is fragile in jsdom when focus trap is suppressed.
         expect(document.activeElement).not.toBe(approveBtn);
         fixture.nativeElement.remove();
     });
@@ -98,6 +100,13 @@ describe('MessageBoxDefaultComponent — focusTrapped: true', () => {
 
         fixture = TestBed.createComponent(MessageBoxDefaultComponent);
         fixture.componentInstance._messageBoxContent = buildContent();
+    });
+
+    afterEach(() => {
+        Object.defineProperty(HTMLElement.prototype, 'offsetWidth', {
+            configurable: true,
+            value: 0
+        });
     });
 
     it('should move focus to the approve button when focusTrapped is true', async () => {
