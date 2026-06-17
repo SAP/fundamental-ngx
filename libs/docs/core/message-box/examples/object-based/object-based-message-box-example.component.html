@@ -1,4 +1,10 @@
 <button fd-button label="Open from object" (click)="open()"></button>
+<button fd-button fdType="ghost" label="Open without focus trap" (click)="openWithoutFocusTrap()"></button>
+
+<p class="fd-margin-top--sm fd-margin-bottom--sm">
+    Use <code>focusTrapped: false</code> for notification-style message boxes where the user should remain able to
+    interact with the page. Focus stays where it was when the dialog opened.
+</p>
 
 <p>{{ closeReason }}</p>
 
