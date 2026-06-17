@@ -18,6 +18,7 @@
                 @if (_messageBoxContent.approveButton) {
                     <fd-button-bar
                         fdkInitialFocus
+                        [enabled]="_messageBoxConfig.focusTrapped !== false"
                         fdType="emphasized"
                         [label]="_messageBoxContent.approveButton"
                         [ariaLabel]="_messageBoxContent.approveButtonAriaLabel"

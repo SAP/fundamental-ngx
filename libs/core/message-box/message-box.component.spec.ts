@@ -1,7 +1,8 @@
 import { Component, NgModule, ViewChild } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { NavigationStart, Router, RouterEvent, RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
+import { FocusTrapService } from '@fundamental-ngx/cdk/utils';
 import { FD_DIALOG_FOCUS_TRAP_ERROR } from '@fundamental-ngx/core/dialog';
 import { Subject } from 'rxjs';
 import { MessageBoxComponent } from './message-box.component';
@@ -54,9 +55,9 @@ describe('MessageBoxComponent', () => {
         });
     }));
 
-    function setup(providers: { token: any; provider: { useValue: any } }[] = []): void {
+    async function setup(providers: { token: any; provider: { useValue: any } }[] = []): Promise<void> {
         providers.forEach((provider) => TestBed.overrideProvider(provider.token, provider.provider));
-        TestBed.compileComponents();
+        await TestBed.compileComponents();
 
         fixture = TestBed.createComponent(TemplateTestComponent);
         component = fixture.componentInstance;
@@ -65,21 +66,21 @@ describe('MessageBoxComponent', () => {
         router = TestBed.inject(Router);
     }
 
-    it('should create', () => {
-        setup();
+    it('should create', async () => {
+        await setup();
         expect(component).toBeTruthy();
         expect(messageBoxComponent).toBeTruthy();
     });
 
-    it('should create w/o Router', () => {
-        setup([{ token: Router, provider: { useValue: null } }]);
+    it('should create w/o Router', async () => {
+        await setup([{ token: Router, provider: { useValue: null } }]);
         expect(router).toBeNull();
         expect(component).toBeTruthy();
         expect(messageBoxComponent).toBeTruthy();
     });
 
-    it('should close after esc pressed', () => {
-        setup();
+    it('should close after esc pressed', async () => {
+        await setup();
 
         const dismissSpy = jest.spyOn(messageBoxRef, 'dismiss');
 
@@ -89,10 +90,10 @@ describe('MessageBoxComponent', () => {
         expect(dismissSpy).toHaveBeenCalled();
     });
 
-    it('should close after backdrop clicked', () => {
+    it('should close after backdrop clicked', async () => {
         const customDialogConfig = { ...new MessageBoxConfig(), backdropClickCloseable: true };
 
-        setup([{ token: MessageBoxConfig, provider: { useValue: customDialogConfig } }]);
+        await setup([{ token: MessageBoxConfig, provider: { useValue: customDialogConfig } }]);
 
         const dismissSpy = jest.spyOn(messageBoxRef, 'dismiss');
         fixture.detectChanges();
@@ -103,15 +104,15 @@ describe('MessageBoxComponent', () => {
         expect(dismissSpy).toHaveBeenCalled();
     });
 
-    it('should set custom position', () => {
+    it('should set custom position', async () => {
         const customMessageBoxConfig = { ...new MessageBoxConfig(), position: { bottom: '100px', right: '50px' } };
-        setup([{ token: MessageBoxConfig, provider: { useValue: customMessageBoxConfig } }]);
+        await setup([{ token: MessageBoxConfig, provider: { useValue: customMessageBoxConfig } }]);
 
         expect(messageBoxComponent.dialogWindow.nativeElement.style.right).toEqual('50px');
         expect(messageBoxComponent.dialogWindow.nativeElement.style.bottom).toEqual('100px');
     });
 
-    it('should set custom size', () => {
+    it('should set custom size', async () => {
         const customSize = {
             width: '500px',
             height: '600px',
@@ -122,7 +123,7 @@ describe('MessageBoxComponent', () => {
         };
         const customMessageBoxConfig = { ...new MessageBoxConfig(), ...customSize };
 
-        setup([{ token: MessageBoxConfig, provider: { useValue: customMessageBoxConfig } }]);
+        await setup([{ token: MessageBoxConfig, provider: { useValue: customMessageBoxConfig } }]);
 
         expect(messageBoxComponent.dialogWindow.nativeElement.style.width).toEqual(customSize.width);
         expect(messageBoxComponent.dialogWindow.nativeElement.style.height).toEqual(customSize.height);
@@ -132,37 +133,37 @@ describe('MessageBoxComponent', () => {
         expect(messageBoxComponent.dialogWindow.nativeElement.style.maxHeight).toEqual(customSize.maxHeight);
     });
 
-    it('should have custom classes', () => {
+    it('should have custom classes', async () => {
         const customMessageBoxConfig = {
             ...new MessageBoxConfig(),
             backdropClass: 'customBackdropClass',
             dialogPanelClass: 'customPanelClass'
         };
-        setup([{ token: MessageBoxConfig, provider: { useValue: customMessageBoxConfig } }]);
+        await setup([{ token: MessageBoxConfig, provider: { useValue: customMessageBoxConfig } }]);
 
         expect(fixture.nativeElement.querySelector('.fd-message-box').classList).toContain('customBackdropClass');
         expect(fixture.nativeElement.querySelector('.fd-message-box__content').classList).toContain('customPanelClass');
     });
 
-    it('should display in mobile mode', () => {
+    it('should display in mobile mode', async () => {
         const customMessageBoxConfig = { ...new MessageBoxConfig(), mobile: true };
-        setup([{ token: MessageBoxConfig, provider: { useValue: customMessageBoxConfig } }]);
+        await setup([{ token: MessageBoxConfig, provider: { useValue: customMessageBoxConfig } }]);
 
         expect(fixture.nativeElement.querySelector('.fd-message-box__content').classList).toContain(
             'fd-message-box__content--mobile'
         );
     });
 
-    it('should display in mobile mode with no stretch', () => {
+    it('should display in mobile mode with no stretch', async () => {
         const customMessageBoxConfig = { ...new MessageBoxConfig(), mobileOuterSpacing: true };
-        setup([{ token: MessageBoxConfig, provider: { useValue: customMessageBoxConfig } }]);
+        await setup([{ token: MessageBoxConfig, provider: { useValue: customMessageBoxConfig } }]);
 
         expect(fixture.nativeElement.querySelector('.fd-message-box__content').classList).toContain(
             'fd-message-box__content--no-mobile-stretch'
         );
     });
 
-    it('should use custom attributes', () => {
+    it('should use custom attributes', async () => {
         const customMessageBoxConfig = {
             ...new MessageBoxConfig(),
             id: 'customId',
@@ -170,7 +171,7 @@ describe('MessageBoxComponent', () => {
             ariaLabelledBy: 'customAriLabelledBy',
             ariaDescribedBy: 'customAriaDescribedBy'
         };
-        setup([{ token: MessageBoxConfig, provider: { useValue: customMessageBoxConfig } }]);
+        await setup([{ token: MessageBoxConfig, provider: { useValue: customMessageBoxConfig } }]);
 
         const messageBoxWindowEl = fixture.nativeElement.querySelector('.fd-message-box__content');
 
@@ -180,12 +181,82 @@ describe('MessageBoxComponent', () => {
         expect(messageBoxWindowEl.getAttribute('aria-describedby')).toEqual(customMessageBoxConfig.ariaDescribedBy);
     });
 
-    it('should close the message box on router navigation start', () => {
-        setup();
+    it('should close the message box on router navigation start', async () => {
+        await setup();
         const event = new NavigationStart(42, '/');
         const spy = jest.spyOn(messageBoxRef, 'dismiss');
         routerEventsSubject.next(event);
 
         expect(spy).toHaveBeenCalled();
+    });
+});
+
+describe('MessageBoxComponent — setupFocusTrap call count', () => {
+    describe('when focusTrapped is true', () => {
+        let fixture: ComponentFixture<TemplateTestComponent>;
+        let focusTrapService: { createFocusTrap: jest.Mock; deactivateFocusTrap: jest.Mock };
+
+        beforeEach(async () => {
+            focusTrapService = {
+                createFocusTrap: jest.fn().mockReturnValue('trap-id'),
+                deactivateFocusTrap: jest.fn()
+            };
+
+            const cfg = new MessageBoxConfig();
+            cfg.focusTrapped = true;
+
+            await TestBed.configureTestingModule({
+                imports: [TestModule, RouterModule, RouterTestingModule],
+                providers: [
+                    { provide: MessageBoxConfig, useValue: cfg },
+                    { provide: MessageBoxRef, useValue: new MessageBoxRef() },
+                    { provide: FocusTrapService, useValue: focusTrapService },
+                    { provide: FD_DIALOG_FOCUS_TRAP_ERROR, useValue: true }
+                ]
+            }).compileComponents();
+
+            fixture = TestBed.createComponent(TemplateTestComponent);
+            fixture.detectChanges();
+        });
+
+        it('should call createFocusTrap exactly once', fakeAsync(() => {
+            tick(0);
+            fixture.detectChanges();
+            expect(focusTrapService.createFocusTrap).toHaveBeenCalledTimes(1);
+        }));
+    });
+
+    describe('when focusTrapped is false', () => {
+        let fixture: ComponentFixture<TemplateTestComponent>;
+        let focusTrapService: { createFocusTrap: jest.Mock; deactivateFocusTrap: jest.Mock };
+
+        beforeEach(async () => {
+            focusTrapService = {
+                createFocusTrap: jest.fn().mockReturnValue('trap-id'),
+                deactivateFocusTrap: jest.fn()
+            };
+
+            const cfg = new MessageBoxConfig();
+            cfg.focusTrapped = false;
+
+            await TestBed.configureTestingModule({
+                imports: [TestModule, RouterModule, RouterTestingModule],
+                providers: [
+                    { provide: MessageBoxConfig, useValue: cfg },
+                    { provide: MessageBoxRef, useValue: new MessageBoxRef() },
+                    { provide: FocusTrapService, useValue: focusTrapService },
+                    { provide: FD_DIALOG_FOCUS_TRAP_ERROR, useValue: true }
+                ]
+            }).compileComponents();
+
+            fixture = TestBed.createComponent(TemplateTestComponent);
+            fixture.detectChanges();
+        });
+
+        it('should not call createFocusTrap', fakeAsync(() => {
+            tick(0);
+            fixture.detectChanges();
+            expect(focusTrapService.createFocusTrap).not.toHaveBeenCalled();
+        }));
     });
 });
