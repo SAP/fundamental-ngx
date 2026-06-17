@@ -583,7 +583,7 @@ export class SelectComponent<T = any>
         this._changeDetectorRef.markForCheck();
         this._controlElementRef.nativeElement.focus();
         this.isOpenChange.emit(true);
-        // _optionPanel is null until the CDK overlay portal renders. Scroll after the next render.
+        // Wait for layout: option offsetHeight is 0 until the overlay is painted.
         afterNextRender(
             () => {
                 if (this._isOpen && this._optionPanel) {
