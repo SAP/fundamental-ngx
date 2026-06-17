@@ -1,3 +1,13 @@
+## 0.63.0-rc.30 (2026-06-17)
+
+### 🩹 Fixes
+
+- **core:** guard tokenList.changes with takeUntilDestroyed ([#14296](https://github.com/SAP/fundamental-ngx/pull/14296))
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.63.0-rc.29 (2026-06-17)
 
 This was a version bump only for core to align it with other projects, there were no code changes.
