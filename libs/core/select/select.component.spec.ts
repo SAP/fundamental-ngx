@@ -410,6 +410,20 @@ describe('SelectComponent', () => {
         );
     });
 
+    describe('scroll behavior on open', () => {
+        it('should scroll to the selected item when the panel is opened', async () => {
+            component.value = 'value-3';
+            await wait(fixture);
+
+            const scrollSpy = jest.spyOn(_keyService, '_scrollActiveOptionIntoView').mockImplementation(() => {});
+
+            component.open();
+            await wait(fixture);
+
+            expect(scrollSpy).toHaveBeenCalled();
+        });
+    });
+
     describe('filtering ', () => {
         let fixtureFilter: ComponentFixture<TestFilteringWrapperComponent>;
         beforeEach(() => {
