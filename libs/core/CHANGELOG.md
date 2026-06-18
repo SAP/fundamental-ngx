@@ -1,3 +1,14 @@
+## 0.63.0-rc.33 (2026-06-18)
+
+### 🩹 Fixes
+
+- **core:** limit rendered tokens in multi-input to visible count ([#14137](https://github.com/SAP/fundamental-ngx/pull/14137))
+
+### ❤️ Thank You
+
+- deno
+- github-actions
+
 ## 0.63.0-rc.32 (2026-06-18)
 
 ### 🩹 Fixes
