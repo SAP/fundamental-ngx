@@ -1,6 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
+    globalSetup: './apps/e2e-harness/e2e/global-setup.ts',
     testDir: './apps/e2e-harness/e2e',
     fullyParallel: true,
     forbidOnly: !!process.env['CI'],
