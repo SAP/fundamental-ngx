@@ -60,13 +60,14 @@
                 [showOverflowPopover]="false"
                 [open]="open"
                 [tokenizerFocusable]="false"
+                [externalHiddenCount]="hiddenCount()"
                 (moreClickedEvent)="_moreClicked()"
                 class="fd-multi-input-tokenizer-custom"
                 tabindex="-1"
                 fdMultiAnnouncer
                 [multiAnnouncerOptions]="filterFn(dropdownValues, searchTerm)"
             >
-                @for (option of viewModel.selectedOptions; track valueFn(option.item)) {
+                @for (option of renderedTokens(); track valueFn(option.item)) {
                     <fd-token
                         [disabled]="disabled"
                         (onCloseClick)="_onTokenCloseClick(option, false, $event)"
@@ -98,8 +99,7 @@
                     [ariaLabelledBy]="ariaLabelledBy"
                     (keydown)="_handleInputKeydown($event)"
                     [attr.id]="inputId"
-                    (focus)="tokenizer._showAllTokens()"
-                    (blur)="tokenizer._hideTokens()"
+                    (focus)="_onInputFocus()"
                     [attr.title]="title"
                 />
             </fd-tokenizer>

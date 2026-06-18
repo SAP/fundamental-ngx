@@ -26,8 +26,11 @@ import {
     ViewChildren,
     ViewContainerRef,
     ViewEncapsulation,
+    computed,
     forwardRef,
-    inject
+    inject,
+    input,
+    linkedSignal
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
@@ -144,6 +147,11 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
     @Output()
     readonly moreClickedEvent: EventEmitter<any> = new EventEmitter<any>();
 
+    /** Number of tokens the consumer chose not to render (e.g., from count-based virtualization).
+     *  When > 0, the tokenizer adds this to its own width-hidden count in the "+N more" label,
+     *  and suppresses its internal overflow popover (consumer should handle "show me" via moreClickedEvent). */
+    readonly externalHiddenCount = input(0);
+
     /** @hidden */
     inputGroupAddonEl: ElementRef;
 
@@ -172,7 +180,12 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
     _tokenizerHasFocus = false;
 
     /** @hidden */
-    _showMoreElement = false;
+    readonly _showMoreElement = linkedSignal(() => this.externalHiddenCount() > 0);
+
+    /** Whether tokenizer's own width-collapse "+N more" span is currently rendered. */
+    readonly hasInternalOverflowIndicator = computed(
+        () => this._showMoreElement() && this._hiddenTokens.length + this.externalHiddenCount() > 0
+    );
 
     /** @hidden */
     _tokensContainerWidth = 'auto';
@@ -462,8 +475,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
             token._viewContainer()!.createEmbeddedView(token._content()!);
         });
         this._tokensContainerWidth = 'auto';
-        this._showMoreElement = false;
-        this._cdRef.detectChanges();
+        this._showMoreElement.set(false);
         this.tokenizerInnerEl.nativeElement.scrollLeft = this.tokenizerInnerEl.nativeElement.scrollWidth;
     }
 
@@ -510,7 +522,11 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
             totalTokenWidth = totalTokenWidth + this.input.nativeElement.getBoundingClientRect().width;
         }
         // add the width of the "____ more" element
-        if (this.moreTokensLeft.length > 0 && this.moreElement && this.moreElement.nativeElement) {
+        if (
+            (this.moreTokensLeft.length > 0 || this.externalHiddenCount() > 0) &&
+            this.moreElement &&
+            this.moreElement.nativeElement
+        ) {
             totalTokenWidth = totalTokenWidth + this.moreElement.nativeElement.getBoundingClientRect().width;
         }
         // add the input group addon
@@ -885,15 +901,18 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
     /** @hidden */
     private _checkMoreElementVisibility(): void {
         const showMoreElement =
-            (this.moreTokensLeft.length > 0 || this.moreTokensRight.length > 0 || this.hiddenCozyTokenCount > 0) &&
+            (this.moreTokensLeft.length > 0 ||
+                this.moreTokensRight.length > 0 ||
+                this.hiddenCozyTokenCount > 0 ||
+                this.externalHiddenCount() > 0) &&
             !this.open &&
             !this._tokenizerHasFocus;
 
-        if (showMoreElement === this._showMoreElement) {
+        if (showMoreElement === this._showMoreElement()) {
             return;
         }
 
-        this._showMoreElement = showMoreElement;
+        this._showMoreElement.set(showMoreElement);
 
         this._cdRef.detectChanges();
     }
