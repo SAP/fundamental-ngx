@@ -12,7 +12,7 @@
         }
     </div>
 }
-@if(_displayUsers.length > 0){
+@if(_displayUsers?.length > 0){
 <fdp-list
     [selectionMode]="isSelectable ? 'multi' : 'none'"
     [selection]="isSelectable"
