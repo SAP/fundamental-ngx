@@ -1,3 +1,13 @@
+## 0.63.0-rc.32 (2026-06-18)
+
+### 🩹 Fixes
+
+- **core:** scroll active element into view upon opening select ([#14299](https://github.com/SAP/fundamental-ngx/pull/14299))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
 ## 0.63.0-rc.31 (2026-06-18)
 
 ### 🩹 Fixes
