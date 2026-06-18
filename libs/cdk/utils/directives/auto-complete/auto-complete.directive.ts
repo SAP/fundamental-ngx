@@ -59,6 +59,14 @@ export class AutoCompleteDirective {
     /** @hidden */
     private _isComposing = false;
 
+    /**
+     * Tracks the intended user-typed value, derived from native `input` events.
+     * When Angular's NgModel re-pushes a stale value (e.g. after Ctrl+A → Delete),
+     * the DOM may contain the old model value when the user types the next character.
+     * We reconstruct the intended value using the cursor position and typed character.
+     */
+    private _lastInputEventValue: string | null = null;
+
     /** @hidden */
     private readonly _elementRef = inject(ElementRef);
 
@@ -76,6 +84,25 @@ export class AutoCompleteDirective {
         const keyupEvent = fromEvent<KeyboardEvent>(this._elementRef.nativeElement, 'keyup');
         const compositionStartEvent = fromEvent<CompositionEvent>(this._elementRef.nativeElement, 'compositionstart');
         const compositionEndEvent = fromEvent<CompositionEvent>(this._elementRef.nativeElement, 'compositionend');
+
+        // Track the intended user-typed value. Uses the cursor position and typed character
+        // to reconstruct the value the user intended, independent of any NgModel re-push.
+        fromEvent<InputEvent>(this._elementRef.nativeElement, 'input')
+            .pipe(takeUntilDestroyed(this._destroyRef))
+            .subscribe((evt) => {
+                const el = this._elementRef.nativeElement;
+                const cursorPos = el.selectionStart ?? el.value.length;
+                if (evt.inputType === 'insertText' && evt.data) {
+                    // Cursor is after the inserted char. Intended value = previously tracked
+                    // prefix + new char. Handles the case where NgModel re-pushed a stale
+                    // value before this keystroke (e.g. "Apple" after Ctrl+A→Delete→"B").
+                    const prev = this._lastInputEventValue ?? '';
+                    this._lastInputEventValue = prev + evt.data;
+                } else {
+                    // Deletion, paste, or other input — use current DOM value at cursor.
+                    this._lastInputEventValue = el.value.substring(0, cursorPos);
+                }
+            });
 
         keyupEvent.pipe(takeUntilDestroyed()).subscribe((evt) => this._handleKeyboardEvent(evt));
 
@@ -97,25 +124,41 @@ export class AutoCompleteDirective {
     _handleKeyboardEvent(event: KeyboardEvent): void {
         if (this.enable && !this._isComposing) {
             if (KeyUtil.isKeyCode(event, this._stopKeys)) {
-                this._elementRef.nativeElement.value = this.inputText;
+                const el = this._elementRef.nativeElement;
+                if (el.selectionStart !== el.selectionEnd) {
+                    el.value = this.inputText;
+                }
             } else if (KeyUtil.isKeyCode(event, this._completeKeys)) {
                 this._sendCompleteEvent(true);
                 this._moveIndicatorToLastCharacter();
             } else if (KeyUtil.isKeyCode(event, this._fillKeys)) {
                 this._sendCompleteEvent(false);
-            } else if (!this._isControlKey(event) && this.inputText) {
-                const hasSelection =
-                    this._elementRef.nativeElement.selectionStart !== this._elementRef.nativeElement.selectionEnd;
+            } else if (!this._isControlKey(event)) {
+                const el = this._elementRef.nativeElement;
+                const hasSelection = el.selectionStart !== el.selectionEnd;
+
+                // Use the value from the last native `input` event as the authoritative
+                // user-typed value. Angular's NgModel may have re-written el.value with a
+                // stale model value (e.g. after Ctrl+A → Delete), but the native `input`
+                // event only fires on actual user input — not on programmatic writes.
+                const currentNativeValue = this._lastInputEventValue !== null ? this._lastInputEventValue : el.value;
+                // After consuming, keep the current value so the next `input` event's
+                // `insertText` accumulation has the right prefix.
+                this._lastInputEventValue = currentNativeValue;
+
                 if (hasSelection) {
                     return;
                 }
 
-                const currentNativeValue = this._elementRef.nativeElement.value;
-
-                if (this.inputText.length > currentNativeValue.length + 1) {
-                    this.inputText = currentNativeValue;
+                if (!currentNativeValue) {
                     return;
                 }
+
+                const effectiveInputText =
+                    this.inputText.length > currentNativeValue.length + 1 ||
+                    !this.inputText.toLocaleLowerCase().startsWith(currentNativeValue.toLocaleLowerCase())
+                        ? currentNativeValue
+                        : this.inputText;
 
                 if (!this._triggerTypeAhead()) {
                     return;
@@ -123,8 +166,9 @@ export class AutoCompleteDirective {
 
                 this.oldValue = this.inputText;
 
+                const searchTerm = effectiveInputText || currentNativeValue;
                 const item = this.options.find((option) =>
-                    this.matcher(this.displayFn(option).toLocaleLowerCase(), this.inputText.toLocaleLowerCase())
+                    this.matcher(this.displayFn(option).toLocaleLowerCase(), searchTerm.toLocaleLowerCase())
                 );
 
                 if (item) {

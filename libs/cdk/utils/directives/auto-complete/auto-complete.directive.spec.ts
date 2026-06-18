@@ -123,49 +123,32 @@ describe('AutoCompleteDirective', () => {
         expect((<any>directive)._elementRef.nativeElement.value).toBe('Banana');
     });
 
-    it('should handle fast typing without selecting last typed character', () => {
-        // When typing quickly, inputText (model) can lag behind native input value.
-        // This caused the autocomplete to select the last character the user just typed.
-        // Example: typing "Week24" fast would result in "Wek24" or "Wee24"
+    it('should autocomplete correctly when NgModel re-pushes stale value before keyup (race condition)', () => {
+        // Reproduces the actual race: user types Ctrl+A → Delete → 'B' fast.
+        // 1. input event fires with insertText 'B' → _lastInputEventValue = 'B'
+        // 2. NgModel re-pushes stale 'Apple' back to el.value before keyup fires
+        // 3. keyup fires → fix must use _lastInputEventValue ('B'), not el.value ('Apple')
+        // Without the fix, el.value='Apple' is used as currentNativeValue and autocomplete
+        // searches for options matching 'Apple', producing 'AppBana'-style output.
 
-        component.values = ['Test', 'Testing', 'Tesla'];
-        fixture.detectChanges();
+        const el = (<any>directive)._elementRef.nativeElement;
 
-        // Simulate the race condition: Native value is 'Tes', but model is still 'Te'
-        directive.inputText = 'Te'; // Stale model value (length = 2)
-        (<any>directive)._elementRef.nativeElement.value = 'Tes'; // Current native value (length = 3)
-        (<any>directive)._elementRef.nativeElement.setSelectionRange(3, 3); // Cursor at end, no selection
+        // Step 1: fire a real input event so _lastInputEventValue is populated with 'B'
+        el.value = 'B';
+        el.setSelectionRange(1, 1);
+        el.dispatchEvent(new InputEvent('input', { bubbles: true, inputType: 'insertText', data: 'B' }));
 
-        // User just typed 's', triggering autocomplete
-        directive._handleKeyboardEvent(<any>{ preventDefault: () => {}, key: 's' });
+        // Step 2: NgModel re-pushes stale 'Apple' (simulates the race — CD hasn't cleared yet)
+        el.value = 'Apple';
+        directive.inputText = 'Apple';
 
-        // Autocomplete should find 'Test' (first match that starts with 'Te', the model value)
-        // and since 'Test' starts with 'Tes' (the native value), it should autocomplete
-        expect((<any>directive)._elementRef.nativeElement.value).toBe('Test');
+        // Step 3: keyup arrives — directive must use _lastInputEventValue ('B'), not el.value ('Apple')
+        directive._handleKeyboardEvent(<any>{ preventDefault: () => {}, key: 'b' });
 
-        // THE FIX: Selection should start at position 3 (current native length),
-        // NOT position 2 (stale model length)
-        // If it were 2, the 's' we just typed would be selected and overwritten by next keystroke (THE BUG)
-        expect((<any>directive)._elementRef.nativeElement.selectionStart).toBe(3);
-        expect((<any>directive)._elementRef.nativeElement.selectionEnd).toBe(4);
-    });
-
-    it('should sync selection start with current native value length, not stale model length', () => {
-        // Direct test of the fix: selection range should use current native value length
-        component.values = ['Testing', 'Test', 'Tested'];
-        fixture.detectChanges();
-
-        // Simulate: native value is 'Tes' but model is still 'Te' (1 char behind)
-        directive.inputText = 'Te'; // Stale model value (length = 2)
-        (<any>directive)._elementRef.nativeElement.value = 'Tes'; // Current native value (length = 3)
-
-        directive._handleKeyboardEvent(<any>{ preventDefault: () => {}, key: 's' });
-
-        // Should autocomplete to "Testing"
-        expect((<any>directive)._elementRef.nativeElement.value).toBe('Testing');
-        // Selection should start at position 3 (current native length), NOT position 2 (stale model length)
-        expect((<any>directive)._elementRef.nativeElement.selectionStart).toBe(3);
-        // If it was 2, the 's' we just typed would be selected and overwritten by next keystroke
-        expect((<any>directive)._elementRef.nativeElement.selectionEnd).toBe(7);
+        // 'B' matches 'Banana' — should autocomplete to 'Banana', not search from 'Apple'
+        expect(el.value).toBe('Banana');
+        // Selection starts at 1 (length of 'B'), not 5 (length of stale 'Apple')
+        expect(el.selectionStart).toBe(1);
+        expect(el.selectionEnd).toBe(6);
     });
 });

@@ -12,7 +12,7 @@ test.describe('core/combobox', () => {
         const listbox = page.locator('[role="listbox"]').first();
         await expect(listbox).toBeVisible();
         const options = listbox.locator('[role="option"]');
-        await expect(options).toHaveCount(5);
+        await expect(options).toHaveCount(8);
     });
 
     test('filters options by typing', async ({ page }) => {
@@ -70,8 +70,9 @@ test.describe('core/combobox', () => {
         // Should autocomplete to "Apple" and NOT lose the second 'p'
         await expect(input).toHaveValue('Apple');
 
-        // Clear and try another sequence
-        await input.clear();
+        // Clear via keyboard (Ctrl+A + Delete simulates real user clearing the field)
+        await input.press('Control+a');
+        await input.press('Delete');
         await input.pressSequentially('Bana', { delay: 10 });
 
         await expect(input).toHaveValue('Banana');

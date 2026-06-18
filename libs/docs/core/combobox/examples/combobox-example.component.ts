@@ -29,7 +29,9 @@ export class ComboboxExampleComponent {
 
     async testFastTyping(textToType: string): Promise<void> {
         const input = document.getElementById('comboboxID1') as HTMLInputElement;
-        if (!input) {return;}
+        if (!input) {
+            return;
+        }
 
         // Clear the input completely
         this.searchTermOne = '';
