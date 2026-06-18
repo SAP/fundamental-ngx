@@ -1,3 +1,15 @@
+## 0.63.0-rc.34 (2026-06-18)
+
+### 🩹 Fixes
+
+- **cdk:** fix autocomplete race condition with fast typing ([#14295](https://github.com/SAP/fundamental-ngx/pull/14295))
+
+### ❤️ Thank You
+
+- droshev
+- github-actions
+- Inna Atanasova @InnaAtanasova
+
 ## 0.63.0-rc.33 (2026-06-18)
 
 This was a version bump only for cdk to align it with other projects, there were no code changes.
