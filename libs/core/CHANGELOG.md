@@ -1,3 +1,13 @@
+## 0.63.0-rc.31 (2026-06-18)
+
+### 🩹 Fixes
+
+- **core:** prevent parent submenu from closing when hovering nested submenu ([#14284](https://github.com/SAP/fundamental-ngx/pull/14284))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.63.0-rc.30 (2026-06-17)
 
 ### 🩹 Fixes
