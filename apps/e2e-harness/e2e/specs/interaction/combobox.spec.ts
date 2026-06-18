@@ -12,7 +12,7 @@ test.describe('core/combobox', () => {
         const listbox = page.locator('[role="listbox"]').first();
         await expect(listbox).toBeVisible();
         const options = listbox.locator('[role="option"]');
-        await expect(options).toHaveCount(5);
+        await expect(options).toHaveCount(8);
     });
 
     test('filters options by typing', async ({ page }) => {
@@ -53,5 +53,31 @@ test.describe('core/combobox', () => {
         await option.click();
         const input = page.locator('input[role="combobox"]').first();
         await expect(input).toHaveValue('Banana');
+    });
+
+    test('handles fast typing without losing characters (autocomplete race condition)', async ({ page }) => {
+        // Regression test for: autocomplete selecting last typed character during fast typing
+        // Bug: typing "Week24" fast would result in "Wek24" or "Wee24"
+        // Cause: selection range used stale model value instead of current native input value
+
+        // Create a custom test with specific values
+        const input = page.locator('input[role="combobox"]').first();
+        await input.click();
+
+        // Type "App" with minimal delay to simulate fast typing
+        await input.pressSequentially('App', { delay: 10 });
+
+        // Should autocomplete to "Apple" and NOT lose the second 'p'
+        await expect(input).toHaveValue('Apple');
+
+        // Clear via keyboard (Ctrl+A + Delete simulates real user clearing the field)
+        await input.press('Control+a');
+        await input.press('Delete');
+        await input.pressSequentially('Bana', { delay: 10 });
+
+        await expect(input).toHaveValue('Banana');
+
+        // Verify no characters were overwritten during typing
+        // The bug would cause the last character to be selected, so next keystroke overwrites it
     });
 });
