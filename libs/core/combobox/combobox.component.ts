@@ -34,6 +34,7 @@ import {
     ViewContainerRef,
     ViewEncapsulation,
     forwardRef,
+    inject,
     input
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -479,6 +480,10 @@ export class ComboboxComponent<T = any>
     /** Last value confirmed by an explicit selection (item click) or external writeValue. */
     private _lastConfirmedValue: any;
 
+    private readonly _elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+
+    private readonly _destroyRef = inject(DestroyRef);
+
     /** @hidden */
     constructor(
         private readonly _overlay: Overlay,
@@ -487,14 +492,12 @@ export class ComboboxComponent<T = any>
         private readonly _viewContainerRef: ViewContainerRef,
         private readonly _dynamicComponentService: DynamicComponentService,
         private readonly _focusTrapService: FocusTrapService,
-        readonly _contentDensityObserver: ContentDensityObserver,
-        private readonly _elementRef: ElementRef<HTMLElement>,
-        destroyRef: DestroyRef
+        readonly _contentDensityObserver: ContentDensityObserver
     ) {
         this._repositionScrollStrategy = this._overlay.scrollStrategies.reposition({ autoClose: true });
 
         fromEvent<MouseEvent>(document, 'mousedown')
-            .pipe(takeUntilDestroyed(destroyRef))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe((event) => {
                 if (!this.closeOnOutsideClick) {
                     return;
