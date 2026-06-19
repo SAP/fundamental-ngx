@@ -179,10 +179,8 @@
         "@ui5/project": "4.0.10"
     },
     "lint-staged": {
-        "*": [
-            "yarn nx format:write --uncommitted"
-        ],
-        "*.{js,ts,html,md,json,yml}": [
+        "*.{js,ts,html,md,json,yml,css,scss}": [
+            "prettier --write",
             "eslint --fix --flag v10_config_lookup_from_file"
         ]
     }
