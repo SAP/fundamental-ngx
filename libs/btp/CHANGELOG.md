@@ -1,3 +1,7 @@
+## 0.63.0-rc.35 (2026-06-19)
+
+This was a version bump only for btp to align it with other projects, there were no code changes.
+
 ## 0.63.0-rc.34 (2026-06-18)
 
 This was a version bump only for btp to align it with other projects, there were no code changes.
