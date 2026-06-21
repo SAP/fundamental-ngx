@@ -34,7 +34,7 @@ import {
 } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent, FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/button';
 import { FD_LANGUAGE_SIGNAL, TranslationResolver } from '@fundamental-ngx/i18n';
-import { EMPTY, Subject, asyncScheduler, fromEvent, merge } from 'rxjs';
+import { EMPTY, Subject, Subscription, asyncScheduler, fromEvent, merge } from 'rxjs';
 import { filter, observeOn, startWith, takeUntil, tap } from 'rxjs/operators';
 
 export type SegmentedButtonValue = string | (string | null)[] | null;
@@ -115,6 +115,9 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
 
     /** An RxJS Subject that will kill the data stream upon queryList changes (for unsubscribing)  */
     private readonly _onRefresh$: Subject<void> = new Subject<void>();
+
+    /** @hidden Outer subscription for QueryList.changes; torn down on re-subscribe. */
+    private _buttonChangesSub: Subscription | null = null;
 
     /** @hidden */
     private readonly _langSignal = inject(FD_LANGUAGE_SIGNAL);
@@ -243,8 +246,9 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
         }
 
         this._onRefresh$.next();
+        this._buttonChangesSub?.unsubscribe();
 
-        merge(this._buttons.changes ?? EMPTY, this._focusableItems.changes ?? EMPTY)
+        this._buttonChangesSub = merge(this._buttons.changes ?? EMPTY, this._focusableItems.changes ?? EMPTY)
             .pipe(startWith(1), observeOn(asyncScheduler), takeUntilDestroyed(this._destroyRef))
             .subscribe(() => {
                 if (!this._buttons || !this._focusableItems) {

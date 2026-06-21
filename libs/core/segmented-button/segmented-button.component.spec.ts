@@ -1,5 +1,5 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { Component, ElementRef, ViewChild, signal } from '@angular/core';
+import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { runValueAccessorTests } from 'ngx-cva-test-suite';
@@ -244,4 +244,100 @@ describe('Segmented button component CVA', () => {
         getComponentValue: (fixture) => (fixture.componentInstance.segmentedButton as any)._currentValue,
         getValues: () => [1, 2, 3] // Setting the same values as select options in host template
     });
+});
+
+@Component({
+    selector: 'fd-test-dynamic-host',
+    template: `
+        <fd-segmented-button>
+            <button fd-button label="Button" value="first"></button>
+            <button fd-button label="Button" value="second"></button>
+            @if (showThird()) {
+                <button #third fd-button label="Button" value="third"></button>
+            }
+        </fd-segmented-button>
+    `,
+    standalone: true,
+    imports: [ButtonComponent, SegmentedButtonModule]
+})
+class HostWithDynamicButtonComponent {
+    @ViewChild(SegmentedButtonComponent) segmentedButton: SegmentedButtonComponent;
+    showThird = signal(false);
+}
+
+describe('SegmentedButtonComponent — duplicate subscription fix', () => {
+    let fixture: ComponentFixture<HostComponent>;
+    let component: HostComponent;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [HostComponent]
+        }).compileComponents();
+    }));
+
+    beforeEach(waitForAsync(() => {
+        fixture = TestBed.createComponent(HostComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+        return fixture.whenStable();
+    }));
+
+    it('should not duplicate work when setDisabledState cycles re-trigger _listenToButtonChanges', fakeAsync(() => {
+        const segBtn = component.segmentedButton as any;
+        const spy = jest.spyOn(segBtn, '_pickButtonsByValues');
+
+        // Cycle disable/enable 5 times — each enable triggers _listenToButtonChanges()
+        for (let i = 0; i < 5; i++) {
+            segBtn.setDisabledState(true);
+            tick();
+            segBtn.setDisabledState(false);
+            tick();
+        }
+        // Flush the asyncScheduler delay from startWith(1) on each subscription
+        tick(0);
+
+        spy.mockClear();
+
+        // Force a QueryList.changes emission
+        (segBtn._buttons as any).notifyOnChanges();
+        tick(0);
+
+        expect(spy).toHaveBeenCalledTimes(1);
+    }));
+});
+
+describe('SegmentedButtonComponent — QueryList.changes regression', () => {
+    let fixture: ComponentFixture<HostWithDynamicButtonComponent>;
+    let component: HostWithDynamicButtonComponent;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [HostWithDynamicButtonComponent]
+        }).compileComponents();
+    }));
+
+    beforeEach(waitForAsync(() => {
+        fixture = TestBed.createComponent(HostWithDynamicButtonComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+        return fixture.whenStable();
+    }));
+
+    it('should re-apply button attributes when a button is added after view init', fakeAsync(() => {
+        // Initially only 2 buttons
+        const segBtn = component.segmentedButton as any;
+        expect(segBtn._buttons.length).toBe(2);
+
+        // Add the third button via signal
+        component.showThird.set(true);
+        fixture.detectChanges();
+        tick(0);
+
+        const buttons = fixture.nativeElement.querySelectorAll('[fd-button]');
+        const thirdButton = buttons[2];
+
+        expect(thirdButton.getAttribute('role')).toBe('option');
+        expect(thirdButton.getAttribute('aria-posinset')).toBe('3');
+        expect(thirdButton.getAttribute('aria-setsize')).toBe('3');
+    }));
 });
