@@ -1535,3 +1535,50 @@ describe('DayjsDatetimeAdapter — M-4 round-trip regression (PR #14016)', () =>
         expect(parsed!.minute()).toBe(33);
     });
 });
+
+describe('single-digit M/D/YYYY parsing (regression #13534)', () => {
+    let adapter: DayjsDatetimeAdapter;
+
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            providers: [provideDayjsDatetimeAdapter()]
+        });
+        adapter = TestBed.inject(DatetimeAdapter) as DayjsDatetimeAdapter;
+        adapter.setLocale('en');
+    });
+
+    it('parses "10/7/2025" against "L" as Oct 7 2025 (en)', () => {
+        // adapter locale = 'en', en L = MM/DD/YYYY
+        const result = adapter.parse('10/7/2025', 'L');
+        expect(result?.isValid()).toBe(true);
+        expect(result?.format('YYYY-MM-DD')).toBe('2025-10-07');
+    });
+
+    it('parses "10/07/2025" against "L" as Oct 7 2025 (en, padded — no regression)', () => {
+        const result = adapter.parse('10/07/2025', 'L');
+        expect(result?.format('YYYY-MM-DD')).toBe('2025-10-07');
+    });
+
+    it('parses "7/10/2025" against "L" as Oct 7 2025 (fr)', () => {
+        adapter.setLocale('fr'); // fr L = DD/MM/YYYY
+        const result = adapter.parse('7/10/2025', 'L');
+        expect(result?.format('YYYY-MM-DD')).toBe('2025-10-07');
+    });
+
+    it('parses "7.10.2025" against "L" as Oct 7 2025 (de)', () => {
+        adapter.setLocale('de'); // de L = DD.MM.YYYY
+        const result = adapter.parse('7.10.2025', 'L');
+        expect(result?.format('YYYY-MM-DD')).toBe('2025-10-07');
+    });
+
+    it('still rejects overflow "13/45/2025" against "L" (en)', () => {
+        // Negative test — overflow guard from PR #14016 must still hold.
+        const result = adapter.parse('13/45/2025', 'L');
+        expect(result?.isValid()).toBeFalsy();
+    });
+
+    it('still rejects overflow "2/30/2025" against "L" (en, day overflow)', () => {
+        const result = adapter.parse('2/30/2025', 'L');
+        expect(result?.isValid()).toBeFalsy();
+    });
+});
