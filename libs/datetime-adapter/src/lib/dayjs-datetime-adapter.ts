@@ -459,11 +459,19 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
                 .replace(/h{1,2}(:mm(?::ss)?) ?[aA]/g, 'HH$1') // lowercase h → HH
                 .replace(/(HH?)(:mm(?::ss)?) ?[aA]/g, 'HH$2'); // uppercase HH + stray A → HH
 
+            // Lenient variants accept single-digit M/D. dayjs's MM/DD requires
+            // exactly 2 digits even in non-strict mode, so unpadded user input
+            // (e.g. "10/7/2025", "7.10.2025") fails without these.
+            const lenient = expandedFormat.replace(/M{2,}/g, 'M').replace(/D{2,}/g, 'D');
+            const lenient24h = normalized24h.replace(/M{2,}/g, 'M').replace(/D{2,}/g, 'D');
+
             const rawFormats: string[] = [
                 expandedFormat, // original (expanded)
                 normalized24h, // 24h variant for inputs where AM/PM was pre-stripped
                 expandedFormat.replace(/ ?[Hh]{1,2}:?mm(?::?ss)?(?: ?[aA])?/, '').trim(), // remove time
                 dayjs.Ls[this.locale()]?.formats?.['L'],
+                lenient,
+                lenient24h,
                 'YYYY-MM-DD'
             ].filter((f): f is string => !!f);
 
