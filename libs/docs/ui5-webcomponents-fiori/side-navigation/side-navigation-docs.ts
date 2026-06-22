@@ -12,6 +12,7 @@ import { BasicSample } from './examples/basic-sample';
 import { CollapsedSample } from './examples/collapsed-sample';
 import { CustomWidthSample } from './examples/custom-width-sample';
 import { FixedItemsSample } from './examples/fixed-items-sample';
+import { IndicationTagSample } from './examples/indication-tag-sample';
 import { NestedSample } from './examples/nested-sample';
 import { OverlayModeSample } from './examples/overlay-mode-sample';
 
@@ -27,11 +28,12 @@ const overlayModeTs = 'overlay-mode-sample.ts';
 const overlayModeHtml = 'overlay-mode-sample.html';
 const customWidthTs = 'custom-width-sample.ts';
 const customWidthHtml = 'custom-width-sample.html';
+const indicationTagTs = 'indication-tag-sample.ts';
+const indicationTagHtml = 'indication-tag-sample.html';
 
 @Component({
     selector: 'ui5-doc-side-navigation',
     templateUrl: './side-navigation-docs.html',
-    standalone: true,
     imports: [
         CodeExampleComponent,
         ComponentExampleComponent,
@@ -43,7 +45,8 @@ const customWidthHtml = 'custom-width-sample.html';
         FixedItemsSample,
         OverlayModeSample,
         NestedSample,
-        CustomWidthSample
+        CustomWidthSample,
+        IndicationTagSample
     ]
 })
 export class SideNavigationDocs {
@@ -146,6 +149,21 @@ export class SideNavigationDocs {
             code: getAssetFromModuleAssets(customWidthHtml),
             originalFileName: 'custom-width-sample',
             component: 'CustomWidthSample'
+        }
+    ]);
+
+    indicationTagExample = signal<ExampleFile[]>([
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(indicationTagTs),
+            originalFileName: 'indication-tag-sample',
+            component: 'IndicationTagSample'
+        },
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(indicationTagHtml),
+            originalFileName: 'indication-tag-sample',
+            component: 'IndicationTagSample'
         }
     ]);
 }

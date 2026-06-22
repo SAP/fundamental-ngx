@@ -1,0 +1,14 @@
+.min-width-control {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.width-slider {
+    width: 300px;
+}
+
+.popover-content {
+    padding: 1rem;
+}

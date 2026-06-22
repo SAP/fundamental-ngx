@@ -5,23 +5,28 @@ import {
     DescriptionComponent,
     DocsSectionTitleComponent,
     ExampleFile,
+    SeparatorComponent,
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
+import { CustomTickmarksSample } from './examples/custom-tickmarks-sample';
 import { SliderExample } from './examples/slider-sample';
 
 const basicSampleHtml = 'slider-sample.html';
 const basicSampleTs = 'slider-sample.ts';
+const customTickmarksHtml = 'custom-tickmarks-sample.html';
+const customTickmarksTs = 'custom-tickmarks-sample.ts';
 
 @Component({
     selector: 'ui5-slider-docs',
     templateUrl: './slider-docs.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         ComponentExampleComponent,
         CodeExampleComponent,
         DescriptionComponent,
-        SliderExample
+        SeparatorComponent,
+        SliderExample,
+        CustomTickmarksSample
     ]
 })
 export class SliderDocsComponent {
@@ -39,5 +44,20 @@ export class SliderDocsComponent {
         }
     ]);
 
+    private readonly customTickmarksFiles = signal<ExampleFile[]>([
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(customTickmarksHtml),
+            originalFileName: 'custom-tickmarks-sample'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(customTickmarksTs),
+            component: 'CustomTickmarksSample',
+            originalFileName: 'custom-tickmarks-sample'
+        }
+    ]);
+
     readonly examples = computed(() => this.exampleFiles());
+    readonly customTickmarksExamples = computed(() => this.customTickmarksFiles());
 }
