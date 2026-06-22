@@ -1,3 +1,7 @@
+## 0.63.0-rc.38 (2026-06-22)
+
+This was a version bump only for ui5-webcomponents-ai to align it with other projects, there were no code changes.
+
 ## 0.63.0-rc.37 (2026-06-22)
 
 This was a version bump only for ui5-webcomponents-ai to align it with other projects, there were no code changes.

@@ -1,3 +1,13 @@
+## 0.63.0-rc.38 (2026-06-22)
+
+### 🩹 Fixes
+
+- **datetime-adapter:** accept single-digit M/D in DayjsDatetimeAdapter parse ([#13534](https://github.com/SAP/fundamental-ngx/pull/13534), [#14307](https://github.com/SAP/fundamental-ngx/pull/14307))
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.63.0-rc.37 (2026-06-22)
 
 This was a version bump only for datetime-adapter to align it with other projects, there were no code changes.
