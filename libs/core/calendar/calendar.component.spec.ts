@@ -287,4 +287,99 @@ describe('CalendarComponent', () => {
         expect(component.selectedMultipleDateRanges[0].start).toBe(invalidDate);
         expect(component.selectedMultipleDateRanges[0].end).toBe(invalidDate2);
     });
+
+    describe('shift-click multi-date selection', () => {
+        beforeEach(() => {
+            component.allowMultipleSelection = true;
+            component.calType = 'single';
+            component.selectedMultipleDates = [];
+            fixture.detectChanges();
+        });
+
+        it('plain click sets anchor and adds date to selection', () => {
+            const emitted: FdDate[][] = [];
+            component.selectedMultipleDatesChange.subscribe((d) => emitted.push(d as FdDate[]));
+
+            component.handleMultipleDateWithShift({ date: new FdDate(2024, 1, 10), shiftKey: false });
+
+            expect(emitted.length).toBe(1);
+            expect(emitted[0].length).toBe(1);
+            expect(emitted[0][0]).toEqual(new FdDate(2024, 1, 10));
+        });
+
+        it('plain click on already-selected date removes it', () => {
+            component.selectedMultipleDates = [new FdDate(2024, 1, 10)];
+            const emitted: FdDate[][] = [];
+            component.selectedMultipleDatesChange.subscribe((d) => emitted.push(d as FdDate[]));
+
+            component.handleMultipleDateWithShift({ date: new FdDate(2024, 1, 10), shiftKey: false });
+
+            expect(emitted[0].length).toBe(0);
+        });
+
+        it('shift-click with no anchor acts as plain click', () => {
+            const emitted: FdDate[][] = [];
+            component.selectedMultipleDatesChange.subscribe((d) => emitted.push(d as FdDate[]));
+
+            component.handleMultipleDateWithShift({ date: new FdDate(2024, 1, 15), shiftKey: true });
+
+            expect(emitted.length).toBe(1);
+            expect(emitted[0].length).toBe(1);
+        });
+
+        it('shift-click fills all dates between anchor and clicked date', () => {
+            component.handleMultipleDateWithShift({ date: new FdDate(2024, 1, 10), shiftKey: false });
+
+            const emitted: FdDate[][] = [];
+            component.selectedMultipleDatesChange.subscribe((d) => emitted.push(d as FdDate[]));
+
+            component.handleMultipleDateWithShift({ date: new FdDate(2024, 1, 14), shiftKey: true });
+
+            const last = emitted[emitted.length - 1];
+            expect(last.length).toBe(5); // Jan 10, 11, 12, 13, 14
+            [10, 11, 12, 13, 14].forEach((day) => {
+                expect(last.some((d) => d.day === day && d.month === 1 && d.year === 2024)).toBeTrue();
+            });
+        });
+
+        it('shift-click fill merges with pre-existing selection', () => {
+            component.selectedMultipleDates = [new FdDate(2024, 1, 5)];
+            component.handleMultipleDateWithShift({ date: new FdDate(2024, 1, 10), shiftKey: false });
+
+            const emitted: FdDate[][] = [];
+            component.selectedMultipleDatesChange.subscribe((d) => emitted.push(d as FdDate[]));
+
+            component.handleMultipleDateWithShift({ date: new FdDate(2024, 1, 12), shiftKey: true });
+
+            const last = emitted[emitted.length - 1];
+            // Jan 5 (pre-existing) + Jan 10, 11, 12 (fill)
+            expect(last.length).toBe(4);
+            expect(last.some((d) => d.day === 5 && d.month === 1 && d.year === 2024)).toBeTrue();
+        });
+
+        it('shift-click fill works across months (Jan 29 to Feb 2)', () => {
+            component.handleMultipleDateWithShift({ date: new FdDate(2024, 1, 29), shiftKey: false });
+
+            const emitted: FdDate[][] = [];
+            component.selectedMultipleDatesChange.subscribe((d) => emitted.push(d as FdDate[]));
+
+            component.handleMultipleDateWithShift({ date: new FdDate(2024, 2, 2), shiftKey: true });
+
+            const last = emitted[emitted.length - 1];
+            expect(last.length).toBe(5); // Jan 29, 30, 31, Feb 1, Feb 2
+        });
+
+        it('writeValue resets the anchor', () => {
+            component.handleMultipleDateWithShift({ date: new FdDate(2024, 1, 10), shiftKey: false });
+            component.writeValue([]);
+
+            const emitted: FdDate[][] = [];
+            component.selectedMultipleDatesChange.subscribe((d) => emitted.push(d as FdDate[]));
+
+            // Shift-click without anchor should behave like plain click
+            component.handleMultipleDateWithShift({ date: new FdDate(2024, 1, 15), shiftKey: true });
+
+            expect(emitted[0].length).toBe(1);
+        });
+    });
 });
