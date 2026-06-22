@@ -903,6 +903,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
         this.selectedMultipleDates = updated;
         this.onChange(updated);
         this.selectedMultipleDatesChange.emit(updated);
+        this.closeCalendar.emit();
         this._changeDetectorRef.markForCheck();
     }
 
