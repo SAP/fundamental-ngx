@@ -10,6 +10,7 @@ import {
     SeparatorComponent,
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
+import { DatePickerAllowMultipleSelectionExampleComponent } from './examples/date-picker-allow-multiple-selection-example.component';
 import { DatePickerAllowNullExampleComponent } from './examples/date-picker-allow-null-example.component';
 import { DatePickerDisableFocusScrollExampleComponent } from './examples/date-picker-disable-focus-scroll-example.component';
 import { DatePickerDisableFuncExampleComponent } from './examples/date-picker-disable-func-example/date-picker-disable-func-example.component';
@@ -37,6 +38,7 @@ const datePickerRangeSrc = 'date-picker-range-example.component.ts';
 const datePickerMultiRangeSrc = 'date-picker-multi-range-example.component.ts';
 const datePickerSingleSrc = 'date-picker-single-example.component.ts';
 const datePickerMultiSrc = 'date-picker-multi-example.component.ts';
+const datePickerAllowMultipleSelectionSrc = 'date-picker-allow-multiple-selection-example.component.ts';
 const datePickeri18nSrc = 'date-picker-i18n-example.component.ts';
 const datePickerTodayButton = 'date-picker-today-button-example.component.ts';
 const datePickerFormatSrc = 'date-picker-format-example.component.ts';
@@ -91,6 +93,7 @@ const datePickerLegendExampleHtml = 'date-picker-legend-example.html';
         DatePickerDisableFocusScrollExampleComponent,
         DatePickerMobileModeExampleComponent,
         DatePickerMultiExampleComponent,
+        DatePickerAllowMultipleSelectionExampleComponent,
         DatePickerFormMultiExampleComponent,
         DatePickerMultiDisableFuncExampleComponent,
         DatePickerMultiRangeExampleComponent,
@@ -115,6 +118,15 @@ export class DatePickerDocsComponent {
             component: 'DatePickerMultiExampleComponent',
             code: getAssetFromModuleAssets(datePickerMultiSrc),
             fileName: 'date-picker-multi-example'
+        }
+    ];
+
+    datePickerAllowMultipleSelection: ExampleFile[] = [
+        {
+            language: 'typescript',
+            component: 'DatePickerAllowMultipleSelectionExampleComponent',
+            code: getAssetFromModuleAssets(datePickerAllowMultipleSelectionSrc),
+            fileName: 'date-picker-allow-multiple-selection-example'
         }
     ];
 

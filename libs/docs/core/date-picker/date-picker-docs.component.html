@@ -32,6 +32,21 @@
 
 <separator></separator>
 
+<fd-docs-section-title id="allow-multiple-selection" componentName="date-picker">
+    Allow Multiple Selection with Shift-Click
+</fd-docs-section-title>
+<description>
+    When <code>[allowMultipleSelection]="true"</code> is set, dates can be individually toggled by clicking. Hold
+    <kbd>Shift</kbd> while clicking a second date to automatically select all dates in between. This works across month
+    boundaries — click a date in January, navigate to February, then Shift+Click to fill the entire range.
+</description>
+<component-example>
+    <fd-date-picker-allow-multiple-selection-example></fd-date-picker-allow-multiple-selection-example>
+</component-example>
+<code-example [exampleFiles]="datePickerAllowMultipleSelection"></code-example>
+
+<separator></separator>
+
 <fd-docs-section-title id="range" componentName="date-picker"> Range Date Picker </fd-docs-section-title>
 <description>
     Allows the selection of a range of dates. Only the first and last dates are passed back under ngModel. To pick the
