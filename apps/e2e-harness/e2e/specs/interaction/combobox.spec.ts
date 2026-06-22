@@ -1,5 +1,62 @@
 import { expect, test } from '../../fixtures/base.fixture';
 
+test.describe('core/combobox click-outside parity with Tab out', () => {
+    // Regression for issue #13481: click-outside must revert invalid input the same way Tab out does.
+    // Uses the reactive-form example (objects mode: communicateByObject=true).
+
+    const setupKiwiThenAppend123 = async (page: import('@playwright/test').Page): Promise<void> => {
+        const combobox = page.locator('fd-combobox').first();
+        const input = combobox.locator('input[role="combobox"]');
+
+        // Select Kiwi via the dropdown
+        await input.click();
+        await input.pressSequentially('Kiwi', { delay: 30 });
+        const listbox = page.locator('[role="listbox"]');
+        await expect(listbox).toBeVisible();
+        const kiwiOption = listbox.locator('[role="option"]').filter({ hasText: 'Kiwi' });
+        await kiwiOption.click();
+        await expect(input).toHaveValue('Kiwi');
+
+        // Re-focus and append "123" — just type the suffix; cursor is at end after refocus
+        await input.click();
+        await input.pressSequentially('123', { delay: 50 });
+        await expect(input).toHaveValue('Kiwi123');
+    };
+
+    test.beforeEach(async ({ goto }) => {
+        await goto('core/combobox/forms');
+    });
+
+    test('scenario 1 — Tab out reverts invalid input to last valid selection', async ({ page }) => {
+        await setupKiwiThenAppend123(page);
+
+        await page.keyboard.press('Tab');
+
+        const combobox = page.locator('fd-combobox').first();
+        const input = combobox.locator('input[role="combobox"]');
+        await expect(input).toHaveValue('Kiwi');
+
+        const jsonValue = page.locator('small').first();
+        await expect(jsonValue).toContainText('"displayedValue": "Kiwi"');
+        await expect(jsonValue).toContainText('"value": "KiwiValue"');
+    });
+
+    test('scenario 2 — click outside reverts invalid input to last valid selection', async ({ page }) => {
+        await setupKiwiThenAppend123(page);
+
+        // Click the value readout of the second combobox — outside the first combobox and its CDK overlay
+        await page.locator('small').last().click();
+
+        const combobox = page.locator('fd-combobox').first();
+        const input = combobox.locator('input[role="combobox"]');
+        await expect(input).toHaveValue('Kiwi');
+
+        const jsonValue = page.locator('small').first();
+        await expect(jsonValue).toContainText('"displayedValue": "Kiwi"');
+        await expect(jsonValue).toContainText('"value": "KiwiValue"');
+    });
+});
+
 test.describe('core/combobox', () => {
     test.beforeEach(async ({ goto }) => {
         await goto('core/combobox/combobox');
