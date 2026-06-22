@@ -1,3 +1,13 @@
+## 0.63.0-rc.37 (2026-06-22)
+
+### 🩹 Fixes
+
+- **platform:** stop fdp-combobox auto-selecting first item on open ([#14305](https://github.com/SAP/fundamental-ngx/pull/14305))
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.63.0-rc.36 (2026-06-19)
 
 This was a version bump only for platform to align it with other projects, there were no code changes.

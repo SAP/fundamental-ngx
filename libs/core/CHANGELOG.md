@@ -1,3 +1,13 @@
+## 0.63.0-rc.37 (2026-06-22)
+
+### 🩹 Fixes
+
+- **core:** combobox click-outside parity with Tab out ([#14306](https://github.com/SAP/fundamental-ngx/pull/14306), [#13481](https://github.com/SAP/fundamental-ngx/issues/13481))
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.63.0-rc.36 (2026-06-19)
 
 This was a version bump only for core to align it with other projects, there were no code changes.
