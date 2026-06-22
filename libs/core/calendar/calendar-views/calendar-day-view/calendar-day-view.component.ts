@@ -155,6 +155,10 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     @Output()
     readonly selectedMultipleDatesChange: EventEmitter<Array<D>> = new EventEmitter<Array<D>>();
 
+    /** Event thrown when a date is clicked in multiple single-selection mode, carrying the shift-key state. */
+    @Output()
+    readonly selectedMultipleDateWithShiftChange = new EventEmitter<{ date: D; shiftKey: boolean }>();
+
     /** Event thrown every time selected first or last date in range mode is changed */
     @Output()
     readonly selectedRangeDateChange: EventEmitter<DateRange<D>> = new EventEmitter<DateRange<D>>();
@@ -387,7 +391,10 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
 
         if (this.allowMultipleSelection()) {
             if (this.calType() === CalendarTypeEnum.Single) {
-                this._toggleMultiDate(day);
+                this.selectedMultipleDateWithShiftChange.emit({
+                    date: day.date,
+                    shiftKey: event?.shiftKey ?? false
+                });
             } else if (this.calType() === CalendarTypeEnum.Range) {
                 this._selectMultipleRangeDates(day);
             }
@@ -1223,28 +1230,6 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
         day.selected = true;
         this._selectedDate = day.date;
         this.selectedDateChange.emit(day.date);
-    }
-
-    /**
-     * @hidden
-     * Toggles the selection of a date in multi mode.
-     * Adds the date if not selected, removes it if already selected.
-     * @param day The calendar day to be toggled.
-     */
-    private _toggleMultiDate(day: CalendarDay<D>): void {
-        const dateIndex = this._selectedMultipleDates.findIndex((d) => this._isSameDay(d, day.date));
-        let newSelectedDates: D[];
-
-        if (dateIndex > -1) {
-            newSelectedDates = this._selectedMultipleDates.filter((_, index) => index !== dateIndex);
-            day.selected = false;
-        } else {
-            newSelectedDates = [...this._selectedMultipleDates, day.date];
-            day.selected = true;
-        }
-
-        this._selectedMultipleDates = newSelectedDates;
-        this.selectedMultipleDatesChange.emit(this._selectedMultipleDates);
     }
 
     /**

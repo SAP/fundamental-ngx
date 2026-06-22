@@ -97,16 +97,16 @@ describe('CalendarDayViewComponent', () => {
         expect(selected?.date.toDateString()).toBe(component.selectedDate.toDateString());
     });
 
-    it('Should Select Proper multi Date', (done) => {
+    it('Should Select Proper multi Date', () => {
         component.currentlyDisplayed = { month: 10, year: 2018 };
         component.allowMultipleSelection.set(true);
         component.ngOnInit();
         const dayPicked = component._dayViewGrid[2][3];
-        component.selectedMultipleDatesChange.subscribe((date: FdDate[]) => {
-            expect(date).toContain(dayPicked.date);
-            done();
-        });
+        const emitted: { date: FdDate; shiftKey: boolean }[] = [];
+        component.selectedMultipleDateWithShiftChange.subscribe((v) => emitted.push(v));
         component.selectDate(dayPicked);
+        expect(emitted.length).toBe(1);
+        expect(emitted[0].date).toEqual(dayPicked.date);
     });
 
     it('Should mark selected multi date', () => {
@@ -416,9 +416,44 @@ describe('CalendarDayViewComponent', () => {
         component.selectedDate = date;
         component.allowMultipleSelection.set(true);
         component.ngOnInit();
+        const emitted: { date: FdDate; shiftKey: boolean }[] = [];
+        component.selectedMultipleDateWithShiftChange.subscribe((v) => emitted.push(v));
         component.selectDate(component._calendarDayList[15]);
-        expect(component.selectedDate).toEqual(component._calendarDayList[14].date);
-        expect(component._calendarDayList[15].selected).toBe(true);
+        expect(emitted.length).toBe(1);
+        expect(emitted[0].date).toEqual(component._calendarDayList[15].date);
+    });
+
+    it('should emit selectedMultipleDateWithShiftChange with shiftKey=false on plain click', () => {
+        component.allowMultipleSelection.set(true);
+        component.calType.set('single');
+        fixture.detectChanges();
+
+        const emittedValues: { date: any; shiftKey: boolean }[] = [];
+        component.selectedMultipleDateWithShiftChange.subscribe((v: any) => emittedValues.push(v));
+
+        const day = component._calendarDayList.find((d: any) => d.monthStatus === 'current' && !d.disabled)!;
+        const event = new MouseEvent('click', { shiftKey: false });
+        component.selectDate(day, event);
+
+        expect(emittedValues.length).toBe(1);
+        expect(emittedValues[0].shiftKey).toBeFalse();
+        expect(emittedValues[0].date).toEqual(day.date);
+    });
+
+    it('should emit selectedMultipleDateWithShiftChange with shiftKey=true on shift-click', () => {
+        component.allowMultipleSelection.set(true);
+        component.calType.set('single');
+        fixture.detectChanges();
+
+        const emittedValues: { date: any; shiftKey: boolean }[] = [];
+        component.selectedMultipleDateWithShiftChange.subscribe((v: any) => emittedValues.push(v));
+
+        const day = component._calendarDayList.find((d: any) => d.monthStatus === 'current' && !d.disabled)!;
+        const event = new MouseEvent('click', { shiftKey: true });
+        component.selectDate(day, event);
+
+        expect(emittedValues.length).toBe(1);
+        expect(emittedValues[0].shiftKey).toBeTrue();
     });
 
     describe('Legend focus optimization', () => {
