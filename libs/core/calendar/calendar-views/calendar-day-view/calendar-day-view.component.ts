@@ -155,9 +155,12 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     @Output()
     readonly selectedMultipleDatesChange: EventEmitter<Array<D>> = new EventEmitter<Array<D>>();
 
-    /** Event thrown when a date is clicked in multiple single-selection mode, carrying the shift-key state. */
+    /** Event thrown when a date is selected in multiple single-selection mode, carrying the shift-key state. */
     @Output()
-    readonly selectedMultipleDateWithShiftChange = new EventEmitter<{ date: D; shiftKey: boolean }>();
+    readonly selectedMultipleDateWithShiftChange: EventEmitter<{ date: D; shiftKey: boolean }> = new EventEmitter<{
+        date: D;
+        shiftKey: boolean;
+    }>();
 
     /** Event thrown every time selected first or last date in range mode is changed */
     @Output()
