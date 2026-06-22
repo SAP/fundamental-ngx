@@ -381,5 +381,34 @@ describe('CalendarComponent', () => {
 
             expect(emitted[0].length).toBe(1);
         });
+
+        it('shift-click fills in reverse direction (anchor later, click earlier)', () => {
+            component.handleMultipleDateWithShift({ date: new FdDate(2024, 1, 14), shiftKey: false });
+
+            const emitted: FdDate[][] = [];
+            component.selectedMultipleDatesChange.subscribe((d) => emitted.push(d as FdDate[]));
+
+            component.handleMultipleDateWithShift({ date: new FdDate(2024, 1, 10), shiftKey: true });
+
+            const last = emitted[emitted.length - 1];
+            expect(last.length).toBe(5); // Jan 10, 11, 12, 13, 14
+            [10, 11, 12, 13, 14].forEach((day) => {
+                expect(last.some((d) => d.day === day && d.month === 1 && d.year === 2024)).toBeTrue();
+            });
+        });
+
+        it('ngOnChanges resets anchor when allowMultipleSelection changes', () => {
+            component.handleMultipleDateWithShift({ date: new FdDate(2024, 1, 10), shiftKey: false });
+            component.selectedMultipleDates = [];
+            component.ngOnChanges({ allowMultipleSelection: {} as any });
+
+            const emitted: FdDate[][] = [];
+            component.selectedMultipleDatesChange.subscribe((d) => emitted.push(d as FdDate[]));
+
+            // Shift-click with no anchor after reset should behave like plain click (not fill a range)
+            component.handleMultipleDateWithShift({ date: new FdDate(2024, 1, 15), shiftKey: true });
+
+            expect(emitted[0].length).toBe(1);
+        });
     });
 });

@@ -327,7 +327,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     /** @hidden */
     private _adapterStartingDayOfWeek: DaysOfWeek;
 
-    /** @hidden Anchor date for shift-click multi-selection. Lives here to survive month navigation. */
+    /** @hidden */
     private _shiftAnchorDate: D | null = null;
 
     /** @hidden */
@@ -545,12 +545,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
         this.closeCalendar.emit();
     }
 
-    /**
-     * @hidden
-     * Handles a day click from the day view in allowMultipleSelection + single mode.
-     * On plain click: sets the shift anchor and toggles the date.
-     * On shift-click: fills all dates between the anchor and the clicked date.
-     */
+    /** @hidden */
     handleMultipleDateWithShift({ date, shiftKey }: { date: D; shiftKey: boolean }): void {
         if (!shiftKey || !this._shiftAnchorDate) {
             this._shiftAnchorDate = date;
@@ -565,7 +560,6 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
             this.selectedMultipleDates = merged;
             this.onChange(merged);
             this.selectedMultipleDatesChange.emit(merged);
-            // Do NOT emit closeCalendar — user may be building a multi-month selection
             this._changeDetectorRef.markForCheck();
         }
     }
@@ -901,10 +895,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
         );
     }
 
-    /**
-     * @hidden
-     * Toggles a single date in/out of selectedMultipleDates.
-     */
+    /** @hidden */
     private _toggleMultiDateFromCalendar(date: D): void {
         const existing = this.selectedMultipleDates || [];
         const idx = existing.findIndex((d) => this._dateTimeAdapter.datesEqual(d, date));
@@ -912,14 +903,10 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
         this.selectedMultipleDates = updated;
         this.onChange(updated);
         this.selectedMultipleDatesChange.emit(updated);
-        this.closeCalendar.emit();
         this._changeDetectorRef.markForCheck();
     }
 
-    /**
-     * @hidden
-     * Returns all non-disabled calendar days between from and to (inclusive, order-independent).
-     */
+    /** @hidden */
     private _fillDateRange(from: D, to: D): D[] {
         const forward = this._dateTimeAdapter.compareDate(from, to) <= 0;
         let current = forward ? from : to;
