@@ -1,6 +1,7 @@
+import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
+import { CalendarComponent } from '@fundamental-ngx/core/calendar';
 import {
     DATE_TIME_FORMATS,
     DatetimeAdapter,
@@ -11,25 +12,26 @@ import {
 } from '@fundamental-ngx/core/datetime';
 
 @Component({
-    selector: 'fd-date-picker-allow-multiple-selection-example',
+    selector: 'fd-calendar-allow-multiple-selection-example',
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
-        <fd-date-picker [allowMultipleSelection]="true" [(ngModel)]="selectedDates"></fd-date-picker>
+        <fd-calendar calType="single" [(ngModel)]="dates" [allowMultipleSelection]="true"></fd-calendar>
         <br />
-        <div>Selected: {{ selectedDates.length }} date(s)</div>
-        <br />
-        @for (date of selectedDates; track date) {
-            <div>{{ date.toDateString() }}</div>
-        }
+        <div>
+            Selected Dates:<br />
+            @for (date of dates; track date.day + date.month) {
+                {{ date.toDate() | date: 'shortDate' }}<br />
+            }
+        </div>
     `,
     providers: [
         { provide: DatetimeAdapter, useClass: FdDatetimeAdapter },
         { provide: DATE_TIME_FORMATS, useValue: FD_DATETIME_FORMATS }
     ],
-    imports: [DatePickerComponent, FormsModule, FdDatetimeModule]
+    imports: [CalendarComponent, FormsModule, DatePipe, FdDatetimeModule]
 })
-export class DatePickerAllowMultipleSelectionExampleComponent {
-    selectedDates: FdDate[] = [
+export class CalendarAllowMultipleSelectionExampleComponent {
+    dates: FdDate[] = [
         new FdDate(2025, 1, 6),
         new FdDate(2025, 1, 7),
         new FdDate(2025, 1, 8),

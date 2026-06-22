@@ -125,6 +125,21 @@
 
 <separator></separator>
 
+<fd-docs-section-title id="allow-multiple-selection-shift-click" componentName="calendar">
+    Allow Multiple Selection with Shift-Click
+</fd-docs-section-title>
+<description>
+    When <code>[allowMultipleSelection]="true"</code> is set, hold <kbd>Shift</kbd> while clicking a second date to
+    automatically select all dates in between. This works across month boundaries — click a date in one month, navigate
+    to another, then Shift+Click to fill the entire range.
+</description>
+<component-example>
+    <fd-calendar-allow-multiple-selection-example></fd-calendar-allow-multiple-selection-example>
+</component-example>
+<code-example [exampleFiles]="calendarAllowMultipleSelectionSource"></code-example>
+
+<separator></separator>
+
 <fd-docs-section-title id="range" componentName="calendar"> Range Selection Calendar </fd-docs-section-title>
 <description>
     Allows the selection of a range of dates. Only the first and last days of the range are passed back.
