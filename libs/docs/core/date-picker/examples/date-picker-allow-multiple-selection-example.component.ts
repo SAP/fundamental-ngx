@@ -14,7 +14,6 @@ import {
     selector: 'fd-date-picker-allow-multiple-selection-example',
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
-        <!-- Hold Shift and click a second date to select all dates in between -->
         <fd-date-picker [allowMultipleSelection]="true" [(ngModel)]="selectedDates"></fd-date-picker>
         <br />
         <div>Selected: {{ selectedDates.length }} date(s)</div>
