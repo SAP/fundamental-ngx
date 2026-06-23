@@ -542,7 +542,9 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
         this._setNavigationButtonsStates();
         this.onChange(date);
         this.selectedMultipleDatesChange.emit(date);
-        this.closeCalendar.emit();
+        if (!this.allowMultipleSelection) {
+            this.closeCalendar.emit();
+        }
     }
 
     /** @hidden */
