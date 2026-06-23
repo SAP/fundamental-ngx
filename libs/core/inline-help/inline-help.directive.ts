@@ -40,7 +40,7 @@ let inlineHelpId = 0;
     providers: [PopoverService],
     host: {
         '[class.fd-inline-help__trigger]': 'true',
-        '[attr.aria-describedby]': 'bodyId()'
+        '[attr.aria-describedby]': 'ariaDescribedBy()'
     }
 })
 export class InlineHelpDirective {
@@ -124,6 +124,13 @@ export class InlineHelpDirective {
         bodyRole: this.bodyRole,
         bodyId: this.bodyId
     });
+
+    /** @hidden Computed aria-describedby - only set when popover is closed to avoid duplication */
+    protected readonly ariaDescribedBy = computed(() =>
+        // When popover is open, the visible content is already accessible
+        // Only reference bodyId when closed for linear reading mode support
+        this._popoverService.isOpen() ? null : this.bodyId()
+    );
 
     /** @hidden */
     private readonly _popoverService = inject(PopoverService);
@@ -213,6 +220,7 @@ export class InlineHelpDirective {
         if (srElement.style) {
             srElement.style.cssText = `position: absolute !important; height: 1px; width: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px);`;
         }
+
         this._renderer.appendChild(this._elementRef.nativeElement, srElement);
     }
 }
