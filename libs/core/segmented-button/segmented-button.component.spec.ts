@@ -265,7 +265,7 @@ class HostWithDynamicButtonComponent {
     showThird = signal(false);
 }
 
-describe('SegmentedButtonComponent — duplicate subscription fix', () => {
+describe('SegmentedButtonComponent — _listenToButtonChanges does not duplicate work', () => {
     let fixture: ComponentFixture<HostComponent>;
     let component: HostComponent;
 
@@ -293,7 +293,7 @@ describe('SegmentedButtonComponent — duplicate subscription fix', () => {
             segBtn.setDisabledState(false);
             tick();
         }
-        // Flush the asyncScheduler delay from startWith(1) on each subscription
+        // Flush the asyncScheduler delay from observeOn() in _listenToButtonChanges
         tick(0);
 
         spy.mockClear();
