@@ -1,3 +1,44 @@
+## 0.63.0 (2026-06-23)
+
+### 🚀 Features
+
+- **core:** add header content area to User Menu, adopt latest fund-styles ([#14268](https://github.com/SAP/fundamental-ngx/pull/14268))
+- ⚠️  **mcp:** MCP server evaluation - part 5 ([#14224](https://github.com/SAP/fundamental-ngx/pull/14224))
+- **mcp:** MCP server evaluation part 3 - Skills ([#14211](https://github.com/SAP/fundamental-ngx/pull/14211))
+
+### 🩹 Fixes
+
+- **datetime-adapter:** accept single-digit M/D in DayjsDatetimeAdapter parse ([#13534](https://github.com/SAP/fundamental-ngx/pull/13534), [#14307](https://github.com/SAP/fundamental-ngx/pull/14307))
+- **ci:** generate components.json before netlify docs build ([#14285](https://github.com/SAP/fundamental-ngx/pull/14285))
+- datetime adapters migration ([#14016](https://github.com/SAP/fundamental-ngx/pull/14016))
+- **core, datetime-adapter:** fix datetime picker manual input ([#14251](https://github.com/SAP/fundamental-ngx/pull/14251))
+- **ui5:** bridge ThemingService to UI5 Web Components and fix theme propagation ([#14188](https://github.com/SAP/fundamental-ngx/pull/14188))
+
+### ⚠️  Breaking Changes
+
+- **mcp:** MCP server evaluation - part 5  ([#14224](https://github.com/SAP/fundamental-ngx/pull/14224))
+  recommend_components removed. It used a hardcoded
+  23-entry UI_PATTERNS dict that missed the entire platform form layer
+  (fdp-form-group, fdp-form-field). Use search_components with relevant
+  keywords instead.
+  BREAKING CHANGE: get_design_tokens removed. The corpus was only 92
+  tokens (42 hardcoded SAP theme vars + 50 spacing utility classes);
+  focus, disabled, and hover tokens were absent, making it unusable for
+  component styling. Use @fundamental-styles/mcp get_design_tokens
+  (1500+ tokens) instead.
+  BREAKING CHANGE: get_migration_guide tool removed from @fundamental-ngx/mcp.
+  BREAKING CHANGE: get_accessibility_guide tool removed from @fundamental-ngx/mcp.
+  Use get_component_api — it returns all inputs (including ARIA inputs with
+  descriptions) and the keyboardHandling field.
+
+### ❤️ Thank You
+
+- Copilot
+- deno
+- github-actions
+- Inna Atanasova @InnaAtanasova
+- Maria Dineva @MariaIDineva
+
 ## 0.63.0-rc.40 (2026-06-23)
 
 This was a version bump only for datetime-adapter to align it with other projects, there were no code changes.
