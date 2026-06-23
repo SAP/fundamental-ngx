@@ -1,3 +1,13 @@
+## 0.63.1-rc.0 (2026-06-23)
+
+### 🩹 Fixes
+
+- **core:** prevent inline-help text from being announced twice by screen readers ([#14310](https://github.com/SAP/fundamental-ngx/pull/14310))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.63.0 (2026-06-23)
 
 ### 🚀 Features
