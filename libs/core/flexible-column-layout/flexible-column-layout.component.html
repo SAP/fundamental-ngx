@@ -25,10 +25,15 @@
                 fdCompact
                 fdType="transparent"
                 class="fd-flexible-column-layout__button"
+                [ariaLabel]="
+                    (_leftColumnSeparator === 'left' ? collapseTitleStartBtn : expandTitleStartBtn) ||
+                    (_leftColumnSeparator === 'left' ? collapseTitle : expandTitle) ||
+                    ''
+                "
                 [title]="
-                    _leftColumnSeparator === 'left'
-                        ? expandTitleStartBtn || expandTitle
-                        : collapseTitleStartBtn || collapseTitle
+                    (_leftColumnSeparator === 'left' ? collapseTitleStartBtn : expandTitleStartBtn) ||
+                    (_leftColumnSeparator === 'left' ? collapseTitle : expandTitle) ||
+                    ''
                 "
             >
                 <fd-icon
@@ -60,10 +65,15 @@
                 fdCompact
                 fdType="transparent"
                 class="fd-flexible-column-layout__button"
+                [ariaLabel]="
+                    (_rightColumnSeparator === 'left' ? collapseTitleEndBtn : expandTitleEndBtn) ||
+                    (_rightColumnSeparator === 'left' ? collapseTitle : expandTitle) ||
+                    ''
+                "
                 [title]="
-                    _rightColumnSeparator === 'left'
-                        ? expandTitleEndBtn || expandTitle
-                        : collapseTitleEndBtn || collapseTitle
+                    (_rightColumnSeparator === 'left' ? collapseTitleEndBtn : expandTitleEndBtn) ||
+                    (_rightColumnSeparator === 'left' ? collapseTitle : expandTitle) ||
+                    ''
                 "
             >
                 <fd-icon

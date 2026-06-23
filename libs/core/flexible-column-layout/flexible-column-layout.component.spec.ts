@@ -29,7 +29,16 @@ function setViewport(width: number): void {
 
 @Component({
     template: `
-        <fd-flexible-column-layout [(layout)]="layout" [backgroundDesign]="backgroundDesign">
+        <fd-flexible-column-layout
+            [(layout)]="layout"
+            [backgroundDesign]="backgroundDesign"
+            [expandTitle]="expandTitle"
+            [collapseTitle]="collapseTitle"
+            [expandTitleStartBtn]="expandTitleStartBtn"
+            [collapseTitleStartBtn]="collapseTitleStartBtn"
+            [expandTitleEndBtn]="expandTitleEndBtn"
+            [collapseTitleEndBtn]="collapseTitleEndBtn"
+        >
             <ng-template #startColumn>
                 <div [style.height.px]="800">
                     <h2>Start Column</h2>
@@ -56,6 +65,12 @@ class TestFlexibleColumnLayoutComponent {
 
     layout: FlexibleColumnLayout = ONE_COLUMN_START_FULL_SCREEN;
     backgroundDesign = 'translucent';
+    expandTitle: string;
+    collapseTitle: string;
+    expandTitleStartBtn: string;
+    collapseTitleStartBtn: string;
+    expandTitleEndBtn: string;
+    collapseTitleEndBtn: string;
 }
 describe('FlexibleColumnLayoutComponent', () => {
     let testComponent: TestFlexibleColumnLayoutComponent;
@@ -430,6 +445,73 @@ describe('FlexibleColumnLayoutComponent', () => {
             fixture.detectChanges();
 
             expect(testComponent.flexibleColumnLayout.layout).toBe(THREE_COLUMNS_END_MINIMIZED);
+        });
+    });
+
+    describe('accessibility', () => {
+        it('should set aria-label on left separator button when collapseTitleStartBtn is provided', async () => {
+            await whenStable(fixture);
+            setViewport(1023);
+
+            testComponent.collapseTitleStartBtn = 'Collapse start column';
+            testComponent.collapseTitle = 'Collapse'; // Fallback
+            testComponent.layout = TWO_COLUMNS_START_EXPANDED;
+            fixture.detectChanges();
+            await whenStable(fixture);
+
+            const separatorBtn = fixture.debugElement.query(By.css('.fd-flexible-column-layout__button'));
+            const ariaLabel = separatorBtn.nativeElement.getAttribute('aria-label');
+
+            expect(ariaLabel).toBeTruthy();
+            expect(ariaLabel).toBe('Collapse start column');
+        });
+
+        it('should set aria-label on left separator button when expandTitleStartBtn is provided', async () => {
+            await whenStable(fixture);
+            setViewport(1023);
+
+            testComponent.expandTitleStartBtn = 'Expand start column';
+            testComponent.expandTitle = 'Expand'; // Fallback
+            testComponent.layout = TWO_COLUMNS_MID_EXPANDED;
+            fixture.detectChanges();
+            await whenStable(fixture);
+
+            const separatorBtn = fixture.debugElement.query(By.css('.fd-flexible-column-layout__button'));
+            const ariaLabel = separatorBtn.nativeElement.getAttribute('aria-label');
+
+            expect(ariaLabel).toBe('Expand start column');
+        });
+
+        it('should set aria-label on right separator button when collapseTitleEndBtn is provided', async () => {
+            await whenStable(fixture);
+            setViewport(1300);
+
+            testComponent.collapseTitleEndBtn = 'Collapse end column';
+            testComponent.collapseTitle = 'Collapse'; // Fallback
+            testComponent.layout = THREE_COLUMNS_MID_EXPANDED;
+            fixture.detectChanges();
+            await whenStable(fixture);
+
+            const separatorBtns = fixture.debugElement.queryAll(By.css('.fd-flexible-column-layout__button'));
+            const rightSeparatorBtn = separatorBtns[1];
+            const ariaLabel = rightSeparatorBtn.nativeElement.getAttribute('aria-label');
+
+            expect(ariaLabel).toBe('Collapse end column');
+        });
+
+        it('should fallback to collapseTitle when specific button title not provided', async () => {
+            await whenStable(fixture);
+            setViewport(1023);
+
+            testComponent.collapseTitle = 'Collapse';
+            testComponent.layout = TWO_COLUMNS_START_EXPANDED;
+            fixture.detectChanges();
+            await whenStable(fixture);
+
+            const separatorBtn = fixture.debugElement.query(By.css('.fd-flexible-column-layout__button'));
+            const ariaLabel = separatorBtn.nativeElement.getAttribute('aria-label');
+
+            expect(ariaLabel).toBe('Collapse');
         });
     });
 });
