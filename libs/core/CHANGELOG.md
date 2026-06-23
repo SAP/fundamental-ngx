@@ -1,3 +1,13 @@
+## 0.63.1-rc.2 (2026-06-23)
+
+### 🩹 Fixes
+
+- **core:** add accessible names to FlexibleColumnLayout separator buttons ([#14313](https://github.com/SAP/fundamental-ngx/pull/14313))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.63.1-rc.1 (2026-06-23)
 
 This was a version bump only for core to align it with other projects, there were no code changes.
