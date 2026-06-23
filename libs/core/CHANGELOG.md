@@ -1,3 +1,13 @@
+## 0.63.1-rc.3 (2026-06-23)
+
+### 🩹 Fixes
+
+- **core:** prevent duplicate subscription in segmented-button button changes listener ([#14308](https://github.com/SAP/fundamental-ngx/pull/14308), [#13358](https://github.com/SAP/fundamental-ngx/issues/13358))
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.63.1-rc.2 (2026-06-23)
 
 ### 🩹 Fixes
