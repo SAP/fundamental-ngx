@@ -1,0 +1,80 @@
+<fd-docs-section-title id="basic" componentName="hero-banner"> Basic </fd-docs-section-title>
+<description>
+    The Hero Banner component displays a personalized greeting area at the top of a page. It consists of a header area
+    with an overline text and main header text.
+</description>
+<component-example>
+    <ui5-doc-hero-banner-basic-sample />
+</component-example>
+<code-example [exampleFiles]="basicExample()" />
+
+<separator />
+
+<fd-docs-section-title id="columns" componentName="hero-banner"> Columns Ratio </fd-docs-section-title>
+<description>
+    The <code>columnsRatio</code> property controls how the content area is divided when using both default and
+    <code>endContent</code> slots:
+    <ul>
+        <li><strong>No columnsRatio</strong> - Single column layout, content spans the full width</li>
+        <li><strong>Equal</strong> - Two equal columns where both content blocks share the available width equally</li>
+        <li>
+            <strong>FirstWider</strong> - Two unequal columns where the start content takes two-thirds of the width and
+            the end content takes one-third
+        </li>
+    </ul>
+    On smaller screens, both slots stack vertically regardless of the ratio setting.
+</description>
+<component-example>
+    <ui5-doc-hero-banner-columns-sample />
+</component-example>
+<code-example [exampleFiles]="columnsExample()" />
+
+<separator />
+
+<fd-docs-section-title id="actions-placement" componentName="hero-banner">
+    Header Block and Actions Placement
+</fd-docs-section-title>
+<description>
+    The <code>actionsPlacement</code> property controls where the actions slot content is positioned:
+    <ul>
+        <li>
+            <strong>TopEnd</strong> (default) - Actions are displayed to the right of the header text, at the top of the
+            header row
+        </li>
+        <li><strong>BottomStart</strong> - Actions are displayed below the header text, left-aligned</li>
+    </ul>
+    The <code>headerBlockPlacement</code> property controls the vertical placement of the header block:
+    <ul>
+        <li><strong>Top</strong> (default) - Header block is placed at the top of the content area</li>
+        <li><strong>Bottom</strong> - Header block is pushed to the bottom of the first column</li>
+    </ul>
+</description>
+<component-example>
+    <ui5-doc-hero-banner-actions-placement-sample />
+</component-example>
+<code-example [exampleFiles]="actionsPlacementExample()" />
+
+<separator />
+
+<fd-docs-section-title id="background-image" componentName="hero-banner">
+    Custom Background Image
+</fd-docs-section-title>
+<description>
+    You can customize the Hero Banner with a background image by applying a <code>background-image</code> CSS style to
+    the component.
+</description>
+<component-example>
+    <ui5-doc-hero-banner-background-image-sample />
+</component-example>
+<code-example [exampleFiles]="backgroundImageExample()" />
+
+<separator />
+
+<fd-docs-section-title id="use-cases" componentName="hero-banner"> Different Use Cases </fd-docs-section-title>
+<description>
+    Various practical implementations of the Hero Banner component showing different configurations.
+</description>
+<component-example>
+    <ui5-doc-hero-banner-use-cases-sample />
+</component-example>
+<code-example [exampleFiles]="useCasesExample()" />

@@ -300,6 +300,26 @@
         "ui5-fiori/media-gallery/media-gallery": {
             "suppress": ["list"],
             "reason": "Known violations: list"
+        },
+        "ui5-fiori/hero-banner/basic": {
+            "suppress": ["landmark-banner-is-top-level"],
+            "reason": "Known violation: ui5-hero-banner renders role=banner internally; upstream UI5 component issue"
+        },
+        "ui5-fiori/hero-banner/columns": {
+            "suppress": ["landmark-banner-is-top-level", "landmark-no-duplicate-banner"],
+            "reason": "Known violation: ui5-hero-banner renders role=banner internally; upstream UI5 component issue"
+        },
+        "ui5-fiori/hero-banner/actions-placement": {
+            "suppress": ["landmark-banner-is-top-level"],
+            "reason": "Known violation: ui5-hero-banner renders role=banner internally; upstream UI5 component issue"
+        },
+        "ui5-fiori/hero-banner/background-image": {
+            "suppress": ["landmark-banner-is-top-level"],
+            "reason": "Known violation: ui5-hero-banner renders role=banner internally; upstream UI5 component issue"
+        },
+        "ui5-fiori/hero-banner/use-cases": {
+            "suppress": ["landmark-banner-is-top-level", "landmark-no-duplicate-banner"],
+            "reason": "Known violation: ui5-hero-banner renders role=banner internally; upstream UI5 component issue"
         }
     }
 }

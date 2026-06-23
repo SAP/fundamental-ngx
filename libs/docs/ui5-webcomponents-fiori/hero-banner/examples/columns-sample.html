@@ -1,0 +1,44 @@
+<ui5-title size="H4" style="display: block; margin-bottom: 0.5rem">No columnsRatio (single column)</ui5-title>
+<ui5-hero-banner headerText="Welcome back, Sarah" overlineText="Monday, May 26, 2026">
+    <div slot="actions" style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center">
+        <ui5-button icon="receipt" design="Default">Approve Invoices</ui5-button>
+        <ui5-button icon="shipping-status" design="Default">Track Deliveries</ui5-button>
+    </div>
+    <div>
+        Here you can insert any additional information that may be relevant to the context. This section serves as a
+        placeholder for content that can provide more in-depth explanations, supplementary data, or any other pertinent
+        details that the reader might need.
+    </div>
+</ui5-hero-banner>
+
+<br />
+
+<ui5-title size="H4" style="display: block; margin-bottom: 0.5rem"
+    >columnsRatio="Equal" (equal width columns)</ui5-title
+>
+<ui5-hero-banner headerText="Hi, David" overlineText="Monday, May 26, 2026" columnsRatio="Equal">
+    <ui5-card>
+        <ui5-card-header slot="header" titleText="Leave Balance" subtitleText="Days remaining"></ui5-card-header>
+        <div style="padding: 0.75rem; font-size: 1.5rem; font-weight: bold">18 of 30</div>
+    </ui5-card>
+    <ui5-card slot="endContent">
+        <ui5-card-header slot="header" titleText="Next Payroll" subtitleText="June 2026"></ui5-card-header>
+        <div style="padding: 0.75rem; font-size: 1.5rem; font-weight: bold">Jun 30</div>
+    </ui5-card>
+</ui5-hero-banner>
+
+<br />
+
+<ui5-title size="H4" style="display: block; margin-bottom: 0.5rem"
+    >columnsRatio="FirstWider" (start column twice as wide)</ui5-title
+>
+<ui5-hero-banner headerText="Good Afternoon, Thomas" overlineText="Monday, May 26, 2026" columnsRatio="FirstWider">
+    <ui5-card>
+        <ui5-card-header slot="header" titleText="Sales Pipeline" subtitleText="Q2 2026"></ui5-card-header>
+        <div style="padding: 0.75rem; font-size: 1.5rem; font-weight: bold">€4.2M</div>
+    </ui5-card>
+    <ui5-card slot="endContent">
+        <ui5-card-header slot="header" titleText="Overdue Tasks" subtitleText="Action needed"></ui5-card-header>
+        <div style="padding: 0.75rem; font-size: 1.5rem; font-weight: bold; color: var(--sapCriticalTextColor)">3</div>
+    </ui5-card>
+</ui5-hero-banner>
