@@ -1,63 +1,73 @@
 <fieldset>
-    <legend fd-list-group-header>
-        <span fd-list-title [attr.id]="sortOrderHeaderId">
-            {{ ('platformTable.sortDialogSortOrderHeader' | fdTranslate)() }}
-        </span>
-    </legend>
-    <ul fd-list [selection]="true" [attr.aria-labelledby]="sortOrderHeaderId">
-        <li fd-list-item [selected]="direction() === SORT_DIRECTION.ASC">
-            <fd-radio-button
-                name="sort-order"
-                value="asc"
-                state="default"
-                [ngModel]="direction()"
-                (ngModelChange)="_sortDirectionChange($event)"
-            ></fd-radio-button>
-            <span fd-list-title>{{ ('platformTable.sortDialogSortOrderAsc' | fdTranslate)() }}</span>
-        </li>
-        <li fd-list-item [selected]="direction() === SORT_DIRECTION.DESC">
-            <fd-radio-button
-                name="sort-order"
-                value="desc"
-                state="default"
-                [ngModel]="direction()"
-                (ngModelChange)="_sortDirectionChange($event)"
-            ></fd-radio-button>
-            <span fd-list-title>{{ ('platformTable.sortDialogSortOrderDesc' | fdTranslate)() }}</span>
-        </li>
-    </ul>
-</fieldset>
+    <ul fd-list>
+        @for (criteria of sortCriteriaList(); track $index; let rowIndex = $index) {
+            @if (rowVisibility()[rowIndex]) {
+                <li fd-list-item class="fdp-sorting__row">
+                    <fd-combobox
+                        #sortCombobox
+                        style="margin-inline-end: 1rem"
+                        [dropdownValues]="availableColumnsPerRow()[rowIndex]"
+                        [displayFn]="displayColumn"
+                        [placeholder]="('platformTable.sortDialogSortByHeader' | fdTranslate)()"
+                        [state]="rowStates()[rowIndex]"
+                        [ngModel]="selectedColumnsPerRow()[rowIndex]"
+                        (ngModelChange)="_sortFieldChangeForRow(rowIndex, $event)"
+                    >
+                    </fd-combobox>
 
-<fieldset>
-    <legend fd-list-group-header>
-        <span fd-list-title [attr.id]="sortDialogSortByHeaderId">
-            {{ ('platformTable.sortDialogSortByHeader' | fdTranslate)() }}
-        </span>
-    </legend>
-    <ul fd-list [selection]="true" [attr.aria-labelledby]="sortDialogSortByHeaderId">
-        @if (allowDisablingSorting()) {
-            <li fd-list-item [selected]="field() === NOT_SORTED_OPTION_VALUE">
-                <fd-radio-button
-                    name="sort-by"
-                    [value]="NOT_SORTED_OPTION_VALUE"
-                    state="default"
-                    [ngModel]="field()"
-                    (ngModelChange)="_sortFieldChange($event)"
-                ></fd-radio-button>
-                <span fd-list-title>{{ ('platformTable.sortDialogNotSortedLabel' | fdTranslate)() }}</span>
-            </li>
-        }
-        @for (column of columns(); track column) {
-            <li fd-list-item [selected]="column.key === field()">
-                <fd-radio-button
-                    name="sort-by"
-                    [value]="column.key"
-                    state="default"
-                    [ngModel]="field()"
-                    (ngModelChange)="_sortFieldChange($event)"
-                ></fd-radio-button>
-                <span fd-list-title>{{ column.label }}</span>
-            </li>
+                    <fd-segmented-button
+                        style="margin-inline-end: 2rem"
+                        [name]="'sort-order-' + rowIndex"
+                        [ngModel]="directionsPerRow()[rowIndex]"
+                        (ngModelChange)="_sortDirectionChangeForRow(rowIndex, $event)"
+                    >
+                        <button
+                            fd-button
+                            glyph="sort-ascending"
+                            [attr.title]="('platformTable.sortDialogSortOrderAsc' | fdTranslate)()"
+                            value="asc"
+                        ></button>
+                        <button
+                            fd-button
+                            glyph="sort-descending"
+                            [attr.title]="('platformTable.sortDialogSortOrderDesc' | fdTranslate)()"
+                            value="desc"
+                        ></button>
+                    </fd-segmented-button>
+
+                    @if (directionsPerRow()[rowIndex] === 'asc') {
+                        <span fd-list-title>{{ ('platformTable.sortDialogSortOrderAsc' | fdTranslate)() }}</span>
+                    }
+
+                    @if (directionsPerRow()[rowIndex] === 'desc') {
+                        <span fd-list-title>{{ ('platformTable.sortDialogSortOrderDesc' | fdTranslate)() }}</span>
+                    }
+
+                    <span fd-list-secondary class="fdp-sorting__actions">
+                        <button
+                            fd-button
+                            glyph="slim-arrow-up"
+                            [attr.title]="('platformTable.sortDialogMoveUp' | fdTranslate)()"
+                            [disabled]="!canMoveUpPerRow()[rowIndex]"
+                            (click)="moveUp(rowIndex)"
+                        ></button>
+                        <button
+                            fd-button
+                            glyph="slim-arrow-down"
+                            [attr.title]="('platformTable.sortDialogMoveDown' | fdTranslate)()"
+                            [disabled]="!canMoveDownPerRow()[rowIndex]"
+                            (click)="moveDown(rowIndex)"
+                        ></button>
+                        <button
+                            fd-button
+                            glyph="decline"
+                            [attr.title]="('platformTable.sortDialogDelete' | fdTranslate)()"
+                            [disabled]="!canDeletePerRow()[rowIndex]"
+                            (click)="deleteRow(rowIndex)"
+                        ></button>
+                    </span>
+                </li>
+            }
         }
     </ul>
 </fieldset>

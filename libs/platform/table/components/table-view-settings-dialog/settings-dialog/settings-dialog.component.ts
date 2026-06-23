@@ -18,7 +18,7 @@ import {
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { IconTabBarComponent, IconTabBarItem, IconTabBarTabComponent } from '@fundamental-ngx/platform/icon-tab-bar';
-import { CollectionFilter, CollectionSort, Table } from '@fundamental-ngx/platform/table-helpers';
+import { CollectionFilter, CollectionSort, SortDirection, Table } from '@fundamental-ngx/platform/table-helpers';
 import { RESETTABLE_TOKEN, ResetButtonComponent, Resettable } from '../../reset-button/reset-button.component';
 import { ColumnsComponent } from '../columns/columns.component';
 import { FiltersViewStep } from '../filtering/filters-active-step';
@@ -97,6 +97,9 @@ export class SettingsDialogComponent implements Resettable {
     /** Signal to track reset availability */
     readonly isResetAvailable$ = signal(false);
 
+    /** Signal to track if the dialog is valid (OK button can be clicked) */
+    readonly isDialogValid$ = signal(true);
+
     /** @hidden Initial sorting configuration */
     _initialSorting = signal<Nullable<CollectionSort>>(null);
 
@@ -117,6 +120,9 @@ export class SettingsDialogComponent implements Resettable {
 
     /** @hidden Pending columns changes (not applied to signal to avoid triggering child effects) */
     private _pendingColumnsChanges: Nullable<SettingsColumnsDialogResultData> = null;
+
+    /** @hidden Stores the sortBy array from sort changes */
+    private _pendingSortBy: Array<{ field: string; direction: SortDirection }> = [];
 
     /** @hidden Tracks reset availability per tab */
     private _resetAvailabilityByTab = signal<Record<string, boolean>>({});
@@ -160,8 +166,12 @@ export class SettingsDialogComponent implements Resettable {
             ? { columns: this._pendingColumnsChanges.columns }
             : this.columnsData();
 
+        // Build sorting result with sortBy array
+        const sortingData = this.sortingData();
+        const sortingResult = sortingData ? { sortBy: this._pendingSortBy } : null;
+
         this.dialogRef.close({
-            sortingData: this.sortingData(),
+            sortingData: sortingResult,
             filteringData: this.filteringData(),
             groupingData: this.groupingData(),
             columnsData
@@ -180,11 +190,19 @@ export class SettingsDialogComponent implements Resettable {
      */
     reset(): void {
         if (this.activeTab() === ActiveTab.SORT && this.sortingData()) {
+            const current = this.sortingData()!;
+            const initial = this._initialSorting()!;
+            // Reset sortBy to initial sorting (if any)
+            const initialSortBy =
+                initial.field !== NOT_SORTED_OPTION_VALUE
+                    ? [{ field: initial.field as string, direction: initial.direction }]
+                    : [];
             this.sortingData.set({
-                ...this.sortingData()!,
-                field: this._initialSorting()!.field,
-                direction: this._initialSorting()!.direction
+                columns: current.columns,
+                allowDisablingSorting: current.allowDisablingSorting,
+                sortBy: initialSortBy
             });
+            this._pendingSortBy = initialSortBy;
         }
         if (this.activeTab() === ActiveTab.FILTER && this.filteringData()) {
             this.filteringData.set({
@@ -218,11 +236,21 @@ export class SettingsDialogComponent implements Resettable {
      * @param event Updated sorting data.
      */
     onSortChange(event: SettingsSortDialogResultData): void {
+        // Store the sortBy array for multi-column sorting
+        this._pendingSortBy = event.sortBy ?? [];
+        // Update sortingData with new sortBy
         this.sortingData.set({
             ...this.sortingData()!,
-            field: event.field,
-            direction: event.direction
+            sortBy: this._pendingSortBy
         });
+    }
+
+    /**
+     * Handle sort validity change event.
+     * @param isValid Whether the sorting configuration is valid.
+     */
+    onSortValidityChange(isValid: boolean): void {
+        this.isDialogValid$.set(isValid);
     }
 
     /**

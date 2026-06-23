@@ -35,7 +35,8 @@ import {
 export const dialogConfig: DialogConfig = {
     responsivePadding: false,
     verticalPadding: false,
-    width: 'auto'
+    width: '40rem',
+    height: '80%'
 };
 
 export interface CombinedTableDialogData {
@@ -123,9 +124,11 @@ export class TableViewSettingsDialogComponent implements AfterViewInit {
 
         const sortData: SettingsSortDialogData = {
             columns: columns.filter(({ sortable }) => sortable),
-            direction: state.sortBy?.[0]?.direction,
-            field: state.sortBy?.[0]?.field,
-            allowDisablingSorting: this.allowDisablingSorting
+            allowDisablingSorting: this.allowDisablingSorting,
+            // Filter out any criteria with null fields
+            sortBy: (state.sortBy ?? []).filter(
+                (s): s is { field: string; direction: SortDirection } => s.field !== null
+            )
         };
 
         const filterData: FiltersDialogData = {
@@ -231,7 +234,7 @@ export class TableViewSettingsDialogComponent implements AfterViewInit {
             )
             .subscribe(({ sortingData, filteringData, groupingData, columnsData }) => {
                 if (sortingData) {
-                    this._applySorting(sortingData.field, sortingData.direction);
+                    this._applySorting(sortingData);
                 }
                 if (filteringData) {
                     this._applyFiltering(filteringData.filterBy);
@@ -298,8 +301,9 @@ export class TableViewSettingsDialogComponent implements AfterViewInit {
     }
 
     /** @hidden */
-    private _applySorting(field: string | null, direction: SortDirection): void {
-        this._table?.sort(field ? [{ field, direction }] : []);
+    private _applySorting(sortingData: { sortBy?: Array<{ field: string; direction: SortDirection }> }): void {
+        const sortRules = sortingData.sortBy ?? [];
+        this._table?.sort(sortRules);
     }
 
     /** @hidden */

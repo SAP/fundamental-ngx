@@ -667,6 +667,12 @@ export class ComboboxComponent<T = any>
 
         this.inputTextValue = this.displayFn(valueToDisplay);
         this.setValue(valueToDisplay);
+
+        // Sync native input element value to ensure programmatic changes are reflected
+        if (this.searchInputElement?.nativeElement) {
+            this.searchInputElement.nativeElement.value = this.inputTextValue;
+        }
+
         this._cdRef.markForCheck();
     }
 
