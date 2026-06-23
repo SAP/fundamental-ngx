@@ -14,9 +14,10 @@ import {
     THREE_COLUMNS_END_EXPANDED,
     THREE_COLUMNS_MID_EXPANDED,
     THREE_COLUMNS_START_MINIMIZED,
+    THREE_COLUMNS_END_MINIMIZED,
     TWO_COLUMNS_END_EXPANDED,
     TWO_COLUMNS_MID_EXPANDED,
-    TWO_COLUMNS_START_EXPANDED
+    TWO_COLUMNS_START_EXPANDED,
 } from './constants';
 import { FlexibleColumnLayoutComponent } from './flexible-column-layout.component';
 
