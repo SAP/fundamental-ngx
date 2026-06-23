@@ -20,8 +20,8 @@ const FILES = {
 
 const WEB_COMPONENTS_BASE = 'ui5-webcomponents-base';
 
-/** Converts PascalCase to kebab-case (e.g., 'Ui5Button' -> 'ui5-button'). */
-const pascalToKebabCase = (str: string): string => str.replace(/\B([A-Z])/g, '-$1').toLowerCase();
+/** @internal Converts PascalCase to kebab-case (e.g., 'Ui5Button' -> 'ui5-button'). */
+export const pascalToKebabCase = (str: string): string => str.replace(/\B([A-Z])/g, '-$1').toLowerCase();
 
 /**
  * Ensures directory exists and writes content to a file.
@@ -33,8 +33,8 @@ async function ensureDirAndWriteFile(filePath: string, content: string): Promise
     await writeFile(filePath, content, 'utf-8');
 }
 
-/** Determines the capitalized suffix for the theming service based on package name. */
-function getPackageSuffix(packageName: string): string {
+/** @internal Determines the capitalized suffix for the theming service based on package name. */
+export function getPackageSuffix(packageName: string): string {
     const prefix = '@ui5/webcomponents';
     if (!packageName.startsWith(prefix)) {
         throw new Error(`Invalid package name: ${packageName}. Expected format: ${prefix} or ${prefix}-<suffix>`);
@@ -85,8 +85,9 @@ type ExtractedCemData = {
 
 /**
  * Step 2: Extract all relevant data from the CEM.
+ * @internal
  */
-function extractCemData(cemData: CEM.Package, options: GenerateExecutorSchema): ExtractedCemData {
+export function extractCemData(cemData: CEM.Package, options: GenerateExecutorSchema): ExtractedCemData {
     const componentDeclarations = cemData.modules.flatMap((m) => {
         const declarations = (m.declarations || []).filter(
             (d): d is CEM.CustomElementDeclaration =>
