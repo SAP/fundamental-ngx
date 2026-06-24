@@ -1,3 +1,13 @@
+## 0.63.1-rc.5 (2026-06-24)
+
+### 🩹 Fixes
+
+- **core:** fix msg box focus trap ([#14298](https://github.com/SAP/fundamental-ngx/pull/14298))
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.63.1-rc.4 (2026-06-24)
 
 This was a version bump only for core to align it with other projects, there were no code changes.
