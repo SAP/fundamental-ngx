@@ -10,12 +10,16 @@
     @if (hasSorting$() || hasFilter$()) {
         <div class="fd-table__column-header-icons">
             @if (hasFilter$()) {
-                <fd-icon fd-table-icon glyph="filter"></fd-icon>
+                <fd-icon fd-table-icon glyph="filter" [ariaHidden]="true"></fd-icon>
             }
             @if (hasSorting$()) {
                 <fd-icon
                     fd-table-icon
-                    [ariaHidden]="true"
+                    [ariaLabel]="
+                        sorting$()?.direction === SORT_DIRECTION.ASC
+                            ? ('platformTable.columnSortedAscLabel' | fdTranslate: { columnName: column?.label })()
+                            : ('platformTable.columnSortedDescLabel' | fdTranslate: { columnName: column?.label })()
+                    "
                     [glyph]="sorting$()?.direction === SORT_DIRECTION.ASC ? 'sort-ascending' : 'sort-descending'"
                 ></fd-icon>
             }

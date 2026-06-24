@@ -519,6 +519,8 @@ export default {
         cancelBtnLabel: 'Ακύρωση',
         clearFilters: 'Εκκαθάριση Φίλτρων',
         collapseRowButtonTitle: 'Σύμπυξη σειράς',
+        columnSortedAscLabel: 'Sort by {columnName}, ascending',
+        columnSortedDescLabel: 'Sort by {columnName}, descending',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Δεν βρέθηκαν δεδομένα',
         deselectAllCheckboxLabel: 'Κατάργηση επιλογής όλων',

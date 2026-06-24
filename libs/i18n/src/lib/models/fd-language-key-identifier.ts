@@ -380,6 +380,8 @@ export type FdLanguageKeyIdentifier =
     | 'platformTable.cancelBtnLabel'
     | 'platformTable.clearFilters'
     | 'platformTable.collapseRowButtonTitle'
+    | 'platformTable.columnSortedAscLabel'
+    | 'platformTable.columnSortedDescLabel'
     | 'platformTable.confirmBtnLabel'
     | 'platformTable.defaultEmptyMessage'
     | 'platformTable.deselectAllCheckboxLabel'

@@ -519,6 +519,8 @@ export default {
         cancelBtnLabel: 'Zrušiť',
         clearFilters: 'Vymazať filtre',
         collapseRowButtonTitle: 'Zbaliť riadok',
+        columnSortedAscLabel: 'Sort by {columnName}, ascending',
+        columnSortedDescLabel: 'Sort by {columnName}, descending',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Nenašli sa žiadne údaje',
         deselectAllCheckboxLabel: 'Zrušiť výber všetkého',

@@ -519,6 +519,8 @@ export default {
         cancelBtnLabel: 'キャンセル',
         clearFilters: 'フィルタをクリア',
         collapseRowButtonTitle: '行を圧縮',
+        columnSortedAscLabel: 'Sort by {columnName}, ascending',
+        columnSortedDescLabel: 'Sort by {columnName}, descending',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'データが見つかりません。',
         deselectAllCheckboxLabel: 'すべて選択解除',

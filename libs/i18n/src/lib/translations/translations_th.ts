@@ -518,6 +518,8 @@ export default {
         cancelBtnLabel: 'ยกเลิก',
         clearFilters: 'เคลียร์ตัวกรอง',
         collapseRowButtonTitle: 'ยุบรวมแถว',
+        columnSortedAscLabel: 'Sort by {columnName}, ascending',
+        columnSortedDescLabel: 'Sort by {columnName}, descending',
         confirmBtnLabel: 'ตกลง',
         defaultEmptyMessage: 'ไม่พบข้อมูล',
         deselectAllCheckboxLabel: 'ยกเลิกการเลือกทั้งหมด',

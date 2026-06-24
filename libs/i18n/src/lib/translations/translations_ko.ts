@@ -517,6 +517,8 @@ export default {
         cancelBtnLabel: '취소',
         clearFilters: '필터 지우기',
         collapseRowButtonTitle: '행 접기',
+        columnSortedAscLabel: 'Sort by {columnName}, ascending',
+        columnSortedDescLabel: 'Sort by {columnName}, descending',
         confirmBtnLabel: '확인',
         defaultEmptyMessage: '데이터를 찾을 수 없음',
         deselectAllCheckboxLabel: '모두 선택 취소',

@@ -519,6 +519,8 @@ export default {
         cancelBtnLabel: 'Отказ',
         clearFilters: 'Изчистване на филтрите',
         collapseRowButtonTitle: 'Свиване на реда',
+        columnSortedAscLabel: 'Sort by {columnName}, ascending',
+        columnSortedDescLabel: 'Sort by {columnName}, descending',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Не са намерени данни',
         deselectAllCheckboxLabel: 'Отмяна на избора на всички',

@@ -518,6 +518,8 @@ export default {
         cancelBtnLabel: 'Peruuta',
         clearFilters: 'Tyhjennä suodattimet',
         collapseRowButtonTitle: 'Tiivistä rivi',
+        columnSortedAscLabel: 'Sort by {columnName}, ascending',
+        columnSortedDescLabel: 'Sort by {columnName}, descending',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Tietoja ei löydy',
         deselectAllCheckboxLabel: 'Poista kaikki valinnat',

@@ -520,6 +520,8 @@ export default {
         cancelBtnLabel: 'Avbryt',
         clearFilters: 'Tøm filtre',
         collapseRowButtonTitle: 'Komprimer rad',
+        columnSortedAscLabel: 'Sort by {columnName}, ascending',
+        columnSortedDescLabel: 'Sort by {columnName}, descending',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Finner ingen data',
         deselectAllCheckboxLabel: 'Opphev merking av alle',

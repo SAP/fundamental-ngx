@@ -519,6 +519,8 @@ export default {
         cancelBtnLabel: 'Odustani',
         clearFilters: 'Obriši filtere',
         collapseRowButtonTitle: 'Sažmi red',
+        columnSortedAscLabel: 'Sort by {columnName}, ascending',
+        columnSortedDescLabel: 'Sort by {columnName}, descending',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Podaci nisu nađeni',
         deselectAllCheckboxLabel: 'Poništi odabir za sve',

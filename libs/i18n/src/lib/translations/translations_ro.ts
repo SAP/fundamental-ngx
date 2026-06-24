@@ -522,6 +522,8 @@ export default {
         cancelBtnLabel: 'Anulare',
         clearFilters: 'Golire filtre',
         collapseRowButtonTitle: 'Comprimare linie',
+        columnSortedAscLabel: 'Sort by {columnName}, ascending',
+        columnSortedDescLabel: 'Sort by {columnName}, descending',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Nu s-au găsit date',
         deselectAllCheckboxLabel: 'Deselectare toate',
