@@ -726,9 +726,9 @@ export default {
         groupRoleDescription: 'กลุ่มปุ่มที่แบ่งเซกเมนต์'
     },
     coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: 'ข้อความการตรวจสอบความถูกต้องของฟิลด์'
     },
     platformInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: 'ข้อความการตรวจสอบความถูกต้องของฟิลด์'
     }
 };

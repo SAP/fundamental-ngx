@@ -726,9 +726,9 @@ export default {
         groupRoleDescription: 'Skupina segmentovaných tlačítek'
     },
     coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: 'Zprávy o validaci pole'
     },
     platformInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: 'Zprávy o validaci pole'
     }
 };

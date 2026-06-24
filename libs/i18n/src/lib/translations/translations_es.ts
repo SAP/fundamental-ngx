@@ -728,9 +728,9 @@ export default {
         groupRoleDescription: 'Grupo de botones segmentados'
     },
     coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: 'Mensajes de validación de campo'
     },
     platformInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: 'Mensajes de validación de campo'
     }
 };

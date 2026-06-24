@@ -20,9 +20,9 @@ export default {
     },
     coreAvatarGroup: {
         ariaLabelGroup:
-            'ポップアップタイプのダイアログに結合されたアバターがあります。{count}個のアバターが表示されており、{hiddenCount}個のアバターが非表示です。すべてのアバターを表示するにはアクティブ化してください。',
+            'アバターが結合されて表示されるポップアップタイプのダイアログ。{count}個のアバターが表示され、{hiddenCount}個のアバターが非表示になっています。すべてのアバターを表示するにはアクティブ化してください。',
         ariaLabelIndividual:
-            '個別のアバター。{count}個のアバターが表示されており、{hiddenCount}個のアバターは非表示です。',
+            '個別のアバター。{count}個のアバターが表示され、{hiddenCount}個のアバターが非表示になっています。',
         backButton: '戻る',
         popupBodyAriaLabel: '{count}件の項目あり'
     },
@@ -727,9 +727,9 @@ export default {
         groupRoleDescription: 'セグメントボタングループ'
     },
     coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: 'フィールド検証メッセージ'
     },
     platformInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: 'フィールド検証メッセージ'
     }
 };

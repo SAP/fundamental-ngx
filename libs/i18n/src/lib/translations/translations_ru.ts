@@ -727,9 +727,9 @@ export default {
         groupRoleDescription: 'Группа сегментированных кнопок'
     },
     coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: 'Сообщения о проверке полей'
     },
     platformInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: 'Сообщения о проверке полей'
     }
 };

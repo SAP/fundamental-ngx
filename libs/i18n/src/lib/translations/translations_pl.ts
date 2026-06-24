@@ -727,9 +727,9 @@ export default {
         groupRoleDescription: 'Grupa przycisków podzielonych na segmenty'
     },
     coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: 'Komunikaty walidacji pola'
     },
     platformInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: 'Komunikaty walidacji pola'
     }
 };

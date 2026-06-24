@@ -724,9 +724,9 @@ export default {
         groupRoleDescription: '세그멘테이션된 버튼 그룹'
     },
     coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: '필드 유효성 확인 메시지'
     },
     platformInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: '필드 유효성 확인 메시지'
     }
 };

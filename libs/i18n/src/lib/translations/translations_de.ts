@@ -728,9 +728,9 @@ export default {
         groupRoleDescription: 'Segmentierte Schaltflächengruppe'
     },
     coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: 'Feldprüfungsmeldungen'
     },
     platformInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: 'Feldprüfungsmeldungen'
     }
 };

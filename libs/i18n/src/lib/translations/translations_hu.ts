@@ -727,9 +727,9 @@ export default {
         groupRoleDescription: 'Szegmentált gombcsoport'
     },
     coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: 'Validálási üzenetek mező'
     },
     platformInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: 'Validálási üzenetek mező'
     }
 };

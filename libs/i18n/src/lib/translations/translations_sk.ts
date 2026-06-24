@@ -727,9 +727,9 @@ export default {
         groupRoleDescription: 'Skupina segmentovaných tlačidiel'
     },
     coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: 'Pole Hlásenia overenia'
     },
     platformInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: 'Pole Hlásenia overenia'
     }
 };
