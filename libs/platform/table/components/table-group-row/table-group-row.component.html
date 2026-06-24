@@ -6,6 +6,11 @@
     [focusable]="true"
     colspan="100%"
     [attr.aria-expanded]="row.expanded"
+    [attr.title]="
+        row.expanded
+            ? ('platformTable.collapseRowButtonTitle' | fdTranslate)()
+            : ('platformTable.expandRowButtonTitle' | fdTranslate)()
+    "
     [attr.data-nesting-level]="row.level + 1"
     (keydown.enter)="toggleGroupRow.emit(row)"
     (keydown.space)="toggleGroupRow.emit(row)"
