@@ -548,22 +548,25 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     }
 
     /** @hidden */
-    handleMultipleDateWithShift({ date, shiftKey }: { date: D; shiftKey: boolean }): void {
-        if (!shiftKey || !this._shiftAnchorDate) {
-            this._shiftAnchorDate = date;
-            this._toggleMultiDateFromCalendar(date);
-        } else {
-            const rangeDates = this._fillDateRange(this._shiftAnchorDate, date);
-            const existing = this.selectedMultipleDates || [];
-            const merged = [
-                ...existing,
-                ...rangeDates.filter((rd) => !existing.some((ex) => this._dateTimeAdapter.datesEqual(ex, rd)))
-            ];
-            this.selectedMultipleDates = merged;
-            this.onChange(merged);
-            this.selectedMultipleDatesChange.emit(merged);
-            this._changeDetectorRef.markForCheck();
+    handleMultiDateAnchorChange(date: D): void {
+        this._shiftAnchorDate = date;
+    }
+
+    /** @hidden */
+    handleShiftMultiDateSelected(date: D): void {
+        if (!this._shiftAnchorDate) {
+            return;
         }
+        const rangeDates = this._fillDateRange(this._shiftAnchorDate, date);
+        const existing = this.selectedMultipleDates || [];
+        const merged = [
+            ...existing,
+            ...rangeDates.filter((rd) => !existing.some((ex) => this._dateTimeAdapter.datesEqual(ex, rd)))
+        ];
+        this.selectedMultipleDates = merged;
+        this.onChange(merged);
+        this.selectedMultipleDatesChange.emit(merged);
+        this._changeDetectorRef.markForCheck();
     }
 
     /**
@@ -895,17 +898,6 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
             typeof disableFunction === 'function' &&
             disableFunction(this.selectedDate, this._currentlyDisplayed, this.activeView)
         );
-    }
-
-    /** @hidden */
-    private _toggleMultiDateFromCalendar(date: D): void {
-        const existing = this.selectedMultipleDates || [];
-        const idx = existing.findIndex((d) => this._dateTimeAdapter.datesEqual(d, date));
-        const updated = idx > -1 ? existing.filter((_, i) => i !== idx) : [...existing, date];
-        this.selectedMultipleDates = updated;
-        this.onChange(updated);
-        this.selectedMultipleDatesChange.emit(updated);
-        this._changeDetectorRef.markForCheck();
     }
 
     /** @hidden */

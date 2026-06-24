@@ -300,40 +300,32 @@ describe('CalendarComponent', () => {
             const emitted: FdDate[][] = [];
             component.selectedMultipleDatesChange.subscribe((d) => emitted.push(d as FdDate[]));
 
-            component.handleMultipleDateWithShift({ date: new FdDate(2024, 1, 10), shiftKey: false });
+            component.handleMultiDateAnchorChange(new FdDate(2024, 1, 10));
+            // anchor change alone does not emit — the toggle comes from the day view via selectedMultipleDatesChanged
+            component.selectedMultipleDatesChanged([new FdDate(2024, 1, 10)]);
 
             expect(emitted.length).toBe(1);
             expect(emitted[0].length).toBe(1);
             expect(emitted[0][0]).toEqual(new FdDate(2024, 1, 10));
         });
 
-        it('plain click on already-selected date removes it', () => {
-            component.selectedMultipleDates = [new FdDate(2024, 1, 10)];
+        it('shift-click with no anchor is a no-op', () => {
             const emitted: FdDate[][] = [];
             component.selectedMultipleDatesChange.subscribe((d) => emitted.push(d as FdDate[]));
 
-            component.handleMultipleDateWithShift({ date: new FdDate(2024, 1, 10), shiftKey: false });
+            component.handleShiftMultiDateSelected(new FdDate(2024, 1, 15));
 
-            expect(emitted[0].length).toBe(0);
-        });
-
-        it('shift-click with no anchor acts as plain click', () => {
-            const emitted: FdDate[][] = [];
-            component.selectedMultipleDatesChange.subscribe((d) => emitted.push(d as FdDate[]));
-
-            component.handleMultipleDateWithShift({ date: new FdDate(2024, 1, 15), shiftKey: true });
-
-            expect(emitted.length).toBe(1);
-            expect(emitted[0].length).toBe(1);
+            expect(emitted.length).toBe(0);
         });
 
         it('shift-click fills all dates between anchor and clicked date', () => {
-            component.handleMultipleDateWithShift({ date: new FdDate(2024, 1, 10), shiftKey: false });
+            component.handleMultiDateAnchorChange(new FdDate(2024, 1, 10));
+            component.selectedMultipleDates = [new FdDate(2024, 1, 10)];
 
             const emitted: FdDate[][] = [];
             component.selectedMultipleDatesChange.subscribe((d) => emitted.push(d as FdDate[]));
 
-            component.handleMultipleDateWithShift({ date: new FdDate(2024, 1, 14), shiftKey: true });
+            component.handleShiftMultiDateSelected(new FdDate(2024, 1, 14));
 
             const last = emitted[emitted.length - 1];
             expect(last.length).toBe(5); // Jan 10, 11, 12, 13, 14
@@ -344,51 +336,52 @@ describe('CalendarComponent', () => {
 
         it('shift-click fill merges with pre-existing selection', () => {
             component.selectedMultipleDates = [new FdDate(2024, 1, 5)];
-            component.handleMultipleDateWithShift({ date: new FdDate(2024, 1, 10), shiftKey: false });
+            component.handleMultiDateAnchorChange(new FdDate(2024, 1, 10));
+            component.selectedMultipleDates = [new FdDate(2024, 1, 5), new FdDate(2024, 1, 10)];
 
             const emitted: FdDate[][] = [];
             component.selectedMultipleDatesChange.subscribe((d) => emitted.push(d as FdDate[]));
 
-            component.handleMultipleDateWithShift({ date: new FdDate(2024, 1, 12), shiftKey: true });
+            component.handleShiftMultiDateSelected(new FdDate(2024, 1, 12));
 
             const last = emitted[emitted.length - 1];
-            // Jan 5 (pre-existing) + Jan 10, 11, 12 (fill)
-            expect(last.length).toBe(4);
+            expect(last.length).toBe(4); // Jan 5 + Jan 10, 11, 12
             expect(last.some((d) => d.day === 5 && d.month === 1 && d.year === 2024)).toBeTrue();
         });
 
         it('shift-click fill works across months (Jan 29 to Feb 2)', () => {
-            component.handleMultipleDateWithShift({ date: new FdDate(2024, 1, 29), shiftKey: false });
+            component.handleMultiDateAnchorChange(new FdDate(2024, 1, 29));
+            component.selectedMultipleDates = [new FdDate(2024, 1, 29)];
 
             const emitted: FdDate[][] = [];
             component.selectedMultipleDatesChange.subscribe((d) => emitted.push(d as FdDate[]));
 
-            component.handleMultipleDateWithShift({ date: new FdDate(2024, 2, 2), shiftKey: true });
+            component.handleShiftMultiDateSelected(new FdDate(2024, 2, 2));
 
             const last = emitted[emitted.length - 1];
             expect(last.length).toBe(5); // Jan 29, 30, 31, Feb 1, Feb 2
         });
 
-        it('writeValue resets the anchor', () => {
-            component.handleMultipleDateWithShift({ date: new FdDate(2024, 1, 10), shiftKey: false });
+        it('writeValue resets the anchor so shift-click becomes a no-op', () => {
+            component.handleMultiDateAnchorChange(new FdDate(2024, 1, 10));
             component.writeValue([]);
 
             const emitted: FdDate[][] = [];
             component.selectedMultipleDatesChange.subscribe((d) => emitted.push(d as FdDate[]));
 
-            // Shift-click without anchor should behave like plain click
-            component.handleMultipleDateWithShift({ date: new FdDate(2024, 1, 15), shiftKey: true });
+            component.handleShiftMultiDateSelected(new FdDate(2024, 1, 15));
 
-            expect(emitted[0].length).toBe(1);
+            expect(emitted.length).toBe(0);
         });
 
         it('shift-click fills in reverse direction (anchor later, click earlier)', () => {
-            component.handleMultipleDateWithShift({ date: new FdDate(2024, 1, 14), shiftKey: false });
+            component.handleMultiDateAnchorChange(new FdDate(2024, 1, 14));
+            component.selectedMultipleDates = [new FdDate(2024, 1, 14)];
 
             const emitted: FdDate[][] = [];
             component.selectedMultipleDatesChange.subscribe((d) => emitted.push(d as FdDate[]));
 
-            component.handleMultipleDateWithShift({ date: new FdDate(2024, 1, 10), shiftKey: true });
+            component.handleShiftMultiDateSelected(new FdDate(2024, 1, 10));
 
             const last = emitted[emitted.length - 1];
             expect(last.length).toBe(5); // Jan 10, 11, 12, 13, 14
@@ -398,29 +391,23 @@ describe('CalendarComponent', () => {
         });
 
         it('ngOnChanges resets anchor when allowMultipleSelection changes', () => {
-            component.handleMultipleDateWithShift({ date: new FdDate(2024, 1, 10), shiftKey: false });
+            component.handleMultiDateAnchorChange(new FdDate(2024, 1, 10));
             component.selectedMultipleDates = [];
             component.ngOnChanges({ allowMultipleSelection: {} as any });
 
             const emitted: FdDate[][] = [];
             component.selectedMultipleDatesChange.subscribe((d) => emitted.push(d as FdDate[]));
 
-            // Shift-click with no anchor after reset should behave like plain click (not fill a range)
-            component.handleMultipleDateWithShift({ date: new FdDate(2024, 1, 15), shiftKey: true });
+            component.handleShiftMultiDateSelected(new FdDate(2024, 1, 15));
 
-            expect(emitted[0].length).toBe(1);
-        });
-
-        it('does not emit closeCalendar on plain click', () => {
-            jest.spyOn(component.closeCalendar, 'emit');
-            component.handleMultipleDateWithShift({ date: new FdDate(2024, 1, 10), shiftKey: false });
-            expect(component.closeCalendar.emit).not.toHaveBeenCalled();
+            expect(emitted.length).toBe(0);
         });
 
         it('does not emit closeCalendar on shift-click fill', () => {
-            component.handleMultipleDateWithShift({ date: new FdDate(2024, 1, 10), shiftKey: false });
+            component.handleMultiDateAnchorChange(new FdDate(2024, 1, 10));
+            component.selectedMultipleDates = [new FdDate(2024, 1, 10)];
             jest.spyOn(component.closeCalendar, 'emit');
-            component.handleMultipleDateWithShift({ date: new FdDate(2024, 1, 15), shiftKey: true });
+            component.handleShiftMultiDateSelected(new FdDate(2024, 1, 15));
             expect(component.closeCalendar.emit).not.toHaveBeenCalled();
         });
     });
