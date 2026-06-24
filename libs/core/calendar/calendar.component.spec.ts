@@ -410,5 +410,34 @@ describe('CalendarComponent', () => {
 
             expect(emitted[0].length).toBe(1);
         });
+
+        it('does not emit closeCalendar on plain click', () => {
+            jest.spyOn(component.closeCalendar, 'emit');
+            component.handleMultipleDateWithShift({ date: new FdDate(2024, 1, 10), shiftKey: false });
+            expect(component.closeCalendar.emit).not.toHaveBeenCalled();
+        });
+
+        it('does not emit closeCalendar on shift-click fill', () => {
+            component.handleMultipleDateWithShift({ date: new FdDate(2024, 1, 10), shiftKey: false });
+            jest.spyOn(component.closeCalendar, 'emit');
+            component.handleMultipleDateWithShift({ date: new FdDate(2024, 1, 15), shiftKey: true });
+            expect(component.closeCalendar.emit).not.toHaveBeenCalled();
+        });
+    });
+
+    it('Should not emit closeCalendar for week selection when allowMultipleSelection is true', () => {
+        const week = [
+            new FdDate(2023, 7, 10),
+            new FdDate(2023, 7, 11),
+            new FdDate(2023, 7, 12),
+            new FdDate(2023, 7, 13),
+            new FdDate(2023, 7, 14),
+            new FdDate(2023, 7, 15),
+            new FdDate(2023, 7, 16)
+        ];
+        component.allowMultipleSelection = true;
+        jest.spyOn(component.closeCalendar, 'emit');
+        component.selectedMultipleDatesChanged(week);
+        expect(component.closeCalendar.emit).not.toHaveBeenCalled();
     });
 });
