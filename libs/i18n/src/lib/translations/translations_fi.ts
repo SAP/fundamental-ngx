@@ -726,9 +726,9 @@ export default {
         groupRoleDescription: 'Segmentoitu painikeryhmä'
     },
     coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: 'Validointisanomien kenttä'
     },
     platformInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: 'Validointisanomien kenttä'
     }
 };

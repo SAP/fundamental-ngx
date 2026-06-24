@@ -726,9 +726,9 @@ export default {
         groupRoleDescription: 'Segmenteret knapgruppe'
     },
     coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: 'Feltvalideringsmeddelelser'
     },
     platformInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: 'Feltvalideringsmeddelelser'
     }
 };

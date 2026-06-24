@@ -725,9 +725,9 @@ export default {
         groupRoleDescription: 'Kumpulan Butang Disegmenkan'
     },
     coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: 'Mesej pengesahan medan'
     },
     platformInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: 'Mesej pengesahan medan'
     }
 };

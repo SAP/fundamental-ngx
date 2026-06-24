@@ -724,9 +724,9 @@ export default {
         groupRoleDescription: 'קבוצת סרגלי לחצנים'
     },
     coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: 'הודעות בדיקת תקינות שדה'
     },
     platformInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: 'הודעות בדיקת תקינות שדה'
     }
 };

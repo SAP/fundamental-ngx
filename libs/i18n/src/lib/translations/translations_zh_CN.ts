@@ -722,9 +722,9 @@ export default {
         groupRoleDescription: '分段式按钮组'
     },
     coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: '字段验证消息'
     },
     platformInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: '字段验证消息'
     }
 };

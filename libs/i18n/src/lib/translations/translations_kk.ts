@@ -727,9 +727,9 @@ export default {
         groupRoleDescription: 'Сегменттелген түймелер тобы'
     },
     coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: 'Өрісті тексеру туралы хабарлар'
     },
     platformInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: 'Өрісті тексеру туралы хабарлар'
     }
 };

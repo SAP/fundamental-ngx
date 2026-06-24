@@ -728,9 +728,9 @@ export default {
         groupRoleDescription: 'Groep gesegmenteerde knoppen'
     },
     coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: 'Validatiemeldingen voor velden'
     },
     platformInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: 'Validatiemeldingen voor velden'
     }
 };

@@ -21,7 +21,7 @@ export default {
     },
     coreAvatarGroup: {
         ariaLabelGroup:
-            'Har dialogboksen for popuptype sammenkoblede avatarer, {count} avatarer vist, {hiddenCount} avatarer skjult, aktiver for fullstendig liste',
+            'Har dialog-popup med sammenkoblede avatarer, {count} avatarer vist, {hiddenCount} avatarer skjult, aktiver for fullstendig liste',
         ariaLabelIndividual: 'Individuelle avatarer. {count} avatarer vist, {hiddenCount} avatarer skjult',
         backButton: 'Tilbake',
         popupBodyAriaLabel: 'Med {count} elementer'
@@ -728,9 +728,9 @@ export default {
         groupRoleDescription: 'Segmenteringsknapp-gruppe'
     },
     coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: 'Feltvalideringsmeldinger'
     },
     platformInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: 'Feltvalideringsmeldinger'
     }
 };

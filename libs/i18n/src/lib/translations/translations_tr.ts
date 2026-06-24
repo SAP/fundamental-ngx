@@ -727,9 +727,9 @@ export default {
         groupRoleDescription: 'Segmentlere Ayrılmış Düğme Grubu'
     },
     coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: 'Alan doğrulama mesajları'
     },
     platformInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: 'Alan doğrulama mesajları'
     }
 };

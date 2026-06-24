@@ -727,9 +727,9 @@ export default {
         groupRoleDescription: 'Ομάδα Τμηματοποιημένου Κουμπιού'
     },
     coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: 'Μηνύματα επικύρωσης πεδίου'
     },
     platformInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: 'Μηνύματα επικύρωσης πεδίου'
     }
 };

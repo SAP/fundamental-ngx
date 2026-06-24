@@ -726,9 +726,9 @@ export default {
         groupRoleDescription: 'مجموعة الأزرار المقسَّمة'
     },
     coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: 'رسائل التحقق من صحة الحقل'
     },
     platformInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: 'رسائل التحقق من صحة الحقل'
     }
 };

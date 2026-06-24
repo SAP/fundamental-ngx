@@ -723,9 +723,9 @@ export default {
         groupRoleDescription: '分區按鈕群組'
     },
     coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: '欄位驗證訊息'
     },
     platformInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: '欄位驗證訊息'
     }
 };

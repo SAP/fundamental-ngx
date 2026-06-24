@@ -728,9 +728,9 @@ export default {
         groupRoleDescription: 'Gruppo pulsanti segmentati'
     },
     coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: 'Messaggi di convalida campo'
     },
     platformInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: 'Messaggi di convalida campo'
     }
 };

@@ -727,9 +727,9 @@ export default {
         groupRoleDescription: 'Grupa segmentirane dugmadi'
     },
     coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: 'Poruke validacije polja'
     },
     platformInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
+        popoverAriaLabel: 'Poruke validacije polja'
     }
 };
