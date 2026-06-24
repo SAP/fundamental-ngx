@@ -23,27 +23,14 @@
     need to be selected, such as booking multiple appointments or selecting multiple event dates.
     <strong>Usage:</strong>
     To enable multiSelection, set the <code>allowMultipleSelection</code> input property to <code>true</code>. The
-    selected dates will be emitted through the <code>selectedMultipleDatesChange</code> event.
+    selected dates will be emitted through the <code>selectedMultipleDatesChange</code> event. Hold
+    <kbd>Shift</kbd> while clicking a second date to automatically select all dates in between — this also works across
+    month boundaries.
 </description>
 <component-example>
     <fd-date-picker-multi-example></fd-date-picker-multi-example>
 </component-example>
 <code-example [exampleFiles]="datePickerMulti"></code-example>
-
-<separator></separator>
-
-<fd-docs-section-title id="allow-multiple-selection" componentName="date-picker">
-    Allow Multiple Selection with Shift-Click
-</fd-docs-section-title>
-<description>
-    When <code>[allowMultipleSelection]="true"</code> is set, dates can be individually toggled by clicking. Hold
-    <kbd>Shift</kbd> while clicking a second date to automatically select all dates in between. This works across month
-    boundaries — click a date in January, navigate to February, then Shift+Click to fill the entire range.
-</description>
-<component-example>
-    <fd-date-picker-allow-multiple-selection-example></fd-date-picker-allow-multiple-selection-example>
-</component-example>
-<code-example [exampleFiles]="datePickerAllowMultipleSelection"></code-example>
 
 <separator></separator>
 

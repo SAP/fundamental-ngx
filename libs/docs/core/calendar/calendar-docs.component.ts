@@ -11,7 +11,6 @@ import {
     SeparatorComponent,
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
-import { CalendarAllowMultipleSelectionExampleComponent } from './examples/calendar-allow-multiple-selection-example.component';
 import { CalendarBcp } from './examples/calendar-bcp/calendar-bcp';
 import { CalendarDisabledNavigationButtonsExampleComponent } from './examples/calendar-disabled-navigation-buttons-example/calendar-disabled-navigation-buttons-example.component';
 import { CalendarFormExamplesComponent } from './examples/calendar-form-example/calendar-form-example.component';
@@ -47,7 +46,6 @@ const calendarDisabledNavigationsHtml =
 const calendarGridHtml = 'calendar-grid-example/calendar-grid-example.component.html';
 const calendarSingleSrc = 'calendar-single-example.component.ts';
 const calendarMultiSrc = 'calendar-multi-example.component.ts';
-const calendarAllowMultipleSelectionSrc = 'calendar-allow-multiple-selection-example.component.ts';
 const calendarMondayStartSrc = 'calendar-monday-start-example.component.ts';
 const calendarIntlSrc = 'calendar-i18n-example.component.ts';
 const calendarIntlMomentSrc = 'calendar--i18n-moment-example.component.ts';
@@ -87,7 +85,6 @@ const calendarBCPHTML = 'calendar-bcp/calendar-bcp.html';
         CalendarMultiExampleComponent,
         CalendarMultiRangeExampleComponent,
         CalendarLegendExampleComponent,
-        CalendarAllowMultipleSelectionExampleComponent,
         CalendarBcp
     ]
 })
@@ -203,15 +200,6 @@ specialDay: SpecialDayRule[] = [
             language: 'typescript',
             fileName: 'calendar-multi-example',
             code: getAssetFromModuleAssets(calendarMultiSrc)
-        }
-    ];
-
-    calendarAllowMultipleSelectionSource: ExampleFile[] = [
-        {
-            language: 'typescript',
-            component: 'CalendarAllowMultipleSelectionExampleComponent',
-            fileName: 'calendar-allow-multiple-selection-example',
-            code: getAssetFromModuleAssets(calendarAllowMultipleSelectionSrc)
         }
     ];
 
