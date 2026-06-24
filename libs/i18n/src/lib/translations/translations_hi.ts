@@ -361,6 +361,7 @@ export default {
         messagesTeamRemoved: '1 समूह को हटा दिया गया है',
         messagesUndoAction: 'पूर्ववत करें',
         nextButtonAriaLabel: 'आगे की स्लाइड पर जाएं',
+        noDataFound: 'No Data Found',
         nodeActionAddApproversAfter: 'बाद में अनुमोदक जोड़ें',
         nodeActionAddApproversBefore: 'पहले अनुमोदक जोड़ें',
         nodeActionAddApproversParallel: 'समानांतर अनुमोदक जोड़ें',

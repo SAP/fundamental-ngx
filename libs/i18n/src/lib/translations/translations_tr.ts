@@ -362,6 +362,7 @@ export default {
         messagesTeamRemoved: '1 ekip kaldırıldı',
         messagesUndoAction: 'Geri al',
         nextButtonAriaLabel: 'Sonraki slayta git',
+        noDataFound: 'No Data Found',
         nodeActionAddApproversAfter: 'Şundan sonra onaylayan ekle',
         nodeActionAddApproversBefore: 'Şundan önce onaylayan ekle',
         nodeActionAddApproversParallel: 'Paralel onaylayan ekle',

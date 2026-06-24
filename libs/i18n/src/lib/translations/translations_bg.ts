@@ -362,6 +362,7 @@ export default {
         messagesTeamRemoved: '1 екип е премахнат',
         messagesUndoAction: 'Отмяна на последното действие',
         nextButtonAriaLabel: 'Към следващия слайд',
+        noDataFound: 'No Data Found',
         nodeActionAddApproversAfter: 'Добавяне на одобряващи лица след',
         nodeActionAddApproversBefore: 'Добавяне на одобряващи лица преди',
         nodeActionAddApproversParallel: 'Добавяне на паралелни одобряващи лица',

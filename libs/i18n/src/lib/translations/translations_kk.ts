@@ -362,6 +362,7 @@ export default {
         messagesTeamRemoved: '1 бекітуші жойылды',
         messagesUndoAction: 'Болдырмау',
         nextButtonAriaLabel: 'Келесі слайдқа өту',
+        noDataFound: 'No Data Found',
         nodeActionAddApproversAfter: 'Бекітушілерді қосу: кейін',
         nodeActionAddApproversBefore: 'Бекітушілерді қосу: дейін',
         nodeActionAddApproversParallel: 'Параллель бекітушілерді қосу',

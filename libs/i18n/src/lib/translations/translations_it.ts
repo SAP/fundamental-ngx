@@ -363,6 +363,7 @@ export default {
         messagesTeamRemoved: '1 team è stato rimosso',
         messagesUndoAction: 'Annulla',
         nextButtonAriaLabel: 'Vai alla diapositiva successiva',
+        noDataFound: 'No Data Found',
         nodeActionAddApproversAfter: 'Aggiungi approvatori dopo',
         nodeActionAddApproversBefore: 'Aggiungi approvatori prima',
         nodeActionAddApproversParallel: 'Aggiungi approvatori paralleli',

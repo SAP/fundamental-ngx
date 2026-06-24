@@ -12,16 +12,17 @@
         }
     </div>
 }
-@if(_displayUsers.length > 0){
+
 <fdp-list
     [selectionMode]="isSelectable ? 'multi' : 'none'"
     [selection]="isSelectable"
-    [navigationIndicator]="true"
+    [navigationIndicator]="true && _displayUsers.length > 0"
     [hasByLine]="true"
     [(ngModel)]="_selectedItems"
     [selectedItems]="_selectedItems"
     (selectedItemChange)="_onSelect($event)"
 >
+@if(_displayUsers.length > 0) {
     @for (_user of _displayUsers; track _trackByFn($index, _user)) {
         <fdp-standard-list-item
             [attr.id]="_idPrefix + _user.id"
@@ -33,10 +34,8 @@
             (click)="$event.stopPropagation(); onUserClick.emit(_user)"
         ></fdp-standard-list-item>
     }
+}
+    @else{
+        <fdp-standard-list-item [noDataText]="('platformApprovalFlow.noDataFound' | fdTranslate)()"></fdp-standard-list-item>
+    }
 </fdp-list>
-}
-@else {
-    <fdp-list>
-        <fdp-standard-list-item noDataText="No Data Found"></fdp-standard-list-item>
-    </fdp-list>
-}

@@ -362,6 +362,7 @@ export default {
         messagesTeamRemoved: '1 skuadër është hequr',
         messagesUndoAction: 'Zhbëj',
         nextButtonAriaLabel: 'Shko te skedari tjetër',
+        noDataFound: 'No Data Found',
         nodeActionAddApproversAfter: 'Shto miratues më pas',
         nodeActionAddApproversBefore: 'Shto miratues më parë',
         nodeActionAddApproversParallel: 'Shto miratues paralel',

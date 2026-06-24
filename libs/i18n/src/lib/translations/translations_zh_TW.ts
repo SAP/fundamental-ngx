@@ -359,6 +359,7 @@ export default {
         messagesTeamRemoved: '已移除 1 個小組',
         messagesUndoAction: '復原',
         nextButtonAriaLabel: '移至下一張投影片',
+        noDataFound: 'No Data Found',
         nodeActionAddApproversAfter: '新增核准人後於',
         nodeActionAddApproversBefore: '新增核准人先於',
         nodeActionAddApproversParallel: '新增平行核准人',
