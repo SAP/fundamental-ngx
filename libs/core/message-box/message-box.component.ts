@@ -1,5 +1,4 @@
 import {
-    AfterViewInit,
     ChangeDetectionStrategy,
     Component,
     ElementRef,
@@ -43,7 +42,7 @@ import { MessageBoxRef } from './utils/message-box-ref.class';
 })
 export class MessageBoxComponent
     extends DialogBase
-    implements AfterViewInit, OnInit, OnChanges, OnDestroy, CssClassBuilder, MessageBoxHost
+    implements OnInit, OnChanges, OnDestroy, CssClassBuilder, MessageBoxHost
 {
     /** Custom classes */
     @Input()
@@ -110,17 +109,6 @@ export class MessageBoxComponent
     /** @hidden */
     ngOnChanges(): void {
         this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    ngAfterViewInit(): void {
-        // Manually call parent setup methods for test environments where afterNextRender may not execute
-        if (this.dialogWindow) {
-            this.setupFocusTrap();
-            this.applyStyles();
-            this.setupResizeObserver();
-            this._ref?.loaded();
-        }
     }
 
     /** @hidden */
