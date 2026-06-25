@@ -479,7 +479,7 @@ export interface FdLanguage {
         statusRejected: FdLanguageKey;
         statusInProgress: FdLanguageKey;
         statusNotStarted: FdLanguageKey;
-        noDataFound:FdLanguageKey;
+        noDataFound: FdLanguageKey;
     };
     platformFeedInput: {
         userTitle: FdLanguageKey;

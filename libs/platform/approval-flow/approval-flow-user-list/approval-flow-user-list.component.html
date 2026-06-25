@@ -16,7 +16,7 @@
 <fdp-list
     [selectionMode]="isSelectable ? 'multi' : 'none'"
     [selection]="isSelectable"
-    [navigationIndicator]="true && _displayUsers.length > 0"
+    [navigationIndicator]="_displayUsers.length > 0"
     [hasByLine]="true"
     [(ngModel)]="_selectedItems"
     [selectedItems]="_selectedItems"

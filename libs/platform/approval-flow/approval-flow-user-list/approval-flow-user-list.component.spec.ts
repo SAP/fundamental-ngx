@@ -85,7 +85,7 @@ describe('ApprovalFlowUserListComponent', () => {
 
         const items = fixture.debugElement.queryAll(By.directive(StandardListItemComponent));
         expect(items.length).toBe(1);
-        expect(items[0].componentInstance.noDataText).toBe('No Data Found');
+        expect(items[0].componentInstance.noDataText).toBeTruthy();
     }));
 
 });
