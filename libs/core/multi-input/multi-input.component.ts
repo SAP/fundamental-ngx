@@ -432,6 +432,9 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
      */
     readonly maxVisibleTokens = input(12);
 
+    /** Placement of the popover relative to the input.*/
+    readonly placement = input<'top' | 'bottom'>('bottom');
+
     /** @hidden */
     get _optionItems(): _OptionItem<ItemType, ValueType>[] {
         return this.optionItems$.value;
