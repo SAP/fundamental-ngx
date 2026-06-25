@@ -1,3 +1,14 @@
+## 0.63.1-rc.6 (2026-06-25)
+
+### 🚀 Features
+
+- **core:** shift-click multi-date selection for fd-calendar / fd-date-picker ([#14309](https://github.com/SAP/fundamental-ngx/pull/14309), [#13502](https://github.com/SAP/fundamental-ngx/issues/13502))
+
+### ❤️ Thank You
+
+- github-actions
+- Maria Dineva @MariaIDineva
+
 ## 0.63.1-rc.5 (2026-06-24)
 
 ### 🩹 Fixes
