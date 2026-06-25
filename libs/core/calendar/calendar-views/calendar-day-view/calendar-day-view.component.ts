@@ -155,6 +155,14 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     @Output()
     readonly selectedMultipleDatesChange: EventEmitter<Array<D>> = new EventEmitter<Array<D>>();
 
+    /** Emitted on every plain click in multi single-selection mode to update the shift-click anchor. */
+    @Output()
+    readonly multiDateAnchorChange: EventEmitter<D> = new EventEmitter<D>();
+
+    /** Emitted when a date is shift-clicked in multi single-selection mode to trigger range fill. */
+    @Output()
+    readonly shiftMultiDateSelected: EventEmitter<D> = new EventEmitter<D>();
+
     /** Event thrown every time selected first or last date in range mode is changed */
     @Output()
     readonly selectedRangeDateChange: EventEmitter<DateRange<D>> = new EventEmitter<DateRange<D>>();
@@ -387,7 +395,12 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
 
         if (this.allowMultipleSelection()) {
             if (this.calType() === CalendarTypeEnum.Single) {
-                this._toggleMultiDate(day);
+                if (event?.shiftKey) {
+                    this.shiftMultiDateSelected.emit(day.date);
+                } else {
+                    this._toggleMultiDate(day);
+                    this.multiDateAnchorChange.emit(day.date);
+                }
             } else if (this.calType() === CalendarTypeEnum.Range) {
                 this._selectMultipleRangeDates(day);
             }
@@ -1213,24 +1226,6 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
         return this._dateTimeAdapter.datesEqual(date1, date2);
     }
 
-    /**
-     * @hidden
-     * Selects a single date and updates the selected date in single mode.
-     * @param day The calendar day to be selected.
-     */
-    private _selectSingleDate(day: CalendarDay<D>): void {
-        this._calendarDayList.forEach((_day) => (_day.selected = false));
-        day.selected = true;
-        this._selectedDate = day.date;
-        this.selectedDateChange.emit(day.date);
-    }
-
-    /**
-     * @hidden
-     * Toggles the selection of a date in multi mode.
-     * Adds the date if not selected, removes it if already selected.
-     * @param day The calendar day to be toggled.
-     */
     private _toggleMultiDate(day: CalendarDay<D>): void {
         const dateIndex = this._selectedMultipleDates.findIndex((d) => this._isSameDay(d, day.date));
         let newSelectedDates: D[];
@@ -1245,6 +1240,13 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
 
         this._selectedMultipleDates = newSelectedDates;
         this.selectedMultipleDatesChange.emit(this._selectedMultipleDates);
+    }
+
+    private _selectSingleDate(day: CalendarDay<D>): void {
+        this._calendarDayList.forEach((_day) => (_day.selected = false));
+        day.selected = true;
+        this._selectedDate = day.date;
+        this.selectedDateChange.emit(day.date);
     }
 
     /**

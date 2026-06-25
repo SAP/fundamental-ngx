@@ -328,6 +328,9 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     private _adapterStartingDayOfWeek: DaysOfWeek;
 
     /** @hidden */
+    private _shiftAnchorDate: D | null = null;
+
+    /** @hidden */
     constructor(
         private _elementRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef,
@@ -408,6 +411,9 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
         ) {
             this._setNavigationButtonsStates();
         }
+        if ('allowMultipleSelection' in changes || 'calType' in changes) {
+            this._shiftAnchorDate = null;
+        }
     }
 
     /** @hidden */
@@ -420,6 +426,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
      * Function that provides support for ControlValueAccessor that allows to use [(ngModel)] or forms.
      */
     writeValue(selected: D | Array<D> | DateRange<D> | Array<DateRange<D>>): void {
+        this._shiftAnchorDate = null;
         let valid = true;
 
         const isValidDate = (date: D | null): boolean => date != null && this._dateTimeAdapter.isValid(date);
@@ -535,7 +542,31 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
         this._setNavigationButtonsStates();
         this.onChange(date);
         this.selectedMultipleDatesChange.emit(date);
-        this.closeCalendar.emit();
+        if (!this.allowMultipleSelection) {
+            this.closeCalendar.emit();
+        }
+    }
+
+    /** @hidden */
+    handleMultiDateAnchorChange(date: D): void {
+        this._shiftAnchorDate = date;
+    }
+
+    /** @hidden */
+    handleShiftMultiDateSelected(date: D): void {
+        if (!this._shiftAnchorDate) {
+            return;
+        }
+        const rangeDates = this._fillDateRange(this._shiftAnchorDate, date);
+        const existing = this.selectedMultipleDates || [];
+        const merged = [
+            ...existing,
+            ...rangeDates.filter((rd) => !existing.some((ex) => this._dateTimeAdapter.datesEqual(ex, rd)))
+        ];
+        this.selectedMultipleDates = merged;
+        this.onChange(merged);
+        this.selectedMultipleDatesChange.emit(merged);
+        this._changeDetectorRef.markForCheck();
     }
 
     /**
@@ -867,5 +898,20 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
             typeof disableFunction === 'function' &&
             disableFunction(this.selectedDate, this._currentlyDisplayed, this.activeView)
         );
+    }
+
+    /** @hidden */
+    private _fillDateRange(from: D, to: D): D[] {
+        const forward = this._dateTimeAdapter.compareDate(from, to) <= 0;
+        let current = forward ? from : to;
+        const end = forward ? to : from;
+        const result: D[] = [];
+        while (this._dateTimeAdapter.compareDate(current, end) <= 0) {
+            if (!this.disableFunction || !this.disableFunction(current)) {
+                result.push(current);
+            }
+            current = this._dateTimeAdapter.addCalendarDays(current, 1);
+        }
+        return result;
     }
 }
