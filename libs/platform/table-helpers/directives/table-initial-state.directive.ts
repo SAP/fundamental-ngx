@@ -55,6 +55,18 @@ export class TableInitialStateDirective extends TableInitialState {
     /** @hidden */
     private readonly _tableService = inject(TableService);
 
+    /** @hidden Snapshot of initialSortBy captured on first setInitialState() call */
+    private _initialSortBySnapshot: CollectionSort[] = [];
+
+    /** @hidden Snapshot of initialFilterBy captured on first setInitialState() call */
+    private _initialFilterBySnapshot: CollectionFilter[] = [];
+
+    /** @hidden Snapshot of initialGroupBy captured on first setInitialState() call */
+    private _initialGroupBySnapshot: CollectionGroup[] = [];
+
+    /** @hidden */
+    private _initialStateApplied = false;
+
     /** @hidden */
     setTable(table: Table): void {
         this._table = table;
@@ -84,6 +96,14 @@ export class TableInitialStateDirective extends TableInitialState {
             (this._table._loadPreviousPages ? directiveInitialPage : initialPage) *
             (this._table.pageSize || page.pageSize);
 
+        // Capture the initial state values on first call only
+        if (!this._initialStateApplied) {
+            this._initialSortBySnapshot = this.initialSortBy ? [...this.initialSortBy] : [];
+            this._initialFilterBySnapshot = this.initialFilterBy ? [...this.initialFilterBy] : [];
+            this._initialGroupBySnapshot = this.initialGroupBy ? [...this.initialGroupBy] : [];
+            this._initialStateApplied = true;
+        }
+
         this.setTableState({
             ...prevState,
             columns: visibleColumns,
@@ -108,5 +128,20 @@ export class TableInitialStateDirective extends TableInitialState {
     /** Set current state/settings of the Table. */
     setTableState(state: TableState): void {
         this._tableService.setTableState(state);
+    }
+
+    /** Returns the initial sort state snapshot captured when setInitialState() was first called. */
+    getInitialSortBySnapshot(): CollectionSort[] {
+        return this._initialSortBySnapshot;
+    }
+
+    /** Returns the initial filter state snapshot captured when setInitialState() was first called. */
+    getInitialFilterBySnapshot(): CollectionFilter[] {
+        return this._initialFilterBySnapshot;
+    }
+
+    /** Returns the initial group state snapshot captured when setInitialState() was first called. */
+    getInitialGroupBySnapshot(): CollectionGroup[] {
+        return this._initialGroupBySnapshot;
     }
 }

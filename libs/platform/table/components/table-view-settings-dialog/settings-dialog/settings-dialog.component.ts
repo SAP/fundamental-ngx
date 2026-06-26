@@ -18,7 +18,7 @@ import {
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { IconTabBarComponent, IconTabBarItem, IconTabBarTabComponent } from '@fundamental-ngx/platform/icon-tab-bar';
-import { CollectionFilter, CollectionSort, SortDirection, Table } from '@fundamental-ngx/platform/table-helpers';
+import { CollectionFilter, CollectionSort, Table } from '@fundamental-ngx/platform/table-helpers';
 import { RESETTABLE_TOKEN, ResetButtonComponent, Resettable } from '../../reset-button/reset-button.component';
 import { ColumnsComponent } from '../columns/columns.component';
 import { FiltersViewStep } from '../filtering/filters-active-step';
@@ -98,7 +98,7 @@ export class SettingsDialogComponent implements Resettable {
     readonly isResetAvailable$ = signal(false);
 
     /** Signal to track if the dialog is valid (OK button can be clicked) */
-    readonly isDialogValid$ = signal(true);
+    readonly isDialogValid = signal(true);
 
     /** @hidden Initial sorting configuration */
     _initialSorting = signal<Nullable<CollectionSort>>(null);
@@ -120,9 +120,6 @@ export class SettingsDialogComponent implements Resettable {
 
     /** @hidden Pending columns changes (not applied to signal to avoid triggering child effects) */
     private _pendingColumnsChanges: Nullable<SettingsColumnsDialogResultData> = null;
-
-    /** @hidden Stores the sortBy array from sort changes */
-    private _pendingSortBy: Array<{ field: string; direction: SortDirection }> = [];
 
     /** @hidden Tracks reset availability per tab */
     private _resetAvailabilityByTab = signal<Record<string, boolean>>({});
@@ -166,9 +163,9 @@ export class SettingsDialogComponent implements Resettable {
             ? { columns: this._pendingColumnsChanges.columns }
             : this.columnsData();
 
-        // Build sorting result with sortBy array
+        // Build sorting result directly from sortingData signal
         const sortingData = this.sortingData();
-        const sortingResult = sortingData ? { sortBy: this._pendingSortBy } : null;
+        const sortingResult = sortingData ? { sortBy: sortingData.sortBy ?? [] } : null;
 
         this.dialogRef.close({
             sortingData: sortingResult,
@@ -202,7 +199,6 @@ export class SettingsDialogComponent implements Resettable {
                 allowDisablingSorting: current.allowDisablingSorting,
                 sortBy: initialSortBy
             });
-            this._pendingSortBy = initialSortBy;
         }
         if (this.activeTab() === ActiveTab.FILTER && this.filteringData()) {
             this.filteringData.set({
@@ -236,12 +232,10 @@ export class SettingsDialogComponent implements Resettable {
      * @param event Updated sorting data.
      */
     onSortChange(event: SettingsSortDialogResultData): void {
-        // Store the sortBy array for multi-column sorting
-        this._pendingSortBy = event.sortBy ?? [];
         // Update sortingData with new sortBy
         this.sortingData.set({
             ...this.sortingData()!,
-            sortBy: this._pendingSortBy
+            sortBy: event.sortBy ?? []
         });
     }
 
@@ -250,7 +244,7 @@ export class SettingsDialogComponent implements Resettable {
      * @param isValid Whether the sorting configuration is valid.
      */
     onSortValidityChange(isValid: boolean): void {
-        this.isDialogValid$.set(isValid);
+        this.isDialogValid.set(isValid);
     }
 
     /**
@@ -380,7 +374,9 @@ export class SettingsDialogComponent implements Resettable {
      * Set initial sorting configuration from the table's state.
      */
     private _setInitialSorting(): void {
-        const initialSorting = (this._table.initialState?.initialSortBy || [])[0];
+        // Use snapshot which preserves the original initial state
+        // even if initialSortBy input is dynamically updated
+        const initialSorting = (this._table.initialState?.getInitialSortBySnapshot() || [])[0];
         this._initialSorting.set({
             field: initialSorting?.field ?? NOT_SORTED_OPTION_VALUE,
             direction: initialSorting?.direction ?? INITIAL_DIRECTION
@@ -391,14 +387,16 @@ export class SettingsDialogComponent implements Resettable {
      * Set initial filter configuration from the table's state.
      */
     private _setInitialFilters(): void {
-        this._initialFilters.set(this._table.initialState?.initialFilterBy ?? []);
+        // Use snapshot which preserves the original initial state
+        this._initialFilters.set(this._table.initialState?.getInitialFilterBySnapshot() ?? []);
     }
 
     /**
      * Set initial grouping configuration from the table's state.
      */
     private _setInitialGrouping(): void {
-        const initialGrouping = (this._table.initialState?.initialGroupBy || [])[0];
+        // Use snapshot which preserves the original initial state
+        const initialGrouping = (this._table.initialState?.getInitialGroupBySnapshot() || [])[0];
         this._initialGrouping.set({
             field: initialGrouping?.field ?? NOT_GROUPED_OPTION_VALUE,
             direction: initialGrouping?.direction ?? INITIAL_DIRECTION

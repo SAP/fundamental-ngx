@@ -48,18 +48,9 @@ let sortDialogSortByHeaderUniqueId = 0;
 @Component({
     selector: 'fdp-sorting',
     templateUrl: './sorting.component.html',
+    styleUrl: './sorting.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    styles: `
-        .fdp-sorting__actions {
-            visibility: hidden;
-        }
-
-        .fdp-sorting__row:hover .fdp-sorting__actions,
-        .fdp-sorting__row:focus-within .fdp-sorting__actions {
-            visibility: visible;
-        }
-    `,
     imports: [
         ListComponent,
         ListGroupHeaderDirective,
@@ -118,7 +109,7 @@ export class SortingComponent {
                     }
                 }
 
-                return this._comboboxTextChanged();
+                return this._hasInvalidComboboxText();
             })
         ).pipe(distinctUntilChanged())
     );
@@ -330,12 +321,16 @@ export class SortingComponent {
 
     /**
      * @hidden
-     * Tracks whether the combobox text has changed to something that doesn't match any column.
-     * Resets to false when sortBy reference changes.
+     * Computed signal that checks if any row has invalid combobox text.
+     * Used by resetAvailabilityChange to determine if reset should be available.
      */
-    private _comboboxTextChanged = linkedSignal(() => {
-        // Only track sortBy reference changes
-        this._sortByRef();
+    private _hasInvalidComboboxText = computed(() => {
+        const invalidMap = this._invalidInputPerRow();
+        for (const isInvalid of invalidMap.values()) {
+            if (isInvalid) {
+                return true;
+            }
+        }
         return false;
     });
 
@@ -543,12 +538,14 @@ export class SortingComponent {
                 const matchingColumn = this.columns().find((col) => col.label === column);
                 fieldKey = matchingColumn?.key ?? null;
 
-                if (rowIndex === 0) {
-                    this._comboboxTextChanged.set(matchingColumn === undefined && column.length > 0);
-                }
+                // Check if any column label starts with the typed text (case-insensitive)
+                // This handles the case where user is still typing and autocomplete is showing suggestions
+                const hasPartialMatch = this.columns().some((col) =>
+                    col.label.toLowerCase().startsWith(column.toLowerCase())
+                );
 
-                // Mark as invalid if text doesn't match any column
-                isInvalid = matchingColumn === undefined;
+                // Mark as invalid only if text doesn't match any column AND no partial matches exist
+                isInvalid = matchingColumn === undefined && !hasPartialMatch;
 
                 // Only update if we found a matching column
                 shouldUpdate = matchingColumn !== undefined;
@@ -556,17 +553,11 @@ export class SortingComponent {
         } else if (column) {
             fieldKey = column.key;
             isInvalid = false;
-            if (rowIndex === 0) {
-                this._comboboxTextChanged.set(false);
-            }
         } else {
             // null/undefined column - don't clear existing selection
             // This can happen when combobox re-renders
             shouldUpdate = false;
             isInvalid = false;
-            if (rowIndex === 0) {
-                this._comboboxTextChanged.set(false);
-            }
         }
 
         // Update invalid state for this row

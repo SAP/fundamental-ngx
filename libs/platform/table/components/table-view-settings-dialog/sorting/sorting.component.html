@@ -3,37 +3,39 @@
         @for (criteria of sortCriteriaList(); track $index; let rowIndex = $index) {
             @if (rowVisibility()[rowIndex]) {
                 <li fd-list-item class="fdp-sorting__row">
-                    <fd-combobox
-                        #sortCombobox
-                        style="margin-inline-end: 1rem"
-                        [dropdownValues]="availableColumnsPerRow()[rowIndex]"
-                        [displayFn]="displayColumn"
-                        [placeholder]="('platformTable.sortDialogSortByHeader' | fdTranslate)()"
-                        [state]="rowStates()[rowIndex]"
-                        [ngModel]="selectedColumnsPerRow()[rowIndex]"
-                        (ngModelChange)="_sortFieldChangeForRow(rowIndex, $event)"
-                    >
-                    </fd-combobox>
+                    <div class="fd-margin-end--sm">
+                        <fd-combobox
+                            #sortCombobox
+                            [dropdownValues]="availableColumnsPerRow()[rowIndex]"
+                            [displayFn]="displayColumn"
+                            [placeholder]="('platformTable.sortDialogSortByHeader' | fdTranslate)()"
+                            [state]="rowStates()[rowIndex]"
+                            [ngModel]="selectedColumnsPerRow()[rowIndex]"
+                            (ngModelChange)="_sortFieldChangeForRow(rowIndex, $event)"
+                        >
+                        </fd-combobox>
+                    </div>
 
-                    <fd-segmented-button
-                        style="margin-inline-end: 2rem"
-                        [name]="'sort-order-' + rowIndex"
-                        [ngModel]="directionsPerRow()[rowIndex]"
-                        (ngModelChange)="_sortDirectionChangeForRow(rowIndex, $event)"
-                    >
-                        <button
-                            fd-button
-                            glyph="sort-ascending"
-                            [attr.title]="('platformTable.sortDialogSortOrderAsc' | fdTranslate)()"
-                            value="asc"
-                        ></button>
-                        <button
-                            fd-button
-                            glyph="sort-descending"
-                            [attr.title]="('platformTable.sortDialogSortOrderDesc' | fdTranslate)()"
-                            value="desc"
-                        ></button>
-                    </fd-segmented-button>
+                    <div class="fd-margin-end--sm">
+                        <fd-segmented-button
+                            [name]="'sort-order-' + rowIndex"
+                            [ngModel]="directionsPerRow()[rowIndex]"
+                            (ngModelChange)="_sortDirectionChangeForRow(rowIndex, $event)"
+                        >
+                            <button
+                                fd-button
+                                glyph="sort-ascending"
+                                [attr.title]="('platformTable.sortDialogSortOrderAsc' | fdTranslate)()"
+                                value="asc"
+                            ></button>
+                            <button
+                                fd-button
+                                glyph="sort-descending"
+                                [attr.title]="('platformTable.sortDialogSortOrderDesc' | fdTranslate)()"
+                                value="desc"
+                            ></button>
+                        </fd-segmented-button>
+                    </div>
 
                     @if (directionsPerRow()[rowIndex] === 'asc') {
                         <span fd-list-title>{{ ('platformTable.sortDialogSortOrderAsc' | fdTranslate)() }}</span>

@@ -116,7 +116,7 @@
         <fd-button-bar
             fdType="emphasized"
             [label]="('platformTable.confirmBtnLabel' | fdTranslate)()"
-            [disabled]="!isDialogValid$()"
+            [disabled]="!isDialogValid()"
             (click)="confirm()"
         ></fd-button-bar>
         <fd-button-bar

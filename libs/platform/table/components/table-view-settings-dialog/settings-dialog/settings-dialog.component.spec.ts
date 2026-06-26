@@ -169,14 +169,52 @@ describe('SettingsDialogComponent', () => {
         );
     });
 
+    it('should preserve existing sort settings when confirming without changes', () => {
+        // Set up dialog with existing sort settings
+        const existingSortBy = [
+            { field: 'name', direction: SortDirection.ASC },
+            { field: 'price', direction: SortDirection.DESC }
+        ];
+        dialogRef.data = {
+            sortingData: {
+                columns: [],
+                allowDisablingSorting: true,
+                sortBy: existingSortBy
+            } as SettingsSortDialogData,
+            filteringData: null,
+            groupingData: null,
+            columnsData: null,
+            headingLevel: 2,
+            allowColumnConfiguration: false
+        };
+
+        // Recreate component with new dialog data
+        fixture = TestBed.createComponent(SettingsDialogComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+
+        // Confirm WITHOUT calling onSortChange (simulating user clicking OK without modifications)
+        const closeSpy = jest.spyOn(component['dialogRef'], 'close');
+        component.confirm();
+
+        // Should preserve the existing sort settings, not return empty array
+        expect(closeSpy).toHaveBeenCalledWith(
+            expect.objectContaining({
+                sortingData: expect.objectContaining({
+                    sortBy: existingSortBy
+                })
+            })
+        );
+    });
+
     it('should track sort validity and update dialog validity', () => {
-        expect(component.isDialogValid$()).toBe(true);
+        expect(component.isDialogValid()).toBe(true);
 
         component.onSortValidityChange(false);
-        expect(component.isDialogValid$()).toBe(false);
+        expect(component.isDialogValid()).toBe(false);
 
         component.onSortValidityChange(true);
-        expect(component.isDialogValid$()).toBe(true);
+        expect(component.isDialogValid()).toBe(true);
     });
 
     it('should update filtering data on filter change', () => {
