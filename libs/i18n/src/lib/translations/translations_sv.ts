@@ -361,6 +361,7 @@ export default {
         messagesTeamRemoved: '1 team har tagits bort',
         messagesUndoAction: 'Ångra',
         nextButtonAriaLabel: 'Gå till nästa bild',
+        noDataFound: 'No Data Found',
         nodeActionAddApproversAfter: 'Lägg till godkännare efter',
         nodeActionAddApproversBefore: 'Lägg till godkännare före',
         nodeActionAddApproversParallel: 'Lägg till parallella godkännare',

@@ -363,6 +363,7 @@ export default {
         messagesTeamRemoved: 'Er is 1 team verwijderd',
         messagesUndoAction: 'Ongedaan maken',
         nextButtonAriaLabel: 'Naar volgende dia',
+        noDataFound: 'No Data Found',
         nodeActionAddApproversAfter: 'Goedkeurders toevoegen na',
         nodeActionAddApproversBefore: 'Goedkeurders toevoegen vóór',
         nodeActionAddApproversParallel: 'Parallelle goedkeurders toevoegen',

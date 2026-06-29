@@ -361,6 +361,7 @@ export default {
         messagesTeamRemoved: 'Видалено 1 групу',
         messagesUndoAction: 'Скасувати',
         nextButtonAriaLabel: 'Перейти до наступного слайду',
+        noDataFound: 'No Data Found',
         nodeActionAddApproversAfter: 'Додати особу з правом затвердження після',
         nodeActionAddApproversBefore: 'Додати особу з правом затвердження перед',
         nodeActionAddApproversParallel: 'Додати паралельну особу з правом затвердження',

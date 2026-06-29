@@ -360,6 +360,7 @@ export default {
         messagesTeamRemoved: '1 pasukan telah dikeluarkan',
         messagesUndoAction: 'Buat Asal',
         nextButtonAriaLabel: 'Pergi ke slaid seterusnya',
+        noDataFound: 'No Data Found',
         nodeActionAddApproversAfter: 'Tambah pelulus selepas',
         nodeActionAddApproversBefore: 'Tambah pelulus sebelum',
         nodeActionAddApproversParallel: 'Tambah pelulus selari',

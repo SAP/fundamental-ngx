@@ -363,6 +363,7 @@ export default {
         messagesTeamRemoved: '1 team er fjernet',
         messagesUndoAction: 'Angre',
         nextButtonAriaLabel: 'Gå til neste lysbilde',
+        noDataFound: 'No Data Found',
         nodeActionAddApproversAfter: 'Legg til godkjennere etter',
         nodeActionAddApproversBefore: 'Legg til godkjennere før',
         nodeActionAddApproversParallel: 'Legg til parallelle godkjennere',

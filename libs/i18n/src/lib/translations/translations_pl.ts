@@ -362,6 +362,7 @@ export default {
         messagesTeamRemoved: 'Usunięto 1 zespół',
         messagesUndoAction: 'Cofnij',
         nextButtonAriaLabel: 'Przejdź do następnego slajdu',
+        noDataFound: 'No Data Found',
         nodeActionAddApproversAfter: 'Dodaj osoby zatwierdzające po',
         nodeActionAddApproversBefore: 'Dodaj osoby zatwierdzające przed',
         nodeActionAddApproversParallel: 'Dodaj osoby zatwierdzające równolegle',

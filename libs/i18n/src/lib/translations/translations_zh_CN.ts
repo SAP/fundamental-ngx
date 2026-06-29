@@ -358,6 +358,7 @@ export default {
         messagesTeamRemoved: '已删除 1 个团队',
         messagesUndoAction: '撤销',
         nextButtonAriaLabel: '转到下一张幻灯片',
+        noDataFound: 'No Data Found',
         nodeActionAddApproversAfter: '之后添加审批人',
         nodeActionAddApproversBefore: '之前添加审批人',
         nodeActionAddApproversParallel: '添加并行审批人',

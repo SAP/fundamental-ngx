@@ -362,6 +362,7 @@ export default {
         messagesTeamRemoved: '1 tim je uklonjen',
         messagesUndoAction: 'Poništi',
         nextButtonAriaLabel: 'Idi na sledeći slajd',
+        noDataFound: 'No Data Found',
         nodeActionAddApproversAfter: 'Dodaj davaoce odobrenja nakon',
         nodeActionAddApproversBefore: 'Dodaj davaoce odobrenja pre',
         nodeActionAddApproversParallel: 'Dodaj paralelne davaoce odobrenja',

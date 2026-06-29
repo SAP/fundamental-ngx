@@ -361,6 +361,7 @@ export default {
         messagesTeamRemoved: 'تمت إزالة فريق واحد',
         messagesUndoAction: 'تراجع',
         nextButtonAriaLabel: 'انتقال إلى الشريحة التالية',
+        noDataFound: 'No Data Found',
         nodeActionAddApproversAfter: 'إضافة المعتمِدين بعد',
         nodeActionAddApproversBefore: 'إضافة المعتمِدين قبل',
         nodeActionAddApproversParallel: 'إضافة المعتمِدين المتوازيين',

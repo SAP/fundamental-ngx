@@ -362,6 +362,7 @@ export default {
         messagesTeamRemoved: '1つのチームが削除されました。',
         messagesUndoAction: '元に戻す',
         nextButtonAriaLabel: '次のスライドへ',
+        noDataFound: 'No Data Found',
         nodeActionAddApproversAfter: 'この後に承認者を追加:',
         nodeActionAddApproversBefore: 'この前に承認者を追加:',
         nodeActionAddApproversParallel: '並列承認者を追加',

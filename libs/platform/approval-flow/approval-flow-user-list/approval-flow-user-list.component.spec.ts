@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { SimpleChanges } from '@angular/core';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
-import { SelectionChangeEvent } from '@fundamental-ngx/platform/list';
+import { SelectionChangeEvent, StandardListItemComponent } from '@fundamental-ngx/platform/list';
 import { PlatformApprovalFlowModule } from '../approval-flow.module';
 import { ApprovalUser } from '../interfaces';
 import { ApprovalFlowUserListComponent } from './approval-flow-user-list.component';
@@ -62,4 +62,29 @@ describe('ApprovalFlowUserListComponent', () => {
         expect(userSelectionSpy).toHaveBeenCalled();
         expect(component._selectedItems).toEqual(selectionEvent.selectedItems);
     });
+
+    it('should render list items when _displayUsers has users', fakeAsync(() => {
+        component.users = [
+            { id: 'u1', name: 'Alice', teamId: 't1' },
+            { id: 'u2', name: 'Bob', teamId: 't1' }
+        ];
+        component.ngOnChanges({ users: {} as any } as SimpleChanges);
+        tick(100);
+        fixture.detectChanges();
+
+        const items = fixture.debugElement.queryAll(By.directive(StandardListItemComponent));
+        expect(items.length).toBe(2);
+        expect(component._displayUsers.length).toBeGreaterThan(0);
+    }));
+
+    it('should render no data item when _displayUsers is empty', fakeAsync(() => {
+        component.users = [];
+        component.ngOnChanges({ users: {} as any } as SimpleChanges);
+        tick(100);
+        fixture.detectChanges();
+
+        const items = fixture.debugElement.queryAll(By.directive(StandardListItemComponent));
+        expect(items.length).toBe(1);
+        expect(items[0].componentInstance.noDataText).toBeTruthy();
+    }));
 });

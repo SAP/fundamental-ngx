@@ -257,6 +257,7 @@ export type FdLanguageKeyIdentifier =
     | 'platformApprovalFlow.messagesTeamRemoved'
     | 'platformApprovalFlow.messagesUndoAction'
     | 'platformApprovalFlow.nextButtonAriaLabel'
+    | 'platformApprovalFlow.noDataFound'
     | 'platformApprovalFlow.nodeActionAddApproversAfter'
     | 'platformApprovalFlow.nodeActionAddApproversBefore'
     | 'platformApprovalFlow.nodeActionAddApproversParallel'

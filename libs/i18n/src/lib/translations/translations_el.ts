@@ -362,6 +362,7 @@ export default {
         messagesTeamRemoved: '1 ομάδα διαγράφηκε',
         messagesUndoAction: 'Αναίρεση',
         nextButtonAriaLabel: 'Μετάβαση στην επόμενη διαφάνεια',
+        noDataFound: 'No Data Found',
         nodeActionAddApproversAfter: 'Προσθήκη υπευθύνων έγκρισης μετά',
         nodeActionAddApproversBefore: 'Προσθήκη υπευθύνων έγκρισης πριν',
         nodeActionAddApproversParallel: 'Προσθήκη παράλληλων υπευθύνων έγκρισης',
