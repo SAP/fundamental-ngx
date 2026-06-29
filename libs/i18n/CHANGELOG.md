@@ -1,3 +1,14 @@
+## 0.63.1-rc.8 (2026-06-29)
+
+### 🩹 Fixes
+
+- **platform:** approval flow empty results ([#14320](https://github.com/SAP/fundamental-ngx/pull/14320))
+
+### ❤️ Thank You
+
+- C5386211
+- Mike O'Donnell @mikerodonnell89
+
 ## 0.63.1-rc.7 (2026-06-29)
 
 This was a version bump only for i18n to align it with other projects, there were no code changes.
