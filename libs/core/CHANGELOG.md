@@ -1,3 +1,13 @@
+## 0.63.1-rc.7 (2026-06-29)
+
+### 🩹 Fixes
+
+- **core:** add option to configure popover placement in Multi Input ([#14317](https://github.com/SAP/fundamental-ngx/pull/14317))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.63.1-rc.6 (2026-06-25)
 
 ### 🚀 Features
