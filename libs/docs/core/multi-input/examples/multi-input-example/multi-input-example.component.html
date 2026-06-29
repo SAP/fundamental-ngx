@@ -51,9 +51,10 @@ Selected: {{ selectedDisabledAutoComplete | json }}
 
 <br /><br />
 
-<label fd-label for="multiInputDisabledAutoComplete">With Object Values</label>
+<label fd-label for="multiInputDisabledAutoComplete">With Object Values and top placement</label>
 <fd-multi-input
     inputId="multiInputWithObjectValues"
+    placement="top"
     [dropdownValues]="objectValues"
     [displayFn]="objectValuesDisplayFn"
     [valueFn]="objectValuesValueFn"
