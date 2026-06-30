@@ -223,6 +223,7 @@ export default {
         defaultWatchersLabel: 'Osoby obserwujące',
         defaultTitle: 'Proces zatwierdzania',
         nextButtonAriaLabel: 'Przejdź do następnego slajdu',
+        noDataFound: 'No Data Found',
         prevButtonAriaLabel: 'Przejdź do poprzedniego slajdu',
         editModeSaveButtonLabel: 'Zapisz',
         editModeExitButtonLabel: 'Wyjdź',

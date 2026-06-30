@@ -223,6 +223,7 @@ export default {
         defaultWatchersLabel: 'المُراقبون',
         defaultTitle: 'عملية الاعتماد',
         nextButtonAriaLabel: 'انتقال إلى الشريحة التالية',
+        noDataFound: 'No Data Found',
         prevButtonAriaLabel: 'انتقال إلى الشريحة السابقة',
         editModeSaveButtonLabel: 'حفظ',
         editModeExitButtonLabel: 'خروج',

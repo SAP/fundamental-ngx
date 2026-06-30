@@ -223,6 +223,7 @@ export default {
         defaultWatchersLabel: 'Beobachter',
         defaultTitle: 'Genehmigungsprozess',
         nextButtonAriaLabel: 'Zur nächsten Folie',
+        noDataFound: 'No Data Found',
         prevButtonAriaLabel: 'Zur vorigen Folie',
         editModeSaveButtonLabel: 'Speichern',
         editModeExitButtonLabel: 'Beenden',

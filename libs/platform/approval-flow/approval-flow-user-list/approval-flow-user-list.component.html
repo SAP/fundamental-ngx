@@ -13,21 +13,27 @@
 <fdp-list
     [selectionMode]="isSelectable ? 'multi' : 'none'"
     [selection]="isSelectable"
-    [navigationIndicator]="true"
+    [navigationIndicator]="_displayUsers.length > 0"
     [hasByLine]="true"
     [(ngModel)]="_selectedItems"
     [selectedItems]="_selectedItems"
     (selectedItemChange)="_onSelect($event)"
 >
-    @for (_user of _displayUsers; track _trackByFn($index, _user)) {
+    @if (_displayUsers.length > 0) {
+        @for (_user of _displayUsers; track _trackByFn($index, _user)) {
+            <fdp-standard-list-item
+                [attr.id]="_idPrefix + _user.id"
+                [id]="_idPrefix + _user.id"
+                [avatar]="{ image: _user.imgUrl, ariaLabel: _user.name }"
+                [description]="_user.description"
+                [ariaLabel]="_user.name"
+                [title]="_user.name"
+                (click)="$event.stopPropagation(); onUserClick.emit(_user)"
+            ></fdp-standard-list-item>
+        }
+    } @else {
         <fdp-standard-list-item
-            [attr.id]="_idPrefix + _user.id"
-            [id]="_idPrefix + _user.id"
-            [avatar]="{ image: _user.imgUrl, ariaLabel: _user.name }"
-            [description]="_user.description"
-            [ariaLabel]="_user.name"
-            [title]="_user.name"
-            (click)="$event.stopPropagation(); onUserClick.emit(_user)"
+            [noDataText]="'platformApprovalFlow.noDataFound' | fdTranslate"
         ></fdp-standard-list-item>
     }
 </fdp-list>

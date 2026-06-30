@@ -214,6 +214,7 @@ export default {
         defaultWatchersLabel: 'Vrojtuesit',
         defaultTitle: 'Procesi i aprovimit',
         nextButtonAriaLabel: 'Shko te skedari tjetër',
+        noDataFound: 'No Data Found',
         prevButtonAriaLabel: 'Shko te skedari i mëparshëm',
         editModeSaveButtonLabel: 'Ruaj',
         editModeExitButtonLabel: 'Dalje',

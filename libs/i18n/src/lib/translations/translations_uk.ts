@@ -223,6 +223,7 @@ export default {
         defaultWatchersLabel: 'Спостерігачі',
         defaultTitle: 'Процес затвердження',
         nextButtonAriaLabel: 'Перейти до наступного слайду',
+        noDataFound: 'No Data Found',
         prevButtonAriaLabel: 'Перейти до попереднього слайду',
         editModeSaveButtonLabel: 'Зберегти',
         editModeExitButtonLabel: 'Вихід',

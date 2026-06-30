@@ -223,6 +223,7 @@ export default {
         defaultWatchersLabel: '참조자',
         defaultTitle: '승인 프로세스',
         nextButtonAriaLabel: '다음 슬라이드로 이동',
+        noDataFound: 'No Data Found',
         prevButtonAriaLabel: '이전 슬라이드로 이동',
         editModeSaveButtonLabel: '저장',
         editModeExitButtonLabel: '종료',

@@ -223,6 +223,7 @@ export default {
         defaultWatchersLabel: 'Watchers',
         defaultTitle: 'Approval process',
         nextButtonAriaLabel: 'Go to next slide',
+        noDataFound: 'No Data Found',
         prevButtonAriaLabel: 'Go to previous slide',
         editModeSaveButtonLabel: 'Save',
         editModeExitButtonLabel: 'Exit',

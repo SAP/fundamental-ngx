@@ -223,6 +223,7 @@ export default {
         defaultWatchersLabel: 'Tarkkailijat',
         defaultTitle: 'Hyväksyntäprosessi',
         nextButtonAriaLabel: 'Siirry seuraavaan diaan',
+        noDataFound: 'No Data Found',
         prevButtonAriaLabel: 'Siirry edelliseen diaan',
         editModeSaveButtonLabel: 'Tallenna',
         editModeExitButtonLabel: 'Lopeta',

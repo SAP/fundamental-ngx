@@ -223,6 +223,7 @@ export default {
         defaultWatchersLabel: 'Παρατηρητές',
         defaultTitle: 'Διαδικασία έγκρισης',
         nextButtonAriaLabel: 'Μετάβαση στην επόμενη διαφάνεια',
+        noDataFound: 'No Data Found',
         prevButtonAriaLabel: 'Μετάβαση στην προηγούμενη διαφάνεια',
         editModeSaveButtonLabel: 'Αποθήκευση',
         editModeExitButtonLabel: 'Έξοδος',

@@ -223,6 +223,7 @@ export default {
         defaultWatchersLabel: 'Observadores',
         defaultTitle: 'Processo de aprovação',
         nextButtonAriaLabel: 'Ir para o próximo slide',
+        noDataFound: 'No Data Found',
         prevButtonAriaLabel: 'Ir para o slide anterior',
         editModeSaveButtonLabel: 'Salvar',
         editModeExitButtonLabel: 'Sair',

@@ -159,6 +159,7 @@ export type FdLanguageKeyIdentifier =
     | 'platformApprovalFlow.defaultWatchersLabel'
     | 'platformApprovalFlow.defaultTitle'
     | 'platformApprovalFlow.nextButtonAriaLabel'
+    | 'platformApprovalFlow.noDataFound'
     | 'platformApprovalFlow.prevButtonAriaLabel'
     | 'platformApprovalFlow.editModeSaveButtonLabel'
     | 'platformApprovalFlow.editModeExitButtonLabel'

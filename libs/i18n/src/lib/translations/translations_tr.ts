@@ -223,6 +223,7 @@ export default {
         defaultWatchersLabel: 'İzleyiciler',
         defaultTitle: 'Onay süreci',
         nextButtonAriaLabel: 'Sonraki slayta git',
+        noDataFound: 'No Data Found',
         prevButtonAriaLabel: 'Önceki slayta git',
         editModeSaveButtonLabel: 'Kaydet',
         editModeExitButtonLabel: 'Çıkış',

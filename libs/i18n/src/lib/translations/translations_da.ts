@@ -223,6 +223,7 @@ export default {
         defaultWatchersLabel: 'Observatører',
         defaultTitle: 'Godkendelsesproces',
         nextButtonAriaLabel: 'Gå til næste dias',
+        noDataFound: 'No Data Found',
         prevButtonAriaLabel: 'Gå til forrige dias',
         editModeSaveButtonLabel: 'Gem',
         editModeExitButtonLabel: 'Afslut',

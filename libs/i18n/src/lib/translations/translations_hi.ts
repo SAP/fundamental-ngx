@@ -214,6 +214,7 @@ export default {
         defaultWatchersLabel: 'नजर रखने वाले',
         defaultTitle: 'अनुमोदन प्रक्रिया',
         nextButtonAriaLabel: 'आगे की स्लाइड पर जाएं',
+        noDataFound: 'No Data Found',
         prevButtonAriaLabel: 'पिछली स्लाइड पर जाएं',
         editModeSaveButtonLabel: 'सहेजें',
         editModeExitButtonLabel: 'बाहर निकलें',

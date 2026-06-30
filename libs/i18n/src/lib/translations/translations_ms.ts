@@ -223,6 +223,7 @@ export default {
         defaultWatchersLabel: 'Pemerhati',
         defaultTitle: 'Proses kelulusan',
         nextButtonAriaLabel: 'Pergi ke slaid seterusnya',
+        noDataFound: 'No Data Found',
         prevButtonAriaLabel: 'Pergi ke slaid sebelumnya',
         editModeSaveButtonLabel: 'Simpan',
         editModeExitButtonLabel: 'Keluar',

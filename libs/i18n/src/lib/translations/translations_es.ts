@@ -223,6 +223,7 @@ export default {
         defaultWatchersLabel: 'Examinadores',
         defaultTitle: 'Proceso de aprobación',
         nextButtonAriaLabel: 'Ir a siguiente diapositiva',
+        noDataFound: 'No Data Found',
         prevButtonAriaLabel: 'Ir a diapositiva anterior',
         editModeSaveButtonLabel: 'Guardar',
         editModeExitButtonLabel: 'Salir',

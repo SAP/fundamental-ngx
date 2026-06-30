@@ -223,6 +223,7 @@ export default {
         defaultWatchersLabel: 'ผู้เฝ้าดู',
         defaultTitle: 'ขั้นตอนการอนุมัติ',
         nextButtonAriaLabel: 'ไปที่สไลด์ถัดไป',
+        noDataFound: 'No Data Found',
         prevButtonAriaLabel: 'ไปที่สไลด์ก่อนหน้า',
         editModeSaveButtonLabel: 'เก็บบันทึก',
         editModeExitButtonLabel: 'ออก',

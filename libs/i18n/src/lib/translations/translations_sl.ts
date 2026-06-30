@@ -223,6 +223,7 @@ export default {
         defaultWatchersLabel: 'Opazovalci',
         defaultTitle: 'Postopek odobritve',
         nextButtonAriaLabel: 'Pojdi na naslednji diapozitiv',
+        noDataFound: 'No Data Found',
         prevButtonAriaLabel: 'Pojdi na prejšnji diapozitiv',
         editModeSaveButtonLabel: 'Shrani',
         editModeExitButtonLabel: 'Izhod',

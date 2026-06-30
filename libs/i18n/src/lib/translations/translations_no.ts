@@ -223,6 +223,7 @@ export default {
         defaultWatchersLabel: 'Overvåkere',
         defaultTitle: 'Godkjenningsprosess',
         nextButtonAriaLabel: 'Gå til neste lysbilde',
+        noDataFound: 'No Data Found',
         prevButtonAriaLabel: 'Gå til forrige lysbilde',
         editModeSaveButtonLabel: 'Lagre',
         editModeExitButtonLabel: 'Avslutt',

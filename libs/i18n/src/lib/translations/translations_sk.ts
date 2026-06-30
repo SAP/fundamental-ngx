@@ -223,6 +223,7 @@ export default {
         defaultWatchersLabel: 'Pozorovatelia',
         defaultTitle: 'Schvaľovací proces',
         nextButtonAriaLabel: 'Prejsť na ďalšiu snímku',
+        noDataFound: 'No Data Found',
         prevButtonAriaLabel: 'Prejsť na predchádzajúcu snímku',
         editModeSaveButtonLabel: 'Uložiť',
         editModeExitButtonLabel: 'Exit',

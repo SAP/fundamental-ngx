@@ -223,6 +223,7 @@ export default {
         defaultWatchersLabel: 'Бақылаушылар',
         defaultTitle: 'Бекіту процесі',
         nextButtonAriaLabel: 'Келесі слайдқа өту',
+        noDataFound: 'No Data Found',
         prevButtonAriaLabel: 'Алдыңғы слайдқа өту',
         editModeSaveButtonLabel: 'Сақтау',
         editModeExitButtonLabel: 'Шығу',

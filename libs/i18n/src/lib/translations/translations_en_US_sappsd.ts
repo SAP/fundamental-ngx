@@ -225,6 +225,7 @@ export default {
         defaultWatchersLabel: '[[[Ŵąţċĥēŗş∙∙∙∙∙∙]]]',
         defaultTitle: '[[[Āρρŗŏʋąĺ ρŗŏċēşş∙∙∙∙∙∙∙∙]]]',
         nextButtonAriaLabel: '[[[Ģŏ ţŏ ŋēχţ şĺįƌē∙∙∙∙∙∙∙∙]]]',
+        noDataFound: 'No Data Found',
         prevButtonAriaLabel: '[[[Ģŏ ţŏ ρŗēʋįŏűş şĺįƌē∙∙∙∙]]]',
         editModeSaveButtonLabel: '[[[Ŝąʋē]]]',
         editModeExitButtonLabel: '[[[Ĕχįţ]]]',

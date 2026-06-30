@@ -223,6 +223,7 @@ export default {
         defaultWatchersLabel: 'Posmatrači',
         defaultTitle: 'Proces odobrenja',
         nextButtonAriaLabel: 'Idi na sledeći slajd',
+        noDataFound: 'No Data Found',
         prevButtonAriaLabel: 'Idi na prethodni slajd',
         editModeSaveButtonLabel: 'Sačuvaj',
         editModeExitButtonLabel: 'Izađi',

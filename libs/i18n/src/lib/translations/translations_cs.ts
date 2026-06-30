@@ -223,6 +223,7 @@ export default {
         defaultWatchersLabel: 'Sledující',
         defaultTitle: 'Proces schvalování',
         nextButtonAriaLabel: 'Přejít na další snímek',
+        noDataFound: 'No Data Found',
         prevButtonAriaLabel: 'Přejít na předchozí snímek',
         editModeSaveButtonLabel: 'Uložit',
         editModeExitButtonLabel: 'Odejít',

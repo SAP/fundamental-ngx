@@ -224,6 +224,7 @@ export default {
         defaultWatchersLabel: 'Observateurs',
         defaultTitle: "Processus d'approbation",
         nextButtonAriaLabel: 'Passer à la diapositive suivante',
+        noDataFound: 'No Data Found',
         prevButtonAriaLabel: 'Revenir à la diapositive précédente',
         editModeSaveButtonLabel: 'Enregistrer',
         editModeExitButtonLabel: 'Quitter',

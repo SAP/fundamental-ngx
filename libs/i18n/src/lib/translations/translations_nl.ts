@@ -223,6 +223,7 @@ export default {
         defaultWatchersLabel: 'Controleurs',
         defaultTitle: 'Goedkeuringsproces',
         nextButtonAriaLabel: 'Naar volgende dia',
+        noDataFound: 'No Data Found',
         prevButtonAriaLabel: 'Naar vorige dia',
         editModeSaveButtonLabel: 'Opslaan',
         editModeExitButtonLabel: 'Afsluiten',

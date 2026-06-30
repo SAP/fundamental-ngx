@@ -223,6 +223,7 @@ export default {
         defaultWatchersLabel: '参照者',
         defaultTitle: '承認プロセス',
         nextButtonAriaLabel: '次のスライドへ',
+        noDataFound: 'No Data Found',
         prevButtonAriaLabel: '前のスライドへ',
         editModeSaveButtonLabel: '保存',
         editModeExitButtonLabel: '終了',

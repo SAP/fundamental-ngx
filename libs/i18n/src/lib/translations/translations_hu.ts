@@ -223,6 +223,7 @@ export default {
         defaultWatchersLabel: 'Megfigyelők',
         defaultTitle: 'Jóváhagyási folyamat',
         nextButtonAriaLabel: 'Tovább a következő diára',
+        noDataFound: 'No Data Found',
         prevButtonAriaLabel: 'Vissza az előző diára',
         editModeSaveButtonLabel: 'Mentés',
         editModeExitButtonLabel: 'Kilépés',

@@ -214,6 +214,7 @@ export default {
         defaultWatchersLabel: 'დამკვირვებლები',
         defaultTitle: 'დადასტურების პროცესი',
         nextButtonAriaLabel: 'შემდეგ სლაიდზე გადასვლა',
+        noDataFound: 'No Data Found',
         prevButtonAriaLabel: 'წინა სლაიდზე დაბრუნება',
         editModeSaveButtonLabel: 'შენახვა',
         editModeExitButtonLabel: 'გასვკა',

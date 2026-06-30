@@ -222,6 +222,7 @@ export default {
         defaultWatchersLabel: '監控員',
         defaultTitle: '核准程序',
         nextButtonAriaLabel: '移至下一張投影片',
+        noDataFound: 'No Data Found',
         prevButtonAriaLabel: '移至上一張投影片',
         editModeSaveButtonLabel: '儲存',
         editModeExitButtonLabel: '退出',

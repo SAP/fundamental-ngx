@@ -223,6 +223,7 @@ export default {
         defaultWatchersLabel: 'Osservatori',
         defaultTitle: 'Processo di approvazione',
         nextButtonAriaLabel: 'Vai alla diapositiva successiva',
+        noDataFound: 'No Data Found',
         prevButtonAriaLabel: 'Vai alla diapositiva precedente',
         editModeSaveButtonLabel: 'Salva',
         editModeExitButtonLabel: 'Esci',

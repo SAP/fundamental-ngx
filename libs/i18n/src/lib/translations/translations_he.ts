@@ -223,6 +223,7 @@ export default {
         defaultWatchersLabel: 'צופים',
         defaultTitle: 'תהליך אישור',
         nextButtonAriaLabel: 'עבור לשקופית הבאה',
+        noDataFound: 'No Data Found',
         prevButtonAriaLabel: 'עבור לשקופית הקודמת',
         editModeSaveButtonLabel: 'שמור',
         editModeExitButtonLabel: 'צא',

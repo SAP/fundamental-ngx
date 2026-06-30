@@ -222,6 +222,7 @@ export default {
         defaultWatchersLabel: '观察者\\n',
         defaultTitle: '审批流程',
         nextButtonAriaLabel: '转到下一张幻灯片',
+        noDataFound: 'No Data Found',
         prevButtonAriaLabel: '转到上一张幻灯片',
         editModeSaveButtonLabel: '保存',
         editModeExitButtonLabel: '退出',

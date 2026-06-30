@@ -223,6 +223,7 @@ export default {
         defaultWatchersLabel: 'Observatori',
         defaultTitle: 'Proces de aprobare',
         nextButtonAriaLabel: 'Salt la diapozitivul următor',
+        noDataFound: 'No Data Found',
         prevButtonAriaLabel: 'Salt la diapozitivul anterior',
         editModeSaveButtonLabel: 'Salvare',
         editModeExitButtonLabel: 'Ieșire',

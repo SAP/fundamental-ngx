@@ -223,6 +223,7 @@ export default {
         defaultWatchersLabel: 'Bevakare',
         defaultTitle: 'Godkännandeprocess',
         nextButtonAriaLabel: 'Gå till nästa bild',
+        noDataFound: 'No Data Found',
         prevButtonAriaLabel: 'Gå till föregående bild',
         editModeSaveButtonLabel: 'Spara',
         editModeExitButtonLabel: 'Avsluta',
