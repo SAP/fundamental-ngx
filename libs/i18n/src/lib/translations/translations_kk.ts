@@ -114,6 +114,10 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Ақпараттық белгі'
     },
+    coreList: {
+        listItemSelectedAriaLabel: 'Selected',
+        listItemNotSelectedAriaLabel: 'Not Selected'
+    },
     coreLink: {
         emphasized: 'Ерекшеленген',
         subtle: 'Білінбейтін'

@@ -113,6 +113,10 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Label Maklumat'
     },
+    coreList: {
+        listItemSelectedAriaLabel: 'Selected',
+        listItemNotSelectedAriaLabel: 'Not Selected'
+    },
     coreLink: {
         emphasized: 'Diserlahkan',
         subtle: 'Tak Ketara'

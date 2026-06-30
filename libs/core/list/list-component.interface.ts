@@ -16,5 +16,7 @@ export interface ListComponentInterface {
 
     role: Nullable<string>;
 
+    selection: boolean;
+
     setItemActive(index: number): void;
 }

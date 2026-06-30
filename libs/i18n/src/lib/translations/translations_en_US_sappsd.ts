@@ -114,6 +114,10 @@ export default {
     coreInfoLabel: {
         srOnlyText: '[[[Ĭŋƒŏ Ļąƃēĺ∙∙∙∙]]]'
     },
+    coreList: {
+        listItemSelectedAriaLabel: 'Selected',
+        listItemNotSelectedAriaLabel: 'Not Selected'
+    },
     coreLink: {
         emphasized: '[[[Ĕɱρĥąşįžēƌ∙∙∙∙]]]',
         subtle: '[[[Ŝűƃţĺē∙∙∙∙∙∙∙∙]]]'

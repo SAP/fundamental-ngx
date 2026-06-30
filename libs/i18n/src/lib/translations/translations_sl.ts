@@ -114,6 +114,10 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Infooznaka'
     },
+    coreList: {
+        listItemSelectedAriaLabel: 'Selected',
+        listItemNotSelectedAriaLabel: 'Not Selected'
+    },
     coreLink: {
         emphasized: 'Izpostavljeno',
         subtle: 'Neizpostavljeno'

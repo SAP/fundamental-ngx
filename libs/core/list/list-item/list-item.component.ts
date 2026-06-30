@@ -28,12 +28,13 @@ import { CheckboxComponent, FD_CHECKBOX_COMPONENT } from '@fundamental-ngx/core/
 import { FormItemComponent } from '@fundamental-ngx/core/form';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { FD_RADIO_BUTTON_COMPONENT, RadioButtonComponent } from '@fundamental-ngx/core/radio';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { Subject } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 import { ListLinkDirective } from '../directives/list-link.directive';
 import { ListTitleDirective } from '../directives/list-title.directive';
 import { ListFocusItem } from '../list-focus-item.model';
-import { FD_LIST_LINK_DIRECTIVE, FD_LIST_UNREAD_INDICATOR } from '../tokens';
+import { FD_LIST_COMPONENT, FD_LIST_LINK_DIRECTIVE, FD_LIST_UNREAD_INDICATOR } from '../tokens';
 
 let listItemUniqueId = 0;
 
@@ -49,7 +50,8 @@ let listItemUniqueId = 0;
         class: 'fd-list__item',
         '[attr.tabindex]': '_normalizedTabIndex()',
         '[attr.id]': 'id',
-        '[class.fd-list__item--suggestion]': 'suggestion()'
+        '[class.fd-list__item--suggestion]': 'suggestion()',
+        '[attr.aria-describedby]': '_isSelectable ? _selectionDescribedById : null'
     },
     providers: [
         {
@@ -63,14 +65,13 @@ let listItemUniqueId = 0;
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    imports: [FormItemComponent, DecimalPipe, IconComponent],
+    imports: [FormItemComponent, DecimalPipe, IconComponent, FdTranslatePipe],
     exportAs: 'fdListItem'
 })
 export class ListItemComponent<T = any> extends ListFocusItem<T> implements AfterContentInit, ListItemInterface {
     /** Whether list item is selected */
     @Input()
     @HostBinding('class.is-selected')
-    @HostBinding('attr.aria-selected')
     selected: boolean;
 
     /** Whether there is no data inside list item */
@@ -128,6 +129,11 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
     /** The ID of the list item element */
     @Input()
     id: Nullable<string> = 'fd-list-item-' + ++listItemUniqueId;
+
+    /** @hidden ID of the hidden selection state span, referenced by aria-describedby on the host */
+    get _selectionDescribedById(): string {
+        return `${this.id}-selection-described-by`;
+    }
 
     /** Whether to prevent built-in click event logic on the list item.
      * Helpful when using lists with checkboxes or radio buttons when the list item should be clickable, but should not select/deselect the list item. */
@@ -198,13 +204,16 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
     readonly suggestion = input(false, { transform: booleanAttribute });
 
     /** @hidden */
-    private _role = 'listitem'; // default for li elements
+    private _role = 'listitem';
 
     /** @hidden An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private readonly _onLinkListChanged$ = new Subject<void>();
+
+    /** @hidden */
+    private readonly _parentList = inject(FD_LIST_COMPONENT, { optional: true });
 
     /** @hidden */
     private _radio: RadioButtonComponent;
@@ -221,6 +230,11 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
     @HostBinding('attr.role')
     protected get roleAttr(): string {
         return this.ariaRole || this._role;
+    }
+
+    /** @hidden True when the parent list is in selection mode. */
+    get _isSelectable(): boolean {
+        return !!this._parentList?.selection;
     }
 
     /** @hidden */

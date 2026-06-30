@@ -113,6 +113,10 @@ export default {
     coreInfoLabel: {
         srOnlyText: '정보 레이블'
     },
+    coreList: {
+        listItemSelectedAriaLabel: 'Selected',
+        listItemNotSelectedAriaLabel: 'Not Selected'
+    },
     coreLink: {
         emphasized: '강조됨',
         subtle: '미약'

@@ -113,6 +113,10 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'ป้ายชื่อข้อมูล'
     },
+    coreList: {
+        listItemSelectedAriaLabel: 'Selected',
+        listItemNotSelectedAriaLabel: 'Not Selected'
+    },
     coreLink: {
         emphasized: 'เน้น',
         subtle: 'ไม่เน้น'

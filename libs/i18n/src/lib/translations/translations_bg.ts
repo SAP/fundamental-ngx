@@ -114,6 +114,10 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Информационен етикет'
     },
+    coreList: {
+        listItemSelectedAriaLabel: 'Selected',
+        listItemNotSelectedAriaLabel: 'Not Selected'
+    },
     coreLink: {
         emphasized: 'Акцентирано',
         subtle: 'Неясни'

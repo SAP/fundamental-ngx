@@ -113,6 +113,10 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Ετικέτα Πληροφοριών'
     },
+    coreList: {
+        listItemSelectedAriaLabel: 'Selected',
+        listItemNotSelectedAriaLabel: 'Not Selected'
+    },
     coreLink: {
         emphasized: 'Τονισμένο',
         subtle: 'Διακριτικό'

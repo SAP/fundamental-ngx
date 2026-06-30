@@ -113,6 +113,10 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Oplysningsetiket'
     },
+    coreList: {
+        listItemSelectedAriaLabel: 'Selected',
+        listItemNotSelectedAriaLabel: 'Not Selected'
+    },
     coreLink: {
         emphasized: 'Fremhævet',
         subtle: 'Diskret'

@@ -114,6 +114,10 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Označenie s informáciami'
     },
+    coreList: {
+        listItemSelectedAriaLabel: 'Selected',
+        listItemNotSelectedAriaLabel: 'Not Selected'
+    },
     coreLink: {
         emphasized: 'Zvýraznené',
         subtle: 'Jednoduché'

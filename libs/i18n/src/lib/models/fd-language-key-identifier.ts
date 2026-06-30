@@ -81,6 +81,8 @@ export type FdLanguageKeyIdentifier =
     | 'coreGridList.listItemStatusDraft'
     | 'coreGridList.listItemStatusLocked'
     | 'coreInfoLabel.srOnlyText'
+    | 'coreList.listItemSelectedAriaLabel'
+    | 'coreList.listItemNotSelectedAriaLabel'
     | 'coreLink.emphasized'
     | 'coreLink.subtle'
     | 'coreMessageStrip.announcementError'

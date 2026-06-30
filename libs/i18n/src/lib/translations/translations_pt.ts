@@ -113,6 +113,10 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Rótulo de informação'
     },
+    coreList: {
+        listItemSelectedAriaLabel: 'Selected',
+        listItemNotSelectedAriaLabel: 'Not Selected'
+    },
     coreLink: {
         emphasized: 'Realçado',
         subtle: 'Discreto'

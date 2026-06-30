@@ -114,6 +114,10 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'تسمية المعلومات'
     },
+    coreList: {
+        listItemSelectedAriaLabel: 'Selected',
+        listItemNotSelectedAriaLabel: 'Not Selected'
+    },
     coreLink: {
         emphasized: 'مؤكَّد',
         subtle: 'غامض'
