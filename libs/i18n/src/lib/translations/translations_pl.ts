@@ -519,6 +519,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Anuluj',
         clearFilters: 'Wyczyść filtry',
+        collapseAllAnnouncementLabel: 'Collapse All clicked',
         collapseRowButtonTitle: 'Zwiń wiersz',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Nie znaleziono danych',
@@ -529,6 +530,7 @@ export default {
         editableCellNumberPlaceholder: 'Wprowadź wartość',
         editableCellStringPlaceholder: 'Wprowadź wartość',
         emptyCell: 'Puste',
+        expandAllAnnouncementLabel: 'Expand All clicked',
         expandRowButtonTitle: 'Rozwiń wiersz',
         filterDialogBackToColumns: 'Przejdź wstecz',
         filterDialogCancelBtnLabel: 'Anuluj',

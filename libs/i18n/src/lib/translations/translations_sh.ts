@@ -519,6 +519,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Odustani',
         clearFilters: 'Obriši filtere',
+        collapseAllAnnouncementLabel: 'Collapse All clicked',
         collapseRowButtonTitle: 'Sažmi red',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Podaci nisu nađeni',
@@ -529,6 +530,7 @@ export default {
         editableCellNumberPlaceholder: 'Unesi vrednost',
         editableCellStringPlaceholder: 'Unesi vrednost',
         emptyCell: 'Prazno',
+        expandAllAnnouncementLabel: 'Expand All clicked',
         expandRowButtonTitle: 'Proširi red',
         filterDialogBackToColumns: 'Usmeri nazad',
         filterDialogCancelBtnLabel: 'Otkaži',

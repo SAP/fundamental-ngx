@@ -518,6 +518,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Cancel',
         clearFilters: 'Clear Filters',
+        collapseAllAnnouncementLabel: 'Collapse All clicked',
         collapseRowButtonTitle: 'Collapse row',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'डाटा प्राप्त नहीं हुआ',
@@ -528,6 +529,7 @@ export default {
         editableCellNumberPlaceholder: 'मूल्य दर्ज करें',
         editableCellStringPlaceholder: 'मूल्य दर्ज करें',
         emptyCell: 'खाली',
+        expandAllAnnouncementLabel: 'Expand All clicked',
         expandRowButtonTitle: 'Expand row',
         filterDialogBackToColumns: 'Navigate back',
         filterDialogCancelBtnLabel: 'रद्द करें',

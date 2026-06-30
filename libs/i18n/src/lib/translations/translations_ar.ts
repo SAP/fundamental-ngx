@@ -518,6 +518,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'إلغاء',
         clearFilters: 'مسح عوامل التصفية',
+        collapseAllAnnouncementLabel: 'Collapse All clicked',
         collapseRowButtonTitle: 'طي الصف',
         confirmBtnLabel: 'موافق',
         defaultEmptyMessage: 'لم يتم العثور على بيانات',
@@ -528,6 +529,7 @@ export default {
         editableCellNumberPlaceholder: 'أدخل القيمة',
         editableCellStringPlaceholder: 'أدخل القيمة',
         emptyCell: 'فارغ',
+        expandAllAnnouncementLabel: 'Expand All clicked',
         expandRowButtonTitle: 'توسيع الصف',
         filterDialogBackToColumns: 'التنقل إلى الخلف',
         filterDialogCancelBtnLabel: 'إلغاء',

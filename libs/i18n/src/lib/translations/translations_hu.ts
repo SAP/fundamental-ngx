@@ -519,6 +519,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Mégse',
         clearFilters: 'Szűrők törlése',
+        collapseAllAnnouncementLabel: 'Collapse All clicked',
         collapseRowButtonTitle: 'Sor összecsukása',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Nem található adat',
@@ -529,6 +530,7 @@ export default {
         editableCellNumberPlaceholder: 'Adjon meg értéket',
         editableCellStringPlaceholder: 'Adjon meg értéket',
         emptyCell: 'Üres',
+        expandAllAnnouncementLabel: 'Expand All clicked',
         expandRowButtonTitle: 'Sor kibontása',
         filterDialogBackToColumns: 'Visszalépés',
         filterDialogCancelBtnLabel: 'Mégse',
