@@ -362,6 +362,7 @@ export default {
         messagesTeamRemoved: '1 skuadër është hequr',
         messagesUndoAction: 'Zhbëj',
         nextButtonAriaLabel: 'Shko te skedari tjetër',
+        noDataFound: 'No Data Found',
         nodeActionAddApproversAfter: 'Shto miratues më pas',
         nodeActionAddApproversBefore: 'Shto miratues më parë',
         nodeActionAddApproversParallel: 'Shto miratues paralel',
@@ -729,5 +730,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Segmented Button',
         groupRoleDescription: 'Segmented Button Group'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Field validation messages'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Field validation messages'
     }
 };

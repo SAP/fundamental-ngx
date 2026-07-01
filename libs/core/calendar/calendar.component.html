@@ -19,6 +19,8 @@
             [selectedMultipleDateRanges]="selectedMultipleDateRanges"
             (selectedDateChange)="selectedDateChanged($event)"
             (selectedMultipleDatesChange)="selectedMultipleDatesChanged($event)"
+            (multiDateAnchorChange)="handleMultiDateAnchorChange($event)"
+            (shiftMultiDateSelected)="handleShiftMultiDateSelected($event)"
             (selectedRangeDateChange)="selectedRangeDateChanged($event)"
             (selectedMultipleDateRangesChange)="selectedMultipleDateRangesChanged($event)"
             [showWeekNumbers]="showWeekNumbers"

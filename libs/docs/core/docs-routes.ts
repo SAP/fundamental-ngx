@@ -392,12 +392,18 @@ const componentRoutes = [
         loadChildren: () => import('@fundamental-ngx/docs/core/wizard').then(configureLibRoutes)
     },
     {
-        path: 'moment-datetime-adapter',
-        loadChildren: () => import('@fundamental-ngx/docs/core/moment-datetime-adapter').then(configureLibRoutes)
+        path: 'datetime-adapters',
+        loadChildren: () => import('@fundamental-ngx/docs/core/datetime-adapters').then(configureLibRoutes)
     },
     {
         path: 'dayjs-datetime-adapter',
-        loadChildren: () => import('@fundamental-ngx/docs/core/dayjs-datetime-adapter').then(configureLibRoutes)
+        redirectTo: 'datetime-adapters',
+        pathMatch: 'prefix' as const
+    },
+    {
+        path: 'moment-datetime-adapter',
+        redirectTo: 'datetime-adapters',
+        pathMatch: 'prefix' as const
     },
     {
         path: 'timeline',

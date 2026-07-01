@@ -93,37 +93,10 @@ jobs:
                   echo "Shards to run: ${SHARDS[*]}"
 
     # ─────────────────────────────────────────────────────────────
-    # Job 2: Verify generated routes are not stale
-    # ─────────────────────────────────────────────────────────────
-    verify-routes:
-        runs-on: ubuntu-latest
-        timeout-minutes: 5
-        steps:
-            - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-              with:
-                  ref: ${{ github.head_ref }}
-
-            - uses: ./.github/actions/nodejs
-              with:
-                  node-version: ${{ env.NODE_VERSION }}
-
-            - name: Regenerate routes
-              run: |
-                  npx tsx apps/e2e-harness/scripts/generate-routes.ts
-                  npx prettier --write apps/e2e-harness/src/app/app.routes.generated.ts apps/e2e-harness/e2e/config/e2e.routes.json
-
-            - name: Check for uncommitted route changes
-              run: |
-                  if ! git diff --exit-code apps/e2e-harness/src/app/app.routes.generated.ts apps/e2e-harness/e2e/config/e2e.routes.json; then
-                    echo "::error::Generated routes are out of date. Run 'npx tsx apps/e2e-harness/scripts/generate-routes.ts && yarn format' and commit the result."
-                    exit 1
-                  fi
-
-    # ─────────────────────────────────────────────────────────────
-    # Job 3: Sharded Playwright tests
+    # Job 2: Sharded Playwright tests
     # ─────────────────────────────────────────────────────────────
     e2e:
-        needs: [detect-scope, verify-routes]
+        needs: [detect-scope]
         runs-on: ubuntu-latest
         timeout-minutes: 40
         name: 'Playwright E2E (${{ matrix.shard }})'
@@ -170,6 +143,9 @@ jobs:
                   BASE_SHA: ${{ github.event.pull_request.base.sha }}
                   HEAD_SHA: ${{ github.event.pull_request.head.sha }}
               run: node .github/actions/helpers/detect-snapshot-update.js
+
+            - name: Generate routes manifest
+              run: npx tsx apps/e2e-harness/scripts/generate-routes.ts
 
             - name: Run E2E tests
               env:
@@ -240,7 +216,7 @@ jobs:
     # ─────────────────────────────────────────────────────────────
     report:
         needs: [e2e]
-        if: always() && needs.e2e.result != 'cancelled'
+        if: always() && needs.e2e.result != 'cancelled' && needs.e2e.result != 'skipped'
         runs-on: ubuntu-latest
         timeout-minutes: 5
         permissions:
@@ -354,7 +330,7 @@ jobs:
     # Job 5: Final status check (single gate for branch protection)
     # ─────────────────────────────────────────────────────────────
     e2e-status:
-        needs: [verify-routes, e2e, report]
+        needs: [e2e, report]
         if: always()
         runs-on: ubuntu-latest
         timeout-minutes: 2
@@ -362,13 +338,8 @@ jobs:
         steps:
             - name: Check results
               env:
-                  ROUTES_RESULT: ${{ needs.verify-routes.result }}
                   E2E_RESULT: ${{ needs.e2e.result }}
               run: |
-                  if [ "$ROUTES_RESULT" != "success" ]; then
-                    echo "::error::Route verification failed"
-                    exit 1
-                  fi
                   if [ "$E2E_RESULT" = "failure" ]; then
                     echo "::error::E2E tests failed"
                     exit 1

@@ -362,6 +362,7 @@ export default {
         messagesTeamRemoved: 'Usunięto 1 zespół',
         messagesUndoAction: 'Cofnij',
         nextButtonAriaLabel: 'Przejdź do następnego slajdu',
+        noDataFound: 'No Data Found',
         nodeActionAddApproversAfter: 'Dodaj osoby zatwierdzające po',
         nodeActionAddApproversBefore: 'Dodaj osoby zatwierdzające przed',
         nodeActionAddApproversParallel: 'Dodaj osoby zatwierdzające równolegle',
@@ -729,5 +730,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Przycisk podzielony na segmenty',
         groupRoleDescription: 'Grupa przycisków podzielonych na segmenty'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Komunikaty walidacji pola'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Komunikaty walidacji pola'
     }
 };

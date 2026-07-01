@@ -20,7 +20,7 @@ export default {
     },
     coreAvatarGroup: {
         ariaLabelGroup:
-            'Har sammankopplade avatarer för dialog av typ popup, {count} avatarer visas, {hiddenCount} avatarer har dolts, aktivera för komplett lista',
+            'Har dialog av typ popup med sammankopplade avatarer, {count} avatarer visas, {hiddenCount} avatarer är dolda, aktivera för komplett lista',
         ariaLabelIndividual: 'Individuella avatarer. {count} avatarer visas, {hiddenCount} avatarer är dolda',
         backButton: 'Tillbaka',
         popupBodyAriaLabel: 'Med {count} objekt'
@@ -361,6 +361,7 @@ export default {
         messagesTeamRemoved: '1 team har tagits bort',
         messagesUndoAction: 'Ångra',
         nextButtonAriaLabel: 'Gå till nästa bild',
+        noDataFound: 'No Data Found',
         nodeActionAddApproversAfter: 'Lägg till godkännare efter',
         nodeActionAddApproversBefore: 'Lägg till godkännare före',
         nodeActionAddApproversParallel: 'Lägg till parallella godkännare',
@@ -728,5 +729,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Segmenterad knapp',
         groupRoleDescription: 'Segmenterad knappgrupp'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Fältvalideringsmeddelanden'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Fältvalideringsmeddelanden'
     }
 };

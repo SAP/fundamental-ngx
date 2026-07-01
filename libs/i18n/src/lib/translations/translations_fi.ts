@@ -361,6 +361,7 @@ export default {
         messagesTeamRemoved: '1 tiimi on poistettu',
         messagesUndoAction: 'Kumoa',
         nextButtonAriaLabel: 'Siirry seuraavaan diaan',
+        noDataFound: 'No Data Found',
         nodeActionAddApproversAfter: 'Lisää hyväksyjät jälkeen',
         nodeActionAddApproversBefore: 'Lisää hyväksyjät ennen',
         nodeActionAddApproversParallel: 'Lisää rinnakkaisia hyväksyjiä',
@@ -728,5 +729,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Segmentoitu painike',
         groupRoleDescription: 'Segmentoitu painikeryhmä'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Validointisanomien kenttä'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Validointisanomien kenttä'
     }
 };

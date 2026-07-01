@@ -21,7 +21,7 @@ export default {
     },
     coreAvatarGroup: {
         ariaLabelGroup:
-            'Har dialogboksen for popuptype sammenkoblede avatarer, {count} avatarer vist, {hiddenCount} avatarer skjult, aktiver for fullstendig liste',
+            'Har dialog-popup med sammenkoblede avatarer, {count} avatarer vist, {hiddenCount} avatarer skjult, aktiver for fullstendig liste',
         ariaLabelIndividual: 'Individuelle avatarer. {count} avatarer vist, {hiddenCount} avatarer skjult',
         backButton: 'Tilbake',
         popupBodyAriaLabel: 'Med {count} elementer'
@@ -363,6 +363,7 @@ export default {
         messagesTeamRemoved: '1 team er fjernet',
         messagesUndoAction: 'Angre',
         nextButtonAriaLabel: 'Gå til neste lysbilde',
+        noDataFound: 'No Data Found',
         nodeActionAddApproversAfter: 'Legg til godkjennere etter',
         nodeActionAddApproversBefore: 'Legg til godkjennere før',
         nodeActionAddApproversParallel: 'Legg til parallelle godkjennere',
@@ -730,5 +731,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Segmenteringsknapp',
         groupRoleDescription: 'Segmenteringsknapp-gruppe'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Feltvalideringsmeldinger'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Feltvalideringsmeldinger'
     }
 };

@@ -361,6 +361,7 @@ export default {
         messagesTeamRemoved: '1 team er fjernet',
         messagesUndoAction: 'Fortryd',
         nextButtonAriaLabel: 'Gå til næste dias',
+        noDataFound: 'No Data Found',
         nodeActionAddApproversAfter: 'Tilføj godkendere efter',
         nodeActionAddApproversBefore: 'Tilføj godkendere før',
         nodeActionAddApproversParallel: 'Tilføj parallelle godkendere',
@@ -728,5 +729,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Segmentknap',
         groupRoleDescription: 'Segmenteret knapgruppe'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Feltvalideringsmeddelelser'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Feltvalideringsmeddelelser'
     }
 };

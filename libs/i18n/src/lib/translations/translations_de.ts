@@ -363,6 +363,7 @@ export default {
         messagesTeamRemoved: '1 Team wurde entfernt',
         messagesUndoAction: 'Rückgängig',
         nextButtonAriaLabel: 'Zur nächsten Folie',
+        noDataFound: 'No Data Found',
         nodeActionAddApproversAfter: 'Genehmiger hinzufügen nach',
         nodeActionAddApproversBefore: 'Genehmiger hinzufügen vor',
         nodeActionAddApproversParallel: 'Parallele Genehmiger hinzufügen',
@@ -730,5 +731,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Segmentierte Schaltfläche',
         groupRoleDescription: 'Segmentierte Schaltflächengruppe'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Feldprüfungsmeldungen'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Feldprüfungsmeldungen'
     }
 };

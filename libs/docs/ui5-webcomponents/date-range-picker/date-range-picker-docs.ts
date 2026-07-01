@@ -12,10 +12,13 @@ import { DateRangePickerComponentStatesSample } from './examples/component-state
 import { DateRangePickerDelimiterSample } from './examples/delimiter-sample';
 import { DateRangePickerFormatSample } from './examples/format-sample';
 import { DateRangePickerMinMaxSample } from './examples/min-max-sample';
+import { DateRangePickerTwoMonthsSample } from './examples/two-months-sample';
 import { DateRangePickerValueStateSample } from './examples/value-state-sample';
 
 const basicSampleHtml = 'basic-sample.html';
 const basicSampleTs = 'basic-sample.ts';
+const twoMonthsSampleHtml = 'two-months-sample.html';
+const twoMonthsSampleTs = 'two-months-sample.ts';
 const delimiterSampleHtml = 'delimiter-sample.html';
 const delimiterSampleTs = 'delimiter-sample.ts';
 const formatSampleHtml = 'format-sample.html';
@@ -41,7 +44,8 @@ const componentStatesSampleTs = 'component-states-sample.ts';
         DateRangePickerFormatSample,
         DateRangePickerMinMaxSample,
         DateRangePickerValueStateSample,
-        DateRangePickerComponentStatesSample
+        DateRangePickerComponentStatesSample,
+        DateRangePickerTwoMonthsSample
     ]
 })
 export class DateRangePickerDocs {
@@ -115,6 +119,20 @@ export class DateRangePickerDocs {
         }
     ]);
 
+    private readonly twoMonthsExampleFiles = signal<ExampleFile[]>([
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(twoMonthsSampleHtml),
+            originalFileName: 'two-months-sample'
+        },
+        {
+            language: 'typescript',
+            component: 'DateRangePickerTwoMonthsSample',
+            code: getAssetFromModuleAssets(twoMonthsSampleTs),
+            originalFileName: 'two-months-sample'
+        }
+    ]);
+
     private readonly componentStatesExampleFiles = signal<ExampleFile[]>([
         {
             language: 'html',
@@ -130,6 +148,7 @@ export class DateRangePickerDocs {
     ]);
 
     readonly basicExamples = computed(() => this.basicExampleFiles());
+    readonly twoMonthsExamples = computed(() => this.twoMonthsExampleFiles());
     readonly delimiterExamples = computed(() => this.delimiterExampleFiles());
     readonly formatExamples = computed(() => this.formatExampleFiles());
     readonly minMaxExamples = computed(() => this.minMaxExampleFiles());

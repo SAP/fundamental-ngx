@@ -362,6 +362,7 @@ export default {
         messagesTeamRemoved: 'Bol odstránený 1 tím',
         messagesUndoAction: 'Anulovať',
         nextButtonAriaLabel: 'Prejsť na ďalšiu snímku',
+        noDataFound: 'No Data Found',
         nodeActionAddApproversAfter: 'Potom pridať schvaľovateľov',
         nodeActionAddApproversBefore: 'Predtým pridať schvaľovateľov',
         nodeActionAddApproversParallel: 'Pridať paralelných schvaľovateľov',
@@ -729,5 +730,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Segmentované tlačidlo',
         groupRoleDescription: 'Skupina segmentovaných tlačidiel'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Pole Hlásenia overenia'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Pole Hlásenia overenia'
     }
 };

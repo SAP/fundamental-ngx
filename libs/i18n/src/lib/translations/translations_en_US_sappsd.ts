@@ -363,6 +363,7 @@ export default {
         messagesTeamRemoved: '[[[1 ţēąɱ ĥąş ƃēēŋ ŗēɱŏʋēƌ∙∙∙∙∙∙]]]',
         messagesUndoAction: '[[[Ůŋƌŏ]]]',
         nextButtonAriaLabel: '[[[Ģŏ ţŏ ŋēχţ şĺįƌē∙∙∙∙∙∙∙∙]]]',
+        noDataFound: 'No Data Found',
         nodeActionAddApproversAfter: '[[[Āƌƌ ąρρŗŏʋēŗş ąƒţēŗ∙∙∙∙∙]]]',
         nodeActionAddApproversBefore: '[[[Āƌƌ ąρρŗŏʋēŗş ƃēƒŏŗē∙∙∙∙]]]',
         nodeActionAddApproversParallel: '[[[Āƌƌ ρąŗąĺĺēĺ ąρρŗŏʋēŗş∙∙∙∙∙]]]',
@@ -731,5 +732,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: '[[[Ŝēğɱēŋţēƌ Ɓűţţŏŋ∙∙∙∙∙∙∙∙]]]',
         groupRoleDescription: '[[[Ŝēğɱēŋţēƌ Ɓűţţŏŋ Ģŗŏűρ∙∙∙∙∙]]]'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: '[[[Ƒįēĺƌ ʋąĺįƌąţįŏŋ ɱēşşąğēş∙∙∙∙∙∙∙]]]'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: '[[[Ƒįēĺƌ ʋąĺįƌąţįŏŋ ɱēşşąğēş∙∙∙∙∙∙∙]]]'
     }
 };

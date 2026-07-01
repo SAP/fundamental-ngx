@@ -48,4 +48,29 @@ export class ObjectBasedMessageBoxExampleComponent {
             }
         });
     }
+
+    openWithoutFocusTrap(): void {
+        const content: MessageBoxContent = {
+            title: this.title,
+            content: this.content,
+            approveButton: 'Ok',
+            cancelButton: 'Cancel',
+            approveButtonCallback: () => messageBoxRef.close('Approved'),
+            cancelButtonCallback: () => messageBoxRef.close('Canceled'),
+            closeButtonCallback: () => messageBoxRef.dismiss('Dismissed')
+        };
+
+        const messageBoxRef = this._messageBoxService.open(content, { focusTrapped: false });
+
+        messageBoxRef.afterClosed.subscribe({
+            next: (result) => {
+                this.closeReason = 'Message box closed with result: ' + result;
+                this._cdr.detectChanges();
+            },
+            error: (error) => {
+                this.closeReason = 'Message box dismissed with result: ' + error;
+                this._cdr.detectChanges();
+            }
+        });
+    }
 }

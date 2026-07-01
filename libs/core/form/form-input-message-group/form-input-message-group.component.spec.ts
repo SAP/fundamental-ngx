@@ -370,3 +370,36 @@ describe('FormInputMessageGroupComponent — placementContainer: self', () => {
         expect(document.activeElement).toBe(input2);
     }));
 });
+
+describe('FormInputMessageGroupComponent — popover aria-label (#14260)', () => {
+    let fixture: ComponentFixture<TwoGroupsTestComponent>;
+    let hostEl: HTMLElement;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [TwoGroupsTestComponent]
+        }).compileComponents();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(TwoGroupsTestComponent);
+        fixture.detectChanges();
+        hostEl = fixture.nativeElement;
+    });
+
+    it('renders the popover body with a non-empty aria-label', fakeAsync(() => {
+        const input1: HTMLInputElement = hostEl.querySelector('#input1')!;
+
+        input1.focus();
+        input1.dispatchEvent(new FocusEvent('focusin', { bubbles: true }));
+        fixture.detectChanges();
+        tick();
+        fixture.detectChanges();
+
+        const body = document.querySelector('.cdk-overlay-container .fd-popover__body');
+        expect(body?.getAttribute('role')).toBe('dialog');
+        const label = body?.getAttribute('aria-label');
+        expect(label).toBeTruthy();
+        expect(label?.length).toBeGreaterThan(0);
+    }));
+});

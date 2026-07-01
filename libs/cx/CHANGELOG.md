@@ -1,3 +1,213 @@
+## 0.63.1-rc.8 (2026-06-29)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.7 (2026-06-29)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.6 (2026-06-25)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.5 (2026-06-24)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.4 (2026-06-24)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.3 (2026-06-23)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.2 (2026-06-23)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.1 (2026-06-23)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.0 (2026-06-23)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.63.0 (2026-06-23)
+
+### 🚀 Features
+
+- **core:** add header content area to User Menu, adopt latest fund-styles ([#14268](https://github.com/SAP/fundamental-ngx/pull/14268))
+- ⚠️  **mcp:** MCP server evaluation - part 5 ([#14224](https://github.com/SAP/fundamental-ngx/pull/14224))
+- **mcp:** MCP server evaluation part 3 - Skills ([#14211](https://github.com/SAP/fundamental-ngx/pull/14211))
+
+### 🩹 Fixes
+
+- **ci:** generate components.json before netlify docs build ([#14285](https://github.com/SAP/fundamental-ngx/pull/14285))
+- datetime adapters migration ([#14016](https://github.com/SAP/fundamental-ngx/pull/14016))
+- **ui5:** bridge ThemingService to UI5 Web Components and fix theme propagation ([#14188](https://github.com/SAP/fundamental-ngx/pull/14188))
+
+### ⚠️  Breaking Changes
+
+- **mcp:** MCP server evaluation - part 5  ([#14224](https://github.com/SAP/fundamental-ngx/pull/14224))
+  recommend_components removed. It used a hardcoded
+  23-entry UI_PATTERNS dict that missed the entire platform form layer
+  (fdp-form-group, fdp-form-field). Use search_components with relevant
+  keywords instead.
+  BREAKING CHANGE: get_design_tokens removed. The corpus was only 92
+  tokens (42 hardcoded SAP theme vars + 50 spacing utility classes);
+  focus, disabled, and hover tokens were absent, making it unusable for
+  component styling. Use @fundamental-styles/mcp get_design_tokens
+  (1500+ tokens) instead.
+  BREAKING CHANGE: get_migration_guide tool removed from @fundamental-ngx/mcp.
+  BREAKING CHANGE: get_accessibility_guide tool removed from @fundamental-ngx/mcp.
+  Use get_component_api — it returns all inputs (including ARIA inputs with
+  descriptions) and the keyboardHandling field.
+
+### ❤️ Thank You
+
+- Copilot
+- deno
+- github-actions
+- Inna Atanasova @InnaAtanasova
+- Maria Dineva @MariaIDineva
+
+## 0.63.0-rc.40 (2026-06-23)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.39 (2026-06-22)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.38 (2026-06-22)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.37 (2026-06-22)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.36 (2026-06-19)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.35 (2026-06-19)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.34 (2026-06-18)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.33 (2026-06-18)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.32 (2026-06-18)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.31 (2026-06-18)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.30 (2026-06-17)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.29 (2026-06-17)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.28 (2026-06-16)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.27 (2026-06-16)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.26 (2026-06-15)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.25 (2026-06-15)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.24 (2026-06-15)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.23 (2026-06-15)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.22 (2026-06-15)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.21 (2026-06-13)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.20 (2026-06-12)
+
+### 🩹 Fixes
+
+- **ci:** generate components.json before netlify docs build ([#14285](https://github.com/SAP/fundamental-ngx/pull/14285))
+
+### ❤️ Thank You
+
+- deno
+
+## 0.63.0-rc.19 (2026-06-12)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.18 (2026-06-12)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.17 (2026-06-11)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.16 (2026-06-11)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.15 (2026-06-10)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.14 (2026-06-10)
+
+### 🚀 Features
+
+- **core:** add header content area to User Menu, adopt latest fund-styles ([#14268](https://github.com/SAP/fundamental-ngx/pull/14268))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
+## 0.63.0-rc.13 (2026-06-10)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.12 (2026-06-10)
+
+### 🩹 Fixes
+
+- datetime adapters migration ([#14016](https://github.com/SAP/fundamental-ngx/pull/14016))
+
+### ❤️ Thank You
+
+- deno
+- github-actions
+
 ## 0.63.0-rc.11 (2026-06-09)
 
 This was a version bump only for cx to align it with other projects, there were no code changes.

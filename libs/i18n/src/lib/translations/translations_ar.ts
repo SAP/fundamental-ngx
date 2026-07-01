@@ -361,6 +361,7 @@ export default {
         messagesTeamRemoved: 'تمت إزالة فريق واحد',
         messagesUndoAction: 'تراجع',
         nextButtonAriaLabel: 'انتقال إلى الشريحة التالية',
+        noDataFound: 'No Data Found',
         nodeActionAddApproversAfter: 'إضافة المعتمِدين بعد',
         nodeActionAddApproversBefore: 'إضافة المعتمِدين قبل',
         nodeActionAddApproversParallel: 'إضافة المعتمِدين المتوازيين',
@@ -728,5 +729,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'زر مقسَّم',
         groupRoleDescription: 'مجموعة الأزرار المقسَّمة'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'رسائل التحقق من صحة الحقل'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'رسائل التحقق من صحة الحقل'
     }
 };

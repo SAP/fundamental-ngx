@@ -1,5 +1,5 @@
+import { Signal, signal } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { Observable, Subject } from 'rxjs';
 
 /**
  * Datetime Adapter is an abstract class that must be implemented by each adapter.
@@ -269,11 +269,22 @@ export abstract class DatetimeAdapter<D> {
     abstract isValid(date: Nullable<D>): date is D;
 
     /**
-     * Gets the RFC 3339 compatible string (https://tools.ietf.org/html/rfc3339) for the given date.
+     * Gets the ISO 8601 date-time string for the given date.
+     *
+     * Returns a **local** (timezone-unaware) string in the format `YYYY-MM-DDTHH:mm:ss`.
+     * This is intentionally **not** RFC 3339 compliant because no timezone designator is appended.
+     *
      * This method is used to generate date strings that are compatible with native HTML attributes
      * such as the `min` or `max` attribute of an `<input>`.
+     *
+     * To produce an RFC 3339 string, append a timezone designator to the result:
+     * ```ts
+     * const rfc3339Utc = adapter.toIso8601(date) + 'Z';          // UTC
+     * const rfc3339Local = adapter.toIso8601(date) + '+05:30';    // with offset
+     * ```
+     *
      * @param date The date to get the ISO date string for.
-     * @returns The ISO date string date string.
+     * @returns The ISO 8601 date-time string without timezone designator.
      */
     abstract toIso8601(date: D): string;
 
@@ -311,25 +322,21 @@ export abstract class DatetimeAdapter<D> {
      */
     abstract fromNow?(date: D): string;
 
-    /** locale changes stream */
-    readonly localeChanges: Observable<void>;
-
-    /** current locale */
-    protected locale: string;
+    /** Current locale as a readonly signal. */
+    readonly locale: Signal<string>;
 
     /** @hidden */
-    private _localeChanges: Subject<void> = new Subject();
+    private readonly _locale = signal<string>('');
 
     protected constructor() {
-        this.localeChanges = this._localeChanges.asObservable();
+        this.locale = this._locale.asReadonly();
     }
     /**
      * Sets the locale used for all dates.
      * @param locale The new locale.
      */
     setLocale(locale: string): void {
-        this.locale = locale;
-        this._localeChanges.next();
+        this._locale.set(locale);
     }
 
     /**
@@ -351,13 +358,15 @@ export abstract class DatetimeAdapter<D> {
      * Get Amount of weeks in given month/year
      * @param year The year of the date
      * @param month The month of the date
-     * @param firstDayOfWeek The first day of week. 1 - Sunday, 2 - Monday...
+     * @param firstDayOfWeek The first day of week. 1 - Sunday, 2 - Monday, ..., 7 - Saturday
      * @returns Number of weeks in the given month
      */
     getAmountOfWeeks(year: number, month: number, firstDayOfWeek: number): number {
         const firstOfMonth = new Date(year, month - 1, 1);
         const lastOfMonth = new Date(year, month, 0);
 
+        // firstDayOfWeek is 1-based (1=Sunday, …, 7=Saturday); getDay() is 0-based —
+        // `+ 8` normalizes both into the 0–6 mod-7 space.
         const dayOffset = (firstOfMonth.getDay() - firstDayOfWeek + 8) % 7;
         const used = dayOffset + lastOfMonth.getDate();
 

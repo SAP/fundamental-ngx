@@ -11,18 +11,21 @@ import {
     forwardRef,
     inject,
     Injector,
+    input,
     Input,
     isDevMode,
     OnChanges,
     OnDestroy,
     OnInit,
     Output,
+    signal,
     SimpleChanges,
     TemplateRef,
     ViewChild,
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, FormControl, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, first, map, startWith } from 'rxjs/operators';
@@ -422,6 +425,16 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     @ViewChild(TokenizerComponent)
     tokenizer: TokenizerComponent;
 
+    /**
+     * Maximum number of selected tokens to render when the input is not focused.
+     * When the selection exceeds this limit, the remaining count is shown as a
+     * "+N more" indicator. Defaults to 12.
+     */
+    readonly maxVisibleTokens = input(12);
+
+    /** Placement of the popover relative to the input.*/
+    readonly placement = input<'top' | 'bottom'>('bottom');
+
     /** @hidden */
     get _optionItems(): _OptionItem<ItemType, ValueType>[] {
         return this.optionItems$.value;
@@ -441,6 +454,34 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     /** @hidden */
     readonly _viewModel$: Observable<ViewModel<ItemType, ValueType>> = this._getViewModel();
 
+    /** @hidden */
+    readonly contentDensityObserver = inject(ContentDensityObserver);
+
+    /** @hidden */
+    readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+
+    /** @hidden — slice (or full list) of options rendered into <fd-tokenizer>. */
+    protected readonly renderedTokens = computed(() => {
+        const all = this._selectedOptionsSignal();
+        if (this._renderAllTokens() || all.length <= this.maxVisibleTokens()) {
+            return all;
+        }
+        return all.slice(0, this.maxVisibleTokens());
+    });
+
+    /** @hidden — count of selected tokens not currently rendered. Fed into tokenizer's externalHiddenCount input. */
+    protected readonly hiddenCount = computed(
+        () => this._selectedOptionsSignal().length - this.renderedTokens().length
+    );
+
+    /** @hidden — the selected option list as a signal, derived from the view model. */
+    private readonly _selectedOptionsSignal = toSignal(this._viewModel$.pipe(map((vm) => vm.selectedOptions)), {
+        initialValue: [] as _OptionItem<ItemType, ValueType>[]
+    });
+
+    /** @hidden — true while the input has focus. Renders the full token list. */
+    private readonly _renderAllTokens = signal(false);
+
     /** typeahead matcher function */
     get typeAheadMatcher(): (item: string, searchTerm: string) => boolean {
         if (this.includes) {
@@ -448,12 +489,6 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         }
         return (item: string, searchTerm: string) => item.startsWith(searchTerm);
     }
-
-    /** @hidden */
-    readonly _contentDensityObserver = inject(ContentDensityObserver);
-
-    /** @hidden */
-    readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
     /** @hidden */
     private readonly _dir = computed(() => (this._rtlService?.rtl() ? 'rtl' : 'ltr'));
@@ -508,6 +543,12 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         }
 
         return ['fd-multi-input', 'fd-multi-input-custom', this.class];
+    }
+
+    /** @hidden Called on input focus — render all tokens, then expand the tokenizer. */
+    _onInputFocus(): void {
+        this._renderAllTokens.set(true);
+        this.tokenizer._showAllTokens();
     }
 
     /** @hidden */
@@ -810,6 +851,13 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         this.openChangeHandle(true);
     }
 
+    /** @hidden Click handler for the "+N more" indicator owned by multi-input. */
+    _onMoreClicked(): void {
+        this.tokenizer._showAllTokens();
+        this._renderAllTokens.set(true);
+        this.searchInputElement?.nativeElement.focus();
+    }
+
     /** @hidden */
     _addOnButtonClicked(event: Event): void {
         this.addOnButtonClicked.emit(event);
@@ -840,6 +888,10 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     protected _focusOut(event: FocusEvent): void {
         if (!this.elementRef.nativeElement.contains(event.relatedTarget as Node)) {
             this.onTouched();
+            if (this._renderAllTokens()) {
+                this.tokenizer._hideTokens();
+                this._renderAllTokens.set(false);
+            }
         }
     }
 

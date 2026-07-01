@@ -90,11 +90,6 @@ jobs:
               env:
                   NX_CLOUD_DISTRIBUTED_EXECUTION: false
 
-            - name: Check metadata catalog is up to date
-              run: npx nx run mcp-server:check-metadata
-              env:
-                  NX_CLOUD_DISTRIBUTED_EXECUTION: false
-
             - name: Run Build, Lint and test commands
               uses: ./.github/actions/parallel-commands
               with:

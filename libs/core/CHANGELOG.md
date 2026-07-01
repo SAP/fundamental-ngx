@@ -1,3 +1,307 @@
+## 0.63.1-rc.8 (2026-06-29)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.7 (2026-06-29)
+
+### 🩹 Fixes
+
+- **core:** add option to configure popover placement in Multi Input ([#14317](https://github.com/SAP/fundamental-ngx/pull/14317))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
+## 0.63.1-rc.6 (2026-06-25)
+
+### 🚀 Features
+
+- **core:** shift-click multi-date selection for fd-calendar / fd-date-picker ([#14309](https://github.com/SAP/fundamental-ngx/pull/14309), [#13502](https://github.com/SAP/fundamental-ngx/issues/13502))
+
+### ❤️ Thank You
+
+- github-actions
+- Maria Dineva @MariaIDineva
+
+## 0.63.1-rc.5 (2026-06-24)
+
+### 🩹 Fixes
+
+- **core:** fix msg box focus trap ([#14298](https://github.com/SAP/fundamental-ngx/pull/14298))
+
+### ❤️ Thank You
+
+- deno
+
+## 0.63.1-rc.4 (2026-06-24)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.3 (2026-06-23)
+
+### 🩹 Fixes
+
+- **core:** prevent duplicate subscription in segmented-button button changes listener ([#14308](https://github.com/SAP/fundamental-ngx/pull/14308), [#13358](https://github.com/SAP/fundamental-ngx/issues/13358))
+
+### ❤️ Thank You
+
+- deno
+
+## 0.63.1-rc.2 (2026-06-23)
+
+### 🩹 Fixes
+
+- **core:** add accessible names to FlexibleColumnLayout separator buttons ([#14313](https://github.com/SAP/fundamental-ngx/pull/14313))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
+## 0.63.1-rc.1 (2026-06-23)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.0 (2026-06-23)
+
+### 🩹 Fixes
+
+- **core:** prevent inline-help text from being announced twice by screen readers ([#14310](https://github.com/SAP/fundamental-ngx/pull/14310))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
+## 0.63.0 (2026-06-23)
+
+### 🚀 Features
+
+- **core:** add header content area to User Menu, adopt latest fund-styles ([#14268](https://github.com/SAP/fundamental-ngx/pull/14268))
+- ⚠️  **mcp:** MCP server evaluation - part 5 ([#14224](https://github.com/SAP/fundamental-ngx/pull/14224))
+- **mcp:** MCP server evaluation - part 4 ([#14221](https://github.com/SAP/fundamental-ngx/pull/14221))
+- **mcp:** MCP server evaluation part 3 - Skills ([#14211](https://github.com/SAP/fundamental-ngx/pull/14211))
+
+### 🩹 Fixes
+
+- **core:** combobox click-outside parity with Tab out ([#14306](https://github.com/SAP/fundamental-ngx/pull/14306), [#13481](https://github.com/SAP/fundamental-ngx/issues/13481))
+- **core:** limit rendered tokens in multi-input to visible count ([#14137](https://github.com/SAP/fundamental-ngx/pull/14137))
+- **core:** scroll active element into view upon opening select ([#14299](https://github.com/SAP/fundamental-ngx/pull/14299))
+- **core:** prevent parent submenu from closing when hovering nested submenu ([#14284](https://github.com/SAP/fundamental-ngx/pull/14284))
+- **core:** guard tokenList.changes with takeUntilDestroyed ([#14296](https://github.com/SAP/fundamental-ngx/pull/14296))
+- **core:** expose bodyRole + bodyAriaLabelledBy inputs on fd-popover ([#14260](https://github.com/SAP/fundamental-ngx/pull/14260), [#14270](https://github.com/SAP/fundamental-ngx/pull/14270))
+- **ci:** generate components.json before netlify docs build ([#14285](https://github.com/SAP/fundamental-ngx/pull/14285))
+- **core:** fix Message Strip btn misalignment ([#14269](https://github.com/SAP/fundamental-ngx/pull/14269))
+- datetime adapters migration ([#14016](https://github.com/SAP/fundamental-ngx/pull/14016))
+- **core:** fix fd-select dropdown reposition upon DOM changes ([#14265](https://github.com/SAP/fundamental-ngx/pull/14265), [#14252](https://github.com/SAP/fundamental-ngx/issues/14252), [#14244](https://github.com/SAP/fundamental-ngx/issues/14244), [#14267](https://github.com/SAP/fundamental-ngx/issues/14267))
+- **core, datetime-adapter:** fix datetime picker manual input ([#14251](https://github.com/SAP/fundamental-ngx/pull/14251))
+- **core:** fix datetime picker selection ([#14243](https://github.com/SAP/fundamental-ngx/pull/14243))
+- **ui5:** bridge ThemingService to UI5 Web Components and fix theme propagation ([#14188](https://github.com/SAP/fundamental-ngx/pull/14188))
+
+### ⚠️  Breaking Changes
+
+- **mcp:** MCP server evaluation - part 5  ([#14224](https://github.com/SAP/fundamental-ngx/pull/14224))
+  recommend_components removed. It used a hardcoded
+  23-entry UI_PATTERNS dict that missed the entire platform form layer
+  (fdp-form-group, fdp-form-field). Use search_components with relevant
+  keywords instead.
+  BREAKING CHANGE: get_design_tokens removed. The corpus was only 92
+  tokens (42 hardcoded SAP theme vars + 50 spacing utility classes);
+  focus, disabled, and hover tokens were absent, making it unusable for
+  component styling. Use @fundamental-styles/mcp get_design_tokens
+  (1500+ tokens) instead.
+  BREAKING CHANGE: get_migration_guide tool removed from @fundamental-ngx/mcp.
+  BREAKING CHANGE: get_accessibility_guide tool removed from @fundamental-ngx/mcp.
+  Use get_component_api — it returns all inputs (including ARIA inputs with
+  descriptions) and the keyboardHandling field.
+
+### ❤️ Thank You
+
+- Copilot
+- deno
+- fundamental-bot
+- github-actions
+- Inna Atanasova @InnaAtanasova
+- Maria Dineva @MariaIDineva
+- Mike O'Donnell @mikerodonnell89
+
+## 0.63.0-rc.40 (2026-06-23)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.39 (2026-06-22)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.38 (2026-06-22)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.37 (2026-06-22)
+
+### 🩹 Fixes
+
+- **core:** combobox click-outside parity with Tab out ([#14306](https://github.com/SAP/fundamental-ngx/pull/14306), [#13481](https://github.com/SAP/fundamental-ngx/issues/13481))
+
+### ❤️ Thank You
+
+- deno
+
+## 0.63.0-rc.36 (2026-06-19)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.35 (2026-06-19)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.34 (2026-06-18)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.33 (2026-06-18)
+
+### 🩹 Fixes
+
+- **core:** limit rendered tokens in multi-input to visible count ([#14137](https://github.com/SAP/fundamental-ngx/pull/14137))
+
+### ❤️ Thank You
+
+- deno
+- github-actions
+
+## 0.63.0-rc.32 (2026-06-18)
+
+### 🩹 Fixes
+
+- **core:** scroll active element into view upon opening select ([#14299](https://github.com/SAP/fundamental-ngx/pull/14299))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
+## 0.63.0-rc.31 (2026-06-18)
+
+### 🩹 Fixes
+
+- **core:** prevent parent submenu from closing when hovering nested submenu ([#14284](https://github.com/SAP/fundamental-ngx/pull/14284))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
+## 0.63.0-rc.30 (2026-06-17)
+
+### 🩹 Fixes
+
+- **core:** guard tokenList.changes with takeUntilDestroyed ([#14296](https://github.com/SAP/fundamental-ngx/pull/14296))
+
+### ❤️ Thank You
+
+- deno
+
+## 0.63.0-rc.29 (2026-06-17)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.28 (2026-06-16)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.27 (2026-06-16)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.26 (2026-06-15)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.25 (2026-06-15)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.24 (2026-06-15)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.23 (2026-06-15)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.22 (2026-06-15)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.21 (2026-06-13)
+
+### 🩹 Fixes
+
+- **core:** expose bodyRole + bodyAriaLabelledBy inputs on fd-popover ([#14260](https://github.com/SAP/fundamental-ngx/pull/14260), [#14270](https://github.com/SAP/fundamental-ngx/pull/14270))
+
+### ❤️ Thank You
+
+- deno
+- github-actions
+
+## 0.63.0-rc.20 (2026-06-12)
+
+### 🩹 Fixes
+
+- **ci:** generate components.json before netlify docs build ([#14285](https://github.com/SAP/fundamental-ngx/pull/14285))
+
+### ❤️ Thank You
+
+- deno
+
+## 0.63.0-rc.19 (2026-06-12)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.18 (2026-06-12)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.17 (2026-06-11)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.16 (2026-06-11)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.15 (2026-06-10)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.63.0-rc.14 (2026-06-10)
+
+### 🚀 Features
+
+- **core:** add header content area to User Menu, adopt latest fund-styles ([#14268](https://github.com/SAP/fundamental-ngx/pull/14268))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
+## 0.63.0-rc.13 (2026-06-10)
+
+### 🩹 Fixes
+
+- **core:** fix Message Strip btn misalignment ([#14269](https://github.com/SAP/fundamental-ngx/pull/14269))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
+## 0.63.0-rc.12 (2026-06-10)
+
+### 🩹 Fixes
+
+- datetime adapters migration ([#14016](https://github.com/SAP/fundamental-ngx/pull/14016))
+
+### ❤️ Thank You
+
+- deno
+- github-actions
+
 ## 0.63.0-rc.11 (2026-06-09)
 
 ### 🩹 Fixes

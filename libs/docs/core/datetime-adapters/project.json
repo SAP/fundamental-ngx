@@ -1,0 +1,9 @@
+{
+    "name": "docs-core-datetime-adapters",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "libs/docs/core/datetime-adapters",
+    "projectType": "library",
+    "prefix": "fundamental-ngx",
+    "tags": ["type:lib", "scope:docs"],
+    "targets": {}
+}

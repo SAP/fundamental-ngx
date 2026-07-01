@@ -362,6 +362,7 @@ export default {
         messagesTeamRemoved: '1 csapat el lett távolítva',
         messagesUndoAction: 'Visszavonás',
         nextButtonAriaLabel: 'Tovább a következő diára',
+        noDataFound: 'No Data Found',
         nodeActionAddApproversAfter: 'Jóváhagyók hozzáadása ez után:',
         nodeActionAddApproversBefore: 'Jóváhagyók hozzáadása ez elé:',
         nodeActionAddApproversParallel: 'Párhuzamos jóváhagyók hozzáadása',
@@ -729,5 +730,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Szegmentált gomb',
         groupRoleDescription: 'Szegmentált gombcsoport'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Validálási üzenetek mező'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Validálási üzenetek mező'
     }
 };

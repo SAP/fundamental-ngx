@@ -257,6 +257,7 @@ export type FdLanguageKeyIdentifier =
     | 'platformApprovalFlow.messagesTeamRemoved'
     | 'platformApprovalFlow.messagesUndoAction'
     | 'platformApprovalFlow.nextButtonAriaLabel'
+    | 'platformApprovalFlow.noDataFound'
     | 'platformApprovalFlow.nodeActionAddApproversAfter'
     | 'platformApprovalFlow.nodeActionAddApproversBefore'
     | 'platformApprovalFlow.nodeActionAddApproversParallel'
@@ -576,4 +577,6 @@ export type FdLanguageKeyIdentifier =
     | 'platformWizardGenerator.stepsLabel'
     | 'platformWizardGenerator.summarySectionEditStep'
     | 'segmentedButton.buttonRoleDescription'
-    | 'segmentedButton.groupRoleDescription';
+    | 'segmentedButton.groupRoleDescription'
+    | 'coreFormInputMessageGroup.popoverAriaLabel'
+    | 'platformInputMessageGroup.popoverAriaLabel';

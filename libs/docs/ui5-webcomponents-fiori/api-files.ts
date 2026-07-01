@@ -11,6 +11,7 @@ export const API_FILES = {
     dynamicPage: ['DynamicPage', 'DynamicPageHeader', 'DynamicPageTitle'],
     dynamicSideContent: ['DynamicSideContent'],
     flexibleColumnLayout: ['FlexibleColumnLayout'],
+    heroBanner: ['HeroBanner'],
     illustratedMessage: ['IllustratedMessage'],
     mediaGallery: ['MediaGallery'],
     navigationLayout: ['NavigationLayout'],

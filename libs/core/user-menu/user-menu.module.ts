@@ -5,6 +5,7 @@ import { UserMenuBodyComponent } from './components/user-menu-body.component';
 import { UserMenuContentContainerComponent } from './components/user-menu-content-container.component';
 import { UserMenuControlComponent } from './components/user-menu-control.component';
 import { UserMenuFooterComponent } from './components/user-menu-footer.component';
+import { UserMenuHeaderContentAreaComponent } from './components/user-menu-header-content-area.component';
 import { UserMenuListItemComponent } from './components/user-menu-list-item.component';
 import { UserMenuListComponent } from './components/user-menu-list.component';
 import { UserMenuSublistComponent } from './components/user-menu-sublist.component';
@@ -26,6 +27,7 @@ const components = [
     UserMenuSublistComponent,
     UserMenuListItemComponent,
     UserMenuContentContainerComponent,
+    UserMenuHeaderContentAreaComponent,
     UserMenuHeaderDirective,
     UserMenuHeaderContainerDirective,
     UserMenuUserNameDirective,

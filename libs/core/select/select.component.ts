@@ -27,6 +27,7 @@ import {
     ViewChild,
     ViewContainerRef,
     ViewEncapsulation,
+    afterNextRender,
     computed,
     inject,
     isDevMode
@@ -582,6 +583,15 @@ export class SelectComponent<T = any>
         this._changeDetectorRef.markForCheck();
         this._controlElementRef.nativeElement.focus();
         this.isOpenChange.emit(true);
+        // Wait for layout: option offsetHeight is 0 until the overlay is painted.
+        afterNextRender(
+            () => {
+                if (this._isOpen && this._optionPanel) {
+                    this._keyManagerService._scrollActiveOptionIntoView();
+                }
+            },
+            { injector: this._injector }
+        );
     }
 
     /** @hidden */

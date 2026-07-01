@@ -360,6 +360,7 @@ export default {
         messagesTeamRemoved: '팀 1개가 제거되었습니다.',
         messagesUndoAction: '실행 취소',
         nextButtonAriaLabel: '다음 슬라이드로 이동',
+        noDataFound: 'No Data Found',
         nodeActionAddApproversAfter: '뒤에 결재자 추가',
         nodeActionAddApproversBefore: '앞에 결재자 추가',
         nodeActionAddApproversParallel: '병렬 결재자 추가',
@@ -726,5 +727,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: '세그멘테이션된 버튼',
         groupRoleDescription: '세그멘테이션된 버튼 그룹'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: '필드 유효성 확인 메시지'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: '필드 유효성 확인 메시지'
     }
 };

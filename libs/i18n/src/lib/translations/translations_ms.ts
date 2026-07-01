@@ -360,6 +360,7 @@ export default {
         messagesTeamRemoved: '1 pasukan telah dikeluarkan',
         messagesUndoAction: 'Buat Asal',
         nextButtonAriaLabel: 'Pergi ke slaid seterusnya',
+        noDataFound: 'No Data Found',
         nodeActionAddApproversAfter: 'Tambah pelulus selepas',
         nodeActionAddApproversBefore: 'Tambah pelulus sebelum',
         nodeActionAddApproversParallel: 'Tambah pelulus selari',
@@ -727,5 +728,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Butang Disegmenkan',
         groupRoleDescription: 'Kumpulan Butang Disegmenkan'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Mesej pengesahan medan'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Mesej pengesahan medan'
     }
 };

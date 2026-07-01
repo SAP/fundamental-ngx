@@ -122,4 +122,33 @@ describe('AutoCompleteDirective', () => {
         // Should autocomplete to "Banana"
         expect((<any>directive)._elementRef.nativeElement.value).toBe('Banana');
     });
+
+    it('should autocomplete correctly when NgModel re-pushes stale value before keyup (race condition)', () => {
+        // Reproduces the actual race: user types Ctrl+A → Delete → 'B' fast.
+        // 1. input event fires with insertText 'B' → _lastInputEventValue = 'B'
+        // 2. NgModel re-pushes stale 'Apple' back to el.value before keyup fires
+        // 3. keyup fires → fix must use _lastInputEventValue ('B'), not el.value ('Apple')
+        // Without the fix, el.value='Apple' is used as currentNativeValue and autocomplete
+        // searches for options matching 'Apple', producing 'AppBana'-style output.
+
+        const el = (<any>directive)._elementRef.nativeElement;
+
+        // Step 1: fire a real input event so _lastInputEventValue is populated with 'B'
+        el.value = 'B';
+        el.setSelectionRange(1, 1);
+        el.dispatchEvent(new InputEvent('input', { bubbles: true, inputType: 'insertText', data: 'B' }));
+
+        // Step 2: NgModel re-pushes stale 'Apple' (simulates the race — CD hasn't cleared yet)
+        el.value = 'Apple';
+        directive.inputText = 'Apple';
+
+        // Step 3: keyup arrives — directive must use _lastInputEventValue ('B'), not el.value ('Apple')
+        directive._handleKeyboardEvent(<any>{ preventDefault: () => {}, key: 'b' });
+
+        // 'B' matches 'Banana' — should autocomplete to 'Banana', not search from 'Apple'
+        expect(el.value).toBe('Banana');
+        // Selection starts at 1 (length of 'B'), not 5 (length of stale 'Apple')
+        expect(el.selectionStart).toBe(1);
+        expect(el.selectionEnd).toBe(6);
+    });
 });

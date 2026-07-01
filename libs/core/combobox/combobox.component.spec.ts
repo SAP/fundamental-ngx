@@ -709,4 +709,264 @@ describe('ComboboxComponent', () => {
             expect(component.getValue()).toBe('someValue');
         });
     });
+
+    describe('click-outside parity with Tab out', () => {
+        interface FruitItem {
+            displayedValue: string;
+            value: string;
+        }
+
+        const kiwiItem: FruitItem = { displayedValue: 'Kiwi', value: 'KiwiValue' };
+        const bananaItem: FruitItem = { displayedValue: 'Banana', value: 'BananaValue' };
+
+        /** Sets both the component inputText and the native DOM input value so handleBlur() sees the correct text. */
+        function setInputText(cmp: ComboboxComponent, fix: ComponentFixture<ComboboxComponent>, value: string): void {
+            cmp.inputText = value;
+            const nativeInput = fix.nativeElement.querySelector('input');
+            if (nativeInput) {
+                nativeInput.value = value;
+            }
+            fix.detectChanges();
+        }
+
+        beforeEach(() => {
+            fixture = TestBed.createComponent(ComboboxComponent<FruitItem>);
+            component = fixture.componentInstance;
+            component.dropdownValues = [kiwiItem, bananaItem];
+            component.displayFn = (item: FruitItem): string => item?.displayedValue ?? '';
+            component.searchFn = () => {};
+            fixture.detectChanges();
+        });
+
+        it('1.1 objects mode closeAndSelect: outside-click reverts invalid text to last valid selection (Tab-out parity)', () => {
+            component.communicateByObject = true;
+            fixture.detectChanges();
+
+            // Select Kiwi — _value = kiwiItem, inputText = 'Kiwi'
+            component.onMenuClickHandler(kiwiItem);
+            expect(component.getValue()).toBe(kiwiItem);
+            expect(component.inputText).toBe('Kiwi');
+
+            // Re-open popover to simulate the state where user types into an open dropdown
+            component.isOpenChangeHandle(true);
+
+            // User types invalid text → _value becomes null via _propagateChange
+            setInputText(component, fixture, 'Kiwi123');
+            expect(component.getValue()).toBeNull();
+            expect(component.inputText).toBe('Kiwi123');
+
+            // Simulate click-outside: mousedown on document (outside the combobox host)
+            document.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
+            fixture.detectChanges();
+
+            // Expected (Tab-out parity): inputText reverts to 'Kiwi' (last valid selection) and value restores
+            expect(component.inputText).toBe('Kiwi');
+            expect(component.getValue()).toBe(kiwiItem);
+        });
+
+        it('1.2 objects mode close strategy: outside-click also reverts invalid text (Tab-out parity)', () => {
+            component.communicateByObject = true;
+            component.tabOutStrategy = 'close';
+            fixture.detectChanges();
+
+            // Select Kiwi — _value = kiwiItem, inputText = 'Kiwi'
+            component.onMenuClickHandler(kiwiItem);
+            expect(component.getValue()).toBe(kiwiItem);
+
+            // Re-open and type invalid text
+            component.isOpenChangeHandle(true);
+            setInputText(component, fixture, 'Kiwi123');
+            expect(component.getValue()).toBeNull();
+
+            // Simulate click-outside via mousedown on document
+            document.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
+            fixture.detectChanges();
+
+            // Expected (Tab-out parity with 'close' strategy): inputText reverts to 'Kiwi'
+            expect(component.inputText).toBe('Kiwi');
+            expect(component.getValue()).toBe(kiwiItem);
+        });
+
+        it('1.3 display-value mode: click-outside and Tab out are already equivalent (regression guard)', () => {
+            // No communicateByObject — _value is always the typed text
+            component.dropdownValues = ['Kiwi', 'Banana'];
+            component.displayFn = (item: any): string => item ?? '';
+            fixture.detectChanges();
+
+            // Select Kiwi
+            component.onMenuClickHandler('Kiwi');
+            expect(component.getValue()).toBe('Kiwi');
+
+            // Re-open and type extra chars — in display-value mode _value = typed text (truthy)
+            component.isOpenChangeHandle(true);
+            setInputText(component, fixture, 'Kiwi123');
+            expect(component.getValue()).toBe('Kiwi123');
+
+            // Simulate click-outside — in display-value mode _value is truthy so _close() keeps inputText
+            component.isOpenChangeHandle(false);
+
+            // Both Tab and click-outside should leave inputText as 'Kiwi123' in display-value mode
+            expect(component.inputText).toBe('Kiwi123');
+            expect(component.getValue()).toBe('Kiwi123');
+        });
+
+        it('1.4 should not revert input value when user re-focuses a populated combobox to edit it', () => {
+            component.communicateByObject = true;
+            fixture.detectChanges();
+
+            // Step 1: user picks Kiwi via item click
+            component.onMenuClickHandler(kiwiItem);
+            expect(component.getValue()).toBe(kiwiItem);
+            expect(component.inputText).toBe('Kiwi');
+
+            // Step 2: user clicks the input to start editing — triggers focus → _syncDomValueToModel
+            // Simulate via handleAutoComplete with the existing text (no forceClose)
+            component.handleAutoComplete({ term: 'Kiwi', forceClose: false });
+            expect(component.inputText).toBe('Kiwi');
+
+            // Step 3: user types '123' appended to the existing text
+            component.isOpenChangeHandle(true);
+            setInputText(component, fixture, 'Kiwi123');
+            // _propagateChange fires — form value becomes null (no match)
+            expect(component.getValue()).toBeNull();
+
+            // Step 4: user is still in the field (popover open), mid-edit — NO outside click here.
+            // The popover is open; nothing should revert the input.
+            expect(component.inputText).toBe('Kiwi123');
+        });
+
+        it('1.5 should preserve accepted autocomplete term when forceClose fires', () => {
+            component.communicateByObject = true;
+            fixture.detectChanges();
+
+            // Prime the native DOM value to match what the AutoCompleteDirective would have written
+            // before calling handleAutoComplete — without this, _syncDomValueToModel reads '' and reverts
+            setInputText(component, fixture, 'Kiwi');
+
+            // Simulate autocomplete accepting 'Kiwi' with forceClose
+            component.handleAutoComplete({ term: 'Kiwi', forceClose: true });
+
+            // inputText must remain 'Kiwi' — the autocomplete acceptance is a controlled close
+            // and must NOT trigger _close()'s revert logic
+            expect(component.inputText).toBe('Kiwi');
+        });
+
+        it('1.6 should not revert input value when user re-focuses a populated combobox to edit it (v3 regression)', () => {
+            component.communicateByObject = true;
+            fixture.detectChanges();
+
+            // Step 1: pick Kiwi — _value = kiwiItem, inputText = 'Kiwi', DOM = 'Kiwi'
+            component.onMenuClickHandler(kiwiItem);
+            expect(component.getValue()).toBe(kiwiItem);
+            expect(component.inputText).toBe('Kiwi');
+
+            // Step 2: simulate re-focus click on the input
+            const inputEl: HTMLInputElement = fixture.nativeElement.querySelector('input');
+            inputEl.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+            inputEl.dispatchEvent(new FocusEvent('focus', { bubbles: true }));
+            fixture.detectChanges();
+
+            // Step 3: user types '123' — model stays at 'Kiwi' + '123' = 'Kiwi123'
+            // Use setInputText so both model and DOM are in sync (as typing would do)
+            setInputText(component, fixture, 'Kiwi123');
+
+            // _propagateChange fires — form value becomes null (no match for 'Kiwi123')
+            expect(component.getValue()).toBeNull();
+
+            // inputText must stay 'Kiwi123' — re-focusing must not have reverted it
+            expect(component.inputText).toBe('Kiwi123');
+        });
+
+        it('1.7 should call _close on mousedown outside the combobox host (v3 outside-click subscription)', () => {
+            component.communicateByObject = true;
+            fixture.detectChanges();
+
+            // Pick Kiwi, then open popover and set invalid text
+            component.onMenuClickHandler(kiwiItem);
+            component.isOpenChangeHandle(true);
+            setInputText(component, fixture, 'Kiwi123');
+            expect(component.getValue()).toBeNull();
+            expect(component.open).toBe(true);
+
+            // Dispatch mousedown on document.body — genuine outside-click
+            document.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
+            fixture.detectChanges();
+
+            // _close() should have fired → inputText reverts to 'Kiwi', value reverts to kiwiItem
+            expect(component.inputText).toBe('Kiwi');
+            expect(component.getValue()).toBe(kiwiItem);
+        });
+
+        it('1.8 should NOT call _close on mousedown inside the combobox host', () => {
+            component.communicateByObject = true;
+            fixture.detectChanges();
+
+            // Pick Kiwi, then open popover and set invalid text
+            component.onMenuClickHandler(kiwiItem);
+            component.isOpenChangeHandle(true);
+            setInputText(component, fixture, 'Kiwi123');
+            expect(component.getValue()).toBeNull();
+            expect(component.open).toBe(true);
+
+            // Dispatch mousedown on the combobox's input (inside host)
+            const inputEl = fixture.nativeElement.querySelector('input');
+            inputEl.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
+            fixture.detectChanges();
+
+            // No revert — click was inside the host
+            expect(component.inputText).toBe('Kiwi123');
+            expect(component.getValue()).toBeNull();
+        });
+
+        it('1.9 should revert input on outside-click when popover is already closed (no-match auto-close)', () => {
+            component.communicateByObject = true;
+            fixture.detectChanges();
+
+            // Step 1: pick Kiwi via item click — _value = kiwiItem, inputText = 'Kiwi'
+            component.onMenuClickHandler(kiwiItem);
+            expect(component.getValue()).toBe(kiwiItem);
+            expect(component.inputText).toBe('Kiwi');
+
+            // Step 2: mimic "user typed Kiwi123 → no matches → popover auto-closed"
+            // The popover is already closed; dirty text remains in the input.
+            component.open = false;
+            setInputText(component, fixture, 'Kiwi123');
+            component.displayedValues = [];
+            fixture.detectChanges();
+
+            expect(component.open).toBe(false);
+            expect(component.inputText).toBe('Kiwi123');
+            // _propagateChange set value to null because 'Kiwi123' matches nothing
+            expect(component.getValue()).toBeNull();
+
+            // Step 3: user clicks outside — should revert even though popover is already closed
+            document.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
+            fixture.detectChanges();
+
+            expect(component.inputText).toBe('Kiwi');
+            expect(component.getValue()).toBe(kiwiItem);
+        });
+
+        it('1.10 should NOT revert when input already matches the model (no-op dirty gate)', () => {
+            component.communicateByObject = true;
+            fixture.detectChanges();
+
+            // Pick Kiwi — input is 'Kiwi', _value is kiwiItem, popover closes
+            component.onMenuClickHandler(kiwiItem);
+            expect(component.getValue()).toBe(kiwiItem);
+            expect(component.inputText).toBe('Kiwi');
+            expect(component.open).toBe(false);
+
+            // Spy on _close before dispatching — it must NOT be called
+            const closeSpy = jest.spyOn(component as any, '_close');
+
+            // Click outside — input matches model, dirty-check must short-circuit
+            document.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
+            fixture.detectChanges();
+
+            expect(closeSpy).not.toHaveBeenCalled();
+            expect(component.inputText).toBe('Kiwi');
+            expect(component.getValue()).toBe(kiwiItem);
+        });
+    });
 });

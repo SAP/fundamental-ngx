@@ -68,6 +68,9 @@ Thumbs.db
 .cursor/rules/nx-rules.mdc
 .github/instructions/nx.instructions.md
 
+# mcp-server generated catalog (generated on release via extract-metadata)
+libs/mcp-server/src/data/components.json
+
 # generation
 libs/ui5-webcomponents/**/
 libs/ui5-webcomponents/index.ts
@@ -89,3 +92,7 @@ libs/ui5-webcomponents-fiori/index.ts
 /test-results/
 /test-results-*/
 /blob-report*/
+# generated at test-time by globalSetup — not committed
+apps/e2e-harness/e2e/config/e2e.routes.json
+# generated before build by NX generate-routes target — not committed
+apps/e2e-harness/src/app/app.routes.generated.ts

@@ -2,7 +2,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    DestroyRef,
+    effect,
     ElementRef,
     EventEmitter,
     Input,
@@ -11,13 +11,11 @@ import {
     Output,
     SimpleChanges,
     ViewChild,
-    ViewEncapsulation,
-    inject
+    ViewEncapsulation
 } from '@angular/core';
 
 import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { CalendarService } from '../calendar.service';
@@ -212,9 +210,6 @@ export class CalendarHeaderComponent<D> implements OnInit, OnChanges {
         return this.viewId + '-select-years-range-aria-label';
     }
 
-    /** @hidden  */
-    private readonly _destroyRef = inject(DestroyRef);
-
     /** Month names */
     private _monthNames: string[] = [];
 
@@ -222,11 +217,23 @@ export class CalendarHeaderComponent<D> implements OnInit, OnChanges {
     private _amountOfYearsPerPeriod = 1;
 
     /** @hidden */
+    private _initiated = false;
+
+    /** @hidden */
     constructor(
         private _changeDetRef: ChangeDetectorRef,
         private _calendarService: CalendarService,
         private _dateTimeAdapter: DatetimeAdapter<D>
-    ) {}
+    ) {
+        effect(() => {
+            this._dateTimeAdapter.locale();
+            if (this._initiated) {
+                this._calculateMonthNames();
+                this._calculateLabels();
+                this._changeDetRef.markForCheck();
+            }
+        });
+    }
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
@@ -240,13 +247,12 @@ export class CalendarHeaderComponent<D> implements OnInit, OnChanges {
 
     /** @hidden */
     ngOnInit(): void {
+        this._initiated = true;
         this._calendarService.leftArrowId = this._prevButtonId;
 
         this._calculateMonthNames();
 
         this._calculateLabels();
-
-        this._listenToLocaleChanges();
     }
 
     /**
@@ -265,15 +271,6 @@ export class CalendarHeaderComponent<D> implements OnInit, OnChanges {
         this.activeView = type === this.activeView ? FdCalendarViewEnum.Day : type;
 
         this.activeViewChange.emit(this.activeView);
-    }
-
-    /** @hidden */
-    private _listenToLocaleChanges(): void {
-        this._dateTimeAdapter.localeChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
-            this._calculateMonthNames();
-            this._calculateLabels();
-            this._changeDetRef.markForCheck();
-        });
     }
 
     /** @hidden */

@@ -1,15 +1,26 @@
-import { Inject, Injectable, InjectionToken, LOCALE_ID, Optional } from '@angular/core';
+import { inject, Injectable, InjectionToken, LOCALE_ID } from '@angular/core';
 import dayjs, { ConfigType, Dayjs } from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import isBetween from 'dayjs/plugin/isBetween';
 import localeData from 'dayjs/plugin/localeData';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
 import objectSupport from 'dayjs/plugin/objectSupport';
+import relativeTime from 'dayjs/plugin/relativeTime';
 import utc from 'dayjs/plugin/utc';
 import weekOfYear from 'dayjs/plugin/weekOfYear';
 
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
+import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
+
+// Load plugins once at module level instead of per-instance in the constructor
+dayjs.extend(localeData);
+dayjs.extend(weekOfYear);
+dayjs.extend(utc);
+dayjs.extend(isBetween);
+dayjs.extend(objectSupport);
+dayjs.extend(localizedFormat);
+dayjs.extend(customParseFormat);
+dayjs.extend(relativeTime);
 
 function range<T>(length: number, mapFn: (index: number) => T): T[] {
     return Array.from(new Array(length)).map((_, index) => mapFn(index));
@@ -51,25 +62,20 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
     private _localeData: DateLocale;
 
     /** @hidden */
-    constructor(
-        @Optional() @Inject(LOCALE_ID) localeId: string,
-        @Optional() @Inject(DAYJS_DATE_TIME_ADAPTER_OPTIONS) private _options?: DayjsDatetimeAdapterOptions
-    ) {
+    private readonly _options = inject(DAYJS_DATE_TIME_ADAPTER_OPTIONS, { optional: true });
+
+    /** @hidden */
+    constructor() {
         super();
 
-        dayjs.extend(localeData);
-        dayjs.extend(weekOfYear);
-        dayjs.extend(utc);
-        dayjs.extend(isBetween);
-        dayjs.extend(objectSupport);
-        dayjs.extend(localizedFormat);
-        dayjs.extend(customParseFormat);
-
+        const localeId = inject(LOCALE_ID, { optional: true });
         this.setLocale(localeId || dayjs.locale());
     }
 
-    /** @hiden */
-    fromNow?(date: dayjs.Dayjs): string;
+    /** @hidden */
+    fromNow(date: Dayjs): string {
+        return date.locale(this.locale()).fromNow();
+    }
 
     /** Set locale */
     setLocale(locale: string): void {
@@ -77,24 +83,28 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
             // Handle English locale name as it's a default one and it is different
             locale = 'en';
         }
-        dayjs.locale(locale);
 
-        if (dayjs.locale() !== locale) {
-            throw new Error(
-                `Failed to load locale ${locale}. ` +
+        if (!dayjs.Ls[locale]) {
+            console.warn(
+                `Failed to load locale ${locale}. Falling back to 'en'. ` +
                     'Make sure it exists and is preloaded. See the imports at the top of the example file at ' +
-                    'https://sap.github.io/fundamental-ngx/#/core/dayjs-datetime-adapter' +
+                    'https://sap.github.io/fundamental-ngx/#/core/dayjs-datetime-adapter ' +
                     'List of supported locales can be found here: https://github.com/iamkun/dayjs/tree/dev/src/locale.'
             );
+            locale = 'en';
         }
 
-        this._dayjsLocaleData = dayjs.localeData();
+        // Use a temporary instance to read locale data without mutating global dayjs state.
+        this._dayjsLocaleData = dayjs().locale(locale).localeData();
 
         this._localeData = {
             firstDayOfWeek: this._dayjsLocaleData.firstDayOfWeek(),
             longMonths: this._dayjsLocaleData.months(),
             shortMonths: this._dayjsLocaleData.monthsShort(),
-            narrowMonths: this._dayjsLocaleData.months().map((name: string) => name.charAt(0)),
+            narrowMonths: (() => {
+                const dtf = new Intl.DateTimeFormat(locale, { month: 'narrow' });
+                return range(12, (i) => dtf.format(new Date(2017, i, 1)));
+            })(),
             longDaysOfWeek: this._dayjsLocaleData.weekdays(),
             shortDaysOfWeek: this._dayjsLocaleData.weekdaysShort(),
             narrowDaysOfWeek: this._dayjsLocaleData.weekdaysMin()
@@ -173,7 +183,7 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
 
     /** Get date names */
     getDateNames(): string[] {
-        return range(31, (i) => this.createDate(2017, 0, i + 1).format('D'));
+        return range(31, (i) => this.createDate(2017, 1, i + 1).format('D'));
     }
 
     /** Get days of week names */
@@ -196,7 +206,7 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
 
     /** Get week name */
     getWeekName(date: Dayjs): string {
-        return date.week().toLocaleString(this.locale);
+        return date.week().toLocaleString(this.locale());
     }
 
     /** Get hour names */
@@ -251,13 +261,26 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
     /** Try to parse a string to a date object */
     parse(value: any, parseFormat: string = ''): Dayjs | null {
         if (value && typeof value === 'string') {
-            return this._createDayjsDate(value, parseFormat);
-        } else if (value instanceof FdDate) {
-            // FdDate instance may be incorrectly parsed by DayJS
-            value = value.toString();
+            return this._createDayjsDate(value, parseFormat).locale(this.locale());
         }
 
-        return value ? this._createDayjsDate(value).locale(this.locale) : null;
+        // If value is a non-Date object with a toString() method (e.g. FdDate),
+        // convert to string first to avoid misinterpretation by dayjs objectSupport plugin
+        // (which uses 0-based months and 'date' instead of 'day').
+        if (
+            value &&
+            typeof value === 'object' &&
+            !(value instanceof Date) &&
+            !dayjs.isDayjs(value) &&
+            typeof value.toString === 'function'
+        ) {
+            const str = value.toString();
+            if (str && str !== '[object Object]') {
+                return this._createDayjsDate(str, parseFormat || undefined).locale(this.locale());
+            }
+        }
+
+        return value ? this._createDayjsDate(value).locale(this.locale()) : null;
     }
 
     /** Format a date as a string */
@@ -267,19 +290,26 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
         }
 
         if (!this.isValid(date)) {
-            throw Error('DayjsDateTimeAdapter: Cannot format invalid date.');
+            throw Error('DayjsDatetimeAdapter: Cannot format invalid date.');
         }
 
-        return date.locale(dayjs.locale()).format(displayFormat);
+        return date.locale(this.locale()).format(displayFormat);
     }
 
     /** Create date object from values */
     createDate(year: number, month?: number, date?: number): Dayjs {
-        const result = this._createDayjsDate(
-            typeof month === 'number' && typeof date === 'number' ? new Date(year, month - 1, date) : `${year}`,
-            undefined,
-            true
-        );
+        const { useUtc }: DayjsDatetimeAdapterOptions = this._options || {};
+
+        let result: Dayjs;
+        if (typeof month === 'number' && typeof date === 'number') {
+            // Build date from components. Use string format to avoid timezone shift
+            // when useUtc is true (passing native Date to dayjs.utc() reads UTC millis,
+            // which differs from local midnight by the timezone offset).
+            const dateStr = `${year}-${String(month).padStart(2, '0')}-${String(date).padStart(2, '0')}`;
+            result = useUtc ? dayjs.utc(dateStr, 'YYYY-MM-DD', true) : dayjs(new Date(year, month - 1, date));
+        } else {
+            result = this._createDayjsDate(`${year}`);
+        }
 
         if (!result.isValid()) {
             throw Error(`Invalid date "${date}" for month with index "${month}" and year "${year}".`);
@@ -290,12 +320,12 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
 
     /** Get today */
     today(): Dayjs {
-        return this._createDayjsDate().locale(this.locale).startOf('day');
+        return this._createDayjsDate().locale(this.locale()).startOf('day');
     }
 
     /** Get now */
     now(): Dayjs {
-        return this._createDayjsDate().locale(this.locale);
+        return this._createDayjsDate().locale(this.locale());
     }
 
     /** Add years to date */
@@ -316,11 +346,11 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
     /** Clone date */
     clone(date: Dayjs): Dayjs {
         if (!date) {
-            return date;
+            throw new Error('DayjsDatetimeAdapter: Cannot clone a null/undefined date.');
         }
 
-        if (this.locale) {
-            return date.clone().locale(this.locale);
+        if (this.locale()) {
+            return date.clone().locale(this.locale());
         }
 
         return date.clone();
@@ -359,9 +389,9 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
         return !!date?.isValid();
     }
 
-    /** Convert date to ISO8601 string */
+    /** {@inheritDoc DatetimeAdapter.toIso8601} */
     toIso8601(date: Dayjs): string {
-        return date.toISOString();
+        return date.format('YYYY-MM-DDTHH:mm:ss');
     }
 
     /** Check if time format includes day period */
@@ -396,10 +426,10 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
      * @hidden
      * will attempt to parse longDataFormat (e.g. "L", "LT") and convert it to simple one.
      */
-    _prepareFormat(displayFormat: string): string {
+    private _prepareFormat(displayFormat: string): string {
         displayFormat = displayFormat.trim();
         try {
-            const formats: object = dayjs.Ls[dayjs.locale()].formats;
+            const formats: object = dayjs.Ls[this.locale()].formats;
             // this is the regular expression to parse format taken from dayjs repo
             // https://github.com/iamkun/dayjs/blob/dev/src/plugin/localizedFormat/utils.js
             return displayFormat.replace(
@@ -412,38 +442,106 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
     }
 
     /** @hidden */
-    _createDayjsDate(date?: ConfigType, format?: string, ignoreUtc = false): Dayjs {
+    private _createDayjsDate(date?: ConfigType, format?: string): Dayjs {
         const { strict, useUtc }: DayjsDatetimeAdapterOptions = this._options || {};
-        const method = useUtc && !ignoreUtc ? dayjs.utc : dayjs;
+        const method = useUtc ? dayjs.utc : dayjs;
 
         if (typeof date === 'string' && format) {
-            const fallbackFormats = [
-                format, // original
-                format.replace(/ ?[Hh]:?mm[aA]?/, ''), // remove time
-                format.replace(/ ?[Hh]:?mm/, ''), // remove time (no meridiem),
-                format.replace(/h:mm ?[aA]/, 'HH:mm'),
-                format.replace(/h:mm ?[aA]/, 'H:mm'),
-                format.replace(/HH:mm ?[aA]/, 'HH:mm'),
-                format.replace(/H:mm ?[aA]/, 'H:mm'),
-                'L',
-                dayjs.Ls[dayjs.locale()].formats['L'],
-                'DD/MM/YYYY',
-                // Only fall back to ISO format when the string actually starts with a 4-digit year,
-                // otherwise a US-locale string like "5/25/2025 15:30" gets mis-parsed as a valid
-                // ISO date with the wrong year and hour=0 (the original bug).
-                ...(typeof date === 'string' && /^\d{4}-/.test(date) ? ['YYYY-MM-DD'] : [])
-            ];
+            // Expand localized format tokens (e.g. 'L', 'LT') using the instance
+            // locale so that parsing does not depend on the global dayjs locale.
+            const expandedFormat = this._prepareFormat(format);
+
+            // Normalize 12h patterns (h:mm A, hh:mm A, h:mm a, etc.) to 24h (HH:mm).
+            // Also strip stray AM/PM marker from already-uppercase HH patterns (HH:mm A → HH:mm).
+            // This handles inputs where convertToDesiredFormat already stripped AM/PM
+            // and converted to 24h before parse() was called (e.g. '14:30' against 'h:mm A').
+            const normalized24h = expandedFormat
+                .replace(/h{1,2}(:mm(?::ss)?) ?[aA]/g, 'HH$1') // lowercase h → HH
+                .replace(/(HH?)(:mm(?::ss)?) ?[aA]/g, 'HH$2'); // uppercase HH + stray A → HH
+
+            // Lenient variants accept single-digit M/D. dayjs's MM/DD requires
+            // exactly 2 digits even in non-strict mode, so unpadded user input
+            // (e.g. "10/7/2025", "7.10.2025") fails without these.
+            const lenient = expandedFormat.replace(/M{2,}/g, 'M').replace(/D{2,}/g, 'D');
+            const lenient24h = normalized24h.replace(/M{2,}/g, 'M').replace(/D{2,}/g, 'D');
+
+            const rawFormats: string[] = [
+                expandedFormat, // original (expanded)
+                normalized24h, // 24h variant for inputs where AM/PM was pre-stripped
+                expandedFormat.replace(/ ?[Hh]{1,2}:?mm(?::?ss)?(?: ?[aA])?/, '').trim(), // remove time
+                dayjs.Ls[this.locale()]?.formats?.['L'],
+                lenient,
+                lenient24h,
+                'YYYY-MM-DD'
+            ].filter((f): f is string => !!f);
+
+            // Deduplicate to avoid trying the same format twice
+            const fallbackFormats = [...new Set(rawFormats)];
 
             for (const f of fallbackFormats) {
-                const tryParsed = method(date, f, strict);
-                if (tryParsed.isValid()) {
-                    return tryParsed;
+                // Try strict first to reject overflow values (month 13, day 45, etc.)
+                const strictParsed = method(date, f, true);
+                if (strictParsed.isValid()) {
+                    return strictParsed;
+                }
+                // If strict fails and global strict is disabled, try non-strict
+                // to handle separator differences (e.g. '/' vs '.')
+                if (!strict) {
+                    const looseParsed = method(date, f, false);
+                    if (looseParsed.isValid() && this._hasNoOverflow(date, looseParsed, f)) {
+                        return looseParsed;
+                    }
                 }
             }
+
+            // No format matched — return an invalid date
+            return method(null);
         }
 
         const parsed = method(date, format, strict);
         return parsed;
+    }
+
+    /**
+     * @hidden
+     * Checks that non-strict parsing didn't wrap overflow values.
+     * Re-formats the parsed date with the same format and compares numeric segments
+     * positionally against the input. This catches cases like '2026-13-45' being
+     * silently wrapped to '2027-02-14'.
+     * Skipped for time-only formats that don't include date components.
+     */
+    private _hasNoOverflow(input: string, parsed: Dayjs, format: string): boolean {
+        // Expand localized format tokens (e.g. 'L' → 'MM/DD/YYYY') before checking
+        const expandedFormat = this._prepareFormat(format);
+
+        // If the format is time-only (no date components), check time overflow too
+        if (!expandedFormat.match(/[YMDd]/)) {
+            const timeReformatted = parsed.format(expandedFormat);
+            const timeInputNums = input.match(/\d+/g) ?? [];
+            const timeOutputNums = timeReformatted.match(/\d+/g) ?? [];
+
+            // If format includes meridiem, hour can legitimately differ (10 PM → 22).
+            // Only compare minute/second segments (skip first digit = hour).
+            if (expandedFormat.match(/[aA]/)) {
+                return (
+                    timeInputNums.length === timeOutputNums.length &&
+                    timeInputNums.slice(1).every((n, i) => n === timeOutputNums[i + 1])
+                );
+            }
+
+            // Otherwise compare all numeric segments positionally
+            return (
+                timeInputNums.length === timeOutputNums.length && timeInputNums.every((n, i) => n === timeOutputNums[i])
+            );
+        }
+
+        // Re-format the parsed date and compare numeric segments positionally
+        const reformatted = parsed.format(expandedFormat);
+        const inputNums = input.match(/\d+/g) ?? [];
+        const outputNums = reformatted.match(/\d+/g) ?? [];
+
+        // Compare each numeric segment — if any differ, the parse wrapped an overflow
+        return inputNums.length === outputNums.length && inputNums.every((n, i) => n === outputNums[i]);
     }
 }
 

@@ -26,6 +26,11 @@
                 <div fd-user-menu-subline>User Experience Designer</div>
                 <div fd-user-menu-subline>Primary Employment</div>
             </div>
+            <div fd-user-menu-header-content-area>
+                <fd-message-strip type="information" [dismissible]="false">
+                    This is an information message.
+                </fd-message-strip>
+            </div>
             <button fd-button label="Manage Account" glyph="user-settings" ariaLabel="Manage Account"></button>
         </div>
         <div fd-user-menu-content-container>
@@ -109,7 +114,32 @@
                         iconAfterActive
                         (click)="actionPicked('Sub-menu Item 1')"
                     ></li>
-                    <li fd-user-menu-list-item text="Sub-menu Item" (click)="actionPicked('Sub-menu Item 2')"></li>
+                    <li
+                        fd-user-menu-list-item
+                        text="Sub-menu Item"
+                        (click)="actionPicked('Sub-menu Item 2')"
+                        hasSubmenu
+                        [submenu]="secondMenuSublist"
+                    ></li>
+                </div>
+            </ng-template>
+
+            <ng-template #secondMenuSublist>
+                <div fd-user-menu-sublist hasIcons>
+                    <li
+                        fd-user-menu-list-item
+                        icon="card"
+                        text="Second Level Item 1"
+                        subtitle="Second Level Subtitle"
+                        iconAfter="accept"
+                        iconAfterActive
+                        (click)="actionPicked('Second Sub-menu Item 1')"
+                    ></li>
+                    <li
+                        fd-user-menu-list-item
+                        text="Second Level Item 2"
+                        (click)="actionPicked('Second Sub-menu Item 2')"
+                    ></li>
                 </div>
             </ng-template>
         </div>

@@ -1,0 +1,23 @@
+<p>
+    Use <code>[bodyRole]="region"</code> (or <code>null</code>) when the popover is a non-modal disclosure rather than a
+    dialog. Match the role to the popover's actual ARIA semantics.
+</p>
+
+<fd-popover [bodyRole]="'region'" [bodyAriaLabel]="'Quick filters'">
+    <fd-popover-control>
+        <button class="fd-button" aria-haspopup="true">Show Filters</button>
+    </fd-popover-control>
+    <fd-popover-body>
+        <div class="fd-popover__wrapper" style="padding: 1rem; min-width: 200px">
+            <h3 class="fd-title fd-title--h5" style="margin-top: 0">Quick Filters</h3>
+            <label class="fd-checkbox">
+                <input type="checkbox" class="fd-checkbox__input" />
+                <span class="fd-checkbox__label">Active items only</span>
+            </label>
+            <label class="fd-checkbox">
+                <input type="checkbox" class="fd-checkbox__input" />
+                <span class="fd-checkbox__label">Show archived</span>
+            </label>
+        </div>
+    </fd-popover-body>
+</fd-popover>

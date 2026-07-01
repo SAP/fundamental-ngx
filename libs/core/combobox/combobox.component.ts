@@ -18,6 +18,7 @@ import {
     Component,
     ContentChild,
     ContentChildren,
+    DestroyRef,
     ElementRef,
     EventEmitter,
     Injector,
@@ -33,8 +34,10 @@ import {
     ViewContainerRef,
     ViewEncapsulation,
     forwardRef,
+    inject,
     input
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription, fromEvent } from 'rxjs';
 
@@ -358,7 +361,7 @@ export class ComboboxComponent<T = any>
     byline = false;
 
     /**
-     * Action to perform when user shifts focus from the dropdown.
+     * Action to perform when the user shifts focus away from the dropdown (Tab or click outside).
      * - `close` will close the dropdown preserving previously selected value.
      * - `closeAndSelect` will close the dropdown and select last focused dropdown item.
      */
@@ -474,6 +477,13 @@ export class ComboboxComponent<T = any>
     /** @hidden */
     private _value: any;
 
+    /** Last value confirmed by an explicit selection (item click) or external writeValue. */
+    private _lastConfirmedValue: any;
+
+    private readonly _elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+
+    private readonly _destroyRef = inject(DestroyRef);
+
     /** @hidden */
     constructor(
         private readonly _overlay: Overlay,
@@ -485,6 +495,26 @@ export class ComboboxComponent<T = any>
         readonly _contentDensityObserver: ContentDensityObserver
     ) {
         this._repositionScrollStrategy = this._overlay.scrollStrategies.reposition({ autoClose: true });
+
+        fromEvent<MouseEvent>(document, 'mousedown')
+            .pipe(takeUntilDestroyed(this._destroyRef))
+            .subscribe((event) => {
+                if (!this.closeOnOutsideClick) {
+                    return;
+                }
+                const target = event.target as Node;
+                if (this._elementRef.nativeElement.contains(target)) {
+                    return;
+                }
+                const overlayPane = this._popoverOverlayPane();
+                if (overlayPane?.contains(target)) {
+                    return;
+                }
+                if (!this._isInputDirtyVsModel()) {
+                    return;
+                }
+                this._close();
+            });
     }
 
     /** @hidden */
@@ -603,6 +633,7 @@ export class ComboboxComponent<T = any>
     dialogDismiss(term: any): void {
         this.inputText = this.displayFn(term);
         this.setValue(term);
+        this._lastConfirmedValue = term;
         this.isOpenChangeHandle(false);
     }
 
@@ -673,6 +704,7 @@ export class ComboboxComponent<T = any>
             this.searchInputElement.nativeElement.value = this.inputTextValue;
         }
 
+        this._lastConfirmedValue = valueToDisplay;
         this._cdRef.markForCheck();
     }
 
@@ -789,7 +821,9 @@ export class ComboboxComponent<T = any>
 
     /** @hidden */
     _close(): void {
-        this.inputText = this._value ? this.inputText : '';
+        const revertText = this._lastConfirmedValue != null ? this.displayFn(this._lastConfirmedValue) : '';
+        this.inputText = revertText;
+        this.searchInputElement.nativeElement.value = revertText;
         if (this.tabOutStrategy === 'closeAndSelect') {
             const focusedItem = this.listComponent.getActiveItem();
             if (focusedItem && !this.inputText) {
@@ -805,6 +839,20 @@ export class ComboboxComponent<T = any>
     isSelected(term: any): boolean {
         const termValue = this.communicateByObject ? term : this.displayFn(term);
         return this.getValue() === termValue;
+    }
+
+    /** @hidden */
+    private _popoverOverlayPane(): Element | null {
+        // The combobox template sets additionalBodyClass="fd-popover-custom-list" on the popover body.
+        // That class is placed inside the .cdk-overlay-pane by the CDK overlay portal.
+        // Walking up finds the pane, which contains all dropdown list content.
+        return document.querySelector('.fd-popover-custom-list')?.closest('.cdk-overlay-pane') ?? null;
+    }
+
+    /** @hidden */
+    private _isInputDirtyVsModel(): boolean {
+        const expected = this._lastConfirmedValue != null ? this.displayFn(this._lastConfirmedValue) : '';
+        return this.inputText !== expected;
     }
 
     /** Method that picks other value moved from current one by offset, called only when combobox is closed */
@@ -858,6 +906,7 @@ export class ComboboxComponent<T = any>
         if (this.closeOnSelect && shouldClosePopover) {
             this.isOpenChangeHandle(false);
         }
+        this._lastConfirmedValue = term;
         if (this.fillOnSelect) {
             this.setValue(term);
             this.inputText = this.displayFn(term);

@@ -13,11 +13,10 @@
 </p>
 @if (dismissible()) {
     <button
-        class="fd-message-strip__close"
+        class="fd-message-strip__close fd-button--compact"
         fd-button
         glyph="decline"
         fdType="transparent"
-        fdCompact
         (click)="dismiss()"
         [attr.aria-controls]="id()"
         [ariaLabel]="dismissBtnTitle() || defaultDismissButtonText()"

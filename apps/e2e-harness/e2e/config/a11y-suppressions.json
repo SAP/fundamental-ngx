@@ -249,34 +249,6 @@
             "suppress": ["aria-dialog-name"],
             "reason": "Known violations: aria-dialog-name"
         },
-        "platform/wizard-generator/customizable-embeded": {
-            "suppress": ["aria-dialog-name"],
-            "reason": "fdp-input-message-group popover opened by wizard init focus has role=dialog with no accessible name — tracked in #14260"
-        },
-        "platform/wizard-generator/external-navigation": {
-            "suppress": ["aria-dialog-name"],
-            "reason": "fdp-input-message-group popover opened by wizard init focus has role=dialog with no accessible name — tracked in #14260"
-        },
-        "platform/wizard-generator/onchange": {
-            "suppress": ["aria-dialog-name"],
-            "reason": "fdp-input-message-group popover opened by wizard init focus has role=dialog with no accessible name — tracked in #14260"
-        },
-        "platform/wizard-generator/responsive-paddings": {
-            "suppress": ["aria-dialog-name"],
-            "reason": "fdp-input-message-group popover opened by wizard init focus has role=dialog with no accessible name — tracked in #14260"
-        },
-        "platform/wizard-generator/special-elements": {
-            "suppress": ["aria-dialog-name"],
-            "reason": "fdp-input-message-group popover opened by wizard init focus has role=dialog with no accessible name — tracked in #14260"
-        },
-        "platform/wizard-generator/summary-objects": {
-            "suppress": ["aria-dialog-name"],
-            "reason": "fdp-input-message-group popover opened by wizard init focus has role=dialog with no accessible name — tracked in #14260"
-        },
-        "platform/wizard-generator/visible-summary": {
-            "suppress": ["aria-dialog-name"],
-            "reason": "fdp-input-message-group popover opened by wizard init focus has role=dialog with no accessible name — tracked in #14260"
-        },
         "core/tree/lazily-loaded-tree-items": {
             "suppress": ["aria-treeitem-name"],
             "reason": "Known violations: aria-treeitem-name"
@@ -328,6 +300,26 @@
         "ui5-fiori/media-gallery/media-gallery": {
             "suppress": ["list"],
             "reason": "Known violations: list"
+        },
+        "ui5-fiori/hero-banner/basic": {
+            "suppress": ["landmark-banner-is-top-level"],
+            "reason": "Known violation: ui5-hero-banner renders role=banner internally; upstream UI5 component issue"
+        },
+        "ui5-fiori/hero-banner/columns": {
+            "suppress": ["landmark-banner-is-top-level", "landmark-no-duplicate-banner"],
+            "reason": "Known violation: ui5-hero-banner renders role=banner internally; upstream UI5 component issue"
+        },
+        "ui5-fiori/hero-banner/actions-placement": {
+            "suppress": ["landmark-banner-is-top-level"],
+            "reason": "Known violation: ui5-hero-banner renders role=banner internally; upstream UI5 component issue"
+        },
+        "ui5-fiori/hero-banner/background-image": {
+            "suppress": ["landmark-banner-is-top-level"],
+            "reason": "Known violation: ui5-hero-banner renders role=banner internally; upstream UI5 component issue"
+        },
+        "ui5-fiori/hero-banner/use-cases": {
+            "suppress": ["landmark-banner-is-top-level", "landmark-no-duplicate-banner"],
+            "reason": "Known violation: ui5-hero-banner renders role=banner internally; upstream UI5 component issue"
         }
     }
 }

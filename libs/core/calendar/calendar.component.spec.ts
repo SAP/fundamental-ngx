@@ -287,4 +287,144 @@ describe('CalendarComponent', () => {
         expect(component.selectedMultipleDateRanges[0].start).toBe(invalidDate);
         expect(component.selectedMultipleDateRanges[0].end).toBe(invalidDate2);
     });
+
+    describe('shift-click multi-date selection', () => {
+        beforeEach(() => {
+            component.allowMultipleSelection = true;
+            component.calType = 'single';
+            component.selectedMultipleDates = [];
+            fixture.detectChanges();
+        });
+
+        it('plain click sets anchor and adds date to selection', () => {
+            const emitted: FdDate[][] = [];
+            component.selectedMultipleDatesChange.subscribe((d) => emitted.push(d as FdDate[]));
+
+            component.handleMultiDateAnchorChange(new FdDate(2024, 1, 10));
+            // anchor change alone does not emit — the toggle comes from the day view via selectedMultipleDatesChanged
+            component.selectedMultipleDatesChanged([new FdDate(2024, 1, 10)]);
+
+            expect(emitted.length).toBe(1);
+            expect(emitted[0].length).toBe(1);
+            expect(emitted[0][0]).toEqual(new FdDate(2024, 1, 10));
+        });
+
+        it('shift-click with no anchor is a no-op', () => {
+            const emitted: FdDate[][] = [];
+            component.selectedMultipleDatesChange.subscribe((d) => emitted.push(d as FdDate[]));
+
+            component.handleShiftMultiDateSelected(new FdDate(2024, 1, 15));
+
+            expect(emitted.length).toBe(0);
+        });
+
+        it('shift-click fills all dates between anchor and clicked date', () => {
+            component.handleMultiDateAnchorChange(new FdDate(2024, 1, 10));
+            component.selectedMultipleDates = [new FdDate(2024, 1, 10)];
+
+            const emitted: FdDate[][] = [];
+            component.selectedMultipleDatesChange.subscribe((d) => emitted.push(d as FdDate[]));
+
+            component.handleShiftMultiDateSelected(new FdDate(2024, 1, 14));
+
+            const last = emitted[emitted.length - 1];
+            expect(last.length).toBe(5); // Jan 10, 11, 12, 13, 14
+            [10, 11, 12, 13, 14].forEach((day) => {
+                expect(last.some((d) => d.day === day && d.month === 1 && d.year === 2024)).toBeTrue();
+            });
+        });
+
+        it('shift-click fill merges with pre-existing selection', () => {
+            component.selectedMultipleDates = [new FdDate(2024, 1, 5)];
+            component.handleMultiDateAnchorChange(new FdDate(2024, 1, 10));
+            component.selectedMultipleDates = [new FdDate(2024, 1, 5), new FdDate(2024, 1, 10)];
+
+            const emitted: FdDate[][] = [];
+            component.selectedMultipleDatesChange.subscribe((d) => emitted.push(d as FdDate[]));
+
+            component.handleShiftMultiDateSelected(new FdDate(2024, 1, 12));
+
+            const last = emitted[emitted.length - 1];
+            expect(last.length).toBe(4); // Jan 5 + Jan 10, 11, 12
+            expect(last.some((d) => d.day === 5 && d.month === 1 && d.year === 2024)).toBeTrue();
+        });
+
+        it('shift-click fill works across months (Jan 29 to Feb 2)', () => {
+            component.handleMultiDateAnchorChange(new FdDate(2024, 1, 29));
+            component.selectedMultipleDates = [new FdDate(2024, 1, 29)];
+
+            const emitted: FdDate[][] = [];
+            component.selectedMultipleDatesChange.subscribe((d) => emitted.push(d as FdDate[]));
+
+            component.handleShiftMultiDateSelected(new FdDate(2024, 2, 2));
+
+            const last = emitted[emitted.length - 1];
+            expect(last.length).toBe(5); // Jan 29, 30, 31, Feb 1, Feb 2
+        });
+
+        it('writeValue resets the anchor so shift-click becomes a no-op', () => {
+            component.handleMultiDateAnchorChange(new FdDate(2024, 1, 10));
+            component.writeValue([]);
+
+            const emitted: FdDate[][] = [];
+            component.selectedMultipleDatesChange.subscribe((d) => emitted.push(d as FdDate[]));
+
+            component.handleShiftMultiDateSelected(new FdDate(2024, 1, 15));
+
+            expect(emitted.length).toBe(0);
+        });
+
+        it('shift-click fills in reverse direction (anchor later, click earlier)', () => {
+            component.handleMultiDateAnchorChange(new FdDate(2024, 1, 14));
+            component.selectedMultipleDates = [new FdDate(2024, 1, 14)];
+
+            const emitted: FdDate[][] = [];
+            component.selectedMultipleDatesChange.subscribe((d) => emitted.push(d as FdDate[]));
+
+            component.handleShiftMultiDateSelected(new FdDate(2024, 1, 10));
+
+            const last = emitted[emitted.length - 1];
+            expect(last.length).toBe(5); // Jan 10, 11, 12, 13, 14
+            [10, 11, 12, 13, 14].forEach((day) => {
+                expect(last.some((d) => d.day === day && d.month === 1 && d.year === 2024)).toBeTrue();
+            });
+        });
+
+        it('ngOnChanges resets anchor when allowMultipleSelection changes', () => {
+            component.handleMultiDateAnchorChange(new FdDate(2024, 1, 10));
+            component.selectedMultipleDates = [];
+            component.ngOnChanges({ allowMultipleSelection: {} as any });
+
+            const emitted: FdDate[][] = [];
+            component.selectedMultipleDatesChange.subscribe((d) => emitted.push(d as FdDate[]));
+
+            component.handleShiftMultiDateSelected(new FdDate(2024, 1, 15));
+
+            expect(emitted.length).toBe(0);
+        });
+
+        it('does not emit closeCalendar on shift-click fill', () => {
+            component.handleMultiDateAnchorChange(new FdDate(2024, 1, 10));
+            component.selectedMultipleDates = [new FdDate(2024, 1, 10)];
+            jest.spyOn(component.closeCalendar, 'emit');
+            component.handleShiftMultiDateSelected(new FdDate(2024, 1, 15));
+            expect(component.closeCalendar.emit).not.toHaveBeenCalled();
+        });
+    });
+
+    it('Should not emit closeCalendar for week selection when allowMultipleSelection is true', () => {
+        const week = [
+            new FdDate(2023, 7, 10),
+            new FdDate(2023, 7, 11),
+            new FdDate(2023, 7, 12),
+            new FdDate(2023, 7, 13),
+            new FdDate(2023, 7, 14),
+            new FdDate(2023, 7, 15),
+            new FdDate(2023, 7, 16)
+        ];
+        component.allowMultipleSelection = true;
+        jest.spyOn(component.closeCalendar, 'emit');
+        component.selectedMultipleDatesChanged(week);
+        expect(component.closeCalendar.emit).not.toHaveBeenCalled();
+    });
 });

@@ -70,7 +70,7 @@ There are two important things to consider:
 1. node and yarn is installed as per package.json versions
 2. run `yarn` to install (`npm i` without a package.lock probably won't work)
 3. (run `yarn prepare`)
-4. ckeck if the app works by `yarn start`
+4. check if the app works by `yarn start`
 
 ### Contributor License Agreement
 

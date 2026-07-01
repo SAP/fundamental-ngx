@@ -361,6 +361,7 @@ export default {
         messagesTeamRemoved: 'เอาออกแล้ว 1 ทีม',
         messagesUndoAction: 'เลิกทำ',
         nextButtonAriaLabel: 'ไปที่สไลด์ถัดไป',
+        noDataFound: 'No Data Found',
         nodeActionAddApproversAfter: 'เพิ่มผู้อนุมัติหลัง',
         nodeActionAddApproversBefore: 'เพิ่มผู้อนุมัติก่อน',
         nodeActionAddApproversParallel: 'เพิ่มผู้อนุมัติแบบขนาน',
@@ -728,5 +729,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'ปุ่มที่แบ่งเซกเมนต์',
         groupRoleDescription: 'กลุ่มปุ่มที่แบ่งเซกเมนต์'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'ข้อความการตรวจสอบความถูกต้องของฟิลด์'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'ข้อความการตรวจสอบความถูกต้องของฟิลด์'
     }
 };

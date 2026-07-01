@@ -1,7 +1,7 @@
 import { TYPE, parse } from '@formatjs/icu-messageformat-parser';
 import { FdLanguage } from '../models';
 import { flattenTranslations } from './flatten-translations';
-import { resolveTranslationSync } from './resolve-helpers/resolve-translations-sync';
+import { resolveTranslationSignal } from './resolve-helpers/resolve-translations-signal';
 
 /**
  * Small utility function to test the validity of translations syntax
@@ -26,18 +26,20 @@ export function translationTester(translations: FdLanguage): void {
                     return acc;
                 }, {});
                 it(`should translate key "${key}" with context ${JSON.stringify(ctx)}`, () => {
-                    const translation = resolveTranslationSync(key as any, ctx, {
+                    const translationSignal = resolveTranslationSignal(key as any, ctx, {
                         fdLang: translations as unknown as FdLanguage,
                         fdLocale: 'en'
-                    }) as unknown;
+                    });
+                    const translation = translationSignal();
                     expect(typeof translation === 'string').toBe(true);
                 });
             } else {
                 it(`should translate key "${key}"`, () => {
-                    const translation = resolveTranslationSync(key as any, {
+                    const translationSignal = resolveTranslationSignal(key as any, {
                         fdLang: translations as unknown as FdLanguage,
                         fdLocale: 'en'
-                    }) as unknown;
+                    });
+                    const translation = translationSignal();
                     expect(typeof translation === 'string').toBe(true);
                 });
             }

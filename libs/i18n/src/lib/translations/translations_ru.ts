@@ -362,6 +362,7 @@ export default {
         messagesTeamRemoved: 'Удалена 1 группа',
         messagesUndoAction: 'Отменить',
         nextButtonAriaLabel: 'Следующий слайд',
+        noDataFound: 'No Data Found',
         nodeActionAddApproversAfter: 'Добавить утверждающих после',
         nodeActionAddApproversBefore: 'Добавить утверждающих до',
         nodeActionAddApproversParallel: 'Добавить параллельных утверждающих',
@@ -729,5 +730,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Сегментированная кнопка',
         groupRoleDescription: 'Группа сегментированных кнопок'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Сообщения о проверке полей'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Сообщения о проверке полей'
     }
 };

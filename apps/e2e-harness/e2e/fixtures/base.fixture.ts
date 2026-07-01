@@ -11,7 +11,6 @@ export interface RouteEntry {
 }
 
 interface RoutesManifest {
-    count: number;
     routes: RouteEntry[];
 }
 

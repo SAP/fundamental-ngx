@@ -88,9 +88,9 @@
             <fd-popover-body
                 (keydown)="onPopoverBodyKeyDown($event)"
                 (mouseenter)="onSubmenuMouseEnter()"
-                (mouseleave)="onSubmenuMouseLeave()"
+                (mouseleave)="onSubmenuMouseLeave($event)"
             >
-                <ng-container *ngTemplateOutlet="submenu()"></ng-container>
+                <ng-container [ngTemplateOutlet]="submenu()"></ng-container>
             </fd-popover-body>
         </fd-popover>
     }

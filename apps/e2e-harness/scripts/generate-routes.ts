@@ -38,9 +38,9 @@ ${imports.join(',\n')}
 }
 
 function buildRoutesJson(examples: ExampleMetadata[]): object {
+    const sorted = [...examples].sort((a, b) => a.routePath.localeCompare(b.routePath));
     return {
-        count: examples.length,
-        routes: examples.map((ex) => ({
+        routes: sorted.map((ex) => ({
             path: ex.routePath,
             library: ex.library,
             component: ex.component,

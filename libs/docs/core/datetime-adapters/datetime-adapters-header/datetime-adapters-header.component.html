@@ -1,0 +1,56 @@
+<fd-doc-page>
+    <header>DateTime Adapters</header>
+    <description>
+        Components such as Date Picker, Time Picker, and DateTime Picker rely on a
+        <strong>DatetimeAdapter</strong> and <strong>DateTimeFormats</strong> to parse, format, and manipulate dates.
+        Two adapters are available out of the box: <br /><br />
+        <table class="fd-table">
+            <thead class="fd-table__header">
+                <tr class="fd-table__row">
+                    <th class="fd-table__cell fd-table__cell--header"></th>
+                    <th class="fd-table__cell fd-table__cell--header">FdDate (built-in)</th>
+                    <th class="fd-table__cell fd-table__cell--header">Dayjs</th>
+                </tr>
+            </thead>
+            <tbody class="fd-table__body">
+                <tr class="fd-table__row">
+                    <td class="fd-table__cell"><strong>Package</strong></td>
+                    <td class="fd-table__cell"><code>&#64;fundamental-ngx/core/datetime</code></td>
+                    <td class="fd-table__cell"><code>&#64;fundamental-ngx/datetime-adapter</code></td>
+                </tr>
+                <tr class="fd-table__row">
+                    <td class="fd-table__cell"><strong>Custom parse formats</strong></td>
+                    <td class="fd-table__cell">Limited (native Date parsing)</td>
+                    <td class="fd-table__cell">Full format-string control</td>
+                </tr>
+                <tr class="fd-table__row">
+                    <td class="fd-table__cell"><strong>Locale support</strong></td>
+                    <td class="fd-table__cell">Via browser Intl API</td>
+                    <td class="fd-table__cell">dayjs locale plugins</td>
+                </tr>
+                <tr class="fd-table__row">
+                    <td class="fd-table__cell"><strong>UTC / strict mode</strong></td>
+                    <td class="fd-table__cell">No</td>
+                    <td class="fd-table__cell">Yes</td>
+                </tr>
+                <tr class="fd-table__row">
+                    <td class="fd-table__cell"><strong>Best for</strong></td>
+                    <td class="fd-table__cell">Simple apps, zero-dep setups</td>
+                    <td class="fd-table__cell">i18n-heavy or format-sensitive apps</td>
+                </tr>
+            </tbody>
+        </table>
+        <br />
+        <fd-message-strip type="information" [dismissible]="false">
+            <strong>Migrating from Moment?</strong> The <code>&#64;fundamental-ngx/moment-adapter</code> package is
+            deprecated because Moment.js is now
+            <a href="https://momentjs.com/docs/#/-project-status/" target="_blank">considered legacy</a>. See the
+            <a [routerLink]="[]" fragment="migration-from-moment">Migration from Moment</a> section below.
+        </fd-message-strip>
+        <br />
+        To use <strong>Dayjs</strong>, install the adapter package separately:
+        <fd-code-snippet [file]="installSnippet"></fd-code-snippet>
+    </description>
+
+    <fd-header-tabs></fd-header-tabs>
+</fd-doc-page>

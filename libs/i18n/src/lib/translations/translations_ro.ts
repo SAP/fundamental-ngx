@@ -365,6 +365,7 @@ export default {
         messagesTeamRemoved: '1 echipă a fost eliminată',
         messagesUndoAction: 'Anulare acțiune',
         nextButtonAriaLabel: 'Salt la diapozitivul următor',
+        noDataFound: 'No Data Found',
         nodeActionAddApproversAfter: 'Adăugare aprobatori după',
         nodeActionAddApproversBefore: 'Adăugare aprobatori înainte',
         nodeActionAddApproversParallel: 'Adăugare aprobatori în paralel',
@@ -732,5 +733,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Buton segmentat',
         groupRoleDescription: 'Grup de butoane segmentate'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Mesaje de validare câmp'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Mesaje de validare câmp'
     }
 };

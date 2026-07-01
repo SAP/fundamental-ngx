@@ -129,6 +129,10 @@ export interface FdLanguage {
         moreLabel: FdLanguageKey;
         lessLabel: FdLanguageKey;
     };
+    coreFormInputMessageGroup: {
+        /** ARIA label for the validation messages popover */
+        popoverAriaLabel: FdLanguageKey;
+    };
     coreGridList: {
         filterBarCancelButtonTitle: FdLanguageKey;
         /** @param status */
@@ -475,12 +479,17 @@ export interface FdLanguage {
         statusRejected: FdLanguageKey;
         statusInProgress: FdLanguageKey;
         statusNotStarted: FdLanguageKey;
+        noDataFound: FdLanguageKey;
     };
     platformFeedInput: {
         userTitle: FdLanguageKey;
     };
     platformIconTabBar: {
         moreButton: FdLanguageKey;
+    };
+    platformInputMessageGroup: {
+        /** ARIA label for the validation messages popover */
+        popoverAriaLabel: FdLanguageKey;
     };
     platformVHD: {
         selectedAndConditionLabel: FdLanguageKey;

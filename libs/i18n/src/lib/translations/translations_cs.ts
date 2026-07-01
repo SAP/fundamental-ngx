@@ -361,6 +361,7 @@ export default {
         messagesTeamRemoved: 'Byl odebrán 1 tým',
         messagesUndoAction: 'Vrátit',
         nextButtonAriaLabel: 'Přejít na další snímek',
+        noDataFound: 'No Data Found',
         nodeActionAddApproversAfter: 'Přidat schvalovatele za',
         nodeActionAddApproversBefore: 'Přidat schvalovatele před',
         nodeActionAddApproversParallel: 'Přidat paralelní schvalovatele',
@@ -728,5 +729,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Segmentované tlačítko',
         groupRoleDescription: 'Skupina segmentovaných tlačítek'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Zprávy o validaci pole'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Zprávy o validaci pole'
     }
 };

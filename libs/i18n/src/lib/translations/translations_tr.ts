@@ -362,6 +362,7 @@ export default {
         messagesTeamRemoved: '1 ekip kaldırıldı',
         messagesUndoAction: 'Geri al',
         nextButtonAriaLabel: 'Sonraki slayta git',
+        noDataFound: 'No Data Found',
         nodeActionAddApproversAfter: 'Şundan sonra onaylayan ekle',
         nodeActionAddApproversBefore: 'Şundan önce onaylayan ekle',
         nodeActionAddApproversParallel: 'Paralel onaylayan ekle',
@@ -729,5 +730,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Segmentlere Ayrılmış Düğme',
         groupRoleDescription: 'Segmentlere Ayrılmış Düğme Grubu'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Alan doğrulama mesajları'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Alan doğrulama mesajları'
     }
 };

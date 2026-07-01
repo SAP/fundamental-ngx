@@ -4,29 +4,26 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    DestroyRef,
+    computed,
+    effect,
     ElementRef,
+    forwardRef,
+    inject,
     Input,
+    input,
     OnChanges,
-    OnDestroy,
     OnInit,
     Optional,
     QueryList,
     SimpleChanges,
     ViewChildren,
-    ViewEncapsulation,
-    computed,
-    forwardRef,
-    inject,
-    input
+    ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Subscription } from 'rxjs';
 
 import { KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
 import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { createMissingDateImplementationError } from './errors';
@@ -60,7 +57,7 @@ type MeridianViewItem = SelectableViewItem<Meridian>;
     encapsulation: ViewEncapsulation.None,
     imports: [TimeColumnComponent, FdTranslatePipe]
 })
-export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterViewInit, ControlValueAccessor {
+export class TimeComponent<D> implements OnInit, OnChanges, AfterViewInit, ControlValueAccessor {
     /**
      * @Input When set to false, uses the 24 hour clock (hours ranging from 0 to 23)
      * and does not display a period control.
@@ -194,12 +191,6 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
     });
 
     /** @hidden */
-    private readonly _destroyRef = inject(DestroyRef);
-
-    /** @hidden */
-    private _subscriptions = new Subscription();
-
-    /** @hidden */
     private readonly _rtlService = inject(RtlService, { optional: true });
 
     /** @hidden */
@@ -215,15 +206,16 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
         }
 
         this.time = this._getDefaultValue();
+
+        effect(() => {
+            this._dateTimeAdapter.locale();
+            this._setUpViewGrid();
+            this._changeDetectorRef.markForCheck();
+        });
     }
 
     /** @hidden */
     ngOnInit(): void {
-        this._dateTimeAdapter.localeChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
-            this._setUpViewGrid();
-            this._changeDetectorRef.detectChanges();
-        });
-
         this._setUpViewGrid();
     }
 
@@ -237,11 +229,6 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
         if (changes.elementsAtOnce && changes.elementsAtOnce.currentValue % 2 === 0) {
             throw new Error('[elementsAtOnce] should be odd number');
         }
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._subscriptions.unsubscribe();
     }
 
     /** @hidden */

@@ -12,6 +12,7 @@ import {
     Output,
     SimpleChanges,
     ViewEncapsulation,
+    effect,
     inject
 } from '@angular/core';
 
@@ -144,6 +145,14 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, Focusabl
         // default values
         this._currentYear = _dateTimeAdapter.getYear(_dateTimeAdapter.today());
         this._firstYearInList = this._currentYear;
+
+        effect(() => {
+            this._dateTimeAdapter.locale();
+            if (this._initiated) {
+                this._constructYearGrid();
+                this._changeDetectorRef.markForCheck();
+            }
+        });
     }
 
     /** @hidden */
@@ -153,11 +162,6 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, Focusabl
         this._setupKeyboardService();
         this._firstYearInList = this.yearSelected;
         this._constructYearGrid();
-
-        this._dateTimeAdapter.localeChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
-            this._constructYearGrid();
-            this._changeDetectorRef.markForCheck();
-        });
     }
 
     /** @hidden */

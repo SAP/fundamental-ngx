@@ -20,6 +20,7 @@ const Configuration = {
                 'shared',
                 'i18n',
                 'datetime-adapter',
+                'moment-adapter',
                 'ui5',
                 'mcp',
                 'skills'

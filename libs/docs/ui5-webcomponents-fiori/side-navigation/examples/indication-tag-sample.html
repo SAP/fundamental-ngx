@@ -1,0 +1,46 @@
+<div class="fd-margin-bottom--sm" style="display: flex; align-items: center; gap: 0.5rem">
+    <ui5-switch [checked]="collapsed()" (ui5Change)="toggleCollapsed()"></ui5-switch>
+    <ui5-label>Collapsed Mode</ui5-label>
+</div>
+
+<ui5-side-navigation [collapsed]="collapsed()">
+    <ui5-side-navigation-item text="Home" icon="home" selected></ui5-side-navigation-item>
+
+    <ui5-side-navigation-group text="Features" expanded>
+        <ui5-side-navigation-item text="Activities" icon="activities">
+            <ui5-tag slot="tag" design="Set2" colorScheme="6" hideStateIcon>New</ui5-tag>
+        </ui5-side-navigation-item>
+
+        <ui5-side-navigation-item text="Experimental" icon="lab">
+            <!-- Using abbreviated text as recommended for longer labels -->
+            <ui5-tag slot="tag" design="Set2" colorScheme="8" hideStateIcon>Exp</ui5-tag>
+        </ui5-side-navigation-item>
+    </ui5-side-navigation-group>
+
+    <ui5-side-navigation-group text="System" expanded>
+        <ui5-side-navigation-item text="Settings" icon="settings">
+            <ui5-tag slot="tag" design="Set2" colorScheme="10" hideStateIcon>Beta</ui5-tag>
+        </ui5-side-navigation-item>
+
+        <ui5-side-navigation-item text="Deprecation Notice" icon="warning">
+            <ui5-tag slot="tag" design="Set2" colorScheme="5" hideStateIcon>Dep</ui5-tag>
+        </ui5-side-navigation-item>
+    </ui5-side-navigation-group>
+
+    <ui5-side-navigation-item slot="fixedItems" text="Help" icon="sys-help">
+        <!-- Tags are also visible in fixed items -->
+        <ui5-tag slot="tag" design="Set2" colorScheme="7" hideStateIcon>24/7</ui5-tag>
+    </ui5-side-navigation-item>
+</ui5-side-navigation>
+
+<div class="fd-margin-top--md" style="color: var(--sapNeutralTextColor); font-size: 0.875rem">
+    <h4 class="fd-margin-bottom--sm">Tag Slot Guidelines</h4>
+    <ul>
+        <li>Tags are visible when the navigation is expanded, and hidden when collapsed</li>
+        <li>In collapsed mode, tags appear in the overflow menu</li>
+        <li>Use <code>design="Set2"</code> and <code>hideStateIcon</code> attributes</li>
+        <li>Use <code>colorScheme</code> values 5-10 to avoid confusion with semantic colors</li>
+        <li>Limit tag width to ~64px (4rem). Use abbreviations for longer text</li>
+        <li>Tags must NOT be interactive (<code>active</code> must be <code>false</code>)</li>
+    </ul>
+</div>

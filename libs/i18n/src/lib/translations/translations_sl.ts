@@ -362,6 +362,7 @@ export default {
         messagesTeamRemoved: '1 tim je bil odstranjen',
         messagesUndoAction: 'Razveljavi',
         nextButtonAriaLabel: 'Pojdi na naslednji diapozitiv',
+        noDataFound: 'No Data Found',
         nodeActionAddApproversAfter: 'Dodaj odobritelje po',
         nodeActionAddApproversBefore: 'Dodaj odobritelje pred',
         nodeActionAddApproversParallel: 'Dodaj vzporedne odobritelje',
@@ -729,5 +730,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Segmentirani gumb',
         groupRoleDescription: 'Skupina segmentiranih gumbov'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Sporočila preverjanja veljavnosti polja'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Sporočila preverjanja veljavnosti polja'
     }
 };

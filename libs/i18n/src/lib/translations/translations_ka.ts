@@ -361,6 +361,7 @@ export default {
         messagesTeamRemoved: 'გუნდი წაიშალა',
         messagesUndoAction: 'უკან დაბრუნება',
         nextButtonAriaLabel: 'შემდეგ სლაიდზე გადასვლა',
+        noDataFound: 'No Data Found',
         nodeActionAddApproversAfter: 'დაამატე დამდასტურებელი შემდეგ',
         nodeActionAddApproversBefore: 'დაამატე დამდასტურებელი წინ',
         nodeActionAddApproversParallel: 'დაამატე პარალელური დამდასტურებელი',
@@ -728,5 +729,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Segmented Button',
         groupRoleDescription: 'Segmented Button Group'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Field validation messages'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Field validation messages'
     }
 };

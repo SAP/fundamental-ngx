@@ -7,3 +7,16 @@
     <ui5-slider-sample></ui5-slider-sample>
 </component-example>
 <code-example [exampleFiles]="examples()"></code-example>
+
+<separator />
+
+<fd-docs-section-title id="custom-tickmarks" componentName="slider">Custom Tickmarks</fd-docs-section-title>
+<description>
+    The <code>tickmarks</code> property allows you to define custom labeled markers on the slider scale. Each tickmark
+    has a numeric <code>value</code> and an optional <code>label</code>. When the slider value matches a tickmark, the
+    label is shown in the tooltip and announced via <code>aria-valuetext</code>.
+</description>
+<component-example>
+    <ui5-custom-tickmarks-sample></ui5-custom-tickmarks-sample>
+</component-example>
+<code-example [exampleFiles]="customTickmarksExamples()"></code-example>

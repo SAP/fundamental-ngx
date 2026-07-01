@@ -13,6 +13,7 @@ import {
     UserMenuControlComponent,
     UserMenuFooterComponent,
     UserMenuHeaderContainerDirective,
+    UserMenuHeaderContentAreaComponent,
     UserMenuHeaderDirective,
     UserMenuListComponent,
     UserMenuListItemComponent,
@@ -22,6 +23,8 @@ import {
 } from '@fundamental-ngx/core/user-menu';
 
 import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/message-toast';
+
+import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 
 @Component({
     selector: 'fd-user-menu-mobile-example',
@@ -39,6 +42,7 @@ import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/m
         UserMenuListComponent,
         UserMenuSublistComponent,
         UserMenuListItemComponent,
+        UserMenuHeaderContentAreaComponent,
         AvatarComponent,
         PopoverModule,
         ListModule,
@@ -47,7 +51,8 @@ import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/m
         ButtonComponent,
         BarComponent,
         BarRightDirective,
-        MessageToastModule
+        MessageToastModule,
+        MessageStripComponent
     ]
 })
 export class UserMenuMobileExampleComponent {

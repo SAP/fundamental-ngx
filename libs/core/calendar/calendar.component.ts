@@ -2,6 +2,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    effect,
     ElementRef,
     EventEmitter,
     forwardRef,
@@ -10,7 +11,6 @@ import {
     Inject,
     Input,
     OnChanges,
-    OnDestroy,
     OnInit,
     Optional,
     Output,
@@ -19,7 +19,6 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
-import { Subscription } from 'rxjs';
 
 import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { SpecialDayRule } from '@fundamental-ngx/core/shared';
@@ -109,7 +108,7 @@ let calendarUniqueId = 0;
         CalendarLegendComponent
     ]
 })
-export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAccessor, Validator, OnDestroy {
+export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAccessor, Validator {
     /** The currently selected date model in single mode. */
     @Input()
     selectedDate: Nullable<D>;
@@ -322,13 +321,14 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     nextButtonDisabled: boolean;
 
     /** @hidden */
+    /** @hidden */
     protected readonly calendarRoleDescription = resolveTranslationSignal('coreCalendar.calendarRoleDescription');
 
     /** @hidden */
-    private _subscriptions = new Subscription();
+    private _adapterStartingDayOfWeek: DaysOfWeek;
 
     /** @hidden */
-    private _adapterStartingDayOfWeek: DaysOfWeek;
+    private _shiftAnchorDate: D | null = null;
 
     /** @hidden */
     constructor(
@@ -350,7 +350,12 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
         this._adapterStartingDayOfWeek = (this._dateTimeAdapter.getFirstDayOfWeek() + 1) as DaysOfWeek;
         this.selectedDate = this._dateTimeAdapter.today();
         this._changeDetectorRef.markForCheck();
-        this._listenToLocaleChanges();
+
+        effect(() => {
+            this._dateTimeAdapter.locale();
+            this._adapterStartingDayOfWeek = (this._dateTimeAdapter.getFirstDayOfWeek() + 1) as DaysOfWeek;
+            this._changeDetectorRef.markForCheck();
+        });
     }
 
     /** That allows to define function that should happen, when focus should normally escape of component */
@@ -406,6 +411,9 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
         ) {
             this._setNavigationButtonsStates();
         }
+        if ('allowMultipleSelection' in changes || 'calType' in changes) {
+            this._shiftAnchorDate = null;
+        }
     }
 
     /** @hidden */
@@ -413,16 +421,12 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
         return this.startingDayOfWeek === undefined ? this._adapterStartingDayOfWeek : this.startingDayOfWeek;
     }
 
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._subscriptions.unsubscribe();
-    }
-
     /**
      * @hidden
      * Function that provides support for ControlValueAccessor that allows to use [(ngModel)] or forms.
      */
     writeValue(selected: D | Array<D> | DateRange<D> | Array<DateRange<D>>): void {
+        this._shiftAnchorDate = null;
         let valid = true;
 
         const isValidDate = (date: D | null): boolean => date != null && this._dateTimeAdapter.isValid(date);
@@ -538,7 +542,31 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
         this._setNavigationButtonsStates();
         this.onChange(date);
         this.selectedMultipleDatesChange.emit(date);
-        this.closeCalendar.emit();
+        if (!this.allowMultipleSelection) {
+            this.closeCalendar.emit();
+        }
+    }
+
+    /** @hidden */
+    handleMultiDateAnchorChange(date: D): void {
+        this._shiftAnchorDate = date;
+    }
+
+    /** @hidden */
+    handleShiftMultiDateSelected(date: D): void {
+        if (!this._shiftAnchorDate) {
+            return;
+        }
+        const rangeDates = this._fillDateRange(this._shiftAnchorDate, date);
+        const existing = this.selectedMultipleDates || [];
+        const merged = [
+            ...existing,
+            ...rangeDates.filter((rd) => !existing.some((ex) => this._dateTimeAdapter.datesEqual(ex, rd)))
+        ];
+        this.selectedMultipleDates = merged;
+        this.onChange(merged);
+        this.selectedMultipleDatesChange.emit(merged);
+        this._changeDetectorRef.markForCheck();
     }
 
     /**
@@ -795,16 +823,6 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
         return this.dateRangeFormat === 'year';
     }
 
-    /** @hidden */
-    private _listenToLocaleChanges(): void {
-        this._subscriptions.add(
-            this._dateTimeAdapter.localeChanges.subscribe(() => {
-                this._adapterStartingDayOfWeek = (this._dateTimeAdapter.getFirstDayOfWeek() + 1) as DaysOfWeek;
-                this._changeDetectorRef.markForCheck();
-            })
-        );
-    }
-
     /**
      * @hidden
      * Method that sets up the currently displayed variables, like shown month and year.
@@ -880,5 +898,20 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
             typeof disableFunction === 'function' &&
             disableFunction(this.selectedDate, this._currentlyDisplayed, this.activeView)
         );
+    }
+
+    /** @hidden */
+    private _fillDateRange(from: D, to: D): D[] {
+        const forward = this._dateTimeAdapter.compareDate(from, to) <= 0;
+        let current = forward ? from : to;
+        const end = forward ? to : from;
+        const result: D[] = [];
+        while (this._dateTimeAdapter.compareDate(current, end) <= 0) {
+            if (!this.disableFunction || !this.disableFunction(current)) {
+                result.push(current);
+            }
+            current = this._dateTimeAdapter.addCalendarDays(current, 1);
+        }
+        return result;
     }
 }

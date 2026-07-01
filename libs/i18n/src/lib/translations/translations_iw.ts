@@ -360,6 +360,7 @@ export default {
         messagesTeamRemoved: 'צוות אחד הוסר',
         messagesUndoAction: 'בטל',
         nextButtonAriaLabel: 'עבור לשקופית הבאה',
+        noDataFound: 'No Data Found',
         nodeActionAddApproversAfter: 'הוסף מאשרים לאחר',
         nodeActionAddApproversBefore: 'הוסף מאשרים לפני',
         nodeActionAddApproversParallel: 'הוסף מאשרים מקבילים',
@@ -722,5 +723,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'סרגל לחצנים',
         groupRoleDescription: 'קבוצת סרגלי לחצנים'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'הודעות בדיקת תקינות שדה'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'הודעות בדיקת תקינות שדה'
     }
 };

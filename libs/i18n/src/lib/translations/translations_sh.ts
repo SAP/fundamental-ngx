@@ -362,6 +362,7 @@ export default {
         messagesTeamRemoved: '1 tim je uklonjen',
         messagesUndoAction: 'Poništi',
         nextButtonAriaLabel: 'Idi na sledeći slajd',
+        noDataFound: 'No Data Found',
         nodeActionAddApproversAfter: 'Dodaj davaoce odobrenja nakon',
         nodeActionAddApproversBefore: 'Dodaj davaoce odobrenja pre',
         nodeActionAddApproversParallel: 'Dodaj paralelne davaoce odobrenja',
@@ -729,5 +730,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Segmentirano dugme',
         groupRoleDescription: 'Grupa segmentirane dugmadi'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Poruke validacije polja'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Poruke validacije polja'
     }
 };

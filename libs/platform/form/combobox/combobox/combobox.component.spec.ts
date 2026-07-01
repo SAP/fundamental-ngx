@@ -228,4 +228,31 @@ describe('ComboboxComponent default values', () => {
         combobox.isOpenChangeHandle(false);
         expect(combobox.searchInputElement.nativeElement.focus).toHaveBeenCalledWith({ preventScroll: true });
     });
+
+    it('should not mutate value or emit selectionChange when the popover opens on an empty control', fakeAsync(() => {
+        const selectionSpy = jest.fn();
+        combobox.selectionChange.subscribe(selectionSpy);
+        const initialValue = combobox.value;
+
+        combobox.onPrimaryButtonClick();
+        fixture.detectChanges();
+        flush();
+
+        expect(combobox.value).toBe(initialValue);
+        expect(selectionSpy).not.toHaveBeenCalled();
+    }));
+
+    it('should select item when focus arrives via keyboard navigation (no mousedown)', fakeAsync(() => {
+        combobox.onPrimaryButtonClick();
+        fixture.detectChanges();
+        flush();
+
+        const secondSuggestion = combobox._suggestions[1];
+        combobox._itemMousedown = false;
+        combobox.onItemFocused(secondSuggestion);
+        fixture.detectChanges();
+        flush();
+
+        expect(combobox.value).toBe(secondSuggestion.value);
+    }));
 });

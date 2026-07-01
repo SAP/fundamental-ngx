@@ -1,0 +1,10 @@
+<ui5-breadcrumbs>
+    <ui5-breadcrumbs-item href="#" (ui5Click)="onItemClick($event, 'Home')">Home</ui5-breadcrumbs-item>
+    <ui5-breadcrumbs-item href="#" (ui5Click)="onItemClick($event, 'Products')">Products</ui5-breadcrumbs-item>
+    <ui5-breadcrumbs-item href="#" (ui5Click)="onItemClick($event, 'Electronics')">Electronics</ui5-breadcrumbs-item>
+    <ui5-breadcrumbs-item (ui5Click)="onItemClick($event, 'Laptops')">Laptops</ui5-breadcrumbs-item>
+</ui5-breadcrumbs>
+
+@if (clickedItem()) {
+<p><strong>Last clicked:</strong> {{ clickedItem() }}</p>
+}

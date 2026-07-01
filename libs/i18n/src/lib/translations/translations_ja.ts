@@ -20,9 +20,9 @@ export default {
     },
     coreAvatarGroup: {
         ariaLabelGroup:
-            'ポップアップタイプのダイアログに結合されたアバターがあります。{count}個のアバターが表示されており、{hiddenCount}個のアバターが非表示です。すべてのアバターを表示するにはアクティブ化してください。',
+            'アバターが結合されて表示されるポップアップタイプのダイアログ。{count}個のアバターが表示され、{hiddenCount}個のアバターが非表示になっています。すべてのアバターを表示するにはアクティブ化してください。',
         ariaLabelIndividual:
-            '個別のアバター。{count}個のアバターが表示されており、{hiddenCount}個のアバターは非表示です。',
+            '個別のアバター。{count}個のアバターが表示され、{hiddenCount}個のアバターが非表示になっています。',
         backButton: '戻る',
         popupBodyAriaLabel: '{count}件の項目あり'
     },
@@ -362,6 +362,7 @@ export default {
         messagesTeamRemoved: '1つのチームが削除されました。',
         messagesUndoAction: '元に戻す',
         nextButtonAriaLabel: '次のスライドへ',
+        noDataFound: 'No Data Found',
         nodeActionAddApproversAfter: 'この後に承認者を追加:',
         nodeActionAddApproversBefore: 'この前に承認者を追加:',
         nodeActionAddApproversParallel: '並列承認者を追加',
@@ -729,5 +730,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'セグメントボタン',
         groupRoleDescription: 'セグメントボタングループ'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'フィールド検証メッセージ'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'フィールド検証メッセージ'
     }
 };

@@ -364,6 +364,7 @@ export default {
         messagesTeamRemoved: '1 équipe a été supprimée.',
         messagesUndoAction: 'Annuler',
         nextButtonAriaLabel: 'Passer à la diapositive suivante',
+        noDataFound: 'No Data Found',
         nodeActionAddApproversAfter: 'Ajouter des approbateurs après',
         nodeActionAddApproversBefore: 'Ajouter des approbateurs avant',
         nodeActionAddApproversParallel: 'Ajouter des approbateurs en parallèle',
@@ -731,5 +732,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Bouton segmenté',
         groupRoleDescription: 'Groupe de boutons segmentés'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Messages de validation de champ'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Messages de validation de champ'
     }
 };

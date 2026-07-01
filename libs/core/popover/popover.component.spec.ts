@@ -55,7 +55,6 @@ class TestPopoverComponent {
             </fd-popover-body>
         </fd-popover>
     `,
-    standalone: true,
     imports: [PopoverModule]
 })
 class TestPopoverConfigComponent {
@@ -514,6 +513,135 @@ describe('PopoverComponent service stub tests', () => {
 
         expect(popoverServiceStub.setIgnoreTriggers).toHaveBeenCalledWith(true);
     });
+});
+
+@Component({
+    selector: 'fd-popover-body-role-test',
+    template: `
+        <fd-popover #popover [bodyRole]="bodyRole" [bodyAriaLabelledBy]="bodyAriaLabelledBy">
+            <fd-popover-control>
+                <button>Open Popover</button>
+            </fd-popover-control>
+            <fd-popover-body>
+                <div>Popover Content</div>
+            </fd-popover-body>
+        </fd-popover>
+    `,
+    standalone: true,
+    imports: [PopoverModule]
+})
+class TestPopoverBodyRoleComponent {
+    @ViewChild('popover') popover: PopoverComponent;
+    bodyRole: string | null = 'dialog';
+    bodyAriaLabelledBy: string | null = null;
+}
+
+describe('PopoverComponent bodyRole and bodyAriaLabelledBy inputs (#14260)', () => {
+    let fixture: ComponentFixture<TestPopoverBodyRoleComponent>;
+    let hostComponent: TestPopoverBodyRoleComponent;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [TestPopoverBodyRoleComponent]
+        }).compileComponents();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(TestPopoverBodyRoleComponent);
+        hostComponent = fixture.componentInstance;
+        fixture.detectChanges();
+    });
+
+    it('defaults bodyRole to "dialog" for back-compat', fakeAsync(() => {
+        hostComponent.popover.open();
+        fixture.detectChanges();
+        tick();
+
+        const body = document.querySelector('.cdk-overlay-container .fd-popover__body');
+        expect(body?.getAttribute('role')).toBe('dialog');
+    }));
+
+    it('binds [bodyRole]="region" to popover-body [attr.role]', fakeAsync(() => {
+        hostComponent.bodyRole = 'region';
+        fixture.detectChanges();
+
+        hostComponent.popover.open();
+        fixture.detectChanges();
+        tick();
+
+        expect(document.querySelector('.cdk-overlay-container .fd-popover__body')?.getAttribute('role')).toBe('region');
+    }));
+
+    it('binds [bodyRole]="null" so no role attribute is rendered', fakeAsync(() => {
+        hostComponent.bodyRole = null;
+        fixture.detectChanges();
+
+        hostComponent.popover.open();
+        fixture.detectChanges();
+        tick();
+
+        expect(document.querySelector('.cdk-overlay-container .fd-popover__body')?.hasAttribute('role')).toBe(false);
+    }));
+
+    it('binds [bodyAriaLabelledBy] to popover-body [attr.aria-labelledby]', fakeAsync(() => {
+        hostComponent.bodyAriaLabelledBy = 'my-label-id';
+        fixture.detectChanges();
+
+        hostComponent.popover.open();
+        fixture.detectChanges();
+        tick();
+
+        expect(
+            document.querySelector('.cdk-overlay-container .fd-popover__body')?.getAttribute('aria-labelledby')
+        ).toBe('my-label-id');
+    }));
+
+    it('accepts PopoverBodyRole union values (type safety test)', fakeAsync(() => {
+        // Test that all enumerated union values are accepted
+        const validRoles: Array<'dialog' | 'region' | 'menu' | 'listbox' | 'tooltip' | 'alertdialog'> = [
+            'dialog',
+            'region',
+            'menu',
+            'listbox',
+            'tooltip',
+            'alertdialog'
+        ];
+
+        validRoles.forEach((role) => {
+            hostComponent.bodyRole = role;
+            fixture.detectChanges();
+
+            hostComponent.popover.open();
+            fixture.detectChanges();
+            tick();
+
+            expect(document.querySelector('.cdk-overlay-container .fd-popover__body')?.getAttribute('role')).toBe(role);
+
+            hostComponent.popover.close();
+            fixture.detectChanges();
+            tick();
+        });
+    }));
+
+    it('accepts arbitrary ARIA role strings via escape hatch (type safety test)', fakeAsync(() => {
+        // Test that non-union valid ARIA roles are still accepted
+        const edgeCaseRoles = ['tree', 'status', 'alert', 'presentation', 'none'];
+
+        edgeCaseRoles.forEach((role) => {
+            hostComponent.bodyRole = role;
+            fixture.detectChanges();
+
+            hostComponent.popover.open();
+            fixture.detectChanges();
+            tick();
+
+            expect(document.querySelector('.cdk-overlay-container .fd-popover__body')?.getAttribute('role')).toBe(role);
+
+            hostComponent.popover.close();
+            fixture.detectChanges();
+            tick();
+        });
+    }));
 });
 
 class PopoverServiceStub {

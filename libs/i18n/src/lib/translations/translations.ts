@@ -360,6 +360,7 @@ export default {
         messagesTeamRemoved: '1 team has been removed',
         messagesUndoAction: 'Undo',
         nextButtonAriaLabel: 'Go to next slide',
+        noDataFound: 'No Data Found',
         nodeActionAddApproversAfter: 'Add approvers after',
         nodeActionAddApproversBefore: 'Add approvers before',
         nodeActionAddApproversParallel: 'Add parallel approvers',
@@ -727,5 +728,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Segmented Button',
         groupRoleDescription: 'Segmented Button Group'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Field validation messages'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Field validation messages'
     }
 };
