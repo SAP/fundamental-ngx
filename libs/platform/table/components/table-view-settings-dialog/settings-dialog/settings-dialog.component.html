@@ -45,6 +45,7 @@
                             [sortingData]="sortingData()!"
                             [initialSorting]="_initialSorting()"
                             (sortChange)="onSortChange($event)"
+                            (validityChange)="onSortValidityChange($event)"
                             (resetAvailabilityChange)="updateResetAvailability(ActiveTab.SORT, $event)"
                         ></fdp-sorting>
                     </fdp-icon-tab-bar-tab>
@@ -86,6 +87,7 @@
                     [sortingData]="sortingData()!"
                     [initialSorting]="_initialSorting()"
                     (sortChange)="onSortChange($event)"
+                    (validityChange)="onSortValidityChange($event)"
                     (resetAvailabilityChange)="updateResetAvailability(ActiveTab.SORT, $event)"
                 ></fdp-sorting>
             }
@@ -114,6 +116,7 @@
         <fd-button-bar
             fdType="emphasized"
             [label]="('platformTable.confirmBtnLabel' | fdTranslate)()"
+            [disabled]="!isDialogValid()"
             (click)="confirm()"
         ></fd-button-bar>
         <fd-button-bar

@@ -20,7 +20,7 @@ describe('SettingsDialogComponent', () => {
     let fixture: ComponentFixture<SettingsDialogComponent>;
     const dialogRef = new DialogRef();
     dialogRef.data = {
-        sortingData: { direction: SortDirection.ASC, field: 'name' } as SettingsSortDialogData,
+        sortingData: { columns: [], allowDisablingSorting: true } as SettingsSortDialogData,
         filteringData: { filterBy: [], columns: [], viewSettingsFilters: [] } as FiltersDialogData,
         groupingData: { direction: SortDirection.ASC, field: 'name', columns: [] } as SettingsGroupDialogData
     };
@@ -53,8 +53,8 @@ describe('SettingsDialogComponent', () => {
 
     it('should set initial sorting data from dialog data', () => {
         const expectedSortingData = {
-            field: 'name',
-            direction: SortDirection.ASC
+            columns: [],
+            allowDisablingSorting: true
         } as SettingsSortDialogData;
         expect(component.sortingData()).toEqual(expectedSortingData);
     });
@@ -75,8 +75,6 @@ describe('SettingsDialogComponent', () => {
         // Simulate sorting data being present
         component.sortingData.set({
             columns: [],
-            direction: SortDirection.NONE,
-            field: null,
             allowDisablingSorting: false
         });
         expect(component.activeTab()).toEqual(ActiveTab.SORT);
@@ -95,34 +93,28 @@ describe('SettingsDialogComponent', () => {
     it('should reset sorting data to initial values', () => {
         component.sortingData.set({
             columns: [],
-            direction: SortDirection.DESC,
-            field: 'someField',
-            allowDisablingSorting: true
+            allowDisablingSorting: true,
+            sortBy: [{ field: 'someField', direction: SortDirection.DESC }]
         });
         component._initialSorting.set({ field: 'initialField', direction: SortDirection.ASC });
         component.reset();
         expect(component.sortingData()).toEqual({
-            field: 'initialField',
-            direction: SortDirection.ASC,
+            sortBy: [{ field: 'initialField', direction: SortDirection.ASC }],
             columns: [],
             allowDisablingSorting: true
         });
     });
 
-    it('should reset sorting data to initial values', () => {
+    it('should reset sorting data to initial values when on sort tab', () => {
         component.sortingData.set({
             columns: [],
-            direction: SortDirection.DESC,
-            field: 'someField',
-            allowDisablingSorting: true
+            allowDisablingSorting: true,
+            sortBy: [{ field: 'someField', direction: SortDirection.DESC }]
         });
         component._initialSorting.set({ field: 'initialField', direction: SortDirection.ASC });
         component.activeTab.set(ActiveTab.SORT);
         component.reset();
-        expect(component.sortingData()).toEqual({
-            ...component.sortingData(),
-            ...component._initialSorting()
-        } as any);
+        expect(component.sortingData()?.sortBy).toEqual([{ field: 'initialField', direction: SortDirection.ASC }]);
     });
 
     it('should reset filtering data to initial values', () => {
@@ -145,12 +137,84 @@ describe('SettingsDialogComponent', () => {
     });
 
     it('should update sorting data on sort change', () => {
-        const newSortData: SettingsSortDialogResultData = { field: 'newField', direction: SortDirection.ASC };
+        const newSortData: SettingsSortDialogResultData = {
+            sortBy: [{ field: 'newField', direction: SortDirection.ASC }]
+        };
         component.onSortChange(newSortData);
-        expect(component.sortingData()).toEqual({
-            field: 'newField',
-            direction: SortDirection.ASC
-        } as any);
+        expect(component.sortingData()?.sortBy).toEqual([{ field: 'newField', direction: SortDirection.ASC }]);
+    });
+
+    it('should store sortBy array from sort change', () => {
+        const newSortData: SettingsSortDialogResultData = {
+            sortBy: [
+                { field: 'name', direction: SortDirection.ASC },
+                { field: 'description', direction: SortDirection.DESC }
+            ]
+        };
+        component.onSortChange(newSortData);
+
+        // Verify sortBy is stored by checking confirm result
+        const closeSpy = jest.spyOn(component['dialogRef'], 'close');
+        component.confirm();
+
+        expect(closeSpy).toHaveBeenCalledWith(
+            expect.objectContaining({
+                sortingData: expect.objectContaining({
+                    sortBy: [
+                        { field: 'name', direction: SortDirection.ASC },
+                        { field: 'description', direction: SortDirection.DESC }
+                    ]
+                })
+            })
+        );
+    });
+
+    it('should preserve existing sort settings when confirming without changes', () => {
+        // Set up dialog with existing sort settings
+        const existingSortBy = [
+            { field: 'name', direction: SortDirection.ASC },
+            { field: 'price', direction: SortDirection.DESC }
+        ];
+        dialogRef.data = {
+            sortingData: {
+                columns: [],
+                allowDisablingSorting: true,
+                sortBy: existingSortBy
+            } as SettingsSortDialogData,
+            filteringData: null,
+            groupingData: null,
+            columnsData: null,
+            headingLevel: 2,
+            allowColumnConfiguration: false
+        };
+
+        // Recreate component with new dialog data
+        fixture = TestBed.createComponent(SettingsDialogComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+
+        // Confirm WITHOUT calling onSortChange (simulating user clicking OK without modifications)
+        const closeSpy = jest.spyOn(component['dialogRef'], 'close');
+        component.confirm();
+
+        // Should preserve the existing sort settings, not return empty array
+        expect(closeSpy).toHaveBeenCalledWith(
+            expect.objectContaining({
+                sortingData: expect.objectContaining({
+                    sortBy: existingSortBy
+                })
+            })
+        );
+    });
+
+    it('should track sort validity and update dialog validity', () => {
+        expect(component.isDialogValid()).toBe(true);
+
+        component.onSortValidityChange(false);
+        expect(component.isDialogValid()).toBe(false);
+
+        component.onSortValidityChange(true);
+        expect(component.isDialogValid()).toBe(true);
     });
 
     it('should update filtering data on filter change', () => {
@@ -297,7 +361,7 @@ describe('SettingsDialogComponent', () => {
 
         it('should show subheader with icon tab bar when columns and sorting data are present', () => {
             dialogRef.data = {
-                sortingData: { direction: SortDirection.ASC, field: 'name' } as SettingsSortDialogData,
+                sortingData: { columns: [], allowDisablingSorting: true } as SettingsSortDialogData,
                 filteringData: null,
                 groupingData: null,
                 columnsData: mockColumnsData,
@@ -318,7 +382,7 @@ describe('SettingsDialogComponent', () => {
 
         it('should handle tab selection correctly with icon tab bar', () => {
             dialogRef.data = {
-                sortingData: { direction: SortDirection.ASC, field: 'name', columns: [] } as SettingsSortDialogData,
+                sortingData: { columns: [], allowDisablingSorting: true } as SettingsSortDialogData,
                 filteringData: { filterBy: [], columns: [], viewSettingsFilters: [] } as FiltersDialogData,
                 groupingData: { direction: SortDirection.ASC, field: 'name', columns: [] } as SettingsGroupDialogData,
                 columnsData: mockColumnsData,
@@ -349,7 +413,7 @@ describe('SettingsDialogComponent', () => {
 
     describe('tab-based reset availability', () => {
         const mockData = {
-            sortingData: { direction: SortDirection.ASC, field: 'name', columns: [] } as SettingsSortDialogData,
+            sortingData: { columns: [], allowDisablingSorting: true } as SettingsSortDialogData,
             filteringData: { filterBy: [], columns: [], viewSettingsFilters: [] } as FiltersDialogData,
             groupingData: { direction: SortDirection.ASC, field: 'name', columns: [] } as SettingsGroupDialogData,
             columnsData: {

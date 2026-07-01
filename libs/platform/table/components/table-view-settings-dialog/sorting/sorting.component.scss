@@ -1,0 +1,10 @@
+@import 'fundamental-styles/dist/margins.css';
+
+.fdp-sorting__actions {
+    visibility: hidden;
+}
+
+.fdp-sorting__row:hover .fdp-sorting__actions,
+.fdp-sorting__row:focus-within .fdp-sorting__actions {
+    visibility: visible;
+}
