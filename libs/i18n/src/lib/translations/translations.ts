@@ -517,6 +517,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Cancel',
         clearFilters: 'Clear Filters',
+        collapseAllAnnouncementLabel: 'Collapse All clicked',
         collapseRowButtonTitle: 'Collapse row',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'No data found',
@@ -527,6 +528,7 @@ export default {
         editableCellNumberPlaceholder: 'Enter value',
         editableCellStringPlaceholder: 'Enter value',
         emptyCell: 'Empty',
+        expandAllAnnouncementLabel: 'Expand All clicked',
         expandRowButtonTitle: 'Expand row',
         filterDialogBackToColumns: 'Navigate back',
         filterDialogCancelBtnLabel: 'Cancel',

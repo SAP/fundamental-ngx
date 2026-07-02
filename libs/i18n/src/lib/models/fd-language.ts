@@ -765,6 +765,8 @@ export interface FdLanguage {
         collapseRowButtonTitle: FdLanguageKey;
         expandRowButtonTitle: FdLanguageKey;
         rowNavigateButtonTitle: FdLanguageKey;
+        expandAllAnnouncementLabel: FdLanguageKey;
+        collapseAllAnnouncementLabel: FdLanguageKey;
     };
     platformWizardGenerator: {
         summarySectionEditStep: FdLanguageKey;

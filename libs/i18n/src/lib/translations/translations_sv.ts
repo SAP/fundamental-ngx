@@ -518,6 +518,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Avbryt',
         clearFilters: 'Rensa filter',
+        collapseAllAnnouncementLabel: 'Collapse All clicked',
         collapseRowButtonTitle: 'Komprimera rad',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Inga data hittades',
@@ -528,6 +529,7 @@ export default {
         editableCellNumberPlaceholder: 'Ange värde',
         editableCellStringPlaceholder: 'Ange värde',
         emptyCell: 'Tom',
+        expandAllAnnouncementLabel: 'Expand All clicked',
         expandRowButtonTitle: 'Expandera rad',
         filterDialogBackToColumns: 'Gå tillbaka',
         filterDialogCancelBtnLabel: 'Avbryt',

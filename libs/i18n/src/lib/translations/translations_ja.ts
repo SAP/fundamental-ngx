@@ -519,6 +519,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'キャンセル',
         clearFilters: 'フィルタをクリア',
+        collapseAllAnnouncementLabel: 'Collapse All clicked',
         collapseRowButtonTitle: '行を圧縮',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'データが見つかりません。',
@@ -529,6 +530,7 @@ export default {
         editableCellNumberPlaceholder: '値を入力',
         editableCellStringPlaceholder: '値を入力',
         emptyCell: '空白',
+        expandAllAnnouncementLabel: 'Expand All clicked',
         expandRowButtonTitle: '行を展開',
         filterDialogBackToColumns: '戻る',
         filterDialogCancelBtnLabel: 'キャンセル',
