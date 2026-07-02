@@ -519,6 +519,8 @@ export default {
         cancelBtnLabel: 'Скасувати',
         clearFilters: 'Очистити фільтри',
         collapseRowButtonTitle: 'Згорнути рядок',
+        columnSortedAscLabel: 'Sort by {columnName}, ascending',
+        columnSortedDescLabel: 'Sort by {columnName}, descending',
         confirmBtnLabel: 'ОК',
         defaultEmptyMessage: 'Даних не знайдено',
         deselectAllCheckboxLabel: 'Скасувати вибір',

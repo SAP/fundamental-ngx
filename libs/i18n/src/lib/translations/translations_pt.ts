@@ -521,6 +521,8 @@ export default {
         cancelBtnLabel: 'Cancelar',
         clearFilters: 'Limpar filtros',
         collapseRowButtonTitle: 'Recolher linha',
+        columnSortedAscLabel: 'Sort by {columnName}, ascending',
+        columnSortedDescLabel: 'Sort by {columnName}, descending',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Nenhum dado encontrado',
         deselectAllCheckboxLabel: 'Desmarcar tudo',

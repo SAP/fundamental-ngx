@@ -520,6 +520,8 @@ export default {
         cancelBtnLabel: 'Anuluj',
         clearFilters: 'Wyczyść filtry',
         collapseRowButtonTitle: 'Zwiń wiersz',
+        columnSortedAscLabel: 'Sort by {columnName}, ascending',
+        columnSortedDescLabel: 'Sort by {columnName}, descending',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Nie znaleziono danych',
         deselectAllCheckboxLabel: 'Odznacz wszystko',

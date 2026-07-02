@@ -520,6 +520,8 @@ export default {
         cancelBtnLabel: 'Cancel',
         clearFilters: 'Clear Filters',
         collapseRowButtonTitle: 'Collapse row',
+        columnSortedAscLabel: 'Sort by {columnName}, ascending',
+        columnSortedDescLabel: 'Sort by {columnName}, descending',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'No data found',
         deselectAllCheckboxLabel: 'Deselect all',

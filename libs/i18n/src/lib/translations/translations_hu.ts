@@ -520,6 +520,8 @@ export default {
         cancelBtnLabel: 'Mégse',
         clearFilters: 'Szűrők törlése',
         collapseRowButtonTitle: 'Sor összecsukása',
+        columnSortedAscLabel: 'Sort by {columnName}, ascending',
+        columnSortedDescLabel: 'Sort by {columnName}, descending',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Nem található adat',
         deselectAllCheckboxLabel: 'Összes kijelölésének megszüntetése',

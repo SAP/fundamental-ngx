@@ -521,6 +521,8 @@ export default {
         cancelBtnLabel: '[[[Ĉąŋċēĺ∙∙∙∙∙∙∙∙]]]',
         clearFilters: '[[[Ĉĺēąŗ Ƒįĺţēŗş∙∙∙∙∙∙]]]',
         collapseRowButtonTitle: '[[[Ĉŏĺĺąρşē ŗŏŵ∙∙∙∙∙∙∙]]]',
+        columnSortedAscLabel: 'Sort by {columnName}, ascending',
+        columnSortedDescLabel: 'Sort by {columnName}, descending',
         confirmBtnLabel: '[[[ŎĶ∙∙]]]',
         defaultEmptyMessage: '[[[Ńŏ ƌąţą ƒŏűŋƌ∙∙∙∙∙∙]]]',
         deselectAllCheckboxLabel: '[[[Ďēşēĺēċţ ąĺĺ∙∙∙∙∙∙∙]]]',

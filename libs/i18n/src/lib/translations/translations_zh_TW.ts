@@ -517,6 +517,8 @@ export default {
         cancelBtnLabel: '取消',
         clearFilters: '清除篩選器',
         collapseRowButtonTitle: '摺疊列',
+        columnSortedAscLabel: 'Sort by {columnName}, ascending',
+        columnSortedDescLabel: 'Sort by {columnName}, descending',
         confirmBtnLabel: '確定',
         defaultEmptyMessage: '找不到資料',
         deselectAllCheckboxLabel: '取消全選',

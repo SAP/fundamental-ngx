@@ -519,6 +519,8 @@ export default {
         cancelBtnLabel: 'Cancel',
         clearFilters: 'Clear Filters',
         collapseRowButtonTitle: 'Collapse row',
+        columnSortedAscLabel: 'Sort by {columnName}, ascending',
+        columnSortedDescLabel: 'Sort by {columnName}, descending',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'डाटा प्राप्त नहीं हुआ',
         deselectAllCheckboxLabel: 'Deselect all',

@@ -521,6 +521,8 @@ export default {
         cancelBtnLabel: 'Cancelar',
         clearFilters: 'Borrar filtros',
         collapseRowButtonTitle: 'Contraer fila',
+        columnSortedAscLabel: 'Sort by {columnName}, ascending',
+        columnSortedDescLabel: 'Sort by {columnName}, descending',
         confirmBtnLabel: 'Aceptar',
         defaultEmptyMessage: 'No se han encontrado datos',
         deselectAllCheckboxLabel: 'Deseleccionar todo',
