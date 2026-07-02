@@ -113,6 +113,10 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'תווית מידע'
     },
+    coreList: {
+        listItemSelectedAriaLabel: 'Selected',
+        listItemNotSelectedAriaLabel: 'Not Selected'
+    },
     coreLink: {
         emphasized: 'מודגש',
         subtle: 'עדין'

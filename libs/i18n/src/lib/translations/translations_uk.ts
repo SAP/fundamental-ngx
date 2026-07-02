@@ -113,6 +113,10 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Інформаційна мітка'
     },
+    coreList: {
+        listItemSelectedAriaLabel: 'Selected',
+        listItemNotSelectedAriaLabel: 'Not Selected'
+    },
     coreLink: {
         emphasized: 'Підкреслено',
         subtle: 'Приховано'

@@ -113,6 +113,10 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Bilgi Etiketi'
     },
+    coreList: {
+        listItemSelectedAriaLabel: 'Selected',
+        listItemNotSelectedAriaLabel: 'Not Selected'
+    },
     coreLink: {
         emphasized: 'Vurgulu',
         subtle: 'İnce'
