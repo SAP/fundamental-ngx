@@ -19,7 +19,6 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
-import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { DecimalPipe } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -29,7 +28,7 @@ import { CheckboxComponent, FD_CHECKBOX_COMPONENT } from '@fundamental-ngx/core/
 import { FormItemComponent } from '@fundamental-ngx/core/form';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { FD_RADIO_BUTTON_COMPONENT, RadioButtonComponent } from '@fundamental-ngx/core/radio';
-import { FdTranslatePipe, resolveTranslationSignal } from '@fundamental-ngx/i18n';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { Subject } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 import { ListLinkDirective } from '../directives/list-link.directive';
@@ -222,15 +221,6 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
     /** @hidden */
     private _checkbox: CheckboxComponent;
 
-    /** @hidden Translated "Selected" string */
-    private readonly _selectedLabel = resolveTranslationSignal('coreList.listItemSelectedAriaLabel');
-
-    /** @hidden Translated "Not Selected" string */
-    private readonly _notSelectedLabel = resolveTranslationSignal('coreList.listItemNotSelectedAriaLabel');
-
-    /** @hidden */
-    private readonly _liveAnnouncer = inject(LiveAnnouncer);
-
     /** @hidden */
     constructor(private readonly _changeDetectorRef: ChangeDetectorRef) {
         super();
@@ -346,13 +336,12 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
         event.preventDefault();
     }
 
-    /** @hidden Reads checked state from embedded checkbox/radio, updates `selected`, and announces the new state. */
+    /** @hidden Reads checked state from embedded checkbox/radio and writes it to `selected`. */
     private _syncSelectionFromControl(): void {
         if (this.checkbox) {
             this.selected = this.checkbox.isChecked;
         } else if (this.radio) {
             this.selected = this.radio.checked;
         }
-        this._liveAnnouncer.announce(this.selected ? this._selectedLabel() : this._notSelectedLabel(), 'polite');
     }
 }

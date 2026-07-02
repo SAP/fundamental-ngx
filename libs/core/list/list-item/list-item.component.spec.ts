@@ -1,4 +1,3 @@
-import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -133,7 +132,6 @@ describe('ListItemComponent', () => {
 describe('ListItemComponent in selection mode', () => {
     let fixture: ComponentFixture<SelectionListTestComponent>;
     let component: SelectionListTestComponent;
-    let liveAnnouncer: LiveAnnouncer;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
@@ -144,7 +142,6 @@ describe('ListItemComponent in selection mode', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(SelectionListTestComponent);
         component = fixture.componentInstance;
-        liveAnnouncer = TestBed.inject(LiveAnnouncer);
         fixture.detectChanges();
     });
 
@@ -171,23 +168,19 @@ describe('ListItemComponent in selection mode', () => {
         expect(span.textContent.trim()).toBe('Selected');
     });
 
-    it('should announce new state via LiveAnnouncer when list item is clicked to check', () => {
-        const announceSpy = jest.spyOn(liveAnnouncer, 'announce');
-
+    it('should update sr-only span to "Selected" when list item is clicked to check', () => {
         component.listItemRef.nativeElement.dispatchEvent(new MouseEvent('click', { bubbles: true }));
         fixture.detectChanges();
-
-        expect(announceSpy).toHaveBeenCalledWith('Selected', 'polite');
+        const span = component.listItemRef.nativeElement.querySelector('.fd-list__item--sr-only');
+        expect(span.textContent.trim()).toBe('Selected');
     });
 
-    it('should announce "Not Selected" via LiveAnnouncer when list item is clicked to uncheck', () => {
+    it('should update sr-only span to "Not Selected" when list item is clicked to uncheck', () => {
         component.listItemRef.nativeElement.dispatchEvent(new MouseEvent('click', { bubbles: true }));
         fixture.detectChanges();
-
-        const announceSpy = jest.spyOn(liveAnnouncer, 'announce');
         component.listItemRef.nativeElement.dispatchEvent(new MouseEvent('click', { bubbles: true }));
         fixture.detectChanges();
-
-        expect(announceSpy).toHaveBeenCalledWith('Not Selected', 'polite');
+        const span = component.listItemRef.nativeElement.querySelector('.fd-list__item--sr-only');
+        expect(span.textContent.trim()).toBe('Not Selected');
     });
 });
