@@ -363,7 +363,7 @@ export default {
         messagesTeamRemoved: '[[[1 ţēąɱ ĥąş ƃēēŋ ŗēɱŏʋēƌ∙∙∙∙∙∙]]]',
         messagesUndoAction: '[[[Ůŋƌŏ]]]',
         nextButtonAriaLabel: '[[[Ģŏ ţŏ ŋēχţ şĺįƌē∙∙∙∙∙∙∙∙]]]',
-        noDataFound: 'No Data Found',
+        noDataFound: '[[[Ńŏ Ďąţą Ƒŏűŋƌ∙∙∙∙∙∙]]]',
         nodeActionAddApproversAfter: '[[[Āƌƌ ąρρŗŏʋēŗş ąƒţēŗ∙∙∙∙∙]]]',
         nodeActionAddApproversBefore: '[[[Āƌƌ ąρρŗŏʋēŗş ƃēƒŏŗē∙∙∙∙]]]',
         nodeActionAddApproversParallel: '[[[Āƌƌ ρąŗąĺĺēĺ ąρρŗŏʋēŗş∙∙∙∙∙]]]',
