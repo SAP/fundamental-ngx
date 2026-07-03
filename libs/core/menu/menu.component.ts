@@ -38,7 +38,7 @@ import { Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { SegmentedButtonHeaderDirective } from './directives/segmented-button/segmented-button-header.directive';
 import { SegmentedButtonOptionDirective } from './directives/segmented-button/segmented-button-option.directive';
-import { MenuItemComponent } from './menu-item/menu-item.component';
+import { BaseSubmenu, MenuItemComponent } from './menu-item/menu-item.component';
 import { MenuMobileComponent } from './menu-mobile/menu-mobile.component';
 import { MENU_COMPONENT, MenuInterface } from './menu.interface';
 import { FD_MENU_COMPONENT, FD_MENU_ITEM_COMPONENT } from './menu.tokens';
@@ -220,6 +220,7 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
     private readonly _viewContainerRef = inject(ViewContainerRef);
     private readonly _dynamicComponentService = inject(DynamicComponentService, { optional: true });
     private readonly _destroyRef = inject(DestroyRef);
+    private readonly _submenuSubscriptions = new Map<BaseSubmenu, () => void>();
 
     /** @hidden */
     constructor() {
@@ -285,13 +286,9 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
         // Use afterNextRender to ensure this runs after ngAfterContentInit sets the menu component
         afterNextRender(() => {
             runInInjectionContext(this._injector, () => {
-                // Track previous subscriptions to clean up when effect re-runs
-                let submenuSubscriptions: (() => void)[] = [];
-
                 effect((onCleanup) => {
                     // Clean up previous subscriptions before creating new ones
-                    submenuSubscriptions.forEach((unsubscribe) => unsubscribe());
-                    submenuSubscriptions = [];
+                    this._clearSubmenuSubscriptions();
 
                     const menuItems = this._menuItems() as readonly MenuItemComponent[];
                     this._menuService.rebuildMenu();
@@ -301,7 +298,7 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
                     // Otherwise menuItem.submenu will be undefined
                     afterNextRender(
                         () => {
-                            this._setAriaPositionAttributesRecursive(menuItems, submenuSubscriptions);
+                            this._setAriaPositionAttributesRecursive(menuItems);
                         },
                         { injector: this._injector }
                     );
@@ -323,8 +320,7 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
 
                     // Cleanup callback when effect is destroyed or re-runs
                     onCleanup(() => {
-                        submenuSubscriptions.forEach((unsubscribe) => unsubscribe());
-                        submenuSubscriptions = [];
+                        this._clearSubmenuSubscriptions();
                     });
                 });
             });
@@ -622,15 +618,17 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
         }
     }
 
+    /** @hidden */
+    private _clearSubmenuSubscriptions(): void {
+        this._submenuSubscriptions.forEach((unsubscribe) => unsubscribe());
+        this._submenuSubscriptions.clear();
+    }
+
     /**
      * @hidden
      * Sets aria-posinset and aria-setsize on all menu items recursively.
      */
-    private _setAriaPositionAttributesRecursive(
-        menuItems: readonly MenuItemComponent[],
-        subscriptions: (() => void)[],
-        depth = 0
-    ): void {
+    private _setAriaPositionAttributesRecursive(menuItems: readonly MenuItemComponent[]): void {
         // Filter out submenu items - contentChildren returns all descendants
         const submenuItems = new Set<MenuItemComponent>();
         menuItems.forEach((item) => {
@@ -640,29 +638,52 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
         });
 
         const directChildren = menuItems.filter((item) => !submenuItems.has(item));
+        const directInteractiveItems = directChildren
+            .map((menuItem) => ({
+                menuItem,
+                interactiveElement: menuItem.elementRef.nativeElement.querySelector(
+                    '[fd-menu-interactive]'
+                ) as HTMLElement | null
+            }))
+            .filter(
+                ({ interactiveElement }) =>
+                    !!interactiveElement && (interactiveElement.getAttribute('role') || 'menuitem') === 'menuitem'
+            );
 
-        directChildren.forEach((menuItem, index) => {
+        directChildren.forEach((menuItem) => {
             const interactiveElement = menuItem.elementRef.nativeElement.querySelector(
                 '[fd-menu-interactive]'
             ) as HTMLElement | null;
 
             if (interactiveElement) {
-                this._renderer.setAttribute(interactiveElement, 'aria-posinset', String(index + 1));
-                this._renderer.setAttribute(interactiveElement, 'aria-setsize', String(directChildren.length));
+                const position = directInteractiveItems.findIndex((item) => item.menuItem === menuItem);
+
+                if (position > -1) {
+                    this._renderer.setAttribute(interactiveElement, 'aria-posinset', String(position + 1));
+                    this._renderer.setAttribute(
+                        interactiveElement,
+                        'aria-setsize',
+                        String(directInteractiveItems.length)
+                    );
+                } else {
+                    // Keep aria metadata aligned when an item switches to role="none".
+                    this._renderer.removeAttribute(interactiveElement, 'aria-posinset');
+                    this._renderer.removeAttribute(interactiveElement, 'aria-setsize');
+                }
             }
 
             if (menuItem.submenu) {
-                this._setAriaPositionAttributesRecursive(menuItem.submenu.menuItems || [], subscriptions, depth + 1);
+                const nestedMenuItems = menuItem.submenu.menuItems || [];
+                this._setAriaPositionAttributesRecursive(nestedMenuItems);
 
-                const subscription = menuItem.submenu._menuItemsChange$.subscribe(() => {
-                    this._menuService.rebuildMenu();
-                    this._setAriaPositionAttributesRecursive(
-                        menuItem.submenu?.menuItems || [],
-                        subscriptions,
-                        depth + 1
-                    );
-                });
-                subscriptions.push(() => subscription.unsubscribe());
+                if (!this._submenuSubscriptions.has(menuItem.submenu)) {
+                    const subscription = menuItem.submenu._menuItemsChange$.subscribe(() => {
+                        this._menuService.rebuildMenu();
+                        this._setAriaPositionAttributesRecursive(this._menuItems() as readonly MenuItemComponent[]);
+                    });
+
+                    this._submenuSubscriptions.set(menuItem.submenu, () => subscription.unsubscribe());
+                }
             }
         });
     }
