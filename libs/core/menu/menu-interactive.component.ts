@@ -21,9 +21,6 @@ import { MenuItemInputDirective } from './directives/menu-item-input.directive';
         <ng-template cdkPortalOutlet></ng-template>
         <ng-content></ng-content>
     `,
-    host: {
-        role: 'menuitem'
-    },
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [PortalModule]
 })
@@ -40,6 +37,14 @@ export class MenuInteractiveComponent implements HasElementRef {
         ) {
             this._startAddonInstance = addon;
         }
+    }
+
+    /** @hidden */
+    @HostBinding('attr.role')
+    get role(): string {
+        // Parent items with submenus should not have role="menuitem" as it causes VoiceOver
+        // to count them in the position calculation. Only leaf items should be menuitems.
+        return this.ariaHaspopup ? 'none' : 'menuitem';
     }
 
     /** @hidden */

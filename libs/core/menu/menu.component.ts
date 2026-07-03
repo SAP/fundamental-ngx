@@ -296,16 +296,21 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
                     const menuItems = this._menuItems() as readonly MenuItemComponent[];
                     this._menuService.rebuildMenu();
 
+                    // Set aria-posinset and aria-setsize for all menu items recursively
+                    // IMPORTANT: Defer this until after Angular processes @Input() bindings
+                    // Otherwise menuItem.submenu will be undefined
+                    afterNextRender(
+                        () => {
+                            this._setAriaPositionAttributesRecursive(menuItems, submenuSubscriptions);
+                        },
+                        { injector: this._injector }
+                    );
+
                     // Whether menu have submenu or not.
                     let hasSubmenus = false;
                     menuItems.forEach((menuItem: MenuItemComponent) => {
                         if (menuItem.submenu) {
                             hasSubmenus = true;
-                            // Subscribe to submenu changes and track subscription for cleanup
-                            const subscription = menuItem.submenu._menuItemsChange$.subscribe(() =>
-                                this._menuService.rebuildMenu()
-                            );
-                            submenuSubscriptions.push(() => subscription.unsubscribe());
                         }
                     });
 
@@ -615,5 +620,67 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
         if (this.focusTrapped() && this.trigger) {
             this.trigger.nativeElement.focus();
         }
+    }
+
+    /**
+     * @hidden
+     * Patches the menu service's setFocused method to update aria attributes before focus moves.
+     * This ensures VoiceOver reads the correct position when first entering a submenu.
+     */
+    /**
+     * @hidden
+     * Recursively sets aria-posinset and aria-setsize on menu items at all nesting levels.
+     * These attributes help screen readers announce "Item X of Y" when navigating.
+     * @param menuItems - Array of menu items at the current level
+     * @param subscriptions - Array to track subscriptions for cleanup
+     */
+    private _setAriaPositionAttributesRecursive(
+        menuItems: readonly MenuItemComponent[],
+        subscriptions: (() => void)[],
+        depth = 0
+    ): void {
+        // CRITICAL: Filter out items that belong to submenus of other items in this list
+        // The contentChildren query returns ALL descendants, so submenu items appear at both levels
+        const submenuItems = new Set<MenuItemComponent>();
+        menuItems.forEach((item) => {
+            if (item.submenu?.menuItems) {
+                item.submenu.menuItems.forEach((child) => submenuItems.add(child));
+            }
+        });
+
+        // Only process items that are direct children at this level
+        const directChildren = menuItems.filter((item) => !submenuItems.has(item));
+
+        directChildren.forEach((menuItem, index) => {
+            // Find the fd-menu-interactive element
+            const interactiveElement = menuItem.elementRef.nativeElement.querySelector(
+                '[fd-menu-interactive]'
+            ) as HTMLElement | null;
+
+            if (interactiveElement) {
+                // Set positional attributes on ALL items at this level
+                // Parent items with role="none" won't be counted by VoiceOver anyway
+                this._renderer.setAttribute(interactiveElement, 'aria-posinset', String(index + 1));
+                this._renderer.setAttribute(interactiveElement, 'aria-setsize', String(directChildren.length));
+            }
+
+            // Recursively process submenus
+            if (menuItem.submenu) {
+                // Process submenu items immediately (no need for afterNextRender since we're already inside one)
+                this._setAriaPositionAttributesRecursive(menuItem.submenu.menuItems || [], subscriptions, depth + 1);
+
+                // Subscribe to submenu changes to update aria attributes when items change
+                const subscription = menuItem.submenu._menuItemsChange$.subscribe(() => {
+                    this._menuService.rebuildMenu();
+                    // Recursively update aria attributes for this submenu and its children
+                    this._setAriaPositionAttributesRecursive(
+                        menuItem.submenu?.menuItems || [],
+                        subscriptions,
+                        depth + 1
+                    );
+                });
+                subscriptions.push(() => subscription.unsubscribe());
+            }
+        });
     }
 }
