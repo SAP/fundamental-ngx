@@ -624,23 +624,14 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
 
     /**
      * @hidden
-     * Patches the menu service's setFocused method to update aria attributes before focus moves.
-     * This ensures VoiceOver reads the correct position when first entering a submenu.
-     */
-    /**
-     * @hidden
-     * Recursively sets aria-posinset and aria-setsize on menu items at all nesting levels.
-     * These attributes help screen readers announce "Item X of Y" when navigating.
-     * @param menuItems - Array of menu items at the current level
-     * @param subscriptions - Array to track subscriptions for cleanup
+     * Sets aria-posinset and aria-setsize on all menu items recursively.
      */
     private _setAriaPositionAttributesRecursive(
         menuItems: readonly MenuItemComponent[],
         subscriptions: (() => void)[],
         depth = 0
     ): void {
-        // CRITICAL: Filter out items that belong to submenus of other items in this list
-        // The contentChildren query returns ALL descendants, so submenu items appear at both levels
+        // Filter out submenu items - contentChildren returns all descendants
         const submenuItems = new Set<MenuItemComponent>();
         menuItems.forEach((item) => {
             if (item.submenu?.menuItems) {
@@ -648,31 +639,23 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
             }
         });
 
-        // Only process items that are direct children at this level
         const directChildren = menuItems.filter((item) => !submenuItems.has(item));
 
         directChildren.forEach((menuItem, index) => {
-            // Find the fd-menu-interactive element
             const interactiveElement = menuItem.elementRef.nativeElement.querySelector(
                 '[fd-menu-interactive]'
             ) as HTMLElement | null;
 
             if (interactiveElement) {
-                // Set positional attributes on ALL items at this level
-                // Parent items with role="none" won't be counted by VoiceOver anyway
                 this._renderer.setAttribute(interactiveElement, 'aria-posinset', String(index + 1));
                 this._renderer.setAttribute(interactiveElement, 'aria-setsize', String(directChildren.length));
             }
 
-            // Recursively process submenus
             if (menuItem.submenu) {
-                // Process submenu items immediately (no need for afterNextRender since we're already inside one)
                 this._setAriaPositionAttributesRecursive(menuItem.submenu.menuItems || [], subscriptions, depth + 1);
 
-                // Subscribe to submenu changes to update aria attributes when items change
                 const subscription = menuItem.submenu._menuItemsChange$.subscribe(() => {
                     this._menuService.rebuildMenu();
-                    // Recursively update aria attributes for this submenu and its children
                     this._setAriaPositionAttributesRecursive(
                         menuItem.submenu?.menuItems || [],
                         subscriptions,

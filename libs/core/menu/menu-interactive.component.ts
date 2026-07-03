@@ -42,9 +42,8 @@ export class MenuInteractiveComponent implements HasElementRef {
     /** @hidden */
     @HostBinding('attr.role')
     get role(): string {
-        // Parent items with submenus should not have role="menuitem" as it causes VoiceOver
-        // to count them in the position calculation. Only leaf items should be menuitems.
-        return this.ariaHaspopup ? 'none' : 'menuitem';
+        // Parent items switch to role="none" when expanded so VoiceOver doesn't count them.
+        return this.ariaHaspopup && this.ariaExpanded ? 'none' : 'menuitem';
     }
 
     /** @hidden */
