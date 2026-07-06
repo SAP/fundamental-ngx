@@ -14,6 +14,11 @@ interface SelectionEvent {
     timestamp: Date;
 }
 
+interface ComboBoxSelectionChangeDetail {
+    item: any;
+    trigger: 'Typeahead' | 'Click' | 'Keyboard';
+}
+
 @Component({
     selector: 'ui5-combo-box-selection-trigger-sample',
     templateUrl: './selection-trigger-sample.html',
@@ -48,8 +53,8 @@ export class ComboBoxSelectionTriggerSample {
      * indicating the source of the selection: 'typeahead', 'click', or 'keyboard'.
      */
     onSelectionChange(event: UI5WrapperCustomEvent<ComboBox, 'ui5SelectionChange'>): void {
-        const detail = (event as any).detail;
-        const trigger = detail?.trigger || 'unknown';
+        const detail = event.detail as ComboBoxSelectionChangeDetail;
+        const trigger = (detail?.trigger.toLowerCase() as 'typeahead' | 'click' | 'keyboard') || 'unknown';
         const value = event.currentTarget.value;
 
         const selectionEvent: SelectionEvent = {

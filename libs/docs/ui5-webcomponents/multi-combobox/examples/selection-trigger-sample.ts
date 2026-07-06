@@ -37,8 +37,10 @@ export class MultiComboBoxSelectionTriggerSample {
     ];
 
     onSelectionChange(event: UI5WrapperCustomEvent<MultiComboBox, 'ui5SelectionChange'>): void {
+        // Note: The trigger property is not yet in the official TypeScript types for MultiComboBox
+        // but is available at runtime in UI5 Web Components v2.24.0
         const detail = (event as any).detail;
-        const trigger = detail?.trigger || 'unknown';
+        const trigger = detail?.trigger?.toLowerCase() || 'unknown';
         const items = event.currentTarget.selectedItems || [];
         const itemTexts = items.map((item) => item.text || '');
 

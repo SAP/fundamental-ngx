@@ -8,10 +8,7 @@ import { Avatar } from '@fundamental-ngx/ui5-webcomponents/avatar';
 import { MessageStrip } from '@fundamental-ngx/ui5-webcomponents/message-strip';
 
 import '@ui5/webcomponents-icons/dist/action-settings.js';
-import '@ui5/webcomponents-icons/dist/manager.js';
 import '@ui5/webcomponents-icons/dist/message-information.js';
-import '@ui5/webcomponents-icons/dist/shield.js';
-import '@ui5/webcomponents-icons/dist/world.js';
 
 @Component({
     selector: 'ui5-doc-user-menu-info-area-sample',

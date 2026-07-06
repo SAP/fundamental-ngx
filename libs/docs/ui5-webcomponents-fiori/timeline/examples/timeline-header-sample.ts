@@ -123,6 +123,7 @@ export class TimelineHeaderSample {
             iconTooltip: 'Return requested',
             name: 'Maria Chen',
             timestamp: '2024-11-06T10:03:00Z',
+            status: 'complete',
             eventType: 'return'
         }
     ]);
