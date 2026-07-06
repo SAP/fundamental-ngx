@@ -1,0 +1,35 @@
+<div>
+    <ui5-shellbar id="shellbar" (ui5ProfileClick)="onProfileClick()">
+        <ui5-shellbar-branding slot="branding">
+            Corporate Portal
+            <img
+                slot="logo"
+                src="https://ui5.github.io/webcomponents/images/sap-logo-svg.svg"
+                alt="Corporate Portal Logo"
+            />
+        </ui5-shellbar-branding>
+        <ui5-avatar slot="profile" id="infoAreaOpener">
+            <img src="https://ui5.github.io/webcomponents/images/avatars/man_avatar_2.png" alt="User Avatar" />
+        </ui5-avatar>
+    </ui5-shellbar>
+    <ui5-user-menu id="userMenu" opener="infoAreaOpener" [open]="menuOpen()" (ui5Close)="onClose()">
+        <ui5-user-menu-account
+            slot="accounts"
+            avatarSrc="https://ui5.github.io/webcomponents/images/avatars/man_avatar_2.png"
+            titleText="Marcus Johnson"
+            subtitleText="marcus.johnson@sap.com"
+            description="System Administrator"
+            selected
+        >
+        </ui5-user-menu-account>
+
+        <div slot="infoArea">
+            <ui5-message-strip [design]="'Information'" hideCloseButton>
+                All actions are recorded under the proxy audit log.
+            </ui5-message-strip>
+        </div>
+
+        <ui5-user-menu-item icon="action-settings" text="Settings"></ui5-user-menu-item>
+        <ui5-user-menu-item icon="message-information" text="About"></ui5-user-menu-item>
+    </ui5-user-menu>
+</div>

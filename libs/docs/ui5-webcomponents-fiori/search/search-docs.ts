@@ -11,6 +11,7 @@ import {
 import { ActionsSample } from './examples/actions-sample';
 import { AdvancedFilteringSample } from './examples/advanced-filtering-sample';
 import { BylineItemsSample } from './examples/byline-items-sample';
+import { CustomMaxHeightSample } from './examples/custom-max-height-sample';
 import { LoadingSample } from './examples/loading-sample';
 import { ScopesSample } from './examples/scopes-sample';
 import { ShowMoreSample } from './examples/show-more-sample';
@@ -30,6 +31,8 @@ const showMoreSampleTs = 'show-more-sample.ts';
 const showMoreSampleHtml = 'show-more-sample.html';
 const actionsSampleTs = 'actions-sample.ts';
 const actionsSampleHtml = 'actions-sample.html';
+const customMaxHeightSampleTs = 'custom-max-height-sample.ts';
+const customMaxHeightSampleHtml = 'custom-max-height-sample.html';
 
 @Component({
     selector: 'ui5-doc-search',
@@ -47,7 +50,8 @@ const actionsSampleHtml = 'actions-sample.html';
         ScopesSample,
         LoadingSample,
         ActionsSample,
-        ShowMoreSample
+        ShowMoreSample,
+        CustomMaxHeightSample
     ]
 })
 export class SearchDocs {
@@ -167,6 +171,23 @@ export class SearchDocs {
             code: getAssetFromModuleAssets(actionsSampleHtml),
             originalFileName: 'actions-sample',
             component: 'ActionsSample'
+        }
+    ]);
+
+    customMaxHeightExample = signal<ExampleFile[]>([
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(customMaxHeightSampleTs),
+            originalFileName: 'custom-max-height-sample',
+            component: 'CustomMaxHeightSample',
+            typescriptFileCode: getAssetFromModuleAssets(customMaxHeightSampleTs),
+            scssFileCode: ''
+        },
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(customMaxHeightSampleHtml),
+            originalFileName: 'custom-max-height-sample',
+            component: 'CustomMaxHeightSample'
         }
     ]);
 }

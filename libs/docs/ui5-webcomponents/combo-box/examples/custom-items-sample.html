@@ -1,0 +1,18 @@
+<ui5-combobox id="combobox" placeholder="Select destination" style="width: 400px" (ui5Change)="onChange($event)">
+    @for (dest of destinations; track dest.code) {
+    <ui5-cb-item-custom [text]="dest.city + ', ' + dest.country" [value]="dest.code">
+        <div style="display: flex; align-items: center; gap: 0.5rem">
+            <span role="img" [attr.aria-label]="'Flag'">{{ dest.flag }}</span>
+            <span style="flex: 1">{{ dest.city }}, {{ dest.country }}</span>
+            <span role="img" [attr.aria-label]="'Airport'">{{ dest.airportIcon }}</span>
+            @if (dest.popular) {
+            <span role="img" [attr.aria-label]="'Popular'">🌍</span>
+            }
+        </div>
+    </ui5-cb-item-custom>
+    }
+</ui5-combobox>
+<br /><br />
+@if (selectedDestination()) {
+<div><strong>Selected:</strong> {{ selectedDestination() }}</div>
+}
