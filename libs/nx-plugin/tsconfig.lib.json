@@ -10,5 +10,13 @@
     },
     "files": ["./src/index.ts"],
     "include": ["**/*.ts"],
-    "exclude": ["jest.config.ts", "**/*.spec.ts", "**/*.test.ts"]
+    "exclude": ["jest.config.ts", "**/*.spec.ts", "**/*.test.ts"],
+    "angularCompilerOptions": {
+        "extendedDiagnostics": {
+            "checks": {
+                "nullishCoalescingNotNullable": "suppress",
+                "optionalChainNotNullable": "suppress"
+            }
+        }
+    }
 }

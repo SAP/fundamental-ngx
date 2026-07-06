@@ -15,7 +15,7 @@
             (click)="goBack.emit()"
         ></button>
     }
-    @if (settings?.title | fdkAsyncOrSync; as settingsTitle) {
+    @if ($safeNavigationMigration(settings?.title) | fdkAsyncOrSync; as settingsTitle) {
         {{ settingsTitle }}
     } @else {
         <fd-skeleton height="40px" type="rectangle" width="40%" textLines="1" [style.margin]="'auto 0'"></fd-skeleton>

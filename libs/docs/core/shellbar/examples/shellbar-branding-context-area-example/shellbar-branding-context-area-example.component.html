@@ -50,7 +50,7 @@
                 [ariaLabel]="action.ariaLabel"
                 [title]="action.title"
                 [fdType]="action.type ?? 'transparent'"
-                [toggled]="action.toggled?.()"
+                [toggled]="$safeNavigationMigration(action.toggled?.())"
                 [notificationCount]="action.notificationCount"
                 [notificationLabel]="action.notificationLabel"
             ></fd-shellbar-action>

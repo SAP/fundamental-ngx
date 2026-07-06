@@ -133,10 +133,10 @@ describe('SelectComponent', () => {
             imports: [TestWrapperComponent, TestFilteringWrapperComponent, ValueCompareWithSelectComponent]
         })
             .overrideComponent(SelectComponent, {
-                set: { changeDetection: ChangeDetectionStrategy.Default }
+                set: { changeDetection: ChangeDetectionStrategy.Eager }
             })
             .overrideComponent(PopoverComponent, {
-                set: { changeDetection: ChangeDetectionStrategy.Default }
+                set: { changeDetection: ChangeDetectionStrategy.Eager }
             })
             .compileComponents();
     }));

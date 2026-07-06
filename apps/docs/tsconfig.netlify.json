@@ -9,8 +9,17 @@
         "useDefineForClassFields": false,
         "moduleResolution": "bundler",
         "module": "preserve",
-        "lib": ["dom", "es2023"]
+        "lib": ["dom", "es2023"],
+        "rootDir": "../../"
     },
     "exclude": ["**/*.spec.ts"],
-    "include": ["**/*.ts"]
+    "include": ["**/*.ts"],
+    "angularCompilerOptions": {
+        "extendedDiagnostics": {
+            "checks": {
+                "nullishCoalescingNotNullable": "suppress",
+                "optionalChainNotNullable": "suppress"
+            }
+        }
+    }
 }

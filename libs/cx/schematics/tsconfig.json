@@ -21,5 +21,14 @@
         "types": ["jasmine", "node"]
     },
     "include": ["**/*"],
-    "exclude": ["*/files/**/*"]
+    "exclude": ["*/files/**/*"],
+    "angularCompilerOptions": {
+        "extendedDiagnostics": {
+            "checks": {
+                "nullishCoalescingNotNullable": "suppress",
+                "optionalChainNotNullable": "suppress"
+            }
+        },
+        "strictTemplates": false
+    }
 }

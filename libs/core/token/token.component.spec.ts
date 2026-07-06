@@ -30,7 +30,7 @@ describe('TokenComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.overrideComponent(TokenComponent, {
             set: {
-                changeDetection: ChangeDetectionStrategy.Default
+                changeDetection: ChangeDetectionStrategy.Eager
             }
         })
             .configureTestingModule({
@@ -410,7 +410,7 @@ describe('TokenComponent with host', () => {
     beforeEach(waitForAsync(() => {
         TestBed.overrideComponent(TokenComponent, {
             set: {
-                changeDetection: ChangeDetectionStrategy.Default
+                changeDetection: ChangeDetectionStrategy.Eager
             }
         })
             .configureTestingModule({

@@ -57,7 +57,7 @@ describe('DialogHeaderComponent', () => {
             providers: [DialogConfig]
         }).overrideComponent(DialogHeaderComponent, {
             set: {
-                changeDetection: ChangeDetectionStrategy.Default
+                changeDetection: ChangeDetectionStrategy.Eager
             }
         });
     }));

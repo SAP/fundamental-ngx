@@ -5,6 +5,7 @@
         "fullTemplateTypeCheck": true
     },
     "compilerOptions": {
+        "ignoreDeprecations": "6.0",
         "baseUrl": ".",
         "outDir": "./dist/out-tsc",
         "sourceMap": true,
@@ -21,7 +22,7 @@
         "experimentalDecorators": true,
         "allowSyntheticDefaultImports": true,
         "resolveJsonModule": true,
-        "downlevelIteration": true,
+
         "importHelpers": true,
         "target": "es2023",
         "typeRoots": ["node_modules/@types"],

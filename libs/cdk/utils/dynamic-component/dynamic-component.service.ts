@@ -1,7 +1,6 @@
 import {
     ApplicationRef,
     Compiler,
-    ComponentFactoryResolver,
     ComponentRef,
     EmbeddedViewRef,
     Injectable,
@@ -9,7 +8,9 @@ import {
     NgModuleFactory,
     TemplateRef,
     Type,
-    ViewContainerRef
+    ViewContainerRef,
+    createComponent,
+    inject
 } from '@angular/core';
 import { DynamicComponentConfig } from './dynamic-component-config';
 import { DynamicComponentInjector } from './dynamic-component-injector';
@@ -21,13 +22,9 @@ import { DynamicComponentInjector } from './dynamic-component-injector';
     providedIn: 'root'
 })
 export class DynamicComponentService {
-    /** @hidden */
-    constructor(
-        private readonly _componentFactoryResolver: ComponentFactoryResolver,
-        private readonly _applicationRef: ApplicationRef,
-        private readonly _injector: Injector,
-        private readonly _compiler: Compiler
-    ) {}
+    private readonly _applicationRef = inject(ApplicationRef);
+    private readonly _injector = inject(Injector);
+    private readonly _compiler = inject(Compiler);
 
     /**
      * Function that creates dynamic component and injects services to allow communication between component and outside
@@ -40,9 +37,8 @@ export class DynamicComponentService {
         content: TemplateRef<any> | Type<any> | string | Record<string, any>,
         componentType: Type<T>,
         config: DynamicComponentConfig,
-        inject: { injector?: Injector; services?: any[] } = {}
+        { injector, services }: { injector?: Injector; services?: any[] } = {}
     ): ComponentRef<T> {
-        const { injector, services } = inject;
         const dependenciesMap = this._createDependencyMap(services);
         const componentRef = this._createComponent<T>(componentType, dependenciesMap, injector);
         this._passExternalContent<T>(componentRef, content);
@@ -69,11 +65,9 @@ export class DynamicComponentService {
         const moduleFactory =
             moduleType instanceof NgModuleFactory ? moduleType : await this._compiler.compileModuleAsync<M>(moduleType);
         const moduleRef = moduleFactory.create(injector || this._injector);
-        const componentFactory = moduleRef.componentFactoryResolver.resolveComponentFactory(componentType);
-
-        containerRef.clear();
-
-        const componentRef: ComponentRef<C> = containerRef.createComponent(componentFactory);
+        const componentRef: ComponentRef<C> = containerRef.createComponent(componentType, {
+            ngModuleRef: moduleRef
+        });
 
         this._passExternalContent<C>(componentRef, content);
 
@@ -118,10 +112,10 @@ export class DynamicComponentService {
         injector?: Injector
     ): ComponentRef<V> {
         const dynamicComponentInjector = new DynamicComponentInjector(injector || this._injector, dependenciesMap);
-        const componentFactory = this._componentFactoryResolver.resolveComponentFactory(componentType);
-        const componentRef = componentFactory.create(dynamicComponentInjector);
-        // this._applicationRef.attachView(componentRef.hostView);
-        return componentRef;
+        return createComponent(componentType, {
+            environmentInjector: this._applicationRef.injector,
+            elementInjector: dynamicComponentInjector
+        });
     }
 
     /** @hidden */

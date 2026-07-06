@@ -12,7 +12,7 @@ describe('BusyIndicatorComponent', () => {
             imports: [BusyIndicatorComponent]
         })
             .overrideComponent(BusyIndicatorComponent, {
-                set: { changeDetection: ChangeDetectionStrategy.Default }
+                set: { changeDetection: ChangeDetectionStrategy.Eager }
             })
             .compileComponents();
 

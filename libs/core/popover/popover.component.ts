@@ -14,6 +14,7 @@ import {
     inject,
     Injector,
     input,
+    linkedSignal,
     model,
     OnDestroy,
     output,
@@ -218,7 +219,9 @@ export class PopoverComponent implements AfterViewInit, AfterContentInit, OnDest
     readonly bodyAriaLabelledBy = input<string | null>(null);
 
     /** Two-way binding for popover open state */
-    readonly isOpen = model(false);
+    // eslint-disable-next-line @angular-eslint/no-input-rename
+    readonly isOpenInput = input(false, { alias: 'isOpen' });
+    readonly isOpen = linkedSignal(this.isOpenInput);
 
     /** Event emitted when the state of the isOpen property changes. */
     readonly isOpenChange = output<boolean>();

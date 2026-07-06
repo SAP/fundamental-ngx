@@ -78,8 +78,8 @@
                     fd-table-body
                     fdkDndList
                     #tableBody
-                    [dragoverPredicate]="_dndTableDirective?.dragoverPredicate"
-                    [dropPredicate]="_dndTableDirective?.dropPredicate"
+                    [dragoverPredicate]="$safeNavigationMigration(_dndTableDirective?.dragoverPredicate)"
+                    [dropPredicate]="$safeNavigationMigration(_dndTableDirective?.dropPredicate)"
                     [noBorderX]="noBorderX || noBorders"
                     [noBorderY]="noBorderY || noBorders"
                     [tabIndex]="pageScrolling ? 0 : -1"

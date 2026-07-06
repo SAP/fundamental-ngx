@@ -13,7 +13,9 @@
             </fd-combobox>
             <small class="sap-margin-top-tiny sap-display-block">
                 Form value will contain entire object:
-                <code>{{ comparisonForm.get('fruitWithoutValueProperty')?.value | json }}</code>
+                <code>{{
+                    $safeNavigationMigration(comparisonForm.get('fruitWithoutValueProperty')?.value) | json
+                }}</code>
             </small>
         </div>
     </div>

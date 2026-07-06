@@ -10,3 +10,5 @@ declare module '*?raw' {
 
     export = contents;
 }
+
+declare module '*.css';

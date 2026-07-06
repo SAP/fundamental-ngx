@@ -4,7 +4,7 @@ import {
     Component,
     contentChild,
     input,
-    model,
+    linkedSignal,
     output,
     signal
 } from '@angular/core';
@@ -75,7 +75,9 @@ export class ProductSwitchComponent {
     readonly focusAutoCapture = input(false, { transform: booleanAttribute });
 
     /** Two-way binding for product switch open state. */
-    readonly isOpen = model(false);
+    // eslint-disable-next-line @angular-eslint/no-input-rename
+    readonly isOpenInput = input(false, { alias: 'isOpen' });
+    readonly isOpen = linkedSignal(this.isOpenInput);
 
     /** Event emitted right before the product switch is being opened. */
     readonly beforeOpen = output<void>();
