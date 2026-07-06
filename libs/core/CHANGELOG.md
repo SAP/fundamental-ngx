@@ -1,3 +1,13 @@
+## 0.63.1-rc.12 (2026-07-06)
+
+### 🩹 Fixes
+
+- **core:** improve menu ARIA attributes and VoiceOver compatibility ([#14327](https://github.com/SAP/fundamental-ngx/pull/14327))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.63.1-rc.11 (2026-07-06)
 
 This was a version bump only for core to align it with other projects, there were no code changes.
