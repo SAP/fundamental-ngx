@@ -1,3 +1,13 @@
+## 0.63.1-rc.10 (2026-07-06)
+
+### 🩹 Fixes
+
+- **core:** screen reader announces selection state for fd-list items ([#14322](https://github.com/SAP/fundamental-ngx/pull/14322))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
 ## 0.63.1-rc.9 (2026-07-02)
 
 This was a version bump only for i18n to align it with other projects, there were no code changes.
