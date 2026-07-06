@@ -215,8 +215,7 @@ export class FocusableItemDirective implements FocusableItem, HasElementRef {
         const activeEl = this._document.activeElement;
         const isFocused = activeEl === this.elementRef.nativeElement;
         const shouldFocusChild = KeyUtil.isKeyCode(event, [ENTER, MAC_ENTER, F2]) && !event.shiftKey && isFocused;
-        const shouldFocusCell =
-            ((KeyUtil.isKeyCode(event, F2) && event.shiftKey) || KeyUtil.isKeyCode(event, ESCAPE)) && !isFocused;
+        const shouldFocusCell = KeyUtil.isKeyCode(event, [ESCAPE, F2]) && !isFocused;
 
         if (shouldFocusChild) {
             event.stopPropagation();
