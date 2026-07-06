@@ -126,43 +126,64 @@ describe('TableCellHeaderPopoverComponent', () => {
     });
 
     describe('filter input keyboard handling', () => {
-        it('should have keydown.arrowdown handler that stops propagation', fakeAsync(() => {
+        it('should stop propagation for all keys including ArrowDown', fakeAsync(() => {
             component.column = new MockTableColumn() as TableColumn;
             component.column.filterable = true;
             component.filteringFromHeaderDisabled = false;
             fixture.detectChanges();
             tick(1000);
 
-            const filteringTemplate = component._popoverItems
-                .toArray()
-                .find((item) => item.name() === 'filteringPopoverItem');
-            expect(filteringTemplate).toBeTruthy();
+            const filterInput = fixture.nativeElement.querySelector(
+                `#fdp-table-column-filtering-${component.column.name}`
+            ) as HTMLInputElement;
+            expect(filterInput).toBeTruthy();
+
+            const event = new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true, cancelable: true });
+            const stopPropagationSpy = jest.spyOn(event, 'stopPropagation');
+
+            filterInput.dispatchEvent(event);
+
+            expect(stopPropagationSpy).toHaveBeenCalled();
         }));
 
-        it('should have keydown.arrowup handler that stops propagation', fakeAsync(() => {
+        it('should stop propagation for all keys including ArrowUp', fakeAsync(() => {
             component.column = new MockTableColumn() as TableColumn;
             component.column.filterable = true;
             component.filteringFromHeaderDisabled = false;
             fixture.detectChanges();
             tick(1000);
 
-            const filteringTemplate = component._popoverItems
-                .toArray()
-                .find((item) => item.name() === 'filteringPopoverItem');
-            expect(filteringTemplate).toBeTruthy();
+            const filterInput = fixture.nativeElement.querySelector(
+                `#fdp-table-column-filtering-${component.column.name}`
+            ) as HTMLInputElement;
+            expect(filterInput).toBeTruthy();
+
+            const event = new KeyboardEvent('keydown', { key: 'ArrowUp', bubbles: true, cancelable: true });
+            const stopPropagationSpy = jest.spyOn(event, 'stopPropagation');
+
+            filterInput.dispatchEvent(event);
+
+            expect(stopPropagationSpy).toHaveBeenCalled();
         }));
 
-        it('should not have a generic keydown handler that would block Escape', fakeAsync(() => {
+        it('should stop propagation for all keys including Escape', fakeAsync(() => {
             component.column = new MockTableColumn() as TableColumn;
             component.column.filterable = true;
             component.filteringFromHeaderDisabled = false;
             fixture.detectChanges();
             tick(1000);
 
-            const filteringTemplate = component._popoverItems
-                .toArray()
-                .find((item) => item.name() === 'filteringPopoverItem');
-            expect(filteringTemplate).toBeTruthy();
+            const filterInput = fixture.nativeElement.querySelector(
+                `#fdp-table-column-filtering-${component.column.name}`
+            ) as HTMLInputElement;
+            expect(filterInput).toBeTruthy();
+
+            const event = new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true });
+            const stopPropagationSpy = jest.spyOn(event, 'stopPropagation');
+
+            filterInput.dispatchEvent(event);
+
+            expect(stopPropagationSpy).toHaveBeenCalled();
         }));
     });
 });
