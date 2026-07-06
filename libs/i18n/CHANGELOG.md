@@ -1,3 +1,13 @@
+## 0.63.1-rc.14 (2026-07-06)
+
+### 🩹 Fixes
+
+- **platform:** use live announcer for screenreader when expand all / collapse all buttons are clicked ([#14324](https://github.com/SAP/fundamental-ngx/pull/14324))
+
+### ❤️ Thank You
+
+- Mike O'Donnell @mikerodonnell89
+
 ## 0.63.1-rc.13 (2026-07-06)
 
 This was a version bump only for i18n to align it with other projects, there were no code changes.
