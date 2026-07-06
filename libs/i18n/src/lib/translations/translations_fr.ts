@@ -526,6 +526,8 @@ export default {
         cancelBtnLabel: 'Annuler',
         clearFilters: 'Effacer les filtres',
         collapseRowButtonTitle: 'Réduire la ligne',
+        columnSortedAscLabel: 'Sort by {columnName}, ascending',
+        columnSortedDescLabel: 'Sort by {columnName}, descending',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Aucune donnée trouvée',
         deselectAllCheckboxLabel: 'Tout désélectionner',

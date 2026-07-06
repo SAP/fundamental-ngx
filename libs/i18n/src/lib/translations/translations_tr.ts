@@ -524,6 +524,8 @@ export default {
         cancelBtnLabel: 'İptal',
         clearFilters: 'Filtreleri Temizle',
         collapseRowButtonTitle: 'Satırı daralt',
+        columnSortedAscLabel: 'Sort by {columnName}, ascending',
+        columnSortedDescLabel: 'Sort by {columnName}, descending',
         confirmBtnLabel: 'Tamam',
         defaultEmptyMessage: 'Veri bulunamadı',
         deselectAllCheckboxLabel: 'Tümünün seçimini kaldır',

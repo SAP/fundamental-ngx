@@ -523,6 +523,8 @@ export default {
         cancelBtnLabel: 'Annuller',
         clearFilters: 'Ryd filtre',
         collapseRowButtonTitle: 'Minimer række',
+        columnSortedAscLabel: 'Sort by {columnName}, ascending',
+        columnSortedDescLabel: 'Sort by {columnName}, descending',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Ingen data fundet',
         deselectAllCheckboxLabel: 'Fravælg alle',

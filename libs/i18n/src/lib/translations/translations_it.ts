@@ -525,6 +525,8 @@ export default {
         cancelBtnLabel: 'Annulla',
         clearFilters: 'Cancella filtri',
         collapseRowButtonTitle: 'Comprimi riga',
+        columnSortedAscLabel: 'Sort by {columnName}, ascending',
+        columnSortedDescLabel: 'Sort by {columnName}, descending',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Non sono stati trovati dati',
         deselectAllCheckboxLabel: 'Deseleziona tutto',

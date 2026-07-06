@@ -522,6 +522,8 @@ export default {
         cancelBtnLabel: 'Batalkan',
         clearFilters: 'Kosongkan Penapis',
         collapseRowButtonTitle: 'Runtuhkan baris',
+        columnSortedAscLabel: 'Sort by {columnName}, ascending',
+        columnSortedDescLabel: 'Sort by {columnName}, descending',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Tiada data ditemui',
         deselectAllCheckboxLabel: 'Nyahpilih semua',

@@ -771,6 +771,8 @@ export interface FdLanguage {
         collapseRowButtonTitle: FdLanguageKey;
         expandRowButtonTitle: FdLanguageKey;
         rowNavigateButtonTitle: FdLanguageKey;
+        columnSortedAscLabel: FdLanguageKey<{ columnName: string }>;
+        columnSortedDescLabel: FdLanguageKey<{ columnName: string }>;
     };
     platformWizardGenerator: {
         summarySectionEditStep: FdLanguageKey;

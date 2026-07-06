@@ -523,6 +523,8 @@ export default {
         cancelBtnLabel: 'إلغاء',
         clearFilters: 'مسح عوامل التصفية',
         collapseRowButtonTitle: 'طي الصف',
+        columnSortedAscLabel: 'Sort by {columnName}, ascending',
+        columnSortedDescLabel: 'Sort by {columnName}, descending',
         confirmBtnLabel: 'موافق',
         defaultEmptyMessage: 'لم يتم العثور على بيانات',
         deselectAllCheckboxLabel: 'إلغاء تحديد الكل',

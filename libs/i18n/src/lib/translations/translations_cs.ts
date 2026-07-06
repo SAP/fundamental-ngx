@@ -523,6 +523,8 @@ export default {
         cancelBtnLabel: 'Zrušit',
         clearFilters: 'Vymazat filtry',
         collapseRowButtonTitle: 'Sbalit řádek',
+        columnSortedAscLabel: 'Sort by {columnName}, ascending',
+        columnSortedDescLabel: 'Sort by {columnName}, descending',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Nebyla nalezena data',
         deselectAllCheckboxLabel: 'Zrušit celý výběr',

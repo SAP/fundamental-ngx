@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation, computed,
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { TableIconDirective } from '@fundamental-ngx/core/table';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { SortDirection, TableColumn, TableService } from '@fundamental-ngx/platform/table-helpers';
 
 @Component({
@@ -23,7 +24,7 @@ import { SortDirection, TableColumn, TableService } from '@fundamental-ngx/platf
             }
         `
     ],
-    imports: [NgTemplateOutlet, IconComponent, TableIconDirective, AsyncPipe, NgStyle]
+    imports: [NgTemplateOutlet, IconComponent, TableIconDirective, AsyncPipe, NgStyle, FdTranslatePipe]
 })
 export class TableHeaderCellContentComponent {
     /** Table Id */

@@ -525,6 +525,8 @@ export default {
         cancelBtnLabel: 'Annuleren',
         clearFilters: 'Filters wissen',
         collapseRowButtonTitle: 'Rij samenvouwen',
+        columnSortedAscLabel: 'Sort by {columnName}, ascending',
+        columnSortedDescLabel: 'Sort by {columnName}, descending',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Geen gegevens gevonden',
         deselectAllCheckboxLabel: 'Alle selecties opheffen',

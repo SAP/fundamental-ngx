@@ -523,6 +523,8 @@ export default {
         cancelBtnLabel: 'Avbryt',
         clearFilters: 'Rensa filter',
         collapseRowButtonTitle: 'Komprimera rad',
+        columnSortedAscLabel: 'Sort by {columnName}, ascending',
+        columnSortedDescLabel: 'Sort by {columnName}, descending',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Inga data hittades',
         deselectAllCheckboxLabel: 'Avmarkera alla',

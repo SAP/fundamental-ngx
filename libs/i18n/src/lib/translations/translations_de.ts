@@ -525,6 +525,8 @@ export default {
         cancelBtnLabel: 'Abbrechen',
         clearFilters: 'Filter zurücksetzen',
         collapseRowButtonTitle: 'Zeile komprimieren',
+        columnSortedAscLabel: 'Sort by {columnName}, ascending',
+        columnSortedDescLabel: 'Sort by {columnName}, descending',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Keine Daten gefunden',
         deselectAllCheckboxLabel: 'Alle abwählen',

@@ -520,6 +520,8 @@ export default {
         cancelBtnLabel: '取消',
         clearFilters: '清除过滤器',
         collapseRowButtonTitle: '折叠行',
+        columnSortedAscLabel: 'Sort by {columnName}, ascending',
+        columnSortedDescLabel: 'Sort by {columnName}, descending',
         confirmBtnLabel: '确定',
         defaultEmptyMessage: '找不到数据',
         deselectAllCheckboxLabel: '取消全选',

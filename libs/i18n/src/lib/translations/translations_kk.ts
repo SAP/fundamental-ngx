@@ -524,6 +524,8 @@ export default {
         cancelBtnLabel: 'Болдырмау',
         clearFilters: 'Сүзгілерді тазарту',
         collapseRowButtonTitle: 'Жолды жию',
+        columnSortedAscLabel: 'Sort by {columnName}, ascending',
+        columnSortedDescLabel: 'Sort by {columnName}, descending',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Дерек табылмады',
         deselectAllCheckboxLabel: 'Барлығының таңдауын алу',

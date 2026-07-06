@@ -524,6 +524,8 @@ export default {
         cancelBtnLabel: 'Отмена',
         clearFilters: 'Очистить фильтры',
         collapseRowButtonTitle: 'Свернуть строку',
+        columnSortedAscLabel: 'Sort by {columnName}, ascending',
+        columnSortedDescLabel: 'Sort by {columnName}, descending',
         confirmBtnLabel: 'ОК',
         defaultEmptyMessage: 'Данные не найдены',
         deselectAllCheckboxLabel: 'Отменить выделение',

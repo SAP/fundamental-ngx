@@ -522,6 +522,8 @@ export default {
         cancelBtnLabel: 'בטל',
         clearFilters: 'נקה מסננים',
         collapseRowButtonTitle: 'צמצם שורה',
+        columnSortedAscLabel: 'Sort by {columnName}, ascending',
+        columnSortedDescLabel: 'Sort by {columnName}, descending',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'לא נמצאו נתונים',
         deselectAllCheckboxLabel: 'בטל בחירה של הכול',

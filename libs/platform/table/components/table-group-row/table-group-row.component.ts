@@ -20,6 +20,7 @@ import {
     Nullable
 } from '@fundamental-ngx/cdk/utils';
 import { TableCellDirective, TableRowDirective } from '@fundamental-ngx/core/table';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { TableColumn, TableRow, TableService } from '@fundamental-ngx/platform/table-helpers';
 
 @Component({
@@ -38,7 +39,7 @@ import { TableColumn, TableRow, TableService } from '@fundamental-ngx/platform/t
         role: 'row',
         '[attr.aria-expanded]': 'row.expanded'
     },
-    imports: [TableCellDirective, NgTemplateOutlet]
+    imports: [TableCellDirective, NgTemplateOutlet, FdTranslatePipe]
 })
 export class TableGroupRowComponent<T> extends TableRowDirective implements OnChanges {
     /** Table ID. */

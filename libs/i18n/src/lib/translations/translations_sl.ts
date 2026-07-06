@@ -524,6 +524,8 @@ export default {
         cancelBtnLabel: 'Preklic',
         clearFilters: 'Počisti filtre',
         collapseRowButtonTitle: 'Skrči vrstico',
+        columnSortedAscLabel: 'Sort by {columnName}, ascending',
+        columnSortedDescLabel: 'Sort by {columnName}, descending',
         confirmBtnLabel: 'V redu',
         defaultEmptyMessage: 'Podatki niso najdeni',
         deselectAllCheckboxLabel: 'Preklic izbire vseh',
