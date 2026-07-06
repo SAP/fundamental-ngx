@@ -21,9 +21,6 @@ import { MenuItemInputDirective } from './directives/menu-item-input.directive';
         <ng-template cdkPortalOutlet></ng-template>
         <ng-content></ng-content>
     `,
-    host: {
-        role: 'menuitem'
-    },
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [PortalModule]
 })
@@ -40,6 +37,13 @@ export class MenuInteractiveComponent implements HasElementRef {
         ) {
             this._startAddonInstance = addon;
         }
+    }
+
+    /** @hidden */
+    @HostBinding('attr.role')
+    get role(): string {
+        // Parent items switch to role="none" when expanded so VoiceOver doesn't count them.
+        return this.ariaHaspopup && this.ariaExpanded ? 'none' : 'menuitem';
     }
 
     /** @hidden */
