@@ -145,6 +145,12 @@ export interface FdLanguage {
         listItemStatusLocked: FdLanguageKey;
         listItemStatusDraft: FdLanguageKey;
     };
+    coreList: {
+        /** Visually hidden label announced by screen readers when a list item is selected */
+        listItemSelectedAriaLabel: FdLanguageKey;
+        /** Visually hidden label announced by screen readers when a list item is not selected */
+        listItemNotSelectedAriaLabel: FdLanguageKey;
+    };
     coreLink: {
         emphasized: FdLanguageKey;
         subtle: FdLanguageKey;

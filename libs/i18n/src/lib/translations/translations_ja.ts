@@ -114,6 +114,10 @@ export default {
     coreInfoLabel: {
         srOnlyText: '情報ラベル'
     },
+    coreList: {
+        listItemSelectedAriaLabel: 'Selected',
+        listItemNotSelectedAriaLabel: 'Not Selected'
+    },
     coreLink: {
         emphasized: '強調',
         subtle: '淡色'

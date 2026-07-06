@@ -114,6 +114,10 @@ export default {
     coreInfoLabel: {
         srOnlyText: "Étiquette d'information"
     },
+    coreList: {
+        listItemSelectedAriaLabel: 'Selected',
+        listItemNotSelectedAriaLabel: 'Not Selected'
+    },
     coreLink: {
         emphasized: 'Mis en évidence',
         subtle: 'Subtil'

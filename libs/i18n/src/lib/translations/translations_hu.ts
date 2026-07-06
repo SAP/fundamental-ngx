@@ -114,6 +114,10 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Infócímke'
     },
+    coreList: {
+        listItemSelectedAriaLabel: 'Selected',
+        listItemNotSelectedAriaLabel: 'Not Selected'
+    },
     coreLink: {
         emphasized: 'Kiemelt',
         subtle: 'Nem kiemelt'
