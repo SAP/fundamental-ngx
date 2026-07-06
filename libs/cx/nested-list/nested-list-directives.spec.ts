@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, input } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { NestedItemService } from './nested-item/nested-item.service';
@@ -12,7 +12,7 @@ import {
     template: `
         <div fdx-nested-list-title>Title</div>
         <button fdx-nested-list-expand-icon></button>
-        <span fdx-nested-list-icon [glyph]="iconGlyph"></span>
+        <span fdx-nested-list-icon [glyph]="iconGlyph()"></span>
     `,
     standalone: true,
     imports: [NestedListTitleDirective, NestedListExpandIconComponent, NestedListIconComponent]
@@ -27,7 +27,7 @@ class TestNestedContainerComponent {
     @ViewChild(NestedListIconComponent)
     iconElement: NestedListIconComponent;
 
-    iconGlyph = '';
+    readonly iconGlyph = input('');
 }
 
 describe('NestedListDirectives', () => {
@@ -72,7 +72,7 @@ describe('NestedListDirectives', () => {
     });
 
     it('Icon should have valid class', () => {
-        component.iconGlyph = 'custom-icon';
+        fixture.componentRef.setInput('iconGlyph', 'custom-icon');
         fixture.detectChanges();
         const classList = (iconElement as any).elementRef.nativeElement.classList;
         expect(classList).toContain('sap-icon--' + 'custom-icon');
