@@ -522,6 +522,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Annuller',
         clearFilters: 'Ryd filtre',
+        collapseAllAnnouncementLabel: 'Collapse All clicked',
         collapseRowButtonTitle: 'Minimer række',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Ingen data fundet',
@@ -532,6 +533,7 @@ export default {
         editableCellNumberPlaceholder: 'Indtast værdi',
         editableCellStringPlaceholder: 'Indtast værdi',
         emptyCell: 'Tom',
+        expandAllAnnouncementLabel: 'Expand All clicked',
         expandRowButtonTitle: 'Udvid række',
         filterDialogBackToColumns: 'Naviger tilbage',
         filterDialogCancelBtnLabel: 'Annuller',

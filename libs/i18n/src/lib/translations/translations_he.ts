@@ -521,6 +521,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'בטל',
         clearFilters: 'נקה מסננים',
+        collapseAllAnnouncementLabel: 'Collapse All clicked',
         collapseRowButtonTitle: 'צמצם שורה',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'לא נמצאו נתונים',
@@ -531,6 +532,7 @@ export default {
         editableCellNumberPlaceholder: 'הזן ערך',
         editableCellStringPlaceholder: 'הזן ערך',
         emptyCell: 'ריק',
+        expandAllAnnouncementLabel: 'Expand All clicked',
         expandRowButtonTitle: 'הרחב שורה',
         filterDialogBackToColumns: 'נווט חזרה',
         filterDialogCancelBtnLabel: 'בטל',

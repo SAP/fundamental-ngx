@@ -524,6 +524,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Annuleren',
         clearFilters: 'Filters wissen',
+        collapseAllAnnouncementLabel: 'Collapse All clicked',
         collapseRowButtonTitle: 'Rij samenvouwen',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Geen gegevens gevonden',
@@ -534,6 +535,7 @@ export default {
         editableCellNumberPlaceholder: 'Waarde invoeren',
         editableCellStringPlaceholder: 'Waarde invoeren',
         emptyCell: 'Leeg',
+        expandAllAnnouncementLabel: 'Expand All clicked',
         expandRowButtonTitle: 'Rij uitvouwen',
         filterDialogBackToColumns: 'Terug',
         filterDialogCancelBtnLabel: 'Annuleren',

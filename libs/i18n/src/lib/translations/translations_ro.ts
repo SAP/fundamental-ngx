@@ -526,6 +526,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Anulare',
         clearFilters: 'Golire filtre',
+        collapseAllAnnouncementLabel: 'Collapse All clicked',
         collapseRowButtonTitle: 'Comprimare linie',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Nu s-au găsit date',
@@ -536,6 +537,7 @@ export default {
         editableCellNumberPlaceholder: 'Introduceți valoarea',
         editableCellStringPlaceholder: 'Introduceți valoarea',
         emptyCell: 'Goală',
+        expandAllAnnouncementLabel: 'Expand All clicked',
         expandRowButtonTitle: 'Expandare linie',
         filterDialogBackToColumns: 'Navigare înapoi',
         filterDialogCancelBtnLabel: 'Anulare',

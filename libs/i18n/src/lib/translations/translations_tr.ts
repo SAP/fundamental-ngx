@@ -523,6 +523,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'İptal',
         clearFilters: 'Filtreleri Temizle',
+        collapseAllAnnouncementLabel: 'Collapse All clicked',
         collapseRowButtonTitle: 'Satırı daralt',
         confirmBtnLabel: 'Tamam',
         defaultEmptyMessage: 'Veri bulunamadı',
@@ -533,6 +534,7 @@ export default {
         editableCellNumberPlaceholder: 'Değer gir',
         editableCellStringPlaceholder: 'Değer gir',
         emptyCell: 'Boş',
+        expandAllAnnouncementLabel: 'Expand All clicked',
         expandRowButtonTitle: 'Satırı genişlet',
         filterDialogBackToColumns: 'Geri git',
         filterDialogCancelBtnLabel: 'İptal',

@@ -522,6 +522,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Скасувати',
         clearFilters: 'Очистити фільтри',
+        collapseAllAnnouncementLabel: 'Collapse All clicked',
         collapseRowButtonTitle: 'Згорнути рядок',
         confirmBtnLabel: 'ОК',
         defaultEmptyMessage: 'Даних не знайдено',
@@ -533,6 +534,7 @@ export default {
         editableCellNumberPlaceholder: 'Введіть значення',
         editableCellStringPlaceholder: 'Введіть значення',
         emptyCell: 'Порожнє',
+        expandAllAnnouncementLabel: 'Expand All clicked',
         expandRowButtonTitle: 'Розгорнути рядок',
         filterDialogBackToColumns: 'Перейти назад',
         filterDialogCancelBtnLabel: 'Скасувати',

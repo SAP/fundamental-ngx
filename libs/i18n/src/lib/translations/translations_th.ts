@@ -522,6 +522,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'ยกเลิก',
         clearFilters: 'เคลียร์ตัวกรอง',
+        collapseAllAnnouncementLabel: 'Collapse All clicked',
         collapseRowButtonTitle: 'ยุบรวมแถว',
         confirmBtnLabel: 'ตกลง',
         defaultEmptyMessage: 'ไม่พบข้อมูล',
@@ -532,6 +533,7 @@ export default {
         editableCellNumberPlaceholder: 'ป้อนค่า',
         editableCellStringPlaceholder: 'ป้อนค่า',
         emptyCell: 'ว่าง',
+        expandAllAnnouncementLabel: 'Expand All clicked',
         expandRowButtonTitle: 'ขยายแถว',
         filterDialogBackToColumns: 'ย้อนกลับ',
         filterDialogCancelBtnLabel: 'ยกเลิก',

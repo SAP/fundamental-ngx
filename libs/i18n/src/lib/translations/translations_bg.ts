@@ -523,6 +523,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Отказ',
         clearFilters: 'Изчистване на филтрите',
+        collapseAllAnnouncementLabel: 'Collapse All clicked',
         collapseRowButtonTitle: 'Свиване на реда',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Не са намерени данни',
@@ -533,6 +534,7 @@ export default {
         editableCellNumberPlaceholder: 'Въведете стойност',
         editableCellStringPlaceholder: 'Въведете стойност',
         emptyCell: 'Празно',
+        expandAllAnnouncementLabel: 'Expand All clicked',
         expandRowButtonTitle: 'Разгръщане на реда',
         filterDialogBackToColumns: 'Назад',
         filterDialogCancelBtnLabel: 'Отказ',

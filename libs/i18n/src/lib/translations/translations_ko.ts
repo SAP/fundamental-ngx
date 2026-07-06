@@ -521,6 +521,7 @@ export default {
     platformTable: {
         cancelBtnLabel: '취소',
         clearFilters: '필터 지우기',
+        collapseAllAnnouncementLabel: 'Collapse All clicked',
         collapseRowButtonTitle: '행 접기',
         confirmBtnLabel: '확인',
         defaultEmptyMessage: '데이터를 찾을 수 없음',
@@ -531,6 +532,7 @@ export default {
         editableCellNumberPlaceholder: '값 입력',
         editableCellStringPlaceholder: '값 입력',
         emptyCell: '비어 있음',
+        expandAllAnnouncementLabel: 'Expand All clicked',
         expandRowButtonTitle: '행 펼치기',
         filterDialogBackToColumns: '뒤로 이동',
         filterDialogCancelBtnLabel: '취소',

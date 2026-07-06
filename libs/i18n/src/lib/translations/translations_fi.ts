@@ -522,6 +522,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Peruuta',
         clearFilters: 'Tyhjennä suodattimet',
+        collapseAllAnnouncementLabel: 'Collapse All clicked',
         collapseRowButtonTitle: 'Tiivistä rivi',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Tietoja ei löydy',
@@ -532,6 +533,7 @@ export default {
         editableCellNumberPlaceholder: 'Syötä arvo',
         editableCellStringPlaceholder: 'Syötä arvo',
         emptyCell: 'Tyhjä',
+        expandAllAnnouncementLabel: 'Expand All clicked',
         expandRowButtonTitle: 'Laajenna rivi',
         filterDialogBackToColumns: 'Navigoi takaisin',
         filterDialogCancelBtnLabel: 'Peruuta',

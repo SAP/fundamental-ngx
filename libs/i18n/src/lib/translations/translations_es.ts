@@ -524,6 +524,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Cancelar',
         clearFilters: 'Borrar filtros',
+        collapseAllAnnouncementLabel: 'Collapse All clicked',
         collapseRowButtonTitle: 'Contraer fila',
         confirmBtnLabel: 'Aceptar',
         defaultEmptyMessage: 'No se han encontrado datos',
@@ -534,6 +535,7 @@ export default {
         editableCellNumberPlaceholder: 'Especificar valor',
         editableCellStringPlaceholder: 'Especificar valor',
         emptyCell: 'Vacía',
+        expandAllAnnouncementLabel: 'Expand All clicked',
         expandRowButtonTitle: 'Expandir fila',
         filterDialogBackToColumns: 'Volver atrás',
         filterDialogCancelBtnLabel: 'Cancelar',

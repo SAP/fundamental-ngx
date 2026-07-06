@@ -523,6 +523,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Ακύρωση',
         clearFilters: 'Εκκαθάριση Φίλτρων',
+        collapseAllAnnouncementLabel: 'Collapse All clicked',
         collapseRowButtonTitle: 'Σύμπυξη σειράς',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Δεν βρέθηκαν δεδομένα',
@@ -533,6 +534,7 @@ export default {
         editableCellNumberPlaceholder: 'Εισαγάγετε τιμή',
         editableCellStringPlaceholder: 'Εισαγάγετε τιμή',
         emptyCell: 'Κενό',
+        expandAllAnnouncementLabel: 'Expand All clicked',
         expandRowButtonTitle: 'Επέκταση σειράς',
         filterDialogBackToColumns: 'Πλοήγηση πίσω',
         filterDialogCancelBtnLabel: 'Ακύρωση',

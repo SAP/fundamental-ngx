@@ -523,6 +523,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Болдырмау',
         clearFilters: 'Сүзгілерді тазарту',
+        collapseAllAnnouncementLabel: 'Collapse All clicked',
         collapseRowButtonTitle: 'Жолды жию',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Дерек табылмады',
@@ -533,6 +534,7 @@ export default {
         editableCellNumberPlaceholder: 'Мән енгізу',
         editableCellStringPlaceholder: 'Мән енгізу',
         emptyCell: 'Бос',
+        expandAllAnnouncementLabel: 'Expand All clicked',
         expandRowButtonTitle: 'Жолды жаю',
         filterDialogBackToColumns: 'Артқа өту',
         filterDialogCancelBtnLabel: 'Болдырмау',

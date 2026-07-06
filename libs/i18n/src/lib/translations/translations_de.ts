@@ -524,6 +524,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Abbrechen',
         clearFilters: 'Filter zurücksetzen',
+        collapseAllAnnouncementLabel: 'Collapse All clicked',
         collapseRowButtonTitle: 'Zeile komprimieren',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Keine Daten gefunden',
@@ -534,6 +535,7 @@ export default {
         editableCellNumberPlaceholder: 'Wert eingeben',
         editableCellStringPlaceholder: 'Wert eingeben',
         emptyCell: 'Leer',
+        expandAllAnnouncementLabel: 'Expand All clicked',
         expandRowButtonTitle: 'Zeile erweitern',
         filterDialogBackToColumns: 'Zurück navigieren',
         filterDialogCancelBtnLabel: 'Abbrechen',

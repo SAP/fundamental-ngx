@@ -523,6 +523,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Zrušiť',
         clearFilters: 'Vymazať filtre',
+        collapseAllAnnouncementLabel: 'Collapse All clicked',
         collapseRowButtonTitle: 'Zbaliť riadok',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Nenašli sa žiadne údaje',
@@ -533,6 +534,7 @@ export default {
         editableCellNumberPlaceholder: 'Zadať hodnotu',
         editableCellStringPlaceholder: 'Zadať hodnotu',
         emptyCell: 'Prázdne',
+        expandAllAnnouncementLabel: 'Expand All clicked',
         expandRowButtonTitle: 'Rozbaliť riadok',
         filterDialogBackToColumns: 'Prejsť späť',
         filterDialogCancelBtnLabel: 'Zrušiť',

@@ -523,6 +523,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Preklic',
         clearFilters: 'Počisti filtre',
+        collapseAllAnnouncementLabel: 'Collapse All clicked',
         collapseRowButtonTitle: 'Skrči vrstico',
         confirmBtnLabel: 'V redu',
         defaultEmptyMessage: 'Podatki niso najdeni',
@@ -533,6 +534,7 @@ export default {
         editableCellNumberPlaceholder: 'Vnesi vrednost',
         editableCellStringPlaceholder: 'Vnesi vrednost',
         emptyCell: 'Prazno',
+        expandAllAnnouncementLabel: 'Expand All clicked',
         expandRowButtonTitle: 'Razširi vrstico',
         filterDialogBackToColumns: 'Nazaj',
         filterDialogCancelBtnLabel: 'Preklic',

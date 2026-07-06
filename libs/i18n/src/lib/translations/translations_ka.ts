@@ -522,6 +522,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Cancel',
         clearFilters: 'Clear Filters',
+        collapseAllAnnouncementLabel: 'Collapse All clicked',
         collapseRowButtonTitle: 'Collapse row',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'მონაცემები ვერ მოიძებნა',
@@ -532,6 +533,7 @@ export default {
         editableCellNumberPlaceholder: 'შეიყვანეთ რიცხვი',
         editableCellStringPlaceholder: 'შეიყვანეთ მნიშვნელობა',
         emptyCell: 'ცარიელი',
+        expandAllAnnouncementLabel: 'Expand All clicked',
         expandRowButtonTitle: 'Expand row',
         filterDialogBackToColumns: 'Navigate back',
         filterDialogCancelBtnLabel: 'გაუქმება',
