@@ -1,12 +1,12 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, input } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ListModule } from '../list.module';
 
 @Component({
     template: `
-        <li #directiveElement fd-list-item [noData]="noData" [action]="action" [selected]="selected">
-            @if (link) {
+        <li #directiveElement fd-list-item [noData]="noData()" [action]="action()" [selected]="selected()">
+            @if (link()) {
                 <a #linkElement fd-list-link>link</a>
             }
             <button fd-button #button></button>
@@ -26,10 +26,10 @@ class TestComponent {
     @ViewChild('button', { read: ElementRef })
     buttonRef: ElementRef;
 
-    selected = false;
-    link = false;
-    noData = false;
-    action = false;
+    readonly selected = input(false);
+    readonly link = input(false);
+    readonly noData = input(false);
+    readonly action = input(false);
 }
 
 describe('ListItemComponent', () => {
@@ -57,9 +57,9 @@ describe('ListItemComponent', () => {
     });
 
     it('should assign classes', () => {
-        component.selected = true;
-        component.noData = true;
-        component.action = true;
+        fixture.componentRef.setInput('selected', true);
+        fixture.componentRef.setInput('noData', true);
+        fixture.componentRef.setInput('action', true);
         fixture.detectChanges();
         expect(component.ref.nativeElement.classList).toContain('is-selected');
         expect(component.ref.nativeElement.classList).toContain('fd-list__item--no-data');
@@ -67,7 +67,7 @@ describe('ListItemComponent', () => {
     });
 
     it('should assign link class', () => {
-        component.link = true;
+        fixture.componentRef.setInput('link', true);
         fixture.detectChanges();
         expect(component.ref.nativeElement.classList).toContain('fd-list__item--link');
     });
@@ -78,7 +78,7 @@ describe('ListItemComponent', () => {
     });
 
     it('should handle keyboard events for the link', () => {
-        component.link = true;
+        fixture.componentRef.setInput('link', true);
         fixture.detectChanges();
         const downEvent = new KeyboardEvent('keydown', {
             key: 'Space'

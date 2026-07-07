@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
@@ -8,11 +8,11 @@ import { DynamicFormControl } from './dynamic-form-control';
 
 @Component({
     template: `
-        <div class="should-show" *fdpDynamicFormControlField="control; show: shouldShow">
+        <div class="should-show" *fdpDynamicFormControlField="control; show: shouldShow()">
             <p>This is shown</p>
         </div>
 
-        <div class="should-hide" *fdpDynamicFormControlField="control; show: !shouldShow">
+        <div class="should-hide" *fdpDynamicFormControlField="control; show: !shouldShow()">
             <p>This is hidden</p>
         </div>
     `,
@@ -24,7 +24,7 @@ class HostComponent {
         dynamicFormItem: { type: 'input', name: 'test', message: 'test', default: '' }
     });
 
-    shouldShow = true;
+    readonly shouldShow = input(true);
 }
 
 describe('DynamicFormControlFieldDirective', () => {
@@ -52,7 +52,7 @@ describe('DynamicFormControlFieldDirective', () => {
     });
 
     it('should revert hidden and visible elements', () => {
-        fixture.componentInstance.shouldShow = false;
+        fixture.componentRef.setInput('shouldShow', false);
         fixture.detectChanges();
 
         const element = fixture.debugElement.query(By.css('.should-show'));

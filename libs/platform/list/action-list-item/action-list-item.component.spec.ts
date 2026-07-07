@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, input } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
@@ -15,7 +15,7 @@ export interface Action {
 @Component({
     selector: 'fdp-test-fdp-action-list-item',
     template: `
-        <fdp-list [selectionMode]="selectionMode">
+        <fdp-list [selectionMode]="selectionMode()">
             <fdp-action-list-item title="Action 1"> </fdp-action-list-item>
             <fdp-action-list-item title="Action 2"> </fdp-action-list-item>
             <fdp-action-list-item title="Action 3"> </fdp-action-list-item>
@@ -35,7 +35,7 @@ class ActionListItemComponentTestComponent {
     itemclick: string;
     enterPress: string;
 
-    selectionMode: SelectionType = 'none';
+    readonly selectionMode = input<SelectionType>('none');
 
     onItemClick(): void {
         this.itemclick = 'mouse is clicked';
@@ -98,7 +98,7 @@ describe('ActionListItemComponent', () => {
     });
 
     it('Should display action item with role as option', async () => {
-        component.selectionMode = 'multi';
+        fixture.componentRef.setInput('selectionMode', 'multi');
         fixture.detectChanges();
         const listItem = fixture.debugElement.query(By.css('fdp-action-list-item')).componentInstance as BaseListItem;
         listItem.ngAfterViewInit();
@@ -106,14 +106,14 @@ describe('ActionListItemComponent', () => {
         await fixture.whenStable();
         let listContainer = fixture.debugElement.query(By.css('fdp-action-list-item .fd-list__item--action'));
         expect(listContainer.nativeElement.getAttribute('role')).toEqual('option');
-        component.selectionMode = 'single';
+        fixture.componentRef.setInput('selectionMode', 'single');
         fixture.detectChanges();
         listItem.ngAfterViewInit();
         fixture.detectChanges();
         await fixture.whenStable();
         listContainer = fixture.debugElement.query(By.css('fdp-action-list-item .fd-list__item--action'));
         expect(listContainer.nativeElement.getAttribute('role')).toEqual('option');
-        component.selectionMode = 'none';
+        fixture.componentRef.setInput('selectionMode', 'none');
         fixture.detectChanges();
         listItem.ngAfterViewInit();
         fixture.detectChanges();

@@ -1,6 +1,15 @@
 import { B, DOWN_ARROW, END, ENTER, ESCAPE, HOME, SPACE, X } from '@angular/cdk/keycodes';
 import { ModifierKeys } from '@angular/cdk/testing';
-import { ChangeDetectionStrategy, Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    QueryList,
+    ViewChild,
+    ViewChildren,
+    input,
+    model
+} from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
@@ -16,12 +25,12 @@ import { SelectModule } from './select.module';
             [(value)]="value"
             formControlName="selectControl"
             (isOpenChange)="onOpen($event)"
-            [fdCompact]="compact"
+            [fdCompact]="compact()"
         >
             <li fd-option id="option-1" [value]="'value-1'">Test1</li>
             <li fd-option id="option-2" [value]="'value-2'">Test2</li>
             <li fd-option id="option-3" [value]="'value-3'">Test3</li>
-            <li fd-option id="option-4" [disabled]="disabled" [value]="'value-4'">Test4</li>
+            <li fd-option id="option-4" [disabled]="disabled()" [value]="'value-4'">Test4</li>
         </fd-select>
     `,
     standalone: true,
@@ -34,13 +43,13 @@ class TestWrapperComponent {
     @ViewChild(SelectComponent, { read: ElementRef, static: true })
     selectElement: ElementRef;
 
-    value: string;
+    readonly value = model<string>();
 
-    disabled = false;
+    readonly disabled = input(false);
 
     overlayOpened: boolean;
 
-    compact = false;
+    readonly compact = input(false);
 
     onOpen(isOpen: boolean): void {
         this.overlayOpened = isOpen;
@@ -165,10 +174,10 @@ describe('SelectComponent', () => {
         });
 
         it('should consume content density', () => {
-            fixture.componentInstance.compact = true;
+            fixture.componentRef.setInput('compact', true);
             fixture.detectChanges();
             expect(fixture.componentInstance.selectElement.nativeElement.classList).toContain('is-compact');
-            fixture.componentInstance.compact = false;
+            fixture.componentRef.setInput('compact', false);
             fixture.detectChanges();
             expect(fixture.componentInstance.selectElement.nativeElement.classList).not.toContain('is-compact');
         });
@@ -255,14 +264,14 @@ describe('SelectComponent', () => {
 
         it('should be able to change initially selected value after selected is initialized', async () => {
             const testValue = 'value-1';
-            fixture.componentInstance.value = testValue;
+            fixture.componentRef.setInput('value', testValue);
             await wait(fixture);
 
             expect(component.selected).toBeTruthy();
             expect(component.selected.value).toBe(testValue);
             expect(_keyService._keyManager.activeItem?.value).toBe(testValue);
 
-            fixture.componentInstance.value = 'value-2';
+            fixture.componentRef.setInput('value', 'value-2');
             await wait(fixture);
 
             expect(component.selected).toBeTruthy();
@@ -272,8 +281,8 @@ describe('SelectComponent', () => {
 
         it('should not be clickable if option item is disabled', async () => {
             const testValue = 'value-1';
-            fixture.componentInstance.value = testValue;
-            fixture.componentInstance.disabled = true;
+            fixture.componentRef.setInput('value', testValue);
+            fixture.componentRef.setInput('disabled', true);
             await wait(fixture);
             expect(component.selected).toBeTruthy();
             expect(component.selected.value).toBe(testValue);
@@ -393,7 +402,7 @@ describe('SelectComponent', () => {
                 ' navigate the item is skipped and value-4 is selected',
             async () => {
                 component.value = 'value-2';
-                fixture.componentInstance.disabled = true;
+                fixture.componentRef.setInput('disabled', true);
 
                 await wait(fixture);
                 triggerControl.click();

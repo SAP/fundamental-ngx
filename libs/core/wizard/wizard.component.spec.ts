@@ -324,6 +324,9 @@ describe('WizardComponent with summary step', () => {
             .overrideComponent(WizardComponent, {
                 set: { changeDetection: ChangeDetectionStrategy.Eager }
             })
+            .overrideComponent(WizardNavigationComponent, {
+                set: { changeDetection: ChangeDetectionStrategy.Eager }
+            })
             .compileComponents();
     }));
 

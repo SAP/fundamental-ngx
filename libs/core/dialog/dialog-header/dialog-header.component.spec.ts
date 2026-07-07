@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { ChangeDetectionStrategy, Component, Type, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Type, ViewChild } from '@angular/core';
+import { By } from '@angular/platform-browser';
 import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
@@ -91,7 +92,14 @@ describe('DialogHeaderComponent', () => {
         component.dialogHeaderRef.dialogConfig.mobile = true;
         component.dialogHeaderRef.dialogConfig.contentDensity = ContentDensityMode.COZY;
 
+        // Mark the OnPush DialogHeaderComponent view as dirty so it re-renders with new service values
+        const headerCdr = fixture.debugElement
+            .query(By.directive(DialogHeaderComponent))
+            .injector.get(ChangeDetectorRef);
+        headerCdr.markForCheck();
         await wait(fixture);
+        TestBed.flushEffects();
+        fixture.detectChanges();
         const footerEl = fixture.nativeElement.querySelector('[fd-bar]');
 
         expect(footerEl.classList).toContain('fd-dialog__header');

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { GridListTitleBarComponent } from './grid-list-title-bar.component';
@@ -12,12 +12,12 @@ class GridListTitleBarDefaultTestComponent {
 }
 
 @Component({
-    template: `<fd-grid-list-title-bar [title]="title" [headingLevel]="headingLevel"></fd-grid-list-title-bar>`,
+    template: `<fd-grid-list-title-bar [title]="title()" [headingLevel]="headingLevel()"></fd-grid-list-title-bar>`,
     imports: [GridListTitleBarComponent]
 })
 class GridListTitleBarTestComponent {
-    title = 'Products';
-    headingLevel: any = 2;
+    readonly title = input('Products');
+    readonly headingLevel = input<any>(2);
 }
 
 @Component({
@@ -60,7 +60,7 @@ describe('GridListTitleBarComponent', () => {
     });
 
     it('should update aria-level when headingLevel input changes', () => {
-        fixture.componentInstance.headingLevel = 3;
+        fixture.componentRef.setInput('headingLevel', 3);
         fixture.detectChanges();
         const label = fixture.debugElement.query(By.css('[fd-toolbar-label]'));
         expect(label.nativeElement.getAttribute('aria-level')).toBe('3');
@@ -72,49 +72,49 @@ describe('GridListTitleBarComponent', () => {
     });
 
     it('should normalize string heading level "h4" to numeric aria-level "4"', () => {
-        fixture.componentInstance.headingLevel = 'h4';
+        fixture.componentRef.setInput('headingLevel', 'h4');
         fixture.detectChanges();
         const el = fixture.debugElement.query(By.css('[fd-toolbar-label]'));
         expect(el.nativeElement.getAttribute('aria-level')).toBe('4');
     });
 
     it('should pass through numeric string "3" as aria-level "3"', () => {
-        fixture.componentInstance.headingLevel = '3';
+        fixture.componentRef.setInput('headingLevel', '3');
         fixture.detectChanges();
         const el = fixture.debugElement.query(By.css('[fd-toolbar-label]'));
         expect(el.nativeElement.getAttribute('aria-level')).toBe('3');
     });
 
     it('should fallback to aria-level "2" for invalid string input', () => {
-        fixture.componentInstance.headingLevel = 'invalid';
+        fixture.componentRef.setInput('headingLevel', 'invalid');
         fixture.detectChanges();
         const el = fixture.debugElement.query(By.css('[fd-toolbar-label]'));
         expect(el.nativeElement.getAttribute('aria-level')).toBe('2');
     });
 
     it('should fallback to aria-level "2" for "h0" string input', () => {
-        fixture.componentInstance.headingLevel = 'h0';
+        fixture.componentRef.setInput('headingLevel', 'h0');
         fixture.detectChanges();
         const el = fixture.debugElement.query(By.css('[fd-toolbar-label]'));
         expect(el.nativeElement.getAttribute('aria-level')).toBe('2');
     });
 
     it('should parse "h7" string as aria-level "7"', () => {
-        fixture.componentInstance.headingLevel = 'h7';
+        fixture.componentRef.setInput('headingLevel', 'h7');
         fixture.detectChanges();
         const el = fixture.debugElement.query(By.css('[fd-toolbar-label]'));
         expect(el.nativeElement.getAttribute('aria-level')).toBe('7');
     });
 
     it('should accept level 1 and render aria-level "1"', () => {
-        fixture.componentInstance.headingLevel = 1;
+        fixture.componentRef.setInput('headingLevel', 1);
         fixture.detectChanges();
         const el = fixture.debugElement.query(By.css('[fd-toolbar-label]'));
         expect(el.nativeElement.getAttribute('aria-level')).toBe('1');
     });
 
     it('should accept level 6 and render aria-level "6"', () => {
-        fixture.componentInstance.headingLevel = 6;
+        fixture.componentRef.setInput('headingLevel', 6);
         fixture.detectChanges();
         const el = fixture.debugElement.query(By.css('[fd-toolbar-label]'));
         expect(el.nativeElement.getAttribute('aria-level')).toBe('6');
