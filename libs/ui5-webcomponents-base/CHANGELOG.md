@@ -1,3 +1,23 @@
+## 0.63.1-rc.14 (2026-07-06)
+
+This was a version bump only for ui5-webcomponents-base to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.13 (2026-07-06)
+
+This was a version bump only for ui5-webcomponents-base to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.12 (2026-07-06)
+
+This was a version bump only for ui5-webcomponents-base to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.11 (2026-07-06)
+
+This was a version bump only for ui5-webcomponents-base to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.10 (2026-07-06)
+
+This was a version bump only for ui5-webcomponents-base to align it with other projects, there were no code changes.
+
 ## 0.63.1-rc.9 (2026-07-02)
 
 This was a version bump only for ui5-webcomponents-base to align it with other projects, there were no code changes.

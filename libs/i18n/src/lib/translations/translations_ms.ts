@@ -113,6 +113,10 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Label Maklumat'
     },
+    coreList: {
+        listItemSelectedAriaLabel: 'Selected',
+        listItemNotSelectedAriaLabel: 'Not Selected'
+    },
     coreLink: {
         emphasized: 'Diserlahkan',
         subtle: 'Tak Ketara'
@@ -517,6 +521,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Batalkan',
         clearFilters: 'Kosongkan Penapis',
+        collapseAllAnnouncementLabel: 'Collapse All clicked',
         collapseRowButtonTitle: 'Runtuhkan baris',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Tiada data ditemui',
@@ -527,6 +532,7 @@ export default {
         editableCellNumberPlaceholder: 'Masukkan nilai',
         editableCellStringPlaceholder: 'Masukkan nilai',
         emptyCell: 'Kosong',
+        expandAllAnnouncementLabel: 'Expand All clicked',
         expandRowButtonTitle: 'Kembangkan baris',
         filterDialogBackToColumns: 'Navigasi kembali',
         filterDialogCancelBtnLabel: 'Batalkan',

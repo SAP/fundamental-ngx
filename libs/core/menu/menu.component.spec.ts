@@ -401,6 +401,55 @@ describe('MenuComponent with submenus', () => {
 
         expect(itemWithSubmenu.submenuVisible).toBe(false);
     }));
+
+    it('should set correct aria-posinset and aria-setsize on submenu items when focused', fakeAsync(() => {
+        // Open the menu
+        menu.open();
+        tick();
+        fixture.detectChanges();
+
+        const menuItems = testComponent.menuItems.toArray();
+        const itemWithSubmenu = menuItems[0];
+
+        // Open submenu by clicking the parent item
+        itemWithSubmenu.click();
+        tick();
+        fixture.detectChanges();
+
+        // Get the submenu items (Pineapple and Banana)
+        const pineappleItem = menuItems[1];
+        const bananaItem = menuItems[2];
+
+        // Focus on the first submenu item (Pineapple)
+        const pineappleInteractive = pineappleItem.menuInteractive.elementRef.nativeElement;
+        pineappleInteractive.dispatchEvent(new FocusEvent('focusin', { bubbles: true }));
+        tick();
+        fixture.detectChanges();
+
+        // Should announce "1 of 2" for Pineapple
+        expect(pineappleInteractive.getAttribute('aria-posinset')).toBe('1');
+        expect(pineappleInteractive.getAttribute('aria-setsize')).toBe('2');
+
+        // Focus on the second submenu item (Banana)
+        const bananaInteractive = bananaItem.menuInteractive.elementRef.nativeElement;
+        bananaInteractive.dispatchEvent(new FocusEvent('focusin', { bubbles: true }));
+        tick();
+        fixture.detectChanges();
+
+        // Should announce "2 of 2" for Banana
+        expect(bananaInteractive.getAttribute('aria-posinset')).toBe('2');
+        expect(bananaInteractive.getAttribute('aria-setsize')).toBe('2');
+
+        // Back to parent menu - focus on Fruits (parent menu has Fruits and Meat)
+        const fruitsInteractive = itemWithSubmenu.menuInteractive.elementRef.nativeElement;
+        fruitsInteractive.dispatchEvent(new FocusEvent('focusin', { bubbles: true }));
+        tick();
+        fixture.detectChanges();
+
+        // Should announce "1 of 2" for Fruits (parent menu has Fruits and Meat)
+        expect(fruitsInteractive.getAttribute('aria-posinset')).toBe('1');
+        expect(fruitsInteractive.getAttribute('aria-setsize')).toBe('2');
+    }));
 });
 
 describe('MenuComponent config input', () => {

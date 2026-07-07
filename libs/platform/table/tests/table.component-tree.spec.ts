@@ -514,4 +514,22 @@ describe('TableComponent Tree View', () => {
             expect(rowsChangedSpy).toHaveBeenCalled();
         });
     });
+
+    describe('Accessibility Announcements', () => {
+        it('should announce when expand all is clicked', () => {
+            const announceSpy = jest.spyOn(tableComponent['_liveAnnouncer'], 'announce');
+
+            hostComponent.table.expandAll();
+
+            expect(announceSpy).toHaveBeenCalledWith('Expand All clicked');
+        });
+
+        it('should announce when collapse all is clicked', () => {
+            const announceSpy = jest.spyOn(tableComponent['_liveAnnouncer'], 'announce');
+
+            hostComponent.table.collapseAll();
+
+            expect(announceSpy).toHaveBeenCalledWith('Collapse All clicked');
+        });
+    });
 });

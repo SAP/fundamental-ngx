@@ -114,6 +114,10 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Информационная метка'
     },
+    coreList: {
+        listItemSelectedAriaLabel: 'Selected',
+        listItemNotSelectedAriaLabel: 'Not Selected'
+    },
     coreLink: {
         emphasized: 'Выделенная',
         subtle: 'Незаметная'
@@ -519,6 +523,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Отмена',
         clearFilters: 'Очистить фильтры',
+        collapseAllAnnouncementLabel: 'Collapse All clicked',
         collapseRowButtonTitle: 'Свернуть строку',
         confirmBtnLabel: 'ОК',
         defaultEmptyMessage: 'Данные не найдены',
@@ -529,6 +534,7 @@ export default {
         editableCellNumberPlaceholder: 'Введите значение',
         editableCellStringPlaceholder: 'Введите значение',
         emptyCell: 'Пусто',
+        expandAllAnnouncementLabel: 'Expand All clicked',
         expandRowButtonTitle: 'Развернуть строку',
         filterDialogBackToColumns: 'Перейти назад',
         filterDialogCancelBtnLabel: 'Отмена',

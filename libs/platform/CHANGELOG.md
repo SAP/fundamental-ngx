@@ -1,3 +1,35 @@
+## 0.63.1-rc.14 (2026-07-06)
+
+### 🩹 Fixes
+
+- **platform:** use live announcer for screenreader when expand all / collapse all buttons are clicked ([#14324](https://github.com/SAP/fundamental-ngx/pull/14324))
+
+### ❤️ Thank You
+
+- Mike O'Donnell @mikerodonnell89
+
+## 0.63.1-rc.13 (2026-07-06)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.12 (2026-07-06)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.11 (2026-07-06)
+
+### 🩹 Fixes
+
+- **platform:** search field missing title attribute for sync button ([#14321](https://github.com/SAP/fundamental-ngx/pull/14321))
+
+### ❤️ Thank You
+
+- Mike O'Donnell @mikerodonnell89
+
+## 0.63.1-rc.10 (2026-07-06)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
 ## 0.63.1-rc.9 (2026-07-02)
 
 This was a version bump only for platform to align it with other projects, there were no code changes.

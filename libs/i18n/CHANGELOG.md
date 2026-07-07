@@ -1,3 +1,35 @@
+## 0.63.1-rc.14 (2026-07-06)
+
+### 🩹 Fixes
+
+- **platform:** use live announcer for screenreader when expand all / collapse all buttons are clicked ([#14324](https://github.com/SAP/fundamental-ngx/pull/14324))
+
+### ❤️ Thank You
+
+- Mike O'Donnell @mikerodonnell89
+
+## 0.63.1-rc.13 (2026-07-06)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.12 (2026-07-06)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.11 (2026-07-06)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.10 (2026-07-06)
+
+### 🩹 Fixes
+
+- **core:** screen reader announces selection state for fd-list items ([#14322](https://github.com/SAP/fundamental-ngx/pull/14322))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
 ## 0.63.1-rc.9 (2026-07-02)
 
 This was a version bump only for i18n to align it with other projects, there were no code changes.

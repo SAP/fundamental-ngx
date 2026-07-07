@@ -113,6 +113,10 @@ export default {
     coreInfoLabel: {
         srOnlyText: '資訊標籤'
     },
+    coreList: {
+        listItemSelectedAriaLabel: 'Selected',
+        listItemNotSelectedAriaLabel: 'Not Selected'
+    },
     coreLink: {
         emphasized: '強調',
         subtle: '輕微'
@@ -516,6 +520,7 @@ export default {
     platformTable: {
         cancelBtnLabel: '取消',
         clearFilters: '清除篩選器',
+        collapseAllAnnouncementLabel: 'Collapse All clicked',
         collapseRowButtonTitle: '摺疊列',
         confirmBtnLabel: '確定',
         defaultEmptyMessage: '找不到資料',
@@ -526,6 +531,7 @@ export default {
         editableCellNumberPlaceholder: '輸入值',
         editableCellStringPlaceholder: '輸入值',
         emptyCell: '空白',
+        expandAllAnnouncementLabel: 'Expand All clicked',
         expandRowButtonTitle: '展開列',
         filterDialogBackToColumns: '返回',
         filterDialogCancelBtnLabel: '取消',
