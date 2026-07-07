@@ -24,6 +24,7 @@ import { DynamicComponentInjector } from './dynamic-component-injector';
 export class DynamicComponentService {
     private readonly _applicationRef = inject(ApplicationRef);
     private readonly _injector = inject(Injector);
+    /** @deprecated Will be removed when {@link createDynamicModule} is removed. */
     private readonly _compiler = inject(Compiler);
 
     /**
@@ -48,12 +49,8 @@ export class DynamicComponentService {
     }
 
     /**
-     * Function that creates dynamic component and injects services to allow communication between component and outside
-     * @param content Type of the component content
-     * @param moduleType Type of module that should be compiled.
-     * @param componentType Type of component that should be rendered.
-     * @param containerRef The container that the dynamic component is appended to.
-     * @param injector enables to provide preconfigured component injector
+     * @deprecated `NgModule`-based lazy loading is deprecated. This method will be removed in a future release.
+     * Use standalone components with dynamic `import()` instead.
      */
     async createDynamicModule<M, C>(
         content: TemplateRef<any> | Type<any> | string | Record<string, any>,
