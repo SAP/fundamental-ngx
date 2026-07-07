@@ -46,11 +46,11 @@ import 'fundamental-styles/dist/title.css';
 export class DynamicPageAccessibilitySample {
     accessibilityAttrs = {
         root: {
-            role: 'main' as const,
+            role: 'region' as const,
             name: 'Product Details Page'
         },
         header: {
-            role: 'banner' as const,
+            role: 'region' as const,
             name: 'Product Header Information'
         },
         content: {
@@ -58,7 +58,7 @@ export class DynamicPageAccessibilitySample {
             name: 'Product Catalog'
         },
         footer: {
-            role: 'contentinfo' as const,
+            role: 'region' as const,
             name: 'Page Actions'
         }
     };
