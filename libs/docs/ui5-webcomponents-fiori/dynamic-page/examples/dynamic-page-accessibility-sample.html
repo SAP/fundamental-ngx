@@ -1,0 +1,94 @@
+<section aria-labelledby="dynamic-page-accessibility">
+    <ui5-dynamic-page style="height: 600px" showFooter="true" [accessibilityAttributes]="accessibilityAttrs">
+        <ui5-dynamic-page-title slot="titleArea">
+            <ui5-breadcrumbs slot="breadcrumbs">
+                <ui5-breadcrumbs-item href="#">Home</ui5-breadcrumbs-item>
+                <ui5-breadcrumbs-item href="#">Products</ui5-breadcrumbs-item>
+                <ui5-breadcrumbs-item href="#">Details</ui5-breadcrumbs-item>
+            </ui5-breadcrumbs>
+
+            <ui5-title slot="heading">Wireless Headphones Pro</ui5-title>
+
+            <div slot="snappedHeading" class="sap-flex sap-flex--align-items-center">
+                <ui5-avatar
+                    class="sap-margin-right-small"
+                    shape="Square"
+                    icon="product"
+                    color-scheme="Accent6"
+                    size="S"
+                ></ui5-avatar>
+
+                <ui5-title slot="heading">Wireless Headphones Pro</ui5-title>
+            </div>
+
+            <ui5-text slot="subheading">SKU-98765</ui5-text>
+            <ui5-text class="sap-margin-begin-large sap-padding-x-medium" slot="snappedSubheading">SKU-98765</ui5-text>
+
+            <ui5-toolbar slot="actionsBar" [design]="'Transparent'">
+                <ui5-toolbar-button text="Edit"></ui5-toolbar-button>
+                <ui5-toolbar-button design="Transparent" text="Share"></ui5-toolbar-button>
+            </ui5-toolbar>
+
+            <ui5-toolbar slot="navigationBar" [design]="'Transparent'">
+                <ui5-toolbar-button design="Transparent" icon="navigation-down-arrow"></ui5-toolbar-button>
+                <ui5-toolbar-button design="Transparent" icon="action-settings"></ui5-toolbar-button>
+            </ui5-toolbar>
+        </ui5-dynamic-page-title>
+
+        <ui5-dynamic-page-header slot="headerArea" accessibleName="Product Details">
+            <div class="sap-flex sap-flex--wrap">
+                <ui5-avatar
+                    class="sap-margin-tiny"
+                    shape="Square"
+                    icon="product"
+                    color-scheme="Accent6"
+                    size="L"
+                ></ui5-avatar>
+                <div class="sap-flex sap-flex--gap-tiny sap-flex--column sap-margin-tiny">
+                    <ui5-label>Category</ui5-label>
+                    <p class="sap-text">Audio Equipment</p>
+                </div>
+                <div class="sap-flex sap-flex--gap-tiny sap-flex--column sap-margin-tiny">
+                    <ui5-label>Price</ui5-label>
+                    <p class="sap-text">299.99 USD</p>
+                </div>
+                <div class="sap-flex sap-flex--gap-tiny sap-flex--column sap-margin-tiny">
+                    <ui5-label>Rating</ui5-label>
+                    <p class="sap-text">4.7 / 5.0 (1,234 reviews)</p>
+                </div>
+            </div>
+        </ui5-dynamic-page-header>
+
+        <ui5-list headerText="Related Products (8)" mode="SingleSelect">
+            <ui5-li description="SKU-11223" icon="slim-arrow-right" iconEnd additionalText="149.00 USD"
+                >Wireless Earbuds</ui5-li
+            >
+            <ui5-li description="SKU-11224" icon="slim-arrow-right" iconEnd additionalText="79.99 USD"
+                >Portable Speaker</ui5-li
+            >
+            <ui5-li description="SKU-11225" icon="slim-arrow-right" iconEnd additionalText="399.00 USD"
+                >Studio Headphones</ui5-li
+            >
+            <ui5-li description="SKU-11226" icon="slim-arrow-right" iconEnd additionalText="199.00 USD"
+                >Bluetooth Headset</ui5-li
+            >
+            <ui5-li description="SKU-11227" icon="slim-arrow-right" iconEnd additionalText="59.99 USD"
+                >Audio Cable Kit</ui5-li
+            >
+            <ui5-li description="SKU-11228" icon="slim-arrow-right" iconEnd additionalText="449.00 USD"
+                >Soundbar Pro</ui5-li
+            >
+            <ui5-li description="SKU-11229" icon="slim-arrow-right" iconEnd additionalText="249.00 USD"
+                >Gaming Headphones</ui5-li
+            >
+            <ui5-li description="SKU-11230" icon="slim-arrow-right" iconEnd additionalText="129.00 USD"
+                >Sports Earbuds</ui5-li
+            >
+        </ui5-list>
+
+        <ui5-bar slot="footerArea" design="FloatingFooter">
+            <ui5-button slot="endContent" design="Emphasized">Add to Cart</ui5-button>
+            <ui5-button slot="endContent">Save for Later</ui5-button>
+        </ui5-bar>
+    </ui5-dynamic-page>
+</section>

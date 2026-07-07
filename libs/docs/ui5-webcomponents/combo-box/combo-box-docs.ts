@@ -10,13 +10,19 @@ import {
 import { ComboBoxAdditionalTextSample } from './examples/additional-text';
 import { ComboBoxBasicSample } from './examples/basic-sample';
 import { ComboBoxClearIconSample } from './examples/clear-icon';
+import { ComboBoxCustomItemsSample } from './examples/custom-items-sample';
 import { ComboBoxFilterSample } from './examples/filter';
 import { ComboBoxItemsGroupingSample } from './examples/items-grouping';
+import { ComboBoxSelectionTriggerSample } from './examples/selection-trigger-sample';
 import { ComboBoxStatesSample } from './examples/states';
 import { ComboBoxValueStateSample } from './examples/value-state';
 
 const basicSampleHtml = 'basic-sample.html';
 const basicSampleTs = 'basic-sample.ts';
+const selectionTriggerHtml = 'selection-trigger-sample.html';
+const selectionTriggerTs = 'selection-trigger-sample.ts';
+const customItemsHtml = 'custom-items-sample.html';
+const customItemsTs = 'custom-items-sample.ts';
 const valueStateHtml = 'value-state.html';
 const valueStateTs = 'value-state.ts';
 const filterHtml = 'filter.html';
@@ -33,13 +39,14 @@ const itemsGroupingTs = 'items-grouping.ts';
 @Component({
     selector: 'ui5-combo-box-docs',
     templateUrl: './combo-box-docs.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         ComponentExampleComponent,
         CodeExampleComponent,
         DescriptionComponent,
         ComboBoxBasicSample,
+        ComboBoxSelectionTriggerSample,
+        ComboBoxCustomItemsSample,
         ComboBoxValueStateSample,
         ComboBoxFilterSample,
         ComboBoxStatesSample,
@@ -60,6 +67,20 @@ export class ComboBoxDocs {
             component: 'ComboBoxBasicSample',
             code: getAssetFromModuleAssets(basicSampleTs),
             originalFileName: 'basic-sample'
+        }
+    ]);
+
+    private readonly selectionTriggerExampleFiles = signal<ExampleFile[]>([
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(selectionTriggerHtml),
+            originalFileName: 'selection-trigger-sample'
+        },
+        {
+            language: 'typescript',
+            component: 'ComboBoxSelectionTriggerSample',
+            code: getAssetFromModuleAssets(selectionTriggerTs),
+            originalFileName: 'selection-trigger-sample'
         }
     ]);
 
@@ -133,6 +154,20 @@ export class ComboBoxDocs {
         }
     ]);
 
+    private readonly customItemsExampleFiles = signal<ExampleFile[]>([
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(customItemsHtml),
+            originalFileName: 'custom-items-sample'
+        },
+        {
+            language: 'typescript',
+            component: 'ComboBoxCustomItemsSample',
+            code: getAssetFromModuleAssets(customItemsTs),
+            originalFileName: 'custom-items-sample'
+        }
+    ]);
+
     private readonly itemsGroupingExampleFiles = signal<ExampleFile[]>([
         {
             language: 'html',
@@ -148,6 +183,8 @@ export class ComboBoxDocs {
     ]);
 
     basicExamples = computed(() => this.basicExampleFiles());
+    selectionTriggerExamples = computed(() => this.selectionTriggerExampleFiles());
+    customItemsExamples = computed(() => this.customItemsExampleFiles());
     valueStateExamples = computed(() => this.valueStateExampleFiles());
     filterExamples = computed(() => this.filterExampleFiles());
     statesExamples = computed(() => this.statesExampleFiles());

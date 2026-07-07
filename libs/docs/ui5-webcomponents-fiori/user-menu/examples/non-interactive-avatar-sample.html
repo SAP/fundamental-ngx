@@ -1,0 +1,36 @@
+<div>
+    <ui5-shellbar id="shellbar" (ui5ProfileClick)="onProfileClick()">
+        <ui5-shellbar-branding slot="branding">
+            Corporate Portal
+            <img
+                slot="logo"
+                src="https://ui5.github.io/webcomponents/images/sap-logo-svg.svg"
+                alt="Corporate Portal Logo"
+            />
+        </ui5-shellbar-branding>
+        <ui5-avatar slot="profile" id="avatarOpener">
+            <img src="https://ui5.github.io/webcomponents/images/avatars/woman_avatar_1.png" alt="User Avatar" />
+        </ui5-avatar>
+    </ui5-shellbar>
+    <ui5-user-menu
+        id="userMenu"
+        opener="avatarOpener"
+        [open]="menuOpen()"
+        [avatarInteractive]="true"
+        [showEditButton]="true"
+        (ui5Close)="onClose()"
+        (ui5AvatarClick)="onAvatarClick()"
+    >
+        <ui5-user-menu-account
+            slot="accounts"
+            avatarSrc="https://ui5.github.io/webcomponents/images/avatars/woman_avatar_1.png"
+            titleText="Emily Foster"
+            subtitleText="emily.foster@sap.com"
+            description="Senior Software Engineer"
+            selected
+        >
+        </ui5-user-menu-account>
+        <ui5-user-menu-item icon="action-settings" text="Settings"></ui5-user-menu-item>
+        <ui5-user-menu-item icon="message-information" text="About"></ui5-user-menu-item>
+    </ui5-user-menu>
+</div>

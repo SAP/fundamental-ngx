@@ -16,13 +16,16 @@ import 'fundamental-styles/dist/section.css';
 interface ScanResult {
     text: string;
     timestamp: Date;
+    /**
+     * Barcode format detected by the scanner
+     * Common values: 'QR_CODE', 'EAN_13', 'CODE_128', 'DATA_MATRIX', etc.
+     */
     format?: string;
 }
 
 @Component({
     selector: 'ui5-barcode-scanner-dialog-sample',
     templateUrl: './barcode-scanner-dialog-sample.html',
-    standalone: true,
     imports: [BarcodeScannerDialog, Button, MessageStrip, CheckBox, Tag, DatePipe]
 })
 export class BarcodeScannerDialogExample {
@@ -51,10 +54,12 @@ export class BarcodeScannerDialogExample {
 
     onBasicScanSuccess(event: any): void {
         const scanText = event.detail?.text || 'Sample Barcode 123456789';
+        const scanFormat = event.detail?.format || 'QR_CODE';
+
         const result: ScanResult = {
             text: scanText,
             timestamp: new Date(),
-            format: 'Code128' // Mock format
+            format: scanFormat
         };
 
         this.lastScanResult.set(result);

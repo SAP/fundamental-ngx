@@ -9,14 +9,20 @@ import {
 } from '@fundamental-ngx/docs/shared';
 import { MultiComboBoxBasicExample } from './examples/basic-sample';
 import { MultiComboBoxClearIconExample } from './examples/clear-icon-sample';
+import { MultiComboBoxCustomItemsSample } from './examples/custom-items-sample';
 import { MultiComboBoxDisabledAndReadonlyExample } from './examples/disabled-and-readonly-sample';
 import { MultiComboBoxGroupedItemsExample } from './examples/grouped-items-sample';
 import { MultiComboBoxSelectAllItemsExample } from './examples/select-all-items';
+import { MultiComboBoxSelectionTriggerSample } from './examples/selection-trigger-sample';
 import { MultiComboBoxTextWrappingExample } from './examples/text-wrapping-sample';
 import { MultiComboBoxValueStateExample } from './examples/value-state-sample';
 
 const basicSampleHtml = 'basic-sample.html';
 const basicSampleTs = 'basic-sample.ts';
+const selectionTriggerHtml = 'selection-trigger-sample.html';
+const selectionTriggerTs = 'selection-trigger-sample.ts';
+const customItemsHtml = 'custom-items-sample.html';
+const customItemsTs = 'custom-items-sample.ts';
 const valueStateSampleHtml = 'value-state-sample.html';
 const valueStateSampleTs = 'value-state-sample.ts';
 const disabledAndReadonlySampleHtml = 'disabled-and-readonly-sample.html';
@@ -33,13 +39,14 @@ const textWrappingSampleTs = 'text-wrapping-sample.ts';
 @Component({
     selector: 'ui5-multi-combobox-docs',
     templateUrl: './multi-combobox-docs.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         ComponentExampleComponent,
         CodeExampleComponent,
         DescriptionComponent,
         MultiComboBoxBasicExample,
+        MultiComboBoxSelectionTriggerSample,
+        MultiComboBoxCustomItemsSample,
         MultiComboBoxValueStateExample,
         MultiComboBoxDisabledAndReadonlyExample,
         MultiComboBoxGroupedItemsExample,
@@ -60,6 +67,20 @@ export class MultiComboBoxDocs {
             code: getAssetFromModuleAssets(basicSampleTs),
             component: 'MultiComboBoxBasicExample',
             originalFileName: 'basic-sample'
+        }
+    ]);
+
+    private readonly selectionTriggerExampleFiles = signal<ExampleFile[]>([
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(selectionTriggerHtml),
+            originalFileName: 'selection-trigger-sample'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(selectionTriggerTs),
+            component: 'MultiComboBoxSelectionTriggerSample',
+            originalFileName: 'selection-trigger-sample'
         }
     ]);
 
@@ -133,6 +154,20 @@ export class MultiComboBoxDocs {
         }
     ]);
 
+    private readonly customItemsExampleFiles = signal<ExampleFile[]>([
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(customItemsHtml),
+            originalFileName: 'custom-items-sample'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(customItemsTs),
+            component: 'MultiComboBoxCustomItemsSample',
+            originalFileName: 'custom-items-sample'
+        }
+    ]);
+
     private readonly textWrappingExampleFiles = signal<ExampleFile[]>([
         {
             language: 'html',
@@ -148,6 +183,8 @@ export class MultiComboBoxDocs {
     ]);
 
     readonly basicExamples = computed(() => this.basicExampleFiles());
+    readonly selectionTriggerExamples = computed(() => this.selectionTriggerExampleFiles());
+    readonly customItemsExamples = computed(() => this.customItemsExampleFiles());
     readonly valueStateExamples = computed(() => this.valueStateExampleFiles());
     readonly disabledAndReadonlyExamples = computed(() => this.disabledAndReadonlyExampleFiles());
     readonly groupedItemsExamples = computed(() => this.groupedItemsExampleFiles());

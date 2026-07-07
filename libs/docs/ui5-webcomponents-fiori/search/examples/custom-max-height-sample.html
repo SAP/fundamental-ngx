@@ -1,0 +1,19 @@
+<ui5-search
+    #search
+    [value]="searchValue()"
+    placeholder="Search menu items..."
+    [showClearIcon]="true"
+    [noTypeahead]="false"
+    (ui5Input)="onInput($event)"
+    (ui5Search)="onSearch($event)"
+>
+    @for (item of filteredItems(); track item.id) {
+    <ui5-search-item [text]="item.name" [icon]="item.icon"></ui5-search-item>
+    }
+</ui5-search>
+
+<style>
+    ui5-search::part(popover) {
+        max-height: 20rem;
+    }
+</style>
