@@ -28,7 +28,6 @@ export class ComboBoxSelectionTriggerSample {
     selectedValue = signal<string>('');
     noTypeahead = signal(false);
     lastEvent = signal<SelectionEvent | null>(null);
-    selectionHistory = signal<SelectionEvent[]>([]);
 
     countries = [
         'Argentina',
@@ -63,7 +62,6 @@ export class ComboBoxSelectionTriggerSample {
         };
 
         this.lastEvent.set(selectionEvent);
-        this.selectionHistory.update((history) => [selectionEvent, ...history.slice(0, 4)]);
         this.selectedValue.set(value);
     }
 

@@ -1,4 +1,4 @@
-import { Component, computed, signal, viewChild } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import type { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { Search } from '@fundamental-ngx/ui5-webcomponents-fiori/search';
 import { SearchItem } from '@fundamental-ngx/ui5-webcomponents-fiori/search-item';
@@ -32,8 +32,6 @@ interface MenuItem {
     imports: [Search, SearchItem]
 })
 export class CustomMaxHeightSample {
-    readonly searchRef = viewChild.required<Search>('search');
-
     searchValue = signal<string>('');
 
     allMenuItems = signal<MenuItem[]>([
