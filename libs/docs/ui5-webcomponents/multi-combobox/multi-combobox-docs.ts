@@ -39,7 +39,6 @@ const textWrappingSampleTs = 'text-wrapping-sample.ts';
 @Component({
     selector: 'ui5-multi-combobox-docs',
     templateUrl: './multi-combobox-docs.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         ComponentExampleComponent,

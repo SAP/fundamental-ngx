@@ -28,7 +28,6 @@ const infoAreaSampleHtml = 'info-area-sample.html';
 @Component({
     selector: 'ui5-doc-user-menu',
     templateUrl: './user-menu-docs.html',
-    standalone: true,
     imports: [
         CodeExampleComponent,
         ComponentExampleComponent,

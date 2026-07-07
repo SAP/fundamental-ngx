@@ -24,7 +24,6 @@ import 'fundamental-styles/dist/title.css';
 @Component({
     selector: 'ui5-dynamic-page-accessibility-sample',
     templateUrl: './dynamic-page-accessibility-sample.html',
-    standalone: true,
     imports: [
         Avatar,
         DynamicPage,

@@ -23,7 +23,6 @@ const headerSampleTs = 'timeline-header-sample.ts';
 @Component({
     selector: 'ui5-timeline-docs',
     templateUrl: './timeline-docs.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         ComponentExampleComponent,

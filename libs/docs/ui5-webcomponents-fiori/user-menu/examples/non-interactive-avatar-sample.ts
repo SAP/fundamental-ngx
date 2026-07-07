@@ -12,7 +12,6 @@ import '@ui5/webcomponents-icons/dist/message-information.js';
 @Component({
     selector: 'ui5-doc-user-menu-non-interactive-avatar-sample',
     templateUrl: './non-interactive-avatar-sample.html',
-    standalone: true,
     imports: [UserMenu, UserMenuAccount, UserMenuItem, ShellBar, ShellBarBranding, Avatar]
 })
 export class NonInteractiveAvatarSample {

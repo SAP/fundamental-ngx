@@ -18,7 +18,6 @@ interface Destination {
 @Component({
     selector: 'ui5-combo-box-custom-items-sample',
     templateUrl: './custom-items-sample.html',
-    standalone: true,
     imports: [ComboBox, ComboBoxItemCustom]
 })
 export class ComboBoxCustomItemsSample {

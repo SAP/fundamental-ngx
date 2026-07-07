@@ -13,7 +13,6 @@ interface SelectionEvent {
 @Component({
     selector: 'ui5-multi-combobox-selection-trigger-sample',
     templateUrl: './selection-trigger-sample.html',
-    standalone: true,
     imports: [MultiComboBox, MultiComboBoxItem, CheckBox]
 })
 export class MultiComboBoxSelectionTriggerSample {

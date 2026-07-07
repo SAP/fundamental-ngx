@@ -22,7 +22,6 @@ interface ComboBoxSelectionChangeDetail {
 @Component({
     selector: 'ui5-combo-box-selection-trigger-sample',
     templateUrl: './selection-trigger-sample.html',
-    standalone: true,
     imports: [ComboBox, ComboBoxItem, CheckBox, Tag]
 })
 export class ComboBoxSelectionTriggerSample {

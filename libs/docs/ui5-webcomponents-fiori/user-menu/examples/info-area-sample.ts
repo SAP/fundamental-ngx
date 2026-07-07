@@ -13,7 +13,6 @@ import '@ui5/webcomponents-icons/dist/message-information.js';
 @Component({
     selector: 'ui5-doc-user-menu-info-area-sample',
     templateUrl: './info-area-sample.html',
-    standalone: true,
     imports: [UserMenu, UserMenuAccount, UserMenuItem, ShellBar, ShellBarBranding, Avatar, MessageStrip]
 })
 export class InfoAreaSample {

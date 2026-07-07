@@ -26,7 +26,6 @@ interface ScanResult {
 @Component({
     selector: 'ui5-barcode-scanner-dialog-sample',
     templateUrl: './barcode-scanner-dialog-sample.html',
-    standalone: true,
     imports: [BarcodeScannerDialog, Button, MessageStrip, CheckBox, Tag, DatePipe]
 })
 export class BarcodeScannerDialogExample {

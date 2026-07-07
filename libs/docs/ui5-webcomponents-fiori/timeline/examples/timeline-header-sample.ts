@@ -29,7 +29,6 @@ interface OrderEvent {
 @Component({
     selector: 'ui5-timeline-header-sample',
     templateUrl: './timeline-header-sample.html',
-    standalone: true,
     imports: [Timeline, TimelineItem, Bar, Button, Input, Label, Tag, Text, Title, Toolbar, ToolbarButton]
 })
 export class TimelineHeaderSample {

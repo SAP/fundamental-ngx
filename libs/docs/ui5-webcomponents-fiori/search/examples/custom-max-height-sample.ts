@@ -29,7 +29,6 @@ interface MenuItem {
 @Component({
     selector: 'ui5-doc-search-custom-max-height-sample',
     templateUrl: './custom-max-height-sample.html',
-    standalone: true,
     imports: [Search, SearchItem]
 })
 export class CustomMaxHeightSample {

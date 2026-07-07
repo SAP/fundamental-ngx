@@ -39,7 +39,6 @@ const itemsGroupingTs = 'items-grouping.ts';
 @Component({
     selector: 'ui5-combo-box-docs',
     templateUrl: './combo-box-docs.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         ComponentExampleComponent,

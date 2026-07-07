@@ -18,7 +18,6 @@ interface TravelDestination {
 @Component({
     selector: 'ui5-multi-combobox-custom-items-sample',
     templateUrl: './custom-items-sample.html',
-    standalone: true,
     imports: [MultiComboBox, MultiComboBoxItemCustom]
 })
 export class MultiComboBoxCustomItemsSample {

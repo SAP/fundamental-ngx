@@ -18,7 +18,6 @@ const accessibilitySampleTs = 'dynamic-page-accessibility-sample.ts';
 @Component({
     selector: 'ui5-dynamic-page-docs',
     templateUrl: './dynamic-page-docs.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         ComponentExampleComponent,

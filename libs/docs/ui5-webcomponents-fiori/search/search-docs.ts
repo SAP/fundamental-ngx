@@ -37,7 +37,6 @@ const customMaxHeightSampleHtml = 'custom-max-height-sample.html';
 @Component({
     selector: 'ui5-doc-search',
     templateUrl: './search-docs.html',
-    standalone: true,
     imports: [
         CodeExampleComponent,
         ComponentExampleComponent,
