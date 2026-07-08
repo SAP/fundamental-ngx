@@ -42,6 +42,11 @@ function addStylesToConfig(options: Schema): Rule {
 function addAssetsToConfig(options: Schema): Rule {
     return async (tree: Tree, context: SchematicContext): Promise<void> => {
         try {
+            // Asset configuration for @sap-theming/theming-base-content
+            // Starting with version 11.36.4 (Theming Engine 17.0.29), font paths in CSS changed from
+            // relative paths (e.g., ../sap_horizon/fonts/) to absolute paths (../../../Base/baseLib/sap_horizon/fonts/).
+            // To fix this, we copy fonts to match the absolute path structure (./Base/baseLib/*/fonts/).
+            // This approach copies only ~5.5MB of fonts instead of the entire 48MB content/ directory.
             const additionalAssets: AssetPatternClass[] = [
                 {
                     glob: '**/css_variables.css',
@@ -51,12 +56,12 @@ function addAssetsToConfig(options: Schema): Rule {
                 {
                     glob: '**/*',
                     input: './node_modules/@sap-theming/theming-base-content/content/Base/baseLib/baseTheme/fonts/',
-                    output: './assets/theming-base/baseTheme/fonts/'
+                    output: './Base/baseLib/baseTheme/fonts/'
                 },
                 {
                     glob: '**/*',
                     input: './node_modules/@sap-theming/theming-base-content/content/Base/baseLib/sap_horizon/fonts/',
-                    output: './assets/theming-base/sap_horizon/fonts/'
+                    output: './Base/baseLib/sap_horizon/fonts/'
                 },
                 {
                     glob: '**/*',
