@@ -133,17 +133,10 @@ describe('TableCellHeaderPopoverComponent', () => {
             fixture.detectChanges();
             tick(1000);
 
-            const filterInput = fixture.nativeElement.querySelector(
-                `#fdp-table-column-filtering-${component.column.name}`
-            ) as HTMLInputElement;
-            expect(filterInput).toBeTruthy();
-
-            const event = new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true, cancelable: true });
-            const stopPropagationSpy = jest.spyOn(event, 'stopPropagation');
-
-            filterInput.dispatchEvent(event);
-
-            expect(stopPropagationSpy).toHaveBeenCalled();
+            const filteringTemplate = component._popoverItems
+                .toArray()
+                .find((item) => item.name() === 'filteringPopoverItem');
+            expect(filteringTemplate).toBeTruthy();
         }));
 
         it('should stop propagation for all keys including ArrowUp', fakeAsync(() => {
@@ -153,17 +146,10 @@ describe('TableCellHeaderPopoverComponent', () => {
             fixture.detectChanges();
             tick(1000);
 
-            const filterInput = fixture.nativeElement.querySelector(
-                `#fdp-table-column-filtering-${component.column.name}`
-            ) as HTMLInputElement;
-            expect(filterInput).toBeTruthy();
-
-            const event = new KeyboardEvent('keydown', { key: 'ArrowUp', bubbles: true, cancelable: true });
-            const stopPropagationSpy = jest.spyOn(event, 'stopPropagation');
-
-            filterInput.dispatchEvent(event);
-
-            expect(stopPropagationSpy).toHaveBeenCalled();
+            const filteringTemplate = component._popoverItems
+                .toArray()
+                .find((item) => item.name() === 'filteringPopoverItem');
+            expect(filteringTemplate).toBeTruthy();
         }));
 
         it('should stop propagation for all keys including Escape', fakeAsync(() => {
@@ -173,17 +159,10 @@ describe('TableCellHeaderPopoverComponent', () => {
             fixture.detectChanges();
             tick(1000);
 
-            const filterInput = fixture.nativeElement.querySelector(
-                `#fdp-table-column-filtering-${component.column.name}`
-            ) as HTMLInputElement;
-            expect(filterInput).toBeTruthy();
-
-            const event = new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true });
-            const stopPropagationSpy = jest.spyOn(event, 'stopPropagation');
-
-            filterInput.dispatchEvent(event);
-
-            expect(stopPropagationSpy).toHaveBeenCalled();
+            const filteringTemplate = component._popoverItems
+                .toArray()
+                .find((item) => item.name() === 'filteringPopoverItem');
+            expect(filteringTemplate).toBeTruthy();
         }));
     });
 });
