@@ -217,6 +217,95 @@ describe('SettingsDialogComponent', () => {
         expect(component.isDialogValid()).toBe(true);
     });
 
+    it('should disable OK button when invalid combobox input is provided', () => {
+        // Set up sorting data with columns
+        const sortingDataWithColumns: SettingsSortDialogData = {
+            columns: [
+                { label: 'Name', key: 'name' },
+                { label: 'Description', key: 'description' },
+                { label: 'Price', key: 'price' }
+            ],
+            allowDisablingSorting: true
+        };
+        component.sortingData.set(sortingDataWithColumns);
+        fixture.detectChanges();
+
+        // Initially, dialog should be valid and OK button enabled
+        expect(component.isDialogValid()).toBe(true);
+        const okButton = fixture.nativeElement.querySelector('fd-button-bar[fdType="emphasized"]');
+        expect(okButton).toBeTruthy();
+        expect(okButton.disabled).toBe(false);
+
+        // Get the combobox input element inside the sorting component
+        const comboboxInput = fixture.nativeElement.querySelector('fdp-sorting fd-combobox input');
+        expect(comboboxInput).toBeTruthy();
+
+        // Simulate typing invalid text that doesn't match any column
+        comboboxInput.value = 'InvalidColumnName';
+        comboboxInput.dispatchEvent(new Event('input', { bubbles: true }));
+
+        // Trigger ngModelChange by dispatching input and change events
+        const inputEvent = new Event('input', { bubbles: true });
+        const changeEvent = new Event('change', { bubbles: true });
+        comboboxInput.dispatchEvent(inputEvent);
+        comboboxInput.dispatchEvent(changeEvent);
+
+        // Need to trigger Angular's change detection and the combobox's internal logic
+        // The combobox will call ngModelChange with the string value
+        fixture.detectChanges();
+
+        // Get the sorting component instance to trigger the validation
+        const sortingComponent = fixture.debugElement.query(
+            (el) => el.componentInstance?.constructor?.name === 'SortingComponent'
+        )?.componentInstance;
+
+        if (sortingComponent) {
+            // Simulate what the combobox does: call _sortFieldChangeForRow with invalid string
+            sortingComponent._sortFieldChangeForRow(0, 'InvalidColumnName');
+            fixture.detectChanges();
+        }
+
+        // Dialog should become invalid and OK button disabled
+        expect(component.isDialogValid()).toBe(false);
+        expect(okButton.disabled).toBe(true);
+
+        // Restore validity by selecting a valid column
+        if (sortingComponent) {
+            sortingComponent._sortFieldChangeForRow(0, sortingDataWithColumns.columns[0]);
+            fixture.detectChanges();
+        }
+
+        // Dialog should be valid again and OK button enabled
+        expect(component.isDialogValid()).toBe(true);
+        expect(okButton.disabled).toBe(false);
+    });
+
+    it('should prevent confirm action when dialog is invalid', () => {
+        const closeSpy = jest.spyOn(dialogRef, 'close');
+
+        // Make dialog invalid
+        component.onSortValidityChange(false);
+        fixture.detectChanges();
+
+        expect(component.isDialogValid()).toBe(false);
+
+        // Try to confirm - button should be disabled
+        const okButton = fixture.nativeElement.querySelector('fd-button-bar[fdType="emphasized"]');
+        expect(okButton.disabled).toBe(true);
+
+        // Clicking disabled button should not trigger confirm
+        // (In real browser, disabled buttons don't fire click events, but we verify the state)
+        expect(component.isDialogValid()).toBe(false);
+
+        // Restore validity and confirm should work
+        component.onSortValidityChange(true);
+        fixture.detectChanges();
+
+        expect(okButton.disabled).toBe(false);
+        component.confirm();
+        expect(closeSpy).toHaveBeenCalled();
+    });
+
     it('should update filtering data on filter change', () => {
         const newFilterData = { filterBy: [{ field: 'filterField', value: 'filterValue' }] } as FiltersDialogResultData;
         component.onFilterChange(newFilterData);

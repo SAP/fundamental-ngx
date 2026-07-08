@@ -7,7 +7,12 @@
         <code>fdp-table-view-settings-dialog</code> component and providing
         <a routerLink="/platform/table" fragment="initial-state">[initialSortBy]</a> input property of the table.
     </p>
-    <p>In this example <code>Name</code>, <code>Description</code> and <code>Price</code> columns can be sorted.</p>
+    <p>
+        Columns are sorted in priority order, meaning when the dialog is opened, the first sort criteria takes priority
+        over the second, and so on. To demonstrate, you can try sorting by "Status" (ascending) first, then add a second
+        sort criteria for "Price". You'll see items which have the status "Available" at the top of the table, and those
+        will then be sorted by their price, before moving to items with the "No info" status.
+    </p>
 </description>
 <component-example>
     <fdp-platform-table-sortable-example></fdp-platform-table-sortable-example>

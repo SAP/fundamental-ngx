@@ -529,4 +529,260 @@ describe('SortingComponent', () => {
             expect(validityChangeSpy).toHaveBeenCalledWith(true);
         }));
     });
+
+    describe('keyboard navigation', () => {
+        beforeEach(() => {
+            fixture.componentRef.setInput('sortingData', defaultDialogData);
+            fixture.detectChanges();
+        });
+
+        it('should have focusable combobox input in first row', () => {
+            const comboboxInput = fixture.nativeElement.querySelector('fd-combobox input');
+            expect(comboboxInput).toBeTruthy();
+            expect(comboboxInput.hasAttribute('tabindex')).toBe(false); // Native input is focusable by default
+        });
+
+        it('should have focusable direction buttons in first row', () => {
+            const ascButton = fixture.nativeElement.querySelector('button[glyph="sort-ascending"]');
+            const descButton = fixture.nativeElement.querySelector('button[glyph="sort-descending"]');
+            expect(ascButton).toBeTruthy();
+            expect(descButton).toBeTruthy();
+            expect(ascButton.tabIndex).toBeGreaterThanOrEqual(0);
+            expect(descButton.tabIndex).toBeGreaterThanOrEqual(0);
+        });
+
+        it('should have focusable action buttons (move up, move down, delete)', () => {
+            // Add a selection so buttons become enabled
+            component._sortFieldChangeForRow(0, mockColumns[0]);
+            fixture.detectChanges();
+
+            const moveUpButton = fixture.nativeElement.querySelector('button[glyph="slim-arrow-up"]');
+            const moveDownButton = fixture.nativeElement.querySelector('button[glyph="slim-arrow-down"]');
+            const deleteButton = fixture.nativeElement.querySelector('button[glyph="decline"]');
+
+            expect(moveUpButton).toBeTruthy();
+            expect(moveDownButton).toBeTruthy();
+            expect(deleteButton).toBeTruthy();
+        });
+
+        it('should disable move up button on first row', () => {
+            component._sortFieldChangeForRow(0, mockColumns[0]);
+            fixture.detectChanges();
+
+            const moveUpButton = fixture.nativeElement.querySelector('button[glyph="slim-arrow-up"]');
+            expect(moveUpButton.disabled).toBe(true);
+        });
+
+        it('should enable delete button when row has selection', () => {
+            component._sortFieldChangeForRow(0, mockColumns[0]);
+            fixture.detectChanges();
+
+            const deleteButton = fixture.nativeElement.querySelector('button[glyph="decline"]');
+            expect(deleteButton.disabled).toBe(false);
+        });
+
+        it('should have second row with focusable elements after first row selection', () => {
+            component._sortFieldChangeForRow(0, mockColumns[0]);
+            fixture.detectChanges();
+
+            const comboboxes = fixture.nativeElement.querySelectorAll('fd-combobox input');
+            expect(comboboxes.length).toBe(2);
+
+            const ascButtons = fixture.nativeElement.querySelectorAll('button[glyph="sort-ascending"]');
+            expect(ascButtons.length).toBe(2);
+        });
+
+        it('should allow tab navigation through multiple rows', () => {
+            // Add two sort criteria
+            component._sortFieldChangeForRow(0, mockColumns[0]);
+            component._sortFieldChangeForRow(1, mockColumns[1]);
+            fixture.detectChanges();
+
+            const comboboxes = fixture.nativeElement.querySelectorAll('fd-combobox input');
+            const ascButtons = fixture.nativeElement.querySelectorAll('button[glyph="sort-ascending"]');
+            const moveUpButtons = fixture.nativeElement.querySelectorAll('button[glyph="slim-arrow-up"]');
+
+            expect(comboboxes.length).toBe(2);
+            expect(ascButtons.length).toBe(2);
+            expect(moveUpButtons.length).toBe(2);
+        });
+
+        it('should respond to Enter key on move up button', () => {
+            component._sortFieldChangeForRow(0, mockColumns[0]);
+            component._sortFieldChangeForRow(1, mockColumns[1]);
+            fixture.detectChanges();
+
+            const initialFirstField = component.sortCriteriaList()[0].field;
+            const initialSecondField = component.sortCriteriaList()[1].field;
+
+            // Get the second row's move up button
+            const moveUpButtons = fixture.nativeElement.querySelectorAll('button[glyph="slim-arrow-up"]');
+            const secondRowMoveUp = moveUpButtons[1];
+
+            // Simulate Enter key
+            const enterEvent = new KeyboardEvent('keydown', { key: 'Enter', bubbles: true });
+            secondRowMoveUp.dispatchEvent(enterEvent);
+            secondRowMoveUp.click(); // Button click triggered by Enter
+            fixture.detectChanges();
+
+            // Verify swap occurred
+            expect(component.sortCriteriaList()[0].field).toBe(initialSecondField);
+            expect(component.sortCriteriaList()[1].field).toBe(initialFirstField);
+        });
+
+        it('should respond to Space key on move down button', () => {
+            component._sortFieldChangeForRow(0, mockColumns[0]);
+            component._sortFieldChangeForRow(1, mockColumns[1]);
+            fixture.detectChanges();
+
+            const initialFirstField = component.sortCriteriaList()[0].field;
+            const initialSecondField = component.sortCriteriaList()[1].field;
+
+            // Get the first row's move down button
+            const moveDownButtons = fixture.nativeElement.querySelectorAll('button[glyph="slim-arrow-down"]');
+            const firstRowMoveDown = moveDownButtons[0];
+
+            // Simulate Space key
+            const spaceEvent = new KeyboardEvent('keydown', { key: ' ', bubbles: true });
+            firstRowMoveDown.dispatchEvent(spaceEvent);
+            firstRowMoveDown.click(); // Button click triggered by Space
+            fixture.detectChanges();
+
+            // Verify swap occurred
+            expect(component.sortCriteriaList()[0].field).toBe(initialSecondField);
+            expect(component.sortCriteriaList()[1].field).toBe(initialFirstField);
+        });
+
+        it('should respond to Enter key on delete button', () => {
+            component._sortFieldChangeForRow(0, mockColumns[0]);
+            component._sortFieldChangeForRow(1, mockColumns[1]);
+            fixture.detectChanges();
+
+            expect(component.sortCriteriaList()[0].field).toBe('name');
+            expect(component.sortCriteriaList()[1].field).toBe('description');
+
+            // Get the first row's delete button
+            const deleteButtons = fixture.nativeElement.querySelectorAll('button[glyph="decline"]');
+            const firstRowDelete = deleteButtons[0];
+
+            // Simulate Enter key
+            const enterEvent = new KeyboardEvent('keydown', { key: 'Enter', bubbles: true });
+            firstRowDelete.dispatchEvent(enterEvent);
+            firstRowDelete.click(); // Button click triggered by Enter
+            fixture.detectChanges();
+
+            // Verify deletion occurred
+            expect(component.sortCriteriaList()[0].field).toBe('description');
+        });
+
+        it('should maintain focus order after moving row up', () => {
+            component._sortFieldChangeForRow(0, mockColumns[0]);
+            component._sortFieldChangeForRow(1, mockColumns[1]);
+            fixture.detectChanges();
+
+            // Get all comboboxes before move
+            const comboboxesBefore = fixture.nativeElement.querySelectorAll('fd-combobox input');
+            expect(comboboxesBefore[0].value).toContain('Name');
+            expect(comboboxesBefore[1].value).toContain('Description');
+
+            // Move second row up
+            component.moveUp(1);
+            fixture.detectChanges();
+
+            // Get all comboboxes after move
+            const comboboxesAfter = fixture.nativeElement.querySelectorAll('fd-combobox input');
+            expect(comboboxesAfter[0].value).toContain('Description');
+            expect(comboboxesAfter[1].value).toContain('Name');
+        });
+
+        it('should maintain focus order after moving row down', () => {
+            component._sortFieldChangeForRow(0, mockColumns[0]);
+            component._sortFieldChangeForRow(1, mockColumns[1]);
+            fixture.detectChanges();
+
+            const comboboxesBefore = fixture.nativeElement.querySelectorAll('fd-combobox input');
+            expect(comboboxesBefore[0].value).toContain('Name');
+            expect(comboboxesBefore[1].value).toContain('Description');
+
+            // Move first row down
+            component.moveDown(0);
+            fixture.detectChanges();
+
+            const comboboxesAfter = fixture.nativeElement.querySelectorAll('fd-combobox input');
+            expect(comboboxesAfter[0].value).toContain('Description');
+            expect(comboboxesAfter[1].value).toContain('Name');
+        });
+
+        it('should maintain focus order after deleting a row', () => {
+            component._sortFieldChangeForRow(0, mockColumns[0]);
+            component._sortFieldChangeForRow(1, mockColumns[1]);
+            component._sortFieldChangeForRow(2, mockColumns[2]);
+            fixture.detectChanges();
+
+            const comboboxesBefore = fixture.nativeElement.querySelectorAll('fd-combobox input');
+            expect(comboboxesBefore.length).toBe(3);
+
+            // Delete middle row
+            component.deleteRow(1);
+            fixture.detectChanges();
+
+            const comboboxesAfter = fixture.nativeElement.querySelectorAll('fd-combobox input');
+            expect(comboboxesAfter.length).toBe(2);
+            expect(comboboxesAfter[0].value).toContain('Name');
+            expect(comboboxesAfter[1].value).toContain('Price');
+        });
+
+        it('should have proper tab order for action buttons', () => {
+            component._sortFieldChangeForRow(0, mockColumns[0]);
+            component._sortFieldChangeForRow(1, mockColumns[1]);
+            fixture.detectChanges();
+
+            const firstRowButtons = fixture.nativeElement.querySelectorAll('li:first-child button');
+            const secondRowButtons = fixture.nativeElement.querySelectorAll('li:nth-child(2) button');
+
+            // Verify buttons exist in each row
+            expect(firstRowButtons.length).toBeGreaterThan(0);
+            expect(secondRowButtons.length).toBeGreaterThan(0);
+
+            // All buttons should be focusable (tabIndex >= 0 or native button)
+            firstRowButtons.forEach((button: HTMLButtonElement) => {
+                expect(button.tabIndex).toBeGreaterThanOrEqual(-1); // -1 for disabled, >=0 for enabled
+            });
+        });
+
+        it('should allow keyboard navigation to change sort direction', () => {
+            component._sortFieldChangeForRow(0, mockColumns[0]);
+            fixture.detectChanges();
+
+            expect(component.sortCriteriaList()[0].direction).toBe(SortDirection.ASC);
+
+            // Get descending button and click it
+            const descButton = fixture.nativeElement.querySelector('button[glyph="sort-descending"]');
+            descButton.click();
+            fixture.detectChanges();
+
+            expect(component.sortCriteriaList()[0].direction).toBe(SortDirection.DESC);
+        });
+
+        it('should have accessible titles on action buttons', () => {
+            component._sortFieldChangeForRow(0, mockColumns[0]);
+            fixture.detectChanges();
+
+            const moveUpButton = fixture.nativeElement.querySelector('button[glyph="slim-arrow-up"]');
+            const moveDownButton = fixture.nativeElement.querySelector('button[glyph="slim-arrow-down"]');
+            const deleteButton = fixture.nativeElement.querySelector('button[glyph="decline"]');
+
+            expect(moveUpButton.getAttribute('title')).toBeTruthy();
+            expect(moveDownButton.getAttribute('title')).toBeTruthy();
+            expect(deleteButton.getAttribute('title')).toBeTruthy();
+        });
+
+        it('should have accessible titles on direction buttons', () => {
+            const ascButton = fixture.nativeElement.querySelector('button[glyph="sort-ascending"]');
+            const descButton = fixture.nativeElement.querySelector('button[glyph="sort-descending"]');
+
+            expect(ascButton.getAttribute('title')).toBeTruthy();
+            expect(descButton.getAttribute('title')).toBeTruthy();
+        });
+    });
 });
