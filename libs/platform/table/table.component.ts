@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/member-ordering */
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { SPACE } from '@angular/cdk/keycodes';
 import {
     AfterViewChecked,
@@ -65,7 +66,7 @@ import {
     TableHeaderDirective,
     TableRowDirective
 } from '@fundamental-ngx/core/table';
-import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { FdTranslatePipe, resolveTranslationSignalFn } from '@fundamental-ngx/i18n';
 import { SearchInput } from '@fundamental-ngx/platform/search-field';
 import { FDP_PRESET_MANAGED_COMPONENT, isJsObject } from '@fundamental-ngx/platform/shared';
 import {
@@ -904,6 +905,9 @@ export class TableComponent<T = any>
     private readonly _rtlService = inject(RtlService, { optional: true });
 
     /** @hidden */
+    private readonly _translate = resolveTranslationSignalFn();
+
+    /** @hidden */
     constructor(
         private readonly _ngZone: NgZone,
         private readonly _cdr: ChangeDetectorRef,
@@ -912,7 +916,8 @@ export class TableComponent<T = any>
         public readonly _tableColumnResizeService: TableColumnResizeService,
         readonly contentDensityObserver: ContentDensityObserver,
         readonly injector: Injector,
-        private readonly _tabbableService: TabbableElementService
+        private readonly _tabbableService: TabbableElementService,
+        private readonly _liveAnnouncer: LiveAnnouncer
     ) {
         super();
         this.initialState?.setTable(this);
@@ -1279,6 +1284,7 @@ export class TableComponent<T = any>
         }
         this._markAsExpanded(expandableRows);
         this.allRowsExpanded.emit();
+        this._liveAnnouncer.announce(this._translate('platformTable.expandAllAnnouncementLabel')());
     }
 
     /** collapse all rows */
@@ -1291,6 +1297,7 @@ export class TableComponent<T = any>
         });
         this.onTableRowsChanged();
         this.allRowsCollapsed.emit();
+        this._liveAnnouncer.announce(this._translate('platformTable.collapseAllAnnouncementLabel')());
     }
 
     /** Search in table */

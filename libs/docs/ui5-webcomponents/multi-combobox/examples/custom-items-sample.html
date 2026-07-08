@@ -1,0 +1,22 @@
+<ui5-multi-combobox
+    placeholder="Select destinations"
+    style="width: 450px"
+    (ui5SelectionChange)="onSelectionChange($event)"
+>
+    @for (dest of destinations; track dest.value) {
+    <ui5-mcb-item-custom [text]="dest.city + ', ' + dest.country" [value]="dest.value">
+        <div style="display: flex; align-items: center; gap: 0.5rem">
+            <span role="img" [attr.aria-label]="'Flag'">{{ dest.flag }}</span>
+            <span style="flex: 1">{{ dest.city }}, {{ dest.country }}</span>
+            <span role="img" [attr.aria-label]="'Airport'">{{ dest.airportIcon }}</span>
+            @if (dest.popular) {
+            <span role="img" [attr.aria-label]="'Popular'">⭐</span>
+            }
+        </div>
+    </ui5-mcb-item-custom>
+    }
+</ui5-multi-combobox>
+
+@if (selectedCodes().length > 0) {
+<div><strong>Selected Destinations:</strong> {{ selectedCodes().join(', ') }}</div>
+}

@@ -114,6 +114,10 @@ export default {
     coreInfoLabel: {
         srOnlyText: "Étiquette d'information"
     },
+    coreList: {
+        listItemSelectedAriaLabel: 'Selected',
+        listItemNotSelectedAriaLabel: 'Not Selected'
+    },
     coreLink: {
         emphasized: 'Mis en évidence',
         subtle: 'Subtil'
@@ -521,6 +525,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Annuler',
         clearFilters: 'Effacer les filtres',
+        collapseAllAnnouncementLabel: 'Collapse All clicked',
         collapseRowButtonTitle: 'Réduire la ligne',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Aucune donnée trouvée',
@@ -531,6 +536,7 @@ export default {
         editableCellNumberPlaceholder: 'Saisir une valeur',
         editableCellStringPlaceholder: 'Saisir une valeur',
         emptyCell: 'Vide',
+        expandAllAnnouncementLabel: 'Expand All clicked',
         expandRowButtonTitle: 'Développer la ligne',
         filterDialogBackToColumns: 'Revenir à la page précédente',
         filterDialogCancelBtnLabel: 'Annuler',

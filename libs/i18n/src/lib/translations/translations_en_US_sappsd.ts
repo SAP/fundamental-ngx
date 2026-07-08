@@ -114,6 +114,10 @@ export default {
     coreInfoLabel: {
         srOnlyText: '[[[Ĭŋƒŏ Ļąƃēĺ∙∙∙∙]]]'
     },
+    coreList: {
+        listItemSelectedAriaLabel: 'Selected',
+        listItemNotSelectedAriaLabel: 'Not Selected'
+    },
     coreLink: {
         emphasized: '[[[Ĕɱρĥąşįžēƌ∙∙∙∙]]]',
         subtle: '[[[Ŝűƃţĺē∙∙∙∙∙∙∙∙]]]'
@@ -363,7 +367,7 @@ export default {
         messagesTeamRemoved: '[[[1 ţēąɱ ĥąş ƃēēŋ ŗēɱŏʋēƌ∙∙∙∙∙∙]]]',
         messagesUndoAction: '[[[Ůŋƌŏ]]]',
         nextButtonAriaLabel: '[[[Ģŏ ţŏ ŋēχţ şĺįƌē∙∙∙∙∙∙∙∙]]]',
-        noDataFound: 'No Data Found',
+        noDataFound: '[[[Ńŏ Ďąţą Ƒŏűŋƌ∙∙∙∙∙∙]]]',
         nodeActionAddApproversAfter: '[[[Āƌƌ ąρρŗŏʋēŗş ąƒţēŗ∙∙∙∙∙]]]',
         nodeActionAddApproversBefore: '[[[Āƌƌ ąρρŗŏʋēŗş ƃēƒŏŗē∙∙∙∙]]]',
         nodeActionAddApproversParallel: '[[[Āƌƌ ρąŗąĺĺēĺ ąρρŗŏʋēŗş∙∙∙∙∙]]]',
@@ -520,6 +524,7 @@ export default {
     platformTable: {
         cancelBtnLabel: '[[[Ĉąŋċēĺ∙∙∙∙∙∙∙∙]]]',
         clearFilters: '[[[Ĉĺēąŗ Ƒįĺţēŗş∙∙∙∙∙∙]]]',
+        collapseAllAnnouncementLabel: 'Collapse All clicked',
         collapseRowButtonTitle: '[[[Ĉŏĺĺąρşē ŗŏŵ∙∙∙∙∙∙∙]]]',
         confirmBtnLabel: '[[[ŎĶ∙∙]]]',
         defaultEmptyMessage: '[[[Ńŏ ƌąţą ƒŏűŋƌ∙∙∙∙∙∙]]]',
@@ -530,6 +535,7 @@ export default {
         editableCellNumberPlaceholder: '[[[Ĕŋţēŗ ʋąĺűē∙∙∙∙∙∙∙∙]]]',
         editableCellStringPlaceholder: '[[[Ĕŋţēŗ ʋąĺűē∙∙∙∙∙∙∙∙]]]',
         emptyCell: '[[[Ĕɱρţŷ∙∙∙∙∙∙∙∙∙]]]',
+        expandAllAnnouncementLabel: 'Expand All clicked',
         expandRowButtonTitle: '[[[Ĕχρąŋƌ ŗŏŵ∙∙∙∙]]]',
         filterDialogBackToColumns: '[[[Ńąʋįğąţē ƃąċķ∙∙∙∙∙∙]]]',
         filterDialogCancelBtnLabel: '[[[Ĉąŋċēĺ∙∙∙∙∙∙∙∙]]]',

@@ -5,8 +5,10 @@ import {
     DescriptionComponent,
     DocsSectionTitleComponent,
     ExampleFile,
+    SeparatorComponent,
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
+import { TimelineHeaderSample } from './examples/timeline-header-sample';
 import { TimelineExample } from './examples/timeline-sample';
 
 // Import Timeline web component dependencies
@@ -15,17 +17,20 @@ import '@ui5/webcomponents-fiori/dist/TimelineItem.js';
 
 const basicSampleHtml = 'timeline-sample.html';
 const basicSampleTs = 'timeline-sample.ts';
+const headerSampleHtml = 'timeline-header-sample.html';
+const headerSampleTs = 'timeline-header-sample.ts';
 
 @Component({
     selector: 'ui5-timeline-docs',
     templateUrl: './timeline-docs.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         ComponentExampleComponent,
         CodeExampleComponent,
         DescriptionComponent,
-        TimelineExample
+        SeparatorComponent,
+        TimelineExample,
+        TimelineHeaderSample
     ]
 })
 export class TimelineDocs {
@@ -44,6 +49,21 @@ export class TimelineDocs {
         }
     ]);
 
+    private readonly headerExampleFiles = signal<ExampleFile[]>([
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(headerSampleHtml),
+            originalFileName: 'timeline-header-example'
+        },
+        {
+            language: 'typescript',
+            component: 'TimelineHeaderSample',
+            code: getAssetFromModuleAssets(headerSampleTs),
+            originalFileName: 'timeline-header-example'
+        }
+    ]);
+
     // Computed property for template binding (Angular 20 feature)
     readonly examples = computed(() => this.exampleFiles());
+    readonly headerExamples = computed(() => this.headerExampleFiles());
 }

@@ -114,6 +114,10 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Infoetikett'
     },
+    coreList: {
+        listItemSelectedAriaLabel: 'Selected',
+        listItemNotSelectedAriaLabel: 'Not Selected'
+    },
     coreLink: {
         emphasized: 'Uthevet',
         subtle: 'Subtil'
@@ -520,6 +524,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Avbryt',
         clearFilters: 'Tøm filtre',
+        collapseAllAnnouncementLabel: 'Collapse All clicked',
         collapseRowButtonTitle: 'Komprimer rad',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Finner ingen data',
@@ -530,6 +535,7 @@ export default {
         editableCellNumberPlaceholder: 'Angi verdi',
         editableCellStringPlaceholder: 'Angi verdi',
         emptyCell: 'Tom',
+        expandAllAnnouncementLabel: 'Expand All clicked',
         expandRowButtonTitle: 'Utvid rad',
         filterDialogBackToColumns: 'Naviger tilbake',
         filterDialogCancelBtnLabel: 'Avbryt',

@@ -1,0 +1,21 @@
+<div>
+    <ui5-checkbox [checked]="noTypeahead()" (ui5Change)="toggleNoTypeahead()" text="No Typeahead Selection">
+    </ui5-checkbox>
+    <br />
+    <small>
+        When enabled, typing does not auto-select items. Selection only occurs on explicit user action (Enter, click, or
+        arrow keys).
+    </small>
+</div>
+
+<br /><br />
+
+<ui5-multi-combobox
+    placeholder="Select skills"
+    [noTypeahead]="noTypeahead()"
+    (ui5SelectionChange)="onSelectionChange($event)"
+>
+    @for (skill of skills; track skill) {
+    <ui5-mcb-item [text]="skill"></ui5-mcb-item>
+    }
+</ui5-multi-combobox>

@@ -6,3 +6,27 @@
     <ui5-dynamic-page-sample></ui5-dynamic-page-sample>
 </component-example>
 <code-example [exampleFiles]="examples()"></code-example>
+
+<fd-docs-section-title id="accessibility" componentName="dynamic-page">Accessibility Attributes</fd-docs-section-title>
+<description>
+    <p>
+        The <code>accessibilityAttributes</code> property allows you to customize ARIA landmark roles and accessible
+        names for each section (root, header, content, footer). This provides fine-grained control over how screen
+        readers interpret the page structure.
+    </p>
+    <p>
+        Additionally, the <code>ui5-dynamic-page-header</code> now supports the <code>accessibleName</code> property to
+        set its accessible name directly.
+    </p>
+    <p><strong>Available roles per section:</strong></p>
+    <ul>
+        <li><strong>root:</strong> <code>none</code>, <code>main</code>, <code>region</code></li>
+        <li><strong>header:</strong> <code>none</code>, <code>banner</code>, <code>region</code></li>
+        <li><strong>content:</strong> <code>none</code>, <code>main</code>, <code>region</code>, <code>form</code></li>
+        <li><strong>footer:</strong> <code>none</code>, <code>contentinfo</code>, <code>region</code></li>
+    </ul>
+</description>
+<component-example>
+    <ui5-dynamic-page-accessibility-sample></ui5-dynamic-page-accessibility-sample>
+</component-example>
+<code-example [exampleFiles]="accessibilityExamples()"></code-example>

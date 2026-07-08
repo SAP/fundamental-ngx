@@ -112,6 +112,10 @@ export default {
     coreInfoLabel: {
         srOnlyText: '信息标签'
     },
+    coreList: {
+        listItemSelectedAriaLabel: 'Selected',
+        listItemNotSelectedAriaLabel: 'Not Selected'
+    },
     coreLink: {
         emphasized: '已强调',
         subtle: '隐蔽'
@@ -515,6 +519,7 @@ export default {
     platformTable: {
         cancelBtnLabel: '取消',
         clearFilters: '清除过滤器',
+        collapseAllAnnouncementLabel: 'Collapse All clicked',
         collapseRowButtonTitle: '折叠行',
         confirmBtnLabel: '确定',
         defaultEmptyMessage: '找不到数据',
@@ -525,6 +530,7 @@ export default {
         editableCellNumberPlaceholder: '输入值',
         editableCellStringPlaceholder: '输入值',
         emptyCell: '空',
+        expandAllAnnouncementLabel: 'Expand All clicked',
         expandRowButtonTitle: '展开行',
         filterDialogBackToColumns: '向后导航',
         filterDialogCancelBtnLabel: '取消',

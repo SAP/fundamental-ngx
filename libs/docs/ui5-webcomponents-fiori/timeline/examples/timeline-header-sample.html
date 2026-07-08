@@ -1,0 +1,40 @@
+<ui5-timeline id="orderTimeline" style="height: 39rem" [stickyHeader]="true" accessibleName="Search order events">
+    <ui5-toolbar slot="header" design="Transparent">
+        <ui5-input
+            id="searchInput"
+            placeholder="Search order events"
+            [value]="searchValue()"
+            (ui5Input)="onSearch($event)"
+            icon="search"
+            style="width: 100%"
+        ></ui5-input>
+        <ui5-toolbar-button icon="sort" (ui5Click)="toggleSort()"></ui5-toolbar-button>
+        <ui5-toolbar-button icon="filter" (ui5Click)="setFilter('placed')"></ui5-toolbar-button>
+        <ui5-toolbar-button icon="action-settings"></ui5-toolbar-button>
+    </ui5-toolbar>
+
+    <ui5-bar slot="infoBar" design="Subheader">
+        <div slot="endContent" id="infoBarContent" style="display: flex; align-items: center; gap: 0.5rem">
+            @if (isFiltered()) {
+            <ui5-label>10 of 10 events</ui5-label>
+            <ui5-tag colorScheme="7"> {{ sortAscending() ? 'Oldest First' : 'Newest First' }} </ui5-tag>
+            @if (filterStatus()) {
+            <ui5-tag colorScheme="6">Status: {{ filterStatus() }}</ui5-tag>
+            }
+            <ui5-button design="Transparent" (ui5Click)="clearFilters()">Clear</ui5-button>
+            } @else {
+            <ui5-label>{{ totalCount() }} events</ui5-label>
+            }
+        </div>
+    </ui5-bar>
+
+    @for (event of filteredAndSortedEvents(); track event.id) {
+    <ui5-timeline-item
+        [titleText]="event.title"
+        [subtitleText]="event.subtitle"
+        [icon]="event.icon"
+        [iconTooltip]="event.iconTooltip"
+        [name]="event.name"
+    ></ui5-timeline-item>
+    }
+</ui5-timeline>

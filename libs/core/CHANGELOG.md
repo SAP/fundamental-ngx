@@ -1,3 +1,47 @@
+## 0.63.1-rc.16 (2026-07-07)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.15 (2026-07-07)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.14 (2026-07-06)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.13 (2026-07-06)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.12 (2026-07-06)
+
+### 🩹 Fixes
+
+- **core:** improve menu ARIA attributes and VoiceOver compatibility ([#14327](https://github.com/SAP/fundamental-ngx/pull/14327))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
+## 0.63.1-rc.11 (2026-07-06)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.10 (2026-07-06)
+
+### 🩹 Fixes
+
+- **core:** screen reader announces selection state for fd-list items ([#14322](https://github.com/SAP/fundamental-ngx/pull/14322))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
+## 0.63.1-rc.9 (2026-07-02)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
 ## 0.63.1-rc.8 (2026-06-29)
 
 This was a version bump only for core to align it with other projects, there were no code changes.

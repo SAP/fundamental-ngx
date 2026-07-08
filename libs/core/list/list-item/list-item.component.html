@@ -4,6 +4,13 @@
         <ng-content select="fd-radio-button"></ng-content>
     </div>
 }
+@if (_isSelectable) {
+    <span [id]="_selectionDescribedById" class="fd-list__item--sr-only" aria-hidden="true">{{
+        selected
+            ? ('coreList.listItemSelectedAriaLabel' | fdTranslate)()
+            : ('coreList.listItemNotSelectedAriaLabel' | fdTranslate)()
+    }}</span>
+}
 @if (unread && (!_list || _list.byline)) {
     <fd-icon class="fd-list__notification" glyph="circle-task-2"></fd-icon>
 }

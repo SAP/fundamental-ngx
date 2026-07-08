@@ -1,3 +1,41 @@
+## 0.63.1-rc.16 (2026-07-07)
+
+This was a version bump only for cdk to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.15 (2026-07-07)
+
+### 🩹 Fixes
+
+- **platform:** f2 key should move focus in and out of child item on fdk focusable items ([#14328](https://github.com/SAP/fundamental-ngx/pull/14328))
+
+### ❤️ Thank You
+
+- Mike O'Donnell @mikerodonnell89
+
+## 0.63.1-rc.14 (2026-07-06)
+
+This was a version bump only for cdk to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.13 (2026-07-06)
+
+This was a version bump only for cdk to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.12 (2026-07-06)
+
+This was a version bump only for cdk to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.11 (2026-07-06)
+
+This was a version bump only for cdk to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.10 (2026-07-06)
+
+This was a version bump only for cdk to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.9 (2026-07-02)
+
+This was a version bump only for cdk to align it with other projects, there were no code changes.
+
 ## 0.63.1-rc.8 (2026-06-29)
 
 This was a version bump only for cdk to align it with other projects, there were no code changes.

@@ -66,3 +66,33 @@
     <ui5-multi-combobox-text-wrapping-sample></ui5-multi-combobox-text-wrapping-sample>
 </component-example>
 <code-example [exampleFiles]="textWrappingExamples()"></code-example>
+
+<fd-docs-section-title id="selection-trigger" componentName="multi-combobox"> Selection Trigger </fd-docs-section-title>
+<description>
+    The <code>ui5SelectionChange</code> event includes a <code>trigger</code> property indicating the source of the
+    selection:
+    <ul>
+        <li><code>typeahead</code> - Selection caused by typeahead (auto-complete while typing)</li>
+        <li><code>click</code> - Selection caused by clicking or tapping an item in the dropdown</li>
+        <li><code>keyboard</code> - Selection caused by keyboard navigation (Arrow keys, Home, End, Page Up/Down)</li>
+    </ul>
+    The <code>noTypeahead</code> property disables auto-selection when typing. With this enabled, selection only occurs
+    on explicit user action (Enter key, click, or keyboard navigation).
+</description>
+<component-example>
+    <ui5-multi-combobox-selection-trigger-sample></ui5-multi-combobox-selection-trigger-sample>
+</component-example>
+<code-example [exampleFiles]="selectionTriggerExamples()"></code-example>
+
+<fd-docs-section-title id="custom-items" componentName="multi-combobox">
+    Custom Items with Rich Content
+</fd-docs-section-title>
+<description>
+    Use <code>ui5-mcb-item-custom</code> to create custom item templates with complex layouts, multiple icons, images,
+    or any HTML content. This allows you to build rich, visually appealing dropdown items beyond the standard text
+    format.
+</description>
+<component-example>
+    <ui5-multi-combobox-custom-items-sample></ui5-multi-combobox-custom-items-sample>
+</component-example>
+<code-example [exampleFiles]="customItemsExamples()"></code-example>

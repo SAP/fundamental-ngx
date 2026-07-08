@@ -26,7 +26,6 @@ import 'fundamental-styles/dist/title.css';
 @Component({
     selector: 'ui5-dynamic-page-sample',
     templateUrl: './dynamic-page-sample.html',
-    standalone: true,
     imports: [
         Avatar,
         DynamicPage,
@@ -46,4 +45,23 @@ import 'fundamental-styles/dist/title.css';
         Text
     ]
 })
-export class DynamicPageExample {}
+export class DynamicPageExample {
+    accessibilityAttrs = {
+        root: {
+            role: 'region' as const,
+            name: 'Dynamic Page Example'
+        },
+        header: {
+            role: 'region' as const,
+            name: 'Page Header'
+        },
+        content: {
+            role: 'region' as const,
+            name: 'Page Content'
+        },
+        footer: {
+            role: 'region' as const,
+            name: 'Page Footer'
+        }
+    };
+}
