@@ -253,7 +253,8 @@ jobs:
         name: Github Pages deploy
         runs-on: ubuntu-latest
         environment: release
-        permissions: {}
+        permissions:
+            contents: write
         needs: create_release
         if: ${{ needs.create_release.outputs.npmTag == 'latest' }}
         steps:
