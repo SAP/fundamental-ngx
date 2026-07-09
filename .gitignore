@@ -43,7 +43,7 @@ npm-debug.log
 testem.log
 /typings
 report.*.json
-migrations.json
+/migrations.json
 
 
 # System Files
