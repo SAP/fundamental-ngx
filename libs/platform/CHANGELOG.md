@@ -1,3 +1,7 @@
+## 0.63.1-rc.19 (2026-07-09)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
 ## 0.63.1-rc.18 (2026-07-09)
 
 This was a version bump only for platform to align it with other projects, there were no code changes.
