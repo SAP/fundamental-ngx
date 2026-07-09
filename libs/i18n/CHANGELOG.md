@@ -1,3 +1,21 @@
+## 0.63.1 (2026-07-09)
+
+### 🩹 Fixes
+
+- **ci:** set npm provenance config directly before publish ([#14342](https://github.com/SAP/fundamental-ngx/pull/14342))
+- ng update report missing ([#14331](https://github.com/SAP/fundamental-ngx/pull/14331))
+- **platform:** use live announcer for screenreader when expand all / collapse all buttons are clicked ([#14324](https://github.com/SAP/fundamental-ngx/pull/14324))
+- **core:** screen reader announces selection state for fd-list items ([#14322](https://github.com/SAP/fundamental-ngx/pull/14322))
+- **platform:** approval flow empty results ([#14320](https://github.com/SAP/fundamental-ngx/pull/14320))
+
+### ❤️ Thank You
+
+- C5386211
+- Inna Atanasova @InnaAtanasova
+- Maria Dineva @MariaIDineva
+- Mike O'Donnell @mikerodonnell89
+- robertIsaac
+
 ## 0.63.1-rc.21 (2026-07-09)
 
 This was a version bump only for i18n to align it with other projects, there were no code changes.

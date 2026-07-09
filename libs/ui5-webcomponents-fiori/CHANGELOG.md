@@ -1,3 +1,15 @@
+## 0.63.1 (2026-07-09)
+
+### 🩹 Fixes
+
+- **ci:** set npm provenance config directly before publish ([#14342](https://github.com/SAP/fundamental-ngx/pull/14342))
+- ng update report missing ([#14331](https://github.com/SAP/fundamental-ngx/pull/14331))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+- robertIsaac
+
 ## 0.63.1-rc.21 (2026-07-09)
 
 This was a version bump only for ui5-webcomponents-fiori to align it with other projects, there were no code changes.

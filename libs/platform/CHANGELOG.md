@@ -1,3 +1,21 @@
+## 0.63.1 (2026-07-09)
+
+### 🩹 Fixes
+
+- **platform:** update table list and table so header cell popover closes with escape ([#14326](https://github.com/SAP/fundamental-ngx/pull/14326))
+- **ci:** set npm provenance config directly before publish ([#14342](https://github.com/SAP/fundamental-ngx/pull/14342))
+- ng update report missing ([#14331](https://github.com/SAP/fundamental-ngx/pull/14331))
+- **platform:** use live announcer for screenreader when expand all / collapse all buttons are clicked ([#14324](https://github.com/SAP/fundamental-ngx/pull/14324))
+- **platform:** search field missing title attribute for sync button ([#14321](https://github.com/SAP/fundamental-ngx/pull/14321))
+- **platform:** approval flow empty results ([#14320](https://github.com/SAP/fundamental-ngx/pull/14320))
+
+### ❤️ Thank You
+
+- C5386211
+- Inna Atanasova @InnaAtanasova
+- Mike O'Donnell @mikerodonnell89
+- robertIsaac
+
 ## 0.63.1-rc.21 (2026-07-09)
 
 ### 🩹 Fixes

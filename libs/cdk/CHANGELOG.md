@@ -1,3 +1,17 @@
+## 0.63.1 (2026-07-09)
+
+### 🩹 Fixes
+
+- **ci:** set npm provenance config directly before publish ([#14342](https://github.com/SAP/fundamental-ngx/pull/14342))
+- ng update report missing ([#14331](https://github.com/SAP/fundamental-ngx/pull/14331))
+- **platform:** f2 key should move focus in and out of child item on fdk focusable items ([#14328](https://github.com/SAP/fundamental-ngx/pull/14328))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+- Mike O'Donnell @mikerodonnell89
+- robertIsaac
+
 ## 0.63.1-rc.21 (2026-07-09)
 
 This was a version bump only for cdk to align it with other projects, there were no code changes.

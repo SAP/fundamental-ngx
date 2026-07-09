@@ -1,3 +1,30 @@
+## 0.63.1 (2026-07-09)
+
+### 🚀 Features
+
+- **core:** shift-click multi-date selection for fd-calendar / fd-date-picker ([#14309](https://github.com/SAP/fundamental-ngx/pull/14309), [#13502](https://github.com/SAP/fundamental-ngx/issues/13502))
+
+### 🩹 Fixes
+
+- **core:** address Shell Bar design review comments ([#14333](https://github.com/SAP/fundamental-ngx/pull/14333))
+- **ci:** set npm provenance config directly before publish ([#14342](https://github.com/SAP/fundamental-ngx/pull/14342))
+- ng update report missing ([#14331](https://github.com/SAP/fundamental-ngx/pull/14331))
+- **core:** improve menu ARIA attributes and VoiceOver compatibility ([#14327](https://github.com/SAP/fundamental-ngx/pull/14327))
+- **core:** screen reader announces selection state for fd-list items ([#14322](https://github.com/SAP/fundamental-ngx/pull/14322))
+- **core:** add option to configure popover placement in Multi Input ([#14317](https://github.com/SAP/fundamental-ngx/pull/14317))
+- **core:** fix msg box focus trap ([#14298](https://github.com/SAP/fundamental-ngx/pull/14298))
+- **core:** prevent duplicate subscription in segmented-button button changes listener ([#14308](https://github.com/SAP/fundamental-ngx/pull/14308), [#13358](https://github.com/SAP/fundamental-ngx/issues/13358))
+- **core:** add accessible names to FlexibleColumnLayout separator buttons ([#14313](https://github.com/SAP/fundamental-ngx/pull/14313))
+- **core:** prevent inline-help text from being announced twice by screen readers ([#14310](https://github.com/SAP/fundamental-ngx/pull/14310))
+
+### ❤️ Thank You
+
+- deno
+- github-actions
+- Inna Atanasova @InnaAtanasova
+- Maria Dineva @MariaIDineva
+- robertIsaac
+
 ## 0.63.1-rc.21 (2026-07-09)
 
 This was a version bump only for core to align it with other projects, there were no code changes.
