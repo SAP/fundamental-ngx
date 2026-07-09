@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "user-menu-sublist.component.ts",
   "sourceLine": 40,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/user-menu/components/user-menu-sublist.component.ts#L40",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/user-menu/components/user-menu-sublist.component.ts#L40",
   "description": "",
   "inputs": [
     {

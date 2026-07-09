@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "auto-complete.directive.ts",
   "sourceLine": 16,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/cdk/utils/directives/auto-complete/auto-complete.directive.ts#L16",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/cdk/utils/directives/auto-complete/auto-complete.directive.ts#L16",
   "description": "",
   "inputs": [
     {
@@ -66,7 +66,7 @@
       "signature": "(str: string, searchTerm: string) => boolean",
       "description": "Matcher function for testing the str for a search term",
       "deprecated": null,
-      "sourceLine": 94,
+      "sourceLine": 121,
       "since": null,
       "parameters": [
         {

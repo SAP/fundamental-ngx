@@ -1,0 +1,180 @@
+{
+  "name": "FdbNavigationListItem",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "navigation-list-item.class.ts",
+  "sourceLine": 12,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/89f18ecc2d/libs/btp/navigation/models/navigation-list-item.class.ts#L12",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "canItemBeSelected",
+      "signature": "() => boolean",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 35,
+      "since": null,
+      "parameters": [],
+      "returnType": "boolean"
+    },
+    {
+      "name": "focus",
+      "signature": "(origin?: FocusOrigin) => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 25,
+      "since": null,
+      "parameters": [
+        {
+          "name": "origin",
+          "type": "FocusOrigin",
+          "description": "",
+          "optional": true
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "focusLink",
+      "signature": "(closePopover?: boolean) => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 34,
+      "since": null,
+      "parameters": [
+        {
+          "name": "closePopover",
+          "type": "boolean",
+          "description": "",
+          "optional": true
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "handleHorizontalNavigation",
+      "signature": "(isExpand: boolean) => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 33,
+      "since": null,
+      "parameters": [
+        {
+          "name": "isExpand",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "keyboardExpanded",
+      "signature": "(shouldExpand: boolean) => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 27,
+      "since": null,
+      "parameters": [
+        {
+          "name": "shouldExpand",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "popoverLinkArrowDown",
+      "signature": "() => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 28,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "registerChildList",
+      "signature": "(list: NavigationListComponent) => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 31,
+      "since": null,
+      "parameters": [
+        {
+          "name": "list",
+          "type": "NavigationListComponent",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "registerLink",
+      "signature": "(link: FdbNavigationItemLink) => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 29,
+      "since": null,
+      "parameters": [
+        {
+          "name": "link",
+          "type": "FdbNavigationItemLink",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "toggleExpanded",
+      "signature": "() => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 26,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "unregisterChildList",
+      "signature": "(list: NavigationListComponent) => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 32,
+      "since": null,
+      "parameters": [
+        {
+          "name": "list",
+          "type": "NavigationListComponent",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "unregisterLink",
+      "signature": "(link: FdbNavigationItemLink) => void",
+      "description": "",
+      "deprecated": null,
+      "sourceLine": 30,
+      "since": null,
+      "parameters": [
+        {
+          "name": "link",
+          "type": "FdbNavigationItemLink",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

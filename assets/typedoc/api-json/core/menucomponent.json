@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "menu.component.ts",
   "sourceLine": 72,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/menu/menu.component.ts#L72",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/menu/menu.component.ts#L72",
   "description": "The component that represents a menu.",
   "inputs": [
     {
@@ -296,7 +296,7 @@
       "signature": "() => void",
       "description": "Closes the menu",
       "deprecated": null,
-      "sourceLine": 479,
+      "sourceLine": 480,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -306,7 +306,7 @@
       "signature": "() => void",
       "description": "Opens the menu",
       "deprecated": null,
-      "sourceLine": 467,
+      "sourceLine": 468,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -316,7 +316,7 @@
       "signature": "() => void",
       "description": "Method called to refresh position of opened menu",
       "deprecated": null,
-      "sourceLine": 498,
+      "sourceLine": 499,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -326,7 +326,7 @@
       "signature": "(addon: unknown) => void",
       "description": "Register addon",
       "deprecated": null,
-      "sourceLine": 423,
+      "sourceLine": 424,
       "since": null,
       "parameters": [
         {
@@ -343,7 +343,7 @@
       "signature": "() => void",
       "description": "Toggles menu open/close state",
       "deprecated": null,
-      "sourceLine": 493,
+      "sourceLine": 494,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -353,7 +353,7 @@
       "signature": "(addon: unknown) => void",
       "description": "Unregister addon",
       "deprecated": null,
-      "sourceLine": 430,
+      "sourceLine": 431,
       "since": null,
       "parameters": [
         {

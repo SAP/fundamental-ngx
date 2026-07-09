@@ -3,8 +3,8 @@
   "selector": "fd-calendar-aggregated-year-view",
   "kind": "Component",
   "sourceFile": "calendar-aggregated-year-view.component.ts",
-  "sourceLine": 39,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/calendar/calendar-views/calendar-aggregated-year-view/calendar-aggregated-year-view.component.ts#L39",
+  "sourceLine": 40,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/calendar/calendar-views/calendar-aggregated-year-view/calendar-aggregated-year-view.component.ts#L40",
   "description": "",
   "inputs": [
     {
@@ -14,7 +14,7 @@
       "description": "Object to customize aggregated year grid",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 56,
+      "sourceLine": 57,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Function that is called when the focus would escape the element.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 46,
+      "sourceLine": 47,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Parameter used in id of years used for help with focusing on the correct element during keyboard navigation.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 42,
+      "sourceLine": 43,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "Parameter holding the year that is currently selected.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 50,
+      "sourceLine": 51,
       "since": null
     },
     {
@@ -54,7 +54,7 @@
       "description": "Object to customize year grid",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 62,
+      "sourceLine": 63,
       "since": null
     }
   ],
@@ -66,7 +66,7 @@
       "description": "Event fired when a year is selected.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 66,
+      "sourceLine": 67,
       "since": null
     }
   ],
@@ -76,7 +76,7 @@
       "signature": "(event: KeyboardEvent, index: number) => void",
       "description": "Method for handling the keyboard navigation.",
       "deprecated": null,
-      "sourceLine": 204,
+      "sourceLine": 208,
       "since": null,
       "parameters": [
         {
@@ -99,7 +99,7 @@
       "signature": "() => void",
       "description": "Method used to load the previous 12 years to be displayed.",
       "deprecated": null,
-      "sourceLine": 180,
+      "sourceLine": 184,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -109,7 +109,7 @@
       "signature": "() => void",
       "description": "Method used to load the next 12 years to be displayed.",
       "deprecated": null,
-      "sourceLine": 186,
+      "sourceLine": 190,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -119,7 +119,7 @@
       "signature": "(selectedYear: CalendarAggregatedYear, event?: MouseEvent) => void",
       "description": "Method that sends the year to the parent component when it is clicked.",
       "deprecated": null,
-      "sourceLine": 171,
+      "sourceLine": 175,
       "since": null,
       "parameters": [
         {
@@ -142,7 +142,7 @@
       "signature": "() => void",
       "description": "Set focus on month cell.\nIt can be a selected cell, current month cell or first cell in the list",
       "deprecated": null,
-      "sourceLine": 195,
+      "sourceLine": 199,
       "since": null,
       "parameters": [],
       "returnType": "void"

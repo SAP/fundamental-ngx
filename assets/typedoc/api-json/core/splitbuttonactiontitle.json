@@ -4,7 +4,7 @@
   "kind": "Class",
   "sourceFile": "split-button.directives.ts",
   "sourceLine": 34,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/split-button/split-button-utils/split-button.directives.ts#L34",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/split-button/split-button-utils/split-button.directives.ts#L34",
   "description": "Directive used to identify the template which will populate the main action button.\nUsed to achieve complex buttons that require more than a string.\n```html\n   <fd-button-split>\n       <ng-template fd-button-split-action-title>\n           <p>Paragraph 1</p>\n           <p>Paragraph 2</p>\n       </ng-template>\n       <fd-menu>\n            <li fd-menu-item>\n              <a fd-menu-interactive [routerLink]=\"'/'\">\n                  <span fd-menu-title>option2</span>\n              </a>\n           </li>\n           <li fd-menu-item>\n              <a fd-menu-interactive [routerLink]=\"'/'\">\n                  <span fd-menu-title>option2</span>\n              </a>\n           </li>\n       </fd-menu>\n   </fd-button-split>\n</fd-button-split>\n```",
   "inputs": [],
   "outputs": [],

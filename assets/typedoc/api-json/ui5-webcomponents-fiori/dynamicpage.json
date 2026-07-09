@@ -8,13 +8,23 @@
   "description": "",
   "inputs": [
     {
+      "name": "accessibilityAttributes",
+      "type": "DynamicPageAccessibilityAttributes",
+      "default": null,
+      "description": "Defines additional accessibility attributes on different areas of the component.\n\nThe accessibilityAttributes object has the following fields,\nwhere each field is an object supporting one or more accessibility attributes:\n\n- **root**: `root.role` and `root.name`.\n- **header**: `header.role` and `header.name`.\n- **content**: `content.role` and `content.name`.\n- **footer**: `footer.role` and `footer.name`.\n\nThe accessibility attributes support the following values:\n\n- **role**: Defines the accessible ARIA landmark role of the area.\nAccepts the following values per section:\n`root` — `none`, `main`, `region`;\n`header` — `none`, `banner`, `region`;\n`content` — `none`, `main`, `region`, `form`;\n`footer` — `none`, `contentinfo`, `region`.\n\n- **name**: Defines the accessible ARIA name of the area.\nAccepts any string.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 65,
+      "since": null
+    },
+    {
       "name": "headerPinned",
       "type": "boolean",
       "default": null,
       "description": "Defines if the header is pinned.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 45,
+      "sourceLine": 70,
       "since": null
     },
     {
@@ -24,7 +34,7 @@
       "description": "Defines if the header is snapped.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 50,
+      "sourceLine": 75,
       "since": null
     },
     {
@@ -34,7 +44,7 @@
       "description": "Defines if the pin button is hidden.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 55,
+      "sourceLine": 80,
       "since": null
     },
     {
@@ -44,7 +54,7 @@
       "description": "Defines if the footer is shown.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 60,
+      "sourceLine": 85,
       "since": null
     }
   ],
@@ -56,7 +66,7 @@
       "description": "Fired when the pin header button is toggled.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 67,
+      "sourceLine": 92,
       "since": null
     },
     {
@@ -66,7 +76,7 @@
       "description": "Fired when the expand/collapse area of the title is toggled.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 72,
+      "sourceLine": 97,
       "since": null
     }
   ],

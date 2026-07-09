@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "shellbar-user-menu-button.directive.ts",
   "sourceLine": 12,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/shellbar/user-menu/shellbar-user-menu-button.directive.ts#L12",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/shellbar/user-menu/shellbar-user-menu-button.directive.ts#L12",
   "description": "",
   "inputs": [
     {

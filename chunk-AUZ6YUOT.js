@@ -1,2 +1,0 @@
-import{Tf as t,Uf as r}from"./chunk-BRPV62HA.js";import{w as o}from"./chunk-EICJANFN.js";import{h as e}from"./chunk-3DNKNTAQ.js";o("@ui5/webcomponents-theming","sap_horizon",()=>e(null,null,function*(){return t}));o("@ui5/webcomponents","sap_horizon",()=>e(null,null,function*(){return r}),"host");var m=`.ui5-li-additional-text{margin:0 .25rem;color:var(--sapNeutralTextColor);font-size:var(--sapFontSize);min-width:3.75rem;text-align:end;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-`;export{m as a};

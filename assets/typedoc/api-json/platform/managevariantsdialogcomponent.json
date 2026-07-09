@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "manage-variants-dialog.component.ts",
   "sourceLine": 61,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/platform/variant-management/components/manage-variants-dialog/manage-variants-dialog.component.ts#L61",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/platform/variant-management/components/manage-variants-dialog/manage-variants-dialog.component.ts#L61",
   "description": "",
   "inputs": [],
   "outputs": [],

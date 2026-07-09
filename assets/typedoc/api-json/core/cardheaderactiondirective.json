@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "card-header-action.directive.ts",
   "sourceLine": 14,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/card/header/card-header-action.directive.ts#L14",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/card/header/card-header-action.directive.ts#L14",
   "description": "",
   "inputs": [],
   "outputs": [],

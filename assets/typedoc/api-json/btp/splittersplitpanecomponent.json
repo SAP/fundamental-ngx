@@ -1,0 +1,86 @@
+{
+  "name": "SplitterSplitPaneComponent",
+  "selector": "fdb-splitter-split-pane",
+  "kind": "Component",
+  "sourceFile": "splitter-split-pane.component.ts",
+  "sourceLine": 37,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/89f18ecc2d/libs/btp/splitter/splitter-split-pane/splitter-split-pane.component.ts#L37",
+  "description": "",
+  "inputs": [
+    {
+      "name": "demandPane",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether pane is reachable using pagination bar when is off-canvas.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 62,
+      "since": null
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "default": null,
+      "description": "Id of the split pane. Generated if not provided.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 54,
+      "since": null
+    },
+    {
+      "name": "requiredParentWidth",
+      "type": "number",
+      "default": null,
+      "description": "Required browser's window width in pixels when the panel will be shown.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 58,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "sizeChange",
+      "type": "void",
+      "default": null,
+      "description": "Event emitted when the size is changed via the input property.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 70,
+      "since": null
+    },
+    {
+      "name": "toggleOnCanvas",
+      "type": "boolean",
+      "default": null,
+      "description": "Event emitted when the pane appears on/disappears out of canvas.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 66,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "hideFromCanvas",
+      "signature": "() => void",
+      "description": "Hide pane from the canvas.",
+      "deprecated": null,
+      "sourceLine": 125,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "showOnCanvas",
+      "signature": "() => void",
+      "description": "Show pane on the canvas.",
+      "deprecated": null,
+      "sourceLine": 136,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

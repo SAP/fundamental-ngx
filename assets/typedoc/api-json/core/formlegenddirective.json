@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "form-legend.directive.ts",
   "sourceLine": 17,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/form/form-legend/form-legend.directive.ts#L17",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/form/form-legend/form-legend.directive.ts#L17",
   "description": "Applies css to a legend html element.\n\n<legend fd-form-legend>Legend</legend>",
   "inputs": [
     {

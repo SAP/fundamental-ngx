@@ -8,13 +8,23 @@
   "description": "",
   "inputs": [
     {
+      "name": "avatarInteractive",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines whether the avatar of the selected account is interactive (focusable and pressable).\n\nWhen `false` (default), the avatar is rendered as a non-interactive image\nand is not announced as a button by screen readers.\n\n*Note:** When `showEditButton` is set to `true`, the avatar is treated as interactive\nregardless of this property's value, to preserve the edit affordance.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 51,
+      "since": null
+    },
+    {
       "name": "open",
       "type": "boolean",
       "default": null,
       "description": "Defines if the User Menu is opened.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 45,
+      "sourceLine": 56,
       "since": null
     },
     {
@@ -24,7 +34,7 @@
       "description": "Defines the ID or DOM Reference of the element at which the user menu is shown.\nWhen using this attribute in a declarative way, you must only use the `id` (as a string) of the element at which you want to show the popover.\nYou can only set the `opener` attribute to a DOM Reference when using JavaScript.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 52,
+      "sourceLine": 63,
       "since": null
     },
     {
@@ -34,7 +44,7 @@
       "description": "Defines if the User Menu shows the Edit Accounts option.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 57,
+      "sourceLine": 68,
       "since": null
     },
     {
@@ -44,7 +54,7 @@
       "description": "Defines if the User menu shows edit button.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 62,
+      "sourceLine": 73,
       "since": null
     },
     {
@@ -54,7 +64,7 @@
       "description": "Defines if the User Menu shows the Manage Account option.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 67,
+      "sourceLine": 78,
       "since": null
     },
     {
@@ -64,7 +74,7 @@
       "description": "Defines if the User Menu shows the Other Accounts option.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 72,
+      "sourceLine": 83,
       "since": null
     }
   ],
@@ -76,7 +86,7 @@
       "description": "Fired when the account avatar is selected.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 79,
+      "sourceLine": 90,
       "since": null
     },
     {
@@ -86,7 +96,7 @@
       "description": "Fired when the account is switched to a different one.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 84,
+      "sourceLine": 95,
       "since": null
     },
     {
@@ -96,7 +106,7 @@
       "description": "Fired when a user menu is close.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 89,
+      "sourceLine": 100,
       "since": null
     },
     {
@@ -106,7 +116,7 @@
       "description": "Fired when the \"Edit Accounts\" button is selected.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 94,
+      "sourceLine": 105,
       "since": null
     },
     {
@@ -116,7 +126,7 @@
       "description": "Fired when a menu item is selected.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 99,
+      "sourceLine": 110,
       "since": null
     },
     {
@@ -126,7 +136,7 @@
       "description": "Fired when the \"Manage Account\" button is selected.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 104,
+      "sourceLine": 115,
       "since": null
     },
     {
@@ -136,7 +146,7 @@
       "description": "Fired when a user menu is open.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 109,
+      "sourceLine": 120,
       "since": null
     },
     {
@@ -146,7 +156,7 @@
       "description": "Fired when the \"Sign Out\" button is selected.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 114,
+      "sourceLine": 125,
       "since": null
     }
   ],

@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "popover-container.directive.ts",
   "sourceLine": 10,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/popover/popover-container/popover-container.directive.ts#L10",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/popover/popover-container/popover-container.directive.ts#L10",
   "description": "",
   "inputs": [],
   "outputs": [],

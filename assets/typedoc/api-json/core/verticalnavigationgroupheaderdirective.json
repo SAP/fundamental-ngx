@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "vertical-navigation-group-header.directive.ts",
   "sourceLine": 7,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/vertical-navigation/vertical-navigation-group-header.directive.ts#L7",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/vertical-navigation/vertical-navigation-group-header.directive.ts#L7",
   "description": "",
   "inputs": [],
   "outputs": [],

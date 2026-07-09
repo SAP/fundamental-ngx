@@ -13,6 +13,13 @@
         </fd-combobox>
     </div>
     <small>Search Term: {{ searchTermOne }}</small>
+    <div style="display: flex; gap: 0.5rem; margin: 0.5rem 0">
+        <button fd-button (click)="testFastTyping('Strawberry')" style="margin-right: 8px">
+            Types "Strawberry" fast
+        </button>
+        <button fd-button (click)="testFastTyping('Pineapple')">Types "Pineapple" fast</button>
+        <button fd-button (click)="testFastTyping('Apple')">Types "Apple" fast</button>
+    </div>
 
     <div fd-form-item>
         <label fd-form-label for="comboboxIDper">Standard with custom width (in %)</label>

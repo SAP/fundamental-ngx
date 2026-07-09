@@ -1,6 +1,7 @@
 # Fundamental Library for Angular
 
 [![REUSE status](https://api.reuse.software/badge/github.com/SAP/fundamental-ngx)](https://api.reuse.software/info/github.com/SAP/fundamental-ngx)
+[![skills.sh](https://skills.sh/b/SAP/fundamental-ngx)](https://skills.sh/SAP/fundamental-ngx)
 
 <a href="https://www.netlify.com">
   <img src="https://www.netlify.com/img/global/badges/netlify-light.svg" alt="Deploys by Netlify" />
@@ -109,8 +110,8 @@ ng add @fundamental-ngx/core
 2. Add to `angular.json` assets:
     ```json
     { "glob": "**/css_variables.css", "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/", "output": "./assets/theming-base/" },
-    { "glob": "**/*", "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/baseTheme/fonts/", "output": "./assets/theming-base/baseTheme/fonts/" },
-    { "glob": "**/*", "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/sap_horizon/fonts/", "output": "./assets/theming-base/sap_horizon/fonts/" },
+    { "glob": "**/*", "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/baseTheme/fonts/", "output": "./Base/baseLib/baseTheme/fonts/" },
+    { "glob": "**/*", "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/sap_horizon/fonts/", "output": "./Base/baseLib/sap_horizon/fonts/" },
     { "glob": "**/*", "input": "./node_modules/fundamental-styles/dist/theming/", "output": "./assets/fundamental-styles-theming/" }
     ```
 3. Add to `app.config.ts`:
@@ -216,7 +217,25 @@ claude mcp add fundamental-ngx -- npx -y @fundamental-ngx/mcp
 }
 ```
 
+### Agent Skills Quick Start
+
+List skills: `npx skills add SAP/fundamental-ngx --list`.
+Install all: `npx skills add SAP/fundamental-ngx --skill '*'`.
+Install one: `npx skills add SAP/fundamental-ngx --skill build-page-layout`.
+
 See the [full MCP server documentation](libs/mcp-server) for available tools and schema details.
+
+### Component Catalog
+
+A machine-readable JSON catalog of all 1,000+ components is published at:
+
+```
+https://sap.github.io/fundamental-ngx/components.json
+```
+
+The catalog includes component selectors, inputs, outputs, methods, and code examples. It's regenerated with every release and enables static analysis, component discovery, and documentation generation.
+
+See [CATALOG.md](CATALOG.md) for format details and usage examples.
 
 ## Known Issues
 

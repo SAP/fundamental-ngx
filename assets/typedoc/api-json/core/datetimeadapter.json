@@ -4,7 +4,7 @@
   "kind": "Class",
   "sourceFile": "datetime-adapter.ts",
   "sourceLine": 10,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/datetime/datetime-adapter.ts#L10",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/datetime/datetime-adapter.ts#L10",
   "description": "Datetime Adapter is an abstract class that must be implemented by each adapter.\nIt's used to encapsulate a date/time manipulations as result\nothers places that uses it remain date type agnostic.",
   "inputs": [],
   "outputs": [],
@@ -100,7 +100,7 @@
       "signature": "(first: D, second: D) => number",
       "description": "Compares two dates.",
       "deprecated": null,
-      "sourceLine": 374,
+      "sourceLine": 383,
       "since": null,
       "parameters": [
         {
@@ -221,7 +221,7 @@
       "signature": "(date: D) => string",
       "description": "",
       "deprecated": null,
-      "sourceLine": 312,
+      "sourceLine": 323,
       "since": null,
       "parameters": [
         {
@@ -238,7 +238,7 @@
       "signature": "(year: number, month: number, firstDayOfWeek: number) => number",
       "description": "Get Amount of weeks in given month/year",
       "deprecated": null,
-      "sourceLine": 357,
+      "sourceLine": 364,
       "since": null,
       "parameters": [
         {
@@ -256,7 +256,7 @@
         {
           "name": "firstDayOfWeek",
           "type": "number",
-          "description": "The first day of week. 1 - Sunday, 2 - Monday...",
+          "description": "The first day of week. 1 - Sunday, 2 - Monday, ..., 7 - Saturday",
           "optional": false
         }
       ],
@@ -598,7 +598,7 @@
       "signature": "(displayFormat: unknown) => boolean",
       "description": "Format option includes period info.",
       "deprecated": null,
-      "sourceLine": 285,
+      "sourceLine": 296,
       "since": null,
       "parameters": [
         {
@@ -615,7 +615,7 @@
       "signature": "(displayFormat: unknown) => boolean",
       "description": "Format option includes hours info.",
       "deprecated": null,
-      "sourceLine": 292,
+      "sourceLine": 303,
       "since": null,
       "parameters": [
         {
@@ -632,7 +632,7 @@
       "signature": "(displayFormat: unknown) => boolean",
       "description": "Format option includes minutes info.",
       "deprecated": null,
-      "sourceLine": 299,
+      "sourceLine": 310,
       "since": null,
       "parameters": [
         {
@@ -649,7 +649,7 @@
       "signature": "(displayFormat: unknown) => boolean",
       "description": "Format option includes seconds info.",
       "deprecated": null,
-      "sourceLine": 306,
+      "sourceLine": 317,
       "since": null,
       "parameters": [
         {
@@ -739,7 +739,7 @@
       "signature": "(locale: string) => void",
       "description": "Sets the locale used for all dates.",
       "deprecated": null,
-      "sourceLine": 330,
+      "sourceLine": 338,
       "since": null,
       "parameters": [
         {
@@ -802,7 +802,7 @@
       "signature": "(date: D, hours: number, minutes: number, seconds: number) => D",
       "description": "Set hours, minutes and seconds at once.",
       "deprecated": null,
-      "sourceLine": 343,
+      "sourceLine": 350,
       "since": null,
       "parameters": [
         {
@@ -835,9 +835,9 @@
     {
       "name": "toIso8601",
       "signature": "(date: D) => string",
-      "description": "Gets the RFC 3339 compatible string (https://tools.ietf.org/html/rfc3339) for the given date.\nThis method is used to generate date strings that are compatible with native HTML attributes\nsuch as the `min` or `max` attribute of an `<input>`.",
+      "description": "Gets the ISO 8601 date-time string for the given date.\n\nReturns a **local** (timezone-unaware) string in the format `YYYY-MM-DDTHH:mm:ss`.\nThis is intentionally **not** RFC 3339 compliant because no timezone designator is appended.\n\nThis method is used to generate date strings that are compatible with native HTML attributes\nsuch as the `min` or `max` attribute of an `<input>`.\n\nTo produce an RFC 3339 string, append a timezone designator to the result:\n```ts\nconst rfc3339Utc = adapter.toIso8601(date) + 'Z';          // UTC\nconst rfc3339Local = adapter.toIso8601(date) + '+05:30';    // with offset\n```",
       "deprecated": null,
-      "sourceLine": 278,
+      "sourceLine": 289,
       "since": null,
       "parameters": [
         {

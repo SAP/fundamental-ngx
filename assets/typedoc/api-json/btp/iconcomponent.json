@@ -1,0 +1,105 @@
+{
+  "name": "IconComponent",
+  "selector": "fd-icon",
+  "kind": "Component",
+  "sourceFile": "icon.component.ts",
+  "sourceLine": 102,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/89f18ecc2d/libs/core/icon/icon.component.ts#L102",
+  "description": "The component that represents an icon.\n\n```html\n<fd-icon font=\"SAP-icons-TNT\" glyph=\"exceptions\"></fd-icon>\n```",
+  "inputs": [
+    {
+      "name": "ariaHidden",
+      "type": "null | boolean",
+      "default": null,
+      "description": "Aria-hidden attribute for Icon element.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 130,
+      "since": null
+    },
+    {
+      "name": "ariaLabel",
+      "type": "null | string",
+      "default": null,
+      "description": "Aria-label for Icon.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 127,
+      "since": null
+    },
+    {
+      "name": "background",
+      "type": "null | IconColor",
+      "default": null,
+      "description": "Icon color",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 118,
+      "since": null
+    },
+    {
+      "name": "class",
+      "type": "string",
+      "default": null,
+      "description": "user's custom classes",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 124,
+      "since": null
+    },
+    {
+      "name": "color",
+      "type": "null | IconColor",
+      "default": null,
+      "description": "Icon color",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 115,
+      "since": null
+    },
+    {
+      "name": "font",
+      "type": "IconFont",
+      "default": null,
+      "description": "The icon font\nOptions include: 'SAP-icons', 'BusinessSuiteInAppSymbols' and 'SAP-icons-TNT'",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 112,
+      "since": null
+    },
+    {
+      "name": "glyph",
+      "type": "any",
+      "default": null,
+      "description": "The icon name to display. See the icon page for the list of icons\nhere: https://sap.github.io/fundamental-ngx/icon",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 106,
+      "since": null
+    },
+    {
+      "name": "size",
+      "type": "null | IconSize",
+      "default": null,
+      "description": "Icon size",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 121,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ariaHiddenChange",
+      "type": "EventEmitter<null | boolean>",
+      "default": null,
+      "description": "Aria-hidden attribute for Icon element.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 130,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

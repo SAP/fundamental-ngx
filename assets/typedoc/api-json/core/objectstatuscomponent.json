@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "object-status.component.ts",
   "sourceLine": 43,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/object-status/object-status.component.ts#L43",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/object-status/object-status.component.ts#L43",
   "description": "",
   "inputs": [
     {

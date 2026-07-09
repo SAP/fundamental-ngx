@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "no-data-wrapper.component.ts",
   "sourceLine": 16,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/platform/table/components/no-data-wrapper/no-data-wrapper.component.ts#L16",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/platform/table/components/no-data-wrapper/no-data-wrapper.component.ts#L16",
   "description": "",
   "inputs": [],
   "outputs": [],

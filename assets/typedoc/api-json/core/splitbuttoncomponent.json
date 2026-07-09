@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "split-button.component.ts",
   "sourceLine": 72,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/split-button/split-button.component.ts#L72",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/split-button/split-button.component.ts#L72",
   "description": "Split Button component, used to enhance standard HTML button and add possibility to put some dropdown with\nadditional options.\n\n```html\n<fd-split-button>\n  <fd-menu>\n      <li fd-menu-item>\n          <div fd-menu-interactive>\n              <span fd-menu-title>Option 1</span>\n          </div>\n      </li>\n      <li fd-menu-item>\n          <div fd-menu-interactive>\n              <span fd-menu-title>Option 2</span>\n          </div>\n      </li>\n   </fd-menu>\n</fd-split-button>\n```",
   "inputs": [
     {

@@ -3,8 +3,8 @@
   "selector": "fd-time-picker",
   "kind": "Component",
   "sourceFile": "time-picker.component.ts",
-  "sourceLine": 98,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/time-picker/time-picker.component.ts#L98",
+  "sourceLine": 94,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/time-picker/time-picker.component.ts#L94",
   "description": "Set of fields of FormItemControl component",
   "inputs": [
     {
@@ -14,7 +14,7 @@
       "description": "Whether a null input is considered valid(success).",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 172,
+      "sourceLine": 168,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Aria-labelledby for the time picker toggle button.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 168,
+      "sourceLine": 164,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Whether AddOn Button should be focusable",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 233,
+      "sourceLine": 229,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "Disables the component.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 113,
+      "sourceLine": 109,
       "since": null
     },
     {
@@ -54,7 +54,7 @@
       "description": "Display format option to customize time format in input control.\nMust be a format option that is understandable by DatetimeAdapter.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 248,
+      "sourceLine": 244,
       "since": null
     },
     {
@@ -64,7 +64,7 @@
       "description": "When set to false, hides the input for hours.\nDefault value based on the current locale format option",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 149,
+      "sourceLine": 145,
       "since": null
     },
     {
@@ -74,7 +74,7 @@
       "description": "When set to false, hides the input for minutes.\nDefault value based on the current locale format option",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 142,
+      "sourceLine": 138,
       "since": null
     },
     {
@@ -84,7 +84,7 @@
       "description": "When set to false, hides the input for seconds.\nDefault value based on the current locale format option",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 135,
+      "sourceLine": 131,
       "since": null
     },
     {
@@ -94,7 +94,7 @@
       "description": "Id attribute for input element inside TimePicker component",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 109,
+      "sourceLine": 105,
       "since": null
     },
     {
@@ -104,7 +104,7 @@
       "description": "When set to true, time inputs won't allow to have 1 digit\nfor example 9 will become 09\nbut 12 will be kept as 12.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 241,
+      "sourceLine": 237,
       "since": null
     },
     {
@@ -114,7 +114,7 @@
       "description": "When set to false, uses the 24 hour clock (hours ranging from 0 to 23).\nDefault value based on the current locale format option",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 128,
+      "sourceLine": 124,
       "since": null
     },
     {
@@ -124,7 +124,7 @@
       "description": "The interval between selectable minutes (e.g., 1 for every minute, 5 for 5-minute intervals, 15 for 15-minute intervals).\nDefaults to 1 (every minute).",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 281,
+      "sourceLine": 277,
       "since": null
     },
     {
@@ -134,7 +134,7 @@
       "description": "Parse format option to customize time format in input control.\nMust be a format option that is understandable by DatetimeAdapter.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 255,
+      "sourceLine": 251,
       "since": null
     },
     {
@@ -144,7 +144,7 @@
       "description": "Default time picker placeholder which is set dependant on the hours, minutes and seconds.\nOtherwise It can be set to a default value",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 156,
+      "sourceLine": 152,
       "since": null
     },
     {
@@ -154,7 +154,7 @@
       "description": "The placement of the popover. It can be one of: top, top-start, top-end, bottom,\n bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 205,
+      "sourceLine": 201,
       "since": null
     },
     {
@@ -164,7 +164,7 @@
       "description": "If it is mandatory field",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 117,
+      "sourceLine": 113,
       "since": null
     },
     {
@@ -174,7 +174,7 @@
       "description": "Whether to show spinner buttons",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 121,
+      "sourceLine": 117,
       "since": null
     },
     {
@@ -184,7 +184,7 @@
       "description": "Defines if time component should be used with tablet mode",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 176,
+      "sourceLine": 172,
       "since": null
     },
     {
@@ -194,7 +194,7 @@
       "description": "Date time object representation",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 105,
+      "sourceLine": 101,
       "since": null
     },
     {
@@ -204,7 +204,7 @@
       "description": "Aria label for the time picker toggle button.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 164,
+      "sourceLine": 160,
       "since": null
     },
     {
@@ -214,7 +214,7 @@
       "description": "Aria label for the time picker input.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 160,
+      "sourceLine": 156,
       "since": null
     },
     {
@@ -224,7 +224,7 @@
       "description": "Whether to validate the time picker input.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 209,
+      "sourceLine": 205,
       "since": null
     }
   ],
@@ -236,7 +236,7 @@
       "description": "Event emitted when the state of the isOpen property changes.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 259,
+      "sourceLine": 255,
       "since": null
     }
   ],
@@ -246,7 +246,7 @@
       "signature": "() => unknown",
       "description": "Returns format options to be used during time formatting.",
       "deprecated": null,
-      "sourceLine": 423,
+      "sourceLine": 409,
       "since": null,
       "parameters": [],
       "returnType": "unknown"
@@ -256,7 +256,7 @@
       "signature": "() => unknown",
       "description": "Returns format options to be used during time parsing.",
       "deprecated": null,
-      "sourceLine": 430,
+      "sourceLine": 416,
       "since": null,
       "parameters": [],
       "returnType": "unknown"
@@ -266,7 +266,7 @@
       "signature": "() => Nullable<D>",
       "description": "Returns the current value of the time input.",
       "deprecated": null,
-      "sourceLine": 416,
+      "sourceLine": 402,
       "since": null,
       "parameters": [],
       "returnType": "Nullable<D>"

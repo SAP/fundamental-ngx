@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "tab-directives.ts",
   "sourceLine": 62,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/tabs/tab-utils/tab-directives.ts#L62",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/tabs/tab-utils/tab-directives.ts#L62",
   "description": "Directive for icon element, available in most of the modes on `tab` component",
   "inputs": [
     {

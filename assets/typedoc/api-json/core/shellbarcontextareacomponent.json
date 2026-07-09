@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "shellbar-context-area.component.ts",
   "sourceLine": 35,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/shellbar/shellbar-context-area/shellbar-context-area.component.ts#L35",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/shellbar/shellbar-context-area/shellbar-context-area.component.ts#L35",
   "description": "Component representing the context area of the shellbar.\nIt manages the visibility of its child elements based on the available width.",
   "inputs": [],
   "outputs": [

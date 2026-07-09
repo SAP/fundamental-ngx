@@ -1,0 +1,44 @@
+{
+  "name": "ToolLayoutComponent",
+  "selector": "[fdbToolLayout]",
+  "kind": "Component",
+  "sourceFile": "tool-layout.component.ts",
+  "sourceLine": 24,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/89f18ecc2d/libs/btp/tool-layout/src/tool-layout.component.ts#L24",
+  "description": "",
+  "inputs": [
+    {
+      "name": "class",
+      "type": "string",
+      "default": null,
+      "description": "user's custom classes",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 27,
+      "since": null
+    },
+    {
+      "name": "mode",
+      "type": "Nullable<FdbViewMode>",
+      "default": null,
+      "description": "Whether the Tool Layout is in Desktop, Tablet or Mobile/Phone mode\nTypes available: '' | 'tablet' | 'phone'\nThe default (not specified) mode is desktop.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 34,
+      "since": null
+    },
+    {
+      "name": "noGaps",
+      "type": "boolean",
+      "default": "false",
+      "description": "whether to remove the gaps between layout containers",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 38,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

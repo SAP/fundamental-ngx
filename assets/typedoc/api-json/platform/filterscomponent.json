@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "filters.component.ts",
   "sourceLine": 31,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/platform/table/components/table-view-settings-dialog/filtering/filters.component.ts#L31",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/platform/table/components/table-view-settings-dialog/filtering/filters.component.ts#L31",
   "description": "",
   "inputs": [
     {

@@ -1,0 +1,28 @@
+<div class="min-width-control">
+    <ui5-label>Popover Min Width: {{ minWidth() }}px</ui5-label>
+    <ui5-slider
+        class="width-slider"
+        [value]="minWidth()"
+        [min]="200"
+        [max]="500"
+        [step]="10"
+        [showTooltip]="true"
+        (ui5Change)="onSliderChange($event)"
+        accessibleName="Popover minimum width control"
+    ></ui5-slider>
+</div>
+
+<ui5-button id="btn-min-width-opener" design="Emphasized" (ui5Click)="togglePopover()">
+    Open Popover (min-width: {{ minWidth() }}px)
+</ui5-button>
+
+<ui5-popover
+    #popover="ui5Popover"
+    opener="btn-min-width-opener"
+    headerText="Custom Min Width"
+    [open]="popoverOpen()"
+    (ui5Close)="popoverOpen.set(false)"
+    [style.min-width.px]="minWidth()"
+>
+    <div class="popover-content">Test</div>
+</ui5-popover>

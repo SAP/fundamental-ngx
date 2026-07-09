@@ -90,13 +90,23 @@
   ],
   "outputs": [
     {
+      "name": "ui5Click",
+      "type": "UI5CustomEvent<NotificationListItem, 'click'>",
+      "default": null,
+      "description": "Fired when the component is activated either with a mouse/tap or by using the Enter or Space key.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 96,
+      "since": null
+    },
+    {
       "name": "ui5Close",
       "type": "UI5CustomEvent<NotificationListItem, 'close'>",
       "default": null,
       "description": "Fired when the `Close` button is pressed.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 96,
+      "sourceLine": 101,
       "since": null
     }
   ],

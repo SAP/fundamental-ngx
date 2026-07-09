@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "notification.component.ts",
   "sourceLine": 66,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/notification/notification/notification.component.ts#L66",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/notification/notification/notification.component.ts#L66",
   "description": "",
   "inputs": [
     {

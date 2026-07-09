@@ -1,0 +1,13 @@
+{
+  "name": "ToolLayoutContainerDirective",
+  "selector": "[fdbToolLayoutContainer]",
+  "kind": "Directive",
+  "sourceFile": "tool-layout-container.directive.ts",
+  "sourceLine": 10,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/89f18ecc2d/libs/btp/tool-layout/src/directives/tool-layout-container.directive.ts#L10",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

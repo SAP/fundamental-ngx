@@ -78,7 +78,18 @@
       "since": null
     }
   ],
-  "outputs": [],
+  "outputs": [
+    {
+      "name": "ui5Click",
+      "type": "UI5CustomEvent<Tab, 'click'>",
+      "default": null,
+      "description": "Fired when the tab is selected either with a mouse/tap or by using the Enter or Space key.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 94,
+      "since": null
+    }
+  ],
   "methods": [],
   "inherited": null
 }

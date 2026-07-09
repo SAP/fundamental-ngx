@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "pagination.component.ts",
   "sourceLine": 87,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/pagination/pagination.component.ts#L87",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/pagination/pagination.component.ts#L87",
   "description": "The component that is used to provide navigation between paged information.\n```html\n<fd-pagination\n         [totalItems]=\"50\"\n         [itemsPerPage]=\"10\"\n         [currentPage]=\"3\">\n</fd-pagination>\n```",
   "inputs": [
     {

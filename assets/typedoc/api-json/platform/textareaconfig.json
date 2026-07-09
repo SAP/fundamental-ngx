@@ -4,7 +4,7 @@
   "kind": "Class",
   "sourceFile": "text-area.config.ts",
   "sourceLine": 9,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/platform/form/text-area/text-area.config.ts#L9",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/platform/form/text-area/text-area.config.ts#L9",
   "description": "Default options for platform Text Area",
   "inputs": [],
   "outputs": [],

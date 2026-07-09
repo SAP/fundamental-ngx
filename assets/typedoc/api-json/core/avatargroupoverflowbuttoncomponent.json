@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "avatar-group-overflow-button.component.ts",
   "sourceLine": 46,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/avatar-group/components/avatar-group-overflow-button.component.ts#L46",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/avatar-group/components/avatar-group-overflow-button.component.ts#L46",
   "description": "Avatar group overflow button component.\nThis is used for the overflow button template.\nAlthough any content can be projected as the overflow button, this component provides some styling and accessibility features.",
   "inputs": [
     {

@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "combobox.component.ts",
   "sourceLine": 78,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/platform/form/combobox/combobox/combobox.component.ts#L78",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/platform/form/combobox/combobox/combobox.component.ts#L78",
   "description": "Combobox Interface to have typing and avoid circular dependency between\nComboboxComponent <==> ComboboxMobileComponent",
   "inputs": [],
   "outputs": [

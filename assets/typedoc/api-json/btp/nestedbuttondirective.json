@@ -1,0 +1,24 @@
+{
+  "name": "NestedButtonDirective",
+  "selector": "[fd-button][fdbNestedButton]",
+  "kind": "Directive",
+  "sourceFile": "nested-button.directive.ts",
+  "sourceLine": 9,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/89f18ecc2d/libs/btp/button/nested-button.directive.ts#L9",
+  "description": "",
+  "inputs": [
+    {
+      "name": "square",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the button should have squared form",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 11,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

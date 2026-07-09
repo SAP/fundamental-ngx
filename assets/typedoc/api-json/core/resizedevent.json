@@ -4,7 +4,7 @@
   "kind": "Class",
   "sourceFile": "resizable-card-item.component.ts",
   "sourceLine": 725,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/resizable-card-layout/resizable-card-layout/resizable-card-item/resizable-card-item.component.ts#L725",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/resizable-card-layout/resizable-card-layout/resizable-card-item/resizable-card-item.component.ts#L725",
   "description": "Object to emit on resize complete",
   "inputs": [
     {

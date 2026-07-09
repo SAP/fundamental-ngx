@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "card-indicator.component.ts",
   "sourceLine": 13,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/card/header-elements/card-indicator.component.ts#L13",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/card/header-elements/card-indicator.component.ts#L13",
   "description": "",
   "inputs": [],
   "outputs": [],

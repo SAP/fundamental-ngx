@@ -1,0 +1,31 @@
+{
+  "name": "NavigationDataSourceParser",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "navigation-data-source-item.model.ts",
+  "sourceLine": 48,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/89f18ecc2d/libs/btp/navigation/models/navigation-data-source-item.model.ts#L48",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "parse",
+      "signature": "(source: FdbNavigationDataSAcceptableDataSource<T>) => FdbNavigationDataSource<T>",
+      "description": "Transforms plain array or observable into DataSource class.",
+      "deprecated": null,
+      "sourceLine": 55,
+      "since": null,
+      "parameters": [
+        {
+          "name": "source",
+          "type": "FdbNavigationDataSAcceptableDataSource<T>",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "FdbNavigationDataSource<T>"
+    }
+  ],
+  "inherited": null
+}

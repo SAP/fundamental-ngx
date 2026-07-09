@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "timeline-node-body.component.ts",
   "sourceLine": 23,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/timeline/components/timeline-node-body/timeline-node-body.component.ts#L23",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/timeline/components/timeline-node-body/timeline-node-body.component.ts#L23",
   "description": "",
   "inputs": [
     {

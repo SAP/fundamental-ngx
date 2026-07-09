@@ -1,0 +1,45 @@
+{
+  "name": "SplitterPaginationComponent",
+  "selector": "fdb-splitter-pagination",
+  "kind": "Component",
+  "sourceFile": "splitter-pagination.component.ts",
+  "sourceLine": 17,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/89f18ecc2d/libs/btp/splitter/splitter-pagination/splitter-pagination.component.ts#L17",
+  "description": "",
+  "inputs": [
+    {
+      "name": "currentPage",
+      "type": "string",
+      "default": null,
+      "description": "Current page id.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 24,
+      "since": null
+    },
+    {
+      "name": "pages",
+      "type": "string[]",
+      "default": "[]",
+      "description": "Array of pages ids.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 20,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "onPageChange",
+      "type": "string",
+      "default": null,
+      "description": "Event emitted on page change.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 29,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

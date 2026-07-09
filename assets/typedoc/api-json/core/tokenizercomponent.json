@@ -3,8 +3,8 @@
   "selector": "fd-tokenizer",
   "kind": "Component",
   "sourceFile": "tokenizer.component.ts",
-  "sourceLine": 72,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/token/tokenizer.component.ts#L72",
+  "sourceLine": 75,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/token/tokenizer.component.ts#L75",
   "description": "",
   "inputs": [
     {
@@ -14,7 +14,7 @@
       "description": "user's custom classes",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 75,
+      "sourceLine": 78,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Whether to use cozy visuals but compact collapsing behavior.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 113,
+      "sourceLine": 116,
       "since": null
     },
     {
@@ -34,7 +34,17 @@
       "description": "Disables possibility to remove tokens by keyboard",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 79,
+      "sourceLine": 82,
+      "since": null
+    },
+    {
+      "name": "externalHiddenCount",
+      "type": "number",
+      "default": null,
+      "description": "Number of tokens the consumer chose not to render (e.g., from count-based virtualization).\n When > 0, the tokenizer adds this to its own width-hidden count in the \"+N more\" label,\n and suppresses its internal overflow popover (consumer should handle \"show me\" via moreClickedEvent).",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 153,
       "since": null
     },
     {
@@ -44,7 +54,7 @@
       "description": "Icon of the button on the right of the input field.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 125,
+      "sourceLine": 128,
       "since": null
     },
     {
@@ -54,7 +64,7 @@
       "description": "Glyph font family",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 129,
+      "sourceLine": 132,
       "since": null
     },
     {
@@ -64,7 +74,7 @@
       "description": "The value for the tokenizer input",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 121,
+      "sourceLine": 124,
       "since": null
     },
     {
@@ -74,7 +84,7 @@
       "description": "Word to use for when there are extra tokens.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 133,
+      "sourceLine": 136,
       "since": null
     },
     {
@@ -84,7 +94,7 @@
       "description": "",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 141,
+      "sourceLine": 144,
       "since": null
     },
     {
@@ -94,7 +104,7 @@
       "description": "Whether tokenizer should have fake focus indicator, when input is focused inside",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 117,
+      "sourceLine": 120,
       "since": null
     }
   ],
@@ -106,7 +116,7 @@
       "description": "Event emitted when the search term changes. Use *$event* to access the new term.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 145,
+      "sourceLine": 148,
       "since": null
     }
   ],
@@ -116,7 +126,7 @@
       "signature": "() => void",
       "description": "Removes all selected tokens",
       "deprecated": null,
-      "sourceLine": 451,
+      "sourceLine": 464,
       "since": null,
       "parameters": [],
       "returnType": "void"

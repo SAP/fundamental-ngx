@@ -3,8 +3,8 @@
   "selector": "[fdpSearchFieldSuggestion]",
   "kind": "Component",
   "sourceFile": "search-field.component.ts",
-  "sourceLine": 162,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/platform/search-field/search-field.component.ts#L162",
+  "sourceLine": 157,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/platform/search-field/search-field.component.ts#L157",
   "description": "",
   "inputs": [
     {
@@ -14,7 +14,7 @@
       "description": "Whether to allow empty searches when using a data source, meaning all results will be displayed when the search input is empty.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 292,
+      "sourceLine": 287,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Additional appearance configuration.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 209,
+      "sourceLine": 204,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Aria value text for the busy indicator.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 304,
+      "sourceLine": 299,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "Title for the busy indicator.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 301,
+      "sourceLine": 296,
       "since": null
     },
     {
@@ -54,7 +54,7 @@
       "description": "List of categories.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 236,
+      "sourceLine": 231,
       "since": null
     },
     {
@@ -64,7 +64,7 @@
       "description": "Set label for category dropdown button.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 242,
+      "sourceLine": 237,
       "since": null
     },
     {
@@ -74,7 +74,7 @@
       "description": "Type of component used to render the categories dropdown.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 206,
+      "sourceLine": 201,
       "since": null
     },
     {
@@ -84,7 +84,7 @@
       "description": "Current category, value should be present in categories array",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 239,
+      "sourceLine": 234,
       "since": null
     },
     {
@@ -94,7 +94,7 @@
       "description": "Datasource for suggestion list",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 230,
+      "sourceLine": 225,
       "since": null
     },
     {
@@ -104,7 +104,7 @@
       "description": "Whether display Refresh button",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 221,
+      "sourceLine": 216,
       "since": null
     },
     {
@@ -114,7 +114,7 @@
       "description": "Whether display search button",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 224,
+      "sourceLine": 219,
       "since": null
     },
     {
@@ -124,7 +124,7 @@
       "description": "Whether to disable the \"suggestions found\" live announcer.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 254,
+      "sourceLine": 249,
       "since": null
     },
     {
@@ -134,7 +134,7 @@
       "description": "Whether to display a suggestion item as selected after it has been clicked.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 295,
+      "sourceLine": 290,
       "since": null
     },
     {
@@ -144,7 +144,7 @@
       "description": "Whether to always show search button.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 251,
+      "sourceLine": 246,
       "since": null
     },
     {
@@ -154,7 +154,7 @@
       "description": "Hide display of category label",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 245,
+      "sourceLine": 240,
       "since": null
     },
     {
@@ -164,7 +164,7 @@
       "description": "Title of the initial suggestion if the user has entered some text and there are no results to display, and an initial suggestion subline should be shown.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 277,
+      "sourceLine": 272,
       "since": null
     },
     {
@@ -174,7 +174,7 @@
       "description": "Title of the initial suggestion if the user has entered some text and there are no results to display, and an initial suggestion title should be shown.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 274,
+      "sourceLine": 269,
       "since": null
     },
     {
@@ -184,7 +184,7 @@
       "description": "Subline of the initial suggestion, if a suggestion list is displayed.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 271,
+      "sourceLine": 266,
       "since": null
     },
     {
@@ -194,7 +194,7 @@
       "description": "Title of the initial suggestion, if a suggestion list is displayed.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 268,
+      "sourceLine": 263,
       "since": null
     },
     {
@@ -204,7 +204,7 @@
       "description": "Initial input text.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 233,
+      "sourceLine": 228,
       "since": null
     },
     {
@@ -214,7 +214,7 @@
       "description": "Toggle \"loading\" mode.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 248,
+      "sourceLine": 243,
       "since": null
     },
     {
@@ -224,7 +224,7 @@
       "description": "Set Mobile Mode",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 215,
+      "sourceLine": 210,
       "since": null
     },
     {
@@ -234,7 +234,7 @@
       "description": "Search Field Mobile configuration",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 218,
+      "sourceLine": 213,
       "since": null
     },
     {
@@ -244,7 +244,7 @@
       "description": "Placeholder text for search input field.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 212,
+      "sourceLine": 207,
       "since": null
     },
     {
@@ -254,7 +254,7 @@
       "description": "Options to display when the user has entered a string into the input that returns no results.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 286,
+      "sourceLine": 281,
       "since": null
     },
     {
@@ -264,7 +264,7 @@
       "description": "Template to display when the search results list has no items to display.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 283,
+      "sourceLine": 278,
       "since": null
     },
     {
@@ -274,7 +274,7 @@
       "description": "Whether to show the advanced filter button, which emits the event `advancedFilterButtonClick`. If this input is set to true, it will override any other category button settings.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 289,
+      "sourceLine": 284,
       "since": null
     },
     {
@@ -284,7 +284,7 @@
       "description": "Whether to show the \"All\" option in the category select.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 257,
+      "sourceLine": 252,
       "since": null
     },
     {
@@ -294,7 +294,7 @@
       "description": "Subline of the initial suggestion, if a suggestion list is displayed.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 280,
+      "sourceLine": 275,
       "since": null
     },
     {
@@ -304,7 +304,7 @@
       "description": "List of string values to populate suggestion dropdown selection.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 227,
+      "sourceLine": 222,
       "since": null
     },
     {
@@ -314,7 +314,7 @@
       "description": "Whether to display the busy indicator over the suggestion list.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 298,
+      "sourceLine": 293,
       "since": null
     }
   ],
@@ -326,7 +326,7 @@
       "description": "Event emitted when the advanced filter button is clicked.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 176,
+      "sourceLine": 171,
       "since": null
     },
     {
@@ -336,7 +336,7 @@
       "description": "Additional appearance configuration.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 209,
+      "sourceLine": 204,
       "since": null
     },
     {
@@ -346,7 +346,7 @@
       "description": "Cancel search event.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 170,
+      "sourceLine": 165,
       "since": null
     },
     {
@@ -356,7 +356,7 @@
       "description": "Type of component used to render the categories dropdown.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 206,
+      "sourceLine": 201,
       "since": null
     },
     {
@@ -366,7 +366,7 @@
       "description": "Whether display Refresh button",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 221,
+      "sourceLine": 216,
       "since": null
     },
     {
@@ -376,7 +376,7 @@
       "description": "Whether to always show search button.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 251,
+      "sourceLine": 246,
       "since": null
     },
     {
@@ -386,7 +386,7 @@
       "description": "Input change event.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 164,
+      "sourceLine": 159,
       "since": null
     },
     {
@@ -396,7 +396,7 @@
       "description": "Initial input text.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 233,
+      "sourceLine": 228,
       "since": null
     },
     {
@@ -406,7 +406,7 @@
       "description": "Open mobile mode event.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 173,
+      "sourceLine": 168,
       "since": null
     },
     {
@@ -416,7 +416,7 @@
       "description": "Search submit event.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 167,
+      "sourceLine": 162,
       "since": null
     }
   ],
@@ -426,7 +426,7 @@
       "signature": "() => void",
       "description": "Focuses the search input field.",
       "deprecated": null,
-      "sourceLine": 505,
+      "sourceLine": 500,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -436,7 +436,7 @@
       "signature": "(event: KeyboardEvent) => void",
       "description": "Capturing onKeydown of input element",
       "deprecated": null,
-      "sourceLine": 511,
+      "sourceLine": 506,
       "since": null,
       "parameters": [
         {
@@ -453,7 +453,7 @@
       "signature": "() => void",
       "description": "Open suggestion menu",
       "deprecated": null,
-      "sourceLine": 654,
+      "sourceLine": 649,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -463,7 +463,7 @@
       "signature": "() => void",
       "description": "Resets the current category to its initial state.",
       "deprecated": null,
-      "sourceLine": 698,
+      "sourceLine": 693,
       "since": null,
       "parameters": [],
       "returnType": "void"

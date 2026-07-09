@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "overflow-item-container-ref.directive.ts",
   "sourceLine": 10,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/overflow-layout/directives/overflow-item-container-ref.directive.ts#L10",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/overflow-layout/directives/overflow-item-container-ref.directive.ts#L10",
   "description": "Directive to hide component without actual destroying of the component instance.",
   "inputs": [],
   "outputs": [],

@@ -1,0 +1,13 @@
+{
+  "name": "NavigationMenuComponent",
+  "selector": "fdb-navigation-menu, ul[fdb-navigation-menu]",
+  "kind": "Component",
+  "sourceFile": "navigation-menu.component.ts",
+  "sourceLine": 17,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/89f18ecc2d/libs/btp/navigation-menu/src/lib/navigation-menu.component.ts#L17",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

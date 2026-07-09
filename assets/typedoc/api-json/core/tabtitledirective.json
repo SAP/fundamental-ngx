@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "tab-directives.ts",
   "sourceLine": 31,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/tabs/tab-utils/tab-directives.ts#L31",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/tabs/tab-utils/tab-directives.ts#L31",
   "description": "Directive used to identify the template which will populate the tab header.\nUsed to achieve complex headers that require more than a string.\n\n```html\n<fd-tab>\n     <ng-template fd-tab-title>\n         <fd-icon [glyph]=\"'delete'\"></fd-icon>\n         <span>Tab Label</span>\n     </ng-template>\n</fd-tab>\n```",
   "inputs": [],
   "outputs": [],

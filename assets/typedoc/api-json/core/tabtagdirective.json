@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "tab-directives.ts",
   "sourceLine": 107,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/tabs/tab-utils/tab-directives.ts#L107",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/tabs/tab-utils/tab-directives.ts#L107",
   "description": "",
   "inputs": [],
   "outputs": [],

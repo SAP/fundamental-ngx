@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "popover-body.component.ts",
   "sourceLine": 47,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/popover/popover-body/popover-body.component.ts#L47",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/popover/popover-body/popover-body.component.ts#L47",
   "description": "A component used to enforce a certain layout for the popover.\n```html\n<fd-popover>\n    <fd-popover-control>Control Element</fd-popover-control>\n    <fd-popover-body>Popover Body</fd-popover-body>\n</fd-popover>\n```",
   "inputs": [
     {
@@ -56,7 +56,7 @@
       "description": "Event emitted when popover body requests to be closed (e.g., Escape key press)",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 123,
+      "sourceLine": 126,
       "since": null
     }
   ],
@@ -66,7 +66,7 @@
       "signature": "(event: KeyboardEvent) => void",
       "description": "Handler escape keydown",
       "deprecated": null,
-      "sourceLine": 148,
+      "sourceLine": 151,
       "since": null,
       "parameters": [
         {

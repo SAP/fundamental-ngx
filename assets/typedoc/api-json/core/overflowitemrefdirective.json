@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "overflow-item-ref.directive.ts",
   "sourceLine": 20,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/overflow-layout/directives/overflow-item-ref.directive.ts#L20",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/overflow-layout/directives/overflow-item-ref.directive.ts#L20",
   "description": "Structural directive which is used to pass the context of the item to the template engine.",
   "inputs": [
     {

@@ -1,0 +1,59 @@
+<div class="fd-panel fd-margin-bottom--md">
+    <div class="fd-panel__header">
+        <h3 class="fd-panel__title">Skill Level</h3>
+    </div>
+    <div class="fd-panel__content">
+        <ui5-label>Select your skill level:</ui5-label>
+        <ui5-slider
+            class="fd-margin-top--tiny"
+            [value]="skillValue()"
+            [min]="0"
+            [max]="100"
+            [step]="25"
+            [showTooltip]="true"
+            [tickmarks]="skillTickmarks()"
+            (ui5Change)="onSkillChange($event)"
+            accessibleName="Skill level selector"
+        ></ui5-slider>
+    </div>
+</div>
+
+<div class="fd-panel fd-margin-bottom--md">
+    <div class="fd-panel__header">
+        <h3 class="fd-panel__title">Day of Week</h3>
+    </div>
+    <div class="fd-panel__content">
+        <ui5-label>Select a day:</ui5-label>
+        <ui5-slider
+            class="fd-margin-top--tiny"
+            [value]="dateValue()"
+            [min]="0"
+            [max]="6"
+            [step]="1"
+            [showTooltip]="true"
+            [tickmarks]="dateTickmarks()"
+            (ui5Change)="onDateChange($event)"
+            accessibleName="Day of week selector"
+        ></ui5-slider>
+    </div>
+</div>
+
+<div class="fd-panel">
+    <div class="fd-panel__header">
+        <h3 class="fd-panel__title">Temperature Preference</h3>
+    </div>
+    <div class="fd-panel__content">
+        <ui5-label>Set temperature (°C):</ui5-label>
+        <ui5-slider
+            class="fd-margin-top--tiny"
+            [value]="tempValue()"
+            [min]="0"
+            [max]="40"
+            [step]="1"
+            [showTooltip]="true"
+            [tickmarks]="tempTickmarks()"
+            (ui5Change)="onTempChange($event)"
+            accessibleName="Temperature preference selector"
+        ></ui5-slider>
+    </div>
+</div>

@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "number-step-input.component.ts",
   "sourceLine": 53,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/platform/form/step-input/number/number-step-input.component.ts#L53",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/platform/form/step-input/number/number-step-input.component.ts#L53",
   "description": "Fundamental number-step-input component\n\nExample of usage\n```html\n<fdp-number-step-input\n  name=\"number\"\n  [value]=\"value\"\n  (valueChange)=\"onValueChange($event)\"\n></fdp-number-step-input>\n```",
   "inputs": [
     {

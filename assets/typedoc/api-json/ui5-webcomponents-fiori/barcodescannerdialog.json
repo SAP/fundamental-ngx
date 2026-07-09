@@ -43,7 +43,7 @@
       "name": "ui5ScanSuccess",
       "type": "UI5CustomEvent<BarcodeScannerDialog, 'scan-success'>",
       "default": null,
-      "description": "Fires when the scan is completed successfuuly.",
+      "description": "Fires when the scan is completed successfully.",
       "isSignal": true,
       "deprecated": null,
       "sourceLine": 62,

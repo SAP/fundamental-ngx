@@ -1,0 +1,45 @@
+{
+  "name": "ComboBoxItemCustom",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "text",
+      "type": "string",
+      "default": null,
+      "description": "Defines the text of the component.\nUsed for filtering, autocomplete, and mobile rendering.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 46,
+      "since": null
+    },
+    {
+      "name": "value",
+      "type": "string",
+      "default": null,
+      "description": "Defines the value of the component.\nUsed for programmatic selection via the `selectedValue` property.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 52,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5Click",
+      "type": "UI5CustomEvent<ComboBoxItemCustom, 'click'>",
+      "default": null,
+      "description": "Fired when the component is activated either with a mouse/tap or by using the Enter or Space key.\n\n*Note:** The event will not be fired if the `disabled` property is set to `true`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 61,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

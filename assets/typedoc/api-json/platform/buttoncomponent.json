@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "button.component.ts",
   "sourceLine": 33,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/platform/button/button.component.ts#L33",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/platform/button/button.component.ts#L33",
   "description": "",
   "inputs": [
     {

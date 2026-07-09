@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "nested-list-directives.ts",
   "sourceLine": 48,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/nested-list/nested-list-directives.ts#L48",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/nested-list/nested-list-directives.ts#L48",
   "description": "The component that represents an icon.\n\n```html\n<fd-icon font=\"SAP-icons-TNT\" glyph=\"exceptions\"></fd-icon>\n```",
   "inputs": [
     {

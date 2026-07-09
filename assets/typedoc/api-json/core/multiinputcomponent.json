@@ -3,8 +3,8 @@
   "selector": "fd-multi-input",
   "kind": "Component",
   "sourceFile": "multi-input.component.ts",
-  "sourceLine": 130,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/multi-input/multi-input.component.ts#L130",
+  "sourceLine": 133,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/multi-input/multi-input.component.ts#L133",
   "description": "Input field with multiple selection enabled. Should be used when a user can select between a\nlimited number of pre-defined options with a filter-enabled context.\n\nSupports Angular Forms.",
   "inputs": [
     {
@@ -14,7 +14,7 @@
       "description": "Aria-label for the addon button.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 387,
+      "sourceLine": 390,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Title text for the add-on icon button.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 179,
+      "sourceLine": 182,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Whether the multi-input allows the creation of new tokens.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 305,
+      "sourceLine": 308,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "aria-label attribute binding.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 274,
+      "sourceLine": 277,
       "since": null
     },
     {
@@ -54,7 +54,7 @@
       "description": "aria-labelledby attribute binding.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 278,
+      "sourceLine": 281,
       "since": null
     },
     {
@@ -64,7 +64,7 @@
       "description": "Whether the autocomplete should be enabled; Enabled by default",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 367,
+      "sourceLine": 370,
       "since": null
     },
     {
@@ -74,7 +74,7 @@
       "description": "Max width of multi input body.\n`none` will not limit width of the dropdown.\n`container` will limit width of the dropdown to the width of the multi-input itself.\n`number` will limit width of the dropdown by provided number in pixels.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 322,
+      "sourceLine": 325,
       "since": null
     },
     {
@@ -84,7 +84,7 @@
       "description": "Whether AddOn Button should be focusable",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 301,
+      "sourceLine": 304,
       "since": null
     },
     {
@@ -94,7 +94,7 @@
       "description": "Whether list item options should be rendered as byline.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 363,
+      "sourceLine": 366,
       "since": null
     },
     {
@@ -104,7 +104,7 @@
       "description": "user's custom classes",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 222,
+      "sourceLine": 225,
       "since": null
     },
     {
@@ -114,7 +114,7 @@
       "description": "Whether to use cozy visuals but compact collapsing behavior.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 155,
+      "sourceLine": 158,
       "since": null
     },
     {
@@ -124,7 +124,7 @@
       "description": "Whether the input is disabled.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 147,
+      "sourceLine": 150,
       "since": null
     },
     {
@@ -134,7 +134,7 @@
       "description": "Whether to display the addon button.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 383,
+      "sourceLine": 386,
       "since": null
     },
     {
@@ -144,7 +144,7 @@
       "description": "",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 249,
+      "sourceLine": 252,
       "since": null
     },
     {
@@ -154,7 +154,7 @@
       "description": "Values to be displayed in the unfiltered dropdown.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 171,
+      "sourceLine": 174,
       "since": null
     },
     {
@@ -164,7 +164,7 @@
       "description": "Preset options for the Select body width, whatever is chosen, the body has a 600px limit.\n* `at-least` will apply a minimum width to the body equivalent to the width of the control. - Default\n* `equal` will apply a width to the body equivalent to the width of the control.\n* 'fit-content' will apply width needed to properly display items inside, independent of control.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 287,
+      "sourceLine": 290,
       "since": null
     },
     {
@@ -174,7 +174,7 @@
       "description": "",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 230,
+      "sourceLine": 233,
       "since": null
     },
     {
@@ -184,7 +184,7 @@
       "description": "Icon of the button on the right of the input field.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 163,
+      "sourceLine": 166,
       "since": null
     },
     {
@@ -194,7 +194,7 @@
       "description": "Glyph font family",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 167,
+      "sourceLine": 170,
       "since": null
     },
     {
@@ -204,7 +204,7 @@
       "description": "Whether the search term should be highlighted in results.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 196,
+      "sourceLine": 199,
       "since": null
     },
     {
@@ -214,7 +214,7 @@
       "description": "Whether to return results where the input matches the entire string. By default, only results that start\nwith the input search term will be returned.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 346,
+      "sourceLine": 349,
       "since": null
     },
     {
@@ -224,7 +224,7 @@
       "description": "Id attribute for input element inside MultiInput component",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 192,
+      "sourceLine": 195,
       "since": null
     },
     {
@@ -234,7 +234,7 @@
       "description": "The template with which to display the individual listed items.\nUse it by passing an ng-template with implicit content. See examples for more info.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 353,
+      "sourceLine": 356,
       "since": null
     },
     {
@@ -244,7 +244,17 @@
       "description": "Max height of the popover. Any overflowing elements will be accessible through scrolling.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 159,
+      "sourceLine": 162,
+      "since": null
+    },
+    {
+      "name": "maxVisibleTokens",
+      "type": "number",
+      "default": null,
+      "description": "Maximum number of selected tokens to render when the input is not focused.\nWhen the selection exceeds this limit, the remaining count is shown as a\n\"+N more\" indicator. Defaults to 12.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 433,
       "since": null
     },
     {
@@ -254,7 +264,7 @@
       "description": "Whether the multi-input should be built on mobile mode",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 309,
+      "sourceLine": 312,
       "since": null
     },
     {
@@ -264,7 +274,7 @@
       "description": "Multi Input Mobile Configuration, it's applied only, when mobile is enabled",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 339,
+      "sourceLine": 342,
       "since": null
     },
     {
@@ -274,7 +284,7 @@
       "description": "",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 257,
+      "sourceLine": 260,
       "since": null
     },
     {
@@ -284,7 +294,7 @@
       "description": "",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 270,
+      "sourceLine": 273,
       "since": null
     },
     {
@@ -294,7 +304,7 @@
       "description": "Whether multi input popover body should be opened",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 379,
+      "sourceLine": 382,
       "since": null
     },
     {
@@ -304,7 +314,7 @@
       "description": "Whether to open the dropdown when the addon button is clicked.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 175,
+      "sourceLine": 178,
       "since": null
     },
     {
@@ -314,7 +324,7 @@
       "description": "Identifier function or path to an identifier property.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 263,
+      "sourceLine": 266,
       "since": null
     },
     {
@@ -324,7 +334,17 @@
       "description": "Placeholder for the input field.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 143,
+      "sourceLine": 146,
+      "since": null
+    },
+    {
+      "name": "placement",
+      "type": "'top' | 'bottom'",
+      "default": null,
+      "description": "Placement of the popover relative to the input.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 436,
       "since": null
     },
     {
@@ -334,7 +354,7 @@
       "description": "If it is mandatory field",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 151,
+      "sourceLine": 154,
       "since": null
     },
     {
@@ -344,7 +364,7 @@
       "description": "Whether the multi-input should have show all button.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 313,
+      "sourceLine": 316,
       "since": null
     },
     {
@@ -354,7 +374,7 @@
       "description": "The state of the form control - applies css classes.\n Can be `success`, `error`, `warning`, `information` or blank for default.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 294,
+      "sourceLine": 297,
       "since": null
     },
     {
@@ -364,7 +384,7 @@
       "description": "The tooltip for the multi-input icon.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 359,
+      "sourceLine": 362,
       "since": null
     },
     {
@@ -374,7 +394,7 @@
       "description": "",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 240,
+      "sourceLine": 243,
       "since": null
     }
   ],
@@ -386,7 +406,7 @@
       "description": "Emits event when the addon button is clicked.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 395,
+      "sourceLine": 398,
       "since": null
     },
     {
@@ -396,7 +416,7 @@
       "description": "Event emitted, when the multi input's all item checked or not",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 399,
+      "sourceLine": 402,
       "since": null
     },
     {
@@ -406,7 +426,7 @@
       "description": "Event emitted, when the multi input's popover body is opened or closed",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 391,
+      "sourceLine": 394,
       "since": null
     },
     {
@@ -416,7 +436,7 @@
       "description": "Event emitted when the search term changes. Use *$event* to access the new term.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 371,
+      "sourceLine": 374,
       "since": null
     },
     {
@@ -426,7 +446,7 @@
       "description": "Event emitted when the selected items change. Use *$event* to access the new selected array.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 375,
+      "sourceLine": 378,
       "since": null
     }
   ],
@@ -436,7 +456,7 @@
       "signature": "() => void",
       "description": "Handle dialog approval, closes popover and propagates data changes.",
       "deprecated": null,
-      "sourceLine": 801,
+      "sourceLine": 842,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -446,7 +466,7 @@
       "signature": "(selectedBackup: any[]) => void",
       "description": "Handle dialog dismissing, closes popover and sets backup data.",
       "deprecated": null,
-      "sourceLine": 792,
+      "sourceLine": 833,
       "since": null,
       "parameters": [
         {
@@ -463,7 +483,7 @@
       "signature": "(direction: FocusEscapeDirection) => void",
       "description": "Method passed to list component",
       "deprecated": null,
-      "sourceLine": 600,
+      "sourceLine": 641,
       "since": null,
       "parameters": [
         {
@@ -480,7 +500,7 @@
       "signature": "(selectAll: boolean) => void",
       "description": "Method that selects all possible options.",
       "deprecated": null,
-      "sourceLine": 639,
+      "sourceLine": 680,
       "since": null,
       "parameters": [
         {

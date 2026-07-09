@@ -3,8 +3,8 @@
   "selector": "fd-date-picker",
   "kind": "Component",
   "sourceFile": "date-picker.component.ts",
-  "sourceLine": 126,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/date-picker/date-picker.component.ts#L126",
+  "sourceLine": 127,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/date-picker/date-picker.component.ts#L127",
   "description": "The datetime picker component is an opinionated composition of the fd-popover and\nfd-calendar components to accomplish the UI pattern for picking a date.\n\nSupports Angular Forms.\n```html\n<fd-date-picker [(ngModel)]=\"date\"></fd-date-picker>\n```",
   "inputs": [
     {
@@ -14,7 +14,7 @@
       "description": "Actually shown active view one of 'day' | 'month' | 'year' in calendar component",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 208,
+      "sourceLine": 209,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Object to customize aggregated year grid,\nRow, Columns and method to display year can be modified",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 280,
+      "sourceLine": 281,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Whether the user wants to select multiple days or multiple range dates.\nIf `displayWeekNumbers` is true, the user can click on the week number to mark the related row.\nThe user can click on week days to mark the related column.\nNote: Clickable selection for week row or column does not work for range selections.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 304,
+      "sourceLine": 305,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "Whether a null input is considered valid.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 204,
+      "sourceLine": 205,
       "since": null
     },
     {
@@ -54,7 +54,7 @@
       "description": "The element to which the popover should be appended.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 219,
+      "sourceLine": 220,
       "since": null
     },
     {
@@ -64,7 +64,7 @@
       "description": "aria-labelledby for element describing date-picker.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 312,
+      "sourceLine": 313,
       "since": null
     },
     {
@@ -74,7 +74,7 @@
       "description": "",
       "isSignal": false,
       "deprecated": "Popover is toggled with f4 key",
-      "sourceLine": 253,
+      "sourceLine": 254,
       "since": null
     },
     {
@@ -84,7 +84,7 @@
       "description": "Defines if date picker should be closed after date choose",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 227,
+      "sourceLine": 228,
       "since": null
     },
     {
@@ -94,7 +94,7 @@
       "description": "Define a custom datetime format. Can be a string for DayjsDatetimeAdapter or object for FdDatetimeAdapter",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 155,
+      "sourceLine": 156,
       "since": null
     },
     {
@@ -104,7 +104,7 @@
       "description": "Whether to select and display the date range in MM/YYYY or YYYY format\nFor month and year format value is 'month'\nFor year format value is 'year'",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 349,
+      "sourceLine": 350,
       "since": null
     },
     {
@@ -114,7 +114,7 @@
       "description": "",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 533,
+      "sourceLine": 540,
       "since": null
     },
     {
@@ -124,7 +124,7 @@
       "description": "",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 545,
+      "sourceLine": 552,
       "since": null
     },
     {
@@ -134,7 +134,7 @@
       "description": "",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 539,
+      "sourceLine": 546,
       "since": null
     },
     {
@@ -144,7 +144,7 @@
       "description": "Whether the date picker is disabled.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 223,
+      "sourceLine": 224,
       "since": null
     },
     {
@@ -154,7 +154,7 @@
       "description": "Should date picker be inlined.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 308,
+      "sourceLine": 309,
       "since": null
     },
     {
@@ -164,7 +164,7 @@
       "description": "ID attribute for input element inside DatePicker component",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 147,
+      "sourceLine": 148,
       "since": null
     },
     {
@@ -174,7 +174,7 @@
       "description": "Whether the legend should display in column layout instead of row layout. Default is false.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 409,
+      "sourceLine": 410,
       "since": null
     },
     {
@@ -184,7 +184,7 @@
       "description": "Whether user wants to mark sunday/saturday with `fd-calendar__item--weekend` class",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 289,
+      "sourceLine": 290,
       "since": null
     },
     {
@@ -194,7 +194,7 @@
       "description": "Whether date picker should rendered in mobile mode.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 330,
+      "sourceLine": 331,
       "since": null
     },
     {
@@ -204,7 +204,7 @@
       "description": "Mobile mode configuration.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 334,
+      "sourceLine": 335,
       "since": null
     },
     {
@@ -214,7 +214,7 @@
       "description": "Whether calendar is used inside mobile in landscape mode, it also adds close button on right side",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 338,
+      "sourceLine": 339,
       "since": null
     },
     {
@@ -224,7 +224,7 @@
       "description": "Whether calendar is used inside mobile in portrait mode",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 342,
+      "sourceLine": 343,
       "since": null
     },
     {
@@ -234,7 +234,7 @@
       "description": "Function used to disable next button in the calendar header.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 247,
+      "sourceLine": 248,
       "since": null
     },
     {
@@ -244,7 +244,7 @@
       "description": "Date picker input placeholder string",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 143,
+      "sourceLine": 144,
       "since": null
     },
     {
@@ -254,7 +254,7 @@
       "description": "The placement of the popover. It can be one of: top, top-start, top-end, bottom,\n bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 215,
+      "sourceLine": 216,
       "since": null
     },
     {
@@ -264,7 +264,7 @@
       "description": "Whether to prevent page scrolling when focusing date picker input field after calendar has been closed.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 326,
+      "sourceLine": 327,
       "since": null
     },
     {
@@ -274,7 +274,7 @@
       "description": "Function used to disable previous button in the calendar header.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 241,
+      "sourceLine": 242,
       "since": null
     },
     {
@@ -284,7 +284,7 @@
       "description": "Whether to recalculate value from the input as user types or on blur.\nBy default, updates the value as user types.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 320,
+      "sourceLine": 321,
       "since": null
     },
     {
@@ -294,7 +294,7 @@
       "description": "Whether user wants to mark day cells on hover.\nWorks only on range mode, when start date is selected on Day View.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 196,
+      "sourceLine": 197,
       "since": null
     },
     {
@@ -304,7 +304,7 @@
       "description": "If it is mandatory field",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 151,
+      "sourceLine": 152,
       "since": null
     },
     {
@@ -314,7 +314,7 @@
       "description": "The currently selected date model in single mode.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 173,
+      "sourceLine": 174,
       "since": null
     },
     {
@@ -324,7 +324,7 @@
       "description": "The currently selected date model with multiple ranges.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 185,
+      "sourceLine": 186,
       "since": null
     },
     {
@@ -334,7 +334,7 @@
       "description": "The currently selected date model in multiple mode.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 177,
+      "sourceLine": 178,
       "since": null
     },
     {
@@ -344,7 +344,7 @@
       "description": "The currently selected date model with start and end in range mode.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 181,
+      "sourceLine": 182,
       "since": null
     },
     {
@@ -354,7 +354,7 @@
       "description": "Whether to display the calendar legend below the calendar. Default is false.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 406,
+      "sourceLine": 407,
       "since": null
     },
     {
@@ -364,7 +364,7 @@
       "description": "Enables Today-Selection-Button if true",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 231,
+      "sourceLine": 232,
       "since": null
     },
     {
@@ -374,7 +374,7 @@
       "description": "Whether user wants to show week numbers next to days",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 295,
+      "sourceLine": 296,
       "since": null
     },
     {
@@ -384,7 +384,7 @@
       "description": "Special days mark, it can be used by passing array of object with\nSpecial day number, list 1-20 [class:`fd-calendar__item--legend-{{number}}`] is available there:\nhttps://sap.github.io/fundamental-styles/components/calendar.html calendar special days section\nRule accepts method with FdDate object as a parameter. ex:\n`rule: (fdDate: FdDate) => fdDate.getDay() === 1`, which will mark all sundays as special day.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 263,
+      "sourceLine": 264,
       "since": null
     },
     {
@@ -394,7 +394,7 @@
       "description": "The day of the week the calendar should start on. 1 represents Sunday, 2 is Monday, 3 is Tuesday, and so on.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 189,
+      "sourceLine": 190,
       "since": null
     },
     {
@@ -404,7 +404,7 @@
       "description": "Label for Today-Selection-Button",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 235,
+      "sourceLine": 236,
       "since": null
     },
     {
@@ -414,7 +414,7 @@
       "description": "The type of calendar, 'single' for single date selection or 'range' for a range of dates.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 139,
+      "sourceLine": 140,
       "since": null
     },
     {
@@ -424,7 +424,7 @@
       "description": "Whether to validate the date picker input.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 200,
+      "sourceLine": 201,
       "since": null
     },
     {
@@ -434,7 +434,7 @@
       "description": "Object to customize year grid,\nRow, Columns and method to display year can be modified",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 270,
+      "sourceLine": 271,
       "since": null
     }
   ],
@@ -446,7 +446,7 @@
       "description": "Event thrown every time calendar active view is changed",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 375,
+      "sourceLine": 376,
       "since": null
     },
     {
@@ -456,7 +456,7 @@
       "description": "Event emitted when the state of the isOpen property changes.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 353,
+      "sourceLine": 354,
       "since": null
     },
     {
@@ -466,7 +466,7 @@
       "description": "Event thrown every time selected date in single mode is changed",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 357,
+      "sourceLine": 358,
       "since": null
     },
     {
@@ -476,7 +476,7 @@
       "description": "Event thrown every time the first or last date in multiple range mode is changed.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 369,
+      "sourceLine": 370,
       "since": null
     },
     {
@@ -486,7 +486,7 @@
       "description": "Event thrown every time the selected dates in multiple mode are changed.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 361,
+      "sourceLine": 362,
       "since": null
     },
     {
@@ -496,7 +496,7 @@
       "description": "Event thrown every time selected first or last date in range mode is changed",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 365,
+      "sourceLine": 366,
       "since": null
     }
   ],
@@ -506,7 +506,7 @@
       "signature": "() => void",
       "description": "Renders the calendar right before the popover is opened.\nUsed for correct calculations of overlay position and size.",
       "deprecated": null,
-      "sourceLine": 1033,
+      "sourceLine": 1035,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -516,7 +516,7 @@
       "signature": "() => void",
       "description": "Closes the calendar if it is open",
       "deprecated": null,
-      "sourceLine": 665,
+      "sourceLine": 667,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -526,7 +526,7 @@
       "signature": "() => D | D[] | DateRange<D> | DateRange<D>[]",
       "description": "Returns current selected date.",
       "deprecated": null,
-      "sourceLine": 1002,
+      "sourceLine": 1004,
       "since": null,
       "parameters": [],
       "returnType": "D | D[] | DateRange<D> | DateRange<D>[]"
@@ -536,7 +536,7 @@
       "signature": "(activeView: FdCalendarView) => void",
       "description": "Method that handle calendar active view change and throws event.",
       "deprecated": null,
-      "sourceLine": 631,
+      "sourceLine": 633,
       "since": null,
       "parameters": [
         {
@@ -553,7 +553,7 @@
       "signature": "() => boolean",
       "description": "Method that provides information if model selected date/dates have properly types and are valid",
       "deprecated": null,
-      "sourceLine": 985,
+      "sourceLine": 987,
       "since": null,
       "parameters": [],
       "returnType": "boolean"
@@ -563,7 +563,7 @@
       "signature": "() => void",
       "description": "Opens the calendar",
       "deprecated": null,
-      "sourceLine": 644,
+      "sourceLine": 646,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -573,7 +573,7 @@
       "signature": "() => void",
       "description": "Toggles the calendar open or closed",
       "deprecated": null,
-      "sourceLine": 653,
+      "sourceLine": 655,
       "since": null,
       "parameters": [],
       "returnType": "void"

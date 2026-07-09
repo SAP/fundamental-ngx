@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "wizard-step-indicator.component.ts",
   "sourceLine": 44,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/wizard/wizard-step-indicator/wizard-step-indicator.component.ts#L44",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/wizard/wizard-step-indicator/wizard-step-indicator.component.ts#L44",
   "description": "",
   "inputs": [
     {

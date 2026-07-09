@@ -1,0 +1,105 @@
+{
+  "name": "NavigationListComponent",
+  "selector": "ul[fdb-navigation-list]",
+  "kind": "Component",
+  "sourceFile": "navigation-list.component.ts",
+  "sourceLine": 44,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/89f18ecc2d/libs/btp/navigation/components/navigation-list/navigation-list.component.ts#L44",
+  "description": "",
+  "inputs": [
+    {
+      "name": "ariaLabel",
+      "type": "Nullable<string>",
+      "default": "null",
+      "description": "aria-label for the navigation list.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 72,
+      "since": null
+    },
+    {
+      "name": "childItems",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the list is for child items.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 90,
+      "since": null
+    },
+    {
+      "name": "moreButtonRef",
+      "type": "any",
+      "default": null,
+      "description": "Reference to the More button component if this list is inside a More button popover.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 103,
+      "since": null
+    },
+    {
+      "name": "noGrow",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the list should not grow in height.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 95,
+      "since": null
+    },
+    {
+      "name": "parentItems",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the list is for parent items.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 85,
+      "since": null
+    },
+    {
+      "name": "role",
+      "type": "'menu' | 'group' | 'tree' | 'menubar'",
+      "default": "'tree'",
+      "description": "",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 65,
+      "since": null
+    },
+    {
+      "name": "withKeyboardNavigation",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the list should handle keyboard navigation.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 99,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "focusAfter",
+      "type": "void",
+      "default": null,
+      "description": "Event emitted when user tries to navigate to the item after the list itself.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 111,
+      "since": null
+    },
+    {
+      "name": "focusBefore",
+      "type": "void",
+      "default": null,
+      "description": "Event emitted when user tries to navigate to the item before the list itself.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 107,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

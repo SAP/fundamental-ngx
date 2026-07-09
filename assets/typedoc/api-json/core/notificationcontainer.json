@@ -4,7 +4,7 @@
   "kind": "Class",
   "sourceFile": "notification-container.ts",
   "sourceLine": 26,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/notification/notification-utils/notification-container.ts#L26",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/notification/notification-utils/notification-container.ts#L26",
   "description": "",
   "inputs": [],
   "outputs": [],

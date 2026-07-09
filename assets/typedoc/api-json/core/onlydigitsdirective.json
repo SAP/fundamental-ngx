@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "only-digits.directive.ts",
   "sourceLine": 27,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/cdk/utils/directives/only-digits/only-digits.directive.ts#L27",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/cdk/utils/directives/only-digits/only-digits.directive.ts#L27",
   "description": "",
   "inputs": [
     {

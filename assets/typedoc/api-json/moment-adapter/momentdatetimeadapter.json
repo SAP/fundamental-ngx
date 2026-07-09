@@ -4,7 +4,7 @@
   "kind": "Class",
   "sourceFile": "moment-datetime-adapter.ts",
   "sourceLine": 41,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L41",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/moment-adapter/src/lib/moment-datetime-adapter.ts#L41",
   "description": "",
   "inputs": [],
   "outputs": [],
@@ -789,7 +789,7 @@
         "signature": "(first: Moment, second: Moment) => number",
         "description": "Compares two dates.",
         "deprecated": null,
-        "sourceLine": 374,
+        "sourceLine": 383,
         "since": null,
         "parameters": [
           {
@@ -812,7 +812,7 @@
         "signature": "(year: number, month: number, firstDayOfWeek: number) => number",
         "description": "Get Amount of weeks in given month/year",
         "deprecated": null,
-        "sourceLine": 357,
+        "sourceLine": 364,
         "since": null,
         "parameters": [
           {
@@ -830,7 +830,7 @@
           {
             "name": "firstDayOfWeek",
             "type": "number",
-            "description": "The first day of week. 1 - Sunday, 2 - Monday...",
+            "description": "The first day of week. 1 - Sunday, 2 - Monday, ..., 7 - Saturday",
             "optional": false
           }
         ],
@@ -841,7 +841,7 @@
         "signature": "(date: Moment, hours: number, minutes: number, seconds: number) => Moment",
         "description": "Set hours, minutes and seconds at once.",
         "deprecated": null,
-        "sourceLine": 343,
+        "sourceLine": 350,
         "since": null,
         "parameters": [
           {

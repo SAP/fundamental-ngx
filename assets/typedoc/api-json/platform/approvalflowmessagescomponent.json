@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "approval-flow-messages.component.ts",
   "sourceLine": 36,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/platform/approval-flow/approval-flow-messages/approval-flow-messages.component.ts#L36",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/platform/approval-flow/approval-flow-messages/approval-flow-messages.component.ts#L36",
   "description": "",
   "inputs": [
     {

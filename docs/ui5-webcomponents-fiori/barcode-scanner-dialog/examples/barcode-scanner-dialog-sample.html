@@ -15,9 +15,9 @@
 
     @if (lastScanResult()) {
     <ui5-message-strip design="Positive" class="sap-margin-bottom-small">
-        <strong>Last Scan Result:</strong> {{ lastScanResult()?.text }} <br /><small class="sap-text-color-neutral"
-            >Scanned at: {{ lastScanResult()?.timestamp | date:'medium' }}</small
-        >
+        <strong>Last Scan Result:</strong> {{ lastScanResult()?.text }} <br />
+        <small class="sap-text-color-neutral">Format: {{ lastScanResult()?.format }}</small> <br />
+        <small class="sap-text-color-neutral">Scanned at: {{ lastScanResult()?.timestamp | date:'medium' }}</small>
     </ui5-message-strip>
     }
 

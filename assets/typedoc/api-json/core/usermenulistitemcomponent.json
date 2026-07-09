@@ -3,8 +3,8 @@
   "selector": "[fd-user-menu-list-item]",
   "kind": "Component",
   "sourceFile": "user-menu-list-item.component.ts",
-  "sourceLine": 47,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/user-menu/components/user-menu-list-item.component.ts#L47",
+  "sourceLine": 48,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/user-menu/components/user-menu-list-item.component.ts#L48",
   "description": "",
   "inputs": [
     {
@@ -14,7 +14,7 @@
       "description": "Whether the item has a submenu",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 92,
+      "sourceLine": 95,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Icon name for the menu list item (optional)",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 65,
+      "sourceLine": 68,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Icon name for the menu list item (optional)",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 68,
+      "sourceLine": 71,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "Whether the icon after is in active state",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 71,
+      "sourceLine": 74,
       "since": null
     },
     {
@@ -54,7 +54,7 @@
       "description": "Whether the item is selected",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 98,
+      "sourceLine": 101,
       "since": null
     },
     {
@@ -64,7 +64,7 @@
       "description": "Template ref for user menu list item submenu",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 95,
+      "sourceLine": 98,
       "since": null
     },
     {
@@ -74,7 +74,7 @@
       "description": "Subtitle text for the menu list item",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 83,
+      "sourceLine": 86,
       "since": null
     },
     {
@@ -84,7 +84,7 @@
       "description": "Unique id for the subtitle. Default is provided.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 86,
+      "sourceLine": 89,
       "since": null
     },
     {
@@ -94,7 +94,7 @@
       "description": "Required text for the menu list item",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 74,
+      "sourceLine": 77,
       "since": null
     },
     {
@@ -104,7 +104,7 @@
       "description": "Unique id for the title. Default is provided.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 77,
+      "sourceLine": 80,
       "since": null
     },
     {
@@ -114,7 +114,7 @@
       "description": "Whether the subtitle should be truncated",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 89,
+      "sourceLine": 92,
       "since": null
     },
     {
@@ -124,7 +124,7 @@
       "description": "Whether the text should be truncated",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 80,
+      "sourceLine": 83,
       "since": null
     },
     {
@@ -134,7 +134,7 @@
       "description": "Unique id for the menu list item. Default is provided.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 62,
+      "sourceLine": 65,
       "since": null
     }
   ],
@@ -146,7 +146,7 @@
       "description": "Event emitter for isOpenChange event that controls the submenu popover body",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 50,
+      "sourceLine": 53,
       "since": null
     },
     {
@@ -156,7 +156,7 @@
       "description": "Event emitter for keyDown event",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 59,
+      "sourceLine": 62,
       "since": null
     },
     {
@@ -166,7 +166,7 @@
       "description": "Event emitter for showSubmenu event",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 53,
+      "sourceLine": 56,
       "since": null
     },
     {
@@ -176,7 +176,7 @@
       "description": "Event emitter for updateTitle event",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 56,
+      "sourceLine": 59,
       "since": null
     }
   ],
@@ -186,7 +186,7 @@
       "signature": "() => void",
       "description": "Handles submenu selection in mobile mode",
       "deprecated": null,
-      "sourceLine": 229,
+      "sourceLine": 274,
       "since": null,
       "parameters": [],
       "returnType": "void"

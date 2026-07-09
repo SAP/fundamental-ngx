@@ -1,0 +1,116 @@
+{
+  "name": "ToolHeaderComponent",
+  "selector": "fdb-tool-header",
+  "kind": "Component",
+  "sourceFile": "tool-header.component.ts",
+  "sourceLine": 94,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/89f18ecc2d/libs/btp/tool-header/src/components/tool-header/tool-header.component.ts#L94",
+  "description": "",
+  "inputs": [
+    {
+      "name": "productName",
+      "type": "string",
+      "default": null,
+      "description": "(required) the Product Name is the official name of the tool.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 98,
+      "since": null
+    },
+    {
+      "name": "secondTitle",
+      "type": "string",
+      "default": null,
+      "description": "Second Title is an optional second text identifier of the tool.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 102,
+      "since": null
+    },
+    {
+      "name": "showMenuButton",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to show the menu button",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 123,
+      "since": null
+    },
+    {
+      "name": "showVoiceInputAction",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether to show the voice input action button on\nthe right side of the tool header, when the mode is mobile\nand the search input is expanded",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 131,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "logoClick",
+      "type": "void",
+      "default": null,
+      "description": "Event emitted when the default logo is clicked",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 165,
+      "since": null
+    },
+    {
+      "name": "menuClick",
+      "type": "void",
+      "default": null,
+      "description": "Event emitted when the menu button is clicked",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 137,
+      "since": null
+    },
+    {
+      "name": "menuCollapse",
+      "type": "void",
+      "default": null,
+      "description": "Event emitted when user intends to collapse the menu.\nHappens when user clicks `left arrow` key on the menu button\nif on ltr or `right arrow` key if on rtl.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 153,
+      "since": null
+    },
+    {
+      "name": "menuExpand",
+      "type": "void",
+      "default": null,
+      "description": "Event emitted when user intends to expand the menu.\nHappens when user clicks `right arrow` key on the menu button\nif on ltr or `left arrow` key if on rtl.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 145,
+      "since": null
+    },
+    {
+      "name": "microphoneClick",
+      "type": "void",
+      "default": null,
+      "description": "Event emitted when the microphone button is clicked",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 159,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "expandSearchField",
+      "signature": "() => void",
+      "description": "Expand the search field",
+      "deprecated": null,
+      "sourceLine": 232,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

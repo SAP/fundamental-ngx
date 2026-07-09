@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "step-input-control.directive.ts",
   "sourceLine": 14,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/platform/form/step-input/step-input-control.directive.ts#L14",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/platform/form/step-input/step-input-control.directive.ts#L14",
   "description": "This directive is intendant to be a bridge between input control and BaseStepInput Component.",
   "inputs": [],
   "outputs": [],

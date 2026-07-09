@@ -11,10 +11,10 @@
       "name": "accessibilityAttributes",
       "type": "DynamicSideContentAccessibilityAttributes",
       "default": null,
-      "description": "Defines additional accessibility attributes on different areas of the component.\n\nThe accessibilityAttributes object has the following fields:\n\n- **mainContent**: `mainContent.ariaLabel` defines the aria-label of the main content area. Accepts any string.\n- **sideContent**: `sideContent.ariaLabel` defines the aria-label of the side content area. Accepts any string.",
+      "description": "Defines additional accessibility attributes on different areas of the component.\n\nThe accessibilityAttributes object has the following fields:\n\n- **mainContent**:\n- **ariaLabel**: defines the aria-label of the main content area. Accepts any string.\n- **role**: defines the role of the main content area. When not set, defaults to `\"main\"`. Set to `undefined` to remove the role attribute.\n\n- **sideContent**:\n- **ariaLabel**: defines the aria-label of the side content area. Accepts any string.\n- **role**: defines the role of the side content area. When not set, defaults to `\"complementary\"`. Set to `undefined` to remove the role attribute.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 53,
+      "sourceLine": 58,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Defines whether the component is in equal split mode. In this mode, the side and\nthe main content take 50:50 percent of the container on all screen sizes\nexcept for phone, where the main and side contents are switching visibility\nusing the toggle method.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 61,
+      "sourceLine": 66,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Defines the visibility of the main content.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 66,
+      "sourceLine": 71,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "Defines the visibility of the side content.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 71,
+      "sourceLine": 76,
       "since": null
     },
     {
@@ -54,7 +54,7 @@
       "description": "Defines on which breakpoints the side content falls down below the main content.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 76,
+      "sourceLine": 81,
       "since": null
     },
     {
@@ -64,7 +64,7 @@
       "description": "Defines whether the side content is positioned before the main content (left side\nin LTR mode), or after the the main content (right side in LTR mode).",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 82,
+      "sourceLine": 87,
       "since": null
     },
     {
@@ -74,7 +74,7 @@
       "description": "Defines on which breakpoints the side content is visible.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 87,
+      "sourceLine": 92,
       "since": null
     }
   ],
@@ -86,7 +86,7 @@
       "description": "Fires when the current breakpoint has been changed.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 94,
+      "sourceLine": 99,
       "since": null
     }
   ],

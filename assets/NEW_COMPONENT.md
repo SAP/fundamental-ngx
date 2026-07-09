@@ -1,257 +1,169 @@
-# Implementing A New Component For Fundamental Library For Angular
+# Adding a New Component
 
-## Content
+This guide walks you through scaffolding and completing a new component in the Fundamental NGX monorepo.
 
-- [1. Code Structure](#1)
-- [2.Prerequisites ](#2)
-- [3. Generating A New Component](#3)
-- [4. Component Example](#4)
-- [5. Updating Documentation](#5)
-- [6. Publishing](#6)
+## Prerequisites
 
-## <a name="1"></a>1. Code Structure
+- Node.js (LTS) and Yarn installed (`corepack enable && yarn`)
+- Repository cloned and dependencies installed (`yarn install`)
 
-The fundamental-ngx repository is split into two projects
+## 1. Choose the right library
 
-- the component library: a centralized modular repository made from components. It allow users to easily insert/reuse a large part of the code improving the quality and time required for their application.
-- the documentation app: used to catalog the various different components, as well as present use cases for them.
+| Library    | Selector prefix | Use when                                                       |
+| ---------- | --------------- | -------------------------------------------------------------- |
+| `core`     | `fd-`           | Standalone UI primitive (button, card, dialog, table, etc.)    |
+| `platform` | `fdp-`          | Higher-level composite built on `core`, with form/data binding |
+| `cdk`      | `fdk-`          | Utility directive, service, or abstraction — no visible UI     |
+| `btp`      | `fdb-`          | Business Technology Platform-specific visual component         |
+| `cx`       | `fdx-`          | Customer Experience-specific visual component                  |
 
-In the following guide we will look at how to create a component from scratch, test it, update the relevant part of the documentation, and publish our work.
+**Dependency rules:**
 
-## <a name="2"></a>2. Prerequisites
+- `cdk` has no library dependencies — it is the base layer.
+- `core` may depend on `cdk` and `i18n`.
+- `platform` may depend on `core`, `cdk`, and `i18n`.
+- `btp` and `cx` may depend on `core`, `platform`, and `cdk`.
 
-Before we begin coding our component, make sure you have successfully cloned the [ngx repository](https://github.com/SAP/fundamental-ngx.git).
+If you are unsure, use `core` for new UI primitives and `platform` for form-aware composites.
 
-If you are having issues cloning the repository or if you have never forked a repository before you can look at the [fork-a-repo documentation](https://docs.github.com/en/get-started/quickstart/fork-a-repo).
+## 2. Run the generator
 
-Additionally, if intend to contribute, read the followind [document](https://github.com/SAP/fundamental-ngx/blob/main/CONTRIBUTING.md), as it covers how to properly commit your work.
+```bash
+nx g @fundamental-ngx/nx-plugin:sap-component --name=<component-name> --project=<library>
+```
 
-## <a name="3"></a>3. Generating a new component
+Replace `<component-name>` with a kebab-case name (e.g. `rating-indicator`) and `<library>` with one of `core | platform | cdk | btp | cx`.
 
-### Description
+**Example:**
 
-To generate a new component first you need to navigate to the location of the repository from the terminal. Once there you need to use the following command:
-`npx nx generate sap-component -–name=[component name] –-project=[package name]`
+```bash
+nx g @fundamental-ngx/nx-plugin:sap-component --name=rating-indicator --project=core
+```
 
-The following command takes two inputs; the first one is the name of the new component, and is located after “name=”. Any name can be chosen, however it is recommended that the name used, is relevant to the functionality of the component. Additionally, the name needs to be in kebab-case/dash-case, if you intend to contribute to the ngx library. The second input relates to which component library the newly generated component will belong to. Currently, there are four, present, in fundamental-ngx, which are: “core”, “platform”, “CX”, “CDK”. To select your preferred library, you just need to add its name in lowercase after “project=”. For example, to access “core” you need to use “core”. For “platform”, you can use “platform”; the rest of the libraries follow the same logic. If you are new to ngx, or are unsure which library is best suited for your needs, it is recommended that you use “core”.
+The generator will prompt interactively if you omit either flag.
 
-To better understand how the component generation works, we will build a simple component called “my-component” in “core”, using the following command:
-`npx nx generate sap-component -–name=my-component –-project=core `
+## 3. What gets generated
 
-Once finished the following error might appear:
+Running the generator creates two areas:
 
-<img width="804" alt="Screenshot 2023-08-08 at 9 24 58 AM" src="https://github.com/SAP/fundamental-ngx/assets/132930816/5a8cc828-98d5-4da9-9bde-ef0e43e98330">
+**Library source** (`libs/<library>/src/lib/<component-name>/`):
 
-You can ignore this error, as all the required code will be generated regardless.
+```
+<component-name>.component.ts   # The Angular component
+index.ts                        # Public API barrel
+```
 
-Now, you can open your project with your IDE. There you will see multiple files created, these files contain everything required for us to start building our project; the files we will focus on are the ones that allows us to create our own component, and document it properly. Those files files should begin with the given name from the terminal, followed by their respective extensions.
+**Documentation app** (`apps/docs/src/app/modules/<library>/<component-name>/`):
 
-The component files can be found at `libs/[library name]/src/lib`, where the library name is the one chosen during generation, in our case it is `core`. In this folder you will notice different component folders, however the one we are interested is the one that has the same name we gave it, in our case `my-component`.
+```
+<component-name>-docs.component.ts      # Docs page shell
+<component-name>-docs.component.html
+<component-name>-header/                # Header / title section
+examples/
+  default/
+    <component-name>-default-example.component.ts
+    <component-name>-default-example.component.html
+  index.ts
+e2e/
+  <component-name>.e2e-spec.ts          # WebdriverIO e2e spec
+index.ts
+```
 
-<img width="408" alt="Screenshot 2023-08-09 at 9 31 27 AM" src="https://github.com/SAP/fundamental-ngx/assets/132930816/2485945e-5c04-4fd2-af22-8ce37ca2ba65">
+The generator also registers the new route in the docs app automatically.
 
-This folder contains all the required files for you to start work on your component.For beginners, it is recommended to only modify the files starting with their components name, for information about the rest of the files check the [angular project file structure docs](https://angular.io/guide/file-structure).
+## 4. Complete the component
 
-The documentation folder can be found in the following directory `libs/docs/[library name]`, in our case the library name is `core`, and just like the component folder this folder will have the same name.
+Open the generated `<component-name>.component.ts` and fill in:
 
-<img width="395" alt="Screenshot 2023-08-09 at 9 31 54 AM" src="https://github.com/SAP/fundamental-ngx/assets/132930816/5f02b21b-1033-489d-8dff-d7f46a357921">
+- `selector` is pre-filled with the library prefix (e.g. `fd-rating-indicator`).
+- Add `@Input()` / `input()` signal inputs for public API.
+- Add `host: {}` bindings for ARIA attributes and CSS classes.
+- All components are standalone by default — do **not** add `standalone: true`.
 
-Once you have created your component, you will need to document it here so that other users are able know what it does. It is recommended to have multiple examples for the component especially when they are more complex.
-
-To check if the everything was generated correctly, we can check the default example for our component. To do this we need to first run `yarn install` to install all the needed packages, once that is done, we will run `yarn start`, to start the documentation app. If the everything is builds correctly, you just need to go to `localhost:4200`. Once the documentation is loaded use the search bar to find your component.
-
-<img width="1764" alt="Screenshot 2023-08-08 at 10 37 59 AM" src="https://github.com/SAP/fundamental-ngx/assets/132930816/806e1595-9f10-4b61-a0b1-75becb0c69f6">
-
-## <a name="4"></a>4. Component Example
-
-In the following section of the report, we will build a simple button component, that informs the user when it has been pressed; to better understand how the process works. To begin coding we will first navigate to `libs/core/src/lib/my-component`.
-
-In our class declaration we will just add a single Boolean value that will use to check whether the button has been pressed.
+**Key patterns** (see `docs/agents/angular-patterns.md` for full reference):
 
 ```typescript
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+// Use signal inputs for new components
+import { Component, input, computed } from '@angular/core';
 
 @Component({
-    selector: 'fd-my-component',
-    templateUrl: './my-component.component.html',
-    styleUrls: ['./my-component.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'fd-rating-indicator',
+    imports: [],
+    template: `...`,
+    host: {
+        '[attr.aria-valuenow]': 'value()',
+        '[class.fd-rating-indicator]': 'true'
+    }
 })
-export class MyComponentComponent {
-    buttonPressed = false;
+export class RatingIndicatorComponent {
+    value = input<number>(0);
+    max = input<number>(5);
+
+    stars = computed(() => Array.from({ length: this.max() }));
 }
 ```
 
-We will now declare the button, as well as the text that will appear once it has been pressed.
+## 5. Add i18n keys (if needed)
 
-```html
-<div>
-    <button class="my-button" (click)="buttonPressed=true;">PRESS ME</button>
-    <div *ngIf="buttonPressed">You pressed me</div>
-</div>
+If the component renders user-visible text (labels, aria strings), add translation keys:
+
+```bash
+nx run i18n:i18n-manage -- add-key <KEY_NAME> --defaultValue="Default text"
 ```
 
-We will also add some styling to make the button more appealing.
+See `docs/agents/i18n-patterns.md` for the full i18n API.
 
-```scss
-.my-button {
-    width: 100px;
-    height: 50px;
-    background-color: rgb(44, 183, 221);
-    font-size: 16px;
-    margin-bottom: 20px;
-}
+## 6. Write unit tests
+
+Create a spec file alongside the component:
+
+```
+libs/<library>/src/lib/<component-name>/<component-name>.component.spec.ts
 ```
 
-If you start the documentation app now, you should see the following result in `My Component`:
+See `docs/agents/testing-guidelines.md` for patterns. Run with:
 
-<img width="1640" alt="Screenshot 2023-08-09 at 9 11 02 AM (2)" src="https://github.com/SAP/fundamental-ngx/assets/132930816/5596c431-cff6-4237-b46d-2dc45ae73f34">
-
-## <a name="5"></a>5. Updating Documentation
-
-In the following section of the report, we will see how to update the documentation app, regarding our newly created component.All the required files can be found at `libs/docs/core`.
-
-The html for the component page is split into two parts. The header which contains a brief decrepitation of component, and the example section which contains some relevant use cases for the component.
-The header section can be found in the file `[component name]-header`.
-
-While the folder contains a component declaration, you will mainly be working with only the html file. In it it should have the following code :
-
-```html
-<fd-doc-page>
-    <header>My Component</header>
-
-    <description>
-        <!-- TODO: description -->
-    </description>
-
-    <import module="MyComponentModule" subPackage="my-component"></import>
-
-    <fd-header-tabs></fd-header-tabs>
-</fd-doc-page>
+```bash
+nx run <library>:test --testfile=<component-name>.component.spec.ts
 ```
 
-Any general information should be writen between the `description` declaration.
+## 7. Add documentation examples
 
-```html
-<fd-doc-page>
-    <header>My Component</header>
+Edit the generated files under `apps/docs/src/app/modules/<library>/<component-name>/examples/`:
 
-    <description> This is my first component. When you press it will inform you. </description>
+- The `default` example is pre-generated. Add more examples as sibling directories.
+- Export all example components from `examples/index.ts`.
+- Reference examples in `<component-name>-docs.component.ts` using the `<fd-docs-section-title>` / `<fd-component-example>` scaffolding.
 
-    <import module="MyComponentModule" subPackage="my-component"></import>
+## 8. Validate your work
 
-    <fd-header-tabs></fd-header-tabs>
-</fd-doc-page>
+```bash
+# Format first (required before lint/test)
+yarn format
+
+# Then lint and test the affected library
+nx affected:lint
+nx affected:test
+
+# Serve the docs app to verify visually
+yarn start
 ```
 
-We will now look at the example folder,`examples`, which is used to contain all the created examples for the functionality of the component. You will notice that the folder is not empty, as a default example was created when generating the component. To demonstrate how to add more examples, we will create a new one, that will contain two copies of the button created previously. Firstly, we will create a folder that has a relevant name to the example. The most utilized naming conventions here are `[component name]-[example name]-example`, and `[example-name]-example`, where all the words are separated by a dashed line. As for the "example name", the most discriptive, and short one, should be used, to illustrate, since our example will contain two instances of our button component, we can just call it `double-button`, so that it is clearly communcated to other users, what it is demonstrating. For the naming conventions, while both are equally popular, a common rule of thumb is to use the former for components with shorter names, while the latter for components with longer or more complex names.
+## 9. Commit
 
-Inside the files all the relevant code regarding our component should be present. At minimum a single typescript file should be present that contains all the logic for very simple components, however in general it is recommended for the html, to be in a separate file. For more complex examples you might have multiple ts and html files, however always keep in mind that the docs should only be used to demonstrate the functionality of your component, and not add additional features to it. These files should start with the folder's name, followed by `.component.[file extension]`, if the folder name does not contain the component name, the component name should be prefixed to file name. For example due to the simple nature of our component we will create a single typescrit file called: `my-component-double-button-example.component.ts `.
+Follow the [commit format](.claude/rules/commit-format.md):
 
-And to achieve the functionaliy that we want we will use the following code:
-
-```typescript
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-
-@Component({
-    selector: 'fd-my-component-double-button-example',
-    template: `<fd-my-component></fd-my-component>
-        <br />
-        <fd-my-component></fd-my-component>`,
-    changeDetection: ChangeDetectionStrategy.OnPush
-})
-export class MyComponentDoubleButtonExampleComponent {}
+```
+feat(core): add RatingIndicatorComponent
 ```
 
-Notice that just like the file, the "selector" should have the same, prefixed with the tag related to the particular library you adding example to. Similarly the class declaration should have the same name as the file in `Pascal Case`, suffixed by Component.
+For breaking changes, add `!` after the scope and a `BREAKING CHANGE:` footer.
 
-However, to see our example we need to declare it first and to add it to our html file. For the declaration, it is recommended that you add it directly to the module file : `my-component-docs.module.ts`.
+---
 
-Now to add our example to the html, we wikk start by declaring a class element in `my-component-docs.component.ts` , that will allow us to show the raw code of our example to our user. To do this will add the following code:
+For deeper reference, see:
 
-```html
-const doubleButtonExamplTs = `double-button-example/my-component-double-button-example.component.ts`
-```
-
-This is placed directly after the imports, and it is used to hold the location of the files shown, in a simple and clear way. The syntax for these variables is the name of the example, followed by a suffix that the type of file; for "ts" it is "Ts", for "html" it is "Html", and so on. All files that need to be show need to have a declaration like this, and they should be be in `camel Case`.
-
-In the class you should add the following code:
-
-```typescript
-myComponentDoubleButtonExample: ExampleFile[] = [
-
-        {
-            language: 'typescript',
-            code: getAssetFromModuleAssets(doubleButtonExampleTs),
-            fileName: 'my-component-double-button-example',
-            component: 'MyComponentDoubleButtonExampleComponent',
-            name: 'TypeScript',
-        }
-    ];
-```
-
-The name of this array should be again the same as the component example in `camel Case`. In this array atleast one instance of the document object needs to present with the following properties:
-
-- `language` it holds the information of the type of file; typescript, html, scss.
-- `code` it contains the the location of the code to be shown.
-- `fileName` it should be the same as the file, without the extensions.
-- `name` reference name give when the user looks at the raw code. It should be as simple and clear as possible.
-- `component` the component class declration, it needs to be present only for typescript files.
-
-When you have multiple files, they all need to be declared in the same array as separate objects. For more information read the following [file](https://github.com/SAP/fundamental-ngx/wiki/Stackblitz-support-instructions).
-
-The last thing we need is to add the following code in the html file:
-
-```html
-<separator></separator>
-
-<fd-docs-section-title id="example name" componentName="Component Name"> Example name </fd-docs-section-title>
-<description> Description </description>
-<component-example>
-    <[example selector></[example selector]>
-</component-example>
-<code-example [exampleFiles]="raw code array name"></code-example>
-```
-
-- `<separator></separator>` is used to separate the different examples, it needs to be present for each example after the first one
-- "id" for each instance should be the name of the example without any modifications; for our example this would be `double-button`
-- "Component name" should be the same name as the one as the actuall component. That would be "My Component" in our case. This should be the same for all the  
-  examples present in the file.
-- "Example Name" should be short and descriptive, telling the user what the following example is.
-- "Description" is used to describe the example in more detail and/or add more detail.
-- `<[example selector></[example selector]>`, is an instance of our example component, it should be replaced with
-  `<fd-my-component-double-button-example></fd-my-component-double-button-example>` in our case.
-  Generally, there should be only one such instance for each example.
-- "[exampleFiles]="raw code array name" should be replaced with the class variable that contains all the raw code that should be showed. For our example component that would be `myComponentDoubleButtonExample`.
-
-In our case this code should look something like this:
-
-```html
-<separator></separator>
-
-<fd-docs-section-title id="double-button" componentName="MyComponent">
-    My Component Double Button
-</fd-docs-section-title>
-<description> Adds a second button </description>
-<component-example>
-    <fd-my-component-double-button-example></fd-my-component-double-button-example>
-</component-example>
-<code-example [exampleFiles]="myComponentDoubleButtonExample"></code-example>
-```
-
-Once the the code above is compiled we get the following result:
-
-<img width="1216" alt="Screenshot 2023-08-10 at 9 37 11 AM" src="https://github.com/SAP/fundamental-ngx/assets/132930816/66bbff9c-aeb2-4804-a234-5abb4c117b3e">
-
-## <a name="6"></a>6. Publishing
-
-### Testing
-
-Before publishing your work you need to test it. That is done by using the following command `yarn nx run [library name]-[component name]:test --skip-nx-cache`. In our case the command will look at this `yarn nx run core-my-component:test --skip-nx-cache`. Once the command has completed succesfully you need to run `yarn build` so that the files are bundled. Additionally, you need to run `yarn pack` to compress the files in zip, followed by `yarn link` to allow other projects to be linked. For more information click [here](https://docs.npmjs.com/cli/v8/commands/npm-link).
-
-### Contributing
-
-Before opening you PR, please look at the following [guidelines](https://github.com/SAP/fundamental-ngx/blob/main/CONTRIBUTING.md) for contributing.
-
-Happy Coding!
+- `docs/agents/angular-patterns.md` — signals, computed, host bindings
+- `docs/agents/i18n-patterns.md` — translation API
+- `docs/agents/testing-guidelines.md` — test patterns
+- `docs/agents/breaking-changes.md` — what constitutes a breaking change

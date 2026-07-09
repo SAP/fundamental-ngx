@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "card-kpi-analytics.directive.ts",
   "sourceLine": 12,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/card/kpi/card-kpi-analytics.directive.ts#L12",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/card/kpi/card-kpi-analytics.directive.ts#L12",
   "description": "",
   "inputs": [],
   "outputs": [],

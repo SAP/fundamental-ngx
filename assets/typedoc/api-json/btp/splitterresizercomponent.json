@@ -1,0 +1,55 @@
+{
+  "name": "SplitterResizerComponent",
+  "selector": "fdb-splitter-resizer",
+  "kind": "Component",
+  "sourceFile": "splitter-resizer.component.ts",
+  "sourceLine": 44,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/89f18ecc2d/libs/btp/splitter/splitter-resizer/splitter-resizer.component.ts#L44",
+  "description": "",
+  "inputs": [
+    {
+      "name": "orientation",
+      "type": "SplitterPaneContainerOrientationType",
+      "default": "SplitterPaneContainerOrientation.vertical",
+      "description": "Orientation of the splitter's host pane container.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 47,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "endResize",
+      "type": "void",
+      "default": null,
+      "description": "Event emitted after resizing has ended.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 55,
+      "since": null
+    },
+    {
+      "name": "resize",
+      "type": "number",
+      "default": null,
+      "description": "Event emitted while resizing.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 60,
+      "since": null
+    },
+    {
+      "name": "startResize",
+      "type": "void",
+      "default": null,
+      "description": "Event emitted after resizing has started.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 51,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

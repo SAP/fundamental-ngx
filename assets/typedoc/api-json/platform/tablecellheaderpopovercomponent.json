@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "table-cell-header-popover.component.ts",
   "sourceLine": 60,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/platform/table/components/table-cell-header-popover/table-cell-header-popover.component.ts#L60",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/platform/table/components/table-cell-header-popover/table-cell-header-popover.component.ts#L60",
   "description": "",
   "inputs": [
     {

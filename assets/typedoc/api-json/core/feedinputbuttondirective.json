@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "feed-input-button.directive.ts",
   "sourceLine": 13,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/feed-input/directives/feed-input-button.directive.ts#L13",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/feed-input/directives/feed-input-button.directive.ts#L13",
   "description": "Applies button feed arrow icon and disabled state",
   "inputs": [],
   "outputs": [],

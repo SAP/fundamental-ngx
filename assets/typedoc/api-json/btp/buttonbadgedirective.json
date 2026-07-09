@@ -1,0 +1,24 @@
+{
+  "name": "ButtonBadgeDirective",
+  "selector": "fd-button-badge",
+  "kind": "Directive",
+  "sourceFile": "button-badge.directive.ts",
+  "sourceLine": 32,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/89f18ecc2d/libs/core/button/button-badge.directive.ts#L32",
+  "description": "Directive to display a badge on a button.\n\nBadges are small status indicators that can be added to buttons to show\nnotifications, counts, or other supplementary information.\n\nUsage:\n```html\n<button fd-button>\n  Button Text\n  <fd-button-badge [content]=\"5\" />\n</button>\n```",
+  "inputs": [
+    {
+      "name": "content",
+      "type": "string | number",
+      "default": null,
+      "description": "Content to display inside the badge.\nShould not exceed 4 characters for optimal display.\nSupports both string and numeric values.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 38,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

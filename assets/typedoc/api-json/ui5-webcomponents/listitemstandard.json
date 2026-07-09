@@ -3,7 +3,7 @@
   "selector": null,
   "kind": "Class",
   "sourceFile": "index.ts",
-  "sourceLine": 44,
+  "sourceLine": 45,
   "sourceUrl": "",
   "description": "",
   "inputs": [
@@ -14,7 +14,7 @@
       "description": "Defines the additional accessibility attributes that will be applied to the component.\nThe following fields are supported:\n\n- **ariaSetsize**: Defines the number of items in the current set  when not all items in the set are present in the DOM.\n*Note:** The value is an integer reflecting the number of items in the complete set. If the size of the entire set is unknown, set `-1`.\n\n- **ariaPosinset**: Defines an element's number or position in the current set when not all items are present in the DOM.\n*Note:** The value is an integer greater than or equal to 1, and less than or equal to the size of the set when that size is known.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 56,
+      "sourceLine": 57,
       "since": null
     },
     {
@@ -24,7 +24,17 @@
       "description": "Defines the text alternative of the component.\nNote: If not provided a default text alternative will be set, if present.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 62,
+      "sourceLine": 63,
+      "since": null
+    },
+    {
+      "name": "accessibleRole",
+      "type": "'None' | 'ListItem' | 'MenuItem' | 'TreeItem' | 'Option'",
+      "default": null,
+      "description": "Used to define the role of the list item.\n\n*Note:** If not set, the role is automatically inherited from the parent `ui5-list` based on its `accessible-role` property\n(e.g. `Menu` -> `MenuItem`, `Tree` -> `TreeItem`, `ListBox` -> `Option`).\nAn explicitly set `accessible-role` on the list item takes precedence over the inherited role.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 72,
       "since": null
     },
     {
@@ -34,7 +44,7 @@
       "description": "Defines the `additionalText`, displayed in the end of the list item.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 67,
+      "sourceLine": 77,
       "since": null
     },
     {
@@ -44,7 +54,7 @@
       "description": "Defines the state of the `additionalText`.\n\nAvailable options are: `\"None\"` (by default), `\"Positive\"`, `\"Critical\"`, `\"Information\"` and `\"Negative\"`.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 74,
+      "sourceLine": 84,
       "since": null
     },
     {
@@ -54,7 +64,7 @@
       "description": "Defines the description displayed right under the item text, if such is present.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 79,
+      "sourceLine": 89,
       "since": null
     },
     {
@@ -64,7 +74,7 @@
       "description": "Defines the highlight state of the list items.\nAvailable options are: `\"None\"` (by default), `\"Positive\"`, `\"Critical\"`, `\"Information\"` and `\"Negative\"`.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 85,
+      "sourceLine": 95,
       "since": null
     },
     {
@@ -74,7 +84,7 @@
       "description": "Defines the `icon` source URI.\n\n*Note:**\nSAP-icons font provides numerous built-in icons. To find all the available icons, see the\n[Icon Explorer](https://sdk.openui5.org/test-resources/sap/m/demokit/iconExplorer/webapp/index.html).",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 94,
+      "sourceLine": 104,
       "since": null
     },
     {
@@ -84,7 +94,7 @@
       "description": "Defines whether the `icon` should be displayed in the beginning of the list item or in the end.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 99,
+      "sourceLine": 109,
       "since": null
     },
     {
@@ -94,7 +104,7 @@
       "description": "Defines whether the item is movable.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 104,
+      "sourceLine": 114,
       "since": null
     },
     {
@@ -104,7 +114,7 @@
       "description": "The navigated state of the list item.\nIf set to `true`, a navigation indicator is displayed at the end of the list item.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 110,
+      "sourceLine": 120,
       "since": null
     },
     {
@@ -114,7 +124,7 @@
       "description": "Defines the selected state of the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 115,
+      "sourceLine": 125,
       "since": null
     },
     {
@@ -124,7 +134,7 @@
       "description": "Defines the text of the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 120,
+      "sourceLine": 130,
       "since": null
     },
     {
@@ -134,7 +144,7 @@
       "description": "Defines the text of the tooltip that would be displayed for the list item.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 125,
+      "sourceLine": 135,
       "since": null
     },
     {
@@ -144,7 +154,7 @@
       "description": "Defines the visual indication and behavior of the list items.\nAvailable options are `Active` (by default), `Inactive`, `Detail` and `Navigation`.\n\n*Note:** When set to `Active` or `Navigation`, the item will provide visual response upon press and hover,\nwhile with type `Inactive` and `Detail` - will not.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 134,
+      "sourceLine": 144,
       "since": null
     },
     {
@@ -154,11 +164,21 @@
       "description": "Defines if the text of the component should wrap when it's too long.\nWhen set to \"Normal\", the content (title, description) will be wrapped\nusing the `ui5-expandable-text` component.<br/>\n\nThe text can wrap up to 100 characters on small screens (size S) and\nup to 300 characters on larger screens (size M and above). When text exceeds\nthese limits, it truncates with an ellipsis followed by a text expansion trigger.\n\nAvailable options are:\n- `None` (default) - The text will truncate with an ellipsis.\n- `Normal` - The text will wrap (without truncation).",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 149,
+      "sourceLine": 159,
       "since": null
     }
   ],
   "outputs": [
+    {
+      "name": "ui5Click",
+      "type": "UI5CustomEvent<ListItemStandard, 'click'>",
+      "default": null,
+      "description": "Fired when the component is activated either with a mouse/tap or by using the Enter or Space key.\n\n*Note:** The event will not be fired if the `disabled` property is set to `true`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 168,
+      "since": null
+    },
     {
       "name": "ui5DetailClick",
       "type": "UI5CustomEvent<ListItemStandard, 'detail-click'>",
@@ -166,7 +186,7 @@
       "description": "Fired when the user clicks on the detail button when type is `Detail`.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 156,
+      "sourceLine": 173,
       "since": null
     }
   ],

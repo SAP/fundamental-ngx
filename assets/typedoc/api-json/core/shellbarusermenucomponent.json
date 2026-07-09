@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "shellbar-user-menu.component.ts",
   "sourceLine": 48,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/shellbar/user-menu/shellbar-user-menu.component.ts#L48",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/shellbar/user-menu/shellbar-user-menu.component.ts#L48",
   "description": "This Component extends popover component and passes all the options and events from outside to popover component\nand Vice Versa",
   "inputs": [
     {

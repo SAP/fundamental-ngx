@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "table-row.component.ts",
   "sourceLine": 110,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/platform/table/components/table-row/table-row.component.ts#L110",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/platform/table/components/table-row/table-row.component.ts#L110",
   "description": "",
   "inputs": [
     {

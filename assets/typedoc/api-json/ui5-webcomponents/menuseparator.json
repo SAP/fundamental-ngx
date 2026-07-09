@@ -1,0 +1,24 @@
+{
+  "name": "MenuSeparator",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [],
+  "outputs": [
+    {
+      "name": "ui5Click",
+      "type": "UI5CustomEvent<MenuSeparator, 'click'>",
+      "default": null,
+      "description": "Fired when the component is activated either with a mouse/tap or by using the Enter or Space key.\n\n*Note:** The event will not be fired if the `disabled` property is set to `true`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 50,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

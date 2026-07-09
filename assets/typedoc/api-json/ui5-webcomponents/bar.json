@@ -31,10 +31,10 @@
       "name": "accessibleRole",
       "type": "'None' | 'Toolbar'",
       "default": null,
-      "description": "Specifies the ARIA role applied to the component for accessibility purposes.\n\n*Note:**\n\n- Set accessibleRole to \"toolbar\" only when the component contains two or more active, interactive elements (such as buttons, links, or input fields) within the bar.\n\n- If there is only one or no active element, it is recommended to avoid using the \"toolbar\" role, as it implies a grouping of multiple interactive controls.",
+      "description": "Specifies the ARIA role applied to the component for accessibility purposes.\n\n*Note:**\n\n- By default, accessibleRole is set to \"Toolbar\", which renders the ARIA role \"toolbar\".\n\n- Use the default accessibleRole value \"Toolbar\" only when the component contains two or more active, interactive elements (such as buttons, links, or input fields) within the bar.\n\n- If there is only one or no active element, set accessibleRole to \"None\" to avoid rendering the ARIA role \"toolbar\", as that role implies a grouping of multiple interactive controls.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 62,
+      "sourceLine": 64,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "Defines the component's design.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 67,
+      "sourceLine": 69,
       "since": null
     }
   ],

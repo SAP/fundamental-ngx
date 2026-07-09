@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "micro-process-flow-icon.component.ts",
   "sourceLine": 15,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/micro-process-flow/components/micro-process-flow-icon/micro-process-flow-icon.component.ts#L15",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/micro-process-flow/components/micro-process-flow-icon/micro-process-flow-icon.component.ts#L15",
   "description": "",
   "inputs": [
     {

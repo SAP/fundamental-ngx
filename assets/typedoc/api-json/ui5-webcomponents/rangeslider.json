@@ -51,10 +51,10 @@
       "name": "labelInterval",
       "type": "number",
       "default": null,
-      "description": "Displays a label with a value on every N-th step.\n\n*Note:** The step and tickmarks properties must be enabled.\nExample - if the step value is set to 2 and the label interval is also specified to 2 - then every second\ntickmark will be labelled, which means every 4th value number.",
+      "description": "Displays a label with a value on every N-th step.\n\n*Note:** The step and tickmarks properties must be enabled.\nExample - if the step value is set to 2 and the label interval is also specified to 2 - then every second\ntickmark will be labelled, which means every 4th value number.\n\n*Note:** This property is ignored when the `tickmarks` property is used.\nIn that case every custom tickmark is labelled with its own `label`.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 82,
+      "sourceLine": 85,
       "since": null
     },
     {
@@ -64,7 +64,7 @@
       "description": "Defines the maximum value of the slider.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 87,
+      "sourceLine": 90,
       "since": null
     },
     {
@@ -74,7 +74,7 @@
       "description": "Defines the minimum value of the slider.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 92,
+      "sourceLine": 95,
       "since": null
     },
     {
@@ -84,7 +84,7 @@
       "description": "Determines the name by which the component will be identified upon submission in an HTML form.\n\n*Note:** This property is only applicable within the context of an HTML Form element.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 99,
+      "sourceLine": 102,
       "since": null
     },
     {
@@ -94,7 +94,7 @@
       "description": "Enables tickmarks visualization for each step.\n\n*Note:** The step must be a positive number.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 106,
+      "sourceLine": 109,
       "since": null
     },
     {
@@ -104,7 +104,7 @@
       "description": "Enables handle tooltip displaying the current value.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 111,
+      "sourceLine": 114,
       "since": null
     },
     {
@@ -114,7 +114,7 @@
       "description": "Defines start point of a selection - position of a first handle on the slider.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 116,
+      "sourceLine": 119,
       "since": null
     },
     {
@@ -124,7 +124,17 @@
       "description": "Defines the size of the slider's selection intervals (e.g. min = 0, max = 10, step = 5 would result in possible selection of the values 0, 5, 10).\n\n*Note:** If set to 0 the slider handle movement is disabled. When negative number or value other than a number, the component fallbacks to its default value.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 123,
+      "sourceLine": 126,
+      "since": null
+    },
+    {
+      "name": "tickmarks",
+      "type": "Tickmark[]",
+      "default": null,
+      "description": "Defines custom tickmarks with labels on the slider scale.\nEach tickmark object has a numeric `value` and an optional `label` string.\nTickmarks are purely visual — they display labeled markers at specific positions\nbut do not affect the slider's movement behavior. The slider still moves\naccording to `min`, `max`, and `step`.\n\nWhen the current value matches a tickmark value, the tickmark's label\nis shown in the tooltip and announced via `aria-valuetext`.\n\n*Note:** When `tickmarks` is provided, the scale is automatically shown\n(equivalent to `showTickmarks`), and `labelInterval` is ignored - every\ncustom tickmark is rendered with its own `label`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 142,
       "since": null
     }
   ],
@@ -136,7 +146,7 @@
       "description": "Fired when the value changes and the user has finished interacting with the slider.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 130,
+      "sourceLine": 149,
       "since": null
     },
     {
@@ -146,7 +156,7 @@
       "description": "Fired when the value changes due to user interaction that is not yet finished - during mouse/touch dragging.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 135,
+      "sourceLine": 154,
       "since": null
     }
   ],

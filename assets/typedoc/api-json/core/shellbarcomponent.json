@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "shellbar.component.ts",
   "sourceLine": 67,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/shellbar/shellbar.component.ts#L67",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/shellbar/shellbar.component.ts#L67",
   "description": "The shellbar offers consistent, responsive navigation across all products and applications.\nIncludes support for branding, product navigation, search, notifications, and user settings.\nShellbar is a composite component comprised of mandatory and optional elements.",
   "inputs": [
     {

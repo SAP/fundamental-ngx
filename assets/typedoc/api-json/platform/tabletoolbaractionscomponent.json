@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "table-toolbar-actions.component.ts",
   "sourceLine": 23,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/platform/table/components/table-toolbar/table-toolbar-actions.component.ts#L23",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/platform/table/components/table-toolbar/table-toolbar-actions.component.ts#L23",
   "description": "The component that represents a table toolbar actions.\n```html\n<fdp-table-toolbar-actions>\n <fdp-button label=\"Action One\"></fdp-button>\n <fdp-button label=\"Action Two\"></fdp-button>\n</fdp-table-toolbar-actions>\n```",
   "inputs": [],
   "outputs": [],

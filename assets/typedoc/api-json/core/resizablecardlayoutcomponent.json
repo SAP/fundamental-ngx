@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "resizable-card-layout.component.ts",
   "sourceLine": 46,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/resizable-card-layout/resizable-card-layout/resizable-card-layout.component.ts#L46",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/resizable-card-layout/resizable-card-layout/resizable-card-layout.component.ts#L46",
   "description": "",
   "inputs": [
     {

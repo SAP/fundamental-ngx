@@ -3,8 +3,8 @@
   "selector": null,
   "kind": "Pipe",
   "sourceFile": "datetime-format.pipes.ts",
-  "sourceLine": 97,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/datetime/datetime-format.pipes.ts#L97",
+  "sourceLine": 87,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/datetime/datetime-format.pipes.ts#L87",
   "description": "",
   "inputs": [],
   "outputs": [],
@@ -14,7 +14,7 @@
       "signature": "(value: null | string) => null | string",
       "description": "Format date object for day period",
       "deprecated": null,
-      "sourceLine": 104,
+      "sourceLine": 94,
       "since": null,
       "parameters": [
         {

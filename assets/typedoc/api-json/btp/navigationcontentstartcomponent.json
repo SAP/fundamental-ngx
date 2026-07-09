@@ -1,0 +1,83 @@
+{
+  "name": "NavigationContentStartComponent",
+  "selector": "fdb-navigation-content-start",
+  "kind": "Component",
+  "sourceFile": "navigation-content-start.component.ts",
+  "sourceLine": 57,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/89f18ecc2d/libs/btp/navigation/components/navigation-start/navigation-content-start.component.ts#L57",
+  "description": "",
+  "inputs": [
+    {
+      "name": "ariaLabel",
+      "type": "Nullable<string>",
+      "default": "null",
+      "description": "aria-label for the navigation list.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 66,
+      "since": null
+    },
+    {
+      "name": "ariaRoleDescription",
+      "type": "Nullable<string>",
+      "default": "null",
+      "description": "aria-roledescription for the navigation list.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 72,
+      "since": null
+    },
+    {
+      "name": "contentProjected",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether the list items are content-projected. Used only with data-driven navigation.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 60,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": {
+    "from": "FdbNavigationContentContainer",
+    "inputs": [],
+    "methods": [
+      {
+        "name": "registerItem",
+        "signature": "(item: FdbNavigationListItem) => void",
+        "description": "Registers navigation list item.",
+        "deprecated": null,
+        "sourceLine": 31,
+        "since": null,
+        "parameters": [
+          {
+            "name": "item",
+            "type": "FdbNavigationListItem",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "unregisterItem",
+        "signature": "(item: FdbNavigationListItem) => void",
+        "description": "Unregisters navigation list item.",
+        "deprecated": null,
+        "sourceLine": 44,
+        "since": null,
+        "parameters": [
+          {
+            "name": "item",
+            "type": "FdbNavigationListItem",
+            "description": "",
+            "optional": false
+          }
+        ],
+        "returnType": "void"
+      }
+    ]
+  }
+}

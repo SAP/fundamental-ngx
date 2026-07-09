@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "input.component.ts",
   "sourceLine": 38,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/platform/form/input-group/input.component.ts#L38",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/platform/form/input-group/input.component.ts#L38",
   "description": "Fundamental input group input component\n\nThis component is intended to be used inside `<fdp-input-group>`\n\nExample:\n```\n<fdp-input-group name=\"group\">\n  <fdp-input-group-input type=\"email\"></fdp-input-group-input>\n</fdp-input-group>\n```",
   "inputs": [
     {

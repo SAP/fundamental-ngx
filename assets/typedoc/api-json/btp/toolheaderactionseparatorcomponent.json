@@ -1,0 +1,13 @@
+{
+  "name": "ToolHeaderActionSeparatorComponent",
+  "selector": "fdb-tool-header-action-separator",
+  "kind": "Component",
+  "sourceFile": "tool-header-action-separator.component.ts",
+  "sourceLine": 19,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/89f18ecc2d/libs/btp/tool-header/src/components/tool-header-action-separator.component.ts#L19",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

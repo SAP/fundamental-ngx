@@ -48,7 +48,18 @@
       "since": null
     }
   ],
-  "outputs": [],
+  "outputs": [
+    {
+      "name": "ui5Click",
+      "type": "UI5CustomEvent<OptionCustom, 'click'>",
+      "default": null,
+      "description": "Fired when the component is activated either with a mouse/tap or by using the Enter or Space key.\n\n*Note:** The event will not be fired if the `disabled` property is set to `true`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 71,
+      "since": null
+    }
+  ],
   "methods": [],
   "inherited": null
 }

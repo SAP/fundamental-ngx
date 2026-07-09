@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "wizard.component.ts",
   "sourceLine": 79,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/wizard/wizard.component.ts#L79",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/wizard/wizard.component.ts#L79",
   "description": "",
   "inputs": [
     {

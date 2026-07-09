@@ -3,8 +3,8 @@
   "selector": "fd-combobox",
   "kind": "Component",
   "sourceFile": "combobox.component.ts",
-  "sourceLine": 147,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/combobox/combobox.component.ts#L147",
+  "sourceLine": 150,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/combobox/combobox.component.ts#L150",
   "description": "Allows users to filter through results and select a value.\n\nSupports Angular Forms.\n```html\n<fd-combobox\n     [(ngModel)]=\"searchTerm\"\n     [dropdownValues]=\"dropdownValues\"\n     placeholder=\"Type some text...\">\n</fd-combobox>\n```",
   "inputs": [
     {
@@ -14,7 +14,7 @@
       "description": "Aria-label for Combobox.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 168,
+      "sourceLine": 171,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Aria-Labelledby for element describing Combobox.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 172,
+      "sourceLine": 175,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Whether the autocomplete should be enabled; Enabled by default",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 289,
+      "sourceLine": 292,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "Whether AddOn Button should be focusable",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 318,
+      "sourceLine": 321,
       "since": null
     },
     {
@@ -54,7 +54,7 @@
       "description": "Whether list item options should be rendered as byline.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 358,
+      "sourceLine": 361,
       "since": null
     },
     {
@@ -64,7 +64,7 @@
       "description": "Whether clear button should be focusable.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 325,
+      "sourceLine": 328,
       "since": null
     },
     {
@@ -74,7 +74,7 @@
       "description": "Whether the combobox should close, when a click is performed outside its boundaries. True by default",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 224,
+      "sourceLine": 227,
       "since": null
     },
     {
@@ -84,7 +84,7 @@
       "description": "Whether the popover should close when a user selects a result.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 281,
+      "sourceLine": 284,
       "since": null
     },
     {
@@ -94,7 +94,7 @@
       "description": "Id for the Combobox.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 160,
+      "sourceLine": 163,
       "since": null
     },
     {
@@ -104,7 +104,7 @@
       "description": "Defines if combobox should behave same as dropdown. When it's enabled writing inside text input won't\ntrigger onChange function, until it matches one of displayed dropdown values. Also communicating with combobox\ncan be achieved only by objects with same type as dropdownValue",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 304,
+      "sourceLine": 307,
       "since": null
     },
     {
@@ -114,7 +114,7 @@
       "description": "Whether the search input is disabled. *",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 189,
+      "sourceLine": 192,
       "since": null
     },
     {
@@ -124,7 +124,7 @@
       "description": "",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 311,
+      "sourceLine": 314,
       "since": null
     },
     {
@@ -134,7 +134,7 @@
       "description": "Max width of the dropdown in pixels. Default is 640px (40rem).",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 258,
+      "sourceLine": 261,
       "since": null
     },
     {
@@ -144,7 +144,7 @@
       "description": "Values to be filtered in the search input.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 180,
+      "sourceLine": 183,
       "since": null
     },
     {
@@ -154,7 +154,7 @@
       "description": "Preset options for the Select body width, whatever is chosen, the body has a 600px limit.\n* `at-least` will apply a minimum width to the body equivalent to the width of the control. - Default\n* `equal` will apply a width to the body equivalent to the width of the control.\n* 'fit-content' will apply width needed to properly display items inside, independent of control.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 298,
+      "sourceLine": 301,
       "since": null
     },
     {
@@ -164,7 +164,7 @@
       "description": "Whether the input field should be populated with the result picked by the user.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 285,
+      "sourceLine": 288,
       "since": null
     },
     {
@@ -174,7 +174,7 @@
       "description": "",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 185,
+      "sourceLine": 188,
       "since": null
     },
     {
@@ -184,7 +184,7 @@
       "description": "Icon to display in the right-side button.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 203,
+      "sourceLine": 206,
       "since": null
     },
     {
@@ -194,7 +194,7 @@
       "description": "Glyph font family",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 207,
+      "sourceLine": 210,
       "since": null
     },
     {
@@ -204,7 +204,7 @@
       "description": "Function used to handle grouping of items.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 250,
+      "sourceLine": 253,
       "since": null
     },
     {
@@ -214,7 +214,7 @@
       "description": "Whether the matching string should be highlighted during filtration.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 277,
+      "sourceLine": 280,
       "since": null
     },
     {
@@ -224,7 +224,7 @@
       "description": "Whether to return results where the input matches the entire string. By default, only results that start\nwith the input search term will be returned.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 348,
+      "sourceLine": 351,
       "since": null
     },
     {
@@ -234,7 +234,7 @@
       "description": "Id attribute for input element inside Combobox component",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 164,
+      "sourceLine": 167,
       "since": null
     },
     {
@@ -244,7 +244,7 @@
       "description": "Whether the Combobox is a Search Field",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 199,
+      "sourceLine": 202,
       "since": null
     },
     {
@@ -254,7 +254,7 @@
       "description": "The template with which to display the individual listed items.\nUse it by passing an ng-template with implicit content. See examples for more info.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 244,
+      "sourceLine": 247,
       "since": null
     },
     {
@@ -264,7 +264,7 @@
       "description": "Max height of the popover. Any overflowing elements will be accessible through scrolling.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 254,
+      "sourceLine": 257,
       "since": null
     },
     {
@@ -274,7 +274,7 @@
       "description": "Whether the combobox should be built on mobile mode",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 333,
+      "sourceLine": 336,
       "since": null
     },
     {
@@ -284,7 +284,7 @@
       "description": "Multi Input Mobile Configuration, it's applied only, when mobile is enabled",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 337,
+      "sourceLine": 340,
       "since": null
     },
     {
@@ -294,7 +294,7 @@
       "description": "Whether the dropdown should have max width.\nSet to true if you want the dropdown to take the width of the control.\nDefault is false",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 265,
+      "sourceLine": 268,
       "since": null
     },
     {
@@ -304,7 +304,7 @@
       "description": "Whether the combobox should open, when any key is pressed in input (except Escape, Space, Enter). True by default",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 230,
+      "sourceLine": 233,
       "since": null
     },
     {
@@ -314,7 +314,7 @@
       "description": "Placeholder of the search input. *",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 193,
+      "sourceLine": 196,
       "since": null
     },
     {
@@ -324,7 +324,7 @@
       "description": "Whether the combobox is readonly.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 329,
+      "sourceLine": 332,
       "since": null
     },
     {
@@ -334,7 +334,7 @@
       "description": "If it is mandatory field",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 176,
+      "sourceLine": 179,
       "since": null
     },
     {
@@ -344,7 +344,7 @@
       "description": "",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 273,
+      "sourceLine": 276,
       "since": null
     },
     {
@@ -354,7 +354,7 @@
       "description": "Whether to show the clear search term button",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 213,
+      "sourceLine": 216,
       "since": null
     },
     {
@@ -364,7 +364,7 @@
       "description": "Whether to display the addon button.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 341,
+      "sourceLine": 344,
       "since": null
     },
     {
@@ -374,17 +374,17 @@
       "description": "The state of the form control - applies css classes.\n Can be `success`, `error`, `warning`, `information` or blank for default.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 237,
+      "sourceLine": 240,
       "since": null
     },
     {
       "name": "tabOutStrategy",
       "type": "'close' | 'closeAndSelect'",
       "default": "'closeAndSelect'",
-      "description": "Action to perform when user shifts focus from the dropdown.\n- `close` will close the dropdown preserving previously selected value.\n- `closeAndSelect` will close the dropdown and select last focused dropdown item.",
+      "description": "Action to perform when the user shifts focus away from the dropdown (Tab or click outside).\n- `close` will close the dropdown preserving previously selected value.\n- `closeAndSelect` will close the dropdown and select last focused dropdown item.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 366,
+      "sourceLine": 369,
       "since": null
     },
     {
@@ -394,7 +394,7 @@
       "description": "The tooltip for the multi-input icon.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 354,
+      "sourceLine": 357,
       "since": null
     },
     {
@@ -404,7 +404,7 @@
       "description": "The trigger events that will open/close the options popover.\n Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp).",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 220,
+      "sourceLine": 223,
       "since": null
     },
     {
@@ -414,7 +414,7 @@
       "description": "When communicateByObject is true, specifies which property of the selected object\nshould be used as the form control value. If not specified, the entire object is returned.\nExample: if dropdownValues = [{ displayedValue: 'Apple', code: 'A1' }] and valueProperty = 'code',\nthe form control value will be 'A1' instead of the entire object.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 418,
+      "sourceLine": 421,
       "since": null
     },
     {
@@ -424,7 +424,7 @@
       "description": "Custom width of the control.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 269,
+      "sourceLine": 272,
       "since": null
     }
   ],
@@ -436,7 +436,7 @@
       "description": "Event emitted when the input text changes.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 378,
+      "sourceLine": 381,
       "since": null
     },
     {
@@ -446,7 +446,7 @@
       "description": "Event emitted when an item is clicked. Use *$event* to retrieve it.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 370,
+      "sourceLine": 373,
       "since": null
     },
     {
@@ -456,7 +456,7 @@
       "description": "Event emitted, when the combobox's popover body is opened or closed",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 374,
+      "sourceLine": 377,
       "since": null
     }
   ],
@@ -466,7 +466,7 @@
       "signature": "() => void",
       "description": "Handle dialog approval, closes popover and propagates data changes.",
       "deprecated": null,
-      "sourceLine": 610,
+      "sourceLine": 641,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -476,7 +476,7 @@
       "signature": "(term: any) => void",
       "description": "Handle dialog dismissing, closes popover and sets backup data.",
       "deprecated": null,
-      "sourceLine": 603,
+      "sourceLine": 633,
       "since": null,
       "parameters": [
         {
@@ -493,7 +493,7 @@
       "signature": "() => any",
       "description": "Current select value",
       "deprecated": null,
-      "sourceLine": 780,
+      "sourceLine": 812,
       "since": null,
       "parameters": [],
       "returnType": "any"
@@ -503,7 +503,7 @@
       "signature": "(event: AutoCompleteEvent) => void",
       "description": "Method that handles complete event from auto complete directive, setting the new value, and closing popover",
       "deprecated": null,
-      "sourceLine": 748,
+      "sourceLine": 780,
       "since": null,
       "parameters": [
         {
@@ -520,7 +520,7 @@
       "signature": "(direction: FocusEscapeDirection) => void",
       "description": "Method passed to list component",
       "deprecated": null,
-      "sourceLine": 684,
+      "sourceLine": 716,
       "since": null,
       "parameters": [
         {

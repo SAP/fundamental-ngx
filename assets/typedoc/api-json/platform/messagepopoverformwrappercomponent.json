@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "message-popover-form-wrapper.component.ts",
   "sourceLine": 45,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/platform/message-popover/components/message-popover-form-wrapper/message-popover-form-wrapper.component.ts#L45",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/platform/message-popover/components/message-popover-form-wrapper/message-popover-form-wrapper.component.ts#L45",
   "description": "",
   "inputs": [],
   "outputs": [],

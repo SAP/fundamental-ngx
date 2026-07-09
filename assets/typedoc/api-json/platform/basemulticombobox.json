@@ -4,7 +4,7 @@
   "kind": "Class",
   "sourceFile": "base-multi-combobox.ts",
   "sourceLine": 90,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/platform/form/multi-combobox/commons/base-multi-combobox.ts#L90",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/platform/form/multi-combobox/commons/base-multi-combobox.ts#L90",
   "description": "Defines specific behavior for Input controls which deals with list of values including:\n - Select\n - RadioGroup\n - CheckboxGroup\n - ComboBox\n ...",
   "inputs": [
     {

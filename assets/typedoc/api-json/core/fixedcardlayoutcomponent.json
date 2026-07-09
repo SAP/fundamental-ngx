@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "fixed-card-layout.component.ts",
   "sourceLine": 129,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/fixed-card-layout/fixed-card-layout.component.ts#L129",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/fixed-card-layout/fixed-card-layout.component.ts#L129",
   "description": "",
   "inputs": [
     {

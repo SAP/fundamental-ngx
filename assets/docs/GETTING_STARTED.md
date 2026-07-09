@@ -90,6 +90,8 @@ ng add @fundamental-ngx/core
 
 `ng add` handles everything automatically: peer dependencies, the core stylesheet, theming assets, and theming providers. It will prompt you to choose a theme — the default is `sap_horizon`.
 
+See the [Theming guide](https://sap.github.io/fundamental-ngx/#/core/theming) for available themes and runtime theme-switching.
+
 **Manual install** — if you are not using the Angular CLI, after installing all peer dependencies you must:
 
 1. Add to `angular.json` styles:
@@ -99,8 +101,8 @@ ng add @fundamental-ngx/core
 2. Add to `angular.json` assets:
     ```json
     { "glob": "**/css_variables.css", "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/", "output": "./assets/theming-base/" },
-    { "glob": "**/*", "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/baseTheme/fonts/", "output": "./assets/theming-base/baseTheme/fonts/" },
-    { "glob": "**/*", "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/sap_horizon/fonts/", "output": "./assets/theming-base/sap_horizon/fonts/" },
+    { "glob": "**/*", "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/baseTheme/fonts/", "output": "./Base/baseLib/baseTheme/fonts/" },
+    { "glob": "**/*", "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/sap_horizon/fonts/", "output": "./Base/baseLib/sap_horizon/fonts/" },
     { "glob": "**/*", "input": "./node_modules/fundamental-styles/dist/theming/", "output": "./assets/fundamental-styles-theming/" }
     ```
 3. Add to `app.config.ts`:
@@ -151,6 +153,8 @@ export const appConfig: ApplicationConfig = {
 };
 ```
 
+> **Using UI5 Web Components?** Add `provideUi5ThemingBridge()` from `@fundamental-ngx/ui5-webcomponents-base/theming-bridge` and instantiate your theming provider(s) (e.g. `provideEnvironmentInitializer(() => inject(Ui5WebcomponentsMainThemingService))`). See the [UI5 Theming guide](#/ui5-webcomponents/theming) for details.
+
 ```typescript
 // src/app/app.ts
 import { Component } from '@angular/core';
@@ -199,6 +203,8 @@ import { provideContentDensity } from '@fundamental-ngx/core/content-density';
 providers: [provideContentDensity({ storage: 'localStorage' })];
 ```
 
+See the [Content Density guide](https://sap.github.io/fundamental-ngx/#/core/content-density) for the full API and interactive examples.
+
 ## Running the Documentation App
 
 ```bash
@@ -220,7 +226,7 @@ If you encounter an issue, [create a ticket](https://github.com/SAP/fundamental-
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines and [NEW_COMPONENT.md](NEW_COMPONENT.md) for a step-by-step guide to building new components.
+See [CONTRIBUTING.md](https://github.com/SAP/fundamental-ngx/blob/main/CONTRIBUTING.md) for contribution guidelines and [NEW_COMPONENT.md](https://sap.github.io/fundamental-ngx/#/core/new-component) for a step-by-step guide to building new components.
 
 Please follow the [Angular commit message guidelines](https://github.com/angular/angular/blob/main/CONTRIBUTING.md#commit) and the [SAP Contribution Guidelines](https://github.com/SAP/.github/blob/main/CONTRIBUTING.md).
 

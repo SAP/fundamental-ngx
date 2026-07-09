@@ -1,0 +1,55 @@
+{
+  "name": "SplitterPaneContainerComponent",
+  "selector": "fdb-splitter-pane-container",
+  "kind": "Component",
+  "sourceFile": "splitter-pane-container.component.ts",
+  "sourceLine": 82,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/89f18ecc2d/libs/btp/splitter/splitter-pane-container/splitter-pane-container.component.ts#L82",
+  "description": "",
+  "inputs": [
+    {
+      "name": "orientation",
+      "type": "SplitterPaneContainerOrientationType",
+      "default": "SplitterPaneContainerOrientation.vertical",
+      "description": "Pane type - vertical (default) or horizontal.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 86,
+      "since": null
+    },
+    {
+      "name": "paneType",
+      "type": "Nullable<PaneTypeInput>",
+      "default": "null",
+      "description": "Style of the pane",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 96,
+      "since": null
+    },
+    {
+      "name": "resizerType",
+      "type": "Nullable<PaneTypeInput>",
+      "default": "null",
+      "description": "Style of the resizer.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 91,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "resize",
+      "type": "SplitterPaneResizeEvent[]",
+      "default": null,
+      "description": "Event emitted after container's panes has resized.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 101,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

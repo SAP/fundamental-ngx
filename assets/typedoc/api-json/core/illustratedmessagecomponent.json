@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "illustrated-message.component.ts",
   "sourceLine": 125,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/illustrated-message/illustrated-message.component.ts#L125",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/illustrated-message/illustrated-message.component.ts#L125",
   "description": "Component representing an illustrated message with responsive SVG illustration.\n\nThe component automatically adjusts its illustration size based on container width:\n- Large (>= 682px)\n- Medium (361px - 681px)\n- Small (261px - 360px)\n- Extra Small (161px - 260px)\n- Base (< 161px)\n\nSupports both URL-based SVG sprites and inline SVG content.",
   "inputs": [
     {

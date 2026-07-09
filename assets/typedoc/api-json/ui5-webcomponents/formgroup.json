@@ -28,13 +28,23 @@
       "since": null
     },
     {
+      "name": "colSpan",
+      "type": "string",
+      "default": null,
+      "description": "Defines the number of columns to distribute the form content by breakpoint (S1 M2 L3 XL4 for example).\n\n*Note:** This property is ignored if `columnSpan` is set, as it is expected that the column span is defined.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 57,
+      "since": null
+    },
+    {
       "name": "columnSpan",
       "type": "number",
       "default": null,
-      "description": "Defines column span of the component,\ne.g how many columns the group should span to.",
+      "description": "Defines column span of the component,\ne.g how many columns the group should span to.\n\n*Note:** If this property is set, it has higher priority than `colSpan` and `colSpan` will be ignored.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 56,
+      "sourceLine": 65,
       "since": null
     },
     {
@@ -44,7 +54,7 @@
       "description": "Defines the compoennt heading level,\nset by the `headerText`.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 62,
+      "sourceLine": 71,
       "since": null
     },
     {
@@ -54,7 +64,7 @@
       "description": "Defines header text of the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 67,
+      "sourceLine": 76,
       "since": null
     }
   ],

@@ -3,8 +3,8 @@
   "selector": "fd-select",
   "kind": "Component",
   "sourceFile": "select.component.ts",
-  "sourceLine": 122,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/select/select.component.ts#L122",
+  "sourceLine": 123,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/select/select.component.ts#L123",
   "description": "Select component intended to mimic\nthe behaviour of the native select element.",
   "inputs": [
     {
@@ -14,7 +14,7 @@
       "description": "Holds advanced message renderer with respect to state.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 275,
+      "sourceLine": 276,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "The element to which the popover should be appended.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 235,
+      "sourceLine": 236,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Value for aria-description",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 291,
+      "sourceLine": 292,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "Value for aria-haspopup",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 287,
+      "sourceLine": 288,
       "since": null
     },
     {
@@ -54,7 +54,7 @@
       "description": "Sets control aria-label attribute value",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 255,
+      "sourceLine": 256,
       "since": null
     },
     {
@@ -64,7 +64,7 @@
       "description": "Binds to control aria-labelledBy attribute",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 251,
+      "sourceLine": 252,
       "since": null
     },
     {
@@ -74,7 +74,7 @@
       "description": "Whether close the popover on outside click.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 218,
+      "sourceLine": 219,
       "since": null
     },
     {
@@ -84,7 +84,7 @@
       "description": "The ID of the control.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 162,
+      "sourceLine": 163,
       "since": null
     },
     {
@@ -94,7 +94,7 @@
       "description": "Custom template used to build control body.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 231,
+      "sourceLine": 232,
       "since": null
     },
     {
@@ -104,7 +104,7 @@
       "description": "Whether the select component is disabled.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 178,
+      "sourceLine": 179,
       "since": null
     },
     {
@@ -114,7 +114,7 @@
       "description": "Preset options for the Select body width, whatever is chosen, the body has a 600px limit.\n* `at-least` will apply a minimum width to the body equivalent to the width of the control. - Default\n* `equal` will apply a width to the body equivalent to the width of the control.\n* 'fit-content' will apply width needed to properly display items inside, independent of control.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 227,
+      "sourceLine": 228,
       "since": null
     },
     {
@@ -124,7 +124,7 @@
       "description": "Glyph to add icon in the select component.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 210,
+      "sourceLine": 211,
       "since": null
     },
     {
@@ -134,7 +134,7 @@
       "description": "Glyph font family",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 214,
+      "sourceLine": 215,
       "since": null
     },
     {
@@ -144,7 +144,7 @@
       "description": "Should select be inlined.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 263,
+      "sourceLine": 264,
       "since": null
     },
     {
@@ -154,7 +154,7 @@
       "description": "Max height of the popover. Any overflowing elements will be accessible through scrolling.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 206,
+      "sourceLine": 207,
       "since": null
     },
     {
@@ -164,7 +164,7 @@
       "description": "Whether the select component should be displayed in mobile mode.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 170,
+      "sourceLine": 171,
       "since": null
     },
     {
@@ -174,7 +174,7 @@
       "description": "Select Input Mobile Configuration",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 259,
+      "sourceLine": 260,
       "since": null
     },
     {
@@ -184,7 +184,7 @@
       "description": "Placeholder for the select. Appears in the triggerbox if no option is selected.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 190,
+      "sourceLine": 191,
       "since": null
     },
     {
@@ -194,7 +194,7 @@
       "description": "Whether the select component is readonly.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 186,
+      "sourceLine": 187,
       "since": null
     },
     {
@@ -204,7 +204,7 @@
       "description": "If it is mandatory field",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 182,
+      "sourceLine": 183,
       "since": null
     },
     {
@@ -214,7 +214,7 @@
       "description": "Scrolling strategy to be used for popover.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 149,
+      "sourceLine": 150,
       "since": null
     },
     {
@@ -224,7 +224,7 @@
       "description": "Additional classname for the select control element.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 267,
+      "sourceLine": 268,
       "since": null
     },
     {
@@ -234,7 +234,7 @@
       "description": "Additional classname for the select dropdown button element.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 271,
+      "sourceLine": 272,
       "since": null
     },
     {
@@ -244,7 +244,7 @@
       "description": "Holds the control state of select",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 166,
+      "sourceLine": 167,
       "since": null
     },
     {
@@ -254,7 +254,7 @@
       "description": "Holds the message with respect to state",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 174,
+      "sourceLine": 175,
       "since": null
     },
     {
@@ -264,7 +264,7 @@
       "description": "Action to perform when user shifts focus from the dropdown.\n- `close` will close the dropdown preserving previously selected value.\n- `closeAndSelect` will close the dropdown and select last focused dropdown item.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 283,
+      "sourceLine": 284,
       "since": null
     },
     {
@@ -274,7 +274,7 @@
       "description": "Controls how long text is displayed in the dropdown list of the Select component.\n\n- `'ellipsis'`: Truncates the text with an ellipsis (`...`) if it exceeds a certain length.\n- `'full'`: Displays the entire text on multiple lines, ensuring full visibility.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 158,
+      "sourceLine": 159,
       "since": null
     },
     {
@@ -284,7 +284,7 @@
       "description": "Time to wait in milliseconds after the last keydown before focusing or selecting option based on alphanumeric keys.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 247,
+      "sourceLine": 248,
       "since": null
     },
     {
@@ -294,7 +294,7 @@
       "description": "If the option should be unselected and value changed to undefined, when the current value is\nnot presented in option array. Switching it off can be handy, when there is some delay between providing\npossible options and chosen value.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 243,
+      "sourceLine": 244,
       "since": null
     }
   ],
@@ -306,7 +306,7 @@
       "description": "Event emitted when the popover open state changes.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 295,
+      "sourceLine": 296,
       "since": null
     },
     {
@@ -316,7 +316,7 @@
       "description": "Event emitted when the selected value of the select changes.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 299,
+      "sourceLine": 300,
       "since": null
     }
   ],
@@ -326,7 +326,7 @@
       "signature": "() => void",
       "description": "Blurs select control.",
       "deprecated": null,
-      "sourceLine": 608,
+      "sourceLine": 618,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -336,7 +336,7 @@
       "signature": "() => void",
       "description": "Focuses select control.",
       "deprecated": null,
-      "sourceLine": 603,
+      "sourceLine": 613,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -346,7 +346,7 @@
       "signature": "() => void",
       "description": "Opens the select popover body.",
       "deprecated": null,
-      "sourceLine": 569,
+      "sourceLine": 570,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -356,7 +356,7 @@
       "signature": "() => void",
       "description": "Toggles the open state of the select.",
       "deprecated": null,
-      "sourceLine": 518,
+      "sourceLine": 519,
       "since": null,
       "parameters": [],
       "returnType": "void"

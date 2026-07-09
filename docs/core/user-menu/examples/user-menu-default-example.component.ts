@@ -14,6 +14,7 @@ import {
     UserMenuControlElementDirective,
     UserMenuFooterComponent,
     UserMenuHeaderContainerDirective,
+    UserMenuHeaderContentAreaComponent,
     UserMenuHeaderDirective,
     UserMenuListComponent,
     UserMenuListItemComponent,
@@ -23,6 +24,8 @@ import {
 } from '@fundamental-ngx/core/user-menu';
 
 import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/message-toast';
+
+import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 
 @Component({
     selector: 'fd-user-menu-default-example',
@@ -41,6 +44,7 @@ import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/m
         UserMenuSublistComponent,
         UserMenuListItemComponent,
         UserMenuControlElementDirective,
+        UserMenuHeaderContentAreaComponent,
         AvatarComponent,
         PopoverModule,
         ListModule,
@@ -49,7 +53,8 @@ import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/m
         ButtonComponent,
         BarComponent,
         BarRightDirective,
-        MessageToastModule
+        MessageToastModule,
+        MessageStripComponent
     ]
 })
 export class UserMenuDefaultExampleComponent {

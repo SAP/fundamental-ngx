@@ -1,0 +1,13 @@
+{
+  "name": "NavigationMenuPopoverComponent",
+  "selector": "fdb-navigation-menu-popover",
+  "kind": "Component",
+  "sourceFile": "navigation-menu-popover.component.ts",
+  "sourceLine": 23,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/89f18ecc2d/libs/btp/navigation-menu/src/lib/navigation-menu-popover.component.ts#L23",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "checkbox.component.ts",
   "sourceLine": 59,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/checkbox/checkbox/checkbox.component.ts#L59",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/checkbox/checkbox/checkbox.component.ts#L59",
   "description": "Set of fields of FormItemControl component",
   "inputs": [
     {
@@ -139,7 +139,7 @@
     },
     {
       "name": "state",
-      "type": "'error' | 'default' | 'information' | 'warning' | 'success'",
+      "type": "null | 'error' | 'default' | 'information' | 'warning' | 'success'",
       "default": null,
       "description": "State of control, changes visual appearance of control.",
       "isSignal": false,

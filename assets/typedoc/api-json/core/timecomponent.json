@@ -3,8 +3,8 @@
   "selector": "fd-time",
   "kind": "Component",
   "sourceFile": "time.component.ts",
-  "sourceLine": 63,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/time/time.component.ts#L63",
+  "sourceLine": 60,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/time/time.component.ts#L60",
   "description": "",
   "inputs": [
     {
@@ -14,7 +14,7 @@
       "description": "",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 89,
+      "sourceLine": 86,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "When set to false, hides the input for hours",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 105,
+      "sourceLine": 102,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 99,
+      "sourceLine": 96,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 95,
+      "sourceLine": 92,
       "since": null
     },
     {
@@ -54,7 +54,7 @@
       "description": "",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 113,
+      "sourceLine": 110,
       "since": null
     },
     {
@@ -64,7 +64,7 @@
       "description": "",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 83,
+      "sourceLine": 80,
       "since": null
     },
     {
@@ -74,7 +74,7 @@
       "description": "",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 69,
+      "sourceLine": 66,
       "since": null
     },
     {
@@ -84,7 +84,7 @@
       "description": "The interval between selectable minutes (e.g., 1 for every minute, 5 for 5-minute intervals, 15 for 15-minute intervals).\nDefaults to 1 (every minute).",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 133,
+      "sourceLine": 130,
       "since": null
     },
     {
@@ -94,7 +94,7 @@
       "description": "",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 123,
+      "sourceLine": 120,
       "since": null
     },
     {
@@ -104,7 +104,7 @@
       "description": "",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 109,
+      "sourceLine": 106,
       "since": null
     },
     {
@@ -114,7 +114,7 @@
       "description": "",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 119,
+      "sourceLine": 116,
       "since": null
     },
     {
@@ -124,7 +124,7 @@
       "description": "",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 75,
+      "sourceLine": 72,
       "since": null
     }
   ],

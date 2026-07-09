@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "addon.component.ts",
   "sourceLine": 52,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/platform/form/input-group/addon.component.ts#L52",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/platform/form/input-group/addon.component.ts#L52",
   "description": "Fundamental input group addon component\n\nThis component is intended to be used inside `<fdp-input-group>`\n\n\nInput group addon can contain a plain text:\n```\n<fdp-input-group-addon>$</fdp-input-group-addon>\n```\nIcon:\n```\n<fdp-input-group-addon><i class=\"sap-icon--employee\"></i></fdp-input-group-addon>\n```\nButton component:\n```\n<fdp-input-group-addon><fdp-button label=\"Action\"></fdp-button></fdp-input-group-addon>\n```",
   "inputs": [],
   "outputs": [],

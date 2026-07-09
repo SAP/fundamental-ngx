@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "notification-popover.directive.ts",
   "sourceLine": 11,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/notification/directives/notification-popover.directive.ts#L11",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/notification/directives/notification-popover.directive.ts#L11",
   "description": "",
   "inputs": [],
   "outputs": [],

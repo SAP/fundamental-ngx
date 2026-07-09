@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "filtering.component.ts",
   "sourceLine": 65,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/platform/table/components/table-p13-dialog/filtering/filtering.component.ts#L65",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/platform/table/components/table-p13-dialog/filtering/filtering.component.ts#L65",
   "description": "Reset button.\n\nUsed to reset resettable state by click.",
   "inputs": [],
   "outputs": [],

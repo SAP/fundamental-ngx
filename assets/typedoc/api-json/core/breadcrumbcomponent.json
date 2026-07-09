@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "breadcrumb.component.ts",
   "sourceLine": 100,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/breadcrumb/breadcrumb.component.ts#L100",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/breadcrumb/breadcrumb.component.ts#L100",
   "description": "Breadcrumb parent wrapper directive. Must have breadcrumb item child directives.\n\n```html\n<fd-breadcrumb>\n    <fd-breadcrumb-item>\n        <a fd-link [routerLink]=\"'#'\">Breadcrumb Link</a>\n    </fd-breadcrumb-item>\n</fd-breadcrumb>\n```",
   "inputs": [
     {

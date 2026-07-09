@@ -1,0 +1,24 @@
+{
+  "name": "DynamicPageHeader",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 40,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "accessibleName",
+      "type": "string",
+      "default": null,
+      "description": "Defines the accessible ARIA label for the header region.\nOverrides the default \"Header Expanded\" / \"Header Snapped\" text.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 46,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

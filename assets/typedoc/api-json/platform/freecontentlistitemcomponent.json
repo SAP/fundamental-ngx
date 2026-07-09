@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "free-content-list-item.component.ts",
   "sourceLine": 18,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/platform/list/free-content-list-item/free-content-list-item.component.ts#L18",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/platform/list/free-content-list-item/free-content-list-item.component.ts#L18",
   "description": "This class contains common properties used across list Item components.\nthis can be extended to reduce the code duplication across list Item components.",
   "inputs": [],
   "outputs": [],

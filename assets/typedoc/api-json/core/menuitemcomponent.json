@@ -3,8 +3,8 @@
   "selector": "li[fd-menu-item]",
   "kind": "Component",
   "sourceFile": "menu-item.component.ts",
-  "sourceLine": 74,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/menu/menu-item/menu-item.component.ts#L74",
+  "sourceLine": 73,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/menu/menu-item/menu-item.component.ts#L73",
   "description": "",
   "inputs": [
     {
@@ -14,7 +14,7 @@
       "description": "Set the Menu Item as disabled/enabled",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 77,
+      "sourceLine": 76,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Menu Item id attribute value",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 81,
+      "sourceLine": 80,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Reference to the parent submenu if nested menus created dynamically",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 89,
+      "sourceLine": 88,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "Reference to sub-menu component",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 85,
+      "sourceLine": 84,
       "since": null
     }
   ],
@@ -56,7 +56,7 @@
       "description": "Emitted when the menu item is selected.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 99,
+      "sourceLine": 98,
       "since": null
     }
   ],
@@ -66,7 +66,7 @@
       "signature": "() => void",
       "description": "Clicks Menu Item interactive element",
       "deprecated": null,
-      "sourceLine": 180,
+      "sourceLine": 179,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -76,7 +76,7 @@
       "signature": "() => void",
       "description": "Focuses Menu Item interactive element",
       "deprecated": null,
-      "sourceLine": 173,
+      "sourceLine": 172,
       "since": null,
       "parameters": [],
       "returnType": "void"

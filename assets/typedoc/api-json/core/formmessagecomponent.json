@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "form-message.component.ts",
   "sourceLine": 29,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/form/form-message/form-message.component.ts#L29",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/form/form-message/form-message.component.ts#L29",
   "description": "Form message. Intended to be displayed with a form control for validation purposes.",
   "inputs": [
     {

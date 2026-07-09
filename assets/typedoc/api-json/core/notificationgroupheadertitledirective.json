@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "notification-group-header-title.directive.ts",
   "sourceLine": 22,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/notification/directives/notification-group-header-title.directive.ts#L22",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/notification/directives/notification-group-header-title.directive.ts#L22",
   "description": "",
   "inputs": [
     {

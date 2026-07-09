@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "menu-addon.directive.ts",
   "sourceLine": 11,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/menu/directives/menu-addon.directive.ts#L11",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/menu/directives/menu-addon.directive.ts#L11",
   "description": "",
   "inputs": [],
   "outputs": [],

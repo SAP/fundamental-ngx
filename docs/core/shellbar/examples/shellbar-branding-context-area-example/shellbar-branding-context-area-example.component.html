@@ -41,7 +41,7 @@
         (inputChange)="onInputChange($event)"
     ></fdp-search-field>
 
-    <fd-shellbar-actions [assistiveTools]="true" [assistiveToolsCallback]="assistiveToolsCallback">
+    <fd-shellbar-actions>
         @for (action of actions; track action) {
             <fd-shellbar-action
                 [glyph]="action.glyph"

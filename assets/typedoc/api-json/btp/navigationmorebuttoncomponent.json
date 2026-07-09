@@ -1,0 +1,31 @@
+{
+  "name": "NavigationMoreButtonComponent",
+  "selector": "li[fdb-navigation-more-button]",
+  "kind": "Component",
+  "sourceFile": "navigation-more-button.component.ts",
+  "sourceLine": 50,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/89f18ecc2d/libs/btp/navigation/components/navigation-more-button/navigation-more-button.component.ts#L50",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [
+    {
+      "name": "focusLink",
+      "signature": "(closePopover: boolean) => void",
+      "description": "Focuses inner link element.\nOptionally closes the popover.",
+      "deprecated": null,
+      "sourceLine": 235,
+      "since": null,
+      "parameters": [
+        {
+          "name": "closePopover",
+          "type": "boolean",
+          "description": "",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

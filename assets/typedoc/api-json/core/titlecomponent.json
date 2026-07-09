@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "title.component.ts",
   "sourceLine": 72,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/title/title.component.ts#L72",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/title/title.component.ts#L72",
   "description": "Title component for rendering semantic headings with Fundamental styles.\n\nApplied as an attribute directive to heading elements (h1-h6).\nAutomatically detects heading level from the tag name or can be explicitly set via `headerSize`.",
   "inputs": [
     {

@@ -4,7 +4,7 @@
   "kind": "Class",
   "sourceFile": "base-toast-duration-dismissible-ref.ts",
   "sourceLine": 12,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/cdk/utils/toast/classes/duration-dismissible/base-toast-duration-dismissible-ref.ts#L12",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/cdk/utils/toast/classes/duration-dismissible/base-toast-duration-dismissible-ref.ts#L12",
   "description": "Base toast reference for toasts that can be dismissed after a duration and support mouse hover persistence.\nExtends BaseToastRef with timer management capabilities for auto-dismissing toasts.",
   "inputs": [],
   "outputs": [],

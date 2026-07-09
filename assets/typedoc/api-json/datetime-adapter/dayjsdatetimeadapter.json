@@ -3,8 +3,8 @@
   "selector": null,
   "kind": "Class",
   "sourceFile": "dayjs-datetime-adapter.ts",
-  "sourceLine": 46,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L46",
+  "sourceLine": 57,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/datetime-adapter/src/lib/dayjs-datetime-adapter.ts#L57",
   "description": "DatetimeAdapter implementation based on dayjs.\n\nThis uses dayjs as a date model instance.\nIt relies on dayjs implementation for formatting and translation purposes.",
   "inputs": [],
   "outputs": [],
@@ -14,7 +14,7 @@
       "signature": "(date: Dayjs, days: number) => Dayjs",
       "description": "Add days to date",
       "deprecated": null,
-      "sourceLine": 312,
+      "sourceLine": 342,
       "since": null,
       "parameters": [
         {
@@ -37,7 +37,7 @@
       "signature": "(date: Dayjs, months: number) => Dayjs",
       "description": "Add months to date",
       "deprecated": null,
-      "sourceLine": 307,
+      "sourceLine": 337,
       "since": null,
       "parameters": [
         {
@@ -60,7 +60,7 @@
       "signature": "(date: Dayjs, years: number) => Dayjs",
       "description": "Add years to date",
       "deprecated": null,
-      "sourceLine": 302,
+      "sourceLine": 332,
       "since": null,
       "parameters": [
         {
@@ -83,7 +83,7 @@
       "signature": "(date: Dayjs) => Dayjs",
       "description": "Clone date",
       "deprecated": null,
-      "sourceLine": 317,
+      "sourceLine": 347,
       "since": null,
       "parameters": [
         {
@@ -100,7 +100,7 @@
       "signature": "(year: number, month?: number, date?: number) => Dayjs",
       "description": "Create date object from values",
       "deprecated": null,
-      "sourceLine": 277,
+      "sourceLine": 300,
       "since": null,
       "parameters": [
         {
@@ -129,7 +129,7 @@
       "signature": "(date1: Dayjs, date2: Dayjs) => boolean",
       "description": "Compare if dates and time are equal",
       "deprecated": null,
-      "sourceLine": 340,
+      "sourceLine": 370,
       "since": null,
       "parameters": [
         {
@@ -152,7 +152,7 @@
       "signature": "(date1: Dayjs, date2: Dayjs) => boolean",
       "description": "Compare if dates are equal",
       "deprecated": null,
-      "sourceLine": 330,
+      "sourceLine": 360,
       "since": null,
       "parameters": [
         {
@@ -175,7 +175,7 @@
       "signature": "(date: Dayjs, displayFormat: string) => string",
       "description": "Format a date as a string",
       "deprecated": null,
-      "sourceLine": 264,
+      "sourceLine": 287,
       "since": null,
       "parameters": [
         {
@@ -194,28 +194,11 @@
       "returnType": "string"
     },
     {
-      "name": "fromNow",
-      "signature": "(date: Dayjs) => string",
-      "description": "",
-      "deprecated": null,
-      "sourceLine": 72,
-      "since": null,
-      "parameters": [
-        {
-          "name": "date",
-          "type": "Dayjs",
-          "description": "",
-          "optional": false
-        }
-      ],
-      "returnType": "string"
-    },
-    {
       "name": "getDate",
       "signature": "(date: Dayjs) => number",
       "description": "Get date",
       "deprecated": null,
-      "sourceLine": 117,
+      "sourceLine": 127,
       "since": null,
       "parameters": [
         {
@@ -232,7 +215,7 @@
       "signature": "() => string[]",
       "description": "Get date names",
       "deprecated": null,
-      "sourceLine": 175,
+      "sourceLine": 185,
       "since": null,
       "parameters": [],
       "returnType": "string[]"
@@ -242,7 +225,7 @@
       "signature": "(date: Dayjs) => number",
       "description": "Get day of the week",
       "deprecated": null,
-      "sourceLine": 122,
+      "sourceLine": 132,
       "since": null,
       "parameters": [
         {
@@ -259,7 +242,7 @@
       "signature": "(style: 'long' | 'short' | 'narrow') => string[]",
       "description": "Get days of week names",
       "deprecated": null,
-      "sourceLine": 180,
+      "sourceLine": 190,
       "since": null,
       "parameters": [
         {
@@ -276,7 +259,7 @@
       "signature": "(isLower: boolean) => [string, string]",
       "description": "Get day period names",
       "deprecated": null,
-      "sourceLine": 234,
+      "sourceLine": 244,
       "since": null,
       "parameters": [
         {
@@ -293,7 +276,7 @@
       "signature": "() => number",
       "description": "Get first day of the week",
       "deprecated": null,
-      "sourceLine": 242,
+      "sourceLine": 252,
       "since": null,
       "parameters": [],
       "returnType": "number"
@@ -303,7 +286,7 @@
       "signature": "(__namedParameters: { meridian: boolean; twoDigit: boolean }) => string[]",
       "description": "Get hour names",
       "deprecated": null,
-      "sourceLine": 203,
+      "sourceLine": 213,
       "since": null,
       "parameters": [
         {
@@ -320,7 +303,7 @@
       "signature": "(date: Dayjs) => number",
       "description": "Get hours",
       "deprecated": null,
-      "sourceLine": 127,
+      "sourceLine": 137,
       "since": null,
       "parameters": [
         {
@@ -337,7 +320,7 @@
       "signature": "(__namedParameters: { minuteStep: number; twoDigit: boolean }) => string[]",
       "description": "Get minute names",
       "deprecated": null,
-      "sourceLine": 211,
+      "sourceLine": 221,
       "since": null,
       "parameters": [
         {
@@ -354,7 +337,7 @@
       "signature": "(date: Dayjs) => number",
       "description": "Get minutes",
       "deprecated": null,
-      "sourceLine": 132,
+      "sourceLine": 142,
       "since": null,
       "parameters": [
         {
@@ -371,7 +354,7 @@
       "signature": "(date: Dayjs) => number",
       "description": "Get month",
       "deprecated": null,
-      "sourceLine": 112,
+      "sourceLine": 122,
       "since": null,
       "parameters": [
         {
@@ -388,7 +371,7 @@
       "signature": "(style: 'long' | 'short' | 'narrow') => string[]",
       "description": "Get months names",
       "deprecated": null,
-      "sourceLine": 162,
+      "sourceLine": 172,
       "since": null,
       "parameters": [
         {
@@ -405,7 +388,7 @@
       "signature": "(date: Dayjs) => number",
       "description": "Get number of days in the month",
       "deprecated": null,
-      "sourceLine": 247,
+      "sourceLine": 257,
       "since": null,
       "parameters": [
         {
@@ -422,7 +405,7 @@
       "signature": "(__namedParameters: { twoDigit: boolean }) => string[]",
       "description": "Get second names",
       "deprecated": null,
-      "sourceLine": 223,
+      "sourceLine": 233,
       "since": null,
       "parameters": [
         {
@@ -439,7 +422,7 @@
       "signature": "(date: Dayjs) => number",
       "description": "Get seconds",
       "deprecated": null,
-      "sourceLine": 137,
+      "sourceLine": 147,
       "since": null,
       "parameters": [
         {
@@ -456,7 +439,7 @@
       "signature": "(date: Dayjs) => string",
       "description": "Get week name",
       "deprecated": null,
-      "sourceLine": 198,
+      "sourceLine": 208,
       "since": null,
       "parameters": [
         {
@@ -473,7 +456,7 @@
       "signature": "(date: Dayjs) => number",
       "description": "Get week number",
       "deprecated": null,
-      "sourceLine": 157,
+      "sourceLine": 167,
       "since": null,
       "parameters": [
         {
@@ -490,7 +473,7 @@
       "signature": "(date: Dayjs) => number",
       "description": "Get year",
       "deprecated": null,
-      "sourceLine": 107,
+      "sourceLine": 117,
       "since": null,
       "parameters": [
         {
@@ -507,7 +490,7 @@
       "signature": "(date: Dayjs) => string",
       "description": "Get year name",
       "deprecated": null,
-      "sourceLine": 193,
+      "sourceLine": 203,
       "since": null,
       "parameters": [
         {
@@ -524,7 +507,7 @@
       "signature": "(dateToCheck: Dayjs, startDate: Dayjs, endDate: Dayjs) => boolean",
       "description": "Check if date is in range",
       "deprecated": null,
-      "sourceLine": 349,
+      "sourceLine": 379,
       "since": null,
       "parameters": [
         {
@@ -553,7 +536,7 @@
       "signature": "(displayFormat: string) => boolean",
       "description": "Check if time format includes day period",
       "deprecated": null,
-      "sourceLine": 368,
+      "sourceLine": 398,
       "since": null,
       "parameters": [
         {
@@ -570,7 +553,7 @@
       "signature": "(displayFormat: string) => boolean",
       "description": "Check if time format includes hours",
       "deprecated": null,
-      "sourceLine": 375,
+      "sourceLine": 405,
       "since": null,
       "parameters": [
         {
@@ -587,7 +570,7 @@
       "signature": "(displayFormat: string) => boolean",
       "description": "Check if time format includes minutes",
       "deprecated": null,
-      "sourceLine": 382,
+      "sourceLine": 412,
       "since": null,
       "parameters": [
         {
@@ -604,7 +587,7 @@
       "signature": "(displayFormat: string) => boolean",
       "description": "Check if time format includes seconds",
       "deprecated": null,
-      "sourceLine": 389,
+      "sourceLine": 419,
       "since": null,
       "parameters": [
         {
@@ -621,7 +604,7 @@
       "signature": "(date: Nullable<Dayjs>) => date is Dayjs",
       "description": "Check if date is valid date object",
       "deprecated": null,
-      "sourceLine": 358,
+      "sourceLine": 388,
       "since": null,
       "parameters": [
         {
@@ -638,7 +621,7 @@
       "signature": "() => Dayjs",
       "description": "Get now",
       "deprecated": null,
-      "sourceLine": 297,
+      "sourceLine": 327,
       "since": null,
       "parameters": [],
       "returnType": "Dayjs"
@@ -648,7 +631,7 @@
       "signature": "(value: any, parseFormat: string) => null | Dayjs",
       "description": "Try to parse a string to a date object",
       "deprecated": null,
-      "sourceLine": 252,
+      "sourceLine": 262,
       "since": null,
       "parameters": [
         {
@@ -671,7 +654,7 @@
       "signature": "(date: Dayjs, hours: number) => Dayjs",
       "description": "Set hours in date object",
       "deprecated": null,
-      "sourceLine": 142,
+      "sourceLine": 152,
       "since": null,
       "parameters": [
         {
@@ -694,7 +677,7 @@
       "signature": "(locale: string) => void",
       "description": "Set locale",
       "deprecated": null,
-      "sourceLine": 75,
+      "sourceLine": 81,
       "since": null,
       "parameters": [
         {
@@ -711,7 +694,7 @@
       "signature": "(date: Dayjs, minutes: number) => Dayjs",
       "description": "Set minutes in date object",
       "deprecated": null,
-      "sourceLine": 147,
+      "sourceLine": 157,
       "since": null,
       "parameters": [
         {
@@ -734,7 +717,7 @@
       "signature": "(date: Dayjs, seconds: number) => Dayjs",
       "description": "Set seconds in date object",
       "deprecated": null,
-      "sourceLine": 152,
+      "sourceLine": 162,
       "since": null,
       "parameters": [
         {
@@ -755,9 +738,9 @@
     {
       "name": "toIso8601",
       "signature": "(date: Dayjs) => string",
-      "description": "Convert date to ISO8601 string",
+      "description": "DatetimeAdapter.toIso8601",
       "deprecated": null,
-      "sourceLine": 363,
+      "sourceLine": 393,
       "since": null,
       "parameters": [
         {
@@ -774,7 +757,7 @@
       "signature": "() => Dayjs",
       "description": "Get today",
       "deprecated": null,
-      "sourceLine": 292,
+      "sourceLine": 322,
       "since": null,
       "parameters": [],
       "returnType": "Dayjs"
@@ -789,7 +772,7 @@
         "signature": "(first: Dayjs, second: Dayjs) => number",
         "description": "Compares two dates.",
         "deprecated": null,
-        "sourceLine": 374,
+        "sourceLine": 383,
         "since": null,
         "parameters": [
           {
@@ -812,7 +795,7 @@
         "signature": "(year: number, month: number, firstDayOfWeek: number) => number",
         "description": "Get Amount of weeks in given month/year",
         "deprecated": null,
-        "sourceLine": 357,
+        "sourceLine": 364,
         "since": null,
         "parameters": [
           {
@@ -830,7 +813,7 @@
           {
             "name": "firstDayOfWeek",
             "type": "number",
-            "description": "The first day of week. 1 - Sunday, 2 - Monday...",
+            "description": "The first day of week. 1 - Sunday, 2 - Monday, ..., 7 - Saturday",
             "optional": false
           }
         ],
@@ -841,7 +824,7 @@
         "signature": "(date: Dayjs, hours: number, minutes: number, seconds: number) => Dayjs",
         "description": "Set hours, minutes and seconds at once.",
         "deprecated": null,
-        "sourceLine": 343,
+        "sourceLine": 350,
         "since": null,
         "parameters": [
           {

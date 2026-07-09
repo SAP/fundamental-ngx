@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "text-area.component.ts",
   "sourceLine": 46,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/platform/form/text-area/text-area.component.ts#L46",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/platform/form/text-area/text-area.component.ts#L46",
   "description": "Textarea field implementation that is compliant with Platform's FormGroup/FormField design",
   "inputs": [
     {

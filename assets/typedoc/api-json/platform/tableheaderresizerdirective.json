@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "table-header-resizer.directive.ts",
   "sourceLine": 20,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/platform/table-helpers/directives/table-header-resizer.directive.ts#L20",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/platform/table-helpers/directives/table-header-resizer.directive.ts#L20",
   "description": "",
   "inputs": [],
   "outputs": [],

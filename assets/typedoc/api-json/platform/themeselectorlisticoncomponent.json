@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "theme-selector-list.component.ts",
   "sourceLine": 59,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/platform/settings-generator/controls/theme-selector-list/theme-selector-list.component.ts#L59",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/platform/settings-generator/controls/theme-selector-list/theme-selector-list.component.ts#L59",
   "description": "",
   "inputs": [],
   "outputs": [],

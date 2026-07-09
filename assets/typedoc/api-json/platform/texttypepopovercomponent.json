@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "text-type-popover.component.ts",
   "sourceLine": 51,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/platform/icon-tab-bar/components/popovers/text-type-popover/text-type-popover.component.ts#L51",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/platform/icon-tab-bar/components/popovers/text-type-popover/text-type-popover.component.ts#L51",
   "description": "",
   "inputs": [
     {

@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "feed-list-avatar.component.ts",
   "sourceLine": 9,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/feed-list-item/components/feed-list-avatar/feed-list-avatar.component.ts#L9",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/feed-list-item/components/feed-list-avatar/feed-list-avatar.component.ts#L9",
   "description": "",
   "inputs": [],
   "outputs": [],

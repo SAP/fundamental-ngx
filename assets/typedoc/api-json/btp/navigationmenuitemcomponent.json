@@ -1,0 +1,44 @@
+{
+  "name": "NavigationMenuItemComponent",
+  "selector": "fdb-navigation-menu-item, li[fdb-navigation-menu-item]",
+  "kind": "Component",
+  "sourceFile": "navigation-menu-item.component.ts",
+  "sourceLine": 52,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/89f18ecc2d/libs/btp/navigation-menu/src/lib/navigation-menu-item.component.ts#L52",
+  "description": "",
+  "inputs": [
+    {
+      "name": "glyph",
+      "type": "Nullable<string>",
+      "default": null,
+      "description": "Name of the icon to be displayed before the text.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 57,
+      "since": null
+    },
+    {
+      "name": "glyphFont",
+      "type": "IconFont",
+      "default": "FD_DEFAULT_ICON_FONT_FAMILY",
+      "description": "Glyph font family",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 61,
+      "since": null
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "default": null,
+      "description": "Text to be displayed.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 67,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

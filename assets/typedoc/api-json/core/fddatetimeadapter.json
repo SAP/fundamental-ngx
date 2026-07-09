@@ -4,7 +4,7 @@
   "kind": "Class",
   "sourceFile": "fd-datetime-adapter.ts",
   "sourceLine": 26,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/datetime/fd-datetime-adapter.ts#L26",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/datetime/fd-datetime-adapter.ts#L26",
   "description": "DatetimeAdapter implementation based on FdDate.\n\nThis uses FdDate as a date model and relies on Intl.DateTimeFormat\nfor formatting and translation purposes.",
   "inputs": [],
   "outputs": [],
@@ -14,7 +14,7 @@
       "signature": "(fdDate: FdDate, days: number) => FdDate",
       "description": "Add days to a date",
       "deprecated": null,
-      "sourceLine": 302,
+      "sourceLine": 379,
       "since": null,
       "parameters": [
         {
@@ -37,7 +37,7 @@
       "signature": "(fdDate: FdDate, months: number) => FdDate",
       "description": "Add months to a date",
       "deprecated": null,
-      "sourceLine": 287,
+      "sourceLine": 364,
       "since": null,
       "parameters": [
         {
@@ -60,7 +60,7 @@
       "signature": "(date: FdDate, years: number) => FdDate",
       "description": "Add years to a date",
       "deprecated": null,
-      "sourceLine": 282,
+      "sourceLine": 359,
       "since": null,
       "parameters": [
         {
@@ -83,7 +83,7 @@
       "signature": "(date: FdDate) => FdDate",
       "description": "Clone a date object",
       "deprecated": null,
-      "sourceLine": 309,
+      "sourceLine": 386,
       "since": null,
       "parameters": [
         {
@@ -100,7 +100,7 @@
       "signature": "(year: number, month: number, date: number) => FdDate",
       "description": "Create a date object",
       "deprecated": null,
-      "sourceLine": 215,
+      "sourceLine": 284,
       "since": null,
       "parameters": [
         {
@@ -129,7 +129,7 @@
       "signature": "(date1: FdDate, date2: FdDate) => boolean",
       "description": "Check if dates and time are equal",
       "deprecated": null,
-      "sourceLine": 341,
+      "sourceLine": 424,
       "since": null,
       "parameters": [
         {
@@ -152,7 +152,7 @@
       "signature": "(date1: FdDate, date2: FdDate) => boolean",
       "description": "Check if dates are equal",
       "deprecated": null,
-      "sourceLine": 330,
+      "sourceLine": 413,
       "since": null,
       "parameters": [
         {
@@ -175,7 +175,7 @@
       "signature": "(date: FdDate, displayFormat: CustomDateTimeFormatOptions) => string",
       "description": "Format date object to string",
       "deprecated": null,
-      "sourceLine": 263,
+      "sourceLine": 340,
       "since": null,
       "parameters": [
         {
@@ -198,7 +198,7 @@
       "signature": "(date: FdDate) => number",
       "description": "Get date",
       "deprecated": null,
-      "sourceLine": 51,
+      "sourceLine": 109,
       "since": null,
       "parameters": [
         {
@@ -215,7 +215,7 @@
       "signature": "() => string[]",
       "description": "Get date names",
       "deprecated": null,
-      "sourceLine": 99,
+      "sourceLine": 157,
       "since": null,
       "parameters": [],
       "returnType": "string[]"
@@ -225,7 +225,7 @@
       "signature": "(date: FdDate) => number",
       "description": "Get day of week",
       "deprecated": null,
-      "sourceLine": 56,
+      "sourceLine": 114,
       "since": null,
       "parameters": [
         {
@@ -242,7 +242,7 @@
       "signature": "(style: 'long' | 'short' | 'narrow') => string[]",
       "description": "Get day of week names",
       "deprecated": null,
-      "sourceLine": 107,
+      "sourceLine": 165,
       "since": null,
       "parameters": [
         {
@@ -259,7 +259,7 @@
       "signature": "() => [string, string]",
       "description": "Get day period names",
       "deprecated": null,
-      "sourceLine": 152,
+      "sourceLine": 210,
       "since": null,
       "parameters": [],
       "returnType": "[string, string]"
@@ -269,7 +269,7 @@
       "signature": "() => number",
       "description": "Get first day of week",
       "deprecated": null,
-      "sourceLine": 201,
+      "sourceLine": 259,
       "since": null,
       "parameters": [],
       "returnType": "number"
@@ -279,7 +279,7 @@
       "signature": "(__namedParameters: { meridian: boolean; twoDigit: boolean }) => string[]",
       "description": "Get hour names",
       "deprecated": null,
-      "sourceLine": 128,
+      "sourceLine": 186,
       "since": null,
       "parameters": [
         {
@@ -296,7 +296,7 @@
       "signature": "(date: FdDate) => number",
       "description": "Get hours",
       "deprecated": null,
-      "sourceLine": 61,
+      "sourceLine": 119,
       "since": null,
       "parameters": [
         {
@@ -313,7 +313,7 @@
       "signature": "(__namedParameters: { minuteStep: number; twoDigit: boolean }) => string[]",
       "description": "Get minute names",
       "deprecated": null,
-      "sourceLine": 138,
+      "sourceLine": 196,
       "since": null,
       "parameters": [
         {
@@ -330,7 +330,7 @@
       "signature": "(date: FdDate) => number",
       "description": "Get minutes",
       "deprecated": null,
-      "sourceLine": 66,
+      "sourceLine": 124,
       "since": null,
       "parameters": [
         {
@@ -347,7 +347,7 @@
       "signature": "(date: FdDate) => number",
       "description": "Get month",
       "deprecated": null,
-      "sourceLine": 46,
+      "sourceLine": 104,
       "since": null,
       "parameters": [
         {
@@ -364,7 +364,7 @@
       "signature": "(style: 'long' | 'short' | 'narrow') => string[]",
       "description": "Get month names",
       "deprecated": null,
-      "sourceLine": 91,
+      "sourceLine": 149,
       "since": null,
       "parameters": [
         {
@@ -381,7 +381,7 @@
       "signature": "(fdDate: FdDate) => number",
       "description": "Get number of days in a month",
       "deprecated": null,
-      "sourceLine": 207,
+      "sourceLine": 276,
       "since": null,
       "parameters": [
         {
@@ -398,7 +398,7 @@
       "signature": "(__namedParameters: { twoDigit: boolean }) => string[]",
       "description": "Get second names",
       "deprecated": null,
-      "sourceLine": 147,
+      "sourceLine": 205,
       "since": null,
       "parameters": [
         {
@@ -415,7 +415,7 @@
       "signature": "(date: FdDate) => number",
       "description": "Get seconds",
       "deprecated": null,
-      "sourceLine": 71,
+      "sourceLine": 129,
       "since": null,
       "parameters": [
         {
@@ -432,7 +432,7 @@
       "signature": "(date: FdDate) => string",
       "description": "Get week name",
       "deprecated": null,
-      "sourceLine": 122,
+      "sourceLine": 180,
       "since": null,
       "parameters": [
         {
@@ -449,7 +449,7 @@
       "signature": "(fdDate: FdDate) => number",
       "description": "Get week number",
       "deprecated": null,
-      "sourceLine": 76,
+      "sourceLine": 134,
       "since": null,
       "parameters": [
         {
@@ -466,7 +466,7 @@
       "signature": "(date: FdDate) => number",
       "description": "Get year",
       "deprecated": null,
-      "sourceLine": 41,
+      "sourceLine": 99,
       "since": null,
       "parameters": [
         {
@@ -483,7 +483,7 @@
       "signature": "(date: FdDate) => string",
       "description": "Get year name",
       "deprecated": null,
-      "sourceLine": 115,
+      "sourceLine": 173,
       "since": null,
       "parameters": [
         {
@@ -500,7 +500,7 @@
       "signature": "(dateToCheck: FdDate, startDate: FdDate, endDate: FdDate) => boolean",
       "description": "Check if date between given dates",
       "deprecated": null,
-      "sourceLine": 322,
+      "sourceLine": 402,
       "since": null,
       "parameters": [
         {
@@ -529,7 +529,7 @@
       "signature": "(displayFormat: CustomDateTimeFormatOptions) => boolean",
       "description": "Check if a time format includes a day period",
       "deprecated": null,
-      "sourceLine": 354,
+      "sourceLine": 437,
       "since": null,
       "parameters": [
         {
@@ -546,7 +546,7 @@
       "signature": "(displayFormat: DateTimeFormatOptions) => boolean",
       "description": "Check if a time format includes hours",
       "deprecated": null,
-      "sourceLine": 364,
+      "sourceLine": 447,
       "since": null,
       "parameters": [
         {
@@ -563,7 +563,7 @@
       "signature": "(displayFormat: DateTimeFormatOptions) => boolean",
       "description": "Check if a time format includes minutes",
       "deprecated": null,
-      "sourceLine": 369,
+      "sourceLine": 452,
       "since": null,
       "parameters": [
         {
@@ -580,7 +580,7 @@
       "signature": "(displayFormat: DateTimeFormatOptions) => boolean",
       "description": "Check if a time format includes seconds",
       "deprecated": null,
-      "sourceLine": 374,
+      "sourceLine": 457,
       "since": null,
       "parameters": [
         {
@@ -597,7 +597,7 @@
       "signature": "(date: FdDate) => date is FdDate",
       "description": "Check if date object is valid",
       "deprecated": null,
-      "sourceLine": 314,
+      "sourceLine": 394,
       "since": null,
       "parameters": [
         {
@@ -614,7 +614,7 @@
       "signature": "() => FdDate",
       "description": "Get a now date object",
       "deprecated": null,
-      "sourceLine": 225,
+      "sourceLine": 294,
       "since": null,
       "parameters": [],
       "returnType": "FdDate"
@@ -624,7 +624,7 @@
       "signature": "(value: any, parseFormat: DateTimeFormatOptions) => null | FdDate",
       "description": "Parse any value to date object",
       "deprecated": null,
-      "sourceLine": 230,
+      "sourceLine": 299,
       "since": null,
       "parameters": [
         {
@@ -647,7 +647,7 @@
       "signature": "(date: FdDate, hours: number) => FdDate",
       "description": "Set hours",
       "deprecated": null,
-      "sourceLine": 180,
+      "sourceLine": 238,
       "since": null,
       "parameters": [
         {
@@ -667,10 +667,10 @@
     },
     {
       "name": "setMinutes",
-      "signature": "(date: FdDate, hours: number) => FdDate",
+      "signature": "(date: FdDate, minutes: number) => FdDate",
       "description": "Set minutes",
       "deprecated": null,
-      "sourceLine": 187,
+      "sourceLine": 245,
       "since": null,
       "parameters": [
         {
@@ -680,7 +680,7 @@
           "optional": false
         },
         {
-          "name": "hours",
+          "name": "minutes",
           "type": "number",
           "description": "",
           "optional": false
@@ -690,10 +690,10 @@
     },
     {
       "name": "setSeconds",
-      "signature": "(date: FdDate, hours: number) => FdDate",
+      "signature": "(date: FdDate, seconds: number) => FdDate",
       "description": "Set seconds",
       "deprecated": null,
-      "sourceLine": 194,
+      "sourceLine": 252,
       "since": null,
       "parameters": [
         {
@@ -703,7 +703,7 @@
           "optional": false
         },
         {
-          "name": "hours",
+          "name": "seconds",
           "type": "number",
           "description": "",
           "optional": false
@@ -714,15 +714,15 @@
     {
       "name": "toIso8601",
       "signature": "(fdDate: FdDate) => string",
-      "description": "Format date object to ISO8601 string",
+      "description": "Gets the ISO 8601 date-time string for the given date.\n\nReturns a **local** (timezone-unaware) string in the format `YYYY-MM-DDTHH:mm:ss`.\nThis is intentionally **not** RFC 3339 compliant because no timezone designator is appended.\n\nThis method is used to generate date strings that are compatible with native HTML attributes\nsuch as the `min` or `max` attribute of an `<input>`.\n\nTo produce an RFC 3339 string, append a timezone designator to the result:\n```ts\nconst rfc3339Utc = adapter.toIso8601(date) + 'Z';          // UTC\nconst rfc3339Local = adapter.toIso8601(date) + '+05:30';    // with offset\n```",
       "deprecated": null,
-      "sourceLine": 349,
+      "sourceLine": 432,
       "since": null,
       "parameters": [
         {
           "name": "fdDate",
           "type": "FdDate",
-          "description": "",
+          "description": "The date to get the ISO date string for.",
           "optional": false
         }
       ],
@@ -733,7 +733,7 @@
       "signature": "() => FdDate",
       "description": "Get a today date object",
       "deprecated": null,
-      "sourceLine": 220,
+      "sourceLine": 289,
       "since": null,
       "parameters": [],
       "returnType": "FdDate"
@@ -748,7 +748,7 @@
         "signature": "(first: FdDate, second: FdDate) => number",
         "description": "Compares two dates.",
         "deprecated": null,
-        "sourceLine": 374,
+        "sourceLine": 383,
         "since": null,
         "parameters": [
           {
@@ -771,7 +771,7 @@
         "signature": "(year: number, month: number, firstDayOfWeek: number) => number",
         "description": "Get Amount of weeks in given month/year",
         "deprecated": null,
-        "sourceLine": 357,
+        "sourceLine": 364,
         "since": null,
         "parameters": [
           {
@@ -789,35 +789,18 @@
           {
             "name": "firstDayOfWeek",
             "type": "number",
-            "description": "The first day of week. 1 - Sunday, 2 - Monday...",
+            "description": "The first day of week. 1 - Sunday, 2 - Monday, ..., 7 - Saturday",
             "optional": false
           }
         ],
         "returnType": "number"
       },
       {
-        "name": "setLocale",
-        "signature": "(locale: string) => void",
-        "description": "Sets the locale used for all dates.",
-        "deprecated": null,
-        "sourceLine": 330,
-        "since": null,
-        "parameters": [
-          {
-            "name": "locale",
-            "type": "string",
-            "description": "The new locale.",
-            "optional": false
-          }
-        ],
-        "returnType": "void"
-      },
-      {
         "name": "setTime",
         "signature": "(date: FdDate, hours: number, minutes: number, seconds: number) => FdDate",
         "description": "Set hours, minutes and seconds at once.",
         "deprecated": null,
-        "sourceLine": 343,
+        "sourceLine": 350,
         "since": null,
         "parameters": [
           {

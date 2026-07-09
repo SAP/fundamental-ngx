@@ -1,0 +1,1 @@
+import{b as o}from"./chunk-ZQEYOHC3.js";import{$ as e}from"./chunk-JFC4ZVIT.js";var s=(()=>{class t extends o{constructor(){super(()=>import("./chunk-PXU45IBL.js")),this.name="ui-5-webcomponents--fiori-theming-service"}static{this.\u0275fac=function(r){return new(r||t)}}static{this.\u0275prov=e({token:t,factory:t.\u0275fac,providedIn:"root"})}}return t})();export{s as a};

@@ -8,13 +8,23 @@
   "description": "",
   "inputs": [
     {
+      "name": "accessibleName",
+      "type": "string",
+      "default": null,
+      "description": "Defines the accessible name of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 46,
+      "since": null
+    },
+    {
       "name": "design",
       "type": "'Standard' | 'NoCurrentPage'",
       "default": null,
       "description": "Defines the visual appearance of the last BreadcrumbsItem.\n\nThe Breadcrumbs supports two visual appearances for the last BreadcrumbsItem:\n- \"Standard\" - displaying the last item as \"current page\" (bold and without separator)\n- \"NoCurrentPage\" - displaying the last item as a regular BreadcrumbsItem, followed by separator",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 50,
+      "sourceLine": 55,
       "since": null
     },
     {
@@ -24,7 +34,7 @@
       "description": "Determines the visual style of the separator between the breadcrumb items.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 55,
+      "sourceLine": 60,
       "since": null
     }
   ],
@@ -36,7 +46,7 @@
       "description": "Fires when a `BreadcrumbsItem` is clicked.\n\n*Note:** You can prevent browser location change by calling `event.preventDefault()`.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 64,
+      "sourceLine": 69,
       "since": null
     }
   ],

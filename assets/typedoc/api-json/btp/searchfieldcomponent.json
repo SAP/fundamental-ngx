@@ -1,0 +1,35 @@
+{
+  "name": "SearchFieldComponent",
+  "selector": "fdb-search-field",
+  "kind": "Component",
+  "sourceFile": "search-field.component.ts",
+  "sourceLine": 36,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/89f18ecc2d/libs/btp/search-field/src/search-field.component.ts#L36",
+  "description": "",
+  "inputs": [
+    {
+      "name": "placeholder",
+      "type": "string",
+      "default": null,
+      "description": "Placeholder for the input field.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 38,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "search",
+      "type": "string",
+      "default": null,
+      "description": "Event emitted when the search button is clicked.",
+      "isSignal": false,
+      "deprecated": null,
+      "sourceLine": 42,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

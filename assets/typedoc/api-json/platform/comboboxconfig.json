@@ -4,7 +4,7 @@
   "kind": "Class",
   "sourceFile": "combobox.config.ts",
   "sourceLine": 10,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/platform/form/combobox/combobox.config.ts#L10",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/platform/form/combobox/combobox.config.ts#L10",
   "description": "Default options for Combobox",
   "inputs": [],
   "outputs": [],

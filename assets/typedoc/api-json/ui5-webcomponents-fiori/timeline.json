@@ -56,6 +56,16 @@
       "deprecated": null,
       "sourceLine": 75,
       "since": null
+    },
+    {
+      "name": "stickyHeader",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines whether the content of the `header` and `infoBar` slots remains visible when the user scrolls the Timeline.\n\n*Note:** The bars pin to the Timeline's own scrollport. Give the Timeline a\nconstrained height (for example `style=\"height: 32rem\"`) so its items scroll\ninside it. Placing the Timeline inside an externally scrolling ancestor while\nleaving the Timeline itself unsized is not supported in this mode — the bars\nwill scroll away with the ancestor.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 86,
+      "since": null
     }
   ],
   "outputs": [
@@ -66,7 +76,7 @@
       "description": "Fired when the user presses the `More` button or scrolls to the Timeline's end.\n\n*Note:** The event will be fired if `growing` is set to `Button` or `Scroll`.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 84,
+      "sourceLine": 95,
       "since": null
     }
   ],

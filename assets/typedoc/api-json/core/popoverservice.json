@@ -4,7 +4,7 @@
   "kind": "Service",
   "sourceFile": "popover.service.ts",
   "sourceLine": 48,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/38469d8/libs/core/popover/popover-service/popover.service.ts#L48",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/popover/popover-service/popover.service.ts#L48",
   "description": "",
   "inputs": [],
   "outputs": [
@@ -25,7 +25,7 @@
       "signature": "() => void",
       "description": "Refresh listeners on trigger element events",
       "deprecated": null,
-      "sourceLine": 555,
+      "sourceLine": 574,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -35,7 +35,7 @@
       "signature": "(positions: ConnectedPosition[]) => void",
       "description": "Method called to change position of popover,\nrecommended to be used only when popover is opened, otherwise change position or cdkPlacement",
       "deprecated": null,
-      "sourceLine": 424,
+      "sourceLine": 436,
       "since": null,
       "parameters": [
         {
@@ -52,7 +52,7 @@
       "signature": "(focusActiveElement: boolean) => void",
       "description": "Closes the popover.",
       "deprecated": null,
-      "sourceLine": 327,
+      "sourceLine": 335,
       "since": null,
       "parameters": [
         {
@@ -69,7 +69,7 @@
       "signature": "() => void",
       "description": "This method is intended to be called in order\nto postpone the main functionality but be able\nto enable it back in the future by initialise()",
       "deprecated": null,
-      "sourceLine": 546,
+      "sourceLine": 565,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -79,7 +79,7 @@
       "signature": "(triggerElement: HTMLElement | ElementRef<any>, config?: PopoverConfig, templateData?: null | TemplateRef<void> | PopoverTemplate) => void",
       "description": "Method initialising the popover service - should be called, after view is initialised, params:\n- triggerElement - element, which is equivalent for cdkOverlayOrigin, or fd-popover-control,\n  by default to this element the popover body will lbe appended and events on this element will trigger\n  popover's  toggle\n- config - configuration object using PopoverConfig interface\n- templateData - in case of having already PopoverBodyComponent, there is way to pass container, template containing\n  PopoverComponent and PopoverComponent instance",
       "deprecated": null,
-      "sourceLine": 298,
+      "sourceLine": 306,
       "since": null,
       "parameters": [
         {
@@ -108,7 +108,7 @@
       "signature": "() => void",
       "description": "Opens the popover.",
       "deprecated": null,
-      "sourceLine": 342,
+      "sourceLine": 353,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -118,7 +118,7 @@
       "signature": "(config: PopoverConfig) => void",
       "description": "Method that sets configuration/options, it detects if there is something changed and overwrites them",
       "deprecated": null,
-      "sourceLine": 443,
+      "sourceLine": 455,
       "since": null,
       "parameters": [
         {
@@ -135,7 +135,7 @@
       "signature": "() => void",
       "description": "Method called to refresh position of opened popover",
       "deprecated": null,
-      "sourceLine": 431,
+      "sourceLine": 443,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -145,7 +145,7 @@
       "signature": "(ignore: boolean) => void",
       "description": "Temporary sets the ignoring of the event triggers.",
       "deprecated": null,
-      "sourceLine": 436,
+      "sourceLine": 448,
       "since": null,
       "parameters": [
         {
@@ -162,7 +162,7 @@
       "signature": "(openAction: boolean, closeAction: boolean, focusActiveElement?: boolean) => void",
       "description": "Toggles the popover open state",
       "deprecated": null,
-      "sourceLine": 411,
+      "sourceLine": 423,
       "since": null,
       "parameters": [
         {
@@ -191,7 +191,7 @@
       "signature": "(stringContent: null | string | TemplateRef<any>, templateContent: Nullable<TemplateRef<any>>) => void",
       "description": "method updating template or text inside rendered PopoverBody",
       "deprecated": null,
-      "sourceLine": 382,
+      "sourceLine": 394,
       "since": null,
       "parameters": [
         {
@@ -214,7 +214,7 @@
       "signature": "(trigger: HTMLElement | ElementRef<any>) => void",
       "description": "Updates trigger element and refreshes the listeners.",
       "deprecated": null,
-      "sourceLine": 604,
+      "sourceLine": 622,
       "since": null,
       "parameters": [
         {
