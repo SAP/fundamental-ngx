@@ -176,7 +176,9 @@
         "nx": "22.4.1",
         "parse5": "7.1.2",
         "tar": "7.5.8",
-        "@ui5/project": "4.0.10"
+        "@ui5/project": "4.0.10",
+        "sigstore@npm:^3.0.0": "npm:4.1.1",
+        "sigstore@npm:^4.0.0": "npm:4.1.1"
     },
     "lint-staged": {
         "*.{js,ts,html,md,json,yml,css,scss}": [
