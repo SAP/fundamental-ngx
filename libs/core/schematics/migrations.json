@@ -1,0 +1,10 @@
+{
+    "$schema": "../../../node_modules/@angular-devkit/schematics/collection-schema.json",
+    "schematics": {
+        "update-sibling-packages": {
+            "version": "0.0.1",
+            "description": "Update sibling @fundamental-ngx/* packages to match the installed core version",
+            "factory": "./update-sibling-packages/index#updateSiblingPackages"
+        }
+    }
+}

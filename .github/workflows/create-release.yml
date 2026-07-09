@@ -161,7 +161,9 @@ jobs:
               run: node scripts/reset-placeholders.js
 
             - name: Configure npm for trusted publishing
-              run: npm config delete //registry.npmjs.org/:_authToken || true
+              run: |
+                  npm config delete //registry.npmjs.org/:_authToken || true
+                  npm config set provenance false
 
             # Use NX Release to publish all packages at once
             # Authentication is handled via npm 11.5.0+ auto-OIDC (detects GitHub Actions + id-token: write)

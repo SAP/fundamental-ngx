@@ -33,12 +33,12 @@ export class ThemingHeaderComponent {
 {
     "glob": "**/*",
     "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/baseTheme/fonts/",
-    "output": "./assets/theming-base/baseTheme/fonts/"
+    "output": "./Base/baseLib/baseTheme/fonts/"
 },
 {
     "glob": "**/*",
     "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/sap_horizon/fonts/",
-    "output": "./assets/theming-base/sap_horizon/fonts/"
+    "output": "./Base/baseLib/sap_horizon/fonts/"
 }`,
         language: 'json'
     };
