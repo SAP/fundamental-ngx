@@ -1,3 +1,13 @@
+## 0.63.1-rc.18 (2026-07-09)
+
+### 🩹 Fixes
+
+- **core:** address Shell Bar design review comments ([#14333](https://github.com/SAP/fundamental-ngx/pull/14333))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.63.1-rc.17 (2026-07-09)
 
 ### 🩹 Fixes
