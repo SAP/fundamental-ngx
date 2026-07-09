@@ -1,3 +1,13 @@
+## 0.63.1-rc.21 (2026-07-09)
+
+### 🩹 Fixes
+
+- **platform:** update table list and table so header cell popover closes with escape ([#14326](https://github.com/SAP/fundamental-ngx/pull/14326))
+
+### ❤️ Thank You
+
+- Mike O'Donnell @mikerodonnell89
+
 ## 0.63.1-rc.20 (2026-07-09)
 
 This was a version bump only for platform to align it with other projects, there were no code changes.
