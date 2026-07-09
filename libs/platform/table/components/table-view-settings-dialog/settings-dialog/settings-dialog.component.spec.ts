@@ -28,7 +28,11 @@ describe('SettingsDialogComponent', () => {
     beforeEach(waitForAsync(() => {
         const mockTable = {
             getTableColumns: () => [],
-            initialState: {}
+            initialState: {
+                getInitialSortBySnapshot: () => [],
+                getInitialFilterBySnapshot: () => [],
+                getInitialGroupBySnapshot: () => []
+            }
         };
         TestBed.configureTestingModule({
             providers: [
@@ -232,7 +236,9 @@ describe('SettingsDialogComponent', () => {
 
         // Initially, dialog should be valid and OK button enabled
         expect(component.isDialogValid()).toBe(true);
-        const okButton = fixture.nativeElement.querySelector('fd-button-bar[fdType="emphasized"]');
+        const okButtonWrapper = fixture.nativeElement.querySelector('fd-button-bar[fdType="emphasized"]');
+        expect(okButtonWrapper).toBeTruthy();
+        const okButton = okButtonWrapper.querySelector('button');
         expect(okButton).toBeTruthy();
         expect(okButton.disabled).toBe(false);
 
@@ -290,7 +296,8 @@ describe('SettingsDialogComponent', () => {
         expect(component.isDialogValid()).toBe(false);
 
         // Try to confirm - button should be disabled
-        const okButton = fixture.nativeElement.querySelector('fd-button-bar[fdType="emphasized"]');
+        const okButtonWrapper = fixture.nativeElement.querySelector('fd-button-bar[fdType="emphasized"]');
+        const okButton = okButtonWrapper.querySelector('button');
         expect(okButton.disabled).toBe(true);
 
         // Clicking disabled button should not trigger confirm

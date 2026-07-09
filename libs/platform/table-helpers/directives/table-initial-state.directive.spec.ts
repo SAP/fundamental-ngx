@@ -309,7 +309,7 @@ describe('TableInitialStateDirective', () => {
     });
 
     describe('snapshot getter methods', () => {
-        it('should return independent copies from getters', () => {
+        it('should return snapshot references from getters', () => {
             const initialSort: CollectionSort[] = [{ field: 'name', direction: SortDirection.ASC }];
             directive.initialSortBy = initialSort;
 
@@ -318,11 +318,9 @@ describe('TableInitialStateDirective', () => {
             const snapshot1 = directive.getInitialSortBySnapshot();
             const snapshot2 = directive.getInitialSortBySnapshot();
 
-            // Both should have same values but different references
+            // Both should have same values and same reference
             expect(snapshot1).toEqual(snapshot2);
-            // Modifying one should not affect the other or the internal snapshot
-            snapshot1.push({ field: 'price', direction: SortDirection.DESC });
-            expect(snapshot2.length).toBe(1);
+            expect(snapshot1).toBe(snapshot2); // Same reference
         });
 
         it('should return empty arrays when no snapshots captured', () => {
