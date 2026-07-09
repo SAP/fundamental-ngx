@@ -82,9 +82,10 @@ jobs:
               run: npx --yes npm@latest install -g npm@latest
 
             # WORKAROUND: npm 11.x/12.x has missing sigstore dependency (npm/cli#9722)
-            # Install sigstore globally so npm can find it when generating provenance attestations
+            # Install sigstore@^4.1.1 globally so npm can find it when generating provenance attestations
+            # Pinned to 4.1.1 for stability - npm 11.x was built against sigstore 4.x
             - name: Install sigstore dependency for npm provenance
-              run: npm install -g sigstore
+              run: npm install -g sigstore@^4.1.1
 
             - name: Initialize the Nx Cloud distributed CI run
               run: npx nx-cloud start-ci-run
