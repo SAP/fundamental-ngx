@@ -1,3 +1,13 @@
+## 0.63.2-rc.0 (2026-07-09)
+
+### 🩹 Fixes
+
+- **ci:** grant contents:write permission for gh-pages deployment ([#14349](https://github.com/SAP/fundamental-ngx/pull/14349))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.63.1 (2026-07-09)
 
 ### 🩹 Fixes
