@@ -36,7 +36,7 @@ class TestComponent {
 @Component({
     template: `
         <ul fd-list [selection]="true">
-            <li #listItem fd-list-item [selected]="selected">
+            <li #listItem fd-list-item [selected]="selected()">
                 <fd-checkbox #checkbox [(ngModel)]="checked"></fd-checkbox>
                 List item with checkbox
             </li>
@@ -52,7 +52,7 @@ class SelectionListTestComponent {
     @ViewChild('checkbox')
     checkbox: CheckboxComponent;
 
-    selected = false;
+    readonly selected = input(false);
     checked = false;
 }
 
@@ -162,7 +162,7 @@ describe('ListItemComponent in selection mode', () => {
     });
 
     it('should show "Selected" in the sr-only span when item is selected', () => {
-        component.selected = true;
+        fixture.componentRef.setInput('selected', true);
         fixture.detectChanges();
         const span = component.listItemRef.nativeElement.querySelector('.fd-list__item--sr-only');
         expect(span.textContent.trim()).toBe('Selected');

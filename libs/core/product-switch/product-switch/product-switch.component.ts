@@ -3,8 +3,9 @@ import {
     ChangeDetectionStrategy,
     Component,
     contentChild,
+    effect,
     input,
-    linkedSignal,
+    model,
     output,
     signal
 } from '@angular/core';
@@ -20,6 +21,7 @@ import {
 } from '@fundamental-ngx/core/popover';
 import { Placement } from '@fundamental-ngx/core/shared';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { Subject } from 'rxjs';
 import { ProductSwitchButtonDirective } from '../product-switch-button.directive';
 import { FD_PRODUCT_SWITCH_COMPONENT } from '../tokens';
 
@@ -75,19 +77,29 @@ export class ProductSwitchComponent {
     readonly focusAutoCapture = input(false, { transform: booleanAttribute });
 
     /** Two-way binding for product switch open state. */
-    // eslint-disable-next-line @angular-eslint/no-input-rename
-    readonly isOpenInput = input(false, { alias: 'isOpen' });
-    readonly isOpen = linkedSignal(this.isOpenInput);
+    readonly isOpen = model(false);
 
     /** Event emitted right before the product switch is being opened. */
     readonly beforeOpen = output<void>();
 
     /** Event emitted when the product switch open state changes. */
-    readonly isOpenChange = output<boolean>();
+    readonly isOpenChange = new Subject<boolean>();
 
     /** @hidden */
     contentDensity = signal<ContentDensityMode>(ContentDensityMode.COZY);
 
     /** @hidden */
     protected readonly customProductSwitchButton = contentChild(ProductSwitchButtonDirective);
+
+    /** @hidden */
+    constructor() {
+        let previousIsOpen = false;
+        effect(() => {
+            const isOpen = this.isOpen();
+            if (isOpen !== previousIsOpen) {
+                this.isOpenChange.next(isOpen);
+                previousIsOpen = isOpen;
+            }
+        });
+    }
 }
