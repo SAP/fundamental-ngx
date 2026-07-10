@@ -15,6 +15,7 @@
         "outDir": "../../dist/libs/cx/schematics",
         "skipDefaultLibCheck": true,
         "skipLibCheck": true,
+        "ignoreDeprecations": "6.0",
         "sourceMap": true,
         "strictNullChecks": false,
         "target": "es6",

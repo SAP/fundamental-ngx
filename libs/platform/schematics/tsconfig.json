@@ -15,6 +15,7 @@
         "outDir": "../../dist/libs/platform/schematics",
         "skipDefaultLibCheck": false,
         "skipLibCheck": true,
+        "ignoreDeprecations": "6.0",
         "sourceMap": true,
         "strictNullChecks": true,
         "target": "es6",

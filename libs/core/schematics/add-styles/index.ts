@@ -34,7 +34,11 @@ function addStylesToConfig(options: Schema): Rule {
             const workspace = await getWorkspaceDefinition(tree);
             await updateWorkspaceDefinition(tree, workspace);
         } catch (error) {
-            handleError(context, error as Error, 'Failed to add styles configuration');
+            handleError(
+                context,
+                error instanceof Error ? error : new Error(String(error)),
+                'Failed to add styles configuration'
+            );
         }
     };
 }
@@ -90,7 +94,11 @@ function addAssetsToConfig(options: Schema): Rule {
             const workspace = await getWorkspaceDefinition(tree);
             await updateWorkspaceDefinition(tree, workspace);
         } catch (error) {
-            handleError(context, error as Error, 'Failed to add assets configuration');
+            handleError(
+                context,
+                error instanceof Error ? error : new Error(String(error)),
+                'Failed to add assets configuration'
+            );
         }
     };
 }
@@ -164,7 +172,7 @@ function updateBudgets(options: Schema): Rule {
             await updateWorkspaceDefinition(tree, workspace);
         } catch (error) {
             context.logger.warn(
-                `⚠️ Could not update bundle budgets (non-fatal): ${(error as Error).message}. ` +
+                `⚠️ Could not update bundle budgets (non-fatal): ${error instanceof Error ? error.message : String(error)}. ` +
                     `Styles and assets were still configured. Update angular.json budgets manually if needed.`
             );
         }
