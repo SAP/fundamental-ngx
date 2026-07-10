@@ -34,7 +34,7 @@ function addStylesToConfig(options: Schema): Rule {
             const workspace = await getWorkspaceDefinition(tree);
             await updateWorkspaceDefinition(tree, workspace);
         } catch (error) {
-            handleError(context, error, 'Failed to add styles configuration');
+            handleError(context, error as Error, 'Failed to add styles configuration');
         }
     };
 }
@@ -90,7 +90,7 @@ function addAssetsToConfig(options: Schema): Rule {
             const workspace = await getWorkspaceDefinition(tree);
             await updateWorkspaceDefinition(tree, workspace);
         } catch (error) {
-            handleError(context, error, 'Failed to add assets configuration');
+            handleError(context, error as Error, 'Failed to add assets configuration');
         }
     };
 }

@@ -128,7 +128,7 @@ Try to replace theme in application manually, or use ThemingService to manage mu
                 }
             ]);
         } catch (e) {
-            context.logger.debug(e);
+            context.logger.debug(String(e));
             context.logger.info(`⚠️ Please process adding Theming to root module by yourself.
 [Instructions: https://sap.github.io/fundamental-ngx/#/core/theming]`);
         }
