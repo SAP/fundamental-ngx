@@ -1,3 +1,73 @@
+## 0.63.2-rc.0 (2026-07-09)
+
+### 🩹 Fixes
+
+- **ci:** grant contents:write permission for gh-pages deployment ([#14349](https://github.com/SAP/fundamental-ngx/pull/14349))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
+## 0.63.1 (2026-07-09)
+
+### 🩹 Fixes
+
+- **platform:** update table list and table so header cell popover closes with escape ([#14326](https://github.com/SAP/fundamental-ngx/pull/14326))
+- **ci:** set npm provenance config directly before publish ([#14342](https://github.com/SAP/fundamental-ngx/pull/14342))
+- ng update report missing ([#14331](https://github.com/SAP/fundamental-ngx/pull/14331))
+- **platform:** use live announcer for screenreader when expand all / collapse all buttons are clicked ([#14324](https://github.com/SAP/fundamental-ngx/pull/14324))
+- **platform:** search field missing title attribute for sync button ([#14321](https://github.com/SAP/fundamental-ngx/pull/14321))
+- **platform:** approval flow empty results ([#14320](https://github.com/SAP/fundamental-ngx/pull/14320))
+
+### ❤️ Thank You
+
+- C5386211
+- Inna Atanasova @InnaAtanasova
+- Mike O'Donnell @mikerodonnell89
+- robertIsaac
+
+## 0.63.1-rc.21 (2026-07-09)
+
+### 🩹 Fixes
+
+- **platform:** update table list and table so header cell popover closes with escape ([#14326](https://github.com/SAP/fundamental-ngx/pull/14326))
+
+### ❤️ Thank You
+
+- Mike O'Donnell @mikerodonnell89
+
+## 0.63.1-rc.20 (2026-07-09)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.19 (2026-07-09)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.18 (2026-07-09)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.17 (2026-07-09)
+
+### 🩹 Fixes
+
+- **ci:** set npm provenance config directly before publish ([#14342](https://github.com/SAP/fundamental-ngx/pull/14342))
+- ng update report missing ([#14331](https://github.com/SAP/fundamental-ngx/pull/14331))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+- robertIsaac
+
+## 0.63.1-rc.16 (2026-07-07)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.15 (2026-07-07)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
 ## 0.63.1-rc.14 (2026-07-06)
 
 ### 🩹 Fixes

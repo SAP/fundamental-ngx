@@ -316,6 +316,18 @@ describe('FocusableItemDirective', () => {
             expect(focusSpy).toHaveBeenCalled();
         });
 
+        it('should focus cell on F2 when child is focused (bidirectional toggle)', () => {
+            const childButton = element.querySelector('button') as HTMLElement;
+            childButton.focus();
+            const focusSpy = jest.spyOn(element, 'focus');
+
+            const event = new KeyboardEvent('keydown', { keyCode: F2, bubbles: true });
+            Object.defineProperty(event, 'keyCode', { value: F2 });
+            element.dispatchEvent(event);
+
+            expect(focusSpy).toHaveBeenCalled();
+        });
+
         it('should not handle keydown when not focusable', () => {
             directive.setFocusable(false);
             const keydownSpy = jest.fn();

@@ -1,6 +1,6 @@
 import { FocusKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
 import { SelectionChange, SelectionModel } from '@angular/cdk/collections';
-import { DOWN_ARROW, ENTER, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
+import { DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -574,6 +574,11 @@ export class ListComponent<T>
         }
 
         if (KeyUtil.isKeyCode(event, TAB) && !this.interceptTabKey) {
+            return;
+        }
+
+        // Allow Escape to propagate so popovers can close
+        if (KeyUtil.isKeyCode(event, ESCAPE)) {
             return;
         }
 

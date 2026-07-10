@@ -82,3 +82,21 @@
     <ui5-doc-search-actions-sample />
 </component-example>
 <code-example [exampleFiles]="actionsExample()" />
+
+<separator />
+
+<fd-docs-section-title id="custom-max-height" componentName="search"> Custom Popover Max-Height </fd-docs-section-title>
+<description>
+    <p>
+        The <code>ui5-search</code> popover is exposed via the <code>::part(popover)</code> CSS pseudo-element, allowing
+        you to customize its max-height. By default, the suggestions popover has a max-height of 39rem.
+    </p>
+    <p>
+        This is particularly useful when you have a large number of suggestions and want to control how much vertical
+        space the dropdown consumes. Use standard CSS to override the max-height to fit your layout needs.
+    </p>
+</description>
+<component-example>
+    <ui5-doc-search-custom-max-height-sample />
+</component-example>
+<code-example [exampleFiles]="customMaxHeightExample()" />

@@ -44,3 +44,43 @@
     <ui5-doc-user-menu-menu-items-sample />
 </component-example>
 <code-example [exampleFiles]="menuItemsExample()" />
+
+<separator />
+
+<fd-docs-section-title id="non-interactive-avatar" componentName="user-menu">
+    Non-Interactive Avatar
+</fd-docs-section-title>
+<description>
+    <p>
+        By default, the avatar in the User Menu is <strong>non-interactive</strong> — rendered as
+        <code>role="img"</code> with no keyboard focus or click affordance. This prevents screen readers from announcing
+        the selected account's avatar as a button when the application does not wire up any avatar-click handler.
+    </p>
+    <p>
+        Set <code>avatarInteractive="true"</code> to opt in to the interactive state: the avatar becomes focusable
+        (<code>role="button"</code>) and fires the <code>ui5AvatarClick</code> event on click / Enter / Space.
+    </p>
+    <p>
+        When <code>showEditButton="true"</code>, the avatar is treated as interactive regardless of the
+        <code>avatarInteractive</code> property, preserving the edit-pencil affordance.
+    </p>
+</description>
+<component-example>
+    <ui5-doc-user-menu-non-interactive-avatar-sample />
+</component-example>
+<code-example [exampleFiles]="nonInteractiveAvatarExample()" />
+
+<separator />
+
+<fd-docs-section-title id="info-area" componentName="user-menu"> Info Area Slot </fd-docs-section-title>
+<description>
+    <p>
+        Use the <code>infoArea</code> slot to surface a status indicator inside the User Menu's account block — for
+        example, an active proxy/impersonation session, temporary privilege elevation, or an environment notice.
+    </p>
+    <p>Typically use a <code>ui5-message-strip</code> to display the status message with an optional action button.</p>
+</description>
+<component-example>
+    <ui5-doc-user-menu-info-area-sample />
+</component-example>
+<code-example [exampleFiles]="infoAreaExample()" />

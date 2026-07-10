@@ -64,9 +64,9 @@
         "@angular/platform-browser": "22.0.5",
         "@angular/platform-browser-dynamic": "22.0.5",
         "@angular/router": "22.0.5",
-        "@fundamental-styles/cx": "0.41.7",
+        "@fundamental-styles/cx": "0.41.8",
         "@nx/angular": "23.0.1",
-        "@sap-theming/theming-base-content": "11.36.3",
+        "@sap-theming/theming-base-content": "11.36.4",
         "@stackblitz/sdk": "1.9.0",
         "@swc/helpers": "0.5.11",
         "@ui5/tooling-webc": "~0.3.1",
@@ -176,7 +176,9 @@
         "nx": "22.4.1",
         "parse5": "7.1.2",
         "tar": "7.5.8",
-        "@ui5/project": "4.0.10"
+        "@ui5/project": "4.0.10",
+        "sigstore@npm:^3.0.0": "npm:4.1.1",
+        "sigstore@npm:^4.0.0": "npm:4.1.1"
     },
     "lint-staged": {
         "*.{js,ts,html,md,json,yml,css,scss}": [

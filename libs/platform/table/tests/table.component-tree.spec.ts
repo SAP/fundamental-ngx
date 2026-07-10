@@ -36,7 +36,6 @@ import {
             <fdp-column name="status" key="status" label="Status"></fdp-column>
         </fdp-table>
     `,
-    standalone: true,
     imports: [PlatformTableModule, RouterModule, RouterTestingModule]
 })
 class TableHostComponent {
