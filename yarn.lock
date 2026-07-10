@@ -16734,7 +16734,7 @@ __metadata:
     "@ui5/webcomponents-icons-tnt": "npm:~2.24.0"
     "@ui5/webcomponents-theming": "npm:~2.24.0"
     "@ui5/webcomponents-tools": "npm:~2.24.0"
-    angular-eslint: "npm:21.1.0"
+    angular-eslint: "npm:22.0.0"
     autoprefixer: "npm:^10.4.0"
     axios: "npm:1.6.0"
     compare-versions: "npm:6.1.0"
