@@ -15,14 +15,24 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="small" componentName="product-switch">
-    Product Switch With Less Than 7 Items
-</fd-docs-section-title>
-<description> When the product switch has less than 7 items, it has 3 columns and 2 rows. </description>
+<fd-docs-section-title id="large" componentName="product-switch"> Large </fd-docs-section-title>
+<description> Product switch is displayed with a maximum of 4 columns on large desktop screens. </description>
 <component-example>
-    <fd-product-switch-small-example></fd-product-switch-small-example>
+    <fd-product-switch-large-example></fd-product-switch-large-example>
 </component-example>
-<code-example [exampleFiles]="productSwitchSmallExample"></code-example>
+<code-example [exampleFiles]="productSwitchLargeExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="medium" componentName="product-switch"> Medium </fd-docs-section-title>
+<description>
+    If there are 6 or fewer items to display, it is recommended to use the 3-column layout (medium). The component
+    automatically switches to 3 columns when it detects fewer than 7 products.
+</description>
+<component-example>
+    <fd-product-switch-medium-example></fd-product-switch-medium-example>
+</component-example>
+<code-example [exampleFiles]="productSwitchMediumExample"></code-example>
 
 <separator></separator>
 
