@@ -1,6 +1,21 @@
+import { Component } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
+import { ProductSwitchButtonDirective } from '../product-switch-button.directive';
 import { ProductSwitchComponent } from './product-switch.component';
+
+@Component({
+    template: `
+        <fd-product-switch>
+            <ng-template fdProductSwitchButton>
+                <button class="custom-test-button">Custom</button>
+            </ng-template>
+        </fd-product-switch>
+    `,
+    imports: [ProductSwitchComponent, ProductSwitchButtonDirective]
+})
+class ProductSwitchWithCustomButtonTestComponent {}
 
 describe('ProductSwitchComponent', () => {
     let component: ProductSwitchComponent;
@@ -8,7 +23,7 @@ describe('ProductSwitchComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [ProductSwitchComponent]
+            imports: [ProductSwitchComponent, ProductSwitchWithCustomButtonTestComponent]
         }).compileComponents();
     }));
 
@@ -79,4 +94,115 @@ describe('ProductSwitchComponent', () => {
         expect(emittedValues).toContain(true);
         expect(emittedValues).toContain(false);
     }));
+
+    describe('default input values', () => {
+        it('should have disabled set to false by default', () => {
+            expect(component.disabled()).toBe(false);
+        });
+
+        it('should have closeOnEscapeKey set to true by default', () => {
+            expect(component.closeOnEscapeKey()).toBe(true);
+        });
+
+        it('should have closeOnOutsideClick set to true by default', () => {
+            expect(component.closeOnOutsideClick()).toBe(true);
+        });
+
+        it('should have disableScrollbar set to false by default', () => {
+            expect(component.disableScrollbar()).toBe(false);
+        });
+
+        it('should have triggers set to [click] by default', () => {
+            expect(component.triggers()).toEqual(['click']);
+        });
+
+        it('should have focusTrapped set to false by default', () => {
+            expect(component.focusTrapped()).toBe(false);
+        });
+
+        it('should have focusAutoCapture set to false by default', () => {
+            expect(component.focusAutoCapture()).toBe(false);
+        });
+
+        it('should have isOpen set to false by default', () => {
+            expect(component.isOpen()).toBe(false);
+        });
+    });
+
+    describe('disabled class host binding', () => {
+        it('should not apply disabled class when not disabled', () => {
+            expect(fixture.nativeElement.classList.contains('fd-popover-custom--disabled')).toBe(false);
+        });
+
+        it('should remove disabled class when disabled input changes back to false', () => {
+            fixture.componentRef.setInput('disabled', true);
+            fixture.detectChanges();
+            expect(fixture.nativeElement.classList.contains('fd-popover-custom--disabled')).toBe(true);
+
+            fixture.componentRef.setInput('disabled', false);
+            fixture.detectChanges();
+            expect(fixture.nativeElement.classList.contains('fd-popover-custom--disabled')).toBe(false);
+        });
+    });
+
+    describe('template structure', () => {
+        it('should render fd-product-switch wrapper div', () => {
+            const wrapper = fixture.nativeElement.querySelector('.fd-product-switch');
+            expect(wrapper).toBeTruthy();
+        });
+
+        it('should render fd-popover inside the wrapper', () => {
+            const popover = fixture.debugElement.query(By.css('fd-popover'));
+            expect(popover).toBeTruthy();
+        });
+
+        it('should render the default shellbar grid button when no custom button is projected', () => {
+            const defaultButton = fixture.nativeElement.querySelector('button.fd-shellbar__button');
+            expect(defaultButton).toBeTruthy();
+        });
+    });
+
+    describe('booleanAttribute input transform', () => {
+        it('should coerce string "true" to boolean true for disabled input', () => {
+            fixture.componentRef.setInput('disabled', 'true');
+            fixture.detectChanges();
+            expect(component.disabled()).toBe(true);
+        });
+
+        it('should coerce string "false" to boolean false for disabled input', () => {
+            fixture.componentRef.setInput('disabled', 'false');
+            fixture.detectChanges();
+            expect(component.disabled()).toBe(false);
+        });
+    });
+
+    describe('lifecycle', () => {
+        it('should complete isOpenChange subject on destroy', () => {
+            const completeSpy = jest.fn();
+            component.isOpenChange.subscribe({ complete: completeSpy });
+
+            fixture.destroy();
+
+            expect(completeSpy).toHaveBeenCalled();
+        });
+    });
+
+    describe('custom product switch button projection', () => {
+        let hostFixture: ComponentFixture<ProductSwitchWithCustomButtonTestComponent>;
+
+        beforeEach(() => {
+            hostFixture = TestBed.createComponent(ProductSwitchWithCustomButtonTestComponent);
+            hostFixture.detectChanges();
+        });
+
+        it('should render the custom button when fdProductSwitchButton is projected', () => {
+            const customButton = hostFixture.nativeElement.querySelector('.custom-test-button');
+            expect(customButton).toBeTruthy();
+        });
+
+        it('should not render the default shellbar grid button when a custom button is projected', () => {
+            const defaultButton = hostFixture.nativeElement.querySelector('button.fd-shellbar__button');
+            expect(defaultButton).toBeFalsy();
+        });
+    });
 });
