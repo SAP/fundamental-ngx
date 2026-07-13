@@ -204,7 +204,10 @@ export default {
         totalResultsLabel: '{totalCount} resultater'
     },
     coreProductSwitch: {
-        ariaLabel: 'Produktindikator'
+        ariaLabel: 'Produktindikator',
+        targetBlank: 'opens in a new browser tab',
+        targetParent: 'opens in the parent frame',
+        targetTop: 'opens in the full browser window'
     },
     coreRadio: {
         readOnlyDescription: 'Denne valgknappen er skrivebeskyttet og kan ikke endres.'

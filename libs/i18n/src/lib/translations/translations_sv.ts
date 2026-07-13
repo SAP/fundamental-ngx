@@ -203,7 +203,10 @@ export default {
         totalResultsLabel: '{totalCount} resultat'
     },
     coreProductSwitch: {
-        ariaLabel: 'Product Switch'
+        ariaLabel: 'Product Switch',
+        targetBlank: 'opens in a new browser tab',
+        targetParent: 'opens in the parent frame',
+        targetTop: 'opens in the full browser window'
     },
     coreRadio: {
         readOnlyDescription: 'Den här alternativknappen är skrivskyddad och kan inte ändras.'

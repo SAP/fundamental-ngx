@@ -203,7 +203,10 @@ export default {
         totalResultsLabel: '{totalCount} Hasil'
     },
     coreProductSwitch: {
-        ariaLabel: 'Suis Produk'
+        ariaLabel: 'Suis Produk',
+        targetBlank: 'opens in a new browser tab',
+        targetParent: 'opens in the parent frame',
+        targetTop: 'opens in the full browser window'
     },
     coreRadio: {
         readOnlyDescription: 'Butang radio ini adalah baca sahaja dan tidak boleh diubah.'

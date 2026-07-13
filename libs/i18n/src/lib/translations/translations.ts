@@ -203,7 +203,10 @@ export default {
         totalResultsLabel: '{totalCount} Results'
     },
     coreProductSwitch: {
-        ariaLabel: 'Product Switch'
+        ariaLabel: 'Product Switch',
+        targetBlank: 'opens in a new browser tab',
+        targetParent: 'opens in the parent frame',
+        targetTop: 'opens in the full browser window'
     },
     coreRadio: {
         readOnlyDescription: 'This radio button is read-only and cannot be changed.'

@@ -255,6 +255,12 @@ export interface FdLanguage {
     };
     coreProductSwitch: {
         ariaLabel: FdLanguageKey;
+        /** Appended to aria-label when target="_blank" */
+        targetBlank: FdLanguageKey;
+        /** Appended to aria-label when target="_parent" */
+        targetParent: FdLanguageKey;
+        /** Appended to aria-label when target="_top" */
+        targetTop: FdLanguageKey;
     };
     coreShellbar: {
         collapsedItemMenuLabel: FdLanguageKey;

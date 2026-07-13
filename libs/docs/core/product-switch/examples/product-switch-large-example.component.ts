@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { ProductSwitchItem, ProductSwitchModule } from '@fundamental-ngx/core/product-switch';
+import { ProductSwitchBodyComponent, ProductSwitchItem } from '@fundamental-ngx/core/product-switch';
 
 @Component({
     selector: 'fd-product-switch-large-example',
     templateUrl: './product-switch-large-example.component.html',
-    imports: [ProductSwitchModule]
+    imports: [ProductSwitchBodyComponent]
 })
 export class ProductSwitchLargeExampleComponent {
     list: ProductSwitchItem[] = [
@@ -36,7 +36,9 @@ export class ProductSwitchLargeExampleComponent {
         {
             title: 'Travel & Expense',
             subtitle: 'Concur',
-            icon: 'travel-expense'
+            icon: 'travel-expense',
+            url: 'https://www.sap.com/products/travel-expense-management.html',
+            target: '_blank'
         },
         {
             title: 'Vendor Management',
@@ -72,7 +74,9 @@ export class ProductSwitchLargeExampleComponent {
         },
         {
             title: 'S/4HANA',
-            icon: 'batch-payments'
+            icon: 'batch-payments',
+            url: 'https://www.sap.com/products/erp/s4hana.html',
+            target: '_parent'
         }
     ];
 

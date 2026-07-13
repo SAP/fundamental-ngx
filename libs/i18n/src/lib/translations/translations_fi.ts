@@ -203,7 +203,10 @@ export default {
         totalResultsLabel: '{totalCount} tulosta'
     },
     coreProductSwitch: {
-        ariaLabel: 'Tuotteen vaihto'
+        ariaLabel: 'Tuotteen vaihto',
+        targetBlank: 'opens in a new browser tab',
+        targetParent: 'opens in the parent frame',
+        targetTop: 'opens in the full browser window'
     },
     coreRadio: {
         readOnlyDescription: 'Tämä valintanappi on kirjoitussuojattu, eikä sitä voi muuttaa.'

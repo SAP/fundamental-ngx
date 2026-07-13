@@ -3,11 +3,14 @@ import {
     ChangeDetectionStrategy,
     Component,
     contentChild,
+    effect,
     input,
     model,
+    OnDestroy,
     output,
     signal
 } from '@angular/core';
+import { Subject } from 'rxjs';
 
 import { NgTemplateOutlet } from '@angular/common';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -20,6 +23,7 @@ import {
 } from '@fundamental-ngx/core/popover';
 import { Placement } from '@fundamental-ngx/core/shared';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { ProductSwitchBodyComponent } from '../product-switch-body/product-switch-body.component';
 import { ProductSwitchButtonDirective } from '../product-switch-button.directive';
 import { FD_PRODUCT_SWITCH_COMPONENT } from '../tokens';
 
@@ -46,7 +50,7 @@ import { FD_PRODUCT_SWITCH_COMPONENT } from '../tokens';
         '[class.fd-popover-custom--disabled]': 'disabled()'
     }
 })
-export class ProductSwitchComponent {
+export class ProductSwitchComponent implements OnDestroy {
     /** Placement of the product switch dropdown. */
     readonly placement = input<Placement>('bottom-end');
 
@@ -81,11 +85,28 @@ export class ProductSwitchComponent {
     readonly beforeOpen = output<void>();
 
     /** Event emitted when the product switch open state changes. */
-    readonly isOpenChange = output<boolean>();
+    readonly isOpenChange = new Subject<boolean>();
 
     /** @hidden */
     contentDensity = signal<ContentDensityMode>(ContentDensityMode.COZY);
 
     /** @hidden */
     protected readonly customProductSwitchButton = contentChild(ProductSwitchButtonDirective);
+
+    /** @hidden */
+    private readonly _productSwitchBody = contentChild(ProductSwitchBodyComponent);
+
+    /** @hidden */
+    constructor() {
+        effect(() => {
+            const isOpen = this.isOpen();
+            this._productSwitchBody()?.isOpen.set(isOpen);
+            this.isOpenChange.next(isOpen);
+        });
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this.isOpenChange.complete();
+    }
 }

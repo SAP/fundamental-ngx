@@ -4,6 +4,12 @@
     position: relative;
 }
 
+.fd-product-switch__link {
+    display: contents;
+    color: inherit;
+    text-decoration: none;
+}
+
 .fd-product-switch__item.cdk-drag-dragging {
     outline: none;
     cursor: grabbing;

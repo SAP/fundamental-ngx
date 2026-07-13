@@ -204,7 +204,10 @@ export default {
         totalResultsLabel: '{totalCount} من النتائج'
     },
     coreProductSwitch: {
-        ariaLabel: 'تبديل المنتج'
+        ariaLabel: 'تبديل المنتج',
+        targetBlank: 'opens in a new browser tab',
+        targetParent: 'opens in the parent frame',
+        targetTop: 'opens in the full browser window'
     },
     coreRadio: {
         readOnlyDescription: 'زر الاختيار هذا للقراءة فقط ولا يمكن تغييره.'

@@ -11,7 +11,6 @@
         [noArrow]="noArrow()"
         [disableScrollbar]="disableScrollbar()"
         (beforeOpen)="beforeOpen.emit()"
-        (isOpenChange)="isOpenChange.emit($event)"
     >
         <fd-popover-control>
             @if (!customProductSwitchButton()) {
@@ -19,6 +18,7 @@
                     fd-button
                     [attr.aria-label]="('coreProductSwitch.ariaLabel' | fdTranslate)()"
                     [attr.title]="('coreProductSwitch.ariaLabel' | fdTranslate)()"
+                    aria-haspopup="menu"
                     class="fd-shellbar__button"
                     glyph="grid"
                     fdType="transparent"
@@ -28,7 +28,7 @@
                 <ng-template [ngTemplateOutlet]="customProductSwitchButton()!.templateRef"></ng-template>
             }
         </fd-popover-control>
-        <fd-popover-body>
+        <fd-popover-body [ariaModal]="false">
             <ng-content></ng-content>
         </fd-popover-body>
     </fd-popover>

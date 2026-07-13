@@ -204,7 +204,10 @@ export default {
         totalResultsLabel: '結果: {totalCount}件'
     },
     coreProductSwitch: {
-        ariaLabel: '製品切替'
+        ariaLabel: '製品切替',
+        targetBlank: 'opens in a new browser tab',
+        targetParent: 'opens in the parent frame',
+        targetTop: 'opens in the full browser window'
     },
     coreRadio: {
         readOnlyDescription: 'このラジオボタンは読み取り専用のため変更できません。'
