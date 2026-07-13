@@ -204,10 +204,7 @@ export default {
         totalResultsLabel: '{totalCount} Ergebnisse'
     },
     coreProductSwitch: {
-        ariaLabel: 'Product Switch',
-        targetBlank: 'opens in a new browser tab',
-        targetParent: 'opens in the parent frame',
-        targetTop: 'opens in the full browser window'
+        ariaLabel: 'Product Switch'
     },
     coreRadio: {
         readOnlyDescription: 'Dieses Optionsfeld ist schreibgeschützt und kann nicht geändert werden.'

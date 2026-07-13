@@ -204,10 +204,7 @@ export default {
         totalResultsLabel: 'Rezultata: {totalCount}'
     },
     coreProductSwitch: {
-        ariaLabel: 'Prebacivač proizvoda',
-        targetBlank: 'opens in a new browser tab',
-        targetParent: 'opens in the parent frame',
-        targetTop: 'opens in the full browser window'
+        ariaLabel: 'Prebacivač proizvoda'
     },
     coreRadio: {
         readOnlyDescription: 'Ovaj radio gumb je samo za čitanje i ne može se mijenjati.'

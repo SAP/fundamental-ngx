@@ -203,10 +203,7 @@ export default {
         totalResultsLabel: '{totalCount} ผลลัพธ์'
     },
     coreProductSwitch: {
-        ariaLabel: 'การสลับผลิตภัณฑ์',
-        targetBlank: 'opens in a new browser tab',
-        targetParent: 'opens in the parent frame',
-        targetTop: 'opens in the full browser window'
+        ariaLabel: 'การสลับผลิตภัณฑ์'
     },
     coreRadio: {
         readOnlyDescription: 'ปุ่มตัวเลือกนี้เป็นแบบอ่านอย่างเดียวและไม่สามารถเปลี่ยนแปลงได้'

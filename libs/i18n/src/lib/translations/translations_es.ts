@@ -204,10 +204,7 @@ export default {
         totalResultsLabel: '{totalCount} resultados'
     },
     coreProductSwitch: {
-        ariaLabel: 'Cambiar producto',
-        targetBlank: 'opens in a new browser tab',
-        targetParent: 'opens in the parent frame',
-        targetTop: 'opens in the full browser window'
+        ariaLabel: 'Cambiar producto'
     },
     coreRadio: {
         readOnlyDescription: 'Este botón de selección es de solo lectura y no se puede modificar.'

@@ -204,10 +204,7 @@ export default {
         totalResultsLabel: 'Št. rezultatov: {totalCount}'
     },
     coreProductSwitch: {
-        ariaLabel: 'Preklop med proizvodi',
-        targetBlank: 'opens in a new browser tab',
-        targetParent: 'opens in the parent frame',
-        targetTop: 'opens in the full browser window'
+        ariaLabel: 'Preklop med proizvodi'
     },
     coreRadio: {
         readOnlyDescription: 'Ta izbirni gumb je samo za branje in ga ni mogoče spremeniti.'

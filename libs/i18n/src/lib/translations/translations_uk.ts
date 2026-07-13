@@ -203,10 +203,7 @@ export default {
         totalResultsLabel: 'Результатів: {totalCount}'
     },
     coreProductSwitch: {
-        ariaLabel: 'Перемикач продуктів',
-        targetBlank: 'opens in a new browser tab',
-        targetParent: 'opens in the parent frame',
-        targetTop: 'opens in the full browser window'
+        ariaLabel: 'Перемикач продуктів'
     },
     coreRadio: {
         readOnlyDescription: 'Цей перемикач доступний тільки для читання і не може бути змінений.'

@@ -204,10 +204,7 @@ export default {
         totalResultsLabel: '[[[{totalCount} Řēşűĺţş]]]'
     },
     coreProductSwitch: {
-        ariaLabel: '[[[Ƥŗŏƌűċţ Ŝŵįţċĥ∙∙∙∙∙]]]',
-        targetBlank: 'opens in a new browser tab',
-        targetParent: 'opens in the parent frame',
-        targetTop: 'opens in the full browser window'
+        ariaLabel: '[[[Ƥŗŏƌűċţ Ŝŵįţċĥ∙∙∙∙∙]]]'
     },
     coreRadio: {
         readOnlyDescription: '[[[Ţĥįş ŗąƌįŏ ƃűţţŏŋ įş ŗēąƌ-ŏŋĺŷ ąŋƌ ċąŋŋŏţ ƃē ċĥąŋğēƌ.∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]'

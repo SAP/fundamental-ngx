@@ -202,10 +202,7 @@ export default {
         totalResultsLabel: '{totalCount} 個結果'
     },
     coreProductSwitch: {
-        ariaLabel: '產品切換',
-        targetBlank: 'opens in a new browser tab',
-        targetParent: 'opens in the parent frame',
-        targetTop: 'opens in the full browser window'
+        ariaLabel: '產品切換'
     },
     coreRadio: {
         readOnlyDescription: '此選項按鈕為唯讀且無法變更。'

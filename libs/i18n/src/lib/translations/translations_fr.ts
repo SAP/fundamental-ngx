@@ -205,10 +205,7 @@ export default {
         totalResultsLabel: '{totalCount} résultats'
     },
     coreProductSwitch: {
-        ariaLabel: 'Changement de produit',
-        targetBlank: 'opens in a new browser tab',
-        targetParent: 'opens in the parent frame',
-        targetTop: 'opens in the full browser window'
+        ariaLabel: 'Changement de produit'
     },
     coreRadio: {
         readOnlyDescription: "Cette case d'option est en lecture seule et ne peut pas être modifiée."

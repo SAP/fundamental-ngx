@@ -204,10 +204,7 @@ export default {
         totalResultsLabel: '{totalCount} нәтиже'
     },
     coreProductSwitch: {
-        ariaLabel: 'Өнім ауыстырып-қосқышы',
-        targetBlank: 'opens in a new browser tab',
-        targetParent: 'opens in the parent frame',
-        targetTop: 'opens in the full browser window'
+        ariaLabel: 'Өнім ауыстырып-қосқышы'
     },
     coreRadio: {
         readOnlyDescription: 'Бұл ауыстырып-қосқыш жазудан қорғалған және оны өзгерту мүмкін емес.'

@@ -204,10 +204,7 @@ export default {
         totalResultsLabel: '{totalCount} resultaten'
     },
     coreProductSwitch: {
-        ariaLabel: 'Overstappen op ander product',
-        targetBlank: 'opens in a new browser tab',
-        targetParent: 'opens in the parent frame',
-        targetTop: 'opens in the full browser window'
+        ariaLabel: 'Overstappen op ander product'
     },
     coreRadio: {
         readOnlyDescription: 'Dit keuzerondje is alleen-lezen en kan niet worden gewijzigd.'

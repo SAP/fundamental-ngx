@@ -203,10 +203,7 @@ export default {
         totalResultsLabel: '{totalCount} Resultater'
     },
     coreProductSwitch: {
-        ariaLabel: 'Produktskift',
-        targetBlank: 'opens in a new browser tab',
-        targetParent: 'opens in the parent frame',
-        targetTop: 'opens in the full browser window'
+        ariaLabel: 'Produktskift'
     },
     coreRadio: {
         readOnlyDescription: 'Denne valgknap er skrivebeskyttet og kan ikke ændres.'
