@@ -176,17 +176,6 @@ describe('ProductSwitchComponent', () => {
         });
     });
 
-    describe('lifecycle', () => {
-        it('should complete isOpenChange subject on destroy', () => {
-            const completeSpy = jest.fn();
-            component.isOpenChange.subscribe({ complete: completeSpy });
-
-            fixture.destroy();
-
-            expect(completeSpy).toHaveBeenCalled();
-        });
-    });
-
     describe('custom product switch button projection', () => {
         let hostFixture: ComponentFixture<ProductSwitchWithCustomButtonTestComponent>;
 

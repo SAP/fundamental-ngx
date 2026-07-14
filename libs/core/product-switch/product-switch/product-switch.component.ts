@@ -6,11 +6,9 @@ import {
     effect,
     input,
     model,
-    OnDestroy,
     output,
     signal
 } from '@angular/core';
-import { Subject } from 'rxjs';
 
 import { NgTemplateOutlet } from '@angular/common';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -50,7 +48,7 @@ import { FD_PRODUCT_SWITCH_COMPONENT } from '../tokens';
         '[class.fd-popover-custom--disabled]': 'disabled()'
     }
 })
-export class ProductSwitchComponent implements OnDestroy {
+export class ProductSwitchComponent {
     /** Placement of the product switch dropdown. */
     readonly placement = input<Placement>('bottom-end');
 
@@ -85,7 +83,7 @@ export class ProductSwitchComponent implements OnDestroy {
     readonly beforeOpen = output<void>();
 
     /** Event emitted when the product switch open state changes. */
-    readonly isOpenChange = new Subject<boolean>();
+    readonly isOpenChange = output<boolean>();
 
     /** @hidden */
     contentDensity = signal<ContentDensityMode>(ContentDensityMode.COZY);
@@ -101,12 +99,7 @@ export class ProductSwitchComponent implements OnDestroy {
         effect(() => {
             const isOpen = this.isOpen();
             this._productSwitchBody()?.isOpen.set(isOpen);
-            this.isOpenChange.next(isOpen);
+            this.isOpenChange.emit(isOpen);
         });
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this.isOpenChange.complete();
     }
 }
