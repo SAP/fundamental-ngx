@@ -8,7 +8,7 @@ Skills are markdown-based task playbooks specifically designed for AI assistants
 
 - **Phased workflows** — Step-by-step instructions that guide the AI from discovery through implementation
 - **API lookup patterns** — How to query the MCP server for accurate, up-to-date component APIs before writing code
-- **Project conventions** — Enforced Angular 21+ patterns, NX workspace commands, and library-specific rules
+- **Project conventions** — Enforced Angular 22+ patterns, NX workspace commands, and library-specific rules
 - **Validation steps** — How to verify the output compiles and behaves correctly
 
 ## Available Skills
@@ -29,7 +29,7 @@ Create new Angular projects and generate component implementations from scratch:
 
 Verify and improve the quality of existing code:
 
-- **best-practices** — Audit any component or folder against Angular 21+ conventions and project-specific rules
+- **best-practices** — Audit any component or folder against Angular 22+ conventions and project-specific rules
 - **review-pr** — Review a pull request, reporting blocking issues, suggestions, and nits grouped by severity
 - **create-test** — Generate or update unit tests for a component following project testing conventions
 - **a11y-audit** — Audit a component for WCAG AA accessibility compliance across semantic HTML, ARIA, keyboard, and focus
@@ -39,7 +39,7 @@ Verify and improve the quality of existing code:
 
 Keep the codebase up to date with evolving standards and dependencies:
 
-- **migrate** — Migrate a component or directive from decorator-based patterns to Angular 21+ signal-based patterns
+- **migrate** — Migrate a component or directive from decorator-based patterns to Angular 22+ signal-based patterns
 - **update-docs** — Verify that documentation examples are in sync with a component's current public API and fix any drift
 - **adopt-styles** — Apply breaking changes from `fundamental-styles` into the Angular component templates and class bindings
 - **i18n-manage** — Add, rename, or remove i18n translation keys across `FdLanguage`, `.properties` files, and generated types
@@ -139,7 +139,7 @@ fundamental-ngx provides two complementary ways to access information:
 Use **Skills** for:
 
 - Building a feature end-to-end (new form, table, page layout)
-- Migrating existing code to Angular 21+ signal patterns
+- Migrating existing code to Angular 22+ signal patterns
 - Reviewing a PR or auditing a component for quality
 - Running pre-PR quality checks
 - Managing i18n keys or adopting style library changes

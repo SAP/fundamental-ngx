@@ -64,7 +64,7 @@ describe('ProductSwitchComponent', () => {
         expect(fixture.nativeElement.classList.contains('fd-popover-custom--disabled')).toBe(true);
     });
 
-    it('should emit isOpenChange when open state changes', fakeAsync(() => {
+    it('should emit isOpenChange exactly once per state change', fakeAsync(() => {
         const emittedValues: boolean[] = [];
         component.isOpenChange.subscribe((value: boolean) => emittedValues.push(value));
 
@@ -72,11 +72,12 @@ describe('ProductSwitchComponent', () => {
         fixture.detectChanges();
         tick();
 
+        expect(emittedValues).toEqual([true]);
+
         component.isOpen.set(false);
         fixture.detectChanges();
         tick();
 
-        expect(emittedValues).toContain(true);
-        expect(emittedValues).toContain(false);
+        expect(emittedValues).toEqual([true, false]);
     }));
 });
