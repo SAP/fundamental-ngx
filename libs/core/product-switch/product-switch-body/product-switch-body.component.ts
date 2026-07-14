@@ -5,6 +5,7 @@ import {
     ChangeDetectorRef,
     Component,
     computed,
+    DestroyRef,
     effect,
     ElementRef,
     EventEmitter,
@@ -66,20 +67,29 @@ export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
     protected readonly FD_DEFAULT_ICON_FONT_FAMILY = FD_DEFAULT_ICON_FONT_FAMILY;
 
     /** @hidden Returns the accessible label for a product item. */
-    protected readonly _itemAriaLabel = computed(() => (item: ProductSwitchItem) => {
-        const parts = [item.title];
-        if (item.subtitle) {
-            parts.push(item.subtitle);
-        }
-        if (item.target === '_blank') {
-            parts.push(this._targetBlank());
-        } else if (item.target === '_parent') {
-            parts.push(this._targetParent());
-        } else if (item.target === '_top') {
-            parts.push(this._targetTop());
-        }
-        return parts.join(' ');
+    protected readonly _itemAriaLabel = computed(() => {
+        const targetLabels = this._targetLabels();
+        return (item: ProductSwitchItem) => {
+            const parts = [item.title];
+            if (item.subtitle) {
+                parts.push(item.subtitle);
+            }
+            if (item.target && item.target !== '_self') {
+                const label = targetLabels[item.target];
+                if (label) {
+                    parts.push(label);
+                }
+            }
+            return parts.join(' ');
+        };
     });
+
+    /** @hidden Resolves all target i18n strings once per change detection cycle. */
+    private readonly _targetLabels = computed(() => ({
+        _blank: this._targetBlank(),
+        _parent: this._targetParent(),
+        _top: this._targetTop()
+    }));
 
     /** @hidden */
     private readonly _translate = resolveTranslationSignalFn();
@@ -100,6 +110,9 @@ export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
     private readonly _elementRef: ElementRef<HTMLElement> = inject(ElementRef);
 
     /** @hidden */
+    private readonly _destroyRef = inject(DestroyRef);
+
+    /** @hidden */
     private _triggerElement: HTMLElement | null = null;
 
     /** @hidden */
@@ -111,9 +124,11 @@ export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
         private readonly _cdr: ChangeDetectorRef
     ) {
         effect(() => this._syncFocusWithOpenState());
-        this._elementRef.nativeElement.addEventListener('focusin', (event: FocusEvent) =>
-            this._trackFocusedItem(event)
-        );
+
+        const el = this._elementRef.nativeElement;
+        const onFocusIn = (event: FocusEvent): void => this._trackFocusedItem(event);
+        el.addEventListener('focusin', onFocusIn);
+        this._destroyRef.onDestroy(() => el.removeEventListener('focusin', onFocusIn));
     }
 
     /** @hidden */
