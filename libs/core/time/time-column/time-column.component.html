@@ -34,7 +34,7 @@
         (dragStateChange)="handleDrag($event)"
         fdCarousel
     >
-        @for (row of rows; track row; let index = $index) {
+        @for (row of rows; track row.value; let index = $index) {
             <li
                 class="fd-time__item"
                 fdCarouselItem
