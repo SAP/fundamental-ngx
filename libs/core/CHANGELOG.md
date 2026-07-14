@@ -1,3 +1,13 @@
+## 0.63.2-rc.4 (2026-07-14)
+
+### 🩹 Fixes
+
+- **core:** track time column rows by value to prevent DOM re-creation ([#14359](https://github.com/SAP/fundamental-ngx/pull/14359), [#14362](https://github.com/SAP/fundamental-ngx/pull/14362))
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.63.2-rc.3 (2026-07-13)
 
 This was a version bump only for core to align it with other projects, there were no code changes.
