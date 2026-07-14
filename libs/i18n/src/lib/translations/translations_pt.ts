@@ -203,7 +203,10 @@ export default {
         totalResultsLabel: '{totalCount} resultados'
     },
     coreProductSwitch: {
-        ariaLabel: 'Alternância de produtos'
+        ariaLabel: 'Alternância de produtos',
+        targetBlank: 'opens in a new browser tab',
+        targetParent: 'opens in the parent frame',
+        targetTop: 'opens in the full browser window'
     },
     coreRadio: {
         readOnlyDescription: 'Este botão de opção é somente leitura e não pode ser alterado.'

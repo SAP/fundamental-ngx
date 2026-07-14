@@ -203,7 +203,10 @@ export default {
         totalResultsLabel: 'Počet výsledků: {totalCount}'
     },
     coreProductSwitch: {
-        ariaLabel: 'Přepínač produktů'
+        ariaLabel: 'Přepínač produktů',
+        targetBlank: 'opens in a new browser tab',
+        targetParent: 'opens in the parent frame',
+        targetTop: 'opens in the full browser window'
     },
     coreRadio: {
         readOnlyDescription: 'Tento přepínač je jen ke čtení a nelze jej změnit.'
