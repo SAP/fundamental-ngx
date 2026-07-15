@@ -9,9 +9,9 @@
         [triggers]="_headerPopoverTriggers"
         (isOpenChange)="_popoverOpened($event)"
     >
-        <fdp-list [noBorder]="true" [navigated]="true" role="menu">
+        <fdp-list [noBorder]="true" [navigated]="true">
             @for (item of _popoverItems$(); track item) {
-                <li fdp-free-content-list-item role="menuitem">
+                <li fdp-free-content-list-item>
                     <ng-template
                         [ngTemplateOutlet]="item"
                         [ngTemplateOutletContext]="{ popover: popover }"
@@ -30,7 +30,6 @@
     <ng-template fdkTemplate="sortingAscPopoverItem" let-popover="popover">
         <div
             fd-list-link
-            role="button"
             [focusable]="true"
             (click)="_setColumnHeaderSortBy(column.key, SORT_DIRECTION.ASC)"
             (keydown.enter)="_setColumnHeaderSortBy(column.key, SORT_DIRECTION.ASC)"
