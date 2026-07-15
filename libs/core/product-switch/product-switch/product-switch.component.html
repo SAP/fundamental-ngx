@@ -11,7 +11,6 @@
         [noArrow]="noArrow()"
         [disableScrollbar]="disableScrollbar()"
         (beforeOpen)="beforeOpen.emit()"
-        (isOpenChange)="isOpenChange.next($event)"
     >
         <fd-popover-control>
             @if (!customProductSwitchButton()) {

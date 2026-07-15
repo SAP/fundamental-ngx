@@ -240,7 +240,10 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
                 this.beforeOpen.emit();
             }
 
-            this.isOpenChange.next(openState);
+            // Emit only when state actually changes.
+            if (openState !== previousIsOpen) {
+                this.isOpenChange.next(openState);
+            }
 
             // Sync to service only if not already syncing and not in mobile mode (prevents loop).
             // In mobile mode, the dialog handles open/close — the popover service should not be involved.

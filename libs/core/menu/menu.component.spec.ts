@@ -206,6 +206,17 @@ describe('MenuComponent', () => {
             expect(emittedValues).toContain(false);
         }));
 
+        it('should not emit isOpenChange when open state does not change', fakeAsync(() => {
+            const emittedValues: boolean[] = [];
+            menu.isOpenChange.subscribe((value) => emittedValues.push(value));
+
+            testComponent.mobileMode = true;
+            fixture.detectChanges();
+            tick();
+
+            expect(emittedValues).toEqual([]);
+        }));
+
         it('should emit beforeOpen when menu is about to open', fakeAsync(() => {
             let beforeOpenEmitted = false;
             menu.beforeOpen.subscribe(() => {

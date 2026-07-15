@@ -82,7 +82,7 @@ export class ProductSwitchComponent {
     /** Event emitted right before the product switch is being opened. */
     readonly beforeOpen = output<void>();
 
-    /** Event emitted when the product switch open state changes. */
+    /** Emits when product switch open state changes - for backwards compatibility with programmatic subscribers. */
     readonly isOpenChange = new Subject<boolean>();
 
     /** @hidden */
@@ -95,11 +95,13 @@ export class ProductSwitchComponent {
     constructor() {
         let previousIsOpen = false;
         effect(() => {
-            const isOpen = this.isOpen();
-            if (isOpen !== previousIsOpen) {
-                this.isOpenChange.next(isOpen);
-                previousIsOpen = isOpen;
+            const openState = this.isOpen();
+
+            if (openState !== previousIsOpen) {
+                this.isOpenChange.next(openState);
             }
+
+            previousIsOpen = openState;
         });
     }
 }
