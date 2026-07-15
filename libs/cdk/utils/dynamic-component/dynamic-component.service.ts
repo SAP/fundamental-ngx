@@ -49,8 +49,10 @@ export class DynamicComponentService {
     }
 
     /**
-     * @deprecated `NgModule`-based lazy loading is deprecated. This method will be removed in a future release.
-     * Use standalone components with dynamic `import()` instead.
+     * @deprecated `NgModule`-based lazy loading is no longer supported. Use standalone components with
+     * dynamic `import()` and `ViewContainerRef.createComponent()` instead. This method will be removed
+     * in a future release; it has no internal callers and its `NgModuleFactory` / `Compiler` dependencies
+     * are themselves deprecated since Angular 14.
      */
     async createDynamicModule<M, C>(
         content: TemplateRef<any> | Type<any> | string | Record<string, any>,
@@ -62,6 +64,9 @@ export class DynamicComponentService {
         const moduleFactory =
             moduleType instanceof NgModuleFactory ? moduleType : await this._compiler.compileModuleAsync<M>(moduleType);
         const moduleRef = moduleFactory.create(injector || this._injector);
+
+        containerRef.clear();
+
         const componentRef: ComponentRef<C> = containerRef.createComponent(componentType, {
             ngModuleRef: moduleRef
         });
