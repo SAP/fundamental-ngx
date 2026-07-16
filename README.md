@@ -66,7 +66,7 @@ Angular wrappers for the [@ui5/webcomponents](https://sap.github.io/ui5-webcompo
 ### Requirements
 
 - Angular 22 or newer
-- TypeScript 5.9 or newer
+- TypeScript 6 or newer
 - Node.js (LTS)
 
 **Peer dependencies** (installed automatically by `ng add`, required for manual installs):
