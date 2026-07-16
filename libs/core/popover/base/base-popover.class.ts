@@ -20,7 +20,9 @@ export { TriggerConfig };
  * This is used by PopoverService and was extended by PopoverComponent and MenuComponent.
  *
  * **For Components:** Use signal inputs with the `input()` function to declare these properties.
- * Components should also define their own `isOpenChange = output<boolean>()` and `beforeOpen = output<void>()` outputs.
+ * Use `model()` for `isOpen` so Angular provides template-level `(isOpenChange)` automatically.
+ * If programmatic subscriptions are needed for backwards compatibility, expose a dedicated stream
+ * (for example `Subject<boolean>`) and emit on real state transitions.
  *
  * **For Services:** Use regular signal instances to store these values.
  */

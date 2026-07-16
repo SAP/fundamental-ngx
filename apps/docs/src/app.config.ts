@@ -1,4 +1,4 @@
-import { HttpClient, provideHttpClient } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withXhr } from '@angular/common/http';
 import { ApplicationConfig, importProvidersFrom, inject, provideEnvironmentInitializer, signal } from '@angular/core';
 import { PreloadAllModules, provideRouter, withHashLocation, withPreloading } from '@angular/router';
 import { provideContentDensity } from '@fundamental-ngx/core/content-density';
@@ -30,7 +30,7 @@ import { translations } from './environments/translations';
 
 export const appConfig: ApplicationConfig = {
     providers: [
-        provideHttpClient(),
+        provideHttpClient(withXhr()),
         provideRouter(applicationRoutes, withPreloading(PreloadAllModules), withHashLocation()),
         provideTheming({ defaultTheme: 'sap_horizon' }),
         themingInitializer(),

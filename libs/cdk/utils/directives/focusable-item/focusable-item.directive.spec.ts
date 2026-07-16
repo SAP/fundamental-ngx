@@ -1,6 +1,6 @@
 import { InteractivityChecker, LiveAnnouncer } from '@angular/cdk/a11y';
 import { ENTER, ESCAPE, F2, MAC_ENTER } from '@angular/cdk/keycodes';
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, input } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { Subject, of } from 'rxjs';
 import { TabbableElementService } from '../../services';
@@ -11,11 +11,11 @@ import { FocusableObserver } from './focusable.observer';
     standalone: true,
     imports: [FocusableItemDirective],
     template: `
-        @if (announcer) {
+        @if (announcer()) {
             <div
                 fdkFocusableItem
-                [fdkFocusableItem]="isFocusable"
-                [cellFocusedEventAnnouncer]="announcer"
+                [fdkFocusableItem]="isFocusable()"
+                [cellFocusedEventAnnouncer]="announcer()"
                 (cellFocused)="onCellFocused($event)"
                 (focusableChildElementFocused)="onChildFocused()"
             >
@@ -25,7 +25,7 @@ import { FocusableObserver } from './focusable.observer';
         } @else {
             <div
                 fdkFocusableItem
-                [fdkFocusableItem]="isFocusable"
+                [fdkFocusableItem]="isFocusable()"
                 (cellFocused)="onCellFocused($event)"
                 (focusableChildElementFocused)="onChildFocused()"
             >
@@ -40,8 +40,8 @@ class TestComponent {
     @ViewChild('childButton', { static: false }) childButton: any;
     @ViewChild('childInput', { static: false }) childInput: any;
 
-    isFocusable = true;
-    announcer?: CellFocusedEventAnnouncer;
+    readonly isFocusable = input(true);
+    readonly announcer = input<CellFocusedEventAnnouncer | undefined>(undefined);
     cellFocusedCount = 0;
     childFocusedCount = 0;
 
@@ -114,7 +114,7 @@ describe('FocusableItemDirective', () => {
     });
 
     it('should set tabindex to -1 when not focusable', () => {
-        component.isFocusable = false;
+        fixture.componentRef.setInput('isFocusable', false);
         fixture.detectChanges();
         expect(element.getAttribute('tabindex')).toBe('-1');
     });
@@ -125,7 +125,7 @@ describe('FocusableItemDirective', () => {
 
     it('should return focusable state from isFocusable()', () => {
         expect(directive.isFocusable()).toBe(true);
-        component.isFocusable = false;
+        fixture.componentRef.setInput('isFocusable', false);
         fixture.detectChanges();
         expect(directive.isFocusable()).toBe(false);
     });
@@ -167,7 +167,7 @@ describe('FocusableItemDirective', () => {
 
         it('should announce position using custom announcer', fakeAsync(() => {
             const customAnnouncer = jest.fn((pos: FocusableItemPosition) => `Custom: ${pos.rowIndex},${pos.colIndex}`);
-            component.announcer = customAnnouncer;
+            fixture.componentRef.setInput('announcer', customAnnouncer);
             fixture.detectChanges();
 
             // Re-get references since @if (announcer) recreated the DOM
@@ -439,7 +439,7 @@ describe('FocusableItemDirective', () => {
 
     describe('input and output bindings', () => {
         it('should accept fdkFocusableItem input', () => {
-            component.isFocusable = false;
+            fixture.componentRef.setInput('isFocusable', false);
             fixture.detectChanges();
             expect(directive.fdkFocusableItem()).toBe(false);
         });

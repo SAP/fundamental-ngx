@@ -10,8 +10,8 @@
     Trigger
 </div>
 <div>
-    Emitted event type is <code>{{ fdClickEvent?.type | json }}</code>
+    Emitted event type is <code>{{ $safeNavigationMigration(fdClickEvent?.type) | json }}</code>
     @if (fdClickEvent?.code) {
-        , Key is <code>{{ fdClickEvent?.code | json }}</code>
+        , Key is <code>{{ $safeNavigationMigration(fdClickEvent?.code) | json }}</code>
     }
 </div>

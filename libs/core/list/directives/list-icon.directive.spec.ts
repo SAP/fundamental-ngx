@@ -1,9 +1,9 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, input } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ListModule } from '../list.module';
 
 @Component({
-    template: ` <span #componentElement fd-list-icon [glyph]="glyph"> </span> `,
+    template: ` <span #componentElement fd-list-icon [glyph]="glyph()"> </span> `,
     standalone: true,
     imports: [ListModule]
 })
@@ -11,7 +11,7 @@ class TestComponent {
     @ViewChild('componentElement', { read: ElementRef })
     ref: ElementRef;
 
-    glyph: string | null = null;
+    readonly glyph = input<string | null>(null);
 }
 
 describe('ListTitleComponent', () => {
@@ -41,7 +41,7 @@ describe('ListTitleComponent', () => {
     it('should assign additional classes', () => {
         const iconName = 'custom-icon';
 
-        component.glyph = iconName;
+        fixture.componentRef.setInput('glyph', iconName);
 
         fixture.detectChanges();
 

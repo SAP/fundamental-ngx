@@ -68,7 +68,9 @@ async function loadCemData(options: GenerateExecutorSchema, context: ExecutorCon
     try {
         cemFilePath = require.resolve(options.cemFile, { paths: [context.root] });
     } catch (error) {
-        throw new Error(`Failed to resolve CEM file at path ${options.cemFile}. Original error: ${error.message}`);
+        throw new Error(
+            `Failed to resolve CEM file at path ${options.cemFile}. Original error: ${error instanceof Error ? error.message : String(error)}`
+        );
     }
 
     const cemContent = await readFile(cemFilePath, 'utf-8');

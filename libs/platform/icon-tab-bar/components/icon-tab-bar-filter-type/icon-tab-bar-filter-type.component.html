@@ -24,7 +24,9 @@
                     @if (_totalTab?.counter) {
                         <span class="fd-icon-tab-bar__filter-counter">{{ _totalTab?.counter }}</span>
                     }
-                    <span class="fd-icon-tab-bar__filter-label">{{ _totalTab?.label | fdkAsyncOrSync }}</span>
+                    <span class="fd-icon-tab-bar__filter-label">{{
+                        $safeNavigationMigration(_totalTab?.label) | fdkAsyncOrSync
+                    }}</span>
                 </div>
             </a>
         </li>

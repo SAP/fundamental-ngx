@@ -22,7 +22,8 @@
         "types": [],
         "lib": ["dom", "es2023"],
         "module": "preserve",
-        "moduleResolution": "bundler"
+        "moduleResolution": "bundler",
+        "rootDir": "../../"
     },
     "angularCompilerOptions": {
         "enableIvy": true,

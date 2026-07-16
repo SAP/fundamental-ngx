@@ -2,7 +2,7 @@
     [disabled]="!!_cvaControl.cvaDirective?.disabled"
     [(ngModel)]="value"
     [state]="_cvaControl?.cvaDirective?.normalizedState$() || 'default'"
-    [stateMessage]="_cvaControl.cvaDirective?.stateMessage"
+    [stateMessage]="$safeNavigationMigration(_cvaControl.cvaDirective?.stateMessage)"
 >
     <!-- Before input addons area -->
     @for (addon of _beforeInputAddons; track addon) {
@@ -19,10 +19,10 @@
             [disabled]="!!_cvaControl.cvaDirective?.disabled"
             [class.is-disabled]="!!_cvaControl.cvaDirective?.disabled"
             [(ngModel)]="value"
-            [ariaLabel]="_cvaControl.cvaDirective?.ariaLabel"
-            [ariaLabelledBy]="_cvaControl.cvaDirective?.ariaLabelledBy"
+            [ariaLabel]="$safeNavigationMigration(_cvaControl.cvaDirective?.ariaLabel)"
+            [ariaLabelledBy]="$safeNavigationMigration(_cvaControl.cvaDirective?.ariaLabelledBy)"
             [attr.required]="_cvaControl.cvaDirective?.required"
-            (input)="_onChangeInputValue($any($event.target)?.value)"
+            (input)="_onChangeInputValue($safeNavigationMigration($any($event.target)?.value))"
             (focus)="_cvaControl.cvaDirective?._onFocusChanged(true)"
             (blur)="_cvaControl.cvaDirective?._onFocusChanged(false)"
             (keypress)="_onKeyPress($event)"

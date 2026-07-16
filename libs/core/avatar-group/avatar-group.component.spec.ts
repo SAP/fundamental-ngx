@@ -1,5 +1,5 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
@@ -55,19 +55,19 @@ class AvatarGroupIndividualTestComponent {}
 class AvatarGroupGroupTypeTestComponent {}
 
 @Component({
-    template: `<fd-avatar-group type="group" [ariaLabel]="label"></fd-avatar-group>`,
+    template: `<fd-avatar-group type="group" [ariaLabel]="label()"></fd-avatar-group>`,
     imports: [AvatarGroupComponent]
 })
 class AvatarGroupGroupTypeWithLabelTestComponent {
-    label: string | undefined;
+    readonly label = input<string | undefined>(undefined);
 }
 
 @Component({
-    template: `<fd-avatar-group type="individual" [ariaLabel]="label"></fd-avatar-group>`,
+    template: `<fd-avatar-group type="individual" [ariaLabel]="label()"></fd-avatar-group>`,
     imports: [AvatarGroupComponent]
 })
 class AvatarGroupIndividualWithLabelTestComponent {
-    label: string | undefined;
+    readonly label = input<string | undefined>(undefined);
 }
 
 describe('AvatarGroupComponent', () => {
@@ -83,7 +83,6 @@ describe('AvatarGroupComponent', () => {
 
     describe('group type', () => {
         let fixture: ComponentFixture<AvatarGroupGroupTypeWithLabelTestComponent>;
-        let wrapper: AvatarGroupGroupTypeWithLabelTestComponent;
 
         beforeEach(async () => {
             await TestBed.configureTestingModule({
@@ -91,7 +90,6 @@ describe('AvatarGroupComponent', () => {
             }).compileComponents();
 
             fixture = TestBed.createComponent(AvatarGroupGroupTypeWithLabelTestComponent);
-            wrapper = fixture.componentInstance;
             fixture.detectChanges();
         });
 
@@ -106,7 +104,7 @@ describe('AvatarGroupComponent', () => {
         });
 
         it('should set aria-label from the ariaLabel input', () => {
-            wrapper.label = 'My avatar group';
+            fixture.componentRef.setInput('label', 'My avatar group');
             fixture.detectChanges();
 
             const host: HTMLElement = fixture.nativeElement.querySelector('fd-avatar-group-host');
@@ -123,7 +121,6 @@ describe('AvatarGroupComponent', () => {
 
     describe('individual type', () => {
         let fixture: ComponentFixture<AvatarGroupIndividualWithLabelTestComponent>;
-        let wrapper: AvatarGroupIndividualWithLabelTestComponent;
 
         beforeEach(async () => {
             await TestBed.configureTestingModule({
@@ -131,7 +128,6 @@ describe('AvatarGroupComponent', () => {
             }).compileComponents();
 
             fixture = TestBed.createComponent(AvatarGroupIndividualWithLabelTestComponent);
-            wrapper = fixture.componentInstance;
             fixture.detectChanges();
         });
 
@@ -151,7 +147,7 @@ describe('AvatarGroupComponent', () => {
         });
 
         it('should set aria-label from the ariaLabel input', () => {
-            wrapper.label = 'My individual group';
+            fixture.componentRef.setInput('label', 'My individual group');
             fixture.detectChanges();
 
             const host: HTMLElement = fixture.nativeElement.querySelector('fd-avatar-group-host');

@@ -114,7 +114,7 @@ export async function sortKeys(options: SortKeysOptions): Promise<SortKeysResult
         return {
             success: false,
             filesModified: [],
-            error: error.message
+            error: error instanceof Error ? error.message : String(error)
         };
     }
 }

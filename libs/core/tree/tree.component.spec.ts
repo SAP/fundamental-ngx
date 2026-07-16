@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, input } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { FD_DATA_SOURCE_TRANSFORMER } from '@fundamental-ngx/cdk/data-source';
@@ -27,8 +27,8 @@ interface TreeItemData {
         <fd-tree
             class="fd-custom-tree-class"
             [(ngModel)]="model"
-            [selection]="selection"
-            [selectionPlacement]="selectionPlacement"
+            [selection]="selection()"
+            [selectionPlacement]="selectionPlacement()"
             [noBorder]="noBorder"
         >
             <fd-tree-item value="first">
@@ -82,8 +82,8 @@ export class ProjectedTreeItemsComponent {
 
     model = '';
 
-    selection: SelectionType = 'none';
-    selectionPlacement: SelectionPlacement = 'none';
+    readonly selection = input<SelectionType>('none');
+    readonly selectionPlacement = input<SelectionPlacement>('none');
     noBorder = false;
     expanded = false;
 }
@@ -225,24 +225,24 @@ describe('Tree component with projected nodes', () => {
     });
 
     it('should enable selection', async () => {
-        component.selection = 'single';
-        component.selectionPlacement = 'none';
+        fixture.componentRef.setInput('selection', 'single');
+        fixture.componentRef.setInput('selectionPlacement', 'none');
         fixture.detectChanges();
         expect(treeElement.nativeElement.querySelector('fd-radio-button')).toBeFalsy();
         expect(treeElement.nativeElement.querySelector('fd-checkbox')).toBeFalsy();
-        component.selectionPlacement = 'left';
+        fixture.componentRef.setInput('selectionPlacement', 'left');
         fixture.detectChanges();
         expect(treeElement.nativeElement.querySelector('fd-radio-button')).toBeTruthy();
         expect(treeElement.nativeElement.querySelector('fd-checkbox')).toBeFalsy();
-        component.selection = 'multiple';
+        fixture.componentRef.setInput('selection', 'multiple');
         fixture.detectChanges();
         expect(treeElement.nativeElement.querySelector('fd-radio-button')).toBeFalsy();
         expect(treeElement.nativeElement.querySelector('fd-checkbox')).toBeTruthy();
     });
 
     it('should mark selected value', async () => {
-        component.selection = 'single';
-        component.selectionPlacement = 'none';
+        fixture.componentRef.setInput('selection', 'single');
+        fixture.componentRef.setInput('selectionPlacement', 'none');
         component.model = 'first';
         fixture.detectChanges();
         fixture.detectChanges();

@@ -1,10 +1,10 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, input } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ListModule } from '../list.module';
 
 @Component({
     template: `
-        <li #componentElement fd-list-link [navigated]="navigated" [navigationIndicator]="navigationIndicator">
+        <li #componentElement fd-list-link [navigated]="navigated()" [navigationIndicator]="navigationIndicator()">
             ListLinkComponent
         </li>
     `,
@@ -15,9 +15,9 @@ class TestComponent {
     @ViewChild('componentElement', { read: ElementRef })
     ref: ElementRef;
 
-    navigated = false;
+    readonly navigated = input(false);
 
-    navigationIndicator = false;
+    readonly navigationIndicator = input(false);
 }
 
 describe('ListTitleComponent', () => {
@@ -45,8 +45,8 @@ describe('ListTitleComponent', () => {
     });
 
     it('should assign additional classes', () => {
-        component.navigated = true;
-        component.navigationIndicator = true;
+        fixture.componentRef.setInput('navigated', true);
+        fixture.componentRef.setInput('navigationIndicator', true);
 
         fixture.detectChanges();
 

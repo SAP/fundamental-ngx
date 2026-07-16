@@ -27,6 +27,7 @@ import {
 import { DOWN_ARROW } from '@angular/cdk/keycodes';
 import { CdkOverlayOrigin, ConnectedPosition } from '@angular/cdk/overlay';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Subject } from 'rxjs';
 
 /**
  * ARIA role values commonly used for popover bodies. Provides autocomplete for
@@ -220,8 +221,8 @@ export class PopoverComponent implements AfterViewInit, AfterContentInit, OnDest
     /** Two-way binding for popover open state */
     readonly isOpen = model(false);
 
-    /** Event emitted when the state of the isOpen property changes. */
-    readonly isOpenChange = output<boolean>();
+    /** Event emitted when the state of the isOpen property changes - for backwards compatibility with programmatic subscribers */
+    readonly isOpenChange = new Subject<boolean>();
 
     /** Event emitted right before the popover is being opened. */
     readonly beforeOpen = output<void>();
@@ -332,7 +333,7 @@ export class PopoverComponent implements AfterViewInit, AfterContentInit, OnDest
 
             // Emit isOpenChange when state changes
             if (currentIsOpen !== previousIsOpen) {
-                this.isOpenChange.emit(currentIsOpen);
+                this.isOpenChange.next(currentIsOpen);
             }
 
             // Sync to service only if not already syncing and not in mobile mode (prevents loop).

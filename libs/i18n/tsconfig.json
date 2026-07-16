@@ -25,7 +25,8 @@
         "noFallthroughCasesInSwitch": true,
         "module": "preserve",
         "moduleResolution": "bundler",
-        "lib": ["dom", "es2023"]
+        "lib": ["dom", "es2023"],
+        "rootDir": "../../"
     },
     "angularCompilerOptions": {
         "strictInjectionParameters": true,
