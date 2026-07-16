@@ -1,10 +1,10 @@
 ---
 name: migrate
-description: Migrate a component or directive to Angular 21+ signal-based patterns
+description: Migrate a component or directive to Angular 22+ signal-based patterns
 argument-hint: [component-path-or-folder]
 ---
 
-# Angular 21+ Migration: $ARGUMENTS
+# Angular 22+ Migration: $ARGUMENTS
 
 If `$ARGUMENTS` is empty, ask the user for a component path or folder before proceeding.
 
