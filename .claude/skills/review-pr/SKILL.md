@@ -1,6 +1,6 @@
 ---
 name: review-pr
-description: Review a pull request against project conventions and Angular 21+ best practices
+description: Review a pull request against project conventions and Angular 22+ best practices
 argument-hint: [PR-number]
 context: fork
 agent: general-purpose
@@ -23,7 +23,7 @@ Fetch the PR details:
 
 For each changed file, check the applicable sections below. Report findings grouped by severity: **Blocking** (must fix), **Suggestion** (should fix), **Nit** (optional).
 
-### 1. Angular 21+ Patterns
+### 1. Angular 22+ Patterns
 
 - [ ] **New code** uses `input()` / `output()` / `model()` / `linkedSignal()`. Existing `@Input()` / `@Output()` decorators being modified should prefer migration to signal functions, but it's not blocking.
 - [ ] `host: {}` in decorator — no `@HostBinding()` / `@HostListener()`

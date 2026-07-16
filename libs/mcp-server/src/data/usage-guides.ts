@@ -522,7 +522,7 @@ themingInitializer()
             }
         ],
         commonPitfalls: [
-            'Package name change: replace @ui5/webcomponents-ngx with @fundamental-ngx/ui5-webcomponents. The old package declares peerDependencies on @angular/core ^20 and is incompatible with Angular 21. Do not use --legacy-peer-deps to force it in.',
+            'Package name change: replace @ui5/webcomponents-ngx with @fundamental-ngx/ui5-webcomponents. The old package declares peerDependencies on @angular/core ^20 and is incompatible with Angular 22. Do not use --legacy-peer-deps to force it in.',
             'Import paths changed: old package used @ui5/webcomponents-ngx/dist/generated/... New package uses @fundamental-ngx/ui5-webcomponents/<component-name> (e.g. @fundamental-ngx/ui5-webcomponents/input, @fundamental-ngx/ui5-webcomponents/button).',
             'All kebab-case attribute bindings must become camelCase Angular property bindings. A template like value-state="Error" will silently pass "Error" as a string to the web component\'s HTML attribute (not the Angular input), bypassing type checking and possibly having no effect.',
             'ValueState "Error" no longer exists — the type now only accepts "None" | "Positive" | "Critical" | "Negative" | "Information". Passing the old string "Error" compiles but produces no visual error state at runtime. Always use "Negative" for validation errors.',
@@ -563,7 +563,7 @@ npm install @fundamental-ngx/ui5-webcomponents @fundamental-ngx/cdk
         summary:
             'Angular wrappers for UI5 Web Components, published under @fundamental-ngx/ui5-webcomponents. ' +
             'The older @ui5/webcomponents-ngx package is deprecated and incompatible with Angular 20+. ' +
-            'Always use @fundamental-ngx/ui5-webcomponents which supports Angular 21 natively.',
+            'Always use @fundamental-ngx/ui5-webcomponents which supports Angular 22 natively.',
         decisionTree: [
             {
                 question: 'Which UI5 package should I install?',
@@ -580,14 +580,14 @@ npm install @fundamental-ngx/ui5-webcomponents @fundamental-ngx/cdk
                         answer: '@ui5/webcomponents-ngx (deprecated — do not use)',
                         recommendation:
                             'This package is deprecated and declares peerDependencies on @angular/core ^20 — it is ' +
-                            'incompatible with Angular 21. Migrate to @fundamental-ngx/ui5-webcomponents.',
+                            'incompatible with Angular 22. Migrate to @fundamental-ngx/ui5-webcomponents.',
                         example: ''
                     }
                 ]
             }
         ],
         commonPitfalls: [
-            '@ui5/webcomponents-ngx is deprecated. The successor is @fundamental-ngx/ui5-webcomponents from this monorepo. Using the old package with --legacy-peer-deps on Angular 21 may appear to install but will cause build or runtime errors.',
+            '@ui5/webcomponents-ngx is deprecated. The successor is @fundamental-ngx/ui5-webcomponents from this monorepo. Using the old package with --legacy-peer-deps on Angular 22 may appear to install but will cause build or runtime errors.',
             '@fundamental-ngx/cdk is a required peer dependency that npm does not always install automatically. If you see "Could not resolve @fundamental-ngx/cdk/utils" or similar import errors, install it explicitly: npm install @fundamental-ngx/cdk',
             'UI5 component import paths follow the pattern @fundamental-ngx/ui5-webcomponents/<component-name>. Example: import { Ui5ButtonComponent } from "@fundamental-ngx/ui5-webcomponents/button".',
             'All three @fundamental-ngx packages (core, cdk, ui5-webcomponents) must be the same semver minor version. Mixing 0.61.x with 0.62.x will cause peer-dep conflicts.',
