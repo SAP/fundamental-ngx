@@ -1,10 +1,4 @@
-<div
-    fd-title
-    [wrap]="!!settings?.wrapSectionTitle"
-    role="heading"
-    class="fd-title--h5 fdp-settings-generator__title"
-    [attr.aria-level]="settings?.sectionTitleHeadingLevel || 5"
->
+<ng-template #backButton>
     @if (mobile) {
         <button
             [attr.title]="backButtonLabel() || ('platformSettingsGenerator.backButtonLabel' | fdTranslate)()"
@@ -15,12 +9,29 @@
             (click)="goBack.emit()"
         ></button>
     }
-    @if ($safeNavigationMigration(settings?.title) | fdkAsyncOrSync; as settingsTitle) {
+</ng-template>
+@if ($safeNavigationMigration(settings?.title) | fdkAsyncOrSync; as settingsTitle) {
+    <div
+        fd-title
+        [wrap]="!!settings?.wrapSectionTitle"
+        role="heading"
+        class="fd-title--h5 fdp-settings-generator__title"
+        [attr.aria-level]="settings?.sectionTitleHeadingLevel || 5"
+    >
+        <ng-template [ngTemplateOutlet]="backButton"></ng-template>
         {{ settingsTitle }}
-    } @else {
+    </div>
+} @else {
+    <div
+        fd-title
+        [wrap]="!!settings?.wrapSectionTitle"
+        class="fd-title--h5 fdp-settings-generator__title"
+        [attr.aria-label]="('platformSettingsGenerator.settingsLabel' | fdTranslate)()"
+    >
+        <ng-template [ngTemplateOutlet]="backButton"></ng-template>
         <fd-skeleton height="40px" type="rectangle" width="40%" textLines="1" [style.margin]="'auto 0'"></fd-skeleton>
-    }
-</div>
+    </div>
+}
 <ng-template #tabbedLayout>
     <fdp-icon-tab-bar
         class="fdp-settings-generator__tabs-container"
