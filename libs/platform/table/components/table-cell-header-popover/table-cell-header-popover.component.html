@@ -11,7 +11,7 @@
     >
         <fdp-list [noBorder]="true" [navigated]="true" [role]="'menu'">
             @for (item of _popoverItems$(); track item) {
-                <li fdp-free-content-list-item role="menuitem">
+                <li fdp-free-content-list-item role="presentation" [listItemRole]="'menuitem'">
                     <ng-template
                         [ngTemplateOutlet]="item"
                         [ngTemplateOutletContext]="{ popover: popover }"

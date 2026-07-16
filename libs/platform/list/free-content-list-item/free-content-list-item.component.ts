@@ -1,5 +1,6 @@
 import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, forwardRef, HostBinding, Input, ViewEncapsulation } from '@angular/core';
+import { Nullable } from '@fundamental-ngx/cdk';
 import { ListItemComponent } from '@fundamental-ngx/core/list';
 import { BaseListItem } from '../base-list-item';
 
@@ -14,10 +15,15 @@ import { BaseListItem } from '../base-list-item';
 })
 export class FreeContentListItemComponent extends BaseListItem {
     /**
-     * The ARIA role of the list item.
-     * Defaults to 'listitem' but can be overridden (e.g., 'menuitem' for menus).
+     * The ARIA role of the fdp-free-content-list-item.
      */
     @Input()
     @HostBinding('attr.role')
-    role = 'listitem';
+    role: Nullable<string>;
+
+    /**
+     * The ARIA role of the fd-list-item.
+     */
+    @Input()
+    listItemRole: Nullable<string>;
 }
