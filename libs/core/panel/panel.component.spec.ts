@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, input } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
@@ -9,7 +9,7 @@ import { PanelComponent } from './panel.component';
 
 @Component({
     template: `
-        <fd-panel #panelRef [fdCompact]="isCompact" [fixed]="isFixed">
+        <fd-panel #panelRef [fdCompact]="isCompact()" [fixed]="isFixed()">
             <h5 fd-panel-title>Panel Header</h5>
             <div fd-panel-content>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ut laoreet lorem.
@@ -23,8 +23,8 @@ class TestComponent {
     @ViewChild('panelRef', { read: ElementRef })
     panelRef: ElementRef;
 
-    isCompact = false;
-    isFixed = false;
+    readonly isCompact = input(false);
+    readonly isFixed = input(false);
 }
 
 describe('PanelComponent', () => {
@@ -55,8 +55,8 @@ describe('PanelComponent', () => {
     });
 
     it('should assign additional classes', () => {
-        component.isCompact = true;
-        component.isFixed = true;
+        fixture.componentRef.setInput('isCompact', true);
+        fixture.componentRef.setInput('isFixed', true);
         fixture.detectChanges();
         expect(component.panelRef.nativeElement.classList).toContain('is-compact');
         expect(component.panelRef.nativeElement.children[0].classList).toContain('fd-panel--fixed');
@@ -68,7 +68,7 @@ describe('PanelComponent', () => {
     });
 
     it('should display the panel content when the Panel is fixed', () => {
-        component.isFixed = true;
+        fixture.componentRef.setInput('isFixed', true);
         fixture.detectChanges();
         panelContent = fixture.debugElement.query(By.css('.fd-panel__content'));
         expect(panelContent.nativeElement.innerHTML).toContain('Lorem ipsum dolor sit amet');

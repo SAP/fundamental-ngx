@@ -36,7 +36,7 @@
     </fd-dialog-header>
     @if (_defaultDialogContent?.content) {
         <fd-dialog-body [id]="_defaultDialogContent?.contentId || dialogContentId">
-            <ng-template [ngTemplateOutlet]="_defaultDialogContent?.content!"></ng-template>
+            <ng-template [ngTemplateOutlet]="$safeNavigationMigration(_defaultDialogContent?.content)!"></ng-template>
         </fd-dialog-body>
     }
     @if (_showFooter()) {
@@ -48,7 +48,7 @@
                     [label]="_defaultDialogContent?.approveButton || ''"
                     [fdCozy]="_defaultDialogConfiguration.mobile"
                     (click)="_approveButtonClicked()"
-                    [ariaLabel]="_defaultDialogContent?.approveButtonAriaLabel"
+                    [ariaLabel]="$safeNavigationMigration(_defaultDialogContent?.approveButtonAriaLabel)"
                     [id]="_defaultDialogContent?.approveButtonId || ''"
                 >
                 </fd-button-bar>
@@ -58,7 +58,7 @@
                     [label]="_defaultDialogContent?.cancelButton || ''"
                     [fdCozy]="_defaultDialogConfiguration.mobile"
                     (click)="_cancelButtonClicked()"
-                    [ariaLabel]="_defaultDialogContent?.closeButtonAriaLabel"
+                    [ariaLabel]="$safeNavigationMigration(_defaultDialogContent?.closeButtonAriaLabel)"
                     [id]="_defaultDialogContent?.cancelButtonId || ''"
                 >
                 </fd-button-bar>

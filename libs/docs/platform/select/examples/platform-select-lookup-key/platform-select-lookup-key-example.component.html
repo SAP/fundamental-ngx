@@ -10,4 +10,4 @@
         ></fdp-select>
     </fdp-form-field>
 </fdp-form-group>
-<p>Form value: {{ form.get('country')?.value | json }}</p>
+<p>Form value: {{ $safeNavigationMigration(form.get('country')?.value) | json }}</p>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ContentDensityGlobalKeyword } from '../content-density.types';
 import { CONTENT_DENSITY_DIRECTIVE } from '../tokens/content-density-directive';
@@ -7,38 +7,38 @@ import { ContentDensityDirective } from './content-density.directive';
 
 @Component({
     selector: 'fd-test-host',
-    template: '<div [fdContentDensity]="density"></div>',
+    template: '<div [fdContentDensity]="density()"></div>',
     imports: [ContentDensityDirective]
 })
 class TestHostComponent {
-    density: string = ContentDensityMode.COZY;
+    readonly density = input<string>(ContentDensityMode.COZY);
 }
 
 @Component({
     selector: 'fd-test-host-compact',
-    template: '<div [fdCompact]="isCompact"></div>',
+    template: '<div [fdCompact]="isCompact()"></div>',
     imports: [ContentDensityDirective]
 })
 class TestHostCompactComponent {
-    isCompact = true;
+    readonly isCompact = input<boolean>(true);
 }
 
 @Component({
     selector: 'fd-test-host-condensed',
-    template: '<div [fdCondensed]="isCondensed"></div>',
+    template: '<div [fdCondensed]="isCondensed()"></div>',
     imports: [ContentDensityDirective]
 })
 class TestHostCondensedComponent {
-    isCondensed = true;
+    readonly isCondensed = input<boolean>(true);
 }
 
 @Component({
     selector: 'fd-test-host-cozy',
-    template: '<div [fdCozy]="isCozy"></div>',
+    template: '<div [fdCozy]="isCozy()"></div>',
     imports: [ContentDensityDirective]
 })
 class TestHostCozyComponent {
-    isCozy = true;
+    readonly isCozy = input<boolean>(true);
 }
 
 describe('ContentDensityDirective', () => {
@@ -75,14 +75,14 @@ describe('ContentDensityDirective', () => {
         });
 
         it('should update density when input changes', () => {
-            component.density = ContentDensityMode.COMPACT;
+            fixture.componentRef.setInput('density', ContentDensityMode.COMPACT);
             fixture.detectChanges();
 
             expect(directive.densityMode()).toBe(ContentDensityMode.COMPACT);
         });
 
         it('should fallback to global keyword for invalid values', () => {
-            component.density = 'invalid-value';
+            fixture.componentRef.setInput('density', 'invalid-value');
             fixture.detectChanges();
 
             expect(directive.densityMode()).toBe(ContentDensityGlobalKeyword);
@@ -91,7 +91,7 @@ describe('ContentDensityDirective', () => {
         it('should update signal reactively when input changes', () => {
             expect(directive.densityMode()).toBe(ContentDensityMode.COZY);
 
-            component.density = ContentDensityMode.CONDENSED;
+            fixture.componentRef.setInput('density', ContentDensityMode.CONDENSED);
             fixture.detectChanges();
 
             expect(directive.densityMode()).toBe(ContentDensityMode.CONDENSED);
@@ -123,7 +123,7 @@ describe('ContentDensityDirective', () => {
         it('should reset to global keyword when fdCompact is set to false', () => {
             expect(directive.densityMode()).toBe(ContentDensityMode.COMPACT);
 
-            component.isCompact = false;
+            fixture.componentRef.setInput('isCompact', false);
             fixture.detectChanges();
 
             expect(directive.densityMode()).toBe(ContentDensityGlobalKeyword);
@@ -155,7 +155,7 @@ describe('ContentDensityDirective', () => {
         it('should reset to global keyword when fdCondensed is set to false', () => {
             expect(directive.densityMode()).toBe(ContentDensityMode.CONDENSED);
 
-            component.isCondensed = false;
+            fixture.componentRef.setInput('isCondensed', false);
             fixture.detectChanges();
 
             expect(directive.densityMode()).toBe(ContentDensityGlobalKeyword);
@@ -187,7 +187,7 @@ describe('ContentDensityDirective', () => {
         it('should reset to global keyword when fdCozy is set to false', () => {
             expect(directive.densityMode()).toBe(ContentDensityMode.COZY);
 
-            component.isCozy = false;
+            fixture.componentRef.setInput('isCozy', false);
             fixture.detectChanges();
 
             expect(directive.densityMode()).toBe(ContentDensityGlobalKeyword);
@@ -355,11 +355,11 @@ describe('ContentDensityDirective', () => {
         it('should remove data-ui5-compact-size attribute when switching from compact to cozy', () => {
             @Component({
                 selector: 'fd-test-dynamic-density',
-                template: '<div [fdContentDensity]="density"></div>',
+                template: '<div [fdContentDensity]="density()"></div>',
                 imports: [ContentDensityDirective]
             })
             class TestDynamicDensityComponent {
-                density: string = ContentDensityMode.COMPACT;
+                readonly density = input<string>(ContentDensityMode.COMPACT);
             }
 
             TestBed.configureTestingModule({
@@ -375,7 +375,7 @@ describe('ContentDensityDirective', () => {
             expect(directiveElement.hasAttribute('data-ui5-compact-size')).toBe(true);
 
             // Switch to COZY
-            fixture.componentInstance.density = ContentDensityMode.COZY;
+            fixture.componentRef.setInput('density', ContentDensityMode.COZY);
             fixture.detectChanges();
 
             // Should remove attribute
@@ -384,7 +384,7 @@ describe('ContentDensityDirective', () => {
 
         it('should add data-ui5-compact-size attribute when switching from cozy to compact', () => {
             const fixture = TestBed.createComponent(TestHostComponent);
-            fixture.componentInstance.density = ContentDensityMode.COZY;
+            fixture.componentRef.setInput('density', ContentDensityMode.COZY);
             fixture.detectChanges();
 
             const directiveElement = fixture.debugElement.children[0].nativeElement;
@@ -393,7 +393,7 @@ describe('ContentDensityDirective', () => {
             expect(directiveElement.hasAttribute('data-ui5-compact-size')).toBe(false);
 
             // Switch to COMPACT
-            fixture.componentInstance.density = ContentDensityMode.COMPACT;
+            fixture.componentRef.setInput('density', ContentDensityMode.COMPACT);
             fixture.detectChanges();
 
             // Should add attribute
@@ -530,11 +530,11 @@ describe('ContentDensityDirective', () => {
         it('should recover from invalid value when valid value is provided', () => {
             @Component({
                 selector: 'fd-test-recovery',
-                template: '<div [fdContentDensity]="density"></div>',
+                template: '<div [fdContentDensity]="density()"></div>',
                 imports: [ContentDensityDirective]
             })
             class TestRecoveryComponent {
-                density: any = null;
+                readonly density = input<any>(null);
             }
 
             TestBed.configureTestingModule({
@@ -551,7 +551,7 @@ describe('ContentDensityDirective', () => {
             expect(directive.densityMode()).toBe(ContentDensityGlobalKeyword);
 
             // Provide valid value
-            fixture.componentInstance.density = ContentDensityMode.COMPACT;
+            fixture.componentRef.setInput('density', ContentDensityMode.COMPACT);
             fixture.detectChanges();
 
             // Should recover and use the valid value

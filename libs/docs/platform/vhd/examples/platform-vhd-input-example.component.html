@@ -1,7 +1,12 @@
 <div fd-form-item>
     <label fd-form-label for="test-selection-type-single">Selection type: single</label>
     <fd-input-group>
-        <input fd-input-group-input fd-form-control id="test-selection-type-single" [value]="valuesSingle?.name" />
+        <input
+            fd-input-group-input
+            fd-form-control
+            id="test-selection-type-single"
+            [value]="$safeNavigationMigration(valuesSingle?.name)"
+        />
         <span fd-input-group-addon [button]="true">
             <button
                 fd-button
@@ -78,7 +83,12 @@
 <div fd-form-item>
     <label fd-form-label for="test-selection-type-once">Selection type: once</label>
     <fd-input-group>
-        <input fd-input-group-input fd-form-control id="test-selection-type-once" [value]="valuesOnce?.name" />
+        <input
+            fd-input-group-input
+            fd-form-control
+            id="test-selection-type-once"
+            [value]="$safeNavigationMigration(valuesOnce?.name)"
+        />
         <span fd-input-group-addon [button]="true">
             <button
                 fd-button

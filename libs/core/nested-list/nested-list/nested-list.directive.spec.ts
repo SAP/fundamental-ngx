@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, input } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import {
     ContentDensityGlobalKeyword,
@@ -14,7 +14,7 @@ import { NestedListDirective } from './nested-list.directive';
 
 @Component({
     template: `
-        <ul fd-nested-list [textOnly]="true" [fdContentDensity]="contentDensity" #level1List>
+        <ul fd-nested-list [textOnly]="true" [fdContentDensity]="contentDensity()" #level1List>
             <li fd-nested-list-item>
                 <a fd-nested-list-link>
                     <span fd-nested-list-title>Link 1</span>
@@ -56,7 +56,7 @@ class TestNestedContainerComponent {
     @ViewChild('level1List', { static: true, read: NestedListDirective })
     level1List: NestedListDirective;
 
-    contentDensity: LocalContentDensityMode = ContentDensityGlobalKeyword;
+    readonly contentDensity = input<LocalContentDensityMode>(ContentDensityGlobalKeyword);
 }
 
 describe('NestedListDirective', () => {
@@ -84,7 +84,7 @@ describe('NestedListDirective', () => {
     });
 
     it('Should add classes', () => {
-        component.contentDensity = ContentDensityMode.COMPACT;
+        fixture.componentRef.setInput('contentDensity', ContentDensityMode.COMPACT);
         fixture.detectChanges();
         expect((level1List as any)._elementRef.nativeElement.classList.contains('fd-nested-list')).toBeTruthy();
         expect(
@@ -97,7 +97,7 @@ describe('NestedListDirective', () => {
     });
 
     it('should handle content density when compact input is not provided', () => {
-        component.contentDensity = ContentDensityGlobalKeyword;
+        fixture.componentRef.setInput('contentDensity', ContentDensityGlobalKeyword);
         fixture.detectChanges();
         expect(
             fixture.nativeElement.querySelector('ul:first-of-type').classList.contains('fd-nested-list--compact')

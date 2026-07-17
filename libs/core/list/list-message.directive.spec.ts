@@ -1,18 +1,18 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, input } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { ListMessageDirective } from './list-message.directive';
 import { ListModule } from './list.module';
 
 @Component({
-    template: ` <li #directiveElement fd-list-message [type]="type">List Item Test Text</li> `,
+    template: ` <li #directiveElement fd-list-message [type]="type()">List Item Test Text</li> `,
     standalone: true,
     imports: [ListModule]
 })
 class TestComponent {
     @ViewChild(ListMessageDirective, { static: true })
     directive: ListMessageDirective;
-    type: FormStates;
+    readonly type = input<FormStates>();
 }
 
 describe('ListMessageDirective', () => {
@@ -41,7 +41,7 @@ describe('ListMessageDirective', () => {
     });
 
     it('should assign success class', () => {
-        component.type = 'success';
+        fixture.componentRef.setInput('type', 'success');
         component.directive.buildComponentCssClass();
         fixture.detectChanges();
         expect(component.directive.elementRef.nativeElement.classList).toContain('fd-list__message--success');

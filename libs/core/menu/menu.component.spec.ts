@@ -1,7 +1,7 @@
 import { ComponentFixture, fakeAsync, flush, TestBed, tick, waitForAsync } from '@angular/core/testing';
 
 import { Overlay, ScrollStrategy } from '@angular/cdk/overlay';
-import { Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, ElementRef, input, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { PopoverService } from '@fundamental-ngx/core/popover';
 import { MenuTitleDirective } from './directives/menu-title.directive';
@@ -53,7 +53,7 @@ export class TestMenuComponent {
 @Component({
     selector: 'fd-menu-submenu-test',
     template: `
-        <fd-menu #menu [mobile]="mobileMode">
+        <fd-menu #menu [mobile]="mobileMode()">
             <li fd-menu-item [submenu]="fruitsSubmenu">
                 <div fd-menu-interactive>
                     <span fd-menu-title>Fruits</span>
@@ -103,7 +103,7 @@ export class TestMenuSubmenuComponent {
     @ViewChild('trigger', { read: ElementRef })
     trigger: ElementRef;
 
-    mobileMode = false;
+    readonly mobileMode = input(false);
 }
 
 describe('MenuComponent', () => {
@@ -206,6 +206,17 @@ describe('MenuComponent', () => {
             expect(emittedValues).toContain(false);
         }));
 
+        it('should not emit isOpenChange when open state does not change', fakeAsync(() => {
+            const emittedValues: boolean[] = [];
+            menu.isOpenChange.subscribe((value) => emittedValues.push(value));
+
+            testComponent.mobileMode = true;
+            fixture.detectChanges();
+            tick();
+
+            expect(emittedValues).toEqual([]);
+        }));
+
         it('should emit beforeOpen when menu is about to open', fakeAsync(() => {
             let beforeOpenEmitted = false;
             menu.beforeOpen.subscribe(() => {
@@ -245,28 +256,44 @@ describe('MenuComponent', () => {
     });
 
     describe('disabled state', () => {
-        it('should apply disabled host class when disabled', () => {
-            testComponent.isDisabled = true;
-            fixture.detectChanges();
+        let menuFixture: ComponentFixture<MenuComponent>;
+        let menuComponent: MenuComponent;
 
-            const menuElement = fixture.nativeElement.querySelector('fd-menu');
-            expect(menuElement?.classList.contains('fd-popover-custom--disabled')).toBe(true);
+        beforeEach(() => {
+            menuFixture = TestBed.createComponent(MenuComponent);
+            menuComponent = menuFixture.componentInstance;
+            menuFixture.detectChanges();
+        });
+
+        it('should apply disabled host class when disabled', () => {
+            menuFixture.componentRef.setInput('disabled', true);
+            menuFixture.detectChanges();
+            expect(menuFixture.nativeElement.classList.contains('fd-popover-custom--disabled')).toBe(true);
         });
 
         it('should reflect disabled input in disabled signal', () => {
-            expect(menu.disabled()).toBe(false);
-            testComponent.isDisabled = true;
-            fixture.detectChanges();
-            expect(menu.disabled()).toBe(true);
+            expect(menuComponent.disabled()).toBe(false);
+            menuFixture.componentRef.setInput('disabled', true);
+            menuFixture.detectChanges();
+            expect(menuComponent.disabled()).toBe(true);
         });
     });
 
     describe('scrollbar configuration', () => {
+        let menuFixture: ComponentFixture<MenuComponent>;
+        let menuComponent: MenuComponent;
+
+        beforeEach(() => {
+            menuFixture = TestBed.createComponent(MenuComponent);
+            menuComponent = menuFixture.componentInstance;
+            menuFixture.detectChanges();
+        });
+
         it('should apply disableScrollbar setting', () => {
-            expect(menu.disableScrollbar()).toBeFalsy();
-            testComponent.scrollbarDisabled = true;
-            fixture.detectChanges();
-            expect(menu.disableScrollbar()).toBeTruthy();
+            expect(menuComponent.disableScrollbar()).toBeFalsy();
+            menuFixture.componentRef.setInput('disableScrollbar', true);
+            menuFixture.detectChanges();
+            expect(menuComponent.disableScrollbar()).toBeTruthy();
         });
     });
 
@@ -322,34 +349,32 @@ describe('MenuComponent with submenus', () => {
         expect(lastItem.hasPopup).toBe(false);
     });
 
-    it('should not show hasPopup for submenu items in mobile mode', () => {
-        testComponent.mobileMode = true;
+    it('should not show hasPopup for submenu items in mobile mode', fakeAsync(() => {
+        fixture.componentRef.setInput('mobileMode', true);
         fixture.detectChanges();
+        tick();
 
         const menuItems = testComponent.menuItems.toArray();
         const firstItem = menuItems[0];
 
-        // Even though submenu exists, hasPopup should be false in mobile mode
         expect(firstItem.submenu).toBeDefined();
         expect(firstItem.hasPopup).toBe(false);
-    });
+    }));
 
-    it('should correctly reflect mobile mode changes', () => {
+    it('should correctly reflect mobile mode changes', fakeAsync(() => {
         const menuItems = testComponent.menuItems.toArray();
         const firstItem = menuItems[0];
 
-        // Desktop mode - hasPopup should be true
         expect(menu.mobile()).toBe(false);
         expect(firstItem.hasPopup).toBe(true);
 
-        // Switch to mobile mode
-        testComponent.mobileMode = true;
+        fixture.componentRef.setInput('mobileMode', true);
         fixture.detectChanges();
+        tick();
 
-        // Mobile mode - hasPopup should be false
         expect(menu.mobile()).toBe(true);
         expect(firstItem.hasPopup).toBe(false);
-    });
+    }));
 
     it('should open submenu when user hovers over item with submenu', fakeAsync(() => {
         menu.open();
@@ -553,6 +578,7 @@ describe('MenuComponent advanced options', () => {
     }
 
     let menu: MenuComponent;
+    let menuFixture: ComponentFixture<MenuComponent>;
     let fixture: ComponentFixture<TestMenuAdvancedComponent>;
     let testComponent: TestMenuAdvancedComponent;
 
@@ -567,6 +593,8 @@ describe('MenuComponent advanced options', () => {
         testComponent = fixture.componentInstance;
         fixture.detectChanges();
         menu = testComponent.menu;
+        menuFixture = TestBed.createComponent(MenuComponent);
+        menuFixture.detectChanges();
     });
 
     describe('closeOnNavigation', () => {
@@ -575,10 +603,9 @@ describe('MenuComponent advanced options', () => {
         });
 
         it('should allow disabling close on navigation', () => {
-            testComponent.closeOnNavigation = false;
-            fixture.detectChanges();
-
-            expect(menu.closeOnNavigation()).toBe(false);
+            menuFixture.componentRef.setInput('closeOnNavigation', false);
+            menuFixture.detectChanges();
+            expect(menuFixture.componentInstance.closeOnNavigation()).toBe(false);
         });
     });
 
@@ -588,10 +615,9 @@ describe('MenuComponent advanced options', () => {
         });
 
         it('should allow disabling focus restore', () => {
-            testComponent.restoreFocusOnClose = false;
-            fixture.detectChanges();
-
-            expect(menu.restoreFocusOnClose()).toBe(false);
+            menuFixture.componentRef.setInput('restoreFocusOnClose', false);
+            menuFixture.detectChanges();
+            expect(menuFixture.componentInstance.restoreFocusOnClose()).toBe(false);
         });
     });
 
@@ -601,10 +627,9 @@ describe('MenuComponent advanced options', () => {
         });
 
         it('should allow enabling fixed position', () => {
-            testComponent.fixedPosition = true;
-            fixture.detectChanges();
-
-            expect(menu.fixedPosition()).toBe(true);
+            menuFixture.componentRef.setInput('fixedPosition', true);
+            menuFixture.detectChanges();
+            expect(menuFixture.componentInstance.fixedPosition()).toBe(true);
         });
     });
 
@@ -614,11 +639,11 @@ describe('MenuComponent advanced options', () => {
         });
 
         it('should accept an element reference', () => {
-            testComponent.useAppendTo = true;
-            fixture.detectChanges();
-
-            expect(menu.appendTo()).toBeTruthy();
-            expect(menu.appendTo()).toBe(testComponent.appendTarget.nativeElement);
+            const el = document.createElement('div');
+            menuFixture.componentRef.setInput('appendTo', el);
+            menuFixture.detectChanges();
+            expect(menuFixture.componentInstance.appendTo()).toBeTruthy();
+            expect(menuFixture.componentInstance.appendTo()).toBe(el);
         });
     });
 });
@@ -627,7 +652,7 @@ describe('MenuComponent scrollStrategy (regression #14210)', () => {
     @Component({
         selector: 'fd-menu-scroll-strategy-test',
         template: `
-            <fd-menu #menu [config]="menuConfig" [scrollStrategy]="directScrollStrategy">
+            <fd-menu #menu [config]="menuConfig()" [scrollStrategy]="directScrollStrategy()">
                 <li fd-menu-item>
                     <a href="#" fd-menu-interactive>
                         <span fd-menu-title>Option 1</span>
@@ -641,12 +666,11 @@ describe('MenuComponent scrollStrategy (regression #14210)', () => {
     class TestMenuScrollStrategyComponent {
         @ViewChild(MenuComponent) menu: MenuComponent;
 
-        menuConfig: { scrollStrategy?: ScrollStrategy | null } = {};
-        directScrollStrategy: ScrollStrategy | null = null;
+        readonly menuConfig = input<{ scrollStrategy?: ScrollStrategy | null }>({});
+        readonly directScrollStrategy = input<ScrollStrategy | null>(null);
     }
 
     let fixture: ComponentFixture<TestMenuScrollStrategyComponent>;
-    let testComponent: TestMenuScrollStrategyComponent;
     let popoverService: PopoverService;
     let overlay: Overlay;
 
@@ -658,7 +682,6 @@ describe('MenuComponent scrollStrategy (regression #14210)', () => {
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestMenuScrollStrategyComponent);
-        testComponent = fixture.componentInstance;
         fixture.detectChanges();
 
         const menuDebugEl = fixture.debugElement.query(By.directive(MenuComponent));
@@ -668,7 +691,7 @@ describe('MenuComponent scrollStrategy (regression #14210)', () => {
 
     it('should forward config.scrollStrategy to the popover service', () => {
         const closeStrategy = overlay.scrollStrategies.close();
-        testComponent.menuConfig = { scrollStrategy: closeStrategy };
+        fixture.componentRef.setInput('menuConfig', { scrollStrategy: closeStrategy });
         fixture.detectChanges();
 
         expect(popoverService.scrollStrategy()).toBe(closeStrategy);
@@ -676,7 +699,7 @@ describe('MenuComponent scrollStrategy (regression #14210)', () => {
 
     it('should forward direct [scrollStrategy] input to the popover service', () => {
         const closeStrategy = overlay.scrollStrategies.close();
-        testComponent.directScrollStrategy = closeStrategy;
+        fixture.componentRef.setInput('directScrollStrategy', closeStrategy);
         fixture.detectChanges();
 
         expect(popoverService.scrollStrategy()).toBe(closeStrategy);
@@ -685,8 +708,8 @@ describe('MenuComponent scrollStrategy (regression #14210)', () => {
     it('should let the direct [scrollStrategy] input win over config.scrollStrategy', () => {
         const configStrategy = overlay.scrollStrategies.noop();
         const directStrategy = overlay.scrollStrategies.close();
-        testComponent.menuConfig = { scrollStrategy: configStrategy };
-        testComponent.directScrollStrategy = directStrategy;
+        fixture.componentRef.setInput('menuConfig', { scrollStrategy: configStrategy });
+        fixture.componentRef.setInput('directScrollStrategy', directStrategy);
         fixture.detectChanges();
 
         expect(popoverService.scrollStrategy()).toBe(directStrategy);

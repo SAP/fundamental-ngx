@@ -1,4 +1,4 @@
-import { Component, forwardRef, ViewChild } from '@angular/core';
+import { Component, forwardRef, input, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { MenuTriggerDirective } from '../directives/menu-trigger.directive';
 import { MenuInteractiveComponent } from '../menu-interactive.component';
@@ -8,7 +8,7 @@ import { MenuItemComponent, SubmenuComponent } from './menu-item.component';
 @Component({
     template: `
         <fd-menu>
-            <li fd-menu-item [disabled]="disabled">
+            <li fd-menu-item [disabled]="disabled()">
                 <div fd-menu-interactive></div>
             </li>
         </fd-menu>
@@ -21,7 +21,7 @@ class TestMenuItemComponent {
     @ViewChild(MenuItemComponent) menuItem: MenuItemComponent;
     @ViewChild(MenuInteractiveComponent) menuInteractive: MenuInteractiveComponent;
 
-    disabled = false;
+    readonly disabled = input(false);
 }
 
 describe('MenuItemComponent', () => {
@@ -107,7 +107,7 @@ describe('MenuItemComponent', () => {
     it('should set disabled state', fakeAsync(() => {
         const setDisabledSpy = jest.spyOn(menuInteractive, 'setDisabled');
 
-        fixture.componentInstance.disabled = true;
+        fixture.componentRef.setInput('disabled', true);
         fixture.detectChanges();
 
         tick();

@@ -1,4 +1,4 @@
-import { Component, DebugElement, ViewChild } from '@angular/core';
+import { Component, DebugElement, ViewChild, input } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
@@ -30,7 +30,7 @@ import { SourceItem, TableDataProviderMock } from './helpers';
             [rowsClass]="rowsClass"
         >
             <fdp-table-toolbar title="Order Items" [hideItemCount]="false"></fdp-table-toolbar>
-            @if (showIdColumn) {
+            @if (showIdColumn()) {
                 <fdp-column name="id" key="id" label="ID"></fdp-column>
             }
             <fdp-column name="name" key="name" label="Name" [width]="customColumnWidth + 'px'"></fdp-column>
@@ -53,7 +53,7 @@ class TableHostComponent {
     /** So big so table column won't grow on any device */
     customColumnWidth = 10000;
     rowsClass: TableRowClass = 'class';
-    showIdColumn = false;
+    readonly showIdColumn = input(false);
 }
 
 describe('TableComponent Host', () => {
@@ -520,7 +520,7 @@ describe('TableComponent Host', () => {
             expect(tableHeaderCells[0].nativeElement.textContent.trim()).toBe('Name');
             expect(tableHeaderCells[1].nativeElement.textContent.trim()).toBe('Status');
 
-            hostComponent.showIdColumn = true;
+            fixture.componentRef.setInput('showIdColumn', true);
             fixture.detectChanges();
             tick(200);
 

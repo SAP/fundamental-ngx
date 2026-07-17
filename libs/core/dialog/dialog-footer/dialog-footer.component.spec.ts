@@ -43,7 +43,7 @@ describe('DialogFooterComponent', () => {
             providers: [DialogConfig]
         }).overrideComponent(DialogFooterComponent, {
             set: {
-                changeDetection: ChangeDetectionStrategy.Default
+                changeDetection: ChangeDetectionStrategy.Eager
             }
         });
     }));

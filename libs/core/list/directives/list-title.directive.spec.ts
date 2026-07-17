@@ -1,11 +1,11 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, input } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ListModule } from '../list.module';
 import { ListTitleDirective } from './list-title.directive';
 
 @Component({
-    template: `<li #componentElement fd-list-title [truncate]="isTruncate">ListTitleComponent</li>`,
+    template: `<li #componentElement fd-list-title [truncate]="isTruncate()">ListTitleComponent</li>`,
     standalone: true,
     imports: [ListModule]
 })
@@ -13,7 +13,7 @@ class TestComponent {
     @ViewChild('componentElement', { read: ElementRef })
     ref!: ElementRef;
 
-    isTruncate = false;
+    readonly isTruncate = input(false);
 }
 
 describe('ListTitleDirective', () => {
@@ -50,7 +50,7 @@ describe('ListTitleDirective', () => {
     });
 
     it('should add truncate class when truncate is true (via input binding)', () => {
-        component.isTruncate = true;
+        fixture.componentRef.setInput('isTruncate', true);
         fixture.detectChanges();
 
         expect(component.ref.nativeElement.classList).toContain('fd-list__title--truncate');

@@ -15,11 +15,22 @@
         "outDir": "../../dist/libs/cx/schematics",
         "skipDefaultLibCheck": true,
         "skipLibCheck": true,
+        "ignoreDeprecations": "6.0",
         "sourceMap": true,
         "strictNullChecks": false,
         "target": "es6",
         "types": ["jasmine", "node"]
     },
     "include": ["**/*"],
-    "exclude": ["*/files/**/*"]
+    "exclude": ["*/files/**/*"],
+    "angularCompilerOptions": {
+        // TODO(#14334): suppress Angular 22 optionalChainNotNullable and nullishCoalescingNotNullable diagnostics
+        "extendedDiagnostics": {
+            "checks": {
+                "nullishCoalescingNotNullable": "suppress",
+                "optionalChainNotNullable": "suppress"
+            }
+        },
+        "strictTemplates": false
+    }
 }

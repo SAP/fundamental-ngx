@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, input } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { InitialFocusDirective } from './initial-focus.directive';
 
@@ -6,7 +6,7 @@ import { InitialFocusDirective } from './initial-focus.directive';
     standalone: true,
     imports: [InitialFocusDirective],
     template: `
-        <button fdkInitialFocus [enabled]="enabled" [attr.tabindex]="rootElementTabIndex" #elementToFocus>
+        <button fdkInitialFocus [enabled]="enabled()" [attr.tabindex]="rootElementTabIndex" #elementToFocus>
             <span>Non Focusable</span>
             <span tabindex="0" #nestedElementToFocus>Focusable</span>
             <button>Focusable</button>
@@ -18,7 +18,7 @@ class TestComponent {
     @ViewChild('nestedElementToFocus') nestedElementToFocus: ElementRef;
     @ViewChild(InitialFocusDirective) initialFocusDir: InitialFocusDirective;
 
-    enabled = false;
+    readonly enabled = input(false);
     rootElementTabIndex = 0;
 }
 
@@ -44,7 +44,7 @@ describe('InitialFocusDirective', () => {
 
     it('should focus element', async () => {
         const spy = jest.spyOn(component.elementToFocus.nativeElement, 'focus');
-        component.enabled = true;
+        fixture.componentRef.setInput('enabled', true);
         fixture.detectChanges();
         await fixture.whenStable();
         expect(spy).toHaveBeenCalledTimes(1);
@@ -54,7 +54,7 @@ describe('InitialFocusDirective', () => {
         const spy = jest.spyOn(component.nestedElementToFocus.nativeElement, 'focus');
         component.rootElementTabIndex = -1;
         fixture.detectChanges();
-        component.enabled = true;
+        fixture.componentRef.setInput('enabled', true);
         fixture.detectChanges();
         await fixture.whenStable();
         expect(spy).toHaveBeenCalledTimes(1);

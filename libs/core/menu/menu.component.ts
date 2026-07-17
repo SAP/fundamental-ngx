@@ -28,6 +28,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Subject } from 'rxjs';
 
 import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
@@ -155,8 +156,8 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
     /** Two-way binding for menu open state */
     readonly isOpen = model(false);
 
-    /** Emits when menu open state changes - required for MenuInterface compatibility */
-    readonly isOpenChange = output<boolean>();
+    /** Emits when menu open state changes - for backwards compatibility with programmatic subscribers */
+    readonly isOpenChange = new Subject<boolean>();
 
     /** Emits array of active menu items */
     readonly activePath = output<MenuItemComponent[]>();
@@ -239,8 +240,10 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
                 this.beforeOpen.emit();
             }
 
-            // Emit isOpenChange for MenuMobileComponent and other consumers
-            this.isOpenChange.emit(openState);
+            // Emit only when state actually changes.
+            if (openState !== previousIsOpen) {
+                this.isOpenChange.next(openState);
+            }
 
             // Sync to service only if not already syncing and not in mobile mode (prevents loop).
             // In mobile mode, the dialog handles open/close — the popover service should not be involved.

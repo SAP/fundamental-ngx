@@ -1,9 +1,4 @@
 {
-    "references": [
-        {
-            "path": "./tsconfig.spec.json"
-        }
-    ],
     "compilerOptions": {
         "allowSyntheticDefaultImports": true,
         "baseUrl": ".",
@@ -20,6 +15,7 @@
         "outDir": "../../dist/libs/core/schematics",
         "skipDefaultLibCheck": true,
         "skipLibCheck": true,
+        "ignoreDeprecations": "6.0",
         "sourceMap": true,
         "strictNullChecks": false,
         "target": "es6",
@@ -27,5 +23,15 @@
         "resolveJsonModule": true
     },
     "include": ["**/*.ts"],
-    "exclude": ["**/*.spec.ts", "testing-utils/**/*.ts", "jest.config.ts"]
+    "exclude": ["**/*.spec.ts", "testing-utils/**/*.ts", "jest.config.ts"],
+    "angularCompilerOptions": {
+        // TODO(#14334): suppress Angular 22 optionalChainNotNullable and nullishCoalescingNotNullable diagnostics
+        "extendedDiagnostics": {
+            "checks": {
+                "nullishCoalescingNotNullable": "suppress",
+                "optionalChainNotNullable": "suppress"
+            }
+        },
+        "strictTemplates": false
+    }
 }

@@ -14,7 +14,7 @@
                     idx: i,
                     source: 'contentChildren',
                     name: name,
-                    checkboxValue: checkbox.coreCheckbox?.values?.trueValue,
+                    checkboxValue: $safeNavigationMigration(checkbox.coreCheckbox?.values?.trueValue),
                     labeltext: checkbox.label,
                     disabled: disabled || checkbox.disabled,
                     ariaLabel: checkbox.ariaLabel,

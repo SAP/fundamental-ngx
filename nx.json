@@ -208,5 +208,6 @@
         "releaseTag": {
             "pattern": "v{version}"
         }
-    }
+    },
+    "analytics": false
 }

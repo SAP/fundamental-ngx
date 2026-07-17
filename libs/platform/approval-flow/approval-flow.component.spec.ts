@@ -1,5 +1,5 @@
 import { RIGHT_ARROW } from '@angular/cdk/keycodes';
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, input } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { of } from 'rxjs';
 
@@ -27,7 +27,7 @@ const TEST_APPROVAL_FLOW_TITLE = 'Test title';
     selector: 'fdp-test-approval-flow',
     template: ` <fdp-approval-flow
         #approvalFlowComponent
-        [title]="title"
+        [title]="title()"
         [value]="value"
         [userDataSource]="userDataSource"
         [watcherDataSource]="watcherDataSource"
@@ -38,7 +38,7 @@ const TEST_APPROVAL_FLOW_TITLE = 'Test title';
 })
 class TestPlatformApprovalFlowComponent {
     @ViewChild('approvalFlowComponent', { static: true }) component: ApprovalFlowComponent;
-    title = TEST_APPROVAL_FLOW_TITLE;
+    readonly title = input(TEST_APPROVAL_FLOW_TITLE);
     value = simpleGraph;
     userDataSource = new ApprovalFlowUserDataSource(new UserDataProvider());
     watcherDataSource = new ApprovalFlowUserDataSource(new UserDataProvider());
@@ -97,7 +97,7 @@ describe('ApprovalFlowComponent', () => {
 
         const newTitle = `${TEST_APPROVAL_FLOW_TITLE}-changed`;
 
-        host.title = newTitle;
+        fixture.componentRef.setInput('title', newTitle);
         fixture.detectChanges();
 
         expect(titleEl.textContent.trim()).toEqual(newTitle);
