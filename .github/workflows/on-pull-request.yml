@@ -2,9 +2,7 @@ name: PR checks
 
 on:
     pull_request:
-        types: [opened, synchronize, edited]
-    pull_request_target:
-        types: [edited]
+        types: [opened, edited, synchronize]
 
 env:
     NODE_VERSION: '22.x'
@@ -23,7 +21,6 @@ jobs:
     pr_lint:
         runs-on: ubuntu-latest
         name: Lint PR title and body
-        if: github.event_name == 'pull_request' || github.event_name == 'pull_request_target'
         permissions:
             pull-requests: write
             contents: read
