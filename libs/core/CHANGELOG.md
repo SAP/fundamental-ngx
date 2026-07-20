@@ -1,3 +1,13 @@
+## 0.64.0-rc.6 (2026-07-20)
+
+### 🩹 Fixes
+
+- **core:** remove icon for default Micro process flow element ([#14374](https://github.com/SAP/fundamental-ngx/pull/14374))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.64.0-rc.5 (2026-07-20)
 
 ### 🩹 Fixes
