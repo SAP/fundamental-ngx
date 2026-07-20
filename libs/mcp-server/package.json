@@ -1,6 +1,6 @@
 {
     "name": "@fundamental-ngx/mcp",
-    "version": "0.64.0-rc.10",
+    "version": "0.64.0-rc.11",
     "mcpName": "io.github.sap/fundamental-ngx-mcp",
     "description": "MCP server exposing Fundamental NGX component metadata for AI coding assistants. Includes companion Claude Code skills for project setup, forms, tables, page layouts, and more",
     "license": "Apache-2.0",
