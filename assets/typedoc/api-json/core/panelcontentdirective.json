@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "panel-content.directive.ts",
   "sourceLine": 28,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/panel/panel-content/panel-content.directive.ts#L28",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/876d4661d6/libs/core/panel/panel-content/panel-content.directive.ts#L28",
   "description": "Applies the panel content style to a div element.\n\n```html\n<div fd-panel-content>Panel Content</div>\n```",
   "inputs": [
     {

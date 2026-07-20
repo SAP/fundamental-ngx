@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "nested-list.directive.ts",
   "sourceLine": 59,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/nested-list/nested-list/nested-list.directive.ts#L59",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/876d4661d6/libs/core/nested-list/nested-list/nested-list.directive.ts#L59",
   "description": "<div fd-nested-list>\n <div fd-nested-list>\n </div>\n</div>",
   "inputs": [
     {

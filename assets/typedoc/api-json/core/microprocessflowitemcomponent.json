@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "micro-process-flow-item.component.ts",
   "sourceLine": 34,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/micro-process-flow/components/micro-process-flow-item/micro-process-flow-item.component.ts#L34",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/876d4661d6/libs/core/micro-process-flow/components/micro-process-flow-item/micro-process-flow-item.component.ts#L34",
   "description": "",
   "inputs": [
     {

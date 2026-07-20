@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "layout-grid.component.ts",
   "sourceLine": 33,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/layout-grid/layout-grid.component.ts#L33",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/876d4661d6/libs/core/layout-grid/layout-grid.component.ts#L33",
   "description": "Use a layout grid to arrange components evenly in a grid layout.",
   "inputs": [
     {

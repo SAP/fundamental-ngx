@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "combobox-item.directive.ts",
   "sourceLine": 106,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/platform/form/combobox/directives/combobox-item.directive.ts#L106",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/876d4661d6/libs/platform/form/combobox/directives/combobox-item.directive.ts#L106",
   "description": "",
   "inputs": [],
   "outputs": [],

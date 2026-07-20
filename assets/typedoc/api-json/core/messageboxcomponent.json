@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "message-box.component.ts",
   "sourceLine": 43,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/message-box/message-box.component.ts#L43",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/876d4661d6/libs/core/message-box/message-box.component.ts#L43",
   "description": "Message box component.\n\n```html\n<fd-message-box>\n     <fd-message-box-header></fd-message-box-header>\n     <fd-message-box-body></fd-message-box-body>\n     <fd-message-box-footer></fd-message-box-footer>\n</fd-message-box>\n```",
   "inputs": [],
   "outputs": [],

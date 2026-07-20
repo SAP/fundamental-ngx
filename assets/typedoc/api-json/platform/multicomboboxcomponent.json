@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "multi-combobox.component.ts",
   "sourceLine": 88,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/platform/form/multi-combobox/multi-combobox/multi-combobox.component.ts#L88",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/876d4661d6/libs/platform/form/multi-combobox/multi-combobox/multi-combobox.component.ts#L88",
   "description": "This component can work with both string primitives as well as with complex objects. In order\nto use objects user must provide an unique ID to lookupkey, which will be used in comparing\neach items of array. It is important to provide lookupkey value as there might be multiple\nitems with same name but different properties which is to be differently identified otherwise\nit will be treated as same objects.",
   "inputs": [],
   "outputs": [],

@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "avatar-group-overflow-body.component.ts",
   "sourceLine": 17,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/avatar-group/components/avatar-group-overflow-body/avatar-group-overflow-body.component.ts#L17",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/876d4661d6/libs/core/avatar-group/components/avatar-group-overflow-body/avatar-group-overflow-body.component.ts#L17",
   "description": "Avatar group overflow body component, used to provide a template for the avatar group overflow body.",
   "inputs": [
     {

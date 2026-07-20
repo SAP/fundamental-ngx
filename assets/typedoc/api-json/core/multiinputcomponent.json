@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "multi-input.component.ts",
   "sourceLine": 133,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/multi-input/multi-input.component.ts#L133",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/876d4661d6/libs/core/multi-input/multi-input.component.ts#L133",
   "description": "Input field with multiple selection enabled. Should be used when a user can select between a\nlimited number of pre-defined options with a filter-enabled context.\n\nSupports Angular Forms.",
   "inputs": [
     {

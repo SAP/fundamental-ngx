@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "list-navigation-item-arrow.directive.ts",
   "sourceLine": 12,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/list/directives/list-navigation-item-arrow.directive.ts#L12",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/876d4661d6/libs/core/list/directives/list-navigation-item-arrow.directive.ts#L12",
   "description": "",
   "inputs": [],
   "outputs": [],

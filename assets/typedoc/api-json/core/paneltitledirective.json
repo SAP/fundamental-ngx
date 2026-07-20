@@ -3,8 +3,8 @@
   "selector": "[fd-panel-title]",
   "kind": "Directive",
   "sourceFile": "panel-title.directive.ts",
-  "sourceLine": 20,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/panel/panel-title/panel-title.directive.ts#L20",
+  "sourceLine": 21,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/876d4661d6/libs/core/panel/panel-title/panel-title.directive.ts#L21",
   "description": "Applies the panel title style to a header element. It can be used with any header level.\n\n```html\n<h5 fd-panel-title>Panel Title</h5>\n```",
   "inputs": [
     {
@@ -14,7 +14,17 @@
       "description": "Id of the host element.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 22,
+      "sourceLine": 23,
+      "since": null
+    },
+    {
+      "name": "wrap",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the title text wraps instead of truncating with ellipsis. Enabled by default to satisfy WCAG 1.4.10 Reflow.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 26,
       "since": null
     }
   ],

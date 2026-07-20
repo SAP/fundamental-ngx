@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "overflow-layout.component.ts",
   "sourceLine": 71,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/overflow-layout/overflow-layout.component.ts#L71",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/876d4661d6/libs/core/overflow-layout/overflow-layout.component.ts#L71",
   "description": "",
   "inputs": [
     {

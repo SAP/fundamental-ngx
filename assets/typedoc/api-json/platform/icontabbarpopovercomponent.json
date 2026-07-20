@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "icon-tab-bar-popover.component.ts",
   "sourceLine": 24,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/platform/icon-tab-bar/components/popovers/icon-tab-bar-popover/icon-tab-bar-popover.component.ts#L24",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/876d4661d6/libs/platform/icon-tab-bar/components/popovers/icon-tab-bar-popover/icon-tab-bar-popover.component.ts#L24",
   "description": "",
   "inputs": [
     {

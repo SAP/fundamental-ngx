@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "table-status-indicator.directive.ts",
   "sourceLine": 18,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/table/directives/table-status-indicator.directive.ts#L18",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/876d4661d6/libs/core/table/directives/table-status-indicator.directive.ts#L18",
   "description": "",
   "inputs": [
     {

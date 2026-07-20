@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "table-popping-row.component.ts",
   "sourceLine": 64,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/platform/table/components/table-popping-row/table-popping-row.component.ts#L64",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/876d4661d6/libs/platform/table/components/table-popping-row/table-popping-row.component.ts#L64",
   "description": "",
   "inputs": [
     {

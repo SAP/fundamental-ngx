@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "bar-middle.directive.ts",
   "sourceLine": 15,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/bar/directives/bar-middle.directive.ts#L15",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/876d4661d6/libs/core/bar/directives/bar-middle.directive.ts#L15",
   "description": "The middle section of the Bar component.",
   "inputs": [
     {

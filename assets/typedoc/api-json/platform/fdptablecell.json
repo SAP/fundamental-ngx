@@ -4,7 +4,7 @@
   "kind": "Class",
   "sourceFile": "table-cell.directive.ts",
   "sourceLine": 14,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/platform/table-helpers/directives/table-cell.directive.ts#L14",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/876d4661d6/libs/platform/table-helpers/directives/table-cell.directive.ts#L14",
   "description": "Column cell container.",
   "inputs": [],
   "outputs": [],

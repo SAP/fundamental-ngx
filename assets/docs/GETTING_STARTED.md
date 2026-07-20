@@ -54,9 +54,9 @@ Fundamental NGX is the SAP set of Angular component libraries implementing the S
 ### Requirements
 
 - **Node.js**: LTS version recommended
-- **Angular**: Version 21 or newer
+- **Angular**: Version 22 or newer
 - **npm**: Included with Node.js
-- **TypeScript**: 5.9 or newer
+- **TypeScript**: 6 or newer
 
 **Peer dependencies** (installed automatically by `ng add`, required for manual installs):
 

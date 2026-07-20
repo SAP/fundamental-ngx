@@ -3,8 +3,8 @@
   "selector": "fd-avatar-group-legacy",
   "kind": "Component",
   "sourceFile": "avatar-group-legacy.component.ts",
-  "sourceLine": 49,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/avatar-group-legacy/avatar-group-legacy.component.ts#L49",
+  "sourceLine": 50,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/876d4661d6/libs/core/avatar-group-legacy/avatar-group-legacy.component.ts#L50",
   "description": "",
   "inputs": [
     {
@@ -14,7 +14,7 @@
       "description": "Aria-label for Avatar Group.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 70,
+      "sourceLine": 71,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Apply user custom class.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 58,
+      "sourceLine": 59,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Id of the Avatar Group.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 54,
+      "sourceLine": 55,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "The size of the Avatar Group. Options include: *xs*, *s*, *m*, *l* and *xl* (default: *s*).",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 62,
+      "sourceLine": 63,
       "since": null
     },
     {
@@ -54,7 +54,7 @@
       "description": "The type of the Avatar Group. Options include: *group* and *individual* (default: *group*).",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 66,
+      "sourceLine": 67,
       "since": null
     }
   ],

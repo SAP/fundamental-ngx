@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "feed-list-item.component.ts",
   "sourceLine": 29,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/feed-list-item/components/item/feed-list-item.component.ts#L29",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/876d4661d6/libs/core/feed-list-item/components/item/feed-list-item.component.ts#L29",
   "description": "",
   "inputs": [
     {

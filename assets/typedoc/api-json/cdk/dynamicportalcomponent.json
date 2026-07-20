@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "dynamic-portal.component.ts",
   "sourceLine": 41,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/cdk/utils/components/dynamic-portal/dynamic-portal.component.ts#L41",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/876d4661d6/libs/cdk/utils/components/dynamic-portal/dynamic-portal.component.ts#L41",
   "description": "A component that can be used to attach a portal to a DOM element, without explicitly creating portal instances on place.\nThis is useful when you have a list of the components or templates, or HTMLElmets, and you want to attach them to the DOM\ndynamically in a loop.",
   "inputs": [],
   "outputs": [

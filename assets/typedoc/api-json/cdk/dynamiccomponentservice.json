@@ -3,8 +3,8 @@
   "selector": null,
   "kind": "Service",
   "sourceFile": "dynamic-component.service.ts",
-  "sourceLine": 23,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/cdk/utils/dynamic-component/dynamic-component.service.ts#L23",
+  "sourceLine": 24,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/876d4661d6/libs/cdk/utils/dynamic-component/dynamic-component.service.ts#L24",
   "description": "Service used to dynamically generate components like dialogs/alerts/notifications",
   "inputs": [],
   "outputs": [],
@@ -14,7 +14,7 @@
       "signature": "(content: string | Type<any> | TemplateRef<any> | Record<string, any>, componentType: Type<T>, config: DynamicComponentConfig, inject: { injector: Injector; services: any[] }) => ComponentRef<T>",
       "description": "Function that creates dynamic component and injects services to allow communication between component and outside",
       "deprecated": null,
-      "sourceLine": 39,
+      "sourceLine": 37,
       "since": null,
       "parameters": [
         {
@@ -47,39 +47,39 @@
     {
       "name": "createDynamicModule",
       "signature": "(content: string | Type<any> | TemplateRef<any> | Record<string, any>, moduleType: Type<M> | NgModuleFactory<M>, componentType: Type<C>, containerRef: ViewContainerRef, injector?: Injector) => Promise<ComponentRef<C>>",
-      "description": "Function that creates dynamic component and injects services to allow communication between component and outside",
-      "deprecated": null,
-      "sourceLine": 62,
+      "description": "",
+      "deprecated": "`NgModule`-based lazy loading is no longer supported. Use standalone components with\ndynamic `import()` and `ViewContainerRef.createComponent()` instead. This method will be removed\nin a future release; it has no internal callers and its `NgModuleFactory` / `Compiler` dependencies\nare themselves deprecated since Angular 14.",
+      "sourceLine": 57,
       "since": null,
       "parameters": [
         {
           "name": "content",
           "type": "string | Type<any> | TemplateRef<any> | Record<string, any>",
-          "description": "Type of the component content",
+          "description": "",
           "optional": false
         },
         {
           "name": "moduleType",
           "type": "Type<M> | NgModuleFactory<M>",
-          "description": "Type of module that should be compiled.",
+          "description": "",
           "optional": false
         },
         {
           "name": "componentType",
           "type": "Type<C>",
-          "description": "Type of component that should be rendered.",
+          "description": "",
           "optional": false
         },
         {
           "name": "containerRef",
           "type": "ViewContainerRef",
-          "description": "The container that the dynamic component is appended to.",
+          "description": "",
           "optional": false
         },
         {
           "name": "injector",
           "type": "Injector",
-          "description": "enables to provide preconfigured component injector",
+          "description": "",
           "optional": true
         }
       ],
@@ -90,7 +90,7 @@
       "signature": "(componentRef: ComponentRef<any>) => void",
       "description": "Function that destroys dynamic component",
       "deprecated": null,
-      "sourceLine": 84,
+      "sourceLine": 80,
       "since": null,
       "parameters": [
         {

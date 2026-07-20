@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "base.step-input.ts",
   "sourceLine": 41,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/platform/form/step-input/base.step-input.ts#L41",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/876d4661d6/libs/platform/form/step-input/base.step-input.ts#L41",
   "description": "StepInputComponent is a base abstract class that should be used\nto create type specific StepInput components such as number, money, unitOfMeasure\nThis holds base Step Input functionality that can be abstracted",
   "inputs": [
     {

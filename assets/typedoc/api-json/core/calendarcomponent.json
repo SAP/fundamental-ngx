@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "calendar.component.ts",
   "sourceLine": 111,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/calendar/calendar.component.ts#L111",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/876d4661d6/libs/core/calendar/calendar.component.ts#L111",
   "description": "Months: 1 = January, 12 = december.\nDays: 1 = Sunday, 7 = Saturday\n\nCalendar component used for selecting dates, typically used by the DatePicker and DateTimePicker components.\nSupports the Angular forms module, enabling form validity, ngModel, etc.\n```html\n<fd-calendar></fd-calendar>\n```",
   "inputs": [
     {

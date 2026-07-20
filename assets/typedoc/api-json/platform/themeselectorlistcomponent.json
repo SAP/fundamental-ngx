@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "theme-selector-list.component.ts",
   "sourceLine": 29,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/platform/settings-generator/controls/theme-selector-list/theme-selector-list.component.ts#L29",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/876d4661d6/libs/platform/settings-generator/controls/theme-selector-list/theme-selector-list.component.ts#L29",
   "description": "Abstract class that used as a base for the Dynamic Form Generator components.",
   "inputs": [],
   "outputs": [],

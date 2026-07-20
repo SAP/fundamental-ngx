@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "tree-item.component.ts",
   "sourceLine": 80,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/tree/components/tree-item/tree-item.component.ts#L80",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/876d4661d6/libs/core/tree/components/tree-item/tree-item.component.ts#L80",
   "description": "Abstract base class for tree item components.\nDefines the contract for tree item implementations with navigation, selection, and hierarchy support.",
   "inputs": [
     {

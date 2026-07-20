@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "panel.component.ts",
   "sourceLine": 39,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/panel/panel.component.ts#L39",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/876d4661d6/libs/core/panel/panel.component.ts#L39",
   "description": "The panel is a container for grouping and displaying information\nTypes: Expandable (default) and Fixed\nModes: Tablet/Mobile (default) and Desktop (compact)",
   "inputs": [
     {

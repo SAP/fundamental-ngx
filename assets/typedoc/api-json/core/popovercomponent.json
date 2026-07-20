@@ -3,8 +3,8 @@
   "selector": "fd-popover",
   "kind": "Component",
   "sourceFile": "popover.component.ts",
-  "sourceLine": 87,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/popover/popover.component.ts#L87",
+  "sourceLine": 88,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/876d4661d6/libs/core/popover/popover.component.ts#L88",
   "description": "The popover is a wrapping component that accepts a *control* as well as a *body*.\nThe control is what will trigger the opening of the actual popover, which is called the body.\nBy default, popovers are triggered by click. This can be customized through the *triggers* input.",
   "inputs": [
     {
@@ -14,7 +14,7 @@
       "description": "Additional CSS class for the popover body container",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 174,
+      "sourceLine": 175,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Additional CSS class for the popover trigger element",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 177,
+      "sourceLine": 178,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "The element to which the overlay is attached. By default it is body",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 159,
+      "sourceLine": 160,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "Whether to apply a background overlay",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 171,
+      "sourceLine": 172,
       "since": null
     },
     {
@@ -54,7 +54,7 @@
       "description": "ARIA label for the popover body",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 189,
+      "sourceLine": 190,
       "since": null
     },
     {
@@ -64,7 +64,7 @@
       "description": "ID of the element that labels the popover body. Alternative to\n[bodyAriaLabel] when the label already exists in the DOM (e.g. the\ntrigger's text). Sets aria-labelledby on the popover body.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 218,
+      "sourceLine": 219,
       "since": null
     },
     {
@@ -74,7 +74,7 @@
       "description": "ARIA role for the popover body. Default: 'dialog' (back-compat).\n\nWhen 'dialog', WCAG requires an accessible name — provide one via\n[bodyAriaLabel] or [bodyAriaLabelledBy]. Without a name, axe-core\nraises aria-dialog-name violations.\n\nSet to null when the popover is a non-modal disclosure widget and\nthe trigger's aria-haspopup already carries the relationship (no role\nattribute is rendered). Other valid values: 'region', 'menu', 'listbox',\n'tooltip', 'alertdialog' — match the role to the popover's actual semantics.\nAny valid ARIA role is accepted; the type provides autocomplete for common cases.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 211,
+      "sourceLine": 212,
       "since": null
     },
     {
@@ -84,7 +84,7 @@
       "description": "List of position options for CDK overlay",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 168,
+      "sourceLine": 169,
       "since": null
     },
     {
@@ -94,7 +94,7 @@
       "description": "Whether escape key should close the popover",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 133,
+      "sourceLine": 134,
       "since": null
     },
     {
@@ -104,7 +104,7 @@
       "description": "Whether to close the popover on router navigation start",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 180,
+      "sourceLine": 181,
       "since": null
     },
     {
@@ -114,7 +114,7 @@
       "description": "Whether clicking outside popover should close it",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 130,
+      "sourceLine": 131,
       "since": null
     },
     {
@@ -124,7 +124,7 @@
       "description": "Configuration object for popover settings.\nWhen provided, these settings will be merged with individual input properties.\nIndividual inputs take precedence over config object values.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 93,
+      "sourceLine": 94,
       "since": null
     },
     {
@@ -134,7 +134,7 @@
       "description": "Whether scrollbar should be disabled",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 156,
+      "sourceLine": 157,
       "since": null
     },
     {
@@ -144,7 +144,7 @@
       "description": "Whether the popover is disabled",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 136,
+      "sourceLine": 137,
       "since": null
     },
     {
@@ -154,7 +154,7 @@
       "description": "Preset options for the popover body width.\n* `at-least` will apply a minimum width to the body equivalent to the width of the control.\n* `equal` will apply a width to the body equivalent to the width of the control.\n* Leave blank for no effect.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 127,
+      "sourceLine": 128,
       "since": null
     },
     {
@@ -164,7 +164,7 @@
       "description": "Whether position shouldn't change when popover approaches the corner of page",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 183,
+      "sourceLine": 184,
       "since": null
     },
     {
@@ -174,7 +174,7 @@
       "description": "Whether focus should be automatically captured when popover opens",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 145,
+      "sourceLine": 146,
       "since": null
     },
     {
@@ -184,7 +184,7 @@
       "description": "Whether the popover should trap focus",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 142,
+      "sourceLine": 143,
       "since": null
     },
     {
@@ -194,7 +194,7 @@
       "description": "Id of the popover. If none is provided, one will be generated.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 102,
+      "sourceLine": 103,
       "since": null
     },
     {
@@ -204,7 +204,7 @@
       "description": "Two-way binding for popover open state",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 221,
+      "sourceLine": 222,
       "since": null
     },
     {
@@ -214,7 +214,7 @@
       "description": "Maximum width of popover body in px, prevents from overextending body by `fillControlMode`",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 119,
+      "sourceLine": 120,
       "since": null
     },
     {
@@ -224,7 +224,7 @@
       "description": "Whether the popover component should be displayed in mobile mode.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 105,
+      "sourceLine": 106,
       "since": null
     },
     {
@@ -234,7 +234,7 @@
       "description": "Config for the popover in mobile mode",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 108,
+      "sourceLine": 109,
       "since": null
     },
     {
@@ -244,7 +244,7 @@
       "description": "Whether the arrow should be hidden",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 153,
+      "sourceLine": 154,
       "since": null
     },
     {
@@ -254,7 +254,7 @@
       "description": "Popover placement",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 116,
+      "sourceLine": 117,
       "since": null
     },
     {
@@ -264,7 +264,7 @@
       "description": "Placement of the popover element",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 162,
+      "sourceLine": 163,
       "since": null
     },
     {
@@ -274,7 +274,7 @@
       "description": "Whether the popover should prevent page scrolling when space key is pressed.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 113,
+      "sourceLine": 114,
       "since": null
     },
     {
@@ -284,7 +284,7 @@
       "description": "Whether the popover body is resizable",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 186,
+      "sourceLine": 187,
       "since": null
     },
     {
@@ -294,7 +294,7 @@
       "description": "Whether to move the focus after popover is closed to the last focused element before popover was opened.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 150,
+      "sourceLine": 151,
       "since": null
     },
     {
@@ -304,7 +304,7 @@
       "description": "Scroll strategy for the overlay",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 165,
+      "sourceLine": 166,
       "since": null
     },
     {
@@ -314,7 +314,7 @@
       "description": "Tooltip for popover",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 96,
+      "sourceLine": 97,
       "since": null
     },
     {
@@ -324,7 +324,7 @@
       "description": "Reference to popover trigger element",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 99,
+      "sourceLine": 100,
       "since": null
     },
     {
@@ -334,7 +334,7 @@
       "description": "Popover trigger events configuration",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 139,
+      "sourceLine": 140,
       "since": null
     }
   ],
@@ -346,7 +346,7 @@
       "description": "Event emitted right before the popover is being opened.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 227,
+      "sourceLine": 228,
       "since": null
     },
     {
@@ -356,17 +356,7 @@
       "description": "Two-way binding for popover open state",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 221,
-      "since": null
-    },
-    {
-      "name": "isOpenChange",
-      "type": "boolean",
-      "default": null,
-      "description": "Event emitted when the state of the isOpen property changes.",
-      "isSignal": true,
-      "deprecated": null,
-      "sourceLine": 224,
+      "sourceLine": 222,
       "since": null
     },
     {
@@ -376,7 +366,7 @@
       "description": "Reference to popover trigger element",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 99,
+      "sourceLine": 100,
       "since": null
     }
   ],
@@ -386,7 +376,7 @@
       "signature": "(positions: ConnectedPosition[]) => void",
       "description": "Method called to change position of popover,\nrecommended to be used only when popover is opened, otherwise change position or cdkPlacement",
       "deprecated": null,
-      "sourceLine": 450,
+      "sourceLine": 451,
       "since": null,
       "parameters": [
         {
@@ -403,7 +393,7 @@
       "signature": "(focusActiveElement: boolean) => void",
       "description": "Closes the popover.",
       "deprecated": null,
-      "sourceLine": 432,
+      "sourceLine": 433,
       "since": null,
       "parameters": [
         {
@@ -420,7 +410,7 @@
       "signature": "() => void",
       "description": "Opens the popover.",
       "deprecated": null,
-      "sourceLine": 422,
+      "sourceLine": 423,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -430,7 +420,7 @@
       "signature": "() => void",
       "description": "Method called to refresh position of opened popover",
       "deprecated": null,
-      "sourceLine": 455,
+      "sourceLine": 456,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -440,7 +430,7 @@
       "signature": "(ignore: boolean) => void",
       "description": "Temporary sets the ignoring of the event triggers.",
       "deprecated": null,
-      "sourceLine": 442,
+      "sourceLine": 443,
       "since": null,
       "parameters": [
         {
@@ -457,7 +447,7 @@
       "signature": "() => void",
       "description": "Toggles menu open/close state",
       "deprecated": null,
-      "sourceLine": 413,
+      "sourceLine": 414,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -467,7 +457,7 @@
       "signature": "(event: KeyboardEvent) => void",
       "description": "Handler for alt + arrow down keydown",
       "deprecated": null,
-      "sourceLine": 460,
+      "sourceLine": 461,
       "since": null,
       "parameters": [
         {

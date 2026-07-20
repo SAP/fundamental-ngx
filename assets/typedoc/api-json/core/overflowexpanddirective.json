@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "overflow-expand.directive.ts",
   "sourceLine": 18,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/overflow-layout/directives/overflow-expand.directive.ts#L18",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/876d4661d6/libs/core/overflow-layout/directives/overflow-expand.directive.ts#L18",
   "description": "Structural directive which is responsible for rendering the \"More\" button and handling further logic.",
   "inputs": [
     {

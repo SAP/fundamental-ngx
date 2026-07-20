@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "datetime-picker.component.ts",
   "sourceLine": 32,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/platform/form/datetime-picker/datetime-picker.component.ts#L32",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/876d4661d6/libs/platform/form/datetime-picker/datetime-picker.component.ts#L32",
   "description": "All form components share the same information (value, name, placeholder,.. ) as well as\nthe same behavior given by ControlValueAccessor.\n\nEven this is not ideal solution there is no other way then use inheritance to reuse some of the\ncommon logic. It should be possible to use some kind of compositions with Proxies but something\nsimilar that exists in Aspect Oriented Programing.\n\nUsually try to fire stateChange only for things that can change dynamically in runtime. We don't expect\nthat e.g. placeholder will change after component is created",
   "inputs": [
     {

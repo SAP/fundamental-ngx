@@ -3,8 +3,8 @@
   "selector": "fd-notification",
   "kind": "Component",
   "sourceFile": "notification.component.ts",
-  "sourceLine": 66,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/notification/notification/notification.component.ts#L66",
+  "sourceLine": 65,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/876d4661d6/libs/core/notification/notification/notification.component.ts#L65",
   "description": "",
   "inputs": [
     {
@@ -14,7 +14,7 @@
       "description": "Whether the notificatioon is in mobile mode",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 74,
+      "sourceLine": 73,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "whether the Notificaion is selected\ndefault is set to false",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 100,
+      "sourceLine": 99,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "User defined width for the notification",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 71,
+      "sourceLine": 70,
       "since": null
     }
   ],
@@ -45,7 +45,7 @@
       "signature": "() => Promise<boolean>",
       "description": "Moves the focus inside the focus trap.",
       "deprecated": null,
-      "sourceLine": 237,
+      "sourceLine": 233,
       "since": null,
       "parameters": [],
       "returnType": "Promise<boolean>"

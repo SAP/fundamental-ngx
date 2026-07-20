@@ -4,7 +4,7 @@
   "kind": "Class",
   "sourceFile": "title.component.ts",
   "sourceLine": 47,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/title/title.component.ts#L47",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/876d4661d6/libs/core/title/title.component.ts#L47",
   "description": "Abstract token for providing access to the title component's element reference.\nUsed for dependency injection when components need to access the title element.",
   "inputs": [],
   "outputs": [],

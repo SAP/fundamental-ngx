@@ -4,7 +4,7 @@
   "kind": "Service",
   "sourceFile": "base-toast.service.ts",
   "sourceLine": 31,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/cdk/utils/toast/base-toast.service.ts#L31",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/876d4661d6/libs/cdk/utils/toast/base-toast.service.ts#L31",
   "description": "",
   "inputs": [],
   "outputs": [],

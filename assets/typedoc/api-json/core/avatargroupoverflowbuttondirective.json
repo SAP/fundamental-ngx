@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "avatar-group-overflow-button.directive.ts",
   "sourceLine": 12,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/avatar-group/directives/avatar-group-overflow-button.directive.ts#L12",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/876d4661d6/libs/core/avatar-group/directives/avatar-group-overflow-button.directive.ts#L12",
   "description": "Avatar group overflow button directive, used to provide a template for the avatar group overflow button.\nIf nothing is provided, default overflow button will be used.",
   "inputs": [],
   "outputs": [],

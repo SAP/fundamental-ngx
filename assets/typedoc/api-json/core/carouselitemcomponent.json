@@ -3,8 +3,8 @@
   "selector": "fd-carousel-item",
   "kind": "Component",
   "sourceFile": "carousel-item.component.ts",
-  "sourceLine": 44,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/carousel/carousel-item/carousel-item.component.ts#L44",
+  "sourceLine": 46,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/876d4661d6/libs/core/carousel/carousel-item/carousel-item.component.ts#L46",
   "description": "",
   "inputs": [
     {
@@ -14,7 +14,7 @@
       "description": "Initial height value, needed when carousel is inside popover",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 78,
+      "sourceLine": 80,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Initial height value, needed when carousel is inside popover",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 82,
+      "sourceLine": 84,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Loading indicator when item is not yet loaded",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 69,
+      "sourceLine": 71,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "Value of carousel item",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 86,
+      "sourceLine": 88,
       "since": null
     }
   ],
@@ -55,7 +55,7 @@
       "signature": "() => number",
       "description": "Height of element",
       "deprecated": null,
-      "sourceLine": 127,
+      "sourceLine": 133,
       "since": null,
       "parameters": [],
       "returnType": "number"
@@ -65,7 +65,7 @@
       "signature": "() => number",
       "description": "Width of element",
       "deprecated": null,
-      "sourceLine": 122,
+      "sourceLine": 128,
       "since": null,
       "parameters": [],
       "returnType": "number"

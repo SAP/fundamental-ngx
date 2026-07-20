@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "dialog.component.ts",
   "sourceLine": 66,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/core/dialog/dialog.component.ts#L66",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/876d4661d6/libs/core/dialog/dialog.component.ts#L66",
   "description": "Dialog component.\n\n```html\n<fd-dialog>\n     <fd-dialog-header></fd-dialog-header>\n     <fd-dialog-body></fd-dialog-body>\n     <fd-dialog-footer></fd-dialog-footer>\n</fd-dialog>\n```",
   "inputs": [],
   "outputs": [],

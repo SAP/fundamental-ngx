@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "filter-custom.component.ts",
   "sourceLine": 36,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/94fde42ad8/libs/platform/table/components/table-view-settings-dialog/filtering/filter-custom.component.ts#L36",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/876d4661d6/libs/platform/table/components/table-view-settings-dialog/filtering/filter-custom.component.ts#L36",
   "description": "Custom Select filter type.\n\nUsed to render user's custom filter template",
   "inputs": [
     {
