@@ -1,3 +1,13 @@
+## 0.64.0-rc.7 (2026-07-20)
+
+### 🩹 Fixes
+
+- **core:** make fd-panel-title wrap instead of truncating ([#14377](https://github.com/SAP/fundamental-ngx/pull/14377))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
 ## 0.64.0-rc.6 (2026-07-20)
 
 ### 🩹 Fixes
