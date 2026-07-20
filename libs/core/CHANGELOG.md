@@ -1,3 +1,13 @@
+## 0.64.0-rc.5 (2026-07-20)
+
+### 🩹 Fixes
+
+- **core:** provide fix for linearGradient console error in Status Indicator ([#14371](https://github.com/SAP/fundamental-ngx/pull/14371))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.64.0-rc.4 (2026-07-17)
 
 This was a version bump only for core to align it with other projects, there were no code changes.
