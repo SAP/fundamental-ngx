@@ -1,3 +1,13 @@
+## 0.64.0 (2026-07-20)
+
+### 🩹 Fixes
+
+- **ci:** grant contents:write permission for gh-pages deployment ([#14349](https://github.com/SAP/fundamental-ngx/pull/14349))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.64.0-rc.11 (2026-07-20)
 
 This was a version bump only for ui5-webcomponents to align it with other projects, there were no code changes.

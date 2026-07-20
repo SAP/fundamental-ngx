@@ -1,3 +1,19 @@
+## 0.64.0 (2026-07-20)
+
+### 🩹 Fixes
+
+- **core:** make fd-panel-title wrap instead of truncating ([#14377](https://github.com/SAP/fundamental-ngx/pull/14377))
+- **core:** remove icon for default Micro process flow element ([#14374](https://github.com/SAP/fundamental-ngx/pull/14374))
+- **core:** provide fix for linearGradient console error in Status Indicator ([#14371](https://github.com/SAP/fundamental-ngx/pull/14371))
+- **core:** track time column rows by value to prevent DOM re-creation ([#14359](https://github.com/SAP/fundamental-ngx/pull/14359), [#14362](https://github.com/SAP/fundamental-ngx/pull/14362))
+- **ci:** grant contents:write permission for gh-pages deployment ([#14349](https://github.com/SAP/fundamental-ngx/pull/14349))
+
+### ❤️ Thank You
+
+- deno
+- Inna Atanasova @InnaAtanasova
+- Maria Dineva @MariaIDineva
+
 ## 0.64.0-rc.11 (2026-07-20)
 
 This was a version bump only for core to align it with other projects, there were no code changes.
