@@ -39,11 +39,7 @@ export class TabbableElementService {
     }
 
     private _isTabbableElement(element: HTMLElement): boolean {
-        return (
-            this._checker.isTabbable(element) &&
-            !this._isElementDisabled(element) &&
-            this._checker.isFocusable(element, { ignoreVisibility: true })
-        );
+        return this._checker.isTabbable(element) && !this._isElementDisabled(element);
     }
 
     private _isElementDisabled(element: HTMLElement): boolean {
