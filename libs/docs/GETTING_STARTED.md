@@ -220,6 +220,10 @@ npx nx serve docs --configuration=core
 
 Navigate to `http://localhost:4200` to view the documentation.
 
+## Version Support and Release Policy
+
+For currently supported versions and release timelines, see the [Version Support and Release Policy wiki](https://github.com/SAP/fundamental-ngx/wiki/Version-Support-and-Release-Policy#current-version-matrix).
+
 ## Support
 
 If you encounter an issue, [create a ticket](https://github.com/SAP/fundamental-ngx/issues).
