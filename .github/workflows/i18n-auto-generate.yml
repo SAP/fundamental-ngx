@@ -53,7 +53,7 @@ jobs:
               env:
                   BASE_REF: ${{ github.event.pull_request.base.ref }}
               run: |
-                  echo "🔍 Validating fork PR only modifies translation files..."
+                  echo "🔍 Validating fork PR only modifies .properties translation files..."
 
                   # Fetch base branch for comparison
                   git fetch origin "$BASE_REF"
@@ -65,16 +65,16 @@ jobs:
                   echo "$FILES"
                   echo ""
 
-                  # Validate file paths (more specific regex - no subdirectories)
+                  # Validate file paths - only .properties files in translations directory are allowed for fork PRs
                   INVALID_FILES=""
                   for file in $FILES; do
-                      if [[ ! "$file" =~ ^libs/i18n/src/lib/translations/[^/]+\.(properties|ts)$ ]]; then
+                      if [[ ! "$file" =~ ^libs/i18n/src/lib/translations/[^/]+\.properties$ ]]; then
                           INVALID_FILES="$INVALID_FILES\n  - $file"
                       fi
                   done
 
                   if [ -n "$INVALID_FILES" ]; then
-                      echo "❌ ERROR: Fork PR modifies non-translation files:"
+                      echo "❌ ERROR: Fork PR modifies files other than .properties translation files:"
                       echo -e "$INVALID_FILES"
                       echo ""
                       echo "For security reasons, fork PRs can only modify .properties files in:"
@@ -91,10 +91,10 @@ jobs:
               run: |
                   echo "🔍 Validating file sizes and content..."
 
-                  # Check file sizes (500KB limit, current max is 86KB)
+                  # Check file sizes (500KB limit)
                   LARGE_FILES=$(find libs/i18n/src/lib/translations -name "*.properties" -size +500k)
                   if [ -n "$LARGE_FILES" ]; then
-                      echo "❌ ERROR: Files exceed 500KB limit:"
+                      echo "❌ ERROR: .properties files exceed 500KB limit:"
                       echo "$LARGE_FILES"
                       exit 1
                   fi
@@ -124,9 +124,9 @@ jobs:
             - name: Generate TypeScript files
               id: generate
               run: |
-                  echo "🔧 Generating TypeScript files..."
-                  if ! npx nx run i18n:transform-translations; then
-                      echo "❌ Transform failed"
+                  echo "🔧 Generating TypeScript translation files from .properties changes..."
+                  if ! npx nx run i18n:i18n-manage --command=sync; then
+                      echo "❌ Sync failed"
                       exit 1
                   fi
                   echo "✅ Generation completed"
