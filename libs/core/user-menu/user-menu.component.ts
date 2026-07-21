@@ -14,7 +14,6 @@ import {
     inject,
     Injector,
     input,
-    isDevMode,
     output,
     Renderer2,
     signal,
@@ -23,7 +22,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
-import { asyncScheduler, filter, observeOn, switchMap } from 'rxjs';
+import { filter, switchMap } from 'rxjs';
 
 import { KeyboardSupportService, RtlService, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityMode, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
@@ -159,19 +158,17 @@ export class UserMenuComponent implements AfterViewInit {
         this._listItems()?.forEach((item) => item.mobile.set(isMobile));
 
         // Subscribe to user menu control clicks for mobile mode
-        // Use toObservable + switchMap to auto-unsubscribe when control changes
+        // Switch to control's clicked observable when control becomes available
         toObservable(this.userMenuControl, { injector: this._injector })
             .pipe(
-                filter((control) => !!control),
+                filter((control) => !!control && this.mobile()),
                 switchMap((control) => control!.clicked),
                 takeUntilDestroyed(this._destroyRef)
             )
             .subscribe(() => {
-                if (this.mobile()) {
-                    const template = this.dialogTemplate();
-                    if (template) {
-                        this.openDialog(template);
-                    }
+                const template = this.dialogTemplate();
+                if (template) {
+                    this.openDialog(template);
                 }
             });
 
@@ -245,24 +242,19 @@ export class UserMenuComponent implements AfterViewInit {
         });
 
         // Focus first list item when dialog loads
-        // Use observeOn(asyncScheduler) to ensure dialog has fully rendered
+        // Use requestAnimationFrame for consistent timing with popover mode
         toObservable(this._dialogRef.isLoaded, { injector: this._injector })
             .pipe(
                 filter((loaded) => loaded),
-                observeOn(asyncScheduler),
                 takeUntilDestroyed(this._destroyRef)
             )
             .subscribe(() => {
-                try {
+                requestAnimationFrame(() => {
                     const firstListItem = this._listItems()[0];
                     if (firstListItem) {
                         firstListItem.focus();
                     }
-                } catch (error) {
-                    if (isDevMode()) {
-                        console.error('Failed to focus first user menu item', error);
-                    }
-                }
+                });
             });
 
         const refSub = this._dialogRef.afterClosed.subscribe({
@@ -331,6 +323,10 @@ export class UserMenuComponent implements AfterViewInit {
      * @hidden
      */
     private _resetListFocus(): void {
-        resetListFocus(this._listItems());
+        const items = this._listItems();
+        if (!items || items.length === 0) {
+            return;
+        }
+        resetListFocus(items);
     }
 }

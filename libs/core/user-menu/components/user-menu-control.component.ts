@@ -13,7 +13,7 @@ import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Output, V
     imports: []
 })
 export class UserMenuControlComponent {
-    /** Event emitted event when control element is clicked */
+    /** Event emitted when control element is clicked */
     @Output()
     clicked: EventEmitter<void> = new EventEmitter<void>();
 
@@ -25,10 +25,16 @@ export class UserMenuControlComponent {
         this.clicked.emit();
     }
 
-    /** @hidden */
+    /**
+     * Handles keyboard activation (Enter or Space).
+     * Prevents default to avoid scrolling on Space and stops propagation
+     * to prevent unintended bubbling to parent elements.
+     * @hidden
+     */
     onKeydown(event: KeyboardEvent): void {
         if (event.key === 'Enter' || event.key === ' ') {
             event.preventDefault();
+            event.stopPropagation();
             this.clicked.emit();
         }
     }

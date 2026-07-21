@@ -123,25 +123,29 @@ export class UserMenuBodyComponent implements AfterViewInit {
     /**
      * Reset roving tabindex when focus leaves the menu entirely,
      * so Tab re-entry starts at the first item instead of the last-focused item.
-     * Uses requestAnimationFrame to ensure focus has settled before checking.
+     *
+     * First checks relatedTarget synchronously for quick exits, then uses
+     * setTimeout(0) to handle cases where focus transitions through multiple
+     * items before leaving (relatedTarget can be temporarily null during rapid moves).
      * @hidden
      */
     onFocusOut(event: FocusEvent): void {
         const relatedTarget = event.relatedTarget as HTMLElement;
         const currentTarget = event.currentTarget as HTMLElement;
 
-        // Check if focus is leaving the menu body entirely
-        // Use requestAnimationFrame to allow focus to settle - during rapid transitions,
-        // relatedTarget might be null temporarily before focus actually moves
-        if (!relatedTarget || !currentTarget.contains(relatedTarget)) {
-            requestAnimationFrame(() => {
-                // Recheck if focus is still outside the menu after the frame
-                const activeElement = document.activeElement as HTMLElement;
-                if (!activeElement || !currentTarget.contains(activeElement)) {
-                    this._resetListFocus();
-                }
-            });
+        // Synchronous check: if relatedTarget is known and inside menu, don't reset
+        if (relatedTarget && currentTarget.contains(relatedTarget)) {
+            return;
         }
+
+        // Deferred check: ensure focus has fully settled before resetting
+        // This handles rapid transitions where relatedTarget might be null temporarily
+        setTimeout(() => {
+            const activeElement = document.activeElement as HTMLElement;
+            if (!activeElement || !currentTarget.contains(activeElement)) {
+                this._resetListFocus();
+            }
+        }, 0);
     }
 
     /** @hidden */

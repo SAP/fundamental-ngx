@@ -3,9 +3,12 @@ import { UserMenuListItemComponent } from '../components/user-menu-list-item.com
 /**
  * Resets roving tabindex to the first list item.
  *
- * Roving tabindex preserves focus within the list (important for submenus),
- * but when tabbing back into the menu from outside, focus should start at
- * the first item, not the last-focused item. Called when focus leaves the menu.
+ * In a roving tabindex pattern, only one item has tabindex="0" at a time,
+ * allowing arrow keys to navigate within the list. This function resets
+ * the pattern so the first item becomes tabbable again.
+ *
+ * Typically called when focus leaves the menu to ensure that when users
+ * Tab back in, focus starts at the first item rather than the last-focused item.
  */
 export function resetListFocus(items: readonly UserMenuListItemComponent[]): void {
     if (!items || items.length === 0) {
