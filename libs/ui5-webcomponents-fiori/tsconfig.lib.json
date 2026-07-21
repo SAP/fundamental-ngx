@@ -1,7 +1,7 @@
 {
     "extends": "./tsconfig.json",
     "compilerOptions": {
-        "outDir": "../../dist/out-tsc",
+        "outDir": "../../dist/out-tsc/ui5-webcomponents-fiori",
         "target": "es2023",
         "declaration": true,
         "declarationMap": true,
@@ -14,6 +14,7 @@
         "moduleResolution": "bundler",
         "skipLibCheck": true,
         "module": "preserve",
+        "composite": true,
         "paths": {
             "@fundamental-ngx/core": [
                 "dist/libs/core"
@@ -27,8 +28,7 @@
             "@fundamental-ngx/ui5-webcomponents-base/*": [
                 "dist/libs/ui5-webcomponents-base/*"
             ]
-        },
-        "rootDir": "../../"
+        }
     },
     "angularCompilerOptions": {
         "skipTemplateCodegen": true,

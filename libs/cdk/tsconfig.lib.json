@@ -1,7 +1,7 @@
 {
     "extends": "./tsconfig.json",
     "compilerOptions": {
-        "outDir": "../../dist/out-tsc",
+        "outDir": "../../dist/out-tsc/cdk",
         "target": "es2023",
         "declaration": true,
         "declarationMap": true,
@@ -9,7 +9,7 @@
         "lib": ["dom", "es2023"],
         "useDefineForClassFields": false,
         "moduleResolution": "bundler",
-        "rootDir": "../../"
+        "composite": true
     },
     "angularCompilerOptions": {
         "skipTemplateCodegen": true,

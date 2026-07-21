@@ -1,7 +1,7 @@
 {
     "extends": "./tsconfig.json",
     "compilerOptions": {
-        "outDir": "../../dist/out-tsc",
+        "outDir": "../../dist/out-tsc/i18n",
         "declaration": true,
         "declarationMap": true,
         "inlineSources": true,
@@ -9,7 +9,7 @@
         "target": "es2023",
         "useDefineForClassFields": false,
         "moduleResolution": "bundler",
-        "rootDir": "../../"
+        "composite": true
     },
     "exclude": ["src/test.ts", "**/*.spec.ts", "**/*.test.ts", "src/lib/utils/translation-tester.ts"],
     "files": ["./src/index.ts"],

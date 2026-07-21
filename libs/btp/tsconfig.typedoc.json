@@ -1,15 +1,14 @@
 {
     "extends": "./tsconfig.json",
     "compilerOptions": {
-        "outDir": "../../dist/out-tsc/core",
+        "outDir": "../../dist/out-tsc",
         "target": "es2023",
         "declaration": true,
         "declarationMap": true,
         "types": [],
         "lib": ["dom", "es2023"],
         "useDefineForClassFields": false,
-        "moduleResolution": "bundler",
-        "composite": true
+        "moduleResolution": "bundler"
     },
     "angularCompilerOptions": {
         "skipTemplateCodegen": true,
@@ -23,7 +22,5 @@
         "strictMetadataEmit": true,
         "enableResourceInlining": true
     },
-    "files": ["./index.ts"],
-    "exclude": ["test.ts", "**/*.spec.ts"],
-    "include": ["**/*.ts"]
+    "files": ["./index.ts"]
 }
