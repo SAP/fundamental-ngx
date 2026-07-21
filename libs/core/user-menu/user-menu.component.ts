@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import {
+    afterNextRender,
     AfterViewInit,
     booleanAttribute,
     ChangeDetectionStrategy,
@@ -12,6 +13,7 @@ import {
     effect,
     ElementRef,
     inject,
+    Injector,
     input,
     output,
     Renderer2,
@@ -134,7 +136,11 @@ export class UserMenuComponent implements AfterViewInit {
     /** @hidden */
     private _dialogRef: DialogRef | undefined;
 
+    /** @hidden */
     private readonly _destroyRef = inject(DestroyRef);
+
+    /** @hidden */
+    private readonly _injector = inject(Injector);
 
     /** @hidden */
     constructor() {
@@ -237,6 +243,20 @@ export class UserMenuComponent implements AfterViewInit {
             contentDensity: ContentDensityMode.COZY
         });
 
+        // Focus the first list item after dialog renders
+        // Need longer delay to override dialog's focus management
+        afterNextRender(
+            () => {
+                setTimeout(() => {
+                    const firstListItem = this._listItems()[0];
+                    if (firstListItem) {
+                        firstListItem.focus();
+                    }
+                }, 100);
+            },
+            { injector: this._injector }
+        );
+
         const refSub = this._dialogRef.afterClosed.subscribe({
             next: () => {
                 this.userMenuControl()?.focus();
@@ -262,6 +282,17 @@ export class UserMenuComponent implements AfterViewInit {
 
         if (!isOpen && !this.mobile()) {
             this.userMenuControl()?.focus();
+        }
+
+        // Focus first list item when popover opens
+        if (isOpen && !this.mobile()) {
+            // Use setTimeout to ensure the popover body is rendered
+            setTimeout(() => {
+                const firstListItem = this._listItems()[0];
+                if (firstListItem) {
+                    firstListItem.focus();
+                }
+            });
         }
 
         const userMenuControlEl = this.userMenuControlElement()?.nativeElement;
