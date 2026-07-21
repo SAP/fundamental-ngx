@@ -33,6 +33,15 @@ export class UserMenuControlComponent {
     }
 
     /** @hidden */
+    @HostListener('keydown', ['$event'])
+    onKeydown(event: KeyboardEvent): void {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            this.clicked.emit();
+        }
+    }
+
+    /** @hidden */
     focus(): void {
         this.el.nativeElement.focus();
     }

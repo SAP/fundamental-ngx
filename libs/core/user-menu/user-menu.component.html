@@ -32,9 +32,7 @@
         </fd-popover-body>
     </fd-popover>
 } @else {
-    <span (click)="openDialog(dialogTemplate)">
-        <ng-container *ngTemplateOutlet="control"></ng-container>
-    </span>
+    <ng-container *ngTemplateOutlet="control"></ng-container>
 
     <ng-template [fdDialogTemplate] let-dialog let-dialogConfig="dialogConfig" #dialogTemplate>
         <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">

@@ -17,6 +17,7 @@ import {
     Renderer2,
     signal,
     TemplateRef,
+    viewChild,
     ViewEncapsulation
 } from '@angular/core';
 
@@ -108,6 +109,9 @@ export class UserMenuComponent implements AfterViewInit {
     protected readonly userMenuBody = contentChild(UserMenuBodyComponent, { descendants: true });
 
     /** @hidden */
+    protected readonly dialogTemplate = viewChild<TemplateRef<any>>('dialogTemplate');
+
+    /** @hidden */
     protected readonly navigationArrow = computed(() =>
         this._rtlService.rtl() ? 'navigation-right-arrow' : 'navigation-left-arrow'
     );
@@ -137,6 +141,25 @@ export class UserMenuComponent implements AfterViewInit {
         effect(() => {
             const isMobile = this.mobile();
             this._listItems()?.forEach((item) => item.mobile.set(isMobile));
+        });
+
+        // Subscribe to user menu control clicks for mobile mode
+        effect(() => {
+            const control = this.userMenuControl();
+            if (!control) {
+                return;
+            }
+
+            const subscription = control.clicked.subscribe(() => {
+                if (this.mobile()) {
+                    const template = this.dialogTemplate();
+                    if (template) {
+                        this.openDialog(template);
+                    }
+                }
+            });
+
+            this._destroyRef.onDestroy(() => subscription.unsubscribe());
         });
     }
 
