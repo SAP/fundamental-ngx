@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import {
-    afterNextRender,
     AfterViewInit,
     booleanAttribute,
     ChangeDetectionStrategy,
@@ -15,6 +14,7 @@ import {
     inject,
     Injector,
     input,
+    isDevMode,
     output,
     Renderer2,
     signal,
@@ -22,6 +22,8 @@ import {
     viewChild,
     ViewEncapsulation
 } from '@angular/core';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
+import { asyncScheduler, filter, observeOn, switchMap } from 'rxjs';
 
 import { KeyboardSupportService, RtlService, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityMode, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
@@ -43,6 +45,7 @@ import { UserMenuControlComponent } from './components/user-menu-control.compone
 import { UserMenuListItemComponent } from './components/user-menu-list-item.component';
 import { UserMenuControlElementDirective } from './directives/user-menu-control-element.directive';
 import { UserMenuUserNameDirective } from './directives/user-menu-user-name.directive';
+import { resetListFocus } from './utils/focus-utils';
 
 @Component({
     selector: 'fd-user-menu',
@@ -148,15 +151,22 @@ export class UserMenuComponent implements AfterViewInit {
             const isMobile = this.mobile();
             this._listItems()?.forEach((item) => item.mobile.set(isMobile));
         });
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        const isMobile = this.mobile();
+        this._listItems()?.forEach((item) => item.mobile.set(isMobile));
 
         // Subscribe to user menu control clicks for mobile mode
-        effect(() => {
-            const control = this.userMenuControl();
-            if (!control) {
-                return;
-            }
-
-            const subscription = control.clicked.subscribe(() => {
+        // Use toObservable + switchMap to auto-unsubscribe when control changes
+        toObservable(this.userMenuControl, { injector: this._injector })
+            .pipe(
+                filter((control) => !!control),
+                switchMap((control) => control!.clicked),
+                takeUntilDestroyed(this._destroyRef)
+            )
+            .subscribe(() => {
                 if (this.mobile()) {
                     const template = this.dialogTemplate();
                     if (template) {
@@ -164,15 +174,6 @@ export class UserMenuComponent implements AfterViewInit {
                     }
                 }
             });
-
-            this._destroyRef.onDestroy(() => subscription.unsubscribe());
-        });
-    }
-
-    /** @hidden */
-    ngAfterViewInit(): void {
-        const isMobile = this.mobile();
-        this._listItems()?.forEach((item) => item.mobile.set(isMobile));
 
         const el = this.userNameEl()?.nativeElement;
 
@@ -243,19 +244,26 @@ export class UserMenuComponent implements AfterViewInit {
             contentDensity: ContentDensityMode.COZY
         });
 
-        // Focus the first list item after dialog renders
-        // Need longer delay to override dialog's focus management
-        afterNextRender(
-            () => {
-                setTimeout(() => {
+        // Focus first list item when dialog loads
+        // Use observeOn(asyncScheduler) to ensure dialog has fully rendered
+        toObservable(this._dialogRef.isLoaded, { injector: this._injector })
+            .pipe(
+                filter((loaded) => loaded),
+                observeOn(asyncScheduler),
+                takeUntilDestroyed(this._destroyRef)
+            )
+            .subscribe(() => {
+                try {
                     const firstListItem = this._listItems()[0];
                     if (firstListItem) {
                         firstListItem.focus();
                     }
-                }, 100);
-            },
-            { injector: this._injector }
-        );
+                } catch (error) {
+                    if (isDevMode()) {
+                        console.error('Failed to focus first user menu item', error);
+                    }
+                }
+            });
 
         const refSub = this._dialogRef.afterClosed.subscribe({
             next: () => {
@@ -284,17 +292,6 @@ export class UserMenuComponent implements AfterViewInit {
             this.userMenuControl()?.focus();
         }
 
-        // Focus first list item when popover opens
-        if (isOpen && !this.mobile()) {
-            // Use setTimeout to ensure the popover body is rendered
-            setTimeout(() => {
-                const firstListItem = this._listItems()[0];
-                if (firstListItem) {
-                    firstListItem.focus();
-                }
-            });
-        }
-
         const userMenuControlEl = this.userMenuControlElement()?.nativeElement;
 
         this.userMenuControlElement()?.nativeElement &&
@@ -303,6 +300,17 @@ export class UserMenuComponent implements AfterViewInit {
                 : this._renderer.removeClass(userMenuControlEl, 'is-active'));
 
         this._changeDetectionRef.detectChanges();
+
+        // Focus first list item when popover opens
+        // Use requestAnimationFrame to allow popover rendering to complete
+        if (isOpen && !this.mobile()) {
+            requestAnimationFrame(() => {
+                const firstListItem = this._listItems()[0];
+                if (firstListItem) {
+                    firstListItem.focus();
+                }
+            });
+        }
     }
 
     /** @hidden */
@@ -323,15 +331,6 @@ export class UserMenuComponent implements AfterViewInit {
      * @hidden
      */
     private _resetListFocus(): void {
-        const items = this._listItems();
-        if (items.length === 0) {
-            return;
-        }
-
-        // Reset tabindex: first item gets 0, rest get -1
-        items[0]._tabIndex$.set(0);
-        for (let i = 1; i < items.length; i++) {
-            items[i]._tabIndex$.set(-1);
-        }
+        resetListFocus(this._listItems());
     }
 }

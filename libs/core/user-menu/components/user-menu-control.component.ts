@@ -1,12 +1,4 @@
-import {
-    ChangeDetectionStrategy,
-    Component,
-    ElementRef,
-    EventEmitter,
-    HostListener,
-    Output,
-    ViewEncapsulation
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: 'fd-user-menu-control',
@@ -14,7 +6,9 @@ import {
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        tabindex: '0'
+        tabindex: '0',
+        '(click)': 'onClick()',
+        '(keydown)': 'onKeydown($event)'
     },
     imports: []
 })
@@ -27,13 +21,11 @@ export class UserMenuControlComponent {
     constructor(private el: ElementRef<HTMLElement>) {}
 
     /** @hidden */
-    @HostListener('click')
     onClick(): void {
         this.clicked.emit();
     }
 
     /** @hidden */
-    @HostListener('keydown', ['$event'])
     onKeydown(event: KeyboardEvent): void {
         if (event.key === 'Enter' || event.key === ' ') {
             event.preventDefault();

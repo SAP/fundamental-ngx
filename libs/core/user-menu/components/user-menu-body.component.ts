@@ -6,7 +6,6 @@ import {
     ContentChildren,
     DestroyRef,
     ElementRef,
-    HostListener,
     QueryList,
     TemplateRef,
     ViewEncapsulation,
@@ -30,13 +29,16 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { Subject, startWith } from 'rxjs';
 import { UserMenuUserNameDirective } from '../directives/user-menu-user-name.directive';
+import { resetListFocus } from '../utils/focus-utils';
 import { UserMenuListItemComponent } from './user-menu-list-item.component';
 
 @Component({
     selector: 'fd-user-menu-body',
     templateUrl: './user-menu-body.component.html',
     host: {
-        class: 'fd-user-menu__body'
+        class: 'fd-user-menu__body',
+        '(click)': 'onClick($event)',
+        '(focusout)': 'onFocusOut($event)'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -114,7 +116,6 @@ export class UserMenuBodyComponent implements AfterViewInit {
     private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
-    @HostListener('click', ['$event'])
     onClick(event: MouseEvent): void {
         event.stopPropagation();
     }
@@ -122,16 +123,24 @@ export class UserMenuBodyComponent implements AfterViewInit {
     /**
      * Reset roving tabindex when focus leaves the menu entirely,
      * so Tab re-entry starts at the first item instead of the last-focused item.
+     * Uses requestAnimationFrame to ensure focus has settled before checking.
      * @hidden
      */
-    @HostListener('focusout', ['$event'])
     onFocusOut(event: FocusEvent): void {
         const relatedTarget = event.relatedTarget as HTMLElement;
         const currentTarget = event.currentTarget as HTMLElement;
 
         // Check if focus is leaving the menu body entirely
+        // Use requestAnimationFrame to allow focus to settle - during rapid transitions,
+        // relatedTarget might be null temporarily before focus actually moves
         if (!relatedTarget || !currentTarget.contains(relatedTarget)) {
-            this._resetListFocus();
+            requestAnimationFrame(() => {
+                // Recheck if focus is still outside the menu after the frame
+                const activeElement = document.activeElement as HTMLElement;
+                if (!activeElement || !currentTarget.contains(activeElement)) {
+                    this._resetListFocus();
+                }
+            });
         }
     }
 
@@ -235,11 +244,6 @@ export class UserMenuBodyComponent implements AfterViewInit {
             return;
         }
 
-        const items = this._listItems.toArray();
-        // Reset tabindex: first item gets 0, rest get -1
-        items[0]._tabIndex$.set(0);
-        for (let i = 1; i < items.length; i++) {
-            items[i]._tabIndex$.set(-1);
-        }
+        resetListFocus(this._listItems.toArray());
     }
 }
