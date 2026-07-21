@@ -119,6 +119,22 @@ export class UserMenuBodyComponent implements AfterViewInit {
         event.stopPropagation();
     }
 
+    /**
+     * Reset roving tabindex when focus leaves the menu entirely,
+     * so Tab re-entry starts at the first item instead of the last-focused item.
+     * @hidden
+     */
+    @HostListener('focusout', ['$event'])
+    onFocusOut(event: FocusEvent): void {
+        const relatedTarget = event.relatedTarget as HTMLElement;
+        const currentTarget = event.currentTarget as HTMLElement;
+
+        // Check if focus is leaving the menu body entirely
+        if (!relatedTarget || !currentTarget.contains(relatedTarget)) {
+            this._resetListFocus();
+        }
+    }
+
     /** @hidden */
     ngAfterViewInit(): void {
         this._listItems.changes
@@ -211,5 +227,19 @@ export class UserMenuBodyComponent implements AfterViewInit {
     closeDialog(dialogRef): void {
         dialogRef.dismiss('Close');
         this.clearSubmenu();
+    }
+
+    /** @hidden */
+    private _resetListFocus(): void {
+        if (!this._listItems || this._listItems.length === 0) {
+            return;
+        }
+
+        const items = this._listItems.toArray();
+        // Reset tabindex: first item gets 0, rest get -1
+        items[0]._tabIndex$.set(0);
+        for (let i = 1; i < items.length; i++) {
+            items[i]._tabIndex$.set(-1);
+        }
     }
 }

@@ -225,7 +225,7 @@ export class UserMenuComponent implements AfterViewInit {
                 item._elementRef?.nativeElement.querySelector('.fd-menu__link')?.classList.remove('is-active');
             });
 
-            this._listItems()[0]?._tabIndex$.set(0);
+            this._resetListFocus();
         }
 
         this._clearSubmenu();
@@ -310,6 +310,28 @@ export class UserMenuComponent implements AfterViewInit {
         const userMenuBody = this.userMenuBody();
         if (userMenuBody) {
             userMenuBody.clearSubmenu();
+        }
+    }
+
+    /**
+     * Resets roving tabindex to the first list item.
+     *
+     * Roving tabindex preserves focus within the list (important for submenus),
+     * but when tabbing back into the menu from outside, focus should start at
+     * the first item, not the last-focused item. Called when focus leaves the menu.
+     *
+     * @hidden
+     */
+    private _resetListFocus(): void {
+        const items = this._listItems();
+        if (items.length === 0) {
+            return;
+        }
+
+        // Reset tabindex: first item gets 0, rest get -1
+        items[0]._tabIndex$.set(0);
+        for (let i = 1; i < items.length; i++) {
+            items[i]._tabIndex$.set(-1);
         }
     }
 }
