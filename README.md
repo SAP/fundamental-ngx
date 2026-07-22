@@ -247,10 +247,6 @@ If you encounter an issue, you can [create a ticket](https://github.com/SAP/fund
 
 Angular version support: features and enhancements target the latest version. Bugfixes can be downported to the version compiled with the previous Angular release. More details on the [Angular Versions Support](https://github.com/SAP/fundamental-ngx/wiki/Angular-Versions-Support) wiki page.
 
-## Version Support and Release Policy
-
-For currently supported versions and release timelines, see the [Version Support and Release Policy wiki](https://github.com/SAP/fundamental-ngx/wiki/Version-Support-and-Release-Policy#current-version-matrix).
-
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines and [NEW_COMPONENT.md](NEW_COMPONENT.md) for a step-by-step guide to building new components.

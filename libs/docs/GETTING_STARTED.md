@@ -49,6 +49,35 @@ Fundamental NGX is the SAP set of Angular component libraries implementing the S
 | [`@fundamental-ngx/mcp`](libs/mcp-server)      | MCP server for AI coding assistants |
 | [`@fundamental-ngx/nx-plugin`](libs/nx-plugin) | NX generators and executors         |
 
+## Version Support and Release Policy
+
+### Currently Supported Versions
+
+| fundamental-ngx | Angular |                         UI5 Web Components                          | Status                           |
+| :-------------- | :-----: | :-----------------------------------------------------------------: | :------------------------------- |
+| **0.64.0** 🎉   |   22    | [2.24.x](https://github.com/UI5/webcomponents/releases/tag/v2.24.0) | 🟢 ACTIVE                        |
+| **0.63.1** 📍   |   21    | [2.24.x](https://github.com/UI5/webcomponents/releases/tag/v2.24.0) | 🟡 LTS (Last Angular 21 release) |
+| ~~**0.63.0**~~  |   21    | [2.23.x](https://github.com/UI5/webcomponents/releases/tag/v2.23.0) | ⚫ Superseded by 0.63.x          |
+| ~~**0.62.4**~~  |   21    | [2.22.x](https://github.com/UI5/webcomponents/releases/tag/v2.22.0) | ⚫ Superseded by 0.63.x          |
+| ~~**0.62.0**~~  |   21    | [2.21.x](https://github.com/UI5/webcomponents/releases/tag/v2.21.0) | ⚫ Superseded by 0.63.x          |
+| ~~**0.61.0**~~  |   21    | [2.20.x](https://github.com/UI5/webcomponents/releases/tag/v2.20.0) | ⚫ Superseded by 0.63.x          |
+| ~~**0.60.x**~~  |   21    | [2.19.x](https://github.com/UI5/webcomponents/releases/tag/v2.19.0) | ⚫ Superseded by 0.63.x          |
+| ~~**0.59.x**~~  |   21    | [2.18.x](https://github.com/UI5/webcomponents/releases/tag/v2.18.1) | ⚫ Superseded by 0.63.x          |
+| **0.58.x** 📍   |   20    | [2.18.x](https://github.com/UI5/webcomponents/releases/tag/v2.18.1) | 🟡 LTS (Last Angular 20 release) |
+| ~~**0.57.x**~~  |   20    |                                N.A.                                 | ⚫ Superseded by 0.58.x          |
+
+**Support tiers:**
+
+- 🟢 **Active Support** — new features, all bug fixes, security patches, and documentation updates
+
+- 🟡 **LTS** — critical fixes only (security vulnerabilities, regressions, blocking bugs)
+
+- ⚫ **End of Life** — no updates (Angular 19 and lower)
+
+**⚠️ Upgrade recommendation:** Angular 20 and 21 are in LTS mode with critical fixes only. For active feature development and full support, upgrade to Angular 22.
+
+See the [complete version policy](https://github.com/SAP/fundamental-ngx/wiki/Version-Support-and-Release-Policy) for LTS backporting rules and release schedules.
+
 ## Quick Start
 
 ### Requirements
@@ -219,10 +248,6 @@ npx nx serve docs --configuration=core
 ```
 
 Navigate to `http://localhost:4200` to view the documentation.
-
-## Version Support and Release Policy
-
-For currently supported versions and release timelines, see the [Version Support and Release Policy wiki](https://github.com/SAP/fundamental-ngx/wiki/Version-Support-and-Release-Policy#current-version-matrix).
 
 ## Support
 
