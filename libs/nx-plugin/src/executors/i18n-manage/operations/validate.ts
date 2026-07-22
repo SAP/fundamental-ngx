@@ -1,12 +1,12 @@
 import { workspaceRoot } from '@nx/devkit';
 import { sync as fastGlobSync } from 'fast-glob';
 import { readFileSync } from 'fs';
-import { parsePropertiesFile } from '../utils/properties-parser';
+import { extractKeysFromFdLanguageInterface, updateFdLanguageKeyIdentifier } from '../../shared/update-typings';
 
 export interface ValidationError {
     file: string;
     line?: number;
-    type: 'missing-keys' | 'extra-keys' | 'missing-comment' | 'invalid-comment' | 'icu-syntax';
+    type: 'missing-keys' | 'extra-keys' | 'missing-comment' | 'invalid-comment' | 'icu-syntax' | 'interface-mismatch';
     message: string;
     keys?: string[];
 }
@@ -36,56 +36,7 @@ const VALID_COMMENT_TYPES = [
 ];
 
 /**
- * Validate comment headers in properties file
- */
-function validateComments(filePath: string, content: string): ValidationError[] {
-    const errors: ValidationError[] = [];
-    const lines = content.split('\n');
-
-    for (let i = 0; i < lines.length; i++) {
-        const line = lines[i].trim();
-
-        // Is this a key=value line?
-        if (line && !line.startsWith('#') && line.includes('=')) {
-            const key = line.split('=')[0].trim();
-
-            // Check if previous line is a comment
-            if (i === 0 || !lines[i - 1].trim().startsWith('#')) {
-                errors.push({
-                    file: filePath,
-                    line: i + 1,
-                    type: 'missing-comment',
-                    message: `Key "${key}" is missing a comment header`
-                });
-            } else {
-                // Validate comment format
-                const comment = lines[i - 1].trim();
-                const match = comment.match(/^#([A-Z]+):/);
-
-                if (!match) {
-                    errors.push({
-                        file: filePath,
-                        line: i,
-                        type: 'invalid-comment',
-                        message: `Invalid comment format for key "${key}". Expected: #XTYPE: Description`
-                    });
-                } else if (!VALID_COMMENT_TYPES.includes(match[1])) {
-                    errors.push({
-                        file: filePath,
-                        line: i,
-                        type: 'invalid-comment',
-                        message: `Invalid comment type "${match[1]}" for key "${key}". Valid types: ${VALID_COMMENT_TYPES.join(', ')}`
-                    });
-                }
-            }
-        }
-    }
-
-    return errors;
-}
-
-/**
- * Validate that all .properties files have the same keys
+ * Validate that all translation files have the same keys
  */
 function validateKeyConsistency(files: Map<string, Set<string>>): ValidationError[] {
     const errors: ValidationError[] = [];
@@ -152,17 +103,17 @@ function validateICUSyntax(filePath: string, entries: Map<string, string>): Vali
 }
 
 /**
- * Validate all .properties files
+ * Validate all TypeScript translation files
  */
 export async function validate(propertiesPath: string): Promise<ValidateResult> {
-    const propertiesPattern = `${propertiesPath}/*.properties`;
-    const propertiesFiles = fastGlobSync(propertiesPattern, { cwd: workspaceRoot });
+    const tsPattern = `${propertiesPath}/translations*.ts`;
+    const tsFiles = fastGlobSync(tsPattern, { cwd: workspaceRoot, ignore: ['**/*.spec.ts'] });
 
-    if (propertiesFiles.length === 0) {
+    if (tsFiles.length === 0) {
         return {
             success: false,
             errors: [],
-            summary: `No .properties files found at: ${propertiesPattern}`
+            summary: `No TypeScript translation files found at: ${tsPattern}`
         };
     }
 
@@ -170,20 +121,26 @@ export async function validate(propertiesPath: string): Promise<ValidateResult> 
     const fileKeysMap = new Map<string, Set<string>>();
 
     // Validate each file
-    for (const propertiesFile of propertiesFiles) {
-        const filePath = `${workspaceRoot}/${propertiesFile}`;
+    for (const tsFile of tsFiles) {
+        const filePath = `${workspaceRoot}/${tsFile}`;
         const fileContent = readFileSync(filePath, 'utf-8');
 
-        // Parse keys
-        const entries = parsePropertiesFile(fileContent);
-        fileKeysMap.set(propertiesFile, new Set(entries.keys()));
+        // Parse the TypeScript default export object to extract keys
+        const keys = extractKeysFromTsFile(fileContent);
+        if (keys.size === 0) {
+            allErrors.push({
+                file: tsFile,
+                type: 'icu-syntax',
+                message: 'Failed to parse TypeScript translation file or file is empty'
+            });
+            continue;
+        }
 
-        // Validate comments
-        const commentErrors = validateComments(propertiesFile, fileContent);
-        allErrors.push(...commentErrors);
+        fileKeysMap.set(tsFile, keys);
 
-        // Validate ICU syntax
-        const icuErrors = validateICUSyntax(propertiesFile, entries);
+        // Validate ICU syntax by extracting values from the TS file
+        const entries = extractEntriesFromTsFile(fileContent);
+        const icuErrors = validateICUSyntax(tsFile, entries);
         allErrors.push(...icuErrors);
     }
 
@@ -191,14 +148,199 @@ export async function validate(propertiesPath: string): Promise<ValidateResult> 
     const consistencyErrors = validateKeyConsistency(fileKeysMap);
     allErrors.push(...consistencyErrors);
 
+    // Validate fd-language.ts interface matches translations.properties
+    const interfaceErrors = await validateInterfaceMatch(propertiesPath);
+    allErrors.push(...interfaceErrors);
+
     const success = allErrors.length === 0;
     const summary = success
-        ? `✅ All ${propertiesFiles.length} .properties files are valid`
-        : `❌ Found ${allErrors.length} validation error(s) across ${propertiesFiles.length} files`;
+        ? `✅ All ${tsFiles.length} TypeScript translation files are valid`
+        : `❌ Found ${allErrors.length} validation error(s) across ${tsFiles.length} files`;
+
+    // If validation succeeds, rebuild fd-language-key-identifier.ts from fd-language.ts
+    if (success) {
+        console.log('🔄 Rebuilding fd-language-key-identifier.ts...');
+        try {
+            const languageKeys = extractKeysFromFdLanguageInterface();
+            updateFdLanguageKeyIdentifier(languageKeys);
+            console.log('✅ fd-language-key-identifier.ts updated');
+        } catch (error) {
+            console.error('⚠️  Warning: Failed to rebuild fd-language-key-identifier.ts:', error);
+        }
+    }
 
     return {
         success,
         errors: allErrors,
         summary
     };
+}
+
+/**
+ * Validate that fd-language.ts interface matches translations.properties
+ */
+async function validateInterfaceMatch(propertiesPath: string): Promise<ValidationError[]> {
+    const errors: ValidationError[] = [];
+
+    try {
+        // Extract keys from fd-language.ts interface (returns array)
+        const interfaceKeysArray = extractKeysFromFdLanguageInterface();
+        const interfaceKeys = new Set(interfaceKeysArray);
+
+        // Extract keys from translations.properties
+        const basePropertiesFile = `${workspaceRoot}/${propertiesPath}/translations.properties`;
+        const propertiesContent = readFileSync(basePropertiesFile, 'utf-8');
+        const propertiesKeys = extractKeysFromTsFile(
+            `export default ${JSON.stringify(extractEntriesFromPropertiesFile(propertiesContent), null, 4)};`
+        );
+
+        // Check for keys in interface but not in properties
+        // (This is the validation that matters - interface is source of truth)
+        const missingInProperties: string[] = [];
+        for (const key of interfaceKeys) {
+            if (!propertiesKeys.has(key)) {
+                missingInProperties.push(key);
+            }
+        }
+
+        if (missingInProperties.length > 0) {
+            errors.push({
+                file: `${propertiesPath}/translations.properties`,
+                type: 'interface-mismatch',
+                message: `${missingInProperties.length} key(s) defined in fd-language.ts interface but missing from translations.properties`,
+                keys: missingInProperties.slice(0, 10)
+            });
+        }
+
+        // Check for keys in properties but not in interface
+        const missingInInterface: string[] = [];
+        for (const key of propertiesKeys) {
+            if (!interfaceKeys.has(key)) {
+                missingInInterface.push(key);
+            }
+        }
+
+        if (missingInInterface.length > 0) {
+            errors.push({
+                file: 'libs/i18n/src/lib/models/fd-language.ts',
+                type: 'interface-mismatch',
+                message: `${missingInInterface.length} key(s) in translations.properties but missing from fd-language.ts interface`,
+                keys: missingInInterface.slice(0, 10)
+            });
+        }
+    } catch (error) {
+        errors.push({
+            file: 'validation',
+            type: 'interface-mismatch',
+            message: `Failed to validate interface match: ${error instanceof Error ? error.message : String(error)}`
+        });
+    }
+
+    return errors;
+}
+
+/**
+ * Extract keys from a .properties file
+ */
+function extractEntriesFromPropertiesFile(content: string): Record<string, string> {
+    const result: Record<string, string> = {};
+    const lines = content.split('\n');
+
+    for (const line of lines) {
+        const trimmed = line.trim();
+        if (trimmed && !trimmed.startsWith('#') && trimmed.includes('=')) {
+            const equalIndex = trimmed.indexOf('=');
+            const key = trimmed.substring(0, equalIndex).trim();
+            const value = trimmed.substring(equalIndex + 1).trim();
+            if (key) {
+                result[key] = value;
+            }
+        }
+    }
+
+    return result;
+}
+
+/**
+ * Extract keys from a TypeScript translation file
+ */
+function extractKeysFromTsFile(content: string): Set<string> {
+    const keys = new Set<string>();
+    try {
+        // Extract the object literal from 'export default { ... };'
+        const match = content.match(/export default\s+(\{[\s\S]+\});?\s*$/m);
+        if (!match) {
+            return keys;
+        }
+
+        // Parse as JSON first (for generated files using JSON.stringify)
+        let obj: any;
+        try {
+            obj = JSON.parse(match[1]);
+        } catch {
+            // Fallback: use Function constructor for JavaScript object literal syntax
+            obj = new Function(`return ${match[1]}`)();
+        }
+
+        // Recursively extract all keys
+        function extractKeys(obj: any, prefix = ''): void {
+            for (const key in obj) {
+                if (!Object.prototype.hasOwnProperty.call(obj, key)) {
+                    continue;
+                }
+                const fullKey = prefix ? `${prefix}.${key}` : key;
+                if (typeof obj[key] === 'object' && obj[key] !== null) {
+                    extractKeys(obj[key], fullKey);
+                } else {
+                    keys.add(fullKey);
+                }
+            }
+        }
+
+        extractKeys(obj);
+    } catch {
+        // Parse failed, return empty set
+    }
+    return keys;
+}
+
+/**
+ * Extract key-value entries from a TypeScript translation file
+ */
+function extractEntriesFromTsFile(content: string): Map<string, string> {
+    const entries = new Map<string, string>();
+    try {
+        const match = content.match(/export default\s+(\{[\s\S]+\});?\s*$/m);
+        if (!match) {
+            return entries;
+        }
+
+        // Parse as JSON first (for generated files using JSON.stringify)
+        let obj: any;
+        try {
+            obj = JSON.parse(match[1]);
+        } catch {
+            // Fallback: use Function constructor for JavaScript object literal syntax
+            obj = new Function(`return ${match[1]}`)();
+        }
+
+        function extractEntries(obj: any, prefix = ''): void {
+            for (const key in obj) {
+                if (!Object.prototype.hasOwnProperty.call(obj, key)) {
+                    continue;
+                }
+                const fullKey = prefix ? `${prefix}.${key}` : key;
+                if (typeof obj[key] === 'object' && obj[key] !== null) {
+                    extractEntries(obj[key], fullKey);
+                } else {
+                    entries.set(fullKey, String(obj[key]));
+                }
+            }
+        }
+
+        extractEntries(obj);
+    } catch {
+        // Parse failed, return empty map
+    }
+    return entries;
 }

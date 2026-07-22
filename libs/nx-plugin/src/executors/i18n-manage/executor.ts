@@ -4,6 +4,7 @@ import { removeKey } from './operations/remove-key';
 import { renameKey } from './operations/rename-key';
 import { searchKeys } from './operations/search-keys';
 import { sortKeys } from './operations/sort-keys';
+import { sync } from './operations/sync';
 import { updateKey } from './operations/update-key';
 import { validate } from './operations/validate';
 import { I18nManageExecutorSchema } from './schema';
@@ -36,6 +37,8 @@ export default async function runExecutor(
                 return await handleUpdate(options, context);
             case 'sort':
                 return await handleSort(options, context);
+            case 'sync':
+                return await handleSync(options, context);
             default:
                 throw new Error(`Unknown command: ${command}`);
         }
@@ -82,8 +85,7 @@ async function handleAdd(options: I18nManageExecutorSchema, context: ExecutorCon
     });
 
     if (result.success) {
-        console.log(`✅ Success! Modified ${result.filesModified.length} .properties files`);
-        console.log(`   Generated TypeScript files`);
+        console.log(`✅ Success! Modified ${result.filesModified.length} TypeScript translation files`);
         console.log('');
     } else {
         console.error(`❌ Error: ${result.error}`);
@@ -121,8 +123,7 @@ async function handleRename(options: I18nManageExecutorSchema, context: Executor
     });
 
     if (result.success) {
-        console.log(`✅ Success! Modified ${result.filesModified.length} .properties files`);
-        console.log(`   Generated TypeScript files`);
+        console.log(`✅ Success! Modified ${result.filesModified.length} TypeScript translation files`);
         console.log('');
     } else {
         console.error(`❌ Error: ${result.error}`);
@@ -159,8 +160,7 @@ async function handleRemove(options: I18nManageExecutorSchema, context: Executor
     });
 
     if (result.success) {
-        console.log(`✅ Success! Modified ${result.filesModified.length} .properties files`);
-        console.log(`   Generated TypeScript files`);
+        console.log(`✅ Success! Modified ${result.filesModified.length} TypeScript translation files`);
         console.log('');
     } else {
         console.error(`❌ Error: ${result.error}`);
@@ -249,8 +249,7 @@ async function handleUpdate(options: I18nManageExecutorSchema, context: Executor
     });
 
     if (result.success) {
-        console.log(`✅ Success! Modified ${result.filesModified.length} .properties files`);
-        console.log(`   Generated TypeScript files`);
+        console.log(`✅ Success! Modified ${result.filesModified.length} TypeScript translation files`);
         console.log('');
     } else {
         console.error(`❌ Error: ${result.error}`);
@@ -271,7 +270,7 @@ async function handleValidate(options: I18nManageExecutorSchema, context: Execut
         };
     }
 
-    console.log(`\n🔍 Validating .properties files...`);
+    console.log(`\n🔍 Validating translation files...`);
     console.log('');
 
     const result = await validate(propertiesPath);
@@ -328,7 +327,7 @@ async function handleSort(options: I18nManageExecutorSchema, context: ExecutorCo
         };
     }
 
-    console.log(`\n🔧 Sorting .properties files...`);
+    console.log(`\n🔧 Sorting TypeScript translation files...`);
     console.log('');
 
     const result = await sortKeys({ propertiesPath });
@@ -341,8 +340,35 @@ async function handleSort(options: I18nManageExecutorSchema, context: ExecutorCo
             for (const file of result.filesModified) {
                 console.log(`   - ${file}`);
             }
-            console.log(`   Generated TypeScript files`);
         }
+        console.log('');
+    } else {
+        console.error(`❌ Error: ${result.error}`);
+        console.log('');
+    }
+
+    return result;
+}
+
+async function handleSync(options: I18nManageExecutorSchema, context: ExecutorContext): Promise<I18nManageResult> {
+    const { propertiesPath } = options;
+
+    // Validation
+    if (!propertiesPath) {
+        return {
+            success: false,
+            filesModified: [],
+            error: '--propertiesPath is required. Configure it in project.json'
+        };
+    }
+
+    console.log(`\n🔧 Syncing TypeScript translation files from .properties files...`);
+    console.log('');
+
+    const result = await sync({ propertiesPath });
+
+    if (result.success) {
+        console.log(`✅ Success! Generated/updated ${result.filesModified.length} file(s)`);
         console.log('');
     } else {
         console.error(`❌ Error: ${result.error}`);

@@ -17,13 +17,6 @@
             },
             "outputs": ["{options.outputPath}"]
         },
-        "transform-translations": {
-            "executor": "@fundamental-ngx/nx-plugin:transform-translations",
-            "options": {
-                "properties": ["{projectRoot}/src/lib/translations/*.properties"]
-            },
-            "outputs": ["{projectRoot}/src/lib/translations/*.ts"]
-        },
         "build": {
             "executor": "@nx/angular:package",
             "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
@@ -38,7 +31,14 @@
                 "development": {}
             },
             "defaultConfiguration": "production",
-            "dependsOn": ["transform-translations", "^build"]
+            "dependsOn": ["^build", "i18n-sync"]
+        },
+        "i18n-sync": {
+            "executor": "@fundamental-ngx/nx-plugin:i18n-manage",
+            "options": {
+                "propertiesPath": "{projectRoot}/src/lib/translations",
+                "command": "sync"
+            }
         },
         "test": {
             "executor": "@nx/jest:jest",
@@ -47,7 +47,7 @@
                 "jestConfig": "{projectRoot}/jest.config.ts",
                 "tsConfig": "libs/i18n/tsconfig.spec.json"
             },
-            "dependsOn": ["transform-translations"]
+            "dependsOn": ["i18n-sync"]
         },
         "i18n-manage": {
             "executor": "@fundamental-ngx/nx-plugin:i18n-manage",
