@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
-import { Component, DebugElement } from '@angular/core';
+import { Component, DebugElement, input, InputSignal } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { DndItemDirective, FdDropEvent } from '@fundamental-ngx/cdk/utils';
 import { createKeyboardEvent } from '@fundamental-ngx/core/tests';
@@ -51,13 +51,13 @@ const LARGE_LIST: ProductSwitchItem[] = [
 @Component({
     selector: 'fd-product-switch-body-test',
     template:
-        '<fd-product-switch-body [products]="list" [forceListMode]="forceListMode" [dragAndDropEnabled]="dragAndDropEnabled"> </fd-product-switch-body>',
+        '<fd-product-switch-body [products]="list()" [forceListMode]="forceListMode()" [dragAndDropEnabled]="dragAndDropEnabled()"> </fd-product-switch-body>',
     imports: [ProductSwitchBodyComponent]
 })
 class ProductSwitchBodyTestComponent {
-    list: ProductSwitchItem[] = [...SMALL_LIST];
-    forceListMode = false;
-    dragAndDropEnabled = true;
+    list: InputSignal<ProductSwitchItem[]> = input([...SMALL_LIST]);
+    forceListMode = input(false);
+    dragAndDropEnabled = input(true);
 }
 
 describe('ProductSwitchBodyComponent', () => {
@@ -115,7 +115,7 @@ describe('ProductSwitchBodyComponent', () => {
         });
 
         it('should not render subtitle element when subtitle is absent', () => {
-            fixture.componentInstance.list = [{ title: 'No Subtitle', icon: 'home' }];
+            fixture.componentRef.setInput('list', [{ title: 'No Subtitle', icon: 'home' }]);
             fixture.detectChanges();
             const subtitles = fixture.debugElement.queryAll(By.css('.fd-product-switch__subtitle'));
             expect(subtitles.length).toBe(0);
@@ -129,7 +129,9 @@ describe('ProductSwitchBodyComponent', () => {
         });
 
         it('should render an anchor element when product has a url', () => {
-            fixture.componentInstance.list = [{ title: 'Link Product', icon: 'home', url: 'https://example.com' }];
+            fixture.componentRef.setInput('list', [
+                { title: 'Link Product', icon: 'home', url: 'https://example.com' }
+            ]);
             fixture.detectChanges();
             const anchor = fixture.debugElement.query(By.css('a.fd-product-switch__link'));
             expect(anchor).toBeTruthy();
@@ -137,7 +139,7 @@ describe('ProductSwitchBodyComponent', () => {
         });
 
         it('should not render an anchor when product has no url', () => {
-            fixture.componentInstance.list = [{ title: 'No Link', icon: 'home' }];
+            fixture.componentRef.setInput('list', [{ title: 'No Link', icon: 'home' }]);
             fixture.detectChanges();
             const anchor = fixture.debugElement.query(By.css('a.fd-product-switch__link'));
             expect(anchor).toBeFalsy();
@@ -159,7 +161,7 @@ describe('ProductSwitchBodyComponent', () => {
         });
 
         it('should pass draggable=false to all DnD items when dragAndDropEnabled is false', () => {
-            fixture.componentInstance.dragAndDropEnabled = false;
+            fixture.componentRef.setInput('dragAndDropEnabled', false);
             fixture.detectChanges();
             const dndItems = fixture.debugElement.queryAll(By.directive(DndItemDirective));
             dndItems.forEach((item) => {
@@ -176,13 +178,13 @@ describe('ProductSwitchBodyComponent', () => {
 
     describe('@Input forceListMode', () => {
         it('should report list mode when forceListMode is true', () => {
-            fixture.componentInstance.forceListMode = true;
+            fixture.componentRef.setInput('forceListMode', true);
             fixture.detectChanges();
             expect(componentInstance._isListMode()).toBe(true);
         });
 
         it('should apply mobile CSS class when in list mode', () => {
-            fixture.componentInstance.forceListMode = true;
+            fixture.componentRef.setInput('forceListMode', true);
             fixture.detectChanges();
             const body = fixture.debugElement.query(By.css('.fd-product-switch__body'));
             expect(body.nativeElement.classList).toContain('fd-product-switch__body--mobile');
@@ -232,7 +234,7 @@ describe('ProductSwitchBodyComponent', () => {
 
         it('should invoke item callback with the click event when provided', () => {
             const callbackSpy = jest.fn();
-            fixture.componentInstance.list = [{ title: 'With Callback', icon: 'home', callback: callbackSpy }];
+            fixture.componentRef.setInput('list', [{ title: 'With Callback', icon: 'home', callback: callbackSpy }]);
             fixture.detectChanges();
             const item = fixture.debugElement.query(By.css('li.fd-product-switch__item'));
             item.nativeElement.click();
@@ -343,7 +345,7 @@ describe('ProductSwitchBodyComponent', () => {
 
     describe('keyboard navigation — grid mode (large, 4 columns)', () => {
         beforeEach(() => {
-            fixture.componentInstance.list = [...LARGE_LIST];
+            fixture.componentRef.setInput('list', [...LARGE_LIST]);
             fixture.detectChanges();
             jest.spyOn(componentInstance, '_isListMode').mockReturnValue(false);
         });
