@@ -44,13 +44,11 @@ describe('UserMenuControlComponent', () => {
 
             const event = new KeyboardEvent('keydown', { key: 'Enter' });
             jest.spyOn(event, 'preventDefault');
-            jest.spyOn(event, 'stopPropagation');
 
             controlElement.dispatchEvent(event);
             fixture.detectChanges();
 
             expect(event.preventDefault).toHaveBeenCalled();
-            expect(event.stopPropagation).toHaveBeenCalled();
             expect(clickedSpy).toHaveBeenCalled();
         });
 
@@ -60,13 +58,11 @@ describe('UserMenuControlComponent', () => {
 
             const event = new KeyboardEvent('keydown', { key: ' ' });
             jest.spyOn(event, 'preventDefault');
-            jest.spyOn(event, 'stopPropagation');
 
             controlElement.dispatchEvent(event);
             fixture.detectChanges();
 
             expect(event.preventDefault).toHaveBeenCalled();
-            expect(event.stopPropagation).toHaveBeenCalled();
             expect(clickedSpy).toHaveBeenCalled();
         });
 
@@ -81,13 +77,13 @@ describe('UserMenuControlComponent', () => {
             expect(clickedSpy).not.toHaveBeenCalled();
         });
 
-        it('should stop propagation to prevent unintended bubbling', () => {
+        it('should allow event to bubble for popover handling', () => {
             const event = new KeyboardEvent('keydown', { key: 'Enter', bubbles: true });
             const stopPropagationSpy = jest.spyOn(event, 'stopPropagation');
 
             controlElement.dispatchEvent(event);
 
-            expect(stopPropagationSpy).toHaveBeenCalled();
+            expect(stopPropagationSpy).not.toHaveBeenCalled();
         });
     });
 

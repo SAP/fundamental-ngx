@@ -27,14 +27,14 @@ export class UserMenuControlComponent {
 
     /**
      * Handles keyboard activation (Enter or Space).
-     * Prevents default to avoid scrolling on Space and stops propagation
-     * to prevent unintended bubbling to parent elements.
+     * Prevents default to avoid scrolling on Space.
+     * Emits clicked event for mobile mode; in popover mode, the event
+     * bubbles to the popover component which handles the toggle.
      * @hidden
      */
     onKeydown(event: KeyboardEvent): void {
         if (event.key === 'Enter' || event.key === ' ') {
             event.preventDefault();
-            event.stopPropagation();
             this.clicked.emit();
         }
     }

@@ -32,7 +32,6 @@
         </fd-popover-body>
     </fd-popover>
 } @else {
-    <!-- Mobile mode: control's clicked event is handled via subscription in ngAfterViewInit -->
     <ng-container *ngTemplateOutlet="control"></ng-container>
 
     <ng-template [fdDialogTemplate] let-dialog let-dialogConfig="dialogConfig" #dialogTemplate>

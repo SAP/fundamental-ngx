@@ -157,20 +157,7 @@ export class UserMenuComponent implements AfterViewInit {
         const isMobile = this.mobile();
         this._listItems()?.forEach((item) => item.mobile.set(isMobile));
 
-        // Subscribe to user menu control clicks for mobile mode
-        // Switch to control's clicked observable when control becomes available
-        toObservable(this.userMenuControl, { injector: this._injector })
-            .pipe(
-                filter((control) => !!control && this.mobile()),
-                switchMap((control) => control!.clicked),
-                takeUntilDestroyed(this._destroyRef)
-            )
-            .subscribe(() => {
-                const template = this.dialogTemplate();
-                if (template) {
-                    this.openDialog(template);
-                }
-            });
+        this._setupMobileControlSubscription();
 
         const el = this.userNameEl()?.nativeElement;
 
@@ -216,16 +203,7 @@ export class UserMenuComponent implements AfterViewInit {
     /** Method that closes the user menu */
     close(): void {
         this.isOpenChangeHandle(false);
-
-        if (this._listItems().length > 0) {
-            this._listItems().forEach((item) => {
-                item.isOpen.set(false);
-                item._elementRef?.nativeElement.querySelector('.fd-menu__link')?.classList.remove('is-active');
-            });
-
-            this._resetListFocus();
-        }
-
+        this._closeAllSubmenus();
         this._clearSubmenu();
         this._dialogRef?.close();
     }
@@ -282,6 +260,8 @@ export class UserMenuComponent implements AfterViewInit {
 
         if (!isOpen && !this.mobile()) {
             this.userMenuControl()?.focus();
+            // Close all nested submenus when the menu closes
+            this._closeAllSubmenus();
         }
 
         const userMenuControlEl = this.userMenuControlElement()?.nativeElement;
@@ -305,12 +285,54 @@ export class UserMenuComponent implements AfterViewInit {
         }
     }
 
+    /**
+     * Set up subscription to user menu control clicks for mobile mode.
+     * Switches to control's clicked observable when control becomes available.
+     * @hidden
+     */
+    private _setupMobileControlSubscription(): void {
+        toObservable(this.userMenuControl, { injector: this._injector })
+            .pipe(
+                filter((control) => !!control && this.mobile()),
+                switchMap((control) => control!.clicked),
+                takeUntilDestroyed(this._destroyRef)
+            )
+            .subscribe(() => {
+                const template = this.dialogTemplate();
+                if (template) {
+                    this.openDialog(template);
+                }
+            });
+    }
+
     /** @hidden */
     private _clearSubmenu(): void {
         const userMenuBody = this.userMenuBody();
         if (userMenuBody) {
             userMenuBody.clearSubmenu();
         }
+    }
+
+    /**
+     * Closes all nested submenus by explicitly calling popover.close() on each item.
+     * This ensures that when the main menu closes (e.g., via click outside),
+     * all nested submenu popovers are also closed.
+     * Iterates in reverse order to close deeply nested submenus before their parents.
+     * @hidden
+     */
+    private _closeAllSubmenus(): void {
+        // Close in reverse order to ensure deeply nested items close first
+        const items = this._listItems();
+        for (let i = items.length - 1; i >= 0; i--) {
+            const item = items[i];
+            const popoverInstance = item.popover();
+            if (popoverInstance && item.isOpen()) {
+                popoverInstance.close();
+            }
+            item.isOpen.set(false);
+            item._elementRef?.nativeElement.querySelector('.fd-menu__link')?.classList.remove('is-active');
+        }
+        this._resetListFocus();
     }
 
     /**

@@ -125,8 +125,10 @@ export class UserMenuBodyComponent implements AfterViewInit {
      * so Tab re-entry starts at the first item instead of the last-focused item.
      *
      * First checks relatedTarget synchronously for quick exits, then uses
-     * setTimeout(0) to handle cases where focus transitions through multiple
-     * items before leaving (relatedTarget can be temporarily null during rapid moves).
+     * setTimeout(0) to defer the check until after the current event loop tick,
+     * handling cases where focus transitions through multiple items before leaving
+     * (relatedTarget can be temporarily null during rapid moves, but activeElement
+     * will be correctly set after the current event completes).
      * @hidden
      */
     onFocusOut(event: FocusEvent): void {
