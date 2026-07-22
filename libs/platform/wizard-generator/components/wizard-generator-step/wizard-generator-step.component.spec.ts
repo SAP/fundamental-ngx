@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { firstValueFrom } from 'rxjs';
 import { WizardStepForms } from '../../interfaces/wizard-generator-forms.interface';
@@ -30,8 +30,11 @@ const items = [
 
 @Component({
     template: `
-        @if (step !== undefined) {
-            <fdp-wizard-generator-step (formsCreated)="formsCreated($event)" [item]="step"></fdp-wizard-generator-step>
+        @if (step() !== undefined) {
+            <fdp-wizard-generator-step
+                (formsCreated)="formsCreated($event)"
+                [item]="step()!"
+            ></fdp-wizard-generator-step>
         }
     `,
     standalone: true,
@@ -43,7 +46,7 @@ export class TestComponent {
 
     items: WizardGeneratorItem[] = [];
 
-    step: WizardGeneratorItem;
+    readonly step = input<WizardGeneratorItem>();
 
     formsCreated(forms: WizardStepForms): void {
         this.forms = forms;
@@ -80,7 +83,7 @@ describe('WizardGeneratorStepComponent', () => {
 
         const newItems = await service.prepareWizardItems(items);
 
-        component.step = newItems[0];
+        fixture.componentRef.setInput('step', newItems[0]);
 
         fixture.detectChanges();
 
@@ -96,7 +99,7 @@ describe('WizardGeneratorStepComponent', () => {
 
         const newItems = await service.prepareWizardItems(items);
 
-        component.step = newItems[0];
+        fixture.componentRef.setInput('step', newItems[0]);
 
         fixture.detectChanges();
 

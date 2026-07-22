@@ -111,7 +111,7 @@ export async function removeKey(options: RemoveKeyOptions): Promise<RemoveKeyRes
         return {
             success: false,
             filesModified,
-            error: `Transform translations failed: ${error.message}`
+            error: `Transform translations failed: ${error instanceof Error ? error.message : String(error)}`
         };
     }
 

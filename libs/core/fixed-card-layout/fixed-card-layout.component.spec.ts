@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, input } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { RtlService } from '@fundamental-ngx/cdk/utils';
@@ -11,7 +11,7 @@ import { FixedCardLayoutModule } from './fixed-card-layout.module';
 @Component({
     template: `
         <div>
-            <fd-fixed-card-layout [maxColumns]="maxColumns">
+            <fd-fixed-card-layout [maxColumns]="maxColumns()">
                 <fd-card *fdCardDef="1">1</fd-card>
                 <fd-card *fdCardDef="2">2</fd-card>
                 <fd-card *fdCardDef="3">3</fd-card>
@@ -33,7 +33,7 @@ class TestFixedCardLayoutComponent {
     @ViewChild(FixedCardLayoutComponent)
     fixedCardLayout: FixedCardLayoutComponent;
 
-    maxColumns = 10;
+    readonly maxColumns = input(10);
 }
 
 describe('FixedCardLayoutComponent', () => {
@@ -80,7 +80,7 @@ describe('FixedCardLayoutComponent', () => {
         }
 
         it('should have 1 column when maxColumns set', async () => {
-            component.maxColumns = 1;
+            fixture.componentRef.setInput('maxColumns', 1);
 
             await whenStable(fixture);
 

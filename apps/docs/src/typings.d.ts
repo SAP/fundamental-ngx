@@ -10,3 +10,6 @@ declare module '*?raw' {
 
     export = contents;
 }
+
+declare module '*.css';
+declare module 'moment/locale/*';

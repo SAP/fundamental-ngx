@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, input } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
@@ -9,7 +9,7 @@ import { TabNavComponent } from './tab-nav.component';
 @Component({
     selector: 'fd-test-tabs',
     template: `
-        <nav fd-tab-nav [fdCompact]="compact">
+        <nav fd-tab-nav [fdCompact]="compact()">
             <div fd-tab-item>
                 <a fd-tab-link [active]="true"> Link </a>
             </div>
@@ -17,7 +17,7 @@ import { TabNavComponent } from './tab-nav.component';
                 <a fd-tab-link #fdTabLink [active]="false"> Link </a>
             </div>
             <a fd-tab-link [active]="false"> Link </a>
-            @if (showLastTab) {
+            @if (showLastTab()) {
                 <a fd-tab-link [active]="false"> Link </a>
             }
         </nav>
@@ -32,8 +32,8 @@ class TestNavWrapperComponent {
     @ViewChild('fdTabLink', { read: TabLinkDirective })
     tabLink: TabLinkDirective;
 
-    compact = false;
-    showLastTab = true;
+    readonly compact = input(false);
+    readonly showLastTab = input(true);
 }
 
 describe('TabNavDirective', () => {
@@ -58,10 +58,10 @@ describe('TabNavDirective', () => {
     });
 
     it('should consume content density', () => {
-        fixture.componentInstance.compact = true;
+        fixture.componentRef.setInput('compact', true);
         fixture.detectChanges();
         expect(fixture.nativeElement.querySelector('.fd-tabs.is-compact')).toBeTruthy();
-        fixture.componentInstance.compact = false;
+        fixture.componentRef.setInput('compact', false);
         fixture.detectChanges();
         expect(fixture.nativeElement.querySelector('.fd-tabs.is-compact')).toBeFalsy();
     });
@@ -76,7 +76,7 @@ describe('TabNavDirective', () => {
 
         jest.spyOn(component as any, '_refreshSubscription');
 
-        fixture.componentInstance.showLastTab = false;
+        fixture.componentRef.setInput('showLastTab', false);
 
         tick(10);
         fixture.detectChanges();

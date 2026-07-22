@@ -1,6 +1,6 @@
 import { DOWN_ARROW, ENTER } from '@angular/cdk/keycodes';
 import { OverlayContainer } from '@angular/cdk/overlay';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, input, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, inject, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
@@ -27,7 +27,7 @@ function mouseClickOnElement(el: Element): void {
             [buttonLabel]="'Default Button'"
             [icon]="'world'"
             [type]="'standard'"
-            [disabled]="disabled"
+            [disabled]="disabled()"
             (primaryButtonClick)="onPrimaryButtonClick()"
         >
         </fdp-split-menu-button>
@@ -50,7 +50,7 @@ class TestWrapperComponent {
 
     actionValue: string;
 
-    disabled = false;
+    readonly disabled = input(false);
 
     onPrimaryButtonClick(): void {
         this.actionValue = 'Default Button';
@@ -141,7 +141,7 @@ describe('SplitMenuButtonComponent', () => {
     }));
 
     it('should not open menu when split-menu-button is disabled', () => {
-        host.disabled = true;
+        fixture.componentRef.setInput('disabled', true);
         fixture.detectChanges();
 
         const splitButtons = (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLButtonElement>('.fd-button');

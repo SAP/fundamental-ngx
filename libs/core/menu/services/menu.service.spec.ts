@@ -1,6 +1,6 @@
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 
-import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, input, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { MenuInteractiveComponent } from '../menu-interactive.component';
 import { MenuItemComponent, SubmenuComponent } from '../menu-item/menu-item.component';
 import { MenuComponent } from '../menu.component';
@@ -13,7 +13,7 @@ import { MenuService } from './menu.service';
             <li fd-menu-item [submenu]="submenu">
                 <div fd-menu-interactive></div>
             </li>
-            <li fd-menu-item [disabled]="disabled">
+            <li fd-menu-item [disabled]="disabled()">
                 <div fd-menu-interactive></div>
             </li>
             <li fd-menu-item>
@@ -40,7 +40,7 @@ export class TestMenuComponent {
     @ViewChildren(MenuItemComponent)
     menuItems: QueryList<MenuItemComponent>;
 
-    disabled = false;
+    readonly disabled = input(false);
 }
 
 describe('MenuService', () => {
@@ -247,7 +247,7 @@ describe('MenuService', () => {
         });
 
         it('should skip disabled item on arrow up', () => {
-            fixture.componentInstance.disabled = true;
+            fixture.componentRef.setInput('disabled', true);
             fixture.detectChanges();
             const menuItemsArray = menuItems.toArray();
             const setFocusedSpy = jest.spyOn(menuService, 'setFocused');
@@ -259,7 +259,7 @@ describe('MenuService', () => {
         });
 
         it('should skip disabled item on arrow down', () => {
-            fixture.componentInstance.disabled = true;
+            fixture.componentRef.setInput('disabled', true);
             fixture.detectChanges();
             const menuItemsArray = menuItems.toArray();
             const setFocusedSpy = jest.spyOn(menuService, 'setFocused');

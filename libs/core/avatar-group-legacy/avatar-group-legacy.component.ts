@@ -4,6 +4,7 @@ import { ViewportRuler } from '@angular/cdk/overlay';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ContentChildren,
     ElementRef,
@@ -122,6 +123,7 @@ export class AvatarGroupLegacyComponent
 
     /** @hidden */
     private readonly _viewportRuler = inject(ViewportRuler);
+    private readonly _cdr = inject(ChangeDetectorRef);
 
     /** @hidden */
     private readonly _rtlService = inject(RtlService, { optional: true });
@@ -195,6 +197,7 @@ export class AvatarGroupLegacyComponent
     private _onResize(): void {
         this._reset();
         this._collapseItems();
+        this._cdr.markForCheck();
     }
 
     /** @hidden */

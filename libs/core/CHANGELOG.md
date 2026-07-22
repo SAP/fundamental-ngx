@@ -1,3 +1,93 @@
+## 0.64.0 (2026-07-20)
+
+### 🩹 Fixes
+
+- **core:** make fd-panel-title wrap instead of truncating ([#14377](https://github.com/SAP/fundamental-ngx/pull/14377))
+- **core:** remove icon for default Micro process flow element ([#14374](https://github.com/SAP/fundamental-ngx/pull/14374))
+- **core:** provide fix for linearGradient console error in Status Indicator ([#14371](https://github.com/SAP/fundamental-ngx/pull/14371))
+- **core:** track time column rows by value to prevent DOM re-creation ([#14359](https://github.com/SAP/fundamental-ngx/pull/14359), [#14362](https://github.com/SAP/fundamental-ngx/pull/14362))
+- **ci:** grant contents:write permission for gh-pages deployment ([#14349](https://github.com/SAP/fundamental-ngx/pull/14349))
+
+### ❤️ Thank You
+
+- deno
+- Inna Atanasova @InnaAtanasova
+- Maria Dineva @MariaIDineva
+
+## 0.64.0-rc.11 (2026-07-20)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.64.0-rc.10 (2026-07-20)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.64.0-rc.9 (2026-07-20)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.64.0-rc.8 (2026-07-20)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.64.0-rc.7 (2026-07-20)
+
+### 🩹 Fixes
+
+- **core:** make fd-panel-title wrap instead of truncating ([#14377](https://github.com/SAP/fundamental-ngx/pull/14377))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
+## 0.64.0-rc.6 (2026-07-20)
+
+### 🩹 Fixes
+
+- **core:** remove icon for default Micro process flow element ([#14374](https://github.com/SAP/fundamental-ngx/pull/14374))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
+## 0.64.0-rc.5 (2026-07-20)
+
+### 🩹 Fixes
+
+- **core:** provide fix for linearGradient console error in Status Indicator ([#14371](https://github.com/SAP/fundamental-ngx/pull/14371))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
+## 0.64.0-rc.4 (2026-07-17)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.64.0-rc.3 (2026-07-17)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.64.0-rc.2 (2026-07-17)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.64.0-rc.1 (2026-07-17)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.64.0-rc.0 (2026-07-16)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.63.2-rc.7 (2026-07-16)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.63.2-rc.6 (2026-07-16)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
 ## 0.63.2-rc.5 (2026-07-14)
 
 This was a version bump only for core to align it with other projects, there were no code changes.

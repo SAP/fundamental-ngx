@@ -1,16 +1,16 @@
-import { Component, DebugElement, ViewChild } from '@angular/core';
+import { Component, DebugElement, ViewChild, input } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { MenuSubtitleDirective } from './menu-subtitle.directive';
 
 @Component({
-    template: '<div fd-menu-subtitle [truncate]="truncate">{{ subtitleText }}</div>',
+    template: '<div fd-menu-subtitle [truncate]="truncate()">{{ subtitleText() }}</div>',
     imports: [MenuSubtitleDirective]
 })
 class TestComponent {
     @ViewChild(MenuSubtitleDirective) directive: MenuSubtitleDirective;
-    subtitleText = 'Menu Subtitle';
-    truncate = false;
+    readonly subtitleText = input('Menu Subtitle');
+    readonly truncate = input(false);
 }
 
 describe('MenuSubtitleDirective', () => {
@@ -43,14 +43,14 @@ describe('MenuSubtitleDirective', () => {
     });
 
     it('should update subtitle when textContent changes', () => {
-        component.subtitleText = 'Updated Subtitle';
+        fixture.componentRef.setInput('subtitleText', 'Updated Subtitle');
         fixture.detectChanges();
 
         expect(directive.subtitle).toBe('Updated Subtitle');
     });
 
     it('should handle empty content', () => {
-        component.subtitleText = '';
+        fixture.componentRef.setInput('subtitleText', '');
         fixture.detectChanges();
 
         expect(directive.subtitle).toBe('');
@@ -61,18 +61,18 @@ describe('MenuSubtitleDirective', () => {
     });
 
     it('should apply truncate class when truncate is true', () => {
-        component.truncate = true;
+        fixture.componentRef.setInput('truncate', true);
         fixture.detectChanges();
 
         expect(directiveElement.nativeElement.classList.contains('fd-menu__subtitle--truncate')).toBe(true);
     });
 
     it('should remove truncate class when truncate is set back to false', () => {
-        component.truncate = true;
+        fixture.componentRef.setInput('truncate', true);
         fixture.detectChanges();
         expect(directiveElement.nativeElement.classList.contains('fd-menu__subtitle--truncate')).toBe(true);
 
-        component.truncate = false;
+        fixture.componentRef.setInput('truncate', false);
         fixture.detectChanges();
         expect(directiveElement.nativeElement.classList.contains('fd-menu__subtitle--truncate')).toBe(false);
     });

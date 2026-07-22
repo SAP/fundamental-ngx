@@ -1,5 +1,5 @@
 import { DragDrop, DragDropModule, DragRef } from '@angular/cdk/drag-drop';
-import { Component, Renderer2, ViewChild } from '@angular/core';
+import { Component, Renderer2, ViewChild, input } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { DndItemDirective } from './dnd-item.directive';
 
@@ -20,7 +20,7 @@ class MockDragDrop {
 @Component({
     template: `
         <span>
-            <div #directiveElement fd-dnd-item>
+            <div #directiveElement fd-dnd-item [applyDragItemClass]="applyDragItemClass()">
                 <div cdkDrag>
                     <div></div>
                 </div>
@@ -33,6 +33,8 @@ class MockDragDrop {
 class TestDndContainerComponent {
     @ViewChild('directiveElement', { static: true, read: DndItemDirective })
     directive: DndItemDirective;
+
+    readonly applyDragItemClass = input(true);
 }
 
 describe('DndItemDirective', () => {
@@ -63,14 +65,14 @@ describe('DndItemDirective', () => {
     });
 
     it('should apply the default class when applyDragItemClass is true', () => {
-        directive.applyDragItemClass = true;
+        fixture.componentRef.setInput('applyDragItemClass', true);
         fixture.detectChanges();
         const element = fixture.debugElement.nativeElement.querySelector('[fd-dnd-item]');
         expect(element.classList).toContain('fd-dnd-item');
     });
 
     it('should not apply the default class when applyDragItemClass is false', () => {
-        directive.applyDragItemClass = false;
+        fixture.componentRef.setInput('applyDragItemClass', false);
         fixture.detectChanges();
         const element = fixture.debugElement.nativeElement.querySelector('[fd-dnd-item]');
         expect(element.classList).not.toContain('fd-dnd-item');

@@ -1,4 +1,4 @@
-import { Component, DebugElement } from '@angular/core';
+import { Component, DebugElement, input } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
@@ -8,12 +8,12 @@ import { CardCounterDirective } from './card-counter.directive';
 import { CLASS_NAME } from '../constants';
 
 @Component({
-    template: `<span fd-card-counter [statusInput]="status">1 of 10</span>`,
+    template: `<span fd-card-counter [statusInput]="status()">1 of 10</span>`,
     standalone: true,
     imports: [CardCounterDirective]
 })
 class TestComponent {
-    status: ObjectStatus | null = null;
+    readonly status = input<ObjectStatus | null>(null);
 }
 
 describe('CardCounterComponent', () => {
@@ -48,15 +48,15 @@ describe('CardCounterComponent', () => {
         });
 
         it('should add corresponding status modifier', () => {
-            fixture.componentInstance.status = 'positive';
+            fixture.componentRef.setInput('status', 'positive');
             fixture.detectChanges();
             expect(debugElement.nativeElement.className.includes('fd-object-status--positive')).toBe(true);
 
-            fixture.componentInstance.status = 'negative';
+            fixture.componentRef.setInput('status', 'negative');
             fixture.detectChanges();
             expect(debugElement.nativeElement.className.includes('fd-object-status--negative')).toBe(true);
 
-            fixture.componentInstance.status = 'informative';
+            fixture.componentRef.setInput('status', 'informative');
             fixture.detectChanges();
             expect(debugElement.nativeElement.className.includes('fd-object-status--informative')).toBe(true);
         });

@@ -18,7 +18,7 @@ describe('TextComponent', () => {
         })
             .overrideComponent(TextComponent, {
                 set: {
-                    changeDetection: ChangeDetectionStrategy.Default,
+                    changeDetection: ChangeDetectionStrategy.Eager,
                     providers: [patchLanguage({ coreText: { moreLabel, lessLabel } })]
                 }
             })

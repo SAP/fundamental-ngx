@@ -124,7 +124,7 @@
                     <fdp-approval-flow-team-list
                         [isRtl]="_data.rtl"
                         [teams]="_teams"
-                        [selectedTeamId]="_selectedTeam?.id"
+                        [selectedTeamId]="$safeNavigationMigration(_selectedTeam?.id)"
                         (onTeamClick)="_viewTeamMembers($event)"
                         (onTeamRadioClick)="_setSelectedTeam($event)"
                     ></fdp-approval-flow-team-list>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MicroProcessFlowModule } from '../../micro-process-flow.module';
@@ -8,13 +8,13 @@ const FONT_NAME = 'SAP-icons';
 
 @Component({
     selector: 'fd-test-icon',
-    template: ` <fd-micro-process-flow-icon [font]="fontName" [glyph]="iconName"></fd-micro-process-flow-icon> `,
+    template: ` <fd-micro-process-flow-icon [font]="fontName()" [glyph]="iconName"></fd-micro-process-flow-icon> `,
     standalone: true,
     imports: [MicroProcessFlowModule]
 })
 class TestWrapperComponent {
     readonly iconName = ICON_NAME;
-    fontName = FONT_NAME;
+    readonly fontName = input(FONT_NAME);
 }
 
 describe('MicroProcessFlowIconComponent', () => {
@@ -43,14 +43,14 @@ describe('MicroProcessFlowIconComponent', () => {
     });
 
     it('should apply SAP-icons-TNT icon font with font on input', () => {
-        component.fontName = 'SAP-icons-TNT';
+        fixture.componentRef.setInput('fontName', 'SAP-icons-TNT');
         fixture.detectChanges();
         const icon = fixture.debugElement.nativeElement.querySelector('fd-icon');
         expect(icon.className).toContain('sap-icon-TNT--' + ICON_NAME);
     });
 
     it('should change the icon font to BusinessSuiteInAppSymbols', () => {
-        component.fontName = 'BusinessSuiteInAppSymbols';
+        fixture.componentRef.setInput('fontName', 'BusinessSuiteInAppSymbols');
         fixture.detectChanges();
         const icon = fixture.debugElement.nativeElement.querySelector('fd-icon');
         expect(icon.className).toContain('sap-icon-businessSuiteInAppSymbols--' + ICON_NAME);

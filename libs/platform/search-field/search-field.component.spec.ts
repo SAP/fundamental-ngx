@@ -1,5 +1,5 @@
 import { ENTER } from '@angular/cdk/keycodes';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, input, OnInit, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Observable, of } from 'rxjs';
@@ -52,7 +52,7 @@ class SearchFieldDataProvider extends DataProvider<string> {
     template: `
         <fdp-search-field
             #component
-            [placeholder]="placeholder"
+            [placeholder]="placeholder()"
             [suggestions]="suggestions"
             [categories]="categories"
             [categoryLabel]="categoryLabel"
@@ -73,7 +73,7 @@ class SearchFieldDataProvider extends DataProvider<string> {
 class TestComponent {
     @ViewChild(SearchFieldComponent, { static: true }) component: SearchFieldComponent;
     @ViewChild('outsideButton') outsideButton: ElementRef<HTMLElement>;
-    placeholder: string;
+    readonly placeholder = input<string>('');
     suggestions: SuggestionItem[] | Observable<SuggestionItem[]>;
     categories: ValueLabelItem[];
     categoryLabel: string;
@@ -122,24 +122,24 @@ describe('SearchFieldComponent', () => {
     });
 
     it('should allow "placeholder" text to be set', () => {
-        host.placeholder = 'Input Search Here!';
+        fixture.componentRef.setInput('placeholder', 'Input Search Here!');
         fixture.detectChanges();
         let placeholder = fixture.debugElement.query(By.css('input')).nativeElement.placeholder;
         expect(placeholder).toBe('Input Search Here!');
 
-        host.placeholder = 'Search Again!';
+        fixture.componentRef.setInput('placeholder', 'Search Again!');
         fixture.detectChanges();
         placeholder = fixture.debugElement.query(By.css('input')).nativeElement.placeholder;
         expect(placeholder).toBe('Search Again!');
     });
 
     it('should generate ids for internal elements', () => {
-        host.placeholder = 'Search';
+        fixture.componentRef.setInput('placeholder', 'Search');
         host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
         fixture.detectChanges();
 
-        const input: ElementRef = fixture.debugElement.query(By.css('.fdp-search-field__input'));
-        expect(input.nativeElement.id).toContain('fdp-search-field-input-');
+        const inputEl: ElementRef = fixture.debugElement.query(By.css('.fdp-search-field__input'));
+        expect(inputEl.nativeElement.id).toContain('fdp-search-field-input-');
 
         const submitButton: ElementRef = fixture.debugElement.query(By.css('.fdp-search-field__submit'));
         expect(submitButton.nativeElement.id).toContain('fdp-search-field-submit-');
@@ -151,7 +151,7 @@ describe('SearchFieldComponent', () => {
 
     it('should allow "dropdown" string list to be set', async () => {
         // set type ahead list
-        host.placeholder = 'Search';
+        fixture.componentRef.setInput('placeholder', 'Search');
         host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
         fixture.detectChanges();
 
@@ -176,7 +176,7 @@ describe('SearchFieldComponent', () => {
 
     it('should allow "dropdown" observable string list to be set', async () => {
         // set type ahead list
-        host.placeholder = 'Search';
+        fixture.componentRef.setInput('placeholder', 'Search');
         host.suggestions = of([{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }]);
         fixture.detectChanges();
         await fixture.whenStable();
@@ -201,7 +201,7 @@ describe('SearchFieldComponent', () => {
     });
 
     it('should show the "category button" if "categories" is set with one or more items', () => {
-        host.placeholder = 'Search';
+        fixture.componentRef.setInput('placeholder', 'Search');
         host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
         host.categories = CATEGORIES;
         host.categoryLabel = 'Category';
@@ -215,7 +215,7 @@ describe('SearchFieldComponent', () => {
     });
 
     it('should allow the user to set the text of the category label', () => {
-        host.placeholder = 'Search';
+        fixture.componentRef.setInput('placeholder', 'Search');
         host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
         host.categories = CATEGORIES;
         host.categoryLabel = 'Categoría';
@@ -226,7 +226,7 @@ describe('SearchFieldComponent', () => {
     });
 
     it('should allow the user to hide the category label', () => {
-        host.placeholder = 'Search';
+        fixture.componentRef.setInput('placeholder', 'Search');
         host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
         host.categories = CATEGORIES;
         host.categoryLabel = 'Category';
@@ -238,7 +238,7 @@ describe('SearchFieldComponent', () => {
     });
 
     it('should not show the "category dropdown" if "categoryValues" is set with no items', () => {
-        host.placeholder = 'Search';
+        fixture.componentRef.setInput('placeholder', 'Search');
         host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
         host.categories = [];
         fixture.detectChanges();
@@ -248,7 +248,7 @@ describe('SearchFieldComponent', () => {
     });
 
     it('should change the category label to the selected category', fakeAsync(() => {
-        host.placeholder = 'Search';
+        fixture.componentRef.setInput('placeholder', 'Search');
         host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
         host.categories = CATEGORIES;
         host.categoryLabel = 'Category';
@@ -275,7 +275,7 @@ describe('SearchFieldComponent', () => {
 
     it('should open "dropdown" on keyboard entry', () => {
         // set type ahead list
-        host.placeholder = 'Search';
+        fixture.componentRef.setInput('placeholder', 'Search');
         host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
         fixture.detectChanges();
 
@@ -295,7 +295,7 @@ describe('SearchFieldComponent', () => {
 
     it('should not create multiple overlays with subsequent keyboard entries', () => {
         // set type ahead list
-        host.placeholder = 'Search';
+        fixture.componentRef.setInput('placeholder', 'Search');
         host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
         fixture.detectChanges();
 
@@ -323,7 +323,7 @@ describe('SearchFieldComponent', () => {
 
     it('should set input text and close dropdown on select of item', async () => {
         // set type ahead list
-        host.placeholder = 'Search';
+        fixture.componentRef.setInput('placeholder', 'Search');
         host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
         fixture.detectChanges();
 
@@ -354,7 +354,7 @@ describe('SearchFieldComponent', () => {
 
     it('should filter the suggestions based on input text', async () => {
         // set type ahead list
-        host.placeholder = 'Search';
+        fixture.componentRef.setInput('placeholder', 'Search');
         host.suggestions = [
             { value: 'Acorn' },
             { value: 'Apple' },
@@ -386,7 +386,7 @@ describe('SearchFieldComponent', () => {
 
     it('should emit an "inputChange" event when user types in the input field', () => {
         // set type ahead list
-        host.placeholder = 'Search';
+        fixture.componentRef.setInput('placeholder', 'Search');
         host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
         fixture.detectChanges();
 
@@ -402,7 +402,7 @@ describe('SearchFieldComponent', () => {
     });
 
     it('should emit a "inputChange" event when user changes the category', () => {
-        host.placeholder = 'Search';
+        fixture.componentRef.setInput('placeholder', 'Search');
         host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
         host.categories = CATEGORIES;
         host.categoryLabel = 'Category';
@@ -424,7 +424,7 @@ describe('SearchFieldComponent', () => {
 
     it('should emit a "searchSubmit" event when user selects from dropdown', () => {
         // set type ahead list
-        host.placeholder = 'Search';
+        fixture.componentRef.setInput('placeholder', 'Search');
         host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
         fixture.detectChanges();
 
@@ -446,7 +446,7 @@ describe('SearchFieldComponent', () => {
 
     it('should emit a "searchSubmit" event and close the dropdown when user clicks keyboard enter in input field', () => {
         // set type ahead list
-        host.placeholder = 'Search';
+        fixture.componentRef.setInput('placeholder', 'Search');
         host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
         fixture.detectChanges();
 
@@ -468,7 +468,7 @@ describe('SearchFieldComponent', () => {
 
     it('should be able to be put into "isLoading" state', () => {
         // set up component
-        host.placeholder = 'Search';
+        fixture.componentRef.setInput('placeholder', 'Search');
         host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
         host.isLoading = true;
         fixture.detectChanges();
@@ -479,7 +479,7 @@ describe('SearchFieldComponent', () => {
 
     it('should emit a "cancelSearch" event when the user clicks the cancel button while in "loading" state', () => {
         // set up component
-        host.placeholder = 'Search';
+        fixture.componentRef.setInput('placeholder', 'Search');
         host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
         host.isLoading = true;
         fixture.detectChanges();
@@ -493,20 +493,20 @@ describe('SearchFieldComponent', () => {
 
     it('should have a disabled state', () => {
         // set up component
-        host.placeholder = 'Search';
+        fixture.componentRef.setInput('placeholder', 'Search');
         host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
         host.disabled = true;
         fixture.detectChanges();
 
-        const input: ElementRef = fixture.debugElement.query(By.css('input[type="search"]'));
+        const inputEl: ElementRef = fixture.debugElement.query(By.css('input[type="search"]'));
         const submitButton: ElementRef = fixture.debugElement.query(By.css('button.fdp-search-field__submit'));
-        expect(input.nativeElement.attributes['disabled']).toBeTruthy();
+        expect(inputEl.nativeElement.attributes['disabled']).toBeTruthy();
         expect(submitButton.nativeElement.attributes['disabled']).toBeTruthy();
     });
 
     it('should not show the "clear" button when input field is empty', () => {
         // set up component
-        host.placeholder = 'Search';
+        fixture.componentRef.setInput('placeholder', 'Search');
         host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
         fixture.detectChanges();
 
@@ -516,7 +516,7 @@ describe('SearchFieldComponent', () => {
 
     it('should show the "clear" button when user types in input field', () => {
         // set up component
-        host.placeholder = 'Search';
+        fixture.componentRef.setInput('placeholder', 'Search');
         host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
         fixture.detectChanges();
 
@@ -532,7 +532,7 @@ describe('SearchFieldComponent', () => {
 
     it('should clear the input field and close the suggestion dropdown when the clear button is clicked', () => {
         // set up component
-        host.placeholder = 'Search';
+        fixture.componentRef.setInput('placeholder', 'Search');
         host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
         fixture.detectChanges();
 
@@ -556,7 +556,7 @@ describe('SearchFieldComponent', () => {
 
     it('should allow keyboard navigation of suggestion list', () => {
         // set up component
-        host.placeholder = 'Search';
+        fixture.componentRef.setInput('placeholder', 'Search');
         host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
         fixture.detectChanges();
 
@@ -582,7 +582,7 @@ describe('SearchFieldComponent', () => {
 
     it('should close the suggestion dropdown on outside click', fakeAsync(() => {
         // set up component
-        host.placeholder = 'Search';
+        fixture.componentRef.setInput('placeholder', 'Search');
         host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
         fixture.detectChanges();
 

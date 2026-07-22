@@ -1,7 +1,9 @@
-<fd-icon
-    class="fd-micro-process-flow__icon"
-    [ariaLabel]="ariaLabel"
-    [glyph]="glyph"
-    [class]="class"
-    [font]="font"
-></fd-icon>
+@if (glyph) {
+    <fd-icon
+        class="fd-micro-process-flow__icon"
+        [ariaLabel]="ariaLabel"
+        [glyph]="glyph"
+        [class]="class"
+        [font]="font"
+    ></fd-icon>
+}

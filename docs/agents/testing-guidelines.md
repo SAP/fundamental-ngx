@@ -1,6 +1,6 @@
 # Testing Guidelines
 
-> This document covers testing patterns and best practices for Angular 21+ development in Fundamental NGX.
+> This document covers testing patterns and best practices for Angular 22+ development in Fundamental NGX.
 
 ## Table of Contents
 

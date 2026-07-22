@@ -9,12 +9,20 @@
         "useDefineForClassFields": false,
         "moduleResolution": "bundler",
         "module": "preserve",
-        "lib": ["dom", "es2023"]
+        "lib": ["dom", "es2023"],
+        "rootDir": "../../"
     },
     "files": ["src/main.ts", "src/polyfills.ts"],
     "include": ["src/*.d.ts", "**/*.ts"],
     "exclude": ["**/*.spec.ts", "**/e2e/*.ts", "dist", "src/environments/**/*"],
     "angularCompilerOptions": {
-        "enableIvy": true
+        "enableIvy": true,
+        // TODO(#14334): suppress Angular 22 optionalChainNotNullable and nullishCoalescingNotNullable diagnostics
+        "extendedDiagnostics": {
+            "checks": {
+                "nullishCoalescingNotNullable": "suppress",
+                "optionalChainNotNullable": "suppress"
+            }
+        }
     }
 }

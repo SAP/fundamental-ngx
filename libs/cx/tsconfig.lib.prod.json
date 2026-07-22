@@ -7,6 +7,13 @@
         "moduleResolution": "bundler"
     },
     "angularCompilerOptions": {
-        "compilationMode": "partial"
+        "compilationMode": "partial",
+        // TODO(#14334): suppress Angular 22 optionalChainNotNullable and nullishCoalescingNotNullable diagnostics
+        "extendedDiagnostics": {
+            "checks": {
+                "nullishCoalescingNotNullable": "suppress",
+                "optionalChainNotNullable": "suppress"
+            }
+        }
     }
 }

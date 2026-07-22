@@ -7,6 +7,7 @@
         "target": "es2023",
         "module": "preserve",
         "moduleResolution": "bundler",
-        "lib": ["dom", "es2023"]
+        "lib": ["dom", "es2023"],
+        "rootDir": "../../"
     }
 }
