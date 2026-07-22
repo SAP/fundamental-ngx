@@ -6,9 +6,6 @@ on:
         branches:
             - main
             - tmp_hotfix_branch
-permissions:
-    contents: write
-    id-token: write
 env:
     NODE_VERSION: '22.x'
     # Package list for build, lint, pack, and publish operations
@@ -19,12 +16,16 @@ env:
     NX_CLOUD_DISTRIBUTED_EXECUTION: true
     NX_CLOUD_DISTRIBUTED_EXECUTION_AGENT_COUNT: 5
     NX_BRANCH: ${{ github.event.number || github.ref_name }}
-    NX_CLOUD_AUTH_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
 
 jobs:
     nx_agents:
         name: Nx Cloud Agent ${{ matrix.agent }}
         runs-on: ubuntu-latest
+        environment: release
+        env:
+            NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
+        permissions:
+            contents: read
         timeout-minutes: 60
         strategy:
             matrix:
@@ -44,6 +45,12 @@ jobs:
     create_release:
         name: Create release
         runs-on: ubuntu-latest
+        environment: release
+        env:
+            NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
+        permissions:
+            contents: write
+            id-token: write
         outputs:
             npmTag: ${{ steps.releaseTags.outputs.npm }}
             ghTag: ${{ steps.releaseTags.outputs.gh }}
@@ -74,8 +81,11 @@ jobs:
             - name: Upgrade npm for OIDC trusted publishing
               run: npx --yes npm@latest install -g npm@latest
 
-            - name: Update npm for trusted publishing
-              run: npm install -g npm@latest
+            # WORKAROUND: npm 11.x/12.x has missing sigstore dependency (npm/cli#9722)
+            # Install sigstore@^4.1.1 globally so npm can find it when generating provenance attestations
+            # Pinned to 4.1.1 for stability - npm 11.x was built against sigstore 4.x
+            - name: Install sigstore dependency for npm provenance
+              run: npm install -g sigstore@^4.1.1
 
             - name: Initialize the Nx Cloud distributed CI run
               run: npx nx-cloud start-ci-run
@@ -160,6 +170,7 @@ jobs:
                   npx nx release publish --tag="${{ steps.releaseTags.outputs.npm }}" --registry=https://registry.npmjs.org/
               env:
                   NX_CLOUD_DISTRIBUTED_EXECUTION: false
+                  NPM_CONFIG_PROVENANCE: true
 
             # Create git commit and tag after successful build and publish
             # We do this here instead of during 'nx release version' to ensure we only commit
@@ -229,6 +240,9 @@ jobs:
     gh_pages:
         name: Github Pages deploy
         runs-on: ubuntu-latest
+        environment: release
+        permissions:
+            contents: write
         needs: create_release
         if: ${{ needs.create_release.outputs.npmTag == 'latest' }}
         steps:
@@ -258,6 +272,9 @@ jobs:
         needs: create_release
         name: Nx Cloud - Stop Agents
         runs-on: ubuntu-latest
+        environment: ci
+        permissions:
+            contents: read
         steps:
             - uses: actions/checkout@v4.2.2
               with:
