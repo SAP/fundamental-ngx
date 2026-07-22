@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, input, ViewChild } from '@angular/core';
 import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 
@@ -557,7 +557,12 @@ describe('DatePickerComponent Accessibility', () => {
 
     @Component({
         template: `
-            <fd-date-picker [type]="type" [message]="message" [state]="state" [required]="required"></fd-date-picker>
+            <fd-date-picker
+                [type]="type()"
+                [message]="message()"
+                [state]="state()"
+                [required]="required()"
+            ></fd-date-picker>
         `,
         standalone: true,
         imports: [FdDatetimeModule, DatePickerModule],
@@ -582,10 +587,10 @@ describe('DatePickerComponent Accessibility', () => {
     class HostComponent {
         @ViewChild(DatePickerComponent) datePicker: DatePickerComponent<FdDate>;
 
-        type: CalendarType = 'single';
-        message = 'This is a message';
-        required = false;
-        state: FormStates | null = null;
+        readonly type = input<CalendarType>('single');
+        readonly message = input('This is a message');
+        readonly required = input(false);
+        readonly state = input<FormStates | null>(null);
     }
 
     beforeEach(waitForAsync(() => {
@@ -609,22 +614,22 @@ describe('DatePickerComponent Accessibility', () => {
     }
 
     it('adds aria-label for date picker', () => {
-        fixture.componentInstance.type = 'single';
+        fixture.componentRef.setInput('type', 'single');
         fixture.detectChanges();
         expect(getInputElement().getAttribute('aria-label')).toBe('Date input');
     });
 
     it('adds aria-label for date range picker', () => {
-        fixture.componentInstance.type = 'range';
+        fixture.componentRef.setInput('type', 'range');
         fixture.detectChanges();
         expect(getInputElement().getAttribute('aria-label')).toBe('Date range input');
     });
 
     it('has aria-required property based on required input', () => {
-        fixture.componentInstance.required = false;
+        fixture.componentRef.setInput('required', false);
         fixture.detectChanges();
         expect(getInputElement().getAttribute('aria-required')).toBe('false');
-        fixture.componentInstance.required = true;
+        fixture.componentRef.setInput('required', true);
         fixture.detectChanges();
         expect(getInputElement().getAttribute('aria-required')).toBe('true');
     });
@@ -649,19 +654,19 @@ describe('DatePickerComponent Accessibility', () => {
     it('has aria-describedby referencing to value state message based on "state" prop', () => {
         const messageId = getInputElement().getAttribute('aria-describedby') as string;
 
-        fixture.componentInstance.state = 'error';
+        fixture.componentRef.setInput('state', 'error');
         fixture.detectChanges();
         expect(document.getElementById(messageId)?.textContent).toContain('Value state Error');
 
-        fixture.componentInstance.state = 'warning';
+        fixture.componentRef.setInput('state', 'warning');
         fixture.detectChanges();
         expect(document.getElementById(messageId)?.textContent).toContain('Value state Warning');
 
-        fixture.componentInstance.state = 'information';
+        fixture.componentRef.setInput('state', 'information');
         fixture.detectChanges();
         expect(document.getElementById(messageId)?.textContent).toContain('Value state Information');
 
-        fixture.componentInstance.state = 'success';
+        fixture.componentRef.setInput('state', 'success');
         fixture.detectChanges();
         expect(document.getElementById(messageId)?.textContent).toContain('Value state Success');
     });

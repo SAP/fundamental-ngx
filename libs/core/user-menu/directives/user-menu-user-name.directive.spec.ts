@@ -1,16 +1,16 @@
-import { Component, DebugElement } from '@angular/core';
+import { Component, DebugElement, input } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { UserMenuUserNameDirective } from './user-menu-user-name.directive';
 
 @Component({
-    template: `<span fd-user-menu-user-name [truncate]="isTruncate">User Menu User Name Test</span>`,
+    template: `<span fd-user-menu-user-name [truncate]="isTruncate()">User Menu User Name Test</span>`,
     standalone: true,
     imports: [UserMenuUserNameDirective]
 })
 class TestComponent {
-    isTruncate = false;
+    readonly isTruncate = input(false);
 }
 
 describe('UserMenuUserNameDirective', () => {
@@ -46,7 +46,7 @@ describe('UserMenuUserNameDirective', () => {
     });
 
     it('should add truncate class when truncate is true (via input binding)', () => {
-        fixture.componentInstance.isTruncate = true;
+        fixture.componentRef.setInput('isTruncate', true);
         fixture.detectChanges();
 
         expect(debugElement.nativeElement.classList).toContain('fd-user-menu__user-name--truncate');

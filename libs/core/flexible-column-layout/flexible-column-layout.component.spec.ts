@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, input, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
@@ -30,14 +30,14 @@ function setViewport(width: number): void {
 @Component({
     template: `
         <fd-flexible-column-layout
-            [(layout)]="layout"
-            [backgroundDesign]="backgroundDesign"
-            [expandTitle]="expandTitle"
-            [collapseTitle]="collapseTitle"
-            [expandTitleStartBtn]="expandTitleStartBtn"
-            [collapseTitleStartBtn]="collapseTitleStartBtn"
-            [expandTitleEndBtn]="expandTitleEndBtn"
-            [collapseTitleEndBtn]="collapseTitleEndBtn"
+            [layout]="layout()"
+            [backgroundDesign]="backgroundDesign()"
+            [expandTitle]="expandTitle()"
+            [collapseTitle]="collapseTitle()"
+            [expandTitleStartBtn]="expandTitleStartBtn()"
+            [collapseTitleStartBtn]="collapseTitleStartBtn()"
+            [expandTitleEndBtn]="expandTitleEndBtn()"
+            [collapseTitleEndBtn]="collapseTitleEndBtn()"
         >
             <ng-template #startColumn>
                 <div [style.height.px]="800">
@@ -63,14 +63,14 @@ class TestFlexibleColumnLayoutComponent {
     @ViewChild(FlexibleColumnLayoutComponent)
     flexibleColumnLayout: FlexibleColumnLayoutComponent;
 
-    layout: FlexibleColumnLayout = ONE_COLUMN_START_FULL_SCREEN;
-    backgroundDesign = 'translucent';
-    expandTitle: string;
-    collapseTitle: string;
-    expandTitleStartBtn: string;
-    collapseTitleStartBtn: string;
-    expandTitleEndBtn: string;
-    collapseTitleEndBtn: string;
+    readonly layout = input<FlexibleColumnLayout>(ONE_COLUMN_START_FULL_SCREEN);
+    readonly backgroundDesign = input('translucent');
+    readonly expandTitle = input<string>(undefined);
+    readonly collapseTitle = input<string>(undefined);
+    readonly expandTitleStartBtn = input<string>(undefined);
+    readonly collapseTitleStartBtn = input<string>(undefined);
+    readonly expandTitleEndBtn = input<string>(undefined);
+    readonly collapseTitleEndBtn = input<string>(undefined);
 }
 describe('FlexibleColumnLayoutComponent', () => {
     let testComponent: TestFlexibleColumnLayoutComponent;
@@ -120,7 +120,7 @@ describe('FlexibleColumnLayoutComponent', () => {
     it('ONE_COLUMN_MID_FULL_SCREEN should render one column', async () => {
         await whenStable(fixture);
 
-        testComponent.layout = ONE_COLUMN_MID_FULL_SCREEN;
+        fixture.componentRef.setInput('layout', ONE_COLUMN_MID_FULL_SCREEN);
         fixture.detectChanges();
 
         // checks the columns width
@@ -136,7 +136,7 @@ describe('FlexibleColumnLayoutComponent', () => {
     it('ONE_COLUMN_END_FULL_SCREEN should render one column', async () => {
         await whenStable(fixture);
 
-        testComponent.layout = ONE_COLUMN_END_FULL_SCREEN;
+        fixture.componentRef.setInput('layout', ONE_COLUMN_END_FULL_SCREEN);
         fixture.detectChanges();
 
         // checks the columns width
@@ -153,7 +153,7 @@ describe('FlexibleColumnLayoutComponent', () => {
         await whenStable(fixture);
         setViewport(1023);
 
-        testComponent.layout = TWO_COLUMNS_START_EXPANDED;
+        fixture.componentRef.setInput('layout', TWO_COLUMNS_START_EXPANDED);
         fixture.detectChanges();
 
         // checks the columns width
@@ -173,7 +173,7 @@ describe('FlexibleColumnLayoutComponent', () => {
         await whenStable(fixture);
         setViewport(1023);
 
-        testComponent.layout = TWO_COLUMNS_MID_EXPANDED;
+        fixture.componentRef.setInput('layout', TWO_COLUMNS_MID_EXPANDED);
         fixture.detectChanges();
 
         // checks the columns width
@@ -193,7 +193,7 @@ describe('FlexibleColumnLayoutComponent', () => {
         await whenStable(fixture);
         setViewport(1023);
 
-        testComponent.layout = TWO_COLUMNS_END_EXPANDED;
+        fixture.componentRef.setInput('layout', TWO_COLUMNS_END_EXPANDED);
         fixture.detectChanges();
 
         // checks the columns width
@@ -213,7 +213,7 @@ describe('FlexibleColumnLayoutComponent', () => {
         await whenStable(fixture);
         setViewport(1300);
 
-        testComponent.layout = THREE_COLUMNS_MID_EXPANDED;
+        fixture.componentRef.setInput('layout', THREE_COLUMNS_MID_EXPANDED);
         fixture.detectChanges();
 
         // checks the columns width
@@ -236,7 +236,7 @@ describe('FlexibleColumnLayoutComponent', () => {
         await whenStable(fixture);
         setViewport(1300);
 
-        testComponent.layout = THREE_COLUMNS_END_EXPANDED;
+        fixture.componentRef.setInput('layout', THREE_COLUMNS_END_EXPANDED);
         fixture.detectChanges();
 
         // checks the columns width
@@ -259,7 +259,7 @@ describe('FlexibleColumnLayoutComponent', () => {
         await whenStable(fixture);
         setViewport(1023);
 
-        testComponent.layout = THREE_COLUMNS_START_MINIMIZED;
+        fixture.componentRef.setInput('layout', THREE_COLUMNS_START_MINIMIZED);
         fixture.detectChanges();
 
         // checks the columns width
@@ -279,7 +279,7 @@ describe('FlexibleColumnLayoutComponent', () => {
         await whenStable(fixture);
         setViewport(1023);
 
-        testComponent.layout = THREE_COLUMNS_MID_EXPANDED;
+        fixture.componentRef.setInput('layout', THREE_COLUMNS_MID_EXPANDED);
         fixture.detectChanges();
 
         // checks the columns width
@@ -299,7 +299,7 @@ describe('FlexibleColumnLayoutComponent', () => {
         await whenStable(fixture);
         setViewport(1023);
 
-        testComponent.layout = THREE_COLUMNS_END_EXPANDED;
+        fixture.componentRef.setInput('layout', THREE_COLUMNS_END_EXPANDED);
         fixture.detectChanges();
 
         // checks the columns width
@@ -319,7 +319,7 @@ describe('FlexibleColumnLayoutComponent', () => {
         it('should have no separators for single-column layouts', async () => {
             await whenStable(fixture);
 
-            testComponent.layout = ONE_COLUMN_START_FULL_SCREEN;
+            fixture.componentRef.setInput('layout', ONE_COLUMN_START_FULL_SCREEN);
             fixture.detectChanges();
 
             expect(testComponent.flexibleColumnLayout._leftColumnSeparator).toBeNull();
@@ -330,7 +330,7 @@ describe('FlexibleColumnLayoutComponent', () => {
             await whenStable(fixture);
             setViewport(1023);
 
-            testComponent.layout = TWO_COLUMNS_START_EXPANDED;
+            fixture.componentRef.setInput('layout', TWO_COLUMNS_START_EXPANDED);
             fixture.detectChanges();
 
             expect(testComponent.flexibleColumnLayout._leftColumnSeparator).toBe('left');
@@ -341,7 +341,7 @@ describe('FlexibleColumnLayoutComponent', () => {
             await whenStable(fixture);
             setViewport(1023);
 
-            testComponent.layout = TWO_COLUMNS_MID_EXPANDED;
+            fixture.componentRef.setInput('layout', TWO_COLUMNS_MID_EXPANDED);
             fixture.detectChanges();
 
             expect(testComponent.flexibleColumnLayout._leftColumnSeparator).toBe('right');
@@ -352,7 +352,7 @@ describe('FlexibleColumnLayoutComponent', () => {
             await whenStable(fixture);
             setViewport(1300);
 
-            testComponent.layout = THREE_COLUMNS_MID_EXPANDED;
+            fixture.componentRef.setInput('layout', THREE_COLUMNS_MID_EXPANDED);
             fixture.detectChanges();
 
             expect(testComponent.flexibleColumnLayout._leftColumnSeparator).toBe('right');
@@ -363,7 +363,7 @@ describe('FlexibleColumnLayoutComponent', () => {
             await whenStable(fixture);
             setViewport(1300);
 
-            testComponent.layout = THREE_COLUMNS_END_EXPANDED;
+            fixture.componentRef.setInput('layout', THREE_COLUMNS_END_EXPANDED);
             fixture.detectChanges();
 
             expect(testComponent.flexibleColumnLayout._rightColumnSeparator).toBe('right');
@@ -375,7 +375,7 @@ describe('FlexibleColumnLayoutComponent', () => {
             await whenStable(fixture);
             setViewport(1023);
 
-            testComponent.layout = TWO_COLUMNS_START_EXPANDED;
+            fixture.componentRef.setInput('layout', TWO_COLUMNS_START_EXPANDED);
             fixture.detectChanges();
             await whenStable(fixture);
 
@@ -395,7 +395,7 @@ describe('FlexibleColumnLayoutComponent', () => {
             await whenStable(fixture);
             setViewport(1023);
 
-            testComponent.layout = TWO_COLUMNS_START_EXPANDED;
+            fixture.componentRef.setInput('layout', TWO_COLUMNS_START_EXPANDED);
             fixture.detectChanges();
             await whenStable(fixture);
 
@@ -409,7 +409,7 @@ describe('FlexibleColumnLayoutComponent', () => {
             await whenStable(fixture);
             setViewport(1023);
 
-            testComponent.layout = TWO_COLUMNS_MID_EXPANDED;
+            fixture.componentRef.setInput('layout', TWO_COLUMNS_MID_EXPANDED);
             fixture.detectChanges();
             await whenStable(fixture);
 
@@ -423,7 +423,7 @@ describe('FlexibleColumnLayoutComponent', () => {
             await whenStable(fixture);
             setViewport(1300);
 
-            testComponent.layout = THREE_COLUMNS_MID_EXPANDED;
+            fixture.componentRef.setInput('layout', THREE_COLUMNS_MID_EXPANDED);
             fixture.detectChanges();
             await whenStable(fixture);
 
@@ -437,7 +437,7 @@ describe('FlexibleColumnLayoutComponent', () => {
             await whenStable(fixture);
             setViewport(1300);
 
-            testComponent.layout = THREE_COLUMNS_MID_EXPANDED;
+            fixture.componentRef.setInput('layout', THREE_COLUMNS_MID_EXPANDED);
             fixture.detectChanges();
             await whenStable(fixture);
 
@@ -453,9 +453,9 @@ describe('FlexibleColumnLayoutComponent', () => {
             await whenStable(fixture);
             setViewport(1023);
 
-            testComponent.collapseTitleStartBtn = 'Collapse start column';
-            testComponent.collapseTitle = 'Collapse'; // Fallback
-            testComponent.layout = TWO_COLUMNS_START_EXPANDED;
+            fixture.componentRef.setInput('collapseTitleStartBtn', 'Collapse start column');
+            fixture.componentRef.setInput('collapseTitle', 'Collapse'); // Fallback
+            fixture.componentRef.setInput('layout', TWO_COLUMNS_START_EXPANDED);
             fixture.detectChanges();
             await whenStable(fixture);
 
@@ -470,9 +470,9 @@ describe('FlexibleColumnLayoutComponent', () => {
             await whenStable(fixture);
             setViewport(1023);
 
-            testComponent.expandTitleStartBtn = 'Expand start column';
-            testComponent.expandTitle = 'Expand'; // Fallback
-            testComponent.layout = TWO_COLUMNS_MID_EXPANDED;
+            fixture.componentRef.setInput('expandTitleStartBtn', 'Expand start column');
+            fixture.componentRef.setInput('expandTitle', 'Expand'); // Fallback
+            fixture.componentRef.setInput('layout', TWO_COLUMNS_MID_EXPANDED);
             fixture.detectChanges();
             await whenStable(fixture);
 
@@ -486,9 +486,9 @@ describe('FlexibleColumnLayoutComponent', () => {
             await whenStable(fixture);
             setViewport(1300);
 
-            testComponent.collapseTitleEndBtn = 'Collapse end column';
-            testComponent.collapseTitle = 'Collapse'; // Fallback
-            testComponent.layout = THREE_COLUMNS_MID_EXPANDED;
+            fixture.componentRef.setInput('collapseTitleEndBtn', 'Collapse end column');
+            fixture.componentRef.setInput('collapseTitle', 'Collapse'); // Fallback
+            fixture.componentRef.setInput('layout', THREE_COLUMNS_MID_EXPANDED);
             fixture.detectChanges();
             await whenStable(fixture);
 
@@ -503,8 +503,8 @@ describe('FlexibleColumnLayoutComponent', () => {
             await whenStable(fixture);
             setViewport(1023);
 
-            testComponent.collapseTitle = 'Collapse';
-            testComponent.layout = TWO_COLUMNS_START_EXPANDED;
+            fixture.componentRef.setInput('collapseTitle', 'Collapse');
+            fixture.componentRef.setInput('layout', TWO_COLUMNS_START_EXPANDED);
             fixture.detectChanges();
             await whenStable(fixture);
 

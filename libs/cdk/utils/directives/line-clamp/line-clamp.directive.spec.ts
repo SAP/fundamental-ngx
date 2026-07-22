@@ -1,4 +1,4 @@
-import { Component, DebugElement, viewChild } from '@angular/core';
+import { Component, DebugElement, input, viewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { BehaviorSubject } from 'rxjs';
@@ -13,16 +13,16 @@ const LONG_TEXT =
     template: `
         <div
             fdkLineClamp
-            [fdLineclampState]="clampState"
-            [fdLineClampLines]="rows"
+            [fdLineclampState]="clampState()"
+            [fdLineClampLines]="rows()"
             (lineCountUpdate)="onLineCountUpdate($event)"
         >
             <span
                 fdkLineClampTarget
-                [fdLineClampTargetText]="text"
+                [fdLineClampTargetText]="text()"
                 (update)="lineClampDirective()?.refreshTarget($event)"
             >
-                {{ text }}
+                {{ text() }}
             </span>
         </div>
     `,
@@ -32,9 +32,9 @@ class TestComponent {
     readonly lineClampDirective = viewChild(LineClampDirective);
     readonly lineClampTargetDirective = viewChild(LineClampTargetDirective);
 
-    text = LONG_TEXT;
-    rows = 2;
-    clampState = true;
+    readonly text = input(LONG_TEXT);
+    readonly rows = input(2);
+    readonly clampState = input(true);
     lineCount: number | undefined;
 
     onLineCountUpdate(count: number): void {
@@ -55,12 +55,12 @@ class DisabledClampTestComponent {
 }
 
 @Component({
-    template: ` <div fdkLineClampTarget [fdLineClampTargetText]="text">{{ text }}</div> `,
+    template: ` <div fdkLineClampTarget [fdLineClampTargetText]="text()">{{ text() }}</div> `,
     imports: [LineClampTargetDirective]
 })
 class StandaloneTargetTestComponent {
     readonly targetDirective = viewChild(LineClampTargetDirective);
-    text = 'Sample text';
+    readonly text = input('Sample text');
 }
 
 describe('LineClampDirective', () => {
@@ -108,8 +108,8 @@ describe('LineClampDirective', () => {
 
     describe('native line-clamp support', () => {
         it('should apply native CSS styles when clampState is true', () => {
-            component.clampState = true;
-            component.rows = 3;
+            fixture.componentRef.setInput('clampState', true);
+            fixture.componentRef.setInput('rows', 3);
             fixture.detectChanges();
 
             const rootElement = lineClampDebugElement.nativeElement as HTMLElement;
@@ -121,10 +121,10 @@ describe('LineClampDirective', () => {
         });
 
         it('should reset native CSS styles when clampState changes to false', () => {
-            component.clampState = true;
+            fixture.componentRef.setInput('clampState', true);
             fixture.detectChanges();
 
-            component.clampState = false;
+            fixture.componentRef.setInput('clampState', false);
             fixture.detectChanges();
 
             const rootElement = lineClampDebugElement.nativeElement as HTMLElement;
@@ -137,20 +137,20 @@ describe('LineClampDirective', () => {
 
     describe('line count changes', () => {
         it('should update styles when fdLineClampLines changes', () => {
-            component.rows = 2;
+            fixture.componentRef.setInput('rows', 2);
             fixture.detectChanges();
 
             const rootElement = lineClampDebugElement.nativeElement as HTMLElement;
             expect(rootElement.style.webkitLineClamp).toBe('2');
 
-            component.rows = 5;
+            fixture.componentRef.setInput('rows', 5);
             fixture.detectChanges();
 
             expect(rootElement.style.webkitLineClamp).toBe('5');
         });
 
         it('should accept a string attribute value and apply the correct line clamp', () => {
-            (component as any).rows = '4';
+            fixture.componentRef.setInput('rows', '4' as any);
             fixture.detectChanges();
 
             const rootElement = lineClampDebugElement.nativeElement as HTMLElement;
@@ -161,7 +161,7 @@ describe('LineClampDirective', () => {
     describe('text updates', () => {
         it('should refresh target when text changes', () => {
             const newText = 'New shorter text';
-            component.text = newText;
+            fixture.componentRef.setInput('text', newText);
             fixture.detectChanges();
 
             const targetElement = lineClampTargetDebugElement.nativeElement as HTMLElement;
@@ -171,7 +171,7 @@ describe('LineClampDirective', () => {
         it('should emit update event when target text changes', () => {
             const updateSpy = jest.spyOn(component.lineClampTargetDirective()!.update, 'emit');
 
-            component.text = 'Changed text';
+            fixture.componentRef.setInput('text', 'Changed text');
             fixture.detectChanges();
 
             expect(updateSpy).toHaveBeenCalled();
@@ -199,7 +199,7 @@ describe('LineClampDirective', () => {
 
     describe('reset functionality', () => {
         it('should restore original text on reset', () => {
-            component.clampState = true;
+            fixture.componentRef.setInput('clampState', true);
             fixture.detectChanges();
 
             component.lineClampDirective()!.reset();
@@ -241,7 +241,7 @@ describe('LineClampTargetDirective (standalone)', () => {
     it('should emit update event on changes', () => {
         const updateSpy = jest.spyOn(component.targetDirective()!.update, 'emit');
 
-        component.text = 'Updated text';
+        fixture.componentRef.setInput('text', 'Updated text');
         fixture.detectChanges();
 
         expect(updateSpy).toHaveBeenCalledWith(component.targetDirective());
@@ -255,7 +255,7 @@ describe('LineClampTargetDirective (standalone)', () => {
         newFixture.detectChanges();
 
         newComponent.targetDirective()!.update.subscribe(updateSpy);
-        newComponent.text = 'trigger change';
+        newFixture.componentRef.setInput('text', 'trigger change');
         newFixture.detectChanges();
 
         expect(updateSpy).toHaveBeenCalled();

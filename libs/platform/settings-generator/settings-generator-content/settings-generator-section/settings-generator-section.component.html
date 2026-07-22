@@ -1,7 +1,7 @@
 @if (_renderer === 'form') {
     <fdp-form-generator
         [noAdditionalContent]="true"
-        [mainTitle]="items?.title | fdkAsyncOrSync"
+        [mainTitle]="$safeNavigationMigration(items?.title) | fdkAsyncOrSync"
         [hideMainTItle]="true"
         [formItems]="_formItems"
         [unifiedLayout]="false"

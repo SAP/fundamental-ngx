@@ -2,6 +2,9 @@ name: PR checks
 
 on:
     pull_request:
+        types: [opened, synchronize, edited]
+    pull_request_target:
+        types: [edited]
 
 env:
     NODE_VERSION: '22.x'
@@ -17,6 +20,59 @@ permissions:
     contents: read
 
 jobs:
+    pr_lint:
+        runs-on: ubuntu-latest
+        name: Lint PR title and body
+        if: github.event_name == 'pull_request' || github.event_name == 'pull_request_target'
+        permissions:
+            pull-requests: write
+            contents: read
+        steps:
+            - name: Check for BREAKING CHANGES (plural)
+              uses: actions/github-script@v7
+              with:
+                  script: |
+                      const pr = context.payload.pull_request;
+                      const title = pr.title;
+                      const body = pr.body || '';
+
+                      // Only check for breaking change declarations, not mentions in descriptions
+                      // Match the actual breaking change footer format
+                      const breakingChangesRegex = /^BREAKING CHANGES:\s/m;
+                      const breakingChangeRegex = /^BREAKING CHANGE:\s/m;
+
+                      const hasBreakingChangesPlural = breakingChangesRegex.test(body);
+                      const hasBreakingChange = breakingChangeRegex.test(body);
+
+                      if (hasBreakingChangesPlural) {
+                          const message = `⚠️ **Breaking Change Format Issue**
+
+                      Your PR body contains \`BREAKING CHANGES:\` (plural), but the conventional-commits parser requires \`BREAKING CHANGE:\` (singular) for version bumping to work correctly.
+
+                      Please update your PR description to use:
+                      \`\`\`
+                      BREAKING CHANGE: your description here
+                      \`\`\`
+
+                      Or use the \`!\` syntax in the PR title instead:
+                      \`\`\`
+                      ${title.replace(/^(\w+)(\([^)]+\))?:/, '$1$2!:')}
+                      \`\`\``;
+
+                          // Post a comment
+                          await github.rest.issues.createComment({
+                              owner: context.repo.owner,
+                              repo: context.repo.repo,
+                              issue_number: pr.number,
+                              body: message
+                          });
+
+                          // Fail the check
+                          core.setFailed('PR body contains "BREAKING CHANGES:" (plural). Use "BREAKING CHANGE:" (singular) instead.');
+                      } else {
+                          core.info('✓ No breaking change format issues detected');
+                      }
+
     nx_agents:
         name: Nx Cloud Agent ${{ matrix.agent }}
         runs-on: ubuntu-latest
@@ -65,7 +121,7 @@ jobs:
                   ref: ${{ github.event.pull_request.head.sha }}
                   fetch-depth: 0
 
-            - uses: nrwl/nx-set-shas@v4.3.0
+            - uses: nrwl/nx-set-shas@v5.0.1
               name: Derive appropriate SHAs for base and head for nx-affected commands
               with:
                   main-branch-name: main

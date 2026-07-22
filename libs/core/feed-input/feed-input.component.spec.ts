@@ -1,4 +1,4 @@
-import { Component, DebugElement, ViewChild } from '@angular/core';
+import { Component, DebugElement, ViewChild, input } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
@@ -8,8 +8,8 @@ import { FeedInputComponent } from './feed-input.component';
 
 @Component({
     template: `
-        <fd-feed-input [disabled]="disabled">
-            <textarea fdFeedInputTextarea [fdFeedInputTextareaMaxRows]="maxRows"></textarea>
+        <fd-feed-input [disabled]="disabled()">
+            <textarea fdFeedInputTextarea [fdFeedInputTextareaMaxRows]="maxRows()"></textarea>
             <button fdFeedInputButton></button>
         </fd-feed-input>
     `,
@@ -23,8 +23,8 @@ class TestComponent {
     @ViewChild(FeedInputButtonDirective)
     buttonDirective: FeedInputButtonDirective;
 
-    disabled = false;
-    maxRows: number;
+    readonly disabled = input(false);
+    readonly maxRows = input<number>();
 }
 
 describe('FeedInputComponent', () => {
@@ -59,7 +59,7 @@ describe('FeedInputComponent', () => {
     });
 
     it('should disable component by class', () => {
-        component.disabled = true;
+        fixture.componentRef.setInput('disabled', true);
         fixture.detectChanges();
 
         expect(hostEl.nativeElement.className.includes('is-disabled')).toBe(true);
@@ -94,7 +94,7 @@ describe('FeedInputComponent', () => {
     });
 
     it('should set textarea max height', () => {
-        component.maxRows = 10;
+        fixture.componentRef.setInput('maxRows', 10);
         textareaEl.nativeElement.style.lineHeight = '19px';
         fixture.detectChanges();
 
@@ -103,7 +103,7 @@ describe('FeedInputComponent', () => {
     });
 
     it('should set textarea max height with normal line height', () => {
-        component.maxRows = 10;
+        fixture.componentRef.setInput('maxRows', 10);
         textareaEl.nativeElement.style.lineHeight = 'normal';
         textareaEl.nativeElement.style.fontSize = '14px';
         fixture.detectChanges();

@@ -135,3 +135,54 @@ nx affected:build
 nx affected:test
 nx affected:lint
 ```
+
+## E2E Testing
+
+### Adding or Updating Routes
+
+When a new page/route needs to be covered by e2e tests:
+
+1. Add the route to [apps/e2e-harness/e2e/config/e2e.routes.json](../../apps/e2e-harness/e2e/config/e2e.routes.json)
+2. Regenerate the route manifest:
+
+```bash
+nx run e2e-harness:generate-routes
+```
+
+### Running E2E Tests Locally
+
+The Playwright config (`playwright.config.ts`) will auto-start the e2e-harness when you run tests.
+You can also start it manually to keep it running across multiple test runs (faster iteration):
+
+```bash
+# Optional: start the harness manually (avoids repeated cold-start overhead)
+npx nx serve e2e-harness
+
+# Run all tests
+npx playwright test
+
+# Run tests for a specific component
+npx playwright test --grep "core/shellbar"
+
+# View the HTML report after a run
+npx playwright show-report
+```
+
+The e2e-harness is served at **http://localhost:4400**.
+
+> Example component URL: `http://localhost:4400/platform/settings-generator/custom-control`
+
+### Updating Snapshots
+
+Snapshot updates require the e2e-harness to be running first:
+
+```bash
+# Start the harness
+npx nx serve e2e-harness
+
+# Update all snapshots
+npx playwright test --update-snapshots
+
+# Update snapshots for a specific component only
+npx playwright test --update-snapshots --grep "core/shellbar"
+```

@@ -3,7 +3,8 @@
     "compilerOptions": {
         "module": "preserve",
         "moduleResolution": "bundler",
-        "lib": ["dom", "es2023"]
+        "lib": ["dom", "es2023"],
+        "rootDir": "../../"
     },
     "files": [],
     "include": [],

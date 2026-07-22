@@ -13,7 +13,9 @@
     >
         <fd-popover-control
             fd-avatar-group-legacy-popover-control
-            [attr.aria-label]="getPopoverCtrlAriaLabel(avatarGroup_GroupType?.overflowItemsCount)"
+            [attr.aria-label]="
+                getPopoverCtrlAriaLabel($safeNavigationMigration(avatarGroup_GroupType?.overflowItemsCount))
+            "
             (click)="handleControlClick($event, overflowPopover)"
             (keydown)="handleControlKeydown($event, overflowPopover)"
         >

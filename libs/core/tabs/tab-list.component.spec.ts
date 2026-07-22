@@ -1,4 +1,4 @@
-import { Component, provideZonelessChangeDetection, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, input, provideZonelessChangeDetection, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { whenStable } from '@fundamental-ngx/core/tests';
@@ -11,7 +11,7 @@ import { TabsModule } from './tabs.module';
         <fd-tab title="Link" id="tab1"> Content Link </fd-tab>
         <fd-tab title="Selected" id="tab2"> Content Selected </fd-tab>
         <fd-tab title="Link" id="tab3"> Content Link Two </fd-tab>
-        @if (showDisabled) {
+        @if (showDisabled()) {
             <fd-tab title="Disabled" id="tab4"> Disabled </fd-tab>
         }
     </fd-tab-list>`,
@@ -21,7 +21,7 @@ class TestTabsComponent {
     @ViewChildren(TabPanelComponent)
     tabs: QueryList<TabPanelComponent>;
 
-    showDisabled = true;
+    readonly showDisabled = input(true);
 }
 
 describe('TabListComponent', () => {
@@ -76,7 +76,7 @@ describe('TabListComponent', () => {
     it('should update on tab panels change', async () => {
         await whenStable(fixture);
 
-        fixture.componentInstance.showDisabled = false;
+        fixture.componentRef.setInput('showDisabled', false);
 
         await whenStable(fixture);
 
@@ -92,7 +92,7 @@ describe('TabListComponent', () => {
 
         const tabChangeSpy = jest.spyOn(component.selectedTabChange, 'emit');
         const tabIndexChangeSpy = jest.spyOn(component.selectedTabIndexChange, 'emit');
-        fixture.componentInstance.showDisabled = false;
+        fixture.componentRef.setInput('showDisabled', false);
 
         await whenStable(fixture);
 
@@ -109,7 +109,7 @@ const NUMBER_OF_TABS = 10;
             [style.width.px]="200"
             [collapsibleTabs]="true"
             [collapseOverflow]="true"
-            [maxVisibleTabs]="maxVisibleTabs"
+            [maxVisibleTabs]="maxVisibleTabs()"
         >
             @for (title of _tabs; track title) {
                 <fd-tab [title]="title">{{ title }} content</fd-tab>
@@ -125,7 +125,7 @@ class TestCollapsibleTabsComponent {
     @ViewChild(TabListComponent)
     tabList: TabListComponent;
 
-    maxVisibleTabs = 10;
+    readonly maxVisibleTabs = input(10);
     _tabs = new Array(NUMBER_OF_TABS).fill(null).map((e, i) => `Tab ${i + 1}`);
 }
 
@@ -170,7 +170,7 @@ describe('TabListComponent', () => {
             () => itemWidth
         );
 
-        testComponent.maxVisibleTabs = 1;
+        fixture.componentRef.setInput('maxVisibleTabs', 1);
 
         await whenStable(fixture);
 

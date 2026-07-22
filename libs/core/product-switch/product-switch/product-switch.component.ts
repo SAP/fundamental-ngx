@@ -21,6 +21,7 @@ import {
 } from '@fundamental-ngx/core/popover';
 import { Placement } from '@fundamental-ngx/core/shared';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { Subject } from 'rxjs';
 import { ProductSwitchBodyComponent } from '../product-switch-body/product-switch-body.component';
 import { ProductSwitchButtonDirective } from '../product-switch-button.directive';
 import { FD_PRODUCT_SWITCH_COMPONENT } from '../tokens';
@@ -82,8 +83,8 @@ export class ProductSwitchComponent {
     /** Event emitted right before the product switch is being opened. */
     readonly beforeOpen = output<void>();
 
-    /** Event emitted when the product switch open state changes. */
-    readonly isOpenChange = output<boolean>();
+    /** Emits when product switch open state changes - for backwards compatibility with programmatic subscribers. */
+    readonly isOpenChange = new Subject<boolean>();
 
     /** @hidden */
     contentDensity = signal<ContentDensityMode>(ContentDensityMode.COZY);
@@ -96,10 +97,16 @@ export class ProductSwitchComponent {
 
     /** @hidden */
     constructor() {
+        let previousIsOpen = false;
         effect(() => {
-            const isOpen = this.isOpen();
-            this._productSwitchBody()?.isOpen.set(isOpen);
-            this.isOpenChange.emit(isOpen);
+            const openState = this.isOpen();
+
+            if (openState !== previousIsOpen) {
+                this._productSwitchBody()?.isOpen.set(openState);
+                this.isOpenChange.next(openState);
+            }
+
+            previousIsOpen = openState;
         });
     }
 }

@@ -2,7 +2,7 @@
 <br />
 <br />
 Start:
-{{ rangeDate.start?.toDate() | date: 'shortDate' }}
+{{ $safeNavigationMigration(rangeDate.start?.toDate()) | date: 'shortDate' }}
 <br />
 End:
-{{ rangeDate.end?.toDate() | date: 'shortDate' }}
+{{ $safeNavigationMigration(rangeDate.end?.toDate()) | date: 'shortDate' }}

@@ -2,11 +2,12 @@ import { Component, LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
-import { DATE_TIME_FORMATS, DatetimeAdapter, FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
+import { DATE_TIME_FORMATS, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { DAYJS_DATETIME_FORMATS, DayjsDatetimeAdapter } from '@fundamental-ngx/datetime-adapter';
 import { patchLanguage } from '@fundamental-ngx/i18n';
+import dayjs, { Dayjs } from 'dayjs';
 import 'dayjs/locale/bg';
 import 'dayjs/locale/de';
 import 'dayjs/locale/fr';
@@ -67,20 +68,13 @@ const CUSTOM_DATETIME_FORMATS = {
             useValue: CUSTOM_DATETIME_FORMATS
         }
     ],
-    imports: [
-        FormLabelComponent,
-        SegmentedButtonModule,
-        ButtonComponent,
-        DatePickerComponent,
-        FormsModule,
-        FdDatetimeModule
-    ]
+    imports: [FormLabelComponent, SegmentedButtonModule, ButtonComponent, DatePickerComponent, FormsModule]
 })
 export class DatePickerI18nExampleComponent {
-    date = FdDate.getNow();
+    date: Dayjs = dayjs();
     locale = 'fr';
 
-    constructor(private datetimeAdapter: DatetimeAdapter<FdDate>) {}
+    constructor(private datetimeAdapter: DatetimeAdapter<Dayjs>) {}
 
     setLocale(locale: string): void {
         this.locale = locale;

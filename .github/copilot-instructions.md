@@ -10,7 +10,7 @@ This file serves as the standard GitHub Copilot configuration pointer. GitHub Co
 
 The main documentation includes:
 
-- Angular 21+ component patterns with signals
+- Angular 22+ component patterns with signals
 - NX monorepo architecture guidelines
 - Commit message and PR conventions
 - Testing patterns and requirements

@@ -6,20 +6,42 @@
         "declaration": true,
         "declarationMap": true,
         "types": [],
-        "lib": ["dom", "es2023"],
+        "lib": [
+            "dom",
+            "es2023"
+        ],
         "useDefineForClassFields": false,
         "moduleResolution": "bundler",
         "paths": {
-            "@fundamental-ngx/i18n": ["dist/libs/i18n"],
-            "@fundamental-ngx/core/theming": ["dist/libs/core/theming"]
-        }
+            "@fundamental-ngx/i18n": [
+                "dist/libs/i18n"
+            ],
+            "@fundamental-ngx/core/theming": [
+                "dist/libs/core/theming"
+            ]
+        },
+        "rootDir": "../../"
     },
     "angularCompilerOptions": {
         "skipTemplateCodegen": true,
+        // TODO(#14334): suppress Angular 22 optionalChainNotNullable and nullishCoalescingNotNullable diagnostics
+        "extendedDiagnostics": {
+            "checks": {
+                "nullishCoalescingNotNullable": "suppress",
+                "optionalChainNotNullable": "suppress"
+            }
+        },
         "strictMetadataEmit": true,
         "enableResourceInlining": true
     },
-    "files": ["./index.ts"],
-    "exclude": ["test.ts", "**/*.spec.ts"],
-    "include": ["**/*.ts"]
+    "files": [
+        "./index.ts"
+    ],
+    "exclude": [
+        "test.ts",
+        "**/*.spec.ts"
+    ],
+    "include": [
+        "**/*.ts"
+    ]
 }
