@@ -18,6 +18,7 @@
                 (click)="selectFilter.emit(filter)"
                 (keydown.space)="selectFilter.emit(filter)"
                 (keydown.enter)="selectFilter.emit(filter)"
+                aria-expanded="false"
             >
                 <a fd-list-link [navigationIndicator]="true">
                     <span fd-list-title>{{ filter.label }}</span>
