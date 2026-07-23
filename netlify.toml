@@ -15,3 +15,5 @@
   YARN_FLAGS = "--frozen-lockfile"
   YARN_VERSION = "4.12"
   PYTHON_VERSION = "3.8"
+  NX_CLOUD_NO_TIMEOUTS = "true"
+  NX_SKIP_NX_CLOUD = "true"
