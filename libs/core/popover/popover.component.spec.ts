@@ -1,5 +1,5 @@
 import { DOWN_ARROW } from '@angular/cdk/keycodes';
-import { Component, ElementRef, signal, ViewChild } from '@angular/core';
+import { Component, ElementRef, input, signal, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { PopoverBodyComponent } from './popover-body/popover-body.component';
 import { PopoverControlComponent } from './popover-control/popover-control.component';
@@ -12,12 +12,12 @@ import { PopoverModule } from './popover.module';
     template: `
         <fd-popover
             #popover
-            [placement]="placement"
-            [disabled]="disabled"
-            [isOpen]="isOpen"
-            [noArrow]="noArrow"
-            [closeOnEscapeKey]="closeOnEscapeKey"
-            [mobile]="mobile"
+            [placement]="placement()"
+            [disabled]="disabled()"
+            [isOpen]="isOpen()"
+            [noArrow]="noArrow()"
+            [closeOnEscapeKey]="closeOnEscapeKey()"
+            [mobile]="mobile()"
         >
             <fd-popover-control>
                 <button #trigger>Open Popover</button>
@@ -35,12 +35,12 @@ class TestPopoverComponent {
     @ViewChild(PopoverBodyComponent) popoverBody: PopoverBodyComponent;
     @ViewChild(PopoverControlComponent) popoverControl: PopoverControlComponent;
 
-    placement: any = 'bottom-start';
-    disabled = false;
-    isOpen = false;
-    noArrow = true;
-    closeOnEscapeKey = true;
-    mobile = false;
+    readonly placement = input<any>('bottom-start');
+    readonly disabled = input(false);
+    readonly isOpen = input(false);
+    readonly noArrow = input(true);
+    readonly closeOnEscapeKey = input(true);
+    readonly mobile = input(false);
 }
 
 @Component({
@@ -183,7 +183,7 @@ describe('PopoverComponent', () => {
     }));
 
     it('should apply disabled host binding when disabled', () => {
-        testComponent.disabled = true;
+        fixture.componentRef.setInput('disabled', true);
         fixture.detectChanges();
 
         const popoverElement = fixture.nativeElement.querySelector('fd-popover');
@@ -198,7 +198,7 @@ describe('PopoverComponent', () => {
             stopPropagation: jest.fn()
         } as any;
 
-        testComponent.disabled = false;
+        fixture.componentRef.setInput('disabled', false);
         fixture.detectChanges();
 
         popover.triggerKeyDownHandler(event as KeyboardEvent);
@@ -215,7 +215,7 @@ describe('PopoverComponent', () => {
             stopPropagation: jest.fn()
         } as any;
 
-        testComponent.disabled = true;
+        fixture.componentRef.setInput('disabled', true);
         fixture.detectChanges();
 
         jest.spyOn(popover, 'open');
@@ -273,13 +273,13 @@ describe('PopoverComponent', () => {
     it('should sync isOpen changes to service', fakeAsync(() => {
         const service = popover['_popoverService'];
 
-        testComponent.isOpen = true;
+        fixture.componentRef.setInput('isOpen', true);
         fixture.detectChanges();
         tick();
 
         expect(service.isOpen()).toBe(true);
 
-        testComponent.isOpen = false;
+        fixture.componentRef.setInput('isOpen', false);
         fixture.detectChanges();
         tick();
 
@@ -291,7 +291,7 @@ describe('PopoverComponent', () => {
     });
 
     it('should update placement when input changes', () => {
-        testComponent.placement = 'top-end';
+        fixture.componentRef.setInput('placement', 'top-end');
         fixture.detectChanges();
 
         expect(popover.placement()).toBe('top-end');
@@ -360,7 +360,7 @@ describe('PopoverComponent mobile mode', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(TestPopoverComponent);
         testComponent = fixture.componentInstance;
-        testComponent.mobile = true;
+        fixture.componentRef.setInput('mobile', true);
         fixture.detectChanges();
         popover = testComponent.popover;
     });
@@ -518,7 +518,7 @@ describe('PopoverComponent service stub tests', () => {
 @Component({
     selector: 'fd-popover-body-role-test',
     template: `
-        <fd-popover #popover [bodyRole]="bodyRole" [bodyAriaLabelledBy]="bodyAriaLabelledBy">
+        <fd-popover #popover [bodyRole]="bodyRole()" [bodyAriaLabelledBy]="bodyAriaLabelledBy()">
             <fd-popover-control>
                 <button>Open Popover</button>
             </fd-popover-control>
@@ -532,8 +532,8 @@ describe('PopoverComponent service stub tests', () => {
 })
 class TestPopoverBodyRoleComponent {
     @ViewChild('popover') popover: PopoverComponent;
-    bodyRole: string | null = 'dialog';
-    bodyAriaLabelledBy: string | null = null;
+    readonly bodyRole = input<string | null>('dialog');
+    readonly bodyAriaLabelledBy = input<string | null>(null);
 }
 
 describe('PopoverComponent bodyRole and bodyAriaLabelledBy inputs (#14260)', () => {
@@ -562,7 +562,7 @@ describe('PopoverComponent bodyRole and bodyAriaLabelledBy inputs (#14260)', () 
     }));
 
     it('binds [bodyRole]="region" to popover-body [attr.role]', fakeAsync(() => {
-        hostComponent.bodyRole = 'region';
+        fixture.componentRef.setInput('bodyRole', 'region');
         fixture.detectChanges();
 
         hostComponent.popover.open();
@@ -573,7 +573,7 @@ describe('PopoverComponent bodyRole and bodyAriaLabelledBy inputs (#14260)', () 
     }));
 
     it('binds [bodyRole]="null" so no role attribute is rendered', fakeAsync(() => {
-        hostComponent.bodyRole = null;
+        fixture.componentRef.setInput('bodyRole', null);
         fixture.detectChanges();
 
         hostComponent.popover.open();
@@ -584,7 +584,7 @@ describe('PopoverComponent bodyRole and bodyAriaLabelledBy inputs (#14260)', () 
     }));
 
     it('binds [bodyAriaLabelledBy] to popover-body [attr.aria-labelledby]', fakeAsync(() => {
-        hostComponent.bodyAriaLabelledBy = 'my-label-id';
+        fixture.componentRef.setInput('bodyAriaLabelledBy', 'my-label-id');
         fixture.detectChanges();
 
         hostComponent.popover.open();
@@ -608,7 +608,7 @@ describe('PopoverComponent bodyRole and bodyAriaLabelledBy inputs (#14260)', () 
         ];
 
         validRoles.forEach((role) => {
-            hostComponent.bodyRole = role;
+            fixture.componentRef.setInput('bodyRole', role);
             fixture.detectChanges();
 
             hostComponent.popover.open();
@@ -628,7 +628,7 @@ describe('PopoverComponent bodyRole and bodyAriaLabelledBy inputs (#14260)', () 
         const edgeCaseRoles = ['tree', 'status', 'alert', 'presentation', 'none'];
 
         edgeCaseRoles.forEach((role) => {
-            hostComponent.bodyRole = role;
+            fixture.componentRef.setInput('bodyRole', role);
             fixture.detectChanges();
 
             hostComponent.popover.open();

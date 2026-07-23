@@ -130,7 +130,7 @@ export async function updateKey(options: UpdateKeyOptions): Promise<UpdateKeyRes
         return {
             success: false,
             filesModified,
-            error: `Transform translations failed: ${error.message}`
+            error: `Transform translations failed: ${error instanceof Error ? error.message : String(error)}`
         };
     }
 

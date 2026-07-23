@@ -1,0 +1,31 @@
+<div>
+    <ui5-checkbox [checked]="noTypeahead()" (ui5Change)="toggleNoTypeahead()" text="No Typeahead Selection">
+    </ui5-checkbox>
+    <p>
+        When enabled, typing does not auto-select items. Selection only occurs on explicit user action (Enter, click, or
+        arrow keys).
+    </p>
+</div>
+
+<ui5-combobox
+    placeholder="Select a country"
+    [noTypeahead]="noTypeahead()"
+    (ui5SelectionChange)="onSelectionChange($event)"
+    (ui5Change)="onChange($event)"
+>
+    @for (country of countries; track country) {
+    <ui5-cb-item [text]="country"></ui5-cb-item>
+    }
+</ui5-combobox>
+
+<br /><br />
+
+<div><strong>Selected Value:</strong> {{ selectedValue() || '(none)' }}</div>
+
+@if (lastEvent()) {
+<br />
+<div>
+    <strong>Last Selection Trigger:</strong>
+    <ui5-tag [design]="getTriggerBadgeColor(lastEvent()!.trigger)"> {{ lastEvent()!.trigger }} </ui5-tag>
+</div>
+}

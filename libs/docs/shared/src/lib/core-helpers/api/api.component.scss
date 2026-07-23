@@ -95,9 +95,9 @@
         box-shadow: var(--sapContent_Shadow1);
 
         &:hover {
-            background: var(--sapButton_Active_Background);
-            border-color: var(--sapButton_Active_BorderColor);
-            color: var(--sapContent_ContrastTextColor);
+            background: var(--sapButton_Emphasized_Hover_Background);
+            border-color: var(--sapButton_Emphasized_Hover_BorderColor);
+            color: var(--sapButton_Emphasized_Hover_TextColor);
             box-shadow: var(--sapContent_Shadow2);
         }
     }
@@ -239,9 +239,9 @@
         color: var(--sapContent_ContrastTextColor);
 
         &:hover {
-            background: var(--sapButton_Active_Background);
-            border-color: var(--sapButton_Active_BorderColor);
-            color: var(--sapContent_ContrastTextColor);
+            background: var(--sapButton_Emphasized_Hover_Background);
+            border-color: var(--sapButton_Emphasized_Hover_BorderColor);
+            color: var(--sapButton_Emphasized_Hover_TextColor);
         }
 
         &:focus-visible {

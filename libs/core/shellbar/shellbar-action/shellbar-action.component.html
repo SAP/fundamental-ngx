@@ -1,8 +1,8 @@
 <div class="fd-shellbar__action fd-shellbar__action--desktop">
     <button
         fd-button
-        [fdType]="fdType() ?? 'transparent'"
-        [class.fd-shellbar__button]="!fdType()"
+        [fdType]="fdType()"
+        [class.fd-shellbar__button]="fdType() === 'transparent'"
         fdCozy
         [ariaLabel]="ariaLabel()"
         [title]="title() || ariaLabel()"

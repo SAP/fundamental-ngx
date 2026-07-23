@@ -1,4 +1,4 @@
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withXhr } from '@angular/common/http';
 import { ApplicationConfig, signal } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { DynamicComponentService, RtlService } from '@fundamental-ngx/cdk/utils';
@@ -11,7 +11,7 @@ import { routes } from './app.routes';
 export const appConfig: ApplicationConfig = {
     providers: [
         provideRouter(routes),
-        provideHttpClient(),
+        provideHttpClient(withXhr()),
         provideTheming({ defaultTheme: 'sap_horizon' }),
         themingInitializer(),
         provideContentDensity({ storage: 'url', storageKey: 'density' }),

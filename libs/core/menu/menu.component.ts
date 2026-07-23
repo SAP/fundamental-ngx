@@ -28,6 +28,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Subject } from 'rxjs';
 
 import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
@@ -38,7 +39,7 @@ import { Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { SegmentedButtonHeaderDirective } from './directives/segmented-button/segmented-button-header.directive';
 import { SegmentedButtonOptionDirective } from './directives/segmented-button/segmented-button-option.directive';
-import { MenuItemComponent } from './menu-item/menu-item.component';
+import { BaseSubmenu, MenuItemComponent } from './menu-item/menu-item.component';
 import { MenuMobileComponent } from './menu-mobile/menu-mobile.component';
 import { MENU_COMPONENT, MenuInterface } from './menu.interface';
 import { FD_MENU_COMPONENT, FD_MENU_ITEM_COMPONENT } from './menu.tokens';
@@ -155,8 +156,8 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
     /** Two-way binding for menu open state */
     readonly isOpen = model(false);
 
-    /** Emits when menu open state changes - required for MenuInterface compatibility */
-    readonly isOpenChange = output<boolean>();
+    /** Emits when menu open state changes - for backwards compatibility with programmatic subscribers */
+    readonly isOpenChange = new Subject<boolean>();
 
     /** Emits array of active menu items */
     readonly activePath = output<MenuItemComponent[]>();
@@ -220,6 +221,7 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
     private readonly _viewContainerRef = inject(ViewContainerRef);
     private readonly _dynamicComponentService = inject(DynamicComponentService, { optional: true });
     private readonly _destroyRef = inject(DestroyRef);
+    private readonly _submenuSubscriptions = new Map<BaseSubmenu, () => void>();
 
     /** @hidden */
     constructor() {
@@ -238,8 +240,10 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
                 this.beforeOpen.emit();
             }
 
-            // Emit isOpenChange for MenuMobileComponent and other consumers
-            this.isOpenChange.emit(openState);
+            // Emit only when state actually changes.
+            if (openState !== previousIsOpen) {
+                this.isOpenChange.next(openState);
+            }
 
             // Sync to service only if not already syncing and not in mobile mode (prevents loop).
             // In mobile mode, the dialog handles open/close — the popover service should not be involved.
@@ -285,27 +289,28 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
         // Use afterNextRender to ensure this runs after ngAfterContentInit sets the menu component
         afterNextRender(() => {
             runInInjectionContext(this._injector, () => {
-                // Track previous subscriptions to clean up when effect re-runs
-                let submenuSubscriptions: (() => void)[] = [];
-
                 effect((onCleanup) => {
                     // Clean up previous subscriptions before creating new ones
-                    submenuSubscriptions.forEach((unsubscribe) => unsubscribe());
-                    submenuSubscriptions = [];
+                    this._clearSubmenuSubscriptions();
 
                     const menuItems = this._menuItems() as readonly MenuItemComponent[];
                     this._menuService.rebuildMenu();
+
+                    // Set aria-posinset and aria-setsize for all menu items recursively
+                    // IMPORTANT: Defer this until after Angular processes @Input() bindings
+                    // Otherwise menuItem.submenu will be undefined
+                    afterNextRender(
+                        () => {
+                            this._setAriaPositionAttributesRecursive(menuItems);
+                        },
+                        { injector: this._injector }
+                    );
 
                     // Whether menu have submenu or not.
                     let hasSubmenus = false;
                     menuItems.forEach((menuItem: MenuItemComponent) => {
                         if (menuItem.submenu) {
                             hasSubmenus = true;
-                            // Subscribe to submenu changes and track subscription for cleanup
-                            const subscription = menuItem.submenu._menuItemsChange$.subscribe(() =>
-                                this._menuService.rebuildMenu()
-                            );
-                            submenuSubscriptions.push(() => subscription.unsubscribe());
                         }
                     });
 
@@ -318,8 +323,7 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
 
                     // Cleanup callback when effect is destroyed or re-runs
                     onCleanup(() => {
-                        submenuSubscriptions.forEach((unsubscribe) => unsubscribe());
-                        submenuSubscriptions = [];
+                        this._clearSubmenuSubscriptions();
                     });
                 });
             });
@@ -615,5 +619,75 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
         if (this.focusTrapped() && this.trigger) {
             this.trigger.nativeElement.focus();
         }
+    }
+
+    /** @hidden */
+    private _clearSubmenuSubscriptions(): void {
+        this._submenuSubscriptions.forEach((unsubscribe) => unsubscribe());
+        this._submenuSubscriptions.clear();
+    }
+
+    /**
+     * @hidden
+     * Sets aria-posinset and aria-setsize on all menu items recursively.
+     */
+    private _setAriaPositionAttributesRecursive(menuItems: readonly MenuItemComponent[]): void {
+        // Filter out submenu items - contentChildren returns all descendants
+        const submenuItems = new Set<MenuItemComponent>();
+        menuItems.forEach((item) => {
+            if (item.submenu?.menuItems) {
+                item.submenu.menuItems.forEach((child) => submenuItems.add(child));
+            }
+        });
+
+        const directChildren = menuItems.filter((item) => !submenuItems.has(item));
+        const directInteractiveItems = directChildren
+            .map((menuItem) => ({
+                menuItem,
+                interactiveElement: menuItem.elementRef.nativeElement.querySelector(
+                    '[fd-menu-interactive]'
+                ) as HTMLElement | null
+            }))
+            .filter(
+                ({ interactiveElement }) =>
+                    !!interactiveElement && (interactiveElement.getAttribute('role') || 'menuitem') === 'menuitem'
+            );
+
+        directChildren.forEach((menuItem) => {
+            const interactiveElement = menuItem.elementRef.nativeElement.querySelector(
+                '[fd-menu-interactive]'
+            ) as HTMLElement | null;
+
+            if (interactiveElement) {
+                const position = directInteractiveItems.findIndex((item) => item.menuItem === menuItem);
+
+                if (position > -1) {
+                    this._renderer.setAttribute(interactiveElement, 'aria-posinset', String(position + 1));
+                    this._renderer.setAttribute(
+                        interactiveElement,
+                        'aria-setsize',
+                        String(directInteractiveItems.length)
+                    );
+                } else {
+                    // Keep aria metadata aligned when an item switches to role="none".
+                    this._renderer.removeAttribute(interactiveElement, 'aria-posinset');
+                    this._renderer.removeAttribute(interactiveElement, 'aria-setsize');
+                }
+            }
+
+            if (menuItem.submenu) {
+                const nestedMenuItems = menuItem.submenu.menuItems || [];
+                this._setAriaPositionAttributesRecursive(nestedMenuItems);
+
+                if (!this._submenuSubscriptions.has(menuItem.submenu)) {
+                    const subscription = menuItem.submenu._menuItemsChange$.subscribe(() => {
+                        this._menuService.rebuildMenu();
+                        this._setAriaPositionAttributesRecursive(this._menuItems() as readonly MenuItemComponent[]);
+                    });
+
+                    this._submenuSubscriptions.set(menuItem.submenu, () => subscription.unsubscribe());
+                }
+            }
+        });
     }
 }

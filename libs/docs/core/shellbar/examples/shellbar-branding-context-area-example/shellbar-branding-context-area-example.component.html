@@ -41,7 +41,7 @@
         (inputChange)="onInputChange($event)"
     ></fdp-search-field>
 
-    <fd-shellbar-actions [assistiveTools]="true" [assistiveToolsCallback]="assistiveToolsCallback">
+    <fd-shellbar-actions>
         @for (action of actions; track action) {
             <fd-shellbar-action
                 [glyph]="action.glyph"
@@ -50,7 +50,7 @@
                 [ariaLabel]="action.ariaLabel"
                 [title]="action.title"
                 [fdType]="action.type ?? 'transparent'"
-                [toggled]="action.toggled?.()"
+                [toggled]="$safeNavigationMigration(action.toggled?.())"
                 [notificationCount]="action.notificationCount"
                 [notificationLabel]="action.notificationLabel"
             ></fd-shellbar-action>

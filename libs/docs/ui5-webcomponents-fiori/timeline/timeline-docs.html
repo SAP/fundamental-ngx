@@ -9,3 +9,37 @@
     <ui5-timeline-sample></ui5-timeline-sample>
 </component-example>
 <code-example [exampleFiles]="examples()"></code-example>
+
+<separator />
+
+<fd-docs-section-title id="header-info-bar" componentName="timeline">
+    Timeline with Header and Info Bar
+</fd-docs-section-title>
+<description>
+    <p>
+        The Timeline supports <code>header</code> and <code>infoBar</code> slots that let applications place their own
+        controls and status indicators above the Timeline items.
+    </p>
+    <ul>
+        <li>
+            <strong>header</strong> — for a controls bar (search, sort, filter). Use a <code>ui5-toolbar</code>
+            containing a search input and buttons that open a filter dialog or toggle sort direction.
+        </li>
+        <li>
+            <strong>infoBar</strong> — for a status bar that reflects the result of the controls (active filters,
+            applied sort, current search query). Typically contains tokens, labels, or a <code>ui5-bar</code>.
+        </li>
+    </ul>
+    <p>
+        The Timeline itself does not filter, sort, or search — the application owns that logic and updates items
+        accordingly.
+    </p>
+    <p>
+        Use <code>stickyHeader</code> to pin both bars while the Timeline's items scroll. Give the Timeline a
+        constrained height (e.g., <code>style="height: 39rem"</code>) in this mode so it owns its scrollbar.
+    </p>
+</description>
+<component-example>
+    <ui5-timeline-header-sample></ui5-timeline-header-sample>
+</component-example>
+<code-example [exampleFiles]="headerExamples()"></code-example>

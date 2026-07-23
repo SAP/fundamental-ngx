@@ -269,10 +269,6 @@
             "reason": "compilation error in docs example"
         },
         {
-            "route": "platform/settings-generator/custom-layout",
-            "reason": "times out in CI"
-        },
-        {
             "route": "platform/standard-list-item/border-less",
             "reason": "compilation error in docs example"
         },

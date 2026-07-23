@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, input } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
@@ -6,7 +6,7 @@ import { ContentDensityMode, ContentDensityModule } from '@fundamental-ngx/core/
 import { InputGroupAddonBodyComponent } from './addon-body.component';
 
 @Component({
-    template: `<fdp-input-group-addon-body [fdContentDensity]="contentDensity" [hasButton]="hasButton"
+    template: `<fdp-input-group-addon-body [fdContentDensity]="contentDensity()" [hasButton]="hasButton()"
         >$</fdp-input-group-addon-body
     >`,
     standalone: true,
@@ -15,8 +15,8 @@ import { InputGroupAddonBodyComponent } from './addon-body.component';
 class TextAddonHostComponent {
     @ViewChild(InputGroupAddonBodyComponent) addon: InputGroupAddonBodyComponent;
 
-    contentDensity = ContentDensityMode.COZY;
-    hasButton = false;
+    readonly contentDensity = input(ContentDensityMode.COZY);
+    readonly hasButton = input(false);
 }
 describe('Input group addon with a text', () => {
     let host: TextAddonHostComponent;
@@ -46,7 +46,7 @@ describe('Input group addon with a text', () => {
 
         expect(addonEl.classList.contains('is-compact')).toBeFalsy();
 
-        host.contentDensity = ContentDensityMode.COMPACT;
+        fixture.componentRef.setInput('contentDensity', ContentDensityMode.COMPACT);
         fixture.detectChanges();
         expect(addonEl.classList.contains('is-compact')).toBeTruthy();
     });
@@ -57,7 +57,7 @@ describe('Input group addon with a text', () => {
 
         expect(addonEl.classList.contains('fd-input-group__addon--button')).toBeFalsy();
 
-        host.hasButton = true;
+        fixture.componentRef.setInput('hasButton', true);
         fixture.detectChanges();
         expect(addonEl.classList.contains('fd-input-group__addon--button')).toBeTruthy();
     });

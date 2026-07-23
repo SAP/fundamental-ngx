@@ -19,5 +19,6 @@ export const LIBRARY_NAME = 'dynamic-page';
 export const API_FILE_KEY = 'dynamicPage';
 
 export * from './dynamic-page-docs';
+export * from './examples/dynamic-page-accessibility-sample';
 export * from './examples/dynamic-page-sample';
 export * from './header/dynamic-page-header';

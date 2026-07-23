@@ -68,9 +68,9 @@
                         <fdp-form-field-group
                             [hintOptions]="field.formItem.guiOptions | getHintOptions"
                             [label]="field.formItem.message || ''"
-                            [labelColumnLayout]="field.formItem.guiOptions?.labelColumnLayout"
-                            [fieldColumnLayout]="field.formItem.guiOptions?.fieldColumnLayout"
-                            [gapColumnLayout]="field.formItem.guiOptions?.gapColumnLayout"
+                            [labelColumnLayout]="$safeNavigationMigration(field.formItem.guiOptions?.labelColumnLayout)"
+                            [fieldColumnLayout]="$safeNavigationMigration(field.formItem.guiOptions?.fieldColumnLayout)"
+                            [gapColumnLayout]="$safeNavigationMigration(field.formItem.guiOptions?.gapColumnLayout)"
                             [formName]="field.formItem.name"
                         >
                             @for (

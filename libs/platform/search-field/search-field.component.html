@@ -128,9 +128,10 @@
     <fd-select
         #categorySelectComponent
         [placeholder]="categoryLabel()"
-        [selectControlClass]="appearance()?.categoryButtonClass"
+        [selectControlClass]="$safeNavigationMigration(appearance()?.categoryButtonClass)"
         [selectDropdownButtonClass]="
-            appearance()?.categoryDropdownButtonClass + (!!_currentCategory()?.value ? ' is-selected' : '')
+            $safeNavigationMigration(appearance()?.categoryDropdownButtonClass) +
+            (!!_currentCategory()?.value ? ' is-selected' : '')
         "
         (valueChange)="setCurrentCategory($event)"
         ariaHasPopup="dialog"
@@ -268,7 +269,7 @@
                     }}"
                 >
                     <button
-                        [attr.aria-title]="('platformSearchField.synchronizeButtonTitle' | fdTranslate)()"
+                        [attr.title]="('platformSearchField.synchronizeButtonTitle' | fdTranslate)()"
                         [attr.aria-label]="('platformSearchField.synchronizeButtonTitle' | fdTranslate)()"
                         class="fdp-search-field__loading fd-input-group__button fd-button fd-button--transparent {{
                             appearance()?.buttonClass
@@ -282,7 +283,7 @@
                 </span>
             }
             @if (appearance()?.helperClass) {
-                <div [ngClass]="appearance()?.helperClass"></div>
+                <div [ngClass]="$safeNavigationMigration(appearance()?.helperClass)"></div>
             }
         </div>
     </div>
@@ -302,7 +303,8 @@
                                 <span fd-list-title>{{ filteredSuggestion?.value }}</span>
                             </li>
                             @for (
-                                childSuggestion of filteredSuggestion?.children | suggestionMatches: inputText();
+                                childSuggestion of $safeNavigationMigration(filteredSuggestion?.children)
+                                    | suggestionMatches: inputText();
                                 track childSuggestion
                             ) {
                                 <ng-template
@@ -341,7 +343,7 @@
 </ng-template>
 
 <ng-template #suggestionItemTemplate let-filteredSuggestion="filteredSuggestion">
-    @let subline = filteredSuggestion?.data?.subline;
+    @let subline = $safeNavigationMigration(filteredSuggestion?.data?.subline);
     <li
         fd-list-item
         [interactive]="true"
@@ -365,15 +367,15 @@
         "
         [ariaRole]="'option'"
     >
-        @let listIconGlyph = filteredSuggestion?.data?.listIconGlyph;
+        @let listIconGlyph = $safeNavigationMigration(filteredSuggestion?.data?.listIconGlyph);
         @if (listIconGlyph) {
             <span fd-list-thumbnail>
                 <i fd-list-icon [glyph]="listIconGlyph"></i>
             </span>
         }
-        @let avatarGlyph = filteredSuggestion?.data?.avatarGlyph;
-        @let avatarImage = filteredSuggestion?.data?.avatarImage;
-        @let avatarLabel = filteredSuggestion?.data?.avatarLabel;
+        @let avatarGlyph = $safeNavigationMigration(filteredSuggestion?.data?.avatarGlyph);
+        @let avatarImage = $safeNavigationMigration(filteredSuggestion?.data?.avatarImage);
+        @let avatarLabel = $safeNavigationMigration(filteredSuggestion?.data?.avatarLabel);
         @if (avatarGlyph || avatarImage || avatarLabel) {
             <fd-avatar
                 [circle]="true"
@@ -383,7 +385,7 @@
                 [label]="avatarLabel"
             ></fd-avatar>
         }
-        @let prefix = filteredSuggestion?.data?.prefix;
+        @let prefix = $safeNavigationMigration(filteredSuggestion?.data?.prefix);
         @if (prefix) {
             <fd-info-label fd-list-info-label [label]="prefix" color="10"></fd-info-label>
         }
@@ -392,14 +394,18 @@
             <!-- toString() below is for type safety -->
             <span
                 fd-list-title
-                [innerHTML]="filteredSuggestion?.toString() | highlight: inputText() : true : true"
+                [innerHTML]="
+                    $safeNavigationMigration(filteredSuggestion?.toString()) | highlight: inputText() : true : true
+                "
             ></span>
         } @else {
             @if (subline) {
                 <div fd-list-content>
                     <span
                         fd-list-title
-                        [innerHTML]="filteredSuggestion?.value | highlight: inputText() : true : true"
+                        [innerHTML]="
+                            $safeNavigationMigration(filteredSuggestion?.value) | highlight: inputText() : true : true
+                        "
                     ></span>
                     <span fd-list-subline>
                         {{ subline }}
@@ -411,19 +417,24 @@
                 } @else if (filteredSuggestion?.showMoreText) {
                     @let showMoreText =
                         filteredSuggestion?.showMoreCounter
-                            ? filteredSuggestion?.showMoreText + ' (' + filteredSuggestion?.showMoreCounter + ')'
-                            : filteredSuggestion?.showMoreText;
+                            ? $safeNavigationMigration(filteredSuggestion?.showMoreText) +
+                              ' (' +
+                              $safeNavigationMigration(filteredSuggestion?.showMoreCounter) +
+                              ')'
+                            : $safeNavigationMigration(filteredSuggestion?.showMoreText);
                     <span class="fdp-search-field__show-more" [attr.aria-label]="showMoreText">{{ showMoreText }}</span>
                 } @else {
                     <span
                         fd-list-title
-                        [innerHTML]="filteredSuggestion?.value | highlight: inputText() : true : true"
+                        [innerHTML]="
+                            $safeNavigationMigration(filteredSuggestion?.value) | highlight: inputText() : true : true
+                        "
                     ></span>
                 }
             }
 
-            @let showDeleteButton = filteredSuggestion?.data?.showDeleteButton;
-            @let actionButtons = filteredSuggestion?.data?.actionButtons;
+            @let showDeleteButton = $safeNavigationMigration(filteredSuggestion?.data?.showDeleteButton);
+            @let actionButtons = $safeNavigationMigration(filteredSuggestion?.data?.actionButtons);
             @if (showDeleteButton || actionButtons?.length) {
                 <div tabindex="-1" [cdkTrapFocus]="_actionButtonTabIndex() === 0">
                     @if (actionButtons && actionButtons.length) {
@@ -455,7 +466,7 @@
                         }
                     }
 
-                    @let deleteCallback = filteredSuggestion?.data?.deleteCallback;
+                    @let deleteCallback = $safeNavigationMigration(filteredSuggestion?.data?.deleteCallback);
                     @if (showDeleteButton && _searchResultIsHoveredOrFocusedOrMobile(suggestionListItem)) {
                         <button
                             fd-button

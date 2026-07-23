@@ -3,7 +3,7 @@ paths: ['libs/**/*.ts']
 alwaysApply: false
 ---
 
-# Angular 21+ Conventions (fundamental-ngx)
+# Angular 22+ Conventions (fundamental-ngx)
 
 ## Quick Decision Guide
 

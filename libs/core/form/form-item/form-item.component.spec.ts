@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, input } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormControlComponent } from '../form-control/form-control.component';
 import { FormLabelComponent } from '../form-label/form-label.component';
@@ -6,7 +6,7 @@ import { FormItemComponent } from './form-item.component';
 
 @Component({
     selector: 'fd-test-component',
-    template: '<div #componentElement fd-form-item [horizontal]="horizontal" [isInline]="inline">FormItem</div>',
+    template: '<div #componentElement fd-form-item [horizontal]="horizontal()" [isInline]="inline()">FormItem</div>',
     imports: [FormItemComponent],
     standalone: true
 })
@@ -14,9 +14,9 @@ export class TestComponent {
     @ViewChild('componentElement', { read: ElementRef })
     ref: ElementRef;
 
-    horizontal = false;
+    readonly horizontal = input(false);
 
-    inline = false;
+    readonly inline = input(false);
 }
 
 @Component({
@@ -62,13 +62,13 @@ describe('FormItemComponent', () => {
     });
 
     it('should support horizontal', () => {
-        component.horizontal = true;
+        fixture.componentRef.setInput('horizontal', true);
         fixture.detectChanges();
         expect(component.ref.nativeElement.className).toContain('fd-form-item--horizontal');
     });
 
     it('should support isInline', () => {
-        component.inline = true;
+        fixture.componentRef.setInput('inline', true);
         fixture.detectChanges();
         expect(component.ref.nativeElement.className).toContain('fd-form-item--inline');
     });

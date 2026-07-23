@@ -1,4 +1,4 @@
-import { Component, DebugElement } from '@angular/core';
+import { Component, DebugElement, input } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
@@ -13,7 +13,7 @@ import { SplitButtonComponent, splitButtonTextClass } from './split-button.compo
 @Component({
     selector: 'fd-test-component',
     template: `
-        <fd-split-button #splitButton [expandButtonTitle]="moreBtnTitle" [fdCompact]="compact">
+        <fd-split-button #splitButton [expandButtonTitle]="moreBtnTitle()" [fdCompact]="compact()">
             <fd-menu>
                 <li fd-menu-item>
                     <div fd-menu-interactive>
@@ -39,8 +39,8 @@ import { SplitButtonComponent, splitButtonTextClass } from './split-button.compo
     ]
 })
 export class TestComponent {
-    moreBtnTitle: string;
-    compact: boolean;
+    readonly moreBtnTitle = input<string>('');
+    readonly compact = input(false);
 }
 
 describe('SplitButtonComponent', () => {
@@ -131,7 +131,7 @@ describe('SplitButtonComponent', () => {
         fixture.detectChanges();
         const textElement = componentInstance.mainActionBtn?.nativeElement.querySelector('.fd-button__text');
         expect(textElement.classList.contains(splitButtonTextClass));
-        fixture.componentInstance.compact = true;
+        fixture.componentRef.setInput('compact', true);
         fixture.detectChanges();
         expect(component.nativeElement.classList).toContain('is-compact');
     });

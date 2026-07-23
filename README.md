@@ -7,7 +7,7 @@
   <img src="https://www.netlify.com/img/global/badges/netlify-light.svg" alt="Deploys by Netlify" />
 </a>
 
-**The official SAP-maintained Angular library for UI5 Web Components and the SAP design system.** Ships 1000+ components across 14 packages, targeting Angular 21+.
+**The official SAP-maintained Angular library for UI5 Web Components and the SAP design system.** Ships 1000+ components across 14 packages, targeting Angular 22+.
 
 [Documentation](https://sap.github.io/fundamental-ngx) | [Component Playground](https://sap.github.io/fundamental-ngx)
 
@@ -65,8 +65,8 @@ Angular wrappers for the [@ui5/webcomponents](https://sap.github.io/ui5-webcompo
 
 ### Requirements
 
-- Angular 21 or newer
-- TypeScript 5.9 or newer
+- Angular 22 or newer
+- TypeScript 6 or newer
 - Node.js (LTS)
 
 **Peer dependencies** (installed automatically by `ng add`, required for manual installs):
@@ -110,8 +110,8 @@ ng add @fundamental-ngx/core
 2. Add to `angular.json` assets:
     ```json
     { "glob": "**/css_variables.css", "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/", "output": "./assets/theming-base/" },
-    { "glob": "**/*", "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/baseTheme/fonts/", "output": "./assets/theming-base/baseTheme/fonts/" },
-    { "glob": "**/*", "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/sap_horizon/fonts/", "output": "./assets/theming-base/sap_horizon/fonts/" },
+    { "glob": "**/*", "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/baseTheme/fonts/", "output": "./Base/baseLib/baseTheme/fonts/" },
+    { "glob": "**/*", "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/sap_horizon/fonts/", "output": "./Base/baseLib/sap_horizon/fonts/" },
     { "glob": "**/*", "input": "./node_modules/fundamental-styles/dist/theming/", "output": "./assets/fundamental-styles-theming/" }
     ```
 3. Add to `app.config.ts`:

@@ -1,5 +1,5 @@
 import { Overlay, ScrollStrategy } from '@angular/cdk/overlay';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, input, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { PopoverService } from '@fundamental-ngx/core/popover';
@@ -26,14 +26,14 @@ class InlineHelpDefaultTestComponent {
         <div
             #directiveElement
             fd-inline-help="Test content"
-            [noArrow]="noArrow"
-            [closeOnEscapeKey]="closeOnEscapeKey"
-            [closeOnNavigation]="closeOnNavigation"
-            [restoreFocusOnClose]="restoreFocusOnClose"
-            [fixedPosition]="fixedPosition"
-            [maxWidth]="maxWidth"
-            [appendTo]="appendTo"
-            [scrollStrategy]="scrollStrategy"
+            [noArrow]="noArrow()"
+            [closeOnEscapeKey]="closeOnEscapeKey()"
+            [closeOnNavigation]="closeOnNavigation()"
+            [restoreFocusOnClose]="restoreFocusOnClose()"
+            [fixedPosition]="fixedPosition()"
+            [maxWidth]="maxWidth()"
+            [appendTo]="appendTo()"
+            [scrollStrategy]="scrollStrategy()"
         ></div>
     `,
     imports: [InlineHelpModule]
@@ -42,14 +42,14 @@ class InlineHelpInputsTestComponent {
     @ViewChild('directiveElement', { static: false, read: ElementRef })
     ref: ElementRef<HTMLDivElement>;
 
-    noArrow = false;
-    closeOnEscapeKey = false;
-    closeOnNavigation = true;
-    restoreFocusOnClose = true;
-    fixedPosition = false;
-    maxWidth: number | null = null;
-    appendTo: Element | null = null;
-    scrollStrategy: ScrollStrategy | null = null;
+    readonly noArrow = input(false);
+    readonly closeOnEscapeKey = input(false);
+    readonly closeOnNavigation = input(true);
+    readonly restoreFocusOnClose = input(true);
+    readonly fixedPosition = input(false);
+    readonly maxWidth = input<number | null>(null);
+    readonly appendTo = input<Element | null>(null);
+    readonly scrollStrategy = input<ScrollStrategy | null>(null);
 }
 
 describe('InlineHelpDirective', () => {
@@ -138,42 +138,42 @@ describe('InlineHelpDirective popover inputs', () => {
 
     it('should pass noArrow to popover service', () => {
         expect(popoverService.noArrow()).toBe(false);
-        component.noArrow = true;
+        fixture.componentRef.setInput('noArrow', true);
         fixture.detectChanges();
         expect(popoverService.noArrow()).toBe(true);
     });
 
     it('should pass closeOnEscapeKey to popover service', () => {
         expect(popoverService.closeOnEscapeKey()).toBe(false);
-        component.closeOnEscapeKey = true;
+        fixture.componentRef.setInput('closeOnEscapeKey', true);
         fixture.detectChanges();
         expect(popoverService.closeOnEscapeKey()).toBe(true);
     });
 
     it('should pass closeOnNavigation to popover service', () => {
         expect(popoverService.closeOnNavigation()).toBe(true);
-        component.closeOnNavigation = false;
+        fixture.componentRef.setInput('closeOnNavigation', false);
         fixture.detectChanges();
         expect(popoverService.closeOnNavigation()).toBe(false);
     });
 
     it('should pass restoreFocusOnClose to popover service', () => {
         expect(popoverService.restoreFocusOnClose()).toBe(true);
-        component.restoreFocusOnClose = false;
+        fixture.componentRef.setInput('restoreFocusOnClose', false);
         fixture.detectChanges();
         expect(popoverService.restoreFocusOnClose()).toBe(false);
     });
 
     it('should pass fixedPosition to popover service', () => {
         expect(popoverService.fixedPosition()).toBe(false);
-        component.fixedPosition = true;
+        fixture.componentRef.setInput('fixedPosition', true);
         fixture.detectChanges();
         expect(popoverService.fixedPosition()).toBe(true);
     });
 
     it('should pass maxWidth to popover service', () => {
         expect(popoverService.maxWidth()).toBeNull();
-        component.maxWidth = 300;
+        fixture.componentRef.setInput('maxWidth', 300);
         fixture.detectChanges();
         expect(popoverService.maxWidth()).toBe(300);
     });
@@ -182,7 +182,7 @@ describe('InlineHelpDirective popover inputs', () => {
         expect(popoverService.appendTo()).toBeNull();
         const container = document.createElement('div');
         document.body.appendChild(container);
-        component.appendTo = container;
+        fixture.componentRef.setInput('appendTo', container);
         fixture.detectChanges();
         expect(popoverService.appendTo()).toBe(container);
         document.body.removeChild(container);
@@ -192,14 +192,14 @@ describe('InlineHelpDirective popover inputs', () => {
         const overlay = TestBed.inject(Overlay);
         expect(popoverService.scrollStrategy()).toBeNull();
         const closeStrategy = overlay.scrollStrategies.close();
-        component.scrollStrategy = closeStrategy;
+        fixture.componentRef.setInput('scrollStrategy', closeStrategy);
         fixture.detectChanges();
         expect(popoverService.scrollStrategy()).toBe(closeStrategy);
     });
 
     it('should close on escape key when closeOnEscapeKey is true (focus on trigger)', fakeAsync(() => {
         const selector = '.fd-popover__body.fd-inline-help__content';
-        component.closeOnEscapeKey = true;
+        fixture.componentRef.setInput('closeOnEscapeKey', true);
         fixture.detectChanges();
 
         // Open via focusin on the trigger
@@ -215,7 +215,7 @@ describe('InlineHelpDirective popover inputs', () => {
 
     it('should close on escape key when closeOnEscapeKey is true (hover, no focus on trigger)', fakeAsync(() => {
         const selector = '.fd-popover__body.fd-inline-help__content';
-        component.closeOnEscapeKey = true;
+        fixture.componentRef.setInput('closeOnEscapeKey', true);
         fixture.detectChanges();
 
         // Open via mouseenter (hover) — keyboard focus is NOT on the trigger
@@ -232,7 +232,7 @@ describe('InlineHelpDirective popover inputs', () => {
 
     it('should not close on escape key when closeOnEscapeKey is false', fakeAsync(() => {
         const selector = '.fd-popover__body.fd-inline-help__content';
-        component.closeOnEscapeKey = false;
+        fixture.componentRef.setInput('closeOnEscapeKey', false);
         fixture.detectChanges();
 
         // Open via focusin on the trigger
@@ -251,7 +251,7 @@ describe('InlineHelpDirective popover inputs', () => {
 
     it('should not close on document escape key when closeOnEscapeKey is false (hover)', fakeAsync(() => {
         const selector = '.fd-popover__body.fd-inline-help__content';
-        component.closeOnEscapeKey = false;
+        fixture.componentRef.setInput('closeOnEscapeKey', false);
         fixture.detectChanges();
 
         // Open via mouseenter (hover)

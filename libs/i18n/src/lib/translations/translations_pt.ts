@@ -113,6 +113,10 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Rótulo de informação'
     },
+    coreList: {
+        listItemSelectedAriaLabel: 'Selected',
+        listItemNotSelectedAriaLabel: 'Not Selected'
+    },
     coreLink: {
         emphasized: 'Realçado',
         subtle: 'Discreto'
@@ -520,6 +524,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Cancelar',
         clearFilters: 'Limpar filtros',
+        collapseAllAnnouncementLabel: 'Collapse All clicked',
         collapseRowButtonTitle: 'Recolher linha',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Nenhum dado encontrado',
@@ -530,6 +535,7 @@ export default {
         editableCellNumberPlaceholder: 'Inserir valor',
         editableCellStringPlaceholder: 'Inserir valor',
         emptyCell: 'Vazio',
+        expandAllAnnouncementLabel: 'Expand All clicked',
         expandRowButtonTitle: 'Expandir linha',
         filterDialogBackToColumns: 'Voltar',
         filterDialogCancelBtnLabel: 'Cancelar',

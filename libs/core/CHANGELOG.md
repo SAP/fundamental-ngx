@@ -1,3 +1,230 @@
+## 0.64.0 (2026-07-20)
+
+### 🩹 Fixes
+
+- **core:** make fd-panel-title wrap instead of truncating ([#14377](https://github.com/SAP/fundamental-ngx/pull/14377))
+- **core:** remove icon for default Micro process flow element ([#14374](https://github.com/SAP/fundamental-ngx/pull/14374))
+- **core:** provide fix for linearGradient console error in Status Indicator ([#14371](https://github.com/SAP/fundamental-ngx/pull/14371))
+- **core:** track time column rows by value to prevent DOM re-creation ([#14359](https://github.com/SAP/fundamental-ngx/pull/14359), [#14362](https://github.com/SAP/fundamental-ngx/pull/14362))
+- **ci:** grant contents:write permission for gh-pages deployment ([#14349](https://github.com/SAP/fundamental-ngx/pull/14349))
+
+### ❤️ Thank You
+
+- deno
+- Inna Atanasova @InnaAtanasova
+- Maria Dineva @MariaIDineva
+
+## 0.64.0-rc.11 (2026-07-20)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.64.0-rc.10 (2026-07-20)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.64.0-rc.9 (2026-07-20)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.64.0-rc.8 (2026-07-20)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.64.0-rc.7 (2026-07-20)
+
+### 🩹 Fixes
+
+- **core:** make fd-panel-title wrap instead of truncating ([#14377](https://github.com/SAP/fundamental-ngx/pull/14377))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
+## 0.64.0-rc.6 (2026-07-20)
+
+### 🩹 Fixes
+
+- **core:** remove icon for default Micro process flow element ([#14374](https://github.com/SAP/fundamental-ngx/pull/14374))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
+## 0.64.0-rc.5 (2026-07-20)
+
+### 🩹 Fixes
+
+- **core:** provide fix for linearGradient console error in Status Indicator ([#14371](https://github.com/SAP/fundamental-ngx/pull/14371))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
+## 0.64.0-rc.4 (2026-07-17)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.64.0-rc.3 (2026-07-17)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.64.0-rc.2 (2026-07-17)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.64.0-rc.1 (2026-07-17)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.64.0-rc.0 (2026-07-16)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.63.2-rc.7 (2026-07-16)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.63.2-rc.6 (2026-07-16)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.63.2-rc.5 (2026-07-14)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.63.2-rc.4 (2026-07-14)
+
+### 🩹 Fixes
+
+- **core:** track time column rows by value to prevent DOM re-creation ([#14359](https://github.com/SAP/fundamental-ngx/pull/14359), [#14362](https://github.com/SAP/fundamental-ngx/pull/14362))
+
+### ❤️ Thank You
+
+- deno
+
+## 0.63.2-rc.3 (2026-07-13)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.63.2-rc.2 (2026-07-10)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.63.2-rc.1 (2026-07-10)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.63.2-rc.0 (2026-07-09)
+
+### 🩹 Fixes
+
+- **ci:** grant contents:write permission for gh-pages deployment ([#14349](https://github.com/SAP/fundamental-ngx/pull/14349))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
+## 0.63.1 (2026-07-09)
+
+### 🚀 Features
+
+- **core:** shift-click multi-date selection for fd-calendar / fd-date-picker ([#14309](https://github.com/SAP/fundamental-ngx/pull/14309), [#13502](https://github.com/SAP/fundamental-ngx/issues/13502))
+
+### 🩹 Fixes
+
+- **core:** address Shell Bar design review comments ([#14333](https://github.com/SAP/fundamental-ngx/pull/14333))
+- **ci:** set npm provenance config directly before publish ([#14342](https://github.com/SAP/fundamental-ngx/pull/14342))
+- ng update report missing ([#14331](https://github.com/SAP/fundamental-ngx/pull/14331))
+- **core:** improve menu ARIA attributes and VoiceOver compatibility ([#14327](https://github.com/SAP/fundamental-ngx/pull/14327))
+- **core:** screen reader announces selection state for fd-list items ([#14322](https://github.com/SAP/fundamental-ngx/pull/14322))
+- **core:** add option to configure popover placement in Multi Input ([#14317](https://github.com/SAP/fundamental-ngx/pull/14317))
+- **core:** fix msg box focus trap ([#14298](https://github.com/SAP/fundamental-ngx/pull/14298))
+- **core:** prevent duplicate subscription in segmented-button button changes listener ([#14308](https://github.com/SAP/fundamental-ngx/pull/14308), [#13358](https://github.com/SAP/fundamental-ngx/issues/13358))
+- **core:** add accessible names to FlexibleColumnLayout separator buttons ([#14313](https://github.com/SAP/fundamental-ngx/pull/14313))
+- **core:** prevent inline-help text from being announced twice by screen readers ([#14310](https://github.com/SAP/fundamental-ngx/pull/14310))
+
+### ❤️ Thank You
+
+- deno
+- github-actions
+- Inna Atanasova @InnaAtanasova
+- Maria Dineva @MariaIDineva
+- robertIsaac
+
+## 0.63.1-rc.21 (2026-07-09)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.20 (2026-07-09)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.19 (2026-07-09)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.18 (2026-07-09)
+
+### 🩹 Fixes
+
+- **core:** address Shell Bar design review comments ([#14333](https://github.com/SAP/fundamental-ngx/pull/14333))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
+## 0.63.1-rc.17 (2026-07-09)
+
+### 🩹 Fixes
+
+- **ci:** set npm provenance config directly before publish ([#14342](https://github.com/SAP/fundamental-ngx/pull/14342))
+- ng update report missing ([#14331](https://github.com/SAP/fundamental-ngx/pull/14331))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+- robertIsaac
+
+## 0.63.1-rc.16 (2026-07-07)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.15 (2026-07-07)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.14 (2026-07-06)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.13 (2026-07-06)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.12 (2026-07-06)
+
+### 🩹 Fixes
+
+- **core:** improve menu ARIA attributes and VoiceOver compatibility ([#14327](https://github.com/SAP/fundamental-ngx/pull/14327))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
+## 0.63.1-rc.11 (2026-07-06)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.10 (2026-07-06)
+
+### 🩹 Fixes
+
+- **core:** screen reader announces selection state for fd-list items ([#14322](https://github.com/SAP/fundamental-ngx/pull/14322))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
 ## 0.63.1-rc.9 (2026-07-02)
 
 This was a version bump only for core to align it with other projects, there were no code changes.

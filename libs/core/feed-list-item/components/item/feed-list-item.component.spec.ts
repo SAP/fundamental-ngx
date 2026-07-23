@@ -27,7 +27,7 @@ describe('FeedListItemComponent', () => {
             ]
         })
             .overrideComponent(FeedListItemComponent, {
-                set: { changeDetection: ChangeDetectionStrategy.Default }
+                set: { changeDetection: ChangeDetectionStrategy.Eager }
             })
             .compileComponents();
     });

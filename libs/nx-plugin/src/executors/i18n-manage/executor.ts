@@ -40,8 +40,8 @@ export default async function runExecutor(
                 throw new Error(`Unknown command: ${command}`);
         }
     } catch (error) {
-        console.error(`❌ Error: ${error.message}`);
-        return { success: false, error: error.message };
+        console.error(`❌ Error: ${error instanceof Error ? error.message : String(error)}`);
+        return { success: false, error: error instanceof Error ? error.message : String(error) };
     }
 }
 

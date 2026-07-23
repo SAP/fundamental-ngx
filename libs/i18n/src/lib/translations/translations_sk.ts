@@ -114,6 +114,10 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Označenie s informáciami'
     },
+    coreList: {
+        listItemSelectedAriaLabel: 'Selected',
+        listItemNotSelectedAriaLabel: 'Not Selected'
+    },
     coreLink: {
         emphasized: 'Zvýraznené',
         subtle: 'Jednoduché'
@@ -519,6 +523,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Zrušiť',
         clearFilters: 'Vymazať filtre',
+        collapseAllAnnouncementLabel: 'Collapse All clicked',
         collapseRowButtonTitle: 'Zbaliť riadok',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Nenašli sa žiadne údaje',
@@ -529,6 +534,7 @@ export default {
         editableCellNumberPlaceholder: 'Zadať hodnotu',
         editableCellStringPlaceholder: 'Zadať hodnotu',
         emptyCell: 'Prázdne',
+        expandAllAnnouncementLabel: 'Expand All clicked',
         expandRowButtonTitle: 'Rozbaliť riadok',
         filterDialogBackToColumns: 'Prejsť späť',
         filterDialogCancelBtnLabel: 'Zrušiť',

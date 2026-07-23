@@ -10,5 +10,14 @@
     },
     "files": ["./src/index.ts"],
     "include": ["**/*.ts"],
-    "exclude": ["jest.config.ts", "**/*.spec.ts", "**/*.test.ts"]
+    "exclude": ["jest.config.ts", "**/*.spec.ts", "**/*.test.ts"],
+    "angularCompilerOptions": {
+        // TODO(#14334): suppress Angular 22 optionalChainNotNullable and nullishCoalescingNotNullable diagnostics
+        "extendedDiagnostics": {
+            "checks": {
+                "nullishCoalescingNotNullable": "suppress",
+                "optionalChainNotNullable": "suppress"
+            }
+        }
+    }
 }

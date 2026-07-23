@@ -1,3 +1,185 @@
+## 0.64.0 (2026-07-20)
+
+### 🩹 Fixes
+
+- **ci:** grant contents:write permission for gh-pages deployment ([#14349](https://github.com/SAP/fundamental-ngx/pull/14349))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
+## 0.64.0-rc.11 (2026-07-20)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.64.0-rc.10 (2026-07-20)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.64.0-rc.9 (2026-07-20)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.64.0-rc.8 (2026-07-20)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.64.0-rc.7 (2026-07-20)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.64.0-rc.6 (2026-07-20)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.64.0-rc.5 (2026-07-20)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.64.0-rc.4 (2026-07-17)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.64.0-rc.3 (2026-07-17)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.64.0-rc.2 (2026-07-17)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.64.0-rc.1 (2026-07-17)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.64.0-rc.0 (2026-07-16)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.63.2-rc.7 (2026-07-16)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.63.2-rc.6 (2026-07-16)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.63.2-rc.5 (2026-07-14)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.63.2-rc.4 (2026-07-14)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.63.2-rc.3 (2026-07-13)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.63.2-rc.2 (2026-07-10)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.63.2-rc.1 (2026-07-10)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.63.2-rc.0 (2026-07-09)
+
+### 🩹 Fixes
+
+- **ci:** grant contents:write permission for gh-pages deployment ([#14349](https://github.com/SAP/fundamental-ngx/pull/14349))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
+## 0.63.1 (2026-07-09)
+
+### 🩹 Fixes
+
+- **ci:** set npm provenance config directly before publish ([#14342](https://github.com/SAP/fundamental-ngx/pull/14342))
+- ng update report missing ([#14331](https://github.com/SAP/fundamental-ngx/pull/14331))
+- **platform:** use live announcer for screenreader when expand all / collapse all buttons are clicked ([#14324](https://github.com/SAP/fundamental-ngx/pull/14324))
+- **core:** screen reader announces selection state for fd-list items ([#14322](https://github.com/SAP/fundamental-ngx/pull/14322))
+- **platform:** approval flow empty results ([#14320](https://github.com/SAP/fundamental-ngx/pull/14320))
+
+### ❤️ Thank You
+
+- C5386211
+- Inna Atanasova @InnaAtanasova
+- Maria Dineva @MariaIDineva
+- Mike O'Donnell @mikerodonnell89
+- robertIsaac
+
+## 0.63.1-rc.21 (2026-07-09)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.20 (2026-07-09)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.19 (2026-07-09)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.18 (2026-07-09)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.17 (2026-07-09)
+
+### 🩹 Fixes
+
+- **ci:** set npm provenance config directly before publish ([#14342](https://github.com/SAP/fundamental-ngx/pull/14342))
+- ng update report missing ([#14331](https://github.com/SAP/fundamental-ngx/pull/14331))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+- robertIsaac
+
+## 0.63.1-rc.16 (2026-07-07)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.15 (2026-07-07)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.14 (2026-07-06)
+
+### 🩹 Fixes
+
+- **platform:** use live announcer for screenreader when expand all / collapse all buttons are clicked ([#14324](https://github.com/SAP/fundamental-ngx/pull/14324))
+
+### ❤️ Thank You
+
+- Mike O'Donnell @mikerodonnell89
+
+## 0.63.1-rc.13 (2026-07-06)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.12 (2026-07-06)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.11 (2026-07-06)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.63.1-rc.10 (2026-07-06)
+
+### 🩹 Fixes
+
+- **core:** screen reader announces selection state for fd-list items ([#14322](https://github.com/SAP/fundamental-ngx/pull/14322))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
 ## 0.63.1-rc.9 (2026-07-02)
 
 This was a version bump only for i18n to align it with other projects, there were no code changes.

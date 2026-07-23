@@ -35,7 +35,8 @@ import { FD_LIST_COMPONENT } from '../tokens';
     styleUrl: './list-navigation-item.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        role: 'treeitem'
+        role: 'treeitem',
+        '[attr.tabindex]': '_tabIndex()'
     },
     imports: [NgTemplateOutlet, IconComponent]
 })
@@ -60,10 +61,6 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
     _isExpandable = false;
 
     /** @hidden */
-    @HostBinding('attr.tabindex')
-    _tabIndex;
-
-    /** @hidden */
     @HostBinding('attr.aria-level')
     _ariaLevel: number;
 
@@ -86,6 +83,9 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
     /** @hidden */
     @ContentChildren(forwardRef(() => ListNavigationItemComponent), { descendants: true })
     _childItems: QueryList<ListNavigationItemComponent>;
+
+    /** @hidden */
+    _tabIndex = signal<number | undefined>(undefined);
 
     /** @hidden */
     @HostBinding('attr.aria-expanded')
@@ -174,7 +174,7 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
             this._isExpandable = true;
             this._listComponent.role = 'group';
         } else {
-            this._tabIndex = 0;
+            this._tabIndex.set(0);
         }
         if (this._iconComponent) {
             this._iconComponent._navigationItemIcon.set(true);
