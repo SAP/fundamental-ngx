@@ -12,9 +12,11 @@ export class TabbableElementService {
 
     /** Get the first tabbable element from a DOM subtree (inclusive). */
     getTabbableElement(root: HTMLElement, focusLastElement = false, skipSelf = false): HTMLElement | null {
-        if (!skipSelf && this._checker.isFocusable(root) && this._checker.isTabbable(root)) {
+        if (!skipSelf && this._isTabbableElement(root)) {
             return root;
         }
+
+        const elementNodeType = this._document?.ELEMENT_NODE ?? 1;
 
         // Iterate in DOM order. Note that IE doesn't have `children` for SVG, so we fall
         // back to `childNodes` which includes text nodes, comments etc.
@@ -24,7 +26,7 @@ export class TabbableElementService {
 
         for (let i = 0; i < children.length; i++) {
             const tabbableChild =
-                children[i].nodeType === this._document?.ELEMENT_NODE
+                children[i].nodeType === elementNodeType
                     ? this.getTabbableElement(children[i] as HTMLElement, focusLastElement)
                     : null;
 
@@ -34,5 +36,17 @@ export class TabbableElementService {
         }
 
         return null;
+    }
+
+    private _isTabbableElement(element: HTMLElement): boolean {
+        return this._checker.isTabbable(element) && !this._isElementDisabled(element);
+    }
+
+    private _isElementDisabled(element: HTMLElement): boolean {
+        return (
+            element.hasAttribute('disabled') ||
+            element.getAttribute('aria-disabled') === 'true' ||
+            element.classList.contains('is-disabled')
+        );
     }
 }
