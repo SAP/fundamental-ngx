@@ -1,3 +1,13 @@
+## 0.64.1-rc.1 (2026-07-23)
+
+### 🩹 Fixes
+
+- **cdk:** filter disabled tabbables and stabilize tabbable docs example ([#14386](https://github.com/SAP/fundamental-ngx/pull/14386))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.64.1-rc.0 (2026-07-23)
 
 This was a version bump only for cdk to align it with other projects, there were no code changes.
