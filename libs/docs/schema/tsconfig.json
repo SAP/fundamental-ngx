@@ -15,7 +15,8 @@
         "types": [],
         "module": "preserve",
         "moduleResolution": "bundler",
-        "lib": ["dom", "es2023"]
+        "lib": ["dom", "es2023"],
+        "rootDir": "../../.."
     },
     "exclude": ["src/test-setup.ts", "**/*.spec.ts", "**/*.test.ts", "**/*.e2e-spec.ts"]
 }

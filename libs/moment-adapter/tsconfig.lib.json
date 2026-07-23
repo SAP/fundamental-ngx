@@ -6,8 +6,7 @@
         "outDir": "../../dist/out-tsc/moment-adapter",
         "target": "es2023",
         "useDefineForClassFields": false,
-        "moduleResolution": "bundler",
-        "composite": true
+        "moduleResolution": "bundler"
     },
     "include": ["**/*.ts"],
     "angularCompilerOptions": {

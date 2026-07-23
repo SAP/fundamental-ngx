@@ -149,12 +149,7 @@
     },
     "namedInputs": {
         "default": ["{projectRoot}/**/*", "sharedGlobals"],
-        "sharedGlobals": [
-            "{workspaceRoot}/package.json",
-            "{workspaceRoot}/angular.json",
-            "{workspaceRoot}/tsconfig.json",
-            "{workspaceRoot}/nx.json"
-        ],
+        "sharedGlobals": ["{workspaceRoot}/package.json", "{workspaceRoot}/angular.json", "{workspaceRoot}/nx.json"],
         "production": [
             "default",
             "!{projectRoot}/**/*.spec.[jt]s",
@@ -172,15 +167,6 @@
             "plugin": "@nx/eslint/plugin",
             "options": {
                 "targetName": "lint"
-            }
-        },
-        {
-            "plugin": "@nx/js/typescript",
-            "options": {
-                "typecheck": {
-                    "targetName": "typecheck"
-                },
-                "build": false
             }
         }
     ],

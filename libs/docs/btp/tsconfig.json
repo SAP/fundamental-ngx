@@ -13,7 +13,8 @@
         "declarationMap": true,
         "inlineSources": true,
         "resolveJsonModule": true,
-        "types": []
+        "types": [],
+        "rootDir": "../../.."
     },
     "exclude": ["**/*.test.ts", "**/*.spec.ts", "**/*.e2e-spec.ts"]
 }

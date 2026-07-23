@@ -8,8 +8,7 @@
         "types": [],
         "target": "es2023",
         "useDefineForClassFields": false,
-        "moduleResolution": "bundler",
-        "composite": true
+        "moduleResolution": "bundler"
     },
     "exclude": ["src/test.ts", "**/*.spec.ts", "**/*.test.ts", "src/lib/utils/translation-tester.ts"],
     "files": ["./src/index.ts"],

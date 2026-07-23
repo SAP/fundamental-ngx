@@ -8,8 +8,7 @@
         "types": [],
         "lib": ["dom", "es2023"],
         "useDefineForClassFields": false,
-        "moduleResolution": "bundler",
-        "composite": true
+        "moduleResolution": "bundler"
     },
     "angularCompilerOptions": {
         "skipTemplateCodegen": true,

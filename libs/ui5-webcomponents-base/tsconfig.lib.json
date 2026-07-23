@@ -12,7 +12,6 @@
         ],
         "useDefineForClassFields": false,
         "moduleResolution": "bundler",
-        "composite": true,
         "paths": {
             "@fundamental-ngx/i18n": [
                 "dist/libs/i18n"
