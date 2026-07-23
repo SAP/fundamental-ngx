@@ -23,8 +23,8 @@ import { SliderComponent } from '@fundamental-ngx/platform/slider';
             <ng-container [formGroupName]="formGroupName">
                 <fdp-slider
                     [customValues]="formItem.choices || []"
-                    [showTicks]="$safeNavigationMigration(formItem.guiOptions?.additionalData?.showTicks)"
-                    [showTicksLabels]="$safeNavigationMigration(formItem.guiOptions?.additionalData?.showTicksLabels)"
+                    [showTicks]="formItem.guiOptions?.additionalData?.showTicks"
+                    [showTicksLabels]="formItem.guiOptions?.additionalData?.showTicksLabels"
                     [name]="name"
                     [formControlName]="name"
                 ></fdp-slider>

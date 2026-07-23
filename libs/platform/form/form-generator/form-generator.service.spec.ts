@@ -60,10 +60,10 @@ export const brokenFormItems: Map<string, DynamicFormItemMap> = mapFormItems([
     template: `
         <ng-container [formGroup]="form">
             <fdp-slider
-                [fdContentDensity]="$any($safeNavigationMigration(formItem.guiOptions?.contentDensity))"
+                [fdContentDensity]="$any(formItem.guiOptions?.contentDensity)"
                 [customValues]="$any(formItem.choices)"
-                [showTicks]="$safeNavigationMigration(formItem.guiOptions?.additionalData?.showTicks)"
-                [showTicksLabels]="$safeNavigationMigration(formItem.guiOptions?.additionalData?.showTicksLabels)"
+                [showTicks]="formItem.guiOptions?.additionalData?.showTicks"
+                [showTicksLabels]="formItem.guiOptions?.additionalData?.showTicksLabels"
                 [name]="name"
                 [formControlName]="name"
             ></fdp-slider>

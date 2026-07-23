@@ -13,17 +13,5 @@
     },
     "exclude": ["src/test.ts", "**/*.spec.ts", "**/*.test.ts", "src/lib/utils/translation-tester.ts"],
     "files": ["./src/index.ts"],
-    "include": ["**/*.ts"],
-    "angularCompilerOptions": {
-        "skipTemplateCodegen": true,
-        // TODO(#14334): suppress Angular 22 optionalChainNotNullable and nullishCoalescingNotNullable diagnostics
-        "extendedDiagnostics": {
-            "checks": {
-                "nullishCoalescingNotNullable": "suppress",
-                "optionalChainNotNullable": "suppress"
-            }
-        },
-        "strictMetadataEmit": true,
-        "enableResourceInlining": true
-    }
+    "include": ["**/*.ts"]
 }

@@ -26,7 +26,7 @@ import { ApprovalGraphNode } from '../interfaces/approval-node';
 export class ApprovalFlowToolbarActionsComponent {
     /** Approval flow graph */
     @Input()
-    graph: ApprovalFlowGraph;
+    graph: ApprovalFlowGraph | undefined;
 
     /** Approval flow graph metadata */
     @Input()

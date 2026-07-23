@@ -13,7 +13,7 @@
 
     <div
         fd-panel-content
-        [id]="$safeNavigationMigration(_panelContentComponent?.id)"
+        [id]="_panelContentComponent?.id"
         [height]="_panelContentComponent?.contentHeight || null"
         [ariaLabelledBy]="_panelTitleDirective?.id() || null"
     >

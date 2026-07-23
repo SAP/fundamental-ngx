@@ -5,9 +5,7 @@
                 <div fd-bar-middle>
                     <fd-bar-element [fullWidth]="true" class="fdp-search-field__mobile-bar-element">
                         @if (childContent?.inputFieldTemplate) {
-                            <ng-template
-                                [ngTemplateOutlet]="$safeNavigationMigration(childContent?.inputFieldTemplate)!"
-                            ></ng-template>
+                            <ng-template [ngTemplateOutlet]="childContent.inputFieldTemplate!"></ng-template>
                         }
                         @if (_inShellbar) {
                             <button
@@ -30,9 +28,7 @@
         </fd-dialog-header>
         <fd-dialog-body>
             @if (childContent?.suggestionMenuTemplate) {
-                <ng-template
-                    [ngTemplateOutlet]="$safeNavigationMigration(childContent?.suggestionMenuTemplate)!"
-                ></ng-template>
+                <ng-template [ngTemplateOutlet]="childContent.suggestionMenuTemplate!"></ng-template>
             }
         </fd-dialog-body>
         @if (mobileConfig.approveButtonText) {
