@@ -83,6 +83,14 @@ libs/ui5-webcomponents-fiori/index.ts
 !libs/ui5-webcomponents-base/theming/
 !libs/ui5-webcomponents-base/theming-bridge/
 !libs/ui5-webcomponents-base/i18n/
+!libs/ui5-webcomponents/theming/
+libs/ui5-webcomponents/theming/index.ts
+libs/ui5-webcomponents/theming/ng-package.json
+!libs/ui5-webcomponents/theming-bridge/
+!libs/ui5-webcomponents-fiori/theming/
+libs/ui5-webcomponents-fiori/theming/index.ts
+libs/ui5-webcomponents-fiori/theming/ng-package.json
+!libs/ui5-webcomponents-fiori/theming-bridge/
 
 /libs/i18n/docs
 /libs/i18n/test-typedoc.json
