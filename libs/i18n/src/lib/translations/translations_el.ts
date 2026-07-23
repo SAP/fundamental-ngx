@@ -114,8 +114,8 @@ export default {
         srOnlyText: 'Ετικέτα Πληροφοριών'
     },
     coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
+        listItemSelectedAriaLabel: 'Επιλέχτηκε',
+        listItemNotSelectedAriaLabel: 'Δεν επιλέχτηκε'
     },
     coreLink: {
         emphasized: 'Τονισμένο',
@@ -366,7 +366,7 @@ export default {
         messagesTeamRemoved: '1 ομάδα διαγράφηκε',
         messagesUndoAction: 'Αναίρεση',
         nextButtonAriaLabel: 'Μετάβαση στην επόμενη διαφάνεια',
-        noDataFound: 'No Data Found',
+        noDataFound: 'Δεν Βρέθηκαν Δεδομένα',
         nodeActionAddApproversAfter: 'Προσθήκη υπευθύνων έγκρισης μετά',
         nodeActionAddApproversBefore: 'Προσθήκη υπευθύνων έγκρισης πριν',
         nodeActionAddApproversParallel: 'Προσθήκη παράλληλων υπευθύνων έγκρισης',
@@ -523,7 +523,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Ακύρωση',
         clearFilters: 'Εκκαθάριση Φίλτρων',
-        collapseAllAnnouncementLabel: 'Collapse All clicked',
+        collapseAllAnnouncementLabel: 'Η Σύμπτυξη Όλων πατήθηκε',
         collapseRowButtonTitle: 'Σύμπυξη σειράς',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Δεν βρέθηκαν δεδομένα',
@@ -534,7 +534,7 @@ export default {
         editableCellNumberPlaceholder: 'Εισαγάγετε τιμή',
         editableCellStringPlaceholder: 'Εισαγάγετε τιμή',
         emptyCell: 'Κενό',
-        expandAllAnnouncementLabel: 'Expand All clicked',
+        expandAllAnnouncementLabel: 'Έγινε κλικ στην Επέκταση Όλων',
         expandRowButtonTitle: 'Επέκταση σειράς',
         filterDialogBackToColumns: 'Πλοήγηση πίσω',
         filterDialogCancelBtnLabel: 'Ακύρωση',

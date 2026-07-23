@@ -114,8 +114,8 @@ export default {
         srOnlyText: 'Label Maklumat'
     },
     coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
+        listItemSelectedAriaLabel: 'Dipilih',
+        listItemNotSelectedAriaLabel: 'Tidak Dipilih'
     },
     coreLink: {
         emphasized: 'Diserlahkan',
@@ -364,7 +364,7 @@ export default {
         messagesTeamRemoved: '1 pasukan telah dikeluarkan',
         messagesUndoAction: 'Buat Asal',
         nextButtonAriaLabel: 'Pergi ke slaid seterusnya',
-        noDataFound: 'No Data Found',
+        noDataFound: 'Tiada Data Ditemui',
         nodeActionAddApproversAfter: 'Tambah pelulus selepas',
         nodeActionAddApproversBefore: 'Tambah pelulus sebelum',
         nodeActionAddApproversParallel: 'Tambah pelulus selari',
@@ -521,7 +521,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Batalkan',
         clearFilters: 'Kosongkan Penapis',
-        collapseAllAnnouncementLabel: 'Collapse All clicked',
+        collapseAllAnnouncementLabel: 'Runtuhkan Semua diklik',
         collapseRowButtonTitle: 'Runtuhkan baris',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Tiada data ditemui',
@@ -532,7 +532,7 @@ export default {
         editableCellNumberPlaceholder: 'Masukkan nilai',
         editableCellStringPlaceholder: 'Masukkan nilai',
         emptyCell: 'Kosong',
-        expandAllAnnouncementLabel: 'Expand All clicked',
+        expandAllAnnouncementLabel: 'Kembangkan Semua diklik',
         expandRowButtonTitle: 'Kembangkan baris',
         filterDialogBackToColumns: 'Navigasi kembali',
         filterDialogCancelBtnLabel: 'Batalkan',

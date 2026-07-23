@@ -115,8 +115,8 @@ export default {
         srOnlyText: 'Информационен етикет'
     },
     coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
+        listItemSelectedAriaLabel: 'Избранo',
+        listItemNotSelectedAriaLabel: 'Не е избрано'
     },
     coreLink: {
         emphasized: 'Акцентирано',
@@ -366,7 +366,7 @@ export default {
         messagesTeamRemoved: '1 екип е премахнат',
         messagesUndoAction: 'Отмяна на последното действие',
         nextButtonAriaLabel: 'Към следващия слайд',
-        noDataFound: 'No Data Found',
+        noDataFound: 'Не са намерени данни',
         nodeActionAddApproversAfter: 'Добавяне на одобряващи лица след',
         nodeActionAddApproversBefore: 'Добавяне на одобряващи лица преди',
         nodeActionAddApproversParallel: 'Добавяне на паралелни одобряващи лица',
@@ -523,7 +523,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Отказ',
         clearFilters: 'Изчистване на филтрите',
-        collapseAllAnnouncementLabel: 'Collapse All clicked',
+        collapseAllAnnouncementLabel: 'Натиснат е бутонът „Свиване на всички“',
         collapseRowButtonTitle: 'Свиване на реда',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Не са намерени данни',
@@ -534,7 +534,7 @@ export default {
         editableCellNumberPlaceholder: 'Въведете стойност',
         editableCellStringPlaceholder: 'Въведете стойност',
         emptyCell: 'Празно',
-        expandAllAnnouncementLabel: 'Expand All clicked',
+        expandAllAnnouncementLabel: 'Натиснат е бутонът „Разгъване на всички“',
         expandRowButtonTitle: 'Разгръщане на реда',
         filterDialogBackToColumns: 'Назад',
         filterDialogCancelBtnLabel: 'Отказ',

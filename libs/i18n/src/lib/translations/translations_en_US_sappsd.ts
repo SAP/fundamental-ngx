@@ -115,8 +115,8 @@ export default {
         srOnlyText: '[[[Ĭŋƒŏ Ļąƃēĺ∙∙∙∙]]]'
     },
     coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
+        listItemSelectedAriaLabel: '[[[Ŝēĺēċţēƌ∙∙∙∙∙∙]]]',
+        listItemNotSelectedAriaLabel: '[[[Ńŏţ Ŝēĺēċţēƌ∙∙∙∙∙∙∙]]]'
     },
     coreLink: {
         emphasized: '[[[Ĕɱρĥąşįžēƌ∙∙∙∙]]]',
@@ -524,7 +524,7 @@ export default {
     platformTable: {
         cancelBtnLabel: '[[[Ĉąŋċēĺ∙∙∙∙∙∙∙∙]]]',
         clearFilters: '[[[Ĉĺēąŗ Ƒįĺţēŗş∙∙∙∙∙∙]]]',
-        collapseAllAnnouncementLabel: 'Collapse All clicked',
+        collapseAllAnnouncementLabel: '[[[Ĉŏĺĺąρşē Āĺĺ ċĺįċķēƌ∙∙∙∙]]]',
         collapseRowButtonTitle: '[[[Ĉŏĺĺąρşē ŗŏŵ∙∙∙∙∙∙∙]]]',
         confirmBtnLabel: '[[[ŎĶ∙∙]]]',
         defaultEmptyMessage: '[[[Ńŏ ƌąţą ƒŏűŋƌ∙∙∙∙∙∙]]]',
@@ -535,7 +535,7 @@ export default {
         editableCellNumberPlaceholder: '[[[Ĕŋţēŗ ʋąĺűē∙∙∙∙∙∙∙∙]]]',
         editableCellStringPlaceholder: '[[[Ĕŋţēŗ ʋąĺűē∙∙∙∙∙∙∙∙]]]',
         emptyCell: '[[[Ĕɱρţŷ∙∙∙∙∙∙∙∙∙]]]',
-        expandAllAnnouncementLabel: 'Expand All clicked',
+        expandAllAnnouncementLabel: '[[[Ĕχρąŋƌ Āĺĺ ċĺįċķēƌ∙∙∙∙∙∙]]]',
         expandRowButtonTitle: '[[[Ĕχρąŋƌ ŗŏŵ∙∙∙∙]]]',
         filterDialogBackToColumns: '[[[Ńąʋįğąţē ƃąċķ∙∙∙∙∙∙]]]',
         filterDialogCancelBtnLabel: '[[[Ĉąŋċēĺ∙∙∙∙∙∙∙∙]]]',

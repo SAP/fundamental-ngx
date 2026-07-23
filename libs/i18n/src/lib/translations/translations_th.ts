@@ -114,8 +114,8 @@ export default {
         srOnlyText: 'ป้ายชื่อข้อมูล'
     },
     coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
+        listItemSelectedAriaLabel: 'เลือกแล้ว',
+        listItemNotSelectedAriaLabel: 'ไม่ได้เลือก'
     },
     coreLink: {
         emphasized: 'เน้น',
@@ -365,7 +365,7 @@ export default {
         messagesTeamRemoved: 'เอาออกแล้ว 1 ทีม',
         messagesUndoAction: 'เลิกทำ',
         nextButtonAriaLabel: 'ไปที่สไลด์ถัดไป',
-        noDataFound: 'No Data Found',
+        noDataFound: 'ไม่พบข้อมูล',
         nodeActionAddApproversAfter: 'เพิ่มผู้อนุมัติหลัง',
         nodeActionAddApproversBefore: 'เพิ่มผู้อนุมัติก่อน',
         nodeActionAddApproversParallel: 'เพิ่มผู้อนุมัติแบบขนาน',
@@ -522,7 +522,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'ยกเลิก',
         clearFilters: 'เคลียร์ตัวกรอง',
-        collapseAllAnnouncementLabel: 'Collapse All clicked',
+        collapseAllAnnouncementLabel: 'ยุบรวมทั้งหมดที่คลิก',
         collapseRowButtonTitle: 'ยุบรวมแถว',
         confirmBtnLabel: 'ตกลง',
         defaultEmptyMessage: 'ไม่พบข้อมูล',
@@ -533,7 +533,7 @@ export default {
         editableCellNumberPlaceholder: 'ป้อนค่า',
         editableCellStringPlaceholder: 'ป้อนค่า',
         emptyCell: 'ว่าง',
-        expandAllAnnouncementLabel: 'Expand All clicked',
+        expandAllAnnouncementLabel: 'ขยายทั้งหมดที่คลิก',
         expandRowButtonTitle: 'ขยายแถว',
         filterDialogBackToColumns: 'ย้อนกลับ',
         filterDialogCancelBtnLabel: 'ยกเลิก',

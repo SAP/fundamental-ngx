@@ -115,8 +115,8 @@ export default {
         srOnlyText: 'Infooznaka'
     },
     coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
+        listItemSelectedAriaLabel: 'Izbrano',
+        listItemNotSelectedAriaLabel: 'Ni izbrano'
     },
     coreLink: {
         emphasized: 'Izpostavljeno',
@@ -366,7 +366,7 @@ export default {
         messagesTeamRemoved: '1 tim je bil odstranjen',
         messagesUndoAction: 'Razveljavi',
         nextButtonAriaLabel: 'Pojdi na naslednji diapozitiv',
-        noDataFound: 'No Data Found',
+        noDataFound: 'Nobeni podatki niso najdeni',
         nodeActionAddApproversAfter: 'Dodaj odobritelje po',
         nodeActionAddApproversBefore: 'Dodaj odobritelje pred',
         nodeActionAddApproversParallel: 'Dodaj vzporedne odobritelje',
@@ -523,7 +523,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Preklic',
         clearFilters: 'Počisti filtre',
-        collapseAllAnnouncementLabel: 'Collapse All clicked',
+        collapseAllAnnouncementLabel: 'Skrči vse kliknjene',
         collapseRowButtonTitle: 'Skrči vrstico',
         confirmBtnLabel: 'V redu',
         defaultEmptyMessage: 'Podatki niso najdeni',
@@ -534,7 +534,7 @@ export default {
         editableCellNumberPlaceholder: 'Vnesi vrednost',
         editableCellStringPlaceholder: 'Vnesi vrednost',
         emptyCell: 'Prazno',
-        expandAllAnnouncementLabel: 'Expand All clicked',
+        expandAllAnnouncementLabel: 'Razširi vse kliknjene',
         expandRowButtonTitle: 'Razširi vrstico',
         filterDialogBackToColumns: 'Nazaj',
         filterDialogCancelBtnLabel: 'Preklic',

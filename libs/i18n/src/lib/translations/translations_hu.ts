@@ -115,8 +115,8 @@ export default {
         srOnlyText: 'Infócímke'
     },
     coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
+        listItemSelectedAriaLabel: 'Kiválasztva',
+        listItemNotSelectedAriaLabel: 'Nincs kiválasztva'
     },
     coreLink: {
         emphasized: 'Kiemelt',
@@ -222,7 +222,7 @@ export default {
         assistiveTools: 'Segítségnyújtó eszközök',
         backButtonLabel: 'Vissza',
         cancel: 'Mégse',
-        collapsedItemMenuLabel: 'Összecsukott menüelem',
+        collapsedItemMenuLabel: 'Visszazárt menüelem',
         navigationButtonLabel: 'Navigáció',
         search: 'Keresés'
     },
@@ -366,7 +366,7 @@ export default {
         messagesTeamRemoved: '1 csapat el lett távolítva',
         messagesUndoAction: 'Visszavonás',
         nextButtonAriaLabel: 'Tovább a következő diára',
-        noDataFound: 'No Data Found',
+        noDataFound: 'Nem találhatók adatok',
         nodeActionAddApproversAfter: 'Jóváhagyók hozzáadása ez után:',
         nodeActionAddApproversBefore: 'Jóváhagyók hozzáadása ez elé:',
         nodeActionAddApproversParallel: 'Párhuzamos jóváhagyók hozzáadása',
@@ -523,8 +523,8 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Mégse',
         clearFilters: 'Szűrők törlése',
-        collapseAllAnnouncementLabel: 'Collapse All clicked',
-        collapseRowButtonTitle: 'Sor összecsukása',
+        collapseAllAnnouncementLabel: 'Rákattintott az összes visszazárására',
+        collapseRowButtonTitle: 'Sor visszazárása',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Nem található adat',
         deselectAllCheckboxLabel: 'Összes kijelölésének megszüntetése',
@@ -534,7 +534,7 @@ export default {
         editableCellNumberPlaceholder: 'Adjon meg értéket',
         editableCellStringPlaceholder: 'Adjon meg értéket',
         emptyCell: 'Üres',
-        expandAllAnnouncementLabel: 'Expand All clicked',
+        expandAllAnnouncementLabel: 'Rákattintott az összes kibontására',
         expandRowButtonTitle: 'Sor kibontása',
         filterDialogBackToColumns: 'Visszalépés',
         filterDialogCancelBtnLabel: 'Mégse',
