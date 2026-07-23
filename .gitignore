@@ -81,6 +81,7 @@ libs/ui5-webcomponents-ai/index.ts
 libs/ui5-webcomponents-fiori/**/
 libs/ui5-webcomponents-fiori/index.ts
 !libs/ui5-webcomponents-base/theming/
+!libs/ui5-webcomponents-base/theming-bridge/
 !libs/ui5-webcomponents-base/i18n/
 
 /libs/i18n/docs
