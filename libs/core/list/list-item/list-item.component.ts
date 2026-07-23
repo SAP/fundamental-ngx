@@ -276,7 +276,16 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
     @HostListener('click', ['$event'])
     onClick(event: MouseEvent): void {
         if (!this.preventClick) {
-            this._clicked$.next(event);
+            const target = event.target as HTMLElement;
+
+            // Don't emit _clicked$ if user clicked on an interactive element
+            // This prevents the list from stealing focus from buttons/inputs/etc inside list items
+            const clickedInteractiveElement = this._isInteractiveElement(target);
+
+            if (!clickedInteractiveElement) {
+                this._clicked$.next(event);
+            }
+
             if (this.checkbox && !this.checkbox.disabled && !this.link) {
                 if (!this.checkbox.elementRef.nativeElement.contains(event.target as Node)) {
                     // clicking on the checkbox is not suppressed
@@ -334,6 +343,27 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
     private _muteEvent(event: Event): void {
         event.stopPropagation();
         event.preventDefault();
+    }
+
+    /**
+     * Checks if an element or any of its ancestors (up to this list item) is an interactive element.
+     * Interactive elements are those that can receive focus and handle user interaction.
+     * @hidden
+     */
+    private _isInteractiveElement(element: HTMLElement): boolean {
+        // Check if the element itself or any parent (up to this element) is an interactive element
+        // We exclude elements with [fd-list-item] or [fdListItem] attributes because the list item
+        // itself has tabindex for roving tabindex functionality, but shouldn't block click handling
+        const interactiveElement = element.closest(
+            'button, a, input, textarea, select, [tabindex]:not([fd-list-item]):not([fdListItem])'
+        );
+
+        if (!interactiveElement) {
+            return false;
+        }
+
+        // Also verify the interactive element is inside this list item (not the list item itself)
+        return this.elementRef.nativeElement.contains(interactiveElement);
     }
 
     /** @hidden Reads checked state from embedded checkbox/radio and writes it to `selected`. */

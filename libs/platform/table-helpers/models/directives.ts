@@ -33,6 +33,20 @@ export abstract class TableInitialState {
     abstract state: TableState;
     abstract setTable(table: Table): void;
     abstract setInitialState(): void;
+    /**
+     * Returns the initial sort state snapshot captured when setInitialState() was first called.
+     * This value does not change even if the initialSortBy input is dynamically updated.
+     * Used by the settings dialog to determine the true "reset" target.
+     */
+    abstract getInitialSortBySnapshot(): CollectionSort[];
+    /**
+     * Returns the initial filter state snapshot captured when setInitialState() was first called.
+     */
+    abstract getInitialFilterBySnapshot(): CollectionFilter[];
+    /**
+     * Returns the initial group state snapshot captured when setInitialState() was first called.
+     */
+    abstract getInitialGroupBySnapshot(): CollectionGroup[];
 }
 
 export abstract class TableVirtualScroll {
