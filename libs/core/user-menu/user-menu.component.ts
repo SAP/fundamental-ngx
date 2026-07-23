@@ -203,7 +203,9 @@ export class UserMenuComponent implements AfterViewInit {
     /** Method that closes the user menu */
     close(): void {
         this.isOpenChangeHandle(false);
-        this._closeAllSubmenus();
+        if (this.mobile()) {
+            this._closeAllSubmenus();
+        }
         this._clearSubmenu();
         this._dialogRef?.close();
     }

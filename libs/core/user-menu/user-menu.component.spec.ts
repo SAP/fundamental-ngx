@@ -67,37 +67,41 @@ describe('UserMenuComponent', () => {
         expect(component.elRef.nativeElement.classList).toContain('fd-user-menu');
     });
 
-    describe('popover mode - initial focus', () => {
-        it('should focus first list item when popover opens', fakeAsync(() => {
+    describe('initial focus behavior', () => {
+        it('should focus first list item (not first focusable element) when popover opens in non-mobile mode', fakeAsync(() => {
             const listItems = userMenu['_listItems']();
 
             expect(listItems.length).toBeGreaterThan(0);
 
             const firstItemFocusSpy = jest.spyOn(listItems[0], 'focus');
 
-            // Open the menu
+            // Open the menu in non-mobile mode (popover)
             userMenu.open();
             fixture.detectChanges();
 
             // Wait for requestAnimationFrame
             tick(20);
 
+            // Verify the first list item's focus() method was called explicitly
+            // (not relying on default popover focus behavior which would focus first focusable element)
             expect(firstItemFocusSpy).toHaveBeenCalled();
         }));
 
-        it('should not focus first item when opening in mobile mode', fakeAsync(() => {
+        it('should not call focus on first list item when open() is called in mobile mode', fakeAsync(() => {
             // Set mobile on the actual user menu component
             userMenu.mobile = jest.fn().mockReturnValue(true) as any;
 
             const listItems = userMenu['_listItems']();
             const firstItemFocusSpy = jest.spyOn(listItems[0], 'focus');
 
-            // Open the menu
+            // Call open() directly (note: in actual usage, mobile mode opens via control click → openDialog())
             userMenu.open();
             fixture.detectChanges();
             tick(20);
 
-            // Should not focus - mobile mode uses dialog
+            // open() method should not focus the first list item in mobile mode
+            // (the condition at line 280 checks !this.mobile())
+            // Note: openDialog() separately handles focusing the first list item when the dialog actually opens
             expect(firstItemFocusSpy).not.toHaveBeenCalled();
         }));
     });
@@ -135,23 +139,5 @@ describe('UserMenuComponent', () => {
 
             expect(controlFocusSpy).toHaveBeenCalled();
         });
-    });
-
-    describe('mobile mode subscription', () => {
-        it('should only subscribe to control clicks when in mobile mode', fakeAsync(() => {
-            // Set mobile on the actual user menu component
-            userMenu.mobile = jest.fn().mockReturnValue(true) as any;
-            fixture.detectChanges();
-
-            // Trigger ngAfterViewInit
-            tick();
-
-            const control = userMenu['userMenuControl']();
-            expect(control).toBeDefined();
-
-            // The subscription should be active in mobile mode
-            // This is verified by the code structure - explicit test would require
-            // triggering the click and checking if dialog opens
-        }));
     });
 });
