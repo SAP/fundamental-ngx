@@ -204,7 +204,10 @@ export default {
         totalResultsLabel: '{totalCount} találat'
     },
     coreProductSwitch: {
-        ariaLabel: 'Termékváltás'
+        ariaLabel: 'Termékváltás',
+        targetBlank: 'opens in a new browser tab',
+        targetParent: 'opens in the parent frame',
+        targetTop: 'opens in the full browser window'
     },
     coreRadio: {
         readOnlyDescription: 'Ez a választókapcsoló írásvédett, ezért nem módosítható.'

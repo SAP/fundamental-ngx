@@ -2,15 +2,15 @@ import { Component } from '@angular/core';
 import { ProductSwitchItem, ProductSwitchModule } from '@fundamental-ngx/core/product-switch';
 
 @Component({
-    selector: 'fd-product-switch-small-example',
-    templateUrl: './product-switch-small-example.component.html',
+    selector: 'fd-product-switch-medium-example',
+    templateUrl: './product-switch-medium-example.component.html',
     imports: [ProductSwitchModule]
 })
-export class ProductSwitchSmallExampleComponent {
+export class ProductSwitchMediumExampleComponent {
     list: ProductSwitchItem[] = [
         {
-            title: 'Home Home Home Home Home Home Home Home',
-            subtitle: 'Central Home Central Home Central Home Central Home',
+            title: 'Home',
+            subtitle: 'Central Home',
             icon: 'home',
             stickToPosition: true,
             disabledDragAndDrop: true
@@ -38,6 +38,5 @@ export class ProductSwitchSmallExampleComponent {
 
     productChangeHandle(products: ProductSwitchItem[]): void {
         this.list = products;
-        console.log(products);
     }
 }

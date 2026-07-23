@@ -147,6 +147,9 @@ export interface PopoverConfig {
     /** ID of the element that labels the popover body. */
     bodyAriaLabelledBy?: string | null;
 
+    /** aria-modal value for the popover body. */
+    bodyAriaModal?: boolean | null;
+
     /** ID for the popover body. */
     bodyId?: string | null;
 }

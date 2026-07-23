@@ -22,6 +22,7 @@ import {
 import { Placement } from '@fundamental-ngx/core/shared';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { Subject } from 'rxjs';
+import { ProductSwitchBodyComponent } from '../product-switch-body/product-switch-body.component';
 import { ProductSwitchButtonDirective } from '../product-switch-button.directive';
 import { FD_PRODUCT_SWITCH_COMPONENT } from '../tokens';
 
@@ -92,12 +93,16 @@ export class ProductSwitchComponent {
     protected readonly customProductSwitchButton = contentChild(ProductSwitchButtonDirective);
 
     /** @hidden */
+    private readonly _productSwitchBody = contentChild(ProductSwitchBodyComponent);
+
+    /** @hidden */
     constructor() {
         let previousIsOpen = false;
         effect(() => {
             const openState = this.isOpen();
 
             if (openState !== previousIsOpen) {
+                this._productSwitchBody()?.isOpen.set(openState);
                 this.isOpenChange.next(openState);
             }
 

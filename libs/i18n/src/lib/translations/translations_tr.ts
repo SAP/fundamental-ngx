@@ -203,7 +203,10 @@ export default {
         totalResultsLabel: '{totalCount} Sonuç'
     },
     coreProductSwitch: {
-        ariaLabel: 'Ürün Anahtarı'
+        ariaLabel: 'Ürün Anahtarı',
+        targetBlank: 'opens in a new browser tab',
+        targetParent: 'opens in the parent frame',
+        targetTop: 'opens in the full browser window'
     },
     coreRadio: {
         readOnlyDescription: 'Bu radyo düğmesi salt okunurdur ve değiştirilemez.'

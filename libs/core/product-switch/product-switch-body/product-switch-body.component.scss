@@ -4,6 +4,12 @@
     position: relative;
 }
 
+.fd-product-switch__link {
+    display: contents;
+    color: inherit;
+    text-decoration: none;
+}
+
 .fd-product-switch__item.cdk-drag-dragging {
     outline: none;
     cursor: grabbing;
@@ -72,28 +78,5 @@
         .fd-product-switch__subtitle {
             text-align: right;
         }
-    }
-}
-
-// TO DO: to be removed with the adoption of fundamental-styles v0.41.0+
-.fd-product-switch__item {
-    --fdProduct_Switch_Item_Border_Color: transparent;
-
-    gap: 0.5rem;
-}
-
-.fd-product-switch__icon [class*='sap-icon'],
-.fd-product-switch__icon[class*='sap-icon'] {
-    margin-block-end: 0;
-}
-
-.fd-product-switch__body.fd-product-switch__body--mobile {
-    .fd-product-switch__item {
-        gap: 0.75rem;
-    }
-
-    .fd-product-switch__icon [class*='sap-icon'],
-    .fd-product-switch__icon[class*='sap-icon'] {
-        margin-inline: 0;
     }
 }
