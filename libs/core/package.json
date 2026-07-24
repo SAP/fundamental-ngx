@@ -3,6 +3,21 @@
     "version": "0.64.1-rc.3",
     "schematics": "./schematics/collection.json",
     "ng-update": {
+        "packageGroupName": "@fundamental-ngx/core",
+        "packageGroup": [
+            "@fundamental-ngx/cdk",
+            "@fundamental-ngx/core",
+            "@fundamental-ngx/i18n",
+            "@fundamental-ngx/platform",
+            "@fundamental-ngx/datetime-adapter",
+            "@fundamental-ngx/moment-adapter",
+            "@fundamental-ngx/cx",
+            "@fundamental-ngx/btp",
+            "@fundamental-ngx/ui5-webcomponents-base",
+            "@fundamental-ngx/ui5-webcomponents",
+            "@fundamental-ngx/ui5-webcomponents-fiori",
+            "@fundamental-ngx/ui5-webcomponents-ai"
+        ],
         "migrations": "./schematics/migrations.json"
     },
     "description": "Fundamental Library for Angular - core",
