@@ -1,4 +1,58 @@
+import { workspaceRoot } from '@nx/devkit';
+import { readFileSync } from 'fs';
 import { CommentType } from '../schema';
+
+/**
+ * Extract JSDoc comment for a key from fd-language.ts
+ */
+export function extractJSDocComment(key: string): string | null {
+    const fdLanguagePath = `${workspaceRoot}/libs/i18n/src/lib/models/fd-language.ts`;
+
+    try {
+        const content = readFileSync(fdLanguagePath, 'utf-8');
+        const lines = content.split('\n');
+
+        // Get the property name (last part after the last dot)
+        const propertyName = key.split('.').pop();
+        if (!propertyName) {
+            return null;
+        }
+
+        // Find the line with this property
+        for (let i = 0; i < lines.length; i++) {
+            const line = lines[i].trim();
+
+            // Check if this line defines our property
+            if (line.startsWith(`${propertyName}:`) || line.startsWith(`${propertyName}?:`)) {
+                // Look backwards for JSDoc comment
+                let commentLine = i - 1;
+                while (commentLine >= 0 && lines[commentLine].trim() === '') {
+                    commentLine--;
+                }
+
+                // Check if we found a JSDoc comment
+                if (commentLine >= 0) {
+                    const potentialComment = lines[commentLine].trim();
+                    // Match /** comment */ or // comment
+                    const jsdocMatch = potentialComment.match(/^\/\*\*\s*(.+?)\s*\*\/$/);
+                    const inlineMatch = potentialComment.match(/^\/\/\s*(.+)$/);
+
+                    if (jsdocMatch) {
+                        return jsdocMatch[1];
+                    } else if (inlineMatch) {
+                        return inlineMatch[1];
+                    }
+                }
+                break;
+            }
+        }
+    } catch {
+        // If we can't read the file, return null and fall back to auto-generation
+        return null;
+    }
+
+    return null;
+}
 
 /**
  * Infer comment type based on key name and value
@@ -71,7 +125,16 @@ export function generateComment(
     customType?: CommentType
 ): { type: CommentType; description: string; fullComment: string } {
     const type = customType || inferCommentType(key, value);
-    const description = customDescription || generateCommentDescription(key);
+
+    // Priority: CLI parameter > JSDoc from fd-language.ts > auto-generated
+    let description: string;
+    if (customDescription) {
+        description = customDescription;
+    } else {
+        const jsdocComment = extractJSDocComment(key);
+        description = jsdocComment || generateCommentDescription(key);
+    }
+
     const fullComment = `#${type}: ${description}`;
 
     return { type, description, fullComment };

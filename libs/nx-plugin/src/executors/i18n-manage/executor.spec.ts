@@ -26,9 +26,12 @@ jest.mock('./operations/update-key', () => ({
     updateKey: jest.fn()
 }));
 
-// Mock transform-translations executor to prevent Prettier import
-jest.mock('../transform-translations/executor', () => ({
-    default: jest.fn()
+jest.mock('./operations/sort-keys', () => ({
+    sortKeys: jest.fn()
+}));
+
+jest.mock('./operations/sync', () => ({
+    sync: jest.fn()
 }));
 
 import executor from './executor';

@@ -20,30 +20,30 @@ jest.mock('@nx/devkit', () => ({
     workspaceRoot: '/test-workspace'
 }));
 
-// Mock transform-translations executor
-jest.mock('../../transform-translations/executor', () => ({
-    __esModule: true,
-    default: jest.fn().mockResolvedValue({ success: true })
+// Mock prettier
+jest.mock('prettier', () => ({
+    format: jest.fn((code) => code),
+    resolveConfig: jest.fn().mockResolvedValue({})
 }));
 
 import { sync as fastGlobSync } from 'fast-glob';
-import transformTranslationsExecutor from '../../transform-translations/executor';
 
 describe('AddKey Operation', () => {
     beforeEach(() => {
         vol.reset();
         jest.clearAllMocks();
-        (transformTranslationsExecutor as jest.Mock).mockResolvedValue({ success: true });
     });
 
     describe('validateKeyFormat', () => {
         it('should accept valid key format', async () => {
-            (fastGlobSync as jest.Mock).mockReturnValue(['libs/i18n/translations/translations_en.properties']);
+            (fastGlobSync as jest.Mock).mockReturnValue(['libs/i18n/translations/translations.ts']);
             vol.fromJSON({
-                '/test-workspace/libs/i18n/translations/translations_en.properties': `
+                '/test-workspace/libs/i18n/translations/translations.properties': `
 #XBUT: Save button
 coreButton.save=Save
-                `.trim()
+                `.trim(),
+                '/test-workspace/libs/i18n/translations/translations.ts': 'export default {}',
+                '/test-workspace/libs/i18n/src/lib/models/fd-language-key-identifier.ts': '// placeholder'
             });
 
             const result = await addKey({
@@ -98,9 +98,9 @@ coreButton.save=Save
 
     describe('key existence check', () => {
         it('should reject if key already exists', async () => {
-            (fastGlobSync as jest.Mock).mockReturnValue(['libs/i18n/translations/translations_en.properties']);
+            (fastGlobSync as jest.Mock).mockReturnValue(['libs/i18n/translations/translations.ts']);
             vol.fromJSON({
-                '/test-workspace/libs/i18n/translations/translations_en.properties': `
+                '/test-workspace/libs/i18n/translations/translations.properties': `
 #XBUT: Save button
 coreButton.save=Save
                 `.trim()
@@ -118,202 +118,191 @@ coreButton.save=Save
     });
 
     describe('adding keys', () => {
-        it('should add key to single .properties file', async () => {
-            (fastGlobSync as jest.Mock).mockReturnValue(['libs/i18n/translations/translations_en.properties']);
+        it('should add key to translations.properties and regenerate .ts files', async () => {
+            (fastGlobSync as jest.Mock).mockReturnValue(['libs/i18n/translations/translations.ts']);
             vol.fromJSON({
-                '/test-workspace/libs/i18n/translations/translations_en.properties': `
+                '/test-workspace/libs/i18n/translations/translations.properties': `
+#XBUT: Save button
+coreButton.save=Save
+                `.trim(),
+                '/test-workspace/libs/i18n/translations/translations.ts': 'export default {}',
+                '/test-workspace/libs/i18n/src/lib/models/fd-language-key-identifier.ts': '// placeholder'
+            });
+
+            const result = await addKey({
+                key: 'coreButton.cancel',
+                value: 'Cancel',
+                propertiesPath: 'libs/i18n/translations'
+            });
+
+            expect(result.success).toBe(true);
+            expect(result.filesModified).toContain('libs/i18n/translations/translations.properties');
+
+            const content = vol.readFileSync(
+                '/test-workspace/libs/i18n/translations/translations.properties',
+                'utf-8'
+            ) as string;
+            expect(content).toContain('coreButton.cancel = Cancel');
+        });
+
+        it('should regenerate all TypeScript translation files', async () => {
+            (fastGlobSync as jest.Mock).mockReturnValue([
+                'libs/i18n/translations/translations.ts',
+                'libs/i18n/translations/translations_de.ts'
+            ]);
+            vol.fromJSON({
+                '/test-workspace/libs/i18n/translations/translations.properties': `
+#XBUT: Save button
+coreButton.save=Save
+                `.trim(),
+                '/test-workspace/libs/i18n/translations/translations.ts': 'export default {}',
+                '/test-workspace/libs/i18n/translations/translations_de.ts': 'export default {}',
+                '/test-workspace/libs/i18n/translations/translations_de.properties': `
+#XBUT: Save button
+coreButton.save=Speichern
+                `.trim(),
+                '/test-workspace/libs/i18n/src/lib/models/fd-language-key-identifier.ts': '// placeholder'
+            });
+
+            const result = await addKey({
+                key: 'coreButton.cancel',
+                value: 'Cancel',
+                propertiesPath: 'libs/i18n/translations'
+            });
+
+            expect(result.success).toBe(true);
+
+            // Check translations.ts was regenerated with new key
+            const enContent = vol.readFileSync(
+                '/test-workspace/libs/i18n/translations/translations.ts',
+                'utf-8'
+            ) as string;
+            expect(enContent).toContain('"cancel": "Cancel"');
+
+            // Check translations_de.ts was regenerated - falls back to English for new key
+            const deContent = vol.readFileSync(
+                '/test-workspace/libs/i18n/translations/translations_de.ts',
+                'utf-8'
+            ) as string;
+            expect(deContent).toContain('"save": "Speichern"'); // Has existing German translation
+            expect(deContent).toContain('"cancel": "Cancel"'); // Falls back to English
+        });
+
+        it('should auto-generate comment when not provided', async () => {
+            (fastGlobSync as jest.Mock).mockReturnValue(['libs/i18n/translations/translations.ts']);
+            vol.fromJSON({
+                '/test-workspace/libs/i18n/translations/translations.properties': `
+#XBUT: Save button
+coreButton.save=Save
+                `.trim(),
+                '/test-workspace/libs/i18n/translations/translations.ts': 'export default {}',
+                '/test-workspace/libs/i18n/src/lib/models/fd-language-key-identifier.ts': '// placeholder'
+            });
+
+            const result = await addKey({
+                key: 'coreButton.submit',
+                value: 'Submit',
+                propertiesPath: 'libs/i18n/translations'
+            });
+
+            expect(result.success).toBe(true);
+
+            const content = vol.readFileSync(
+                '/test-workspace/libs/i18n/translations/translations.properties',
+                'utf-8'
+            ) as string;
+            // Should have some comment
+            expect(content).toMatch(/#X[A-Z]+:/);
+        });
+
+        it('should use provided comment and type', async () => {
+            (fastGlobSync as jest.Mock).mockReturnValue(['libs/i18n/translations/translations.ts']);
+            vol.fromJSON({
+                '/test-workspace/libs/i18n/translations/translations.properties': `
+#XBUT: Save button
+coreButton.save=Save
+                `.trim(),
+                '/test-workspace/libs/i18n/translations/translations.ts': 'export default {}',
+                '/test-workspace/libs/i18n/src/lib/models/fd-language-key-identifier.ts': '// placeholder'
+            });
+
+            const result = await addKey({
+                key: 'coreButton.delete',
+                value: 'Delete',
+                comment: 'Custom delete button',
+                commentType: 'XBUT',
+                propertiesPath: 'libs/i18n/translations'
+            });
+
+            expect(result.success).toBe(true);
+
+            const content = vol.readFileSync(
+                '/test-workspace/libs/i18n/translations/translations.properties',
+                'utf-8'
+            ) as string;
+            expect(content).toContain('#XBUT: Custom delete button');
+        });
+
+        it('should handle nested key structure', async () => {
+            (fastGlobSync as jest.Mock).mockReturnValue(['libs/i18n/translations/translations.ts']);
+            vol.fromJSON({
+                '/test-workspace/libs/i18n/translations/translations.properties': `
+#XBUT: Save button
+coreButton.save=Save
+                `.trim(),
+                '/test-workspace/libs/i18n/translations/translations.ts': 'export default {}',
+                '/test-workspace/libs/i18n/src/lib/models/fd-language-key-identifier.ts': '// placeholder'
+            });
+
+            const result = await addKey({
+                key: 'coreDialog.headerTitle',
+                value: 'Dialog Title',
+                propertiesPath: 'libs/i18n/translations'
+            });
+
+            expect(result.success).toBe(true);
+
+            const tsContent = vol.readFileSync(
+                '/test-workspace/libs/i18n/translations/translations.ts',
+                'utf-8'
+            ) as string;
+            // Should generate nested structure
+            expect(tsContent).toContain('coreDialog');
+        });
+    });
+
+    describe('error handling', () => {
+        it('should fail if translations.properties does not exist', async () => {
+            (fastGlobSync as jest.Mock).mockReturnValue([]);
+            vol.fromJSON({});
+
+            const result = await addKey({
+                key: 'coreButton.test',
+                value: 'Test',
+                propertiesPath: 'libs/i18n/translations'
+            });
+
+            expect(result.success).toBe(false);
+            expect(result.error).toContain('Failed to read translations.properties');
+        });
+
+        it('should fail if no TypeScript files found', async () => {
+            (fastGlobSync as jest.Mock).mockReturnValue([]);
+            vol.fromJSON({
+                '/test-workspace/libs/i18n/translations/translations.properties': `
 #XBUT: Save button
 coreButton.save=Save
                 `.trim()
             });
 
             const result = await addKey({
-                key: 'coreButton.cancel',
-                value: 'Cancel',
-                propertiesPath: 'libs/i18n/translations'
-            });
-
-            expect(result.success).toBe(true);
-            expect(result.filesModified).toHaveLength(1);
-            expect(result.filesModified[0]).toBe('libs/i18n/translations/translations_en.properties');
-
-            const content = vol.readFileSync(
-                '/test-workspace/libs/i18n/translations/translations_en.properties',
-                'utf-8'
-            ) as string;
-            expect(content).toContain('coreButton.cancel=Cancel');
-            expect(content).toContain('#XBUT: Cancel');
-        });
-
-        it('should add key to multiple .properties files', async () => {
-            (fastGlobSync as jest.Mock).mockReturnValue([
-                'libs/i18n/translations/translations_en.properties',
-                'libs/i18n/translations/translations_de.properties',
-                'libs/i18n/translations/translations_fr.properties'
-            ]);
-
-            vol.fromJSON({
-                '/test-workspace/libs/i18n/translations/translations_en.properties': `
-#XBUT: Save
-coreButton.save=Save
-                `.trim(),
-                '/test-workspace/libs/i18n/translations/translations_de.properties': `
-#XBUT: Save
-coreButton.save=Save
-                `.trim(),
-                '/test-workspace/libs/i18n/translations/translations_fr.properties': `
-#XBUT: Save
-coreButton.save=Save
-                `.trim()
-            });
-
-            const result = await addKey({
-                key: 'coreButton.cancel',
-                value: 'Cancel',
-                propertiesPath: 'libs/i18n/translations'
-            });
-
-            expect(result.success).toBe(true);
-            expect(result.filesModified).toHaveLength(3);
-
-            // Check all files were updated
-            for (const file of result.filesModified) {
-                const content = vol.readFileSync(`/test-workspace/${file}`, 'utf-8') as string;
-                expect(content).toContain('coreButton.cancel=Cancel');
-            }
-        });
-
-        it('should use custom comment when provided', async () => {
-            (fastGlobSync as jest.Mock).mockReturnValue(['libs/i18n/translations/translations_en.properties']);
-            vol.fromJSON({
-                '/test-workspace/libs/i18n/translations/translations_en.properties': `
-#XBUT: Save
-coreButton.save=Save
-                `.trim()
-            });
-
-            const result = await addKey({
-                key: 'coreButton.submit',
-                value: 'Submit',
-                comment: 'Submit button for form submission',
-                propertiesPath: 'libs/i18n/translations'
-            });
-
-            expect(result.success).toBe(true);
-
-            const content = vol.readFileSync(
-                '/test-workspace/libs/i18n/translations/translations_en.properties',
-                'utf-8'
-            ) as string;
-            expect(content).toContain('#XBUT: Submit button for form submission');
-            expect(content).toContain('coreButton.submit=Submit');
-        });
-
-        it('should use custom comment type when provided', async () => {
-            (fastGlobSync as jest.Mock).mockReturnValue(['libs/i18n/translations/translations_en.properties']);
-            vol.fromJSON({
-                '/test-workspace/libs/i18n/translations/translations_en.properties': `
-#XBUT: Save
-coreButton.save=Save
-                `.trim()
-            });
-
-            const result = await addKey({
-                key: 'coreComponent.text',
-                value: 'Text',
-                commentType: 'XTIT',
-                propertiesPath: 'libs/i18n/translations'
-            });
-
-            expect(result.success).toBe(true);
-
-            const content = vol.readFileSync(
-                '/test-workspace/libs/i18n/translations/translations_en.properties',
-                'utf-8'
-            ) as string;
-            expect(content).toContain('#XTIT:');
-            expect(content).toContain('coreComponent.text=Text');
-        });
-
-        it('should handle keys with parameters', async () => {
-            (fastGlobSync as jest.Mock).mockReturnValue(['libs/i18n/translations/translations_en.properties']);
-            vol.fromJSON({
-                '/test-workspace/libs/i18n/translations/translations_en.properties': `
-#XBUT: Save
-coreButton.save=Save
-                `.trim()
-            });
-
-            const result = await addKey({
-                key: 'corePagination.pageLabel',
-                value: 'Page {pageNumber}',
-                propertiesPath: 'libs/i18n/translations'
-            });
-
-            expect(result.success).toBe(true);
-
-            const content = vol.readFileSync(
-                '/test-workspace/libs/i18n/translations/translations_en.properties',
-                'utf-8'
-            ) as string;
-            expect(content).toContain('corePagination.pageLabel=Page {pageNumber}');
-        });
-    });
-
-    describe('error handling', () => {
-        it('should handle missing .properties files', async () => {
-            (fastGlobSync as jest.Mock).mockReturnValue([]);
-
-            const result = await addKey({
                 key: 'coreButton.test',
                 value: 'Test',
                 propertiesPath: 'libs/i18n/translations'
             });
 
             expect(result.success).toBe(false);
-            expect(result.error).toContain('No .properties files found');
-        });
-
-        it('should handle transform-translations failure', async () => {
-            (fastGlobSync as jest.Mock).mockReturnValue(['libs/i18n/translations/translations_en.properties']);
-            (transformTranslationsExecutor as jest.Mock).mockResolvedValue({ success: false });
-            vol.fromJSON({
-                '/test-workspace/libs/i18n/translations/translations_en.properties': `
-#XBUT: Save
-coreButton.save=Save
-                `.trim()
-            });
-
-            const result = await addKey({
-                key: 'coreButton.test',
-                value: 'Test',
-                propertiesPath: 'libs/i18n/translations'
-            });
-
-            expect(result.success).toBe(false);
-            expect(result.error).toContain('Failed to generate TypeScript files');
-        });
-    });
-
-    describe('integration with transform-translations', () => {
-        it('should call transform-translations after adding keys', async () => {
-            (fastGlobSync as jest.Mock).mockReturnValue(['libs/i18n/translations/translations_en.properties']);
-            vol.fromJSON({
-                '/test-workspace/libs/i18n/translations/translations_en.properties': `
-#XBUT: Save
-coreButton.save=Save
-                `.trim()
-            });
-
-            await addKey({
-                key: 'coreButton.test',
-                value: 'Test',
-                propertiesPath: 'libs/i18n/translations'
-            });
-
-            expect(transformTranslationsExecutor).toHaveBeenCalledWith({
-                properties: ['libs/i18n/translations/*.properties']
-            });
+            expect(result.error).toContain('No TypeScript translation files found');
         });
     });
 });

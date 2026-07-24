@@ -40,10 +40,9 @@ nx run i18n:i18n-manage --command=add --key=coreButton.yourNewKey --value="Your 
 
 **What happens:**
 
-- Adds the key to all 37 language files (`.properties` files)
+- Adds the key to translations.properties
 - Sets the English text for `en` locale
-- Other locales get the same English text as a placeholder
-- Auto-regenerates TypeScript files
+- Auto-regenerates TypeScript files for every language and adds the English text for each
 
 ---
 
@@ -83,8 +82,9 @@ nx run i18n:i18n-manage --command=rename --key=coreButton.oldName --newKey=coreB
 
 **What happens:**
 
-- Renames the key in all 37 language files
-- Preserves all existing translations and comments
+- Renames the key in `translations.properties` (base English file)
+- Regenerates all TypeScript files (`translations.ts` and `translations_*.ts`)
+- Language-specific `.properties` files are **not modified** (will be updated by external translation team)
 
 **Next step:** Update your component code to use the new key name.
 
@@ -100,8 +100,9 @@ nx run i18n:i18n-manage --command=remove --key=coreButton.obsoleteKey
 
 **What happens:**
 
-- Removes the key from all 37 language files
-- Auto-regenerates TypeScript files
+- Removes the key from `translations.properties` (base English file)
+- Regenerates all TypeScript files (`translations.ts` and `translations_*.ts`)
+- Language-specific `.properties` files are **not modified** (will be cleaned up by external translation team)
 
 **Before removing:** Search your codebase to ensure the key is not used:
 
@@ -197,11 +198,19 @@ nx run i18n:i18n-manage --command=add --key=coreButton.submit --value="Submit" -
 
 - `libs/i18n/src/lib/models/fd-language.ts` — The interface definition
 
+### ⚠️ Managed Externally
+
+- `libs/i18n/src/lib/translations/translations_*.properties` — Language-specific translations (managed by external translation team)
+
+### 🤖 Modified by CLI
+
+- `libs/i18n/src/lib/translations/translations.properties` — Base English translations (modified by `add`, `update`, `rename`, `remove` commands)
+
 ### ❌ Never Edit (Auto-Generated)
 
 - `libs/i18n/src/lib/models/fd-language-key-identifier.ts`
+- `libs/i18n/src/lib/translations/translations.ts`
 - `libs/i18n/src/lib/translations/translations_*.ts`
-- All `.properties` files (use the CLI instead)
 
 ---
 
@@ -261,4 +270,9 @@ nx run i18n:i18n-manage --command=validate
 
 # Sort translation keys alphabetically
 nx run i18n:i18n-manage --command=sort
+
+# Sync/regenerate all TypeScript files from .properties
+nx run i18n:i18n-manage --command=sync
 ```
+
+**Note:** The `sync` command regenerates all TypeScript translation files from `.properties` files and is automatically run by CI when `.properties` files are modified. You typically don't need to run it manually unless you're debugging the build process.

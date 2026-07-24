@@ -4,94 +4,42 @@ import { readFileSync, writeFileSync } from 'fs';
 import { format, resolveConfig } from 'prettier';
 import { mergeTranslations, parseProperties } from '../../shared/properties-utils';
 import { extractKeysFromFdLanguageInterface, updateFdLanguageKeyIdentifier } from '../../shared/update-typings';
-import { keyExists, removeKeyFromProperties } from '../utils/properties-parser';
 
-export interface RemoveKeyOptions {
-    key: string;
+export interface SyncOptions {
     propertiesPath: string;
 }
 
-export interface RemoveKeyResult {
+export interface SyncResult {
     success: boolean;
     filesModified: string[];
     error?: string;
 }
 
 /**
- * Validate key format (must be component.keyName)
+ * Sync/regenerate all TypeScript translation files from .properties files
+ * Fills in missing keys from base translations.properties
  */
-function validateKeyFormat(key: string): { valid: boolean; error?: string } {
-    if (!key || key.trim() === '') {
-        return { valid: false, error: 'Key cannot be empty' };
-    }
+export async function sync(options: SyncOptions): Promise<SyncResult> {
+    const { propertiesPath } = options;
 
-    const parts = key.split('.');
-    if (parts.length < 2) {
-        return {
-            valid: false,
-            error: `Invalid key format: "${key}". Expected format: "component.keyName" (e.g., "coreButton.save")`
-        };
-    }
-
-    if (!/^[a-zA-Z0-9_.]+$/.test(key)) {
-        return {
-            valid: false,
-            error: `Invalid characters in key: "${key}". Only alphanumeric, underscore, and dots are allowed`
-        };
-    }
-
-    return { valid: true };
-}
-
-/**
- * Remove a translation key from all TypeScript translation files
- */
-export async function removeKey(options: RemoveKeyOptions): Promise<RemoveKeyResult> {
-    const { key, propertiesPath } = options;
-
-    // Step 1: Validate key format
-    const validation = validateKeyFormat(key);
-    if (!validation.valid) {
-        return {
-            success: false,
-            filesModified: [],
-            error: validation.error
-        };
-    }
-
-    // Step 2: Read the base translations.properties file to check if key exists
     const basePropertiesFile = `${workspaceRoot}/${propertiesPath}/translations.properties`;
+
+    // Step 1: Parse the base properties file to get all keys
+    let basePropertiesContent: string;
+    let basePropertiesMap: Record<string, string>;
+
     try {
-        const baseContent = readFileSync(basePropertiesFile, 'utf-8');
-        if (!keyExists(baseContent, key)) {
-            return {
-                success: false,
-                filesModified: [],
-                error: `Key "${key}" does not exist in translations.properties. Cannot remove a non-existent key.`
-            };
-        }
+        basePropertiesContent = readFileSync(basePropertiesFile, 'utf-8');
+        basePropertiesMap = parseProperties(basePropertiesContent);
     } catch (error) {
         return {
             success: false,
             filesModified: [],
-            error: `Failed to read translations.properties: ${error instanceof Error ? error.message : String(error)}`
+            error: `Failed to read base translations.properties: ${error instanceof Error ? error.message : String(error)}`
         };
     }
 
-    // Step 3: Remove the key from base translations.properties file
-    try {
-        const baseContent = readFileSync(basePropertiesFile, 'utf-8');
-        const updatedContent = removeKeyFromProperties(baseContent, key);
-        writeFileSync(basePropertiesFile, updatedContent, 'utf-8');
-    } catch (error) {
-        return {
-            success: false,
-            filesModified: [],
-            error: `Failed to remove key from translations.properties: ${error instanceof Error ? error.message : String(error)}`
-        };
-    }
-
-    // Step 4: Find all TypeScript translation files (excluding .spec.ts)
+    // Step 2: Find all TypeScript translation files (excluding .spec.ts)
     const tsPattern = `${propertiesPath}/translations*.ts`;
     const tsFiles = fastGlobSync(tsPattern, { cwd: workspaceRoot, ignore: ['**/*.spec.ts'] });
 
@@ -103,12 +51,8 @@ export async function removeKey(options: RemoveKeyOptions): Promise<RemoveKeyRes
         };
     }
 
-    // Step 5: Regenerate all TypeScript files from .properties files
-    const filesModified: string[] = [`${propertiesPath}/translations.properties`];
-
-    // Parse the updated base properties file to get all keys (without the removed one)
-    const basePropertiesContent = readFileSync(basePropertiesFile, 'utf-8');
-    const basePropertiesMap = parseProperties(basePropertiesContent);
+    // Step 3: Regenerate all TypeScript files from .properties files
+    const filesModified: string[] = [];
 
     for (const tsFile of tsFiles) {
         const filePath = `${workspaceRoot}/${tsFile}`;
@@ -139,6 +83,20 @@ export default ${JSON.stringify(translationObj, null, 4)};
             // Write updated content
             writeFileSync(filePath, formattedContent, 'utf-8');
             filesModified.push(tsFile);
+
+            // Generate .spec.ts file
+            const specFilePath = filePath.replace('.ts', '.spec.ts');
+            const specFileName = fileName.replace('.properties', '');
+            const specContent = `
+import translations from './${specFileName}';
+import { translationTester } from "../utils/translation-tester";
+import { FdLanguage } from "../models";
+
+describe("${tsFile.replace('.ts', '.spec.ts')}", () => translationTester(translations as unknown as FdLanguage));
+`;
+            const formattedSpecContent = await format(specContent, { ...prettierConfig, parser: 'typescript' });
+            writeFileSync(specFilePath, formattedSpecContent, 'utf-8');
+            filesModified.push(tsFile.replace('.ts', '.spec.ts'));
         } catch (error) {
             return {
                 success: false,
@@ -148,10 +106,11 @@ export default ${JSON.stringify(translationObj, null, 4)};
         }
     }
 
-    // Step 6: Rebuild fd-language-key-identifier.ts from fd-language.ts
+    // Step 4: Rebuild fd-language-key-identifier.ts from fd-language.ts
     try {
         const languageKeys = extractKeysFromFdLanguageInterface();
         updateFdLanguageKeyIdentifier(languageKeys);
+        filesModified.push('libs/i18n/src/lib/models/fd-language-key-identifier.ts');
     } catch (error) {
         console.error('⚠️  Warning: Failed to rebuild fd-language-key-identifier.ts:', error);
     }
