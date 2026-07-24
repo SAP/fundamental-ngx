@@ -2,11 +2,20 @@ import { workspaceRoot } from '@nx/devkit';
 import { sync as fastGlobSync } from 'fast-glob';
 import { readFileSync } from 'fs';
 import { extractKeysFromFdLanguageInterface, updateFdLanguageKeyIdentifier } from '../../shared/update-typings';
+import { validatePropertiesFiles } from '../utils/properties-validator';
 
 export interface ValidationError {
     file: string;
     line?: number;
-    type: 'missing-keys' | 'extra-keys' | 'missing-comment' | 'invalid-comment' | 'icu-syntax' | 'interface-mismatch';
+    type:
+        | 'missing-keys'
+        | 'extra-keys'
+        | 'missing-comment'
+        | 'invalid-comment'
+        | 'icu-syntax'
+        | 'interface-mismatch'
+        | 'properties-security'
+        | 'properties-syntax';
     message: string;
     keys?: string[];
 }
@@ -106,18 +115,58 @@ function validateICUSyntax(filePath: string, entries: Map<string, string>): Vali
  * Validate all TypeScript translation files
  */
 export async function validate(propertiesPath: string): Promise<ValidateResult> {
+    const allErrors: ValidationError[] = [];
+
+    // Step 1: Validate .properties files for security and syntax (runs first as a security gate)
+    console.log('🔒 Validating .properties files for security...');
+    const propertiesPattern = `${propertiesPath}/*.properties`;
+    const propertiesFiles = fastGlobSync(propertiesPattern, { cwd: workspaceRoot }).map(
+        (file) => `${workspaceRoot}/${file}`
+    );
+
+    if (propertiesFiles.length > 0) {
+        const propertiesValidation = validatePropertiesFiles(propertiesFiles);
+
+        // Convert properties validation errors to our format
+        for (const error of propertiesValidation.errors) {
+            allErrors.push({
+                file: error.file.replace(`${workspaceRoot}/`, ''),
+                line: error.line,
+                type: error.type === 'suspicious-content' ? 'properties-security' : 'properties-syntax',
+                message: error.message
+            });
+        }
+
+        // Log warnings but don't fail validation
+        for (const warning of propertiesValidation.warnings) {
+            console.warn(`⚠️  ${warning.file}:${warning.line} - ${warning.message}`);
+        }
+
+        if (!propertiesValidation.valid) {
+            const summary = `❌ Found ${allErrors.length} security/syntax error(s) in .properties files`;
+            return {
+                success: false,
+                errors: allErrors,
+                summary
+            };
+        }
+        console.log('✅ Properties files security validation passed');
+    } else {
+        console.log('ℹ️  No .properties files found, skipping security validation');
+    }
+
+    // Step 2: Validate TypeScript translation files
     const tsPattern = `${propertiesPath}/translations*.ts`;
     const tsFiles = fastGlobSync(tsPattern, { cwd: workspaceRoot, ignore: ['**/*.spec.ts'] });
 
     if (tsFiles.length === 0) {
         return {
             success: false,
-            errors: [],
+            errors: allErrors,
             summary: `No TypeScript translation files found at: ${tsPattern}`
         };
     }
 
-    const allErrors: ValidationError[] = [];
     const fileKeysMap = new Map<string, Set<string>>();
 
     // Validate each file

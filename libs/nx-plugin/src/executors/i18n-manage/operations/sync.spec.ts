@@ -333,6 +333,23 @@ coreButton.label=Save & Close`,
     });
 
     describe('error handling', () => {
+        it('should return error when translations.properties does not exist', async () => {
+            vol.fromJSON({
+                '/workspace/libs/i18n/translations/translations_en.ts': `export default {};`
+                // No translations.properties file
+            });
+
+            const result = await sync({
+                propertiesPath: 'libs/i18n/translations'
+            });
+
+            expect(result.success).toBe(false);
+            expect(result.error).toBe(
+                'Base translations.properties not found at: /workspace/libs/i18n/translations/translations.properties'
+            );
+            expect(result.filesModified).toEqual([]);
+        });
+
         it('should handle missing base translations.properties file', async () => {
             vol.fromJSON({
                 '/workspace/libs/i18n/translations/translations_en.ts': `export default {};`
@@ -343,7 +360,7 @@ coreButton.label=Save & Close`,
             });
 
             expect(result.success).toBe(false);
-            expect(result.error).toContain('Failed to read base translations.properties');
+            expect(result.error).toContain('translations.properties not found');
         });
 
         it('should handle no TypeScript files found', async () => {

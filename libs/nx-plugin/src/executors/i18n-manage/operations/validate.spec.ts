@@ -17,6 +17,15 @@ jest.mock('../../shared/update-typings', () => ({
 import { sync as fastGlobSync } from 'fast-glob';
 import { extractKeysFromFdLanguageInterface } from '../../shared/update-typings';
 
+/**
+ * Helper to set up glob mocks for properties and TS files
+ */
+function mockGlobForValidation(propertiesFiles: string[], tsFiles: string[]) {
+    (fastGlobSync as jest.Mock)
+        .mockReturnValueOnce(propertiesFiles) // First call: *.properties
+        .mockReturnValueOnce(tsFiles); // Second call: translations*.ts
+}
+
 describe('Validate Operation', () => {
     beforeEach(() => {
         vol.reset();
@@ -24,10 +33,10 @@ describe('Validate Operation', () => {
     });
 
     it('should pass validation for valid files', async () => {
-        (fastGlobSync as jest.Mock).mockReturnValue([
-            'libs/i18n/translations/translations.ts',
-            'libs/i18n/translations/translations_de.ts'
-        ]);
+        mockGlobForValidation(
+            ['libs/i18n/translations/translations.properties'],
+            ['libs/i18n/translations/translations.ts', 'libs/i18n/translations/translations_de.ts']
+        );
         (extractKeysFromFdLanguageInterface as jest.Mock).mockReturnValue(['coreButton.save', 'coreInput.name']);
         vol.fromJSON({
             '/test-workspace/libs/i18n/translations/translations.properties': `
@@ -77,7 +86,10 @@ export interface FdLanguage {
     });
 
     it('should detect missing comment headers', async () => {
-        (fastGlobSync as jest.Mock).mockReturnValue(['libs/i18n/translations/translations.ts']);
+        mockGlobForValidation(
+            ['libs/i18n/translations/translations.properties'],
+            ['libs/i18n/translations/translations.ts']
+        );
         (extractKeysFromFdLanguageInterface as jest.Mock).mockReturnValue(['coreButton.save', 'coreButton.cancel']);
         vol.fromJSON({
             '/test-workspace/libs/i18n/translations/translations.properties': `
@@ -111,7 +123,10 @@ export interface FdLanguage {
     });
 
     it('should detect invalid comment format', async () => {
-        (fastGlobSync as jest.Mock).mockReturnValue(['libs/i18n/translations/translations.ts']);
+        mockGlobForValidation(
+            ['libs/i18n/translations/translations.properties'],
+            ['libs/i18n/translations/translations.ts']
+        );
         (extractKeysFromFdLanguageInterface as jest.Mock).mockReturnValue(['coreButton.save']);
         vol.fromJSON({
             '/test-workspace/libs/i18n/translations/translations.properties': `
@@ -141,7 +156,10 @@ export interface FdLanguage {
     });
 
     it('should detect invalid comment type', async () => {
-        (fastGlobSync as jest.Mock).mockReturnValue(['libs/i18n/translations/translations.ts']);
+        mockGlobForValidation(
+            ['libs/i18n/translations/translations.properties'],
+            ['libs/i18n/translations/translations.ts']
+        );
         (extractKeysFromFdLanguageInterface as jest.Mock).mockReturnValue(['coreButton.save']);
         vol.fromJSON({
             '/test-workspace/libs/i18n/translations/translations.properties': `
@@ -171,10 +189,10 @@ export interface FdLanguage {
     });
 
     it('should detect missing keys across files', async () => {
-        (fastGlobSync as jest.Mock).mockReturnValue([
-            'libs/i18n/translations/translations.ts',
-            'libs/i18n/translations/translations_de.ts'
-        ]);
+        mockGlobForValidation(
+            ['libs/i18n/translations/translations.properties'],
+            ['libs/i18n/translations/translations.ts', 'libs/i18n/translations/translations_de.ts']
+        );
         (extractKeysFromFdLanguageInterface as jest.Mock).mockReturnValue(['coreButton.save', 'coreButton.cancel']);
         vol.fromJSON({
             '/test-workspace/libs/i18n/translations/translations.properties': `
@@ -218,10 +236,10 @@ export interface FdLanguage {
     });
 
     it('should detect extra keys in files', async () => {
-        (fastGlobSync as jest.Mock).mockReturnValue([
-            'libs/i18n/translations/translations.ts',
-            'libs/i18n/translations/translations_de.ts'
-        ]);
+        mockGlobForValidation(
+            ['libs/i18n/translations/translations.properties'],
+            ['libs/i18n/translations/translations.ts', 'libs/i18n/translations/translations_de.ts']
+        );
         (extractKeysFromFdLanguageInterface as jest.Mock).mockReturnValue(['coreButton.save']);
         vol.fromJSON({
             '/test-workspace/libs/i18n/translations/translations.properties': `
@@ -261,7 +279,10 @@ export interface FdLanguage {
     });
 
     it('should detect unbalanced curly braces in ICU syntax', async () => {
-        (fastGlobSync as jest.Mock).mockReturnValue(['libs/i18n/translations/translations.ts']);
+        mockGlobForValidation(
+            ['libs/i18n/translations/translations.properties'],
+            ['libs/i18n/translations/translations.ts']
+        );
         (extractKeysFromFdLanguageInterface as jest.Mock).mockReturnValue(['coreMessage.greeting']);
         vol.fromJSON({
             '/test-workspace/libs/i18n/translations/translations.properties': `
@@ -294,7 +315,7 @@ export interface FdLanguage {
     });
 
     it('should return error if no TypeScript files found', async () => {
-        (fastGlobSync as jest.Mock).mockReturnValue([]);
+        mockGlobForValidation(['libs/i18n/translations/translations.properties'], []);
         (extractKeysFromFdLanguageInterface as jest.Mock).mockReturnValue([]);
 
         const result = await validate('libs/i18n/translations');
@@ -304,7 +325,10 @@ export interface FdLanguage {
     });
 
     it('should detect multiple validation errors', async () => {
-        (fastGlobSync as jest.Mock).mockReturnValue(['libs/i18n/translations/translations.ts']);
+        mockGlobForValidation(
+            ['libs/i18n/translations/translations.properties'],
+            ['libs/i18n/translations/translations.ts']
+        );
         (extractKeysFromFdLanguageInterface as jest.Mock).mockReturnValue(['coreButton.save', 'coreButton.cancel']);
         vol.fromJSON({
             '/test-workspace/libs/i18n/translations/translations.properties': `
@@ -339,7 +363,10 @@ export interface FdLanguage {
     });
 
     it('should validate successfully with proper setup', async () => {
-        (fastGlobSync as jest.Mock).mockReturnValue(['libs/i18n/translations/translations.ts']);
+        mockGlobForValidation(
+            ['libs/i18n/translations/translations.properties'],
+            ['libs/i18n/translations/translations.ts']
+        );
         (extractKeysFromFdLanguageInterface as jest.Mock).mockReturnValue(['coreButton.save', 'coreButton.cancel']);
         vol.fromJSON({
             '/test-workspace/libs/i18n/translations/translations.properties': `

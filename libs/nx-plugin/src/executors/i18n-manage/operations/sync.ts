@@ -1,6 +1,6 @@
 import { workspaceRoot } from '@nx/devkit';
 import { sync as fastGlobSync } from 'fast-glob';
-import { readFileSync, writeFileSync } from 'fs';
+import { existsSync, readFileSync, writeFileSync } from 'fs';
 import { format, resolveConfig } from 'prettier';
 import { mergeTranslations, parseProperties } from '../../shared/properties-utils';
 import { extractKeysFromFdLanguageInterface, updateFdLanguageKeyIdentifier } from '../../shared/update-typings';
@@ -24,7 +24,16 @@ export async function sync(options: SyncOptions): Promise<SyncResult> {
 
     const basePropertiesFile = `${workspaceRoot}/${propertiesPath}/translations.properties`;
 
-    // Step 1: Parse the base properties file to get all keys
+    // Step 1: Validate that translations.properties exists
+    if (!existsSync(basePropertiesFile)) {
+        return {
+            success: false,
+            filesModified: [],
+            error: `Base translations.properties not found at: ${basePropertiesFile}`
+        };
+    }
+
+    // Step 2: Parse the base properties file to get all keys
     let basePropertiesContent: string;
     let basePropertiesMap: Record<string, string>;
 
@@ -39,7 +48,7 @@ export async function sync(options: SyncOptions): Promise<SyncResult> {
         };
     }
 
-    // Step 2: Find all TypeScript translation files (excluding .spec.ts)
+    // Step 3: Find all TypeScript translation files (excluding .spec.ts)
     const tsPattern = `${propertiesPath}/translations*.ts`;
     const tsFiles = fastGlobSync(tsPattern, { cwd: workspaceRoot, ignore: ['**/*.spec.ts'] });
 
@@ -51,7 +60,7 @@ export async function sync(options: SyncOptions): Promise<SyncResult> {
         };
     }
 
-    // Step 3: Regenerate all TypeScript files from .properties files
+    // Step 4: Regenerate all TypeScript files from .properties files
     const filesModified: string[] = [];
 
     for (const tsFile of tsFiles) {
@@ -106,7 +115,7 @@ describe("${tsFile.replace('.ts', '.spec.ts')}", () => translationTester(transla
         }
     }
 
-    // Step 4: Rebuild fd-language-key-identifier.ts from fd-language.ts
+    // Step 5: Rebuild fd-language-key-identifier.ts from fd-language.ts
     try {
         const languageKeys = extractKeysFromFdLanguageInterface();
         updateFdLanguageKeyIdentifier(languageKeys);
