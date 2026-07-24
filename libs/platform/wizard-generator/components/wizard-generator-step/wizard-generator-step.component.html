@@ -9,7 +9,7 @@
             [noAdditionalContent]="true"
             [formName]="form.id"
             [formItems]="$any(form.formItems)"
-            [hint]="$safeNavigationMigration(form.guiOptions?.hint)!"
+            [hint]="form.guiOptions?.hint!"
             [unifiedLayout]="unifiedLayout"
             (formCreated)="onFormCreated($event, form.id)"
             (formSubmittedStatus)="onFormSubmitted($event, form.id)"

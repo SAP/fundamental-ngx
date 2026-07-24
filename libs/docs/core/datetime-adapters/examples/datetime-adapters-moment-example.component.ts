@@ -16,5 +16,5 @@ import moment, { Moment } from 'moment';
     imports: [DatePickerComponent, FormsModule]
 })
 export class DatetimeAdaptersMomentExampleComponent {
-    date: Moment = moment();
+    date: Moment | null = moment();
 }

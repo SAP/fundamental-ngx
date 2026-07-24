@@ -10,7 +10,7 @@
         ></button>
     }
 </ng-template>
-@if ($safeNavigationMigration(settings?.title) | fdkAsyncOrSync; as settingsTitle) {
+@if (settings?.title | fdkAsyncOrSync; as settingsTitle) {
     <div
         fd-title
         [wrap]="!!settings?.wrapSectionTitle"

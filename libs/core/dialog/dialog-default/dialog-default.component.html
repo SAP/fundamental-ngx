@@ -14,8 +14,8 @@
                 #fullScreenTogglerButton
                 [title]="
                     (fullScreenTogglerButton._fullscreen$()
-                        ? _defaultDialogContent?.fullScreenMinifyButtonText
-                        : _defaultDialogContent?.fullScreenExpandButtonText) || ''
+                        ? _defaultDialogContent.fullScreenMinifyButtonText
+                        : _defaultDialogContent.fullScreenExpandButtonText) || ''
                 "
                 (click)="_fullScreenButtonClicked()"
             ></button>
@@ -23,8 +23,8 @@
         @if (_defaultDialogContent?.closeButtonCallback) {
             <button
                 fd-dialog-close-button
-                [title]="_defaultDialogContent?.closeButtonTitle || ''"
-                [ariaLabel]="_defaultDialogContent?.closeButtonAriaLabel || ''"
+                [title]="_defaultDialogContent.closeButtonTitle || ''"
+                [ariaLabel]="_defaultDialogContent.closeButtonAriaLabel || ''"
                 (click)="_closeButtonClicked()"
             ></button>
         }
@@ -35,8 +35,8 @@
         }
     </fd-dialog-header>
     @if (_defaultDialogContent?.content) {
-        <fd-dialog-body [id]="_defaultDialogContent?.contentId || dialogContentId">
-            <ng-template [ngTemplateOutlet]="$safeNavigationMigration(_defaultDialogContent?.content)!"></ng-template>
+        <fd-dialog-body [id]="_defaultDialogContent.contentId || dialogContentId">
+            <ng-template [ngTemplateOutlet]="_defaultDialogContent.content!"></ng-template>
         </fd-dialog-body>
     }
     @if (_showFooter()) {
@@ -45,21 +45,21 @@
                 <fd-button-bar
                     fdType="emphasized"
                     fdkInitialFocus
-                    [label]="_defaultDialogContent?.approveButton || ''"
+                    [label]="_defaultDialogContent.approveButton || ''"
                     [fdCozy]="_defaultDialogConfiguration.mobile"
                     (click)="_approveButtonClicked()"
-                    [ariaLabel]="$safeNavigationMigration(_defaultDialogContent?.approveButtonAriaLabel)"
-                    [id]="_defaultDialogContent?.approveButtonId || ''"
+                    [ariaLabel]="_defaultDialogContent.approveButtonAriaLabel"
+                    [id]="_defaultDialogContent.approveButtonId || ''"
                 >
                 </fd-button-bar>
             }
             @if (_defaultDialogContent?.cancelButton) {
                 <fd-button-bar
-                    [label]="_defaultDialogContent?.cancelButton || ''"
+                    [label]="_defaultDialogContent.cancelButton || ''"
                     [fdCozy]="_defaultDialogConfiguration.mobile"
                     (click)="_cancelButtonClicked()"
-                    [ariaLabel]="$safeNavigationMigration(_defaultDialogContent?.closeButtonAriaLabel)"
-                    [id]="_defaultDialogContent?.cancelButtonId || ''"
+                    [ariaLabel]="_defaultDialogContent.closeButtonAriaLabel"
+                    [id]="_defaultDialogContent.cancelButtonId || ''"
                 >
                 </fd-button-bar>
             }
