@@ -10,15 +10,11 @@
         "noFallthroughCasesInSwitch": true,
         "module": "preserve",
         "moduleResolution": "bundler",
-        "lib": ["dom", "es2023"]
+        "lib": ["dom", "es2023"],
+        "rootDir": "../../../.."
     },
     "files": [],
     "include": [],
-    "references": [
-        {
-            "path": "./tsconfig.lib.json"
-        }
-    ],
     "extends": "../../../../tsconfig.base.json",
     "angularCompilerOptions": {
         "enableI18nLegacyMessageIdFormat": false,

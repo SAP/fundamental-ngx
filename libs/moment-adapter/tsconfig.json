@@ -1,5 +1,7 @@
 {
     "extends": "../../tsconfig.base.json",
+    "files": [],
+    "include": [],
     "references": [
         {
             "path": "./tsconfig.typedoc.json"
@@ -12,10 +14,15 @@
         },
         {
             "path": "./tsconfig.spec.json"
+        },
+        {
+            "path": "../cdk/tsconfig.json"
+        },
+        {
+            "path": "../core/tsconfig.json"
         }
     ],
     "compilerOptions": {
-        "outDir": "../../dist/out-tsc",
         "target": "es2023",
         "declaration": true,
         "declarationMap": true,
@@ -24,12 +31,5 @@
         "module": "preserve",
         "moduleResolution": "bundler",
         "rootDir": "../../"
-    },
-    "angularCompilerOptions": {
-        "enableIvy": true,
-        "skipTemplateCodegen": true,
-        "strictMetadataEmit": true,
-        "enableResourceInlining": true
-    },
-    "include": ["**/*.ts"]
+    }
 }

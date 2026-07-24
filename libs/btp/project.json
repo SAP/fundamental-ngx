@@ -14,7 +14,8 @@
         "compile-typedoc": {
             "executor": "@fundamental-ngx/nx-plugin:compile-typedoc",
             "options": {
-                "outputPath": "libs/docs/typedoc/btp"
+                "outputPath": "libs/docs/typedoc/btp",
+                "tsConfig": "libs/btp/tsconfig.typedoc.json"
             },
             "outputs": ["{options.outputPath}"]
         },

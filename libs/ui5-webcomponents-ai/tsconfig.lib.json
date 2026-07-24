@@ -1,7 +1,7 @@
 {
     "extends": "./tsconfig.json",
     "compilerOptions": {
-        "outDir": "../../dist/out-tsc",
+        "outDir": "../../dist/out-tsc/ui5-webcomponents-ai",
         "target": "es2023",
         "declaration": true,
         "declarationMap": true,
@@ -27,8 +27,7 @@
             "@fundamental-ngx/ui5-webcomponents-base/*": [
                 "dist/libs/ui5-webcomponents-base/*"
             ]
-        },
-        "rootDir": "../../"
+        }
     },
     "angularCompilerOptions": {
         "skipTemplateCodegen": true,

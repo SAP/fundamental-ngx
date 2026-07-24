@@ -1,18 +1,15 @@
 {
     "extends": "./tsconfig.json",
     "compilerOptions": {
-        "outDir": "../../dist/out-tsc/i18n",
+        "outDir": "../../dist/out-tsc",
+        "target": "es2023",
         "declaration": true,
         "declarationMap": true,
-        "inlineSources": true,
         "types": [],
-        "target": "es2023",
+        "lib": ["dom", "es2023"],
         "useDefineForClassFields": false,
         "moduleResolution": "bundler"
     },
-    "exclude": ["src/test.ts", "**/*.spec.ts", "**/*.test.ts", "src/lib/utils/translation-tester.ts"],
-    "files": ["./src/index.ts"],
-    "include": ["**/*.ts"],
     "angularCompilerOptions": {
         "skipTemplateCodegen": true,
         // TODO(#14334): suppress Angular 22 optionalChainNotNullable and nullishCoalescingNotNullable diagnostics
@@ -24,5 +21,6 @@
         },
         "strictMetadataEmit": true,
         "enableResourceInlining": true
-    }
+    },
+    "files": ["./index.ts"]
 }

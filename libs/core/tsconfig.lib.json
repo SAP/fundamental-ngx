@@ -1,15 +1,14 @@
 {
     "extends": "./tsconfig.json",
     "compilerOptions": {
-        "outDir": "../../dist/out-tsc",
+        "outDir": "../../dist/out-tsc/core",
         "target": "es2023",
         "declaration": true,
         "declarationMap": true,
         "types": [],
         "lib": ["dom", "es2023"],
         "useDefineForClassFields": false,
-        "moduleResolution": "bundler",
-        "rootDir": "../../"
+        "moduleResolution": "bundler"
     },
     "angularCompilerOptions": {
         "skipTemplateCodegen": true,
