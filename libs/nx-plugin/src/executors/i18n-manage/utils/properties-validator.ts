@@ -135,6 +135,17 @@ export function validatePropertiesFile(filePath: string): PropertiesValidationRe
             });
         }
 
+        // Check for prototype pollution attempts in keys
+        if (/__proto__/i.test(key) || /constructor/i.test(key) || key.toLowerCase().includes('prototype')) {
+            errors.push({
+                file: filePath,
+                line: lineNum,
+                type: 'suspicious-content',
+                message: `Key contains suspicious pattern (prototype pollution): "${key}"`,
+                severity: 'error'
+            });
+        }
+
         // Validate value length (DoS prevention)
         if (value.length > MAX_VALUE_LENGTH) {
             errors.push({

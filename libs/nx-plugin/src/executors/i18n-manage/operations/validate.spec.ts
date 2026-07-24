@@ -317,6 +317,12 @@ export interface FdLanguage {
     it('should return error if no TypeScript files found', async () => {
         mockGlobForValidation(['libs/i18n/translations/translations.properties'], []);
         (extractKeysFromFdLanguageInterface as jest.Mock).mockReturnValue([]);
+        vol.fromJSON({
+            '/test-workspace/libs/i18n/translations/translations.properties': `
+#XBUT: Test
+test.key=Test value
+            `.trim()
+        });
 
         const result = await validate('libs/i18n/translations');
 
