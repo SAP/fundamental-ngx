@@ -113,13 +113,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: '資訊標籤'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
-    },
     coreLink: {
         emphasized: '強調',
         subtle: '輕微'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: '已選擇',
+        listItemNotSelectedAriaLabel: '未選擇'
     },
     coreMessageStrip: {
         announcementError: '錯誤訊息列',
@@ -363,7 +363,7 @@ export default {
         messagesTeamRemoved: '已移除 1 個小組',
         messagesUndoAction: '復原',
         nextButtonAriaLabel: '移至下一張投影片',
-        noDataFound: 'No Data Found',
+        noDataFound: '找不到資料',
         nodeActionAddApproversAfter: '新增核准人後於',
         nodeActionAddApproversBefore: '新增核准人先於',
         nodeActionAddApproversParallel: '新增平行核准人',
@@ -520,7 +520,7 @@ export default {
     platformTable: {
         cancelBtnLabel: '取消',
         clearFilters: '清除篩選器',
-        collapseAllAnnouncementLabel: 'Collapse All clicked',
+        collapseAllAnnouncementLabel: '已按一下全部摺疊',
         collapseRowButtonTitle: '摺疊列',
         confirmBtnLabel: '確定',
         defaultEmptyMessage: '找不到資料',
@@ -531,7 +531,7 @@ export default {
         editableCellNumberPlaceholder: '輸入值',
         editableCellStringPlaceholder: '輸入值',
         emptyCell: '空白',
-        expandAllAnnouncementLabel: 'Expand All clicked',
+        expandAllAnnouncementLabel: '已按一下全部展開',
         expandRowButtonTitle: '展開列',
         filterDialogBackToColumns: '返回',
         filterDialogCancelBtnLabel: '取消',

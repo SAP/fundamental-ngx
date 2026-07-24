@@ -1,16 +1,18 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, signal } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { PanelTitleDirective } from './panel-title.directive';
 
 @Component({
-    template: `<h5 #directiveElement fd-panel-title>Test Panel Title Text</h5>`,
+    template: `<h5 #directiveElement fd-panel-title [wrap]="wrap()">Test Panel Title Text</h5>`,
     standalone: true,
     imports: [PanelTitleDirective]
 })
 class TestComponent {
     @ViewChild('directiveElement')
     ref: ElementRef;
+
+    wrap = signal(true);
 }
 
 describe('PanelTitleDirective', () => {
@@ -34,6 +36,16 @@ describe('PanelTitleDirective', () => {
     });
 
     it('should assign class', () => {
-        expect(component.ref.nativeElement.className).toBe('fd-panel__title');
+        expect(component.ref.nativeElement.classList).toContain('fd-panel__title');
+    });
+
+    it('should apply fd-panel__title--wrap by default', () => {
+        expect(component.ref.nativeElement.classList).toContain('fd-panel__title--wrap');
+    });
+
+    it('should remove fd-panel__title--wrap when wrap is false', () => {
+        component.wrap.set(false);
+        fixture.detectChanges();
+        expect(component.ref.nativeElement.classList).not.toContain('fd-panel__title--wrap');
     });
 });

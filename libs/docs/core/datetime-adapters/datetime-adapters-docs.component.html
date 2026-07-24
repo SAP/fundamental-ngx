@@ -18,6 +18,8 @@
 <description>
     The Dayjs adapter lets you use <a href="https://day.js.org" target="_blank">Day.js</a> objects directly with
     date/time components. It supports locale switching, custom formats, UTC mode, and strict parsing. <br /><br />
+    When you provide <code>DayjsDatetimeAdapter</code>, bind your picker model to <code>Dayjs</code> values such as
+    <code>dayjs()</code>. Do not mix it with <code>FdDate</code> model values. <br /><br />
     For application-wide setup, add <code>provideDayjsDatetimeAdapter()</code> to your app or route providers. The
     example below shows the equivalent manual approach with explicit <code>DatetimeAdapter</code> and
     <code>DATE_TIME_FORMATS</code> providers &mdash; useful when you only need it in a specific component.
