@@ -110,6 +110,10 @@ describe('UserMenuComponent', () => {
         it('should reset list focus when menu closes', () => {
             const listItems = userMenu['_listItems']();
 
+            // Open the menu first
+            userMenu.open();
+            fixture.detectChanges();
+
             // Simulate roving tabindex where second item was focused
             listItems[0]._tabIndex$.set(-1);
             listItems[1]._tabIndex$.set(0);
