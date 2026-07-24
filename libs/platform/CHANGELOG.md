@@ -1,3 +1,13 @@
+## 0.64.1-rc.3 (2026-07-24)
+
+### 🩹 Fixes
+
+- **platform:** table header cell popover aria improvements ([#14365](https://github.com/SAP/fundamental-ngx/pull/14365))
+
+### ❤️ Thank You
+
+- Mike O'Donnell @mikerodonnell89
+
 ## 0.64.1-rc.2 (2026-07-23)
 
 This was a version bump only for platform to align it with other projects, there were no code changes.
