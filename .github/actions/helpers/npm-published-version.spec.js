@@ -18,14 +18,15 @@ describe('npm-published-version', () => {
     });
 
     // Helper: make execFileSync respond per package name based on a { name: distTags } map.
-    // Any package not present in the map throws (simulating an unpublished package / error).
+    // Any package not in the map throws (simulating a 404 / network error).
     const mockRegistry = (distTagsByPackage) => {
         mockedExecFileSync.mockImplementation((cmd, args) => {
-            const name = args[1]; // ['view', <name>, 'dist-tags', '--json']
-            if (Object.prototype.hasOwnProperty.call(distTagsByPackage, name)) {
-                return JSON.stringify(distTagsByPackage[name]);
+            const url = args.find((a) => a.startsWith('https://'));
+            const match = Object.keys(distTagsByPackage).find((name) => url && url.includes(name.replace('/', '%2f')));
+            if (match) {
+                return JSON.stringify({ 'dist-tags': distTagsByPackage[match] });
             }
-            throw new Error(`E404 - not found: ${name}`);
+            throw new Error(`E404 - not found: ${url}`);
         });
     };
 
@@ -50,7 +51,6 @@ describe('npm-published-version', () => {
     });
 
     it('should take the max across packages when versions drift (partial publish)', () => {
-        // All packages at rc.3 except one that reached rc.4 — floor must be rc.4.
         const map = {};
         packageNames.forEach((name) => {
             map[name] = { prerelease: '0.64.1-rc.3' };
@@ -62,11 +62,9 @@ describe('npm-published-version', () => {
     });
 
     it('should ignore packages that error and use the ones that resolve', () => {
-        // Only one package published; the rest 404. Floor comes from the published one.
         mockRegistry({ '@fundamental-ngx/core': { prerelease: '0.64.1-rc.4' } });
 
         expect(npmPublishedVersion()).toBe('0.64.1-rc.4');
-        // 12 of 13 threw -> 12 warnings
         expect(mockedWarn).toHaveBeenCalledTimes(packageNames.length - 1);
     });
 
@@ -89,22 +87,21 @@ describe('npm-published-version', () => {
         expect(npmPublishedVersion()).toBeNull();
     });
 
-    it('should handle empty stdout from npm as a non-contributing package', () => {
-        mockedExecFileSync.mockReturnValue('');
+    it('should handle empty stdout from curl as a non-contributing package', () => {
+        mockedExecFileSync.mockReturnValue('{}');
 
         expect(npmPublishedVersion()).toBeNull();
     });
 
-    it('should invoke npm via argv array (no shell string) and pass a registry when given', () => {
+    it('should invoke curl with the registry URL containing the encoded package name', () => {
         mockRegistry({ '@fundamental-ngx/core': { prerelease: '0.64.1-rc.4' } });
 
-        npmPublishedVersion('https://registry.npmjs.org/');
+        npmPublishedVersion();
 
-        const call = mockedExecFileSync.mock.calls[0];
-        expect(call[0]).toBe('npm');
-        expect(Array.isArray(call[1])).toBe(true);
-        expect(call[1]).toEqual(
-            expect.arrayContaining(['view', 'dist-tags', '--json', '--registry', 'https://registry.npmjs.org/'])
+        const coreCall = mockedExecFileSync.mock.calls.find((c) => c[1].some((a) => a.includes('%2fcore')));
+        expect(coreCall[0]).toBe('curl');
+        expect(coreCall[1].find((a) => a.startsWith('https://'))).toBe(
+            'https://registry.npmjs.org/@fundamental-ngx%2fcore'
         );
     });
 });
