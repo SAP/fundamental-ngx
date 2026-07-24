@@ -1,21 +1,18 @@
 // Mock dependencies before requiring the module
 jest.mock('child_process');
-jest.mock('@actions/core', () => ({
-    info: jest.fn(),
-    warning: jest.fn()
-}));
 
 describe('npm-published-version', () => {
     let npmPublishedVersion;
     let mockedExecFileSync;
-    let mockedWarning;
+    let mockedWarn;
     let packageNames;
 
     beforeEach(() => {
         jest.clearAllMocks();
         jest.resetModules();
         mockedExecFileSync = require('child_process').execFileSync;
-        mockedWarning = require('@actions/core').warning;
+        mockedWarn = jest.spyOn(console, 'warn').mockImplementation(jest.fn());
+        jest.spyOn(console, 'log').mockImplementation(jest.fn());
         npmPublishedVersion = require('./npm-published-version');
         packageNames = npmPublishedVersion.RELEASE_PACKAGE_NAMES;
     });
@@ -70,7 +67,7 @@ describe('npm-published-version', () => {
 
         expect(npmPublishedVersion()).toBe('0.64.1-rc.4');
         // 12 of 13 threw -> 12 warnings
-        expect(mockedWarning).toHaveBeenCalledTimes(packageNames.length - 1);
+        expect(mockedWarn).toHaveBeenCalledTimes(packageNames.length - 1);
     });
 
     it('should return null when every package lookup fails (total npm failure)', () => {
@@ -79,7 +76,7 @@ describe('npm-published-version', () => {
         });
 
         expect(npmPublishedVersion()).toBeNull();
-        expect(mockedWarning).toHaveBeenCalledTimes(packageNames.length);
+        expect(mockedWarn).toHaveBeenCalledTimes(packageNames.length);
     });
 
     it('should return null when dist-tags contain no valid semver', () => {

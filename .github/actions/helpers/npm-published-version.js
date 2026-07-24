@@ -1,6 +1,5 @@
 const { execFileSync } = require('child_process');
 const semver = require('semver');
-const { info, warning } = require('@actions/core');
 
 /**
  * npm package names published by the release pipeline. Kept in sync with
@@ -64,7 +63,7 @@ function highestPublishedForPackage(packageName, registry) {
     } catch (e) {
         // Unpublished package, registry error, offline, timeout, malformed JSON.
         // Non-fatal: this package simply does not contribute to the floor.
-        warning(`Could not read npm dist-tags for ${packageName}: ${e.message}`);
+        console.warn(`Could not read npm dist-tags for ${packageName}: ${e.message}`);
         return null;
     }
 }
@@ -88,7 +87,7 @@ module.exports = (registry = null) => {
     );
 
     if (versions.length === 0) {
-        info('No npm-published versions could be resolved; skipping npm floor.');
+        console.log('No npm-published versions could be resolved; skipping npm floor.');
         return null;
     }
 
