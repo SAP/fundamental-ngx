@@ -23,7 +23,6 @@
         }
     ],
     "compilerOptions": {
-        "outDir": "../../dist/out-tsc",
         "target": "es2023",
         "declaration": true,
         "declarationMap": true,

@@ -9,7 +9,8 @@
         // ui5-webcomponents-base paths entries (and other cross-lib non-relative paths) point to
         // dist/libs/ output and sibling lib sources, relative to baseUrl — removing it breaks
         // ng-packagr partial compilation (TS2307) and esbuild path resolution across the monorepo.
-        // The correct fix is TypeScript project references; until then baseUrl is suppressed via
+        // The correct fix is workspace-linked packages or an ng-packagr upgrade that fixes
+        // secondary-entry-point path resolution; until then baseUrl is suppressed via
         // ignoreDeprecations. moduleResolution has been migrated to "bundler" (see #14335).
         "ignoreDeprecations": "6.0",
         "baseUrl": ".",
