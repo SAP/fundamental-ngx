@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, forwardRef, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, HostBinding, Input, ViewEncapsulation } from '@angular/core';
 import { ListItemComponent } from '@fundamental-ngx/core/list';
 import { BaseListItem } from '../base-list-item';
 
@@ -10,9 +10,19 @@ import { BaseListItem } from '../base-list-item';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [{ provide: BaseListItem, useExisting: forwardRef(() => FreeContentListItemComponent) }],
-    host: {
-        role: 'listitem'
-    },
     imports: [ListItemComponent, AsyncPipe]
 })
-export class FreeContentListItemComponent extends BaseListItem {}
+export class FreeContentListItemComponent extends BaseListItem {
+    /**
+     * The ARIA role of the fdp-free-content-list-item.
+     */
+    @Input()
+    @HostBinding('attr.role')
+    role: string | null | undefined;
+
+    /**
+     * The ARIA role of the fd-list-item.
+     */
+    @Input()
+    listItemRole: string | null | undefined;
+}
