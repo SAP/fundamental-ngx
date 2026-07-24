@@ -74,7 +74,8 @@
     <br />
     Since FdDatetimeAdapter implementation relies on native date api for parsing and formatting dates, it might not work
     correctly with some of the locales out of the box. We recommend switching to the DayjsDatetimeAdapter for more
-    flexibility.
+    flexibility. When using DayjsDatetimeAdapter, bind the picker value to <code>dayjs()</code>-based values instead of
+    <code>FdDate</code>.
     <br />
     Please check examples and documentation on:
     <b> <a routerLink="/core/dayjs-datetime-adapter" target="_blank"> DayJS date time adapter </a> </b>.
