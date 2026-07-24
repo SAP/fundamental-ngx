@@ -1,3 +1,13 @@
+## 0.64.1-rc.5 (2026-07-24)
+
+### 🩹 Fixes
+
+- attempt number 3 to fix ng update ([#14395](https://github.com/SAP/fundamental-ngx/pull/14395))
+
+### ❤️ Thank You
+
+- robertIsaac
+
 ## 0.64.1-rc.3 (2026-07-24)
 
 This was a version bump only for core to align it with other projects, there were no code changes.
