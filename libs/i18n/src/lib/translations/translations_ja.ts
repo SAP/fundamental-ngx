@@ -115,8 +115,8 @@ export default {
         srOnlyText: '情報ラベル'
     },
     coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
+        listItemSelectedAriaLabel: '選択されました。',
+        listItemNotSelectedAriaLabel: '選択されていません。'
     },
     coreLink: {
         emphasized: '強調',
@@ -366,7 +366,7 @@ export default {
         messagesTeamRemoved: '1つのチームが削除されました。',
         messagesUndoAction: '元に戻す',
         nextButtonAriaLabel: '次のスライドへ',
-        noDataFound: 'No Data Found',
+        noDataFound: 'データが見つかりません',
         nodeActionAddApproversAfter: 'この後に承認者を追加:',
         nodeActionAddApproversBefore: 'この前に承認者を追加:',
         nodeActionAddApproversParallel: '並列承認者を追加',
@@ -523,7 +523,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'キャンセル',
         clearFilters: 'フィルタをクリア',
-        collapseAllAnnouncementLabel: 'Collapse All clicked',
+        collapseAllAnnouncementLabel: '[すべて圧縮] がクリックされました。',
         collapseRowButtonTitle: '行を圧縮',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'データが見つかりません。',
@@ -534,7 +534,7 @@ export default {
         editableCellNumberPlaceholder: '値を入力',
         editableCellStringPlaceholder: '値を入力',
         emptyCell: '空白',
-        expandAllAnnouncementLabel: 'Expand All clicked',
+        expandAllAnnouncementLabel: '[すべて展開] がクリックされました。',
         expandRowButtonTitle: '行を展開',
         filterDialogBackToColumns: '戻る',
         filterDialogCancelBtnLabel: 'キャンセル',

@@ -114,8 +114,8 @@ export default {
         srOnlyText: 'Bilgi Etiketi'
     },
     coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
+        listItemSelectedAriaLabel: 'Seçildi',
+        listItemNotSelectedAriaLabel: 'Seçilmedi'
     },
     coreLink: {
         emphasized: 'Vurgulu',
@@ -366,7 +366,7 @@ export default {
         messagesTeamRemoved: '1 ekip kaldırıldı',
         messagesUndoAction: 'Geri al',
         nextButtonAriaLabel: 'Sonraki slayta git',
-        noDataFound: 'No Data Found',
+        noDataFound: 'Veri Bulunamadı',
         nodeActionAddApproversAfter: 'Şundan sonra onaylayan ekle',
         nodeActionAddApproversBefore: 'Şundan önce onaylayan ekle',
         nodeActionAddApproversParallel: 'Paralel onaylayan ekle',
@@ -523,7 +523,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'İptal',
         clearFilters: 'Filtreleri Temizle',
-        collapseAllAnnouncementLabel: 'Collapse All clicked',
+        collapseAllAnnouncementLabel: 'Tümünü Daralt tıklandı',
         collapseRowButtonTitle: 'Satırı daralt',
         confirmBtnLabel: 'Tamam',
         defaultEmptyMessage: 'Veri bulunamadı',
@@ -534,7 +534,7 @@ export default {
         editableCellNumberPlaceholder: 'Değer gir',
         editableCellStringPlaceholder: 'Değer gir',
         emptyCell: 'Boş',
-        expandAllAnnouncementLabel: 'Expand All clicked',
+        expandAllAnnouncementLabel: 'Tümünü Genişlet tıklandı',
         expandRowButtonTitle: 'Satırı genişlet',
         filterDialogBackToColumns: 'Geri git',
         filterDialogCancelBtnLabel: 'İptal',

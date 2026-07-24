@@ -115,8 +115,8 @@ export default {
         srOnlyText: 'Označenie s informáciami'
     },
     coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
+        listItemSelectedAriaLabel: 'Vybrané',
+        listItemNotSelectedAriaLabel: 'Nevybrané'
     },
     coreLink: {
         emphasized: 'Zvýraznené',
@@ -366,7 +366,7 @@ export default {
         messagesTeamRemoved: 'Bol odstránený 1 tím',
         messagesUndoAction: 'Anulovať',
         nextButtonAriaLabel: 'Prejsť na ďalšiu snímku',
-        noDataFound: 'No Data Found',
+        noDataFound: 'Nenašli sa žiadne dáta',
         nodeActionAddApproversAfter: 'Potom pridať schvaľovateľov',
         nodeActionAddApproversBefore: 'Predtým pridať schvaľovateľov',
         nodeActionAddApproversParallel: 'Pridať paralelných schvaľovateľov',
@@ -523,7 +523,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Zrušiť',
         clearFilters: 'Vymazať filtre',
-        collapseAllAnnouncementLabel: 'Collapse All clicked',
+        collapseAllAnnouncementLabel: 'Kliknuté na „Zbaliť všetko“',
         collapseRowButtonTitle: 'Zbaliť riadok',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Nenašli sa žiadne údaje',
@@ -534,7 +534,7 @@ export default {
         editableCellNumberPlaceholder: 'Zadať hodnotu',
         editableCellStringPlaceholder: 'Zadať hodnotu',
         emptyCell: 'Prázdne',
-        expandAllAnnouncementLabel: 'Expand All clicked',
+        expandAllAnnouncementLabel: 'Kliknuté na „Rozbaliť všetko“',
         expandRowButtonTitle: 'Rozbaliť riadok',
         filterDialogBackToColumns: 'Prejsť späť',
         filterDialogCancelBtnLabel: 'Zrušiť',
