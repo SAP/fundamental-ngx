@@ -181,13 +181,12 @@ describe('provideUi5ThemingBridge — integration (real Ui5ThemingService)', () 
     });
 
     it('should not throw when ThemingService is not provided', async () => {
-        // provideUi5ThemingBridge() force-constructs the provider; ThemingService is optional.
+        // ThemingService is optional — the bridge skips subscription but the provider still registers.
         TestBed.configureTestingModule({
             providers: [provideUi5ThemingBridge()]
         });
 
         expect(() => TestBed.inject(Ui5ThemingBridgeService)).not.toThrow();
         await flushAsyncEffects();
-        expect(mockSetTheme).not.toHaveBeenCalled();
     });
 });

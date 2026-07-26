@@ -91,6 +91,7 @@ libs/ui5-webcomponents/theming/ng-package.json
 libs/ui5-webcomponents-fiori/theming/index.ts
 libs/ui5-webcomponents-fiori/theming/ng-package.json
 !libs/ui5-webcomponents-fiori/theming-bridge/
+!libs/ui5-webcomponents-ai/theming-bridge/
 
 /libs/i18n/docs
 /libs/i18n/test-typedoc.json

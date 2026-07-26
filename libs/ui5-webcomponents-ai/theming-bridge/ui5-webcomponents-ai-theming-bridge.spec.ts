@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { ThemingService } from '@fundamental-ngx/core/theming';
 import { Ui5ThemingBridgeService } from '@fundamental-ngx/ui5-webcomponents-base/theming-bridge';
 import { Ui5ThemingService, Ui5WebcomponentsThemingService } from '@fundamental-ngx/ui5-webcomponents-base/theming';
-import { Ui5WebcomponentsFioriThemingService, provideUi5WebcomponentsFiori } from './index';
+import { Ui5WebcomponentsAiThemingService, provideUi5WebcomponentsAi } from './index';
 
 const mockSetTheme = jest.fn();
 jest.mock('@ui5/webcomponents-base/dist/config/Theme.js', () => ({
@@ -11,7 +11,7 @@ jest.mock('@ui5/webcomponents-base/dist/config/Theme.js', () => ({
 }));
 
 jest.mock('@ui5/webcomponents-theming/dist/generated/json-imports/Themes.js', () => ({}));
-jest.mock('@ui5/webcomponents-fiori/dist/generated/json-imports/Themes.js', () => ({}));
+jest.mock('@ui5/webcomponents-ai/dist/generated/json-imports/Themes.js', () => ({}));
 
 async function flushAsyncEffects(rounds = 4): Promise<void> {
     for (let i = 0; i < rounds; i++) {
@@ -20,37 +20,37 @@ async function flushAsyncEffects(rounds = 4): Promise<void> {
     }
 }
 
-describe('provideUi5WebcomponentsFiori', () => {
+describe('provideUi5WebcomponentsAi', () => {
     afterEach(() => {
         mockSetTheme.mockClear();
         TestBed.resetTestingModule();
     });
 
     it('should be exported from the theming-bridge entry point', () => {
-        expect(provideUi5WebcomponentsFiori).toBeDefined();
-        expect(typeof provideUi5WebcomponentsFiori).toBe('function');
+        expect(provideUi5WebcomponentsAi).toBeDefined();
+        expect(typeof provideUi5WebcomponentsAi).toBe('function');
     });
 
-    it('should force-construct Ui5WebcomponentsFioriThemingService', () => {
+    it('should force-construct Ui5WebcomponentsAiThemingService', () => {
         TestBed.configureTestingModule({
-            providers: [provideUi5WebcomponentsFiori()]
+            providers: [provideUi5WebcomponentsAi()]
         });
 
-        const service = TestBed.inject(Ui5WebcomponentsFioriThemingService);
+        const service = TestBed.inject(Ui5WebcomponentsAiThemingService);
         expect(service).toBeTruthy();
     });
 });
 
-describe('provideUi5WebcomponentsFiori — integration (real Ui5ThemingService)', () => {
+describe('provideUi5WebcomponentsAi — integration (real Ui5ThemingService)', () => {
     afterEach(() => {
         mockSetTheme.mockClear();
         TestBed.resetTestingModule();
     });
 
-    it('should register Ui5WebcomponentsFioriThemingService with Ui5ThemingService', async () => {
-        // Without provideUi5WebcomponentsFiori(), the service is never constructed and availableThemes() stays empty.
+    it('should register Ui5WebcomponentsAiThemingService with Ui5ThemingService', async () => {
+        // Without provideUi5WebcomponentsAi(), the service is never constructed and availableThemes() stays empty.
         TestBed.configureTestingModule({
-            providers: [provideUi5WebcomponentsFiori()]
+            providers: [provideUi5WebcomponentsAi()]
         });
 
         await flushAsyncEffects();
@@ -59,15 +59,15 @@ describe('provideUi5WebcomponentsFiori — integration (real Ui5ThemingService)'
         expect(ui5Theming.getAvailableThemes().length).toBeGreaterThan(0);
     });
 
-    it('should call UI5 setTheme through the full bridge chain when provideUi5WebcomponentsFiori() is used', async () => {
-        // Without provideUi5WebcomponentsFiori(), the effect early-returns on empty _providers and setTheme() is never called.
+    it('should call UI5 setTheme through the full bridge chain when provideUi5WebcomponentsAi() is used', async () => {
+        // Without provideUi5WebcomponentsAi(), the effect early-returns on empty _providers and setTheme() is never called.
         const themeSubject = new BehaviorSubject<{ id: string } | null>({ id: 'sap_horizon_dark' });
 
         TestBed.configureTestingModule({
             providers: [
                 { provide: ThemingService, useValue: { currentTheme: themeSubject.asObservable() } },
                 Ui5WebcomponentsThemingService,
-                provideUi5WebcomponentsFiori()
+                provideUi5WebcomponentsAi()
             ]
         });
 

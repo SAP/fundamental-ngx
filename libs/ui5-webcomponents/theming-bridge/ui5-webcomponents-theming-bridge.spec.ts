@@ -48,8 +48,7 @@ describe('provideUi5Webcomponents — integration (real Ui5ThemingService)', () 
     });
 
     it('should register Ui5WebcomponentsMainThemingService with Ui5ThemingService', async () => {
-        // Without provideUi5Webcomponents(), the service is never constructed, never calls
-        // registerProvider(), and availableThemes() stays empty.
+        // Without provideUi5Webcomponents(), the service is never constructed and availableThemes() stays empty.
         TestBed.configureTestingModule({
             providers: [provideUi5Webcomponents()]
         });
@@ -61,9 +60,7 @@ describe('provideUi5Webcomponents — integration (real Ui5ThemingService)', () 
     });
 
     it('should call UI5 setTheme through the full bridge chain when provideUi5Webcomponents() is used', async () => {
-        // Full stack: ThemingService → bridge → Ui5ThemingService → all providers → setTheme().
-        // Without provideUi5Webcomponents(), _providers stays [] and the effect early-returns,
-        // so setTheme() is never called for @ui5/webcomponents component-level theme assets.
+        // Without provideUi5Webcomponents(), the effect early-returns on empty _providers and setTheme() is never called.
         const themeSubject = new BehaviorSubject<{ id: string } | null>({ id: 'sap_horizon_dark' });
 
         TestBed.configureTestingModule({
