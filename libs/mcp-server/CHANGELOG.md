@@ -1,3 +1,7 @@
+## 0.64.1-rc.9 (2026-07-27)
+
+This was a version bump only for mcp-server to align it with other projects, there were no code changes.
+
 ## 0.64.1-rc.8 (2026-07-27)
 
 This was a version bump only for mcp-server to align it with other projects, there were no code changes.
