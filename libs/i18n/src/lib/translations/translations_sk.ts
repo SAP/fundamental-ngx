@@ -204,7 +204,7 @@ export default {
         totalResultsLabel: '{totalCount} výsledkov'
     },
     coreProductSwitch: {
-        ariaLabel: 'Prepínač produktov'
+        ariaLabel: 'App Launcher'
     },
     coreRadio: {
         readOnlyDescription: 'Tento prepínač je len na čítanie a nemožno ho zmeniť.'

@@ -203,7 +203,7 @@ export default {
         totalResultsLabel: '{totalCount} Αποτελέσματα'
     },
     coreProductSwitch: {
-        ariaLabel: 'Διακόπτης Προϊόντος'
+        ariaLabel: 'App Launcher'
     },
     coreRadio: {
         readOnlyDescription: 'Αυτό το κουμπί επιλογής είναι μόνο για ανάγνωση και δεν μπορεί να αλλάξει.'

@@ -202,7 +202,7 @@ export default {
         totalResultsLabel: '{totalCount} 個結果'
     },
     coreProductSwitch: {
-        ariaLabel: '產品切換'
+        ariaLabel: 'App Launcher'
     },
     coreRadio: {
         readOnlyDescription: '此選項按鈕為唯讀且無法變更。'

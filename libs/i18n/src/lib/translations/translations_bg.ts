@@ -204,7 +204,7 @@ export default {
         totalResultsLabel: '{totalCount} резултата'
     },
     coreProductSwitch: {
-        ariaLabel: 'Превключвател за продукти'
+        ariaLabel: 'App Launcher'
     },
     coreRadio: {
         readOnlyDescription: 'Този радио бутон е само за четене и не може да се променя.'

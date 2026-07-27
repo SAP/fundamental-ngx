@@ -203,7 +203,7 @@ export default {
         totalResultsLabel: 'Počet výsledků: {totalCount}'
     },
     coreProductSwitch: {
-        ariaLabel: 'Přepínač produktů'
+        ariaLabel: 'App Launcher'
     },
     coreRadio: {
         readOnlyDescription: 'Tento přepínač je jen ke čtení a nelze jej změnit.'

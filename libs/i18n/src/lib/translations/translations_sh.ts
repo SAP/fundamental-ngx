@@ -204,7 +204,7 @@ export default {
         totalResultsLabel: '{totalCount} rezultata'
     },
     coreProductSwitch: {
-        ariaLabel: 'Zamena proizvoda'
+        ariaLabel: 'App Launcher'
     },
     coreRadio: {
         readOnlyDescription: 'Ovo dugme odabira je samo za čitanje i ne može se promeniti.'

@@ -203,7 +203,7 @@ export default {
         totalResultsLabel: '{totalCount} resultat'
     },
     coreProductSwitch: {
-        ariaLabel: 'Product Switch'
+        ariaLabel: 'App Launcher'
     },
     coreRadio: {
         readOnlyDescription: 'Den här alternativknappen är skrivskyddad och kan inte ändras.'

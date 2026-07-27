@@ -204,7 +204,7 @@ export default {
         totalResultsLabel: '{totalCount} من النتائج'
     },
     coreProductSwitch: {
-        ariaLabel: 'تبديل المنتج'
+        ariaLabel: 'App Launcher'
     },
     coreRadio: {
         readOnlyDescription: 'زر الاختيار هذا للقراءة فقط ولا يمكن تغييره.'

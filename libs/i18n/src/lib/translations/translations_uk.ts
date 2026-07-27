@@ -203,7 +203,7 @@ export default {
         totalResultsLabel: 'Результатів: {totalCount}'
     },
     coreProductSwitch: {
-        ariaLabel: 'Перемикач продуктів'
+        ariaLabel: 'App Launcher'
     },
     coreRadio: {
         readOnlyDescription: 'Цей перемикач доступний тільки для читання і не може бути змінений.'

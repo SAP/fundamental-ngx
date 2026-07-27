@@ -204,7 +204,7 @@ export default {
         totalResultsLabel: '{totalCount} találat'
     },
     coreProductSwitch: {
-        ariaLabel: 'Termékváltás'
+        ariaLabel: 'App Launcher'
     },
     coreRadio: {
         readOnlyDescription: 'Ez a választókapcsoló írásvédett, ezért nem módosítható.'

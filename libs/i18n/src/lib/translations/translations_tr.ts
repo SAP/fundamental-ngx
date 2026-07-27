@@ -203,7 +203,7 @@ export default {
         totalResultsLabel: '{totalCount} Sonuç'
     },
     coreProductSwitch: {
-        ariaLabel: 'Ürün Anahtarı'
+        ariaLabel: 'App Launcher'
     },
     coreRadio: {
         readOnlyDescription: 'Bu radyo düğmesi salt okunurdur ve değiştirilemez.'

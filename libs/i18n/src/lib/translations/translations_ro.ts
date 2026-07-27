@@ -204,7 +204,7 @@ export default {
         totalResultsLabel: '{totalCount} rezultate'
     },
     coreProductSwitch: {
-        ariaLabel: 'Comutator produse'
+        ariaLabel: 'App Launcher'
     },
     coreRadio: {
         readOnlyDescription: 'Acest buton radio este numai pentru citire și nu poate fi modificat.'

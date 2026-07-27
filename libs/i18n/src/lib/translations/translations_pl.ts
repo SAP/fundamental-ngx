@@ -204,7 +204,7 @@ export default {
         totalResultsLabel: '{totalCount} wyniki(-ów)'
     },
     coreProductSwitch: {
-        ariaLabel: 'Przełącznik produktu'
+        ariaLabel: 'App Launcher'
     },
     coreRadio: {
         readOnlyDescription: 'Ten przycisk jest tylko do odczytu i nie można go zmienić.'

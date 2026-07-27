@@ -204,7 +204,7 @@ export default {
         totalResultsLabel: 'Rezultata: {totalCount}'
     },
     coreProductSwitch: {
-        ariaLabel: 'Prebacivač proizvoda'
+        ariaLabel: 'App Launcher'
     },
     coreRadio: {
         readOnlyDescription: 'Ovaj radio gumb je samo za čitanje i ne može se mijenjati.'

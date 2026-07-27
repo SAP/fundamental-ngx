@@ -204,7 +204,7 @@ export default {
         totalResultsLabel: '{totalCount} resultaten'
     },
     coreProductSwitch: {
-        ariaLabel: 'Overstappen op ander product'
+        ariaLabel: 'App Launcher'
     },
     coreRadio: {
         readOnlyDescription: 'Dit keuzerondje is alleen-lezen en kan niet worden gewijzigd.'

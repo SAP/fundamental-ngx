@@ -203,7 +203,7 @@ export default {
         totalResultsLabel: '{totalCount} tulosta'
     },
     coreProductSwitch: {
-        ariaLabel: 'Tuotteen vaihto'
+        ariaLabel: 'App Launcher'
     },
     coreRadio: {
         readOnlyDescription: 'Tämä valintanappi on kirjoitussuojattu, eikä sitä voi muuttaa.'

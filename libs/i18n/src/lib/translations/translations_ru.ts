@@ -204,7 +204,7 @@ export default {
         totalResultsLabel: 'Результаты: {totalCount}'
     },
     coreProductSwitch: {
-        ariaLabel: 'Переключатель продуктов'
+        ariaLabel: 'App Launcher'
     },
     coreRadio: {
         readOnlyDescription: 'Эта зависимая кнопка доступна только для чтения и не может быть изменена.'

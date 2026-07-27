@@ -203,7 +203,7 @@ export default {
         totalResultsLabel: '{totalCount} परिणाम'
     },
     coreProductSwitch: {
-        ariaLabel: 'उत्पाद स्विच'
+        ariaLabel: 'App Launcher'
     },
     coreRadio: {
         readOnlyDescription: 'This radio button is read-only and cannot be changed.'

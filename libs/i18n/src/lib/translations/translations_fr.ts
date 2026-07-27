@@ -205,7 +205,7 @@ export default {
         totalResultsLabel: '{totalCount} résultats'
     },
     coreProductSwitch: {
-        ariaLabel: 'Changement de produit'
+        ariaLabel: 'App Launcher'
     },
     coreRadio: {
         readOnlyDescription: "Cette case d'option est en lecture seule et ne peut pas être modifiée."

@@ -203,7 +203,7 @@ export default {
         totalResultsLabel: '{totalCount} Hasil'
     },
     coreProductSwitch: {
-        ariaLabel: 'Suis Produk'
+        ariaLabel: 'App Launcher'
     },
     coreRadio: {
         readOnlyDescription: 'Butang radio ini adalah baca sahaja dan tidak boleh diubah.'

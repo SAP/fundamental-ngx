@@ -204,7 +204,7 @@ export default {
         totalResultsLabel: '{totalCount} risultati'
     },
     coreProductSwitch: {
-        ariaLabel: 'Switch prodotti'
+        ariaLabel: 'App Launcher'
     },
     coreRadio: {
         readOnlyDescription: 'Questo pulsante di opzione è di sola lettura e non può essere modificato.'

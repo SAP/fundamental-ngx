@@ -203,7 +203,7 @@ export default {
         totalResultsLabel: 'სულ {totalCount} შედეგი'
     },
     coreProductSwitch: {
-        ariaLabel: 'გადამრთველი'
+        ariaLabel: 'App Launcher'
     },
     coreRadio: {
         readOnlyDescription: 'This radio button is read-only and cannot be changed.'

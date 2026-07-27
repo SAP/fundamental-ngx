@@ -203,7 +203,7 @@ export default {
         totalResultsLabel: '{totalCount} Rezultate'
     },
     coreProductSwitch: {
-        ariaLabel: 'Ndërprerësi i produktit'
+        ariaLabel: 'App Launcher'
     },
     coreRadio: {
         readOnlyDescription: 'This radio button is read-only and cannot be changed.'

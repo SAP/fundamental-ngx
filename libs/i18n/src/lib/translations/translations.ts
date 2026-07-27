@@ -203,7 +203,7 @@ export default {
         totalResultsLabel: '{totalCount} Results'
     },
     coreProductSwitch: {
-        ariaLabel: 'Product Switch'
+        ariaLabel: 'App Launcher'
     },
     coreRadio: {
         readOnlyDescription: 'This radio button is read-only and cannot be changed.'

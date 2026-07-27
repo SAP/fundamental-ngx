@@ -204,7 +204,7 @@ export default {
         totalResultsLabel: '{totalCount} Ergebnisse'
     },
     coreProductSwitch: {
-        ariaLabel: 'Product Switch'
+        ariaLabel: 'App Launcher'
     },
     coreRadio: {
         readOnlyDescription: 'Dieses Optionsfeld ist schreibgeschützt und kann nicht geändert werden.'

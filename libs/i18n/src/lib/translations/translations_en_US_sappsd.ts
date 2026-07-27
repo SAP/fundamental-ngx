@@ -204,7 +204,7 @@ export default {
         totalResultsLabel: '[[[{totalCount} Řēşűĺţş]]]'
     },
     coreProductSwitch: {
-        ariaLabel: '[[[Ƥŗŏƌűċţ Ŝŵįţċĥ∙∙∙∙∙]]]'
+        ariaLabel: 'App Launcher'
     },
     coreRadio: {
         readOnlyDescription: '[[[Ţĥįş ŗąƌįŏ ƃűţţŏŋ įş ŗēąƌ-ŏŋĺŷ ąŋƌ ċąŋŋŏţ ƃē ċĥąŋğēƌ.∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]'

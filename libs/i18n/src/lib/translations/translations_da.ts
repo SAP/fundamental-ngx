@@ -203,7 +203,7 @@ export default {
         totalResultsLabel: '{totalCount} Resultater'
     },
     coreProductSwitch: {
-        ariaLabel: 'Produktskift'
+        ariaLabel: 'App Launcher'
     },
     coreRadio: {
         readOnlyDescription: 'Denne valgknap er skrivebeskyttet og kan ikke ændres.'

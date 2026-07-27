@@ -201,7 +201,7 @@ export default {
         totalResultsLabel: '{totalCount} 个结果'
     },
     coreProductSwitch: {
-        ariaLabel: '产品切换'
+        ariaLabel: 'App Launcher'
     },
     coreRadio: {
         readOnlyDescription: '此单选按钮为只读，无法更改。'

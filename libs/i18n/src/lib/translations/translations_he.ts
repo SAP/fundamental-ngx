@@ -203,7 +203,7 @@ export default {
         totalResultsLabel: '{totalCount} תוצאות'
     },
     coreProductSwitch: {
-        ariaLabel: 'מתג מוצר'
+        ariaLabel: 'App Launcher'
     },
     coreRadio: {
         readOnlyDescription: 'לחצן הבחירה הוא לקריאה בלבד ולא ניתן לשנות אותו.'

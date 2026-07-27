@@ -204,7 +204,7 @@ export default {
         totalResultsLabel: 'Št. rezultatov: {totalCount}'
     },
     coreProductSwitch: {
-        ariaLabel: 'Preklop med proizvodi'
+        ariaLabel: 'App Launcher'
     },
     coreRadio: {
         readOnlyDescription: 'Ta izbirni gumb je samo za branje in ga ni mogoče spremeniti.'

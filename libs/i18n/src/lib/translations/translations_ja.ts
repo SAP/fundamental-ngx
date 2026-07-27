@@ -204,7 +204,7 @@ export default {
         totalResultsLabel: '結果: {totalCount}件'
     },
     coreProductSwitch: {
-        ariaLabel: '製品切替'
+        ariaLabel: 'App Launcher'
     },
     coreRadio: {
         readOnlyDescription: 'このラジオボタンは読み取り専用のため変更できません。'

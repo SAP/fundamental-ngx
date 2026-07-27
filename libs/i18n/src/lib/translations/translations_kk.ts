@@ -204,7 +204,7 @@ export default {
         totalResultsLabel: '{totalCount} нәтиже'
     },
     coreProductSwitch: {
-        ariaLabel: 'Өнім ауыстырып-қосқышы'
+        ariaLabel: 'App Launcher'
     },
     coreRadio: {
         readOnlyDescription: 'Бұл ауыстырып-қосқыш жазудан қорғалған және оны өзгерту мүмкін емес.'

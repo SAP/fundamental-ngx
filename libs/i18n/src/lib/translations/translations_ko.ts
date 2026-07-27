@@ -203,7 +203,7 @@ export default {
         totalResultsLabel: '{totalCount}개 결과'
     },
     coreProductSwitch: {
-        ariaLabel: '제품 전환'
+        ariaLabel: 'App Launcher'
     },
     coreRadio: {
         readOnlyDescription: '이 라디오 버튼은 읽기 전용이므로 변경할 수 없습니다.'

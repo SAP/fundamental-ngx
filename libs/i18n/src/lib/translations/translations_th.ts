@@ -203,7 +203,7 @@ export default {
         totalResultsLabel: '{totalCount} ผลลัพธ์'
     },
     coreProductSwitch: {
-        ariaLabel: 'การสลับผลิตภัณฑ์'
+        ariaLabel: 'App Launcher'
     },
     coreRadio: {
         readOnlyDescription: 'ปุ่มตัวเลือกนี้เป็นแบบอ่านอย่างเดียวและไม่สามารถเปลี่ยนแปลงได้'
