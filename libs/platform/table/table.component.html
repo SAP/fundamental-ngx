@@ -30,9 +30,7 @@
         class="fdp-table__body fd-scrollbar"
         [class.fdp-table__body--virtual-scroll]="!!_virtualScrollDirective?.virtualScroll"
         [style.position]="
-            !!_virtualScrollDirective?.virtualScroll && !_virtualScrollDirective?.scrollWholeRows
-                ? 'relative'
-                : 'static'
+            !!_virtualScrollDirective?.virtualScroll && !_virtualScrollDirective.scrollWholeRows ? 'relative' : 'static'
         "
         [class.fdp-table__body--disable-scroll]="
             !!_dndTableDirective?.dragDropInProgress && !_virtualScrollDirective?.scrollWholeRows
@@ -78,8 +76,8 @@
                     fd-table-body
                     fdkDndList
                     #tableBody
-                    [dragoverPredicate]="$safeNavigationMigration(_dndTableDirective?.dragoverPredicate)"
-                    [dropPredicate]="$safeNavigationMigration(_dndTableDirective?.dropPredicate)"
+                    [dragoverPredicate]="_dndTableDirective?.dragoverPredicate"
+                    [dropPredicate]="_dndTableDirective?.dropPredicate"
                     [noBorderX]="noBorderX || noBorders"
                     [noBorderY]="noBorderY || noBorders"
                     [tabIndex]="pageScrolling ? 0 : -1"
@@ -115,13 +113,13 @@
                                         [applyDragItemClass]="isDraggable"
                                         [class]="row | rowClasses: rowsClass"
                                         [tabindex]="
-                                            !_tableService.poppingColumns$()?.length &&
+                                            !_tableService.poppingColumns$().length &&
                                             (rowsActivable || !!row.navigatable)
                                                 ? 0
                                                 : -1
                                         "
                                         [focusable]="
-                                            !_tableService.poppingColumns$()?.length &&
+                                            !_tableService.poppingColumns$().length &&
                                             (rowsActivable || !!row.navigatable)
                                         "
                                         [hoverable]="rowsActivable || isSelectionColumnShown || !!row.navigatable"
@@ -278,7 +276,7 @@
             @if (pageScrolling) {
                 <tbody class="fd-table__body__focus-mock"></tbody>
             }
-            @if (_virtualScrollDirective?.virtualScroll && !_virtualScrollDirective?.scrollWholeRows) {
+            @if (_virtualScrollDirective?.virtualScroll && !_virtualScrollDirective.scrollWholeRows) {
                 <!-- the tbody element below is so the scrollbar renders correctly -->
                 <tbody>
                     <tr>
@@ -287,16 +285,16 @@
                 </tbody>
             }
             <!-- the tbody element below is so the scrollbar renders correctly -->
-            @if (_virtualScrollDirective?.virtualScroll && _virtualScrollDirective?.scrollWholeRows) {
+            @if (_virtualScrollDirective?.virtualScroll && _virtualScrollDirective.scrollWholeRows) {
                 <tbody
-                    [class.fd-table__body--scroll-mock]="!!_virtualScrollDirective?.scrollWholeRows"
+                    [class.fd-table__body--scroll-mock]="!!_virtualScrollDirective.scrollWholeRows"
                     [class.fdp-table__body--disable-scroll]="
-                        !!_dndTableDirective?.dragDropInProgress && !_virtualScrollDirective?.scrollWholeRows
+                        !!_dndTableDirective?.dragDropInProgress && !_virtualScrollDirective.scrollWholeRows
                     "
                     #tableScrollMockContainer
                 >
                     <tr>
-                        <td colspan="100%" [style.height.px]="_virtualScrollDirective?.virtualScrollTotalHeight"></td>
+                        <td colspan="100%" [style.height.px]="_virtualScrollDirective.virtualScrollTotalHeight"></td>
                     </tr>
                 </tbody>
             }

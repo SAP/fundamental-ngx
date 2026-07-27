@@ -60,7 +60,7 @@ import { startWith } from 'rxjs/operators';
 export class TableCellHeaderPopoverComponent implements AfterViewInit {
     /** Column definition. */
     @Input()
-    column: TableColumn;
+    column: TableColumn | null | undefined;
 
     /** Custom popover template. */
     @Input()
@@ -189,13 +189,13 @@ export class TableCellHeaderPopoverComponent implements AfterViewInit {
 
     /** @hidden */
     _freeze(): void {
-        this._table.freezeToColumn(this.column.name, this.column.endFreezable);
+        this._table.freezeToColumn(this.column!.name, this.column!.endFreezable);
         this._closePopover();
     }
 
     /** @hidden */
     _unFreeze(): void {
-        this._table.unfreeze(this.column.name, this.column.endFreezable);
+        this._table.unfreeze(this.column!.name, this.column!.endFreezable);
         this._closePopover();
     }
 

@@ -25,7 +25,7 @@
                 ></fdp-approval-flow-toolbar-actions>
             }
         </fd-grid-list-title-bar>
-        @if (_approvalProcess.watchers?.length || _isEditMode) {
+        @if (_approvalProcess.watchers.length || _isEditMode) {
             <div class="fdp-approval-flow__watchers" [attr.aria-label]="watchersLabel">
                 <p class="fdp-approval-flow__watchers-title">
                     {{ watchersLabel || ('platformApprovalFlow.defaultWatchersLabel' | fdTranslate)() }}

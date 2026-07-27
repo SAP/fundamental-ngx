@@ -85,7 +85,7 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
     @Input() node: ApprovalGraphNode;
 
     /** Node metadata */
-    @Input() meta: ApprovalGraphNodeMetadata;
+    @Input() meta: ApprovalGraphNodeMetadata | undefined;
 
     /** Whether node element has arrow on the left side pointing to the node */
     @Input() renderArrow = false;
@@ -135,13 +135,13 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
     /** @hidden */
     @HostBinding('class.fdp-approval-flow-node--root')
     get _isRoot(): boolean {
-        return this.meta?.isRoot;
+        return this.meta?.isRoot ?? false;
     }
 
     /** @hidden */
     @HostBinding('class.fdp-approval-flow-node--final')
     get _isFinal(): boolean {
-        return this.meta?.isFinal;
+        return this.meta?.isFinal ?? false;
     }
 
     /** @hidden */

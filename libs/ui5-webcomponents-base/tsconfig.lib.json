@@ -22,18 +22,6 @@
         },
         "rootDir": "../../"
     },
-    "angularCompilerOptions": {
-        "skipTemplateCodegen": true,
-        // TODO(#14334): suppress Angular 22 optionalChainNotNullable and nullishCoalescingNotNullable diagnostics
-        "extendedDiagnostics": {
-            "checks": {
-                "nullishCoalescingNotNullable": "suppress",
-                "optionalChainNotNullable": "suppress"
-            }
-        },
-        "strictMetadataEmit": true,
-        "enableResourceInlining": true
-    },
     "files": [
         "./index.ts"
     ],

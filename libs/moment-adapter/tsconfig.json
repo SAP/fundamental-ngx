@@ -25,11 +25,5 @@
         "moduleResolution": "bundler",
         "rootDir": "../../"
     },
-    "angularCompilerOptions": {
-        "enableIvy": true,
-        "skipTemplateCodegen": true,
-        "strictMetadataEmit": true,
-        "enableResourceInlining": true
-    },
     "include": ["**/*.ts"]
 }
