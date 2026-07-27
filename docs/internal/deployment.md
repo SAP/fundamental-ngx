@@ -57,6 +57,46 @@ git push --set-upstream origin docs/0.63
 
 ---
 
+## Update an Existing Docs Branch to a Newer Patch (Fast-Forward)
+
+Use when a `docs/X.YY` branch already exists but serves an old patch (e.g. `docs/0.58` sits at `0.58.0`) and you want it to serve a newer tag on the same minor line (`v0.58.10`). Netlify re-deploys on push. No Netlify config change needed.
+
+Substitute your own values: `0.58` → your minor, `v0.58.10` → your tag. Branch names use two-digit minors (`docs/0.58`).
+
+**1. Verify it's a clean fast-forward** (no merge/rebase/force):
+
+```bash
+git fetch origin
+# (a) branch tip must be an ancestor of the tag:
+git merge-base --is-ancestor origin/docs/0.58 v0.58.10 && echo "ff OK"
+# (b) must print 0 — else the branch has commits that would be lost; STOP:
+git rev-list --count v0.58.10..origin/docs/0.58
+```
+
+**2. Push the tag's commit onto the branch** (no `--force`):
+
+```bash
+git push origin 'v0.58.10^{commit}:refs/heads/docs/0.58'
+```
+
+`^{commit}` is literal syntax, not a placeholder. Quote it — zsh expands unquoted `^{}`. Output should show `..` (not `+`/`forced update`). Alternative: `git push origin <sha>:refs/heads/docs/0.58`.
+
+**3. Verify + confirm the site:**
+
+```bash
+git fetch origin && git log -1 --format="%h %s" origin/docs/0.58   # now the new tag
+```
+
+Then open `https://docs-0-58--fundamental-ngx.netlify.app` and **visually confirm the fix** — a moved ref isn't a verified deploy.
+
+**Rollback:** `git push origin <old-sha>:refs/heads/docs/0.58 --force-with-lease`.
+
+### Troubleshooting: build fails with `Nx Cloud … unable to be authorized`
+
+Old tags (< ~0.61) carry a stale `nxCloudAccessToken` in `nx.json`. **Fix:** add `NX_NO_CLOUD=true` in Netlify → Site configuration → Environment variables (scope: Builds), then retry. It's a persistent var, so it covers all old-branch redeploys.
+
+---
+
 ## Netlify Deploy via gh-pages (Alternative)
 
 Deploy a specific version tag to Netlify using gh-pages.
