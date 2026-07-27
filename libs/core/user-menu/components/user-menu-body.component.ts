@@ -6,7 +6,6 @@ import {
     ContentChildren,
     DestroyRef,
     ElementRef,
-    HostListener,
     QueryList,
     TemplateRef,
     ViewEncapsulation,
@@ -30,13 +29,16 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { Subject, startWith } from 'rxjs';
 import { UserMenuUserNameDirective } from '../directives/user-menu-user-name.directive';
+import { resetListFocus } from '../utils/focus-utils';
 import { UserMenuListItemComponent } from './user-menu-list-item.component';
 
 @Component({
     selector: 'fd-user-menu-body',
     templateUrl: './user-menu-body.component.html',
     host: {
-        class: 'fd-user-menu__body'
+        class: 'fd-user-menu__body',
+        '(click)': 'onClick($event)',
+        '(focusout)': 'onFocusOut($event)'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -114,9 +116,38 @@ export class UserMenuBodyComponent implements AfterViewInit {
     private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
-    @HostListener('click', ['$event'])
     onClick(event: MouseEvent): void {
         event.stopPropagation();
+    }
+
+    /**
+     * Reset roving tabindex when focus leaves the menu entirely,
+     * so Tab re-entry starts at the first item instead of the last-focused item.
+     *
+     * First checks relatedTarget synchronously for quick exits, then uses
+     * setTimeout(0) to defer the check until after the current event loop tick,
+     * handling cases where focus transitions through multiple items before leaving
+     * (relatedTarget can be temporarily null during rapid moves, but activeElement
+     * will be correctly set after the current event completes).
+     * @hidden
+     */
+    onFocusOut(event: FocusEvent): void {
+        const relatedTarget = event.relatedTarget as HTMLElement;
+        const currentTarget = event.currentTarget as HTMLElement;
+
+        // Synchronous check: if relatedTarget is known and inside menu, don't reset
+        if (relatedTarget && currentTarget.contains(relatedTarget)) {
+            return;
+        }
+
+        // Deferred check: ensure focus has fully settled before resetting
+        // This handles rapid transitions where relatedTarget might be null temporarily
+        setTimeout(() => {
+            const activeElement = document.activeElement as HTMLElement;
+            if (!activeElement || !currentTarget.contains(activeElement)) {
+                this._resetListFocus();
+            }
+        }, 0);
     }
 
     /** @hidden */
@@ -211,5 +242,14 @@ export class UserMenuBodyComponent implements AfterViewInit {
     closeDialog(dialogRef): void {
         dialogRef.dismiss('Close');
         this.clearSubmenu();
+    }
+
+    /** @hidden */
+    private _resetListFocus(): void {
+        if (!this._listItems || this._listItems.length === 0) {
+            return;
+        }
+
+        resetListFocus(this._listItems.toArray());
     }
 }
