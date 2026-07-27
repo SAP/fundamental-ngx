@@ -44,16 +44,24 @@ export function loadProperties(propertiesFileContent: string): Record<string, an
 
 /**
  * Parse a JavaScript object literal from generated TypeScript files.
- * Handles both JSON format and JavaScript object literal syntax.
+ * Generated files use JSON.stringify + Prettier, which produces JavaScript object literals
+ * with single quotes and unquoted keys. We first try JSON.parse, then convert to valid JSON.
  */
 function parseObjectLiteral(objStr: string): any {
-    // First try JSON.parse (for generated files using JSON.stringify)
+    // First try JSON.parse (in case format changes to pure JSON)
     try {
         return JSON.parse(objStr);
     } catch {
-        // Fallback: use Function constructor (safer than eval, still works with JS syntax)
-        // This handles single-quoted strings and unquoted keys
-        return new Function(`return ${objStr}`)();
+        // Convert JavaScript object literal to JSON:
+        // 1. Replace single quotes with double quotes (but not in already-quoted strings)
+        // 2. Quote unquoted keys
+        const jsonStr = objStr
+            // Replace single quotes with double quotes
+            .replace(/'([^']*)'/g, '"$1"')
+            // Quote unquoted object keys: word followed by colon
+            .replace(/(\s*)(\w+)(\s*):/g, '$1"$2"$3:');
+
+        return JSON.parse(jsonStr);
     }
 }
 

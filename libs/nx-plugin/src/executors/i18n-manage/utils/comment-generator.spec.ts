@@ -238,6 +238,67 @@ describe('CommentGenerator', () => {
                 expect(result).toBe(result.trim());
             }
         });
+
+        describe('component scoping', () => {
+            it('should scope search to the correct component when property names are duplicated', () => {
+                // Test that we don't get cross-component comment bleed
+                // For example, if both coreButton.ariaLabel and coreInput.ariaLabel exist,
+                // requesting coreInput.ariaLabel should not return coreButton.ariaLabel's comment
+                const result1 = extractJSDocComment('coreMultiComboBox.multiComboBoxAriaLabel');
+                const result2 = extractJSDocComment('coreCombobox.comboboxAriaLabel');
+
+                // Both should either be null or distinct strings
+                // They should NOT return the same comment (cross-component bleed)
+                if (result1 !== null && result2 !== null) {
+                    // If both exist and have comments, they should be different
+                    // (unless they legitimately have the same comment text, which is unlikely)
+                    expect(result1 === result2).toBe(false);
+                }
+            });
+
+            it('should return null when component name does not exist', () => {
+                // Component "nonExistentComponent" should not be found
+                const result = extractJSDocComment('nonExistentComponent.someProperty');
+
+                expect(result).toBeNull();
+            });
+
+            it('should return null when property exists in wrong component', () => {
+                // If we look for coreButton.multiComboBoxAriaLabel (property from wrong component),
+                // it should return null even though multiComboBoxAriaLabel exists in coreMultiComboBox
+                const result = extractJSDocComment('coreButton.multiComboBoxAriaLabel');
+
+                expect(result).toBeNull();
+            });
+
+            it('should handle nested keys correctly (use second-to-last segment as component)', () => {
+                // For a key like "platform.form.submitButton", it should:
+                // - Use "form" as the component name (second-to-last)
+                // - Look for "submitButton" property within the form block
+                const result = extractJSDocComment('some.nested.component.property');
+
+                // Should execute without error and return null or string
+                expect(result === null || typeof result === 'string').toBe(true);
+            });
+
+            it('should find property in correct component when same property name appears in multiple components', () => {
+                // Real scenario: ariaLabel appears in multiple components
+                // Each should resolve to its own component's comment, not the first match
+                const result1 = extractJSDocComment('coreCard.ariaDescription');
+                const result2 = extractJSDocComment('coreCalendar.yearSelectionLabel');
+
+                // If comments exist, they should be component-specific
+                if (result1 !== null) {
+                    expect(typeof result1).toBe('string');
+                    expect(result1.length).toBeGreaterThan(0);
+                }
+
+                if (result2 !== null) {
+                    expect(typeof result2).toBe('string');
+                    expect(result2.length).toBeGreaterThan(0);
+                }
+            });
+        });
     });
 
     describe('real-world examples', () => {

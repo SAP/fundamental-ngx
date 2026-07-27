@@ -12,26 +12,70 @@ export function extractJSDocComment(key: string): string | null {
         const content = readFileSync(fdLanguagePath, 'utf-8');
         const lines = content.split('\n');
 
-        // Get the property name (last part after the last dot)
-        const propertyName = key.split('.').pop();
-        if (!propertyName) {
+        // Parse the key: e.g., "coreDatePicker.save" -> component: "coreDatePicker", property: "save"
+        const keyParts = key.split('.');
+        if (keyParts.length < 2) {
             return null;
         }
 
-        // Find the line with this property
+        const componentName = keyParts[keyParts.length - 2]; // Second-to-last segment
+        const propertyName = keyParts[keyParts.length - 1]; // Last segment
+
+        // Find the component's interface block first
+        let componentStartLine = -1;
         for (let i = 0; i < lines.length; i++) {
+            // Match "componentName: {" at the interface root level (4 spaces indentation)
+            if (lines[i].match(new RegExp(`^    ${componentName}:\\s*\\{`))) {
+                componentStartLine = i;
+                break;
+            }
+        }
+
+        if (componentStartLine === -1) {
+            return null;
+        }
+
+        // Find the closing brace for this component block
+        let componentEndLine = -1;
+        let braceDepth = 1; // We're inside the component block
+        for (let i = componentStartLine + 1; i < lines.length; i++) {
+            const currentLine = lines[i];
+            // Count opening and closing braces
+            for (const char of currentLine) {
+                if (char === '{') {
+                    braceDepth++;
+                }
+                if (char === '}') {
+                    braceDepth--;
+                    if (braceDepth === 0) {
+                        componentEndLine = i;
+                        break;
+                    }
+                }
+            }
+            if (componentEndLine !== -1) {
+                break;
+            }
+        }
+
+        if (componentEndLine === -1) {
+            return null;
+        }
+
+        // Now search for the property within the component's scope
+        for (let i = componentStartLine + 1; i < componentEndLine; i++) {
             const line = lines[i].trim();
 
             // Check if this line defines our property
             if (line.startsWith(`${propertyName}:`) || line.startsWith(`${propertyName}?:`)) {
                 // Look backwards for JSDoc comment
                 let commentLine = i - 1;
-                while (commentLine >= 0 && lines[commentLine].trim() === '') {
+                while (commentLine >= componentStartLine && lines[commentLine].trim() === '') {
                     commentLine--;
                 }
 
                 // Check if we found a JSDoc comment
-                if (commentLine >= 0) {
+                if (commentLine >= componentStartLine) {
                     const potentialComment = lines[commentLine].trim();
                     // Match /** comment */ or // comment
                     const jsdocMatch = potentialComment.match(/^\/\*\*\s*(.+?)\s*\*\/$/);

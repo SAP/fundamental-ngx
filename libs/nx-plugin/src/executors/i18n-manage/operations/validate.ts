@@ -322,13 +322,17 @@ function extractKeysFromTsFile(content: string): Set<string> {
             return keys;
         }
 
-        // Parse as JSON first (for generated files using JSON.stringify)
+        // Parse generated TypeScript (JSON.stringify + Prettier = JS object literal with single quotes)
+        // Convert to valid JSON without executing code
         let obj: any;
         try {
             obj = JSON.parse(match[1]);
         } catch {
-            // Fallback: use Function constructor for JavaScript object literal syntax
-            obj = new Function(`return ${match[1]}`)();
+            // Convert JavaScript object literal to JSON
+            const jsonStr = match[1]
+                .replace(/'([^']*)'/g, '"$1"') // Single quotes → double quotes
+                .replace(/(\s*)(\w+)(\s*):/g, '$1"$2"$3:'); // Quote unquoted keys
+            obj = JSON.parse(jsonStr);
         }
 
         // Recursively extract all keys
@@ -364,13 +368,17 @@ function extractEntriesFromTsFile(content: string): Map<string, string> {
             return entries;
         }
 
-        // Parse as JSON first (for generated files using JSON.stringify)
+        // Parse generated TypeScript (JSON.stringify + Prettier = JS object literal with single quotes)
+        // Convert to valid JSON without executing code
         let obj: any;
         try {
             obj = JSON.parse(match[1]);
         } catch {
-            // Fallback: use Function constructor for JavaScript object literal syntax
-            obj = new Function(`return ${match[1]}`)();
+            // Convert JavaScript object literal to JSON
+            const jsonStr = match[1]
+                .replace(/'([^']*)'/g, '"$1"') // Single quotes → double quotes
+                .replace(/(\s*)(\w+)(\s*):/g, '$1"$2"$3:'); // Quote unquoted keys
+            obj = JSON.parse(jsonStr);
         }
 
         function extractEntries(obj: any, prefix = ''): void {

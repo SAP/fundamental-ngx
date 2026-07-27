@@ -44,7 +44,11 @@ export default async function runExecutor(
         }
     } catch (error) {
         console.error(`❌ Error: ${error instanceof Error ? error.message : String(error)}`);
-        return { success: false, error: error instanceof Error ? error.message : String(error) };
+        return {
+            success: false,
+            filesModified: [],
+            error: error instanceof Error ? error.message : String(error)
+        };
     }
 }
 
@@ -216,7 +220,7 @@ async function handleSearch(options: I18nManageExecutorSchema, context: Executor
     } else {
         console.error(`❌ Error: ${result.error}`);
         console.log('');
-        return { success: false, error: result.error };
+        return { success: false, filesModified: [], error: result.error };
     }
 }
 
@@ -312,7 +316,7 @@ async function handleValidate(options: I18nManageExecutorSchema, context: Execut
         }
 
         console.log('');
-        return { success: false, error: `Found ${result.errors.length} validation error(s)` };
+        return { success: false, filesModified: [], error: `Found ${result.errors.length} validation error(s)` };
     }
 }
 
@@ -327,7 +331,7 @@ async function handleSort(options: I18nManageExecutorSchema, context: ExecutorCo
         };
     }
 
-    console.log(`\n🔧 Sorting TypeScript translation files...`);
+    console.log(`\n🔧 Sorting .properties translation files...`);
     console.log('');
 
     const result = await sortKeys({ propertiesPath });

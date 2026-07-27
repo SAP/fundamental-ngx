@@ -48,22 +48,28 @@ export async function sync(options: SyncOptions): Promise<SyncResult> {
         };
     }
 
-    // Step 3: Find all TypeScript translation files (excluding .spec.ts)
-    const tsPattern = `${propertiesPath}/translations*.ts`;
-    const tsFiles = fastGlobSync(tsPattern, { cwd: workspaceRoot, ignore: ['**/*.spec.ts'] });
+    // Step 3: Find all .properties files to determine which .ts files need to be created/updated
+    const propertiesPattern = `${propertiesPath}/translations*.properties`;
+    const propertiesFiles = fastGlobSync(propertiesPattern, { cwd: workspaceRoot });
 
-    if (tsFiles.length === 0) {
+    if (propertiesFiles.length === 0) {
         return {
             success: false,
             filesModified: [],
-            error: `No TypeScript translation files found at: ${tsPattern}`
+            error: `No .properties files found at: ${propertiesPattern}`
         };
     }
 
-    // Step 4: Regenerate all TypeScript files from .properties files
+    // Step 4: Generate list of .ts files to create (one for each .properties file)
+    const tsFilesToGenerate = propertiesFiles.map((propertiesFile) => {
+        const fileName = propertiesFile.split('/').pop()?.replace('.properties', '.ts') || 'translations.ts';
+        return `${propertiesPath}/${fileName}`;
+    });
+
+    // Step 5: Regenerate all TypeScript files from .properties files
     const filesModified: string[] = [];
 
-    for (const tsFile of tsFiles) {
+    for (const tsFile of tsFilesToGenerate) {
         const filePath = `${workspaceRoot}/${tsFile}`;
 
         try {

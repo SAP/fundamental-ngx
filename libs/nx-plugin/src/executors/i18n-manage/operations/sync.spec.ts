@@ -158,6 +158,48 @@ coreButton.cancel=Cancel`,
             expect(content).toContain('Cancel');
         });
 
+        it('should explicitly fall back to English for all keys when .properties file is missing (locale not yet delivered)', async () => {
+            // Scenario: Translation team has not yet delivered the Japanese locale
+            // The .ts file exists (committed to repo), but translations_ja.properties is missing
+            // This is the normal workflow - sync should regenerate the .ts file with English fallbacks
+            vol.fromJSON({
+                '/workspace/libs/i18n/translations/translations.properties': `coreButton.save=Save
+coreButton.cancel=Cancel
+coreButton.submit=Submit
+coreDialog.close=Close
+coreDialog.confirm=Confirm`,
+                '/workspace/libs/i18n/translations/translations_ja.ts': `export default {};`
+                // translations_ja.properties does NOT exist - locale not yet delivered by translation team
+            });
+
+            (fastGlobSync as jest.Mock).mockReturnValue(['libs/i18n/translations/translations_ja.ts']);
+
+            const result = await sync({
+                propertiesPath: 'libs/i18n/translations'
+            });
+
+            // Should succeed - missing .properties file is not an error
+            expect(result.success).toBe(true);
+            expect(result.filesModified).toContain('libs/i18n/translations/translations_ja.ts');
+
+            const content = vol.readFileSync('/workspace/libs/i18n/translations/translations_ja.ts', 'utf-8') as string;
+
+            // Verify ALL keys fall back to English values from base translations.properties
+            expect(content).toContain('Save');
+            expect(content).toContain('Cancel');
+            expect(content).toContain('Submit');
+            expect(content).toContain('Close');
+            expect(content).toContain('Confirm');
+
+            // Verify structure is correct (nested objects)
+            expect(content).toContain('coreButton');
+            expect(content).toContain('coreDialog');
+
+            // Verify no Japanese translations leaked in (since .properties file doesn't exist)
+            expect(content).not.toContain('保存'); // Japanese for "Save"
+            expect(content).not.toContain('キャンセル'); // Japanese for "Cancel"
+        });
+
         it('should only include keys that exist in base properties', async () => {
             vol.fromJSON({
                 '/workspace/libs/i18n/translations/translations.properties': `coreButton.save=Save
@@ -375,7 +417,7 @@ coreButton.label=Save & Close`,
             });
 
             expect(result.success).toBe(false);
-            expect(result.error).toContain('No TypeScript translation files found');
+            expect(result.error).toContain('No .properties files found');
         });
 
         it('should handle prettier formatting errors', async () => {
@@ -427,23 +469,25 @@ coreButton.label=Save & Close`,
     });
 
     describe('integration behavior', () => {
-        it('should respect fast-glob ignore pattern for spec files', async () => {
+        it('should discover .properties files and create corresponding .ts files', async () => {
             vol.fromJSON({
                 '/workspace/libs/i18n/translations/translations.properties': `coreButton.save=Save`,
-                '/workspace/libs/i18n/translations/translations_en.ts': `export default {};`,
+                '/workspace/libs/i18n/translations/translations_en.properties': `coreButton.save=Save EN`,
                 '/workspace/libs/i18n/translations/translations_en.spec.ts': `describe('test', () => {});`
             });
 
-            (fastGlobSync as jest.Mock).mockReturnValue(['libs/i18n/translations/translations_en.ts']);
+            (fastGlobSync as jest.Mock).mockReturnValue([
+                'libs/i18n/translations/translations.properties',
+                'libs/i18n/translations/translations_en.properties'
+            ]);
 
             const result = await sync({
                 propertiesPath: 'libs/i18n/translations'
             });
 
             expect(result.success).toBe(true);
-            expect(fastGlobSync).toHaveBeenCalledWith(expect.any(String), {
-                cwd: '/workspace',
-                ignore: ['**/*.spec.ts']
+            expect(fastGlobSync).toHaveBeenCalledWith('libs/i18n/translations/translations*.properties', {
+                cwd: '/workspace'
             });
         });
 

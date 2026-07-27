@@ -38,7 +38,10 @@
             "options": {
                 "propertiesPath": "{projectRoot}/src/lib/translations",
                 "command": "sync"
-            }
+            },
+            "inputs": ["{projectRoot}/src/lib/translations/*.properties", "default"],
+            "outputs": ["{projectRoot}/src/lib/translations/*.ts"],
+            "cache": true
         },
         "test": {
             "executor": "@nx/jest:jest",

@@ -98,7 +98,9 @@ export function extractKeysFromFdLanguageInterface(): string[] {
  * Generate the content for fd-language-key-identifier.ts
  */
 function generateFdLanguageKeyIdentifierContent(languageKeys: string[]): string {
-    const keys = languageKeys.map((k) => `    | '${k}'`).join('\n');
+    // Sort keys alphabetically for consistent ordering
+    const sortedKeys = [...languageKeys].sort();
+    const keys = sortedKeys.map((k) => `    | '${k}'`).join('\n');
     return `/**
  * Type contains all the language keys.
  * This type is generated automatically. Please, do not change it manually.
