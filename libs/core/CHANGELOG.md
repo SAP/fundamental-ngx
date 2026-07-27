@@ -1,3 +1,13 @@
+## 0.64.1-rc.8 (2026-07-27)
+
+### 🩹 Fixes
+
+- **core:** add User menu a11y improvements ([#14391](https://github.com/SAP/fundamental-ngx/pull/14391))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.64.1-rc.7 (2026-07-27)
 
 This was a version bump only for core to align it with other projects, there were no code changes.
