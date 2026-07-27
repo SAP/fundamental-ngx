@@ -421,6 +421,42 @@ describe('runExecutor', () => {
         const writeFileCalls = (fs.writeFile as jest.Mock).mock.calls.map((c: any[]) => c[0] as string);
         expect(writeFileCalls.some((p) => p.includes('theming-bridge'))).toBe(false);
     });
+
+    it.each([
+        ['@ui5/webcomponents', 'ui5-webcomponents-theming-service'],
+        ['@ui5/webcomponents-fiori', 'ui5-webcomponents-fiori-theming-service'],
+        ['@ui5/webcomponents-ai', 'ui5-webcomponents-ai-theming-service']
+    ])('generates correct name for %s', async (packageName, expectedName) => {
+        const templateContent = require('fs').readFileSync(
+            require('path').resolve(__dirname, 'utils/theming-service-template.tpl'),
+            'utf-8'
+        );
+        (fs.readFile as jest.Mock).mockImplementation((filePath: string) => {
+            if ((filePath as string).endsWith('.json')) {
+                return Promise.resolve(JSON.stringify(minimalCem));
+            }
+            if ((filePath as string).includes('theming-service-template')) {
+                return Promise.resolve(templateContent);
+            }
+            return Promise.resolve('/* template content */');
+        });
+        const result = await runExecutor(
+            {
+                cemFile: '@ui5/webcomponents/dist/custom-elements-internal.json',
+                packageName,
+                targetDir: '',
+                outputPath: '',
+                tsConfig: ''
+            },
+            makeContext(packageName.replace('@ui5/', ''))
+        );
+        expect(result.success).toBe(true);
+        const themingWriteCall = (fs.writeFile as jest.Mock).mock.calls.find((c: any[]) =>
+            /theming[/\\]index\.ts$/.test(c[0])
+        );
+        expect(themingWriteCall).toBeDefined();
+        expect(themingWriteCall[1]).toContain(`name = '${expectedName}'`);
+    });
 });
 
 describe('generateThemingBridgeContent', () => {
