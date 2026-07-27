@@ -114,13 +114,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: '[[[Ĭŋƒŏ Ļąƃēĺ∙∙∙∙]]]'
     },
-    coreList: {
-        listItemSelectedAriaLabel: '[[[Ŝēĺēċţēƌ∙∙∙∙∙∙]]]',
-        listItemNotSelectedAriaLabel: '[[[Ńŏţ Ŝēĺēċţēƌ∙∙∙∙∙∙∙]]]'
-    },
     coreLink: {
         emphasized: '[[[Ĕɱρĥąşįžēƌ∙∙∙∙]]]',
         subtle: '[[[Ŝűƃţĺē∙∙∙∙∙∙∙∙]]]'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: '[[[Ŝēĺēċţēƌ∙∙∙∙∙∙]]]',
+        listItemNotSelectedAriaLabel: '[[[Ńŏţ Ŝēĺēċţēƌ∙∙∙∙∙∙∙]]]'
     },
     coreMessageStrip: {
         announcementError: '[[[Ĕŗŗŏŗ Μēşşąğē Ŝţŗįρ∙∙∙∙∙]]]',
