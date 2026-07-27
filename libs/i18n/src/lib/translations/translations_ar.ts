@@ -115,8 +115,8 @@ export default {
         srOnlyText: 'تسمية المعلومات'
     },
     coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
+        listItemSelectedAriaLabel: 'المحدد',
+        listItemNotSelectedAriaLabel: 'غير محدد'
     },
     coreLink: {
         emphasized: 'مؤكَّد',
@@ -365,7 +365,7 @@ export default {
         messagesTeamRemoved: 'تمت إزالة فريق واحد',
         messagesUndoAction: 'تراجع',
         nextButtonAriaLabel: 'انتقال إلى الشريحة التالية',
-        noDataFound: 'No Data Found',
+        noDataFound: 'لم يتم العثور على أي بيانات',
         nodeActionAddApproversAfter: 'إضافة المعتمِدين بعد',
         nodeActionAddApproversBefore: 'إضافة المعتمِدين قبل',
         nodeActionAddApproversParallel: 'إضافة المعتمِدين المتوازيين',
@@ -522,7 +522,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'إلغاء',
         clearFilters: 'مسح عوامل التصفية',
-        collapseAllAnnouncementLabel: 'Collapse All clicked',
+        collapseAllAnnouncementLabel: 'طي الكل الذي تم النقر فوقه',
         collapseRowButtonTitle: 'طي الصف',
         confirmBtnLabel: 'موافق',
         defaultEmptyMessage: 'لم يتم العثور على بيانات',
@@ -533,7 +533,7 @@ export default {
         editableCellNumberPlaceholder: 'أدخل القيمة',
         editableCellStringPlaceholder: 'أدخل القيمة',
         emptyCell: 'فارغ',
-        expandAllAnnouncementLabel: 'Expand All clicked',
+        expandAllAnnouncementLabel: 'توسيع الكل الذي تم النقر فوقه',
         expandRowButtonTitle: 'توسيع الصف',
         filterDialogBackToColumns: 'التنقل إلى الخلف',
         filterDialogCancelBtnLabel: 'إلغاء',

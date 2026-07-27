@@ -10,18 +10,6 @@
         "useDefineForClassFields": false,
         "moduleResolution": "bundler"
     },
-    "angularCompilerOptions": {
-        "skipTemplateCodegen": true,
-        // TODO(#14334): suppress Angular 22 optionalChainNotNullable and nullishCoalescingNotNullable diagnostics
-        "extendedDiagnostics": {
-            "checks": {
-                "nullishCoalescingNotNullable": "suppress",
-                "optionalChainNotNullable": "suppress"
-            }
-        },
-        "strictMetadataEmit": true,
-        "enableResourceInlining": true
-    },
     "exclude": ["**/*.spec.ts", "../../dist/out-tsc", "jest.config.ts"],
     "include": ["./**/*.ts"]
 }

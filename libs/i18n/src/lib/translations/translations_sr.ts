@@ -1,4 +1,4 @@
-// Do not modify, it's automatically created. Modify translations_sh.properties instead
+// Do not modify, it's automatically created. Modify translations_sr.properties instead
 export default {
     btpNavigation: {
         expanderAriaLabel: 'proširi/sažmi podstavke',

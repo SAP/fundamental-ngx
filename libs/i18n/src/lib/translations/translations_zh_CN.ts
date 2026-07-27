@@ -113,8 +113,8 @@ export default {
         srOnlyText: '信息标签'
     },
     coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
+        listItemSelectedAriaLabel: '已选择',
+        listItemNotSelectedAriaLabel: '未选择'
     },
     coreLink: {
         emphasized: '已强调',
@@ -362,7 +362,7 @@ export default {
         messagesTeamRemoved: '已删除 1 个团队',
         messagesUndoAction: '撤销',
         nextButtonAriaLabel: '转到下一张幻灯片',
-        noDataFound: 'No Data Found',
+        noDataFound: '未找到数据',
         nodeActionAddApproversAfter: '之后添加审批人',
         nodeActionAddApproversBefore: '之前添加审批人',
         nodeActionAddApproversParallel: '添加并行审批人',
@@ -519,7 +519,7 @@ export default {
     platformTable: {
         cancelBtnLabel: '取消',
         clearFilters: '清除过滤器',
-        collapseAllAnnouncementLabel: 'Collapse All clicked',
+        collapseAllAnnouncementLabel: '已单击“全部折叠”',
         collapseRowButtonTitle: '折叠行',
         confirmBtnLabel: '确定',
         defaultEmptyMessage: '找不到数据',
@@ -530,7 +530,7 @@ export default {
         editableCellNumberPlaceholder: '输入值',
         editableCellStringPlaceholder: '输入值',
         emptyCell: '空',
-        expandAllAnnouncementLabel: 'Expand All clicked',
+        expandAllAnnouncementLabel: '已单击“全部展开”',
         expandRowButtonTitle: '展开行',
         filterDialogBackToColumns: '向后导航',
         filterDialogCancelBtnLabel: '取消',

@@ -57,7 +57,7 @@
             <fd-form-message type="error" [attr.id]="'fdp-form-message-error-' + id">
                 <ng-template
                     [ngTemplateOutlet]="i18Strings"
-                    [ngTemplateOutletContext]="{ $implicit: $safeNavigationMigration(control?.ngControl?.errors) }"
+                    [ngTemplateOutletContext]="{ $implicit: control?.ngControl?.errors }"
                 >
                 </ng-template>
             </fd-form-message>
@@ -93,7 +93,7 @@
     @if (groupedErrors.length === 0 && hasErrors() && i18Strings) {
         <ng-template
             [ngTemplateOutlet]="i18Strings"
-            [ngTemplateOutletContext]="{ $implicit: $safeNavigationMigration(control?.ngControl?.errors) }"
+            [ngTemplateOutletContext]="{ $implicit: control?.ngControl?.errors }"
         >
         </ng-template>
     }

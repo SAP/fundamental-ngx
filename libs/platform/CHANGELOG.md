@@ -1,3 +1,27 @@
+## 0.64.1-rc.6 (2026-07-27)
+
+### 🩹 Fixes
+
+- **core,platform,cdk:** remove extendedDiagnostics suppressions, retire `$safeNavigationMigration` and fix all violations ([#14393](https://github.com/SAP/fundamental-ngx/pull/14393), [#14334](https://github.com/SAP/fundamental-ngx/issues/14334))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
+## 0.64.1-rc.5 (2026-07-24)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
+## 0.64.1-rc.3 (2026-07-24)
+
+### 🩹 Fixes
+
+- **platform:** table header cell popover aria improvements ([#14365](https://github.com/SAP/fundamental-ngx/pull/14365))
+
+### ❤️ Thank You
+
+- Mike O'Donnell @mikerodonnell89
+
 ## 0.64.1-rc.2 (2026-07-23)
 
 This was a version bump only for platform to align it with other projects, there were no code changes.

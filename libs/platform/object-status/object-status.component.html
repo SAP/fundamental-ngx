@@ -13,5 +13,5 @@
     (click)="onObjectStatusClick($event)"
     [label]="label"
     [secondaryIndication]="secondaryIndication"
-    [textTemplate]="$safeNavigationMigration(_textDirective?.templateRef)"
+    [textTemplate]="_textDirective?.templateRef"
 ></span>

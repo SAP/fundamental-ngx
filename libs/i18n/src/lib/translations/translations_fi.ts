@@ -114,8 +114,8 @@ export default {
         srOnlyText: 'Infoetiketti'
     },
     coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
+        listItemSelectedAriaLabel: 'Valittu',
+        listItemNotSelectedAriaLabel: 'Ei valittu'
     },
     coreLink: {
         emphasized: 'Korostettu',
@@ -365,7 +365,7 @@ export default {
         messagesTeamRemoved: '1 tiimi on poistettu',
         messagesUndoAction: 'Kumoa',
         nextButtonAriaLabel: 'Siirry seuraavaan diaan',
-        noDataFound: 'No Data Found',
+        noDataFound: 'Tietoja ei löytynyt',
         nodeActionAddApproversAfter: 'Lisää hyväksyjät jälkeen',
         nodeActionAddApproversBefore: 'Lisää hyväksyjät ennen',
         nodeActionAddApproversParallel: 'Lisää rinnakkaisia hyväksyjiä',
@@ -522,7 +522,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Peruuta',
         clearFilters: 'Tyhjennä suodattimet',
-        collapseAllAnnouncementLabel: 'Collapse All clicked',
+        collapseAllAnnouncementLabel: 'Tiivistä kaikki -painiketta napsautettu',
         collapseRowButtonTitle: 'Tiivistä rivi',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Tietoja ei löydy',
@@ -533,7 +533,7 @@ export default {
         editableCellNumberPlaceholder: 'Syötä arvo',
         editableCellStringPlaceholder: 'Syötä arvo',
         emptyCell: 'Tyhjä',
-        expandAllAnnouncementLabel: 'Expand All clicked',
+        expandAllAnnouncementLabel: 'Laajenna kaikki -painiketta napsautettu',
         expandRowButtonTitle: 'Laajenna rivi',
         filterDialogBackToColumns: 'Navigoi takaisin',
         filterDialogCancelBtnLabel: 'Peruuta',

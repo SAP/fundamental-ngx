@@ -1,11 +1,13 @@
 // Mock dependencies before requiring the module
 jest.mock('child_process');
 jest.mock('./get-file-contents');
+jest.mock('./npm-published-version', () => jest.fn());
 
 describe('get-version', () => {
     let getVersion;
     let mockedExecSync;
     let mockedGetFileContents;
+    let mockedNpmPublishedVersion;
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -14,6 +16,9 @@ describe('get-version', () => {
         // Re-require the mocked dependencies and store references
         mockedExecSync = require('child_process').execSync;
         mockedGetFileContents = require('./get-file-contents');
+        mockedNpmPublishedVersion = require('./npm-published-version');
+        // Default: npm floor contributes nothing unless a test opts in.
+        mockedNpmPublishedVersion.mockReturnValue(null);
         // Now require the module under test (it will use the mocked dependencies)
         getVersion = require('./get-version');
     });
@@ -295,6 +300,84 @@ describe('get-version', () => {
             const result = getVersion();
 
             expect(result).toBe('0.59.1-rc.19');
+        });
+    });
+
+    describe('npm published version floor', () => {
+        // Root cause of the failed release run 30101584110: a prior run published
+        // 0.64.1-rc.4 to npm and pushed tag v0.64.1-rc.4, but its release commit
+        // orphaned (never landed on main). The next run's `git tag --merged HEAD`
+        // could not see the orphaned tag, so it recomputed rc.4 and got a 403 on
+        // publish. npm is the authority on "already published" and must act as a floor.
+
+        it('should return the npm-published version when it is higher than the highest reachable tag (the rc.4 bug)', () => {
+            // Reachable tags top out at rc.3 (orphaned rc.4 tag is invisible to --merged HEAD)
+            mockedExecSync.mockReturnValue('v0.64.1-rc.3\nv0.64.1-rc.2\nv0.64.1-rc.1\n');
+            mockedGetFileContents.mockReturnValue({ version: '0.64.1-rc.3' });
+            // npm already has rc.4
+            mockedNpmPublishedVersion.mockReturnValue('0.64.1-rc.4');
+
+            const result = getVersion();
+
+            // Must return rc.4 so the bump produces rc.5, not another rc.4
+            expect(result).toBe('0.64.1-rc.4');
+        });
+
+        it('should NOT lower the result when npm is behind the git tags', () => {
+            mockedExecSync.mockReturnValue('v0.64.1-rc.5\nv0.64.1-rc.4\n');
+            mockedGetFileContents.mockReturnValue({ version: '0.64.1-rc.5' });
+            mockedNpmPublishedVersion.mockReturnValue('0.64.1-rc.4');
+
+            const result = getVersion();
+
+            expect(result).toBe('0.64.1-rc.5');
+        });
+
+        it('should return the npm version when npm latest is higher than tags and package.json', () => {
+            mockedExecSync.mockReturnValue('v0.64.1-rc.4\nv0.64.1-rc.3\n');
+            mockedGetFileContents.mockReturnValue({ version: '0.64.1-rc.4' });
+            mockedNpmPublishedVersion.mockReturnValue('0.65.0');
+
+            const result = getVersion();
+
+            expect(result).toBe('0.65.0');
+        });
+
+        it('should fall back to the git tag version when the npm lookup returns null (query failed)', () => {
+            mockedExecSync.mockReturnValue('v0.64.1-rc.3\nv0.64.1-rc.2\n');
+            mockedGetFileContents.mockReturnValue({ version: '0.64.1-rc.3' });
+            // Total npm failure is represented as null by the helper
+            mockedNpmPublishedVersion.mockReturnValue(null);
+
+            const result = getVersion();
+
+            expect(result).toBe('0.64.1-rc.3');
+        });
+
+        it('should use the npm floor over package.json when both are considered', () => {
+            // Simulates partial-publish drift surfaced via the npm helper's own max:
+            // helper already reduced across all packages and returned rc.4
+            mockedExecSync.mockReturnValue('v0.64.1-rc.3\n');
+            mockedGetFileContents.mockReturnValue({ version: '0.64.1-rc.2' });
+            mockedNpmPublishedVersion.mockReturnValue('0.64.1-rc.4');
+
+            const result = getVersion();
+
+            expect(result).toBe('0.64.1-rc.4');
+        });
+
+        it('should NOT query npm when a specific branch is requested', () => {
+            mockedGetFileContents.mockImplementation((file, branch) => {
+                if (file === 'libs/core/package.json' && branch === 'main') {
+                    return { version: '0.64.0' };
+                }
+                throw new Error('Unexpected call');
+            });
+
+            const result = getVersion('main');
+
+            expect(result).toBe('0.64.0');
+            expect(mockedNpmPublishedVersion).not.toHaveBeenCalled();
         });
     });
 });

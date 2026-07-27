@@ -52,7 +52,7 @@
             Valid: {{ customForm.controls.multiDateRange.valid }}<br />
             Selected Date Ranges:<br />
             @for (dateRange of customForm.controls.multiDateRange.value; track dateRange) {
-                {{ (dateRange?.start?.toDateString() || 'null') + ' - ' + (dateRange?.end?.toDateString() || 'null') }}
+                {{ (dateRange?.start.toDateString() || 'null') + ' - ' + (dateRange?.end.toDateString() || 'null') }}
                 <br />
             }
         </small>

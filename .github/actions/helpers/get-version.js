@@ -1,21 +1,24 @@
 const getFileContents = require('./get-file-contents');
+const npmPublishedVersion = require('./npm-published-version');
 const { execSync } = require('child_process');
 const semver = require('semver');
 
 /**
- * Get the version from git tags (NX Release compatible) or fall back to package.json.
- * This aligns with NX Release's currentVersionResolver: "git-tag" configuration.
+ * Resolve the current version, aligning with NX Release's "git-tag" resolver.
  *
- * Priority:
- * 1. Git tags (latest semver tag by semver comparison, including prereleases)
- * 2. libs/core/package.json (contains actual version)
- * 3. package.json (workspace root - fallback)
+ * Current branch: highest of git tag (reachable from HEAD), libs/core/package.json,
+ * and the npm-published version. npm acts as a floor because git tags aren't the
+ * authority on "already published" — an orphaned release commit hides its tag from
+ * `git tag --merged HEAD`, so the resolver would otherwise recompute an already-
+ * published version and 403 on publish. See npm-published-version.js.
  *
- * @param branch - Optional branch to get version from
+ * @param branch - Optional branch to read the version from
  * @returns {string} - The current version
  */
 module.exports = (branch = null) => {
-    // If checking a specific branch, use libs/core/package.json (has actual version)
+    // If checking a specific branch, use libs/core/package.json (has actual version).
+    // The npm floor is intentionally NOT applied here: this path is used for hotfix
+    // main-sync comparisons and must stay pure and synchronous.
     if (branch) {
         try {
             return getFileContents('libs/core/package.json', branch).version;
@@ -43,21 +46,24 @@ module.exports = (branch = null) => {
             // Sort by semver (including prereleases) and get the highest version
             // semver.rsort handles prerelease comparison correctly:
             // e.g., 0.59.0-rc.0 > 0.58.1 (because 0.59.0 > 0.58.1)
-            const sortedVersions = semver.rsort(validVersions);
-            const tagVersion = sortedVersions[0];
+            let resolved = semver.rsort(validVersions)[0];
 
-            // Also check package.json version - use whichever is higher
-            // This handles cases where a release commit bumped package.json but tag creation failed
+            // Floor 1: package.json version.
+            // Handles cases where a release commit bumped package.json but tag creation failed.
             try {
                 const packageVersion = getFileContents('libs/core/package.json', null).version;
-                if (semver.valid(packageVersion) && semver.gt(packageVersion, tagVersion)) {
-                    return packageVersion;
-                }
+                resolved = higherOf(resolved, packageVersion);
             } catch (e) {
                 // Ignore errors reading package.json
             }
 
-            return tagVersion;
+            // Floor 2: npm-published version.
+            // Handles the orphaned-release-commit race where the pushed tag is not
+            // reachable from HEAD but the version is already live on npm. Best-effort:
+            // returns null (no-op) if npm cannot be reached.
+            resolved = higherOf(resolved, npmPublishedVersion());
+
+            return resolved;
         }
     } catch (e) {
         // Git command failed or no tags found, fall through to package.json
@@ -74,3 +80,18 @@ module.exports = (branch = null) => {
         }
     }
 };
+
+/**
+ * Return the higher valid semver of `current` / `candidate`.
+ * A null/invalid candidate never lowers `current`.
+ *
+ * @param {string} current - Assumed valid semver
+ * @param {string | null | undefined} candidate
+ * @returns {string}
+ */
+function higherOf(current, candidate) {
+    if (semver.valid(candidate) && semver.gt(candidate, current)) {
+        return candidate;
+    }
+    return current;
+}

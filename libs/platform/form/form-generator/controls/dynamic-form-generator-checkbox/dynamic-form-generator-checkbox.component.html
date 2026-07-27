@@ -3,7 +3,7 @@
         <fdp-checkbox-group
             [id]="id"
             [isInline]="formItem.guiOptions?.inline || false"
-            [inlineLayout]="$safeNavigationMigration(formItem.guiOptions?.inlineLayout)"
+            [inlineLayout]="formItem.guiOptions?.inlineLayout"
             [name]="name"
             [list]="choices"
             [formControlName]="name"

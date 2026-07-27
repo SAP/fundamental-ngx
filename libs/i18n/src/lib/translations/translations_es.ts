@@ -115,8 +115,8 @@ export default {
         srOnlyText: 'Etiqueta de información'
     },
     coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
+        listItemSelectedAriaLabel: 'Seleccionado',
+        listItemNotSelectedAriaLabel: 'No seleccionado'
     },
     coreLink: {
         emphasized: 'Destacado',
@@ -367,7 +367,7 @@ export default {
         messagesTeamRemoved: 'Se ha eliminado un equipo',
         messagesUndoAction: 'Deshacer',
         nextButtonAriaLabel: 'Ir a siguiente diapositiva',
-        noDataFound: 'No Data Found',
+        noDataFound: 'No se han encontrado datos',
         nodeActionAddApproversAfter: 'Agregar responsables de aprobación después',
         nodeActionAddApproversBefore: 'Agregar responsables de aprobación antes',
         nodeActionAddApproversParallel: 'Agregar responsables de aprobación en paralelo',
@@ -524,7 +524,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Cancelar',
         clearFilters: 'Borrar filtros',
-        collapseAllAnnouncementLabel: 'Collapse All clicked',
+        collapseAllAnnouncementLabel: 'Contraer todo lo seleccionado',
         collapseRowButtonTitle: 'Contraer fila',
         confirmBtnLabel: 'Aceptar',
         defaultEmptyMessage: 'No se han encontrado datos',
@@ -535,7 +535,7 @@ export default {
         editableCellNumberPlaceholder: 'Especificar valor',
         editableCellStringPlaceholder: 'Especificar valor',
         emptyCell: 'Vacía',
-        expandAllAnnouncementLabel: 'Expand All clicked',
+        expandAllAnnouncementLabel: 'Expandir todo lo seleccionado',
         expandRowButtonTitle: 'Expandir fila',
         filterDialogBackToColumns: 'Volver atrás',
         filterDialogCancelBtnLabel: 'Cancelar',

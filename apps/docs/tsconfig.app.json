@@ -14,15 +14,5 @@
     },
     "files": ["src/main.ts", "src/polyfills.ts"],
     "include": ["src/*.d.ts", "**/*.ts"],
-    "exclude": ["**/*.spec.ts", "**/e2e/*.ts", "dist", "src/environments/**/*"],
-    "angularCompilerOptions": {
-        "enableIvy": true,
-        // TODO(#14334): suppress Angular 22 optionalChainNotNullable and nullishCoalescingNotNullable diagnostics
-        "extendedDiagnostics": {
-            "checks": {
-                "nullishCoalescingNotNullable": "suppress",
-                "optionalChainNotNullable": "suppress"
-            }
-        }
-    }
+    "exclude": ["**/*.spec.ts", "**/e2e/*.ts", "dist", "src/environments/**/*"]
 }
