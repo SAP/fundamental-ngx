@@ -1,6 +1,6 @@
 import { ConfigurableFocusTrapFactory, FocusTrap } from '@angular/cdk/a11y';
 import { Direction } from '@angular/cdk/bidi';
-import { ESCAPE } from '@angular/cdk/keycodes';
+import { BACKSPACE, DELETE, ENTER, ESCAPE } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -52,6 +52,7 @@ import { FD_NOTIFICATION, FD_NOTIFICATION_FOOTER, FD_NOTIFICATION_PARAGRAPH, FD_
         '[attr.id]': 'id',
         '[tabindex]': '0',
         '[style.width]': 'width',
+        '(keydown)': '_handleNotificationActionKeys($event)',
         '(window:keyup)': '_closeNotificationEsc($event)'
     },
     providers: [
@@ -63,6 +64,13 @@ import { FD_NOTIFICATION, FD_NOTIFICATION_FOOTER, FD_NOTIFICATION_PARAGRAPH, FD_
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NotificationComponent extends AbstractFdNgxClass implements OnInit, AfterViewInit, OnDestroy {
+    /** @hidden */
+    private static readonly _FOCUSABLE_SELECTOR =
+        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+    /** Callback fired when Enter or Delete/Backspace is pressed on this notification. */
+    actionKeyHandler = input<Nullable<(event: KeyboardEvent, key: 'enter' | 'delete') => void>>(null);
+
     /** @hidden */
     containerRef = viewChild('vc', { read: ViewContainerRef });
 
@@ -189,6 +197,24 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
         }
     }
 
+    /** @hidden Calls the optional action callback when Enter or Delete/Backspace is pressed. */
+    _handleNotificationActionKeys(event: KeyboardEvent): void {
+        const callbackFn = this.actionKeyHandler();
+
+        if (!callbackFn || this._isEditableTarget(event.target)) {
+            return;
+        }
+
+        if (KeyUtil.isKeyCode(event, ENTER)) {
+            callbackFn(event, 'enter');
+            return;
+        }
+
+        if (KeyUtil.isKeyCode(event, [DELETE, BACKSPACE])) {
+            callbackFn(event, 'delete');
+        }
+    }
+
     /** @hidden */
     ngOnInit(): void {
         this._listenAndCloseOnNavigation();
@@ -242,6 +268,39 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
     /** @hidden */
     _setProperties(): void {
         this._addClassToElement('fd-notification');
+    }
+
+    /** @hidden Focuses the element at the same child path, or a close fallback if not found. */
+    focusByPath(path: number[]): void {
+        const ownElement = this.elementRef.nativeElement as HTMLElement;
+        const matchedElement = this._resolvePathInNotification(path);
+
+        if (matchedElement instanceof HTMLElement) {
+            matchedElement.focus();
+            return;
+        }
+
+        const fallbackFocusable = ownElement.querySelector<HTMLElement>(NotificationComponent._FOCUSABLE_SELECTOR);
+        if (fallbackFocusable) {
+            fallbackFocusable.focus();
+            return;
+        }
+
+        ownElement.focus();
+    }
+
+    /** @hidden Returns the child index path from this notification to the target element. */
+    getPathToChild(target: EventTarget | null): number[] | null {
+        if (!(target instanceof HTMLElement)) {
+            return null;
+        }
+
+        const ownElement = this.elementRef.nativeElement as HTMLElement;
+        if (!ownElement.contains(target)) {
+            return null;
+        }
+
+        return this._buildPathToNotification(target);
     }
 
     /** @hidden */
@@ -334,5 +393,55 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
         Object.keys(notificationConfig || {})
             .filter((key) => key !== 'data' && key !== 'container')
             .forEach((key) => (this[key] = notificationConfig[key]));
+    }
+
+    /** @hidden Returns true when keyboard handling should not run for editable controls. */
+    private _isEditableTarget(target: EventTarget | null): boolean {
+        if (!(target instanceof HTMLElement)) {
+            return false;
+        }
+
+        return target.isContentEditable || ['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName);
+    }
+
+    /** @hidden Builds a path of child indexes from this notification root to the target element. */
+    private _buildPathToNotification(target: HTMLElement): number[] {
+        const ownElement = this.elementRef.nativeElement as HTMLElement;
+
+        if (target === ownElement) {
+            return [];
+        }
+
+        const path: number[] = [];
+        let currentElement: HTMLElement | null = target;
+
+        while (currentElement && currentElement !== ownElement) {
+            const parentElement = currentElement.parentElement;
+
+            if (!parentElement) {
+                break;
+            }
+
+            path.unshift(Array.from(parentElement.children).indexOf(currentElement));
+            currentElement = parentElement;
+        }
+
+        return path;
+    }
+
+    /** @hidden Resolves a child-index path to an element inside this notification. */
+    private _resolvePathInNotification(path: number[]): Element | null {
+        let currentElement: Element = this.elementRef.nativeElement as Element;
+
+        for (const pathIndex of path) {
+            const childElement = currentElement.children.item(pathIndex);
+            if (!childElement) {
+                return null;
+            }
+
+            currentElement = childElement;
+        }
+
+        return currentElement;
     }
 }

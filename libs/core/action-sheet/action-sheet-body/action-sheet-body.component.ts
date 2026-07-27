@@ -68,6 +68,9 @@ export class ActionSheetBodyComponent implements AfterViewInit {
     @ContentChildren(ActionSheetItemComponent)
     private readonly _items: QueryList<ActionSheetItemComponent>;
 
+    /** Emits when the Tab key is pressed inside the action sheet body. */
+    readonly tabKeyDown = new Subject<void>();
+
     /** @hidden */
     private _refresh$ = new Subject<void>();
 
@@ -89,6 +92,11 @@ export class ActionSheetBodyComponent implements AfterViewInit {
     /** @hidden */
     @HostListener('keydown', ['$event'])
     keyDownHandler(event: KeyboardEvent): void {
+        if (event.key === 'Tab') {
+            event.preventDefault();
+            this.tabKeyDown.next();
+            return;
+        }
         if (this._keyboardSupportService.keyManager) {
             this._keyboardSupportService.onKeyDown(event);
         }

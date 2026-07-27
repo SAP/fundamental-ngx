@@ -146,6 +146,7 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
         this._keyboardSupportService.setKeyboardService(this.actionSheetItems, true);
         this._listenOnItemsChange();
         this._actionControlHandle();
+        this._listenOnBodyTabKey();
     }
 
     /** @hidden */
@@ -203,6 +204,18 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
         this.actionSheetControl.clicked
             .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe(() => (this.isOpen ? this.close() : this.open()));
+    }
+
+    /** @hidden */
+    private _listenOnBodyTabKey(): void {
+        if (!this.actionSheetBody) {
+            return;
+        }
+        this.actionSheetBody.tabKeyDown.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+            if (!this.mobile && this.isOpen) {
+                this.close();
+            }
+        });
     }
 
     /** @hidden */
