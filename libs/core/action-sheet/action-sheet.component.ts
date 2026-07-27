@@ -211,8 +211,8 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
         if (!this.actionSheetBody) {
             return;
         }
-        this.actionSheetBody.tabKeyDown.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
-            if (!this.mobile && this.isOpen) {
+        this.actionSheetBody.tabKeyPressed$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+            if (this.isOpen) {
                 this.close();
             }
         });

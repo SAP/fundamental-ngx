@@ -12,5 +12,5 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
     }
 })
 export class NotificationGroupGrowingItemComponent {
-    protected ariaLabel = input<string>();
+    readonly ariaLabel = input<string>();
 }

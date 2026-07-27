@@ -83,9 +83,10 @@ export class NotificationGroupListComponent implements AfterViewInit {
             return;
         }
 
-        const focusedPath = currentIndex >= 0 ? notificationList[currentIndex].getPathToChild(event.target) : [];
+        const focusedPath =
+            currentIndex >= 0 ? (notificationList[currentIndex].getPathToChild(event.target) ?? []) : [];
 
-        notificationList[targetIndex].focusByPath(focusedPath ?? []);
+        notificationList[targetIndex].focusByPath(focusedPath);
         event.preventDefault();
     }
 

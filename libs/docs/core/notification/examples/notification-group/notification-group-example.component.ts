@@ -91,7 +91,7 @@ export class NotificationGroupExampleComponent {
     ];
 
     onNotificationActionKey(_event: KeyboardEvent, key: 'enter' | 'delete'): void {
-        // Defer blocking alert so the keydown handler can finish quickly.
+        // Defer blocking alert so the keydown handler can finish quickly and focus management completes
         if (key === 'enter') {
             setTimeout(() => alert('Enter key pressed'));
             return;

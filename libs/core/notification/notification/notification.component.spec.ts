@@ -109,4 +109,18 @@ describe('NotificationComponent', () => {
 
         expect(callbackSpy).not.toHaveBeenCalled();
     });
+
+    it('should not execute action callback when keydown originates from nested interactive controls', () => {
+        const callbackSpy = jest.fn();
+
+        fixture.componentRef.setInput('actionKeyHandler', callbackSpy);
+        fixture.detectChanges();
+
+        const nestedButton = document.createElement('button');
+        fixture.nativeElement.appendChild(nestedButton);
+
+        nestedButton.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+
+        expect(callbackSpy).not.toHaveBeenCalled();
+    });
 });

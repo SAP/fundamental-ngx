@@ -395,13 +395,23 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
             .forEach((key) => (this[key] = notificationConfig[key]));
     }
 
-    /** @hidden Returns true when keyboard handling should not run for editable controls. */
+    /** @hidden Returns true when keyboard handling should not run for editable or nested interactive controls. */
     private _isEditableTarget(target: EventTarget | null): boolean {
         if (!(target instanceof HTMLElement)) {
             return false;
         }
 
-        return target.isContentEditable || ['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName);
+        if (target.isContentEditable) {
+            return true;
+        }
+
+        if (['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName)) {
+            return true;
+        }
+
+        const interactiveContainer = target.closest('button, a[href], [role="button"], [role="link"]');
+
+        return !!interactiveContainer && interactiveContainer !== this.elementRef.nativeElement;
     }
 
     /** @hidden Builds a path of child indexes from this notification root to the target element. */

@@ -1,3 +1,4 @@
+import { TAB } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -5,7 +6,6 @@ import {
     ContentChildren,
     DestroyRef,
     ElementRef,
-    HostListener,
     Input,
     QueryList,
     ViewChild,
@@ -13,11 +13,11 @@ import {
     inject
 } from '@angular/core';
 
-import { KeyboardSupportService, Nullable } from '@fundamental-ngx/cdk/utils';
+import { KeyUtil, KeyboardSupportService, Nullable } from '@fundamental-ngx/cdk/utils';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
-import { Subject, merge, startWith, takeUntil } from 'rxjs';
+import { Observable, Subject, merge, startWith, takeUntil } from 'rxjs';
 import { ActionSheetItemComponent } from '../action-sheet-item/action-sheet-item.component';
 
 let actionSheetBodyUniqueIdCounter = 0;
@@ -41,7 +41,11 @@ let actionSheetBodyUniqueIdCounter = 0;
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [KeyboardSupportService, contentDensityObserverProviders()],
-    standalone: true
+    standalone: true,
+    host: {
+        '(click)': 'onClick($event)',
+        '(keydown)': 'keyDownHandler($event)'
+    }
 })
 export class ActionSheetBodyComponent implements AfterViewInit {
     /** Id of the Action Sheet Body. */
@@ -68,8 +72,11 @@ export class ActionSheetBodyComponent implements AfterViewInit {
     @ContentChildren(ActionSheetItemComponent)
     private readonly _items: QueryList<ActionSheetItemComponent>;
 
-    /** Emits when the Tab key is pressed inside the action sheet body. */
-    readonly tabKeyDown = new Subject<void>();
+    /** Observable that emits when the Tab key is pressed inside the action sheet body. */
+    readonly tabKeyPressed$: Observable<void>;
+
+    /** @hidden Internal subject for tab key events */
+    private readonly _tabKeyPressed$ = new Subject<void>();
 
     /** @hidden */
     private _refresh$ = new Subject<void>();
@@ -81,20 +88,20 @@ export class ActionSheetBodyComponent implements AfterViewInit {
     constructor(
         private readonly _keyboardSupportService: KeyboardSupportService<ActionSheetItemComponent>,
         readonly _contentDensityObserver: ContentDensityObserver
-    ) {}
+    ) {
+        this.tabKeyPressed$ = this._tabKeyPressed$.asObservable();
+    }
 
     /** Handler for mouse events */
-    @HostListener('click', ['$event'])
     onClick(event: MouseEvent): void {
         event.stopPropagation();
     }
 
     /** @hidden */
-    @HostListener('keydown', ['$event'])
     keyDownHandler(event: KeyboardEvent): void {
-        if (event.key === 'Tab') {
+        if (KeyUtil.isKeyCode(event, TAB)) {
             event.preventDefault();
-            this.tabKeyDown.next();
+            this._tabKeyPressed$.next();
             return;
         }
         if (this._keyboardSupportService.keyManager) {
