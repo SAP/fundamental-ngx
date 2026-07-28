@@ -114,13 +114,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Etichetă informații'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Selectat',
-        listItemNotSelectedAriaLabel: 'Neselectat'
-    },
     coreLink: {
         emphasized: 'Evidențiat',
         subtle: 'Discret'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'Selectat',
+        listItemNotSelectedAriaLabel: 'Neselectat'
     },
     coreMessageStrip: {
         announcementError: 'Linie de mesaj de eroare',

@@ -113,13 +113,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Інформаційна мітка'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Вибрано',
-        listItemNotSelectedAriaLabel: 'Не вибрано'
-    },
     coreLink: {
         emphasized: 'Підкреслено',
         subtle: 'Приховано'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'Вибрано',
+        listItemNotSelectedAriaLabel: 'Не вибрано'
     },
     coreMessageStrip: {
         announcementError: 'Рядок повідомлень про помилки',

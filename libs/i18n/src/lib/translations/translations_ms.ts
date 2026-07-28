@@ -113,13 +113,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Label Maklumat'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Dipilih',
-        listItemNotSelectedAriaLabel: 'Tidak Dipilih'
-    },
     coreLink: {
         emphasized: 'Diserlahkan',
         subtle: 'Tak Ketara'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'Dipilih',
+        listItemNotSelectedAriaLabel: 'Tidak Dipilih'
     },
     coreMessageStrip: {
         announcementError: 'Jalur Mesej Ralat',

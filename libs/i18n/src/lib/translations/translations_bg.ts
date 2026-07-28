@@ -114,13 +114,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Информационен етикет'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Избранo',
-        listItemNotSelectedAriaLabel: 'Не е избрано'
-    },
     coreLink: {
         emphasized: 'Акцентирано',
         subtle: 'Неясни'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'Избранo',
+        listItemNotSelectedAriaLabel: 'Не е избрано'
     },
     coreMessageStrip: {
         announcementError: 'Лента със съобщение за грешка',

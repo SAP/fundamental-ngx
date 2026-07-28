@@ -114,13 +114,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Infolabel'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Geselecteerd',
-        listItemNotSelectedAriaLabel: 'Niet geselecteerd'
-    },
     coreLink: {
         emphasized: 'Benadrukt',
         subtle: 'Subtiel'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'Geselecteerd',
+        listItemNotSelectedAriaLabel: 'Niet geselecteerd'
     },
     coreMessageStrip: {
         announcementError: 'Statusbalk foutmelding',

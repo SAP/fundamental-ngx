@@ -114,13 +114,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Infooznaka'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Izbrano',
-        listItemNotSelectedAriaLabel: 'Ni izbrano'
-    },
     coreLink: {
         emphasized: 'Izpostavljeno',
         subtle: 'Neizpostavljeno'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'Izbrano',
+        listItemNotSelectedAriaLabel: 'Ni izbrano'
     },
     coreMessageStrip: {
         announcementError: 'Vrstica z obvestilom o napaki',

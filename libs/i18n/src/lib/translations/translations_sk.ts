@@ -114,13 +114,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Označenie s informáciami'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Vybrané',
-        listItemNotSelectedAriaLabel: 'Nevybrané'
-    },
     coreLink: {
         emphasized: 'Zvýraznené',
         subtle: 'Jednoduché'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'Vybrané',
+        listItemNotSelectedAriaLabel: 'Nevybrané'
     },
     coreMessageStrip: {
         announcementError: 'Riadok chybovej správy',

@@ -103,7 +103,7 @@ coreButton.save=Save
             ];
 
             // Should insert between add and save
-            const index = findInsertionPoint(lines, 'coreButton', 'coreButton.cancel');
+            const index = findInsertionPoint(lines, 'coreButton.cancel');
 
             expect(index).toBe(3); // Before the #XBUT: Save comment
         });
@@ -120,7 +120,7 @@ coreButton.save=Save
                 'coreInput.name=Name'
             ];
 
-            const index = findInsertionPoint(lines, 'coreButton', 'coreButton.zzz');
+            const index = findInsertionPoint(lines, 'coreButton.zzz');
 
             expect(index).toBe(6); // Before #XFLD comment (after coreButton group)
         });
@@ -137,7 +137,7 @@ coreButton.save=Save
                 'coreInput.name=Name'
             ];
 
-            const index = findInsertionPoint(lines, 'coreButton', 'coreButton.add');
+            const index = findInsertionPoint(lines, 'coreButton.add');
 
             expect(index).toBe(0); // Before the #XBUT: Save comment
         });
@@ -145,7 +145,7 @@ coreButton.save=Save
         it('should insert at end if no matching prefix', () => {
             const lines = ['#XBUT: Save', 'coreButton.save=Save', ''];
 
-            const index = findInsertionPoint(lines, 'coreDialog', 'coreDialog.title');
+            const index = findInsertionPoint(lines, 'coreDialog.title');
 
             expect(index).toBe(lines.length);
         });
@@ -153,7 +153,7 @@ coreButton.save=Save
         it('should handle empty file', () => {
             const lines: string[] = [];
 
-            const index = findInsertionPoint(lines, 'coreButton', 'coreButton.save');
+            const index = findInsertionPoint(lines, 'coreButton.save');
 
             expect(index).toBe(0);
         });
@@ -161,7 +161,7 @@ coreButton.save=Save
         it('should handle component group at the end of file', () => {
             const lines = ['#XFLD: Email', 'coreInput.email=Email', '', '#XFLD: Name', 'coreInput.name=Name'];
 
-            const index = findInsertionPoint(lines, 'coreInput', 'coreInput.password');
+            const index = findInsertionPoint(lines, 'coreInput.password');
 
             expect(index).toBe(5); // After name (alphabetically last in group)
         });
@@ -178,7 +178,7 @@ coreButton.save=Save
 
             const result = formatPropertiesEntry(entry);
 
-            expect(result).toEqual(['#XBUT: Save button label', 'coreButton.save=Save']);
+            expect(result).toEqual(['#XBUT: Save button label', 'coreButton.save = Save']);
         });
     });
 
@@ -197,7 +197,7 @@ coreButton.save=Save
             });
 
             expect(result).toContain('#XBUT: Cancel button label');
-            expect(result).toContain('coreButton.cancel=Cancel');
+            expect(result).toContain('coreButton.cancel = Cancel');
             expect(result).toContain('coreButton.save=Save'); // Original key preserved
         });
 
@@ -267,7 +267,7 @@ coreButton.save=Save
             });
 
             expect(result).toContain('#XTIT: Dialog title');
-            expect(result).toContain('coreDialog.title=Dialog');
+            expect(result).toContain('coreDialog.title = Dialog');
         });
 
         it('should insert in correct alphabetical position within group', () => {

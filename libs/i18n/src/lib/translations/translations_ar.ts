@@ -114,13 +114,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'تسمية المعلومات'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'المحدد',
-        listItemNotSelectedAriaLabel: 'غير محدد'
-    },
     coreLink: {
         emphasized: 'مؤكَّد',
         subtle: 'غامض'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'المحدد',
+        listItemNotSelectedAriaLabel: 'غير محدد'
     },
     coreMessageStrip: {
         announcementError: 'شريط رسالة الخطأ',

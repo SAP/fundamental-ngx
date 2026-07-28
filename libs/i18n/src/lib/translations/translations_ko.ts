@@ -113,13 +113,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: '정보 레이블'
     },
-    coreList: {
-        listItemSelectedAriaLabel: '선택됨',
-        listItemNotSelectedAriaLabel: '선택 안 함'
-    },
     coreLink: {
         emphasized: '강조됨',
         subtle: '미약'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: '선택됨',
+        listItemNotSelectedAriaLabel: '선택 안 함'
     },
     coreMessageStrip: {
         announcementError: '오류 메시지 스트립',

@@ -113,13 +113,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Infoetikett'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Vald',
-        listItemNotSelectedAriaLabel: 'Inte vald'
-    },
     coreLink: {
         emphasized: 'Markerad',
         subtle: 'Diskret'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'Vald',
+        listItemNotSelectedAriaLabel: 'Inte vald'
     },
     coreMessageStrip: {
         announcementError: 'Felmeddelanderad',

@@ -113,13 +113,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: '資訊標籤'
     },
-    coreList: {
-        listItemSelectedAriaLabel: '已選擇',
-        listItemNotSelectedAriaLabel: '未選擇'
-    },
     coreLink: {
         emphasized: '強調',
         subtle: '輕微'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: '已選擇',
+        listItemNotSelectedAriaLabel: '未選擇'
     },
     coreMessageStrip: {
         announcementError: '錯誤訊息列',

@@ -114,13 +114,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Oznaka informacija'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Odabrano',
-        listItemNotSelectedAriaLabel: 'Nije odabrano'
-    },
     coreLink: {
         emphasized: 'Naglašeno',
         subtle: 'Rafinirano'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'Odabrano',
+        listItemNotSelectedAriaLabel: 'Nije odabrano'
     },
     coreMessageStrip: {
         announcementError: 'Traka poruke o pogrešci',

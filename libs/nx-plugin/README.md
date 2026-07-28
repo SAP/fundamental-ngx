@@ -68,6 +68,10 @@ See [i18n-manage README](src/executors/i18n-manage/README.md) for the full comma
 
 ---
 
-### `transform-translations`
+### `i18n-manage`
 
-Converts `.properties` translation files to TypeScript modules. Called automatically by `i18n-manage` commands — you do not need to invoke this directly.
+Manages i18n translation keys across all language files. See the [i18n-manage README](./src/executors/i18n-manage/README.md) for detailed usage.
+
+**Commands:** `add`, `rename`, `remove`, `search`, `validate`, `update`, `sort`, `sync`
+
+The `sync` command regenerates all TypeScript files from `.properties` files and is called automatically by other commands. It replaces the deprecated `transform-translations` executor.

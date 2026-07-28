@@ -113,13 +113,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'ป้ายชื่อข้อมูล'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'เลือกแล้ว',
-        listItemNotSelectedAriaLabel: 'ไม่ได้เลือก'
-    },
     coreLink: {
         emphasized: 'เน้น',
         subtle: 'ไม่เน้น'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'เลือกแล้ว',
+        listItemNotSelectedAriaLabel: 'ไม่ได้เลือก'
     },
     coreMessageStrip: {
         announcementError: 'แถบข้อความแสดงข้อผิดพลาด',

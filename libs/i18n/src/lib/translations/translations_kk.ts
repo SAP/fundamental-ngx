@@ -114,13 +114,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Ақпараттық белгі'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Таңдалған',
-        listItemNotSelectedAriaLabel: 'Таңдалмаған'
-    },
     coreLink: {
         emphasized: 'Ерекшеленген',
         subtle: 'Білінбейтін'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'Таңдалған',
+        listItemNotSelectedAriaLabel: 'Таңдалмаған'
     },
     coreMessageStrip: {
         announcementError: 'Қате туралы хабар жолағы',

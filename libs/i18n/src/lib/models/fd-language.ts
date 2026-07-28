@@ -15,6 +15,9 @@ export interface FdLanguage {
         /** Title for the busy indicator */
         defaultTitle: FdLanguageKey;
     };
+    coreActionSheet: {
+        toolbarLabel: FdLanguageKey;
+    };
     coreCalendar: {
         /** Year selection aria label. Used on the button to navigate to the years view. */
         yearSelectionLabel: FdLanguageKey;
@@ -120,10 +123,12 @@ export interface FdLanguage {
         datetimeCancelLabel: FdLanguageKey;
     };
     coreDynamicPage: {
+        breadcrumbsLabel: FdLanguageKey;
         expandLabel: FdLanguageKey;
         collapseLabel: FdLanguageKey;
         pinLabel: FdLanguageKey;
         unpinLabel: FdLanguageKey;
+        toggleHeader: FdLanguageKey;
     };
     coreFeedListItem: {
         moreLabel: FdLanguageKey;
@@ -162,6 +167,8 @@ export interface FdLanguage {
         announcementError: FdLanguageKey;
         announcementSuccess: FdLanguageKey;
         closable: FdLanguageKey;
+        defaultDismissButtonText: FdLanguageKey;
+        defaultHiddenText: FdLanguageKey;
     };
     coreCombobox: {
         clearButtonTitle: FdLanguageKey;
@@ -174,6 +181,7 @@ export interface FdLanguage {
         escapeNavigateTokens: FdLanguageKey;
         countListResultsSingular: FdLanguageKey<{ count: number }>;
         countListResultsPlural: FdLanguageKey<{ count: number }>;
+        showAll: FdLanguageKey;
     };
     coreNavigation: {
         mainNavigation: FdLanguageKey;
@@ -256,6 +264,9 @@ export interface FdLanguage {
     coreProductSwitch: {
         ariaLabel: FdLanguageKey;
     };
+    coreSelect: {
+        closeButton: FdLanguageKey;
+    };
     coreShellbar: {
         collapsedItemMenuLabel: FdLanguageKey;
         cancel: FdLanguageKey;
@@ -317,6 +328,7 @@ export interface FdLanguage {
     };
     coreTabs: {
         tabListExpandButtonText: FdLanguageKey;
+        expandIconLabel: FdLanguageKey;
     };
     coreText: {
         moreLabel: FdLanguageKey;
@@ -360,10 +372,22 @@ export interface FdLanguage {
          * in the time column list and to switch between time columns
          */
         navigationInstruction: FdLanguageKey;
+        morningLabel: FdLanguageKey;
+        afternoonLabel: FdLanguageKey;
+        eveningLabel: FdLanguageKey;
+        nightLabel: FdLanguageKey;
     };
     coreTimePicker: {
         timePickerInputLabel: FdLanguageKey;
         timePickerButtonLabel: FdLanguageKey;
+        valueStateErrorMessage: FdLanguageKey;
+        valueStateInformationMessage: FdLanguageKey;
+        valueStateSuccessMessage: FdLanguageKey;
+        valueStateWarningMessage: FdLanguageKey;
+    };
+    coreUserMenu: {
+        closeButton: FdLanguageKey;
+        previousButton: FdLanguageKey;
     };
     coreToken: {
         deleteButtonLabel: FdLanguageKey;
@@ -372,6 +396,9 @@ export interface FdLanguage {
     coreTokenizer: {
         moreLabel: FdLanguageKey;
         tokenizerLabel: FdLanguageKey;
+    };
+    coreToolbar: {
+        moreButton: FdLanguageKey;
     };
     coreUploadCollection: {
         menuOkText: FdLanguageKey;
@@ -489,6 +516,7 @@ export interface FdLanguage {
     };
     platformFeedInput: {
         userTitle: FdLanguageKey;
+        sendButton: FdLanguageKey;
     };
     platformIconTabBar: {
         moreButton: FdLanguageKey;
@@ -606,6 +634,11 @@ export interface FdLanguage {
         suggestionsWrapperAriaLabel: FdLanguageKey;
         selectScopeLabel: FdLanguageKey;
         selectStateMessageLabel: FdLanguageKey;
+    };
+    platformSettingsGenerator: {
+        backButtonLabel: FdLanguageKey;
+        searchLabel: FdLanguageKey;
+        settingsLabel: FdLanguageKey;
     };
     platformSwitch: {
         ariaLabel: FdLanguageKey;
@@ -742,8 +775,10 @@ export interface FdLanguage {
         filterDialogFilterByLabel: FdLanguageKey<{ filterLabel: string }>;
         filterDialogFilterTitle: FdLanguageKey;
         filterDialogFilterBy: FdLanguageKey;
+        filterDialogBackToColumns: FdLanguageKey;
         filterDialogConfirmBtnLabel: FdLanguageKey;
         filterDialogCancelBtnLabel: FdLanguageKey;
+        filteredBy: FdLanguageKey;
         groupDialogHeader: FdLanguageKey;
         groupDialogGroupOrderHeader: FdLanguageKey;
         groupDialogGroupOrderAsc: FdLanguageKey;
@@ -760,6 +795,13 @@ export interface FdLanguage {
         sortDialogNotSortedLabel: FdLanguageKey;
         sortDialogConfirmBtnLabel: FdLanguageKey;
         sortDialogCancelBtnLabel: FdLanguageKey;
+        cancelBtnLabel: FdLanguageKey;
+        confirmBtnLabel: FdLanguageKey;
+        clearFilters: FdLanguageKey;
+        settingsDialogHeader: FdLanguageKey;
+        toolbarActionButtonTitle: FdLanguageKey;
+        loadMore: FdLanguageKey;
+        navigationColumnTitle: FdLanguageKey;
         selectAllCheckboxLabel: FdLanguageKey;
         deselectAllCheckboxLabel: FdLanguageKey;
         deselectAllCheckboxLongLabel: FdLanguageKey;
@@ -776,9 +818,11 @@ export interface FdLanguage {
     };
     platformWizardGenerator: {
         summarySectionEditStep: FdLanguageKey;
+        stepsLabel: FdLanguageKey;
     };
     platformMessagePopover: {
         allErrors: FdLanguageKey;
+        backButton: FdLanguageKey;
         defaultErrors: {
             required: FdLanguageKey;
             min: FdLanguageKey;
@@ -817,6 +861,9 @@ export interface FdLanguage {
     };
     platformSelect: {
         selectOptionLabel: FdLanguageKey;
+    };
+    platformSplitMenuButton: {
+        groupLabel: FdLanguageKey;
     };
     btpSearchField: {
         searchButtonLabel: FdLanguageKey;

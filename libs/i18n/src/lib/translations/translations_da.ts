@@ -113,13 +113,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Oplysningsetiket'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Valgt',
-        listItemNotSelectedAriaLabel: 'Ikke valgt'
-    },
     coreLink: {
         emphasized: 'Fremhævet',
         subtle: 'Diskret'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'Valgt',
+        listItemNotSelectedAriaLabel: 'Ikke valgt'
     },
     coreMessageStrip: {
         announcementError: 'Meddelelseslinje for fejl',

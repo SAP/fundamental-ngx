@@ -114,13 +114,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: '情報ラベル'
     },
-    coreList: {
-        listItemSelectedAriaLabel: '選択されました。',
-        listItemNotSelectedAriaLabel: '選択されていません。'
-    },
     coreLink: {
         emphasized: '強調',
         subtle: '淡色'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: '選択されました。',
+        listItemNotSelectedAriaLabel: '選択されていません。'
     },
     coreMessageStrip: {
         announcementError: 'エラーメッセージストリップ',

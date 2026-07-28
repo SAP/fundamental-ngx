@@ -113,13 +113,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Bilgi Etiketi'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Seçildi',
-        listItemNotSelectedAriaLabel: 'Seçilmedi'
-    },
     coreLink: {
         emphasized: 'Vurgulu',
         subtle: 'İnce'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'Seçildi',
+        listItemNotSelectedAriaLabel: 'Seçilmedi'
     },
     coreMessageStrip: {
         announcementError: 'Hata İletisi Satırı',

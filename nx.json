@@ -103,10 +103,6 @@
         "prepare": {
             "dependsOn": ["^prepare", "build"]
         },
-        "transform-translations": {
-            "inputs": ["{projectRoot}/**/*.properties", "default"],
-            "cache": true
-        },
         "compile-typedoc": {
             "cache": true
         },

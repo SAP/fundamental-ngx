@@ -114,13 +114,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Infócímke'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Kiválasztva',
-        listItemNotSelectedAriaLabel: 'Nincs kiválasztva'
-    },
     coreLink: {
         emphasized: 'Kiemelt',
         subtle: 'Nem kiemelt'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'Kiválasztva',
+        listItemNotSelectedAriaLabel: 'Nincs kiválasztva'
     },
     coreMessageStrip: {
         announcementError: 'Hibaüzenetsor',

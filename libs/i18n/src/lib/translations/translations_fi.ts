@@ -113,13 +113,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Infoetiketti'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Valittu',
-        listItemNotSelectedAriaLabel: 'Ei valittu'
-    },
     coreLink: {
         emphasized: 'Korostettu',
         subtle: 'Hillitty'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'Valittu',
+        listItemNotSelectedAriaLabel: 'Ei valittu'
     },
     coreMessageStrip: {
         announcementError: 'Virheilmoitusnauha',

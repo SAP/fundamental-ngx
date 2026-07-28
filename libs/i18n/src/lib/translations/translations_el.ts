@@ -113,13 +113,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Ετικέτα Πληροφοριών'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Επιλέχτηκε',
-        listItemNotSelectedAriaLabel: 'Δεν επιλέχτηκε'
-    },
     coreLink: {
         emphasized: 'Τονισμένο',
         subtle: 'Διακριτικό'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'Επιλέχτηκε',
+        listItemNotSelectedAriaLabel: 'Δεν επιλέχτηκε'
     },
     coreMessageStrip: {
         announcementError: 'Ταινία Μηνύματος Σφάλματος',

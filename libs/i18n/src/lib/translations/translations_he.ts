@@ -113,13 +113,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'תווית מידע'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'נבחר',
-        listItemNotSelectedAriaLabel: 'לא נבחר'
-    },
     coreLink: {
         emphasized: 'מודגש',
         subtle: 'עדין'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'נבחר',
+        listItemNotSelectedAriaLabel: 'לא נבחר'
     },
     coreMessageStrip: {
         announcementError: 'רצועת הודעות שגיאה',

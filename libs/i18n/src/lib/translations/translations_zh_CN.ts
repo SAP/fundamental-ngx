@@ -112,13 +112,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: '信息标签'
     },
-    coreList: {
-        listItemSelectedAriaLabel: '已选择',
-        listItemNotSelectedAriaLabel: '未选择'
-    },
     coreLink: {
         emphasized: '已强调',
         subtle: '隐蔽'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: '已选择',
+        listItemNotSelectedAriaLabel: '未选择'
     },
     coreMessageStrip: {
         announcementError: '错误消息条',

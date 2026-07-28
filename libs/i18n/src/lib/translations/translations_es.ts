@@ -114,13 +114,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Etiqueta de información'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Seleccionado',
-        listItemNotSelectedAriaLabel: 'No seleccionado'
-    },
     coreLink: {
         emphasized: 'Destacado',
         subtle: 'Discreto'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'Seleccionado',
+        listItemNotSelectedAriaLabel: 'No seleccionado'
     },
     coreMessageStrip: {
         announcementError: 'Línea de mensajes de error',
