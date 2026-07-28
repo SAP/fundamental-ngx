@@ -11,7 +11,8 @@ jest.mock('@nx/devkit', () => ({ workspaceRoot: '/test-workspace' }));
 
 // Mock extractKeysFromFdLanguageInterface to read from memfs
 jest.mock('../../shared/update-typings', () => ({
-    extractKeysFromFdLanguageInterface: jest.fn()
+    extractKeysFromFdLanguageInterface: jest.fn(),
+    updateFdLanguageKeyIdentifier: jest.fn()
 }));
 
 import { sync as fastGlobSync } from 'fast-glob';
@@ -21,9 +22,15 @@ import { extractKeysFromFdLanguageInterface } from '../../shared/update-typings'
  * Helper to set up glob mocks for properties and TS files
  */
 function mockGlobForValidation(propertiesFiles: string[], tsFiles: string[]) {
-    (fastGlobSync as jest.Mock)
-        .mockReturnValueOnce(propertiesFiles) // First call: *.properties
-        .mockReturnValueOnce(tsFiles); // Second call: translations*.ts
+    (fastGlobSync as jest.Mock).mockImplementation((pattern: string) => {
+        if (pattern.includes('*.properties')) {
+            return propertiesFiles;
+        }
+        if (pattern.includes('translations*.ts')) {
+            return tsFiles;
+        }
+        return [];
+    });
 }
 
 describe('Validate Operation', () => {
@@ -118,8 +125,9 @@ export interface FdLanguage {
 
         const result = await validate('libs/i18n/translations');
 
-        expect(result.success).toBe(true);
-        expect(result.errors).toHaveLength(0);
+        expect(result.success).toBe(false);
+        expect(result.errors.length).toBeGreaterThan(0);
+        expect(result.errors[0].type).toBe('missing-comment');
     });
 
     it('should detect invalid comment format', async () => {
@@ -130,7 +138,7 @@ export interface FdLanguage {
         (extractKeysFromFdLanguageInterface as jest.Mock).mockReturnValue(['coreButton.save']);
         vol.fromJSON({
             '/test-workspace/libs/i18n/translations/translations.properties': `
-# Invalid comment without type
+#XINV: Save button with invalid comment type (4 chars but not in valid list)
 coreButton.save=Save
             `.trim(),
             '/test-workspace/libs/i18n/translations/translations.ts': `
@@ -151,8 +159,10 @@ export interface FdLanguage {
 
         const result = await validate('libs/i18n/translations');
 
-        expect(result.success).toBe(true);
-        expect(result.errors).toHaveLength(0);
+        expect(result.success).toBe(false);
+        expect(result.errors.length).toBeGreaterThan(0);
+        // Invalid comment type (4 chars but not in valid list)
+        expect(result.errors[0].type).toBe('invalid-comment');
     });
 
     it('should detect invalid comment type', async () => {
@@ -163,7 +173,7 @@ export interface FdLanguage {
         (extractKeysFromFdLanguageInterface as jest.Mock).mockReturnValue(['coreButton.save']);
         vol.fromJSON({
             '/test-workspace/libs/i18n/translations/translations.properties': `
-#XINVALID: Save button
+#XBAD: Save button with invalid comment type
 coreButton.save=Save
             `.trim(),
             '/test-workspace/libs/i18n/translations/translations.ts': `
@@ -184,8 +194,9 @@ export interface FdLanguage {
 
         const result = await validate('libs/i18n/translations');
 
-        expect(result.success).toBe(true);
-        expect(result.errors).toHaveLength(0);
+        expect(result.success).toBe(false);
+        expect(result.errors.length).toBeGreaterThan(0);
+        expect(result.errors[0].type).toBe('invalid-comment');
     });
 
     it('should detect missing keys across files', async () => {
@@ -341,6 +352,7 @@ test.key=Test value
 #XBUT: Save button
 coreButton.save=Save {count
 
+#XBUT: Cancel button
 coreButton.cancel=Cancel
             `.trim(),
             '/test-workspace/libs/i18n/translations/translations.ts': `
@@ -379,6 +391,7 @@ export interface FdLanguage {
 #XBUT: Save button
 coreButton.save=Save
 
+#XBUT: Cancel button
 coreButton.cancel=Cancel
             `.trim(),
             '/test-workspace/libs/i18n/translations/translations.ts': `

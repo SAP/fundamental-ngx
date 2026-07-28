@@ -34,7 +34,15 @@ coreButton.save=Save
 coreButton.cancel=Cancel
             `.trim(),
             '/test-workspace/libs/i18n/translations/translations.ts': 'export default {}',
-            '/test-workspace/libs/i18n/src/lib/models/fd-language-key-identifier.ts': '// placeholder'
+            '/test-workspace/libs/i18n/src/lib/models/fd-language-key-identifier.ts': '// placeholder',
+            '/test-workspace/libs/i18n/src/lib/models/fd-language.ts': `
+export interface FdLanguage {
+    coreButton: {
+        save: string;
+        cancel: string;
+    };
+}
+            `.trim()
         });
 
         const result = await removeKey({
@@ -105,7 +113,15 @@ coreButton.save=Speichern
 #XBUT: Cancel
 coreButton.cancel=Abbrechen
             `.trim(),
-            '/test-workspace/libs/i18n/src/lib/models/fd-language-key-identifier.ts': '// placeholder'
+            '/test-workspace/libs/i18n/src/lib/models/fd-language-key-identifier.ts': '// placeholder',
+            '/test-workspace/libs/i18n/src/lib/models/fd-language.ts': `
+export interface FdLanguage {
+    coreButton: {
+        save: string;
+        cancel: string;
+    };
+}
+            `.trim()
         });
 
         const result = await removeKey({
@@ -153,7 +169,17 @@ coreNavigation.navigationPath = Navigation Path
 coreButton.save = Save
             `.trim(),
             '/test-workspace/libs/i18n/translations/translations.ts': 'export default {}',
-            '/test-workspace/libs/i18n/src/lib/models/fd-language-key-identifier.ts': '// placeholder'
+            '/test-workspace/libs/i18n/src/lib/models/fd-language-key-identifier.ts': '// placeholder',
+            '/test-workspace/libs/i18n/src/lib/models/fd-language.ts': `
+export interface FdLanguage {
+    coreNavigation: {
+        navigationPath: string;
+    };
+    coreButton: {
+        save: string;
+    };
+}
+            `.trim()
         });
 
         const result = await removeKey({
