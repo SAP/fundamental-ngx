@@ -26,7 +26,7 @@ jobs:
             pull-requests: read
             statuses: write
         steps:
-            - uses: amannn/action-semantic-pull-request@v5
+            - uses: amannn/action-semantic-pull-request@e32d7e603df1aa1ba07e981f2a23455dee596825 # v5
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
@@ -73,36 +73,62 @@ jobs:
         permissions:
             contents: read
             pull-requests: read
+            issues: write
         steps:
             - name: Check PR body for breaking change footer typos
               uses: actions/github-script@v7
               with:
                   script: |
                       const body = context.payload.pull_request.body || '';
+                      const commentMarker = '<!-- breaking-change-footer-lint -->';
 
-                      // Only check if there's a breaking change footer at all
-                      const hasAnyBreakingFooter = /^(BREAKING[ _-]?CHANG[EE]S?|breaking change):/im.test(body);
+                      async function upsertGuidanceComment(message) {
+                          const comments = await github.paginate(github.rest.issues.listComments, {
+                              ...context.repo,
+                              issue_number: context.issue.number,
+                              per_page: 100
+                          });
 
-                      if (!hasAnyBreakingFooter) {
+                          const existingComment = comments.find((comment) => comment.body?.includes(commentMarker));
+                          const commentBody = `${commentMarker}\n❌ ${message}\n\nUse this exact footer format:\n\n\`\`\`\nBREAKING CHANGE: <description>\n\`\`\``;
+
+                          if (existingComment) {
+                              await github.rest.issues.updateComment({
+                                  ...context.repo,
+                                  comment_id: existingComment.id,
+                                  body: commentBody
+                              });
+                              return;
+                          }
+
+                          await github.rest.issues.createComment({
+                              ...context.repo,
+                              issue_number: context.issue.number,
+                              body: commentBody
+                          });
+                      }
+
+                      const candidateFooterPattern = /^[ \t>*-]*breaking[ \t_-]*changes?[ \t]*:/im;
+                      const candidateFooterTokenPattern = /breaking[ \t_-]*changes?[ \t]*:/i;
+
+                      if (!candidateFooterPattern.test(body)) {
                           core.info('✓ No breaking change footer found in PR body');
                           return;
                       }
 
-                      // Check for typos in breaking change footers
-                      const typos = [
-                          { pattern: /^BREAKING CHANGES:/m, name: 'BREAKING CHANGES:' },      // plural
-                          { pattern: /^BREAKING-CHANGE:/m, name: 'BREAKING-CHANGE:' },        // dash
-                          { pattern: /^breaking change:/m, name: 'breaking change:' },        // lowercase
-                          { pattern: /^BREAKING_CHANGE:/m, name: 'BREAKING_CHANGE:' },        // underscore
-                          { pattern: /^BREAKINGCHANGE:/m, name: 'BREAKINGCHANGE:' }           // no separator
-                      ];
+                      for (const line of body.split(/\r?\n/)) {
+                          if (!candidateFooterPattern.test(line)) {
+                              continue;
+                          }
 
-                      for (const { pattern, name } of typos) {
-                          if (pattern.test(body)) {
-                              core.setFailed(
-                                  `PR body contains "${name}" but must use "BREAKING CHANGE:" (singular, uppercase, with space). ` +
-                                  `This matters when using GitHub's squash merge - the PR body becomes the commit footer.`
-                              );
+                          const token = line.match(candidateFooterTokenPattern)?.[0] ?? line.trim();
+                          if (line !== 'BREAKING CHANGE:' && !line.startsWith('BREAKING CHANGE: ')) {
+                              const errorMessage =
+                                  `PR body contains "${token}" but must use "BREAKING CHANGE:" exactly (singular, uppercase, one space, no prefix). ` +
+                                  `This matters when using GitHub's squash merge - the PR body becomes the commit footer.`;
+
+                              await upsertGuidanceComment(errorMessage);
+                              core.setFailed(errorMessage);
                               return;
                           }
                       }

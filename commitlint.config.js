@@ -38,20 +38,20 @@ const Configuration = {
                     const { body, footer } = parsed;
                     const fullText = [body, footer].filter(Boolean).join('\n');
 
-                    // Check for common typos in breaking change footers
-                    const invalidPatterns = [
-                        { pattern: /^BREAKING CHANGES:/m, typo: 'BREAKING CHANGES:' }, // plural
-                        { pattern: /^BREAKING-CHANGE:/m, typo: 'BREAKING-CHANGE:' }, // dash instead of space
-                        { pattern: /^breaking change:/m, typo: 'breaking change:' }, // lowercase (exact match, not case-insensitive)
-                        { pattern: /^BREAKING_CHANGE:/m, typo: 'BREAKING_CHANGE:' }, // underscore
-                        { pattern: /^BREAKINGCHANGE:/m, typo: 'BREAKINGCHANGE:' } // no space/separator
-                    ];
+                    // Catch typo variants like pluralization, separators, casing, spacing, and markdown list prefixes.
+                    const candidateFooterPattern = /^[ \t>*-]*breaking[ \t_-]*changes?[ \t]*:/im;
+                    const candidateFooterTokenPattern = /breaking[ \t_-]*changes?[ \t]*:/i;
 
-                    for (const { pattern, typo } of invalidPatterns) {
-                        if (pattern.test(fullText)) {
+                    for (const line of fullText.split(/\r?\n/)) {
+                        if (!candidateFooterPattern.test(line)) {
+                            continue;
+                        }
+
+                        const token = line.match(candidateFooterTokenPattern)?.[0] ?? line.trim();
+                        if (line !== 'BREAKING CHANGE:' && !line.startsWith('BREAKING CHANGE: ')) {
                             return [
                                 false,
-                                `Breaking change footer contains "${typo}" but must use "BREAKING CHANGE:" (singular, uppercase, with space). ` +
+                                `Breaking change footer contains "${token}" but must use "BREAKING CHANGE:" exactly (singular, uppercase, one space, no prefix). ` +
                                     `The conventional-commits parser requires this exact format for version bumping.`
                             ];
                         }
