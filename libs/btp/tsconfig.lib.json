@@ -1,15 +1,14 @@
 {
     "extends": "./tsconfig.json",
     "compilerOptions": {
-        "outDir": "../../dist/out-tsc",
+        "outDir": "../../dist/out-tsc/btp",
         "target": "es2023",
         "declaration": true,
         "declarationMap": true,
         "types": [],
         "lib": ["dom", "es2023"],
         "useDefineForClassFields": false,
-        "moduleResolution": "bundler",
-        "rootDir": "../../"
+        "moduleResolution": "bundler"
     },
     "exclude": ["test.ts", "**/*.spec.ts", "jest.config.ts", "test-setup.ts"],
     "include": ["**/*.ts"]

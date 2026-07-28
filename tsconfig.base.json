@@ -5,10 +5,13 @@
         "fullTemplateTypeCheck": true
     },
     "compilerOptions": {
-        // TODO(#14335): both "baseUrl" and "moduleResolution: node" are deprecated in TypeScript 6.
-        // They are retained here because the ui5-webcomponents-base paths entries point to dist/libs/
-        // output and are relative to baseUrl — removing it breaks ng-packagr partial compilation (TS2307).
-        // The correct fix is TypeScript project references; until then both are suppressed via ignoreDeprecations.
+        // TODO(#14335): "baseUrl" is deprecated in TypeScript 6, but retained here because the
+        // ui5-webcomponents-base paths entries (and other cross-lib non-relative paths) point to
+        // dist/libs/ output and sibling lib sources, relative to baseUrl — removing it breaks
+        // ng-packagr partial compilation (TS2307) and esbuild path resolution across the monorepo.
+        // The correct fix is workspace-linked packages or an ng-packagr upgrade that fixes
+        // secondary-entry-point path resolution; until then baseUrl is suppressed via
+        // ignoreDeprecations. moduleResolution has been migrated to "bundler" (see #14335).
         "ignoreDeprecations": "6.0",
         "baseUrl": ".",
         "outDir": "./dist/out-tsc",
@@ -21,7 +24,7 @@
         "strictBindCallApply": true,
         "strictFunctionTypes": true,
         "strictPropertyInitialization": false,
-        "moduleResolution": "node",
+        "moduleResolution": "bundler",
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "allowSyntheticDefaultImports": true,
