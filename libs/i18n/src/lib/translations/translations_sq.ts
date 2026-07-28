@@ -113,13 +113,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Info Label'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
-    },
     coreLink: {
         emphasized: 'Emphasized',
         subtle: 'Subtle'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'Selected',
+        listItemNotSelectedAriaLabel: 'Not Selected'
     },
     coreMessageStrip: {
         announcementError: 'Error Message Strip',
@@ -626,18 +626,18 @@ export default {
         selectSingleRow: 'To select row, press SPACEBAR',
         settingsDialogHeader: 'Settings',
         showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}',
+        sortDialogAddSort: 'Add Sort Criterion',
         sortDialogCancelBtnLabel: 'Anulo',
         sortDialogConfirmBtnLabel: 'OK',
+        sortDialogDelete: 'Remove Sort Criterion',
         sortDialogHeader: 'Rendit',
+        sortDialogMoveUp: 'Move Up',
+        sortDialogMoveDown: 'Move Down',
         sortDialogNotSortedLabel: '(Not Sorted)',
         sortDialogSortByHeader: 'Rendit sipas',
         sortDialogSortOrderAsc: 'Në ngritje',
         sortDialogSortOrderDesc: 'Në zbritje',
         sortDialogSortOrderHeader: 'Sort Order',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
-        sortDialogDelete: 'Remove Sort Criterion',
-        sortDialogAddSort: 'Add Sort Criterion',
         toolbarActionButtonTitle: 'Settings',
         toolbarActionCancelButtonLabel: 'Anulo',
         toolbarActionCollapseAllButtonTitle: 'Collapse all',

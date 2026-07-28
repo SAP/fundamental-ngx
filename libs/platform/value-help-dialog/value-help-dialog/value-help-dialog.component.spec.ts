@@ -82,7 +82,7 @@ describe('PlatformValueHelpDialogComponent', () => {
             providers: [RtlService]
         }).overrideComponent(PlatformValueHelpDialogComponent, {
             set: {
-                changeDetection: ChangeDetectionStrategy.Default
+                changeDetection: ChangeDetectionStrategy.Eager
             }
         });
         setup();

@@ -103,10 +103,6 @@
         "prepare": {
             "dependsOn": ["^prepare", "build"]
         },
-        "transform-translations": {
-            "inputs": ["{projectRoot}/**/*.properties", "default"],
-            "cache": true
-        },
         "compile-typedoc": {
             "cache": true
         },
@@ -149,12 +145,7 @@
     },
     "namedInputs": {
         "default": ["{projectRoot}/**/*", "sharedGlobals"],
-        "sharedGlobals": [
-            "{workspaceRoot}/package.json",
-            "{workspaceRoot}/angular.json",
-            "{workspaceRoot}/tsconfig.json",
-            "{workspaceRoot}/nx.json"
-        ],
+        "sharedGlobals": ["{workspaceRoot}/package.json", "{workspaceRoot}/angular.json", "{workspaceRoot}/nx.json"],
         "production": [
             "default",
             "!{projectRoot}/**/*.spec.[jt]s",
@@ -208,5 +199,6 @@
         "releaseTag": {
             "pattern": "v{version}"
         }
-    }
+    },
+    "analytics": false
 }

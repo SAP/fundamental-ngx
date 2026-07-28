@@ -45,10 +45,9 @@ export function addKeyToProperties(
     entry: { key: string; value: string; commentType: CommentType; commentDescription: string }
 ): string {
     const lines = content.split('\n');
-    const componentPrefix = entry.key.split('.')[0];
 
-    // Find insertion point (alphabetically within component group)
-    const insertionIndex = findInsertionPoint(lines, componentPrefix, entry.key);
+    // Find insertion point (alphabetically across all keys)
+    const insertionIndex = findInsertionPoint(lines, entry.key);
 
     // Build new entry
     const newEntry = formatPropertiesEntry(entry);
@@ -60,70 +59,30 @@ export function addKeyToProperties(
 }
 
 /**
- * Find the best insertion point for a new key based on component prefix and alphabetical order
+ * Find the best insertion point for a new key in alphabetical order
  */
-export function findInsertionPoint(lines: string[], componentPrefix: string, fullKey: string): number {
-    let firstMatchIndex = -1;
-    const insertionIndex = -1;
-
+export function findInsertionPoint(lines: string[], fullKey: string): number {
     for (let i = 0; i < lines.length; i++) {
         const line = lines[i].trim();
+
         // Check if this is a key line (not comment, not empty)
         if (line && !line.startsWith('#') && line.includes('=')) {
             const lineKey = line.split('=')[0].trim();
 
-            if (lineKey.startsWith(componentPrefix + '.')) {
-                // Found a key in our component group
-                if (firstMatchIndex === -1) {
-                    firstMatchIndex = i;
+            // If this key is alphabetically after our new key, insert before it
+            if (lineKey > fullKey) {
+                // Find the comment line before this key
+                let commentIndex = i - 1;
+                while (commentIndex >= 0 && lines[commentIndex].trim() === '') {
+                    commentIndex--;
                 }
-
-                // Check if we should insert before this key (alphabetical order)
-                if (insertionIndex === -1 && lineKey > fullKey) {
-                    // Find the comment line before this key
-                    let commentIndex = i - 1;
-                    while (commentIndex >= 0 && lines[commentIndex].trim() === '') {
-                        commentIndex--;
-                    }
-                    // Insert before the comment
-                    return commentIndex >= 0 && lines[commentIndex].trim().startsWith('#') ? commentIndex : i;
-                }
-            } else if (firstMatchIndex !== -1) {
-                // We've passed the component group
-                // Insert before the current line (which is the start of a new component)
-                // But first check if there's a comment before it
-                let insertIndex = i;
-                while (insertIndex > 0 && lines[insertIndex - 1].trim() === '') {
-                    insertIndex--;
-                }
-                if (insertIndex > 0 && lines[insertIndex - 1].trim().startsWith('#')) {
-                    insertIndex--;
-                }
-                return insertIndex;
+                // Insert before the comment (or before the key if no comment)
+                return commentIndex >= 0 && lines[commentIndex].trim().startsWith('#') ? commentIndex : i;
             }
         }
     }
 
-    // If we found matches but no insertion point, insert at the end of the group
-    if (firstMatchIndex !== -1) {
-        // Find the end of the component group
-        for (let i = lines.length - 1; i >= 0; i--) {
-            const line = lines[i].trim();
-            if (line && !line.startsWith('#') && line.includes('=')) {
-                const lineKey = line.split('=')[0].trim();
-                if (lineKey.startsWith(componentPrefix + '.')) {
-                    // Skip forward past any trailing empty lines
-                    let nextIndex = i + 1;
-                    while (nextIndex < lines.length && lines[nextIndex].trim() === '') {
-                        nextIndex++;
-                    }
-                    return nextIndex;
-                }
-            }
-        }
-    }
-
-    // No match found, insert at end
+    // No key found that's alphabetically after ours, insert at end
     return lines.length;
 }
 
@@ -136,7 +95,7 @@ export function formatPropertiesEntry(entry: {
     commentType: CommentType;
     commentDescription: string;
 }): string[] {
-    return [`#${entry.commentType}: ${entry.commentDescription}`, `${entry.key}=${entry.value}`];
+    return [`#${entry.commentType}: ${entry.commentDescription}`, `${entry.key} = ${entry.value}`];
 }
 
 /**
@@ -175,6 +134,31 @@ export function removeKeyFromProperties(content: string, key: string): string {
     }
 
     return result.join('\n');
+}
+
+/**
+ * Update the value of an existing key in properties content
+ */
+export function updateKeyInProperties(content: string, key: string, newValue: string): string {
+    const lines = content.split('\n');
+
+    // Create a regex pattern that matches the key with optional spaces around '='
+    // Escape special regex characters in the key
+    const escapedKey = key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const keyPattern = new RegExp(`^${escapedKey}\\s*=`);
+
+    for (let i = 0; i < lines.length; i++) {
+        const line = lines[i].trim();
+
+        if (keyPattern.test(line)) {
+            // Replace the line with new value, always using space-equals-space format
+            const originalIndent = lines[i].match(/^\s*/)?.[0] || '';
+            lines[i] = `${originalIndent}${key} = ${newValue}`;
+            break;
+        }
+    }
+
+    return lines.join('\n');
 }
 
 /**

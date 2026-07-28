@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, input } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { whenStable } from '@fundamental-ngx/core/tests';
@@ -11,17 +11,17 @@ import { CarouselModule } from './carousel.module';
     imports: [CarouselModule],
     template: `
         <fd-carousel
-            [vertical]="vertical"
-            [visibleSlidesCount]="visibleItemsCount"
-            [pageIndicatorContainer]="showPageIndicatorContainer"
-            [pageIndicator]="showPageIndicator"
-            [navigation]="showNavigator"
-            [navigatorInPageIndicator]="navigatorInPageIndicator"
-            [pageIndicatorsOrientation]="pageIndicatorContainerPlacement"
-            [loop]="isCircular"
-            [noPaginationContainerBorder]="noPaginationContainerBorder"
-            [contentBackground]="contentBackground"
-            [pageIndicatorBackground]="pageIndicatorBackground"
+            [vertical]="vertical()"
+            [visibleSlidesCount]="visibleItemsCount()"
+            [pageIndicatorContainer]="showPageIndicatorContainer()"
+            [pageIndicator]="showPageIndicator()"
+            [navigation]="showNavigator()"
+            [navigatorInPageIndicator]="navigatorInPageIndicator()"
+            [pageIndicatorsOrientation]="pageIndicatorContainerPlacement()"
+            [loop]="isCircular()"
+            [noPaginationContainerBorder]="noPaginationContainerBorder()"
+            [contentBackground]="contentBackground()"
+            [pageIndicatorBackground]="pageIndicatorBackground()"
         >
             <fd-carousel-item>Item 1 Lorem ipsum dolor sit amet.</fd-carousel-item>
             <fd-carousel-item>Item 2 Lorem ipsum dolor sit amet.</fd-carousel-item>
@@ -38,17 +38,17 @@ class TestCarouselComponent {
     @ViewChild(CarouselComponent)
     carousel: CarouselComponent;
 
-    vertical = false;
-    visibleItemsCount = 1;
-    showPageIndicatorContainer = true;
-    showPageIndicator = true;
-    showNavigator = true;
-    navigatorInPageIndicator = true;
-    pageIndicatorContainerPlacement: PageIndicatorsOrientation = 'top';
-    isCircular = false;
-    noPaginationContainerBorder = false;
-    contentBackground: CarouselBackgroundOptions;
-    pageIndicatorBackground: CarouselBackgroundOptions;
+    readonly vertical = input(false);
+    readonly visibleItemsCount = input(1);
+    readonly showPageIndicatorContainer = input(true);
+    readonly showPageIndicator = input(true);
+    readonly showNavigator = input(true);
+    readonly navigatorInPageIndicator = input(true);
+    readonly pageIndicatorContainerPlacement = input<PageIndicatorsOrientation>('top');
+    readonly isCircular = input(false);
+    readonly noPaginationContainerBorder = input(false);
+    readonly contentBackground = input<CarouselBackgroundOptions | undefined>(undefined);
+    readonly pageIndicatorBackground = input<CarouselBackgroundOptions | undefined>(undefined);
 }
 
 describe('CarouselComponent', () => {
@@ -76,7 +76,7 @@ describe('CarouselComponent', () => {
 
         // Apply properties in a separate loop to exclude possibility of incorrect property binding.
         backgroundOptions.forEach((option) => {
-            component.contentBackground = option;
+            fixture.componentRef.setInput('contentBackground', option);
             fixture.detectChanges();
             expect(fixture.nativeElement.querySelector('.fd-carousel__content').classList).toContain(
                 `fd-carousel__content--${option}`
@@ -84,7 +84,7 @@ describe('CarouselComponent', () => {
         });
 
         backgroundOptions.forEach((option) => {
-            component.pageIndicatorBackground = option;
+            fixture.componentRef.setInput('pageIndicatorBackground', option);
             fixture.detectChanges();
             expect(fixture.nativeElement.querySelector('.fd-carousel__page-indicator-container').classList).toContain(
                 `fd-carousel__page-indicator-container--${option}`
@@ -93,7 +93,7 @@ describe('CarouselComponent', () => {
     });
 
     it('should change icons for vertical carousel', async () => {
-        component.vertical = false;
+        fixture.componentRef.setInput('vertical', false);
         fixture.detectChanges();
 
         expect(fixture.nativeElement.querySelector('.fd-carousel__content').classList).toContain(
@@ -114,7 +114,7 @@ describe('CarouselComponent', () => {
             fixture.nativeElement.querySelector('.fd-carousel__button--right .sap-icon--slim-arrow-down')
         ).toBeFalsy();
 
-        component.vertical = true;
+        fixture.componentRef.setInput('vertical', true);
         fixture.detectChanges();
 
         expect(fixture.nativeElement.querySelector('.fd-carousel__content').classList).not.toContain(
@@ -141,7 +141,7 @@ describe('CarouselComponent', () => {
 
     it('should handle changes to visibleSlidesCount', () => {
         jest.spyOn(component.carousel.slideChange, 'emit');
-        component.visibleItemsCount = 2;
+        fixture.componentRef.setInput('visibleItemsCount', 2);
         fixture.detectChanges();
         expect(component.carousel.slideChange.emit).toHaveBeenCalled();
     });

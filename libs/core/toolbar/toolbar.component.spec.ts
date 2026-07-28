@@ -1,4 +1,4 @@
-import { Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, ElementRef, QueryList, ViewChild, ViewChildren, input } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Subject } from 'rxjs';
@@ -422,7 +422,7 @@ describe('ToolbarComponent - Visibility Detection', () => {
 /* Toolbar with title */
 @Component({
     template: `
-        <fd-toolbar #toolbar [title]="title">
+        <fd-toolbar #toolbar [title]="title()">
             <button fd-toolbar-item>Button1</button>
         </fd-toolbar>
     `,
@@ -431,7 +431,7 @@ describe('ToolbarComponent - Visibility Detection', () => {
 })
 class ToolbarWithTitleTestComponent {
     @ViewChild('toolbar') toolbar: ToolbarComponent;
-    title = 'Test Toolbar Title';
+    readonly title = input('Test Toolbar Title');
 }
 
 describe('ToolbarComponent - Title Accessibility', () => {
@@ -481,7 +481,7 @@ describe('ToolbarComponent - Title Accessibility', () => {
     });
 
     it('should update title and aria-label when title input changes', async () => {
-        component.title = 'Updated Title';
+        fixture.componentRef.setInput('title', 'Updated Title');
         fixture.detectChanges();
         await whenStable(fixture);
 

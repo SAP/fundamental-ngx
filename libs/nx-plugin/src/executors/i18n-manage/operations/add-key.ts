@@ -1,10 +1,9 @@
 import { workspaceRoot } from '@nx/devkit';
-import { sync as fastGlobSync } from 'fast-glob';
 import { readFileSync, writeFileSync } from 'fs';
-import transformTranslationsExecutor from '../../transform-translations/executor';
 import { CommentType } from '../schema';
 import { generateComment } from '../utils/comment-generator';
 import { addKeyToProperties, keyExists } from '../utils/properties-parser';
+import { regenerateTypeScriptFiles } from './sync';
 
 export interface AddKeyOptions {
     key: string;
@@ -48,7 +47,7 @@ function validateKeyFormat(key: string): { valid: boolean; error?: string } {
 }
 
 /**
- * Add a new translation key to all .properties files
+ * Add a new translation key to all TypeScript translation files
  */
 export async function addKey(options: AddKeyOptions): Promise<AddKeyResult> {
     const { key, value, comment, commentType, propertiesPath } = options;
@@ -63,74 +62,53 @@ export async function addKey(options: AddKeyOptions): Promise<AddKeyResult> {
         };
     }
 
-    // Step 2: Find all .properties files
-    const propertiesPattern = `${propertiesPath}/*.properties`;
-    const propertiesFiles = fastGlobSync(propertiesPattern, { cwd: workspaceRoot });
-
-    if (propertiesFiles.length === 0) {
-        return {
-            success: false,
-            filesModified: [],
-            error: `No .properties files found at: ${propertiesPattern}`
-        };
-    }
-
-    // Step 3: Check if key already exists (check first file as reference)
-    const firstFile = `${workspaceRoot}/${propertiesFiles[0]}`;
-    const firstFileContent = readFileSync(firstFile, 'utf-8');
-
-    if (keyExists(firstFileContent, key)) {
-        return {
-            success: false,
-            filesModified: [],
-            error: `Key "${key}" already exists. Use rename command to modify existing keys.`
-        };
-    }
-
-    // Step 4: Generate comment
-    const commentInfo = generateComment(key, value, comment, commentType);
-
-    // Step 5: Add key to all .properties files
-    const filesModified: string[] = [];
-
-    for (const propertiesFile of propertiesFiles) {
-        const filePath = `${workspaceRoot}/${propertiesFile}`;
-        const fileContent = readFileSync(filePath, 'utf-8');
-
-        const updatedContent = addKeyToProperties(fileContent, {
-            key,
-            value,
-            commentType: commentInfo.type,
-            commentDescription: commentInfo.description
-        });
-
-        writeFileSync(filePath, updatedContent, 'utf-8');
-        filesModified.push(propertiesFile);
-    }
-
-    // Step 6: Run transform-translations to generate .ts files
+    // Step 2: Read the base translations.properties file to check if key exists
+    const basePropertiesFile = `${workspaceRoot}/${propertiesPath}/translations.properties`;
     try {
-        const transformResult = await transformTranslationsExecutor({
-            properties: [`${propertiesPath}/*.properties`]
-        });
-
-        if (!transformResult.success) {
+        const baseContent = readFileSync(basePropertiesFile, 'utf-8');
+        if (keyExists(baseContent, key)) {
             return {
                 success: false,
-                filesModified,
-                error: 'Failed to generate TypeScript files from .properties'
+                filesModified: [],
+                error: `Key "${key}" already exists in translations.properties. Use update command to modify existing keys.`
             };
         }
     } catch (error) {
         return {
             success: false,
-            filesModified,
-            error: `Transform translations failed: ${error.message}`
+            filesModified: [],
+            error: `Failed to read translations.properties: ${error instanceof Error ? error.message : String(error)}`
         };
     }
 
+    // Step 3: Add key to base translations.properties file
+    try {
+        const baseContent = readFileSync(basePropertiesFile, 'utf-8');
+        const commentInfo = generateComment(key, value, comment, commentType);
+        const updatedContent = addKeyToProperties(baseContent, {
+            key,
+            value,
+            commentType: commentInfo.type,
+            commentDescription: commentInfo.description
+        });
+        writeFileSync(basePropertiesFile, updatedContent, 'utf-8');
+    } catch (error) {
+        return {
+            success: false,
+            filesModified: [],
+            error: `Failed to add key to translations.properties: ${error instanceof Error ? error.message : String(error)}`
+        };
+    }
+
+    // Step 4: Regenerate all TypeScript files from .properties files
+    const result = await regenerateTypeScriptFiles(propertiesPath);
+    if (!result.success) {
+        return result;
+    }
+
+    // Include the base properties file in the modified files list
     return {
         success: true,
-        filesModified
+        filesModified: [`${propertiesPath}/translations.properties`, ...result.filesModified]
     };
 }

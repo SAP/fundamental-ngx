@@ -113,13 +113,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'ป้ายชื่อข้อมูล'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
-    },
     coreLink: {
         emphasized: 'เน้น',
         subtle: 'ไม่เน้น'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'เลือกแล้ว',
+        listItemNotSelectedAriaLabel: 'ไม่ได้เลือก'
     },
     coreMessageStrip: {
         announcementError: 'แถบข้อความแสดงข้อผิดพลาด',
@@ -365,7 +365,7 @@ export default {
         messagesTeamRemoved: 'เอาออกแล้ว 1 ทีม',
         messagesUndoAction: 'เลิกทำ',
         nextButtonAriaLabel: 'ไปที่สไลด์ถัดไป',
-        noDataFound: 'No Data Found',
+        noDataFound: 'ไม่พบข้อมูล',
         nodeActionAddApproversAfter: 'เพิ่มผู้อนุมัติหลัง',
         nodeActionAddApproversBefore: 'เพิ่มผู้อนุมัติก่อน',
         nodeActionAddApproversParallel: 'เพิ่มผู้อนุมัติแบบขนาน',
@@ -522,7 +522,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'ยกเลิก',
         clearFilters: 'เคลียร์ตัวกรอง',
-        collapseAllAnnouncementLabel: 'Collapse All clicked',
+        collapseAllAnnouncementLabel: 'ยุบรวมทั้งหมดที่คลิก',
         collapseRowButtonTitle: 'ยุบรวมแถว',
         confirmBtnLabel: 'ตกลง',
         defaultEmptyMessage: 'ไม่พบข้อมูล',
@@ -533,7 +533,7 @@ export default {
         editableCellNumberPlaceholder: 'ป้อนค่า',
         editableCellStringPlaceholder: 'ป้อนค่า',
         emptyCell: 'ว่าง',
-        expandAllAnnouncementLabel: 'Expand All clicked',
+        expandAllAnnouncementLabel: 'ขยายทั้งหมดที่คลิก',
         expandRowButtonTitle: 'ขยายแถว',
         filterDialogBackToColumns: 'ย้อนกลับ',
         filterDialogCancelBtnLabel: 'ยกเลิก',
@@ -625,18 +625,18 @@ export default {
         selectSingleRow: 'เมื่อต้องการเลือกแถว ให้กด SPACEBAR',
         settingsDialogHeader: 'การตั้งค่า',
         showingBlankOfBlank: 'กำลังแสดง {totalGrowingItemsCount} จาก {totalGrowingItemsCount}',
+        sortDialogAddSort: 'Add Sort Criterion',
         sortDialogCancelBtnLabel: 'ยกเลิก',
         sortDialogConfirmBtnLabel: 'ตกลง',
+        sortDialogDelete: 'Remove Sort Criterion',
         sortDialogHeader: 'จัดเรียง',
+        sortDialogMoveUp: 'Move Up',
+        sortDialogMoveDown: 'Move Down',
         sortDialogNotSortedLabel: '(ไม่ได้จัดเรียง)',
         sortDialogSortByHeader: 'จัดเรียงตาม',
         sortDialogSortOrderAsc: 'จากน้อยไปหามาก',
         sortDialogSortOrderDesc: 'จากมากไปหาน้อย',
         sortDialogSortOrderHeader: 'ลำดับการจัดเรียง',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
-        sortDialogDelete: 'Remove Sort Criterion',
-        sortDialogAddSort: 'Add Sort Criterion',
         toolbarActionButtonTitle: 'การตั้งค่า',
         toolbarActionCancelButtonLabel: 'ยกเลิก',
         toolbarActionCollapseAllButtonTitle: 'ยุบรวมทั้งหมด',

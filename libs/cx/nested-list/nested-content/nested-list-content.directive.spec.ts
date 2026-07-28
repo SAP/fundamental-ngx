@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, input } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterModule } from '@angular/router';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
@@ -22,7 +22,7 @@ import { NestedListContentDirective } from './nested-list-content.directive';
 
 @Component({
     template: `
-        <div fdx-nested-list-content>
+        <div fdx-nested-list-content [selected]="selected()">
             <a fdx-nested-list-link>
                 <span fdx-nested-list-icon [glyph]="'settings'"></span>
                 <span fdx-nested-list-title>Link 1</span>
@@ -55,6 +55,8 @@ class TestNestedContainerComponent {
 
     @ViewChild(NestedListExpandIconComponent)
     iconElement: NestedListExpandIconComponent;
+
+    readonly selected = input(false);
 }
 
 describe('NestedContentDirective', () => {
@@ -84,7 +86,7 @@ describe('NestedContentDirective', () => {
         expect(classList.contains('has-child')).toBeFalsy();
         expect(classList.contains('is-selected')).toBeFalsy();
 
-        directiveElement.selected = true;
+        fixture.componentRef.setInput('selected', true);
 
         fixture.detectChanges();
 

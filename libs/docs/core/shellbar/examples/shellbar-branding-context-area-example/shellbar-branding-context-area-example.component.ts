@@ -343,10 +343,6 @@ export class ShellbarBrandingContextAreaExampleComponent {
         alert(product + 'Product Clicked');
     }
 
-    assistiveToolsCallback(): void {
-        alert('Assistive Tools Clicked');
-    }
-
     navClicked(event): void {
         console.log(event);
         alert('Navigation Button Clicked');

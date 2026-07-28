@@ -114,13 +114,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Infócímke'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
-    },
     coreLink: {
         emphasized: 'Kiemelt',
         subtle: 'Nem kiemelt'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'Kiválasztva',
+        listItemNotSelectedAriaLabel: 'Nincs kiválasztva'
     },
     coreMessageStrip: {
         announcementError: 'Hibaüzenetsor',
@@ -222,7 +222,7 @@ export default {
         assistiveTools: 'Segítségnyújtó eszközök',
         backButtonLabel: 'Vissza',
         cancel: 'Mégse',
-        collapsedItemMenuLabel: 'Összecsukott menüelem',
+        collapsedItemMenuLabel: 'Visszazárt menüelem',
         navigationButtonLabel: 'Navigáció',
         search: 'Keresés'
     },
@@ -366,7 +366,7 @@ export default {
         messagesTeamRemoved: '1 csapat el lett távolítva',
         messagesUndoAction: 'Visszavonás',
         nextButtonAriaLabel: 'Tovább a következő diára',
-        noDataFound: 'No Data Found',
+        noDataFound: 'Nem találhatók adatok',
         nodeActionAddApproversAfter: 'Jóváhagyók hozzáadása ez után:',
         nodeActionAddApproversBefore: 'Jóváhagyók hozzáadása ez elé:',
         nodeActionAddApproversParallel: 'Párhuzamos jóváhagyók hozzáadása',
@@ -523,8 +523,8 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Mégse',
         clearFilters: 'Szűrők törlése',
-        collapseAllAnnouncementLabel: 'Collapse All clicked',
-        collapseRowButtonTitle: 'Sor összecsukása',
+        collapseAllAnnouncementLabel: 'Rákattintott az összes visszazárására',
+        collapseRowButtonTitle: 'Sor visszazárása',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Nem található adat',
         deselectAllCheckboxLabel: 'Összes kijelölésének megszüntetése',
@@ -534,7 +534,7 @@ export default {
         editableCellNumberPlaceholder: 'Adjon meg értéket',
         editableCellStringPlaceholder: 'Adjon meg értéket',
         emptyCell: 'Üres',
-        expandAllAnnouncementLabel: 'Expand All clicked',
+        expandAllAnnouncementLabel: 'Rákattintott az összes kibontására',
         expandRowButtonTitle: 'Sor kibontása',
         filterDialogBackToColumns: 'Visszalépés',
         filterDialogCancelBtnLabel: 'Mégse',
@@ -626,18 +626,18 @@ export default {
         selectSingleRow: 'A sor kijelöléséhez nyomja meg a „szóköz” billentyűt',
         settingsDialogHeader: 'Beállítások',
         showingBlankOfBlank: '{totalGrowingItemsCount} / {totalGrowingItemsCount} látható',
+        sortDialogAddSort: 'Add Sort Criterion',
         sortDialogCancelBtnLabel: 'Mégse',
         sortDialogConfirmBtnLabel: 'OK',
+        sortDialogDelete: 'Remove Sort Criterion',
         sortDialogHeader: 'Rendezés',
+        sortDialogMoveUp: 'Move Up',
+        sortDialogMoveDown: 'Move Down',
         sortDialogNotSortedLabel: '(Nincs rendezve)',
         sortDialogSortByHeader: 'Rendezés alapja',
         sortDialogSortOrderAsc: 'Növekvő',
         sortDialogSortOrderDesc: 'Csökkenő',
         sortDialogSortOrderHeader: 'Rendezési sorrend',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
-        sortDialogDelete: 'Remove Sort Criterion',
-        sortDialogAddSort: 'Add Sort Criterion',
         toolbarActionButtonTitle: 'Beállítások',
         toolbarActionCancelButtonLabel: 'Mégse',
         toolbarActionCollapseAllButtonTitle: 'Összes visszazárása',

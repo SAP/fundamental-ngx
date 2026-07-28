@@ -14,6 +14,9 @@
         },
         {
             "path": "./tsconfig.spec.json"
+        },
+        {
+            "path": "../cdk/tsconfig.json"
         }
     ],
     "compilerOptions": {
@@ -25,11 +28,7 @@
         "noFallthroughCasesInSwitch": true,
         "module": "preserve",
         "moduleResolution": "bundler",
-        "lib": ["dom", "es2023"]
-    },
-    "angularCompilerOptions": {
-        "strictInjectionParameters": true,
-        "strictInputAccessModifiers": true,
-        "strictTemplates": true
+        "lib": ["dom", "es2023"],
+        "rootDir": "../../"
     }
 }

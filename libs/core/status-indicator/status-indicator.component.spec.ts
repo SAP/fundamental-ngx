@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, input } from '@angular/core';
 import { LablePosition, StatusIndicatorComponent } from './status-indicator.component';
 
 @Component({
@@ -8,8 +8,8 @@ import { LablePosition, StatusIndicatorComponent } from './status-indicator.comp
     template: `
         <fd-status-indicator
             id="status_icon_24"
-            [status]="status"
-            [fillPercentage]="fillPercentage"
+            [status]="status()"
+            [fillPercentage]="fillPercentage()"
             [path]="euroImage"
             viewBox="0 0 24 31"
         >
@@ -22,12 +22,12 @@ class TestStatusIndicatorComponent {
     @ViewChild(StatusIndicatorComponent, { static: true, read: ElementRef })
     StatusInidcatorElementRef: ElementRef;
 
-    status: 'negative' | 'critical' | 'positive';
-    fillPercentage: number;
-    size: string;
-    hasLabel: boolean;
-    labelPosition: LablePosition;
-    statusLabel: string;
+    readonly status = input<'negative' | 'critical' | 'positive'>();
+    readonly fillPercentage = input<number>();
+    readonly size = input<string>();
+    readonly hasLabel = input<boolean>();
+    readonly labelPosition = input<LablePosition>();
+    readonly statusLabel = input<string>();
     euroImage = [
         `
         M13,0.5c-6.6,0-12,5.4-12,12s5.4,12,12,12s12-5.4,12-12S19.6,0.5,13,0.5z M16.4,10.1L15.9,12h-5.3v0.
@@ -63,42 +63,42 @@ describe('StatusIndicatorComponent', () => {
     });
 
     it('Should add status', () => {
-        testComponent.status = 'positive';
+        fixture.componentRef.setInput('status', 'positive');
         fixture.detectChanges();
         expect(statusIndicatorElementRef.nativeElement.querySelectorAll('fd-status-indicator--positive')).toBeTruthy();
     });
 
     it('Should add fill Percentage', () => {
-        testComponent.status = 'positive';
-        testComponent.fillPercentage = 50;
+        fixture.componentRef.setInput('status', 'positive');
+        fixture.componentRef.setInput('fillPercentage', 50);
         fixture.detectChanges();
         const indicator = statusIndicatorElementRef.nativeElement.querySelectorAll('stop')[0];
         expect(indicator.getAttribute('offset')).toEqual('0.5');
     });
     it('Should add size ', () => {
-        testComponent.status = 'positive';
-        testComponent.fillPercentage = 50;
-        testComponent.size = 'xl';
+        fixture.componentRef.setInput('status', 'positive');
+        fixture.componentRef.setInput('fillPercentage', 50);
+        fixture.componentRef.setInput('size', 'xl');
         fixture.detectChanges();
         expect(statusIndicatorElementRef.nativeElement.querySelectorAll('fd-status-indicator--xl')).toBeTruthy();
     });
     it('Should add label ', () => {
-        testComponent.status = 'positive';
-        testComponent.fillPercentage = 50;
-        testComponent.size = 'xl';
-        testComponent.hasLabel = true;
-        testComponent.labelPosition = 'right';
-        testComponent.statusLabel = '35%';
+        fixture.componentRef.setInput('status', 'positive');
+        fixture.componentRef.setInput('fillPercentage', 50);
+        fixture.componentRef.setInput('size', 'xl');
+        fixture.componentRef.setInput('hasLabel', true);
+        fixture.componentRef.setInput('labelPosition', 'right');
+        fixture.componentRef.setInput('statusLabel', '35%');
         fixture.detectChanges();
         expect(statusIndicatorElementRef.nativeElement.querySelectorAll('fd-status-indicator--htext')).toBeTruthy();
     });
     it('Should add label ', () => {
-        testComponent.status = 'positive';
-        testComponent.fillPercentage = 50;
-        testComponent.size = 'xl';
-        testComponent.hasLabel = true;
-        testComponent.labelPosition = 'bottom';
-        testComponent.statusLabel = '35%';
+        fixture.componentRef.setInput('status', 'positive');
+        fixture.componentRef.setInput('fillPercentage', 50);
+        fixture.componentRef.setInput('size', 'xl');
+        fixture.componentRef.setInput('hasLabel', true);
+        fixture.componentRef.setInput('labelPosition', 'bottom');
+        fixture.componentRef.setInput('statusLabel', '35%');
         fixture.detectChanges();
         expect(
             statusIndicatorElementRef.nativeElement.querySelectorAll('fd-status-indicator--positive__text')

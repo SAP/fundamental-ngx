@@ -29,9 +29,9 @@ fi
 echo "✅ Git working tree is clean"
 echo ""
 
-# Test transform-translations executor
-echo "2️⃣ Testing transform-translations executor..."
-npx nx run i18n:transform-translations
+# Test i18n-manage sync executor
+echo "2️⃣ Testing i18n-manage sync executor..."
+npx nx run i18n:i18n-manage --command=sync
 echo "✅ Executor ran successfully"
 echo ""
 
@@ -47,19 +47,21 @@ else
 fi
 echo ""
 
-# Verify .properties files exist
-echo "4️⃣ Verifying .properties files..."
-PROPERTIES_COUNT=$(ls libs/i18n/src/lib/translations/*.properties 2>/dev/null | wc -l)
-echo "   Found $PROPERTIES_COUNT .properties files"
-ls libs/i18n/src/lib/translations/*.properties | head -3
-echo "   ..."
+# Verify translations.properties exists
+echo "4️⃣ Verifying translations.properties file..."
+if [ -f "libs/i18n/src/lib/translations/translations.properties" ]; then
+    echo "   Found translations.properties"
+else
+    echo "❌ ERROR: translations.properties not found"
+    exit 1
+fi
 echo ""
 
 # Verify .ts files exist
-echo "5️⃣ Verifying generated .ts files..."
-TS_COUNT=$(ls libs/i18n/src/lib/translations/*.ts 2>/dev/null | wc -l)
-echo "   Found $TS_COUNT .ts files"
-ls libs/i18n/src/lib/translations/*.ts | head -3
+echo "5️⃣ Verifying generated TypeScript files..."
+TS_COUNT=$(ls libs/i18n/src/lib/translations/translations*.ts 2>/dev/null | grep -v ".spec.ts" | wc -l)
+echo "   Found $TS_COUNT TypeScript translation files"
+ls libs/i18n/src/lib/translations/translations*.ts | grep -v ".spec.ts" | head -3
 echo "   ..."
 echo ""
 
@@ -67,9 +69,9 @@ echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo "📊 Test Summary"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "✅ transform-translations executor works"
-echo "✅ .properties files exist ($PROPERTIES_COUNT files)"
-echo "✅ .ts files exist ($TS_COUNT files)"
+echo "✅ i18n-manage sync executor works"
+echo "✅ translations.properties file exists"
+echo "✅ TypeScript translation files exist ($TS_COUNT files)"
 if [ "$CHANGES_DETECTED" = true ]; then
     echo "⚠️  Generated files have uncommitted changes"
     echo ""

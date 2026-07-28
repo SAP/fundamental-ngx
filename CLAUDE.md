@@ -1,6 +1,6 @@
 # Fundamental NGX
 
-Angular component library (Angular 21+, NX monorepo, Yarn 4).
+Angular component library (Angular 22+, NX monorepo, Yarn 4).
 All components standalone by default.
 
 ## Architecture
@@ -95,12 +95,12 @@ Invoke with `/skill-name` (e.g. `/preflight`). Skills live in `.claude/skills/`.
 | `build-table`       | Build a platform data table with sorting, filtering, pagination, and row selection |
 | `build-page-layout` | Build a page layout using `fd-dynamic-page` or `fdp-dynamic-page`                  |
 | `scaffold`          | Generate a working component (dialog, table, card, form, shell, layout-grid)       |
-| `migrate`           | Migrate a component or directive to Angular 21+ signal-based patterns              |
+| `migrate`           | Migrate a component or directive to Angular 22+ signal-based patterns              |
 | `create-test`       | Generate or update unit tests following project testing conventions                |
 | `i18n-manage`       | Add, rename, or remove i18n translation keys across the codebase                   |
 | `adopt-styles`      | Adopt breaking changes from `fundamental-styles` into Angular components           |
 | `update-docs`       | Verify and update documentation examples against the current public API            |
-| `best-practices`    | Audit code against project conventions and Angular 21+ best practices              |
+| `best-practices`    | Audit code against project conventions and Angular 22+ best practices              |
 | `a11y-audit`        | Audit a component for WCAG AA accessibility compliance                             |
 | `review-pr`         | Review a pull request against project conventions                                  |
 | `preflight`         | Run local quality gates before creating a PR                                       |

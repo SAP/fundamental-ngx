@@ -1,7 +1,7 @@
 {
     "extends": "./tsconfig.json",
     "compilerOptions": {
-        "outDir": "../../dist/out-tsc",
+        "outDir": "../../dist/out-tsc/datetime-adapter",
         "declaration": true,
         "declarationMap": true,
         "inlineSources": true,
@@ -12,10 +12,5 @@
     },
     "exclude": ["src/test.ts", "**/*.spec.ts", "**/*.test.ts"],
     "files": ["./src/index.ts"],
-    "include": ["**/*.ts"],
-    "angularCompilerOptions": {
-        "skipTemplateCodegen": true,
-        "strictMetadataEmit": true,
-        "enableResourceInlining": true
-    }
+    "include": ["**/*.ts"]
 }

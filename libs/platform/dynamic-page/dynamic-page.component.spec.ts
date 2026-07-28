@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, input } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -14,7 +14,7 @@ import { PlatformDynamicPageModule } from './dynamic-page.module';
 
 @Component({
     template: `
-        <fdp-dynamic-page [size]="size" [background]="background">
+        <fdp-dynamic-page [size]="size()" [background]="background()">
             <fdp-dynamic-page-title>
                 <fdp-dynamic-page-global-actions>
                     <fd-toolbar fdType="transparent" [clearBorder]="true">
@@ -50,8 +50,8 @@ class TestComponent {
     @ViewChild(DynamicPageTitleComponent) dynamicPageTitleComponent: DynamicPageTitleComponent;
     @ViewChild(DynamicPageHeaderComponent) dynamicPageHeaderComponent: DynamicPageHeaderComponent;
     @ViewChild(DynamicPageContentComponent) dynamicPageContentComponent: DynamicPageContentComponent;
-    size: DynamicPageResponsiveSize = 'medium';
-    background: DynamicPageBackgroundType = 'solid';
+    readonly size = input<DynamicPageResponsiveSize>('medium');
+    readonly background = input<DynamicPageBackgroundType>('solid');
 }
 describe('DynamicPageComponent default values', () => {
     let component: TestComponent;
@@ -82,22 +82,22 @@ describe('DynamicPageComponent default values', () => {
 
     it('should set proper style by size', async () => {
         const dynamicPageElement = fixture.debugElement.query(By.css('.' + CLASS_NAME.dynamicPage)).nativeElement;
-        component.dynamicPage.size = 'large';
+        fixture.componentRef.setInput('size', 'large');
         fixture.detectChanges();
         expect(dynamicPageElement.classList.contains('fd-dynamic-page--lg')).toBeTruthy();
 
-        component.dynamicPage.size = 'small';
+        fixture.componentRef.setInput('size', 'small');
         fixture.detectChanges();
         expect(dynamicPageElement.classList.contains('fd-dynamic-page--sm')).toBeTruthy();
     });
 
     it('should set background styles', async () => {
         const dynamicPageElement = fixture.debugElement.query(By.css('.' + CLASS_NAME.dynamicPage)).nativeElement;
-        component.dynamicPage.background = 'transparent';
+        fixture.componentRef.setInput('background', 'transparent');
         fixture.detectChanges();
         expect(dynamicPageElement.classList.contains('fd-dynamic-page--transparent-bg')).toBeTruthy();
 
-        component.dynamicPage.background = 'list';
+        fixture.componentRef.setInput('background', 'list');
         fixture.detectChanges();
         expect(dynamicPageElement.classList.contains('fd-dynamic-page--list-bg')).toBeTruthy();
     });
@@ -109,7 +109,8 @@ describe('DynamicPageComponent default values', () => {
     });
 
     it('should collapse header on click of title', async () => {
-        component.dynamicPageHeaderComponent._onCollapseChange(true);
+        const service = component.dynamicPage._dynamicPageComponent['_dynamicPageService'];
+        service.collapsed.set(true);
         fixture.detectChanges();
         const contentEl: HTMLElement = fixture.debugElement.query(
             By.css('.fd-dynamic-page__collapsible-header')

@@ -203,3 +203,40 @@ describe('ListComponent loading state', () => {
         expect(skeletonItems.length).toBe(0);
     });
 });
+
+describe('ListComponent keyboard handling', () => {
+    let component: ListComponent<any>;
+    let fixture: ComponentFixture<ListComponent<any>>;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [ListComponent]
+        }).compileComponents();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(ListComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
+
+    it('should allow Escape key to propagate', () => {
+        const event = new KeyboardEvent('keydown', { key: 'Escape', keyCode: 27, bubbles: true });
+        const stopImmediatePropagationSpy = jest.spyOn(event, 'stopImmediatePropagation');
+
+        const listElement = fixture.debugElement.query(By.css('.fd-list'));
+        listElement.nativeElement.dispatchEvent(event);
+
+        expect(stopImmediatePropagationSpy).not.toHaveBeenCalled();
+    });
+
+    it('should stop propagation for arrow keys', () => {
+        const event = new KeyboardEvent('keydown', { key: 'ArrowDown', keyCode: 40, bubbles: true });
+        const stopImmediatePropagationSpy = jest.spyOn(event, 'stopImmediatePropagation');
+
+        const listElement = fixture.debugElement.query(By.css('.fd-list'));
+        listElement.nativeElement.dispatchEvent(event);
+
+        expect(stopImmediatePropagationSpy).toHaveBeenCalled();
+    });
+});

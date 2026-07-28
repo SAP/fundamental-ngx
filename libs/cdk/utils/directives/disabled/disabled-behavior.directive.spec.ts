@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, input } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { DisabledBehaviorDirective } from './disabled-behavior.directive';
 
@@ -8,9 +8,9 @@ import { DisabledBehaviorDirective } from './disabled-behavior.directive';
     template: `
         <button
             fdkDisabled
-            [fdkDisabled]="disabled"
-            [addDisabledClass]="addDisabledClass"
-            [disabledClass]="disabledClass"
+            [fdkDisabled]="disabled()"
+            [addDisabledClass]="addDisabledClass()"
+            [disabledClass]="disabledClass()"
         >
             Test Button
         </button>
@@ -19,9 +19,9 @@ import { DisabledBehaviorDirective } from './disabled-behavior.directive';
 class TestComponent {
     @ViewChild(DisabledBehaviorDirective, { static: true }) directive: DisabledBehaviorDirective;
 
-    disabled = false;
-    addDisabledClass = true;
-    disabledClass = 'is-disabled';
+    readonly disabled = input(false);
+    readonly addDisabledClass = input(true);
+    readonly disabledClass = input('is-disabled');
 }
 
 describe('DisabledBehaviorDirective', () => {
@@ -55,7 +55,7 @@ describe('DisabledBehaviorDirective', () => {
     });
 
     it('should disable the element when fdkDisabled is set to true', async () => {
-        component.disabled = true;
+        fixture.componentRef.setInput('disabled', true);
         fixture.detectChanges();
         await fixture.whenStable();
 
@@ -66,11 +66,11 @@ describe('DisabledBehaviorDirective', () => {
     });
 
     it('should enable the element when fdkDisabled is set to false', async () => {
-        component.disabled = true;
+        fixture.componentRef.setInput('disabled', true);
         fixture.detectChanges();
         await fixture.whenStable();
 
-        component.disabled = false;
+        fixture.componentRef.setInput('disabled', false);
         fixture.detectChanges();
         await fixture.whenStable();
 
@@ -81,7 +81,7 @@ describe('DisabledBehaviorDirective', () => {
     });
 
     it('should coerce string "true" to boolean true', async () => {
-        component.disabled = 'true' as any;
+        fixture.componentRef.setInput('disabled', 'true' as any);
         fixture.detectChanges();
         await fixture.whenStable();
 
@@ -90,7 +90,7 @@ describe('DisabledBehaviorDirective', () => {
     });
 
     it('should coerce empty string to boolean true', async () => {
-        component.disabled = '' as any;
+        fixture.componentRef.setInput('disabled', '' as any);
         fixture.detectChanges();
         await fixture.whenStable();
 
@@ -99,7 +99,7 @@ describe('DisabledBehaviorDirective', () => {
     });
 
     it('should coerce "false" string to boolean false', async () => {
-        component.disabled = 'false' as any;
+        fixture.componentRef.setInput('disabled', 'false' as any);
         fixture.detectChanges();
         await fixture.whenStable();
 
@@ -110,12 +110,12 @@ describe('DisabledBehaviorDirective', () => {
     describe('with addDisabledClass set to false', () => {
         beforeEach(async () => {
             // Set addDisabledClass first and detect changes
-            component.addDisabledClass = false;
+            fixture.componentRef.setInput('addDisabledClass', false);
             fixture.detectChanges();
             await fixture.whenStable();
 
             // Then enable disabled state
-            component.disabled = true;
+            fixture.componentRef.setInput('disabled', true);
             fixture.detectChanges();
             await fixture.whenStable();
         });
@@ -131,12 +131,12 @@ describe('DisabledBehaviorDirective', () => {
     describe('with custom disabled class', () => {
         beforeEach(async () => {
             // Set custom class first and detect changes
-            component.disabledClass = 'custom-disabled';
+            fixture.componentRef.setInput('disabledClass', 'custom-disabled');
             fixture.detectChanges();
             await fixture.whenStable();
 
             // Then enable disabled state
-            component.disabled = true;
+            fixture.componentRef.setInput('disabled', true);
             fixture.detectChanges();
             await fixture.whenStable();
         });
@@ -148,12 +148,12 @@ describe('DisabledBehaviorDirective', () => {
     });
 
     it('should remove custom disabled class when re-enabled', async () => {
-        component.disabledClass = 'custom-disabled';
-        component.disabled = true;
+        fixture.componentRef.setInput('disabledClass', 'custom-disabled');
+        fixture.componentRef.setInput('disabled', true);
         fixture.detectChanges();
         await fixture.whenStable();
 
-        component.disabled = false;
+        fixture.componentRef.setInput('disabled', false);
         fixture.detectChanges();
         await fixture.whenStable();
 
@@ -166,7 +166,7 @@ describe('DisabledBehaviorDirective', () => {
             emittedValues.push(value);
         });
 
-        component.disabled = true;
+        fixture.componentRef.setInput('disabled', true);
         fixture.detectChanges();
 
         setTimeout(() => {
@@ -181,11 +181,11 @@ describe('DisabledBehaviorDirective', () => {
             emittedValues.push(value);
         });
 
-        component.disabled = true;
+        fixture.componentRef.setInput('disabled', true);
         fixture.detectChanges();
 
         setTimeout(() => {
-            component.disabled = false;
+            fixture.componentRef.setInput('disabled', false);
             fixture.detectChanges();
 
             setTimeout(() => {
@@ -202,11 +202,11 @@ describe('DisabledBehaviorDirective', () => {
             emittedValues.push(value);
         });
 
-        component.disabled = true;
+        fixture.componentRef.setInput('disabled', true);
         fixture.detectChanges();
 
         setTimeout(() => {
-            component.disabled = true;
+            fixture.componentRef.setInput('disabled', true);
             fixture.detectChanges();
 
             setTimeout(() => {
@@ -222,7 +222,7 @@ describe('DisabledBehaviorDirective', () => {
         const clickedProvider = (component.directive as any)._clicked;
         const spy = jest.spyOn(clickedProvider, 'setPreventDefault');
 
-        component.disabled = true;
+        fixture.componentRef.setInput('disabled', true);
         fixture.detectChanges();
         await fixture.whenStable();
 
@@ -230,14 +230,14 @@ describe('DisabledBehaviorDirective', () => {
     });
 
     it('should call setPreventDefault with false when enabled', async () => {
-        component.disabled = true;
+        fixture.componentRef.setInput('disabled', true);
         fixture.detectChanges();
         await fixture.whenStable();
 
         const clickedProvider = (component.directive as any)._clicked;
         const spy = jest.spyOn(clickedProvider, 'setPreventDefault');
 
-        component.disabled = false;
+        fixture.componentRef.setInput('disabled', false);
         fixture.detectChanges();
         await fixture.whenStable();
 
@@ -266,11 +266,11 @@ describe('DisabledBehaviorDirective', () => {
     });
 
     it('should handle rapid state changes', async () => {
-        component.disabled = true;
+        fixture.componentRef.setInput('disabled', true);
         fixture.detectChanges();
-        component.disabled = false;
+        fixture.componentRef.setInput('disabled', false);
         fixture.detectChanges();
-        component.disabled = true;
+        fixture.componentRef.setInput('disabled', true);
         fixture.detectChanges();
         await fixture.whenStable();
 

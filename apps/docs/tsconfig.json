@@ -1,12 +1,10 @@
 {
     "extends": "../../tsconfig.base.json",
-    "angularCompilerOptions": {
-        "enableIvy": true
-    },
     "compilerOptions": {
         "target": "es2023",
         "module": "preserve",
         "moduleResolution": "bundler",
-        "lib": ["dom", "es2023"]
+        "lib": ["dom", "es2023"],
+        "rootDir": "../../"
     }
 }

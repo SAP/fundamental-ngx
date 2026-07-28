@@ -1,9 +1,9 @@
-import { AfterViewInit, Component, Inject, Injectable, TemplateRef, ViewChild } from '@angular/core';
+import { Component, computed, inject, Injectable, TemplateRef, viewChild } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ThemingService } from '@fundamental-ngx/core/theming';
 import { TitleComponent } from '@fundamental-ngx/core/title';
-import { FD_LANGUAGE, FD_LANGUAGE_ENGLISH, FD_LANGUAGE_GERMAN, FdLanguage } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_ENGLISH, FD_LANGUAGE_GERMAN, FD_LANGUAGE_SIGNAL } from '@fundamental-ngx/i18n';
 import { ListAvatarConfig } from '@fundamental-ngx/platform/list';
 import {
     SettingsGeneratorComponent,
@@ -70,28 +70,17 @@ class ExampleUserService {
     providers: [ExampleUserService],
     imports: [TitleComponent, SettingsGeneratorModule, BarModule]
 })
-export class SettingsGeneratorDefaultExampleComponent implements AfterViewInit {
-    @ViewChild('privacyContent')
-    privacyContent: TemplateRef<any>;
+export class SettingsGeneratorDefaultExampleComponent {
+    readonly privacyContent = viewChild.required<TemplateRef<any>>('privacyContent');
 
-    @ViewChild('termsOfServiceContent')
-    termsOfServiceContent: TemplateRef<any>;
+    readonly termsOfServiceContent = viewChild.required<TemplateRef<any>>('termsOfServiceContent');
 
-    @ViewChild('themeListItemTemplate')
-    themeListItemTemplate: TemplateRef<any>;
+    readonly settingsGenerator = viewChild.required(SettingsGeneratorComponent);
 
-    @ViewChild(SettingsGeneratorComponent)
-    settingsGenerator: SettingsGeneratorComponent;
+    readonly schema = computed<SettingsModel>(() => {
+        const privacyContent = this.privacyContent();
+        const termsOfServiceContent = this.termsOfServiceContent();
 
-    schema: SettingsModel;
-
-    constructor(
-        private readonly _theming: ThemingService,
-        private readonly _userService: ExampleUserService,
-        @Inject(FD_LANGUAGE) private _langSubject$: BehaviorSubject<FdLanguage>
-    ) {}
-
-    ngAfterViewInit(): void {
         const choices: SelectItem[] = this._theming.getThemes().map((theme) => ({
             label: theme.name + (this._theming.config.defaultTheme === theme.id ? ' (Default)' : ''),
             value: theme.id,
@@ -100,7 +89,7 @@ export class SettingsGeneratorDefaultExampleComponent implements AfterViewInit {
 
         const currentTheme = this._theming.getCurrentTheme();
 
-        this.schema = {
+        return {
             appearance: 'sidebar',
             sidebarWidth: {
                 minWidth: '20rem',
@@ -252,13 +241,13 @@ export class SettingsGeneratorDefaultExampleComponent implements AfterViewInit {
                                     message: 'Language',
                                     choices: this._userService.getLanguages(),
                                     default: this._userService.getUser().pipe(map((res) => res.language)),
-                                    onchange: (fieldValue: FdLanguage) => {
-                                        switch (fieldValue.toString()) {
+                                    onchange: (fieldValue: string) => {
+                                        switch (fieldValue) {
                                             case 'en':
-                                                this._langSubject$.next(FD_LANGUAGE_ENGLISH);
+                                                this._langSignal.set(FD_LANGUAGE_ENGLISH);
                                                 break;
                                             case 'de':
-                                                this._langSubject$.next(FD_LANGUAGE_GERMAN);
+                                                this._langSignal.set(FD_LANGUAGE_GERMAN);
                                                 break;
                                         }
                                     }
@@ -301,20 +290,27 @@ export class SettingsGeneratorDefaultExampleComponent implements AfterViewInit {
                     groups: [
                         {
                             title: 'Privacy Policy',
-                            template: this.privacyContent
+                            template: privacyContent
                         },
                         {
                             title: 'Terms of Service',
-                            template: this.termsOfServiceContent
+                            template: termsOfServiceContent
                         }
                     ]
                 }
             ]
         };
-    }
+    });
+
+    private readonly _langSignal = inject(FD_LANGUAGE_SIGNAL);
+
+    constructor(
+        private readonly _theming: ThemingService,
+        private readonly _userService: ExampleUserService
+    ) {}
 
     submit(): void {
-        this.settingsGenerator
+        this.settingsGenerator()
             .submit()
             .pipe(take(1))
             .subscribe((result: any) => {

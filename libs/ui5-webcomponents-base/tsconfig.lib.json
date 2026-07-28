@@ -1,25 +1,34 @@
 {
     "extends": "./tsconfig.json",
     "compilerOptions": {
-        "outDir": "../../dist/out-tsc",
+        "outDir": "../../dist/out-tsc/ui5-webcomponents-base",
         "target": "es2023",
         "declaration": true,
         "declarationMap": true,
         "types": [],
-        "lib": ["dom", "es2023"],
+        "lib": [
+            "dom",
+            "es2023"
+        ],
         "useDefineForClassFields": false,
         "moduleResolution": "bundler",
         "paths": {
-            "@fundamental-ngx/i18n": ["dist/libs/i18n"],
-            "@fundamental-ngx/core/theming": ["dist/libs/core/theming"]
+            "@fundamental-ngx/i18n": [
+                "dist/libs/i18n"
+            ],
+            "@fundamental-ngx/core/theming": [
+                "dist/libs/core/theming"
+            ]
         }
     },
-    "angularCompilerOptions": {
-        "skipTemplateCodegen": true,
-        "strictMetadataEmit": true,
-        "enableResourceInlining": true
-    },
-    "files": ["./index.ts"],
-    "exclude": ["test.ts", "**/*.spec.ts"],
-    "include": ["**/*.ts"]
+    "files": [
+        "./index.ts"
+    ],
+    "exclude": [
+        "test.ts",
+        "**/*.spec.ts"
+    ],
+    "include": [
+        "**/*.ts"
+    ]
 }

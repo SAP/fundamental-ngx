@@ -1,4 +1,4 @@
-import { Component, ContentChildren, QueryList, ViewChild } from '@angular/core';
+import { Component, ContentChildren, QueryList, ViewChild, input } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormControlComponent } from '@fundamental-ngx/core/form';
 
@@ -12,7 +12,7 @@ import { TokenizerComponent } from './tokenizer.component';
 @Component({
     selector: 'fd-tokenizer-test-component',
     template: `
-        <fd-tokenizer [fdCompact]="compact" [externalHiddenCount]="externalHiddenCount">
+        <fd-tokenizer [fdCompact]="compact()" [externalHiddenCount]="externalHiddenCount()">
             <fd-token>Token 1</fd-token>
             <fd-token>Token 2</fd-token>
             <fd-token>Token 3</fd-token>
@@ -29,8 +29,8 @@ class HostComponent {
     @ContentChildren(TokenComponent, { read: TokenComponent })
     tokenList: QueryList<TokenComponent>;
 
-    compact: boolean | undefined = undefined;
-    externalHiddenCount = 0;
+    readonly compact = input<boolean | undefined>(undefined);
+    readonly externalHiddenCount = input(0);
 }
 
 describe('TokenizerComponent', () => {
@@ -181,7 +181,7 @@ describe('TokenizerComponent', () => {
     });
 
     it('should handle resize - getting smaller', () => {
-        fixture.componentInstance.compact = true;
+        fixture.componentRef.setInput('compact', true);
         fixture.detectChanges();
         jest.spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').mockReturnValue({ width: 1 });
         jest.spyOn(component, 'getCombinedTokenWidth').mockReturnValue(2);
@@ -198,7 +198,7 @@ describe('TokenizerComponent', () => {
     });
 
     it('should handle resize - getting bigger', () => {
-        fixture.componentInstance.compact = true;
+        fixture.componentRef.setInput('compact', true);
         fixture.detectChanges();
         // need to collapse the tokens before running expand
         jest.spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').mockReturnValue({ width: 1 });
@@ -215,7 +215,7 @@ describe('TokenizerComponent', () => {
     });
 
     it('should handle resize - getting bigger', () => {
-        fixture.componentInstance.compact = true;
+        fixture.componentRef.setInput('compact', true);
         fixture.detectChanges();
         // need to collapse the tokens before running expand
         jest.spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').mockReturnValue({ width: 1 });
@@ -250,7 +250,8 @@ describe('TokenizerComponent', () => {
     });
 
     it('should get the hidden cozy token count AfterViewChecked', async () => {
-        fixture.componentInstance.compact = false;
+        fixture.componentRef.setInput('compact', false);
+        fixture.detectChanges();
 
         jest.spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').mockReturnValue({ left: 1 });
         component.tokenList.forEach((token) => {
@@ -269,7 +270,7 @@ describe('TokenizerComponent', () => {
 
     describe('externalHiddenCount input', () => {
         it('adds externalHiddenCount to the "+N more" label in compact mode', async () => {
-            fixture.componentInstance.compact = true;
+            fixture.componentRef.setInput('compact', true);
             fixture.detectChanges();
 
             // Force width-collapse to hide all 3 tokens (elementWidth=1 < combinedTokenWidth=100)
@@ -282,7 +283,7 @@ describe('TokenizerComponent', () => {
             await whenStable(fixture);
 
             // Set externalHiddenCount = 100
-            fixture.componentInstance.externalHiddenCount = 100;
+            fixture.componentRef.setInput('externalHiddenCount', 100);
             fixture.detectChanges();
             await whenStable(fixture);
 
@@ -294,7 +295,7 @@ describe('TokenizerComponent', () => {
         });
 
         it('adds externalHiddenCount to the "+N more" label in cozy mode', async () => {
-            fixture.componentInstance.compact = false;
+            fixture.componentRef.setInput('compact', false);
             fixture.detectChanges();
 
             // externalHiddenCount drives the indicator in cozy mode (no width-collapse path)
@@ -305,7 +306,7 @@ describe('TokenizerComponent', () => {
             await whenStable(fixture);
 
             // Set externalHiddenCount = 50
-            fixture.componentInstance.externalHiddenCount = 50;
+            fixture.componentRef.setInput('externalHiddenCount', 50);
             fixture.detectChanges();
             await whenStable(fixture);
 
@@ -317,7 +318,7 @@ describe('TokenizerComponent', () => {
         });
 
         it('renders "+N more" indicator when externalHiddenCount > 0 even with no width-hidden tokens', async () => {
-            fixture.componentInstance.compact = true;
+            fixture.componentRef.setInput('compact', true);
             fixture.detectChanges();
 
             // Wide viewport - no tokens width-hidden
@@ -330,7 +331,7 @@ describe('TokenizerComponent', () => {
             await whenStable(fixture);
 
             // Set externalHiddenCount = 988
-            fixture.componentInstance.externalHiddenCount = 988;
+            fixture.componentRef.setInput('externalHiddenCount', 988);
             fixture.detectChanges();
             await whenStable(fixture);
 
@@ -341,7 +342,7 @@ describe('TokenizerComponent', () => {
         });
 
         it('does NOT render "+N more" indicator when externalHiddenCount === 0 and no width-hidden tokens', async () => {
-            fixture.componentInstance.compact = true;
+            fixture.componentRef.setInput('compact', true);
             fixture.detectChanges();
 
             // Wide viewport - no width-collapse
@@ -373,7 +374,7 @@ describe('TokenizerComponent', () => {
             await whenStable(fixture);
 
             // Set externalHiddenCount = 100
-            fixture.componentInstance.externalHiddenCount = 100;
+            fixture.componentRef.setInput('externalHiddenCount', 100);
             fixture.detectChanges();
             await whenStable(fixture);
 
@@ -405,7 +406,7 @@ describe('TokenizerComponent', () => {
             await whenStable(fixture);
 
             // Set externalHiddenCount = 100
-            fixture.componentInstance.externalHiddenCount = 100;
+            fixture.componentRef.setInput('externalHiddenCount', 100);
             fixture.detectChanges();
             await whenStable(fixture);
 
@@ -447,7 +448,7 @@ describe('TokenizerComponent', () => {
         });
 
         it('clears _showMoreElement when externalHiddenCount flips back to 0 (no width-collapse)', async () => {
-            fixture.componentInstance.compact = true;
+            fixture.componentRef.setInput('compact', true);
             fixture.detectChanges();
 
             // Wide viewport — no width-hidden tokens
@@ -460,20 +461,20 @@ describe('TokenizerComponent', () => {
             await whenStable(fixture);
 
             // Set externalHiddenCount = 988 — _showMoreElement flips to true
-            fixture.componentInstance.externalHiddenCount = 988;
+            fixture.componentRef.setInput('externalHiddenCount', 988);
             fixture.detectChanges();
             await whenStable(fixture);
             expect(component._showMoreElement()).toBe(true);
 
             // Flip back to 0 — _showMoreElement MUST flip back to false (currently stays stuck)
-            fixture.componentInstance.externalHiddenCount = 0;
+            fixture.componentRef.setInput('externalHiddenCount', 0);
             fixture.detectChanges();
             await whenStable(fixture);
             expect(component._showMoreElement()).toBe(false);
         });
 
         it('does NOT show "0 more" when externalHiddenCount drops to 0 and no width-hidden tokens', async () => {
-            fixture.componentInstance.compact = true;
+            fixture.componentRef.setInput('compact', true);
             fixture.detectChanges();
 
             // Wide viewport — no width-collapse
@@ -486,13 +487,13 @@ describe('TokenizerComponent', () => {
             await whenStable(fixture);
 
             // Start with externalHiddenCount > 0 — indicator shows
-            fixture.componentInstance.externalHiddenCount = 5;
+            fixture.componentRef.setInput('externalHiddenCount', 5);
             fixture.detectChanges();
             await whenStable(fixture);
             expect(fixture.nativeElement.querySelector('.fd-tokenizer-more')).not.toBeNull();
 
             // Drop to 0 — indicator must disappear entirely (no "0 more")
-            fixture.componentInstance.externalHiddenCount = 0;
+            fixture.componentRef.setInput('externalHiddenCount', 0);
             fixture.detectChanges();
             await whenStable(fixture);
             expect(fixture.nativeElement.querySelector('.fd-tokenizer-more')).toBeNull();

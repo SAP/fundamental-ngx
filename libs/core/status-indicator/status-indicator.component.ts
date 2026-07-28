@@ -136,14 +136,19 @@ export class StatusIndicatorComponent implements AfterViewInit, HasElementRef {
 
     /** @hidden */
     protected readonly binaryString = signal<string>('');
+
     /** @hidden */
-    protected readonly x1 = signal<string>('');
+    protected readonly x1 = signal<string>('0');
+
     /** @hidden */
-    protected readonly y1 = signal<string>('');
+    protected readonly y1 = signal<string>('0');
+
     /** @hidden */
-    protected readonly x2 = signal<string>('');
+    protected readonly x2 = signal<string>('0');
+
     /** @hidden */
-    protected readonly y2 = signal<string>('');
+    protected readonly y2 = signal<string>('0');
+
     /** @hidden */
     protected readonly pointsArray = signal<string[]>([]);
 

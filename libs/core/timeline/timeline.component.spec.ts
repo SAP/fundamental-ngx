@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TimelineNodeComponent } from './components/timeline-node/timeline-node.component';
 import { TimelineNodeDefDirective } from './directives/timeline-node-def.directive';
@@ -31,7 +31,7 @@ describe('TimelineComponent', () => {
     it('should create nodes by dataSource', () => {
         const hostEl: HTMLElement = fixture.debugElement.nativeElement;
         const nodesCount = hostEl.querySelectorAll('.fd-timeline__node-wrapper').length;
-        const dataSourceCount = component.data.length;
+        const dataSourceCount = component.data().length;
         expect(nodesCount).toBeGreaterThan(0);
         expect(nodesCount).toBe(dataSourceCount);
     });
@@ -42,9 +42,9 @@ describe('TimelineComponent', () => {
             node.setAttribute('initialIndex', index.toString());
         });
 
-        expect(nodesArr.length).toBe(component.data.length);
+        expect(nodesArr.length).toBe(component.data().length);
 
-        component.data = [{ title: 'Title #1' }, { title: 'Title #2' }, { title: 'Title #3' }];
+        fixture.componentRef.setInput('data', [{ title: 'Title #1' }, { title: 'Title #2' }, { title: 'Title #3' }]);
         fixture.detectChanges();
 
         const nodeWithInitialIndexAttr = getNodes(fixture.debugElement.nativeElement).filter((node: Element) =>
@@ -55,8 +55,8 @@ describe('TimelineComponent', () => {
     });
 
     it('should create timeline in a horizontal dimension', () => {
-        component.axis = 'horizontal';
-        component.layout = 'top';
+        fixture.componentRef.setInput('axis', 'horizontal');
+        fixture.componentRef.setInput('layout', 'top');
         fixture.detectChanges();
 
         const hostEl: HTMLElement = fixture.debugElement.nativeElement;
@@ -65,7 +65,7 @@ describe('TimelineComponent', () => {
     });
 
     it('should create timeline with double side layout', () => {
-        component.layout = 'double';
+        fixture.componentRef.setInput('layout', 'double');
         fixture.detectChanges();
 
         const hostEl: HTMLElement = fixture.debugElement.nativeElement;
@@ -94,11 +94,11 @@ describe('TimelineComponentLoading', () => {
 
     it('should show loading skeleton with 3 repeated nodes when dataSource becomes null', () => {
         // First initialize with data
-        component.data = [{ title: 'Title #1' }];
+        fixture.componentRef.setInput('data', [{ title: 'Title #1' }]);
         fixture.detectChanges();
 
         // Then set to null to trigger loading state
-        component.data = null as any;
+        fixture.componentRef.setInput('data', null);
         fixture.detectChanges();
 
         const hostEl: HTMLElement = fixture.debugElement.nativeElement;
@@ -109,7 +109,7 @@ describe('TimelineComponentLoading', () => {
     });
 
     it('should hide loading skeleton when dataSource is provided', () => {
-        component.data = [{ title: 'Title #1' }];
+        fixture.componentRef.setInput('data', [{ title: 'Title #1' }]);
         fixture.detectChanges();
 
         const hostEl: HTMLElement = fixture.debugElement.nativeElement;
@@ -146,23 +146,23 @@ describe('TimelineComponentWithTrackBy', () => {
             node.setAttribute('initialIndex', index.toString());
         });
 
-        expect(nodesArr.length).toBe(component.data.length);
+        expect(nodesArr.length).toBe(component.data().length);
 
-        component.data = [{ title: 'Title #1' }, { title: 'Title #2' }, { title: 'Title #3' }];
+        fixture.componentRef.setInput('data', [{ title: 'Title #1' }, { title: 'Title #2' }, { title: 'Title #3' }]);
         fixture.detectChanges();
 
         const nodeWithInitialIndexAttr = getNodes(fixture.debugElement.nativeElement).filter((node: Element) =>
             node.hasAttribute('initialIndex')
         );
 
-        expect(nodeWithInitialIndexAttr.length).toBe(component.data.length);
+        expect(nodeWithInitialIndexAttr.length).toBe(component.data().length);
     });
 });
 
 @Component({
     template: `
         <div [style.width.px]="300">
-            <fd-timeline [dataSource]="data" [axis]="axis" [layout]="layout">
+            <fd-timeline [dataSource]="data()" [axis]="axis()" [layout]="layout()">
                 <fd-timeline-node *fdTimelineNodeDef="let node">
                     {{ node.title }}
                 </fd-timeline-node>
@@ -173,16 +173,16 @@ describe('TimelineComponentWithTrackBy', () => {
     imports: [TimelineComponent, TimelineNodeDefDirective, TimelineNodeComponent, TimelineTestComponent]
 })
 class TimelineTestComponent {
-    data = [{ title: 'Title #1' }, { title: 'Title #2' }, { title: 'Title #3' }];
+    readonly data = input<{ title: string }[]>([{ title: 'Title #1' }, { title: 'Title #2' }, { title: 'Title #3' }]);
 
-    axis: TimelineAxis = 'vertical';
-    layout: TimelineSidePosition = 'right';
+    readonly axis = input<TimelineAxis>('vertical');
+    readonly layout = input<TimelineSidePosition>('right');
 }
 
 @Component({
     template: `
         <div [style.width.px]="300">
-            <fd-timeline [dataSource]="data" [trackBy]="trackBy">
+            <fd-timeline [dataSource]="data()" [trackBy]="trackBy">
                 <fd-timeline-node *fdTimelineNodeDef="let node">
                     {{ node.title }}
                 </fd-timeline-node>
@@ -203,7 +203,7 @@ class TimelineTestWithTrackByComponent extends TimelineTestComponent {
 @Component({
     template: `
         <div [style.width.px]="300">
-            <fd-timeline [dataSource]="data" [axis]="axis" [layout]="layout">
+            <fd-timeline [dataSource]="data()" [axis]="axis()" [layout]="layout()">
                 <fd-timeline-node *fdTimelineNodeDef="let node">
                     {{ node.title }}
                 </fd-timeline-node>
@@ -214,10 +214,10 @@ class TimelineTestWithTrackByComponent extends TimelineTestComponent {
     imports: [TimelineComponent, TimelineNodeDefDirective, TimelineNodeComponent]
 })
 class TimelineLoadingTestComponent {
-    data: { title: string }[] | null = null;
+    readonly data = input<{ title: string }[] | null>(null);
 
-    axis: TimelineAxis = 'vertical';
-    layout: TimelineSidePosition = 'right';
+    readonly axis = input<TimelineAxis>('vertical');
+    readonly layout = input<TimelineSidePosition>('right');
 }
 
 function getNodes(treeElement: Element): HTMLElement[] {

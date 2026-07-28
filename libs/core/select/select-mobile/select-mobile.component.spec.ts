@@ -43,7 +43,7 @@ describe('SelectComponent in mobile mode', () => {
         TestBed.configureTestingModule({
             imports: [TestWrapperComponent],
             providers: [{ provide: MOBILE_CONFIG_TEST_TOKEN, useValue: MOBILE_CONFIG }]
-        }).overrideComponent(SelectComponent, { set: { changeDetection: ChangeDetectionStrategy.Default } });
+        }).overrideComponent(SelectComponent, { set: { changeDetection: ChangeDetectionStrategy.Eager } });
     }));
 
     async function setup(mobileConfig: MobileModeConfig = MOBILE_CONFIG): Promise<void> {

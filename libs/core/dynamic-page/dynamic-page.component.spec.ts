@@ -44,7 +44,7 @@ describe('DynamicPageComponent default values', () => {
             imports: [TestComponent]
         })
             .overrideComponent(DynamicPageComponent, {
-                set: { changeDetection: ChangeDetectionStrategy.Default }
+                set: { changeDetection: ChangeDetectionStrategy.Eager }
             })
             .compileComponents();
     }));

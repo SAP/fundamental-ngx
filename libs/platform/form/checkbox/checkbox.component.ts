@@ -98,7 +98,7 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
      * is needed for the checkbox group to access component values
      */
     @ViewChild(FdCheckboxComponent)
-    coreCheckbox: FdCheckboxComponent;
+    coreCheckbox: FdCheckboxComponent | undefined;
 
     /** @hidden */
     constructor(@Attribute('tabIndexValue') public tabIndexValue: number = 0) {

@@ -19,7 +19,7 @@ describe('Pagination Component', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({ imports: [PaginationModule] })
             .overrideComponent(PaginationComponent, {
-                set: { changeDetection: ChangeDetectionStrategy.Default }
+                set: { changeDetection: ChangeDetectionStrategy.Eager }
             })
             .compileComponents();
     }));

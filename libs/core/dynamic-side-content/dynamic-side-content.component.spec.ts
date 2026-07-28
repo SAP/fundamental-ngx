@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, input } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { whenStable } from '@fundamental-ngx/core/tests';
@@ -10,13 +10,13 @@ import { DynamicSideContentModule } from './dynamic-side-content.module';
 
 @Component({
     template: `
-        <fd-dynamic-side-content [size]="size" [position]="position">
-            @if (renderSideFromLeft) {
-                <fd-dynamic-side-content-side>{{ sideTextContent }}</fd-dynamic-side-content-side>
+        <fd-dynamic-side-content [size]="size()" [position]="position()">
+            @if (renderSideFromLeft()) {
+                <fd-dynamic-side-content-side>{{ sideTextContent() }}</fd-dynamic-side-content-side>
             }
-            <fd-dynamic-side-content-main>{{ mainTextContent }}</fd-dynamic-side-content-main>
-            @if (!renderSideFromLeft) {
-                <fd-dynamic-side-content-side>{{ sideTextContent }}</fd-dynamic-side-content-side>
+            <fd-dynamic-side-content-main>{{ mainTextContent() }}</fd-dynamic-side-content-main>
+            @if (!renderSideFromLeft()) {
+                <fd-dynamic-side-content-side>{{ sideTextContent() }}</fd-dynamic-side-content-side>
             }
         </fd-dynamic-side-content>
     `,
@@ -26,13 +26,13 @@ import { DynamicSideContentModule } from './dynamic-side-content.module';
 class TestHostComponent {
     @ViewChild(DynamicSideContentComponent) dynamicSideContent: DynamicSideContentComponent;
 
-    position: DynamicSideContentPosition = 'none';
-    size: DynamicSideContentSize = 'xl';
+    readonly position = input<DynamicSideContentPosition>('none');
+    readonly size = input<DynamicSideContentSize>('xl');
 
-    sideTextContent = 'SIDE_CONTENT_TEXT';
-    mainTextContent = 'MAIN_CONTENT_TEXT';
+    readonly sideTextContent = input('SIDE_CONTENT_TEXT');
+    readonly mainTextContent = input('MAIN_CONTENT_TEXT');
 
-    renderSideFromLeft = true;
+    readonly renderSideFromLeft = input(true);
 }
 describe('DynamicSideContent', () => {
     let fixture: ComponentFixture<TestHostComponent>;
@@ -58,7 +58,7 @@ describe('DynamicSideContent', () => {
 
     describe('classNames on host element', () => {
         it('should has binding', () => {
-            expect(component.size).toBe(host.size);
+            expect(component.size).toBe(host.size());
         });
 
         it('should add container', () => {
@@ -69,7 +69,7 @@ describe('DynamicSideContent', () => {
         });
 
         it('should add modifier for position="equalSplit"', () => {
-            host.position = 'equalSplit';
+            fixture.componentRef.setInput('position', 'equalSplit');
             fixture.detectChanges();
 
             const componentDebugEl = fixture.debugElement.query(By.directive(DynamicSideContentComponent));
@@ -79,7 +79,7 @@ describe('DynamicSideContent', () => {
         });
 
         it('should add modifier for position="bottom"', () => {
-            host.position = 'bottom';
+            fixture.componentRef.setInput('position', 'bottom');
             fixture.detectChanges();
 
             const componentDebugEl = fixture.debugElement.query(By.directive(DynamicSideContentComponent));
@@ -91,25 +91,25 @@ describe('DynamicSideContent', () => {
         it('should add modifier for size option', () => {
             const componentDebugEl = fixture.debugElement.query(By.directive(DynamicSideContentComponent));
 
-            host.size = 'sm';
+            fixture.componentRef.setInput('size', 'sm');
             fixture.detectChanges();
             expect(
                 componentDebugEl.nativeElement.className.includes(DYNAMIC_SIDE_CONTENT_CLASS_NAME.containerSizeSm)
             ).toBe(true);
 
-            host.size = 'md';
+            fixture.componentRef.setInput('size', 'md');
             fixture.detectChanges();
             expect(
                 componentDebugEl.nativeElement.className.includes(DYNAMIC_SIDE_CONTENT_CLASS_NAME.containerSizeMd)
             ).toBe(true);
 
-            host.size = 'lg';
+            fixture.componentRef.setInput('size', 'lg');
             fixture.detectChanges();
             expect(
                 componentDebugEl.nativeElement.className.includes(DYNAMIC_SIDE_CONTENT_CLASS_NAME.containerSizeMd)
             ).toBe(true);
 
-            host.size = 'xl';
+            fixture.componentRef.setInput('size', 'xl');
             fixture.detectChanges();
             expect(
                 componentDebugEl.nativeElement.className.includes(DYNAMIC_SIDE_CONTENT_CLASS_NAME.containerSizeXl)
@@ -121,17 +121,17 @@ describe('DynamicSideContent', () => {
         const componentEl = fixture.debugElement.query(By.directive(DynamicSideContentComponent))
             .nativeElement as HTMLElement;
 
-        expect(componentEl?.innerHTML).toContain(host.sideTextContent);
-        expect(componentEl?.innerHTML).toContain(host.mainTextContent);
+        expect(componentEl?.innerHTML).toContain(host.sideTextContent());
+        expect(componentEl?.innerHTML).toContain(host.mainTextContent());
     });
 
     describe('positioning', () => {
         it('should has binding', () => {
-            expect(component.position).toBe(host.position);
+            expect(component.position).toBe(host.position());
         });
 
         it('should render side content from the left if projected so', () => {
-            host.renderSideFromLeft = true; // left side-content projection
+            fixture.componentRef.setInput('renderSideFromLeft', true); // left side-content projection
             fixture.detectChanges();
 
             const componentDebugEl = fixture.debugElement.query(By.directive(DynamicSideContentComponent));
@@ -140,7 +140,7 @@ describe('DynamicSideContent', () => {
         });
 
         it('should render side content from the right if projected so', () => {
-            host.renderSideFromLeft = false; // right side-content projection
+            fixture.componentRef.setInput('renderSideFromLeft', false); // right side-content projection
             fixture.detectChanges();
 
             const componentDebugEl = fixture.debugElement.query(By.directive(DynamicSideContentComponent));
@@ -149,8 +149,8 @@ describe('DynamicSideContent', () => {
         });
 
         it('should render side content from the left if position="left"', () => {
-            host.renderSideFromLeft = false; // right side-content projection
-            host.position = 'left';
+            fixture.componentRef.setInput('renderSideFromLeft', false); // right side-content projection
+            fixture.componentRef.setInput('position', 'left');
             fixture.detectChanges();
 
             const componentDebugEl = fixture.debugElement.query(By.directive(DynamicSideContentComponent));
@@ -159,8 +159,8 @@ describe('DynamicSideContent', () => {
         });
 
         it('should render side content from the right if position="right"', () => {
-            host.renderSideFromLeft = true; // left side-content projection
-            host.position = 'right';
+            fixture.componentRef.setInput('renderSideFromLeft', true); // left side-content projection
+            fixture.componentRef.setInput('position', 'right');
             fixture.detectChanges();
 
             const componentDebugEl = fixture.debugElement.query(By.directive(DynamicSideContentComponent));
@@ -169,8 +169,8 @@ describe('DynamicSideContent', () => {
         });
 
         it('should render side content from the right if position="bottom"', () => {
-            host.renderSideFromLeft = true; // left side-content projection
-            host.position = 'bottom';
+            fixture.componentRef.setInput('renderSideFromLeft', true); // left side-content projection
+            fixture.componentRef.setInput('position', 'bottom');
             fixture.detectChanges();
 
             const componentDebugEl = fixture.debugElement.query(By.directive(DynamicSideContentComponent));
@@ -181,15 +181,15 @@ describe('DynamicSideContent', () => {
         it('should render side content according to projection when position="equalSplit"', () => {
             const componentDebugEl = fixture.debugElement.query(By.directive(DynamicSideContentComponent));
 
-            host.position = 'equalSplit';
+            fixture.componentRef.setInput('position', 'equalSplit');
 
-            host.renderSideFromLeft = true; // left side-content projection
+            fixture.componentRef.setInput('renderSideFromLeft', true); // left side-content projection
             fixture.detectChanges();
 
             expect(componentDebugEl.children[0].componentInstance).toBeInstanceOf(DynamicSideContentSideComponent);
             expect(componentDebugEl.children[1].componentInstance).toBeInstanceOf(DynamicSideContentMainComponent);
 
-            host.renderSideFromLeft = false; // right side-content projection
+            fixture.componentRef.setInput('renderSideFromLeft', false); // right side-content projection
             fixture.detectChanges();
 
             expect(componentDebugEl.children[0].componentInstance).toBeInstanceOf(DynamicSideContentMainComponent);

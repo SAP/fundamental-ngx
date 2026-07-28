@@ -1,6 +1,7 @@
 import { InjectionToken, InputSignal, InputSignalWithTransform, ModelSignal, OutputEmitterRef } from '@angular/core';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
 import { MobileMode, MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import { Subject } from 'rxjs';
 import { MenuItemComponent } from './menu-item/menu-item.component';
 
 export const MENU_COMPONENT = new InjectionToken<string[]>('MenuInterface');
@@ -18,7 +19,7 @@ export interface MenuInterface extends Omit<MobileMode, 'mobile' | 'mobileConfig
     activePath: OutputEmitterRef<MenuItemComponent[]>;
     dialogConfig: DialogConfig | null;
     isOpen: ModelSignal<boolean>;
-    isOpenChange: OutputEmitterRef<boolean>;
+    isOpenChange: Subject<boolean>;
 
     close(): void;
 }

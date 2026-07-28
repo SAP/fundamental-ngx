@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, input } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
@@ -7,14 +7,14 @@ import { PlatformObjectMarkerComponent } from './object-marker.component';
 
 @Component({
     selector: 'fdp-test-object-marker',
-    template: ` <fdp-object-marker [glyph]="glyph" [clickable]="clickable">Object marker</fdp-object-marker>`,
+    template: ` <fdp-object-marker [glyph]="glyph()" [clickable]="clickable()">Object marker</fdp-object-marker>`,
     standalone: true,
     imports: [PlatformObjectMarkerComponent]
 })
 class TestPlatformPlatformObjectMarkerComponent {
     @ViewChild(PlatformObjectMarkerComponent, { static: true }) component: PlatformObjectMarkerComponent;
-    public glyph: string;
-    public clickable: boolean;
+    readonly glyph = input<string>(undefined);
+    readonly clickable = input<boolean>(undefined);
 
     constructor() {}
 }
@@ -42,12 +42,12 @@ describe('PlatformObjectMarkerComponent', () => {
     });
 
     it('Should Validate diffrent object icon', () => {
-        host.glyph = 'add-favorite';
+        fixture.componentRef.setInput('glyph', 'add-favorite');
         fixture.detectChanges();
         let linkElement = fixture.debugElement.query(By.directive(IconComponent));
         expect(linkElement.nativeElement.classList.contains('fd-object-marker__icon')).toBe(true);
         expect(linkElement.nativeElement.classList.contains('sap-icon--add-favorite')).toBe(true);
-        host.glyph = 'private';
+        fixture.componentRef.setInput('glyph', 'private');
         fixture.detectChanges();
         linkElement = fixture.debugElement.query(By.directive(IconComponent));
         expect(linkElement.nativeElement.classList.contains('fd-object-marker__icon')).toBe(true);
@@ -55,11 +55,11 @@ describe('PlatformObjectMarkerComponent', () => {
     });
 
     it('Should Validate inverted object states and clickable', () => {
-        host.clickable = true;
+        fixture.componentRef.setInput('clickable', true);
         fixture.detectChanges();
         let linkElement = fixture.debugElement.query(By.css('a'));
         expect(linkElement.nativeElement.classList.contains('fd-object-marker--link')).toBe(true);
-        host.clickable = false;
+        fixture.componentRef.setInput('clickable', false);
         fixture.detectChanges();
         linkElement = fixture.debugElement.query(By.css('span'));
         expect(linkElement.nativeElement.classList.contains('fd-object-marker--link')).toBe(false);

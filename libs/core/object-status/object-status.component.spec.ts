@@ -1,4 +1,14 @@
-import { Component, ElementRef, InjectionToken, Pipe, PipeTransform, Signal, ViewChild, signal } from '@angular/core';
+import {
+    Component,
+    ElementRef,
+    InjectionToken,
+    Pipe,
+    PipeTransform,
+    Signal,
+    ViewChild,
+    input,
+    signal
+} from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { By } from '@angular/platform-browser';
@@ -31,16 +41,16 @@ export const FD_LANGUAGE = new InjectionToken<any>('FD_LANGUAGE');
     template: `
         <span
             fd-object-status
-            [status]="status"
-            [glyph]="glyph"
-            [label]="label"
-            [indicationColor]="indicationColor"
-            [clickable]="clickable"
-            [inverted]="inverted"
-            [large]="large"
-            [statusMessage]="statusMessage"
-            [ariaLabel]="ariaLabel"
-            [ariaRoleDescription]="ariaRoleDescription"
+            [status]="status()"
+            [glyph]="glyph()"
+            [label]="label()"
+            [indicationColor]="indicationColor()"
+            [clickable]="clickable()"
+            [inverted]="inverted()"
+            [large]="large()"
+            [statusMessage]="statusMessage()"
+            [ariaLabel]="ariaLabel()"
+            [ariaRoleDescription]="ariaRoleDescription()"
         >
         </span>
     `,
@@ -51,16 +61,16 @@ class TestObjectStatusComponent {
     @ViewChild(ObjectStatusComponent, { static: true, read: ElementRef })
     objectStatusElementRef: ElementRef;
 
-    status: 'negative' | 'critical' | 'positive' | 'informative';
-    glyph: string;
-    label: string;
-    indicationColor: number;
-    clickable: boolean;
-    inverted: boolean;
-    large: boolean;
-    statusMessage: string;
-    ariaLabel: string;
-    ariaRoleDescription: string;
+    readonly status = input<'negative' | 'critical' | 'positive' | 'informative'>();
+    readonly glyph = input<string>();
+    readonly label = input<string>();
+    readonly indicationColor = input<number>();
+    readonly clickable = input<boolean>();
+    readonly inverted = input<boolean>();
+    readonly large = input<boolean>();
+    readonly statusMessage = input<string>();
+    readonly ariaLabel = input<string>();
+    readonly ariaRoleDescription = input<string>();
 }
 
 describe('ObjectStatusComponent', () => {
@@ -101,7 +111,7 @@ describe('ObjectStatusComponent', () => {
 
     describe('when status is set', () => {
         beforeEach(() => {
-            testComponent.status = 'positive';
+            fixture.componentRef.setInput('status', 'positive');
             fixture.detectChanges();
         });
 
@@ -119,7 +129,7 @@ describe('ObjectStatusComponent', () => {
 
         describe('when statusMessage is provided', () => {
             it('should add the provided statusMessage as screen reader text', () => {
-                testComponent.statusMessage = 'Custom status message';
+                fixture.componentRef.setInput('statusMessage', 'Custom status message');
                 fixture.detectChanges();
                 expect(
                     fixture.debugElement.queryAll(By.css('.fd-object-status__sr-only'))[1].nativeElement.textContent
@@ -130,7 +140,7 @@ describe('ObjectStatusComponent', () => {
 
     describe('when indication color is set', () => {
         beforeEach(() => {
-            testComponent.indicationColor = 2;
+            fixture.componentRef.setInput('indicationColor', 2);
             fixture.detectChanges();
         });
 
@@ -148,7 +158,7 @@ describe('ObjectStatusComponent', () => {
     });
 
     it('Should add icon', () => {
-        testComponent.glyph = 'future';
+        fixture.componentRef.setInput('glyph', 'future');
         fixture.detectChanges();
         const iconElement = fixture.nativeElement.querySelector('fd-icon');
 
@@ -157,20 +167,20 @@ describe('ObjectStatusComponent', () => {
     });
 
     it('Should add inverted class', () => {
-        testComponent.inverted = true;
+        fixture.componentRef.setInput('inverted', true);
         fixture.detectChanges();
         expect(objectStatusElementRef.nativeElement.classList.contains('fd-object-status--inverted')).toBe(true);
     });
 
     it('Should add large design', () => {
-        testComponent.large = true;
+        fixture.componentRef.setInput('large', true);
         fixture.detectChanges();
         expect(objectStatusElementRef.nativeElement.classList.contains('fd-object-status--large')).toBe(true);
     });
 
     describe('when the object status is clickable', () => {
         beforeEach(() => {
-            testComponent.clickable = true;
+            fixture.componentRef.setInput('clickable', true);
             fixture.detectChanges();
         });
 
@@ -198,7 +208,7 @@ describe('ObjectStatusComponent', () => {
 
         describe('when ariaRoleDescription is set', () => {
             beforeEach(() => {
-                testComponent.ariaRoleDescription = 'Custom Role Description';
+                fixture.componentRef.setInput('ariaRoleDescription', 'Custom Role Description');
                 fixture.detectChanges();
             });
 
@@ -212,7 +222,7 @@ describe('ObjectStatusComponent', () => {
 
     describe('when the object status is not clickable', () => {
         beforeEach(() => {
-            testComponent.clickable = false;
+            fixture.componentRef.setInput('clickable', false);
             fixture.detectChanges();
         });
 
@@ -224,7 +234,7 @@ describe('ObjectStatusComponent', () => {
 
         describe('when ariaLabel is set', () => {
             beforeEach(() => {
-                testComponent.ariaLabel = 'Custom Aria Label';
+                fixture.componentRef.setInput('ariaLabel', 'Custom Aria Label');
                 fixture.detectChanges();
             });
 
@@ -238,7 +248,7 @@ describe('ObjectStatusComponent', () => {
 
     it('Should display label', () => {
         const label = 'Test label';
-        testComponent.label = label;
+        fixture.componentRef.setInput('label', label);
         fixture.detectChanges();
 
         const labelTextElement = fixture.nativeElement.querySelector('.fd-object-status__text');

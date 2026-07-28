@@ -67,6 +67,10 @@ export class DatetimeAdaptersIsolatedPickerInternalComponent {
 @Component({
     selector: 'fd-datetime-adapters-locale-example',
     changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        { provide: DatetimeAdapter, useClass: DayjsDatetimeAdapter },
+        { provide: DATE_TIME_FORMATS, useValue: DAYJS_DATETIME_FORMATS }
+    ],
     imports: [
         FormLabelComponent,
         SegmentedButtonComponent,

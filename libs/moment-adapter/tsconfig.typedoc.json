@@ -13,11 +13,6 @@
         "jsxFragmentFactory": "JSX.Fragment",
         "moduleResolution": "bundler"
     },
-    "angularCompilerOptions": {
-        "skipTemplateCodegen": true,
-        "strictMetadataEmit": true,
-        "enableResourceInlining": true
-    },
     "files": ["./src/index.ts"],
     "include": [],
     "exclude": ["**/*.spec.ts", "**/*.test.ts", "jest.config.ts"]

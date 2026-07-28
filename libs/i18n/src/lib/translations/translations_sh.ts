@@ -114,13 +114,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Info oznaka'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
-    },
     coreLink: {
         emphasized: 'Naglašeno',
         subtle: 'Suptilno'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'Odabrano',
+        listItemNotSelectedAriaLabel: 'Nije odabrano'
     },
     coreMessageStrip: {
         announcementError: 'Statusna traka greške',
@@ -366,7 +366,7 @@ export default {
         messagesTeamRemoved: '1 tim je uklonjen',
         messagesUndoAction: 'Poništi',
         nextButtonAriaLabel: 'Idi na sledeći slajd',
-        noDataFound: 'No Data Found',
+        noDataFound: 'Podaci nisu nađeni',
         nodeActionAddApproversAfter: 'Dodaj davaoce odobrenja nakon',
         nodeActionAddApproversBefore: 'Dodaj davaoce odobrenja pre',
         nodeActionAddApproversParallel: 'Dodaj paralelne davaoce odobrenja',
@@ -523,7 +523,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Odustani',
         clearFilters: 'Obriši filtere',
-        collapseAllAnnouncementLabel: 'Collapse All clicked',
+        collapseAllAnnouncementLabel: 'Sažmi sve na šta se kliknulo',
         collapseRowButtonTitle: 'Sažmi red',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Podaci nisu nađeni',
@@ -534,7 +534,7 @@ export default {
         editableCellNumberPlaceholder: 'Unesi vrednost',
         editableCellStringPlaceholder: 'Unesi vrednost',
         emptyCell: 'Prazno',
-        expandAllAnnouncementLabel: 'Expand All clicked',
+        expandAllAnnouncementLabel: 'Proširi sve na šta se kliknulo',
         expandRowButtonTitle: 'Proširi red',
         filterDialogBackToColumns: 'Usmeri nazad',
         filterDialogCancelBtnLabel: 'Otkaži',
@@ -626,18 +626,18 @@ export default {
         selectSingleRow: 'Da odaberete red, pritisnite SPACEBAR',
         settingsDialogHeader: 'Podešavanja',
         showingBlankOfBlank: 'Prikazuje se {totalGrowingItemsCount} od {totalGrowingItemsCount}',
+        sortDialogAddSort: 'Add Sort Criterion',
         sortDialogCancelBtnLabel: 'Otkaži',
         sortDialogConfirmBtnLabel: 'OK',
+        sortDialogDelete: 'Remove Sort Criterion',
         sortDialogHeader: 'Sortiraj',
+        sortDialogMoveUp: 'Move Up',
+        sortDialogMoveDown: 'Move Down',
         sortDialogNotSortedLabel: '(Nije sortirano)',
         sortDialogSortByHeader: 'Sortiraj po',
         sortDialogSortOrderAsc: 'Po rastućem redosledu',
         sortDialogSortOrderDesc: 'Po opadajućem redosledu',
         sortDialogSortOrderHeader: 'Redosled sortiranja',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
-        sortDialogDelete: 'Remove Sort Criterion',
-        sortDialogAddSort: 'Add Sort Criterion',
         toolbarActionButtonTitle: 'Podešavanja',
         toolbarActionCancelButtonLabel: 'Otkaži',
         toolbarActionCollapseAllButtonTitle: 'Sažmi sve',

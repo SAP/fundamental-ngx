@@ -112,13 +112,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: '信息标签'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
-    },
     coreLink: {
         emphasized: '已强调',
         subtle: '隐蔽'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: '已选择',
+        listItemNotSelectedAriaLabel: '未选择'
     },
     coreMessageStrip: {
         announcementError: '错误消息条',
@@ -362,7 +362,7 @@ export default {
         messagesTeamRemoved: '已删除 1 个团队',
         messagesUndoAction: '撤销',
         nextButtonAriaLabel: '转到下一张幻灯片',
-        noDataFound: 'No Data Found',
+        noDataFound: '未找到数据',
         nodeActionAddApproversAfter: '之后添加审批人',
         nodeActionAddApproversBefore: '之前添加审批人',
         nodeActionAddApproversParallel: '添加并行审批人',
@@ -519,7 +519,7 @@ export default {
     platformTable: {
         cancelBtnLabel: '取消',
         clearFilters: '清除过滤器',
-        collapseAllAnnouncementLabel: 'Collapse All clicked',
+        collapseAllAnnouncementLabel: '已单击“全部折叠”',
         collapseRowButtonTitle: '折叠行',
         confirmBtnLabel: '确定',
         defaultEmptyMessage: '找不到数据',
@@ -530,7 +530,7 @@ export default {
         editableCellNumberPlaceholder: '输入值',
         editableCellStringPlaceholder: '输入值',
         emptyCell: '空',
-        expandAllAnnouncementLabel: 'Expand All clicked',
+        expandAllAnnouncementLabel: '已单击“全部展开”',
         expandRowButtonTitle: '展开行',
         filterDialogBackToColumns: '向后导航',
         filterDialogCancelBtnLabel: '取消',
@@ -621,18 +621,18 @@ export default {
         selectSingleRow: '要选择行，请按空格键',
         settingsDialogHeader: '设置',
         showingBlankOfBlank: '显示 {totalGrowingItemsCount}/{totalGrowingItemsCount}',
+        sortDialogAddSort: 'Add Sort Criterion',
         sortDialogCancelBtnLabel: '取消',
         sortDialogConfirmBtnLabel: '确定',
+        sortDialogDelete: 'Remove Sort Criterion',
         sortDialogHeader: '排序',
+        sortDialogMoveUp: 'Move Up',
+        sortDialogMoveDown: 'Move Down',
         sortDialogNotSortedLabel: '（未排序）',
         sortDialogSortByHeader: '排序方式',
         sortDialogSortOrderAsc: '升序',
         sortDialogSortOrderDesc: '降序',
         sortDialogSortOrderHeader: '排序顺序',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
-        sortDialogDelete: 'Remove Sort Criterion',
-        sortDialogAddSort: 'Add Sort Criterion',
         toolbarActionButtonTitle: '设置',
         toolbarActionCancelButtonLabel: '取消',
         toolbarActionCollapseAllButtonTitle: '全部折叠',

@@ -34,7 +34,7 @@ describe('TreeItemComponent', () => {
             ]
         })
             .overrideComponent(TreeItemComponent, {
-                set: { changeDetection: ChangeDetectionStrategy.Default }
+                set: { changeDetection: ChangeDetectionStrategy.Eager }
             })
             .compileComponents();
 

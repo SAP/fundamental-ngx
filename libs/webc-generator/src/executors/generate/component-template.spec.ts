@@ -503,4 +503,38 @@ describe('componentTemplate', () => {
             expect(output).toContain("events: ['change', 'input']");
         });
     });
+
+    describe('input synchronization', () => {
+        const linkDeclaration: CEM.CustomElementDeclaration = {
+            kind: 'class',
+            name: 'Link',
+            tagName: 'ui5-link',
+            customElement: true,
+            members: [
+                {
+                    kind: 'field',
+                    name: 'href',
+                    privacy: 'public',
+                    type: { text: 'string | undefined' },
+                    default: 'undefined'
+                } as CEM.ClassField
+            ]
+        };
+
+        it('generates guard code to prevent clobbering imperatively-set properties', () => {
+            const output = componentTemplate(linkDeclaration, [], PACKAGE);
+            // This test verifies the GENERATOR produces the guard code.
+            // The guard prevents the effect from writing undefined when a property
+            // (like href) has been set imperatively by RouterLink or other code.
+            expect(output).toContain('// Skip writes when the signal is undefined and the property is already truthy');
+            expect(output).toContain('if (value === undefined && wcElement[inputName]) {');
+            expect(output).toContain('return;');
+        });
+
+        it('generates code that still writes non-undefined values', () => {
+            const output = componentTemplate(linkDeclaration, [], PACKAGE);
+            // After the guard, the effect should still write when value is not undefined
+            expect(output).toContain('wcElement[inputName] = value;');
+        });
+    });
 });

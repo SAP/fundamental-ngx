@@ -113,13 +113,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Bilgi Etiketi'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
-    },
     coreLink: {
         emphasized: 'Vurgulu',
         subtle: 'İnce'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'Seçildi',
+        listItemNotSelectedAriaLabel: 'Seçilmedi'
     },
     coreMessageStrip: {
         announcementError: 'Hata İletisi Satırı',
@@ -366,7 +366,7 @@ export default {
         messagesTeamRemoved: '1 ekip kaldırıldı',
         messagesUndoAction: 'Geri al',
         nextButtonAriaLabel: 'Sonraki slayta git',
-        noDataFound: 'No Data Found',
+        noDataFound: 'Veri Bulunamadı',
         nodeActionAddApproversAfter: 'Şundan sonra onaylayan ekle',
         nodeActionAddApproversBefore: 'Şundan önce onaylayan ekle',
         nodeActionAddApproversParallel: 'Paralel onaylayan ekle',
@@ -523,7 +523,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'İptal',
         clearFilters: 'Filtreleri Temizle',
-        collapseAllAnnouncementLabel: 'Collapse All clicked',
+        collapseAllAnnouncementLabel: 'Tümünü Daralt tıklandı',
         collapseRowButtonTitle: 'Satırı daralt',
         confirmBtnLabel: 'Tamam',
         defaultEmptyMessage: 'Veri bulunamadı',
@@ -534,7 +534,7 @@ export default {
         editableCellNumberPlaceholder: 'Değer gir',
         editableCellStringPlaceholder: 'Değer gir',
         emptyCell: 'Boş',
-        expandAllAnnouncementLabel: 'Expand All clicked',
+        expandAllAnnouncementLabel: 'Tümünü Genişlet tıklandı',
         expandRowButtonTitle: 'Satırı genişlet',
         filterDialogBackToColumns: 'Geri git',
         filterDialogCancelBtnLabel: 'İptal',
@@ -626,18 +626,18 @@ export default {
         selectSingleRow: 'Satırı seçmek için boşluk tuşuna basın',
         settingsDialogHeader: 'Ayarlar',
         showingBlankOfBlank: 'Gösterilen: {totalGrowingItemsCount} / {totalGrowingItemsCount}',
+        sortDialogAddSort: 'Add Sort Criterion',
         sortDialogCancelBtnLabel: 'İptal',
         sortDialogConfirmBtnLabel: 'Tamam',
+        sortDialogDelete: 'Remove Sort Criterion',
         sortDialogHeader: 'Sıralama',
+        sortDialogMoveUp: 'Move Up',
+        sortDialogMoveDown: 'Move Down',
         sortDialogNotSortedLabel: '(Sıralanmamış)',
         sortDialogSortByHeader: 'Sıralama Ölçütü',
         sortDialogSortOrderAsc: 'Artan',
         sortDialogSortOrderDesc: 'Azalan',
         sortDialogSortOrderHeader: 'Sıralama Sırası',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
-        sortDialogDelete: 'Remove Sort Criterion',
-        sortDialogAddSort: 'Add Sort Criterion',
         toolbarActionButtonTitle: 'Ayarlar',
         toolbarActionCancelButtonLabel: 'İptal',
         toolbarActionCollapseAllButtonTitle: 'Tümünü daralt',

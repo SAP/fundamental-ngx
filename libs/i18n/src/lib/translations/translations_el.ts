@@ -113,13 +113,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Ετικέτα Πληροφοριών'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
-    },
     coreLink: {
         emphasized: 'Τονισμένο',
         subtle: 'Διακριτικό'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'Επιλέχτηκε',
+        listItemNotSelectedAriaLabel: 'Δεν επιλέχτηκε'
     },
     coreMessageStrip: {
         announcementError: 'Ταινία Μηνύματος Σφάλματος',
@@ -366,7 +366,7 @@ export default {
         messagesTeamRemoved: '1 ομάδα διαγράφηκε',
         messagesUndoAction: 'Αναίρεση',
         nextButtonAriaLabel: 'Μετάβαση στην επόμενη διαφάνεια',
-        noDataFound: 'No Data Found',
+        noDataFound: 'Δεν Βρέθηκαν Δεδομένα',
         nodeActionAddApproversAfter: 'Προσθήκη υπευθύνων έγκρισης μετά',
         nodeActionAddApproversBefore: 'Προσθήκη υπευθύνων έγκρισης πριν',
         nodeActionAddApproversParallel: 'Προσθήκη παράλληλων υπευθύνων έγκρισης',
@@ -523,7 +523,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Ακύρωση',
         clearFilters: 'Εκκαθάριση Φίλτρων',
-        collapseAllAnnouncementLabel: 'Collapse All clicked',
+        collapseAllAnnouncementLabel: 'Η Σύμπτυξη Όλων πατήθηκε',
         collapseRowButtonTitle: 'Σύμπυξη σειράς',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Δεν βρέθηκαν δεδομένα',
@@ -534,7 +534,7 @@ export default {
         editableCellNumberPlaceholder: 'Εισαγάγετε τιμή',
         editableCellStringPlaceholder: 'Εισαγάγετε τιμή',
         emptyCell: 'Κενό',
-        expandAllAnnouncementLabel: 'Expand All clicked',
+        expandAllAnnouncementLabel: 'Έγινε κλικ στην Επέκταση Όλων',
         expandRowButtonTitle: 'Επέκταση σειράς',
         filterDialogBackToColumns: 'Πλοήγηση πίσω',
         filterDialogCancelBtnLabel: 'Ακύρωση',
@@ -626,18 +626,18 @@ export default {
         selectSingleRow: 'Για να αποεπιλέξετε σειρά, πατήστε το ΚΕΝΟ ΔΙΑΣΤΗΜΑ',
         settingsDialogHeader: 'Ρυθμίσεις',
         showingBlankOfBlank: 'Εμφάνιση {totalGrowingItemsCount} από {totalGrowingItemsCount}',
+        sortDialogAddSort: 'Add Sort Criterion',
         sortDialogCancelBtnLabel: 'Ακύρωση',
         sortDialogConfirmBtnLabel: 'ΟΚ',
+        sortDialogDelete: 'Remove Sort Criterion',
         sortDialogHeader: 'Ταξινόμηση',
+        sortDialogMoveUp: 'Move Up',
+        sortDialogMoveDown: 'Move Down',
         sortDialogNotSortedLabel: '(Μη Ταξινομημένό)',
         sortDialogSortByHeader: 'Ταξινόμηση Βάσει',
         sortDialogSortOrderAsc: 'Αύξουσα σειρά',
         sortDialogSortOrderDesc: 'Φθίνουσα σειρά',
         sortDialogSortOrderHeader: 'Σειρά Ταξινόμησης',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
-        sortDialogDelete: 'Remove Sort Criterion',
-        sortDialogAddSort: 'Add Sort Criterion',
         toolbarActionButtonTitle: 'Ρυθμίσεις',
         toolbarActionCancelButtonLabel: 'Ακύρωση',
         toolbarActionCollapseAllButtonTitle: 'Σύμπτηξη όλων',

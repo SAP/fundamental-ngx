@@ -1,9 +1,9 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, input } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormLegendDirective } from './form-legend.directive';
 
 @Component({
-    template: ` <legend #directiveElement fd-form-legend [disabled]="disabled">Test Text</legend> `,
+    template: ` <legend #directiveElement fd-form-legend [disabled]="disabled()">Test Text</legend> `,
     imports: [FormLegendDirective],
     standalone: true
 })
@@ -11,7 +11,7 @@ class FormLegendTestComponent {
     @ViewChild('directiveElement')
     ref: ElementRef;
 
-    disabled = false;
+    readonly disabled = input(false);
 }
 
 describe('FormLegendDirective', () => {
@@ -43,7 +43,7 @@ describe('FormLegendDirective', () => {
     });
 
     it('should add is-disabled class when disabled', () => {
-        component.disabled = true;
+        fixture.componentRef.setInput('disabled', true);
         fixture.detectChanges();
         expect(component.ref.nativeElement.classList.contains('is-disabled')).toBe(true);
     });

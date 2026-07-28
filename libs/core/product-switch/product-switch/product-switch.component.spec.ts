@@ -1,4 +1,4 @@
-import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ProductSwitchComponent } from './product-switch.component';
 
@@ -64,19 +64,25 @@ describe('ProductSwitchComponent', () => {
         expect(fixture.nativeElement.classList.contains('fd-popover-custom--disabled')).toBe(true);
     });
 
-    it('should emit isOpenChange when open state changes', fakeAsync(() => {
+    it('should not emit isOpenChange on initial render', () => {
         const emittedValues: boolean[] = [];
-        component.isOpenChange.subscribe((value: boolean) => emittedValues.push(value));
+        component.isOpenChange.subscribe((value) => emittedValues.push(value));
+
+        fixture.detectChanges();
+
+        expect(emittedValues).toEqual([]);
+    });
+
+    it('should emit isOpenChange when open state changes', () => {
+        const emittedValues: boolean[] = [];
+        component.isOpenChange.subscribe((value) => emittedValues.push(value));
 
         component.isOpen.set(true);
         fixture.detectChanges();
-        tick();
 
         component.isOpen.set(false);
         fixture.detectChanges();
-        tick();
 
-        expect(emittedValues).toContain(true);
-        expect(emittedValues).toContain(false);
-    }));
+        expect(emittedValues).toEqual([true, false]);
+    });
 });

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, fakeAsync, waitForAsync } from '@angular/core/testing';
 
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, input } from '@angular/core';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { NestedListModule } from '@fundamental-ngx/core/nested-list';
 import { SideNavigationMainDirective } from './side-navigation-main.directive';
@@ -21,7 +21,7 @@ import { SideNavigationComponent } from './side-navigation.component';
                             <span fd-nested-list-title>Link 2</span>
                         </a>
                     </li>
-                    <li fd-nested-list-item [expanded]="expanded">
+                    <li fd-nested-list-item [expanded]="expanded()">
                         <div fd-nested-list-content>
                             <a fd-nested-list-link>
                                 <span fd-nested-list-title>Link 3</span>
@@ -54,7 +54,7 @@ import { SideNavigationComponent } from './side-navigation.component';
                                     <span fd-nested-list-title>Link 7</span>
                                 </a>
                             </li>
-                            <li fd-nested-list-item [expanded]="expanded">
+                            <li fd-nested-list-item [expanded]="expanded()">
                                 <div fd-nested-list-content>
                                     <a fd-nested-list-link>
                                         <span fd-nested-list-title>Link 6</span>
@@ -93,7 +93,7 @@ class TestNestedContainerComponent {
     @ViewChild('sideNavigationComponent')
     sideNav: SideNavigationComponent;
 
-    expanded = false;
+    expanded = input(false);
 }
 
 describe('SideNavigationComponent', () => {
@@ -122,7 +122,7 @@ describe('SideNavigationComponent', () => {
     }));
 
     it('should have expanded items in list', fakeAsync(() => {
-        component.expanded = true;
+        fixture.componentRef.setInput('expanded', true);
         fixture.whenStable().then(() => {
             component.sideNav.ngAfterContentInit();
             fixture.detectChanges();

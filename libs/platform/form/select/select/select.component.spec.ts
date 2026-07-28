@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, input } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
@@ -245,7 +245,7 @@ interface Country {
                     [list]="countries"
                     displayKey="name"
                     lookupKey="id"
-                    [(ngModel)]="selectedCountry"
+                    [ngModel]="selectedCountry()"
                 ></fdp-select>
             </fdp-form-field>
         </fdp-form-group>
@@ -264,7 +264,7 @@ class SelectLookupKeyTestComponent {
         { id: 4, name: 'Brazil', region: 'Americas' }
     ];
 
-    selectedCountry: Country | null = null;
+    readonly selectedCountry = input<Country | null>(null);
 }
 
 describe('Select Component with lookupKey', () => {
@@ -288,7 +288,7 @@ describe('Select Component with lookupKey', () => {
 
     it('should identify selected item when ngModel is set to a separate object reference with same lookupKey value', async () => {
         // Set ngModel to a DIFFERENT object reference that has the same id
-        component.selectedCountry = { id: 2, name: 'France', region: 'Europe' };
+        fixture.componentRef.setInput('selectedCountry', { id: 2, name: 'France', region: 'Europe' });
         fixture.detectChanges();
         await fixture.whenStable();
         fixture.detectChanges();
@@ -299,7 +299,7 @@ describe('Select Component with lookupKey', () => {
     });
 
     it('should not identify non-matching item as selected when using lookupKey', async () => {
-        component.selectedCountry = { id: 2, name: 'France', region: 'Europe' };
+        fixture.componentRef.setInput('selectedCountry', { id: 2, name: 'France', region: 'Europe' });
         fixture.detectChanges();
         await fixture.whenStable();
         fixture.detectChanges();
@@ -488,7 +488,7 @@ describe('Select Component with lookupKey and showSecondaryText', () => {
                     name="fruit"
                     placeholder="Select a fruit"
                     [list]="fruits"
-                    [(ngModel)]="selectedFruit"
+                    [ngModel]="selectedFruit()"
                 ></fdp-select>
             </fdp-form-field>
         </fdp-form-group>
@@ -502,7 +502,7 @@ class SelectSimpleValuesTestComponent {
 
     fruits: string[] = ['Apple', 'Banana', 'Cherry', 'Date'];
 
-    selectedFruit: string | null = null;
+    readonly selectedFruit = input<string | null>(null);
 }
 
 describe('Select Component with simple string values (no lookupKey)', () => {
@@ -531,7 +531,7 @@ describe('Select Component with simple string values (no lookupKey)', () => {
     });
 
     it('should display selected string value in trigger', async () => {
-        component.selectedFruit = 'Cherry';
+        fixture.componentRef.setInput('selectedFruit', 'Cherry');
         fixture.detectChanges();
         await fixture.whenStable();
         fixture.detectChanges();
@@ -541,7 +541,7 @@ describe('Select Component with simple string values (no lookupKey)', () => {
     });
 
     it('should update trigger when selection changes between string values', async () => {
-        component.selectedFruit = 'Apple';
+        fixture.componentRef.setInput('selectedFruit', 'Apple');
         fixture.detectChanges();
         await fixture.whenStable();
         fixture.detectChanges();
@@ -549,7 +549,7 @@ describe('Select Component with simple string values (no lookupKey)', () => {
         let triggerText = fixture.nativeElement.querySelector('.fd-select__text-content')?.textContent?.trim();
         expect(triggerText).toBe('Apple');
 
-        component.selectedFruit = 'Date';
+        fixture.componentRef.setInput('selectedFruit', 'Date');
         fixture.detectChanges();
         await fixture.whenStable();
         fixture.detectChanges();
@@ -577,7 +577,7 @@ describe('Select Component with lookupKey — selection changes', () => {
     });
 
     it('should display correct country when ngModel changes from one to another', async () => {
-        component.selectedCountry = { id: 1, name: 'Germany', region: 'Europe' };
+        fixture.componentRef.setInput('selectedCountry', { id: 1, name: 'Germany', region: 'Europe' });
         fixture.detectChanges();
         await fixture.whenStable();
         fixture.detectChanges();
@@ -585,7 +585,7 @@ describe('Select Component with lookupKey — selection changes', () => {
         let triggerText = fixture.nativeElement.querySelector('.fd-select__text-content')?.textContent?.trim();
         expect(triggerText).toBe('Germany');
 
-        component.selectedCountry = { id: 3, name: 'Japan', region: 'Asia' };
+        fixture.componentRef.setInput('selectedCountry', { id: 3, name: 'Japan', region: 'Asia' });
         fixture.detectChanges();
         await fixture.whenStable();
         fixture.detectChanges();
@@ -595,7 +595,7 @@ describe('Select Component with lookupKey — selection changes', () => {
     });
 
     it('should clear displayed value when ngModel is set to null', async () => {
-        component.selectedCountry = { id: 2, name: 'France', region: 'Europe' };
+        fixture.componentRef.setInput('selectedCountry', { id: 2, name: 'France', region: 'Europe' });
         fixture.detectChanges();
         await fixture.whenStable();
         fixture.detectChanges();
@@ -603,7 +603,7 @@ describe('Select Component with lookupKey — selection changes', () => {
         let triggerText = fixture.nativeElement.querySelector('.fd-select__text-content')?.textContent?.trim();
         expect(triggerText).toBe('France');
 
-        component.selectedCountry = null;
+        fixture.componentRef.setInput('selectedCountry', null);
         fixture.detectChanges();
         await fixture.whenStable();
         fixture.detectChanges();
@@ -613,7 +613,7 @@ describe('Select Component with lookupKey — selection changes', () => {
     });
 
     it('should display correct value when ngModel is set before first detection cycle', async () => {
-        component.selectedCountry = { id: 4, name: 'Brazil', region: 'Americas' };
+        fixture.componentRef.setInput('selectedCountry', { id: 4, name: 'Brazil', region: 'Americas' });
         fixture.detectChanges();
         await fixture.whenStable();
         fixture.detectChanges();

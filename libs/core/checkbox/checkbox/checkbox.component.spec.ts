@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, input, model } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 
@@ -20,14 +20,20 @@ function checkboxDetectChanges(checkbox: CheckboxComponent): void {
 }
 
 @Component({
-    template: ` <fd-checkbox [(ngModel)]="value" [displayOnly]="displayOnly"></fd-checkbox> `,
+    template: `
+        <fd-checkbox
+            [ngModel]="value()"
+            (ngModelChange)="value.set($event)"
+            [displayOnly]="displayOnly()"
+        ></fd-checkbox>
+    `,
     standalone: true,
     imports: [FormsModule, CheckboxComponent]
 })
 class TestCheckboxWrapperComponent {
     @ViewChild(CheckboxComponent) checkboxRef: CheckboxComponent;
-    value: any = false;
-    displayOnly = false;
+    readonly value = model<any>(false);
+    readonly displayOnly = input(false);
 }
 
 describe('CheckboxComponent', () => {
@@ -57,7 +63,7 @@ describe('CheckboxComponent', () => {
     });
 
     it('should properly bind control value', async () => {
-        hostComponent.value = true;
+        fixture.componentRef.setInput('value', true);
         fixture.detectChanges();
 
         await fixture.whenStable();
@@ -65,7 +71,7 @@ describe('CheckboxComponent', () => {
     });
 
     it('should be unchecked on null', async () => {
-        hostComponent.value = null;
+        fixture.componentRef.setInput('value', null);
         fixture.detectChanges();
 
         await fixture.whenStable();
@@ -73,7 +79,7 @@ describe('CheckboxComponent', () => {
     });
 
     it('should be unchecked on undefined', async () => {
-        hostComponent.value = undefined;
+        fixture.componentRef.setInput('value', undefined);
         fixture.detectChanges();
 
         await fixture.whenStable();
@@ -86,7 +92,7 @@ describe('CheckboxComponent', () => {
         await whenStable(fixture);
 
         expect(checkbox.checkboxState).toBe('checked');
-        expect(hostComponent.value).toBe(true);
+        expect(hostComponent.value()).toBe(true);
         expect(checkbox.checkboxValue).toBe(true);
     });
 
@@ -96,7 +102,7 @@ describe('CheckboxComponent', () => {
         tick(15);
         checkbox.nextValue();
         expect(getCheckboxInput(fixture).checked).toBe(false);
-        expect(hostComponent.value).toBe(false);
+        expect(hostComponent.value()).toBe(false);
         expect(checkbox.checkboxValue).toBe(false);
         expect(checkbox.nextValue).toHaveBeenCalledTimes(2);
     }));
@@ -107,11 +113,11 @@ describe('CheckboxComponent', () => {
         checkboxDetectChanges(checkbox);
         await whenStable(fixture);
 
-        const input = getCheckboxInput(fixture);
-        expect(input.classList.contains('is-success')).toBe(true);
+        const checkboxInput = getCheckboxInput(fixture);
+        expect(checkboxInput.classList.contains('is-success')).toBe(true);
     });
 
-    it('should display input label', async () => {
+    it('should display checkboxInput label', async () => {
         checkbox.label = 'Option 1';
 
         checkboxDetectChanges(checkbox);
@@ -131,8 +137,8 @@ describe('CheckboxComponent', () => {
 
             await whenStable(fixture);
 
-            const input = getCheckboxInput(fixture);
-            expect(input.classList.contains(`is-${states[i]}`)).toBe(true);
+            const checkboxInput = getCheckboxInput(fixture);
+            expect(checkboxInput.classList.contains(`is-${states[i]}`)).toBe(true);
         }
     });
 
@@ -141,15 +147,15 @@ describe('CheckboxComponent', () => {
         checkboxDetectChanges(checkbox);
         await whenStable(fixture);
 
-        let input = getCheckboxInput(fixture);
-        expect(input.classList.contains('is-error')).toBe(true);
+        let checkboxInput = getCheckboxInput(fixture);
+        expect(checkboxInput.classList.contains('is-error')).toBe(true);
 
         checkbox.setStyleState(null);
         checkboxDetectChanges(checkbox);
         await whenStable(fixture);
 
-        input = getCheckboxInput(fixture);
-        expect(input.classList.contains('is-error')).toBe(false);
+        checkboxInput = getCheckboxInput(fixture);
+        expect(checkboxInput.classList.contains('is-error')).toBe(false);
     });
 
     it('should not add any state class when state is null', async () => {
@@ -157,8 +163,8 @@ describe('CheckboxComponent', () => {
         checkboxDetectChanges(checkbox);
         await whenStable(fixture);
 
-        const input = getCheckboxInput(fixture);
-        const stateClasses = Array.from(input.classList).filter((c) => c.startsWith('is-'));
+        const checkboxInput = getCheckboxInput(fixture);
+        const stateClasses = Array.from(checkboxInput.classList).filter((c) => c.startsWith('is-'));
         expect(stateClasses.length).toBe(0);
     });
 
@@ -167,14 +173,14 @@ describe('CheckboxComponent', () => {
 
         await whenStable(fixture);
 
-        const input = getCheckboxInput(fixture);
+        const checkboxInput = getCheckboxInput(fixture);
         const checkboxLabel = getCheckboxLabel(fixture);
 
         jest.spyOn(checkbox, 'nextValue');
         checkboxLabel.click();
-        expect(input.checked).toBe(false);
-        expect(input.disabled).toBe(true);
-        expect(hostComponent.value).toBe(false);
+        expect(checkboxInput.checked).toBe(false);
+        expect(checkboxInput.disabled).toBe(true);
+        expect(hostComponent.value()).toBe(false);
         expect(checkbox.checkboxValue).toBe(false);
     });
 
@@ -182,45 +188,45 @@ describe('CheckboxComponent', () => {
         checkbox.setReadOnlyState(true);
         await whenStable(fixture);
 
-        const input = getCheckboxInput(fixture);
+        const checkboxInput = getCheckboxInput(fixture);
 
         // Check if the checkbox can be focused
-        input.focus();
-        expect(document.activeElement).toBe(input);
+        checkboxInput.focus();
+        expect(document.activeElement).toBe(checkboxInput);
 
         // Ensuring that it maintains its readonly nature
-        expect(input.getAttribute('readonly')).not.toBeNull();
+        expect(checkboxInput.getAttribute('readonly')).not.toBeNull();
     });
 
     it('should not toggle state on click when readonly', async () => {
         checkbox.setReadOnlyState(true);
-        hostComponent.value = false;
+        fixture.componentRef.setInput('value', false);
         await whenStable(fixture);
 
-        const input = getCheckboxInput(fixture);
+        const checkboxInput = getCheckboxInput(fixture);
 
         // Spy on the nextValue method to ensure it is not being called
         jest.spyOn(checkbox, 'nextValue');
 
-        // Click the input and check that the value does not change
-        input.click();
+        // Click the checkboxInput and check that the value does not change
+        checkboxInput.click();
         expect(checkbox.nextValue).not.toHaveBeenCalled();
         expect(checkbox.checkboxValue).toBe(false);
-        expect(hostComponent.value).toBe(false);
+        expect(hostComponent.value()).toBe(false);
     });
 
     it('should use custom values', async () => {
         checkbox.values = { trueValue: 'Yes', falseValue: 'No' };
-        hostComponent.value = 'Yes';
+        fixture.componentRef.setInput('value', 'Yes');
         fixture.detectChanges();
 
         await fixture.whenStable();
-        expect(hostComponent.value).toBe('Yes');
+        expect(hostComponent.value()).toBe('Yes');
         expect(checkbox.checkboxValue).toBe('Yes');
 
         checkbox.nextValue();
 
-        expect(hostComponent.value).toBe('No');
+        expect(hostComponent.value()).toBe('No');
         expect(checkbox.checkboxValue).toBe('No');
     });
 
@@ -229,63 +235,63 @@ describe('CheckboxComponent', () => {
         checkbox.tristateSelectable = true;
         fixture.detectChanges();
 
-        expect(hostComponent.value).toBe(false);
+        expect(hostComponent.value()).toBe(false);
         checkbox.nextValue();
         tick(10);
-        expect(hostComponent.value).toBe(null);
+        expect(hostComponent.value()).toBe(null);
         checkbox.nextValue();
         tick(10);
-        expect(hostComponent.value).toBe(true);
+        expect(hostComponent.value()).toBe(true);
         checkbox.nextValue();
         tick(10);
-        expect(hostComponent.value).toBe(false);
+        expect(hostComponent.value()).toBe(false);
     }));
 
     it('should not use third state', async () => {
-        hostComponent.value = null;
+        fixture.componentRef.setInput('value', null);
         checkbox.tristate = true;
         checkbox.tristateSelectable = false; // "false" value is default
         fixture.detectChanges();
 
         await fixture.whenStable();
-        expect(hostComponent.value).toBe(null);
+        expect(hostComponent.value()).toBe(null);
         checkbox.nextValue();
-        expect(hostComponent.value).toBe(true);
+        expect(hostComponent.value()).toBe(true);
         checkbox.nextValue();
-        expect(hostComponent.value).toBe(false);
+        expect(hostComponent.value()).toBe(false);
         checkbox.nextValue();
-        expect(hostComponent.value).toBe(true);
+        expect(hostComponent.value()).toBe(true);
     });
 
     it('should use custom values for third state', async () => {
         checkbox.tristate = true;
         checkbox.tristateSelectable = true;
         checkbox.values = { trueValue: 'Yes', falseValue: 'No', thirdStateValue: 'Maybe' };
-        hostComponent.value = 'Yes';
+        fixture.componentRef.setInput('value', 'Yes');
         fixture.detectChanges();
 
         await fixture.whenStable();
-        expect(hostComponent.value).toBe('Yes');
+        expect(hostComponent.value()).toBe('Yes');
         checkbox.nextValue();
-        expect(hostComponent.value).toBe('No');
+        expect(hostComponent.value()).toBe('No');
         checkbox.nextValue();
-        expect(hostComponent.value).toBe('Maybe');
+        expect(hostComponent.value()).toBe('Maybe');
         checkbox.nextValue();
-        expect(hostComponent.value).toBe('Yes');
+        expect(hostComponent.value()).toBe('Yes');
     });
 
     it('should apply is-readonly class when readonly', async () => {
         checkbox.setReadOnlyState(true);
         await whenStable(fixture);
 
-        const input = getCheckboxInput(fixture);
-        expect(input.classList.contains('is-readonly')).toBe(true);
-        expect(input.classList.contains('is-disabled')).toBe(false);
-        expect(input.classList.contains('is-display')).toBe(false);
+        const checkboxInput = getCheckboxInput(fixture);
+        expect(checkboxInput.classList.contains('is-readonly')).toBe(true);
+        expect(checkboxInput.classList.contains('is-disabled')).toBe(false);
+        expect(checkboxInput.classList.contains('is-display')).toBe(false);
     });
 
     it('should render display-only mode', async () => {
-        hostComponent.displayOnly = true;
+        fixture.componentRef.setInput('displayOnly', true);
         fixture.detectChanges();
         await fixture.whenStable();
 
@@ -294,14 +300,14 @@ describe('CheckboxComponent', () => {
 
     it('should ignore user interactions when rendered in display-only mode', async () => {
         // Check usual interaction
-        const oldValue = hostComponent.value;
+        const oldValue = hostComponent.value();
         const checkboxInput = getCheckboxInput(fixture);
         checkboxInput.dispatchEvent(new Event('click'));
         fixture.detectChanges();
         await fixture.whenStable();
 
         // Toggle happened
-        expect(hostComponent.value).not.toEqual(oldValue);
+        expect(hostComponent.value()).not.toEqual(oldValue);
 
         checkbox.displayOnly = true;
         fixture.detectChanges();
@@ -312,7 +318,7 @@ describe('CheckboxComponent', () => {
         await fixture.whenStable();
 
         // Toggle didn't happen
-        expect(hostComponent.value).not.toEqual(oldValue);
+        expect(hostComponent.value()).not.toEqual(oldValue);
     });
 });
 

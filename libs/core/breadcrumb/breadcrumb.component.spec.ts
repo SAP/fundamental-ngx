@@ -1,5 +1,5 @@
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
-import { Component, NO_ERRORS_SCHEMA, ViewChild } from '@angular/core';
+import { Component, input, NO_ERRORS_SCHEMA, ViewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
@@ -14,7 +14,7 @@ import { BreadcrumbComponent, BreadcrumbSeparatorStyle } from './breadcrumb.comp
 @Component({
     selector: 'fd-breadcrumb-test-component',
     template: `
-        <fd-breadcrumb [separatorStyle]="separatorStyle">
+        <fd-breadcrumb [separatorStyle]="separatorStyle()">
             <fd-breadcrumb-item>
                 <a fd-link [routerLink]="'#'">Breadcrumb Level 1</a>
             </fd-breadcrumb-item>
@@ -31,7 +31,7 @@ import { BreadcrumbComponent, BreadcrumbSeparatorStyle } from './breadcrumb.comp
 })
 class BreadcrumbWrapperComponent {
     @ViewChild(BreadcrumbComponent) breadcrumb: BreadcrumbComponent;
-    separatorStyle: BreadcrumbSeparatorStyle = '';
+    readonly separatorStyle = input<BreadcrumbSeparatorStyle>('');
 }
 
 describe('BreadcrumbComponent', () => {
@@ -65,7 +65,7 @@ describe('BreadcrumbComponent', () => {
     });
 
     it('should apply backslash separator style', async () => {
-        fixture.componentInstance.separatorStyle = 'backslash';
+        fixture.componentRef.setInput('separatorStyle', 'backslash');
         fixture.detectChanges();
         await whenStable(fixture);
 
@@ -74,7 +74,7 @@ describe('BreadcrumbComponent', () => {
     });
 
     it('should apply double-slash separator style', async () => {
-        fixture.componentInstance.separatorStyle = 'double-slash';
+        fixture.componentRef.setInput('separatorStyle', 'double-slash');
         fixture.detectChanges();
         await whenStable(fixture);
 
@@ -83,7 +83,7 @@ describe('BreadcrumbComponent', () => {
     });
 
     it('should apply double-backslash separator style', async () => {
-        fixture.componentInstance.separatorStyle = 'double-backslash';
+        fixture.componentRef.setInput('separatorStyle', 'double-backslash');
         fixture.detectChanges();
         await whenStable(fixture);
 
@@ -92,7 +92,7 @@ describe('BreadcrumbComponent', () => {
     });
 
     it('should apply greater-than separator style', async () => {
-        fixture.componentInstance.separatorStyle = 'greater-than';
+        fixture.componentRef.setInput('separatorStyle', 'greater-than');
         fixture.detectChanges();
         await whenStable(fixture);
 
@@ -101,7 +101,7 @@ describe('BreadcrumbComponent', () => {
     });
 
     it('should apply double-greater-than separator style', async () => {
-        fixture.componentInstance.separatorStyle = 'double-greater-than';
+        fixture.componentRef.setInput('separatorStyle', 'double-greater-than');
         fixture.detectChanges();
         await whenStable(fixture);
 
@@ -110,7 +110,7 @@ describe('BreadcrumbComponent', () => {
     });
 
     it('should update separator style when input changes', async () => {
-        fixture.componentInstance.separatorStyle = 'backslash';
+        fixture.componentRef.setInput('separatorStyle', 'backslash');
         fixture.detectChanges();
         await whenStable(fixture);
 
@@ -118,7 +118,7 @@ describe('BreadcrumbComponent', () => {
         expect(element.classList.contains('fd-breadcrumb--backslash')).toBe(true);
         expect(element.classList.contains('fd-breadcrumb--greater-than')).toBe(false);
 
-        fixture.componentInstance.separatorStyle = 'greater-than';
+        fixture.componentRef.setInput('separatorStyle', 'greater-than');
         fixture.detectChanges();
         await whenStable(fixture);
 

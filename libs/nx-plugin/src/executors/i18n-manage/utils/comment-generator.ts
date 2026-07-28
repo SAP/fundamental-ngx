@@ -1,4 +1,102 @@
+import { workspaceRoot } from '@nx/devkit';
+import { readFileSync } from 'fs';
 import { CommentType } from '../schema';
+
+/**
+ * Extract JSDoc comment for a key from fd-language.ts
+ */
+export function extractJSDocComment(key: string): string | null {
+    const fdLanguagePath = `${workspaceRoot}/libs/i18n/src/lib/models/fd-language.ts`;
+
+    try {
+        const content = readFileSync(fdLanguagePath, 'utf-8');
+        const lines = content.split('\n');
+
+        // Parse the key: e.g., "coreDatePicker.save" -> component: "coreDatePicker", property: "save"
+        const keyParts = key.split('.');
+        if (keyParts.length < 2) {
+            return null;
+        }
+
+        const componentName = keyParts[keyParts.length - 2]; // Second-to-last segment
+        const propertyName = keyParts[keyParts.length - 1]; // Last segment
+
+        // Find the component's interface block first
+        let componentStartLine = -1;
+        for (let i = 0; i < lines.length; i++) {
+            // Match "componentName: {" at the interface root level (4 spaces indentation)
+            if (lines[i].match(new RegExp(`^    ${componentName}:\\s*\\{`))) {
+                componentStartLine = i;
+                break;
+            }
+        }
+
+        if (componentStartLine === -1) {
+            return null;
+        }
+
+        // Find the closing brace for this component block
+        let componentEndLine = -1;
+        let braceDepth = 1; // We're inside the component block
+        for (let i = componentStartLine + 1; i < lines.length; i++) {
+            const currentLine = lines[i];
+            // Count opening and closing braces
+            for (const char of currentLine) {
+                if (char === '{') {
+                    braceDepth++;
+                }
+                if (char === '}') {
+                    braceDepth--;
+                    if (braceDepth === 0) {
+                        componentEndLine = i;
+                        break;
+                    }
+                }
+            }
+            if (componentEndLine !== -1) {
+                break;
+            }
+        }
+
+        if (componentEndLine === -1) {
+            return null;
+        }
+
+        // Now search for the property within the component's scope
+        for (let i = componentStartLine + 1; i < componentEndLine; i++) {
+            const line = lines[i].trim();
+
+            // Check if this line defines our property
+            if (line.startsWith(`${propertyName}:`) || line.startsWith(`${propertyName}?:`)) {
+                // Look backwards for JSDoc comment
+                let commentLine = i - 1;
+                while (commentLine >= componentStartLine && lines[commentLine].trim() === '') {
+                    commentLine--;
+                }
+
+                // Check if we found a JSDoc comment
+                if (commentLine >= componentStartLine) {
+                    const potentialComment = lines[commentLine].trim();
+                    // Match /** comment */ or // comment
+                    const jsdocMatch = potentialComment.match(/^\/\*\*\s*(.+?)\s*\*\/$/);
+                    const inlineMatch = potentialComment.match(/^\/\/\s*(.+)$/);
+
+                    if (jsdocMatch) {
+                        return jsdocMatch[1];
+                    } else if (inlineMatch) {
+                        return inlineMatch[1];
+                    }
+                }
+                break;
+            }
+        }
+    } catch {
+        // If we can't read the file, return null and fall back to auto-generation
+        return null;
+    }
+
+    return null;
+}
 
 /**
  * Infer comment type based on key name and value
@@ -71,7 +169,16 @@ export function generateComment(
     customType?: CommentType
 ): { type: CommentType; description: string; fullComment: string } {
     const type = customType || inferCommentType(key, value);
-    const description = customDescription || generateCommentDescription(key);
+
+    // Priority: CLI parameter > JSDoc from fd-language.ts > auto-generated
+    let description: string;
+    if (customDescription) {
+        description = customDescription;
+    } else {
+        const jsdocComment = extractJSDocComment(key);
+        description = jsdocComment || generateCommentDescription(key);
+    }
+
     const fullComment = `#${type}: ${description}`;
 
     return { type, description, fullComment };

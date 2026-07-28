@@ -113,13 +113,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Інформаційна мітка'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
-    },
     coreLink: {
         emphasized: 'Підкреслено',
         subtle: 'Приховано'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'Вибрано',
+        listItemNotSelectedAriaLabel: 'Не вибрано'
     },
     coreMessageStrip: {
         announcementError: 'Рядок повідомлень про помилки',
@@ -365,7 +365,7 @@ export default {
         messagesTeamRemoved: 'Видалено 1 групу',
         messagesUndoAction: 'Скасувати',
         nextButtonAriaLabel: 'Перейти до наступного слайду',
-        noDataFound: 'No Data Found',
+        noDataFound: 'Даних не знайдено',
         nodeActionAddApproversAfter: 'Додати особу з правом затвердження після',
         nodeActionAddApproversBefore: 'Додати особу з правом затвердження перед',
         nodeActionAddApproversParallel: 'Додати паралельну особу з правом затвердження',
@@ -522,7 +522,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Скасувати',
         clearFilters: 'Очистити фільтри',
-        collapseAllAnnouncementLabel: 'Collapse All clicked',
+        collapseAllAnnouncementLabel: 'Натиснуто «Згорнути все»',
         collapseRowButtonTitle: 'Згорнути рядок',
         confirmBtnLabel: 'ОК',
         defaultEmptyMessage: 'Даних не знайдено',
@@ -534,7 +534,7 @@ export default {
         editableCellNumberPlaceholder: 'Введіть значення',
         editableCellStringPlaceholder: 'Введіть значення',
         emptyCell: 'Порожнє',
-        expandAllAnnouncementLabel: 'Expand All clicked',
+        expandAllAnnouncementLabel: 'Натиснуто «Розгорнути все»',
         expandRowButtonTitle: 'Розгорнути рядок',
         filterDialogBackToColumns: 'Перейти назад',
         filterDialogCancelBtnLabel: 'Скасувати',
@@ -626,18 +626,18 @@ export default {
         selectSingleRow: 'Для вибору рядка натисніть клавішу пробілу',
         settingsDialogHeader: 'Налаштування',
         showingBlankOfBlank: 'Показано {totalGrowingItemsCount} з {totalGrowingItemsCount}',
+        sortDialogAddSort: 'Add Sort Criterion',
         sortDialogCancelBtnLabel: 'Скасувати',
         sortDialogConfirmBtnLabel: 'ОК',
+        sortDialogDelete: 'Remove Sort Criterion',
         sortDialogHeader: 'Сортувати',
+        sortDialogMoveUp: 'Move Up',
+        sortDialogMoveDown: 'Move Down',
         sortDialogNotSortedLabel: '(без сортування)',
         sortDialogSortByHeader: 'Сортувати за',
         sortDialogSortOrderAsc: 'За зростанням',
         sortDialogSortOrderDesc: 'За спаданням',
         sortDialogSortOrderHeader: 'Порядок сортування',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
-        sortDialogDelete: 'Remove Sort Criterion',
-        sortDialogAddSort: 'Add Sort Criterion',
         toolbarActionButtonTitle: 'Налаштування',
         toolbarActionCancelButtonLabel: 'Скасувати',
         toolbarActionCollapseAllButtonTitle: 'Згорнути все',

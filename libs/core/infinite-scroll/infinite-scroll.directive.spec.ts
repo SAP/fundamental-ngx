@@ -1,4 +1,4 @@
-import { Component, DebugElement } from '@angular/core';
+import { Component, DebugElement, input } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { InfiniteScrollDirective } from './infinite-scroll.directive';
@@ -7,8 +7,8 @@ import { InfiniteScrollDirective } from './infinite-scroll.directive';
     template: `
         <div
             fdInfiniteScroll
-            [scrollPercent]="scrollPercent"
-            [scrollOffset]="scrollOffset"
+            [scrollPercent]="scrollPercent()"
+            [scrollOffset]="scrollOffset()"
             (onScrollAction)="onScroll()"
             [style.max-height.px]="200"
         >
@@ -18,8 +18,8 @@ import { InfiniteScrollDirective } from './infinite-scroll.directive';
     imports: [InfiniteScrollDirective]
 })
 class TestComponent {
-    scrollPercent = 75;
-    scrollOffset: number | null = null;
+    readonly scrollPercent = input(75);
+    readonly scrollOffset = input<number | null>(null);
     scrollCount = 0;
 
     onScroll(): void {
@@ -64,7 +64,7 @@ describe('InfiniteScrollDirective', () => {
     });
 
     it('should update scrollPercent when input changes', () => {
-        component.scrollPercent = 90;
+        fixture.componentRef.setInput('scrollPercent', 90);
         fixture.detectChanges();
 
         const directive = directiveElement.injector.get(InfiniteScrollDirective);
@@ -72,7 +72,7 @@ describe('InfiniteScrollDirective', () => {
     });
 
     it('should update scrollOffset when input changes', () => {
-        component.scrollOffset = 100;
+        fixture.componentRef.setInput('scrollOffset', 100);
         fixture.detectChanges();
 
         const directive = directiveElement.injector.get(InfiniteScrollDirective);
@@ -105,7 +105,7 @@ describe('InfiniteScrollDirective', () => {
     });
 
     it('should use scrollOffset when provided', (done) => {
-        component.scrollOffset = 200;
+        fixture.componentRef.setInput('scrollOffset', 200);
         fixture.detectChanges();
 
         // Scroll to position where remaining scroll is less than scrollOffset
@@ -123,7 +123,7 @@ describe('InfiniteScrollDirective', () => {
     });
 
     it('should not trigger scroll action when scrollOffset threshold is not met', (done) => {
-        component.scrollOffset = 300;
+        fixture.componentRef.setInput('scrollOffset', 300);
         fixture.detectChanges();
 
         // Scroll to position where remaining scroll is more than scrollOffset
@@ -165,7 +165,7 @@ describe('InfiniteScrollDirective', () => {
     });
 
     it('should call shouldTriggerAction and return correct value based on scrollOffset', () => {
-        component.scrollOffset = 200;
+        fixture.componentRef.setInput('scrollOffset', 200);
         fixture.detectChanges();
 
         const directive = directiveElement.injector.get(InfiniteScrollDirective);

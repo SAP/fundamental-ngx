@@ -21,7 +21,7 @@ describe('FeedInputComponent', () => {
             imports: [FormsModule, ButtonComponent, AvatarComponent, FormControlComponent, PlatformFeedInputModule]
         })
             .overrideComponent(FeedInputComponent, {
-                set: { changeDetection: ChangeDetectionStrategy.Default }
+                set: { changeDetection: ChangeDetectionStrategy.Eager }
             })
             .compileComponents();
     });

@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, input } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { PopoverBodyFooterDirective } from './popover-body-directives/popover-body-footer.directive';
@@ -7,7 +7,12 @@ import { PopoverBodyComponent } from './popover-body.component';
 
 @Component({
     template: `
-        <fd-popover-body [minWidth]="minWidth" [maxWidth]="maxWidth" [minHeight]="minHeight" [maxHeight]="maxHeight">
+        <fd-popover-body
+            [minWidth]="minWidth()"
+            [maxWidth]="maxWidth()"
+            [minHeight]="minHeight()"
+            [maxHeight]="maxHeight()"
+        >
             <div fd-popover-body-header>Header Content</div>
             <div class="body-content">Body Content</div>
             <div fd-popover-body-footer>Footer Content</div>
@@ -19,10 +24,10 @@ import { PopoverBodyComponent } from './popover-body.component';
 class TestHostComponent {
     @ViewChild(PopoverBodyComponent) popoverBody: PopoverBodyComponent;
 
-    minWidth = '200px';
-    maxWidth = '400px';
-    minHeight = '100px';
-    maxHeight = '300px';
+    readonly minWidth = input('200px');
+    readonly maxWidth = input('400px');
+    readonly minHeight = input('100px');
+    readonly maxHeight = input('300px');
 }
 
 describe('PopoverBodyComponent', () => {
@@ -93,8 +98,8 @@ describe('PopoverBodyComponent', () => {
         });
 
         it('should update height dimensions when inputs change', () => {
-            hostComponent.minHeight = '150px';
-            hostComponent.maxHeight = '350px';
+            fixture.componentRef.setInput('minHeight', '150px');
+            fixture.componentRef.setInput('maxHeight', '350px');
             fixture.detectChanges();
 
             const bodyDiv = fixture.debugElement.query(By.css('.fd-popover__body'));

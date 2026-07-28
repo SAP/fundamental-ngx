@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, DebugElement, ElementRef, ViewChild } from '@angular/core';
+import { Component, DebugElement, ElementRef, ViewChild, input } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
@@ -25,7 +25,7 @@ describe('Platform Form', () => {
         template: `
             <form [formGroup]="userFormGroup" (ngSubmit)="onSubmit()">
                 <fdp-form-group #userForm [object]="user" [formGroup]="userFormGroup" [i18Strings]="i18n">
-                    @if (showFirstNameControl) {
+                    @if (showFirstNameControl()) {
                         <fdp-form-field
                             #firstName
                             id="firstName"
@@ -86,7 +86,7 @@ describe('Platform Form', () => {
 
         result: any = null;
 
-        showFirstNameControl = true;
+        showFirstNameControl = input(true);
 
         onSubmit(): void {
             this.result = this.userFormGroup.value;
@@ -153,7 +153,7 @@ describe('Platform Form', () => {
     });
 
     it('should unregister formField from formGroup', () => {
-        host.showFirstNameControl = false;
+        fixture.componentRef.setInput('showFirstNameControl', false);
         fixture.detectChanges();
         // no control in DOM
         expect(fixture.debugElement.query(By.css('#firstName'))).toBeFalsy();
@@ -166,7 +166,7 @@ describe('Platform Form', () => {
         expect(inputs[0].nativeElement.id).toBe('lastName');
 
         // Enable firstName
-        host.showFirstNameControl = true;
+        fixture.componentRef.setInput('showFirstNameControl', true);
         fixture.detectChanges();
         // control appears in DOM
         expect(fixture.debugElement.query(By.css('#firstName'))).toBeTruthy();
@@ -500,7 +500,7 @@ describe('FdpFormField with Wrapper', () => {
         expect(label.nativeElement.textContent).toEqual('Default Input Field');
 
         // Input
-        const input = fixture.debugElement.query(By.css('input#input1'));
-        expect(input).toBeTruthy();
+        const inputEl = fixture.debugElement.query(By.css('input#input1'));
+        expect(inputEl).toBeTruthy();
     });
 });

@@ -1,6 +1,6 @@
-# Angular 21+ Patterns - Detailed Reference
+# Angular 22+ Patterns - Detailed Reference
 
-> This document provides detailed patterns and examples for Angular 21+ development in the Fundamental NGX project.
+> This document provides detailed patterns and examples for Angular 22+ development in the Fundamental NGX project.
 
 ## Table of Contents
 
@@ -263,7 +263,7 @@ effect(() => {
 
 ### Signal Writes in Effects
 
-Signal writes are **allowed by default** in Angular 21+. The `allowSignalWrites` option is deprecated.
+Signal writes are **allowed by default** in Angular 22+. The `allowSignalWrites` option is deprecated.
 
 ```typescript
 // Correct - no options needed
@@ -515,9 +515,9 @@ afterRender(
 
 ## Resource API (Experimental)
 
-> **Warning:** `resource()`, `rxResource()`, and `httpResource()` are in **developer preview** as of Angular 21. Known issues include: `value()` throws when in error state, `fixture.whenStable()` doesn't resolve with pending resources, errors don't trigger `ErrorHandler`, and the error signal is typed as `unknown`. Use with caution and expect API changes.
+> **Warning:** `resource()`, `rxResource()`, and `httpResource()` are in **developer preview** as of Angular 22. Known issues include: `value()` throws when in error state, `fixture.whenStable()` doesn't resolve with pending resources, errors don't trigger `ErrorHandler`, and the error signal is typed as `unknown`. Use with caution and expect API changes.
 
-Angular 21 introduces experimental `resource()` API for async data fetching:
+Angular 22 introduced experimental `resource()` API for async data fetching:
 
 ```typescript
 export class UserProfile {
@@ -570,7 +570,7 @@ export class ExampleComponent implements CssClassBuilder {
 }
 ```
 
-### After (Angular 21+ with signals)
+### After (Angular 22+ with signals)
 
 ```typescript
 @Component({

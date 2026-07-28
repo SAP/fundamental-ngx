@@ -114,13 +114,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Etykieta informacyjna'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
-    },
     coreLink: {
         emphasized: 'Wyróżniony',
         subtle: 'Delikatny'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'Wybrane',
+        listItemNotSelectedAriaLabel: 'Niewybrane'
     },
     coreMessageStrip: {
         announcementError: 'Pasek komunikatów o błędach',
@@ -366,7 +366,7 @@ export default {
         messagesTeamRemoved: 'Usunięto 1 zespół',
         messagesUndoAction: 'Cofnij',
         nextButtonAriaLabel: 'Przejdź do następnego slajdu',
-        noDataFound: 'No Data Found',
+        noDataFound: 'Nie znaleziono danych',
         nodeActionAddApproversAfter: 'Dodaj osoby zatwierdzające po',
         nodeActionAddApproversBefore: 'Dodaj osoby zatwierdzające przed',
         nodeActionAddApproversParallel: 'Dodaj osoby zatwierdzające równolegle',
@@ -523,7 +523,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Anuluj',
         clearFilters: 'Wyczyść filtry',
-        collapseAllAnnouncementLabel: 'Collapse All clicked',
+        collapseAllAnnouncementLabel: 'Zwiń wszystkie kliknięte',
         collapseRowButtonTitle: 'Zwiń wiersz',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Nie znaleziono danych',
@@ -534,7 +534,7 @@ export default {
         editableCellNumberPlaceholder: 'Wprowadź wartość',
         editableCellStringPlaceholder: 'Wprowadź wartość',
         emptyCell: 'Puste',
-        expandAllAnnouncementLabel: 'Expand All clicked',
+        expandAllAnnouncementLabel: 'Kliknięto opcję Rozwiń wszystko',
         expandRowButtonTitle: 'Rozwiń wiersz',
         filterDialogBackToColumns: 'Przejdź wstecz',
         filterDialogCancelBtnLabel: 'Anuluj',
@@ -626,18 +626,18 @@ export default {
         selectSingleRow: 'Aby zaznaczyć linię, naciśnij SPACJĘ',
         settingsDialogHeader: 'Ustawienia',
         showingBlankOfBlank: 'Pokazuje {totalGrowingItemsCount} z {totalGrowingItemsCount}',
+        sortDialogAddSort: 'Add Sort Criterion',
         sortDialogCancelBtnLabel: 'Anuluj',
         sortDialogConfirmBtnLabel: 'OK',
+        sortDialogDelete: 'Remove Sort Criterion',
         sortDialogHeader: 'Sortuj',
+        sortDialogMoveUp: 'Move Up',
+        sortDialogMoveDown: 'Move Down',
         sortDialogNotSortedLabel: '(Nieposortowane)',
         sortDialogSortByHeader: 'Sortuj wg',
         sortDialogSortOrderAsc: 'Rosnąco',
         sortDialogSortOrderDesc: 'Malejąco',
         sortDialogSortOrderHeader: 'Kolejność sortowania',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
-        sortDialogDelete: 'Remove Sort Criterion',
-        sortDialogAddSort: 'Add Sort Criterion',
         toolbarActionButtonTitle: 'Ustawienia',
         toolbarActionCancelButtonLabel: 'Anuluj',
         toolbarActionCollapseAllButtonTitle: 'Zwiń wszystko',

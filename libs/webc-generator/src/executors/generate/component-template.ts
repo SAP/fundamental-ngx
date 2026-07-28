@@ -405,6 +405,11 @@ export function componentTemplate(
             // Read the signal value
             const value = this[signalName]();
             if (wcElement) {
+              // Skip writes when the signal is undefined and the property is already truthy
+              // This prevents clobbering imperatively-set values (e.g., from RouterLink)
+              if (value === undefined && wcElement[inputName]) {
+                return;
+              }
               // Write the value to the Web Component's property
               wcElement[inputName] = value;
             }

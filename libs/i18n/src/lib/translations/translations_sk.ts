@@ -114,13 +114,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Označenie s informáciami'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
-    },
     coreLink: {
         emphasized: 'Zvýraznené',
         subtle: 'Jednoduché'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'Vybrané',
+        listItemNotSelectedAriaLabel: 'Nevybrané'
     },
     coreMessageStrip: {
         announcementError: 'Riadok chybovej správy',
@@ -366,7 +366,7 @@ export default {
         messagesTeamRemoved: 'Bol odstránený 1 tím',
         messagesUndoAction: 'Anulovať',
         nextButtonAriaLabel: 'Prejsť na ďalšiu snímku',
-        noDataFound: 'No Data Found',
+        noDataFound: 'Nenašli sa žiadne dáta',
         nodeActionAddApproversAfter: 'Potom pridať schvaľovateľov',
         nodeActionAddApproversBefore: 'Predtým pridať schvaľovateľov',
         nodeActionAddApproversParallel: 'Pridať paralelných schvaľovateľov',
@@ -523,7 +523,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Zrušiť',
         clearFilters: 'Vymazať filtre',
-        collapseAllAnnouncementLabel: 'Collapse All clicked',
+        collapseAllAnnouncementLabel: 'Kliknuté na „Zbaliť všetko“',
         collapseRowButtonTitle: 'Zbaliť riadok',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Nenašli sa žiadne údaje',
@@ -534,7 +534,7 @@ export default {
         editableCellNumberPlaceholder: 'Zadať hodnotu',
         editableCellStringPlaceholder: 'Zadať hodnotu',
         emptyCell: 'Prázdne',
-        expandAllAnnouncementLabel: 'Expand All clicked',
+        expandAllAnnouncementLabel: 'Kliknuté na „Rozbaliť všetko“',
         expandRowButtonTitle: 'Rozbaliť riadok',
         filterDialogBackToColumns: 'Prejsť späť',
         filterDialogCancelBtnLabel: 'Zrušiť',
@@ -626,18 +626,18 @@ export default {
         selectSingleRow: 'Ak chcete vybrať riadok, stlačte MEDZERNÍK',
         settingsDialogHeader: 'Nastavenia',
         showingBlankOfBlank: 'Zobrazuje sa {totalGrowingItemsCount} z {totalGrowingItemsCount}',
+        sortDialogAddSort: 'Add Sort Criterion',
         sortDialogCancelBtnLabel: 'Zrušiť',
         sortDialogConfirmBtnLabel: 'OK',
+        sortDialogDelete: 'Remove Sort Criterion',
         sortDialogHeader: 'Triediť',
+        sortDialogMoveUp: 'Move Up',
+        sortDialogMoveDown: 'Move Down',
         sortDialogNotSortedLabel: '(bez triedenia)',
         sortDialogSortByHeader: 'Triediť podľa',
         sortDialogSortOrderAsc: 'Vzostupne',
         sortDialogSortOrderDesc: 'Zostupne',
         sortDialogSortOrderHeader: 'Poradie triedenia',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
-        sortDialogDelete: 'Remove Sort Criterion',
-        sortDialogAddSort: 'Add Sort Criterion',
         toolbarActionButtonTitle: 'Nastavenia',
         toolbarActionCancelButtonLabel: 'Zrušiť',
         toolbarActionCollapseAllButtonTitle: 'Zbaliť všetko',

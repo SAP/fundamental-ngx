@@ -114,13 +114,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Info-Label'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
-    },
     coreLink: {
         emphasized: 'Hervorgehoben',
         subtle: 'Subtil'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'Ausgewählt',
+        listItemNotSelectedAriaLabel: 'Nicht ausgewählt'
     },
     coreMessageStrip: {
         announcementError: 'Fehlermeldungsleiste',
@@ -367,7 +367,7 @@ export default {
         messagesTeamRemoved: '1 Team wurde entfernt',
         messagesUndoAction: 'Rückgängig',
         nextButtonAriaLabel: 'Zur nächsten Folie',
-        noDataFound: 'No Data Found',
+        noDataFound: 'Keine Daten gefunden',
         nodeActionAddApproversAfter: 'Genehmiger hinzufügen nach',
         nodeActionAddApproversBefore: 'Genehmiger hinzufügen vor',
         nodeActionAddApproversParallel: 'Parallele Genehmiger hinzufügen',
@@ -524,7 +524,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Abbrechen',
         clearFilters: 'Filter zurücksetzen',
-        collapseAllAnnouncementLabel: 'Collapse All clicked',
+        collapseAllAnnouncementLabel: 'Auf "Alle komprimieren" geklickt',
         collapseRowButtonTitle: 'Zeile komprimieren',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Keine Daten gefunden',
@@ -535,7 +535,7 @@ export default {
         editableCellNumberPlaceholder: 'Wert eingeben',
         editableCellStringPlaceholder: 'Wert eingeben',
         emptyCell: 'Leer',
-        expandAllAnnouncementLabel: 'Expand All clicked',
+        expandAllAnnouncementLabel: 'Auf "Alle erweitern" geklickt',
         expandRowButtonTitle: 'Zeile erweitern',
         filterDialogBackToColumns: 'Zurück navigieren',
         filterDialogCancelBtnLabel: 'Abbrechen',
@@ -627,18 +627,18 @@ export default {
         selectSingleRow: 'Um Zeile auszuwählen, Leertaste drücken',
         settingsDialogHeader: 'Einstellungen',
         showingBlankOfBlank: '{totalGrowingItemsCount} von {totalGrowingItemsCount} werden angezeigt',
+        sortDialogAddSort: 'Add Sort Criterion',
         sortDialogCancelBtnLabel: 'Abbrechen',
         sortDialogConfirmBtnLabel: 'OK',
+        sortDialogDelete: 'Remove Sort Criterion',
         sortDialogHeader: 'Sortieren',
+        sortDialogMoveUp: 'Move Up',
+        sortDialogMoveDown: 'Move Down',
         sortDialogNotSortedLabel: '(Nicht sortiert)',
         sortDialogSortByHeader: 'Sortieren nach',
         sortDialogSortOrderAsc: 'Aufsteigend',
         sortDialogSortOrderDesc: 'Absteigend',
         sortDialogSortOrderHeader: 'Sortierreihenfolge',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
-        sortDialogDelete: 'Remove Sort Criterion',
-        sortDialogAddSort: 'Add Sort Criterion',
         toolbarActionButtonTitle: 'Einstellungen',
         toolbarActionCancelButtonLabel: 'Abbrechen',
         toolbarActionCollapseAllButtonTitle: 'Alle komprimieren',

@@ -113,13 +113,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Info Label'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
-    },
     coreLink: {
         emphasized: 'Emphasized',
         subtle: 'Subtle'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'Selected',
+        listItemNotSelectedAriaLabel: 'Not Selected'
     },
     coreMessageStrip: {
         announcementError: 'Error Message Strip',
@@ -625,18 +625,18 @@ export default {
         selectSingleRow: 'To select row, press SPACEBAR',
         settingsDialogHeader: 'Settings',
         showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}',
+        sortDialogAddSort: 'Add Sort Criterion',
         sortDialogCancelBtnLabel: 'გაუქმება',
         sortDialogConfirmBtnLabel: 'კარგი',
+        sortDialogDelete: 'Remove Sort Criterion',
         sortDialogHeader: 'დალაგება',
+        sortDialogMoveUp: 'Move Up',
+        sortDialogMoveDown: 'Move Down',
         sortDialogNotSortedLabel: '(დაულაგებელია)',
         sortDialogSortByHeader: 'დალაგებულია',
         sortDialogSortOrderAsc: 'ზრდადი',
         sortDialogSortOrderDesc: 'კლებადი',
         sortDialogSortOrderHeader: 'დალაგების წესი',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
-        sortDialogDelete: 'Remove Sort Criterion',
-        sortDialogAddSort: 'Add Sort Criterion',
         toolbarActionButtonTitle: 'Settings',
         toolbarActionCancelButtonLabel: 'გაუქმება',
         toolbarActionCollapseAllButtonTitle: 'Collapse all',

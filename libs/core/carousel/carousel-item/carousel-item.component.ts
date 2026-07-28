@@ -1,8 +1,10 @@
 import {
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ElementRef,
     HostBinding,
+    inject,
     Input,
     signal,
     ViewEncapsulation
@@ -104,11 +106,15 @@ export class CarouselItemComponent<T = any> implements CarouselItemInterface {
     /** @hidden */
     set visibility(visibility: Visibility) {
         this._visibility = visibility;
+        this._changeDetectorRef.markForCheck();
     }
 
     get visibility(): Visibility {
         return this._visibility;
     }
+
+    /** @hidden */
+    private readonly _changeDetectorRef = inject(ChangeDetectorRef);
 
     /** @hidden */
     constructor(private readonly _elementRef: ElementRef<HTMLElement>) {}

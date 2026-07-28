@@ -1,6 +1,6 @@
 # Dependency Injection Patterns
 
-> This document covers advanced dependency injection patterns for Angular 21+ development in Fundamental NGX.
+> This document covers advanced dependency injection patterns for Angular 22+ development in Fundamental NGX.
 
 ## Table of Contents
 

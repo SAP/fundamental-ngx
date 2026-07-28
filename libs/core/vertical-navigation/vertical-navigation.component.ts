@@ -132,7 +132,7 @@ export class VerticalNavigationComponent implements AfterContentInit, OnDestroy 
                 setTimeout(() => {
                     // using setTimeout to avoid ExpressionChangedAfterItHasBeenCheckedError
                     this._navigationItems.forEach((navItem, index) => {
-                        index !== 0 && (navItem._tabIndex = -1);
+                        index !== 0 && navItem._tabIndex.set(-1);
                     });
                 });
             });

@@ -1,5 +1,5 @@
 @if (_isRootContainer) {
-    @if (_defaultPane && _defaultPane?.isOnCanvas && _activePanes.length > 1) {
+    @if (_defaultPane && _defaultPane.isOnCanvas && _activePanes.length > 1) {
         <ng-template
             [ngTemplateOutlet]="panesTemplate"
             [ngTemplateOutletContext]="{ panes: [_defaultPane], showResizer: true }"

@@ -114,13 +114,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Информационная метка'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
-    },
     coreLink: {
         emphasized: 'Выделенная',
         subtle: 'Незаметная'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'Выбрано',
+        listItemNotSelectedAriaLabel: 'Не выбрано'
     },
     coreMessageStrip: {
         announcementError: 'Строка сообщения об ошибке',
@@ -366,7 +366,7 @@ export default {
         messagesTeamRemoved: 'Удалена 1 группа',
         messagesUndoAction: 'Отменить',
         nextButtonAriaLabel: 'Следующий слайд',
-        noDataFound: 'No Data Found',
+        noDataFound: 'Данные не найдены',
         nodeActionAddApproversAfter: 'Добавить утверждающих после',
         nodeActionAddApproversBefore: 'Добавить утверждающих до',
         nodeActionAddApproversParallel: 'Добавить параллельных утверждающих',
@@ -523,7 +523,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Отмена',
         clearFilters: 'Очистить фильтры',
-        collapseAllAnnouncementLabel: 'Collapse All clicked',
+        collapseAllAnnouncementLabel: 'Нажата кнопка "Свернуть все"',
         collapseRowButtonTitle: 'Свернуть строку',
         confirmBtnLabel: 'ОК',
         defaultEmptyMessage: 'Данные не найдены',
@@ -534,7 +534,7 @@ export default {
         editableCellNumberPlaceholder: 'Введите значение',
         editableCellStringPlaceholder: 'Введите значение',
         emptyCell: 'Пусто',
-        expandAllAnnouncementLabel: 'Expand All clicked',
+        expandAllAnnouncementLabel: 'Нажата кнопка "Развернуть все"',
         expandRowButtonTitle: 'Развернуть строку',
         filterDialogBackToColumns: 'Перейти назад',
         filterDialogCancelBtnLabel: 'Отмена',
@@ -626,18 +626,18 @@ export default {
         selectSingleRow: 'Для выбора строки нажмите пробел',
         settingsDialogHeader: 'Настройки',
         showingBlankOfBlank: 'Отображение {totalGrowingItemsCount} из {totalGrowingItemsCount}',
+        sortDialogAddSort: 'Add Sort Criterion',
         sortDialogCancelBtnLabel: 'Отмена',
         sortDialogConfirmBtnLabel: 'ОК',
+        sortDialogDelete: 'Remove Sort Criterion',
         sortDialogHeader: 'Сортировать',
+        sortDialogMoveUp: 'Move Up',
+        sortDialogMoveDown: 'Move Down',
         sortDialogNotSortedLabel: '(не отсортировано)',
         sortDialogSortByHeader: 'Сортировать по',
         sortDialogSortOrderAsc: 'По восходящей',
         sortDialogSortOrderDesc: 'По нисходящей',
         sortDialogSortOrderHeader: 'Порядок сортировки',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
-        sortDialogDelete: 'Remove Sort Criterion',
-        sortDialogAddSort: 'Add Sort Criterion',
         toolbarActionButtonTitle: 'Настройки',
         toolbarActionCancelButtonLabel: 'Отмена',
         toolbarActionCollapseAllButtonTitle: 'Свернуть все',

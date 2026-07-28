@@ -13,10 +13,5 @@
         "jsxFragmentFactory": "JSX.Fragment",
         "moduleResolution": "bundler"
     },
-    "angularCompilerOptions": {
-        "skipTemplateCodegen": true,
-        "strictMetadataEmit": true,
-        "enableResourceInlining": true
-    },
     "files": ["./index.ts"]
 }

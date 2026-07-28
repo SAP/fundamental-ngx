@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, input, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { OverflowLayoutItemDirective } from './directives/overflow-layout-item.directive';
@@ -10,7 +10,7 @@ import { OverflowLayoutService } from './overflow-layout.service';
 @Component({
     selector: 'fd-test-component',
     template: `
-        <fd-overflow-layout [maxVisibleItems]="maxItems" [style.width.px]="containerWidth">
+        <fd-overflow-layout [maxVisibleItems]="maxItems()" [style.width.px]="containerWidth">
             @for (item of itemsToRender; track item; let i = $index) {
                 <div
                     *fdOverflowItemRef="let hidden; index as i"
@@ -34,7 +34,7 @@ export class TestComponent {
 
     elementsWidth = 200;
     containerWidth = 1000;
-    maxItems = 3;
+    readonly maxItems = input(3);
 
     itemsToRender = new Array(10).fill(null);
 
@@ -82,7 +82,7 @@ describe('OverflowLayoutComponent', () => {
         await fixture.whenStable();
 
         expect(fixture.debugElement.queryAll(By.directive(OverflowLayoutItemDirective)).length).toEqual(
-            component.maxItems
+            component.maxItems()
         );
     });
 
@@ -92,7 +92,7 @@ describe('OverflowLayoutComponent', () => {
         const expectedAmount = Math.floor(component.containerWidth / component.elementsWidth) - 1; // Minus 'More' button container
         const visibleItemsCountSpy = jest.spyOn(component.overflowLayout.visibleItemsCount, 'emit');
 
-        component.maxItems = Infinity;
+        fixture.componentRef.setInput('maxItems', Infinity);
         fixture.detectChanges();
         await fixture.whenStable();
 

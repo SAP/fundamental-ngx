@@ -1,15 +1,15 @@
-import { Component, DebugElement, ViewChild } from '@angular/core';
+import { Component, DebugElement, ViewChild, input } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { MenuContentDirective } from './menu-content.directive';
 
 @Component({
-    template: '<div fd-menu-content>{{ contentText }}</div>',
+    template: '<div fd-menu-content>{{ contentText() }}</div>',
     imports: [MenuContentDirective]
 })
 class TestComponent {
     @ViewChild(MenuContentDirective) directive: MenuContentDirective;
-    contentText = 'Menu Content';
+    readonly contentText = input('Menu Content');
 }
 
 describe('MenuContentDirective', () => {
@@ -42,7 +42,7 @@ describe('MenuContentDirective', () => {
     });
 
     it('should update when content changes', () => {
-        component.contentText = 'Updated Content';
+        fixture.componentRef.setInput('contentText', 'Updated Content');
         fixture.detectChanges();
 
         expect(directiveElement.nativeElement.textContent).toBe('Updated Content');

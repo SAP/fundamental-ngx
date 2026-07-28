@@ -168,7 +168,7 @@ describe('WizardComponent', () => {
             imports: [TestWrapperComponent]
         })
             .overrideComponent(WizardComponent, {
-                set: { changeDetection: ChangeDetectionStrategy.Default }
+                set: { changeDetection: ChangeDetectionStrategy.Eager }
             })
             .compileComponents();
     }));
@@ -322,7 +322,10 @@ describe('WizardComponent with summary step', () => {
             imports: [TestWizardWithSummaryComponent]
         })
             .overrideComponent(WizardComponent, {
-                set: { changeDetection: ChangeDetectionStrategy.Default }
+                set: { changeDetection: ChangeDetectionStrategy.Eager }
+            })
+            .overrideComponent(WizardNavigationComponent, {
+                set: { changeDetection: ChangeDetectionStrategy.Eager }
             })
             .compileComponents();
     }));

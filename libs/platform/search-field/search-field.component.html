@@ -204,9 +204,9 @@
                 [attr.aria-labelledby]="ariaLabel ? null : ariaLabelledBy"
                 [attr.aria-controls]="!!_popoverBodyId() ? _popoverBodyId() : null"
                 [attr.aria-expanded]="
-                    dropdownValues()?.length !== 0 ? (_isSuggestionMenuOpen() ? 'true' : 'false') : null
+                    dropdownValues().length !== 0 ? (_isSuggestionMenuOpen() ? 'true' : 'false') : null
                 "
-                [attr.aria-haspopup]="dropdownValues()?.length !== 0"
+                [attr.aria-haspopup]="dropdownValues().length !== 0"
                 autocomplete="off"
                 aria-autocomplete="both"
                 (keydown)="onKeydown($event)"

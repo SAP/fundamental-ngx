@@ -114,13 +114,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Etiqueta de información'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
-    },
     coreLink: {
         emphasized: 'Destacado',
         subtle: 'Discreto'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'Seleccionado',
+        listItemNotSelectedAriaLabel: 'No seleccionado'
     },
     coreMessageStrip: {
         announcementError: 'Línea de mensajes de error',
@@ -367,7 +367,7 @@ export default {
         messagesTeamRemoved: 'Se ha eliminado un equipo',
         messagesUndoAction: 'Deshacer',
         nextButtonAriaLabel: 'Ir a siguiente diapositiva',
-        noDataFound: 'No Data Found',
+        noDataFound: 'No se han encontrado datos',
         nodeActionAddApproversAfter: 'Agregar responsables de aprobación después',
         nodeActionAddApproversBefore: 'Agregar responsables de aprobación antes',
         nodeActionAddApproversParallel: 'Agregar responsables de aprobación en paralelo',
@@ -524,7 +524,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Cancelar',
         clearFilters: 'Borrar filtros',
-        collapseAllAnnouncementLabel: 'Collapse All clicked',
+        collapseAllAnnouncementLabel: 'Contraer todo lo seleccionado',
         collapseRowButtonTitle: 'Contraer fila',
         confirmBtnLabel: 'Aceptar',
         defaultEmptyMessage: 'No se han encontrado datos',
@@ -535,7 +535,7 @@ export default {
         editableCellNumberPlaceholder: 'Especificar valor',
         editableCellStringPlaceholder: 'Especificar valor',
         emptyCell: 'Vacía',
-        expandAllAnnouncementLabel: 'Expand All clicked',
+        expandAllAnnouncementLabel: 'Expandir todo lo seleccionado',
         expandRowButtonTitle: 'Expandir fila',
         filterDialogBackToColumns: 'Volver atrás',
         filterDialogCancelBtnLabel: 'Cancelar',
@@ -627,18 +627,18 @@ export default {
         selectSingleRow: 'Pulse la barra de espaciado para seleccionar líneas',
         settingsDialogHeader: 'Configuración',
         showingBlankOfBlank: 'Mostrando {totalGrowingItemsCount} de {totalGrowingItemsCount}',
+        sortDialogAddSort: 'Add Sort Criterion',
         sortDialogCancelBtnLabel: 'Cancelar',
         sortDialogConfirmBtnLabel: 'Aceptar',
+        sortDialogDelete: 'Remove Sort Criterion',
         sortDialogHeader: 'Ordenar',
+        sortDialogMoveUp: 'Move Up',
+        sortDialogMoveDown: 'Move Down',
         sortDialogNotSortedLabel: '(No ordenado)',
         sortDialogSortByHeader: 'Ordenar por',
         sortDialogSortOrderAsc: 'Ascendente',
         sortDialogSortOrderDesc: 'Descendente',
         sortDialogSortOrderHeader: 'Ordenación',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
-        sortDialogDelete: 'Remove Sort Criterion',
-        sortDialogAddSort: 'Add Sort Criterion',
         toolbarActionButtonTitle: 'Configuración',
         toolbarActionCancelButtonLabel: 'Cancelar',
         toolbarActionCollapseAllButtonTitle: 'Contraer todo',

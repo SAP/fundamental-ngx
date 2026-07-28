@@ -95,7 +95,7 @@
         (focusEscapeList)="handleListFocusEscape($event)"
         [dropdownMode]="true"
         class="fdp-combobox__list"
-        [hasMessage]="!!stateMessage || (!!advancedStateMessage?.hasErrors && !!advancedStateMessage?.template)"
+        [hasMessage]="!!stateMessage || (!!advancedStateMessage?.hasErrors && !!advancedStateMessage.template)"
         [id]="id + '-result'"
         role="listbox"
         [byline]="byline"
@@ -116,7 +116,7 @@
                 [attr.id]="'fdp-list-message-combobox-state-message-' + id"
             ></li>
         }
-        @if (advancedStateMessage?.hasErrors && advancedStateMessage?.template) {
+        @if (advancedStateMessage?.hasErrors && advancedStateMessage.template) {
             <li
                 fd-list-message
                 tabindex="-1"

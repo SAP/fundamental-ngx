@@ -6,7 +6,6 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    ComponentFactoryResolver,
     ComponentRef,
     DestroyRef,
     EmbeddedViewRef,
@@ -140,9 +139,6 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
 
     /** @hidden */
     private _cdRef = inject(ChangeDetectorRef);
-
-    /** @hidden */
-    private _componentFactoryResolver = inject(ComponentFactoryResolver);
 
     /** @hidden */
     private _router = inject(Router);
@@ -321,8 +317,7 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
     /** @hidden */
     private _loadFromComponent(content: Type<any>): void {
         this.containerRef()?.clear();
-        const componentFactory = this._componentFactoryResolver.resolveComponentFactory(content);
-        this.componentRef = this.containerRef()?.createComponent(componentFactory);
+        this.componentRef = this.containerRef()?.createComponent(content);
     }
 
     /** @hidden */

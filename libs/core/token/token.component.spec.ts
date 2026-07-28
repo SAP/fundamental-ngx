@@ -1,5 +1,5 @@
 import { ENTER, SPACE, TAB } from '@angular/cdk/keycodes';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { TokenComponent } from './token.component';
 
@@ -14,13 +14,13 @@ function createKeyboardEvent(type: string, keyCode: number, key: string): Keyboa
 
 @Component({
     selector: 'fd-test-host',
-    template: `<fd-token [disabled]="disabled" [selected]="selected" [readOnly]="readOnly">Test Token</fd-token>`,
+    template: `<fd-token [disabled]="disabled()" [selected]="selected()" [readOnly]="readOnly()">Test Token</fd-token>`,
     imports: [TokenComponent]
 })
 class TestHostComponent {
-    disabled = false;
-    selected = false;
-    readOnly = false;
+    readonly disabled = input(false);
+    readonly selected = input(false);
+    readonly readOnly = input(false);
 }
 
 describe('TokenComponent', () => {
@@ -30,7 +30,7 @@ describe('TokenComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.overrideComponent(TokenComponent, {
             set: {
-                changeDetection: ChangeDetectionStrategy.Default
+                changeDetection: ChangeDetectionStrategy.Eager
             }
         })
             .configureTestingModule({
@@ -410,7 +410,7 @@ describe('TokenComponent with host', () => {
     beforeEach(waitForAsync(() => {
         TestBed.overrideComponent(TokenComponent, {
             set: {
-                changeDetection: ChangeDetectionStrategy.Default
+                changeDetection: ChangeDetectionStrategy.Eager
             }
         })
             .configureTestingModule({
@@ -439,7 +439,7 @@ describe('TokenComponent with host', () => {
     it('should update disabled class when host changes disabled input', async () => {
         expect(tokenElement.classList.contains('fd-token__disabled')).toBe(false);
 
-        hostComponent.disabled = true;
+        fixture.componentRef.setInput('disabled', true);
         fixture.detectChanges();
         await fixture.whenStable();
 
@@ -449,7 +449,7 @@ describe('TokenComponent with host', () => {
     it('should update selected class when host changes selected input', async () => {
         expect(tokenElement.classList.contains('fd-token--selected')).toBe(false);
 
-        hostComponent.selected = true;
+        fixture.componentRef.setInput('selected', true);
         fixture.detectChanges();
         await fixture.whenStable();
 
@@ -459,7 +459,7 @@ describe('TokenComponent with host', () => {
     it('should update readonly class when host changes readOnly input', async () => {
         expect(tokenElement.classList.contains('fd-token--readonly')).toBe(false);
 
-        hostComponent.readOnly = true;
+        fixture.componentRef.setInput('readOnly', true);
         fixture.detectChanges();
         await fixture.whenStable();
 
@@ -469,7 +469,7 @@ describe('TokenComponent with host', () => {
     it('should hide close button when readOnly is true', async () => {
         expect(fixture.nativeElement.querySelector('.fd-token__close')).toBeTruthy();
 
-        hostComponent.readOnly = true;
+        fixture.componentRef.setInput('readOnly', true);
         fixture.detectChanges();
         await fixture.whenStable();
 

@@ -114,13 +114,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Ақпараттық белгі'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
-    },
     coreLink: {
         emphasized: 'Ерекшеленген',
         subtle: 'Білінбейтін'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'Таңдалған',
+        listItemNotSelectedAriaLabel: 'Таңдалмаған'
     },
     coreMessageStrip: {
         announcementError: 'Қате туралы хабар жолағы',
@@ -366,7 +366,7 @@ export default {
         messagesTeamRemoved: '1 бекітуші жойылды',
         messagesUndoAction: 'Болдырмау',
         nextButtonAriaLabel: 'Келесі слайдқа өту',
-        noDataFound: 'No Data Found',
+        noDataFound: 'Дерек табылмады',
         nodeActionAddApproversAfter: 'Бекітушілерді қосу: кейін',
         nodeActionAddApproversBefore: 'Бекітушілерді қосу: дейін',
         nodeActionAddApproversParallel: 'Параллель бекітушілерді қосу',
@@ -523,7 +523,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Болдырмау',
         clearFilters: 'Сүзгілерді тазарту',
-        collapseAllAnnouncementLabel: 'Collapse All clicked',
+        collapseAllAnnouncementLabel: '"Барлығын жию" түймесі басылды',
         collapseRowButtonTitle: 'Жолды жию',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Дерек табылмады',
@@ -534,7 +534,7 @@ export default {
         editableCellNumberPlaceholder: 'Мән енгізу',
         editableCellStringPlaceholder: 'Мән енгізу',
         emptyCell: 'Бос',
-        expandAllAnnouncementLabel: 'Expand All clicked',
+        expandAllAnnouncementLabel: '"Барлығын жаю" түймесі басылды',
         expandRowButtonTitle: 'Жолды жаю',
         filterDialogBackToColumns: 'Артқа өту',
         filterDialogCancelBtnLabel: 'Болдырмау',
@@ -626,18 +626,18 @@ export default {
         selectSingleRow: 'Қатарды таңадау үшін бос жол пернесін басыңыз',
         settingsDialogHeader: 'Параметрлер',
         showingBlankOfBlank: '{totalGrowingItemsCount} / {totalGrowingItemsCount} көрсетілуде',
+        sortDialogAddSort: 'Add Sort Criterion',
         sortDialogCancelBtnLabel: 'Болдырмау',
         sortDialogConfirmBtnLabel: 'OK',
+        sortDialogDelete: 'Remove Sort Criterion',
         sortDialogHeader: 'Сұрыптау',
+        sortDialogMoveUp: 'Move Up',
+        sortDialogMoveDown: 'Move Down',
         sortDialogNotSortedLabel: '(Сұрыпталмады)',
         sortDialogSortByHeader: 'Сұрыптау шарты',
         sortDialogSortOrderAsc: 'Артуы бойынша',
         sortDialogSortOrderDesc: 'Кемуі бойынша',
         sortDialogSortOrderHeader: 'Сұрыптау реті',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
-        sortDialogDelete: 'Remove Sort Criterion',
-        sortDialogAddSort: 'Add Sort Criterion',
         toolbarActionButtonTitle: 'Параметрлер',
         toolbarActionCancelButtonLabel: 'Болдырмау',
         toolbarActionCollapseAllButtonTitle: 'Барлығын жию',

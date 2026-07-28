@@ -1,8 +1,7 @@
 import { workspaceRoot } from '@nx/devkit';
-import { sync as fastGlobSync } from 'fast-glob';
 import { readFileSync, writeFileSync } from 'fs';
-import transformTranslationsExecutor from '../../transform-translations/executor';
 import { keyExists, renameKeyInProperties } from '../utils/properties-parser';
+import { regenerateTypeScriptFiles } from './sync';
 
 export interface RenameKeyOptions {
     oldKey: string;
@@ -43,7 +42,7 @@ function validateKeyFormat(key: string): { valid: boolean; error?: string } {
 }
 
 /**
- * Rename an existing translation key in all .properties files
+ * Rename an existing translation key in all TypeScript translation files
  */
 export async function renameKey(options: RenameKeyOptions): Promise<RenameKeyResult> {
     const { oldKey, newKey, propertiesPath } = options;
@@ -67,74 +66,56 @@ export async function renameKey(options: RenameKeyOptions): Promise<RenameKeyRes
         };
     }
 
-    // Step 2: Find all .properties files
-    const propertiesPattern = `${propertiesPath}/*.properties`;
-    const propertiesFiles = fastGlobSync(propertiesPattern, { cwd: workspaceRoot });
-
-    if (propertiesFiles.length === 0) {
-        return {
-            success: false,
-            filesModified: [],
-            error: `No .properties files found at: ${propertiesPattern}`
-        };
-    }
-
-    // Step 3: Check if old key exists and new key doesn't exist
-    const firstFile = `${workspaceRoot}/${propertiesFiles[0]}`;
-    const firstFileContent = readFileSync(firstFile, 'utf-8');
-
-    if (!keyExists(firstFileContent, oldKey)) {
-        return {
-            success: false,
-            filesModified: [],
-            error: `Key "${oldKey}" does not exist. Cannot rename a non-existent key.`
-        };
-    }
-
-    if (keyExists(firstFileContent, newKey)) {
-        return {
-            success: false,
-            filesModified: [],
-            error: `Key "${newKey}" already exists. Cannot rename to an existing key.`
-        };
-    }
-
-    // Step 4: Rename key in all .properties files
-    const filesModified: string[] = [];
-
-    for (const propertiesFile of propertiesFiles) {
-        const filePath = `${workspaceRoot}/${propertiesFile}`;
-        const fileContent = readFileSync(filePath, 'utf-8');
-
-        const updatedContent = renameKeyInProperties(fileContent, oldKey, newKey);
-
-        writeFileSync(filePath, updatedContent, 'utf-8');
-        filesModified.push(propertiesFile);
-    }
-
-    // Step 5: Run transform-translations to generate .ts files
+    // Step 2: Read the base translations.properties file to validate
+    const basePropertiesFile = `${workspaceRoot}/${propertiesPath}/translations.properties`;
     try {
-        const transformResult = await transformTranslationsExecutor({
-            properties: [`${propertiesPath}/*.properties`]
-        });
+        const baseContent = readFileSync(basePropertiesFile, 'utf-8');
 
-        if (!transformResult.success) {
+        if (!keyExists(baseContent, oldKey)) {
             return {
                 success: false,
-                filesModified,
-                error: 'Failed to generate TypeScript files from .properties'
+                filesModified: [],
+                error: `Key "${oldKey}" does not exist in translations.properties. Cannot rename a non-existent key.`
+            };
+        }
+
+        if (keyExists(baseContent, newKey)) {
+            return {
+                success: false,
+                filesModified: [],
+                error: `Key "${newKey}" already exists in translations.properties. Cannot rename to an existing key.`
             };
         }
     } catch (error) {
         return {
             success: false,
-            filesModified,
-            error: `Transform translations failed: ${error.message}`
+            filesModified: [],
+            error: `Failed to read translations.properties: ${error instanceof Error ? error.message : String(error)}`
         };
     }
 
+    // Step 3: Rename the key in base translations.properties file
+    try {
+        const baseContent = readFileSync(basePropertiesFile, 'utf-8');
+        const updatedContent = renameKeyInProperties(baseContent, oldKey, newKey);
+        writeFileSync(basePropertiesFile, updatedContent, 'utf-8');
+    } catch (error) {
+        return {
+            success: false,
+            filesModified: [],
+            error: `Failed to rename key in translations.properties: ${error instanceof Error ? error.message : String(error)}`
+        };
+    }
+
+    // Step 4: Regenerate all TypeScript files from .properties files
+    const result = await regenerateTypeScriptFiles(propertiesPath);
+    if (!result.success) {
+        return result;
+    }
+
+    // Include the base properties file in the modified files list
     return {
         success: true,
-        filesModified
+        filesModified: [`${propertiesPath}/translations.properties`, ...result.filesModified]
     };
 }

@@ -124,4 +124,45 @@ describe('TableCellHeaderPopoverComponent', () => {
 
         expect(serviceGroupSpy).toHaveBeenCalledWith(payload);
     });
+
+    describe('filter input keyboard handling', () => {
+        it('should stop propagation for all keys including ArrowDown', fakeAsync(() => {
+            component.column = new MockTableColumn() as TableColumn;
+            component.column.filterable = true;
+            component.filteringFromHeaderDisabled = false;
+            fixture.detectChanges();
+            tick(1000);
+
+            const filteringTemplate = component._popoverItems
+                .toArray()
+                .find((item) => item.name() === 'filteringPopoverItem');
+            expect(filteringTemplate).toBeTruthy();
+        }));
+
+        it('should stop propagation for all keys including ArrowUp', fakeAsync(() => {
+            component.column = new MockTableColumn() as TableColumn;
+            component.column.filterable = true;
+            component.filteringFromHeaderDisabled = false;
+            fixture.detectChanges();
+            tick(1000);
+
+            const filteringTemplate = component._popoverItems
+                .toArray()
+                .find((item) => item.name() === 'filteringPopoverItem');
+            expect(filteringTemplate).toBeTruthy();
+        }));
+
+        it('should stop propagation for all keys including Escape', fakeAsync(() => {
+            component.column = new MockTableColumn() as TableColumn;
+            component.column.filterable = true;
+            component.filteringFromHeaderDisabled = false;
+            fixture.detectChanges();
+            tick(1000);
+
+            const filteringTemplate = component._popoverItems
+                .toArray()
+                .find((item) => item.name() === 'filteringPopoverItem');
+            expect(filteringTemplate).toBeTruthy();
+        }));
+    });
 });

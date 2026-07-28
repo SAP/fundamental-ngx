@@ -1,6 +1,6 @@
-import { Component, QueryList, ViewChildren } from '@angular/core';
+import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgModel } from '@angular/forms';
 import { whenStable } from '@fundamental-ngx/core/tests';
 import { MenuInteractiveComponent } from '../../menu-interactive.component';
 import { MenuItemComponent } from '../../menu-item/menu-item.component';
@@ -45,6 +45,7 @@ import { SegmentedButtonOptionDirective } from './segmented-button-option.direct
     ]
 })
 class SegmentedButtonOptionTestComponent {
+    @ViewChild(NgModel) ngModel: NgModel;
     @ViewChildren(SegmentedButtonOptionDirective) options: QueryList<SegmentedButtonOptionDirective<string>>;
 
     sortValue: string | null = null;
@@ -108,7 +109,8 @@ describe('SegmentedButtonOptionDirective', () => {
 
     it('should show dot when option is selected', async () => {
         await setup();
-        component.sortValue = 'asc';
+
+        component.ngModel.control.setValue('asc');
         fixture.detectChanges();
         await whenStable(fixture);
         await new Promise((resolve) => setTimeout(resolve, 50));
@@ -123,7 +125,7 @@ describe('SegmentedButtonOptionDirective', () => {
         await setup();
 
         // Select first option
-        component.sortValue = 'asc';
+        component.ngModel.control.setValue('asc');
         fixture.detectChanges();
         await whenStable(fixture);
         await new Promise((resolve) => setTimeout(resolve, 50));
@@ -138,7 +140,7 @@ describe('SegmentedButtonOptionDirective', () => {
         expect(descDot.style.display).toBe('none');
 
         // Switch to second option
-        component.sortValue = 'desc';
+        component.ngModel.control.setValue('desc');
         fixture.detectChanges();
         await whenStable(fixture);
         await new Promise((resolve) => setTimeout(resolve, 50));

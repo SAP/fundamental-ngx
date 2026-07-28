@@ -1,10 +1,10 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, input } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ListSublineDirective } from './list-subline.directive';
 
 @Component({
-    template: `<li #componentElement fd-list-subline [truncate]="isTruncate">List Subline Directive Test</li>`,
+    template: `<li #componentElement fd-list-subline [truncate]="isTruncate()">List Subline Directive Test</li>`,
     standalone: true,
     imports: [ListSublineDirective]
 })
@@ -12,7 +12,7 @@ class TestComponent {
     @ViewChild('componentElement', { read: ElementRef })
     ref!: ElementRef;
 
-    isTruncate = false;
+    readonly isTruncate = input(false);
 }
 
 describe('ListSublineDirective', () => {
@@ -50,7 +50,7 @@ describe('ListSublineDirective', () => {
     });
 
     it('should add truncate class when truncate is true (via input binding)', () => {
-        component.isTruncate = true;
+        fixture.componentRef.setInput('isTruncate', true);
         fixture.detectChanges();
 
         expect(component.ref.nativeElement.classList).toContain('fd-list__subline--truncate');

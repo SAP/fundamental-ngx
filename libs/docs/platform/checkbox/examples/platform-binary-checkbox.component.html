@@ -46,8 +46,16 @@
 
 <h3>Read Only Checkbox</h3>
 <fdp-form-group fdCompact>
-    <fdp-form-field #readonly id="readonly" [rank]="1">
-        <fdp-checkbox name="readonly-cb" title="Blue" [readonly]="true" label="Blue"></fdp-checkbox>
-        <fdp-checkbox name="readonly-cb" title="Green" [readonly]="true" label="Green" [checked]="true"></fdp-checkbox>
+    <fdp-form-field #readonlyBlue id="readonly-blue" [rank]="1">
+        <fdp-checkbox name="readonly-blue-cb" title="Blue" [readonly]="true" label="Blue"></fdp-checkbox>
+    </fdp-form-field>
+    <fdp-form-field #readonlyGreen id="readonly-green" [rank]="1">
+        <fdp-checkbox
+            name="readonly-green-cb"
+            title="Green"
+            [readonly]="true"
+            label="Green"
+            [checked]="true"
+        ></fdp-checkbox>
     </fdp-form-field>
 </fdp-form-group>

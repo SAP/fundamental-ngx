@@ -1,4 +1,4 @@
-import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { Component, TemplateRef, ViewChild, input } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import {
     FdpViewSettingsFilterCustomDef,
@@ -10,7 +10,7 @@ import { TableViewSettingsFilterComponent } from './table-view-settings-filter.c
 
 @Component({
     template: `
-        <fdp-table-view-settings-filter [column]="column" [label]="label" [type]="type" [values]="values">
+        <fdp-table-view-settings-filter [column]="column()" [label]="label()" [type]="type()" [values]="values()">
             <ng-container *fdpViewSettingsFilterCustomDef> Custom filter template </ng-container>
         </fdp-table-view-settings-filter>
     `,
@@ -20,13 +20,13 @@ import { TableViewSettingsFilterComponent } from './table-view-settings-filter.c
 class HostTableViewSettingsFilterComponent {
     @ViewChild(TableViewSettingsFilterComponent) filter: TableViewSettingsFilterComponent;
 
-    column = 'table_column_name';
-    label = 'Filter label';
-    type: FilterType = FilterType.CUSTOM;
-    values: TableFilterSelectOption[] = [
+    readonly column = input('table_column_name');
+    readonly label = input('Filter label');
+    readonly type = input<FilterType>(FilterType.CUSTOM);
+    readonly values = input<TableFilterSelectOption[]>([
         { label: 'Option 1', value: 'option_1' },
         { label: 'Option 2', value: 'option_2' }
-    ];
+    ]);
 }
 
 describe('TableViewSettingsFilterComponent', () => {
@@ -53,7 +53,7 @@ describe('TableViewSettingsFilterComponent', () => {
 
     it('Should have "column" binding', () => {
         const column = 'someColumnName';
-        hostComponent.column = column;
+        fixture.componentRef.setInput('column', column);
         fixture.detectChanges();
 
         expect(component.column).toBe(column);
@@ -61,7 +61,7 @@ describe('TableViewSettingsFilterComponent', () => {
 
     it('Should have "label" binding', () => {
         const label = 'filterLabel';
-        hostComponent.label = label;
+        fixture.componentRef.setInput('label', label);
         fixture.detectChanges();
 
         expect(component.label).toBe(label);
@@ -69,7 +69,7 @@ describe('TableViewSettingsFilterComponent', () => {
 
     it('Should have "type" binding', () => {
         const type = FilterType.SINGLE;
-        hostComponent.type = type;
+        fixture.componentRef.setInput('type', type);
         fixture.detectChanges();
 
         expect(component.type).toBe(type);
@@ -77,7 +77,7 @@ describe('TableViewSettingsFilterComponent', () => {
 
     it('Should have "values" binding', () => {
         const values: TableFilterSelectOption[] = [{ label: 'test', value: 'test' }];
-        hostComponent.values = values;
+        fixture.componentRef.setInput('values', values);
         fixture.detectChanges();
 
         expect(component.values).toBe(values);
@@ -85,7 +85,7 @@ describe('TableViewSettingsFilterComponent', () => {
 
     it('Should have reference to projected custom template', () => {
         const values: TableFilterSelectOption[] = [{ label: 'test', value: 'test' }];
-        hostComponent.values = values;
+        fixture.componentRef.setInput('values', values);
         fixture.detectChanges();
 
         expect(component.customFilterTemplate).toBeInstanceOf(TemplateRef);

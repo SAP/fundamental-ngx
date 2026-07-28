@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, input, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, flush, TestBed, waitForAsync } from '@angular/core/testing';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { ListItemComponent } from './list-item/list-item.component';
@@ -8,12 +8,12 @@ import { ListComponent } from './list.component';
     template: `
         <ul
             #componentElement
-            [dropdownMode]="dropdown"
-            [multiInputMode]="multiInput"
-            [hasMessage]="hasMessage"
-            [noBorder]="noBorder"
-            [fdCompact]="compact"
-            [unreadIndicator]="unreadIndicator"
+            [dropdownMode]="dropdown()"
+            [multiInputMode]="multiInput()"
+            [hasMessage]="hasMessage()"
+            [noBorder]="noBorder()"
+            [fdCompact]="compact()"
+            [unreadIndicator]="unreadIndicator()"
             fd-list
         >
             Action Bar Title Test Text
@@ -26,17 +26,17 @@ class TestComponent {
     @ViewChild('componentElement', { read: ElementRef })
     ref: ElementRef;
 
-    dropdown = false;
+    readonly dropdown = input(false);
 
-    multiInput = false;
+    readonly multiInput = input(false);
 
-    compact = false;
+    readonly compact = input(false);
 
-    hasMessage = false;
+    readonly hasMessage = input(false);
 
-    noBorder = false;
+    readonly noBorder = input(false);
 
-    unreadIndicator = false;
+    readonly unreadIndicator = input(false);
 }
 
 describe('ListComponent', () => {
@@ -65,11 +65,11 @@ describe('ListComponent', () => {
     });
 
     it('should assign additional classes', () => {
-        component.dropdown = true;
-        component.compact = true;
-        component.multiInput = true;
-        component.hasMessage = true;
-        component.noBorder = true;
+        fixture.componentRef.setInput('dropdown', true);
+        fixture.componentRef.setInput('compact', true);
+        fixture.componentRef.setInput('multiInput', true);
+        fixture.componentRef.setInput('hasMessage', true);
+        fixture.componentRef.setInput('noBorder', true);
         fixture.detectChanges();
         expect(component.ref.nativeElement.classList).toContain('fd-list--no-border');
         expect(component.ref.nativeElement.classList).toContain('fd-list--has-message');
@@ -79,7 +79,7 @@ describe('ListComponent', () => {
     });
 
     it('should add unread indicator', () => {
-        component.unreadIndicator = true;
+        fixture.componentRef.setInput('unreadIndicator', true);
         fixture.detectChanges();
 
         expect(component.ref.nativeElement.classList).toContain('fd-list--unread-indicator');

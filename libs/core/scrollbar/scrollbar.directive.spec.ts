@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, input } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ScrollbarDirective } from './scrollbar.directive';
 
@@ -7,9 +7,9 @@ import { ScrollbarDirective } from './scrollbar.directive';
         <div
             #componentElement
             fd-scrollbar
-            [noHorizontalScroll]="noHorizontalScroll"
-            [noVerticalScroll]="noVerticalScroll"
-            [alwaysVisible]="alwaysVisible"
+            [noHorizontalScroll]="noHorizontalScroll()"
+            [noVerticalScroll]="noVerticalScroll()"
+            [alwaysVisible]="alwaysVisible()"
         ></div>
     `,
     standalone: true,
@@ -19,9 +19,9 @@ class TestComponent {
     @ViewChild('componentElement', { read: ElementRef, static: true })
     ref: ElementRef;
 
-    noHorizontalScroll = false;
-    noVerticalScroll = false;
-    alwaysVisible = false;
+    readonly noHorizontalScroll = input(false);
+    readonly noVerticalScroll = input(false);
+    readonly alwaysVisible = input(false);
 }
 
 describe('ScrollbarDirective Host Component', () => {
@@ -49,21 +49,21 @@ describe('ScrollbarDirective Host Component', () => {
     });
 
     it('should hide horizontal overflow content', () => {
-        component.noHorizontalScroll = true;
+        fixture.componentRef.setInput('noHorizontalScroll', true);
         fixture.detectChanges();
 
         expect(component.ref.nativeElement.style.overflowX).toEqual('hidden');
     });
 
     it('should hide vertical overflow content', () => {
-        component.noVerticalScroll = true;
+        fixture.componentRef.setInput('noVerticalScroll', true);
         fixture.detectChanges();
 
         expect(component.ref.nativeElement.style.overflowY).toEqual('hidden');
     });
 
     it('should make scrollbars always visible', () => {
-        component.alwaysVisible = true;
+        fixture.componentRef.setInput('alwaysVisible', true);
         fixture.detectChanges();
 
         expect(component.ref.nativeElement.style.overflowX).toEqual('scroll');

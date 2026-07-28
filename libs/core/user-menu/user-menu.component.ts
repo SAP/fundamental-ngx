@@ -12,13 +12,17 @@ import {
     effect,
     ElementRef,
     inject,
+    Injector,
     input,
     output,
     Renderer2,
     signal,
     TemplateRef,
+    viewChild,
     ViewEncapsulation
 } from '@angular/core';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
+import { filter, switchMap } from 'rxjs';
 
 import { KeyboardSupportService, RtlService, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityMode, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
@@ -40,6 +44,7 @@ import { UserMenuControlComponent } from './components/user-menu-control.compone
 import { UserMenuListItemComponent } from './components/user-menu-list-item.component';
 import { UserMenuControlElementDirective } from './directives/user-menu-control-element.directive';
 import { UserMenuUserNameDirective } from './directives/user-menu-user-name.directive';
+import { resetListFocus } from './utils/focus-utils';
 
 @Component({
     selector: 'fd-user-menu',
@@ -108,6 +113,9 @@ export class UserMenuComponent implements AfterViewInit {
     protected readonly userMenuBody = contentChild(UserMenuBodyComponent, { descendants: true });
 
     /** @hidden */
+    protected readonly dialogTemplate = viewChild<TemplateRef<any>>('dialogTemplate');
+
+    /** @hidden */
     protected readonly navigationArrow = computed(() =>
         this._rtlService.rtl() ? 'navigation-right-arrow' : 'navigation-left-arrow'
     );
@@ -130,7 +138,11 @@ export class UserMenuComponent implements AfterViewInit {
     /** @hidden */
     private _dialogRef: DialogRef | undefined;
 
+    /** @hidden */
     private readonly _destroyRef = inject(DestroyRef);
+
+    /** @hidden */
+    private readonly _injector = inject(Injector);
 
     /** @hidden */
     constructor() {
@@ -144,6 +156,8 @@ export class UserMenuComponent implements AfterViewInit {
     ngAfterViewInit(): void {
         const isMobile = this.mobile();
         this._listItems()?.forEach((item) => item.mobile.set(isMobile));
+
+        this._setupMobileControlSubscription();
 
         const el = this.userNameEl()?.nativeElement;
 
@@ -189,16 +203,9 @@ export class UserMenuComponent implements AfterViewInit {
     /** Method that closes the user menu */
     close(): void {
         this.isOpenChangeHandle(false);
-
-        if (this._listItems().length > 0) {
-            this._listItems().forEach((item) => {
-                item.isOpen.set(false);
-                item._elementRef?.nativeElement.querySelector('.fd-menu__link')?.classList.remove('is-active');
-            });
-
-            this._listItems()[0]?._tabIndex$.set(0);
+        if (this.mobile()) {
+            this._closeAllSubmenus();
         }
-
         this._clearSubmenu();
         this._dialogRef?.close();
     }
@@ -213,6 +220,22 @@ export class UserMenuComponent implements AfterViewInit {
             ariaDescribedBy: 'fd-user-menu-body',
             contentDensity: ContentDensityMode.COZY
         });
+
+        // Focus first list item when dialog loads
+        // Use requestAnimationFrame for consistent timing with popover mode
+        toObservable(this._dialogRef.isLoaded, { injector: this._injector })
+            .pipe(
+                filter((loaded) => loaded),
+                takeUntilDestroyed(this._destroyRef)
+            )
+            .subscribe(() => {
+                requestAnimationFrame(() => {
+                    const firstListItem = this._listItems()[0];
+                    if (firstListItem) {
+                        firstListItem.focus();
+                    }
+                });
+            });
 
         const refSub = this._dialogRef.afterClosed.subscribe({
             next: () => {
@@ -239,6 +262,8 @@ export class UserMenuComponent implements AfterViewInit {
 
         if (!isOpen && !this.mobile()) {
             this.userMenuControl()?.focus();
+            // Close all nested submenus when the menu closes
+            this._closeAllSubmenus();
         }
 
         const userMenuControlEl = this.userMenuControlElement()?.nativeElement;
@@ -249,6 +274,37 @@ export class UserMenuComponent implements AfterViewInit {
                 : this._renderer.removeClass(userMenuControlEl, 'is-active'));
 
         this._changeDetectionRef.detectChanges();
+
+        // Focus first list item when popover opens
+        // Use requestAnimationFrame to allow popover rendering to complete
+        if (isOpen && !this.mobile()) {
+            requestAnimationFrame(() => {
+                const firstListItem = this._listItems()[0];
+                if (firstListItem) {
+                    firstListItem.focus();
+                }
+            });
+        }
+    }
+
+    /**
+     * Set up subscription to user menu control clicks for mobile mode.
+     * Switches to control's clicked observable when control becomes available.
+     * @hidden
+     */
+    private _setupMobileControlSubscription(): void {
+        toObservable(this.userMenuControl, { injector: this._injector })
+            .pipe(
+                filter((control) => !!control && this.mobile()),
+                switchMap((control) => control!.clicked),
+                takeUntilDestroyed(this._destroyRef)
+            )
+            .subscribe(() => {
+                const template = this.dialogTemplate();
+                if (template) {
+                    this.openDialog(template);
+                }
+            });
     }
 
     /** @hidden */
@@ -257,5 +313,44 @@ export class UserMenuComponent implements AfterViewInit {
         if (userMenuBody) {
             userMenuBody.clearSubmenu();
         }
+    }
+
+    /**
+     * Closes all nested submenus by explicitly calling popover.close() on each item.
+     * This ensures that when the main menu closes (e.g., via click outside),
+     * all nested submenu popovers are also closed.
+     * Iterates in reverse order to close deeply nested submenus before their parents.
+     * @hidden
+     */
+    private _closeAllSubmenus(): void {
+        // Close in reverse order to ensure deeply nested items close first
+        const items = this._listItems();
+        for (let i = items.length - 1; i >= 0; i--) {
+            const item = items[i];
+            const popoverInstance = item.popover();
+            if (popoverInstance && item.isOpen()) {
+                popoverInstance.close();
+            }
+            item.isOpen.set(false);
+            item._elementRef?.nativeElement.querySelector('.fd-menu__link')?.classList.remove('is-active');
+        }
+        this._resetListFocus();
+    }
+
+    /**
+     * Resets roving tabindex to the first list item.
+     *
+     * Roving tabindex preserves focus within the list (important for submenus),
+     * but when tabbing back into the menu from outside, focus should start at
+     * the first item, not the last-focused item. Called when focus leaves the menu.
+     *
+     * @hidden
+     */
+    private _resetListFocus(): void {
+        const items = this._listItems();
+        if (!items || items.length === 0) {
+            return;
+        }
+        resetListFocus(items);
     }
 }

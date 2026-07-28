@@ -113,13 +113,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Label Maklumat'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
-    },
     coreLink: {
         emphasized: 'Diserlahkan',
         subtle: 'Tak Ketara'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'Dipilih',
+        listItemNotSelectedAriaLabel: 'Tidak Dipilih'
     },
     coreMessageStrip: {
         announcementError: 'Jalur Mesej Ralat',
@@ -364,7 +364,7 @@ export default {
         messagesTeamRemoved: '1 pasukan telah dikeluarkan',
         messagesUndoAction: 'Buat Asal',
         nextButtonAriaLabel: 'Pergi ke slaid seterusnya',
-        noDataFound: 'No Data Found',
+        noDataFound: 'Tiada Data Ditemui',
         nodeActionAddApproversAfter: 'Tambah pelulus selepas',
         nodeActionAddApproversBefore: 'Tambah pelulus sebelum',
         nodeActionAddApproversParallel: 'Tambah pelulus selari',
@@ -521,7 +521,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Batalkan',
         clearFilters: 'Kosongkan Penapis',
-        collapseAllAnnouncementLabel: 'Collapse All clicked',
+        collapseAllAnnouncementLabel: 'Runtuhkan Semua diklik',
         collapseRowButtonTitle: 'Runtuhkan baris',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Tiada data ditemui',
@@ -532,7 +532,7 @@ export default {
         editableCellNumberPlaceholder: 'Masukkan nilai',
         editableCellStringPlaceholder: 'Masukkan nilai',
         emptyCell: 'Kosong',
-        expandAllAnnouncementLabel: 'Expand All clicked',
+        expandAllAnnouncementLabel: 'Kembangkan Semua diklik',
         expandRowButtonTitle: 'Kembangkan baris',
         filterDialogBackToColumns: 'Navigasi kembali',
         filterDialogCancelBtnLabel: 'Batalkan',
@@ -624,18 +624,18 @@ export default {
         selectSingleRow: 'Untuk pilih baris, tekan BAR RUANG',
         settingsDialogHeader: 'Tetapan',
         showingBlankOfBlank: 'Menunjukkan {totalGrowingItemsCount} daripada {totalGrowingItemsCount}',
+        sortDialogAddSort: 'Add Sort Criterion',
         sortDialogCancelBtnLabel: 'Batalkan',
         sortDialogConfirmBtnLabel: 'OK',
+        sortDialogDelete: 'Remove Sort Criterion',
         sortDialogHeader: 'Isih',
+        sortDialogMoveUp: 'Move Up',
+        sortDialogMoveDown: 'Move Down',
         sortDialogNotSortedLabel: '(Tidak Diisih)',
         sortDialogSortByHeader: 'Diisih Mengikut',
         sortDialogSortOrderAsc: 'Menaik',
         sortDialogSortOrderDesc: 'Menurun',
         sortDialogSortOrderHeader: 'Urutan Isihan',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
-        sortDialogDelete: 'Remove Sort Criterion',
-        sortDialogAddSort: 'Add Sort Criterion',
         toolbarActionButtonTitle: 'Tetapan',
         toolbarActionCancelButtonLabel: 'Batalkan',
         toolbarActionCollapseAllButtonTitle: 'Runtuhkan semua',

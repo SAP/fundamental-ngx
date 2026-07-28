@@ -113,13 +113,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Rótulo de informação'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
-    },
     coreLink: {
         emphasized: 'Realçado',
         subtle: 'Discreto'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'Selecionado',
+        listItemNotSelectedAriaLabel: 'Não selecionado'
     },
     coreMessageStrip: {
         announcementError: 'Faixa de mensagens de erro',
@@ -367,7 +367,7 @@ export default {
         messagesTeamRemoved: '1 equipe foi removida',
         messagesUndoAction: 'Desfazer',
         nextButtonAriaLabel: 'Ir para o próximo slide',
-        noDataFound: 'No Data Found',
+        noDataFound: 'Não foram encontrados dados',
         nodeActionAddApproversAfter: 'Adicionar aprovadores após',
         nodeActionAddApproversBefore: 'Adicionar aprovadores antes',
         nodeActionAddApproversParallel: 'Adicionar aprovadores paralelos',
@@ -524,7 +524,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Cancelar',
         clearFilters: 'Limpar filtros',
-        collapseAllAnnouncementLabel: 'Collapse All clicked',
+        collapseAllAnnouncementLabel: '"Recolher tudo" clicado',
         collapseRowButtonTitle: 'Recolher linha',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Nenhum dado encontrado',
@@ -535,7 +535,7 @@ export default {
         editableCellNumberPlaceholder: 'Inserir valor',
         editableCellStringPlaceholder: 'Inserir valor',
         emptyCell: 'Vazio',
-        expandAllAnnouncementLabel: 'Expand All clicked',
+        expandAllAnnouncementLabel: '"Expandir tudo" clicado',
         expandRowButtonTitle: 'Expandir linha',
         filterDialogBackToColumns: 'Voltar',
         filterDialogCancelBtnLabel: 'Cancelar',
@@ -627,18 +627,18 @@ export default {
         selectSingleRow: 'Pressione a BARRA DE ESPAÇOS para selecionar a linha',
         settingsDialogHeader: 'Configurações',
         showingBlankOfBlank: 'Mostrando {totalGrowingItemsCount} de {totalGrowingItemsCount}',
+        sortDialogAddSort: 'Add Sort Criterion',
         sortDialogCancelBtnLabel: 'Cancelar',
         sortDialogConfirmBtnLabel: 'OK',
+        sortDialogDelete: 'Remove Sort Criterion',
         sortDialogHeader: 'Classificar',
+        sortDialogMoveUp: 'Move Up',
+        sortDialogMoveDown: 'Move Down',
         sortDialogNotSortedLabel: '(Não classificado)',
         sortDialogSortByHeader: 'Classificar por',
         sortDialogSortOrderAsc: 'Crescente',
         sortDialogSortOrderDesc: 'Decrescente',
         sortDialogSortOrderHeader: 'Ordem de classificação',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
-        sortDialogDelete: 'Remove Sort Criterion',
-        sortDialogAddSort: 'Add Sort Criterion',
         toolbarActionButtonTitle: 'Configurações',
         toolbarActionCancelButtonLabel: 'Cancelar',
         toolbarActionCollapseAllButtonTitle: 'Recolher tudo',

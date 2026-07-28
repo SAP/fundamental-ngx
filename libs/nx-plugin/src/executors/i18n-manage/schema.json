@@ -7,7 +7,7 @@
     "properties": {
         "command": {
             "type": "string",
-            "enum": ["add", "rename", "remove", "search", "validate", "update", "sort"],
+            "enum": ["add", "rename", "remove", "search", "validate", "update", "sort", "sync"],
             "description": "Operation to perform"
         },
         "key": {

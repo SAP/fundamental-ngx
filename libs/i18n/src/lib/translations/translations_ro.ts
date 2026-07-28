@@ -114,13 +114,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Etichetă informații'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
-    },
     coreLink: {
         emphasized: 'Evidențiat',
         subtle: 'Discret'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'Selectat',
+        listItemNotSelectedAriaLabel: 'Neselectat'
     },
     coreMessageStrip: {
         announcementError: 'Linie de mesaj de eroare',
@@ -369,7 +369,7 @@ export default {
         messagesTeamRemoved: '1 echipă a fost eliminată',
         messagesUndoAction: 'Anulare acțiune',
         nextButtonAriaLabel: 'Salt la diapozitivul următor',
-        noDataFound: 'No Data Found',
+        noDataFound: 'Nu s-au găsit date',
         nodeActionAddApproversAfter: 'Adăugare aprobatori după',
         nodeActionAddApproversBefore: 'Adăugare aprobatori înainte',
         nodeActionAddApproversParallel: 'Adăugare aprobatori în paralel',
@@ -526,18 +526,18 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Anulare',
         clearFilters: 'Golire filtre',
-        collapseAllAnnouncementLabel: 'Collapse All clicked',
+        collapseAllAnnouncementLabel: 'Se comprimă toate elementele pe care s-a făcut clic',
         collapseRowButtonTitle: 'Comprimare linie',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Nu s-au găsit date',
         deselectAllCheckboxLabel: 'Deselectare toate',
-        deselectAllCheckboxLongLabel: 'Casetă de selectare, bifată, efectuați click pentru a deselecta tot',
+        deselectAllCheckboxLongLabel: 'Casetă de selectare, bifată, faceți clic pentru a deselecta tot',
         deselectSingleRow: 'Pentru a deselecta linia, apăsați pe BARA DE SPAȚIU',
         editableCellDatePlaceholder: 'Introduceți valoarea',
         editableCellNumberPlaceholder: 'Introduceți valoarea',
         editableCellStringPlaceholder: 'Introduceți valoarea',
         emptyCell: 'Goală',
-        expandAllAnnouncementLabel: 'Expand All clicked',
+        expandAllAnnouncementLabel: 'Se extind toate elementele pe care s-a făcut clic',
         expandRowButtonTitle: 'Expandare linie',
         filterDialogBackToColumns: 'Navigare înapoi',
         filterDialogCancelBtnLabel: 'Anulare',
@@ -629,18 +629,18 @@ export default {
         selectSingleRow: 'Pentru a selecta linia, apăsați pe BARA DE SPAȚIU',
         settingsDialogHeader: 'Setări',
         showingBlankOfBlank: 'Se afișează {totalGrowingItemsCount} din {totalGrowingItemsCount}',
+        sortDialogAddSort: 'Add Sort Criterion',
         sortDialogCancelBtnLabel: 'Anulare',
         sortDialogConfirmBtnLabel: 'OK',
+        sortDialogDelete: 'Remove Sort Criterion',
         sortDialogHeader: 'Sortare',
+        sortDialogMoveUp: 'Move Up',
+        sortDialogMoveDown: 'Move Down',
         sortDialogNotSortedLabel: '(Nesortat)',
         sortDialogSortByHeader: 'Sortare după',
         sortDialogSortOrderAsc: 'Ordine crescătoare',
         sortDialogSortOrderDesc: 'Ordine descrescătoare',
         sortDialogSortOrderHeader: 'Ordine de sortare',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
-        sortDialogDelete: 'Remove Sort Criterion',
-        sortDialogAddSort: 'Add Sort Criterion',
         toolbarActionButtonTitle: 'Setări',
         toolbarActionCancelButtonLabel: 'Anulare',
         toolbarActionCollapseAllButtonTitle: 'Restrângere tot',

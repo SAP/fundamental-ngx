@@ -1,10 +1,10 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, input } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { KeyboardSupportService } from '@fundamental-ngx/cdk/utils';
 import { UserMenuSublistComponent } from './user-menu-sublist.component';
 
 @Component({
-    template: `<div fd-user-menu-sublist #elRef [hasIcons]="hasIcons">User Menu Sublist Test</div>`,
+    template: `<div fd-user-menu-sublist #elRef [hasIcons]="hasIcons()">User Menu Sublist Test</div>`,
     standalone: true,
     imports: [UserMenuSublistComponent]
 })
@@ -12,7 +12,7 @@ class TestHostComponent {
     @ViewChild('elRef', { read: ElementRef })
     elRef: ElementRef;
 
-    hasIcons = false;
+    readonly hasIcons = input(false);
 }
 
 describe('UserMenuSublistComponent', () => {
@@ -42,7 +42,7 @@ describe('UserMenuSublistComponent', () => {
     });
 
     it('should add modifier class', () => {
-        component.hasIcons = true;
+        fixture.componentRef.setInput('hasIcons', true);
         fixture.detectChanges();
         expect(component.elRef.nativeElement.classList).toContain('fd-menu--icons');
     });

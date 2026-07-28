@@ -1,6 +1,6 @@
 ---
 name: best-practices
-description: Audit existing code against project conventions and Angular 21+ best practices
+description: Audit existing code against project conventions and Angular 22+ best practices
 argument-hint: [component-path-or-folder]
 context: fork
 agent: general-purpose
@@ -15,7 +15,7 @@ Audit the code at `$ARGUMENTS` against the project's conventions. Unlike `/revie
 
 ## Checklist
 
-### 1. Angular 21+ Patterns
+### 1. Angular 22+ Patterns
 
 - [ ] **New code** uses `input()` / `output()` / `model()` / `linkedSignal()`. Existing `@Input()` / `@Output()` decorators are acceptable.
 - [ ] `host: {}` in decorator — no `@HostBinding()` / `@HostListener()`

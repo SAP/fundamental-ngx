@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, input, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { Size } from '@fundamental-ngx/cdk/utils';
@@ -17,18 +17,18 @@ const NUMBER_OF_ITEMS = 20;
 @Component({
     template: `
         <div [style.width.px]="500">
-            <fd-avatar-group-legacy #avatarGroup [type]="type" [size]="size">
+            <fd-avatar-group-legacy #avatarGroup [type]="type()" [size]="size()">
                 <div>
                     @for (item of items; track item) {
                         <div fd-avatar-group-legacy-item>
-                            <fd-avatar [circle]="true" [border]="true" [size]="size" [label]="item"></fd-avatar>
+                            <fd-avatar [circle]="true" [border]="true" [size]="size()" [label]="item"></fd-avatar>
                         </div>
                     }
                 </div>
                 <fd-popover [noArrow]="false" placement="bottom">
                     <fd-popover-control>
                         @if (avatarGroup.overflowItemsCount > 0) {
-                            <button fd-button fd-avatar-group-legacy-overflow-button [size]="size">
+                            <button fd-button fd-avatar-group-legacy-overflow-button [size]="size()">
                                 <bdi fd-avatar-group-legacy-overflow-button-text>
                                     +{{ avatarGroup.overflowItemsCount }}
                                 </bdi>
@@ -70,9 +70,9 @@ class AvatarGroupLegacyTestComponent {
 
     items = Array.from(Array(NUMBER_OF_ITEMS).map((_, index) => `Item #${index}`));
 
-    type: AvatarGroupLegacyType = 'group';
+    readonly type = input<AvatarGroupLegacyType>('group');
 
-    size: Size = 's';
+    readonly size = input<Size>('s');
 }
 describe('AvatarGroupLegacyComponent', () => {
     let component: AvatarGroupLegacyTestComponent;
@@ -99,7 +99,7 @@ describe('AvatarGroupLegacyComponent', () => {
             'fd-avatar-group-legacy--group-type'
         );
 
-        component.type = 'individual';
+        fixture.componentRef.setInput('type', 'individual');
         fixture.detectChanges();
         expect(fixture.nativeElement.querySelector('.fd-avatar-group-legacy').classList).toContain(
             'fd-avatar-group-legacy--individual-type'
@@ -111,25 +111,25 @@ describe('AvatarGroupLegacyComponent', () => {
             'fd-avatar-group-legacy--s'
         );
 
-        component.size = 'xs';
+        fixture.componentRef.setInput('size', 'xs');
         fixture.detectChanges();
         expect(fixture.nativeElement.querySelector('.fd-avatar-group-legacy').classList).toContain(
             'fd-avatar-group-legacy--xs'
         );
 
-        component.size = 'm';
+        fixture.componentRef.setInput('size', 'm');
         fixture.detectChanges();
         expect(fixture.nativeElement.querySelector('.fd-avatar-group-legacy').classList).toContain(
             'fd-avatar-group-legacy--m'
         );
 
-        component.size = 'l';
+        fixture.componentRef.setInput('size', 'l');
         fixture.detectChanges();
         expect(fixture.nativeElement.querySelector('.fd-avatar-group-legacy').classList).toContain(
             'fd-avatar-group-legacy--l'
         );
 
-        component.size = 'xl';
+        fixture.componentRef.setInput('size', 'xl');
         fixture.detectChanges();
         expect(fixture.nativeElement.querySelector('.fd-avatar-group-legacy').classList).toContain(
             'fd-avatar-group-legacy--xl'

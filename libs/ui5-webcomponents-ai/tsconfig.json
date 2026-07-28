@@ -14,6 +14,9 @@
         },
         {
             "path": "./tsconfig.spec.json"
+        },
+        {
+            "path": "../ui5-webcomponents-base/tsconfig.json"
         }
     ],
     "compilerOptions": {
@@ -24,6 +27,10 @@
         "target": "es2023",
         "module": "preserve",
         "moduleResolution": "bundler",
-        "lib": ["dom", "es2023"]
+        "lib": [
+            "dom",
+            "es2023"
+        ],
+        "rootDir": "../../"
     }
 }

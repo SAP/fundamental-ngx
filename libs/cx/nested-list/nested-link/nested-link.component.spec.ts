@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, input } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NestedItemService } from '../nested-item/nested-item.service';
 import { NestedListIconComponent, NestedListTitleDirective } from '../nested-list-directives';
@@ -7,7 +7,7 @@ import { NestedLinkComponent } from './nested-link.component';
 
 @Component({
     template: `
-        <a fdx-nested-list-link #directiveElement>
+        <a fdx-nested-list-link #directiveElement [selected]="selected()">
             <span fdx-nested-list-icon [glyph]="'settings'"></span>
             <span fdx-nested-list-title>Link 1</span>
         </a>
@@ -18,6 +18,8 @@ import { NestedLinkComponent } from './nested-link.component';
 class TestNestedContainerComponent {
     @ViewChild('directiveElement', { static: true, read: NestedLinkComponent })
     directiveElement: NestedLinkComponent;
+
+    readonly selected = input(false);
 }
 
 describe('NestedLinkDirective', () => {
@@ -46,7 +48,7 @@ describe('NestedLinkDirective', () => {
     });
 
     it('Should have good classes', () => {
-        directiveElement.selected = true;
+        fixture.componentRef.setInput('selected', true);
         fixture.detectChanges();
 
         const classList = (directiveElement as any)._elementRef.nativeElement.classList;

@@ -1,15 +1,15 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, input } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { FocusableItemDirective } from '../focusable-item/focusable-item.directive';
 import { FocusableListDirective } from './focusable-list.directive';
 
 @Component({
     template: `
-        <div fdkFocusableList [wrap]="wrap" [focusable]="focusable">
-            <div fdkFocusableItem id="item-0" [fdkFocusableItem]="item0Focusable"></div>
-            <div fdkFocusableItem id="item-1" [fdkFocusableItem]="item1Focusable"></div>
-            <div fdkFocusableItem id="item-2" [fdkFocusableItem]="item2Focusable"></div>
+        <div fdkFocusableList [wrap]="wrap()" [focusable]="focusable()">
+            <div fdkFocusableItem id="item-0" [fdkFocusableItem]="item0Focusable()"></div>
+            <div fdkFocusableItem id="item-1" [fdkFocusableItem]="item1Focusable()"></div>
+            <div fdkFocusableItem id="item-2" [fdkFocusableItem]="item2Focusable()"></div>
         </div>
     `,
     standalone: true,
@@ -17,11 +17,11 @@ import { FocusableListDirective } from './focusable-list.directive';
 })
 class TestComponent {
     @ViewChild(FocusableListDirective, { static: false }) listDirective!: FocusableListDirective;
-    wrap = false;
-    focusable = false;
-    item0Focusable = true;
-    item1Focusable = true;
-    item2Focusable = true;
+    readonly wrap = input(false);
+    readonly focusable = input(false);
+    readonly item0Focusable = input(true);
+    readonly item1Focusable = input(true);
+    readonly item2Focusable = input(true);
 }
 
 describe('FocusableListDirective', () => {
@@ -76,7 +76,7 @@ describe('FocusableListDirective', () => {
 
     describe('focusable property', () => {
         it('should set tabindex to 0 when focusable is true', () => {
-            component.focusable = true;
+            fixture.componentRef.setInput('focusable', true);
             fixture.detectChanges();
 
             expect(directive.focusable).toBe(true);
@@ -84,7 +84,7 @@ describe('FocusableListDirective', () => {
         });
 
         it('should set tabindex to -1 when focusable is false', () => {
-            component.focusable = false;
+            fixture.componentRef.setInput('focusable', false);
             fixture.detectChanges();
 
             expect(directive.focusable).toBe(false);
@@ -94,14 +94,14 @@ describe('FocusableListDirective', () => {
 
     describe('wrap property', () => {
         it('should update wrap value', () => {
-            component.wrap = true;
+            fixture.componentRef.setInput('wrap', true);
             fixture.detectChanges();
 
             expect(directive.wrap()).toBe(true);
         });
 
         it('should support wrapping with true value', () => {
-            component.wrap = true;
+            fixture.componentRef.setInput('wrap', true);
             fixture.detectChanges();
 
             directive.setActiveItem(0);
@@ -154,7 +154,7 @@ describe('FocusableListDirective', () => {
 
         it('should skip non-focusable items', () => {
             // Make item at index 1 non-focusable
-            component.item1Focusable = false;
+            fixture.componentRef.setInput('item1Focusable', false);
             fixture.detectChanges();
 
             // Try to set active item to index 1 (non-focusable)

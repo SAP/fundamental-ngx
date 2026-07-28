@@ -113,13 +113,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Oplysningsetiket'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
-    },
     coreLink: {
         emphasized: 'Fremhævet',
         subtle: 'Diskret'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'Valgt',
+        listItemNotSelectedAriaLabel: 'Ikke valgt'
     },
     coreMessageStrip: {
         announcementError: 'Meddelelseslinje for fejl',
@@ -365,7 +365,7 @@ export default {
         messagesTeamRemoved: '1 team er fjernet',
         messagesUndoAction: 'Fortryd',
         nextButtonAriaLabel: 'Gå til næste dias',
-        noDataFound: 'No Data Found',
+        noDataFound: 'Ingen data blev fundet',
         nodeActionAddApproversAfter: 'Tilføj godkendere efter',
         nodeActionAddApproversBefore: 'Tilføj godkendere før',
         nodeActionAddApproversParallel: 'Tilføj parallelle godkendere',
@@ -522,7 +522,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Annuller',
         clearFilters: 'Ryd filtre',
-        collapseAllAnnouncementLabel: 'Collapse All clicked',
+        collapseAllAnnouncementLabel: 'Skjul alle, der er klikket på',
         collapseRowButtonTitle: 'Minimer række',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Ingen data fundet',
@@ -533,7 +533,7 @@ export default {
         editableCellNumberPlaceholder: 'Indtast værdi',
         editableCellStringPlaceholder: 'Indtast værdi',
         emptyCell: 'Tom',
-        expandAllAnnouncementLabel: 'Expand All clicked',
+        expandAllAnnouncementLabel: 'Udvid alle, der er klikket på',
         expandRowButtonTitle: 'Udvid række',
         filterDialogBackToColumns: 'Naviger tilbage',
         filterDialogCancelBtnLabel: 'Annuller',
@@ -625,18 +625,18 @@ export default {
         selectSingleRow: 'Tryk på mellemrumstasten for at vælge række',
         settingsDialogHeader: 'Indstillinger',
         showingBlankOfBlank: 'Viser {totalGrowingItemsCount} af {totalGrowingItemsCount}',
+        sortDialogAddSort: 'Add Sort Criterion',
         sortDialogCancelBtnLabel: 'Annuller',
         sortDialogConfirmBtnLabel: 'OK',
+        sortDialogDelete: 'Remove Sort Criterion',
         sortDialogHeader: 'Sortér',
+        sortDialogMoveUp: 'Move Up',
+        sortDialogMoveDown: 'Move Down',
         sortDialogNotSortedLabel: '(Ikke sorteret)',
         sortDialogSortByHeader: 'Sortér efter',
         sortDialogSortOrderAsc: 'Stigende',
         sortDialogSortOrderDesc: 'Faldende',
         sortDialogSortOrderHeader: 'Sorteringsrækkefølge',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
-        sortDialogDelete: 'Remove Sort Criterion',
-        sortDialogAddSort: 'Add Sort Criterion',
         toolbarActionButtonTitle: 'Indstillinger',
         toolbarActionCancelButtonLabel: 'Annuller',
         toolbarActionCollapseAllButtonTitle: 'Minimer alle',

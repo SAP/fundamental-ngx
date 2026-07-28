@@ -16,5 +16,5 @@ import dayjs, { Dayjs } from 'dayjs';
     imports: [DatePickerComponent, FormsModule]
 })
 export class DatetimeAdaptersDayjsBasicExampleComponent {
-    date: Dayjs = dayjs();
+    date: Dayjs | null = dayjs();
 }

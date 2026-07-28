@@ -12,7 +12,7 @@
 
 ## Requirements
 
-Angular 21 or newer. Prior knowledge of Angular is recommended.
+Angular 22 or newer. Prior knowledge of Angular is recommended.
 
 ## Getting Started
 

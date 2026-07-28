@@ -113,13 +113,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Infoetiketti'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
-    },
     coreLink: {
         emphasized: 'Korostettu',
         subtle: 'Hillitty'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'Valittu',
+        listItemNotSelectedAriaLabel: 'Ei valittu'
     },
     coreMessageStrip: {
         announcementError: 'Virheilmoitusnauha',
@@ -365,7 +365,7 @@ export default {
         messagesTeamRemoved: '1 tiimi on poistettu',
         messagesUndoAction: 'Kumoa',
         nextButtonAriaLabel: 'Siirry seuraavaan diaan',
-        noDataFound: 'No Data Found',
+        noDataFound: 'Tietoja ei löytynyt',
         nodeActionAddApproversAfter: 'Lisää hyväksyjät jälkeen',
         nodeActionAddApproversBefore: 'Lisää hyväksyjät ennen',
         nodeActionAddApproversParallel: 'Lisää rinnakkaisia hyväksyjiä',
@@ -522,7 +522,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Peruuta',
         clearFilters: 'Tyhjennä suodattimet',
-        collapseAllAnnouncementLabel: 'Collapse All clicked',
+        collapseAllAnnouncementLabel: 'Tiivistä kaikki -painiketta napsautettu',
         collapseRowButtonTitle: 'Tiivistä rivi',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Tietoja ei löydy',
@@ -533,7 +533,7 @@ export default {
         editableCellNumberPlaceholder: 'Syötä arvo',
         editableCellStringPlaceholder: 'Syötä arvo',
         emptyCell: 'Tyhjä',
-        expandAllAnnouncementLabel: 'Expand All clicked',
+        expandAllAnnouncementLabel: 'Laajenna kaikki -painiketta napsautettu',
         expandRowButtonTitle: 'Laajenna rivi',
         filterDialogBackToColumns: 'Navigoi takaisin',
         filterDialogCancelBtnLabel: 'Peruuta',
@@ -625,18 +625,18 @@ export default {
         selectSingleRow: 'Valitse rivi painamalla välilyöntinäppäintä',
         settingsDialogHeader: 'Asetukset',
         showingBlankOfBlank: 'Näytetään {totalGrowingItemsCount} / {totalGrowingItemsCount}',
+        sortDialogAddSort: 'Add Sort Criterion',
         sortDialogCancelBtnLabel: 'Peruuta',
         sortDialogConfirmBtnLabel: 'OK',
+        sortDialogDelete: 'Remove Sort Criterion',
         sortDialogHeader: 'Lajittele',
+        sortDialogMoveUp: 'Move Up',
+        sortDialogMoveDown: 'Move Down',
         sortDialogNotSortedLabel: '(Ei lajiteltu)',
         sortDialogSortByHeader: 'Lajitteluperuste',
         sortDialogSortOrderAsc: 'Nouseva',
         sortDialogSortOrderDesc: 'Laskeva',
         sortDialogSortOrderHeader: 'Lajittelujärjestys',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
-        sortDialogDelete: 'Remove Sort Criterion',
-        sortDialogAddSort: 'Add Sort Criterion',
         toolbarActionButtonTitle: 'Asetukset',
         toolbarActionCancelButtonLabel: 'Peruuta',
         toolbarActionCollapseAllButtonTitle: 'Tiivistä kaikki',

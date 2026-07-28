@@ -114,13 +114,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: "Étiquette d'information"
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
-    },
     coreLink: {
         emphasized: 'Mis en évidence',
         subtle: 'Subtil'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'Sélectionné',
+        listItemNotSelectedAriaLabel: 'Non sélectionné'
     },
     coreMessageStrip: {
         announcementError: "Barre de message d'erreur",
@@ -368,7 +368,7 @@ export default {
         messagesTeamRemoved: '1 équipe a été supprimée.',
         messagesUndoAction: 'Annuler',
         nextButtonAriaLabel: 'Passer à la diapositive suivante',
-        noDataFound: 'No Data Found',
+        noDataFound: 'Aucune donnée trouvée',
         nodeActionAddApproversAfter: 'Ajouter des approbateurs après',
         nodeActionAddApproversBefore: 'Ajouter des approbateurs avant',
         nodeActionAddApproversParallel: 'Ajouter des approbateurs en parallèle',
@@ -525,7 +525,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Annuler',
         clearFilters: 'Effacer les filtres',
-        collapseAllAnnouncementLabel: 'Collapse All clicked',
+        collapseAllAnnouncementLabel: 'Clic effectué sur "Réduire tout"',
         collapseRowButtonTitle: 'Réduire la ligne',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Aucune donnée trouvée',
@@ -536,7 +536,7 @@ export default {
         editableCellNumberPlaceholder: 'Saisir une valeur',
         editableCellStringPlaceholder: 'Saisir une valeur',
         emptyCell: 'Vide',
-        expandAllAnnouncementLabel: 'Expand All clicked',
+        expandAllAnnouncementLabel: 'Clic effectué sur "Développer tout"',
         expandRowButtonTitle: 'Développer la ligne',
         filterDialogBackToColumns: 'Revenir à la page précédente',
         filterDialogCancelBtnLabel: 'Annuler',
@@ -628,18 +628,18 @@ export default {
         selectSingleRow: "Pour sélectionner la ligne, appuyer sur la BARRE D'ESPACEMENT",
         settingsDialogHeader: 'Paramètres',
         showingBlankOfBlank: 'Affichage de {totalGrowingItemsCount} sur {totalGrowingItemsCount}',
+        sortDialogAddSort: 'Add Sort Criterion',
         sortDialogCancelBtnLabel: 'Annuler',
         sortDialogConfirmBtnLabel: 'OK',
+        sortDialogDelete: 'Remove Sort Criterion',
         sortDialogHeader: 'Trier',
+        sortDialogMoveUp: 'Move Up',
+        sortDialogMoveDown: 'Move Down',
         sortDialogNotSortedLabel: '(No triée)',
         sortDialogSortByHeader: 'Trier par',
         sortDialogSortOrderAsc: 'Ordre croissant',
         sortDialogSortOrderDesc: 'Ordre décroissant',
         sortDialogSortOrderHeader: 'Ordre de tri',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
-        sortDialogDelete: 'Remove Sort Criterion',
-        sortDialogAddSort: 'Add Sort Criterion',
         toolbarActionButtonTitle: 'Paramètres',
         toolbarActionCancelButtonLabel: 'Annuler',
         toolbarActionCollapseAllButtonTitle: 'Tout réduire',

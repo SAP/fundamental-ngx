@@ -14,7 +14,7 @@ See the [Component Documentation](https://sap.github.io/fundamental-ngx) for exa
 
 ## Requirements
 
-Angular 21 or newer. Prior knowledge of Angular is recommended.
+Angular 22 or newer. Prior knowledge of Angular is recommended.
 
 ## Getting Started
 

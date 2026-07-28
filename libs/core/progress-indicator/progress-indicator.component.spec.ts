@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, input } from '@angular/core';
 import { ProgressIndicatorComponent } from './progress-indicator.component';
 
 @Component({
     template: `
         <fd-progress-indicator
             #indicatorRef
-            [valueText]="valueText"
-            [valueMin]="valueMin"
-            [valueMax]="valueMax"
-            [valueNow]="valueNow"
+            [valueText]="valueText()"
+            [valueMin]="valueMin()"
+            [valueMax]="valueMax()"
+            [valueNow]="valueNow()"
         >
         </fd-progress-indicator>
     `,
@@ -24,10 +24,10 @@ class TestProgressIndicatorComponent {
     @ViewChild(ProgressIndicatorComponent)
     progressIndicatorComponent: ProgressIndicatorComponent;
 
-    valueText;
-    valueMin;
-    valueMax;
-    valueNow;
+    readonly valueText = input(undefined);
+    readonly valueMin = input(undefined);
+    readonly valueMax = input(undefined);
+    readonly valueNow = input(undefined);
 }
 
 describe('ProgressIndicatorComponent', () => {
@@ -58,9 +58,9 @@ describe('ProgressIndicatorComponent', () => {
     });
 
     it('should calculate the progress bar width', () => {
-        testComponent.valueMin = 0;
-        testComponent.valueMax = 100;
-        testComponent.valueNow = 42;
+        fixture.componentRef.setInput('valueMin', 0);
+        fixture.componentRef.setInput('valueMax', 100);
+        fixture.componentRef.setInput('valueNow', 42);
         fixture.detectChanges();
         const progressBar = progressIndicatorElementRef.nativeElement.querySelector(
             '.fd-progress-indicator__progress-bar'

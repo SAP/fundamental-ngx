@@ -1,5 +1,5 @@
 @if (item?.titleTemplate) {
-    <ng-template [ngTemplateOutlet]="item?.titleTemplate || null"></ng-template>
+    <ng-template [ngTemplateOutlet]="item.titleTemplate || null"></ng-template>
 } @else {
     @if (layoutMode === 'row') {
         <span class="fd-icon-tab-bar__tag">

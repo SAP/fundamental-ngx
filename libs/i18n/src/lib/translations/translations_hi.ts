@@ -113,13 +113,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Info Label'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
-    },
     coreLink: {
         emphasized: 'Emphasized',
         subtle: 'Subtle'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'Selected',
+        listItemNotSelectedAriaLabel: 'Not Selected'
     },
     coreMessageStrip: {
         announcementError: 'Error Message Strip',
@@ -625,18 +625,18 @@ export default {
         selectSingleRow: 'To select row, press SPACEBAR',
         settingsDialogHeader: 'Settings',
         showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}',
+        sortDialogAddSort: 'Add Sort Criterion',
         sortDialogCancelBtnLabel: 'रद्द करें',
         sortDialogConfirmBtnLabel: 'अनुमोदन',
+        sortDialogDelete: 'Remove Sort Criterion',
         sortDialogHeader: 'क्रम से लगाना',
+        sortDialogMoveUp: 'Move Up',
+        sortDialogMoveDown: 'Move Down',
         sortDialogNotSortedLabel: '(क्रमबद्ध नहीं)',
         sortDialogSortByHeader: 'आधार पर छाँटे',
         sortDialogSortOrderAsc: 'बढ़ते क्रम',
         sortDialogSortOrderDesc: 'घटते क्रम',
         sortDialogSortOrderHeader: 'क्रमबद्ध करें',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
-        sortDialogDelete: 'Remove Sort Criterion',
-        sortDialogAddSort: 'Add Sort Criterion',
         toolbarActionButtonTitle: 'Settings',
         toolbarActionCancelButtonLabel: 'रद्द करें',
         toolbarActionCollapseAllButtonTitle: 'Collapse all',

@@ -113,13 +113,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: '정보 레이블'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
-    },
     coreLink: {
         emphasized: '강조됨',
         subtle: '미약'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: '선택됨',
+        listItemNotSelectedAriaLabel: '선택 안 함'
     },
     coreMessageStrip: {
         announcementError: '오류 메시지 스트립',
@@ -364,7 +364,7 @@ export default {
         messagesTeamRemoved: '팀 1개가 제거되었습니다.',
         messagesUndoAction: '실행 취소',
         nextButtonAriaLabel: '다음 슬라이드로 이동',
-        noDataFound: 'No Data Found',
+        noDataFound: '데이터를 찾을 수 없음',
         nodeActionAddApproversAfter: '뒤에 결재자 추가',
         nodeActionAddApproversBefore: '앞에 결재자 추가',
         nodeActionAddApproversParallel: '병렬 결재자 추가',
@@ -521,7 +521,7 @@ export default {
     platformTable: {
         cancelBtnLabel: '취소',
         clearFilters: '필터 지우기',
-        collapseAllAnnouncementLabel: 'Collapse All clicked',
+        collapseAllAnnouncementLabel: '클릭한 항목 모두 접기',
         collapseRowButtonTitle: '행 접기',
         confirmBtnLabel: '확인',
         defaultEmptyMessage: '데이터를 찾을 수 없음',
@@ -532,7 +532,7 @@ export default {
         editableCellNumberPlaceholder: '값 입력',
         editableCellStringPlaceholder: '값 입력',
         emptyCell: '비어 있음',
-        expandAllAnnouncementLabel: 'Expand All clicked',
+        expandAllAnnouncementLabel: '모두 펼치기 클릭됨',
         expandRowButtonTitle: '행 펼치기',
         filterDialogBackToColumns: '뒤로 이동',
         filterDialogCancelBtnLabel: '취소',
@@ -623,18 +623,18 @@ export default {
         selectSingleRow: '행을 선택하려면 스페이스바를 누르십시오.',
         settingsDialogHeader: '설정',
         showingBlankOfBlank: '{totalGrowingItemsCount}/{totalGrowingItemsCount} 표시',
+        sortDialogAddSort: 'Add Sort Criterion',
         sortDialogCancelBtnLabel: '취소',
         sortDialogConfirmBtnLabel: '확인',
+        sortDialogDelete: 'Remove Sort Criterion',
         sortDialogHeader: '정렬',
+        sortDialogMoveUp: 'Move Up',
+        sortDialogMoveDown: 'Move Down',
         sortDialogNotSortedLabel: '(정렬 안 함)',
         sortDialogSortByHeader: '정렬 기준',
         sortDialogSortOrderAsc: '오름차순',
         sortDialogSortOrderDesc: '내림차순',
         sortDialogSortOrderHeader: '정렬 순서',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
-        sortDialogDelete: 'Remove Sort Criterion',
-        sortDialogAddSort: 'Add Sort Criterion',
         toolbarActionButtonTitle: '설정',
         toolbarActionCancelButtonLabel: '취소',
         toolbarActionCollapseAllButtonTitle: '모두 접기',

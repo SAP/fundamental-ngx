@@ -114,13 +114,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'تسمية المعلومات'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
-    },
     coreLink: {
         emphasized: 'مؤكَّد',
         subtle: 'غامض'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'المحدد',
+        listItemNotSelectedAriaLabel: 'غير محدد'
     },
     coreMessageStrip: {
         announcementError: 'شريط رسالة الخطأ',
@@ -365,7 +365,7 @@ export default {
         messagesTeamRemoved: 'تمت إزالة فريق واحد',
         messagesUndoAction: 'تراجع',
         nextButtonAriaLabel: 'انتقال إلى الشريحة التالية',
-        noDataFound: 'No Data Found',
+        noDataFound: 'لم يتم العثور على أي بيانات',
         nodeActionAddApproversAfter: 'إضافة المعتمِدين بعد',
         nodeActionAddApproversBefore: 'إضافة المعتمِدين قبل',
         nodeActionAddApproversParallel: 'إضافة المعتمِدين المتوازيين',
@@ -522,7 +522,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'إلغاء',
         clearFilters: 'مسح عوامل التصفية',
-        collapseAllAnnouncementLabel: 'Collapse All clicked',
+        collapseAllAnnouncementLabel: 'طي الكل الذي تم النقر فوقه',
         collapseRowButtonTitle: 'طي الصف',
         confirmBtnLabel: 'موافق',
         defaultEmptyMessage: 'لم يتم العثور على بيانات',
@@ -533,7 +533,7 @@ export default {
         editableCellNumberPlaceholder: 'أدخل القيمة',
         editableCellStringPlaceholder: 'أدخل القيمة',
         emptyCell: 'فارغ',
-        expandAllAnnouncementLabel: 'Expand All clicked',
+        expandAllAnnouncementLabel: 'توسيع الكل الذي تم النقر فوقه',
         expandRowButtonTitle: 'توسيع الصف',
         filterDialogBackToColumns: 'التنقل إلى الخلف',
         filterDialogCancelBtnLabel: 'إلغاء',
@@ -625,18 +625,18 @@ export default {
         selectSingleRow: 'لتحديد الصف، اضغط مفتاح المسافة',
         settingsDialogHeader: 'الإعدادات',
         showingBlankOfBlank: 'جارٍ إظهار {totalGrowingItemsCount} من {totalGrowingItemsCount}',
+        sortDialogAddSort: 'Add Sort Criterion',
         sortDialogCancelBtnLabel: 'إلغاء',
         sortDialogConfirmBtnLabel: 'موافق',
+        sortDialogDelete: 'Remove Sort Criterion',
         sortDialogHeader: 'ترتيب',
+        sortDialogMoveUp: 'Move Up',
+        sortDialogMoveDown: 'Move Down',
         sortDialogNotSortedLabel: '(لم يتم ترتيبه)',
         sortDialogSortByHeader: 'ترتيب حسب',
         sortDialogSortOrderAsc: 'تصاعدي',
         sortDialogSortOrderDesc: 'تنازلي',
         sortDialogSortOrderHeader: 'نوع الترتيب',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
-        sortDialogDelete: 'Remove Sort Criterion',
-        sortDialogAddSort: 'Add Sort Criterion',
         toolbarActionButtonTitle: 'الإعدادات',
         toolbarActionCancelButtonLabel: 'إلغاء',
         toolbarActionCollapseAllButtonTitle: 'طي الكل',

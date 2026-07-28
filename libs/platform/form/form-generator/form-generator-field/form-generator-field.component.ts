@@ -12,6 +12,9 @@ import {
 import { FD_FORM_FIELD } from '@fundamental-ngx/cdk/forms';
 import { FieldHintOptions, PlatformFormField } from '@fundamental-ngx/platform/shared';
 import { FORM_GROUP_CHILD_FIELD_TOKEN } from '../../form-group/constants';
+import { FormFieldErrorDescriptionDirective } from '../../form-group/form-field-error/form-field-error-description.directive';
+import { FormFieldErrorHeadingDirective } from '../../form-group/form-field-error/form-field-error-heading.directive';
+import { FormFieldErrorDirective } from '../../form-group/form-field-error/form-field-error.directive';
 import { FormFieldComponent } from '../../form-group/form-field/form-field.component';
 import { DynamicFormControl } from '../dynamic-form-control';
 import { DynamicFormControlDirective } from '../dynamic-form-control.directive';
@@ -20,7 +23,6 @@ import { DynamicFormGroup } from '../interfaces/dynamic-form-group';
 import { DynamicFormItemValidationObject } from '../interfaces/dynamic-form-item';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FdpFormGroupModule } from '../../form-group/fdp-form.module';
 
 const formFieldProvider: Provider = {
     provide: FD_FORM_FIELD,
@@ -38,7 +40,15 @@ const formGroupChildProvider: Provider = {
     providers: [formFieldProvider, formGroupChildProvider],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [FdpFormGroupModule, FormsModule, ReactiveFormsModule, DynamicFormControlDirective]
+    imports: [
+        FormFieldComponent,
+        FormFieldErrorDirective,
+        FormFieldErrorHeadingDirective,
+        FormFieldErrorDescriptionDirective,
+        FormsModule,
+        ReactiveFormsModule,
+        DynamicFormControlDirective
+    ]
 })
 export class FormGeneratorFieldComponent implements OnInit {
     /**

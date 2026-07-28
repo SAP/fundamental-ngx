@@ -1,15 +1,15 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, input, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { BarElementDirective } from './bar-element.directive';
 
 @Component({
-    template: ` <fd-bar-element #directiveElement [fullWidth]="fullWidth"> Bar Element Test </fd-bar-element> `,
+    template: ` <fd-bar-element #directiveElement [fullWidth]="fullWidth()"> Bar Element Test </fd-bar-element> `,
     imports: [BarElementDirective]
 })
 class TestComponent {
     @ViewChild('directiveElement')
     ref: ElementRef;
-    fullWidth = false;
+    readonly fullWidth = input(false);
 }
 
 describe('BarElementDirective', () => {
@@ -38,7 +38,7 @@ describe('BarElementDirective', () => {
 
     it('should take into account the fullWidth input property', () => {
         expect(component.ref.nativeElement.className).not.toContain('fd-bar__element--full-width');
-        component.fullWidth = true;
+        fixture.componentRef.setInput('fullWidth', true);
         fixture.detectChanges();
         expect(component.ref.nativeElement.className).toContain('fd-bar__element--full-width');
     });

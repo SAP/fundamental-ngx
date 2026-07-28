@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, signal } from '@angular/core';
+import { Component, ElementRef, ViewChild, input, signal } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
@@ -14,16 +14,16 @@ const langSignal = signal(FD_LANGUAGE_ENGLISH);
     template: `
         <fd-step-input
             [(value)]="value"
-            [locale]="locale"
-            [step]="step"
-            [fdCompact]="compact"
-            [state]="state"
-            [inputTitle]="inputTitle"
-            [unit]="unit"
-            [inputId]="inputId"
-            [ariaLabel]="ariaLabel"
-            [incrementButtonIcon]="incrementButtonIcon"
-            [decrementButtonIcon]="decrementButtonIcon"
+            [locale]="locale()"
+            [step]="step()"
+            [fdCompact]="compact()"
+            [state]="state()"
+            [inputTitle]="inputTitle()"
+            [unit]="unit()"
+            [inputId]="inputId()"
+            [ariaLabel]="ariaLabel()"
+            [incrementButtonIcon]="incrementButtonIcon()"
+            [decrementButtonIcon]="decrementButtonIcon()"
         >
         </fd-step-input>
     `,
@@ -43,27 +43,27 @@ class TestWrapperComponent {
     @ViewChild(StepInputComponent, { read: ElementRef, static: true })
     stepInputElement: ElementRef;
 
-    step = 1;
+    readonly step = input(1);
 
     value: number = initialValue;
 
-    compact: boolean | undefined = undefined;
+    readonly compact = input<boolean | undefined>(undefined);
 
-    unit: string | null = null;
+    readonly unit = input<string | null>(null);
 
-    state: FormStates;
+    readonly state = input<FormStates>(undefined as any);
 
-    inputId: string | null = null;
+    readonly inputId = input<string | null>(null);
 
-    ariaLabel: string | null = null;
+    readonly ariaLabel = input<string | null>(null);
 
-    locale = 'en-US';
+    readonly locale = input('en-US');
 
-    inputTitle: string | null = null;
+    readonly inputTitle = input<string | null>(null);
 
-    incrementButtonIcon: string | null = null;
+    readonly incrementButtonIcon = input<string | null>(null);
 
-    decrementButtonIcon: string | null = null;
+    readonly decrementButtonIcon = input<string | null>(null);
 }
 
 describe('StepInputComponent', () => {
@@ -181,7 +181,7 @@ describe('StepInputComponent', () => {
     });
 
     it('should display in compact mode', async () => {
-        testComponent.compact = true;
+        fixture.componentRef.setInput('compact', true);
 
         await whenStable(fixture);
 
@@ -189,7 +189,7 @@ describe('StepInputComponent', () => {
     });
 
     it('should display in selected semantic state', async () => {
-        testComponent.state = 'warning';
+        fixture.componentRef.setInput('state', 'warning');
 
         await whenStable(fixture);
 
@@ -201,7 +201,7 @@ describe('StepInputComponent', () => {
         const incrementButtonTitle = 'Inc Button Title';
         const decrementButtonTitle = 'Dec Button Title';
 
-        testComponent.inputTitle = inputTitle;
+        fixture.componentRef.setInput('inputTitle', inputTitle);
         langSignal.set({
             ...langSignal(),
             coreStepInput: { ...langSignal().coreStepInput, incrementButtonTitle, decrementButtonTitle }
@@ -218,8 +218,8 @@ describe('StepInputComponent', () => {
         const incrementButtonIcon = 'arrow-up';
         const decrementButtonIcon = 'arrow-bottom';
 
-        testComponent.incrementButtonIcon = incrementButtonIcon;
-        testComponent.decrementButtonIcon = decrementButtonIcon;
+        fixture.componentRef.setInput('incrementButtonIcon', incrementButtonIcon);
+        fixture.componentRef.setInput('decrementButtonIcon', decrementButtonIcon);
 
         await whenStable(fixture);
 
@@ -230,7 +230,7 @@ describe('StepInputComponent', () => {
     it('should display unit', async () => {
         const unit = 'kg';
 
-        testComponent.unit = unit;
+        fixture.componentRef.setInput('unit', unit);
 
         await whenStable(fixture);
 
@@ -240,7 +240,7 @@ describe('StepInputComponent', () => {
     it('should set id attribute', async () => {
         const id = 'custom-id';
 
-        testComponent.inputId = id;
+        fixture.componentRef.setInput('inputId', id);
 
         await whenStable(fixture);
 
@@ -250,7 +250,7 @@ describe('StepInputComponent', () => {
     it('should set aria-label attribute', async () => {
         const ariaLabel = 'Number of elements';
 
-        testComponent.ariaLabel = ariaLabel;
+        fixture.componentRef.setInput('ariaLabel', ariaLabel);
 
         await whenStable(fixture);
 

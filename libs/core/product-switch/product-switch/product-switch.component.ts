@@ -3,6 +3,7 @@ import {
     ChangeDetectionStrategy,
     Component,
     contentChild,
+    effect,
     input,
     model,
     output,
@@ -20,6 +21,7 @@ import {
 } from '@fundamental-ngx/core/popover';
 import { Placement } from '@fundamental-ngx/core/shared';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { Subject } from 'rxjs';
 import { ProductSwitchButtonDirective } from '../product-switch-button.directive';
 import { FD_PRODUCT_SWITCH_COMPONENT } from '../tokens';
 
@@ -80,12 +82,26 @@ export class ProductSwitchComponent {
     /** Event emitted right before the product switch is being opened. */
     readonly beforeOpen = output<void>();
 
-    /** Event emitted when the product switch open state changes. */
-    readonly isOpenChange = output<boolean>();
+    /** Emits when product switch open state changes - for backwards compatibility with programmatic subscribers. */
+    readonly isOpenChange = new Subject<boolean>();
 
     /** @hidden */
     contentDensity = signal<ContentDensityMode>(ContentDensityMode.COZY);
 
     /** @hidden */
     protected readonly customProductSwitchButton = contentChild(ProductSwitchButtonDirective);
+
+    /** @hidden */
+    constructor() {
+        let previousIsOpen = false;
+        effect(() => {
+            const openState = this.isOpen();
+
+            if (openState !== previousIsOpen) {
+                this.isOpenChange.next(openState);
+            }
+
+            previousIsOpen = openState;
+        });
+    }
 }

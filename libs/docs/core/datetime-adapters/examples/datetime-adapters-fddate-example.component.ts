@@ -11,5 +11,5 @@ import { FdDate, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
     imports: [DatePickerComponent, FormsModule]
 })
 export class DatetimeAdaptersFddateExampleComponent {
-    date = FdDate.getNow();
+    date: FdDate | null = FdDate.getNow();
 }

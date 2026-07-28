@@ -6,7 +6,7 @@
     [class.fd-shellbar__input-group]="inShellbar"
     [class.fd-input-group--control]="isControl"
     [class.is-focus]="_inputFocused$ | async"
-    [class]="_cvaControl.cvaDirective?.state ? 'is-' + _cvaControl.cvaDirective?.state : ' '"
+    [class]="_cvaControl.cvaDirective?.state ? 'is-' + _cvaControl.cvaDirective.state : ' '"
 >
     @if (placement === 'after' && !inputElement) {
         <ng-template [ngTemplateOutlet]="input"></ng-template>

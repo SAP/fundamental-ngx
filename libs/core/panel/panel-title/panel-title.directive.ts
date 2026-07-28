@@ -1,4 +1,4 @@
-import { Directive, input } from '@angular/core';
+import { booleanAttribute, Directive, input } from '@angular/core';
 
 let panelTitleUniqueId = 0;
 
@@ -14,10 +14,14 @@ let panelTitleUniqueId = 0;
     selector: '[fd-panel-title]',
     host: {
         class: 'fd-panel__title',
+        '[class.fd-panel__title--wrap]': 'wrap()',
         '[attr.id]': 'id()'
     }
 })
 export class PanelTitleDirective {
     /** Id of the host element. */
     readonly id = input('fd-panel-title-' + panelTitleUniqueId++);
+
+    /** Whether the title text wraps instead of truncating with ellipsis. Enabled by default to satisfy WCAG 1.4.10 Reflow. */
+    readonly wrap = input(true, { transform: booleanAttribute });
 }
