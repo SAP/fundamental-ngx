@@ -8,15 +8,13 @@ import {
     SeparatorComponent,
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
-import {
-    ToolbarOverflowGroupingExampleComponent,
-    ToolbarOverflowPriorityExampleComponent,
-    ToolbarSeparatorExampleComponent,
-    ToolbarSpacerExampleComponent,
-    ToolbarTitleExampleComponent,
-    ToolbarTypeExampleComponent
-} from './examples/toolbar-example.component';
 import { ToolbarOverflowExampleComponent } from './examples/toolbar-overflow-example.component';
+import { ToolbarOverflowGroupingExampleComponent } from './examples/toolbar-overflow-grouping-example.component';
+import { ToolbarOverflowPriorityExampleComponent } from './examples/toolbar-overflow-priority-example.component';
+import { ToolbarSeparatorExampleComponent } from './examples/toolbar-separator-example.component';
+import { ToolbarSpacerExampleComponent } from './examples/toolbar-spacer-example.component';
+import { ToolbarTitleExampleComponent } from './examples/toolbar-title-example.component';
+import { ToolbarTypeExampleComponent } from './examples/toolbar-type-example.component';
 
 const toolbarTypeExampleHtml = 'toolbar-type-example.component.html';
 const toolbarTitleExampleHtml = 'toolbar-title-example.component.html';

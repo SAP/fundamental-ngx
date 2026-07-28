@@ -9,15 +9,13 @@ import {
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
 import { PlatformObjectStatusClickableAndIconExampleComponent } from './examples/platform-object-status-clickable-and-icon-example.component';
-import {
-    PlatformObjectStatusExampleComponent,
-    PlatformObjectStatusInvertedTextExampleComponent,
-    PlatformObjectStatusTextExampleComponent,
-    PlatformObjectStatusTextIconExampleComponent
-} from './examples/platform-object-status-example.component';
+import { PlatformObjectStatusExampleComponent } from './examples/platform-object-status-example.component';
 import { PlatformObjectStatusGenericExampleComponent } from './examples/platform-object-status-generic-text-example.component';
+import { PlatformObjectStatusTextIconExampleComponent } from './examples/platform-object-status-icon-text-example.component';
+import { PlatformObjectStatusInvertedTextExampleComponent } from './examples/platform-object-status-inverted-example.component';
 import { PlatformObjectStatusInvertedGenericTextExampleComponent } from './examples/platform-object-status-inverted-generic-text-example.component';
 import { PlatformObjectStatusLargeExampleComponent } from './examples/platform-object-status-large-example.component';
+import { PlatformObjectStatusTextExampleComponent } from './examples/platform-object-status-text-example.component';
 
 const PlatformObjectStatusDefaultExampleScss = 'platform-object-status-example.component.scss';
 const PlatformObjectStatusDefaultExample = 'platform-object-status-example.component.html';

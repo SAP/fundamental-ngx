@@ -11,15 +11,13 @@ import {
 } from '@fundamental-ngx/docs/shared';
 import { BarCustomShellbarExampleComponent } from './examples/bar-custom-shellbar-example.component';
 import { BarDefaultExampleComponent } from './examples/bar-default-example.component';
+import { BarFloatingFooterExampleComponent } from './examples/bar-floating-footer-example.component';
+import { BarFooterExampleComponent } from './examples/bar-footer-example.component';
 import { BarHeaderExampleComponent } from './examples/bar-header-example.component';
+import { BarHeaderSubHeaderExampleComponent } from './examples/bar-header-subheader-example.component';
 import { BarPageExampleComponent } from './examples/bar-page-example.component';
 import { BarPageResponsiveExampleComponent } from './examples/bar-page-responsive-example.component';
-import {
-    BarFloatingFooterExampleComponent,
-    BarFooterExampleComponent,
-    BarHeaderSubHeaderExampleComponent,
-    BarSubHeaderExampleComponent
-} from './examples/bar-simple-examples.component';
+import { BarSubHeaderExampleComponent } from './examples/bar-subheader-example.component';
 import { BarWithTitleExampleComponent } from './examples/bar-with-title-example.component';
 
 const barCustomShellbarExampleScss = 'bar-custom-shellbar-example.component.scss';

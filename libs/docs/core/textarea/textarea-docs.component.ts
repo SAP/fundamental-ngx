@@ -9,12 +9,10 @@ import {
     SeparatorComponent,
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
-import {
-    TextareaExampleComponent,
-    TextareaInlineHelpExampleComponent,
-    TextareaStateExampleComponent
-} from './examples/textarea-examples.component';
+import { TextareaExampleComponent } from './examples/textarea-example.component';
 import { TextareaFormGroupExampleComponent } from './examples/textarea-form-group-example.component';
+import { TextareaInlineHelpExampleComponent } from './examples/textarea-inline-help-example.component';
+import { TextareaStateExampleComponent } from './examples/textarea-state-example.component';
 
 const formGroupInputScss = 'textarea-form-group-example.component.scss';
 

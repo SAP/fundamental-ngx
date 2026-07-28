@@ -9,11 +9,9 @@ import {
     SeparatorComponent,
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
-import {
-    BreadcrumbHrefExampleComponent,
-    BreadcrumbRouterLinkExampleComponent,
-    BreadcrumbSeparatorExampleComponent
-} from './examples/breadcrumb-examples.component';
+import { BreadcrumbHrefExampleComponent } from './examples/breadcrumb-href-example.component';
+import { BreadcrumbRouterLinkExampleComponent } from './examples/breadcrumb-routerlink-example.component';
+import { BreadcrumbSeparatorExampleComponent } from './examples/breadcrumb-separator-example.component';
 
 const breadcrumbHrefExample = 'breadcrumb-href-example.component.html';
 const breadcrumbRouterLinkExample = 'breadcrumb-routerlink-example.component.html';

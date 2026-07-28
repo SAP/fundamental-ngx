@@ -8,11 +8,9 @@ import {
     ExampleFile,
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
-import {
-    PlatformPageFooterExampleComponent,
-    PlatformPageFooterMultipleLineExampleComponent,
-    PlatformPageFooterWithIconExampleComponent
-} from './examples/platform-page-footer-example.component';
+import { PlatformPageFooterExampleComponent } from './examples/platform-page-footer-example.component';
+import { PlatformPageFooterMultipleLineExampleComponent } from './examples/platform-page-footer-multiple-line-example.component';
+import { PlatformPageFooterWithIconExampleComponent } from './examples/platform-page-footer-with-icon-example.component';
 
 const platformFooterExampleHtml = 'platform-page-footer-example.component.html';
 const platformFooterWithIconHtml = 'platform-page-footer-with-icon-example.component.html';

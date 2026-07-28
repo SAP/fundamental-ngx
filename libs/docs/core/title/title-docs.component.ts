@@ -9,12 +9,10 @@ import {
     getAssetFromModuleAssets,
     SeparatorComponent
 } from '@fundamental-ngx/docs/shared';
-import {
-    TitleElisionExampleComponent,
-    TitleSemanticExampleComponent,
-    TitleVisualExampleComponent,
-    TitleWrappingExampleComponent
-} from './examples/title-examples.component';
+import { TitleElisionExampleComponent } from './examples/title-elision-example.component';
+import { TitleSemanticExampleComponent } from './examples/title-semantic-example.component';
+import { TitleVisualExampleComponent } from './examples/title-visual-example.component';
+import { TitleWrappingExampleComponent } from './examples/title-wrapping-example.component';
 
 const titleSemanticHtml = 'title-semantic-example.component.html';
 const titleElisionHtml = 'title-elision-example.component.html';

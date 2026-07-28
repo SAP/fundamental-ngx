@@ -8,12 +8,10 @@ import {
     SeparatorComponent,
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
-import {
-    ObjectIdentifierBoldExampleComponent,
-    ObjectIdentifierDefaultExampleComponent,
-    ObjectIdentifierDescriptiveExampleComponent,
-    ObjectIdentifierLinkExampleComponent
-} from './examples/object-identifier-components';
+import { ObjectIdentifierBoldExampleComponent } from './examples/object-identifier-bold-example.component';
+import { ObjectIdentifierDefaultExampleComponent } from './examples/object-identifier-default-example.component';
+import { ObjectIdentifierDescriptiveExampleComponent } from './examples/object-identifier-descriptive-example.component';
+import { ObjectIdentifierLinkExampleComponent } from './examples/object-identifier-link-example.component';
 import { ObjectIdentifierTableExampleComponent } from './examples/object-identifier-table-example.component';
 
 const ObjectIdentifierDefaultExample = 'object-identifier-default-example.component.html';

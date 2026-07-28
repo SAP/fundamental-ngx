@@ -11,20 +11,18 @@ import {
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
 import { ExtendedMenuExampleComponent } from './examples/extended-menu-example.component';
+import { MenuAddonExampleComponent } from './examples/menu-addon-example.component';
 import { MenuDisabledExampleComponent } from './examples/menu-disabled-example.component';
-import {
-    MenuAddonExampleComponent,
-    MenuExampleComponent,
-    MenuSeparatorExampleComponent
-} from './examples/menu-examples.component';
+import { MenuExampleComponent } from './examples/menu-example.component';
 import { MenuMobileExampleComponent } from './examples/menu-mobile-example.component';
 import { MenuPlacementExampleComponent } from './examples/menu-placement-example.component';
 import { MenuProgrammaticExampleComponent } from './examples/menu-programmatic-example.component';
 import { MenuScrollbarExampleComponent } from './examples/menu-scrollbar-example.component';
+import { MenuSeparatorExampleComponent } from './examples/menu-separator-example.component';
 import { MenuWithSubmenuExampleComponent } from './examples/menu-with-submenu-example.component';
 
 const menuHtml = 'menu-example.component.html';
-const menuTs = 'menu-examples.component.ts';
+const menuTs = 'menu-example.component.ts';
 const menuAddonHtml = 'menu-addon-example.component.html';
 const menuAddonScss = 'menu-addon-example.component.scss';
 const menuMobileTs = 'menu-mobile-example.component.ts';

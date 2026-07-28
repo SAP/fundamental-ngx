@@ -7,15 +7,13 @@ import {
     ExampleFile,
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
-import {
-    MessagePageActionsExampleComponent,
-    MessagePageCustomIconExampleComponent,
-    MessagePageErrorExampleComponent,
-    MessagePageFilterExampleComponent,
-    MessagePageNoIconExampleComponent,
-    MessagePageNoItemsExampleComponent,
-    MessagePageSearchExampleComponent
-} from './examples/message-page-examples.component';
+import { MessagePageActionsExampleComponent } from './examples/message-page-actions-example.component';
+import { MessagePageCustomIconExampleComponent } from './examples/message-page-custom-icon-example.component';
+import { MessagePageErrorExampleComponent } from './examples/message-page-error-example.component';
+import { MessagePageFilterExampleComponent } from './examples/message-page-filter-example.component';
+import { MessagePageNoIconExampleComponent } from './examples/message-page-no-icon-example.component';
+import { MessagePageNoItemsExampleComponent } from './examples/message-page-no-items-example.component';
+import { MessagePageSearchExampleComponent } from './examples/message-page-search-example.component';
 
 const messagePageFilterExample = 'message-page-filter-example.component.html';
 const messagePageSearchExample = 'message-page-search-example.component.html';
