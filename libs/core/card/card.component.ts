@@ -58,8 +58,8 @@ let cardId = 0;
         '[attr.aria-labelledby]': 'cardTitle()?.id() || cardMediaHeading()?.id()',
         '[attr.aria-describedby]': 'ariaDescribedbyComputed()',
         '[attr.aria-label]': 'ariaLabel()',
-        '[attr.aria-selected]': 'selected()',
         '[tabindex]': 'role() === "listitem" ? 0 : -1',
+        '[attr.aria-selected]': 'role() === "listitem" ? selected() : null',
         '[attr.aria-posinset]': 'role() === "listitem" ? ariaPosinset() : null',
         '[attr.aria-setsize]': 'role() === "listitem" ? ariaSetsize() : null',
         '(keydown)': 'keydownHandler($event)'
