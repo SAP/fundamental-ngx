@@ -1,4 +1,4 @@
-import { Tree, workspaceRoot } from '@nx/devkit';
+import { workspaceRoot } from '@nx/devkit';
 import { readFileSync, writeFileSync } from 'fs';
 
 /**
@@ -116,13 +116,4 @@ export function updateFdLanguageKeyIdentifier(languageKeys: string[]): void {
     const content = generateFdLanguageKeyIdentifierContent(languageKeys);
     const filePath = `${workspaceRoot}/libs/i18n/src/lib/models/fd-language-key-identifier.ts`;
     writeFileSync(filePath, content, 'utf-8');
-}
-
-/**
- * Update fd-language-key-identifier.ts with the current list of translation keys
- * (NX Tree version - used by sync command)
- */
-export function updateTypings(tree: Tree, languageKeys: string[]): void {
-    const content = generateFdLanguageKeyIdentifierContent(languageKeys);
-    tree.write('libs/i18n/src/lib/models/fd-language-key-identifier.ts', content);
 }

@@ -112,6 +112,77 @@ function validateICUSyntax(filePath: string, entries: Map<string, string>): Vali
 }
 
 /**
+ * Validate that all keys in .properties files have SAP UI5 comment annotations
+ */
+function validatePropertiesComments(filePath: string): ValidationError[] {
+    const errors: ValidationError[] = [];
+    const content = readFileSync(filePath, 'utf-8');
+    const lines = content.split('\n');
+    const relativeFilePath = filePath.replace(`${workspaceRoot}/`, '');
+
+    for (let i = 0; i < lines.length; i++) {
+        const line = lines[i].trim();
+
+        // Skip empty lines and comments
+        if (!line || line.startsWith('#')) {
+            continue;
+        }
+
+        // This is a key=value line
+        if (line.includes('=')) {
+            const key = line.split('=')[0].trim();
+
+            // Check if the previous non-empty line is a comment
+            let commentLine = '';
+            let commentLineNum = i;
+            for (let j = i - 1; j >= 0; j--) {
+                const prevLine = lines[j].trim();
+                if (prevLine) {
+                    commentLine = prevLine;
+                    commentLineNum = j + 1;
+                    break;
+                }
+            }
+
+            // Check if we have a comment for this key
+            if (!commentLine.startsWith('#')) {
+                errors.push({
+                    file: relativeFilePath,
+                    line: i + 1,
+                    type: 'missing-comment',
+                    message: `Key "${key}" is missing a required SAP UI5 comment annotation (e.g., #XACT, #XBUT, #XMSG, etc.)`
+                });
+                continue;
+            }
+
+            // Extract comment type (e.g., XACT from #XACT: description)
+            const commentMatch = commentLine.match(/^#([A-Z]{4}):/);
+            if (!commentMatch) {
+                errors.push({
+                    file: relativeFilePath,
+                    line: commentLineNum,
+                    type: 'invalid-comment',
+                    message: `Comment for key "${key}" does not follow SAP UI5 format. Expected format: #TYPE: description (e.g., #XACT: Aria label for...)`
+                });
+                continue;
+            }
+
+            const commentType = commentMatch[1];
+            if (!VALID_COMMENT_TYPES.includes(commentType)) {
+                errors.push({
+                    file: relativeFilePath,
+                    line: commentLineNum,
+                    type: 'invalid-comment',
+                    message: `Comment for key "${key}" uses invalid type "${commentType}". Valid types: ${VALID_COMMENT_TYPES.join(', ')}`
+                });
+            }
+        }
+    }
+
+    return errors;
+}
+
+/**
  * Validate all TypeScript translation files
  */
 export async function validate(propertiesPath: string): Promise<ValidateResult> {
@@ -155,7 +226,26 @@ export async function validate(propertiesPath: string): Promise<ValidateResult> 
         console.log('ℹ️  No .properties files found, skipping security validation');
     }
 
-    // Step 2: Validate TypeScript translation files
+    // Step 2: Validate .properties files have required comments
+    console.log('📝 Validating .properties files have comments...');
+    if (propertiesFiles.length > 0) {
+        for (const propertiesFile of propertiesFiles) {
+            const commentErrors = validatePropertiesComments(propertiesFile);
+            allErrors.push(...commentErrors);
+        }
+
+        if (allErrors.length > 0) {
+            const summary = `❌ Found ${allErrors.length} comment error(s) in .properties files`;
+            return {
+                success: false,
+                errors: allErrors,
+                summary
+            };
+        }
+        console.log('✅ Properties files comment validation passed');
+    }
+
+    // Step 3: Validate TypeScript translation files
     const tsPattern = `${propertiesPath}/translations*.ts`;
     const tsFiles = fastGlobSync(tsPattern, { cwd: workspaceRoot, ignore: ['**/*.spec.ts'] });
 
@@ -322,18 +412,10 @@ function extractKeysFromTsFile(content: string): Set<string> {
             return keys;
         }
 
-        // Parse generated TypeScript (JSON.stringify + Prettier = JS object literal with single quotes)
-        // Convert to valid JSON without executing code
-        let obj: any;
-        try {
-            obj = JSON.parse(match[1]);
-        } catch {
-            // Convert JavaScript object literal to JSON
-            const jsonStr = match[1]
-                .replace(/'([^']*)'/g, '"$1"') // Single quotes → double quotes
-                .replace(/(\s*)(\w+)(\s*):/g, '$1"$2"$3:'); // Quote unquoted keys
-            obj = JSON.parse(jsonStr);
-        }
+        // Use Node's VM to safely evaluate the JavaScript object literal
+        // This handles single quotes, multi-line strings, and escaped characters correctly
+        const vm = require('vm');
+        const obj = vm.runInNewContext(`(${match[1]})`);
 
         // Recursively extract all keys
         function extractKeys(obj: any, prefix = ''): void {
@@ -368,18 +450,9 @@ function extractEntriesFromTsFile(content: string): Map<string, string> {
             return entries;
         }
 
-        // Parse generated TypeScript (JSON.stringify + Prettier = JS object literal with single quotes)
-        // Convert to valid JSON without executing code
-        let obj: any;
-        try {
-            obj = JSON.parse(match[1]);
-        } catch {
-            // Convert JavaScript object literal to JSON
-            const jsonStr = match[1]
-                .replace(/'([^']*)'/g, '"$1"') // Single quotes → double quotes
-                .replace(/(\s*)(\w+)(\s*):/g, '$1"$2"$3:'); // Quote unquoted keys
-            obj = JSON.parse(jsonStr);
-        }
+        // Use Node's VM to safely evaluate the JavaScript object literal
+        const vm = require('vm');
+        const obj = vm.runInNewContext(`(${match[1]})`);
 
         function extractEntries(obj: any, prefix = ''): void {
             for (const key in obj) {
