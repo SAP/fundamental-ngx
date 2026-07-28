@@ -1,6 +1,11 @@
 import type { ExecutorContext } from '@nx/devkit';
 import type * as CEM from '@ui5/webcomponents-tools/lib/cem/types-internal.d.ts';
-import runExecutor, { extractCemData, getPackageSuffix, pascalToKebabCase } from './executor';
+import runExecutor, {
+    extractCemData,
+    generateThemingBridgeContent,
+    getPackageSuffix,
+    pascalToKebabCase
+} from './executor';
 
 jest.mock('fs/promises', () => ({
     mkdir: jest.fn().mockResolvedValue(undefined),
@@ -347,5 +352,161 @@ describe('runExecutor', () => {
         );
         expect(rootWriteCall).toBeDefined();
         expect(rootWriteCall[1]).not.toContain("export * from './types'");
+    });
+
+    it('writes theming-bridge/index.ts on full happy path', async () => {
+        const result = await runExecutor(
+            {
+                cemFile: '@ui5/webcomponents/dist/custom-elements-internal.json',
+                packageName: '@ui5/webcomponents',
+                targetDir: '',
+                outputPath: '',
+                tsConfig: ''
+            },
+            makeContext()
+        );
+        expect(result.success).toBe(true);
+        const writeFileCalls = (fs.writeFile as jest.Mock).mock.calls.map((c: any[]) => c[0] as string);
+        expect(writeFileCalls.some((p) => /theming-bridge[/\\]index\.ts$/.test(p))).toBe(true);
+    });
+
+    it('writes theming-bridge/ng-package.json on full happy path', async () => {
+        const result = await runExecutor(
+            {
+                cemFile: '@ui5/webcomponents/dist/custom-elements-internal.json',
+                packageName: '@ui5/webcomponents',
+                targetDir: '',
+                outputPath: '',
+                tsConfig: ''
+            },
+            makeContext()
+        );
+        expect(result.success).toBe(true);
+        const writeFileCalls = (fs.writeFile as jest.Mock).mock.calls.map((c: any[]) => c[0] as string);
+        expect(writeFileCalls.some((p) => /theming-bridge[/\\]ng-package\.json$/.test(p))).toBe(true);
+    });
+
+    it('root index does not export theming-bridge', async () => {
+        const result = await runExecutor(
+            {
+                cemFile: '@ui5/webcomponents/dist/custom-elements-internal.json',
+                packageName: '@ui5/webcomponents',
+                targetDir: '',
+                outputPath: '',
+                tsConfig: ''
+            },
+            makeContext()
+        );
+        expect(result.success).toBe(true);
+        const rootWriteCall = (fs.writeFile as jest.Mock).mock.calls.find((c: any[]) =>
+            /libs\/ui5-webcomponents\/index\.ts$/.test(c[0])
+        );
+        expect(rootWriteCall).toBeDefined();
+        expect(rootWriteCall[1]).not.toContain('theming-bridge');
+    });
+
+    it('does not write theming-bridge files when skipComponents is true', async () => {
+        const result = await runExecutor(
+            {
+                cemFile: '@ui5/webcomponents/dist/custom-elements-internal.json',
+                packageName: '@ui5/webcomponents',
+                targetDir: '',
+                outputPath: '',
+                tsConfig: '',
+                skipComponents: true
+            },
+            makeContext()
+        );
+        expect(result.success).toBe(true);
+        const writeFileCalls = (fs.writeFile as jest.Mock).mock.calls.map((c: any[]) => c[0] as string);
+        expect(writeFileCalls.some((p) => p.includes('theming-bridge'))).toBe(false);
+    });
+
+    it.each([
+        ['@ui5/webcomponents', 'ui5-webcomponents-theming-service'],
+        ['@ui5/webcomponents-fiori', 'ui5-webcomponents-fiori-theming-service'],
+        ['@ui5/webcomponents-ai', 'ui5-webcomponents-ai-theming-service']
+    ])('generates correct name for %s', async (packageName, expectedName) => {
+        const templateContent = require('fs').readFileSync(
+            require('path').resolve(__dirname, 'utils/theming-service-template.tpl'),
+            'utf-8'
+        );
+        (fs.readFile as jest.Mock).mockImplementation((filePath: string) => {
+            if ((filePath as string).endsWith('.json')) {
+                return Promise.resolve(JSON.stringify(minimalCem));
+            }
+            if ((filePath as string).includes('theming-service-template')) {
+                return Promise.resolve(templateContent);
+            }
+            return Promise.resolve('/* template content */');
+        });
+        const result = await runExecutor(
+            {
+                cemFile: '@ui5/webcomponents/dist/custom-elements-internal.json',
+                packageName,
+                targetDir: '',
+                outputPath: '',
+                tsConfig: ''
+            },
+            makeContext(packageName.replace('@ui5/', ''))
+        );
+        expect(result.success).toBe(true);
+        const themingWriteCall = (fs.writeFile as jest.Mock).mock.calls.find((c: any[]) =>
+            /theming[/\\]index\.ts$/.test(c[0])
+        );
+        expect(themingWriteCall).toBeDefined();
+        expect(themingWriteCall[1]).toContain(`name = '${expectedName}'`);
+    });
+});
+
+describe('generateThemingBridgeContent', () => {
+    beforeEach(() => {
+        jest.clearAllMocks();
+        (fs.readFile as jest.Mock).mockImplementation((filePath: string) => {
+            if ((filePath as string).includes('theming-bridge-template')) {
+                return Promise.resolve(
+                    `import { EnvironmentProviders, inject, provideEnvironmentInitializer } from '@angular/core';\n` +
+                        `import { Ui5Webcomponents\${PACKAGE_SUFFIX_PLACEHOLDER}ThemingService } from '@fundamental-ngx/ui5-webcomponents\${PACKAGE_SUFFIX_LOWER_PLACEHOLDER}/theming';\n\n` +
+                        `export { Ui5Webcomponents\${PACKAGE_SUFFIX_PLACEHOLDER}ThemingService };\n\n` +
+                        `export function provideUi5Webcomponents\${FUNCTION_SUFFIX_PLACEHOLDER}(): EnvironmentProviders {\n` +
+                        `    return provideEnvironmentInitializer(() => {\n` +
+                        `        inject(Ui5Webcomponents\${PACKAGE_SUFFIX_PLACEHOLDER}ThemingService);\n` +
+                        `    });\n` +
+                        `}\n`
+                );
+            }
+            return Promise.resolve('/* template content */');
+        });
+    });
+
+    it('uses empty FUNCTION_SUFFIX for @ui5/webcomponents — gives provideUi5Webcomponents()', async () => {
+        const content = await generateThemingBridgeContent('@ui5/webcomponents');
+        expect(content).toContain('provideUi5Webcomponents()');
+        expect(content).not.toContain('provideUi5WebcomponentsMain()');
+    });
+
+    it('uses Fiori FUNCTION_SUFFIX for @ui5/webcomponents-fiori', async () => {
+        const content = await generateThemingBridgeContent('@ui5/webcomponents-fiori');
+        expect(content).toContain('provideUi5WebcomponentsFiori()');
+    });
+
+    it('uses Ai FUNCTION_SUFFIX for @ui5/webcomponents-ai', async () => {
+        const content = await generateThemingBridgeContent('@ui5/webcomponents-ai');
+        expect(content).toContain('provideUi5WebcomponentsAi()');
+    });
+
+    it('uses correct PACKAGE_SUFFIX class name for @ui5/webcomponents', async () => {
+        const content = await generateThemingBridgeContent('@ui5/webcomponents');
+        expect(content).toContain('Ui5WebcomponentsMainThemingService');
+    });
+
+    it('uses correct import path with empty lower suffix for @ui5/webcomponents', async () => {
+        const content = await generateThemingBridgeContent('@ui5/webcomponents');
+        expect(content).toContain('@fundamental-ngx/ui5-webcomponents/theming');
+    });
+
+    it('uses correct import path with -fiori suffix', async () => {
+        const content = await generateThemingBridgeContent('@ui5/webcomponents-fiori');
+        expect(content).toContain('@fundamental-ngx/ui5-webcomponents-fiori/theming');
     });
 });
