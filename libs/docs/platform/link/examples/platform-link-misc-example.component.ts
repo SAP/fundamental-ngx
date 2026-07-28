@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { PlatformLinkModule } from '@fundamental-ngx/platform/link';
 
 @Component({
-    selector: 'fdp-platform-link-misc-examples',
-    templateUrl: './platform-link-misc-examples.component.html',
+    selector: 'fdp-platform-link-misc-example',
+    templateUrl: './platform-link-misc-example.component.html',
     styles: [
         `
             .fd-docs-truncate {

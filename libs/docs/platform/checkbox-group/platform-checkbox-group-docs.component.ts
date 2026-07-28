@@ -9,7 +9,7 @@ import {
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
 import { PlatformCheckboxGroupContentCheckboxComponent } from './examples/platform-checkbox-group-content-checkbox.component';
-import { PlatformCheckboxGroupExampleComponent } from './examples/platform-checkbox-group-examples.component';
+import { PlatformCheckboxGroupExampleComponent } from './examples/platform-checkbox-group-example.component';
 import { PlatformCheckboxGroupListObjectComponent } from './examples/platform-checkbox-group-list-object.component';
 import { PlatformCheckboxGroupListComponent } from './examples/platform-checkbox-group-list.component';
 const listCheckboxGroupHtml = 'platform-checkbox-group-list.component.html';
@@ -19,7 +19,7 @@ const listObjectCheckboxGroupTs = 'platform-checkbox-group-list-object.component
 const contentCheckboxGroupHtml = 'platform-checkbox-group-content-checkbox.component.html';
 const contentCheckboxGroupTs = 'platform-checkbox-group-content-checkbox.component.ts';
 const checkboxGroupExampleHtml = 'platform-checkbox-group-example.component.html';
-const checkboxGroupExampleTs = 'platform-checkbox-group-examples.component.ts';
+const checkboxGroupExampleTs = 'platform-checkbox-group-example.component.ts';
 
 @Component({
     selector: 'app-checkbox-group',
@@ -88,7 +88,7 @@ export class PlatformCheckboxGroupDocsComponent {
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(checkboxGroupExampleTs),
-            fileName: 'platform-checkbox-group-examples',
+            fileName: 'platform-checkbox-group-example',
             component: 'PlatformCheckboxGroupExampleComponent'
         }
     ];

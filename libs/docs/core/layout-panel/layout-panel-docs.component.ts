@@ -10,7 +10,7 @@ import {
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
 import { LayoutPanelEdgeBleedExampleComponent } from './examples/layout-panel-edge-bleed-example.component';
-import { LayoutPanelExampleComponent } from './examples/layout-panel-examples.component';
+import { LayoutPanelExampleComponent } from './examples/layout-panel-example.component';
 import { LayoutPanelFooterVariationsExampleComponent } from './examples/layout-panel-footer-variations-example.component';
 import { LayoutPanelTransparentExampleComponent } from './examples/layout-panel-transparent-example.component';
 

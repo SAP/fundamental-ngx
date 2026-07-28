@@ -6,7 +6,7 @@ import { CheckboxComponent, CheckboxGroupComponent, FdpFormGroupModule } from '@
 import { SelectItem } from '@fundamental-ngx/platform/shared';
 
 @Component({
-    selector: 'fdp-platform-checkbox-group-examples',
+    selector: 'fdp-platform-checkbox-group-example',
     templateUrl: './platform-checkbox-group-example.component.html',
     imports: [FdpFormGroupModule, FormsModule, ReactiveFormsModule, CheckboxGroupComponent, CheckboxComponent, JsonPipe]
 })

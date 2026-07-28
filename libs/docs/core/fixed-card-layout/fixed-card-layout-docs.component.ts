@@ -10,17 +10,17 @@ import {
 } from '@fundamental-ngx/docs/shared';
 import { FixedCardLayoutCustomColumnWidthExampleComponent } from './examples/custom-column-width/fixed-card-layout-custom-column-width-example.component';
 import { FixedCardLayoutCustomWidthExampleComponent } from './examples/custom-width/fixed-card-layout-custom-width-example.component';
-import { FixedCardLayoutExampleComponent } from './examples/default/fixed-card-layout-examples.component';
+import { FixedCardLayoutExampleComponent } from './examples/default/fixed-card-layout-example.component';
 import { FixedCardLayoutDisabledDragExampleComponent } from './examples/disabled-drag-drop/fixed-card-layout-disabled-drag.component';
 import { FixedCardLayoutMaxColumnsExampleComponent } from './examples/max-columns/fixed-card-layout-max-columns-example.component';
-import { FixedCardLayoutMobileExampleComponent } from './examples/mobile/fixed-card-layout-mobile-examples.component';
+import { FixedCardLayoutMobileExampleComponent } from './examples/mobile/fixed-card-layout-mobile-example.component';
 
-const fixedCardLayoutTs = 'default/fixed-card-layout-examples.component.ts';
-const fixedCardLayoutH = 'default/fixed-card-layout-examples.component.html';
+const fixedCardLayoutTs = 'default/fixed-card-layout-example.component.ts';
+const fixedCardLayoutH = 'default/fixed-card-layout-example.component.html';
 const disabledDragFixedCardLayoutH = 'disabled-drag-drop/fixed-card-layout-disabled-drag.component.html';
 const disabledDragFixedCardLayoutTs = 'disabled-drag-drop/fixed-card-layout-disabled-drag.component.ts';
-const mobileFixedCardlayoutH = 'mobile/fixed-card-layout-mobile-examples.component.html';
-const mobileFixedCardlayoutTs = 'mobile/fixed-card-layout-mobile-examples.component.ts';
+const mobileFixedCardlayoutH = 'mobile/fixed-card-layout-mobile-example.component.html';
+const mobileFixedCardlayoutTs = 'mobile/fixed-card-layout-mobile-example.component.ts';
 const customColumnWidthHtml = 'custom-column-width/fixed-card-layout-custom-column-width-example.component.html';
 const customColumnWidthTs = 'custom-column-width/fixed-card-layout-custom-column-width-example.component.ts';
 const maxColumnsHtml = 'max-columns/fixed-card-layout-max-columns-example.component.html';
@@ -48,13 +48,13 @@ export class FixedCardLayoutDocsComponent {
         {
             language: 'html',
             code: getAssetFromModuleAssets(fixedCardLayoutH),
-            fileName: 'fixed-card-layout-examples'
+            fileName: 'fixed-card-layout-example'
         },
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(fixedCardLayoutTs),
             component: 'FixedCardLayoutExampleComponent',
-            fileName: 'fixed-card-layout-examples'
+            fileName: 'fixed-card-layout-example'
         }
     ];
 
@@ -76,13 +76,13 @@ export class FixedCardLayoutDocsComponent {
         {
             language: 'html',
             code: getAssetFromModuleAssets(mobileFixedCardlayoutH),
-            fileName: 'fixed-card-layout-mobile-examples'
+            fileName: 'fixed-card-layout-mobile-example'
         },
         {
             language: 'typescript',
             component: 'FixedCardLayoutMobileExampleComponent',
             code: getAssetFromModuleAssets(mobileFixedCardlayoutTs),
-            fileName: 'fixed-card-layout-mobile-examples'
+            fileName: 'fixed-card-layout-mobile-example'
         }
     ];
 

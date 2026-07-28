@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 
 const listItemsRadioGroupSrc = 'platform-radio-group-list-items-example.component.html';
-const listItemsRadioGroupSrcCode = 'platform-radio-group-list-items-examples.component.ts';
+const listItemsRadioGroupSrcCode = 'platform-radio-group-list-items-example.component.ts';
 const listRadioGroupSrc = 'platform-radio-group-list-example.component.html';
-const listRadioGroupSrcCode = 'platform-radio-group-list-examples.component.ts';
+const listRadioGroupSrcCode = 'platform-radio-group-list-example.component.ts';
 const contentRadioGroupSrc = 'platform-radio-group-content-example.component.html';
-const contentRadioGroupSrcCode = 'platform-radio-group-content-examples.component.ts';
+const contentRadioGroupSrcCode = 'platform-radio-group-content-example.component.ts';
 const disabledRadioGroupSrc = 'platform-radio-group-disabled-example.component.html';
-const disabledRadioGroupSrcCode = 'platform-radio-group-disabled-examples.component.ts';
+const disabledRadioGroupSrcCode = 'platform-radio-group-disabled-example.component.ts';
 
 import {
     CodeExampleComponent,
@@ -17,10 +17,10 @@ import {
     ExampleFile,
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
-import { PlatformRadioGroupContentExampleComponent } from './examples/platform-radio-group-content-examples.component';
-import { PlatformRadioGroupDisabledExampleComponent } from './examples/platform-radio-group-disabled-examples.component';
-import { PlatformRadioGroupListExampleComponent } from './examples/platform-radio-group-list-examples.component';
-import { PlatformRadioGroupListItemsExampleComponent } from './examples/platform-radio-group-list-items-examples.component';
+import { PlatformRadioGroupContentExampleComponent } from './examples/platform-radio-group-content-example.component';
+import { PlatformRadioGroupDisabledExampleComponent } from './examples/platform-radio-group-disabled-example.component';
+import { PlatformRadioGroupListExampleComponent } from './examples/platform-radio-group-list-example.component';
+import { PlatformRadioGroupListItemsExampleComponent } from './examples/platform-radio-group-list-items-example.component';
 
 @Component({
     selector: 'app-radio-group',
