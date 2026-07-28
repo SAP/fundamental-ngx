@@ -1,3 +1,13 @@
+## 0.64.1-rc.11 (2026-07-28)
+
+### 🩹 Fixes
+
+- **ui5:** force-construct per-package theme providers to eliminate "Theme not registered" errors ([#14396](https://github.com/SAP/fundamental-ngx/pull/14396))
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.64.1-rc.10 (2026-07-28)
 
 ### 🩹 Fixes
