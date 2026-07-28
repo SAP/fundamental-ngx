@@ -1,3 +1,13 @@
+## 0.64.1-rc.10 (2026-07-28)
+
+### 🩹 Fixes
+
+- **cdk:** complete moduleResolution bundler migration and TS project references ([#14389](https://github.com/SAP/fundamental-ngx/pull/14389))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
 ## 0.64.1-rc.9 (2026-07-27)
 
 This was a version bump only for ui5-webcomponents-fiori to align it with other projects, there were no code changes.
