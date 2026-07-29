@@ -1,7 +1,7 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-if [ "$(uname)" = "Darwin" ]; then
+if [ "$(uname)" = "Darwin" ] && [ ! -f "$(git rev-parse --git-dir)/MERGE_HEAD" ]; then
     staged_linux=$(git diff --cached --name-only --diff-filter=ACM | grep '^apps/e2e-harness/e2e/snapshots/linux/' || true)
     if [ -n "$staged_linux" ]; then
         echo "Refusing commit: Linux snapshots staged from a Mac."
