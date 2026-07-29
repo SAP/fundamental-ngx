@@ -1,3 +1,15 @@
+## 0.64.1-rc.17 (2026-07-29)
+
+### 🩹 Fixes
+
+- **core:** product switch design updates ([#14354](https://github.com/SAP/fundamental-ngx/pull/14354))
+
+### ❤️ Thank You
+
+- fundamental-bot
+- github-actions
+- Maria Dineva @MariaIDineva
+
 ## 0.64.1-rc.16 (2026-07-29)
 
 ### 🩹 Fixes
