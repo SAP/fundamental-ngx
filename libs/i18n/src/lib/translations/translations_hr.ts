@@ -114,13 +114,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Oznaka informacija'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
-    },
     coreLink: {
         emphasized: 'Naglašeno',
         subtle: 'Rafinirano'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'Odabrano',
+        listItemNotSelectedAriaLabel: 'Nije odabrano'
     },
     coreMessageStrip: {
         announcementError: 'Traka poruke o pogrešci',
@@ -369,7 +369,7 @@ export default {
         messagesTeamRemoved: 'Uklonjen je 1 tim',
         messagesUndoAction: 'Poništi',
         nextButtonAriaLabel: 'Idi na sljedeći slajd',
-        noDataFound: 'No Data Found',
+        noDataFound: 'Podaci nisu pronađeni',
         nodeActionAddApproversAfter: 'Dodaj odobravatelje poslije',
         nodeActionAddApproversBefore: 'Dodaj odobravatelje prije',
         nodeActionAddApproversParallel: 'Dodaj paralelne odobravatelje',
@@ -526,7 +526,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Odustani',
         clearFilters: 'Poništi filtre',
-        collapseAllAnnouncementLabel: 'Collapse All clicked',
+        collapseAllAnnouncementLabel: 'Sažmi sve kliknuto',
         collapseRowButtonTitle: 'Sažmi redak',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Nisu pronađeni podaci',
@@ -537,7 +537,7 @@ export default {
         editableCellNumberPlaceholder: 'Unesite vrijednost',
         editableCellStringPlaceholder: 'Unesite vrijednost',
         emptyCell: 'Prazno',
-        expandAllAnnouncementLabel: 'Expand All clicked',
+        expandAllAnnouncementLabel: 'Proširi sve kliknuto',
         expandRowButtonTitle: 'Proširi redak',
         filterDialogBackToColumns: 'Navigiraj natrag',
         filterDialogCancelBtnLabel: 'Otkaži',

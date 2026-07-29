@@ -8,14 +8,16 @@ import { GenerateExecutorSchema } from './schema';
 const SUBDIRS = {
     TYPES: 'types',
     UTILS: 'utils',
-    THEMING: 'theming'
+    THEMING: 'theming',
+    THEMING_BRIDGE: 'theming-bridge'
 };
 
 const FILES = {
     INDEX_TS: 'index.ts',
     NG_PACKAGE_JSON: 'ng-package.json',
     CVA_TS: 'cva.ts',
-    THEMING_TEMPLATE: 'utils/theming-service-template.tpl'
+    THEMING_TEMPLATE: 'utils/theming-service-template.tpl',
+    THEMING_BRIDGE_TEMPLATE: 'utils/theming-bridge-template.tpl'
 };
 
 const WEB_COMPONENTS_BASE = 'ui5-webcomponents-base';
@@ -174,8 +176,39 @@ async function generateThemingFiles(packageName: string, targetDir: string): Pro
     await writeFile(ngPackagePath, JSON.stringify({ lib: { entryFile: './index.ts' } }, null, 2), 'utf-8');
 }
 
+/** @internal Returns the function-name suffix — empty for Main (base package), class suffix for all others. */
+export function getFunctionSuffix(packageName: string): string {
+    const suffix = getPackageSuffix(packageName);
+    return suffix === 'Main' ? '' : suffix;
+}
+
+/** Loads the theming-bridge template and injects all three placeholders. */
+export async function generateThemingBridgeContent(packageName: string): Promise<string> {
+    const templatePath = path.resolve(__dirname, FILES.THEMING_BRIDGE_TEMPLATE);
+    const content = await readFile(templatePath, 'utf-8');
+    const suffix = getPackageSuffix(packageName);
+    const suffixLower = suffix === 'Main' ? '' : '-' + suffix.toLowerCase();
+    const functionSuffix = getFunctionSuffix(packageName);
+    return content
+        .replace(/\${PACKAGE_SUFFIX_LOWER_PLACEHOLDER}/g, suffixLower)
+        .replace(/\${PACKAGE_SUFFIX_PLACEHOLDER}/g, suffix)
+        .replace(/\${FUNCTION_SUFFIX_PLACEHOLDER}/g, functionSuffix);
+}
+
 /**
- * Generates all individual component wrapper files.
+ * Generates the theming-bridge secondary entrypoint (index.ts + ng-package.json).
+ */
+async function generateThemingBridgeFiles(packageName: string, targetDir: string): Promise<void> {
+    const content = await generateThemingBridgeContent(packageName);
+
+    const indexPath = path.join(targetDir, SUBDIRS.THEMING_BRIDGE, FILES.INDEX_TS);
+    await ensureDirAndWriteFile(indexPath, content);
+
+    const ngPackagePath = path.join(targetDir, SUBDIRS.THEMING_BRIDGE, FILES.NG_PACKAGE_JSON);
+    await writeFile(ngPackagePath, JSON.stringify({ lib: { entryFile: './index.ts' } }, null, 2), 'utf-8');
+}
+
+/**
  */
 async function generateComponentFiles(
     componentDeclarations: { declaration: CEM.CustomElementDeclaration; modulePath: string }[],
@@ -287,6 +320,9 @@ const runExecutor: PromiseExecutor<GenerateExecutorSchema> = async (options, con
         if (options.skipComponents !== true) {
             // Generate Theming
             await generateThemingFiles(packageName, targetDir);
+
+            // Generate Theming Bridge secondary entrypoint
+            await generateThemingBridgeFiles(packageName, targetDir);
 
             // Generate CVA Utility and Utils secondary entry point
             await generateCvaFile(targetDir);

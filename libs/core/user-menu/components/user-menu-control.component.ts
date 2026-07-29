@@ -1,12 +1,4 @@
-import {
-    ChangeDetectionStrategy,
-    Component,
-    ElementRef,
-    EventEmitter,
-    HostListener,
-    Output,
-    ViewEncapsulation
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: 'fd-user-menu-control',
@@ -14,12 +6,14 @@ import {
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        tabindex: '0'
+        tabindex: '0',
+        '(click)': 'onClick()',
+        '(keydown)': 'onKeydown($event)'
     },
     imports: []
 })
 export class UserMenuControlComponent {
-    /** Event emitted event when control element is clicked */
+    /** Event emitted when control element is clicked */
     @Output()
     clicked: EventEmitter<void> = new EventEmitter<void>();
 
@@ -27,9 +21,22 @@ export class UserMenuControlComponent {
     constructor(private el: ElementRef<HTMLElement>) {}
 
     /** @hidden */
-    @HostListener('click')
     onClick(): void {
         this.clicked.emit();
+    }
+
+    /**
+     * Handles keyboard activation (Enter or Space).
+     * Prevents default to avoid scrolling on Space.
+     * Emits clicked event for mobile mode; in popover mode, the event
+     * bubbles to the popover component which handles the toggle.
+     * @hidden
+     */
+    onKeydown(event: KeyboardEvent): void {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            this.clicked.emit();
+        }
     }
 
     /** @hidden */

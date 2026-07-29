@@ -113,13 +113,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'תווית מידע'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
-    },
     coreLink: {
         emphasized: 'מודגש',
         subtle: 'עדין'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'נבחר',
+        listItemNotSelectedAriaLabel: 'לא נבחר'
     },
     coreMessageStrip: {
         announcementError: 'רצועת הודעות שגיאה',
@@ -367,7 +367,7 @@ export default {
         messagesTeamRemoved: 'צוות אחד הוסר',
         messagesUndoAction: 'בטל',
         nextButtonAriaLabel: 'עבור לשקופית הבאה',
-        noDataFound: 'No Data Found',
+        noDataFound: 'לא נמצאו נתונים',
         nodeActionAddApproversAfter: 'הוסף מאשרים לאחר',
         nodeActionAddApproversBefore: 'הוסף מאשרים לפני',
         nodeActionAddApproversParallel: 'הוסף מאשרים מקבילים',
@@ -524,7 +524,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'בטל',
         clearFilters: 'נקה מסננים',
-        collapseAllAnnouncementLabel: 'Collapse All clicked',
+        collapseAllAnnouncementLabel: "'צמצם הכול' נלחץ",
         collapseRowButtonTitle: 'צמצם שורה',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'לא נמצאו נתונים',
@@ -535,7 +535,7 @@ export default {
         editableCellNumberPlaceholder: 'הזן ערך',
         editableCellStringPlaceholder: 'הזן ערך',
         emptyCell: 'ריק',
-        expandAllAnnouncementLabel: 'Expand All clicked',
+        expandAllAnnouncementLabel: "'הרחב הכול' נלחץ",
         expandRowButtonTitle: 'הרחב שורה',
         filterDialogBackToColumns: 'נווט חזרה',
         filterDialogCancelBtnLabel: 'בטל',

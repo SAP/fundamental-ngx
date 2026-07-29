@@ -39,10 +39,10 @@ jobs:
               with:
                   node-version: ${{ env.NODE_VERSION }}
 
-            - name: Test - Run transform-translations
+            - name: Test - Run i18n-manage sync
               run: |
-                  echo "Testing transform-translations executor..."
-                  npx nx run i18n:transform-translations
+                  echo "Testing i18n-manage sync executor..."
+                  npx nx run i18n:i18n-manage --command=sync
 
             - name: Test - Check git status
               run: |
@@ -109,7 +109,7 @@ jobs:
                   echo "✅ All test checks passed" >> $GITHUB_STEP_SUMMARY
                   echo "" >> $GITHUB_STEP_SUMMARY
                   echo "### Validated:" >> $GITHUB_STEP_SUMMARY
-                  echo "- ✅ transform-translations executor runs successfully" >> $GITHUB_STEP_SUMMARY
+                  echo "- ✅ i18n-manage executor runs successfully" >> $GITHUB_STEP_SUMMARY
                   echo "- ✅ Git change detection works" >> $GITHUB_STEP_SUMMARY
                   echo "- ✅ Required .properties files exist" >> $GITHUB_STEP_SUMMARY
                   echo "- ✅ Generated .ts files exist" >> $GITHUB_STEP_SUMMARY

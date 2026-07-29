@@ -114,13 +114,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Info-Label'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
-    },
     coreLink: {
         emphasized: 'Hervorgehoben',
         subtle: 'Subtil'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'Ausgewählt',
+        listItemNotSelectedAriaLabel: 'Nicht ausgewählt'
     },
     coreMessageStrip: {
         announcementError: 'Fehlermeldungsleiste',
@@ -370,7 +370,7 @@ export default {
         messagesTeamRemoved: '1 Team wurde entfernt',
         messagesUndoAction: 'Rückgängig',
         nextButtonAriaLabel: 'Zur nächsten Folie',
-        noDataFound: 'No Data Found',
+        noDataFound: 'Keine Daten gefunden',
         nodeActionAddApproversAfter: 'Genehmiger hinzufügen nach',
         nodeActionAddApproversBefore: 'Genehmiger hinzufügen vor',
         nodeActionAddApproversParallel: 'Parallele Genehmiger hinzufügen',
@@ -527,7 +527,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Abbrechen',
         clearFilters: 'Filter zurücksetzen',
-        collapseAllAnnouncementLabel: 'Collapse All clicked',
+        collapseAllAnnouncementLabel: 'Auf "Alle komprimieren" geklickt',
         collapseRowButtonTitle: 'Zeile komprimieren',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Keine Daten gefunden',
@@ -538,7 +538,7 @@ export default {
         editableCellNumberPlaceholder: 'Wert eingeben',
         editableCellStringPlaceholder: 'Wert eingeben',
         emptyCell: 'Leer',
-        expandAllAnnouncementLabel: 'Expand All clicked',
+        expandAllAnnouncementLabel: 'Auf "Alle erweitern" geklickt',
         expandRowButtonTitle: 'Zeile erweitern',
         filterDialogBackToColumns: 'Zurück navigieren',
         filterDialogCancelBtnLabel: 'Abbrechen',

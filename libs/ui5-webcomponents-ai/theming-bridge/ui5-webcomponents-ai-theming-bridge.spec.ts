@@ -1,0 +1,79 @@
+import { TestBed } from '@angular/core/testing';
+import { BehaviorSubject } from 'rxjs';
+import { ThemingService } from '@fundamental-ngx/core/theming';
+import { Ui5ThemingBridgeService } from '@fundamental-ngx/ui5-webcomponents-base/theming-bridge';
+import { Ui5ThemingService, Ui5WebcomponentsThemingService } from '@fundamental-ngx/ui5-webcomponents-base/theming';
+import { Ui5WebcomponentsAiThemingService, provideUi5WebcomponentsAi } from './index';
+
+const mockSetTheme = jest.fn();
+jest.mock('@ui5/webcomponents-base/dist/config/Theme.js', () => ({
+    setTheme: (...args: unknown[]) => mockSetTheme(...args)
+}));
+
+jest.mock('@ui5/webcomponents-theming/dist/generated/json-imports/Themes.js', () => ({}));
+jest.mock('@ui5/webcomponents-ai/dist/generated/json-imports/Themes.js', () => ({}));
+
+async function flushAsyncEffects(rounds = 4): Promise<void> {
+    for (let i = 0; i < rounds; i++) {
+        TestBed.flushEffects();
+        await new Promise<void>((resolve) => setTimeout(resolve, 0));
+    }
+}
+
+describe('provideUi5WebcomponentsAi', () => {
+    afterEach(() => {
+        mockSetTheme.mockClear();
+        TestBed.resetTestingModule();
+    });
+
+    it('should be exported from the theming-bridge entry point', () => {
+        expect(provideUi5WebcomponentsAi).toBeDefined();
+        expect(typeof provideUi5WebcomponentsAi).toBe('function');
+    });
+
+    it('should force-construct Ui5WebcomponentsAiThemingService', () => {
+        TestBed.configureTestingModule({
+            providers: [provideUi5WebcomponentsAi()]
+        });
+
+        const service = TestBed.inject(Ui5WebcomponentsAiThemingService);
+        expect(service).toBeTruthy();
+    });
+});
+
+describe('provideUi5WebcomponentsAi — integration (real Ui5ThemingService)', () => {
+    afterEach(() => {
+        mockSetTheme.mockClear();
+        TestBed.resetTestingModule();
+    });
+
+    it('should register Ui5WebcomponentsAiThemingService with Ui5ThemingService', async () => {
+        // Without provideUi5WebcomponentsAi(), the service is never constructed and availableThemes() stays empty.
+        TestBed.configureTestingModule({
+            providers: [provideUi5WebcomponentsAi()]
+        });
+
+        await flushAsyncEffects();
+
+        const ui5Theming = TestBed.inject(Ui5ThemingService);
+        expect(ui5Theming.getAvailableThemes().length).toBeGreaterThan(0);
+    });
+
+    it('should call UI5 setTheme through the full bridge chain when provideUi5WebcomponentsAi() is used', async () => {
+        // Without provideUi5WebcomponentsAi(), the effect early-returns on empty _providers and setTheme() is never called.
+        const themeSubject = new BehaviorSubject<{ id: string } | null>({ id: 'sap_horizon_dark' });
+
+        TestBed.configureTestingModule({
+            providers: [
+                { provide: ThemingService, useValue: { currentTheme: themeSubject.asObservable() } },
+                Ui5WebcomponentsThemingService,
+                provideUi5WebcomponentsAi()
+            ]
+        });
+
+        TestBed.inject(Ui5ThemingBridgeService);
+        await flushAsyncEffects();
+
+        expect(mockSetTheme).toHaveBeenCalledWith('sap_horizon_dark');
+    });
+});

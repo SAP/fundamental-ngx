@@ -67,7 +67,7 @@ There are two important things to consider:
 
 ### Local setup
 
-1. node and yarn is installed as per package.json versions
+1. Node.js and Yarn are installed as per package.json versions
 2. run `yarn` to install (`npm i` without a package.lock probably won't work)
 3. (run `yarn prepare`)
 4. check if the app works by `yarn start`
@@ -76,7 +76,7 @@ There are two important things to consider:
 
 ## Developer Certificate of Origin (DCO)
 
-Due to legal reasons, contributors will be asked to accept a DCO before they submit the first pull request to this projects, this happens in an automated fashion during the submission process. SAP uses [the standard DCO text of the Linux Foundation](https://developercertificate.org/).
+Due to legal reasons, contributors will be asked to accept a DCO before they submit the first pull request to this project. This happens in an automated fashion during the submission process. SAP uses [the standard DCO text of the Linux Foundation](https://developercertificate.org/).
 
 ## <a name="submit"></a> Submission Guidelines
 

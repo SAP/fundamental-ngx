@@ -114,13 +114,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Infoetikett'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
-    },
     coreLink: {
         emphasized: 'Uthevet',
         subtle: 'Subtil'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'Valgt',
+        listItemNotSelectedAriaLabel: 'Ikke valgt'
     },
     coreMessageStrip: {
         announcementError: 'Feilmeldingslinje',
@@ -370,7 +370,7 @@ export default {
         messagesTeamRemoved: '1 team er fjernet',
         messagesUndoAction: 'Angre',
         nextButtonAriaLabel: 'Gå til neste lysbilde',
-        noDataFound: 'No Data Found',
+        noDataFound: 'Finner ingen data',
         nodeActionAddApproversAfter: 'Legg til godkjennere etter',
         nodeActionAddApproversBefore: 'Legg til godkjennere før',
         nodeActionAddApproversParallel: 'Legg til parallelle godkjennere',
@@ -527,7 +527,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Avbryt',
         clearFilters: 'Tøm filtre',
-        collapseAllAnnouncementLabel: 'Collapse All clicked',
+        collapseAllAnnouncementLabel: 'Klikk på Komprimer alle',
         collapseRowButtonTitle: 'Komprimer rad',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Finner ingen data',
@@ -538,7 +538,7 @@ export default {
         editableCellNumberPlaceholder: 'Angi verdi',
         editableCellStringPlaceholder: 'Angi verdi',
         emptyCell: 'Tom',
-        expandAllAnnouncementLabel: 'Expand All clicked',
+        expandAllAnnouncementLabel: 'Klikk på Utvid alle',
         expandRowButtonTitle: 'Utvid rad',
         filterDialogBackToColumns: 'Naviger tilbake',
         filterDialogCancelBtnLabel: 'Avbryt',

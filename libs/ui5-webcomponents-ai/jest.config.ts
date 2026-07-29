@@ -3,6 +3,10 @@ export default {
     preset: '../../jest.preset.js',
     setupFilesAfterEnv: ['<rootDir>/test-setup.ts'],
     coverageDirectory: '../../coverage/libs/ui5-webcomponents-ai',
+    moduleNameMapper: {
+        '^@fundamental-ngx/ui5-webcomponents-base/(.*)$': '<rootDir>/../../libs/ui5-webcomponents-base/$1/index.ts',
+        '^@fundamental-ngx/ui5-webcomponents-ai/(.*)$': '<rootDir>/../ui5-webcomponents-ai/$1/index.ts'
+    },
     transform: {
         '^.+\\.(ts|mjs|js|html)$': [
             'jest-preset-angular',

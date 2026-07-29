@@ -35,13 +35,12 @@ export const appConfig: ApplicationConfig = &#123;
 
     <p><strong>Step 3:</strong> Instantiate the theming provider for each UI5 package you use:</p>
     <pre><code>// app.config.ts (continued)
-import &#123; inject, provideEnvironmentInitializer &#125; from '&#64;angular/core';
-import &#123; Ui5WebcomponentsMainThemingService &#125; from '&#64;fundamental-ngx/ui5-webcomponents/theming';
+import &#123; provideUi5Webcomponents &#125; from '&#64;fundamental-ngx/ui5-webcomponents/theming-bridge';
 
 export const appConfig: ApplicationConfig = &#123;
   providers: [
     // ... steps 1-2 above ...
-    provideEnvironmentInitializer(() =&gt; inject(Ui5WebcomponentsMainThemingService)),
+    provideUi5Webcomponents(),
   ]
 &#125;;</code></pre>
     <p>
@@ -61,15 +60,15 @@ export const appConfig: ApplicationConfig = &#123;
 <fd-docs-section-title id="multiple-packages" componentName="theming"> Multiple UI5 packages </fd-docs-section-title>
 <description>
     <p>If your app uses components from multiple UI5 packages, instantiate a provider for each one:</p>
-    <pre><code>import &#123; Ui5WebcomponentsMainThemingService &#125; from '&#64;fundamental-ngx/ui5-webcomponents/theming';
-import &#123; Ui5WebcomponentsFioriThemingService &#125; from '&#64;fundamental-ngx/ui5-webcomponents-fiori/theming';
-import &#123; Ui5WebcomponentsAiThemingService &#125; from '&#64;fundamental-ngx/ui5-webcomponents-ai/theming';
+    <pre><code>import &#123; provideUi5Webcomponents &#125; from '&#64;fundamental-ngx/ui5-webcomponents/theming-bridge';
+import &#123; provideUi5WebcomponentsFiori &#125; from '&#64;fundamental-ngx/ui5-webcomponents-fiori/theming-bridge';
+import &#123; provideUi5WebcomponentsAi &#125; from '&#64;fundamental-ngx/ui5-webcomponents-ai/theming-bridge';
 
 providers: [
   provideUi5ThemingBridge(),
-  provideEnvironmentInitializer(() =&gt; inject(Ui5WebcomponentsMainThemingService)),
-  provideEnvironmentInitializer(() =&gt; inject(Ui5WebcomponentsFioriThemingService)),
-  provideEnvironmentInitializer(() =&gt; inject(Ui5WebcomponentsAiThemingService)),
+  provideUi5Webcomponents(),
+  provideUi5WebcomponentsFiori(),
+  provideUi5WebcomponentsAi(),
 ]</code></pre>
     <p>
         Only include the packages you actually use — each provider lazily imports its own theme JSON, so unused

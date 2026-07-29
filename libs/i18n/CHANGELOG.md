@@ -1,3 +1,83 @@
+## 0.64.1-rc.14 (2026-07-29)
+
+### 🩹 Fixes
+
+- skip linux snapshot check in merge commits ([#14414](https://github.com/SAP/fundamental-ngx/pull/14414))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
+## 0.64.1-rc.13 (2026-07-28)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.64.1-rc.12 (2026-07-28)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.64.1-rc.11 (2026-07-28)
+
+### 🩹 Fixes
+
+- **ui5:** force-construct per-package theme providers to eliminate "Theme not registered" errors ([#14396](https://github.com/SAP/fundamental-ngx/pull/14396))
+
+### ❤️ Thank You
+
+- deno
+
+## 0.64.1-rc.10 (2026-07-28)
+
+### 🩹 Fixes
+
+- **cdk:** complete moduleResolution bundler migration and TS project references ([#14389](https://github.com/SAP/fundamental-ngx/pull/14389))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
+## 0.64.1-rc.9 (2026-07-27)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.64.1-rc.8 (2026-07-27)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.64.1-rc.7 (2026-07-27)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.64.1-rc.6 (2026-07-27)
+
+### 🩹 Fixes
+
+- **core,platform,cdk:** remove extendedDiagnostics suppressions, retire `$safeNavigationMigration` and fix all violations ([#14393](https://github.com/SAP/fundamental-ngx/pull/14393), [#14334](https://github.com/SAP/fundamental-ngx/issues/14334))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
+## 0.64.1-rc.5 (2026-07-24)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.64.1-rc.3 (2026-07-24)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.64.1-rc.2 (2026-07-23)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.64.1-rc.1 (2026-07-23)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.64.1-rc.0 (2026-07-23)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
 ## 0.64.0 (2026-07-20)
 
 ### 🩹 Fixes

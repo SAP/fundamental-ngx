@@ -58,8 +58,8 @@ export const CUSTOM_FD_DATETIME_FORMATS: DateTimeFormats = {
         <br />
         <fd-date-picker placeholder="mm/dd/yy to mm/dd/yy" type="range" [(ngModel)]="selectedRange"></fd-date-picker>
         <br />
-        <div>Selected First Date: {{ $safeNavigationMigration(selectedRange?.start) | dateFormat }}</div>
-        <div>Selected Last Date: {{ $safeNavigationMigration(selectedRange?.end) | dateFormat }}</div>
+        <div>Selected First Date: {{ selectedRange?.start | dateFormat }}</div>
+        <div>Selected Last Date: {{ selectedRange?.end | dateFormat }}</div>
 
         <br />
         <fd-date-picker

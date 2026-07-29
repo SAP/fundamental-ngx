@@ -1,27 +1,14 @@
 {
     "extends": "./tsconfig.json",
     "compilerOptions": {
-        "outDir": "../../dist/out-tsc",
+        "outDir": "../../dist/out-tsc/cdk",
         "target": "es2023",
         "declaration": true,
         "declarationMap": true,
         "types": [],
         "lib": ["dom", "es2023"],
         "useDefineForClassFields": false,
-        "moduleResolution": "bundler",
-        "rootDir": "../../"
-    },
-    "angularCompilerOptions": {
-        "skipTemplateCodegen": true,
-        // TODO(#14334): suppress Angular 22 optionalChainNotNullable and nullishCoalescingNotNullable diagnostics
-        "extendedDiagnostics": {
-            "checks": {
-                "nullishCoalescingNotNullable": "suppress",
-                "optionalChainNotNullable": "suppress"
-            }
-        },
-        "strictMetadataEmit": true,
-        "enableResourceInlining": true
+        "moduleResolution": "bundler"
     },
     "files": ["./index.ts"],
     "exclude": ["test.ts", "**/*.spec.ts", "jest.config.ts"],

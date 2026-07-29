@@ -1,7 +1,7 @@
 <div
     class="fd-table__text--no-wrap"
     [class]="{ 'fd-table__inner': hasSorting$() || hasFilter$() }"
-    [ngStyle]="{ 'justify-content': $safeNavigationMigration(column?.align), gap: column?.align ? '0.5rem' : '' }"
+    [ngStyle]="{ 'justify-content': column?.align, gap: column?.align ? '0.5rem' : '' }"
 >
     <ng-template
         [ngTemplateOutlet]="tableHeaderCellContentTemplate"
@@ -30,8 +30,8 @@
             [ngTemplateOutletContext]="{ $implicit: column }"
         ></ng-template>
     } @else {
-        <span [id]="id + '-header-cell-' + $safeNavigationMigration(column?.name)" class="fd-table__cell--truncate-txt">
-            {{ $safeNavigationMigration(column?.labelValueChanges$) | async }}
+        <span [id]="id + '-header-cell-' + column?.name" class="fd-table__cell--truncate-txt">
+            {{ column?.labelValueChanges$ | async }}
         </span>
     }
 </ng-template>

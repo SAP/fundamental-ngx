@@ -113,13 +113,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Informační označení'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
-    },
     coreLink: {
         emphasized: 'Zvýrazněno',
         subtle: 'Jemné'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'Vybráno',
+        listItemNotSelectedAriaLabel: 'Nevybráno'
     },
     coreMessageStrip: {
         announcementError: 'Pruh chybových zpráv',
@@ -368,7 +368,7 @@ export default {
         messagesTeamRemoved: 'Byl odebrán 1 tým',
         messagesUndoAction: 'Vrátit',
         nextButtonAriaLabel: 'Přejít na další snímek',
-        noDataFound: 'No Data Found',
+        noDataFound: 'Nebyla nalezena žádná data',
         nodeActionAddApproversAfter: 'Přidat schvalovatele za',
         nodeActionAddApproversBefore: 'Přidat schvalovatele před',
         nodeActionAddApproversParallel: 'Přidat paralelní schvalovatele',
@@ -525,7 +525,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Zrušit',
         clearFilters: 'Vymazat filtry',
-        collapseAllAnnouncementLabel: 'Collapse All clicked',
+        collapseAllAnnouncementLabel: 'Bylo kliknuto na možnost Sbalit vše',
         collapseRowButtonTitle: 'Sbalit řádek',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Nebyla nalezena data',
@@ -536,7 +536,7 @@ export default {
         editableCellNumberPlaceholder: 'Zadat hodnotu',
         editableCellStringPlaceholder: 'Zadat hodnotu',
         emptyCell: 'Prázdné',
-        expandAllAnnouncementLabel: 'Expand All clicked',
+        expandAllAnnouncementLabel: 'Bylo kliknuto na možnost Rozbalit vše',
         expandRowButtonTitle: 'Rozbalit řádek',
         filterDialogBackToColumns: 'Přejít zpět',
         filterDialogCancelBtnLabel: 'Zrušit',

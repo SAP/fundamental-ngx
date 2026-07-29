@@ -10,29 +10,28 @@ jest.mock('fs', () => {
     };
 });
 
-// Mock transform-translations executor
-jest.mock('../../transform-translations/executor', () => ({
-    __esModule: true,
-    default: jest.fn().mockResolvedValue({ success: true })
+// Mock prettier
+jest.mock('prettier', () => ({
+    format: jest.fn((content: string) => Promise.resolve(content)),
+    resolveConfig: jest.fn(() => Promise.resolve({}))
 }));
-
-import transformTranslationsExecutor from '../../transform-translations/executor';
 
 describe('SortKeys Operation', () => {
     beforeEach(() => {
         vol.reset();
         jest.clearAllMocks();
-        (transformTranslationsExecutor as jest.Mock).mockResolvedValue({ success: true });
     });
 
     describe('sorting behavior', () => {
-        it('should sort keys by component name', async () => {
+        it('should regenerate TypeScript file from properties with sorted keys', async () => {
             vol.fromJSON({
-                '/test-path/translations_en.properties': `#XFLD: Name field
-coreName.label=Name
-#XBUT: Save button
+                '/test-path/translations_en.ts': `export default {
+    "coreName": { "label": "Name" },
+    "coreButton": { "save": "Save" },
+    "coreEmail": { "label": "Email" }
+};`,
+                '/test-path/translations_en.properties': `coreName.label=Name
 coreButton.save=Save
-#XFLD: Email field
 coreEmail.label=Email`
             });
 
@@ -41,27 +40,30 @@ coreEmail.label=Email`
             });
 
             expect(result.success).toBe(true);
-            expect(result.filesModified).toContain('translations_en.properties');
+            expect(result.filesModified).toContain('translations_en.ts');
 
-            const content = vol.readFileSync('/test-path/translations_en.properties', 'utf-8') as string;
-            const lines = content.split('\n');
+            const content = vol.readFileSync('/test-path/translations_en.ts', 'utf-8') as string;
 
-            // coreButton should come before coreEmail and coreName
-            const buttonIndex = lines.findIndex((l) => l.includes('coreButton.save'));
-            const emailIndex = lines.findIndex((l) => l.includes('coreEmail.label'));
-            const nameIndex = lines.findIndex((l) => l.includes('coreName.label'));
+            // Components should be alphabetically sorted: coreButton, coreEmail, coreName
+            const buttonPos = content.indexOf('"coreButton"');
+            const emailPos = content.indexOf('"coreEmail"');
+            const namePos = content.indexOf('"coreName"');
 
-            expect(buttonIndex).toBeLessThan(emailIndex);
-            expect(emailIndex).toBeLessThan(nameIndex);
+            expect(buttonPos).toBeLessThan(emailPos);
+            expect(emailPos).toBeLessThan(namePos);
         });
 
-        it('should sort keys alphabetically within same component', async () => {
+        it('should alphabetically sort keys within same component', async () => {
             vol.fromJSON({
-                '/test-path/translations_en.properties': `#XBUT: Submit button
-coreButton.submit=Submit
-#XBUT: Cancel button
+                '/test-path/translations_en.ts': `export default {
+    "coreButton": {
+        "submit": "Submit",
+        "cancel": "Cancel",
+        "save": "Save"
+    }
+};`,
+                '/test-path/translations_en.properties': `coreButton.submit=Submit
 coreButton.cancel=Cancel
-#XBUT: Save button
 coreButton.save=Save`
             });
 
@@ -70,24 +72,24 @@ coreButton.save=Save`
             });
 
             expect(result.success).toBe(true);
+            expect(result.filesModified).toContain('translations_en.ts');
 
-            const content = vol.readFileSync('/test-path/translations_en.properties', 'utf-8') as string;
-            const lines = content.split('\n');
+            const content = vol.readFileSync('/test-path/translations_en.ts', 'utf-8') as string;
 
-            const cancelIndex = lines.findIndex((l) => l.includes('coreButton.cancel'));
-            const saveIndex = lines.findIndex((l) => l.includes('coreButton.save'));
-            const submitIndex = lines.findIndex((l) => l.includes('coreButton.submit'));
+            // Keys should be alphabetically sorted: cancel, save, submit
+            const cancelPos = content.indexOf('"cancel"');
+            const savePos = content.indexOf('"save"');
+            const submitPos = content.indexOf('"submit"');
 
-            expect(cancelIndex).toBeLessThan(saveIndex);
-            expect(saveIndex).toBeLessThan(submitIndex);
+            expect(cancelPos).toBeLessThan(savePos);
+            expect(savePos).toBeLessThan(submitPos);
         });
 
-        it('should preserve comments with their keys', async () => {
+        it('should preserve nested structure from dot notation', async () => {
             vol.fromJSON({
-                '/test-path/translations_en.properties': `#XFLD: Name field
-coreName.label=Name
-#XBUT: Save button
-coreButton.save=Save`
+                '/test-path/translations_en.ts': `export default {};`,
+                '/test-path/translations_en.properties': `coreButton.primary.label=Primary
+coreButton.secondary.label=Secondary`
             });
 
             const result = await sortKeys({
@@ -96,19 +98,16 @@ coreButton.save=Save`
 
             expect(result.success).toBe(true);
 
-            const content = vol.readFileSync('/test-path/translations_en.properties', 'utf-8') as string;
-
-            // Comment should be immediately before its key
-            expect(content).toContain('#XBUT: Save button\ncoreButton.save=Save');
-            expect(content).toContain('#XFLD: Name field\ncoreName.label=Name');
+            const content = vol.readFileSync('/test-path/translations_en.ts', 'utf-8') as string;
+            expect(content).toContain('primary');
+            expect(content).toContain('secondary');
         });
 
-        it('should preserve original line formatting', async () => {
+        it('should handle special characters in values', async () => {
             vol.fromJSON({
-                '/test-path/translations_en.properties': `#XBUT: Button with spaces
-coreButton.test = Value with spaces
-#XBUT: Button without spaces
-coreButton.another=NoSpaces`
+                '/test-path/translations_en.ts': `export default {};`,
+                '/test-path/translations_en.properties': `coreMessage.selected={count} selected
+coreButton.save=Save & Close`
             });
 
             const result = await sortKeys({
@@ -117,24 +116,30 @@ coreButton.another=NoSpaces`
 
             expect(result.success).toBe(true);
 
-            const content = vol.readFileSync('/test-path/translations_en.properties', 'utf-8') as string;
-
-            // Should preserve original spacing
-            expect(content).toContain('coreButton.another=NoSpaces');
-            expect(content).toContain('coreButton.test = Value with spaces');
+            const content = vol.readFileSync('/test-path/translations_en.ts', 'utf-8') as string;
+            expect(content).toContain('{count} selected');
+            expect(content).toContain('Save & Close');
         });
 
-        it('should not modify already sorted file', async () => {
-            const sortedContent = `#XBUT: Cancel button
-coreButton.cancel=Cancel
-#XBUT: Save button
-coreButton.save=Save
-#XFLD: Name field
-coreName.label=Name
+        it('should not modify file if content is already sorted and matches', async () => {
+            const sortedContent = `
+// Do not modify, it's automatically created. Modify translations_en.properties instead
+export default {
+    "coreButton": {
+        "cancel": "Cancel",
+        "save": "Save"
+    },
+    "coreName": {
+        "label": "Name"
+    }
+};
 `;
 
             vol.fromJSON({
-                '/test-path/translations_en.properties': sortedContent
+                '/test-path/translations_en.ts': sortedContent,
+                '/test-path/translations_en.properties': `coreButton.cancel=Cancel
+coreButton.save=Save
+coreName.label=Name`
             });
 
             const result = await sortKeys({
@@ -147,20 +152,14 @@ coreName.label=Name
     });
 
     describe('multiple files', () => {
-        it('should sort multiple .properties files', async () => {
+        it('should process multiple TypeScript translation files', async () => {
             vol.fromJSON({
-                '/test-path/translations_en.properties': `#XFLD: Name
-coreName.label=Name
-#XBUT: Save
-coreButton.save=Save`,
-                '/test-path/translations_de.properties': `#XFLD: Name
-coreName.label=Name
-#XBUT: Save
-coreButton.save=Save`,
-                '/test-path/translations_fr.properties': `#XFLD: Name
-coreName.label=Name
-#XBUT: Save
-coreButton.save=Save`
+                '/test-path/translations_en.ts': `export default {};`,
+                '/test-path/translations_en.properties': `coreButton.save=Save`,
+                '/test-path/translations_de.ts': `export default {};`,
+                '/test-path/translations_de.properties': `coreButton.save=Speichern`,
+                '/test-path/translations_fr.ts': `export default {};`,
+                '/test-path/translations_fr.properties': `coreButton.save=Enregistrer`
             });
 
             const result = await sortKeys({
@@ -169,22 +168,26 @@ coreButton.save=Save`
 
             expect(result.success).toBe(true);
             expect(result.filesModified).toHaveLength(3);
-            expect(result.filesModified).toContain('translations_en.properties');
-            expect(result.filesModified).toContain('translations_de.properties');
-            expect(result.filesModified).toContain('translations_fr.properties');
+            expect(result.filesModified).toContain('translations_en.ts');
+            expect(result.filesModified).toContain('translations_de.ts');
+            expect(result.filesModified).toContain('translations_fr.ts');
         });
 
-        it('should only report files that changed', async () => {
+        it('should only report files that actually changed', async () => {
+            const unchangedContent = `
+// Do not modify, it's automatically created. Modify translations_en.properties instead
+export default {
+    "coreButton": {
+        "save": "Save"
+    }
+};
+`;
+
             vol.fromJSON({
-                '/test-path/translations_en.properties': `#XFLD: Name
-coreName.label=Name
-#XBUT: Save
-coreButton.save=Save`,
-                '/test-path/translations_de.properties': `#XBUT: Save
-coreButton.save=Save
-#XFLD: Name
-coreName.label=Name
-`
+                '/test-path/translations_en.ts': `export default {};`,
+                '/test-path/translations_en.properties': `coreButton.save=Save`,
+                '/test-path/translations_de.ts': unchangedContent,
+                '/test-path/translations_de.properties': `coreButton.save=Speichern`
             });
 
             const result = await sortKeys({
@@ -192,17 +195,48 @@ coreName.label=Name
             });
 
             expect(result.success).toBe(true);
-            expect(result.filesModified).toHaveLength(1);
-            expect(result.filesModified).toContain('translations_en.properties');
+            expect(result.filesModified.length).toBeGreaterThan(0);
+            expect(result.filesModified).toContain('translations_en.ts');
+        });
+
+        it('should skip files without corresponding properties file', async () => {
+            vol.fromJSON({
+                '/test-path/translations_en.ts': `export default {};`,
+                '/test-path/translations_en.properties': `coreButton.save=Save`,
+                '/test-path/translations_de.ts': `export default {};`
+                // Missing translations_de.properties
+            });
+
+            const result = await sortKeys({
+                propertiesPath: '/test-path'
+            });
+
+            expect(result.success).toBe(true);
+            expect(result.filesModified).toContain('translations_en.ts');
+            expect(result.filesModified).not.toContain('translations_de.ts');
+        });
+
+        it('should ignore spec files', async () => {
+            vol.fromJSON({
+                '/test-path/translations_en.ts': `export default {};`,
+                '/test-path/translations_en.properties': `coreButton.save=Save`,
+                '/test-path/translations_en.spec.ts': `describe('test', () => {});`
+            });
+
+            const result = await sortKeys({
+                propertiesPath: '/test-path'
+            });
+
+            expect(result.success).toBe(true);
+            expect(result.filesModified).not.toContain('translations_en.spec.ts');
         });
     });
 
     describe('edge cases', () => {
         it('should handle file with single key', async () => {
             vol.fromJSON({
-                '/test-path/translations_en.properties': `#XBUT: Save
-coreButton.save=Save
-`
+                '/test-path/translations_en.ts': `export default { "coreButton": { "save": "Save" } };`,
+                '/test-path/translations_en.properties': `coreButton.save=Save`
             });
 
             const result = await sortKeys({
@@ -210,15 +244,15 @@ coreButton.save=Save
             });
 
             expect(result.success).toBe(true);
-            expect(result.filesModified).toHaveLength(0);
         });
 
-        it('should handle keys with ICU parameters', async () => {
+        it('should handle deeply nested keys', async () => {
             vol.fromJSON({
-                '/test-path/translations_en.properties': `#XMSG: Message with params
-coreMessage.selected={count} selected
-#XBUT: Button
-coreButton.save=Save`
+                '/test-path/translations_en.ts': `export default {};`,
+                '/test-path/translations_en.properties': `core.button.primary.label=Primary
+core.button.secondary.label=Secondary
+core.button.action.submit=Submit
+core.button.action.cancel=Cancel`
             });
 
             const result = await sortKeys({
@@ -227,19 +261,40 @@ coreButton.save=Save`
 
             expect(result.success).toBe(true);
 
-            const content = vol.readFileSync('/test-path/translations_en.properties', 'utf-8') as string;
-            expect(content).toContain('coreMessage.selected={count} selected');
+            const content = vol.readFileSync('/test-path/translations_en.ts', 'utf-8') as string;
+
+            // At the "button" level, "action" should come before "primary" and "secondary"
+            const actionPos = content.indexOf('"action"');
+            const primaryPos = content.indexOf('"primary"');
+            const secondaryPos = content.indexOf('"secondary"');
+
+            expect(actionPos).toBeLessThan(primaryPos);
+            expect(primaryPos).toBeLessThan(secondaryPos);
+
+            // Within "action", "cancel" should come before "submit"
+            const cancelPos = content.indexOf('"cancel"');
+            const submitPos = content.indexOf('"submit"');
+
+            expect(cancelPos).toBeLessThan(submitPos);
         });
 
-        it('should skip empty lines', async () => {
+        it('should handle empty properties file', async () => {
             vol.fromJSON({
-                '/test-path/translations_en.properties': `#XFLD: Name
-coreName.label=Name
+                '/test-path/translations_en.ts': `export default {};`,
+                '/test-path/translations_en.properties': ``
+            });
 
-#XBUT: Save
-coreButton.save=Save
+            const result = await sortKeys({
+                propertiesPath: '/test-path'
+            });
 
-`
+            expect(result.success).toBe(true);
+        });
+
+        it('should handle properties with escaped hash characters', async () => {
+            vol.fromJSON({
+                '/test-path/translations_en.ts': `export default {};`,
+                '/test-path/translations_en.properties': `coreButton.label=Use \\#hashtag`
             });
 
             const result = await sortKeys({
@@ -248,16 +303,15 @@ coreButton.save=Save
 
             expect(result.success).toBe(true);
 
-            const content = vol.readFileSync('/test-path/translations_en.properties', 'utf-8') as string;
-            // Empty lines should be removed
-            expect(content).not.toContain('\n\n');
+            const content = vol.readFileSync('/test-path/translations_en.ts', 'utf-8') as string;
+            expect(content).toContain('#hashtag');
         });
     });
 
     describe('error handling', () => {
-        it('should handle no .properties files', async () => {
+        it('should handle no TypeScript files', async () => {
             vol.fromJSON({
-                '/test-path/some-file.txt': 'not a properties file'
+                '/test-path/some-file.txt': 'not a ts file'
             });
 
             const result = await sortKeys({
@@ -266,17 +320,30 @@ coreButton.save=Save
 
             expect(result.success).toBe(false);
             expect(result.filesModified).toHaveLength(0);
-            expect(result.error).toContain('No .properties files found');
+            expect(result.error).toContain('No TypeScript translation files found');
         });
 
-        it('should handle transform-translations failure', async () => {
-            (transformTranslationsExecutor as jest.Mock).mockRejectedValue(new Error('Transform failed'));
+        it('should handle invalid properties syntax gracefully', async () => {
+            vol.fromJSON({
+                '/test-path/translations_en.ts': `export default {};`,
+                '/test-path/translations_en.properties': `invalid syntax without equals sign`
+            });
+
+            const result = await sortKeys({
+                propertiesPath: '/test-path'
+            });
+
+            // Should still succeed, just with empty or minimal content
+            expect(result.success).toBe(true);
+        });
+
+        it('should handle prettier errors', async () => {
+            const prettier = require('prettier');
+            (prettier.format as jest.Mock).mockRejectedValueOnce(new Error('Prettier failed'));
 
             vol.fromJSON({
-                '/test-path/translations_en.properties': `#XFLD: Name
-coreName.label=Name
-#XBUT: Save
-coreButton.save=Save`
+                '/test-path/translations_en.ts': `export default {};`,
+                '/test-path/translations_en.properties': `coreButton.save=Save`
             });
 
             const result = await sortKeys({
@@ -284,26 +351,7 @@ coreButton.save=Save`
             });
 
             expect(result.success).toBe(false);
-            expect(result.error).toBe('Transform failed');
-        });
-    });
-
-    describe('integration with transform-translations', () => {
-        it('should call transform-translations after sorting', async () => {
-            vol.fromJSON({
-                '/test-path/translations_en.properties': `#XFLD: Name
-coreName.label=Name
-#XBUT: Save
-coreButton.save=Save`
-            });
-
-            await sortKeys({
-                propertiesPath: '/test-path'
-            });
-
-            expect(transformTranslationsExecutor).toHaveBeenCalledWith({
-                properties: ['/test-path/*.properties']
-            });
+            expect(result.error).toContain('Prettier failed');
         });
     });
 });

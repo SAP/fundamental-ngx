@@ -44,8 +44,8 @@
         </ng-container>
         @if (
             treeItemDirective.treeItem?.hasDsChildren &&
-            !!treeItemDirective.treeItem?.expanded &&
-            !treeItemDirective.treeItem?.childrenLoaded
+            !!treeItemDirective.treeItem.expanded &&
+            !treeItemDirective.treeItem.childrenLoaded
         ) {
             <ng-template
                 [ngTemplateOutlet]="loadingRenderer"
@@ -53,7 +53,7 @@
             ></ng-template>
         }
         @if (treeItemDirective.treeItem?.children; as childItems) {
-            @if (childItems && childItems.length > 0 && !!treeItemDirective?.treeItem?.expanded) {
+            @if (childItems && childItems.length > 0 && !!treeItemDirective.treeItem.expanded) {
                 <div class="fd-tree">
                     @for (child of childItems; track _trackFn($index, child)) {
                         <ng-template

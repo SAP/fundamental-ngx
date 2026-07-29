@@ -114,13 +114,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Информационная метка'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
-    },
     coreLink: {
         emphasized: 'Выделенная',
         subtle: 'Незаметная'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'Выбрано',
+        listItemNotSelectedAriaLabel: 'Не выбрано'
     },
     coreMessageStrip: {
         announcementError: 'Строка сообщения об ошибке',
@@ -369,7 +369,7 @@ export default {
         messagesTeamRemoved: 'Удалена 1 группа',
         messagesUndoAction: 'Отменить',
         nextButtonAriaLabel: 'Следующий слайд',
-        noDataFound: 'No Data Found',
+        noDataFound: 'Данные не найдены',
         nodeActionAddApproversAfter: 'Добавить утверждающих после',
         nodeActionAddApproversBefore: 'Добавить утверждающих до',
         nodeActionAddApproversParallel: 'Добавить параллельных утверждающих',
@@ -526,7 +526,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Отмена',
         clearFilters: 'Очистить фильтры',
-        collapseAllAnnouncementLabel: 'Collapse All clicked',
+        collapseAllAnnouncementLabel: 'Нажата кнопка "Свернуть все"',
         collapseRowButtonTitle: 'Свернуть строку',
         confirmBtnLabel: 'ОК',
         defaultEmptyMessage: 'Данные не найдены',
@@ -537,7 +537,7 @@ export default {
         editableCellNumberPlaceholder: 'Введите значение',
         editableCellStringPlaceholder: 'Введите значение',
         emptyCell: 'Пусто',
-        expandAllAnnouncementLabel: 'Expand All clicked',
+        expandAllAnnouncementLabel: 'Нажата кнопка "Развернуть все"',
         expandRowButtonTitle: 'Развернуть строку',
         filterDialogBackToColumns: 'Перейти назад',
         filterDialogCancelBtnLabel: 'Отмена',

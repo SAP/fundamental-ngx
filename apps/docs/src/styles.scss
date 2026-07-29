@@ -492,4 +492,34 @@ fd-card {
         font-size: var(--sapFontLargeSize);
         font-weight: 400;
     }
+
+    table {
+        margin-block: 1.5rem 0;
+        border-collapse: separate;
+        border-spacing: 0;
+        width: 100%;
+        border: $doc-border;
+        overflow: hidden;
+
+        th,
+        td {
+            padding: 0.75rem 1rem;
+            border: $doc-border;
+            text-align: left;
+        }
+
+        th {
+            font-weight: 600;
+            background: color-mix(in srgb, var(--sapGroup_ContentBackground) 80%, var(--sapBackgroundColor));
+            color: var(--sapTitleColor);
+        }
+
+        tr {
+            background: var(--sapGroup_ContentBackground);
+
+            &:nth-child(2n) {
+                background: color-mix(in srgb, var(--sapGroup_ContentBackground) 92%, var(--sapBackgroundColor));
+            }
+        }
+    }
 }

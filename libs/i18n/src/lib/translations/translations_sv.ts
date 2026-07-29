@@ -113,13 +113,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Infoetikett'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
-    },
     coreLink: {
         emphasized: 'Markerad',
         subtle: 'Diskret'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'Vald',
+        listItemNotSelectedAriaLabel: 'Inte vald'
     },
     coreMessageStrip: {
         announcementError: 'Felmeddelanderad',
@@ -368,7 +368,7 @@ export default {
         messagesTeamRemoved: '1 team har tagits bort',
         messagesUndoAction: 'Ångra',
         nextButtonAriaLabel: 'Gå till nästa bild',
-        noDataFound: 'No Data Found',
+        noDataFound: 'Inga data hittades',
         nodeActionAddApproversAfter: 'Lägg till godkännare efter',
         nodeActionAddApproversBefore: 'Lägg till godkännare före',
         nodeActionAddApproversParallel: 'Lägg till parallella godkännare',
@@ -525,7 +525,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Avbryt',
         clearFilters: 'Rensa filter',
-        collapseAllAnnouncementLabel: 'Collapse All clicked',
+        collapseAllAnnouncementLabel: 'Klickat på Komprimera alla',
         collapseRowButtonTitle: 'Komprimera rad',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Inga data hittades',
@@ -536,7 +536,7 @@ export default {
         editableCellNumberPlaceholder: 'Ange värde',
         editableCellStringPlaceholder: 'Ange värde',
         emptyCell: 'Tom',
-        expandAllAnnouncementLabel: 'Expand All clicked',
+        expandAllAnnouncementLabel: 'Klickat på Expandera alla',
         expandRowButtonTitle: 'Expandera rad',
         filterDialogBackToColumns: 'Gå tillbaka',
         filterDialogCancelBtnLabel: 'Avbryt',

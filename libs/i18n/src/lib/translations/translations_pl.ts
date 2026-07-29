@@ -114,13 +114,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Etykieta informacyjna'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
-    },
     coreLink: {
         emphasized: 'Wyróżniony',
         subtle: 'Delikatny'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'Wybrane',
+        listItemNotSelectedAriaLabel: 'Niewybrane'
     },
     coreMessageStrip: {
         announcementError: 'Pasek komunikatów o błędach',
@@ -369,7 +369,7 @@ export default {
         messagesTeamRemoved: 'Usunięto 1 zespół',
         messagesUndoAction: 'Cofnij',
         nextButtonAriaLabel: 'Przejdź do następnego slajdu',
-        noDataFound: 'No Data Found',
+        noDataFound: 'Nie znaleziono danych',
         nodeActionAddApproversAfter: 'Dodaj osoby zatwierdzające po',
         nodeActionAddApproversBefore: 'Dodaj osoby zatwierdzające przed',
         nodeActionAddApproversParallel: 'Dodaj osoby zatwierdzające równolegle',
@@ -526,7 +526,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Anuluj',
         clearFilters: 'Wyczyść filtry',
-        collapseAllAnnouncementLabel: 'Collapse All clicked',
+        collapseAllAnnouncementLabel: 'Zwiń wszystkie kliknięte',
         collapseRowButtonTitle: 'Zwiń wiersz',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Nie znaleziono danych',
@@ -537,7 +537,7 @@ export default {
         editableCellNumberPlaceholder: 'Wprowadź wartość',
         editableCellStringPlaceholder: 'Wprowadź wartość',
         emptyCell: 'Puste',
-        expandAllAnnouncementLabel: 'Expand All clicked',
+        expandAllAnnouncementLabel: 'Kliknięto opcję Rozwiń wszystko',
         expandRowButtonTitle: 'Rozwiń wiersz',
         filterDialogBackToColumns: 'Przejdź wstecz',
         filterDialogCancelBtnLabel: 'Anuluj',

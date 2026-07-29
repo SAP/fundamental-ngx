@@ -85,7 +85,7 @@
         tabindex="-1"
         [mobileMode]="mobile"
         [dropdownMode]="true"
-        [hasMessage]="!!stateMessage || (!!advancedStateMessage?.hasErrors && !!advancedStateMessage?.template)"
+        [hasMessage]="!!stateMessage || (!!advancedStateMessage?.hasErrors && !!advancedStateMessage.template)"
         [attr.id]="controlId + '-list-box'"
         [style.max-height]="maxHeight || calculatedMaxHeight + 'px'"
         [style.padding-block-start.rem]="showEllipsis && stateMessage ? 2 : 0"
@@ -111,7 +111,7 @@
                 }
             </li>
         }
-        @if (advancedStateMessage?.hasErrors && advancedStateMessage?.template) {
+        @if (advancedStateMessage?.hasErrors && advancedStateMessage.template) {
             <li fd-list-message tabindex="-1" role="presentation" [type]="state || 'default'">
                 <ng-template [ngTemplateOutlet]="advancedStateMessage!.template!"></ng-template>
             </li>

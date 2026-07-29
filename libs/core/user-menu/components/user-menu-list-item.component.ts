@@ -48,6 +48,12 @@ let uniqueSubtitleId = 0;
 export class UserMenuListItemComponent implements KeyboardSupportItemInterface {
     /** @hidden Event name for child menu item state changes */
     private static readonly STATE_CHANGE_EVENT = 'fdMenuItemStateChange';
+
+    /** @hidden Event name for sibling close coordination */
+    private static readonly SIBLING_CLOSE_EVENT = 'fdMenuItemCloseSubmenu';
+
+    /** @hidden Event name for force closing nested submenus */
+    private static readonly FORCE_CLOSE_EVENT = 'fdMenuItemForceClose';
     /** Event emitter for isOpenChange event that controls the submenu popover body */
     @Output()
     readonly isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -150,13 +156,20 @@ export class UserMenuListItemComponent implements KeyboardSupportItemInterface {
     /** @hidden Cleanup function for child state listener */
     private _childStateListenerCleanup: (() => void) | null = null;
 
+    /** @hidden Cleanup function for sibling close listener */
+    private _siblingCloseListenerCleanup: (() => void) | null = null;
+
     /** @hidden Grace period in ms before closing submenu on mouseleave */
     private readonly _hoverCloseDelay = 150;
 
     constructor() {
+        afterNextRender(() => this._setupEventListeners(), { injector: this._injector });
+
         this._destroyRef.onDestroy(() => {
             this._childStateListenerCleanup?.();
             this._childStateListenerCleanup = null;
+            this._siblingCloseListenerCleanup?.();
+            this._siblingCloseListenerCleanup = null;
             this._cancelHoverCloseTimer();
         });
     }
@@ -220,13 +233,24 @@ export class UserMenuListItemComponent implements KeyboardSupportItemInterface {
 
     /** @hidden Open submenu on host mouseenter (non-mobile only) */
     onHostMouseEnter(): void {
-        if (!this.hasSubmenu() || this.mobile()) {
+        if (this.mobile()) {
             return;
         }
+
         this._cancelHoverCloseTimer();
-        const popoverInstance = this.popover();
-        if (popoverInstance && !this.isOpen()) {
-            popoverInstance.open();
+
+        // Focus this item to maintain keyboard navigation state
+        this.focus();
+
+        // Close sibling submenus at the same nesting level
+        this._closeSiblingSubmenus();
+
+        // Open this item's submenu if it has one
+        if (this.hasSubmenu()) {
+            const popoverInstance = this.popover();
+            if (popoverInstance && !this.isOpen()) {
+                popoverInstance.open();
+            }
         }
     }
 
@@ -316,6 +340,8 @@ export class UserMenuListItemComponent implements KeyboardSupportItemInterface {
         if (isOpen) {
             this._setupChildStateListener(popoverBodyEl?._elementRef.nativeElement);
         } else {
+            // When closing, also close all nested child submenus
+            this._closeAllNestedSubmenus(popoverBodyEl?._elementRef.nativeElement);
             // Reset state when closing
             this._openChildCount = 0;
             this._pendingClose = false;
@@ -404,5 +430,134 @@ export class UserMenuListItemComponent implements KeyboardSupportItemInterface {
             clearTimeout(this._hoverCloseTimer);
             this._hoverCloseTimer = null;
         }
+    }
+
+    /**
+     * Closes sibling menu items' submenus at the same nesting level.
+     * Uses custom DOM events to coordinate between siblings.
+     * Only dispatches if there are siblings that actually have submenus.
+     * @hidden
+     */
+    private _closeSiblingSubmenus(): void {
+        const thisElement = this._elementRef.nativeElement as HTMLElement;
+        const parentElement = thisElement.parentElement;
+
+        if (!parentElement) {
+            return;
+        }
+
+        // Check if any siblings have submenus before dispatching the event
+        // This prevents unnecessary closes when navigating within a submenu that has no submenu siblings
+        const siblings = Array.from(parentElement.children);
+        const hasSubmenuSiblings = siblings.some((sibling) => {
+            if (sibling === thisElement) {
+                return false;
+            }
+            // Check if this sibling has a popover (indicating a submenu)
+            return sibling.querySelector('fd-popover') !== null;
+        });
+
+        if (!hasSubmenuSiblings) {
+            // No siblings with submenus, no need to dispatch close event
+            return;
+        }
+
+        // Dispatch an event that siblings will listen for
+        const event = new CustomEvent(UserMenuListItemComponent.SIBLING_CLOSE_EVENT, {
+            detail: { sourceElement: thisElement },
+            bubbles: false // Don't bubble, only direct siblings should hear it
+        });
+        parentElement.dispatchEvent(event);
+    }
+
+    /**
+     * Recursively closes all nested child submenus within a popover body.
+     * Called when a submenu is closing to ensure all descendants are also closed.
+     * @hidden
+     */
+    private _closeAllNestedSubmenus(popoverBodyEl: HTMLElement): void {
+        if (!popoverBodyEl) {
+            return;
+        }
+
+        // Find all menu items with popovers inside this popover body
+        const childItems = popoverBodyEl.querySelectorAll('[fd-user-menu-list-item]');
+
+        childItems.forEach((itemEl: Element) => {
+            const popover = itemEl.querySelector('fd-popover');
+            if (popover) {
+                // Find the popover body of this child item
+                const childPopoverBody = popover.querySelector('fd-popover-body');
+                if (childPopoverBody) {
+                    // Recursively close any nested submenus first
+                    this._closeAllNestedSubmenus(childPopoverBody as HTMLElement);
+                }
+
+                // Close this child item's popover by dispatching a close event
+                const closeEvent = new CustomEvent(UserMenuListItemComponent.FORCE_CLOSE_EVENT, {
+                    bubbles: false
+                });
+                itemEl.dispatchEvent(closeEvent);
+            }
+        });
+    }
+
+    /**
+     * Helper method to close the popover if it's open.
+     * Reduces code duplication across event handlers.
+     * @hidden
+     */
+    private _closePopover(): void {
+        const popoverInstance = this.popover();
+        if (popoverInstance && this.isOpen()) {
+            popoverInstance.close();
+        }
+    }
+
+    /**
+     * Set up event listeners for coordinating submenu behavior.
+     * Called after next render when DOM is ready.
+     * @hidden
+     */
+    private _setupEventListeners(): void {
+        const thisElement = this._elementRef.nativeElement as HTMLElement;
+        const parentElement = thisElement.parentElement;
+
+        if (!parentElement) {
+            return;
+        }
+
+        // Listen for sibling close events from the parent
+        const handleSiblingClose = (event: Event): void => {
+            const customEvent = event as CustomEvent<{ sourceElement: HTMLElement }>;
+            const sourceElement = customEvent.detail.sourceElement;
+
+            // Ignore events from ourselves or non-siblings
+            if (sourceElement === thisElement || sourceElement.parentElement !== parentElement) {
+                return;
+            }
+
+            // Ignore if in different popover contexts
+            const thisPopoverBody = thisElement.closest('fd-popover-body');
+            const sourcePopoverBody = sourceElement.closest('fd-popover-body');
+            if (thisPopoverBody !== sourcePopoverBody) {
+                return;
+            }
+
+            this._closePopover();
+        };
+
+        // Listen for force close events (used when recursively closing nested submenus)
+        const handleForceClose = (): void => {
+            this._closePopover();
+        };
+
+        parentElement.addEventListener(UserMenuListItemComponent.SIBLING_CLOSE_EVENT, handleSiblingClose);
+        thisElement.addEventListener(UserMenuListItemComponent.FORCE_CLOSE_EVENT, handleForceClose);
+
+        this._siblingCloseListenerCleanup = () => {
+            parentElement.removeEventListener(UserMenuListItemComponent.SIBLING_CLOSE_EVENT, handleSiblingClose);
+            thisElement.removeEventListener(UserMenuListItemComponent.FORCE_CLOSE_EVENT, handleForceClose);
+        };
     }
 }

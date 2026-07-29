@@ -1,7 +1,7 @@
 // Do not modify, it's automatically created. Modify translations_nl.properties instead
 export default {
     btpNavigation: {
-        expanderAriaLabel: 'Subelementen weergeven/verbergen',
+        expanderAriaLabel: 'Subelementen uitvouwen/samenvouwen',
         moreButtonAriaLabel:
             'Geeft aanvullende navigatie-elementen weer die zijn verborgen vanwege beperkte schermruimte',
         overflowMenuAriaLabel: 'Aanvullende navigatie-elementen',
@@ -114,13 +114,13 @@ export default {
     coreInfoLabel: {
         srOnlyText: 'Infolabel'
     },
-    coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
-    },
     coreLink: {
         emphasized: 'Benadrukt',
         subtle: 'Subtiel'
+    },
+    coreList: {
+        listItemSelectedAriaLabel: 'Geselecteerd',
+        listItemNotSelectedAriaLabel: 'Niet geselecteerd'
     },
     coreMessageStrip: {
         announcementError: 'Statusbalk foutmelding',
@@ -370,7 +370,7 @@ export default {
         messagesTeamRemoved: 'Er is 1 team verwijderd',
         messagesUndoAction: 'Ongedaan maken',
         nextButtonAriaLabel: 'Naar volgende dia',
-        noDataFound: 'No Data Found',
+        noDataFound: 'Geen gegevens gevonden',
         nodeActionAddApproversAfter: 'Goedkeurders toevoegen na',
         nodeActionAddApproversBefore: 'Goedkeurders toevoegen vóór',
         nodeActionAddApproversParallel: 'Parallelle goedkeurders toevoegen',
@@ -527,7 +527,7 @@ export default {
     platformTable: {
         cancelBtnLabel: 'Annuleren',
         clearFilters: 'Filters wissen',
-        collapseAllAnnouncementLabel: 'Collapse All clicked',
+        collapseAllAnnouncementLabel: 'Alles samenvouwen waarop is geklikt',
         collapseRowButtonTitle: 'Rij samenvouwen',
         confirmBtnLabel: 'OK',
         defaultEmptyMessage: 'Geen gegevens gevonden',
@@ -538,7 +538,7 @@ export default {
         editableCellNumberPlaceholder: 'Waarde invoeren',
         editableCellStringPlaceholder: 'Waarde invoeren',
         emptyCell: 'Leeg',
-        expandAllAnnouncementLabel: 'Expand All clicked',
+        expandAllAnnouncementLabel: 'Alles uitvouwen waarop is geklikt',
         expandRowButtonTitle: 'Rij uitvouwen',
         filterDialogBackToColumns: 'Terug',
         filterDialogCancelBtnLabel: 'Annuleren',

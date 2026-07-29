@@ -5,7 +5,7 @@ Automatically generates TypeScript files when `.properties` files are modified i
 ## How It Works
 
 1. Triggers on PRs modifying `libs/i18n/src/lib/translations/*.properties`
-2. Runs `npx nx run i18n:transform-translations`
+2. Runs `npx nx run i18n:i18n-manage --command=sync`
 3. Commits generated `.ts` files back to PR as `fundamental-bot`
 4. Posts PR comment notifying about auto-generation
 
@@ -61,4 +61,4 @@ Verify workflow runs and commits `.ts` files.
 ## Related
 
 - [i18n-manage CLI](../../libs/nx-plugin/src/executors/i18n-manage/README.md)
-- [transform-translations executor](../../libs/nx-plugin/src/executors/transform-translations/)
+- [i18n-manage executor](../../libs/nx-plugin/src/executors/i18n-manage/)
