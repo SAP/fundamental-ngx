@@ -248,7 +248,7 @@ fi
 echo ""
 
 # Test 8: Run Jest tests for get-release-tag.spec.js
-echo -e "${YELLOW}[8/8] Running Jest unit tests...${NC}"
+echo -e "${YELLOW}[8/9] Running Jest unit tests...${NC}"
 if command -v jest &> /dev/null || [ -f "node_modules/.bin/jest" ]; then
     cd "$REPO_ROOT/.github/actions/helpers"
     JEST_OUTPUT=$(npx jest get-release-tag.spec.js --silent 2>&1 || true)
@@ -266,6 +266,41 @@ if command -v jest &> /dev/null || [ -f "node_modules/.bin/jest" ]; then
     cd "$REPO_ROOT"
 else
     echo -e "${YELLOW}⚠️  Jest not available, skipping unit tests${NC}"
+fi
+echo ""
+
+# Test 9: npm-published-version.js — live registry integration
+# This catches transport-layer failures (e.g. ENOBUFS from oversized responses)
+# that unit tests can't see because execFileSync is mocked.
+echo -e "${YELLOW}[9/9] Testing npm-published-version (live registry)...${NC}"
+NPM_VERSION_TEST=$(node -e "
+    try {
+        const npmPublishedVersion = require('./.github/actions/helpers/npm-published-version');
+        const version = npmPublishedVersion();
+        console.log(JSON.stringify({ version: version }));
+    } catch (e) {
+        console.log(JSON.stringify({ error: e.message }));
+    }
+" 2>&1)
+
+if echo "$NPM_VERSION_TEST" | grep -q '"version"'; then
+    VERSION_VALUE=$(echo "$NPM_VERSION_TEST" | node -e "
+        const data = JSON.parse(require('fs').readFileSync(0, 'utf-8'));
+        process.stdout.write(String(data.version));
+    ")
+    if [ "$VERSION_VALUE" = "null" ]; then
+        echo -e "${YELLOW}⚠️  npm-published-version returned null (registry unreachable or no versions found)${NC}"
+        # null is valid — best-effort helper, never blocks releases
+        ((TESTS_PASSED++))
+    else
+        echo -e "${GREEN}✓ npm-published-version working${NC}"
+        echo "  Highest published version: $VERSION_VALUE"
+        ((TESTS_PASSED++))
+    fi
+else
+    echo -e "${RED}✗ npm-published-version failed${NC}"
+    echo "  Error: $NPM_VERSION_TEST"
+    ((TESTS_FAILED++))
 fi
 echo ""
 

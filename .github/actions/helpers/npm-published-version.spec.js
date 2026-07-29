@@ -24,7 +24,7 @@ describe('npm-published-version', () => {
             const url = args.find((a) => a.startsWith('https://'));
             const match = Object.keys(distTagsByPackage).find((name) => url && url.includes(name.replace('/', '%2f')));
             if (match) {
-                return JSON.stringify({ 'dist-tags': distTagsByPackage[match] });
+                return JSON.stringify(distTagsByPackage[match]);
             }
             throw new Error(`E404 - not found: ${url}`);
         });
@@ -101,7 +101,7 @@ describe('npm-published-version', () => {
         const coreCall = mockedExecFileSync.mock.calls.find((c) => c[1].some((a) => a.includes('%2fcore')));
         expect(coreCall[0]).toBe('curl');
         expect(coreCall[1].find((a) => a.startsWith('https://'))).toBe(
-            'https://registry.npmjs.org/@fundamental-ngx%2fcore'
+            'https://registry.npmjs.org/-/package/@fundamental-ngx%2fcore/dist-tags'
         );
     });
 });
