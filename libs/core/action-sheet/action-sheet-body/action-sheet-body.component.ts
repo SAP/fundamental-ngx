@@ -41,7 +41,6 @@ let actionSheetBodyUniqueIdCounter = 0;
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [KeyboardSupportService, contentDensityObserverProviders()],
-    standalone: true,
     host: {
         '(click)': 'onClick($event)',
         '(keydown)': 'keyDownHandler($event)'

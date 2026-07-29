@@ -52,8 +52,8 @@ import { FD_NOTIFICATION, FD_NOTIFICATION_FOOTER, FD_NOTIFICATION_PARAGRAPH, FD_
         '[attr.id]': 'id',
         '[tabindex]': '0',
         '[style.width]': 'width',
-        '(keydown)': '_handleNotificationActionKeys($event)',
-        '(window:keyup)': '_closeNotificationEsc($event)'
+        '(keydown)': 'handleNotificationActionKeys($event)',
+        '(window:keyup)': 'closeNotificationEsc($event)'
     },
     providers: [
         {
@@ -191,14 +191,14 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
     }
 
     /** @hidden Listen and close notification on Escape key */
-    _closeNotificationEsc(event: KeyboardEvent): void {
+    closeNotificationEsc(event: KeyboardEvent): void {
         if (this.escKeyCloseable && KeyUtil.isKeyCode(event, ESCAPE) && this._notificationRef) {
             this._notificationRef.dismiss('escape');
         }
     }
 
     /** @hidden Calls the optional action callback when Enter or Delete/Backspace is pressed. */
-    _handleNotificationActionKeys(event: KeyboardEvent): void {
+    handleNotificationActionKeys(event: KeyboardEvent): void {
         const callbackFn = this.actionKeyHandler();
 
         if (!callbackFn || this._isEditableTarget(event.target)) {
