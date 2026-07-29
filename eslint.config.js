@@ -153,7 +153,7 @@ module.exports = pluginTs.config(
             '@nx/enforce-module-boundaries': [
                 'error',
                 {
-                    allow: ['jest.config.base'],
+                    allow: ['jest.config.base', '@fundamental-ngx/ui5-webcomponents.*/theming'],
                     depConstraints: [
                         {
                             sourceTag: 'scope:cdk',
