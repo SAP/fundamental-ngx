@@ -1,3 +1,13 @@
+## 0.64.1-rc.16 (2026-07-29)
+
+### 🩹 Fixes
+
+- **ui5:** use relative import in theming-bridge template to fix lint boundary error ([#14419](https://github.com/SAP/fundamental-ngx/pull/14419))
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.64.1-rc.14 (2026-07-29)
 
 ### 🩹 Fixes
