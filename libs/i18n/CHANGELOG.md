@@ -1,3 +1,13 @@
+## 0.64.1-rc.14 (2026-07-29)
+
+### 🩹 Fixes
+
+- skip linux snapshot check in merge commits ([#14414](https://github.com/SAP/fundamental-ngx/pull/14414))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
 ## 0.64.1-rc.13 (2026-07-28)
 
 This was a version bump only for i18n to align it with other projects, there were no code changes.
