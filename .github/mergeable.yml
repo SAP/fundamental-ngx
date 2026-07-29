@@ -24,7 +24,7 @@ mergeable:
                 - required:
                       reviewers: ['mikerodonnell89']
                 - min:
-                      count: 2
+                      count: 1
     - when: schedule.repository
       validate:
           - do: stale
