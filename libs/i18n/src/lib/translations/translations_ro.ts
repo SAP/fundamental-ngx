@@ -204,7 +204,10 @@ export default {
         totalResultsLabel: '{totalCount} rezultate'
     },
     coreProductSwitch: {
-        ariaLabel: 'Comutator produse'
+        ariaLabel: 'Comutator produse',
+        targetBlank: 'opens in a new browser tab',
+        targetParent: 'opens in the parent frame',
+        targetTop: 'opens in the full browser window'
     },
     coreRadio: {
         readOnlyDescription: 'Acest buton radio este numai pentru citire și nu poate fi modificat.'

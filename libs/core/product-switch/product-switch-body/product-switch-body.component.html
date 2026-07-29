@@ -5,57 +5,78 @@
 >
     <ul
         fd-dnd-list
+        role="menu"
         class="fd-product-switch__list"
         [items]="products"
         [gridMode]="!_isListMode()"
         (itemDropped)="_productSwitchItemsChangeHandle($event)"
     >
-        @for (product of products; track product) {
+        @for (product of products; track product; let i = $index) {
             <li
                 fd-dnd-item
                 tabindex="0"
+                role="menuitem"
                 class="fd-product-switch__item"
                 [class.selected]="product.selected"
+                [attr.aria-label]="_itemAriaLabel()(product)"
+                [attr.aria-posinset]="i + 1"
+                [attr.aria-setsize]="products.length"
                 (keydown)="_keyDownHandle($event)"
                 (click)="_itemClick(product, $event)"
                 [draggable]="!product.disabledDragAndDrop && dragAndDropEnabled"
                 [stickInPlace]="!!product.stickToPosition"
             >
-                @if (product.avatar) {
-                    <fd-avatar
-                        size="s"
-                        [glyph]="product.avatar.glyph ?? null"
-                        [label]="product.avatar.label ?? null"
-                        [circle]="!!product.avatar.circle"
-                        [image]="product.avatar.image ?? null"
-                        [contain]="!!product.avatar.contain"
-                        [transparent]="!!product.avatar.transparent"
-                        [placeholder]="!!product.avatar.placeholder"
-                        [tile]="!!product.avatar.tile"
-                        [colorAccent]="product.avatar.colorAccent"
-                        [colorIndication]="product.avatar.colorIndication"
-                        [border]="!!product.avatar.border"
-                        [alterIcon]="product.avatar.alterIcon ?? null"
-                        [backupImage]="product.avatar.backupImage ?? null"
-                        [ariaLabel]="product.avatar.ariaLabel ?? null"
+                @if (product.url) {
+                    <a
+                        class="fd-product-switch__link"
+                        [href]="product.url"
+                        [target]="product.target || '_self'"
+                        tabindex="-1"
+                        aria-hidden="true"
                     >
-                    </fd-avatar>
+                        <ng-container *ngTemplateOutlet="itemContent; context: { $implicit: product }"></ng-container>
+                    </a>
                 } @else {
-                    <fd-icon
-                        [font]="product.font || FD_DEFAULT_ICON_FONT_FAMILY"
-                        role="presentation"
-                        class="fd-product-switch__icon"
-                        [glyph]="product.icon"
-                    ></fd-icon>
+                    <ng-container *ngTemplateOutlet="itemContent; context: { $implicit: product }"></ng-container>
                 }
-
-                <div class="fd-product-switch__text">
-                    <div class="fd-product-switch__title">{{ product.title }}</div>
-                    @if (product.subtitle) {
-                        <div class="fd-product-switch__subtitle">{{ product.subtitle }}</div>
-                    }
-                </div>
             </li>
         }
     </ul>
 </div>
+
+<ng-template #itemContent let-product>
+    @if (product.avatar) {
+        <fd-avatar
+            size="s"
+            [glyph]="product.avatar.glyph ?? null"
+            [label]="product.avatar.label ?? null"
+            [circle]="!!product.avatar.circle"
+            [image]="product.avatar.image ?? null"
+            [contain]="!!product.avatar.contain"
+            [transparent]="!!product.avatar.transparent"
+            [placeholder]="!!product.avatar.placeholder"
+            [tile]="!!product.avatar.tile"
+            [colorAccent]="product.avatar.colorAccent"
+            [colorIndication]="product.avatar.colorIndication"
+            [border]="!!product.avatar.border"
+            [alterIcon]="product.avatar.alterIcon ?? null"
+            [backupImage]="product.avatar.backupImage ?? null"
+            [ariaLabel]="product.avatar.ariaLabel ?? null"
+        >
+        </fd-avatar>
+    } @else {
+        <fd-icon
+            [font]="product.font || FD_DEFAULT_ICON_FONT_FAMILY"
+            role="presentation"
+            class="fd-product-switch__icon"
+            [glyph]="product.icon"
+        ></fd-icon>
+    }
+
+    <div class="fd-product-switch__text">
+        <div class="fd-product-switch__title">{{ product.title }}</div>
+        @if (product.subtitle) {
+            <div class="fd-product-switch__subtitle">{{ product.subtitle }}</div>
+        }
+    </div>
+</ng-template>

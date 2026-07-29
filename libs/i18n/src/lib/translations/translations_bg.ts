@@ -204,7 +204,10 @@ export default {
         totalResultsLabel: '{totalCount} резултата'
     },
     coreProductSwitch: {
-        ariaLabel: 'Превключвател за продукти'
+        ariaLabel: 'Превключвател за продукти',
+        targetBlank: 'opens in a new browser tab',
+        targetParent: 'opens in the parent frame',
+        targetTop: 'opens in the full browser window'
     },
     coreRadio: {
         readOnlyDescription: 'Този радио бутон е само за четене и не може да се променя.'

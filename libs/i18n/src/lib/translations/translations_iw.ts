@@ -203,7 +203,10 @@ export default {
         totalResultsLabel: '{totalCount} תוצאות'
     },
     coreProductSwitch: {
-        ariaLabel: 'מתג מוצר'
+        ariaLabel: 'מתג מוצר',
+        targetBlank: 'opens in a new browser tab',
+        targetParent: 'opens in the parent frame',
+        targetTop: 'opens in the full browser window'
     },
     coreRadio: {
         readOnlyDescription: 'לחצן הבחירה הוא לקריאה בלבד ולא ניתן לשנות אותו.'

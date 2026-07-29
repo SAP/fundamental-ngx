@@ -204,7 +204,10 @@ export default {
         totalResultsLabel: 'Результаты: {totalCount}'
     },
     coreProductSwitch: {
-        ariaLabel: 'Переключатель продуктов'
+        ariaLabel: 'Переключатель продуктов',
+        targetBlank: 'opens in a new browser tab',
+        targetParent: 'opens in the parent frame',
+        targetTop: 'opens in the full browser window'
     },
     coreRadio: {
         readOnlyDescription: 'Эта зависимая кнопка доступна только для чтения и не может быть изменена.'

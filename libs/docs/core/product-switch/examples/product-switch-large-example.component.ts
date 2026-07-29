@@ -1,17 +1,12 @@
 import { Component } from '@angular/core';
-import {
-    ProductSwitchBodyComponent,
-    ProductSwitchComponent,
-    ProductSwitchItem
-} from '@fundamental-ngx/core/product-switch';
-import { ShellbarActionsComponent, ShellbarComponent } from '@fundamental-ngx/core/shellbar';
+import { ProductSwitchBodyComponent, ProductSwitchItem } from '@fundamental-ngx/core/product-switch';
 
 @Component({
-    selector: 'fd-product-switch-dnd-example',
-    templateUrl: './product-switch-dnd-example.component.html',
-    imports: [ShellbarComponent, ShellbarActionsComponent, ProductSwitchComponent, ProductSwitchBodyComponent]
+    selector: 'fd-product-switch-large-example',
+    templateUrl: './product-switch-large-example.component.html',
+    imports: [ProductSwitchBodyComponent]
 })
-export class ProductSwitchDndExampleComponent {
+export class ProductSwitchLargeExampleComponent {
     list: ProductSwitchItem[] = [
         {
             title: 'Home',
@@ -23,36 +18,30 @@ export class ProductSwitchDndExampleComponent {
         {
             title: 'Analytics Cloud',
             subtitle: 'Analytics Cloud',
-            icon: 'business-objects-experience',
-            url: 'https://www.sap.com/products/technology-platform/cloud-analytics.html',
-            target: '_blank'
+            icon: 'business-objects-experience'
         },
         {
             title: 'Catalog',
             subtitle: 'Ariba',
-            avatar: {
-                glyph: 'contacts',
-                colorAccent: 5,
-                ariaLabel: 'Ariba Catalog',
-                circle: true
-            }
+            icon: 'contacts'
         },
         {
             title: 'Guided Buying',
-            avatar: {
-                image: 'https://picsum.photos/id/1018/400',
-                ariaLabel: 'Guided Buying',
-                transparent: true
-            }
+            icon: 'credit-card'
         },
         {
             title: 'Strategic Procurement',
-            icon: 'cart-3',
-            url: 'https://www.sap.com/products/spend-management/strategic-sourcing.html',
-            target: '_top'
+            icon: 'cart-3'
         },
         {
-            title: 'Vendor Managemen',
+            title: 'Travel & Expense',
+            subtitle: 'Concur',
+            icon: 'travel-expense',
+            url: 'https://www.sap.com/products/travel-expense-management.html',
+            target: '_blank'
+        },
+        {
+            title: 'Vendor Management',
             subtitle: 'Fieldglass',
             icon: 'shipping-status'
         },
@@ -80,13 +69,18 @@ export class ProductSwitchDndExampleComponent {
             icon: 'family-care'
         },
         {
+            title: 'Customer Data Cloud',
+            icon: 'customer-and-contacts'
+        },
+        {
             title: 'S/4HANA',
-            icon: 'batch-payments'
+            icon: 'batch-payments',
+            url: 'https://www.sap.com/products/erp/s4hana.html',
+            target: '_parent'
         }
     ];
 
     productChangeHandle(products: ProductSwitchItem[]): void {
         this.list = products;
-        console.log(products);
     }
 }

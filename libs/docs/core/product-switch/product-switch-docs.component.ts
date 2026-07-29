@@ -10,14 +10,18 @@ import {
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
 import { ProductSwitchDndExampleComponent } from './examples/product-switch-dnd-example.component';
+import { ProductSwitchLargeExampleComponent } from './examples/product-switch-large-example.component';
 import { ProductSwitchListComponent } from './examples/product-switch-list/product-switch-list-example.component';
-import { ProductSwitchSmallExampleComponent } from './examples/product-switch-small-example.component';
-
-const smallProductSwitchH = 'product-switch-small-example.component.html';
-const smallProductSwitchTs = 'product-switch-small-example.component.ts';
+import { ProductSwitchMediumExampleComponent } from './examples/product-switch-medium-example.component';
 
 const productSwitchDndH = 'product-switch-dnd-example.component.html';
 const productSwitchDndTs = 'product-switch-dnd-example.component.ts';
+
+const largeProductSwitchH = 'product-switch-large-example.component.html';
+const largeProductSwitchTs = 'product-switch-large-example.component.ts';
+
+const mediumProductSwitchH = 'product-switch-medium-example.component.html';
+const mediumProductSwitchTs = 'product-switch-medium-example.component.ts';
 
 const listProductSwitchH = 'product-switch-list/product-switch-list-example.component.html';
 const listProductSwitchTs = 'product-switch-list/product-switch-list-example.component.ts';
@@ -30,9 +34,10 @@ const listProductSwitchTs = 'product-switch-list/product-switch-list-example.com
         DescriptionComponent,
         ComponentExampleComponent,
         ProductSwitchDndExampleComponent,
+        ProductSwitchLargeExampleComponent,
+        ProductSwitchMediumExampleComponent,
         CodeExampleComponent,
         SeparatorComponent,
-        ProductSwitchSmallExampleComponent,
         ProductSwitchListComponent
     ]
 })
@@ -51,17 +56,31 @@ export class ProductSwitchDocsComponent {
         }
     ];
 
-    productSwitchSmallExample: ExampleFile[] = [
+    productSwitchLargeExample: ExampleFile[] = [
         {
             language: 'html',
-            code: getAssetFromModuleAssets(smallProductSwitchH),
-            fileName: 'product-switch-small-example'
+            code: getAssetFromModuleAssets(largeProductSwitchH),
+            fileName: 'product-switch-large-example'
         },
         {
             language: 'typescript',
-            code: getAssetFromModuleAssets(smallProductSwitchTs),
-            fileName: 'product-switch-small-example',
-            component: 'ProductSwitchSmallExampleComponent'
+            code: getAssetFromModuleAssets(largeProductSwitchTs),
+            fileName: 'product-switch-large-example',
+            component: 'ProductSwitchLargeExampleComponent'
+        }
+    ];
+
+    productSwitchMediumExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(mediumProductSwitchH),
+            fileName: 'product-switch-medium-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(mediumProductSwitchTs),
+            fileName: 'product-switch-medium-example',
+            component: 'ProductSwitchMediumExampleComponent'
         }
     ];
 

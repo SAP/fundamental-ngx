@@ -142,6 +142,9 @@ export class PopoverService {
     /** @hidden ID of the element that labels the popover body. */
     protected _bodyAriaLabelledBy: string | null = null;
 
+    /** @hidden aria-modal value for the popover body. */
+    protected _bodyAriaModal: boolean | null = null;
+
     /** @hidden ID for the popover body. */
     protected readonly _bodyId = signal<string | null>(null);
 
@@ -536,6 +539,10 @@ export class PopoverService {
         if (config.bodyAriaLabelledBy !== undefined) {
             this._bodyAriaLabelledBy = unwrap(config.bodyAriaLabelledBy);
             this._getPopoverBody()?._bodyAriaLabelledBy.set(this._bodyAriaLabelledBy);
+        }
+        if (config.bodyAriaModal !== undefined) {
+            this._bodyAriaModal = unwrap(config.bodyAriaModal);
+            this._getPopoverBody()?._bodyAriaModal.set(this._bodyAriaModal);
         }
         if (config.bodyId !== undefined) {
             this._bodyId.set(unwrap(config.bodyId));

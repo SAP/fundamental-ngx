@@ -203,7 +203,10 @@ export default {
         totalResultsLabel: '{totalCount} Rezultate'
     },
     coreProductSwitch: {
-        ariaLabel: 'Ndërprerësi i produktit'
+        ariaLabel: 'Ndërprerësi i produktit',
+        targetBlank: 'opens in a new browser tab',
+        targetParent: 'opens in the parent frame',
+        targetTop: 'opens in the full browser window'
     },
     coreRadio: {
         readOnlyDescription: 'This radio button is read-only and cannot be changed.'

@@ -204,7 +204,10 @@ export default {
         totalResultsLabel: '{totalCount} výsledkov'
     },
     coreProductSwitch: {
-        ariaLabel: 'Prepínač produktov'
+        ariaLabel: 'Prepínač produktov',
+        targetBlank: 'opens in a new browser tab',
+        targetParent: 'opens in the parent frame',
+        targetTop: 'opens in the full browser window'
     },
     coreRadio: {
         readOnlyDescription: 'Tento prepínač je len na čítanie a nemožno ho zmeniť.'

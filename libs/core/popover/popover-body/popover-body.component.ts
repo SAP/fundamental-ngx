@@ -5,6 +5,7 @@ import {
     ElementRef,
     inject,
     input,
+    linkedSignal,
     output,
     Renderer2,
     signal,
@@ -57,6 +58,9 @@ export class PopoverBodyComponent {
     /** Maximum height of the popover body element. */
     readonly maxHeight = input<Nullable<string>>();
 
+    /** aria-modal value for the popover body. Set to false for non-modal dialogs (e.g. product switch). */
+    readonly ariaModal = input<boolean | null>(null);
+
     /** @hidden */
     readonly _cdkTrapFocus = viewChild(CdkTrapFocus);
 
@@ -105,6 +109,9 @@ export class PopoverBodyComponent {
 
     /** @hidden ID for the popover body. */
     readonly _bodyId = signal<string | null>(null);
+
+    /** @hidden aria-modal value for the popover body. */
+    readonly _bodyAriaModal = linkedSignal(() => this.ariaModal());
 
     /** @hidden Classes added to arrow element. */
     readonly _arrowClasses = signal('');
