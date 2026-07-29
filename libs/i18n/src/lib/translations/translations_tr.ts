@@ -34,6 +34,12 @@ export default {
         defaultAriaValueText: 'Meşgul',
         defaultTitle: 'Lütfen bekleyin'
     },
+    coreButton: {
+        attentionTypeDescription: 'Warning',
+        emphasizedTypeDescription: 'Default Action',
+        negativeTypeDescription: 'Negative Action',
+        positiveTypeDescription: 'Positive Action'
+    },
     coreCalendar: {
         calendarDayViewDescription: 'Takvim',
         calendarLegendLabel: 'Takvim açıklaması',

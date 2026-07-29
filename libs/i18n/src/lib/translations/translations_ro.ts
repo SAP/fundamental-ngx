@@ -35,6 +35,12 @@ export default {
         defaultAriaValueText: 'Ocupat',
         defaultTitle: 'Așteptați'
     },
+    coreButton: {
+        attentionTypeDescription: 'Warning',
+        emphasizedTypeDescription: 'Default Action',
+        negativeTypeDescription: 'Negative Action',
+        positiveTypeDescription: 'Positive Action'
+    },
     coreCalendar: {
         calendarDayViewDescription: 'Calendar',
         calendarLegendLabel: 'Legendă calendar',

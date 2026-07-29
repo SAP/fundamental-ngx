@@ -35,6 +35,12 @@ export default {
         defaultAriaValueText: 'Zaneprázdnené',
         defaultTitle: 'Čakajte prosím'
     },
+    coreButton: {
+        attentionTypeDescription: 'Warning',
+        emphasizedTypeDescription: 'Default Action',
+        negativeTypeDescription: 'Negative Action',
+        positiveTypeDescription: 'Positive Action'
+    },
     coreCalendar: {
         calendarDayViewDescription: 'Kalendár',
         calendarLegendLabel: 'Legenda kalendára',

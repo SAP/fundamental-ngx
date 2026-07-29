@@ -17,10 +17,57 @@
         <li><strong>Attention</strong>: Warning actions that require user attention.</li>
     </ul>
     <p>
-        <strong>Note:</strong> Positive, Negative, and Attention buttons automatically generate accessible
-        <code>aria-label</code> and <code>aria-description</code> attributes based on the button type for screen
-        readers.
+        <strong>Accessibility for special button types:</strong> The four semantic types — Emphasized, Positive,
+        Negative, and Attention — automatically provide screen reader support via a hidden
+        <code>aria-describedby</code> span. You have two independent description slots:
     </p>
+    <ul>
+        <li>
+            <strong>Custom description</strong> (<code>ariaDescription</code>): Describes what the button
+            <em>does</em> in context (e.g., "This permanently deletes the record"). Accepts three forms:
+            <ul>
+                <li><code>ariaDescription="text"</code> — Angular input binding (recommended)</li>
+                <li><code>aria-description="text"</code> — Native ARIA attribute</li>
+                <li><code>[attr.aria-description]="expr"</code> — Bound native attribute</li>
+            </ul>
+        </li>
+        <li>
+            <strong>Type description</strong> (<code>ariaTypeDescription</code>): Overrides the default semantic label
+            for the button type. Defaults are provided via i18n and auto-translated:
+            <em>Emphasized → "Default Action"</em>, <em>Positive → "Positive Action"</em>,
+            <em>Negative → "Negative Action"</em>, <em>Attention → "Warning"</em>. Pass
+            <code>ariaTypeDescription="…"</code> to replace the default — note that custom values are used as-is and
+            translation must be handled on the application side.
+        </li>
+        <li>
+            <strong>Custom <code>aria-describedby</code></strong> (<code>ariaDescribedBy</code>): When you need to
+            reference external elements as the description source, provide your own <code>aria-describedby</code> value.
+            This bypasses the component's auto-generated hidden spans entirely and uses your value as-is. Accepts both
+            Angular input binding (<code>ariaDescribedBy="id1 id2"</code>) and native attribute binding (<code
+                >aria-describedby="id1 id2"</code
+            >).
+        </li>
+    </ul>
+    <p>
+        <strong>When to use each:</strong>
+    </p>
+    <ul>
+        <li>
+            <strong>Use <code>ariaDescription</code></strong> when the button's action needs context-specific
+            information for screen readers (recommended for most cases). Example: "Deletes the selected record
+            permanently".
+        </li>
+        <li>
+            <strong>Use <code>ariaTypeDescription</code> rarely</strong> — only when the default semantic label
+            ("Negative Action", "Warning", etc.) is misleading or incorrect for your use case. Most applications should
+            rely on the auto-translated defaults.
+        </li>
+        <li>
+            <strong>Use <code>ariaDescribedBy</code></strong> when the description lives in an external element (e.g., a
+            tooltip or help text rendered elsewhere in the DOM). The auto-generated hidden spans are skipped in this
+            case.
+        </li>
+    </ul>
 </description>
 <component-example>
     <fd-button-types-example></fd-button-types-example>

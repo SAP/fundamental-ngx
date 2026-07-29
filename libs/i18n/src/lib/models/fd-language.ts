@@ -15,6 +15,16 @@ export interface FdLanguage {
         /** Title for the busy indicator */
         defaultTitle: FdLanguageKey;
     };
+    coreButton: {
+        /** Emphasized type button default aria-description */
+        emphasizedTypeDescription: FdLanguageKey;
+        /** Positive type button default aria-description */
+        positiveTypeDescription: FdLanguageKey;
+        /** Negative type button default aria-description */
+        negativeTypeDescription: FdLanguageKey;
+        /** Attention/warning type button default aria-description */
+        attentionTypeDescription: FdLanguageKey;
+    };
     coreActionSheet: {
         toolbarLabel: FdLanguageKey;
     };

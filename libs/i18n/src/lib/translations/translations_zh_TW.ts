@@ -34,6 +34,12 @@ export default {
         defaultAriaValueText: '忙碌',
         defaultTitle: '請稍候'
     },
+    coreButton: {
+        attentionTypeDescription: 'Warning',
+        emphasizedTypeDescription: 'Default Action',
+        negativeTypeDescription: 'Negative Action',
+        positiveTypeDescription: 'Positive Action'
+    },
     coreCalendar: {
         calendarDayViewDescription: '行事曆',
         calendarLegendLabel: '行事曆圖例',

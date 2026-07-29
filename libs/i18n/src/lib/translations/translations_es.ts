@@ -35,6 +35,12 @@ export default {
         defaultAriaValueText: 'Ocupado',
         defaultTitle: 'Espere'
     },
+    coreButton: {
+        attentionTypeDescription: 'Warning',
+        emphasizedTypeDescription: 'Default Action',
+        negativeTypeDescription: 'Negative Action',
+        positiveTypeDescription: 'Positive Action'
+    },
     coreCalendar: {
         calendarDayViewDescription: 'Calendario',
         calendarLegendLabel: 'Leyenda de calendario',

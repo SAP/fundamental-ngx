@@ -131,6 +131,22 @@ export class BaseButton implements HasElementRef, ButtonModel {
      */
     readonly ariaDescription = input<string | null | undefined>();
 
+    /**
+     * Override the default type description for special button types.
+     * Provides a custom description for screen readers.
+     * If not provided, defaults to the i18n-translated type description.
+     */
+    readonly ariaTypeDescription = input<string | null | undefined>();
+
+    /**
+     * Custom aria-describedby value.
+     * When provided, bypasses the component's auto-generated aria-describedby
+     * (which references the hidden description spans) and uses this value directly.
+     * Use this when you need to reference external elements as the description source.
+     * Native aria-describedby attributes are captured automatically via ngOnInit.
+     */
+    readonly ariaDescribedBy = input<string | null | undefined>();
+
     /** @hidden */
     readonly elementRef = inject(ElementRef);
 

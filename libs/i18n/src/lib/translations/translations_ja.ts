@@ -35,6 +35,12 @@ export default {
         defaultAriaValueText: 'ビジー',
         defaultTitle: 'お待ちください'
     },
+    coreButton: {
+        attentionTypeDescription: 'Warning',
+        emphasizedTypeDescription: 'Default Action',
+        negativeTypeDescription: 'Negative Action',
+        positiveTypeDescription: 'Positive Action'
+    },
     coreCalendar: {
         calendarDayViewDescription: 'カレンダー',
         calendarLegendLabel: 'カレンダーの凡例',

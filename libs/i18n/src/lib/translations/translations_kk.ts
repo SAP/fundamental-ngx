@@ -35,6 +35,12 @@ export default {
         defaultAriaValueText: 'Бос емес',
         defaultTitle: 'Күте тұрыңыз'
     },
+    coreButton: {
+        attentionTypeDescription: 'Warning',
+        emphasizedTypeDescription: 'Default Action',
+        negativeTypeDescription: 'Negative Action',
+        positiveTypeDescription: 'Positive Action'
+    },
     coreCalendar: {
         calendarDayViewDescription: 'Күнтізбе',
         calendarLegendLabel: 'Күнтізбе шартты белгісі',

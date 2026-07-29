@@ -35,6 +35,12 @@ export default {
         defaultAriaValueText: 'مشغول',
         defaultTitle: 'يرجى الانتظار'
     },
+    coreButton: {
+        attentionTypeDescription: 'Warning',
+        emphasizedTypeDescription: 'Default Action',
+        negativeTypeDescription: 'Negative Action',
+        positiveTypeDescription: 'Positive Action'
+    },
     coreCalendar: {
         calendarDayViewDescription: 'التقويم',
         calendarLegendLabel: 'وسيلة إيضاح التقويم',

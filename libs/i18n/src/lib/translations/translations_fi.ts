@@ -34,6 +34,12 @@ export default {
         defaultAriaValueText: 'Varattu',
         defaultTitle: 'Odota'
     },
+    coreButton: {
+        attentionTypeDescription: 'Warning',
+        emphasizedTypeDescription: 'Default Action',
+        negativeTypeDescription: 'Negative Action',
+        positiveTypeDescription: 'Positive Action'
+    },
     coreCalendar: {
         calendarDayViewDescription: 'Kalenteri',
         calendarLegendLabel: 'Kalenterin selitys',
