@@ -1,3 +1,13 @@
+## 0.64.2-rc.0 (2026-07-30)
+
+### 🩹 Fixes
+
+- **core:** change Product Switch name to App Launcher ([#14422](https://github.com/SAP/fundamental-ngx/pull/14422))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.64.1 (2026-07-30)
 
 ### 🩹 Fixes
