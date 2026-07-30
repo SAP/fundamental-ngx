@@ -4,12 +4,12 @@
   "kind": "Component",
   "sourceFile": "table-cell-header-popover.component.ts",
   "sourceLine": 60,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/876d4661d6/libs/platform/table/components/table-cell-header-popover/table-cell-header-popover.component.ts#L60",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/b83a9b2ffb/libs/platform/table/components/table-cell-header-popover/table-cell-header-popover.component.ts#L60",
   "description": "",
   "inputs": [
     {
       "name": "column",
-      "type": "TableColumn",
+      "type": "null | TableColumn",
       "default": null,
       "description": "Column definition.",
       "isSignal": false,

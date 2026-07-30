@@ -3,8 +3,8 @@
   "selector": "fd-product-switch",
   "kind": "Component",
   "sourceFile": "product-switch.component.ts",
-  "sourceLine": 51,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/876d4661d6/libs/core/product-switch/product-switch/product-switch.component.ts#L51",
+  "sourceLine": 52,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/b83a9b2ffb/libs/core/product-switch/product-switch/product-switch.component.ts#L52",
   "description": "",
   "inputs": [
     {
@@ -14,7 +14,7 @@
       "description": "Whether the product switch should close when the escape key is pressed.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 59,
+      "sourceLine": 60,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Whether the product switch should close when a click is made outside its boundaries.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 62,
+      "sourceLine": 63,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Whether to wrap content with fd-scrollbar directive.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 68,
+      "sourceLine": 69,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "Whether the product switch is disabled.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 56,
+      "sourceLine": 57,
       "since": null
     },
     {
@@ -54,7 +54,7 @@
       "description": "Whether the product switch should automatically move focus into the trapped region.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 77,
+      "sourceLine": 78,
       "since": null
     },
     {
@@ -64,7 +64,7 @@
       "description": "Whether the product switch should trap focus within its boundaries.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 74,
+      "sourceLine": 75,
       "since": null
     },
     {
@@ -74,7 +74,7 @@
       "description": "Two-way binding for product switch open state.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 80,
+      "sourceLine": 81,
       "since": null
     },
     {
@@ -84,7 +84,7 @@
       "description": "Whether the product switch dropdown should have an arrow.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 65,
+      "sourceLine": 66,
       "since": null
     },
     {
@@ -94,7 +94,7 @@
       "description": "Placement of the product switch dropdown.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 53,
+      "sourceLine": 54,
       "since": null
     },
     {
@@ -104,7 +104,7 @@
       "description": "The trigger events that will open/close the product switch.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 71,
+      "sourceLine": 72,
       "since": null
     }
   ],
@@ -116,7 +116,7 @@
       "description": "Event emitted right before the product switch is being opened.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 83,
+      "sourceLine": 84,
       "since": null
     },
     {
@@ -126,7 +126,7 @@
       "description": "Two-way binding for product switch open state.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 80,
+      "sourceLine": 81,
       "since": null
     }
   ],

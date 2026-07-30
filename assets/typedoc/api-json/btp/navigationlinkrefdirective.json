@@ -1,0 +1,13 @@
+{
+  "name": "NavigationLinkRefDirective",
+  "selector": "[fdbNavigationLinkRef]",
+  "kind": "Directive",
+  "sourceFile": "navigation-link.component.ts",
+  "sourceLine": 31,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5fe1a54e76/libs/btp/navigation/components/navigation-link/navigation-link.component.ts#L31",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

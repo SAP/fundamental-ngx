@@ -128,13 +128,23 @@
       "since": null
     },
     {
+      "name": "showFullscreenButton",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines whether a fullscreen toggle button is shown in the dialog header.\nWhen pressed, it toggles the `stretch` property.\nThe fullscreen button is not available on phone devices.\n\n*Note:** The fullscreen button is not available on phone devices,\nnor when a custom header slot is provided — the application is expected\nto render its own toggle inside the custom header in those cases.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 131,
+      "since": null
+    },
+    {
       "name": "state",
       "type": "'None' | 'Positive' | 'Critical' | 'Negative' | 'Information'",
       "default": null,
       "description": "Defines the state of the `Dialog`.\n\n*Note:** If `\"Negative\"` and `\"Critical\"` states is set, it will change the\naccessibility role to \"alertdialog\", if the accessibleRole property is set to `\"Dialog\"`.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 128,
+      "sourceLine": 139,
       "since": null
     },
     {
@@ -144,7 +154,7 @@
       "description": "Determines if the dialog will be stretched to full screen on mobile. On desktop,\nthe dialog will be stretched to approximately 90% of the viewport.\n\n*Note:** For better usability of the component it is recommended to set this property to \"true\" when the dialog is opened on phone.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 136,
+      "sourceLine": 147,
       "since": null
     }
   ],
@@ -156,7 +166,7 @@
       "description": "Fired before the component is closed. This event can be cancelled, which will prevent the popup from closing.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 143,
+      "sourceLine": 154,
       "since": null
     },
     {
@@ -166,7 +176,7 @@
       "description": "Fired before the component is opened. This event can be cancelled, which will prevent the popup from opening.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 148,
+      "sourceLine": 159,
       "since": null
     },
     {
@@ -176,7 +186,7 @@
       "description": "Fired after the component is closed.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 153,
+      "sourceLine": 164,
       "since": null
     },
     {
@@ -186,7 +196,7 @@
       "description": "Fired after the component is opened.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 158,
+      "sourceLine": 169,
       "since": null
     }
   ],

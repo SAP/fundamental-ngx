@@ -16,6 +16,16 @@
       "deprecated": null,
       "sourceLine": 45,
       "since": null
+    },
+    {
+      "name": "value",
+      "type": "string",
+      "default": null,
+      "description": "Defines the value of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 50,
+      "since": null
     }
   ],
   "outputs": [],

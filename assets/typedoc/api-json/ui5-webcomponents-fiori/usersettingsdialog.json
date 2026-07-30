@@ -28,13 +28,23 @@
       "since": null
     },
     {
+      "name": "saveMode",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines whether the dialog offers Save and Cancel actions in its footer.\n\nWhen true, the footer renders a Save (Emphasized) and a Cancel button\ninstead of the default Close button. Save and Cancel each fire a\ncorresponding event; the application is responsible for closing the\ndialog (typically after persisting or discarding the changes).",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 60,
+      "since": null
+    },
+    {
       "name": "showSearchField",
       "type": "boolean",
       "default": null,
       "description": "Defines if the Search Field would be displayed.\n\n*Note:** By default the Search Field is not displayed.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 57,
+      "sourceLine": 67,
       "since": null
     }
   ],
@@ -43,30 +53,50 @@
       "name": "ui5BeforeClose",
       "type": "UI5CustomEvent<UserSettingsDialog, 'before-close'>",
       "default": null,
-      "description": "Fired before the settings dialog is closed.",
+      "description": "Fired before the settings dialog is closed.\n\n*Note:** This event is cancelable via `preventDefault()`, allowing the application to keep the\ndialog open — for example, to prompt the user about unsaved changes before dismissal.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 64,
+      "sourceLine": 77,
+      "since": null
+    },
+    {
+      "name": "ui5Cancel",
+      "type": "UI5CustomEvent<UserSettingsDialog, 'cancel'>",
+      "default": null,
+      "description": "Fired when the Cancel button in the footer is clicked.\nThe dialog does not close automatically — the application is responsible\nfor closing it after discarding the changes.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 84,
       "since": null
     },
     {
       "name": "ui5Close",
       "type": "UI5CustomEvent<UserSettingsDialog, 'close'>",
       "default": null,
-      "description": "Fired when a settings dialog is closed.",
+      "description": "Fired when the settings dialog is closed.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 69,
+      "sourceLine": 89,
       "since": null
     },
     {
       "name": "ui5Open",
       "type": "UI5CustomEvent<UserSettingsDialog, 'open'>",
       "default": null,
-      "description": "Fired when a settings dialog is open.",
+      "description": "Fired when the settings dialog is opened.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 74,
+      "sourceLine": 94,
+      "since": null
+    },
+    {
+      "name": "ui5Save",
+      "type": "UI5CustomEvent<UserSettingsDialog, 'save'>",
+      "default": null,
+      "description": "Fired when the Save button in the footer is clicked.\nThe dialog does not close automatically — the application is responsible\nfor closing it after persisting the changes.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 101,
       "since": null
     },
     {
@@ -76,7 +106,7 @@
       "description": "Fired when an item is selected.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 79,
+      "sourceLine": 106,
       "since": null
     }
   ],

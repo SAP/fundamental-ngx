@@ -5,7 +5,7 @@
 
     <ui5-toolbar-select (ui5Change)="onProjectChange($event)" style="width: 180px">
         @for (project of projects(); track project) {
-        <ui5-toolbar-select-option [selected]="project === selectedProject()">
+        <ui5-toolbar-select-option [value]="project" [selected]="project === selectedProject()">
             {{ project }}
         </ui5-toolbar-select-option>
         }
