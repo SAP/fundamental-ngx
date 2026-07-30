@@ -9,11 +9,9 @@ import {
     SeparatorComponent,
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
-import {
-    ObjectAttributeExampleComponent,
-    ObjectAttributeTruncateExampleComponent
-} from './examples/object-attribute-examples.component';
+import { ObjectAttributeExampleComponent } from './examples/object-attribute-example.component';
 import { ObjectAttributeLinkExampleComponent } from './examples/object-attribute-link-example.component';
+import { ObjectAttributeTruncateExampleComponent } from './examples/object-attribute-truncate-example.component';
 
 const objectAttribute = 'object-attribute-example.component.html';
 const objectAttributeTruncate = 'object-attribute-truncate-example.component.html';

@@ -9,18 +9,16 @@ import {
     SeparatorComponent,
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
-import {
-    ObjectNumberBasicExampleComponent,
-    ObjectNumberBoldExampleComponent,
-    ObjectNumberDecimalExampleComponent,
-    ObjectNumberInteractiveExampleComponent,
-    ObjectNumberInvertedExampleComponent,
-    ObjectNumberInvertedInteractiveExampleComponent,
-    ObjectNumberLargeExampleComponent,
-    ObjectNumberStatusExampleComponent,
-    ObjectNumberTruncationExampleComponent,
-    ObjectNumberUnitsExampleComponent
-} from './examples/object-number-examples.component';
+import { ObjectNumberBasicExampleComponent } from './examples/object-number-basic-example.component';
+import { ObjectNumberBoldExampleComponent } from './examples/object-number-bold-example.component';
+import { ObjectNumberDecimalExampleComponent } from './examples/object-number-decimal-example.component';
+import { ObjectNumberInteractiveExampleComponent } from './examples/object-number-interactive-example.component';
+import { ObjectNumberInvertedExampleComponent } from './examples/object-number-inverted-example.component';
+import { ObjectNumberInvertedInteractiveExampleComponent } from './examples/object-number-inverted-interactive-example.component';
+import { ObjectNumberLargeExampleComponent } from './examples/object-number-large-example.component';
+import { ObjectNumberStatusExampleComponent } from './examples/object-number-status-example.component';
+import { ObjectNumberTruncationExampleComponent } from './examples/object-number-truncation-example.component';
+import { ObjectNumberUnitsExampleComponent } from './examples/object-number-units-example.component';
 
 const basicHtml = 'object-number-basic-example.component.html';
 const boldHtml = 'object-number-bold-example.component.html';

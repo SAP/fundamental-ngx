@@ -14,21 +14,19 @@ import {
 } from '@fundamental-ngx/docs/shared';
 import { ListActionExampleComponent } from './examples/list-action-example/list-action-example.component';
 import { ListBorderlessExampleComponent } from './examples/list-borderless-example/list-borderless-example.component';
+import { ListComplexExampleComponent } from './examples/list-complex-example.component';
 import { ListDataExampleComponent } from './examples/list-data-example/list-data-example.component';
 import { ListDndExampleComponent } from './examples/list-dnd-example/list-dnd-example.component';
-import {
-    ListComplexExampleComponent,
-    ListExampleComponent,
-    ListIconExampleComponent,
-    ListSearchResultsExampleComponent,
-    ListSecondaryExampleComponent
-} from './examples/list-examples.component';
+import { ListExampleComponent } from './examples/list-example.component';
+import { ListIconExampleComponent } from './examples/list-icon-example.component';
 import { ListInfiniteScrollExampleComponent } from './examples/list-infinite-scroll-example.component';
 import { ListInteractiveExampleComponent } from './examples/list-interactive-example/list-interactive-example.component';
 import { ListKeyboardExampleComponent } from './examples/list-keyboard-example/list-keyboard-example.component';
 import { ListLoadingExampleComponent } from './examples/list-loading-example/list-loading-example.component';
 import { ListNavIndicatorExampleComponent } from './examples/list-nav-indicator-example/list-nav-indicator-example.component';
 import { ListNavigationExampleComponent } from './examples/list-navigation-example/list-navigation-example.component';
+import { ListSearchResultsExampleComponent } from './examples/list-search-results-example.component';
+import { ListSecondaryExampleComponent } from './examples/list-secondary-example.component';
 import { ListSelectionExampleComponent } from './examples/list-selection-example/list-selection-example.component';
 
 const listSrc = 'list-example.component.html';

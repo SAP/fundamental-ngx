@@ -10,16 +10,14 @@ import {
     SeparatorComponent,
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
+import { PlatformNonByLineStandardListItemExampleComponent } from './examples/platform-non-byline-standard-list-item-example.component';
 import { PlatformStandardListItemBorderLessExampleComponent } from './examples/platform-standard-list-item-border-less-example.component';
-import {
-    PlatformNonByLineStandardListItemExampleComponent,
-    PlatformStandardListItemExampleComponent,
-    PlatformStandardListItemWithInvertedSecondaryTypeExampleComponent,
-    PlatformStandardListItemWithSecondaryTypeExampleComponent,
-    PlatformStandardListItemtWithGroupHeaderExampleComponent
-} from './examples/platform-standard-list-item-example.component';
+import { PlatformStandardListItemExampleComponent } from './examples/platform-standard-list-item-example.component';
 import { PlatformStandardListItemWithFooterExampleComponent } from './examples/platform-standard-list-item-with-footer-example.component';
+import { PlatformStandardListItemtWithGroupHeaderExampleComponent } from './examples/platform-standard-list-item-with-group-header-example.component';
+import { PlatformStandardListItemWithInvertedSecondaryTypeExampleComponent } from './examples/platform-standard-list-item-with-inverted-secondary-type-example.component';
 import { PlatformStandardListItemWithNavigationExampleComponent } from './examples/platform-standard-list-item-with-navigation-example.component';
+import { PlatformStandardListItemWithSecondaryTypeExampleComponent } from './examples/platform-standard-list-item-with-secondary-type-example.component';
 import { PlatformStandardListItemWithSelectionExampleComponent } from './examples/platform-standard-list-item-with-selection-example.component';
 import { PlatformStandardListItemWithSingleSelectionExampleComponent } from './examples/platform-standard-list-item-with-single-selection-example.component';
 import { PlatformStandardListUnreadExampleComponent } from './examples/platform-standard-list-unread-example.component';

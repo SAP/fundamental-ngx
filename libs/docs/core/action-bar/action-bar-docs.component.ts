@@ -8,12 +8,10 @@ import {
     getExampleFile
 } from '@fundamental-ngx/docs/shared';
 import { ActionBarBackExampleComponent } from './examples/action-bar-back-example.component';
-import {
-    ActionBarContextualMenuExampleComponent,
-    ActionBarNoBackExampleComponent
-} from './examples/action-bar-examples.component';
+import { ActionBarContextualMenuExampleComponent } from './examples/action-bar-contextual-menu-example.component';
 import { ActionBarLongStringTitleTruncationExampleComponent } from './examples/action-bar-long-string-title-truncation-example.component';
 import { ActionBarMobileExampleComponent } from './examples/action-bar-mobile-example.component';
+import { ActionBarNoBackExampleComponent } from './examples/action-bar-no-back-example.component';
 
 @Component({
     selector: 'app-action-bar',

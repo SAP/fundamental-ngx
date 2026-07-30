@@ -12,7 +12,7 @@ import {
     SeparatorComponent,
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
-import { RatingIndicatorExampleComponent } from './examples/rating-indicator-examples.component';
+import { RatingIndicatorExampleComponent } from './examples/rating-indicator-example.component';
 import { RatingIndicatorRatingsExampleComponent } from './examples/rating-indicator-ratings.component';
 import { RatingIndicatorSizesExampleComponent } from './examples/rating-indicator-sizes.component';
 import { RatingIndicatorCustomIconExampleComponent } from './examples/ri-custom-icon-example.component';
@@ -25,7 +25,7 @@ const ratingsObjectHtml = 'rating-indicator-ratings.component.html';
 const ratingsObjectTs = 'rating-indicator-ratings.component.ts';
 
 const baseHtml = 'rating-indicator-example.component.html';
-const baseTs = 'rating-indicator-examples.component.ts';
+const baseTs = 'rating-indicator-example.component.ts';
 
 const customIconHtml = 'ri-custom-icon-example.component.html';
 const customIconTs = 'ri-custom-icon-example.component.ts';

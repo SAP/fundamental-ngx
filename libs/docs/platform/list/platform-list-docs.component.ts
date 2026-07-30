@@ -38,22 +38,20 @@ import {
 } from '@fundamental-ngx/docs/shared';
 import { PlatformListLoadingExampleComponent } from './examples/loading/platform-list-loading-example.component';
 import { PlatformListBorderLessExampleComponent } from './examples/platform-list-border-less-example.component';
-import {
-    PlatformListExampleComponent,
-    PlatformListWithGroupHeaderExampleComponent,
-    PlatformListWithNoDataExampleComponent,
-    PlatformListWithUnReadExampleComponent
-} from './examples/platform-list-example.component';
+import { PlatformListExampleComponent } from './examples/platform-list-example.component';
 import { PlatformListFreeContentExampleComponent } from './examples/platform-list-free-content-example.component';
 import { PlatformListWithButtonsExampleComponent } from './examples/platform-list-with-buttons-example.component';
 import { PlatformListWithDeleteButtonExampleComponent } from './examples/platform-list-with-delete-button-example.component';
 import { PlatformListWithFooterExampleComponent } from './examples/platform-list-with-footer-example.component';
+import { PlatformListWithGroupHeaderExampleComponent } from './examples/platform-list-with-group-header-example.component';
 import { PlatformListWithInfiniteScrollExampleComponent } from './examples/platform-list-with-infinite-scroll-example.component';
 import { PlatformListWithItemCounterExampleComponent } from './examples/platform-list-with-item-counter-example.component';
 import { PlatformListWithMoreButtonExampleComponent } from './examples/platform-list-with-more-button-example.component';
 import { PlatformListWithNavigationExampleComponent } from './examples/platform-list-with-navigation-example.component';
+import { PlatformListWithNoDataExampleComponent } from './examples/platform-list-with-nodata-example.component';
 import { PlatformListWithSelectionExampleComponent } from './examples/platform-list-with-selection-example.component';
 import { PlatformListWithSingleSelectionExampleComponent } from './examples/platform-list-with-single-selection-example.component';
+import { PlatformListWithUnReadExampleComponent } from './examples/platform-list-with-unread-example.component';
 
 @Component({
     selector: 'app-list',

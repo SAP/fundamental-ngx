@@ -13,16 +13,14 @@ import {
     SeparatorComponent,
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
-import {
-    InputGroupButtonExampleComponent,
-    InputGroupComplexExampleComponent,
-    InputGroupIconExampleComponent,
-    InputGroupStatesExampleComponent,
-    InputGroupTextCompactExampleComponent,
-    InputGroupTextExampleComponent
-} from './examples/input-group-examples.component';
+import { InputGroupButtonExampleComponent } from './examples/input-group-button-example.component';
+import { InputGroupComplexExampleComponent } from './examples/input-group-complex-example.component';
 import { InputGroupFormExampleComponent } from './examples/input-group-form-example/input-group-form-example.component';
+import { InputGroupIconExampleComponent } from './examples/input-group-icon-example.component';
 import { InputGroupSearchExampleComponent } from './examples/input-group-search-example/input-group-search-example.component';
+import { InputGroupStatesExampleComponent } from './examples/input-group-states-example.component';
+import { InputGroupTextCompactExampleComponent } from './examples/input-group-text-compact-example.component';
+import { InputGroupTextExampleComponent } from './examples/input-group-text-example.component';
 
 const inputGroupButtonSrc = 'input-group-button-example.component.html';
 const inputGroupIconSrc = 'input-group-icon-example.component.html';

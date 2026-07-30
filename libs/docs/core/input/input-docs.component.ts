@@ -8,12 +8,10 @@ import {
     SeparatorComponent,
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
-import {
-    InputExampleComponent,
-    InputInlineHelpExampleComponent,
-    InputStateExampleComponent
-} from './examples/input-examples.component';
+import { InputExampleComponent } from './examples/input-example.component';
 import { InputFormGroupExampleComponent } from './examples/input-form-group-example.component';
+import { InputInlineHelpExampleComponent } from './examples/input-inline-help-example.component';
+import { InputStateExampleComponent } from './examples/input-state-example.component';
 
 const formGroupInputScss = 'input-form-group-example.component.scss';
 

@@ -11,10 +11,8 @@ import {
 } from '@fundamental-ngx/docs/shared';
 import { SideNavigationCondensedExampleComponent } from './examples/side-navigation-condensed-example/side-navigation-condensed-example.component';
 import { SideNavigationCondensedObjectExampleComponent } from './examples/side-navigation-condensed-object-example/side-navigation-condensed-object-example.component';
-import {
-    SideNavigationExampleComponent,
-    SideNavigationIconsExampleComponent
-} from './examples/side-navigation-examples.component';
+import { SideNavigationExampleComponent } from './examples/side-navigation-example.component';
+import { SideNavigationIconsExampleComponent } from './examples/side-navigation-icons-example.component';
 import { SideNavigationMultipleSelectedExampleComponent } from './examples/side-navigation-multiple-selected-example/side-navigation-multiple-selected-example.component';
 import { SideNavigationObjectExampleComponent } from './examples/side-navigation-object-example/side-navigation-object-example.component';
 import { SideNavigationProgrammaticallyExampleComponent } from './examples/side-navigation-programmatically-example/side-navigation-programmatically-example.component';

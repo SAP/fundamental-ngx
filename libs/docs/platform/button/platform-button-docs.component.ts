@@ -9,11 +9,9 @@ import {
     SeparatorComponent,
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
-import {
-    PlatformButtonIconsExampleComponent,
-    PlatformButtonTruncateExampleComponent,
-    PlatformButtonTypesExampleComponent
-} from './examples/platform-button-examples.component';
+import { PlatformButtonIconsExampleComponent } from './examples/platform-button-icons-example.component';
+import { PlatformButtonTruncateExampleComponent } from './examples/platform-button-truncate-example.component';
+import { PlatformButtonTypesExampleComponent } from './examples/platform-button-types-example.component';
 const buttonIconsExample = 'platform-button-icons-example.component.html';
 const buttonTypesExample = 'platform-button-types-example.component.html';
 const buttonTruncateExample = 'platform-button-truncate-example.component.html';
