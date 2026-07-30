@@ -1,0 +1,55 @@
+<div>
+    <ui5-shellbar (ui5ProfileClick)="onProfileClick()">
+        <ui5-shellbar-branding slot="branding">
+            Corporate Portal
+            <img slot="logo" src="https://ui5.github.io/webcomponents/images/sap-logo-svg.svg" alt="Logo" />
+        </ui5-shellbar-branding>
+        <ui5-avatar slot="profile" id="save-mode-menu-opener">
+            <img [src]="userAccount().avatarSrc" alt="User Avatar" />
+        </ui5-avatar>
+    </ui5-shellbar>
+
+    <ui5-user-menu opener="save-mode-menu-opener" [open]="menuOpen()" (ui5Close)="onMenuClose()">
+        <ui5-user-menu-account
+            slot="accounts"
+            [avatarSrc]="userAccount().avatarSrc"
+            [titleText]="userAccount().titleText"
+            [subtitleText]="userAccount().subtitleText"
+            [selected]="true"
+        ></ui5-user-menu-account>
+        <ui5-user-menu-item icon="action-settings" text="Settings" (click)="onSettingsClick()"></ui5-user-menu-item>
+    </ui5-user-menu>
+
+    <ui5-user-settings-dialog
+        headerText="Settings"
+        [saveMode]="true"
+        [open]="settingsDialogOpen()"
+        (ui5Save)="onSave()"
+        (ui5Cancel)="onCancel()"
+        (ui5Close)="onSettingsDialogClose()"
+    >
+        <ui5-user-settings-item icon="palette" text="Appearance" tooltip="Appearance" headerText="Appearance">
+            <ui5-user-settings-view text="Themes" slot="tabs">
+                <ui5-list separators="Inner" selectionMode="Single" (ui5SelectionChange)="onThemeSelect($event)">
+                    @for (theme of themes(); track theme) {
+                    <ui5-li icon="palette" [selected]="theme === pendingTheme()">{{ theme }}</ui5-li>
+                    }
+                </ui5-list>
+            </ui5-user-settings-view>
+        </ui5-user-settings-item>
+
+        <ui5-user-settings-item icon="bell" text="Notifications" tooltip="Notifications" headerText="Notifications">
+            <ui5-user-settings-view>
+                <ui5-checkbox
+                    [checked]="pendingNotifications()"
+                    text="Show High-Priority Notification Alerts"
+                    (ui5Change)="onNotificationsChange($event)"
+                ></ui5-checkbox>
+            </ui5-user-settings-view>
+        </ui5-user-settings-item>
+    </ui5-user-settings-dialog>
+
+    @if (lastAction()) {
+    <p class="fd-margin-top--sm">Last action: <strong>{{ lastAction() }}</strong></p>
+    }
+</div>

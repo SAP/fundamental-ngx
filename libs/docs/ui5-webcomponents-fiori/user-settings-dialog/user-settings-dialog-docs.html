@@ -32,3 +32,15 @@
     <ui5-doc-user-settings-dialog-basic-sample />
 </component-example>
 <code-example [exampleFiles]="basicExample()" />
+
+<fd-docs-section-title id="save-mode" componentName="user-settings-dialog">Save Mode</fd-docs-section-title>
+<description>
+    Set <b>saveMode</b> to <code>true</code> to show <b>Save</b> and <b>Cancel</b> buttons in the dialog footer. Changes
+    are not committed automatically — the application must listen to the <b>ui5Save</b> event to persist them, and
+    <b>ui5Cancel</b> to discard. This pattern is required when settings changes involve async operations or need
+    explicit user confirmation before taking effect.
+</description>
+<component-example>
+    <ui5-user-settings-dialog-save-mode-sample></ui5-user-settings-dialog-save-mode-sample>
+</component-example>
+<code-example [exampleFiles]="saveModeExample()"></code-example>

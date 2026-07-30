@@ -1,0 +1,22 @@
+<ui5-button (ui5Click)="openDialog()">Open Dialog with Fullscreen Button</ui5-button>
+
+<ui5-dialog
+    headerText="Fullscreen Toggle Dialog"
+    [showFullscreenButton]="true"
+    [open]="isOpen()"
+    (ui5Close)="closeDialog()"
+>
+    <div class="fd-margin--sm">
+        <p>
+            This dialog has a <strong>fullscreen toggle button</strong> in its header. Click it to expand the dialog to
+            fill the viewport, and click again to restore the original size.
+        </p>
+        <p class="fd-margin-top--sm">
+            <strong>Note:</strong> The fullscreen button is not available on phone devices — the dialog renders at full
+            screen automatically there.
+        </p>
+    </div>
+    <div slot="footer" style="display: flex; justify-content: flex-end; padding: 0.5rem">
+        <ui5-button design="Emphasized" (ui5Click)="closeDialog()">Close</ui5-button>
+    </div>
+</ui5-dialog>
