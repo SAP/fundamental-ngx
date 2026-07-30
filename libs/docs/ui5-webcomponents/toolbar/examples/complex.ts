@@ -26,9 +26,10 @@ export class ToolbarComplexSample {
     notificationText = computed(() => `(${this.notifications()})`);
 
     onProjectChange(event: UI5CustomEvent<any, 'change'>): void {
-        const selectedOption = event.detail.selectedOption;
-        if (selectedOption) {
-            console.log(`Project changed: ${selectedOption.textContent?.trim() || ''}`);
+        const selectedToolbarOption = event.detail.selectedToolbarOption;
+        if (selectedToolbarOption) {
+            this.selectedProject.set(selectedToolbarOption.value ?? selectedToolbarOption.textContent?.trim() ?? '');
+            console.log(`Project changed to: ${this.selectedProject()}`);
         }
     }
 

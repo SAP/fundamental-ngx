@@ -1,0 +1,39 @@
+<div class="fd-margin-bottom--sm">
+    <ui5-label for="search-input">Search term:</ui5-label>
+    <ui5-input id="search-input" [value]="searchValue()" (ui5Input)="onSearchInput($event)" placeholder="Search term">
+        @if (searchValue()) {
+        <ui5-input-icon slot="icon" name="decline" accessibleName="Clear" (ui5Click)="clearSearch()"></ui5-input-icon>
+        }
+        <ui5-input-icon slot="icon" name="search" accessibleName="Search" (ui5Click)="onSearchClick()"></ui5-input-icon>
+    </ui5-input>
+</div>
+
+<div class="fd-margin-bottom--sm">
+    <ui5-label for="voice-input">Voice input:</ui5-label>
+    <ui5-input id="voice-input" placeholder="Voice input...">
+        <ui5-input-icon
+            slot="icon"
+            name="microphone"
+            accessibleName="Start voice input"
+            (ui5Click)="onVoiceClick()"
+        ></ui5-input-icon>
+    </ui5-input>
+</div>
+
+<div class="fd-margin-bottom--sm">
+    <ui5-label for="multi-input">Multiple icons:</ui5-label>
+    <ui5-input id="multi-input" [value]="multiValue()" (ui5Input)="onMultiInput($event)" placeholder="Multiple icons">
+        @if (multiValue()) {
+        <ui5-input-icon slot="icon" name="decline" accessibleName="Clear" (ui5Click)="clearMulti()"></ui5-input-icon>
+        }
+        <ui5-input-icon slot="icon" name="search" accessibleName="Search" (ui5Click)="onSearchClick()"></ui5-input-icon>
+        <ui5-input-icon
+            slot="icon"
+            name="microphone"
+            accessibleName="Start voice input"
+            (ui5Click)="onVoiceClick()"
+        ></ui5-input-icon>
+    </ui5-input>
+</div>
+
+<p class="fd-margin-top--sm">Last action: <strong>{{ lastAction() }}</strong></p>

@@ -21,3 +21,17 @@
     <ui5-dynamic-date-range-value-handling-sample></ui5-dynamic-date-range-value-handling-sample>
 </component-example>
 <code-example [exampleFiles]="valueHandlingExample" />
+
+<fd-docs-section-title id="label-association" componentName="dynamic-date-range"
+    >Label Association</fd-docs-section-title
+>
+<description>
+    As of v2.25.0, <code>ui5-dynamic-date-range</code> supports explicit label association. Use a
+    <code>ui5-label</code> with a matching <code>for</code> attribute, or set the <b>accessibleNameRef</b> input
+    directly to the <code>id</code> of a label element. Both approaches ensure screen readers announce the label when
+    the component receives focus.
+</description>
+<component-example>
+    <ui5-dynamic-date-range-label-sample></ui5-dynamic-date-range-label-sample>
+</component-example>
+<code-example [exampleFiles]="labelExample()"></code-example>

@@ -19,3 +19,18 @@
     <ui5-autofocus-sample></ui5-autofocus-sample>
 </component-example>
 <code-example [exampleFiles]="autofocusExamples()"></code-example>
+
+<separator />
+
+<fd-docs-section-title id="interactive-icons" componentName="input">Interactive Icons</fd-docs-section-title>
+<description>
+    Use <code>ui5-input-icon</code> in the <code>icon</code> slot to add interactive icons to an input field. Unlike a
+    static <code>ui5-icon</code>, <code>ui5-input-icon</code> is focusable and fires a <code>ui5Click</code> event when
+    activated with a click, Enter, or Space. Common patterns include a search trigger and a clear button that appears
+    only when the input has a value. Always set <code>accessibleName</code> so screen readers can announce the icon's
+    purpose independently of the input's label.
+</description>
+<component-example>
+    <ui5-input-interactive-icons-sample></ui5-input-interactive-icons-sample>
+</component-example>
+<code-example [exampleFiles]="interactiveIconsExamples()"></code-example>

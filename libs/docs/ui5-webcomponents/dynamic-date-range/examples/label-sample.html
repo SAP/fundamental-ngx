@@ -1,0 +1,14 @@
+<p class="fd-margin-bottom--sm">
+    Two equivalent ways to associate a label — <code>for</code> attribute on <code>ui5-label</code>, and
+    <code>accessibleNameRef</code> input on the component:
+</p>
+
+<div class="fd-form-group fd-margin-bottom--md">
+    <ui5-label for="ddr-via-for">Via <code>ui5-label for</code>:</ui5-label>
+    <ui5-dynamic-date-range id="ddr-via-for" [options]="options()" />
+</div>
+
+<div class="fd-form-group">
+    <ui5-label id="ddr-label-ref">Via <code>accessibleNameRef</code>:</ui5-label>
+    <ui5-dynamic-date-range [accessibleNameRef]="'ddr-label-ref'" [options]="options()" />
+</div>

@@ -10,11 +10,14 @@ import {
 } from '@fundamental-ngx/docs/shared';
 import { AutofocusSample } from './examples/autofocus-sample';
 import { InputExample } from './examples/input-sample';
+import { InputInteractiveIconsSample } from './examples/interactive-icons-sample';
 
 const basicSampleHtml = 'input-sample.html';
 const basicSampleTs = 'input-sample.ts';
 const autofocusSampleHtml = 'autofocus-sample.html';
 const autofocusSampleTs = 'autofocus-sample.ts';
+const interactiveIconsSampleHtml = 'interactive-icons-sample.html';
+const interactiveIconsSampleTs = 'interactive-icons-sample.ts';
 
 @Component({
     selector: 'ui5-input-docs',
@@ -26,7 +29,8 @@ const autofocusSampleTs = 'autofocus-sample.ts';
         DescriptionComponent,
         SeparatorComponent,
         InputExample,
-        AutofocusSample
+        AutofocusSample,
+        InputInteractiveIconsSample
     ]
 })
 export class InputDocs {
@@ -60,4 +64,20 @@ export class InputDocs {
 
     readonly examples = computed(() => this.exampleFiles());
     readonly autofocusExamples = computed(() => this.autofocusExampleFiles());
+
+    private readonly interactiveIconsExampleFiles = signal<ExampleFile[]>([
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(interactiveIconsSampleHtml),
+            originalFileName: 'input-interactive-icons-sample'
+        },
+        {
+            language: 'typescript',
+            component: 'InputInteractiveIconsSample',
+            code: getAssetFromModuleAssets(interactiveIconsSampleTs),
+            originalFileName: 'input-interactive-icons-sample'
+        }
+    ]);
+
+    readonly interactiveIconsExamples = computed(() => this.interactiveIconsExampleFiles());
 }

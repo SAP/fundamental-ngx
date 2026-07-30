@@ -8,9 +8,13 @@ import {
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
 import { BasicSample } from './examples/basic-sample';
+import { SaveModeSample } from './examples/save-mode-sample';
 
 const basicSampleTs = 'basic-sample.ts';
 const basicSampleHtml = 'basic-sample.html';
+
+const saveModeSampleTs = 'save-mode-sample.ts';
+const saveModeSampleHtml = 'save-mode-sample.html';
 
 @Component({
     selector: 'ui5-doc-user-settings-dialog',
@@ -21,7 +25,8 @@ const basicSampleHtml = 'basic-sample.html';
         ComponentExampleComponent,
         DescriptionComponent,
         DocsSectionTitleComponent,
-        BasicSample
+        BasicSample,
+        SaveModeSample
     ]
 })
 export class UserSettingsDialogDocs {
@@ -39,6 +44,23 @@ export class UserSettingsDialogDocs {
             code: getAssetFromModuleAssets(basicSampleHtml),
             originalFileName: 'basic-sample',
             component: 'BasicSample'
+        }
+    ]);
+
+    saveModeExample = signal<ExampleFile[]>([
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(saveModeSampleTs),
+            originalFileName: 'save-mode-sample',
+            component: 'SaveModeSample',
+            typescriptFileCode: getAssetFromModuleAssets(saveModeSampleTs),
+            scssFileCode: ''
+        },
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(saveModeSampleHtml),
+            originalFileName: 'save-mode-sample',
+            component: 'SaveModeSample'
         }
     ]);
 }

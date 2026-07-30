@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import {
     CodeExampleComponent,
     ComponentExampleComponent,
@@ -8,24 +8,27 @@ import {
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
 import { BasicSample } from './examples/basic-sample';
+import { LabelSample } from './examples/label-sample';
 import { ValueHandlingSample } from './examples/value-handling-sample';
 
 const basicSampleTs = 'basic-sample.ts';
 const basicSampleHtml = 'basic-sample.html';
 const valueHandlingSampleTs = 'value-handling-sample.ts';
 const valueHandlingSampleHtml = 'value-handling-sample.html';
+const labelSampleHtml = 'label-sample.html';
+const labelSampleTs = 'label-sample.ts';
 
 @Component({
     selector: 'ui5-doc-dynamic-date-range',
     templateUrl: './dynamic-date-range-docs.html',
-    standalone: true,
     imports: [
         CodeExampleComponent,
         ComponentExampleComponent,
         DescriptionComponent,
         DocsSectionTitleComponent,
         BasicSample,
-        ValueHandlingSample
+        ValueHandlingSample,
+        LabelSample
     ]
 })
 export class DynamicDateRangeDocs {
@@ -60,4 +63,18 @@ export class DynamicDateRangeDocs {
             originalFileName: 'value-handling-sample'
         }
     ];
+
+    readonly labelExample = signal<ExampleFile[]>([
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(labelSampleHtml),
+            originalFileName: 'label-sample'
+        },
+        {
+            language: 'typescript',
+            component: 'LabelSample',
+            code: getAssetFromModuleAssets(labelSampleTs),
+            originalFileName: 'label-sample'
+        }
+    ]);
 }

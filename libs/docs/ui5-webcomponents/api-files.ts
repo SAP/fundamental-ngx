@@ -32,7 +32,7 @@ export const API_FILES = {
     fileUploader: ['FileUploader'],
     form: ['Form', 'FormGroup', 'FormItem'],
     icon: ['Icon'],
-    input: ['Input'],
+    input: ['Input', 'InputIcon'],
     label: ['Label'],
     link: ['Link'],
     list: ['List', 'ListItemCustom', 'ListItemGroup', 'ListItemStandard'],
