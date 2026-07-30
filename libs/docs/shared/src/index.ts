@@ -3,6 +3,7 @@ export * from './lib/core-helpers/code-example/code-example.component';
 export * from './lib/core-helpers/code-example/example-file';
 export * from './lib/core-helpers/code-snippet/code-snippet.component';
 export * from './lib/core-helpers/component-example/component-example.component';
+export * from './lib/core-helpers/density-dial/fd-docs-density-dial.component';
 export * from './lib/core-helpers/deprecated-alerts/deprecated-alerts.component';
 export * from './lib/core-helpers/description/description';
 export * from './lib/core-helpers/doc-page/doc-page.component';

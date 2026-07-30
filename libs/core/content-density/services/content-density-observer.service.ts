@@ -58,16 +58,11 @@ const getDefaultContentDensity = (
 const initialContentDensity = (
     injector: Injector,
     configuration?: ContentDensityObserverSettings
-): ContentDensityMode => {
-    const serviceValue = injector.get(GlobalContentDensityService, null, { optional: true })?.currentContentDensity;
-    if (serviceValue) {
-        return serviceValue;
-    }
-    return getDefaultContentDensity(injector, {
+): ContentDensityMode =>
+    getDefaultContentDensity(injector, {
         ...defaultContentDensityObserverConfigs,
         ...(configuration || {})
     });
-};
 
 /**
  * Service for observing and managing content density in components.
@@ -203,7 +198,6 @@ export class ContentDensityObserver {
         // Set up config first (needed for validation)
         this.config = {
             ...defaultContentDensityObserverConfigs,
-            ...(this._parentContentDensityObserver?.config ?? {}),
             ...(_providedConfig || {})
         };
 
@@ -215,8 +209,8 @@ export class ContentDensityObserver {
             defaultContentDensity: resolvedInitialDensity,
             contentDensityDirective: this._contentDensityDirective?.densityMode,
             contentDensityService: this._globalContentDensityService ?? undefined,
-            parentContentDensityObserver: this.config.restrictChildContentDensity
-                ? this._parentContentDensityObserver?.contentDensity
+            parentContentDensityObserver: this._parentContentDensityObserver?.config?.restrictChildContentDensity
+                ? this._parentContentDensityObserver.contentDensity
                 : undefined
         });
 
@@ -349,20 +343,13 @@ export class ContentDensityObserver {
         const modifiers = this.config.modifiers;
         const density = currentDensity ?? this._contentDensity();
 
-        const parentContentDensityEqual = this._parentContentDensityObserver?.value === density;
-
         this._elements.forEach((element) => {
             Object.values(modifiers).forEach((className) => {
                 this._renderer?.removeClass(element?.nativeElement, className);
             });
 
-            // Apply/remove UI5 compact marker attribute
-            this._applyUi5Marker(element?.nativeElement, density, parentContentDensityEqual);
+            this._applyUi5Marker(element?.nativeElement, density);
 
-            // Simply remove all modifiers from current element. Content density state is covered by parent element.
-            if (parentContentDensityEqual && !this.config.alwaysAddModifiers) {
-                return;
-            }
             const modifierClass = modifiers[density];
             if (modifierClass) {
                 this._renderer?.addClass(element?.nativeElement, modifierClass);
@@ -375,11 +362,7 @@ export class ContentDensityObserver {
      * UI5 Web Components only support cozy (default) and compact modes.
      * Both COMPACT and CONDENSED fundamental-ngx modes map to UI5 compact.
      */
-    private _applyUi5Marker(
-        nativeElement: HTMLElement | undefined,
-        currentDensity: ContentDensityMode,
-        parentContentDensityEqual: boolean
-    ): void {
+    private _applyUi5Marker(nativeElement: HTMLElement | undefined, currentDensity: ContentDensityMode): void {
         // Only apply to actual HTML elements, not comment/text nodes
         if (
             !this.config.ui5Markers?.enabled ||
@@ -391,12 +374,6 @@ export class ContentDensityObserver {
         }
 
         const ui5CompactAttribute = 'data-ui5-compact-size';
-
-        // Remove attribute if parent already has the same density (unless alwaysAddModifiers)
-        if (parentContentDensityEqual && !this.config.alwaysAddModifiers) {
-            this._renderer.removeAttribute(nativeElement, ui5CompactAttribute);
-            return;
-        }
 
         // UI5 only has cozy (default) and compact modes
         // Map: COMPACT -> compact, CONDENSED -> compact, COZY -> remove attribute

@@ -19,10 +19,7 @@ import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
     `,
     styleUrls: ['./content-density-user.component.scss'],
     host: {
-        class: 'example-component',
-        '[class.is-compact]': '_contentDensityObserver.isCompactSignal()',
-        '[class.is-cozy]': '_contentDensityObserver.isCozySignal()',
-        '[class.is-condensed]': '_contentDensityObserver.isCondensedSignal()'
+        class: 'example-component'
     },
     providers: [
         contentDensityObserverProviders({

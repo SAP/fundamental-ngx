@@ -15,7 +15,6 @@ import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { NestedListComponent } from '@fundamental-ngx/cx/nested-list';
 
 @Component({
-    // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'fdx-side-nav-main, div[fdx-side-nav-main]',
     template: `<ng-content></ng-content>`,
     encapsulation: ViewEncapsulation.None,

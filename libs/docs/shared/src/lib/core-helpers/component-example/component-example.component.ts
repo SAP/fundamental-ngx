@@ -13,12 +13,12 @@ import { RtlService } from '@fundamental-ngx/cdk/utils';
 import {
     ContentDensityDirective,
     ContentDensityMode,
-    contentDensityObserverProviders,
-    GlobalContentDensityService
+    contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { WizardDialogGeneratorService } from '@fundamental-ngx/platform/wizard-generator';
+import { DensityDialChoice, FdDocsDensityDialComponent } from '../density-dial/fd-docs-density-dial.component';
 
 @Component({
     selector: 'component-example',
@@ -30,13 +30,12 @@ import { WizardDialogGeneratorService } from '@fundamental-ngx/platform/wizard-g
         WizardDialogGeneratorService,
         contentDensityObserverProviders({
             supportedContentDensity: [ContentDensityMode.COMPACT, ContentDensityMode.COZY],
-            defaultContentDensity: ContentDensityMode.COZY,
-            restrictChildContentDensity: true
+            defaultContentDensity: ContentDensityMode.COZY
         })
     ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [IconComponent],
+    imports: [IconComponent, FdDocsDensityDialComponent],
     hostDirectives: [
         {
             directive: ContentDensityDirective,
@@ -46,12 +45,11 @@ import { WizardDialogGeneratorService } from '@fundamental-ngx/platform/wizard-g
 })
 export class ComponentExampleComponent {
     readonly hasBackground = input(true);
+    readonly contentDensityPassthrough = input(false);
 
     protected readonly rtlEnabled = signal(false);
     protected readonly showBackground = linkedSignal(() => this.hasBackground());
-    protected readonly compactMode = linkedSignal(
-        () => this._globalDensity.currentDensitySignal() === ContentDensityMode.COMPACT
-    );
+    protected readonly densityChoice = signal<DensityDialChoice>('global');
     protected readonly responsiveEnabled = signal(false);
     protected readonly viewportWidth = signal<string | null>(null);
 
@@ -73,16 +71,22 @@ export class ComponentExampleComponent {
 
     private readonly _rtlService = inject(RtlService);
     private readonly _contentDensityDirective = inject(ContentDensityDirective);
-    private readonly _globalDensity = inject(GlobalContentDensityService);
 
     constructor() {
         effect(() => {
             this._rtlService.rtl.set(this.rtlEnabled());
         });
         effect(() => {
-            this._contentDensityDirective.setDensity(
-                this.compactMode() ? ContentDensityMode.COMPACT : ContentDensityMode.COZY
-            );
+            if (this.contentDensityPassthrough()) {
+                this._contentDensityDirective.setDensity('global');
+                return;
+            }
+            const choice = this.densityChoice();
+            if (choice === 'global') {
+                this._contentDensityDirective.setDensity('global');
+            } else {
+                this._contentDensityDirective.setDensity(choice as ContentDensityMode);
+            }
         });
     }
 
