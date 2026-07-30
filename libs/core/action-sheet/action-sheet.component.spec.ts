@@ -9,7 +9,6 @@ import { ActionSheetModule } from './action-sheet.module';
 
 @Component({
     template: ` <div #componentElement fd-action-sheet>Action Sheet Parent Test Text</div> `,
-    standalone: true,
     imports: [ActionSheetModule, ButtonComponent]
 })
 class TestComponent {
@@ -29,7 +28,6 @@ class TestComponent {
             </fd-action-sheet-body>
         </fd-action-sheet>
     `,
-    standalone: true,
     imports: [
         ActionSheetComponent,
         ActionSheetControlComponent,

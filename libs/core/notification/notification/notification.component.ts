@@ -190,31 +190,6 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
         });
     }
 
-    /** @hidden Listen and close notification on Escape key */
-    closeNotificationEsc(event: KeyboardEvent): void {
-        if (this.escKeyCloseable && KeyUtil.isKeyCode(event, ESCAPE) && this._notificationRef) {
-            this._notificationRef.dismiss('escape');
-        }
-    }
-
-    /** @hidden Calls the optional action callback when Enter or Delete/Backspace is pressed. */
-    handleNotificationActionKeys(event: KeyboardEvent): void {
-        const callbackFn = this.actionKeyHandler();
-
-        if (!callbackFn || this._isEditableTarget(event.target)) {
-            return;
-        }
-
-        if (KeyUtil.isKeyCode(event, ENTER)) {
-            callbackFn(event, 'enter');
-            return;
-        }
-
-        if (KeyUtil.isKeyCode(event, [DELETE, BACKSPACE])) {
-            callbackFn(event, 'delete');
-        }
-    }
-
     /** @hidden */
     ngOnInit(): void {
         this._listenAndCloseOnNavigation();
@@ -301,6 +276,31 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
         }
 
         return this._buildPathToNotification(target);
+    }
+
+    /** @hidden Listen and close notification on Escape key */
+    protected closeNotificationEsc(event: KeyboardEvent): void {
+        if (this.escKeyCloseable && KeyUtil.isKeyCode(event, ESCAPE) && this._notificationRef) {
+            this._notificationRef.dismiss('escape');
+        }
+    }
+
+    /** @hidden Calls the optional action callback when Enter or Delete/Backspace is pressed. */
+    protected handleNotificationActionKeys(event: KeyboardEvent): void {
+        const callbackFn = this.actionKeyHandler();
+
+        if (!callbackFn || this._isEditableTarget(event.target)) {
+            return;
+        }
+
+        if (KeyUtil.isKeyCode(event, ENTER)) {
+            callbackFn(event, 'enter');
+            return;
+        }
+
+        if (KeyUtil.isKeyCode(event, [DELETE, BACKSPACE])) {
+            callbackFn(event, 'delete');
+        }
     }
 
     /** @hidden */

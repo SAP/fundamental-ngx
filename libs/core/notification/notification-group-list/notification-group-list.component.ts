@@ -3,10 +3,8 @@ import {
     AfterViewInit,
     ChangeDetectionStrategy,
     Component,
-    ElementRef,
     ViewEncapsulation,
     contentChildren,
-    inject,
     input
 } from '@angular/core';
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';
@@ -22,7 +20,7 @@ let notificationGroupListCounter = 0;
         class: 'fd-notification-group__list',
         role: 'list',
         '[attr.id]': 'id()',
-        '(keydown)': '_onListKeydown($event)'
+        '(keydown)': 'onListKeydown($event)'
     },
     providers: [
         {
@@ -51,9 +49,6 @@ export class NotificationGroupListComponent implements AfterViewInit {
      */
     notifications = contentChildren<NotificationComponent>(FD_NOTIFICATION);
 
-    /** @hidden */
-    private readonly _hostElement = inject(ElementRef<HTMLElement>);
-
     /**
      * @hidden
      */
@@ -65,7 +60,7 @@ export class NotificationGroupListComponent implements AfterViewInit {
     }
 
     /** @hidden Handles list keyboard navigation and moves focus to the target notification. */
-    protected _onListKeydown(event: KeyboardEvent): void {
+    protected onListKeydown(event: KeyboardEvent): void {
         if (!this._shouldHandleNavigation(event)) {
             return;
         }
@@ -133,7 +128,7 @@ export class NotificationGroupListComponent implements AfterViewInit {
         return null;
     }
 
-    /** @hidden Allows navigation only for supported keys and non-editable targets inside the list. */
+    /** @hidden Allows navigation only for supported keys and non-editable targets. */
     private _shouldHandleNavigation(event: KeyboardEvent): boolean {
         const isNavigationKey =
             KeyUtil.isKeyCode(event, DOWN_ARROW) ||
@@ -147,10 +142,6 @@ export class NotificationGroupListComponent implements AfterViewInit {
 
         const target = event.target;
         if (!(target instanceof HTMLElement)) {
-            return false;
-        }
-
-        if (!this._hostElement.nativeElement.contains(target)) {
             return false;
         }
 
