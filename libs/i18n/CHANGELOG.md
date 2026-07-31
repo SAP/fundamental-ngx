@@ -1,3 +1,13 @@
+## 0.64.2-rc.2 (2026-07-31)
+
+### 🩹 Fixes
+
+- **core:** improve aria-description for special types Buttons ([#14420](https://github.com/SAP/fundamental-ngx/pull/14420))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.64.2-rc.1 (2026-07-31)
 
 This was a version bump only for i18n to align it with other projects, there were no code changes.
