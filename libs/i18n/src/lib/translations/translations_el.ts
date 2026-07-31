@@ -34,6 +34,12 @@ export default {
         defaultAriaValueText: 'Απασχολημένο',
         defaultTitle: 'Παρακαλώ περιμένετε'
     },
+    coreButton: {
+        attentionTypeDescription: 'Warning',
+        emphasizedTypeDescription: 'Default Action',
+        negativeTypeDescription: 'Negative Action',
+        positiveTypeDescription: 'Positive Action'
+    },
     coreCalendar: {
         calendarDayViewDescription: 'Ημερολόγιο',
         calendarLegendLabel: 'Λεζάντα Ημερολογίου',

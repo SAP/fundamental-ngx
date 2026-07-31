@@ -156,26 +156,99 @@ describe('ButtonComponent', () => {
             expect(element.getAttribute('aria-label')).toBe('Custom Label');
         });
 
-        it('should set aria-description when provided', () => {
-            fixture.componentRef.setInput('ariaDescription', 'Custom Description');
+        it('should not set aria-describedby when no description and non-special type', () => {
+            fixture.componentRef.setInput('fdType', 'standard');
             fixture.detectChanges();
-            expect(element.getAttribute('aria-description')).toBe('Custom Description');
+            expect(element.getAttribute('aria-describedby')).toBeNull();
         });
 
-        it('should auto-generate aria-label for emphasized button with label', () => {
-            fixture.componentRef.setInput('fdType', 'emphasized');
-            fixture.componentRef.setInput('label', 'Submit');
-            fixture.detectChanges();
-            expect(element.getAttribute('aria-label')).toBe('Submit');
+        describe('ariaDescription input', () => {
+            it('should set aria-describedby pointing to description span', () => {
+                fixture.componentRef.setInput('ariaDescription', 'Custom Description');
+                fixture.detectChanges();
+                const id = component.id();
+                expect(element.getAttribute('aria-describedby')).toContain(`${id}-description`);
+            });
+
+            it('should render hidden span with description text', () => {
+                fixture.componentRef.setInput('ariaDescription', 'Custom Description');
+                fixture.detectChanges();
+                const id = component.id();
+                const span = element.querySelector(`#${id}-description`);
+                expect(span).not.toBeNull();
+                expect(span!.textContent!.trim()).toBe('Custom Description');
+            });
+
+            it('should not render description span when ariaDescription is not set', () => {
+                fixture.detectChanges();
+                const id = component.id();
+                expect(element.querySelector(`#${id}-description`)).toBeNull();
+            });
         });
 
-        it('should auto-generate aria-description for special button types', () => {
+        describe('special type auto-description', () => {
             const specialTypes = ['emphasized', 'positive', 'negative', 'attention'];
 
             specialTypes.forEach((type) => {
-                fixture.componentRef.setInput('fdType', type);
+                it(`should set aria-describedby for ${type} button`, () => {
+                    fixture.componentRef.setInput('fdType', type);
+                    fixture.detectChanges();
+                    const id = component.id();
+                    expect(element.getAttribute('aria-describedby')).toContain(`${id}-type-description`);
+                });
+
+                it(`should render hidden type description span for ${type} button`, () => {
+                    fixture.componentRef.setInput('fdType', type);
+                    fixture.detectChanges();
+                    const id = component.id();
+                    const span = element.querySelector(`#${id}-type-description`);
+                    expect(span).not.toBeNull();
+                    expect(span!.textContent!.trim()).toBeTruthy();
+                });
+            });
+
+            it('should not render type description span for non-special types', () => {
+                fixture.componentRef.setInput('fdType', 'transparent');
                 fixture.detectChanges();
-                expect(element.getAttribute('aria-description')).toBe(type);
+                const id = component.id();
+                expect(element.querySelector(`#${id}-type-description`)).toBeNull();
+            });
+
+            it('should use ariaTypeDescription to override default type description', () => {
+                fixture.componentRef.setInput('fdType', 'negative');
+                fixture.componentRef.setInput('ariaTypeDescription', 'Removes item permanently');
+                fixture.detectChanges();
+                const id = component.id();
+                const span = element.querySelector(`#${id}-type-description`);
+                expect(span!.textContent!.trim()).toBe('Removes item permanently');
+            });
+        });
+
+        describe('combined ariaDescription and special type', () => {
+            it('should include both IDs in aria-describedby', () => {
+                fixture.componentRef.setInput('fdType', 'negative');
+                fixture.componentRef.setInput('ariaDescription', 'Deletes the record');
+                fixture.detectChanges();
+                const id = component.id();
+                const describedBy = element.getAttribute('aria-describedby');
+                expect(describedBy).toContain(`${id}-description`);
+                expect(describedBy).toContain(`${id}-type-description`);
+            });
+        });
+
+        describe('auto-generated aria-label for special types', () => {
+            it('should auto-generate aria-label from label for emphasized button', () => {
+                fixture.componentRef.setInput('fdType', 'emphasized');
+                fixture.componentRef.setInput('label', 'Submit');
+                fixture.detectChanges();
+                expect(element.getAttribute('aria-label')).toBe('Submit');
+            });
+
+            it('should auto-generate aria-label from glyph for special button without label', () => {
+                fixture.componentRef.setInput('fdType', 'positive');
+                fixture.componentRef.setInput('glyph', 'slim-arrow-down');
+                fixture.detectChanges();
+                expect(element.getAttribute('aria-label')).toBe('slim arrow down');
             });
         });
     });

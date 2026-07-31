@@ -34,6 +34,12 @@ export default {
         defaultAriaValueText: 'עסוק',
         defaultTitle: 'המתן'
     },
+    coreButton: {
+        attentionTypeDescription: 'Warning',
+        emphasizedTypeDescription: 'Default Action',
+        negativeTypeDescription: 'Negative Action',
+        positiveTypeDescription: 'Positive Action'
+    },
     coreCalendar: {
         calendarDayViewDescription: 'לוח שנה',
         calendarLegendLabel: 'מקרא לוח שנה',

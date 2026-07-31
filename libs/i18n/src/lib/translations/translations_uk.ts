@@ -34,6 +34,12 @@ export default {
         defaultAriaValueText: 'Зайнято',
         defaultTitle: 'Зачекайте'
     },
+    coreButton: {
+        attentionTypeDescription: 'Warning',
+        emphasizedTypeDescription: 'Default Action',
+        negativeTypeDescription: 'Negative Action',
+        positiveTypeDescription: 'Positive Action'
+    },
     coreCalendar: {
         calendarDayViewDescription: 'Календар',
         calendarLegendLabel: 'Умовні позначення календаря',

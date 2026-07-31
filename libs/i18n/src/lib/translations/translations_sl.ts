@@ -35,6 +35,12 @@ export default {
         defaultAriaValueText: 'Zasedeno',
         defaultTitle: 'Počakajte'
     },
+    coreButton: {
+        attentionTypeDescription: 'Warning',
+        emphasizedTypeDescription: 'Default Action',
+        negativeTypeDescription: 'Negative Action',
+        positiveTypeDescription: 'Positive Action'
+    },
     coreCalendar: {
         calendarDayViewDescription: 'Koledar',
         calendarLegendLabel: 'Legenda koledarja',

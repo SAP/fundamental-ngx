@@ -34,6 +34,12 @@ export default {
         defaultAriaValueText: 'ไม่ว่าง',
         defaultTitle: 'กรุณารอสักครู่'
     },
+    coreButton: {
+        attentionTypeDescription: 'Warning',
+        emphasizedTypeDescription: 'Default Action',
+        negativeTypeDescription: 'Negative Action',
+        positiveTypeDescription: 'Positive Action'
+    },
     coreCalendar: {
         calendarDayViewDescription: 'ปฏิทิน',
         calendarLegendLabel: 'คำอธิบายสัญลักษณ์ของปฏิทิน',

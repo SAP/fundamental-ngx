@@ -34,6 +34,12 @@ export default {
         defaultAriaValueText: '사용 중',
         defaultTitle: '기다려 주십시오.'
     },
+    coreButton: {
+        attentionTypeDescription: 'Warning',
+        emphasizedTypeDescription: 'Default Action',
+        negativeTypeDescription: 'Negative Action',
+        positiveTypeDescription: 'Positive Action'
+    },
     coreCalendar: {
         calendarDayViewDescription: '달력',
         calendarLegendLabel: '달력 범례',

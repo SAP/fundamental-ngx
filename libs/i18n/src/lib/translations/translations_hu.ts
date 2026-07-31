@@ -35,6 +35,12 @@ export default {
         defaultAriaValueText: 'Elfoglalt',
         defaultTitle: 'Kis türelmet'
     },
+    coreButton: {
+        attentionTypeDescription: 'Warning',
+        emphasizedTypeDescription: 'Default Action',
+        negativeTypeDescription: 'Negative Action',
+        positiveTypeDescription: 'Positive Action'
+    },
     coreCalendar: {
         calendarDayViewDescription: 'Naptár',
         calendarLegendLabel: 'Naptármagyarázat',

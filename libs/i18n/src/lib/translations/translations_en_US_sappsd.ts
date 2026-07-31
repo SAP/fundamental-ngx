@@ -35,6 +35,12 @@ export default {
         defaultAriaValueText: '[[[Ɓűşŷ]]]',
         defaultTitle: '[[[Ƥĺēąşē ŵąįţ∙∙∙∙∙∙∙∙]]]'
     },
+    coreButton: {
+        attentionTypeDescription: 'Warning',
+        emphasizedTypeDescription: 'Default Action',
+        negativeTypeDescription: 'Negative Action',
+        positiveTypeDescription: 'Positive Action'
+    },
     coreCalendar: {
         calendarDayViewDescription: '[[[Ĉąĺēŋƌąŗ∙∙∙∙∙∙]]]',
         calendarLegendLabel: '[[[Ĉąĺēŋƌąŗ Ļēğēŋƌ∙∙∙∙]]]',

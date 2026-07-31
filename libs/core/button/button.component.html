@@ -14,3 +14,17 @@
 @if (fdMenu()) {
     <fd-icon glyph="slim-arrow-down"></fd-icon>
 }
+
+<!-- Custom description (ariaDescription input or native attribute).
+     Skipped when user provides aria-describedby — they manage their own description references. -->
+@if (!ariaDescribedBy() && !nativeAriaDescribedBy() && effectiveAriaDescription()) {
+    <span class="fd-button__sr-only" [attr.id]="id() + '-description'">{{ effectiveAriaDescription() }}</span>
+}
+
+<!-- Type description (special button types: emphasized, positive, negative, attention).
+     Skipped when user provides aria-describedby — they manage their own description references. -->
+@if (!ariaDescribedBy() && !nativeAriaDescribedBy() && isSpecialButtonType()) {
+    <span class="fd-button__sr-only" [attr.id]="id() + '-type-description'">{{
+        ariaTypeDescription() || defaultButtonTypeDescription()
+    }}</span>
+}

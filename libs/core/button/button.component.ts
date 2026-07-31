@@ -1,16 +1,17 @@
 import {
-    afterNextRender,
     ChangeDetectionStrategy,
     Component,
     computed,
     ElementRef,
     inject,
     input,
+    OnInit,
     signal,
     ViewEncapsulation
 } from '@angular/core';
 import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { resolveTranslationSignalFn } from '@fundamental-ngx/i18n';
 import { BaseButton } from './base-button';
 
 import { IconComponent } from '@fundamental-ngx/core/icon';
@@ -43,7 +44,7 @@ const SPECIAL_BUTTON_TYPES = new Set(['emphasized', 'positive', 'negative', 'att
         '[attr.disabled]': '_disabledState() || null',
         '[attr.aria-disabled]': 'ariaDisabled() || null',
         '[attr.aria-label]': 'buttonArialabel()',
-        '[attr.aria-description]': 'buttonAriaDescription()',
+        '[attr.aria-describedby]': 'ariaDescribedby() || null',
         '[attr.id]': 'id()',
         '[class]': 'cssClass()',
         '(click)': 'clicked($event)'
@@ -57,7 +58,7 @@ const SPECIAL_BUTTON_TYPES = new Set(['emphasized', 'positive', 'negative', 'att
     ],
     imports: [IconComponent]
 })
-export class ButtonComponent extends BaseButton implements HasElementRef {
+export class ButtonComponent extends BaseButton implements HasElementRef, OnInit {
     /** Button ID - default value is provided if not set  */
     readonly id = input(`fd-button-${++buttonId}`);
 
@@ -66,6 +67,65 @@ export class ButtonComponent extends BaseButton implements HasElementRef {
 
     /** @hidden */
     protected readonly contentDensityObserver = inject(ContentDensityObserver);
+
+    /**
+     * Check if button has a special type (emphasized, positive, negative, attention)
+     * @hidden
+     */
+    protected readonly isSpecialButtonType = computed(() => SPECIAL_BUTTON_TYPES.has(this.fdTypeState()));
+
+    /**
+     * Calculate aria-describedby attribute value.
+     * If the user explicitly provides aria-describedby (via input or native attribute),
+     * that value is used as-is. Otherwise, auto-generates IDs referencing hidden description spans.
+     * Returns null if no descriptions apply (attribute not set).
+     * @hidden
+     */
+    protected readonly ariaDescribedby = computed(() => {
+        // User-provided value takes full precedence — bypass the auto-generated spans
+        const userProvided = this.ariaDescribedBy() ?? this.nativeAriaDescribedBy();
+        if (userProvided != null) {
+            return userProvided || null;
+        }
+
+        const ids: string[] = [];
+
+        if (this.effectiveAriaDescription()) {
+            ids.push(this.id() + '-description');
+        }
+
+        if (this.isSpecialButtonType()) {
+            ids.push(this.id() + '-type-description');
+        }
+
+        return ids.length > 0 ? ids.join(' ') : null;
+    });
+
+    /**
+     * Native aria-describedby attribute read from the DOM element.
+     * Captured once during init; signals user intent to manage describedby manually.
+     * @hidden
+     */
+    protected readonly nativeAriaDescribedBy = signal<string | null>(null);
+
+    /**
+     * Effective aria description: explicit input takes precedence over native attribute.
+     * Prioritizes ariaDescription input, falls back to native attribute.
+     * Empty string from ariaDescription is preserved (clears description).
+     * @hidden
+     */
+    protected readonly effectiveAriaDescription = computed(
+        () => this.ariaDescription() ?? this._nativeAriaDescription()
+    );
+
+    /**
+     * Translated aria description for the current special button type, or null if not special.
+     * @hidden
+     */
+    protected readonly defaultButtonTypeDescription = computed(() => {
+        const type = this.fdTypeState() as keyof typeof this._typeDescriptions;
+        return this._typeDescriptions[type]?.() ?? null;
+    });
 
     /**
      * Calculate aria-label attribute
@@ -82,24 +142,8 @@ export class ButtonComponent extends BaseButton implements HasElementRef {
             return nativeLabel; // return the native attribute aria-label
         }
 
-        if (SPECIAL_BUTTON_TYPES.has(this.fdTypeState())) {
+        if (this.isSpecialButtonType()) {
             return this.label() ?? this._glyphLabel() ?? null;
-        }
-
-        return null;
-    });
-
-    /**
-     * Calculate aria-description attribute
-     * @hidden
-     */
-    protected readonly buttonAriaDescription = computed(() => {
-        if (this.ariaDescription()) {
-            return this.ariaDescription();
-        }
-
-        if (SPECIAL_BUTTON_TYPES.has(this.fdTypeState())) {
-            return this.fdTypeState();
         }
 
         return null;
@@ -150,17 +194,52 @@ export class ButtonComponent extends BaseButton implements HasElementRef {
      */
     private readonly _nativeAriaLabel = signal<string | null>(null);
 
+    /**
+     * Native aria-description attribute read from the DOM element.
+     * Captured once after render for use in aria-description computation.
+     * @hidden
+     */
+    private readonly _nativeAriaDescription = signal<string | null>(null);
+
+    /** @hidden Resolves per-key translation signals */
+    private readonly _translate = resolveTranslationSignalFn();
+
+    /** @hidden Translated aria descriptions for each special button type */
+    private readonly _typeDescriptions = {
+        attention: this._translate('coreButton.attentionTypeDescription'),
+        emphasized: this._translate('coreButton.emphasizedTypeDescription'),
+        negative: this._translate('coreButton.negativeTypeDescription'),
+        positive: this._translate('coreButton.positiveTypeDescription')
+    } as const;
+
     /** @hidden */
     constructor() {
         super();
+    }
 
-        // Read native aria-label attribute once after render
-        afterNextRender(() => {
-            const nativeLabel = this.elementRef.nativeElement.getAttribute('aria-label');
-            if (nativeLabel) {
-                this._nativeAriaLabel.set(nativeLabel);
-            }
-        });
+    /**
+     * Capture native aria-label and aria-description attributes during initialization.
+     * Runs during ngOnInit to ensure attributes are captured before rendering the template.
+     * The native aria-description is removed from the DOM after capture to prevent
+     * duplicate accessibility attributes (ACC-264.1).
+     */
+    ngOnInit(): void {
+        const nativeLabel = this.elementRef.nativeElement.getAttribute('aria-label');
+        if (nativeLabel) {
+            this._nativeAriaLabel.set(nativeLabel);
+        }
+
+        const nativeDescription = this.elementRef.nativeElement.getAttribute('aria-description');
+        if (nativeDescription) {
+            this._nativeAriaDescription.set(nativeDescription);
+            // Remove native attribute to prevent ACC-264.1 (duplicate aria-description)
+            this.elementRef.nativeElement.removeAttribute('aria-description');
+        }
+
+        const nativeDescribedBy = this.elementRef.nativeElement.getAttribute('aria-describedby');
+        if (nativeDescribedBy) {
+            this.nativeAriaDescribedBy.set(nativeDescribedBy);
+        }
     }
 
     /** Forces the focus outline around the button, which is not default behavior in Safari. */
