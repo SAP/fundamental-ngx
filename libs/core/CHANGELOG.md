@@ -1,3 +1,13 @@
+## 0.64.2-rc.3 (2026-07-31)
+
+### 🩹 Fixes
+
+- **core:** updates for Notifications after design review ([#14408](https://github.com/SAP/fundamental-ngx/pull/14408))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.64.2-rc.2 (2026-07-31)
 
 ### 🩹 Fixes
