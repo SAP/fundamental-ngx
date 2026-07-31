@@ -12,6 +12,9 @@ export interface ProductSwitchItem {
     /** Callback function that will be called on selecting this product from dropdown */
     callback?: (event: MouseEvent) => void;
 
+    /** URL to navigate to when the product item is clicked */
+    url?: string;
+
     /** Icon of product item */
     icon?: string;
 
@@ -44,4 +47,7 @@ export interface ProductSwitchItem {
 
     /** Whether this element should stick in one place, without changing position */
     stickToPosition?: boolean;
+
+    /** Navigation target for the product item link (_self, _blank, _parent, _top) */
+    target?: '_self' | '_blank' | '_parent' | '_top';
 }

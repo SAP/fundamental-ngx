@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
-import { ProductSwitchItem, ProductSwitchModule } from '@fundamental-ngx/core/product-switch';
+import {
+    ProductSwitchBodyComponent,
+    ProductSwitchComponent,
+    ProductSwitchItem
+} from '@fundamental-ngx/core/product-switch';
 import { ShellbarActionsComponent, ShellbarComponent } from '@fundamental-ngx/core/shellbar';
 
 @Component({
     selector: 'fd-product-switch-dnd-example',
     templateUrl: './product-switch-dnd-example.component.html',
-    imports: [ShellbarComponent, ShellbarActionsComponent, ProductSwitchModule]
+    imports: [ShellbarComponent, ShellbarActionsComponent, ProductSwitchComponent, ProductSwitchBodyComponent]
 })
 export class ProductSwitchDndExampleComponent {
     list: ProductSwitchItem[] = [
@@ -19,7 +23,9 @@ export class ProductSwitchDndExampleComponent {
         {
             title: 'Analytics Cloud',
             subtitle: 'Analytics Cloud',
-            icon: 'business-objects-experience'
+            icon: 'business-objects-experience',
+            url: 'https://www.sap.com/products/technology-platform/cloud-analytics.html',
+            target: '_blank'
         },
         {
             title: 'Catalog',
@@ -41,7 +47,9 @@ export class ProductSwitchDndExampleComponent {
         },
         {
             title: 'Strategic Procurement',
-            icon: 'cart-3'
+            icon: 'cart-3',
+            url: 'https://www.sap.com/products/spend-management/strategic-sourcing.html',
+            target: '_top'
         },
         {
             title: 'Vendor Managemen',

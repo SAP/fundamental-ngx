@@ -1,3 +1,74 @@
+## 0.64.2-rc.4 (2026-07-31)
+
+This was a version bump only for datetime-adapter to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.3 (2026-07-31)
+
+This was a version bump only for datetime-adapter to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.2 (2026-07-31)
+
+This was a version bump only for datetime-adapter to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.1 (2026-07-31)
+
+This was a version bump only for datetime-adapter to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.0 (2026-07-30)
+
+This was a version bump only for datetime-adapter to align it with other projects, there were no code changes.
+
+## 0.64.1 (2026-07-30)
+
+### 🩹 Fixes
+
+- **ui5:** use relative import in theming-bridge template to fix lint boundary error ([#14419](https://github.com/SAP/fundamental-ngx/pull/14419))
+- skip linux snapshot check in merge commits ([#14414](https://github.com/SAP/fundamental-ngx/pull/14414))
+- **ui5:** force-construct per-package theme providers to eliminate "Theme not registered" errors ([#14396](https://github.com/SAP/fundamental-ngx/pull/14396))
+- **cdk:** complete moduleResolution bundler migration and TS project references ([#14389](https://github.com/SAP/fundamental-ngx/pull/14389))
+- **core,platform,cdk:** remove extendedDiagnostics suppressions, retire `$safeNavigationMigration` and fix all violations ([#14393](https://github.com/SAP/fundamental-ngx/pull/14393), [#14334](https://github.com/SAP/fundamental-ngx/issues/14334))
+
+### ❤️ Thank You
+
+- deno
+- Maria Dineva @MariaIDineva
+
+## 0.64.1-rc.19 (2026-07-30)
+
+This was a version bump only for datetime-adapter to align it with other projects, there were no code changes.
+
+## 0.64.1-rc.18 (2026-07-30)
+
+This was a version bump only for datetime-adapter to align it with other projects, there were no code changes.
+
+## 0.64.1-rc.17 (2026-07-29)
+
+This was a version bump only for datetime-adapter to align it with other projects, there were no code changes.
+
+## 0.64.1-rc.16 (2026-07-29)
+
+### 🩹 Fixes
+
+- **ui5:** use relative import in theming-bridge template to fix lint boundary error ([#14419](https://github.com/SAP/fundamental-ngx/pull/14419))
+
+### ❤️ Thank You
+
+- deno
+
+## 0.64.1-rc.14 (2026-07-29)
+
+### 🩹 Fixes
+
+- skip linux snapshot check in merge commits ([#14414](https://github.com/SAP/fundamental-ngx/pull/14414))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
+## 0.64.1-rc.13 (2026-07-28)
+
+This was a version bump only for datetime-adapter to align it with other projects, there were no code changes.
+
 ## 0.64.1-rc.12 (2026-07-28)
 
 This was a version bump only for datetime-adapter to align it with other projects, there were no code changes.

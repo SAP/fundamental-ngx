@@ -35,6 +35,12 @@ export default {
         defaultAriaValueText: 'Zasedeno',
         defaultTitle: 'Počakajte'
     },
+    coreButton: {
+        attentionTypeDescription: 'Warning',
+        emphasizedTypeDescription: 'Default Action',
+        negativeTypeDescription: 'Negative Action',
+        positiveTypeDescription: 'Positive Action'
+    },
     coreCalendar: {
         calendarDayViewDescription: 'Koledar',
         calendarLegendLabel: 'Legenda koledarja',
@@ -204,7 +210,10 @@ export default {
         totalResultsLabel: 'Št. rezultatov: {totalCount}'
     },
     coreProductSwitch: {
-        ariaLabel: 'Preklop med proizvodi'
+        ariaLabel: 'Preklop med proizvodi',
+        targetBlank: 'opens in a new browser tab',
+        targetParent: 'opens in the parent frame',
+        targetTop: 'opens in the full browser window'
     },
     coreRadio: {
         readOnlyDescription: 'Ta izbirni gumb je samo za branje in ga ni mogoče spremeniti.'

@@ -34,6 +34,12 @@ export default {
         defaultAriaValueText: 'Зайнято',
         defaultTitle: 'Зачекайте'
     },
+    coreButton: {
+        attentionTypeDescription: 'Warning',
+        emphasizedTypeDescription: 'Default Action',
+        negativeTypeDescription: 'Negative Action',
+        positiveTypeDescription: 'Positive Action'
+    },
     coreCalendar: {
         calendarDayViewDescription: 'Календар',
         calendarLegendLabel: 'Умовні позначення календаря',
@@ -203,7 +209,10 @@ export default {
         totalResultsLabel: 'Результатів: {totalCount}'
     },
     coreProductSwitch: {
-        ariaLabel: 'Перемикач продуктів'
+        ariaLabel: 'Перемикач продуктів',
+        targetBlank: 'opens in a new browser tab',
+        targetParent: 'opens in the parent frame',
+        targetTop: 'opens in the full browser window'
     },
     coreRadio: {
         readOnlyDescription: 'Цей перемикач доступний тільки для читання і не може бути змінений.'

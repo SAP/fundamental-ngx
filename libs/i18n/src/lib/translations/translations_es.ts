@@ -35,6 +35,12 @@ export default {
         defaultAriaValueText: 'Ocupado',
         defaultTitle: 'Espere'
     },
+    coreButton: {
+        attentionTypeDescription: 'Warning',
+        emphasizedTypeDescription: 'Default Action',
+        negativeTypeDescription: 'Negative Action',
+        positiveTypeDescription: 'Positive Action'
+    },
     coreCalendar: {
         calendarDayViewDescription: 'Calendario',
         calendarLegendLabel: 'Leyenda de calendario',
@@ -204,7 +210,10 @@ export default {
         totalResultsLabel: '{totalCount} resultados'
     },
     coreProductSwitch: {
-        ariaLabel: 'Cambiar producto'
+        ariaLabel: 'Cambiar producto',
+        targetBlank: 'opens in a new browser tab',
+        targetParent: 'opens in the parent frame',
+        targetTop: 'opens in the full browser window'
     },
     coreRadio: {
         readOnlyDescription: 'Este botón de selección es de solo lectura y no se puede modificar.'

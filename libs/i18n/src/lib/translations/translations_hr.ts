@@ -35,6 +35,12 @@ export default {
         defaultAriaValueText: 'Zauzeto',
         defaultTitle: 'Pričekajte'
     },
+    coreButton: {
+        attentionTypeDescription: 'Warning',
+        emphasizedTypeDescription: 'Default Action',
+        negativeTypeDescription: 'Negative Action',
+        positiveTypeDescription: 'Positive Action'
+    },
     coreCalendar: {
         calendarDayViewDescription: 'Kalendar',
         calendarLegendLabel: 'Tumač kalendara',
@@ -204,7 +210,10 @@ export default {
         totalResultsLabel: 'Rezultata: {totalCount}'
     },
     coreProductSwitch: {
-        ariaLabel: 'Prebacivač proizvoda'
+        ariaLabel: 'Prebacivač proizvoda',
+        targetBlank: 'opens in a new browser tab',
+        targetParent: 'opens in the parent frame',
+        targetTop: 'opens in the full browser window'
     },
     coreRadio: {
         readOnlyDescription: 'Ovaj radio gumb je samo za čitanje i ne može se mijenjati.'

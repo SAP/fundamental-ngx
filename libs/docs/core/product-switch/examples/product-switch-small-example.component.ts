@@ -9,8 +9,8 @@ import { ProductSwitchItem, ProductSwitchModule } from '@fundamental-ngx/core/pr
 export class ProductSwitchSmallExampleComponent {
     list: ProductSwitchItem[] = [
         {
-            title: 'Home',
-            subtitle: 'Central Home',
+            title: 'Home Home Home Home Home Home Home Home',
+            subtitle: 'Central Home Central Home Central Home Central Home',
             icon: 'home',
             stickToPosition: true,
             disabledDragAndDrop: true

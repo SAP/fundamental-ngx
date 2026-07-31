@@ -35,6 +35,12 @@ export default {
         defaultAriaValueText: 'Elfoglalt',
         defaultTitle: 'Kis türelmet'
     },
+    coreButton: {
+        attentionTypeDescription: 'Warning',
+        emphasizedTypeDescription: 'Default Action',
+        negativeTypeDescription: 'Negative Action',
+        positiveTypeDescription: 'Positive Action'
+    },
     coreCalendar: {
         calendarDayViewDescription: 'Naptár',
         calendarLegendLabel: 'Naptármagyarázat',
@@ -204,7 +210,10 @@ export default {
         totalResultsLabel: '{totalCount} találat'
     },
     coreProductSwitch: {
-        ariaLabel: 'Termékváltás'
+        ariaLabel: 'Termékváltás',
+        targetBlank: 'opens in a new browser tab',
+        targetParent: 'opens in the parent frame',
+        targetTop: 'opens in the full browser window'
     },
     coreRadio: {
         readOnlyDescription: 'Ez a választókapcsoló írásvédett, ezért nem módosítható.'

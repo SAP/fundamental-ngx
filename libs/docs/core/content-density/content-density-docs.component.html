@@ -53,12 +53,17 @@
         <li><code>updateContentDensity(mode)</code> - Method to change the global content density</li>
     </ul>
     <p>
+        The example below shares the app-wide <code>GlobalContentDensityService</code> instance. Use the
+        <strong>content-density toggle in the top-right toolbar</strong> to cycle through Cozy, Compact, and Condensed —
+        the example box updates in real time.
+    </p>
+    <p>
         Note that many components only come in one size, and others (such as the button) only have
         <code>compact</code> and <code>cozy</code> sizes, so setting the size to <code>condensed</code>
         will have the same effect as compact.
     </p>
 </description>
-<component-example>
+<component-example [contentDensityPassthrough]="true">
     <fd-content-density-example></fd-content-density-example>
 </component-example>
 <code-example [exampleFiles]="contentDensityExample"></code-example>
@@ -134,7 +139,7 @@
         Components with a directive override the inherited value.
     </p>
 </description>
-<component-example>
+<component-example [contentDensityPassthrough]="true">
     <fd-directive-usage-example></fd-directive-usage-example>
 </component-example>
 <code-example [exampleFiles]="directiveUsageExample"></code-example>
@@ -152,7 +157,7 @@
     </p>
     <p>This is useful for conditionally applying density based on component state or user preferences.</p>
 </description>
-<component-example>
+<component-example [contentDensityPassthrough]="true">
     <fd-toggle-directive-example></fd-toggle-directive-example>
 </component-example>
 <code-example [exampleFiles]="toggleDirectiveExample"></code-example>
@@ -183,7 +188,7 @@
         <li><code>ui5Markers</code> - Configure UI5 Web Components content density markers (enabled by default).</li>
     </ul>
 </description>
-<component-example>
+<component-example [contentDensityPassthrough]="true">
     <fd-advanced-config-example></fd-advanced-config-example>
 </component-example>
 <code-example [exampleFiles]="advancedConfigExample"></code-example>
@@ -292,7 +297,7 @@
         </tbody>
     </table>
 </description>
-<component-example>
+<component-example [contentDensityPassthrough]="true">
     <fd-docs-deprecated-api-example></fd-docs-deprecated-api-example>
 </component-example>
 <code-example [exampleFiles]="deprecatedApiExample"></code-example>

@@ -35,6 +35,12 @@ export default {
         defaultAriaValueText: 'Zaneprázdnené',
         defaultTitle: 'Čakajte prosím'
     },
+    coreButton: {
+        attentionTypeDescription: 'Warning',
+        emphasizedTypeDescription: 'Default Action',
+        negativeTypeDescription: 'Negative Action',
+        positiveTypeDescription: 'Positive Action'
+    },
     coreCalendar: {
         calendarDayViewDescription: 'Kalendár',
         calendarLegendLabel: 'Legenda kalendára',
@@ -204,7 +210,10 @@ export default {
         totalResultsLabel: '{totalCount} výsledkov'
     },
     coreProductSwitch: {
-        ariaLabel: 'Prepínač produktov'
+        ariaLabel: 'Prepínač produktov',
+        targetBlank: 'opens in a new browser tab',
+        targetParent: 'opens in the parent frame',
+        targetTop: 'opens in the full browser window'
     },
     coreRadio: {
         readOnlyDescription: 'Tento prepínač je len na čítanie a nemožno ho zmeniť.'

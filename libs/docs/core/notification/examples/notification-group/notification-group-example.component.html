@@ -6,7 +6,7 @@
         <fd-popover-body>
             <div fd-notification-popover aria-labelledby="fd-notification-title-1">
                 <fd-toolbar fdType="transparent" [clearBorder]="true">
-                    <h4 fd-title id="fd-notification-title-1">Notifications (30)</h4>
+                    <h4 fd-title id="fd-notification-title-1">Notifications</h4>
                     <fd-toolbar-spacer></fd-toolbar-spacer>
                     <button fd-button label="Clear All" fdType="transparent" ariaLabel="Clear All"></button>
                     <button
@@ -36,7 +36,7 @@
                         </fd-notification-group-header>
                         <!-- A custom id can be provided; it will be used for aria-controls on the header -->
                         <fd-notification-group-list id="today-notifications">
-                            <fd-notification>
+                            <fd-notification [actionKeyHandler]="onNotificationActionKey">
                                 <fd-notification-body>
                                     <fd-avatar size="xs" glyph="batch-payments"></fd-avatar>
                                     <fd-notification-content>
@@ -66,8 +66,8 @@
                                             [indicationColor]="2"
                                             [secondaryIndication]="true"
                                             [inverted]="true"
-                                            label="Negative"
-                                            title="Negative"
+                                            label="Important"
+                                            title="Important"
                                             glyph="high-priority"
                                             aria-label="Object status Negative Inverted"
                                         ></span>
@@ -76,14 +76,14 @@
                                         <button
                                             fd-button
                                             fdType="transparent"
-                                            ariaLabel="Close"
+                                            ariaLabel="Clear Notification"
                                             glyph="decline"
-                                            title="close"
+                                            title="Clear Notification"
                                         ></button>
                                     </fd-notification-actions>
                                 </fd-notification-body>
                             </fd-notification>
-                            <fd-notification>
+                            <fd-notification [actionKeyHandler]="onNotificationActionKey">
                                 <fd-notification-body>
                                     <fd-avatar size="xs" glyph="batch-payments"></fd-avatar>
                                     <fd-notification-content>
@@ -113,8 +113,8 @@
                                             [indicationColor]="2"
                                             [secondaryIndication]="true"
                                             [inverted]="true"
-                                            label="Negative"
-                                            title="Negative"
+                                            label="Important"
+                                            title="Important"
                                             glyph="high-priority"
                                             aria-label="Object status Negative Inverted"
                                         ></span>
@@ -123,14 +123,14 @@
                                         <button
                                             fd-button
                                             fdType="transparent"
-                                            ariaLabel="Close"
+                                            ariaLabel="Clear Notification"
                                             glyph="decline"
-                                            title="close"
+                                            title="Clear Notification"
                                         ></button>
                                     </fd-notification-actions>
                                 </fd-notification-body>
                             </fd-notification>
-                            <fd-notification>
+                            <fd-notification [actionKeyHandler]="onNotificationActionKey">
                                 <fd-notification-body>
                                     <fd-avatar size="xs" glyph="batch-payments"></fd-avatar>
                                     <fd-notification-content>
@@ -160,8 +160,8 @@
                                             [indicationColor]="2"
                                             [secondaryIndication]="true"
                                             [inverted]="true"
-                                            label="Negative"
-                                            title="Negative"
+                                            label="Important"
+                                            title="Important"
                                             glyph="high-priority"
                                             aria-label="Object status Negative Inverted"
                                         ></span>
@@ -170,15 +170,15 @@
                                         <button
                                             fd-button
                                             fdType="transparent"
-                                            ariaLabel="Close"
+                                            ariaLabel="Clear Notification"
                                             glyph="decline"
-                                            title="close"
+                                            title="Clear Notification"
                                         ></button>
                                     </fd-notification-actions>
                                 </fd-notification-body>
                             </fd-notification>
                         </fd-notification-group-list>
-                        <fd-notification-group-growing-item>
+                        <fd-notification-group-growing-item ariaLabel="Load More Notifications">
                             <span fd-notification-group-growing-item-title>More</span>
                         </fd-notification-group-growing-item>
                     </fd-notification-group>
@@ -189,7 +189,7 @@
                             <span fd-notification-group-header-title>Yesterday</span>
                         </fd-notification-group-header>
                         <fd-notification-group-list id="yesterday-notifications">
-                            <fd-notification>
+                            <fd-notification [actionKeyHandler]="onNotificationActionKey">
                                 <fd-notification-body>
                                     <fd-avatar size="xs" glyph="batch-payments"></fd-avatar>
                                     <fd-notification-content>
@@ -219,8 +219,8 @@
                                             [indicationColor]="2"
                                             [secondaryIndication]="true"
                                             [inverted]="true"
-                                            label="Negative"
-                                            title="Negative"
+                                            label="Important"
+                                            title="Important"
                                             glyph="high-priority"
                                             aria-label="Object status Negative Inverted"
                                         ></span>
@@ -229,14 +229,14 @@
                                         <button
                                             fd-button
                                             fdType="transparent"
-                                            ariaLabel="Close"
+                                            ariaLabel="Clear Notification"
                                             glyph="decline"
-                                            title="close"
+                                            title="Clear Notification"
                                         ></button>
                                     </fd-notification-actions>
                                 </fd-notification-body>
                             </fd-notification>
-                            <fd-notification>
+                            <fd-notification [actionKeyHandler]="onNotificationActionKey">
                                 <fd-notification-body>
                                     <fd-avatar size="xs" glyph="batch-payments"></fd-avatar>
                                     <fd-notification-content>
@@ -266,8 +266,8 @@
                                             [indicationColor]="2"
                                             [secondaryIndication]="true"
                                             [inverted]="true"
-                                            label="Negative"
-                                            title="Negative"
+                                            label="Important"
+                                            title="Important"
                                             glyph="high-priority"
                                             aria-label="Object status Negative Inverted"
                                         ></span>
@@ -276,14 +276,14 @@
                                         <button
                                             fd-button
                                             fdType="transparent"
-                                            ariaLabel="Close"
+                                            ariaLabel="Clear Notification"
                                             glyph="decline"
-                                            title="close"
+                                            title="Clear Notification"
                                         ></button>
                                     </fd-notification-actions>
                                 </fd-notification-body>
                             </fd-notification>
-                            <fd-notification>
+                            <fd-notification [actionKeyHandler]="onNotificationActionKey">
                                 <fd-notification-body>
                                     <fd-avatar size="xs" glyph="batch-payments"></fd-avatar>
                                     <fd-notification-content>
@@ -313,8 +313,8 @@
                                             [indicationColor]="2"
                                             [secondaryIndication]="true"
                                             [inverted]="true"
-                                            label="Negative"
-                                            title="Negative"
+                                            label="Important"
+                                            title="Important"
                                             glyph="high-priority"
                                             aria-label="Object status Negative Inverted"
                                         ></span>
@@ -323,9 +323,9 @@
                                         <button
                                             fd-button
                                             fdType="transparent"
-                                            ariaLabel="Close"
+                                            ariaLabel="Clear Notification"
                                             glyph="decline"
-                                            title="close"
+                                            title="Clear Notification"
                                         ></button>
                                     </fd-notification-actions>
                                 </fd-notification-body>

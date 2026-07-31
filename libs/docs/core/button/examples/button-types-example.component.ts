@@ -14,4 +14,6 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
     ],
     imports: [ButtonComponent]
 })
-export class ButtonTypesExampleComponent {}
+export class ButtonTypesExampleComponent {
+    ghostButtonAriaDescription = 'Ghost button description';
+}

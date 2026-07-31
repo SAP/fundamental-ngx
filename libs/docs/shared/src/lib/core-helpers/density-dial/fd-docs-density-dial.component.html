@@ -1,0 +1,22 @@
+<div class="fd-docs-density-dial__segmented" [class.fd-docs-density-dial__segmented--pinned]="isPinned()">
+    <fd-segmented-button [ngModel]="choice()" (ngModelChange)="choice.set($event)">
+        <button fd-button value="global" [ariaLabel]="echoLabel()">
+            @if (!isPinned()) {
+                <span class="fd-docs-density-echo">
+                    <span
+                        class="fd-docs-density-echo__value"
+                        [class.fd-docs-density-echo__value--flash]="flashValue()"
+                        >{{ echoLabel() }}</span
+                    >
+                </span>
+            } @else {
+                Auto
+            }
+        </button>
+        <button fd-button value="cozy">Cozy</button>
+        <button fd-button value="compact">Compact</button>
+    </fd-segmented-button>
+</div>
+<span class="fd-docs-density-provenance" [class.fd-docs-density-provenance--quiet]="quiet()" aria-live="polite">{{
+    provenanceText()
+}}</span>

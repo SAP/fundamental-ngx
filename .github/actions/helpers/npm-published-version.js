@@ -37,14 +37,17 @@ function highestPublishedForPackage(packageName) {
     try {
         // Encode scoped package name: @scope/name -> @scope%2fname
         const encoded = packageName.replace('/', '%2f');
-        const url = `${REGISTRY}/${encoded}`;
+        // Use the dist-tags endpoint — returns {"latest":"x","prerelease":"y"} (tiny payload).
+        // The full package document endpoint causes ENOBUFS in execFileSync because the
+        // response can be several megabytes and overflows the default pipe buffer.
+        const url = `${REGISTRY}/-/package/${encoded}/dist-tags`;
         const raw = execFileSync('curl', ['--silent', '--fail', '--max-time', String(TIMEOUT_S), '--location', url], {
             encoding: 'utf8',
             stdio: ['pipe', 'pipe', 'pipe'],
             timeout: (TIMEOUT_S + 2) * 1000
         });
 
-        const distTags = JSON.parse(raw)['dist-tags'];
+        const distTags = JSON.parse(raw);
         if (!distTags) {
             return null;
         }

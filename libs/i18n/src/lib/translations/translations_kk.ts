@@ -35,6 +35,12 @@ export default {
         defaultAriaValueText: 'Бос емес',
         defaultTitle: 'Күте тұрыңыз'
     },
+    coreButton: {
+        attentionTypeDescription: 'Warning',
+        emphasizedTypeDescription: 'Default Action',
+        negativeTypeDescription: 'Negative Action',
+        positiveTypeDescription: 'Positive Action'
+    },
     coreCalendar: {
         calendarDayViewDescription: 'Күнтізбе',
         calendarLegendLabel: 'Күнтізбе шартты белгісі',
@@ -204,7 +210,10 @@ export default {
         totalResultsLabel: '{totalCount} нәтиже'
     },
     coreProductSwitch: {
-        ariaLabel: 'Өнім ауыстырып-қосқышы'
+        ariaLabel: 'Өнім ауыстырып-қосқышы',
+        targetBlank: 'opens in a new browser tab',
+        targetParent: 'opens in the parent frame',
+        targetTop: 'opens in the full browser window'
     },
     coreRadio: {
         readOnlyDescription: 'Бұл ауыстырып-қосқыш жазудан қорғалған және оны өзгерту мүмкін емес.'

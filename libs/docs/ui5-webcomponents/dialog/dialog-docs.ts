@@ -10,6 +10,7 @@ import {
 import { DialogBasicSample } from './examples/basic-sample';
 import { DialogDraggableResizableSample } from './examples/draggable-resizable-sample';
 import { DialogEventsSample } from './examples/events-sample';
+import { DialogFullscreenSample } from './examples/fullscreen-sample';
 import { DialogHeaderFooterSample } from './examples/header-footer-sample';
 import { DialogStretchSample } from './examples/stretch-sample';
 import { DialogValueStateSample } from './examples/value-state-sample';
@@ -26,6 +27,8 @@ const stretchSampleHtml = 'stretch-sample.html';
 const stretchSampleTs = 'stretch-sample.ts';
 const eventsSampleHtml = 'events-sample.html';
 const eventsSampleTs = 'events-sample.ts';
+const fullscreenSampleHtml = 'fullscreen-sample.html';
+const fullscreenSampleTs = 'fullscreen-sample.ts';
 
 @Component({
     selector: 'ui5-dialog-docs',
@@ -41,7 +44,8 @@ const eventsSampleTs = 'events-sample.ts';
         DialogDraggableResizableSample,
         DialogValueStateSample,
         DialogStretchSample,
-        DialogEventsSample
+        DialogEventsSample,
+        DialogFullscreenSample
     ]
 })
 export class DialogDocs {
@@ -129,10 +133,25 @@ export class DialogDocs {
         }
     ]);
 
+    private readonly fullscreenExampleFiles = signal<ExampleFile[]>([
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(fullscreenSampleHtml),
+            originalFileName: 'fullscreen-sample'
+        },
+        {
+            language: 'typescript',
+            component: 'DialogFullscreenSample',
+            code: getAssetFromModuleAssets(fullscreenSampleTs),
+            originalFileName: 'fullscreen-sample'
+        }
+    ]);
+
     readonly basicExamples = computed(() => this.basicExampleFiles());
     readonly headerFooterExamples = computed(() => this.headerFooterExampleFiles());
     readonly draggableResizableExamples = computed(() => this.draggableResizableExampleFiles());
     readonly valueStateExamples = computed(() => this.valueStateExampleFiles());
     readonly stretchExamples = computed(() => this.stretchExampleFiles());
     readonly eventsExamples = computed(() => this.eventsExampleFiles());
+    readonly fullscreenExamples = computed(() => this.fullscreenExampleFiles());
 }

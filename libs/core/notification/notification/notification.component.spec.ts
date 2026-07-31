@@ -62,4 +62,65 @@ describe('NotificationComponent', () => {
         expect(component['componentRef']).toBeTruthy();
         expect((component as any)._loadFromTemplate).toHaveBeenCalled();
     });
+
+    it('should execute action callback on Enter key', () => {
+        const callbackSpy = jest.fn();
+
+        fixture.componentRef.setInput('actionKeyHandler', callbackSpy);
+        fixture.detectChanges();
+
+        fixture.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+
+        expect(callbackSpy).toHaveBeenCalledTimes(1);
+        expect(callbackSpy).toHaveBeenCalledWith(expect.any(KeyboardEvent), 'enter');
+    });
+
+    it('should execute action callback on Delete key', () => {
+        const callbackSpy = jest.fn();
+
+        fixture.componentRef.setInput('actionKeyHandler', callbackSpy);
+        fixture.detectChanges();
+
+        fixture.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Delete', bubbles: true }));
+
+        expect(callbackSpy).toHaveBeenCalledTimes(1);
+        expect(callbackSpy).toHaveBeenCalledWith(expect.any(KeyboardEvent), 'delete');
+    });
+
+    it('should execute action callback on Backspace key', () => {
+        const callbackSpy = jest.fn();
+
+        fixture.componentRef.setInput('actionKeyHandler', callbackSpy);
+        fixture.detectChanges();
+
+        fixture.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Backspace', bubbles: true }));
+
+        expect(callbackSpy).toHaveBeenCalledTimes(1);
+        expect(callbackSpy).toHaveBeenCalledWith(expect.any(KeyboardEvent), 'delete');
+    });
+
+    it('should not execute action callback for non action keys', () => {
+        const callbackSpy = jest.fn();
+
+        fixture.componentRef.setInput('actionKeyHandler', callbackSpy);
+        fixture.detectChanges();
+
+        fixture.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
+
+        expect(callbackSpy).not.toHaveBeenCalled();
+    });
+
+    it('should not execute action callback when keydown originates from nested interactive controls', () => {
+        const callbackSpy = jest.fn();
+
+        fixture.componentRef.setInput('actionKeyHandler', callbackSpy);
+        fixture.detectChanges();
+
+        const nestedButton = document.createElement('button');
+        fixture.nativeElement.appendChild(nestedButton);
+
+        nestedButton.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+
+        expect(callbackSpy).not.toHaveBeenCalled();
+    });
 });

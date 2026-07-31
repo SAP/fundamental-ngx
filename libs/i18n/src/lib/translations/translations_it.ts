@@ -35,6 +35,12 @@ export default {
         defaultAriaValueText: 'Occupato',
         defaultTitle: 'Attendere'
     },
+    coreButton: {
+        attentionTypeDescription: 'Warning',
+        emphasizedTypeDescription: 'Default Action',
+        negativeTypeDescription: 'Negative Action',
+        positiveTypeDescription: 'Positive Action'
+    },
     coreCalendar: {
         calendarDayViewDescription: 'Calendario',
         calendarLegendLabel: 'Legenda del calendario',
@@ -204,7 +210,10 @@ export default {
         totalResultsLabel: '{totalCount} risultati'
     },
     coreProductSwitch: {
-        ariaLabel: 'Switch prodotti'
+        ariaLabel: 'Switch prodotti',
+        targetBlank: 'opens in a new browser tab',
+        targetParent: 'opens in the parent frame',
+        targetTop: 'opens in the full browser window'
     },
     coreRadio: {
         readOnlyDescription: 'Questo pulsante di opzione è di sola lettura e non può essere modificato.'

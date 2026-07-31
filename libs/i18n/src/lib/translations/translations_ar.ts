@@ -35,6 +35,12 @@ export default {
         defaultAriaValueText: 'مشغول',
         defaultTitle: 'يرجى الانتظار'
     },
+    coreButton: {
+        attentionTypeDescription: 'Warning',
+        emphasizedTypeDescription: 'Default Action',
+        negativeTypeDescription: 'Negative Action',
+        positiveTypeDescription: 'Positive Action'
+    },
     coreCalendar: {
         calendarDayViewDescription: 'التقويم',
         calendarLegendLabel: 'وسيلة إيضاح التقويم',
@@ -204,7 +210,10 @@ export default {
         totalResultsLabel: '{totalCount} من النتائج'
     },
     coreProductSwitch: {
-        ariaLabel: 'تبديل المنتج'
+        ariaLabel: 'تبديل المنتج',
+        targetBlank: 'opens in a new browser tab',
+        targetParent: 'opens in the parent frame',
+        targetTop: 'opens in the full browser window'
     },
     coreRadio: {
         readOnlyDescription: 'زر الاختيار هذا للقراءة فقط ولا يمكن تغييره.'

@@ -34,6 +34,12 @@ export default {
         defaultAriaValueText: 'עסוק',
         defaultTitle: 'המתן'
     },
+    coreButton: {
+        attentionTypeDescription: 'Warning',
+        emphasizedTypeDescription: 'Default Action',
+        negativeTypeDescription: 'Negative Action',
+        positiveTypeDescription: 'Positive Action'
+    },
     coreCalendar: {
         calendarDayViewDescription: 'לוח שנה',
         calendarLegendLabel: 'מקרא לוח שנה',
@@ -203,7 +209,10 @@ export default {
         totalResultsLabel: '{totalCount} תוצאות'
     },
     coreProductSwitch: {
-        ariaLabel: 'מתג מוצר'
+        ariaLabel: 'מתג מוצר',
+        targetBlank: 'opens in a new browser tab',
+        targetParent: 'opens in the parent frame',
+        targetTop: 'opens in the full browser window'
     },
     coreRadio: {
         readOnlyDescription: 'לחצן הבחירה הוא לקריאה בלבד ולא ניתן לשנות אותו.'

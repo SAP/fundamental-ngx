@@ -15,6 +15,16 @@ export interface FdLanguage {
         /** Title for the busy indicator */
         defaultTitle: FdLanguageKey;
     };
+    coreButton: {
+        /** Emphasized type button default aria-description */
+        emphasizedTypeDescription: FdLanguageKey;
+        /** Positive type button default aria-description */
+        positiveTypeDescription: FdLanguageKey;
+        /** Negative type button default aria-description */
+        negativeTypeDescription: FdLanguageKey;
+        /** Attention/warning type button default aria-description */
+        attentionTypeDescription: FdLanguageKey;
+    };
     coreActionSheet: {
         toolbarLabel: FdLanguageKey;
     };
@@ -263,6 +273,12 @@ export interface FdLanguage {
     };
     coreProductSwitch: {
         ariaLabel: FdLanguageKey;
+        /** Appended to aria-label when target="_blank" */
+        targetBlank: FdLanguageKey;
+        /** Appended to aria-label when target="_parent" */
+        targetParent: FdLanguageKey;
+        /** Appended to aria-label when target="_top" */
+        targetTop: FdLanguageKey;
     };
     coreSelect: {
         closeButton: FdLanguageKey;

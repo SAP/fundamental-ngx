@@ -25,16 +25,10 @@
                 BG
             </button>
         }
-        <span class="fd-docs-example-card__separator"></span>
-        <button
-            class="fd-docs-example-card__action fd-docs-example-card__action--icon"
-            [class.fd-docs-example-card__action--active]="compactMode()"
-            [attr.aria-pressed]="compactMode()"
-            [attr.title]="compactMode() ? 'Switch to cozy mode' : 'Switch to compact mode'"
-            (click)="compactMode.set(!compactMode())"
-        >
-            <fd-icon glyph="keyboard-and-mouse"></fd-icon>
-        </button>
+        @if (!contentDensityPassthrough()) {
+            <span class="fd-docs-example-card__separator"></span>
+            <fd-docs-density-dial [(choice)]="densityChoice" [quiet]="true"></fd-docs-density-dial>
+        }
         @if (responsiveEnabled()) {
             <button
                 class="fd-docs-example-card__action fd-docs-example-card__action--icon"

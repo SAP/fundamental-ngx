@@ -9,11 +9,9 @@ import {
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
 import { ObjectMarkerClickableExampleComponent } from './examples/object-marker-clickable-example.component';
-import {
-    ObjectMarkerExampleComponent,
-    ObjectMarkerIconAndTextExampleComponent,
-    ObjectMarkerTextExampleComponent
-} from './examples/object-marker-example.component';
+import { ObjectMarkerExampleComponent } from './examples/object-marker-example.component';
+import { ObjectMarkerIconAndTextExampleComponent } from './examples/object-marker-icon-text-example.component';
+import { ObjectMarkerTextExampleComponent } from './examples/object-marker-text-example.component';
 
 const ObjectMarkerExample = 'object-marker-example.component.html';
 const ObjectMarkerIconandText = 'object-marker-Icon-text-example.component.html';

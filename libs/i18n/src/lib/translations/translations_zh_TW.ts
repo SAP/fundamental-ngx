@@ -34,6 +34,12 @@ export default {
         defaultAriaValueText: '忙碌',
         defaultTitle: '請稍候'
     },
+    coreButton: {
+        attentionTypeDescription: 'Warning',
+        emphasizedTypeDescription: 'Default Action',
+        negativeTypeDescription: 'Negative Action',
+        positiveTypeDescription: 'Positive Action'
+    },
     coreCalendar: {
         calendarDayViewDescription: '行事曆',
         calendarLegendLabel: '行事曆圖例',
@@ -202,7 +208,10 @@ export default {
         totalResultsLabel: '{totalCount} 個結果'
     },
     coreProductSwitch: {
-        ariaLabel: '產品切換'
+        ariaLabel: '產品切換',
+        targetBlank: 'opens in a new browser tab',
+        targetParent: 'opens in the parent frame',
+        targetTop: 'opens in the full browser window'
     },
     coreRadio: {
         readOnlyDescription: '此選項按鈕為唯讀且無法變更。'

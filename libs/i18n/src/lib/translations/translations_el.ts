@@ -34,6 +34,12 @@ export default {
         defaultAriaValueText: 'Απασχολημένο',
         defaultTitle: 'Παρακαλώ περιμένετε'
     },
+    coreButton: {
+        attentionTypeDescription: 'Warning',
+        emphasizedTypeDescription: 'Default Action',
+        negativeTypeDescription: 'Negative Action',
+        positiveTypeDescription: 'Positive Action'
+    },
     coreCalendar: {
         calendarDayViewDescription: 'Ημερολόγιο',
         calendarLegendLabel: 'Λεζάντα Ημερολογίου',
@@ -203,7 +209,10 @@ export default {
         totalResultsLabel: '{totalCount} Αποτελέσματα'
     },
     coreProductSwitch: {
-        ariaLabel: 'Διακόπτης Προϊόντος'
+        ariaLabel: 'Διακόπτης Προϊόντος',
+        targetBlank: 'opens in a new browser tab',
+        targetParent: 'opens in the parent frame',
+        targetTop: 'opens in the full browser window'
     },
     coreRadio: {
         readOnlyDescription: 'Αυτό το κουμπί επιλογής είναι μόνο για ανάγνωση και δεν μπορεί να αλλάξει.'

@@ -35,6 +35,12 @@ export default {
         defaultAriaValueText: 'Ausgelastet',
         defaultTitle: 'Bitte warten'
     },
+    coreButton: {
+        attentionTypeDescription: 'Warning',
+        emphasizedTypeDescription: 'Default Action',
+        negativeTypeDescription: 'Negative Action',
+        positiveTypeDescription: 'Positive Action'
+    },
     coreCalendar: {
         calendarDayViewDescription: 'Kalender',
         calendarLegendLabel: 'Kalenderlegende',
@@ -204,7 +210,10 @@ export default {
         totalResultsLabel: '{totalCount} Ergebnisse'
     },
     coreProductSwitch: {
-        ariaLabel: 'Product Switch'
+        ariaLabel: 'Product Switch',
+        targetBlank: 'opens in a new browser tab',
+        targetParent: 'opens in the parent frame',
+        targetTop: 'opens in the full browser window'
     },
     coreRadio: {
         readOnlyDescription: 'Dieses Optionsfeld ist schreibgeschützt und kann nicht geändert werden.'

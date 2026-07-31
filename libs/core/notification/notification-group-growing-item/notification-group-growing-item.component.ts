@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
     selector: 'fd-notification-group-growing-item',
@@ -7,7 +7,10 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     host: {
         class: 'fd-notification-group__growing-item',
         role: 'button',
+        '[aria-label]': 'ariaLabel()',
         '[tabindex]': '0'
     }
 })
-export class NotificationGroupGrowingItemComponent {}
+export class NotificationGroupGrowingItemComponent {
+    readonly ariaLabel = input<string>();
+}

@@ -35,6 +35,12 @@ export default {
         defaultAriaValueText: 'Occupé',
         defaultTitle: 'Veuillez patienter.'
     },
+    coreButton: {
+        attentionTypeDescription: 'Warning',
+        emphasizedTypeDescription: 'Default Action',
+        negativeTypeDescription: 'Negative Action',
+        positiveTypeDescription: 'Positive Action'
+    },
     coreCalendar: {
         calendarDayViewDescription: 'Calendrier',
         calendarLegendLabel: 'Légende du calendrier',
@@ -205,7 +211,10 @@ export default {
         totalResultsLabel: '{totalCount} résultats'
     },
     coreProductSwitch: {
-        ariaLabel: 'Changement de produit'
+        ariaLabel: 'Changement de produit',
+        targetBlank: 'opens in a new browser tab',
+        targetParent: 'opens in the parent frame',
+        targetTop: 'opens in the full browser window'
     },
     coreRadio: {
         readOnlyDescription: "Cette case d'option est en lecture seule et ne peut pas être modifiée."

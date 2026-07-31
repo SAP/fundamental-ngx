@@ -34,6 +34,12 @@ export default {
         defaultAriaValueText: 'ไม่ว่าง',
         defaultTitle: 'กรุณารอสักครู่'
     },
+    coreButton: {
+        attentionTypeDescription: 'Warning',
+        emphasizedTypeDescription: 'Default Action',
+        negativeTypeDescription: 'Negative Action',
+        positiveTypeDescription: 'Positive Action'
+    },
     coreCalendar: {
         calendarDayViewDescription: 'ปฏิทิน',
         calendarLegendLabel: 'คำอธิบายสัญลักษณ์ของปฏิทิน',
@@ -203,7 +209,10 @@ export default {
         totalResultsLabel: '{totalCount} ผลลัพธ์'
     },
     coreProductSwitch: {
-        ariaLabel: 'การสลับผลิตภัณฑ์'
+        ariaLabel: 'การสลับผลิตภัณฑ์',
+        targetBlank: 'opens in a new browser tab',
+        targetParent: 'opens in the parent frame',
+        targetTop: 'opens in the full browser window'
     },
     coreRadio: {
         readOnlyDescription: 'ปุ่มตัวเลือกนี้เป็นแบบอ่านอย่างเดียวและไม่สามารถเปลี่ยนแปลงได้'

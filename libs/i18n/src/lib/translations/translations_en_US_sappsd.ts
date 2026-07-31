@@ -35,6 +35,12 @@ export default {
         defaultAriaValueText: '[[[Ɓűşŷ]]]',
         defaultTitle: '[[[Ƥĺēąşē ŵąįţ∙∙∙∙∙∙∙∙]]]'
     },
+    coreButton: {
+        attentionTypeDescription: 'Warning',
+        emphasizedTypeDescription: 'Default Action',
+        negativeTypeDescription: 'Negative Action',
+        positiveTypeDescription: 'Positive Action'
+    },
     coreCalendar: {
         calendarDayViewDescription: '[[[Ĉąĺēŋƌąŗ∙∙∙∙∙∙]]]',
         calendarLegendLabel: '[[[Ĉąĺēŋƌąŗ Ļēğēŋƌ∙∙∙∙]]]',
@@ -204,7 +210,10 @@ export default {
         totalResultsLabel: '[[[{totalCount} Řēşűĺţş]]]'
     },
     coreProductSwitch: {
-        ariaLabel: '[[[Ƥŗŏƌűċţ Ŝŵįţċĥ∙∙∙∙∙]]]'
+        ariaLabel: '[[[Ƥŗŏƌűċţ Ŝŵįţċĥ∙∙∙∙∙]]]',
+        targetBlank: '[[[ŏρēŋş įŋ ą ŋēŵ ƃŗŏŵşēŗ ţąƃ∙∙∙∙∙∙∙]]]',
+        targetParent: '[[[ŏρēŋş įŋ ţĥē ρąŗēŋţ ƒŗąɱē∙∙∙∙∙∙∙]]]',
+        targetTop: '[[[ŏρēŋş įŋ ţĥē ƒűĺĺ ƃŗŏŵşēŗ ŵįŋƌŏŵ∙∙∙∙∙∙∙∙∙∙]]]'
     },
     coreRadio: {
         readOnlyDescription: '[[[Ţĥįş ŗąƌįŏ ƃűţţŏŋ įş ŗēąƌ-ŏŋĺŷ ąŋƌ ċąŋŋŏţ ƃē ċĥąŋğēƌ.∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]'

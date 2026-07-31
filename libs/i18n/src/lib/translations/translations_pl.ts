@@ -35,6 +35,12 @@ export default {
         defaultAriaValueText: 'Zajęty',
         defaultTitle: 'Proszę czekać'
     },
+    coreButton: {
+        attentionTypeDescription: 'Warning',
+        emphasizedTypeDescription: 'Default Action',
+        negativeTypeDescription: 'Negative Action',
+        positiveTypeDescription: 'Positive Action'
+    },
     coreCalendar: {
         calendarDayViewDescription: 'Kalendarz',
         calendarLegendLabel: 'Legenda kalendarza',
@@ -204,7 +210,10 @@ export default {
         totalResultsLabel: '{totalCount} wyniki(-ów)'
     },
     coreProductSwitch: {
-        ariaLabel: 'Przełącznik produktu'
+        ariaLabel: 'Przełącznik produktu',
+        targetBlank: 'opens in a new browser tab',
+        targetParent: 'opens in the parent frame',
+        targetTop: 'opens in the full browser window'
     },
     coreRadio: {
         readOnlyDescription: 'Ten przycisk jest tylko do odczytu i nie można go zmienić.'

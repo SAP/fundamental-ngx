@@ -34,6 +34,12 @@ export default {
         defaultAriaValueText: 'Zaneprázdněné',
         defaultTitle: 'Počkejte'
     },
+    coreButton: {
+        attentionTypeDescription: 'Warning',
+        emphasizedTypeDescription: 'Default Action',
+        negativeTypeDescription: 'Negative Action',
+        positiveTypeDescription: 'Positive Action'
+    },
     coreCalendar: {
         calendarDayViewDescription: 'Kalendář',
         calendarLegendLabel: 'Legenda ke kalendáři',
@@ -203,7 +209,10 @@ export default {
         totalResultsLabel: 'Počet výsledků: {totalCount}'
     },
     coreProductSwitch: {
-        ariaLabel: 'Přepínač produktů'
+        ariaLabel: 'Přepínač produktů',
+        targetBlank: 'opens in a new browser tab',
+        targetParent: 'opens in the parent frame',
+        targetTop: 'opens in the full browser window'
     },
     coreRadio: {
         readOnlyDescription: 'Tento přepínač je jen ke čtení a nelze jej změnit.'

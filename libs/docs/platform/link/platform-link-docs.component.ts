@@ -10,15 +10,15 @@ import {
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
 import { PlatformLinkExampleComponent } from './examples/platform-link-example.component';
-import { PlatformLinkMiscExamplesComponent } from './examples/platform-link-misc-examples.component';
+import { PlatformLinkMiscExamplesComponent } from './examples/platform-link-misc-example.component';
 import { PlatformLinkTypesExampleComponent } from './examples/platform-link-types-example.component';
 
 const iconlinkSrc = 'platform-link-example.component.html';
 const iconlinkTs = 'platform-link-example.component.ts';
 const linkTypesScr = 'platform-link-types-example.component.html';
 const linkTypesTs = 'platform-link-types-example.component.ts';
-const linkMisc = 'platform-link-misc-examples.component.html';
-const linkMiscTs = 'platform-link-misc-examples.component.ts';
+const linkMisc = 'platform-link-misc-example.component.html';
+const linkMiscTs = 'platform-link-misc-example.component.ts';
 
 @Component({
     selector: 'app-link',
@@ -67,12 +67,12 @@ export class PlatformLinkDocsComponent {
         {
             language: 'html',
             code: getAssetFromModuleAssets(linkMisc),
-            fileName: 'platform-link-misc-examples'
+            fileName: 'platform-link-misc-example'
         },
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(linkMiscTs),
-            fileName: 'platform-link-misc-examples',
+            fileName: 'platform-link-misc-example',
             component: 'PlatformLinkMiscExamplesComponent'
         }
     ];

@@ -34,6 +34,12 @@ export default {
         defaultAriaValueText: 'Busy',
         defaultTitle: 'Please wait'
     },
+    coreButton: {
+        attentionTypeDescription: 'Warning',
+        emphasizedTypeDescription: 'Default Action',
+        negativeTypeDescription: 'Negative Action',
+        positiveTypeDescription: 'Positive Action'
+    },
     coreCalendar: {
         calendarDayViewDescription: 'კალენდარი',
         calendarLegendLabel: 'Calendar Legend',
@@ -203,7 +209,10 @@ export default {
         totalResultsLabel: 'სულ {totalCount} შედეგი'
     },
     coreProductSwitch: {
-        ariaLabel: 'გადამრთველი'
+        ariaLabel: 'გადამრთველი',
+        targetBlank: 'opens in a new browser tab',
+        targetParent: 'opens in the parent frame',
+        targetTop: 'opens in the full browser window'
     },
     coreRadio: {
         readOnlyDescription: 'This radio button is read-only and cannot be changed.'
