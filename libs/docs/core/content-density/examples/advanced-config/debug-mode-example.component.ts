@@ -18,6 +18,11 @@ import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
             <span>Current density: </span>
             <span fd-object-status [inverted]="true" [label]="_observer.contentDensity()"></span>
             <p class="debug-example__hint">Open browser console to see debug logs when density changes</p>
+            <p class="debug-example__hint">
+                This example supports only <code>compact</code> and <code>cozy</code>. Selecting
+                <strong>condensed</strong> falls back to <strong>compact</strong> (<code>condensed → compact</code>) —
+                the observer maps an unsupported density to its nearest supported alternative.
+            </p>
         </div>
     `,
     styles: [

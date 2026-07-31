@@ -44,7 +44,11 @@ import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
     ],
     providers: [
         contentDensityObserverProviders({
-            supportedContentDensity: [ContentDensityMode.COMPACT, ContentDensityMode.COZY],
+            supportedContentDensity: [
+                ContentDensityMode.COMPACT,
+                ContentDensityMode.COZY,
+                ContentDensityMode.CONDENSED
+            ],
             defaultContentDensity: ContentDensityMode.COZY,
             // Always add modifier classes to the host element
             alwaysAddModifiers: true

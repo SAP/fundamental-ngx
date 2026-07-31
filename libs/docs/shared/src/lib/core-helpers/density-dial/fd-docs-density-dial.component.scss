@@ -1,0 +1,107 @@
+// Echo Segments — docs-scoped SCSS (issue #14355)
+
+.fd-docs-density-dial {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sapContent_GridGap, 0.25rem);
+}
+
+// ─── 2. Segmented-button: pinned-item fill override ──────────────────────────
+
+.fd-docs-density-dial__segmented {
+    &--pinned {
+        [aria-selected='true'] {
+            --fdButtonBackgroundColor: var(--sapButton_Emphasized_Background);
+            --fdButtonColor: var(--sapButton_Emphasized_TextColor);
+            --fdButtonBorderColor: var(--sapButton_Emphasized_BorderColor);
+
+            &:hover {
+                --fdButtonBackgroundColor: var(--sapButton_Emphasized_Hover_Background);
+                --fdButtonColor: var(--sapButton_Emphasized_Hover_TextColor);
+                --fdButtonBorderColor: var(--sapButton_Emphasized_Hover_BorderColor);
+            }
+
+            &:active {
+                --fdButtonBackgroundColor: var(--sapButton_Emphasized_Active_Background);
+                --fdButtonColor: var(--sapButton_Emphasized_Active_TextColor);
+                --fdButtonBorderColor: var(--sapButton_Emphasized_Active_BorderColor);
+            }
+        }
+    }
+}
+
+// ─── 3. Echo label (inside Auto button — dotted underline, live value) ───────
+
+.fd-docs-density-echo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25em;
+    color: var(--sapContent_LabelColor);
+
+    // The resolved-value span gets the dotted underline to signal "live / borrowed"
+    &__value {
+        text-decoration: underline dotted var(--sapContent_LabelColor);
+        text-underline-offset: 0.15em;
+    }
+
+    &__value--flash {
+        animation: fd-docs-echo-flash 120ms ease-out;
+    }
+}
+
+@keyframes fd-docs-echo-flash {
+    0% {
+        opacity: 0.3;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+// ─── 4. Provenance line ───────────────────────────────────────────────────────
+
+.fd-docs-density-provenance {
+    font-size: var(--sapFontSmallSize);
+    color: var(--sapContent_LabelColor);
+    min-height: 1.25em; // Reserve height so layout never reflows on text change
+
+    &--quiet {
+        clip: rect(0 0 0 0);
+        clip-path: inset(50%);
+        overflow: hidden;
+        white-space: nowrap;
+        width: 1px;
+        height: 1px;
+        position: absolute;
+    }
+}
+
+// ─── 5. HC fallback (HCB / HCW) ──────────────────────────────────────────────
+
+@media (forced-colors: active) {
+    .fd-docs-density-dial__segmented--pinned [aria-selected='true'] {
+        --fdButtonColor: ButtonText;
+        font-weight: bold;
+        outline: 2px solid ButtonText;
+        outline-offset: -2px;
+    }
+
+    .fd-docs-density-provenance {
+        forced-color-adjust: none;
+        color: ButtonText;
+    }
+}
+
+// ─── 6. Reduced-motion ────────────────────────────────────────────────────────
+
+@media (prefers-reduced-motion: reduce) {
+    .fd-docs-density-echo__value--flash {
+        animation: none;
+    }
+
+    // Let the fd-segmented-button's own press micro-animation drop gracefully.
+    // The primitive uses CSS transitions — override here if needed once FORGE wires it.
+    .fd-docs-density-dial .fd-button {
+        transition: none;
+    }
+}

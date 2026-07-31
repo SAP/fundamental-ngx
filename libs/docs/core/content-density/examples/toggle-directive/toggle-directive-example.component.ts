@@ -1,11 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
-import {
-    ContentDensityDirective,
-    GlobalContentDensityService,
-    provideContentDensity
-} from '@fundamental-ngx/core/content-density';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { ContentDensityUserComponent } from '../content-density-user/content-density-user.component';
 
 /**
@@ -60,8 +56,7 @@ import { ContentDensityUserComponent } from '../content-density-user/content-den
             }
         `
     ],
-    imports: [FormsModule, ContentDensityDirective, ContentDensityUserComponent, CheckboxComponent],
-    providers: [GlobalContentDensityService, provideContentDensity()]
+    imports: [FormsModule, ContentDensityDirective, ContentDensityUserComponent, CheckboxComponent]
 })
 export class ToggleDirectiveExampleComponent {
     useCompact = true;
