@@ -211,9 +211,9 @@ export default {
     },
     coreProductSwitch: {
         ariaLabel: '[[[Ƥŗŏƌűċţ Ŝŵįţċĥ∙∙∙∙∙]]]',
-        targetBlank: 'opens in a new browser tab',
-        targetParent: 'opens in the parent frame',
-        targetTop: 'opens in the full browser window'
+        targetBlank: '[[[ŏρēŋş įŋ ą ŋēŵ ƃŗŏŵşēŗ ţąƃ∙∙∙∙∙∙∙]]]',
+        targetParent: '[[[ŏρēŋş įŋ ţĥē ρąŗēŋţ ƒŗąɱē∙∙∙∙∙∙∙]]]',
+        targetTop: '[[[ŏρēŋş įŋ ţĥē ƒűĺĺ ƃŗŏŵşēŗ ŵįŋƌŏŵ∙∙∙∙∙∙∙∙∙∙]]]'
     },
     coreRadio: {
         readOnlyDescription: '[[[Ţĥįş ŗąƌįŏ ƃűţţŏŋ įş ŗēąƌ-ŏŋĺŷ ąŋƌ ċąŋŋŏţ ƃē ċĥąŋğēƌ.∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]'
