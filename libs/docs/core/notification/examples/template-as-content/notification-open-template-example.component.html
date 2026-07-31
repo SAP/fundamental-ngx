@@ -15,7 +15,7 @@
             <p fd-notification-paragraph [class.is-expanded]="isExpanded()">
                 This is a very long notification paragraph with multiple sentences. It contains important information
                 that the user should read. The text will be truncated after two lines by default, but the user can click
-                "Show More" to expand and read the full content.
+                "More" to expand and read the full content.
             </p>
             <fd-notification-footer [manualShowTrigger]="showTrigger()" [(manualExpanded)]="isExpanded">
                 <span fd-notification-footer-content>Product Name</span>
@@ -29,8 +29,8 @@
                 [indicationColor]="2"
                 [secondaryIndication]="true"
                 [inverted]="true"
-                label="Negative"
-                title="Negative"
+                label="Important"
+                title="Important"
                 glyph="high-priority"
                 aria-label="Object status Negative Inverted"
             ></span>
@@ -39,9 +39,9 @@
             <button
                 fd-button
                 fdType="transparent"
-                ariaLabel="Close"
+                ariaLabel="Clear Notification"
                 glyph="decline"
-                title="close"
+                title="Clear Notification"
                 (click)="notification.close('Close Button Click')"
             ></button>
         </fd-notification-actions>
