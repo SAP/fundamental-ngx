@@ -125,6 +125,26 @@ nx run i18n:i18n-manage --command=search --searchTerm=submit
 
 ---
 
+## Auto-Correcting Translation Files
+
+**When:** Translation files have formatting issues (missing comments, whitespace, unsorted keys).
+
+```bash
+# Auto-correct the base English translation file
+nx run i18n:i18n-manage --command=correct --baseLangOnly
+```
+
+**What it fixes:**
+
+- Adds missing SAP UI5 comment annotations (defaults to `#XMSG:`)
+- Fixes malformed comment format
+- Trims leading whitespace in values
+- Sorts keys alphabetically
+
+**Note:** This runs automatically in CI when validation fails on fork PRs. Use locally to fix issues before pushing.
+
+---
+
 ## Common Scenarios
 
 ### Adding a Translation with Parameters
@@ -268,6 +288,9 @@ nx run i18n:i18n-manage --command=search --searchTerm=submit
 # Validate all translations
 nx run i18n:i18n-manage --command=validate
 
+# Auto-correct formatting issues (base language file only)
+nx run i18n:i18n-manage --command=correct --baseLangOnly
+
 # Sort translation keys alphabetically
 nx run i18n:i18n-manage --command=sort
 
@@ -276,3 +299,5 @@ nx run i18n:i18n-manage --command=sync
 ```
 
 **Note:** The `sync` command regenerates all TypeScript translation files from `.properties` files and is automatically run by CI when `.properties` files are modified. You typically don't need to run it manually unless you're debugging the build process.
+
+The `correct` command also runs automatically in CI when validation fails on fork PRs.
