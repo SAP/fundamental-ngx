@@ -1,3 +1,14 @@
+## 0.64.2-rc.1 (2026-07-31)
+
+### 🩹 Fixes
+
+- **core:** observer must not inherit parent config; fix restrictChild ContentDensity keying ([#14426](https://github.com/SAP/fundamental-ngx/pull/14426))
+
+### ❤️ Thank You
+
+- deno
+- github-actions
+
 ## 0.64.2-rc.0 (2026-07-30)
 
 This was a version bump only for core to align it with other projects, there were no code changes.
