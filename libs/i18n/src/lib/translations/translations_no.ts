@@ -44,8 +44,8 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'Kalender',
         calendarLegendLabel: 'Kalenderforklaring',
-        calendarRoleDescription: 'Kalender',
         calendarMonthViewDescription: 'Månedsvelger',
+        calendarRoleDescription: 'Kalender',
         calendarYearsRangeViewDescription: 'Velger av årsintervall',
         calendarYearsViewDescription: 'Velger av år',
         closeCalendarLabel: 'Lukk kalender',
@@ -107,6 +107,9 @@ export default {
         lessLabel: 'Mindre',
         moreLabel: '{count} til'
     },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Feltvalideringsmeldinger'
+    },
     coreGridList: {
         filterBarCancelButtonTitle: 'Avbryt',
         listItemButtonDeleteTitle: 'Slett',
@@ -125,8 +128,8 @@ export default {
         subtle: 'Subtil'
     },
     coreList: {
-        listItemSelectedAriaLabel: 'Valgt',
-        listItemNotSelectedAriaLabel: 'Ikke valgt'
+        listItemNotSelectedAriaLabel: 'Ikke valgt',
+        listItemSelectedAriaLabel: 'Valgt'
     },
     coreMessageStrip: {
         announcementError: 'Feilmeldingslinje',
@@ -424,6 +427,9 @@ export default {
     platformIconTabBar: {
         moreButton: 'Mer'
     },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Feltvalideringsmeldinger'
+    },
     platformLink: {
         roleDescriptionWithMedia: 'Media: {media}'
     },
@@ -668,8 +674,8 @@ export default {
     },
     platformVariantManagement: {
         access: {
-            public: 'Offentlig',
-            private: 'Privat'
+            private: 'Privat',
+            public: 'Offentlig'
         },
         applyAutomatically: 'Bruk automatisk',
         cancel: 'Avbryt',
@@ -746,11 +752,5 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Segmenteringsknapp',
         groupRoleDescription: 'Segmenteringsknapp-gruppe'
-    },
-    coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Feltvalideringsmeldinger'
-    },
-    platformInputMessageGroup: {
-        popoverAriaLabel: 'Feltvalideringsmeldinger'
     }
 };

@@ -44,8 +44,8 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'Calendar',
         calendarLegendLabel: 'Legendă calendar',
-        calendarRoleDescription: 'Calendar',
         calendarMonthViewDescription: 'Selector lună',
+        calendarRoleDescription: 'Calendar',
         calendarYearsRangeViewDescription: 'Selector interval de ani',
         calendarYearsViewDescription: 'Selector an',
         closeCalendarLabel: 'Închidere calendar',
@@ -107,6 +107,9 @@ export default {
         lessLabel: 'Mai puțin',
         moreLabel: 'și încă {count}'
     },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Mesaje de validare câmp'
+    },
     coreGridList: {
         filterBarCancelButtonTitle: 'Anulare',
         listItemButtonDeleteTitle: 'Ștergere',
@@ -125,8 +128,8 @@ export default {
         subtle: 'Discret'
     },
     coreList: {
-        listItemSelectedAriaLabel: 'Selectat',
-        listItemNotSelectedAriaLabel: 'Neselectat'
+        listItemNotSelectedAriaLabel: 'Neselectat',
+        listItemSelectedAriaLabel: 'Selectat'
     },
     coreMessageStrip: {
         announcementError: 'Linie de mesaj de eroare',
@@ -426,6 +429,9 @@ export default {
     platformIconTabBar: {
         moreButton: 'Mai mult'
     },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Mesaje de validare câmp'
+    },
     platformLink: {
         roleDescriptionWithMedia: 'Media: {media}'
     },
@@ -670,8 +676,8 @@ export default {
     },
     platformVariantManagement: {
         access: {
-            public: 'Public',
-            private: 'Privat'
+            private: 'Privat',
+            public: 'Public'
         },
         applyAutomatically: 'Aplicare automată',
         cancel: 'Anulare',
@@ -748,11 +754,5 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Buton segmentat',
         groupRoleDescription: 'Grup de butoane segmentate'
-    },
-    coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Mesaje de validare câmp'
-    },
-    platformInputMessageGroup: {
-        popoverAriaLabel: 'Mesaje de validare câmp'
     }
 };

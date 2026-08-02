@@ -1,11 +1,26 @@
 # Translation Management (i18n)
 
-**Purpose:** Simple, step-by-step guide for managing translation keys in Fundamental NGX. Covers adding new translations, updating existing ones, and removing obsolete keys.
-
-**Reference:**
-
 - [i18n-manage CLI Reference](https://github.com/SAP/fundamental-ngx/blob/main/libs/nx-plugin/src/executors/i18n-manage/README.md)
 - [i18n Package README](https://github.com/SAP/fundamental-ngx/blob/main/libs/i18n/README.md)
+
+---
+
+## Files You Should/Shouldn't Edit
+
+### ✅ Automatically Managed by CLI
+
+- `libs/i18n/src/lib/models/fd-language.ts` — Auto-updated by `add` command only; `remove` does **not** touch this file (manual cleanup required)
+- `libs/i18n/src/lib/translations/translations.properties` — Base English translations (modified by `add`, `update`, `rename`, `remove` commands)
+
+### ⚠️ Managed Externally
+
+- `libs/i18n/src/lib/translations/translations_*.properties` — Language-specific translations (managed by external translation team)
+
+### ❌ Never Edit (Auto-Generated)
+
+- `libs/i18n/src/lib/models/fd-language-key-identifier.ts`
+- `libs/i18n/src/lib/translations/translations.ts`
+- `libs/i18n/src/lib/translations/translations_*.ts`
 
 ---
 
@@ -13,47 +28,55 @@
 
 **When:** You need to add a new translatable string to a component.
 
-### Step 1: Update the Interface
-
-Open `libs/i18n/src/lib/models/fd-language.ts` and add your key to the `FdLanguage` interface:
-
-```typescript
-coreButton: {
-    /** Submit button label */
-    submit: FdLanguageKey;
-    /** Cancel button label */
-    cancel: FdLanguageKey;
-    /** YOUR NEW KEY - Description for translators */
-    yourNewKey: FdLanguageKey;
-}
-```
-
-**Important:** Always add a comment describing what the text is for — this helps translators.
-
----
-
-### Step 2: Run the Add Command
-
 ```bash
-nx run i18n:i18n-manage --command=add --key=coreButton.yourNewKey --value="Your English Text"
+nx run i18n:i18n-manage --command=add \
+  --key=coreButton.yourNewKey \
+  --value="Your English Text" \
+  --comment="Description for translators"  # optional; auto-generated if omitted
 ```
 
 **What happens:**
 
-- Adds the key to translations.properties
-- Sets the English text for `en` locale
-- Auto-regenerates TypeScript files for every language and adds the English text for each
+- Automatically updates `fd-language.ts` interface with the new key and JSDoc comment
+- Adds the key to `translations.properties` with SAP UI5 comment
+- Regenerates TypeScript files for every language
 
----
+**Required parameters:**
 
-### Step 3: Verify
+- `--key` — Key name in format `component.keyName` (e.g., `coreButton.submit`)
+- `--value` — English text for the key
+
+**Optional parameters:**
+
+- `--comment` — Description for translators (auto-generated if omitted)
+- `--commentType` — Override auto-detected SAP UI5 comment type (auto-detected if omitted)
+
+Run `nx run i18n:i18n-manage --command=validate` to verify. ✅ Done!
+
+### Adding a Key with Parameters
+
+For dynamic values (e.g., `"Hello, {name}"`), the CLI creates a plain `FdLanguageKey;` — you must add the generic type manually afterward:
+
+1. Run `add` as normal:
 
 ```bash
-# Validate all translation files
-nx run i18n:i18n-manage --command=validate
+nx run i18n:i18n-manage --command=add --key=coreGreeting.hello --value="Hello, {name}"
 ```
 
-✅ Done! Your translation key is now available across all languages.
+2. Edit `fd-language.ts` to add the generic type:
+
+```typescript
+coreGreeting: {
+    /** Greeting message with user name */
+    hello: FdLanguageKey<{ name: string }>;
+}
+```
+
+3. Use in your component:
+
+```typescript
+this.translationService.instant('coreGreeting.hello', { name: 'John' });
+```
 
 ---
 
@@ -65,10 +88,7 @@ nx run i18n:i18n-manage --command=validate
 nx run i18n:i18n-manage --command=update --key=coreButton.submit --value="Submit Changes"
 ```
 
-**What happens:**
-
-- Updates the English text for the key
-- Other language files keep their existing translations (translator review needed)
+Updates the English text; other languages keep their current translations until the external team reviews.
 
 ---
 
@@ -80,13 +100,7 @@ nx run i18n:i18n-manage --command=update --key=coreButton.submit --value="Submit
 nx run i18n:i18n-manage --command=rename --key=coreButton.oldName --newKey=coreButton.newName
 ```
 
-**What happens:**
-
-- Renames the key in `translations.properties` (base English file)
-- Regenerates all TypeScript files (`translations.ts` and `translations_*.ts`)
-- Language-specific `.properties` files are **not modified** (will be updated by external translation team)
-
-**Next step:** Update your component code to use the new key name.
+Renames the key in `translations.properties` and regenerates all TypeScript files. Language-specific `.properties` files are **not modified** (managed by external translation team). Update your component code to use the new key name.
 
 ---
 
@@ -94,20 +108,24 @@ nx run i18n:i18n-manage --command=rename --key=coreButton.oldName --newKey=coreB
 
 **When:** A translation key is no longer used.
 
-```bash
-nx run i18n:i18n-manage --command=remove --key=coreButton.obsoleteKey
-```
-
-**What happens:**
-
-- Removes the key from `translations.properties` (base English file)
-- Regenerates all TypeScript files (`translations.ts` and `translations_*.ts`)
-- Language-specific `.properties` files are **not modified** (will be cleaned up by external translation team)
-
 **Before removing:** Search your codebase to ensure the key is not used:
 
 ```bash
 grep -r "obsoleteKey" libs/ apps/
+```
+
+```bash
+nx run i18n:i18n-manage --command=remove --key=coreButton.obsoleteKey
+```
+
+Removes the key from `translations.properties` and regenerates all TypeScript files. Language-specific `.properties` files are not modified (cleaned up by external translation team).
+
+⚠️ **`fd-language.ts` is not updated automatically.** Manually delete the key:
+
+```typescript
+coreButton: {
+    // ❌ delete this line: obsoleteKey: FdLanguageKey;
+}
 ```
 
 ---
@@ -121,7 +139,7 @@ grep -r "obsoleteKey" libs/ apps/
 nx run i18n:i18n-manage --command=search --searchTerm=submit
 ```
 
-**Returns:** All matching keys with their values across all languages.
+**Output:** All matching keys with their values across all languages.
 
 ---
 
@@ -134,46 +152,77 @@ nx run i18n:i18n-manage --command=search --searchTerm=submit
 nx run i18n:i18n-manage --command=correct --baseLangOnly
 ```
 
-**What it fixes:**
-
-- Adds missing SAP UI5 comment annotations (defaults to `#XMSG:`)
-- Fixes malformed comment format
-- Trims leading whitespace in values
-- Sorts keys alphabetically
-
-**Note:** This runs automatically in CI when validation fails on fork PRs. Use locally to fix issues before pushing.
+Adds missing SAP UI5 comments, fixes formatting, and sorts keys alphabetically. This runs automatically in CI when validation fails on fork PRs.
 
 ---
 
-## Common Scenarios
+## Troubleshooting
 
-### Adding a Translation with Parameters
+### Error: "Key already exists"
 
-If your translation needs dynamic values (e.g., "Hello, {name}"):
+**Cause:** The key you're trying to add is already in the translation files.
 
-1. Update the interface:
+**Fix:** Use `--command=update` instead of `--command=add`, or choose a different key name.
+
+---
+
+### Error: "Invalid key format" (multi-dot keys)
+
+**Cause:** You used a key like `component.sub.key` instead of `component.key`.
+
+**Fix:** Keys must have exactly one dot. Use flat names under each component:
+
+```bash
+# ✅ Correct
+nx run i18n:i18n-manage --command=add --key=coreButton.save --value="Save"
+
+# ❌ Wrong
+nx run i18n:i18n-manage --command=add --key=coreButton.actions.save --value="Save"
+```
+
+---
+
+### Error: "Property does not exist on type FdLanguage"
+
+**Cause:** The `add` command failed mid-way. Typically:
+
+- `translations.properties` was written successfully
+- `fd-language.ts` update failed (permission error, disk full, etc.)
+- The interface is now stale
+
+**Fix:** Manually add the key to `fd-language.ts` (re-running `add` won't work — the key already exists in `translations.properties`):
 
 ```typescript
-coreGreeting: {
-    /** Greeting message with user name */
-    hello: FdLanguageKey<{ name: string }>;
+coreButton: {
+    /** Your description */
+    yourKey: FdLanguageKey;
 }
 ```
 
-2. Add the key with ICU syntax:
-
-```bash
-nx run i18n:i18n-manage --command=add --key=coreGreeting.hello --value="Hello, {name}"
-```
-
-3. Use in your component:
-
-```typescript
-this.translationService.instant('coreGreeting.hello', { name: 'John' });
-// Output: "Hello, John"
-```
+Then reload your IDE if it still shows a stale type.
 
 ---
+
+### Validation fails after adding a key
+
+**Cause:** The key might not match the interface, or there's a syntax error.
+
+**Fix:**
+
+1. Run validation to see details:
+    ```bash
+    nx run i18n:i18n-manage --command=validate
+    ```
+2. Check that the key in `fd-language.ts` matches what you added via CLI
+3. Ensure ICU syntax is correct (e.g., `{paramName}` not `{{paramName}}`)
+4. If comments are malformed, run auto-correct:
+    ```bash
+    nx run i18n:i18n-manage --command=correct --baseLangOnly
+    ```
+
+---
+
+## Reference
 
 ### Organizing Keys by Component
 
@@ -199,7 +248,7 @@ The CLI auto-detects comment types based on key names:
 | ------------ | ------------------ | ---------------------- |
 | `XBUT`       | Button labels      | `coreButton.submit`    |
 | `XTIT`       | Titles/headings    | `coreDialog.title`     |
-| `XLBL`       | Labels             | `coreInput.label`      |
+| `XFLD`       | Field labels       | `coreInput.label`      |
 | `XMSG`       | Messages           | `coreTable.noData`     |
 | `XTOL`       | Tooltips           | `coreButton.tooltip`   |
 | `XACT`       | Accessibility text | `coreButton.ariaLabel` |
@@ -212,66 +261,13 @@ nx run i18n:i18n-manage --command=add --key=coreButton.submit --value="Submit" -
 
 ---
 
-## Files You Should/Shouldn't Edit
-
-### ✅ Edit Manually
-
-- `libs/i18n/src/lib/models/fd-language.ts` — The interface definition
-
-### ⚠️ Managed Externally
-
-- `libs/i18n/src/lib/translations/translations_*.properties` — Language-specific translations (managed by external translation team)
-
-### 🤖 Modified by CLI
-
-- `libs/i18n/src/lib/translations/translations.properties` — Base English translations (modified by `add`, `update`, `rename`, `remove` commands)
-
-### ❌ Never Edit (Auto-Generated)
-
-- `libs/i18n/src/lib/models/fd-language-key-identifier.ts`
-- `libs/i18n/src/lib/translations/translations.ts`
-- `libs/i18n/src/lib/translations/translations_*.ts`
-
----
-
-## Troubleshooting
-
-### Error: "Property does not exist on type FdLanguage"
-
-**Cause:** You forgot Step 1 (updating `fd-language.ts`)
-
-**Fix:** Add your key to the `FdLanguage` interface first, then run the CLI command.
-
----
-
-### Error: "Key already exists"
-
-**Cause:** The key you're trying to add is already in the translation files.
-
-**Fix:** Use `--command=update` instead of `--command=add`, or choose a different key name.
-
----
-
-### Validation fails after adding a key
-
-**Cause:** The key might not match the interface, or there's a syntax error.
-
-**Fix:**
-
-1. Run validation to see details:
-    ```bash
-    nx run i18n:i18n-manage --command=validate
-    ```
-2. Check that your key in `fd-language.ts` matches what you added via CLI
-3. Ensure ICU syntax is correct (e.g., `{paramName}` not `{{paramName}}`)
-
----
-
 ## Quick Reference
 
 ```bash
-# Add new translation
-nx run i18n:i18n-manage --command=add --key=coreComponent.key --value="English text"
+# Add new translation (automatically updates fd-language.ts + translations.properties)
+nx run i18n:i18n-manage --command=add \
+  --key=coreComponent.key \
+  --value="English text"
 
 # Update existing translation
 nx run i18n:i18n-manage --command=update --key=coreComponent.key --value="New text"
@@ -298,6 +294,7 @@ nx run i18n:i18n-manage --command=sort
 nx run i18n:i18n-manage --command=sync
 ```
 
-**Note:** The `sync` command regenerates all TypeScript translation files from `.properties` files and is automatically run by CI when `.properties` files are modified. You typically don't need to run it manually unless you're debugging the build process.
+**Notes:**
 
-The `correct` command also runs automatically in CI when validation fails on fork PRs.
+- The `sync` command regenerates all TypeScript translation files from `.properties` files and is automatically run by CI when `.properties` files are modified.
+- The `correct` command also runs automatically in CI when validation fails on fork PRs.

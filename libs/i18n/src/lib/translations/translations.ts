@@ -43,8 +43,8 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'Calendar',
         calendarLegendLabel: 'Calendar Legend',
-        calendarRoleDescription: 'Calendar',
         calendarMonthViewDescription: 'Month picker',
+        calendarRoleDescription: 'Calendar',
         calendarYearsRangeViewDescription: 'Years range picker',
         calendarYearsViewDescription: 'Year picker',
         closeCalendarLabel: 'Close calendar',
@@ -106,6 +106,9 @@ export default {
         lessLabel: 'Less',
         moreLabel: '{count} more'
     },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Field validation messages'
+    },
     coreGridList: {
         filterBarCancelButtonTitle: 'Cancel',
         listItemButtonDeleteTitle: 'Delete',
@@ -124,8 +127,8 @@ export default {
         subtle: 'Subtle'
     },
     coreList: {
-        listItemSelectedAriaLabel: 'Selected',
-        listItemNotSelectedAriaLabel: 'Not Selected'
+        listItemNotSelectedAriaLabel: 'Not Selected',
+        listItemSelectedAriaLabel: 'Selected'
     },
     coreMessageStrip: {
         announcementError: 'Error Message Strip',
@@ -421,6 +424,9 @@ export default {
     platformIconTabBar: {
         moreButton: 'More'
     },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Field validation messages'
+    },
     platformLink: {
         roleDescriptionWithMedia: 'Media: {media}'
     },
@@ -665,8 +671,8 @@ export default {
     },
     platformVariantManagement: {
         access: {
-            public: 'Public',
-            private: 'Private'
+            private: 'Private',
+            public: 'Public'
         },
         applyAutomatically: 'Apply Automatically',
         cancel: 'Cancel',
@@ -743,11 +749,5 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Segmented Button',
         groupRoleDescription: 'Segmented Button Group'
-    },
-    coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
-    },
-    platformInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
     }
 };

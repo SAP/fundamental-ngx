@@ -43,8 +43,8 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'Calendário',
         calendarLegendLabel: 'Legenda do calendário',
-        calendarRoleDescription: 'Calendário',
         calendarMonthViewDescription: 'Selecionador de mês',
+        calendarRoleDescription: 'Calendário',
         calendarYearsRangeViewDescription: 'Selecionador de intervalo de anos',
         calendarYearsViewDescription: 'Selecionador de ano',
         closeCalendarLabel: 'Fechar calendário',
@@ -106,6 +106,9 @@ export default {
         lessLabel: 'Menos',
         moreLabel: 'Mais de {count}'
     },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Mensagens de validação de campo'
+    },
     coreGridList: {
         filterBarCancelButtonTitle: 'Cancelar',
         listItemButtonDeleteTitle: 'Excluir',
@@ -124,8 +127,8 @@ export default {
         subtle: 'Discreto'
     },
     coreList: {
-        listItemSelectedAriaLabel: 'Selecionado',
-        listItemNotSelectedAriaLabel: 'Não selecionado'
+        listItemNotSelectedAriaLabel: 'Não selecionado',
+        listItemSelectedAriaLabel: 'Selecionado'
     },
     coreMessageStrip: {
         announcementError: 'Faixa de mensagens de erro',
@@ -424,6 +427,9 @@ export default {
     platformIconTabBar: {
         moreButton: 'Mais'
     },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Mensagens de validação de campo'
+    },
     platformLink: {
         roleDescriptionWithMedia: 'Mídia: {media}'
     },
@@ -668,8 +674,8 @@ export default {
     },
     platformVariantManagement: {
         access: {
-            public: 'Público',
-            private: 'Privado'
+            private: 'Privado',
+            public: 'Público'
         },
         applyAutomatically: 'Aplicar automaticamente',
         cancel: 'Cancelar',
@@ -746,11 +752,5 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Botão segmentado',
         groupRoleDescription: 'Grupo de botões segmentados'
-    },
-    coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Mensagens de validação de campo'
-    },
-    platformInputMessageGroup: {
-        popoverAriaLabel: 'Mensagens de validação de campo'
     }
 };

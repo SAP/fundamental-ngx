@@ -43,8 +43,8 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'Ημερολόγιο',
         calendarLegendLabel: 'Λεζάντα Ημερολογίου',
-        calendarRoleDescription: 'Ημερολόγιο',
         calendarMonthViewDescription: 'Επιλογέας μήνα',
+        calendarRoleDescription: 'Ημερολόγιο',
         calendarYearsRangeViewDescription: 'Επιλογέας εύρους ετών',
         calendarYearsViewDescription: 'Επιλογέας έτους',
         closeCalendarLabel: 'Κλείσιμο ημερολογίου',
@@ -106,6 +106,9 @@ export default {
         lessLabel: 'Λιγότερα',
         moreLabel: 'περισσότερες από {count}'
     },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Μηνύματα επικύρωσης πεδίου'
+    },
     coreGridList: {
         filterBarCancelButtonTitle: 'Ακύρωση',
         listItemButtonDeleteTitle: 'Διαγραφή',
@@ -124,8 +127,8 @@ export default {
         subtle: 'Διακριτικό'
     },
     coreList: {
-        listItemSelectedAriaLabel: 'Επιλέχτηκε',
-        listItemNotSelectedAriaLabel: 'Δεν επιλέχτηκε'
+        listItemNotSelectedAriaLabel: 'Δεν επιλέχτηκε',
+        listItemSelectedAriaLabel: 'Επιλέχτηκε'
     },
     coreMessageStrip: {
         announcementError: 'Ταινία Μηνύματος Σφάλματος',
@@ -423,6 +426,9 @@ export default {
     platformIconTabBar: {
         moreButton: 'Περισσότερα'
     },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Μηνύματα επικύρωσης πεδίου'
+    },
     platformLink: {
         roleDescriptionWithMedia: 'Μέσα: {media}'
     },
@@ -667,8 +673,8 @@ export default {
     },
     platformVariantManagement: {
         access: {
-            public: 'Δημόσια',
-            private: 'Ιδιωτική'
+            private: 'Ιδιωτική',
+            public: 'Δημόσια'
         },
         applyAutomatically: 'Εφαρμογή Αυτόματα',
         cancel: 'Ακύρωση',
@@ -745,11 +751,5 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Τμηματοποιημένο Κουμπί',
         groupRoleDescription: 'Ομάδα Τμηματοποιημένου Κουμπιού'
-    },
-    coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Μηνύματα επικύρωσης πεδίου'
-    },
-    platformInputMessageGroup: {
-        popoverAriaLabel: 'Μηνύματα επικύρωσης πεδίου'
     }
 };

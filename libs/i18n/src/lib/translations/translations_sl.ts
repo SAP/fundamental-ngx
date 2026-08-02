@@ -44,8 +44,8 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'Koledar',
         calendarLegendLabel: 'Legenda koledarja',
-        calendarRoleDescription: 'Koledar',
         calendarMonthViewDescription: 'Izbirnik meseca',
+        calendarRoleDescription: 'Koledar',
         calendarYearsRangeViewDescription: 'Izbirnik števila let',
         calendarYearsViewDescription: 'Izbirnik leta',
         closeCalendarLabel: 'Zapri koledar',
@@ -107,6 +107,9 @@ export default {
         lessLabel: 'Manj',
         moreLabel: 'Še {count}'
     },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Sporočila preverjanja veljavnosti polja'
+    },
     coreGridList: {
         filterBarCancelButtonTitle: 'Prekliči',
         listItemButtonDeleteTitle: 'Izbriši',
@@ -125,8 +128,8 @@ export default {
         subtle: 'Neizpostavljeno'
     },
     coreList: {
-        listItemSelectedAriaLabel: 'Izbrano',
-        listItemNotSelectedAriaLabel: 'Ni izbrano'
+        listItemNotSelectedAriaLabel: 'Ni izbrano',
+        listItemSelectedAriaLabel: 'Izbrano'
     },
     coreMessageStrip: {
         announcementError: 'Vrstica z obvestilom o napaki',
@@ -423,6 +426,9 @@ export default {
     platformIconTabBar: {
         moreButton: 'Več'
     },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Sporočila preverjanja veljavnosti polja'
+    },
     platformLink: {
         roleDescriptionWithMedia: 'Mediji: {media}'
     },
@@ -667,8 +673,8 @@ export default {
     },
     platformVariantManagement: {
         access: {
-            public: 'Javno',
-            private: 'Zasebno'
+            private: 'Zasebno',
+            public: 'Javno'
         },
         applyAutomatically: 'Uporabi samodejno',
         cancel: 'Preklic',
@@ -745,11 +751,5 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Segmentirani gumb',
         groupRoleDescription: 'Skupina segmentiranih gumbov'
-    },
-    coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Sporočila preverjanja veljavnosti polja'
-    },
-    platformInputMessageGroup: {
-        popoverAriaLabel: 'Sporočila preverjanja veljavnosti polja'
     }
 };

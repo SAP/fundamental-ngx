@@ -108,19 +108,27 @@ jobs:
               with:
                   node-version: ${{ env.NODE_VERSION }}
 
-            # Security: Run syntax validation before generation (fork PRs only)
-            - name: Validate .properties syntax (fork PRs)
+            # Security: Run validation before generation (fork PRs only)
+            - name: Validate .properties files (fork PRs)
               if: github.event.pull_request.head.repo.full_name != github.repository
               id: validate
               run: |
-                  echo "🔍 Validating .properties file syntax..."
+                  echo "🔍 Validating .properties files..."
                   if npx nx run i18n:i18n-manage --command=validate; then
-                    echo "✅ Syntax validation passed"
+                    echo "✅ Validation passed"
                     echo "validation_passed=true" >> $GITHUB_OUTPUT
                   else
-                    echo "❌ Syntax validation failed"
+                    echo "❌ Validation failed"
                     echo "validation_passed=false" >> $GITHUB_OUTPUT
                   fi
+                  echo ""
+
+            - name: Validate .properties files (same-repo PRs)
+              if: github.event.pull_request.head.repo.full_name == github.repository
+              run: |
+                  echo "🔍 Validating .properties files..."
+                  npx nx run i18n:i18n-manage --command=validate
+                  echo "✅ Validation passed"
                   echo ""
 
             - name: Auto-correct .properties files (fork PRs, if validation failed)

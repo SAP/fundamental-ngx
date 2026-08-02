@@ -53,10 +53,6 @@
             "type": "string",
             "description": "Path to translations directory"
         },
-        "fdLanguagePath": {
-            "type": "string",
-            "description": "Path to FdLanguage interface file"
-        },
         "baseLangOnly": {
             "type": "boolean",
             "default": false,

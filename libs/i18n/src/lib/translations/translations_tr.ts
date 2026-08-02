@@ -43,8 +43,8 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'Takvim',
         calendarLegendLabel: 'Takvim açıklaması',
-        calendarRoleDescription: 'Takvim',
         calendarMonthViewDescription: 'Ay seçici',
+        calendarRoleDescription: 'Takvim',
         calendarYearsRangeViewDescription: 'Yıl aralığı seçici',
         calendarYearsViewDescription: 'Yıl seçici',
         closeCalendarLabel: 'Takvimi kapat',
@@ -106,6 +106,9 @@ export default {
         lessLabel: 'Daha az',
         moreLabel: '{count} tane daha'
     },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Alan doğrulama mesajları'
+    },
     coreGridList: {
         filterBarCancelButtonTitle: 'İptal',
         listItemButtonDeleteTitle: 'Sil',
@@ -124,8 +127,8 @@ export default {
         subtle: 'İnce'
     },
     coreList: {
-        listItemSelectedAriaLabel: 'Seçildi',
-        listItemNotSelectedAriaLabel: 'Seçilmedi'
+        listItemNotSelectedAriaLabel: 'Seçilmedi',
+        listItemSelectedAriaLabel: 'Seçildi'
     },
     coreMessageStrip: {
         announcementError: 'Hata İletisi Satırı',
@@ -423,6 +426,9 @@ export default {
     platformIconTabBar: {
         moreButton: 'Diğer'
     },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Alan doğrulama mesajları'
+    },
     platformLink: {
         roleDescriptionWithMedia: 'Medya: {media}'
     },
@@ -667,8 +673,8 @@ export default {
     },
     platformVariantManagement: {
         access: {
-            public: 'Genele Açık',
-            private: 'Özel'
+            private: 'Özel',
+            public: 'Genele Açık'
         },
         applyAutomatically: 'Otomatik Olarak Uygula',
         cancel: 'İptal',
@@ -745,11 +751,5 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Segmentlere Ayrılmış Düğme',
         groupRoleDescription: 'Segmentlere Ayrılmış Düğme Grubu'
-    },
-    coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Alan doğrulama mesajları'
-    },
-    platformInputMessageGroup: {
-        popoverAriaLabel: 'Alan doğrulama mesajları'
     }
 };

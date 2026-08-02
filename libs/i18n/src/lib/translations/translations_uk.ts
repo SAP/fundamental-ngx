@@ -43,8 +43,8 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'Календар',
         calendarLegendLabel: 'Умовні позначення календаря',
-        calendarRoleDescription: 'Календар',
         calendarMonthViewDescription: 'Вибір місяця',
+        calendarRoleDescription: 'Календар',
         calendarYearsRangeViewDescription: 'Вибір діапазону років',
         calendarYearsViewDescription: 'Вибір року',
         closeCalendarLabel: 'Закрити календар',
@@ -106,6 +106,9 @@ export default {
         lessLabel: 'Менше',
         moreLabel: 'Ще {count}'
     },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Повідомлення про перевірку полів'
+    },
     coreGridList: {
         filterBarCancelButtonTitle: 'Скасувати',
         listItemButtonDeleteTitle: 'Видалити',
@@ -124,8 +127,8 @@ export default {
         subtle: 'Приховано'
     },
     coreList: {
-        listItemSelectedAriaLabel: 'Вибрано',
-        listItemNotSelectedAriaLabel: 'Не вибрано'
+        listItemNotSelectedAriaLabel: 'Не вибрано',
+        listItemSelectedAriaLabel: 'Вибрано'
     },
     coreMessageStrip: {
         announcementError: 'Рядок повідомлень про помилки',
@@ -422,6 +425,9 @@ export default {
     platformIconTabBar: {
         moreButton: 'Більше'
     },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Повідомлення про перевірку полів'
+    },
     platformLink: {
         roleDescriptionWithMedia: 'Медіаресурси: {media}'
     },
@@ -667,8 +673,8 @@ export default {
     },
     platformVariantManagement: {
         access: {
-            public: 'Загальнодоступно',
-            private: 'Приватно'
+            private: 'Приватно',
+            public: 'Загальнодоступно'
         },
         applyAutomatically: 'Застосовувати автоматично',
         cancel: 'Скасувати',
@@ -745,11 +751,5 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Сегментована кнопка',
         groupRoleDescription: 'Група сегментованих кнопок'
-    },
-    coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Повідомлення про перевірку полів'
-    },
-    platformInputMessageGroup: {
-        popoverAriaLabel: 'Повідомлення про перевірку полів'
     }
 };

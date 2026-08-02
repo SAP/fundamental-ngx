@@ -44,8 +44,8 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'Календарь',
         calendarLegendLabel: 'Условные обозначения календаря',
-        calendarRoleDescription: 'Календарь',
         calendarMonthViewDescription: 'Выбор месяца',
+        calendarRoleDescription: 'Календарь',
         calendarYearsRangeViewDescription: 'Выбор диапазона годов',
         calendarYearsViewDescription: 'Выбор года',
         closeCalendarLabel: 'Закрыть календарь',
@@ -107,6 +107,9 @@ export default {
         lessLabel: 'Меньше',
         moreLabel: 'больше {count}'
     },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Сообщения о проверке полей'
+    },
     coreGridList: {
         filterBarCancelButtonTitle: 'Отмена',
         listItemButtonDeleteTitle: 'Удалить',
@@ -125,8 +128,8 @@ export default {
         subtle: 'Незаметная'
     },
     coreList: {
-        listItemSelectedAriaLabel: 'Выбрано',
-        listItemNotSelectedAriaLabel: 'Не выбрано'
+        listItemNotSelectedAriaLabel: 'Не выбрано',
+        listItemSelectedAriaLabel: 'Выбрано'
     },
     coreMessageStrip: {
         announcementError: 'Строка сообщения об ошибке',
@@ -423,6 +426,9 @@ export default {
     platformIconTabBar: {
         moreButton: 'Больше'
     },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Сообщения о проверке полей'
+    },
     platformLink: {
         roleDescriptionWithMedia: 'Медиа: {media}'
     },
@@ -667,8 +673,8 @@ export default {
     },
     platformVariantManagement: {
         access: {
-            public: 'Общедоступный',
-            private: 'Частный'
+            private: 'Частный',
+            public: 'Общедоступный'
         },
         applyAutomatically: 'Применить автоматически',
         cancel: 'Отмена',
@@ -745,11 +751,5 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Сегментированная кнопка',
         groupRoleDescription: 'Группа сегментированных кнопок'
-    },
-    coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Сообщения о проверке полей'
-    },
-    platformInputMessageGroup: {
-        popoverAriaLabel: 'Сообщения о проверке полей'
     }
 };

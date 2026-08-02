@@ -44,8 +44,8 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'Kalendar',
         calendarLegendLabel: 'Tumač kalendara',
-        calendarRoleDescription: 'Kalendar',
         calendarMonthViewDescription: 'Odabir mjeseca',
+        calendarRoleDescription: 'Kalendar',
         calendarYearsRangeViewDescription: 'Odabir raspona godina',
         calendarYearsViewDescription: 'Odabir godine',
         closeCalendarLabel: 'Zatvori kalendar',
@@ -107,6 +107,9 @@ export default {
         lessLabel: 'manje',
         moreLabel: 'još {count}'
     },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Poruke validacije polja'
+    },
     coreGridList: {
         filterBarCancelButtonTitle: 'Otkaži',
         listItemButtonDeleteTitle: 'Izbriši',
@@ -125,8 +128,8 @@ export default {
         subtle: 'Rafinirano'
     },
     coreList: {
-        listItemSelectedAriaLabel: 'Odabrano',
-        listItemNotSelectedAriaLabel: 'Nije odabrano'
+        listItemNotSelectedAriaLabel: 'Nije odabrano',
+        listItemSelectedAriaLabel: 'Odabrano'
     },
     coreMessageStrip: {
         announcementError: 'Traka poruke o pogrešci',
@@ -423,6 +426,9 @@ export default {
     platformIconTabBar: {
         moreButton: 'Više'
     },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Poruke validacije polja'
+    },
     platformLink: {
         roleDescriptionWithMedia: 'Mediji: {media}'
     },
@@ -667,8 +673,8 @@ export default {
     },
     platformVariantManagement: {
         access: {
-            public: 'Javno',
-            private: 'Privatno'
+            private: 'Privatno',
+            public: 'Javno'
         },
         applyAutomatically: 'Primijeni automatski',
         cancel: 'Otkaži',
@@ -745,11 +751,5 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Segmentirani gumbi',
         groupRoleDescription: 'Grupa segmentiranih gumbi'
-    },
-    coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Poruke validacije polja'
-    },
-    platformInputMessageGroup: {
-        popoverAriaLabel: 'Poruke validacije polja'
     }
 };

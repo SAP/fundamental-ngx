@@ -43,8 +43,8 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'ปฏิทิน',
         calendarLegendLabel: 'คำอธิบายสัญลักษณ์ของปฏิทิน',
-        calendarRoleDescription: 'ปฏิทิน',
         calendarMonthViewDescription: 'ตัวเลือกเดือน',
+        calendarRoleDescription: 'ปฏิทิน',
         calendarYearsRangeViewDescription: 'ตัวเลือกช่วงปี',
         calendarYearsViewDescription: 'ตัวเลือกปี',
         closeCalendarLabel: 'ปิดปฏิทิน',
@@ -106,6 +106,9 @@ export default {
         lessLabel: 'น้อยลง',
         moreLabel: '{count} เพิ่มขึ้น'
     },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'ข้อความการตรวจสอบความถูกต้องของฟิลด์'
+    },
     coreGridList: {
         filterBarCancelButtonTitle: 'ยกเลิก',
         listItemButtonDeleteTitle: 'ลบ',
@@ -124,8 +127,8 @@ export default {
         subtle: 'ไม่เน้น'
     },
     coreList: {
-        listItemSelectedAriaLabel: 'เลือกแล้ว',
-        listItemNotSelectedAriaLabel: 'ไม่ได้เลือก'
+        listItemNotSelectedAriaLabel: 'ไม่ได้เลือก',
+        listItemSelectedAriaLabel: 'เลือกแล้ว'
     },
     coreMessageStrip: {
         announcementError: 'แถบข้อความแสดงข้อผิดพลาด',
@@ -422,6 +425,9 @@ export default {
     platformIconTabBar: {
         moreButton: 'เพิ่มเติม'
     },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'ข้อความการตรวจสอบความถูกต้องของฟิลด์'
+    },
     platformLink: {
         roleDescriptionWithMedia: 'สื่อ: {media}'
     },
@@ -666,8 +672,8 @@ export default {
     },
     platformVariantManagement: {
         access: {
-            public: 'สาธารณะ',
-            private: 'ส่วนบุคคล'
+            private: 'ส่วนบุคคล',
+            public: 'สาธารณะ'
         },
         applyAutomatically: 'นำไปใช้โดยอัตโนมัติ',
         cancel: 'ยกเลิก',
@@ -744,11 +750,5 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'ปุ่มที่แบ่งเซกเมนต์',
         groupRoleDescription: 'กลุ่มปุ่มที่แบ่งเซกเมนต์'
-    },
-    coreFormInputMessageGroup: {
-        popoverAriaLabel: 'ข้อความการตรวจสอบความถูกต้องของฟิลด์'
-    },
-    platformInputMessageGroup: {
-        popoverAriaLabel: 'ข้อความการตรวจสอบความถูกต้องของฟิลด์'
     }
 };

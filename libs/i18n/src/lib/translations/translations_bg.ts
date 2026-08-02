@@ -44,8 +44,8 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'Календар',
         calendarLegendLabel: 'Легенда на календара',
-        calendarRoleDescription: 'Календар',
         calendarMonthViewDescription: 'Средство за избор на месец',
+        calendarRoleDescription: 'Календар',
         calendarYearsRangeViewDescription: 'Средство за избор на диапазона от години',
         calendarYearsViewDescription: 'Средство за избор на година',
         closeCalendarLabel: 'Затвори календара',
@@ -107,6 +107,9 @@ export default {
         lessLabel: 'По-малко',
         moreLabel: 'още {count}'
     },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Съобщения за проверка на полета'
+    },
     coreGridList: {
         filterBarCancelButtonTitle: 'Отказ',
         listItemButtonDeleteTitle: 'Изтриване',
@@ -125,8 +128,8 @@ export default {
         subtle: 'Неясни'
     },
     coreList: {
-        listItemSelectedAriaLabel: 'Избранo',
-        listItemNotSelectedAriaLabel: 'Не е избрано'
+        listItemNotSelectedAriaLabel: 'Не е избрано',
+        listItemSelectedAriaLabel: 'Избранo'
     },
     coreMessageStrip: {
         announcementError: 'Лента със съобщение за грешка',
@@ -423,6 +426,9 @@ export default {
     platformIconTabBar: {
         moreButton: 'Повече'
     },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Съобщения за проверка на полета'
+    },
     platformLink: {
         roleDescriptionWithMedia: 'Медии: {media}'
     },
@@ -667,8 +673,8 @@ export default {
     },
     platformVariantManagement: {
         access: {
-            public: 'Публично',
-            private: 'Частно'
+            private: 'Частно',
+            public: 'Публично'
         },
         applyAutomatically: 'Автоматично прилагане',
         cancel: 'Отказ',
@@ -745,11 +751,5 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Сегментиран бутон',
         groupRoleDescription: 'Група сегментирани бутони'
-    },
-    coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Съобщения за проверка на полета'
-    },
-    platformInputMessageGroup: {
-        popoverAriaLabel: 'Съобщения за проверка на полета'
     }
 };

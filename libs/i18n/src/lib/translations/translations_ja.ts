@@ -44,8 +44,8 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'カレンダー',
         calendarLegendLabel: 'カレンダーの凡例',
-        calendarRoleDescription: 'カレンダー',
         calendarMonthViewDescription: '月選択',
+        calendarRoleDescription: 'カレンダー',
         calendarYearsRangeViewDescription: '年範囲選択',
         calendarYearsViewDescription: '年選択',
         closeCalendarLabel: 'カレンダーを閉じる',
@@ -107,6 +107,9 @@ export default {
         lessLabel: '表示を減らす',
         moreLabel: 'さらに表示 ({count})'
     },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'フィールド検証メッセージ'
+    },
     coreGridList: {
         filterBarCancelButtonTitle: 'キャンセル',
         listItemButtonDeleteTitle: '削除',
@@ -125,8 +128,8 @@ export default {
         subtle: '淡色'
     },
     coreList: {
-        listItemSelectedAriaLabel: '選択されました。',
-        listItemNotSelectedAriaLabel: '選択されていません。'
+        listItemNotSelectedAriaLabel: '選択されていません。',
+        listItemSelectedAriaLabel: '選択されました。'
     },
     coreMessageStrip: {
         announcementError: 'エラーメッセージストリップ',
@@ -423,6 +426,9 @@ export default {
     platformIconTabBar: {
         moreButton: '表示を増やす'
     },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'フィールド検証メッセージ'
+    },
     platformLink: {
         roleDescriptionWithMedia: 'メディア: {media}'
     },
@@ -667,8 +673,8 @@ export default {
     },
     platformVariantManagement: {
         access: {
-            public: '公開',
-            private: '非公開'
+            private: '非公開',
+            public: '公開'
         },
         applyAutomatically: '自動的に適用',
         cancel: 'キャンセル',
@@ -745,11 +751,5 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'セグメントボタン',
         groupRoleDescription: 'セグメントボタングループ'
-    },
-    coreFormInputMessageGroup: {
-        popoverAriaLabel: 'フィールド検証メッセージ'
-    },
-    platformInputMessageGroup: {
-        popoverAriaLabel: 'フィールド検証メッセージ'
     }
 };

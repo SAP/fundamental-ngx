@@ -43,8 +43,8 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'Kalender',
         calendarLegendLabel: 'Kalenderförklaring',
-        calendarRoleDescription: 'Kalender',
         calendarMonthViewDescription: 'Månadsväljare',
+        calendarRoleDescription: 'Kalender',
         calendarYearsRangeViewDescription: 'Årsintervallväljare',
         calendarYearsViewDescription: 'Årsväljare',
         closeCalendarLabel: 'Stäng kalender',
@@ -106,6 +106,9 @@ export default {
         lessLabel: 'Mindre',
         moreLabel: '{count} fler'
     },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Fältvalideringsmeddelanden'
+    },
     coreGridList: {
         filterBarCancelButtonTitle: 'Avbryt',
         listItemButtonDeleteTitle: 'Ta bort',
@@ -124,8 +127,8 @@ export default {
         subtle: 'Diskret'
     },
     coreList: {
-        listItemSelectedAriaLabel: 'Vald',
-        listItemNotSelectedAriaLabel: 'Inte vald'
+        listItemNotSelectedAriaLabel: 'Inte vald',
+        listItemSelectedAriaLabel: 'Vald'
     },
     coreMessageStrip: {
         announcementError: 'Felmeddelanderad',
@@ -422,6 +425,9 @@ export default {
     platformIconTabBar: {
         moreButton: 'Mer'
     },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Fältvalideringsmeddelanden'
+    },
     platformLink: {
         roleDescriptionWithMedia: 'Media: {media}'
     },
@@ -666,8 +672,8 @@ export default {
     },
     platformVariantManagement: {
         access: {
-            public: 'Offentlig',
-            private: 'Privat'
+            private: 'Privat',
+            public: 'Offentlig'
         },
         applyAutomatically: 'Tillämpa automatiskt',
         cancel: 'Avbryt',
@@ -744,11 +750,5 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Segmenterad knapp',
         groupRoleDescription: 'Segmenterad knappgrupp'
-    },
-    coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Fältvalideringsmeddelanden'
-    },
-    platformInputMessageGroup: {
-        popoverAriaLabel: 'Fältvalideringsmeddelanden'
     }
 };
