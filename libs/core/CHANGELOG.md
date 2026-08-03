@@ -1,3 +1,14 @@
+## 0.64.2-rc.6 (2026-08-03)
+
+### 🚀 Features
+
+- **platform:** update sorting functionality for platform table combined settings dialog ([#14312](https://github.com/SAP/fundamental-ngx/pull/14312))
+
+### ❤️ Thank You
+
+- github-actions
+- Mike O'Donnell @mikerodonnell89
+
 ## 0.64.2-rc.5 (2026-08-03)
 
 This was a version bump only for core to align it with other projects, there were no code changes.
