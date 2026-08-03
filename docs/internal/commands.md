@@ -1,6 +1,6 @@
 # Common Commands Reference
 
-**Purpose:** Quick reference for frequently used commands in the Fundamental NGX project. Copy-paste ready commands for building, testing, linting, and managing the NX monorepo.
+**Purpose:** The definitive command reference for the Fundamental NGX project. All commands are copy-paste ready. When in doubt, check here first.
 
 ---
 
@@ -20,18 +20,51 @@ nx run core:build --verbose
 
 ## Testing
 
+### Unit Tests (Jest)
+
 ```bash
-# Run all tests for a library
+# Run all unit tests for a library
 nx run core:test
 
 # Run specific test file
 nx run core:test --testfile=button.component.spec.ts
 
-# Run affected tests only
-nx affected:test
-
 # Run tests in watch mode
 nx run core:test --watch
+
+# Run tests with coverage
+nx run core:test --coverage
+
+# Run affected tests only (recommended)
+nx affected:test
+
+# Skip NX cache
+nx run core:test --skip-nx-cache
+```
+
+### E2E Tests (Playwright)
+
+```bash
+# Run all E2E tests (auto-starts e2e-harness)
+npx playwright test
+
+# Run specific test suite
+npx playwright test --grep "core/button"
+
+# Run tests in headed mode (see browser)
+npx playwright test --headed
+
+# Run tests in debug mode
+npx playwright test --debug
+
+# View test report
+npx playwright show-report
+
+# Run a test multiple times (detect flakiness)
+npx playwright test --repeat-each=10 --grep "test-name"
+
+# Increase timeout for slow tests
+npx playwright test --timeout=60000
 ```
 
 ## Linting
@@ -58,8 +91,8 @@ npx nx affected --target=lint
 # Format all files (run after code changes)
 yarn format
 
-# Check formatting without changes
-yarn format:check
+# Check formatting without changes (add --check flag)
+yarn prettier . --check
 ```
 
 ## Development
@@ -136,53 +169,41 @@ nx affected:test
 nx affected:lint
 ```
 
-## E2E Testing
+## E2E Harness & Snapshots
 
-### Adding or Updating Routes
+### Start the E2E Harness
 
-When a new page/route needs to be covered by e2e tests:
+```bash
+# Start manually (keeps running across test runs)
+npx nx serve e2e-harness
+```
+
+The harness is served at **http://localhost:4400**.
+
+> Example: `http://localhost:4400/platform/settings-generator/custom-control`
+
+### Update Snapshots
+
+**IMPORTANT:** Snapshot updates require the e2e-harness to be running first (Playwright config only auto-starts it for regular test runs, not `--update-snapshots`).
+
+```bash
+# 1. Start the harness in one terminal
+npx nx serve e2e-harness
+
+# 2. Update snapshots in another terminal
+npx playwright test --update-snapshots
+
+# Update snapshots for a specific component only
+npx playwright test --update-snapshots --grep "core/shellbar"
+```
+
+### Add E2E Routes
+
+When adding a new page/route to E2E coverage:
 
 1. Add the route to [apps/e2e-harness/e2e/config/e2e.routes.json](../../apps/e2e-harness/e2e/config/e2e.routes.json)
 2. Regenerate the route manifest:
 
 ```bash
 nx run e2e-harness:generate-routes
-```
-
-### Running E2E Tests Locally
-
-The Playwright config (`playwright.config.ts`) will auto-start the e2e-harness when you run tests.
-You can also start it manually to keep it running across multiple test runs (faster iteration):
-
-```bash
-# Optional: start the harness manually (avoids repeated cold-start overhead)
-npx nx serve e2e-harness
-
-# Run all tests
-npx playwright test
-
-# Run tests for a specific component
-npx playwright test --grep "core/shellbar"
-
-# View the HTML report after a run
-npx playwright show-report
-```
-
-The e2e-harness is served at **http://localhost:4400**.
-
-> Example component URL: `http://localhost:4400/platform/settings-generator/custom-control`
-
-### Updating Snapshots
-
-Snapshot updates require the e2e-harness to be running first:
-
-```bash
-# Start the harness
-npx nx serve e2e-harness
-
-# Update all snapshots
-npx playwright test --update-snapshots
-
-# Update snapshots for a specific component only
-npx playwright test --update-snapshots --grep "core/shellbar"
 ```

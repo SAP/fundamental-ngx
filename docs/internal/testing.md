@@ -1,89 +1,113 @@
 # Testing Guide
 
-**Purpose:** Commands and workflows for running unit tests, E2E tests, visual regression tests, and updating snapshots. Covers Playwright, Jest, and screenshot testing.
+**Purpose:** Testing workflows, best practices, and troubleshooting. For commands, see [commands.md](commands.md).
 
 ---
 
-## E2E Testing (Playwright)
+## Quick Start
 
-```bash
-# Run all E2E tests
-npx playwright test
+> **Commands:** See [commands.md](commands.md#testing) for all test commands.
 
-# Run specific test suite
-npx playwright test --grep "core/button"
+**Basic workflow:**
 
-# Run tests in headed mode (see browser)
-npx playwright test --headed
-
-# Run tests in debug mode
-npx playwright test --debug
-
-# Update snapshots
-npx playwright test --update-snapshots
-
-# View test report
-npx playwright show-report
-```
+1. Run unit tests after code changes: `nx run <library>:test --testfile=<file>.spec.ts`
+2. Run E2E tests to verify UI: `npx playwright test --grep "component-name"`
+3. Update snapshots when UI changes are intentional (see [Snapshot Workflow](#snapshot-workflow))
 
 ---
 
-## Unit Tests (Jest)
+## Testing Workflows
+
+### Unit Testing Workflow (Jest)
+
+**When to run:**
+
+- After modifying component logic
+- After changing component structure or properties
+- Before committing code
+
+**Typical flow:**
 
 ```bash
-# Run all unit tests for a library
+# 1. Run specific test file during development
+nx run core:test --testfile=button.component.spec.ts --watch
+
+# 2. Run all library tests before committing
 nx run core:test
 
-# Run specific test file
-nx run core:test --testfile=button.component.spec.ts
-
-# Run tests in watch mode
-nx run core:test --watch
-
-# Run tests with coverage
-nx run core:test --coverage
-
-# Run affected tests only (faster)
+# 3. Run affected tests to validate your branch
 nx affected:test
 ```
 
+**Watch mode tips:**
+
+- Press `p` to filter by filename pattern
+- Press `t` to filter by test name pattern
+- Press `u` to update snapshots (Jest snapshots, not Playwright)
+- Press `q` to quit watch mode
+
 ---
 
-## Visual Regression Tests
+### E2E Testing Workflow (Playwright)
+
+**When to run:**
+
+- After visual/UI changes
+- Before creating a PR
+- When reviewing component rendering
+
+**Typical flow:**
 
 ```bash
-# Update visual snapshots (after intentional UI changes)
-npx playwright test --update-snapshots
+# Run all E2E tests (auto-starts harness)
+npx playwright test
 
-# Run only visual tests
-npx playwright test --grep "visual"
+# Run tests for specific component (faster iteration)
+npx playwright test --grep "core/dialog"
 
-# Compare snapshots
-npx playwright show-report
+# Debug a specific test
+npx playwright test --debug --grep "test-name"
 ```
+
+> **Commands:** See [commands.md](commands.md#e2e-tests-playwright) for all Playwright options.
+
+---
+
+### Snapshot Workflow
+
+**When snapshots fail:**
+
+1. Review the diff: `npx playwright show-report`
+2. If the change is **intentional** (you changed CSS/HTML):
+    - Start the harness: `npx nx serve e2e-harness`
+    - Update snapshots: `npx playwright test --update-snapshots`
+3. If the change is **unintentional** (regression):
+    - Fix the code
+    - Re-run tests to verify
+
+**Updating snapshots:**
+
+> ⚠️ **IMPORTANT:** You must start the e2e-harness **before** updating snapshots. The Playwright config only auto-starts it for regular test runs, not for `--update-snapshots`.
+
+```bash
+# Terminal 1: Start the harness
+npx nx serve e2e-harness
+
+# Terminal 2: Update snapshots
+npx playwright test --update-snapshots
+```
+
+> **Commands:** See [commands.md](commands.md#update-snapshots) for snapshot commands.
 
 ---
 
 ## Troubleshooting
 
-### Snapshot mismatches
+Having test issues? See **[troubleshooting.md](troubleshooting.md#test-issues)** for solutions to:
 
-If snapshots fail unexpectedly:
-
-1. Check if the change is intentional
-2. Review the diff in the HTML report: `npx playwright show-report`
-3. Update if correct: `npx playwright test --update-snapshots`
-
-### Flaky tests
-
-```bash
-# Run a test multiple times to detect flakiness
-npx playwright test --repeat-each=10 --grep "flaky-test"
-```
-
-### Test hangs or times out
-
-```bash
-# Increase timeout for slow tests
-npx playwright test --timeout=60000
-```
+- Visual snapshot mismatches
+- Flaky tests (pass/fail intermittently)
+- Test hangs or timeouts
+- Jest snapshot failures
+- Tests passing locally but failing in CI
+- Cannot update Playwright snapshots

@@ -54,6 +54,7 @@ nx run <project>:build
     ```bash
     CI=true npx playwright test
     ```
+- Download HTML report from CI artifacts and compare screenshots
 
 ### Snapshot tests fail after OS upgrade
 
@@ -63,6 +64,59 @@ nx run <project>:build
 
 ```bash
 # Regenerate snapshots on the new OS
+npx playwright test --update-snapshots
+```
+
+### Visual snapshots fail unexpectedly
+
+**Cause:** Pixel differences from style changes, animations, or rendering issues
+
+**Fix:**
+
+1. View diff: `npx playwright show-report`
+2. If expected (you changed styles) → update snapshots (see below)
+3. If unexpected → check font rendering, animation timing, browser version
+
+### Flaky tests (pass/fail intermittently)
+
+**Cause:** Race conditions, animation timing, missing await
+
+**Fix:**
+
+1. Reproduce: `npx playwright test --repeat-each=10 --grep "test-name"`
+2. Add proper waits: `waitForSelector` with `state: 'visible'`
+3. Mock external dependencies (APIs, timers)
+
+### Test hangs or times out
+
+**Cause:** Waiting for element that never appears, infinite loop, server not running
+
+**Fix:**
+
+1. Debug: `npx playwright test --debug --grep "test-name"`
+2. Check selector matches actual DOM
+3. Verify e2e-harness is running (for E2E tests)
+
+### Jest snapshots fail after code changes
+
+**Cause:** Component output changed
+
+**Fix:**
+
+- If intentional: `nx run <lib>:test --updateSnapshot`
+- If unintentional: fix code and re-run tests
+
+### Cannot update Playwright snapshots
+
+**Cause:** e2e-harness not running (required for `--update-snapshots`)
+
+**Fix:**
+
+```bash
+# Terminal 1: Start harness
+npx nx serve e2e-harness
+
+# Terminal 2: Update snapshots
 npx playwright test --update-snapshots
 ```
 
