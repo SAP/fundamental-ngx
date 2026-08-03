@@ -12,15 +12,15 @@ export interface SettingsSortDialogColumn {
 }
 
 export interface SettingsSortDialogData extends TableDialogCommonData {
-    direction: SortDirection;
-    field: string | null;
     columns: SettingsSortDialogColumn[];
     allowDisablingSorting: boolean;
+    /** Array of current sort criteria in priority order (only includes criteria with non-null fields) */
+    sortBy?: Array<{ field: string; direction: SortDirection }>;
 }
 
 export interface SettingsSortDialogResultData {
-    field: string | null;
-    direction: SortDirection;
+    /** Array of sort criteria in priority order (first has highest priority) */
+    sortBy: Array<{ field: string; direction: SortDirection }>;
 }
 
 export const NOT_SORTED_OPTION_VALUE = null;

@@ -20,7 +20,7 @@ describe('SettingsDialogComponent', () => {
     let fixture: ComponentFixture<SettingsDialogComponent>;
     const dialogRef = new DialogRef();
     dialogRef.data = {
-        sortingData: { direction: SortDirection.ASC, field: 'name' } as SettingsSortDialogData,
+        sortingData: { columns: [], allowDisablingSorting: true } as SettingsSortDialogData,
         filteringData: { filterBy: [], columns: [], viewSettingsFilters: [] } as FiltersDialogData,
         groupingData: { direction: SortDirection.ASC, field: 'name', columns: [] } as SettingsGroupDialogData
     };
@@ -28,7 +28,11 @@ describe('SettingsDialogComponent', () => {
     beforeEach(waitForAsync(() => {
         const mockTable = {
             getTableColumns: () => [],
-            initialState: {}
+            initialState: {
+                getInitialSortBySnapshot: () => [],
+                getInitialFilterBySnapshot: () => [],
+                getInitialGroupBySnapshot: () => []
+            }
         };
         TestBed.configureTestingModule({
             providers: [
@@ -53,8 +57,8 @@ describe('SettingsDialogComponent', () => {
 
     it('should set initial sorting data from dialog data', () => {
         const expectedSortingData = {
-            field: 'name',
-            direction: SortDirection.ASC
+            columns: [],
+            allowDisablingSorting: true
         } as SettingsSortDialogData;
         expect(component.sortingData()).toEqual(expectedSortingData);
     });
@@ -75,8 +79,6 @@ describe('SettingsDialogComponent', () => {
         // Simulate sorting data being present
         component.sortingData.set({
             columns: [],
-            direction: SortDirection.NONE,
-            field: null,
             allowDisablingSorting: false
         });
         expect(component.activeTab()).toEqual(ActiveTab.SORT);
@@ -95,34 +97,28 @@ describe('SettingsDialogComponent', () => {
     it('should reset sorting data to initial values', () => {
         component.sortingData.set({
             columns: [],
-            direction: SortDirection.DESC,
-            field: 'someField',
-            allowDisablingSorting: true
+            allowDisablingSorting: true,
+            sortBy: [{ field: 'someField', direction: SortDirection.DESC }]
         });
         component._initialSorting.set({ field: 'initialField', direction: SortDirection.ASC });
         component.reset();
         expect(component.sortingData()).toEqual({
-            field: 'initialField',
-            direction: SortDirection.ASC,
+            sortBy: [{ field: 'initialField', direction: SortDirection.ASC }],
             columns: [],
             allowDisablingSorting: true
         });
     });
 
-    it('should reset sorting data to initial values', () => {
+    it('should reset sorting data to initial values when on sort tab', () => {
         component.sortingData.set({
             columns: [],
-            direction: SortDirection.DESC,
-            field: 'someField',
-            allowDisablingSorting: true
+            allowDisablingSorting: true,
+            sortBy: [{ field: 'someField', direction: SortDirection.DESC }]
         });
         component._initialSorting.set({ field: 'initialField', direction: SortDirection.ASC });
         component.activeTab.set(ActiveTab.SORT);
         component.reset();
-        expect(component.sortingData()).toEqual({
-            ...component.sortingData(),
-            ...component._initialSorting()
-        } as any);
+        expect(component.sortingData()?.sortBy).toEqual([{ field: 'initialField', direction: SortDirection.ASC }]);
     });
 
     it('should reset filtering data to initial values', () => {
@@ -145,12 +141,176 @@ describe('SettingsDialogComponent', () => {
     });
 
     it('should update sorting data on sort change', () => {
-        const newSortData: SettingsSortDialogResultData = { field: 'newField', direction: SortDirection.ASC };
+        const newSortData: SettingsSortDialogResultData = {
+            sortBy: [{ field: 'newField', direction: SortDirection.ASC }]
+        };
         component.onSortChange(newSortData);
-        expect(component.sortingData()).toEqual({
-            field: 'newField',
-            direction: SortDirection.ASC
-        } as any);
+        expect(component.sortingData()?.sortBy).toEqual([{ field: 'newField', direction: SortDirection.ASC }]);
+    });
+
+    it('should store sortBy array from sort change', () => {
+        const newSortData: SettingsSortDialogResultData = {
+            sortBy: [
+                { field: 'name', direction: SortDirection.ASC },
+                { field: 'description', direction: SortDirection.DESC }
+            ]
+        };
+        component.onSortChange(newSortData);
+
+        // Verify sortBy is stored by checking confirm result
+        const closeSpy = jest.spyOn(component['dialogRef'], 'close');
+        component.confirm();
+
+        expect(closeSpy).toHaveBeenCalledWith(
+            expect.objectContaining({
+                sortingData: expect.objectContaining({
+                    sortBy: [
+                        { field: 'name', direction: SortDirection.ASC },
+                        { field: 'description', direction: SortDirection.DESC }
+                    ]
+                })
+            })
+        );
+    });
+
+    it('should preserve existing sort settings when confirming without changes', () => {
+        // Set up dialog with existing sort settings
+        const existingSortBy = [
+            { field: 'name', direction: SortDirection.ASC },
+            { field: 'price', direction: SortDirection.DESC }
+        ];
+        dialogRef.data = {
+            sortingData: {
+                columns: [],
+                allowDisablingSorting: true,
+                sortBy: existingSortBy
+            } as SettingsSortDialogData,
+            filteringData: null,
+            groupingData: null,
+            columnsData: null,
+            headingLevel: 2,
+            allowColumnConfiguration: false
+        };
+
+        // Recreate component with new dialog data
+        fixture = TestBed.createComponent(SettingsDialogComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+
+        // Confirm WITHOUT calling onSortChange (simulating user clicking OK without modifications)
+        const closeSpy = jest.spyOn(component['dialogRef'], 'close');
+        component.confirm();
+
+        // Should preserve the existing sort settings, not return empty array
+        expect(closeSpy).toHaveBeenCalledWith(
+            expect.objectContaining({
+                sortingData: expect.objectContaining({
+                    sortBy: existingSortBy
+                })
+            })
+        );
+    });
+
+    it('should track sort validity and update dialog validity', () => {
+        expect(component.isDialogValid()).toBe(true);
+
+        component.onSortValidityChange(false);
+        expect(component.isDialogValid()).toBe(false);
+
+        component.onSortValidityChange(true);
+        expect(component.isDialogValid()).toBe(true);
+    });
+
+    it('should disable OK button when invalid combobox input is provided', () => {
+        // Set up sorting data with columns
+        const sortingDataWithColumns: SettingsSortDialogData = {
+            columns: [
+                { label: 'Name', key: 'name' },
+                { label: 'Description', key: 'description' },
+                { label: 'Price', key: 'price' }
+            ],
+            allowDisablingSorting: true
+        };
+        component.sortingData.set(sortingDataWithColumns);
+        fixture.detectChanges();
+
+        // Initially, dialog should be valid and OK button enabled
+        expect(component.isDialogValid()).toBe(true);
+        const okButtonWrapper = fixture.nativeElement.querySelector('fd-button-bar[fdType="emphasized"]');
+        expect(okButtonWrapper).toBeTruthy();
+        const okButton = okButtonWrapper.querySelector('button');
+        expect(okButton).toBeTruthy();
+        expect(okButton.disabled).toBe(false);
+
+        // Get the combobox input element inside the sorting component
+        const comboboxInput = fixture.nativeElement.querySelector('fdp-sorting fd-combobox input');
+        expect(comboboxInput).toBeTruthy();
+
+        // Simulate typing invalid text that doesn't match any column
+        comboboxInput.value = 'InvalidColumnName';
+        comboboxInput.dispatchEvent(new Event('input', { bubbles: true }));
+
+        // Trigger ngModelChange by dispatching input and change events
+        const inputEvent = new Event('input', { bubbles: true });
+        const changeEvent = new Event('change', { bubbles: true });
+        comboboxInput.dispatchEvent(inputEvent);
+        comboboxInput.dispatchEvent(changeEvent);
+
+        // Need to trigger Angular's change detection and the combobox's internal logic
+        // The combobox will call ngModelChange with the string value
+        fixture.detectChanges();
+
+        // Get the sorting component instance to trigger the validation
+        const sortingComponent = fixture.debugElement.query(
+            (el) => el.componentInstance?.constructor?.name === 'SortingComponent'
+        )?.componentInstance;
+
+        if (sortingComponent) {
+            // Simulate what the combobox does: call _sortFieldChangeForRow with invalid string
+            sortingComponent._sortFieldChangeForRow(0, 'InvalidColumnName');
+            fixture.detectChanges();
+        }
+
+        // Dialog should become invalid and OK button disabled
+        expect(component.isDialogValid()).toBe(false);
+        expect(okButton.disabled).toBe(true);
+
+        // Restore validity by selecting a valid column
+        if (sortingComponent) {
+            sortingComponent._sortFieldChangeForRow(0, sortingDataWithColumns.columns[0]);
+            fixture.detectChanges();
+        }
+
+        // Dialog should be valid again and OK button enabled
+        expect(component.isDialogValid()).toBe(true);
+        expect(okButton.disabled).toBe(false);
+    });
+
+    it('should prevent confirm action when dialog is invalid', () => {
+        const closeSpy = jest.spyOn(dialogRef, 'close');
+
+        // Make dialog invalid
+        component.onSortValidityChange(false);
+        fixture.detectChanges();
+
+        expect(component.isDialogValid()).toBe(false);
+
+        // Try to confirm - button should be disabled
+        const okButtonWrapper = fixture.nativeElement.querySelector('fd-button-bar[fdType="emphasized"]');
+        const okButton = okButtonWrapper.querySelector('button');
+        expect(okButton.disabled).toBe(true);
+
+        // Clicking disabled button should not trigger confirm
+        // (In real browser, disabled buttons don't fire click events, but we verify the state)
+        expect(component.isDialogValid()).toBe(false);
+
+        // Restore validity and confirm should work
+        component.onSortValidityChange(true);
+        fixture.detectChanges();
+
+        expect(okButton.disabled).toBe(false);
+        component.confirm();
+        expect(closeSpy).toHaveBeenCalled();
     });
 
     it('should update filtering data on filter change', () => {
@@ -297,7 +457,7 @@ describe('SettingsDialogComponent', () => {
 
         it('should show subheader with icon tab bar when columns and sorting data are present', () => {
             dialogRef.data = {
-                sortingData: { direction: SortDirection.ASC, field: 'name' } as SettingsSortDialogData,
+                sortingData: { columns: [], allowDisablingSorting: true } as SettingsSortDialogData,
                 filteringData: null,
                 groupingData: null,
                 columnsData: mockColumnsData,
@@ -318,7 +478,7 @@ describe('SettingsDialogComponent', () => {
 
         it('should handle tab selection correctly with icon tab bar', () => {
             dialogRef.data = {
-                sortingData: { direction: SortDirection.ASC, field: 'name', columns: [] } as SettingsSortDialogData,
+                sortingData: { columns: [], allowDisablingSorting: true } as SettingsSortDialogData,
                 filteringData: { filterBy: [], columns: [], viewSettingsFilters: [] } as FiltersDialogData,
                 groupingData: { direction: SortDirection.ASC, field: 'name', columns: [] } as SettingsGroupDialogData,
                 columnsData: mockColumnsData,
@@ -349,7 +509,7 @@ describe('SettingsDialogComponent', () => {
 
     describe('tab-based reset availability', () => {
         const mockData = {
-            sortingData: { direction: SortDirection.ASC, field: 'name', columns: [] } as SettingsSortDialogData,
+            sortingData: { columns: [], allowDisablingSorting: true } as SettingsSortDialogData,
             filteringData: { filterBy: [], columns: [], viewSettingsFilters: [] } as FiltersDialogData,
             groupingData: { direction: SortDirection.ASC, field: 'name', columns: [] } as SettingsGroupDialogData,
             columnsData: {

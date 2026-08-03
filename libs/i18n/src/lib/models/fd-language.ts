@@ -811,6 +811,10 @@ export interface FdLanguage {
         sortDialogNotSortedLabel: FdLanguageKey;
         sortDialogConfirmBtnLabel: FdLanguageKey;
         sortDialogCancelBtnLabel: FdLanguageKey;
+        sortDialogMoveUp: FdLanguageKey;
+        sortDialogMoveDown: FdLanguageKey;
+        sortDialogDelete: FdLanguageKey;
+        sortDialogAddSort: FdLanguageKey;
         cancelBtnLabel: FdLanguageKey;
         confirmBtnLabel: FdLanguageKey;
         clearFilters: FdLanguageKey;

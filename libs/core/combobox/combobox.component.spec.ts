@@ -111,6 +111,22 @@ describe('ComboboxComponent', () => {
         expect(component.inputTextValue).toBe('displayedValue2');
     });
 
+    it('should sync native input element value when writeValue is called', () => {
+        component.displayFn = (item: any): string => (item ? item.displayedValue : '');
+
+        // Simulate user typing in the input (changes native element directly)
+        const nativeInput = component.searchInputElement.nativeElement;
+        nativeInput.value = 'user typed text';
+        component.inputText = 'user typed text';
+
+        // Now simulate programmatic reset via writeValue
+        component.writeValue({ value: 'value', displayedValue: 'displayedValue' });
+
+        // Both the model and native element should be updated
+        expect(component.inputTextValue).toBe('displayedValue');
+        expect(nativeInput.value).toBe('displayedValue');
+    });
+
     it('should handleSearchTermChange', () => {
         component.dropdownValues = ['value 1', 'value 2'];
         component.inputText = 'input text';

@@ -97,6 +97,9 @@ export class SettingsDialogComponent implements Resettable {
     /** Signal to track reset availability */
     readonly isResetAvailable$ = signal(false);
 
+    /** Signal to track if the dialog is valid (OK button can be clicked) */
+    readonly isDialogValid = signal(true);
+
     /** @hidden Initial sorting configuration */
     _initialSorting = signal<Nullable<CollectionSort>>(null);
 
@@ -160,8 +163,12 @@ export class SettingsDialogComponent implements Resettable {
             ? { columns: this._pendingColumnsChanges.columns }
             : this.columnsData();
 
+        // Build sorting result directly from sortingData signal
+        const sortingData = this.sortingData();
+        const sortingResult = sortingData ? { sortBy: sortingData.sortBy ?? [] } : null;
+
         this.dialogRef.close({
-            sortingData: this.sortingData(),
+            sortingData: sortingResult,
             filteringData: this.filteringData(),
             groupingData: this.groupingData(),
             columnsData
@@ -180,10 +187,17 @@ export class SettingsDialogComponent implements Resettable {
      */
     reset(): void {
         if (this.activeTab() === ActiveTab.SORT && this.sortingData()) {
+            const current = this.sortingData()!;
+            const initial = this._initialSorting()!;
+            // Reset sortBy to initial sorting (if any)
+            const initialSortBy =
+                initial.field !== NOT_SORTED_OPTION_VALUE
+                    ? [{ field: initial.field as string, direction: initial.direction }]
+                    : [];
             this.sortingData.set({
-                ...this.sortingData()!,
-                field: this._initialSorting()!.field,
-                direction: this._initialSorting()!.direction
+                columns: current.columns,
+                allowDisablingSorting: current.allowDisablingSorting,
+                sortBy: initialSortBy
             });
         }
         if (this.activeTab() === ActiveTab.FILTER && this.filteringData()) {
@@ -218,11 +232,19 @@ export class SettingsDialogComponent implements Resettable {
      * @param event Updated sorting data.
      */
     onSortChange(event: SettingsSortDialogResultData): void {
+        // Update sortingData with new sortBy
         this.sortingData.set({
             ...this.sortingData()!,
-            field: event.field,
-            direction: event.direction
+            sortBy: event.sortBy ?? []
         });
+    }
+
+    /**
+     * Handle sort validity change event.
+     * @param isValid Whether the sorting configuration is valid.
+     */
+    onSortValidityChange(isValid: boolean): void {
+        this.isDialogValid.set(isValid);
     }
 
     /**
@@ -352,7 +374,9 @@ export class SettingsDialogComponent implements Resettable {
      * Set initial sorting configuration from the table's state.
      */
     private _setInitialSorting(): void {
-        const initialSorting = (this._table.initialState?.initialSortBy || [])[0];
+        // Use snapshot which preserves the original initial state
+        // even if initialSortBy input is dynamically updated
+        const initialSorting = (this._table.initialState?.getInitialSortBySnapshot() || [])[0];
         this._initialSorting.set({
             field: initialSorting?.field ?? NOT_SORTED_OPTION_VALUE,
             direction: initialSorting?.direction ?? INITIAL_DIRECTION
@@ -363,14 +387,16 @@ export class SettingsDialogComponent implements Resettable {
      * Set initial filter configuration from the table's state.
      */
     private _setInitialFilters(): void {
-        this._initialFilters.set(this._table.initialState?.initialFilterBy ?? []);
+        // Use snapshot which preserves the original initial state
+        this._initialFilters.set(this._table.initialState?.getInitialFilterBySnapshot() ?? []);
     }
 
     /**
      * Set initial grouping configuration from the table's state.
      */
     private _setInitialGrouping(): void {
-        const initialGrouping = (this._table.initialState?.initialGroupBy || [])[0];
+        // Use snapshot which preserves the original initial state
+        const initialGrouping = (this._table.initialState?.getInitialGroupBySnapshot() || [])[0];
         this._initialGrouping.set({
             field: initialGrouping?.field ?? NOT_GROUPED_OPTION_VALUE,
             direction: initialGrouping?.direction ?? INITIAL_DIRECTION
