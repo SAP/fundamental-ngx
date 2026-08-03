@@ -102,12 +102,6 @@ Create a pull request and wait for approval and merge.
 
 ---
 
-## Standard Release
-
-> TODO: Add standard release process (non-UI5 version bump)
-
----
-
 ## Hotfix Release
 
 See [Hotfix Release in deployment.md](./deployment.md#hotfix-release) for the hotfix process.

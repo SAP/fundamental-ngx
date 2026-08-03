@@ -93,7 +93,9 @@ npx playwright test --update-snapshots --grep "button"
 
 ```bash
 # Build and analyze docs bundle
-npx nx run docs:build:production --stats-json
+npx nx run docs:compile:production --stats-json
+# Note: webpack-bundle-analyzer is not in project dependencies
+# Install it first: yarn add -D webpack-bundle-analyzer
 npx webpack-bundle-analyzer dist/apps/docs/stats.json
 ```
 
@@ -144,7 +146,11 @@ git clean -df
 
 ```bash
 # Replace old import path with new one
-find libs/ apps/ -name "*.ts" -exec sed -i '' 's|@fundamental-ngx/core|@fundamental-ngx/core/button|g' {} +
+# WARNING: Use precise patterns to avoid corrupting unrelated imports
+# Bad:  s|@fundamental-ngx/core|@fundamental-ngx/core/button|g
+#       (matches @fundamental-ngx/core/dialog, @fundamental-ngx/core-utils, etc.)
+# Good: Match only the exact import you want to change
+find libs/ apps/ -name "*.ts" -exec sed -i '' 's|from '\''@fundamental-ngx/core'\''|from '\''@fundamental-ngx/core/button'\''|g' {} +
 ```
 
 ### Format specific files
