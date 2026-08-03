@@ -118,15 +118,13 @@ grep -r "obsoleteKey" libs/ apps/
 nx run i18n:i18n-manage --command=remove --key=coreButton.obsoleteKey
 ```
 
-Removes the key from `translations.properties` and regenerates all TypeScript files. Language-specific `.properties` files are not modified (cleaned up by external translation team).
+**What happens:**
 
-⚠️ **`fd-language.ts` is not updated automatically.** Manually delete the key:
-
-```typescript
-coreButton: {
-    // ❌ delete this line: obsoleteKey: FdLanguageKey;
-}
-```
+- Removes the key from `translations.properties`
+- Automatically removes the key from `fd-language.ts` interface
+- If this was the last key in a component section, the entire section is removed
+- Regenerates all TypeScript files
+- Language-specific `.properties` files are not modified (cleaned up by external translation team)
 
 ---
 

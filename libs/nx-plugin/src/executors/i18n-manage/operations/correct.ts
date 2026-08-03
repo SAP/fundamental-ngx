@@ -106,8 +106,8 @@ async function correctFile(filePath: string): Promise<FileCorrections> {
             }
         }
 
-        // Trim whitespace in value (only leading, preserve trailing for intent)
-        const trimmedValue = section.value.trimStart();
+        // Trim whitespace in value (leading and trailing)
+        const trimmedValue = section.value.trim();
         if (trimmedValue !== section.value) {
             section.value = trimmedValue;
             applied.push(`Trimmed whitespace in key "${section.key}"`);

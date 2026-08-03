@@ -22,6 +22,5 @@ export interface I18nManageExecutorSchema {
     comment?: string;
     commentType?: CommentType;
     propertiesPath?: string;
-    fdLanguagePath?: string;
     baseLangOnly?: boolean;
 }
