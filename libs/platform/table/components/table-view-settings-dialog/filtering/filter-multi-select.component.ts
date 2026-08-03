@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEn
 import { FormsModule } from '@angular/forms';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { ListComponent, ListItemComponent, ListTitleDirective } from '@fundamental-ngx/core/list';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { CollectionFilter, TableFilterSelectOption } from '@fundamental-ngx/platform/table-helpers';
 
 /**
@@ -16,7 +17,7 @@ type SelectableOption = TableFilterSelectOption & { selected: boolean };
     templateUrl: './filter-multi-select.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    imports: [ListComponent, ListItemComponent, CheckboxComponent, FormsModule, ListTitleDirective]
+    imports: [ListComponent, ListItemComponent, CheckboxComponent, FormsModule, ListTitleDirective, FdTranslatePipe]
 })
 export class FilterMultiSelectComponent {
     /** Selectable filter options */

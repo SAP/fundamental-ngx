@@ -1,6 +1,12 @@
 <ul fd-list [selection]="true">
     @for (option of _selectableOptions; track option) {
-        <li fd-list-item [selected]="option.selected">
+        <li
+            fd-list-item
+            [selected]="option.selected"
+            [attr.aria-label]="
+                ('platformTable.filterDialogFilterByLabel' | fdTranslate: { filterLabel: option.label })()
+            "
+        >
             <fd-checkbox [ngModel]="option.selected" (ngModelChange)="_onSelectChange(option, $event)"></fd-checkbox>
             <span fd-list-title>{{ option.label }}</span>
         </li>
