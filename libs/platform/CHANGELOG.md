@@ -1,3 +1,13 @@
+## 0.64.2-rc.7 (2026-08-03)
+
+### 🩹 Fixes
+
+- **platform:** filter settings dialog a11y improvements ([#14367](https://github.com/SAP/fundamental-ngx/pull/14367))
+
+### ❤️ Thank You
+
+- Mike O'Donnell @mikerodonnell89
+
 ## 0.64.2-rc.6 (2026-08-03)
 
 ### 🚀 Features
