@@ -36,10 +36,10 @@ export default {
         defaultTitle: '[[[Ƥĺēąşē ŵąįţ∙∙∙∙∙∙∙∙]]]'
     },
     coreButton: {
-        attentionTypeDescription: 'Warning',
-        emphasizedTypeDescription: 'Default Action',
-        negativeTypeDescription: 'Negative Action',
-        positiveTypeDescription: 'Positive Action'
+        attentionTypeDescription: '[[[Ŵąŗŋįŋğ∙∙∙∙∙∙∙]]]',
+        emphasizedTypeDescription: '[[[Ďēƒąűĺţ Āċţįŏŋ∙∙∙∙∙]]]',
+        negativeTypeDescription: '[[[Ńēğąţįʋē Āċţįŏŋ∙∙∙∙]]]',
+        positiveTypeDescription: '[[[Ƥŏşįţįʋē Āċţįŏŋ∙∙∙∙]]]'
     },
     coreCalendar: {
         calendarDayViewDescription: '[[[Ĉąĺēŋƌąŗ∙∙∙∙∙∙]]]',
@@ -210,7 +210,7 @@ export default {
         totalResultsLabel: '[[[{totalCount} Řēşűĺţş]]]'
     },
     coreProductSwitch: {
-        ariaLabel: '[[[Ƥŗŏƌűċţ Ŝŵįţċĥ∙∙∙∙∙]]]',
+        ariaLabel: '[[[Āρρ Ļąűŋċĥēŗ∙∙∙∙∙∙∙]]]',
         targetBlank: '[[[ŏρēŋş įŋ ą ŋēŵ ƃŗŏŵşēŗ ţąƃ∙∙∙∙∙∙∙]]]',
         targetParent: '[[[ŏρēŋş įŋ ţĥē ρąŗēŋţ ƒŗąɱē∙∙∙∙∙∙∙]]]',
         targetTop: '[[[ŏρēŋş įŋ ţĥē ƒűĺĺ ƃŗŏŵşēŗ ŵįŋƌŏŵ∙∙∙∙∙∙∙∙∙∙]]]'
