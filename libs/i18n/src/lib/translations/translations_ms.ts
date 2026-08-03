@@ -43,8 +43,8 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'Kalendar',
         calendarLegendLabel: 'Petunjuk Kalendar',
-        calendarMonthViewDescription: 'Pemilih bulan',
         calendarRoleDescription: 'Kalendar',
+        calendarMonthViewDescription: 'Pemilih bulan',
         calendarYearsRangeViewDescription: 'Pemilih julat tahun',
         calendarYearsViewDescription: 'Pemilih tahun',
         closeCalendarLabel: 'Tutup kalendar',
@@ -106,9 +106,6 @@ export default {
         lessLabel: 'Kurang',
         moreLabel: '{count} lagi'
     },
-    coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Mesej pengesahan medan'
-    },
     coreGridList: {
         filterBarCancelButtonTitle: 'Batalkan',
         listItemButtonDeleteTitle: 'Padam',
@@ -127,8 +124,8 @@ export default {
         subtle: 'Tak Ketara'
     },
     coreList: {
-        listItemNotSelectedAriaLabel: 'Tidak Dipilih',
-        listItemSelectedAriaLabel: 'Dipilih'
+        listItemSelectedAriaLabel: 'Dipilih',
+        listItemNotSelectedAriaLabel: 'Tidak Dipilih'
     },
     coreMessageStrip: {
         announcementError: 'Jalur Mesej Ralat',
@@ -424,9 +421,6 @@ export default {
     platformIconTabBar: {
         moreButton: 'Selanjutnya'
     },
-    platformInputMessageGroup: {
-        popoverAriaLabel: 'Mesej pengesahan medan'
-    },
     platformLink: {
         roleDescriptionWithMedia: 'Media: {media}'
     },
@@ -671,8 +665,8 @@ export default {
     },
     platformVariantManagement: {
         access: {
-            private: 'Persendirian',
-            public: 'Awam'
+            public: 'Awam',
+            private: 'Persendirian'
         },
         applyAutomatically: 'Gunakan secara Automatik',
         cancel: 'Batalkan',
@@ -749,5 +743,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Butang Disegmenkan',
         groupRoleDescription: 'Kumpulan Butang Disegmenkan'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Mesej pengesahan medan'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Mesej pengesahan medan'
     }
 };

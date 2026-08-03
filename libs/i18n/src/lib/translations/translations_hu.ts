@@ -44,8 +44,8 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'Naptár',
         calendarLegendLabel: 'Naptármagyarázat',
-        calendarMonthViewDescription: 'Hónapválasztó',
         calendarRoleDescription: 'Naptár',
+        calendarMonthViewDescription: 'Hónapválasztó',
         calendarYearsRangeViewDescription: 'Évtartomány-választó',
         calendarYearsViewDescription: 'Évválasztó',
         closeCalendarLabel: 'Naptár bezárása',
@@ -107,9 +107,6 @@ export default {
         lessLabel: 'Kevesebb',
         moreLabel: 'további {count}'
     },
-    coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Validálási üzenetek mező'
-    },
     coreGridList: {
         filterBarCancelButtonTitle: 'Mégse',
         listItemButtonDeleteTitle: 'Törlés',
@@ -128,8 +125,8 @@ export default {
         subtle: 'Nem kiemelt'
     },
     coreList: {
-        listItemNotSelectedAriaLabel: 'Nincs kiválasztva',
-        listItemSelectedAriaLabel: 'Kiválasztva'
+        listItemSelectedAriaLabel: 'Kiválasztva',
+        listItemNotSelectedAriaLabel: 'Nincs kiválasztva'
     },
     coreMessageStrip: {
         announcementError: 'Hibaüzenetsor',
@@ -426,9 +423,6 @@ export default {
     platformIconTabBar: {
         moreButton: 'Több'
     },
-    platformInputMessageGroup: {
-        popoverAriaLabel: 'Validálási üzenetek mező'
-    },
     platformLink: {
         roleDescriptionWithMedia: 'Média: {media}'
     },
@@ -673,8 +667,8 @@ export default {
     },
     platformVariantManagement: {
         access: {
-            private: 'Privát',
-            public: 'Nyilvános'
+            public: 'Nyilvános',
+            private: 'Privát'
         },
         applyAutomatically: 'Automatikus alkalmazás',
         cancel: 'Mégse',
@@ -751,5 +745,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Szegmentált gomb',
         groupRoleDescription: 'Szegmentált gombcsoport'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Validálási üzenetek mező'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Validálási üzenetek mező'
     }
 };

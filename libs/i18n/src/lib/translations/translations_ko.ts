@@ -43,8 +43,8 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: '달력',
         calendarLegendLabel: '달력 범례',
-        calendarMonthViewDescription: '월 선택 도구',
         calendarRoleDescription: '달력',
+        calendarMonthViewDescription: '월 선택 도구',
         calendarYearsRangeViewDescription: '연도 범위 선택 도구',
         calendarYearsViewDescription: '연도 선택 도구',
         closeCalendarLabel: '달력 닫기',
@@ -106,9 +106,6 @@ export default {
         lessLabel: '간단히',
         moreLabel: '{count} 이상'
     },
-    coreFormInputMessageGroup: {
-        popoverAriaLabel: '필드 유효성 확인 메시지'
-    },
     coreGridList: {
         filterBarCancelButtonTitle: '취소',
         listItemButtonDeleteTitle: '삭제',
@@ -127,8 +124,8 @@ export default {
         subtle: '미약'
     },
     coreList: {
-        listItemNotSelectedAriaLabel: '선택 안 함',
-        listItemSelectedAriaLabel: '선택됨'
+        listItemSelectedAriaLabel: '선택됨',
+        listItemNotSelectedAriaLabel: '선택 안 함'
     },
     coreMessageStrip: {
         announcementError: '오류 메시지 스트립',
@@ -424,9 +421,6 @@ export default {
     platformIconTabBar: {
         moreButton: '더 보기'
     },
-    platformInputMessageGroup: {
-        popoverAriaLabel: '필드 유효성 확인 메시지'
-    },
     platformLink: {
         roleDescriptionWithMedia: '미디어: {media}'
     },
@@ -670,8 +664,8 @@ export default {
     },
     platformVariantManagement: {
         access: {
-            private: '비공개',
-            public: '공개'
+            public: '공개',
+            private: '비공개'
         },
         applyAutomatically: '자동 적용',
         cancel: '취소',
@@ -748,5 +742,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: '세그멘테이션된 버튼',
         groupRoleDescription: '세그멘테이션된 버튼 그룹'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: '필드 유효성 확인 메시지'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: '필드 유효성 확인 메시지'
     }
 };

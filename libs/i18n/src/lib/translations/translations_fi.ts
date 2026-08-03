@@ -43,8 +43,8 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'Kalenteri',
         calendarLegendLabel: 'Kalenterin selitys',
-        calendarMonthViewDescription: 'Kuukausivalitsin',
         calendarRoleDescription: 'Kalenteri',
+        calendarMonthViewDescription: 'Kuukausivalitsin',
         calendarYearsRangeViewDescription: 'Vuosialuevalitsin',
         calendarYearsViewDescription: 'Vuosivalitsin',
         closeCalendarLabel: 'Sulje kalenteri',
@@ -106,9 +106,6 @@ export default {
         lessLabel: 'Vähemmän',
         moreLabel: '{count} lisää'
     },
-    coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Validointisanomien kenttä'
-    },
     coreGridList: {
         filterBarCancelButtonTitle: 'Peruuta',
         listItemButtonDeleteTitle: 'Poista',
@@ -127,8 +124,8 @@ export default {
         subtle: 'Hillitty'
     },
     coreList: {
-        listItemNotSelectedAriaLabel: 'Ei valittu',
-        listItemSelectedAriaLabel: 'Valittu'
+        listItemSelectedAriaLabel: 'Valittu',
+        listItemNotSelectedAriaLabel: 'Ei valittu'
     },
     coreMessageStrip: {
         announcementError: 'Virheilmoitusnauha',
@@ -425,9 +422,6 @@ export default {
     platformIconTabBar: {
         moreButton: 'Enemmän'
     },
-    platformInputMessageGroup: {
-        popoverAriaLabel: 'Validointisanomien kenttä'
-    },
     platformLink: {
         roleDescriptionWithMedia: 'Media: {media}'
     },
@@ -672,8 +666,8 @@ export default {
     },
     platformVariantManagement: {
         access: {
-            private: 'Yksityinen',
-            public: 'Julkinen'
+            public: 'Julkinen',
+            private: 'Yksityinen'
         },
         applyAutomatically: 'Käytä automaattisesti',
         cancel: 'Peruuta',
@@ -750,5 +744,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Segmentoitu painike',
         groupRoleDescription: 'Segmentoitu painikeryhmä'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Validointisanomien kenttä'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Validointisanomien kenttä'
     }
 };

@@ -44,8 +44,8 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'Kalender',
         calendarLegendLabel: 'Kalenderlegende',
-        calendarMonthViewDescription: 'Monatsauswahl',
         calendarRoleDescription: 'Kalender',
+        calendarMonthViewDescription: 'Monatsauswahl',
         calendarYearsRangeViewDescription: 'Jahresbereichsauswahl',
         calendarYearsViewDescription: 'Jahresauswahl',
         closeCalendarLabel: 'Kalender schließen',
@@ -107,9 +107,6 @@ export default {
         lessLabel: 'Weniger',
         moreLabel: '{count} weitere'
     },
-    coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Feldprüfungsmeldungen'
-    },
     coreGridList: {
         filterBarCancelButtonTitle: 'Abbrechen',
         listItemButtonDeleteTitle: 'Löschen',
@@ -128,8 +125,8 @@ export default {
         subtle: 'Subtil'
     },
     coreList: {
-        listItemNotSelectedAriaLabel: 'Nicht ausgewählt',
-        listItemSelectedAriaLabel: 'Ausgewählt'
+        listItemSelectedAriaLabel: 'Ausgewählt',
+        listItemNotSelectedAriaLabel: 'Nicht ausgewählt'
     },
     coreMessageStrip: {
         announcementError: 'Fehlermeldungsleiste',
@@ -427,9 +424,6 @@ export default {
     platformIconTabBar: {
         moreButton: 'Mehr'
     },
-    platformInputMessageGroup: {
-        popoverAriaLabel: 'Feldprüfungsmeldungen'
-    },
     platformLink: {
         roleDescriptionWithMedia: 'Medien: {media}'
     },
@@ -674,8 +668,8 @@ export default {
     },
     platformVariantManagement: {
         access: {
-            private: 'Privat',
-            public: 'Öffentlich'
+            public: 'Öffentlich',
+            private: 'Privat'
         },
         applyAutomatically: 'Automatisch anwenden',
         cancel: 'Abbrechen',
@@ -752,5 +746,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Segmentierte Schaltfläche',
         groupRoleDescription: 'Segmentierte Schaltflächengruppe'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Feldprüfungsmeldungen'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Feldprüfungsmeldungen'
     }
 };

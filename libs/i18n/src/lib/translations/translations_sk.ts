@@ -44,8 +44,8 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'Kalendár',
         calendarLegendLabel: 'Legenda kalendára',
-        calendarMonthViewDescription: 'Výber mesiaca',
         calendarRoleDescription: 'Kalendár',
+        calendarMonthViewDescription: 'Výber mesiaca',
         calendarYearsRangeViewDescription: 'Výber rozsahu rokov',
         calendarYearsViewDescription: 'Výber roka',
         closeCalendarLabel: 'Zavrieť kalendár',
@@ -107,9 +107,6 @@ export default {
         lessLabel: 'Menej',
         moreLabel: '{count} viac'
     },
-    coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Pole Hlásenia overenia'
-    },
     coreGridList: {
         filterBarCancelButtonTitle: 'Zrušiť',
         listItemButtonDeleteTitle: 'Odstrániť',
@@ -128,8 +125,8 @@ export default {
         subtle: 'Jednoduché'
     },
     coreList: {
-        listItemNotSelectedAriaLabel: 'Nevybrané',
-        listItemSelectedAriaLabel: 'Vybrané'
+        listItemSelectedAriaLabel: 'Vybrané',
+        listItemNotSelectedAriaLabel: 'Nevybrané'
     },
     coreMessageStrip: {
         announcementError: 'Riadok chybovej správy',
@@ -426,9 +423,6 @@ export default {
     platformIconTabBar: {
         moreButton: 'Ďalšie'
     },
-    platformInputMessageGroup: {
-        popoverAriaLabel: 'Pole Hlásenia overenia'
-    },
     platformLink: {
         roleDescriptionWithMedia: 'Médiá: {media}'
     },
@@ -673,8 +667,8 @@ export default {
     },
     platformVariantManagement: {
         access: {
-            private: 'Súkromné',
-            public: 'Verejné'
+            public: 'Verejné',
+            private: 'Súkromné'
         },
         applyAutomatically: 'Automaticky použiť',
         cancel: 'Zrušiť',
@@ -751,5 +745,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Segmentované tlačidlo',
         groupRoleDescription: 'Skupina segmentovaných tlačidiel'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Pole Hlásenia overenia'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Pole Hlásenia overenia'
     }
 };

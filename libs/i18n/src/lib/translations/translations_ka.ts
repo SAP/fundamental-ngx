@@ -43,8 +43,8 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'კალენდარი',
         calendarLegendLabel: 'Calendar Legend',
-        calendarMonthViewDescription: 'თვის არჩევა',
         calendarRoleDescription: 'Calendar',
+        calendarMonthViewDescription: 'თვის არჩევა',
         calendarYearsRangeViewDescription: 'წელთა შუალედის არჩევა',
         calendarYearsViewDescription: 'წელის არჩევა',
         closeCalendarLabel: 'კალენდარის დახურვა',
@@ -106,9 +106,6 @@ export default {
         lessLabel: 'ნაკლები',
         moreLabel: 'მეტი'
     },
-    coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
-    },
     coreGridList: {
         filterBarCancelButtonTitle: 'გაუქმება',
         listItemButtonDeleteTitle: 'წაშლა',
@@ -127,8 +124,8 @@ export default {
         subtle: 'Subtle'
     },
     coreList: {
-        listItemNotSelectedAriaLabel: 'Not Selected',
-        listItemSelectedAriaLabel: 'Selected'
+        listItemSelectedAriaLabel: 'Selected',
+        listItemNotSelectedAriaLabel: 'Not Selected'
     },
     coreMessageStrip: {
         announcementError: 'Error Message Strip',
@@ -425,9 +422,6 @@ export default {
     platformIconTabBar: {
         moreButton: 'მეტი'
     },
-    platformInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
-    },
     platformLink: {
         roleDescriptionWithMedia: 'მედია: {media}'
     },
@@ -672,8 +666,8 @@ export default {
     },
     platformVariantManagement: {
         access: {
-            private: 'პირადი',
-            public: 'საჯარო'
+            public: 'საჯარო',
+            private: 'პირადი'
         },
         applyAutomatically: 'ავტომატურად გამოყენება',
         cancel: 'გაუქმება',
@@ -750,5 +744,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Segmented Button',
         groupRoleDescription: 'Segmented Button Group'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Field validation messages'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Field validation messages'
     }
 };

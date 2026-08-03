@@ -44,8 +44,8 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: '[[[Ĉąĺēŋƌąŗ∙∙∙∙∙∙]]]',
         calendarLegendLabel: '[[[Ĉąĺēŋƌąŗ Ļēğēŋƌ∙∙∙∙]]]',
-        calendarMonthViewDescription: '[[[Μŏŋţĥ ρįċķēŗ∙∙∙∙∙∙∙]]]',
         calendarRoleDescription: '[[[Ĉąĺēŋƌąŗ∙∙∙∙∙∙]]]',
+        calendarMonthViewDescription: '[[[Μŏŋţĥ ρįċķēŗ∙∙∙∙∙∙∙]]]',
         calendarYearsRangeViewDescription: '[[[Ŷēąŗş ŗąŋğē ρįċķēŗ∙∙∙∙∙∙]]]',
         calendarYearsViewDescription: '[[[Ŷēąŗ ρįċķēŗ∙∙∙∙∙∙∙∙]]]',
         closeCalendarLabel: '[[[Ĉĺŏşē ċąĺēŋƌąŗ∙∙∙∙∙]]]',
@@ -107,9 +107,6 @@ export default {
         lessLabel: '[[[Ļēşş]]]',
         moreLabel: '[[[{count} ɱŏŗē]]]'
     },
-    coreFormInputMessageGroup: {
-        popoverAriaLabel: '[[[Ƒįēĺƌ ʋąĺįƌąţįŏŋ ɱēşşąğēş∙∙∙∙∙∙∙]]]'
-    },
     coreGridList: {
         filterBarCancelButtonTitle: '[[[Ĉąŋċēĺ∙∙∙∙∙∙∙∙]]]',
         listItemButtonDeleteTitle: '[[[Ďēĺēţē∙∙∙∙∙∙∙∙]]]',
@@ -128,8 +125,8 @@ export default {
         subtle: '[[[Ŝűƃţĺē∙∙∙∙∙∙∙∙]]]'
     },
     coreList: {
-        listItemNotSelectedAriaLabel: '[[[Ńŏţ Ŝēĺēċţēƌ∙∙∙∙∙∙∙]]]',
-        listItemSelectedAriaLabel: '[[[Ŝēĺēċţēƌ∙∙∙∙∙∙]]]'
+        listItemSelectedAriaLabel: '[[[Ŝēĺēċţēƌ∙∙∙∙∙∙]]]',
+        listItemNotSelectedAriaLabel: '[[[Ńŏţ Ŝēĺēċţēƌ∙∙∙∙∙∙∙]]]'
     },
     coreMessageStrip: {
         announcementError: '[[[Ĕŗŗŏŗ Μēşşąğē Ŝţŗįρ∙∙∙∙∙]]]',
@@ -427,9 +424,6 @@ export default {
     platformIconTabBar: {
         moreButton: '[[[Μŏŗē]]]'
     },
-    platformInputMessageGroup: {
-        popoverAriaLabel: '[[[Ƒįēĺƌ ʋąĺįƌąţįŏŋ ɱēşşąğēş∙∙∙∙∙∙∙]]]'
-    },
     platformLink: {
         roleDescriptionWithMedia: '[[[Μēƌįą: {media}]]]'
     },
@@ -674,8 +668,8 @@ export default {
     },
     platformVariantManagement: {
         access: {
-            private: '[[[Ƥŗįʋąţē∙∙∙∙∙∙∙]]]',
-            public: '[[[Ƥűƃĺįċ∙∙∙∙∙∙∙∙]]]'
+            public: '[[[Ƥűƃĺįċ∙∙∙∙∙∙∙∙]]]',
+            private: '[[[Ƥŗįʋąţē∙∙∙∙∙∙∙]]]'
         },
         applyAutomatically: '[[[Āρρĺŷ Āűţŏɱąţįċąĺĺŷ∙∙∙∙∙]]]',
         cancel: '[[[Ĉąŋċēĺ∙∙∙∙∙∙∙∙]]]',
@@ -753,5 +747,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: '[[[Ŝēğɱēŋţēƌ Ɓűţţŏŋ∙∙∙∙∙∙∙∙]]]',
         groupRoleDescription: '[[[Ŝēğɱēŋţēƌ Ɓűţţŏŋ Ģŗŏűρ∙∙∙∙∙]]]'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: '[[[Ƒįēĺƌ ʋąĺįƌąţįŏŋ ɱēşşąğēş∙∙∙∙∙∙∙]]]'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: '[[[Ƒįēĺƌ ʋąĺįƌąţįŏŋ ɱēşşąğēş∙∙∙∙∙∙∙]]]'
     }
 };

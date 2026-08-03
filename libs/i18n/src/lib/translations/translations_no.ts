@@ -44,8 +44,8 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'Kalender',
         calendarLegendLabel: 'Kalenderforklaring',
-        calendarMonthViewDescription: 'Månedsvelger',
         calendarRoleDescription: 'Kalender',
+        calendarMonthViewDescription: 'Månedsvelger',
         calendarYearsRangeViewDescription: 'Velger av årsintervall',
         calendarYearsViewDescription: 'Velger av år',
         closeCalendarLabel: 'Lukk kalender',
@@ -107,9 +107,6 @@ export default {
         lessLabel: 'Mindre',
         moreLabel: '{count} til'
     },
-    coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Feltvalideringsmeldinger'
-    },
     coreGridList: {
         filterBarCancelButtonTitle: 'Avbryt',
         listItemButtonDeleteTitle: 'Slett',
@@ -128,8 +125,8 @@ export default {
         subtle: 'Subtil'
     },
     coreList: {
-        listItemNotSelectedAriaLabel: 'Ikke valgt',
-        listItemSelectedAriaLabel: 'Valgt'
+        listItemSelectedAriaLabel: 'Valgt',
+        listItemNotSelectedAriaLabel: 'Ikke valgt'
     },
     coreMessageStrip: {
         announcementError: 'Feilmeldingslinje',
@@ -427,9 +424,6 @@ export default {
     platformIconTabBar: {
         moreButton: 'Mer'
     },
-    platformInputMessageGroup: {
-        popoverAriaLabel: 'Feltvalideringsmeldinger'
-    },
     platformLink: {
         roleDescriptionWithMedia: 'Media: {media}'
     },
@@ -674,8 +668,8 @@ export default {
     },
     platformVariantManagement: {
         access: {
-            private: 'Privat',
-            public: 'Offentlig'
+            public: 'Offentlig',
+            private: 'Privat'
         },
         applyAutomatically: 'Bruk automatisk',
         cancel: 'Avbryt',
@@ -752,5 +746,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Segmenteringsknapp',
         groupRoleDescription: 'Segmenteringsknapp-gruppe'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Feltvalideringsmeldinger'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Feltvalideringsmeldinger'
     }
 };

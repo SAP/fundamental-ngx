@@ -44,8 +44,8 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'Kalender',
         calendarLegendLabel: 'Kalenderlegenda',
-        calendarMonthViewDescription: 'Maandenkiezer',
         calendarRoleDescription: 'Kalender',
+        calendarMonthViewDescription: 'Maandenkiezer',
         calendarYearsRangeViewDescription: 'Jarenbereikkiezer',
         calendarYearsViewDescription: 'Jaarkiezer',
         closeCalendarLabel: 'Kalender sluiten',
@@ -107,9 +107,6 @@ export default {
         lessLabel: 'Minder',
         moreLabel: 'nog {count}'
     },
-    coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Validatiemeldingen voor velden'
-    },
     coreGridList: {
         filterBarCancelButtonTitle: 'Annuleren',
         listItemButtonDeleteTitle: 'Verwijderen',
@@ -128,8 +125,8 @@ export default {
         subtle: 'Subtiel'
     },
     coreList: {
-        listItemNotSelectedAriaLabel: 'Niet geselecteerd',
-        listItemSelectedAriaLabel: 'Geselecteerd'
+        listItemSelectedAriaLabel: 'Geselecteerd',
+        listItemNotSelectedAriaLabel: 'Niet geselecteerd'
     },
     coreMessageStrip: {
         announcementError: 'Statusbalk foutmelding',
@@ -427,9 +424,6 @@ export default {
     platformIconTabBar: {
         moreButton: 'Meer'
     },
-    platformInputMessageGroup: {
-        popoverAriaLabel: 'Validatiemeldingen voor velden'
-    },
     platformLink: {
         roleDescriptionWithMedia: 'Media: {media}'
     },
@@ -674,8 +668,8 @@ export default {
     },
     platformVariantManagement: {
         access: {
-            private: 'Privé',
-            public: 'Openbaar'
+            public: 'Openbaar',
+            private: 'Privé'
         },
         applyAutomatically: 'Automatisch toepassen',
         cancel: 'Annuleren',
@@ -752,5 +746,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Gesegmenteerde knop',
         groupRoleDescription: 'Groep gesegmenteerde knoppen'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Validatiemeldingen voor velden'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Validatiemeldingen voor velden'
     }
 };

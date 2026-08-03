@@ -44,8 +44,8 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'Calendario',
         calendarLegendLabel: 'Legenda del calendario',
-        calendarMonthViewDescription: 'Selettore mese',
         calendarRoleDescription: 'Calendario',
+        calendarMonthViewDescription: 'Selettore mese',
         calendarYearsRangeViewDescription: 'Selettore intervallo di anni',
         calendarYearsViewDescription: 'Selettore anno',
         closeCalendarLabel: 'Chiudi calendario',
@@ -107,9 +107,6 @@ export default {
         lessLabel: 'Meno',
         moreLabel: 'Altre {count}'
     },
-    coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Messaggi di convalida campo'
-    },
     coreGridList: {
         filterBarCancelButtonTitle: 'Annulla',
         listItemButtonDeleteTitle: 'Elimina',
@@ -128,8 +125,8 @@ export default {
         subtle: 'Discreto'
     },
     coreList: {
-        listItemNotSelectedAriaLabel: 'Nessuna selezione',
-        listItemSelectedAriaLabel: 'Selezionata'
+        listItemSelectedAriaLabel: 'Selezionata',
+        listItemNotSelectedAriaLabel: 'Nessuna selezione'
     },
     coreMessageStrip: {
         announcementError: 'Riga messaggio di errore',
@@ -427,9 +424,6 @@ export default {
     platformIconTabBar: {
         moreButton: 'Espandi'
     },
-    platformInputMessageGroup: {
-        popoverAriaLabel: 'Messaggi di convalida campo'
-    },
     platformLink: {
         roleDescriptionWithMedia: 'Media: {media}'
     },
@@ -674,8 +668,8 @@ export default {
     },
     platformVariantManagement: {
         access: {
-            private: 'Privato',
-            public: 'Pubblico'
+            public: 'Pubblico',
+            private: 'Privato'
         },
         applyAutomatically: 'Applica automaticamente',
         cancel: 'Annulla',
@@ -752,5 +746,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Pulsante segmentato',
         groupRoleDescription: 'Gruppo pulsanti segmentati'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Messaggi di convalida campo'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Messaggi di convalida campo'
     }
 };

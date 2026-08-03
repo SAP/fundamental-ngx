@@ -43,8 +43,8 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'Kalendář',
         calendarLegendLabel: 'Legenda ke kalendáři',
-        calendarMonthViewDescription: 'Výběr měsíce',
         calendarRoleDescription: 'Kalendář',
+        calendarMonthViewDescription: 'Výběr měsíce',
         calendarYearsRangeViewDescription: 'Výběr rozsahu let',
         calendarYearsViewDescription: 'Výběr roku',
         closeCalendarLabel: 'Zavřít kalendář',
@@ -106,9 +106,6 @@ export default {
         lessLabel: 'Méně',
         moreLabel: 'o {count} více'
     },
-    coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Zprávy o validaci pole'
-    },
     coreGridList: {
         filterBarCancelButtonTitle: 'Zrušit',
         listItemButtonDeleteTitle: 'Odstranit',
@@ -127,8 +124,8 @@ export default {
         subtle: 'Jemné'
     },
     coreList: {
-        listItemNotSelectedAriaLabel: 'Nevybráno',
-        listItemSelectedAriaLabel: 'Vybráno'
+        listItemSelectedAriaLabel: 'Vybráno',
+        listItemNotSelectedAriaLabel: 'Nevybráno'
     },
     coreMessageStrip: {
         announcementError: 'Pruh chybových zpráv',
@@ -425,9 +422,6 @@ export default {
     platformIconTabBar: {
         moreButton: 'Více'
     },
-    platformInputMessageGroup: {
-        popoverAriaLabel: 'Zprávy o validaci pole'
-    },
     platformLink: {
         roleDescriptionWithMedia: 'Média: {media}'
     },
@@ -672,8 +666,8 @@ export default {
     },
     platformVariantManagement: {
         access: {
-            private: 'Soukromý',
-            public: 'Veřejný'
+            public: 'Veřejný',
+            private: 'Soukromý'
         },
         applyAutomatically: 'Použít automaticky',
         cancel: 'Zrušit',
@@ -750,5 +744,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Segmentované tlačítko',
         groupRoleDescription: 'Skupina segmentovaných tlačítek'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Zprávy o validaci pole'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Zprávy o validaci pole'
     }
 };

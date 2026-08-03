@@ -43,8 +43,8 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'कैलेंडर',
         calendarLegendLabel: 'Calendar Legend',
-        calendarMonthViewDescription: 'महीना चयनकर्ता',
         calendarRoleDescription: 'Calendar',
+        calendarMonthViewDescription: 'महीना चयनकर्ता',
         calendarYearsRangeViewDescription: 'वर्षों की सीमा चयनकर्ता',
         calendarYearsViewDescription: 'वर्ष चयनकर्ता',
         closeCalendarLabel: 'कैलेंडर बंद करें',
@@ -106,9 +106,6 @@ export default {
         lessLabel: 'कम',
         moreLabel: 'अधिक'
     },
-    coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
-    },
     coreGridList: {
         filterBarCancelButtonTitle: 'रद्द करें',
         listItemButtonDeleteTitle: 'मिटायें',
@@ -127,8 +124,8 @@ export default {
         subtle: 'Subtle'
     },
     coreList: {
-        listItemNotSelectedAriaLabel: 'Not Selected',
-        listItemSelectedAriaLabel: 'Selected'
+        listItemSelectedAriaLabel: 'Selected',
+        listItemNotSelectedAriaLabel: 'Not Selected'
     },
     coreMessageStrip: {
         announcementError: 'Error Message Strip',
@@ -425,9 +422,6 @@ export default {
     platformIconTabBar: {
         moreButton: 'अधिक'
     },
-    platformInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
-    },
     platformLink: {
         roleDescriptionWithMedia: 'मीडिया: {media}'
     },
@@ -672,8 +666,8 @@ export default {
     },
     platformVariantManagement: {
         access: {
-            private: 'Private',
-            public: 'Public'
+            public: 'Public',
+            private: 'Private'
         },
         applyAutomatically: 'Apply Automatically',
         cancel: 'Cancel',
@@ -750,5 +744,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Segmented Button',
         groupRoleDescription: 'Segmented Button Group'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Field validation messages'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Field validation messages'
     }
 };

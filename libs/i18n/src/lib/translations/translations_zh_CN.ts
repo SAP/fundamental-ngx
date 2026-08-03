@@ -42,8 +42,8 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: '日历',
         calendarLegendLabel: '日历图例',
-        calendarMonthViewDescription: '月份选取器',
         calendarRoleDescription: '日历',
+        calendarMonthViewDescription: '月份选取器',
         calendarYearsRangeViewDescription: '年度范围选取器',
         calendarYearsViewDescription: '年度选取器',
         closeCalendarLabel: '关闭日期',
@@ -105,9 +105,6 @@ export default {
         lessLabel: '更少',
         moreLabel: '超出 {count} 个字符'
     },
-    coreFormInputMessageGroup: {
-        popoverAriaLabel: '字段验证消息'
-    },
     coreGridList: {
         filterBarCancelButtonTitle: '取消',
         listItemButtonDeleteTitle: '删除',
@@ -126,8 +123,8 @@ export default {
         subtle: '隐蔽'
     },
     coreList: {
-        listItemNotSelectedAriaLabel: '未选择',
-        listItemSelectedAriaLabel: '已选择'
+        listItemSelectedAriaLabel: '已选择',
+        listItemNotSelectedAriaLabel: '未选择'
     },
     coreMessageStrip: {
         announcementError: '错误消息条',
@@ -422,9 +419,6 @@ export default {
     platformIconTabBar: {
         moreButton: '更多'
     },
-    platformInputMessageGroup: {
-        popoverAriaLabel: '字段验证消息'
-    },
     platformLink: {
         roleDescriptionWithMedia: '媒体：{media}'
     },
@@ -668,8 +662,8 @@ export default {
     },
     platformVariantManagement: {
         access: {
-            private: '私人',
-            public: '公共'
+            public: '公共',
+            private: '私人'
         },
         applyAutomatically: '自动应用',
         cancel: '取消',
@@ -746,5 +740,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: '分段式按钮',
         groupRoleDescription: '分段式按钮组'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: '字段验证消息'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: '字段验证消息'
     }
 };

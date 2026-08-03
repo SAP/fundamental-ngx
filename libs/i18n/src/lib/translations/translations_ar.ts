@@ -44,8 +44,8 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'التقويم',
         calendarLegendLabel: 'وسيلة إيضاح التقويم',
-        calendarMonthViewDescription: 'أداة انتقاء الشهر',
         calendarRoleDescription: 'التقويم',
+        calendarMonthViewDescription: 'أداة انتقاء الشهر',
         calendarYearsRangeViewDescription: 'أداة انتقاء نطاق السنوات',
         calendarYearsViewDescription: 'أداة انتقاء السنة',
         closeCalendarLabel: 'إغلاق التقويم',
@@ -107,9 +107,6 @@ export default {
         lessLabel: 'أقل',
         moreLabel: '{count} أكبر'
     },
-    coreFormInputMessageGroup: {
-        popoverAriaLabel: 'رسائل التحقق من صحة الحقل'
-    },
     coreGridList: {
         filterBarCancelButtonTitle: 'إلغاء',
         listItemButtonDeleteTitle: 'حذف',
@@ -128,8 +125,8 @@ export default {
         subtle: 'غامض'
     },
     coreList: {
-        listItemNotSelectedAriaLabel: 'غير محدد',
-        listItemSelectedAriaLabel: 'المحدد'
+        listItemSelectedAriaLabel: 'المحدد',
+        listItemNotSelectedAriaLabel: 'غير محدد'
     },
     coreMessageStrip: {
         announcementError: 'شريط رسالة الخطأ',
@@ -425,9 +422,6 @@ export default {
     platformIconTabBar: {
         moreButton: 'المزيد'
     },
-    platformInputMessageGroup: {
-        popoverAriaLabel: 'رسائل التحقق من صحة الحقل'
-    },
     platformLink: {
         roleDescriptionWithMedia: 'الوسائط: {media}'
     },
@@ -672,8 +666,8 @@ export default {
     },
     platformVariantManagement: {
         access: {
-            private: 'خاص',
-            public: 'عام'
+            public: 'عام',
+            private: 'خاص'
         },
         applyAutomatically: 'تطبيق تلقائيًا',
         cancel: 'إلغاء',
@@ -750,5 +744,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'زر مقسَّم',
         groupRoleDescription: 'مجموعة الأزرار المقسَّمة'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'رسائل التحقق من صحة الحقل'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'رسائل التحقق من صحة الحقل'
     }
 };

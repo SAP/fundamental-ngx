@@ -44,8 +44,8 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'Kalendarz',
         calendarLegendLabel: 'Legenda kalendarza',
-        calendarMonthViewDescription: 'Selektor miesiąca',
         calendarRoleDescription: 'Kalendarz',
+        calendarMonthViewDescription: 'Selektor miesiąca',
         calendarYearsRangeViewDescription: 'Selektor zakresu lat',
         calendarYearsViewDescription: 'Selektor roku',
         closeCalendarLabel: 'Zamknij kalendarz',
@@ -107,9 +107,6 @@ export default {
         lessLabel: 'Mniej',
         moreLabel: '{count} więcej'
     },
-    coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Komunikaty walidacji pola'
-    },
     coreGridList: {
         filterBarCancelButtonTitle: 'Anuluj',
         listItemButtonDeleteTitle: 'Usuń',
@@ -128,8 +125,8 @@ export default {
         subtle: 'Delikatny'
     },
     coreList: {
-        listItemNotSelectedAriaLabel: 'Niewybrane',
-        listItemSelectedAriaLabel: 'Wybrane'
+        listItemSelectedAriaLabel: 'Wybrane',
+        listItemNotSelectedAriaLabel: 'Niewybrane'
     },
     coreMessageStrip: {
         announcementError: 'Pasek komunikatów o błędach',
@@ -426,9 +423,6 @@ export default {
     platformIconTabBar: {
         moreButton: 'Więcej'
     },
-    platformInputMessageGroup: {
-        popoverAriaLabel: 'Komunikaty walidacji pola'
-    },
     platformLink: {
         roleDescriptionWithMedia: 'Media: {media}'
     },
@@ -673,8 +667,8 @@ export default {
     },
     platformVariantManagement: {
         access: {
-            private: 'Prywatne',
-            public: 'Publiczne'
+            public: 'Publiczne',
+            private: 'Prywatne'
         },
         applyAutomatically: 'Zastosuj automatycznie',
         cancel: 'Anuluj',
@@ -751,5 +745,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Przycisk podzielony na segmenty',
         groupRoleDescription: 'Grupa przycisków podzielonych na segmenty'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Komunikaty walidacji pola'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Komunikaty walidacji pola'
     }
 };

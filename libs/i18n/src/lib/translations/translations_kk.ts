@@ -44,8 +44,8 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'Күнтізбе',
         calendarLegendLabel: 'Күнтізбе шартты белгісі',
-        calendarMonthViewDescription: 'Айды таңдау құралы',
         calendarRoleDescription: 'Күнтізбе',
+        calendarMonthViewDescription: 'Айды таңдау құралы',
         calendarYearsRangeViewDescription: 'Жылдар ауқымын таңдау құралы',
         calendarYearsViewDescription: 'Жылды таңдау құралы',
         closeCalendarLabel: 'Күнтізбені жабу',
@@ -107,9 +107,6 @@ export default {
         lessLabel: 'Азырақ',
         moreLabel: 'Тағы {count}'
     },
-    coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Өрісті тексеру туралы хабарлар'
-    },
     coreGridList: {
         filterBarCancelButtonTitle: 'Болдырмау',
         listItemButtonDeleteTitle: 'Жою',
@@ -128,8 +125,8 @@ export default {
         subtle: 'Білінбейтін'
     },
     coreList: {
-        listItemNotSelectedAriaLabel: 'Таңдалмаған',
-        listItemSelectedAriaLabel: 'Таңдалған'
+        listItemSelectedAriaLabel: 'Таңдалған',
+        listItemNotSelectedAriaLabel: 'Таңдалмаған'
     },
     coreMessageStrip: {
         announcementError: 'Қате туралы хабар жолағы',
@@ -426,9 +423,6 @@ export default {
     platformIconTabBar: {
         moreButton: 'Көбірек'
     },
-    platformInputMessageGroup: {
-        popoverAriaLabel: 'Өрісті тексеру туралы хабарлар'
-    },
     platformLink: {
         roleDescriptionWithMedia: 'Мультимедиа: {media}'
     },
@@ -673,8 +667,8 @@ export default {
     },
     platformVariantManagement: {
         access: {
-            private: 'Жеке',
-            public: 'Ортақ'
+            public: 'Ортақ',
+            private: 'Жеке'
         },
         applyAutomatically: 'Автоматты түрде қолдану',
         cancel: 'Болдырмау',
@@ -751,5 +745,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Сегменттелген түйме',
         groupRoleDescription: 'Сегменттелген түймелер тобы'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Өрісті тексеру туралы хабарлар'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Өрісті тексеру туралы хабарлар'
     }
 };

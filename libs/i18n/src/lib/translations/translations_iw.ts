@@ -43,8 +43,8 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'לוח שנה',
         calendarLegendLabel: 'מקרא לוח שנה',
-        calendarMonthViewDescription: 'בוחר חודש',
         calendarRoleDescription: 'לוח שנה',
+        calendarMonthViewDescription: 'בוחר חודש',
         calendarYearsRangeViewDescription: 'בוחר טווח שנים',
         calendarYearsViewDescription: 'בוחר שנה',
         closeCalendarLabel: 'סגירת לוח שנה',
@@ -106,9 +106,6 @@ export default {
         lessLabel: 'פחות',
         moreLabel: '{count} יותר'
     },
-    coreFormInputMessageGroup: {
-        popoverAriaLabel: 'הודעות בדיקת תקינות שדה'
-    },
     coreGridList: {
         filterBarCancelButtonTitle: 'בטל',
         listItemButtonDeleteTitle: 'מחק',
@@ -127,8 +124,8 @@ export default {
         subtle: 'עדין'
     },
     coreList: {
-        listItemNotSelectedAriaLabel: 'לא נבחר',
-        listItemSelectedAriaLabel: 'נבחר'
+        listItemSelectedAriaLabel: 'נבחר',
+        listItemNotSelectedAriaLabel: 'לא נבחר'
     },
     coreMessageStrip: {
         announcementError: 'רצועת הודעות שגיאה',
@@ -424,9 +421,6 @@ export default {
     platformIconTabBar: {
         moreButton: 'עוד'
     },
-    platformInputMessageGroup: {
-        popoverAriaLabel: 'הודעות בדיקת תקינות שדה'
-    },
     platformLink: {
         roleDescriptionWithMedia: 'תקשורת: {media}'
     },
@@ -670,8 +664,8 @@ export default {
     },
     platformVariantManagement: {
         access: {
-            private: 'פרטי',
-            public: 'ציבורי'
+            public: 'ציבורי',
+            private: 'פרטי'
         },
         applyAutomatically: 'החל באופן אוטומטי',
         cancel: 'בטל',
@@ -748,5 +742,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'סרגל לחצנים',
         groupRoleDescription: 'קבוצת סרגלי לחצנים'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'הודעות בדיקת תקינות שדה'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'הודעות בדיקת תקינות שדה'
     }
 };

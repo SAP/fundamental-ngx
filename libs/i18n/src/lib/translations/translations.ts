@@ -43,8 +43,8 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'Calendar',
         calendarLegendLabel: 'Calendar Legend',
-        calendarMonthViewDescription: 'Month picker',
         calendarRoleDescription: 'Calendar',
+        calendarMonthViewDescription: 'Month picker',
         calendarYearsRangeViewDescription: 'Years range picker',
         calendarYearsViewDescription: 'Year picker',
         closeCalendarLabel: 'Close calendar',
@@ -106,9 +106,6 @@ export default {
         lessLabel: 'Less',
         moreLabel: '{count} more'
     },
-    coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
-    },
     coreGridList: {
         filterBarCancelButtonTitle: 'Cancel',
         listItemButtonDeleteTitle: 'Delete',
@@ -127,8 +124,8 @@ export default {
         subtle: 'Subtle'
     },
     coreList: {
-        listItemNotSelectedAriaLabel: 'Not Selected',
-        listItemSelectedAriaLabel: 'Selected'
+        listItemSelectedAriaLabel: 'Selected',
+        listItemNotSelectedAriaLabel: 'Not Selected'
     },
     coreMessageStrip: {
         announcementError: 'Error Message Strip',
@@ -424,9 +421,6 @@ export default {
     platformIconTabBar: {
         moreButton: 'More'
     },
-    platformInputMessageGroup: {
-        popoverAriaLabel: 'Field validation messages'
-    },
     platformLink: {
         roleDescriptionWithMedia: 'Media: {media}'
     },
@@ -671,8 +665,8 @@ export default {
     },
     platformVariantManagement: {
         access: {
-            private: 'Private',
-            public: 'Public'
+            public: 'Public',
+            private: 'Private'
         },
         applyAutomatically: 'Apply Automatically',
         cancel: 'Cancel',
@@ -749,5 +743,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Segmented Button',
         groupRoleDescription: 'Segmented Button Group'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Field validation messages'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Field validation messages'
     }
 };

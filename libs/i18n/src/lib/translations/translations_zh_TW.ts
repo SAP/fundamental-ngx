@@ -43,8 +43,8 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: '行事曆',
         calendarLegendLabel: '行事曆圖例',
-        calendarMonthViewDescription: '月份選擇器',
         calendarRoleDescription: '行事曆',
+        calendarMonthViewDescription: '月份選擇器',
         calendarYearsRangeViewDescription: '年份範圍選擇器',
         calendarYearsViewDescription: '年份選擇器',
         closeCalendarLabel: '關閉行事曆',
@@ -106,9 +106,6 @@ export default {
         lessLabel: '較少',
         moreLabel: '超出 {count} 個字元'
     },
-    coreFormInputMessageGroup: {
-        popoverAriaLabel: '欄位驗證訊息'
-    },
     coreGridList: {
         filterBarCancelButtonTitle: '取消',
         listItemButtonDeleteTitle: '刪除',
@@ -127,8 +124,8 @@ export default {
         subtle: '輕微'
     },
     coreList: {
-        listItemNotSelectedAriaLabel: '未選擇',
-        listItemSelectedAriaLabel: '已選擇'
+        listItemSelectedAriaLabel: '已選擇',
+        listItemNotSelectedAriaLabel: '未選擇'
     },
     coreMessageStrip: {
         announcementError: '錯誤訊息列',
@@ -423,9 +420,6 @@ export default {
     platformIconTabBar: {
         moreButton: '更多'
     },
-    platformInputMessageGroup: {
-        popoverAriaLabel: '欄位驗證訊息'
-    },
     platformLink: {
         roleDescriptionWithMedia: '媒體：{media}'
     },
@@ -669,8 +663,8 @@ export default {
     },
     platformVariantManagement: {
         access: {
-            private: '私人',
-            public: '公共'
+            public: '公共',
+            private: '私人'
         },
         applyAutomatically: '自動套用',
         cancel: '取消',
@@ -747,5 +741,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: '分區按鈕',
         groupRoleDescription: '分區按鈕群組'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: '欄位驗證訊息'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: '欄位驗證訊息'
     }
 };

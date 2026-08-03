@@ -44,8 +44,8 @@ export default {
     coreCalendar: {
         calendarDayViewDescription: 'Calendario',
         calendarLegendLabel: 'Leyenda de calendario',
-        calendarMonthViewDescription: 'Selector de mes',
         calendarRoleDescription: 'Calendario',
+        calendarMonthViewDescription: 'Selector de mes',
         calendarYearsRangeViewDescription: 'Selector de rango de años',
         calendarYearsViewDescription: 'Selector de año',
         closeCalendarLabel: 'Cerrar calendario',
@@ -107,9 +107,6 @@ export default {
         lessLabel: 'Menos',
         moreLabel: '{count} más'
     },
-    coreFormInputMessageGroup: {
-        popoverAriaLabel: 'Mensajes de validación de campo'
-    },
     coreGridList: {
         filterBarCancelButtonTitle: 'Cancelar',
         listItemButtonDeleteTitle: 'Suprimir',
@@ -128,8 +125,8 @@ export default {
         subtle: 'Discreto'
     },
     coreList: {
-        listItemNotSelectedAriaLabel: 'No seleccionado',
-        listItemSelectedAriaLabel: 'Seleccionado'
+        listItemSelectedAriaLabel: 'Seleccionado',
+        listItemNotSelectedAriaLabel: 'No seleccionado'
     },
     coreMessageStrip: {
         announcementError: 'Línea de mensajes de error',
@@ -427,9 +424,6 @@ export default {
     platformIconTabBar: {
         moreButton: 'Más'
     },
-    platformInputMessageGroup: {
-        popoverAriaLabel: 'Mensajes de validación de campo'
-    },
     platformLink: {
         roleDescriptionWithMedia: 'Medios de comunicación: {media}'
     },
@@ -674,8 +668,8 @@ export default {
     },
     platformVariantManagement: {
         access: {
-            private: 'Privado',
-            public: 'Público'
+            public: 'Público',
+            private: 'Privado'
         },
         applyAutomatically: 'Aplicar automáticamente',
         cancel: 'Cancelar',
@@ -752,5 +746,11 @@ export default {
     segmentedButton: {
         buttonRoleDescription: 'Botón segmentado',
         groupRoleDescription: 'Grupo de botones segmentados'
+    },
+    coreFormInputMessageGroup: {
+        popoverAriaLabel: 'Mensajes de validación de campo'
+    },
+    platformInputMessageGroup: {
+        popoverAriaLabel: 'Mensajes de validación de campo'
     }
 };
