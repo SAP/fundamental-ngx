@@ -368,9 +368,26 @@ export function componentTemplate(
     // Get CVA configuration based on component metadata
     const cvaConfig = getCvaConfig(data, packageName);
 
-    // Add hostDirective if CVA is needed
-    const cvaHostDirective = cvaConfig ? `  hostDirectives: [${cvaConfig.hostDirective}],\n` : '';
     const cvaImport = cvaConfig ? cvaConfig.import : '';
+
+    // Detect whether this component has an href input
+    const hasHref = (data.members ?? []).some((m) => m.kind === 'field' && m.privacy === 'public' && m.name === 'href');
+
+    const routerLinkBridgeImport = hasHref
+        ? `import { Ui5RouterLinkBridgeDirective } from '@fundamental-ngx/ui5-webcomponents-base/router-link';`
+        : '';
+
+    // Build hostDirectives array — may include CVA and/or RouterLinkBridge
+    const hostDirectiveEntries: string[] = [];
+    if (cvaConfig) {
+        hostDirectiveEntries.push(cvaConfig.hostDirective);
+    }
+    if (hasHref) {
+        hostDirectiveEntries.push('Ui5RouterLinkBridgeDirective');
+    }
+
+    const hostDirectivesDeclaration =
+        hostDirectiveEntries.length > 0 ? `  hostDirectives: [${hostDirectiveEntries.join(', ')}],\n` : '';
 
     // Build providers array - always includes content density, plus CVA if needed
     const contentDensityProvider = `    contentDensityObserverProviders({
@@ -466,18 +483,22 @@ ${outputEvents
         outputEvents.length > 0
             ? `
     // Synchronize outputs (events)
+    const _listeners: Array<() => void> = [];
     for (const outputName of outputsToSync) {
       // Map Angular output name to UI5 web component event name
       const eventName = outputName.replace('ui5', '').replace(/([A-Z])/g, '-$1').toLowerCase().substring(1);
       // Ensure the output property exists and has an emit function before adding listener
       if (this[outputName] && typeof this[outputName].emit === 'function' && wcElement.addEventListener) {
         // Cast the listener to the correct type to satisfy TypeScript
-        wcElement.addEventListener(eventName, (e) => {
+        const listener = (e: Event) => {
 ${readonlySignalUpdates}
           this[outputName].emit(e as CustomEvent<any>);
-        });
+        };
+        wcElement.addEventListener(eventName, listener);
+        _listeners.push(() => wcElement.removeEventListener(eventName, listener));
       }
     }
+    this._destroyRef.onDestroy(() => _listeners.forEach((fn) => fn()));
   `
             : '';
 
@@ -495,7 +516,7 @@ import {
   Injector,
   booleanAttribute,
   computed,
-  signal
+  signal${outputEvents.length > 0 ? ',\n  DestroyRef' : ''}
 } from '@angular/core';
 import '${packageName}/dist/${className}.js';
 import { default as _${className} } from '${packageName}/dist/${className}.js';
@@ -506,6 +527,7 @@ import {
   ContentDensityMode
 } from '@fundamental-ngx/core/content-density';
 ${cvaImport}
+${routerLinkBridgeImport}
 ${componentImports.join('\n')}
 
 @Component({
@@ -513,7 +535,7 @@ ${componentImports.join('\n')}
   selector: '${tagName}, [${tagName}]',
   template: '<ng-content></ng-content>',
   exportAs: 'ui5${className}',
-${cvaHostDirective}${providersArray}  changeDetection: ChangeDetectionStrategy.OnPush,
+${hostDirectivesDeclaration}${providersArray}  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ${className} implements AfterViewInit {
 ${generateInputs(data, componentEnums, className)} // className is now passed
@@ -531,7 +553,7 @@ ${generateSlotsDocumentation(data)}
    * @private
    */
   private readonly _contentDensityObserver = inject(ContentDensityObserver);
-${privateProperties}
+${outputEvents.length > 0 ? '  private readonly _destroyRef = inject(DestroyRef);\n' : ''}${privateProperties}
   get element(): _${className} {
     return this.elementRef.nativeElement;
   }
