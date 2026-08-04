@@ -14,7 +14,7 @@ export type CommentType =
     | 'NOTR'; // No translation
 
 export interface I18nManageExecutorSchema {
-    command: 'add' | 'rename' | 'remove' | 'search' | 'validate' | 'update' | 'sort' | 'sync';
+    command: 'add' | 'rename' | 'remove' | 'search' | 'validate' | 'update' | 'sort' | 'sync' | 'correct';
     key?: string;
     value?: string;
     newKey?: string;
@@ -22,5 +22,5 @@ export interface I18nManageExecutorSchema {
     comment?: string;
     commentType?: CommentType;
     propertiesPath?: string;
-    fdLanguagePath?: string;
+    baseLangOnly?: boolean;
 }

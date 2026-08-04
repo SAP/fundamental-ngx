@@ -7,7 +7,7 @@
     "properties": {
         "command": {
             "type": "string",
-            "enum": ["add", "rename", "remove", "search", "validate", "update", "sort", "sync"],
+            "enum": ["add", "rename", "remove", "search", "validate", "update", "sort", "sync", "correct"],
             "description": "Operation to perform"
         },
         "key": {
@@ -53,9 +53,10 @@
             "type": "string",
             "description": "Path to translations directory"
         },
-        "fdLanguagePath": {
-            "type": "string",
-            "description": "Path to FdLanguage interface file"
+        "baseLangOnly": {
+            "type": "boolean",
+            "default": false,
+            "description": "Only correct translations.properties (base English file), not locale-specific files"
         }
     },
     "required": ["command"]

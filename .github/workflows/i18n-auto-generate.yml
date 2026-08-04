@@ -108,13 +108,43 @@ jobs:
               with:
                   node-version: ${{ env.NODE_VERSION }}
 
-            # Security: Run syntax validation before generation (fork PRs only)
-            - name: Validate .properties syntax (fork PRs)
+            # Security: Run validation before generation (fork PRs only)
+            - name: Validate .properties files (fork PRs)
               if: github.event.pull_request.head.repo.full_name != github.repository
+              id: validate
               run: |
-                  echo "🔍 Validating .properties file syntax..."
+                  echo "🔍 Validating .properties files..."
+                  if npx nx run i18n:i18n-manage --command=validate; then
+                    echo "✅ Validation passed"
+                    echo "validation_passed=true" >> $GITHUB_OUTPUT
+                  else
+                    echo "❌ Validation failed"
+                    echo "validation_passed=false" >> $GITHUB_OUTPUT
+                  fi
+                  echo ""
+
+            - name: Validate .properties files (same-repo PRs)
+              if: github.event.pull_request.head.repo.full_name == github.repository
+              run: |
+                  echo "🔍 Validating .properties files..."
                   npx nx run i18n:i18n-manage --command=validate
-                  echo "✅ Syntax validation passed"
+                  echo "✅ Validation passed"
+                  echo ""
+
+            - name: Auto-correct .properties files (fork PRs, if validation failed)
+              if: |
+                  github.event.pull_request.head.repo.full_name != github.repository &&
+                  steps.validate.outputs.validation_passed == 'false'
+              id: correct
+              run: |
+                  echo "🔧 Auto-correcting translation files..."
+                  npx nx run i18n:i18n-manage --command=correct --baseLangOnly
+                  if git diff --quiet -- libs/i18n/src/lib/translations/; then
+                    echo "changed=false" >> $GITHUB_OUTPUT
+                  else
+                    echo "changed=true" >> $GITHUB_OUTPUT
+                  fi
+                  echo "✅ Auto-correction completed"
                   echo ""
 
             - name: Setup git user
@@ -122,6 +152,44 @@ jobs:
               with:
                   name: ${{ secrets.GH_NAME }}
                   email: ${{ secrets.GH_EMAIL }}
+
+            - name: Commit corrections (fork PRs, if auto-correct made changes)
+              if: |
+                  github.event.pull_request.head.repo.full_name != github.repository &&
+                  steps.correct.outputs.changed == 'true'
+              env:
+                  FORK_REPO: ${{ github.event.pull_request.head.repo.full_name }}
+                  FORK_REF: ${{ github.event.pull_request.head.ref }}
+                  GHACTIONS_TOKEN: ${{ secrets.GHACTIONS }}
+              run: |
+                  set -e
+                  git add libs/i18n/src/lib/translations/*.properties
+
+                  if ! git commit -m "chore(i18n): auto-correct translation file format
+
+                  Auto-corrected by i18n-auto-generate workflow"; then
+                      echo "❌ Commit failed"
+                      exit 1
+                  fi
+
+                  # Validate ref name and repo name for security
+                  if [[ ! "$FORK_REF" =~ ^[a-zA-Z0-9._/-]+$ ]] || [[ "$FORK_REF" == *..* ]]; then
+                      echo "❌ ERROR: Branch ref contains invalid characters: $FORK_REF"
+                      exit 1
+                  fi
+
+                  if [[ ! "$FORK_REPO" =~ ^[a-zA-Z0-9._-]+/[a-zA-Z0-9._-]+$ ]]; then
+                      echo "❌ ERROR: Fork repo name has invalid format: $FORK_REPO"
+                      exit 1
+                  fi
+
+                  FORK_URL="https://x-access-token:${GHACTIONS_TOKEN}@github.com/${FORK_REPO}.git"
+                  if ! git push "$FORK_URL" "HEAD:${FORK_REF}" 2>/dev/null; then
+                      echo "❌ Push to fork failed - PAT may not have access to ${FORK_REPO}"
+                      exit 1
+                  fi
+
+                  echo "✅ Corrections committed and pushed successfully"
 
             - name: Generate TypeScript files
               id: generate

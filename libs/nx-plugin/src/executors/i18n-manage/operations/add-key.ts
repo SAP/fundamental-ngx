@@ -2,6 +2,7 @@ import { workspaceRoot } from '@nx/devkit';
 import { readFileSync, writeFileSync } from 'fs';
 import { CommentType } from '../schema';
 import { generateComment } from '../utils/comment-generator';
+import { updateFdLanguageInterface } from '../utils/interface-updater';
 import { addKeyToProperties, keyExists } from '../utils/properties-parser';
 import { regenerateTypeScriptFiles } from './sync';
 
@@ -81,7 +82,17 @@ export async function addKey(options: AddKeyOptions): Promise<AddKeyResult> {
         };
     }
 
-    // Step 3: Add key to base translations.properties file
+    // Step 2.5: Validate key format (reject multi-dot keys)
+    const keyParts = key.split('.');
+    if (keyParts.length > 2) {
+        return {
+            success: false,
+            filesModified: [],
+            error: `Invalid key format: "${key}". Keys must be in format "component.keyName" with a single dot. Multi-level keys like "component.sub.key" are not supported.`
+        };
+    }
+
+    // Step 3: Add key to base translations.properties file (write properties first for safer atomicity)
     try {
         const baseContent = readFileSync(basePropertiesFile, 'utf-8');
         const commentInfo = generateComment(key, value, comment, commentType);
@@ -100,15 +111,67 @@ export async function addKey(options: AddKeyOptions): Promise<AddKeyResult> {
         };
     }
 
+    // Step 3.5: Update fd-language.ts interface with the new key (after properties succeeds).
+    // Trade-off: if this write fails, properties is already updated but interface is stale.
+    // Recovery: run `sync` — it regenerates TypeScript from properties, making it the source of truth.
+    const fdLanguagePath = `${workspaceRoot}/libs/i18n/src/lib/models/fd-language.ts`;
+    try {
+        const fdLanguageContent = readFileSync(fdLanguagePath, 'utf-8');
+        const [componentName, keyName] = keyParts;
+        const commentInfo = generateComment(key, value, comment, commentType);
+
+        const updatedFdLanguage = updateFdLanguageInterface(
+            fdLanguageContent,
+            componentName,
+            keyName,
+            commentInfo.type,
+            commentInfo.description
+        );
+
+        // Only write if content changed
+        if (updatedFdLanguage !== fdLanguageContent) {
+            writeFileSync(fdLanguagePath, updatedFdLanguage, 'utf-8');
+        }
+    } catch (error) {
+        return {
+            success: false,
+            filesModified: [],
+            error: `Failed to update fd-language.ts: ${error instanceof Error ? error.message : String(error)}`
+        };
+    }
+
     // Step 4: Regenerate all TypeScript files from .properties files
     const result = await regenerateTypeScriptFiles(propertiesPath);
     if (!result.success) {
         return result;
     }
 
-    // Include the base properties file in the modified files list
+    // Step 5: Verify the comment was written to the file
+    try {
+        const updatedContent = readFileSync(basePropertiesFile, 'utf-8');
+        const keyRegex = new RegExp(`#([A-Z]{4}):\\s*[^\\n]*\\n\\s*${key.replace(/\./g, '\\.')}\\s*=`, 'm');
+        if (!keyRegex.test(updatedContent)) {
+            return {
+                success: false,
+                filesModified: [],
+                error: `Failed to verify comment for key "${key}". The key was added but the SAP UI5 comment may not have been written correctly. Please run: nx run i18n:i18n-manage --command=validate`
+            };
+        }
+    } catch (error) {
+        return {
+            success: false,
+            filesModified: [],
+            error: `Failed to verify comment was written: ${error instanceof Error ? error.message : String(error)}`
+        };
+    }
+
+    // Include the base properties file and fd-language.ts in the modified files list
     return {
         success: true,
-        filesModified: [`${propertiesPath}/translations.properties`, ...result.filesModified]
+        filesModified: [
+            `${propertiesPath}/translations.properties`,
+            'libs/i18n/src/lib/models/fd-language.ts',
+            ...result.filesModified
+        ]
     };
 }

@@ -43,7 +43,13 @@ describe('AddKey Operation', () => {
 coreButton.save=Save
                 `.trim(),
                 '/test-workspace/libs/i18n/translations/translations.ts': 'export default {}',
-                '/test-workspace/libs/i18n/src/lib/models/fd-language-key-identifier.ts': '// placeholder'
+                '/test-workspace/libs/i18n/src/lib/models/fd-language-key-identifier.ts': '// placeholder',
+                '/test-workspace/libs/i18n/src/lib/models/fd-language.ts': `export interface FdLanguage {
+    coreButton: {
+        /** Save button */
+        save: FdLanguageKey;
+    };
+}`
             });
 
             const result = await addKey({
@@ -103,12 +109,19 @@ coreButton.save=Save
                 '/test-workspace/libs/i18n/translations/translations.properties': `
 #XBUT: Save button
 coreButton.save=Save
-                `.trim()
+                `.trim(),
+                '/test-workspace/libs/i18n/src/lib/models/fd-language.ts': `export interface FdLanguage {
+    coreButton: {
+        /** Save button */
+        save: FdLanguageKey;
+    };
+}`
             });
 
             const result = await addKey({
                 key: 'coreButton.save',
                 value: 'Save',
+
                 propertiesPath: 'libs/i18n/translations'
             });
 
@@ -126,12 +139,19 @@ coreButton.save=Save
 coreButton.save=Save
                 `.trim(),
                 '/test-workspace/libs/i18n/translations/translations.ts': 'export default {}',
-                '/test-workspace/libs/i18n/src/lib/models/fd-language-key-identifier.ts': '// placeholder'
+                '/test-workspace/libs/i18n/src/lib/models/fd-language-key-identifier.ts': '// placeholder',
+                '/test-workspace/libs/i18n/src/lib/models/fd-language.ts': `export interface FdLanguage {
+    coreButton: {
+        /** Save button */
+        save: FdLanguageKey;
+    };
+}`
             });
 
             const result = await addKey({
                 key: 'coreButton.cancel',
                 value: 'Cancel',
+
                 propertiesPath: 'libs/i18n/translations'
             });
 
@@ -161,12 +181,19 @@ coreButton.save=Save
 #XBUT: Save button
 coreButton.save=Speichern
                 `.trim(),
-                '/test-workspace/libs/i18n/src/lib/models/fd-language-key-identifier.ts': '// placeholder'
+                '/test-workspace/libs/i18n/src/lib/models/fd-language-key-identifier.ts': '// placeholder',
+                '/test-workspace/libs/i18n/src/lib/models/fd-language.ts': `export interface FdLanguage {
+    coreButton: {
+        /** Save button */
+        save: FdLanguageKey;
+    };
+}`
             });
 
             const result = await addKey({
                 key: 'coreButton.cancel',
                 value: 'Cancel',
+
                 propertiesPath: 'libs/i18n/translations'
             });
 
@@ -196,7 +223,13 @@ coreButton.save=Speichern
 coreButton.save=Save
                 `.trim(),
                 '/test-workspace/libs/i18n/translations/translations.ts': 'export default {}',
-                '/test-workspace/libs/i18n/src/lib/models/fd-language-key-identifier.ts': '// placeholder'
+                '/test-workspace/libs/i18n/src/lib/models/fd-language-key-identifier.ts': '// placeholder',
+                '/test-workspace/libs/i18n/src/lib/models/fd-language.ts': `export interface FdLanguage {
+    coreButton: {
+        /** Save button */
+        save: FdLanguageKey;
+    };
+}`
             });
 
             const result = await addKey({
@@ -223,7 +256,13 @@ coreButton.save=Save
 coreButton.save=Save
                 `.trim(),
                 '/test-workspace/libs/i18n/translations/translations.ts': 'export default {}',
-                '/test-workspace/libs/i18n/src/lib/models/fd-language-key-identifier.ts': '// placeholder'
+                '/test-workspace/libs/i18n/src/lib/models/fd-language-key-identifier.ts': '// placeholder',
+                '/test-workspace/libs/i18n/src/lib/models/fd-language.ts': `export interface FdLanguage {
+    coreButton: {
+        /** Save button */
+        save: FdLanguageKey;
+    };
+}`
             });
 
             const result = await addKey({
@@ -251,12 +290,19 @@ coreButton.save=Save
 coreButton.save=Save
                 `.trim(),
                 '/test-workspace/libs/i18n/translations/translations.ts': 'export default {}',
-                '/test-workspace/libs/i18n/src/lib/models/fd-language-key-identifier.ts': '// placeholder'
+                '/test-workspace/libs/i18n/src/lib/models/fd-language-key-identifier.ts': '// placeholder',
+                '/test-workspace/libs/i18n/src/lib/models/fd-language.ts': `export interface FdLanguage {
+    coreButton: {
+        /** Save button */
+        save: FdLanguageKey;
+    };
+}`
             });
 
             const result = await addKey({
                 key: 'coreDialog.headerTitle',
                 value: 'Dialog Title',
+
                 propertiesPath: 'libs/i18n/translations'
             });
 
@@ -274,11 +320,14 @@ coreButton.save=Save
     describe('error handling', () => {
         it('should fail if translations.properties does not exist', async () => {
             (fastGlobSync as jest.Mock).mockReturnValue([]);
-            vol.fromJSON({});
+            vol.fromJSON({
+                '/test-workspace/libs/i18n/src/lib/models/fd-language.ts': `export interface FdLanguage {}`
+            });
 
             const result = await addKey({
                 key: 'coreButton.test',
                 value: 'Test',
+
                 propertiesPath: 'libs/i18n/translations'
             });
 
@@ -292,12 +341,19 @@ coreButton.save=Save
                 '/test-workspace/libs/i18n/translations/translations.properties': `
 #XBUT: Save button
 coreButton.save=Save
-                `.trim()
+                `.trim(),
+                '/test-workspace/libs/i18n/src/lib/models/fd-language.ts': `export interface FdLanguage {
+    coreButton: {
+        /** Save button */
+        save: FdLanguageKey;
+    };
+}`
             });
 
             const result = await addKey({
                 key: 'coreButton.test',
                 value: 'Test',
+
                 propertiesPath: 'libs/i18n/translations'
             });
 
