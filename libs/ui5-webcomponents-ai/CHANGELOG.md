@@ -1,3 +1,14 @@
+## 0.64.2-rc.10 (2026-08-04)
+
+### 🚀 Features
+
+- **i18n:** add auto-correct command to i18n-manage executor ([#14429](https://github.com/SAP/fundamental-ngx/pull/14429))
+
+### ❤️ Thank You
+
+- deno
+- fundamental-bot
+
 ## 0.64.2-rc.9 (2026-08-03)
 
 This was a version bump only for ui5-webcomponents-ai to align it with other projects, there were no code changes.
