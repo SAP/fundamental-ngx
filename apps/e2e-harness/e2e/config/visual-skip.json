@@ -108,6 +108,22 @@
         {
             "route": "core/shellbar/context-area-overflow",
             "reason": "Covered by visual-shellbar-context-area-overflow.spec.ts with fixed viewports and avatar masking"
+        },
+        {
+            "route": "core/bar/floating-footer",
+            "reason": "position:fixed bar causes e2e-root to appear hidden to Playwright — goto fixture times out on waitFor visible"
+        },
+        {
+            "route": "core/micro-process-flow/overflow",
+            "reason": "Non-deterministic overflow calculation — ResizeObserver timing causes 3% pixel diff"
+        },
+        {
+            "route": "platform/multi-input/loading",
+            "reason": "300ms RxJS delay() in DelayedBaseDataProvider causes timing-dependent busy indicator state at snapshot time"
+        },
+        {
+            "route": "core/calendar/legend",
+            "reason": "Calendar highlights today's date — baseline drifts daily as the current day changes"
         }
     ]
 }

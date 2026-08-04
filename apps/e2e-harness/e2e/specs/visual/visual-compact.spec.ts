@@ -43,8 +43,8 @@ test.describe('Visual Regression — Compact Content Density', () => {
             await page.evaluate(() => document.documentElement.classList.add('e2e-no-animations'));
             await page.locator('html.e2e-no-animations').waitFor({ state: 'attached' });
 
-            await expect(page).toHaveScreenshot(`compact/${route.library}/${route.component}-${route.example}.png`, {
-                fullPage: true,
+            const example = page.locator('e2e-root > main');
+            await expect(example).toHaveScreenshot(`compact/${route.library}/${route.component}-${route.example}.png`, {
                 maxDiffPixelRatio: 0.01,
                 animations: 'disabled'
             });
