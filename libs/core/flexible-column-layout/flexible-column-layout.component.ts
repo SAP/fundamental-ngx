@@ -11,6 +11,7 @@ import {
     OnDestroy,
     OnInit,
     Output,
+    signal,
     SimpleChanges,
     TemplateRef,
     ViewEncapsulation
@@ -91,7 +92,12 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
      * 'ThreeColumnsStartMinimized' | 'ThreeColumnsEndMinimized'
      */
     @Input()
-    layout: FlexibleColumnLayout = ONE_COLUMN_START_FULL_SCREEN;
+    set layout(value: FlexibleColumnLayout) {
+        this._layout.set(value);
+    }
+    get layout(): FlexibleColumnLayout {
+        return this._layout();
+    }
 
     /**
      * Mapping of the layout name and the column layout in %
@@ -155,12 +161,22 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
 
     /**
      * @hidden
+     * the column layout representing the distribution of the width
+     * between the first (start), the middle and the last(end) column
+     */
+    _columnLayout: { start: number; mid: number; end: number };
+
+    /** @hidden */
+    protected readonly _layout = signal<FlexibleColumnLayout>(ONE_COLUMN_START_FULL_SCREEN);
+
+    /**
+     * @hidden
      * left column separator value (between start and middle columns)
      * that specifies the direction of the arrow and
      * if the separator is visible
      * Options include: 'left', 'right' and null
      */
-    _leftColumnSeparator: ColumnSeparatorValue = null;
+    protected readonly _leftColumnSeparator = signal<ColumnSeparatorValue>(null);
 
     /**
      * @hidden
@@ -169,21 +185,14 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
      * if the separator is visible
      * Options include: 'left', 'right' and null
      */
-    _rightColumnSeparator: ColumnSeparatorValue = null;
-
-    /**
-     * @hidden
-     * the column layout representing the distribution of the width
-     * between the first (start), the middle and the last(end) column
-     */
-    _columnLayout: { start: number; mid: number; end: number } = this.layoutDefinitions[this.layout];
+    protected readonly _rightColumnSeparator = signal<ColumnSeparatorValue>(null);
 
     /**
      * @hidden
      * allows to keep track of the previos layout
      * so we can go back to it on window resize
      */
-    private _previousLayout: FlexibleColumnLayout = this.layout;
+    private _previousLayout: FlexibleColumnLayout = this._layout();
 
     /** @hidden */
     private _screenSize: ScreenSize = LG_SCREEN_SIZE;
@@ -205,7 +214,7 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
      * and updates the layout
      */
     _handleLeftColumnSeparatorClick(): void {
-        switch (this.layout) {
+        switch (this._layout()) {
             case TWO_COLUMNS_START_EXPANDED:
                 this._updateCurrentLayout(TWO_COLUMNS_MID_EXPANDED);
                 break;
@@ -230,7 +239,7 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
      * and updates the layout
      */
     _handleRightColumnSeparatorClick(): void {
-        switch (this.layout) {
+        switch (this._layout()) {
             case TWO_COLUMNS_END_EXPANDED:
                 this._updateCurrentLayout(THREE_COLUMNS_START_MINIMIZED);
                 break;
@@ -252,7 +261,7 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
     /** @hidden */
     ngOnInit(): void {
         this._updateColumnLayoutParameters();
-        this._previousLayout = this.layout;
+        this._previousLayout = this._layout();
     }
 
     /** @hidden */
@@ -301,12 +310,12 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
     private _responsiveLayoutChangeHandler(): void {
         this._screenSize = this._getScreenSize(window.innerWidth);
 
-        switch (this.layout) {
+        switch (this._layout()) {
             case ONE_COLUMN_MID_FULL_SCREEN:
             case ONE_COLUMN_END_FULL_SCREEN: {
                 if (
                     this._screenSize !== SM_SCREEN_SIZE &&
-                    this.layout !== this._previousLayout &&
+                    this._layout() !== this._previousLayout &&
                     this._responsiveFullscreenLayout
                 ) {
                     this._responsiveFullscreenLayout = false;
@@ -409,7 +418,7 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
      * and the value that will specify the direction of the arrow
      */
     private _getLeftColumnSeparatorValue(): ColumnSeparatorValue {
-        switch (this.layout) {
+        switch (this._layout()) {
             case TWO_COLUMNS_START_EXPANDED:
                 return 'left';
             case TWO_COLUMNS_MID_EXPANDED:
@@ -428,7 +437,7 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
      * and the value that will specify the direction of the arrow
      */
     private _getRightColumnSeparatorValue(): ColumnSeparatorValue {
-        switch (this.layout) {
+        switch (this._layout()) {
             case TWO_COLUMNS_END_EXPANDED:
             case THREE_COLUMNS_END_EXPANDED:
                 return 'right';
@@ -448,9 +457,9 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
      * makes a call to determine the new value of the right separator
      */
     private _updateColumnLayoutParameters(): void {
-        this._columnLayout = this.layoutDefinitions[this.layout];
-        this._leftColumnSeparator = this._getLeftColumnSeparatorValue();
-        this._rightColumnSeparator = this._getRightColumnSeparatorValue();
+        this._columnLayout = this.layoutDefinitions[this._layout()];
+        this._leftColumnSeparator.set(this._getLeftColumnSeparatorValue());
+        this._rightColumnSeparator.set(this._getRightColumnSeparatorValue());
     }
 
     /**
@@ -460,12 +469,12 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
      * makes a call to the helper function that will update the column layout and the separators
      */
     private _updateCurrentLayout(newLayout: FlexibleColumnLayout): void {
-        this.layout = newLayout;
+        this._layout.set(newLayout);
         this._updateColumnLayoutParameters();
 
         // setTimeout fixes "ExpressionChangedAfterItHasBeenCheckedError"
         setTimeout(() => {
-            this.layoutChange.emit(this.layout);
+            this.layoutChange.emit(this._layout());
         });
     }
 }
