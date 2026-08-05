@@ -1,3 +1,14 @@
+## 0.64.2-rc.13 (2026-08-05)
+
+### 🩹 Fixes
+
+- **e2e:** scope visual regression snapshots to component container ([#14440](https://github.com/SAP/fundamental-ngx/pull/14440))
+
+### ❤️ Thank You
+
+- deno
+- github-actions
+
 ## 0.64.2-rc.12 (2026-08-05)
 
 This was a version bump only for cdk to align it with other projects, there were no code changes.
