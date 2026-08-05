@@ -4,6 +4,7 @@ import {
     AfterViewInit,
     ChangeDetectionStrategy,
     Component,
+    computed,
     ElementRef,
     HostListener,
     Input,
@@ -14,7 +15,7 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { FD_FORM_FIELD_CONTROL, FormStates } from '@fundamental-ngx/cdk/forms';
+import { FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import { KeyUtil, Nullable } from '@fundamental-ngx/cdk/utils';
 import { FormControlComponent } from '@fundamental-ngx/core/form';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
@@ -101,8 +102,8 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
         if (value) {
             super.setValue(value);
         } else {
-            // when custom value not set, we should set/reset counter to maxlength value when it becomes undefined
-            this.exceededCharCount.set(this.maxLength ? this.maxLength : 0);
+            // when custom value not set, reset character count to 0
+            this._textAreaCharCount.set(0);
             // reset state by resetting value
             super.setValue('');
         }
@@ -115,29 +116,48 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
     @ViewChild('counter')
     _textareaCounter?: ElementRef<HTMLDivElement>;
 
-    /** @hidden */
-    hasTextExceeded = false;
-
     /** @hidden flag to check if there is an initial value set */
     isValueCustomSet = false;
 
-    /** @hidden excess character count */
-    protected readonly exceededCharCount = signal(0);
+    /**
+     * @hidden
+     * Computed signal that derives counter state from character count.
+     * Returns 'excess' when over maxLength, 'remaining' otherwise.
+     */
+    protected readonly counterExcessOrRemaining = computed<'remaining' | 'excess'>(() => {
+        if (!this.maxLength) {
+            return 'remaining';
+        }
+        return this._textAreaCharCount() > this.maxLength ? 'excess' : 'remaining';
+    });
 
-    /** @hidden a string placeholder that toggles between 'remaining' and 'excess' for the select ICU expression */
-    protected readonly counterExcessOrRemaining = signal<'remaining' | 'excess'>('remaining');
+    /**
+     * @hidden
+     * Computed signal for the counter value (either exceeded or remaining count).
+     */
+    protected readonly exceededCharCount = computed(() => {
+        if (!this.maxLength) {
+            return 0;
+        }
+        const count = this._textAreaCharCount();
+        return count > this.maxLength ? count - this.maxLength : this.maxLength - count;
+    });
 
-    /** @hidden */
-    /** to keep track of number of characters in the textarea */
-    private readonly _textAreaCharCount = signal(0);
+    /**
+     * @hidden
+     * Computed signal that determines if text has exceeded maxLength.
+     * Used for state management.
+     */
+    protected readonly hasTextExceeded = computed(
+        () => this.maxLength > 0 && this._textAreaCharCount() > this.maxLength
+    );
 
     /** @hidden */
     private _isPasted = false;
 
-    /** for i18n counter message translation */
-    private readonly remainingText = 'remaining';
-    /** for i18n counter message translation */
-    private readonly excessText = 'excess';
+    /** @hidden */
+    /** to keep track of number of characters in the textarea */
+    private readonly _textAreaCharCount = signal(0);
 
     /**
      * @hidden
@@ -188,10 +208,8 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
         if (!this.wrapType || VALID_WRAP_TYPES.indexOf(this.wrapType) === -1) {
             throw new Error(`Textarea wrap type ${this.wrapType} is not supported`);
         }
-        // if not custom set, set counter to max length value, else it calculates remaining/exceeded characters.
-        if (!this.value) {
-            this.exceededCharCount.set(this.maxLength || 0);
-        } else {
+        // if custom value is set, mark it for validation
+        if (this.value) {
             this.isValueCustomSet = true;
         }
         super.ngOnInit();
@@ -245,12 +263,6 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
                 this._targetElement.focus();
                 this._targetElement.setSelectionRange(this.maxLength, this._textAreaCharCount());
             }
-
-            this.counterExcessOrRemaining.set(this.excessText as 'excess');
-            this.exceededCharCount.set(this._textAreaCharCount() - this.maxLength);
-        } else {
-            this.counterExcessOrRemaining.set(this.remainingText as 'remaining');
-            this.exceededCharCount.set(this.maxLength - this._textAreaCharCount());
         }
 
         this._isPasted = false;
@@ -293,28 +305,12 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
     getTextareaLineHeight(): number {
         // Get the computed styles for the element
         if (this._targetElement) {
-            const computed = window.getComputedStyle(this._targetElement);
+            const computedStyle = window.getComputedStyle(this._targetElement);
 
             // Calculate the height
-            return parseInt(computed.getPropertyValue('line-height'), 10);
+            return parseInt(computedStyle.getPropertyValue('line-height'), 10);
         }
         return 20; // default line height if nothing is defined
-    }
-
-    /**
-     * get the updated state when character count breaches `maxLength`
-     */
-    getUpdatedState(): FormStates {
-        if (this._getContentLength() > this.maxLength) {
-            this.hasTextExceeded = true; // set flag for error message to also change accordingly
-            this.counterExcessOrRemaining.set(this.excessText as 'excess');
-
-            return this.state;
-        }
-        this.hasTextExceeded = false;
-        this.counterExcessOrRemaining.set(this.remainingText as 'remaining');
-
-        return this.state; // return any other errors found by parent form field
     }
 
     /** @hidden Native element  */
@@ -322,27 +318,15 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
         return this._elementRef?.nativeElement;
     }
 
-    /** @hidden get the length of the textarea content */
-    private _getContentLength(): number {
-        let contentLength;
-        if (this._targetElement) {
-            contentLength = this._targetElement.value.length;
-        }
-        if (this.value) {
-            contentLength = this.value.length;
-        }
-        return contentLength;
-    }
-
     /** @hidden get the total height including borders and scroll height */
     private _getTextareaTotalHeight(): number {
         // Get the computed styles for the element
-        const computed = window.getComputedStyle(this._targetElement);
+        const computedStyle = window.getComputedStyle(this._targetElement);
         // Calculate the height
         return (
-            parseInt(computed.getPropertyValue('border-top-width'), 10) +
+            parseInt(computedStyle.getPropertyValue('border-top-width'), 10) +
             this._targetElement.scrollHeight +
-            parseInt(computed.getPropertyValue('border-bottom-width'), 10)
+            parseInt(computedStyle.getPropertyValue('border-bottom-width'), 10)
         );
     }
 
