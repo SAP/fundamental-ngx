@@ -8,6 +8,7 @@ import {
     HostListener,
     Input,
     OnInit,
+    signal,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
@@ -101,7 +102,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
             super.setValue(value);
         } else {
             // when custom value not set, we should set/reset counter to maxlength value when it becomes undefined
-            this.exceededCharCount = this.maxLength ? this.maxLength : 0;
+            this.exceededCharCount.set(this.maxLength ? this.maxLength : 0);
             // reset state by resetting value
             super.setValue('');
         }
@@ -117,18 +118,18 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
     /** @hidden */
     hasTextExceeded = false;
 
-    /** @hidden excess character count */
-    exceededCharCount = 0;
-
-    /** @hidden a string placeholder that toggles between 'remaining' and 'excess' for the select ICU expression */
-    counterExcessOrRemaining = 'remaining';
-
     /** @hidden flag to check if there is an initial value set */
     isValueCustomSet = false;
 
+    /** @hidden excess character count */
+    protected readonly exceededCharCount = signal(0);
+
+    /** @hidden a string placeholder that toggles between 'remaining' and 'excess' for the select ICU expression */
+    protected readonly counterExcessOrRemaining = signal<'remaining' | 'excess'>('remaining');
+
     /** @hidden */
     /** to keep track of number of characters in the textarea */
-    private _textAreaCharCount = 0;
+    private readonly _textAreaCharCount = signal(0);
 
     /** @hidden */
     private _isPasted = false;
@@ -172,8 +173,8 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
         if (this._shouldTrackTextLimit && KeyUtil.isKeyCode(event, [DELETE, BACKSPACE])) {
             // for the custom value set and showExceededText=false case, on any key press, remove excess characters
             if (this.value) {
-                this._textAreaCharCount = this.value.length;
-                if (this._textAreaCharCount > this.maxLength) {
+                this._textAreaCharCount.set(this.value.length);
+                if (this._textAreaCharCount() > this.maxLength) {
                     // remove excess characters
                     this.value = this.value.substring(0, this.maxLength);
                     this.isValueCustomSet = false; // since value is now changed, it is no longer custom set
@@ -189,7 +190,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
         }
         // if not custom set, set counter to max length value, else it calculates remaining/exceeded characters.
         if (!this.value) {
-            this.exceededCharCount = this.maxLength || 0;
+            this.exceededCharCount.set(this.maxLength || 0);
         } else {
             this.isValueCustomSet = true;
         }
@@ -229,7 +230,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
 
     /** update the counter message and related interactions */
     updateCounterInteractions(): void {
-        this._textAreaCharCount = this.value?.length ?? 0;
+        this._textAreaCharCount.set(this.value?.length ?? 0);
 
         if (this.maxLength) {
             // newly added to avoid unnecessary iteration, remove if issue found
@@ -239,17 +240,17 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
 
     /** if exceeded maxlength when set as a value in code, highlight the exceeded text. */
     validateLengthOnCustomSet(): void {
-        if (this._textAreaCharCount > this.maxLength) {
+        if (this._textAreaCharCount() > this.maxLength) {
             if (this._isPasted) {
                 this._targetElement.focus();
-                this._targetElement.setSelectionRange(this.maxLength, this._textAreaCharCount);
+                this._targetElement.setSelectionRange(this.maxLength, this._textAreaCharCount());
             }
 
-            this.counterExcessOrRemaining = this.excessText;
-            this.exceededCharCount = this._textAreaCharCount - this.maxLength;
+            this.counterExcessOrRemaining.set(this.excessText as 'excess');
+            this.exceededCharCount.set(this._textAreaCharCount() - this.maxLength);
         } else {
-            this.counterExcessOrRemaining = this.remainingText;
-            this.exceededCharCount = this.maxLength - this._textAreaCharCount;
+            this.counterExcessOrRemaining.set(this.remainingText as 'remaining');
+            this.exceededCharCount.set(this.maxLength - this._textAreaCharCount());
         }
 
         this._isPasted = false;
@@ -306,12 +307,12 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
     getUpdatedState(): FormStates {
         if (this._getContentLength() > this.maxLength) {
             this.hasTextExceeded = true; // set flag for error message to also change accordingly
-            this.counterExcessOrRemaining = this.excessText;
+            this.counterExcessOrRemaining.set(this.excessText as 'excess');
 
             return this.state;
         }
         this.hasTextExceeded = false;
-        this.counterExcessOrRemaining = this.remainingText;
+        this.counterExcessOrRemaining.set(this.remainingText as 'remaining');
 
         return this.state; // return any other errors found by parent form field
     }
