@@ -17,8 +17,8 @@ test.describe('Visual Regression', () => {
     for (const route of routes) {
         test(`${route.library}/${route.component}/${route.example}`, async ({ page, goto }) => {
             await goto(route.path);
-            await expect(page).toHaveScreenshot(`${route.library}/${route.component}-${route.example}.png`, {
-                fullPage: true,
+            const example = page.locator('e2e-root > main');
+            await expect(example).toHaveScreenshot(`${route.library}/${route.component}-${route.example}.png`, {
                 maxDiffPixelRatio: 0.01,
                 animations: 'disabled'
             });
