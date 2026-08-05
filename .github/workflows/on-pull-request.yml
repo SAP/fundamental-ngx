@@ -8,8 +8,7 @@ on:
             - 'apps/**'
             - 'playwright.config.ts'
             - '.github/workflows/on-pull-request.yml'
-        paths-ignore:
-            - 'apps/e2e-harness/e2e/snapshots/**'
+            - '!apps/e2e-harness/e2e/snapshots/**'
 
 env:
     NODE_VERSION: '22.x'
@@ -143,7 +142,6 @@ jobs:
                       core.info('✓ Breaking change footer format is correct');
 
     nx_agents:
-        if: github.event.action != 'edited'
         name: Nx Cloud Agent ${{ matrix.agent }}
         runs-on: ubuntu-latest
         environment: ci
@@ -172,7 +170,6 @@ jobs:
                   NX_AGENT_NAME: ${{matrix.agent}}
 
     build_test:
-        if: github.event.action != 'edited'
         runs-on: ubuntu-latest
         name: Run affected Build, Lint and test commands
         environment: ci
@@ -288,7 +285,6 @@ jobs:
     #               NX_CLOUD_DISTRIBUTED_EXECUTION=false npx nx run docs:e2e-app --skip-nx-cache
 
     stop_agents:
-        if: ${{ always() }}
         needs:
             - build_test
             # - e2e_test

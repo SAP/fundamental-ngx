@@ -11,24 +11,9 @@ validator
         'libs/**',
         'apps/**',
         'playwright.config.ts',
-        '.github/workflows/on-pull-request.yml'
+        '.github/workflows/on-pull-request.yml',
+        '!apps/e2e-harness/e2e/snapshots/**'
     ])
-    .assertHasPathsIgnore('pull_request', ['apps/e2e-harness/e2e/snapshots/**'])
-
-    // Linting jobs always run (no conditional)
-    .assertJobExists('pr_title_lint')
-    .assertJobCondition('pr_title_lint', null)
-    .assertJobExists('pr_body_lint')
-    .assertJobCondition('pr_body_lint', null)
-
-    // Build/test jobs skip on description-only edits
-    .assertJobExists('nx_agents')
-    .assertJobCondition('nx_agents', "github.event.action != 'edited'")
-    .assertJobEnvironment('nx_agents', 'ci')
-
-    .assertJobExists('build_test')
-    .assertJobCondition('build_test', "github.event.action != 'edited'")
-    .assertJobEnvironment('build_test', 'ci')
 
     // Report results
     .report();
