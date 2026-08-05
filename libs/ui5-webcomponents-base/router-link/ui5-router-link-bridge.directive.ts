@@ -1,4 +1,4 @@
-import { Directive, ElementRef, inject, OnInit } from '@angular/core';
+import { DestroyRef, Directive, ElementRef, inject, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 
 /**
@@ -20,15 +20,17 @@ export class Ui5RouterLinkBridgeDirective implements OnInit {
     private readonly _router = inject(Router);
     private readonly _routerLink = inject(RouterLink, { optional: true, self: true });
     private readonly _elementRef = inject(ElementRef<HTMLElement>);
+    private readonly _destroyRef = inject(DestroyRef);
 
     ngOnInit(): void {
         const routerLink = this._routerLink;
         if (!routerLink) {
             return;
         }
-        this._elementRef.nativeElement.addEventListener('click', (event: Event) => {
-            this._handleClick(event as CustomEvent, routerLink);
-        }, true);
+        const el = this._elementRef.nativeElement;
+        const handler = (event: Event): void => this._handleClick(event as CustomEvent, routerLink);
+        el.addEventListener('click', handler, true);
+        this._destroyRef.onDestroy(() => el.removeEventListener('click', handler, true));
     }
 
     private _handleClick(event: CustomEvent, routerLink: RouterLink): void {

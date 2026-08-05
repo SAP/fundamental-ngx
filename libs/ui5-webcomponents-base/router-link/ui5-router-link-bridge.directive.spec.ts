@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { Router, RouterLink, provideRouter } from '@angular/router';
+import { Router, RouterLink, UrlTree, provideRouter } from '@angular/router';
 import { Ui5RouterLinkBridgeDirective } from './ui5-router-link-bridge.directive';
 
 @Component({ selector: 'fd-test-target', template: 'Target' })
@@ -35,18 +35,18 @@ describe('Ui5RouterLinkBridgeDirective', () => {
     });
 
     describe('plain left-click (no modifiers, button 0)', () => {
-        it('calls router.navigateByUrl() with the resolved URL', fakeAsync(() => {
-            const navigateSpy = jest.spyOn(router, 'navigateByUrl');
+        it('calls router.navigateByUrl() with the resolved /target URL', fakeAsync(() => {
             const fixture = TestBed.createComponent(TestHostComponent);
             fixture.detectChanges();
             tick();
 
+            const navigateSpy = jest.spyOn(router, 'navigateByUrl');
             const host = fixture.nativeElement.querySelector('#host') as HTMLElement;
             host.dispatchEvent(makeClickCustomEvent({ button: 0 }));
-            fixture.detectChanges();
-            tick();
 
-            expect(navigateSpy).toHaveBeenCalledWith(expect.objectContaining({ root: expect.anything() }), expect.anything());
+            expect(navigateSpy).toHaveBeenCalled();
+            const passedTree = navigateSpy.mock.calls[0][0];
+            expect(router.serializeUrl(passedTree as UrlTree)).toBe('/target');
         }));
 
         it('calls event.preventDefault() to suppress shadow-DOM anchor navigation', fakeAsync(() => {
@@ -104,6 +104,23 @@ describe('Ui5RouterLinkBridgeDirective', () => {
             const host = fixture.nativeElement.querySelector('#host') as HTMLElement;
             host.dispatchEvent(makeClickCustomEvent({ button: 1 }));
             fixture.detectChanges();
+            tick();
+
+            expect(navigateSpy).not.toHaveBeenCalled();
+        }));
+    });
+
+    describe('teardown', () => {
+        it('removes the capture-phase click listener on destroy', fakeAsync(() => {
+            const navigateSpy = jest.spyOn(router, 'navigateByUrl');
+            const fixture = TestBed.createComponent(TestHostComponent);
+            fixture.detectChanges();
+            tick();
+
+            const host = fixture.nativeElement.querySelector('#host') as HTMLElement;
+            fixture.destroy();
+
+            host.dispatchEvent(makeClickCustomEvent({ button: 0 }));
             tick();
 
             expect(navigateSpy).not.toHaveBeenCalled();
