@@ -3,6 +3,13 @@ name: PR checks
 on:
     pull_request:
         types: [opened, synchronize, edited]
+        paths:
+            - 'libs/**'
+            - 'apps/**'
+            - 'playwright.config.ts'
+            - '.github/workflows/on-pull-request.yml'
+        paths-ignore:
+            - 'apps/e2e-harness/e2e/snapshots/**'
 
 env:
     NODE_VERSION: '22.x'
@@ -136,6 +143,7 @@ jobs:
                       core.info('✓ Breaking change footer format is correct');
 
     nx_agents:
+        if: github.event.action != 'edited'
         name: Nx Cloud Agent ${{ matrix.agent }}
         runs-on: ubuntu-latest
         environment: ci
@@ -164,6 +172,7 @@ jobs:
                   NX_AGENT_NAME: ${{matrix.agent}}
 
     build_test:
+        if: github.event.action != 'edited'
         runs-on: ubuntu-latest
         name: Run affected Build, Lint and test commands
         environment: ci
