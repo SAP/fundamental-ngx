@@ -67,7 +67,7 @@
         "@angular/router": "22.0.5",
         "@fundamental-styles/cx": "0.41.8",
         "@nx/angular": "23.0.1",
-        "@sap-theming/theming-base-content": "11.36.4",
+        "@sap-theming/theming-base-content": "11.36.5",
         "@stackblitz/sdk": "1.9.0",
         "@swc/helpers": "0.5.11",
         "@ui5/tooling-webc": "~0.3.1",
