@@ -314,7 +314,7 @@ ${slotDocs.join('\n')}
    * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_templates_and_slots | MDN Web Components Slots}
    */
   readonly slots = ${JSON.stringify(
-      slots.map((slot: any) => ({
+      slots.map((slot: any): { name: string; description: string; since: string } => ({
           name: slot.name,
           description: slot.description,
           since: slot._ui5since
@@ -417,8 +417,8 @@ export function componentTemplate(
 
       // Use the Injector to run the effect in the correct context
       if (this[signalName] && typeof this[signalName] === 'function') {
-        runInInjectionContext(this.injector, () => {
-          effect(() => {
+        runInInjectionContext(this.injector, (): void => {
+          effect((): void => {
             // Read the signal value
             const value = this[signalName]();
             if (wcElement) {
@@ -471,7 +471,8 @@ ${outputEvents
           if (eventName === '${event.name}') {
             const customEvent = e as CustomEvent<any>;
             // Use ${member.name} from event detail, fallback to web component property
-            const ${camelCaseName}Value = customEvent.detail?.${member.name} || wcElement.${member.name} || ${member.default || (member.type?.text?.includes('Array') ? '[]' : 'undefined')};
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            const ${camelCaseName}Value = customEvent.detail?.${member.name} || wcElement.${member.name}! || ${member.default || (member.type?.text?.includes('Array') ? '[]' : 'undefined')};
             this._${camelCaseName}Signal.set(${camelCaseName}Value);
           }`
                 )
@@ -490,7 +491,7 @@ ${outputEvents
       // Ensure the output property exists and has an emit function before adding listener
       if (this[outputName] && typeof this[outputName].emit === 'function' && wcElement.addEventListener) {
         // Cast the listener to the correct type to satisfy TypeScript
-        const listener = (e: Event) => {
+        const listener = (e: Event): void => {
 ${readonlySignalUpdates}
           this[outputName].emit(e as CustomEvent<any>);
         };
@@ -576,7 +577,8 @@ ${(() => {
             return `    // Initialize ${camelCaseName} signal with current state using delayed initialization
     // to handle web component timing properly
     const initialize${camelCaseName.charAt(0).toUpperCase() + camelCaseName.slice(1)} = (): void => {
-      const currentValue = wcElement.${member.name} || ${fallbackValue};
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      const currentValue = wcElement.${member.name}! || ${fallbackValue};
       if (JSON.stringify(currentValue) !== JSON.stringify(this._${camelCaseName}Signal())) {
         this._${camelCaseName}Signal.set(currentValue);
       }

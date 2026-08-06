@@ -139,3 +139,26 @@ For in-depth patterns, read on demand (not auto-loaded):
 - `docs/agents/nx-workflow.md` -- workspace commands, incremental validation
 - `docs/agents/breaking-changes.md` -- what constitutes a breaking change
 - `docs/agents/fundamental-styles.md` -- CSS class naming (BEM), design tokens, accessibility, MCP tools
+
+## Automation & CI/CD
+
+### Generator Template Changes → Auto-Regenerate UI5 Wrappers
+
+When modifying `libs/webc-generator/src/executors/generate/component-template.ts`:
+
+**Workflows automatically trigger:**
+
+- `on-pull-request.yml` — builds webc-generator, regenerates UI5 wrappers, then lints them before running other checks
+- `create-release.yml` — same pattern before the main lint/build step
+
+**Why this matters:** The generator produces code for four UI5 packages (`ui5-webcomponents-base`, `ui5-webcomponents`, `ui5-webcomponents-fiori`, `ui5-webcomponents-ai`). Template changes that violate ESLint rules (e.g., missing return types on arrow functions) won't be caught during local development if the generator isn't rebuilt. The CI workflows force a rebuild + regenerate + lint sequence to catch these before merge.
+
+**Local development:** Before committing changes to the generator template:
+
+```bash
+nx run webc-generator:build
+nx run-many --target=generate --projects=ui5-webcomponents-base,ui5-webcomponents,ui5-webcomponents-fiori,ui5-webcomponents-ai
+nx run-many --target=lint --projects=ui5-webcomponents-base,ui5-webcomponents,ui5-webcomponents-fiori,ui5-webcomponents-ai
+```
+
+Or use the preflight skill: `/preflight` will catch these issues early.
