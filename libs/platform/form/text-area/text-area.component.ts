@@ -152,6 +152,19 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
         () => this.maxLength > 0 && this._textAreaCharCount() > this.maxLength
     );
 
+    /**
+     * @hidden
+     * Computed signal that returns the effective state.
+     * Returns 'error' when showExceededText is true and text exceeds maxLength,
+     * otherwise returns the base state from the parent.
+     */
+    protected readonly effectiveState = computed(() => {
+        if (this.showExceededText && this.hasTextExceeded()) {
+            return 'error' as const;
+        }
+        return this.state;
+    });
+
     /** @hidden */
     private _isPasted = false;
 
