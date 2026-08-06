@@ -10,7 +10,6 @@ import {
     EventEmitter,
     HostBinding,
     Input,
-    NgZone,
     OnChanges,
     OnDestroy,
     OnInit,
@@ -225,9 +224,6 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
     private readonly _cdr = inject(ChangeDetectorRef);
 
     /** @hidden */
-    private readonly _zone = inject(NgZone);
-
-    /** @hidden */
     private readonly _elmRef = inject(ElementRef);
 
     /** @hidden */
@@ -247,16 +243,14 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
                 this._cdr.markForCheck();
             });
 
-        this._zone.runOutsideAngular(() => {
-            fromEvent<KeyboardEvent>(this._elmRef.nativeElement, 'keydown')
-                .pipe(
-                    filter(() => !!this._dndTableDirective),
-                    takeUntilDestroyed(this._destroyRef)
-                )
-                .subscribe((event) => {
-                    this._onKeyDown(event);
-                });
-        });
+        fromEvent<KeyboardEvent>(this._elmRef.nativeElement, 'keydown')
+            .pipe(
+                filter(() => !!this._dndTableDirective),
+                takeUntilDestroyed(this._destroyRef)
+            )
+            .subscribe((event) => {
+                this._onKeyDown(event);
+            });
     }
 
     /** @hidden */
