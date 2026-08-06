@@ -14,7 +14,7 @@
     [attr.maxlength]="!showExceededText ? maxLength : null"
     [attr.readonly]="readonly ? true : null"
     [(ngModel)]="value"
-    [state]="state"
+    [state]="effectiveState()"
     (paste)="handlePasteInteraction()"
     (blur)="_onFocusChanged(false)"
     (focus)="_onFocusChanged(true)"
