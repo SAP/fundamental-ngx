@@ -74,7 +74,7 @@ import {
     TableColumnComponent,
     TableToolbarComponent,
     TableToolbarActionsComponent,
-    TableP13DialogComponent
+    TableViewSettingsDialogComponent
 } from '@fundamental-ngx/platform/table';
 // FdpTableDataSource is a type alias only — use the concrete class from table-helpers:
 import {
@@ -94,7 +94,7 @@ export interface [Name]Row {
     selector: 'app-[kebab-name]-table',
     templateUrl: './[kebab-name]-table.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [TableComponent, TableColumnComponent, TableToolbarComponent, TableToolbarActionsComponent, TableP13DialogComponent,
+    imports: [TableComponent, TableColumnComponent, TableToolbarComponent, TableToolbarActionsComponent, TableViewSettingsDialogComponent,
               TableInitialStateDirective]
 })
 export class [Name]TableComponent {
@@ -144,7 +144,7 @@ export class [Name]TableComponent {
 
     <!-- repeat fdp-column for each field -->
 
-    <fdp-table-p13-dialog></fdp-table-p13-dialog>
+    <fdp-table-view-settings-dialog></fdp-table-view-settings-dialog>
 </fdp-table>
 ```
 
@@ -181,7 +181,7 @@ export class [Name]DataSource extends TableDataSource<[Name]Row> {
 - **`TableRowSelectionChangeEvent` is from `table-helpers`** — import it from `@fundamental-ngx/platform/table-helpers`, not `@fundamental-ngx/platform/table`.
 - **There are no `fdpTableSortable` / `fdpTableFilterable` directives** — sort and filter are activated solely by `[sortable]="true"` and `[filterable]="true"` on each `fdp-column`. No extra directive goes on `<fdp-table>`.
 - **`[pageSizeOptions]` does not exist** — `[pageSize]` is the only pagination input on `<fdp-table>`. There is no per-page picker input.
-- **`fdp-table-p13-dialog` is required** — without it, the column personalization panel and the sort/filter apply buttons do not render; include it inside `<fdp-table>` even when not explicitly requested
+- **`fdp-table-view-settings-dialog` is required** — without it, the column personalization panel and the sort/filter apply buttons do not render; include it inside `<fdp-table>` even when not explicitly requested
 - **`name` and `key` are both required on `fdp-column`** — `name` is the unique identifier (camelCase), `key` maps to the data row's property path; they can be identical
 - **Do NOT pass a `BehaviorSubject` directly** — wrap it: `new ObservableTableDataSource(subject.asObservable())`; passing a subject directly causes double-subscription issues
 - **`selectionMode` is a string input** — values: `'single'` | `'multiple'` | `'none'`; do not use `[selectionMode]="SelectionMode.Multiple"` enum binding unless you import the enum
