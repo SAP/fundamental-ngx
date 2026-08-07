@@ -156,9 +156,16 @@ When modifying `libs/webc-generator/src/executors/generate/component-template.ts
 **Local development:** Before committing changes to the generator template:
 
 ```bash
+# Clear generated code and NX cache to force clean regeneration
+yarn cleanup
+nx reset
+
+# Build generator, regenerate all packages (skip cache), and lint (skip cache)
 nx run webc-generator:build
-nx run-many --target=generate --projects=ui5-webcomponents-base,ui5-webcomponents,ui5-webcomponents-fiori,ui5-webcomponents-ai
-nx run-many --target=lint --projects=ui5-webcomponents-base,ui5-webcomponents,ui5-webcomponents-fiori,ui5-webcomponents-ai
+nx run-many --target=generate --projects=ui5-webcomponents-base,ui5-webcomponents,ui5-webcomponents-fiori,ui5-webcomponents-ai --skip-nx-cache
+nx run-many --target=lint --projects=ui5-webcomponents-base,ui5-webcomponents,ui5-webcomponents-fiori,ui5-webcomponents-ai --skip-nx-cache
 ```
+
+**Important:** Both `yarn cleanup` and `--skip-nx-cache` are essential — NX caching can mask template violations by serving cached generated code instead of running generation with your new template. Without clearing the cache and forcing fresh execution, you'll lint the old generated code and miss violations that only appear with your template changes. The `cleanup` script preserves source files (spec files, theming, i18n) while removing generated components.
 
 Or use the preflight skill: `/preflight` will catch these issues early.

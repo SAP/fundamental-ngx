@@ -215,7 +215,7 @@ jobs:
                   NX_CLOUD_DISTRIBUTED_EXECUTION: false
 
             - name: Generate ui5-webcomponents wrappers
-              run: npx nx run-many --target=generate --projects=ui5-webcomponents-base,ui5-webcomponents,ui5-webcomponents-ai,ui5-webcomponents-fiori
+              run: npx nx run-many --target=generate --projects=ui5-webcomponents-base,ui5-webcomponents,ui5-webcomponents-ai,ui5-webcomponents-fiori --skip-nx-cache
               env:
                   NX_CLOUD_DISTRIBUTED_EXECUTION: false
 

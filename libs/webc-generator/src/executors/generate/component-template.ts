@@ -245,7 +245,7 @@ function generateProperties(data: CEM.CustomElementDeclaration): {
    * @readonly This property is managed by the web component and updates reactively.
    * Based on schema: readonly field that updates via ${relatedEvent.name} event parameters.
    */
-  ${camelCaseName} = computed(() => this._${camelCaseName}Signal());`);
+  ${camelCaseName} = computed((): ${member.type?.text || 'any'} => this._${camelCaseName}Signal());`);
         } else {
             // Generate simple getter for readonly properties without related events
             const typeString = member.type?.text || 'any';
@@ -565,7 +565,7 @@ ${outputEvents.length > 0 ? '  private readonly _destroyRef = inject(DestroyRef)
     ${inputSyncLoop}
     ${outputsToSyncCode}
     ${outputSyncLoop}
-${(() => {
+${((): string => {
     const signalInits = readonlyMembers
         .filter((member) =>
             // Only initialize signals for members that have related events
@@ -589,7 +589,7 @@ ${(() => {
 
     // Fallback delayed initialization if web component needs more time
     // Use requestAnimationFrame for zoneless compatibility
-    requestAnimationFrame(() => initialize${camelCaseName.charAt(0).toUpperCase() + camelCaseName.slice(1)}());`;
+    requestAnimationFrame((): void => initialize${camelCaseName.charAt(0).toUpperCase() + camelCaseName.slice(1)}());`;
         })
         .join('\n');
 
