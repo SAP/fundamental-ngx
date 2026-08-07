@@ -84,28 +84,28 @@ export class CardExample {
             name: 'Wireless Headphones',
             price: 299.99,
             stock: 15,
-            image: 'https://picsum.photos/300/200?id=1',
+            image: 'https://picsum.photos/seed/item1/300/200',
             category: 'Electronics'
         },
         {
             name: 'Smart Watch',
             price: 399.99,
             stock: 8,
-            image: 'https://picsum.photos/300/200?id=2',
+            image: 'https://picsum.photos/seed/item2/300/200',
             category: 'Wearables'
         },
         {
             name: 'Laptop Stand',
             price: 79.99,
             stock: 25,
-            image: 'https://picsum.photos/300/200?id=3',
+            image: 'https://picsum.photos/seed/item3/300/200',
             category: 'Accessories'
         },
         {
             name: 'USB-C Hub',
             price: 49.99,
             stock: 32,
-            image: 'https://picsum.photos/300/200?id=4',
+            image: 'https://picsum.photos/seed/item4/300/200',
             category: 'Electronics'
         }
     ]);
