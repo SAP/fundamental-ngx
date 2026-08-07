@@ -14,7 +14,7 @@
     [attr.maxlength]="!showExceededText ? maxLength : null"
     [attr.readonly]="readonly ? true : null"
     [(ngModel)]="value"
-    [state]="getUpdatedState()"
+    [state]="effectiveState()"
     (paste)="handlePasteInteraction()"
     (blur)="_onFocusChanged(false)"
     (focus)="_onFocusChanged(true)"
@@ -23,14 +23,14 @@
 @if (showExceededText) {
     <div class="fd-textarea-counter" aria-live="polite" aria-atomic="true" [attr.id]="id + '-counter'" #counter>
         <!-- render spaces instead of the actual value while translation string is loading in order to avoid content jumps -->
-        @if (counterExcessOrRemaining === 'excess') {
+        @if (counterExcessOrRemaining() === 'excess') {
             <span
                 [innerHtml]="
                     (
-                        (exceededCharCount === 1
+                        (exceededCharCount() === 1
                             ? 'platformTextarea.counterMessageCharactersOverTheLimitSingular'
                             : 'platformTextarea.counterMessageCharactersOverTheLimitPlural'
-                        ) | fdTranslate: { count: exceededCharCount } : '&nbsp;&nbsp;'
+                        ) | fdTranslate: { count: exceededCharCount() } : '&nbsp;&nbsp;'
                     )()
                 "
             ></span>
@@ -38,10 +38,10 @@
             <span
                 [innerHtml]="
                     (
-                        (exceededCharCount === 1
+                        (exceededCharCount() === 1
                             ? 'platformTextarea.counterMessageCharactersRemainingSingular'
                             : 'platformTextarea.counterMessageCharactersRemainingPlural'
-                        ) | fdTranslate: { count: exceededCharCount } : '&nbsp;&nbsp;'
+                        ) | fdTranslate: { count: exceededCharCount() } : '&nbsp;&nbsp;'
                     )()
                 "
             ></span>
