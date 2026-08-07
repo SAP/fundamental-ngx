@@ -43,6 +43,10 @@ const dialogConfig: DialogConfig = {
 };
 
 /**
+ * @deprecated
+ *
+ * This component has been deprecated, please use the fdp-table-view-settings-dialog component instead.
+ *
  * View settings dialog component.
  *
  * Used to link view settings filters options to the grid table.
