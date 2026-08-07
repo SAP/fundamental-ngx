@@ -1,6 +1,6 @@
 import { LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 
-import { DOCUMENT, DestroyRef, Directive, ElementRef, NgZone, OnInit, computed, inject } from '@angular/core';
+import { DOCUMENT, DestroyRef, Directive, ElementRef, OnInit, computed, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
     FocusableCellPosition,
@@ -42,9 +42,6 @@ export class TableHeaderResizerDirective implements OnInit {
     private readonly _tableRowService = inject(TableRowService);
 
     /** @hidden */
-    private readonly _zone = inject(NgZone);
-
-    /** @hidden */
     private readonly _document = inject(DOCUMENT);
 
     /** @hidden */
@@ -56,49 +53,47 @@ export class TableHeaderResizerDirective implements OnInit {
     }
     /** @hidden */
     ngOnInit(): void {
-        this._zone.runOutsideAngular(() => {
-            fromEvent<KeyboardEvent>(this._elmRef.nativeElement, 'keydown')
-                .pipe(takeUntilDestroyed(this._destroyRef))
-                .subscribe((event) => {
-                    if (
-                        (KeyUtil.isKeyCode(event, LEFT_ARROW) ||
-                            (this._isRtl() && KeyUtil.isKeyCode(event, RIGHT_ARROW))) &&
-                        event.shiftKey &&
-                        this._headerCellFocused
-                    ) {
-                        this._tableColumnResizeService._processResize(-32);
-                        event.preventDefault();
-                        event.stopImmediatePropagation();
-                    } else if (
-                        (KeyUtil.isKeyCode(event, RIGHT_ARROW) ||
-                            (this._isRtl() && KeyUtil.isKeyCode(event, LEFT_ARROW))) &&
-                        event.shiftKey &&
-                        this._headerCellFocused
-                    ) {
-                        this._tableColumnResizeService._processResize(32);
-                        event.preventDefault();
-                        event.stopImmediatePropagation();
-                    }
-                });
+        fromEvent<KeyboardEvent>(this._elmRef.nativeElement, 'keydown')
+            .pipe(takeUntilDestroyed(this._destroyRef))
+            .subscribe((event) => {
+                if (
+                    (KeyUtil.isKeyCode(event, LEFT_ARROW) ||
+                        (this._isRtl() && KeyUtil.isKeyCode(event, RIGHT_ARROW))) &&
+                    event.shiftKey &&
+                    this._headerCellFocused
+                ) {
+                    this._tableColumnResizeService._processResize(-32);
+                    event.preventDefault();
+                    event.stopImmediatePropagation();
+                } else if (
+                    (KeyUtil.isKeyCode(event, RIGHT_ARROW) ||
+                        (this._isRtl() && KeyUtil.isKeyCode(event, LEFT_ARROW))) &&
+                    event.shiftKey &&
+                    this._headerCellFocused
+                ) {
+                    this._tableColumnResizeService._processResize(32);
+                    event.preventDefault();
+                    event.stopImmediatePropagation();
+                }
+            });
 
-            fromEvent(this._elmRef.nativeElement, 'focusin')
-                .pipe(takeUntilDestroyed(this._destroyRef))
-                .subscribe(() => {
-                    if (!this._focusinTimerId) {
-                        return;
-                    }
-                    clearTimeout(this._focusinTimerId);
-                    this._focusinTimerId = null;
-                });
+        fromEvent(this._elmRef.nativeElement, 'focusin')
+            .pipe(takeUntilDestroyed(this._destroyRef))
+            .subscribe(() => {
+                if (!this._focusinTimerId) {
+                    return;
+                }
+                clearTimeout(this._focusinTimerId);
+                this._focusinTimerId = null;
+            });
 
-            fromEvent(this._elmRef.nativeElement, 'focusout')
-                .pipe(takeUntilDestroyed(this._destroyRef))
-                .subscribe(() => {
-                    this._focusinTimerId = setTimeout(() => {
-                        this.focusedCellPosition = null;
-                    });
+        fromEvent(this._elmRef.nativeElement, 'focusout')
+            .pipe(takeUntilDestroyed(this._destroyRef))
+            .subscribe(() => {
+                this._focusinTimerId = setTimeout(() => {
+                    this.focusedCellPosition = null;
                 });
-        });
+            });
 
         this._tableRowService.cellFocused$.subscribe((evt) => {
             this._onCellFocused(evt);

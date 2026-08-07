@@ -1,4 +1,4 @@
-import { AfterViewInit, computed, Directive, inject, Input, NgZone, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, computed, Directive, inject, Input, OnDestroy, OnInit } from '@angular/core';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FDK_FOCUSABLE_ITEM_DIRECTIVE, FocusableItemDirective, RtlService } from '@fundamental-ngx/cdk/utils';
@@ -65,27 +65,22 @@ export class PlatformTableCellResizableDirective
     });
 
     /** @hidden */
-    private readonly _zone = inject(NgZone);
-
-    /** @hidden */
     ngOnInit(): void {
-        this._zone.runOutsideAngular(() => {
-            fromEvent<MouseEvent>(this.elementRef.nativeElement, 'mousemove')
-                .pipe(
-                    filter(() => this._tableColumnResizeService?.resizeInProgress !== true),
-                    debounceTime(5),
-                    map((event) => this._getResizer(event) || { resizerPosition: 0, resizedColumn: this.columnName }),
-                    takeUntilDestroyed(this._destroyRef)
-                )
-                .subscribe((data) => {
-                    this._tableColumnResizeService.setInitialResizerPosition(data.resizerPosition, data.resizedColumn);
-                });
-            fromEvent<FocusEvent>(this.elementRef.nativeElement, 'focus')
-                .pipe(takeUntilDestroyed(this._destroyRef))
-                .subscribe(() => {
-                    this._tableColumnResizeService.setInitialResizerPosition(0, this.columnName);
-                });
-        });
+        fromEvent<MouseEvent>(this.elementRef.nativeElement, 'mousemove')
+            .pipe(
+                filter(() => this._tableColumnResizeService?.resizeInProgress !== true),
+                debounceTime(5),
+                map((event) => this._getResizer(event) || { resizerPosition: 0, resizedColumn: this.columnName }),
+                takeUntilDestroyed(this._destroyRef)
+            )
+            .subscribe((data) => {
+                this._tableColumnResizeService.setInitialResizerPosition(data.resizerPosition, data.resizedColumn);
+            });
+        fromEvent<FocusEvent>(this.elementRef.nativeElement, 'focus')
+            .pipe(takeUntilDestroyed(this._destroyRef))
+            .subscribe(() => {
+                this._tableColumnResizeService.setInitialResizerPosition(0, this.columnName);
+            });
     }
 
     /** @hidden */
