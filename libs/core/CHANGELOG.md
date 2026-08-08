@@ -1,3 +1,7 @@
+## 0.64.2-rc.16 (2026-08-08)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
 ## 0.64.2-rc.15 (2026-08-07)
 
 This was a version bump only for core to align it with other projects, there were no code changes.
