@@ -81,7 +81,6 @@
         "@ui5/webcomponents-theming": "~2.25.0",
         "@ui5/webcomponents-tools": "~2.25.0",
         "compare-versions": "6.1.0",
-        "core-js": "3.26.1",
         "dayjs": "1.11.11",
         "fast-equals": "^6.0.0",
         "focus-trap": "7.1.0",

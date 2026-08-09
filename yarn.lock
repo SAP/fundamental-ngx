@@ -13122,13 +13122,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js@npm:3.26.1":
-  version: 3.26.1
-  resolution: "core-js@npm:3.26.1"
-  checksum: 10/ec6f6a366d0a9503b29e8b46cbc2665000cc920b0a4add7b7b53fb8f45c3ac934921334bd741f2d40fca87991d6c31dcd1becdca6bd8782f8833f1229d8c20d8
-  languageName: node
-  linkType: hard
-
 "core-util-is@npm:1.0.2":
   version: 1.0.2
   resolution: "core-util-is@npm:1.0.2"
@@ -16890,7 +16883,6 @@ __metadata:
     conventional-changelog-angular: "npm:6.0.0"
     conventional-changelog-cli: "npm:3.0.0"
     conventional-recommended-bump: "npm:7.0.1"
-    core-js: "npm:3.26.1"
     coveralls: "npm:3.1.1"
     dayjs: "npm:1.11.11"
     eslint: "npm:^9.28.0"
