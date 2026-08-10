@@ -547,7 +547,7 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
         effect(() => {
             const isOpen = this.popoverOpen$();
             if (!isOpen && this._popoverWasOpen && this.navigation.isSnapped$() && this.link$()) {
-                this._restoreFocusAfterPopoverClose();
+                this.restoreFocusAfterPopoverClose();
             }
             this._popoverWasOpen = isOpen;
         });
@@ -906,7 +906,7 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
      * Defers focus until after overlay DOM teardown.
      * @hidden
      */
-    protected _restoreFocusAfterPopoverClose(): void {
+    protected restoreFocusAfterPopoverClose(): void {
         afterNextRender(
             () => {
                 this.focusLink();
