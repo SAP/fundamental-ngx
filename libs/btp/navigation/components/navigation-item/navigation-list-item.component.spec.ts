@@ -92,7 +92,7 @@ describe('NavigationListItemComponent', () => {
         // Mock the link$ signal to return a truthy value
         component.link$.set({ elementRef: { nativeElement: document.createElement('a') } } as any);
 
-        const restoreFocusSpy = jest.spyOn(component as any, '_restoreFocusAfterPopoverClose');
+        const restoreFocusSpy = jest.spyOn(component as any, 'restoreFocusAfterPopoverClose');
 
         navComponent.isSnapped$.set(true);
         component.popoverOpen$.set(true);
@@ -105,7 +105,7 @@ describe('NavigationListItemComponent', () => {
     }));
 
     it('should not restore focus when popover closes in non-snapped mode', fakeAsync(() => {
-        const restoreFocusSpy = jest.spyOn(component as any, '_restoreFocusAfterPopoverClose');
+        const restoreFocusSpy = jest.spyOn(component as any, 'restoreFocusAfterPopoverClose');
 
         navComponent.isSnapped$.set(false);
         component.popoverOpen$.set(true);
@@ -118,7 +118,7 @@ describe('NavigationListItemComponent', () => {
     }));
 
     it('should not restore focus when popover opens', fakeAsync(() => {
-        const restoreFocusSpy = jest.spyOn(component as any, '_restoreFocusAfterPopoverClose');
+        const restoreFocusSpy = jest.spyOn(component as any, 'restoreFocusAfterPopoverClose');
 
         navComponent.isSnapped$.set(true);
         component.popoverOpen$.set(false);
