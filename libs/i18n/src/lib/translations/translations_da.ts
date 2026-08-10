@@ -627,6 +627,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'Stigende',
         P13SortDialogSortOrderSelectOptionDesc: 'Faldende',
         resetChangesButtonLabel: 'Nulstil',
+        resetConfirmationAnnouncement: 'Values Reset',
         rowNavigateButtonTitle: 'Naviger',
         selectAllCheckboxLabel: 'Vælg alle',
         selectAllCheckboxLongLabel: 'Afkrydsningsfelt, ikke-markeret, klik for at markere alle',

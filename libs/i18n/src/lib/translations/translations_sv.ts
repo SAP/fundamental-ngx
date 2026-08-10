@@ -627,6 +627,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'Stigande',
         P13SortDialogSortOrderSelectOptionDesc: 'Fallande',
         resetChangesButtonLabel: 'Återställ',
+        resetConfirmationAnnouncement: 'Values Reset',
         rowNavigateButtonTitle: 'Navigera',
         selectAllCheckboxLabel: 'Välj alla',
         selectAllCheckboxLongLabel: 'Kryssruta ej, markerad, klicka för att markera alla',

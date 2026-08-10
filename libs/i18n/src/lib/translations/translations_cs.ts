@@ -627,6 +627,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'Vzestupně',
         P13SortDialogSortOrderSelectOptionDesc: 'Sestupně',
         resetChangesButtonLabel: 'Resetovat',
+        resetConfirmationAnnouncement: 'Values Reset',
         rowNavigateButtonTitle: 'Přejít',
         selectAllCheckboxLabel: 'Vybrat vše',
         selectAllCheckboxLongLabel: 'Zaškrtávací pole, nezaškrtnuto, kliknutím vyberete vše',

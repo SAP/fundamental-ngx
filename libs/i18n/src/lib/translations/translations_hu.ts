@@ -628,6 +628,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'Növekvő',
         P13SortDialogSortOrderSelectOptionDesc: 'Csökkenő',
         resetChangesButtonLabel: 'Alaphelyzetbe állítás',
+        resetConfirmationAnnouncement: 'Values Reset',
         rowNavigateButtonTitle: 'Navigálás',
         selectAllCheckboxLabel: 'Összes kiválasztása',
         selectAllCheckboxLongLabel: 'Jelölőnégyzet, nincs bejelölve, kattintson az összes kijelöléséhez',

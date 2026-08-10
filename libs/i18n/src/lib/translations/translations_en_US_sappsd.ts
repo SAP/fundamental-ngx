@@ -629,6 +629,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: '[[[Āşċēŋƌįŋğ∙∙∙∙∙]]]',
         P13SortDialogSortOrderSelectOptionDesc: '[[[Ďēşċēŋƌįŋğ∙∙∙∙]]]',
         resetChangesButtonLabel: '[[[Řēşēţ∙∙∙∙∙∙∙∙∙]]]',
+        resetConfirmationAnnouncement: 'Values Reset',
         rowNavigateButtonTitle: '[[[Ńąʋįğąţē∙∙∙∙∙∙]]]',
         selectAllCheckboxLabel: '[[[Ŝēĺēċţ ąĺĺ∙∙∙∙]]]',
         selectAllCheckboxLongLabel: '[[[Ĉĥēċķƃŏχ, űŋċĥēċķēƌ, ċĺįċķ ţŏ şēĺēċţ ąĺĺ∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]',

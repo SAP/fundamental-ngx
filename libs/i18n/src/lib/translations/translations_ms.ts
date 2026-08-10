@@ -626,6 +626,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'Menaik',
         P13SortDialogSortOrderSelectOptionDesc: 'Menurun',
         resetChangesButtonLabel: 'Tetapkan semula',
+        resetConfirmationAnnouncement: 'Values Reset',
         rowNavigateButtonTitle: 'Navigasi',
         selectAllCheckboxLabel: 'Pilih semua',
         selectAllCheckboxLongLabel: 'Kotak semak, dinyahtanda, klik untuk memilih semua',

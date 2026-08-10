@@ -628,6 +628,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'По восходящей',
         P13SortDialogSortOrderSelectOptionDesc: 'По нисходящей',
         resetChangesButtonLabel: 'Сбросить',
+        resetConfirmationAnnouncement: 'Values Reset',
         rowNavigateButtonTitle: 'Перейти',
         selectAllCheckboxLabel: 'Выбрать все',
         selectAllCheckboxLongLabel: 'Флажок, не выбрано, щелкнуть, чтобы выбрать все',

@@ -625,6 +625,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: '오름차순',
         P13SortDialogSortOrderSelectOptionDesc: '내림차순',
         resetChangesButtonLabel: '재설정',
+        resetConfirmationAnnouncement: 'Values Reset',
         rowNavigateButtonTitle: '탐색',
         selectAllCheckboxLabel: '모두 선택',
         selectAllCheckboxLongLabel: '확인란, 선택 취소됨, 클릭하여 모두 선택',

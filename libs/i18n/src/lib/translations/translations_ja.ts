@@ -627,6 +627,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: '昇順',
         P13SortDialogSortOrderSelectOptionDesc: '降順',
         resetChangesButtonLabel: 'リセット',
+        resetConfirmationAnnouncement: 'Values Reset',
         rowNavigateButtonTitle: '移動',
         selectAllCheckboxLabel: 'すべて選択',
         selectAllCheckboxLongLabel: 'チェックボックス: チェックが外れています。クリックするとすべて選択します。',

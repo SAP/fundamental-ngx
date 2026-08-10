@@ -629,6 +629,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'Ascendente',
         P13SortDialogSortOrderSelectOptionDesc: 'Descendente',
         resetChangesButtonLabel: 'Restablecer',
+        resetConfirmationAnnouncement: 'Values Reset',
         rowNavigateButtonTitle: 'Navegar',
         selectAllCheckboxLabel: 'Seleccionar todos',
         selectAllCheckboxLongLabel: 'Casilla de verificación, sin seleccionar, hacer clic para seleccionar todo',

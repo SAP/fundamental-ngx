@@ -628,6 +628,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'Артуы бойынша',
         P13SortDialogSortOrderSelectOptionDesc: 'Кемуі бойынша',
         resetChangesButtonLabel: 'Қалпына келтіру',
+        resetConfirmationAnnouncement: 'Values Reset',
         rowNavigateButtonTitle: 'Өту',
         selectAllCheckboxLabel: 'Барлығын таңдау',
         selectAllCheckboxLongLabel: 'Құсбелгі ұяшығы, құсбелгі қойылмаған, барлығын таңдау үшін басыңыз',

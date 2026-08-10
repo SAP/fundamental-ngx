@@ -628,6 +628,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'Po rastućem redosledu',
         P13SortDialogSortOrderSelectOptionDesc: 'Po opadajućem redosledu',
         resetChangesButtonLabel: 'Ponovo postavi',
+        resetConfirmationAnnouncement: 'Values Reset',
         rowNavigateButtonTitle: 'Usmeri',
         selectAllCheckboxLabel: 'Odaberi sve',
         selectAllCheckboxLongLabel: 'Kvadratić za potvrdu, nije označeno, kliknite da biste odabrali sve',
