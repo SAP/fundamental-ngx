@@ -546,10 +546,8 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
         // _onPopoverOpen(), which is only called for service-internal closes.
         effect(() => {
             const isOpen = this.popoverOpen$();
-            if (!isOpen && this._popoverWasOpen && this.navigation.isSnapped$()) {
-                setTimeout(() => {
-                    this.focusLink();
-                }, 0);
+            if (!isOpen && this._popoverWasOpen && this.navigation.isSnapped$() && this.link$()) {
+                this._restoreFocusAfterPopoverClose();
             }
             this._popoverWasOpen = isOpen;
         });
@@ -901,6 +899,20 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
                 this.overflowSubmenuMaxHeight.set(`${availableHeight}px`);
             }
         });
+    }
+
+    /**
+     * Restores focus to the parent link after popover closes in snapped mode.
+     * Defers focus until after overlay DOM teardown.
+     * @hidden
+     */
+    protected _restoreFocusAfterPopoverClose(): void {
+        afterNextRender(
+            () => {
+                this.focusLink();
+            },
+            { injector: this._injector }
+        );
     }
 
     private _focusPopoverLink(): void {
