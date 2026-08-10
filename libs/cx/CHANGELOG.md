@@ -1,3 +1,21 @@
+## 0.64.2-rc.16 (2026-08-08)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.15 (2026-08-07)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.14 (2026-08-07)
+
+### 🩹 Fixes
+
+- **ui5:** enable SPA navigation for [routerLink] on UI5 href components ([#14438](https://github.com/SAP/fundamental-ngx/pull/14438))
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.64.2-rc.13 (2026-08-05)
 
 ### 🩹 Fixes

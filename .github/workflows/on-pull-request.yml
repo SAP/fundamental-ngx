@@ -209,8 +209,18 @@ jobs:
             - uses: wagoid/commitlint-github-action@v6.1.2
               name: Commit lint
 
+            - name: Build webc-generator before UI5 regeneration
+              run: npx nx run webc-generator:build
+              env:
+                  NX_CLOUD_DISTRIBUTED_EXECUTION: false
+
             - name: Generate ui5-webcomponents wrappers
-              run: npx nx run-many --target=generate --projects=ui5-webcomponents,ui5-webcomponents-ai,ui5-webcomponents-fiori,ui5-webcomponents-base
+              run: npx nx run-many --target=generate --projects=ui5-webcomponents-base,ui5-webcomponents,ui5-webcomponents-ai,ui5-webcomponents-fiori --skip-nx-cache
+              env:
+                  NX_CLOUD_DISTRIBUTED_EXECUTION: false
+
+            - name: Lint generated UI5 wrappers
+              run: npx nx run-many --target=lint --projects=ui5-webcomponents-base,ui5-webcomponents,ui5-webcomponents-ai,ui5-webcomponents-fiori
               env:
                   NX_CLOUD_DISTRIBUTED_EXECUTION: false
 
