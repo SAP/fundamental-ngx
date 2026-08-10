@@ -13,7 +13,8 @@ import {
     ViewChild,
     booleanAttribute,
     inject,
-    isDevMode
+    isDevMode,
+    signal
 } from '@angular/core';
 import { ControlContainer, ControlValueAccessor, FormControl, NgControl, NgForm } from '@angular/forms';
 import { HasElementRef, Nullable } from '@fundamental-ngx/cdk/utils';
@@ -84,14 +85,15 @@ export abstract class BaseInput
     @Input()
     set state(state: FormStates | undefined) {
         if (!state || isValidControlState(state)) {
-            this._state = state;
+            this._state.set(state);
         } else if (isDevMode()) {
             console.warn(`Provided value "${state}" is not a valid option for FormStates type`);
         }
     }
     get state(): FormStates {
-        if (this._state) {
-            return this._state;
+        const stateValue = this._state();
+        if (stateValue) {
+            return stateValue;
         }
 
         if (!this.controlInvalid) {
@@ -222,7 +224,7 @@ export abstract class BaseInput
      * The state of the form control - applies css classes.
      * Can be `success`, `error`, `warning`, `information` or 'default'
      */
-    protected _state: FormStates | undefined;
+    protected readonly _state = signal<FormStates | undefined>(undefined);
 
     /** @hidden */
     protected defaultId = `fdp-input-id-${randomId++}`;

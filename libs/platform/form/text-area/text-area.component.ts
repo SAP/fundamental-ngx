@@ -162,6 +162,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
         if (this.showExceededText && this.hasTextExceeded()) {
             return 'error' as const;
         }
+        // Call this.state which now reads from the _state signal in BaseInput
         return this.state;
     });
 
