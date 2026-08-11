@@ -28,7 +28,7 @@ export class ReactiveSample {
 
     orderForm: FormGroup = this.fb.group({
         product: ['', Validators.required],
-        quantity: [1, [Validators.required, Validators.min(1)]]
+        quantity: ['1', [Validators.required, Validators.min(1)]]
     });
 
     products = signal<Product[]>([
@@ -41,7 +41,7 @@ export class ReactiveSample {
 
     // Convert form value changes to signals for reactive computed properties
     productValue = toSignal(this.orderForm.controls['product'].valueChanges, { initialValue: '' });
-    quantityValue = toSignal(this.orderForm.controls['quantity'].valueChanges, { initialValue: 1 });
+    quantityValue = toSignal(this.orderForm.controls['quantity'].valueChanges, { initialValue: '1' });
 
     selectedProductInfo = computed(() => {
         const productId = this.productValue();
@@ -50,14 +50,14 @@ export class ReactiveSample {
 
     totalPrice = computed(() => {
         const product = this.selectedProductInfo();
-        const qty = this.quantityValue() || 0;
+        const qty = Number(this.quantityValue()) || 0;
         return product ? product.price * qty : 0;
     });
 
     isFormValid = toSignal(this.orderForm.statusChanges, { initialValue: this.orderForm.status });
 
     resetForm(): void {
-        this.orderForm.reset({ product: '', quantity: 1 });
+        this.orderForm.reset({ product: '', quantity: '1' });
     }
 
     submitOrder(): void {
