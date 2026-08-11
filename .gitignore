@@ -58,6 +58,11 @@ Thumbs.db
 
 .nx/cache
 .nx/workspace-data
+.nx/polygraph
+.nx/self-healing
+.nx/migrate-runs
+.claude/worktrees
+.claude/settings.local.json
 
 .yarn/*
 !.yarn/patches
@@ -67,6 +72,7 @@ Thumbs.db
 !.yarn/versions
 .cursor/rules/nx-rules.mdc
 .github/instructions/nx.instructions.md
+/tools/ai-migrations/
 
 # mcp-server generated catalog (generated on release via extract-metadata)
 libs/mcp-server/src/data/components.json

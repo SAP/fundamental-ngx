@@ -3,7 +3,7 @@ const pluginTs = require('typescript-eslint');
 
 module.exports = pluginTs.config(
     {
-        ignores: ['**/dist', '.nx', '**/typedoc']
+        ignores: ['**/dist', '.nx', '**/typedoc', '**/eslint.config.js']
     },
     ...nx.configs['flat/base'],
     ...nx.configs['flat/javascript'],
@@ -199,6 +199,17 @@ module.exports = pluginTs.config(
                         {
                             sourceTag: 'scope:ui5',
                             onlyDependOnLibsWithTags: ['scope:ui5', 'scope:cdk', 'scope:fd', 'scope:i18n']
+                        },
+                        {
+                            sourceTag: 'type:schematics',
+                            onlyDependOnLibsWithTags: [
+                                'scope:fd',
+                                'scope:fdp',
+                                'scope:fdb',
+                                'scope:cx',
+                                'scope:cdk',
+                                'scope:i18n'
+                            ]
                         }
                     ]
                 }
