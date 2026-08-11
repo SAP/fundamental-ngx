@@ -1,3 +1,13 @@
+## 0.64.2-rc.21 (2026-08-11)
+
+### 🩹 Fixes
+
+- **platform:** announce Reset button action to screen readers in fdp-table View Settings ([#14453](https://github.com/SAP/fundamental-ngx/pull/14453))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.64.2-rc.20 (2026-08-11)
 
 This was a version bump only for i18n to align it with other projects, there were no code changes.
