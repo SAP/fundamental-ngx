@@ -209,6 +209,13 @@ export class SettingsGeneratorDialogExampleComponent implements AfterViewInit {
                                         fieldColumnLayout: {
                                             S: 11,
                                             M: 6
+                                        },
+                                        hint: {
+                                            content: 'Enter a valid email address',
+                                            glyph: 'hint',
+                                            placement: 'right',
+                                            trigger: [{ trigger: 'click', openAction: true, closeAction: false }],
+                                            closeOnOutsideClick: true
                                         }
                                     }
                                 },
