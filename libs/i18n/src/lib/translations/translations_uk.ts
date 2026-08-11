@@ -628,6 +628,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'За зростанням',
         P13SortDialogSortOrderSelectOptionDesc: 'За спаданням',
         resetChangesButtonLabel: 'Скинути',
+        resetConfirmationAnnouncement: 'Values Reset',
         rowNavigateButtonTitle: 'Перейти',
         selectAllCheckboxLabel: 'Вибрати все',
         selectAllCheckboxLongLabel: 'Поле для прапорця, прапорець знято, натисніть, щоб вибрати все',

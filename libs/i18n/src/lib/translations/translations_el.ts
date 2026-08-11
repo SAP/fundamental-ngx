@@ -628,6 +628,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'Αύξουσα σειρά',
         P13SortDialogSortOrderSelectOptionDesc: 'Φθίνουσα σειρά',
         resetChangesButtonLabel: 'Επαναφορά',
+        resetConfirmationAnnouncement: 'Values Reset',
         rowNavigateButtonTitle: 'Πλοήγηση',
         selectAllCheckboxLabel: 'Επιλογή όλων',
         selectAllCheckboxLongLabel: 'Πλαίσιο ελέγχου, αποεπιλέχθηκε, κάντε κλικ για επιλογή όλων',

@@ -628,6 +628,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'Naraščajoče',
         P13SortDialogSortOrderSelectOptionDesc: 'Padajoče',
         resetChangesButtonLabel: 'Ponastavi',
+        resetConfirmationAnnouncement: 'Values Reset',
         rowNavigateButtonTitle: 'Navigacija',
         selectAllCheckboxLabel: 'Izberi vse',
         selectAllCheckboxLongLabel: 'Potrditveno polje, neoznačeno, kliknite za izbiro vseh',

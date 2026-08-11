@@ -629,6 +629,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'Oplopend',
         P13SortDialogSortOrderSelectOptionDesc: 'Aflopend',
         resetChangesButtonLabel: 'Opnieuw instellen',
+        resetConfirmationAnnouncement: 'Values Reset',
         rowNavigateButtonTitle: 'Navigeren',
         selectAllCheckboxLabel: 'Alles selecteren',
         selectAllCheckboxLongLabel: 'Selectievakje, uitgeschakeld, klik om alles te selecteren',

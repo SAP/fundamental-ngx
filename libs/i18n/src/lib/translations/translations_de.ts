@@ -629,6 +629,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'Aufsteigend',
         P13SortDialogSortOrderSelectOptionDesc: 'Absteigend',
         resetChangesButtonLabel: 'Zurücksetzen',
+        resetConfirmationAnnouncement: 'Values Reset',
         rowNavigateButtonTitle: 'Navigieren',
         selectAllCheckboxLabel: 'Alle auswählen',
         selectAllCheckboxLongLabel: 'Ankreuzfeld, nicht markiert, zur Auswahl aller Zeilen klicken',

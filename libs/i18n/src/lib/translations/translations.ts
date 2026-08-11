@@ -626,6 +626,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'Ascending',
         P13SortDialogSortOrderSelectOptionDesc: 'Descending',
         resetChangesButtonLabel: 'Reset',
+        resetConfirmationAnnouncement: 'Values Reset',
         rowNavigateButtonTitle: 'Navigate',
         selectAllCheckboxLabel: 'Select all',
         selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',

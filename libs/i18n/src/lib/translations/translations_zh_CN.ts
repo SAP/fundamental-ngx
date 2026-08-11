@@ -623,6 +623,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: '升序',
         P13SortDialogSortOrderSelectOptionDesc: '降序',
         resetChangesButtonLabel: '重置',
+        resetConfirmationAnnouncement: 'Values Reset',
         rowNavigateButtonTitle: '导航',
         selectAllCheckboxLabel: '全选',
         selectAllCheckboxLongLabel: '复选框，未选中，单击以全部选中',

@@ -628,6 +628,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'Rosnąco',
         P13SortDialogSortOrderSelectOptionDesc: 'Malejąco',
         resetChangesButtonLabel: 'Resetuj',
+        resetConfirmationAnnouncement: 'Values Reset',
         rowNavigateButtonTitle: 'Nawigacja',
         selectAllCheckboxLabel: 'Zaznacz wszystko',
         selectAllCheckboxLongLabel: 'Pole wyboru, niezaznaczone, kliknij, aby zaznaczyć wszystko',

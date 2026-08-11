@@ -627,6 +627,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'Nouseva',
         P13SortDialogSortOrderSelectOptionDesc: 'Laskeva',
         resetChangesButtonLabel: 'Palauta',
+        resetConfirmationAnnouncement: 'Values Reset',
         rowNavigateButtonTitle: 'Navigoi',
         selectAllCheckboxLabel: 'Valitse kaikki',
         selectAllCheckboxLongLabel: 'Valintaruutu, ei valittu, valitse kaikki napsauttamalla',

@@ -835,6 +835,8 @@ export interface FdLanguage {
         rowNavigateButtonTitle: FdLanguageKey;
         expandAllAnnouncementLabel: FdLanguageKey;
         collapseAllAnnouncementLabel: FdLanguageKey;
+        /** Reset button announcement message */
+        resetConfirmationAnnouncement: FdLanguageKey;
     };
     platformWizardGenerator: {
         summarySectionEditStep: FdLanguageKey;
