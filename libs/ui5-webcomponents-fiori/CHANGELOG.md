@@ -1,3 +1,7 @@
+## 0.64.2-rc.18 (2026-08-11)
+
+This was a version bump only for ui5-webcomponents-fiori to align it with other projects, there were no code changes.
+
 ## 0.64.2-rc.17 (2026-08-10)
 
 This was a version bump only for ui5-webcomponents-fiori to align it with other projects, there were no code changes.
