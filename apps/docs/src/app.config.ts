@@ -1,5 +1,5 @@
 import { HttpClient, provideHttpClient, withXhr } from '@angular/common/http';
-import { ApplicationConfig, importProvidersFrom, signal } from '@angular/core';
+import { ApplicationConfig, signal } from '@angular/core';
 import { PreloadAllModules, provideRouter, withHashLocation, withPreloading } from '@angular/router';
 import { provideContentDensity } from '@fundamental-ngx/core/content-density';
 import { provideDialogService } from '@fundamental-ngx/core/dialog';
@@ -21,7 +21,7 @@ import { provideUi5WebcomponentsFiori } from '@fundamental-ngx/ui5-webcomponents
 
 import { SecurityContext } from '@angular/core';
 import { provideUi5Webcomponents } from '@fundamental-ngx/ui5-webcomponents/theming-bridge';
-import { MarkdownModule } from 'ngx-markdown';
+import { provideMarkdown, SANITIZE } from 'ngx-markdown';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import packageJson from '../../../package.json';
 // eslint-disable-next-line @nx/enforce-module-boundaries
@@ -76,6 +76,12 @@ export const appConfig: ApplicationConfig = {
             provide: Translations,
             useFactory: translations
         },
-        importProvidersFrom(MarkdownModule.forRoot({ loader: HttpClient, sanitize: SecurityContext.NONE }))
+        provideMarkdown({
+            loader: HttpClient,
+            sanitize: {
+                provide: SANITIZE,
+                useValue: SecurityContext.NONE
+            }
+        })
     ]
 };
