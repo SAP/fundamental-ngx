@@ -3,7 +3,7 @@ const pluginTs = require('typescript-eslint');
 
 module.exports = pluginTs.config(
     {
-        ignores: ['**/dist', '.nx', '**/typedoc']
+        ignores: ['**/dist', '.nx', '**/typedoc', '**/eslint.config.js']
     },
     ...nx.configs['flat/base'],
     ...nx.configs['flat/javascript'],
