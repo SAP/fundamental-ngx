@@ -1,3 +1,13 @@
+## 0.64.2-rc.19 (2026-08-11)
+
+### 🩹 Fixes
+
+- **btp:** restore focus to parent nav item after snapped popover closes ([#14457](https://github.com/SAP/fundamental-ngx/pull/14457))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.64.2-rc.18 (2026-08-11)
 
 This was a version bump only for btp to align it with other projects, there were no code changes.
