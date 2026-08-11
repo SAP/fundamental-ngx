@@ -12,13 +12,14 @@ import {
     Translations
 } from '@fundamental-ngx/docs/shared';
 import { FD_LANGUAGE_ENGLISH, FD_LANGUAGE_SIGNAL } from '@fundamental-ngx/i18n';
-// eslint-disable-next-line @nx/enforce-module-boundaries
+
 import { provideUi5WebcomponentsAi } from '@fundamental-ngx/ui5-webcomponents-ai/theming-bridge';
 import { provideUi5LanguageBridge } from '@fundamental-ngx/ui5-webcomponents-base/i18n';
 import { provideUi5ThemingBridge } from '@fundamental-ngx/ui5-webcomponents-base/theming-bridge';
-// eslint-disable-next-line @nx/enforce-module-boundaries
+
 import { provideUi5WebcomponentsFiori } from '@fundamental-ngx/ui5-webcomponents-fiori/theming-bridge';
-// eslint-disable-next-line @nx/enforce-module-boundaries
+
+import { SecurityContext } from '@angular/core';
 import { provideUi5Webcomponents } from '@fundamental-ngx/ui5-webcomponents/theming-bridge';
 import { MarkdownModule } from 'ngx-markdown';
 // eslint-disable-next-line @nx/enforce-module-boundaries
@@ -75,6 +76,6 @@ export const appConfig: ApplicationConfig = {
             provide: Translations,
             useFactory: translations
         },
-        importProvidersFrom(MarkdownModule.forRoot({ loader: HttpClient }))
+        importProvidersFrom(MarkdownModule.forRoot({ loader: HttpClient, sanitize: SecurityContext.NONE }))
     ]
 };
