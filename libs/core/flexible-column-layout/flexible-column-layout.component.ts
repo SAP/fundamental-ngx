@@ -456,9 +456,16 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
      * updates the layout
      * emits an event
      * makes a call to the helper function that will update the column layout and the separators
+     *
+     * NOTE: setTimeout defers the emit to the next event loop tick to prevent
+     * ExpressionChangedAfterItHasBeenCheckedError when consumers update bound state
+     * in layoutChange handlers (zone-based mode). Safe in both zone.js and zoneless modes.
+     * Can be removed once the library drops zone.js support entirely.
      */
     private _updateCurrentLayout(newLayout: FlexibleColumnLayout): void {
-        this.layoutChange.emit(newLayout);
+        setTimeout(() => {
+            this.layoutChange.emit(newLayout);
+        });
         this._updateColumnLayoutParameters(newLayout);
     }
 }

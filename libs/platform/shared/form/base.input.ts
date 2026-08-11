@@ -181,7 +181,7 @@ export abstract class BaseInput
 
     /** Whether control has errors */
     get controlInvalid(): boolean {
-        return this._controlInvalid;
+        return this._controlInvalid();
     }
 
     /** @hidden */
@@ -245,7 +245,7 @@ export abstract class BaseInput
     /**
      * @hidden
      */
-    private _controlInvalid = false;
+    private readonly _controlInvalid = signal(false);
 
     /** @hidden */
     constructor() {
@@ -442,7 +442,7 @@ export abstract class BaseInput
         );
 
         if (newStatusIsError !== this.controlInvalid) {
-            this._controlInvalid = newStatusIsError;
+            this._controlInvalid.set(newStatusIsError);
             this.stateChanges.next('updateErrorState');
             this.markForCheck();
         }
