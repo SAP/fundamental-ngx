@@ -199,6 +199,17 @@ module.exports = pluginTs.config(
                         {
                             sourceTag: 'scope:ui5',
                             onlyDependOnLibsWithTags: ['scope:ui5', 'scope:cdk', 'scope:fd', 'scope:i18n']
+                        },
+                        {
+                            sourceTag: 'type:schematics',
+                            onlyDependOnLibsWithTags: [
+                                'scope:fd',
+                                'scope:fdp',
+                                'scope:fdb',
+                                'scope:cx',
+                                'scope:cdk',
+                                'scope:i18n'
+                            ]
                         }
                     ]
                 }
