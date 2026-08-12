@@ -8,10 +8,6 @@ on:
 env:
     NODE_VERSION: '22.x'
 
-concurrency:
-    group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
-    cancel-in-progress: true
-
 permissions:
     contents: read
 
@@ -25,9 +21,11 @@ jobs:
             contents: write
             pull-requests: write
         # Security: Only run for same-repo PRs or trusted translation bot (service-tip-git)
+        # Skip when triggered by fundamental-bot to prevent duplicate runs after auto-commit
         if: |
-            github.event.pull_request.head.repo.full_name == github.repository ||
-            github.event.pull_request.head.repo.owner.login == 'service-tip-git'
+            (github.event.pull_request.head.repo.full_name == github.repository ||
+             github.event.pull_request.head.repo.owner.login == 'service-tip-git') &&
+            github.actor != 'fundamental-bot'
         steps:
             # Same-repo PRs: checkout the branch by name so we can push back
             - name: Checkout PR branch (same-repo)
@@ -59,7 +57,7 @@ jobs:
                   git fetch origin "$BASE_REF"
 
                   # Get list of changed files (using two-dot diff for direct comparison)
-                  FILES=$(git diff --name-only "origin/${BASE_REF}...HEAD")
+                  FILES=$(git diff --name-only "origin/${BASE_REF}..HEAD")
 
                   echo "Files changed in this PR:"
                   echo "$FILES"

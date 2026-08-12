@@ -522,6 +522,9 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
     /** @hidden */
     private readonly _overflowSubmenuContainer = viewChild<ElementRef>('overflowSubmenuContainer');
 
+    /** @hidden Tracks the previous popover open state to detect true→false transitions. */
+    private _popoverWasOpen = false;
+
     /** @hidden */
     constructor() {
         super();
@@ -534,6 +537,19 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
             } else {
                 this._keyManager?.destroy();
             }
+        });
+
+        // Restore focus to the parent link whenever the popover transitions from open
+        // to closed in snapped mode. This covers ALL close paths (closeAllPopups,
+        // service-driven close via Escape/click-outside, keyboard handlers) because it
+        // reacts directly to the popoverOpen$ signal rather than relying on
+        // _onPopoverOpen(), which is only called for service-internal closes.
+        effect(() => {
+            const isOpen = this.popoverOpen$();
+            if (!isOpen && this._popoverWasOpen && this.navigation.isSnapped$() && this.link$()) {
+                this.restoreFocusAfterPopoverClose();
+            }
+            this._popoverWasOpen = isOpen;
         });
 
         // We need to track child directives change and set list items based on that.
@@ -822,16 +838,6 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
                 },
                 { injector: this._injector }
             );
-        } else {
-            // When popover closes, return focus to the parent link (for snapped state)
-            if (this.navigation.isSnapped$()) {
-                afterNextRender(
-                    () => {
-                        this.focusLink();
-                    },
-                    { injector: this._injector }
-                );
-            }
         }
     }
 
@@ -893,6 +899,20 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
                 this.overflowSubmenuMaxHeight.set(`${availableHeight}px`);
             }
         });
+    }
+
+    /**
+     * Restores focus to the parent link after popover closes in snapped mode.
+     * Defers focus until after overlay DOM teardown.
+     * @hidden
+     */
+    protected restoreFocusAfterPopoverClose(): void {
+        afterNextRender(
+            () => {
+                this.focusLink();
+            },
+            { injector: this._injector }
+        );
     }
 
     private _focusPopoverLink(): void {

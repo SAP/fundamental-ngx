@@ -1,6 +1,7 @@
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, forwardRef, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, inject, input, signal } from '@angular/core';
 import { InitialFocusDirective, Nullable, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import {
     BarElementDirective,
@@ -16,7 +17,7 @@ import {
     DialogRef
 } from '@fundamental-ngx/core/dialog';
 import { TitleComponent } from '@fundamental-ngx/core/title';
-import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_SIGNAL, FdTranslatePipe, TranslationResolver } from '@fundamental-ngx/i18n';
 import { IconTabBarComponent, IconTabBarItem, IconTabBarTabComponent } from '@fundamental-ngx/platform/icon-tab-bar';
 import { CollectionFilter, CollectionSort, Table } from '@fundamental-ngx/platform/table-helpers';
 import { ResetButtonComponent, Resettable, RESETTABLE_TOKEN } from '../../reset-button/reset-button.component';
@@ -110,6 +111,9 @@ export class SettingsDialogComponent implements Resettable {
     /** Signal to track if the dialog is valid (OK button can be clicked) */
     readonly isDialogValid = signal(true);
 
+    /** Input for custom reset announcement message. If not provided, uses the translated default from i18n */
+    readonly resetAnnouncementMessage = input<string | null>(null);
+
     /** @hidden Initial sorting configuration */
     _initialSorting = signal<Nullable<CollectionSort>>(null);
 
@@ -145,6 +149,15 @@ export class SettingsDialogComponent implements Resettable {
               }
             : undefined;
     }
+
+    /** @hidden Live announcer for screen reader announcements */
+    private _liveAnnouncer = inject(LiveAnnouncer);
+
+    /** @hidden Language signal for getting current language */
+    private _langSignal = inject(FD_LANGUAGE_SIGNAL);
+
+    /** @hidden Translation resolver for getting translations synchronously */
+    private _translationResolver = inject(TranslationResolver);
 
     /**
      * Constructor that initializes dialog data and sets initial values for sorting, filtering, grouping, and columns.
@@ -265,6 +278,9 @@ export class SettingsDialogComponent implements Resettable {
             this._pendingColumnsChanges = initialColumns;
         }
         this.updateResetAvailability(this.activeTab()!, false);
+
+        // Announce reset to screen readers
+        this._announceReset();
     }
 
     /**
@@ -475,5 +491,25 @@ export class SettingsDialogComponent implements Resettable {
             columnOrder,
             columns: initialColumnsArray
         });
+    }
+
+    /**
+     * Announce the reset action to screen readers.
+     * @hidden
+     */
+    private _announceReset(): void {
+        // Get the announcement message: use custom input if provided, otherwise use translation
+        let message = this.resetAnnouncementMessage();
+        if (!message) {
+            // Resolve the translation key synchronously
+            message = this._translationResolver.resolve(
+                this._langSignal(),
+                'platformTable.resetConfirmationAnnouncement'
+            );
+        }
+
+        // Announce the message to screen readers using LiveAnnouncer
+        // 'polite' priority ensures it doesn't interrupt other announcements
+        this._liveAnnouncer.announce(message, 'polite');
     }
 }

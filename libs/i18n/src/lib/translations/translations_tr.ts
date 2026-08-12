@@ -628,6 +628,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'Artan',
         P13SortDialogSortOrderSelectOptionDesc: 'Azalan',
         resetChangesButtonLabel: 'Sıfırla',
+        resetConfirmationAnnouncement: 'Values Reset',
         rowNavigateButtonTitle: 'Git',
         selectAllCheckboxLabel: 'Tümünü seç',
         selectAllCheckboxLongLabel: 'Onay kutusu, seçim kaldırıldı, tümünü seçmek için tıklayın',

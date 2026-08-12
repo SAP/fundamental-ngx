@@ -624,6 +624,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: '升冪',
         P13SortDialogSortOrderSelectOptionDesc: '降冪',
         resetChangesButtonLabel: '重設',
+        resetConfirmationAnnouncement: 'Values Reset',
         rowNavigateButtonTitle: '瀏覽',
         selectAllCheckboxLabel: '全選',
         selectAllCheckboxLongLabel: '核取方塊、未勾選、按一下以全選',

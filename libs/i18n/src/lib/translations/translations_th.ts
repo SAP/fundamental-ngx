@@ -627,6 +627,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'จากน้อยไปหามาก',
         P13SortDialogSortOrderSelectOptionDesc: 'จากมากไปหาน้อย',
         resetChangesButtonLabel: 'รีเซ็ต',
+        resetConfirmationAnnouncement: 'Values Reset',
         rowNavigateButtonTitle: 'เนวิเกต',
         selectAllCheckboxLabel: 'เลือกทั้งหมด',
         selectAllCheckboxLongLabel: 'เช็คบ็อกซ์, ยกเลิกการเลือกแล้ว, คลิกเพื่อเลือกทั้งหมด',

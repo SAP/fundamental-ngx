@@ -1,13 +1,48 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, input, ViewChild } from '@angular/core';
 
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FlexibleColumnLayout, FlexibleColumnLayoutModule } from '@fundamental-ngx/core/flexible-column-layout';
+import { LayoutGridColDirective, LayoutGridComponent, LayoutGridRowDirective } from '@fundamental-ngx/core/layout-grid';
+
+@Component({
+    selector: 'fd-docs-fcl-grid-block',
+    template: `<div class="fd-docs-fcl-grid-block-content">
+        {{ itemNumber() }}
+    </div>`,
+    styles: [
+        `
+            .fd-docs-fcl-grid-block-content {
+                display: flex;
+                font-size: 2rem;
+                color: #0854a0;
+                min-height: 10rem;
+                font-weight: bold;
+                text-align: center;
+                align-items: center;
+                background: #d4e8f0;
+                border-radius: 0.5rem;
+                justify-content: center;
+                border: 0.125rem solid #0854a0;
+            }
+        `
+    ]
+})
+export class FlexibleColumnLayoutGridBlockComponent {
+    readonly itemNumber = input<number>(0);
+}
 
 @Component({
     selector: 'fd-flexible-column-layout-example',
     templateUrl: './flexible-column-layout-example.component.html',
     styleUrls: ['flexible-column-layout-example.component.scss'],
-    imports: [ButtonComponent, FlexibleColumnLayoutModule]
+    imports: [
+        ButtonComponent,
+        FlexibleColumnLayoutModule,
+        LayoutGridComponent,
+        LayoutGridRowDirective,
+        LayoutGridColDirective,
+        FlexibleColumnLayoutGridBlockComponent
+    ]
 })
 export class FlexibleColumnLayoutExampleComponent {
     /**

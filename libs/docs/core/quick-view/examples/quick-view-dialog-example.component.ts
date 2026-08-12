@@ -36,7 +36,7 @@ export class QuickViewDialogExampleComponent {
         subHeader: {
             title: 'Michael Adams',
             subtitle: 'Account Manager',
-            avatar: 'https://picsum.photos/500/500?people'
+            avatar: 'https://picsum.photos/seed/people/500/500'
         },
         groups: [
             {

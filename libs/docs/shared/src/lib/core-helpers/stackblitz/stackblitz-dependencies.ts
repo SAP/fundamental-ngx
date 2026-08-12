@@ -30,7 +30,6 @@ export class StackblitzDependencies {
     private static _dependencies: string[] = [
         'rxjs',
         '@sap-theming/theming-base-content',
-        'core-js',
         'focus-trap',
         'fundamental-styles',
         '@fundamental-styles/common-css',

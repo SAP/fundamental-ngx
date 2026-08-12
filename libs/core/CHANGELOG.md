@@ -1,3 +1,67 @@
+## 0.64.2-rc.28 (2026-08-12)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.27 (2026-08-12)
+
+### 🩹 Fixes
+
+- **core:** fix layout grid reflow inside flexible colum ([#14463](https://github.com/SAP/fundamental-ngx/pull/14463))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
+## 0.64.2-rc.26 (2026-08-12)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.25 (2026-08-12)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.24 (2026-08-12)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.23 (2026-08-11)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.22 (2026-08-11)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.21 (2026-08-11)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.20 (2026-08-11)
+
+### 🩹 Fixes
+
+- **core:** move aria-label from role-less span to fd-icon in InputGroupComponent ([#14452](https://github.com/SAP/fundamental-ngx/pull/14452))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
+## 0.64.2-rc.19 (2026-08-11)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.18 (2026-08-11)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.17 (2026-08-10)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.16 (2026-08-08)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
 ## 0.64.2-rc.15 (2026-08-07)
 
 This was a version bump only for core to align it with other projects, there were no code changes.

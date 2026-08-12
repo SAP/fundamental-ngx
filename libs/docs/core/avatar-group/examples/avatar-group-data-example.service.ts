@@ -46,47 +46,34 @@ export class AvatarGroupDataExampleService {
         const people: PeopleExample[] = [];
 
         for (let i = 0; i < num; i++) {
-            const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
-            const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
-            const position = positions[Math.floor(Math.random() * positions.length)];
+            const firstName = firstNames[i % firstNames.length];
+            const lastName = lastNames[i % lastNames.length];
+            const position = positions[i % positions.length];
 
             people.push({
-                id: this._generateId(),
+                id: `avatar-${i}`,
                 firstName,
                 lastName,
                 position,
-                phone: this._generatePhone(),
-                mobile: this._generatePhone(),
-                email: this._generateEmail(firstName, lastName),
-                ...this._generateImage()
+                phone: `+01555000${String(i).padStart(4, '0')}`,
+                mobile: `+01555001${String(i).padStart(4, '0')}`,
+                email: `${firstName.toLowerCase()}.${lastName.toLowerCase()}${i}@example.com`,
+                ...this._generateImage(i)
             });
         }
 
         return people;
     }
 
-    private _generateImage(): { imageUrl?: string; glyph?: string } | null {
-        const option = Math.floor(Math.random() * 3);
-        switch (option) {
+    private _generateImage(index: number): { imageUrl?: string; glyph?: string } | null {
+        // cycle: image → glyph → no image → image → ...
+        switch (index % 3) {
+            case 0:
+                return { imageUrl: `https://picsum.photos/seed/avatar${index}/400/400` };
             case 1:
-                return { imageUrl: `https://i.pravatar.cc/400?u=${this._generateId()}` };
-            case 2:
-                return { glyph: glyphs[Math.floor(Math.random() * glyphs.length)] };
-            case 3:
+                return { glyph: glyphs[index % glyphs.length] };
             default:
                 return null;
         }
-    }
-
-    private _generateId(): string {
-        return Math.random().toString(36).substring(6);
-    }
-
-    private _generateEmail(firstName: string, lastName: string): string {
-        return `${firstName}_${lastName}_${Math.random().toString(36).substring(6)}@example.com`;
-    }
-
-    private _generatePhone(): string {
-        return '+01' + Math.random().toString().slice(2, 11);
     }
 }
