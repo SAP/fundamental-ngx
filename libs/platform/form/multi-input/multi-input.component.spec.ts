@@ -98,6 +98,26 @@ describe('PlatformMultiInputComponent', () => {
         expect(component.platformMultiInputComponent.addOnButtonClicked.emit).toHaveBeenCalled();
         expect(component.platformMultiInputComponent.showList).not.toHaveBeenCalled();
     });
+
+    it('should recalculate popover widths on window resize when autoResize is enabled', () => {
+        const inputGroup = fixture.nativeElement.querySelector('fd-input-group') as HTMLElement;
+        jest.spyOn(inputGroup, 'getBoundingClientRect').mockReturnValue({ left: 100, width: 300 } as DOMRect);
+
+        component.platformMultiInputComponent.autoResize = true;
+        component.platformMultiInputComponent['_initWindowResize']();
+
+        window.innerWidth = 1200;
+        window.dispatchEvent(new Event('resize'));
+
+        expect(component.platformMultiInputComponent.maxWidth()).toBe(1100);
+        expect(component.platformMultiInputComponent.minWidth()).toBe(298);
+
+        window.innerWidth = 900;
+        window.dispatchEvent(new Event('resize'));
+
+        expect(component.platformMultiInputComponent.maxWidth()).toBe(800);
+        expect(component.platformMultiInputComponent.minWidth()).toBe(298);
+    });
 });
 
 const MULTI_INPUT_IDENTIFIER = 'platform-multi-input-unit-test';
