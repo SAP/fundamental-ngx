@@ -1,3 +1,7 @@
+## 0.64.2-rc.24 (2026-08-12)
+
+This was a version bump only for btp to align it with other projects, there were no code changes.
+
 ## 0.64.2-rc.23 (2026-08-11)
 
 This was a version bump only for btp to align it with other projects, there were no code changes.
