@@ -8,7 +8,9 @@ import {
     HostBinding,
     inject,
     OnInit,
+    QueryList,
     ViewChild,
+    ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -67,6 +69,10 @@ export class SettingsGeneratorSidebarLayoutComponent
     /** @hidden */
     @ViewChild('listElement', { read: ElementRef })
     private _listElement: ElementRef;
+
+    /** @hidden */
+    @ViewChildren('sidebarItem', { read: ElementRef })
+    private readonly _sidebarItems: QueryList<ElementRef<HTMLElement>>;
 
     /** @hidden */
     searchTerm: string;
@@ -152,7 +158,7 @@ export class SettingsGeneratorSidebarLayoutComponent
             this._settingsGeneratorContent.setActiveTab(pathArray[1]);
         }
 
-        setTimeout(() => {
+        queueMicrotask(() => {
             element.nativeElement.focus();
         });
     }
@@ -182,11 +188,13 @@ export class SettingsGeneratorSidebarLayoutComponent
                     // In mobile view, we don't need to set initial index, since the section won't be visible to the end user.
                     if (!this._initialSelectedItemSet && !this._isMobile) {
                         this._setSelectedIndex(this._selectedIndex > -1 ? this._selectedIndex : 0);
+                        this._focusSelectedSidebarItem();
                         this._initialSelectedItemSet = true;
                     }
 
                     if (!this._isMobile && this._selectedIndex === -1) {
                         this._setSelectedIndex(0);
+                        this._focusSelectedSidebarItem();
                     }
 
                     this._cdr.detectChanges();
@@ -219,6 +227,15 @@ export class SettingsGeneratorSidebarLayoutComponent
     /** @hidden */
     private _getNormalizedSidebarWidth(width: string | SidebarWidthConfiguration): SidebarWidthConfiguration {
         return typeof width === 'string' ? { minWidth: width, maxWidth: width, width } : width;
+    }
+
+    /** @hidden */
+    private _focusSelectedSidebarItem(): void {
+        queueMicrotask(() => {
+            const target = this._sidebarItems.get(this._selectedIndex) ?? this._sidebarItems.first;
+
+            target?.nativeElement.focus();
+        });
     }
 
     /** @hidden */
