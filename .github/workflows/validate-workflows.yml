@@ -1,0 +1,44 @@
+name: Validate CI Workflows
+
+on:
+    pull_request:
+        types: [opened, synchronize, edited]
+        paths:
+            - '.github/workflows/**'
+            - '.github/workflows/__tests__/**'
+
+permissions:
+    contents: read
+
+jobs:
+    validate_workflows:
+        name: Validate workflow structure and security
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4.2.2
+
+            - name: Setup Node.js
+              uses: ./.github/actions/nodejs
+              with:
+                  node-version: '22.x'
+
+            - name: Run workflow tests
+              run: |
+                  echo "🔍 Running workflow validation tests..."
+                  for test_file in .github/workflows/__tests__/*.test.js; do
+                      if [[ "$test_file" == *"TEMPLATE"* ]]; then
+                          continue
+                      fi
+                      if [ -f "$test_file" ]; then
+                          echo ""
+                          echo "Running: $test_file"
+                          node "$test_file"
+                          if [ $? -ne 0 ]; then
+                              echo "❌ Test failed: $test_file"
+                              exit 1
+                          fi
+                      fi
+                  done
+                  echo ""
+                  echo "✅ All workflow validation tests passed"
