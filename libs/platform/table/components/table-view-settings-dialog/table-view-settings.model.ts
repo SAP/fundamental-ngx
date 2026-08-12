@@ -58,7 +58,7 @@ export interface FiltersDialogResultData {
 export interface IncludeExcludeFiltersDialogData extends TableDialogCommonData {
     filterBy: CollectionFilter[];
     columns: FilterableColumn[];
-    validator?: ((rules: CollectionFilter[]) => boolean) | undefined;
+    validator?: (rules: CollectionFilter[]) => boolean;
 }
 
 export interface IncludeExcludeFiltersDialogResultData {

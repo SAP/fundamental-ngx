@@ -57,39 +57,37 @@ export class PlatformTableIncludeExcludeFilterExampleComponent {
         this.source = new TableDataSource(new TableDataProviderExample(datetimeAdapter));
     }
 
-    validator: (rules: CollectionFilter[]) => boolean = (rules: CollectionFilter[]) => {
-        let retVal = true;
-        let foundMatch = false;
-        const excludedRules = [...rules.filter((rule) => rule.exclude === true)];
-        const includedRules = [...rules.filter((rule) => rule.exclude === false)];
-        includedRules.forEach((includedRule) => {
-            excludedRules.forEach((excludedRule) => {
-                if (
-                    excludedRule.strategy === includedRule.strategy &&
-                    excludedRule.field === includedRule.field &&
-                    includedRule.value === excludedRule.value
-                ) {
-                    foundMatch = true;
-                }
-            });
-        });
-        if (foundMatch) {
-            const content = {
-                title: 'Contradictory filtering rules',
-                approveButton: 'Ok',
-                approveButtonCallback: () => messageBoxRef.close('Approved'),
-                cancelButtonCallback: () => messageBoxRef.close('Canceled'),
-                closeButtonCallback: () => messageBoxRef.dismiss('Dismissed'),
-                content:
-                    'The provided "include" and "exclude" rules are contradictory and will not return any results. No filtering will be applied.'
-            };
+    validator = (rules: CollectionFilter[]): boolean => {
+        const excludedRules = rules.filter((rule) => rule.exclude);
+        const includedRules = rules.filter((rule) => !rule.exclude);
 
-            const messageBoxRef = this.messageBoxService.open(content, { type: 'error' });
+        const hasContradiction = includedRules.some((include) =>
+            excludedRules.some(
+                (exclude) =>
+                    exclude.strategy === include.strategy &&
+                    exclude.field === include.field &&
+                    exclude.value === include.value
+            )
+        );
 
-            retVal = false;
+        if (hasContradiction) {
+            const messageBoxRef = this.messageBoxService.open(
+                {
+                    title: 'Contradictory filtering rules',
+                    approveButton: 'Ok',
+                    approveButtonCallback: () => messageBoxRef.close('Approved'),
+                    cancelButtonCallback: () => messageBoxRef.close('Canceled'),
+                    closeButtonCallback: () => messageBoxRef.dismiss('Dismissed'),
+                    content:
+                        'The provided "include" and "exclude" rules are contradictory and will not return any results. No filtering will be applied.'
+                },
+                { type: 'error' }
+            );
+
+            return false;
         }
 
-        return retVal;
+        return true;
     };
 }
 

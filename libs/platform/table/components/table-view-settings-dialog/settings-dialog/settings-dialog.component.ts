@@ -137,14 +137,13 @@ export class SettingsDialogComponent implements Resettable {
     /** @hidden Computed filter data for include/exclude filters component */
     protected get includeExcludeFiltersComponentData(): IncludeExcludeFiltersData | undefined {
         const data = this.includeExcludeFiltersData();
-        if (!data) {
-            return undefined;
-        }
-        return {
-            columns: data.columns,
-            collectionFilter: data.filterBy,
-            validator: data.validator
-        };
+        return data
+            ? {
+                  columns: data.columns,
+                  collectionFilter: data.filterBy,
+                  validator: data.validator
+              }
+            : undefined;
     }
 
     /**

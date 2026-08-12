@@ -21,7 +21,7 @@ import { FilterableColumn, FilterRule } from '../../table-p13-dialog/filtering/f
 export interface IncludeExcludeFiltersData {
     columns: FilterableColumn[];
     collectionFilter: CollectionFilter[];
-    validator?: ((rules: CollectionFilter[]) => boolean) | undefined;
+    validator?: (rules: CollectionFilter[]) => boolean;
 }
 
 export interface IncludeExcludeFiltersResultData {
@@ -60,7 +60,7 @@ export class IncludeExcludeFiltersComponent implements OnInit {
 
     /** Validator function for filter rules */
     @Input()
-    validator: ((rules: CollectionFilter[]) => boolean) | undefined;
+    validator?: (rules: CollectionFilter[]) => boolean;
 
     /** Emits when filters change */
     @Output()
@@ -211,23 +211,8 @@ export class IncludeExcludeFiltersComponent implements OnInit {
     }
 
     /** @hidden */
-    private _getCollectionFiltersFromIncludeRules(): CollectionFilter[] {
-        return this._getCollectionFiltersFromRules(this._includeRules).map(
-            (collectionFilter): CollectionFilter => ({
-                ...collectionFilter,
-                exclude: false
-            })
-        );
-    }
-
-    /** @hidden */
-    private _getCollectionFiltersFromExcludeRules(): CollectionFilter[] {
-        return this._getCollectionFiltersFromRules(this._excludeRules).map(
-            (collectionFilter): CollectionFilter => ({
-                ...collectionFilter,
-                exclude: true
-            })
-        );
+    private _getCollectionFiltersWithExcludeFlag(rules: FilterRule[], exclude: boolean): CollectionFilter[] {
+        return this._getCollectionFiltersFromRules(rules).map((filter): CollectionFilter => ({ ...filter, exclude }));
     }
 
     /** @hidden */
@@ -241,8 +226,8 @@ export class IncludeExcludeFiltersComponent implements OnInit {
 
     /** @hidden */
     private _emitChange(): void {
-        const includeFilters = this._getCollectionFiltersFromIncludeRules();
-        const excludeFilters = this._getCollectionFiltersFromExcludeRules();
+        const includeFilters = this._getCollectionFiltersWithExcludeFlag(this._includeRules, false);
+        const excludeFilters = this._getCollectionFiltersWithExcludeFlag(this._excludeRules, true);
         const combinedFilters = [...includeFilters, ...excludeFilters];
 
         this.filterChange.emit({ filterBy: combinedFilters });
