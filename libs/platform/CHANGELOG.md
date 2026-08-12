@@ -1,3 +1,13 @@
+## 0.64.2-rc.26 (2026-08-12)
+
+### 🚀 Features
+
+- **platform:** add closeOnOutsideClick option to hint configuration ([#14461](https://github.com/SAP/fundamental-ngx/pull/14461))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.64.2-rc.25 (2026-08-12)
 
 This was a version bump only for platform to align it with other projects, there were no code changes.
