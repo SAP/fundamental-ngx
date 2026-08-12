@@ -4,6 +4,7 @@ import {
     TableColumn,
     TableDialogCommonData
 } from '@fundamental-ngx/platform/table-helpers';
+import { FilterableColumn } from '../table-p13-dialog/filtering/filtering.model';
 import { TableViewSettingsFilterComponent } from './table-view-settings-filter.component';
 
 export interface SettingsSortDialogColumn {
@@ -51,6 +52,16 @@ export interface FiltersDialogData extends TableDialogCommonData {
 }
 
 export interface FiltersDialogResultData {
+    filterBy: CollectionFilter[];
+}
+
+export interface IncludeExcludeFiltersDialogData extends TableDialogCommonData {
+    filterBy: CollectionFilter[];
+    columns: FilterableColumn[];
+    validator?: ((rules: CollectionFilter[]) => boolean) | undefined;
+}
+
+export interface IncludeExcludeFiltersDialogResultData {
     filterBy: CollectionFilter[];
 }
 

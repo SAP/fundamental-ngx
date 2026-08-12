@@ -2,6 +2,7 @@ import {
     AfterViewInit,
     ChangeDetectionStrategy,
     Component,
+    ContentChild,
     ContentChildren,
     DestroyRef,
     forwardRef,
@@ -22,10 +23,12 @@ import {
     TableDialogCommonData,
     TableState
 } from '@fundamental-ngx/platform/table-helpers';
+import { IncludeExcludeFiltersComponent } from './include-exclude-filters/include-exclude-filters.component';
 import { SettingsDialogComponent } from './settings-dialog/settings-dialog.component';
 import { TableViewSettingsFilterComponent } from './table-view-settings-filter.component';
 import {
     FiltersDialogData,
+    IncludeExcludeFiltersDialogData,
     SettingsColumnsDialogColumn,
     SettingsColumnsDialogData,
     SettingsGroupDialogData,
@@ -42,6 +45,7 @@ export const dialogConfig: DialogConfig = {
 export interface CombinedTableDialogData {
     sortingData: SettingsSortDialogData | null;
     filteringData: FiltersDialogData | null;
+    includeExcludeFiltersData: IncludeExcludeFiltersDialogData | null;
     groupingData: SettingsGroupDialogData | null;
     columnsData: SettingsColumnsDialogData | null;
 }
@@ -99,6 +103,10 @@ export class TableViewSettingsDialogComponent implements AfterViewInit {
     filters: QueryList<TableViewSettingsFilterComponent>;
 
     /** @hidden */
+    @ContentChild(forwardRef(() => IncludeExcludeFiltersComponent))
+    includeExcludeFilters: IncludeExcludeFiltersComponent | undefined;
+
+    /** @hidden */
     _table: Table;
 
     /** @hidden */
@@ -136,6 +144,23 @@ export class TableViewSettingsDialogComponent implements AfterViewInit {
             viewSettingsFilters: this.filters.toArray(),
             filterBy: state?.filterBy
         };
+
+        // Build include/exclude filters data if component is present
+        const includeExcludeFiltersData: IncludeExcludeFiltersDialogData | null = this.includeExcludeFilters
+            ? {
+                  columns: columns
+                      .filter((col) => col.filterable)
+                      .map((col) => ({
+                          label: col.label,
+                          key: col.key,
+                          dataType: col.dataType,
+                          filterable: col.filterable,
+                          filterSelectOptions: col.filterSelectOptions
+                      })),
+                  filterBy: state?.filterBy ?? [],
+                  validator: this.includeExcludeFilters.validator
+              }
+            : null;
 
         const groupData: SettingsGroupDialogData = {
             columns: columns.filter(({ groupable }) => groupable),
@@ -218,6 +243,7 @@ export class TableViewSettingsDialogComponent implements AfterViewInit {
                 data: {
                     sortingData: sortData.columns.length > 0 ? sortData : null,
                     filteringData: filterData.viewSettingsFilters.length > 0 ? filterData : null,
+                    includeExcludeFiltersData,
                     groupingData: groupData.columns.length > 0 ? groupData : null,
                     columnsData: currentColumnsData.columns.length > 0 ? currentColumnsData : null,
                     headingLevel: this.headingLevel,
@@ -232,26 +258,37 @@ export class TableViewSettingsDialogComponent implements AfterViewInit {
                 filter((result) => !!result),
                 takeUntilDestroyed(this.destroyRef)
             )
-            .subscribe(({ sortingData, filteringData, groupingData, columnsData }) => {
-                if (sortingData) {
-                    this._applySorting(sortingData);
+            .subscribe(
+                ({
+                    sortingData,
+                    filteringData,
+                    includeExcludeFiltersData: resultFiltersData,
+                    groupingData,
+                    columnsData
+                }) => {
+                    if (sortingData) {
+                        this._applySorting(sortingData);
+                    }
+                    if (filteringData) {
+                        this._applyFiltering(filteringData.filterBy);
+                    }
+                    if (resultFiltersData) {
+                        this._applyFiltering(resultFiltersData.filterBy);
+                    }
+                    if (groupingData) {
+                        this._applyGrouping(groupingData.field, groupingData.direction);
+                    }
+                    if (columnsData) {
+                        this._applyColumns(columnsData);
+                    }
                 }
-                if (filteringData) {
-                    this._applyFiltering(filteringData.filterBy);
-                }
-                if (groupingData) {
-                    this._applyGrouping(groupingData.field, groupingData.direction);
-                }
-                if (columnsData) {
-                    this._applyColumns(columnsData);
-                }
-            });
+            );
     }
 
     /** @hidden */
     private _listenToFilters(): void {
         this.filters.changes.pipe(startWith(null), takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-            if (this.filters.toArray().length > 0) {
+            if (this.filters.toArray().length > 0 || this.includeExcludeFilters) {
                 this._table?.showSettingsInToolbar(true);
             }
         });
