@@ -1,13 +1,14 @@
+import { type Page } from '@playwright/test';
 import { expect, test } from '../../fixtures/base.fixture';
 
-async function getContentWidth(page: any): Promise<number> {
+async function getContentWidth(page: Page): Promise<number> {
     return page.evaluate(() => {
         const overlay = document.querySelector('.fd-docs-fcl-example-overlay-content') as HTMLElement;
         return overlay ? overlay.scrollWidth : 1920;
     });
 }
 
-async function getContentHeight(page: any): Promise<number> {
+async function getContentHeight(page: Page): Promise<number> {
     return page.evaluate(() => {
         const overlay = document.querySelector('.fd-docs-fcl-example-overlay-content') as HTMLElement;
         return overlay ? overlay.scrollHeight : 1080;
