@@ -16,7 +16,30 @@
                 <ng-template #startColumn>
                     <div class="fd-docs-fcl-example-section">
                         <h2>Start Column</h2>
-                        <div>
+
+                        <fd-layout-grid style="padding: 1rem">
+                            <div fdLayoutGridRow>
+                                <div [fdLayoutGridCol]="12" [colMd]="6" [colLg]="4">
+                                    <fd-docs-fcl-grid-block [itemNumber]="1"></fd-docs-fcl-grid-block>
+                                </div>
+                                <div [fdLayoutGridCol]="12" [colMd]="6" [colLg]="4">
+                                    <fd-docs-fcl-grid-block [itemNumber]="2"></fd-docs-fcl-grid-block>
+                                </div>
+                                <div [fdLayoutGridCol]="12" [colMd]="6" [colLg]="4">
+                                    <fd-docs-fcl-grid-block [itemNumber]="3"></fd-docs-fcl-grid-block>
+                                </div>
+                                <div [fdLayoutGridCol]="12" [colMd]="6" [colLg]="4">
+                                    <fd-docs-fcl-grid-block [itemNumber]="4"></fd-docs-fcl-grid-block>
+                                </div>
+                                <div [fdLayoutGridCol]="12" [colMd]="6" [colLg]="4">
+                                    <fd-docs-fcl-grid-block [itemNumber]="5"></fd-docs-fcl-grid-block>
+                                </div>
+                                <div [fdLayoutGridCol]="12" [colMd]="6" [colLg]="4">
+                                    <fd-docs-fcl-grid-block [itemNumber]="6"></fd-docs-fcl-grid-block>
+                                </div>
+                            </div>
+                        </fd-layout-grid>
+                        <div style="padding: 1rem">
                             <button class="fd-button" (click)="changeLayout('TwoColumnsStartExpanded')">
                                 Open Column 2
                             </button>
@@ -25,8 +48,31 @@
                 </ng-template>
                 <ng-template #midColumn>
                     <div class="fd-docs-fcl-example-section">
-                        <h2>Mid Column</h2>
-                        <div>
+                        <h2>Middle Column</h2>
+
+                        <fd-layout-grid style="padding: 1rem">
+                            <div fdLayoutGridRow>
+                                <div [fdLayoutGridCol]="12" [colMd]="6" [colLg]="4">
+                                    <fd-docs-fcl-grid-block [itemNumber]="101"></fd-docs-fcl-grid-block>
+                                </div>
+                                <div [fdLayoutGridCol]="12" [colMd]="6" [colLg]="4">
+                                    <fd-docs-fcl-grid-block [itemNumber]="102"></fd-docs-fcl-grid-block>
+                                </div>
+                                <div [fdLayoutGridCol]="12" [colMd]="6" [colLg]="4">
+                                    <fd-docs-fcl-grid-block [itemNumber]="103"></fd-docs-fcl-grid-block>
+                                </div>
+                                <div [fdLayoutGridCol]="12" [colMd]="6" [colLg]="4">
+                                    <fd-docs-fcl-grid-block [itemNumber]="104"></fd-docs-fcl-grid-block>
+                                </div>
+                                <div [fdLayoutGridCol]="12" [colMd]="6" [colLg]="4">
+                                    <fd-docs-fcl-grid-block [itemNumber]="105"></fd-docs-fcl-grid-block>
+                                </div>
+                                <div [fdLayoutGridCol]="12" [colMd]="6" [colLg]="4">
+                                    <fd-docs-fcl-grid-block [itemNumber]="106"></fd-docs-fcl-grid-block>
+                                </div>
+                            </div>
+                        </fd-layout-grid>
+                        <div style="padding: 1rem">
                             <button class="fd-button" (click)="changeLayout('ThreeColumnsMidExpanded')">
                                 Open Column 3
                             </button>
@@ -36,22 +82,47 @@
                 <ng-template #endColumn>
                     <div class="fd-docs-fcl-example-section">
                         <h2>End Column</h2>
-                        <div>
-                            @if (localLayout !== 'OneColumnEndFullScreen') {
-                                <button class="fd-button" (click)="changeLayout('OneColumnEndFullScreen')">
-                                    Expand Column 3
-                                </button>
-                            }
-                            @if (localLayout !== 'OneColumnEndFullScreen') {
-                                <button class="fd-button" (click)="changeLayout('TwoColumnsMidExpanded')">
-                                    Close Column 3
-                                </button>
-                            }
-                            @if (localLayout === 'OneColumnEndFullScreen') {
-                                <button class="fd-button" (click)="changeLayout('ThreeColumnsMidExpanded')">
-                                    Exit Full Screen Column 3
-                                </button>
-                            }
+
+                        <fd-layout-grid style="padding: 1rem">
+                            <div fdLayoutGridRow>
+                                <div [fdLayoutGridCol]="12" [colMd]="6" [colLg]="4">
+                                    <fd-docs-fcl-grid-block [itemNumber]="201"></fd-docs-fcl-grid-block>
+                                </div>
+                                <div [fdLayoutGridCol]="12" [colMd]="6" [colLg]="4">
+                                    <fd-docs-fcl-grid-block [itemNumber]="202"></fd-docs-fcl-grid-block>
+                                </div>
+                                <div [fdLayoutGridCol]="12" [colMd]="6" [colLg]="4">
+                                    <fd-docs-fcl-grid-block [itemNumber]="203"></fd-docs-fcl-grid-block>
+                                </div>
+                                <div [fdLayoutGridCol]="12" [colMd]="6" [colLg]="4">
+                                    <fd-docs-fcl-grid-block [itemNumber]="204"></fd-docs-fcl-grid-block>
+                                </div>
+                                <div [fdLayoutGridCol]="12" [colMd]="6" [colLg]="4">
+                                    <fd-docs-fcl-grid-block [itemNumber]="205"></fd-docs-fcl-grid-block>
+                                </div>
+                                <div [fdLayoutGridCol]="12" [colMd]="6" [colLg]="4">
+                                    <fd-docs-fcl-grid-block [itemNumber]="206"></fd-docs-fcl-grid-block>
+                                </div>
+                            </div>
+                        </fd-layout-grid>
+                        <div style="padding: 1rem">
+                            <div>
+                                @if (localLayout !== 'OneColumnEndFullScreen') {
+                                    <button class="fd-button" (click)="changeLayout('OneColumnEndFullScreen')">
+                                        Expand Column 3
+                                    </button>
+                                }
+                                @if (localLayout !== 'OneColumnEndFullScreen') {
+                                    <button class="fd-button" (click)="changeLayout('TwoColumnsMidExpanded')">
+                                        Close Column 3
+                                    </button>
+                                }
+                                @if (localLayout === 'OneColumnEndFullScreen') {
+                                    <button class="fd-button" (click)="changeLayout('ThreeColumnsMidExpanded')">
+                                        Exit Full Screen Column 3
+                                    </button>
+                                }
+                            </div>
                         </div>
                     </div>
                 </ng-template>

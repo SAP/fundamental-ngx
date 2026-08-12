@@ -22,17 +22,10 @@
     background: #394a5d;
 }
 
-.fd-docs-fcl-example-section {
-    height: calc(100vh - 77px);
-
-    h2 {
-        font-size: 30px;
-        text-align: center;
-    }
-
-    div {
-        display: flex;
-        justify-content: space-around;
-        margin: 20px;
-    }
+.fd-docs-fcl-example-section h2 {
+    margin: 1rem;
+    color: #0854a0;
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-align: center;
 }
