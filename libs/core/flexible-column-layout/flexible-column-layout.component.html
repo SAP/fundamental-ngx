@@ -6,15 +6,15 @@
     <!-- Start/Left/First Column -->
     <div
         class="fd-flexible-column-layout__column"
-        [style.width.%]="_columnLayout.start"
-        [style.visibility]="_columnLayout.start === 0 ? 'hidden' : 'visible'"
-        [style.height]="_columnLayout.start === 0 ? '0' : 'auto'"
-        [attr.aria-hidden]="_columnLayout.start === 0"
+        [style.width.%]="_columnLayout().start"
+        [style.visibility]="_columnLayout().start === 0 ? 'hidden' : 'visible'"
+        [style.height]="_columnLayout().start === 0 ? '0' : 'auto'"
+        [attr.aria-hidden]="_columnLayout().start === 0"
     >
         <ng-template [ngTemplateOutlet]="startColumn"></ng-template>
     </div>
     <!-- Left Separator -->
-    @if (_leftColumnSeparator) {
+    @if (_leftColumnSeparator()) {
         <div
             class="fd-flexible-column-layout__separator"
             [attr.aria-label]="separatorAriaLabel"
@@ -26,18 +26,18 @@
                 fdType="transparent"
                 class="fd-flexible-column-layout__button"
                 [ariaLabel]="
-                    (_leftColumnSeparator === 'left' ? collapseTitleStartBtn : expandTitleStartBtn) ||
-                    (_leftColumnSeparator === 'left' ? collapseTitle : expandTitle) ||
+                    (_leftColumnSeparator() === 'left' ? collapseTitleStartBtn : expandTitleStartBtn) ||
+                    (_leftColumnSeparator() === 'left' ? collapseTitle : expandTitle) ||
                     ''
                 "
                 [title]="
-                    (_leftColumnSeparator === 'left' ? collapseTitleStartBtn : expandTitleStartBtn) ||
-                    (_leftColumnSeparator === 'left' ? collapseTitle : expandTitle) ||
+                    (_leftColumnSeparator() === 'left' ? collapseTitleStartBtn : expandTitleStartBtn) ||
+                    (_leftColumnSeparator() === 'left' ? collapseTitle : expandTitle) ||
                     ''
                 "
             >
                 <fd-icon
-                    [glyph]="_leftColumnSeparator ? 'slim-arrow-' + _leftColumnSeparator : ''"
+                    [glyph]="_leftColumnSeparator() ? 'slim-arrow-' + _leftColumnSeparator() : ''"
                     role="presentation"
                 ></fd-icon>
             </button>
@@ -46,15 +46,15 @@
     <!-- Middle/Second Column -->
     <div
         class="fd-flexible-column-layout__column"
-        [style.width.%]="_columnLayout.mid"
-        [style.visibility]="_columnLayout.mid === 0 ? 'hidden' : 'visible'"
-        [style.height]="_columnLayout.mid === 0 ? '0' : 'auto'"
-        [attr.aria-hidden]="_columnLayout.mid === 0"
+        [style.width.%]="_columnLayout().mid"
+        [style.visibility]="_columnLayout().mid === 0 ? 'hidden' : 'visible'"
+        [style.height]="_columnLayout().mid === 0 ? '0' : 'auto'"
+        [attr.aria-hidden]="_columnLayout().mid === 0"
     >
         <ng-template [ngTemplateOutlet]="midColumn"></ng-template>
     </div>
     <!-- Right Separator -->
-    @if (_rightColumnSeparator) {
+    @if (_rightColumnSeparator()) {
         <div
             class="fd-flexible-column-layout__separator"
             [attr.aria-label]="separatorAriaLabel"
@@ -66,18 +66,18 @@
                 fdType="transparent"
                 class="fd-flexible-column-layout__button"
                 [ariaLabel]="
-                    (_rightColumnSeparator === 'left' ? collapseTitleEndBtn : expandTitleEndBtn) ||
-                    (_rightColumnSeparator === 'left' ? collapseTitle : expandTitle) ||
+                    (_rightColumnSeparator() === 'left' ? collapseTitleEndBtn : expandTitleEndBtn) ||
+                    (_rightColumnSeparator() === 'left' ? collapseTitle : expandTitle) ||
                     ''
                 "
                 [title]="
-                    (_rightColumnSeparator === 'left' ? collapseTitleEndBtn : expandTitleEndBtn) ||
-                    (_rightColumnSeparator === 'left' ? collapseTitle : expandTitle) ||
+                    (_rightColumnSeparator() === 'left' ? collapseTitleEndBtn : expandTitleEndBtn) ||
+                    (_rightColumnSeparator() === 'left' ? collapseTitle : expandTitle) ||
                     ''
                 "
             >
                 <fd-icon
-                    [glyph]="_rightColumnSeparator ? 'slim-arrow-' + _rightColumnSeparator : ''"
+                    [glyph]="_rightColumnSeparator() ? 'slim-arrow-' + _rightColumnSeparator() : ''"
                     role="presentation"
                 ></fd-icon>
             </button>
@@ -86,10 +86,10 @@
     <!-- End/Right/Third Column -->
     <div
         class="fd-flexible-column-layout__column"
-        [style.width.%]="_columnLayout.end"
-        [style.visibility]="_columnLayout.end === 0 ? 'hidden' : 'visible'"
-        [style.height]="_columnLayout.end === 0 ? '0' : 'auto'"
-        [attr.aria-hidden]="_columnLayout.end === 0"
+        [style.width.%]="_columnLayout().end"
+        [style.visibility]="_columnLayout().end === 0 ? 'hidden' : 'visible'"
+        [style.height]="_columnLayout().end === 0 ? '0' : 'auto'"
+        [attr.aria-hidden]="_columnLayout().end === 0"
     >
         <ng-template [ngTemplateOutlet]="endColumn"></ng-template>
     </div>

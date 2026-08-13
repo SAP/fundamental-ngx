@@ -1,5 +1,5 @@
 import { Component, input, ViewChild } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { whenStable } from '@fundamental-ngx/core/tests';
@@ -65,12 +65,12 @@ class TestFlexibleColumnLayoutComponent {
 
     readonly layout = input<FlexibleColumnLayout>(ONE_COLUMN_START_FULL_SCREEN);
     readonly backgroundDesign = input('translucent');
-    readonly expandTitle = input<string>(undefined);
-    readonly collapseTitle = input<string>(undefined);
-    readonly expandTitleStartBtn = input<string>(undefined);
-    readonly collapseTitleStartBtn = input<string>(undefined);
-    readonly expandTitleEndBtn = input<string>(undefined);
-    readonly collapseTitleEndBtn = input<string>(undefined);
+    readonly expandTitle = input<string | undefined>(undefined);
+    readonly collapseTitle = input<string | undefined>(undefined);
+    readonly expandTitleStartBtn = input<string | undefined>(undefined);
+    readonly collapseTitleStartBtn = input<string | undefined>(undefined);
+    readonly expandTitleEndBtn = input<string | undefined>(undefined);
+    readonly collapseTitleEndBtn = input<string | undefined>(undefined);
 }
 describe('FlexibleColumnLayoutComponent', () => {
     let testComponent: TestFlexibleColumnLayoutComponent;
@@ -315,6 +315,30 @@ describe('FlexibleColumnLayoutComponent', () => {
         expect(separators.length).toBe(1);
     });
 
+    it('should update rendered layout on resize without manual detectChanges', fakeAsync(() => {
+        setViewport(1023);
+
+        fixture.componentRef.setInput('layout', TWO_COLUMNS_MID_EXPANDED);
+        fixture.detectChanges();
+
+        let midColumn: HTMLElement = fixture.debugElement.queryAll(By.css('.fd-flexible-column-layout__column'))[1]
+            .nativeElement;
+        expect(midColumn.style.width).toBe('67%');
+
+        setViewport(900);
+        tick(150);
+
+        expect(testComponent.flexibleColumnLayout.layout).toBe(ONE_COLUMN_MID_FULL_SCREEN);
+
+        fixture.detectChanges();
+
+        midColumn = fixture.debugElement.queryAll(By.css('.fd-flexible-column-layout__column'))[1].nativeElement;
+        expect(midColumn.style.width).toBe('100%');
+
+        const separators = fixture.debugElement.queryAll(By.css('.fd-flexible-column-layout__separator'));
+        expect(separators.length).toBe(0);
+    }));
+
     describe('separator direction values', () => {
         it('should have no separators for single-column layouts', async () => {
             await whenStable(fixture);
@@ -322,8 +346,8 @@ describe('FlexibleColumnLayoutComponent', () => {
             fixture.componentRef.setInput('layout', ONE_COLUMN_START_FULL_SCREEN);
             fixture.detectChanges();
 
-            expect(testComponent.flexibleColumnLayout._leftColumnSeparator).toBeNull();
-            expect(testComponent.flexibleColumnLayout._rightColumnSeparator).toBeNull();
+            expect(testComponent.flexibleColumnLayout._leftColumnSeparator()).toBeNull();
+            expect(testComponent.flexibleColumnLayout._rightColumnSeparator()).toBeNull();
         });
 
         it('should set left separator to "left" for TWO_COLUMNS_START_EXPANDED', async () => {
@@ -333,8 +357,8 @@ describe('FlexibleColumnLayoutComponent', () => {
             fixture.componentRef.setInput('layout', TWO_COLUMNS_START_EXPANDED);
             fixture.detectChanges();
 
-            expect(testComponent.flexibleColumnLayout._leftColumnSeparator).toBe('left');
-            expect(testComponent.flexibleColumnLayout._rightColumnSeparator).toBeNull();
+            expect(testComponent.flexibleColumnLayout._leftColumnSeparator()).toBe('left');
+            expect(testComponent.flexibleColumnLayout._rightColumnSeparator()).toBeNull();
         });
 
         it('should set left separator to "right" for TWO_COLUMNS_MID_EXPANDED', async () => {
@@ -344,8 +368,8 @@ describe('FlexibleColumnLayoutComponent', () => {
             fixture.componentRef.setInput('layout', TWO_COLUMNS_MID_EXPANDED);
             fixture.detectChanges();
 
-            expect(testComponent.flexibleColumnLayout._leftColumnSeparator).toBe('right');
-            expect(testComponent.flexibleColumnLayout._rightColumnSeparator).toBeNull();
+            expect(testComponent.flexibleColumnLayout._leftColumnSeparator()).toBe('right');
+            expect(testComponent.flexibleColumnLayout._rightColumnSeparator()).toBeNull();
         });
 
         it('should set both separators for THREE_COLUMNS_MID_EXPANDED', async () => {
@@ -355,8 +379,8 @@ describe('FlexibleColumnLayoutComponent', () => {
             fixture.componentRef.setInput('layout', THREE_COLUMNS_MID_EXPANDED);
             fixture.detectChanges();
 
-            expect(testComponent.flexibleColumnLayout._leftColumnSeparator).toBe('right');
-            expect(testComponent.flexibleColumnLayout._rightColumnSeparator).toBe('left');
+            expect(testComponent.flexibleColumnLayout._leftColumnSeparator()).toBe('right');
+            expect(testComponent.flexibleColumnLayout._rightColumnSeparator()).toBe('left');
         });
 
         it('should set right separator to "right" for THREE_COLUMNS_END_EXPANDED', async () => {
@@ -366,7 +390,7 @@ describe('FlexibleColumnLayoutComponent', () => {
             fixture.componentRef.setInput('layout', THREE_COLUMNS_END_EXPANDED);
             fixture.detectChanges();
 
-            expect(testComponent.flexibleColumnLayout._rightColumnSeparator).toBe('right');
+            expect(testComponent.flexibleColumnLayout._rightColumnSeparator()).toBe('right');
         });
     });
 
