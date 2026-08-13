@@ -1,4 +1,14 @@
-import { DestroyRef, Directive, DOCUMENT, ElementRef, forwardRef, inject, OnDestroy, OnInit } from '@angular/core';
+import {
+    DestroyRef,
+    Directive,
+    DOCUMENT,
+    ElementRef,
+    forwardRef,
+    inject,
+    NgZone,
+    OnDestroy,
+    OnInit
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { fromEvent, Observable, Observer } from 'rxjs';
 import { filter, share, tap } from 'rxjs/operators';
@@ -40,7 +50,9 @@ export class TableScrollableDirective implements TableScrollable, OnInit, OnDest
 
     /** Scroll events stream */
     private _elementScrollStream: Observable<Event> = new Observable((observer: Observer<Event>) => {
-        const subscription = fromEvent(this.elementRef.nativeElement, 'scroll').subscribe(observer);
+        const subscription = this.ngZone.runOutsideAngular(() =>
+            fromEvent(this.elementRef.nativeElement, 'scroll').subscribe(observer)
+        );
         return () => subscription.unsubscribe();
     }).pipe(
         filter(() => {
@@ -69,7 +81,8 @@ export class TableScrollableDirective implements TableScrollable, OnInit, OnDest
     /** @hidden */
     constructor(
         public elementRef: ElementRef<HTMLElement>,
-        protected scrollDispatcher: TableScrollDispatcherService
+        protected scrollDispatcher: TableScrollDispatcherService,
+        protected ngZone: NgZone
     ) {}
 
     /** @hidden */
@@ -182,8 +195,10 @@ export class TableScrollableDirective implements TableScrollable, OnInit, OnDest
 
     /** Set Scroll Position during component initialization. */
     initializeScrollTop(scrollTop: number): void {
-        setTimeout(() => {
-            this.setScrollTop(scrollTop, false);
+        this.ngZone.runOutsideAngular(() => {
+            setTimeout(() => {
+                this.setScrollTop(scrollTop, false);
+            });
         });
     }
 }

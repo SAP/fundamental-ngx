@@ -2,6 +2,7 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { SPACE } from '@angular/cdk/keycodes';
 import {
+    afterNextRender,
     AfterViewChecked,
     AfterViewInit,
     booleanAttribute,
@@ -1143,10 +1144,16 @@ export class TableComponent<T = any>
         }
         this._shouldEmitRowsChange = false;
         const emitter = this.tableRowsSet;
-        // Use queueMicrotask to defer emission until current synchronous work completes
-        queueMicrotask(() => {
-            emitter.emit();
-        });
+        // Use afterNextRender to defer emission until after Angular CD is stable AND browser layout is complete.
+        // This guarantees that subscribers can safely query DOM (scroll positions, element dimensions, focus).
+        // Unlike queueMicrotask, which runs before zone.js CD settles, afterNextRender preserves the timing
+        // guarantee of the original ngZone.onMicrotaskEmpty approach.
+        afterNextRender(
+            () => {
+                emitter.emit();
+            },
+            { injector: this.injector }
+        );
     }
 
     /** @hidden */
@@ -1834,7 +1841,10 @@ export class TableComponent<T = any>
         if (currentPage >= lastPage) {
             return;
         }
+        // IntersectionObserver callbacks run outside Angular's zone.
+        // Explicitly mark for check to ensure change detection runs.
         this.setCurrentPage(currentPage + 1);
+        this._cdr.markForCheck();
     }
 
     /**
