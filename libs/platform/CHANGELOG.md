@@ -1,3 +1,13 @@
+## 0.64.2-rc.30 (2026-08-13)
+
+### 🩹 Fixes
+
+- **core, platform:** resolve zoneless change detection issues in Flexible Column Layout, Textarea (Platform) and Multi Input (Platform) ([#14465](https://github.com/SAP/fundamental-ngx/pull/14465))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.64.2-rc.29 (2026-08-13)
 
 This was a version bump only for platform to align it with other projects, there were no code changes.
