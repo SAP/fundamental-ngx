@@ -5,6 +5,8 @@ import { FD_LANGUAGE_ENGLISH } from '../languages/english';
 import { FD_LANGUAGE_FRENCH } from '../languages/french';
 import { FD_LANGUAGE_GERMAN } from '../languages/german';
 import { FdLanguage } from '../models';
+import { provideAllFundamentalLanguages } from '../providers';
+import { resetRegistry } from './detect-language';
 import { FD_LANGUAGE, FD_LANGUAGE_AUTO_DETECT, FD_LANGUAGE_SIGNAL, FD_LOCALE, FD_LOCALE_SIGNAL } from './tokens';
 
 describe('Injection Tokens', () => {
@@ -769,6 +771,11 @@ describe('Injection Tokens', () => {
     });
 
     describe('FD_LANGUAGE_AUTO_DETECT', () => {
+        // Auto-detect tests need languages registered; use provideAllFundamentalLanguages()
+        // in each TestBed that exercises non-English locale detection.
+        afterEach(() => {
+            resetRegistry();
+        });
         it('should default to true', () => {
             @Component({
                 selector: 'fd-test',
@@ -797,7 +804,7 @@ describe('Injection Tokens', () => {
 
             TestBed.configureTestingModule({
                 imports: [TestComponent],
-                providers: [{ provide: LOCALE_ID, useValue: 'de-DE' }]
+                providers: [{ provide: LOCALE_ID, useValue: 'de-DE' }, provideAllFundamentalLanguages()]
             });
 
             const fixture = TestBed.createComponent(TestComponent);
@@ -854,7 +861,7 @@ describe('Injection Tokens', () => {
 
             TestBed.configureTestingModule({
                 imports: [TestComponent],
-                providers: [{ provide: LOCALE_ID, useValue: 'de-DE' }]
+                providers: [{ provide: LOCALE_ID, useValue: 'de-DE' }, provideAllFundamentalLanguages()]
             });
 
             const fixture = TestBed.createComponent(TestComponent);
@@ -876,7 +883,7 @@ describe('Injection Tokens', () => {
 
             TestBed.configureTestingModule({
                 imports: [TestComponent],
-                providers: [{ provide: LOCALE_ID, useValue: 'de-DE' }]
+                providers: [{ provide: LOCALE_ID, useValue: 'de-DE' }, provideAllFundamentalLanguages()]
             });
 
             const fixture = TestBed.createComponent(TestComponent);
