@@ -8,9 +8,8 @@ import {
     HostBinding,
     inject,
     OnInit,
-    QueryList,
     ViewChild,
-    ViewChildren,
+    viewChildren,
     ViewEncapsulation
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -71,10 +70,6 @@ export class SettingsGeneratorSidebarLayoutComponent
     private _listElement: ElementRef;
 
     /** @hidden */
-    @ViewChildren('sidebarItem', { read: ElementRef })
-    private readonly _sidebarItems: QueryList<ElementRef<HTMLElement>>;
-
-    /** @hidden */
     searchTerm: string;
 
     /**
@@ -113,6 +108,9 @@ export class SettingsGeneratorSidebarLayoutComponent
 
     /** @hidden */
     private _initialSelectedItemSet = false;
+
+    /** @hidden */
+    private readonly _sidebarItems = viewChildren('sidebarItem', { read: ElementRef });
 
     /** @hidden */
     get _mobileSidebarVisible(): boolean {
@@ -232,10 +230,29 @@ export class SettingsGeneratorSidebarLayoutComponent
     /** @hidden */
     private _focusSelectedSidebarItem(): void {
         queueMicrotask(() => {
-            const target = this._sidebarItems.get(this._selectedIndex) ?? this._sidebarItems.first;
+            // Try to focus immediately in case sidebar items are already rendered.
+            if (this._focusFromSidebarItems()) {
+                return;
+            }
 
-            target?.nativeElement.focus();
+            // Retry on the next paint because signal query results may arrive after this microtask.
+            requestAnimationFrame(() => {
+                this._focusFromSidebarItems();
+            });
         });
+    }
+
+    /** @hidden */
+    private _focusFromSidebarItems(): boolean {
+        const sidebarItems = this._sidebarItems();
+        const target = sidebarItems[this._selectedIndex] ?? sidebarItems[0];
+
+        if (!target) {
+            return false;
+        }
+
+        target.nativeElement.focus();
+        return true;
     }
 
     /** @hidden */
