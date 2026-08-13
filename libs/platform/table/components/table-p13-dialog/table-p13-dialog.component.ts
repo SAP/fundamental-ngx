@@ -43,7 +43,14 @@ const dialogConfig: DialogConfig = {
 };
 
 /**
- * @deprecated
+ * @deprecated Use {@link TableViewSettingsDialogComponent} instead.
+ *
+ * @example
+ * <!-- Before -->
+ * <fdp-table-p13-dialog [table]="table"></fdp-table-p13-dialog>
+ *
+ * <!-- After -->
+ * <fdp-table-view-settings-dialog [table]="table"></fdp-table-view-settings-dialog>
  *
  * This component has been deprecated, please use the fdp-table-view-settings-dialog component instead.
  *

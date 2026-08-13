@@ -1,11 +1,11 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    EventEmitter,
-    Input,
-    OnInit,
-    Output,
+    effect,
+    input,
+    output,
     signal,
+    untracked,
     ViewEncapsulation
 } from '@angular/core';
 import { CollectionFilter } from '@fundamental-ngx/platform/table-helpers';
@@ -53,22 +53,18 @@ export interface IncludeExcludeFiltersResultData {
         FdTranslatePipe
     ]
 })
-export class IncludeExcludeFiltersComponent implements OnInit {
+export class IncludeExcludeFiltersComponent {
     /** Filter data input */
-    @Input()
-    filterData: IncludeExcludeFiltersData | undefined;
+    readonly filterData = input<IncludeExcludeFiltersData>();
 
     /** Validator function for filter rules */
-    @Input()
-    validator?: (rules: CollectionFilter[]) => boolean;
+    readonly validator = input<(rules: CollectionFilter[]) => boolean>();
 
     /** Emits when filters change */
-    @Output()
-    filterChange = new EventEmitter<IncludeExcludeFiltersResultData>();
+    readonly filterChange = output<IncludeExcludeFiltersResultData>();
 
     /** Emits when reset availability changes */
-    @Output()
-    resetAvailabilityChange = new EventEmitter<boolean>();
+    readonly resetAvailabilityChange = output<boolean>();
 
     /** Table columns available for filtering */
     columns: FilterableColumn[] = [];
@@ -109,24 +105,34 @@ export class IncludeExcludeFiltersComponent implements OnInit {
      */
     _excludePanelExpanded = false;
 
+    private initialized = false;
+
     /** @hidden */
-    ngOnInit(): void {
-        if (this.filterData) {
-            this.columns = this.filterData.columns.filter((column) => column.filterable) || [];
-            this._initiateRules(this.filterData.collectionFilter);
-            this._calculateValidRulesCount();
-            this._excludePanelExpanded = this._validExcludeRulesCount() > 0;
-            this._recalculateResetAvailability();
-        }
+    constructor() {
+        // Initialize once when filterData is available
+        effect(() => {
+            const data = this.filterData();
+            if (data && !this.initialized) {
+                this.initialized = true;
+                // Use untracked to prevent signal reads from triggering the effect again
+                untracked(() => {
+                    this.columns = data.columns.filter((column) => column.filterable) || [];
+                    this.initiateRules(data.collectionFilter);
+                    this.calculateValidRulesCount();
+                    this._excludePanelExpanded = this._validExcludeRulesCount() > 0;
+                    this._recalculateResetAvailability();
+                });
+            }
+        });
     }
 
     /** Reset changes to the initial state */
     reset(): void {
-        this._initiateRules();
+        this.initiateRules();
         this._validIncludeRulesCount.set(0);
         this._validExcludeRulesCount.set(0);
         this._recalculateResetAvailability();
-        this._emitChange();
+        this.emitChange();
     }
 
     /** @hidden */
@@ -145,8 +151,8 @@ export class IncludeExcludeFiltersComponent implements OnInit {
         }
 
         this._recalculateResetAvailability();
-        this._calculateValidRulesCount();
-        this._emitChange();
+        this.calculateValidRulesCount();
+        this.emitChange();
     }
 
     /** @hidden */
@@ -165,20 +171,20 @@ export class IncludeExcludeFiltersComponent implements OnInit {
 
     /** @hidden */
     _onRuleStateChange(): void {
-        this._calculateValidRulesCount();
-        this._emitChange();
+        this.calculateValidRulesCount();
+        this.emitChange();
     }
 
     /** @hidden */
     _onRuleChange(): void {
         this._recalculateResetAvailability();
-        this._emitChange();
+        this.emitChange();
     }
 
     /** @hidden */
-    private _initiateRules(initialRules?: CollectionFilter[]): void {
-        this._includeRules = this._createRules(initialRules?.filter(({ exclude }) => !exclude));
-        this._excludeRules = this._createRules(initialRules?.filter(({ exclude }) => exclude));
+    private initiateRules(initialRules?: CollectionFilter[]): void {
+        this._includeRules = this.createRules(initialRules?.filter(({ exclude }) => !exclude));
+        this._excludeRules = this.createRules(initialRules?.filter(({ exclude }) => exclude));
 
         [this._includeRules, this._excludeRules].forEach((rules) => {
             // Rules on initial phase are considered as valid
@@ -191,7 +197,7 @@ export class IncludeExcludeFiltersComponent implements OnInit {
     }
 
     /** @hidden */
-    private _createRules(collectionFilter: CollectionFilter[] = []): FilterRule[] {
+    private createRules(collectionFilter: CollectionFilter[] = []): FilterRule[] {
         return collectionFilter.map(
             ({ field, value, value2, strategy }): FilterRule =>
                 new FilterRule(this.columns, field, strategy, value, value2)
@@ -199,8 +205,8 @@ export class IncludeExcludeFiltersComponent implements OnInit {
     }
 
     /** @hidden */
-    private _getCollectionFiltersFromRules(rules: FilterRule[]): CollectionFilter[] {
-        return rules.filter(this._isRuleValid).map(
+    private getCollectionFiltersFromRules(rules: FilterRule[]): CollectionFilter[] {
+        return rules.filter(this.isRuleValid).map(
             ({ columnKey, strategy, value, value2 }): CollectionFilter => ({
                 field: columnKey!,
                 value,
@@ -211,23 +217,23 @@ export class IncludeExcludeFiltersComponent implements OnInit {
     }
 
     /** @hidden */
-    private _getCollectionFiltersWithExcludeFlag(rules: FilterRule[], exclude: boolean): CollectionFilter[] {
-        return this._getCollectionFiltersFromRules(rules).map((filter): CollectionFilter => ({ ...filter, exclude }));
+    private getCollectionFiltersWithExcludeFlag(rules: FilterRule[], exclude: boolean): CollectionFilter[] {
+        return this.getCollectionFiltersFromRules(rules).map((filter): CollectionFilter => ({ ...filter, exclude }));
     }
 
     /** @hidden */
-    private _calculateValidRulesCount = (): void => {
-        this._validIncludeRulesCount.set(this._includeRules.filter(this._isRuleValid).length);
-        this._validExcludeRulesCount.set(this._excludeRules.filter(this._isRuleValid).length);
+    private calculateValidRulesCount = (): void => {
+        this._validIncludeRulesCount.set(this._includeRules.filter(this.isRuleValid).length);
+        this._validExcludeRulesCount.set(this._excludeRules.filter(this.isRuleValid).length);
     };
 
     /** @hidden */
-    private _isRuleValid = (rule: FilterRule): boolean => rule?.isValid;
+    private isRuleValid = (rule: FilterRule): boolean => rule?.isValid;
 
     /** @hidden */
-    private _emitChange(): void {
-        const includeFilters = this._getCollectionFiltersWithExcludeFlag(this._includeRules, false);
-        const excludeFilters = this._getCollectionFiltersWithExcludeFlag(this._excludeRules, true);
+    private emitChange(): void {
+        const includeFilters = this.getCollectionFiltersWithExcludeFlag(this._includeRules, false);
+        const excludeFilters = this.getCollectionFiltersWithExcludeFlag(this._excludeRules, true);
         const combinedFilters = [...includeFilters, ...excludeFilters];
 
         this.filterChange.emit({ filterBy: combinedFilters });

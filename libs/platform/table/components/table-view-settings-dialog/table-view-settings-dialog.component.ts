@@ -158,7 +158,7 @@ export class TableViewSettingsDialogComponent implements AfterViewInit {
                           filterSelectOptions: col.filterSelectOptions
                       })),
                   filterBy: state?.filterBy ?? [],
-                  validator: this.includeExcludeFilters.validator
+                  validator: this.includeExcludeFilters.validator()
               }
             : null;
 
