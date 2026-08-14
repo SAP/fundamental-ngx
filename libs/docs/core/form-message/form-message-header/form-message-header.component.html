@@ -4,9 +4,43 @@
         The form message is a feature that is used as an information bar. It contains information about an object or a
         status and can be embedded within the detail area of an object or page. The form message cannot act as a stand
         alone component.
-        <br />
-        When using this component, it is advised to manually set <code>aria</code> attributes to manage screenreader
-        functionality.
+
+        <h3>Accessibility</h3>
+        <p>
+            Form messages are announced to screen readers with <code>aria-live="assertive"</code> and
+            <code>aria-atomic="true"</code>, ensuring assistive technologies immediately announce changes.
+        </p>
+        <ul>
+            <li>
+                <b>Automatic ARIA linking</b>: When using <code>fd-form-input-message-group</code>, the component
+                automatically links the form control to the message using the appropriate ARIA attributes:
+                <ul>
+                    <li>
+                        For <b>error</b> messages: sets both <code>aria-errormessage</code> (pointing to the message ID)
+                        and <code>aria-invalid="true"</code>
+                    </li>
+                    <li>
+                        For <b>information/warning/success</b> messages: sets <code>aria-describedby</code> (pointing to
+                        the message ID)
+                    </li>
+                </ul>
+                If you don't provide an <code>id</code> on the form message, a unique default value is automatically
+                assigned.
+            </li>
+            <li>
+                <b>Value state announcement</b>: Each message type displays an icon that needs a text alternative for
+                screen readers. The component automatically provides translated screen reader text that describes the
+                icon's meaning:
+                <ul>
+                    <li><b>Error</b>: "Invalid Entry"</li>
+                    <li><b>Warning</b>: "Warning"</li>
+                    <li><b>Success</b>: "Success"</li>
+                    <li><b>Information</b>: "Information"</li>
+                </ul>
+                You can override the default text by setting the <code>valueStateMessage</code> input if you need
+                context-specific announcements (e.g., "Invalid email format" instead of generic "Invalid Entry").
+            </li>
+        </ul>
     </description>
     <import module="FormModule" subPackage="form"></import>
 

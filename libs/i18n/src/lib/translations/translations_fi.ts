@@ -106,6 +106,12 @@ export default {
         lessLabel: 'Vähemmän',
         moreLabel: '{count} lisää'
     },
+    coreFormMessage: {
+        error: 'Invalid Entry',
+        information: 'Information',
+        success: 'Success',
+        warning: 'Warning'
+    },
     coreGridList: {
         filterBarCancelButtonTitle: 'Peruuta',
         listItemButtonDeleteTitle: 'Poista',

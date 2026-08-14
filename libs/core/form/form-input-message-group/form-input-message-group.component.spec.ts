@@ -403,3 +403,118 @@ describe('FormInputMessageGroupComponent — popover aria-label (#14260)', () =>
         expect(label?.length).toBeGreaterThan(0);
     }));
 });
+
+describe('FormInputMessageGroupComponent — ARIA attributes linking control to message', () => {
+    let fixture: ComponentFixture<FourGroupsTestComponent>;
+    let hostEl: HTMLElement;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [FourGroupsTestComponent]
+        }).compileComponents();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(FourGroupsTestComponent);
+        fixture.detectChanges();
+        hostEl = fixture.nativeElement;
+    });
+
+    it('should set aria-errormessage on input for error message type', fakeAsync(() => {
+        tick();
+        fixture.detectChanges();
+
+        const inputA: HTMLInputElement = hostEl.querySelector('#input-a')!;
+        const inputD: HTMLInputElement = hostEl.querySelector('#input-d')!;
+
+        // Both inputs have error messages, so should have aria-errormessage
+        expect(inputA.getAttribute('aria-errormessage')).toBeTruthy();
+        expect(inputA.hasAttribute('aria-describedby')).toBe(false);
+
+        expect(inputD.getAttribute('aria-errormessage')).toBeTruthy();
+        expect(inputD.hasAttribute('aria-describedby')).toBe(false);
+    }));
+
+    it('should set aria-describedby on input for non-error message types', fakeAsync(() => {
+        tick();
+        fixture.detectChanges();
+
+        const inputB: HTMLInputElement = hostEl.querySelector('#input-b')!;
+        const inputC: HTMLInputElement = hostEl.querySelector('#input-c')!;
+
+        // Warning and information messages should use aria-describedby
+        expect(inputB.getAttribute('aria-describedby')).toBeTruthy();
+        expect(inputB.hasAttribute('aria-errormessage')).toBe(false);
+
+        expect(inputC.getAttribute('aria-describedby')).toBeTruthy();
+        expect(inputC.hasAttribute('aria-errormessage')).toBe(false);
+    }));
+
+    it('should link input to the correct form message ID', fakeAsync(() => {
+        tick();
+        fixture.detectChanges();
+
+        const inputA: HTMLInputElement = hostEl.querySelector('#input-a')!;
+        const formMessageA: HTMLElement = hostEl.querySelector('#input-a ~ fd-form-message')!;
+
+        const messageId = formMessageA.getAttribute('id');
+        expect(messageId).toBeTruthy();
+        expect(inputA.getAttribute('aria-errormessage')).toBe(messageId);
+    }));
+});
+
+@Component({
+    template: `
+        <fd-form-input-message-group>
+            <input id="input-with-custom-describedby" aria-describedby="custom-id" />
+            <fd-form-message type="warning">Warning message</fd-form-message>
+        </fd-form-input-message-group>
+
+        <fd-form-input-message-group>
+            <input id="input-with-custom-errormessage" aria-errormessage="custom-error-id" />
+            <fd-form-message type="error">Error message</fd-form-message>
+        </fd-form-input-message-group>
+    `,
+    imports: [FormInputMessageGroupComponent, FormMessageComponent]
+})
+class CustomAriaAttributesTestComponent {}
+
+describe('FormInputMessageGroupComponent — preserve user-provided ARIA attributes', () => {
+    let fixture: ComponentFixture<CustomAriaAttributesTestComponent>;
+    let hostEl: HTMLElement;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [CustomAriaAttributesTestComponent]
+        }).compileComponents();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(CustomAriaAttributesTestComponent);
+        hostEl = fixture.nativeElement;
+    });
+
+    it('should preserve user-provided aria-describedby attribute', fakeAsync(() => {
+        fixture.detectChanges();
+        tick();
+        fixture.detectChanges();
+
+        const input: HTMLInputElement = hostEl.querySelector('#input-with-custom-describedby')!;
+
+        // User provided aria-describedby should be preserved, not overridden
+        expect(input.getAttribute('aria-describedby')).toBe('custom-id');
+        expect(input.hasAttribute('aria-errormessage')).toBe(false);
+    }));
+
+    it('should preserve user-provided aria-errormessage attribute', fakeAsync(() => {
+        fixture.detectChanges();
+        tick();
+        fixture.detectChanges();
+
+        const input: HTMLInputElement = hostEl.querySelector('#input-with-custom-errormessage')!;
+
+        // User provided aria-errormessage should be preserved, not overridden
+        expect(input.getAttribute('aria-errormessage')).toBe('custom-error-id');
+        expect(input.hasAttribute('aria-describedby')).toBe(false);
+    }));
+});

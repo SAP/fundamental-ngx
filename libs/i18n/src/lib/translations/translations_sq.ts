@@ -106,6 +106,12 @@ export default {
         lessLabel: 'Më pak',
         moreLabel: 'Më shumë'
     },
+    coreFormMessage: {
+        error: 'Invalid Entry',
+        information: 'Information',
+        success: 'Success',
+        warning: 'Warning'
+    },
     coreGridList: {
         filterBarCancelButtonTitle: 'Anulo',
         listItemButtonDeleteTitle: 'Fshi',

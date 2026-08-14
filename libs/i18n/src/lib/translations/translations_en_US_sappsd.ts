@@ -107,6 +107,12 @@ export default {
         lessLabel: '[[[Ļēşş]]]',
         moreLabel: '[[[{count} ɱŏŗē]]]'
     },
+    coreFormMessage: {
+        error: 'Invalid Entry',
+        information: 'Information',
+        success: 'Success',
+        warning: 'Warning'
+    },
     coreGridList: {
         filterBarCancelButtonTitle: '[[[Ĉąŋċēĺ∙∙∙∙∙∙∙∙]]]',
         listItemButtonDeleteTitle: '[[[Ďēĺēţē∙∙∙∙∙∙∙∙]]]',
