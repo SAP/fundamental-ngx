@@ -33,7 +33,7 @@ describe('SettingsGeneratorComponent', () => {
         fixture.detectChanges();
 
         expect(settingsSpy).toHaveBeenCalledTimes(1);
-        expect(settingsSpy).toHaveBeenLastCalledWith(settings);
+        expect(settingsSpy).toHaveBeenCalledWith(settings);
     });
 
     it('should set appropriate layout', () => {
@@ -58,5 +58,40 @@ describe('SettingsGeneratorComponent', () => {
         fixture.detectChanges();
 
         expect((component as any)._currentLayout).toBeFalsy();
+    });
+
+    it('should focus the first sidebar item when opened on desktop', async () => {
+        const requestAnimationFrameSpy = jest
+            .spyOn(globalThis, 'requestAnimationFrame')
+            .mockImplementation((callback: FrameRequestCallback) => {
+                callback(0);
+                return 1;
+            });
+
+        component.settings = {
+            appearance: 'sidebar',
+            sidebarWidth: '20rem',
+            items: [{ id: 'general', title: 'General', items: [] }]
+        } as any;
+
+        fixture.detectChanges();
+        await fixture.whenStable();
+        fixture.detectChanges();
+
+        const firstSidebarItem = fixture.nativeElement.querySelector('#general') as HTMLElement | null;
+        const layoutRef = (component as any)._layoutComponentRef;
+
+        expect(layoutRef).toBeTruthy();
+        const focusSpy = jest.spyOn(firstSidebarItem as HTMLElement, 'focus');
+
+        (layoutRef.instance as any)._selectedIndex = 0;
+        (layoutRef.instance as any)._focusSelectedSidebarItem();
+        await Promise.resolve();
+
+        expect(firstSidebarItem).toBeTruthy();
+        expect(focusSpy).toHaveBeenCalled();
+
+        requestAnimationFrameSpy.mockRestore();
+        focusSpy.mockRestore();
     });
 });

@@ -9,6 +9,7 @@ import {
     inject,
     OnInit,
     ViewChild,
+    viewChildren,
     ViewEncapsulation
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -109,6 +110,9 @@ export class SettingsGeneratorSidebarLayoutComponent
     private _initialSelectedItemSet = false;
 
     /** @hidden */
+    private readonly _sidebarItems = viewChildren('sidebarItem', { read: ElementRef });
+
+    /** @hidden */
     get _mobileSidebarVisible(): boolean {
         return this._isMobile && this._sidebarVisible;
     }
@@ -152,7 +156,7 @@ export class SettingsGeneratorSidebarLayoutComponent
             this._settingsGeneratorContent.setActiveTab(pathArray[1]);
         }
 
-        setTimeout(() => {
+        queueMicrotask(() => {
             element.nativeElement.focus();
         });
     }
@@ -182,11 +186,13 @@ export class SettingsGeneratorSidebarLayoutComponent
                     // In mobile view, we don't need to set initial index, since the section won't be visible to the end user.
                     if (!this._initialSelectedItemSet && !this._isMobile) {
                         this._setSelectedIndex(this._selectedIndex > -1 ? this._selectedIndex : 0);
+                        this._focusSelectedSidebarItem();
                         this._initialSelectedItemSet = true;
                     }
 
                     if (!this._isMobile && this._selectedIndex === -1) {
                         this._setSelectedIndex(0);
+                        this._focusSelectedSidebarItem();
                     }
 
                     this._cdr.detectChanges();
@@ -219,6 +225,34 @@ export class SettingsGeneratorSidebarLayoutComponent
     /** @hidden */
     private _getNormalizedSidebarWidth(width: string | SidebarWidthConfiguration): SidebarWidthConfiguration {
         return typeof width === 'string' ? { minWidth: width, maxWidth: width, width } : width;
+    }
+
+    /** @hidden */
+    private _focusSelectedSidebarItem(): void {
+        queueMicrotask(() => {
+            // Try to focus immediately in case sidebar items are already rendered.
+            if (this._focusFromSidebarItems()) {
+                return;
+            }
+
+            // Retry on the next paint because signal query results may arrive after this microtask.
+            requestAnimationFrame(() => {
+                this._focusFromSidebarItems();
+            });
+        });
+    }
+
+    /** @hidden */
+    private _focusFromSidebarItems(): boolean {
+        const sidebarItems = this._sidebarItems();
+        const target = sidebarItems[this._selectedIndex] ?? sidebarItems[0];
+
+        if (!target) {
+            return false;
+        }
+
+        target.nativeElement.focus();
+        return true;
     }
 
     /** @hidden */
