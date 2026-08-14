@@ -16,7 +16,12 @@ This was a version bump only for i18n to align it with other projects, there wer
 
 ## 0.64.2-rc.29 (2026-08-13)
 
-This was a version bump only for i18n to align it with other projects, there were no code changes.
+### 🚀 Features
+
+- **i18n:** lazy language registry — only registered languages are bundled; English requires no registration ([MIGRATION.md](./MIGRATION.md))
+  - `provideFundamentalTranslations(...langs)` — register specific languages at bootstrap (recommended; keeps bundle small)
+  - `provideAllFundamentalLanguages()` — one-line escape hatch that restores the old all-languages behavior
+  - Dev-mode warning: if a non-English `LOCALE_ID` is used without registering the matching language, the system falls back to English and logs an actionable `console.warn` in development mode
 
 ## 0.64.2-rc.28 (2026-08-12)
 

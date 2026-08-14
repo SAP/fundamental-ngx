@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
     CodeExampleComponent,
+    CodeSnippetComponent,
     ComponentExampleComponent,
     DescriptionComponent,
     DocsSectionTitleComponent,
@@ -24,6 +25,7 @@ import { LocaleOverrideExampleComponent } from './examples/i18n-locale-override-
         SeparatorComponent,
         ComponentExampleComponent,
         CodeExampleComponent,
+        CodeSnippetComponent,
         LanguageChangeExampleComponent,
         LocaleChangeExampleComponent,
         CustomLanguageExampleComponent,
@@ -32,21 +34,19 @@ import { LocaleOverrideExampleComponent } from './examples/i18n-locale-override-
     ]
 })
 export class ChangingTranslationsDocsComponent {
-    basicUsageExample = {
+    registerLanguagesExample: ExampleFile = {
         language: 'typescript',
-        code: `import { FD_LANGUAGE, FdLanguage, FD_LANGUAGE_UKRAINIAN } from '@fundamental-ngx/i18n';
+        code: `import { ApplicationConfig } from '@angular/core';
+import { provideFundamentalTranslations, FD_LANGUAGE_GERMAN, FD_LANGUAGE_FRENCH } from '@fundamental-ngx/i18n';
 
-// app.module
-@NgModule({
-    // ...
-    providers: [
-        {
-            provide: FD_LANGUAGE,
-            useValue: of<FdLanguage>(FD_LANGUAGE_UKRAINIAN),
-        },
-    ],
-})
-export class AppModule {}`
+export const appConfig: ApplicationConfig = {
+  providers: [
+    // Register only the languages your app supports (keeps the bundle small).
+    // English is always available, so English-only apps need no registration.
+    provideFundamentalTranslations(FD_LANGUAGE_GERMAN, FD_LANGUAGE_FRENCH)
+  ]
+};`,
+        fileName: 'app.config'
     };
 
     languageChangeExample: ExampleFile[] = [

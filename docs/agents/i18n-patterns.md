@@ -81,6 +81,41 @@ The shared factory pattern from "Multiple keys" above works only when both the f
 
 ---
 
+## Language Registration (lazy registry)
+
+Since the lazy registry was introduced, only languages **explicitly registered** at bootstrap
+are matchable by `FD_LANGUAGE_SIGNAL`'s auto-detect. English is always registered; all other
+languages must be opted in.
+
+### Register specific languages
+
+```typescript
+// app.config.ts
+import { provideFundamentalTranslations, FD_LANGUAGE_GERMAN, FD_LANGUAGE_FRENCH } from '@fundamental-ngx/i18n';
+
+providers: [provideFundamentalTranslations(FD_LANGUAGE_GERMAN, FD_LANGUAGE_FRENCH)];
+```
+
+Only listed languages are bundled. Auto-detect via `LOCALE_ID` works for registered languages only.
+
+### Restore all-languages behavior
+
+```typescript
+import { provideAllFundamentalLanguages } from '@fundamental-ngx/i18n';
+
+providers: [provideAllFundamentalLanguages()];
+```
+
+Registers all 37 built-in languages — matches pre-lazy behavior. Use as a migration escape hatch.
+
+### Resolution order (registered languages only)
+
+`detectLanguage` resolves in order: exact match → Chinese region-to-script (`zh-CN` → `zh-Hans`)
+→ alias (`nb` → `no`) → base language (`pt-BR` → `pt`) → alias on base → English fallback.
+All steps only match **registered** languages. See `libs/i18n/MIGRATION.md` for full details.
+
+---
+
 ## Testing Translations
 
 ```typescript

@@ -43,16 +43,19 @@
 </fd-docs-section-title>
 <description>
     <p>
-        By default, <code>FD_LANGUAGE_SIGNAL</code> auto-detects the user's language from Angular's
-        <code>LOCALE_ID</code> at bootstrap. This means your app starts in the user's preferred language without any
-        explicit setup.
+        <code>FD_LANGUAGE_SIGNAL</code> auto-detects the user's language from Angular's <code>LOCALE_ID</code> at
+        bootstrap — but only among <strong>registered</strong> languages. English is always registered. For any other
+        language to be matchable, you must register it first:
+    </p>
+    <fd-code-snippet [file]="registerLanguagesExample"></fd-code-snippet>
+    <p>
+        The detection resolves the browser locale against registered languages: exact match first, then base language
+        fallback (e.g., <code>pt-BR</code> resolves to Portuguese), then English as the ultimate fallback. If the
+        browser locale matches an unregistered language, the fallback to English is used and a warning is logged in
+        development mode.
     </p>
     <p>
-        The detection resolves the browser locale against all 37 built-in languages: exact match first, then base
-        language fallback (e.g., <code>pt-BR</code> resolves to Portuguese), then English as the ultimate fallback.
-    </p>
-    <p>
-        To disable auto-detection, provide
+        To disable auto-detection entirely, provide
         <code>{{ '{' }} provide: FD_LANGUAGE_AUTO_DETECT, useValue: false {{ '}' }}</code> in your app config.
     </p>
 </description>
@@ -99,10 +102,22 @@
         </thead>
         <tbody>
             <tr>
-                <td><strong>Default (95% of apps)</strong></td>
+                <td><strong>English-only app (default)</strong></td>
                 <td>
-                    Nothing extra — language auto-detects from the browser, locale derives automatically, UI5 follows if
-                    the bridge is active.
+                    Nothing extra — English is always registered. Auto-detection, locale derivation, and UI5 bridge all
+                    work without any provider.
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Non-English language via auto-detect</strong></td>
+                <td>
+                    Register the languages your app supports with
+                    <code>provideFundamentalTranslations(FD_LANGUAGE_GERMAN, ...)</code> in <code>app.config.ts</code>.
+                    Without this, a non-English <code>LOCALE_ID</code> falls back to English and logs a dev warning.
+                    <strong>Ordering:</strong> place <code>provideFundamentalTranslations(...)</code>
+                    <em>before</em> any provider that reads <code>FD_LANGUAGE_SIGNAL</code> during bootstrap (e.g. in an
+                    earlier <code>provideEnvironmentInitializer</code>). The signal resolves the detected language once,
+                    on first read; if that read happens before registration, it stays on the English fallback.
                 </td>
             </tr>
             <tr>

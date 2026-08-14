@@ -31,25 +31,28 @@
 <separator></separator>
 
 <fd-docs-section-title id="step2-provide" componentName="getting-started">
-    Step 2: Provide a language to your app
+    Step 2: Register languages your app supports
 </fd-docs-section-title>
 <description>
     <p>
-        By default, the i18n system reads Angular's <code>LOCALE_ID</code> and picks the closest built-in language.
-        Since <code>LOCALE_ID</code> defaults to <code>'en-US'</code>, most apps start in English unless you provide it
-        explicitly. To pin a specific language, provide <code>FD_LANGUAGE_SIGNAL</code>:
+        <strong>English works with zero setup.</strong> For any other language you must register it at bootstrap —
+        otherwise a non-English <code>LOCALE_ID</code> falls back to English and logs a warning in development mode.
+    </p>
+    <p>
+        Use <code>provideFundamentalTranslations</code> to register only the languages your app supports (keeps the
+        bundle small):
     </p>
     <fd-code-snippet [file]="provideLanguageExample"></fd-code-snippet>
 
     <p class="fd-margin-top--sm">
-        This provides a <code>WritableSignal&lt;FdLanguage&gt;</code> to the DI tree. All fundamental-ngx components
-        read from it. Available constants: <code>FD_LANGUAGE_ENGLISH</code>, <code>FD_LANGUAGE_GERMAN</code>,
-        <code>FD_LANGUAGE_FRENCH</code>, <code>FD_LANGUAGE_JAPANESE</code>, and 30+ more.
+        To restore the old all-languages behavior (larger bundle, no per-language work required), use
+        <code>provideAllFundamentalLanguages()</code> instead. English-only apps need neither provider.
     </p>
 
     <fd-message-strip [type]="'information'" [dismissible]="false" class="fd-margin-top--sm">
-        <strong>Tip:</strong> Providing the language at the app level makes it available to all components. You can also
-        provide it at the component level if you need different languages in different parts of your app.
+        <strong>Tip:</strong> Providing translations at the app level makes all registered languages available
+        throughout your app. You can still override <code>FD_LANGUAGE_SIGNAL</code> at the component level for
+        component-specific language overrides.
     </fd-message-strip>
 </description>
 
@@ -199,8 +202,9 @@
     <ul>
         <li><strong>Remember user's choice:</strong> Save language preference to localStorage</li>
         <li>
-            <strong>Language detection:</strong> Reads <code>LOCALE_ID</code> at bootstrap — disable with
-            <code>FD_LANGUAGE_AUTO_DETECT</code> if needed
+            <strong>Language detection:</strong> Reads <code>LOCALE_ID</code> at bootstrap against registered languages.
+            Register non-English languages via <code>provideFundamentalTranslations</code>; disable detection entirely
+            with <code>FD_LANGUAGE_AUTO_DETECT: false</code>.
         </li>
         <li><strong>Language dropdown:</strong> Create a dropdown menu for language selection</li>
         <li><strong>Custom translations:</strong> Create your own translation keys for app-specific text</li>

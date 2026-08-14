@@ -1,4 +1,4 @@
-export * from './detect-language';
+export { detectLanguage, registerLanguage } from './detect-language';
 export * from './load-json';
 export * from './load-properties';
 export * from './patch-language';

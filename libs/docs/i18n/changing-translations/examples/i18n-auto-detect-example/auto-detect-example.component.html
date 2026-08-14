@@ -22,8 +22,10 @@
     </div>
     <p class="sap-margin-top-small sap-font-size-small sap-color-content_LabelColor">
         <strong>How it works:</strong> At bootstrap, <code>FD_LANGUAGE_SIGNAL</code> reads Angular's
-        <code>LOCALE_ID</code> and picks the closest built-in language via <code>detectLanguage()</code>. The locale
-        then auto-derives from the language's <code>locale</code> field. To disable, provide
+        <code>LOCALE_ID</code> and resolves it against <strong>registered</strong> languages via
+        <code>detectLanguage()</code>. English is always registered. Non-English languages must be registered via
+        <code>provideFundamentalTranslations(...)</code> — unregistered locales fall back to English with a dev warning.
+        The locale then auto-derives from the matched language's <code>locale</code> field. To disable, provide
         <code>{{ '{' }} provide: FD_LANGUAGE_AUTO_DETECT, useValue: false {{ '}' }}</code
         >.
     </p>

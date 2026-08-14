@@ -5,6 +5,21 @@
 
 ---
 
+## Runtime Language Registration
+
+The i18n registry is **lazy**: only languages explicitly registered at bootstrap are available for auto-detection from `LOCALE_ID`. English is always available — no registration needed for English-only apps.
+
+For apps that need non-English language support, register languages in `app.config.ts`:
+
+- **`provideFundamentalTranslations(...langs)`** — register specific languages (recommended; keeps bundle small)
+- **`provideAllFundamentalLanguages()`** — register all 37 built-in languages (one-line escape hatch)
+
+If a non-English `LOCALE_ID` is used without registering the matching language, the system falls back to English and logs a warning in development mode.
+
+See the [i18n Package README](https://github.com/SAP/fundamental-ngx/blob/main/libs/i18n/README.md) for full provider API and code examples.
+
+---
+
 ## Files You Should/Shouldn't Edit
 
 ### ✅ Automatically Managed by CLI

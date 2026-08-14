@@ -10,6 +10,7 @@
 
 - [1. Description](#1-description)
     - [Quick Start](#quick-start)
+    - [Public API — Language Registration](#public-api--language-registration)
     - [What's Included](#whats-included)
     - [How It Works](#how-it-works)
     - [Adding New Translation Keys](#adding-new-translation-keys)
@@ -26,25 +27,35 @@
 
 ### Quick Start
 
-**1. Provide a language in your app (optional — auto-detects from browser by default):**
+**1. Register the languages your app uses:**
 
-By default, `FD_LANGUAGE_SIGNAL` reads the browser's locale via Angular's `LOCALE_ID` and picks the closest built-in language. An explicit provider is only needed if you want to override the default.
+English works with zero setup. For any other language you **must** register it at bootstrap — otherwise a non-English `LOCALE_ID` silently falls back to English and logs a warning in development mode.
 
 ```typescript
+// app.config.ts
 import { ApplicationConfig } from '@angular/core';
-import { signal } from '@angular/core';
-import { FD_LANGUAGE_SIGNAL, FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n';
+import { provideFundamentalTranslations } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_GERMAN, FD_LANGUAGE_FRENCH } from '@fundamental-ngx/i18n';
 
 export const appConfig: ApplicationConfig = {
     providers: [
-        // Optional: override auto-detection with a specific language
-        {
-            provide: FD_LANGUAGE_SIGNAL,
-            useValue: signal(FD_LANGUAGE_ENGLISH)
-        }
+        // Register only the languages your app supports (keeps the bundle small):
+        provideFundamentalTranslations(FD_LANGUAGE_GERMAN, FD_LANGUAGE_FRENCH)
     ]
 };
 ```
+
+To restore the old behavior of including all 37 languages (larger bundle, no per-language registration needed):
+
+```typescript
+import { provideAllFundamentalLanguages } from '@fundamental-ngx/i18n';
+
+export const appConfig: ApplicationConfig = {
+    providers: [provideAllFundamentalLanguages()]
+};
+```
+
+English-only apps need neither provider.
 
 **2. Use translations in templates:**
 
@@ -140,6 +151,18 @@ providers: [{ provide: FD_LANGUAGE_AUTO_DETECT, useValue: false }];
 ```
 
 When disabled, `FD_LANGUAGE_SIGNAL` defaults to English unless you provide a custom value.
+
+### Public API — Language Registration
+
+| Export                                     | Purpose                                                                                                                                   |
+| ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `provideFundamentalTranslations(...langs)` | Register specific languages at bootstrap. Only listed languages are bundled. **Recommended.**                                             |
+| `provideAllFundamentalLanguages()`         | Register all 37 built-in languages. Restores pre-lazy bundle behavior (one-line escape hatch).                                            |
+| `FD_LANGUAGE_SIGNAL`                       | `InjectionToken<WritableSignal<FdLanguage>>` — the single source of truth for the active language.                                        |
+| `FD_LOCALE_SIGNAL`                         | Derived from `FD_LANGUAGE_SIGNAL.locale`; override only for edge-case locale/language splits.                                             |
+| `FD_LANGUAGE_AUTO_DETECT`                  | Set to `false` to disable browser locale auto-detection (defaults to `true`).                                                             |
+| `registerLanguage(lang, ...aliases)`       | Low-level runtime registration — prefer `provideFundamentalTranslations()`. Useful for languages loaded dynamically (e.g. from a server). |
+| `FD_LANGUAGE_*` constants                  | Pre-compiled translation objects for each supported locale (e.g. `FD_LANGUAGE_GERMAN`).                                                   |
 
 ### What's Included
 

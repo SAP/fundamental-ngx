@@ -51,7 +51,18 @@ export const FD_LANGUAGE_SIGNAL = new InjectionToken<WritableSignal<FdLanguage>>
             const autoDetect = inject(FD_LANGUAGE_AUTO_DETECT);
             if (autoDetect) {
                 const localeId = inject(LOCALE_ID);
-                return signal(detectLanguage(localeId));
+                const lang = detectLanguage(localeId);
+                const normalized = localeId.trim().toLowerCase();
+                const base = normalized.split('-')[0];
+                if (isDevMode() && normalized && base !== 'en' && lang === FD_LANGUAGE_ENGLISH) {
+                    console.warn(
+                        `[@fundamental-ngx/i18n] Locale "${localeId}" was requested (via LOCALE_ID) but no matching language ` +
+                            `is registered, so translations fell back to English. Register it with ` +
+                            `provideFundamentalTranslations(FD_LANGUAGE_GERMAN) (use the constant matching your locale) — ` +
+                            `or provideAllFundamentalLanguages() to restore the pre-0.64.x auto-detect of all built-in languages.`
+                    );
+                }
+                return signal(lang);
             }
             return signal(FD_LANGUAGE_ENGLISH);
         }

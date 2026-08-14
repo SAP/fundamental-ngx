@@ -5,6 +5,8 @@ import { FD_LANGUAGE_ENGLISH } from '../languages/english';
 import { FD_LANGUAGE_FRENCH } from '../languages/french';
 import { FD_LANGUAGE_GERMAN } from '../languages/german';
 import { FdLanguage } from '../models';
+import { provideAllFundamentalLanguages } from '../providers';
+import { registerLanguage, resetRegistry } from './detect-language';
 import { FD_LANGUAGE, FD_LANGUAGE_AUTO_DETECT, FD_LANGUAGE_SIGNAL, FD_LOCALE, FD_LOCALE_SIGNAL } from './tokens';
 
 describe('Injection Tokens', () => {
@@ -769,6 +771,15 @@ describe('Injection Tokens', () => {
     });
 
     describe('FD_LANGUAGE_AUTO_DETECT', () => {
+        // Auto-detect tests need languages registered; use provideAllFundamentalLanguages()
+        // in each TestBed that exercises non-English locale detection.
+        beforeEach(() => {
+            jest.spyOn(console, 'warn').mockImplementation(() => {});
+        });
+        afterEach(() => {
+            jest.restoreAllMocks();
+            resetRegistry();
+        });
         it('should default to true', () => {
             @Component({
                 selector: 'fd-test',
@@ -797,7 +808,7 @@ describe('Injection Tokens', () => {
 
             TestBed.configureTestingModule({
                 imports: [TestComponent],
-                providers: [{ provide: LOCALE_ID, useValue: 'de-DE' }]
+                providers: [{ provide: LOCALE_ID, useValue: 'de-DE' }, provideAllFundamentalLanguages()]
             });
 
             const fixture = TestBed.createComponent(TestComponent);
@@ -854,7 +865,7 @@ describe('Injection Tokens', () => {
 
             TestBed.configureTestingModule({
                 imports: [TestComponent],
-                providers: [{ provide: LOCALE_ID, useValue: 'de-DE' }]
+                providers: [{ provide: LOCALE_ID, useValue: 'de-DE' }, provideAllFundamentalLanguages()]
             });
 
             const fixture = TestBed.createComponent(TestComponent);
@@ -876,12 +887,124 @@ describe('Injection Tokens', () => {
 
             TestBed.configureTestingModule({
                 imports: [TestComponent],
-                providers: [{ provide: LOCALE_ID, useValue: 'de-DE' }]
+                providers: [{ provide: LOCALE_ID, useValue: 'de-DE' }, provideAllFundamentalLanguages()]
             });
 
             const fixture = TestBed.createComponent(TestComponent);
             expect(fixture.componentInstance.langSignal()).toBe(FD_LANGUAGE_GERMAN);
             expect(fixture.componentInstance.localeSignal()).toBe('de');
         });
+    });
+});
+
+// Task B.1 (RED): dev-mode fallback warning — these tests MUST FAIL before implementation.
+// The warning is emitted by the FD_LANGUAGE_SIGNAL factory in tokens.ts, not by detectLanguage.
+// Design: factory checks post-call whether English was returned for a non-English, non-blank locale.
+describe('FD_LANGUAGE_SIGNAL — dev-mode fallback warning', () => {
+    @Component({ selector: 'fd-warn-test', template: '' })
+    class WarnTestComponent {
+        langSignal = inject(FD_LANGUAGE_SIGNAL);
+    }
+
+    beforeEach(() => {
+        jest.spyOn(console, 'warn').mockImplementation(() => {});
+        resetRegistry();
+    });
+
+    afterEach(() => {
+        jest.restoreAllMocks();
+        resetRegistry();
+    });
+
+    it('(a) warns once when non-English locale is unregistered and falls back to English', () => {
+        // German is NOT registered — registry has English only after resetRegistry()
+        TestBed.configureTestingModule({
+            imports: [WarnTestComponent],
+            providers: [{ provide: LOCALE_ID, useValue: 'de' }]
+        });
+
+        TestBed.createComponent(WarnTestComponent);
+
+        expect(console.warn).toHaveBeenCalledTimes(1);
+        const message = (console.warn as jest.Mock).mock.calls[0][0] as string;
+        expect(message).toContain('@fundamental-ngx/i18n');
+        expect(message).toContain('"de"');
+        expect(message).toContain('provideFundamentalTranslations');
+    });
+
+    it('(b) does NOT warn when the requested locale is registered', () => {
+        registerLanguage(FD_LANGUAGE_GERMAN);
+
+        TestBed.configureTestingModule({
+            imports: [WarnTestComponent],
+            providers: [{ provide: LOCALE_ID, useValue: 'de' }]
+        });
+
+        TestBed.createComponent(WarnTestComponent);
+
+        // The deprecation warn from FD_LANGUAGE token must not fire here; only checking our new warn
+        const fallbackWarns = (console.warn as jest.Mock).mock.calls.filter((args) =>
+            String(args[0]).includes('@fundamental-ngx/i18n')
+        );
+        expect(fallbackWarns).toHaveLength(0);
+    });
+
+    it('(c) does NOT warn for bare "en" — English is the intended default, not a missed locale', () => {
+        TestBed.configureTestingModule({
+            imports: [WarnTestComponent],
+            providers: [{ provide: LOCALE_ID, useValue: 'en' }]
+        });
+
+        TestBed.createComponent(WarnTestComponent);
+
+        const fallbackWarns = (console.warn as jest.Mock).mock.calls.filter((args) =>
+            String(args[0]).includes('@fundamental-ngx/i18n')
+        );
+        expect(fallbackWarns).toHaveLength(0);
+    });
+
+    it('(c) does NOT warn for "en-US" — base is English', () => {
+        TestBed.configureTestingModule({
+            imports: [WarnTestComponent],
+            providers: [{ provide: LOCALE_ID, useValue: 'en-US' }]
+        });
+
+        TestBed.createComponent(WarnTestComponent);
+
+        const fallbackWarns = (console.warn as jest.Mock).mock.calls.filter((args) =>
+            String(args[0]).includes('@fundamental-ngx/i18n')
+        );
+        expect(fallbackWarns).toHaveLength(0);
+    });
+
+    it('(c) does NOT warn for empty/blank locale', () => {
+        TestBed.configureTestingModule({
+            imports: [WarnTestComponent],
+            providers: [{ provide: LOCALE_ID, useValue: '' }]
+        });
+
+        TestBed.createComponent(WarnTestComponent);
+
+        const fallbackWarns = (console.warn as jest.Mock).mock.calls.filter((args) =>
+            String(args[0]).includes('@fundamental-ngx/i18n')
+        );
+        expect(fallbackWarns).toHaveLength(0);
+    });
+
+    it('(c) does NOT warn when auto-detect is disabled', () => {
+        TestBed.configureTestingModule({
+            imports: [WarnTestComponent],
+            providers: [
+                { provide: LOCALE_ID, useValue: 'de' },
+                { provide: FD_LANGUAGE_AUTO_DETECT, useValue: false }
+            ]
+        });
+
+        TestBed.createComponent(WarnTestComponent);
+
+        const fallbackWarns = (console.warn as jest.Mock).mock.calls.filter((args) =>
+            String(args[0]).includes('@fundamental-ngx/i18n')
+        );
+        expect(fallbackWarns).toHaveLength(0);
     });
 });

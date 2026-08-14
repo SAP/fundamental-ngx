@@ -41,20 +41,21 @@ export class GettingStartedDocsComponent {
 
     provideLanguageExample: ExampleFile = {
         language: 'typescript',
-        code: `import { ApplicationConfig, signal } from '@angular/core';
-import { FD_LANGUAGE_SIGNAL, FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n';
+        code: `import { ApplicationConfig } from '@angular/core';
+import { provideFundamentalTranslations } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_GERMAN, FD_LANGUAGE_FRENCH } from '@fundamental-ngx/i18n';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    // ... your other providers
-    // Optional — language auto-detects from browser by default.
-    // Only needed if you want to pin a specific language:
-    {
-      provide: FD_LANGUAGE_SIGNAL,
-      useValue: signal(FD_LANGUAGE_ENGLISH)
-    }
+    // Register only the languages your app supports (keeps the bundle small).
+    // English is always available — no registration needed for English-only apps.
+    provideFundamentalTranslations(FD_LANGUAGE_GERMAN, FD_LANGUAGE_FRENCH)
   ]
-};`,
+};
+
+// To include all 37 languages (one-line escape hatch):
+// import { provideAllFundamentalLanguages } from '@fundamental-ngx/i18n';
+// providers: [provideAllFundamentalLanguages()]`,
         fileName: 'app.config'
     };
 
