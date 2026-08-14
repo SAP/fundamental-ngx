@@ -1,3 +1,13 @@
+## 0.64.2-rc.31 (2026-08-14)
+
+### 🩹 Fixes
+
+- **platform:** restore initial sidebar focus in settings generator dialog ([#14467](https://github.com/SAP/fundamental-ngx/pull/14467))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.64.2-rc.30 (2026-08-13)
 
 ### 🩹 Fixes
