@@ -2,7 +2,7 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, forwardRef, inject, input, signal } from '@angular/core';
-import { InitialFocusDirective, Nullable, TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import { Nullable, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import {
     BarElementDirective,
     BarLeftDirective,
@@ -64,7 +64,6 @@ import {
         TemplateDirective,
         TitleComponent,
         ButtonBarComponent,
-        InitialFocusDirective,
         IconTabBarComponent,
         IconTabBarTabComponent
     ],

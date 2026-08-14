@@ -336,4 +336,208 @@ describe('FilterCustomComponent', () => {
             expect(component.contentDensity).toBe(ContentDensityMode.COZY);
         });
     });
+
+    describe('focus behavior', () => {
+        it('should focus the first focusable input in the custom template after view init', async () => {
+            component.filter = buildMockFilter(host.customFilterTpl);
+            component.filterBy = buildCollectionFilter({ min: 0, max: 100 });
+            fixture.detectChanges();
+            await whenStable(fixture);
+
+            const minInput = fixture.nativeElement.querySelector('.min-input') as HTMLInputElement;
+            const focusSpy = jest.spyOn(minInput, 'focus');
+
+            component.ngAfterViewInit();
+
+            expect(focusSpy).toHaveBeenCalled();
+        });
+
+        it('should focus a button if it is the first focusable element', async () => {
+            const buttonTemplate = TestBed.createComponent(ButtonTemplateHostComponent);
+            buttonTemplate.detectChanges();
+
+            component.filter = buildMockFilter(buttonTemplate.componentInstance.buttonTpl);
+            component.filterBy = buildCollectionFilter({});
+            fixture.detectChanges();
+            await whenStable(fixture);
+
+            const button = fixture.nativeElement.querySelector('button') as HTMLButtonElement;
+            const focusSpy = jest.spyOn(button, 'focus');
+
+            component.ngAfterViewInit();
+
+            expect(focusSpy).toHaveBeenCalled();
+        });
+
+        it('should focus a select element if present', async () => {
+            const selectTemplate = TestBed.createComponent(SelectTemplateHostComponent);
+            selectTemplate.detectChanges();
+
+            component.filter = buildMockFilter(selectTemplate.componentInstance.selectTpl);
+            component.filterBy = buildCollectionFilter({});
+            fixture.detectChanges();
+            await whenStable(fixture);
+
+            const select = fixture.nativeElement.querySelector('select') as HTMLSelectElement;
+            const focusSpy = jest.spyOn(select, 'focus');
+
+            component.ngAfterViewInit();
+
+            expect(focusSpy).toHaveBeenCalled();
+        });
+
+        it('should focus an element with tabindex="0"', async () => {
+            const tabindexTemplate = TestBed.createComponent(TabindexTemplateHostComponent);
+            tabindexTemplate.detectChanges();
+
+            component.filter = buildMockFilter(tabindexTemplate.componentInstance.tabindexTpl);
+            component.filterBy = buildCollectionFilter({});
+            fixture.detectChanges();
+            await whenStable(fixture);
+
+            const div = fixture.nativeElement.querySelector('div[tabindex="0"]') as HTMLElement;
+            const focusSpy = jest.spyOn(div, 'focus');
+
+            component.ngAfterViewInit();
+
+            expect(focusSpy).toHaveBeenCalled();
+        });
+
+        it('should skip disabled inputs when focusing', async () => {
+            const disabledTemplate = TestBed.createComponent(DisabledInputTemplateHostComponent);
+            disabledTemplate.detectChanges();
+
+            component.filter = buildMockFilter(disabledTemplate.componentInstance.disabledTpl);
+            component.filterBy = buildCollectionFilter({});
+            fixture.detectChanges();
+            await whenStable(fixture);
+
+            const enabledInput = fixture.nativeElement.querySelector('input:not([disabled])') as HTMLInputElement;
+            const focusSpy = jest.spyOn(enabledInput, 'focus');
+
+            component.ngAfterViewInit();
+
+            expect(focusSpy).toHaveBeenCalled();
+        });
+
+        it('should not focus anything if no focusable elements exist', async () => {
+            const noFocusTemplate = TestBed.createComponent(NoFocusTemplateHostComponent);
+            noFocusTemplate.detectChanges();
+
+            component.filter = buildMockFilter(noFocusTemplate.componentInstance.noFocusTpl);
+            component.filterBy = buildCollectionFilter({});
+            fixture.detectChanges();
+            await whenStable(fixture);
+
+            // Should not throw when no focusable elements exist
+            expect(() => component.ngAfterViewInit()).not.toThrow();
+        });
+
+        it('should skip elements with tabindex="-1"', async () => {
+            const negativeTabindexTemplate = TestBed.createComponent(NegativeTabindexTemplateHostComponent);
+            negativeTabindexTemplate.detectChanges();
+
+            component.filter = buildMockFilter(negativeTabindexTemplate.componentInstance.negativeTpl);
+            component.filterBy = buildCollectionFilter({});
+            fixture.detectChanges();
+            await whenStable(fixture);
+
+            const negativeTabindex = fixture.nativeElement.querySelector('div[tabindex="-1"]') as HTMLElement;
+            const positiveTabindex = fixture.nativeElement.querySelector('div[tabindex="0"]') as HTMLElement;
+
+            const negativeFocusSpy = jest.spyOn(negativeTabindex, 'focus');
+            const positiveFocusSpy = jest.spyOn(positiveTabindex, 'focus');
+
+            component.ngAfterViewInit();
+
+            expect(negativeFocusSpy).not.toHaveBeenCalled();
+            expect(positiveFocusSpy).toHaveBeenCalled();
+        });
+
+        it('should use querySelector with proper selectors', () => {
+            const querySelectorSpy = jest.spyOn(component['_elementRef'].nativeElement, 'querySelector');
+
+            component.ngAfterViewInit();
+
+            expect(querySelectorSpy).toHaveBeenCalledWith(expect.stringContaining('input:not([disabled])'));
+            expect(querySelectorSpy).toHaveBeenCalledWith(expect.stringContaining('button:not([disabled])'));
+        });
+    });
 });
+
+@Component({
+    template: `
+        <ng-template #buttonTpl let-model>
+            <button type="button">Filter</button>
+        </ng-template>
+    `
+})
+class ButtonTemplateHostComponent {
+    @ViewChild('buttonTpl', { static: true })
+    buttonTpl: TemplateRef<any>;
+}
+
+@Component({
+    template: `
+        <ng-template #selectTpl let-model>
+            <select>
+                <option>Option 1</option>
+                <option>Option 2</option>
+            </select>
+        </ng-template>
+    `
+})
+class SelectTemplateHostComponent {
+    @ViewChild('selectTpl', { static: true })
+    selectTpl: TemplateRef<any>;
+}
+
+@Component({
+    template: `
+        <ng-template #tabindexTpl let-model>
+            <div tabindex="0">Focusable div</div>
+        </ng-template>
+    `
+})
+class TabindexTemplateHostComponent {
+    @ViewChild('tabindexTpl', { static: true })
+    tabindexTpl: TemplateRef<any>;
+}
+
+@Component({
+    template: `
+        <ng-template #disabledTpl let-model>
+            <input disabled />
+            <input />
+        </ng-template>
+    `
+})
+class DisabledInputTemplateHostComponent {
+    @ViewChild('disabledTpl', { static: true })
+    disabledTpl: TemplateRef<any>;
+}
+
+@Component({
+    template: `
+        <ng-template #noFocusTpl let-model>
+            <span>No focusable elements</span>
+        </ng-template>
+    `
+})
+class NoFocusTemplateHostComponent {
+    @ViewChild('noFocusTpl', { static: true })
+    noFocusTpl: TemplateRef<any>;
+}
+
+@Component({
+    template: `
+        <ng-template #negativeTpl let-model>
+            <div tabindex="-1">Skip me</div>
+            <div tabindex="0">Focus me</div>
+        </ng-template>
+    `
+})
+class NegativeTabindexTemplateHostComponent {
+    @ViewChild('negativeTpl', { static: true })
+    negativeTpl: TemplateRef<any>;
+}

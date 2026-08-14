@@ -1,8 +1,10 @@
 import {
     afterEveryRender,
+    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    ElementRef,
     EventEmitter,
     inject,
     Input,
@@ -33,7 +35,7 @@ import { TableViewSettingsFilterComponent } from '../table-view-settings-filter.
     providers: [contentDensityObserverProviders()],
     imports: [NgTemplateOutlet]
 })
-export class FilterCustomComponent {
+export class FilterCustomComponent implements AfterViewInit {
     /** ViewSettingsFilter options the filter is created from */
     @Input()
     filter: TableViewSettingsFilterComponent;
@@ -75,8 +77,27 @@ export class FilterCustomComponent {
     private readonly _cdr = inject(ChangeDetectorRef);
 
     /** @hidden */
+    private readonly _elementRef = inject(ElementRef);
+
+    /** @hidden */
     constructor(private contentDensityObserver: ContentDensityObserver) {
         afterEveryRender(() => this._checkValueChanges());
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        // Focus the first focusable element in the custom template
+        const focusableSelectors = [
+            'input:not([disabled])',
+            'select:not([disabled])',
+            'textarea:not([disabled])',
+            'button:not([disabled])',
+            'a[href]',
+            '[tabindex]:not([tabindex="-1"])'
+        ].join(', ');
+
+        const firstFocusable = this._elementRef.nativeElement.querySelector(focusableSelectors);
+        firstFocusable?.focus();
     }
 
     /** @hidden */

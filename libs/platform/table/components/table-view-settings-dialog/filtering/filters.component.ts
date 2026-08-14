@@ -1,9 +1,14 @@
 import { NgTemplateOutlet } from '@angular/common';
 import {
+    afterNextRender,
     AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    effect,
+    ElementRef,
+    inject,
+    Injector,
     input,
     Input,
     OnInit,
@@ -73,8 +78,31 @@ export class FiltersComponent implements AfterViewInit, OnInit {
     /** Reference to the available steps */
     readonly ACTIVE_STEP = ACTIVE_STEP;
 
+    /** @hidden */
+    private readonly _elementRef = inject(ElementRef);
+
+    /** @hidden */
+    private readonly _injector = inject(Injector);
+
     /** hidden */
-    constructor(private readonly _cd: ChangeDetectorRef) {}
+    constructor(private readonly _cd: ChangeDetectorRef) {
+        // Focus first focusable element when returning to the filters list
+        effect(() => {
+            const step = this.activeStep();
+            if (step === ACTIVE_STEP.SELECT_FILTER) {
+                afterNextRender(
+                    () => {
+                        // Query from the root element to find the list items rendered via template outlet
+                        const firstListItem = document.querySelector('li[fd-list-item]');
+                        if (firstListItem instanceof HTMLElement) {
+                            firstListItem.focus();
+                        }
+                    },
+                    { injector: this._injector }
+                );
+            }
+        });
+    }
 
     /** hidden */
     ngOnInit(): void {

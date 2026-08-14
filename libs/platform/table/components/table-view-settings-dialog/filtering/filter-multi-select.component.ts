@@ -1,4 +1,14 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
+import {
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    Component,
+    EventEmitter,
+    Input,
+    Output,
+    QueryList,
+    ViewChildren,
+    ViewEncapsulation
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { ListComponent, ListItemComponent, ListTitleDirective } from '@fundamental-ngx/core/list';
@@ -19,7 +29,7 @@ type SelectableOption = TableFilterSelectOption & { selected: boolean };
     encapsulation: ViewEncapsulation.None,
     imports: [ListComponent, ListItemComponent, CheckboxComponent, FormsModule, ListTitleDirective, FdTranslatePipe]
 })
-export class FilterMultiSelectComponent {
+export class FilterMultiSelectComponent implements AfterViewInit {
     /** Selectable filter options */
     @Input()
     options: TableFilterSelectOption[] = [];
@@ -41,6 +51,10 @@ export class FilterMultiSelectComponent {
     @Output()
     valueChange: EventEmitter<any[]> = new EventEmitter();
 
+    /** @hidden */
+    @ViewChildren(ListItemComponent)
+    listItems: QueryList<ListItemComponent>;
+
     /**
      * @hidden
      * Currently selected values
@@ -49,6 +63,11 @@ export class FilterMultiSelectComponent {
 
     /** @hidden */
     _selectableOptions: SelectableOption[];
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        this.listItems.first?.focus();
+    }
 
     /** @hidden */
     _onSelectChange(option: SelectableOption, selected: boolean): void {
