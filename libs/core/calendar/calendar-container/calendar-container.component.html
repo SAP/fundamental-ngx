@@ -1,27 +1,115 @@
 <div class="fd-calendar-container-inner" (mouseleave)="onHoverChange(null)">
-    @let isVertical = layout() === 'vertical';
-    @for (m of calendarMonths(); track $index; let last = $last) {
-        <fd-calendar
-            [calType]="calType()"
-            [selectedRangeDate]="selectedRangeDate()"
-            [selectedDate]="selectedDate()"
-            [rangeHoverEffect]="rangeHoverEffect()"
-            [markWeekends]="markWeekends()"
-            [showWeekNumbers]="showWeekNumbers()"
-            [startingDayOfWeek]="startingDayOfWeek()!"
-            [disableFunction]="disableFunction()!"
-            [disableRangeStartFunction]="disableRangeStartFunction()!"
-            [disableRangeEndFunction]="disableRangeEndFunction()!"
-            [specialDaysRules]="specialDaysRules()"
-            [currentMonth]="m"
-            [hoverDate]="hoverDate()"
-            (hoverDateChange)="onHoverChange($event)"
-            (selectedRangeDateChange)="onRangeChange($event)"
-            (selectedDateChange)="onDateChange($event)"
-            (navigated)="onCalendarNavigated($event, $index)"
-            [attr.aria-label]="getSlotAriaLabel(m, $index)"
-            [hidePreviousArrow]="$index > 0"
-            [hideNextArrow]="isVertical ? $index > 0 : !last"
-        ></fd-calendar>
+    @let isPickerYearMode =
+        pickerState().open && (pickerState().view === 'year' || pickerState().view === 'aggregatedYear');
+
+    @if (isPickerYearMode) {
+        <header class="fd-calendar-container__aggregate-header">
+            <button
+                fd-button
+                fdType="transparent"
+                glyph="slim-arrow-left"
+                type="button"
+                aria-label="Previous"
+                (click)="shiftPickerYearWindow(-1)"
+            ></button>
+            @if (pickerState().view === 'year') {
+                <button
+                    fd-button
+                    fdType="transparent"
+                    type="button"
+                    class="fd-calendar-container__aggregate-header__label"
+                    (click)="onAggregateYearRangeLabelClick()"
+                >
+                    {{ pickerYearRangeLabel() }}
+                </button>
+            } @else {
+                <span class="fd-calendar-container__aggregate-header__spacer"></span>
+            }
+            <button
+                fd-button
+                fdType="transparent"
+                glyph="slim-arrow-right"
+                type="button"
+                aria-label="Next"
+                (click)="shiftPickerYearWindow(1)"
+            ></button>
+        </header>
+    }
+
+    <div class="fd-calendar-container__row">
+        @let isVertical = layout() === 'vertical';
+        @for (m of calendarMonths(); track $index; let last = $last) {
+            <fd-calendar
+                [class.fd-calendar-container__slot--headers-hidden]="isPickerYearMode"
+                [calType]="calType()"
+                [selectedRangeDate]="selectedRangeDate()"
+                [selectedDate]="selectedDate()"
+                [rangeHoverEffect]="rangeHoverEffect()"
+                [markWeekends]="markWeekends()"
+                [showWeekNumbers]="showWeekNumbers()"
+                [startingDayOfWeek]="startingDayOfWeek()!"
+                [disableFunction]="disableFunction()!"
+                [disableRangeStartFunction]="disableRangeStartFunction()!"
+                [disableRangeEndFunction]="disableRangeEndFunction()!"
+                [specialDaysRules]="specialDaysRules()"
+                [currentMonth]="m"
+                [hoverDate]="hoverDate()"
+                (hoverDateChange)="onHoverChange($event)"
+                (selectedRangeDateChange)="onRangeChange($event)"
+                (selectedDateChange)="onDateChange($event)"
+                (navigated)="onCalendarNavigated($event, $index)"
+                [attr.aria-label]="getSlotAriaLabel(m, $index)"
+                [hidePreviousArrow]="$index > 0"
+                [hideNextArrow]="isVertical ? $index > 0 : !last"
+                [monthYearPickerMode]="'popover'"
+                (activeViewChange)="onCalendarTriggerView($event, $index)"
+            ></fd-calendar>
+        }
+    </div>
+
+    @if (pickerState().open) {
+        <div class="fd-calendar-container__picker-backdrop" (click)="closeContainerPicker()" aria-hidden="true"></div>
+        <div
+            class="fd-calendar-container__picker-overlay"
+            #containerPickerOverlay
+            role="dialog"
+            [attr.aria-label]="pickerOverlayAriaLabel()"
+            (keydown)="onContainerPickerKeydown($event)"
+        >
+            @switch (pickerState().view) {
+                @case ('month') {
+                    <!--
+                        isDateRangeMonthYearFormat opts <fd-calendar-month-view> into 'long' month names
+                        (January, February) instead of default 'short' (Jan, Feb). The input name reads
+                        oddly here — it was originally added for date-range display format — but reusing
+                        it avoids adding new API surface for a single-line visual concern.
+                    -->
+                    <fd-calendar-month-view
+                        [monthSelected]="calendarMonths()[pickerState().calendarIndex]?.month ?? 1"
+                        [year]="calendarMonths()[pickerState().calendarIndex]?.year ?? 2026"
+                        [id]="id"
+                        [isDateRangeMonthYearFormat]="true"
+                        (monthClicked)="onPickerMonthSelected($event)"
+                    ></fd-calendar-month-view>
+                }
+                @case ('year') {
+                    <fd-calendar-year-view
+                        [yearSelected]="pickerYearAnchor()"
+                        [yearViewGrid]="yearViewGrid()"
+                        [id]="id"
+                        (yearClicked)="onPickerYearSelected($event)"
+                    ></fd-calendar-year-view>
+                }
+                @case ('aggregatedYear') {
+                    <fd-calendar-aggregated-year-view
+                        [yearSelected]="pickerYearAnchor()"
+                        [yearViewGrid]="yearViewGrid()"
+                        [aggregatedYearsViewGrid]="aggregatedYearViewGrid()"
+                        [id]="id"
+                        (yearsClicked)="onPickerYearsSelected($event.startYear)"
+                    ></fd-calendar-aggregated-year-view>
+                }
+            }
+        </div>
     }
 </div>

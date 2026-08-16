@@ -1,4 +1,5 @@
 import {
+    booleanAttribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -6,15 +7,13 @@ import {
     ElementRef,
     EventEmitter,
     Input,
+    input,
     OnChanges,
     OnInit,
     Output,
     SimpleChanges,
     ViewChild,
-    ViewEncapsulation,
-    booleanAttribute,
-    inject,
-    input
+    ViewEncapsulation
 } from '@angular/core';
 
 import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';

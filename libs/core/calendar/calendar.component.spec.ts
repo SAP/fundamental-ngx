@@ -469,6 +469,120 @@ describe('CalendarComponent', () => {
     });
 
     // ---------------------------------------------------------------------------
+    // monthYearPickerMode — picker overlay (AC1–AC9, AC13)
+    // ---------------------------------------------------------------------------
+
+    describe('monthYearPickerMode', () => {
+        // AC1 — input defaults to 'inline'
+        it('monthYearPickerMode defaults to "inline"', () => {
+            expect(component.monthYearPickerMode()).toBe('inline');
+        });
+
+        it('monthYearPickerMode accepts "popover"', () => {
+            fixture.componentRef.setInput('monthYearPickerMode', 'popover');
+            fixture.detectChanges();
+            expect(component.monthYearPickerMode()).toBe('popover');
+        });
+
+        // AC2 — in popover mode, day-view always rendered
+        it('popover mode: fd-calendar-day-view is always rendered even when activeView !== "day"', () => {
+            fixture.componentRef.setInput('monthYearPickerMode', 'popover');
+            component.activeView = 'month';
+            fixture.detectChanges();
+            expect(fixture.nativeElement.querySelector('fd-calendar-day-view')).not.toBeNull();
+        });
+
+        it('inline mode (default): fd-calendar-day-view is absent when activeView === "month"', () => {
+            // Ensure inline mode (some prior tests in this describe set popover mode)
+            fixture.componentRef.setInput('monthYearPickerMode', 'inline');
+            component.activeView = 'month';
+            fixture.detectChanges();
+            expect(fixture.nativeElement.querySelector('fd-calendar-day-view')).toBeNull();
+            expect(fixture.nativeElement.querySelector('fd-calendar-month-view')).not.toBeNull();
+        });
+
+        // AC2 (Round 2 contract) — in popover mode, day-view always rendered; activeView stays 'day'
+        // Note: overlay + backdrop moved to container in Round 2 — not present in fd-calendar's own DOM.
+        it('popover mode: fd-calendar-day-view is always rendered and activeView stays "day"', () => {
+            fixture.componentRef.setInput('monthYearPickerMode', 'popover');
+            fixture.detectChanges();
+
+            // Calling handleActiveViewChange in popover mode should NOT change activeView
+            component.handleActiveViewChange('month');
+            fixture.detectChanges();
+
+            expect(component.activeView).toBe('day');
+            expect(fixture.nativeElement.querySelector('fd-calendar-day-view')).not.toBeNull();
+        });
+
+        // AC3/AC4 (Round 2) — overlay and backdrop are NOT inside fd-calendar's own DOM (moved to container)
+        it('popover mode: fd-calendar owns no overlay or backdrop element', () => {
+            fixture.componentRef.setInput('monthYearPickerMode', 'popover');
+            // Even if activeView were forced to non-day, calendar should not render overlay
+            component.activeView = 'month';
+            fixture.detectChanges();
+            expect(fixture.nativeElement.querySelector('.fd-calendar__picker-overlay')).toBeNull();
+            expect(fixture.nativeElement.querySelector('.fd-calendar__picker-backdrop')).toBeNull();
+        });
+
+        // AC6/AC7 (moved to container) — calendar's own backdrop/ESC handlers removed in Round 2
+        // Regression guard: handleActiveViewChange in popover mode emits activeViewChange but does not update activeView
+        it('popover mode: handleActiveViewChange emits activeViewChange without changing activeView', () => {
+            fixture.componentRef.setInput('monthYearPickerMode', 'popover');
+            fixture.detectChanges();
+
+            const spy = jest.fn();
+            component.activeViewChange.subscribe(spy);
+
+            component.handleActiveViewChange('year');
+            fixture.detectChanges();
+
+            expect(spy).toHaveBeenCalledWith('year');
+            expect(component.activeView).toBe('day'); // calendar stays on day
+        });
+
+        // AC9 — month picker selection → navigated output emits; calendar stays on day
+        it('handleMonthViewChange in popover mode emits navigated and keeps activeView "day"', () => {
+            fixture.componentRef.setInput('monthYearPickerMode', 'popover');
+            component.activeView = 'day';
+            fixture.detectChanges();
+
+            const spy = jest.fn();
+            component.navigated.subscribe(spy);
+
+            component.handleMonthViewChange(3);
+            fixture.detectChanges();
+
+            expect(spy).toHaveBeenCalled();
+            expect(component.activeView).toBe('day');
+        });
+
+        // AC11 — inline mode unchanged (regression guard)
+        it('inline mode: view-replacement ladder works exactly as before', () => {
+            fixture.componentRef.setInput('monthYearPickerMode', 'inline');
+            component.activeView = 'day';
+            fixture.detectChanges();
+
+            // Transition to year — uses handleActiveViewChange to trigger proper OnPush CD
+            component.handleActiveViewChange('year');
+            fixture.detectChanges();
+            expect(fixture.nativeElement.querySelector('fd-calendar-year-view')).not.toBeNull();
+            expect(fixture.nativeElement.querySelector('fd-calendar-day-view')).toBeNull();
+
+            // Transition to aggregatedYear
+            component.handleActiveViewChange('aggregatedYear');
+            fixture.detectChanges();
+            expect(fixture.nativeElement.querySelector('fd-calendar-aggregated-year-view')).not.toBeNull();
+            expect(fixture.nativeElement.querySelector('fd-calendar-year-view')).toBeNull();
+
+            // Back to day
+            component.handleActiveViewChange('day');
+            fixture.detectChanges();
+            expect(fixture.nativeElement.querySelector('fd-calendar-day-view')).not.toBeNull();
+        });
+    });
+
+    // ---------------------------------------------------------------------------
     // T2.1 — Integration: Escape from day-view when hidePreviousArrow=true (Wave 2 / S1 BLOCKER)
     // ---------------------------------------------------------------------------
 

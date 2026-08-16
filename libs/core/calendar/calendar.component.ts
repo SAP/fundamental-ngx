@@ -23,14 +23,13 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 
-import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamental-ngx/core/datetime';
-import { SpecialDayRule } from '@fundamental-ngx/core/shared';
-
 import {
     ContentDensityModule,
     ContentDensityObserver,
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
+import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamental-ngx/core/datetime';
+import { SpecialDayRule } from '@fundamental-ngx/core/shared';
 import { FD_LANGUAGE_SIGNAL, resolveTranslationSignal } from '@fundamental-ngx/i18n';
 import { createMissingDateImplementationError } from './calendar-errors';
 import { CalendarHeaderComponent } from './calendar-header/calendar-header.component';
@@ -324,6 +323,18 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     /** External hover date for cross-calendar hover coordination. */
     readonly hoverDate = input<D | null | undefined>(null);
 
+    /**
+     * Controls how the month/year/year-range pickers are presented.
+     * - `'inline'` (default): clicking the month/year label replaces the day grid with the picker
+     *   (preserves existing single-calendar behavior).
+     * - `'popover'`: clicking the month/year label opens a calendar-local overlay floating over the
+     *   day grid; the day grid remains visible behind a scoped backdrop.
+     *
+     * Container-coordination member. Used by `<fd-calendar-container>` to enable multi-month picker UX.
+     * Standalone consumers should leave this at `'inline'`.
+     */
+    readonly monthYearPickerMode = input<'inline' | 'popover'>('inline');
+
     /** Emitted when the user navigates (prev/next) and the displayed month/year changes. */
     readonly navigated = output<CalendarCurrent>();
 
@@ -538,6 +549,18 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
      */
     handleActiveViewChange(activeView: FdCalendarView): void {
         if (activeView === this.activeView) {
+            return;
+        }
+
+        // In popover mode the container owns the overlay — emit upward without self-updating.
+        if (this.monthYearPickerMode() === 'popover' && activeView !== FdCalendarViewEnum.Day) {
+            this.activeViewChange.emit(activeView);
+            // The header toggles its own local activeView copy before emitting.
+            // Reset it directly so the header display reverts to day-view labels.
+            if (this._calendarHeaderComponent) {
+                this._calendarHeaderComponent.activeView = FdCalendarViewEnum.Day;
+            }
+            this._changeDetectorRef.markForCheck();
             return;
         }
 

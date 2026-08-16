@@ -1,22 +1,109 @@
 fd-calendar-container {
     display: block;
-    overflow: hidden;
+    position: relative;
 
     .fd-calendar {
         box-shadow: none;
         border-radius: 0;
+        // Establish a stacking context so day cells cannot escape the backdrop's z-index gate.
+        position: relative;
+        z-index: 0;
+    }
+}
+
+.fd-calendar-container-inner {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+}
+
+.fd-calendar-container__row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--fdCalendarContainerGap, 1rem);
+
+    .fd-calendar-container--vertical & {
+        flex-direction: column;
     }
 
-    // Reason: CSS custom properties cannot be used as @media query bounds — --sapBreakpoint_M_Min
-    // exists as a SCSS/LESS variable only, not as a runtime-usable media query value.
-    // At N≥3 the natural horizontal width is 3×18rem + 2×1rem = 56rem (3 calendars + 2 gaps).
-    // Below 56rem any N≥3 layout overflows; collapsing to vertical is the safe fallback.
+    // N≥3 fallback below 56rem — collapse to column even in horizontal.
     // 55.9375rem = 895px (1px below 56rem to avoid triggering at exact boundary).
     @media (max-width: 55.9375rem) {
-        &:not(.fd-calendar-container--vertical) {
-            .fd-calendar-container-inner {
-                flex-direction: column;
-            }
+        .fd-calendar-container:not(.fd-calendar-container--vertical) & {
+            flex-direction: column;
         }
     }
+}
+
+fd-calendar-header {
+    position: relative;
+    // Above backdrop so per-calendar headers stay clickable while picker is open.
+    z-index: 101;
+}
+
+fd-calendar-container {
+    .fd-calendar {
+        // Weekday row (Sun Mon Tue...) sits above backdrop, matches header treatment.
+        // Scoped to fd-calendar-container so single-calendar consumers are unaffected.
+        fd-calendar-day-view thead.fd-calendar__group {
+            position: relative;
+            z-index: 101;
+        }
+    }
+}
+
+.fd-calendar-container__picker-backdrop {
+    position: absolute;
+    inset: 0;
+    background-color: var(--sapBlockLayer_Background);
+    opacity: var(--sapBlockLayer_Opacity);
+    // Above the fd-calendar stacking contexts (z-index: 0), below headers (z-index: 101).
+    z-index: 100;
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+.fd-calendar-container__picker-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    // Above headers so picker floats over everything.
+    z-index: 102;
+    background-color: var(--sapList_Background);
+    border-radius: var(--sapElement_BorderCornerRadius);
+    box-shadow: var(--sapContent_Shadow2);
+    padding: 0.5rem;
+    max-width: calc(100% - 2rem);
+    max-height: calc(100% - 2rem);
+    overflow: auto;
+}
+
+.fd-calendar-container__aggregate-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    background-color: var(--sapList_Background);
+    // Above per-calendar headers (hidden anyway) and above backdrop.
+    position: relative;
+    z-index: 102;
+}
+
+.fd-calendar-container__aggregate-header__label {
+    flex: 1;
+    text-align: center;
+    font-weight: bold;
+}
+
+.fd-calendar-container__aggregate-header__spacer {
+    flex: 1;
+}
+
+// Hide per-calendar headers when aggregate header is showing.
+.fd-calendar-container__slot--headers-hidden fd-calendar-header {
+    display: none;
 }

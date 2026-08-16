@@ -13,7 +13,8 @@
     [hideNextArrow]="hideNextArrow()"
 ></fd-calendar-header>
 @if (_currentlyDisplayed) {
-    @if (activeView === 'day') {
+    @if (monthYearPickerMode() === 'popover') {
+        <!-- Day grid is always rendered in popover mode; picker overlay is owned by fd-calendar-container. -->
         <fd-calendar-day-view
             [selectedDate]="selectedDate"
             [selectedMultipleDates]="selectedMultipleDates"
@@ -43,41 +44,72 @@
             (nextMonthSelect)="displayNextMonth()"
             (previousMonthSelect)="displayPreviousMonth()"
         ></fd-calendar-day-view>
-    } @else if (activeView === 'month') {
-        <fd-calendar-month-view
-            [monthSelected]="_currentlyDisplayed.month"
-            [year]="_currentlyDisplayed.year"
-            [id]="id"
-            [focusEscapeFunction]="escapeFocusFunction"
-            [isDateRangeMonthYearFormat]="isDateRangeMonthFormat()"
-            [selectedRangeDate]="selectedRangeDate"
-            [rangeHoverEffect]="rangeHoverEffect"
-            (selectedRangeDateChange)="selectedRangeDateChanged($event)"
-            (monthClicked)="handleMonthViewChange($event)"
-        ></fd-calendar-month-view>
-    } @else if (activeView === 'year') {
-        <fd-calendar-year-view
-            [yearSelected]="_currentlyDisplayed.year"
-            [yearViewGrid]="yearGrid"
-            [id]="id"
-            [focusEscapeFunction]="escapeFocusFunction"
-            [isDateRangeYearFormat]="isDateRangeYearFormat()"
-            [selectedRangeDate]="selectedRangeDate"
-            [rangeHoverEffect]="rangeHoverEffect"
-            (selectedRangeDateChange)="selectedRangeDateChanged($event)"
-            (yearClicked)="selectedYear($event)"
-        >
-        </fd-calendar-year-view>
-    } @else if (activeView === 'aggregatedYear') {
-        <fd-calendar-aggregated-year-view
-            (yearsClicked)="selectedYears($event)"
-            [yearSelected]="_currentlyDisplayed.year"
-            [yearViewGrid]="yearGrid"
-            [aggregatedYearsViewGrid]="aggregatedYearGrid"
-            [id]="id"
-            [focusEscapeFunction]="escapeFocusFunction"
-        >
-        </fd-calendar-aggregated-year-view>
+    } @else {
+        <!-- Inline mode: existing view-replacement ladder, byte-identical to pre-PR. -->
+        @if (activeView === 'day') {
+            <fd-calendar-day-view
+                [selectedDate]="selectedDate"
+                [selectedMultipleDates]="selectedMultipleDates"
+                [selectedRangeDate]="selectedRangeDate"
+                [selectedMultipleDateRanges]="selectedMultipleDateRanges"
+                (selectedDateChange)="selectedDateChanged($event)"
+                (selectedMultipleDatesChange)="selectedMultipleDatesChanged($event)"
+                (selectedRangeDateChange)="selectedRangeDateChanged($event)"
+                (selectedMultipleDateRangesChange)="selectedMultipleDateRangesChanged($event)"
+                [showWeekNumbers]="showWeekNumbers"
+                [allowMultipleSelection]="allowMultipleSelection"
+                [markWeekends]="markWeekends"
+                [currentlyDisplayed]="_currentlyDisplayed"
+                [startingDayOfWeek]="getWeekStartDay()"
+                [disableFunction]="disableFunction"
+                [disableRangeEndFunction]="disableRangeEndFunction"
+                [disableRangeStartFunction]="disableRangeStartFunction"
+                [calType]="calType"
+                [id]="id"
+                [rangeHoverEffect]="rangeHoverEffect"
+                [specialDaysRules]="specialDaysRules"
+                [focusEscapeFunction]="escapeFocusFunction"
+                [hoverDate]="hoverDate()"
+                (hoverDateChange)="hoverDateChange.emit($event)"
+                (nextMonthSelect)="displayNextMonth()"
+                (previousMonthSelect)="displayPreviousMonth()"
+            ></fd-calendar-day-view>
+        } @else if (activeView === 'month') {
+            <fd-calendar-month-view
+                [monthSelected]="_currentlyDisplayed.month"
+                [year]="_currentlyDisplayed.year"
+                [id]="id"
+                [focusEscapeFunction]="escapeFocusFunction"
+                [isDateRangeMonthYearFormat]="isDateRangeMonthFormat()"
+                [selectedRangeDate]="selectedRangeDate"
+                [rangeHoverEffect]="rangeHoverEffect"
+                (selectedRangeDateChange)="selectedRangeDateChanged($event)"
+                (monthClicked)="handleMonthViewChange($event)"
+            ></fd-calendar-month-view>
+        } @else if (activeView === 'year') {
+            <fd-calendar-year-view
+                [yearSelected]="_currentlyDisplayed.year"
+                [yearViewGrid]="yearGrid"
+                [id]="id"
+                [focusEscapeFunction]="escapeFocusFunction"
+                [isDateRangeYearFormat]="isDateRangeYearFormat()"
+                [selectedRangeDate]="selectedRangeDate"
+                [rangeHoverEffect]="rangeHoverEffect"
+                (selectedRangeDateChange)="selectedRangeDateChanged($event)"
+                (yearClicked)="selectedYear($event)"
+            >
+            </fd-calendar-year-view>
+        } @else if (activeView === 'aggregatedYear') {
+            <fd-calendar-aggregated-year-view
+                (yearsClicked)="selectedYears($event)"
+                [yearSelected]="_currentlyDisplayed.year"
+                [yearViewGrid]="yearGrid"
+                [aggregatedYearsViewGrid]="aggregatedYearGrid"
+                [id]="id"
+                [focusEscapeFunction]="escapeFocusFunction"
+            >
+            </fd-calendar-aggregated-year-view>
+        }
     }
 }
 @if (showCalendarLegend && specialDaysRules.length > 0) {
