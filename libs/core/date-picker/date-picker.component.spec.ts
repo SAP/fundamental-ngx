@@ -526,6 +526,32 @@ describe('DatePickerComponent', () => {
             containerDebug.triggerEventHandler('selectedRangeDateChange', { start, end });
             expect(spy).toHaveBeenCalledWith({ start, end });
         });
+
+        it('should still render fd-calendar-container at the clamp ceiling (months=4)', () => {
+            component.months = 4;
+            component.isOpen = true;
+            component._showPopoverContents = true;
+            fixture.detectChanges();
+
+            const container = fixture.debugElement.query(By.directive(FdCalendarContainerComponent));
+            expect(container).toBeTruthy();
+        });
+
+        it('should call handleSingleDateChange when the container emits a single-date change (months=2)', () => {
+            component.type = 'single';
+            component.months = 2;
+            component.isOpen = true;
+            component._showPopoverContents = true;
+            fixture.detectChanges();
+
+            const containerDebug = fixture.debugElement.query(By.directive(FdCalendarContainerComponent));
+            expect(containerDebug).toBeTruthy();
+
+            const spy = jest.spyOn(component, 'handleSingleDateChange');
+            const date = adapter.today();
+            containerDebug.triggerEventHandler('selectedDateChange', date);
+            expect(spy).toHaveBeenCalledWith(date);
+        });
     });
 
     describe('Calendar Legend Feature', () => {

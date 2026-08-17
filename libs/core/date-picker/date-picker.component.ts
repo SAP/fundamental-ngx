@@ -183,7 +183,10 @@ export class DatePickerComponent<D>
      *
      * NOTE: multi-month mode supports single and range selection only. Date-picker-only features
      * (multiple selection, multiple date ranges, calendar legend, today button, mobile
-     * landscape/portrait) are NOT available when `months > 1`.
+     * landscape/portrait) are NOT available when `months > 1`. Additionally, the following inputs
+     * and outputs are NOT forwarded to the multi-month container: `activeView`,
+     * `previousButtonDisableFunction`, `nextButtonDisableFunction`, `dateRangeFormat`, and the
+     * `(activeViewChange)` and `(closeCalendar)` outputs.
      */
     @Input()
     months = 1;
