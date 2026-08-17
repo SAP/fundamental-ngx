@@ -42,6 +42,7 @@ import {
     CalendarYearGrid,
     DateRange,
     DaysOfWeek,
+    FdCalendarContainerComponent,
     FdCalendarView,
     FdCalendarViewEnum,
     NavigationButtonDisableFunction
@@ -117,6 +118,7 @@ let datePickerCounter = 0;
         InputGroupInputDirective,
         FormsModule,
         CalendarComponent,
+        FdCalendarContainerComponent,
         BarComponent,
         BarRightDirective,
         BarElementDirective,
@@ -172,6 +174,19 @@ export class DatePickerComponent<D>
     /** The currently selected date model in single mode. */
     @Input()
     selectedDate: Nullable<D>;
+
+    /**
+     * Number of calendar months to render.
+     *
+     * When `1` (the default), the date picker renders a single `<fd-calendar>` exactly as before.
+     * When greater than `1`, it renders a multi-month `<fd-calendar-container>` instead.
+     *
+     * NOTE: multi-month mode supports single and range selection only. Date-picker-only features
+     * (multiple selection, multiple date ranges, calendar legend, today button, mobile
+     * landscape/portrait) are NOT available when `months > 1`.
+     */
+    @Input()
+    months = 1;
 
     /** The currently selected date model in multiple mode. */
     @Input()

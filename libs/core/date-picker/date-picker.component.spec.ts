@@ -3,7 +3,12 @@ import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/t
 import { FormsModule } from '@angular/forms';
 
 import { FormStates } from '@fundamental-ngx/cdk/forms';
-import { CalendarType, DateRange } from '@fundamental-ngx/core/calendar';
+import {
+    CalendarComponent,
+    CalendarType,
+    DateRange,
+    FdCalendarContainerComponent
+} from '@fundamental-ngx/core/calendar';
 import { DatetimeAdapter, FdDate, FdDatetimeAdapter, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { runValueAccessorTests } from 'ngx-cva-test-suite';
 
@@ -473,6 +478,54 @@ describe('DatePickerComponent', () => {
             })
         );
         expect(component.toggleCalendar).toHaveBeenCalled();
+    });
+
+    describe('Multi-month calendar (months input)', () => {
+        it('should render a bare fd-calendar and NO fd-calendar-container by default (months=1)', () => {
+            component.isOpen = true;
+            component._showPopoverContents = true;
+            fixture.detectChanges();
+
+            const bareCalendar = fixture.debugElement.query(By.directive(CalendarComponent));
+            const container = fixture.debugElement.query(By.directive(FdCalendarContainerComponent));
+            expect(bareCalendar).toBeTruthy();
+            expect(container).toBeNull();
+        });
+
+        it('should render fd-calendar-container and NOT a top-level bare fd-calendar when months=2', () => {
+            component.months = 2;
+            component.isOpen = true;
+            component._showPopoverContents = true;
+            fixture.detectChanges();
+
+            const container = fixture.debugElement.query(By.directive(FdCalendarContainerComponent));
+            expect(container).toBeTruthy();
+
+            // The container renders its own inner <fd-calendar> instances, so any calendar in the
+            // DOM must live inside the container — the date-picker must NOT render its own
+            // top-level bare <fd-calendar> in multi-month mode.
+            const bareCalendars = Array.from(
+                fixture.nativeElement.querySelectorAll('fd-calendar') as NodeListOf<HTMLElement>
+            ).filter((cal) => !cal.closest('fd-calendar-container'));
+            expect(bareCalendars.length).toBe(0);
+        });
+
+        it('should call handleRangeDateChange when the container emits a range change (months=2)', () => {
+            component.type = 'range';
+            component.months = 2;
+            component.isOpen = true;
+            component._showPopoverContents = true;
+            fixture.detectChanges();
+
+            const containerDebug = fixture.debugElement.query(By.directive(FdCalendarContainerComponent));
+            expect(containerDebug).toBeTruthy();
+
+            const spy = jest.spyOn(component, 'handleRangeDateChange');
+            const start = adapter.today();
+            const end = adapter.addCalendarDays(start, 5);
+            containerDebug.triggerEventHandler('selectedRangeDateChange', { start, end });
+            expect(spy).toHaveBeenCalledWith({ start, end });
+        });
     });
 
     describe('Calendar Legend Feature', () => {
