@@ -1,6 +1,6 @@
 # Two-month calendar picker overlay — pointer-blocking backdrop + day-grid centering
 
-**Status:** approved
+**Status:** superseded by [`2026-08-16-two-month-calendar-design.md`](./2026-08-16-two-month-calendar-design.md) — the hand-rolled overlay this spec patched is replaced by the shared `DialogService` / mobile-mode primitive, making §5.1/§5.2 obsolete.
 **Date:** 2026-07-02
 **Author:** DAEDALUS (droshev)
 **Branch:** `feat/two-month`
