@@ -1,4 +1,5 @@
 import {
+    booleanAttribute,
     ChangeDetectionStrategy,
     Component,
     computed,
@@ -19,6 +20,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 import { DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
+import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { SpecialDayRule } from '@fundamental-ngx/core/shared';
 
 import { CalendarAggregatedYearViewComponent } from '../calendar-views/calendar-aggregated-year-view/calendar-aggregated-year-view.component';
@@ -127,6 +129,22 @@ export class FdCalendarContainerComponent<D> implements ControlValueAccessor {
         transform: (v: number) => Math.min(4, Math.max(1, Math.trunc(v)))
     });
 
+    /**
+     * Whether the container renders in mobile (phone) mode. On mobile the container
+     * collapses to a single month regardless of `months`, and the month/year picker
+     * opens full-screen.
+     *
+     * @default false
+     */
+    readonly mobile = input(false, { transform: booleanAttribute });
+
+    /**
+     * Passthrough mobile-mode configuration for standalone use. Its `dialogConfig`
+     * fields (when present) are merged into the picker dialog config; the container's
+     * own `mobile` flag always wins for the dialog's full-screen behaviour.
+     */
+    readonly mobileConfig = input<MobileModeConfig>();
+
     /** @hidden */
     protected readonly dateTimeAdapter = inject(DatetimeAdapter<D>);
 
@@ -180,10 +198,13 @@ export class FdCalendarContainerComponent<D> implements ControlValueAccessor {
         return classes.join(' ');
     });
 
+    /** @hidden Number of calendars actually rendered — collapses to 1 on mobile. */
+    protected readonly displayedCount = computed(() => (this.mobile() ? 1 : this.months()));
+
     /** @hidden */
     protected readonly calendarMonths = computed<CalendarCurrent[]>(() => {
         const base = this.baseMonth();
-        const n = this.months();
+        const n = this.displayedCount();
         return Array.from({ length: n }, (_, i) => this._shiftMonth(base, i));
     });
 
@@ -297,10 +318,13 @@ export class FdCalendarContainerComponent<D> implements ControlValueAccessor {
         this._pickerDialogRef = this._dialogService.open(
             this.pickerTemplate(),
             {
+                ...this.mobileConfig()?.dialogConfig,
                 hasBackdrop: true,
                 backdropClickCloseable: true,
                 escKeyCloseable: true,
-                ariaLabel: this.pickerAriaLabel()
+                ariaLabel: this.pickerAriaLabel(),
+                // Container's own mobile flag always wins so the picker goes full-screen on phone.
+                mobile: this.mobile()
             },
             this._injector
         );

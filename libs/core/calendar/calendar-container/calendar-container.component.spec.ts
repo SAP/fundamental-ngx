@@ -36,6 +36,7 @@ class TestSingleHostComponent {
             #container
             calType="range"
             [months]="months()"
+            [mobile]="mobile()"
             [(selectedRangeDate)]="dateRange"
         ></fd-calendar-container>
     `,
@@ -45,6 +46,7 @@ class TestNMonthHostComponent {
     @ViewChild('container') container: FdCalendarContainerComponent<FdDate>;
     dateRange = new DateRange<FdDate>(null, null);
     months = signal(2);
+    mobile = signal(false);
 }
 
 @Component({
@@ -965,6 +967,80 @@ describe('FdCalendarContainerComponent', () => {
             nFixture.detectChanges();
             tick();
             expect(dialog.hasOpenDialogs()).toBe(false);
+        }));
+    });
+
+    // ---------------------------------------------------------------------------
+    // Task 4 — phone single-month collapse + full-screen picker
+    // ---------------------------------------------------------------------------
+
+    describe('mobile single-month collapse', () => {
+        let nFixture: ComponentFixture<TestNMonthHostComponent>;
+        let nHost: TestNMonthHostComponent;
+        let nComponent: FdCalendarContainerComponent<FdDate>;
+
+        beforeEach(() => {
+            nFixture = TestBed.createComponent(TestNMonthHostComponent);
+            nHost = nFixture.componentInstance;
+            nFixture.detectChanges();
+            nComponent = nHost.container;
+        });
+
+        it('mobile=true collapses to a single fd-calendar even when months=2', () => {
+            nHost.months.set(2);
+            nHost.mobile.set(true);
+            nFixture.detectChanges();
+            expect((nComponent as any).calendarMonths().length).toBe(1);
+            expect(nFixture.debugElement.queryAll(By.directive(CalendarComponent)).length).toBe(1);
+        });
+
+        it('mobile=true collapses to a single fd-calendar even when months=3', () => {
+            nHost.months.set(3);
+            nHost.mobile.set(true);
+            nFixture.detectChanges();
+            expect((nComponent as any).calendarMonths().length).toBe(1);
+            expect(nFixture.debugElement.queryAll(By.directive(CalendarComponent)).length).toBe(1);
+        });
+
+        it('mobile=true collapses to a single fd-calendar even when months=4', () => {
+            nHost.months.set(4);
+            nHost.mobile.set(true);
+            nFixture.detectChanges();
+            expect((nComponent as any).calendarMonths().length).toBe(1);
+            expect(nFixture.debugElement.queryAll(By.directive(CalendarComponent)).length).toBe(1);
+        });
+
+        it('mobile=false (default) still renders months() calendars — months=3 → 3', () => {
+            nHost.months.set(3);
+            nHost.mobile.set(false);
+            nFixture.detectChanges();
+            expect(nFixture.debugElement.queryAll(By.directive(CalendarComponent)).length).toBe(3);
+        });
+
+        it('opening the picker while mobile=true opens a full-screen (mobile) dialog', fakeAsync(() => {
+            nHost.months.set(2);
+            nHost.mobile.set(true);
+            nFixture.detectChanges();
+
+            const dialog = TestBed.inject(DialogService);
+            const openSpy = jest.spyOn(dialog, 'open');
+
+            const calInstances = nFixture.debugElement
+                .queryAll(By.directive(CalendarComponent))
+                .map((de) => de.componentInstance as CalendarComponent<FdDate>);
+            calInstances[0].activeViewChange.emit('month');
+            nFixture.detectChanges();
+            tick();
+            nFixture.detectChanges();
+
+            expect(dialog.hasOpenDialogs()).toBe(true);
+            // The DialogConfig passed to open() must carry mobile=true for full-screen rendering.
+            expect(openSpy).toHaveBeenCalled();
+            const config = openSpy.mock.calls[0][1] as { mobile?: boolean };
+            expect(config?.mobile).toBe(true);
+
+            (nComponent as any)['_pickerDialogRef']?.close();
+            tick(200);
         }));
     });
 });
