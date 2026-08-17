@@ -9,28 +9,18 @@ fd-calendar-container {
 }
 
 .fd-calendar-container-inner {
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
+    // Flex layout (display:flex, flex-flow, gap, justify-content) is provided by
+    // fundamental-styles on .fd-calendar-container-inner, driven by the
+    // --fdCalendarContainerFlexDirection / --fdCalendarContainerGap CSS vars.
+    // .fd-calendar-container--vertical flips those vars automatically.
     position: relative;
-}
-
-.fd-calendar-container__row {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: var(--fdCalendarContainerGap, 1rem);
-
-    .fd-calendar-container--vertical & {
-        flex-direction: column;
-    }
 
     // N≥3 fallback below 56rem — collapse to column even in horizontal.
     // 55.9375rem = 895px (1px below 56rem to avoid triggering at exact boundary).
+    // Contract-friendly: flip the shipped CSS var rather than hardcoding flex-direction.
     @media (max-width: 55.9375rem) {
         .fd-calendar-container:not(.fd-calendar-container--vertical) & {
-            flex-direction: column;
+            --fdCalendarContainerFlexDirection: column;
         }
     }
 }

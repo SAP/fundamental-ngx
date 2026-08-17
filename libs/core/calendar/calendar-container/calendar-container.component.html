@@ -1,33 +1,31 @@
 <div class="fd-calendar-container-inner" (mouseleave)="onHoverChange(null)">
-    <div class="fd-calendar-container__row">
-        @let isVertical = layout() === 'vertical';
-        @for (m of calendarMonths(); track $index; let last = $last) {
-            <fd-calendar
-                [calType]="calType()"
-                [selectedRangeDate]="selectedRangeDate()"
-                [selectedDate]="selectedDate()"
-                [rangeHoverEffect]="rangeHoverEffect()"
-                [markWeekends]="markWeekends()"
-                [showWeekNumbers]="showWeekNumbers()"
-                [startingDayOfWeek]="startingDayOfWeek()!"
-                [disableFunction]="disableFunction()!"
-                [disableRangeStartFunction]="disableRangeStartFunction()!"
-                [disableRangeEndFunction]="disableRangeEndFunction()!"
-                [specialDaysRules]="specialDaysRules()"
-                [currentMonth]="m"
-                [hoverDate]="hoverDate()"
-                (hoverDateChange)="onHoverChange($event)"
-                (selectedRangeDateChange)="onRangeChange($event)"
-                (selectedDateChange)="onDateChange($event)"
-                (navigated)="onCalendarNavigated($event, $index)"
-                [attr.aria-label]="getSlotAriaLabel(m, $index)"
-                [hidePreviousArrow]="$index > 0"
-                [hideNextArrow]="isVertical ? $index > 0 : !last"
-                [monthYearPickerMode]="'popover'"
-                (activeViewChange)="onCalendarTriggerView($event, $index)"
-            ></fd-calendar>
-        }
-    </div>
+    @let isVertical = layout() === 'vertical';
+    @for (m of calendarMonths(); track $index; let last = $last) {
+        <fd-calendar
+            [calType]="calType()"
+            [selectedRangeDate]="selectedRangeDate()"
+            [selectedDate]="selectedDate()"
+            [rangeHoverEffect]="rangeHoverEffect()"
+            [markWeekends]="markWeekends()"
+            [showWeekNumbers]="showWeekNumbers()"
+            [startingDayOfWeek]="startingDayOfWeek()!"
+            [disableFunction]="disableFunction()!"
+            [disableRangeStartFunction]="disableRangeStartFunction()!"
+            [disableRangeEndFunction]="disableRangeEndFunction()!"
+            [specialDaysRules]="specialDaysRules()"
+            [currentMonth]="m"
+            [hoverDate]="hoverDate()"
+            (hoverDateChange)="onHoverChange($event)"
+            (selectedRangeDateChange)="onRangeChange($event)"
+            (selectedDateChange)="onDateChange($event)"
+            (navigated)="onCalendarNavigated($event, $index)"
+            [attr.aria-label]="getSlotAriaLabel(m, $index)"
+            [hidePreviousArrow]="$index > 0"
+            [hideNextArrow]="isVertical ? $index > 0 : !last"
+            [monthYearPickerMode]="'popover'"
+            (activeViewChange)="onCalendarTriggerView($event, $index)"
+        ></fd-calendar>
+    }
 </div>
 
 <ng-template #pickerTemplate let-dialogRef let-dialogConfig="dialogConfig">
