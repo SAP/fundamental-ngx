@@ -5,9 +5,6 @@ fd-calendar-container {
     .fd-calendar {
         box-shadow: none;
         border-radius: 0;
-        // Establish a stacking context so day cells cannot escape the backdrop's z-index gate.
-        position: relative;
-        z-index: 0;
     }
 }
 
@@ -38,59 +35,12 @@ fd-calendar-container {
     }
 }
 
-fd-calendar-header {
-    position: relative;
-    // Above backdrop so per-calendar headers stay clickable while picker is open.
-    z-index: 101;
-}
-
-fd-calendar-container {
-    .fd-calendar {
-        // Weekday row (Sun Mon Tue...) sits above backdrop, matches header treatment.
-        // Scoped to fd-calendar-container so single-calendar consumers are unaffected.
-        fd-calendar-day-view thead.fd-calendar__group {
-            position: relative;
-            z-index: 101;
-        }
-    }
-}
-
-.fd-calendar-container__picker-backdrop {
-    position: absolute;
-    inset: 0;
-    background-color: var(--sapBlockLayer_Background);
-    opacity: var(--sapBlockLayer_Opacity);
-    // Above the fd-calendar stacking contexts (z-index: 0), below headers (z-index: 101).
-    z-index: 100;
-    pointer-events: auto;
-    cursor: pointer;
-}
-
-.fd-calendar-container__picker-overlay {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    // Above headers so picker floats over everything.
-    z-index: 102;
-    background-color: var(--sapList_Background);
-    border-radius: var(--sapElement_BorderCornerRadius);
-    box-shadow: var(--sapContent_Shadow2);
-    padding: 0.5rem;
-    max-width: calc(100% - 2rem);
-    max-height: calc(100% - 2rem);
-    overflow: auto;
-}
-
 .fd-calendar-container__aggregate-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0.5rem 1rem;
     background-color: var(--sapList_Background);
-    // Above per-calendar headers (hidden anyway) and above backdrop.
-    position: relative;
-    z-index: 102;
 }
 
 .fd-calendar-container__aggregate-header__label {
@@ -101,9 +51,4 @@ fd-calendar-container {
 
 .fd-calendar-container__aggregate-header__spacer {
     flex: 1;
-}
-
-// Hide per-calendar headers when aggregate header is showing.
-.fd-calendar-container__slot--headers-hidden fd-calendar-header {
-    display: none;
 }
