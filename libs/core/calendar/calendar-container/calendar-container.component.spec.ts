@@ -1,5 +1,5 @@
 import { OverlayModule } from '@angular/cdk/overlay';
-import { Component, ViewChild } from '@angular/core';
+import { Component, signal, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
@@ -35,7 +35,7 @@ class TestSingleHostComponent {
         <fd-calendar-container
             #container
             calType="range"
-            [months]="months"
+            [months]="months()"
             [(selectedRangeDate)]="dateRange"
         ></fd-calendar-container>
     `,
@@ -44,7 +44,7 @@ class TestSingleHostComponent {
 class TestNMonthHostComponent {
     @ViewChild('container') container: FdCalendarContainerComponent<FdDate>;
     dateRange = new DateRange<FdDate>(null, null);
-    months = 2;
+    months = signal(2);
 }
 
 @Component({
@@ -53,7 +53,7 @@ class TestNMonthHostComponent {
             #container
             calType="range"
             layout="vertical"
-            [months]="months"
+            [months]="months()"
             [(selectedRangeDate)]="dateRange"
         ></fd-calendar-container>
     `,
@@ -62,7 +62,7 @@ class TestNMonthHostComponent {
 class TestVerticalHostComponent {
     @ViewChild('container') container: FdCalendarContainerComponent<FdDate>;
     dateRange = new DateRange<FdDate>(null, null);
-    months = 2;
+    months = signal(2);
 }
 
 describe('FdCalendarContainerComponent', () => {
@@ -183,7 +183,9 @@ describe('FdCalendarContainerComponent', () => {
     });
 
     it('should emit selectedRangeDateChange on range selection', () => {
-        const spy = jest.spyOn(component.selectedRangeDateChange, 'emit');
+        const spy = jest.fn();
+        // selectedRangeDate is a model() signal; its two-way change is observed via subscribe().
+        component.selectedRangeDate.subscribe(spy);
         const range = new DateRange(new FdDate(2026, 5, 10), new FdDate(2026, 6, 15));
         (component as any).onRangeChange(range);
         expect(spy).toHaveBeenCalledWith(range);
@@ -227,7 +229,9 @@ describe('FdCalendarContainerComponent', () => {
         });
 
         it('should emit selectedDateChange on date selection', () => {
-            const spy = jest.spyOn(singleComponent.selectedDateChange, 'emit');
+            const spy = jest.fn();
+            // selectedDate is a model() signal; its two-way change is observed via subscribe().
+            singleComponent.selectedDate.subscribe(spy);
             const date = new FdDate(2026, 5, 15);
             (singleComponent as any).onDateChange(date);
             expect(spy).toHaveBeenCalledWith(date);
@@ -251,7 +255,7 @@ describe('FdCalendarContainerComponent', () => {
         });
 
         it('months=1 → 1 fd-calendar rendered', () => {
-            nHost.months = 1;
+            nHost.months.set(1);
             nFixture.detectChanges();
             const calendars = nFixture.debugElement.queryAll(By.directive(CalendarComponent));
             expect(calendars.length).toBe(1);
@@ -263,14 +267,14 @@ describe('FdCalendarContainerComponent', () => {
         });
 
         it('months=3 → 3 fd-calendar rendered', () => {
-            nHost.months = 3;
+            nHost.months.set(3);
             nFixture.detectChanges();
             const calendars = nFixture.debugElement.queryAll(By.directive(CalendarComponent));
             expect(calendars.length).toBe(3);
         });
 
         it('months=4 → 4 fd-calendar rendered', () => {
-            nHost.months = 4;
+            nHost.months.set(4);
             nFixture.detectChanges();
             const calendars = nFixture.debugElement.queryAll(By.directive(CalendarComponent));
             expect(calendars.length).toBe(4);
@@ -292,31 +296,31 @@ describe('FdCalendarContainerComponent', () => {
         });
 
         it('months=0 → renders 1 (clamped up)', () => {
-            nHost.months = 0;
+            nHost.months.set(0);
             nFixture.detectChanges();
             expect(nFixture.debugElement.queryAll(By.directive(CalendarComponent)).length).toBe(1);
         });
 
         it('months=-3 → renders 1', () => {
-            nHost.months = -3;
+            nHost.months.set(-3);
             nFixture.detectChanges();
             expect(nFixture.debugElement.queryAll(By.directive(CalendarComponent)).length).toBe(1);
         });
 
         it('months=5 → renders 4 (clamped down)', () => {
-            nHost.months = 5;
+            nHost.months.set(5);
             nFixture.detectChanges();
             expect(nFixture.debugElement.queryAll(By.directive(CalendarComponent)).length).toBe(4);
         });
 
         it('months=2.7 → renders 2 (truncated)', () => {
-            nHost.months = 2.7;
+            nHost.months.set(2.7);
             nFixture.detectChanges();
             expect(nFixture.debugElement.queryAll(By.directive(CalendarComponent)).length).toBe(2);
         });
 
         it('months=-0.5 → renders 1 (truncated to 0 then clamped to 1)', () => {
-            nHost.months = -0.5;
+            nHost.months.set(-0.5);
             nFixture.detectChanges();
             expect(nFixture.debugElement.queryAll(By.directive(CalendarComponent)).length).toBe(1);
         });
@@ -340,7 +344,7 @@ describe('FdCalendarContainerComponent', () => {
 
         it('months=3, base March 2026 → Mar / Apr / May 2026', () => {
             (nComponent as any).baseMonth.set({ month: 3, year: 2026 });
-            nHost.months = 3;
+            nHost.months.set(3);
             nFixture.detectChanges();
             const months = (nComponent as any).calendarMonths();
             expect(months[0]).toEqual({ month: 3, year: 2026 });
@@ -350,7 +354,7 @@ describe('FdCalendarContainerComponent', () => {
 
         it('months=4, base Nov 2026 → Nov / Dec 2026 / Jan / Feb 2027 (year rollover)', () => {
             (nComponent as any).baseMonth.set({ month: 11, year: 2026 });
-            nHost.months = 4;
+            nHost.months.set(4);
             nFixture.detectChanges();
             const months = (nComponent as any).calendarMonths();
             expect(months[0]).toEqual({ month: 11, year: 2026 });
@@ -378,7 +382,7 @@ describe('FdCalendarContainerComponent', () => {
 
         it('navigating from index=0 shifts all months forward by 1', () => {
             (nComponent as any).baseMonth.set({ month: 3, year: 2026 });
-            nHost.months = 3;
+            nHost.months.set(3);
             nFixture.detectChanges();
 
             (nComponent as any).onCalendarNavigated({ month: 4, year: 2026 }, 0);
@@ -392,7 +396,7 @@ describe('FdCalendarContainerComponent', () => {
 
         it('navigating from index=2 (rightmost) shifts all months forward by 1', () => {
             (nComponent as any).baseMonth.set({ month: 3, year: 2026 });
-            nHost.months = 3;
+            nHost.months.set(3);
             nFixture.detectChanges();
 
             // Rightmost calendar (index=2) reports May→June; base = June - 2 = April
@@ -405,7 +409,7 @@ describe('FdCalendarContainerComponent', () => {
 
         it('navigation step is 1, not N: 3 navigations forward from Jan moves first slot Jan→Apr', () => {
             (nComponent as any).baseMonth.set({ month: 1, year: 2026 });
-            nHost.months = 3;
+            nHost.months.set(3);
             nFixture.detectChanges();
 
             // Each step: navigate index=0 calendar to the next month
@@ -424,8 +428,7 @@ describe('FdCalendarContainerComponent', () => {
 
     describe('CVA writeValue with N', () => {
         it('writeValue(DateRange) sets _baseMonth regardless of months value', () => {
-            // Use the container's own componentRef (signal input) to set months to 3
-            fixture.componentRef.setInput('calType', 'range');
+            // calType is already 'range' via the host template.
             fixture.detectChanges();
             const start = new FdDate(2026, 7, 10);
             const end = new FdDate(2026, 9, 20);
@@ -468,7 +471,7 @@ describe('FdCalendarContainerComponent', () => {
         });
 
         it('months=1 → aria-label contains "Calendar showing" and single month', () => {
-            nHost.months = 1;
+            nHost.months.set(1);
             nFixture.detectChanges();
             const label = nFixture.nativeElement.querySelector('fd-calendar-container').getAttribute('aria-label');
             expect(label).toMatch(/^Calendar showing .+$/);
@@ -477,21 +480,21 @@ describe('FdCalendarContainerComponent', () => {
         });
 
         it('months=2 → aria-label uses "and" form', () => {
-            nHost.months = 2;
+            nHost.months.set(2);
             nFixture.detectChanges();
             const label = nFixture.nativeElement.querySelector('fd-calendar-container').getAttribute('aria-label');
             expect(label).toContain(' and ');
         });
 
         it('months=3 → aria-label uses "through" form', () => {
-            nHost.months = 3;
+            nHost.months.set(3);
             nFixture.detectChanges();
             const label = nFixture.nativeElement.querySelector('fd-calendar-container').getAttribute('aria-label');
             expect(label).toContain(' through ');
         });
 
         it('months=4 → aria-label uses "through" form', () => {
-            nHost.months = 4;
+            nHost.months.set(4);
             nFixture.detectChanges();
             const label = nFixture.nativeElement.querySelector('fd-calendar-container').getAttribute('aria-label');
             expect(label).toContain(' through ');
@@ -510,7 +513,7 @@ describe('FdCalendarContainerComponent', () => {
         beforeEach(() => {
             nFixture = TestBed.createComponent(TestNMonthHostComponent);
             nHost = nFixture.componentInstance;
-            nHost.months = 3;
+            nHost.months.set(3);
             nFixture.detectChanges();
             nComponent = nFixture.componentInstance.container;
         });
@@ -562,7 +565,7 @@ describe('FdCalendarContainerComponent', () => {
         });
 
         it('months=1: single calendar has BOTH arrow buttons present', () => {
-            nHost.months = 1;
+            nHost.months.set(1);
             nFixture.detectChanges();
             const calEls = nFixture.nativeElement.querySelectorAll('fd-calendar');
             expect(calEls.length).toBe(1);
@@ -572,7 +575,7 @@ describe('FdCalendarContainerComponent', () => {
         });
 
         it('months=2: first calendar has 0 right-arrows; second has 0 left-arrows', () => {
-            nHost.months = 2;
+            nHost.months.set(2);
             nFixture.detectChanges();
             const calEls = nFixture.nativeElement.querySelectorAll('fd-calendar');
             expect(calEls[0].querySelectorAll('.fd-calendar__action--arrow-right').length).toBe(0);
@@ -580,7 +583,7 @@ describe('FdCalendarContainerComponent', () => {
         });
 
         it('months=3: middle calendar has 0 left-arrows and 0 right-arrows', () => {
-            nHost.months = 3;
+            nHost.months.set(3);
             nFixture.detectChanges();
             const calEls = nFixture.nativeElement.querySelectorAll('fd-calendar');
             expect(calEls[1].querySelectorAll('.fd-calendar__action--arrow-left').length).toBe(0);
@@ -588,7 +591,7 @@ describe('FdCalendarContainerComponent', () => {
         });
 
         it('months=4: indices 1 and 2 each have zero left and right arrows', () => {
-            nHost.months = 4;
+            nHost.months.set(4);
             nFixture.detectChanges();
             const calEls = nFixture.nativeElement.querySelectorAll('fd-calendar');
             [1, 2].forEach((i) => {
@@ -616,7 +619,7 @@ describe('FdCalendarContainerComponent', () => {
         });
 
         it('N=1: slot has bare month label (no positional prefix)', () => {
-            nHost.months = 1;
+            nHost.months.set(1);
             nFixture.detectChanges();
             const calEls = nFixture.nativeElement.querySelectorAll('fd-calendar');
             const label = (calEls[0] as HTMLElement).getAttribute('aria-label');
@@ -626,7 +629,7 @@ describe('FdCalendarContainerComponent', () => {
         });
 
         it('N=2: each slot has positional label "Calendar K of 2: <month>"', () => {
-            nHost.months = 2;
+            nHost.months.set(2);
             nFixture.detectChanges();
             const calEls = nFixture.nativeElement.querySelectorAll('fd-calendar');
             expect((calEls[0] as HTMLElement).getAttribute('aria-label')).toMatch(/^Calendar 1 of 2:/);
@@ -634,7 +637,7 @@ describe('FdCalendarContainerComponent', () => {
         });
 
         it('N=3: positional labels reflect total=3', () => {
-            nHost.months = 3;
+            nHost.months.set(3);
             nFixture.detectChanges();
             const calEls = nFixture.nativeElement.querySelectorAll('fd-calendar');
             expect((calEls[0] as HTMLElement).getAttribute('aria-label')).toMatch(/^Calendar 1 of 3:/);
@@ -643,7 +646,7 @@ describe('FdCalendarContainerComponent', () => {
         });
 
         it('N=4: positional labels reflect total=4', () => {
-            nHost.months = 4;
+            nHost.months.set(4);
             nFixture.detectChanges();
             const calEls = nFixture.nativeElement.querySelectorAll('fd-calendar');
             expect((calEls[0] as HTMLElement).getAttribute('aria-label')).toMatch(/^Calendar 1 of 4:/);
@@ -663,7 +666,7 @@ describe('FdCalendarContainerComponent', () => {
 
         beforeEach(() => {
             nFixture = TestBed.createComponent(TestNMonthHostComponent);
-            nFixture.componentInstance.months = 2;
+            nFixture.componentInstance.months.set(2);
             nFixture.detectChanges();
             nComponent = nFixture.componentInstance.container;
         });
@@ -697,7 +700,7 @@ describe('FdCalendarContainerComponent', () => {
         });
 
         it('vertical N=1: top calendar shows both arrows', () => {
-            vertHost.months = 1;
+            vertHost.months.set(1);
             vertFixture.detectChanges();
             const calEls = vertFixture.nativeElement.querySelectorAll('fd-calendar');
             expect(calEls.length).toBe(1);
@@ -706,7 +709,7 @@ describe('FdCalendarContainerComponent', () => {
         });
 
         it('vertical N=2: top shows both arrows, bottom shows neither', () => {
-            vertHost.months = 2;
+            vertHost.months.set(2);
             vertFixture.detectChanges();
             const calEls = vertFixture.nativeElement.querySelectorAll('fd-calendar');
             expect(calEls.length).toBe(2);
@@ -719,7 +722,7 @@ describe('FdCalendarContainerComponent', () => {
         });
 
         it('vertical N=3: top shows both arrows, middle and bottom show neither', () => {
-            vertHost.months = 3;
+            vertHost.months.set(3);
             vertFixture.detectChanges();
             const calEls = vertFixture.nativeElement.querySelectorAll('fd-calendar');
             expect(calEls.length).toBe(3);
@@ -732,7 +735,7 @@ describe('FdCalendarContainerComponent', () => {
         });
 
         it('vertical N=4: top shows both arrows, three below show neither', () => {
-            vertHost.months = 4;
+            vertHost.months.set(4);
             vertFixture.detectChanges();
             const calEls = vertFixture.nativeElement.querySelectorAll('fd-calendar');
             expect(calEls.length).toBe(4);
@@ -746,7 +749,7 @@ describe('FdCalendarContainerComponent', () => {
 
         // pre-PR parity per DECISION-006 — do not change without amending the decision.
         it('vertical N=2: post-fix DOM matches pre-PR shape exactly — top has both, bottom has none', () => {
-            vertHost.months = 2;
+            vertHost.months.set(2);
             vertFixture.detectChanges();
             const calEls = vertFixture.nativeElement.querySelectorAll('fd-calendar');
             // Top calendar carries both navigation arrows (same as pre-PR behavior)
@@ -773,7 +776,7 @@ describe('FdCalendarContainerComponent', () => {
         });
 
         it('all fd-calendar instances inside the container have monthYearPickerMode === "popover"', () => {
-            nHost.months = 2;
+            nHost.months.set(2);
             nFixture.detectChanges();
 
             const calInstances = nFixture.debugElement
@@ -787,7 +790,7 @@ describe('FdCalendarContainerComponent', () => {
         });
 
         it('all 4 fd-calendar instances have monthYearPickerMode === "popover" at N=4', () => {
-            nHost.months = 4;
+            nHost.months.set(4);
             nFixture.detectChanges();
 
             const calInstances = nFixture.debugElement
@@ -815,7 +818,7 @@ describe('FdCalendarContainerComponent', () => {
         });
 
         it('horizontal N=2: left has prev only, right has next only', () => {
-            nHost.months = 2;
+            nHost.months.set(2);
             nFixture.detectChanges();
             const calEls = nFixture.nativeElement.querySelectorAll('fd-calendar');
             // Left calendar: prev arrow present, next arrow absent
@@ -827,7 +830,7 @@ describe('FdCalendarContainerComponent', () => {
         });
 
         it('horizontal N=3: leftmost has prev only, middle has none, rightmost has next only', () => {
-            nHost.months = 3;
+            nHost.months.set(3);
             nFixture.detectChanges();
             const calEls = nFixture.nativeElement.querySelectorAll('fd-calendar');
             // Leftmost
@@ -855,7 +858,7 @@ describe('FdCalendarContainerComponent', () => {
         beforeEach(() => {
             nFixture = TestBed.createComponent(TestNMonthHostComponent);
             nHost = nFixture.componentInstance;
-            nHost.months = 2;
+            nHost.months.set(2);
             nFixture.detectChanges();
             nComponent = nFixture.componentInstance.container;
             dialog = TestBed.inject(DialogService);
