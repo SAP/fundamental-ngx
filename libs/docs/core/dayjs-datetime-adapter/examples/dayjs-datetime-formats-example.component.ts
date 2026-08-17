@@ -37,4 +37,5 @@ import dayjs, { Dayjs } from 'dayjs';
 })
 export class DayjsDatetimeFormatsExampleComponent {
     date: Dayjs = dayjs();
+    dateCustom: Dayjs = dayjs();
 }

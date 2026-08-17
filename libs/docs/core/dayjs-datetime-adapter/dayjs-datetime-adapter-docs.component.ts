@@ -11,6 +11,7 @@ import {
 } from '@fundamental-ngx/docs/shared';
 import { DatePickerDayjsAdapterExampleComponent } from './examples/date-picker-dayjs-adapter-example.component';
 import { DayjsAdapterOptionsExampleComponent } from './examples/dayjs-adapter-options-example.component';
+import { DayjsDatetime24hExampleComponent } from './examples/dayjs-datetime-24h-example.component';
 import { DayjsDatetimeFormatsExampleComponent } from './examples/dayjs-datetime-formats-example.component';
 
 const datePickerDayjsAdapterSrcTs = 'date-picker-dayjs-adapter-example.component.ts';
@@ -19,6 +20,8 @@ const dayjsAdapterOptionsSrcTs = 'dayjs-adapter-options-example.component.ts';
 const dayjsAdapterOptionsSrcHtml = 'dayjs-adapter-options-example.component.html';
 const dayjsDatetimeFormatsSrcTs = 'dayjs-datetime-formats-example.component.ts';
 const dayjsDatetimeFormatsSrcHtml = 'dayjs-datetime-formats-example.component.html';
+const dayjsDatetime24hSrcTs = 'dayjs-datetime-24h-example.component.ts';
+const dayjsDatetime24hSrcHtml = 'dayjs-datetime-24h-example.component.html';
 
 @Component({
     selector: 'app-dayjs-datetime-adapter',
@@ -31,7 +34,8 @@ const dayjsDatetimeFormatsSrcHtml = 'dayjs-datetime-formats-example.component.ht
         CodeExampleComponent,
         SeparatorComponent,
         DayjsAdapterOptionsExampleComponent,
-        DayjsDatetimeFormatsExampleComponent
+        DayjsDatetimeFormatsExampleComponent,
+        DayjsDatetime24hExampleComponent
     ]
 })
 export class DayjsDatetimeAdapterDocsComponent {
@@ -74,6 +78,20 @@ export class DayjsDatetimeAdapterDocsComponent {
             component: 'DayjsDatetimeFormatsExampleComponent',
             code: getAssetFromModuleAssets(dayjsDatetimeFormatsSrcTs),
             fileName: 'dayjs-datetime-formats-example'
+        }
+    ];
+
+    dayjsDatetime24h: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(dayjsDatetime24hSrcHtml),
+            fileName: 'dayjs-datetime-24h-example'
+        },
+        {
+            language: 'typescript',
+            component: 'DayjsDatetime24hExampleComponent',
+            code: getAssetFromModuleAssets(dayjsDatetime24hSrcTs),
+            fileName: 'dayjs-datetime-24h-example'
         }
     ];
 }

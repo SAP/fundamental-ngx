@@ -186,6 +186,27 @@ describe('DatetimePickerComponent', () => {
         expect(component.togglePopover).toHaveBeenCalled();
     });
 
+    describe('customDateTimeFormat parsing (fix #14250)', () => {
+        it('should use customDateTimeFormat as the parse format when typing into the input', () => {
+            const adapter = (component as any)._dateTimeAdapter;
+            const parseSpy = jest.spyOn(adapter, 'parse').mockReturnValue(new FdDate(2025, 5, 25, 15, 30));
+
+            component.customDateTimeFormat = 'YYYY-MM-DD HH:mm';
+            component.handleInputChange('2025-05-25 15:30', true);
+
+            expect(parseSpy).toHaveBeenCalledWith('2025-05-25 15:30', 'YYYY-MM-DD HH:mm');
+        });
+
+        it('should fall back to the provider parse format when customDateTimeFormat is not set', () => {
+            const adapter = (component as any)._dateTimeAdapter;
+            const parseSpy = jest.spyOn(adapter, 'parse').mockReturnValue(new FdDate(2025, 5, 25));
+
+            component.customDateTimeFormat = undefined;
+            component.handleInputChange('5/25/2025', true);
+
+            expect(parseSpy).toHaveBeenCalledWith('5/25/2025', datetimeFormats.parse.dateTimeInput);
+        });
+    });
     describe('Calendar Legend Feature', () => {
         beforeEach(() => {
             component.isOpen = true;

@@ -519,4 +519,38 @@ describe('MomentDatetimeAdapter with LOCALE_ID override', () => {
         expect(result.month()).toBe(JUL); // month is 0-based
         expect(result.date()).toBe(10);
     });
+
+    describe('_createDayjsDate 24h fallback (fix #14250)', () => {
+        it('should parse a 24h time typed into a 12h-configured format and preserve the hour', () => {
+            // The bug: typing '5/25/2025 15:30' with format 'M/D/YYYY h:mm A' exhausted all
+            // sensible fallbacks and landed on YYYY-MM-DD, producing hour=0 and a garbage date.
+            const result = adapter['_createDayjsDate']('5/25/2025 15:30', 'M/D/YYYY h:mm A');
+            expect(result.isValid()).toBe(true);
+            expect(result.year()).toBe(2025);
+            expect(result.month()).toBe(MAY);
+            expect(result.date()).toBe(25);
+            expect(result.hour()).toBe(15);
+        });
+
+        it('should not mis-parse a US-locale datetime string via the YYYY-MM-DD fallback', () => {
+            // The YYYY-MM-DD fallback used to non-strictly "match" strings like '5/25/2025 15:30',
+            // returning isValid()=true with year=2027 and hour=0 — no error shown to the user.
+            const result = adapter['_createDayjsDate']('5/25/2025 15:30', 'M/D/YYYY h:mm A');
+            expect(result.year()).not.toBe(2027);
+            expect(result.hour()).not.toBe(0);
+            expect(result.isValid()).toBe(true);
+            expect(result.year()).toBe(2025);
+            expect(result.month()).toBe(MAY);
+            expect(result.date()).toBe(25);
+            expect(result.hour()).toBe(15);
+        });
+
+        it('should still parse a genuine ISO date string via the YYYY-MM-DD fallback', () => {
+            const result = adapter['_createDayjsDate']('2025-05-25', 'M/D/YYYY h:mm A');
+            expect(result.isValid()).toBe(true);
+            expect(result.year()).toBe(2025);
+            expect(result.month()).toBe(MAY);
+            expect(result.date()).toBe(25);
+        });
+    });
 });
