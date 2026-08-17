@@ -59,6 +59,10 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnChanges, Focusab
     @Input()
     isDateRangeMonthYearFormat: boolean;
 
+    /** Whether to render full month names ('January') instead of abbreviated ('Jan'). */
+    @Input()
+    longMonthNames = false;
+
     /** An event fired when a new month is selected */
     @Output()
     readonly monthClicked: EventEmitter<number> = new EventEmitter<number>();
@@ -433,9 +437,10 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnChanges, Focusab
      * Method that create month grid with required meta data
      */
     private _constructMonthGrid(): void {
-        const monthNames: string[] = this.isDateRangeMonthYearFormat
-            ? this._dateTimeAdapter.getMonthNames('long')
-            : this._dateTimeAdapter.getMonthNames('short');
+        const monthNames: string[] =
+            this.longMonthNames || this.isDateRangeMonthYearFormat
+                ? this._dateTimeAdapter.getMonthNames('long')
+                : this._dateTimeAdapter.getMonthNames('short');
 
         const monthList: CalendarMonth<D>[] = monthNames.map((monthName, index): CalendarMonth<D> => {
             const month = index + this.monthOffset;

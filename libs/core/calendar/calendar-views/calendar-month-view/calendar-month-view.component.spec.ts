@@ -144,4 +144,18 @@ describe('CalendarMonthViewComponent', () => {
         );
         expect(spans.length).toBe(12);
     });
+
+    it('longMonthNames=true renders full month names', () => {
+        component.longMonthNames = true;
+        (component as any)._constructMonthGrid();
+        fixture.detectChanges();
+        const firstLabel = fixture.nativeElement.querySelector('td .fd-calendar__text');
+        expect(firstLabel.textContent).toContain('January');
+    });
+
+    it('longMonthNames=false (default) renders short month names', () => {
+        const firstLabel = fixture.nativeElement.querySelector('td .fd-calendar__text');
+        expect(firstLabel.textContent).toContain('Jan');
+        expect(firstLabel.textContent).not.toContain('January');
+    });
 });
