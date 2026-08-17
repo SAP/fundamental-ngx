@@ -71,7 +71,7 @@
         @case ('month') {
             <fd-calendar-month-view
                 [monthSelected]="calendarMonths()[pickerCalendarIndex()]?.month ?? 1"
-                [year]="calendarMonths()[pickerCalendarIndex()]?.year ?? 2026"
+                [year]="calendarMonths()[pickerCalendarIndex()]?.year ?? currentYear"
                 [id]="id"
                 [longMonthNames]="true"
                 (monthClicked)="onPickerMonthSelected($event)"

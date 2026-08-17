@@ -201,6 +201,9 @@ export class FdCalendarContainerComponent<D> implements ControlValueAccessor {
     /** @hidden Number of calendars actually rendered — collapses to 1 on mobile. */
     protected readonly displayedCount = computed(() => (this.mobile() ? 1 : this.months()));
 
+    /** @hidden Current calendar year, used as a fallback when no month is resolved (templates can't call `new Date()`). */
+    protected readonly currentYear = new Date().getFullYear();
+
     /** @hidden */
     protected readonly calendarMonths = computed<CalendarCurrent[]>(() => {
         const base = this.baseMonth();
