@@ -1,7 +1,9 @@
+import { OverlayModule } from '@angular/cdk/overlay';
 import { Component, ViewChild } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
+import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
 import { CalendarComponent } from '../calendar.component';
 import { DateRange } from '../models/date-range';
 import { FdCalendarContainerComponent } from './calendar-container.component';
@@ -75,7 +77,9 @@ describe('FdCalendarContainerComponent', () => {
                 TestSingleHostComponent,
                 TestNMonthHostComponent,
                 TestVerticalHostComponent,
-                FdDatetimeModule
+                FdDatetimeModule,
+                OverlayModule,
+                DialogModule
             ]
         }).compileComponents();
     }));
@@ -839,13 +843,14 @@ describe('FdCalendarContainerComponent', () => {
     });
 
     // ---------------------------------------------------------------------------
-    // Round 2 — container-level picker overlay (ACs 3–9 moved, ACs 17–21 new)
+    // Container picker hosted via DialogService (replaces hand-rolled inline overlay)
     // ---------------------------------------------------------------------------
 
-    describe('container-level picker overlay (Round 2)', () => {
+    describe('container picker (DialogService)', () => {
         let nFixture: ComponentFixture<TestNMonthHostComponent>;
         let nHost: TestNMonthHostComponent;
         let nComponent: FdCalendarContainerComponent<FdDate>;
+        let dialog: DialogService;
 
         beforeEach(() => {
             nFixture = TestBed.createComponent(TestNMonthHostComponent);
@@ -853,344 +858,110 @@ describe('FdCalendarContainerComponent', () => {
             nHost.months = 2;
             nFixture.detectChanges();
             nComponent = nFixture.componentInstance.container;
+            dialog = TestBed.inject(DialogService);
         });
 
-        function openPickerOnCalendar(calIndex: number, view: 'month' | 'year' | 'aggregatedYear'): void {
-            const calInstances = nFixture.debugElement
+        function calInstances(): CalendarComponent<FdDate>[] {
+            return nFixture.debugElement
                 .queryAll(By.directive(CalendarComponent))
                 .map((de) => de.componentInstance as CalendarComponent<FdDate>);
-            calInstances[calIndex].activeViewChange.emit(view);
+        }
+
+        function openPicker(calIndex: number, view: 'month' | 'year' | 'aggregatedYear'): void {
+            calInstances()[calIndex].activeViewChange.emit(view);
+            nFixture.detectChanges();
+            tick();
             nFixture.detectChanges();
         }
 
-        // AC3 (moved to container) — overlay renders inside the container, not calendar
-        it('AC3: after triggering picker, overlay element renders inside fd-calendar-container', () => {
-            openPickerOnCalendar(0, 'month');
-            const overlay = nFixture.nativeElement.querySelector('.fd-calendar-container__picker-overlay');
-            expect(overlay).not.toBeNull();
-        });
+        function overlayContainer(): HTMLElement | null {
+            return document.querySelector('.cdk-overlay-container');
+        }
 
-        it('AC3: overlay is NOT inside any fd-calendar element', () => {
-            openPickerOnCalendar(0, 'month');
-            const calEls = nFixture.nativeElement.querySelectorAll('fd-calendar');
-            calEls.forEach((cal: HTMLElement) => {
-                expect(cal.querySelector('.fd-calendar-container__picker-overlay')).toBeNull();
-            });
-        });
+        it('triggering month view opens a dialog containing fd-calendar-month-view', fakeAsync(() => {
+            openPicker(0, 'month');
+            expect(dialog.hasOpenDialogs()).toBe(true);
+            expect(overlayContainer()!.querySelector('fd-calendar-month-view')).not.toBeNull();
+            nComponent['_pickerDialogRef']?.close();
+            tick(200);
+        }));
 
-        // AC4 (moved to container) — backdrop renders inside the container
-        it('AC4: backdrop element renders inside fd-calendar-container', () => {
-            openPickerOnCalendar(0, 'month');
-            const backdrop = nFixture.nativeElement.querySelector('.fd-calendar-container__picker-backdrop');
-            expect(backdrop).not.toBeNull();
-        });
-
-        it('AC4: overlay and backdrop absent when picker is closed', () => {
-            // No trigger — picker should be closed
-            expect(nFixture.nativeElement.querySelector('.fd-calendar-container__picker-overlay')).toBeNull();
-            expect(nFixture.nativeElement.querySelector('.fd-calendar-container__picker-backdrop')).toBeNull();
-        });
-
-        // AC6 (moved to container) — ESC closes picker
-        it('AC6: ESC keydown on container overlay closes picker', () => {
-            openPickerOnCalendar(0, 'month');
-            const overlay: HTMLElement = nFixture.nativeElement.querySelector('.fd-calendar-container__picker-overlay');
-            expect(overlay).not.toBeNull();
-
-            overlay.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
-            nFixture.detectChanges();
-
-            expect(nFixture.nativeElement.querySelector('.fd-calendar-container__picker-overlay')).toBeNull();
-        });
-
-        // AC7 (moved to container) — backdrop click closes picker
-        it('AC7: clicking container backdrop closes picker', () => {
-            openPickerOnCalendar(0, 'month');
-
-            const backdropDe = nFixture.debugElement.query(By.css('.fd-calendar-container__picker-backdrop'));
-            expect(backdropDe).not.toBeNull();
-
-            backdropDe.triggerEventHandler('click', new MouseEvent('click', { bubbles: true }));
-            nFixture.detectChanges();
-
-            expect(nFixture.nativeElement.querySelector('.fd-calendar-container__picker-overlay')).toBeNull();
-        });
-
-        // AC9 (moved to container) — selection updates the correct calendar
-        it('AC9: month selection from picker updates the calendar at the triggered index', () => {
-            // Open picker from calendar at index=1 (second calendar)
-            openPickerOnCalendar(1, 'month');
-            const baseMonthBefore = (nComponent as any).baseMonth();
-
-            // Directly call the container's handler that receives month selection
-            (nComponent as any).onPickerMonthSelected(3); // pick March
-            nFixture.detectChanges();
-
-            // Picker should be closed
-            expect(nFixture.nativeElement.querySelector('.fd-calendar-container__picker-overlay')).toBeNull();
-
-            // The base month should have shifted so calendar at index=1 shows March of the same year
-            const months = (nComponent as any).calendarMonths();
-            expect(months[1].month).toBe(3);
-        });
-
-        // AC13 (ARIA — moved to container overlay)
-        it('AC13: container overlay has role="dialog" and aria-label', () => {
-            openPickerOnCalendar(0, 'month');
-            const overlay: HTMLElement = nFixture.nativeElement.querySelector('.fd-calendar-container__picker-overlay');
-            expect(overlay.getAttribute('role')).toBe('dialog');
-            expect(overlay.getAttribute('aria-label')).toBeTruthy();
-        });
-
-        it('AC13: container backdrop has aria-hidden="true"', () => {
-            openPickerOnCalendar(0, 'month');
-            const backdrop: HTMLElement = nFixture.nativeElement.querySelector(
-                '.fd-calendar-container__picker-backdrop'
-            );
-            expect(backdrop.getAttribute('aria-hidden')).toBe('true');
-        });
-
-        // AC17 — overlay/backdrop are direct children of .fd-calendar-container-inner
-        it('AC17: overlay and backdrop are direct children of .fd-calendar-container-inner (not of the host root)', () => {
-            openPickerOnCalendar(0, 'month');
-            const inner: HTMLElement = nFixture.nativeElement.querySelector('.fd-calendar-container-inner');
-            const overlay = inner.querySelector(':scope > .fd-calendar-container__picker-overlay');
-            const backdrop = inner.querySelector(':scope > .fd-calendar-container__picker-backdrop');
-            expect(overlay).not.toBeNull();
-            expect(backdrop).not.toBeNull();
-        });
-
-        // AC20 — clicked calendar index is captured; correct calendar updates on selection
-        it('AC20: picking from calendar 2 updates the second calendar, not the first', () => {
-            // Set a known base month
-            (nComponent as any).baseMonth.set({ month: 5, year: 2026 }); // May / June
-            nFixture.detectChanges();
-
-            openPickerOnCalendar(1, 'month'); // trigger from calendar at index=1
-
-            (nComponent as any).onPickerMonthSelected(8); // pick August
-            nFixture.detectChanges();
-
-            const months = (nComponent as any).calendarMonths();
-            // calendar[1] should show August; base = July
-            expect(months[1].month).toBe(8);
-            expect(months[0].month).toBe(7);
-        });
-
-        // AC21 — calendar component stays on day view in popover mode (never self-switches)
-        it('AC21: calendar activeView stays "day" after header click when in popover mode', () => {
-            const calInstances = nFixture.debugElement
-                .queryAll(By.directive(CalendarComponent))
-                .map((de) => de.componentInstance as CalendarComponent<FdDate>);
-
-            calInstances[0].handleActiveViewChange('month');
-            nFixture.detectChanges();
-
-            // The calendar itself should NOT have switched away from day view
-            expect(calInstances[0].activeView).toBe('day');
-        });
-
-        // AC11 regression guard — calendar overlay no longer renders inside fd-calendar in popover mode
-        it('AC11 regression: individual fd-calendar elements do not contain overlay or backdrop elements', () => {
-            openPickerOnCalendar(0, 'year');
-            const calEls: NodeListOf<HTMLElement> = nFixture.nativeElement.querySelectorAll('fd-calendar');
-            calEls.forEach((cal) => {
-                expect(cal.querySelector('.fd-calendar__picker-overlay')).toBeNull();
-                expect(cal.querySelector('.fd-calendar__picker-backdrop')).toBeNull();
-                expect(cal.querySelector('.fd-calendar-container__picker-overlay')).toBeNull();
-                expect(cal.querySelector('.fd-calendar-container__picker-backdrop')).toBeNull();
-            });
-        });
-
-        // year / aggregatedYear trigger also opens picker
-        it('year trigger opens picker with year view inside overlay', () => {
-            openPickerOnCalendar(0, 'year');
-            expect(nFixture.nativeElement.querySelector('.fd-calendar-container__picker-overlay')).not.toBeNull();
-            expect(nFixture.nativeElement.querySelector('fd-calendar-year-view')).not.toBeNull();
-        });
-
-        it('aggregatedYear trigger opens picker with aggregated-year view inside overlay', () => {
-            openPickerOnCalendar(0, 'aggregatedYear');
-            expect(nFixture.nativeElement.querySelector('.fd-calendar-container__picker-overlay')).not.toBeNull();
-            expect(nFixture.nativeElement.querySelector('fd-calendar-aggregated-year-view')).not.toBeNull();
-        });
-
-        // -----------------------------------------------------------------------
-        // Backdrop pointer-blocking + day-grid centering (Round 3 — 2026-07-02)
-        // -----------------------------------------------------------------------
-
-        it('backdrop sits above day-grid stacking context (z-index chain intact)', () => {
-            openPickerOnCalendar(0, 'month');
-            const inner: HTMLElement = nFixture.nativeElement.querySelector('.fd-calendar-container-inner');
-            const backdrop: HTMLElement = inner.querySelector('.fd-calendar-container__picker-backdrop')!;
-            const row: HTMLElement = inner.querySelector('.fd-calendar-container__row')!;
-            const calendars: HTMLElement[] = Array.from(row.querySelectorAll('fd-calendar'));
-
-            // Backdrop must exist as a direct child of inner.
-            expect(inner.querySelector(':scope > .fd-calendar-container__picker-backdrop')).not.toBeNull();
-
-            // fd-calendar elements are inside the row wrapper; the backdrop is a sibling of the row,
-            // not inside any fd-calendar.
-            expect(calendars.length).toBeGreaterThan(0);
-            calendars.forEach((cal) => {
-                expect(cal.contains(backdrop)).toBe(false);
-            });
-
-            expect(backdrop.classList.contains('fd-calendar-container__picker-backdrop')).toBe(true);
-        });
-
-        it('per-calendar headers sit above backdrop (still clickable to switch picker)', () => {
-            openPickerOnCalendar(0, 'month');
-            const inner: HTMLElement = nFixture.nativeElement.querySelector('.fd-calendar-container-inner');
-            const backdrop: HTMLElement = inner.querySelector('.fd-calendar-container__picker-backdrop')!;
-            const headers: HTMLElement[] = Array.from(nFixture.nativeElement.querySelectorAll('fd-calendar-header'));
-
-            // Headers must exist and must NOT be inside the backdrop.
-            expect(headers.length).toBeGreaterThan(0);
-            headers.forEach((header) => {
-                expect(backdrop.contains(header)).toBe(false);
-            });
-
-            // Headers must bear the class that the z-index: 101 rule targets.
-            headers.forEach((header) => {
-                expect(header.tagName.toLowerCase()).toBe('fd-calendar-header');
-            });
-        });
-
-        it('picker overlay renders inside .fd-calendar-container-inner (not container root)', () => {
-            openPickerOnCalendar(0, 'month');
-            const inner: HTMLElement = nFixture.nativeElement.querySelector('.fd-calendar-container-inner');
-            const overlay: HTMLElement | null = inner.querySelector(':scope > .fd-calendar-container__picker-overlay');
-            const backdrop: HTMLElement | null = inner.querySelector(
-                ':scope > .fd-calendar-container__picker-backdrop'
-            );
-            expect(overlay).not.toBeNull();
-            expect(backdrop).not.toBeNull();
-        });
-
-        // -----------------------------------------------------------------------
-        // Round 2 — Task A: weekday row above backdrop
-        // -----------------------------------------------------------------------
-
-        it('Task A: weekday row (thead) exists inside fd-calendar-day-view', () => {
-            openPickerOnCalendar(0, 'month');
-            const dayView = nFixture.nativeElement.querySelector('fd-calendar-day-view');
-            expect(dayView).not.toBeNull();
-            const weekdayRow = dayView.querySelector('thead.fd-calendar__group');
-            expect(weekdayRow).not.toBeNull();
-        });
-
-        // -----------------------------------------------------------------------
-        // Round 2 — Task B: long month names
-        // -----------------------------------------------------------------------
-
-        it('Task B: month picker overlay renders full month names (long format)', () => {
+        it('month picker renders long month names (guards AC8 longMonthNames binding)', fakeAsync(() => {
             (nComponent as any).baseMonth.set({ month: 1, year: 2026 });
             nFixture.detectChanges();
-            openPickerOnCalendar(0, 'month');
-            const overlay: HTMLElement = nFixture.nativeElement.querySelector('.fd-calendar-container__picker-overlay');
-            const monthView: HTMLElement | null = overlay.querySelector('fd-calendar-month-view');
+            openPicker(0, 'month');
+            const monthView = overlayContainer()!.querySelector('fd-calendar-month-view');
             expect(monthView).not.toBeNull();
             expect(monthView!.textContent).toContain('January');
-        });
+            nComponent['_pickerDialogRef']?.close();
+            tick(200);
+        }));
 
-        // -----------------------------------------------------------------------
-        // Round 2 — Task C: aggregate header
-        // -----------------------------------------------------------------------
-
-        it('Task C: aggregate header renders when picker view is year', () => {
-            openPickerOnCalendar(0, 'year');
-            const aggHeader = nFixture.nativeElement.querySelector('.fd-calendar-container__aggregate-header');
-            expect(aggHeader).not.toBeNull();
-        });
-
-        it('Task C: aggregate header renders when picker view is aggregatedYear', () => {
-            openPickerOnCalendar(0, 'aggregatedYear');
-            const aggHeader = nFixture.nativeElement.querySelector('.fd-calendar-container__aggregate-header');
-            expect(aggHeader).not.toBeNull();
-        });
-
-        it('Task C: aggregate header does NOT render when picker view is month', () => {
-            openPickerOnCalendar(0, 'month');
-            expect(nFixture.nativeElement.querySelector('.fd-calendar-container__aggregate-header')).toBeNull();
-        });
-
-        it('Task C: aggregate header does NOT render when picker is closed', () => {
-            expect(nFixture.nativeElement.querySelector('.fd-calendar-container__aggregate-header')).toBeNull();
-        });
-
-        it('Task C: per-calendar headers have headers-hidden class when picker view is year', () => {
-            openPickerOnCalendar(0, 'year');
-            const calendars: NodeListOf<HTMLElement> = nFixture.nativeElement.querySelectorAll('fd-calendar');
-            calendars.forEach((cal) => {
-                expect(cal.classList.contains('fd-calendar-container__slot--headers-hidden')).toBe(true);
-            });
-        });
-
-        it('Task C: aggregate year-range label shows correct window (anchor 2020, grid 4x5 = "2020 - 2039")', () => {
-            (nComponent as any).baseMonth.set({ month: 1, year: 2020 });
+        it('selecting a month updates the triggered calendar and closes the dialog', fakeAsync(() => {
+            openPicker(0, 'month');
+            (nComponent as any).onPickerMonthSelected(3); // March
             nFixture.detectChanges();
-            openPickerOnCalendar(0, 'year');
-            const label: HTMLElement | null = nFixture.nativeElement.querySelector(
-                '.fd-calendar-container__aggregate-header__label'
-            );
-            expect(label).not.toBeNull();
-            expect(label!.textContent?.trim()).toBe('2020 - 2039');
-        });
+            tick(200);
+            const months = (nComponent as any).calendarMonths();
+            expect(months[0].month).toBe(3);
+            expect(dialog.hasOpenDialogs()).toBe(false);
+        }));
 
-        it('Task C: clicking aggregate year-range label switches picker to aggregatedYear view', () => {
-            openPickerOnCalendar(0, 'year');
-            const labelDe = nFixture.debugElement.query(By.css('.fd-calendar-container__aggregate-header__label'));
-            expect(labelDe).not.toBeNull();
-            labelDe.triggerEventHandler('click', new MouseEvent('click', { bubbles: true }));
+        it('picking from calendar index 1 updates the second calendar, not the first', fakeAsync(() => {
+            (nComponent as any).baseMonth.set({ month: 5, year: 2026 }); // May / June
             nFixture.detectChanges();
-            expect((nComponent as any).pickerState().view).toBe('aggregatedYear');
-        });
-
-        it('Task C: aggregate next-arrow shifts pickerYearAnchor forward by 20 (yearViewGrid 4x5)', () => {
-            (nComponent as any).baseMonth.set({ month: 1, year: 2020 });
+            openPicker(1, 'month');
+            (nComponent as any).onPickerMonthSelected(8); // August
             nFixture.detectChanges();
-            openPickerOnCalendar(0, 'year');
-            expect((nComponent as any).pickerYearAnchor()).toBe(2020);
-            const arrowDes = nFixture.debugElement.queryAll(By.css('.fd-calendar-container__aggregate-header button'));
-            // arrowDes: [0]=prev, [1]=label-button, [2]=next
-            arrowDes[arrowDes.length - 1].triggerEventHandler('click', new MouseEvent('click', { bubbles: true }));
+            tick(200);
+            const months = (nComponent as any).calendarMonths();
+            expect(months[1].month).toBe(8);
+            expect(months[0].month).toBe(7); // base shifted back by 1
+            expect(dialog.hasOpenDialogs()).toBe(false);
+        }));
+
+        it('triggering year view opens a dialog containing fd-calendar-year-view; selecting a year closes it', fakeAsync(() => {
+            openPicker(0, 'year');
+            expect(dialog.hasOpenDialogs()).toBe(true);
+            expect(overlayContainer()!.querySelector('fd-calendar-year-view')).not.toBeNull();
+            (nComponent as any).onPickerYearSelected(2030);
             nFixture.detectChanges();
-            expect((nComponent as any).pickerYearAnchor()).toBe(2040);
-        });
+            tick(200);
+            const months = (nComponent as any).calendarMonths();
+            expect(months[0].year).toBe(2030);
+            expect(dialog.hasOpenDialogs()).toBe(false);
+        }));
 
-        it('Task C: aggregate prev-arrow in aggregatedYear view shifts by 400 (4x5 * 4x5 = not right; actual: yearGrid*aggGrid)', () => {
-            (nComponent as any).baseMonth.set({ month: 1, year: 2020 });
+        it('triggering aggregatedYear view opens a dialog containing fd-calendar-aggregated-year-view', fakeAsync(() => {
+            openPicker(0, 'aggregatedYear');
+            expect(dialog.hasOpenDialogs()).toBe(true);
+            expect(overlayContainer()!.querySelector('fd-calendar-aggregated-year-view')).not.toBeNull();
+            nComponent['_pickerDialogRef']?.close();
+            tick(200);
+        }));
+
+        it('day grids stay rendered in the DOM while the picker is open (AC4)', fakeAsync(() => {
+            openPicker(0, 'month');
+            const calEls = nFixture.nativeElement.querySelectorAll('fd-calendar');
+            expect(calEls.length).toBe(2);
+            const dayView = nFixture.nativeElement.querySelector('fd-calendar-day-view');
+            expect(dayView).not.toBeNull();
+            nComponent['_pickerDialogRef']?.close();
+            tick(200);
+        }));
+
+        it('calendar activeView stays "day" after header click in popover mode (never self-switches)', () => {
+            const instances = calInstances();
+            instances[0].handleActiveViewChange('month');
             nFixture.detectChanges();
-            openPickerOnCalendar(0, 'aggregatedYear');
-            expect((nComponent as any).pickerYearAnchor()).toBe(2020);
-            const prevArrowDe = nFixture.debugElement.query(By.css('.fd-calendar-container__aggregate-header button'));
-            prevArrowDe.triggerEventHandler('click', new MouseEvent('click', { bubbles: true }));
+            expect(instances[0].activeView).toBe('day');
+        });
+
+        it('no dialog opens for the "day" view (guard)', fakeAsync(() => {
+            calInstances()[0].activeViewChange.emit('day' as any);
             nFixture.detectChanges();
-            // yearViewGrid 4x5=20, aggregatedYearViewGrid 4x3=12 → shift = 20*12 = 240
-            expect((nComponent as any).pickerYearAnchor()).toBe(2020 - 240);
-        });
-
-        // -----------------------------------------------------------------------
-        // Hotfix — aggregate header layout (column-flex inner + row wrapper)
-        // -----------------------------------------------------------------------
-
-        it('aggregate header spans full width above calendar row (year picker)', () => {
-            openPickerOnCalendar(0, 'year');
-            const inner: HTMLElement = nFixture.nativeElement.querySelector('.fd-calendar-container-inner');
-            const aggHeader = inner.querySelector(':scope > .fd-calendar-container__aggregate-header');
-            const row = inner.querySelector(':scope > .fd-calendar-container__row');
-            expect(aggHeader).not.toBeNull();
-            expect(row).not.toBeNull();
-            expect(row!.querySelectorAll('fd-calendar').length).toBe(2);
-        });
-
-        it('calendar row contains all fd-calendar instances when picker is closed', () => {
-            const inner: HTMLElement = nFixture.nativeElement.querySelector('.fd-calendar-container-inner');
-            const row = inner.querySelector(':scope > .fd-calendar-container__row');
-            expect(row).not.toBeNull();
-            expect(row!.querySelectorAll('fd-calendar').length).toBe(2);
-            expect(inner.querySelector(':scope > .fd-calendar-container__aggregate-header')).toBeNull();
-        });
+            tick();
+            expect(dialog.hasOpenDialogs()).toBe(false);
+        }));
     });
 });

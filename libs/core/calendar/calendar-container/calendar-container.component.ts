@@ -2,20 +2,21 @@ import {
     ChangeDetectionStrategy,
     Component,
     computed,
-    ElementRef,
     forwardRef,
     inject,
+    Injector,
     input,
     model,
     signal,
-    ViewChild,
+    TemplateRef,
+    viewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { FocusTrapService } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
+import { DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
 import { SpecialDayRule } from '@fundamental-ngx/core/shared';
 
 import { CalendarAggregatedYearViewComponent } from '../calendar-views/calendar-aggregated-year-view/calendar-aggregated-year-view.component';
@@ -71,10 +72,6 @@ let calendarContainerUniqueId = 0;
     ]
 })
 export class FdCalendarContainerComponent<D> implements ControlValueAccessor {
-    /** @hidden Reference to the picker overlay element, used for focus trap. */
-    @ViewChild('containerPickerOverlay')
-    private _containerPickerOverlayRef: ElementRef<HTMLElement> | undefined;
-
     /** Layout direction. 'horizontal' shows side-by-side; 'vertical' stacks. */
     readonly layout = input<'horizontal' | 'vertical'>('horizontal');
 
@@ -134,19 +131,20 @@ export class FdCalendarContainerComponent<D> implements ControlValueAccessor {
     /** @hidden */
     protected readonly id = 'fd-calendar-container-' + calendarContainerUniqueId++;
 
+    /** @hidden Reference to the picker dialog template rendered via DialogService. */
+    protected readonly pickerTemplate = viewChild.required<TemplateRef<unknown>>('pickerTemplate');
+
     /** The month/year displayed by the first (leftmost/topmost) calendar. */
     protected readonly baseMonth = signal<CalendarCurrent>(this._getInitialMonth());
 
     /** Shared hover date for cross-calendar hover coordination. */
     protected readonly hoverDate = signal<D | null | undefined>(null);
 
-    /** @hidden Picker overlay open state for the container-level month/year/year-range picker. */
-    protected readonly pickerState = signal<{
-        open: boolean;
-        view: 'month' | 'year' | 'aggregatedYear';
-        calendarIndex: number;
-        triggerEl: HTMLElement | null;
-    }>({ open: false, view: 'month', calendarIndex: -1, triggerEl: null });
+    /** @hidden Current view of the container-level picker. */
+    protected readonly pickerView = signal<'month' | 'year' | 'aggregatedYear'>('month');
+
+    /** @hidden Index of the calendar that triggered the picker (-1 = none). */
+    protected readonly pickerCalendarIndex = signal<number>(-1);
 
     /** @hidden Year anchor for the picker's year/aggregatedYear view. Set when picker opens; shifted by aggregate header arrows. */
     protected readonly pickerYearAnchor = signal<number>(0);
@@ -189,10 +187,13 @@ export class FdCalendarContainerComponent<D> implements ControlValueAccessor {
     });
 
     /** @hidden */
-    private readonly _focusTrapService = inject(FocusTrapService, { optional: true });
+    private readonly _dialogService = inject(DialogService);
 
-    /** @hidden Active focus trap ID when picker overlay is open. */
-    private _pickerTrapId: string | null = null;
+    /** @hidden */
+    private readonly _injector = inject(Injector);
+
+    /** @hidden Reference to the currently open picker dialog. */
+    private _pickerDialogRef: DialogRef | null = null;
 
     /** @hidden */
     writeValue(value: DateRange<D> | D | null): void {
@@ -269,42 +270,31 @@ export class FdCalendarContainerComponent<D> implements ControlValueAccessor {
         if (view === 'day') {
             return;
         }
-        const triggerEl = document.activeElement as HTMLElement | null;
-        this.pickerState.set({
-            open: true,
-            view: view as 'month' | 'year' | 'aggregatedYear',
-            calendarIndex: index,
-            triggerEl
-        });
+        this.pickerView.set(view as 'month' | 'year' | 'aggregatedYear');
+        this.pickerCalendarIndex.set(index);
         // Anchor the picker's year window on the clicked calendar's current year.
         const currentYear = this.calendarMonths()[index]?.year ?? new Date().getFullYear();
         this.pickerYearAnchor.set(currentYear);
-        // Focus trap activates after the overlay renders — use setTimeout to let the @if branch render.
-        setTimeout(() => this._activateContainerPickerTrap());
+        this._pickerDialogRef = this._dialogService.open(
+            this.pickerTemplate(),
+            {
+                hasBackdrop: true,
+                backdropClickCloseable: true,
+                escKeyCloseable: true,
+                ariaLabel: this.pickerAriaLabel()
+            },
+            this._injector
+        );
     }
 
-    /** @hidden Closes the container-level picker and restores focus to the trigger element. */
+    /** @hidden Closes the container-level picker. Focus restore is handled by DialogService. */
     protected closeContainerPicker(): void {
-        if (!this.pickerState().open) {
-            return;
-        }
-        const trigger = this.pickerState().triggerEl;
-        this._deactivateContainerPickerTrap();
-        this.pickerState.set({ open: false, view: 'month', calendarIndex: -1, triggerEl: null });
-        trigger?.focus();
+        this._pickerDialogRef?.close();
     }
 
-    /** @hidden ESC keydown on the container overlay. */
-    protected onContainerPickerKeydown(event: KeyboardEvent): void {
-        if (event.key === 'Escape') {
-            event.stopPropagation();
-            this.closeContainerPicker();
-        }
-    }
-
-    /** @hidden Returns the ARIA label for the container picker overlay. */
-    protected pickerOverlayAriaLabel(): string {
-        switch (this.pickerState().view) {
+    /** @hidden Returns the ARIA label for the container picker dialog. */
+    protected pickerAriaLabel(): string {
+        switch (this.pickerView()) {
             case 'month':
                 return 'Month picker';
             case 'year':
@@ -316,7 +306,7 @@ export class FdCalendarContainerComponent<D> implements ControlValueAccessor {
 
     /** @hidden Month selected from the picker — update the calendar at the captured index. */
     protected onPickerMonthSelected(month: number): void {
-        const { calendarIndex } = this.pickerState();
+        const calendarIndex = this.pickerCalendarIndex();
         const currentMonths = this.calendarMonths();
         if (calendarIndex < 0 || calendarIndex >= currentMonths.length) {
             return;
@@ -324,32 +314,32 @@ export class FdCalendarContainerComponent<D> implements ControlValueAccessor {
         const targetYear = currentMonths[calendarIndex].year;
         const newMonth: CalendarCurrent = { month, year: targetYear };
         this.baseMonth.set(this._shiftMonth(newMonth, -calendarIndex));
-        this.closeContainerPicker();
+        this._pickerDialogRef?.close();
     }
 
     /** @hidden Year selected from the picker — update calendar, close picker. */
     protected onPickerYearSelected(year: number): void {
-        const { calendarIndex } = this.pickerState();
+        const calendarIndex = this.pickerCalendarIndex();
         const currentMonths = this.calendarMonths();
         if (calendarIndex < 0 || calendarIndex >= currentMonths.length) {
             return;
         }
         const newMonth: CalendarCurrent = { month: currentMonths[calendarIndex].month, year };
         this.baseMonth.set(this._shiftMonth(newMonth, -calendarIndex));
-        this.closeContainerPicker();
+        this._pickerDialogRef?.close();
     }
 
     /** @hidden Year-range selected — set anchor and navigate back to year view (keep picker open). */
     protected onPickerYearsSelected(startYear: number): void {
         this.pickerYearAnchor.set(startYear);
-        this.pickerState.update((s) => ({ ...s, view: 'year' }));
+        this.pickerView.set('year');
         // Do NOT update baseMonth here — that is a separate concern from the picker's own display anchor.
         // baseMonth updates only on final selection (onPickerYearSelected / onPickerMonthSelected).
     }
 
     /** @hidden Shift picker year window by ±(cols*rows). */
     protected shiftPickerYearWindow(direction: 1 | -1): void {
-        const view = this.pickerState().view;
+        const view = this.pickerView();
         if (view === 'year') {
             const size = this.yearViewGrid().cols * this.yearViewGrid().rows;
             this.pickerYearAnchor.update((y) => y + direction * size);
@@ -363,7 +353,7 @@ export class FdCalendarContainerComponent<D> implements ControlValueAccessor {
 
     /** @hidden Click on aggregate year-range label — switch to aggregatedYear view. */
     protected onAggregateYearRangeLabelClick(): void {
-        this.pickerState.update((s) => ({ ...s, view: 'aggregatedYear' }));
+        this.pickerView.set('aggregatedYear');
     }
 
     /** @hidden */
@@ -371,30 +361,6 @@ export class FdCalendarContainerComponent<D> implements ControlValueAccessor {
 
     /** @hidden */
     private _onTouched: () => void = () => {};
-
-    /** @hidden */
-    private _activateContainerPickerTrap(): void {
-        if (this._pickerTrapId || !this._containerPickerOverlayRef?.nativeElement || !this._focusTrapService) {
-            return;
-        }
-        const el = this._containerPickerOverlayRef.nativeElement;
-        this._focusTrapService.pauseCurrentFocusTrap();
-        this._pickerTrapId = this._focusTrapService.createFocusTrap(el, {
-            escapeDeactivates: false,
-            clickOutsideDeactivates: false,
-            returnFocusOnDeactivate: false,
-            fallbackFocus: el // prevents "no tabbable node" throw in test environments
-        });
-    }
-
-    /** @hidden */
-    private _deactivateContainerPickerTrap(): void {
-        if (this._pickerTrapId && this._focusTrapService) {
-            this._focusTrapService.deactivateFocusTrap(this._pickerTrapId);
-            this._pickerTrapId = null;
-            this._focusTrapService.unpauseCurrentFocusTrap();
-        }
-    }
 
     /** @hidden */
     private _shiftMonth(cur: CalendarCurrent, delta: number): CalendarCurrent {
