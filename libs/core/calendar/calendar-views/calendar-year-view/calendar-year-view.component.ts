@@ -12,14 +12,13 @@ import {
     Output,
     SimpleChanges,
     ViewEncapsulation,
-    effect,
     inject
 } from '@angular/core';
 
 import { DATE_TIME_FORMATS, DateTimeFormats, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { Nullable, onLocaleChange } from '@fundamental-ngx/cdk/utils';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { CalendarService } from '../../calendar.service';
 import { CalendarYear, CalendarYearGrid } from '../../models/calendar-year-grid';
@@ -146,12 +145,9 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, Focusabl
         this._currentYear = _dateTimeAdapter.getYear(_dateTimeAdapter.today());
         this._firstYearInList = this._currentYear;
 
-        effect(() => {
-            this._dateTimeAdapter.locale();
-            if (this._initiated) {
-                this._constructYearGrid();
-                this._changeDetectorRef.markForCheck();
-            }
+        onLocaleChange(this._dateTimeAdapter, () => {
+            this._constructYearGrid();
+            this._changeDetectorRef.markForCheck();
         });
     }
 

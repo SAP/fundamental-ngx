@@ -3,7 +3,6 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    effect,
     ElementRef,
     EventEmitter,
     forwardRef,
@@ -45,7 +44,7 @@ import { TimeComponent } from '@fundamental-ngx/core/time';
 
 import { NgTemplateOutlet } from '@angular/common';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { Nullable, onLocaleChange } from '@fundamental-ngx/cdk/utils';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { createMissingDateImplementationError } from './errors';
 
@@ -342,8 +341,7 @@ export class TimePickerComponent<D>
             throw createMissingDateImplementationError('DATE_TIME_FORMATS');
         }
 
-        effect(() => {
-            this._dateTimeAdapter.locale();
+        onLocaleChange(this._dateTimeAdapter, () => {
             this._calculateTimeOptions();
             this._formatTimeInputField();
             this._changeDetectorRef.markForCheck();

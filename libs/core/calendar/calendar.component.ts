@@ -2,7 +2,6 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    effect,
     ElementRef,
     EventEmitter,
     forwardRef,
@@ -23,7 +22,7 @@ import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } fro
 import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { SpecialDayRule } from '@fundamental-ngx/core/shared';
 
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { Nullable, onLocaleChange } from '@fundamental-ngx/cdk/utils';
 import {
     ContentDensityModule,
     ContentDensityObserver,
@@ -351,8 +350,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
         this.selectedDate = this._dateTimeAdapter.today();
         this._changeDetectorRef.markForCheck();
 
-        effect(() => {
-            this._dateTimeAdapter.locale();
+        onLocaleChange(this._dateTimeAdapter, () => {
             this._adapterStartingDayOfWeek = (this._dateTimeAdapter.getFirstDayOfWeek() + 1) as DaysOfWeek;
             this._changeDetectorRef.markForCheck();
         });

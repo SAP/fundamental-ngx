@@ -28,7 +28,7 @@ import { DateRange } from '../../models/date-range';
 
 import { NgClass } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { Nullable, onLocaleChange } from '@fundamental-ngx/cdk/utils';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { shallowEqual } from 'fast-equals';
 import { CalendarLegendFocusingService } from '../../calendar-legend/calendar-legend-focusing.service';
@@ -334,13 +334,10 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
         });
 
         // Effect to react to locale changes
-        effect(() => {
-            this._dateTimeAdapter.locale();
-            if (this._isInitiated) {
-                this._refreshShortWeekDays();
-                this._buildDayViewGrid();
-                this.changeDetRef.markForCheck();
-            }
+        onLocaleChange(this._dateTimeAdapter, () => {
+            this._refreshShortWeekDays();
+            this._buildDayViewGrid();
+            this.changeDetRef.markForCheck();
         });
     }
 

@@ -7,7 +7,6 @@ import {
     Component,
     ComponentRef,
     DestroyRef,
-    effect,
     ElementRef,
     EventEmitter,
     forwardRef,
@@ -31,7 +30,7 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
-import { DynamicComponentService, FocusTrapService, Nullable } from '@fundamental-ngx/cdk/utils';
+import { DynamicComponentService, FocusTrapService, Nullable, onLocaleChange } from '@fundamental-ngx/cdk/utils';
 import { BarComponent, BarElementDirective, BarRightDirective } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
@@ -526,8 +525,7 @@ export class DatePickerComponent<D>
             throw createMissingDateImplementationError('DATE_TIME_FORMATS');
         }
 
-        effect(() => {
-            this._dateTimeAdapter.locale();
+        onLocaleChange(this._dateTimeAdapter, () => {
             this.formatInputDate(this.selectedDate);
             this._changeDetectionRef.markForCheck();
         });

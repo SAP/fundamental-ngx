@@ -2,7 +2,6 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    effect,
     ElementRef,
     EventEmitter,
     Input,
@@ -14,6 +13,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
+import { onLocaleChange } from '@fundamental-ngx/cdk/utils';
 import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -217,21 +217,15 @@ export class CalendarHeaderComponent<D> implements OnInit, OnChanges {
     private _amountOfYearsPerPeriod = 1;
 
     /** @hidden */
-    private _initiated = false;
-
-    /** @hidden */
     constructor(
         private _changeDetRef: ChangeDetectorRef,
         private _calendarService: CalendarService,
         private _dateTimeAdapter: DatetimeAdapter<D>
     ) {
-        effect(() => {
-            this._dateTimeAdapter.locale();
-            if (this._initiated) {
-                this._calculateMonthNames();
-                this._calculateLabels();
-                this._changeDetRef.markForCheck();
-            }
+        onLocaleChange(this._dateTimeAdapter, () => {
+            this._calculateMonthNames();
+            this._calculateLabels();
+            this._changeDetRef.markForCheck();
         });
     }
 
@@ -247,7 +241,6 @@ export class CalendarHeaderComponent<D> implements OnInit, OnChanges {
 
     /** @hidden */
     ngOnInit(): void {
-        this._initiated = true;
         this._calendarService.leftArrowId = this._prevButtonId;
 
         this._calculateMonthNames();
