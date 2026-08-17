@@ -2,6 +2,7 @@ import {
     ChangeDetectionStrategy,
     Component,
     computed,
+    DestroyRef,
     forwardRef,
     inject,
     Injector,
@@ -12,6 +13,7 @@ import {
     viewChild,
     ViewEncapsulation
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -157,6 +159,18 @@ export class FdCalendarContainerComponent<D> implements ControlValueAccessor {
         return `${anchor} - ${anchor + size - 1}`;
     });
 
+    /** @hidden ARIA label for the container picker dialog. */
+    protected readonly pickerAriaLabel = computed<string>(() => {
+        switch (this.pickerView()) {
+            case 'month':
+                return 'Month picker';
+            case 'year':
+                return 'Year picker';
+            case 'aggregatedYear':
+                return 'Year range picker';
+        }
+    });
+
     /** @hidden */
     protected readonly cssClass = computed(() => {
         const classes = ['fd-calendar-container'];
@@ -191,6 +205,9 @@ export class FdCalendarContainerComponent<D> implements ControlValueAccessor {
 
     /** @hidden */
     private readonly _injector = inject(Injector);
+
+    /** @hidden */
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden Reference to the currently open picker dialog. */
     private _pickerDialogRef: DialogRef | null = null;
@@ -275,6 +292,8 @@ export class FdCalendarContainerComponent<D> implements ControlValueAccessor {
         // Anchor the picker's year window on the clicked calendar's current year.
         const currentYear = this.calendarMonths()[index]?.year ?? new Date().getFullYear();
         this.pickerYearAnchor.set(currentYear);
+        // Close any lingering picker before opening a fresh one.
+        this._pickerDialogRef?.close();
         this._pickerDialogRef = this._dialogService.open(
             this.pickerTemplate(),
             {
@@ -285,23 +304,18 @@ export class FdCalendarContainerComponent<D> implements ControlValueAccessor {
             },
             this._injector
         );
+        // Null the ref on any dismissal (ESC, backdrop, selection) so the
+        // "is a picker open?" state stays truthful and .close() is never
+        // called on an already-closed ref.
+        this._pickerDialogRef.afterClosed.pipe(takeUntilDestroyed(this._destroyRef)).subscribe({
+            next: () => (this._pickerDialogRef = null),
+            error: () => (this._pickerDialogRef = null)
+        });
     }
 
     /** @hidden Closes the container-level picker. Focus restore is handled by DialogService. */
     protected closeContainerPicker(): void {
         this._pickerDialogRef?.close();
-    }
-
-    /** @hidden Returns the ARIA label for the container picker dialog. */
-    protected pickerAriaLabel(): string {
-        switch (this.pickerView()) {
-            case 'month':
-                return 'Month picker';
-            case 'year':
-                return 'Year picker';
-            case 'aggregatedYear':
-                return 'Year range picker';
-        }
     }
 
     /** @hidden Month selected from the picker — update the calendar at the captured index. */
