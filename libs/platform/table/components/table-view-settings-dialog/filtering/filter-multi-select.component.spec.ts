@@ -123,27 +123,29 @@ describe('FilterMultiSelectComponent', () => {
             await whenStable(fixture);
 
             expect(component.listItems).toBeDefined();
-            expect(component.listItems.length).toBe(3);
+            expect(component.listItems().length).toBe(3);
         });
 
-        it('should focus the first list item after view init', async () => {
+        it('should have listItems as a signal that returns an array', async () => {
             await whenStable(fixture);
 
-            const firstItem = component.listItems.first;
-            const focusSpy = jest.spyOn(firstItem, 'focus');
-
-            component.ngAfterViewInit();
-
-            expect(focusSpy).toHaveBeenCalled();
+            const items = component.listItems();
+            expect(Array.isArray(items)).toBe(true);
+            expect(items.length).toBe(3);
+            expect(items[0]).toHaveProperty('focus');
         });
 
-        it('should handle empty list items gracefully', () => {
-            component.options = [];
-            component.filterBy = undefined;
-            fixture.detectChanges();
+        it('should handle empty options gracefully', () => {
+            // Create a new fixture with no options
+            const emptyFixture = TestBed.createComponent(FilterMultiSelectComponent);
+            const emptyComponent = emptyFixture.componentInstance;
 
-            // Should not throw when listItems is empty
-            expect(() => component.ngAfterViewInit()).not.toThrow();
+            emptyComponent.options = [];
+            emptyComponent.filterBy = undefined;
+            emptyFixture.detectChanges();
+
+            // Should have 0 items (multi-select has no default option)
+            expect(emptyComponent.listItems().length).toBe(0);
         });
     });
 

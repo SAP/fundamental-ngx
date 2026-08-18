@@ -1,5 +1,6 @@
 import {
     afterEveryRender,
+    afterNextRender,
     AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -7,6 +8,7 @@ import {
     ElementRef,
     EventEmitter,
     inject,
+    Injector,
     Input,
     Output
 } from '@angular/core';
@@ -80,13 +82,15 @@ export class FilterCustomComponent implements AfterViewInit {
     private readonly _elementRef = inject(ElementRef);
 
     /** @hidden */
+    private readonly _injector = inject(Injector);
+
+    /** @hidden */
     constructor(private contentDensityObserver: ContentDensityObserver) {
         afterEveryRender(() => this._checkValueChanges());
     }
 
     /** @hidden */
     ngAfterViewInit(): void {
-        // Focus the first focusable element in the custom template
         const focusableSelectors = [
             'input:not([disabled])',
             'select:not([disabled])',
@@ -96,8 +100,37 @@ export class FilterCustomComponent implements AfterViewInit {
             '[tabindex]:not([tabindex="-1"])'
         ].join(', ');
 
-        const firstFocusable = this._elementRef.nativeElement.querySelector(focusableSelectors);
-        firstFocusable?.focus();
+        afterNextRender(
+            () => {
+                const firstFocusable: HTMLElement = this._elementRef.nativeElement.querySelector(focusableSelectors);
+                if (
+                    !firstFocusable ||
+                    firstFocusable.style.display === 'none' ||
+                    firstFocusable.style.visibility === 'hidden' ||
+                    firstFocusable.style.opacity === '0'
+                ) {
+                    return;
+                }
+
+                const dialog = this._elementRef.nativeElement.closest('fd-dialog, [fd-dialog]');
+                if (!dialog) {
+                    return;
+                }
+
+                const dialogRect = dialog.getBoundingClientRect();
+                const elementRect = firstFocusable.getBoundingClientRect();
+                const isWithinBounds =
+                    elementRect.top >= dialogRect.top &&
+                    elementRect.left >= dialogRect.left &&
+                    elementRect.bottom <= dialogRect.bottom &&
+                    elementRect.right <= dialogRect.right;
+
+                if (isWithinBounds) {
+                    firstFocusable.focus();
+                }
+            },
+            { injector: this._injector }
+        );
     }
 
     /** @hidden */

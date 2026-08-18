@@ -1,12 +1,12 @@
 import {
     ChangeDetectionStrategy,
     Component,
+    effect,
     EventEmitter,
     Input,
     Output,
-    QueryList,
-    ViewChildren,
-    ViewEncapsulation, AfterViewInit
+    viewChildren,
+    ViewEncapsulation
 } from '@angular/core';
 import { CollectionFilter, TableFilterSelectOption } from '@fundamental-ngx/platform/table-helpers';
 
@@ -28,7 +28,7 @@ import { NOT_FILTERED_OPTION_VALUE } from './constants';
     encapsulation: ViewEncapsulation.None,
     imports: [ListComponent, ListItemComponent, RadioButtonComponent, FormsModule, ListTitleDirective, FdTranslatePipe]
 })
-export class FilterSingleSelectComponent implements AfterViewInit {
+export class FilterSingleSelectComponent {
     /** Selectable filter options */
     @Input()
     options: TableFilterSelectOption[] = [];
@@ -45,8 +45,7 @@ export class FilterSingleSelectComponent implements AfterViewInit {
     valueChange: EventEmitter<any[]> = new EventEmitter();
 
     /** @hidden */
-    @ViewChildren(ListItemComponent)
-    listItems: QueryList<ListItemComponent>;
+    readonly listItems = viewChildren(ListItemComponent);
 
     /** @hidden */
     readonly NOT_FILTERED_OPTION_VALUE = NOT_FILTERED_OPTION_VALUE;
@@ -58,8 +57,13 @@ export class FilterSingleSelectComponent implements AfterViewInit {
     _value: any;
 
     /** @hidden */
-    ngAfterViewInit(): void {
-        this.listItems.first?.focus();
+    constructor() {
+        effect(() => {
+            const items = this.listItems();
+            if (items.length > 0) {
+                items[0].focus();
+            }
+        });
     }
 
     /** @hidden */

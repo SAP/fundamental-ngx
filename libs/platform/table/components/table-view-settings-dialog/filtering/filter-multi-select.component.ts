@@ -1,12 +1,11 @@
 import {
-    AfterViewInit,
     ChangeDetectionStrategy,
     Component,
+    effect,
     EventEmitter,
     Input,
     Output,
-    QueryList,
-    ViewChildren,
+    viewChildren,
     ViewEncapsulation
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -29,7 +28,7 @@ type SelectableOption = TableFilterSelectOption & { selected: boolean };
     encapsulation: ViewEncapsulation.None,
     imports: [ListComponent, ListItemComponent, CheckboxComponent, FormsModule, ListTitleDirective, FdTranslatePipe]
 })
-export class FilterMultiSelectComponent implements AfterViewInit {
+export class FilterMultiSelectComponent {
     /** Selectable filter options */
     @Input()
     options: TableFilterSelectOption[] = [];
@@ -52,8 +51,7 @@ export class FilterMultiSelectComponent implements AfterViewInit {
     valueChange: EventEmitter<any[]> = new EventEmitter();
 
     /** @hidden */
-    @ViewChildren(ListItemComponent)
-    listItems: QueryList<ListItemComponent>;
+    readonly listItems = viewChildren(ListItemComponent);
 
     /**
      * @hidden
@@ -65,8 +63,13 @@ export class FilterMultiSelectComponent implements AfterViewInit {
     _selectableOptions: SelectableOption[];
 
     /** @hidden */
-    ngAfterViewInit(): void {
-        this.listItems.first?.focus();
+    constructor() {
+        effect(() => {
+            const items = this.listItems();
+            if (items.length > 0) {
+                items[0].focus();
+            }
+        });
     }
 
     /** @hidden */
