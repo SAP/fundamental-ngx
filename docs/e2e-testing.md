@@ -70,7 +70,7 @@ playwright.config.ts                # Root config (projects, sharding, server)
 **When:** you added a new example component. Visual tests are automatic — every discovered route gets one. Routes regenerate at the start of every Playwright run; nothing needs to be committed.
 
 1. Create the example in `libs/docs/<library>/<component>/examples/`.
-2. Generate baselines: `npx playwright test --update-snapshots --grep "<library>/<component>"`.
+2. Generate baselines: `yarn e2e:update --grep "<library>/<component>"`.
 3. Commit the new baseline images under `snapshots/darwin/`.
 
 **Verify:** `npx playwright test --grep "<library>/<component>"` passes locally.
@@ -147,10 +147,12 @@ Add an entry to `apps/e2e-harness/e2e/config/a11y-suppressions.json`:
 1. Run `yarn e2e:update --grep "<library>/<component>"` — regenerates `snapshots/darwin/`.
 2. Review the new PNGs. If they look wrong, it's a regression — don't update.
 3. Commit `snapshots/darwin/` and push.
-4. CI runs `--update-snapshots` on Linux and commits `snapshots/linux/` back to your branch.
+4. CI runs `--update-snapshots=all` on Linux and commits `snapshots/linux/` back to your branch.
 5. `git pull` before your next push.
 
 Scope updates to keep diffs small: `yarn e2e:update --project high-contrast --grep "core/button"`
+
+Use `yarn e2e:update` rather than a hand-written `npx playwright test --update-snapshots`: the bare flag means `=changed` and skips any baseline whose diff fits inside the screenshot tolerance.
 
 A pre-commit hook on macOS rejects staged `snapshots/linux/` files — unstage them if it fires.
 
@@ -177,7 +179,7 @@ A pre-commit hook on macOS rejects staged `snapshots/linux/` files — unstage t
 
 If e2e infrastructure changed, all shards run.
 
-**Auto-baseline-commit:** committing `snapshots/darwin/` changes is the signal — CI runs `--update-snapshots` on Linux and pushes `snapshots/linux/` back to your branch automatically.
+**Auto-baseline-commit:** committing `snapshots/darwin/` changes is the signal — CI runs `--update-snapshots=all` on Linux and pushes `snapshots/linux/` back to your branch automatically.
 
 ## 5. Troubleshooting
 
@@ -186,7 +188,7 @@ If e2e infrastructure changed, all shards run.
 | `Route not found` or component doesn't render | New example not yet discovered.                                 | Routes regenerate automatically on the next run.                                                                                             |
 | New example not picked up by the generator    | Filename doesn't match the discovery pattern.                   | Rename to `*-example.component.ts` (core/platform) or `*-sample.ts` (UI5 WC).                                                                |
 | Component throws a DI error in the harness    | Harness app config missing a provider.                          | Add to `apps/e2e-harness/src/app/app.config.ts`, or skip via [3.4](#34-skip-a-route-from-tests).                                             |
-| Visual test fails locally, passes in CI       | Platform font rendering differs. Linux baselines are canonical. | Use `--update-snapshots` locally. Don't commit `snapshots/linux/` from a Mac.                                                                |
+| Visual test fails locally, passes in CI       | Platform font rendering differs. Linux baselines are canonical. | Use `yarn e2e:update` locally. Don't commit `snapshots/linux/` from a Mac.                                                                   |
 | Visual test flakes with 1px diffs             | Animation, timing, or external asset.                           | Use `goto()`. Add `await expect(locator).toBeVisible()` before screenshot. Skip via [3.4](#34-skip-a-route-from-tests) if non-deterministic. |
 
 ## 6. Reference

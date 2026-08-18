@@ -156,7 +156,7 @@ jobs:
               run: |
                   UPDATE_FLAG=""
                   if [ "$UPDATE_MODE" = "1" ]; then
-                    UPDATE_FLAG="--update-snapshots"
+                    UPDATE_FLAG="--update-snapshots=all"
                   fi
                   npx playwright test --grep "$GREP_FILTER" $UPDATE_FLAG
 

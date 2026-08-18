@@ -38,7 +38,6 @@ test.describe('Visual Regression', () => {
             await page.waitForTimeout(500);
             const example = page.locator('e2e-root > main');
             await expect(example).toHaveScreenshot(`${route.library}/${route.component}-${route.example}.png`, {
-                maxDiffPixelRatio: 0.01,
                 animations: 'disabled'
             });
         });

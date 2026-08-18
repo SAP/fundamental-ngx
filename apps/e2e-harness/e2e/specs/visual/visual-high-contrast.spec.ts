@@ -47,7 +47,6 @@ test.describe('Visual Regression — High Contrast (sap_horizon_hcb)', () => {
 
             const example = page.locator('e2e-root > main');
             await expect(example).toHaveScreenshot(`hcb/${route.library}/${route.component}-${route.example}.png`, {
-                maxDiffPixelRatio: 0.01,
                 animations: 'disabled'
             });
         });

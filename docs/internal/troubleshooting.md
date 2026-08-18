@@ -64,7 +64,7 @@ nx run <project>:build
 
 ```bash
 # Regenerate snapshots on the new OS
-npx playwright test --update-snapshots
+yarn e2e:update
 ```
 
 ### Visual snapshots fail unexpectedly
@@ -106,19 +106,19 @@ npx playwright test --update-snapshots
 - If intentional: `nx run <lib>:test --updateSnapshot`
 - If unintentional: fix code and re-run tests
 
-### Cannot update Playwright snapshots
+### Snapshot update appears to do nothing
 
-**Cause:** e2e-harness not running (required for `--update-snapshots`)
+**Cause:** Bare `--update-snapshots` means `=changed`, which only rewrites a baseline when the comparison **fails**. If the difference fits inside the screenshot tolerance the test passes, so nothing is written and the stale baseline survives. Deleting the file works because that takes the "missing" path instead.
 
 **Fix:**
 
 ```bash
-# Terminal 1: Start harness
-npx nx serve e2e-harness
-
-# Terminal 2: Update snapshots
-npx playwright test --update-snapshots
+yarn e2e:update
+# or, scoped
+npx playwright test --update-snapshots=all --grep "core/shellbar"
 ```
+
+You do not need to start the e2e-harness first — Playwright's `webServer` config starts it for every run, updates included.
 
 ---
 

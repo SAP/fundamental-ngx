@@ -11,6 +11,11 @@ export default defineConfig({
         ? [['blob'], ['json', { outputFile: `test-results-${process.env['SHARD'] || 'default'}.json` }]]
         : [['html']],
     snapshotPathTemplate: '{testDir}/snapshots/{platform}/{projectName}/{arg}{ext}',
+    expect: {
+        // Absolute cap, not a ratio: a ratio budget scales with image size, so on large mostly-white
+        // screenshots it silently absorbs real text/layout regressions.
+        toHaveScreenshot: { maxDiffPixels: 150 }
+    },
     use: {
         baseURL: 'http://localhost:4400',
         trace: 'on-first-retry'

@@ -1,113 +1,43 @@
 # Testing Guide
 
-**Purpose:** Testing workflows, best practices, and troubleshooting. For commands, see [commands.md](commands.md).
+Testing workflows and gotchas. For the full command list see [commands.md](commands.md#testing); for failures see [troubleshooting.md](troubleshooting.md#test-issues).
 
----
+## Unit tests (Jest)
 
-## Quick Start
-
-> **Commands:** See [commands.md](commands.md#testing) for all test commands.
-
-**Basic workflow:**
-
-1. Run unit tests after code changes: `nx run <library>:test --testfile=<file>.spec.ts`
-2. Run E2E tests to verify UI: `npx playwright test --grep "component-name"`
-3. Update snapshots when UI changes are intentional (see [Snapshot Workflow](#snapshot-workflow))
-
----
-
-## Testing Workflows
-
-### Unit Testing Workflow (Jest)
-
-**When to run:**
-
-- After modifying component logic
-- After changing component structure or properties
-- Before committing code
-
-**Typical flow:**
+Run after changing component logic or structure, and before committing.
 
 ```bash
-# 1. Run specific test file during development
-nx run core:test --testfile=button.component.spec.ts --watch
-
-# 2. Run all library tests before committing
-nx run core:test
-
-# 3. Run affected tests to validate your branch
-nx affected:test
+nx run core:test --testfile=button.component.spec.ts --watch   # while developing
+nx run core:test                                               # whole library
+nx affected:test                                               # validate branch
 ```
 
-**Watch mode tips:**
+Watch mode: `p` filter by filename, `t` filter by test name, `u` update Jest snapshots, `q` quit.
 
-- Press `p` to filter by filename pattern
-- Press `t` to filter by test name pattern
-- Press `u` to update snapshots (Jest snapshots, not Playwright)
-- Press `q` to quit watch mode
+## E2E tests (Playwright)
 
----
-
-### E2E Testing Workflow (Playwright)
-
-**When to run:**
-
-- After visual/UI changes
-- Before creating a PR
-- When reviewing component rendering
-
-**Typical flow:**
+Run after visual/UI changes and before opening a PR.
 
 ```bash
-# Run all E2E tests (auto-starts harness)
-npx playwright test
-
-# Run tests for specific component (faster iteration)
-npx playwright test --grep "core/dialog"
-
-# Debug a specific test
-npx playwright test --debug --grep "test-name"
+npx playwright test                          # everything
+npx playwright test --grep "core/dialog"     # one component
+npx playwright test --debug --grep "name"    # step through
 ```
 
-> **Commands:** See [commands.md](commands.md#e2e-tests-playwright) for all Playwright options.
+The harness starts automatically — `webServer` in `playwright.config.ts` serves it on :4400 and stops it afterwards. Outside CI `reuseExistingServer` is on, so you can keep `npx nx serve e2e-harness` running in another terminal to skip the rebuild each run; just make sure its watcher is alive, or you will test stale output.
 
----
+## Visual baselines
 
-### Snapshot Workflow
-
-**When snapshots fail:**
-
-1. Review the diff: `npx playwright show-report`
-2. If the change is **intentional** (you changed CSS/HTML):
-    - Start the harness: `npx nx serve e2e-harness`
-    - Update snapshots: `npx playwright test --update-snapshots`
-3. If the change is **unintentional** (regression):
-    - Fix the code
-    - Re-run tests to verify
-
-**Updating snapshots:**
-
-> ⚠️ **IMPORTANT:** You must start the e2e-harness **before** updating snapshots. The Playwright config only auto-starts it for regular test runs, not for `--update-snapshots`.
+Baselines live in `apps/e2e-harness/e2e/snapshots/` — `darwin/` locally, `linux/` in CI. Update `darwin/` and commit; CI regenerates `linux/`.
 
 ```bash
-# Terminal 1: Start the harness
-npx nx serve e2e-harness
-
-# Terminal 2: Update snapshots
-npx playwright test --update-snapshots
+yarn e2e:update                          # all
+yarn e2e:update --grep "core/shellbar"   # scoped — prefer this
 ```
 
-> **Commands:** See [commands.md](commands.md#update-snapshots) for snapshot commands.
+Two rules that are easy to get wrong:
 
----
+- **Use `yarn e2e:update`, not a hand-written `--update-snapshots`.** The bare flag means `=changed`, which rewrites a baseline only when the comparison _fails_ — a diff small enough to fit inside the tolerance is silently skipped. `yarn e2e:update` passes `=all`.
+- **Set the screenshot tolerance in `playwright.config.ts` only** (`expect.toHaveScreenshot`). Never add a per-call `maxDiffPixelRatio`: a ratio scales with image size, so on a large mostly-white screenshot 1% is thousands of pixels — enough to hide a changed text label and, combined with the rule above, keep the baseline stale forever.
 
-## Troubleshooting
-
-Having test issues? See **[troubleshooting.md](troubleshooting.md#test-issues)** for solutions to:
-
-- Visual snapshot mismatches
-- Flaky tests (pass/fail intermittently)
-- Test hangs or timeouts
-- Jest snapshot failures
-- Tests passing locally but failing in CI
-- Cannot update Playwright snapshots
+Review the regenerated PNGs before committing. If they look wrong, it is a regression — fix the code instead.

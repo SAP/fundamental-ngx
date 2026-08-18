@@ -29,7 +29,6 @@ test.describe('Flexible Column Layout', () => {
 
         const overlayContent = page.locator('.fd-docs-fcl-example-overlay-content');
         await expect(overlayContent).toHaveScreenshot('core-flexible-column-layout-default-fullscreen.png', {
-            maxDiffPixelRatio: 0.01,
             animations: 'disabled'
         });
 
@@ -41,7 +40,6 @@ test.describe('Flexible Column Layout', () => {
         await page.setViewportSize({ width: contentWidth, height: contentHeight });
         await page.waitForTimeout(500);
         await expect(overlayContent).toHaveScreenshot('core-flexible-column-layout-default-with-mid-column.png', {
-            maxDiffPixelRatio: 0.01,
             animations: 'disabled'
         });
 
@@ -53,7 +51,6 @@ test.describe('Flexible Column Layout', () => {
         await page.setViewportSize({ width: contentWidth, height: contentHeight });
         await page.waitForTimeout(500);
         await expect(overlayContent).toHaveScreenshot('core-flexible-column-layout-default-with-three-columns.png', {
-            maxDiffPixelRatio: 0.01,
             animations: 'disabled'
         });
     });
@@ -71,7 +68,6 @@ test.describe('Flexible Column Layout', () => {
 
         const overlayContent = page.locator('.fd-docs-fcl-example-overlay-content');
         await expect(overlayContent).toHaveScreenshot('core-flexible-column-layout-custom-config-fullscreen.png', {
-            maxDiffPixelRatio: 0.01,
             animations: 'disabled'
         });
 
@@ -83,7 +79,6 @@ test.describe('Flexible Column Layout', () => {
         await page.setViewportSize({ width: contentWidth, height: contentHeight });
         await page.waitForTimeout(500);
         await expect(overlayContent).toHaveScreenshot('core-flexible-column-layout-custom-config-with-mid-column.png', {
-            maxDiffPixelRatio: 0.01,
             animations: 'disabled'
         });
 
@@ -97,7 +92,6 @@ test.describe('Flexible Column Layout', () => {
         await expect(overlayContent).toHaveScreenshot(
             'core-flexible-column-layout-custom-config-with-three-columns.png',
             {
-                maxDiffPixelRatio: 0.01,
                 animations: 'disabled'
             }
         );
@@ -116,7 +110,6 @@ test.describe('Flexible Column Layout', () => {
 
         const overlayContent = page.locator('.fd-docs-fcl-example-overlay-content');
         await expect(overlayContent).toHaveScreenshot('core-flexible-column-layout-dynamic-page-fullscreen.png', {
-            maxDiffPixelRatio: 0.01,
             animations: 'disabled'
         });
 
@@ -128,7 +121,6 @@ test.describe('Flexible Column Layout', () => {
         await page.setViewportSize({ width: contentWidth, height: contentHeight });
         await page.waitForTimeout(500);
         await expect(overlayContent).toHaveScreenshot('core-flexible-column-layout-dynamic-page-with-mid-column.png', {
-            maxDiffPixelRatio: 0.01,
             animations: 'disabled'
         });
 
@@ -142,7 +134,6 @@ test.describe('Flexible Column Layout', () => {
         await expect(overlayContent).toHaveScreenshot(
             'core-flexible-column-layout-dynamic-page-with-three-columns.png',
             {
-                maxDiffPixelRatio: 0.01,
                 animations: 'disabled'
             }
         );
