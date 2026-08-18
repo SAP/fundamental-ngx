@@ -233,7 +233,7 @@ export class DynamicPageComponent implements AfterViewInit, DynamicPage {
             return null;
         }
         const distanceFromTop = element.getBoundingClientRect().top;
-        return 'calc(100vh - ' + (distanceFromTop + this.offset) + 'px)';
+        return 'calc(100svh - ' + (distanceFromTop + this.offset) + 'px)';
     }
 
     /** @hidden */
