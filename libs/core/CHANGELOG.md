@@ -1,3 +1,13 @@
+## 0.64.2-rc.32 (2026-08-18)
+
+### 🩹 Fixes
+
+- **core:** use 100svh for dynamic page full height ([#14475](https://github.com/SAP/fundamental-ngx/pull/14475))
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.64.2-rc.31 (2026-08-14)
 
 This was a version bump only for core to align it with other projects, there were no code changes.

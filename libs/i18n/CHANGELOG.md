@@ -1,3 +1,7 @@
+## 0.64.2-rc.32 (2026-08-18)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
 ## 0.64.2-rc.31 (2026-08-14)
 
 This was a version bump only for i18n to align it with other projects, there were no code changes.
