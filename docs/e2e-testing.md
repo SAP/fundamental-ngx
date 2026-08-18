@@ -147,7 +147,7 @@ Add an entry to `apps/e2e-harness/e2e/config/a11y-suppressions.json`:
 1. Run `yarn e2e:update --grep "<library>/<component>"` — regenerates `snapshots/darwin/`.
 2. Review the new PNGs. If they look wrong, it's a regression — don't update.
 3. Commit `snapshots/darwin/` and push.
-4. CI runs `--update-snapshots=all` on Linux and commits `snapshots/linux/` back to your branch.
+4. CI runs `--update-snapshots=changed` on Linux and commits `snapshots/linux/` back to your branch.
 5. `git pull` before your next push.
 
 Scope updates to keep diffs small: `yarn e2e:update --project high-contrast --grep "core/button"`
@@ -179,7 +179,7 @@ A pre-commit hook on macOS rejects staged `snapshots/linux/` files — unstage t
 
 If e2e infrastructure changed, all shards run.
 
-**Auto-baseline-commit:** committing `snapshots/darwin/` changes is the signal — CI runs `--update-snapshots=all` on Linux and pushes `snapshots/linux/` back to your branch automatically.
+**Auto-baseline-commit:** committing `snapshots/darwin/` changes is the signal — CI runs `--update-snapshots=changed` on Linux and pushes `snapshots/linux/` back to your branch automatically. CI deliberately uses `=changed` rather than the `=all` you use locally: the step commits and pushes, so it has to be a no-op once Linux is correct or it would retrigger itself forever.
 
 ## 5. Troubleshooting
 
