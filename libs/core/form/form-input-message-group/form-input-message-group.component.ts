@@ -115,6 +115,9 @@ export class FormInputMessageGroupComponent implements AfterContentInit {
     /** @hidden Query for the projected form message */
     private readonly _formMessage = contentChild(FormMessageComponent);
 
+    /** @hidden Track the aria-describedby value we set, to distinguish from user-provided values */
+    private _managedDescribedbyId: string | null = null;
+
     /** @hidden */
     ngAfterContentInit(): void {
         // Set up ARIA attributes linking the control to the form message
@@ -123,7 +126,17 @@ export class FormInputMessageGroupComponent implements AfterContentInit {
                 const formMessage = this._formMessage();
                 const controlElement = this._getControlElement();
 
+                // If form message is removed or control not found, clean up managed attributes
                 if (!formMessage || !controlElement) {
+                    if (controlElement && this._managedDescribedbyId) {
+                        // Only remove attributes we previously managed
+                        const currentDescribedby = controlElement.getAttribute('aria-describedby');
+                        if (currentDescribedby === this._managedDescribedbyId) {
+                            this._renderer.removeAttribute(controlElement, 'aria-describedby');
+                            this._renderer.removeAttribute(controlElement, 'aria-invalid');
+                        }
+                        this._managedDescribedbyId = null;
+                    }
                     return;
                 }
 
@@ -135,7 +148,7 @@ export class FormInputMessageGroupComponent implements AfterContentInit {
                 }
 
                 // Check if user provided their own ARIA linking attributes
-                const userDescribedby = controlElement.getAttribute('aria-describedby');
+                const existingDescribedby = controlElement.getAttribute('aria-describedby');
                 const userErrormessage = controlElement.getAttribute('aria-errormessage');
 
                 // If user provided aria-errormessage, replace it with aria-describedby
@@ -144,6 +157,7 @@ export class FormInputMessageGroupComponent implements AfterContentInit {
                 if (userErrormessage) {
                     this._renderer.removeAttribute(controlElement, 'aria-errormessage');
                     this._renderer.setAttribute(controlElement, 'aria-describedby', userErrormessage);
+                    this._managedDescribedbyId = userErrormessage;
                     // Ensure aria-invalid is set for error messages
                     if (messageType === 'error' && !controlElement.hasAttribute('aria-invalid')) {
                         this._renderer.setAttribute(controlElement, 'aria-invalid', 'true');
@@ -151,8 +165,8 @@ export class FormInputMessageGroupComponent implements AfterContentInit {
                     return;
                 }
 
-                // If user provided aria-describedby, respect it and only add aria-invalid for errors
-                if (userDescribedby) {
+                // If user provided aria-describedby (and it's NOT one we set), respect it
+                if (existingDescribedby && existingDescribedby !== this._managedDescribedbyId) {
                     if (messageType === 'error' && !controlElement.hasAttribute('aria-invalid')) {
                         this._renderer.setAttribute(controlElement, 'aria-invalid', 'true');
                     }
@@ -163,6 +177,7 @@ export class FormInputMessageGroupComponent implements AfterContentInit {
                 // Note: We use aria-describedby for all message types (including errors)
                 // because aria-errormessage requires the referenced element to be perceivable,
                 // which isn't guaranteed with popover-based messages
+                this._managedDescribedbyId = messageId;
                 if (messageType === 'error') {
                     this._renderer.setAttribute(controlElement, 'aria-describedby', messageId);
                     this._renderer.setAttribute(controlElement, 'aria-invalid', 'true');
