@@ -628,6 +628,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'Възходящо',
         P13SortDialogSortOrderSelectOptionDesc: 'Низходящо',
         resetChangesButtonLabel: 'Изчистване',
+        resetConfirmationAnnouncement: 'Values Reset',
         rowNavigateButtonTitle: 'Навигация',
         selectAllCheckboxLabel: 'Избиране на всички',
         selectAllCheckboxLongLabel: 'Поле за отметка: без отметка. Кликнете, за да изберете всичко',

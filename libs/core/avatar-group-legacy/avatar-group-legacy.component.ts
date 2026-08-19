@@ -1,6 +1,5 @@
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, TAB, UP_ARROW } from '@angular/cdk/keycodes';
-import { ViewportRuler } from '@angular/cdk/overlay';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -12,7 +11,6 @@ import {
     Input,
     OnChanges,
     OnDestroy,
-    OnInit,
     QueryList,
     ViewChild,
     ViewEncapsulation,
@@ -21,8 +19,7 @@ import {
     forwardRef,
     inject
 } from '@angular/core';
-import { Subscription, of } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 import { ColorAccent, KeyUtil, Nullable, RtlService, Size } from '@fundamental-ngx/cdk/utils';
 import { AvatarGroupLegacyInterface } from './avatar-group-legacy.interface';
@@ -47,9 +44,7 @@ let avatarGroupCount = 0;
         }
     ]
 })
-export class AvatarGroupLegacyComponent
-    implements AvatarGroupLegacyInterface, OnChanges, OnInit, AfterViewInit, OnDestroy
-{
+export class AvatarGroupLegacyComponent implements AvatarGroupLegacyInterface, OnChanges, AfterViewInit, OnDestroy {
     /** Id of the Avatar Group. */
     @Input()
     id = `fd-avatar-group-legacy-${avatarGroupCount++}`;
@@ -122,7 +117,9 @@ export class AvatarGroupLegacyComponent
     private readonly _subscription = new Subscription();
 
     /** @hidden */
-    private readonly _viewportRuler = inject(ViewportRuler);
+    private _resizeObserver: ResizeObserver | null = null;
+
+    /** @hidden */
     private readonly _cdr = inject(ChangeDetectorRef);
 
     /** @hidden */
@@ -159,11 +156,6 @@ export class AvatarGroupLegacyComponent
     }
 
     /** @hidden */
-    ngOnInit(): void {
-        this._subscription.add(this._viewportRuler.change().subscribe(() => this._onResize()));
-    }
-
-    /** @hidden */
     ngOnChanges(): void {
         this._assignCssClasses();
     }
@@ -172,11 +164,10 @@ export class AvatarGroupLegacyComponent
     ngAfterViewInit(): void {
         this._reset();
 
-        this._subscription.add(
-            of(true)
-                .pipe(delay(5))
-                .subscribe(() => this._collapseItems())
-        );
+        this._resizeObserver = new ResizeObserver(() => {
+            this._onResize();
+        });
+        this._resizeObserver.observe(this.avatarGroupContainer.nativeElement);
 
         this._listenForItemChanges();
         this._setKeyboardEventsManager();
@@ -185,6 +176,8 @@ export class AvatarGroupLegacyComponent
     /** @hidden */
     ngOnDestroy(): void {
         this._subscription.unsubscribe();
+        this._resizeObserver?.disconnect();
+        this._resizeObserver = null;
         this._keyboardEventsManager.destroy();
     }
 

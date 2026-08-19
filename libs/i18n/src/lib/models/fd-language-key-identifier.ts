@@ -486,6 +486,7 @@ export type FdLanguageKeyIdentifier =
     | 'platformTable.navigationColumnTitle'
     | 'platformTable.noVisibleColumnsMessage'
     | 'platformTable.resetChangesButtonLabel'
+    | 'platformTable.resetConfirmationAnnouncement'
     | 'platformTable.rowNavigateButtonTitle'
     | 'platformTable.selectAllCheckboxLabel'
     | 'platformTable.selectAllCheckboxLongLabel'

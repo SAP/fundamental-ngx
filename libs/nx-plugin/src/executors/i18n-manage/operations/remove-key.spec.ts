@@ -228,4 +228,116 @@ coreButton.save=Save
         expect(result.success).toBe(false);
         expect(result.error).toContain('No TypeScript translation files found');
     });
+
+    describe('removing keys with interface update (RED tests)', () => {
+        it('should remove key from fd-language.ts interface', async () => {
+            (fastGlobSync as jest.Mock).mockReturnValue(['libs/i18n/translations/translations.ts']);
+            vol.fromJSON({
+                '/test-workspace/libs/i18n/translations/translations.properties': `
+#XBUT: Save button
+coreButton.save=Save
+#XBUT: Submit button
+coreButton.submit=Submit
+                `.trim(),
+                '/test-workspace/libs/i18n/translations/translations.ts': 'export default {}',
+                '/test-workspace/libs/i18n/src/lib/models/fd-language-key-identifier.ts': '// placeholder',
+                '/test-workspace/libs/i18n/src/lib/models/fd-language.ts': `export interface FdLanguage {
+    coreButton: {
+        /** Save button */
+        save: FdLanguageKey;
+        /** Submit button */
+        submit: FdLanguageKey;
+    };
+}`
+            });
+
+            const result = await removeKey({
+                key: 'coreButton.submit',
+                propertiesPath: 'libs/i18n/translations'
+            });
+
+            expect(result.success).toBe(true);
+
+            // Check fd-language.ts was updated
+            const interfaceContent = vol.readFileSync(
+                '/test-workspace/libs/i18n/src/lib/models/fd-language.ts',
+                'utf-8'
+            ) as string;
+            expect(interfaceContent).toContain('save: FdLanguageKey;');
+            expect(interfaceContent).not.toContain('submit: FdLanguageKey;');
+            expect(result.filesModified).toContain('libs/i18n/src/lib/models/fd-language.ts');
+        });
+
+        it('should remove entire component section if last key is removed', async () => {
+            (fastGlobSync as jest.Mock).mockReturnValue(['libs/i18n/translations/translations.ts']);
+            vol.fromJSON({
+                '/test-workspace/libs/i18n/translations/translations.properties': `
+#XBUT: Submit button
+coreButton.submit=Submit
+                `.trim(),
+                '/test-workspace/libs/i18n/translations/translations.ts': 'export default {}',
+                '/test-workspace/libs/i18n/src/lib/models/fd-language-key-identifier.ts': '// placeholder',
+                '/test-workspace/libs/i18n/src/lib/models/fd-language.ts': `export interface FdLanguage {
+    coreButton: {
+        /** Submit button */
+        submit: FdLanguageKey;
+    };
+}`
+            });
+
+            const result = await removeKey({
+                key: 'coreButton.submit',
+                propertiesPath: 'libs/i18n/translations'
+            });
+
+            expect(result.success).toBe(true);
+
+            // Check fd-language.ts has no coreButton section
+            const interfaceContent = vol.readFileSync(
+                '/test-workspace/libs/i18n/src/lib/models/fd-language.ts',
+                'utf-8'
+            ) as string;
+            expect(interfaceContent).not.toContain('coreButton:');
+        });
+
+        it('should preserve other component sections when removing a key', async () => {
+            (fastGlobSync as jest.Mock).mockReturnValue(['libs/i18n/translations/translations.ts']);
+            vol.fromJSON({
+                '/test-workspace/libs/i18n/translations/translations.properties': `
+#XBUT: Save button
+coreButton.save=Save
+#XTIT: Dialog title
+coreDialog.title=Title
+                `.trim(),
+                '/test-workspace/libs/i18n/translations/translations.ts': 'export default {}',
+                '/test-workspace/libs/i18n/src/lib/models/fd-language-key-identifier.ts': '// placeholder',
+                '/test-workspace/libs/i18n/src/lib/models/fd-language.ts': `export interface FdLanguage {
+    coreButton: {
+        /** Save button */
+        save: FdLanguageKey;
+    };
+    coreDialog: {
+        /** Dialog title */
+        title: FdLanguageKey;
+    };
+}`
+            });
+
+            const result = await removeKey({
+                key: 'coreButton.save',
+                propertiesPath: 'libs/i18n/translations'
+            });
+
+            expect(result.success).toBe(true);
+
+            // Check coreDialog is preserved
+            const interfaceContent = vol.readFileSync(
+                '/test-workspace/libs/i18n/src/lib/models/fd-language.ts',
+                'utf-8'
+            ) as string;
+            expect(interfaceContent).not.toContain('coreButton:');
+            expect(interfaceContent).toContain('coreDialog:');
+            expect(interfaceContent).toContain('title: FdLanguageKey;');
+        });
+    });
 });

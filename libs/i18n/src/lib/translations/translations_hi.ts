@@ -627,6 +627,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'बढ़ते क्रम',
         P13SortDialogSortOrderSelectOptionDesc: 'घटते क्रम',
         resetChangesButtonLabel: 'रीसेट करें',
+        resetConfirmationAnnouncement: 'Values Reset',
         rowNavigateButtonTitle: 'Navigate',
         selectAllCheckboxLabel: 'Select all',
         selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',

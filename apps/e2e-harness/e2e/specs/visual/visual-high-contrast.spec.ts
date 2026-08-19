@@ -45,9 +45,8 @@ test.describe('Visual Regression — High Contrast (sap_horizon_hcb)', () => {
             await page.evaluate(() => document.documentElement.classList.add('e2e-no-animations'));
             await page.locator('html.e2e-no-animations').waitFor({ state: 'attached' });
 
-            await expect(page).toHaveScreenshot(`hcb/${route.library}/${route.component}-${route.example}.png`, {
-                fullPage: true,
-                maxDiffPixelRatio: 0.01,
+            const example = page.locator('e2e-root > main');
+            await expect(example).toHaveScreenshot(`hcb/${route.library}/${route.component}-${route.example}.png`, {
                 animations: 'disabled'
             });
         });

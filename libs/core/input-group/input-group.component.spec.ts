@@ -44,6 +44,89 @@ describe('InputGroupComponent', () => {
         });
         component._buttonClicked({} as any);
     });
+
+    describe('Accessibility - Non-Button Icon Addon (aria-label placement)', () => {
+        it('should NOT place aria-label on role-less span when glyph is provided (non-button)', () => {
+            component.glyph = 'search';
+            component.glyphAriaLabel = 'Search Icon';
+            fixture.detectChanges();
+
+            const addonSpan = fixture.nativeElement.querySelector('[fd-input-group-addon]');
+            expect(addonSpan).toBeTruthy();
+            expect(addonSpan.getAttribute('aria-label')).toBeNull();
+        });
+
+        it('should place ariaLabel on fd-icon when glyph is provided (non-button)', () => {
+            component.glyph = 'search';
+            component.glyphAriaLabel = 'Search Icon';
+            fixture.detectChanges();
+
+            const icon = fixture.nativeElement.querySelector('fd-icon');
+            expect(icon).toBeTruthy();
+            expect(icon.getAttribute('aria-label')).toBe('Search Icon');
+            // When ariaLabel is set, role should be 'img' (from IconComponent)
+            expect(icon.getAttribute('role')).toBe('img');
+        });
+
+        it('should fallback to glyph name when glyphAriaLabel is not provided (non-button)', () => {
+            component.glyph = 'search';
+            component.glyphAriaLabel = null;
+            fixture.detectChanges();
+
+            const icon = fixture.nativeElement.querySelector('fd-icon');
+            expect(icon).toBeTruthy();
+            expect(icon.getAttribute('aria-label')).toBe('search');
+            expect(icon.getAttribute('role')).toBe('img');
+        });
+
+        it('should NOT have aria-label on icon when only text add-on is provided (non-button)', () => {
+            component.addOnText = 'USD';
+            component.button = false;
+            fixture.detectChanges();
+
+            const icon = fixture.nativeElement.querySelector('fd-icon');
+            expect(icon).toBeFalsy(); // Icon should not exist when only text is shown
+            const addonSpan = fixture.nativeElement.querySelector('[fd-input-group-addon]');
+            expect(addonSpan).toBeTruthy();
+            expect(addonSpan.getAttribute('aria-label')).toBeNull();
+            expect(addonSpan.textContent).toContain('USD');
+        });
+    });
+
+    describe('Accessibility - Button Addon (aria-label placement)', () => {
+        it('should place ariaLabel on fd-button when glyph is provided (button addon)', () => {
+            component.glyph = 'search';
+            component.glyphAriaLabel = 'Search Button';
+            component.button = true;
+            fixture.detectChanges();
+
+            const button = fixture.nativeElement.querySelector('button[fd-button]');
+            expect(button).toBeTruthy();
+            expect(button.getAttribute('aria-label')).toBe('Search Button');
+        });
+
+        it('should fallback to glyph name when glyphAriaLabel is not provided (button addon)', () => {
+            component.glyph = 'search';
+            component.glyphAriaLabel = null;
+            component.button = true;
+            fixture.detectChanges();
+
+            const button = fixture.nativeElement.querySelector('button[fd-button]');
+            expect(button).toBeTruthy();
+            expect(button.getAttribute('aria-label')).toBe('search');
+        });
+
+        it('should use addOnText as fallback for ariaLabel when no glyph (button addon)', () => {
+            component.glyph = null;
+            component.addOnText = 'USD';
+            component.button = true;
+            fixture.detectChanges();
+
+            const button = fixture.nativeElement.querySelector('button[fd-button]');
+            expect(button).toBeTruthy();
+            expect(button.getAttribute('aria-label')).toBe('USD');
+        });
+    });
 });
 
 describe('InputGroup component CVA', () => {

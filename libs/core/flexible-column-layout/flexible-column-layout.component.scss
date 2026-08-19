@@ -1,4 +1,5 @@
 @import 'fundamental-styles/dist/flexible-column-layout.css';
+@import 'fundamental-styles/dist/layout-grid.css';
 
 .fd-button.fd-flexible-column-layout__button {
     z-index: 1;
@@ -9,8 +10,49 @@
         width 0.56s cubic-bezier(0.1, 0, 0.05, 1),
         visibility 0.1s ease-in;
     overflow: hidden;
+    min-width: 0;
+
+    /* Makes each column a container so child layout grids respond to column width,
+     * not the viewport width (enables @container queries below). */
+    container-type: inline-size;
 }
 
-.fd-flexible-column-layout__column {
-    min-width: 0;
+/*
+ * The fundamental-styles layout grid is flexbox-based and uses viewport @media queries
+ * to set max-width/min-width on fd-col-md--*, fd-col-lg--*, fd-col-xl--* elements.
+ * When the FCL column is narrower than the viewport, those media queries still fire,
+ * so grid items don't reflow. The @container rules below correct that by overriding
+ * the breakpoint classes based on the FCL column width instead.
+ */
+
+/* Narrow column (< 600px): collapse all breakpoint classes to full width. */
+@container (max-width: 599px) {
+    @for $i from 1 through 12 {
+        .fd-col-md--#{$i},
+        .fd-col-lg--#{$i},
+        .fd-col-xl--#{$i} {
+            max-width: 100% !important;
+            min-width: 100% !important;
+        }
+    }
+}
+
+/* Medium column (600–1023px): apply md widths.
+ * lg/xl rules are declared first so that md rules — declared after — win the cascade
+ * when both classes are present on the same element (e.g. fd-col-md--6 + fd-col-lg--4). */
+@container (min-width: 600px) and (max-width: 1023px) {
+    @for $i from 1 through 12 {
+        .fd-col-lg--#{$i},
+        .fd-col-xl--#{$i} {
+            max-width: percentage(calc($i / 12)) !important;
+            min-width: percentage(calc($i / 12)) !important;
+        }
+    }
+
+    @for $i from 1 through 12 {
+        .fd-col-md--#{$i} {
+            max-width: percentage(calc($i / 12)) !important;
+            min-width: percentage(calc($i / 12)) !important;
+        }
+    }
 }

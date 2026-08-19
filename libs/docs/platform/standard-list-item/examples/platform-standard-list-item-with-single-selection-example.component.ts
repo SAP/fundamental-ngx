@@ -7,28 +7,28 @@ import { DataProvider, ListDataSource } from '@fundamental-ngx/platform/shared';
 
 const LIST_ELEMENTS: Address[] = [
     {
-        img: 'https://picsum.photos/400/400?nature',
+        img: 'https://picsum.photos/seed/nature/400/400',
         imgInfo: 'nature',
         name: 'Green',
         description: 'First text item in Byline (Standard text item)',
         info: 'Second text item in Byline (Can be semantic (Status) or not)'
     },
     {
-        img: 'https://picsum.photos/400/400?nature',
+        img: 'https://picsum.photos/seed/nature/400/400',
         imgInfo: 'nature',
         name: 'Yellow',
         description: 'First text item in Byline (Standard text item)',
         info: 'Second text item in Byline (Can be semantic (Status) or not)'
     },
     {
-        img: 'https://picsum.photos/400/400?nature',
+        img: 'https://picsum.photos/seed/nature/400/400',
         imgInfo: 'nature',
         name: 'Purple',
         description: 'First text item in Byline (Standard text item)',
         info: 'Second text item in Byline (Can be semantic (Status) or not)'
     },
     {
-        img: 'https://picsum.photos/400/400?nature',
+        img: 'https://picsum.photos/seed/nature/400/400',
         imgInfo: 'nature',
         name: 'Orange',
         description: 'First text item in Byline (Standard text item)',

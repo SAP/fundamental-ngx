@@ -35,11 +35,13 @@ test.describe('Visual Regression — Responsive Viewports', () => {
         test(`${route.library}/${route.component}/${route.example}`, async ({ page, goto }) => {
             await goto(route.path);
 
-            await expect(page).toHaveScreenshot(`responsive/${route.library}/${route.component}-${route.example}.png`, {
-                fullPage: true,
-                maxDiffPixelRatio: 0.01,
-                animations: 'disabled'
-            });
+            const example = page.locator('e2e-root > main');
+            await expect(example).toHaveScreenshot(
+                `responsive/${route.library}/${route.component}-${route.example}.png`,
+                {
+                    animations: 'disabled'
+                }
+            );
         });
     }
 });

@@ -101,4 +101,11 @@ describe('DynamicPageComponent default values', () => {
         expect(dynamicPageComponent.size).toBe('small');
         expect(updateHeightSpy).toHaveBeenCalled();
     });
+
+    it('should compute full height using the small viewport unit (svh) so mobile browser chrome is excluded', () => {
+        const element = document.createElement('div');
+        const calc = (<any>dynamicPageComponent)._getCalculatedFullHeight(element);
+        expect(calc).toContain('svh');
+        expect(calc).not.toMatch(/\d+vh/);
+    });
 });

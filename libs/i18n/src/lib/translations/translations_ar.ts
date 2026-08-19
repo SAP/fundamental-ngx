@@ -627,6 +627,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'تصاعدي',
         P13SortDialogSortOrderSelectOptionDesc: 'تنازلي',
         resetChangesButtonLabel: 'إعادة التعيين',
+        resetConfirmationAnnouncement: 'Values Reset',
         rowNavigateButtonTitle: 'تنقل',
         selectAllCheckboxLabel: 'تحديد الكل',
         selectAllCheckboxLongLabel: 'خانة الاختيار، غير محددة، انقر لتحديد الكل',

@@ -628,6 +628,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'Uzlazno',
         P13SortDialogSortOrderSelectOptionDesc: 'Silazno',
         resetChangesButtonLabel: 'Ponovo postavi',
+        resetConfirmationAnnouncement: 'Values Reset',
         rowNavigateButtonTitle: 'Navigiraj',
         selectAllCheckboxLabel: 'Odaberi sve',
         selectAllCheckboxLongLabel: 'Potvrdni okvir, neoznačen, klikni za odabir svega',

@@ -11,6 +11,7 @@ import {
     OnDestroy,
     OnInit,
     Output,
+    signal,
     SimpleChanges,
     TemplateRef,
     ViewEncapsulation
@@ -91,7 +92,12 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
      * 'ThreeColumnsStartMinimized' | 'ThreeColumnsEndMinimized'
      */
     @Input()
-    layout: FlexibleColumnLayout = ONE_COLUMN_START_FULL_SCREEN;
+    set layout(value: FlexibleColumnLayout) {
+        this._layout.set(value);
+    }
+    get layout(): FlexibleColumnLayout {
+        return this._layout();
+    }
 
     /**
      * Mapping of the layout name and the column layout in %
@@ -160,7 +166,7 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
      * if the separator is visible
      * Options include: 'left', 'right' and null
      */
-    _leftColumnSeparator: ColumnSeparatorValue = null;
+    readonly _leftColumnSeparator = signal<ColumnSeparatorValue>(null);
 
     /**
      * @hidden
@@ -169,14 +175,19 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
      * if the separator is visible
      * Options include: 'left', 'right' and null
      */
-    _rightColumnSeparator: ColumnSeparatorValue = null;
+    readonly _rightColumnSeparator = signal<ColumnSeparatorValue>(null);
 
     /**
      * @hidden
      * the column layout representing the distribution of the width
      * between the first (start), the middle and the last(end) column
      */
-    _columnLayout: { start: number; mid: number; end: number } = this.layoutDefinitions[this.layout];
+    readonly _columnLayout = signal<{ start: number; mid: number; end: number }>(
+        this.layoutDefinitions[ONE_COLUMN_START_FULL_SCREEN]
+    );
+
+    /** @hidden */
+    private readonly _layout = signal<FlexibleColumnLayout>(ONE_COLUMN_START_FULL_SCREEN);
 
     /**
      * @hidden
@@ -448,9 +459,9 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
      * makes a call to determine the new value of the right separator
      */
     private _updateColumnLayoutParameters(): void {
-        this._columnLayout = this.layoutDefinitions[this.layout];
-        this._leftColumnSeparator = this._getLeftColumnSeparatorValue();
-        this._rightColumnSeparator = this._getRightColumnSeparatorValue();
+        this._columnLayout.set(this.layoutDefinitions[this.layout]);
+        this._leftColumnSeparator.set(this._getLeftColumnSeparatorValue());
+        this._rightColumnSeparator.set(this._getRightColumnSeparatorValue());
     }
 
     /**

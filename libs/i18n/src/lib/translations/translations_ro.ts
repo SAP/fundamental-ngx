@@ -631,6 +631,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'Ordine crescătoare',
         P13SortDialogSortOrderSelectOptionDesc: 'Ordine descrescătoare',
         resetChangesButtonLabel: 'Resetare',
+        resetConfirmationAnnouncement: 'Values Reset',
         rowNavigateButtonTitle: 'Navigare',
         selectAllCheckboxLabel: 'Selectare toate',
         selectAllCheckboxLongLabel: 'Casetă de selectare, debifată, efectuați click pentru a selecta tot',

@@ -7,6 +7,7 @@ export * from './filtering/filters-active-step';
 export * from './filtering/filters-list-step.component';
 export * from './filtering/filters.component';
 export * from './grouping/grouping.component';
+export * from './include-exclude-filters/include-exclude-filters.component';
 export * from './sorting/sorting.component';
 export * from './table-view-settings-dialog.component';
 export * from './table-view-settings-filter.component';

@@ -41,10 +41,9 @@
         @if (row.hasNavigation) {
         <ui5-table-row-action-navigation
             slot="actions"
-            [interactive]="row.navigationInteractive || false"
+            interactive
             (ui5Click)="onNavigate()"
-        >
-        </ui5-table-row-action-navigation>
+        ></ui5-table-row-action-navigation>
         }
     </ui5-table-row>
     }

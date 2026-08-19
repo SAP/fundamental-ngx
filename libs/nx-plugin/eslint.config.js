@@ -1,8 +1,18 @@
 const nx = require('@nx/eslint-plugin');
 const baseConfig = require('../../eslint.config.js');
+const pluginTs = require('typescript-eslint');
+const angularEslint = require('@angular-eslint/eslint-plugin');
 
 module.exports = [
+    { ignores: ['eslint.config.js', '**/*.tsx'] },
     ...baseConfig,
+    { plugins: { '@typescript-eslint': pluginTs.plugin, '@angular-eslint': angularEslint } },
+    {
+        files: ['**/*.spec.ts'],
+        rules: {
+            '@nx/enforce-module-boundaries': 'off'
+        }
+    },
     {
         files: ['**/*.ts', '**/*.tsx'],
         rules: {

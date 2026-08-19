@@ -165,6 +165,10 @@
         }
     ],
     "routes": {
+        "core/radio/radio": {
+            "suppress": ["aria-conditional-attr"],
+            "reason": "aria-readonly is invalid on role=radio — fix requires coordinated change in fundamental-styles examples. Tracked in #14458"
+        },
         "platform/form-container/possible": {
             "suppress": ["landmark-main-is-top-level", "landmark-no-duplicate-main"],
             "reason": "Known violations: landmark-main-is-top-level, landmark-no-duplicate-main"

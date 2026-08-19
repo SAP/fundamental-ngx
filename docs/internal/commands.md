@@ -174,7 +174,8 @@ nx affected:lint
 ### Start the E2E Harness
 
 ```bash
-# Start manually (keeps running across test runs)
+# Optional — Playwright starts its own harness for every run.
+# Start it manually only to keep it warm across runs and skip the rebuild each time.
 npx nx serve e2e-harness
 ```
 
@@ -184,17 +185,14 @@ The harness is served at **http://localhost:4400**.
 
 ### Update Snapshots
 
-**IMPORTANT:** Snapshot updates require the e2e-harness to be running first (Playwright config only auto-starts it for regular test runs, not `--update-snapshots`).
+**IMPORTANT:** Use `--update-snapshots=all`. The bare `--update-snapshots` flag means `=changed`, which only rewrites a baseline when the comparison fails — differences absorbed by the tolerance are silently skipped.
 
 ```bash
-# 1. Start the harness in one terminal
-npx nx serve e2e-harness
-
-# 2. Update snapshots in another terminal
-npx playwright test --update-snapshots
+# All baselines
+yarn e2e:update
 
 # Update snapshots for a specific component only
-npx playwright test --update-snapshots --grep "core/shellbar"
+npx playwright test --update-snapshots=all --grep "core/shellbar"
 ```
 
 ### Add E2E Routes

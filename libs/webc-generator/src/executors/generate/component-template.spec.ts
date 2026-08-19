@@ -504,6 +504,83 @@ describe('componentTemplate', () => {
         });
     });
 
+    describe('RouterLink bridge (href components)', () => {
+        const hrefDeclaration: CEM.CustomElementDeclaration = {
+            kind: 'class',
+            name: 'Link',
+            tagName: 'ui5-link',
+            customElement: true,
+            members: [
+                {
+                    kind: 'field',
+                    name: 'href',
+                    privacy: 'public',
+                    type: { text: 'string | undefined' }
+                } as CEM.ClassField
+            ]
+        };
+
+        const noHrefDeclaration: CEM.CustomElementDeclaration = {
+            kind: 'class',
+            name: 'Button',
+            tagName: 'ui5-button',
+            customElement: true
+        };
+
+        it('imports Ui5RouterLinkBridgeDirective for components with href', () => {
+            const result = componentTemplate(hrefDeclaration, [], PACKAGE);
+            expect(result).toContain(
+                `import { Ui5RouterLinkBridgeDirective } from '@fundamental-ngx/ui5-webcomponents-base/router-link'`
+            );
+        });
+
+        it('adds Ui5RouterLinkBridgeDirective to hostDirectives for components with href', () => {
+            const result = componentTemplate(hrefDeclaration, [], PACKAGE);
+            expect(result).toContain('hostDirectives: [Ui5RouterLinkBridgeDirective]');
+        });
+
+        it('does NOT import Ui5RouterLinkBridgeDirective for components without href', () => {
+            const result = componentTemplate(noHrefDeclaration, [], PACKAGE);
+            expect(result).not.toContain('Ui5RouterLinkBridgeDirective');
+        });
+
+        it('does NOT add hostDirectives for components without href (unless CVA requires it)', () => {
+            const result = componentTemplate(noHrefDeclaration, [], PACKAGE);
+            expect(result).not.toContain('hostDirectives');
+        });
+    });
+
+    describe('output listener cleanup (NG0953 prevention)', () => {
+        const eventDeclaration: CEM.CustomElementDeclaration = {
+            kind: 'class',
+            name: 'Button',
+            tagName: 'ui5-button',
+            customElement: true,
+            events: [
+                {
+                    name: 'click',
+                    _ui5privacy: 'public',
+                    type: { text: 'CustomEvent' }
+                } as CEM.Event
+            ]
+        };
+
+        it('injects DestroyRef when component has outputs', () => {
+            const result = componentTemplate(eventDeclaration, [], PACKAGE);
+            expect(result).toContain('DestroyRef');
+        });
+
+        it('removes event listeners on destroy', () => {
+            const result = componentTemplate(eventDeclaration, [], PACKAGE);
+            expect(result).toContain('removeEventListener');
+        });
+
+        it('does not inject DestroyRef when component has no outputs', () => {
+            const result = componentTemplate(minimalDeclaration, [], PACKAGE);
+            expect(result).not.toContain('DestroyRef');
+        });
+    });
+
     describe('input synchronization', () => {
         const linkDeclaration: CEM.CustomElementDeclaration = {
             kind: 'class',

@@ -2,6 +2,9 @@
 // so language switching works without CDN fallback
 import '@ui5/webcomponents-localization/dist/Assets.js';
 import '@ui5/webcomponents/dist/Assets.js';
+// Register all SAP icons (v4 + v5) so any icon name used in examples resolves correctly
+// regardless of the active theme (sap_horizon uses SAP-icons-v5 by default)
+import '@ui5/webcomponents-icons/dist/AllIcons.js';
 
 import { registerLocaleData } from '@angular/common';
 import localeKa from '@angular/common/locales/ka';

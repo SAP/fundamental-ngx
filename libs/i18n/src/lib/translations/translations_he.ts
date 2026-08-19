@@ -625,6 +625,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'סדר עולה',
         P13SortDialogSortOrderSelectOptionDesc: 'סדר יורד',
         resetChangesButtonLabel: 'אפס',
+        resetConfirmationAnnouncement: 'Values Reset',
         rowNavigateButtonTitle: 'נווט',
         selectAllCheckboxLabel: 'בחר הכול',
         selectAllCheckboxLongLabel: 'תיבת סימון, לא סומנה, לחץ כדי לבחור הכול',

@@ -1,7 +1,11 @@
 const baseConfig = require('../../../eslint.config.js');
+const pluginTs = require('typescript-eslint');
 
 module.exports = [
     ...baseConfig,
+    {
+        plugins: { '@typescript-eslint': pluginTs.plugin }
+    },
     {
         files: ['**/*'],
         rules: {

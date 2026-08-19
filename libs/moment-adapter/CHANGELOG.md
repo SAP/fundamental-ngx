@@ -1,3 +1,130 @@
+## 0.64.2-rc.34 (2026-08-19)
+
+### 🚀 Features
+
+- **platform:** table - deprecate p13 dialog, add include/exclude filter component ([#14448](https://github.com/SAP/fundamental-ngx/pull/14448))
+
+### ❤️ Thank You
+
+- github-actions
+- Mike O'Donnell @mikerodonnell89
+
+## 0.64.2-rc.33 (2026-08-19)
+
+This was a version bump only for moment-adapter to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.32 (2026-08-18)
+
+This was a version bump only for moment-adapter to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.31 (2026-08-14)
+
+This was a version bump only for moment-adapter to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.30 (2026-08-13)
+
+This was a version bump only for moment-adapter to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.29 (2026-08-13)
+
+This was a version bump only for moment-adapter to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.28 (2026-08-12)
+
+This was a version bump only for moment-adapter to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.27 (2026-08-12)
+
+This was a version bump only for moment-adapter to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.26 (2026-08-12)
+
+This was a version bump only for moment-adapter to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.25 (2026-08-12)
+
+This was a version bump only for moment-adapter to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.24 (2026-08-12)
+
+This was a version bump only for moment-adapter to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.23 (2026-08-11)
+
+This was a version bump only for moment-adapter to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.22 (2026-08-11)
+
+This was a version bump only for moment-adapter to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.21 (2026-08-11)
+
+This was a version bump only for moment-adapter to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.20 (2026-08-11)
+
+This was a version bump only for moment-adapter to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.19 (2026-08-11)
+
+This was a version bump only for moment-adapter to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.18 (2026-08-11)
+
+This was a version bump only for moment-adapter to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.17 (2026-08-10)
+
+This was a version bump only for moment-adapter to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.16 (2026-08-08)
+
+This was a version bump only for moment-adapter to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.15 (2026-08-07)
+
+This was a version bump only for moment-adapter to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.14 (2026-08-07)
+
+### 🩹 Fixes
+
+- **ui5:** enable SPA navigation for [routerLink] on UI5 href components ([#14438](https://github.com/SAP/fundamental-ngx/pull/14438))
+
+### ❤️ Thank You
+
+- deno
+
+## 0.64.2-rc.13 (2026-08-05)
+
+### 🩹 Fixes
+
+- **e2e:** scope visual regression snapshots to component container ([#14440](https://github.com/SAP/fundamental-ngx/pull/14440))
+
+### ❤️ Thank You
+
+- deno
+- github-actions
+
+## 0.64.2-rc.12 (2026-08-05)
+
+This was a version bump only for moment-adapter to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.11 (2026-08-05)
+
+This was a version bump only for moment-adapter to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.10 (2026-08-04)
+
+### 🚀 Features
+
+- **i18n:** add auto-correct command to i18n-manage executor ([#14429](https://github.com/SAP/fundamental-ngx/pull/14429))
+
+### ❤️ Thank You
+
+- deno
+- fundamental-bot
+
 ## 0.64.2-rc.9 (2026-08-03)
 
 This was a version bump only for moment-adapter to align it with other projects, there were no code changes.

@@ -245,7 +245,7 @@ function generateProperties(data: CEM.CustomElementDeclaration): {
    * @readonly This property is managed by the web component and updates reactively.
    * Based on schema: readonly field that updates via ${relatedEvent.name} event parameters.
    */
-  ${camelCaseName} = computed(() => this._${camelCaseName}Signal());`);
+  ${camelCaseName} = computed((): ${member.type?.text || 'any'} => this._${camelCaseName}Signal());`);
         } else {
             // Generate simple getter for readonly properties without related events
             const typeString = member.type?.text || 'any';
@@ -314,7 +314,7 @@ ${slotDocs.join('\n')}
    * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_templates_and_slots | MDN Web Components Slots}
    */
   readonly slots = ${JSON.stringify(
-      slots.map((slot: any) => ({
+      slots.map((slot: any): { name: string; description: string; since: string } => ({
           name: slot.name,
           description: slot.description,
           since: slot._ui5since
@@ -368,9 +368,26 @@ export function componentTemplate(
     // Get CVA configuration based on component metadata
     const cvaConfig = getCvaConfig(data, packageName);
 
-    // Add hostDirective if CVA is needed
-    const cvaHostDirective = cvaConfig ? `  hostDirectives: [${cvaConfig.hostDirective}],\n` : '';
     const cvaImport = cvaConfig ? cvaConfig.import : '';
+
+    // Detect whether this component has an href input
+    const hasHref = (data.members ?? []).some((m) => m.kind === 'field' && m.privacy === 'public' && m.name === 'href');
+
+    const routerLinkBridgeImport = hasHref
+        ? `import { Ui5RouterLinkBridgeDirective } from '@fundamental-ngx/ui5-webcomponents-base/router-link';`
+        : '';
+
+    // Build hostDirectives array — may include CVA and/or RouterLinkBridge
+    const hostDirectiveEntries: string[] = [];
+    if (cvaConfig) {
+        hostDirectiveEntries.push(cvaConfig.hostDirective);
+    }
+    if (hasHref) {
+        hostDirectiveEntries.push('Ui5RouterLinkBridgeDirective');
+    }
+
+    const hostDirectivesDeclaration =
+        hostDirectiveEntries.length > 0 ? `  hostDirectives: [${hostDirectiveEntries.join(', ')}],\n` : '';
 
     // Build providers array - always includes content density, plus CVA if needed
     const contentDensityProvider = `    contentDensityObserverProviders({
@@ -400,8 +417,8 @@ export function componentTemplate(
 
       // Use the Injector to run the effect in the correct context
       if (this[signalName] && typeof this[signalName] === 'function') {
-        runInInjectionContext(this.injector, () => {
-          effect(() => {
+        runInInjectionContext(this.injector, (): void => {
+          effect((): void => {
             // Read the signal value
             const value = this[signalName]();
             if (wcElement) {
@@ -454,7 +471,8 @@ ${outputEvents
           if (eventName === '${event.name}') {
             const customEvent = e as CustomEvent<any>;
             // Use ${member.name} from event detail, fallback to web component property
-            const ${camelCaseName}Value = customEvent.detail?.${member.name} || wcElement.${member.name} || ${member.default || (member.type?.text?.includes('Array') ? '[]' : 'undefined')};
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            const ${camelCaseName}Value = customEvent.detail?.${member.name} || wcElement.${member.name}! || ${member.default || (member.type?.text?.includes('Array') ? '[]' : 'undefined')};
             this._${camelCaseName}Signal.set(${camelCaseName}Value);
           }`
                 )
@@ -466,18 +484,22 @@ ${outputEvents
         outputEvents.length > 0
             ? `
     // Synchronize outputs (events)
+    const _listeners: Array<() => void> = [];
     for (const outputName of outputsToSync) {
       // Map Angular output name to UI5 web component event name
       const eventName = outputName.replace('ui5', '').replace(/([A-Z])/g, '-$1').toLowerCase().substring(1);
       // Ensure the output property exists and has an emit function before adding listener
       if (this[outputName] && typeof this[outputName].emit === 'function' && wcElement.addEventListener) {
         // Cast the listener to the correct type to satisfy TypeScript
-        wcElement.addEventListener(eventName, (e) => {
+        const listener = (e: Event): void => {
 ${readonlySignalUpdates}
           this[outputName].emit(e as CustomEvent<any>);
-        });
+        };
+        wcElement.addEventListener(eventName, listener);
+        _listeners.push(() => wcElement.removeEventListener(eventName, listener));
       }
     }
+    this._destroyRef.onDestroy(() => _listeners.forEach((fn) => fn()));
   `
             : '';
 
@@ -495,7 +517,7 @@ import {
   Injector,
   booleanAttribute,
   computed,
-  signal
+  signal${outputEvents.length > 0 ? ',\n  DestroyRef' : ''}
 } from '@angular/core';
 import '${packageName}/dist/${className}.js';
 import { default as _${className} } from '${packageName}/dist/${className}.js';
@@ -506,6 +528,7 @@ import {
   ContentDensityMode
 } from '@fundamental-ngx/core/content-density';
 ${cvaImport}
+${routerLinkBridgeImport}
 ${componentImports.join('\n')}
 
 @Component({
@@ -513,7 +536,7 @@ ${componentImports.join('\n')}
   selector: '${tagName}, [${tagName}]',
   template: '<ng-content></ng-content>',
   exportAs: 'ui5${className}',
-${cvaHostDirective}${providersArray}  changeDetection: ChangeDetectionStrategy.OnPush,
+${hostDirectivesDeclaration}${providersArray}  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ${className} implements AfterViewInit {
 ${generateInputs(data, componentEnums, className)} // className is now passed
@@ -531,7 +554,7 @@ ${generateSlotsDocumentation(data)}
    * @private
    */
   private readonly _contentDensityObserver = inject(ContentDensityObserver);
-${privateProperties}
+${outputEvents.length > 0 ? '  private readonly _destroyRef = inject(DestroyRef);\n' : ''}${privateProperties}
   get element(): _${className} {
     return this.elementRef.nativeElement;
   }
@@ -542,7 +565,7 @@ ${privateProperties}
     ${inputSyncLoop}
     ${outputsToSyncCode}
     ${outputSyncLoop}
-${(() => {
+${((): string => {
     const signalInits = readonlyMembers
         .filter((member) =>
             // Only initialize signals for members that have related events
@@ -554,7 +577,8 @@ ${(() => {
             return `    // Initialize ${camelCaseName} signal with current state using delayed initialization
     // to handle web component timing properly
     const initialize${camelCaseName.charAt(0).toUpperCase() + camelCaseName.slice(1)} = (): void => {
-      const currentValue = wcElement.${member.name} || ${fallbackValue};
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      const currentValue = wcElement.${member.name}! || ${fallbackValue};
       if (JSON.stringify(currentValue) !== JSON.stringify(this._${camelCaseName}Signal())) {
         this._${camelCaseName}Signal.set(currentValue);
       }
@@ -565,7 +589,7 @@ ${(() => {
 
     // Fallback delayed initialization if web component needs more time
     // Use requestAnimationFrame for zoneless compatibility
-    requestAnimationFrame(() => initialize${camelCaseName.charAt(0).toUpperCase() + camelCaseName.slice(1)}());`;
+    requestAnimationFrame((): void => initialize${camelCaseName.charAt(0).toUpperCase() + camelCaseName.slice(1)}());`;
         })
         .join('\n');
 

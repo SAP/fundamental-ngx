@@ -627,6 +627,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'ზრდადი',
         P13SortDialogSortOrderSelectOptionDesc: 'კლებადი',
         resetChangesButtonLabel: 'გააუქმეთ ცვლილებები',
+        resetConfirmationAnnouncement: 'Values Reset',
         rowNavigateButtonTitle: 'Navigate',
         selectAllCheckboxLabel: 'Select all',
         selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',

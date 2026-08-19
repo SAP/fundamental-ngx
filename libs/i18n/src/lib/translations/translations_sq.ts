@@ -628,6 +628,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'Në ngritje',
         P13SortDialogSortOrderSelectOptionDesc: 'Në zbritje',
         resetChangesButtonLabel: 'Rivendos',
+        resetConfirmationAnnouncement: 'Values Reset',
         rowNavigateButtonTitle: 'Navigate',
         selectAllCheckboxLabel: 'Select all',
         selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',

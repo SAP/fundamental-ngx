@@ -20,6 +20,8 @@ export interface HintOptions {
     placement?: HintPlacement;
     /** Icon name of the inline help element */
     glyph?: string;
+    /** Whether the hint popover should close when clicking outside its boundaries */
+    closeOnOutsideClick?: boolean;
 }
 
 export interface FieldHintOptions extends HintOptions {

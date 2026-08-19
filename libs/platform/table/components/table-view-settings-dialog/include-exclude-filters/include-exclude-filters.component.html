@@ -1,0 +1,106 @@
+<div class="fdp-table-include-exclude-filters">
+    <!-- Include Rules -->
+    <fd-panel [expanded]="_includePanelExpanded">
+        <div fd-panel-title>
+            {{
+                (
+                    (_validIncludeRulesCount() > 0
+                        ? 'platformTable.P13FilterDialogIncludePanelTitleWithCount'
+                        : 'platformTable.P13FilterDialogIncludePanelTitleWithoutCount'
+                    ) | fdTranslate: { count: _validIncludeRulesCount() }
+                )()
+            }}
+        </div>
+        <div fd-panel-content>
+            @for (rule of _includeRules; track rule) {
+                <fd-layout-grid>
+                    <div fdLayoutGridRow>
+                        <fdp-table-filter-rule
+                            [fdLayoutGridCol]="10"
+                            [rule]="rule"
+                            (ruleChange)="_onRuleChange()"
+                            (ruleStateChange)="_onRuleStateChange()"
+                        ></fdp-table-filter-rule>
+                        <!-- Actions buttons -->
+                        <div [fdLayoutGridCol]="2">
+                            <button
+                                fd-button
+                                fdType="transparent"
+                                glyph="sys-cancel"
+                                [attr.aria-label]="
+                                    ('platformTable.P13FilterDialogRemoveFilterBtnTitle' | fdTranslate)()
+                                "
+                                [title]="('platformTable.P13FilterDialogRemoveFilterBtnTitle' | fdTranslate)()"
+                                (click)="_removeRule(rule, _includeRules)"
+                            ></button>
+                            @if (_includeRules.length - 1 === $index) {
+                                <button
+                                    fd-button
+                                    fdType="transparent"
+                                    glyph="add"
+                                    [attr.aria-label]="
+                                        ('platformTable.P13FilterDialogAddFilterBtnTitle' | fdTranslate)()
+                                    "
+                                    [title]="('platformTable.P13FilterDialogAddFilterBtnTitle' | fdTranslate)()"
+                                    (click)="_addNewRule(_includeRules)"
+                                ></button>
+                            }
+                        </div>
+                    </div>
+                </fd-layout-grid>
+            }
+        </div>
+    </fd-panel>
+    <!-- Exclude Rules -->
+    <fd-panel [expanded]="_excludePanelExpanded">
+        <div fd-panel-title>
+            {{
+                (
+                    (_validExcludeRulesCount() > 0
+                        ? 'platformTable.P13FilterDialogExcludePanelTitleWithCount'
+                        : 'platformTable.P13FilterDialogExcludePanelTitleWithoutCount'
+                    ) | fdTranslate: { count: _validExcludeRulesCount() }
+                )()
+            }}
+        </div>
+        <div fd-panel-content>
+            @for (rule of _excludeRules; track rule) {
+                <fd-layout-grid>
+                    <div fdLayoutGridRow>
+                        <fdp-table-filter-rule
+                            [fdLayoutGridCol]="10"
+                            [rule]="rule"
+                            (ruleChange)="_onRuleChange()"
+                            (ruleStateChange)="_onRuleStateChange()"
+                        ></fdp-table-filter-rule>
+                        <!-- Actions buttons -->
+                        <div [fdLayoutGridCol]="2">
+                            <button
+                                fd-button
+                                fdType="transparent"
+                                glyph="sys-cancel"
+                                [attr.aria-label]="
+                                    ('platformTable.P13FilterDialogRemoveFilterBtnTitle' | fdTranslate)()
+                                "
+                                [title]="('platformTable.P13FilterDialogRemoveFilterBtnTitle' | fdTranslate)()"
+                                (click)="_removeRule(rule, _excludeRules)"
+                            ></button>
+                            @if (_excludeRules.length - 1 === $index) {
+                                <button
+                                    fd-button
+                                    fdType="transparent"
+                                    glyph="add"
+                                    [attr.aria-label]="
+                                        ('platformTable.P13FilterDialogAddFilterBtnTitle' | fdTranslate)()
+                                    "
+                                    [title]="('platformTable.P13FilterDialogAddFilterBtnTitle' | fdTranslate)()"
+                                    (click)="_addNewRule(_excludeRules)"
+                                ></button>
+                            }
+                        </div>
+                    </div>
+                </fd-layout-grid>
+            }
+        </div>
+    </fd-panel>
+</div>

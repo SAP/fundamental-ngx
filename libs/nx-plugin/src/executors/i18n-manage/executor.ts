@@ -1,5 +1,6 @@
 import { ExecutorContext } from '@nx/devkit';
 import { addKey } from './operations/add-key';
+import { correct } from './operations/correct';
 import { removeKey } from './operations/remove-key';
 import { renameKey } from './operations/rename-key';
 import { searchKeys } from './operations/search-keys';
@@ -39,6 +40,8 @@ export default async function runExecutor(
                 return await handleSort(options, context);
             case 'sync':
                 return await handleSync(options, context);
+            case 'correct':
+                return await handleCorrect(options, context);
             default:
                 throw new Error(`Unknown command: ${command}`);
         }
@@ -380,4 +383,45 @@ async function handleSync(options: I18nManageExecutorSchema, context: ExecutorCo
     }
 
     return result;
+}
+
+async function handleCorrect(options: I18nManageExecutorSchema, context: ExecutorContext): Promise<I18nManageResult> {
+    const { propertiesPath, baseLangOnly } = options;
+
+    // Validation
+    if (!propertiesPath) {
+        return {
+            success: false,
+            error: '--propertiesPath is required. Configure it in project.json'
+        };
+    }
+
+    console.log(`\n🔧 Auto-correcting translation files...`);
+    if (baseLangOnly) {
+        console.log('   (base language file only)');
+    }
+    console.log('');
+
+    const result = await correct({ propertiesPath, baseLangOnly });
+
+    if (result.success) {
+        if (result.filesModified.length === 0) {
+            console.log('✅ No corrections needed');
+        } else {
+            console.log(`✅ Success! Corrected ${result.filesModified.length} file(s):`);
+            for (const file of result.filesModified) {
+                console.log(`   - ${file}`);
+                const corrections = (result as any).corrections[file] || [];
+                for (const correction of corrections) {
+                    console.log(`     • ${correction}`);
+                }
+            }
+        }
+        console.log('');
+    } else {
+        console.error(`❌ Error: ${result.error}`);
+        console.log('');
+    }
+
+    return { success: result.success, filesModified: result.filesModified, error: result.error };
 }

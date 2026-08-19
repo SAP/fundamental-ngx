@@ -23,6 +23,7 @@ import {
     OnDestroy,
     Output,
     QueryList,
+    signal,
     SimpleChanges,
     TemplateRef,
     ViewChild
@@ -252,12 +253,12 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     /** @hidden
      * Max width of list container
      * */
-    maxWidth?: number;
+    readonly maxWidth = signal<number | null>(null);
 
     /** @hidden
      * Min width of list container
      * */
-    minWidth?: number;
+    readonly minWidth = signal<number | null>(null);
 
     /**
      * Need for opening mobile version
@@ -591,8 +592,8 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         const body = document.body;
         const rect = (this._element.querySelector('fd-input-group') as HTMLElement).getBoundingClientRect();
         const scrollBarWidth = body.offsetWidth - body.clientWidth;
-        this.maxWidth = window.innerWidth - scrollBarWidth - rect.left;
-        this.minWidth = rect.width - 2;
+        this.maxWidth.set(window.innerWidth - scrollBarWidth - rect.left);
+        this.minWidth.set(rect.width - 2);
     }
 
     /**

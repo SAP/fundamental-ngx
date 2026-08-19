@@ -21,6 +21,9 @@ export interface E2EFixtures {
 
 const ROUTES_JSON_PATH = resolve(__dirname, '../config/e2e.routes.json');
 
+// Calendars/date pickers highlight "today", so baselines would rot every midnight without a frozen clock.
+const FIXED_NOW = new Date('2025-06-16T10:00:00Z');
+
 let cachedRoutes: RoutesManifest | null = null;
 
 function loadRoutes(): RoutesManifest {
@@ -35,6 +38,10 @@ async function disableAnimations(page: Page): Promise<void> {
 }
 
 export const test = base.extend<E2EFixtures>({
+    page: async ({ page }, use) => {
+        await page.clock.setFixedTime(FIXED_NOW);
+        await use(page);
+    },
     goto: async ({ page }, use) => {
         const fn = async (route: string): Promise<void> => {
             await page.goto(`/${route}`, { waitUntil: 'domcontentloaded' });

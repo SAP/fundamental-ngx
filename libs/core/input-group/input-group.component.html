@@ -48,16 +48,11 @@
                 </button>
             </span>
         } @else {
-            <span
-                fd-input-group-addon
-                [id]="_addOnNonButtonId"
-                [placement]="placement"
-                [attr.aria-label]="glyphAriaLabel || glyph || addOnText"
-            >
+            <span fd-input-group-addon [id]="_addOnNonButtonId" [placement]="placement">
                 @if (!glyph) {
                     {{ addOnText }}
                 } @else {
-                    <fd-icon [glyph]="glyph" [font]="glyphFont"></fd-icon>
+                    <fd-icon [glyph]="glyph" [font]="glyphFont" [ariaLabel]="glyphAriaLabel || glyph"></fd-icon>
                 }
             </span>
         }
