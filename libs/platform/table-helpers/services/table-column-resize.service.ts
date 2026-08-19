@@ -112,7 +112,7 @@ export class TableColumnResizeService implements OnDestroy {
     });
 
     /** @hidden */
-    private readonly _ngZone = inject(NgZone);
+    private readonly _ngZone = inject(NgZone, { optional: true });
 
     /** @hidden */
     constructor(private readonly _tableScrollDispatcherService: TableScrollDispatcherService) {
@@ -358,7 +358,7 @@ export class TableColumnResizeService implements OnDestroy {
 
     /** Update column resizer position. */
     private _updateResizerPositionOnMouseMove(): void {
-        this._resizerMoveSubscription = this._ngZone.runOutsideAngular(() =>
+        const setupMouseMove = (): Subscription =>
             fromEvent<MouseEvent>(document, 'mousemove')
                 .pipe(debounceTime(10))
                 .subscribe((event) => {
@@ -367,8 +367,11 @@ export class TableColumnResizeService implements OnDestroy {
 
                     this._resizerPosition = (this._startX ?? 0) + diffX;
                     this.resizerPosition$.next(this.resizerPosition);
-                })
-        );
+                });
+
+        this._resizerMoveSubscription = this._ngZone
+            ? this._ngZone.runOutsideAngular(setupMouseMove)
+            : setupMouseMove();
     }
 
     /**

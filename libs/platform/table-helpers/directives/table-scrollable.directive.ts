@@ -48,11 +48,14 @@ export class TableScrollableDirective implements TableScrollable, OnInit, OnDest
     /** @hidden */
     private readonly _document = inject(DOCUMENT);
 
+    /** @hidden */
+    private readonly _ngZone = inject(NgZone, { optional: true });
+
     /** Scroll events stream */
     private _elementScrollStream: Observable<Event> = new Observable((observer: Observer<Event>) => {
-        const subscription = this.ngZone.runOutsideAngular(() =>
-            fromEvent(this.elementRef.nativeElement, 'scroll').subscribe(observer)
-        );
+        const subscribeToScroll = (): Subscription =>
+            fromEvent(this.elementRef.nativeElement, 'scroll').subscribe(observer);
+        const subscription = this._ngZone ? this._ngZone.runOutsideAngular(subscribeToScroll) : subscribeToScroll();
         return () => subscription.unsubscribe();
     }).pipe(
         filter(() => {
@@ -81,8 +84,7 @@ export class TableScrollableDirective implements TableScrollable, OnInit, OnDest
     /** @hidden */
     constructor(
         public elementRef: ElementRef<HTMLElement>,
-        protected scrollDispatcher: TableScrollDispatcherService,
-        protected ngZone: NgZone
+        protected scrollDispatcher: TableScrollDispatcherService
     ) {}
 
     /** @hidden */
@@ -195,10 +197,16 @@ export class TableScrollableDirective implements TableScrollable, OnInit, OnDest
 
     /** Set Scroll Position during component initialization. */
     initializeScrollTop(scrollTop: number): void {
-        this.ngZone.runOutsideAngular(() => {
+        const setScrollTimeout = (): void => {
             setTimeout(() => {
                 this.setScrollTop(scrollTop, false);
             });
-        });
+        };
+
+        if (this._ngZone) {
+            this._ngZone.runOutsideAngular(setScrollTimeout);
+        } else {
+            setScrollTimeout();
+        }
     }
 }
