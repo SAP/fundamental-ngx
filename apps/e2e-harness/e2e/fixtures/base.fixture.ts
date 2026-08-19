@@ -34,7 +34,21 @@ function loadRoutes(): RoutesManifest {
 }
 
 async function disableAnimations(page: Page): Promise<void> {
+    // Add class-based animation disabling
     await page.evaluate(() => document.documentElement.classList.add('e2e-no-animations'));
+
+    // Add CSS injection as fallback to ensure all animations are disabled
+    await page.addStyleTag({
+        content: `
+            *, *::before, *::after {
+                animation-duration: 0s !important;
+                animation-delay: 0s !important;
+                transition-duration: 0s !important;
+                transition-delay: 0s !important;
+                scroll-behavior: auto !important;
+            }
+        `
+    });
 }
 
 export const test = base.extend<E2EFixtures>({
