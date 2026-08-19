@@ -45,7 +45,6 @@ test.describe('Visual Regression — Compact Content Density', () => {
 
             const example = page.locator('e2e-root > main');
             await expect(example).toHaveScreenshot(`compact/${route.library}/${route.component}-${route.example}.png`, {
-                maxDiffPixelRatio: 0.01,
                 animations: 'disabled'
             });
         });

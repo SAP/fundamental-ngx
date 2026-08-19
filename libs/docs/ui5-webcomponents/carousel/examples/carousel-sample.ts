@@ -69,31 +69,31 @@ export class CarouselExample {
     // Sample data signals
     readonly images = signal<Array<ImageStyle>>([
         {
-            url: 'https://picsum.photos/800/500?id=1',
+            url: 'https://picsum.photos/id/1018/400',
             title: 'Nature Landscape',
             description: 'Beautiful mountain scenery with clear blue sky',
             gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
         },
         {
-            url: 'https://picsum.photos/800/500?id=2',
+            url: 'https://picsum.photos/id/1019/400',
             title: 'Urban Architecture',
             description: 'Modern city skyline during golden hour',
             gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)'
         },
         {
-            url: 'https://picsum.photos/800/500?id=3',
+            url: 'https://picsum.photos/id/1020/400',
             title: 'Ocean View',
             description: 'Peaceful ocean waves at sunset',
             gradient: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)'
         },
         {
-            url: 'https://picsum.photos/800/500?id=4',
+            url: 'https://picsum.photos/id/1021/400',
             title: 'Forest Path',
             description: 'Winding trail through autumn forest',
             gradient: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)'
         },
         {
-            url: 'https://picsum.photos/800/500?id=5',
+            url: 'https://picsum.photos/id/1022/400',
             title: 'Desert Dunes',
             description: 'Golden sand dunes under starlit sky',
             gradient: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)'

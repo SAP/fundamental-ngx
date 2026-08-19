@@ -44,7 +44,7 @@ class ExampleUserService {
         name: 'John Doe',
         username: 'C78672634',
         language: 'de',
-        avatar: `https://randomuser.me/api/portraits/men/${Math.floor(Math.random() * 10)}.jpg`,
+        avatar: `https://picsum.photos/seed/people1/100/100`,
         shipping: {
             address: 'Walldorf, Baden-Württemberg'
         }
@@ -71,7 +71,7 @@ class ExampleUserService {
         this._user$.next({
             ...this._user$.value,
             ...user,
-            ...{ avatar: `https://randomuser.me/api/portraits/men/${Math.floor(Math.random() * 10)}.jpg` }
+            ...{ avatar: `https://picsum.photos/seed/people2/100/100` }
         });
     }
 }
