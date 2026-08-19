@@ -62,6 +62,15 @@
                         ></fdp-filters>
                     </fdp-icon-tab-bar-tab>
                 }
+                @if (includeExcludeFiltersData()) {
+                    <fdp-icon-tab-bar-tab [label]="('platformTable.toolbarActionFilterButtonTitle' | fdTranslate)()">
+                        <fdp-table-include-exclude-filters
+                            [filterData]="includeExcludeFiltersComponentData"
+                            (filterChange)="onIncludeExcludeFilterChange($event)"
+                            (resetAvailabilityChange)="updateResetAvailability(ActiveTab.FILTER, $event)"
+                        ></fdp-table-include-exclude-filters>
+                    </fdp-icon-tab-bar-tab>
+                }
                 @if (groupingData()) {
                     <fdp-icon-tab-bar-tab [label]="('platformTable.toolbarActionGroupButtonTitle' | fdTranslate)()">
                         <fdp-grouping
@@ -100,6 +109,13 @@
                     (filterChange)="onFilterChange($event)"
                     (resetAvailabilityChange)="updateResetAvailability(ActiveTab.FILTER, $event)"
                 ></fdp-filters>
+            }
+            @if (includeExcludeFiltersData()) {
+                <fdp-table-include-exclude-filters
+                    [filterData]="includeExcludeFiltersComponentData"
+                    (filterChange)="onIncludeExcludeFilterChange($event)"
+                    (resetAvailabilityChange)="updateResetAvailability(ActiveTab.FILTER, $event)"
+                ></fdp-table-include-exclude-filters>
             }
             @if (groupingData()) {
                 <fdp-grouping

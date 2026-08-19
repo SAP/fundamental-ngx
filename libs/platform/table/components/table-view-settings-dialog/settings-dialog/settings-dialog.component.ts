@@ -20,16 +20,22 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
 import { FD_LANGUAGE_SIGNAL, FdTranslatePipe, TranslationResolver } from '@fundamental-ngx/i18n';
 import { IconTabBarComponent, IconTabBarItem, IconTabBarTabComponent } from '@fundamental-ngx/platform/icon-tab-bar';
 import { CollectionFilter, CollectionSort, Table } from '@fundamental-ngx/platform/table-helpers';
-import { RESETTABLE_TOKEN, ResetButtonComponent, Resettable } from '../../reset-button/reset-button.component';
+import { ResetButtonComponent, Resettable, RESETTABLE_TOKEN } from '../../reset-button/reset-button.component';
 import { ColumnsComponent } from '../columns/columns.component';
 import { FiltersViewStep } from '../filtering/filters-active-step';
 import { FiltersComponent } from '../filtering/filters.component';
 import { GroupingComponent } from '../grouping/grouping.component';
+import {
+    IncludeExcludeFiltersComponent,
+    IncludeExcludeFiltersData,
+    IncludeExcludeFiltersResultData
+} from '../include-exclude-filters/include-exclude-filters.component';
 import { SortingComponent } from '../sorting/sorting.component';
 import {
     ActiveTab,
     FiltersDialogData,
     FiltersDialogResultData,
+    IncludeExcludeFiltersDialogData,
     INITIAL_DIRECTION,
     NOT_GROUPED_OPTION_VALUE,
     NOT_SORTED_OPTION_VALUE,
@@ -60,6 +66,7 @@ import {
         FiltersComponent,
         GroupingComponent,
         ColumnsComponent,
+        IncludeExcludeFiltersComponent,
         NgTemplateOutlet,
         TemplateDirective,
         TitleComponent,
@@ -76,6 +83,9 @@ export class SettingsDialogComponent implements Resettable {
 
     /** Data for filtering */
     filteringData = signal<Nullable<FiltersDialogData>>(null);
+
+    /** Data for include/exclude filters */
+    includeExcludeFiltersData = signal<Nullable<IncludeExcludeFiltersDialogData>>(null);
 
     /** Data for grouping */
     groupingData = signal<Nullable<SettingsGroupDialogData>>(null);
@@ -128,6 +138,18 @@ export class SettingsDialogComponent implements Resettable {
     /** @hidden Tracks reset availability per tab */
     private _resetAvailabilityByTab = signal<Record<string, boolean>>({});
 
+    /** @hidden Computed filter data for include/exclude filters component */
+    protected get includeExcludeFiltersComponentData(): IncludeExcludeFiltersData | undefined {
+        const data = this.includeExcludeFiltersData();
+        return data
+            ? {
+                  columns: data.columns,
+                  collectionFilter: data.filterBy,
+                  validator: data.validator
+              }
+            : undefined;
+    }
+
     /** @hidden Live announcer for screen reader announcements */
     private _liveAnnouncer = inject(LiveAnnouncer);
 
@@ -144,6 +166,7 @@ export class SettingsDialogComponent implements Resettable {
         private readonly dialogRef: DialogRef<{
             sortingData: Nullable<SettingsSortDialogData>;
             filteringData: Nullable<FiltersDialogData>;
+            includeExcludeFiltersData: Nullable<IncludeExcludeFiltersDialogData>;
             groupingData: Nullable<SettingsGroupDialogData>;
             columnsData: Nullable<SettingsColumnsDialogData>;
             headingLevel: 1 | 2 | 3 | 4 | 5 | 6;
@@ -154,6 +177,7 @@ export class SettingsDialogComponent implements Resettable {
         const data = this.dialogRef.data;
         this.sortingData.set(data.sortingData);
         this.filteringData.set(data.filteringData);
+        this.includeExcludeFiltersData.set(data.includeExcludeFiltersData);
         this.groupingData.set(data.groupingData);
         this.showColumns = data.allowColumnConfiguration;
         if (this.showColumns) {
@@ -172,6 +196,15 @@ export class SettingsDialogComponent implements Resettable {
      * Confirm the dialog action and close the dialog, returning updated settings data.
      */
     confirm(): void {
+        // Validate include-exclude filters if present
+        const includeExcludeData = this.includeExcludeFiltersData();
+        if (includeExcludeData?.validator && includeExcludeData.filterBy.length > 0) {
+            if (!includeExcludeData.validator(includeExcludeData.filterBy)) {
+                // Validator returned false - don't close dialog
+                return;
+            }
+        }
+
         const columnsData = this._pendingColumnsChanges
             ? { columns: this._pendingColumnsChanges.columns }
             : this.columnsData();
@@ -183,6 +216,7 @@ export class SettingsDialogComponent implements Resettable {
         this.dialogRef.close({
             sortingData: sortingResult,
             filteringData: this.filteringData(),
+            includeExcludeFiltersData: this.includeExcludeFiltersData(),
             groupingData: this.groupingData(),
             columnsData
         });
@@ -216,6 +250,12 @@ export class SettingsDialogComponent implements Resettable {
         if (this.activeTab() === ActiveTab.FILTER && this.filteringData()) {
             this.filteringData.set({
                 ...this.filteringData()!,
+                filterBy: this._initialFilters()
+            });
+        }
+        if (this.activeTab() === ActiveTab.FILTER && this.includeExcludeFiltersData()) {
+            this.includeExcludeFiltersData.set({
+                ...this.includeExcludeFiltersData()!,
                 filterBy: this._initialFilters()
             });
         }
@@ -275,6 +315,17 @@ export class SettingsDialogComponent implements Resettable {
     }
 
     /**
+     * Handle include/exclude filter change event and update filtering data.
+     * @param event Updated include/exclude filtering data.
+     */
+    onIncludeExcludeFilterChange(event: IncludeExcludeFiltersResultData): void {
+        this.includeExcludeFiltersData.set({
+            ...this.includeExcludeFiltersData()!,
+            filterBy: event.filterBy
+        });
+    }
+
+    /**
      * Handle group change event and update grouping data.
      * @param event Updated grouping data.
      */
@@ -309,7 +360,7 @@ export class SettingsDialogComponent implements Resettable {
      */
     protected onTabSelected(event: IconTabBarItem): void {
         // Map tab index to ActiveTab enum based on which tabs are rendered
-        // The order is: columns (if showColumns), sort, filter, group
+        // The order is: columns (if showColumns), sort, filter (regular or include/exclude), group
         const tabOrder: ActiveTab[] = [];
         if (this.columnsData() && this.showColumns) {
             tabOrder.push(ActiveTab.COLUMNS);
@@ -317,7 +368,7 @@ export class SettingsDialogComponent implements Resettable {
         if (this.sortingData()) {
             tabOrder.push(ActiveTab.SORT);
         }
-        if (this.filteringData()) {
+        if (this.filteringData() || this.includeExcludeFiltersData()) {
             tabOrder.push(ActiveTab.FILTER);
         }
         if (this.groupingData()) {
@@ -365,7 +416,7 @@ export class SettingsDialogComponent implements Resettable {
             return ActiveTab.COLUMNS;
         } else if (this.sortingData()) {
             return ActiveTab.SORT;
-        } else if (this.filteringData()) {
+        } else if (this.filteringData() || this.includeExcludeFiltersData()) {
             return ActiveTab.FILTER;
         } else if (this.groupingData()) {
             return ActiveTab.GROUP;
@@ -379,10 +430,10 @@ export class SettingsDialogComponent implements Resettable {
     private _shouldRenderSubheader(): void {
         const validDataCount = [
             this.sortingData(),
-            this.filteringData(),
+            !!(this.filteringData() || this.includeExcludeFiltersData()),
             this.groupingData(),
             this.columnsData()
-        ].filter((data) => data !== null).length;
+        ].filter((data) => data !== null && data !== false).length;
         this.showSubheader.set(validDataCount >= 2);
     }
 

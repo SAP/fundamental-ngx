@@ -33,6 +33,7 @@ export * from './components/table-view-settings-dialog/filtering/filters-active-
 export * from './components/table-view-settings-dialog/filtering/filters-list-step.component';
 export * from './components/table-view-settings-dialog/filtering/filters.component';
 export * from './components/table-view-settings-dialog/grouping/grouping.component';
+export * from './components/table-view-settings-dialog/include-exclude-filters/include-exclude-filters.component';
 export * from './components/table-view-settings-dialog/sorting/sorting.component';
 export * from './components/table-view-settings-dialog/table-view-settings-dialog.component';
 export * from './components/table-view-settings-dialog/table-view-settings-filter.component';
