@@ -1,3 +1,14 @@
+## 0.64.2-rc.34 (2026-08-19)
+
+### 🚀 Features
+
+- **platform:** table - deprecate p13 dialog, add include/exclude filter component ([#14448](https://github.com/SAP/fundamental-ngx/pull/14448))
+
+### ❤️ Thank You
+
+- github-actions
+- Mike O'Donnell @mikerodonnell89
+
 ## 0.64.2-rc.33 (2026-08-19)
 
 This was a version bump only for ui5-webcomponents to align it with other projects, there were no code changes.
