@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FdDate, FdDatetimeModule, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { TitleComponent } from '@fundamental-ngx/core/title';
-import { FD_LANGUAGE, FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n/en';
 import { PlatformSmartFilterBarModule } from '@fundamental-ngx/platform/smart-filter-bar';
 import { FilterType, FilterableColumnDataType, PlatformTableModule } from '@fundamental-ngx/platform/table';
 import {
@@ -10,7 +11,6 @@ import {
     TableInitialStateDirective
 } from '@fundamental-ngx/platform/table-helpers';
 import { of } from 'rxjs';
-
 @Component({
     selector: 'fdp-platform-smart-filter-bar-custom-labels-example',
     templateUrl: './platform-smart-filter-bar-custom-labels-example.component.html',

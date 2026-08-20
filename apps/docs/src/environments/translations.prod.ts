@@ -1,44 +1,41 @@
-import {
-    FD_LANGUAGE_ALBANIAN,
-    FD_LANGUAGE_ARABIC,
-    FD_LANGUAGE_BULGARIAN,
-    FD_LANGUAGE_CHINESE,
-    FD_LANGUAGE_CHINESE_TRADITIONAL,
-    FD_LANGUAGE_CROATIAN,
-    FD_LANGUAGE_CZECH,
-    FD_LANGUAGE_DANISH,
-    FD_LANGUAGE_DUTCH,
-    FD_LANGUAGE_ENGLISH,
-    FD_LANGUAGE_FINNISH,
-    FD_LANGUAGE_FRENCH,
-    FD_LANGUAGE_GEORGIAN,
-    FD_LANGUAGE_GERMAN,
-    FD_LANGUAGE_GREEK,
-    FD_LANGUAGE_HEBREW,
-    FD_LANGUAGE_HINDI,
-    FD_LANGUAGE_HUNGARIAN,
-    FD_LANGUAGE_ITALIAN,
-    FD_LANGUAGE_JAPANESE,
-    FD_LANGUAGE_KAZAKH,
-    FD_LANGUAGE_KOREAN,
-    FD_LANGUAGE_MALAY,
-    FD_LANGUAGE_NORWEGIAN,
-    FD_LANGUAGE_POLISH,
-    FD_LANGUAGE_PORTUGUESE,
-    FD_LANGUAGE_ROMANIAN,
-    FD_LANGUAGE_RUSSIAN,
-    FD_LANGUAGE_SERBIAN,
-    FD_LANGUAGE_SLOVAK,
-    FD_LANGUAGE_SLOVENIAN,
-    FD_LANGUAGE_SPANISH,
-    FD_LANGUAGE_SWEDISH,
-    FD_LANGUAGE_THAI,
-    FD_LANGUAGE_TURKISH,
-    FD_LANGUAGE_UKRAINIAN,
-    FdLanguage
-} from '@fundamental-ngx/i18n';
+import { FdLanguage } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_ARABIC } from '@fundamental-ngx/i18n/ar';
+import { FD_LANGUAGE_BULGARIAN } from '@fundamental-ngx/i18n/bg';
+import { FD_LANGUAGE_CZECH } from '@fundamental-ngx/i18n/cs';
+import { FD_LANGUAGE_DANISH } from '@fundamental-ngx/i18n/da';
+import { FD_LANGUAGE_GERMAN } from '@fundamental-ngx/i18n/de';
+import { FD_LANGUAGE_GREEK } from '@fundamental-ngx/i18n/el';
+import { FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n/en';
+import { FD_LANGUAGE_SPANISH } from '@fundamental-ngx/i18n/es';
+import { FD_LANGUAGE_FINNISH } from '@fundamental-ngx/i18n/fi';
+import { FD_LANGUAGE_FRENCH } from '@fundamental-ngx/i18n/fr';
+import { FD_LANGUAGE_HEBREW } from '@fundamental-ngx/i18n/he';
+import { FD_LANGUAGE_HINDI } from '@fundamental-ngx/i18n/hi';
+import { FD_LANGUAGE_CROATIAN } from '@fundamental-ngx/i18n/hr';
+import { FD_LANGUAGE_HUNGARIAN } from '@fundamental-ngx/i18n/hu';
+import { FD_LANGUAGE_ITALIAN } from '@fundamental-ngx/i18n/it';
+import { FD_LANGUAGE_JAPANESE } from '@fundamental-ngx/i18n/ja';
+import { FD_LANGUAGE_GEORGIAN } from '@fundamental-ngx/i18n/ka';
+import { FD_LANGUAGE_KAZAKH } from '@fundamental-ngx/i18n/kk';
+import { FD_LANGUAGE_KOREAN } from '@fundamental-ngx/i18n/ko';
+import { FD_LANGUAGE_MALAY } from '@fundamental-ngx/i18n/ms';
+import { FD_LANGUAGE_DUTCH } from '@fundamental-ngx/i18n/nl';
+import { FD_LANGUAGE_NORWEGIAN } from '@fundamental-ngx/i18n/no';
+import { FD_LANGUAGE_POLISH } from '@fundamental-ngx/i18n/pl';
+import { FD_LANGUAGE_PORTUGUESE } from '@fundamental-ngx/i18n/pt';
+import { FD_LANGUAGE_ROMANIAN } from '@fundamental-ngx/i18n/ro';
+import { FD_LANGUAGE_RUSSIAN } from '@fundamental-ngx/i18n/ru';
+import { FD_LANGUAGE_SLOVAK } from '@fundamental-ngx/i18n/sk';
+import { FD_LANGUAGE_SLOVENIAN } from '@fundamental-ngx/i18n/sl';
+import { FD_LANGUAGE_ALBANIAN } from '@fundamental-ngx/i18n/sq';
+import { FD_LANGUAGE_SERBIAN } from '@fundamental-ngx/i18n/sr';
+import { FD_LANGUAGE_SWEDISH } from '@fundamental-ngx/i18n/sv';
+import { FD_LANGUAGE_THAI } from '@fundamental-ngx/i18n/th';
+import { FD_LANGUAGE_TURKISH } from '@fundamental-ngx/i18n/tr';
+import { FD_LANGUAGE_UKRAINIAN } from '@fundamental-ngx/i18n/uk';
+import { FD_LANGUAGE_CHINESE } from '@fundamental-ngx/i18n/zh-hans';
+import { FD_LANGUAGE_CHINESE_TRADITIONAL } from '@fundamental-ngx/i18n/zh-hant';
 import { Observable, of } from 'rxjs';
-
 export function translations(): Observable<Array<{ value: FdLanguage; name: string }>> {
     return of([
         { name: 'Shqip', value: FD_LANGUAGE_ALBANIAN },

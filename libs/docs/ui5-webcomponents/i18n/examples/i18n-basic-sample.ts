@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/c
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { FD_LANGUAGE_SIGNAL, FD_LOCALE_SIGNAL, resolveTranslationSignal } from '@fundamental-ngx/i18n';
 import { DatePicker } from '@fundamental-ngx/ui5-webcomponents/date-picker';
-
 /**
  * Demonstrates UI5 + FD language synchronization via the bridge.
  *
