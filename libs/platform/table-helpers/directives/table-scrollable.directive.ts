@@ -10,7 +10,7 @@ import {
     OnInit
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { fromEvent, Observable, Observer } from 'rxjs';
+import { fromEvent, Observable, Observer, Subscription } from 'rxjs';
 import { filter, share, tap } from 'rxjs/operators';
 import {
     TABLE_SCROLLABLE,
