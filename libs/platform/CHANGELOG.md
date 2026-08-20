@@ -1,3 +1,13 @@
+## 0.64.2-rc.38 (2026-08-20)
+
+### 🩹 Fixes
+
+- **platform:** expose BaseInput required as input without changing validation ownership ([#14482](https://github.com/SAP/fundamental-ngx/pull/14482))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.64.2-rc.37 (2026-08-20)
 
 ### 🩹 Fixes
