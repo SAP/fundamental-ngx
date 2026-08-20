@@ -31,7 +31,7 @@
         <td
             class="fd-table__cell--checkbox"
             [class.fd-table__cell--fixed]="fixed"
-            [attr.role]="_hasRowHeaderColumn$() ? 'rowheader' : 'gridcell'"
+            [attr.role]="_hasRowHeaderColumn$() ? 'rowheader' : 'cell'"
             fd-table-cell
             [focusable]="true"
             [style]="
@@ -50,7 +50,6 @@
     } @else {
         <td
             class="fd-table__cell--checkbox"
-            role="gridcell"
             fd-table-cell
             fdkDisabled
             [addDisabledClass]="false"
@@ -89,7 +88,6 @@
     } @else {
         <td
             class="fd-table__cell--checkbox"
-            role="gridcell"
             fd-table-cell
             fdkDisabled
             [addDisabledClass]="false"

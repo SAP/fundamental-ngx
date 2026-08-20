@@ -147,7 +147,7 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
 
     /** Column role attribute. */
     @Input()
-    role: 'cell' | 'rowheader' | 'gridcell' = 'gridcell';
+    role: 'cell' | 'rowheader' | 'gridcell' = 'cell';
 
     /** Whether to announce empty cells to screen readers. Default is true. */
     readonly announceEmptyCell = input(true);
