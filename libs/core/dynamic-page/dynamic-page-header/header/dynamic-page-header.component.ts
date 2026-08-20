@@ -20,9 +20,9 @@ import { DYNAMIC_PAGE_HEADER_TOKEN } from '@fundamental-ngx/core/shared';
 
 import { NgTemplateOutlet } from '@angular/common';
 import { IgnoreClickOnSelectionDirective } from '@fundamental-ngx/cdk/utils';
+import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 import { HeadingLevel } from '@fundamental-ngx/core/shared';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
-import { MessageStripComponent } from '../../../message-strip/message-strip.component';
 import { DYNAMIC_PAGE_CLASS_NAME, DynamicPageResponsiveSize } from '../../constants';
 import { DynamicPageHeaderSubtitleDirective } from '../../directives/dynamic-page-header-subtitle.directive';
 import { DynamicPageHeaderTitleDirective } from '../../directives/dynamic-page-header-title.directive';
