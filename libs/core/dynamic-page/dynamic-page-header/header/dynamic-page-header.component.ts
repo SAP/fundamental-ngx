@@ -11,6 +11,7 @@ import {
     input,
     OnInit,
     Renderer2,
+    TemplateRef,
     ViewEncapsulation
 } from '@angular/core';
 
@@ -111,6 +112,14 @@ export class DynamicPageHeaderComponent implements OnInit {
      * When provided via fdDynamicPageHeaderTitle directive, overrides the title text input.
      */
     readonly _titleTemplate = contentChild(DynamicPageHeaderTitleDirective);
+
+    /**
+     * Optional template ref for message strip content.
+     * When provided, the message strip container is rendered using this template
+     * instead of relying on ng-content projection.
+     * This is used by Platform Dynamic Page which cannot project via ng-content.
+     */
+    readonly messageStripTemplate = input<TemplateRef<any> | null>(null);
 
     /**
      * @hidden

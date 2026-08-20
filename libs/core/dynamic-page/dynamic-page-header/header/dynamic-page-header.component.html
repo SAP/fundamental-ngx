@@ -70,9 +70,13 @@
     </span>
 }
 
-@if (messageStrip()) {
+@if (messageStrip() || messageStripTemplate()) {
     <div class="fd-dynamic-page__message-strip-container">
-        <ng-content select="fd-message-strip"></ng-content>
+        @if (messageStripTemplate()) {
+            <ng-template [ngTemplateOutlet]="messageStripTemplate()!"></ng-template>
+        } @else {
+            <ng-content select="fd-message-strip"></ng-content>
+        }
     </div>
 }
 
