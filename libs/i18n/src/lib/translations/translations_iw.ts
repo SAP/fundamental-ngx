@@ -106,6 +106,12 @@ export default {
         lessLabel: 'פחות',
         moreLabel: '{count} יותר'
     },
+    coreFormMessage: {
+        error: 'Invalid Entry',
+        information: 'Information',
+        success: 'Success',
+        warning: 'Warning'
+    },
     coreGridList: {
         filterBarCancelButtonTitle: 'בטל',
         listItemButtonDeleteTitle: 'מחק',

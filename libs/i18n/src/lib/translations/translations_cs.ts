@@ -106,6 +106,12 @@ export default {
         lessLabel: 'Méně',
         moreLabel: 'o {count} více'
     },
+    coreFormMessage: {
+        error: 'Invalid Entry',
+        information: 'Information',
+        success: 'Success',
+        warning: 'Warning'
+    },
     coreGridList: {
         filterBarCancelButtonTitle: 'Zrušit',
         listItemButtonDeleteTitle: 'Odstranit',

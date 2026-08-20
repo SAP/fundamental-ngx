@@ -107,6 +107,12 @@ export default {
         lessLabel: 'Moins',
         moreLabel: '{count} de plus'
     },
+    coreFormMessage: {
+        error: 'Invalid Entry',
+        information: 'Information',
+        success: 'Success',
+        warning: 'Warning'
+    },
     coreGridList: {
         filterBarCancelButtonTitle: 'Annuler',
         listItemButtonDeleteTitle: 'Supprimer',

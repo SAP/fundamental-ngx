@@ -106,6 +106,12 @@ export default {
         lessLabel: '간단히',
         moreLabel: '{count} 이상'
     },
+    coreFormMessage: {
+        error: 'Invalid Entry',
+        information: 'Information',
+        success: 'Success',
+        warning: 'Warning'
+    },
     coreGridList: {
         filterBarCancelButtonTitle: '취소',
         listItemButtonDeleteTitle: '삭제',

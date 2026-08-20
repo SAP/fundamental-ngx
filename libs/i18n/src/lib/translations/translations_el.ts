@@ -106,6 +106,12 @@ export default {
         lessLabel: 'Λιγότερα',
         moreLabel: 'περισσότερες από {count}'
     },
+    coreFormMessage: {
+        error: 'Invalid Entry',
+        information: 'Information',
+        success: 'Success',
+        warning: 'Warning'
+    },
     coreGridList: {
         filterBarCancelButtonTitle: 'Ακύρωση',
         listItemButtonDeleteTitle: 'Διαγραφή',

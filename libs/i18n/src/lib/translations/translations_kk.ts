@@ -107,6 +107,12 @@ export default {
         lessLabel: 'Азырақ',
         moreLabel: 'Тағы {count}'
     },
+    coreFormMessage: {
+        error: 'Invalid Entry',
+        information: 'Information',
+        success: 'Success',
+        warning: 'Warning'
+    },
     coreGridList: {
         filterBarCancelButtonTitle: 'Болдырмау',
         listItemButtonDeleteTitle: 'Жою',

@@ -30,7 +30,12 @@ import { FormItemControl, registerFormItemControl } from '../form-item-control/f
     styleUrl: './form-control.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [registerFormItemControl(FormControlComponent), contentDensityObserverProviders()]
+    providers: [registerFormItemControl(FormControlComponent), contentDensityObserverProviders()],
+    host: {
+        '[attr.aria-label]': 'ariaLabelAttr || ariaLabel || null',
+        '[attr.aria-labelledby]': 'ariaLabelledByAttr || ariaLabelledBy || null',
+        '[attr.aria-invalid]': 'state === "error" ? true : null'
+    }
 })
 export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges, OnDestroy, FormItemControl {
     /**
@@ -58,26 +63,14 @@ export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges,
     ariaLabelledBy: string | undefined | null;
 
     /** @hidden */
-    @HostBinding('attr.aria-label')
-    protected get ariaLabelBinding(): string | null {
-        return this.ariaLabelAttr || this.ariaLabel || null;
-    }
-
-    /** @hidden */
-    @HostBinding('attr.aria-labelledby')
-    protected get ariaLabelledByBinding(): string | null {
-        return this.ariaLabelledByAttr || this.ariaLabelledBy || null;
-    }
-
-    /** @hidden */
     private _subscriptions = new Subscription();
 
     /** @hidden */
     constructor(
         public elementRef: ElementRef<HTMLInputElement | HTMLTextAreaElement>,
         _contentDensityObserver: ContentDensityObserver,
-        @Attribute('aria-label') private ariaLabelAttr: string,
-        @Attribute('aria-labelledby') private ariaLabelledByAttr: string
+        @Attribute('aria-label') protected ariaLabelAttr: string,
+        @Attribute('aria-labelledby') protected ariaLabelledByAttr: string
     ) {
         _contentDensityObserver.subscribe();
     }
