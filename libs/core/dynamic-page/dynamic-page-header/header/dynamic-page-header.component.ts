@@ -21,6 +21,7 @@ import { NgTemplateOutlet } from '@angular/common';
 import { IgnoreClickOnSelectionDirective } from '@fundamental-ngx/cdk/utils';
 import { HeadingLevel } from '@fundamental-ngx/core/shared';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { MessageStripComponent } from '../../../message-strip/message-strip.component';
 import { DYNAMIC_PAGE_CLASS_NAME, DynamicPageResponsiveSize } from '../../constants';
 import { DynamicPageHeaderSubtitleDirective } from '../../directives/dynamic-page-header-subtitle.directive';
 import { DynamicPageHeaderTitleDirective } from '../../directives/dynamic-page-header-title.directive';
@@ -110,6 +111,13 @@ export class DynamicPageHeaderComponent implements OnInit {
      * When provided via fdDynamicPageHeaderTitle directive, overrides the title text input.
      */
     readonly _titleTemplate = contentChild(DynamicPageHeaderTitleDirective);
+
+    /**
+     * @hidden
+     * Content child query for MessageStripComponent.
+     * When present, the message strip will be rendered below the subtitle in the header.
+     */
+    readonly messageStrip = contentChild(MessageStripComponent);
 
     /** @hidden */
     readonly _dynamicPageBreadcrumbComponent = contentChild(FD_DYNAMIC_PAGE_BREADCRUMB_COMPONENT, {

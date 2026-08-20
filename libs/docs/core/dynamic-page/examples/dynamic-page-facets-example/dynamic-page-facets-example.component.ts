@@ -14,6 +14,7 @@ import {
 import { FacetModule } from '@fundamental-ngx/core/facets';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { LinkComponent } from '@fundamental-ngx/core/link';
+import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 import { ObjectNumberComponent } from '@fundamental-ngx/core/object-number';
 import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { RatingIndicatorComponent } from '@fundamental-ngx/core/rating-indicator';
@@ -67,7 +68,8 @@ import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } fro
         ObjectStatusComponent,
         ObjectNumberComponent,
         CdkScrollable,
-        BarModule
+        BarModule,
+        MessageStripComponent
     ]
 })
 export class DynamicPageFacetsExampleComponent {

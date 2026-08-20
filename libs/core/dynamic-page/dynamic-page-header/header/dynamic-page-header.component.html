@@ -69,6 +69,13 @@
         <ng-template [ngTemplateOutlet]="_subtitleTemplate() ? subtitleRef : defaultSubtitle"></ng-template>
     </span>
 }
+
+@if (messageStrip()) {
+    <div class="fd-dynamic-page__message-strip-container">
+        <ng-content select="fd-message-strip"></ng-content>
+    </div>
+}
+
 <ng-template #dynamicPageGlobalActionsRef>
     <ng-content select="fd-dynamic-page-global-actions"></ng-content>
 </ng-template>
