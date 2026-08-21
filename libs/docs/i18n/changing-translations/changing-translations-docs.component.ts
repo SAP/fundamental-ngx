@@ -34,7 +34,8 @@ import { LocaleOverrideExampleComponent } from './examples/i18n-locale-override-
 export class ChangingTranslationsDocsComponent {
     basicUsageExample = {
         language: 'typescript',
-        code: `import { FD_LANGUAGE, FdLanguage, FD_LANGUAGE_UKRAINIAN } from '@fundamental-ngx/i18n';
+        code: `import { FD_LANGUAGE, FdLanguage } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_UKRAINIAN } from '@fundamental-ngx/i18n/uk';;
 
 // app.module
 @NgModule({

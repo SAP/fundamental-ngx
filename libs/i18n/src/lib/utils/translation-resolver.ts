@@ -1,7 +1,7 @@
 import { Injectable, isDevMode } from '@angular/core';
 import { Nullable, get } from '@fundamental-ngx/cdk/utils';
 import { IntlMessageFormat } from 'intl-messageformat';
-import { FD_LANGUAGE_ENGLISH } from '../languages';
+import { FD_LANGUAGE_ENGLISH } from '../languages/english';
 import {
     FdLanguage,
     FdLanguageKey,

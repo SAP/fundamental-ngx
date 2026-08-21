@@ -3,8 +3,8 @@ import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
-import { FD_LANGUAGE_ENGLISH, FD_LANGUAGE_SIGNAL, FdTranslatePipe } from '@fundamental-ngx/i18n';
-
+import { FD_LANGUAGE_SIGNAL, FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n/en';
 /**
  * REAL-WORLD EXAMPLE: E-commerce Shopping Cart
  *
