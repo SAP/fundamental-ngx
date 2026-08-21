@@ -107,6 +107,12 @@ export default {
         lessLabel: '表示を減らす',
         moreLabel: 'さらに表示 ({count})'
     },
+    coreFormMessage: {
+        error: 'Invalid Entry',
+        information: 'Information',
+        success: 'Success',
+        warning: 'Warning'
+    },
     coreGridList: {
         filterBarCancelButtonTitle: 'キャンセル',
         listItemButtonDeleteTitle: '削除',

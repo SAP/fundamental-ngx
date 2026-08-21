@@ -7,6 +7,7 @@ body {
     color: var(--sapTextColor);
 }
 
+// Disable animations for E2E tests (via class)
 .e2e-no-animations *,
 .e2e-no-animations *::before,
 .e2e-no-animations *::after {
@@ -15,4 +16,17 @@ body {
     transition-duration: 0s !important;
     transition-delay: 0s !important;
     scroll-behavior: auto !important;
+}
+
+// Disable animations for E2E tests (via prefers-reduced-motion)
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0s !important;
+        animation-delay: 0s !important;
+        transition-duration: 0s !important;
+        transition-delay: 0s !important;
+        scroll-behavior: auto !important;
+    }
 }

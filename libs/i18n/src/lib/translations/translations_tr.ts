@@ -106,6 +106,12 @@ export default {
         lessLabel: 'Daha az',
         moreLabel: '{count} tane daha'
     },
+    coreFormMessage: {
+        error: 'Invalid Entry',
+        information: 'Information',
+        success: 'Success',
+        warning: 'Warning'
+    },
     coreGridList: {
         filterBarCancelButtonTitle: 'İptal',
         listItemButtonDeleteTitle: 'Sil',

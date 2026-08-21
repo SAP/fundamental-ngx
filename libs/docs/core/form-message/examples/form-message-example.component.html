@@ -1,68 +1,64 @@
 <div fd-form-item class="fd-custom-form-item-message">
-    <label fd-form-label for="input-message" id="label-input"> Message With Input </label>
+    <label fd-form-label for="input-1" id="input-label-1">Account Number</label>
     <fd-form-input-message-group>
         <input
             fd-form-control
             type="text"
-            id="input-message"
-            placeholder="Field placeholder text"
+            id="input-1"
+            placeholder="Enter 10-digit account number"
             state="information"
-            aria-labelledby="label-input input-message message-input"
+            aria-labelledby="input-label-1"
         />
-        <fd-form-message type="information" id="message-input">
-            This message is triggered by a click event.
+        <fd-form-message type="information">
+            Your account number is shown on your monthly statement or in the mobile app under Account Settings.
         </fd-form-message>
     </fd-form-input-message-group>
 </div>
 
 <div fd-form-item class="fd-custom-form-item-message">
-    <label fd-form-label for="group-message-2"> Message With InputGroup - Changed Programmatically </label>
+    <label fd-form-label id="input-label-2">Password Requirements</label>
     <fd-form-input-message-group
         placement="bottom"
         [(isOpen)]="open"
         [triggers]="[]"
         [closeOnOutsideClick]="false"
         [closeOnEscapeKey]="false"
+        aria-labelledby="input-label-2"
     >
         <fd-input-group
-            id="group-message-2"
             state="information"
             [button]="true"
-            addOnText="Toggle Message"
+            addOnText="Show Requirements"
+            aria-labelledby="input-label-2"
             (addOnButtonClicked)="open = !open"
         >
         </fd-input-group>
         <fd-form-message type="information">
-            This message is controlled by&nbsp;<code>open</code>&nbsp;variable.
+            Password must contain at least 8 characters, including one uppercase letter, one lowercase letter, one
+            number, and one special character.
         </fd-form-message>
     </fd-form-input-message-group>
 </div>
 
 <div fd-form-item class="fd-custom-form-item-message">
-    <label fd-form-label for="group-message" id="label-group"> Message With InputGroup - Hover </label>
+    <label fd-form-label id="input-label-3">Country Code</label>
     <fd-form-input-message-group
         placement="bottom"
         [triggers]="['mouseenter', 'mouseleave', 'focusin', 'focusout']"
         [closeOnOutsideClick]="false"
         [closeOnEscapeKey]="false"
-        aria-labelledby="label-group message-group"
+        aria-labelledby="input-label-3"
     >
-        <fd-input-group
-            id="group-message"
-            glyph="world"
-            iconTitle="Icon title world"
-            state="information"
-            [button]="true"
-        >
+        <fd-input-group glyph="world" iconTitle="Select country code" state="information" [button]="true">
         </fd-input-group>
-        <fd-form-message type="information" id="message-group">
-            This message is only triggered by hovering or focusing on the InputGroup.
+        <fd-form-message type="information">
+            Select your country code from the list. This determines your tax jurisdiction and available payment methods.
         </fd-form-message>
     </fd-form-input-message-group>
 </div>
 
 <div fd-form-item class="fd-custom-form-item-message">
-    <label fd-form-label for="textarea-message" id="label-textarea"> Message With Textarea - Try to focus </label>
+    <label fd-form-label for="input-4" id="input-label-4">Additional Comments</label>
     <fd-form-input-message-group
         [triggers]="['focusin', 'focusout']"
         placement="bottom"
@@ -71,38 +67,47 @@
     >
         <textarea
             fd-form-control
-            id="textarea-message"
+            id="input-4"
             state="information"
-            aria-labelledby="label-textarea message-textarea"
+            placeholder="Provide any additional details about your request"
+            aria-labelledby="input-label-4"
         >
         </textarea>
-        <fd-form-message type="information" id="message-textarea">
-            This message is only triggered by focusing inside the textarea. The message box placement is also changed.
+        <fd-form-message type="information">
+            Please include any relevant context or special requirements. This helps our team process your request more
+            efficiently.
         </fd-form-message>
     </fd-form-input-message-group>
 </div>
 
 <div fd-form-item class="fd-custom-form-item-message">
-    <label fd-form-label for="multi-input-message" id="label-multi-input"> Message with Multi Input - Hover </label>
+    <label fd-form-label id="input-label-5">Dietary Restrictions</label>
     <fd-form-input-message-group [triggers]="['mouseover', 'mouseout']">
         <fd-multi-input
-            id="multi-input-message"
-            placeholder="Search here..."
+            placeholder="Select all that apply"
             state="information"
-            aria-labelledby="label-multi-input message-multi-input"
-            [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato', 'Kiwi', 'Strawberry', 'Blueberry', 'Orange']"
+            aria-labelledby="input-label-5"
+            [dropdownValues]="[
+                'Vegetarian',
+                'Vegan',
+                'Gluten-Free',
+                'Dairy-Free',
+                'Nut Allergy',
+                'Shellfish Allergy',
+                'Kosher',
+                'Halal'
+            ]"
             [(ngModel)]="selected"
         ></fd-multi-input>
-        <fd-form-message type="information" id="message-multi-input">
-            Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
+        <fd-form-message type="information">
+            Select all dietary restrictions that apply. This information will be shared with catering for company
+            events.
         </fd-form-message>
     </fd-form-input-message-group>
 </div>
 
 <div fd-form-item class="fd-custom-form-item-message">
-    <label fd-form-label for="group-message-custom-placement">
-        Message with custom placement - Changed Programmatically
-    </label>
+    <label fd-form-label id="input-label-6"> Budget Approval Code </label>
     <fd-form-input-message-group
         placement="bottom"
         [(isOpen)]="openCustom"
@@ -110,19 +115,19 @@
         [triggers]="[]"
         [closeOnOutsideClick]="false"
         [closeOnEscapeKey]="false"
+        aria-labelledby="input-label-6"
     >
         <fd-input-group
-            id="group-message-2"
             state="information"
             [button]="true"
-            addOnText="Toggle Message"
+            addOnText="Where to Find"
             (addOnButtonClicked)="openCustom = !openCustom"
         >
         </fd-input-group>
         <fd-form-message type="information">
             <div>
-                This message is controlled by&nbsp;<code>openCustom</code>&nbsp;variable.<br />
-                The popover itself is rendered inside <code>fd-form-input-message-group</code> element.
+                Your approval code is sent via email when your budget request is approved. Check your inbox for messages
+                with subject line starting with <code>[Budget Approved]</code>.
             </div>
         </fd-form-message>
     </fd-form-input-message-group>

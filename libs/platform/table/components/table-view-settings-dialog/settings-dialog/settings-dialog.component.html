@@ -135,10 +135,6 @@
             [disabled]="!isDialogValid()"
             (click)="confirm()"
         ></fd-button-bar>
-        <fd-button-bar
-            [label]="('platformTable.cancelBtnLabel' | fdTranslate)()"
-            fdkInitialFocus
-            (click)="cancel()"
-        ></fd-button-bar>
+        <fd-button-bar [label]="('platformTable.cancelBtnLabel' | fdTranslate)()" (click)="cancel()"></fd-button-bar>
     </fd-dialog-footer>
 </fd-dialog>

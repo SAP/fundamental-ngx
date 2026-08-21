@@ -22,14 +22,14 @@
     </span>
 </ng-template>
 <ng-template #withFormMessage>
-    <fdp-input-message-group class="fd-col" [class]="_fieldColumnLayoutClass" [attr.aria-labelledby]="_getLabelledBy()">
+    <fdp-input-message-group class="fd-col" [class]="_fieldColumnLayoutClass">
         <ng-template #triggerItem>
             <ng-content></ng-content>
         </ng-template>
 
         @if (hasErrors() && groupedErrors.length > 0) {
             @for (error of groupedErrors; track error) {
-                <fd-form-message [type]="error.directive.type" [attr.id]="'fdp-form-message-grouped-errors-' + id">
+                <fd-form-message [type]="error.directive.type">
                     <div>
                         @if (error.directive._headingTemplateRef) {
                             <ng-template
@@ -54,7 +54,7 @@
         }
 
         @if (groupedErrors.length === 0 && hasErrors() && i18Strings) {
-            <fd-form-message type="error" [attr.id]="'fdp-form-message-error-' + id">
+            <fd-form-message type="error">
                 <ng-template
                     [ngTemplateOutlet]="i18Strings"
                     [ngTemplateOutletContext]="{ $implicit: control?.ngControl?.errors }"

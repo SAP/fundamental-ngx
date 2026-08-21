@@ -106,6 +106,12 @@ export default {
         lessLabel: '較少',
         moreLabel: '超出 {count} 個字元'
     },
+    coreFormMessage: {
+        error: 'Invalid Entry',
+        information: 'Information',
+        success: 'Success',
+        warning: 'Warning'
+    },
     coreGridList: {
         filterBarCancelButtonTitle: '取消',
         listItemButtonDeleteTitle: '刪除',
