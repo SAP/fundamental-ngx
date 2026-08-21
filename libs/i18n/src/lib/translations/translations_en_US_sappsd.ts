@@ -108,10 +108,10 @@ export default {
         moreLabel: '[[[{count} ɱŏŗē]]]'
     },
     coreFormMessage: {
-        error: 'Invalid Entry',
-        information: 'Information',
-        success: 'Success',
-        warning: 'Warning'
+        error: '[[[Ĭŋʋąĺįƌ Ĕŋţŗŷ∙∙∙∙∙∙]]]',
+        information: '[[[Ĭŋƒŏŗɱąţįŏŋ∙∙∙∙∙∙∙∙]]]',
+        success: '[[[Ŝűċċēşş∙∙∙∙∙∙∙]]]',
+        warning: '[[[Ŵąŗŋįŋğ∙∙∙∙∙∙∙]]]'
     },
     coreGridList: {
         filterBarCancelButtonTitle: '[[[Ĉąŋċēĺ∙∙∙∙∙∙∙∙]]]',
