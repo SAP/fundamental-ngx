@@ -1,10 +1,14 @@
 import {
     afterEveryRender,
+    afterNextRender,
+    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    ElementRef,
     EventEmitter,
     inject,
+    Injector,
     Input,
     Output
 } from '@angular/core';
@@ -33,7 +37,7 @@ import { TableViewSettingsFilterComponent } from '../table-view-settings-filter.
     providers: [contentDensityObserverProviders()],
     imports: [NgTemplateOutlet]
 })
-export class FilterCustomComponent {
+export class FilterCustomComponent implements AfterViewInit {
     /** ViewSettingsFilter options the filter is created from */
     @Input()
     filter: TableViewSettingsFilterComponent;
@@ -75,8 +79,58 @@ export class FilterCustomComponent {
     private readonly _cdr = inject(ChangeDetectorRef);
 
     /** @hidden */
+    private readonly _elementRef = inject(ElementRef);
+
+    /** @hidden */
+    private readonly _injector = inject(Injector);
+
+    /** @hidden */
     constructor(private contentDensityObserver: ContentDensityObserver) {
         afterEveryRender(() => this._checkValueChanges());
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        const focusableSelectors = [
+            'input:not([disabled])',
+            'select:not([disabled])',
+            'textarea:not([disabled])',
+            'button:not([disabled])',
+            'a[href]',
+            '[tabindex]:not([tabindex="-1"])'
+        ].join(', ');
+
+        afterNextRender(
+            () => {
+                const firstFocusable: HTMLElement = this._elementRef.nativeElement.querySelector(focusableSelectors);
+                if (
+                    !firstFocusable ||
+                    firstFocusable.style.display === 'none' ||
+                    firstFocusable.style.visibility === 'hidden' ||
+                    firstFocusable.style.opacity === '0'
+                ) {
+                    return;
+                }
+
+                const dialog = this._elementRef.nativeElement.closest('fd-dialog, [fd-dialog]');
+                if (!dialog) {
+                    return;
+                }
+
+                const dialogRect = dialog.getBoundingClientRect();
+                const elementRect = firstFocusable.getBoundingClientRect();
+                const isWithinBounds =
+                    elementRect.top >= dialogRect.top &&
+                    elementRect.left >= dialogRect.left &&
+                    elementRect.bottom <= dialogRect.bottom &&
+                    elementRect.right <= dialogRect.right;
+
+                if (isWithinBounds) {
+                    firstFocusable.focus();
+                }
+            },
+            { injector: this._injector }
+        );
     }
 
     /** @hidden */
