@@ -9,10 +9,13 @@ import {
     SeparatorComponent,
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
+import { ProductSwitchBusyExampleComponent } from './examples/product-switch-busy-example.component';
 import { ProductSwitchDndExampleComponent } from './examples/product-switch-dnd-example.component';
 import { ProductSwitchLargeExampleComponent } from './examples/product-switch-large-example.component';
 import { ProductSwitchListComponent } from './examples/product-switch-list/product-switch-list-example.component';
 import { ProductSwitchMediumExampleComponent } from './examples/product-switch-medium-example.component';
+import { ProductSwitchNavigationExampleComponent } from './examples/product-switch-navigation-example.component';
+import { ProductSwitchTwoColumnExampleComponent } from './examples/product-switch-two-column-example.component';
 
 const productSwitchDndH = 'product-switch-dnd-example.component.html';
 const productSwitchDndTs = 'product-switch-dnd-example.component.ts';
@@ -26,6 +29,15 @@ const mediumProductSwitchTs = 'product-switch-medium-example.component.ts';
 const listProductSwitchH = 'product-switch-list/product-switch-list-example.component.html';
 const listProductSwitchTs = 'product-switch-list/product-switch-list-example.component.ts';
 
+const busyProductSwitchH = 'product-switch-busy-example.component.html';
+const busyProductSwitchTs = 'product-switch-busy-example.component.ts';
+
+const navigationProductSwitchH = 'product-switch-navigation-example.component.html';
+const navigationProductSwitchTs = 'product-switch-navigation-example.component.ts';
+
+const twoColumnProductSwitchH = 'product-switch-two-column-example.component.html';
+const twoColumnProductSwitchTs = 'product-switch-two-column-example.component.ts';
+
 @Component({
     selector: 'app-product-switch',
     templateUrl: './product-switch-docs.component.html',
@@ -38,7 +50,10 @@ const listProductSwitchTs = 'product-switch-list/product-switch-list-example.com
         ProductSwitchMediumExampleComponent,
         CodeExampleComponent,
         SeparatorComponent,
-        ProductSwitchListComponent
+        ProductSwitchListComponent,
+        ProductSwitchNavigationExampleComponent,
+        ProductSwitchTwoColumnExampleComponent,
+        ProductSwitchBusyExampleComponent
     ]
 })
 export class ProductSwitchDocsComponent {
@@ -95,6 +110,48 @@ export class ProductSwitchDocsComponent {
             code: getAssetFromModuleAssets(listProductSwitchTs),
             fileName: 'product-switch-list-example',
             component: 'ProductSwitchListComponent'
+        }
+    ];
+
+    productSwitchBusyExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(busyProductSwitchH),
+            fileName: 'product-switch-busy-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(busyProductSwitchTs),
+            fileName: 'product-switch-busy-example',
+            component: 'ProductSwitchBusyExampleComponent'
+        }
+    ];
+
+    productSwitchNavigationExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(navigationProductSwitchH),
+            fileName: 'product-switch-navigation-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(navigationProductSwitchTs),
+            fileName: 'product-switch-navigation-example',
+            component: 'ProductSwitchNavigationExampleComponent'
+        }
+    ];
+
+    productSwitchTwoColumnExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(twoColumnProductSwitchH),
+            fileName: 'product-switch-two-column-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(twoColumnProductSwitchTs),
+            fileName: 'product-switch-two-column-example',
+            component: 'ProductSwitchTwoColumnExampleComponent'
         }
     ];
 }

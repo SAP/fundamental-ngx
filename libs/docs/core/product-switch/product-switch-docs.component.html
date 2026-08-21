@@ -6,7 +6,10 @@
     passing <code>[dragAndDropEnabled]="false"</code> to component. The event thrown on drop can be handled by binding
     to <code>(productsChange)</code>. The element can stick to it's position, it can be achieved by passing
     <code>stickToPosition: true</code> value to the interface object. Example of usage is in <code>Home</code> product.
-    Use <code>(isOpenChange)</code> to listen for open/close state changes.
+    Use <code>(isOpenChange)</code> to listen for open/close state changes. <br /><br />
+    <strong>SAP Start must be the first item.</strong> The panel always focuses the first product on open. By
+    convention, the first entry in the <code>products</code> array must be the SAP Start product so that focus lands
+    there consistently.
 </description>
 <component-example>
     <fd-product-switch-dnd-example></fd-product-switch-dnd-example>
@@ -17,7 +20,8 @@
 
 <fd-docs-section-title id="large" componentName="product-switch"> Large </fd-docs-section-title>
 <description>
-    Product Switch (App Launcher) is displayed with a maximum of 4 columns on large desktop screens.
+    Product Switch (App Launcher) is displayed with a maximum of 4 columns on large desktop screens. Beyond the fourth
+    row, a vertical scroll bar is introduced.
 </description>
 <component-example>
     <fd-product-switch-large-example></fd-product-switch-large-example>
@@ -38,6 +42,18 @@
 
 <separator></separator>
 
+<fd-docs-section-title id="two-column" componentName="product-switch"> Two-Column Layout </fd-docs-section-title>
+<description>
+    When fewer than 3 items are provided, the component automatically switches to a 2-column layout that hugs its
+    contents, matching the spec for small product sets.
+</description>
+<component-example>
+    <fd-product-switch-two-column-example></fd-product-switch-two-column-example>
+</component-example>
+<code-example [exampleFiles]="productSwitchTwoColumnExample"></code-example>
+
+<separator></separator>
+
 <fd-docs-section-title id="list" componentName="product-switch"> List Mode </fd-docs-section-title>
 <description>
     For narrow screens the Product Switch (App Launcher) transforms to a List by itself. Add the
@@ -48,3 +64,29 @@
     <fd-product-switch-list-example></fd-product-switch-list-example>
 </component-example>
 <code-example [exampleFiles]="productSwitchListExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="busy" componentName="product-switch"> Busy State </fd-docs-section-title>
+<description>
+    Pass <code>[busy]="true"</code> to show a loading indicator over the product list while items are being fetched. The
+    busy indicator is removed once the <code>products</code> array is populated.
+</description>
+<component-example>
+    <fd-product-switch-busy-example></fd-product-switch-busy-example>
+</component-example>
+<code-example [exampleFiles]="productSwitchBusyExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="navigation" componentName="product-switch"> URL Navigation </fd-docs-section-title>
+<description>
+    When a product item has a <code>url</code>, clicking it navigates to that URL. The default <code>target</code> is
+    <code>_blank</code> (opens in a new tab). Override with <code>target: '_self'</code> for same-tab navigation, or
+    <code>target: '_parent'</code> / <code>target: '_top'</code> for frame contexts. Items without a
+    <code>url</code> fire the <code>callback</code> instead.
+</description>
+<component-example>
+    <fd-product-switch-navigation-example></fd-product-switch-navigation-example>
+</component-example>
+<code-example [exampleFiles]="productSwitchNavigationExample"></code-example>
