@@ -18,8 +18,7 @@ export class ProductSwitchSmallExampleComponent {
         {
             title: 'Analytics Cloud',
             subtitle: 'Analytics Cloud',
-            icon: 'business-objects-experience',
-            selected: true
+            icon: 'business-objects-experience'
         },
         {
             title: 'Catalog',
@@ -38,6 +37,5 @@ export class ProductSwitchSmallExampleComponent {
 
     productChangeHandle(products: ProductSwitchItem[]): void {
         this.list = products;
-        console.log(products);
     }
 }

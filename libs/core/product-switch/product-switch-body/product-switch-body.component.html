@@ -1,48 +1,52 @@
-<div
-    class="fd-product-switch__body"
-    [class.fd-product-switch__body--col-3]="_isSmallMode() && !_isListMode()"
-    [class.fd-product-switch__body--mobile]="_isListMode()"
->
-    <ul
-        fd-dnd-list
-        role="menu"
-        class="fd-product-switch__list"
-        [items]="products"
-        [gridMode]="!_isListMode()"
-        (itemDropped)="_productSwitchItemsChangeHandle($event)"
+<fd-busy-indicator [loading]="busy()">
+    <div
+        class="fd-product-switch__body"
+        [class.fd-product-switch__body--col-2]="_isTwoColumnMode() && !_isListMode()"
+        [class.fd-product-switch__body--col-3]="_isSmallMode() && !_isListMode()"
+        [class.fd-product-switch__body--mobile]="_isListMode()"
     >
-        @for (product of products; track product; let i = $index) {
-            <li
-                fd-dnd-item
-                tabindex="0"
-                role="menuitem"
-                class="fd-product-switch__item"
-                [class.selected]="product.selected"
-                [attr.aria-label]="_itemAriaLabel()(product)"
-                [attr.aria-posinset]="i + 1"
-                [attr.aria-setsize]="products.length"
-                (keydown)="_keyDownHandle($event)"
-                (click)="_itemClick(product, $event)"
-                [draggable]="!product.disabledDragAndDrop && dragAndDropEnabled"
-                [stickInPlace]="!!product.stickToPosition"
-            >
-                @if (product.url) {
-                    <a
-                        class="fd-product-switch__link"
-                        [href]="product.url"
-                        [target]="product.target || '_self'"
-                        tabindex="-1"
-                        aria-hidden="true"
-                    >
+        <ul
+            fd-dnd-list
+            role="menu"
+            class="fd-product-switch__list"
+            [items]="products"
+            [gridMode]="!_isListMode()"
+            (itemDropped)="_productSwitchItemsChangeHandle($event)"
+        >
+            @for (product of products; track product; let i = $index) {
+                <li
+                    fd-dnd-item
+                    tabindex="0"
+                    role="menuitem"
+                    class="fd-product-switch__item"
+                    [attr.aria-label]="_itemAriaLabel()(product)"
+                    [attr.aria-posinset]="i + 1"
+                    [attr.aria-setsize]="products.length"
+                    (keydown)="_keyDownHandle($event)"
+                    (click)="_itemClick(product, $event)"
+                    [draggable]="!product.disabledDragAndDrop && dragAndDropEnabled"
+                    [stickInPlace]="!!product.stickToPosition"
+                >
+                    @if (product.url) {
+                        <a
+                            class="fd-product-switch__link"
+                            [href]="product.url"
+                            [target]="product.target ?? '_blank'"
+                            tabindex="-1"
+                            aria-hidden="true"
+                        >
+                            <ng-container
+                                *ngTemplateOutlet="itemContent; context: { $implicit: product }"
+                            ></ng-container>
+                        </a>
+                    } @else {
                         <ng-container *ngTemplateOutlet="itemContent; context: { $implicit: product }"></ng-container>
-                    </a>
-                } @else {
-                    <ng-container *ngTemplateOutlet="itemContent; context: { $implicit: product }"></ng-container>
-                }
-            </li>
-        }
-    </ul>
-</div>
+                    }
+                </li>
+            }
+        </ul>
+    </div>
+</fd-busy-indicator>
 
 <ng-template #itemContent let-product>
     @if (product.avatar) {

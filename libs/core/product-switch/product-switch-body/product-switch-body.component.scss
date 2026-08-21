@@ -1,5 +1,21 @@
 @import 'fundamental-styles/dist/product-switch.css';
 
+// Use the popover border-radius token instead of the element token used by fundamental-styles
+.fd-product-switch__body {
+    border-radius: var(--sapPopover_BorderCornerRadius, var(--sapElement_BorderCornerRadius));
+    max-height: 33rem;
+}
+
+// 2-column layout for fewer than 3 items: 2 × 11.25rem max-width + 0.5rem gap
+.fd-product-switch__body--col-2 .fd-product-switch__list {
+    width: 23rem;
+}
+
+// List-mode item min-height: spec requires 6rem (96px), fundamental-styles ships 5rem (80px)
+.fd-product-switch__body--mobile .fd-product-switch__item {
+    min-height: 6rem;
+}
+
 .fd-product-switch__list {
     position: relative;
 }
@@ -63,11 +79,6 @@
                 background-color: #fff;
                 background-color: var(--sapList_Background, #fff);
             }
-        }
-
-        &.selected {
-            background-color: #fff;
-            background-color: var(--sapList_Background, #fff);
         }
     }
 }
