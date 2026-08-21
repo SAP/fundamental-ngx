@@ -78,7 +78,7 @@ export class MyComponent {}`,
 <h1>{{ ('coreDatePicker.dateInputLabel' | fdTranslate)() }}</h1>
 
 <!-- In a button -->
-<button>{{ ('coreFileUploader.browse' | fdTranslate)() }}</button>
+<button>{{ ('corePagination.ariaLabel' | fdTranslate)() }}</button>
 
 <!-- In an attribute (like aria-label or title) -->
 <button [title]="('coreDatePicker.displayCalendarToggleLabel' | fdTranslate)()">
