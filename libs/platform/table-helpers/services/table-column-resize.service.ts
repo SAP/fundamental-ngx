@@ -1,4 +1,4 @@
-import { DestroyRef, ElementRef, Injectable, OnDestroy, computed, inject, signal } from '@angular/core';
+import { DestroyRef, ElementRef, Injectable, NgZone, OnDestroy, computed, inject, signal } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, Subscription, fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
@@ -110,6 +110,9 @@ export class TableColumnResizeService implements OnDestroy {
     private readonly _rtlService = inject(RtlService, {
         optional: true
     });
+
+    /** @hidden */
+    private readonly _ngZone = inject(NgZone, { optional: true });
 
     /** @hidden */
     constructor(private readonly _tableScrollDispatcherService: TableScrollDispatcherService) {
@@ -355,15 +358,20 @@ export class TableColumnResizeService implements OnDestroy {
 
     /** Update column resizer position. */
     private _updateResizerPositionOnMouseMove(): void {
-        this._resizerMoveSubscription = fromEvent<MouseEvent>(document, 'mousemove')
-            .pipe(debounceTime(10))
-            .subscribe((event) => {
-                const clientStartX = this._clientStartX ?? 0;
-                const diffX = this._isRtl() ? clientStartX - event.clientX : event.clientX - clientStartX;
+        const setupMouseMove = (): Subscription =>
+            fromEvent<MouseEvent>(document, 'mousemove')
+                .pipe(debounceTime(10))
+                .subscribe((event) => {
+                    const clientStartX = this._clientStartX ?? 0;
+                    const diffX = this._isRtl() ? clientStartX - event.clientX : event.clientX - clientStartX;
 
-                this._resizerPosition = (this._startX ?? 0) + diffX;
-                this.resizerPosition$.next(this.resizerPosition);
-            });
+                    this._resizerPosition = (this._startX ?? 0) + diffX;
+                    this.resizerPosition$.next(this.resizerPosition);
+                });
+
+        this._resizerMoveSubscription = this._ngZone
+            ? this._ngZone.runOutsideAngular(setupMouseMove)
+            : setupMouseMove();
     }
 
     /**
