@@ -1,3 +1,13 @@
+## 0.64.2-rc.39 (2026-08-21)
+
+### 🩹 Fixes
+
+- **platform:** focus issues on the table-view-settings-dialog filters ([#14472](https://github.com/SAP/fundamental-ngx/pull/14472))
+
+### ❤️ Thank You
+
+- Mike O'Donnell @mikerodonnell89
+
 ## 0.64.2-rc.38 (2026-08-20)
 
 ### 🩹 Fixes
