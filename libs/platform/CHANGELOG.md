@@ -1,3 +1,13 @@
+## 0.64.2-rc.40 (2026-08-21)
+
+### 🩹 Fixes
+
+- **platform:** remove ngZone from platform table ([#14439](https://github.com/SAP/fundamental-ngx/pull/14439))
+
+### ❤️ Thank You
+
+- Mike O'Donnell @mikerodonnell89
+
 ## 0.64.2-rc.39 (2026-08-21)
 
 ### 🩹 Fixes
