@@ -1,3 +1,7 @@
+## 0.64.2-rc.43 (2026-08-22)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
 ## 0.64.2-rc.42 (2026-08-21)
 
 This was a version bump only for cx to align it with other projects, there were no code changes.
