@@ -49,7 +49,7 @@
             [allCellsFocusable]="true"
             [popIn]="_tableService.poppingColumns$().length > 0"
             [class.fd-table--no-outer-border]="noOuterBorders"
-            [attr.aria-labelledby]="_ariaLabelledBy"
+            [attr.aria-label]="_ariaLabel"
         >
             <thead fd-table-header [nonInteractive]="nonInteractiveHeader" class="fdp-table__header">
                 <tr

@@ -742,6 +742,16 @@ export class TableComponent<T = any>
         return this.tableToolbar?.tableToolbarTitleId || null;
     }
 
+    /** @hidden */
+    get _ariaLabel(): string | null {
+        const labelId = this._ariaLabelledBy;
+        if (!labelId) {
+            return null;
+        }
+        const labelElement = document.getElementById(labelId);
+        return labelElement?.textContent?.trim() || null;
+    }
+
     /**
      * @hidden
      * Representation of combined table rows.
