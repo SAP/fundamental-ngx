@@ -14,7 +14,7 @@
     </span>
 }
 <ng-content></ng-content>
-@if (overflownItems.length > 0) {
+@if (overflownItems().length > 0) {
     @if (!spacerUsed()) {
         <fd-toolbar-spacer></fd-toolbar-spacer>
     }
@@ -32,7 +32,7 @@
         </fd-popover-control>
         <fd-popover-body>
             <div class="fd-toolbar__overflow">
-                @for (overflowedItem of overflownItems; track overflowedItem) {
+                @for (overflowedItem of overflownItems(); track overflowedItem) {
                     <fdk-dynamic-portal
                         [domElement]="overflowedItem.element"
                         [style.display]="overflowedItem.priority === 'disappear' ? 'none' : 'flex'"

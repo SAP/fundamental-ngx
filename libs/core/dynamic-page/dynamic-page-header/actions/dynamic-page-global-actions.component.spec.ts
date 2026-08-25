@@ -147,4 +147,67 @@ describe('DynamicPageGlobalActionsComponent', () => {
             }).not.toThrow();
         });
     });
+
+    describe('overflow state on resize (behavioral coverage)', () => {
+        let fixture: ComponentFixture<TestHostComponent>;
+        let component: TestHostComponent;
+        let globalActions: DynamicPageGlobalActionsComponent;
+        let toolbar: ToolbarComponent;
+
+        beforeEach(async () => {
+            await TestBed.configureTestingModule({
+                imports: [TestHostComponent]
+            }).compileComponents();
+
+            fixture = TestBed.createComponent(TestHostComponent);
+            component = fixture.componentInstance;
+            fixture.detectChanges();
+            globalActions = component.globalActions;
+            toolbar = (globalActions as any)._toolbarComponent();
+        });
+
+        it('should handle resize from large (1200px) to small (500px) without throwing', () => {
+            // Start at large size
+            component.dynamicPageService.pixelsSizeChanged.set(1200);
+            fixture.detectChanges();
+
+            expect((globalActions as any).shouldOverflow()).toBe(false);
+            expect(toolbar.shouldOverflow).toBe(false);
+
+            // Flip to small size and confirm the toolbar receives the overflow state.
+            // NOTE: this is behavioral coverage, NOT a crash reproduction. The reported NG0103
+            // (issue #14474) needs the reporter's exact stack — a real ResizeObserver firing
+            // repeatedly plus an Eager/Default-CD component wrapping the whole fd-dynamic-page —
+            // which neither zoneless nor a single synchronous size flip can manifest here.
+            expect(() => {
+                component.dynamicPageService.pixelsSizeChanged.set(500);
+                fixture.detectChanges();
+            }).not.toThrow();
+
+            // Verify the toolbar received the overflow state
+            expect((globalActions as any).shouldOverflow()).toBe(true);
+            expect(toolbar.shouldOverflow).toBe(true);
+            expect(toolbar.forceOverflow).toBe(true);
+        });
+
+        it('should handle multiple rapid resizes without throwing', () => {
+            // Simulate rapid resize events (the scenario that triggered the bug)
+            expect(() => {
+                // Large → Small
+                component.dynamicPageService.pixelsSizeChanged.set(1200);
+                fixture.detectChanges();
+
+                component.dynamicPageService.pixelsSizeChanged.set(500);
+                fixture.detectChanges();
+
+                // Small → Large
+                component.dynamicPageService.pixelsSizeChanged.set(1200);
+                fixture.detectChanges();
+
+                // Large → Medium
+                component.dynamicPageService.pixelsSizeChanged.set(800);
+                fixture.detectChanges();
+            }).not.toThrow();
+        });
+    });
 });

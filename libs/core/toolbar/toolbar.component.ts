@@ -212,7 +212,7 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
     overflowItems$: Observable<ToolbarItem[]>;
 
     /** @hidden */
-    overflownItems: ToolbarItem[] = [];
+    overflownItems = signal<ToolbarItem[]>([]);
 
     /** @hidden */
     spacerUsed = signal(false);
@@ -345,8 +345,14 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
             takeUntilDestroyed(this._destroyRef)
         );
         this.overflowItems$.subscribe((items) => {
-            this.overflownItems = items;
-            this._cd.detectChanges();
+            // Drive the view through a signal instead of a manual detectChanges(). The
+            // combineLatest pipeline emits synchronously when `shouldOverflow$` (a
+            // BehaviorSubject) is pushed from a parent effect that runs mid-change-detection.
+            // Calling `_cd.detectChanges()` on that synchronous path re-enters the in-progress
+            // CD tick and, compounded with an Eager/Default-CD host resizing repeatedly, drives
+            // NG0103 (issue #14474). Setting a template-consumed signal lets Angular mark and
+            // refresh the toolbar on its own schedule without re-entrancy.
+            this.overflownItems.set(items);
         });
         this.buildComponentCssClass();
 
@@ -445,12 +451,12 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
         delete groupedCollectionPriority[lowestPriorityFromGroup];
 
         if (lowestPriorityFromGroup !== itemGroup) {
-            itemsToRemove = [...itemsToRemove, ...groupedCollection[itemGroup]];
+            itemsToRemove = [...(itemsToRemove ?? []), ...(groupedCollection[itemGroup] ?? [])];
             delete groupedCollection[itemGroup];
             delete groupedCollectionPriority[itemGroup];
         }
 
-        return itemsToRemove;
+        return itemsToRemove ?? [];
     }
 
     /** @hidden Get the object with grouped arrays of elements. */
@@ -480,7 +486,7 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
         const groups = Object.keys(groupedCollection);
 
         return groups.reduce((acc, itemGroup) => {
-            const sortedPriorities = groupedCollection![itemGroup]
+            const sortedPriorities = (groupedCollection[itemGroup] ?? [])
                 .map((i: ToolbarItem) => i.priority)
                 .filter(
                     (prio: OverflowPriority) =>

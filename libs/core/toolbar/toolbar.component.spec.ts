@@ -419,6 +419,61 @@ describe('ToolbarComponent - Visibility Detection', () => {
     });
 });
 
+describe('ToolbarComponent - Grouped overflow undefined-group guard', () => {
+    let toolbar: ToolbarComponent;
+    let fixture: ComponentFixture<ToolbarWithTitleTestComponent>;
+    let originalIntersectionObserver: typeof IntersectionObserver;
+
+    beforeEach(waitForAsync(() => {
+        originalIntersectionObserver = global.window.IntersectionObserver;
+        global.window.IntersectionObserver = MockIntersectionObserver as any;
+
+        TestBed.configureTestingModule({
+            imports: [ToolbarWithTitleTestComponent],
+            providers: [
+                {
+                    provide: ResizeObserverService,
+                    useClass: ResizeObservableServiceMock
+                }
+            ]
+        }).compileComponents();
+    }));
+
+    beforeEach(async () => {
+        fixture = TestBed.createComponent(ToolbarWithTitleTestComponent);
+
+        await whenStable(fixture);
+
+        toolbar = fixture.componentInstance.toolbar;
+
+        await whenStable(fixture);
+    });
+
+    afterEach(() => {
+        global.window.IntersectionObserver = originalIntersectionObserver;
+    });
+
+    it('should not throw when a referenced group was already removed from the collection', () => {
+        // Reproduces issue #14474 secondary defect: during a resize→overflow pass the same
+        // group can be visited twice. The first visit deletes the group's entry from the
+        // grouped collection; a later visit whose lowest-priority group differs from itemGroup
+        // then spreads `groupedCollection[itemGroup]`, which is now `undefined`.
+        // Group 2 (itemGroup) is absent from the collection, group 1 has the lower priority
+        // so it becomes lowestPriorityFromGroup !== itemGroup, forcing the undefined spread.
+        const groupedCollection: Record<number, any[]> = {
+            1: [{ priority: 'low', group: 1 }]
+        };
+        const groupedCollectionPriority: Record<number, OverflowPriority> = {
+            1: 'low',
+            2: 'high'
+        };
+
+        expect(() =>
+            (toolbar as any)._getElementsFromCurrentGroup(2, groupedCollection, groupedCollectionPriority)
+        ).not.toThrow();
+    });
+});
+
 /* Toolbar with title */
 @Component({
     template: `
