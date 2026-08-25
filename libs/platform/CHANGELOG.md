@@ -1,3 +1,13 @@
+## 0.64.2-rc.44 (2026-08-25)
+
+### 🩹 Fixes
+
+- **core, platform:** added option to show Message Strip in Dynamic Page ([#14486](https://github.com/SAP/fundamental-ngx/pull/14486))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.64.2-rc.43 (2026-08-22)
 
 This was a version bump only for platform to align it with other projects, there were no code changes.
