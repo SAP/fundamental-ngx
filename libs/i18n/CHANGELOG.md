@@ -1,3 +1,45 @@
+## 0.64.2-rc.43 (2026-08-22)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.42 (2026-08-21)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.41 (2026-08-21)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.40 (2026-08-21)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.39 (2026-08-21)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.38 (2026-08-20)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.37 (2026-08-20)
+
+### 🩹 Fixes
+
+- **core, platform:** update form messages a11y ([#14473](https://github.com/SAP/fundamental-ngx/pull/14473))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
+## 0.64.2-rc.36 (2026-08-20)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.35 (2026-08-20)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
 ## 0.64.2-rc.34 (2026-08-19)
 
 ### 🚀 Features

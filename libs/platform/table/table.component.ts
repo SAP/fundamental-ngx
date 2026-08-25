@@ -19,7 +19,6 @@ import {
     inject,
     Injector,
     Input,
-    NgZone,
     OnChanges,
     OnDestroy,
     OnInit,
@@ -909,7 +908,6 @@ export class TableComponent<T = any>
 
     /** @hidden */
     constructor(
-        private readonly _ngZone: NgZone,
         private readonly _cdr: ChangeDetectorRef,
         readonly _tableService: TableService,
         private readonly _tableScrollDispatcher: TableScrollDispatcherService,
@@ -1145,7 +1143,7 @@ export class TableComponent<T = any>
         }
         this._shouldEmitRowsChange = false;
         const emitter = this.tableRowsSet;
-        this._onZoneFree(() => {
+        queueMicrotask(() => {
             emitter.emit();
         });
     }
@@ -1835,9 +1833,10 @@ export class TableComponent<T = any>
         if (currentPage >= lastPage) {
             return;
         }
-        this._ngZone.run(() => {
-            this.setCurrentPage(currentPage + 1);
-        });
+        // IntersectionObserver callbacks run outside Angular's zone.
+        // Explicitly mark for check to ensure change detection runs.
+        this.setCurrentPage(currentPage + 1);
+        this._cdr.markForCheck();
     }
 
     /**
@@ -2440,13 +2439,11 @@ export class TableComponent<T = any>
 
     /** @hidden */
     private _listenToTableContainerMouseLeave(): void {
-        this._ngZone.runOutsideAngular(() => {
-            this._subscriptions.add(
-                fromEvent(this.tableContainer.nativeElement, 'mouseleave').subscribe(() =>
-                    this._tableColumnResizeService.hideResizer()
-                )
-            );
-        });
+        this._subscriptions.add(
+            fromEvent(this.tableContainer.nativeElement, 'mouseleave').subscribe(() =>
+                this._tableColumnResizeService.hideResizer()
+            )
+        );
     }
 
     /** @hidden */
@@ -2482,13 +2479,6 @@ export class TableComponent<T = any>
                 });
             })
         );
-    }
-
-    /** @hidden */
-    private _onZoneFree(callback: () => void): void {
-        this._ngZone.onMicrotaskEmpty.pipe(take(1)).subscribe(() => {
-            callback();
-        });
     }
 
     /** @hidden */

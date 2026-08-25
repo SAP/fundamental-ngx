@@ -65,11 +65,11 @@ export class PlatformTableCellResizableDirective
     });
 
     /** @hidden */
-    private readonly _zone = inject(NgZone);
+    private readonly _ngZone = inject(NgZone, { optional: true });
 
     /** @hidden */
     ngOnInit(): void {
-        this._zone.runOutsideAngular(() => {
+        const setupMouseMove = (): void => {
             fromEvent<MouseEvent>(this.elementRef.nativeElement, 'mousemove')
                 .pipe(
                     filter(() => this._tableColumnResizeService?.resizeInProgress !== true),
@@ -80,12 +80,19 @@ export class PlatformTableCellResizableDirective
                 .subscribe((data) => {
                     this._tableColumnResizeService.setInitialResizerPosition(data.resizerPosition, data.resizedColumn);
                 });
-            fromEvent<FocusEvent>(this.elementRef.nativeElement, 'focus')
-                .pipe(takeUntilDestroyed(this._destroyRef))
-                .subscribe(() => {
-                    this._tableColumnResizeService.setInitialResizerPosition(0, this.columnName);
-                });
-        });
+        };
+
+        if (this._ngZone) {
+            this._ngZone.runOutsideAngular(setupMouseMove);
+        } else {
+            setupMouseMove();
+        }
+
+        fromEvent<FocusEvent>(this.elementRef.nativeElement, 'focus')
+            .pipe(takeUntilDestroyed(this._destroyRef))
+            .subscribe(() => {
+                this._tableColumnResizeService.setInitialResizerPosition(0, this.columnName);
+            });
     }
 
     /** @hidden */

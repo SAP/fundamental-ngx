@@ -114,110 +114,6 @@
             "reason": "Non-deterministic step animation timing"
         },
         {
-            "route": "core/list-byline/loading",
-            "reason": "loading placeholder is non-deterministic (intersection observer timing)"
-        },
-        {
-            "route": "core/timeline/loading",
-            "reason": "loading placeholder is non-deterministic (intersection observer timing)"
-        },
-        {
-            "route": "core/list/loading",
-            "reason": "loading placeholder is non-deterministic (intersection observer timing)"
-        },
-        {
-            "route": "core/tree/lazily-loaded-tree-items",
-            "reason": "loading placeholder is non-deterministic (intersection observer timing)"
-        },
-        {
-            "route": "platform/form-generator/observable",
-            "reason": "loading placeholder is non-deterministic (intersection observer timing)"
-        },
-        {
-            "route": "platform/settings-generator/default",
-            "reason": "loading placeholder is non-deterministic (intersection observer timing)"
-        },
-        {
-            "route": "core/card/loading",
-            "reason": "Loading state is timing-dependent"
-        },
-        {
-            "route": "core/facets/facet-loading",
-            "reason": "Loading state is timing-dependent"
-        },
-        {
-            "route": "core/multi-combobox/loading",
-            "reason": "Loading state is timing-dependent"
-        },
-        {
-            "route": "core/table/loading",
-            "reason": "Loading state is timing-dependent"
-        },
-        {
-            "route": "core/wizard/loading",
-            "reason": "Loading state is timing-dependent"
-        },
-        {
-            "route": "i18n/loading-translations/json-loading",
-            "reason": "Loading state is timing-dependent"
-        },
-        {
-            "route": "i18n/loading-translations/properties-loading",
-            "reason": "Loading state is timing-dependent"
-        },
-        {
-            "route": "platform/combobox/loading",
-            "reason": "Loading state is timing-dependent"
-        },
-        {
-            "route": "platform/form-generator/loading",
-            "reason": "Loading state is timing-dependent"
-        },
-        {
-            "route": "platform/list/loading",
-            "reason": "Loading state is timing-dependent"
-        },
-        {
-            "route": "platform/multi-combobox/loading",
-            "reason": "Loading state is timing-dependent"
-        },
-        {
-            "route": "platform/smart-filter-bar/loading",
-            "reason": "Loading state is timing-dependent"
-        },
-        {
-            "route": "platform/table/initial-loading",
-            "reason": "Loading state is timing-dependent"
-        },
-        {
-            "route": "platform/table/loading",
-            "reason": "Loading state is timing-dependent"
-        },
-        {
-            "route": "platform/vhd/loading",
-            "reason": "Loading state is timing-dependent"
-        },
-        {
-            "route": "platform/wizard-generator/loading",
-            "reason": "Loading state is timing-dependent"
-        },
-        {
-            "route": "ui5-fiori/search/loading",
-            "reason": "Loading state is timing-dependent"
-        },
-        {
-            "route": "ui5/menu/loading",
-            "reason": "Loading state is timing-dependent"
-        },
-        {
-            "route": "core/skeleton/complex",
-            "reason": "Skeleton state is timing-dependent"
-        },
-        {
-            "route": "core/skeleton/component",
-            "reason": "Skeleton state is timing-dependent"
-        },
-        {
             "route": "ui5/carousel/carousel",
             "reason": "Auto-rotating carousel with timing-dependent state"
         },
@@ -244,10 +140,6 @@
         {
             "route": "platform/multi-input/loading",
             "reason": "300ms RxJS delay() in DelayedBaseDataProvider causes timing-dependent busy indicator state at snapshot time"
-        },
-        {
-            "route": "core/calendar/legend",
-            "reason": "Calendar highlights today's date — baseline drifts daily as the current day changes"
         }
     ]
 }

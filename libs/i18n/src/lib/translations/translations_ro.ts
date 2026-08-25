@@ -107,6 +107,12 @@ export default {
         lessLabel: 'Mai puțin',
         moreLabel: 'și încă {count}'
     },
+    coreFormMessage: {
+        error: 'Invalid Entry',
+        information: 'Information',
+        success: 'Success',
+        warning: 'Warning'
+    },
     coreGridList: {
         filterBarCancelButtonTitle: 'Anulare',
         listItemButtonDeleteTitle: 'Ștergere',

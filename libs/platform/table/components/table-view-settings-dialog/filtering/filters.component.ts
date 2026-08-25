@@ -4,6 +4,10 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    effect,
+    ElementRef,
+    inject,
+    Injector,
     input,
     Input,
     OnInit,
@@ -73,8 +77,36 @@ export class FiltersComponent implements AfterViewInit, OnInit {
     /** Reference to the available steps */
     readonly ACTIVE_STEP = ACTIVE_STEP;
 
+    /** @hidden */
+    private readonly _elementRef = inject(ElementRef);
+
+    /** @hidden */
+    private readonly _injector = inject(Injector);
+
+    /** @hidden */
+    private readonly _cd = inject(ChangeDetectorRef);
+
     /** hidden */
-    constructor(private readonly _cd: ChangeDetectorRef) {}
+    constructor() {
+        // Focus first focusable element when returning to the filters list
+        effect(
+            (onCleanup) => {
+                const step = this.activeStep();
+                if (step === ACTIVE_STEP.SELECT_FILTER) {
+                    // Use microtask to defer focus until after the next render
+                    const timeoutId = setTimeout(() => {
+                        // Query from the root element to find the list items rendered via template outlet
+                        const firstListItem = this._elementRef?.nativeElement.querySelector('li[fd-list-item]');
+                        if (firstListItem instanceof HTMLElement) {
+                            firstListItem.focus();
+                        }
+                    });
+                    onCleanup(() => clearTimeout(timeoutId));
+                }
+            },
+            { injector: this._injector }
+        );
+    }
 
     /** hidden */
     ngOnInit(): void {

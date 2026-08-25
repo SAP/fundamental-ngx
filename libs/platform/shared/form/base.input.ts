@@ -127,6 +127,10 @@ export abstract class BaseInput
     @Input()
     readonly: boolean;
 
+    /** Whether the input is required. */
+    @Input({ transform: booleanAttribute })
+    required = false;
+
     /**
      * Tell the component if we are in editing mode.
      */
@@ -170,9 +174,6 @@ export abstract class BaseInput
      * See @FormFieldControl
      */
     focused = false;
-
-    /** set when input field is mandatory form field */
-    required: boolean;
 
     /** @hidden */
     innerErrorsTemplate?: TemplateRef<any>;

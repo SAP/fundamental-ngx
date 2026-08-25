@@ -106,6 +106,12 @@ export default {
         lessLabel: 'ნაკლები',
         moreLabel: 'მეტი'
     },
+    coreFormMessage: {
+        error: 'Invalid Entry',
+        information: 'Information',
+        success: 'Success',
+        warning: 'Warning'
+    },
     coreGridList: {
         filterBarCancelButtonTitle: 'გაუქმება',
         listItemButtonDeleteTitle: 'წაშლა',

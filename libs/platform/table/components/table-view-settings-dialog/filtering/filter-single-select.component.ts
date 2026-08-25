@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    effect,
+    EventEmitter,
+    Input,
+    Output,
+    viewChildren,
+    ViewEncapsulation
+} from '@angular/core';
 import { CollectionFilter, TableFilterSelectOption } from '@fundamental-ngx/platform/table-helpers';
 
 import { FormsModule } from '@angular/forms';
@@ -36,6 +45,9 @@ export class FilterSingleSelectComponent {
     valueChange: EventEmitter<any[]> = new EventEmitter();
 
     /** @hidden */
+    readonly listItems = viewChildren(ListItemComponent);
+
+    /** @hidden */
     readonly NOT_FILTERED_OPTION_VALUE = NOT_FILTERED_OPTION_VALUE;
 
     /**
@@ -43,6 +55,16 @@ export class FilterSingleSelectComponent {
      * Currently selected value
      */
     _value: any;
+
+    /** @hidden */
+    constructor() {
+        effect(() => {
+            const items = this.listItems();
+            if (items.length > 0) {
+                items[0].focus();
+            }
+        });
+    }
 
     /** @hidden */
     _onValueChange(value: unknown): void {
