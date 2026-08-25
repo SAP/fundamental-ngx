@@ -2,17 +2,11 @@ import { Component, computed, inject, signal, WritableSignal } from '@angular/co
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
-import {
-    FD_LANGUAGE_ENGLISH,
-    FD_LANGUAGE_FRENCH,
-    FD_LANGUAGE_GERMAN,
-    FD_LANGUAGE_SIGNAL,
-    FD_LANGUAGE_SPANISH,
-    FdLanguage,
-    FdTranslatePipe,
-    resolveTranslationSignal
-} from '@fundamental-ngx/i18n';
-
+import { FD_LANGUAGE_SIGNAL, FdLanguage, FdTranslatePipe, resolveTranslationSignal } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_GERMAN } from '@fundamental-ngx/i18n/de';
+import { FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n/en';
+import { FD_LANGUAGE_SPANISH } from '@fundamental-ngx/i18n/es';
+import { FD_LANGUAGE_FRENCH } from '@fundamental-ngx/i18n/fr';
 /**
  * Complete example showing all the concepts from the Getting Started guide
  */

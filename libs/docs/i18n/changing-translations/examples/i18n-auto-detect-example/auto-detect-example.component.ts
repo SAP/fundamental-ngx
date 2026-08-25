@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, inject, LOCALE_ID } from '@angular/core';
 import { FD_LANGUAGE_SIGNAL, FD_LOCALE_SIGNAL, FdLanguage } from '@fundamental-ngx/i18n';
-
 @Component({
     selector: 'fd-auto-detect-example',
     templateUrl: './auto-detect-example.component.html',

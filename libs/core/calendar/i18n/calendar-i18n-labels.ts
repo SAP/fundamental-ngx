@@ -1,4 +1,4 @@
-import { FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n/en';
 import { Subject } from 'rxjs';
 
 /**

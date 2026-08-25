@@ -9,7 +9,6 @@ import {
     DescriptionComponent,
     DocsSectionTitleComponent,
     ExampleFile,
-    HeaderComponent,
     SeparatorComponent,
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
@@ -19,7 +18,6 @@ import { GettingStartedExampleComponent } from './examples/getting-started-examp
     selector: 'fd-docs-i18n-getting-started',
     templateUrl: './getting-started-docs.component.html',
     imports: [
-        HeaderComponent,
         DescriptionComponent,
         DocsSectionTitleComponent,
         CodeSnippetComponent,
@@ -42,7 +40,8 @@ export class GettingStartedDocsComponent {
     provideLanguageExample: ExampleFile = {
         language: 'typescript',
         code: `import { ApplicationConfig, signal } from '@angular/core';
-import { FD_LANGUAGE_SIGNAL, FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_SIGNAL } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n/en';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -114,12 +113,9 @@ export class MyComponent {
     switchLanguageExample: ExampleFile = {
         language: 'typescript',
         code: `import { Component, inject, WritableSignal } from '@angular/core';
-import {
-  FD_LANGUAGE_SIGNAL,
-  FD_LANGUAGE_ENGLISH,
-  FD_LANGUAGE_SPANISH,
-  FdLanguage
-} from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_SIGNAL, FdLanguage } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n/en';
+import { FD_LANGUAGE_SPANISH } from '@fundamental-ngx/i18n/es';
 
 @Component({
   selector: 'my-component',
