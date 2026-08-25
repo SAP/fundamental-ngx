@@ -335,6 +335,97 @@ describe('ProductSwitchBodyComponent', () => {
         });
     });
 
+    describe('URL navigation', () => {
+        let windowOpenSpy: jest.SpyInstance;
+
+        beforeEach(() => {
+            windowOpenSpy = jest.spyOn(window, 'open').mockImplementation(() => null as any);
+        });
+
+        afterEach(() => {
+            windowOpenSpy.mockRestore();
+        });
+
+        it('should call window.open with the item url and _blank by default when clicked', () => {
+            fixture.componentRef.setInput('list', [{ title: 'Link', icon: 'home', url: 'https://example.com' }]);
+            fixture.detectChanges();
+            const item = fixture.debugElement.query(By.css('li.fd-product-switch__item'));
+            item.nativeElement.click();
+            expect(windowOpenSpy).toHaveBeenCalledWith('https://example.com', '_blank');
+        });
+
+        it('should call window.open with the explicit target when provided', () => {
+            fixture.componentRef.setInput('list', [
+                { title: 'Link', icon: 'home', url: 'https://example.com', target: '_self' }
+            ]);
+            fixture.detectChanges();
+            const item = fixture.debugElement.query(By.css('li.fd-product-switch__item'));
+            item.nativeElement.click();
+            expect(windowOpenSpy).toHaveBeenCalledWith('https://example.com', '_self');
+        });
+
+        it('should not call window.open when item has both url and callback', () => {
+            const callbackSpy = jest.fn();
+            fixture.componentRef.setInput('list', [
+                { title: 'Link', icon: 'home', url: 'https://example.com', callback: callbackSpy }
+            ]);
+            fixture.detectChanges();
+            const item = fixture.debugElement.query(By.css('li.fd-product-switch__item'));
+            item.nativeElement.click();
+            expect(windowOpenSpy).not.toHaveBeenCalled();
+            expect(callbackSpy).toHaveBeenCalledTimes(1);
+        });
+
+        it('should not call window.open when item has no url', () => {
+            const item = fixture.debugElement.query(By.css('li.fd-product-switch__item'));
+            item.nativeElement.click();
+            expect(windowOpenSpy).not.toHaveBeenCalled();
+        });
+    });
+
+    describe('drag guard', () => {
+        let windowOpenSpy: jest.SpyInstance;
+
+        beforeEach(() => {
+            windowOpenSpy = jest.spyOn(window, 'open').mockImplementation(() => null as any);
+        });
+
+        afterEach(() => {
+            windowOpenSpy.mockRestore();
+        });
+
+        it('should not emit itemClicked when a drag preceded the click', () => {
+            const spy = jest.fn();
+            componentInstance.itemClicked.subscribe(spy);
+            componentInstance._onDragStart();
+            const item = fixture.debugElement.query(By.css('li.fd-product-switch__item'));
+            item.nativeElement.click();
+            expect(spy).not.toHaveBeenCalled();
+        });
+
+        it('should not call window.open when a drag preceded the click', () => {
+            fixture.componentRef.setInput('list', [{ title: 'Link', icon: 'home', url: 'https://example.com' }]);
+            fixture.detectChanges();
+            componentInstance._onDragStart();
+            const item = fixture.debugElement.query(By.css('li.fd-product-switch__item'));
+            item.nativeElement.click();
+            expect(windowOpenSpy).not.toHaveBeenCalled();
+        });
+
+        it('should reset after a drag so the next genuine click navigates normally', () => {
+            fixture.componentRef.setInput('list', [{ title: 'Link', icon: 'home', url: 'https://example.com' }]);
+            fixture.detectChanges();
+            const item = fixture.debugElement.query(By.css('li.fd-product-switch__item'));
+
+            componentInstance._onDragStart();
+            item.nativeElement.click(); // spurious post-drag click, suppressed
+
+            item.nativeElement.click(); // genuine click
+            expect(windowOpenSpy).toHaveBeenCalledTimes(1);
+            expect(windowOpenSpy).toHaveBeenCalledWith('https://example.com', '_blank');
+        });
+    });
+
     describe('model isOpen — focus behaviour', () => {
         it('should focus the first item when isOpen is set to true', () => {
             componentInstance.isOpen.set(true);

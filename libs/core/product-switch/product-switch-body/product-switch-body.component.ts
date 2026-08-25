@@ -133,6 +133,8 @@ export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
     /** @hidden */
     private _triggerElement: HTMLElement | null = null;
 
+    private _wasDragged = false;
+
     /** @hidden */
     constructor(
         private _viewportRuler: ViewportRuler,
@@ -159,11 +161,24 @@ export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
         this._subscriptions.unsubscribe();
     }
 
+    _onDragStart(): void {
+        this._wasDragged = true;
+    }
+
     /** @hidden */
     _itemClick(item: ProductSwitchItem, event: MouseEvent): void {
+        if (this._wasDragged) {
+            this._wasDragged = false;
+            return;
+        }
+
         this.itemClicked.emit();
         if (item.callback) {
             item.callback(event);
+        }
+
+        if (item.url && !item.callback) {
+            window.open(item.url, item.target ?? '_blank');
         }
     }
 

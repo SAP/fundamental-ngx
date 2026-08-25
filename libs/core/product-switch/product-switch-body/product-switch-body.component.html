@@ -26,6 +26,7 @@
                     (click)="_itemClick(product, $event)"
                     [draggable]="!product.disabledDragAndDrop && dragAndDropEnabled"
                     [stickInPlace]="!!product.stickToPosition"
+                    (started)="_onDragStart()"
                 >
                     @if (product.url) {
                         <a
@@ -34,6 +35,7 @@
                             [target]="product.target ?? '_blank'"
                             tabindex="-1"
                             aria-hidden="true"
+                            (click)="$event.preventDefault()"
                         >
                             <ng-container
                                 *ngTemplateOutlet="itemContent; context: { $implicit: product }"
