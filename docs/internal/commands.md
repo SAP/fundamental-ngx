@@ -169,7 +169,7 @@ nx affected:test
 nx affected:lint
 ```
 
-## E2E Harness & Snapshots
+## E2E Harness
 
 ### Start the E2E Harness
 
@@ -182,26 +182,3 @@ npx nx serve e2e-harness
 The harness is served at **http://localhost:4400**.
 
 > Example: `http://localhost:4400/platform/settings-generator/custom-control`
-
-### Update Snapshots
-
-**IMPORTANT:** Use `--update-snapshots=all`. The bare `--update-snapshots` flag means `=changed`, which only rewrites a baseline when the comparison fails — differences absorbed by the tolerance are silently skipped.
-
-```bash
-# All baselines
-yarn e2e:update
-
-# Update snapshots for a specific component only
-npx playwright test --update-snapshots=all --grep "core/shellbar"
-```
-
-### Add E2E Routes
-
-When adding a new page/route to E2E coverage:
-
-1. Add the route to [apps/e2e-harness/e2e/config/e2e.routes.json](../../apps/e2e-harness/e2e/config/e2e.routes.json)
-2. Regenerate the route manifest:
-
-```bash
-nx run e2e-harness:generate-routes
-```

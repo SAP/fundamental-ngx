@@ -78,13 +78,6 @@ for i in {1..10}; do
 done
 ```
 
-### Update all snapshots for a specific component
-
-```bash
-# Update snapshots for button tests
-npx playwright test --update-snapshots=all --grep "button"
-```
-
 ---
 
 ## Build & Bundle Analysis

@@ -56,27 +56,6 @@ nx run <project>:build
     ```
 - Download HTML report from CI artifacts and compare screenshots
 
-### Snapshot tests fail after OS upgrade
-
-**Cause:** Font rendering differences between OS versions
-
-**Fix:**
-
-```bash
-# Regenerate snapshots on the new OS
-yarn e2e:update
-```
-
-### Visual snapshots fail unexpectedly
-
-**Cause:** Pixel differences from style changes, animations, or rendering issues
-
-**Fix:**
-
-1. View diff: `npx playwright show-report`
-2. If expected (you changed styles) → update snapshots (see below)
-3. If unexpected → check font rendering, animation timing, browser version
-
 ### Flaky tests (pass/fail intermittently)
 
 **Cause:** Race conditions, animation timing, missing await
@@ -105,20 +84,6 @@ yarn e2e:update
 
 - If intentional: `nx run <lib>:test --updateSnapshot`
 - If unintentional: fix code and re-run tests
-
-### Snapshot update appears to do nothing
-
-**Cause:** Bare `--update-snapshots` means `=changed`, which only rewrites a baseline when the comparison **fails**. If the difference fits inside the screenshot tolerance the test passes, so nothing is written and the stale baseline survives. Deleting the file works because that takes the "missing" path instead.
-
-**Fix:**
-
-```bash
-yarn e2e:update
-# or, scoped
-npx playwright test --update-snapshots=all --grep "core/shellbar"
-```
-
-You do not need to start the e2e-harness first — Playwright's `webServer` config starts it for every run, updates included.
 
 ---
 
