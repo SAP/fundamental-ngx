@@ -1,6 +1,7 @@
 import {
     ChangeDetectionStrategy,
     Component,
+    contentChild,
     ContentChild,
     Input,
     TemplateRef,
@@ -16,6 +17,7 @@ import { DynamicPageGlobalActionsComponent } from '../actions/global-actions/dyn
 import { DynamicPageLayoutActionsComponent } from '../actions/layout-actions/dynamic-page-layout-actions.component';
 import { DynamicPageBreadcrumbComponent } from '../breadcrumb/dynamic-page-breadcrumb.component';
 import { DynamicPageKeyInfoComponent } from '../key-info/dynamic-page-key-info.component';
+import { DynamicPageMessageStripComponent } from '../message-strip/dynamic-page-message-strip.component';
 import { DynamicPageTitleImageComponent } from './dynamic-page-title-image.component';
 
 /**
@@ -108,4 +110,7 @@ export class DynamicPageTitleComponent implements DynamicPageHeader {
      */
     @ViewChild('contentTemplateRef')
     contentTemplateRef: TemplateRef<any>;
+
+    /** reference to message strip component */
+    readonly messageStripComponent = contentChild(DynamicPageMessageStripComponent);
 }

@@ -2,6 +2,7 @@ import { Component, ViewChild, input } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 import { TabsModule } from '@fundamental-ngx/core/tabs';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { IconTabBarTabContentDirective } from '@fundamental-ngx/platform/icon-tab-bar';
@@ -337,5 +338,44 @@ describe('DynamicPageComponent Content Projection', () => {
 
     it('should project footer content', () => {
         expect(fixture.debugElement.query(By.css('#test-footer'))).toBeTruthy();
+    });
+});
+
+@Component({
+    template: `
+        <fdp-dynamic-page>
+            <fdp-dynamic-page-title title="Message strip title">
+                <fdp-dynamic-page-message-strip>
+                    <fd-message-strip type="success" [dismissible]="false">
+                        Operation completed successfully
+                    </fd-message-strip>
+                </fdp-dynamic-page-message-strip>
+            </fdp-dynamic-page-title>
+            <fdp-dynamic-page-header></fdp-dynamic-page-header>
+            <fdp-dynamic-page-content>DynamicPage Content Text</fdp-dynamic-page-content>
+        </fdp-dynamic-page>
+    `,
+    imports: [PlatformDynamicPageModule, MessageStripComponent]
+})
+class TestMessageStripProjectionComponent {}
+
+describe('DynamicPageComponent with message strip', () => {
+    let fixture: ComponentFixture<TestMessageStripProjectionComponent>;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [TestMessageStripProjectionComponent]
+        }).compileComponents();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(TestMessageStripProjectionComponent);
+        fixture.detectChanges();
+    });
+
+    it('should render message strip inside the header container', () => {
+        const container = fixture.debugElement.query(By.css('.fd-dynamic-page__message-strip-container'));
+        expect(container).toBeTruthy();
+        expect(container.query(By.css('fd-message-strip'))).toBeTruthy();
     });
 });

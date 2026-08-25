@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { DynamicPageModule } from '../../dynamic-page.module';
 import { DynamicPageService } from '../../dynamic-page.service';
@@ -438,5 +439,90 @@ describe('DynamicPageHeaderComponent with custom templates', () => {
 
         expect(subtitle.textContent.trim()).toBe('Subtitle collapsed');
         expect(title.textContent.trim()).toBe('Title collapsed');
+    });
+});
+
+describe('DynamicPageHeaderComponent with message strip', () => {
+    @Component({
+        template: `
+            <fd-dynamic-page-header [title]="title">
+                <fd-message-strip type="success" [dismissible]="false">
+                    Operation completed successfully
+                </fd-message-strip>
+            </fd-dynamic-page-header>
+        `,
+        imports: [DynamicPageModule, MessageStripComponent],
+        providers: [DynamicPageService]
+    })
+    class WithMessageStripTestComponent {
+        @ViewChild(DynamicPageHeaderComponent)
+        header: DynamicPageHeaderComponent;
+
+        title = 'Test title';
+    }
+
+    let fixture: ComponentFixture<WithMessageStripTestComponent>;
+    let header: DynamicPageHeaderComponent;
+
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            imports: [WithMessageStripTestComponent],
+            providers: [DynamicPageService]
+        }).compileComponents();
+
+        fixture = TestBed.createComponent(WithMessageStripTestComponent);
+        fixture.detectChanges();
+        header = fixture.componentInstance.header;
+    });
+
+    it('should detect message strip when present', () => {
+        expect(header.messageStrip()).toBeTruthy();
+    });
+
+    it('should render message strip container when message strip is present', () => {
+        const container = fixture.nativeElement.querySelector('.fd-dynamic-page__message-strip-container');
+        expect(container).toBeTruthy();
+    });
+
+    it('should render message strip component', () => {
+        const messageStrip = fixture.nativeElement.querySelector('fd-message-strip');
+        expect(messageStrip).toBeTruthy();
+    });
+});
+
+describe('DynamicPageHeaderComponent without message strip', () => {
+    @Component({
+        template: ` <fd-dynamic-page-header [title]="title"> </fd-dynamic-page-header> `,
+        imports: [DynamicPageModule],
+        providers: [DynamicPageService]
+    })
+    class WithoutMessageStripTestComponent {
+        @ViewChild(DynamicPageHeaderComponent)
+        header: DynamicPageHeaderComponent;
+
+        title = 'Test title';
+    }
+
+    let fixture: ComponentFixture<WithoutMessageStripTestComponent>;
+    let header: DynamicPageHeaderComponent;
+
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            imports: [WithoutMessageStripTestComponent],
+            providers: [DynamicPageService]
+        }).compileComponents();
+
+        fixture = TestBed.createComponent(WithoutMessageStripTestComponent);
+        fixture.detectChanges();
+        header = fixture.componentInstance.header;
+    });
+
+    it('should not detect message strip when not present', () => {
+        expect(header.messageStrip()).toBeFalsy();
+    });
+
+    it('should not render message strip container when message strip is not present', () => {
+        const container = fixture.nativeElement.querySelector('.fd-dynamic-page__message-strip-container');
+        expect(container).toBeFalsy();
     });
 });
