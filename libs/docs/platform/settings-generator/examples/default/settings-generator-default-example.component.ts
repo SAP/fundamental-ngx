@@ -3,7 +3,9 @@ import { Validators } from '@angular/forms';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ThemingService } from '@fundamental-ngx/core/theming';
 import { TitleComponent } from '@fundamental-ngx/core/title';
-import { FD_LANGUAGE_ENGLISH, FD_LANGUAGE_GERMAN, FD_LANGUAGE_SIGNAL } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_SIGNAL } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_GERMAN } from '@fundamental-ngx/i18n/de';
+import { FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n/en';
 import { ListAvatarConfig } from '@fundamental-ngx/platform/list';
 import {
     SettingsGeneratorComponent,

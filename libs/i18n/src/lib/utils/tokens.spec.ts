@@ -808,6 +808,8 @@ describe('Injection Tokens', () => {
             });
 
             const fixture = TestBed.createComponent(TestComponent);
+            // toStrictEqual: provideAllFundamentalLanguages imports from a secondary entry point,
+            // so reference identity differs from the direct import in this file.
             expect(fixture.componentInstance.langSignal()).toStrictEqual(FD_LANGUAGE_GERMAN);
         });
 
@@ -865,6 +867,8 @@ describe('Injection Tokens', () => {
             });
 
             const fixture = TestBed.createComponent(TestComponent);
+            // toStrictEqual: provideAllFundamentalLanguages imports from a secondary entry point,
+            // so reference identity differs from the direct import in this file.
             expect(fixture.componentInstance.langSignal()).toStrictEqual(FD_LANGUAGE_GERMAN);
 
             fixture.componentInstance.langSignal.set(FD_LANGUAGE_FRENCH);
@@ -887,6 +891,8 @@ describe('Injection Tokens', () => {
             });
 
             const fixture = TestBed.createComponent(TestComponent);
+            // toStrictEqual: provideAllFundamentalLanguages imports from a secondary entry point,
+            // so reference identity differs from the direct import in this file.
             expect(fixture.componentInstance.langSignal()).toStrictEqual(FD_LANGUAGE_GERMAN);
             expect(fixture.componentInstance.localeSignal()).toBe('de');
         });
