@@ -1,3 +1,66 @@
+## 0.64.2-rc.43 (2026-08-22)
+
+This was a version bump only for datetime-adapter to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.42 (2026-08-21)
+
+This was a version bump only for datetime-adapter to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.41 (2026-08-21)
+
+This was a version bump only for datetime-adapter to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.40 (2026-08-21)
+
+This was a version bump only for datetime-adapter to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.39 (2026-08-21)
+
+This was a version bump only for datetime-adapter to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.38 (2026-08-20)
+
+This was a version bump only for datetime-adapter to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.37 (2026-08-20)
+
+This was a version bump only for datetime-adapter to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.36 (2026-08-20)
+
+This was a version bump only for datetime-adapter to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.35 (2026-08-20)
+
+This was a version bump only for datetime-adapter to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.34 (2026-08-19)
+
+### 🚀 Features
+
+- **platform:** table - deprecate p13 dialog, add include/exclude filter component ([#14448](https://github.com/SAP/fundamental-ngx/pull/14448))
+
+### ❤️ Thank You
+
+- github-actions
+- Mike O'Donnell @mikerodonnell89
+
+## 0.64.2-rc.33 (2026-08-19)
+
+This was a version bump only for datetime-adapter to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.32 (2026-08-18)
+
+This was a version bump only for datetime-adapter to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.31 (2026-08-14)
+
+This was a version bump only for datetime-adapter to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.30 (2026-08-13)
+
+This was a version bump only for datetime-adapter to align it with other projects, there were no code changes.
+
 ## 0.64.2-rc.29 (2026-08-13)
 
 This was a version bump only for datetime-adapter to align it with other projects, there were no code changes.

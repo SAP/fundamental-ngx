@@ -1,74 +1,74 @@
 <div fd-form-item>
-    <label fd-form-label [colon]="true" for="textarea-52">Textarea State: Success</label>
+    <label fd-form-label [colon]="true" for="textarea-success">Project Description</label>
     <fd-form-input-message-group>
         <textarea
             fd-form-control
-            id="textarea-52"
-            placeholder="Field placeholder text"
+            id="textarea-success"
+            placeholder="Describe the project scope and objectives"
             state="success"
-            aria-describedby="form-message-52"
         ></textarea>
-        <fd-form-message type="success" id="form-message-52">
-            Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
+        <fd-form-message type="success">
+            Description meets the <b>minimum requirement</b> of 100 characters. You can submit the form.
         </fd-form-message>
     </fd-form-input-message-group>
 </div>
 
 <div fd-form-item>
-    <label fd-form-label [colon]="true" for="textarea-53">Textarea State: Error</label>
+    <label fd-form-label [colon]="true" for="textarea-error">Security Policy</label>
     <fd-form-input-message-group>
         <textarea
             fd-form-control
-            id="textarea-53"
-            aria-errormessage="form-message-53"
+            id="textarea-error"
+            aria-errormessage="textarea-error-message"
             aria-invalid="true"
-            placeholder="Field placeholder text"
+            placeholder="Define security requirements and compliance standards"
             state="error"
         ></textarea>
-        <fd-form-message type="error" id="form-message-53">
-            Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
+        <fd-form-message type="error" id="textarea-error-message">
+            Policy must include <code>authentication</code>, <code>authorization</code>, and
+            <code>data encryption</code> sections. See <a href="#">template</a>.
         </fd-form-message>
     </fd-form-input-message-group>
 </div>
 
 <div fd-form-item>
-    <label fd-form-label [colon]="true" for="textarea-54">Textarea State: Warning</label>
+    <label fd-form-label [colon]="true" for="textarea-warning">Customer Feedback</label>
     <fd-form-input-message-group>
         <textarea
             fd-form-control
-            id="textarea-54"
-            placeholder="Field placeholder text"
+            id="textarea-warning"
+            placeholder="Enter customer comments and concerns"
             state="warning"
-            aria-describedby="form-message-54"
         ></textarea>
-        <fd-form-message type="warning" id="form-message-54">
-            Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
+        <fd-form-message type="warning">
+            This feedback contains <b>potentially sensitive information</b>. Ensure proper data handling before
+            submission.
         </fd-form-message>
     </fd-form-input-message-group>
 </div>
 
 <div fd-form-item>
-    <label fd-form-label [colon]="true" for="textarea-55">Textarea State: Information</label>
+    <label fd-form-label [colon]="true" for="textarea-info">Release Notes</label>
     <fd-form-input-message-group>
         <textarea
             fd-form-control
-            id="textarea-55"
-            placeholder="Field placeholder text"
+            id="textarea-info"
+            placeholder="List new features, improvements, and bug fixes"
             state="information"
-            aria-describedby="form-message-55"
         ></textarea>
-        <fd-form-message type="information" id="form-message-55">
-            Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
+        <fd-form-message type="information">
+            Use <code>markdown</code> formatting for better readability. Include ticket references in format
+            <code>JIRA-1234</code>.
         </fd-form-message>
     </fd-form-input-message-group>
 </div>
 
 <div fd-form-item>
-    <label fd-form-label [colon]="true" for="textarea-56">Textarea State: Disabled</label>
-    <textarea fd-form-control id="textarea-56" placeholder="Field placeholder text" disabled></textarea>
+    <label fd-form-label [colon]="true" for="textarea-disabled">System Logs (Processing)</label>
+    <textarea fd-form-control id="textarea-disabled" placeholder="Logs are being processed..." disabled></textarea>
 </div>
 
 <div fd-form-item>
-    <label fd-form-label [colon]="true" for="textarea-57">Textarea State: Readonly</label>
-    <textarea fd-form-control id="textarea-57" placeholder="Field placeholder text" readonly></textarea>
+    <label fd-form-label [colon]="true" for="textarea-readonly">Terms and Conditions</label>
+    <textarea fd-form-control id="textarea-readonly" placeholder="Standard terms (non-editable)" readonly></textarea>
 </div>

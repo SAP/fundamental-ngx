@@ -82,7 +82,7 @@ done
 
 ```bash
 # Update snapshots for button tests
-npx playwright test --update-snapshots --grep "button"
+npx playwright test --update-snapshots=all --grep "button"
 ```
 
 ---

@@ -1,0 +1,1 @@
+../src/lib/translations/translations_zh_TW.ts

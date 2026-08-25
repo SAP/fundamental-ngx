@@ -2,7 +2,7 @@ import { Component, computed, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ContentDensityObserver } from '@fundamental-ngx/core/content-density';
 import { TableService as CoreTableService } from '@fundamental-ngx/core/table';
-import { FD_LANGUAGE, FD_LANGUAGE_SIGNAL, FdLanguage } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_SIGNAL, FdLanguage } from '@fundamental-ngx/i18n';
 import {
     SelectionMode,
     TableColumnResizeService,
@@ -81,18 +81,6 @@ describe('TableHeaderRowComponent', () => {
                 { provide: TableRowService, useValue: mockTableRowService },
                 { provide: TableColumnResizeService, useValue: mockTableColumnResizeService },
                 { provide: ContentDensityObserver, useValue: mockContentDensityObserver },
-                {
-                    provide: FD_LANGUAGE,
-                    useValue: signal<FdLanguage>({
-                        platformTable: {
-                            selectAllCheckboxLabel: 'Select All',
-                            deselectAllCheckboxLabel: 'Deselect All',
-                            selectAllCheckboxLongLabel: 'Select all items',
-                            deselectAllCheckboxLongLabel: 'Deselect all items',
-                            selectAllCheckboxMixedLongLabel: 'Select all mixed items'
-                        }
-                    } as FdLanguage)
-                },
                 {
                     provide: FD_LANGUAGE_SIGNAL,
                     useValue: signal<FdLanguage>({

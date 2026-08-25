@@ -35,7 +35,6 @@ import { filter, fromEvent } from 'rxjs';
 import { debounceTime, startWith } from 'rxjs/operators';
 import { DocsService } from '../../services/docs.service';
 import { Translations } from '../../tokens/translations.token';
-
 const urlContains = (themeName: string, search: string): boolean => themeName.toLowerCase().includes(search);
 
 const isHcb = (themeName: string): boolean => urlContains(themeName, 'hcb');

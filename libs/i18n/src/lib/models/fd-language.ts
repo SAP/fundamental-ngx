@@ -930,4 +930,14 @@ export interface FdLanguage {
         ariaLabelTotalRating: FdLanguageKey;
         ariaLabelValue: FdLanguageKey;
     };
+    coreFormMessage: {
+        /** Value State Success */
+        success: FdLanguageKey;
+        /** Value State Error */
+        error: FdLanguageKey;
+        /** Value State Warning */
+        warning: FdLanguageKey;
+        /** Value State Information */
+        information: FdLanguageKey;
+    };
 }

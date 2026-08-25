@@ -3,14 +3,13 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 import {
-    FD_LANGUAGE_ENGLISH,
     FD_LANGUAGE_SIGNAL,
-    FD_LANGUAGE_UKRAINIAN,
     FdLanguage,
     resolveTranslationSignal,
     resolveTranslationSignalFn
 } from '@fundamental-ngx/i18n';
-
+import { FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n/en';
+import { FD_LANGUAGE_UKRAINIAN } from '@fundamental-ngx/i18n/uk';
 @Component({
     selector: 'fd-migration-example',
     templateUrl: './migration-example.component.html',

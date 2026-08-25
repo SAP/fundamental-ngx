@@ -107,6 +107,12 @@ export default {
         lessLabel: 'Kevesebb',
         moreLabel: 'további {count}'
     },
+    coreFormMessage: {
+        error: 'Invalid Entry',
+        information: 'Information',
+        success: 'Success',
+        warning: 'Warning'
+    },
     coreGridList: {
         filterBarCancelButtonTitle: 'Mégse',
         listItemButtonDeleteTitle: 'Törlés',

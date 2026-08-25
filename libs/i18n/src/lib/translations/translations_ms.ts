@@ -106,6 +106,12 @@ export default {
         lessLabel: 'Kurang',
         moreLabel: '{count} lagi'
     },
+    coreFormMessage: {
+        error: 'Invalid Entry',
+        information: 'Information',
+        success: 'Success',
+        warning: 'Warning'
+    },
     coreGridList: {
         filterBarCancelButtonTitle: 'Batalkan',
         listItemButtonDeleteTitle: 'Padam',

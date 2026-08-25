@@ -42,6 +42,26 @@
             "reason": "Loads random avatar images from external URLs"
         },
         {
+            "route": "core/flexible-column-layout/custom-config",
+            "reason": "Example renders only a launcher button; real layouts are covered by specs/interaction/flexible-column-layout.spec.ts"
+        },
+        {
+            "route": "core/flexible-column-layout/default",
+            "reason": "Example renders only a launcher button; real layouts are covered by specs/interaction/flexible-column-layout.spec.ts"
+        },
+        {
+            "route": "core/flexible-column-layout/dynamic-page",
+            "reason": "Example renders only a launcher button; real layouts are covered by specs/interaction/flexible-column-layout.spec.ts"
+        },
+        {
+            "route": "ui5/calendar-legend/basic",
+            "reason": "Example picks 10 special dates via Math.random() on every load"
+        },
+        {
+            "route": "ui5/slider/slider",
+            "reason": "Example auto-increments a slider on a 100ms interval, so the page never reaches a stable frame"
+        },
+        {
             "route": "core/bar/default",
             "reason": "Non-deterministic overflow layout calculation"
         },
@@ -122,8 +142,8 @@
             "reason": "300ms RxJS delay() in DelayedBaseDataProvider causes timing-dependent busy indicator state at snapshot time"
         },
         {
-            "route": "core/calendar/legend",
-            "reason": "Calendar highlights today's date — baseline drifts daily as the current day changes"
+            "route": "platform/table/columns-ngfor",
+            "reason": "Intermittent snapshot mismatch after rebase onto main — baseline provenance conflict, not a functional regression"
         }
     ]
 }

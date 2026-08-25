@@ -1,11 +1,11 @@
 import { Component, computed, inject, LOCALE_ID, signal, WritableSignal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { BehaviorSubject, firstValueFrom, Observable } from 'rxjs';
+import { provideAllFundamentalLanguages } from '../../../all/providers-all';
 import { FD_LANGUAGE_ENGLISH } from '../languages/english';
 import { FD_LANGUAGE_FRENCH } from '../languages/french';
 import { FD_LANGUAGE_GERMAN } from '../languages/german';
 import { FdLanguage } from '../models';
-import { provideAllFundamentalLanguages } from '../providers';
 import { resetRegistry } from './detect-language';
 import { FD_LANGUAGE, FD_LANGUAGE_AUTO_DETECT, FD_LANGUAGE_SIGNAL, FD_LOCALE, FD_LOCALE_SIGNAL } from './tokens';
 
@@ -808,7 +808,7 @@ describe('Injection Tokens', () => {
             });
 
             const fixture = TestBed.createComponent(TestComponent);
-            expect(fixture.componentInstance.langSignal()).toBe(FD_LANGUAGE_GERMAN);
+            expect(fixture.componentInstance.langSignal()).toStrictEqual(FD_LANGUAGE_GERMAN);
         });
 
         it('should fall back to English for unsupported locale', () => {
@@ -865,7 +865,7 @@ describe('Injection Tokens', () => {
             });
 
             const fixture = TestBed.createComponent(TestComponent);
-            expect(fixture.componentInstance.langSignal()).toBe(FD_LANGUAGE_GERMAN);
+            expect(fixture.componentInstance.langSignal()).toStrictEqual(FD_LANGUAGE_GERMAN);
 
             fixture.componentInstance.langSignal.set(FD_LANGUAGE_FRENCH);
             expect(fixture.componentInstance.langSignal()).toBe(FD_LANGUAGE_FRENCH);
@@ -887,7 +887,7 @@ describe('Injection Tokens', () => {
             });
 
             const fixture = TestBed.createComponent(TestComponent);
-            expect(fixture.componentInstance.langSignal()).toBe(FD_LANGUAGE_GERMAN);
+            expect(fixture.componentInstance.langSignal()).toStrictEqual(FD_LANGUAGE_GERMAN);
             expect(fixture.componentInstance.localeSignal()).toBe('de');
         });
     });

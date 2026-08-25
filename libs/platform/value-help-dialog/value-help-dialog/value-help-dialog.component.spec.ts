@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RtlService } from '@fundamental-ngx/cdk/utils';
-import { FD_LANGUAGE, FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n';
-import { of } from 'rxjs';
+import { FD_LANGUAGE_SIGNAL } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n/en';
 import { PlatformValueHelpDialogModule } from '../value-help-dialog.module';
 import { PlatformValueHelpDialogComponent } from './value-help-dialog.component';
 
@@ -44,8 +44,8 @@ import { PlatformValueHelpDialogComponent } from './value-help-dialog.component'
     imports: [PlatformValueHelpDialogModule],
     providers: [
         {
-            provide: FD_LANGUAGE,
-            useValue: of({
+            provide: FD_LANGUAGE_SIGNAL,
+            useValue: signal({
                 ...FD_LANGUAGE_ENGLISH,
                 platformVHD: {
                     ...FD_LANGUAGE_ENGLISH.platformVHD,

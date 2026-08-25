@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    effect,
+    EventEmitter,
+    Input,
+    Output,
+    viewChildren,
+    ViewEncapsulation
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { ListComponent, ListItemComponent, ListTitleDirective } from '@fundamental-ngx/core/list';
@@ -41,6 +50,9 @@ export class FilterMultiSelectComponent {
     @Output()
     valueChange: EventEmitter<any[]> = new EventEmitter();
 
+    /** @hidden */
+    readonly listItems = viewChildren(ListItemComponent);
+
     /**
      * @hidden
      * Currently selected values
@@ -49,6 +61,16 @@ export class FilterMultiSelectComponent {
 
     /** @hidden */
     _selectableOptions: SelectableOption[];
+
+    /** @hidden */
+    constructor() {
+        effect(() => {
+            const items = this.listItems();
+            if (items.length > 0) {
+                items[0].focus();
+            }
+        });
+    }
 
     /** @hidden */
     _onSelectChange(option: SelectableOption, selected: boolean): void {

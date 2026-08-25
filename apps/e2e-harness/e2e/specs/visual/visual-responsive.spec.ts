@@ -39,7 +39,6 @@ test.describe('Visual Regression — Responsive Viewports', () => {
             await expect(example).toHaveScreenshot(
                 `responsive/${route.library}/${route.component}-${route.example}.png`,
                 {
-                    maxDiffPixelRatio: 0.01,
                     animations: 'disabled'
                 }
             );

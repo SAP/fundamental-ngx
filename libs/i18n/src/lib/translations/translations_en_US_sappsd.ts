@@ -107,6 +107,12 @@ export default {
         lessLabel: '[[[Ļēşş]]]',
         moreLabel: '[[[{count} ɱŏŗē]]]'
     },
+    coreFormMessage: {
+        error: '[[[Ĭŋʋąĺįƌ Ĕŋţŗŷ∙∙∙∙∙∙]]]',
+        information: '[[[Ĭŋƒŏŗɱąţįŏŋ∙∙∙∙∙∙∙∙]]]',
+        success: '[[[Ŝűċċēşş∙∙∙∙∙∙∙]]]',
+        warning: '[[[Ŵąŗŋįŋğ∙∙∙∙∙∙∙]]]'
+    },
     coreGridList: {
         filterBarCancelButtonTitle: '[[[Ĉąŋċēĺ∙∙∙∙∙∙∙∙]]]',
         listItemButtonDeleteTitle: '[[[Ďēĺēţē∙∙∙∙∙∙∙∙]]]',

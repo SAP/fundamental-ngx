@@ -37,7 +37,7 @@
         "build:prepare": "echo Building libraries and preparing for publishing && nx run-many --target=prepare --all --pack --configuration=production --skip-nx-cache",
         "test": "echo Running unit tests && nx run-many --target=test --all --parallel=10",
         "e2e": "playwright test",
-        "e2e:update": "playwright test --update-snapshots",
+        "e2e:update": "playwright test --update-snapshots=all",
         "e2e:report": "playwright show-report",
         "e2e:routes": "npx tsx apps/e2e-harness/scripts/generate-routes.ts && prettier --write apps/e2e-harness/src/app/app.routes.generated.ts apps/e2e-harness/e2e/config/e2e.routes.json",
         "cleanup": "git clean -fdx libs/ui5-webcomponents libs/ui5-webcomponents-ai libs/ui5-webcomponents-fiori libs/ui5-webcomponents-base/types && rm -rf dist",
@@ -178,7 +178,7 @@
     },
     "lint-staged": {
         "*.{js,ts,html,md,json,yml,css,scss}": [
-            "prettier --write",
+            "bash -c 'files=$(for f in \"$@\"; do [ ! -L \"$f\" ] && echo \"$f\"; done); [ -n \"$files\" ] && prettier --write $files || true' --",
             "eslint --fix --flag v10_config_lookup_from_file"
         ]
     }

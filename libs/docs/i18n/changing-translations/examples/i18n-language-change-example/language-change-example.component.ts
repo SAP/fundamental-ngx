@@ -4,16 +4,15 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button';
 import {
-    FD_LANGUAGE_ENGLISH,
     FD_LANGUAGE_SIGNAL,
-    FD_LANGUAGE_UKRAINIAN,
     FD_LOCALE_SIGNAL,
     FdLanguage,
     FdTranslatePipe,
     resolveTranslationSignal
 } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n/en';
+import { FD_LANGUAGE_UKRAINIAN } from '@fundamental-ngx/i18n/uk';
 import { TextAreaComponent } from '@fundamental-ngx/platform/form';
-
 @Component({
     selector: 'fd-language-change-example',
     templateUrl: './language-change-example.component.html',

@@ -1,7 +1,4 @@
 import { EnvironmentProviders, makeEnvironmentProviders, provideEnvironmentInitializer } from '@angular/core';
-import { registerAllBuiltinLanguages } from './all-languages';
-import { FD_LANGUAGE_CHINESE_SIMPLIFIED } from './languages/chinese_simplified';
-import { FD_LANGUAGE_CHINESE_TRADITIONAL } from './languages/chinese_traditional';
 import { FdLanguage } from './models/fd-language';
 import { registerLanguage } from './utils/detect-language';
 
@@ -21,38 +18,14 @@ export function provideFundamentalTranslations(...langs: FdLanguage[]): Environm
         provideEnvironmentInitializer(() => {
             for (const lang of langs) {
                 registerLanguage(lang);
+                // Register extra script aliases that the locale field doesn't cover:
+                // zh-Hans locale already registers 'zh-hans'; add only the bare 'zh' alias.
+                // zh-Hant locale already registers 'zh-hant'; no extra alias needed.
+                const loc = lang.locale?.toLowerCase();
+                if (loc === 'zh-hans') {
+                    registerLanguage(lang, 'zh');
+                }
             }
-            // Chinese needs extra locale aliases beyond its `locale` field
-            if (langs.includes(FD_LANGUAGE_CHINESE_SIMPLIFIED)) {
-                registerLanguage(FD_LANGUAGE_CHINESE_SIMPLIFIED, 'zh-hans', 'zh');
-            }
-            if (langs.includes(FD_LANGUAGE_CHINESE_TRADITIONAL)) {
-                registerLanguage(FD_LANGUAGE_CHINESE_TRADITIONAL, 'zh-hant');
-            }
-        })
-    ]);
-}
-
-/**
- * Register all 37 built-in languages at bootstrap. Restores the pre-lazy-registry
- * auto-detect behavior: `FD_LANGUAGE_SIGNAL` will match any supported locale from
- * `LOCALE_ID` without requiring explicit language imports.
- *
- * Use this as a one-line migration escape hatch if your app relied on transitive
- * auto-detection of non-English languages. For new apps, prefer
- * `provideFundamentalTranslations(...langs)` and list only the languages you support.
- *
- * NOTE: calling this function pulls all 37 language constants into the bundle by design.
- * Apps that never call it will tree-shake out the language set when `sideEffects: false`
- * is set on the package (it is).
- *
- * @example
- * providers: [provideAllFundamentalLanguages()]
- */
-export function provideAllFundamentalLanguages(): EnvironmentProviders {
-    return makeEnvironmentProviders([
-        provideEnvironmentInitializer(() => {
-            registerAllBuiltinLanguages();
         })
     ]);
 }

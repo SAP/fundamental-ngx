@@ -18,6 +18,15 @@ const LOCALE_ALIASES: Record<string, string> = {
 };
 
 /**
+ * Extra locale aliases for the Chinese languages, beyond each language's own
+ * `locale` field (`zh-Hans` / `zh-Hant`). Shared so the alias set lives in one
+ * place — consumed by both `provideFundamentalTranslations()` and the eager
+ * `ALL_BUILTIN_LANGUAGES` registration.
+ */
+export const CHINESE_SIMPLIFIED_ALIASES = ['zh-hans', 'zh'] as const;
+export const CHINESE_TRADITIONAL_ALIASES = ['zh-hant'] as const;
+
+/**
  * Runtime registry: locale code → FdLanguage. Seeded with English only.
  * Non-English languages are added via registerLanguage() at bootstrap time
  * (e.g. via provideFundamentalTranslations() or provideAllFundamentalLanguages()).

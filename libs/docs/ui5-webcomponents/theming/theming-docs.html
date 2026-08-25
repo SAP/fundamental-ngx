@@ -31,7 +31,7 @@ export const appConfig: ApplicationConfig = &#123;
     themingInitializer(),
     provideUi5ThemingBridge(),
   ]
-&#125;;</code></pre>
+&#125;</code></pre>
 
     <p><strong>Step 3:</strong> Instantiate the theming provider for each UI5 package you use:</p>
     <pre><code>// app.config.ts (continued)
@@ -42,7 +42,7 @@ export const appConfig: ApplicationConfig = &#123;
     // ... steps 1-2 above ...
     provideUi5Webcomponents(),
   ]
-&#125;;</code></pre>
+&#125;</code></pre>
     <p>
         Each UI5 package (<code>&#64;ui5/webcomponents</code>, <code>&#64;ui5/webcomponents-fiori</code>,
         <code>&#64;ui5/webcomponents-ai</code>) ships its own theming provider that registers theme assets for that

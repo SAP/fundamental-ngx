@@ -6,21 +6,17 @@ import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { SelectModule } from '@fundamental-ngx/core/select';
 import { DAYJS_DATETIME_FORMATS, DayjsDatetimeAdapter } from '@fundamental-ngx/datetime-adapter';
-import {
-    FD_LANGUAGE,
-    FD_LANGUAGE_BULGARIAN,
-    FD_LANGUAGE_CHINESE,
-    FD_LANGUAGE_ENGLISH,
-    FD_LANGUAGE_FRENCH,
-    FD_LANGUAGE_POLISH,
-    FdLanguage
-} from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE, FdLanguage } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_BULGARIAN } from '@fundamental-ngx/i18n/bg';
+import { FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n/en';
+import { FD_LANGUAGE_FRENCH } from '@fundamental-ngx/i18n/fr';
+import { FD_LANGUAGE_POLISH } from '@fundamental-ngx/i18n/pl';
+import { FD_LANGUAGE_CHINESE } from '@fundamental-ngx/i18n/zh-hans';
 import dayjs, { Dayjs } from 'dayjs';
 import 'dayjs/locale/en-gb';
 import 'dayjs/locale/pl';
 import 'dayjs/locale/zh';
 import { BehaviorSubject } from 'rxjs';
-
 const placeholders = new Map([
     ['en-us', 'mm/dd/yyyy, hh:mm a'],
     ['en-gb', 'dd/mm/yyyy, hh:mm a'],

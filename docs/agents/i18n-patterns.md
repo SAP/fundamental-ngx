@@ -91,7 +91,9 @@ languages must be opted in.
 
 ```typescript
 // app.config.ts
-import { provideFundamentalTranslations, FD_LANGUAGE_GERMAN, FD_LANGUAGE_FRENCH } from '@fundamental-ngx/i18n';
+import { provideFundamentalTranslations } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_GERMAN } from '@fundamental-ngx/i18n/de';
+import { FD_LANGUAGE_FRENCH } from '@fundamental-ngx/i18n/fr';
 
 providers: [provideFundamentalTranslations(FD_LANGUAGE_GERMAN, FD_LANGUAGE_FRENCH)];
 ```
@@ -101,7 +103,7 @@ Only listed languages are bundled. Auto-detect via `LOCALE_ID` works for registe
 ### Restore all-languages behavior
 
 ```typescript
-import { provideAllFundamentalLanguages } from '@fundamental-ngx/i18n';
+import { provideAllFundamentalLanguages } from '@fundamental-ngx/i18n/all';
 
 providers: [provideAllFundamentalLanguages()];
 ```

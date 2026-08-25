@@ -30,7 +30,8 @@ are **not affected** — direct `.set()` bypasses `detectLanguage` entirely.
 ```typescript
 // app.config.ts
 import { provideFundamentalTranslations } from '@fundamental-ngx/i18n';
-import { FD_LANGUAGE_GERMAN, FD_LANGUAGE_FRENCH } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_GERMAN } from '@fundamental-ngx/i18n/de'; // secondary entry point
+import { FD_LANGUAGE_FRENCH } from '@fundamental-ngx/i18n/fr'; // secondary entry point
 
 export const appConfig: ApplicationConfig = {
     providers: [provideFundamentalTranslations(FD_LANGUAGE_GERMAN, FD_LANGUAGE_FRENCH)]
@@ -43,7 +44,7 @@ Only the languages you list are bundled. Auto-detect via `LOCALE_ID` works for t
 
 ```typescript
 // app.config.ts
-import { provideAllFundamentalLanguages } from '@fundamental-ngx/i18n';
+import { provideAllFundamentalLanguages } from '@fundamental-ngx/i18n/all'; // secondary entry point
 
 export const appConfig: ApplicationConfig = {
     providers: [provideAllFundamentalLanguages()]
@@ -65,3 +66,51 @@ behavior. All languages remain in the bundle. Use this if you need zero-effort m
 6. Fallback to English
 
 The only difference is that steps 1–5 only match **registered** languages.
+
+---
+
+## Secondary entry points — language import paths changed (0.65.x → minor)
+
+### What changed
+
+Language constants and `provideAllFundamentalLanguages` are no longer exported from the
+root `@fundamental-ngx/i18n` entry. Each language now has its own secondary entry point,
+and `provideAllFundamentalLanguages` lives in `@fundamental-ngx/i18n/all`.
+
+This enables bundlers to tree-shake individual language bundles — an app that only imports
+`@fundamental-ngx/i18n/de` gets ~33 KB for German instead of the full 1.3 MB FESM.
+
+### Who is affected
+
+Any code that imports `FD_LANGUAGE_*` constants or `provideAllFundamentalLanguages`
+directly from `@fundamental-ngx/i18n` (the root entry).
+
+### Migration
+
+**Language constants** — change the import path to the language's subpath:
+
+```typescript
+// Before
+import { FD_LANGUAGE_GERMAN } from '@fundamental-ngx/i18n';
+
+// After
+import { FD_LANGUAGE_GERMAN } from '@fundamental-ngx/i18n/de';
+```
+
+Full list of subpaths: `ar`, `bg`, `cs`, `da`, `de`, `el`, `en`, `es`, `fi`, `fr`, `he`,
+`hi`, `hr`, `hu`, `it`, `ja`, `ka`, `kk`, `ko`, `ms`, `nl`, `no`, `pl`, `pt`, `ro`, `ru`,
+`sk`, `sl`, `sq`, `sr`, `sv`, `th`, `tr`, `uk`, `zh-hans`, `zh-hant`.
+
+**`provideAllFundamentalLanguages`** — change the import path to `/all`:
+
+```typescript
+// Before
+import { provideAllFundamentalLanguages } from '@fundamental-ngx/i18n';
+
+// After
+import { provideAllFundamentalLanguages } from '@fundamental-ngx/i18n/all';
+```
+
+**`provideFundamentalTranslations`** and all other tokens/pipes (`FD_LANGUAGE_SIGNAL`,
+`FD_LOCALE_SIGNAL`, `registerLanguage`, `detectLanguage`, `FdTranslatePipe`, etc.) remain
+in the root entry — no import path change needed for those.

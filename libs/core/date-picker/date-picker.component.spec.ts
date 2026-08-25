@@ -1,4 +1,4 @@
-import { Component, input, ViewChild } from '@angular/core';
+import { Component, input, signal, ViewChild } from '@angular/core';
 import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 
@@ -8,8 +8,8 @@ import { DatetimeAdapter, FdDate, FdDatetimeAdapter, FdDatetimeModule } from '@f
 import { runValueAccessorTests } from 'ngx-cva-test-suite';
 
 import { By } from '@angular/platform-browser';
-import { FD_LANGUAGE, FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n';
-import { of } from 'rxjs';
+import { FD_LANGUAGE_SIGNAL } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n/en';
 import { DatePickerComponent } from './date-picker.component';
 import { DatePickerModule } from './date-picker.module';
 
@@ -568,8 +568,8 @@ describe('DatePickerComponent Accessibility', () => {
         imports: [FdDatetimeModule, DatePickerModule],
         providers: [
             {
-                provide: FD_LANGUAGE,
-                useValue: of({
+                provide: FD_LANGUAGE_SIGNAL,
+                useValue: signal({
                     ...FD_LANGUAGE_ENGLISH,
                     coreDatePicker: {
                         ...FD_LANGUAGE_ENGLISH.coreDatePicker,

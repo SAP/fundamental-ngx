@@ -1,6 +1,6 @@
 import { DELETE } from '@angular/cdk/keycodes';
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { FormControl, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
@@ -208,6 +208,22 @@ describe('Advanced Textarea', () => {
         const result = textareaCounterElement.nativeElement.textContent.toString().trim();
         expect(result).toBe('2 characters remaining');
     });
+
+    it('should update the counter message after paste', fakeAsync(() => {
+        fixture.detectChanges();
+
+        const textareaElement = host.textareaComponent;
+        textareaElement.maxLength = 5;
+        textareaElement.value = 'abcdefgg';
+
+        textareaElement.handlePasteInteraction();
+        tick();
+        fixture.detectChanges();
+
+        const textareaCounterElement = fixture.debugElement.query(By.css('.fd-textarea-counter'));
+        const result = textareaCounterElement.nativeElement.textContent.toString().trim();
+        expect(result).toBe('3 characters over the limit');
+    }));
 
     it('should not focus when textarea is disabled', async () => {
         await wait(fixture);

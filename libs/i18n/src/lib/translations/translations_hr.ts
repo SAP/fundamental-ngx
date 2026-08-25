@@ -107,6 +107,12 @@ export default {
         lessLabel: 'manje',
         moreLabel: 'još {count}'
     },
+    coreFormMessage: {
+        error: 'Invalid Entry',
+        information: 'Information',
+        success: 'Success',
+        warning: 'Warning'
+    },
     coreGridList: {
         filterBarCancelButtonTitle: 'Otkaži',
         listItemButtonDeleteTitle: 'Izbriši',

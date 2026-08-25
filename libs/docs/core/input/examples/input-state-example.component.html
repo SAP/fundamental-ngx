@@ -1,81 +1,56 @@
 <div fd-form-item>
-    <label fd-form-label for="input-52"> Valid(Success) Input </label>
+    <label fd-form-label for="input-success"> Email Address </label>
     <fd-form-input-message-group>
-        <input
-            fd-form-control
-            type="text"
-            id="input-52"
-            placeholder="Field placeholder text"
-            state="success"
-            aria-describedby="input-state-form-message-52"
-        />
-        <fd-form-message type="success" id="input-state-form-message-52">
-            Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
+        <input fd-form-control type="text" id="input-success" placeholder="your.name&#64;company.com" state="success" />
+        <fd-form-message type="success">
+            Email format is valid and the domain is verified. You will receive notifications at this address.
         </fd-form-message>
     </fd-form-input-message-group>
 </div>
 
 <div fd-form-item>
-    <label fd-form-label for="input-53"> Invalid(Error) Input - Message appears on hover </label>
+    <label fd-form-label for="input-error"> VAT Number - Message appears on hover </label>
     <fd-form-input-message-group [triggers]="['mouseenter', 'mouseleave']">
-        <input
-            fd-form-control
-            type="text"
-            id="input-53"
-            placeholder="Field placeholder text"
-            state="error"
-            aria-invalid="true"
-            aria-errormessage="input-state-form-message-53"
-        />
-        <fd-form-message type="error" id="input-state-form-message-53">
-            Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
+        <input fd-form-control type="text" id="input-error" placeholder="DE123456789" state="error" />
+        <fd-form-message type="error">
+            Invalid VAT number format. Must start with <b>country code</b> (2 letters) followed by <b>9-12 digits</b>.
+            See <a href="#">validation rules</a>.
         </fd-form-message>
     </fd-form-input-message-group>
 </div>
 
 <div fd-form-item>
-    <label fd-form-label for="input-54"> Warning Input - Example of message triggered only on focus/blur </label>
+    <label fd-form-label for="input-warning">
+        Purchase Order Amount - Example of message triggered only on focus/blur
+    </label>
     <fd-form-input-message-group
         [closeOnEscapeKey]="false"
         [closeOnOutsideClick]="false"
         [triggers]="['focusin', 'focusout']"
     >
-        <input
-            fd-form-control
-            type="text"
-            id="input-54"
-            placeholder="Field placeholder text"
-            state="warning"
-            aria-describedby="input-state-form-message-54"
-        />
-        <fd-form-message type="warning" id="input-state-form-message-54">
-            Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
+        <input fd-form-control type="text" id="input-warning" placeholder="0.00" state="warning" />
+        <fd-form-message type="warning">
+            Amount exceeds your <b>approval limit</b> of $50,000. This purchase order will require manager approval.
         </fd-form-message>
     </fd-form-input-message-group>
 </div>
 
 <div fd-form-item>
-    <label fd-form-label for="input-55"> Information Input </label>
+    <label fd-form-label for="input-info"> API Key </label>
     <fd-form-input-message-group>
-        <input
-            fd-form-control
-            type="text"
-            id="input-55"
-            placeholder="Field placeholder text"
-            state="information"
-            aria-describedby="input-state-form-message-55"
-        />
-        <fd-form-message type="information" id="input-state-form-message-55">
-            Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
+        <input fd-form-control type="text" id="input-info" placeholder="Enter your API key" state="information" />
+        <fd-form-message type="information">
+            Find your API key in <b>Settings → Developer Tools</b>. Keys are <code>32 characters</code> long and
+            case-sensitive.
         </fd-form-message>
     </fd-form-input-message-group>
 </div>
 
 <div fd-form-item>
-    <label fd-form-label for="input-56"> Disabled Input </label>
-    <input fd-form-control type="text" id="input-56" placeholder="Field placeholder text" disabled />
+    <label fd-form-label for="input-56"> Employee ID (System Generated) </label>
+    <input fd-form-control type="text" id="input-56" placeholder="Auto-assigned after approval" disabled />
 </div>
 <div fd-form-item>
-    <label fd-form-label for="input-57"> Readonly Input </label>
-    <input fd-form-control type="text" id="input-57" placeholder="Field placeholder text" readonly />
+    <label fd-form-label for="input-57"> Legal Entity Name </label>
+    <input fd-form-control type="text" id="input-57" placeholder="Registered company name (non-editable)" readonly />
 </div>

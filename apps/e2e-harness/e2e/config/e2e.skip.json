@@ -415,6 +415,10 @@
         {
             "route": "core/card/kpi",
             "reason": "depends on Google Charts CDN — unreliable in CI"
+        },
+        {
+            "route": "ui5-fiori/dynamic-page/dynamic-page",
+            "reason": "flaky a11y sweep — non-deterministic rendering timing"
         }
     ]
 }

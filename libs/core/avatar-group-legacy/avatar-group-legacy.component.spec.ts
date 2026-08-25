@@ -50,13 +50,11 @@ const NUMBER_OF_ITEMS = 20;
             </fd-avatar-group-legacy>
         </div>
     `,
-    standalone: true,
     imports: [
         AvatarGroupLegacyComponent,
         PopoverModule,
         AvatarComponent,
         ButtonComponent,
-        AvatarGroupLegacyTestComponent,
         AvatarGroupLegacyItemDirective,
         AvatarGroupLegacyOverflowButtonDirective,
         AvatarGroupLegacyOverflowButtonTextDirective,
@@ -79,10 +77,16 @@ describe('AvatarGroupLegacyComponent', () => {
     let fixture: ComponentFixture<AvatarGroupLegacyTestComponent>;
 
     beforeEach(waitForAsync(() => {
+        (window as any).ResizeObserver = jest.fn(() => ({ observe: jest.fn(), disconnect: jest.fn() }));
+
         TestBed.configureTestingModule({
             imports: [AvatarGroupLegacyTestComponent]
         }).compileComponents();
     }));
+
+    afterEach(() => {
+        delete (window as any).ResizeObserver;
+    });
 
     beforeEach(() => {
         fixture = TestBed.createComponent(AvatarGroupLegacyTestComponent);

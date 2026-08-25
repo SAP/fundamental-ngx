@@ -106,6 +106,12 @@ export default {
         lessLabel: 'कम',
         moreLabel: 'अधिक'
     },
+    coreFormMessage: {
+        error: 'Invalid Entry',
+        information: 'Information',
+        success: 'Success',
+        warning: 'Warning'
+    },
     coreGridList: {
         filterBarCancelButtonTitle: 'रद्द करें',
         listItemButtonDeleteTitle: 'मिटायें',

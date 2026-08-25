@@ -42,6 +42,35 @@
 
 <separator></separator>
 
+<fd-docs-section-title id="include-exclude-filter" componentName="table">
+    Column Filtering with Include/Exclude Dialog</fd-docs-section-title
+>
+<description>
+    <p>
+        The <code>fdp-table-include-exclude-filters</code> component provides an advanced filtering UI with separate
+        include and exclude rule panels. This component is designed to be used inside the
+        <code>fdp-table-view-settings-dialog</code> as an alternative to
+        <code>fdp-table-view-settings-filter</code> components.
+    </p>
+    <p>
+        Use <code>[filterable]="true"</code> and <code>[dataType]</code> to mark columns as filterable. The component
+        allows users to create multiple filter rules with different strategies (contains, equals, between, etc.) and
+        supports various data types including strings, numbers, dates, and booleans. Filter validation is handled with
+        the component's <code>[validator]</code> input, demonstrated in the example below.
+    </p>
+    <p>
+        Note: A <code>fdp-table-view-settings-dialog</code> should either contain
+        <code>fdp-table-view-settings-filter</code> components OR a
+        <code>fdp-table-include-exclude-filters</code> component, but not both at the same time.
+    </p>
+</description>
+<component-example>
+    <fdp-platform-table-include-exclude-filter-example></fdp-platform-table-include-exclude-filter-example>
+</component-example>
+<code-example [exampleFiles]="includeExcludeFilterTableFiles"></code-example>
+
+<separator></separator>
+
 <fd-docs-section-title id="groupable" componentName="table"> Column Grouping</fd-docs-section-title>
 <description>
     Use <code>[groupable]="true"</code> to mark a column as one that can be used to group by.

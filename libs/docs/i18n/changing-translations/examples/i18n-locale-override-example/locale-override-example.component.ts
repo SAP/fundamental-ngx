@@ -4,16 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button';
-import {
-    FD_LANGUAGE_ENGLISH,
-    FD_LANGUAGE_FRENCH,
-    FD_LANGUAGE_GERMAN,
-    FD_LANGUAGE_SIGNAL,
-    FD_LOCALE_SIGNAL,
-    FdLanguage,
-    resolveTranslationSignal
-} from '@fundamental-ngx/i18n';
-
+import { FD_LANGUAGE_SIGNAL, FD_LOCALE_SIGNAL, FdLanguage, resolveTranslationSignal } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_GERMAN } from '@fundamental-ngx/i18n/de';
+import { FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n/en';
+import { FD_LANGUAGE_FRENCH } from '@fundamental-ngx/i18n/fr';
 @Component({
     selector: 'fd-locale-override-example',
     templateUrl: './locale-override-example.component.html',

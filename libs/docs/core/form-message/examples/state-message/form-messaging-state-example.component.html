@@ -1,65 +1,67 @@
 <div fd-form-item class="fd-custom-form-item-message">
-    <label fd-form-label for="input-message" id="label-input-1"> Informative Message With Input </label>
+    <label fd-form-label for="info-input" id="info-label"> Employee ID </label>
     <fd-form-input-message-group>
         <input
             fd-form-control
             type="text"
-            id="input-message-1"
-            placeholder="Field placeholder text"
+            id="info-input"
+            placeholder="e.g., EMP12345"
             state="information"
-            aria-labelledby="label-input input-message message-input"
+            aria-labelledby="info-label"
         />
-        <fd-form-message type="information" id="message-input-1"> This is an informative message. </fd-form-message>
+        <fd-form-message type="information">
+            Your employee ID can be found on your company badge or ID card.
+        </fd-form-message>
     </fd-form-input-message-group>
 </div>
 
 <div fd-form-item class="fd-custom-form-item-message">
-    <label fd-form-label for="input-message" id="label-input-2"> Warning Message With Input </label>
+    <label fd-form-label for="warning-input" id="warning-label"> Cost Center </label>
     <fd-form-input-message-group>
         <input
             fd-form-control
             type="text"
-            id="input-message-2"
-            placeholder="Field placeholder text"
+            id="warning-input"
+            placeholder="e.g., CC-1000"
             state="warning"
-            aria-labelledby="label-input input-message message-input"
+            aria-labelledby="warning-label"
         />
-        <fd-form-message type="warning" id="message-input-2">
-            This is a warning message with&nbsp;<a href="/">formatted text</a>.
+        <fd-form-message type="warning">
+            This cost center will be retired next quarter. Please check&nbsp;<a href="/">Available Cost Centers</a>.
         </fd-form-message>
     </fd-form-input-message-group>
 </div>
 
 <div fd-form-item class="fd-custom-form-item-message">
-    <label fd-form-label for="input-message" id="label-input-3"> Error Message With Input </label>
+    <label fd-form-label for="error-input" id="error-label"> Email Address </label>
     <fd-form-input-message-group>
         <input
             fd-form-control
             type="text"
-            id="input-message-3"
-            placeholder="Field placeholder text"
+            id="error-input"
+            placeholder="your.name&#64;company.com"
             state="error"
-            aria-labelledby="label-input input-message message-input"
+            aria-labelledby="error-label"
         />
-        <fd-form-message type="error" id="message-input-3">
-            This is an error message with&nbsp;<code>formatted text</code>.
+        <fd-form-message type="error">
+            Please enter a valid email address in the format&nbsp;<b>name&#64;domain.com</b>.
         </fd-form-message>
     </fd-form-input-message-group>
 </div>
 
 <div fd-form-item class="fd-custom-form-item-message">
-    <label fd-form-label for="input-message" id="label-input-4"> Success Message With Input </label>
+    <label fd-form-label for="success-input" id="success-label"> Username </label>
     <fd-form-input-message-group>
         <input
             fd-form-control
             type="text"
-            id="input-message-4"
-            placeholder="Field placeholder text"
+            id="success-input"
+            placeholder="Choose a unique username"
             state="success"
-            aria-labelledby="label-input input-message message-input"
+            aria-labelledby="success-label"
         />
-        <fd-form-message type="success" id="message-input-4">
-            This is a success message with a plain text.
+        <fd-form-message type="success" id="success-message">
+            Great! This username is available and meets all requirements.
         </fd-form-message>
     </fd-form-input-message-group>
 </div>

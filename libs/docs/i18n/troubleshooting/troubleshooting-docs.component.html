@@ -43,7 +43,7 @@ this.lang.set(newLang); // ❌ Error: set doesn't exist</code></pre>
 {{ '{' }}{{ '{' }} provide: FD_LANGUAGE_SIGNAL, useValue: signal(FD_LANGUAGE_ENGLISH) {{ '}' }}{{ '}' }}
 
 // In component - cast to WritableSignal
-private readonly lang = inject(FD_LANGUAGE_SIGNAL) as WritableSignal&lt;FdLanguage&gt;;
+private readonly lang = inject(FD_LANGUAGE_SIGNAL) as WritableSignal&lt;FdLanguage&gt;
 this.lang.set(newLang); // ✅ Works!</code></pre>
         </fd-message-strip>
     </div>

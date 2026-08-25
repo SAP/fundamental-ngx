@@ -1,10 +1,11 @@
 import { Component, inject, LOCALE_ID } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+import { provideAllFundamentalLanguages } from '../../all/providers-all';
 import { FD_LANGUAGE_CHINESE_SIMPLIFIED } from './languages/chinese_simplified';
 import { FD_LANGUAGE_ENGLISH } from './languages/english';
 import { FD_LANGUAGE_FRENCH } from './languages/french';
 import { FD_LANGUAGE_GERMAN } from './languages/german';
-import { provideAllFundamentalLanguages, provideFundamentalTranslations } from './providers';
+import { provideFundamentalTranslations } from './providers';
 import { resetRegistry } from './utils/detect-language';
 import { FD_LANGUAGE_SIGNAL } from './utils/tokens';
 
@@ -97,7 +98,9 @@ describe('provideAllFundamentalLanguages', () => {
         });
 
         const fixture = TestBed.createComponent(TestPallDeComponent);
-        expect(fixture.componentInstance.langSignal()).toBe(FD_LANGUAGE_GERMAN);
+        // toStrictEqual: provideAllFundamentalLanguages imports from secondary entry points
+        // which produce separate object instances; content equality is the correct contract.
+        expect(fixture.componentInstance.langSignal()).toStrictEqual(FD_LANGUAGE_GERMAN);
     });
 
     it('with LOCALE_ID="fr" → FD_LANGUAGE_SIGNAL resolves to French', () => {
@@ -112,6 +115,6 @@ describe('provideAllFundamentalLanguages', () => {
         });
 
         const fixture = TestBed.createComponent(TestPallFrComponent);
-        expect(fixture.componentInstance.langSignal()).toBe(FD_LANGUAGE_FRENCH);
+        expect(fixture.componentInstance.langSignal()).toStrictEqual(FD_LANGUAGE_FRENCH);
     });
 });

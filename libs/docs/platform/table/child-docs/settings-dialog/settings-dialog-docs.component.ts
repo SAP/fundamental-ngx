@@ -13,6 +13,7 @@ import {
 } from '@fundamental-ngx/docs/shared';
 import { PlatformTableFilterableExampleComponent } from '../../examples/platform-table-filterable-example.component';
 import { PlatformTableGroupableExampleComponent } from '../../examples/platform-table-groupable-example.component';
+import { PlatformTableIncludeExcludeFilterExampleComponent } from '../../examples/platform-table-include-exclude-filter-example.component';
 import { PlatformTableSettingsDialogExampleComponent } from '../../examples/platform-table-settings-dialog-example.component';
 import { PlatformTableSortableExampleComponent } from '../../examples/platform-table-sortable-example.component';
 
@@ -22,6 +23,8 @@ const platformTableGroupableSrc = 'platform-table-groupable-example.component.ht
 const platformTableGroupableTsSrc = 'platform-table-groupable-example.component.ts';
 const platformTableFilterableSrc = 'platform-table-filterable-example.component.html';
 const platformTableFilterableTsSrc = 'platform-table-filterable-example.component.ts';
+const platformTableIncludeExcludeSrc = 'platform-table-include-exclude-filter-example.component.html';
+const platformTableIncludeExcludeTsSrc = 'platform-table-include-exclude-filter-example.component.ts';
 const platformTableSettingsSrc = 'platform-table-settings-dialog-example.component.html';
 const platformTableFiSettingsSrc = 'platform-table-settings-dialog-example.component.ts';
 @Component({
@@ -39,6 +42,7 @@ const platformTableFiSettingsSrc = 'platform-table-settings-dialog-example.compo
         SeparatorComponent,
         PlatformTableFilterableExampleComponent,
         PlatformTableGroupableExampleComponent,
+        PlatformTableIncludeExcludeFilterExampleComponent,
         FdDatetimeModule,
         PlatformTableSettingsDialogExampleComponent
     ]
@@ -109,6 +113,21 @@ export class SettingsDialogDocsComponent {
             name: 'platform-table-example.component.ts'
         }
     ];
+
+    includeExcludeFilterTableFiles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(platformTableIncludeExcludeSrc),
+            fileName: 'platform-table-include-exclude-filter-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(platformTableIncludeExcludeTsSrc),
+            fileName: 'platform-table-include-exclude-filter-example',
+            component: 'PlatformTableIncludeExcludeFilterExampleComponent'
+        }
+    ];
+
     constructor() {
         this.childService.setLink(this.route.snapshot.routeConfig?.path);
     }

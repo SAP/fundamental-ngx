@@ -106,6 +106,12 @@ export default {
         lessLabel: 'Менше',
         moreLabel: 'Ще {count}'
     },
+    coreFormMessage: {
+        error: 'Invalid Entry',
+        information: 'Information',
+        success: 'Success',
+        warning: 'Warning'
+    },
     coreGridList: {
         filterBarCancelButtonTitle: 'Скасувати',
         listItemButtonDeleteTitle: 'Видалити',

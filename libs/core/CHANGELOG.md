@@ -1,3 +1,84 @@
+## 0.64.2-rc.43 (2026-08-22)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.42 (2026-08-21)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.41 (2026-08-21)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.40 (2026-08-21)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.39 (2026-08-21)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.38 (2026-08-20)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.37 (2026-08-20)
+
+### 🩹 Fixes
+
+- **core, platform:** update form messages a11y ([#14473](https://github.com/SAP/fundamental-ngx/pull/14473))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
+## 0.64.2-rc.36 (2026-08-20)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.35 (2026-08-20)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.34 (2026-08-19)
+
+### 🚀 Features
+
+- **platform:** table - deprecate p13 dialog, add include/exclude filter component ([#14448](https://github.com/SAP/fundamental-ngx/pull/14448))
+
+### ❤️ Thank You
+
+- github-actions
+- Mike O'Donnell @mikerodonnell89
+
+## 0.64.2-rc.33 (2026-08-19)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.32 (2026-08-18)
+
+### 🩹 Fixes
+
+- **core:** use 100svh for dynamic page full height ([#14475](https://github.com/SAP/fundamental-ngx/pull/14475))
+
+### ❤️ Thank You
+
+- deno
+
+## 0.64.2-rc.31 (2026-08-14)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.30 (2026-08-13)
+
+### 🩹 Fixes
+
+- **core, platform:** resolve zoneless change detection issues in Flexible Column Layout, Textarea (Platform) and Multi Input (Platform) ([#14465](https://github.com/SAP/fundamental-ngx/pull/14465))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.64.2-rc.29 (2026-08-13)
 
 This was a version bump only for core to align it with other projects, there were no code changes.

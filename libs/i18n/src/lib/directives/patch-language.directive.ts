@@ -1,6 +1,6 @@
 import { computed, Directive, inject, input, Signal } from '@angular/core';
 import { merge } from '@fundamental-ngx/cdk/utils';
-import { FD_LANGUAGE_ENGLISH } from '../languages';
+import { FD_LANGUAGE_ENGLISH } from '../languages/english';
 import { FdLanguage, FdLanguagePatch } from '../models';
 import { patchedObj } from '../utils';
 import { FD_LANGUAGE_SIGNAL } from '../utils/tokens';
