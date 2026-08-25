@@ -8,7 +8,6 @@ on:
             - 'apps/**'
             - 'playwright.config.ts'
             - '.github/workflows/on-pull-request.yml'
-            - '!apps/e2e-harness/e2e/snapshots/**'
 
 env:
     NODE_VERSION: '22.x'

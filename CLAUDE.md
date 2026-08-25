@@ -53,7 +53,6 @@ nx reset
 # E2E / integration tests (see docs/e2e-testing.md)
 npx playwright test                    # Run all
 npx playwright test --grep "core/button"    # Run specific
-npx playwright test --update-snapshots # Update baselines
 npx playwright show-report             # View results
 ```
 
