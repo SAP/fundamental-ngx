@@ -101,7 +101,7 @@ jobs:
         timeout-minutes: 40
         name: 'Playwright E2E (${{ matrix.shard }})'
         permissions:
-            contents: write
+            contents: read
         strategy:
             fail-fast: false
             matrix: ${{ fromJson(needs.detect-scope.outputs.matrix) }}
@@ -137,13 +137,6 @@ jobs:
                   esac
                   echo "grep=$GREP" >> "$GITHUB_OUTPUT"
 
-            - name: Detect snapshot update
-              id: marker
-              env:
-                  BASE_SHA: ${{ github.event.pull_request.base.sha }}
-                  HEAD_SHA: ${{ github.event.pull_request.head.sha }}
-              run: node .github/actions/helpers/detect-snapshot-update.js
-
             - name: Generate routes manifest
               run: npx tsx apps/e2e-harness/scripts/generate-routes.ts
 
@@ -151,16 +144,9 @@ jobs:
               env:
                   CI: true
                   SHARD: ${{ matrix.shard }}
-                  UPDATE_MODE: ${{ steps.marker.outputs.update }}
                   GREP_FILTER: ${{ steps.filter.outputs.grep }}
               run: |
-                  UPDATE_FLAG=""
-                  if [ "$UPDATE_MODE" = "1" ]; then
-                    # =changed, not =all: this step must be idempotent. =all rewrites every baseline
-                    # on every run, so the commit-and-push below would retrigger CI forever.
-                    UPDATE_FLAG="--update-snapshots=changed"
-                  fi
-                  npx playwright test --grep "$GREP_FILTER" $UPDATE_FLAG
+                  npx playwright test --grep "$GREP_FILTER"
 
             - name: Upload blob report
               if: always()
@@ -177,41 +163,6 @@ jobs:
                   name: test-results-${{ matrix.shard }}
                   path: test-results-${{ matrix.shard }}.json
                   retention-days: 3
-
-            - name: Commit Linux baselines
-              if: (failure() || steps.marker.outputs.update == '1') && github.event.pull_request.head.repo.full_name == github.repository
-              env:
-                  SHARD: ${{ matrix.shard }}
-                  UPDATE_MODE: ${{ steps.marker.outputs.update }}
-              run: |
-                  SNAPDIR="apps/e2e-harness/e2e/snapshots/linux"
-                  git add --intent-to-add "$SNAPDIR" 2>/dev/null || true
-                  if ! git diff --quiet "$SNAPDIR"; then
-                    git config user.name "github-actions"
-                    git config user.email "github-actions@github.com"
-                    git add "$SNAPDIR"
-                    if [ "$UPDATE_MODE" = "1" ]; then
-                      git commit -m "test(e2e): update Linux visual baselines [$SHARD]"
-                    else
-                      git commit -m "test(e2e): add missing Linux visual baselines [$SHARD]"
-                    fi
-                    git pull --rebase || true
-                    git push
-                    echo "Pushed baselines"
-                  else
-                    echo "No baselines to commit"
-                  fi
-
-            - name: Upload snapshot diffs
-              if: failure()
-              uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
-              with:
-                  name: snapshot-diffs-${{ matrix.shard }}
-                  path: |
-                      test-results/**/*-actual.png
-                      test-results/**/*-expected.png
-                      test-results/**/*-diff.png
-                  retention-days: 7
 
     # ─────────────────────────────────────────────────────────────
     # Job 4: Merge reports from all shards + post a11y summary

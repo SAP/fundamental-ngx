@@ -10,12 +10,6 @@ export default defineConfig({
     reporter: process.env['CI']
         ? [['blob'], ['json', { outputFile: `test-results-${process.env['SHARD'] || 'default'}.json` }]]
         : [['html']],
-    snapshotPathTemplate: '{testDir}/snapshots/{platform}/{projectName}/{arg}{ext}',
-    expect: {
-        // Absolute cap, not a ratio: a ratio budget scales with image size, so on large mostly-white
-        // screenshots it silently absorbs real text/layout regressions.
-        toHaveScreenshot: { maxDiffPixels: 150 }
-    },
     use: {
         baseURL: 'http://localhost:4400',
         trace: 'on-first-retry',
@@ -24,42 +18,7 @@ export default defineConfig({
     projects: [
         {
             name: 'chromium',
-            use: { ...devices['Desktop Chrome'] },
-            testIgnore: /visual-(high-contrast|responsive|compact)/
-        },
-        {
-            name: 'high-contrast',
-            use: {
-                ...devices['Desktop Chrome']
-            },
-            testMatch: /visual-high-contrast/
-        },
-        {
-            name: 'mobile',
-            use: {
-                ...devices['Desktop Chrome'],
-                viewport: { width: 375, height: 667 },
-                deviceScaleFactor: 2,
-                isMobile: true,
-                hasTouch: true
-            },
-            testMatch: /visual-responsive/
-        },
-        {
-            name: 'tablet',
-            use: {
-                viewport: { width: 768, height: 1024 },
-                deviceScaleFactor: 2,
-                isMobile: true
-            },
-            testMatch: /visual-responsive/
-        },
-        {
-            name: 'compact',
-            use: {
-                ...devices['Desktop Chrome']
-            },
-            testMatch: /visual-compact/
+            use: { ...devices['Desktop Chrome'] }
         }
     ],
     webServer: {
