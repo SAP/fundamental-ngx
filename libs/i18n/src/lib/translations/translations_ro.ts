@@ -242,20 +242,7 @@ export default {
         search: 'Căutare'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails:
-            'Valoarea minimă a cursorului de intervale este {min}, valoarea maximă este {max}',
-        multipleHandle1ValuemaxDetails: 'Valoarea este {value}',
-        multipleHandle1ValueminDetails: 'Valoarea este {value}',
-        multipleHandle1ValueNowDetails: 'Valoarea actuală este {value}',
-        multipleHandle2MinMaxDetails:
-            'Valoarea minimă a cursorului de intervale este {min}, valoarea maximă este {max}',
-        multipleHandle2ValuemaxDetails: 'Valoarea este {value}',
-        multipleHandle2ValueminDetails: 'Valoarea este {value}',
-        multipleHandle2ValueNowDetails: 'Valoarea actuală este {value}',
-        singleMinMaxDetails: 'Valoarea minimă a cursorului este {min}, valoarea maximă este {max}',
-        singleValuemaxDetails: 'Valoarea este {value}',
-        singleValueminDetails: 'Valoarea este {value}',
-        singleValueNowDetails: 'Valoarea actuală este {value}'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: 'Buton de divizare',

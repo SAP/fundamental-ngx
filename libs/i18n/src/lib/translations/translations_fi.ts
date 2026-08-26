@@ -241,18 +241,7 @@ export default {
         search: 'Hae'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: 'Alueen liukusäätimen minimiarvo on {min}, maksimiarvo {max}',
-        multipleHandle1ValuemaxDetails: 'Arvo on {value}',
-        multipleHandle1ValueminDetails: 'Arvo on {value}',
-        multipleHandle1ValueNowDetails: 'Nykyinen arvo on {value}',
-        multipleHandle2MinMaxDetails: 'Alueen liukusäätimen minimiarvo on {min}, maksimiarvo {max}',
-        multipleHandle2ValuemaxDetails: 'Arvo on {value}',
-        multipleHandle2ValueminDetails: 'Arvo on {value}',
-        multipleHandle2ValueNowDetails: 'Nykyinen arvo on {value}',
-        singleMinMaxDetails: 'Liukusäätimen minimiarvo on {min}, maksimiarvo {max}',
-        singleValuemaxDetails: 'Arvo on {value}',
-        singleValueminDetails: 'Arvo on {value}',
-        singleValueNowDetails: 'Nykyinen arvo on {value}'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: 'Jaa-painike',

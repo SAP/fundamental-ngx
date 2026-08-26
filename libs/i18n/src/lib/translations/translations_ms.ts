@@ -241,18 +241,7 @@ export default {
         search: 'Cari'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: 'Nilai minimum penggelongsor julat ialah {min}, nilai maksimum ialah {max}',
-        multipleHandle1ValuemaxDetails: 'Nilai ialah {value}',
-        multipleHandle1ValueminDetails: 'Nilai ialah {value}',
-        multipleHandle1ValueNowDetails: 'Nilai semasa ialah {value}',
-        multipleHandle2MinMaxDetails: 'Nilai minimum penggelongsor julat ialah {min}, nilai maksimum ialah {max}',
-        multipleHandle2ValuemaxDetails: 'Nilai ialah {value}',
-        multipleHandle2ValueminDetails: 'Nilai ialah {value}',
-        multipleHandle2ValueNowDetails: 'Nilai semasa ialah {value}',
-        singleMinMaxDetails: 'Nilai minimum penggelongsor ialah {min}, nilai maksimum ialah {max}',
-        singleValuemaxDetails: 'Nilai ialah {value}',
-        singleValueminDetails: 'Nilai ialah {value}',
-        singleValueNowDetails: 'Nilai semasa ialah {value}'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: 'Butang pisahan',

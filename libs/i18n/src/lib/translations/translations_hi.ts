@@ -241,18 +241,7 @@ export default {
         search: 'Search'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: 'रेंज स्लाइडर न्यूनतम मूल्य है {min}, अधिकतम मूल्य है {max}',
-        multipleHandle1ValuemaxDetails: 'मूल्य है {value}',
-        multipleHandle1ValueminDetails: 'मूल्य है {value}',
-        multipleHandle1ValueNowDetails: 'वर्तमान मूल्य है {value}',
-        multipleHandle2MinMaxDetails: 'रेंज स्लाइडर न्यूनतम मूल्य है {min}, अधिकतम मूल्य है {max}',
-        multipleHandle2ValuemaxDetails: 'मूल्य है {value}',
-        multipleHandle2ValueminDetails: 'मूल्य है {value}',
-        multipleHandle2ValueNowDetails: 'वर्तमान मूल्य है {value}',
-        singleMinMaxDetails: 'स्लाइडर न्यूनतम मूल्य है {min}, अधिकतम मूल्य है {max}',
-        singleValuemaxDetails: 'मूल्य है {value}',
-        singleValueminDetails: 'मूल्य है {value}',
-        singleValueNowDetails: 'वर्तमान मूल्य है {value}'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: 'बाँटा हुआ बटन',

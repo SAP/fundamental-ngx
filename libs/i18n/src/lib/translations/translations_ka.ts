@@ -241,18 +241,7 @@ export default {
         search: 'Search'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: 'სლაიდერის მინიმალური მნიშვნელობაა {min}, მაქსიმუმი - {max}',
-        multipleHandle1ValuemaxDetails: 'მნიშვნელობაა {value}',
-        multipleHandle1ValueminDetails: 'მნიშვნელობაა {value}',
-        multipleHandle1ValueNowDetails: 'მიმდინარე მნიშვნელობაა {value}',
-        multipleHandle2MinMaxDetails: 'სლაიდერის მინიმალური მნიშვნელობაა {min}, მაქსიმუმი - {max}',
-        multipleHandle2ValuemaxDetails: 'მნიშვნელობაა {value}',
-        multipleHandle2ValueminDetails: 'მნიშვნელობაა {value}',
-        multipleHandle2ValueNowDetails: 'მიმდინარე მნიშვნელობაა {value}',
-        singleMinMaxDetails: 'სლაიდერის მინიმალური მნიშვნელობაა {min}, მაქსიმუმი - {max}',
-        singleValuemaxDetails: 'მნიშვნელობაა {value}',
-        singleValueminDetails: 'მნიშვნელობაა {value}',
-        singleValueNowDetails: 'მიმდინარე მნიშვნელობაა {value}'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: 'გამოყოფილი ღილაკები',

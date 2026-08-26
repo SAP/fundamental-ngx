@@ -241,18 +241,7 @@ export default {
         search: 'Ara'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: 'Aralık kaydırıcısı asgari değeri {min}, azami değeri {max}',
-        multipleHandle1ValuemaxDetails: 'Azami değer {value}',
-        multipleHandle1ValueminDetails: 'Asgari değer {value}',
-        multipleHandle1ValueNowDetails: 'Mevcut değer {value}',
-        multipleHandle2MinMaxDetails: 'Aralık kaydırıcısı asgari değeri {min}, azami değeri {max}',
-        multipleHandle2ValuemaxDetails: 'Azami değer {value}',
-        multipleHandle2ValueminDetails: 'Asgari değer {value}',
-        multipleHandle2ValueNowDetails: 'Mevcut değer {value}',
-        singleMinMaxDetails: 'Kaydırıcı asgari değeri {min}, azami değeri {max}',
-        singleValuemaxDetails: 'Azami değer {value}',
-        singleValueminDetails: 'Asgari değer {value}',
-        singleValueNowDetails: 'Mevcut değer {value}'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: 'İki bölümlü düğme',

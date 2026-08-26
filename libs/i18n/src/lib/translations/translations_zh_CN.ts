@@ -239,18 +239,7 @@ export default {
         search: '搜索'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: '范围滑块最小值为 {min}，最大值为 {max}',
-        multipleHandle1ValuemaxDetails: '值为 {value}',
-        multipleHandle1ValueminDetails: '值为 {value}',
-        multipleHandle1ValueNowDetails: '当前值为 {value}',
-        multipleHandle2MinMaxDetails: '范围滑块最小值为 {min}，最大值为 {max}',
-        multipleHandle2ValuemaxDetails: '值为 {value}',
-        multipleHandle2ValueminDetails: '值为 {value}',
-        multipleHandle2ValueNowDetails: '当前值为 {value}',
-        singleMinMaxDetails: '滑块最小值为 {min}，最大值为 {max}',
-        singleValuemaxDetails: '值为 {value}',
-        singleValueminDetails: '值为 {value}',
-        singleValueNowDetails: '当前值为 {value}'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: '拆分按钮',

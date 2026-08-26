@@ -242,18 +242,7 @@ export default {
         search: 'Поиск'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: 'Минимальное значение ползунка диапазона: {min}, максимальное значение: {max}',
-        multipleHandle1ValuemaxDetails: 'Значение: {value}',
-        multipleHandle1ValueminDetails: 'Значение: {value}',
-        multipleHandle1ValueNowDetails: 'Текущее значение: {value}',
-        multipleHandle2MinMaxDetails: 'Минимальное значение ползунка диапазона: {min}, максимальное значение: {max}',
-        multipleHandle2ValuemaxDetails: 'Значение: {value}',
-        multipleHandle2ValueminDetails: 'Значение: {value}',
-        multipleHandle2ValueNowDetails: 'Текущее значение: {value}',
-        singleMinMaxDetails: 'Минимальное значение ползунка: {min}, максимальное значение: {max}',
-        singleValuemaxDetails: 'Значение: {value}',
-        singleValueminDetails: 'Значение: {value}',
-        singleValueNowDetails: 'Текущее значение: {value}'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: 'Разделенная кнопка',

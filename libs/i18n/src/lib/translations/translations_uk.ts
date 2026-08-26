@@ -241,18 +241,7 @@ export default {
         search: 'Пошук'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: 'Мінімальне значення діапазону повзунка: {min}, максимальне значення: {max}',
-        multipleHandle1ValuemaxDetails: 'Значення: {value}',
-        multipleHandle1ValueminDetails: 'Значення: {value}',
-        multipleHandle1ValueNowDetails: 'Поточне значення: {value}',
-        multipleHandle2MinMaxDetails: 'Мінімальне значення діапазону повзунка: {min}, максимальне значення: {max}',
-        multipleHandle2ValuemaxDetails: 'Значення: {value}',
-        multipleHandle2ValueminDetails: 'Значення: {value}',
-        multipleHandle2ValueNowDetails: 'Поточне значення: {value}',
-        singleMinMaxDetails: 'Мінімальне значення повзунка: {min}, максимальне значення: {max}',
-        singleValuemaxDetails: 'Значення: {value}',
-        singleValueminDetails: 'Значення: {value}',
-        singleValueNowDetails: 'Поточне значення: {value}'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: 'Кнопка розділення',

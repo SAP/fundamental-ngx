@@ -21,7 +21,8 @@ import {
     ViewEncapsulation,
     computed,
     forwardRef,
-    inject
+    inject,
+    input
 } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BehaviorSubject, Observable, combineLatest, fromEvent, of } from 'rxjs';
@@ -111,6 +112,14 @@ export class SliderComponent
     /** Aria label for the slider. */
     @Input()
     ariaLabel: Nullable<string>;
+
+    /**
+     * aria-valuetext for the slider
+     * provides a human-readable text alternative for a slider's current numeric value.
+     * Assistive technologies usually announce the numeric value stored in aria-valuenow.
+     * When a bare number is not meaningful or needs context, aria-valuetext overrides the numeric announcement with a descriptive string.
+     */
+    ariaValueText = input<string>();
 
     /** Minimum value. */
     @Input()

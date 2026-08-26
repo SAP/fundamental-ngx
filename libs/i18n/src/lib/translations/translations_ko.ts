@@ -241,18 +241,7 @@ export default {
         search: '검색'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: '범위 슬라이더 최소값은 {min}, 최대값은 {max}입니다.',
-        multipleHandle1ValuemaxDetails: '값은 {value}입니다.',
-        multipleHandle1ValueminDetails: '값은 {value}입니다.',
-        multipleHandle1ValueNowDetails: '현재 값은 {value}입니다.',
-        multipleHandle2MinMaxDetails: '범위 슬라이더 최소값은 {min}, 최대값은 {max}입니다.',
-        multipleHandle2ValuemaxDetails: '값은 {value}입니다.',
-        multipleHandle2ValueminDetails: '값은 {value}입니다.',
-        multipleHandle2ValueNowDetails: '현재 값은 {value}입니다.',
-        singleMinMaxDetails: '슬라이더 최소값은 {min}, 최대값은 {max}입니다.',
-        singleValuemaxDetails: '값은 {value}입니다.',
-        singleValueminDetails: '값은 {value}입니다.',
-        singleValueNowDetails: '현재 값은 {value}입니다.'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: '분할 버튼',

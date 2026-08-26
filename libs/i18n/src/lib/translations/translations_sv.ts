@@ -241,18 +241,7 @@ export default {
         search: 'Sök'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: 'Intervallminimivärde för reglage är {min}, maximalt värde är {max}',
-        multipleHandle1ValuemaxDetails: 'Värde är {value}',
-        multipleHandle1ValueminDetails: 'Värde är {value}',
-        multipleHandle1ValueNowDetails: 'Aktuellt värde är {value}',
-        multipleHandle2MinMaxDetails: 'Intervallminimivärde för reglage är {min}, maximalt värde är {max}',
-        multipleHandle2ValuemaxDetails: 'Värde är {value}',
-        multipleHandle2ValueminDetails: 'Värde är {value}',
-        multipleHandle2ValueNowDetails: 'Aktuellt värde är {value}',
-        singleMinMaxDetails: 'Minimivärde för reglage är {min}, maximalt värde är {max}',
-        singleValuemaxDetails: 'Värde är {value}',
-        singleValueminDetails: 'Värde är {value}',
-        singleValueNowDetails: 'Aktuellt värde är {value}'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: 'Delningsknapp',

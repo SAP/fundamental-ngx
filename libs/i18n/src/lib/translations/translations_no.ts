@@ -242,18 +242,7 @@ export default {
         search: 'Søk'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: 'Minimumsverdi for intervallglidebryter er {min}, maksimumsverdi er {max}',
-        multipleHandle1ValuemaxDetails: 'Verdien er {value}',
-        multipleHandle1ValueminDetails: 'Verdien er {value}',
-        multipleHandle1ValueNowDetails: 'Aktuell verdi er {value}',
-        multipleHandle2MinMaxDetails: 'Minimumsverdi for intervallglidebryter er {min}, maksimumsverdi er {max}',
-        multipleHandle2ValuemaxDetails: 'Verdien er {value}',
-        multipleHandle2ValueminDetails: 'Verdien er {value}',
-        multipleHandle2ValueNowDetails: 'Aktuell verdi er {value}',
-        singleMinMaxDetails: 'Minimumsverdi for glidebryter er {min}, maksimumsverdi er {max}',
-        singleValuemaxDetails: 'Verdien er {value}',
-        singleValueminDetails: 'Verdien er {value}',
-        singleValueNowDetails: 'Aktuell verdi er {value}'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: 'Oppdelt knapp',

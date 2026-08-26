@@ -242,18 +242,7 @@ export default {
         search: 'Wyszukiwanie'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: 'Minimalna wartość suwaka zakresu to {min}, maksymalna wartość to {max}',
-        multipleHandle1ValuemaxDetails: 'Wartość to {value}',
-        multipleHandle1ValueminDetails: 'Wartość to {value}',
-        multipleHandle1ValueNowDetails: 'Bieżąca wartość to {value}',
-        multipleHandle2MinMaxDetails: 'Minimalna wartość suwaka zakresu to {min}, maksymalna wartość to {max}',
-        multipleHandle2ValuemaxDetails: 'Wartość to {value}',
-        multipleHandle2ValueminDetails: 'Wartość to {value}',
-        multipleHandle2ValueNowDetails: 'Bieżąca wartość to {value}',
-        singleMinMaxDetails: 'Minimalna wartość suwaka to {min}, maksymalna wartość to {max}',
-        singleValuemaxDetails: 'Wartość to {value}',
-        singleValueminDetails: 'Wartość to {value}',
-        singleValueNowDetails: 'Bieżąca wartość to {value}'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: 'Przycisk podzielony na dwie części',

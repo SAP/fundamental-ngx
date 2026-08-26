@@ -241,20 +241,7 @@ export default {
         search: 'Pesquisar'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails:
-            'O valor mínimo do controle deslizante de intervalo é {min}, o valor máximo é {max}',
-        multipleHandle1ValuemaxDetails: 'O valor é {value}',
-        multipleHandle1ValueminDetails: 'O valor é {value}',
-        multipleHandle1ValueNowDetails: 'O valor atual é {value}',
-        multipleHandle2MinMaxDetails:
-            'O valor mínimo do controle deslizante de intervalo é {min}, o valor máximo é {max}',
-        multipleHandle2ValuemaxDetails: 'O valor é {value}',
-        multipleHandle2ValueminDetails: 'O valor é {value}',
-        multipleHandle2ValueNowDetails: 'O valor atual é {value}',
-        singleMinMaxDetails: 'O valor mínimo do controle deslizante de intervalo é {min}, o valor máximo é {max}',
-        singleValuemaxDetails: 'O valor é {value}',
-        singleValueminDetails: 'O valor é {value}',
-        singleValueNowDetails: 'O valor atual é {value}'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: 'Botão Ratear',

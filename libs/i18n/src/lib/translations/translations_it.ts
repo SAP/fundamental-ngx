@@ -242,18 +242,7 @@ export default {
         search: 'Cerca'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: "Il valore minimo del cursore dell'intervallo è {min}, quello massimo è {max}",
-        multipleHandle1ValuemaxDetails: 'Il valore è {value}',
-        multipleHandle1ValueminDetails: 'Il valore è {value}',
-        multipleHandle1ValueNowDetails: 'Il valore corrente è {value}',
-        multipleHandle2MinMaxDetails: "Il valore minimo del cursore dell'intervallo è {min}, quello massimo è {max}",
-        multipleHandle2ValuemaxDetails: 'Il valore è {value}',
-        multipleHandle2ValueminDetails: 'Il valore è {value}',
-        multipleHandle2ValueNowDetails: 'Il valore corrente è {value}',
-        singleMinMaxDetails: 'Il valore minimo del cursore è {min}, quello massimo è {max}',
-        singleValuemaxDetails: 'Il valore è {value}',
-        singleValueminDetails: 'Il valore è {value}',
-        singleValueNowDetails: 'Il valore corrente è {value}'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: 'Pulsante Suddividi',

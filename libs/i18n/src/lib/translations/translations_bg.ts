@@ -242,18 +242,7 @@ export default {
         search: 'Търсене'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: 'Минималната стойност на плъзгача за диапазона е {min}, а максималната е {max}',
-        multipleHandle1ValuemaxDetails: 'Стойността е {value}',
-        multipleHandle1ValueminDetails: 'Стойността е {value}',
-        multipleHandle1ValueNowDetails: 'Текущата стойност е {value}',
-        multipleHandle2MinMaxDetails: 'Минималната стойност на плъзгача за диапазона е {min}, а максималната е {max}',
-        multipleHandle2ValuemaxDetails: 'Стойността е {value}',
-        multipleHandle2ValueminDetails: 'Стойността е {value}',
-        multipleHandle2ValueNowDetails: 'Текущата стойност е {value}',
-        singleMinMaxDetails: 'Минималната стойност на плъзгача е {min}, а максималната е {max}',
-        singleValuemaxDetails: 'Стойността е {value}',
-        singleValueminDetails: 'Стойността е {value}',
-        singleValueNowDetails: 'Текущата стойност е {value}'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: 'Бутон разделяне',

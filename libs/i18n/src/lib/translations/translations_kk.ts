@@ -242,18 +242,7 @@ export default {
         search: 'Іздеу'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: 'Ауқым слайдерінің минималды мәні — {min}, максималды мәні — {max}',
-        multipleHandle1ValuemaxDetails: 'Мән — {value}',
-        multipleHandle1ValueminDetails: 'Мән — {value}',
-        multipleHandle1ValueNowDetails: 'Ағымдағы мән — {value}',
-        multipleHandle2MinMaxDetails: 'Ауқым слайдерінің минималды мәні — {min}, максималды мәні — {max}',
-        multipleHandle2ValuemaxDetails: 'Мән — {value}',
-        multipleHandle2ValueminDetails: 'Мән — {value}',
-        multipleHandle2ValueNowDetails: 'Ағымдағы мән — {value}',
-        singleMinMaxDetails: 'Слайдердің минималды мәні — {min}, максималды мәні — {max}',
-        singleValuemaxDetails: 'Мән — {value}',
-        singleValueminDetails: 'Мән — {value}',
-        singleValueNowDetails: 'Ағымдағы мән — {value}'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: 'Бөлу түймесі',

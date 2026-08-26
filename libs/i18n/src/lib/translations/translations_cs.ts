@@ -241,18 +241,7 @@ export default {
         search: 'Hledat'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: 'Minimální hodnota rozsahu posuvníku je {min}, maximální hodnota je {max}',
-        multipleHandle1ValuemaxDetails: 'Hodnota je {value}',
-        multipleHandle1ValueminDetails: 'Hodnota je {value}',
-        multipleHandle1ValueNowDetails: 'Aktuální hodnota je {value}',
-        multipleHandle2MinMaxDetails: 'Minimální hodnota rozsahu posuvníku je {min}, maximální hodnota je {max}',
-        multipleHandle2ValuemaxDetails: 'Hodnota je {value}',
-        multipleHandle2ValueminDetails: 'Hodnota je {value}',
-        multipleHandle2ValueNowDetails: 'Aktuální hodnota je {value}',
-        singleMinMaxDetails: 'Minimální hodnota posuvníku je {min}, maximální hodnota je {max}',
-        singleValuemaxDetails: 'Hodnota je {value}',
-        singleValueminDetails: 'Hodnota je {value}',
-        singleValueNowDetails: 'Aktuální hodnota je {value}'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: 'Vícefunkční (rozdělené) tlačítko',

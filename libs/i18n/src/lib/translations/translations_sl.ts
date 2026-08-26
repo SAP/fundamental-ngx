@@ -242,18 +242,7 @@ export default {
         search: 'Iskanje'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: 'Najmanjša vrednost drsnika obsega je {min}, največja pa {max}',
-        multipleHandle1ValuemaxDetails: 'Vrednost je {value}',
-        multipleHandle1ValueminDetails: 'Vrednost je {value}',
-        multipleHandle1ValueNowDetails: 'Trenutna vrednost je {value}',
-        multipleHandle2MinMaxDetails: 'Najmanjša vrednost drsnika obsega je {min}, največja pa {max}',
-        multipleHandle2ValuemaxDetails: 'Vrednost je {value}',
-        multipleHandle2ValueminDetails: 'Vrednost je {value}',
-        multipleHandle2ValueNowDetails: 'Trenutna vrednost je {value}',
-        singleMinMaxDetails: 'Najmanjša vrednost drsnika je {min}, največja pa {max}',
-        singleValuemaxDetails: 'Vrednost je {value}',
-        singleValueminDetails: 'Vrednost je {value}',
-        singleValueNowDetails: 'Trenutna vrednost je {value}'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: 'Razdelilni gumb',

@@ -241,18 +241,7 @@ export default {
         search: 'חפש'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: 'הערך המינימלי של מחוון טווח הוא {min}, הערך המקסימלי הוא {max}',
-        multipleHandle1ValuemaxDetails: 'הערך הוא {value}',
-        multipleHandle1ValueminDetails: 'הערך הוא {value}',
-        multipleHandle1ValueNowDetails: 'הערך הנוכחי הוא {value}',
-        multipleHandle2MinMaxDetails: 'הערך המינימלי של מחוון טווח הוא {min}, הערך המקסימלי הוא {max}',
-        multipleHandle2ValuemaxDetails: 'הערך הוא {value}',
-        multipleHandle2ValueminDetails: 'הערך הוא {value}',
-        multipleHandle2ValueNowDetails: 'הערך הנוכחי הוא {value}',
-        singleMinMaxDetails: 'הערך המינימלי של מחוון הוא {min}, הערך המקסימלי הוא {max}',
-        singleValuemaxDetails: 'הערך הוא {value}',
-        singleValueminDetails: 'הערך הוא {value}',
-        singleValueNowDetails: 'הערך הנוכחי הוא {value}'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: 'לחצן פיצול',
