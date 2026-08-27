@@ -48,8 +48,10 @@
         explicit setup.
     </p>
     <p>
-        The detection resolves the browser locale against all 37 built-in languages: exact match first, then base
-        language fallback (e.g., <code>pt-BR</code> resolves to Portuguese), then English as the ultimate fallback.
+        The detection resolves the browser locale against registered languages: exact match first, then base language
+        fallback (e.g., <code>pt-BR</code> resolves to Portuguese), then English as the ultimate fallback. Only
+        languages registered via <code>provideFundamentalTranslations()</code> are matched — English is always
+        available.
     </p>
     <p>
         To disable auto-detection, provide

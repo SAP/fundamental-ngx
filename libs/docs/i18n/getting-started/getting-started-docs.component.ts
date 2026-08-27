@@ -39,19 +39,16 @@ export class GettingStartedDocsComponent {
 
     provideLanguageExample: ExampleFile = {
         language: 'typescript',
-        code: `import { ApplicationConfig, signal } from '@angular/core';
-import { FD_LANGUAGE_SIGNAL } from '@fundamental-ngx/i18n';
-import { FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n/en';
+        code: `import { ApplicationConfig } from '@angular/core';
+import { provideFundamentalTranslations } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_GERMAN } from '@fundamental-ngx/i18n/de';
+import { FD_LANGUAGE_FRENCH } from '@fundamental-ngx/i18n/fr';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    // ... your other providers
     // Optional — language auto-detects from browser by default.
-    // Only needed if you want to pin a specific language:
-    {
-      provide: FD_LANGUAGE_SIGNAL,
-      useValue: signal(FD_LANGUAGE_ENGLISH)
-    }
+    // List the languages your app supports:
+    provideFundamentalTranslations(FD_LANGUAGE_GERMAN, FD_LANGUAGE_FRENCH)
   ]
 };`,
         fileName: 'app.config'
@@ -112,8 +109,8 @@ export class MyComponent {
 
     switchLanguageExample: ExampleFile = {
         language: 'typescript',
-        code: `import { Component, inject, WritableSignal } from '@angular/core';
-import { FD_LANGUAGE_SIGNAL, FdLanguage } from '@fundamental-ngx/i18n';
+        code: `import { Component, inject } from '@angular/core';
+import { FD_LANGUAGE_SIGNAL } from '@fundamental-ngx/i18n';
 import { FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n/en';
 import { FD_LANGUAGE_SPANISH } from '@fundamental-ngx/i18n/es';
 
@@ -125,16 +122,13 @@ import { FD_LANGUAGE_SPANISH } from '@fundamental-ngx/i18n/es';
   \`
 })
 export class MyComponent {
-  // Get access to the language signal
-  private langSignal = inject(FD_LANGUAGE_SIGNAL) as WritableSignal<FdLanguage>;
+  private langSignal = inject(FD_LANGUAGE_SIGNAL);
 
   switchToEnglish() {
-    // One call — locale and UI5 follow automatically
     this.langSignal.set(FD_LANGUAGE_ENGLISH);
   }
 
   switchToSpanish() {
-    // One call — locale and UI5 follow automatically
     this.langSignal.set(FD_LANGUAGE_SPANISH);
   }
 }`,
