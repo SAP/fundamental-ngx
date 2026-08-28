@@ -1,5 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
 import {
+    afterNextRender,
     booleanAttribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -11,12 +12,14 @@ import {
     ElementRef,
     HostBinding,
     inject,
+    Injector,
     Input,
     input,
     model,
     OnInit,
     Optional,
     output,
+    runInInjectionContext,
     signal,
     TemplateRef,
     viewChild,
@@ -242,6 +245,12 @@ export class IconTabBarComponent implements OnInit, TabList {
     private readonly _rtlService = inject(RtlService, { optional: true });
 
     /** @hidden */
+    private readonly _injector = inject(Injector);
+
+    /** @hidden Maps stable tab key → uId string, allocated once per tab identity */
+    private _tabUidMap = new Map<string, string>();
+
+    /** @hidden */
     constructor(
         private _cd: ChangeDetectorRef,
         @Optional() private _contentDensityService: ContentDensityService
@@ -265,6 +274,30 @@ export class IconTabBarComponent implements OnInit, TabList {
                     }
                     this._cd.detectChanges();
                 });
+        }
+
+        /**
+         * @hidden
+         * Limitation: fires once after the first render. Two known constraints:
+         * 1. If projected `fdp-icon-tab-bar-tab`s or their `[active]` flag arrive
+         *    asynchronously (e.g. deferred content), the active panel may not exist
+         *    yet and the initial scroll will be silently skipped.
+         * 2. A runtime `false → true` transition of `[stackContent]` does not re-run
+         *    this scroll — the active panel is not scrolled into view and the scroll-spy
+         *    may select the first visible panel instead.
+         * Do NOT add a retry-on-mutation observer for either case — self-feeding observer
+         * risk (see popover ancestor-observer loop). Track as separate issues if needed.
+         */
+        if (this.stackContent) {
+            runInInjectionContext(this._injector, () => {
+                afterNextRender(() => {
+                    const activeTab = this._flatTabs$().find((t) => t.active);
+                    if (activeTab) {
+                        const panel = this.tabDirectives().find((tab) => tab.uId() === activeTab.uId);
+                        this._scrollToPanel(panel ?? null);
+                    }
+                });
+            });
         }
     }
 
@@ -392,16 +425,60 @@ export class IconTabBarComponent implements OnInit, TabList {
     /**
      * @hidden
      * @description generate IconTabItems from TabConfig array
+     *
+     * `nextMap` is threaded through the full recursion so nested id-bearing tabs
+     * are persisted across recomputes. Collision-free uId allocation is per-level:
+     * each recursion level tracks its own set of emitted uIds (the indexPrefix
+     * already namespaces siblings across levels, so cross-level collisions are
+     * impossible). A monotonic fallback counter replaces raw index so that inserting
+     * a tab before existing id-bearing tabs cannot produce duplicate keys.
      */
     private _generateTabBarItems(
         config: TabConfig[],
         indexPrefix = '',
         flatIndexRef?: FlatIndex,
-        parentUId?: string
+        parentUId?: string,
+        nextMap?: Map<string, string>
     ): IconTabBarItem[] {
+        const isRootCall = !flatIndexRef;
         flatIndexRef = flatIndexRef || { value: 0 };
-        return config.map((item, index) => {
-            const uId = `${indexPrefix}${index}`;
+
+        if (isRootCall) {
+            nextMap = new Map<string, string>();
+        }
+
+        // Per-level collision tracking: seed with uIds already retained at this level
+        const levelUsed = new Set<string>();
+        for (const item of config) {
+            const stableKey = item.id != null ? `id:${indexPrefix}${item.id}` : null;
+            if (stableKey) {
+                const retained = this._tabUidMap.get(stableKey);
+                if (retained) {
+                    levelUsed.add(retained);
+                }
+            }
+        }
+
+        let fallback = 0;
+
+        const items = config.map((item, index) => {
+            const stableKey = item.id != null ? `id:${indexPrefix}${item.id}` : `idx:${indexPrefix}${index}`;
+            let uId = this._tabUidMap.get(stableKey);
+
+            if (!uId) {
+                // Allocate a collision-free fallback uId at this level
+                let candidate = `${indexPrefix}${fallback}`;
+                while (levelUsed.has(candidate)) {
+                    fallback++;
+                    candidate = `${indexPrefix}${fallback}`;
+                }
+                fallback++;
+                uId = candidate;
+            }
+
+            nextMap!.set(stableKey, uId);
+            levelUsed.add(uId);
+
             item.color = item.color || 'default';
             const result: IconTabBarItem = {
                 ...item,
@@ -415,11 +492,18 @@ export class IconTabBarComponent implements OnInit, TabList {
                     item.subItems || [],
                     `${uId}${UNIQUE_KEY_SEPARATOR}`,
                     flatIndexRef,
-                    uId
+                    uId,
+                    nextMap
                 )
             };
             return result;
         });
+
+        if (isRootCall) {
+            this._tabUidMap = nextMap!;
+        }
+
+        return items;
     }
 
     /** @hidden Apply template mapping to tab configurations */
