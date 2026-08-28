@@ -243,18 +243,7 @@ export default {
         search: 'Rechercher'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: 'La valeur minimale du curseur de plage est {min}, la valeur maximale est {max}',
-        multipleHandle1ValuemaxDetails: 'La valeur est {value}',
-        multipleHandle1ValueminDetails: 'La valeur est {value}',
-        multipleHandle1ValueNowDetails: 'La valeur actuelle est {value}',
-        multipleHandle2MinMaxDetails: 'La valeur minimale du curseur de plage est {min}, la valeur maximale est {max}',
-        multipleHandle2ValuemaxDetails: 'La valeur est {value}',
-        multipleHandle2ValueminDetails: 'La valeur est {value}',
-        multipleHandle2ValueNowDetails: 'La valeur actuelle est {value}',
-        singleMinMaxDetails: 'La valeur minimale du curseur est {min}, la valeur maximale est {max}',
-        singleValuemaxDetails: 'La valeur est {value}',
-        singleValueminDetails: 'La valeur est {value}',
-        singleValueNowDetails: 'La valeur actuelle est {value}'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: 'Bouton de fractionnement',

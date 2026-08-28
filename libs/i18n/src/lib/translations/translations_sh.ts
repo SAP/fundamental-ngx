@@ -242,18 +242,7 @@ export default {
         search: 'Traži'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: 'Minimalna vrednost klizača raspona je {min}, maksimalna vrednost je {max}',
-        multipleHandle1ValuemaxDetails: 'Vrednost je {value}',
-        multipleHandle1ValueminDetails: 'Vrednost je {value}',
-        multipleHandle1ValueNowDetails: 'Trenutna vrednost je {value}',
-        multipleHandle2MinMaxDetails: 'Minimalna vrednost klizača raspona je {min}, maksimalna vrednost je {max}',
-        multipleHandle2ValuemaxDetails: 'Vrednost je {value}',
-        multipleHandle2ValueminDetails: 'Vrednost je {value}',
-        multipleHandle2ValueNowDetails: 'Trenutna vrednost je {value}',
-        singleMinMaxDetails: 'Minimalna vrednost klizača je {min}, maksimalna vrednost je {max}',
-        singleValuemaxDetails: 'Vrednost je {value}',
-        singleValueminDetails: 'Vrednost je {value}',
-        singleValueNowDetails: 'Trenutna vrednost je {value}'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: 'Dugme za deljenje',

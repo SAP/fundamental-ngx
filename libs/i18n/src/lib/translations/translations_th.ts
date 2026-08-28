@@ -241,18 +241,7 @@ export default {
         search: 'ค้นหา'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: 'ค่าต่ำสุดของแถบเลื่อนช่วงคือ {min} ค่าสูงสุดคือ {max}',
-        multipleHandle1ValuemaxDetails: 'ค่าคือ {value}',
-        multipleHandle1ValueminDetails: 'ค่าคือ {value}',
-        multipleHandle1ValueNowDetails: 'ค่าปัจจุบันคือ {value}',
-        multipleHandle2MinMaxDetails: 'ค่าต่ำสุดของแถบเลื่อนช่วงคือ {min} ค่าสูงสุดคือ {max}',
-        multipleHandle2ValuemaxDetails: 'ค่าคือ {value}',
-        multipleHandle2ValueminDetails: 'ค่าคือ {value}',
-        multipleHandle2ValueNowDetails: 'ค่าปัจจุบันคือ {value}',
-        singleMinMaxDetails: 'ค่าต่ำสุดของแถบเลื่อนคือ {min} ค่าสูงสุดคือ {max}',
-        singleValuemaxDetails: 'ค่าคือ {value}',
-        singleValueminDetails: 'ค่าคือ {value}',
-        singleValueNowDetails: 'ค่าปัจจุบันคือ {value}'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: "ปุ่ม 'แยก'",

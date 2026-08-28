@@ -242,18 +242,7 @@ export default {
         search: 'بحث'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: 'الحد الأدنى لقيمة شريط تمرير النطاق هو {min}، والحد الأقصى للقيمة هو {max}',
-        multipleHandle1ValuemaxDetails: 'القيمة هي {value}',
-        multipleHandle1ValueminDetails: 'القيمة هي {value}',
-        multipleHandle1ValueNowDetails: 'القيمة الحالية هي {value}',
-        multipleHandle2MinMaxDetails: 'الحد الأدنى لقيمة شريط تمرير النطاق هو {min}، والحد الأقصى للقيمة هو {max}',
-        multipleHandle2ValuemaxDetails: 'القيمة هي {value}',
-        multipleHandle2ValueminDetails: 'القيمة هي {value}',
-        multipleHandle2ValueNowDetails: 'القيمة الحالية هي {value}',
-        singleMinMaxDetails: 'الحد الأدنى لقيمة شريط التمرير هو {min}، والحد الأقصى للقيمة هو {max}',
-        singleValuemaxDetails: 'القيمة هي {value}',
-        singleValueminDetails: 'القيمة هي {value}',
-        singleValueNowDetails: 'القيمة الحالية هي {value}'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: 'الزر ’تقسيم‘',

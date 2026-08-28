@@ -242,18 +242,7 @@ export default {
         search: 'Buscar'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: 'El valor mínimo del slider de rango es {min}, el valor máximo es {max}',
-        multipleHandle1ValuemaxDetails: 'Valor es {value}',
-        multipleHandle1ValueminDetails: 'Valor es {value}',
-        multipleHandle1ValueNowDetails: 'El valor actual es {value}',
-        multipleHandle2MinMaxDetails: 'El valor mínimo del slider de rango es {min}, el valor máximo es {max}',
-        multipleHandle2ValuemaxDetails: 'Valor es {value}',
-        multipleHandle2ValueminDetails: 'Valor es {value}',
-        multipleHandle2ValueNowDetails: 'El valor actual es {value}',
-        singleMinMaxDetails: 'El valor mínimo del slider es {min}, el valor máximo es {max}',
-        singleValuemaxDetails: 'Valor es {value}',
-        singleValueminDetails: 'Valor es {value}',
-        singleValueNowDetails: 'El valor actual es {value}'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: 'Botón Dividir',

@@ -241,18 +241,7 @@ export default {
         search: 'Αναζήτηση'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: 'Ελάχιστη τιμή του slider εύρους είναι {min}, μέγιστη τιμή είναι {max}',
-        multipleHandle1ValuemaxDetails: 'Η τιμή είναι {value}',
-        multipleHandle1ValueminDetails: 'Η τιμή είναι {value}',
-        multipleHandle1ValueNowDetails: 'Τρέχουσα τιμή είναι {value}',
-        multipleHandle2MinMaxDetails: 'Ελάχιστη τιμή του slider εύρους είναι {min}, μέγιστη τιμή είναι {max}',
-        multipleHandle2ValuemaxDetails: 'Η τιμή είναι {value}',
-        multipleHandle2ValueminDetails: 'Η τιμή είναι {value}',
-        multipleHandle2ValueNowDetails: 'Τρέχουσα τιμή είναι {value}',
-        singleMinMaxDetails: 'Ελάχιστη τιμή του slider είναι {min}, μέγιστη τιμή είναι {max}',
-        singleValuemaxDetails: 'Η τιμή είναι {value}',
-        singleValueminDetails: 'Η τιμή είναι {value}',
-        singleValueNowDetails: 'Τρέχουσα τιμή είναι {value}'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: 'Κουμπί επιμερισμού',

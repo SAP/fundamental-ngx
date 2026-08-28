@@ -242,18 +242,7 @@ export default {
         search: 'Zoeken'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: 'Minimumwaarde voor schuifregelaar voor bereik is {min}, maximumwaarde is {max}',
-        multipleHandle1ValuemaxDetails: 'Waarde is {value}',
-        multipleHandle1ValueminDetails: 'Waarde is {value}',
-        multipleHandle1ValueNowDetails: 'Huidige waarde is {value}',
-        multipleHandle2MinMaxDetails: 'Minimumwaarde voor schuifregelaar voor bereik is {min}, maximumwaarde is {max}',
-        multipleHandle2ValuemaxDetails: 'Waarde is {value}',
-        multipleHandle2ValueminDetails: 'Waarde is {value}',
-        multipleHandle2ValueNowDetails: 'Huidige waarde is {value}',
-        singleMinMaxDetails: 'Minimumwaarde voor schuifregelaar is {min}, maximumwaarde is {max}',
-        singleValuemaxDetails: 'Waarde is {value}',
-        singleValueminDetails: 'Waarde is {value}',
-        singleValueNowDetails: 'Huidige waarde is {value}'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: 'Knop Splitsen',

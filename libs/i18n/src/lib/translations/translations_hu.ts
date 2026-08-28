@@ -242,18 +242,7 @@ export default {
         search: 'Keresés'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: 'A tartománycsúszka minimális értéke {min}, maximális értéke {max}',
-        multipleHandle1ValuemaxDetails: 'Az érték {value}',
-        multipleHandle1ValueminDetails: 'Az érték {value}',
-        multipleHandle1ValueNowDetails: 'Az aktuális érték {value}',
-        multipleHandle2MinMaxDetails: 'A tartománycsúszka minimális értéke {min}, maximális értéke {max}',
-        multipleHandle2ValuemaxDetails: 'Az érték {value}',
-        multipleHandle2ValueminDetails: 'Az érték {value}',
-        multipleHandle2ValueNowDetails: 'Az aktuális érték {value}',
-        singleMinMaxDetails: 'A csúszka minimális értéke {min}, maximális értéke {max}',
-        singleValuemaxDetails: 'Az érték {value}',
-        singleValueminDetails: 'Az érték {value}',
-        singleValueNowDetails: 'Az aktuális érték {value}'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: 'Felosztott gomb',

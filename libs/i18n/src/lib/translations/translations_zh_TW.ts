@@ -240,18 +240,7 @@ export default {
         search: '搜尋'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: '範圍滑桿最小值為 {min}、最大值為 {max}',
-        multipleHandle1ValuemaxDetails: '值為 {value}',
-        multipleHandle1ValueminDetails: '值為 {value}',
-        multipleHandle1ValueNowDetails: '目前值為 {value}',
-        multipleHandle2MinMaxDetails: '範圍滑桿最小值為 {min}、最大值為 {max}',
-        multipleHandle2ValuemaxDetails: '值為 {value}',
-        multipleHandle2ValueminDetails: '值為 {value}',
-        multipleHandle2ValueNowDetails: '目前值為 {value}',
-        singleMinMaxDetails: '滑桿最小值為 {min}、最大值為 {max}',
-        singleValuemaxDetails: '值為 {value}',
-        singleValueminDetails: '值為 {value}',
-        singleValueNowDetails: '目前值為 {value}'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: '拆分按鈕',

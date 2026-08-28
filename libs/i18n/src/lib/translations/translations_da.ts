@@ -241,18 +241,7 @@ export default {
         search: 'Søg'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: 'Intervalskyderens minimumværdi er {min}, maksimumværdi er {max}',
-        multipleHandle1ValuemaxDetails: 'Værdi er {value}',
-        multipleHandle1ValueminDetails: 'Værdi er {value}',
-        multipleHandle1ValueNowDetails: 'Aktuel værdi er {value}',
-        multipleHandle2MinMaxDetails: 'Intervalskyderens minimumværdi er {min}, maksimumværdi er {max}',
-        multipleHandle2ValuemaxDetails: 'Værdi er {value}',
-        multipleHandle2ValueminDetails: 'Værdi er {value}',
-        multipleHandle2ValueNowDetails: 'Aktuel værdi er {value}',
-        singleMinMaxDetails: 'Skyderens minimumværdi er {min}, maksimumværdi er {max}',
-        singleValuemaxDetails: 'Værdi er {value}',
-        singleValueminDetails: 'Værdi er {value}',
-        singleValueNowDetails: 'Aktuel værdi er {value}'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: 'Opdelt trykknap',

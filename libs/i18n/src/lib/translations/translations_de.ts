@@ -242,18 +242,7 @@ export default {
         search: 'Suchen'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: 'Mindestwert des Bereichsschiebereglers ist {min}, Höchstwert ist {max}',
-        multipleHandle1ValuemaxDetails: 'Wert ist {value}',
-        multipleHandle1ValueminDetails: 'Wert ist {value}',
-        multipleHandle1ValueNowDetails: 'Aktueller Wert ist {value}',
-        multipleHandle2MinMaxDetails: 'Mindestwert des Bereichsschiebereglers ist {min}, Höchstwert ist {max}',
-        multipleHandle2ValuemaxDetails: 'Wert ist {value}',
-        multipleHandle2ValueminDetails: 'Wert ist {value}',
-        multipleHandle2ValueNowDetails: 'Aktueller Wert ist {value}',
-        singleMinMaxDetails: 'Mindestwert des Schiebereglers ist {min}, Höchstwert ist {max}',
-        singleValuemaxDetails: 'Wert ist {value}',
-        singleValueminDetails: 'Wert ist {value}',
-        singleValueNowDetails: 'Aktueller Wert ist {value}'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: 'Trenndrucktaste',

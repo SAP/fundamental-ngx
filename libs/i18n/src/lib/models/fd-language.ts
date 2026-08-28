@@ -292,39 +292,8 @@ export interface FdLanguage {
         navigationButtonLabel: FdLanguageKey;
     };
     coreSlider: {
-        /**
-         * @param min
-         * @param max
-         */
-        singleMinMaxDetails: FdLanguageKey<{ min: number; max: number }>;
-        /** @param value */
-        singleValueminDetails: FdLanguageKey<{ value: number | string }>;
-        /** @param value */
-        singleValuemaxDetails: FdLanguageKey<{ value: number | string }>;
-        /** @param value */
-        singleValueNowDetails: FdLanguageKey<{ value: number | string }>;
-        /**
-         * @param min
-         * @param max
-         */
-        multipleHandle1MinMaxDetails: FdLanguageKey<{ min: number; max: number }>;
-        /** @param value */
-        multipleHandle1ValueminDetails: FdLanguageKey<{ value: number | string }>;
-        /** @param value */
-        multipleHandle1ValuemaxDetails: FdLanguageKey<{ value: number | string }>;
-        /** @param value */
-        multipleHandle1ValueNowDetails: FdLanguageKey<{ value: number | string }>;
-        /**
-         * @param min
-         * @param max
-         */
-        multipleHandle2MinMaxDetails: FdLanguageKey<{ min: number; max: number }>;
-        /** @param value */
-        multipleHandle2ValueminDetails: FdLanguageKey<{ value: number | string }>;
-        /** @param value */
-        multipleHandle2ValuemaxDetails: FdLanguageKey<{ value: number | string }>;
-        /** @param value */
-        multipleHandle2ValueNowDetails: FdLanguageKey<{ value: number | string }>;
+        /** Default aria-label value for Slider Handle */
+        ariaLabel: FdLanguageKey;
     };
     coreSplitButton: {
         expandButtonAriaLabel: FdLanguageKey;

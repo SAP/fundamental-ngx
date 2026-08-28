@@ -242,18 +242,7 @@ export default {
         search: 'Vyhľadávanie'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: 'Minimálna hodnota posúvača rozsahu je {min}, maximálna hodnota je {max}',
-        multipleHandle1ValuemaxDetails: 'Hodnota je {value}',
-        multipleHandle1ValueminDetails: 'Hodnota je {value}',
-        multipleHandle1ValueNowDetails: 'Aktuálna hodnota je {value}',
-        multipleHandle2MinMaxDetails: 'Minimálna hodnota posúvača rozsahu je {min}, maximálna hodnota je {max}',
-        multipleHandle2ValuemaxDetails: 'Hodnota je {value}',
-        multipleHandle2ValueminDetails: 'Hodnota je {value}',
-        multipleHandle2ValueNowDetails: 'Aktuálna hodnota je {value}',
-        singleMinMaxDetails: 'Minimálna hodnota posúvača je {min}, maximálna hodnota je {max}',
-        singleValuemaxDetails: 'Hodnota je {value}',
-        singleValueminDetails: 'Hodnota je {value}',
-        singleValueNowDetails: 'Aktuálna hodnota je {value}'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: 'Tlačidlo rozdelenia',

@@ -242,18 +242,7 @@ export default {
         search: '検索'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: '範囲スライダの最小値は{min}、最大値は{max}',
-        multipleHandle1ValuemaxDetails: '値は{value}',
-        multipleHandle1ValueminDetails: '値は{value}',
-        multipleHandle1ValueNowDetails: '現在の値は{value}',
-        multipleHandle2MinMaxDetails: '範囲スライダの最小値は{min}、最大値は{max}',
-        multipleHandle2ValuemaxDetails: '値は{value}',
-        multipleHandle2ValueminDetails: '値は{value}',
-        multipleHandle2ValueNowDetails: '現在の値は{value}',
-        singleMinMaxDetails: 'スライダの最小値は{min}、最大値は{max}',
-        singleValuemaxDetails: '値は{value}',
-        singleValueminDetails: '値は{value}',
-        singleValueNowDetails: '現在の値は{value}'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: '分割ボタン',
