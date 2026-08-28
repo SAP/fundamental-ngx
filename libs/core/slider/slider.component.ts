@@ -301,12 +301,6 @@ export class SliderComponent
     /** @hidden */
     _popoverInputFieldClass = `fd-slider-popover-input-${sliderId}`;
 
-    /**
-     * @hidden
-     * whether to use value with a prefix for announcing
-     */
-    _useSliderValuePrefix = true;
-
     /** @hidden */
     _handles = SliderRangeHandles;
 
@@ -662,7 +656,6 @@ export class SliderComponent
         if (newValue < this.min) {
             newValue = this.min;
         }
-        this._useSliderValuePrefix = false;
         this._cdr.markForCheck();
         const stepDiffArray = this._valuesBySteps
             .map((stepValue) => ({
@@ -962,17 +955,9 @@ export class SliderComponent
                 if (focused) {
                     this._popovers.forEach((popover) => popover.open());
                 } else {
-                    this._resetPrefix();
                     this._popovers.forEach((popover) => popover.close());
                 }
             });
-    }
-
-    /** @hidden reset default prefix on leaving the slider */
-    private _resetPrefix(): void {
-        // reset prefix string for slider current value that need to be announced
-        this._useSliderValuePrefix = true;
-        this._cdr.markForCheck();
     }
 
     /**
