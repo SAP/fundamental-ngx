@@ -35,10 +35,10 @@ export default {
         defaultTitle: '請稍候'
     },
     coreButton: {
-        attentionTypeDescription: 'Warning',
-        emphasizedTypeDescription: 'Default Action',
-        negativeTypeDescription: 'Negative Action',
-        positiveTypeDescription: 'Positive Action'
+        attentionTypeDescription: '警告',
+        emphasizedTypeDescription: '預設動作',
+        negativeTypeDescription: '負向動作',
+        positiveTypeDescription: '正向動作'
     },
     coreCalendar: {
         calendarDayViewDescription: '行事曆',
@@ -107,10 +107,10 @@ export default {
         moreLabel: '超出 {count} 個字元'
     },
     coreFormMessage: {
-        error: 'Invalid Entry',
-        information: 'Information',
-        success: 'Success',
-        warning: 'Warning'
+        error: '輸入無效',
+        information: '資訊',
+        success: '成功',
+        warning: '警告'
     },
     coreGridList: {
         filterBarCancelButtonTitle: '取消',
@@ -214,10 +214,10 @@ export default {
         totalResultsLabel: '{totalCount} 個結果'
     },
     coreProductSwitch: {
-        ariaLabel: '產品切換',
-        targetBlank: 'opens in a new browser tab',
-        targetParent: 'opens in the parent frame',
-        targetTop: 'opens in the full browser window'
+        ariaLabel: '應用程式啟動工具',
+        targetBlank: '在新的瀏覽器索引標籤中開啟',
+        targetParent: '在父系框架中開啟',
+        targetTop: '在完整瀏覽器視窗中開啟'
     },
     coreRadio: {
         readOnlyDescription: '此選項按鈕為唯讀且無法變更。'
@@ -630,7 +630,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: '升冪',
         P13SortDialogSortOrderSelectOptionDesc: '降冪',
         resetChangesButtonLabel: '重設',
-        resetConfirmationAnnouncement: 'Values Reset',
+        resetConfirmationAnnouncement: '已重設值',
         rowNavigateButtonTitle: '瀏覽',
         selectAllCheckboxLabel: '全選',
         selectAllCheckboxLongLabel: '核取方塊、未勾選、按一下以全選',
@@ -638,13 +638,13 @@ export default {
         selectSingleRow: '若要選擇列，請按空白鍵',
         settingsDialogHeader: '設定',
         showingBlankOfBlank: '顯示 {totalGrowingItemsCount}/{totalGrowingItemsCount}',
-        sortDialogAddSort: 'Add Sort Criterion',
+        sortDialogAddSort: '新增排序條件',
         sortDialogCancelBtnLabel: '取消',
         sortDialogConfirmBtnLabel: '確定',
-        sortDialogDelete: 'Remove Sort Criterion',
+        sortDialogDelete: '刪除排序條件',
         sortDialogHeader: '排序',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
+        sortDialogMoveUp: '上移',
+        sortDialogMoveDown: '下移',
         sortDialogNotSortedLabel: '(未排序)',
         sortDialogSortByHeader: '排序依據',
         sortDialogSortOrderAsc: '升冪',

@@ -35,10 +35,10 @@ export default {
         defaultTitle: 'Aguarde'
     },
     coreButton: {
-        attentionTypeDescription: 'Warning',
-        emphasizedTypeDescription: 'Default Action',
-        negativeTypeDescription: 'Negative Action',
-        positiveTypeDescription: 'Positive Action'
+        attentionTypeDescription: 'Aviso',
+        emphasizedTypeDescription: 'Ação padrão',
+        negativeTypeDescription: 'Ação negativa',
+        positiveTypeDescription: 'Ação positiva'
     },
     coreCalendar: {
         calendarDayViewDescription: 'Calendário',
@@ -107,10 +107,10 @@ export default {
         moreLabel: 'Mais de {count}'
     },
     coreFormMessage: {
-        error: 'Invalid Entry',
-        information: 'Information',
-        success: 'Success',
-        warning: 'Warning'
+        error: 'Entrada inválida',
+        information: 'Informação',
+        success: 'Êxito',
+        warning: 'Aviso'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'Cancelar',
@@ -215,10 +215,10 @@ export default {
         totalResultsLabel: '{totalCount} resultados'
     },
     coreProductSwitch: {
-        ariaLabel: 'Alternância de produtos',
-        targetBlank: 'opens in a new browser tab',
-        targetParent: 'opens in the parent frame',
-        targetTop: 'opens in the full browser window'
+        ariaLabel: 'Iniciador de aplicativo',
+        targetBlank: 'abre em uma nova aba do navegador',
+        targetParent: 'abre no quadro raiz',
+        targetTop: 'abre na janela completa do navegador'
     },
     coreRadio: {
         readOnlyDescription: 'Este botão de opção é somente leitura e não pode ser alterado.'
@@ -635,7 +635,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'Crescente',
         P13SortDialogSortOrderSelectOptionDesc: 'Decrescente',
         resetChangesButtonLabel: 'Redefinir',
-        resetConfirmationAnnouncement: 'Values Reset',
+        resetConfirmationAnnouncement: 'Redefinição de valores',
         rowNavigateButtonTitle: 'Navegar',
         selectAllCheckboxLabel: 'Selecionar tudo',
         selectAllCheckboxLongLabel: 'Caixa de seleção, desmarcado, clicar para selecionar tudo',
@@ -643,13 +643,13 @@ export default {
         selectSingleRow: 'Pressione a BARRA DE ESPAÇOS para selecionar a linha',
         settingsDialogHeader: 'Configurações',
         showingBlankOfBlank: 'Mostrando {totalGrowingItemsCount} de {totalGrowingItemsCount}',
-        sortDialogAddSort: 'Add Sort Criterion',
+        sortDialogAddSort: 'Adicionar critério de classificação',
         sortDialogCancelBtnLabel: 'Cancelar',
         sortDialogConfirmBtnLabel: 'OK',
-        sortDialogDelete: 'Remove Sort Criterion',
+        sortDialogDelete: 'Remover critério de classificação',
         sortDialogHeader: 'Classificar',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
+        sortDialogMoveUp: 'Mover para cima',
+        sortDialogMoveDown: 'Mover para baixo',
         sortDialogNotSortedLabel: '(Não classificado)',
         sortDialogSortByHeader: 'Classificar por',
         sortDialogSortOrderAsc: 'Crescente',

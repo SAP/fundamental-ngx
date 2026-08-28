@@ -36,10 +36,10 @@ export default {
         defaultTitle: 'Počakajte'
     },
     coreButton: {
-        attentionTypeDescription: 'Warning',
-        emphasizedTypeDescription: 'Default Action',
-        negativeTypeDescription: 'Negative Action',
-        positiveTypeDescription: 'Positive Action'
+        attentionTypeDescription: 'Opozorilo',
+        emphasizedTypeDescription: 'Privzeto dejanje',
+        negativeTypeDescription: 'Negativno dejanje',
+        positiveTypeDescription: 'Pozitivno dejanje'
     },
     coreCalendar: {
         calendarDayViewDescription: 'Koledar',
@@ -108,10 +108,10 @@ export default {
         moreLabel: 'Še {count}'
     },
     coreFormMessage: {
-        error: 'Invalid Entry',
-        information: 'Information',
-        success: 'Success',
-        warning: 'Warning'
+        error: 'Neveljaven vnos',
+        information: 'Informacije',
+        success: 'Uspešno',
+        warning: 'Opozorilo'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'Prekliči',
@@ -216,10 +216,10 @@ export default {
         totalResultsLabel: 'Št. rezultatov: {totalCount}'
     },
     coreProductSwitch: {
-        ariaLabel: 'Preklop med proizvodi',
-        targetBlank: 'opens in a new browser tab',
-        targetParent: 'opens in the parent frame',
-        targetTop: 'opens in the full browser window'
+        ariaLabel: 'Zaganjalnik aplikacij',
+        targetBlank: 'se odpre v novem zavihku brskalnika',
+        targetParent: 'se odpre v nadrejenem okvirju',
+        targetTop: 'se odpre v celotnem oknu brskalnika'
     },
     coreRadio: {
         readOnlyDescription: 'Ta izbirni gumb je samo za branje in ga ni mogoče spremeniti.'
@@ -634,7 +634,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'Naraščajoče',
         P13SortDialogSortOrderSelectOptionDesc: 'Padajoče',
         resetChangesButtonLabel: 'Ponastavi',
-        resetConfirmationAnnouncement: 'Values Reset',
+        resetConfirmationAnnouncement: 'Ponastavitev vrednosti',
         rowNavigateButtonTitle: 'Navigacija',
         selectAllCheckboxLabel: 'Izberi vse',
         selectAllCheckboxLongLabel: 'Potrditveno polje, neoznačeno, kliknite za izbiro vseh',
@@ -642,13 +642,13 @@ export default {
         selectSingleRow: 'Za izbiro vrstice pritisnite preslednico',
         settingsDialogHeader: 'Nastavitve',
         showingBlankOfBlank: 'Prikazano: {totalGrowingItemsCount} od {totalGrowingItemsCount}',
-        sortDialogAddSort: 'Add Sort Criterion',
+        sortDialogAddSort: 'Dodajanje kriterija razvrščanja',
         sortDialogCancelBtnLabel: 'Preklic',
         sortDialogConfirmBtnLabel: 'V redu',
-        sortDialogDelete: 'Remove Sort Criterion',
+        sortDialogDelete: 'Odstranitev kriterija razvrščanja',
         sortDialogHeader: 'Razvrsti',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
+        sortDialogMoveUp: 'Premik navzgor',
+        sortDialogMoveDown: 'Premik navzdol',
         sortDialogNotSortedLabel: '(Ni razvrščeno)',
         sortDialogSortByHeader: 'Razvrščanje po',
         sortDialogSortOrderAsc: 'Naraščajoče',

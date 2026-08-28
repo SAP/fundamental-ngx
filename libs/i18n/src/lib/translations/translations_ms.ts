@@ -35,10 +35,10 @@ export default {
         defaultTitle: 'Sila tunggu'
     },
     coreButton: {
-        attentionTypeDescription: 'Warning',
-        emphasizedTypeDescription: 'Default Action',
-        negativeTypeDescription: 'Negative Action',
-        positiveTypeDescription: 'Positive Action'
+        attentionTypeDescription: 'Amaran',
+        emphasizedTypeDescription: 'Tindakan Lalai',
+        negativeTypeDescription: 'Tindakan Negatif',
+        positiveTypeDescription: 'Tindakan Positif'
     },
     coreCalendar: {
         calendarDayViewDescription: 'Kalendar',
@@ -107,10 +107,10 @@ export default {
         moreLabel: '{count} lagi'
     },
     coreFormMessage: {
-        error: 'Invalid Entry',
-        information: 'Information',
-        success: 'Success',
-        warning: 'Warning'
+        error: 'Entri Tidak Sah',
+        information: 'Maklumat',
+        success: 'Berjaya',
+        warning: 'Amaran'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'Batalkan',
@@ -215,10 +215,10 @@ export default {
         totalResultsLabel: '{totalCount} Hasil'
     },
     coreProductSwitch: {
-        ariaLabel: 'Suis Produk',
-        targetBlank: 'opens in a new browser tab',
-        targetParent: 'opens in the parent frame',
-        targetTop: 'opens in the full browser window'
+        ariaLabel: 'Pelancar Aplikasi',
+        targetBlank: 'buka dalam tab pelayar baharu',
+        targetParent: 'buka dalam rangka induk',
+        targetTop: 'buka dalam tetingkap pelayar penuh'
     },
     coreRadio: {
         readOnlyDescription: 'Butang radio ini adalah baca sahaja dan tidak boleh diubah.'
@@ -632,7 +632,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'Menaik',
         P13SortDialogSortOrderSelectOptionDesc: 'Menurun',
         resetChangesButtonLabel: 'Tetapkan semula',
-        resetConfirmationAnnouncement: 'Values Reset',
+        resetConfirmationAnnouncement: 'Nilai Ditetapkan Semula',
         rowNavigateButtonTitle: 'Navigasi',
         selectAllCheckboxLabel: 'Pilih semua',
         selectAllCheckboxLongLabel: 'Kotak semak, dinyahtanda, klik untuk memilih semua',
@@ -640,13 +640,13 @@ export default {
         selectSingleRow: 'Untuk pilih baris, tekan BAR RUANG',
         settingsDialogHeader: 'Tetapan',
         showingBlankOfBlank: 'Menunjukkan {totalGrowingItemsCount} daripada {totalGrowingItemsCount}',
-        sortDialogAddSort: 'Add Sort Criterion',
+        sortDialogAddSort: 'Tambah Kriteria Isihan',
         sortDialogCancelBtnLabel: 'Batalkan',
         sortDialogConfirmBtnLabel: 'OK',
-        sortDialogDelete: 'Remove Sort Criterion',
+        sortDialogDelete: 'Keluarkan Kriteria Isihan',
         sortDialogHeader: 'Isih',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
+        sortDialogMoveUp: 'Gerakkan ke Atas',
+        sortDialogMoveDown: 'Gerakkan ke Bawah',
         sortDialogNotSortedLabel: '(Tidak Diisih)',
         sortDialogSortByHeader: 'Diisih Mengikut',
         sortDialogSortOrderAsc: 'Menaik',

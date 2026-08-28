@@ -35,10 +35,10 @@ export default {
         defaultTitle: 'Počkejte'
     },
     coreButton: {
-        attentionTypeDescription: 'Warning',
-        emphasizedTypeDescription: 'Default Action',
-        negativeTypeDescription: 'Negative Action',
-        positiveTypeDescription: 'Positive Action'
+        attentionTypeDescription: 'Varování',
+        emphasizedTypeDescription: 'Výchozí akce',
+        negativeTypeDescription: 'Negativní akce',
+        positiveTypeDescription: 'Pozitivní akce'
     },
     coreCalendar: {
         calendarDayViewDescription: 'Kalendář',
@@ -107,10 +107,10 @@ export default {
         moreLabel: 'o {count} více'
     },
     coreFormMessage: {
-        error: 'Invalid Entry',
-        information: 'Information',
-        success: 'Success',
-        warning: 'Warning'
+        error: 'Neplatné zadání',
+        information: 'Informace',
+        success: 'Úspěch',
+        warning: 'Varování'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'Zrušit',
@@ -215,10 +215,10 @@ export default {
         totalResultsLabel: 'Počet výsledků: {totalCount}'
     },
     coreProductSwitch: {
-        ariaLabel: 'Přepínač produktů',
-        targetBlank: 'opens in a new browser tab',
-        targetParent: 'opens in the parent frame',
-        targetTop: 'opens in the full browser window'
+        ariaLabel: 'Spouštěč aplikací',
+        targetBlank: 'otevře se na nové kartě prohlížeče',
+        targetParent: 'otevře se v nadřazeném rámci',
+        targetTop: 'otevře se v úplném okně prohlížeče'
     },
     coreRadio: {
         readOnlyDescription: 'Tento přepínač je jen ke čtení a nelze jej změnit.'
@@ -633,7 +633,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'Vzestupně',
         P13SortDialogSortOrderSelectOptionDesc: 'Sestupně',
         resetChangesButtonLabel: 'Resetovat',
-        resetConfirmationAnnouncement: 'Values Reset',
+        resetConfirmationAnnouncement: 'Reset hodnot',
         rowNavigateButtonTitle: 'Přejít',
         selectAllCheckboxLabel: 'Vybrat vše',
         selectAllCheckboxLongLabel: 'Zaškrtávací pole, nezaškrtnuto, kliknutím vyberete vše',
@@ -641,13 +641,13 @@ export default {
         selectSingleRow: 'Řádku vyberete stisknutím mezerníku',
         settingsDialogHeader: 'Nastavení',
         showingBlankOfBlank: 'Zobrazuje se {totalGrowingItemsCount} z {totalGrowingItemsCount}',
-        sortDialogAddSort: 'Add Sort Criterion',
+        sortDialogAddSort: 'Přidat kritérium řazení',
         sortDialogCancelBtnLabel: 'Zrušit',
         sortDialogConfirmBtnLabel: 'OK',
-        sortDialogDelete: 'Remove Sort Criterion',
+        sortDialogDelete: 'Odebrat kritérium řazení',
         sortDialogHeader: 'Řadit',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
+        sortDialogMoveUp: 'Přesunout nahoru',
+        sortDialogMoveDown: 'Přesunout dolů',
         sortDialogNotSortedLabel: '(Neseřazeno)',
         sortDialogSortByHeader: 'Řadit podle',
         sortDialogSortOrderAsc: 'Vzestupně',

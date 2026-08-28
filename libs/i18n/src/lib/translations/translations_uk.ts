@@ -35,10 +35,10 @@ export default {
         defaultTitle: 'Зачекайте'
     },
     coreButton: {
-        attentionTypeDescription: 'Warning',
-        emphasizedTypeDescription: 'Default Action',
-        negativeTypeDescription: 'Negative Action',
-        positiveTypeDescription: 'Positive Action'
+        attentionTypeDescription: 'Попередження',
+        emphasizedTypeDescription: 'Операція за промовчанням',
+        negativeTypeDescription: 'Негативна операція',
+        positiveTypeDescription: 'Позитивна операція'
     },
     coreCalendar: {
         calendarDayViewDescription: 'Календар',
@@ -107,10 +107,10 @@ export default {
         moreLabel: 'Ще {count}'
     },
     coreFormMessage: {
-        error: 'Invalid Entry',
-        information: 'Information',
-        success: 'Success',
-        warning: 'Warning'
+        error: 'Недійсний запис',
+        information: 'Інформація',
+        success: 'Успішно',
+        warning: 'Попередження'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'Скасувати',
@@ -215,10 +215,10 @@ export default {
         totalResultsLabel: 'Результатів: {totalCount}'
     },
     coreProductSwitch: {
-        ariaLabel: 'Перемикач продуктів',
-        targetBlank: 'opens in a new browser tab',
-        targetParent: 'opens in the parent frame',
-        targetTop: 'opens in the full browser window'
+        ariaLabel: 'Запуск застосунку',
+        targetBlank: 'відкриється в новій вкладці браузера',
+        targetParent: 'відкриється в батьківському фреймі',
+        targetTop: 'відкриється в повноекранному вікні браузера'
     },
     coreRadio: {
         readOnlyDescription: 'Цей перемикач доступний тільки для читання і не може бути змінений.'
@@ -634,7 +634,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'За зростанням',
         P13SortDialogSortOrderSelectOptionDesc: 'За спаданням',
         resetChangesButtonLabel: 'Скинути',
-        resetConfirmationAnnouncement: 'Values Reset',
+        resetConfirmationAnnouncement: 'Значення скинуто',
         rowNavigateButtonTitle: 'Перейти',
         selectAllCheckboxLabel: 'Вибрати все',
         selectAllCheckboxLongLabel: 'Поле для прапорця, прапорець знято, натисніть, щоб вибрати все',
@@ -642,13 +642,13 @@ export default {
         selectSingleRow: 'Для вибору рядка натисніть клавішу пробілу',
         settingsDialogHeader: 'Налаштування',
         showingBlankOfBlank: 'Показано {totalGrowingItemsCount} з {totalGrowingItemsCount}',
-        sortDialogAddSort: 'Add Sort Criterion',
+        sortDialogAddSort: 'Додати критерій сортування',
         sortDialogCancelBtnLabel: 'Скасувати',
         sortDialogConfirmBtnLabel: 'ОК',
-        sortDialogDelete: 'Remove Sort Criterion',
+        sortDialogDelete: 'Видалити критерій сортування',
         sortDialogHeader: 'Сортувати',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
+        sortDialogMoveUp: 'Перемістити вгору',
+        sortDialogMoveDown: 'Перемістити вниз',
         sortDialogNotSortedLabel: '(без сортування)',
         sortDialogSortByHeader: 'Сортувати за',
         sortDialogSortOrderAsc: 'За зростанням',

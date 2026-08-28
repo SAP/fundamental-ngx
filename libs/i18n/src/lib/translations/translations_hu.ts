@@ -36,10 +36,10 @@ export default {
         defaultTitle: 'Kis türelmet'
     },
     coreButton: {
-        attentionTypeDescription: 'Warning',
-        emphasizedTypeDescription: 'Default Action',
-        negativeTypeDescription: 'Negative Action',
-        positiveTypeDescription: 'Positive Action'
+        attentionTypeDescription: 'Figyelmeztetés',
+        emphasizedTypeDescription: 'Alapértelmezett művelet',
+        negativeTypeDescription: 'Negatív művelet',
+        positiveTypeDescription: 'Pozitív művelet'
     },
     coreCalendar: {
         calendarDayViewDescription: 'Naptár',
@@ -108,10 +108,10 @@ export default {
         moreLabel: 'további {count}'
     },
     coreFormMessage: {
-        error: 'Invalid Entry',
-        information: 'Information',
-        success: 'Success',
-        warning: 'Warning'
+        error: 'Érvénytelen bejegyzés',
+        information: 'Információ',
+        success: 'Sikeres',
+        warning: 'Figyelmeztetés'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'Mégse',
@@ -216,10 +216,10 @@ export default {
         totalResultsLabel: '{totalCount} találat'
     },
     coreProductSwitch: {
-        ariaLabel: 'Termékváltás',
-        targetBlank: 'opens in a new browser tab',
-        targetParent: 'opens in the parent frame',
-        targetTop: 'opens in the full browser window'
+        ariaLabel: 'Alkalmazásindító',
+        targetBlank: 'egy új böngészőlapon nyílik meg',
+        targetParent: 'a szülőkeretben nyílik meg',
+        targetTop: 'a teljes böngészőablakban nyílik meg'
     },
     coreRadio: {
         readOnlyDescription: 'Ez a választókapcsoló írásvédett, ezért nem módosítható.'
@@ -634,7 +634,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'Növekvő',
         P13SortDialogSortOrderSelectOptionDesc: 'Csökkenő',
         resetChangesButtonLabel: 'Alaphelyzetbe állítás',
-        resetConfirmationAnnouncement: 'Values Reset',
+        resetConfirmationAnnouncement: 'Értékek visszaállítva',
         rowNavigateButtonTitle: 'Navigálás',
         selectAllCheckboxLabel: 'Összes kiválasztása',
         selectAllCheckboxLongLabel: 'Jelölőnégyzet, nincs bejelölve, kattintson az összes kijelöléséhez',
@@ -642,13 +642,13 @@ export default {
         selectSingleRow: 'A sor kijelöléséhez nyomja meg a „szóköz” billentyűt',
         settingsDialogHeader: 'Beállítások',
         showingBlankOfBlank: '{totalGrowingItemsCount} / {totalGrowingItemsCount} látható',
-        sortDialogAddSort: 'Add Sort Criterion',
+        sortDialogAddSort: 'Rendezési feltétel hozzáadása',
         sortDialogCancelBtnLabel: 'Mégse',
         sortDialogConfirmBtnLabel: 'OK',
-        sortDialogDelete: 'Remove Sort Criterion',
+        sortDialogDelete: 'Rendezési feltétel eltávolítása',
         sortDialogHeader: 'Rendezés',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
+        sortDialogMoveUp: 'Mozgatás felfelé',
+        sortDialogMoveDown: 'Mozgatás lefelé',
         sortDialogNotSortedLabel: '(Nincs rendezve)',
         sortDialogSortByHeader: 'Rendezés alapja',
         sortDialogSortOrderAsc: 'Növekvő',

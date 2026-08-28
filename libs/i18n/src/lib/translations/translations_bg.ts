@@ -36,10 +36,10 @@ export default {
         defaultTitle: 'Моля, изчакайте'
     },
     coreButton: {
-        attentionTypeDescription: 'Warning',
-        emphasizedTypeDescription: 'Default Action',
-        negativeTypeDescription: 'Negative Action',
-        positiveTypeDescription: 'Positive Action'
+        attentionTypeDescription: 'Предупреждение',
+        emphasizedTypeDescription: 'Действие по подразбиране',
+        negativeTypeDescription: 'Отрицателно действие',
+        positiveTypeDescription: 'Положително действие'
     },
     coreCalendar: {
         calendarDayViewDescription: 'Календар',
@@ -108,10 +108,10 @@ export default {
         moreLabel: 'още {count}'
     },
     coreFormMessage: {
-        error: 'Invalid Entry',
-        information: 'Information',
-        success: 'Success',
-        warning: 'Warning'
+        error: 'Невалиден запис',
+        information: 'Информация',
+        success: 'Успешно',
+        warning: 'Предупреждение'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'Отказ',
@@ -216,10 +216,10 @@ export default {
         totalResultsLabel: '{totalCount} резултата'
     },
     coreProductSwitch: {
-        ariaLabel: 'Превключвател за продукти',
-        targetBlank: 'opens in a new browser tab',
-        targetParent: 'opens in the parent frame',
-        targetTop: 'opens in the full browser window'
+        ariaLabel: 'Програма за стартиране на приложение',
+        targetBlank: 'отваря нов таб на браузъра',
+        targetParent: 'отваря се във висшестоящата рамка',
+        targetTop: 'отваря се в пълния прозорец на браузъра'
     },
     coreRadio: {
         readOnlyDescription: 'Този радио бутон е само за четене и не може да се променя.'
@@ -634,7 +634,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'Възходящо',
         P13SortDialogSortOrderSelectOptionDesc: 'Низходящо',
         resetChangesButtonLabel: 'Изчистване',
-        resetConfirmationAnnouncement: 'Values Reset',
+        resetConfirmationAnnouncement: 'Повторно задаване на стойности',
         rowNavigateButtonTitle: 'Навигация',
         selectAllCheckboxLabel: 'Избиране на всички',
         selectAllCheckboxLongLabel: 'Поле за отметка: без отметка. Кликнете, за да изберете всичко',
@@ -642,13 +642,13 @@ export default {
         selectSingleRow: 'За избор на ред, натиснете ИНТЕРВАЛ',
         settingsDialogHeader: 'Настройки',
         showingBlankOfBlank: 'Виждате {totalGrowingItemsCount} от {totalGrowingItemsCount}',
-        sortDialogAddSort: 'Add Sort Criterion',
+        sortDialogAddSort: 'Добавяне на критерий за сортиране',
         sortDialogCancelBtnLabel: 'Отказ',
         sortDialogConfirmBtnLabel: 'ОК',
-        sortDialogDelete: 'Remove Sort Criterion',
+        sortDialogDelete: 'Премахване на критерия за сортиране',
         sortDialogHeader: 'Сортиране',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
+        sortDialogMoveUp: 'Преместване нагоре',
+        sortDialogMoveDown: 'Преместване надолу',
         sortDialogNotSortedLabel: '(Без сортиране)',
         sortDialogSortByHeader: 'Сортиране по',
         sortDialogSortOrderAsc: 'Възходящо',

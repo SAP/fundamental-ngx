@@ -35,10 +35,10 @@ export default {
         defaultTitle: '기다려 주십시오.'
     },
     coreButton: {
-        attentionTypeDescription: 'Warning',
-        emphasizedTypeDescription: 'Default Action',
-        negativeTypeDescription: 'Negative Action',
-        positiveTypeDescription: 'Positive Action'
+        attentionTypeDescription: '경고',
+        emphasizedTypeDescription: '기본 조치',
+        negativeTypeDescription: '부정적 조치',
+        positiveTypeDescription: '긍정적 조치'
     },
     coreCalendar: {
         calendarDayViewDescription: '달력',
@@ -107,10 +107,10 @@ export default {
         moreLabel: '{count} 이상'
     },
     coreFormMessage: {
-        error: 'Invalid Entry',
-        information: 'Information',
-        success: 'Success',
-        warning: 'Warning'
+        error: '유효하지 않은 엔트리',
+        information: '정보',
+        success: '성공',
+        warning: '경고'
     },
     coreGridList: {
         filterBarCancelButtonTitle: '취소',
@@ -194,7 +194,7 @@ export default {
         critical: '경고 발생',
         indicationColor: '표시 색',
         informative: '정보 항목',
-        negative: '잘못된 항목',
+        negative: '유효하지 않은 엔트리',
         positive: '입력이 검증되었습니다.'
     },
     coreOverflowLayout: {
@@ -215,10 +215,10 @@ export default {
         totalResultsLabel: '{totalCount}개 결과'
     },
     coreProductSwitch: {
-        ariaLabel: '제품 전환',
-        targetBlank: 'opens in a new browser tab',
-        targetParent: 'opens in the parent frame',
-        targetTop: 'opens in the full browser window'
+        ariaLabel: '앱 런처',
+        targetBlank: '새 브라우저 탭에서 열림',
+        targetParent: '상위 프레임에서 열림',
+        targetTop: '전체 브라우저 창에서 열림'
     },
     coreRadio: {
         readOnlyDescription: '이 라디오 버튼은 읽기 전용이므로 변경할 수 없습니다.'
@@ -450,7 +450,7 @@ export default {
     platformMultiCombobox: {
         inputGlyphAriaLabel: '옵션 선택',
         inputIconTitle: '옵션 선택',
-        invalidEntryError: '잘못된 엔트리',
+        invalidEntryError: '유효하지 않은 엔트리',
         mobileShowAllItemsButton: '모든 항목 표시',
         mobileShowSelectedItemsButton: '선택한 항목 표시'
     },
@@ -631,7 +631,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: '오름차순',
         P13SortDialogSortOrderSelectOptionDesc: '내림차순',
         resetChangesButtonLabel: '재설정',
-        resetConfirmationAnnouncement: 'Values Reset',
+        resetConfirmationAnnouncement: '값 재설정',
         rowNavigateButtonTitle: '탐색',
         selectAllCheckboxLabel: '모두 선택',
         selectAllCheckboxLongLabel: '확인란, 선택 취소됨, 클릭하여 모두 선택',
@@ -639,13 +639,13 @@ export default {
         selectSingleRow: '행을 선택하려면 스페이스바를 누르십시오.',
         settingsDialogHeader: '설정',
         showingBlankOfBlank: '{totalGrowingItemsCount}/{totalGrowingItemsCount} 표시',
-        sortDialogAddSort: 'Add Sort Criterion',
+        sortDialogAddSort: '정렬 기준 추가',
         sortDialogCancelBtnLabel: '취소',
         sortDialogConfirmBtnLabel: '확인',
-        sortDialogDelete: 'Remove Sort Criterion',
+        sortDialogDelete: '정렬 기준 제거',
         sortDialogHeader: '정렬',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
+        sortDialogMoveUp: '위로 이동',
+        sortDialogMoveDown: '아래로 이동',
         sortDialogNotSortedLabel: '(정렬 안 함)',
         sortDialogSortByHeader: '정렬 기준',
         sortDialogSortOrderAsc: '오름차순',

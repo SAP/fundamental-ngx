@@ -36,10 +36,10 @@ export default {
         defaultTitle: 'Sačekajte'
     },
     coreButton: {
-        attentionTypeDescription: 'Warning',
-        emphasizedTypeDescription: 'Default Action',
-        negativeTypeDescription: 'Negative Action',
-        positiveTypeDescription: 'Positive Action'
+        attentionTypeDescription: 'Upozorenje',
+        emphasizedTypeDescription: 'Standardna radnja',
+        negativeTypeDescription: 'Negativna radnja',
+        positiveTypeDescription: 'Pozitivna radnja'
     },
     coreCalendar: {
         calendarDayViewDescription: 'Kalendar',
@@ -108,10 +108,10 @@ export default {
         moreLabel: 'još {count}'
     },
     coreFormMessage: {
-        error: 'Invalid Entry',
-        information: 'Information',
-        success: 'Success',
-        warning: 'Warning'
+        error: 'Nevažeći unos',
+        information: 'Informacije',
+        success: 'Uspeh',
+        warning: 'Upozorenje'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'Otkaži',
@@ -216,10 +216,10 @@ export default {
         totalResultsLabel: '{totalCount} rezultata'
     },
     coreProductSwitch: {
-        ariaLabel: 'Zamena proizvoda',
-        targetBlank: 'opens in a new browser tab',
-        targetParent: 'opens in the parent frame',
-        targetTop: 'opens in the full browser window'
+        ariaLabel: 'Pokretač aplikacije',
+        targetBlank: 'otvara se u novoj kartici pretraživača',
+        targetParent: 'otvara se u nadređenom okviru',
+        targetTop: 'otvara se u celom prozoru pretraživača'
     },
     coreRadio: {
         readOnlyDescription: 'Ovo dugme odabira je samo za čitanje i ne može se promeniti.'
@@ -236,7 +236,7 @@ export default {
     coreShellbar: {
         assistiveTools: 'Asistivni alati',
         backButtonLabel: 'Nazad',
-        cancel: 'Odustani',
+        cancel: 'Otkaži',
         collapsedItemMenuLabel: 'Sažeti meni stavke',
         navigationButtonLabel: 'Usmeravanje',
         search: 'Traži'
@@ -462,7 +462,7 @@ export default {
     },
     platformSearchField: {
         allButtonLabel: 'Sve',
-        cancelLabel: 'Odustani',
+        cancelLabel: 'Otkaži',
         clearButtonTitle: 'Poništi traženje',
         counterLabel: 'Ukupni rezultati: {count}',
         deleteButtonAriaLabel: 'Ukloni',
@@ -536,7 +536,7 @@ export default {
         ariaLabel: 'Zameni unos'
     },
     platformTable: {
-        cancelBtnLabel: 'Odustani',
+        cancelBtnLabel: 'Otkaži',
         clearFilters: 'Obriši filtere',
         collapseAllAnnouncementLabel: 'Sažmi sve na šta se kliknulo',
         collapseRowButtonTitle: 'Sažmi red',
@@ -634,7 +634,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'Po rastućem redosledu',
         P13SortDialogSortOrderSelectOptionDesc: 'Po opadajućem redosledu',
         resetChangesButtonLabel: 'Ponovo postavi',
-        resetConfirmationAnnouncement: 'Values Reset',
+        resetConfirmationAnnouncement: 'Vrednosti ponovo postavljene',
         rowNavigateButtonTitle: 'Usmeri',
         selectAllCheckboxLabel: 'Odaberi sve',
         selectAllCheckboxLongLabel: 'Kvadratić za potvrdu, nije označeno, kliknite da biste odabrali sve',
@@ -642,13 +642,13 @@ export default {
         selectSingleRow: 'Da odaberete red, pritisnite SPACEBAR',
         settingsDialogHeader: 'Podešavanja',
         showingBlankOfBlank: 'Prikazuje se {totalGrowingItemsCount} od {totalGrowingItemsCount}',
-        sortDialogAddSort: 'Add Sort Criterion',
+        sortDialogAddSort: 'Dodaj kriterijum sortiranja',
         sortDialogCancelBtnLabel: 'Otkaži',
         sortDialogConfirmBtnLabel: 'OK',
-        sortDialogDelete: 'Remove Sort Criterion',
+        sortDialogDelete: 'Ukloni kriterijum sortiranja',
         sortDialogHeader: 'Sortiraj',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
+        sortDialogMoveUp: 'Pomeri gore',
+        sortDialogMoveDown: 'Pomeri dole',
         sortDialogNotSortedLabel: '(Nije sortirano)',
         sortDialogSortByHeader: 'Sortiraj po',
         sortDialogSortOrderAsc: 'Po rastućem redosledu',

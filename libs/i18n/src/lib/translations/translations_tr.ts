@@ -35,10 +35,10 @@ export default {
         defaultTitle: 'Lütfen bekleyin'
     },
     coreButton: {
-        attentionTypeDescription: 'Warning',
-        emphasizedTypeDescription: 'Default Action',
-        negativeTypeDescription: 'Negative Action',
-        positiveTypeDescription: 'Positive Action'
+        attentionTypeDescription: 'Uyarı',
+        emphasizedTypeDescription: 'Varsayılan Eylem',
+        negativeTypeDescription: 'Negatif Eylem',
+        positiveTypeDescription: 'Pozitif Eylem'
     },
     coreCalendar: {
         calendarDayViewDescription: 'Takvim',
@@ -107,10 +107,10 @@ export default {
         moreLabel: '{count} tane daha'
     },
     coreFormMessage: {
-        error: 'Invalid Entry',
-        information: 'Information',
-        success: 'Success',
-        warning: 'Warning'
+        error: 'Geçersiz Giriş',
+        information: 'Bilgi',
+        success: 'Başarılı',
+        warning: 'Uyarı'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'İptal',
@@ -215,10 +215,10 @@ export default {
         totalResultsLabel: '{totalCount} Sonuç'
     },
     coreProductSwitch: {
-        ariaLabel: 'Ürün Anahtarı',
-        targetBlank: 'opens in a new browser tab',
-        targetParent: 'opens in the parent frame',
-        targetTop: 'opens in the full browser window'
+        ariaLabel: 'Uygulama Başlatıcı',
+        targetBlank: 'yeni tarayıcı sekmesinde açılır',
+        targetParent: 'üst çerçevede açılır',
+        targetTop: 'tam tarayıcı penceresinde açılır'
     },
     coreRadio: {
         readOnlyDescription: 'Bu radyo düğmesi salt okunurdur ve değiştirilemez.'
@@ -634,7 +634,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'Artan',
         P13SortDialogSortOrderSelectOptionDesc: 'Azalan',
         resetChangesButtonLabel: 'Sıfırla',
-        resetConfirmationAnnouncement: 'Values Reset',
+        resetConfirmationAnnouncement: 'Değerleri Sıfırla',
         rowNavigateButtonTitle: 'Git',
         selectAllCheckboxLabel: 'Tümünü seç',
         selectAllCheckboxLongLabel: 'Onay kutusu, seçim kaldırıldı, tümünü seçmek için tıklayın',
@@ -642,13 +642,13 @@ export default {
         selectSingleRow: 'Satırı seçmek için boşluk tuşuna basın',
         settingsDialogHeader: 'Ayarlar',
         showingBlankOfBlank: 'Gösterilen: {totalGrowingItemsCount} / {totalGrowingItemsCount}',
-        sortDialogAddSort: 'Add Sort Criterion',
+        sortDialogAddSort: 'Sıralama Ölçütü Ekle',
         sortDialogCancelBtnLabel: 'İptal',
         sortDialogConfirmBtnLabel: 'Tamam',
-        sortDialogDelete: 'Remove Sort Criterion',
+        sortDialogDelete: 'Sıralama Ölçütünü Kaldır',
         sortDialogHeader: 'Sıralama',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
+        sortDialogMoveUp: 'Yukarıya Taşı',
+        sortDialogMoveDown: 'Aşağıya Taşı',
         sortDialogNotSortedLabel: '(Sıralanmamış)',
         sortDialogSortByHeader: 'Sıralama Ölçütü',
         sortDialogSortOrderAsc: 'Artan',
