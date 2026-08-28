@@ -5,7 +5,6 @@ import {
     ChangeDetectorRef,
     Component,
     ComponentRef,
-    effect,
     ElementRef,
     EventEmitter,
     forwardRef,
@@ -57,7 +56,7 @@ import { Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
 
 import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
-import { DynamicComponentService, FocusTrapService, Nullable } from '@fundamental-ngx/cdk/utils';
+import { DynamicComponentService, FocusTrapService, Nullable, onLocaleChange } from '@fundamental-ngx/cdk/utils';
 import { BarComponent, BarElementDirective, BarRightDirective } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
@@ -514,15 +513,12 @@ export class DatetimePickerComponent<D>
         // default model value
         this.date = _dateTimeAdapter.now();
 
-        let localeEffectInitialized = false;
-        effect(() => {
-            this._dateTimeAdapter.locale();
-            if (localeEffectInitialized && this._inputFieldDate) {
+        onLocaleChange(this._dateTimeAdapter, () => {
+            if (this._inputFieldDate) {
                 this._setInput(this.date);
                 this._calculateTimeOptions();
                 this._changeDetRef.markForCheck();
             }
-            localeEffectInitialized = true;
         });
     }
 
