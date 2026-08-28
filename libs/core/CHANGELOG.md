@@ -1,3 +1,13 @@
+## 0.64.2-rc.48 (2026-08-28)
+
+### 🩹 Fixes
+
+- **core:** improve Slider aria attributes ([#14497](https://github.com/SAP/fundamental-ngx/pull/14497))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.64.2-rc.47 (2026-08-28)
 
 ### 🩹 Fixes
