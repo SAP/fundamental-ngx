@@ -696,5 +696,88 @@ describe('PopoverService', () => {
 
             document.body.removeChild(orphan);
         });
+
+        // ---------------------------------------------------------------------------------------
+        // Regression: self-feeding reposition loop. updatePosition() writes `style` on the overlay's
+        // own position elements; the observer watches that subtree, so it reacts to its own writes
+        // and loops. The guard must ignore mutations inside the overlay while still repositioning
+        // for genuine external shifts (the sibling tests above).
+        describe('self-feeding reposition loop guard', () => {
+            it('should NOT call updatePosition for a style mutation originating inside its own overlay', () => {
+                service.open();
+                fixture.detectChanges();
+
+                const overlayElement = service['_overlayRef'].overlayElement;
+                // Simulate the mutation CDK itself emits when updatePosition() rewrites the
+                // overlay's position styles: an attribute change whose target is inside the overlay.
+                const selfCausedRecord = {
+                    type: 'attributes',
+                    attributeName: 'style',
+                    target: overlayElement
+                } as unknown as MutationRecord;
+
+                updatePositionSpy = jest.spyOn(service['_overlayRef'], 'updatePosition');
+
+                mutationCallback([selfCausedRecord], {} as MutationObserver);
+
+                // Reacting to our own style write is what re-arms the loop. It must be skipped.
+                expect(updatePositionSpy).not.toHaveBeenCalled();
+            });
+
+            it('should still reposition for a genuine sibling mutation outside the overlay', () => {
+                // Guard must be target-aware: real external layout shifts must still reposition.
+                service.open();
+                fixture.detectChanges();
+
+                updatePositionSpy = jest.spyOn(service['_overlayRef'], 'updatePosition');
+
+                const siblingRecord = {
+                    type: 'attributes',
+                    attributeName: 'style',
+                    target: component.siblingRef.nativeElement
+                } as unknown as MutationRecord;
+
+                mutationCallback([siblingRecord], {} as MutationObserver);
+
+                expect(updatePositionSpy).toHaveBeenCalled();
+            });
+
+            it('should NOT call updatePosition for a style mutation on the overlay position wrapper (parent of overlayElement)', () => {
+                // CDK writes the churning `style` on the position wrapper, not on overlayElement --
+                // and the wrapper is overlayElement's parent, nested under .cdk-overlay-container:
+                //
+                //   .cdk-overlay-container
+                //     └─ .cdk-overlay-connected-position-bounding-box   <- churning style writes
+                //          └─ .cdk-overlay-pane (= overlayElement)
+                //
+                // So a guard checking overlayElement.contains(target) misses the wrapper and the
+                // loop survives. This test reconstructs that ancestry to lock the container guard in.
+                service.open();
+                fixture.detectChanges();
+
+                const overlayElement = service['_overlayRef'].overlayElement;
+                const container = document.createElement('div');
+                container.className = 'cdk-overlay-container';
+                const boundingBox = document.createElement('div');
+                boundingBox.className = 'cdk-overlay-connected-position-bounding-box';
+                container.appendChild(boundingBox);
+                boundingBox.appendChild(overlayElement);
+                document.body.appendChild(container);
+
+                const wrapperRecord = {
+                    type: 'attributes',
+                    attributeName: 'style',
+                    target: boundingBox
+                } as unknown as MutationRecord;
+
+                updatePositionSpy = jest.spyOn(service['_overlayRef'], 'updatePosition');
+
+                mutationCallback([wrapperRecord], {} as MutationObserver);
+
+                expect(updatePositionSpy).not.toHaveBeenCalled();
+
+                container.remove();
+            });
+        });
     });
 });
