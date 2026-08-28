@@ -1,3 +1,13 @@
+## 0.64.2-rc.49 (2026-08-28)
+
+### 🚀 Features
+
+- **cdk, core:** add onLocaleChange helper and migrate datetime locale effects ([#14500](https://github.com/SAP/fundamental-ngx/pull/14500))
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.64.2-rc.48 (2026-08-28)
 
 This was a version bump only for cdk to align it with other projects, there were no code changes.
