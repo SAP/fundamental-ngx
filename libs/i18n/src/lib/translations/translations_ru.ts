@@ -36,10 +36,10 @@ export default {
         defaultTitle: 'Подождите'
     },
     coreButton: {
-        attentionTypeDescription: 'Warning',
-        emphasizedTypeDescription: 'Default Action',
-        negativeTypeDescription: 'Negative Action',
-        positiveTypeDescription: 'Positive Action'
+        attentionTypeDescription: 'Предупреждение',
+        emphasizedTypeDescription: 'Действие по умолчанию',
+        negativeTypeDescription: 'Отрицательное действие',
+        positiveTypeDescription: 'Положительное действие'
     },
     coreCalendar: {
         calendarDayViewDescription: 'Календарь',
@@ -108,10 +108,10 @@ export default {
         moreLabel: 'больше {count}'
     },
     coreFormMessage: {
-        error: 'Invalid Entry',
-        information: 'Information',
-        success: 'Success',
-        warning: 'Warning'
+        error: 'Недопустимый ввод',
+        information: 'Информация',
+        success: 'Успешно',
+        warning: 'Предупреждение'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'Отмена',
@@ -195,7 +195,7 @@ export default {
         critical: 'Выведено предупреждение',
         indicationColor: 'Цвет индикации',
         informative: 'Информативная запись',
-        negative: 'Недействительная запись',
+        negative: 'Недопустимый ввод',
         positive: 'Запись успешно проверена'
     },
     coreOverflowLayout: {
@@ -216,10 +216,10 @@ export default {
         totalResultsLabel: 'Результаты: {totalCount}'
     },
     coreProductSwitch: {
-        ariaLabel: 'Переключатель продуктов',
-        targetBlank: 'opens in a new browser tab',
-        targetParent: 'opens in the parent frame',
-        targetTop: 'opens in the full browser window'
+        ariaLabel: 'Программа запуска приложения',
+        targetBlank: 'открывается на новой вкладке браузера',
+        targetParent: 'открывается в родительском кадре',
+        targetTop: 'открывается в полном окне браузера'
     },
     coreRadio: {
         readOnlyDescription: 'Эта зависимая кнопка доступна только для чтения и не может быть изменена.'
@@ -452,7 +452,7 @@ export default {
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Опции выбора',
         inputIconTitle: 'Опции выбора',
-        invalidEntryError: 'Недействительная запись',
+        invalidEntryError: 'Недопустимый ввод',
         mobileShowAllItemsButton: 'Показать все позиции',
         mobileShowSelectedItemsButton: 'Показать выбранные позиции'
     },
@@ -634,7 +634,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'По восходящей',
         P13SortDialogSortOrderSelectOptionDesc: 'По нисходящей',
         resetChangesButtonLabel: 'Сбросить',
-        resetConfirmationAnnouncement: 'Values Reset',
+        resetConfirmationAnnouncement: 'Сброс значений',
         rowNavigateButtonTitle: 'Перейти',
         selectAllCheckboxLabel: 'Выбрать все',
         selectAllCheckboxLongLabel: 'Флажок, не выбрано, щелкнуть, чтобы выбрать все',
@@ -642,13 +642,13 @@ export default {
         selectSingleRow: 'Для выбора строки нажмите пробел',
         settingsDialogHeader: 'Настройки',
         showingBlankOfBlank: 'Отображение {totalGrowingItemsCount} из {totalGrowingItemsCount}',
-        sortDialogAddSort: 'Add Sort Criterion',
+        sortDialogAddSort: 'Добавить критерий сортировки',
         sortDialogCancelBtnLabel: 'Отмена',
         sortDialogConfirmBtnLabel: 'ОК',
-        sortDialogDelete: 'Remove Sort Criterion',
+        sortDialogDelete: 'Удалить критерий сортировки',
         sortDialogHeader: 'Сортировать',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
+        sortDialogMoveUp: 'Переместить выше',
+        sortDialogMoveDown: 'Переместить ниже',
         sortDialogNotSortedLabel: '(не отсортировано)',
         sortDialogSortByHeader: 'Сортировать по',
         sortDialogSortOrderAsc: 'По восходящей',

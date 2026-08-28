@@ -36,10 +36,10 @@ export default {
         defaultTitle: 'Bitte warten'
     },
     coreButton: {
-        attentionTypeDescription: 'Warning',
-        emphasizedTypeDescription: 'Default Action',
-        negativeTypeDescription: 'Negative Action',
-        positiveTypeDescription: 'Positive Action'
+        attentionTypeDescription: 'Warnung',
+        emphasizedTypeDescription: 'Standardaktion',
+        negativeTypeDescription: 'Negative Aktion',
+        positiveTypeDescription: 'Positive Aktion'
     },
     coreCalendar: {
         calendarDayViewDescription: 'Kalender',
@@ -108,10 +108,10 @@ export default {
         moreLabel: '{count} weitere'
     },
     coreFormMessage: {
-        error: 'Invalid Entry',
-        information: 'Information',
-        success: 'Success',
-        warning: 'Warning'
+        error: 'Ungültiger Eintrag',
+        information: 'Informationen',
+        success: 'Erfolg',
+        warning: 'Warnung'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'Abbrechen',
@@ -216,10 +216,10 @@ export default {
         totalResultsLabel: '{totalCount} Ergebnisse'
     },
     coreProductSwitch: {
-        ariaLabel: 'Product Switch',
-        targetBlank: 'opens in a new browser tab',
-        targetParent: 'opens in the parent frame',
-        targetTop: 'opens in the full browser window'
+        ariaLabel: 'App-Launcher',
+        targetBlank: 'wird auf neuer Browserregisterkarte geöffnet',
+        targetParent: 'wird im übergeordneten Rahmen geöffnet',
+        targetTop: 'wird im Browservollbild geöffnet'
     },
     coreRadio: {
         readOnlyDescription: 'Dieses Optionsfeld ist schreibgeschützt und kann nicht geändert werden.'
@@ -635,7 +635,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'Aufsteigend',
         P13SortDialogSortOrderSelectOptionDesc: 'Absteigend',
         resetChangesButtonLabel: 'Zurücksetzen',
-        resetConfirmationAnnouncement: 'Values Reset',
+        resetConfirmationAnnouncement: 'Werte zurückgesetzt',
         rowNavigateButtonTitle: 'Navigieren',
         selectAllCheckboxLabel: 'Alle auswählen',
         selectAllCheckboxLongLabel: 'Ankreuzfeld, nicht markiert, zur Auswahl aller Zeilen klicken',
@@ -643,13 +643,13 @@ export default {
         selectSingleRow: 'Um Zeile auszuwählen, Leertaste drücken',
         settingsDialogHeader: 'Einstellungen',
         showingBlankOfBlank: '{totalGrowingItemsCount} von {totalGrowingItemsCount} werden angezeigt',
-        sortDialogAddSort: 'Add Sort Criterion',
+        sortDialogAddSort: 'Sortierkriterium hinzufügen',
         sortDialogCancelBtnLabel: 'Abbrechen',
         sortDialogConfirmBtnLabel: 'OK',
-        sortDialogDelete: 'Remove Sort Criterion',
+        sortDialogDelete: 'Sortierkriterium entfernen',
         sortDialogHeader: 'Sortieren',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
+        sortDialogMoveUp: 'Nach oben verschieben',
+        sortDialogMoveDown: 'Nach unten verschieben',
         sortDialogNotSortedLabel: '(Nicht sortiert)',
         sortDialogSortByHeader: 'Sortieren nach',
         sortDialogSortOrderAsc: 'Aufsteigend',

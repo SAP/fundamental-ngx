@@ -36,10 +36,10 @@ export default {
         defaultTitle: 'يرجى الانتظار'
     },
     coreButton: {
-        attentionTypeDescription: 'Warning',
-        emphasizedTypeDescription: 'Default Action',
-        negativeTypeDescription: 'Negative Action',
-        positiveTypeDescription: 'Positive Action'
+        attentionTypeDescription: 'تحذير',
+        emphasizedTypeDescription: 'إجراء افتراضي',
+        negativeTypeDescription: 'إجراء سلبي',
+        positiveTypeDescription: 'إجراء إيجابي'
     },
     coreCalendar: {
         calendarDayViewDescription: 'التقويم',
@@ -108,10 +108,10 @@ export default {
         moreLabel: '{count} أكبر'
     },
     coreFormMessage: {
-        error: 'Invalid Entry',
-        information: 'Information',
-        success: 'Success',
-        warning: 'Warning'
+        error: 'إدخال غير صالح',
+        information: 'معلومات',
+        success: 'تم بنجاح',
+        warning: 'تحذير'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'إلغاء',
@@ -216,10 +216,10 @@ export default {
         totalResultsLabel: '{totalCount} من النتائج'
     },
     coreProductSwitch: {
-        ariaLabel: 'تبديل المنتج',
-        targetBlank: 'opens in a new browser tab',
-        targetParent: 'opens in the parent frame',
-        targetTop: 'opens in the full browser window'
+        ariaLabel: 'بادئ تشغيل التطبيقات',
+        targetBlank: 'يتم فتحه في علامة تبويب مستعرض جديدة',
+        targetParent: 'يتم فتحه في الإطار الأصل',
+        targetTop: 'يتم فتحه في نافذة مستعرض كاملة'
     },
     coreRadio: {
         readOnlyDescription: 'زر الاختيار هذا للقراءة فقط ولا يمكن تغييره.'
@@ -633,7 +633,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'تصاعدي',
         P13SortDialogSortOrderSelectOptionDesc: 'تنازلي',
         resetChangesButtonLabel: 'إعادة التعيين',
-        resetConfirmationAnnouncement: 'Values Reset',
+        resetConfirmationAnnouncement: 'تمت إعادة تعيين القيم',
         rowNavigateButtonTitle: 'تنقل',
         selectAllCheckboxLabel: 'تحديد الكل',
         selectAllCheckboxLongLabel: 'خانة الاختيار، غير محددة، انقر لتحديد الكل',
@@ -641,13 +641,13 @@ export default {
         selectSingleRow: 'لتحديد الصف، اضغط مفتاح المسافة',
         settingsDialogHeader: 'الإعدادات',
         showingBlankOfBlank: 'جارٍ إظهار {totalGrowingItemsCount} من {totalGrowingItemsCount}',
-        sortDialogAddSort: 'Add Sort Criterion',
+        sortDialogAddSort: 'إضافة معيار الترتيب',
         sortDialogCancelBtnLabel: 'إلغاء',
         sortDialogConfirmBtnLabel: 'موافق',
-        sortDialogDelete: 'Remove Sort Criterion',
+        sortDialogDelete: 'إزالة معيار الترتيب',
         sortDialogHeader: 'ترتيب',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
+        sortDialogMoveUp: 'نقل لأعلى',
+        sortDialogMoveDown: 'نقل لأسفل',
         sortDialogNotSortedLabel: '(لم يتم ترتيبه)',
         sortDialogSortByHeader: 'ترتيب حسب',
         sortDialogSortOrderAsc: 'تصاعدي',

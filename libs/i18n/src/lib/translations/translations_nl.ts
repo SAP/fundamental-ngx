@@ -36,10 +36,10 @@ export default {
         defaultTitle: 'Een ogenblik geduld'
     },
     coreButton: {
-        attentionTypeDescription: 'Warning',
-        emphasizedTypeDescription: 'Default Action',
-        negativeTypeDescription: 'Negative Action',
-        positiveTypeDescription: 'Positive Action'
+        attentionTypeDescription: 'Waarschuwing',
+        emphasizedTypeDescription: 'Standaardactie',
+        negativeTypeDescription: 'Negatieve actie',
+        positiveTypeDescription: 'Positieve actie'
     },
     coreCalendar: {
         calendarDayViewDescription: 'Kalender',
@@ -108,10 +108,10 @@ export default {
         moreLabel: 'nog {count}'
     },
     coreFormMessage: {
-        error: 'Invalid Entry',
-        information: 'Information',
-        success: 'Success',
-        warning: 'Warning'
+        error: 'Ongeldig gegeven',
+        information: 'Informatie',
+        success: 'Succesvol',
+        warning: 'Waarschuwing'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'Annuleren',
@@ -216,10 +216,10 @@ export default {
         totalResultsLabel: '{totalCount} resultaten'
     },
     coreProductSwitch: {
-        ariaLabel: 'Overstappen op ander product',
-        targetBlank: 'opens in a new browser tab',
-        targetParent: 'opens in the parent frame',
-        targetTop: 'opens in the full browser window'
+        ariaLabel: 'App-launcher',
+        targetBlank: 'wordt geopend in een nieuw browsertabblad',
+        targetParent: 'wordt geopend in het bovenliggende kader',
+        targetTop: 'wordt geopend in het volledige browservenster'
     },
     coreRadio: {
         readOnlyDescription: 'Dit keuzerondje is alleen-lezen en kan niet worden gewijzigd.'
@@ -635,7 +635,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'Oplopend',
         P13SortDialogSortOrderSelectOptionDesc: 'Aflopend',
         resetChangesButtonLabel: 'Opnieuw instellen',
-        resetConfirmationAnnouncement: 'Values Reset',
+        resetConfirmationAnnouncement: 'Waarden resetten',
         rowNavigateButtonTitle: 'Navigeren',
         selectAllCheckboxLabel: 'Alles selecteren',
         selectAllCheckboxLongLabel: 'Selectievakje, uitgeschakeld, klik om alles te selecteren',
@@ -643,13 +643,13 @@ export default {
         selectSingleRow: 'Druk op de spatiebalk om de rij te selecteren',
         settingsDialogHeader: 'Instellingen',
         showingBlankOfBlank: '{totalGrowingItemsCount} van {totalGrowingItemsCount} weergeven',
-        sortDialogAddSort: 'Add Sort Criterion',
+        sortDialogAddSort: 'Sorteercriterium toevoegen',
         sortDialogCancelBtnLabel: 'Annuleren',
         sortDialogConfirmBtnLabel: 'OK',
-        sortDialogDelete: 'Remove Sort Criterion',
+        sortDialogDelete: 'Sorteercriterium verwijderen',
         sortDialogHeader: 'Sorteren',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
+        sortDialogMoveUp: 'Omhoog',
+        sortDialogMoveDown: 'Omlaag',
         sortDialogNotSortedLabel: '(niet gesorteerd)',
         sortDialogSortByHeader: 'Sorteren op',
         sortDialogSortOrderAsc: 'Oplopend',

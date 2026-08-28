@@ -36,10 +36,10 @@ export default {
         defaultTitle: 'お待ちください'
     },
     coreButton: {
-        attentionTypeDescription: 'Warning',
-        emphasizedTypeDescription: 'Default Action',
-        negativeTypeDescription: 'Negative Action',
-        positiveTypeDescription: 'Positive Action'
+        attentionTypeDescription: '注意',
+        emphasizedTypeDescription: '既定のアクション',
+        negativeTypeDescription: 'ネガティブアクション',
+        positiveTypeDescription: 'ポジティブアクション'
     },
     coreCalendar: {
         calendarDayViewDescription: 'カレンダー',
@@ -108,10 +108,10 @@ export default {
         moreLabel: 'さらに表示 ({count})'
     },
     coreFormMessage: {
-        error: 'Invalid Entry',
-        information: 'Information',
-        success: 'Success',
-        warning: 'Warning'
+        error: 'エントリが無効です。',
+        information: '情報',
+        success: '正常終了',
+        warning: '注意'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'キャンセル',
@@ -216,10 +216,10 @@ export default {
         totalResultsLabel: '結果: {totalCount}件'
     },
     coreProductSwitch: {
-        ariaLabel: '製品切替',
-        targetBlank: 'opens in a new browser tab',
-        targetParent: 'opens in the parent frame',
-        targetTop: 'opens in the full browser window'
+        ariaLabel: 'アプリランチャー',
+        targetBlank: '新しいブラウザタブで開きます。',
+        targetParent: '親フレームで開きます。',
+        targetTop: '完全なブラウザウィンドウで開きます。'
     },
     coreRadio: {
         readOnlyDescription: 'このラジオボタンは読み取り専用のため変更できません。'
@@ -633,7 +633,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: '昇順',
         P13SortDialogSortOrderSelectOptionDesc: '降順',
         resetChangesButtonLabel: 'リセット',
-        resetConfirmationAnnouncement: 'Values Reset',
+        resetConfirmationAnnouncement: '値をリセット',
         rowNavigateButtonTitle: '移動',
         selectAllCheckboxLabel: 'すべて選択',
         selectAllCheckboxLongLabel: 'チェックボックス: チェックが外れています。クリックするとすべて選択します。',
@@ -642,13 +642,13 @@ export default {
         selectSingleRow: '行を選択するにはスペースキーを押します。',
         settingsDialogHeader: '設定',
         showingBlankOfBlank: '{totalGrowingItemsCount}/{totalGrowingItemsCount}件を表示中',
-        sortDialogAddSort: 'Add Sort Criterion',
+        sortDialogAddSort: '並べ替え基準を追加',
         sortDialogCancelBtnLabel: 'キャンセル',
         sortDialogConfirmBtnLabel: 'OK',
-        sortDialogDelete: 'Remove Sort Criterion',
+        sortDialogDelete: '並べ替え基準を削除',
         sortDialogHeader: '並べ替え',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
+        sortDialogMoveUp: '上に移動',
+        sortDialogMoveDown: '下に移動',
         sortDialogNotSortedLabel: '(並べ替えなし)',
         sortDialogSortByHeader: '並べ替え基準',
         sortDialogSortOrderAsc: '昇順',

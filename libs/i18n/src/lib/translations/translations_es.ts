@@ -36,10 +36,10 @@ export default {
         defaultTitle: 'Espere'
     },
     coreButton: {
-        attentionTypeDescription: 'Warning',
-        emphasizedTypeDescription: 'Default Action',
-        negativeTypeDescription: 'Negative Action',
-        positiveTypeDescription: 'Positive Action'
+        attentionTypeDescription: 'Advertencia',
+        emphasizedTypeDescription: 'Acción predeterminada',
+        negativeTypeDescription: 'Acción negativa',
+        positiveTypeDescription: 'Acción positiva'
     },
     coreCalendar: {
         calendarDayViewDescription: 'Calendario',
@@ -108,10 +108,10 @@ export default {
         moreLabel: '{count} más'
     },
     coreFormMessage: {
-        error: 'Invalid Entry',
-        information: 'Information',
-        success: 'Success',
-        warning: 'Warning'
+        error: 'Entrada no válida',
+        information: 'Información',
+        success: 'Correcto',
+        warning: 'Advertencia'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'Cancelar',
@@ -216,10 +216,10 @@ export default {
         totalResultsLabel: '{totalCount} resultados'
     },
     coreProductSwitch: {
-        ariaLabel: 'Cambiar producto',
-        targetBlank: 'opens in a new browser tab',
-        targetParent: 'opens in the parent frame',
-        targetTop: 'opens in the full browser window'
+        ariaLabel: 'Iniciador de aplicaciones',
+        targetBlank: 'se abre en una nueva pestaña',
+        targetParent: 'se abre en el marco superior',
+        targetTop: 'se abre en la ventana completa del navegador'
     },
     coreRadio: {
         readOnlyDescription: 'Este botón de selección es de solo lectura y no se puede modificar.'
@@ -635,7 +635,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'Ascendente',
         P13SortDialogSortOrderSelectOptionDesc: 'Descendente',
         resetChangesButtonLabel: 'Restablecer',
-        resetConfirmationAnnouncement: 'Values Reset',
+        resetConfirmationAnnouncement: 'Restablecimiento de valores',
         rowNavigateButtonTitle: 'Navegar',
         selectAllCheckboxLabel: 'Seleccionar todos',
         selectAllCheckboxLongLabel: 'Casilla de verificación, sin seleccionar, hacer clic para seleccionar todo',
@@ -643,13 +643,13 @@ export default {
         selectSingleRow: 'Pulse la barra de espaciado para seleccionar líneas',
         settingsDialogHeader: 'Configuración',
         showingBlankOfBlank: 'Mostrando {totalGrowingItemsCount} de {totalGrowingItemsCount}',
-        sortDialogAddSort: 'Add Sort Criterion',
+        sortDialogAddSort: 'Añadir criterio de clasificación',
         sortDialogCancelBtnLabel: 'Cancelar',
         sortDialogConfirmBtnLabel: 'Aceptar',
-        sortDialogDelete: 'Remove Sort Criterion',
+        sortDialogDelete: 'Eliminar criterios de clasificación',
         sortDialogHeader: 'Ordenar',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
+        sortDialogMoveUp: 'Subir',
+        sortDialogMoveDown: 'Bajar',
         sortDialogNotSortedLabel: '(No ordenado)',
         sortDialogSortByHeader: 'Ordenar por',
         sortDialogSortOrderAsc: 'Ascendente',

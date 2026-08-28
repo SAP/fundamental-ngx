@@ -34,10 +34,10 @@ export default {
         defaultTitle: '请等待'
     },
     coreButton: {
-        attentionTypeDescription: 'Warning',
-        emphasizedTypeDescription: 'Default Action',
-        negativeTypeDescription: 'Negative Action',
-        positiveTypeDescription: 'Positive Action'
+        attentionTypeDescription: '警告',
+        emphasizedTypeDescription: '默认操作',
+        negativeTypeDescription: '消极操作',
+        positiveTypeDescription: '积极操作'
     },
     coreCalendar: {
         calendarDayViewDescription: '日历',
@@ -106,10 +106,10 @@ export default {
         moreLabel: '超出 {count} 个字符'
     },
     coreFormMessage: {
-        error: 'Invalid Entry',
-        information: 'Information',
-        success: 'Success',
-        warning: 'Warning'
+        error: '无效条目',
+        information: '信息',
+        success: '成功',
+        warning: '警告'
     },
     coreGridList: {
         filterBarCancelButtonTitle: '取消',
@@ -213,10 +213,10 @@ export default {
         totalResultsLabel: '{totalCount} 个结果'
     },
     coreProductSwitch: {
-        ariaLabel: '产品切换',
-        targetBlank: 'opens in a new browser tab',
-        targetParent: 'opens in the parent frame',
-        targetTop: 'opens in the full browser window'
+        ariaLabel: '应用启动程序',
+        targetBlank: '将在新的浏览器选项卡中打开',
+        targetParent: '在父框架中打开',
+        targetTop: '在完整浏览器窗口中打开'
     },
     coreRadio: {
         readOnlyDescription: '此单选按钮为只读，无法更改。'
@@ -629,7 +629,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: '升序',
         P13SortDialogSortOrderSelectOptionDesc: '降序',
         resetChangesButtonLabel: '重置',
-        resetConfirmationAnnouncement: 'Values Reset',
+        resetConfirmationAnnouncement: '已重置值',
         rowNavigateButtonTitle: '导航',
         selectAllCheckboxLabel: '全选',
         selectAllCheckboxLongLabel: '复选框，未选中，单击以全部选中',
@@ -637,13 +637,13 @@ export default {
         selectSingleRow: '要选择行，请按空格键',
         settingsDialogHeader: '设置',
         showingBlankOfBlank: '显示 {totalGrowingItemsCount}/{totalGrowingItemsCount}',
-        sortDialogAddSort: 'Add Sort Criterion',
+        sortDialogAddSort: '添加排序条件',
         sortDialogCancelBtnLabel: '取消',
         sortDialogConfirmBtnLabel: '确定',
-        sortDialogDelete: 'Remove Sort Criterion',
+        sortDialogDelete: '移除排序条件',
         sortDialogHeader: '排序',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
+        sortDialogMoveUp: '上移',
+        sortDialogMoveDown: '下移',
         sortDialogNotSortedLabel: '（未排序）',
         sortDialogSortByHeader: '排序方式',
         sortDialogSortOrderAsc: '升序',

@@ -35,10 +35,10 @@ export default {
         defaultTitle: 'Vent venligst'
     },
     coreButton: {
-        attentionTypeDescription: 'Warning',
-        emphasizedTypeDescription: 'Default Action',
-        negativeTypeDescription: 'Negative Action',
-        positiveTypeDescription: 'Positive Action'
+        attentionTypeDescription: 'Advarsel',
+        emphasizedTypeDescription: 'Standardhandling',
+        negativeTypeDescription: 'Negativ handling',
+        positiveTypeDescription: 'Positiv handling'
     },
     coreCalendar: {
         calendarDayViewDescription: 'Kalender',
@@ -107,10 +107,10 @@ export default {
         moreLabel: '{count} mere'
     },
     coreFormMessage: {
-        error: 'Invalid Entry',
-        information: 'Information',
-        success: 'Success',
-        warning: 'Warning'
+        error: 'Ugyldig indtastning',
+        information: 'Oplysninger',
+        success: 'Gennemført',
+        warning: 'Advarsel'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'Annuller',
@@ -215,10 +215,10 @@ export default {
         totalResultsLabel: '{totalCount} Resultater'
     },
     coreProductSwitch: {
-        ariaLabel: 'Produktskift',
-        targetBlank: 'opens in a new browser tab',
-        targetParent: 'opens in the parent frame',
-        targetTop: 'opens in the full browser window'
+        ariaLabel: 'App-launcher',
+        targetBlank: 'åbner i en ny browserfane',
+        targetParent: 'åbner i den overordnede ramme',
+        targetTop: 'åbner i hele browservinduet'
     },
     coreRadio: {
         readOnlyDescription: 'Denne valgknap er skrivebeskyttet og kan ikke ændres.'
@@ -633,7 +633,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'Stigende',
         P13SortDialogSortOrderSelectOptionDesc: 'Faldende',
         resetChangesButtonLabel: 'Nulstil',
-        resetConfirmationAnnouncement: 'Values Reset',
+        resetConfirmationAnnouncement: 'Nulstilling af værdier',
         rowNavigateButtonTitle: 'Naviger',
         selectAllCheckboxLabel: 'Vælg alle',
         selectAllCheckboxLongLabel: 'Afkrydsningsfelt, ikke-markeret, klik for at markere alle',
@@ -641,13 +641,13 @@ export default {
         selectSingleRow: 'Tryk på mellemrumstasten for at vælge række',
         settingsDialogHeader: 'Indstillinger',
         showingBlankOfBlank: 'Viser {totalGrowingItemsCount} af {totalGrowingItemsCount}',
-        sortDialogAddSort: 'Add Sort Criterion',
+        sortDialogAddSort: 'Tilføj sorteringskriterium',
         sortDialogCancelBtnLabel: 'Annuller',
         sortDialogConfirmBtnLabel: 'OK',
-        sortDialogDelete: 'Remove Sort Criterion',
+        sortDialogDelete: 'Fjern sorteringskriterium',
         sortDialogHeader: 'Sortér',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
+        sortDialogMoveUp: 'Flyt op',
+        sortDialogMoveDown: 'Flyt ned',
         sortDialogNotSortedLabel: '(Ikke sorteret)',
         sortDialogSortByHeader: 'Sortér efter',
         sortDialogSortOrderAsc: 'Stigende',
