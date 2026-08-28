@@ -1,8 +1,9 @@
 import { Component, signal } from '@angular/core';
 import type { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
+import { SearchScope } from '@fundamental-ngx/ui5-webcomponents-fiori/search-scope';
 import { ShellBar } from '@fundamental-ngx/ui5-webcomponents-fiori/shell-bar';
+import { ShellBarSearch } from '@fundamental-ngx/ui5-webcomponents-fiori/shell-bar-search';
 import { Avatar } from '@fundamental-ngx/ui5-webcomponents/avatar';
-import { Input } from '@fundamental-ngx/ui5-webcomponents/input';
 import { SuggestionItem } from '@fundamental-ngx/ui5-webcomponents/suggestion-item';
 
 // Import Fundamental Styles
@@ -16,15 +17,16 @@ import '@ui5/webcomponents-icons/dist/search.js';
     selector: 'ui5-doc-shellbar-with-search-sample',
     templateUrl: './with-search-sample.html',
     standalone: true,
-    imports: [ShellBar, Avatar, Input, SuggestionItem]
+    imports: [ShellBar, Avatar, ShellBarSearch, SearchScope, SuggestionItem]
 })
 export class WithSearchSample {
     primaryTitle = signal('My Application');
     searchValue = signal('');
 
     suggestions = signal(['Product A', 'Product B', 'Service C', 'Documentation', 'Settings']);
+    searchScopes = signal(['Products', 'Services', 'Documentation', 'All']);
 
-    onSearchInput(event: UI5WrapperCustomEvent<Input, 'ui5Input'>): void {
+    onSearchInput(event: UI5WrapperCustomEvent<ShellBarSearch, 'ui5Input'>): void {
         console.log(`Input value changed: ${event.currentTarget.value}.`);
     }
 

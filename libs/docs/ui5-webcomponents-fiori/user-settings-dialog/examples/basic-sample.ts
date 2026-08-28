@@ -193,6 +193,10 @@ export class BasicSample {
         { text: '1234,56', additionalText: 'SI/SO Format' }
     ]);
 
+    handleEditAccountsClick(event: any): void {
+        console.log(event);
+    }
+
     onProfileClick(): void {
         this.menuOpen.set(true);
     }

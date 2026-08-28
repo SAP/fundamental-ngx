@@ -5,16 +5,18 @@
         (ui5SearchFieldToggle)="onSearchFieldToggle($event)"
         (ui5SearchButtonClick)="onSearchButtonClick()"
     >
-        <ui5-input
+        <ui5-shellbar-search
             slot="searchField"
             placeholder="Search..."
             [value]="searchValue()"
             (ui5Input)="onSearchInput($event)"
         >
-            @for (suggestion of suggestions(); track suggestion) {
+            @for (scope of searchScopes(); track scope) {
+            <ui5-search-scope slot="scopes" [text]="scope"></ui5-search-scope>
+            } @for (suggestion of suggestions(); track suggestion) {
             <ui5-suggestion-item [text]="suggestion"></ui5-suggestion-item>
             }
-        </ui5-input>
+        </ui5-shellbar-search>
         <ui5-avatar slot="profile" icon="customer" colorScheme="Accent1"></ui5-avatar>
     </ui5-shellbar>
 </div>
