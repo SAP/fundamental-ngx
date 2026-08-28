@@ -36,10 +36,10 @@ export default {
         defaultTitle: 'Vent litt'
     },
     coreButton: {
-        attentionTypeDescription: 'Warning',
-        emphasizedTypeDescription: 'Default Action',
-        negativeTypeDescription: 'Negative Action',
-        positiveTypeDescription: 'Positive Action'
+        attentionTypeDescription: 'Advarsel',
+        emphasizedTypeDescription: 'Standardhandling',
+        negativeTypeDescription: 'Negativ handling',
+        positiveTypeDescription: 'Positiv handling'
     },
     coreCalendar: {
         calendarDayViewDescription: 'Kalender',
@@ -108,10 +108,10 @@ export default {
         moreLabel: '{count} til'
     },
     coreFormMessage: {
-        error: 'Invalid Entry',
-        information: 'Information',
-        success: 'Success',
-        warning: 'Warning'
+        error: 'Ugyldige data',
+        information: 'Informasjon',
+        success: 'Utført',
+        warning: 'Advarsel'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'Avbryt',
@@ -216,10 +216,10 @@ export default {
         totalResultsLabel: '{totalCount} resultater'
     },
     coreProductSwitch: {
-        ariaLabel: 'Produktindikator',
-        targetBlank: 'opens in a new browser tab',
-        targetParent: 'opens in the parent frame',
-        targetTop: 'opens in the full browser window'
+        ariaLabel: 'Appstarter',
+        targetBlank: 'åpnes i et nytt faneark i nettleseren',
+        targetParent: 'åpnes i den overordnede rammen',
+        targetTop: 'åpnes i hele nettleservinduet'
     },
     coreRadio: {
         readOnlyDescription: 'Denne valgknappen er skrivebeskyttet og kan ikke endres.'
@@ -242,18 +242,7 @@ export default {
         search: 'Søk'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: 'Minimumsverdi for intervallglidebryter er {min}, maksimumsverdi er {max}',
-        multipleHandle1ValuemaxDetails: 'Verdien er {value}',
-        multipleHandle1ValueminDetails: 'Verdien er {value}',
-        multipleHandle1ValueNowDetails: 'Aktuell verdi er {value}',
-        multipleHandle2MinMaxDetails: 'Minimumsverdi for intervallglidebryter er {min}, maksimumsverdi er {max}',
-        multipleHandle2ValuemaxDetails: 'Verdien er {value}',
-        multipleHandle2ValueminDetails: 'Verdien er {value}',
-        multipleHandle2ValueNowDetails: 'Aktuell verdi er {value}',
-        singleMinMaxDetails: 'Minimumsverdi for glidebryter er {min}, maksimumsverdi er {max}',
-        singleValuemaxDetails: 'Verdien er {value}',
-        singleValueminDetails: 'Verdien er {value}',
-        singleValueNowDetails: 'Aktuell verdi er {value}'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: 'Oppdelt knapp',
@@ -635,7 +624,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'Stigende',
         P13SortDialogSortOrderSelectOptionDesc: 'Synkende',
         resetChangesButtonLabel: 'Tilbakestill',
-        resetConfirmationAnnouncement: 'Values Reset',
+        resetConfirmationAnnouncement: 'Verdier tilbakestilt',
         rowNavigateButtonTitle: 'Naviger',
         selectAllCheckboxLabel: 'Merk alle',
         selectAllCheckboxLongLabel: 'Avmerkingsboks, ikke merket av, klikk for å velge alle',
@@ -643,13 +632,13 @@ export default {
         selectSingleRow: 'Trykk på mellomromstast for å merke rad',
         settingsDialogHeader: 'Innstillinger',
         showingBlankOfBlank: 'Viser {totalGrowingItemsCount} av {totalGrowingItemsCount}',
-        sortDialogAddSort: 'Add Sort Criterion',
+        sortDialogAddSort: 'Legg til sorteringskriterium',
         sortDialogCancelBtnLabel: 'Avbryt',
         sortDialogConfirmBtnLabel: 'OK',
-        sortDialogDelete: 'Remove Sort Criterion',
+        sortDialogDelete: 'Fjern sorteringskriterium',
         sortDialogHeader: 'Sorter',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
+        sortDialogMoveUp: 'Flytt opp',
+        sortDialogMoveDown: 'Flytt ned',
         sortDialogNotSortedLabel: '(Ikke sortert)',
         sortDialogSortByHeader: 'Sorter etter',
         sortDialogSortOrderAsc: 'Stigende',

@@ -36,10 +36,10 @@ export default {
         defaultTitle: 'Proszę czekać'
     },
     coreButton: {
-        attentionTypeDescription: 'Warning',
-        emphasizedTypeDescription: 'Default Action',
-        negativeTypeDescription: 'Negative Action',
-        positiveTypeDescription: 'Positive Action'
+        attentionTypeDescription: 'Ostrzeżenie',
+        emphasizedTypeDescription: 'Czynność domyślna',
+        negativeTypeDescription: 'Czynność negatywna',
+        positiveTypeDescription: 'Czynność pozytywna'
     },
     coreCalendar: {
         calendarDayViewDescription: 'Kalendarz',
@@ -108,10 +108,10 @@ export default {
         moreLabel: '{count} więcej'
     },
     coreFormMessage: {
-        error: 'Invalid Entry',
-        information: 'Information',
-        success: 'Success',
-        warning: 'Warning'
+        error: 'Nieprawidłowy wpis',
+        information: 'Informacja',
+        success: 'Sukces',
+        warning: 'Ostrzeżenie'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'Anuluj',
@@ -216,10 +216,10 @@ export default {
         totalResultsLabel: '{totalCount} wyniki(-ów)'
     },
     coreProductSwitch: {
-        ariaLabel: 'Przełącznik produktu',
-        targetBlank: 'opens in a new browser tab',
-        targetParent: 'opens in the parent frame',
-        targetTop: 'opens in the full browser window'
+        ariaLabel: 'App Launcher',
+        targetBlank: 'otwiera się w nowej karcie przeglądarki',
+        targetParent: 'otwiera się w ramce nadrzędnej',
+        targetTop: 'otwiera się w pełnym oknie przeglądarki'
     },
     coreRadio: {
         readOnlyDescription: 'Ten przycisk jest tylko do odczytu i nie można go zmienić.'
@@ -242,18 +242,7 @@ export default {
         search: 'Wyszukiwanie'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: 'Minimalna wartość suwaka zakresu to {min}, maksymalna wartość to {max}',
-        multipleHandle1ValuemaxDetails: 'Wartość to {value}',
-        multipleHandle1ValueminDetails: 'Wartość to {value}',
-        multipleHandle1ValueNowDetails: 'Bieżąca wartość to {value}',
-        multipleHandle2MinMaxDetails: 'Minimalna wartość suwaka zakresu to {min}, maksymalna wartość to {max}',
-        multipleHandle2ValuemaxDetails: 'Wartość to {value}',
-        multipleHandle2ValueminDetails: 'Wartość to {value}',
-        multipleHandle2ValueNowDetails: 'Bieżąca wartość to {value}',
-        singleMinMaxDetails: 'Minimalna wartość suwaka to {min}, maksymalna wartość to {max}',
-        singleValuemaxDetails: 'Wartość to {value}',
-        singleValueminDetails: 'Wartość to {value}',
-        singleValueNowDetails: 'Bieżąca wartość to {value}'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: 'Przycisk podzielony na dwie części',
@@ -634,7 +623,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'Rosnąco',
         P13SortDialogSortOrderSelectOptionDesc: 'Malejąco',
         resetChangesButtonLabel: 'Resetuj',
-        resetConfirmationAnnouncement: 'Values Reset',
+        resetConfirmationAnnouncement: 'Reset wartości',
         rowNavigateButtonTitle: 'Nawigacja',
         selectAllCheckboxLabel: 'Zaznacz wszystko',
         selectAllCheckboxLongLabel: 'Pole wyboru, niezaznaczone, kliknij, aby zaznaczyć wszystko',
@@ -642,13 +631,13 @@ export default {
         selectSingleRow: 'Aby zaznaczyć linię, naciśnij SPACJĘ',
         settingsDialogHeader: 'Ustawienia',
         showingBlankOfBlank: 'Pokazuje {totalGrowingItemsCount} z {totalGrowingItemsCount}',
-        sortDialogAddSort: 'Add Sort Criterion',
+        sortDialogAddSort: 'Dodaj kryterium sortowania',
         sortDialogCancelBtnLabel: 'Anuluj',
         sortDialogConfirmBtnLabel: 'OK',
-        sortDialogDelete: 'Remove Sort Criterion',
+        sortDialogDelete: 'Usuń kryterium sortowania',
         sortDialogHeader: 'Sortuj',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
+        sortDialogMoveUp: 'Przenieś wyżej',
+        sortDialogMoveDown: 'Przenieś niżej',
         sortDialogNotSortedLabel: '(Nieposortowane)',
         sortDialogSortByHeader: 'Sortuj wg',
         sortDialogSortOrderAsc: 'Rosnąco',

@@ -35,10 +35,10 @@ export default {
         defaultTitle: 'Odota'
     },
     coreButton: {
-        attentionTypeDescription: 'Warning',
-        emphasizedTypeDescription: 'Default Action',
-        negativeTypeDescription: 'Negative Action',
-        positiveTypeDescription: 'Positive Action'
+        attentionTypeDescription: 'Varoitus',
+        emphasizedTypeDescription: 'Oletustoimi',
+        negativeTypeDescription: 'Negatiivinen toimi',
+        positiveTypeDescription: 'Positiivinen toimi'
     },
     coreCalendar: {
         calendarDayViewDescription: 'Kalenteri',
@@ -107,10 +107,10 @@ export default {
         moreLabel: '{count} lisää'
     },
     coreFormMessage: {
-        error: 'Invalid Entry',
-        information: 'Information',
-        success: 'Success',
-        warning: 'Warning'
+        error: 'Virheellinen merkintä',
+        information: 'Tiedot',
+        success: 'Onnistunut',
+        warning: 'Varoitus'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'Peruuta',
@@ -215,10 +215,10 @@ export default {
         totalResultsLabel: '{totalCount} tulosta'
     },
     coreProductSwitch: {
-        ariaLabel: 'Tuotteen vaihto',
-        targetBlank: 'opens in a new browser tab',
-        targetParent: 'opens in the parent frame',
-        targetTop: 'opens in the full browser window'
+        ariaLabel: 'Sovelluksen käynnistäjä',
+        targetBlank: 'avaa uudessa selainvälilehdessä',
+        targetParent: 'avautuu ylätason kehyksessä',
+        targetTop: 'avautuu koko selainikkunassa'
     },
     coreRadio: {
         readOnlyDescription: 'Tämä valintanappi on kirjoitussuojattu, eikä sitä voi muuttaa.'
@@ -241,18 +241,7 @@ export default {
         search: 'Hae'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: 'Alueen liukusäätimen minimiarvo on {min}, maksimiarvo {max}',
-        multipleHandle1ValuemaxDetails: 'Arvo on {value}',
-        multipleHandle1ValueminDetails: 'Arvo on {value}',
-        multipleHandle1ValueNowDetails: 'Nykyinen arvo on {value}',
-        multipleHandle2MinMaxDetails: 'Alueen liukusäätimen minimiarvo on {min}, maksimiarvo {max}',
-        multipleHandle2ValuemaxDetails: 'Arvo on {value}',
-        multipleHandle2ValueminDetails: 'Arvo on {value}',
-        multipleHandle2ValueNowDetails: 'Nykyinen arvo on {value}',
-        singleMinMaxDetails: 'Liukusäätimen minimiarvo on {min}, maksimiarvo {max}',
-        singleValuemaxDetails: 'Arvo on {value}',
-        singleValueminDetails: 'Arvo on {value}',
-        singleValueNowDetails: 'Nykyinen arvo on {value}'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: 'Jaa-painike',
@@ -633,7 +622,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'Nouseva',
         P13SortDialogSortOrderSelectOptionDesc: 'Laskeva',
         resetChangesButtonLabel: 'Palauta',
-        resetConfirmationAnnouncement: 'Values Reset',
+        resetConfirmationAnnouncement: 'Arvot palautettu',
         rowNavigateButtonTitle: 'Navigoi',
         selectAllCheckboxLabel: 'Valitse kaikki',
         selectAllCheckboxLongLabel: 'Valintaruutu, ei valittu, valitse kaikki napsauttamalla',
@@ -641,13 +630,13 @@ export default {
         selectSingleRow: 'Valitse rivi painamalla välilyöntinäppäintä',
         settingsDialogHeader: 'Asetukset',
         showingBlankOfBlank: 'Näytetään {totalGrowingItemsCount} / {totalGrowingItemsCount}',
-        sortDialogAddSort: 'Add Sort Criterion',
+        sortDialogAddSort: 'Lisää lajitteluperuste',
         sortDialogCancelBtnLabel: 'Peruuta',
         sortDialogConfirmBtnLabel: 'OK',
-        sortDialogDelete: 'Remove Sort Criterion',
+        sortDialogDelete: 'Poista lajitteluperuste',
         sortDialogHeader: 'Lajittele',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
+        sortDialogMoveUp: 'Siirry ylöspäin',
+        sortDialogMoveDown: 'Siirry alaspäin',
         sortDialogNotSortedLabel: '(Ei lajiteltu)',
         sortDialogSortByHeader: 'Lajitteluperuste',
         sortDialogSortOrderAsc: 'Nouseva',

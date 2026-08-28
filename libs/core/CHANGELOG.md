@@ -1,3 +1,37 @@
+## 0.64.2-rc.49 (2026-08-28)
+
+### 🚀 Features
+
+- **cdk, core:** add onLocaleChange helper and migrate datetime locale effects ([#14500](https://github.com/SAP/fundamental-ngx/pull/14500))
+
+### ❤️ Thank You
+
+- deno
+
+## 0.64.2-rc.48 (2026-08-28)
+
+### 🩹 Fixes
+
+- **core:** improve Slider aria attributes ([#14497](https://github.com/SAP/fundamental-ngx/pull/14497))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
+## 0.64.2-rc.47 (2026-08-28)
+
+### 🩹 Fixes
+
+- **core:** stop popover reposition loop feeding on its own overlay style writes ([#14474](https://github.com/SAP/fundamental-ngx/pull/14474), [#14498](https://github.com/SAP/fundamental-ngx/pull/14498))
+
+### ❤️ Thank You
+
+- deno
+
+## 0.64.2-rc.46 (2026-08-28)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
 ## 0.64.2-rc.45 (2026-08-25)
 
 This was a version bump only for core to align it with other projects, there were no code changes.

@@ -36,10 +36,10 @@ export default {
         defaultTitle: 'Күте тұрыңыз'
     },
     coreButton: {
-        attentionTypeDescription: 'Warning',
-        emphasizedTypeDescription: 'Default Action',
-        negativeTypeDescription: 'Negative Action',
-        positiveTypeDescription: 'Positive Action'
+        attentionTypeDescription: 'Ескерту',
+        emphasizedTypeDescription: 'Әдепкі операция',
+        negativeTypeDescription: 'Теріс операция',
+        positiveTypeDescription: 'Оң операция'
     },
     coreCalendar: {
         calendarDayViewDescription: 'Күнтізбе',
@@ -108,10 +108,10 @@ export default {
         moreLabel: 'Тағы {count}'
     },
     coreFormMessage: {
-        error: 'Invalid Entry',
-        information: 'Information',
-        success: 'Success',
-        warning: 'Warning'
+        error: 'Енгізілім жарамсыз',
+        information: 'Ақпарат',
+        success: 'Сәтті',
+        warning: 'Ескерту'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'Болдырмау',
@@ -216,10 +216,10 @@ export default {
         totalResultsLabel: '{totalCount} нәтиже'
     },
     coreProductSwitch: {
-        ariaLabel: 'Өнім ауыстырып-қосқышы',
-        targetBlank: 'opens in a new browser tab',
-        targetParent: 'opens in the parent frame',
-        targetTop: 'opens in the full browser window'
+        ariaLabel: 'Қолданбаны іске қосқыш',
+        targetBlank: 'жаңа браузер қойындысында ашылады',
+        targetParent: 'басты жақтауда ашылады',
+        targetTop: 'толық браузер терезесінде ашылады'
     },
     coreRadio: {
         readOnlyDescription: 'Бұл ауыстырып-қосқыш жазудан қорғалған және оны өзгерту мүмкін емес.'
@@ -242,18 +242,7 @@ export default {
         search: 'Іздеу'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: 'Ауқым слайдерінің минималды мәні — {min}, максималды мәні — {max}',
-        multipleHandle1ValuemaxDetails: 'Мән — {value}',
-        multipleHandle1ValueminDetails: 'Мән — {value}',
-        multipleHandle1ValueNowDetails: 'Ағымдағы мән — {value}',
-        multipleHandle2MinMaxDetails: 'Ауқым слайдерінің минималды мәні — {min}, максималды мәні — {max}',
-        multipleHandle2ValuemaxDetails: 'Мән — {value}',
-        multipleHandle2ValueminDetails: 'Мән — {value}',
-        multipleHandle2ValueNowDetails: 'Ағымдағы мән — {value}',
-        singleMinMaxDetails: 'Слайдердің минималды мәні — {min}, максималды мәні — {max}',
-        singleValuemaxDetails: 'Мән — {value}',
-        singleValueminDetails: 'Мән — {value}',
-        singleValueNowDetails: 'Ағымдағы мән — {value}'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: 'Бөлу түймесі',
@@ -634,7 +623,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'Артуы бойынша',
         P13SortDialogSortOrderSelectOptionDesc: 'Кемуі бойынша',
         resetChangesButtonLabel: 'Қалпына келтіру',
-        resetConfirmationAnnouncement: 'Values Reset',
+        resetConfirmationAnnouncement: 'Мәндер қалпына келтірілді',
         rowNavigateButtonTitle: 'Өту',
         selectAllCheckboxLabel: 'Барлығын таңдау',
         selectAllCheckboxLongLabel: 'Құсбелгі ұяшығы, құсбелгі қойылмаған, барлығын таңдау үшін басыңыз',
@@ -642,13 +631,13 @@ export default {
         selectSingleRow: 'Қатарды таңадау үшін бос жол пернесін басыңыз',
         settingsDialogHeader: 'Параметрлер',
         showingBlankOfBlank: '{totalGrowingItemsCount} / {totalGrowingItemsCount} көрсетілуде',
-        sortDialogAddSort: 'Add Sort Criterion',
+        sortDialogAddSort: 'Сұрыптау шартын қосу',
         sortDialogCancelBtnLabel: 'Болдырмау',
         sortDialogConfirmBtnLabel: 'OK',
-        sortDialogDelete: 'Remove Sort Criterion',
+        sortDialogDelete: 'Сұрыптау шартын жою',
         sortDialogHeader: 'Сұрыптау',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
+        sortDialogMoveUp: 'Жоғары жылжыту',
+        sortDialogMoveDown: 'Төмен жылжыту',
         sortDialogNotSortedLabel: '(Сұрыпталмады)',
         sortDialogSortByHeader: 'Сұрыптау шарты',
         sortDialogSortOrderAsc: 'Артуы бойынша',

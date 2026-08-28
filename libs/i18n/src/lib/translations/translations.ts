@@ -241,18 +241,7 @@ export default {
         search: 'Search'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: 'Range slider minimum value is {min}, maximum value is {max}',
-        multipleHandle1ValuemaxDetails: 'Value is {value}',
-        multipleHandle1ValueminDetails: 'Value is {value}',
-        multipleHandle1ValueNowDetails: 'Current value is {value}',
-        multipleHandle2MinMaxDetails: 'Range slider minimum value is {min}, maximum value is {max}',
-        multipleHandle2ValuemaxDetails: 'Value is {value}',
-        multipleHandle2ValueminDetails: 'Value is {value}',
-        multipleHandle2ValueNowDetails: 'Current value is {value}',
-        singleMinMaxDetails: 'Slider minimum value is {min}, maximum value is {max}',
-        singleValuemaxDetails: 'Value is {value}',
-        singleValueminDetails: 'Value is {value}',
-        singleValueNowDetails: 'Current value is {value}'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: 'Split button',

@@ -35,10 +35,10 @@ export default {
         defaultTitle: 'Vänta'
     },
     coreButton: {
-        attentionTypeDescription: 'Warning',
-        emphasizedTypeDescription: 'Default Action',
-        negativeTypeDescription: 'Negative Action',
-        positiveTypeDescription: 'Positive Action'
+        attentionTypeDescription: 'Varning',
+        emphasizedTypeDescription: 'Standardåtgärd',
+        negativeTypeDescription: 'Negativ åtgärd',
+        positiveTypeDescription: 'Positiv åtgärd'
     },
     coreCalendar: {
         calendarDayViewDescription: 'Kalender',
@@ -107,10 +107,10 @@ export default {
         moreLabel: '{count} fler'
     },
     coreFormMessage: {
-        error: 'Invalid Entry',
+        error: 'Ogiltig uppgift',
         information: 'Information',
-        success: 'Success',
-        warning: 'Warning'
+        success: 'OK',
+        warning: 'Varning'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'Avbryt',
@@ -215,10 +215,10 @@ export default {
         totalResultsLabel: '{totalCount} resultat'
     },
     coreProductSwitch: {
-        ariaLabel: 'Product Switch',
-        targetBlank: 'opens in a new browser tab',
-        targetParent: 'opens in the parent frame',
-        targetTop: 'opens in the full browser window'
+        ariaLabel: 'Appstartare',
+        targetBlank: 'öppnas på en ny webbläsarflik',
+        targetParent: 'öppnas i överordnad ram',
+        targetTop: 'öppnas i hela webbläsarfönstret'
     },
     coreRadio: {
         readOnlyDescription: 'Den här alternativknappen är skrivskyddad och kan inte ändras.'
@@ -241,18 +241,7 @@ export default {
         search: 'Sök'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: 'Intervallminimivärde för reglage är {min}, maximalt värde är {max}',
-        multipleHandle1ValuemaxDetails: 'Värde är {value}',
-        multipleHandle1ValueminDetails: 'Värde är {value}',
-        multipleHandle1ValueNowDetails: 'Aktuellt värde är {value}',
-        multipleHandle2MinMaxDetails: 'Intervallminimivärde för reglage är {min}, maximalt värde är {max}',
-        multipleHandle2ValuemaxDetails: 'Värde är {value}',
-        multipleHandle2ValueminDetails: 'Värde är {value}',
-        multipleHandle2ValueNowDetails: 'Aktuellt värde är {value}',
-        singleMinMaxDetails: 'Minimivärde för reglage är {min}, maximalt värde är {max}',
-        singleValuemaxDetails: 'Värde är {value}',
-        singleValueminDetails: 'Värde är {value}',
-        singleValueNowDetails: 'Aktuellt värde är {value}'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: 'Delningsknapp',
@@ -633,7 +622,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'Stigande',
         P13SortDialogSortOrderSelectOptionDesc: 'Fallande',
         resetChangesButtonLabel: 'Återställ',
-        resetConfirmationAnnouncement: 'Values Reset',
+        resetConfirmationAnnouncement: 'Värden har återställts',
         rowNavigateButtonTitle: 'Navigera',
         selectAllCheckboxLabel: 'Välj alla',
         selectAllCheckboxLongLabel: 'Kryssruta ej, markerad, klicka för att markera alla',
@@ -641,13 +630,13 @@ export default {
         selectSingleRow: 'Tryck på BLANKSTEG för att välja rad',
         settingsDialogHeader: 'Inställningar',
         showingBlankOfBlank: 'Visar {totalGrowingItemsCount} av {totalGrowingItemsCount}',
-        sortDialogAddSort: 'Add Sort Criterion',
+        sortDialogAddSort: 'Lägg till sorteringskriterium',
         sortDialogCancelBtnLabel: 'Avbryt',
         sortDialogConfirmBtnLabel: 'OK',
-        sortDialogDelete: 'Remove Sort Criterion',
+        sortDialogDelete: 'Ta bort sorteringskriterium',
         sortDialogHeader: 'Sortera',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
+        sortDialogMoveUp: 'Flytta upp',
+        sortDialogMoveDown: 'Flytta ner',
         sortDialogNotSortedLabel: '(Ej sorterad)',
         sortDialogSortByHeader: 'Sortera efter',
         sortDialogSortOrderAsc: 'Stigande',

@@ -35,10 +35,10 @@ export default {
         defaultTitle: 'Παρακαλώ περιμένετε'
     },
     coreButton: {
-        attentionTypeDescription: 'Warning',
-        emphasizedTypeDescription: 'Default Action',
-        negativeTypeDescription: 'Negative Action',
-        positiveTypeDescription: 'Positive Action'
+        attentionTypeDescription: 'Προειδοποίηση',
+        emphasizedTypeDescription: 'Προεπιλεγμένη Ενέργεια',
+        negativeTypeDescription: 'Αρνητική Ενέργεια',
+        positiveTypeDescription: 'Θετική Ενέργεια'
     },
     coreCalendar: {
         calendarDayViewDescription: 'Ημερολόγιο',
@@ -107,10 +107,10 @@ export default {
         moreLabel: 'περισσότερες από {count}'
     },
     coreFormMessage: {
-        error: 'Invalid Entry',
-        information: 'Information',
-        success: 'Success',
-        warning: 'Warning'
+        error: 'Άκυρη Καταχώριση',
+        information: 'Πληροφορίες',
+        success: 'Πέτυχε',
+        warning: 'Προειδοποίηση'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'Ακύρωση',
@@ -215,10 +215,10 @@ export default {
         totalResultsLabel: '{totalCount} Αποτελέσματα'
     },
     coreProductSwitch: {
-        ariaLabel: 'Διακόπτης Προϊόντος',
-        targetBlank: 'opens in a new browser tab',
-        targetParent: 'opens in the parent frame',
-        targetTop: 'opens in the full browser window'
+        ariaLabel: 'App Launcher',
+        targetBlank: 'άνοιγμα σε νέα καρτέλα προγράμματος περιήγησης',
+        targetParent: 'ανοίγει στο κύριο πλαίσιο',
+        targetTop: 'ανοίγει στο πλήρες παράθυρο του προγράμματος περιήγησης'
     },
     coreRadio: {
         readOnlyDescription: 'Αυτό το κουμπί επιλογής είναι μόνο για ανάγνωση και δεν μπορεί να αλλάξει.'
@@ -241,18 +241,7 @@ export default {
         search: 'Αναζήτηση'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: 'Ελάχιστη τιμή του slider εύρους είναι {min}, μέγιστη τιμή είναι {max}',
-        multipleHandle1ValuemaxDetails: 'Η τιμή είναι {value}',
-        multipleHandle1ValueminDetails: 'Η τιμή είναι {value}',
-        multipleHandle1ValueNowDetails: 'Τρέχουσα τιμή είναι {value}',
-        multipleHandle2MinMaxDetails: 'Ελάχιστη τιμή του slider εύρους είναι {min}, μέγιστη τιμή είναι {max}',
-        multipleHandle2ValuemaxDetails: 'Η τιμή είναι {value}',
-        multipleHandle2ValueminDetails: 'Η τιμή είναι {value}',
-        multipleHandle2ValueNowDetails: 'Τρέχουσα τιμή είναι {value}',
-        singleMinMaxDetails: 'Ελάχιστη τιμή του slider είναι {min}, μέγιστη τιμή είναι {max}',
-        singleValuemaxDetails: 'Η τιμή είναι {value}',
-        singleValueminDetails: 'Η τιμή είναι {value}',
-        singleValueNowDetails: 'Τρέχουσα τιμή είναι {value}'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: 'Κουμπί επιμερισμού',
@@ -634,7 +623,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'Αύξουσα σειρά',
         P13SortDialogSortOrderSelectOptionDesc: 'Φθίνουσα σειρά',
         resetChangesButtonLabel: 'Επαναφορά',
-        resetConfirmationAnnouncement: 'Values Reset',
+        resetConfirmationAnnouncement: 'Επανακαθορισμός Τιμών',
         rowNavigateButtonTitle: 'Πλοήγηση',
         selectAllCheckboxLabel: 'Επιλογή όλων',
         selectAllCheckboxLongLabel: 'Πλαίσιο ελέγχου, αποεπιλέχθηκε, κάντε κλικ για επιλογή όλων',
@@ -642,13 +631,13 @@ export default {
         selectSingleRow: 'Για να αποεπιλέξετε σειρά, πατήστε το ΚΕΝΟ ΔΙΑΣΤΗΜΑ',
         settingsDialogHeader: 'Ρυθμίσεις',
         showingBlankOfBlank: 'Εμφάνιση {totalGrowingItemsCount} από {totalGrowingItemsCount}',
-        sortDialogAddSort: 'Add Sort Criterion',
+        sortDialogAddSort: 'Προσθήκη Κριτηρίου Ταξινόμησης',
         sortDialogCancelBtnLabel: 'Ακύρωση',
         sortDialogConfirmBtnLabel: 'ΟΚ',
-        sortDialogDelete: 'Remove Sort Criterion',
+        sortDialogDelete: 'Κατάργηση Κριτηρίου Ταξινόμησης',
         sortDialogHeader: 'Ταξινόμηση',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
+        sortDialogMoveUp: 'Μετακίνηση προς τα επάνω',
+        sortDialogMoveDown: 'Μετακίνηση προς τα κάτω',
         sortDialogNotSortedLabel: '(Μη Ταξινομημένό)',
         sortDialogSortByHeader: 'Ταξινόμηση Βάσει',
         sortDialogSortOrderAsc: 'Αύξουσα σειρά',

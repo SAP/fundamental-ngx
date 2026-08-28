@@ -36,10 +36,10 @@ export default {
         defaultTitle: 'Așteptați'
     },
     coreButton: {
-        attentionTypeDescription: 'Warning',
-        emphasizedTypeDescription: 'Default Action',
-        negativeTypeDescription: 'Negative Action',
-        positiveTypeDescription: 'Positive Action'
+        attentionTypeDescription: 'Avertisment',
+        emphasizedTypeDescription: 'Acțiune standard',
+        negativeTypeDescription: 'Acțiune negativă',
+        positiveTypeDescription: 'Acțiune pozitivă'
     },
     coreCalendar: {
         calendarDayViewDescription: 'Calendar',
@@ -108,10 +108,10 @@ export default {
         moreLabel: 'și încă {count}'
     },
     coreFormMessage: {
-        error: 'Invalid Entry',
-        information: 'Information',
-        success: 'Success',
-        warning: 'Warning'
+        error: 'Intrare nevalidă',
+        information: 'Informații',
+        success: 'Succes',
+        warning: 'Avertisment'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'Anulare',
@@ -216,10 +216,10 @@ export default {
         totalResultsLabel: '{totalCount} rezultate'
     },
     coreProductSwitch: {
-        ariaLabel: 'Comutator produse',
-        targetBlank: 'opens in a new browser tab',
-        targetParent: 'opens in the parent frame',
-        targetTop: 'opens in the full browser window'
+        ariaLabel: 'Lansator aplicație',
+        targetBlank: 'se deschidere într-o filă de browser nouă',
+        targetParent: 'se deschide în cadrul principal',
+        targetTop: 'se deschide în fereastra completă a browserului'
     },
     coreRadio: {
         readOnlyDescription: 'Acest buton radio este numai pentru citire și nu poate fi modificat.'
@@ -242,20 +242,7 @@ export default {
         search: 'Căutare'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails:
-            'Valoarea minimă a cursorului de intervale este {min}, valoarea maximă este {max}',
-        multipleHandle1ValuemaxDetails: 'Valoarea este {value}',
-        multipleHandle1ValueminDetails: 'Valoarea este {value}',
-        multipleHandle1ValueNowDetails: 'Valoarea actuală este {value}',
-        multipleHandle2MinMaxDetails:
-            'Valoarea minimă a cursorului de intervale este {min}, valoarea maximă este {max}',
-        multipleHandle2ValuemaxDetails: 'Valoarea este {value}',
-        multipleHandle2ValueminDetails: 'Valoarea este {value}',
-        multipleHandle2ValueNowDetails: 'Valoarea actuală este {value}',
-        singleMinMaxDetails: 'Valoarea minimă a cursorului este {min}, valoarea maximă este {max}',
-        singleValuemaxDetails: 'Valoarea este {value}',
-        singleValueminDetails: 'Valoarea este {value}',
-        singleValueNowDetails: 'Valoarea actuală este {value}'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: 'Buton de divizare',
@@ -637,7 +624,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'Ordine crescătoare',
         P13SortDialogSortOrderSelectOptionDesc: 'Ordine descrescătoare',
         resetChangesButtonLabel: 'Resetare',
-        resetConfirmationAnnouncement: 'Values Reset',
+        resetConfirmationAnnouncement: 'Valori resetate',
         rowNavigateButtonTitle: 'Navigare',
         selectAllCheckboxLabel: 'Selectare toate',
         selectAllCheckboxLongLabel: 'Casetă de selectare, debifată, efectuați click pentru a selecta tot',
@@ -645,13 +632,13 @@ export default {
         selectSingleRow: 'Pentru a selecta linia, apăsați pe BARA DE SPAȚIU',
         settingsDialogHeader: 'Setări',
         showingBlankOfBlank: 'Se afișează {totalGrowingItemsCount} din {totalGrowingItemsCount}',
-        sortDialogAddSort: 'Add Sort Criterion',
+        sortDialogAddSort: 'Adăugare criteriu de sortare',
         sortDialogCancelBtnLabel: 'Anulare',
         sortDialogConfirmBtnLabel: 'OK',
-        sortDialogDelete: 'Remove Sort Criterion',
+        sortDialogDelete: 'Eliminare criteriu de sortare',
         sortDialogHeader: 'Sortare',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
+        sortDialogMoveUp: 'Mutare în sus',
+        sortDialogMoveDown: 'Mutare în jos',
         sortDialogNotSortedLabel: '(Nesortat)',
         sortDialogSortByHeader: 'Sortare după',
         sortDialogSortOrderAsc: 'Ordine crescătoare',

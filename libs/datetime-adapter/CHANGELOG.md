@@ -1,3 +1,19 @@
+## 0.64.2-rc.49 (2026-08-28)
+
+This was a version bump only for datetime-adapter to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.48 (2026-08-28)
+
+This was a version bump only for datetime-adapter to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.47 (2026-08-28)
+
+This was a version bump only for datetime-adapter to align it with other projects, there were no code changes.
+
+## 0.64.2-rc.46 (2026-08-28)
+
+This was a version bump only for datetime-adapter to align it with other projects, there were no code changes.
+
 ## 0.64.2-rc.45 (2026-08-25)
 
 This was a version bump only for datetime-adapter to align it with other projects, there were no code changes.

@@ -242,18 +242,7 @@ export default {
         search: '[[[Ŝēąŗċĥ∙∙∙∙∙∙∙∙]]]'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: '[[[Řąŋğē şĺįƌēŗ ɱįŋįɱűɱ ʋąĺűē įş {min}, ɱąχįɱűɱ ʋąĺűē įş {max}]]]',
-        multipleHandle1ValuemaxDetails: '[[[Ʋąĺűē įş {value}]]]',
-        multipleHandle1ValueminDetails: '[[[Ʋąĺűē įş {value}]]]',
-        multipleHandle1ValueNowDetails: '[[[Ĉűŗŗēŋţ ʋąĺűē įş {value}]]]',
-        multipleHandle2MinMaxDetails: '[[[Řąŋğē şĺįƌēŗ ɱįŋįɱűɱ ʋąĺűē įş {min}, ɱąχįɱűɱ ʋąĺűē įş {max}]]]',
-        multipleHandle2ValuemaxDetails: '[[[Ʋąĺűē įş {value}]]]',
-        multipleHandle2ValueminDetails: '[[[Ʋąĺűē įş {value}]]]',
-        multipleHandle2ValueNowDetails: '[[[Ĉűŗŗēŋţ ʋąĺűē įş {value}]]]',
-        singleMinMaxDetails: '[[[Ŝĺįƌēŗ ɱįŋįɱűɱ ʋąĺűē įş {min}, ɱąχįɱűɱ ʋąĺűē įş {max}]]]',
-        singleValuemaxDetails: '[[[Ʋąĺűē įş {value}]]]',
-        singleValueminDetails: '[[[Ʋąĺűē įş {value}]]]',
-        singleValueNowDetails: '[[[Ĉűŗŗēŋţ ʋąĺűē įş {value}]]]'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: '[[[Ŝρĺįţ ƃűţţŏŋ∙∙∙∙∙∙∙]]]',

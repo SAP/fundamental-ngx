@@ -12,14 +12,13 @@ import {
     Output,
     SimpleChanges,
     ViewEncapsulation,
-    effect,
     inject
 } from '@angular/core';
 
 import { DATE_TIME_FORMATS, DateTimeFormats, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { Nullable, onLocaleChange } from '@fundamental-ngx/cdk/utils';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { CalendarService } from '../../calendar.service';
 import { CalendarMonth } from '../../models/calendar-month';
@@ -111,12 +110,9 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnChanges, Focusab
         @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats,
         private _dateTimeAdapter: DatetimeAdapter<D>
     ) {
-        effect(() => {
-            this._dateTimeAdapter.locale();
-            if (this._initiated) {
-                this._constructMonthGrid();
-                this._changeDetectorRef.markForCheck();
-            }
+        onLocaleChange(this._dateTimeAdapter, () => {
+            this._constructMonthGrid();
+            this._changeDetectorRef.markForCheck();
         });
     }
 

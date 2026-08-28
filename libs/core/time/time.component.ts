@@ -5,7 +5,6 @@ import {
     ChangeDetectorRef,
     Component,
     computed,
-    effect,
     ElementRef,
     forwardRef,
     inject,
@@ -21,7 +20,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
+import { KeyUtil, onLocaleChange, RtlService } from '@fundamental-ngx/cdk/utils';
 import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
@@ -207,8 +206,7 @@ export class TimeComponent<D> implements OnInit, OnChanges, AfterViewInit, Contr
 
         this.time = this._getDefaultValue();
 
-        effect(() => {
-            this._dateTimeAdapter.locale();
+        onLocaleChange(this._dateTimeAdapter, () => {
             this._setUpViewGrid();
             this._changeDetectorRef.markForCheck();
         });

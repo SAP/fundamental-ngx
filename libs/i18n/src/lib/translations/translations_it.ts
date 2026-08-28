@@ -36,10 +36,10 @@ export default {
         defaultTitle: 'Attendere'
     },
     coreButton: {
-        attentionTypeDescription: 'Warning',
-        emphasizedTypeDescription: 'Default Action',
-        negativeTypeDescription: 'Negative Action',
-        positiveTypeDescription: 'Positive Action'
+        attentionTypeDescription: 'Avviso',
+        emphasizedTypeDescription: 'Azione predefinita',
+        negativeTypeDescription: 'Azione negativa',
+        positiveTypeDescription: 'Azione positiva'
     },
     coreCalendar: {
         calendarDayViewDescription: 'Calendario',
@@ -108,10 +108,10 @@ export default {
         moreLabel: 'Altre {count}'
     },
     coreFormMessage: {
-        error: 'Invalid Entry',
-        information: 'Information',
-        success: 'Success',
-        warning: 'Warning'
+        error: 'Immissione non valida',
+        information: 'Informazioni',
+        success: 'Operazione riuscita',
+        warning: 'Avviso'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'Annulla',
@@ -216,10 +216,10 @@ export default {
         totalResultsLabel: '{totalCount} risultati'
     },
     coreProductSwitch: {
-        ariaLabel: 'Switch prodotti',
-        targetBlank: 'opens in a new browser tab',
-        targetParent: 'opens in the parent frame',
-        targetTop: 'opens in the full browser window'
+        ariaLabel: 'Lanciatore di applicazioni',
+        targetBlank: 'si apre in una nuova scheda del browser',
+        targetParent: 'si apre nel riquadro sovraordinato',
+        targetTop: 'si apre nella finestra completa del browser'
     },
     coreRadio: {
         readOnlyDescription: 'Questo pulsante di opzione è di sola lettura e non può essere modificato.'
@@ -242,18 +242,7 @@ export default {
         search: 'Cerca'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: "Il valore minimo del cursore dell'intervallo è {min}, quello massimo è {max}",
-        multipleHandle1ValuemaxDetails: 'Il valore è {value}',
-        multipleHandle1ValueminDetails: 'Il valore è {value}',
-        multipleHandle1ValueNowDetails: 'Il valore corrente è {value}',
-        multipleHandle2MinMaxDetails: "Il valore minimo del cursore dell'intervallo è {min}, quello massimo è {max}",
-        multipleHandle2ValuemaxDetails: 'Il valore è {value}',
-        multipleHandle2ValueminDetails: 'Il valore è {value}',
-        multipleHandle2ValueNowDetails: 'Il valore corrente è {value}',
-        singleMinMaxDetails: 'Il valore minimo del cursore è {min}, quello massimo è {max}',
-        singleValuemaxDetails: 'Il valore è {value}',
-        singleValueminDetails: 'Il valore è {value}',
-        singleValueNowDetails: 'Il valore corrente è {value}'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: 'Pulsante Suddividi',
@@ -635,7 +624,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'Crescente',
         P13SortDialogSortOrderSelectOptionDesc: 'Decrescente',
         resetChangesButtonLabel: 'Reimposta',
-        resetConfirmationAnnouncement: 'Values Reset',
+        resetConfirmationAnnouncement: 'Reset valori',
         rowNavigateButtonTitle: 'Esplora',
         selectAllCheckboxLabel: 'Seleziona tutto',
         selectAllCheckboxLongLabel: 'Casella di controllo, deselezionata, fare clic per selezionare tutto',
@@ -643,13 +632,13 @@ export default {
         selectSingleRow: 'Per selezionare la riga, premere la BARRA SPAZIATRICE',
         settingsDialogHeader: 'Impostazioni',
         showingBlankOfBlank: 'Elementi visualizzati: {totalGrowingItemsCount} di {totalGrowingItemsCount}',
-        sortDialogAddSort: 'Add Sort Criterion',
+        sortDialogAddSort: 'Aggiungi criterio di ordinamento',
         sortDialogCancelBtnLabel: 'Annulla',
         sortDialogConfirmBtnLabel: 'OK',
-        sortDialogDelete: 'Remove Sort Criterion',
+        sortDialogDelete: 'Rimuovi criterio di ordinamento',
         sortDialogHeader: 'Ordina',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
+        sortDialogMoveUp: 'Sposta su',
+        sortDialogMoveDown: 'Sposta giù',
         sortDialogNotSortedLabel: '(Non ordinato)',
         sortDialogSortByHeader: 'Ordina per',
         sortDialogSortOrderAsc: 'Crescente',

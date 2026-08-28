@@ -12,10 +12,10 @@ import {
     Output,
     SimpleChanges,
     ViewEncapsulation,
-    effect,
     inject
 } from '@angular/core';
 
+import { onLocaleChange } from '@fundamental-ngx/cdk/utils';
 import { DATE_TIME_FORMATS, DateTimeFormats, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -138,12 +138,9 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnChanges
         // default values
         this._currentYear = _dateTimeAdapter.getYear(_dateTimeAdapter.today());
 
-        effect(() => {
-            this._dateTimeAdapter.locale();
-            if (this._initiated) {
-                this._constructYearsGrid();
-                this._changeDetectorRef.markForCheck();
-            }
+        onLocaleChange(this._dateTimeAdapter, () => {
+            this._constructYearsGrid();
+            this._changeDetectorRef.markForCheck();
         });
     }
 

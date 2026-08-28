@@ -976,7 +976,16 @@ export class PopoverService {
         }
 
         let animationFrame: number | null = null;
-        const scheduleUpdate = (): void => {
+        const scheduleUpdate = (records: MutationRecord[]): void => {
+            // Skip self-caused mutations, else we loop: updatePosition() writes `style` on the
+            // overlay's position wrapper (.cdk-overlay-connected-position-bounding-box), which this
+            // observer would see and react to. Test against .cdk-overlay-container, not
+            // overlayElement -- the wrapper is overlayElement's parent, so it isn't contained by it.
+            const overlayEl = this._overlayRef?.overlayElement;
+            const overlayContainer = overlayEl?.closest('.cdk-overlay-container') ?? overlayEl;
+            if (overlayContainer && records.every((record) => overlayContainer.contains(record.target as Node))) {
+                return;
+            }
             if (animationFrame !== null) {
                 return;
             }

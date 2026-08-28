@@ -35,10 +35,10 @@ export default {
         defaultTitle: 'המתן'
     },
     coreButton: {
-        attentionTypeDescription: 'Warning',
-        emphasizedTypeDescription: 'Default Action',
-        negativeTypeDescription: 'Negative Action',
-        positiveTypeDescription: 'Positive Action'
+        attentionTypeDescription: 'אזהרה',
+        emphasizedTypeDescription: 'פעולה בברירת מחדל',
+        negativeTypeDescription: 'פעולה שלילית',
+        positiveTypeDescription: 'פעולה חיובית'
     },
     coreCalendar: {
         calendarDayViewDescription: 'לוח שנה',
@@ -107,10 +107,10 @@ export default {
         moreLabel: '{count} יותר'
     },
     coreFormMessage: {
-        error: 'Invalid Entry',
-        information: 'Information',
-        success: 'Success',
-        warning: 'Warning'
+        error: 'הזנה לא חוקית',
+        information: 'מידע',
+        success: 'הצלחה',
+        warning: 'אזהרה'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'בטל',
@@ -215,10 +215,10 @@ export default {
         totalResultsLabel: '{totalCount} תוצאות'
     },
     coreProductSwitch: {
-        ariaLabel: 'מתג מוצר',
-        targetBlank: 'opens in a new browser tab',
-        targetParent: 'opens in the parent frame',
-        targetTop: 'opens in the full browser window'
+        ariaLabel: 'מפעיל יישום',
+        targetBlank: 'נפתח בלשונית דפדפן חדשה',
+        targetParent: 'נפתח במסגרת האב',
+        targetTop: 'נפתח בחלון הדפדפן המלא'
     },
     coreRadio: {
         readOnlyDescription: 'לחצן הבחירה הוא לקריאה בלבד ולא ניתן לשנות אותו.'
@@ -241,18 +241,7 @@ export default {
         search: 'חפש'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: 'הערך המינימלי של מחוון טווח הוא {min}, הערך המקסימלי הוא {max}',
-        multipleHandle1ValuemaxDetails: 'הערך הוא {value}',
-        multipleHandle1ValueminDetails: 'הערך הוא {value}',
-        multipleHandle1ValueNowDetails: 'הערך הנוכחי הוא {value}',
-        multipleHandle2MinMaxDetails: 'הערך המינימלי של מחוון טווח הוא {min}, הערך המקסימלי הוא {max}',
-        multipleHandle2ValuemaxDetails: 'הערך הוא {value}',
-        multipleHandle2ValueminDetails: 'הערך הוא {value}',
-        multipleHandle2ValueNowDetails: 'הערך הנוכחי הוא {value}',
-        singleMinMaxDetails: 'הערך המינימלי של מחוון הוא {min}, הערך המקסימלי הוא {max}',
-        singleValuemaxDetails: 'הערך הוא {value}',
-        singleValueminDetails: 'הערך הוא {value}',
-        singleValueNowDetails: 'הערך הנוכחי הוא {value}'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: 'לחצן פיצול',
@@ -631,7 +620,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'סדר עולה',
         P13SortDialogSortOrderSelectOptionDesc: 'סדר יורד',
         resetChangesButtonLabel: 'אפס',
-        resetConfirmationAnnouncement: 'Values Reset',
+        resetConfirmationAnnouncement: 'איפוס ערכים',
         rowNavigateButtonTitle: 'נווט',
         selectAllCheckboxLabel: 'בחר הכול',
         selectAllCheckboxLongLabel: 'תיבת סימון, לא סומנה, לחץ כדי לבחור הכול',
@@ -639,13 +628,13 @@ export default {
         selectSingleRow: 'על מנת לבחור שורה, הקש על מקש הרווח',
         settingsDialogHeader: 'הגדרות',
         showingBlankOfBlank: 'מציג {totalGrowingItemsCount} מתוך {totalGrowingItemsCount}',
-        sortDialogAddSort: 'Add Sort Criterion',
+        sortDialogAddSort: 'הוסף קריטריון מיון',
         sortDialogCancelBtnLabel: 'בטל',
         sortDialogConfirmBtnLabel: 'OK',
-        sortDialogDelete: 'Remove Sort Criterion',
+        sortDialogDelete: 'הסר קריטריון מיון',
         sortDialogHeader: 'מיין',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
+        sortDialogMoveUp: 'העבר למעלה',
+        sortDialogMoveDown: 'העבר למטה',
         sortDialogNotSortedLabel: '(לא ממוין)',
         sortDialogSortByHeader: 'מיין לפי',
         sortDialogSortOrderAsc: 'סדר עולה',

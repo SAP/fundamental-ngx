@@ -35,10 +35,10 @@ export default {
         defaultTitle: 'Počkejte'
     },
     coreButton: {
-        attentionTypeDescription: 'Warning',
-        emphasizedTypeDescription: 'Default Action',
-        negativeTypeDescription: 'Negative Action',
-        positiveTypeDescription: 'Positive Action'
+        attentionTypeDescription: 'Varování',
+        emphasizedTypeDescription: 'Výchozí akce',
+        negativeTypeDescription: 'Negativní akce',
+        positiveTypeDescription: 'Pozitivní akce'
     },
     coreCalendar: {
         calendarDayViewDescription: 'Kalendář',
@@ -107,10 +107,10 @@ export default {
         moreLabel: 'o {count} více'
     },
     coreFormMessage: {
-        error: 'Invalid Entry',
-        information: 'Information',
-        success: 'Success',
-        warning: 'Warning'
+        error: 'Neplatné zadání',
+        information: 'Informace',
+        success: 'Úspěch',
+        warning: 'Varování'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'Zrušit',
@@ -215,10 +215,10 @@ export default {
         totalResultsLabel: 'Počet výsledků: {totalCount}'
     },
     coreProductSwitch: {
-        ariaLabel: 'Přepínač produktů',
-        targetBlank: 'opens in a new browser tab',
-        targetParent: 'opens in the parent frame',
-        targetTop: 'opens in the full browser window'
+        ariaLabel: 'Spouštěč aplikací',
+        targetBlank: 'otevře se na nové kartě prohlížeče',
+        targetParent: 'otevře se v nadřazeném rámci',
+        targetTop: 'otevře se v úplném okně prohlížeče'
     },
     coreRadio: {
         readOnlyDescription: 'Tento přepínač je jen ke čtení a nelze jej změnit.'
@@ -241,18 +241,7 @@ export default {
         search: 'Hledat'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: 'Minimální hodnota rozsahu posuvníku je {min}, maximální hodnota je {max}',
-        multipleHandle1ValuemaxDetails: 'Hodnota je {value}',
-        multipleHandle1ValueminDetails: 'Hodnota je {value}',
-        multipleHandle1ValueNowDetails: 'Aktuální hodnota je {value}',
-        multipleHandle2MinMaxDetails: 'Minimální hodnota rozsahu posuvníku je {min}, maximální hodnota je {max}',
-        multipleHandle2ValuemaxDetails: 'Hodnota je {value}',
-        multipleHandle2ValueminDetails: 'Hodnota je {value}',
-        multipleHandle2ValueNowDetails: 'Aktuální hodnota je {value}',
-        singleMinMaxDetails: 'Minimální hodnota posuvníku je {min}, maximální hodnota je {max}',
-        singleValuemaxDetails: 'Hodnota je {value}',
-        singleValueminDetails: 'Hodnota je {value}',
-        singleValueNowDetails: 'Aktuální hodnota je {value}'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: 'Vícefunkční (rozdělené) tlačítko',
@@ -633,7 +622,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'Vzestupně',
         P13SortDialogSortOrderSelectOptionDesc: 'Sestupně',
         resetChangesButtonLabel: 'Resetovat',
-        resetConfirmationAnnouncement: 'Values Reset',
+        resetConfirmationAnnouncement: 'Reset hodnot',
         rowNavigateButtonTitle: 'Přejít',
         selectAllCheckboxLabel: 'Vybrat vše',
         selectAllCheckboxLongLabel: 'Zaškrtávací pole, nezaškrtnuto, kliknutím vyberete vše',
@@ -641,13 +630,13 @@ export default {
         selectSingleRow: 'Řádku vyberete stisknutím mezerníku',
         settingsDialogHeader: 'Nastavení',
         showingBlankOfBlank: 'Zobrazuje se {totalGrowingItemsCount} z {totalGrowingItemsCount}',
-        sortDialogAddSort: 'Add Sort Criterion',
+        sortDialogAddSort: 'Přidat kritérium řazení',
         sortDialogCancelBtnLabel: 'Zrušit',
         sortDialogConfirmBtnLabel: 'OK',
-        sortDialogDelete: 'Remove Sort Criterion',
+        sortDialogDelete: 'Odebrat kritérium řazení',
         sortDialogHeader: 'Řadit',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
+        sortDialogMoveUp: 'Přesunout nahoru',
+        sortDialogMoveDown: 'Přesunout dolů',
         sortDialogNotSortedLabel: '(Neseřazeno)',
         sortDialogSortByHeader: 'Řadit podle',
         sortDialogSortOrderAsc: 'Vzestupně',

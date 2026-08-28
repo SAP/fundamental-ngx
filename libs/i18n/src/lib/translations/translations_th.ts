@@ -35,10 +35,10 @@ export default {
         defaultTitle: 'กรุณารอสักครู่'
     },
     coreButton: {
-        attentionTypeDescription: 'Warning',
-        emphasizedTypeDescription: 'Default Action',
-        negativeTypeDescription: 'Negative Action',
-        positiveTypeDescription: 'Positive Action'
+        attentionTypeDescription: 'คำเตือน',
+        emphasizedTypeDescription: 'การดำเนินการตั้งต้น',
+        negativeTypeDescription: 'การดำเนินการเชิงลบ',
+        positiveTypeDescription: 'การดำเนินการเชิงบวก'
     },
     coreCalendar: {
         calendarDayViewDescription: 'ปฏิทิน',
@@ -107,10 +107,10 @@ export default {
         moreLabel: '{count} เพิ่มขึ้น'
     },
     coreFormMessage: {
-        error: 'Invalid Entry',
-        information: 'Information',
-        success: 'Success',
-        warning: 'Warning'
+        error: 'รายการไม่ถูกต้อง',
+        information: 'ข้อมูล',
+        success: 'สำเร็จ',
+        warning: 'คำเตือน'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'ยกเลิก',
@@ -215,10 +215,10 @@ export default {
         totalResultsLabel: '{totalCount} ผลลัพธ์'
     },
     coreProductSwitch: {
-        ariaLabel: 'การสลับผลิตภัณฑ์',
-        targetBlank: 'opens in a new browser tab',
-        targetParent: 'opens in the parent frame',
-        targetTop: 'opens in the full browser window'
+        ariaLabel: 'ตัวเปิดใช้แอพ',
+        targetBlank: 'เปิดในแท็บใหม่ของบราวเซอร์',
+        targetParent: 'เปิดในกรอบหลัก',
+        targetTop: 'เปิดในหน้าต่างบราวเซอร์แบบเต็ม'
     },
     coreRadio: {
         readOnlyDescription: 'ปุ่มตัวเลือกนี้เป็นแบบอ่านอย่างเดียวและไม่สามารถเปลี่ยนแปลงได้'
@@ -241,18 +241,7 @@ export default {
         search: 'ค้นหา'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: 'ค่าต่ำสุดของแถบเลื่อนช่วงคือ {min} ค่าสูงสุดคือ {max}',
-        multipleHandle1ValuemaxDetails: 'ค่าคือ {value}',
-        multipleHandle1ValueminDetails: 'ค่าคือ {value}',
-        multipleHandle1ValueNowDetails: 'ค่าปัจจุบันคือ {value}',
-        multipleHandle2MinMaxDetails: 'ค่าต่ำสุดของแถบเลื่อนช่วงคือ {min} ค่าสูงสุดคือ {max}',
-        multipleHandle2ValuemaxDetails: 'ค่าคือ {value}',
-        multipleHandle2ValueminDetails: 'ค่าคือ {value}',
-        multipleHandle2ValueNowDetails: 'ค่าปัจจุบันคือ {value}',
-        singleMinMaxDetails: 'ค่าต่ำสุดของแถบเลื่อนคือ {min} ค่าสูงสุดคือ {max}',
-        singleValuemaxDetails: 'ค่าคือ {value}',
-        singleValueminDetails: 'ค่าคือ {value}',
-        singleValueNowDetails: 'ค่าปัจจุบันคือ {value}'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: "ปุ่ม 'แยก'",
@@ -633,7 +622,7 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'จากน้อยไปหามาก',
         P13SortDialogSortOrderSelectOptionDesc: 'จากมากไปหาน้อย',
         resetChangesButtonLabel: 'รีเซ็ต',
-        resetConfirmationAnnouncement: 'Values Reset',
+        resetConfirmationAnnouncement: 'รีเซ็ตค่าแล้ว',
         rowNavigateButtonTitle: 'เนวิเกต',
         selectAllCheckboxLabel: 'เลือกทั้งหมด',
         selectAllCheckboxLongLabel: 'เช็คบ็อกซ์, ยกเลิกการเลือกแล้ว, คลิกเพื่อเลือกทั้งหมด',
@@ -641,13 +630,13 @@ export default {
         selectSingleRow: 'เมื่อต้องการเลือกแถว ให้กด SPACEBAR',
         settingsDialogHeader: 'การตั้งค่า',
         showingBlankOfBlank: 'กำลังแสดง {totalGrowingItemsCount} จาก {totalGrowingItemsCount}',
-        sortDialogAddSort: 'Add Sort Criterion',
+        sortDialogAddSort: 'เพิ่มเกณฑ์การจัดเรียง',
         sortDialogCancelBtnLabel: 'ยกเลิก',
         sortDialogConfirmBtnLabel: 'ตกลง',
-        sortDialogDelete: 'Remove Sort Criterion',
+        sortDialogDelete: 'เอาเกณฑ์การจัดเรียงออก',
         sortDialogHeader: 'จัดเรียง',
-        sortDialogMoveUp: 'Move Up',
-        sortDialogMoveDown: 'Move Down',
+        sortDialogMoveUp: 'ย้ายขึ้น',
+        sortDialogMoveDown: 'ย้ายลง',
         sortDialogNotSortedLabel: '(ไม่ได้จัดเรียง)',
         sortDialogSortByHeader: 'จัดเรียงตาม',
         sortDialogSortOrderAsc: 'จากน้อยไปหามาก',

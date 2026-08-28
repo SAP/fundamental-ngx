@@ -241,18 +241,7 @@ export default {
         search: 'Search'
     },
     coreSlider: {
-        multipleHandle1MinMaxDetails: 'Vlera minimale e rrëshqitësit është {min}, vlera maksimale është {max}',
-        multipleHandle1ValuemaxDetails: 'Vlera është {value}',
-        multipleHandle1ValueminDetails: 'Vlera është  {value}',
-        multipleHandle1ValueNowDetails: 'Vlera aktuale është{value}',
-        multipleHandle2MinMaxDetails: 'Vlera minimale e rrëshqitësit është {min}, vlera maksimale është{max}',
-        multipleHandle2ValuemaxDetails: 'Vlera është {value}',
-        multipleHandle2ValueminDetails: 'Vlera është {value}',
-        multipleHandle2ValueNowDetails: 'Vlera aktuale është {value}',
-        singleMinMaxDetails: 'Vlera minimale e rrëshqitësit është {min}, vlera maksimale është {max}',
-        singleValuemaxDetails: 'Vlera është  {value}',
-        singleValueminDetails: 'Vlera është {value}',
-        singleValueNowDetails: 'Vlera aktuale është {value}'
+        ariaLabel: 'Slider Handle'
     },
     coreSplitButton: {
         arialLabel: 'Butoni i ndarjes',
