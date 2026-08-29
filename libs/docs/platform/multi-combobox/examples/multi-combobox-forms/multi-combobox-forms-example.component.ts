@@ -1,20 +1,18 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { JsonPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
     FdpFormGroupModule,
     MultiComboboxSelectionChangeEvent,
     PlatformMultiComboboxModule
 } from '@fundamental-ngx/platform/form';
-import { DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
 
 @Component({
     selector: 'fdp-multi-combobox-forms-example',
     templateUrl: './multi-combobox-forms-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }],
-    imports: [FdpFormGroupModule, FormsModule, ReactiveFormsModule, PlatformMultiComboboxModule, JsonPipe]
+    imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformMultiComboboxModule, ButtonComponent, JsonPipe]
 })
 export class MultiComboboxFormsExampleComponent {
     dataSource = [
@@ -28,13 +26,38 @@ export class MultiComboboxFormsExampleComponent {
         { name: 'Spinach', type: 'Vegetables' }
     ];
 
+    // Idiom 1: Reactive Forms with CVA directive binding
+    reactiveFormControl = new FormControl<typeof this.dataSource>([this.dataSource[3]]);
     customForm = new FormGroup({
-        field: new FormControl(this.dataSource[3])
+        reactiveFormsCombo: this.reactiveFormControl
     });
 
-    selectedItems = [this.dataSource[3]];
+    // Idiom 2: Pure signal-based state (no FormControl)
+    pureSignalSelection = signal([this.dataSource[3], this.dataSource[4]]);
 
-    onSelect(item: MultiComboboxSelectionChangeEvent): void {
-        this.selectedItems = item.selectedItems;
+    onPureSignalChange(item: MultiComboboxSelectionChangeEvent): void {
+        this.pureSignalSelection.set(item.selectedItems);
+    }
+
+    // Programmatic updates via FormControl
+    selectAllFruits(): void {
+        const fruits = this.dataSource.filter((item) => item.type === 'Fruits');
+        this.reactiveFormControl.setValue(fruits);
+        this.customForm.updateValueAndValidity();
+    }
+
+    clearReactiveForm(): void {
+        this.reactiveFormControl.setValue([]);
+        this.customForm.updateValueAndValidity();
+    }
+
+    // Programmatic updates via signal
+    selectAllVegetables(): void {
+        const vegetables = this.dataSource.filter((item) => item.type === 'Vegetables');
+        this.pureSignalSelection.set(vegetables);
+    }
+
+    clearSignal(): void {
+        this.pureSignalSelection.set([]);
     }
 }

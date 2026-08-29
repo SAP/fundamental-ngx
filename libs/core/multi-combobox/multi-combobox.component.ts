@@ -54,7 +54,7 @@ import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { TokenComponent, TokenizerComponent } from '@fundamental-ngx/core/token';
 import { Subject } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { debounceTime, filter } from 'rxjs/operators';
 import { BaseMultiCombobox } from './base-multi-combobox.class';
 import { MobileMultiComboboxComponent } from './mobile/mobile-multi-combobox.component';
 import { MULTI_COMBOBOX_COMPONENT } from './multi-combobox.token';
@@ -576,6 +576,17 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
         this._assignCustomTemplates();
 
         this._initWindowResize();
+
+        this._cva.stateChanges
+            .pipe(
+                filter((event) => event === 'writeValue'),
+                takeUntilDestroyed(this._destroyRef)
+            )
+            .subscribe(() => {
+                if (this._fullFlatSuggestions().length) {
+                    this._setSelectedItems(this._cva.value);
+                }
+            });
     }
 
     /** @hidden */
@@ -927,6 +938,9 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
      */
     protected _setSelectedItems(value: T[]): void {
         this._selectedItems.set(coerceArraySafe(value));
+        if (this._fullFlatSuggestions().length) {
+            this._setSelectedSuggestions();
+        }
     }
 
     /**

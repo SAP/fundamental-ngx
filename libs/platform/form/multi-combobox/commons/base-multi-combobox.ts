@@ -422,6 +422,13 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         if (dataSourceChange) {
             this._initializeDataSource(dataSourceChange.currentValue);
         }
+
+        if (changes['selectedItems'] && !changes['selectedItems'].firstChange) {
+            const currentValues = this._selectedSuggestions.map((s) => s.value);
+            if (!shallowEqual(currentValues, this.selectedItems)) {
+                this._setSelectedSuggestions();
+            }
+        }
     }
 
     /** @hidden */
@@ -631,6 +638,9 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     protected _setSelectedSuggestions(): void {
         this._selectedSuggestions = [];
 
+        this._fullFlatSuggestions.forEach((item) => (item.selected = false));
+        (this._suggestions || []).forEach((item) => (item.selected = false));
+
         if (!this.selectedItems?.length) {
             return;
         }
@@ -638,7 +648,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         for (let i = 0; i < this.selectedItems.length; i++) {
             const selectedItem = this.selectedItems[i];
             const finder = (item: SelectableOptionItem): boolean =>
-                item.label === selectedItem || item.value === selectedItem;
+                item.label === selectedItem || shallowEqual(item.value, selectedItem);
             const idFromFullFlatSuggestions = this._fullFlatSuggestions.findIndex(finder);
             const idFromSuggestions = (this._suggestions || []).findIndex(finder);
             const itemIndex = Math.max(idFromFullFlatSuggestions, idFromSuggestions);
@@ -658,10 +668,13 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
             if (itemIndex > -1) {
                 this._selectedSuggestions.push(collection[itemIndex]);
                 collection[itemIndex].selected = true;
+                if (idFromSuggestions !== -1) {
+                    this._suggestions[idFromSuggestions].selected = true;
+                }
             }
         }
 
-        this.detectChanges();
+        this.markForCheck();
     }
 
     /** @hidden */
