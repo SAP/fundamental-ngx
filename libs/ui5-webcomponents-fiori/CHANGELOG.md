@@ -1,3 +1,13 @@
+## 0.64.2-rc.50 (2026-08-30)
+
+### 🩹 Fixes
+
+- **deps:** ui5-webcomponents version 2.26.0 ([#14499](https://github.com/SAP/fundamental-ngx/pull/14499))
+
+### ❤️ Thank You
+
+- Mike O'Donnell @mikerodonnell89
+
 ## 0.64.2-rc.49 (2026-08-28)
 
 This was a version bump only for ui5-webcomponents-fiori to align it with other projects, there were no code changes.
