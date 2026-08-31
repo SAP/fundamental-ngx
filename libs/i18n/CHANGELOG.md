@@ -1,3 +1,30 @@
+## 0.64.3 (2026-08-31)
+
+### 🚀 Features
+
+- **platform:** table - deprecate p13 dialog, add include/exclude filter component ([#14448](https://github.com/SAP/fundamental-ngx/pull/14448))
+- **i18n:** add auto-correct command to i18n-manage executor ([#14429](https://github.com/SAP/fundamental-ngx/pull/14429))
+- **platform:** update sorting functionality for platform table combined settings dialog ([#14312](https://github.com/SAP/fundamental-ngx/pull/14312))
+
+### 🩹 Fixes
+
+- **deps:** ui5-webcomponents version 2.26.0 ([#14499](https://github.com/SAP/fundamental-ngx/pull/14499))
+- **core:** improve Slider aria attributes ([#14497](https://github.com/SAP/fundamental-ngx/pull/14497))
+- **core, platform:** update form messages a11y ([#14473](https://github.com/SAP/fundamental-ngx/pull/14473))
+- **platform:** announce Reset button action to screen readers in fdp-table View Settings ([#14453](https://github.com/SAP/fundamental-ngx/pull/14453))
+- **ui5:** enable SPA navigation for [routerLink] on UI5 href components ([#14438](https://github.com/SAP/fundamental-ngx/pull/14438))
+- **e2e:** scope visual regression snapshots to component container ([#14440](https://github.com/SAP/fundamental-ngx/pull/14440))
+- **core:** improve aria-description for special types Buttons ([#14420](https://github.com/SAP/fundamental-ngx/pull/14420))
+- **core:** change Product Switch name to App Launcher ([#14422](https://github.com/SAP/fundamental-ngx/pull/14422))
+
+### ❤️ Thank You
+
+- deno
+- fundamental-bot
+- github-actions
+- Inna Atanasova @InnaAtanasova
+- Mike O'Donnell @mikerodonnell89
+
 ## 0.64.2-rc.50 (2026-08-30)
 
 ### 🩹 Fixes
