@@ -1,3 +1,23 @@
+## 0.64.2 (2026-08-30)
+
+### 🚀 Features
+
+- **platform:** table - deprecate p13 dialog, add include/exclude filter component ([#14448](https://github.com/SAP/fundamental-ngx/pull/14448))
+- **i18n:** add auto-correct command to i18n-manage executor ([#14429](https://github.com/SAP/fundamental-ngx/pull/14429))
+
+### 🩹 Fixes
+
+- **deps:** ui5-webcomponents version 2.26.0 ([#14499](https://github.com/SAP/fundamental-ngx/pull/14499))
+- **ui5:** enable SPA navigation for [routerLink] on UI5 href components ([#14438](https://github.com/SAP/fundamental-ngx/pull/14438))
+- **e2e:** scope visual regression snapshots to component container ([#14440](https://github.com/SAP/fundamental-ngx/pull/14440))
+
+### ❤️ Thank You
+
+- deno
+- fundamental-bot
+- github-actions
+- Mike O'Donnell @mikerodonnell89
+
 ## 0.64.2-rc.49 (2026-08-28)
 
 This was a version bump only for ui5-webcomponents-ai to align it with other projects, there were no code changes.

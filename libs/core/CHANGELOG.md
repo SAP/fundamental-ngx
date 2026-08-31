@@ -1,3 +1,37 @@
+## 0.64.2 (2026-08-30)
+
+### 🚀 Features
+
+- **cdk, core:** add onLocaleChange helper and migrate datetime locale effects ([#14500](https://github.com/SAP/fundamental-ngx/pull/14500))
+- **platform:** table - deprecate p13 dialog, add include/exclude filter component ([#14448](https://github.com/SAP/fundamental-ngx/pull/14448))
+- **i18n:** add auto-correct command to i18n-manage executor ([#14429](https://github.com/SAP/fundamental-ngx/pull/14429))
+- **platform:** update sorting functionality for platform table combined settings dialog ([#14312](https://github.com/SAP/fundamental-ngx/pull/14312))
+
+### 🩹 Fixes
+
+- **deps:** ui5-webcomponents version 2.26.0 ([#14499](https://github.com/SAP/fundamental-ngx/pull/14499))
+- **core:** improve Slider aria attributes ([#14497](https://github.com/SAP/fundamental-ngx/pull/14497))
+- **core:** stop popover reposition loop feeding on its own overlay style writes ([#14474](https://github.com/SAP/fundamental-ngx/pull/14474), [#14498](https://github.com/SAP/fundamental-ngx/pull/14498))
+- **core, platform:** added option to show Message Strip in Dynamic Page ([#14486](https://github.com/SAP/fundamental-ngx/pull/14486))
+- **core, platform:** update form messages a11y ([#14473](https://github.com/SAP/fundamental-ngx/pull/14473))
+- **core:** use 100svh for dynamic page full height ([#14475](https://github.com/SAP/fundamental-ngx/pull/14475))
+- **core, platform:** resolve zoneless change detection issues in Flexible Column Layout, Textarea (Platform) and Multi Input (Platform) ([#14465](https://github.com/SAP/fundamental-ngx/pull/14465))
+- **core:** fix layout grid reflow inside flexible colum ([#14463](https://github.com/SAP/fundamental-ngx/pull/14463))
+- **core:** move aria-label from role-less span to fd-icon in InputGroupComponent ([#14452](https://github.com/SAP/fundamental-ngx/pull/14452))
+- **ui5:** enable SPA navigation for [routerLink] on UI5 href components ([#14438](https://github.com/SAP/fundamental-ngx/pull/14438))
+- **e2e:** scope visual regression snapshots to component container ([#14440](https://github.com/SAP/fundamental-ngx/pull/14440))
+- **core:** updates for Notifications after design review ([#14408](https://github.com/SAP/fundamental-ngx/pull/14408))
+- **core:** improve aria-description for special types Buttons ([#14420](https://github.com/SAP/fundamental-ngx/pull/14420))
+- **core:** observer must not inherit parent config; fix restrictChild ContentDensity keying ([#14426](https://github.com/SAP/fundamental-ngx/pull/14426))
+
+### ❤️ Thank You
+
+- deno
+- fundamental-bot
+- github-actions
+- Inna Atanasova @InnaAtanasova
+- Mike O'Donnell @mikerodonnell89
+
 ## 0.64.2-rc.49 (2026-08-28)
 
 ### 🚀 Features

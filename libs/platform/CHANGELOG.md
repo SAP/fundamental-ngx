@@ -1,3 +1,35 @@
+## 0.64.2 (2026-08-30)
+
+### 🚀 Features
+
+- **platform:** table - deprecate p13 dialog, add include/exclude filter component ([#14448](https://github.com/SAP/fundamental-ngx/pull/14448))
+- **platform:** add closeOnOutsideClick option to hint configuration ([#14461](https://github.com/SAP/fundamental-ngx/pull/14461))
+- **i18n:** add auto-correct command to i18n-manage executor ([#14429](https://github.com/SAP/fundamental-ngx/pull/14429))
+- **platform:** update sorting functionality for platform table combined settings dialog ([#14312](https://github.com/SAP/fundamental-ngx/pull/14312))
+
+### 🩹 Fixes
+
+- **deps:** ui5-webcomponents version 2.26.0 ([#14499](https://github.com/SAP/fundamental-ngx/pull/14499))
+- **core, platform:** added option to show Message Strip in Dynamic Page ([#14486](https://github.com/SAP/fundamental-ngx/pull/14486))
+- **platform:** remove ngZone from platform table ([#14439](https://github.com/SAP/fundamental-ngx/pull/14439))
+- **platform:** focus issues on the table-view-settings-dialog filters ([#14472](https://github.com/SAP/fundamental-ngx/pull/14472))
+- **platform:** expose BaseInput required as input without changing validation ownership ([#14482](https://github.com/SAP/fundamental-ngx/pull/14482))
+- **core, platform:** update form messages a11y ([#14473](https://github.com/SAP/fundamental-ngx/pull/14473))
+- **platform:** restore initial sidebar focus in settings generator dialog ([#14467](https://github.com/SAP/fundamental-ngx/pull/14467))
+- **core, platform:** resolve zoneless change detection issues in Flexible Column Layout, Textarea (Platform) and Multi Input (Platform) ([#14465](https://github.com/SAP/fundamental-ngx/pull/14465))
+- **platform:** announce Reset button action to screen readers in fdp-table View Settings ([#14453](https://github.com/SAP/fundamental-ngx/pull/14453))
+- **ui5:** enable SPA navigation for [routerLink] on UI5 href components ([#14438](https://github.com/SAP/fundamental-ngx/pull/14438))
+- **e2e:** scope visual regression snapshots to component container ([#14440](https://github.com/SAP/fundamental-ngx/pull/14440))
+- **platform:** filter settings dialog a11y improvements ([#14367](https://github.com/SAP/fundamental-ngx/pull/14367))
+
+### ❤️ Thank You
+
+- deno
+- fundamental-bot
+- github-actions
+- Inna Atanasova @InnaAtanasova
+- Mike O'Donnell @mikerodonnell89
+
 ## 0.64.2-rc.49 (2026-08-28)
 
 This was a version bump only for platform to align it with other projects, there were no code changes.
