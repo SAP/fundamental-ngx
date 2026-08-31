@@ -242,7 +242,7 @@ export default {
         search: '[[[Ŝēąŗċĥ∙∙∙∙∙∙∙∙]]]'
     },
     coreSlider: {
-        ariaLabel: 'Slider Handle'
+        ariaLabel: '[[[Ŝĺįƌēŗ Ĥąŋƌĺē∙∙∙∙∙∙]]]'
     },
     coreSplitButton: {
         arialLabel: '[[[Ŝρĺįţ ƃűţţŏŋ∙∙∙∙∙∙∙]]]',
