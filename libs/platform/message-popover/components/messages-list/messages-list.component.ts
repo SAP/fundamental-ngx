@@ -28,8 +28,8 @@ const ANIMATION_EASING = 'cubic-bezier(0, 0, 0.2, 1)';
 const ANIMATION_DURATION = 100;
 
 @Component({
-    selector: 'fdp-message-view',
-    templateUrl: './message-view.component.html',
+    selector: 'fdp-messages-list',
+    templateUrl: './messages-list.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [TabbableElementService],
@@ -46,7 +46,7 @@ const ANIMATION_DURATION = 100;
         FdTranslatePipe
     ]
 })
-export class MessageViewComponent implements AfterViewInit {
+export class MessagesListComponent implements AfterViewInit {
     /** Current Message Popover screen. Can be either `list` or `details`. */
     @Input()
     set currentScreen(value: 'list' | 'details') {

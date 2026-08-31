@@ -21,7 +21,7 @@ import { PopoverComponent, PopoverModule } from '@fundamental-ngx/core/popover';
 import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { getFormState } from '@fundamental-ngx/platform/form';
-import { MessageViewComponent } from './components/message-view/message-view.component';
+import { MessagesListComponent } from './components/messages-list/messages-list.component';
 import {
     MessagePopoverEntry,
     MessagePopoverError,
@@ -46,7 +46,7 @@ import { convertFormState, convertFormStateToMessagePopoverState } from './utils
         FormsModule,
         ObjectStatusComponent,
         InitialFocusDirective,
-        MessageViewComponent,
+        MessagesListComponent,
         FdTranslatePipe
     ]
 })

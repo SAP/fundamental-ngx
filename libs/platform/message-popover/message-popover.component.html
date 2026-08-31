@@ -58,14 +58,14 @@
                     </div>
                 </div>
             </div>
-            <fdp-message-view
+            <fdp-messages-list
                 [currentScreen]="currentScreen"
                 [filteredErrors]="_filteredErrors$()"
                 [currentEntry]="currentEntry"
                 (openDetails)="_showDetails($event)"
                 (closePopover)="_closePopover($event)"
                 (focusItem)="focusItem.emit($event)"
-            ></fdp-message-view>
+            ></fdp-messages-list>
         </div>
     </fd-popover>
 }

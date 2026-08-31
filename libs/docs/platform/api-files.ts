@@ -203,7 +203,7 @@ export const API_FILES = {
     messagePopover: [
         'MessagePopoverComponent',
         'MessagePopoverFormWrapperComponent',
-        'MessageViewComponent',
+        'MessagesListComponent',
         'MessagePopoverFormItemDirective'
     ],
     variantManagement: [

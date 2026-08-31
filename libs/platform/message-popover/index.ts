@@ -1,5 +1,5 @@
 export * from './components/message-popover-form-wrapper/message-popover-form-wrapper.component';
-export * from './components/message-view/message-view.component';
+export * from './components/messages-list/messages-list.component';
 export * from './default-config';
 export * from './directives/message-popover-form-item.directive';
 export * from './message-popover.component';

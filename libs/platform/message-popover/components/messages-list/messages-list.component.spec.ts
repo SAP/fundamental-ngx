@@ -1,7 +1,7 @@
 import { ElementRef } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MessagePopoverEntry, MessagePopoverErrorGroup } from '../../models/message-popover-entry.interface';
-import { MessageViewComponent } from './message-view.component';
+import { MessagesListComponent } from './messages-list.component';
 
 const mockEntry: MessagePopoverEntry = {
     heading: { type: 'string', message: 'Error heading' },
@@ -30,18 +30,18 @@ const mockErrors: MessagePopoverErrorGroup[] = [
     }
 ];
 
-describe('MessageViewComponent', () => {
-    let component: MessageViewComponent;
-    let fixture: ComponentFixture<MessageViewComponent>;
+describe('MessagesListComponent', () => {
+    let component: MessagesListComponent;
+    let fixture: ComponentFixture<MessagesListComponent>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [MessageViewComponent]
+            imports: [MessagesListComponent]
         }).compileComponents();
     });
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(MessageViewComponent);
+        fixture = TestBed.createComponent(MessagesListComponent);
         component = fixture.componentInstance;
         component.currentScreen = 'list';
         component.filteredErrors = mockErrors;
