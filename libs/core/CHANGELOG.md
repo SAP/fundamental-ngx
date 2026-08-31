@@ -1,3 +1,13 @@
+## 0.64.4-rc.2 (2026-08-31)
+
+### 🚀 Features
+
+- **core:** product-switch design review updates ([#14487](https://github.com/SAP/fundamental-ngx/pull/14487))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
 ## 0.64.4-rc.1 (2026-08-31)
 
 This was a version bump only for core to align it with other projects, there were no code changes.
