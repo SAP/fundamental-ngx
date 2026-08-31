@@ -39,7 +39,10 @@ export interface ProductSwitchItem {
     /** Font of product item */
     font?: IconFont;
 
-    /** Whether user wants to mark this element ass selected */
+    /**
+     * Whether to mark this item as selected.
+     * @deprecated Product Switch has no persistent selected state per design spec. This property has no effect.
+     */
     selected?: boolean;
 
     /** Whether user wants to disable drag and drop functionality from single element */

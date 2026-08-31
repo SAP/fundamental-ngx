@@ -1,16 +1,17 @@
 import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 import { ViewportRuler } from '@angular/cdk/scrolling';
 import {
+    booleanAttribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     computed,
-    DestroyRef,
     effect,
     ElementRef,
     EventEmitter,
     inject,
     Input,
+    input,
     model,
     OnDestroy,
     OnInit,
@@ -24,6 +25,7 @@ import { FdDropEvent, KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
 import { NgTemplateOutlet } from '@angular/common';
 import { DndItemDirective, DndListDirective } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
+import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
 import { FD_DEFAULT_ICON_FONT_FAMILY, IconComponent } from '@fundamental-ngx/core/icon';
 import { resolveTranslationSignalFn } from '@fundamental-ngx/i18n';
 import { ProductSwitchItem } from './product-switch.item';
@@ -37,14 +39,27 @@ const containerWidthPx = 776;
     styleUrls: ['./product-switch-body.component.scss', '../../../cdk/utils/drag-and-drop/drag-and-drop.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [DndItemDirective, DndListDirective, IconComponent, AvatarComponent, NgTemplateOutlet]
+    imports: [
+        DndItemDirective,
+        DndListDirective,
+        IconComponent,
+        AvatarComponent,
+        NgTemplateOutlet,
+        BusyIndicatorComponent
+    ]
 })
 export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
     /** Defines if drag and drop functionality should be included in product switch*/
     @Input()
     dragAndDropEnabled = true;
 
-    /** The product switch's product items. */
+    /**
+     * The product switch's product items.
+     *
+     * The first item in this array receives focus when the panel opens and should always be the
+     * SAP Start product. The component does not enforce this ordering — it is the consumer's
+     * responsibility to place SAP Start at index 0.
+     */
     @Input()
     products: ProductSwitchItem[];
 
@@ -60,6 +75,9 @@ export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
     @Output()
     readonly itemClicked: EventEmitter<void> = new EventEmitter<void>();
 
+    /** Whether the product switch body is in a loading/busy state. */
+    readonly busy = input(false, { transform: booleanAttribute });
+
     /** Whether the product switch body is open. When set to true, focuses the first item. */
     readonly isOpen = model(false);
 
@@ -74,10 +92,13 @@ export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
             if (item.subtitle) {
                 parts.push(item.subtitle);
             }
-            if (item.target && item.target !== '_self') {
-                const label = targetLabels[item.target];
-                if (label) {
-                    parts.push(label);
+            if (item.url) {
+                const effectiveTarget = item.target ?? '_blank';
+                if (effectiveTarget !== '_self') {
+                    const label = targetLabels[effectiveTarget];
+                    if (label) {
+                        parts.push(label);
+                    }
                 }
             }
             return parts.join(' ');
@@ -110,13 +131,9 @@ export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
     private readonly _elementRef: ElementRef<HTMLElement> = inject(ElementRef);
 
     /** @hidden */
-    private readonly _destroyRef = inject(DestroyRef);
-
-    /** @hidden */
     private _triggerElement: HTMLElement | null = null;
 
-    /** @hidden */
-    private _lastFocusedIndex = -1;
+    private _wasDragged = false;
 
     /** @hidden */
     constructor(
@@ -124,11 +141,6 @@ export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
         private readonly _cdr: ChangeDetectorRef
     ) {
         effect(() => this._syncFocusWithOpenState());
-
-        const el = this._elementRef.nativeElement;
-        const onFocusIn = (event: FocusEvent): void => this._trackFocusedItem(event);
-        el.addEventListener('focusin', onFocusIn);
-        this._destroyRef.onDestroy(() => el.removeEventListener('focusin', onFocusIn));
     }
 
     /** @hidden */
@@ -149,13 +161,24 @@ export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
         this._subscriptions.unsubscribe();
     }
 
+    _onDragStart(): void {
+        this._wasDragged = true;
+    }
+
     /** @hidden */
     _itemClick(item: ProductSwitchItem, event: MouseEvent): void {
-        this.products.forEach((product) => (product.selected = product === item));
+        if (this._wasDragged) {
+            this._wasDragged = false;
+            return;
+        }
 
         this.itemClicked.emit();
         if (item.callback) {
             item.callback(event);
+        }
+
+        if (item.url && !item.callback) {
+            window.open(item.url, item.target ?? '_blank');
         }
     }
 
@@ -174,8 +197,8 @@ export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
         }
 
         if (KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
-            // Click the inner <a> when one exists to triggers browser navigation (including target handling),
-            // while also bubbling up to the <li>'s (click) handler to update selected state and fire itemClicked.
+            // Click the inner <a> when one exists to trigger browser navigation (including target handling),
+            // while also bubbling up to the <li>'s (click) handler to fire itemClicked.
             const anchor = target.querySelector<HTMLAnchorElement>('a.fd-product-switch__link');
             (anchor ?? target).click();
         } else if (!this._isListMode()) {
@@ -188,7 +211,12 @@ export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
 
     /** @hidden */
     _isSmallMode(): boolean {
-        return this.products?.length < 7;
+        return this.products?.length >= 3 && this.products?.length < 7;
+    }
+
+    /** @hidden */
+    _isTwoColumnMode(): boolean {
+        return this.products?.length < 3;
     }
 
     /** @hidden */
@@ -196,11 +224,11 @@ export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
         return this._listMode || this.forceListMode;
     }
 
-    /** @hidden Focuses the appropriate item on open, or returns focus to the trigger on close. */
+    /** @hidden Focuses the first item on open, or returns focus to the trigger on close. */
     private _syncFocusWithOpenState(): void {
         if (this.isOpen()) {
             this._triggerElement = document.activeElement as HTMLElement;
-            this._focusItemAtIndex(this._lastFocusedIndex >= 0 ? this._lastFocusedIndex : 0);
+            this._focusItemAtIndex(0);
         } else if (this._triggerElement) {
             this._triggerElement.focus();
             this._triggerElement = null;
@@ -213,20 +241,9 @@ export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
         items[index]?.focus();
     }
 
-    /** @hidden Records the index of the last focused product item so it can be restored on reopen. */
-    private _trackFocusedItem(event: FocusEvent): void {
-        const items = Array.from(
-            this._elementRef.nativeElement.querySelectorAll<HTMLElement>('.fd-product-switch__item')
-        );
-        const index = items.indexOf(event.target as HTMLElement);
-        if (index !== -1) {
-            this._lastFocusedIndex = index;
-        }
-    }
-
     /** @hidden */
     private _checkSize(width: number): void {
-        if (this._isSmallMode()) {
+        if (this._isTwoColumnMode() || this._isSmallMode()) {
             this._listMode = width < containerWidthPxSmallMode;
         } else {
             this._listMode = width < containerWidthPx;

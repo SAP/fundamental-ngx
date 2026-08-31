@@ -48,16 +48,22 @@ const LARGE_LIST: ProductSwitchItem[] = [
     { title: 'Marketing', icon: 'marketing-campaign' }
 ];
 
+const TWO_COL_LIST: ProductSwitchItem[] = [
+    { title: 'SAP Start', icon: 'home' },
+    { title: 'Analytics Cloud', icon: 'business-objects-experience' }
+];
+
 @Component({
     selector: 'fd-product-switch-body-test',
     template:
-        '<fd-product-switch-body [products]="list()" [forceListMode]="forceListMode()" [dragAndDropEnabled]="dragAndDropEnabled()"> </fd-product-switch-body>',
+        '<fd-product-switch-body [products]="list()" [forceListMode]="forceListMode()" [dragAndDropEnabled]="dragAndDropEnabled()" [busy]="busy()"> </fd-product-switch-body>',
     imports: [ProductSwitchBodyComponent]
 })
 class ProductSwitchBodyTestComponent {
     list: InputSignal<ProductSwitchItem[]> = input([...SMALL_LIST]);
     forceListMode = input(false);
     dragAndDropEnabled = input(true);
+    busy = input(false);
 }
 
 describe('ProductSwitchBodyComponent', () => {
@@ -121,11 +127,12 @@ describe('ProductSwitchBodyComponent', () => {
             expect(subtitles.length).toBe(0);
         });
 
-        it('should mark the selected item with the selected class', () => {
+        it('should not apply the selected class even when product.selected is true', () => {
+            // selected is deprecated and has no visual effect
             const items = fixture.debugElement.queryAll(By.css('li.fd-product-switch__item'));
-            // second item has selected: true
-            expect(items[1].nativeElement.classList).toContain('selected');
-            expect(items[0].nativeElement.classList).not.toContain('selected');
+            items.forEach((item) => {
+                expect(item.nativeElement.classList).not.toContain('selected');
+            });
         });
 
         it('should render an anchor element when product has a url', () => {
@@ -192,13 +199,81 @@ describe('ProductSwitchBodyComponent', () => {
     });
 
     describe('_isSmallMode()', () => {
-        it('should return true when products count is less than 7', () => {
-            expect(componentInstance._isSmallMode()).toBe(true);
+        it('should return true when products count is between 3 and 6 (inclusive)', () => {
+            expect(componentInstance._isSmallMode()).toBe(true); // SMALL_LIST has 5 items
+        });
+
+        it('should return false when products count is fewer than 3 (two-column territory)', () => {
+            componentInstance.products = [...TWO_COL_LIST];
+            expect(componentInstance._isSmallMode()).toBe(false);
         });
 
         it('should return false when products count is 7 or more', () => {
             componentInstance.products = [...LARGE_LIST];
             expect(componentInstance._isSmallMode()).toBe(false);
+        });
+    });
+
+    describe('_isTwoColumnMode()', () => {
+        it('should return true when fewer than 3 items are provided', () => {
+            componentInstance.products = [...TWO_COL_LIST];
+            expect(componentInstance._isTwoColumnMode()).toBe(true);
+        });
+
+        it('should return false when 3 or more items are provided', () => {
+            expect(componentInstance._isTwoColumnMode()).toBe(false); // SMALL_LIST has 5 items
+        });
+
+        it('should apply fd-product-switch__body--col-2 class when in two-column mode', () => {
+            fixture.componentRef.setInput('list', [...TWO_COL_LIST]);
+            fixture.detectChanges();
+            const body = fixture.debugElement.query(By.css('.fd-product-switch__body'));
+            expect(body.nativeElement.classList).toContain('fd-product-switch__body--col-2');
+        });
+
+        it('should not apply fd-product-switch__body--col-2 when in list mode', () => {
+            fixture.componentRef.setInput('list', [...TWO_COL_LIST]);
+            fixture.componentRef.setInput('forceListMode', true);
+            fixture.detectChanges();
+            const body = fixture.debugElement.query(By.css('.fd-product-switch__body'));
+            expect(body.nativeElement.classList).not.toContain('fd-product-switch__body--col-2');
+        });
+
+        it('should not apply fd-product-switch__body--col-2 when 3 or more items are provided', () => {
+            const body = fixture.debugElement.query(By.css('.fd-product-switch__body'));
+            expect(body.nativeElement.classList).not.toContain('fd-product-switch__body--col-2');
+        });
+    });
+
+    describe('busy signal input', () => {
+        it('should not show the loading indicator when busy is false', () => {
+            const indicator = fixture.debugElement.query(By.css('fd-busy-indicator'));
+            expect(indicator.nativeElement.getAttribute('aria-busy')).not.toBe('true');
+        });
+
+        it('should show the loading indicator when busy is true', () => {
+            fixture.componentRef.setInput('busy', true);
+            fixture.detectChanges();
+            const indicator = fixture.debugElement.query(By.css('fd-busy-indicator'));
+            expect(indicator.nativeElement.getAttribute('aria-busy')).toBe('true');
+        });
+    });
+
+    describe('URL target', () => {
+        it('should default anchor target to _blank when product has url but no target', () => {
+            fixture.componentRef.setInput('list', [{ title: 'SAP Start', icon: 'home', url: 'https://example.com' }]);
+            fixture.detectChanges();
+            const anchor = fixture.debugElement.query(By.css('a.fd-product-switch__link'));
+            expect(anchor.nativeElement.getAttribute('target')).toBe('_blank');
+        });
+
+        it('should respect explicit target when provided', () => {
+            fixture.componentRef.setInput('list', [
+                { title: 'S/4HANA', icon: 'home', url: 'https://example.com', target: '_self' }
+            ]);
+            fixture.detectChanges();
+            const anchor = fixture.debugElement.query(By.css('a.fd-product-switch__link'));
+            expect(anchor.nativeElement.getAttribute('target')).toBe('_self');
         });
     });
 
@@ -223,13 +298,13 @@ describe('ProductSwitchBodyComponent', () => {
             expect(spy).toHaveBeenCalled();
         });
 
-        it('should mark the clicked item as selected and deselect others', () => {
+        it('should not mutate product.selected when an item is clicked', () => {
+            // selected mutation was removed — Product Switch has no persistent selected state
             const items = fixture.debugElement.queryAll(By.css('li.fd-product-switch__item'));
-            // Click the first (unselected) item
             items[0].nativeElement.click();
             fixture.detectChanges();
-            expect(componentInstance.products[0].selected).toBe(true);
-            expect(componentInstance.products[1].selected).toBe(false);
+            expect(componentInstance.products[0].selected).toBeUndefined();
+            expect(componentInstance.products[1].selected).toBe(true); // original data unchanged
         });
 
         it('should invoke item callback with the click event when provided', () => {
@@ -257,6 +332,106 @@ describe('ProductSwitchBodyComponent', () => {
             componentInstance._productSwitchItemsChangeHandle(dropEvent);
             expect(spy).toHaveBeenCalledWith(reordered);
             expect(componentInstance.products).toBe(reordered);
+        });
+    });
+
+    describe('URL navigation', () => {
+        let windowOpenSpy: jest.SpyInstance;
+
+        beforeEach(() => {
+            windowOpenSpy = jest.spyOn(window, 'open').mockImplementation(() => null as any);
+        });
+
+        afterEach(() => {
+            windowOpenSpy.mockRestore();
+        });
+
+        it('should call window.open with the item url and _blank by default when clicked', () => {
+            fixture.componentRef.setInput('list', [{ title: 'Link', icon: 'home', url: 'https://example.com' }]);
+            fixture.detectChanges();
+            const item = fixture.debugElement.query(By.css('li.fd-product-switch__item'));
+            item.nativeElement.click();
+            expect(windowOpenSpy).toHaveBeenCalledWith('https://example.com', '_blank');
+        });
+
+        it('should call window.open with the explicit target when provided', () => {
+            fixture.componentRef.setInput('list', [
+                { title: 'Link', icon: 'home', url: 'https://example.com', target: '_self' }
+            ]);
+            fixture.detectChanges();
+            const item = fixture.debugElement.query(By.css('li.fd-product-switch__item'));
+            item.nativeElement.click();
+            expect(windowOpenSpy).toHaveBeenCalledWith('https://example.com', '_self');
+        });
+
+        it('should not call window.open when item has both url and callback', () => {
+            const callbackSpy = jest.fn();
+            fixture.componentRef.setInput('list', [
+                { title: 'Link', icon: 'home', url: 'https://example.com', callback: callbackSpy }
+            ]);
+            fixture.detectChanges();
+            const item = fixture.debugElement.query(By.css('li.fd-product-switch__item'));
+            item.nativeElement.click();
+            expect(windowOpenSpy).not.toHaveBeenCalled();
+            expect(callbackSpy).toHaveBeenCalledTimes(1);
+        });
+
+        it('should not call window.open when item has no url', () => {
+            const item = fixture.debugElement.query(By.css('li.fd-product-switch__item'));
+            item.nativeElement.click();
+            expect(windowOpenSpy).not.toHaveBeenCalled();
+        });
+    });
+
+    describe('drag guard', () => {
+        let windowOpenSpy: jest.SpyInstance;
+
+        beforeEach(() => {
+            windowOpenSpy = jest.spyOn(window, 'open').mockImplementation(() => null as any);
+        });
+
+        afterEach(() => {
+            windowOpenSpy.mockRestore();
+        });
+
+        it('should not emit itemClicked when a drag preceded the click', () => {
+            const spy = jest.fn();
+            componentInstance.itemClicked.subscribe(spy);
+            componentInstance._onDragStart();
+            const item = fixture.debugElement.query(By.css('li.fd-product-switch__item'));
+            item.nativeElement.click();
+            expect(spy).not.toHaveBeenCalled();
+        });
+
+        it('should not call window.open when a drag preceded the click', () => {
+            fixture.componentRef.setInput('list', [{ title: 'Link', icon: 'home', url: 'https://example.com' }]);
+            fixture.detectChanges();
+            componentInstance._onDragStart();
+            const item = fixture.debugElement.query(By.css('li.fd-product-switch__item'));
+            item.nativeElement.click();
+            expect(windowOpenSpy).not.toHaveBeenCalled();
+        });
+
+        it('should reset after a drag so the next genuine click navigates normally', () => {
+            fixture.componentRef.setInput('list', [{ title: 'Link', icon: 'home', url: 'https://example.com' }]);
+            fixture.detectChanges();
+            const item = fixture.debugElement.query(By.css('li.fd-product-switch__item'));
+
+            componentInstance._onDragStart();
+            item.nativeElement.click(); // spurious post-drag click, suppressed
+
+            item.nativeElement.click(); // genuine click
+            expect(windowOpenSpy).toHaveBeenCalledTimes(1);
+            expect(windowOpenSpy).toHaveBeenCalledWith('https://example.com', '_blank');
+        });
+    });
+
+    describe('model isOpen — focus behaviour', () => {
+        it('should focus the first item when isOpen is set to true', () => {
+            componentInstance.isOpen.set(true);
+            fixture.detectChanges();
+            const firstItem = fixture.debugElement.query(By.css('li.fd-product-switch__item'));
+            expect(document.activeElement).toBe(firstItem.nativeElement);
         });
     });
 
