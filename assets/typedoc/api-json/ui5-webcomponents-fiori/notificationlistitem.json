@@ -3,7 +3,7 @@
   "selector": null,
   "kind": "Class",
   "sourceFile": "index.ts",
-  "sourceLine": 42,
+  "sourceLine": 44,
   "sourceUrl": "",
   "description": "",
   "inputs": [
@@ -14,7 +14,7 @@
       "description": "Defines the `Important` label of the item.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 47,
+      "sourceLine": 49,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Defines if a busy indicator would be displayed over the item.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 52,
+      "sourceLine": 54,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Defines the delay in milliseconds, after which the busy indicator will show up for this component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 57,
+      "sourceLine": 59,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "Defines if the `notification` is new or has been already read.\n\n*Note:** if set to `false` the `titleText` has bold font,\nif set to true - it has a normal font.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 65,
+      "sourceLine": 67,
       "since": null
     },
     {
@@ -54,7 +54,7 @@
       "description": "Defines if the `Close` button would be displayed.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 70,
+      "sourceLine": 72,
       "since": null
     },
     {
@@ -64,7 +64,7 @@
       "description": "Defines the status indicator of the item.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 75,
+      "sourceLine": 77,
       "since": null
     },
     {
@@ -74,7 +74,7 @@
       "description": "Defines the `titleText` of the item.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 80,
+      "sourceLine": 82,
       "since": null
     },
     {
@@ -84,7 +84,7 @@
       "description": "Defines if the `titleText` and `description` should wrap,\nthey truncate by default.\n\n*Note:** by default the `titleText` and `description`,\nand a `ShowMore/Less` button would be displayed.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 89,
+      "sourceLine": 91,
       "since": null
     }
   ],
@@ -96,7 +96,7 @@
       "description": "Fired when the component is activated either with a mouse/tap or by using the Enter or Space key.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 96,
+      "sourceLine": 98,
       "since": null
     },
     {
@@ -106,7 +106,7 @@
       "description": "Fired when the `Close` button is pressed.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 101,
+      "sourceLine": 103,
       "since": null
     }
   ],

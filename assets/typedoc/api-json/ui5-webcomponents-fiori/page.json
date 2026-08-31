@@ -3,7 +3,7 @@
   "selector": null,
   "kind": "Class",
   "sourceFile": "index.ts",
-  "sourceLine": 40,
+  "sourceLine": 41,
   "sourceUrl": "",
   "description": "",
   "inputs": [
@@ -14,7 +14,7 @@
       "description": "Defines the background color of the `ui5-page`.\n\n*Note:** When a ui5-list is placed inside the page, we recommend using “List” to ensure better color contrast.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 47,
+      "sourceLine": 48,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Defines if the footer is fixed at the very bottom of the page.\n\n*Note:** When set to true the footer is fixed at the very bottom of the page, otherwise it floats over the content with a slight offset from the bottom.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 54,
+      "sourceLine": 55,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Defines the footer visibility.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 59,
+      "sourceLine": 60,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "Disables vertical scrolling of page content.\nIf set to true, there will be no vertical scrolling at all.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 65,
+      "sourceLine": 66,
       "since": null
     }
   ],

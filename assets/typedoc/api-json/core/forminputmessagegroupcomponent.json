@@ -3,8 +3,8 @@
   "selector": "fd-form-input-message-group",
   "kind": "Component",
   "sourceFile": "form-input-message-group.component.ts",
-  "sourceLine": 31,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/b83a9b2ffb/libs/core/form/form-input-message-group/form-input-message-group.component.ts#L31",
+  "sourceLine": 37,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/core/form/form-input-message-group/form-input-message-group.component.ts#L37",
   "description": "",
   "inputs": [
     {
@@ -14,7 +14,7 @@
       "description": "Whether the popover should close when the escape key is pressed.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 61,
+      "sourceLine": 67,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Allows the user to decide if he wants to keep the error message after they click outside\nWhether the popover should close when a click is made outside its boundaries.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 44,
+      "sourceLine": 50,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Preset options for the message body width.\n* `at-least` will apply a minimum width to the body equivalent to the width of the control.\n* `equal` will apply a width to the body equivalent to the width of the control.\n* Leave blank for no effect.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 53,
+      "sourceLine": 59,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "Whether the message is open. Can be used through two-way binding.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 77,
+      "sourceLine": 83,
       "since": null
     },
     {
@@ -54,7 +54,7 @@
       "description": "Whether the popover should have an arrow.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 57,
+      "sourceLine": 63,
       "since": null
     },
     {
@@ -64,7 +64,7 @@
       "description": "The placement of the popover. It can be one of: top, top-start, top-end, bottom,\n bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 66,
+      "sourceLine": 72,
       "since": null
     },
     {
@@ -74,7 +74,7 @@
       "description": "Container element, in which form message popover will be rendered.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 73,
+      "sourceLine": 79,
       "since": null
     },
     {
@@ -84,7 +84,7 @@
       "description": "Whether the popover should prevent page scrolling when space key is pressed.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 83,
+      "sourceLine": 89,
       "since": null
     },
     {
@@ -94,7 +94,7 @@
       "description": "To allow user to determine what event he wants to trigger the messages to show\nAccepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp).",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 37,
+      "sourceLine": 43,
       "since": null
     }
   ],
@@ -106,7 +106,7 @@
       "description": "Event emitted when the state of the isOpen property changes.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 87,
+      "sourceLine": 93,
       "since": null
     }
   ],
@@ -116,7 +116,7 @@
       "signature": "(isOpen: boolean) => void",
       "description": "Function is called every time message changes isOpen attribute",
       "deprecated": null,
-      "sourceLine": 106,
+      "sourceLine": 196,
       "since": null,
       "parameters": [
         {

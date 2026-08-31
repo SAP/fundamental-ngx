@@ -3,8 +3,8 @@
   "selector": "fdp-filters",
   "kind": "Component",
   "sourceFile": "filters.component.ts",
-  "sourceLine": 31,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/b83a9b2ffb/libs/platform/table/components/table-view-settings-dialog/filtering/filters.component.ts#L31",
+  "sourceLine": 35,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/platform/table/components/table-view-settings-dialog/filtering/filters.component.ts#L35",
   "description": "",
   "inputs": [
     {
@@ -14,7 +14,7 @@
       "description": "Initial set of filters applied",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 41,
+      "sourceLine": 45,
       "since": null
     }
   ],
@@ -26,7 +26,7 @@
       "description": "Emits when the active filter step view changes",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 44,
+      "sourceLine": 48,
       "since": null
     },
     {
@@ -36,7 +36,7 @@
       "description": "Emits the final result of filter changes",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 47,
+      "sourceLine": 51,
       "since": null
     },
     {
@@ -46,7 +46,7 @@
       "description": "Emits whether the reset button should be enabled",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 50,
+      "sourceLine": 54,
       "since": null
     }
   ],
@@ -56,7 +56,7 @@
       "signature": "(filter: CollectionFilter, filterComponent: Nullable<TableViewSettingsFilterComponent>) => void",
       "description": "Apply changes to the selected filter and emit the filter change event.",
       "deprecated": null,
-      "sourceLine": 121,
+      "sourceLine": 153,
       "since": null,
       "parameters": [
         {
@@ -79,7 +79,7 @@
       "signature": "() => void",
       "description": "Navigate back to the top-level filters list",
       "deprecated": null,
-      "sourceLine": 111,
+      "sourceLine": 143,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -89,7 +89,7 @@
       "signature": "(filter: SelectableFilter) => void",
       "description": "Select a filter to drill down and update the active filter step.",
       "deprecated": null,
-      "sourceLine": 101,
+      "sourceLine": 133,
       "since": null,
       "parameters": [
         {

@@ -48,6 +48,32 @@ export class ExampleComponent {
 }
 ```
 
+### Use Secondary Entry Points
+
+For best bundle size, use secondary entry points rather than the barrel import. When you import from the barrel, all 66 components are bundled together because each component registers its web component as a side effect during initialization, preventing tree-shaking.
+
+**Larger bundle:**
+```typescript
+import { IllustratedMessage } from '@fundamental-ngx/ui5-webcomponents-fiori';
+```
+
+**Smaller bundle:**
+```typescript
+import { IllustratedMessage } from '@fundamental-ngx/ui5-webcomponents-fiori/illustrated-message';
+```
+
+Secondary entry points bundle only what you use — the difference is times smaller bundle size.
+
+### Illustrations
+
+UI5 fiori loads only the `BeforeSearch` illustration by default. To use other illustrations, import them explicitly:
+
+```typescript
+import '@ui5/webcomponents-fiori/dist/illustrations/NoData.js';
+```
+
+Do not barrel-import the entire illustration set—import only what you use. Each illustration is added individually when needed.
+
 ### Using Angular Components Inside UI5 Components
 
 Angular components often use selectors with hyphens (e.g. `<app-item>`, `<app-value>`).

@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "form-field.component.ts",
   "sourceLine": 120,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/b83a9b2ffb/libs/platform/form/form-group/form-field/form-field.component.ts#L120",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/platform/form/form-group/form-field/form-field.component.ts#L120",
   "description": "Form Field represent actual row and aggregates common behavior for the input field such as\nerror, label or hint.\nHint is also responsible for listening for FieldControl changes and trigger necessary\nchange detection",
   "inputs": [
     {
@@ -173,13 +173,13 @@
   "methods": [
     {
       "name": "getPriorityState",
-      "signature": "() => 'error' | 'default' | 'information' | 'success' | 'warning'",
+      "signature": "() => 'error' | 'success' | 'warning' | 'information' | 'default'",
       "description": "Gets prioritized control state based on the error types it has.",
       "deprecated": null,
       "sourceLine": 739,
       "since": null,
       "parameters": [],
-      "returnType": "'error' | 'default' | 'information' | 'success' | 'warning'"
+      "returnType": "'error' | 'success' | 'warning' | 'information' | 'default'"
     },
     {
       "name": "groupErrors",

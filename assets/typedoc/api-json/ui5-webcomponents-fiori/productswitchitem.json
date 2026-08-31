@@ -3,7 +3,7 @@
   "selector": null,
   "kind": "Class",
   "sourceFile": "index.ts",
-  "sourceLine": 40,
+  "sourceLine": 42,
   "sourceUrl": "",
   "description": "",
   "inputs": [
@@ -14,7 +14,7 @@
       "description": "Defines the icon to be displayed as a graphical element within the component.\n\nExample:\n\n`<ui5-product-switch-item icon=\"palette\">`\n\nSee all the available icons in the [Icon Explorer](https://sdk.openui5.org/test-resources/sap/m/demokit/iconExplorer/webapp/index.html).",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 51,
+      "sourceLine": 53,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Defines the subtitle of the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 56,
+      "sourceLine": 58,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Defines a target where the `targetSrc` content must be open.\n\nAvailable options are:\n\n- `_self`\n- `_top`\n- `_blank`\n- `_parent`\n- `_search`\n\n*Note:** By default target will be open in the same frame as it was clicked.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 71,
+      "sourceLine": 73,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "Defines the component target URI. Supports standard hyperlink behavior.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 76,
+      "sourceLine": 78,
       "since": null
     },
     {
@@ -54,7 +54,7 @@
       "description": "Defines the title of the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 81,
+      "sourceLine": 83,
       "since": null
     }
   ],
@@ -66,7 +66,7 @@
       "description": "Fired when the `ui5-product-switch-item` is activated either with a\nclick/tap or by using the Enter or Space key.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 89,
+      "sourceLine": 91,
       "since": null
     }
   ],

@@ -3,7 +3,7 @@
   "selector": null,
   "kind": "Class",
   "sourceFile": "index.ts",
-  "sourceLine": 40,
+  "sourceLine": 42,
   "sourceUrl": "",
   "description": "",
   "inputs": [
@@ -14,7 +14,7 @@
       "description": "Defines the additional text of the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 45,
+      "sourceLine": 47,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Defines the text of the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 50,
+      "sourceLine": 52,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Defines the value of the `ui5-cb-item`.\n\nUse this property to associate a unique identifier or machine-readable value with the item,\nseparate from the display text. This enables:\n- Selecting items programmatically via `selectedValue` on the ComboBox\n- Submitting machine-readable values in forms\n- Distinguishing between items with identical display text\n\n*When to use:**\n- **Recommended:** Use the `value` property on items together with `selectedValue` on the ComboBox when you need unique identifiers\n- Omit `value` if the display text (`text` property) is sufficient for your use case\n\n*Example:**\n```html\n<ui5-combobox selected-value=\"DE\">\n<ui5-cb-item text=\"Germany\" value=\"DE\"></ui5-cb-item>\n<ui5-cb-item text=\"France\" value=\"FR\"></ui5-cb-item>\n</ui5-combobox>\n```",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 73,
+      "sourceLine": 75,
       "since": null
     }
   ],
@@ -46,7 +46,7 @@
       "description": "Fired when the component is activated either with a mouse/tap or by using the Enter or Space key.\n\n*Note:** The event will not be fired if the `disabled` property is set to `true`.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 82,
+      "sourceLine": 84,
       "since": null
     }
   ],

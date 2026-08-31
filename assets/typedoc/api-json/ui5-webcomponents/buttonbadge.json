@@ -3,7 +3,7 @@
   "selector": null,
   "kind": "Class",
   "sourceFile": "index.ts",
-  "sourceLine": 40,
+  "sourceLine": 41,
   "sourceUrl": "",
   "description": "",
   "inputs": [
@@ -14,7 +14,7 @@
       "description": "Defines the badge placement and appearance.\n- **InlineText** - displayed inside the button after its text, and recommended for **compact** density.\n- **OverlayText** - displayed at the top-end corner of the button, and recommended for **cozy** density.\n- **AttentionDot** - displayed at the top-end corner of the button as a dot, and suitable for both **cozy** and **compact** densities.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 48,
+      "sourceLine": 49,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Defines the text of the component.\n\n*Note:** Text is not applied when the `design` property is set to `AttentionDot`.\n\n*Note:** The badge component only accepts numeric values and the \"+\" symbol. Using other characters or formats may result in unpredictable behavior, which is not guaranteed or supported.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 57,
+      "sourceLine": 58,
       "since": null
     }
   ],

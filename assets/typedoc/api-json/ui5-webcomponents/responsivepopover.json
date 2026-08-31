@@ -3,7 +3,7 @@
   "selector": null,
   "kind": "Class",
   "sourceFile": "index.ts",
-  "sourceLine": 43,
+  "sourceLine": 45,
   "sourceUrl": "",
   "description": "",
   "inputs": [
@@ -14,7 +14,7 @@
       "description": "Defines the accessible description of the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 48,
+      "sourceLine": 50,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Receives id(or many ids) of the elements that describe the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 53,
+      "sourceLine": 55,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Defines the accessible name of the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 58,
+      "sourceLine": 60,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "Defines the IDs of the elements that label the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 63,
+      "sourceLine": 65,
       "since": null
     },
     {
@@ -54,7 +54,7 @@
       "description": "Allows setting a custom role.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 68,
+      "sourceLine": 70,
       "since": null
     },
     {
@@ -64,7 +64,7 @@
       "description": "Determines if there is no enough space, the component can be placed\nover the target.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 74,
+      "sourceLine": 76,
       "since": null
     },
     {
@@ -74,7 +74,7 @@
       "description": "Defines the header text.\n\n*Note:** If `header` slot is provided, the `headerText` is ignored.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 81,
+      "sourceLine": 83,
       "since": null
     },
     {
@@ -84,7 +84,7 @@
       "description": "Determines whether the component arrow is hidden.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 86,
+      "sourceLine": 88,
       "since": null
     },
     {
@@ -94,7 +94,7 @@
       "description": "Determines the horizontal alignment of the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 91,
+      "sourceLine": 93,
       "since": null
     },
     {
@@ -104,7 +104,7 @@
       "description": "Defines the ID of the HTML Element, which will get the initial focus.\n\n*Note:** If an element with `autofocus` attribute is added inside the component,\n`initialFocus` won't take effect.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 99,
+      "sourceLine": 101,
       "since": null
     },
     {
@@ -114,7 +114,7 @@
       "description": "Defines whether the component should close when\nclicking/tapping outside the popover.\nIf enabled, it blocks any interaction with the background.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 106,
+      "sourceLine": 108,
       "since": null
     },
     {
@@ -124,7 +124,7 @@
       "description": "Indicates if the element is open",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 111,
+      "sourceLine": 113,
       "since": null
     },
     {
@@ -134,7 +134,7 @@
       "description": "Defines the ID or DOM Reference of the element at which the popover is shown.\nWhen using this attribute in a declarative way, you must only use the `id` (as a string) of the element at which you want to show the popover.\nYou can only set the `opener` attribute to a DOM Reference when using JavaScript.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 118,
+      "sourceLine": 120,
       "since": null
     },
     {
@@ -144,7 +144,7 @@
       "description": "Determines on which side the component is placed at.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 123,
+      "sourceLine": 125,
       "since": null
     },
     {
@@ -154,7 +154,7 @@
       "description": "Defines if the focus should be returned to the previously focused element,\nwhen the popup closes.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 129,
+      "sourceLine": 131,
       "since": null
     },
     {
@@ -164,7 +164,7 @@
       "description": "Indicates whether initial focus should be prevented.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 134,
+      "sourceLine": 136,
       "since": null
     },
     {
@@ -174,7 +174,7 @@
       "description": "Determines whether the component is resizable.\n*Note:** This property is effective only on desktop devices.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 140,
+      "sourceLine": 142,
       "since": null
     },
     {
@@ -184,7 +184,7 @@
       "description": "Determines the vertical alignment of the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 145,
+      "sourceLine": 147,
       "since": null
     }
   ],
@@ -196,7 +196,7 @@
       "description": "Fired before the component is closed. This event can be cancelled, which will prevent the popup from closing.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 152,
+      "sourceLine": 154,
       "since": null
     },
     {
@@ -206,7 +206,7 @@
       "description": "Fired before the component is opened. This event can be cancelled, which will prevent the popup from opening.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 157,
+      "sourceLine": 159,
       "since": null
     },
     {
@@ -216,7 +216,7 @@
       "description": "Fired after the component is closed.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 162,
+      "sourceLine": 164,
       "since": null
     },
     {
@@ -226,7 +226,7 @@
       "description": "Fired after the component is opened.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 167,
+      "sourceLine": 169,
       "since": null
     }
   ],

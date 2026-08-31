@@ -4,11 +4,41 @@
   "kind": "Class",
   "sourceFile": "directives.ts",
   "sourceLine": 27,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/b83a9b2ffb/libs/platform/table-helpers/models/directives.ts#L27",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/platform/table-helpers/models/directives.ts#L27",
   "description": "",
   "inputs": [],
   "outputs": [],
   "methods": [
+    {
+      "name": "getInitialFilterBySnapshot",
+      "signature": "() => CollectionFilter[]",
+      "description": "Returns the initial filter state snapshot captured when setInitialState() was first called.",
+      "deprecated": null,
+      "sourceLine": 45,
+      "since": null,
+      "parameters": [],
+      "returnType": "CollectionFilter[]"
+    },
+    {
+      "name": "getInitialGroupBySnapshot",
+      "signature": "() => CollectionGroup[]",
+      "description": "Returns the initial group state snapshot captured when setInitialState() was first called.",
+      "deprecated": null,
+      "sourceLine": 49,
+      "since": null,
+      "parameters": [],
+      "returnType": "CollectionGroup[]"
+    },
+    {
+      "name": "getInitialSortBySnapshot",
+      "signature": "() => CollectionSort[]",
+      "description": "Returns the initial sort state snapshot captured when setInitialState() was first called.\nThis value does not change even if the initialSortBy input is dynamically updated.\nUsed by the settings dialog to determine the true \"reset\" target.",
+      "deprecated": null,
+      "sourceLine": 41,
+      "since": null,
+      "parameters": [],
+      "returnType": "CollectionSort[]"
+    },
     {
       "name": "setInitialState",
       "signature": "() => void",

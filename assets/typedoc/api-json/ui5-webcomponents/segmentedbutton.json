@@ -3,7 +3,7 @@
   "selector": null,
   "kind": "Class",
   "sourceFile": "index.ts",
-  "sourceLine": 41,
+  "sourceLine": 43,
   "sourceUrl": "",
   "description": "",
   "inputs": [
@@ -14,7 +14,7 @@
       "description": "Defines the accessible description of the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 46,
+      "sourceLine": 48,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Defines the IDs of the HTML Elements that describe the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 51,
+      "sourceLine": 53,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Defines the accessible ARIA name of the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 56,
+      "sourceLine": 58,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "Defines the IDs of the HTML Elements that label the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 61,
+      "sourceLine": 63,
       "since": null
     },
     {
@@ -54,7 +54,7 @@
       "description": "Determines whether the segmented button items should be sized to fit their content.\n\nIf set to `true`, each item will be sized to fit its content, with any extra space distributed after the last item.\nIf set to `false` (the default), all items will be equally sized to fill the available space.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 69,
+      "sourceLine": 71,
       "since": null
     },
     {
@@ -64,7 +64,7 @@
       "description": "Defines the component selection mode.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 74,
+      "sourceLine": 76,
       "since": null
     }
   ],
@@ -76,7 +76,7 @@
       "description": "Fired when the selected item changes.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 87,
+      "sourceLine": 89,
       "since": null
     }
   ],

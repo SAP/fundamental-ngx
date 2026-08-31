@@ -4,7 +4,7 @@
   "kind": "Class",
   "sourceFile": "attribute.observer.ts",
   "sourceLine": 11,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/b83a9b2ffb/libs/cdk/utils/services/observers/attribute.observer.ts#L11",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/cdk/utils/services/observers/attribute.observer.ts#L11",
   "description": "",
   "inputs": [],
   "outputs": [],

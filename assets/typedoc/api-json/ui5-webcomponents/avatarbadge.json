@@ -3,7 +3,7 @@
   "selector": null,
   "kind": "Class",
   "sourceFile": "index.ts",
-  "sourceLine": 40,
+  "sourceLine": 41,
   "sourceUrl": "",
   "description": "",
   "inputs": [
@@ -14,7 +14,7 @@
       "description": "Defines the icon name to be displayed inside the badge.\n\n*Note:** You should import the desired icon first, then use its name as \"icon\".\n\n`import \"@ui5/webcomponents-icons/dist/{icon_name}.js\"`",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 49,
+      "sourceLine": 50,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Defines the state of the badge, which determines its styling.\n\nAvailable options:\n- `None` (default) - Standard appearance\n- `Positive` - Green, used for success/approved states\n- `Critical` - Orange, used for warning states\n- `Negative` - Red, used for error/rejected states\n- `Information` - Blue, used for informational states",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 61,
+      "sourceLine": 62,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Defines the tooltip text of the badge icon.\n\n*Note:** If not provided, the badge uses the icon accessible name.\nIf no icon accessible name is available, a generic fallback text is used.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 69,
+      "sourceLine": 70,
       "since": null
     }
   ],

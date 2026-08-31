@@ -3,7 +3,7 @@
   "selector": null,
   "kind": "Class",
   "sourceFile": "index.ts",
-  "sourceLine": 40,
+  "sourceLine": 42,
   "sourceUrl": "",
   "description": "",
   "inputs": [
@@ -14,7 +14,7 @@
       "description": "Indicates whether the dialog is open.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 45,
+      "sourceLine": 47,
       "since": null
     }
   ],
@@ -26,7 +26,7 @@
       "description": "Fired when the user closes the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 52,
+      "sourceLine": 54,
       "since": null
     },
     {
@@ -36,7 +36,7 @@
       "description": "Fires when the scan fails with error.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 57,
+      "sourceLine": 59,
       "since": null
     },
     {
@@ -46,7 +46,7 @@
       "description": "Fires when the scan is completed successfully.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 62,
+      "sourceLine": 64,
       "since": null
     }
   ],

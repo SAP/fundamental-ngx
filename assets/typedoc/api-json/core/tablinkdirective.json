@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "tab-link.directive.ts",
   "sourceLine": 25,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/b83a9b2ffb/libs/core/tabs/tab-link/tab-link.directive.ts#L25",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/core/tabs/tab-link/tab-link.directive.ts#L25",
   "description": "Tab link for nav mode\n\n```html\n<a fd-tab-link>\n   link\n</a>\n```",
   "inputs": [],
   "outputs": [

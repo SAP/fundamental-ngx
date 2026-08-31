@@ -3,8 +3,8 @@
   "selector": "fdp-table",
   "kind": "Component",
   "sourceFile": "table.component.ts",
-  "sourceLine": 268,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/b83a9b2ffb/libs/platform/table/table.component.ts#L268",
+  "sourceLine": 267,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/platform/table/table.component.ts#L267",
   "description": "The component that represents a table.\nA table is a set of tabular data. Line items can support data, images and actions.\n```html\n<fdp-table\n [dataSource]=\"source\"\n fdCompact\n selectionMode=\"multiple\"\n emptyTableMessage=\"No data found\">\n\n <fdp-table-toolbar\n  title=\"Order Line Items\"\n  [hideItemCount]=\"false\">\n </fdp-table-toolbar>\n\n <fdp-column\n  name=\"name\"\n  key=\"name\"\n  label=\"Name\"\n  align=\"start\">\n </fdp-column>\n\n <fdp-column\n  name=\"description\"\n  key=\"description\"\n  label=\"Description\">\n </fdp-column>\n</fdp-table>\n```",
   "inputs": [
     {
@@ -14,7 +14,7 @@
       "description": "aria-labelledby attribute value for the table.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 503,
+      "sourceLine": 502,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Table body height.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 319,
+      "sourceLine": 318,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Used to construct empty row object for editing.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 409,
+      "sourceLine": 408,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "Text displayed when table has no items.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 322,
+      "sourceLine": 321,
       "since": null
     },
     {
@@ -54,7 +54,7 @@
       "description": "Whether to allow resizing columns by dragging the column edge with mouse.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 283,
+      "sourceLine": 282,
       "since": null
     },
     {
@@ -64,7 +64,7 @@
       "description": "Whether all rows should be collapsed by default after the table is loaded.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 412,
+      "sourceLine": 411,
       "since": null
     },
     {
@@ -74,7 +74,7 @@
       "description": "Table row expanded state key. Used to set the initial state of tree row.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 366,
+      "sourceLine": 365,
       "since": null
     },
     {
@@ -84,7 +84,7 @@
       "description": "Whether to fix the table header and footer. Default is true.\nNote that if the table contains freezable columns, the header and\nfooter will be fixed automatically, regardless of this input value.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 291,
+      "sourceLine": 290,
       "since": null
     },
     {
@@ -94,7 +94,7 @@
       "description": "Whether to force rows to follow 'checked all' state of the table.\nIf true, all new rows that are coming from the dataSource will follow 'checked all' state.\nIf false, row will respect `checkedKey` property to define checked state of itself.\nDefault is false.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 497,
+      "sourceLine": 496,
       "since": null
     },
     {
@@ -104,7 +104,7 @@
       "description": "The column `name` to freeze columns up to and including.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 295,
+      "sourceLine": 294,
       "since": null
     },
     {
@@ -114,7 +114,7 @@
       "description": "The column `name` to freeze columns after and including.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 299,
+      "sourceLine": 298,
       "since": null
     },
     {
@@ -124,7 +124,7 @@
       "description": "Property key indicating that the row has children accessible via [childDataSource].",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 369,
+      "sourceLine": 368,
       "since": null
     },
     {
@@ -134,7 +134,7 @@
       "description": "Whether to highlight navigated row.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 381,
+      "sourceLine": 380,
       "since": null
     },
     {
@@ -144,7 +144,7 @@
       "description": "Whether to load previous pages.\nThis option works only when `pageScrolling` is true, and the initial page > 1",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 430,
+      "sourceLine": 429,
       "since": null
     },
     {
@@ -154,7 +154,7 @@
       "description": "Loading state",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 841,
+      "sourceLine": 840,
       "since": null
     },
     {
@@ -164,7 +164,7 @@
       "description": "The minimum width at which the user can resize a column, in pixels. Default is 50.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 507,
+      "sourceLine": 506,
       "since": null
     },
     {
@@ -174,7 +174,7 @@
       "description": "Component name used in a Preset-managed component.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 274,
+      "sourceLine": 273,
       "since": null
     },
     {
@@ -184,7 +184,7 @@
       "description": "Table body without any borders, but header with borders.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 350,
+      "sourceLine": 349,
       "since": null
     },
     {
@@ -194,7 +194,7 @@
       "description": "Table body without horizontal borders.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 357,
+      "sourceLine": 356,
       "since": null
     },
     {
@@ -204,7 +204,7 @@
       "description": "Table body without vertical borders.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 360,
+      "sourceLine": 359,
       "since": null
     },
     {
@@ -214,7 +214,7 @@
       "description": "Table without borders.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 347,
+      "sourceLine": 346,
       "since": null
     },
     {
@@ -224,7 +224,7 @@
       "description": "Table without horizontal borders.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 328,
+      "sourceLine": 327,
       "since": null
     },
     {
@@ -234,7 +234,7 @@
       "description": "Table without outer borders",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 354,
+      "sourceLine": 353,
       "since": null
     },
     {
@@ -244,7 +244,7 @@
       "description": "Text displayed when table has no visible columns.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 325,
+      "sourceLine": 324,
       "since": null
     },
     {
@@ -254,7 +254,7 @@
       "description": "Whether or not the header cells should be interactive\n(have hover and active states)\ndefault: false",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 438,
+      "sourceLine": 437,
       "since": null
     },
     {
@@ -264,7 +264,7 @@
       "description": "If the table scrolling should happen outside and stick the toolbar and thead",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 331,
+      "sourceLine": 330,
       "since": null
     },
     {
@@ -274,7 +274,7 @@
       "description": "Toggle for page scrolling feature.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 302,
+      "sourceLine": 301,
       "since": null
     },
     {
@@ -284,7 +284,7 @@
       "description": "Page scrolling threshold in px.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 316,
+      "sourceLine": 315,
       "since": null
     },
     {
@@ -294,7 +294,7 @@
       "description": "Number of items per page.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 313,
+      "sourceLine": 312,
       "since": null
     },
     {
@@ -304,7 +304,7 @@
       "description": "Accessor to a children nodes of tree.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 363,
+      "sourceLine": 362,
       "since": null
     },
     {
@@ -314,7 +314,7 @@
       "description": "An optional function that identifies uniqueness of a particular row.\nTable component uses it to be able to preserve selection when a data list is changed.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 403,
+      "sourceLine": 402,
       "since": null
     },
     {
@@ -324,7 +324,7 @@
       "description": "Minimum height of the row, required for the virtualScroll,\ndefault is 44px in cozy, 32px in compact and 24px in condensed (set automatically)",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 418,
+      "sourceLine": 417,
       "since": null
     },
     {
@@ -334,7 +334,7 @@
       "description": "Whether row is navigatable.\nPass boolean value to set state for the all rows.\nPass string value with the key of the row item's field to compute state for every single row.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 376,
+      "sourceLine": 375,
       "since": null
     },
     {
@@ -344,7 +344,7 @@
       "description": "Whether table row can be clicked",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 384,
+      "sourceLine": 383,
       "since": null
     },
     {
@@ -354,7 +354,7 @@
       "description": "String or function to calculate additional rows' CSS classes.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 406,
+      "sourceLine": 405,
       "since": null
     },
     {
@@ -364,7 +364,7 @@
       "description": "Minimum height of the popping column when displayed in pop-in mode. Required when using popping columns and virtual scroll.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 423,
+      "sourceLine": 422,
       "since": null
     },
     {
@@ -374,7 +374,7 @@
       "description": "Value with the key of the row item's field to enable selecting.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 390,
+      "sourceLine": 389,
       "since": null
     },
     {
@@ -384,7 +384,7 @@
       "description": "Value with the key of the row item's field to enable selecting.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 387,
+      "sourceLine": 386,
       "since": null
     },
     {
@@ -394,7 +394,7 @@
       "description": "Whether the table should render growing button at the bottom.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 305,
+      "sourceLine": 304,
       "since": null
     },
     {
@@ -404,7 +404,7 @@
       "description": "Whether to show total items amount in growing button text content.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 310,
+      "sourceLine": 309,
       "since": null
     },
     {
@@ -414,7 +414,7 @@
       "description": "Whether to display the table footer.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 511,
+      "sourceLine": 510,
       "since": null
     },
     {
@@ -424,7 +424,7 @@
       "description": "Tracking function that will be used to check the differences in data changes.\nUsed similarly to `ngFor` `trackBy` function.\nAccepts a function that takes two parameters, index and item.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 397,
+      "sourceLine": 396,
       "since": null
     }
   ],
@@ -436,7 +436,7 @@
       "description": "Event emitted when all rows being collapsed.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 598,
+      "sourceLine": 597,
       "since": null
     },
     {
@@ -446,7 +446,7 @@
       "description": "Event emitted when all rows being expanded.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 595,
+      "sourceLine": 594,
       "since": null
     },
     {
@@ -456,7 +456,7 @@
       "description": "Event fired when cancel button pressed.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 586,
+      "sourceLine": 585,
       "since": null
     },
     {
@@ -466,7 +466,7 @@
       "description": "Event fired when a cell is clicked or focused.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 570,
+      "sourceLine": 569,
       "since": null
     },
     {
@@ -476,7 +476,7 @@
       "description": "Event emitted when a cell is focused.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 601,
+      "sourceLine": 600,
       "since": null
     },
     {
@@ -486,7 +486,7 @@
       "description": "Event fired when there is a change in the frozen column.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 564,
+      "sourceLine": 563,
       "since": null
     },
     {
@@ -496,7 +496,7 @@
       "description": "Event fired when visible columns list has been changed.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 558,
+      "sourceLine": 557,
       "since": null
     },
     {
@@ -506,7 +506,7 @@
       "description": "Event fired when empty row added.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 579,
+      "sourceLine": 578,
       "since": null
     },
     {
@@ -516,7 +516,7 @@
       "description": "Event fired when the table filter has changed.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 552,
+      "sourceLine": 551,
       "since": null
     },
     {
@@ -526,7 +526,7 @@
       "description": "Event fired when table grouping has changed.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 555,
+      "sourceLine": 554,
       "since": null
     },
     {
@@ -536,7 +536,7 @@
       "description": "Event emitted when pagination state has been changed.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 561,
+      "sourceLine": 560,
       "since": null
     },
     {
@@ -546,7 +546,7 @@
       "description": "Event emitted when current preset configuration has been changed.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 541,
+      "sourceLine": 540,
       "since": null
     },
     {
@@ -556,7 +556,7 @@
       "description": "Event fired when row navigated.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 573,
+      "sourceLine": 572,
       "since": null
     },
     {
@@ -566,7 +566,7 @@
       "description": "Event fired when row navigated.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 576,
+      "sourceLine": 575,
       "since": null
     },
     {
@@ -576,7 +576,7 @@
       "description": "Event fired when table selection has changed.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 544,
+      "sourceLine": 543,
       "since": null
     },
     {
@@ -586,7 +586,7 @@
       "description": "Event fired when group/tree row collapsed/expanded.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 567,
+      "sourceLine": 566,
       "since": null
     },
     {
@@ -596,7 +596,7 @@
       "description": "Event fired when save button pressed.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 582,
+      "sourceLine": 581,
       "since": null
     },
     {
@@ -606,7 +606,7 @@
       "description": "Event fired when table sort order has changed.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 549,
+      "sourceLine": 548,
       "since": null
     },
     {
@@ -616,7 +616,7 @@
       "description": "Event emitted when new rows has been set and rendered.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 592,
+      "sourceLine": 591,
       "since": null
     },
     {
@@ -626,7 +626,7 @@
       "description": "Event emitted when table body being scrolled.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 589,
+      "sourceLine": 588,
       "since": null
     }
   ],
@@ -636,7 +636,7 @@
       "signature": "(filterRules: CollectionFilter[]) => void",
       "description": "Add Filter rule",
       "deprecated": null,
-      "sourceLine": 1210,
+      "sourceLine": 1208,
       "since": null,
       "parameters": [
         {
@@ -653,7 +653,7 @@
       "signature": "(groups: CollectionGroup[]) => void",
       "description": "Add Groups",
       "deprecated": null,
-      "sourceLine": 1228,
+      "sourceLine": 1226,
       "since": null,
       "parameters": [
         {
@@ -670,7 +670,7 @@
       "signature": "() => void",
       "description": "Adds empty row for editing at the beginning of the rows array.",
       "deprecated": null,
-      "sourceLine": 1442,
+      "sourceLine": 1440,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -680,7 +680,7 @@
       "signature": "(sortRules: CollectionSort[]) => void",
       "description": "Add Sorting rules to the existing ones",
       "deprecated": null,
-      "sourceLine": 1198,
+      "sourceLine": 1196,
       "since": null,
       "parameters": [
         {
@@ -697,7 +697,7 @@
       "signature": "() => void",
       "description": "Cancels editing and discards newly added rows",
       "deprecated": null,
-      "sourceLine": 1459,
+      "sourceLine": 1457,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -707,7 +707,7 @@
       "signature": "() => void",
       "description": "Clears the array of table rows. Triggered when new data source is applied.",
       "deprecated": null,
-      "sourceLine": 1573,
+      "sourceLine": 1571,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -717,7 +717,7 @@
       "signature": "() => void",
       "description": "collapse all rows",
       "deprecated": null,
-      "sourceLine": 1291,
+      "sourceLine": 1289,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -727,7 +727,7 @@
       "signature": "() => void",
       "description": "expand all rows",
       "deprecated": null,
-      "sourceLine": 1280,
+      "sourceLine": 1278,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -737,7 +737,7 @@
       "signature": "() => void",
       "description": "Fetch data source data.",
       "deprecated": null,
-      "sourceLine": 1789,
+      "sourceLine": 1787,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -747,7 +747,7 @@
       "signature": "(filterRules: CollectionFilter[]) => void",
       "description": "Set Filter rules",
       "deprecated": null,
-      "sourceLine": 1204,
+      "sourceLine": 1202,
       "since": null,
       "parameters": [
         {
@@ -764,7 +764,7 @@
       "signature": "(position: FocusableCellPosition) => void",
       "description": "Function used to focus a cell in the table utilizing a FocusableCellPosition interface.",
       "deprecated": null,
-      "sourceLine": 1565,
+      "sourceLine": 1563,
       "since": null,
       "parameters": [
         {
@@ -781,7 +781,7 @@
       "signature": "(columnName: string, end?: boolean) => void",
       "description": "Freeze table to column",
       "deprecated": null,
-      "sourceLine": 1258,
+      "sourceLine": 1256,
       "since": null,
       "parameters": [
         {
@@ -804,7 +804,7 @@
       "signature": "() => Partial<Omit<TableState, 'columnKeys'>>",
       "description": "Returns current preset configuration.",
       "deprecated": null,
-      "sourceLine": 1494,
+      "sourceLine": 1492,
       "since": null,
       "parameters": [],
       "returnType": "Partial<Omit<TableState, 'columnKeys'>>"
@@ -814,7 +814,7 @@
       "signature": "() => number[]",
       "description": "Returns array of rows that are currently rendered in the table body.",
       "deprecated": null,
-      "sourceLine": 965,
+      "sourceLine": 963,
       "since": null,
       "parameters": [],
       "returnType": "number[]"
@@ -824,7 +824,7 @@
       "signature": "() => TableDataSource<T>",
       "description": "Get table data source",
       "deprecated": null,
-      "sourceLine": 1435,
+      "sourceLine": 1433,
       "since": null,
       "parameters": [],
       "returnType": "TableDataSource<T>"
@@ -834,7 +834,7 @@
       "signature": "() => number",
       "description": "Gets the max allowed width for all freezable columns",
       "deprecated": null,
-      "sourceLine": 1423,
+      "sourceLine": 1421,
       "since": null,
       "parameters": [],
       "returnType": "number"
@@ -844,7 +844,7 @@
       "signature": "() => TableColumn[]",
       "description": "Get table columns definition list.",
       "deprecated": null,
-      "sourceLine": 1182,
+      "sourceLine": 1180,
       "since": null,
       "parameters": [],
       "returnType": "TableColumn[]"
@@ -854,7 +854,7 @@
       "signature": "() => TableState",
       "description": "Get current state/settings of the Table.",
       "deprecated": null,
-      "sourceLine": 1161,
+      "sourceLine": 1159,
       "since": null,
       "parameters": [],
       "returnType": "TableState"
@@ -864,7 +864,7 @@
       "signature": "() => TableColumn[]",
       "description": "Get a list of visible table columns.",
       "deprecated": null,
-      "sourceLine": 1187,
+      "sourceLine": 1185,
       "since": null,
       "parameters": [],
       "returnType": "TableColumn[]"
@@ -874,7 +874,7 @@
       "signature": "(groups: CollectionGroup[]) => void",
       "description": "Set Groups",
       "deprecated": null,
-      "sourceLine": 1222,
+      "sourceLine": 1220,
       "since": null,
       "parameters": [
         {
@@ -891,7 +891,7 @@
       "signature": "() => void",
       "description": "Manually triggers column's width recalculation",
       "deprecated": null,
-      "sourceLine": 1416,
+      "sourceLine": 1414,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -901,7 +901,7 @@
       "signature": "() => void",
       "description": "Manually triggers list item event listeners for drag&drop list directive.",
       "deprecated": null,
-      "sourceLine": 1523,
+      "sourceLine": 1521,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -911,7 +911,7 @@
       "signature": "(fields: string[]) => void",
       "description": "Removes filters for the provided fields",
       "deprecated": null,
-      "sourceLine": 1216,
+      "sourceLine": 1214,
       "since": null,
       "parameters": [
         {
@@ -928,7 +928,7 @@
       "signature": "(rowIndex: number) => void",
       "description": "Remove the row navigation",
       "deprecated": null,
-      "sourceLine": 1401,
+      "sourceLine": 1399,
       "since": null,
       "parameters": [
         {
@@ -945,7 +945,7 @@
       "signature": "() => void",
       "description": "Emits save event and resets editable rows array.",
       "deprecated": null,
-      "sourceLine": 1467,
+      "sourceLine": 1465,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -955,7 +955,7 @@
       "signature": "(searchInput: SearchInput) => void",
       "description": "Search in table",
       "deprecated": null,
-      "sourceLine": 1304,
+      "sourceLine": 1302,
       "since": null,
       "parameters": [
         {
@@ -972,7 +972,7 @@
       "signature": "(columns: string[]) => void",
       "description": "Set visible table columns\nThe order is matter",
       "deprecated": null,
-      "sourceLine": 1238,
+      "sourceLine": 1236,
       "since": null,
       "parameters": [
         {
@@ -989,7 +989,7 @@
       "signature": "(currentPage: number) => void",
       "description": "Set current page number in table",
       "deprecated": null,
-      "sourceLine": 1310,
+      "sourceLine": 1308,
       "since": null,
       "parameters": [
         {
@@ -1006,7 +1006,7 @@
       "signature": "(startIndex: number, length: number) => void",
       "description": "Sets an array of rows that are currently rendered in the table body.",
       "deprecated": null,
-      "sourceLine": 974,
+      "sourceLine": 972,
       "since": null,
       "parameters": [
         {
@@ -1029,7 +1029,7 @@
       "signature": "(disabled: boolean) => void",
       "description": "Disable filter from column heder menu",
       "deprecated": null,
-      "sourceLine": 1346,
+      "sourceLine": 1344,
       "since": null,
       "parameters": [
         {
@@ -1046,7 +1046,7 @@
       "signature": "(pageSize: number, resetPageNumber: boolean) => void",
       "description": "Set items per page number in table",
       "deprecated": null,
-      "sourceLine": 1316,
+      "sourceLine": 1314,
       "since": null,
       "parameters": [
         {
@@ -1069,7 +1069,7 @@
       "signature": "(data: Partial<Omit<TableState, 'columnKeys'>>) => void",
       "description": "",
       "deprecated": "use 'setTableState' instead. Sets current preset for the Table.",
-      "sourceLine": 1489,
+      "sourceLine": 1487,
       "since": null,
       "parameters": [
         {
@@ -1086,7 +1086,7 @@
       "signature": "(rowIndex: number, value: boolean) => void",
       "description": "Sets the checked state of the row.",
       "deprecated": null,
-      "sourceLine": 1388,
+      "sourceLine": 1386,
       "since": null,
       "parameters": [
         {
@@ -1109,7 +1109,7 @@
       "signature": "(rowIndex: number, rowNavigatable: string | boolean) => void",
       "description": "Set the row navigation",
       "deprecated": null,
-      "sourceLine": 1351,
+      "sourceLine": 1349,
       "since": null,
       "parameters": [
         {
@@ -1132,7 +1132,7 @@
       "signature": "(state: TableState | Partial<Omit<TableState, 'columnKeys'>>) => void",
       "description": "Set current state/settings of the Table.",
       "deprecated": null,
-      "sourceLine": 1166,
+      "sourceLine": 1164,
       "since": null,
       "parameters": [
         {
@@ -1149,7 +1149,7 @@
       "signature": "(showColumnSettings: boolean) => void",
       "description": "Toolbar Columns Settings button visibility",
       "deprecated": null,
-      "sourceLine": 1336,
+      "sourceLine": 1334,
       "since": null,
       "parameters": [
         {
@@ -1166,7 +1166,7 @@
       "signature": "(showFilterSettings: boolean) => void",
       "description": "Toolbar Filter Settings button visibility",
       "deprecated": null,
-      "sourceLine": 1326,
+      "sourceLine": 1324,
       "since": null,
       "parameters": [
         {
@@ -1183,7 +1183,7 @@
       "signature": "(showGroupSettings: boolean) => void",
       "description": "Toolbar Group Settings button visibility",
       "deprecated": null,
-      "sourceLine": 1331,
+      "sourceLine": 1329,
       "since": null,
       "parameters": [
         {
@@ -1200,7 +1200,7 @@
       "signature": "(showSettings: boolean) => void",
       "description": "Toolbar Settings button visibility",
       "deprecated": null,
-      "sourceLine": 1341,
+      "sourceLine": 1339,
       "since": null,
       "parameters": [
         {
@@ -1217,7 +1217,7 @@
       "signature": "(showSortSettings: boolean) => void",
       "description": "Toolbar Sort Settings button visibility",
       "deprecated": null,
-      "sourceLine": 1321,
+      "sourceLine": 1319,
       "since": null,
       "parameters": [
         {
@@ -1234,7 +1234,7 @@
       "signature": "(sortRules: CollectionSort[]) => void",
       "description": "Set Sorting rules",
       "deprecated": null,
-      "sourceLine": 1192,
+      "sourceLine": 1190,
       "since": null,
       "parameters": [
         {
@@ -1251,7 +1251,7 @@
       "signature": "(rowIndexes: number[]) => void",
       "description": "Programmatically toggles `expand` state of the row with defined index.",
       "deprecated": null,
-      "sourceLine": 1549,
+      "sourceLine": 1547,
       "since": null,
       "parameters": [
         {
@@ -1268,7 +1268,7 @@
       "signature": "(rowIndex: number) => void",
       "description": "Toggle row checked state.",
       "deprecated": null,
-      "sourceLine": 1369,
+      "sourceLine": 1367,
       "since": null,
       "parameters": [
         {
@@ -1285,7 +1285,7 @@
       "signature": "(columnName: string, end?: boolean) => void",
       "description": "Unfreeze column",
       "deprecated": null,
-      "sourceLine": 1266,
+      "sourceLine": 1264,
       "since": null,
       "parameters": [
         {

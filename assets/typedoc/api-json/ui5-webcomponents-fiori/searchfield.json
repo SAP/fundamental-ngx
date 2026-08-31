@@ -3,7 +3,7 @@
   "selector": null,
   "kind": "Class",
   "sourceFile": "index.ts",
-  "sourceLine": 40,
+  "sourceLine": 42,
   "sourceUrl": "",
   "description": "",
   "inputs": [
@@ -14,7 +14,7 @@
       "description": "Defines the accessible ARIA description of the field.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 45,
+      "sourceLine": 47,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Defines the accessible ARIA name of the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 50,
+      "sourceLine": 52,
       "since": null
     },
     {
@@ -34,17 +34,17 @@
       "description": "Indicates whether a loading indicator should be shown in the input field.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 55,
+      "sourceLine": 57,
       "since": null
     },
     {
       "name": "placeholder",
       "type": "string",
       "default": null,
-      "description": "Defines a short hint intended to aid the user with data entry when the\ncomponent has no value.",
+      "description": "Defines a short hint intended to aid the user with data entry when the\ncomponent has no value.\n\n*Note:** When `scopes` are defined and no custom placeholder is provided,\nthe placeholder automatically displays \"Search in: {selected scope name}\".\nSetting a custom placeholder will override this automatic behavior.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 61,
+      "sourceLine": 67,
       "since": null
     },
     {
@@ -54,7 +54,7 @@
       "description": "Defines the value of the component:\n\nApplications are responsible for setting the correct scope value.\n\n*Note:** If the given value does not match any existing scopes,\nno scope will be selected and the SearchField scope component will be displayed as empty.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 71,
+      "sourceLine": 77,
       "since": null
     },
     {
@@ -64,7 +64,7 @@
       "description": "Defines whether the clear icon of the search will be shown.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 76,
+      "sourceLine": 82,
       "since": null
     },
     {
@@ -74,7 +74,7 @@
       "description": "Defines the value of the component.\n\n*Note:** The property is updated upon typing.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 83,
+      "sourceLine": 89,
       "since": null
     }
   ],
@@ -86,7 +86,7 @@
       "description": "Fired when typing in input or clear icon is pressed.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 90,
+      "sourceLine": 96,
       "since": null
     },
     {
@@ -96,7 +96,7 @@
       "description": "Fired when the scope has changed.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 95,
+      "sourceLine": 101,
       "since": null
     },
     {
@@ -106,7 +106,7 @@
       "description": "Fired when the user has triggered search with Enter key or Search Button press.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 100,
+      "sourceLine": 106,
       "since": null
     }
   ],

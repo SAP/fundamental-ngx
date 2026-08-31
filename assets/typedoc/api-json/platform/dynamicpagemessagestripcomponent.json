@@ -1,0 +1,13 @@
+{
+  "name": "DynamicPageMessageStripComponent",
+  "selector": "fdp-dynamic-page-message-strip",
+  "kind": "Component",
+  "sourceFile": "dynamic-page-message-strip.component.ts",
+  "sourceLine": 13,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/platform/dynamic-page/dynamic-page-header/message-strip/dynamic-page-message-strip.component.ts#L13",
+  "description": "",
+  "inputs": [],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

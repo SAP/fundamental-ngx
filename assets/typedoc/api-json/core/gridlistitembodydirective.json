@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "grid-list-item-body.directive.ts",
   "sourceLine": 8,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/b83a9b2ffb/libs/core/grid-list/directives/grid-list-item-body.directive.ts#L8",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/core/grid-list/directives/grid-list-item-body.directive.ts#L8",
   "description": "",
   "inputs": [],
   "outputs": [],

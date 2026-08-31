@@ -3,7 +3,7 @@
   "selector": null,
   "kind": "Class",
   "sourceFile": "index.ts",
-  "sourceLine": 40,
+  "sourceLine": 41,
   "sourceUrl": "",
   "description": "",
   "inputs": [
@@ -14,7 +14,7 @@
       "description": "Defines the icon to be displayed as graphical element within the component after the text.\nThe SAP-icons font provides numerous options.\n\n*Example:**\n\nSee all the available icons in the [Icon Explorer](https://sdk.openui5.org/test-resources/sap/m/demokit/iconExplorer/webapp/index.html).",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 50,
+      "sourceLine": 51,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Defines the icon to be displayed as graphical element within the component before the text.\nThe SAP-icons font provides numerous options.\n\n*Example:**\n\nSee all the available icons in the [Icon Explorer](https://sdk.openui5.org/test-resources/sap/m/demokit/iconExplorer/webapp/index.html).",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 60,
+      "sourceLine": 61,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Defines the name of the button state.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 65,
+      "sourceLine": 66,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "Defines if the component is in split button mode.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 70,
+      "sourceLine": 71,
       "since": null
     },
     {
@@ -54,7 +54,7 @@
       "description": "Defines the text of the button in this state.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 75,
+      "sourceLine": 76,
       "since": null
     }
   ],

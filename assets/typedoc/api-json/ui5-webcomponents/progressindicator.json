@@ -3,7 +3,7 @@
   "selector": null,
   "kind": "Class",
   "sourceFile": "index.ts",
-  "sourceLine": 40,
+  "sourceLine": 41,
   "sourceUrl": "",
   "description": "",
   "inputs": [
@@ -14,7 +14,7 @@
       "description": "Defines the accessible ARIA name of the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 45,
+      "sourceLine": 46,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Specifies the text value to be displayed in the bar.\n\n*Note:**\n\n- If there is no value provided or the value is empty, the default percentage value is shown.\n- If `hideValue` property is `true` both the `displayValue` and `value` property values are not shown.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 55,
+      "sourceLine": 56,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Defines whether the component value is shown.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 60,
+      "sourceLine": 61,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "Specifies the numerical value in percent for the length of the component.\n\n*Note:**\nIf a value greater than 100 is provided, the percentValue is set to 100. In other cases of invalid value, percentValue is set to its default of 0.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 68,
+      "sourceLine": 69,
       "since": null
     },
     {
@@ -54,7 +54,7 @@
       "description": "Defines the value state of the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 73,
+      "sourceLine": 74,
       "since": null
     }
   ],

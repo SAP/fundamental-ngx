@@ -3,7 +3,7 @@
   "selector": null,
   "kind": "Class",
   "sourceFile": "index.ts",
-  "sourceLine": 40,
+  "sourceLine": 42,
   "sourceUrl": "",
   "description": "",
   "inputs": [
@@ -14,7 +14,7 @@
       "description": "Defines the initial group order.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 45,
+      "sourceLine": 47,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Indicates if the dialog is open.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 50,
+      "sourceLine": 52,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Controls whether the Reset button is always enabled.\n\nBy default, the Reset button is enabled only when the built-in settings (Sort, Filter, Group)\ndiffer from their initial state — the component can detect these changes automatically.\nHowever, when the dialog contains custom tabs, the component has no way to detect\nwhether the custom tab content has been modified by the user.\n\nSet this property to `true` when the user has made changes inside a custom tab, so that\nthe Reset button becomes enabled and the user can trigger a reset.\nSet it back to `false` once the custom tab content is back to its initial state\n(e.g. after the user confirms or after a reset is applied).",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 65,
+      "sourceLine": 67,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "Defines the initial sort order.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 70,
+      "sourceLine": 72,
       "since": null
     }
   ],
@@ -56,7 +56,7 @@
       "description": "Fired before the component is opened.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 77,
+      "sourceLine": 79,
       "since": null
     },
     {
@@ -66,7 +66,7 @@
       "description": "Fired when cancel button is activated.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 82,
+      "sourceLine": 84,
       "since": null
     },
     {
@@ -76,7 +76,7 @@
       "description": "Fired after the dialog is closed.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 87,
+      "sourceLine": 89,
       "since": null
     },
     {
@@ -86,7 +86,7 @@
       "description": "Fired when confirmation button is activated.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 92,
+      "sourceLine": 94,
       "since": null
     },
     {
@@ -96,7 +96,7 @@
       "description": "Fired after the dialog is opened.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 97,
+      "sourceLine": 99,
       "since": null
     },
     {
@@ -106,7 +106,7 @@
       "description": "Fired when the Reset button is clicked.\n\n*Note:** This event is particularly relevant when the dialog contains custom tabs.\nBy default, the Reset button resets all built-in settings (sort, filter, group) to their\ninitial values. However, the component has no knowledge of the content or state inside\ncustom tabs — it cannot detect what has changed or what the \"default\" values are.\nTherefore, when this event is fired, it is the application developer's responsibility\nto listen for it and manually reset the custom tab content to its initial state.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 109,
+      "sourceLine": 111,
       "since": null
     }
   ],

@@ -4,9 +4,19 @@
   "kind": "Class",
   "sourceFile": "base-button.ts",
   "sourceLine": 31,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5fe1a54e76/libs/core/button/base-button.ts#L31",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/047f9ed5fa/libs/core/button/base-button.ts#L31",
   "description": "",
   "inputs": [
+    {
+      "name": "ariaDescribedBy",
+      "type": "null | string",
+      "default": null,
+      "description": "Custom aria-describedby value.\nWhen provided, bypasses the component's auto-generated aria-describedby\n(which references the hidden description spans) and uses this value directly.\nUse this when you need to reference external elements as the description source.\nNative aria-describedby attributes are captured automatically via ngOnInit.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 148,
+      "since": null
+    },
     {
       "name": "ariaDescription",
       "type": "null | string",
@@ -35,6 +45,16 @@
       "isSignal": true,
       "deprecated": null,
       "sourceLine": 124,
+      "since": null
+    },
+    {
+      "name": "ariaTypeDescription",
+      "type": "null | string",
+      "default": null,
+      "description": "Override the default type description for special button types.\nProvides a custom description for screen readers.\nIf not provided, defaults to the i18n-translated type description.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 139,
       "since": null
     },
     {
@@ -145,7 +165,7 @@
       "signature": "() => ButtonType",
       "description": "Get the current button type.\nReturns the internal button type which may have been modified programmatically.",
       "deprecated": null,
-      "sourceLine": 231,
+      "sourceLine": 247,
       "since": null,
       "parameters": [],
       "returnType": "ButtonType"
@@ -155,7 +175,7 @@
       "signature": "() => boolean",
       "description": "Get the current disabled state.\nReturns the internal disabled state which may have been modified programmatically.",
       "deprecated": null,
-      "sourceLine": 203,
+      "sourceLine": 219,
       "since": null,
       "parameters": [],
       "returnType": "boolean"
@@ -165,7 +185,7 @@
       "signature": "() => boolean",
       "description": "Get the current selected state.\nReturns the internal selected state which may have been modified programmatically.",
       "deprecated": null,
-      "sourceLine": 259,
+      "sourceLine": 275,
       "since": null,
       "parameters": [],
       "returnType": "boolean"
@@ -175,7 +195,7 @@
       "signature": "() => boolean",
       "description": "Get the current toggled state.\nReturns the internal toggled state which may have been modified programmatically.",
       "deprecated": null,
-      "sourceLine": 289,
+      "sourceLine": 305,
       "since": null,
       "parameters": [],
       "returnType": "boolean"
@@ -185,7 +205,7 @@
       "signature": "() => void",
       "description": "No-op for ButtonModel interface compatibility.\nSignals automatically notify Angular when they change.",
       "deprecated": "Signals eliminate the need for manual change detection.",
-      "sourceLine": 170,
+      "sourceLine": 186,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -195,7 +215,7 @@
       "signature": "(value: boolean) => void",
       "description": "Programmatically set the disabled state.\nThis allows parent components or directives to update the button's disabled state.",
       "deprecated": null,
-      "sourceLine": 186,
+      "sourceLine": 202,
       "since": null,
       "parameters": [
         {
@@ -212,7 +232,7 @@
       "signature": "(value: ButtonType) => void",
       "description": "Programmatically set the button type.\nThis allows directives to override the button's visual style.",
       "deprecated": null,
-      "sourceLine": 221,
+      "sourceLine": 237,
       "since": null,
       "parameters": [
         {
@@ -229,7 +249,7 @@
       "signature": "(value: boolean) => void",
       "description": "Programmatically set the selected state.\nThis allows parent components to update the button's selected state.\nUsed in button groups or toolbars to indicate active selection.",
       "deprecated": null,
-      "sourceLine": 249,
+      "sourceLine": 265,
       "since": null,
       "parameters": [
         {
@@ -246,7 +266,7 @@
       "signature": "(value: boolean) => void",
       "description": "Programmatically set the toggled state.\nThis allows parent components to update the button's toggled state.\nUsed for toggle buttons that maintain an on/off state.",
       "deprecated": null,
-      "sourceLine": 279,
+      "sourceLine": 295,
       "since": null,
       "parameters": [
         {

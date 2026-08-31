@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "navigation-list-item.component.ts",
   "sourceLine": 88,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5fe1a54e76/libs/btp/navigation/components/navigation-item/navigation-list-item.component.ts#L88",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/047f9ed5fa/libs/btp/navigation/components/navigation-item/navigation-list-item.component.ts#L88",
   "description": "",
   "inputs": [
     {
@@ -25,7 +25,7 @@
       "signature": "(event: KeyboardEvent) => void",
       "description": "",
       "deprecated": null,
-      "sourceLine": 646,
+      "sourceLine": 662,
       "since": null,
       "parameters": [
         {
@@ -42,7 +42,7 @@
       "signature": "() => boolean",
       "description": "Determines if this item can be selected based on its type and structure.",
       "deprecated": null,
-      "sourceLine": 842,
+      "sourceLine": 848,
       "since": null,
       "parameters": [],
       "returnType": "boolean"
@@ -52,7 +52,7 @@
       "signature": "() => void",
       "description": "Focus method implementation.\nUsed by main navigation component FocusKeyManager.",
       "deprecated": null,
-      "sourceLine": 742,
+      "sourceLine": 758,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -62,7 +62,7 @@
       "signature": "(closePopover: boolean) => void",
       "description": "Focuses inner link element.\nOptionally closes the popover.",
       "deprecated": null,
-      "sourceLine": 754,
+      "sourceLine": 770,
       "since": null,
       "parameters": [
         {
@@ -79,7 +79,7 @@
       "signature": "() => void",
       "description": "Handles item click for both selection and expansion based on item type and navigation mode.",
       "deprecated": null,
-      "sourceLine": 693,
+      "sourceLine": 709,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -89,7 +89,7 @@
       "signature": "(event: KeyboardEvent) => void",
       "description": "Handles keydown events for navigation item actions.",
       "deprecated": null,
-      "sourceLine": 712,
+      "sourceLine": 728,
       "since": null,
       "parameters": [
         {
@@ -106,7 +106,7 @@
       "signature": "(shouldExpand: boolean) => void",
       "description": "Callback method when user used keyboard arrows to expand/collapse list item.",
       "deprecated": null,
-      "sourceLine": 727,
+      "sourceLine": 743,
       "since": null,
       "parameters": [
         {
@@ -123,7 +123,7 @@
       "signature": "() => void",
       "description": "Callback method when Arrow down is pressed on the link in popover.",
       "deprecated": null,
-      "sourceLine": 641,
+      "sourceLine": 657,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -133,7 +133,7 @@
       "signature": "() => void",
       "description": "Toggles expanded state of the item.",
       "deprecated": null,
-      "sourceLine": 675,
+      "sourceLine": 691,
       "since": null,
       "parameters": [],
       "returnType": "void"

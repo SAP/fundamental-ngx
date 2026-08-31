@@ -3,7 +3,7 @@
   "selector": null,
   "kind": "Class",
   "sourceFile": "index.ts",
-  "sourceLine": 40,
+  "sourceLine": 42,
   "sourceUrl": "",
   "description": "",
   "inputs": [
@@ -14,7 +14,7 @@
       "description": "Defines the count of extra rows to be rendered at the top and bottom of the table.\n\n*Note:** This property is experimental and may be changed or deleted in the future.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 47,
+      "sourceLine": 49,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Defines the total count of rows in the table.\n\n*Note:** For virtualization to work properly, this property is mandatory.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 54,
+      "sourceLine": 56,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Defines the height of the rows in the table.\n\n*Note:** For virtualization to work properly, this property is mandatory.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 61,
+      "sourceLine": 63,
       "since": null
     }
   ],
@@ -46,7 +46,7 @@
       "description": "Fired when the virtualizer is changed by user interaction e.g. on scrolling.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 68,
+      "sourceLine": 70,
       "since": null
     }
   ],

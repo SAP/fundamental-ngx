@@ -3,7 +3,7 @@
   "selector": null,
   "kind": "Class",
   "sourceFile": "index.ts",
-  "sourceLine": 40,
+  "sourceLine": 42,
   "sourceUrl": "",
   "description": "",
   "inputs": [
@@ -14,7 +14,7 @@
       "description": "Defines the duration in milliseconds for which component\nremains on the screen before it's automatically closed.\n\n*Note:** The minimum supported value is `500` ms\nand even if a lower value is set, the duration would remain `500` ms.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 49,
+      "sourceLine": 51,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Indicates whether the component is open (visible).",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 54,
+      "sourceLine": 56,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Defines the placement of the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 59,
+      "sourceLine": 61,
       "since": null
     }
   ],
@@ -46,7 +46,7 @@
       "description": "Fired after the component is auto closed.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 66,
+      "sourceLine": 68,
       "since": null
     }
   ],

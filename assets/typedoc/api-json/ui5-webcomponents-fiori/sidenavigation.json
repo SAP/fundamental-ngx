@@ -3,7 +3,7 @@
   "selector": null,
   "kind": "Class",
   "sourceFile": "index.ts",
-  "sourceLine": 40,
+  "sourceLine": 42,
   "sourceUrl": "",
   "description": "",
   "inputs": [
@@ -14,7 +14,7 @@
       "description": "Defines the accessible ARIA name of the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 45,
+      "sourceLine": 47,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Defines whether the `ui5-side-navigation` is expanded or collapsed.\n\n*Note:** On small screens (screen width of 599px or less) the collapsed mode is not supported, and in\nexpanded mode the side navigation will take the whole width of the screen.\nThe `ui5-side-navigation` component is intended to be used within a `ui5-navigation-layout`\ncomponent to ensure proper responsive behavior. If you choose not to use the\n`ui5-navigation-layout`, you will need to implement the appropriate responsive patterns yourself,\nparticularly for smaller screens where the collapsed mode should not be used.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 57,
+      "sourceLine": 59,
       "since": null
     }
   ],
@@ -36,7 +36,17 @@
       "description": "Fired when an item is clicked.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 64,
+      "sourceLine": 66,
+      "since": null
+    },
+    {
+      "name": "ui5ItemToggle",
+      "type": "UI5CustomEvent<SideNavigation, 'item-toggle'>",
+      "default": null,
+      "description": "Fired when a `ui5-side-navigation-item` or `ui5-side-navigation-group` is expanded or collapsed.\n\n*Note:** You can call `preventDefault()` on the event to suppress the expand/collapse.\nThe `expanded` state stays unchanged. This is handy, for example, if you want to\ndynamically load child items before allowing a parent item to expand.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 75,
       "since": null
     },
     {
@@ -46,7 +56,7 @@
       "description": "Fired when the selection has changed via user interaction.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 69,
+      "sourceLine": 80,
       "since": null
     }
   ],

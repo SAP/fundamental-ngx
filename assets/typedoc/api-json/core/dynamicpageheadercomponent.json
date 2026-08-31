@@ -3,8 +3,8 @@
   "selector": "fd-dynamic-page-header",
   "kind": "Component",
   "sourceFile": "dynamic-page-header.component.ts",
-  "sourceLine": 53,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/b83a9b2ffb/libs/core/dynamic-page/dynamic-page-header/header/dynamic-page-header.component.ts#L53",
+  "sourceLine": 55,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/core/dynamic-page/dynamic-page-header/header/dynamic-page-header.component.ts#L55",
   "description": "",
   "inputs": [
     {
@@ -14,7 +14,17 @@
       "description": "The heading level (h1-h6) for the dynamic page title.\nDetermines the semantic hierarchy for accessibility and SEO.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 83,
+      "sourceLine": 85,
+      "since": null
+    },
+    {
+      "name": "messageStripTemplate",
+      "type": "null | TemplateRef<any>",
+      "default": null,
+      "description": "Optional template ref for message strip content.\nWhen provided, the message strip container is rendered using this template\ninstead of relying on ng-content projection.\nThis is used by Platform Dynamic Page which cannot project via ng-content.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 122,
       "since": null
     },
     {
@@ -24,7 +34,7 @@
       "description": "The subtitle text displayed below the title in the dynamic page header.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 70,
+      "sourceLine": 72,
       "since": null
     },
     {
@@ -34,7 +44,7 @@
       "description": "The heading level (h1-h6) for the dynamic page subtitle.\nWhen provided, the subtitle will be rendered as a semantic heading with role=\"heading\".\nWhen not provided (undefined/null), the subtitle is rendered as plain text without a heading role.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 91,
+      "sourceLine": 93,
       "since": null
     },
     {
@@ -44,7 +54,7 @@
       "description": "Whether the subtitle text should wrap to multiple lines instead of truncating with ellipsis.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 76,
+      "sourceLine": 78,
       "since": null
     },
     {
@@ -54,7 +64,7 @@
       "description": "The title text displayed in the dynamic page header.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 58,
+      "sourceLine": 60,
       "since": null
     },
     {
@@ -64,7 +74,7 @@
       "description": "The unique ID for the dynamic page title element.\nUsed for ARIA relationships and programmatic reference.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 98,
+      "sourceLine": 100,
       "since": null
     },
     {
@@ -74,7 +84,7 @@
       "description": "Whether the title text should wrap to multiple lines instead of truncating with ellipsis.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 64,
+      "sourceLine": 66,
       "since": null
     }
   ],

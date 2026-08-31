@@ -3,7 +3,7 @@
   "selector": null,
   "kind": "Class",
   "sourceFile": "index.ts",
-  "sourceLine": 40,
+  "sourceLine": 42,
   "sourceUrl": "",
   "description": "",
   "inputs": [
@@ -14,7 +14,7 @@
       "description": "Defines the accessible name of the icon.\n\n*Note:** This property is used for accessibility purposes and will be announced by screen readers.\nWhen set, it is also rendered as a native `title` tooltip.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 48,
+      "sourceLine": 50,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Defines the icon name to be displayed.\n\n*Note:** Make sure you import the desired icon before using it.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 55,
+      "sourceLine": 57,
       "since": null
     }
   ],
@@ -36,7 +36,7 @@
       "description": "Fired when the `ui5-input-icon` is activated either with a click/tap or by using the Enter or Space key.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 62,
+      "sourceLine": 64,
       "since": null
     }
   ],

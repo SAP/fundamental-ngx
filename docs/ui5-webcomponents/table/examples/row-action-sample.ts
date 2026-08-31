@@ -35,7 +35,6 @@ interface ProductRow {
     navigated?: boolean;
     actions: RowAction[];
     hasNavigation?: boolean;
-    navigationInteractive?: boolean;
 }
 
 @Component({
@@ -68,8 +67,7 @@ export class RowActionTableSample {
             price: '899.99',
             interactive: true,
             actions: [],
-            hasNavigation: true,
-            navigationInteractive: false
+            hasNavigation: true
         },
         {
             rowKey: '2',
@@ -87,8 +85,7 @@ export class RowActionTableSample {
                 { icon: 'share', text: 'Share', handler: 'onShare' },
                 { icon: 'heart', text: 'Like', handler: 'onLike' }
             ],
-            hasNavigation: true,
-            navigationInteractive: true
+            hasNavigation: true
         },
         {
             rowKey: '3',

@@ -3,7 +3,7 @@
   "selector": null,
   "kind": "Class",
   "sourceFile": "index.ts",
-  "sourceLine": 40,
+  "sourceLine": 41,
   "sourceUrl": "",
   "description": "",
   "inputs": [
@@ -14,7 +14,7 @@
       "description": "Property used to define the access of the item to the overflow Popover. If \"NeverOverflow\" option is set,\nthe item never goes in the Popover, if \"AlwaysOverflow\" - it never comes out of it.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 46,
+      "sourceLine": 47,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Defines if the toolbar overflow popup should close upon interaction with the item.\nIt will close by default.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 52,
+      "sourceLine": 53,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Defines the width of the spacer.\n\n*Note:** all CSS sizes are supported - 'percentage', 'px', 'rem', 'auto', etc.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 59,
+      "sourceLine": 60,
       "since": null
     }
   ],

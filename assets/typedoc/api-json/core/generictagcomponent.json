@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "generic-tag.component.ts",
   "sourceLine": 37,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/b83a9b2ffb/libs/core/generic-tag/generic-tag.component.ts#L37",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/core/generic-tag/generic-tag.component.ts#L37",
   "description": "",
   "inputs": [
     {

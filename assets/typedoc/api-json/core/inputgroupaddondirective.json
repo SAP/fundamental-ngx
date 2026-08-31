@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "input-group-directives.ts",
   "sourceLine": 76,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/b83a9b2ffb/libs/core/input-group/input-group-directives.ts#L76",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/core/input-group/input-group-directives.ts#L76",
   "description": "",
   "inputs": [
     {
@@ -39,7 +39,7 @@
     },
     {
       "name": "state",
-      "type": "'error' | 'default' | 'information' | 'warning' | 'success'",
+      "type": "'error' | 'default' | 'information' | 'success' | 'warning'",
       "default": null,
       "description": "The state of the form control - applies css classes.\n Can be `success`, `error`, `warning`, `information` or blank for default.",
       "isSignal": false,

@@ -43,6 +43,22 @@ export class ExampleComponent {
 }
 ```
 
+### Use Secondary Entry Points
+
+For best bundle size, use secondary entry points rather than the barrel import. When you import from the barrel, all components are bundled together because each component registers its web component as a side effect during initialization, preventing tree-shaking.
+
+**Larger bundle:**
+```typescript
+import { PromptInput } from '@fundamental-ngx/ui5-webcomponents-ai';
+```
+
+**Smaller bundle:**
+```typescript
+import { PromptInput } from '@fundamental-ngx/ui5-webcomponents-ai/prompt-input';
+```
+
+Secondary entry points bundle only what you use — the difference yields significantly smaller bundle sizes.
+
 ### Using Angular Components Inside UI5 Components
 
 Angular components often use selectors with hyphens (e.g. `<app-item>`, `<app-value>`).

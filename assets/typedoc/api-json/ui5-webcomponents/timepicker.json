@@ -3,7 +3,7 @@
   "selector": null,
   "kind": "Class",
   "sourceFile": "index.ts",
-  "sourceLine": 49,
+  "sourceLine": 51,
   "sourceUrl": "",
   "description": "",
   "inputs": [
@@ -14,7 +14,7 @@
       "description": "Defines the accessible description of the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 54,
+      "sourceLine": 56,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Receives id(or many ids) of the elements that describe the input.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 59,
+      "sourceLine": 61,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Defines the aria-label attribute for the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 64,
+      "sourceLine": 66,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "Receives id (or many ids) of the elements that label the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 69,
+      "sourceLine": 71,
       "since": null
     },
     {
@@ -54,7 +54,7 @@
       "description": "Defines the disabled state of the comonent.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 74,
+      "sourceLine": 76,
       "since": null
     },
     {
@@ -64,7 +64,7 @@
       "description": "Determines the format, displayed in the input field.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 79,
+      "sourceLine": 81,
       "since": null
     },
     {
@@ -74,7 +74,7 @@
       "description": "Determines the format, displayed in the input field.\n\nExample:\nHH:mm:ss -> 11:42:35\nhh:mm:ss a -> 2:23:15 PM\nmm:ss -> 12:04 (only minutes and seconds)",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 89,
+      "sourceLine": 91,
       "since": null
     },
     {
@@ -84,7 +84,7 @@
       "description": "Determines the name by which the component will be identified upon submission in an HTML form.\n\n*Note:** This property is only applicable within the context of an HTML Form element.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 96,
+      "sourceLine": 98,
       "since": null
     },
     {
@@ -94,7 +94,7 @@
       "description": "Defines the open or closed state of the popover.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 101,
+      "sourceLine": 103,
       "since": null
     },
     {
@@ -104,7 +104,7 @@
       "description": "Defines a short hint, intended to aid the user with data entry when the\ncomponent has no value.\n\n*Note:** When no placeholder is set, the format pattern is displayed as a placeholder.\nPassing an empty string as the value of this property will make the component appear empty - without placeholder or format pattern.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 110,
+      "sourceLine": 112,
       "since": null
     },
     {
@@ -114,7 +114,7 @@
       "description": "Defines the readonly state of the comonent.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 115,
+      "sourceLine": 117,
       "since": null
     },
     {
@@ -124,7 +124,7 @@
       "description": "Defines whether the component is required.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 120,
+      "sourceLine": 122,
       "since": null
     },
     {
@@ -134,7 +134,7 @@
       "description": "Defines a formatted time value.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 125,
+      "sourceLine": 127,
       "since": null
     },
     {
@@ -144,7 +144,7 @@
       "description": "Determines the format, used for the value attribute.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 130,
+      "sourceLine": 132,
       "since": null
     },
     {
@@ -154,7 +154,7 @@
       "description": "Defines the value state of the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 135,
+      "sourceLine": 137,
       "since": null
     }
   ],
@@ -166,7 +166,7 @@
       "description": "Fired when the input operation has finished by clicking the \"OK\" button or\nwhen the text in the input field has changed and the focus leaves the input field.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 150,
+      "sourceLine": 152,
       "since": null
     },
     {
@@ -176,7 +176,7 @@
       "description": "Fired after the value-help dialog of the component is closed.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 155,
+      "sourceLine": 157,
       "since": null
     },
     {
@@ -186,7 +186,7 @@
       "description": "Fired when the value of the `ui5-time-picker` is changed at each key stroke.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 160,
+      "sourceLine": 162,
       "since": null
     },
     {
@@ -196,7 +196,7 @@
       "description": "Fired after the value-help dialog of the component is opened.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 165,
+      "sourceLine": 167,
       "since": null
     }
   ],

@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "splitter-pane-container.component.ts",
   "sourceLine": 82,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5fe1a54e76/libs/btp/splitter/splitter-pane-container/splitter-pane-container.component.ts#L82",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/047f9ed5fa/libs/btp/splitter/splitter-pane-container/splitter-pane-container.component.ts#L82",
   "description": "",
   "inputs": [
     {

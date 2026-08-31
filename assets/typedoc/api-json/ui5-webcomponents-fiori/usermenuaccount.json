@@ -3,7 +3,7 @@
   "selector": null,
   "kind": "Class",
   "sourceFile": "index.ts",
-  "sourceLine": 40,
+  "sourceLine": 41,
   "sourceUrl": "",
   "description": "",
   "inputs": [
@@ -14,7 +14,7 @@
       "description": "Defines additional information for the user.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 45,
+      "sourceLine": 46,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Defines the background color of the desired image.\nIf `avatarColorScheme` is set to `Auto`, the avatar will be displayed with the `Accent6` color.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 51,
+      "sourceLine": 52,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Defines the avatar initials of the user.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 56,
+      "sourceLine": 57,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "Defines the avatar image url of the user.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 61,
+      "sourceLine": 62,
       "since": null
     },
     {
@@ -54,7 +54,7 @@
       "description": "Defines description of the user.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 66,
+      "sourceLine": 67,
       "since": null
     },
     {
@@ -64,7 +64,7 @@
       "description": "Indicates whether a loading indicator should be shown.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 71,
+      "sourceLine": 72,
       "since": null
     },
     {
@@ -74,7 +74,7 @@
       "description": "Defines if the user is selected.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 76,
+      "sourceLine": 77,
       "since": null
     },
     {
@@ -84,7 +84,7 @@
       "description": "Defines additional text of the user.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 81,
+      "sourceLine": 82,
       "since": null
     },
     {
@@ -94,7 +94,7 @@
       "description": "Defines the title text of the user.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 86,
+      "sourceLine": 87,
       "since": null
     }
   ],

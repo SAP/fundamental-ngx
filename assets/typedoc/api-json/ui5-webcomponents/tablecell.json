@@ -3,7 +3,7 @@
   "selector": null,
   "kind": "Class",
   "sourceFile": "index.ts",
-  "sourceLine": 40,
+  "sourceLine": 41,
   "sourceUrl": "",
   "description": "",
   "inputs": [
@@ -14,7 +14,7 @@
       "description": "Determines the horizontal alignment of table cells.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 45,
+      "sourceLine": 46,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Defines whether the cell is visually merged with the cell directly above it.\n\nThis is useful if consecutive cells in a column have the same value and should visually appear as a single merged cell.\nAlthough the cell is visually merged with the previous one, its content must still be provided for accessibility purposes.\n*Note:** This feature is disabled when cells are rendered as a popin, and should remain `false` for interactive cell content.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 54,
+      "sourceLine": 55,
       "since": null
     }
   ],

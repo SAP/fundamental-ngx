@@ -3,7 +3,7 @@
   "selector": null,
   "kind": "Class",
   "sourceFile": "index.ts",
-  "sourceLine": 40,
+  "sourceLine": 41,
   "sourceUrl": "",
   "description": "",
   "inputs": [
@@ -14,7 +14,7 @@
       "description": "The date formatted according to the `formatPattern` property\nof the `ui5-calendar` that hosts the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 46,
+      "sourceLine": 47,
       "since": null
     }
   ],

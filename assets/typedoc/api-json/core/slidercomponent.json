@@ -3,8 +3,8 @@
   "selector": "fd-slider",
   "kind": "Component",
   "sourceFile": "slider.component.ts",
-  "sourceLine": 95,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/b83a9b2ffb/libs/core/slider/slider.component.ts#L95",
+  "sourceLine": 96,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/core/slider/slider.component.ts#L96",
   "description": "Set of fields of FormItemControl component",
   "inputs": [
     {
@@ -14,7 +14,7 @@
       "description": "Aria label for the slider.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 113,
+      "sourceLine": 114,
       "since": null
     },
     {
@@ -24,7 +24,17 @@
       "description": "ID of the element that labels slider.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 109,
+      "sourceLine": 110,
+      "since": null
+    },
+    {
+      "name": "ariaValueText",
+      "type": "string",
+      "default": null,
+      "description": "aria-valuetext for the slider\nprovides a human-readable text alternative for a slider's current numeric value.\nAssistive technologies usually announce the numeric value stored in aria-valuenow.\nWhen a bare number is not meaningful or needs context, aria-valuetext overrides the numeric announcement with a descriptive string.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 122,
       "since": null
     },
     {
@@ -34,7 +44,7 @@
       "description": "User's custom classes",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 105,
+      "sourceLine": 106,
       "since": null
     },
     {
@@ -44,7 +54,7 @@
       "description": "Array of custom values to use for Slider.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 190,
+      "sourceLine": 199,
       "since": null
     },
     {
@@ -54,7 +64,7 @@
       "description": "Whether the control is disabled.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 202,
+      "sourceLine": 211,
       "since": null
     },
     {
@@ -64,7 +74,7 @@
       "description": "Hides display of colored progress bar.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 198,
+      "sourceLine": 207,
       "since": null
     },
     {
@@ -74,7 +84,7 @@
       "description": "Slider mode.\nOptions include: 'single' | 'range'\nThe default is set to 'single'",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 178,
+      "sourceLine": 187,
       "since": null
     },
     {
@@ -84,7 +94,7 @@
       "description": "Toggles the visibility of tick marks.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 182,
+      "sourceLine": 191,
       "since": null
     },
     {
@@ -94,7 +104,7 @@
       "description": "Toggles the visibility of tick mark labels. Must be used in conjunction with 'showTicks'",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 186,
+      "sourceLine": 195,
       "since": null
     },
     {
@@ -104,7 +114,7 @@
       "description": "Tooltip can be two types, 'readonly' to display value and 'editable' to make the ability to set and display value.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 194,
+      "sourceLine": 203,
       "since": null
     },
     {
@@ -114,7 +124,7 @@
       "description": "Whether slider should have vertical alignment.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 208,
+      "sourceLine": 217,
       "since": null
     }
   ],

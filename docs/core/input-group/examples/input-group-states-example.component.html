@@ -1,15 +1,15 @@
 <div fd-form-item>
-    <label fd-form-label for="fd-input-group-state-1" id="fd-input-group-state-label-1">Information</label>
+    <label fd-form-label id="fd-input-group-info-state">Discount Code</label>
     <fd-form-input-message-group>
         <fd-input-group
-            addOnText="Button"
+            addOnText="Apply"
             state="information"
-            placeholder="Placeholder"
+            placeholder="Enter promo code"
             [button]="true"
-            aria-label="Pellentesque metus lacus commodo eget justo ut rutrum varius nunc"
+            aria-labelledby="fd-input-group-info-state"
         ></fd-input-group>
         <fd-form-message type="information">
-            Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
+            Use code <code>WELCOME20</code> for 20% off your first order. Valid until end of month.
         </fd-form-message>
     </fd-form-input-message-group>
 </div>
@@ -17,17 +17,17 @@
 <br />
 
 <div fd-form-item>
-    <label fd-form-label for="fd-input-group-state-2" id="fd-input-group-state-label-2">Success</label>
+    <label fd-form-label id="fd-input-group-success-state">Invitation Code</label>
     <fd-form-input-message-group>
         <fd-input-group
             state="success"
-            addOnText="Button"
-            placeholder="Placeholder"
+            addOnText="Verify"
+            placeholder="8-digit code"
             [button]="true"
-            aria-label="Pellentesque metus lacus commodo eget justo ut rutrum varius nunc"
+            aria-labelledby="fd-input-group-success-state"
         ></fd-input-group>
         <fd-form-message type="success">
-            Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
+            Code verified successfully. You can now access the conference portal.
         </fd-form-message>
     </fd-form-input-message-group>
 </div>
@@ -35,17 +35,17 @@
 <br />
 
 <div fd-form-item>
-    <label fd-form-label for="fd-input-group-state-3" id="fd-input-group-state-label-3">Warning</label>
+    <label fd-form-label id="fd-input-group-warning-state">Account Number</label>
     <fd-form-input-message-group>
         <fd-input-group
             state="warning"
-            addOnText="Button"
-            placeholder="Placeholder"
+            addOnText="Check"
+            placeholder="10-digit account number"
             [button]="true"
-            aria-label="Pellentesque metus lacus commodo eget justo ut rutrum varius nunc"
+            aria-labelledby="fd-input-group-warning-state"
         ></fd-input-group>
         <fd-form-message type="warning">
-            Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
+            This account number matches a <b>closed account</b>. Verify the number or contact <a href="#">support</a>.
         </fd-form-message>
     </fd-form-input-message-group>
 </div>
@@ -53,17 +53,17 @@
 <br />
 
 <div fd-form-item>
-    <label fd-form-label for="fd-input-group-state-4" id="fd-input-group-state-label-4">Error</label>
+    <label fd-form-label id="fd-input-group-error-state">License Key</label>
     <fd-form-input-message-group>
         <fd-input-group
             state="error"
-            addOnText="Button"
-            placeholder="Placeholder"
+            addOnText="Activate"
+            placeholder="XXXX-XXXX-XXXX-XXXX"
             [button]="true"
-            aria-label="Pellentesque metus lacus commodo eget justo ut rutrum varius nunc"
+            aria-labelledby="fd-input-group-error-state"
         ></fd-input-group>
         <fd-form-message type="error">
-            Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
+            Invalid license key format. Keys must be 16 characters (letters and numbers) separated by dashes.
         </fd-form-message>
     </fd-form-input-message-group>
 </div>

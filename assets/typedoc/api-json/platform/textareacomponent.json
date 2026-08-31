@@ -3,8 +3,8 @@
   "selector": "fdp-textarea",
   "kind": "Component",
   "sourceFile": "text-area.component.ts",
-  "sourceLine": 46,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/b83a9b2ffb/libs/platform/form/text-area/text-area.component.ts#L46",
+  "sourceLine": 47,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/platform/form/text-area/text-area.component.ts#L47",
   "description": "Textarea field implementation that is compliant with Platform's FormGroup/FormField design",
   "inputs": [
     {
@@ -14,7 +14,7 @@
       "description": "The textarea `cols` attribute wrapped- the number of letters visible per line.\nIf width is set to auto, this attribute has no effect.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 65,
+      "sourceLine": 66,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Whether this textarea can grow.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 93,
+      "sourceLine": 94,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "The number of rows that will be visible when `growing` is set.\nIf both `growingMaxLines` and `height` are provided, `height` value takes precedence.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 58,
+      "sourceLine": 59,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "The height to which the textarea will grow when `growing` is set.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 51,
+      "sourceLine": 52,
       "since": null
     },
     {
@@ -54,7 +54,7 @@
       "description": "The maximum number of characters allowed to enter.\nIf `showExceededText` is false, `maxLength` has native textarea's behavior of disallowing typing beyond `maxLength`.\nIf `showExceededText` is true, user is allowed to type beyond `maxLength`, but error states and counter messages showing\nthe exceeded count is displayed.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 79,
+      "sourceLine": 80,
       "since": null
     },
     {
@@ -64,7 +64,7 @@
       "description": "Whether counter message should be shown.\nIf `showExceededText` is false, no state changes or error messages are shown. User is simply not allowed to type\nbeyond the `maxLength` characters.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 87,
+      "sourceLine": 88,
       "since": null
     },
     {
@@ -74,7 +74,7 @@
       "description": "The textarea `wrap` attribute - can be one of three: 'off', 'hard' or 'soft'.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 71,
+      "sourceLine": 72,
       "since": null
     }
   ],
@@ -85,7 +85,7 @@
       "signature": "() => void",
       "description": "handle auto growing of textarea",
       "deprecated": null,
-      "sourceLine": 267,
+      "sourceLine": 271,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -95,27 +95,27 @@
       "signature": "() => number",
       "description": "get line height of textarea",
       "deprecated": null,
-      "sourceLine": 292,
+      "sourceLine": 296,
       "since": null,
       "parameters": [],
       "returnType": "number"
     },
     {
       "name": "getUpdatedState",
-      "signature": "() => 'error' | 'default' | 'information' | 'success' | 'warning'",
+      "signature": "() => 'error' | 'success' | 'warning' | 'information' | 'default'",
       "description": "get the updated state when character count breaches `maxLength`",
       "deprecated": null,
-      "sourceLine": 306,
+      "sourceLine": 310,
       "since": null,
       "parameters": [],
-      "returnType": "'error' | 'default' | 'information' | 'success' | 'warning'"
+      "returnType": "'error' | 'success' | 'warning' | 'information' | 'default'"
     },
     {
       "name": "handleBackPress",
       "signature": "(event: KeyboardEvent) => void",
       "description": "when backpress or delete key is pressed when showExceededText field is not set, simply remove excess characters,\n/* else handle autogrow case",
       "deprecated": null,
-      "sourceLine": 166,
+      "sourceLine": 170,
       "since": null,
       "parameters": [
         {
@@ -132,7 +132,7 @@
       "signature": "() => void",
       "description": "handle exceeded maxlength case when text is pasted",
       "deprecated": null,
-      "sourceLine": 259,
+      "sourceLine": 263,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -142,7 +142,7 @@
       "signature": "() => void",
       "description": "update the counter message and related interactions",
       "deprecated": null,
-      "sourceLine": 231,
+      "sourceLine": 235,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -152,7 +152,7 @@
       "signature": "() => void",
       "description": "if exceeded maxlength when set as a value in code, highlight the exceeded text.",
       "deprecated": null,
-      "sourceLine": 241,
+      "sourceLine": 245,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -167,7 +167,7 @@
         "signature": "(isFocused: boolean) => void",
         "description": "Keeps track of element focus",
         "deprecated": null,
-        "sourceLine": 389,
+        "sourceLine": 390,
         "since": null,
         "parameters": [
           {
@@ -184,7 +184,7 @@
         "signature": "(event?: MouseEvent) => void",
         "description": "In most of the cases when working with input element directly you should be just find to assing\nvariable to this element\n\n```\n<input #inputElementRef fd-form-control ...>\n```\n\nand this default behavior used. For other cases implement focus.",
         "deprecated": null,
-        "sourceLine": 419,
+        "sourceLine": 420,
         "since": null,
         "parameters": [
           {
@@ -201,7 +201,7 @@
         "signature": "(event: MouseEvent) => void",
         "description": "Handles even when we click on parent container which is the FormField Wrapping this\ncontrol",
         "deprecated": null,
-        "sourceLine": 404,
+        "sourceLine": 405,
         "since": null,
         "parameters": [
           {

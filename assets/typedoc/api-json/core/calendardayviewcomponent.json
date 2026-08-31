@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "calendar-day-view.component.ts",
   "sourceLine": 52,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/b83a9b2ffb/libs/core/calendar/calendar-views/calendar-day-view/calendar-day-view.component.ts#L52",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/core/calendar/calendar-views/calendar-day-view/calendar-day-view.component.ts#L52",
   "description": "Component representing the day view of the calendar.",
   "inputs": [
     {
@@ -286,7 +286,7 @@
       "signature": "(selectedWeek: CalendarDay<D>[]) => void",
       "description": "Toggles the selection of a week on the calendar.\nIf the provided week is already fully selected, it will deselect it.\nIf the provided week is not fully selected, it will select the entire week and clear any previous selections.",
       "deprecated": null,
-      "sourceLine": 425,
+      "sourceLine": 422,
       "since": null,
       "parameters": [
         {
@@ -303,7 +303,7 @@
       "signature": "(weekDayIndex: number) => void",
       "description": "Toggles the selection of a week on the calendar based on the weekday index.\nIf the provided week is already fully selected, it will deselect it.\nIf the provided week is not fully selected, it will select the entire week and clear any previous selections.",
       "deprecated": null,
-      "sourceLine": 435,
+      "sourceLine": 432,
       "since": null,
       "parameters": [
         {
@@ -320,7 +320,7 @@
       "signature": "() => void",
       "description": "Set focus on default focusable cell",
       "deprecated": null,
-      "sourceLine": 443,
+      "sourceLine": 440,
       "since": null,
       "parameters": [],
       "returnType": "void"

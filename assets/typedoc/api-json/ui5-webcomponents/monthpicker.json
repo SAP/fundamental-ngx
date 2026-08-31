@@ -3,7 +3,7 @@
   "selector": null,
   "kind": "Class",
   "sourceFile": "index.ts",
-  "sourceLine": 41,
+  "sourceLine": 42,
   "sourceUrl": "",
   "description": "",
   "inputs": [
@@ -14,7 +14,7 @@
       "description": "Defines how to calculate calendar weeks and first day of the week.\nIf not set, the calendar will be displayed according to the currently set global configuration.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 47,
+      "sourceLine": 48,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Determines the format, displayed in the input field.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 52,
+      "sourceLine": 53,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Determines the format, displayed in the input field.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 57,
+      "sourceLine": 58,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "Determines the maximum date available for selection.\n\n*Note:** If the formatPattern property is not set, the maxDate value must be provided in the ISO date format (yyyy-MM-dd).",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 64,
+      "sourceLine": 65,
       "since": null
     },
     {
@@ -54,7 +54,7 @@
       "description": "Determines the minimum date available for selection.\n\n*Note:** If the formatPattern property is not set, the minDate value must be provided in the ISO date format (yyyy-MM-dd).",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 71,
+      "sourceLine": 72,
       "since": null
     },
     {
@@ -64,7 +64,7 @@
       "description": "Sets a calendar type used for display.\nIf not set, the calendar type of the global configuration is used.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 77,
+      "sourceLine": 78,
       "since": null
     },
     {
@@ -74,7 +74,7 @@
       "description": "Defines the secondary calendar type.\nIf not set, the calendar will only show the primary calendar type.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 83,
+      "sourceLine": 84,
       "since": null
     },
     {
@@ -84,7 +84,7 @@
       "description": "Determines the format, used for the value attribute.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 88,
+      "sourceLine": 89,
       "since": null
     }
   ],

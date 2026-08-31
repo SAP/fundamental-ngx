@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { NgTemplateOutlet } from '@angular/common';
 import { TitleComponent } from '@fundamental-ngx/core';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -33,7 +32,6 @@ export type Notification = {
         PopoverBodyComponent,
         NotificationModule,
         FDP_ICON_TAB_BAR,
-        NgTemplateOutlet,
         AvatarComponent,
         MessageStripModule,
         ToolbarModule,
@@ -91,4 +89,14 @@ export class NotificationGroupExampleComponent {
             actionButton: 'Accept'
         }
     ];
+
+    onNotificationActionKey(_event: KeyboardEvent, key: 'enter' | 'delete'): void {
+        // Defer blocking alert so the keydown handler can finish quickly and focus management completes
+        if (key === 'enter') {
+            setTimeout(() => alert('Enter key pressed'));
+            return;
+        }
+
+        setTimeout(() => alert('Delete key pressed'));
+    }
 }

@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "feed-input.component.ts",
   "sourceLine": 36,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/b83a9b2ffb/libs/platform/feed-input/feed-input.component.ts#L36",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/platform/feed-input/feed-input.component.ts#L36",
   "description": "",
   "inputs": [
     {

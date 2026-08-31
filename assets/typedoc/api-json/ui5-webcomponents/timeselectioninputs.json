@@ -3,7 +3,7 @@
   "selector": null,
   "kind": "Class",
   "sourceFile": "index.ts",
-  "sourceLine": 40,
+  "sourceLine": 41,
   "sourceUrl": "",
   "description": "",
   "inputs": [
@@ -14,7 +14,7 @@
       "description": "Determines the format, displayed in the input field.\n\nExample:\nHH:mm:ss -> 11:42:35\nhh:mm:ss a -> 2:23:15 PM\nmm:ss -> 12:04 (only minutes and seconds)",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 50,
+      "sourceLine": 51,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Defines a formatted time value.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 55,
+      "sourceLine": 56,
       "since": null
     }
   ],

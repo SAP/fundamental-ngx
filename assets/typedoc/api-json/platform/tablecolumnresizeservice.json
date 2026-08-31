@@ -4,7 +4,7 @@
   "kind": "Service",
   "sourceFile": "table-column-resize.service.ts",
   "sourceLine": 20,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/b83a9b2ffb/libs/platform/table-helpers/services/table-column-resize.service.ts#L20",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/platform/table-helpers/services/table-column-resize.service.ts#L20",
   "description": "Service to handle all things related to column resizing:\n- Setting resizer\n- Processing resize\n- Calculating the real columns width",
   "inputs": [],
   "outputs": [],
@@ -14,7 +14,7 @@
       "signature": "(diffX: number) => void",
       "description": "Update columns width after resizing, prevent from having too small columns.",
       "deprecated": null,
-      "sourceLine": 299,
+      "sourceLine": 302,
       "since": null,
       "parameters": [
         {
@@ -31,7 +31,7 @@
       "signature": "(event: MouseEvent) => void",
       "description": "Handle end resizing.",
       "deprecated": null,
-      "sourceLine": 277,
+      "sourceLine": 280,
       "since": null,
       "parameters": [
         {
@@ -48,7 +48,7 @@
       "signature": "(columnName: string) => string",
       "description": "Retrieves custom column value or returns `unset`",
       "deprecated": null,
-      "sourceLine": 181,
+      "sourceLine": 184,
       "since": null,
       "parameters": [
         {
@@ -65,7 +65,7 @@
       "signature": "(columnName: string) => string",
       "description": "Previous column name",
       "deprecated": null,
-      "sourceLine": 192,
+      "sourceLine": 195,
       "since": null,
       "parameters": [
         {
@@ -82,7 +82,7 @@
       "signature": "(columnName: string) => number",
       "description": "Overall next columns width. Used to calculate offset for the absolute positioned cells.",
       "deprecated": null,
-      "sourceLine": 202,
+      "sourceLine": 205,
       "since": null,
       "parameters": [
         {
@@ -99,7 +99,7 @@
       "signature": "(columnName: string) => number",
       "description": "Overall previous columns width. Used to calculate offset for the absolute positioned cells.",
       "deprecated": null,
-      "sourceLine": 197,
+      "sourceLine": 200,
       "since": null,
       "parameters": [
         {
@@ -116,7 +116,7 @@
       "signature": "(columnName: string) => string",
       "description": "Previous column name",
       "deprecated": null,
-      "sourceLine": 187,
+      "sourceLine": 190,
       "since": null,
       "parameters": [
         {
@@ -133,7 +133,7 @@
       "signature": "() => void",
       "description": "Hide the column resizer.",
       "deprecated": null,
-      "sourceLine": 250,
+      "sourceLine": 253,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -143,7 +143,7 @@
       "signature": "(columnName: string, cellElRef: ElementRef<any>) => void",
       "description": "Register column's cell to get its dimensions in further.",
       "deprecated": null,
-      "sourceLine": 207,
+      "sourceLine": 210,
       "since": null,
       "parameters": [
         {
@@ -166,7 +166,7 @@
       "signature": "(columnName: string, value: string) => void",
       "description": "Register the value of column width that changed from  input",
       "deprecated": null,
-      "sourceLine": 227,
+      "sourceLine": 230,
       "since": null,
       "parameters": [
         {
@@ -189,7 +189,7 @@
       "signature": "(resizerPosition: number, resizedColumn: string) => void",
       "description": "Set the appropriate column resizer position.",
       "deprecated": null,
-      "sourceLine": 233,
+      "sourceLine": 236,
       "since": null,
       "parameters": [
         {
@@ -212,7 +212,7 @@
       "signature": "(event: MouseEvent) => void",
       "description": "Handle start resizing.",
       "deprecated": null,
-      "sourceLine": 266,
+      "sourceLine": 269,
       "since": null,
       "parameters": [
         {
@@ -229,7 +229,7 @@
       "signature": "(columnName: string, cellElRef: ElementRef<any>) => void",
       "description": "Unregister column's cell.",
       "deprecated": null,
-      "sourceLine": 213,
+      "sourceLine": 216,
       "since": null,
       "parameters": [
         {

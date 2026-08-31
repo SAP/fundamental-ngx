@@ -1,0 +1,66 @@
+{
+  "name": "IncludeExcludeFiltersComponent",
+  "selector": "fdp-table-include-exclude-filters",
+  "kind": "Component",
+  "sourceFile": "include-exclude-filters.component.ts",
+  "sourceLine": 56,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/platform/table/components/table-view-settings-dialog/include-exclude-filters/include-exclude-filters.component.ts#L56",
+  "description": "Include/Exclude Filters Component\n\nProvides filtering UI with include and exclude rules panels,\ndesigned to be used within the table view settings dialog.",
+  "inputs": [
+    {
+      "name": "filterData",
+      "type": "IncludeExcludeFiltersData",
+      "default": null,
+      "description": "Filter data input",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 58,
+      "since": null
+    },
+    {
+      "name": "validator",
+      "type": "(rules: CollectionFilter[]) => boolean",
+      "default": null,
+      "description": "Validator function for filter rules",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 61,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "filterChange",
+      "type": "IncludeExcludeFiltersResultData",
+      "default": null,
+      "description": "Emits when filters change",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 64,
+      "since": null
+    },
+    {
+      "name": "resetAvailabilityChange",
+      "type": "boolean",
+      "default": null,
+      "description": "Emits when reset availability changes",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 67,
+      "since": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "reset",
+      "signature": "() => void",
+      "description": "Reset changes to the initial state",
+      "deprecated": null,
+      "sourceLine": 130,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "inherited": null
+}

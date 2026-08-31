@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "input.component.ts",
   "sourceLine": 52,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/b83a9b2ffb/libs/platform/form/input/input.component.ts#L52",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/platform/form/input/input.component.ts#L52",
   "description": "Input field implementation to be compliant with our FormGroup/FormField design and also to\nachieve certain this in Angular this component is re-using several ideas from MatDesign",
   "inputs": [
     {
@@ -26,7 +26,7 @@
       "description": "Emits event on focus change",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 75,
+      "sourceLine": 67,
       "since": null
     }
   ],
@@ -40,7 +40,7 @@
         "signature": "(isFocused: boolean) => void",
         "description": "Keeps track of element focus",
         "deprecated": null,
-        "sourceLine": 389,
+        "sourceLine": 390,
         "since": null,
         "parameters": [
           {
@@ -57,7 +57,7 @@
         "signature": "(event?: MouseEvent) => void",
         "description": "In most of the cases when working with input element directly you should be just find to assing\nvariable to this element\n\n```\n<input #inputElementRef fd-form-control ...>\n```\n\nand this default behavior used. For other cases implement focus.",
         "deprecated": null,
-        "sourceLine": 419,
+        "sourceLine": 420,
         "since": null,
         "parameters": [
           {
@@ -74,7 +74,7 @@
         "signature": "(event: MouseEvent) => void",
         "description": "Handles even when we click on parent container which is the FormField Wrapping this\ncontrol",
         "deprecated": null,
-        "sourceLine": 404,
+        "sourceLine": 405,
         "since": null,
         "parameters": [
           {

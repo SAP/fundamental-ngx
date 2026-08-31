@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "tool-header-button.directive.ts",
   "sourceLine": 8,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5fe1a54e76/libs/btp/button/tool-header-button.directive.ts#L8",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/047f9ed5fa/libs/btp/button/tool-header-button.directive.ts#L8",
   "description": "",
   "inputs": [
     {

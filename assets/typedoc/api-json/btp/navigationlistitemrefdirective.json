@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "navigation-list-item-ref.directive.ts",
   "sourceLine": 88,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5fe1a54e76/libs/btp/navigation/directives/navigation-list-item-ref.directive.ts#L88",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/047f9ed5fa/libs/btp/navigation/directives/navigation-list-item-ref.directive.ts#L88",
   "description": "",
   "inputs": [
     {

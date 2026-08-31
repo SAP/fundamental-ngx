@@ -169,6 +169,7 @@ export class CustomModifiersExampleComponent {
     protected readonly densityClass;
 
     constructor() {
+        // Reads GlobalContentDensityService directly (bypasses observer) so condensed is shown verbatim, no fallback.
         const densityService = inject(GlobalContentDensityService);
         this.density = densityService.currentDensitySignal;
         this.densityClass = computed(() => `custom-mod density--${this.density()}`);

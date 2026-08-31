@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "navigation-content-start.component.ts",
   "sourceLine": 57,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5fe1a54e76/libs/btp/navigation/components/navigation-start/navigation-content-start.component.ts#L57",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/047f9ed5fa/libs/btp/navigation/components/navigation-start/navigation-content-start.component.ts#L57",
   "description": "",
   "inputs": [
     {

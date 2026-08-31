@@ -3,7 +3,7 @@
   "selector": null,
   "kind": "Class",
   "sourceFile": "index.ts",
-  "sourceLine": 40,
+  "sourceLine": 42,
   "sourceUrl": "",
   "description": "",
   "inputs": [
@@ -14,7 +14,7 @@
       "description": "Defines the text of the `ui5-suggestion-item-custom`.\n*Note:** The text property is considered only for autocomplete.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 46,
+      "sourceLine": 48,
       "since": null
     }
   ],
@@ -26,7 +26,7 @@
       "description": "Fired when the component is activated either with a mouse/tap or by using the Enter or Space key.\n\n*Note:** The event will not be fired if the `disabled` property is set to `true`.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 55,
+      "sourceLine": 57,
       "since": null
     }
   ],

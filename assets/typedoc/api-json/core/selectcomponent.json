@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "select.component.ts",
   "sourceLine": 123,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/b83a9b2ffb/libs/core/select/select.component.ts#L123",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/core/select/select.component.ts#L123",
   "description": "Select component intended to mimic\nthe behaviour of the native select element.",
   "inputs": [
     {
@@ -239,7 +239,7 @@
     },
     {
       "name": "state",
-      "type": "Nullable<'error' | 'default' | 'information' | 'warning' | 'success'>",
+      "type": "Nullable<'error' | 'default' | 'information' | 'success' | 'warning'>",
       "default": null,
       "description": "Holds the control state of select",
       "isSignal": false,

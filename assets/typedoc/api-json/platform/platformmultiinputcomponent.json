@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "multi-input.component.ts",
   "sourceLine": 109,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/b83a9b2ffb/libs/platform/form/multi-input/multi-input.component.ts#L109",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/platform/form/multi-input/multi-input.component.ts#L109",
   "description": "Defines specific behavior for Input controls which deals with list of values including:\n - Select\n - RadioGroup\n - CheckboxGroup\n - ComboBox\n ...",
   "inputs": [
     {
@@ -158,7 +158,7 @@
         "signature": "(isFocused: boolean) => void",
         "description": "Keeps track of element focus",
         "deprecated": null,
-        "sourceLine": 389,
+        "sourceLine": 390,
         "since": null,
         "parameters": [
           {
@@ -175,7 +175,7 @@
         "signature": "() => void",
         "description": "Closes the select popover body.",
         "deprecated": null,
-        "sourceLine": 362,
+        "sourceLine": 363,
         "since": null,
         "parameters": [],
         "returnType": "void"
@@ -185,7 +185,7 @@
         "signature": "(event?: MouseEvent) => void",
         "description": "In most of the cases when working with input element directly you should be just find to assing\nvariable to this element\n\n```\n<input #inputElementRef fd-form-control ...>\n```\n\nand this default behavior used. For other cases implement focus.",
         "deprecated": null,
-        "sourceLine": 419,
+        "sourceLine": 420,
         "since": null,
         "parameters": [
           {
@@ -202,7 +202,7 @@
         "signature": "(direction: FocusEscapeDirection) => void",
         "description": "Method passed to list component",
         "deprecated": null,
-        "sourceLine": 457,
+        "sourceLine": 458,
         "since": null,
         "parameters": [
           {
@@ -219,7 +219,7 @@
         "signature": "(event: MouseEvent) => void",
         "description": "Handles even when we click on parent container which is the FormField Wrapping this\ncontrol",
         "deprecated": null,
-        "sourceLine": 404,
+        "sourceLine": 405,
         "since": null,
         "parameters": [
           {
@@ -236,7 +236,7 @@
         "signature": "() => void",
         "description": "Opens the select popover body.",
         "deprecated": null,
-        "sourceLine": 349,
+        "sourceLine": 350,
         "since": null,
         "parameters": [],
         "returnType": "void"

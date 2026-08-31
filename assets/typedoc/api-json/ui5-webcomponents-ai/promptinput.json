@@ -3,7 +3,7 @@
   "selector": null,
   "kind": "Class",
   "sourceFile": "index.ts",
-  "sourceLine": 40,
+  "sourceLine": 42,
   "sourceUrl": "",
   "description": "",
   "inputs": [
@@ -14,7 +14,7 @@
       "description": "Defines whether the component is in disabled state.\n\n*Note:** A disabled component is completely noninteractive.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 47,
+      "sourceLine": 49,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Defines the label of the input field.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 52,
+      "sourceLine": 54,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Sets the maximum number of characters available in the input field.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 57,
+      "sourceLine": 59,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "Defines a short hint intended to aid the user with data entry when the\ncomponent has no value.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 63,
+      "sourceLine": 65,
       "since": null
     },
     {
@@ -54,7 +54,7 @@
       "description": "Defines whether the component is read-only.\n\n*Note:** A read-only component is not editable,\nbut still provides visual feedback upon user interaction.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 71,
+      "sourceLine": 73,
       "since": null
     },
     {
@@ -64,7 +64,7 @@
       "description": "Defines whether the clear icon of the input will be shown.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 76,
+      "sourceLine": 78,
       "since": null
     },
     {
@@ -74,7 +74,7 @@
       "description": "Determines whether the characters exceeding the maximum allowed character count are visible\nin the component.\n\nIf set to `false`, the user is not allowed to enter more characters than what is set in the\n`maxlength` property.\nIf set to `true` the characters exceeding the `maxlength` value are selected on\npaste and the counter below the component displays their number.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 87,
+      "sourceLine": 89,
       "since": null
     },
     {
@@ -84,7 +84,7 @@
       "description": "Defines whether the component should show suggestions, if such are present.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 92,
+      "sourceLine": 94,
       "since": null
     },
     {
@@ -94,7 +94,7 @@
       "description": "Defines the value of the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 97,
+      "sourceLine": 99,
       "since": null
     },
     {
@@ -104,7 +104,7 @@
       "description": "Defines the value state of the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 102,
+      "sourceLine": 104,
       "since": null
     }
   ],
@@ -116,7 +116,7 @@
       "description": "Fired when the input operation has finished by pressing Enter\nor on focusout.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 110,
+      "sourceLine": 112,
       "since": null
     },
     {
@@ -126,7 +126,7 @@
       "description": "Fired when the value of the component changes at each keystroke,\nand when a suggestion item has been selected.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 116,
+      "sourceLine": 118,
       "since": null
     },
     {
@@ -136,7 +136,7 @@
       "description": "Fired when the input operation has finished by pressing Enter\nor AI button is clicked.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 122,
+      "sourceLine": 124,
       "since": null
     }
   ],

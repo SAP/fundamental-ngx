@@ -3,8 +3,8 @@
   "selector": "input[fd-form-control], textarea[fd-form-control]",
   "kind": "Component",
   "sourceFile": "form-control.component.ts",
-  "sourceLine": 35,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/b83a9b2ffb/libs/core/form/form-control/form-control.component.ts#L35",
+  "sourceLine": 40,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/core/form/form-control/form-control.component.ts#L40",
   "description": "Directive intended for use on form controls.\n\n```html\n<input type=\"text\" fd-form-control />\n```",
   "inputs": [
     {
@@ -14,7 +14,7 @@
       "description": "aria-label for form-control.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 54,
+      "sourceLine": 59,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "aria-label for form-control.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 58,
+      "sourceLine": 63,
       "since": null
     },
     {
@@ -34,17 +34,17 @@
       "description": "user's custom classes",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 50,
+      "sourceLine": 55,
       "since": null
     },
     {
       "name": "state",
-      "type": "null | 'error' | 'default' | 'information' | 'warning' | 'success'",
+      "type": "null | 'error' | 'default' | 'information' | 'success' | 'warning'",
       "default": "null",
       "description": "The state of the form control - applies css classes.\n Can be `success`, `error`, `warning`, `information` or blank for default.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 41,
+      "sourceLine": 46,
       "since": null
     },
     {
@@ -54,7 +54,7 @@
       "description": "Type of the form control.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 46,
+      "sourceLine": 51,
       "since": null
     }
   ],

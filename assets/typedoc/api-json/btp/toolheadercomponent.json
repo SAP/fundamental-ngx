@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "tool-header.component.ts",
   "sourceLine": 94,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5fe1a54e76/libs/btp/tool-header/src/components/tool-header/tool-header.component.ts#L94",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/047f9ed5fa/libs/btp/tool-header/src/components/tool-header/tool-header.component.ts#L94",
   "description": "",
   "inputs": [
     {

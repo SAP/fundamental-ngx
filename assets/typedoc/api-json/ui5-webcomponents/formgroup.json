@@ -3,7 +3,7 @@
   "selector": null,
   "kind": "Class",
   "sourceFile": "index.ts",
-  "sourceLine": 40,
+  "sourceLine": 41,
   "sourceUrl": "",
   "description": "",
   "inputs": [
@@ -14,7 +14,7 @@
       "description": "Defines the accessible ARIA name of the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 45,
+      "sourceLine": 46,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Defines id (or many ids) of the element (or elements) that label the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 50,
+      "sourceLine": 51,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Defines the number of columns to distribute the form content by breakpoint (S1 M2 L3 XL4 for example).\n\n*Note:** This property is ignored if `columnSpan` is set, as it is expected that the column span is defined.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 57,
+      "sourceLine": 58,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "Defines column span of the component,\ne.g how many columns the group should span to.\n\n*Note:** If this property is set, it has higher priority than `colSpan` and `colSpan` will be ignored.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 65,
+      "sourceLine": 66,
       "since": null
     },
     {
@@ -54,7 +54,7 @@
       "description": "Defines the compoennt heading level,\nset by the `headerText`.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 71,
+      "sourceLine": 72,
       "since": null
     },
     {
@@ -64,7 +64,7 @@
       "description": "Defines header text of the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 76,
+      "sourceLine": 77,
       "since": null
     }
   ],

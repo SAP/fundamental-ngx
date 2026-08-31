@@ -3,7 +3,7 @@
   "selector": null,
   "kind": "Class",
   "sourceFile": "index.ts",
-  "sourceLine": 42,
+  "sourceLine": 43,
   "sourceUrl": "",
   "description": "",
   "inputs": [
@@ -14,7 +14,7 @@
       "description": "Defines the placement of the actions slot within the hero banner header.\n\n- **TopEnd** (default) - Actions are displayed to the right of the header text, at the top of the header row.\n- **BottomStart** - Actions are displayed below the header text, left-aligned, regardless of `columnsRatio` or slot usage.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 50,
+      "sourceLine": 51,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Defines the ratio between the two content columns inside the hero banner.\n\nTakes effect only when `endContent` is provided. When no `endContent` is present, the content spans the full width (single column).\n\n- **Equal** - Two equal columns. Both content blocks share the available width equally.\nOn smaller screens, both slots stack vertically.\n- **FirstWider** - Two unequal columns. The start content takes two-thirds of the width, the end content one-third.\nOn smaller screens, both slots stack vertically.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 62,
+      "sourceLine": 63,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Defines the vertical placement of the header block within the content area.\n\n- **Top** (default) - Header block is placed at the top of the content area.\n- **Bottom** - Header block is pushed to the bottom of column 1. Only takes effect when `columnsRatio`\nis `Equal` or `FirstWider` and only `endContent` is provided (no default slot content).\nWhen `actionsPlacement` is also `BottomStart`, the `endContent` slot spans the full height.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 72,
+      "sourceLine": 73,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "Defines the header text displayed in the hero banner.\n\nThis is the main greeting header, typically a personalized message\nsuch as \"Hello, John\".",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 80,
+      "sourceLine": 81,
       "since": null
     },
     {
@@ -54,7 +54,7 @@
       "description": "Defines text displayed above the heading as an overline.\nCan be used to show the current date, a status message, or any other relevant contextual information.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 86,
+      "sourceLine": 87,
       "since": null
     }
   ],

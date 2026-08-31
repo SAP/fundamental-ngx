@@ -3,7 +3,7 @@
   "selector": null,
   "kind": "Class",
   "sourceFile": "index.ts",
-  "sourceLine": 40,
+  "sourceLine": 42,
   "sourceUrl": "",
   "description": "",
   "inputs": [
@@ -14,7 +14,7 @@
       "description": "Defines the text that is displayed when the component contains no items.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 45,
+      "sourceLine": 47,
       "since": null
     }
   ],
@@ -26,7 +26,7 @@
       "description": "Fired when an item is clicked.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 52,
+      "sourceLine": 54,
       "since": null
     },
     {
@@ -36,7 +36,7 @@
       "description": "Fired when the `Close` button of any item is clicked.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 57,
+      "sourceLine": 59,
       "since": null
     },
     {
@@ -46,7 +46,7 @@
       "description": "Fired when an item is toggled.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 62,
+      "sourceLine": 64,
       "since": null
     }
   ],

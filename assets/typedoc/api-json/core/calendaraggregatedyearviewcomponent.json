@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "calendar-aggregated-year-view.component.ts",
   "sourceLine": 40,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/b83a9b2ffb/libs/core/calendar/calendar-views/calendar-aggregated-year-view/calendar-aggregated-year-view.component.ts#L40",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/core/calendar/calendar-views/calendar-aggregated-year-view/calendar-aggregated-year-view.component.ts#L40",
   "description": "",
   "inputs": [
     {
@@ -76,7 +76,7 @@
       "signature": "(event: KeyboardEvent, index: number) => void",
       "description": "Method for handling the keyboard navigation.",
       "deprecated": null,
-      "sourceLine": 208,
+      "sourceLine": 205,
       "since": null,
       "parameters": [
         {
@@ -99,7 +99,7 @@
       "signature": "() => void",
       "description": "Method used to load the previous 12 years to be displayed.",
       "deprecated": null,
-      "sourceLine": 184,
+      "sourceLine": 181,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -109,7 +109,7 @@
       "signature": "() => void",
       "description": "Method used to load the next 12 years to be displayed.",
       "deprecated": null,
-      "sourceLine": 190,
+      "sourceLine": 187,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -119,7 +119,7 @@
       "signature": "(selectedYear: CalendarAggregatedYear, event?: MouseEvent) => void",
       "description": "Method that sends the year to the parent component when it is clicked.",
       "deprecated": null,
-      "sourceLine": 175,
+      "sourceLine": 172,
       "since": null,
       "parameters": [
         {
@@ -142,7 +142,7 @@
       "signature": "() => void",
       "description": "Set focus on month cell.\nIt can be a selected cell, current month cell or first cell in the list",
       "deprecated": null,
-      "sourceLine": 199,
+      "sourceLine": 196,
       "since": null,
       "parameters": [],
       "returnType": "void"

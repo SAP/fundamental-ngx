@@ -3,7 +3,7 @@
   "selector": null,
   "kind": "Class",
   "sourceFile": "index.ts",
-  "sourceLine": 40,
+  "sourceLine": 41,
   "sourceUrl": "",
   "description": "",
   "inputs": [
@@ -14,7 +14,7 @@
       "description": "Defines the accessible ARIA name of the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 45,
+      "sourceLine": 46,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Defines whether the component is disabled.\nA disabled component can't be pressed or\nfocused, and it is not in the tab chain.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 52,
+      "sourceLine": 53,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Defines if the item is expanded",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 57,
+      "sourceLine": 58,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "Defines the text of the item.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 62,
+      "sourceLine": 63,
       "since": null
     },
     {
@@ -54,7 +54,7 @@
       "description": "Defines the tooltip of the component.\n\nA tooltip attribute should be provided, in order to represent meaning/function,\nwhen the component is collapsed (\"icon only\" design is visualized) or the item text is truncated.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 70,
+      "sourceLine": 71,
       "since": null
     }
   ],

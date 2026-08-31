@@ -3,7 +3,7 @@
   "selector": null,
   "kind": "Class",
   "sourceFile": "index.ts",
-  "sourceLine": 40,
+  "sourceLine": 42,
   "sourceUrl": "",
   "description": "",
   "inputs": [
@@ -14,7 +14,7 @@
       "description": "Defines the color scheme of the component.\nThere are 10 predefined schemes.\nTo use one you can set a number from `\"1\"` to `\"10\"`. The `colorScheme` `\"1\"` will be set by default.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 47,
+      "sourceLine": 49,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Defines the component type.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 52,
+      "sourceLine": 54,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Defines whether the MessageStrip renders close button.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 57,
+      "sourceLine": 59,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "Defines whether the MessageStrip will show an icon in the beginning.\nYou can directly provide an icon with the `icon` slot. Otherwise, the default icon for the type will be used.\n\n**Note:** If <code>MessageStripDesign.ColorSet1</code> or <code>MessageStripDesign.ColorSet2</code> value is set to the <code>design</code> property, default icon will not be presented.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 65,
+      "sourceLine": 67,
       "since": null
     }
   ],
@@ -56,7 +56,7 @@
       "description": "Fired when the close button is pressed either with a\nclick/tap or by using the Enter or Space key.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 73,
+      "sourceLine": 75,
       "since": null
     }
   ],

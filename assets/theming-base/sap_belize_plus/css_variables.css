@@ -1,15 +1,15 @@
 /**
 * Copyright (c) 2012-2025 SAP SE or an SAP affiliate company and Theming Base Content contributors. Licensed under the Apache License, Version 2.0 - see LICENSE.txt.
 *
-* Theming Engine 17.0.29
-* data:{"Path": "Base.baseLib.sap_belize_plus.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_belize","sap_base_fiori","baseTheme"], "Tags": ["Fiori_2","Fiori_3"], "Scopes": ["sapContrastPlus"], "FallbackThemeId": "sap_belize", "Engine": {"Name": "theming-engine", "Version": "17.0.29"}, "Version": { "Build": "11.36.4.20260616082028", "Source": "11.36.4"}}
+* Theming Engine 17.0.47
+* data:{"Path": "Base.baseLib.sap_belize_plus.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_belize","sap_base_fiori","baseTheme"], "Tags": ["Fiori_2","Fiori_3"], "Scopes": ["sapContrastPlus"], "FallbackThemeId": "sap_belize", "Engine": {"Name": "theming-engine", "Version": "17.0.47"}, "Version": { "Build": "11.36.5.20260729124237", "Source": "11.36.5"}}
 */
 
-.sapThemeMetaData-Base-baseLib{background-image: url('data:text/plain;utf-8,{"Path": "Base.baseLib.sap_belize_plus.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_belize","sap_base_fiori","baseTheme"], "Tags": ["Fiori_2","Fiori_3"], "Scopes": ["sapContrastPlus"], "FallbackThemeId": "sap_belize", "Engine": {"Name": "theming-engine", "Version": "17.0.29"}, "Version": { "Build": "11.36.4.20260616082028", "Source": "11.36.4"}}');}
-:root{--sapThemeMetaData-Base-baseLib:{"Path": "Base.baseLib.sap_belize_plus.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_belize","sap_base_fiori","baseTheme"], "Tags": ["Fiori_2","Fiori_3"], "Scopes": ["sapContrastPlus"], "FallbackThemeId": "sap_belize", "Engine": {"Name": "theming-engine", "Version": "17.0.29"}, "Version": { "Build": "11.36.4.20260616082028", "Source": "11.36.4"}};}
+.sapThemeMetaData-Base-baseLib{background-image: url('data:text/plain;utf-8,{"Path": "Base.baseLib.sap_belize_plus.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_belize","sap_base_fiori","baseTheme"], "Tags": ["Fiori_2","Fiori_3"], "Scopes": ["sapContrastPlus"], "FallbackThemeId": "sap_belize", "Engine": {"Name": "theming-engine", "Version": "17.0.47"}, "Version": { "Build": "11.36.5.20260729124237", "Source": "11.36.5"}}');}
+:root{--sapThemeMetaData-Base-baseLib:{"Path": "Base.baseLib.sap_belize_plus.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_belize","sap_base_fiori","baseTheme"], "Tags": ["Fiori_2","Fiori_3"], "Scopes": ["sapContrastPlus"], "FallbackThemeId": "sap_belize", "Engine": {"Name": "theming-engine", "Version": "17.0.47"}, "Version": { "Build": "11.36.5.20260729124237", "Source": "11.36.5"}};}
 
 /**
-* Base.baseLib.baseTheme.base (Version 11.36.4)
+* Base.baseLib.baseTheme.base (Version 11.36.5)
 */
 
 /*!SAP_POSTPROCESS_REDUCE_START*/
@@ -239,7 +239,7 @@
 /*!SAP_POSTPROCESS_REDUCE_END*/
 
 /**
-* Base.baseLib.baseTheme.skeleton (Version 11.36.4)
+* Base.baseLib.baseTheme.skeleton (Version 11.36.5)
 */
 
 /*!SAP_POSTPROCESS_REDUCE_START*/
@@ -2119,27 +2119,27 @@
 /*!SAP_POSTPROCESS_REDUCE_END*/
 
 /**
-* Base.baseLib.baseTheme.css_variables (Version 11.36.4)
+* Base.baseLib.baseTheme.css_variables (Version 11.36.5)
 */
 
 
 /**
-* Base.baseLib.sap_base_fiori.base (Version 11.36.4)
+* Base.baseLib.sap_base_fiori.base (Version 11.36.5)
 */
 
 
 /**
-* Base.baseLib.sap_base_fiori.css_variables (Version 11.36.4)
+* Base.baseLib.sap_base_fiori.css_variables (Version 11.36.5)
 */
 
 
 /**
-* Base.baseLib.sap_belize.base (Version 11.36.4)
+* Base.baseLib.sap_belize.base (Version 11.36.5)
 */
 
 
 /**
-* Base.baseLib.sap_belize.css_variables (Version 11.36.4)
+* Base.baseLib.sap_belize.css_variables (Version 11.36.5)
 */
 
 

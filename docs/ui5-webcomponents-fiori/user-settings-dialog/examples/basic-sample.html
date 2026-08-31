@@ -35,7 +35,10 @@
             tooltip="User Account"
             headerText="User Account"
         >
-            <ui5-user-settings-account-view>
+            <ui5-user-settings-account-view
+                [showEditButton]="true"
+                (edit-accounts-click)="handleEditAccountsClick($event)"
+            >
                 <ui5-user-menu-account
                     slot="account"
                     [avatarSrc]="userAccount().avatarSrc"

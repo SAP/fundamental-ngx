@@ -3,8 +3,8 @@
   "selector": "fdp-table-view-settings-dialog",
   "kind": "Component",
   "sourceFile": "table-view-settings-dialog.component.ts",
-  "sourceLine": 73,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/b83a9b2ffb/libs/platform/table/components/table-view-settings-dialog/table-view-settings-dialog.component.ts#L73",
+  "sourceLine": 78,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/platform/table/components/table-view-settings-dialog/table-view-settings-dialog.component.ts#L78",
   "description": "View settings dialog component.\n\nUsed to link view settings filters options to the grid table.\n\n```html\n<fdp-table #myTable></fdp-table>\n...\n<fdp-table-view-settings-dialog [table]=\"myTable\">\n    <fdp-table-view-settings-filter\n        column=\"status\"\n        label=\"Status\"\n        type=\"single-select\"\n        values=\"[{value: 'filterValue', label: 'Filter label'}]\">\n    </fdp-table-view-settings-filter>\n</fdp-table-view-settings-dialog>\n```",
   "inputs": [
     {
@@ -14,7 +14,7 @@
       "description": "Whether to allow the user to configure column show/hide, as well as column order.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 94,
+      "sourceLine": 99,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Whether to allow selecting '(Not sorted)' option in sorting dialog.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 86,
+      "sourceLine": 91,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Heading level of the dialog.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 90,
+      "sourceLine": 95,
       "since": null
     }
   ],
@@ -45,7 +45,7 @@
       "signature": "() => void",
       "description": "Open Sort Settings Dialog",
       "deprecated": null,
-      "sourceLine": 120,
+      "sourceLine": 129,
       "since": null,
       "parameters": [],
       "returnType": "void"

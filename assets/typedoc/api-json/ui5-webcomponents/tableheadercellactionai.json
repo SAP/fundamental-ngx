@@ -3,7 +3,7 @@
   "selector": null,
   "kind": "Class",
   "sourceFile": "index.ts",
-  "sourceLine": 40,
+  "sourceLine": 42,
   "sourceUrl": "",
   "description": "",
   "inputs": [],
@@ -15,7 +15,7 @@
       "description": "Fired when a header cell action is clicked.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 48,
+      "sourceLine": 50,
       "since": null
     }
   ],

@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "tile.directives.ts",
   "sourceLine": 42,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/b83a9b2ffb/libs/core/tile/directives/tile.directives.ts#L42",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/core/tile/directives/tile.directives.ts#L42",
   "description": "",
   "inputs": [],
   "outputs": [],

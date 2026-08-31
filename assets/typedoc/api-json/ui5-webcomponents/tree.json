@@ -3,7 +3,7 @@
   "selector": null,
   "kind": "Class",
   "sourceFile": "index.ts",
-  "sourceLine": 40,
+  "sourceLine": 42,
   "sourceUrl": "",
   "description": "",
   "inputs": [
@@ -14,7 +14,7 @@
       "description": "Defines the accessible description of the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 45,
+      "sourceLine": 47,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Defines the IDs of the elements that describe the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 50,
+      "sourceLine": 52,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Defines the accessible name of the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 55,
+      "sourceLine": 57,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "Defines the IDs of the elements that label the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 60,
+      "sourceLine": 62,
       "since": null
     },
     {
@@ -54,7 +54,7 @@
       "description": "Defines the component footer text.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 65,
+      "sourceLine": 67,
       "since": null
     },
     {
@@ -64,7 +64,7 @@
       "description": "Defines the component header text.\n\n*Note:** If the `header` slot is set, this property is ignored.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 72,
+      "sourceLine": 74,
       "since": null
     },
     {
@@ -74,7 +74,7 @@
       "description": "Defines the text that is displayed when the component contains no items.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 77,
+      "sourceLine": 79,
       "since": null
     },
     {
@@ -84,7 +84,7 @@
       "description": "Defines the selection mode of the component. Since the tree uses a `ui5-list` to display its structure,\nthe tree modes are exactly the same as the list modes, and are all applicable.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 83,
+      "sourceLine": 85,
       "since": null
     }
   ],
@@ -96,7 +96,7 @@
       "description": "Fired when a tree item is activated.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 90,
+      "sourceLine": 92,
       "since": null
     },
     {
@@ -106,7 +106,7 @@
       "description": "Fired when the Delete button of any tree item is pressed.\n\n*Note:** A Delete button is displayed on each item,\nwhen the component `selectionMode` property is set to `Delete`.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 98,
+      "sourceLine": 100,
       "since": null
     },
     {
@@ -116,7 +116,7 @@
       "description": "Fired when the mouse cursor leaves the tree item borders.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 103,
+      "sourceLine": 105,
       "since": null
     },
     {
@@ -126,7 +126,7 @@
       "description": "Fired when the mouse cursor enters the tree item borders.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 108,
+      "sourceLine": 110,
       "since": null
     },
     {
@@ -136,7 +136,7 @@
       "description": "Fired when a tree item is expanded or collapsed.\n\n*Note:** You can call `preventDefault()` on the event object to suppress the event, if needed.\nThis may be handy for example if you want to dynamically load tree items upon the user expanding a node.\nEven if you prevented the event's default behavior, you can always manually call `toggle()` on a tree item.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 117,
+      "sourceLine": 119,
       "since": null
     },
     {
@@ -146,7 +146,7 @@
       "description": "Fired when a movable tree item is moved over a potential drop target during a drag-and-drop operation.\n\nIf the new position is valid, prevent the default action of the event using `preventDefault()`.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 124,
+      "sourceLine": 126,
       "since": null
     },
     {
@@ -156,7 +156,7 @@
       "description": "Fired when a movable tree item is dropped onto a drop target.\n\n*Note:** The `move` event is fired only if there was a preceding `move-over` event with prevented default action.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 131,
+      "sourceLine": 133,
       "since": null
     },
     {
@@ -166,7 +166,7 @@
       "description": "Fired when selection is changed by user interaction\nin `Single`, `SingleStart`, `SingleEnd` and `Multiple` modes.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 137,
+      "sourceLine": 139,
       "since": null
     }
   ],

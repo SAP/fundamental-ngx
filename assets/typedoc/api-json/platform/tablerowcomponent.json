@@ -3,8 +3,8 @@
   "selector": "[fdp-table-row]",
   "kind": "Component",
   "sourceFile": "table-row.component.ts",
-  "sourceLine": 110,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/b83a9b2ffb/libs/platform/table/components/table-row/table-row.component.ts#L110",
+  "sourceLine": 109,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/platform/table/components/table-row/table-row.component.ts#L109",
   "description": "",
   "inputs": [
     {
@@ -14,7 +14,7 @@
       "description": "Whether to enable checkbox tristate mode.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 133,
+      "sourceLine": 132,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Whether to fix the table header and footer. Default is true.\nNote that if the table contains freezable columns, the header and\nfooter will be fixed automatically, regardless of this input value.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 141,
+      "sourceLine": 140,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "The column `name` to freeze columns up to and including.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 149,
+      "sourceLine": 148,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "The column `name` to freeze columns after and including.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 153,
+      "sourceLine": 152,
       "since": null
     },
     {
@@ -54,7 +54,7 @@
       "description": "Row index.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 121,
+      "sourceLine": 120,
       "since": null
     },
     {
@@ -64,7 +64,7 @@
       "description": "Table Row.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 117,
+      "sourceLine": 116,
       "since": null
     },
     {
@@ -74,7 +74,7 @@
       "description": "Row ID.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 113,
+      "sourceLine": 112,
       "since": null
     },
     {
@@ -84,7 +84,7 @@
       "description": "Selectable flag key.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 129,
+      "sourceLine": 128,
       "since": null
     },
     {
@@ -94,7 +94,7 @@
       "description": "Selection column width.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 145,
+      "sourceLine": 144,
       "since": null
     },
     {
@@ -104,7 +104,7 @@
       "description": "Selection mode.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 125,
+      "sourceLine": 124,
       "since": null
     }
   ],
@@ -116,7 +116,7 @@
       "description": "Event emitted when keyboard drag performed.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 159,
+      "sourceLine": 158,
       "since": null
     }
   ],

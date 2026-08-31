@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "tool-header-action.directive.ts",
   "sourceLine": 19,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/5fe1a54e76/libs/btp/tool-header/src/directives/tool-header-action.directive.ts#L19",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/047f9ed5fa/libs/btp/tool-header/src/directives/tool-header-action.directive.ts#L19",
   "description": "",
   "inputs": [],
   "outputs": [],

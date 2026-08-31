@@ -3,7 +3,7 @@
   "selector": null,
   "kind": "Class",
   "sourceFile": "index.ts",
-  "sourceLine": 40,
+  "sourceLine": 41,
   "sourceUrl": "",
   "description": "",
   "inputs": [
@@ -14,7 +14,7 @@
       "description": "Defines the column span of the component,\ne.g how many columns the component should span to.\n\n*Note:** The column span should be a number between 1 and the available columns of the FormGroup (when items are placed in a group)\nor the Form. The available columns can be affected by the FormGroup#columnSpan and/or the Form#layout.\nA number bigger than the available columns won't take effect.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 50,
+      "sourceLine": 51,
       "since": null
     }
   ],

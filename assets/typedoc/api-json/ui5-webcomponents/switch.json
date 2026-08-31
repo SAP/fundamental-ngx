@@ -3,7 +3,7 @@
   "selector": null,
   "kind": "Class",
   "sourceFile": "index.ts",
-  "sourceLine": 49,
+  "sourceLine": 51,
   "sourceUrl": "",
   "description": "",
   "inputs": [
@@ -14,7 +14,7 @@
       "description": "Sets the accessible ARIA name of the component.\n\n*Note**: We recommend that you set an accessibleNameRef pointing to an external label or at least an `accessibleName`.\nProviding an `accessibleNameRef` or an `accessibleName` is mandatory in the cases when `textOn` and `textOff` properties aren't set.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 57,
+      "sourceLine": 59,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Receives id(or many ids) of the elements that label the component.\n\n*Note**: We recommend that you set an accessibleNameRef pointing to an external label or at least an `accessibleName`.\nProviding an `accessibleNameRef` or an `accessibleName` is mandatory in the cases when `textOn` and `textOff` properties aren't set.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 65,
+      "sourceLine": 67,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Defines if the component is checked.\n\n*Note:** The property can be changed with user interaction,\neither by clicking the component, or by pressing the `Enter` or `Space` key.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 73,
+      "sourceLine": 75,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "Defines the component design.\n\n*Note:** If `Graphical` type is set,\npositive and negative icons will replace the `textOn` and `textOff`.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 81,
+      "sourceLine": 83,
       "since": null
     },
     {
@@ -54,7 +54,7 @@
       "description": "Defines whether the component is disabled.\n\n*Note:** A disabled component is noninteractive.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 88,
+      "sourceLine": 90,
       "since": null
     },
     {
@@ -64,7 +64,7 @@
       "description": "Determines the name by which the component will be identified upon submission in an HTML form.\n\n*Note:** This property is only applicable within the context of an HTML Form element.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 95,
+      "sourceLine": 97,
       "since": null
     },
     {
@@ -74,7 +74,7 @@
       "description": "Defines whether the component is in readonly state.\n\n*Note:** A readonly switch cannot be toggled by user interaction,\nbut can still be focused and its value read programmatically.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 103,
+      "sourceLine": 105,
       "since": null
     },
     {
@@ -84,7 +84,7 @@
       "description": "Defines whether the component is required.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 108,
+      "sourceLine": 110,
       "since": null
     },
     {
@@ -94,7 +94,7 @@
       "description": "Defines the text, displayed when the component is not checked.\n\n*Note:** We recommend using short texts, up to 3 letters (larger texts would be cut off).",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 115,
+      "sourceLine": 117,
       "since": null
     },
     {
@@ -104,7 +104,7 @@
       "description": "Defines the text, displayed when the component is checked.\n\n*Note:** We recommend using short texts, up to 3 letters (larger texts would be cut off).",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 122,
+      "sourceLine": 124,
       "since": null
     },
     {
@@ -114,7 +114,7 @@
       "description": "Defines the tooltip of the component.\n\n*Note:** If applicable an external label reference should always be the preferred option to provide context to the `ui5-switch` component over a tooltip.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 129,
+      "sourceLine": 131,
       "since": null
     },
     {
@@ -124,7 +124,7 @@
       "description": "Defines the form value of the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 134,
+      "sourceLine": 136,
       "since": null
     }
   ],
@@ -136,7 +136,7 @@
       "description": "Fired when the component checked state changes.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 141,
+      "sourceLine": 143,
       "since": null
     }
   ],

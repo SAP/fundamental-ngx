@@ -3,7 +3,7 @@
   "selector": null,
   "kind": "Class",
   "sourceFile": "index.ts",
-  "sourceLine": 40,
+  "sourceLine": 42,
   "sourceUrl": "",
   "description": "",
   "inputs": [
@@ -14,7 +14,7 @@
       "description": "Defines if the group is collapsed or expanded.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 45,
+      "sourceLine": 47,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Defines whether the component will have growing capability by pressing a `More` button.\nWhen button is pressed `load-more` event will be fired.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 51,
+      "sourceLine": 53,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Defines if a busy indicator would be displayed over the item.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 56,
+      "sourceLine": 58,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "Defines the delay in milliseconds, after which the busy indicator will show up for this component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 61,
+      "sourceLine": 63,
       "since": null
     },
     {
@@ -54,7 +54,7 @@
       "description": "Defines if the `notification` is new or has been already read.\n\n*Note:** if set to `false` the `titleText` has bold font,\nif set to true - it has a normal font.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 69,
+      "sourceLine": 71,
       "since": null
     },
     {
@@ -64,7 +64,7 @@
       "description": "Defines the `titleText` of the item.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 74,
+      "sourceLine": 76,
       "since": null
     }
   ],
@@ -76,7 +76,7 @@
       "description": "Fired when the component is activated either with a mouse/tap or by using the Enter or Space key.\n\n*Note:** The event will not be fired if the `disabled` property is set to `true`.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 93,
+      "sourceLine": 95,
       "since": null
     },
     {
@@ -86,7 +86,7 @@
       "description": "Fired when additional items are requested.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 81,
+      "sourceLine": 83,
       "since": null
     },
     {
@@ -96,7 +96,7 @@
       "description": "Fired when the `ui5-li-notification-group` is expanded/collapsed by user interaction.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 86,
+      "sourceLine": 88,
       "since": null
     }
   ],

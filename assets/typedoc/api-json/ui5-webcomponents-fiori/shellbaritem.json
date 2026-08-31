@@ -3,7 +3,7 @@
   "selector": null,
   "kind": "Class",
   "sourceFile": "index.ts",
-  "sourceLine": 40,
+  "sourceLine": 42,
   "sourceUrl": "",
   "description": "",
   "inputs": [
@@ -14,7 +14,7 @@
       "description": "Defines additional accessibility attributes on Shellbar Items.\n\nThe accessibility attributes support the following values:\n\n- **expanded**: Indicates whether the button, or another grouping element it controls,\nis currently expanded or collapsed.\nAccepts the following string values: `true` or `false`.\n\n- **hasPopup**: Indicates the availability and type of interactive popup element,\nsuch as menu or dialog, that can be triggered by the button.\n\n- **controls**: Identifies the element (or elements) whose contents\nor presence are controlled by the component.\nAccepts a lowercase string value, referencing the ID of the element it controls.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 58,
+      "sourceLine": 60,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Defines the count displayed in badge.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 63,
+      "sourceLine": 65,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "Defines the item's icon.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 68,
+      "sourceLine": 70,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "Defines the item text.\n\n*Note:** The text is only displayed inside the overflow popover list view.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 75,
+      "sourceLine": 77,
       "since": null
     }
   ],
@@ -56,7 +56,7 @@
       "description": "Fired when the item is clicked.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 82,
+      "sourceLine": 84,
       "since": null
     }
   ],
