@@ -10,13 +10,14 @@ import {
     QueryList,
     ViewChild,
     ViewEncapsulation,
+    booleanAttribute,
     computed,
     inject,
+    input,
     signal
 } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { Nullable, resizeObservable } from '@fundamental-ngx/cdk';
-import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import {
     animationFrames,
     asyncScheduler,
@@ -44,15 +45,16 @@ const FD_NAVIGATION_OVERFLOW_ITEM_CLASS = 'fd-navigation__container--hidden-over
     encapsulation: ViewEncapsulation.None,
     host: {
         class: 'fd-navigation__container fd-navigation__container--top',
-        '[style.flex-grow]': '1'
+        '[class.fd-navigation__container--sticky]': 'sticky()',
+        '[style.flex-grow]': 'sticky() ? 0 : 1',
+        '[style.overflow]': 'overflow()'
     },
     providers: [
         {
             provide: FdbNavigationContentContainer,
             useExisting: NavigationContentStartComponent
         }
-    ],
-    hostDirectives: [ScrollbarDirective]
+    ]
 })
 export class NavigationContentStartComponent extends FdbNavigationContentContainer implements AfterContentInit {
     /** Whether the list items are content-projected. Used only with data-driven navigation. */
@@ -109,6 +111,14 @@ export class NavigationContentStartComponent extends FdbNavigationContentContain
     /** @hidden */
     readonly hiddenItems$ = signal<FdbNavigationListItem[]>([]);
 
+    /**
+     * whether the container is sticky.
+     */
+    readonly sticky = input(false, { transform: booleanAttribute });
+
+    /** @hidden */
+    readonly overflow = computed(() => (this.sticky() ? null : 'auto'));
+
     /** @hidden */
     private _calculationInProgress = false;
 
@@ -139,6 +149,18 @@ export class NavigationContentStartComponent extends FdbNavigationContentContain
                 this.allListItems$.set(this._listItems.toArray());
             });
 
+        // Sticky containers always show all items — no overflow calculation needed.
+        // Only non-sticky containers participate in snapped-mode overflow.
+        if (this.sticky()) {
+            this._listItemsObservable.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((items) => {
+                items.forEach((item) => item.hidden$.set(false));
+                this.visibleItems$.set([...items]);
+                this.hiddenItems$.set([]);
+                this._showMoreButton$.set(false);
+            });
+            return;
+        }
+
         const resize = resizeObservable(this._elementRef.nativeElement).pipe(debounceTime(30));
 
         merge(this._isSnappedObservable, this._listItemsObservable, resize)
@@ -167,6 +189,8 @@ export class NavigationContentStartComponent extends FdbNavigationContentContain
         if (this._calculationInProgress) {
             return;
         }
+        this._calculationInProgress = true;
+
         const items = [...this.listItems$()];
         items.forEach((item) => item.hidden$.set(false));
         this.visibleItems$.set([...items]);
