@@ -1,6 +1,7 @@
 import { NgTemplateOutlet } from '@angular/common';
 import {
     afterNextRender,
+    AfterViewInit,
     booleanAttribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -19,7 +20,6 @@ import {
     OnInit,
     Optional,
     output,
-    runInInjectionContext,
     signal,
     TemplateRef,
     viewChild,
@@ -77,7 +77,7 @@ import { IconTabBarBackground, IconTabBarSize, TabDensityMode, TabType } from '.
         '[class.fd-settings__tab-bar]': 'settings()'
     }
 })
-export class IconTabBarComponent implements OnInit, TabList {
+export class IconTabBarComponent implements OnInit, AfterViewInit, TabList {
     /**
      * Whether to open tab content one under another without collapsing.
      * Works only for content-projected tab content.
@@ -275,7 +275,10 @@ export class IconTabBarComponent implements OnInit, TabList {
                     this._cd.detectChanges();
                 });
         }
+    }
 
+    /** @hidden */
+    ngAfterViewInit(): void {
         /**
          * @hidden
          * Limitation: fires once after the first render. Two known constraints:
@@ -288,17 +291,14 @@ export class IconTabBarComponent implements OnInit, TabList {
          * Do NOT add a retry-on-mutation observer for either case — self-feeding observer
          * risk (see popover ancestor-observer loop). Track as separate issues if needed.
          */
-        if (this.stackContent) {
-            runInInjectionContext(this._injector, () => {
-                afterNextRender(() => {
-                    const activeTab = this._flatTabs$().find((t) => t.active);
-                    if (activeTab) {
-                        const panel = this.tabDirectives().find((tab) => tab.uId() === activeTab.uId);
-                        this._scrollToPanel(panel ?? null);
-                    }
-                });
-            });
+        if (!this.stackContent) {
+            return;
         }
+
+        const activeTab = this._flatTabs$().find((tab) => tab.active);
+        const panel = this.tabDirectives().find((tab) => tab.uId() === activeTab?.uId);
+
+        afterNextRender(() => this._scrollToPanel(panel ?? null), { injector: this._injector });
     }
 
     /**
