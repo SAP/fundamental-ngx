@@ -3,15 +3,9 @@ import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
-import {
-    FD_LANGUAGE_ENGLISH,
-    FD_LANGUAGE_SIGNAL,
-    FdLanguage,
-    FdTranslatePipe,
-    resolveTranslationSignal
-} from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_SIGNAL, FdLanguage, FdTranslatePipe, resolveTranslationSignal } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n/en';
 import { PlatformTextAreaModule } from '@fundamental-ngx/platform/form';
-
 /**
  * Example demonstrating how to create custom language objects.
  *

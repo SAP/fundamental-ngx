@@ -1,9 +1,8 @@
 # @fundamental-ngx/i18n
 
-[![npm version](https://badge.fury.io/js/%40fundamental-ngx%2Fcdk.svg)](//www.npmjs.com/package/@fundamental-ngx/cdk)
+[![npm version](https://badge.fury.io/js/%40fundamental-ngx%2Fi18n.svg)](//www.npmjs.com/package/@fundamental-ngx/i18n)
 ![Build Status](https://github.com/SAP/fundamental-ngx/actions/workflows/create-release.yml/badge.svg?branch=main)
-![npm](https://img.shields.io/npm/dm/@fundamental-ngx/cdk?label=npm%20downloads)
-[![Slack](https://img.shields.io/badge/slack-ui--fundamentals-blue.svg?logo=slack)](https://ui-fundamentals.slack.com)
+![npm](https://img.shields.io/npm/dm/@fundamental-ngx/i18n?label=npm%20downloads)
 [![REUSE status](https://api.reuse.software/badge/github.com/SAP/fundamental-ngx)](https://api.reuse.software/info/github.com/SAP/fundamental-ngx)
 
 ## Content
@@ -22,7 +21,7 @@
 
 ## 1. Description
 
-`@fundamental-ngx/i18n` provides centralized internationalization for Fundamental-ngx components with support for 37+ languages and runtime translation switching.
+`@fundamental-ngx/i18n` provides centralized internationalization for Fundamental ngx components with support for 37+ languages and runtime translation switching.
 
 ### Quick Start
 
@@ -32,17 +31,12 @@ By default, `FD_LANGUAGE_SIGNAL` reads the browser's locale via Angular's `LOCAL
 
 ```typescript
 import { ApplicationConfig } from '@angular/core';
-import { signal } from '@angular/core';
-import { FD_LANGUAGE_SIGNAL, FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n';
+import { provideFundamentalTranslations } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_GERMAN } from '@fundamental-ngx/i18n/de';
+import { FD_LANGUAGE_FRENCH } from '@fundamental-ngx/i18n/fr';
 
 export const appConfig: ApplicationConfig = {
-    providers: [
-        // Optional: override auto-detection with a specific language
-        {
-            provide: FD_LANGUAGE_SIGNAL,
-            useValue: signal(FD_LANGUAGE_ENGLISH)
-        }
-    ]
+    providers: [provideFundamentalTranslations(FD_LANGUAGE_GERMAN, FD_LANGUAGE_FRENCH)]
 };
 ```
 
@@ -79,7 +73,8 @@ export class MyComponent {
 
 ```typescript
 import { Component, inject } from '@angular/core';
-import { FD_LANGUAGE_SIGNAL, FD_LANGUAGE_GERMAN } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_SIGNAL } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_GERMAN } from '@fundamental-ngx/i18n/de';
 
 @Component({
     selector: 'language-switcher'
@@ -89,7 +84,6 @@ export class LanguageSwitcher {
 
     switchToGerman(): void {
         this.langSignal.set(FD_LANGUAGE_GERMAN);
-        // Locale + UI5 language update automatically — one call is all you need!
     }
 }
 ```
@@ -109,11 +103,11 @@ FD_LANGUAGE_SIGNAL  →  FD_LOCALE_SIGNAL (auto-derived via linkedSignal)
 Each built-in language carries `locale` and `name` metadata:
 
 ```typescript
+import { FD_LANGUAGE_GERMAN } from '@fundamental-ngx/i18n/de';
+
 FD_LANGUAGE_GERMAN.locale; // 'de'
 FD_LANGUAGE_GERMAN.name; // 'Deutsch'
 ```
-
-`FD_LOCALE_SIGNAL` derives from `language.locale` by default. You can still override it independently for edge cases (e.g., German text with Japanese date formatting), but the override clears when the language changes next.
 
 ### UI5 Integration
 
@@ -148,15 +142,6 @@ When disabled, `FD_LANGUAGE_SIGNAL` defaults to English unless you provide a cus
 - `FdTranslatePipe` for template translations (returns `Signal<string>`)
 - Type-safe translation keys via `FdLanguage` interface
 
-### Signal-based Reactivity
-
-Built on Angular signals for optimal performance and developer experience:
-
-- ✅ Significantly better performance (fine-grained reactivity)
-- ✅ Automatic cleanup (no subscriptions)
-- ✅ Zoneless compatible
-- ✅ Simpler, cleaner API
-
 ### How It Works
 
 1. **Source**: Translation teams provide `.properties` files (Java-style format)
@@ -171,42 +156,26 @@ While designed for Fundamental-ngx components, this library works in any Angular
 
 > **Note:** This guide is for adding new translation keys (labels, ARIA attributes), NOT for adding new languages.
 
-**The only manual file is `libs/i18n/src/lib/models/fd-language.ts`** — the `FdLanguage` interface that defines the runtime type shape. No CLI tool updates this file; you must edit it by hand. Skipping this step causes a misleading `TS2554: Expected 2 arguments, but got 1` build error.
+**Run the CLI** — it updates `translations.properties` and `fd-language.ts` automatically:
 
-**Steps:**
+```bash
+nx run i18n:i18n-manage --command=add --key=coreYourComponent.yourNewKey --value="Your English text"
+```
 
-1. **Update `fd-language.ts`** — add the property to the `FdLanguage` interface in the correct section:
+For keys that require typed parameters (e.g., `FdLanguageKey<{ count: number }>`), update `fd-language.ts` manually after running the command.
 
-    ```typescript
-    coreYourComponent: {
-        /** Description for translators */
-        yourNewKey: FdLanguageKey;
-    }
-    ```
+**Verify:**
 
-2. **Run the CLI** — adds the key to all 37 `.properties` files and regenerates TypeScript:
-
-    ```bash
-    nx run i18n:i18n-manage --command=add --key=coreYourComponent.yourNewKey --value="Your English text"
-    ```
-
-3. **Verify:**
-
-    ```bash
-    nx run i18n:i18n-manage --command=validate
-    ```
+```bash
+nx run i18n:i18n-manage --command=validate
+```
 
 For rename, remove, update, search, sort, and validation commands, see the [i18n-manage CLI reference](../nx-plugin/src/executors/i18n-manage/README.md).
-
-**Generated files — do not edit manually:**
-
-- `fd-language-key-identifier.ts` — union type, regenerated by `i18n-manage --command=sync`
-- `translations_*.ts` — TypeScript modules, regenerated from `.properties` files
 
 ## 2. Requirements
 
 - Node.js and npm
-- Angular 16.2 or newer
+- Angular 22 or newer
 - Prior Angular knowledge recommended
 
 ## 3. Versioning

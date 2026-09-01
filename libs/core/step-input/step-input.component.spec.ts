@@ -3,7 +3,8 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { whenStable } from '@fundamental-ngx/core/tests';
-import { FD_LANGUAGE_ENGLISH, FD_LANGUAGE_SIGNAL } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_SIGNAL } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n/en';
 import { StepInputComponent } from './step-input.component';
 
 const initialValue = 100;
