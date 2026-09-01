@@ -15,8 +15,8 @@ export interface ExampleNavigationItem {
 }
 
 @Component({
-    selector: 'fdb-sticky-area',
-    templateUrl: './sticky-area.component.html',
+    selector: 'fdb-sticky-item',
+    templateUrl: './sticky-item.component.html',
     imports: [
         RouterLink,
         FormsModule,
@@ -28,7 +28,7 @@ export interface ExampleNavigationItem {
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class StickyAreaExampleComponent {
+export class StickyItemExampleComponent {
     state: FdbNavigationState = 'expanded';
     mode: FdbViewMode = '';
     searchTerm = '';

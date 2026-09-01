@@ -1,4 +1,4 @@
-<!-- <fd-docs-section-title id="simple" componentName="navigation">Basic example</fd-docs-section-title>
+<fd-docs-section-title id="simple" componentName="navigation">Basic example</fd-docs-section-title>
 <description>
     <p>
         Vertical navigation can accept multiple states, such as: <code>expanded</code>, <code>snapped</code>,
@@ -118,12 +118,13 @@
 </component-example>
 <code-example [exampleFiles]="overlayExample"></code-example>
 
-<separator></separator> 
+<separator></separator>
 
 <fd-docs-section-title id="indication-tags" componentName="navigation">Indication Tags</fd-docs-section-title>
 <description>
     <p>
-        Navigation items can display indication tags (e.g., "New", "Beta", "Deprecated") using the Object Status component.
+        Navigation items can display indication tags (e.g., "New", "Beta", "Deprecated") using the Object Status
+        component.
     </p>
     <h3>Guidelines</h3>
     <ul>
@@ -138,7 +139,7 @@
 </component-example>
 <code-example [exampleFiles]="indicationTagsExample"></code-example>
 
-<separator></separator> -->
+<separator></separator>
 
 <fd-docs-section-title id="sticky-area" componentName="navigation">Sticky Area</fd-docs-section-title>
 <description>
@@ -152,8 +153,33 @@
     <ul>
         <li>Recommended not to contain more than 4 items.</li>
     </ul>
+    <br />
+    <b
+        >Note: No built-in search or filtering logic is provided. The consuming application is responsible for handling
+        input changes and filtering navigation items accordingly.</b
+    >
 </description>
 <component-example [hasBackground]="false">
     <fdb-sticky-area></fdb-sticky-area>
 </component-example>
 <code-example [exampleFiles]="stickyAreaExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="sticky-item" componentName="navigation">Sticky Item</fd-docs-section-title>
+<description>
+    <p>
+        Any <code>fdb-navigation-list-item</code> can be pinned to the top of the navigation by adding the
+        <code>sticky</code> attribute. The item will remain fixed regardless of scroll position and no separator is
+        rendered beneath it. Only one item should be marked as sticky — if multiple items need to be pinned, use a
+        <a href="#sticky-area">Sticky Area</a> instead.
+    </p>
+    <b
+        >Note: No built-in search or filtering logic is provided. The consuming application is responsible for handling
+        input changes and filtering navigation items accordingly.</b
+    >
+</description>
+<component-example [hasBackground]="false">
+    <fdb-sticky-item></fdb-sticky-item>
+</component-example>
+<code-example [exampleFiles]="stickyItemExample"></code-example>

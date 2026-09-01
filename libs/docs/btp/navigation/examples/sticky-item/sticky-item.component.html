@@ -17,56 +17,41 @@
     [state]="state"
     [mode]="mode"
     [style.width]="'fit-content'"
-    [style.height.px]="700"
+    [style.height.px]="500"
     [ariaLabel]="`Main Navigation ${state}`"
     ariaRoleDescription="Side Navigation"
 >
     <fdb-navigation-content-start ariaLabel="Primary Navigation Menu" ariaRoleDescription="Navigation List Tree">
-        <fdb-navigation-list-item>
-            <a fdb-navigation-link *fdbNavigationLinkRef glyph="home">
-                Home
-                <span
-                    fd-object-status
-                    [indicationColor]="8"
-                    [secondaryIndication]="true"
-                    [inverted]="true"
-                    label="Beta"
-                ></span>
-            </a>
+        <fdb-navigation-list-item sticky search>
+            <fdp-search-field
+                placeholder="Search"
+                [disableRefresh]="true"
+                (searchSubmit)="onSearchSubmit($event)"
+                (inputChange)="onInputChange($event)"
+            ></fdp-search-field>
         </fdb-navigation-list-item>
+
         <fdb-navigation-list-item>
-            <a fdb-navigation-link *fdbNavigationLinkRef glyph="favorite-list">
-                Favourites
-                <span fd-object-status [indicationColor]="9" [inverted]="true" label="New"></span>
-            </a>
+            <a fdb-navigation-link *fdbNavigationLinkRef glyph="home">Home</a>
         </fdb-navigation-list-item>
+
+        <fdb-navigation-list-item>
+            <a fdb-navigation-link *fdbNavigationLinkRef glyph="favorite-list">Favourites</a>
+        </fdb-navigation-list-item>
+
+        <fdb-navigation-list-item>
+            <a fdb-navigation-link *fdbNavigationLinkRef glyph="document">Reports</a>
+        </fdb-navigation-list-item>
+
         <fdb-navigation-list-item disabled>
             <a fdb-navigation-link *fdbNavigationLinkRef glyph="time-account">Recent (Disabled)</a>
         </fdb-navigation-list-item>
 
         <fdb-navigation-list-item group expanded>
-            <a fdb-navigation-link *fdbNavigationLinkRef>
-                Sales
-                <span
-                    fd-object-status
-                    [indicationColor]="10"
-                    [secondaryIndication]="true"
-                    [inverted]="true"
-                    label="Alpha"
-                ></span>
-            </a>
+            <a fdb-navigation-link *fdbNavigationLinkRef>Sales</a>
 
             <fdb-navigation-list-item expanded>
-                <a fdb-navigation-link *fdbNavigationLinkRef glyph="lead">
-                    Leads
-                    <span
-                        fd-object-status
-                        [indicationColor]="5"
-                        [secondaryIndication]="true"
-                        [inverted]="true"
-                        label="Beta Lorem ipsum dolor sit amet consectetur adipisicing elit"
-                    ></span>
-                </a>
+                <a fdb-navigation-link *fdbNavigationLinkRef glyph="lead">Leads</a>
                 <fdb-navigation-list-item selected>
                     <a fdb-navigation-link *fdbNavigationLinkRef [routerLink]="['/btp/navigation']">All Leads</a>
                 </fdb-navigation-list-item>
@@ -81,16 +66,7 @@
                     <a fdb-navigation-link *fdbNavigationLinkRef>All Opportunities</a>
                 </fdb-navigation-list-item>
                 <fdb-navigation-list-item>
-                    <a fdb-navigation-link *fdbNavigationLinkRef>
-                        Resource Planning and Business Management Solutions
-                        <span
-                            fd-object-status
-                            [indicationColor]="6"
-                            [secondaryIndication]="true"
-                            [inverted]="true"
-                            label="Preview"
-                        ></span>
-                    </a>
+                    <a fdb-navigation-link *fdbNavigationLinkRef>Team Pipeline</a>
                 </fdb-navigation-list-item>
             </fdb-navigation-list-item>
 

@@ -22,6 +22,14 @@
     ariaRoleDescription="Side Navigation"
 >
     <fdb-navigation-content-start sticky ariaLabel="Sticky Navigation Menu" ariaRoleDescription="Navigation List Tree">
+        <fdb-navigation-list-item search>
+            <fdp-search-field
+                placeholder="Search"
+                [disableRefresh]="true"
+                (searchSubmit)="onSearchSubmit($event)"
+                (inputChange)="onInputChange($event)"
+            ></fdp-search-field>
+        </fdb-navigation-list-item>
         <fdb-navigation-list-item>
             <a fdb-navigation-link *fdbNavigationLinkRef glyph="home">Home</a>
         </fdb-navigation-list-item>

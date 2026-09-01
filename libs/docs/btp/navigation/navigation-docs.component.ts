@@ -15,6 +15,7 @@ import { NavigationOverlayExampleComponent } from './examples/overlay/overlay.co
 import { NavigationParentItemLinkComponent } from './examples/parent-item-link/navigation-parent-item-link.component';
 import { SelectionModeComponent } from './examples/selection-mode/selection-mode.component';
 import { StickyAreaExampleComponent } from './examples/sticky-area/sticky-area.component';
+import { StickyItemExampleComponent } from './examples/sticky-item/sticky-item.component';
 
 @Component({
     selector: 'fd-docs-btp-navigation',
@@ -31,7 +32,8 @@ import { StickyAreaExampleComponent } from './examples/sticky-area/sticky-area.c
         NavigationOverlayExampleComponent,
         NavigationDesktopExampleComponent,
         NavigationIndicationTagsExampleComponent,
-        StickyAreaExampleComponent
+        StickyAreaExampleComponent,
+        StickyItemExampleComponent
     ]
 })
 export class NavigationDocsComponent {
@@ -89,5 +91,13 @@ export class NavigationDocsComponent {
             selector: 'fdb-sticky-area'
         }),
         getExampleFile('sticky-area/sticky-area.component.html')
+    ];
+
+    stickyItemExample: ExampleFile[] = [
+        getExampleFile('sticky-item/sticky-item.component.ts', {
+            component: 'StickyItemExampleComponent',
+            selector: 'fdb-sticky-item'
+        }),
+        getExampleFile('sticky-item/sticky-item.component.html')
     ];
 }

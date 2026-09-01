@@ -209,6 +209,11 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
      */
     readonly sticky = input(false, { transform: booleanAttribute });
 
+    /**
+     * whether the item contains a search field.
+     */
+    readonly search = input(false, { transform: booleanAttribute });
+
     /** Type of the list item. Whether its a standard item or a "show more" button container. */
     readonly type: 'item' | 'showMore' = 'item';
 
