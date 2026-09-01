@@ -176,9 +176,7 @@
         "websocket-driver": "0.7.5"
     },
     "lint-staged": {
-        "*.{js,ts,html,md,json,yml,css,scss}": [
-            "prettier --write",
-            "eslint --fix --flag v10_config_lookup_from_file"
-        ]
+        "*.{js,ts,html,md,json,yml,css,scss}": ["prettier --write"],
+        "*.{html,scss,css}": ["eslint --flag v10_config_lookup_from_file"]
     }
 }
