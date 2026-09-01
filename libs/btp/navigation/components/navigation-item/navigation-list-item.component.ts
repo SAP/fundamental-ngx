@@ -205,12 +205,12 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
     id = input(`fdb-nav-list-item-${++navListItemUniqueId}`);
 
     /**
-     * whether the item is a sticky item.
+     * Whether the item is a sticky item.
      */
     readonly sticky = input(false, { transform: booleanAttribute });
 
     /**
-     * whether the item contains a search field.
+     * Whether the item contains a search field.
      */
     readonly search = input(false, { transform: booleanAttribute });
 
