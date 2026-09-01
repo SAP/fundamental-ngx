@@ -112,7 +112,8 @@ export class NavigationContentStartComponent extends FdbNavigationContentContain
     readonly hiddenItems$ = signal<FdbNavigationListItem[]>([]);
 
     /**
-     * whether the container is sticky.
+     * Whether the container is sticky.
+     * When true, all items are displayed without overflow calculation.
      */
     readonly sticky = input(false, { transform: booleanAttribute });
 
@@ -149,18 +150,6 @@ export class NavigationContentStartComponent extends FdbNavigationContentContain
                 this.allListItems$.set(this._listItems.toArray());
             });
 
-        // Sticky containers always show all items — no overflow calculation needed.
-        // Only non-sticky containers participate in snapped-mode overflow.
-        if (this.sticky()) {
-            this._listItemsObservable.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((items) => {
-                items.forEach((item) => item.hidden$.set(false));
-                this.visibleItems$.set([...items]);
-                this.hiddenItems$.set([]);
-                this._showMoreButton$.set(false);
-            });
-            return;
-        }
-
         const resize = resizeObservable(this._elementRef.nativeElement).pipe(debounceTime(30));
 
         merge(this._isSnappedObservable, this._listItemsObservable, resize)
@@ -195,6 +184,16 @@ export class NavigationContentStartComponent extends FdbNavigationContentContain
         items.forEach((item) => item.hidden$.set(false));
         this.visibleItems$.set([...items]);
         this._cdr.detectChanges();
+
+        // Sticky containers always show all items — no overflow calculation needed.
+        if (this.sticky()) {
+            this.hiddenItems$.set([]);
+            this._showMoreButton$.set(false);
+            this._calculationInProgress = false;
+            this.navigation.showMoreButton$.set(null);
+            return;
+        }
+
         if (!this.navigation.isSnapped$()) {
             this._showMoreButton$.set(false);
             this._calculationInProgress = false;
