@@ -577,6 +577,9 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
 
         this._initWindowResize();
 
+        // Sync selected items when FormControl.setValue() is called (CVA.writeValue event).
+        // This catches programmatic value updates even without a [selectedItems] binding.
+        // Requires datasource to be populated for the lookup to succeed.
         this._cva.stateChanges
             .pipe(
                 filter((event) => event === 'writeValue'),

@@ -51,12 +51,10 @@ export class MultiComboboxFormsExampleComponent {
     selectAllFruits(): void {
         const fruits = this.dataSource.filter((item) => item.type === 'Fruits');
         this.reactiveFormControl.setValue(fruits);
-        this.customForm.updateValueAndValidity();
     }
 
     clearReactiveForm(): void {
         this.reactiveFormControl.setValue([]);
-        this.customForm.updateValueAndValidity();
     }
 
     // Programmatic updates via signal
