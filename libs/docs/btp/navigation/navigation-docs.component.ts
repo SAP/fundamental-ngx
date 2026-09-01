@@ -10,9 +10,11 @@ import {
 } from '@fundamental-ngx/docs/shared';
 import { NavigationBasicExampleComponent } from './examples/basic-example/navigation-basic-example.component';
 import { NavigationDesktopExampleComponent } from './examples/desktop/desktop.component';
+import { NavigationIndicationTagsExampleComponent } from './examples/indication-tags/navigation-indication-tags.component';
 import { NavigationOverlayExampleComponent } from './examples/overlay/overlay.component';
 import { NavigationParentItemLinkComponent } from './examples/parent-item-link/navigation-parent-item-link.component';
 import { SelectionModeComponent } from './examples/selection-mode/selection-mode.component';
+import { StickyAreaExampleComponent } from './examples/sticky-area/sticky-area.component';
 
 @Component({
     selector: 'fd-docs-btp-navigation',
@@ -27,7 +29,9 @@ import { SelectionModeComponent } from './examples/selection-mode/selection-mode
         NavigationParentItemLinkComponent,
         SelectionModeComponent,
         NavigationOverlayExampleComponent,
-        NavigationDesktopExampleComponent
+        NavigationDesktopExampleComponent,
+        NavigationIndicationTagsExampleComponent,
+        StickyAreaExampleComponent
     ]
 })
 export class NavigationDocsComponent {
@@ -69,5 +73,21 @@ export class NavigationDocsComponent {
             selector: 'overlay'
         }),
         getExampleFile('overlay/overlay.component.html')
+    ];
+
+    indicationTagsExample: ExampleFile[] = [
+        getExampleFile('indication-tags/navigation-indication-tags.component.ts', {
+            component: 'NavigationIndicationTagsExampleComponent',
+            selector: 'navigation-indication-tags'
+        }),
+        getExampleFile('indication-tags/navigation-indication-tags.component.html')
+    ];
+
+    stickyAreaExample: ExampleFile[] = [
+        getExampleFile('sticky-area/sticky-area.component.ts', {
+            component: 'StickyAreaExampleComponent',
+            selector: 'fdb-sticky-area'
+        }),
+        getExampleFile('sticky-area/sticky-area.component.html')
     ];
 }

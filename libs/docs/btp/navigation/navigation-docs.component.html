@@ -1,4 +1,4 @@
-<fd-docs-section-title id="simple" componentName="navigation">Basic example</fd-docs-section-title>
+<!-- <fd-docs-section-title id="simple" componentName="navigation">Basic example</fd-docs-section-title>
 <description>
     <p>
         Vertical navigation can accept multiple states, such as: <code>expanded</code>, <code>snapped</code>,
@@ -117,3 +117,43 @@
     <fdb-overlay></fdb-overlay>
 </component-example>
 <code-example [exampleFiles]="overlayExample"></code-example>
+
+<separator></separator> 
+
+<fd-docs-section-title id="indication-tags" componentName="navigation">Indication Tags</fd-docs-section-title>
+<description>
+    <p>
+        Navigation items can display indication tags (e.g., "New", "Beta", "Deprecated") using the Object Status component.
+    </p>
+    <h3>Guidelines</h3>
+    <ul>
+        <li>One tag per navigation item (parent or child items only)</li>
+        <li>Avoid semantic colors 1-4 (may be confused with error/success/warning states)</li>
+        <li>Limit tag width to 64px (4rem) — use abbreviations if needed (e.g., "Experimental" → "Exp")</li>
+        <li>Tags are visual indicators only (non-interactive, no tooltips or actions)</li>
+    </ul>
+</description>
+<component-example [hasBackground]="false">
+    <fdb-navigation-indication-tags></fdb-navigation-indication-tags>
+</component-example>
+<code-example [exampleFiles]="indicationTagsExample"></code-example>
+
+<separator></separator> -->
+
+<fd-docs-section-title id="sticky-area" componentName="navigation">Sticky Area</fd-docs-section-title>
+<description>
+    <p>
+        The Side Navigation can show a top-aligned fixed header area that stays visible at all times. It can contain an
+        optional search field. A separator is shown below this area unless it contains only a search field. <br />
+        Add the <code>sticky</code> attribute to <code>fdb-navigation-content-start</code> to mark the container as a
+        sticky area.
+    </p>
+    <h3>Guidelines</h3>
+    <ul>
+        <li>Recommended not to contain more than 4 items.</li>
+    </ul>
+</description>
+<component-example [hasBackground]="false">
+    <fdb-sticky-area></fdb-sticky-area>
+</component-example>
+<code-example [exampleFiles]="stickyAreaExample"></code-example>
