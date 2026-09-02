@@ -253,11 +253,11 @@ describe('Platform ButtonComponent', () => {
     });
 
     describe('ButtonModel Interface', () => {
-        it('should implement setDisabled method (logs warning for signal inputs)', () => {
-            const consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation();
+        it('should implement setDisabled method', () => {
+            expect(component.isDisabled()).toBe(false);
             component.setDisabled(true);
-            expect(consoleWarnSpy).toHaveBeenCalled();
-            consoleWarnSpy.mockRestore();
+            fixture.detectChanges();
+            expect(component.isDisabled()).toBe(true);
         });
 
         it('should implement isDisabled method', () => {
@@ -267,11 +267,10 @@ describe('Platform ButtonComponent', () => {
             expect(component.isDisabled()).toBe(true);
         });
 
-        it('should implement setFdType method (logs warning for signal inputs)', () => {
-            const consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation();
+        it('should implement setFdType method', () => {
             component.setFdType('positive');
-            expect(consoleWarnSpy).toHaveBeenCalled();
-            consoleWarnSpy.mockRestore();
+            fixture.detectChanges();
+            expect(component.getFdType()).toBe('positive');
         });
 
         it('should implement getFdType method', () => {
