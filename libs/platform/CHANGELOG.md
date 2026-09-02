@@ -1,3 +1,13 @@
+## 0.65.0-rc.1 (2026-09-02)
+
+### 🩹 Fixes
+
+- **platform:** make fdp-button ButtonModel setters update rendered state ([#14513](https://github.com/SAP/fundamental-ngx/pull/14513))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.65.0-rc.0 (2026-09-01)
 
 ### 🚀 Features
