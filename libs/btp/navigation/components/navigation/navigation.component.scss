@@ -1,10 +1,23 @@
 @import 'fundamental-styles/dist/navigation.css';
 @import 'fundamental-styles/dist/menu.css';
 
-$block: fd-navigation;
+$navigation: fd-navigation;
+$popoverBody: fd-popover__body;
+$navContainer: '.#{$navigation}__container';
+$navList: '.#{$navigation}__list';
+$navListItem: '.#{$navigation}__list-item';
+$navListContainer: '.#{$navigation}__list-container';
+$navListWrapper: '.#{$navigation}__list-wrapper';
+$navItem: '.#{$navigation}__item';
+$navLink: '.#{$navigation}__link';
+$navIcon: '.#{$navigation}__icon';
+$navText: '.#{$navigation}__text';
+$navHasChildrenIndicator: '.#{$navigation}__has-children-indicator';
+$navExpandedWidth: 16rem;
 
-.#{$block} {
-    & &__container--top {
+// Navigation root and state-specific layout rules.
+.#{$navigation} {
+    #{$navContainer}--top {
         padding-left: var(--fdNavigation_Padding_X);
         padding-right: var(--fdNavigation_Padding_X);
         padding-bottom: 0.25rem;
@@ -16,17 +29,18 @@ $block: fd-navigation;
     }
 
     &--snapped {
-        .#{$block}__list-item--sticky,
-        .#{$block}__list-item--home {
+        // Snapped-state list item positioning.
+        #{$navListItem}--sticky,
+        #{$navListItem}--home {
             position: relative;
         }
 
-        .#{$block}__container--top {
+        #{$navContainer}--top {
             overflow: visible !important;
             display: flex;
             flex-direction: column;
 
-            .#{$block}__list {
+            #{$navList} {
                 flex-grow: 1;
                 height: auto;
                 min-height: 0;
@@ -35,14 +49,29 @@ $block: fd-navigation;
                 }
             }
         }
-        .#{$block}__container--hidden-overflow {
+        #{$navContainer}--hidden-overflow {
             overflow: hidden !important;
+        }
+
+        #{$navListContainer}#{$navListContainer}--menu {
+            left: auto;
+            position: relative;
+            transition: none;
+        }
+
+        // Keep the same selector specificity but stage the chain for readability.
+        #{$navListItem} {
+            > #{$navItem}:not(#{$navItem}--child, #{$navItem}--overflow)[aria-expanded='true'] {
+                > #{$navLink}:hover {
+                    --fdNavigation_Link_Padding_Right: 1rem;
+                }
+            }
         }
     }
 
     &--expanded,
     &--popup {
-        .#{$block}__list-item--home {
+        #{$navListItem}--home {
             z-index: 21;
         }
     }
@@ -55,12 +84,12 @@ $block: fd-navigation;
         opacity: 0.6;
         cursor: default;
 
-        .fd-navigation__link {
+        #{$navLink} {
             pointer-events: none;
             user-select: none;
         }
 
-        .fd-navigation__has-children-indicator {
+        #{$navHasChildrenIndicator} {
             pointer-events: none;
             cursor: default;
         }
@@ -70,33 +99,69 @@ $block: fd-navigation;
         }
     }
 
-    &__list-item--spacer {
-        &--hidden {
-            display: none !important;
+    &__list-item--spacer--hidden {
+        display: none !important;
+    }
+
+    &__list-item--home-without-separator {
+        margin-bottom: 0.125rem;
+    }
+
+    &.#{$navigation}--expanded {
+        width: $navExpandedWidth;
+        min-width: $navExpandedWidth;
+        max-width: $navExpandedWidth;
+
+        #{$navItem}:not(#{$navItem}--create) {
+            #{$navText} {
+                white-space: normal;
+            }
+        }
+
+        &.is-overlay {
+            right: 0;
+            width: 100%;
+            min-width: 100%;
+            max-width: 100%;
         }
     }
 
-    .fd-navigation__list-item--home-without-separator {
-        margin-bottom: 0.125rem;
+    &.#{$navigation}--vertical.#{$navigation}--popup {
+        --fdNavigation_Border_Radius: 0;
+        --fdNavigation_Box_Shadow: none;
+        --fdNavigation_Height: 100%;
+    }
+
+    &.#{$navigation}--snapped {
+        #{$navListContainer} {
+            display: flex;
+        }
+
+        #{$navContainer}--top#{$navContainer}--sticky:after {
+            margin-block: 0.25rem;
+        }
+    }
+
+    &.is-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
     }
 }
 
-.#{$block}--snapped .#{$block}__list-container.#{$block}__list-container--menu {
-    position: relative;
-    transition: none;
-}
-
-.#{$block}__list-item:not(.#{$block}__list-item--sticky):not(.#{$block}__list-item--home) {
+// Shared list/menu behaviors.
+#{$navListItem}:not(#{$navListItem}--sticky):not(#{$navListItem}--home) {
     position: relative;
 }
 
-.#{$block}__list-container--menu {
+// Menu interaction and overflow behaviors.
+#{$navListContainer}--menu {
     > .fd-scrollbar {
         overflow: visible !important;
     }
 
-    .#{$block}__list--parent-items {
-        .#{$block}__list-item {
+    #{$navList}--parent-items {
+        #{$navListItem} {
             // Give more focus area for submenu
             &::before {
                 content: '';
@@ -106,7 +171,7 @@ $block: fd-navigation;
                 left: -1rem;
                 right: -1rem;
             }
-            > .#{$block}__list-container {
+            > #{$navListContainer} {
                 display: none;
                 top: -0.5rem;
             }
@@ -114,12 +179,12 @@ $block: fd-navigation;
             &:hover,
             &:focus,
             &:focus-within {
-                > .#{$block}__list-container {
+                > #{$navListContainer} {
                     display: block;
                 }
             }
 
-            .#{$block}__list-container--submenu {
+            #{$navListContainer}--submenu {
                 overflow-x: hidden;
                 overflow-y: auto;
 
@@ -136,98 +201,83 @@ $block: fd-navigation;
     }
 }
 
-.fd-popover__body.fd-navigation__list-container {
-    display: block;
+#{$navList}.fd-menu__list {
+    &#{$navList}--parent-items {
+        #{$navListItem}#{$navListItem}--separator:is(:first-child, :last-child) {
+            height: 0;
+            min-height: 0;
+            max-height: 0;
+        }
+    }
 }
 
-.fd-navigation__item {
+// Item-level visual and typography adjustments.
+#{$navItem} {
     .fd-popover-custom {
         max-width: none;
     }
-}
 
-.fd-navigation__item.fd-navigation__item--title .fd-navigation__has-children-indicator {
-    display: none;
-}
-
-.fd-navigation__item {
-    .fd-navigation__icon,
-    .fd-navigation__text {
+    #{$navIcon},
+    #{$navText} {
         font-family: var(--sapFontSemiboldDuplexFamily);
     }
 
-    &.fd-navigation__item--child {
-        .fd-navigation__icon,
-        .fd-navigation__text {
+    #{$navItem}--title #{$navHasChildrenIndicator} {
+        display: none;
+    }
+
+    #{$navItem}--child {
+        #{$navIcon},
+        #{$navText} {
             font-family: var(--sapFontFamily);
         }
     }
-}
 
-.fd-navigation.fd-navigation--expanded {
-    width: 16rem;
-    min-width: 16rem;
-    max-width: 16rem;
+    #{$navItem}--create #{$navLink} {
+        border: none;
+        box-shadow: 0 0 0 var(--sapButton_BorderWidth) var(--fdNavigation_Quick_Create_Border_Color);
+    }
 
-    .fd-navigation__item:not(.fd-navigation__item--create) {
-        .fd-navigation__text {
-            white-space: normal;
-        }
+    fdp-search-field {
+        width: 100%;
     }
 }
 
-.fd-popover__body.fd-navigation__list-container.fd-navigation__list-wrapper {
-    max-width: 40rem;
-}
-
-.fd-navigation.fd-navigation--vertical.fd-navigation--popup {
-    --fdNavigation_Border_Radius: 0;
-    --fdNavigation_Box_Shadow: none;
-    --fdNavigation_Height: 100%;
-}
-
-.fd-navigation.is-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-.fd-navigation.fd-navigation--expanded.is-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    min-width: 100%;
-    max-width: 100%;
-}
-
-.fd-navigation__item.fd-navigation__item--create .fd-navigation__link {
-    border: none;
-    box-shadow: 0 0 0 var(--sapButton_BorderWidth) var(--fdNavigation_Quick_Create_Border_Color);
-}
-
-.fd-navigation--snapped .fd-navigation__list-container.fd-navigation__list-container--menu {
-    left: auto;
-}
-
-.fd-navigation__list.fd-menu__list.fd-navigation__list--parent-items {
-    .fd-navigation__list-item.fd-navigation__list-item--separator:is(:first-child, :last-child) {
-        height: 0;
-        min-height: 0;
-        max-height: 0;
-    }
-}
-
-.fd-navigation__container.fd-navigation__container--bottom::before {
+// Container helpers.
+#{$navContainer}--bottom::before {
     display: flex;
     margin-block: 0 0.25rem;
 }
 
+#{$navContainer}--sticky {
+    background: var(--sapList_Background);
+}
+
+// Popover integration.
+.#{$popoverBody}#{$navListContainer} {
+    display: block;
+
+    &#{$navListWrapper} {
+        max-width: 40rem;
+    }
+}
+
+.#{$popoverBody} {
+    &.#{$popoverBody}--left:has(.#{$navigation}) {
+        margin-inline-start: -0.875rem;
+
+        &::after,
+        &::before {
+            margin-inline-start: 0.875rem;
+        }
+    }
+}
+
+// RTL-specific overrides.
 @at-root {
     [dir='rtl'],
     [dir='rtl'] {
-        .fd-navigation__item--with-expander .fd-navigation__has-children-indicator {
+        #{$navItem}--with-expander #{$navHasChildrenIndicator} {
             left: var(--fdNavigation_Link_Has_Child_Indicator_Pos_Right, 0.375rem);
             right: auto;
 
@@ -237,52 +287,20 @@ $block: fd-navigation;
             }
         }
 
-        .fd-navigation__has-children-indicator:before {
+        #{$navHasChildrenIndicator}:before {
             --fdNavigation_Link_Has_Child_Indicator_Icon: '\e1ee';
         }
 
-        .fd-navigation--snapped .fd-navigation__list-container.fd-navigation__list-container--menu {
+        .#{$navigation}--snapped #{$navListContainer}#{$navListContainer}--menu {
             right: auto;
         }
 
-        .fd-navigation__item[aria-expanded='true'] .fd-navigation__has-children-indicator:before {
+        #{$navItem}[aria-expanded='true'] #{$navHasChildrenIndicator}:before {
             --fdNavigation_Link_Has_Child_Indicator_Icon: '\e1ef';
         }
 
-        .fd-navigation.fd-navigation--snapped .fd-navigation__has-children-indicator:before {
+        .#{$navigation}--snapped #{$navHasChildrenIndicator}:before {
             --fdNavigation_Link_Has_Child_Indicator_Icon: '\e1ee';
         }
     }
-}
-
-.fd-navigation.fd-navigation--snapped .fd-navigation__list-container {
-    display: flex;
-}
-
-.fd-popover__body.fd-popover__body--left:has(.fd-navigation) {
-    margin-inline-start: -0.875rem;
-
-    &::after,
-    &::before {
-        margin-inline-start: 0.875rem;
-    }
-}
-
-.fd-navigation__container.fd-navigation__container--sticky {
-    background: var(--sapList_Background);
-}
-
-.fd-navigation.fd-navigation--snapped .fd-navigation__container--top.fd-navigation__container--sticky:after {
-    margin-block: 0.25rem;
-}
-
-.fd-navigation__item fdp-search-field {
-    width: 100%;
-}
-
-.fd-navigation--snapped
-    .fd-navigation__list-item
-    > .fd-navigation__item:not(.fd-navigation__item--child, .fd-navigation__item--overflow)[aria-expanded='true']
-    > .fd-navigation__link:hover {
-    --fdNavigation_Link_Padding_Right: 1rem;
 }
