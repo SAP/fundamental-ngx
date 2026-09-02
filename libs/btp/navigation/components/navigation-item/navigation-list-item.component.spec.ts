@@ -143,4 +143,12 @@ describe('NavigationListItemComponent', () => {
 
         expect(component.class$()).not.toContain('fd-navigation__list-item--sticky');
     });
+
+    it('should not be visible when configured as search item in snapped mode', () => {
+        fixture.componentRef.setInput('search', true);
+        navComponent.isSnapped$.set(true);
+        fixture.detectChanges();
+
+        expect(component.isVisible$()).toBe(false);
+    });
 });
