@@ -45,6 +45,7 @@ const FD_NAVIGATION_OVERFLOW_ITEM_CLASS = 'fd-navigation__container--hidden-over
     encapsulation: ViewEncapsulation.None,
     host: {
         class: 'fd-navigation__container fd-navigation__container--top',
+        '[tabindex]': '-1',
         '[class.fd-navigation__container--sticky]': 'sticky()',
         '[style.flex-grow]': 'sticky() ? 0 : 1',
         '[style.overflow]': 'overflow()'

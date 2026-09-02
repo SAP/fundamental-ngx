@@ -232,6 +232,12 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
             return false;
         }
 
+        // Search list-items are not rendered in snapped mode, so they must not
+        // participate in keyboard navigation indexing.
+        if (this.search() && this.navigation.isSnapped$()) {
+            return false;
+        }
+
         if (!this.parentListItem) {
             return this.isGroup$() ? !this.navigation.isSnapped$() : true;
         }

@@ -330,21 +330,26 @@ export class NavigationComponent
                 return;
             }
 
-            // Find last list item from the `Start` container.
-            const insertionIndex = items.findIndex((item) => {
+            // Find the true last item from all `start` containers.
+            // We insert AFTER this item so ArrowDown reaches the overflow button
+            // in the expected visual order.
+            let lastStartItemIndex = -1;
+            items.forEach((item, index) => {
                 const listItems = item.placementContainer?.listItems$();
-                if (!listItems) {
+                if (!listItems?.length) {
                     return;
                 }
 
-                return item.placementContainer?.placement === 'start' && listItems[listItems.length - 1] === item;
+                if (item.placementContainer?.placement === 'start' && listItems[listItems.length - 1] === item) {
+                    lastStartItemIndex = index;
+                }
             });
 
-            if (insertionIndex === -1) {
+            if (lastStartItemIndex === -1) {
                 return;
             }
 
-            items.splice(insertionIndex, 0, showMoreButton);
+            items.splice(lastStartItemIndex + 1, 0, showMoreButton);
             this._navigationItems.reset(items);
         }
     }
