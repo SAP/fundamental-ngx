@@ -1,8 +1,8 @@
 import { EventEmitter, QueryList } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { BehaviorSubject, of } from 'rxjs';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { BehaviorSubject, of, throwError } from 'rxjs';
 
-import { DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
+import { DialogRef, DialogService, FD_DIALOG_DISMISS_REASON } from '@fundamental-ngx/core/dialog';
 import { SortDirection, Table, TableColumn, TableState } from '@fundamental-ngx/platform/table-helpers';
 import { TableViewSettingsDialogComponent } from './table-view-settings-dialog.component';
 import { TableViewSettingsFilterComponent } from './table-view-settings-filter.component';
@@ -26,6 +26,7 @@ class TableComponentMock
             | 'sort'
             | 'group'
             | 'filter'
+            | 'setColumns'
         >
 {
     _tableColumnsSubject = new BehaviorSubject<TableColumn[]>([]);
@@ -44,6 +45,7 @@ class TableComponentMock
     search(): void {}
     sort(): void {}
     filter(): void {}
+    setColumns(): void {}
     getTableState(): TableState {
         return {} as TableState;
     }
@@ -365,6 +367,106 @@ describe('TableViewSettingsDialogComponent', () => {
             expect(result.sortingData).toEqual(mockSortDialogResultData);
             expect(result.filteringData).toEqual(mockFilterDialogResultData);
             expect(result.groupingData).toEqual(mockGroupDialogResultData);
+        });
+    });
+
+    describe('afterClosed handling', () => {
+        let mockTable: TableComponentMock;
+
+        beforeEach(() => {
+            mockTable = new TableComponentMock();
+            jest.spyOn(mockTable, 'getTableColumns').mockReturnValue([
+                {
+                    label: 'Name',
+                    key: 'name',
+                    name: 'name',
+                    sortable: true,
+                    filterable: true,
+                    groupable: true
+                } as TableColumn,
+                {
+                    label: 'Price',
+                    key: 'price',
+                    name: 'price',
+                    sortable: false,
+                    filterable: false,
+                    groupable: false
+                } as TableColumn
+            ]);
+            jest.spyOn(mockTable, 'getTableState').mockReturnValue({
+                columns: ['name'],
+                sortBy: [],
+                filterBy: [],
+                groupBy: []
+            } as TableState);
+            jest.spyOn(mockTable, 'sort');
+            jest.spyOn(mockTable, 'filter');
+            jest.spyOn(mockTable, 'group');
+            jest.spyOn(mockTable, 'setColumns');
+
+            component.table = mockTable as any;
+        });
+
+        it.each([FD_DIALOG_DISMISS_REASON.ESCAPE, FD_DIALOG_DISMISS_REASON.NAVIGATION_CHANGE])(
+            'should ignore %s dismissal errors without applying settings',
+            fakeAsync((dismissReason) => {
+                jest.spyOn(dialogServiceStub, 'open').mockReturnValue({
+                    afterClosed: throwError(() => dismissReason),
+                    dismiss: jest.fn()
+                } as any);
+
+                component.showViewSettingsDialog();
+
+                expect(() => tick()).not.toThrow();
+                expect(mockTable.sort).not.toHaveBeenCalled();
+                expect(mockTable.filter).not.toHaveBeenCalled();
+                expect(mockTable.group).not.toHaveBeenCalled();
+                expect(mockTable.setColumns).not.toHaveBeenCalled();
+            })
+        );
+
+        it('should ignore non-enum dismissal errors without applying settings', fakeAsync(() => {
+            jest.spyOn(dialogServiceStub, 'open').mockReturnValue({
+                afterClosed: throwError(() => 'custom dismissal'),
+                dismiss: jest.fn()
+            } as any);
+
+            component.showViewSettingsDialog();
+
+            expect(() => tick()).not.toThrow();
+            expect(mockTable.sort).not.toHaveBeenCalled();
+            expect(mockTable.filter).not.toHaveBeenCalled();
+            expect(mockTable.group).not.toHaveBeenCalled();
+            expect(mockTable.setColumns).not.toHaveBeenCalled();
+        }));
+
+        it('should apply settings when dialog closes with a result', () => {
+            const result = {
+                sortingData: { sortBy: [{ field: 'name', direction: SortDirection.ASC }] },
+                filteringData: { filterBy: [{ field: 'name', value: 'test', strategy: 'contains', exclude: false }] },
+                includeExcludeFiltersData: null,
+                groupingData: { field: 'name', direction: SortDirection.DESC },
+                columnsData: {
+                    columns: [
+                        { label: 'Price', key: 'price', name: 'price', visible: true },
+                        { label: 'Name', key: 'name', name: 'name', visible: false }
+                    ]
+                }
+            };
+
+            jest.spyOn(dialogServiceStub, 'open').mockReturnValue({
+                afterClosed: of(result),
+                dismiss: jest.fn()
+            } as any);
+
+            component.showViewSettingsDialog();
+
+            expect(mockTable.sort).toHaveBeenCalledWith(result.sortingData.sortBy);
+            expect(mockTable.filter).toHaveBeenCalledWith(result.filteringData.filterBy);
+            expect(mockTable.group).toHaveBeenCalledWith([
+                { field: 'name', direction: SortDirection.DESC, showAsColumn: true }
+            ]);
+            expect(mockTable.setColumns).toHaveBeenCalledWith(['price']);
         });
     });
 

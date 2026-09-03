@@ -11,7 +11,8 @@ import {
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
-import { filter, startWith } from 'rxjs/operators';
+import { EMPTY } from 'rxjs';
+import { catchError, filter, startWith } from 'rxjs/operators';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
@@ -255,6 +256,7 @@ export class TableViewSettingsDialogComponent implements AfterViewInit {
 
         this._dialogRef.afterClosed
             .pipe(
+                catchError(() => EMPTY),
                 filter((result) => !!result),
                 takeUntilDestroyed(this.destroyRef)
             )
