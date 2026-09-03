@@ -1,3 +1,13 @@
+## 0.65.0-rc.2 (2026-09-03)
+
+### 🩹 Fixes
+
+- **platform:** harden icon-tab-bar stackContent active-tab fix ([#14501](https://github.com/SAP/fundamental-ngx/pull/14501), [#14505](https://github.com/SAP/fundamental-ngx/pull/14505))
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.65.0-rc.1 (2026-09-02)
 
 ### 🩹 Fixes
