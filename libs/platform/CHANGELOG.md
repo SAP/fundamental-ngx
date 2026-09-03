@@ -1,3 +1,13 @@
+## 0.65.0-rc.4 (2026-09-03)
+
+### 🩹 Fixes
+
+- **platform:** handle table settings dialog dismissal ([#14517](https://github.com/SAP/fundamental-ngx/pull/14517))
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.65.0-rc.3 (2026-09-03)
 
 ### 🩹 Fixes
