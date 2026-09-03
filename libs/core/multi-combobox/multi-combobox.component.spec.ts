@@ -1,8 +1,8 @@
 import { A } from '@angular/cdk/keycodes';
 import { OverlayContainer } from '@angular/cdk/overlay';
-import { Type } from '@angular/core';
+import { Component, Type } from '@angular/core';
 import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
-import { ControlValueAccessor, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ControlValueAccessor, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { isSelectableOptionItem } from '@fundamental-ngx/cdk/forms';
 import { ContentDensityMode, mockedLocalContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { CVATestSteps, runValueAccessorTests } from 'ngx-cva-test-suite';
@@ -358,6 +358,222 @@ describe('MultiComboBox component', () => {
 
             expect(component._suggestions().some((item) => item.label === 'Blue')).toBe(true);
         });
+    });
+});
+
+describe('MultiComboBox — programmatic selectedItems (#13553)', () => {
+    let component: MultiComboboxComponent;
+    let fixture: ComponentFixture<MultiComboboxComponent>;
+    let overlayContainerEl: HTMLElement;
+
+    const dataSource = [
+        { name: 'Apple', type: 'Fruits' },
+        { name: 'Banana', type: 'Fruits' },
+        { name: 'Pineapple', type: 'Fruits' }
+    ];
+
+    function getTokenLabels(): string[] {
+        return Array.from(fixture.nativeElement.querySelectorAll('fd-token')).map((el) =>
+            (el as HTMLElement).textContent!.trim()
+        );
+    }
+
+    function getSelectedLabels(): string[] {
+        return Array.from(overlayContainerEl.querySelectorAll('li.fd-list__item.is-selected[role="option"]')).map(
+            (el) => (el as HTMLElement).textContent!.trim()
+        );
+    }
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [FormsModule, ReactiveFormsModule, MultiComboboxModule]
+        }).compileComponents();
+
+        inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
+            overlayContainerEl = overlayContainer.getContainerElement();
+        })();
+    }));
+
+    beforeEach(waitForAsync(() => {
+        fixture = TestBed.createComponent(MultiComboboxComponent);
+        component = fixture.componentInstance;
+        fixture.componentRef.setInput('displayKey', 'name');
+        component.dataSourceDirective.dataSource = dataSource;
+        fixture.detectChanges();
+    }));
+
+    it('add (regression): [] → [Apple, Banana] via [selectedItems] without opening dropdown renders tokens', () => {
+        fixture.componentRef.setInput('selectedItems', [dataSource[0], dataSource[1]]);
+        fixture.detectChanges();
+
+        const labels = getTokenLabels();
+        expect(labels).toContain('Apple');
+        expect(labels).toContain('Banana');
+        expect(labels.length).toBe(2);
+    });
+
+    it('replace: [Apple] → [Banana] via [selectedItems] renders only Banana token; reopen shows only Banana checked', async () => {
+        fixture.componentRef.setInput('selectedItems', [dataSource[0]]);
+        fixture.detectChanges();
+        expect(getTokenLabels()).toEqual(['Apple']);
+
+        fixture.componentRef.setInput('selectedItems', [dataSource[1]]);
+        fixture.detectChanges();
+
+        const labels = getTokenLabels();
+        expect(labels).toEqual(['Banana']);
+
+        // Reopen-state assertion via signal — CDK overlay in jsdom doesn't reliably render
+        // is-selected on fd-list-item after a programmatic replace without user interaction.
+        // _setSelectedSuggestions() updates _fullFlatSuggestions (not _suggestions), so assert there.
+        const flat = component._fullFlatSuggestions();
+        const apple = flat.find((s) => s.label === 'Apple');
+        const banana = flat.find((s) => s.label === 'Banana');
+        expect(apple?.selected).toBe(false);
+        expect(banana?.selected).toBe(true);
+    });
+
+    it('clear: [Apple, Banana] → [] via [selectedItems] renders no tokens; reopen shows nothing checked', async () => {
+        fixture.componentRef.setInput('selectedItems', [dataSource[0], dataSource[1]]);
+        fixture.detectChanges();
+        expect(getTokenLabels().length).toBe(2);
+
+        fixture.componentRef.setInput('selectedItems', []);
+        fixture.detectChanges();
+
+        expect(getTokenLabels().length).toBe(0);
+
+        component._onPrimaryButtonClick(component.isOpen);
+        fixture.detectChanges();
+        await fixture.whenStable();
+        fixture.detectChanges();
+
+        const selectedInOverlay = getSelectedLabels();
+        expect(selectedInOverlay.length).toBe(0);
+    });
+});
+
+@Component({
+    template: `<fd-multi-combobox displayKey="name" [formControl]="control"></fd-multi-combobox>`,
+    imports: [MultiComboboxModule, ReactiveFormsModule]
+})
+class MultiComboboxWithFormControlTestComponent {
+    control = new FormControl<{ name: string; type: string }[]>([]);
+}
+
+describe('MultiComboBox — FormControl.setValue() CVA path (#13553)', () => {
+    const formDataSource = [
+        { name: 'Apple', type: 'Fruits' },
+        { name: 'Banana', type: 'Fruits' },
+        { name: 'Pineapple', type: 'Fruits' }
+    ];
+
+    let hostFixture: ComponentFixture<MultiComboboxWithFormControlTestComponent>;
+    let host: MultiComboboxWithFormControlTestComponent;
+    let combobox: MultiComboboxComponent;
+
+    function getTokenLabels(): string[] {
+        return Array.from(hostFixture.nativeElement.querySelectorAll('fd-token')).map((el) =>
+            (el as HTMLElement).textContent!.trim()
+        );
+    }
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [FormsModule, ReactiveFormsModule, MultiComboboxModule, MultiComboboxWithFormControlTestComponent]
+        }).compileComponents();
+    }));
+
+    beforeEach(waitForAsync(() => {
+        hostFixture = TestBed.createComponent(MultiComboboxWithFormControlTestComponent);
+        host = hostFixture.componentInstance;
+        combobox = hostFixture.debugElement.query(By.directive(MultiComboboxComponent)).componentInstance;
+        combobox.dataSourceDirective.dataSource = formDataSource;
+        hostFixture.detectChanges();
+        // Wait for data source to populate _fullFlatSuggestions
+        return hostFixture.whenStable();
+    }));
+
+    it('FormControl.setValue() without [selectedItems] binding renders tokens and updates suggestion state', async () => {
+        // Precondition: no tokens, no selected suggestions
+        expect(getTokenLabels().length).toBe(0);
+        expect(combobox._selectedSuggestions().length).toBe(0);
+
+        // Act: programmatic setValue via FormControl (the CVA path — no [selectedItems] binding)
+        host.control.setValue([formDataSource[0], formDataSource[1]]);
+        hostFixture.detectChanges();
+        await hostFixture.whenStable();
+        hostFixture.detectChanges();
+
+        // Assert: tokens repaint
+        const labels = getTokenLabels();
+        expect(labels).toContain('Apple');
+        expect(labels).toContain('Banana');
+        expect(labels.length).toBe(2);
+
+        // Assert: internal suggestion state consistent
+        const flat = combobox._fullFlatSuggestions();
+        const apple = flat.find((s) => s.label === 'Apple');
+        const banana = flat.find((s) => s.label === 'Banana');
+        const pineapple = flat.find((s) => s.label === 'Pineapple');
+        expect(apple?.selected).toBe(true);
+        expect(banana?.selected).toBe(true);
+        expect(pineapple?.selected).toBe(false);
+    });
+});
+
+@Component({
+    template: `<fd-multi-combobox displayKey="name" [formControl]="control"></fd-multi-combobox>`,
+    imports: [MultiComboboxModule, ReactiveFormsModule]
+})
+class MultiComboboxWithPresetFormControlTestComponent {
+    readonly formDataSource = [
+        { name: 'Apple', type: 'Fruits' },
+        { name: 'Banana', type: 'Fruits' },
+        { name: 'Pineapple', type: 'Fruits' }
+    ];
+    control = new FormControl<{ name: string; type: string }[]>([this.formDataSource[0]]);
+}
+
+describe('MultiComboBox — FormControl initial value renders on datasource populate (#13553)', () => {
+    let hostFixture: ComponentFixture<MultiComboboxWithPresetFormControlTestComponent>;
+    let combobox: MultiComboboxComponent;
+
+    function getTokenLabels(): string[] {
+        return Array.from(hostFixture.nativeElement.querySelectorAll('fd-token')).map((el) =>
+            (el as HTMLElement).textContent!.trim()
+        );
+    }
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [
+                FormsModule,
+                ReactiveFormsModule,
+                MultiComboboxModule,
+                MultiComboboxWithPresetFormControlTestComponent
+            ]
+        }).compileComponents();
+    }));
+
+    beforeEach(waitForAsync(() => {
+        hostFixture = TestBed.createComponent(MultiComboboxWithPresetFormControlTestComponent);
+        const host = hostFixture.componentInstance;
+        combobox = hostFixture.debugElement.query(By.directive(MultiComboboxComponent)).componentInstance;
+        combobox.dataSourceDirective.dataSource = host.formDataSource;
+        hostFixture.detectChanges();
+        return hostFixture.whenStable();
+    }));
+
+    it('FormControl initialized with a value renders tokens on load without opening the dropdown', async () => {
+        hostFixture.detectChanges();
+        await hostFixture.whenStable();
+        hostFixture.detectChanges();
+
+        const labels = getTokenLabels();
+        expect(labels).toContain('Apple');
+        expect(labels.length).toBe(1);
+        expect(combobox.isOpen).toBe(false);
     });
 });
 
