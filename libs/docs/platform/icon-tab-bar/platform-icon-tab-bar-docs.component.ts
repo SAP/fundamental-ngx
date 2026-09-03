@@ -21,6 +21,7 @@ import { PlatformIconTabBarIconTypeExampleComponent } from './examples/platform-
 import { PlatformIconTabBarProcessTypeExampleComponent } from './examples/platform-icon-tab-bar-process-type-example/platform-icon-tab-bar-process-type-example.component';
 import { PlatformIconTabBarTemplateContentExampleComponent } from './examples/platform-icon-tab-bar-template-content-example/platform-icon-tab-bar-template-content-example.component';
 import { PlatformIconTabBarTextTypeExampleComponent } from './examples/platform-icon-tab-bar-text-type-example/platform-icon-tab-bar-text-type-example.component';
+import { IconTabBarStackContentActiveReproExampleComponent } from './examples/stack-content-active-repro/icon-tab-bar-stack-content-active-repro-example.component';
 import { IconTabBarTabsContentExampleComponent } from './examples/tabs-content/icon-tab-bar-tabs-content-example.component';
 import { IconTabBarTwoClickAreaExampleComponent } from './examples/two-click-area/icon-tab-bar-two-click-area-example.component';
 
@@ -64,6 +65,11 @@ const iconTabBarClosableTs = 'closable-tabs/icon-tab-bar-closable-tabs-example.c
 
 const iconTabBarProjectedHtml = 'tabs-content/icon-tab-bar-tabs-content-example.component.html';
 const iconTabBarProjectedTs = 'tabs-content/icon-tab-bar-tabs-content-example.component.ts';
+
+const iconTabBarStackActiveReproHtml =
+    'stack-content-active-repro/icon-tab-bar-stack-content-active-repro-example.component.html';
+const iconTabBarStackActiveReproTs =
+    'stack-content-active-repro/icon-tab-bar-stack-content-active-repro-example.component.ts';
 
 const iconTabBarAsyncHtml = 'async-tabs/icon-tab-bar-async-tabs-example.component.html';
 const iconTabBarAsyncTs = 'async-tabs/icon-tab-bar-async-tabs-example.component.ts';
@@ -110,6 +116,7 @@ export interface IconTabBarItem extends TabConfig {
         PlatformIconTabBarConfigurablePaddingsExampleComponent,
         IconTabBarClosableTabsExampleComponent,
         IconTabBarTabsContentExampleComponent,
+        IconTabBarStackContentActiveReproExampleComponent,
         IconTabBarTwoClickAreaExampleComponent,
         IconTabBarAsyncTabsExampleComponent,
         PlatformIconTabBarDynamicOverflowExampleComponent
@@ -321,6 +328,22 @@ export class PlatformIconTabBarDocsComponent {
             code: getAssetFromModuleAssets(iconTabBarAsyncTs),
             fileName: 'icon-tab-bar-async-tabs-example',
             component: 'IconTabBarAsyncTabsExampleComponent',
+            path: 'example'
+        }
+    ];
+
+    iconTabBarStackActiveReproFiles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(iconTabBarStackActiveReproHtml),
+            fileName: 'icon-tab-bar-stack-content-active-repro-example',
+            path: 'example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(iconTabBarStackActiveReproTs),
+            fileName: 'icon-tab-bar-stack-content-active-repro-example',
+            component: 'IconTabBarStackContentActiveReproExampleComponent',
             path: 'example'
         }
     ];
