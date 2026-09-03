@@ -1,3 +1,13 @@
+## 0.65.0-rc.3 (2026-09-03)
+
+### 🩹 Fixes
+
+- **core, platform:** update multi-combobox tokens and reset selected flags on programmatic selectedItems change ([#13553](https://github.com/SAP/fundamental-ngx/pull/13553), [#14506](https://github.com/SAP/fundamental-ngx/pull/14506))
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.65.0-rc.2 (2026-09-03)
 
 ### 🩹 Fixes
