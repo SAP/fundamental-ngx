@@ -1,6 +1,7 @@
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, TemplateRef, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { ButtonBarComponent, CheckboxComponent, FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { BarComponent, BarElementDirective, BarLeftDirective } from '@fundamental-ngx/core/bar';
@@ -14,6 +15,7 @@ import {
     DialogTemplateDirective
 } from '@fundamental-ngx/core/dialog';
 import {
+    ListBylineDirective,
     ListComponent,
     ListContentDirective,
     ListGroupHeaderDirective,
@@ -22,6 +24,7 @@ import {
     ListLinkDirective,
     ListTitleDirective
 } from '@fundamental-ngx/core/list';
+import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import {
     SettingsContainerComponent,
@@ -31,13 +34,13 @@ import {
     SettingsListContainerDirective,
     SettingsProfileCardDirective,
     SettingsProfileCardNameDirective,
-    SettingsProfileCardSublineDirective
+    SettingsProfileCardSublineDirective,
+    SettingsSpacingDirective
 } from '@fundamental-ngx/core/settings';
+import { SwitchComponent } from '@fundamental-ngx/core/switch';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { ToolbarComponent } from '@fundamental-ngx/core/toolbar';
 import { IconTabBarComponent, IconTabBarTabComponent } from '@fundamental-ngx/platform/icon-tab-bar';
-
-import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'fd-template-based-settings-dialog-example',
@@ -69,6 +72,7 @@ import { FormsModule } from '@angular/forms';
         ListLinkDirective,
         ListTitleDirective,
         ListTitleDirective,
+        ListBylineDirective,
         ListGroupHeaderDirective,
         ListContentDirective,
         SettingsContentContainerDirective,
@@ -76,12 +80,15 @@ import { FormsModule } from '@angular/forms';
         SettingsListContainerDirective,
         SettingsContentDirective,
         SettingsContainerComponent,
+        SettingsSpacingDirective,
         SettingsProfileCardDirective,
         SettingsProfileCardNameDirective,
         SettingsProfileCardSublineDirective,
         ScrollbarDirective,
         TitleComponent,
-        ToolbarComponent
+        ToolbarComponent,
+        MessageStripComponent,
+        SwitchComponent
     ]
 })
 export class TemplateBasedSettingsDialogExampleComponent {
@@ -115,6 +122,7 @@ export class TemplateBasedSettingsDialogExampleComponent {
     selectednumberFormat = this.numberFormats[0];
 
     checkboxValue = true;
+    checked = true;
 
     confirmationReason = signal<string>('');
 

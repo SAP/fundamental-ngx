@@ -4093,19 +4093,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fundamental-styles/common-css@npm:0.41.8":
-  version: 0.41.8
-  resolution: "@fundamental-styles/common-css@npm:0.41.8"
+"@fundamental-styles/common-css@npm:0.41.9-rc.22":
+  version: 0.41.9-rc.22
+  resolution: "@fundamental-styles/common-css@npm:0.41.9-rc.22"
   dependencies:
     "@sap-theming/theming-base-content": "npm:^11.36.0"
-  checksum: 10/319f40ecfa8da22c029a126f9b2bef5e7d9723400c48c83cd684da13c292a4cb705c3c778ca6d42f68f8b50e56a2c95f7bde01bde526c3287b14438916841b95
+  checksum: 10/7f03a03db85ef6ff10561c22d1875be2af210c28d579cb20877ee17a7aa8e1141e65f99bbd62ab78f6bfd347e54d042cc87db06096faf13aa6c295aecb940f08
   languageName: node
   linkType: hard
 
-"@fundamental-styles/cx@npm:0.41.8":
-  version: 0.41.8
-  resolution: "@fundamental-styles/cx@npm:0.41.8"
-  checksum: 10/d01111fb513ac1ea922d0f04725a4826cb67a39a2ddfdb534f96d9d6f107995309dccbdc5f7ff37088cf364f693041423bc96101433d92d9896fb28b20c33ada
+"@fundamental-styles/cx@npm:0.41.9-rc.22":
+  version: 0.41.9-rc.22
+  resolution: "@fundamental-styles/cx@npm:0.41.9-rc.22"
+  checksum: 10/444c4af4664db86b6a618ef0424f426e88c3501bdf6503b1facb9d5c12d2dd3f63e5740a306cd4bae8ab544f2f02df65ce6f29626c9d89fd95ff3544530c2595
   languageName: node
   linkType: hard
 
@@ -16114,8 +16114,8 @@ __metadata:
     "@axe-core/playwright": "npm:^4.11.2"
     "@commitlint/cli": "npm:18.6.1"
     "@commitlint/config-conventional": "npm:18.6.1"
-    "@fundamental-styles/common-css": "npm:0.41.8"
-    "@fundamental-styles/cx": "npm:0.41.8"
+    "@fundamental-styles/common-css": "npm:0.41.9-rc.22"
+    "@fundamental-styles/cx": "npm:0.41.9-rc.22"
     "@modelcontextprotocol/sdk": "npm:^1.29.0"
     "@nx/angular": "npm:23.1.1"
     "@nx/devkit": "npm:23.1.1"
@@ -16165,7 +16165,7 @@ __metadata:
     focus-trap: "npm:7.1.0"
     focus-visible: "npm:5.2.1"
     fs-extra: "npm:^11.3.0"
-    fundamental-styles: "npm:0.41.8"
+    fundamental-styles: "npm:0.41.9-rc.22"
     fuse.js: "npm:7.0.0"
     highlight.js: "npm:11.11.1"
     husky: "npm:8.0.2"
@@ -16206,13 +16206,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"fundamental-styles@npm:0.41.8":
-  version: 0.41.8
-  resolution: "fundamental-styles@npm:0.41.8"
+"fundamental-styles@npm:0.41.9-rc.22":
+  version: 0.41.9-rc.22
+  resolution: "fundamental-styles@npm:0.41.9-rc.22"
   peerDependencies:
-    "@fundamental-styles/common-css": 0.41.8
+    "@fundamental-styles/common-css": 0.41.9-rc.22
     "@sap-theming/theming-base-content": ^11.36.0
-  checksum: 10/fcc625986cee332d64d85b15c61e9cedc493642e076d22388b35b063cb1f3e1e40caf49bf4a8bf7d2cac62266637b588a3a7c27061f65b67043434a1653388e6
+  checksum: 10/8f5af7698c0d86f4c0425c02e4baaff71689a7a15e89e869f9d3d1a574a3c2a077e202b5bb6abe5cf183e13e44393a08a91a7eaa646fb931e3661431936f9936
   languageName: node
   linkType: hard
 
