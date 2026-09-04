@@ -11,5 +11,6 @@ export * from './settings-list-container/settings-list-container.directive';
 export * from './settings-profile-card-name/settings-profile-card-name.directive';
 export * from './settings-profile-card-subline/settings-profile-card-subline.directive';
 export * from './settings-profile-card/settings-profile-card.directive';
+export * from './settings-spacing/settings-spacing.directive';
 export * from './settings.component';
 export * from './settings.module';

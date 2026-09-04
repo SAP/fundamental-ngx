@@ -13,6 +13,7 @@ import { SettingsListContainerDirective } from './settings-list-container/settin
 import { SettingsProfileCardNameDirective } from './settings-profile-card-name/settings-profile-card-name.directive';
 import { SettingsProfileCardSublineDirective } from './settings-profile-card-subline/settings-profile-card-subline.directive';
 import { SettingsProfileCardDirective } from './settings-profile-card/settings-profile-card.directive';
+import { SettingsSpacingDirective } from './settings-spacing/settings-spacing.directive';
 import { SettingsComponent } from './settings.component';
 
 const components = [
@@ -29,7 +30,8 @@ const components = [
     SettingsDialogContentDirective,
     SettingsDialogBodyDirective,
     SettingsContainerComponent,
-    SettingsComponent
+    SettingsComponent,
+    SettingsSpacingDirective
 ];
 
 /**
