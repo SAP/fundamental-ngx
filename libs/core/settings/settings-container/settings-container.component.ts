@@ -4,12 +4,14 @@ import {
     Component,
     computed,
     contentChildren,
+    ElementRef,
     HostListener,
     inject,
     input,
     OnDestroy,
     Renderer2,
     signal,
+    TemplateRef,
     viewChild,
     ViewContainerRef,
     ViewEncapsulation
@@ -29,6 +31,14 @@ export enum VIEW_MODE {
     LG = 'lg',
     MD = 'md',
     SM = 'sm'
+}
+
+/** Represents a secondary view in the view stack */
+export interface SettingsStackedView {
+    /** The template to render */
+    template: TemplateRef<any>;
+    /** The title to display in the header */
+    title: string;
 }
 
 @Component({
@@ -98,6 +108,19 @@ export class SettingsContainerComponent implements OnDestroy, AfterViewInit {
     /** @hidden */
     readonly activeTitle = signal<string>('');
 
+    /** Whether there is a stacked (secondary) view currently displayed */
+    readonly hasStackedView = computed(() => this._viewStack().length > 0);
+
+    /**
+     * The current title to display in the header.
+     * Returns the stacked view's title if one exists, otherwise the active list item's title.
+     * Computed from the view stack to reactively update when navigating between views.
+     */
+    readonly currentTitle = computed(() => {
+        const stack = this._viewStack();
+        return stack.length > 0 ? stack[stack.length - 1].title : this.activeTitle();
+    });
+
     /**
      * Handle the navigation icon (arrow) of the Back button in RTL mode
      */
@@ -105,11 +128,20 @@ export class SettingsContainerComponent implements OnDestroy, AfterViewInit {
         this._rtlService?.rtl() ? 'navigation-right-arrow' : 'navigation-left-arrow'
     );
 
+    /**
+     * Stack of secondary views pushed on top of the main template.
+     * This enables drill-down navigation within a settings section.
+     */
+    private readonly _viewStack = signal<SettingsStackedView[]>([]);
+
     /** @hidden */
     private _eventUnlisteners: (() => void)[] = [];
 
     /** @hidden */
     private readonly _rtlService = inject(RtlService, { optional: true });
+
+    /** @hidden */
+    private readonly _elementRef = inject(ElementRef);
 
     /** @hidden */
     private _renderer = inject(Renderer2);
@@ -141,8 +173,47 @@ export class SettingsContainerComponent implements OnDestroy, AfterViewInit {
         this._eventUnlisteners.forEach((unlistener) => unlistener());
     }
 
+    /**
+     * Push a secondary view onto the stack.
+     * Use this to navigate to a drill-down view within a settings section.
+     * @param template The template to render
+     * @param title The title to display in the header
+     */
+    pushView(template: TemplateRef<any>, title: string): void {
+        this._viewStack.update((stack) => [...stack, { template, title }]);
+        this._renderCurrentView();
+
+        // Focus the back button after rendering the secondary view.
+        setTimeout(() => this._focusBackButton());
+    }
+
+    /**
+     * Pop the top view from the stack, returning to the previous view.
+     * If no stacked views exist, this method does nothing.
+     */
+    popView(): void {
+        if (this._viewStack().length === 0) {
+            return;
+        }
+        this._viewStack.update((stack) => stack.slice(0, -1));
+        this._renderCurrentView();
+    }
+
+    /**
+     * Clear all stacked views and return to the main template.
+     */
+    clearViewStack(): void {
+        this._viewStack.set([]);
+    }
+
     /** @hidden */
     onHeaderBackClick(): void {
+        // If we have stacked views, pop the top view instead of navigating back to the list
+        if (this.hasStackedView()) {
+            this.popView();
+            return;
+        }
+
         if (this.viewMode() !== VIEW_MODE.LG) {
             this.showListArea.set(true);
             this.showDetailArea.set(false);
@@ -171,7 +242,7 @@ export class SettingsContainerComponent implements OnDestroy, AfterViewInit {
         this.showDetailArea.set(isLargeView);
 
         if (isLargeView && this.activeListItem()) {
-            queueMicrotask(() => this._renderTemplate());
+            queueMicrotask(() => this._renderCurrentView());
         }
     }
 
@@ -181,7 +252,7 @@ export class SettingsContainerComponent implements OnDestroy, AfterViewInit {
             if (item.selected) {
                 this.activeListItem.set(item);
                 this._updateActiveTitle(item);
-                this._renderTemplate();
+                this._renderCurrentView();
             }
 
             this._eventUnlisteners.push(
@@ -193,6 +264,9 @@ export class SettingsContainerComponent implements OnDestroy, AfterViewInit {
 
                     this.activeListItem.set(item);
 
+                    // Clear any stacked views when switching list items
+                    this.clearViewStack();
+
                     const newActiveItem = this.activeListItem();
                     if (newActiveItem) {
                         newActiveItem.selected = true;
@@ -202,18 +276,19 @@ export class SettingsContainerComponent implements OnDestroy, AfterViewInit {
                     if (this.viewMode() !== VIEW_MODE.LG) {
                         this.showListArea.set(false);
                         this.showDetailArea.set(true);
-                        setTimeout(() => this._renderTemplate());
+                        setTimeout(() => this._renderCurrentView());
                     }
 
-                    this._renderTemplate();
+                    this._renderCurrentView();
                 })
             );
         });
     }
 
     /** @hidden */
-    private _renderTemplate(): void {
-        const template = this.activeListItem()?.settingsListTpl();
+    private _renderCurrentView(): void {
+        const stack = this._viewStack();
+        const template = stack.length > 0 ? stack[stack.length - 1].template : this.activeListItem()?.settingsListTpl();
 
         if (this.viewContainer() && template) {
             this.viewContainer()?.clear();
@@ -245,5 +320,15 @@ export class SettingsContainerComponent implements OnDestroy, AfterViewInit {
                 el.focus();
             });
         });
+    }
+
+    /** @hidden Focus the back button in the header */
+    private _focusBackButton(): void {
+        const backButton = this._elementRef.nativeElement.querySelector(
+            'button[fd-settings-header-button]'
+        ) as HTMLElement;
+        if (backButton) {
+            backButton.focus();
+        }
     }
 }
