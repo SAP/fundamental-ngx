@@ -7,15 +7,15 @@ import {
     DestroyRef,
     forwardRef,
     inject,
+    Injector,
     Input,
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
-import { EMPTY } from 'rxjs';
-import { catchError, filter, startWith } from 'rxjs/operators';
+import { filter, map, startWith, take } from 'rxjs/operators';
 
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
+import { DialogCloseResult, DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
 import {
     CollectionFilter,
     SortDirection,
@@ -111,12 +111,14 @@ export class TableViewSettingsDialogComponent implements AfterViewInit {
     _table: Table;
 
     /** @hidden */
-    _dialogRef: DialogRef<TableDialogCommonData | CombinedTableDialogData, any>;
+    _dialogRef: DialogRef<TableDialogCommonData | CombinedTableDialogData, CombinedTableDialogData>;
 
     /** @hidden Stores the last known full column order (visible + hidden) */
     private _lastColumnOrder: SettingsColumnsDialogColumn[] | null = null;
 
     private readonly destroyRef = inject(DestroyRef);
+
+    private readonly _injector = inject(Injector);
 
     /** @hidden */
     constructor(private readonly _dialogService: DialogService) {}
@@ -254,10 +256,15 @@ export class TableViewSettingsDialogComponent implements AfterViewInit {
             this.table.injector
         );
 
-        this._dialogRef.afterClosed
+        toObservable(this._dialogRef.closeResult, { injector: this._injector })
             .pipe(
-                catchError(() => EMPTY),
-                filter((result) => !!result),
+                filter((result): result is DialogCloseResult<CombinedTableDialogData> => result !== null),
+                take(1),
+                filter(
+                    (result): result is { status: 'closed'; value: CombinedTableDialogData } =>
+                        result.status === 'closed' && !!result.value
+                ),
+                map((result) => result.value),
                 takeUntilDestroyed(this.destroyRef)
             )
             .subscribe(
