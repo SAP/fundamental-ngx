@@ -117,3 +117,69 @@
     <fdb-overlay></fdb-overlay>
 </component-example>
 <code-example [exampleFiles]="overlayExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="indication-tags" componentName="navigation">Indication Tags</fd-docs-section-title>
+<description>
+    <p>
+        Navigation items can display indication tags (e.g., "New", "Beta", "Deprecated") using the Object Status
+        component.
+    </p>
+    <h3>Guidelines</h3>
+    <ul>
+        <li>One tag per navigation item (parent or child items only)</li>
+        <li>Avoid semantic colors 1-4 (may be confused with error/success/warning states)</li>
+        <li>Limit tag width to 64px (4rem) — use abbreviations if needed (e.g., "Experimental" → "Exp")</li>
+        <li>Tags are visual indicators only (non-interactive, no tooltips or actions)</li>
+    </ul>
+</description>
+<component-example [hasBackground]="false">
+    <fdb-navigation-indication-tags></fdb-navigation-indication-tags>
+</component-example>
+<code-example [exampleFiles]="indicationTagsExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="sticky-area" componentName="navigation">Sticky Area</fd-docs-section-title>
+<description>
+    <p>
+        The Side Navigation can show a top-aligned fixed header area that stays visible at all times. It can contain an
+        optional search field. A separator is shown below this area unless it contains only a search field. <br />
+        Add the <code>sticky</code> attribute to <code>fdb-navigation-content-start</code> to mark the container as a
+        sticky area.
+    </p>
+    <h3>Guidelines</h3>
+    <ul>
+        <li>Recommended not to contain more than 4 items.</li>
+    </ul>
+    <br />
+    <b
+        >Note: No built-in search or filtering logic is provided. The consuming application is responsible for handling
+        input changes and filtering navigation items accordingly.</b
+    >
+</description>
+<component-example [hasBackground]="false">
+    <fdb-sticky-area></fdb-sticky-area>
+</component-example>
+<code-example [exampleFiles]="stickyAreaExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="sticky-item" componentName="navigation">Sticky Item</fd-docs-section-title>
+<description>
+    <p>
+        Any <code>fdb-navigation-list-item</code> can be pinned to the top of the navigation by adding the
+        <code>sticky</code> attribute. The item will remain fixed regardless of scroll position and no separator is
+        rendered beneath it. Only one item should be marked as sticky — if multiple items need to be pinned, use a
+        <a href="#sticky-area">Sticky Area</a> instead.
+    </p>
+    <b
+        >Note: No built-in search or filtering logic is provided. The consuming application is responsible for handling
+        input changes and filtering navigation items accordingly.</b
+    >
+</description>
+<component-example [hasBackground]="false">
+    <fdb-sticky-item></fdb-sticky-item>
+</component-example>
+<code-example [exampleFiles]="stickyItemExample"></code-example>
