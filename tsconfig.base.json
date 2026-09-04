@@ -84,6 +84,7 @@
             "@fundamental-ngx/nx-plugin": ["libs/nx-plugin/src/index.ts"],
             "@fundamental-ngx/platform": ["libs/platform/index.ts"],
             "@fundamental-ngx/platform/*": ["libs/platform/*/index.ts"],
+            "@fundamental-ngx/platform/messages-shared": ["libs/platform/messages-shared/index.ts"],
             "@fundamental-ngx/ui5-webcomponents": ["libs/ui5-webcomponents/index.ts"],
             "@fundamental-ngx/ui5-webcomponents-ai": ["libs/ui5-webcomponents-ai/index.ts"],
             "@fundamental-ngx/ui5-webcomponents-ai/*": ["libs/ui5-webcomponents-ai/*/index.ts"],

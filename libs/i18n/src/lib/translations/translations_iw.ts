@@ -436,6 +436,11 @@ export default {
             requiredTrue: 'השדה הוא חובה'
         }
     },
+    platformMessageView: {
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        title: 'Messages'
+    },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'בחר אפשרויות',
         inputIconTitle: 'בחר אפשרויות',

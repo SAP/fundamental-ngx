@@ -438,6 +438,11 @@ export default {
             requiredTrue: 'To pole jest obowiązkowe'
         }
     },
+    platformMessageView: {
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        title: 'Messages'
+    },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Wybór opcji',
         inputIconTitle: 'Wybór opcji',

@@ -436,6 +436,11 @@ export default {
             requiredTrue: '필수 필드입니다.'
         }
     },
+    platformMessageView: {
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        title: 'Messages'
+    },
     platformMultiCombobox: {
         inputGlyphAriaLabel: '옵션 선택',
         inputIconTitle: '옵션 선택',

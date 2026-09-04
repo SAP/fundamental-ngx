@@ -15,7 +15,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Nullable, TabbableElementService, resizeObservable } from '@fundamental-ngx/cdk/utils';
+import { ClickedDirective, Nullable, TabbableElementService, resizeObservable } from '@fundamental-ngx/cdk/utils';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
@@ -30,6 +30,7 @@ const ANIMATION_DURATION = 100;
 @Component({
     selector: 'fdp-messages-list',
     templateUrl: './messages-list.component.html',
+    styleUrl: './messages-list.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [TabbableElementService],
@@ -43,7 +44,8 @@ const ANIMATION_DURATION = 100;
         ListModule,
         ObjectStatusComponent,
         LinkComponent,
-        FdTranslatePipe
+        FdTranslatePipe,
+        ClickedDirective
     ]
 })
 export class MessagesListComponent implements AfterViewInit {
@@ -144,7 +146,7 @@ export class MessagesListComponent implements AfterViewInit {
     }
 
     /** @hidden */
-    _focusElement(event?: MouseEvent, item?: MessagePopoverEntry): void {
+    _focusElement(event?: MouseEvent | KeyboardEvent, item?: MessagePopoverEntry): void {
         if (!item?.element?.nativeElement) {
             return;
         }
@@ -195,7 +197,7 @@ export class MessagesListComponent implements AfterViewInit {
                 { transform: 'translateX(50px)', opacity: 0 },
                 { transform: 'translateX(0)', opacity: 1 }
             ],
-            { duration: ANIMATION_DURATION, easing: ANIMATION_EASING, fill: 'forwards', delay: ANIMATION_DURATION }
+            { duration: ANIMATION_DURATION, easing: ANIMATION_EASING, fill: 'forwards' }
         );
 
         this._detailsAnimation.finished
@@ -226,7 +228,7 @@ export class MessagesListComponent implements AfterViewInit {
                 { transform: 'translateX(-50px)', opacity: 0 },
                 { transform: 'translateX(0)', opacity: 1 }
             ],
-            { duration: ANIMATION_DURATION, easing: ANIMATION_EASING, fill: 'forwards', delay: ANIMATION_DURATION }
+            { duration: ANIMATION_DURATION, easing: ANIMATION_EASING, fill: 'forwards' }
         );
 
         this._listAnimation.finished

@@ -436,6 +436,11 @@ export default {
             requiredTrue: 'Medan adalah wajib'
         }
     },
+    platformMessageView: {
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        title: 'Messages'
+    },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Pilih Pilihan',
         inputIconTitle: 'Pilih Pilihan',

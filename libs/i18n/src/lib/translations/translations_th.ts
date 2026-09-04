@@ -437,6 +437,11 @@ export default {
             requiredTrue: 'ฟิลด์นี้เป็นฟิลด์บังคับ'
         }
     },
+    platformMessageView: {
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        title: 'Messages'
+    },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'เลือกตัวเลือก',
         inputIconTitle: 'เลือกตัวเลือก',

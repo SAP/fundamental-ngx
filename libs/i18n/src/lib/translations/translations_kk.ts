@@ -438,6 +438,11 @@ export default {
             requiredTrue: 'Бұл өріс міндетті'
         }
     },
+    platformMessageView: {
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        title: 'Messages'
+    },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Таңдау опциялары',
         inputIconTitle: 'Таңдау опциялары',

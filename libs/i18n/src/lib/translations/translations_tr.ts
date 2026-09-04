@@ -438,6 +438,11 @@ export default {
             requiredTrue: 'Bu alan zorunludur'
         }
     },
+    platformMessageView: {
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        title: 'Messages'
+    },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Seçenekleri Belirle',
         inputIconTitle: 'Seçenekleri Belirle',

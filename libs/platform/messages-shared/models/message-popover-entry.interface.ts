@@ -15,6 +15,8 @@ export interface MessagePopoverEntry {
     errors: ValidationErrors | null;
     element?: ElementRef;
     formField?: PlatformFormFieldControl;
+    link?: MessagePopoverEntryLink;
+    subtitle?: string;
 }
 
 export interface MessagePopoverError {
@@ -32,4 +34,11 @@ export interface MessagePopoverErrorText {
 export interface MessagePopoverErrorGroup {
     group?: string;
     errors: MessagePopoverEntry[];
+}
+
+export interface MessagePopoverEntryLink {
+    text: string;
+    callback?: () => void;
+    href?: string;
+    target?: string;
 }

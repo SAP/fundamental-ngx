@@ -439,6 +439,11 @@ export default {
             requiredTrue: 'Câmpul este obligatoriu'
         }
     },
+    platformMessageView: {
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        title: 'Messages'
+    },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Opțiuni de selecție',
         inputIconTitle: 'Opțiuni de selecție',

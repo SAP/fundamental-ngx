@@ -438,6 +438,11 @@ export default {
             requiredTrue: 'Polje je obavezno'
         }
     },
+    platformMessageView: {
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        title: 'Messages'
+    },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Odaberi opcije',
         inputIconTitle: 'Odaberi opcije',

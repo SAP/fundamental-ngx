@@ -51,7 +51,13 @@
     ></ng-template>
 </ng-template>
 <div class="fd-message-view">
-    <section #listSection class="fd-message-view__list" tabindex="-1" fd-scrollbar>
+    <section
+        #listSection
+        class="fd-message-view__list"
+        [class.fd-message-view__list--hidden]="currentScreen === 'details'"
+        tabindex="-1"
+        fd-scrollbar
+    >
         <ul #listView fd-list class="message-popover__list fd-list--message-view" [navigationIndicator]="true">
             @for (group of filteredErrors; track group) {
                 @if (group.group) {
@@ -60,7 +66,7 @@
                     </li>
                 }
                 @for (item of group.errors; track item; let i = $index) {
-                    <li fd-list-item [tabindex]="i === 0 ? 0 : -1" [byline]="true" (click)="_showDetails(item)">
+                    <li fd-list-item [tabindex]="i === 0 ? 0 : -1" [byline]="true" (fdkClicked)="_showDetails(item)">
                         <ng-template #itemIcon>
                             <span
                                 fd-object-status
@@ -82,7 +88,7 @@
                                 <ng-template [ngTemplateOutlet]="itemIcon"></ng-template>
                                 <span fd-list-content>
                                     <span fd-list-title>
-                                        <a tabindex="0" fd-link (click)="_focusElement($event, item)">
+                                        <a tabindex="0" fd-link (fdkClicked)="_focusElement($event, item)">
                                             {{ item.fieldName }}
                                         </a>
                                     </span>
@@ -103,7 +109,11 @@
             }
         </ul>
     </section>
-    <section #detailsSection class="fd-message-view__details">
+    <section
+        #detailsSection
+        class="fd-message-view__details"
+        [class.fd-message-view__details--visible]="currentScreen === 'details'"
+    >
         <div #detailsView>
             @if (currentEntry) {
                 <span class="fd-message-view__details-title">
@@ -118,12 +128,34 @@
                         [ngTemplateOutletContext]="{ $implicit: currentEntry }"
                     ></ng-template>
                 </span>
+                @if (currentEntry.subtitle) {
+                    <span class="fd-message-view__details-subtitle">
+                        {{ currentEntry.subtitle }}
+                    </span>
+                }
                 @if (currentEntry.description.message) {
                     <span class="fd-message-view__details-description">
                         <ng-template
                             [ngTemplateOutlet]="descriptionTemplate"
                             [ngTemplateOutletContext]="{ $implicit: currentEntry }"
                         ></ng-template>
+                    </span>
+                }
+                @if (currentEntry.link) {
+                    <span class="fd-message-view__details-link">
+                        @if (currentEntry.link.href) {
+                            <a
+                                fd-link
+                                [attr.href]="currentEntry.link.href"
+                                [attr.target]="currentEntry.link.target || '_blank'"
+                            >
+                                {{ currentEntry.link.text }}
+                            </a>
+                        } @else {
+                            <a fd-link tabindex="0" (fdkClicked)="currentEntry.link.callback?.()">
+                                {{ currentEntry.link.text }}
+                            </a>
+                        }
                     </span>
                 }
             }

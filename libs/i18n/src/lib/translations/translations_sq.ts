@@ -438,6 +438,11 @@ export default {
             requiredTrue: 'The field is mandatory'
         }
     },
+    platformMessageView: {
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        title: 'Messages'
+    },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Zgjidhni Opsionet',
         inputIconTitle: 'Zgjidhni Opsionet',

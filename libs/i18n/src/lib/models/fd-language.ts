@@ -909,4 +909,12 @@ export interface FdLanguage {
         /** Value State Information */
         information: FdLanguageKey;
     };
+    platformMessageView: {
+        /** Text for the cancel button in the message view dialog */
+        cancel: FdLanguageKey;
+        /** Text for the message view dialog title */
+        title: FdLanguageKey;
+        /** Text for the message view dialog details page title */
+        detailsTitle: FdLanguageKey;
+    };
 }
