@@ -114,6 +114,7 @@ export class SettingsContainerComponent implements OnDestroy, AfterViewInit {
     /**
      * The current title to display in the header.
      * Returns the stacked view's title if one exists, otherwise the active list item's title.
+     * Computed from the view stack to reactively update when navigating between views.
      */
     readonly currentTitle = computed(() => {
         const stack = this._viewStack();
@@ -182,7 +183,7 @@ export class SettingsContainerComponent implements OnDestroy, AfterViewInit {
         this._viewStack.update((stack) => [...stack, { template, title }]);
         this._renderCurrentView();
 
-        // Focus the back button after rendering the secondary view
+        // Focus the back button after rendering the secondary view.
         setTimeout(() => this._focusBackButton());
     }
 

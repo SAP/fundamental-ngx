@@ -9,12 +9,15 @@ export type SettingsSpacingSize = 'small' | 'medium' | 'large' | 'form' | undefi
         '[class]': 'cssClass()',
         role: 'presentation',
         'aria-hidden': 'true'
-    },
-    standalone: true
+    }
 })
 export class SettingsSpacingDirective {
     size = input<SettingsSpacingSize>();
 
+    /**
+     * Computed CSS class string that reactively updates based on the size input.
+     * Combines base class with optional size modifier.
+     */
     protected readonly cssClass = computed(() => {
         const sizeValue = this.size();
 

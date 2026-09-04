@@ -4,7 +4,6 @@ import { SettingsSpacingDirective } from './settings-spacing.directive';
 
 @Component({
     template: `<span #directiveElement fd-settings-spacing>Settings Spacing Directive Test</span>`,
-    standalone: true,
     imports: [SettingsSpacingDirective]
 })
 class TestComponent {
