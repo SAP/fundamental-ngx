@@ -1,7 +1,7 @@
 <ng-template [fdDialogTemplate] let-dialog let-dialogConfig="dialogConfig" #confirmationDialog>
     <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
         <fd-dialog-body>
-            <fd-settings-container backBtnAriaLabel="Navigate Back" [detailsAreaTitleHeading]="2">
+            <fd-settings-container #settingsContainer backBtnAriaLabel="Navigate Back" [detailsAreaTitleHeading]="2">
                 <div fd-settings-list-area>
                     <div fd-bar barDesign="header">
                         <div fd-bar-left>
@@ -226,7 +226,7 @@
 
 <ng-template #languageTemplate>
     <div fd-settings-content>
-        <fd-message-strip type="information"
+        <fd-message-strip type="information" [dismissible]="false"
             >Close to apply your chosen language - the page will reload.</fd-message-strip
         >
         <span fd-settings-spacing size="small"></span>
@@ -354,7 +354,7 @@
 
 <ng-template #notificationsTemplate>
     <div fd-settings-content>
-        <fd-message-strip type="information">
+        <fd-message-strip type="information" [dismissible]="false">
             Some settings are managed by your organization and cannot be changed.</fd-message-strip
         >
         <span fd-settings-spacing></span>
@@ -364,14 +364,14 @@
                 <div fd-list-content>
                     <div fd-list-title>Allow Notifications</div>
                 </div>
-                <fd-switch [(ngModel)]="checked"></fd-switch>
+                <fd-switch [(ngModel)]="allowNotificationsValue"></fd-switch>
             </li>
             <li fd-list-item>
                 <div fd-list-content>
                     <div fd-list-title>Allow Banner Alerts</div>
                     <div fd-list-byline>Switch on Banner for Notifications</div>
                 </div>
-                <fd-switch [(ngModel)]="checked"></fd-switch>
+                <fd-switch [(ngModel)]="allowBannerAlertsValue"></fd-switch>
             </li>
         </ul>
 
@@ -384,86 +384,114 @@
 
             <li fd-list-item>
                 <div fd-list-content>
-                    <div fd-list-title>Notification Type</div>
+                    <div fd-list-title>Email Notifications</div>
                 </div>
-                <fd-switch [(ngModel)]="checked"></fd-switch>
+                <fd-switch [(ngModel)]="allowEmailNotificationsValue"></fd-switch>
                 <button
                     fd-button
                     fdType="transparent"
                     glyph="navigation-right-arrow"
-                    (click)="$event.stopPropagation()"
+                    (click)="
+                        navigateToNotificationDetail(notificationDetail1, 'Email Notifications');
+                        $event.stopPropagation()
+                    "
                     title="Click to navigate"
                 ></button>
             </li>
 
             <li fd-list-item>
                 <div fd-list-content>
-                    <div fd-list-title>Notification Type</div>
+                    <div fd-list-title>Push Notifications</div>
                 </div>
-                <fd-switch [(ngModel)]="checked"></fd-switch>
+                <fd-switch [(ngModel)]="allowPushNotificationsValue"></fd-switch>
                 <button
                     fd-button
                     fdType="transparent"
                     glyph="navigation-right-arrow"
-                    (click)="$event.stopPropagation()"
+                    (click)="
+                        navigateToNotificationDetail(notificationDetail2, 'Push Notifications');
+                        $event.stopPropagation()
+                    "
                     title="Click to navigate"
                 ></button>
             </li>
 
             <li fd-list-item>
                 <div fd-list-content>
-                    <div fd-list-title>Notification Type</div>
+                    <div fd-list-title>SMS Notifications</div>
                 </div>
-                <fd-switch [(ngModel)]="checked"></fd-switch>
+                <fd-switch [(ngModel)]="allowSMSNotificationsValue"></fd-switch>
                 <button
                     fd-button
                     fdType="transparent"
                     glyph="navigation-right-arrow"
-                    (click)="$event.stopPropagation()"
+                    (click)="
+                        navigateToNotificationDetail(notificationDetail3, 'SMS Notifications'); $event.stopPropagation()
+                    "
                     title="Click to navigate"
                 ></button>
             </li>
+        </ul>
+    </div>
+</ng-template>
 
+<ng-template #notificationDetail1>
+    <div fd-settings-content>
+        <p>This is from Email Notifications detail view.</p>
+        <span fd-settings-spacing></span>
+        <ul fd-list byline notification>
             <li fd-list-item>
                 <div fd-list-content>
-                    <div fd-list-title>Notification Type</div>
+                    <div fd-list-title>Daily Digest</div>
+                    <div fd-list-byline>Receive a daily summary of all notifications</div>
                 </div>
-                <fd-switch [(ngModel)]="checked"></fd-switch>
-                <button
-                    fd-button
-                    fdType="transparent"
-                    glyph="navigation-right-arrow"
-                    (click)="$event.stopPropagation()"
-                    title="Click to navigate"
-                ></button>
+                <fd-switch [(ngModel)]="allowDailyValue"></fd-switch>
             </li>
-
             <li fd-list-item>
                 <div fd-list-content>
-                    <div fd-list-title>Notification Type</div>
+                    <div fd-list-title>Immediate Alerts</div>
+                    <div fd-list-byline>Receive emails immediately for urgent notifications</div>
                 </div>
-                <fd-switch [(ngModel)]="checked"></fd-switch>
-                <button
-                    fd-button
-                    fdType="transparent"
-                    glyph="navigation-right-arrow"
-                    (click)="$event.stopPropagation()"
-                    title="Click to navigate"
-                ></button>
+                <fd-switch [(ngModel)]="allowImmediateValue"></fd-switch>
             </li>
+        </ul>
+    </div>
+</ng-template>
 
+<ng-template #notificationDetail2>
+    <div fd-settings-content>
+        <p>This is from Push Notifications detail view.</p>
+        <span fd-settings-spacing></span>
+        <ul fd-list byline notification>
             <li fd-list-item>
                 <div fd-list-content>
-                    <div fd-list-title>Notification Type</div>
+                    <div fd-list-title>Sound</div>
+                    <div fd-list-byline>Play a sound when a notification arrives</div>
                 </div>
-                <fd-switch [(ngModel)]="checked"></fd-switch>
-                <button
-                    fd-button
-                    fdType="transparent"
-                    glyph="navigation-right-arrow"
-                    (click)="$event.stopPropagation()"
-                    title="Click to navigate"
-                ></button>
+                <fd-switch [(ngModel)]="allowSoundValue"></fd-switch>
+            </li>
+            <li fd-list-item>
+                <div fd-list-content>
+                    <div fd-list-title>Vibration</div>
+                    <div fd-list-byline>Vibrate when a notification arrives</div>
+                </div>
+                <fd-switch [(ngModel)]="allowVibrationValue"></fd-switch>
+            </li>
+        </ul>
+    </div>
+</ng-template>
+
+<ng-template #notificationDetail3>
+    <div fd-settings-content>
+        <p>This is from SMS Notifications detail view.</p>
+        <span fd-settings-spacing></span>
+        <ul fd-list byline notification>
+            <li fd-list-item>
+                <div fd-list-content>
+                    <div fd-list-title>Critical Alerts Only</div>
+                    <div fd-list-byline>Only receive SMS for critical system alerts</div>
+                </div>
+                <fd-switch [(ngModel)]="allowCriticalAlertsValue"></fd-switch>
             </li>
         </ul>
     </div>

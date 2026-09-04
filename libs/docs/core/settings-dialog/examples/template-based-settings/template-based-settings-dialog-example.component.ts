@@ -1,6 +1,6 @@
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, TemplateRef, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, TemplateRef, signal, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonBarComponent, CheckboxComponent, FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
@@ -92,6 +92,9 @@ import { IconTabBarComponent, IconTabBarTabComponent } from '@fundamental-ngx/pl
     ]
 })
 export class TemplateBasedSettingsDialogExampleComponent {
+    /** Reference to the settings container for drill-down navigation */
+    readonly settingsContainer = viewChild<SettingsContainerComponent>('settingsContainer');
+
     languages = ['English (United States)', 'English (Canada)', 'French', 'German', 'Spanish', 'Bulgarian'];
 
     regions = ['United States', 'Canada', 'France', 'Germany', 'Spain', 'Bulgaria'];
@@ -122,7 +125,16 @@ export class TemplateBasedSettingsDialogExampleComponent {
     selectednumberFormat = this.numberFormats[0];
 
     checkboxValue = true;
-    checked = true;
+    allowNotificationsValue = true;
+    allowBannerAlertsValue = true;
+    allowEmailNotificationsValue = true;
+    allowPushNotificationsValue = true;
+    allowSMSNotificationsValue = true;
+    allowDailyValue = true;
+    allowImmediateValue = true;
+    allowSoundValue = true;
+    allowVibrationValue = true;
+    allowCriticalAlertsValue = true;
 
     confirmationReason = signal<string>('');
 
@@ -144,5 +156,10 @@ export class TemplateBasedSettingsDialogExampleComponent {
 
     onZoomGlyphClick(): void {
         alert('Edit Avatar');
+    }
+
+    /** Navigate to a notification detail view */
+    navigateToNotificationDetail(template: TemplateRef<any>, title: string): void {
+        this.settingsContainer()?.pushView(template, title);
     }
 }
