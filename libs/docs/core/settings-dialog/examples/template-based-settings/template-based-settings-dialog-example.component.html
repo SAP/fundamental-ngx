@@ -12,31 +12,44 @@
                     </div>
                     <div fd-settings-list-container>
                         <ul fd-list [navigationIndicator]="true" [noBorder]="true" settingsList>
-                            <li fd-list-item [settingsListTpl]="userAccountTemplate" [selected]="true">
+                            <li
+                                fd-list-item
+                                [settingsListTpl]="userAccountTemplate"
+                                [selected]="true"
+                                (click)="onOtherSettingsSelected()"
+                            >
                                 <a fd-list-link [navigationIndicator]="true">
                                     <i fd-list-icon glyph="user-settings"></i>
                                     <span fd-list-title>User Account</span>
                                 </a>
                             </li>
-                            <li fd-list-item [settingsListTpl]="appearanceTemplate">
+                            <li fd-list-item [settingsListTpl]="appearanceTemplate" (click)="onOtherSettingsSelected()">
                                 <a fd-list-link [navigationIndicator]="true">
                                     <i fd-list-icon glyph="palette"></i>
                                     <span fd-list-title>Appearance</span>
                                 </a>
                             </li>
-                            <li fd-list-item [settingsListTpl]="languageTemplate">
+                            <li fd-list-item [settingsListTpl]="languageTemplate" (click)="onOtherSettingsSelected()">
                                 <a fd-list-link [navigationIndicator]="true">
                                     <i fd-list-icon glyph="globe"></i>
                                     <span fd-list-title>Language & Region</span>
                                 </a>
                             </li>
-                            <li fd-list-item [settingsListTpl]="mobileStartTemplate">
+                            <li
+                                fd-list-item
+                                [settingsListTpl]="mobileStartTemplate"
+                                (click)="onOtherSettingsSelected()"
+                            >
                                 <a fd-list-link [navigationIndicator]="true">
                                     <i fd-list-icon glyph="iphone"></i>
                                     <span fd-list-title>SAP Mobile Start Application</span>
                                 </a>
                             </li>
-                            <li fd-list-item [settingsListTpl]="notificationsTemplate">
+                            <li
+                                fd-list-item
+                                [settingsListTpl]="notificationsTemplate"
+                                (click)="onOtherSettingsSelected()"
+                            >
                                 <a fd-list-link [navigationIndicator]="true">
                                     <i fd-list-icon glyph="bell"></i>
                                     <span fd-list-title>Notifications</span>
@@ -44,7 +57,7 @@
                             </li>
                         </ul>
                         <ul fd-list [navigationIndicator]="true" [noBorder]="true" settingsListFooter>
-                            <li fd-list-item [settingsListTpl]="resetTemplate">
+                            <li fd-list-item [settingsListTpl]="resetTemplate" (click)="onResetSettingsSelected()">
                                 <a fd-list-link [navigationIndicator]="true">
                                     <i fd-list-icon glyph="reset"></i>
                                     <span fd-list-title>Reset Settings</span>
@@ -57,7 +70,17 @@
         </fd-dialog-body>
 
         <fd-dialog-footer>
-            <fd-button-bar label="Close" (click)="dialog.close('Close')" ariaLabel="Close"></fd-button-bar>
+            @if (saveMode()) {
+                <fd-button-bar
+                    label="Save"
+                    fdType="emphasized"
+                    (click)="dialog.close('Save')"
+                    ariaLabel="Save"
+                ></fd-button-bar>
+                <fd-button-bar label="Cancel" (click)="dialog.dismiss('Cancel')" ariaLabel="Cancel"></fd-button-bar>
+            } @else {
+                <fd-button-bar label="Close" (click)="dialog.close('Close')" ariaLabel="Close"></fd-button-bar>
+            }
         </fd-dialog-footer>
     </fd-dialog>
 </ng-template>

@@ -138,6 +138,9 @@ export class TemplateBasedSettingsDialogExampleComponent {
 
     confirmationReason = signal<string>('');
 
+    /** Track if the reset settings view is active to show Save/Cancel buttons */
+    saveMode = signal<boolean>(false);
+
     constructor(private _dialogService: DialogService) {}
 
     openDialog(dialog: TemplateRef<any>): void {
@@ -161,5 +164,15 @@ export class TemplateBasedSettingsDialogExampleComponent {
     /** Navigate to a notification detail view */
     navigateToNotificationDetail(template: TemplateRef<any>, title: string): void {
         this.settingsContainer()?.pushView(template, title);
+    }
+
+    /** Handle when reset settings is selected */
+    onResetSettingsSelected(): void {
+        this.saveMode.set(true);
+    }
+
+    /** Handle when any other settings item is selected */
+    onOtherSettingsSelected(): void {
+        this.saveMode.set(false);
     }
 }
