@@ -93,7 +93,7 @@ import { IconTabBarComponent, IconTabBarTabComponent } from '@fundamental-ngx/pl
 })
 export class TemplateBasedSettingsDialogExampleComponent {
     /** Reference to the settings container for drill-down navigation */
-    readonly settingsContainer = viewChild<SettingsContainerComponent>('settingsContainer');
+    readonly settingsContainer = viewChild.required<SettingsContainerComponent>('settingsContainer');
 
     languages = ['English (United States)', 'English (Canada)', 'French', 'German', 'Spanish', 'Bulgarian'];
 
@@ -124,6 +124,11 @@ export class TemplateBasedSettingsDialogExampleComponent {
     selectedCurrency = this.currencies[0];
     selectednumberFormat = this.numberFormats[0];
 
+    /**
+     * Simple boolean properties for switch states bound with [(ngModel)].
+     * Note: For production code, consider using a form model or signal-based state management
+     * for better reactivity and testability.
+     */
     checkboxValue = true;
     allowNotificationsValue = true;
     allowBannerAlertsValue = true;
@@ -163,7 +168,7 @@ export class TemplateBasedSettingsDialogExampleComponent {
 
     /** Navigate to a notification detail view */
     navigateToNotificationDetail(template: TemplateRef<any>, title: string): void {
-        this.settingsContainer()?.pushView(template, title);
+        this.settingsContainer().pushView(template, title);
     }
 
     /** Handle when reset settings is selected */
