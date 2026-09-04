@@ -1,3 +1,13 @@
+## 0.65.0-rc.5 (2026-09-04)
+
+### 🩹 Fixes
+
+- **platform:** migrate table settings dialog close handling ([#14518](https://github.com/SAP/fundamental-ngx/pull/14518))
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.65.0-rc.4 (2026-09-03)
 
 ### 🩹 Fixes
