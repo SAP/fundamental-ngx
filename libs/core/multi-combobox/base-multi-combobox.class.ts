@@ -730,6 +730,10 @@ export abstract class BaseMultiCombobox<T = any> {
             this._flatSuggestions.set(this.isGroup() ? flattenGroups(currentSuggestions) : currentSuggestions);
             this._fullFlatSuggestions.set(this._flatSuggestions());
 
+            if (!this._selectedItems().length && this._cva.value?.length) {
+                this._setSelectedItems(this._cva.value);
+            }
+
             this._setSelectedSuggestions();
 
             this._mapAndUpdateModel();

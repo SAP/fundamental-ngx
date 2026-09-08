@@ -22,7 +22,7 @@
         [style.max-height]="maxContentHeight()"
     >
         @if (stackContent) {
-            @for (tab of _flatTabs$(); track tab) {
+            @for (tab of _flatTabs$(); track tab.uId) {
                 <fdp-icon-tab-bar-tab-content [id]="tab.id" [uId]="tab.uId" class="fd-icon-tab-bar__tab-content">
                     <ng-template [ngTemplateOutlet]="tab.renderer || null"></ng-template>
                 </fdp-icon-tab-bar-tab-content>

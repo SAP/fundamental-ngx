@@ -8,7 +8,8 @@ import { DatetimeAdapter, FdDate, FdDatetimeAdapter, FdDatetimeModule } from '@f
 import { runValueAccessorTests } from 'ngx-cva-test-suite';
 
 import { By } from '@angular/platform-browser';
-import { FD_LANGUAGE, FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n/en';
 import { of } from 'rxjs';
 import { DatePickerComponent } from './date-picker.component';
 import { DatePickerModule } from './date-picker.module';

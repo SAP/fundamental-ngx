@@ -1,3 +1,90 @@
+<fd-docs-section-title id="withPipe" componentName="resolver"> Using fdTranslate pipe </fd-docs-section-title>
+<description>
+    <p>
+        The <code>fdTranslate</code> pipe provides a convenient way to resolve translations directly in templates. The
+        pipe returns a <code>Signal&lt;string&gt;</code>, so you must <strong>invoke it with <code>()</code></strong> in
+        your template.
+    </p>
+    <p><strong>When to use the pipe:</strong></p>
+    <ul>
+        <li>For simple inline translations in templates</li>
+        <li>For one-off labels and text that don't need to be reused</li>
+        <li>When you want a clean, declarative syntax</li>
+    </ul>
+    <p>
+        <strong>Important:</strong> The pipe is <strong>pure</strong> for better performance, meaning it only
+        re-evaluates when the language signal changes.
+    </p>
+</description>
+<component-example>
+    <fd-using-translation-pipe-example />
+</component-example>
+<code-example [exampleFiles]="usingTranslationPipeExampleFiles"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="withUtility" componentName="resolver">
+    Using utility functions (Recommended)
+</fd-docs-section-title>
+<description>
+    <p>
+        The <strong>recommended approach</strong> for most use cases is to use the signal-based utility functions. These
+        functions provide a simpler API while automatically handling signal management and cleanup.
+    </p>
+    <p><strong>Available utility functions:</strong></p>
+    <ul>
+        <li>
+            <code>resolveTranslationSignal(key)</code> - Use in injection context to get a reactive signal for a
+            translation key
+        </li>
+        <li>
+            <code>resolveTranslationSignalFn()</code> - Returns a resolver function that can be used outside injection
+            context
+        </li>
+    </ul>
+    <p>
+        These functions must be called within the
+        <a href="https://angular.dev/guide/di/dependency-injection-context" fd-link target="_blank">
+            dependency injection context
+        </a>
+        (constructor, class field initializers, or factories).
+    </p>
+</description>
+<component-example>
+    <fd-translation-resolver-using-utility-functions-example />
+</component-example>
+<code-example [exampleFiles]="utilityTranslationResolverExampleFiles"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="basic" componentName="resolver"> Using TranslationResolver class </fd-docs-section-title>
+<description>
+    <p>
+        The <code>TranslationResolver</code> class is the low-level API for resolving translation keys to their
+        translated strings. It provides fine-grained control over translation resolution.
+    </p>
+    <p><strong>When to use TranslationResolver:</strong></p>
+    <ul>
+        <li>When you need direct control over translation resolution</li>
+        <li>For one-time synchronous translation lookups (non-reactive)</li>
+        <li>In advanced scenarios where utility functions don't fit</li>
+    </ul>
+    <p>
+        <strong>Note:</strong> For most use cases, prefer the simpler <code>resolveTranslationSignal()</code> utility
+        function (shown above) which handles signal management automatically.
+    </p>
+    <p>
+        The example below shows both reactive (using <code>computed()</code>) and one-time synchronous translation
+        resolution.
+    </p>
+</description>
+<component-example>
+    <fd-translation-resolver-basic-usage-example />
+</component-example>
+<code-example [exampleFiles]="basicTranslationResolverExampleFiles"></code-example>
+
+<separator></separator>
+
 <fd-docs-section-title id="comparison" componentName="resolver">
     Comparison: When to use what approach
 </fd-docs-section-title>
@@ -155,124 +242,6 @@
             <li><strong>Need low-level control?</strong> → Use <code>TranslationResolver</code> class</li>
         </ol>
     </fd-message-strip>
-
-    <h4 class="fd-margin-top--md">Example Scenarios:</h4>
-    <div class="fd-margin-top--sm">
-        <fd-message-strip [type]="'success'" [dismissible]="false" class="fd-margin-top--tiny">
-            <strong>Button label in template:</strong><br />
-            Use <code>fdTranslate</code> pipe:
-            <code>{{ '{' }}{{ '{' }} ('coreButton.close' | fdTranslate)() {{ '}' }}{{ '}' }}</code>
-        </fd-message-strip>
-        <fd-message-strip [type]="'success'" [dismissible]="false" class="fd-margin-top--tiny">
-            <strong>Alert message in click handler:</strong><br />
-            Use <code>resolveTranslationSignal()</code>:
-            <code>alertMessage = resolveTranslationSignal('myApp.alert')</code>
-        </fd-message-strip>
-        <fd-message-strip [type]="'success'" [dismissible]="false" class="fd-margin-top--tiny">
-            <strong>Dynamic error messages in method:</strong><br />
-            Use <code>resolveTranslationSignalFn()</code>: <code>resolver = resolveTranslationSignalFn()</code> then
-            call in method
-        </fd-message-strip>
-        <fd-message-strip [type]="'success'" [dismissible]="false" class="fd-margin-top--tiny">
-            <strong>Change "Upload" to "Upload File" for one component:</strong><br />
-            Use <code>patchLanguage()</code> in component providers
-        </fd-message-strip>
-    </div>
 </description>
-
-<separator></separator>
-
-<fd-docs-section-title id="basic" componentName="resolver"> Using TranslationResolver class </fd-docs-section-title>
-<description>
-    <p>
-        The <code>TranslationResolver</code> class is the low-level API for resolving translation keys to their
-        translated strings. It provides fine-grained control over translation resolution.
-    </p>
-    <p><strong>When to use TranslationResolver:</strong></p>
-    <ul>
-        <li>When you need direct control over translation resolution</li>
-        <li>For one-time synchronous translation lookups (non-reactive)</li>
-        <li>In advanced scenarios where utility functions don't fit</li>
-    </ul>
-    <p>
-        <strong>Note:</strong> For most use cases, prefer the simpler <code>resolveTranslationSignal()</code> utility
-        function (shown in the next section) which handles signal management automatically.
-    </p>
-    <p>
-        The example below shows both reactive (using <code>computed()</code>) and one-time synchronous translation
-        resolution.
-    </p>
-</description>
-<component-example>
-    <fd-translation-resolver-basic-usage-example />
-</component-example>
-<code-example [exampleFiles]="basicTranslationResolverExampleFiles"></code-example>
-
-<separator></separator>
-
-<fd-docs-section-title id="withUtility" componentName="resolver">
-    Using utility functions (Recommended)
-</fd-docs-section-title>
-<description>
-    <p>
-        The <strong>recommended approach</strong> for most use cases is to use the signal-based utility functions. These
-        functions provide a simpler API while automatically handling signal management and cleanup.
-    </p>
-    <p><strong>Available utility functions:</strong></p>
-    <ul>
-        <li>
-            <code>resolveTranslationSignal(key)</code> - Use in injection context to get a reactive signal for a
-            translation key
-        </li>
-        <li>
-            <code>resolveTranslationSignalFn()</code> - Returns a resolver function that can be used outside injection
-            context
-        </li>
-    </ul>
-    <p>
-        These functions must be called within the
-        <a href="https://angular.dev/guide/di/dependency-injection-context" fd-link target="_blank">
-            dependency injection context
-        </a>
-        (constructor, class field initializers, or factories).
-    </p>
-</description>
-<component-example>
-    <fd-translation-resolver-using-utility-functions-example />
-</component-example>
-<code-example [exampleFiles]="utilityTranslationResolverExampleFiles"></code-example>
-
-<separator></separator>
-
-<fd-docs-section-title id="withPipe" componentName="resolver"> Using fdTranslate pipe </fd-docs-section-title>
-<description>
-    <p>
-        The <code>fdTranslate</code> pipe provides a convenient way to resolve translations directly in templates. The
-        pipe returns a <code>Signal&lt;string&gt;</code>, so you must <strong>invoke it with <code>()</code></strong> in
-        your template.
-    </p>
-    <p><strong>When to use the pipe:</strong></p>
-    <ul>
-        <li>For simple inline translations in templates</li>
-        <li>For one-off labels and text that don't need to be reused</li>
-        <li>When you want a clean, declarative syntax</li>
-    </ul>
-    <p><strong>When NOT to use the pipe:</strong></p>
-    <ul>
-        <li>
-            If you need to reuse the same translation in multiple places (use <code>resolveTranslationSignal()</code>)
-        </li>
-        <li>For computed values based on translations (use <code>computed()</code> with signals)</li>
-        <li>In class methods or logic (use utility functions)</li>
-    </ul>
-    <p>
-        <strong>Important:</strong> The pipe is <strong>pure</strong> for better performance, meaning it only
-        re-evaluates when the language signal changes.
-    </p>
-</description>
-<component-example>
-    <fd-using-translation-pipe-example />
-</component-example>
-<code-example [exampleFiles]="usingTranslationPipeExampleFiles"></code-example>
 
 <separator></separator>

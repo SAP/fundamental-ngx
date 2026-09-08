@@ -1,0 +1,4 @@
+<div style="display: flex; flex-direction: column; align-items: flex-start; gap: 1rem">
+    <button fd-button (click)="busy.set(!busy())">Toggle busy</button>
+    <fd-product-switch-body [products]="list" [busy]="busy()"></fd-product-switch-body>
+</div>

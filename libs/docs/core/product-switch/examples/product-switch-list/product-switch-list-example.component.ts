@@ -46,8 +46,7 @@ export class ProductSwitchListComponent {
         {
             title: 'Vendor Managemen',
             subtitle: 'Fieldglass',
-            icon: 'shipping-status',
-            selected: true
+            icon: 'shipping-status'
         },
         {
             title: 'Human Capital Management',
@@ -80,6 +79,5 @@ export class ProductSwitchListComponent {
 
     productChangeHandle(products: ProductSwitchItem[]): void {
         this.list = products;
-        console.log(products);
     }
 }

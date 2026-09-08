@@ -5,7 +5,8 @@ import { DynamicComponentService, RtlService } from '@fundamental-ngx/cdk/utils'
 import { provideContentDensity } from '@fundamental-ngx/core/content-density';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { provideTheming, themingInitializer } from '@fundamental-ngx/core/theming';
-import { FD_LANGUAGE_ENGLISH, FD_LANGUAGE_SIGNAL } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_SIGNAL } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n/en';
 import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {

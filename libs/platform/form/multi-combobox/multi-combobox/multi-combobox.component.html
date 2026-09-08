@@ -50,7 +50,7 @@
                 fdMultiAnnouncer
                 [multiAnnouncerOptions]="_suggestions"
             >
-                @for (token of _selectedSuggestions; track token) {
+                @for (token of _selectedSuggestions; track token.label) {
                     <fd-token [readOnly]="disabled" (onCloseClick)="removeToken(token, $event)">
                         {{ token.label }}
                     </fd-token>
@@ -174,7 +174,7 @@
         }
         <ng-content></ng-content>
         @if (isGroup) {
-            @for (group of _suggestions; track group) {
+            @for (group of _suggestions; track group.label) {
                 @if (!groupItemTemplate) {
                     <label fd-list-item fd-list-group-header role="group">
                         <span fd-list-title>{{ group.label }}</span>
@@ -186,7 +186,7 @@
                         [ngTemplateOutletContext]="{ $implicit: { label: group.label } }"
                     ></ng-template>
                 }
-                @for (optionItem of group.children; track optionItem) {
+                @for (optionItem of group.children; track $index) {
                     <li
                         fd-list-item
                         role="option"
@@ -208,7 +208,7 @@
                 }
             }
         } @else {
-            @for (optionItem of _suggestions; track optionItem) {
+            @for (optionItem of _suggestions; track $index) {
                 <li
                     fd-list-item
                     role="option"

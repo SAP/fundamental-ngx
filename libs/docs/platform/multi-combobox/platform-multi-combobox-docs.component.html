@@ -90,6 +90,27 @@
 
 <separator></separator>
 
+<fd-docs-section-title id="delayed-datasource" componentName="multi-combobox">
+    Programmatic Value Set Before Datasource Loads
+</fd-docs-section-title>
+<description>
+    <p>
+        This example tests an edge case: setting the form value programmatically <strong>before</strong> the datasource
+        has loaded. Once the datasource populates, the component should reconcile the selected items and update both
+        tokens and dropdown checkboxes.
+    </p>
+    <p>
+        <strong>Use case:</strong> When a form is restored from saved state or URL parameters before async data loads,
+        the component should correctly identify and display matching items once they arrive.
+    </p>
+</description>
+<component-example>
+    <fdp-multi-combobox-delayed-datasource-example></fdp-multi-combobox-delayed-datasource-example>
+</component-example>
+<code-example [exampleFiles]="multiComboboxDelayedDatasourceExample"></code-example>
+
+<separator></separator>
+
 <fd-docs-section-title id="loading" componentName="multi-combobox"> Loading </fd-docs-section-title>
 <description>
     Combobox exposes <code>onDataRequested</code> and <code>onDataReceived</code> outputs, that can be used to implement

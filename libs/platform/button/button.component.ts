@@ -1,5 +1,14 @@
 import { BooleanInput } from '@angular/cdk/coercion';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, input, output } from '@angular/core';
+import {
+    booleanAttribute,
+    ChangeDetectionStrategy,
+    Component,
+    computed,
+    effect,
+    input,
+    linkedSignal,
+    output
+} from '@angular/core';
 
 import { ModuleDeprecation, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { ButtonType, ButtonComponent as CoreButtonComponent, GlyphPosition } from '@fundamental-ngx/core/button';
@@ -115,11 +124,17 @@ export class ButtonComponent implements ButtonModel {
     /** Event sent when button is clicked */
     readonly buttonClicked = output<any>();
 
+    /** @hidden Mutable disabled state for ButtonModel compatibility */
+    protected readonly disabledState = linkedSignal(() => this.disabled());
+
+    /** @hidden Mutable type state for ButtonModel compatibility */
+    protected readonly fdTypeState = linkedSignal(() => this.buttonType() || this.fdType());
+
     /** @hidden Computed to determine effective fdType (buttonType overrides fdType if provided) */
-    protected readonly _effectiveFdType = computed(() => this.buttonType() || this.fdType());
+    protected readonly effectiveFdType = computed(() => this.fdTypeState());
 
     /** @hidden Computed to determine effective toggled state */
-    protected readonly _effectiveToggled = computed(() => this.toggled() || this.ariaPressed() || this.ariaSelected());
+    protected readonly effectiveToggled = computed(() => this.toggled() || this.ariaPressed() || this.ariaSelected());
 
     /**
      * Computed accessible name for the button.
@@ -160,7 +175,7 @@ export class ButtonComponent implements ButtonModel {
      * Note: Cannot directly set signal inputs. This method exists for interface compatibility.
      */
     setDisabled(_value: boolean): void {
-        console.warn('setDisabled() cannot modify signal input. Use template binding [disabled]="value" instead.');
+        this.disabledState.set(_value);
     }
 
     /**
@@ -168,7 +183,7 @@ export class ButtonComponent implements ButtonModel {
      * Implements ButtonModel interface.
      */
     isDisabled(): boolean {
-        return this.disabled();
+        return this.disabledState();
     }
 
     /**
@@ -177,7 +192,7 @@ export class ButtonComponent implements ButtonModel {
      * Note: Cannot directly set signal inputs. This method exists for interface compatibility.
      */
     setFdType(_value: ButtonType): void {
-        console.warn('setFdType() cannot modify signal input. Use template binding [fdType]="value" instead.');
+        this.fdTypeState.set(_value);
     }
 
     /**
@@ -185,7 +200,7 @@ export class ButtonComponent implements ButtonModel {
      * Implements ButtonModel interface.
      */
     getFdType(): ButtonType {
-        return this._effectiveFdType();
+        return this.effectiveFdType();
     }
 
     /**

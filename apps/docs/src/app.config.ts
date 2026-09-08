@@ -11,8 +11,8 @@ import {
     provideUnifiedDocsNavigation,
     Translations
 } from '@fundamental-ngx/docs/shared';
-import { FD_LANGUAGE_ENGLISH, FD_LANGUAGE_SIGNAL } from '@fundamental-ngx/i18n';
-
+import { FD_LANGUAGE_SIGNAL } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n/en';
 import { provideUi5WebcomponentsAi } from '@fundamental-ngx/ui5-webcomponents-ai/theming-bridge';
 import { provideUi5LanguageBridge } from '@fundamental-ngx/ui5-webcomponents-base/i18n';
 import { provideUi5ThemingBridge } from '@fundamental-ngx/ui5-webcomponents-base/theming-bridge';

@@ -422,6 +422,15 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         if (dataSourceChange) {
             this._initializeDataSource(dataSourceChange.currentValue);
         }
+
+        // Sync selected suggestion tokens when [selectedItems] input changes (after init).
+        // Skips if values haven't actually changed to avoid unnecessary rebuilds.
+        if (changes['selectedItems'] && !changes['selectedItems'].firstChange) {
+            const currentValues = this._selectedSuggestions.map((s) => s.value);
+            if (!shallowEqual(currentValues, this.selectedItems)) {
+                this._setSelectedSuggestions();
+            }
+        }
     }
 
     /** @hidden */
@@ -631,16 +640,24 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     protected _setSelectedSuggestions(): void {
         this._selectedSuggestions = [];
 
+        // Clear all selected flags before rebuilding; it ensures replace/clear operations
+        // don't leave stale checkmarks in the dropdown when the data is re-rendered.
+        this._fullFlatSuggestions.forEach((item) => (item.selected = false));
+        (this._suggestions || []).forEach((item) => (item.selected = false));
+
         if (!this.selectedItems?.length) {
             return;
         }
 
         for (let i = 0; i < this.selectedItems.length; i++) {
             const selectedItem = this.selectedItems[i];
+            // Match by label OR by value (object with deep equality).
+            // Supports both string-based selections (e.g. ['Apple'] and object-based [{id:1, label:'Apple'}]).
             const finder = (item: SelectableOptionItem): boolean =>
-                item.label === selectedItem || item.value === selectedItem;
+                item.label === selectedItem || shallowEqual(item.value, selectedItem);
             const idFromFullFlatSuggestions = this._fullFlatSuggestions.findIndex(finder);
             const idFromSuggestions = (this._suggestions || []).findIndex(finder);
+            // Prefer full flat list (which includes groups); fall back to filtered list if needed.
             const itemIndex = Math.max(idFromFullFlatSuggestions, idFromSuggestions);
             const collection = idFromFullFlatSuggestions !== -1 ? this._fullFlatSuggestions : this._suggestions;
             if (idFromFullFlatSuggestions === -1 && idFromSuggestions === -1) {
@@ -658,10 +675,14 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
             if (itemIndex > -1) {
                 this._selectedSuggestions.push(collection[itemIndex]);
                 collection[itemIndex].selected = true;
+                // If the item also exists in the filtered visible list, sync its selected flag too.
+                if (idFromSuggestions !== -1) {
+                    this._suggestions[idFromSuggestions].selected = true;
+                }
             }
         }
 
-        this.detectChanges();
+        this.markForCheck();
     }
 
     /** @hidden */

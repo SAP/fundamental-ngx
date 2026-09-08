@@ -1,7 +1,16 @@
 import { OverlayContainer } from '@angular/cdk/overlay';
-import { Component, ViewChild } from '@angular/core';
-import { ComponentFixture, TestBed, inject, waitForAsync } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
+import { Component, signal, ViewChild } from '@angular/core';
+import {
+    ComponentFixture,
+    discardPeriodicTasks,
+    fakeAsync,
+    flush,
+    inject,
+    TestBed,
+    tick,
+    waitForAsync
+} from '@angular/core/testing';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 import { By } from '@angular/platform-browser';
 import { DynamicComponentService, RtlService } from '@fundamental-ngx/cdk/utils';
@@ -35,7 +44,6 @@ import { MultiComboboxComponent } from './multi-combobox.component';
             </fdp-form-field>
         </fdp-form-group>
     `,
-    standalone: true,
     imports: [FdpFormGroupModule, FormModule, ReactiveFormsModule, PlatformMultiComboboxModule, ContentDensityModule]
 })
 class MultiComboboxStandardComponent {
@@ -288,5 +296,344 @@ describe('MultiComboboxComponent default values', () => {
 
         // Verify that _focusToSearchField was NOT called
         expect(focusToSearchFieldSpy).not.toHaveBeenCalled();
+    });
+});
+
+// ─── Regression tests for #13553 ─────────────────────────────────────────────
+// Covers the [selectedItems] binding path: programmatic set without opening
+// the dropdown must update tokens and option selected-flags on reopen.
+// The FormControl.setValue() path is not reproduced here because writeValue()
+// reaches _setSelectedSuggestions() via a synchronous datasource, making that
+// path correct in jsdom even before the fix — covered by the docs form example.
+
+const ITEMS_13553 = [
+    { name: 'Apple', type: 'Fruits' },
+    { name: 'Banana', type: 'Fruits' },
+    { name: 'Pineapple', type: 'Fruits' },
+    { name: 'Strawberry', type: 'Fruits' },
+    { name: 'Broccoli', type: 'Vegetables' }
+];
+
+@Component({
+    selector: 'fdp-multi-combobox-selected-items-test',
+    template: `
+        <fdp-form-group>
+            <fdp-form-field id="field" label="Items" zone="zLeft" rank="1">
+                <fdp-multi-combobox
+                    name="items"
+                    displayKey="name"
+                    [dataSource]="dataSource"
+                    [selectedItems]="selectedItems"
+                ></fdp-multi-combobox>
+            </fdp-form-field>
+        </fdp-form-group>
+    `,
+    imports: [FdpFormGroupModule, FormModule, PlatformMultiComboboxModule]
+})
+class MultiComboboxSelectedItemsTestComponent {
+    @ViewChild(MultiComboboxComponent)
+    multiCombobox: MultiComboboxComponent;
+
+    dataSource = [...ITEMS_13553];
+    selectedItems: any[] = [];
+}
+
+describe('MultiComboboxComponent #13553 – programmatic set without dropdown open', () => {
+    let fixture: ComponentFixture<MultiComboboxSelectedItemsTestComponent>;
+    let component: MultiComboboxSelectedItemsTestComponent;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [MultiComboboxSelectedItemsTestComponent],
+            providers: [DynamicComponentService, RtlService, { provide: DATA_PROVIDERS, useClass: DataProvider as any }]
+        }).compileComponents();
+    }));
+
+    beforeEach(async () => {
+        fixture = TestBed.createComponent(MultiComboboxSelectedItemsTestComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+        await fixture.whenStable();
+    });
+
+    it('should render tokens when [selectedItems] is set programmatically without opening the dropdown', async () => {
+        // Confirm suggestions are populated — the bug is NOT an empty lookup table
+        expect(component.multiCombobox._fullFlatSuggestions.length).toBeGreaterThan(0);
+
+        // Set selection programmatically — no dropdown interaction
+        component.selectedItems = [ITEMS_13553[0], ITEMS_13553[1]];
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        // _selectedSuggestions must reflect the new selection
+        expect(component.multiCombobox._selectedSuggestions.length).toBe(2);
+
+        // Tokens must be rendered in the DOM
+        const tokens = fixture.nativeElement.querySelectorAll('fd-token');
+        expect(tokens.length).toBe(2);
+
+        const labels = Array.from(tokens).map((t: Element) => t.textContent?.trim());
+        expect(labels).toContain('Apple');
+        expect(labels).toContain('Banana');
+    });
+});
+
+// ─── RED tests for #13553 – stale selected-flag bug (dropdown reopen state) ──
+// _setSelectedSuggestions() only ever sets selected=true, never resets stale
+// flags. After replace/clear, reopening the dropdown shows stale checked items.
+// These tests fail on current main for the RIGHT reason (stale option.selected
+// flags), not a setup artifact.
+
+describe('MultiComboboxComponent #13553 – stale selected-flag on dropdown reopen', () => {
+    let fixture: ComponentFixture<MultiComboboxSelectedItemsTestComponent>;
+    let component: MultiComboboxSelectedItemsTestComponent;
+    let multiCombobox: MultiComboboxComponent;
+    let overlayContainerEl: HTMLElement;
+
+    beforeEach(fakeAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [MultiComboboxSelectedItemsTestComponent],
+            providers: [DynamicComponentService, RtlService, { provide: DATA_PROVIDERS, useClass: DataProvider as any }]
+        }).compileComponents();
+
+        inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
+            overlayContainerEl = overlayContainer.getContainerElement();
+        })();
+
+        fixture = TestBed.createComponent(MultiComboboxSelectedItemsTestComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+        tick(50);
+        fixture.detectChanges();
+        multiCombobox = component.multiCombobox;
+    }));
+
+    /** Returns labels of list items in the open dropdown that carry is-selected. */
+    function getSelectedLabels(): string[] {
+        return Array.from(overlayContainerEl.querySelectorAll('li.fd-list__item.is-selected[role="option"]')).map(
+            (el) => el.querySelector('.fd-list__title')?.textContent?.trim() ?? ''
+        );
+    }
+
+    /** Opens the dropdown and ticks to let CDK overlay render. */
+    function openDropdown(): void {
+        multiCombobox.onPrimaryButtonClick(multiCombobox.isOpen);
+        tick(200);
+        fixture.detectChanges();
+        flush();
+        fixture.detectChanges();
+    }
+
+    it('replace: after [Apple]→[Banana], Apple option must not remain selected in _suggestions', fakeAsync(() => {
+        // The overlay DOM cannot distinguish 2-vs-1 selected items for this path in jsdom
+        // (CDK overlay renders from a snapshot). Assert the model that drives [selected] instead —
+        // _suggestions[i].selected is the exact value the template reads for the li[selected] binding.
+        (multiCombobox as any).setValue([ITEMS_13553[0]]); // Apple
+        tick(100);
+        fixture.detectChanges();
+
+        const appleOption = multiCombobox._suggestions.find((s) => s.label === 'Apple')!;
+        expect(appleOption.selected).toBe(true);
+
+        (multiCombobox as any).setValue([ITEMS_13553[1]]); // Banana — replace
+        tick(100);
+        fixture.detectChanges();
+
+        const bananaOption = multiCombobox._suggestions.find((s) => s.label === 'Banana')!;
+        expect(bananaOption.selected).toBe(true); // Banana must be selected after replace
+        // On main: Apple.selected stays true (stale flag bug) — this assertion fails
+        expect(appleOption.selected).toBe(false); // fails on main
+        discardPeriodicTasks();
+    }));
+
+    it('clear: after [Apple, Banana]→[], reopen dropdown should show nothing checked', fakeAsync(() => {
+        // Seed Apple + Banana directly to bypass the round-1 ngOnChanges bug
+        const appleOption = multiCombobox._fullFlatSuggestions.find((s) => s.label === 'Apple')!;
+        const bananaOption = multiCombobox._fullFlatSuggestions.find((s) => s.label === 'Banana')!;
+        appleOption.selected = true;
+        bananaOption.selected = true;
+        multiCombobox._selectedSuggestions = [appleOption, bananaOption];
+        fixture.detectChanges();
+
+        // Clear — no dropdown open during the set
+        component.selectedItems = [];
+        fixture.detectChanges();
+        tick(50);
+        fixture.detectChanges();
+
+        // Reopen dropdown and assert option state
+        openDropdown();
+
+        const listItems = overlayContainerEl.querySelectorAll('li.fd-list__item[role="option"]');
+        expect(listItems.length).toBeGreaterThan(0); // dropdown is populated
+        const selectedLabels = getSelectedLabels();
+        expect(selectedLabels.length).toBe(0); // fails on main — early-return leaves flags true
+        discardPeriodicTasks();
+    }));
+});
+
+// ─── Regression tests for #13553 – onChange emits raw values, not wrappers ────
+// _propagateChange() was calling this.onChange(this._selectedSuggestions) which
+// passed SelectableOptionItem wrappers to the FormControl. The control value then
+// stored wrappers, causing re-matching failures when writeValue fed the value back.
+
+const ITEMS_PROPAGATE = [
+    { name: 'Apple', type: 'Fruits' },
+    { name: 'Banana', type: 'Fruits' },
+    { name: 'Pineapple', type: 'Fruits' }
+];
+
+@Component({
+    selector: 'fdp-multi-combobox-form-control-test',
+    template: `
+        <form [formGroup]="form">
+            <fdp-form-group>
+                <fdp-form-field id="ctrl" label="Items" zone="zLeft" rank="1">
+                    <fdp-multi-combobox
+                        name="items"
+                        displayKey="name"
+                        formControlName="items"
+                        [dataSource]="dataSource"
+                    ></fdp-multi-combobox>
+                </fdp-form-field>
+            </fdp-form-group>
+        </form>
+    `,
+    imports: [FdpFormGroupModule, FormModule, ReactiveFormsModule, PlatformMultiComboboxModule]
+})
+class MultiComboboxFormControlTestComponent {
+    @ViewChild(MultiComboboxComponent)
+    multiCombobox: MultiComboboxComponent;
+
+    dataSource = [...ITEMS_PROPAGATE];
+    form = new FormGroup({ items: new FormControl([]) });
+}
+
+@Component({
+    selector: 'fdp-multi-combobox-signal-selection-test',
+    template: `
+        <fdp-form-group>
+            <fdp-form-field id="signal-items" label="Items" zone="zLeft" rank="1">
+                <fdp-multi-combobox
+                    name="items"
+                    displayKey="name"
+                    [dataSource]="dataSource"
+                    [selectedItems]="selectedItems()"
+                    (selectionChange)="selectedItems.set($event.selectedItems)"
+                ></fdp-multi-combobox>
+            </fdp-form-field>
+        </fdp-form-group>
+    `,
+    imports: [FdpFormGroupModule, FormModule, PlatformMultiComboboxModule]
+})
+class MultiComboboxSignalSelectionTestComponent {
+    @ViewChild(MultiComboboxComponent)
+    multiCombobox: MultiComboboxComponent;
+
+    dataSource = [...ITEMS_13553];
+    selectedItems = signal<typeof ITEMS_13553>([]);
+}
+
+describe('MultiComboboxComponent #13553 - signal-bound selection', () => {
+    let fixture: ComponentFixture<MultiComboboxSignalSelectionTestComponent>;
+    let component: MultiComboboxSignalSelectionTestComponent;
+    let overlayContainerEl: HTMLElement;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [MultiComboboxSignalSelectionTestComponent],
+            providers: [DynamicComponentService, RtlService, { provide: DATA_PROVIDERS, useClass: DataProvider as any }]
+        })
+            .compileComponents()
+            .then(() => {
+                overlayContainerEl = TestBed.inject(OverlayContainer).getContainerElement();
+            });
+    }));
+
+    beforeEach(async () => {
+        fixture = TestBed.createComponent(MultiComboboxSignalSelectionTestComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+        await fixture.whenStable();
+    });
+
+    it('keeps existing options selected after adding an item', async () => {
+        component.selectedItems.set([ITEMS_13553[3], ITEMS_13553[4]]);
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        expect(component.multiCombobox._selectedSuggestions.map((item) => item.label)).toEqual([
+            'Strawberry',
+            'Broccoli'
+        ]);
+
+        component.multiCombobox.onPrimaryButtonClick(component.multiCombobox.isOpen);
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        const appleCheckbox = overlayContainerEl.querySelector<HTMLInputElement>('fd-checkbox input')!;
+        appleCheckbox.click();
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        expect(component.selectedItems().map((item) => item.name)).toEqual(['Strawberry', 'Broccoli', 'Apple']);
+
+        const tokenLabels = Array.from(fixture.nativeElement.querySelectorAll('fd-token')).map((token: Element) =>
+            token.textContent?.trim()
+        );
+        expect(tokenLabels).toEqual(['Strawberry', 'Broccoli', 'Apple']);
+
+        const selectedLabels = component.multiCombobox._suggestions
+            .filter((item) => item.selected)
+            .map((item) => item.label);
+        expect(selectedLabels).toEqual(['Apple', 'Strawberry', 'Broccoli']);
+    });
+});
+
+describe('MultiComboboxComponent #13553 – onChange emits raw values (not wrappers)', () => {
+    let fixture: ComponentFixture<MultiComboboxFormControlTestComponent>;
+    let component: MultiComboboxFormControlTestComponent;
+    let multiCombobox: MultiComboboxComponent;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [MultiComboboxFormControlTestComponent],
+            providers: [DynamicComponentService, RtlService, { provide: DATA_PROVIDERS, useClass: DataProvider as any }]
+        }).compileComponents();
+    }));
+
+    beforeEach(async () => {
+        fixture = TestBed.createComponent(MultiComboboxFormControlTestComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+        await fixture.whenStable();
+        multiCombobox = component.multiCombobox;
+    });
+
+    it('FormControl.value should contain raw datasource objects after toggleSelection', async () => {
+        const item = multiCombobox._suggestions.find((s) => s.label === 'Apple')!;
+        multiCombobox.toggleSelection(item);
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        const value: any[] = component.form.get('items')!.value ?? [];
+        expect(value.length).toBe(1);
+        // Raw datasource object must not carry a `selected` property (wrappers do)
+        expect(value[0]).not.toHaveProperty('selected');
+        expect(value[0].name).toBe('Apple');
+    });
+
+    it('selected item remains checked in _suggestions after searchTermChanged re-emits datasource', async () => {
+        const item = multiCombobox._suggestions.find((s) => s.label === 'Banana')!;
+        multiCombobox.toggleSelection(item);
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        multiCombobox.searchTermChanged('');
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        const bananaOption = multiCombobox._suggestions.find((s) => s.label === 'Banana')!;
+        expect(bananaOption.selected).toBe(true);
     });
 });

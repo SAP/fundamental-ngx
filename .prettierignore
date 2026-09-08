@@ -31,3 +31,5 @@ axe-reports
 libs/docs/i18n/writing-translations.component.html
 # Example file with deliberately formatted code snippets
 libs/docs/i18n/translation-resolver/examples/pipe-parameters-example/pipe-parameters-example.component.html
+# Symlinks to translation files in secondary entry points — prettier refuses symlinks
+libs/i18n/*/translations*.ts

@@ -361,7 +361,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
     /** @hidden */
     private _propagateChange(emitInMobile?: boolean): void {
         if (!this.mobile || emitInMobile) {
-            this.onChange(this._selectedSuggestions);
+            this.onChange(this._selectedSuggestions.map(({ value }) => value));
             this._mapAndUpdateModel();
         }
     }

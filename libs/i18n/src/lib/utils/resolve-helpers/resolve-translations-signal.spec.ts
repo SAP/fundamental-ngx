@@ -1,7 +1,7 @@
 import { ApplicationRef, computed, EnvironmentInjector, runInInjectionContext, signal } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { TestBed } from '@angular/core/testing';
-import { FD_LANGUAGE_ENGLISH } from '../../languages';
+import { FD_LANGUAGE_ENGLISH } from '../../languages/english';
 import { FdLanguage } from '../../models';
 import { FD_LANGUAGE_SIGNAL, FD_LOCALE_SIGNAL } from '../tokens';
 import { resolveTranslationSignal, resolveTranslationSignalFn } from './resolve-translations-signal';

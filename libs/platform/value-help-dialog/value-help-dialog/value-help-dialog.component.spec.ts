@@ -2,7 +2,8 @@ import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RtlService } from '@fundamental-ngx/cdk/utils';
-import { FD_LANGUAGE, FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n/en';
 import { of } from 'rxjs';
 import { PlatformValueHelpDialogModule } from '../value-help-dialog.module';
 import { PlatformValueHelpDialogComponent } from './value-help-dialog.component';

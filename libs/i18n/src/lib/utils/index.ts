@@ -1,4 +1,9 @@
-export * from './detect-language';
+export {
+    CHINESE_SIMPLIFIED_ALIASES,
+    CHINESE_TRADITIONAL_ALIASES,
+    detectLanguage,
+    registerLanguage
+} from './detect-language';
 export * from './load-json';
 export * from './load-properties';
 export * from './patch-language';

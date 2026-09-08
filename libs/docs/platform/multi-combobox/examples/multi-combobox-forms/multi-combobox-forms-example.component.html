@@ -1,18 +1,43 @@
-<fdp-form-group [noLabelLayout]="false" [formGroup]="customForm">
-    <fdp-form-field id="field" label="Array of Strings">
+<!-- Two idioms for multi-combobox state management:
+     1. Reactive Forms with CVA: Use FormControl + [formControlName] for form-integrated selection.
+     2. Pure Signal-based: Use signal() for lightweight local state without form overhead.
+-->
+
+<form [formGroup]="customForm">
+    <!-- Idiom 1: Reactive Forms with two-way binding via CVA -->
+    <div>
+        <label for="reactiveFormsCombo">Reactive Forms (FormControl + CVA):</label>
         <fdp-multi-combobox
-            name="field"
-            placeholder="Type some text..."
+            name="reactiveFormsCombo"
+            inputId="reactiveFormsCombo"
+            placeholder="Select items..."
             [dataSource]="dataSource"
             displayKey="name"
-            (selectionChange)="onSelect($event)"
-            formControlName="field"
-            [selectedItems]="selectedItems"
+            formControlName="reactiveFormsCombo"
         ></fdp-multi-combobox>
-        <p>Selected Item: {{ selectedItems | json }}</p>
-        <p>Form Selected Item: {{ customForm.getRawValue() | json }}</p>
-        <p>Dirty: {{ customForm.controls.field.dirty }}</p>
-        <p>Touched: {{ customForm.controls.field.touched }}</p>
-        <p>Pristine: {{ customForm.controls.field.pristine }}</p>
-    </fdp-form-field>
-</fdp-form-group>
+        <p>Form Value: {{ customForm.controls.reactiveFormsCombo.value | json }}</p>
+        <div>
+            <button fd-button type="button" (click)="selectAllFruits()">Select All Fruits</button>
+            <button fd-button type="button" (click)="clearReactiveForm()">Clear</button>
+        </div>
+    </div>
+</form>
+
+<!-- Idiom 2: Pure signal-based state (no FormControl) -->
+<div>
+    <label for="pureSignalCombo">Pure Signal-based:</label>
+    <fdp-multi-combobox
+        name="pureSignalCombo"
+        inputId="pureSignalCombo"
+        placeholder="Select items..."
+        [dataSource]="dataSource"
+        displayKey="name"
+        (selectionChange)="onPureSignalChange($event)"
+        [selectedItems]="pureSignalSelection()"
+    ></fdp-multi-combobox>
+    <p>Signal Value: {{ pureSignalSelection() | json }}</p>
+    <div>
+        <button fd-button type="button" (click)="selectAllVegetables()">Select All Vegetables</button>
+        <button fd-button type="button" (click)="clearSignal()">Clear</button>
+    </div>
+</div>

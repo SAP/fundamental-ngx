@@ -34,9 +34,51 @@ import { FD_LANGUAGE_SWEDISH } from '../languages/swedish';
 import { FD_LANGUAGE_THAI } from '../languages/thai';
 import { FD_LANGUAGE_TURKISH } from '../languages/turkish';
 import { FD_LANGUAGE_UKRAINIAN } from '../languages/ukrainian';
-import { detectLanguage } from './detect-language';
+import { detectLanguage, registerLanguage, resetRegistry } from './detect-language';
 
 describe('detectLanguage', () => {
+    // Register all languages so existing resolution tests work as before (all-languages-available).
+    beforeEach(() => {
+        registerLanguage(FD_LANGUAGE_ALBANIAN);
+        registerLanguage(FD_LANGUAGE_ARABIC);
+        registerLanguage(FD_LANGUAGE_BULGARIAN);
+        registerLanguage(FD_LANGUAGE_CHINESE_SIMPLIFIED, 'zh-hans', 'zh');
+        registerLanguage(FD_LANGUAGE_CHINESE_TRADITIONAL, 'zh-hant');
+        registerLanguage(FD_LANGUAGE_CROATIAN);
+        registerLanguage(FD_LANGUAGE_CZECH);
+        registerLanguage(FD_LANGUAGE_DANISH);
+        registerLanguage(FD_LANGUAGE_DUTCH);
+        registerLanguage(FD_LANGUAGE_FINNISH);
+        registerLanguage(FD_LANGUAGE_FRENCH);
+        registerLanguage(FD_LANGUAGE_GEORGIAN);
+        registerLanguage(FD_LANGUAGE_GERMAN);
+        registerLanguage(FD_LANGUAGE_GREEK);
+        registerLanguage(FD_LANGUAGE_HEBREW);
+        registerLanguage(FD_LANGUAGE_HINDI);
+        registerLanguage(FD_LANGUAGE_HUNGARIAN);
+        registerLanguage(FD_LANGUAGE_ITALIAN);
+        registerLanguage(FD_LANGUAGE_JAPANESE);
+        registerLanguage(FD_LANGUAGE_KAZAKH);
+        registerLanguage(FD_LANGUAGE_KOREAN);
+        registerLanguage(FD_LANGUAGE_MALAY);
+        registerLanguage(FD_LANGUAGE_NORWEGIAN);
+        registerLanguage(FD_LANGUAGE_POLISH);
+        registerLanguage(FD_LANGUAGE_PORTUGUESE);
+        registerLanguage(FD_LANGUAGE_ROMANIAN);
+        registerLanguage(FD_LANGUAGE_RUSSIAN);
+        registerLanguage(FD_LANGUAGE_SERBIAN);
+        registerLanguage(FD_LANGUAGE_SLOVAK);
+        registerLanguage(FD_LANGUAGE_SLOVENIAN);
+        registerLanguage(FD_LANGUAGE_SPANISH);
+        registerLanguage(FD_LANGUAGE_SWEDISH);
+        registerLanguage(FD_LANGUAGE_THAI);
+        registerLanguage(FD_LANGUAGE_TURKISH);
+        registerLanguage(FD_LANGUAGE_UKRAINIAN);
+    });
+
+    afterEach(() => {
+        resetRegistry();
+    });
     describe('exact match', () => {
         it('should match "de" to German', () => {
             expect(detectLanguage('de')).toBe(FD_LANGUAGE_GERMAN);
@@ -213,5 +255,56 @@ describe('detectLanguage', () => {
         it('should trim whitespace: " zh-CN " → Chinese Simplified', () => {
             expect(detectLanguage(' zh-CN ')).toBe(FD_LANGUAGE_CHINESE_SIMPLIFIED);
         });
+    });
+});
+
+// Task 1.1 (RED): registry contract — these tests assert lazy-registry behavior and MUST FAIL
+// against the current all-37 eager implementation.
+describe('detectLanguage — lazy registry contract', () => {
+    // The registry is module-level state; reset to English-only before each test.
+    // resetRegistry() does not exist yet — it will be added alongside registerLanguage in Task 1.2.
+    beforeEach(() => {
+        resetRegistry();
+    });
+
+    it('English resolves without any explicit registration', () => {
+        expect(detectLanguage('en')).toBe(FD_LANGUAGE_ENGLISH);
+    });
+
+    it('registerLanguage(FD_LANGUAGE_GERMAN) then detectLanguage("de") returns German', () => {
+        registerLanguage(FD_LANGUAGE_GERMAN);
+        expect(detectLanguage('de')).toBe(FD_LANGUAGE_GERMAN);
+    });
+
+    it('detectLanguage("de") with German NOT registered falls back to English', () => {
+        // German not registered → must return English, not German
+        expect(detectLanguage('de')).toBe(FD_LANGUAGE_ENGLISH);
+    });
+
+    it('alias resolution works for registered languages: registerLanguage(FD_LANGUAGE_NORWEGIAN) → detectLanguage("nb") returns Norwegian', () => {
+        registerLanguage(FD_LANGUAGE_NORWEGIAN);
+        expect(detectLanguage('nb')).toBe(FD_LANGUAGE_NORWEGIAN);
+    });
+
+    it('alias resolution returns English when aliased language is NOT registered: detectLanguage("nb") without Norwegian', () => {
+        expect(detectLanguage('nb')).toBe(FD_LANGUAGE_ENGLISH);
+    });
+
+    it('base-language match works for registered languages: registerLanguage(FD_LANGUAGE_PORTUGUESE) → detectLanguage("pt-BR") returns Portuguese', () => {
+        registerLanguage(FD_LANGUAGE_PORTUGUESE);
+        expect(detectLanguage('pt-BR')).toBe(FD_LANGUAGE_PORTUGUESE);
+    });
+
+    it('base-language match returns English when base language is NOT registered: detectLanguage("pt-BR") without Portuguese', () => {
+        expect(detectLanguage('pt-BR')).toBe(FD_LANGUAGE_ENGLISH);
+    });
+
+    it('Chinese region-to-script mapping works for registered language: registerLanguage(FD_LANGUAGE_CHINESE_SIMPLIFIED) → detectLanguage("zh-CN") returns Simplified', () => {
+        registerLanguage(FD_LANGUAGE_CHINESE_SIMPLIFIED);
+        expect(detectLanguage('zh-CN')).toBe(FD_LANGUAGE_CHINESE_SIMPLIFIED);
+    });
+
+    it('Chinese region-to-script returns English when Chinese Simplified is NOT registered: detectLanguage("zh-CN")', () => {
+        expect(detectLanguage('zh-CN')).toBe(FD_LANGUAGE_ENGLISH);
     });
 });

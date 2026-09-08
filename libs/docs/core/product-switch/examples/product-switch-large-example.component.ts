@@ -77,6 +77,36 @@ export class ProductSwitchLargeExampleComponent {
             icon: 'batch-payments',
             url: 'https://www.sap.com/products/erp/s4hana.html',
             target: '_parent'
+        },
+        {
+            title: 'Fieldglass',
+            subtitle: 'SAP Fieldglass',
+            icon: 'personnel-view'
+        },
+        {
+            title: 'SuccessFactors',
+            subtitle: 'HXM Suite',
+            icon: 'learning-assistant'
+        },
+        {
+            title: 'Ariba Network',
+            subtitle: 'Procurement',
+            icon: 'supplier'
+        },
+        {
+            title: 'Concur Invoice',
+            subtitle: 'Invoice Management',
+            icon: 'expense-report'
+        },
+        {
+            title: 'Business Network',
+            subtitle: 'Logistics',
+            icon: 'connected'
+        },
+        {
+            title: 'Data Intelligence',
+            subtitle: 'SAP DI',
+            icon: 'database'
         }
     ];
 

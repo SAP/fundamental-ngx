@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FD_LANGUAGE_ENGLISH } from '../languages';
+import { FD_LANGUAGE_ENGLISH } from '../languages/english';
 import { FdLanguage, FdLanguageKeyArgs, FdLanguageKeyIdentifier } from '../models';
 import { FD_LANGUAGE_SIGNAL } from '../utils/tokens';
 import { FdTranslatePipe } from './fd-translate.pipe';

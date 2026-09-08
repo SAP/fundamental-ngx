@@ -16,74 +16,45 @@
 </fd-docs-section-title>
 <description>
     <fd-message-strip [type]="'warning'" [dismissible]="false">
-        <strong>Symptom:</strong> You change the language using <code>FD_LANGUAGE_SIGNAL.set()</code>, but the UI still
-        shows the old language.
+        <strong>Symptom:</strong> You change the language using <code>langSignal.set()</code>, but the UI still shows
+        the old language.
     </fd-message-strip>
 
     <h4>Common Causes and Solutions:</h4>
 
     <div class="sap-padding fd-margin-bottom--sm">
-        <h5 class="fd-margin-top--none">❌ Cause 1: Not updating a WritableSignal</h5>
+        <h5 class="fd-margin-top--none">❌ Cause 1: Language provided at the wrong scope</h5>
         <p>
-            You provided a <code>signal()</code> but you're trying to change it without getting a reference to the
-            writable signal.
-        </p>
-        <fd-message-strip [type]="'error'" [dismissible]="false" class="fd-margin-top-bottom--tiny">
-            <strong>Wrong:</strong>
-            <pre><code>// In providers
-{{ '{' }}{{ '{' }} provide: FD_LANGUAGE_SIGNAL, useValue: signal(FD_LANGUAGE_ENGLISH) {{ '}' }}{{ '}' }}
-
-// In component - can't modify this!
-private readonly lang = inject(FD_LANGUAGE_SIGNAL); // Signal&lt;FdLanguage&gt; (read-only)
-this.lang.set(newLang); // ❌ Error: set doesn't exist</code></pre>
-        </fd-message-strip>
-        <fd-message-strip [type]="'success'" [dismissible]="false" class="fd-margin-top-bottom--tiny">
-            <strong>Correct:</strong>
-            <pre><code>// In providers
-{{ '{' }}{{ '{' }} provide: FD_LANGUAGE_SIGNAL, useValue: signal(FD_LANGUAGE_ENGLISH) {{ '}' }}{{ '}' }}
-
-// In component - cast to WritableSignal
-private readonly lang = inject(FD_LANGUAGE_SIGNAL) as WritableSignal&lt;FdLanguage&gt;;
-this.lang.set(newLang); // ✅ Works!</code></pre>
-        </fd-message-strip>
-    </div>
-
-    <div class="sap-padding fd-margin-bottom--sm">
-        <h5 class="fd-margin-top--none">❌ Cause 2: Provider scope issue</h5>
-        <p>
-            The language signal is provided in a component, but you're trying to change it from a different component
-            that doesn't share the same provider.
+            If you provide the language signal inside a component, only that component and its children share it. Other
+            components inject a different signal instance — changing one doesn't update the others.
         </p>
         <fd-message-strip [type]="'success'" [dismissible]="false" class="fd-margin-top-bottom--tiny">
-            <strong>Solution:</strong> Provide the language signal at a higher level (app.config.ts or shared parent
-            component) so all components can access the same signal instance.
+            <strong>Solution:</strong> Provide the language at the app level so all components share the same signal.
             <pre><code>// app.config.ts
-export const appConfig: ApplicationConfig = {{ '{' }}{{ '{' }}
-  providers: [
-    {{ '{' }}{{ '{' }}
-      provide: FD_LANGUAGE_SIGNAL,
-      useValue: signal(FD_LANGUAGE_ENGLISH)
-    {{ '}' }}{{ '}' }}
-  ]
-{{ '}' }}{{ '}' }};</code></pre>
+import {{ '{' }} provideFundamentalTranslations {{ '}' }} from '&#64;fundamental-ngx/i18n';
+import {{ '{' }} FD_LANGUAGE_ENGLISH {{ '}' }} from '&#64;fundamental-ngx/i18n/en';
+
+export const appConfig: ApplicationConfig = {{ '{' }}
+  providers: [provideFundamentalTranslations(FD_LANGUAGE_ENGLISH)]
+{{ '}' }};</code></pre>
         </fd-message-strip>
     </div>
 
     <div class="sap-padding fd-margin-bottom--sm">
-        <h5 class="fd-margin-top--none">❌ Cause 3: Not calling the signal in templates</h5>
+        <h5 class="fd-margin-top--none">❌ Cause 2: Not calling the signal in templates</h5>
         <p>
-            When using <code>fdTranslate</code> pipe or <code>resolveTranslationSignal()</code>, you forgot to call the
-            signal with <code>()</code>.
+            <code>fdTranslate</code> pipe and <code>resolveTranslationSignal()</code> return a signal, not a string. You
+            must invoke it with <code>()</code>.
         </p>
         <fd-message-strip [type]="'error'" [dismissible]="false" class="fd-margin-top-bottom--tiny">
             <strong>Wrong:</strong>
-            <pre><code>&lt;div&gt;{{ '{' }}{{ '{' }} ('myKey' | fdTranslate) {{ '}' }}{{ '}' }}&lt;/div&gt;  &lt;!-- Shows [Function] --&gt;
-&lt;div&gt;{{ '{' }}{{ '{' }} myLabel {{ '}' }}{{ '}' }}&lt;/div&gt;  &lt;!-- Shows [Function] --&gt;</code></pre>
+            <pre><code>&lt;div&gt;{{ '{' }}{{ '{' }} ('myKey' | fdTranslate) {{ '}' }}{{ '}' }}&lt;/div&gt;   &lt;!-- shows [Function] --&gt;
+&lt;div&gt;{{ '{' }}{{ '{' }} myLabel {{ '}' }}{{ '}' }}&lt;/div&gt;              &lt;!-- shows [Function] --&gt;</code></pre>
         </fd-message-strip>
         <fd-message-strip [type]="'success'" [dismissible]="false" class="fd-margin-top-bottom--tiny">
             <strong>Correct:</strong>
-            <pre><code>&lt;div&gt;{{ '{' }}{{ '{' }} ('myKey' | fdTranslate)() {{ '}' }}{{ '}' }}&lt;/div&gt;  &lt;!-- ✅ Shows translated text --&gt;
-&lt;div&gt;{{ '{' }}{{ '{' }} myLabel() {{ '}' }}{{ '}' }}&lt;/div&gt;  &lt;!-- ✅ Shows translated text --&gt;</code></pre>
+            <pre><code>&lt;div&gt;{{ '{' }}{{ '{' }} ('myKey' | fdTranslate)() {{ '}' }}{{ '}' }}&lt;/div&gt;
+&lt;div&gt;{{ '{' }}{{ '{' }} myLabel() {{ '}' }}{{ '}' }}&lt;/div&gt;</code></pre>
         </fd-message-strip>
     </div>
 </description>
@@ -103,18 +74,22 @@ export const appConfig: ApplicationConfig = {{ '{' }}{{ '{' }}
     <h4>Common Causes and Solutions:</h4>
 
     <div class="sap-padding fd-margin-bottom--sm">
-        <h5 class="fd-margin-top--none">❌ Cause 1: Language not imported</h5>
-        <p>You're referencing a language constant without importing it.</p>
+        <h5 class="fd-margin-top--none">❌ Cause 1: Language constant not registered</h5>
+        <p>
+            Since the lazy registry, only languages explicitly registered at bootstrap are matched by auto-detect. If
+            you never registered Spanish, the system falls back to English.
+        </p>
         <fd-message-strip [type]="'error'" [dismissible]="false" class="fd-margin-top-bottom--tiny">
             <strong>Wrong:</strong>
-            <pre><code>// No import for FD_LANGUAGE_SPANISH
-{{ '{' }}{{ '{' }} provide: FD_LANGUAGE_SIGNAL, useValue: signal(FD_LANGUAGE_SPANISH) {{ '}' }}{{ '}' }}</code></pre>
+            <pre><code>// Spanish never registered — auto-detect can't match it
+providers: [provideFundamentalTranslations(FD_LANGUAGE_ENGLISH)]</code></pre>
         </fd-message-strip>
         <fd-message-strip [type]="'success'" [dismissible]="false" class="fd-margin-top-bottom--tiny">
             <strong>Correct:</strong>
-            <pre><code>import {{ '{' }} FD_LANGUAGE_SPANISH {{ '}' }} from '&#64;fundamental-ngx/i18n';
+            <pre><code>import {{ '{' }} provideFundamentalTranslations {{ '}' }} from '&#64;fundamental-ngx/i18n';
+import {{ '{' }} FD_LANGUAGE_SPANISH {{ '}' }} from '&#64;fundamental-ngx/i18n/es';
 
-{{ '{' }}{{ '{' }} provide: FD_LANGUAGE_SIGNAL, useValue: signal(FD_LANGUAGE_SPANISH) {{ '}' }}{{ '}' }}</code></pre>
+providers: [provideFundamentalTranslations(FD_LANGUAGE_SPANISH)]</code></pre>
         </fd-message-strip>
     </div>
 
@@ -124,7 +99,7 @@ export const appConfig: ApplicationConfig = {{ '{' }}{{ '{' }}
         <fd-message-strip [type]="'success'" [dismissible]="false" class="fd-margin-top-bottom--tiny">
             <strong>Solution:</strong> When creating custom languages, always extend an existing language to inherit
             missing keys:
-            <pre><code>import {{ '{' }} FD_LANGUAGE_ENGLISH {{ '}' }} from '&#64;fundamental-ngx/i18n';
+            <pre><code>import {{ '{' }} FD_LANGUAGE_ENGLISH {{ '}' }} from '&#64;fundamental-ngx/i18n/en';
 
 const MY_CUSTOM_LANGUAGE: FdLanguage = {{ '{' }}{{ '{' }}
   ...FD_LANGUAGE_ENGLISH,  // ✅ Inherit all English translations as fallback
@@ -398,7 +373,9 @@ onClick() {{ '{' }}{{ '{' }}
         </p>
         <div class="fd-code fd-margin-top-bottom--tiny">
             <pre><code>// ✅ Modern signal-based (fast)
-{{ '{' }}{{ '{' }} provide: FD_LANGUAGE_SIGNAL, useValue: signal(FD_LANGUAGE_ENGLISH) {{ '}' }}{{ '}' }}
+import {{ '{' }} provideFundamentalTranslations {{ '}' }} from '&#64;fundamental-ngx/i18n';
+import {{ '{' }} FD_LANGUAGE_ENGLISH {{ '}' }} from '&#64;fundamental-ngx/i18n/en';
+providers: [provideFundamentalTranslations(FD_LANGUAGE_ENGLISH)]
 
 // ❌ Deprecated Observable-based (slow)
 {{ '{' }}{{ '{' }} provide: FD_LANGUAGE, useValue: of(FD_LANGUAGE_ENGLISH) {{ '}' }}{{ '}' }}</code></pre>
@@ -406,20 +383,18 @@ onClick() {{ '{' }}{{ '{' }}
     </div>
 
     <div class="sap-padding fd-margin-bottom--sm">
-        <h5 class="fd-margin-top--none">✅ Reuse translation signals</h5>
-        <p>Create the signal once as a class field, don't recreate it multiple times.</p>
-        <fd-message-strip [type]="'error'" [dismissible]="false" class="fd-margin-top-bottom--tiny">
-            <strong>Wrong (inefficient):</strong>
-            <pre><code>&lt;div&gt;{{ '{' }}{{ '{' }} ('myApp.label' | fdTranslate)() {{ '}' }}{{ '}' }}&lt;/div&gt;
-&lt;div&gt;{{ '{' }}{{ '{' }} ('myApp.label' | fdTranslate)() {{ '}' }}{{ '}' }}&lt;/div&gt;
-&lt;div&gt;{{ '{' }}{{ '{' }} ('myApp.label' | fdTranslate)() {{ '}' }}{{ '}' }}&lt;/div&gt;</code></pre>
-        </fd-message-strip>
+        <h5 class="fd-margin-top--none">✅ Prefer resolveTranslationSignal() over repeated pipe calls</h5>
+        <p>
+            If the same translation key is used multiple times in a template, create a signal once as a class field
+            instead of piping the key each time. The pipe is pure and returns the same signal per key, but the explicit
+            field is clearer and avoids redundant pipe evaluations.
+        </p>
         <fd-message-strip [type]="'success'" [dismissible]="false" class="fd-margin-top-bottom--tiny">
-            <strong>Correct (efficient):</strong>
+            <strong>Better:</strong>
             <pre><code>// In TypeScript
 readonly label = resolveTranslationSignal('myApp.label');
 
-// In template
+// In template — reuse the same signal
 &lt;div&gt;{{ '{' }}{{ '{' }} label() {{ '}' }}{{ '}' }}&lt;/div&gt;
 &lt;div&gt;{{ '{' }}{{ '{' }} label() {{ '}' }}{{ '}' }}&lt;/div&gt;
 &lt;div&gt;{{ '{' }}{{ '{' }} label() {{ '}' }}{{ '}' }}&lt;/div&gt;</code></pre>
@@ -450,12 +425,10 @@ readonly label = resolveTranslationSignal('myApp.label');
             <li class="fd-margin-bottom--tiny">
                 Are you using <code>FD_LANGUAGE_SIGNAL</code> (not the deprecated <code>FD_LANGUAGE</code>)?
             </li>
-            <li class="fd-margin-bottom--tiny">
-                Did you cast to <code>WritableSignal&lt;FdLanguage&gt;</code> when you need to change the language?
-            </li>
             <li class="fd-margin-bottom--tiny">Are you calling signals with <code>()</code> in your templates?</li>
             <li class="fd-margin-bottom--tiny">
-                Did you import the language constant you're using (e.g., <code>FD_LANGUAGE_SPANISH</code>)?
+                Did you register the language via <code>provideFundamentalTranslations(FD_LANGUAGE_SPANISH)</code>? Only
+                registered languages are matched by auto-detect.
             </li>
             <li class="fd-margin-bottom--tiny">
                 Does your custom language extend an existing language with <code>...FD_LANGUAGE_ENGLISH</code>?

@@ -1,10 +1,12 @@
 import { Component, computed, inject, LOCALE_ID, signal, WritableSignal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { BehaviorSubject, firstValueFrom, Observable } from 'rxjs';
+import { provideAllFundamentalLanguages } from '../../../all/providers-all';
 import { FD_LANGUAGE_ENGLISH } from '../languages/english';
 import { FD_LANGUAGE_FRENCH } from '../languages/french';
 import { FD_LANGUAGE_GERMAN } from '../languages/german';
 import { FdLanguage } from '../models';
+import { resetRegistry } from './detect-language';
 import { FD_LANGUAGE, FD_LANGUAGE_AUTO_DETECT, FD_LANGUAGE_SIGNAL, FD_LOCALE, FD_LOCALE_SIGNAL } from './tokens';
 
 describe('Injection Tokens', () => {
@@ -769,6 +771,11 @@ describe('Injection Tokens', () => {
     });
 
     describe('FD_LANGUAGE_AUTO_DETECT', () => {
+        // Auto-detect tests need languages registered; use provideAllFundamentalLanguages()
+        // in each TestBed that exercises non-English locale detection.
+        afterEach(() => {
+            resetRegistry();
+        });
         it('should default to true', () => {
             @Component({
                 selector: 'fd-test',
@@ -797,11 +804,13 @@ describe('Injection Tokens', () => {
 
             TestBed.configureTestingModule({
                 imports: [TestComponent],
-                providers: [{ provide: LOCALE_ID, useValue: 'de-DE' }]
+                providers: [{ provide: LOCALE_ID, useValue: 'de-DE' }, provideAllFundamentalLanguages()]
             });
 
             const fixture = TestBed.createComponent(TestComponent);
-            expect(fixture.componentInstance.langSignal()).toBe(FD_LANGUAGE_GERMAN);
+            // toStrictEqual: provideAllFundamentalLanguages imports from a secondary entry point,
+            // so reference identity differs from the direct import in this file.
+            expect(fixture.componentInstance.langSignal()).toStrictEqual(FD_LANGUAGE_GERMAN);
         });
 
         it('should fall back to English for unsupported locale', () => {
@@ -854,11 +863,13 @@ describe('Injection Tokens', () => {
 
             TestBed.configureTestingModule({
                 imports: [TestComponent],
-                providers: [{ provide: LOCALE_ID, useValue: 'de-DE' }]
+                providers: [{ provide: LOCALE_ID, useValue: 'de-DE' }, provideAllFundamentalLanguages()]
             });
 
             const fixture = TestBed.createComponent(TestComponent);
-            expect(fixture.componentInstance.langSignal()).toBe(FD_LANGUAGE_GERMAN);
+            // toStrictEqual: provideAllFundamentalLanguages imports from a secondary entry point,
+            // so reference identity differs from the direct import in this file.
+            expect(fixture.componentInstance.langSignal()).toStrictEqual(FD_LANGUAGE_GERMAN);
 
             fixture.componentInstance.langSignal.set(FD_LANGUAGE_FRENCH);
             expect(fixture.componentInstance.langSignal()).toBe(FD_LANGUAGE_FRENCH);
@@ -876,11 +887,13 @@ describe('Injection Tokens', () => {
 
             TestBed.configureTestingModule({
                 imports: [TestComponent],
-                providers: [{ provide: LOCALE_ID, useValue: 'de-DE' }]
+                providers: [{ provide: LOCALE_ID, useValue: 'de-DE' }, provideAllFundamentalLanguages()]
             });
 
             const fixture = TestBed.createComponent(TestComponent);
-            expect(fixture.componentInstance.langSignal()).toBe(FD_LANGUAGE_GERMAN);
+            // toStrictEqual: provideAllFundamentalLanguages imports from a secondary entry point,
+            // so reference identity differs from the direct import in this file.
+            expect(fixture.componentInstance.langSignal()).toStrictEqual(FD_LANGUAGE_GERMAN);
             expect(fixture.componentInstance.localeSignal()).toBe('de');
         });
     });

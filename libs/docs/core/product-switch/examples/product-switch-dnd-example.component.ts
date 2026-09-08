@@ -14,9 +14,12 @@ import { ShellbarActionsComponent, ShellbarComponent } from '@fundamental-ngx/co
 export class ProductSwitchDndExampleComponent {
     list: ProductSwitchItem[] = [
         {
-            title: 'Home',
+            title: 'SAP Start',
             subtitle: 'Central Home',
-            icon: 'home',
+            avatar: {
+                image: 'assets/images/sap-start.svg',
+                contain: true
+            },
             stickToPosition: true,
             disabledDragAndDrop: true
         },

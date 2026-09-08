@@ -1,0 +1,1 @@
+../src/lib/translations/translations_ka.ts

@@ -35,17 +35,10 @@
 </fd-docs-section-title>
 <description>
     <p>
-        By default, the i18n system reads Angular's <code>LOCALE_ID</code> and picks the closest built-in language.
-        Since <code>LOCALE_ID</code> defaults to <code>'en-US'</code>, most apps start in English unless you provide it
-        explicitly. To pin a specific language, provide <code>FD_LANGUAGE_SIGNAL</code>:
+        By default, the i18n system reads Angular's <code>LOCALE_ID</code> and picks the closest registered language. To
+        explicitly list the languages your app supports, use <code>provideFundamentalTranslations()</code>:
     </p>
     <fd-code-snippet [file]="provideLanguageExample"></fd-code-snippet>
-
-    <p class="fd-margin-top--sm">
-        This provides a <code>WritableSignal&lt;FdLanguage&gt;</code> to the DI tree. All fundamental-ngx components
-        read from it. Available constants: <code>FD_LANGUAGE_ENGLISH</code>, <code>FD_LANGUAGE_GERMAN</code>,
-        <code>FD_LANGUAGE_FRENCH</code>, <code>FD_LANGUAGE_JAPANESE</code>, and 30+ more.
-    </p>
 
     <fd-message-strip [type]="'information'" [dismissible]="false" class="fd-margin-top--sm">
         <strong>Tip:</strong> Providing the language at the app level makes it available to all components. You can also
@@ -102,6 +95,7 @@
         <ul class="fd-margin-bottom--none">
             <li><code>coreDatePicker.dateInputLabel</code> - "Enter date"</li>
             <li><code>corePagination.ariaLabel</code> - "Pagination"</li>
+            <li><code>platformTable.emptyTableMessage</code> - "No data"</li>
         </ul>
     </fd-message-strip>
 </description>
@@ -119,16 +113,6 @@
 
     <fd-code-snippet [file]="useInCodeExample"></fd-code-snippet>
 
-    <p class="fd-margin-top--sm"><strong>What's happening here:</strong></p>
-    <ol>
-        <li>Import <code>resolveTranslationSignal</code> from <code>&#64;fundamental-ngx/i18n</code></li>
-        <li>
-            Call it with a translation key - this returns a signal (reactive value) containing the translated string
-        </li>
-        <li>Use <code>()</code> to invoke the signal and get the actual string value</li>
-        <li>The translation automatically updates if the language changes!</li>
-    </ol>
-
     <fd-message-strip [type]="'information'" [dismissible]="false" class="fd-margin-top--sm">
         <strong>Tip:</strong> <code>resolveTranslationSignal()</code> must be called in the "injection context" - that
         means in class field initializers (like the example above) or in the constructor. It won't work inside methods.
@@ -144,15 +128,6 @@
     <p>Want to let users change the language? It's easy! Just update the language signal.</p>
     <fd-code-snippet [file]="switchLanguageExample"></fd-code-snippet>
 
-    <p class="fd-margin-top--sm"><strong>What's happening here:</strong></p>
-    <ol>
-        <li>We inject <code>FD_LANGUAGE_SIGNAL</code> to get access to the language signal</li>
-        <li>We create a method that calls <code>.set()</code> to change the language</li>
-        <li>
-            When you call this method, ALL translations throughout your app automatically update — no manual work
-            needed!
-        </li>
-    </ol>
     <p class="fd-margin-top--sm">
         <strong>Bonus:</strong> The locale (<code>FD_LOCALE_SIGNAL</code>) auto-derives from the language — no need to
         set it separately. If you use <code>provideUi5LanguageBridge()</code>, UI5 components update too.
@@ -171,7 +146,7 @@
 <description>
     <p>Congratulations! You now know the basics of i18n in fundamental-ngx. Here's what to explore next:</p>
 
-    <h4>📚 Learn More:</h4>
+    <h4>Learn More:</h4>
     <ul>
         <li>
             <a routerLink="/i18n/writing-translations" fd-link>Writing Translations</a> - Learn the syntax for custom
@@ -194,7 +169,7 @@
         </li>
     </ul>
 
-    <h4 class="fd-margin-top--md">🔧 Common Patterns:</h4>
+    <h4 class="fd-margin-top--md">Common Patterns:</h4>
     <ul>
         <li><strong>Remember user's choice:</strong> Save language preference to localStorage</li>
         <li>
@@ -205,7 +180,7 @@
         <li><strong>Custom translations:</strong> Create your own translation keys for app-specific text</li>
     </ul>
 
-    <h4 class="fd-margin-top--md">❓ Need Help?</h4>
+    <h4 class="fd-margin-top--md">Need Help?</h4>
     <ul>
         <li>
             Check the
