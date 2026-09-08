@@ -2,6 +2,7 @@ export * from './components/message-popover-form-wrapper/message-popover-form-wr
 export * from './components/messages-list/messages-list.component';
 export * from './default-config';
 export * from './directives/message-popover-form-item.directive';
+export * from './message-list-shared';
 export * from './models/message-popover-entry.interface';
 export * from './models/message-popover-wrapper.interface';
 export * from './models/message-popover.interface';

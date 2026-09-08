@@ -8,8 +8,11 @@ import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { PopoverComponent, PopoverModule } from '@fundamental-ngx/core/popover';
 import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
-import { MessagePopoverWrapper, MessagesListComponent } from '@fundamental-ngx/platform/messages-shared';
-import { MessageListShared } from '@fundamental-ngx/platform/shared';
+import {
+    MessageListShared,
+    MessagePopoverWrapper,
+    MessagesListComponent
+} from '@fundamental-ngx/platform/messages-shared';
 
 @Component({
     selector: 'fdp-message-popover',

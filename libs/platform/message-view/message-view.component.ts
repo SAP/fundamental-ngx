@@ -10,8 +10,7 @@ import {
 } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
-import { MessagePopoverErrorGroup } from '@fundamental-ngx/platform/messages-shared';
-import { MessageListShared } from '@fundamental-ngx/platform/shared';
+import { MessageListShared, MessagePopoverErrorGroup } from '@fundamental-ngx/platform/messages-shared';
 import { MessageViewDialogComponent } from './components/message-view-dialog.component';
 
 @Component({
@@ -54,11 +53,6 @@ export class MessageViewComponent extends MessageListShared {
 
     /** @hidden */
     protected override readonly _groupedErrors$ = this.messages;
-
-    /** @hidden */
-    _closeDialog(): void {
-        this._dialogRef?.close();
-    }
 
     /** Opens the dialog. */
     open(): void {

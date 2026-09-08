@@ -3,15 +3,13 @@ import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { Nullable, countBy } from '@fundamental-ngx/cdk/utils';
 import { getFormState } from '@fundamental-ngx/platform/form';
 import {
-    MessagePopover,
     MessagePopoverEntry,
     MessagePopoverError,
-    MessagePopoverErrorGroup,
-    MessagePopoverState,
-    MessagePopoverWrapper,
-    convertFormState,
-    convertFormStateToMessagePopoverState
-} from '@fundamental-ngx/platform/messages-shared';
+    MessagePopoverErrorGroup
+} from './models/message-popover-entry.interface';
+import { MessagePopoverWrapper } from './models/message-popover-wrapper.interface';
+import { MessagePopover, MessagePopoverState } from './models/message-popover.interface';
+import { convertFormState, convertFormStateToMessagePopoverState } from './utils';
 
 /**
  * Abstract base class for message list components (MessagePopover and MessageView).

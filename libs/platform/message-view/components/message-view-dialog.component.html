@@ -1,59 +1,53 @@
 <fd-dialog>
     <fd-dialog-body>
-        <div fd-dialog-body-header>
-            <div fd-bar barDesign="header" class="fd-bar--growing">
+        <div fd-bar barDesign="header" class="fd-bar--growing">
+            <div fd-bar-left>
+                @if (messageView.currentScreen === 'list') {
+                    <div fd-bar-element>
+                        <h1 class="fd-title fd-title--h5">
+                            {{ messageView.title() || ('platformMessageView.title' | fdTranslate)() }}
+                        </h1>
+                    </div>
+                }
+                @if (messageView.currentScreen === 'details') {
+                    <button
+                        fd-button
+                        fdkInitialFocus
+                        fdType="transparent"
+                        glyph="navigation-left-arrow"
+                        [title]="('platformMessagePopover.backButton' | fdTranslate)()"
+                        (click)="messageView._showList()"
+                    ></button>
+                    <div fd-bar-element>
+                        <h1 class="fd-title fd-title--h5">
+                            {{ messageView.detailsTitle() || ('platformMessageView.detailsTitle' | fdTranslate)() }}
+                        </h1>
+                    </div>
+                }
+            </div>
+        </div>
+        @if (messageView.currentScreen === 'list') {
+            <div fd-bar barDesign="subheader">
                 <div fd-bar-left>
-                    @if (messageView.currentScreen === 'list') {
-                        <div class="fd-bar__element">
-                            <h2 class="fd-title fd-title--h5">
-                                {{ messageView.title() || ('platformMessageView.title' | fdTranslate)() }}
-                            </h2>
-                        </div>
-                    }
-                    @if (messageView.currentScreen === 'details') {
+                    <fd-segmented-button
+                        [ngModel]="messageView._currentErrorType$()"
+                        (ngModelChange)="messageView._currentErrorType$.set($event)"
+                    >
                         <button
                             fd-button
-                            fdkInitialFocus
-                            fdType="transparent"
-                            glyph="navigation-left-arrow"
-                            [title]="('platformMessagePopover.backButton' | fdTranslate)()"
-                            (click)="messageView._showList()"
+                            [label]="('platformMessagePopover.allErrors' | fdTranslate)()"
+                            value="all"
                         ></button>
-                        <div class="fd-bar__element">
-                            <h2 class="fd-title fd-title--h5">
-                                {{ messageView.detailsTitle() || ('platformMessageView.detailsTitle' | fdTranslate)() }}
-                            </h2>
-                        </div>
-                    }
+                        @for (type of messageView._errorTypes$(); track type) {
+                            <button fd-button [value]="type.group">
+                                <span fd-object-status [status]="type.state" [glyph]="'message-' + type.group"></span>
+                                <span class="fd-button__text">{{ type.count }}</span>
+                            </button>
+                        }
+                    </fd-segmented-button>
                 </div>
             </div>
-            @if (messageView.currentScreen === 'list') {
-                <div fd-bar barDesign="subheader">
-                    <div fd-bar-left>
-                        <fd-segmented-button
-                            [ngModel]="messageView._currentErrorType$()"
-                            (ngModelChange)="messageView._currentErrorType$.set($event)"
-                        >
-                            <button
-                                fd-button
-                                [label]="('platformMessagePopover.allErrors' | fdTranslate)()"
-                                value="all"
-                            ></button>
-                            @for (type of messageView._errorTypes$(); track type) {
-                                <button fd-button [value]="type.group">
-                                    <span
-                                        fd-object-status
-                                        [status]="type.state"
-                                        [glyph]="'message-' + type.group"
-                                    ></span>
-                                    <span class="fd-button__text">{{ type.count }}</span>
-                                </button>
-                            }
-                        </fd-segmented-button>
-                    </div>
-                </div>
-            }
-        </div>
+        }
         <fdp-messages-list
             [currentScreen]="messageView.currentScreen"
             [filteredErrors]="messageView._filteredErrors$()"

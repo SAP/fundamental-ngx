@@ -15,8 +15,6 @@ export * from './form/form-options';
 export * from './form/hint-options';
 export * from './form/inline-layout-collection-base.input';
 
-export * from './message-list-shared';
-
 export * from './pipes/convert-bytes/convert-bytes.pipe';
 export * from './pipes/pipe.module';
 

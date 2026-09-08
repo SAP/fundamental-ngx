@@ -245,4 +245,63 @@ describe('MessageViewComponent', () => {
 
         expect(spy).toHaveBeenCalledWith(entry);
     });
+
+    describe('Dialog operations', () => {
+        it('should open dialog when open() is called', () => {
+            component.open();
+            expect(component['_dialogRef']).toBeDefined();
+        });
+
+        it('should close dialog when close() is called', () => {
+            component.open();
+            const dialogRef = component['_dialogRef'];
+            const closeSpy = jest.spyOn(dialogRef!, 'close');
+
+            component.close();
+            expect(closeSpy).toHaveBeenCalled();
+        });
+
+        it('should pass mobile config to dialog when mobile input is true', () => {
+            fixture.componentRef.setInput('mobile', true);
+            const openSpy = jest.spyOn(component['_dialogService'], 'open');
+
+            component.open();
+
+            expect(openSpy).toHaveBeenCalledWith(
+                expect.anything(),
+                expect.objectContaining({ mobile: true }),
+                expect.anything()
+            );
+        });
+
+        it('should pass mobile false to dialog by default', () => {
+            const openSpy = jest.spyOn(component['_dialogService'], 'open');
+
+            component.open();
+
+            expect(openSpy).toHaveBeenCalledWith(
+                expect.anything(),
+                expect.objectContaining({ mobile: false }),
+                expect.anything()
+            );
+        });
+
+        it('should pass correct dialog configuration', () => {
+            const openSpy = jest.spyOn(component['_dialogService'], 'open');
+
+            component.open();
+
+            expect(openSpy).toHaveBeenCalledWith(
+                expect.anything(),
+                expect.objectContaining({
+                    focusTrapped: true,
+                    responsivePadding: false,
+                    disablePaddings: true,
+                    width: '24rem',
+                    height: 'auto'
+                }),
+                expect.anything()
+            );
+        });
+    });
 });
