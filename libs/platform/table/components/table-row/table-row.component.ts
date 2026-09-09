@@ -9,6 +9,7 @@ import {
     ElementRef,
     EventEmitter,
     HostBinding,
+    Injector,
     Input,
     OnChanges,
     OnDestroy,
@@ -18,6 +19,7 @@ import {
     SimpleChanges,
     ViewChildren,
     ViewEncapsulation,
+    afterNextRender,
     computed,
     inject,
     signal
@@ -213,6 +215,9 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
     protected readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
+    private readonly _cellTitles = signal<Map<number, string | null>>(new Map());
+
+    /** @hidden */
     private readonly _refreshChildRows$ = new Subject<void>();
 
     /** @hidden */
@@ -269,6 +274,14 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
                 this._tableRowService.removeEditableCells(this.row);
             }
         });
+
+        // Measure cell overflow after initial render to populate title attributes
+        afterNextRender(
+            () => {
+                this._updateCellTitles();
+            },
+            { injector: inject(Injector) }
+        );
     }
 
     /** @hidden */
@@ -350,6 +363,11 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
         }
     }
 
+    /** @hidden Get cached cell title for the given column index */
+    protected _getCellTitle(columnIndex: number): string | null {
+        return this._cellTitles().get(columnIndex) ?? null;
+    }
+
     /** @hidden */
     private _listenToRowExpansion(): void {
         this._refreshChildRows$.next();
@@ -416,5 +434,25 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
     /** @hidden Checks if container has elements with explicit accessible names (aria-label, aria-labelledby) */
     private _hasAccessibleContent(container: HTMLElement): boolean {
         return !!container?.querySelector('[aria-label], [aria-labelledby]');
+    }
+
+    /** @hidden Update cell titles by measuring overflow after render */
+    private _updateCellTitles(): void {
+        const rowElement = this._elmRef.nativeElement as HTMLElement;
+        const textContainers = rowElement.querySelectorAll<HTMLElement>(
+            '.fd-table__text, .fd-table__cell--truncate-txt'
+        );
+        const newTitles = new Map<number, string | null>();
+
+        textContainers.forEach((container, index) => {
+            // Check if content overflows
+            if (container.offsetWidth < container.scrollWidth) {
+                newTitles.set(index, container.textContent?.trim() || null);
+            } else {
+                newTitles.set(index, null);
+            }
+        });
+
+        this._cellTitles.set(newTitles);
     }
 }
