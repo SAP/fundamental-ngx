@@ -6,14 +6,6 @@ import { FdbViewMode } from '@fundamental-ngx/btp/shared';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button';
 import { PlatformSearchFieldModule, SearchInput } from '@fundamental-ngx/platform/search-field';
-
-export interface ExampleNavigationItem {
-    icon?: string;
-    title: string;
-    expanded?: boolean;
-    group?: boolean;
-}
-
 @Component({
     selector: 'fdb-sticky-area',
     templateUrl: './sticky-area.component.html',

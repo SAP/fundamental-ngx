@@ -7,13 +7,6 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button';
 import { PlatformSearchFieldModule, SearchInput } from '@fundamental-ngx/platform/search-field';
 
-export interface ExampleNavigationItem {
-    icon?: string;
-    title: string;
-    expanded?: boolean;
-    group?: boolean;
-}
-
 @Component({
     selector: 'fdb-sticky-item',
     templateUrl: './sticky-item.component.html',

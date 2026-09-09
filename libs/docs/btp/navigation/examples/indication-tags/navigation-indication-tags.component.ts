@@ -7,13 +7,6 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button';
 
-export interface ExampleNavigationItem {
-    icon?: string;
-    title: string;
-    expanded?: boolean;
-    group?: boolean;
-}
-
 @Component({
     selector: 'fdb-navigation-indication-tags',
     templateUrl: './navigation-indication-tags.component.html',

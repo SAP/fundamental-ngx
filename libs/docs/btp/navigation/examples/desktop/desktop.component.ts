@@ -21,13 +21,6 @@ import {
 } from '@fundamental-ngx/btp/tool-layout';
 import { ShellbarComponent, ShellbarModule } from '@fundamental-ngx/core/shellbar';
 
-export interface ExampleNavigationItem {
-    icon?: string;
-    title: string;
-    expanded?: boolean;
-    group?: boolean;
-}
-
 @Component({
     selector: 'fdb-desktop',
     templateUrl: './desktop.component.html',
