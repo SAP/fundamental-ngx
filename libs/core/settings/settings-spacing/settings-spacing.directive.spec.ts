@@ -45,7 +45,6 @@ describe('SettingsSpacingDirective with size modifiers', () => {
     it('should apply small modifier class', () => {
         @Component({
             template: `<span fd-settings-spacing size="small"></span>`,
-            standalone: true,
             imports: [SettingsSpacingDirective]
         })
         class TestSmallComponent {}
@@ -61,7 +60,6 @@ describe('SettingsSpacingDirective with size modifiers', () => {
     it('should apply medium modifier class', () => {
         @Component({
             template: `<span fd-settings-spacing size="medium"></span>`,
-            standalone: true,
             imports: [SettingsSpacingDirective]
         })
         class TestMediumComponent {}
@@ -77,7 +75,6 @@ describe('SettingsSpacingDirective with size modifiers', () => {
     it('should apply large modifier class', () => {
         @Component({
             template: `<span fd-settings-spacing size="large"></span>`,
-            standalone: true,
             imports: [SettingsSpacingDirective]
         })
         class TestLargeComponent {}
@@ -93,7 +90,6 @@ describe('SettingsSpacingDirective with size modifiers', () => {
     it('should apply form modifier class', () => {
         @Component({
             template: `<span fd-settings-spacing size="form"></span>`,
-            standalone: true,
             imports: [SettingsSpacingDirective]
         })
         class TestFormComponent {}
@@ -109,7 +105,6 @@ describe('SettingsSpacingDirective with size modifiers', () => {
     it('should only have base class when size is not provided', () => {
         @Component({
             template: `<span fd-settings-spacing></span>`,
-            standalone: true,
             imports: [SettingsSpacingDirective]
         })
         class TestNoSizeComponent {}

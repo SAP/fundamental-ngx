@@ -12,7 +12,7 @@ export type SettingsSpacingSize = 'small' | 'medium' | 'large' | 'form' | undefi
     }
 })
 export class SettingsSpacingDirective {
-    size = input<SettingsSpacingSize>();
+    readonly size = input<SettingsSpacingSize>();
 
     /**
      * Computed CSS class string that reactively updates based on the size input.
