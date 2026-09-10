@@ -1,3 +1,13 @@
+## 0.65.0-rc.6 (2026-09-10)
+
+### 🩹 Fixes
+
+- **core:** restore dynamic page subheader pin functionality ([#14530](https://github.com/SAP/fundamental-ngx/pull/14530))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.65.0-rc.5 (2026-09-04)
 
 This was a version bump only for mcp-server to align it with other projects, there were no code changes.
