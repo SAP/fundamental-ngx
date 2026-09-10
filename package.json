@@ -177,10 +177,8 @@
     },
     "lint-staged": {
         "*.{js,ts,html,md,json,yml,css,scss}": [
-            "prettier --write"
-        ],
-        "*.{html,scss,css}": [
-            "eslint --flag v10_config_lookup_from_file"
+            "prettier --write",
+            "eslint --fix --flag v10_config_lookup_from_file"
         ]
     }
 }
