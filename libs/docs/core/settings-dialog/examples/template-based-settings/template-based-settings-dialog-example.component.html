@@ -1,7 +1,7 @@
 <ng-template [fdDialogTemplate] let-dialog let-dialogConfig="dialogConfig" #confirmationDialog>
     <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
         <fd-dialog-body>
-            <fd-settings-container backBtnAriaLabel="Navigate Back" [detailsAreaTitleHeading]="2">
+            <fd-settings-container #settingsContainer backBtnAriaLabel="Navigate Back" [detailsAreaTitleHeading]="2">
                 <div fd-settings-list-area>
                     <div fd-bar barDesign="header">
                         <div fd-bar-left>
@@ -12,31 +12,44 @@
                     </div>
                     <div fd-settings-list-container>
                         <ul fd-list [navigationIndicator]="true" [noBorder]="true" settingsList>
-                            <li fd-list-item [settingsListTpl]="userAccountTemplate" [selected]="true">
+                            <li
+                                fd-list-item
+                                [settingsListTpl]="userAccountTemplate"
+                                [selected]="true"
+                                (click)="onOtherSettingsSelected()"
+                            >
                                 <a fd-list-link [navigationIndicator]="true">
                                     <i fd-list-icon glyph="user-settings"></i>
                                     <span fd-list-title>User Account</span>
                                 </a>
                             </li>
-                            <li fd-list-item [settingsListTpl]="appearanceTemplate">
+                            <li fd-list-item [settingsListTpl]="appearanceTemplate" (click)="onOtherSettingsSelected()">
                                 <a fd-list-link [navigationIndicator]="true">
                                     <i fd-list-icon glyph="palette"></i>
                                     <span fd-list-title>Appearance</span>
                                 </a>
                             </li>
-                            <li fd-list-item [settingsListTpl]="languageTemplate">
+                            <li fd-list-item [settingsListTpl]="languageTemplate" (click)="onOtherSettingsSelected()">
                                 <a fd-list-link [navigationIndicator]="true">
                                     <i fd-list-icon glyph="globe"></i>
                                     <span fd-list-title>Language & Region</span>
                                 </a>
                             </li>
-                            <li fd-list-item [settingsListTpl]="mobileStartTemplate">
+                            <li
+                                fd-list-item
+                                [settingsListTpl]="mobileStartTemplate"
+                                (click)="onOtherSettingsSelected()"
+                            >
                                 <a fd-list-link [navigationIndicator]="true">
                                     <i fd-list-icon glyph="iphone"></i>
                                     <span fd-list-title>SAP Mobile Start Application</span>
                                 </a>
                             </li>
-                            <li fd-list-item [settingsListTpl]="notificationsTemplate">
+                            <li
+                                fd-list-item
+                                [settingsListTpl]="notificationsTemplate"
+                                (click)="onOtherSettingsSelected()"
+                            >
                                 <a fd-list-link [navigationIndicator]="true">
                                     <i fd-list-icon glyph="bell"></i>
                                     <span fd-list-title>Notifications</span>
@@ -44,7 +57,7 @@
                             </li>
                         </ul>
                         <ul fd-list [navigationIndicator]="true" [noBorder]="true" settingsListFooter>
-                            <li fd-list-item [settingsListTpl]="resetTemplate">
+                            <li fd-list-item [settingsListTpl]="resetTemplate" (click)="onResetSettingsSelected()">
                                 <a fd-list-link [navigationIndicator]="true">
                                     <i fd-list-icon glyph="reset"></i>
                                     <span fd-list-title>Reset Settings</span>
@@ -57,7 +70,17 @@
         </fd-dialog-body>
 
         <fd-dialog-footer>
-            <fd-button-bar label="Close" (click)="dialog.close('Close')" ariaLabel="Close"></fd-button-bar>
+            @if (saveMode()) {
+                <fd-button-bar
+                    label="Save"
+                    fdType="emphasized"
+                    (click)="dialog.close('Save')"
+                    ariaLabel="Save"
+                ></fd-button-bar>
+                <fd-button-bar label="Cancel" (click)="dialog.dismiss('Cancel')" ariaLabel="Cancel"></fd-button-bar>
+            } @else {
+                <fd-button-bar label="Close" (click)="dialog.close('Close')" ariaLabel="Close"></fd-button-bar>
+            }
         </fd-dialog-footer>
     </fd-dialog>
 </ng-template>
@@ -117,6 +140,41 @@
 
         <ul fd-list [theme]="true">
             <li fd-list-group-header>
+                <span fd-list-title>Coca Cola</span>
+            </li>
+
+            <li fd-list-item>
+                <fd-avatar [colorAccent]="7" glyph="product" size="s"></fd-avatar>
+                <div fd-list-content>
+                    <div fd-list-title>Automatic (based on your operating syste settings)</div>
+                </div>
+            </li>
+            <li fd-list-item>
+                <fd-avatar [colorAccent]="7" glyph="product" size="s"></fd-avatar>
+                <div fd-list-content>
+                    <div fd-list-title>Coca Cola Light</div>
+                </div>
+            </li>
+            <li fd-list-item>
+                <fd-avatar [colorAccent]="7" glyph="product" size="s"></fd-avatar>
+                <div fd-list-content>
+                    <div fd-list-title>Coca Cola Dark</div>
+                </div>
+            </li>
+            <li fd-list-item>
+                <fd-avatar [colorAccent]="7" glyph="product" size="s"></fd-avatar>
+                <div fd-list-content>
+                    <div fd-list-title>Coca Cola Light (High Contrast)</div>
+                </div>
+            </li>
+            <li fd-list-item>
+                <fd-avatar [colorAccent]="7" glyph="product" size="s"></fd-avatar>
+                <div fd-list-content>
+                    <div fd-list-title>Coca Cola Dark (High Contrast)</div>
+                </div>
+            </li>
+
+            <li fd-list-group-header>
                 <span fd-list-title>SAP Horizon</span>
             </li>
 
@@ -129,25 +187,25 @@
             <li fd-list-item>
                 <fd-avatar [colorAccent]="7" glyph="product" size="s"></fd-avatar>
                 <div fd-list-content>
-                    <div fd-list-title>SAP Morning Horizon</div>
+                    <div fd-list-title>Morning Horizon</div>
                 </div>
             </li>
             <li fd-list-item>
                 <fd-avatar [colorAccent]="7" glyph="product" size="s"></fd-avatar>
                 <div fd-list-content>
-                    <div fd-list-title>SAP Evening Horizon</div>
+                    <div fd-list-title>Evening Horizon</div>
                 </div>
             </li>
             <li fd-list-item>
                 <fd-avatar [colorAccent]="7" glyph="product" size="s"></fd-avatar>
                 <div fd-list-content>
-                    <div fd-list-title>SAP High Contrast White (Horizon)</div>
+                    <div fd-list-title>High Contrast White (Horizon)</div>
                 </div>
             </li>
             <li fd-list-item>
                 <fd-avatar [colorAccent]="7" glyph="product" size="s"></fd-avatar>
                 <div fd-list-content>
-                    <div fd-list-title>SAP High Contrast Black (Horizon)</div>
+                    <div fd-list-title>High Contrast Black (Horizon)</div>
                 </div>
             </li>
 
@@ -164,25 +222,25 @@
             <li fd-list-item>
                 <fd-avatar [colorAccent]="7" glyph="product" size="s"></fd-avatar>
                 <div fd-list-content>
-                    <div fd-list-title>SAP Quartz Light</div>
+                    <div fd-list-title>Quartz Light</div>
                 </div>
             </li>
             <li fd-list-item>
                 <fd-avatar [colorAccent]="7" glyph="product" size="s"></fd-avatar>
                 <div fd-list-content>
-                    <div fd-list-title>SAP Quartz Dark</div>
+                    <div fd-list-title>Quartz Dark</div>
                 </div>
             </li>
             <li fd-list-item>
                 <fd-avatar [colorAccent]="7" glyph="product" size="s"></fd-avatar>
                 <div fd-list-content>
-                    <div fd-list-title>SAP High Contrast White (Quartz)</div>
+                    <div fd-list-title>High Contrast White (Quartz)</div>
                 </div>
             </li>
             <li fd-list-item>
                 <fd-avatar [colorAccent]="7" glyph="product" size="s"></fd-avatar>
                 <div fd-list-content>
-                    <div fd-list-title>SAP High Contrast Black (Quartz)</div>
+                    <div fd-list-title>High Contrast Black (Quartz)</div>
                 </div>
             </li>
         </ul>
@@ -191,6 +249,11 @@
 
 <ng-template #languageTemplate>
     <div fd-settings-content>
+        <fd-message-strip type="information" [dismissible]="false"
+            >Close to apply your chosen language - the page will reload.</fd-message-strip
+        >
+        <span fd-settings-spacing size="small"></span>
+
         <div fd-form-item>
             <label fd-form-label for="language">Display Language: </label>
             <fd-combobox
@@ -204,6 +267,8 @@
             >
             </fd-combobox>
         </div>
+
+        <span fd-settings-spacing size="form"></span>
 
         <div fd-form-item>
             <label fd-form-label for="region">Region: </label>
@@ -219,6 +284,8 @@
             </fd-combobox>
         </div>
 
+        <span fd-settings-spacing size="form"></span>
+
         <div fd-form-item>
             <label fd-form-label for="dateFormat">Date Format: </label>
             <fd-combobox
@@ -232,6 +299,8 @@
             >
             </fd-combobox>
         </div>
+
+        <span fd-settings-spacing size="form"></span>
 
         <div fd-form-item>
             <label fd-form-label for="timeFormat">Time Format: </label>
@@ -247,6 +316,8 @@
             </fd-combobox>
         </div>
 
+        <span fd-settings-spacing size="form"></span>
+
         <div fd-form-item>
             <label fd-form-label for="timeZone">Time zone: </label>
             <fd-combobox
@@ -261,6 +332,8 @@
             </fd-combobox>
         </div>
 
+        <span fd-settings-spacing size="form"></span>
+
         <div fd-form-item>
             <label fd-form-label for="currency">Currency: </label>
             <fd-combobox
@@ -274,6 +347,8 @@
             >
             </fd-combobox>
         </div>
+
+        <span fd-settings-spacing size="form"></span>
 
         <div fd-form-item>
             <label fd-form-label for="numberFormat">Number Format: </label>
@@ -302,11 +377,146 @@
 
 <ng-template #notificationsTemplate>
     <div fd-settings-content>
-        <fd-checkbox
-            label="Show High-Priority Notification Alerts"
-            [(ngModel)]="checkboxValue"
-            inputId="defaultCheckbox"
-        ></fd-checkbox>
+        <fd-message-strip type="information" [dismissible]="false">
+            Some settings are managed by your organization and cannot be changed.</fd-message-strip
+        >
+        <span fd-settings-spacing></span>
+
+        <ul fd-list byline notification>
+            <li fd-list-item>
+                <div fd-list-content>
+                    <div fd-list-title>Allow Notifications</div>
+                </div>
+                <fd-switch [(ngModel)]="allowNotificationsValue"></fd-switch>
+            </li>
+            <li fd-list-item>
+                <div fd-list-content>
+                    <div fd-list-title>Allow Banner Alerts</div>
+                    <div fd-list-byline>Switch on Banner for Notifications</div>
+                </div>
+                <fd-switch [(ngModel)]="allowBannerAlertsValue"></fd-switch>
+            </li>
+        </ul>
+
+        <span fd-settings-spacing></span>
+
+        <ul fd-list byline notification>
+            <li fd-list-group-header>
+                <span fd-list-title>Notification Group Title</span>
+            </li>
+
+            <li fd-list-item>
+                <div fd-list-content>
+                    <div fd-list-title>Email Notifications</div>
+                </div>
+                <fd-switch [(ngModel)]="allowEmailNotificationsValue"></fd-switch>
+                <button
+                    fd-button
+                    fdType="transparent"
+                    glyph="navigation-right-arrow"
+                    (click)="
+                        navigateToNotificationDetail(notificationDetail1, 'Email Notifications');
+                        $event.stopPropagation()
+                    "
+                    title="Click to navigate"
+                ></button>
+            </li>
+
+            <li fd-list-item>
+                <div fd-list-content>
+                    <div fd-list-title>Push Notifications</div>
+                </div>
+                <fd-switch [(ngModel)]="allowPushNotificationsValue"></fd-switch>
+                <button
+                    fd-button
+                    fdType="transparent"
+                    glyph="navigation-right-arrow"
+                    (click)="
+                        navigateToNotificationDetail(notificationDetail2, 'Push Notifications');
+                        $event.stopPropagation()
+                    "
+                    title="Click to navigate"
+                ></button>
+            </li>
+
+            <li fd-list-item>
+                <div fd-list-content>
+                    <div fd-list-title>SMS Notifications</div>
+                </div>
+                <fd-switch [(ngModel)]="allowSMSNotificationsValue"></fd-switch>
+                <button
+                    fd-button
+                    fdType="transparent"
+                    glyph="navigation-right-arrow"
+                    (click)="
+                        navigateToNotificationDetail(notificationDetail3, 'SMS Notifications'); $event.stopPropagation()
+                    "
+                    title="Click to navigate"
+                ></button>
+            </li>
+        </ul>
+    </div>
+</ng-template>
+
+<ng-template #notificationDetail1>
+    <div fd-settings-content>
+        <p>This is from Email Notifications detail view.</p>
+        <span fd-settings-spacing></span>
+        <ul fd-list byline notification>
+            <li fd-list-item>
+                <div fd-list-content>
+                    <div fd-list-title>Daily Digest</div>
+                    <div fd-list-byline>Receive a daily summary of all notifications</div>
+                </div>
+                <fd-switch [(ngModel)]="allowDailyValue"></fd-switch>
+            </li>
+            <li fd-list-item>
+                <div fd-list-content>
+                    <div fd-list-title>Immediate Alerts</div>
+                    <div fd-list-byline>Receive emails immediately for urgent notifications</div>
+                </div>
+                <fd-switch [(ngModel)]="allowImmediateValue"></fd-switch>
+            </li>
+        </ul>
+    </div>
+</ng-template>
+
+<ng-template #notificationDetail2>
+    <div fd-settings-content>
+        <p>This is from Push Notifications detail view.</p>
+        <span fd-settings-spacing></span>
+        <ul fd-list byline notification>
+            <li fd-list-item>
+                <div fd-list-content>
+                    <div fd-list-title>Sound</div>
+                    <div fd-list-byline>Play a sound when a notification arrives</div>
+                </div>
+                <fd-switch [(ngModel)]="allowSoundValue"></fd-switch>
+            </li>
+            <li fd-list-item>
+                <div fd-list-content>
+                    <div fd-list-title>Vibration</div>
+                    <div fd-list-byline>Vibrate when a notification arrives</div>
+                </div>
+                <fd-switch [(ngModel)]="allowVibrationValue"></fd-switch>
+            </li>
+        </ul>
+    </div>
+</ng-template>
+
+<ng-template #notificationDetail3>
+    <div fd-settings-content>
+        <p>This is from SMS Notifications detail view.</p>
+        <span fd-settings-spacing></span>
+        <ul fd-list byline notification>
+            <li fd-list-item>
+                <div fd-list-content>
+                    <div fd-list-title>Critical Alerts Only</div>
+                    <div fd-list-byline>Only receive SMS for critical system alerts</div>
+                </div>
+                <fd-switch [(ngModel)]="allowCriticalAlertsValue"></fd-switch>
+            </li>
+        </ul>
     </div>
 </ng-template>
 

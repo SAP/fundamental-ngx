@@ -1,6 +1,7 @@
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, TemplateRef, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, TemplateRef, signal, viewChild } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { ButtonBarComponent, CheckboxComponent, FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { BarComponent, BarElementDirective, BarLeftDirective } from '@fundamental-ngx/core/bar';
@@ -14,6 +15,7 @@ import {
     DialogTemplateDirective
 } from '@fundamental-ngx/core/dialog';
 import {
+    ListBylineDirective,
     ListComponent,
     ListContentDirective,
     ListGroupHeaderDirective,
@@ -22,6 +24,7 @@ import {
     ListLinkDirective,
     ListTitleDirective
 } from '@fundamental-ngx/core/list';
+import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import {
     SettingsContainerComponent,
@@ -31,13 +34,13 @@ import {
     SettingsListContainerDirective,
     SettingsProfileCardDirective,
     SettingsProfileCardNameDirective,
-    SettingsProfileCardSublineDirective
+    SettingsProfileCardSublineDirective,
+    SettingsSpacingDirective
 } from '@fundamental-ngx/core/settings';
+import { SwitchComponent } from '@fundamental-ngx/core/switch';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { ToolbarComponent } from '@fundamental-ngx/core/toolbar';
 import { IconTabBarComponent, IconTabBarTabComponent } from '@fundamental-ngx/platform/icon-tab-bar';
-
-import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'fd-template-based-settings-dialog-example',
@@ -69,6 +72,7 @@ import { FormsModule } from '@angular/forms';
         ListLinkDirective,
         ListTitleDirective,
         ListTitleDirective,
+        ListBylineDirective,
         ListGroupHeaderDirective,
         ListContentDirective,
         SettingsContentContainerDirective,
@@ -76,15 +80,21 @@ import { FormsModule } from '@angular/forms';
         SettingsListContainerDirective,
         SettingsContentDirective,
         SettingsContainerComponent,
+        SettingsSpacingDirective,
         SettingsProfileCardDirective,
         SettingsProfileCardNameDirective,
         SettingsProfileCardSublineDirective,
         ScrollbarDirective,
         TitleComponent,
-        ToolbarComponent
+        ToolbarComponent,
+        MessageStripComponent,
+        SwitchComponent
     ]
 })
 export class TemplateBasedSettingsDialogExampleComponent {
+    /** Reference to the settings container for drill-down navigation */
+    readonly settingsContainer = viewChild.required<SettingsContainerComponent>('settingsContainer');
+
     languages = ['English (United States)', 'English (Canada)', 'French', 'German', 'Spanish', 'Bulgarian'];
 
     regions = ['United States', 'Canada', 'France', 'Germany', 'Spain', 'Bulgaria'];
@@ -114,9 +124,27 @@ export class TemplateBasedSettingsDialogExampleComponent {
     selectedCurrency = this.currencies[0];
     selectednumberFormat = this.numberFormats[0];
 
+    /**
+     * Simple boolean properties for switch states bound with [(ngModel)].
+     * Note: For production code, consider using a form model or signal-based state management
+     * for better reactivity and testability.
+     */
     checkboxValue = true;
+    allowNotificationsValue = true;
+    allowBannerAlertsValue = true;
+    allowEmailNotificationsValue = true;
+    allowPushNotificationsValue = true;
+    allowSMSNotificationsValue = true;
+    allowDailyValue = true;
+    allowImmediateValue = true;
+    allowSoundValue = true;
+    allowVibrationValue = true;
+    allowCriticalAlertsValue = true;
 
     confirmationReason = signal<string>('');
+
+    /** Track if the reset settings view is active to show Save/Cancel buttons */
+    saveMode = signal<boolean>(false);
 
     constructor(private _dialogService: DialogService) {}
 
@@ -136,5 +164,20 @@ export class TemplateBasedSettingsDialogExampleComponent {
 
     onZoomGlyphClick(): void {
         alert('Edit Avatar');
+    }
+
+    /** Navigate to a notification detail view */
+    navigateToNotificationDetail(template: TemplateRef<any>, title: string): void {
+        this.settingsContainer().pushView(template, title);
+    }
+
+    /** Handle when reset settings is selected */
+    onResetSettingsSelected(): void {
+        this.saveMode.set(true);
+    }
+
+    /** Handle when any other settings item is selected */
+    onOtherSettingsSelected(): void {
+        this.saveMode.set(false);
     }
 }
