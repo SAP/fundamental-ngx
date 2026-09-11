@@ -1,3 +1,13 @@
+## 0.65.0-rc.8 (2026-09-11)
+
+### 🚀 Features
+
+- **btp:** add Indication tags, sticky area and sticky item to BTP Vertical Navigation ([#14511](https://github.com/SAP/fundamental-ngx/pull/14511))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.65.0-rc.7 (2026-09-11)
 
 This was a version bump only for btp to align it with other projects, there were no code changes.
