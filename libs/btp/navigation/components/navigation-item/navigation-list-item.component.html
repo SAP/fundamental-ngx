@@ -1,6 +1,17 @@
 <!-- General renderer. -->
 <ng-template #renderer>
-    @if (!separator) {
+    @if (search() && !navigation.isSnapped$()) {
+        <div
+            class="fd-navigation__item"
+            [attr.id]="id()"
+            [attr.aria-level]="ariaLevelAttr$()"
+            [attr.normalized-level]="normalizedLevel$()"
+            (focusin)="_focusInHandler()"
+        >
+            <ng-content></ng-content>
+        </div>
+    }
+    @if (!separator && !search()) {
         <div
             class="fd-navigation__item"
             [class.fd-navigation__item--group]="isGroup$()"
@@ -141,7 +152,6 @@
             [listItems]="listItems$() || []"
             [childItems]="true"
             [role]="isOverflow$() ? 'menu' : 'group'"
-            (keydown)="(false)"
             (focusBefore)="_focusBeforeList()"
             [withKeyboardNavigation]="keyboardNavigation"
             [moreButtonRef]="_moreButtonRef$()"

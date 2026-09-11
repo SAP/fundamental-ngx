@@ -204,6 +204,16 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
     /** ID for the navigation list item. Default one is assigned if not provided. */
     id = input(`fdb-nav-list-item-${++navListItemUniqueId}`);
 
+    /**
+     * Whether the item is a sticky item.
+     */
+    readonly sticky = input(false, { transform: booleanAttribute });
+
+    /**
+     * Whether the item contains a search field.
+     */
+    readonly search = input(false, { transform: booleanAttribute });
+
     /** Type of the list item. Whether its a standard item or a "show more" button container. */
     readonly type: 'item' | 'showMore' = 'item';
 
@@ -219,6 +229,12 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
      */
     readonly isVisible$ = computed(() => {
         if (this.isOverflow$()) {
+            return false;
+        }
+
+        // Search list-items are not rendered in snapped mode, so they must not
+        // participate in keyboard navigation indexing.
+        if (this.search() && this.navigation.isSnapped$()) {
             return false;
         }
 
@@ -394,7 +410,8 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
             this._class$(),
             this._separator$() ? `${LIST_ITEM_CLASS}--separator` : '',
             this._spacer$() ? `${LIST_ITEM_CLASS}--spacer` : '',
-            this._home$() ? `${LIST_ITEM_CLASS}--home` : ''
+            this._home$() ? `${LIST_ITEM_CLASS}--home` : '',
+            this.sticky() ? `${LIST_ITEM_CLASS}--sticky` : ''
         ]
             .filter((k) => !!k)
             .join(' ')

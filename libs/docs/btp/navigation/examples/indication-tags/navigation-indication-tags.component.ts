@@ -4,16 +4,24 @@ import { RouterLink } from '@angular/router';
 import { FDB_NAVIGATION, FdbNavigationState } from '@fundamental-ngx/btp/navigation';
 import { FdbViewMode } from '@fundamental-ngx/btp/shared';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button';
 
 @Component({
-    selector: 'fdb-navigation-basic-example',
-    templateUrl: './navigation-basic-example.component.html',
-    imports: [RouterLink, FormsModule, ButtonComponent, SegmentedButtonComponent, FDB_NAVIGATION],
+    selector: 'fdb-navigation-indication-tags',
+    templateUrl: './navigation-indication-tags.component.html',
+    imports: [
+        RouterLink,
+        FormsModule,
+        ButtonComponent,
+        SegmentedButtonComponent,
+        ObjectStatusComponent,
+        FDB_NAVIGATION
+    ],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class NavigationBasicExampleComponent {
+export class NavigationIndicationTagsExampleComponent {
     state: FdbNavigationState = 'expanded';
     mode: FdbViewMode = '';
 

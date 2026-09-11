@@ -129,4 +129,26 @@ describe('NavigationListItemComponent', () => {
 
         expect(restoreFocusSpy).not.toHaveBeenCalled();
     }));
+
+    it('should add sticky modifier class when sticky input is true', () => {
+        fixture.componentRef.setInput('sticky', true);
+        fixture.detectChanges();
+
+        expect(component.class$()).toContain('fd-navigation__list-item--sticky');
+    });
+
+    it('should not add sticky modifier class when sticky input is false', () => {
+        fixture.componentRef.setInput('sticky', false);
+        fixture.detectChanges();
+
+        expect(component.class$()).not.toContain('fd-navigation__list-item--sticky');
+    });
+
+    it('should not be visible when configured as search item in snapped mode', () => {
+        fixture.componentRef.setInput('search', true);
+        navComponent.isSnapped$.set(true);
+        fixture.detectChanges();
+
+        expect(component.isVisible$()).toBe(false);
+    });
 });
