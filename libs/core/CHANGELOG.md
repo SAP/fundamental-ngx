@@ -1,3 +1,13 @@
+## 0.65.0-rc.7 (2026-09-11)
+
+### 🚀 Features
+
+- **core:** update product switch design and documentation examples ([#14528](https://github.com/SAP/fundamental-ngx/pull/14528))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
 ## 0.65.0-rc.6 (2026-09-10)
 
 ### 🩹 Fixes
