@@ -9,6 +9,7 @@
             [class.fd-navigation__item--overflow]="isOverflow$()"
             [class.fd-navigation__item--with-expander]="!!link$()?.routerLink && hasChildren$()"
             [class.fd-navigation__item--disabled]="disabled$()"
+            [class.is-selected]="isActiveAttr$()"
             [attr.id]="id()"
             [attr.role]="roleAttr$()"
             [attr.aria-level]="ariaLevelAttr$()"
