@@ -1,3 +1,13 @@
+## 0.65.0-rc.9 (2026-09-11)
+
+### 🚀 Features
+
+- **core:** Settings Dialog latest design updates and drill-down navigation ([#14526](https://github.com/SAP/fundamental-ngx/pull/14526))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.65.0-rc.8 (2026-09-11)
 
 This was a version bump only for core to align it with other projects, there were no code changes.

@@ -1,3 +1,7 @@
+## 0.65.0-rc.9 (2026-09-11)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
 ## 0.65.0-rc.8 (2026-09-11)
 
 This was a version bump only for cx to align it with other projects, there were no code changes.
