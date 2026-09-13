@@ -785,6 +785,10 @@ export class ComboboxComponent<T = any>
     /** Method that handles complete event from auto complete directive, setting the new value, and closing popover */
     handleAutoComplete(event: AutoCompleteEvent): void {
         if (this.inputText !== event.term) {
+            const matchingValues = this._getOptionObjectByDisplayedValue(event.term);
+            if (matchingValues.length === 1) {
+                this._lastConfirmedValue = matchingValues[0];
+            }
             this.inputText = event.term;
             this.handleSearchTermChange();
         }
@@ -821,6 +825,27 @@ export class ComboboxComponent<T = any>
 
     /** @hidden */
     _close(): void {
+        const completedValue =
+            this.tabOutStrategy === 'closeAndSelect' ? this._getCompletedAutocompleteValue() : undefined;
+
+        if (completedValue !== undefined) {
+            if (completedValue !== this._lastConfirmedValue) {
+                this._commitCompletedAutocompleteValue(completedValue);
+            }
+            if (this.open) {
+                this.isOpenChangeHandle(false);
+            }
+            this.searchInputElement.nativeElement.focus();
+            return;
+        }
+
+        if (this.tabOutStrategy === 'closeAndSelect' && !this.communicateByObject) {
+            this.searchInputElement.nativeElement.value = this.inputText;
+            this.isOpenChangeHandle(false);
+            this.searchInputElement.nativeElement.focus();
+            return;
+        }
+
         const revertText = this._lastConfirmedValue != null ? this.displayFn(this._lastConfirmedValue) : '';
         this.inputText = revertText;
         this.searchInputElement.nativeElement.value = revertText;
@@ -853,6 +878,31 @@ export class ComboboxComponent<T = any>
     private _isInputDirtyVsModel(): boolean {
         const expected = this._lastConfirmedValue != null ? this.displayFn(this._lastConfirmedValue) : '';
         return this.inputText !== expected;
+    }
+
+    /** @hidden */
+    private _getCompletedAutocompleteValue(): any | undefined {
+        const nativeInput = this.searchInputElement.nativeElement;
+        const nativeValue = nativeInput.value;
+        const hasSelectedSuffix =
+            nativeValue !== this.inputText &&
+            nativeInput.selectionStart === this.inputText.length &&
+            nativeInput.selectionEnd === nativeValue.length;
+
+        if (nativeValue !== this.inputText && !hasSelectedSuffix) {
+            return;
+        }
+
+        const matchingValues = this._getOptionObjectByDisplayedValue(nativeValue);
+        return matchingValues.length === 1 ? matchingValues[0] : undefined;
+    }
+
+    /** @hidden */
+    private _commitCompletedAutocompleteValue(value: any): void {
+        this._lastConfirmedValue = value;
+        this.setValue(value);
+        this.inputText = this.displayFn(value);
+        this.searchInputElement.nativeElement.value = this.inputText;
     }
 
     /** Method that picks other value moved from current one by offset, called only when combobox is closed */

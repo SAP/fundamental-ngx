@@ -377,7 +377,7 @@ export abstract class BaseCombobox
     }
 
     /** @hidden */
-    isOpenChangeHandle(isOpen: boolean): void {
+    isOpenChangeHandle(isOpen: boolean, focusInput = true): void {
         if (this.isOpen === isOpen) {
             return;
         }
@@ -387,7 +387,7 @@ export abstract class BaseCombobox
         this.openChange.next(isOpen);
         this._onOpenChange(this.isOpen);
 
-        if (!this.isOpen && !this.mobile) {
+        if (!this.isOpen && !this.mobile && focusInput) {
             this.searchInputElement.nativeElement.focus({ preventScroll: true });
         }
 
@@ -433,7 +433,6 @@ export abstract class BaseCombobox
         if (this.mobile) {
             return;
         }
-
         this.isOpenChangeHandle(!this.isOpen);
 
         if (this.isOpen) {

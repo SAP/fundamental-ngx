@@ -255,4 +255,53 @@ describe('ComboboxComponent default values', () => {
 
         expect(combobox.value).toBe(secondSuggestion.value);
     }));
+
+    it('commits a completed native autocomplete candidate once on Tab', fakeAsync(() => {
+        const selectionSpy = jest.fn();
+        combobox.selectionChange.subscribe(selectionSpy);
+        combobox.onPrimaryButtonClick();
+        fixture.detectChanges();
+        flush();
+
+        combobox.inputText = 'Ban';
+        const nativeInput = combobox.searchInputElement.nativeElement;
+        nativeInput.value = 'Banana';
+        nativeInput.setSelectionRange(3, 6);
+
+        combobox._close();
+
+        expect(combobox.inputText).toBe('Banana');
+        expect(combobox.value).toEqual(component.dataSource[1]);
+        expect(selectionSpy).toHaveBeenCalledTimes(1);
+        expect(selectionSpy.mock.calls[0][0].payload).toEqual(component.dataSource[1]);
+    }));
+
+    it('preserves custom text on blur when no option matches', () => {
+        combobox.inputText = 'Custom';
+        combobox.searchInputElement.nativeElement.value = 'Custom';
+
+        combobox._onBlur(new FocusEvent('blur'));
+
+        expect(combobox.inputText).toBe('Custom');
+        expect(combobox.value).toBe('Custom');
+    });
+
+    it('restores the previous selection without emitting when tabOutStrategy is close', fakeAsync(() => {
+        const selectionSpy = jest.fn();
+        combobox.selectionChange.subscribe(selectionSpy);
+        combobox.selectOptionItem(combobox._suggestions[0]);
+        selectionSpy.mockClear();
+        combobox.tabOutStrategy = 'close';
+        combobox.inputText = 'Custom';
+        combobox.searchInputElement.nativeElement.value = 'Custom';
+        combobox.isOpenChangeHandle(true);
+        fixture.detectChanges();
+        flush();
+
+        combobox._close();
+
+        expect(combobox.inputText).toBe('Apple');
+        expect(combobox.value).toEqual(component.dataSource[0]);
+        expect(selectionSpy).not.toHaveBeenCalled();
+    }));
 });
