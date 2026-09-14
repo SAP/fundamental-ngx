@@ -97,6 +97,12 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
     /** @hidden */
     _itemMousedown = false;
 
+    private _autocompleteCandidate?: string;
+
+    private _leaveResolved = false;
+
+    private _resolvingLeave = false;
+
     /** @hidden */
     constructor(
         @Optional() _dialogConfig: DialogConfig,
@@ -132,6 +138,9 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
         if (this.mobile) {
             return;
         }
+        if (!this.closeOnOutsideClick && this._hasVisibleSuggestions()) {
+            return;
+        }
 
         const target = event.relatedTarget as HTMLElement;
         if (target) {
@@ -142,13 +151,53 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
             }
         }
 
-        if ((!this._selectedElement && !this.inputText) || this._selectedElement?.label === this.inputText) {
-            return;
+        this._resolveLeave(this.closeOnOutsideClick, false);
+    }
+
+    /** @hidden */
+    _beginLeaveCycle(): void {
+        if (!this._resolvingLeave) {
+            this._resetLeaveCycle();
         }
+        this.onTouched();
+    }
 
-        const optionItem = this._getSelectedOptionItem(this.inputText);
+    /** @hidden */
+    override searchTermChanged(text: string): void {
+        this._autocompleteCandidate = undefined;
+        this._leaveResolved = false;
+        super.searchTermChanged(text);
+    }
 
-        this._updateModel(optionItem ? optionItem.value : this.inputText);
+    /** @hidden */
+    override isOpenChangeHandle(isOpen: boolean, focusInput = true): void {
+        if (isOpen && !this.isOpen) {
+            this._resetLeaveCycle();
+        }
+        super.isOpenChangeHandle(isOpen, focusInput);
+    }
+
+    /** @hidden */
+    _captureAutocompleteCandidate(): void {
+        const nativeInput = this.searchInputElement.nativeElement;
+        const nativeValue = nativeInput.value;
+        const inputTextLength = this.inputText.length;
+
+        const candidate =
+            nativeValue !== this.inputText &&
+            nativeInput.selectionStart === inputTextLength &&
+            nativeInput.selectionEnd === nativeValue.length
+                ? nativeValue
+                : undefined;
+
+        if (candidate) {
+            this._autocompleteCandidate = candidate;
+        }
+    }
+
+    /** @hidden */
+    override _close(): void {
+        this._resolveLeave();
     }
 
     /** @hidden Method to emit change event */
@@ -159,7 +208,7 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
     }
 
     /** @hidden Method to set selected item */
-    selectOptionItem(item: OptionItem, shouldClosePopover = true): void {
+    selectOptionItem(item: OptionItem, shouldClosePopover = true, focusInput = true): void {
         if (this.mobile) {
             this._selectedElement = item;
             this.inputText = item.label;
@@ -171,7 +220,7 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
         this.inputText = item.label;
         this._checkAndUpdate(item);
         if (shouldClosePopover) {
-            this.isOpenChangeHandle(false);
+            this.isOpenChangeHandle(false, focusInput);
         }
     }
 
@@ -266,6 +315,84 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
         this.value = value;
 
         this.emitChangeEvent(value ? value : null);
+    }
+
+    /** @hidden */
+    private _resolveLeave(closePopover = true, focusInput = true): void {
+        if (this._leaveResolved) {
+            return;
+        }
+
+        this._leaveResolved = true;
+        this._resolvingLeave = true;
+        try {
+            const optionItem = this.tabOutStrategy === 'closeAndSelect' ? this._getAutocompleteCandidate() : undefined;
+
+            if (optionItem) {
+                this.selectOptionItem(optionItem, closePopover, focusInput);
+                return;
+            }
+
+            if (
+                this._hasAmbiguousOptionLabel(this.searchInputElement.nativeElement.value) ||
+                this._hasAmbiguousOptionLabel(this._autocompleteCandidate ?? '')
+            ) {
+                if (closePopover) {
+                    this.isOpenChangeHandle(false, focusInput);
+                }
+                this.markForCheck();
+                return;
+            }
+
+            if (this.tabOutStrategy === 'close') {
+                const selectedLabel = this._selectedElement?.label ?? '';
+                this.inputText = selectedLabel;
+                this.searchInputElement.nativeElement.value = selectedLabel;
+            } else if (this._selectedElement?.label !== this.inputText && this.value !== this.inputText) {
+                this._updateModel(this.inputText);
+            }
+
+            this.searchInputElement.nativeElement.value = this.inputText;
+            if (closePopover) {
+                this.isOpenChangeHandle(false, focusInput);
+            }
+            this.markForCheck();
+        } finally {
+            this._resolvingLeave = false;
+        }
+    }
+
+    /** @hidden */
+    private _resetLeaveCycle(): void {
+        this._autocompleteCandidate = undefined;
+        this._leaveResolved = false;
+    }
+
+    /** @hidden */
+    private _getAutocompleteCandidate(): OptionItem | undefined {
+        const nativeValue = this.searchInputElement.nativeElement.value;
+        return (
+            this._getUniqueSelectItemByInputValue(nativeValue) ??
+            (this._autocompleteCandidate
+                ? this._getUniqueSelectItemByInputValue(this._autocompleteCandidate)
+                : undefined)
+        );
+    }
+
+    /** @hidden */
+    private _getUniqueSelectItemByInputValue(displayValue: string): OptionItem | undefined {
+        const matchingItems = this._flatSuggestions.filter((item) => item.label === displayValue);
+        return matchingItems.length === 1 ? matchingItems[0] : undefined;
+    }
+
+    /** @hidden */
+    private _hasAmbiguousOptionLabel(displayValue: string): boolean {
+        return this._flatSuggestions.filter((item) => item.label === displayValue).length > 1;
+    }
+
+    /** @hidden */
+    private _hasVisibleSuggestions(): boolean {
+        return this.isOpen && this._suggestions.length > 0;
     }
 
     /** @hidden */

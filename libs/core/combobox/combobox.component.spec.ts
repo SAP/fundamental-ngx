@@ -770,8 +770,10 @@ describe('ComboboxComponent', () => {
             fixture.detectChanges();
 
             // Select Kiwi — _value = kiwiItem, inputText = 'Kiwi'
+            const itemClickedSpy = jest.spyOn(component.itemClicked, 'emit');
             component.onMenuClickHandler(kiwiItem);
             expect(component.getValue()).toBe(kiwiItem);
+            itemClickedSpy.mockClear();
 
             // Re-open and type invalid text
             component.isOpenChangeHandle(true);
@@ -785,9 +787,10 @@ describe('ComboboxComponent', () => {
             // Expected (Tab-out parity with 'close' strategy): inputText reverts to 'Kiwi'
             expect(component.inputText).toBe('Kiwi');
             expect(component.getValue()).toBe(kiwiItem);
+            expect(itemClickedSpy).not.toHaveBeenCalled();
         });
 
-        it('1.3 display-value mode: click-outside and Tab out are already equivalent (regression guard)', () => {
+        it('1.3 display-value mode: document mousedown preserves nonmatching custom text', () => {
             // No communicateByObject — _value is always the typed text
             component.dropdownValues = ['Kiwi', 'Banana'];
             component.displayFn = (item: any): string => item ?? '';
@@ -802,12 +805,92 @@ describe('ComboboxComponent', () => {
             setInputText(component, fixture, 'Kiwi123');
             expect(component.getValue()).toBe('Kiwi123');
 
-            // Simulate click-outside — in display-value mode _value is truthy so _close() keeps inputText
-            component.isOpenChangeHandle(false);
+            // The production outside-click subscription closes before blur.
+            document.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
+            fixture.detectChanges();
 
-            // Both Tab and click-outside should leave inputText as 'Kiwi123' in display-value mode
+            // Display-value mode permits free text, so pointer leave must not restore Kiwi.
             expect(component.inputText).toBe('Kiwi123');
             expect(component.getValue()).toBe('Kiwi123');
+        });
+
+        it('1.3a close strategy: Tab restores the previous selection without emitting a new selection', () => {
+            component.communicateByObject = true;
+            component.tabOutStrategy = 'close';
+            fixture.detectChanges();
+
+            const itemClickedSpy = jest.spyOn(component.itemClicked, 'emit');
+            component.onMenuClickHandler(kiwiItem);
+            itemClickedSpy.mockClear();
+            component.isOpenChangeHandle(true);
+            setInputText(component, fixture, 'Custom');
+
+            component.onInputKeydownHandler(new KeyboardEvent('keydown', { key: 'Tab' }));
+
+            expect(component.inputText).toBe('Kiwi');
+            expect(component.getValue()).toBe(kiwiItem);
+            expect(itemClickedSpy).not.toHaveBeenCalled();
+        });
+
+        it('1.3b display-value mode: Tab commits the unique completed native autocomplete candidate', () => {
+            component.communicateByObject = false;
+            fixture.detectChanges();
+
+            setInputText(component, fixture, 'K');
+            const nativeInput: HTMLInputElement = fixture.nativeElement.querySelector('input');
+            nativeInput.value = 'Kiwi';
+            nativeInput.setSelectionRange(1, 4);
+            component.isOpenChangeHandle(true);
+
+            component._close();
+
+            expect(component.inputText).toBe('Kiwi');
+            expect(component.getValue()).toBe('Kiwi');
+        });
+
+        it('1.3ba object mode: a completed candidate emits valueProperty exactly once', () => {
+            const onChange = jest.fn();
+            component.communicateByObject = true;
+            fixture.componentRef.setInput('valueProperty', 'value');
+            fixture.detectChanges();
+            component.registerOnChange(onChange);
+
+            setInputText(component, fixture, 'K');
+            onChange.mockClear();
+            const nativeInput: HTMLInputElement = fixture.nativeElement.querySelector('input');
+            nativeInput.value = 'Kiwi';
+            nativeInput.setSelectionRange(1, 4);
+            component.isOpenChangeHandle(true);
+
+            component._close();
+
+            expect(component.inputText).toBe('Kiwi');
+            expect(component.getValue()).toBe('KiwiValue');
+            expect(onChange).toHaveBeenCalledTimes(1);
+            expect(onChange).toHaveBeenCalledWith('KiwiValue');
+        });
+
+        it('1.3c object mode: a duplicate display label does not select an arbitrary object on Tab', () => {
+            const firstApple: FruitItem = { displayedValue: 'Apple', value: 'AppleValue' };
+            const secondApple: FruitItem = { displayedValue: 'Apple', value: 'AppleValue2' };
+            component.communicateByObject = true;
+            component.dropdownValues = [kiwiItem, firstApple, secondApple];
+            fixture.detectChanges();
+
+            const itemClickedSpy = jest.spyOn(component.itemClicked, 'emit');
+            component.onMenuClickHandler(kiwiItem);
+            itemClickedSpy.mockClear();
+            setInputText(component, fixture, 'A');
+            const nativeInput: HTMLInputElement = fixture.nativeElement.querySelector('input');
+            nativeInput.value = 'Apple';
+            nativeInput.setSelectionRange(1, 5);
+            component.isOpenChangeHandle(true);
+
+            component._close();
+
+            expect(component.inputText).toBe('Kiwi');
+            expect(component.getValue()).toBe(kiwiItem);
+            expect(itemClickedSpy).not.toHaveBeenCalled();
         });
 
         it('1.4 should not revert input value when user re-focuses a populated combobox to edit it', () => {
