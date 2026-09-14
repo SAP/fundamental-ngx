@@ -1,3 +1,7 @@
+## 0.65.0-rc.10 (2026-09-14)
+
+This was a version bump only for cdk to align it with other projects, there were no code changes.
+
 ## 0.65.0-rc.9 (2026-09-11)
 
 This was a version bump only for cdk to align it with other projects, there were no code changes.

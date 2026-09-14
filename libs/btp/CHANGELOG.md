@@ -1,3 +1,13 @@
+## 0.65.0-rc.10 (2026-09-14)
+
+### 🩹 Fixes
+
+- **btp:** emit aria-selected only for treeitem role in navigation ([#14535](https://github.com/SAP/fundamental-ngx/pull/14535))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.65.0-rc.9 (2026-09-11)
 
 This was a version bump only for btp to align it with other projects, there were no code changes.
