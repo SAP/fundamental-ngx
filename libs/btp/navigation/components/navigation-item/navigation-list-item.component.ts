@@ -288,8 +288,15 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
         return undefined;
     });
 
-    /** aria-selected attribute value - kept in both expanded and snapped modes. */
-    readonly ariaSelectedAttr$ = computed(() => this.isActiveAttr$());
+    /** aria-selected attribute value - only valid for treeitem role per WAI-ARIA 1.2. */
+    readonly ariaSelectedAttr$ = computed(() => {
+        // aria-selected is only valid on: gridcell, option, row, tab, treeitem, columnheader, rowheader
+        // For navigation items, only emit when role is treeitem
+        if (this.roleAttr$() === 'treeitem') {
+            return this.isActiveAttr$();
+        }
+        return undefined;
+    });
 
     /** aria-level attribute value - only for treeitem role. */
     readonly ariaLevelAttr$ = computed(() => {
