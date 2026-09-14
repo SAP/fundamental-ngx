@@ -155,9 +155,7 @@
             [class.fd-table__text]="column.applyText"
             [class.fd-table__text--no-wrap]="column.noWrap"
             [class.fd-table__cell--truncate-txt]="column.applyText"
-            [attr.title]="
-                tableTextContainer.offsetWidth < tableTextContainer.scrollWidth ? tableTextContainer.textContent : null
-            "
+            [fdpTableCellOverflow]="column.noWrap"
             #tableTextContainer
         >
             @if (_isTreeRowFirstCell($index, row)) {
