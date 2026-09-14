@@ -1,3 +1,13 @@
+## 0.65.0-rc.11 (2026-09-14)
+
+### 🩹 Fixes
+
+- **core,platform:** correct combobox leave behavior and popover sync ([#14536](https://github.com/SAP/fundamental-ngx/pull/14536))
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.65.0-rc.10 (2026-09-14)
 
 This was a version bump only for platform to align it with other projects, there were no code changes.
