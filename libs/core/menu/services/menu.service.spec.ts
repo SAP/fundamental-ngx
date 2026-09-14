@@ -225,6 +225,28 @@ describe('MenuService', () => {
             expect(setFocusedSpy).toHaveBeenCalledWith(menuItems.first);
         });
 
+        it('should focus first enabled menu item on Home', () => {
+            const menuItemsArray = menuItems.toArray();
+            const setFocusedSpy = jest.spyOn(menuService, 'setFocused').mockImplementation(() => undefined);
+
+            menuService.focusedNode = menuService.menuMap.get(menuItemsArray[2]);
+
+            menuService['_handleKeydown'](new KeyboardEvent('keydown', { key: 'Home' }));
+
+            expect(setFocusedSpy).toHaveBeenCalledWith(menuItems.first);
+        });
+
+        it('should focus last enabled menu item on End', () => {
+            const menuItemsArray = menuItems.toArray();
+            const setFocusedSpy = jest.spyOn(menuService, 'setFocused').mockImplementation(() => undefined);
+
+            menuService.focusedNode = menuService.menuMap.get(menuItems.first);
+
+            menuService['_handleKeydown'](new KeyboardEvent('keydown', { key: 'End' }));
+
+            expect(setFocusedSpy).toHaveBeenCalledWith(menuItemsArray[2]);
+        });
+
         it('should not trigger click on Space/Enter', () => {
             const clickSpy = jest.spyOn(menuItems.first, 'click');
 
@@ -266,6 +288,30 @@ describe('MenuService', () => {
 
             menuService.focusedNode = menuService.menuMap.get(menuItemsArray[0]);
             menuService['_handleKeydown'](new KeyboardEvent('keydown', { key: 'ArrowDown' }));
+
+            expect(setFocusedSpy).toHaveBeenCalledWith(menuItemsArray[2]);
+        });
+
+        it('should skip disabled items and focus first enabled on Home', () => {
+            fixture.componentRef.setInput('disabled', true);
+            fixture.detectChanges();
+            const menuItemsArray = menuItems.toArray();
+            const setFocusedSpy = jest.spyOn(menuService, 'setFocused').mockImplementation(() => undefined);
+
+            menuService.focusedNode = menuService.menuMap.get(menuItemsArray[2]);
+            menuService['_handleKeydown'](new KeyboardEvent('keydown', { key: 'Home' }));
+
+            expect(setFocusedSpy).toHaveBeenCalledWith(menuItemsArray[0]);
+        });
+
+        it('should skip disabled items and focus last enabled on End', () => {
+            fixture.componentRef.setInput('disabled', true);
+            fixture.detectChanges();
+            const menuItemsArray = menuItems.toArray();
+            const setFocusedSpy = jest.spyOn(menuService, 'setFocused').mockImplementation(() => undefined);
+
+            menuService.focusedNode = menuService.menuMap.get(menuItemsArray[0]);
+            menuService['_handleKeydown'](new KeyboardEvent('keydown', { key: 'End' }));
 
             expect(setFocusedSpy).toHaveBeenCalledWith(menuItemsArray[2]);
         });
