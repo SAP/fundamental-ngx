@@ -31,47 +31,61 @@ describe('TableCellOverflowDirective', () => {
         expect(divElement).toBeTruthy();
     });
 
-    it('should not set title attribute when text does not overflow', () => {
+    it('should not set title attribute when text does not overflow on mouseenter', () => {
         component.text = 'Short';
         component.width = 200;
         fixture.detectChanges();
 
-        // Wait for ResizeObserver callback
-        setTimeout(() => {
-            expect(divElement.hasAttribute('title')).toBe(false);
-        }, 100);
+        divElement.dispatchEvent(new MouseEvent('mouseenter'));
+        fixture.detectChanges();
+
+        expect(divElement.hasAttribute('title')).toBe(false);
     });
 
-    it('should set title attribute when text overflows', (done) => {
+    it('should set title attribute when text overflows on mouseenter', () => {
         component.text = 'This is a very long text that will definitely overflow the container width';
         component.width = 100;
         fixture.detectChanges();
 
-        // Wait for ResizeObserver callback
-        setTimeout(() => {
-            const hasTitle = divElement.hasAttribute('title');
-            if (hasTitle) {
-                expect(divElement.getAttribute('title')).toBe(component.text);
-            }
-            done();
-        }, 100);
+        divElement.dispatchEvent(new MouseEvent('mouseenter'));
+        fixture.detectChanges();
+
+        const hasTitle = divElement.hasAttribute('title');
+        if (hasTitle) {
+            expect(divElement.getAttribute('title')).toBe(component.text);
+        }
     });
 
-    it('should remove title attribute when text no longer overflows', (done) => {
+    it('should set title attribute when text overflows on focusin', () => {
+        component.text = 'This is a very long text that will definitely overflow the container width';
+        component.width = 100;
+        fixture.detectChanges();
+
+        divElement.dispatchEvent(new FocusEvent('focusin'));
+        fixture.detectChanges();
+
+        const hasTitle = divElement.hasAttribute('title');
+        if (hasTitle) {
+            expect(divElement.getAttribute('title')).toBe(component.text);
+        }
+    });
+
+    it('should remove title attribute when text no longer overflows', () => {
         // First make it overflow
         component.text = 'This is a very long text that will definitely overflow';
         component.width = 50;
         fixture.detectChanges();
 
-        setTimeout(() => {
-            // Then make it not overflow
-            component.width = 500;
-            fixture.detectChanges();
+        divElement.dispatchEvent(new MouseEvent('mouseenter'));
+        fixture.detectChanges();
 
-            setTimeout(() => {
-                expect(divElement.hasAttribute('title')).toBe(false);
-                done();
-            }, 100);
-        }, 100);
+        // Then make it not overflow
+        component.width = 500;
+        fixture.detectChanges();
+
+        divElement.dispatchEvent(new MouseEvent('mouseenter'));
+        fixture.detectChanges();
+
+        expect(divElement.hasAttribute('title')).toBe(false);
     });
 });
