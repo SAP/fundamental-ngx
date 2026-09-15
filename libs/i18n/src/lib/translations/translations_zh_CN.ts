@@ -434,6 +434,11 @@ export default {
             requiredTrue: '该字段为必填'
         }
     },
+    platformMessageView: {
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        title: 'Messages'
+    },
     platformMultiCombobox: {
         inputGlyphAriaLabel: '选择选项',
         inputIconTitle: '选择选项',

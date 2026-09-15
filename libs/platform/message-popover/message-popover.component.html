@@ -20,10 +20,10 @@
             <div fd-popover-body-header>
                 <div fd-bar barDesign="header" class="fd-bar--growing">
                     <div fd-bar-left>
-                        @if (currentScreen === 'list') {
+                        @if (currentScreen() === 'list') {
                             <fd-segmented-button
-                                [ngModel]="_currentErrorType$()"
-                                (ngModelChange)="_currentErrorType$.set($event)"
+                                [ngModel]="_currentErrorType()"
+                                (ngModelChange)="_currentErrorType.set($event)"
                             >
                                 <button
                                     fd-button
@@ -42,14 +42,14 @@
                                 }
                             </fd-segmented-button>
                         }
-                        @if (currentScreen === 'details') {
+                        @if (currentScreen() === 'details') {
                             <button
                                 fd-button
                                 fdkInitialFocus
                                 fdType="transparent"
                                 glyph="navigation-left-arrow"
                                 [title]="('platformMessagePopover.backButton' | fdTranslate)()"
-                                (click)="_showList()"
+                                (click)="showList()"
                             ></button>
                         }
                     </div>
@@ -58,14 +58,14 @@
                     </div>
                 </div>
             </div>
-            <fdp-message-view
-                [currentScreen]="currentScreen"
+            <fdp-messages-list
+                [currentScreen]="currentScreen()"
                 [filteredErrors]="_filteredErrors$()"
-                [currentEntry]="currentEntry"
-                (openDetails)="_showDetails($event)"
+                [currentEntry]="currentEntry()"
+                (openDetails)="showDetails($event)"
                 (closePopover)="_closePopover($event)"
                 (focusItem)="focusItem.emit($event)"
-            ></fdp-message-view>
+            ></fdp-messages-list>
         </div>
     </fd-popover>
 }

@@ -438,6 +438,11 @@ export default {
             requiredTrue: 'Это поле является обязательным'
         }
     },
+    platformMessageView: {
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        title: 'Messages'
+    },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Опции выбора',
         inputIconTitle: 'Опции выбора',

@@ -1,0 +1,9 @@
+{
+    "name": "docs-platform-message-view",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "library",
+    "sourceRoot": "libs/docs/platform/message-view",
+    "prefix": "fd",
+    "tags": ["type:lib", "scope:docs"],
+    "targets": {}
+}

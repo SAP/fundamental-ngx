@@ -437,6 +437,11 @@ export default {
             requiredTrue: 'ველის შეყვანა სავალდებულოა'
         }
     },
+    platformMessageView: {
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        title: 'Messages'
+    },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'აირჩიეთ ოფციები',
         inputIconTitle: 'აირჩიეთ ოფციები',

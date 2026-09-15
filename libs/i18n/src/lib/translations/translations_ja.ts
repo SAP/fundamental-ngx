@@ -438,6 +438,11 @@ export default {
             requiredTrue: 'このフィールドは必須です。'
         }
     },
+    platformMessageView: {
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        title: 'Messages'
+    },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'オプションを選択',
         inputIconTitle: 'オプションを選択',
