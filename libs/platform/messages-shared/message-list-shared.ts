@@ -20,17 +20,17 @@ export abstract class MessageListShared implements MessagePopover {
     focusItem = new EventEmitter<MessagePopoverEntry>();
 
     /** Current message popover screen. Can be `list` or `details`. */
-    currentScreen: 'list' | 'details' = 'list';
+    readonly currentScreen = signal<'list' | 'details'>('list');
 
     /** Current error entry. */
-    currentEntry: Nullable<MessagePopoverEntry>;
+    readonly currentEntry = signal<Nullable<MessagePopoverEntry>>(null);
 
     /** @hidden */
-    _currentErrorType$: WritableSignal<MessagePopoverError['group']> = signal('all');
+    _currentErrorType: WritableSignal<MessagePopoverError['group']> = signal('all');
 
     /** @hidden */
     _errorTypes$ = computed<MessagePopoverError[]>(() => {
-        const countedErrors = this._countedErrors$();
+        const countedErrors = this.countedErrors$();
         const errorTypes = Object.keys(countedErrors) as FormStates[];
         return errorTypes.map((errorType) => ({
             group: errorType,
@@ -40,11 +40,11 @@ export abstract class MessageListShared implements MessagePopover {
     });
 
     /** @hidden */
-    _priorityStateItemsCount$ = computed(() => this._countedErrors$()[this._priorityFormState$()!] || 0);
+    _priorityStateItemsCount$ = computed(() => this.countedErrors$()[this._priorityFormState$()!] || 0);
 
     /** @hidden */
     _priorityFormState$ = computed<FormStates>(() => {
-        const countedErrors = this._countedErrors$();
+        const countedErrors = this.countedErrors$();
         const errorTypes = Object.keys(countedErrors) as FormStates[];
         return getFormState(errorTypes);
     });
@@ -56,8 +56,8 @@ export abstract class MessageListShared implements MessagePopover {
 
     /** @hidden */
     readonly _filteredErrors$ = computed(() => {
-        const groupedErrors = this._groupedErrors$();
-        const errorType = this._currentErrorType$();
+        const groupedErrors = this.groupedErrors$();
+        const errorType = this._currentErrorType();
 
         if (errorType === 'all') {
             return groupedErrors;
@@ -81,26 +81,26 @@ export abstract class MessageListShared implements MessagePopover {
     });
 
     /** @hidden */
-    protected readonly _groupedErrors$ = computed(() => this._wrapper$()?.errors$() || []);
+    protected readonly groupedErrors$ = computed(() => this.wrapper$()?.errors$() || []);
 
     /** @hidden */
-    protected readonly _wrapper$ = signal<Nullable<MessagePopoverWrapper>>(null);
+    protected readonly wrapper$ = signal<Nullable<MessagePopoverWrapper>>(null);
 
     /** @hidden */
-    protected readonly _countedErrors$ = computed(() => {
-        const allErrors = this._groupedErrors$().flatMap((group) => group.errors);
+    protected readonly countedErrors$ = computed(() => {
+        const allErrors = this.groupedErrors$().flatMap((group) => group.errors);
         return countBy(allErrors, 'type');
     });
 
     /** @hidden */
-    _showList(): void {
-        this.currentScreen = 'list';
-        this.currentEntry = null;
+    showList(): void {
+        this.currentScreen.set('list');
+        this.currentEntry.set(null);
     }
 
     /** @hidden */
-    _showDetails(entry: MessagePopoverEntry): void {
-        this.currentScreen = 'details';
-        this.currentEntry = entry;
+    showDetails(entry: MessagePopoverEntry): void {
+        this.currentScreen.set('details');
+        this.currentEntry.set(entry);
     }
 }

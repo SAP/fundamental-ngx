@@ -87,7 +87,7 @@ describe('MessagesListComponent', () => {
             const spy = jest.fn();
             component.openDetails.subscribe(spy);
 
-            component._showDetails(entry);
+            component.showDetails(entry);
 
             expect(spy).toHaveBeenCalledWith(entry);
             expect(component.currentScreen).toBe('details');
@@ -109,7 +109,7 @@ describe('MessagesListComponent', () => {
             const focusSpy = jest.fn();
             component.focusItem.subscribe(focusSpy);
 
-            component._showDetails(entry);
+            component.showDetails(entry);
 
             expect(focusSpy).toHaveBeenCalledWith(entry);
             expect(component.currentScreen).toBe('list');
@@ -238,7 +238,7 @@ describe('MessagesListComponent', () => {
                 errors: null
             };
 
-            component._showDetails(entry);
+            component.showDetails(entry);
 
             expect(component['_activeListElement']).toBe(mockActiveElement);
         });

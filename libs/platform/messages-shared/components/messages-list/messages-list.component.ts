@@ -84,19 +84,19 @@ export class MessagesListComponent implements AfterViewInit {
 
     /** @hidden */
     @ViewChild('listView', { read: ElementRef })
-    protected _listView: ElementRef;
+    protected listView: ElementRef;
 
     /** @hidden */
     @ViewChild('detailsView', { read: ElementRef })
-    protected _detailsView: ElementRef;
+    protected detailsView: ElementRef;
 
     /** @hidden */
     @ViewChild('listSection', { read: ElementRef })
-    protected _listSection: ElementRef;
+    protected listSection: ElementRef;
 
     /** @hidden */
     @ViewChild('detailsSection', { read: ElementRef })
-    protected _detailsSection: ElementRef;
+    protected detailsSection: ElementRef;
 
     /** @hidden */
     private _currentScreen: 'list' | 'details' = 'list';
@@ -126,16 +126,16 @@ export class MessagesListComponent implements AfterViewInit {
 
     /** @hidden */
     ngAfterViewInit(): void {
-        resizeObservable(this._detailsView.nativeElement)
+        resizeObservable(this.detailsView.nativeElement)
             .pipe(debounceTime(20), takeUntilDestroyed(this._destroyRef))
             .subscribe(() => {
-                const { height } = this._detailsView.nativeElement.getBoundingClientRect();
-                this._listSection.nativeElement.style.minHeight = `${height}px`;
+                const { height } = this.detailsView.nativeElement.getBoundingClientRect();
+                this.listSection.nativeElement.style.minHeight = `${height}px`;
             });
     }
 
     /** @hidden */
-    _showDetails(entry: MessagePopoverEntry): void {
+    showDetails(entry: MessagePopoverEntry): void {
         this._activeListElement = this._document.activeElement as HTMLElement;
         if (!entry.description.message) {
             this._focusElement(undefined, entry);
@@ -161,8 +161,8 @@ export class MessagesListComponent implements AfterViewInit {
 
     /** @hidden Animate the transition between list and details screens. */
     private _animateScreenTransition(screen: 'list' | 'details'): void {
-        const listEl = this._listSection?.nativeElement;
-        const detailsEl = this._detailsSection?.nativeElement;
+        const listEl = this.listSection?.nativeElement;
+        const detailsEl = this.detailsSection?.nativeElement;
 
         if (!listEl || !detailsEl) {
             return;

@@ -20,7 +20,7 @@ describe('MessageViewComponent', () => {
     });
 
     it('should show list screen by default', () => {
-        expect(component.currentScreen).toBe('list');
+        expect(component.currentScreen()).toBe('list');
     });
 
     it('should switch to details screen', () => {
@@ -34,16 +34,16 @@ describe('MessageViewComponent', () => {
             errors: null
         };
 
-        component._showDetails(entry);
-        expect(component.currentScreen).toBe('details');
-        expect(component.currentEntry).toBe(entry);
+        component.showDetails(entry);
+        expect(component.currentScreen()).toBe('details');
+        expect(component.currentEntry()).toBe(entry);
     });
 
     it('should switch back to list screen', () => {
-        component.currentScreen = 'details';
-        component._showList();
-        expect(component.currentScreen).toBe('list');
-        expect(component.currentEntry).toBeNull();
+        component.currentScreen.set('details');
+        component.showList();
+        expect(component.currentScreen()).toBe('list');
+        expect(component.currentEntry()).toBeNull();
     });
 
     it('should accept messages input', () => {
@@ -67,7 +67,7 @@ describe('MessageViewComponent', () => {
         fixture.detectChanges();
 
         expect(component.messages()).toEqual(messages);
-        expect(component._groupedErrors$()).toEqual(messages);
+        expect(component.groupedErrors$()).toEqual(messages);
     });
 
     it('should display error count when messages are provided', () => {
@@ -149,7 +149,7 @@ describe('MessageViewComponent', () => {
         fixture.detectChanges();
 
         // Filter by error type
-        component._currentErrorType$.set('error');
+        component._currentErrorType.set('error');
         const filteredErrors = component._filteredErrors$();
 
         expect(filteredErrors.length).toBe(1);
@@ -186,7 +186,7 @@ describe('MessageViewComponent', () => {
         fixture.componentRef.setInput('messages', messages);
         fixture.detectChanges();
 
-        component._currentErrorType$.set('all');
+        component._currentErrorType.set('all');
         const filteredErrors = component._filteredErrors$();
 
         expect(filteredErrors).toEqual(messages);

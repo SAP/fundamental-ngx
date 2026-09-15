@@ -42,10 +42,10 @@ export class MessagePopoverComponent extends MessageListShared {
     @Input()
     set wrapper(value: Nullable<MessagePopoverWrapper>) {
         value?.setMessagePopover(this);
-        this._wrapper$.set(value);
+        this.wrapper$.set(value);
     }
     get wrapper(): Nullable<MessagePopoverWrapper> {
-        return this._wrapper$();
+        return this.wrapper$();
     }
 
     /** @hidden */

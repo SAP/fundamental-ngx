@@ -122,7 +122,7 @@ describe('MessagePopoverComponent', () => {
     it('should filter errors', async () => {
         await fixture.whenStable();
 
-        component._currentErrorType$.set('error');
+        component._currentErrorType.set('error');
 
         fixture.detectChanges();
 

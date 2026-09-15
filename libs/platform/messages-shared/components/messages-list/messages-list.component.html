@@ -66,7 +66,7 @@
                     </li>
                 }
                 @for (item of group.errors; track item; let i = $index) {
-                    <li fd-list-item [tabindex]="i === 0 ? 0 : -1" [byline]="true" (fdkClicked)="_showDetails(item)">
+                    <li fd-list-item [tabindex]="i === 0 ? 0 : -1" [byline]="true" (fdkClicked)="showDetails(item)">
                         <ng-template #itemIcon>
                             <span
                                 fd-object-status

@@ -3,9 +3,9 @@ import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
-    ViewChild,
     ViewEncapsulation,
-    signal
+    signal,
+    viewChild
 } from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import { MessagePopoverErrorGroup, MessageViewComponent } from '@fundamental-ngx/platform/message-view';
@@ -18,11 +18,9 @@ import { MessagePopoverErrorGroup, MessageViewComponent } from '@fundamental-ngx
     imports: [MessageViewComponent, ButtonComponent]
 })
 export class MessageViewDefaultExampleComponent implements AfterViewInit {
-    @ViewChild(MessageViewComponent)
-    messageView: MessageViewComponent;
+    readonly messageView = viewChild.required(MessageViewComponent);
 
-    @ViewChild('profileButton', { read: ElementRef })
-    profileButton: ElementRef;
+    readonly profileButton = viewChild<ElementRef>('profileButton');
 
     readonly messages = signal<MessagePopoverErrorGroup[]>([]);
 
@@ -104,7 +102,7 @@ export class MessageViewDefaultExampleComponent implements AfterViewInit {
                         name: 'profile',
                         fieldName: 'Profile',
                         errors: null,
-                        element: this.profileButton,
+                        element: this.profileButton(),
                         link: {
                             text: 'Profile',
                             href: '#/platform/message-view'
@@ -136,6 +134,6 @@ export class MessageViewDefaultExampleComponent implements AfterViewInit {
     }
 
     showMessageView(): void {
-        this.messageView?.open();
+        this.messageView()?.open();
     }
 }

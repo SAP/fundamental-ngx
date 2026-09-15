@@ -18,8 +18,7 @@ import { MessageViewDialogComponent } from './components/message-view-dialog.com
     template: ``,
     styleUrl: './message-view.component.scss',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MessageViewComponent extends MessageListShared {
     /**
@@ -43,20 +42,20 @@ export class MessageViewComponent extends MessageListShared {
     readonly mobile = input<boolean, BooleanInput>(false, { transform: booleanAttribute });
 
     /** @hidden */
-    protected readonly _dialogService = inject(DialogService);
+    protected readonly dialogService = inject(DialogService);
 
     /** @hidden */
-    protected readonly _injector = inject(Injector);
+    protected readonly injector = inject(Injector);
 
     /** @hidden */
-    protected _dialogRef: Nullable<DialogRef>;
+    protected dialogRef: Nullable<DialogRef>;
 
     /** @hidden */
-    protected override readonly _groupedErrors$ = this.messages;
+    protected override readonly groupedErrors$ = this.messages;
 
     /** Opens the dialog. */
     open(): void {
-        this._dialogRef = this._dialogService.open(
+        this.dialogRef = this.dialogService.open(
             MessageViewDialogComponent,
             {
                 focusTrapped: true,
@@ -66,12 +65,12 @@ export class MessageViewComponent extends MessageListShared {
                 height: 'auto',
                 mobile: this.mobile()
             },
-            this._injector
+            this.injector
         );
     }
 
     /** Closes the dialog. */
     close(): void {
-        this._dialogRef?.close();
+        this.dialogRef?.close();
     }
 }

@@ -2,21 +2,21 @@
     <fd-dialog-body>
         <div fd-bar barDesign="header" class="fd-bar--growing">
             <div fd-bar-left>
-                @if (messageView.currentScreen === 'list') {
+                @if (messageView.currentScreen() === 'list') {
                     <div fd-bar-element>
                         <h1 class="fd-title fd-title--h5">
                             {{ messageView.title() || ('platformMessageView.title' | fdTranslate)() }}
                         </h1>
                     </div>
                 }
-                @if (messageView.currentScreen === 'details') {
+                @if (messageView.currentScreen() === 'details') {
                     <button
                         fd-button
                         fdkInitialFocus
                         fdType="transparent"
                         glyph="navigation-left-arrow"
                         [title]="('platformMessagePopover.backButton' | fdTranslate)()"
-                        (click)="messageView._showList()"
+                        (click)="messageView.showList()"
                     ></button>
                     <div fd-bar-element>
                         <h1 class="fd-title fd-title--h5">
@@ -26,12 +26,12 @@
                 }
             </div>
         </div>
-        @if (messageView.currentScreen === 'list') {
+        @if (messageView.currentScreen() === 'list') {
             <div fd-bar barDesign="subheader">
                 <div fd-bar-left>
                     <fd-segmented-button
-                        [ngModel]="messageView._currentErrorType$()"
-                        (ngModelChange)="messageView._currentErrorType$.set($event)"
+                        [ngModel]="messageView._currentErrorType()"
+                        (ngModelChange)="messageView._currentErrorType.set($event)"
                     >
                         <button
                             fd-button
@@ -49,10 +49,10 @@
             </div>
         }
         <fdp-messages-list
-            [currentScreen]="messageView.currentScreen"
+            [currentScreen]="messageView.currentScreen()"
             [filteredErrors]="messageView._filteredErrors$()"
-            [currentEntry]="messageView.currentEntry"
-            (openDetails)="messageView._showDetails($event)"
+            [currentEntry]="messageView.currentEntry()"
+            (openDetails)="messageView.showDetails($event)"
             (closePopover)="dialogRef.close()"
             (focusItem)="messageView.focusItem.emit($event)"
         ></fdp-messages-list>
