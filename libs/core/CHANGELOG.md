@@ -1,3 +1,13 @@
+## 0.65.0-rc.12 (2026-09-16)
+
+### 🩹 Fixes
+
+- **core:** add Home/End keyboard support for menu navigation ([#14537](https://github.com/SAP/fundamental-ngx/pull/14537))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.65.0-rc.11 (2026-09-14)
 
 ### 🩹 Fixes
