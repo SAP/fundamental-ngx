@@ -52,7 +52,11 @@
                             [ngTemplateOutletContext]="{ hiddenItems: hiddenItems }"
                         />
                     } @else {
-                        <fd-avatar-group-overflow-button [size]="size" [colorAccent]="1">
+                        <fd-avatar-group-overflow-button
+                            [size]="size"
+                            [colorAccent]="1"
+                            [circle]="overflowButtonShape() === 'circle'"
+                        >
                             +{{ hiddenItems.length }}
                         </fd-avatar-group-overflow-button>
                     }
@@ -121,7 +125,12 @@
             [ngTemplateOutletContext]="{ hiddenItems: hiddenItems }"
         />
     } @else {
-        <fd-avatar-group-overflow-button [size]="size" [colorAccent]="1" [fdkFocusableItem]="false">
+        <fd-avatar-group-overflow-button
+            [size]="size"
+            [colorAccent]="1"
+            [fdkFocusableItem]="false"
+            [circle]="overflowButtonShape() === 'circle'"
+        >
             +{{ hiddenItems.length }}
         </fd-avatar-group-overflow-button>
     }

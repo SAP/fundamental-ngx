@@ -4,6 +4,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { AvatarGroupComponent } from './avatar-group.component';
+import { AvatarGroupHostComponent } from './components/avatar-group-host.component';
+import { AvatarGroupItemRendererDirective } from './directives/avatar-group-item-renderer.directive';
 import { AvatarGroupItemDirective } from './directives/avatar-group-item.directive';
 
 @Component({
@@ -68,6 +70,20 @@ class AvatarGroupGroupTypeWithLabelTestComponent {
 })
 class AvatarGroupIndividualWithLabelTestComponent {
     readonly label = input<string | undefined>(undefined);
+}
+
+@Component({
+    template: `
+        <fd-avatar-group [type]="type()" size="s" [overflowButtonShape]="shape()">
+            <fd-avatar *fdAvatarGroupItem="''; title: 'Person 1'" [circle]="true" size="s" label="P1"></fd-avatar>
+            <fd-avatar *fdAvatarGroupItem="''; title: 'Person 2'" [circle]="true" size="s" label="P2"></fd-avatar>
+        </fd-avatar-group>
+    `,
+    imports: [AvatarGroupComponent, AvatarGroupItemDirective, AvatarComponent]
+})
+class AvatarGroupOverflowButtonShapeTestComponent {
+    readonly shape = input<'circle' | 'square'>('square');
+    readonly type = input<'individual' | 'group'>('individual');
 }
 
 describe('AvatarGroupComponent', () => {
@@ -204,6 +220,81 @@ describe('AvatarGroupComponent with group type', () => {
         expect(popoverControls.length).toBeGreaterThan(0);
         popoverControls.forEach((control: HTMLElement) => {
             expect(control.classList).toContain('fd-avatar-group__popover-control');
+        });
+    });
+});
+
+describe('AvatarGroupComponent overflowButtonShape', () => {
+    let fixture: ComponentFixture<AvatarGroupOverflowButtonShapeTestComponent>;
+
+    function getHostInstance(): AvatarGroupHostComponent {
+        return fixture.debugElement.query(By.directive(AvatarGroupHostComponent)).componentInstance;
+    }
+
+    function forceOverflow(): void {
+        getHostInstance()._hiddenItems.set([{} as AvatarGroupItemRendererDirective]);
+        fixture.detectChanges();
+    }
+
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            imports: [AvatarGroupOverflowButtonShapeTestComponent]
+        }).compileComponents();
+
+        fixture = TestBed.createComponent(AvatarGroupOverflowButtonShapeTestComponent);
+        fixture.detectChanges();
+    });
+
+    describe('individual type', () => {
+        it('overflow button is square by default', () => {
+            forceOverflow();
+            const btn: HTMLElement = fixture.nativeElement.querySelector('fd-avatar-group-overflow-button');
+            expect(btn).toBeTruthy();
+            expect(btn.classList).not.toContain('fd-avatar--circle');
+        });
+
+        it('overflow button is circular when overflowButtonShape is "circle"', () => {
+            fixture.componentRef.setInput('shape', 'circle');
+            forceOverflow();
+            const btn: HTMLElement = fixture.nativeElement.querySelector('fd-avatar-group-overflow-button');
+            expect(btn).toBeTruthy();
+            expect(btn.classList).toContain('fd-avatar--circle');
+        });
+
+        it('overflow button shape updates reactively when overflowButtonShape changes', () => {
+            fixture.componentRef.setInput('shape', 'circle');
+            forceOverflow();
+            expect(fixture.nativeElement.querySelector('fd-avatar-group-overflow-button').classList).toContain(
+                'fd-avatar--circle'
+            );
+
+            fixture.componentRef.setInput('shape', 'square');
+            fixture.detectChanges();
+            expect(fixture.nativeElement.querySelector('fd-avatar-group-overflow-button').classList).not.toContain(
+                'fd-avatar--circle'
+            );
+        });
+    });
+
+    describe('group type', () => {
+        beforeEach(() => {
+            fixture.componentRef.setInput('type', 'group');
+            fixture.detectChanges();
+        });
+
+        it('overflow button is square by default', () => {
+            forceOverflow();
+            const btn: HTMLElement = fixture.nativeElement.querySelector('fd-avatar-group-overflow-button');
+            expect(btn).toBeTruthy();
+            expect(btn.classList).not.toContain('fd-avatar--circle');
+        });
+
+        it('overflow button is circular when overflowButtonShape is "circle"', () => {
+            fixture.componentRef.setInput('shape', 'circle');
+            forceOverflow();
+            const btn: HTMLElement = fixture.nativeElement.querySelector('fd-avatar-group-overflow-button');
+            expect(btn).toBeTruthy();
+            expect(btn.classList).toContain('fd-avatar--circle');
         });
     });
 });

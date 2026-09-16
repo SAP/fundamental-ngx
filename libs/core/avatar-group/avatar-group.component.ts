@@ -137,6 +137,14 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
      */
     readonly popoverPlacement = input<Placement>('bottom');
 
+    /**
+     * Shape of the default overflow button.
+     * Use `'circle'` when the avatar group displays circle avatars, so the overflow button matches their shape.
+     * Has no effect when a custom overflow button is provided via `fdAvatarGroupOverflowButton`.
+     * @default 'square'
+     */
+    readonly overflowButtonShape = input<'circle' | 'square'>('square');
+
     /** @hidden */
     readonly _avatarGroupHost = viewChild(AvatarGroupHostComponent);
 

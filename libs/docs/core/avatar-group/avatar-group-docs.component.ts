@@ -11,6 +11,7 @@ import {
 } from '@fundamental-ngx/docs/shared';
 import { AvatarGroupDefaultExampleComponent } from './examples/default/avatar-group-default-example.component';
 import { GroupTypeExampleComponent } from './examples/group-type/group-type-example.component';
+import { AvatarGroupOverflowButtonCircleExampleComponent } from './examples/overflow-button-circle/avatar-group-overflow-button-circle-example.component';
 import { AvatarGroupPopoverPlacementExampleComponent } from './examples/popover-placement/avatar-group-popover-placement-example.component';
 import { AvatarGroupVerticalExampleComponent } from './examples/vertical/avatar-group-vertical-example.component';
 
@@ -36,7 +37,8 @@ const service = () => ({
         AvatarGroupDefaultExampleComponent,
         AvatarGroupVerticalExampleComponent,
         GroupTypeExampleComponent,
-        AvatarGroupPopoverPlacementExampleComponent
+        AvatarGroupPopoverPlacementExampleComponent,
+        AvatarGroupOverflowButtonCircleExampleComponent
     ]
 })
 export class AvatarGroupDocsComponent {
@@ -73,6 +75,15 @@ export class AvatarGroupDocsComponent {
             component: 'AvatarGroupPopoverPlacementExampleComponent',
             fileName: 'avatar-group-popover-placement-example',
             path: 'popover-placement'
+        }),
+        service()
+    ];
+    avatarGroupOverflowButtonCircleExample: ExampleFile[] = [
+        getExampleFile('overflow-button-circle/avatar-group-overflow-button-circle-example.component.html'),
+        getExampleFile('overflow-button-circle/avatar-group-overflow-button-circle-example.component.ts', {
+            component: 'AvatarGroupOverflowButtonCircleExampleComponent',
+            fileName: 'avatar-group-overflow-button-circle-example',
+            path: 'overflow-button-circle'
         }),
         service()
     ];
