@@ -26,18 +26,20 @@ export const HIDDEN_CLASS_NAME = 'fd-table--hidden';
         }
     ],
     host: {
-        role: 'row',
         class: 'fd-table__row',
         '[class.fd-table__row--activable]': 'activable()',
         '[class.fd-table__row--hoverable]': 'hoverable()',
         '[class.fd-table__row--main]': 'main()',
         '[class.fd-table__row--secondary]': 'secondary()',
         '[class.fd-table__row--focusable]': 'focusable',
-        '[class.is-selected]': 'active()'
-    },
-    standalone: true
+        '[class.is-selected]': 'active()',
+        '[attr.role]': 'role()'
+    }
 })
 export class TableRowDirective extends FocusableListDirective implements AfterViewInit, OnInit {
+    /** ARIA role for the table row */
+    readonly role = input('row');
+
     /** @hidden */
     readonly cells = contentChildren(TableCellDirective);
 

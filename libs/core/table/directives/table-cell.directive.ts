@@ -1,4 +1,14 @@
-import { afterNextRender, booleanAttribute, contentChildren, Directive, effect, input } from '@angular/core';
+import {
+    afterNextRender,
+    booleanAttribute,
+    computed,
+    contentChildren,
+    Directive,
+    effect,
+    inject,
+    input,
+    Renderer2
+} from '@angular/core';
 import { FDK_FOCUSABLE_ITEM_DIRECTIVE, FocusableItemDirective } from '@fundamental-ngx/cdk/utils';
 import { FD_CHECKBOX_COMPONENT } from '@fundamental-ngx/core/checkbox';
 
@@ -21,14 +31,14 @@ import { FD_CHECKBOX_COMPONENT } from '@fundamental-ngx/core/checkbox';
         '[class.fd-table__cell--no-data]': 'noData()',
         '[class.fd-table__cell--non-interactive]': 'nonInteractive()',
         '[class.fd-table__cell--focusable]': 'isFocusable()',
-        '[attr.role]': 'role()',
+        '[attr.role]': 'computedRole()',
         '(focusin)': '_focusIn()',
         '(focusout)': '_focusOut()'
     }
 })
 export class TableCellDirective extends FocusableItemDirective {
-    /** ARIA role for the table cell */
-    readonly role = input('gridcell');
+    /** ARIA role for the table cell (only used if explicitly provided) */
+    readonly role = input<string>();
 
     /** Whether to show the table cell's horizontal borders */
     readonly noBorderX = input(false, { transform: booleanAttribute });
@@ -66,6 +76,47 @@ export class TableCellDirective extends FocusableItemDirective {
     /** @hidden */
     readonly _checkboxes = contentChildren(FD_CHECKBOX_COMPONENT);
 
+    /** @hidden Computed role based on element type and parent context */
+    protected readonly computedRole = computed(() => {
+        // If role is explicitly provided via input, use it
+        const explicitRole = this.role();
+
+        if (explicitRole) {
+            return explicitRole;
+        }
+
+        // Otherwise, determine role based on element and parent context
+        const element = this.elementRef.nativeElement;
+        const tagName = element.tagName.toLowerCase();
+
+        // td elements always get gridcell
+        if (tagName === 'td') {
+            return 'gridcell';
+        }
+
+        // th elements need to check their parent context
+        if (tagName === 'th') {
+            const parent = element.parentElement;
+            const grandparent = parent?.parentElement;
+
+            if (grandparent) {
+                const grandparentTag = grandparent.tagName.toLowerCase();
+
+                if (grandparentTag === 'thead') {
+                    return 'columnheader';
+                } else if (grandparentTag === 'tbody') {
+                    return 'rowheader';
+                }
+            }
+        }
+
+        // Default fallback
+        return 'gridcell';
+    });
+
+    /** @hidden */
+    private readonly _renderer = inject(Renderer2);
+
     /** @hidden */
     private _parentPreviousTabIndex: number | undefined;
 
@@ -78,6 +129,18 @@ export class TableCellDirective extends FocusableItemDirective {
         effect(() => {
             const focusableValue = this.focusable();
             this.setFocusable(focusableValue);
+        });
+
+        // Set scope="row" for th elements in tbody
+        effect(() => {
+            const role = this.computedRole();
+            const element = this.elementRef.nativeElement;
+
+            if (role === 'rowheader') {
+                this._renderer.setAttribute(element, 'scope', 'row');
+            } else {
+                this._renderer.removeAttribute(element, 'scope');
+            }
         });
 
         // Add checkbox class and colspan after content is available
