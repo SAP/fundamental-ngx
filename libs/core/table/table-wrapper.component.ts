@@ -1,5 +1,5 @@
 import {
-    afterNextRender,
+    AfterContentInit,
     ChangeDetectionStrategy,
     Component,
     effect,
@@ -27,7 +27,7 @@ import { ContentDensityObserver, contentDensityObserverProviders } from '@fundam
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [contentDensityObserverProviders()]
 })
-export class TableWrapperComponent {
+export class TableWrapperComponent implements AfterContentInit {
     /** @hidden */
     private readonly _elementRef = inject(ElementRef);
 
@@ -39,26 +39,6 @@ export class TableWrapperComponent {
 
     /** @hidden */
     constructor() {
-        // Apply CSS classes to table and its children after render
-        afterNextRender(() => {
-            if (this._elementRef.nativeElement && this._elementRef.nativeElement.firstChild) {
-                const tableElement = this._elementRef.nativeElement.firstChild;
-                tableElement.classList.add('fd-table');
-
-                if (tableElement.children) {
-                    for (let i = 0; i < tableElement.children.length; i++) {
-                        if (tableElement.children[i].tagName === 'THEAD') {
-                            tableElement.children[i].classList.add('fd-table__header');
-                        } else if (tableElement.children[i].tagName === 'TBODY') {
-                            tableElement.children[i].classList.add('fd-table__body');
-                        } else if (tableElement.children[i].tagName === 'TFOOT') {
-                            tableElement.children[i].classList.add('fd-table__footer');
-                        }
-                    }
-                }
-            }
-        });
-
         // Apply content density classes to child table element reactively
         effect(() => {
             const density = this._contentDensityObserver.contentDensity();
@@ -79,5 +59,25 @@ export class TableWrapperComponent {
                 }
             }
         });
+    }
+
+    /** @hidden */
+    ngAfterContentInit(): void {
+        if (this._elementRef.nativeElement && this._elementRef.nativeElement.firstChild) {
+            const tableElement = this._elementRef.nativeElement.firstChild;
+            tableElement.classList.add('fd-table');
+
+            if (tableElement.children) {
+                for (let i = 0; i < tableElement.children.length; i++) {
+                    if (tableElement.children[i].tagName === 'THEAD') {
+                        tableElement.children[i].classList.add('fd-table__header');
+                    } else if (tableElement.children[i].tagName === 'TBODY') {
+                        tableElement.children[i].classList.add('fd-table__body');
+                    } else if (tableElement.children[i].tagName === 'TFOOT') {
+                        tableElement.children[i].classList.add('fd-table__footer');
+                    }
+                }
+            }
+        }
     }
 }

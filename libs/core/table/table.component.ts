@@ -6,7 +6,6 @@ import {
     effect,
     inject,
     input,
-    untracked,
     ViewEncapsulation
 } from '@angular/core';
 import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
@@ -94,13 +93,11 @@ export class TableComponent {
             const cells = this._cells();
             const allFocusable = this.allCellsFocusable();
 
-            // Use untracked to prevent creating dependencies on cell.isFocusable() reads
-            untracked(() => {
-                cells.forEach((cell) => {
-                    if (!cell.isFocusable() && allFocusable) {
-                        cell.setFocusable(allFocusable);
-                    }
-                });
+            // Set focusable on all cells when allCellsFocusable is true
+            cells.forEach((cell) => {
+                if (allFocusable) {
+                    cell.setFocusable(true);
+                }
             });
         });
 
@@ -108,7 +105,7 @@ export class TableComponent {
         effect(() => {
             const keys = this.keys();
             if (keys) {
-                untracked(() => this._propagateKeys(keys));
+                this._propagateKeys(keys);
             }
         });
     }

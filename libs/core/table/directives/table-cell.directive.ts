@@ -1,14 +1,4 @@
-import {
-    afterNextRender,
-    booleanAttribute,
-    computed,
-    contentChildren,
-    Directive,
-    effect,
-    inject,
-    input,
-    Renderer2
-} from '@angular/core';
+import { AfterContentInit, booleanAttribute, computed, contentChildren, Directive, input, OnInit } from '@angular/core';
 import { FDK_FOCUSABLE_ITEM_DIRECTIVE, FocusableItemDirective } from '@fundamental-ngx/cdk/utils';
 import { FD_CHECKBOX_COMPONENT } from '@fundamental-ngx/core/checkbox';
 
@@ -32,11 +22,12 @@ import { FD_CHECKBOX_COMPONENT } from '@fundamental-ngx/core/checkbox';
         '[class.fd-table__cell--non-interactive]': 'nonInteractive()',
         '[class.fd-table__cell--focusable]': 'isFocusable()',
         '[attr.role]': 'computedRole()',
+        '[attr.scope]': 'scope()',
         '(focusin)': '_focusIn()',
         '(focusout)': '_focusOut()'
     }
 })
-export class TableCellDirective extends FocusableItemDirective {
+export class TableCellDirective extends FocusableItemDirective implements OnInit, AfterContentInit {
     /** ARIA role for the table cell (only used if explicitly provided) */
     readonly role = input<string>();
 
@@ -75,6 +66,9 @@ export class TableCellDirective extends FocusableItemDirective {
 
     /** @hidden */
     readonly _checkboxes = contentChildren(FD_CHECKBOX_COMPONENT);
+
+    /** @hidden Computed scope attribute for th elements in tbody */
+    protected readonly scope = computed(() => (this.computedRole() === 'rowheader' ? 'row' : null));
 
     /** @hidden Computed role based on element type and parent context */
     protected readonly computedRole = computed(() => {
@@ -115,46 +109,31 @@ export class TableCellDirective extends FocusableItemDirective {
     });
 
     /** @hidden */
-    private readonly _renderer = inject(Renderer2);
-
-    /** @hidden */
     private _parentPreviousTabIndex: number | undefined;
 
     /** @hidden */
     constructor() {
         super();
         this.setFocusable(false);
+    }
 
+    /** @hidden */
+    ngOnInit(): void {
         // Sync focusable input with parent's focusable state
-        effect(() => {
-            const focusableValue = this.focusable();
-            this.setFocusable(focusableValue);
-        });
+        this.setFocusable(this.focusable());
+    }
 
-        // Set scope="row" for th elements in tbody
-        effect(() => {
-            const role = this.computedRole();
-            const element = this.elementRef.nativeElement;
+    /** @hidden */
+    ngAfterContentInit(): void {
+        const cell = this.elementRef.nativeElement;
 
-            if (role === 'rowheader') {
-                this._renderer.setAttribute(element, 'scope', 'row');
-            } else {
-                this._renderer.removeAttribute(element, 'scope');
-            }
-        });
+        if (this._checkboxes().length) {
+            cell.classList.add('fd-table__cell--checkbox');
+        }
 
-        // Add checkbox class and colspan after content is available
-        afterNextRender(() => {
-            const cell = this.elementRef.nativeElement;
-
-            if (this._checkboxes().length) {
-                cell.classList.add('fd-table__cell--checkbox');
-            }
-
-            if (this.noData()) {
-                cell.setAttribute('colspan', '100%');
-            }
-        });
+        if (this.noData()) {
+            cell.setAttribute('colspan', '100%');
+        }
     }
 
     /** @hidden */

@@ -36,7 +36,7 @@ export const HIDDEN_CLASS_NAME = 'fd-table--hidden';
         '[attr.role]': 'role()'
     }
 })
-export class TableRowDirective extends FocusableListDirective implements AfterViewInit, OnInit {
+export class TableRowDirective extends FocusableListDirective implements OnInit, AfterViewInit {
     /** ARIA role for the table row */
     readonly role = input('row');
 
@@ -79,10 +79,11 @@ export class TableRowDirective extends FocusableListDirective implements AfterVi
             this._resetCells(this._tableService.propagateKeys$());
         });
 
-        // Set aria-colindex on cells when they change
+        // Set aria-colindex on cells when they change (1-based index)
+        // This effect runs in constructor (injection context) but reads cells signal which updates after content init
         effect(() => {
             this.cells().forEach((cell, index) => {
-                cell.elementRef.nativeElement.ariaColIndex = index.toString();
+                cell.elementRef.nativeElement.ariaColIndex = (index + 1).toString();
             });
         });
     }

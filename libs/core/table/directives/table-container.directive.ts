@@ -3,16 +3,15 @@ import {
     contentChild,
     DestroyRef,
     Directive,
-    effect,
     ElementRef,
     inject,
     input,
-    Renderer2,
-    untracked
+    Renderer2
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { ResizeObserverService } from '@fundamental-ngx/cdk/utils';
 import { FD_TOOLBAR } from '@fundamental-ngx/core/toolbar';
+import { EMPTY, switchMap } from 'rxjs';
 import { TableHeaderDirective } from './table-header.directive';
 
 @Directive({
@@ -39,47 +38,47 @@ export class TableContainerDirective {
 
     /** @hidden */
     constructor() {
-        // Handle toolbar changes
-        effect(() => {
-            const toolbarElRef = this.toolbar();
-            const outerScroll = this.outerScroll();
+        // Handle toolbar sticky positioning when outerScroll is enabled
+        toObservable(this.toolbar)
+            .pipe(
+                switchMap((toolbarElRef) => {
+                    const outerScroll = this.outerScroll();
+                    return outerScroll && toolbarElRef
+                        ? this.resizeObserverService.observe(toolbarElRef.nativeElement)
+                        : EMPTY;
+                }),
+                takeUntilDestroyed(this._destroyRef)
+            )
+            .subscribe(() => {
+                const toolbarElRef = this.toolbar();
+                if (toolbarElRef) {
+                    const toolbarEl = toolbarElRef.nativeElement;
+                    this._renderer.setStyle(toolbarEl, 'position', 'sticky');
+                    this._renderer.setStyle(toolbarEl, 'top', '0');
+                    this._renderer.setStyle(toolbarEl, 'z-index', '2');
 
-            if (outerScroll && toolbarElRef) {
-                const toolbarEl = toolbarElRef.nativeElement;
+                    const tableHeaderEl = this.tableHeader();
+                    if (tableHeaderEl) {
+                        const headerNativeEl = tableHeaderEl.nativeElement;
+                        this._renderer.setStyle(headerNativeEl, 'position', 'sticky');
+                        this._renderer.setStyle(headerNativeEl, 'top', `${toolbarEl.offsetHeight}px`);
+                        this._renderer.setStyle(headerNativeEl, 'z-index', '2');
+                    }
+                }
+            });
 
-                untracked(() => {
-                    this.resizeObserverService
-                        .observe(toolbarEl)
-                        .pipe(takeUntilDestroyed(this._destroyRef))
-                        .subscribe(() => {
-                            this._renderer.setStyle(toolbarEl, 'position', 'sticky');
-                            this._renderer.setStyle(toolbarEl, 'top', '0');
-                            this._renderer.setStyle(toolbarEl, 'z-index', '2');
+        // Handle table header sticky positioning when outerScroll is enabled
+        toObservable(this.tableHeader)
+            .pipe(takeUntilDestroyed(this._destroyRef))
+            .subscribe(() => {
+                const tableHeaderElRef = this.tableHeader();
+                const outerScroll = this.outerScroll();
 
-                            const tableHeaderEl = this.tableHeader();
-                            if (tableHeaderEl) {
-                                const headerNativeEl = tableHeaderEl.nativeElement;
-                                this._renderer.setStyle(headerNativeEl, 'position', 'sticky');
-                                this._renderer.setStyle(headerNativeEl, 'top', `${toolbarEl.offsetHeight}px`);
-                                this._renderer.setStyle(headerNativeEl, 'z-index', '2');
-                            }
-                        });
-                });
-            }
-        });
-
-        // Handle table header changes
-        effect(() => {
-            const tableHeaderElRef = this.tableHeader();
-            const outerScroll = this.outerScroll();
-
-            if (outerScroll && tableHeaderElRef) {
-                untracked(() => {
+                if (outerScroll && tableHeaderElRef) {
                     const headerEl = tableHeaderElRef.nativeElement;
                     this._renderer.setStyle(headerEl, 'position', 'sticky');
                     this._renderer.setStyle(headerEl, 'top', '0');
-                });
-            }
-        });
+                }
+            });
     }
 }
