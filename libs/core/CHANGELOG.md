@@ -1,3 +1,13 @@
+## 0.65.0-rc.14 (2026-09-16)
+
+### 🩹 Fixes
+
+- **core:** remove duplicate icon CSS import ([#14540](https://github.com/SAP/fundamental-ngx/pull/14540))
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.65.0-rc.13 (2026-09-16)
 
 This was a version bump only for core to align it with other projects, there were no code changes.
