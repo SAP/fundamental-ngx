@@ -74,6 +74,15 @@ Thumbs.db
 .github/instructions/nx.instructions.md
 /tools/ai-migrations/
 
+# Packed icon CSS consumer build artifacts
+/tools/icon-css-dedup-baseline/fixture/.angular/
+/tools/icon-css-dedup-baseline/fixture/.yarn/
+/tools/icon-css-dedup-baseline/fixture/.yarnrc.yml
+/tools/icon-css-dedup-baseline/fixture/node_modules/
+/tools/icon-css-dedup-baseline/fixture/package.json
+/tools/icon-css-dedup-baseline/fixture/dist/
+/tools/icon-css-dedup-baseline/results/
+
 # mcp-server generated catalog (generated on release via extract-metadata)
 libs/mcp-server/src/data/components.json
 

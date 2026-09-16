@@ -6,6 +6,10 @@ on:
         paths:
             - 'libs/**'
             - 'apps/**'
+            - 'tools/icon-css-dedup-baseline/**'
+            - 'package.json'
+            - 'yarn.lock'
+            - '.yarnrc.yml'
             - 'playwright.config.ts'
             - '.github/workflows/on-pull-request.yml'
 
@@ -246,6 +250,25 @@ jobs:
               run: npx --yes nx-cloud@latest stop-all-agents
               env:
                   NX_CLOUD_AUTH_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
+
+    icon_catalogue:
+        name: Validate packed Core icon catalogue
+        runs-on: ubuntu-latest
+        timeout-minutes: 20
+        permissions:
+            contents: read
+        steps:
+            - uses: actions/checkout@v4.2.2
+
+            - uses: ./.github/actions/nodejs
+              with:
+                  node-version: ${{ env.NODE_VERSION }}
+
+            - name: Install Playwright Chromium
+              run: npx playwright install chromium --with-deps
+
+            - name: Build packed consumer and verify icon catalogue
+              run: node --test tools/icon-css-dedup-baseline/tests/icon-catalogue.integration.test.mjs
 
     # e2e_test:
     #     runs-on: ubuntu-latest

@@ -1,0 +1,42 @@
+body {
+    background: var(--sapBackgroundColor);
+    color: var(--sapTextColor);
+    font-family: var(--sapFontFamily);
+}
+
+.icon-baseline-page {
+    box-sizing: border-box;
+    padding: var(--sapElement_Height);
+}
+
+.icon-baseline-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sapContent_IconHeight);
+}
+
+.icon-baseline-sample {
+    align-items: center;
+    background: var(--sapGroup_ContentBackground);
+    border: var(--sapElement_BorderWidth) solid var(--sapGroup_ContentBorderColor);
+    border-radius: var(--sapElement_BorderCornerRadius);
+    display: flex;
+    gap: var(--sapContent_IconHeight);
+    min-height: var(--sapElement_Height);
+    padding: var(--sapContent_IconHeight);
+}
+
+.icon-baseline-sample [class*='sap-icon'] {
+    color: var(--sapContent_IconColor);
+    font-size: var(--sapContent_IconHeight);
+}
+
+.icon-baseline-label {
+    font-size: var(--sapFontSmallSize);
+    line-height: var(--sapContent_LineHeight);
+}
+
+.icon-baseline-link {
+    display: inline-block;
+    margin-block: var(--sapContent_IconHeight);
+}
