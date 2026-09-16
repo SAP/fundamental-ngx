@@ -1,120 +1,130 @@
-import { Component, ViewChild } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { TableModule } from '../table.module';
+import { Component } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TableService } from '../table.service';
-import { HIDDEN_CLASS_NAME, TableRowDirective } from './table-row.directive';
+import { TableCellDirective } from './table-cell.directive';
+import { TableRowDirective } from './table-row.directive';
 
 @Component({
     template: `
-        <tr #directiveElement fd-table-row id="row">
-            @for (key of keys; track key) {
-                <td fd-table-cell [key]="key">{{ key }}</td>
-            }
-        </tr>
+        <table>
+            <tbody>
+                <tr fd-table-row>
+                    <td fd-table-cell>Cell</td>
+                </tr>
+            </tbody>
+        </table>
     `,
-    standalone: true,
-    imports: [TableModule]
+    imports: [TableRowDirective, TableCellDirective],
+    providers: [TableService]
 })
-class TestComponent {
-    @ViewChild(TableRowDirective)
-    tableRow: TableRowDirective;
+class TestComponent {}
 
-    keys: string[] = ['key1', 'key2', 'key3', 'key4'];
-
-    getElements(): HTMLCollection {
-        return (document.getElementById('row') as HTMLElement).children;
-    }
+@Component({
+    template: `
+        <table>
+            <tbody>
+                <tr
+                    fd-table-row
+                    [activable]="activable"
+                    [hoverable]="hoverable"
+                    [main]="main"
+                    [secondary]="secondary"
+                    [active]="active"
+                >
+                    <td fd-table-cell>Cell</td>
+                </tr>
+            </tbody>
+        </table>
+    `,
+    imports: [TableRowDirective, TableCellDirective],
+    providers: [TableService]
+})
+class ModifierTestComponent {
+    activable = false;
+    hoverable = false;
+    main = false;
+    secondary = false;
+    active = false;
 }
 
 describe('TableRowDirective', () => {
-    let component: TestComponent;
-    let fixture: ComponentFixture<TestComponent>;
+    describe('basic functionality', () => {
+        let fixture: ComponentFixture<TestComponent>;
 
-    const getElements = (): Element[] => {
-        const _elements = component.getElements();
+        beforeEach(async () => {
+            await TestBed.configureTestingModule({
+                imports: [TestComponent]
+            }).compileComponents();
 
-        const result: Element[] = [];
+            fixture = TestBed.createComponent(TestComponent);
+            fixture.detectChanges();
+        });
 
-        for (let i = 0; i < _elements.length; i++) {
-            result.push(_elements[i]);
-        }
+        it('should create', () => {
+            expect(fixture.componentInstance).toBeTruthy();
+        });
 
-        return result;
-    };
+        it('should apply base class', () => {
+            const row = fixture.nativeElement.querySelector('[fd-table-row]');
+            expect(row.classList.contains('fd-table__row')).toBe(true);
+        });
 
-    const getInnerTextFromNodes = (): string[] => getElements().map((cell) => cell.innerHTML);
-
-    const getVisibleCells = (): string[] =>
-        getElements()
-            .filter((cell) => !cell.classList.contains(HIDDEN_CLASS_NAME))
-            .map((cell) => cell.innerHTML);
-
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [TestComponent],
-            providers: [TableService]
-        }).compileComponents();
-    }));
-
-    beforeEach(async () => {
-        fixture = TestBed.createComponent(TestComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-        await fixture.whenStable();
+        it('should set role="row"', () => {
+            const row = fixture.nativeElement.querySelector('[fd-table-row]');
+            expect(row.getAttribute('role')).toBe('row');
+        });
     });
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+    describe('modifier classes', () => {
+        let modifierFixture: ComponentFixture<ModifierTestComponent>;
 
-    it('should sort elements', async () => {
-        let keys = component.keys;
+        beforeEach(async () => {
+            await TestBed.configureTestingModule({
+                imports: [ModifierTestComponent]
+            }).compileComponents();
 
-        expect(getInnerTextFromNodes()).toEqual(keys);
+            modifierFixture = TestBed.createComponent(ModifierTestComponent);
+            modifierFixture.detectChanges();
+        });
 
-        keys = [...component.keys].reverse();
+        it('should apply activable modifier class', () => {
+            const row = modifierFixture.nativeElement.querySelector('tr');
+            expect(row.classList.contains('fd-table__row--activable')).toBe(false);
+            modifierFixture.componentInstance.activable = true;
+            modifierFixture.detectChanges();
+            expect(row.classList.contains('fd-table__row--activable')).toBe(true);
+        });
 
-        (<any>component.tableRow)._resetCells(keys);
+        it('should apply hoverable modifier class', () => {
+            const row = modifierFixture.nativeElement.querySelector('tr');
+            expect(row.classList.contains('fd-table__row--hoverable')).toBe(false);
+            modifierFixture.componentInstance.hoverable = true;
+            modifierFixture.detectChanges();
+            expect(row.classList.contains('fd-table__row--hoverable')).toBe(true);
+        });
 
-        fixture.detectChanges();
-        await fixture.whenStable();
+        it('should apply main modifier class', () => {
+            const row = modifierFixture.nativeElement.querySelector('tr');
+            expect(row.classList.contains('fd-table__row--main')).toBe(false);
+            modifierFixture.componentInstance.main = true;
+            modifierFixture.detectChanges();
+            expect(row.classList.contains('fd-table__row--main')).toBe(true);
+        });
 
-        const textFromNodes = getInnerTextFromNodes();
+        it('should apply secondary modifier class', () => {
+            const row = modifierFixture.nativeElement.querySelector('tr');
+            expect(row.classList.contains('fd-table__row--secondary')).toBe(false);
+            modifierFixture.componentInstance.secondary = true;
+            modifierFixture.detectChanges();
+            expect(row.classList.contains('fd-table__row--secondary')).toBe(true);
+        });
 
-        expect(textFromNodes).toEqual(keys);
-
-        keys = [component.keys[1], component.keys[0], component.keys[3], component.keys[2]];
-
-        (<any>component.tableRow)._resetCells(keys);
-
-        fixture.detectChanges();
-
-        expect(getInnerTextFromNodes()).toEqual(keys);
-    });
-
-    it('should hide elements', () => {
-        let keys = component.keys;
-
-        expect(getInnerTextFromNodes()).toEqual(keys);
-
-        component.keys.pop();
-
-        keys = component.keys;
-
-        (<any>component.tableRow)._resetCells(keys);
-
-        fixture.detectChanges();
-
-        expect(getVisibleCells()).toEqual(keys);
-
-        component.keys.pop();
-
-        keys = component.keys;
-
-        (<any>component.tableRow)._resetCells(keys);
-
-        fixture.detectChanges();
-
-        expect(getVisibleCells()).toEqual(keys);
+        it('should apply active state class', () => {
+            const row = modifierFixture.nativeElement.querySelector('tr');
+            expect(row.classList.contains('is-selected')).toBe(false);
+            modifierFixture.componentInstance.active = true;
+            modifierFixture.detectChanges();
+            expect(row.classList.contains('is-selected')).toBe(true);
+        });
     });
 });

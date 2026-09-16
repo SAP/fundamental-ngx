@@ -1,39 +1,41 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { TableModule } from '../table.module';
+import { Component } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TableInnerDirective } from './table-inner.directive';
 
 @Component({
-    template: ` <div #tableInnerElement fd-table-inner>Content</div> `,
-    standalone: true,
-    imports: [TableModule]
+    template: `
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        <div fd-table-inner>Inner content</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    `,
+    imports: [TableInnerDirective]
 })
-class TestComponent {
-    @ViewChild('tableInnerElement')
-    ref: ElementRef;
-}
+class TestComponent {}
 
 describe('TableInnerDirective', () => {
-    let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
             imports: [TestComponent]
         }).compileComponents();
-    }));
 
-    beforeEach(async () => {
         fixture = TestBed.createComponent(TestComponent);
-        component = fixture.componentInstance;
         fixture.detectChanges();
-        await fixture.whenStable();
     });
 
     it('should create', () => {
-        expect(component).toBeTruthy();
+        expect(fixture.componentInstance).toBeTruthy();
     });
 
-    it('should assign class', () => {
-        expect(component.ref.nativeElement.className).toBe('fd-table__inner');
+    it('should apply base class', () => {
+        const inner = fixture.nativeElement.querySelector('[fd-table-inner]');
+        expect(inner.classList.contains('fd-table__inner')).toBe(true);
     });
 });
