@@ -2,17 +2,14 @@ import {
     AfterViewInit,
     booleanAttribute,
     ChangeDetectorRef,
-    ContentChildren,
+    contentChildren,
     Directive,
     effect,
     ElementRef,
-    HostBinding,
     inject,
-    Input,
-    OnInit,
-    QueryList
+    input,
+    OnInit
 } from '@angular/core';
-import { startWith } from 'rxjs/operators';
 
 import { FDK_FOCUSABLE_LIST_DIRECTIVE, FocusableListDirective } from '@fundamental-ngx/cdk/utils';
 import { TableService } from '../table.service';
@@ -29,74 +26,62 @@ export const HIDDEN_CLASS_NAME = 'fd-table--hidden';
         }
     ],
     host: {
-        role: 'row'
+        role: 'row',
+        class: 'fd-table__row',
+        '[class.fd-table__row--activable]': 'activable()',
+        '[class.fd-table__row--hoverable]': 'hoverable()',
+        '[class.fd-table__row--main]': 'main()',
+        '[class.fd-table__row--secondary]': 'secondary()',
+        '[class.fd-table__row--focusable]': 'focusable',
+        '[class.is-selected]': 'active()'
     },
     standalone: true
 })
 export class TableRowDirective extends FocusableListDirective implements AfterViewInit, OnInit {
     /** @hidden */
-    @ContentChildren(TableCellDirective)
-    cells: QueryList<TableCellDirective>;
-
-    /** @hidden */
-    @HostBinding('class.fd-table__row')
-    fdTableRowClass = true;
+    readonly cells = contentChildren(TableCellDirective);
 
     /** Whether the table row is activable */
-    @HostBinding('class.fd-table__row--activable')
-    @Input()
-    activable = false;
+    readonly activable = input(false, { transform: booleanAttribute });
 
     /** Whether the table row is hoverable */
     /** Whether to highlight active row when clicked. */
-    @Input()
-    highlightActive = false;
+    readonly highlightActive = input(false, { transform: booleanAttribute });
 
     /**  Whether the table row is hoverable */
-    @HostBinding('class.fd-table__row--hoverable')
-    @Input()
-    hoverable = false;
-
-    /** Whether the table row is focusable */
-    @HostBinding('class.fd-table__row--focusable')
-    @Input({ transform: booleanAttribute })
-    set focusable(value: boolean) {
-        this._focusable.set(value);
-
-        this.setTabbable(this._focusable());
-    }
-    get focusable(): boolean {
-        return this._focusable();
-    }
+    readonly hoverable = input(false, { transform: booleanAttribute });
 
     /** Whether the table row is main row, it's concerned only on pop in mode */
-    @HostBinding('class.fd-table__row--main')
-    @Input()
-    main = false;
+    readonly main = input(false, { transform: booleanAttribute });
 
     /** Whether the table row is secondary row, it's concerned only on pop in mode */
-    @HostBinding('class.fd-table__row--secondary')
-    @Input()
-    secondary = false;
+    readonly secondary = input(false, { transform: booleanAttribute });
 
     /** Whether the table row is active. */
-    @HostBinding('class.is-selected')
-    @Input()
-    active = false;
+    readonly active = input(false, { transform: booleanAttribute });
 
     /** @hidden */
     elementRef: ElementRef<HTMLTableRowElement> = inject(ElementRef);
 
     /** @hidden */
     private readonly _changeDetRef = inject(ChangeDetectorRef);
+
     /** @hidden */
     private _tableService = inject(TableService);
 
     /** @hidden */
     constructor() {
         super();
+
         effect(() => {
             this._resetCells(this._tableService.propagateKeys$());
+        });
+
+        // Set aria-colindex on cells when they change
+        effect(() => {
+            this.cells().forEach((cell, index) => {
+                cell.elementRef.nativeElement.ariaColIndex = index.toString();
+            });
         });
     }
 
@@ -110,19 +95,17 @@ export class TableRowDirective extends FocusableListDirective implements AfterVi
     ngAfterViewInit(): void {
         super.ngAfterViewInit();
         this._resetCells(this._tableService.propagateKeys$());
-        this._setupCellsSubscription();
     }
 
     /** @hidden */
     private _resetCells(keys: string[]): void {
-        if (this.cells && keys && keys.length > 0) {
+        const cells = this.cells();
+        if (cells.length > 0 && keys && keys.length > 0) {
             this._changeVisibility(keys);
 
-            const sortedCells = this.cells.toArray().sort((a, b) => this._sortMethod(a, b, keys));
+            const sortedCells = [...cells].sort((a, b) => this._sortMethod(a, b, keys));
 
-            this.cells.reset(sortedCells);
-
-            this._sortNativeElements();
+            this._sortNativeElements(sortedCells);
 
             this._changeDetRef.detectChanges();
         }
@@ -130,7 +113,7 @@ export class TableRowDirective extends FocusableListDirective implements AfterVi
 
     /** @hidden */
     private _sortMethod(a: TableCellDirective, b: TableCellDirective, keys: string[]): number {
-        if (keys.findIndex((_key) => _key === a.key) < keys.findIndex((_key) => _key === b.key)) {
+        if (keys.findIndex((_key) => _key === a.key()) < keys.findIndex((_key) => _key === b.key())) {
             return -1;
         } else {
             return 1;
@@ -138,32 +121,22 @@ export class TableRowDirective extends FocusableListDirective implements AfterVi
     }
 
     /** @hidden */
-    private _sortNativeElements(): void {
-        this.cells.forEach((cell) =>
+    private _sortNativeElements(sortedCells: readonly TableCellDirective[]): void {
+        sortedCells.forEach((cell) =>
             cell.elementRef.nativeElement.parentNode?.appendChild(cell.elementRef.nativeElement)
         );
     }
 
     /** @hidden */
     private _changeVisibility(keys: string[]): void {
-        this.cells.forEach((cell) => cell.elementRef.nativeElement.classList.remove(HIDDEN_CLASS_NAME));
-        const notFoundElements: TableCellDirective[] = this.cells.filter(
-            (cell) => !keys.find((key) => key === cell.key)
-        );
+        const cells = this.cells();
+        cells.forEach((cell) => cell.elementRef.nativeElement.classList.remove(HIDDEN_CLASS_NAME));
+        const notFoundElements: TableCellDirective[] = cells.filter((cell) => !keys.find((key) => key === cell.key()));
         notFoundElements.forEach(this._hideElement);
     }
 
     /** @hidden */
     private _hideElement(element: TableCellDirective): void {
         element.elementRef.nativeElement.classList.add(HIDDEN_CLASS_NAME);
-    }
-
-    /** @hidden */
-    private _setupCellsSubscription(): void {
-        this.cells.changes.pipe(startWith(null)).subscribe(() => {
-            this.cells.forEach((cell, index) => {
-                cell.elementRef.nativeElement.ariaColIndex = index.toString();
-            });
-        });
     }
 }
