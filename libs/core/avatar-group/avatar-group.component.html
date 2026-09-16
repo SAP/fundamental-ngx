@@ -69,6 +69,7 @@
 } @else {
     <fd-popover
         #groupPopover
+        [placement]="popoverPlacement()"
         [noArrow]="false"
         [focusAutoCapture]="true"
         [bodyAriaLabel]="_popupBodyAriaLabel(_avatars.length)"

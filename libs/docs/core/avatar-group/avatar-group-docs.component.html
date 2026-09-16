@@ -23,8 +23,23 @@
 </component-example>
 <code-example [exampleFiles]="avatarGroupGroupExample"></code-example>
 
-<fd-docs-section-title id="vertical" componentName="avatar-group"> Vertical Avatar Group Usage </fd-docs-section-title>
+<fd-docs-section-title id="popover-placement" componentName="avatar-group">
+    Group Popover Placement
+</fd-docs-section-title>
 <description>
+    <p>
+        Use the <code>[popoverPlacement]</code> input to control where the overflow popover opens relative to the avatar
+        group. The default <code>'bottom'</code> centers the popover below the group. Any value from the
+        <code>Placement</code> type is accepted.
+    </p>
+</description>
+<component-example>
+    <fd-avatar-group-popover-placement-example></fd-avatar-group-popover-placement-example>
+</component-example>
+<code-example [exampleFiles]="avatarGroupPlacementExample"></code-example>
+
+<fd-docs-section-title id="vertical" componentName="avatar-group"> Vertical Avatar Group Usage </fd-docs-section-title
+><description>
     <p>
         The <code>fd-avatar-group</code> supports <code>vertical</code> orientation as well. In this case, all items are
         displayed in a vertical list and overflow is not supported.

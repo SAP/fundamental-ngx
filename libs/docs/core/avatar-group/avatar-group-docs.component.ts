@@ -11,6 +11,7 @@ import {
 } from '@fundamental-ngx/docs/shared';
 import { AvatarGroupDefaultExampleComponent } from './examples/default/avatar-group-default-example.component';
 import { GroupTypeExampleComponent } from './examples/group-type/group-type-example.component';
+import { AvatarGroupPopoverPlacementExampleComponent } from './examples/popover-placement/avatar-group-popover-placement-example.component';
 import { AvatarGroupVerticalExampleComponent } from './examples/vertical/avatar-group-vertical-example.component';
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
@@ -34,7 +35,8 @@ const service = () => ({
         DescriptionComponent,
         AvatarGroupDefaultExampleComponent,
         AvatarGroupVerticalExampleComponent,
-        GroupTypeExampleComponent
+        GroupTypeExampleComponent,
+        AvatarGroupPopoverPlacementExampleComponent
     ]
 })
 export class AvatarGroupDocsComponent {
@@ -62,6 +64,15 @@ export class AvatarGroupDocsComponent {
             component: 'AvatarGroupVerticalExampleComponent',
             fileName: 'avatar-group-vertical-example',
             path: 'vertical'
+        }),
+        service()
+    ];
+    avatarGroupPlacementExample: ExampleFile[] = [
+        getExampleFile('popover-placement/avatar-group-popover-placement-example.component.html'),
+        getExampleFile('popover-placement/avatar-group-popover-placement-example.component.ts', {
+            component: 'AvatarGroupPopoverPlacementExampleComponent',
+            fileName: 'avatar-group-popover-placement-example',
+            path: 'popover-placement'
         }),
         service()
     ];

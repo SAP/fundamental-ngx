@@ -24,6 +24,7 @@ import {
     RtlService
 } from '@fundamental-ngx/cdk/utils';
 import { PopoverBodyDirective, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
+import { Placement } from '@fundamental-ngx/core/shared';
 import { resolveTranslationSignalFn } from '@fundamental-ngx/i18n';
 import { AvatarGroupHostComponent } from './components/avatar-group-host.component';
 import { AvatarGroupOverflowButtonComponent } from './components/avatar-group-overflow-button.component';
@@ -127,6 +128,14 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
      * @default 5
      */
     readonly overflowHeadingLevel = input<1 | 2 | 3 | 4 | 5 | 6>(5);
+
+    /**
+     * Placement of the group overflow popover relative to the avatar group.
+     * Use `'bottom'` (default) to open centered, or `'bottom-start'` / `'bottom-end'` to align to an edge.
+     * Only applies to `type="group"`.
+     * @default 'bottom'
+     */
+    readonly popoverPlacement = input<Placement>('bottom');
 
     /** @hidden */
     readonly _avatarGroupHost = viewChild(AvatarGroupHostComponent);
