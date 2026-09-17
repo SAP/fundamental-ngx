@@ -299,4 +299,44 @@ describe('TableComponent', () => {
             expect(component['_noVerticalBorders']).toBe(false);
         });
     });
+
+    describe('Cell Overflow Integration', () => {
+        it('should call updateCellOverflowTitles when onTableRowsChanged is called', (done) => {
+            const updateSpy = jest.spyOn<any>(component, '_updateCellOverflowTitles');
+
+            component.onTableRowsChanged();
+
+            // _updateCellOverflowTitles uses queueMicrotask
+            queueMicrotask(() => {
+                expect(updateSpy).toHaveBeenCalled();
+                done();
+            });
+        });
+
+        it('should call updateCellOverflowTitles on all row components', (done) => {
+            // Mock some row components
+            const mockRowComponent1 = { updateCellOverflowTitles: jest.fn() };
+            const mockRowComponent2 = { updateCellOverflowTitles: jest.fn() };
+
+            // Mock the QueryList
+            Object.defineProperty(component, '_tableRowComponents', {
+                value: {
+                    forEach: (callback: any) => {
+                        [mockRowComponent1, mockRowComponent2].forEach(callback);
+                    },
+                    length: 2
+                },
+                writable: true
+            });
+
+            component.onTableRowsChanged();
+
+            // Wait for queueMicrotask to complete
+            queueMicrotask(() => {
+                expect(mockRowComponent1.updateCellOverflowTitles).toHaveBeenCalled();
+                expect(mockRowComponent2.updateCellOverflowTitles).toHaveBeenCalled();
+                done();
+            });
+        });
+    });
 });

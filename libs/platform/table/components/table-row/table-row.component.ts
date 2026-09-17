@@ -170,6 +170,10 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
     private readonly _editableCells: QueryList<EditableTableCell>;
 
     /** @hidden */
+    @ViewChildren(TableCellOverflowDirective)
+    private readonly _tableCellOverflowDirectives: QueryList<TableCellOverflowDirective>;
+
+    /** @hidden */
     @HostBinding('attr.aria-selected')
     protected get _ariaSelected(): boolean {
         return !!this.row.checked;
@@ -286,6 +290,16 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
         this._refreshChildRows$.next();
         this._refreshChildRows$.complete();
         this._tableRowService.removeEditableCells(this.row);
+    }
+
+    /**
+     * Updates overflow titles for all cells in this row.
+     * @hidden
+     */
+    updateCellOverflowTitles(): void {
+        this._tableCellOverflowDirectives?.forEach((directive) => {
+            directive.updateTitle();
+        });
     }
 
     /** @hidden */

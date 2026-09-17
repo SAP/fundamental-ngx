@@ -28,6 +28,7 @@ import {
     SimpleChanges,
     TrackByFunction,
     ViewChild,
+    ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
 
@@ -634,6 +635,9 @@ export class TableComponent<T = any>
     /** @hidden */
     @ContentChild(NoDataWrapperComponent)
     readonly _noDataWrapper: Nullable<NoDataWrapperComponent>;
+    /** @hidden */
+    @ViewChildren(TableRowComponent)
+    readonly _tableRowComponents: QueryList<TableRowComponent<T>>;
 
     /** Total loaded items. */
     loadedRows$ = signal(0);
@@ -1797,6 +1801,18 @@ export class TableComponent<T = any>
         if (this._virtualScrollDirective) {
             this._virtualScrollDirective.calculateVirtualScrollRows();
         }
+
+        this._updateCellOverflowTitles();
+    }
+
+    /** @hidden */
+    private _updateCellOverflowTitles(): void {
+        // Use queueMicrotask to ensure DOM has updated before checking overflow
+        queueMicrotask(() => {
+            this._tableRowComponents?.forEach((rowComponent) => {
+                rowComponent.updateCellOverflowTitles();
+            });
+        });
     }
 
     /** @hidden */

@@ -37,22 +37,12 @@ export class TableCellOverflowDirective {
         });
     }
 
-    /** @hidden */
-    private _setupResizeObserver(): void {
-        const element = this._elementRef.nativeElement;
-
-        this._resizeObserver = new ResizeObserver(() => {
-            this._updateTitle();
-        });
-
-        this._resizeObserver.observe(element);
-
-        // Initial check
-        this._updateTitle();
-    }
-
-    /** @hidden */
-    private _updateTitle(): void {
+    /**
+     * Updates the title attribute when text content overflows.
+     * Called by ResizeObserver on width changes and by the table component when rows change.
+     * @hidden
+     */
+    updateTitle(): void {
         const element = this._elementRef.nativeElement;
         const isOverflowing = element.offsetWidth < element.scrollWidth;
 
@@ -61,5 +51,19 @@ export class TableCellOverflowDirective {
         } else {
             this._renderer.removeAttribute(element, 'title');
         }
+    }
+
+    /** @hidden */
+    private _setupResizeObserver(): void {
+        const element = this._elementRef.nativeElement;
+
+        this._resizeObserver = new ResizeObserver(() => {
+            this.updateTitle();
+        });
+
+        this._resizeObserver.observe(element);
+
+        // Initial check
+        this.updateTitle();
     }
 }
