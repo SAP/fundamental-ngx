@@ -2,6 +2,7 @@ import {
     booleanAttribute,
     ChangeDetectionStrategy,
     Component,
+    computed,
     contentChildren,
     effect,
     inject,
@@ -46,7 +47,8 @@ export const FdTableContentDensityProviderParams = {
         '[class.fd-table--top-border]': 'topBorder()',
         '[class.fd-table--pop-in]': 'popIn()',
         '[class.fd-table--responsive]': 'responsive()',
-        '[attr.role]': 'role()'
+        '[attr.role]': 'role()',
+        '[attr.aria-colcount]': 'ariaColCount()'
     }
 })
 export class TableComponent {
@@ -79,6 +81,35 @@ export class TableComponent {
 
     /** @hidden */
     readonly _cells = contentChildren(TableCellDirective, { descendants: true });
+
+    /**
+     * @hidden
+     * Computed aria-colcount attribute - total number of columns in the grid
+     * Required when aria-colindex is set on cells */
+    protected readonly ariaColCount = computed(() => {
+        const keys = this.keys();
+        if (keys && keys.length > 0) {
+            // If keys are provided, use that count (includes hidden columns)
+            return keys.length;
+        }
+
+        // Otherwise, determine from the first row's visible cell count
+        // This assumes all rows have the same number of columns
+        const cells = this._cells();
+        if (cells.length === 0) {
+            return null;
+        }
+
+        // Group cells by their parent row and count cells in first row
+        const firstRow = cells[0]?.elementRef.nativeElement.parentElement;
+        if (!firstRow) {
+            return null;
+        }
+
+        const cellsInFirstRow = cells.filter((cell) => cell.elementRef.nativeElement.parentElement === firstRow);
+
+        return cellsInFirstRow.length || null;
+    });
 
     /** @hidden */
     private readonly _tableService = inject(TableService);
