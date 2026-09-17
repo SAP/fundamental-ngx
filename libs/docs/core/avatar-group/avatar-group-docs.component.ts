@@ -11,6 +11,7 @@ import {
 } from '@fundamental-ngx/docs/shared';
 import { AvatarGroupDefaultExampleComponent } from './examples/default/avatar-group-default-example.component';
 import { GroupTypeExampleComponent } from './examples/group-type/group-type-example.component';
+import { AvatarGroupMaxVisibleExampleComponent } from './examples/max-visible/avatar-group-max-visible-example.component';
 import { AvatarGroupOverflowButtonCircleExampleComponent } from './examples/overflow-button-circle/avatar-group-overflow-button-circle-example.component';
 import { AvatarGroupPopoverPlacementExampleComponent } from './examples/popover-placement/avatar-group-popover-placement-example.component';
 import { AvatarGroupVerticalExampleComponent } from './examples/vertical/avatar-group-vertical-example.component';
@@ -38,7 +39,8 @@ const service = () => ({
         AvatarGroupVerticalExampleComponent,
         GroupTypeExampleComponent,
         AvatarGroupPopoverPlacementExampleComponent,
-        AvatarGroupOverflowButtonCircleExampleComponent
+        AvatarGroupOverflowButtonCircleExampleComponent,
+        AvatarGroupMaxVisibleExampleComponent
     ]
 })
 export class AvatarGroupDocsComponent {
@@ -84,6 +86,15 @@ export class AvatarGroupDocsComponent {
             component: 'AvatarGroupOverflowButtonCircleExampleComponent',
             fileName: 'avatar-group-overflow-button-circle-example',
             path: 'overflow-button-circle'
+        }),
+        service()
+    ];
+    avatarGroupMaxVisibleExample: ExampleFile[] = [
+        getExampleFile('max-visible/avatar-group-max-visible-example.component.html'),
+        getExampleFile('max-visible/avatar-group-max-visible-example.component.ts', {
+            component: 'AvatarGroupMaxVisibleExampleComponent',
+            fileName: 'avatar-group-max-visible-example',
+            path: 'max-visible'
         }),
         service()
     ];

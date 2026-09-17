@@ -145,6 +145,14 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
      */
     readonly overflowButtonShape = input<'circle' | 'square'>('square');
 
+    /**
+     * Maximum number of avatars to display before the overflow button appears.
+     * When set, the group shows exactly this many avatars regardless of the container width.
+     * When `null` (default), visibility is determined by the available container width.
+     * @default null
+     */
+    readonly maxVisibleItems = input<number | null>(null);
+
     /** @hidden */
     readonly _avatarGroupHost = viewChild(AvatarGroupHostComponent);
 

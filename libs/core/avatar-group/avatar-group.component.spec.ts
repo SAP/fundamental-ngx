@@ -298,3 +298,170 @@ describe('AvatarGroupComponent overflowButtonShape', () => {
         });
     });
 });
+
+@Component({
+    template: `
+        <fd-avatar-group [type]="type()" size="s" [maxVisibleItems]="max()">
+            <fd-avatar *fdAvatarGroupItem="''; title: 'P1'" size="s" label="P1"></fd-avatar>
+            <fd-avatar *fdAvatarGroupItem="''; title: 'P2'" size="s" label="P2"></fd-avatar>
+            <fd-avatar *fdAvatarGroupItem="''; title: 'P3'" size="s" label="P3"></fd-avatar>
+            <fd-avatar *fdAvatarGroupItem="''; title: 'P4'" size="s" label="P4"></fd-avatar>
+            <fd-avatar *fdAvatarGroupItem="''; title: 'P5'" size="s" label="P5"></fd-avatar>
+        </fd-avatar-group>
+    `,
+    imports: [AvatarGroupComponent, AvatarGroupItemDirective, AvatarComponent]
+})
+class AvatarGroupMaxVisibleTestComponent {
+    readonly max = input<number | null>(null);
+    readonly type = input<'individual' | 'group'>('individual');
+}
+
+describe('AvatarGroupComponent maxVisibleItems', () => {
+    let fixture: ComponentFixture<AvatarGroupMaxVisibleTestComponent>;
+
+    function getHostInstance(): AvatarGroupHostComponent {
+        return fixture.debugElement.query(By.directive(AvatarGroupHostComponent)).componentInstance;
+    }
+
+    // _calculateVisibility is called directly because ResizeObserver never fires in JSDOM,
+    // so the combineLatest pipeline that updates _hiddenItems cannot be triggered in tests.
+    function makeItems(count: number, forceVisibility = false, width = 0): AvatarGroupItemRendererDirective[] {
+        return Array.from(
+            { length: count },
+            () => ({ forceVisibility, width }) as unknown as AvatarGroupItemRendererDirective
+        );
+    }
+
+    function runCalc(
+        max: number | null,
+        items: AvatarGroupItemRendererDirective[],
+        containerWidth = 1000
+    ): { hiddenItems: AvatarGroupItemRendererDirective[]; visibleItems: AvatarGroupItemRendererDirective[] } {
+        const host = getHostInstance();
+        host.maxVisibleItems = max;
+         
+        return (host as any)._calculateVisibility(containerWidth, items);
+    }
+
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            imports: [AvatarGroupMaxVisibleTestComponent]
+        }).compileComponents();
+
+        fixture = TestBed.createComponent(AvatarGroupMaxVisibleTestComponent);
+        fixture.detectChanges();
+    });
+
+    it('passes maxVisibleItems to the host component', () => {
+        fixture.componentRef.setInput('max', 3);
+        fixture.detectChanges();
+        expect(getHostInstance().maxVisibleItems).toBe(3);
+    });
+
+    it('falls through to width-based calculation when maxVisibleItems is null', () => {
+        const result = runCalc(null, makeItems(5));
+        // Items have 0 width in JSDOM, so all fit inside the 1000px container.
+        expect(result.hiddenItems.length).toBe(0);
+        expect(result.visibleItems.length).toBe(5);
+    });
+
+    it('hides items beyond maxVisibleItems', () => {
+        const result = runCalc(3, makeItems(5));
+        // maxVisibleItems=3, all items fit (0 width), but one is moved to hidden for overflow button
+        expect(result.visibleItems.length).toBe(2);
+        expect(result.hiddenItems.length).toBe(3);
+    });
+
+    it('hides no items when maxVisibleItems equals the total count', () => {
+        const result = runCalc(5, makeItems(5));
+        expect(result.visibleItems.length).toBe(5);
+        expect(result.hiddenItems.length).toBe(0);
+    });
+
+    it('hides all items when maxVisibleItems is 0', () => {
+        const result = runCalc(0, makeItems(5));
+        expect(result.visibleItems.length).toBe(0);
+        expect(result.hiddenItems.length).toBe(5);
+    });
+
+    it('counts forceVisibility items against the limit and never hides them', () => {
+        const host = getHostInstance();
+        host.maxVisibleItems = 3;
+        const items: AvatarGroupItemRendererDirective[] = [
+            { forceVisibility: true, width: 0 } as unknown as AvatarGroupItemRendererDirective,
+            ...makeItems(4)
+        ];
+         
+        const result = (host as any)._calculateVisibility(1000, items);
+        // maxVisibleItems=3, so 1 forced + 2 regular fit, then one moved for button
+        expect(result.visibleItems.length).toBe(2); // 1 forced + 1 regular
+        expect(result.hiddenItems.length).toBe(3);
+    });
+
+    it('reflects updated count when maxVisibleItems changes', () => {
+        const items = makeItems(5);
+        // maxVisibleItems=2: show 2, hide 3, then move 1 for button → show 1, hide 4
+        expect(runCalc(2, items).visibleItems.length).toBe(1);
+        expect(runCalc(2, items).hiddenItems.length).toBe(4);
+        // maxVisibleItems=4: show 4, hide 1, then move 1 for button → show 3, hide 2
+        expect(runCalc(4, items).visibleItems.length).toBe(3);
+        expect(runCalc(4, items).hiddenItems.length).toBe(2);
+    });
+
+    describe('group type', () => {
+        beforeEach(() => {
+            fixture.componentRef.setInput('type', 'group');
+            fixture.detectChanges();
+        });
+
+        it('hides items beyond maxVisibleItems', () => {
+            const result = runCalc(3, makeItems(5));
+            // maxVisibleItems=3, all items fit (0 width), but one is moved to hidden for overflow button
+            expect(result.visibleItems.length).toBe(2);
+            expect(result.hiddenItems.length).toBe(3);
+        });
+    });
+
+    describe('width-based visibility with maxVisibleItems', () => {
+        function makeItemsWithWidth(count: number, width: number): AvatarGroupItemRendererDirective[] {
+            return makeItems(count, false, width);
+        }
+
+        it('respects containerWidth constraint when items have width', () => {
+            const items = makeItemsWithWidth(5, 100);
+            // maxVisibleItems allows 5, but container only fits 3 items (300px out of 350px available)
+            const result = runCalc(5, items, 350);
+            expect(result.visibleItems.length).toBeLessThan(5);
+            expect(result.hiddenItems.length).toBeGreaterThan(0);
+        });
+
+        it('moves one visible item to hidden when overflow occurs to make room for overflow button', () => {
+            const items = makeItemsWithWidth(4, 100);
+            // maxVisibleItems = 4, but container can only fit 3 items (300px)
+            // Then one is moved to hidden for overflow button
+            const result = runCalc(4, items, 350);
+            expect(result.visibleItems.length).toBe(2);
+            expect(result.hiddenItems.length).toBe(2);
+        });
+
+        it('does not reserve overflow space when all items fit within maxVisibleItems and containerWidth', () => {
+            const items = makeItemsWithWidth(2, 50);
+            const result = runCalc(5, items, 1000);
+            expect(result.visibleItems.length).toBe(2);
+            expect(result.hiddenItems.length).toBe(0);
+        });
+
+        it('respects forced visibility items when checking width constraints', () => {
+            const items: AvatarGroupItemRendererDirective[] = [
+                { forceVisibility: true, width: 100 } as unknown as AvatarGroupItemRendererDirective,
+                ...makeItemsWithWidth(3, 100)
+            ];
+            // maxVisibleItems = 3 (1 forced + 2 regular), container fits 2.5 items total (250px)
+            // Only 1 regular item fits, then moved to hidden for overflow button
+            const result = runCalc(3, items, 250);
+            expect(result.visibleItems[0].forceVisibility).toBe(true); // forced always visible
+            expect(result.visibleItems.length).toBe(1); // 1 forced, 0 regular (one that fit was moved for overflow button)
+            expect(result.hiddenItems.length).toBe(3);
+        });
+    });
+});

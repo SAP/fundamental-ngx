@@ -5,6 +5,7 @@
         [type]="type"
         [size]="size"
         [orientation]="orientation"
+        [maxVisibleItems]="maxVisibleItems()"
         fdkResizeObserver
         fdkFocusableList
         [contentDirection]="contentDirection()"
@@ -86,6 +87,7 @@
                 [type]="type"
                 [size]="size"
                 [orientation]="orientation"
+                [maxVisibleItems]="maxVisibleItems()"
                 [attr.aria-label]="ariaLabel || _defaultAriaLabelGroup()"
                 role="button"
                 tabindex="0"
