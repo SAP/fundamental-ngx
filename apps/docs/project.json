@@ -17,6 +17,11 @@
         "ui5-webcomponents-ai",
         "ui5-webcomponents"
     ],
+    "cli": {
+        "cache": {
+            "enabled": false
+        }
+    },
     "generators": {
         "@nx/schematics:component": {
             "style": "scss"
