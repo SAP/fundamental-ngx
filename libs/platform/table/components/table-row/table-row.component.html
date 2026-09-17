@@ -155,7 +155,7 @@
             [class.fd-table__text]="column.applyText"
             [class.fd-table__text--no-wrap]="column.noWrap"
             [class.fd-table__cell--truncate-txt]="column.applyText"
-            [fdpTableCellOverflow]="column.noWrap"
+            [fdpTableCellOverflow]="column.noWrap || column.applyText"
             #tableTextContainer
         >
             @if (_isTreeRowFirstCell($index, row)) {
