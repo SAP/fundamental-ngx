@@ -6,8 +6,7 @@ export type TableStatuses = 'valid' | 'warning' | 'information' | 'error';
     selector: '[fdTableStatusIndicator], [fd-table-status-indicator]',
     host: {
         '[class]': 'cssClass()'
-    },
-    standalone: true
+    }
 })
 export class TableStatusIndicatorDirective {
     /** The type of indicator. Options are 'valid', 'warning', 'information' and 'error'. */

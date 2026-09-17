@@ -11,7 +11,7 @@ import {
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { ResizeObserverService } from '@fundamental-ngx/cdk/utils';
 import { FD_TOOLBAR } from '@fundamental-ngx/core/toolbar';
-import { EMPTY, switchMap } from 'rxjs';
+import { combineLatestWith, EMPTY, switchMap } from 'rxjs';
 import { TableHeaderDirective } from './table-header.directive';
 
 @Directive({
@@ -41,12 +41,10 @@ export class TableContainerDirective {
         // Handle toolbar sticky positioning when outerScroll is enabled
         toObservable(this.toolbar)
             .pipe(
-                switchMap((toolbarElRef) => {
-                    const outerScroll = this.outerScroll();
-                    return outerScroll && toolbarElRef
-                        ? this.resizeObserverService.observe(toolbarElRef.nativeElement)
-                        : EMPTY;
-                }),
+                combineLatestWith(toObservable(this.outerScroll)),
+                switchMap(([toolbarElRef, outerScroll]) =>
+                    outerScroll && toolbarElRef ? this.resizeObserverService.observe(toolbarElRef.nativeElement) : EMPTY
+                ),
                 takeUntilDestroyed(this._destroyRef)
             )
             .subscribe(() => {
@@ -69,11 +67,8 @@ export class TableContainerDirective {
 
         // Handle table header sticky positioning when outerScroll is enabled
         toObservable(this.tableHeader)
-            .pipe(takeUntilDestroyed(this._destroyRef))
-            .subscribe(() => {
-                const tableHeaderElRef = this.tableHeader();
-                const outerScroll = this.outerScroll();
-
+            .pipe(combineLatestWith(toObservable(this.outerScroll)), takeUntilDestroyed(this._destroyRef))
+            .subscribe(([tableHeaderElRef, outerScroll]) => {
                 if (outerScroll && tableHeaderElRef) {
                     const headerEl = tableHeaderElRef.nativeElement;
                     this._renderer.setStyle(headerEl, 'position', 'sticky');

@@ -1,4 +1,4 @@
-import { AfterContentInit, booleanAttribute, computed, contentChildren, Directive, input, OnInit } from '@angular/core';
+import { AfterContentInit, booleanAttribute, computed, contentChildren, Directive, effect, input } from '@angular/core';
 import { FDK_FOCUSABLE_ITEM_DIRECTIVE, FocusableItemDirective } from '@fundamental-ngx/cdk/utils';
 import { FD_CHECKBOX_COMPONENT } from '@fundamental-ngx/core/checkbox';
 
@@ -27,7 +27,7 @@ import { FD_CHECKBOX_COMPONENT } from '@fundamental-ngx/core/checkbox';
         '(focusout)': '_focusOut()'
     }
 })
-export class TableCellDirective extends FocusableItemDirective implements OnInit, AfterContentInit {
+export class TableCellDirective extends FocusableItemDirective implements AfterContentInit {
     /** ARIA role for the table cell (only used if explicitly provided) */
     readonly role = input<string>();
 
@@ -114,13 +114,8 @@ export class TableCellDirective extends FocusableItemDirective implements OnInit
     /** @hidden */
     constructor() {
         super();
-        this.setFocusable(false);
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        // Sync focusable input with parent's focusable state
-        this.setFocusable(this.focusable());
+        // Reactively sync focusable input with parent FocusableItemDirective state
+        effect(() => this.setFocusable(this.focusable()));
     }
 
     /** @hidden */

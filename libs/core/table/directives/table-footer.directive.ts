@@ -1,9 +1,13 @@
-import { Directive } from '@angular/core';
+import { Directive, input } from '@angular/core';
 
 @Directive({
     selector: '[fdTableFooter], [fd-table-footer]',
     host: {
-        class: 'fd-table__footer'
+        class: 'fd-table__footer',
+        '[attr.role]': 'role()'
     }
 })
-export class TableFooterDirective {}
+export class TableFooterDirective {
+    /** ARIA role for the table footer */
+    readonly role = input('rowgroup');
+}

@@ -174,4 +174,34 @@ describe('TableCellDirective', () => {
             expect(cell.classList.contains('fd-table__cell--non-interactive')).toBe(true);
         });
     });
+
+    describe('focus behavior', () => {
+        let focusFixture: ComponentFixture<TestComponent>;
+
+        beforeEach(async () => {
+            await TestBed.configureTestingModule({
+                imports: [TestComponent]
+            }).compileComponents();
+
+            focusFixture = TestBed.createComponent(TestComponent);
+            focusFixture.detectChanges();
+        });
+
+        it('should remove parent tabindex on focus and restore on blur', () => {
+            const cell = focusFixture.nativeElement.querySelector('tbody td') as HTMLElement;
+            const parentEl = cell.parentElement as HTMLElement;
+
+            // Set up initial tabindex on parent
+            parentEl.setAttribute('tabindex', '-1');
+            expect(parentEl.tabIndex).toBe(-1);
+
+            // Focus the cell - should remove parent tabindex
+            cell.dispatchEvent(new FocusEvent('focusin', { bubbles: true }));
+            expect(parentEl.hasAttribute('tabindex')).toBe(false);
+
+            // Blur the cell - should restore parent tabindex
+            cell.dispatchEvent(new FocusEvent('focusout', { bubbles: true }));
+            expect(parentEl.getAttribute('tabindex')).toBe('-1');
+        });
+    });
 });

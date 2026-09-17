@@ -93,11 +93,9 @@ export class TableComponent {
             const cells = this._cells();
             const allFocusable = this.allCellsFocusable();
 
-            // Set focusable on all cells when allCellsFocusable is true
+            // Set focusable on all cells based on allCellsFocusable or individual cell's focusable state
             cells.forEach((cell) => {
-                if (allFocusable) {
-                    cell.setFocusable(true);
-                }
+                cell.setFocusable(allFocusable || cell.focusable());
             });
         });
 

@@ -27,7 +27,7 @@ export class TableIconDirective {
     protected readonly cssClass = computed(() =>
         [
             'fd-table__icon',
-            this.glyph ? fdBuildIconClass(this.glyphFont(), this.glyph()) : '',
+            this.glyph() ? fdBuildIconClass(this.glyphFont(), this.glyph()) : '',
             this.navigation() ? 'fd-table__icon--navigation' : ''
         ]
             .filter(Boolean)
