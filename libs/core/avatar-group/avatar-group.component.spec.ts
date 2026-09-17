@@ -339,7 +339,7 @@ describe('AvatarGroupComponent maxVisibleItems', () => {
     ): { hiddenItems: AvatarGroupItemRendererDirective[]; visibleItems: AvatarGroupItemRendererDirective[] } {
         const host = getHostInstance();
         host.maxVisibleItems = max;
-         
+
         return (host as any)._calculateVisibility(containerWidth, items);
     }
 
@@ -391,7 +391,7 @@ describe('AvatarGroupComponent maxVisibleItems', () => {
             { forceVisibility: true, width: 0 } as unknown as AvatarGroupItemRendererDirective,
             ...makeItems(4)
         ];
-         
+
         const result = (host as any)._calculateVisibility(1000, items);
         // maxVisibleItems=3, so 1 forced + 2 regular fit, then one moved for button
         expect(result.visibleItems.length).toBe(2); // 1 forced + 1 regular
