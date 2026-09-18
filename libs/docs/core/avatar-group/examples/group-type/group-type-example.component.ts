@@ -1,4 +1,5 @@
 import { ENTER, ESCAPE, SPACE, TAB } from '@angular/cdk/keycodes';
+
 import { Component, inject } from '@angular/core';
 import { KeyUtil, Size } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
@@ -15,7 +16,6 @@ import { AvatarGroupDataExampleService } from '../avatar-group-data-example.serv
 })
 export class GroupTypeExampleComponent {
     size: Size = 'l';
-    containerHidden = false;
     readonly avatarGroupDataExampleService = inject(AvatarGroupDataExampleService);
     people = this.avatarGroupDataExampleService.generate();
     personDetails: any = null;
