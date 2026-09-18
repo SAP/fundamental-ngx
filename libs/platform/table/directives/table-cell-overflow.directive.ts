@@ -1,4 +1,4 @@
-import { DestroyRef, Directive, ElementRef, Input, Renderer2, afterNextRender, inject } from '@angular/core';
+import { DestroyRef, Directive, ElementRef, Renderer2, afterNextRender, effect, inject, input } from '@angular/core';
 
 /**
  * Directive that sets the title attribute on an element when its text content overflows.
@@ -9,28 +9,28 @@ import { DestroyRef, Directive, ElementRef, Input, Renderer2, afterNextRender, i
     selector: '[fdpTableCellOverflow]'
 })
 export class TableCellOverflowDirective {
+    /** Whether the directive is enabled. */
+    readonly fdpTableCellOverflow = input(false);
+
     private readonly _elementRef = inject(ElementRef<HTMLElement>);
     private readonly _renderer = inject(Renderer2);
     private readonly _destroyRef = inject(DestroyRef);
     private _resizeObserver?: ResizeObserver;
     private _mutationObserver?: MutationObserver;
-    private _enabled = false;
-
-    /** Whether the directive is enabled. */
-    @Input()
-    set fdpTableCellOverflow(value: boolean) {
-        this._enabled = value;
-        if (!this._enabled) {
-            this._resizeObserver?.disconnect();
-            this._mutationObserver?.disconnect();
-            this._renderer.removeAttribute(this._elementRef.nativeElement, 'title');
-        }
-    }
 
     /** @hidden */
     constructor() {
+        effect(() => {
+            const enabled = this.fdpTableCellOverflow();
+            if (!enabled) {
+                this._resizeObserver?.disconnect();
+                this._mutationObserver?.disconnect();
+                this._renderer.removeAttribute(this._elementRef.nativeElement, 'title');
+            }
+        });
+
         afterNextRender(() => {
-            if (this._enabled) {
+            if (this.fdpTableCellOverflow()) {
                 this._setupObservers();
             }
         });
