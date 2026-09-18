@@ -67,6 +67,7 @@ import {
 } from '@fundamental-ngx/platform/table-helpers';
 import { Subject, fromEvent, merge } from 'rxjs';
 import { filter, startWith, switchMap, takeUntil } from 'rxjs/operators';
+import { TableCellOverflowDirective } from '../../directives/table-cell-overflow.directive';
 import { TableEditableCellComponent } from '../table-editable-cell/table-editable-cell.component';
 
 @Component({
@@ -103,7 +104,8 @@ import { TableEditableCellComponent } from '../table-editable-cell/table-editabl
         SelectionCellStylesPipe,
         TableCellStylesPipe,
         ColumnResizableSidePipe,
-        IconComponent
+        IconComponent,
+        TableCellOverflowDirective
     ]
 })
 export class TableRowComponent<T> extends TableRowDirective implements OnInit, AfterViewInit, OnDestroy, OnChanges {
