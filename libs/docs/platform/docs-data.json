@@ -202,6 +202,10 @@
             "name": "Message Popover"
         },
         {
+            "url": "platform/message-view",
+            "name": "Message View"
+        },
+        {
             "url": "platform/variant-management",
             "name": "Variant Management"
         },

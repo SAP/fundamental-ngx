@@ -437,6 +437,11 @@ export default {
             requiredTrue: 'الحقل إلزامي'
         }
     },
+    platformMessageView: {
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        title: 'Messages'
+    },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'تحديد الخيارات',
         inputIconTitle: 'تحديد الخيارات',

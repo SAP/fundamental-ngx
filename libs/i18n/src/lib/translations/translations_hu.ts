@@ -438,6 +438,11 @@ export default {
             requiredTrue: 'Ez a mező kötelezően kitöltendő'
         }
     },
+    platformMessageView: {
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        title: 'Messages'
+    },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Kiválasztási beállítások',
         inputIconTitle: 'Kiválasztási beállítások',

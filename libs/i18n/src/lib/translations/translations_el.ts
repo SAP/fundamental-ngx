@@ -438,6 +438,11 @@ export default {
             requiredTrue: 'Το πεδίο είναι υποχρεωτικό'
         }
     },
+    platformMessageView: {
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        title: 'Messages'
+    },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Επιλογή Δυνατοτήτων',
         inputIconTitle: 'Επιλογή Δυνατοτήτων',

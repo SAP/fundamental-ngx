@@ -439,6 +439,11 @@ export default {
             requiredTrue: 'Dit is een verplicht veld'
         }
     },
+    platformMessageView: {
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        title: 'Messages'
+    },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Opties selecteren',
         inputIconTitle: 'Opties selecteren',

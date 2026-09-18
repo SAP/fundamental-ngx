@@ -439,6 +439,11 @@ export default {
             requiredTrue: 'El campo es obligatorio'
         }
     },
+    platformMessageView: {
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        title: 'Messages'
+    },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Seleccionar opciones',
         inputIconTitle: 'Seleccionar opciones',

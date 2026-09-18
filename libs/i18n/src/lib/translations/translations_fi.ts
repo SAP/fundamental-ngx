@@ -437,6 +437,11 @@ export default {
             requiredTrue: 'Kenttä on pakollinen'
         }
     },
+    platformMessageView: {
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        title: 'Messages'
+    },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Valitse vaihtoehdot',
         inputIconTitle: 'Valitse vaihtoehdot',

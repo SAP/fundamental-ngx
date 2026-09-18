@@ -439,6 +439,11 @@ export default {
             requiredTrue: '[[[Ţĥē ƒįēĺƌ įş ɱąŋƌąţŏŗŷ∙∙∙∙∙]]]'
         }
     },
+    platformMessageView: {
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        title: 'Messages'
+    },
     platformMultiCombobox: {
         inputGlyphAriaLabel: '[[[Ŝēĺēċţ Ŏρţįŏŋş∙∙∙∙∙]]]',
         inputIconTitle: '[[[Ŝēĺēċţ Ŏρţįŏŋş∙∙∙∙∙]]]',
