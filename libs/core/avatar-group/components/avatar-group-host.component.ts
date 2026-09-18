@@ -8,6 +8,7 @@ import {
     ElementRef,
     inject,
     Input,
+    input,
     OnChanges,
     OnInit,
     QueryList,
@@ -26,7 +27,7 @@ import {
 import { animationFrames, combineLatest, delayWhen, map, Observable, startWith, Subject } from 'rxjs';
 import { AvatarGroupItemRendererDirective } from '../directives/avatar-group-item-renderer.directive';
 import { AvatarGroupItemDirective } from '../directives/avatar-group-item.directive';
-import { AvatarGroupHostConfig } from '../types';
+import { AvatarGroupHostConfig, AvatarGroupOrientation } from '../types';
 
 @Component({
     selector: 'fd-avatar-group-host',
@@ -53,13 +54,6 @@ export class AvatarGroupHostComponent
     type: AvatarGroupHostConfig['type'];
 
     /**
-     * The orientation of the avatar group.
-     * Options include 'horizontal' and 'vertical'.
-     **/
-    @Input()
-    orientation: AvatarGroupHostConfig['orientation'];
-
-    /**
      * The size of the avatar group.
      * Options include 'xs', 's', 'm', 'l', and 'xl'.
      **/
@@ -73,11 +67,24 @@ export class AvatarGroupHostComponent
     items: QueryList<AvatarGroupItemDirective>;
 
     /**
+     * Maximum number of avatars to show before the overflow button.
+     * When set, overrides the width-based visibility calculation.
+     **/
+    @Input()
+    maxVisibleItems: number | null = null;
+
+    /**
      * @hidden
      * The portals to be rendered in the avatar group.
      **/
     @ContentChildren(AvatarGroupItemRendererDirective, { descendants: true })
     _portals: QueryList<AvatarGroupItemRendererDirective>;
+
+    /**
+     * The orientation of the avatar group.
+     * Options include 'horizontal' and 'vertical'.
+     **/
+    readonly orientation = input<AvatarGroupOrientation>('horizontal');
 
     /** @hidden */
     _resizeEmitter: Observable<ResizeObserverEntry[]> = inject(ResizeObserverDirective).resizeEvents$;
@@ -105,7 +112,7 @@ export class AvatarGroupHostComponent
             'fd-avatar-group',
             this.type === 'individual' ? 'fd-avatar-group--individual-type' : '',
             this.type === 'group' ? 'fd-avatar-group--group-type' : '',
-            this.orientation ? 'fd-avatar-group--' + this.orientation : '',
+            this.orientation() ? 'fd-avatar-group--' + this.orientation() : '',
             this.size ? 'fd-avatar-group--' + this.size : ''
         ];
     }
@@ -158,15 +165,72 @@ export class AvatarGroupHostComponent
         hiddenItems: AvatarGroupItemRendererDirective[];
         visibleItems: AvatarGroupItemRendererDirective[];
     } {
-        if (this.orientation === 'vertical') {
-            return {
-                visibleItems: items,
-                hiddenItems: []
-            };
+        if (this.orientation() === 'vertical') {
+            return this.maxVisibleItems != null
+                ? this._calculateVisibilityWithMaxItems(Infinity, items)
+                : { visibleItems: items, hiddenItems: [] };
         }
+
+        return this.maxVisibleItems != null
+            ? this._calculateVisibilityWithMaxItems(containerWidth, items)
+            : this._calculateVisibilityByWidth(containerWidth, items);
+    }
+
+    /** @hidden */
+    private _calculateVisibilityWithMaxItems(
+        containerWidth: number,
+        items: AvatarGroupItemRendererDirective[]
+    ): {
+        hiddenItems: AvatarGroupItemRendererDirective[];
+        visibleItems: AvatarGroupItemRendererDirective[];
+    } {
+        const forcedVisible = items.filter((i) => i.forceVisibility);
+        const regular = items.filter((i) => !i.forceVisibility);
+        const maxRegularSlots = Math.max(0, this.maxVisibleItems! - forcedVisible.length);
+
+        // Respect both maxVisibleItems cap and containerWidth constraint
+        let accWidth = forcedVisible.reduce((acc, item) => acc + item.width, 0);
+        const visibleRegular: AvatarGroupItemRendererDirective[] = [];
+
+        for (let i = 0; i < Math.min(regular.length, maxRegularSlots); i++) {
+            const item = regular[i];
+            accWidth += item.width;
+            if (accWidth <= containerWidth) {
+                visibleRegular.push(item);
+            } else {
+                break;
+            }
+        }
+
+        const hiddenRegular = regular.slice(visibleRegular.length);
+
+        // If there are hidden items and visible regular items,
+        // move the last one to hidden to make room for overflow button
+        if (hiddenRegular.length > 0 && visibleRegular.length > 0) {
+            const movedItem = visibleRegular.pop();
+            if (movedItem) {
+                hiddenRegular.unshift(movedItem);
+            }
+        }
+
+        return {
+            visibleItems: [...forcedVisible, ...visibleRegular],
+            hiddenItems: hiddenRegular
+        };
+    }
+
+    /** @hidden */
+    private _calculateVisibilityByWidth(
+        containerWidth: number,
+        items: AvatarGroupItemRendererDirective[]
+    ): {
+        hiddenItems: AvatarGroupItemRendererDirective[];
+        visibleItems: AvatarGroupItemRendererDirective[];
+    } {
         const visibleItems = items.filter((i) => i.forceVisibility);
         const hiddenItems: AvatarGroupItemRendererDirective[] = [];
         let accWidth = items.reduce((acc, item) => (item.forceVisibility ? acc + item.width : acc), 0);
+
         for (const item of items) {
             if (item.forceVisibility) {
                 continue;
@@ -178,13 +242,14 @@ export class AvatarGroupHostComponent
                 hiddenItems.push(item);
             }
         }
-        /* take last item from the visibleItems which is not forced to be visible and push it to the hiddenItems
-         * This is done to free up the space for the overflow button
-         */
+
+        // Take last item from the visibleItems which is not forced to be visible
+        // and push it to the hiddenItems to free up the space for the overflow button
         if (hiddenItems.length > 0) {
             const lastAllowedToBeHidden = visibleItems.reverse().findIndex((item) => !item.forceVisibility);
             hiddenItems.push(...visibleItems.splice(lastAllowedToBeHidden * -1, 1));
         }
+
         return {
             visibleItems,
             hiddenItems
