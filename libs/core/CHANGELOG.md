@@ -1,3 +1,21 @@
+## 0.65.0-rc.16 (2026-09-18)
+
+### 🩹 Fixes
+
+- ⚠️  **core:** emit datetime picker dateChange events ([#14544](https://github.com/SAP/fundamental-ngx/pull/14544))
+
+### ⚠️  Breaking Changes
+
+- **core:** emit datetime picker dateChange events  ([#14544](https://github.com/SAP/fundamental-ngx/pull/14544))
+  DatetimePickerComponent.dateChange now emits D | null. Event handlers must accept null when allowNull is enabled."
+  M	libs/core/datetime-picker/datetime-picker.component.spec.ts
+  M	libs/core/datetime-picker/datetime-picker.component.ts
+  M	libs/docs/core/datetime-picker/datetime-picker-docs.component.html
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.65.0-rc.15 (2026-09-17)
 
 This was a version bump only for core to align it with other projects, there were no code changes.
