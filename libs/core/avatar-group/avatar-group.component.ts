@@ -35,7 +35,7 @@ import { AvatarGroupItemDirective } from './directives/avatar-group-item.directi
 import { AvatarGroupOverflowBodyDirective } from './directives/avatar-group-overflow-body.directive';
 import { AvatarGroupOverflowButtonDirective } from './directives/avatar-group-overflow-button.directive';
 import { AVATAR_GROUP_HOST_CONFIG } from './tokens';
-import { AvatarGroupHostConfig } from './types';
+import { AvatarGroupHostConfig, AvatarGroupOrientation } from './types';
 
 @Component({
     selector: 'fd-avatar-group',
@@ -72,15 +72,6 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
      * */
     @Input()
     type: AvatarGroupHostConfig['type'] = 'individual';
-
-    /**
-     * Orientation of the AvatarGroup control.
-     *
-     * `horizontal`: The avatars are displayed horizontally.
-     * `vertical`: The avatars are displayed vertically.
-     */
-    @Input()
-    orientation: AvatarGroupHostConfig['orientation'] = 'horizontal';
 
     /**
      * The spacing between the items depends on the size of the avatars in the group.
@@ -124,6 +115,14 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
     _avatarGroupPopoverBody: AvatarGroupOverflowBodyDirective;
 
     /**
+     * Orientation of the AvatarGroup control.
+     *
+     * `horizontal`: The avatars are displayed horizontally.
+     * `vertical`: The avatars are displayed vertically.
+     */
+    readonly orientation = input<AvatarGroupOrientation>('horizontal');
+
+    /**
      * Heading level for the overflow popover title.
      * @default 5
      */
@@ -131,11 +130,16 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
 
     /**
      * Placement of the group overflow popover relative to the avatar group.
-     * Use `'bottom'` (default) to open centered, or `'bottom-start'` / `'bottom-end'` to align to an edge.
+     * Defaults to `'right'` when `orientation="vertical"`, otherwise `'bottom'`.
+     * Use `'bottom-start'` / `'bottom-end'` to align to an edge.
      * Only applies to `type="group"`.
-     * @default 'bottom'
      */
-    readonly popoverPlacement = input<Placement>('bottom');
+    readonly popoverPlacement = input<Placement | undefined>();
+
+    /** @hidden */
+    readonly _effectivePlacement = computed<Placement>(
+        () => this.popoverPlacement() ?? (this.orientation() === 'vertical' ? 'right' : 'bottom')
+    );
 
     /**
      * Shape of the default overflow button.

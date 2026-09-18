@@ -301,7 +301,7 @@ describe('AvatarGroupComponent overflowButtonShape', () => {
 
 @Component({
     template: `
-        <fd-avatar-group [type]="type()" size="s" [maxVisibleItems]="max()">
+        <fd-avatar-group [type]="type()" size="s" [maxVisibleItems]="max()" [orientation]="orientation()">
             <fd-avatar *fdAvatarGroupItem="''; title: 'P1'" size="s" label="P1"></fd-avatar>
             <fd-avatar *fdAvatarGroupItem="''; title: 'P2'" size="s" label="P2"></fd-avatar>
             <fd-avatar *fdAvatarGroupItem="''; title: 'P3'" size="s" label="P3"></fd-avatar>
@@ -314,6 +314,7 @@ describe('AvatarGroupComponent overflowButtonShape', () => {
 class AvatarGroupMaxVisibleTestComponent {
     readonly max = input<number | null>(null);
     readonly type = input<'individual' | 'group'>('individual');
+    readonly orientation = input<'horizontal' | 'vertical'>('horizontal');
 }
 
 describe('AvatarGroupComponent maxVisibleItems', () => {
@@ -409,14 +410,18 @@ describe('AvatarGroupComponent maxVisibleItems', () => {
     });
 
     describe('vertical orientation with maxVisibleItems', () => {
-        function getHostInstanceVertical(): AvatarGroupHostComponent {
-            const host = getHostInstance();
-            host.orientation = 'vertical';
-            return host;
-        }
+        beforeEach(() => {
+            fixture.componentRef.setInput('orientation', 'vertical');
+            fixture.detectChanges();
+        });
+
+        afterEach(() => {
+            fixture.componentRef.setInput('orientation', 'horizontal');
+            fixture.detectChanges();
+        });
 
         it('hides items beyond maxVisibleItems in vertical orientation', () => {
-            const host = getHostInstanceVertical();
+            const host = getHostInstance();
             host.maxVisibleItems = 3;
             const result = (host as any)._calculateVisibility(0, makeItems(5));
             // maxVisibleItems=3, one moved for overflow button → 2 visible, 3 hidden
@@ -425,7 +430,7 @@ describe('AvatarGroupComponent maxVisibleItems', () => {
         });
 
         it('shows all items when maxVisibleItems is null in vertical orientation', () => {
-            const host = getHostInstanceVertical();
+            const host = getHostInstance();
             host.maxVisibleItems = null;
             const result = (host as any)._calculateVisibility(0, makeItems(5));
             expect(result.visibleItems.length).toBe(5);
@@ -433,10 +438,10 @@ describe('AvatarGroupComponent maxVisibleItems', () => {
         });
 
         it('ignores container width when applying count cap in vertical orientation', () => {
-            const host = getHostInstanceVertical();
+            const host = getHostInstance();
             host.maxVisibleItems = 3;
             // Items have explicit width — vertical should ignore it entirely
-             
+
             const items = Array.from(
                 { length: 5 },
                 () => ({ forceVisibility: false, width: 500 }) as unknown as AvatarGroupItemRendererDirective
@@ -502,6 +507,75 @@ describe('AvatarGroupComponent maxVisibleItems', () => {
             expect(result.visibleItems[0].forceVisibility).toBe(true); // forced always visible
             expect(result.visibleItems.length).toBe(1); // 1 forced, 0 regular (one that fit was moved for overflow button)
             expect(result.hiddenItems.length).toBe(3);
+        });
+    });
+});
+
+describe('AvatarGroupComponent orientation and placement', () => {
+    let fixture: ComponentFixture<AvatarGroupComponent>;
+
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            imports: [AvatarGroupComponent]
+        }).compileComponents();
+
+        fixture = TestBed.createComponent(AvatarGroupComponent);
+        fixture.detectChanges();
+    });
+
+    describe('orientation', () => {
+        it('defaults to "horizontal"', () => {
+            expect(fixture.componentInstance.orientation()).toBe('horizontal');
+        });
+
+        it('updates via signal input', () => {
+            fixture.componentRef.setInput('orientation', 'vertical');
+            fixture.detectChanges();
+            expect(fixture.componentInstance.orientation()).toBe('vertical');
+        });
+    });
+
+    describe('_effectivePlacement', () => {
+        it('defaults to "bottom" for horizontal orientation', () => {
+            expect(fixture.componentInstance._effectivePlacement()).toBe('bottom');
+        });
+
+        it('defaults to "right" when orientation is "vertical"', () => {
+            fixture.componentRef.setInput('orientation', 'vertical');
+            fixture.detectChanges();
+            expect(fixture.componentInstance._effectivePlacement()).toBe('right');
+        });
+
+        it('returns to "bottom" when orientation changes from vertical back to horizontal', () => {
+            fixture.componentRef.setInput('orientation', 'vertical');
+            fixture.detectChanges();
+            fixture.componentRef.setInput('orientation', 'horizontal');
+            fixture.detectChanges();
+            expect(fixture.componentInstance._effectivePlacement()).toBe('bottom');
+        });
+
+        it('explicit popoverPlacement overrides the horizontal default', () => {
+            fixture.componentRef.setInput('popoverPlacement', 'bottom-end');
+            fixture.detectChanges();
+            expect(fixture.componentInstance._effectivePlacement()).toBe('bottom-end');
+        });
+
+        it('explicit popoverPlacement overrides the vertical default', () => {
+            fixture.componentRef.setInput('orientation', 'vertical');
+            fixture.componentRef.setInput('popoverPlacement', 'bottom');
+            fixture.detectChanges();
+            expect(fixture.componentInstance._effectivePlacement()).toBe('bottom');
+        });
+
+        it('explicit popoverPlacement can be cleared to restore the computed default', () => {
+            fixture.componentRef.setInput('orientation', 'vertical');
+            fixture.componentRef.setInput('popoverPlacement', 'bottom');
+            fixture.detectChanges();
+            expect(fixture.componentInstance._effectivePlacement()).toBe('bottom');
+
+            fixture.componentRef.setInput('popoverPlacement', undefined);
+            fixture.detectChanges();
+            expect(fixture.componentInstance._effectivePlacement()).toBe('right');
         });
     });
 });

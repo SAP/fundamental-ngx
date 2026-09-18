@@ -41,8 +41,12 @@ fd-avatar-group {
             display: inline-block;
         }
 
-        .fd-avatar-group {
+        .fd-avatar-group:not(.fd-avatar-group--vertical) {
             display: inline-block;
+        }
+
+        .fd-avatar-group.fd-avatar-group--vertical {
+            display: flex;
         }
     }
 }

@@ -8,6 +8,7 @@ import {
     ElementRef,
     inject,
     Input,
+    input,
     OnChanges,
     OnInit,
     QueryList,
@@ -26,7 +27,7 @@ import {
 import { animationFrames, combineLatest, delayWhen, map, Observable, startWith, Subject } from 'rxjs';
 import { AvatarGroupItemRendererDirective } from '../directives/avatar-group-item-renderer.directive';
 import { AvatarGroupItemDirective } from '../directives/avatar-group-item.directive';
-import { AvatarGroupHostConfig } from '../types';
+import { AvatarGroupHostConfig, AvatarGroupOrientation } from '../types';
 
 @Component({
     selector: 'fd-avatar-group-host',
@@ -51,13 +52,6 @@ export class AvatarGroupHostComponent
      **/
     @Input()
     type: AvatarGroupHostConfig['type'];
-
-    /**
-     * The orientation of the avatar group.
-     * Options include 'horizontal' and 'vertical'.
-     **/
-    @Input()
-    orientation: AvatarGroupHostConfig['orientation'];
 
     /**
      * The size of the avatar group.
@@ -86,6 +80,12 @@ export class AvatarGroupHostComponent
     @ContentChildren(AvatarGroupItemRendererDirective, { descendants: true })
     _portals: QueryList<AvatarGroupItemRendererDirective>;
 
+    /**
+     * The orientation of the avatar group.
+     * Options include 'horizontal' and 'vertical'.
+     **/
+    readonly orientation = input<AvatarGroupOrientation>('horizontal');
+
     /** @hidden */
     _resizeEmitter: Observable<ResizeObserverEntry[]> = inject(ResizeObserverDirective).resizeEvents$;
 
@@ -112,7 +112,7 @@ export class AvatarGroupHostComponent
             'fd-avatar-group',
             this.type === 'individual' ? 'fd-avatar-group--individual-type' : '',
             this.type === 'group' ? 'fd-avatar-group--group-type' : '',
-            this.orientation ? 'fd-avatar-group--' + this.orientation : '',
+            this.orientation() ? 'fd-avatar-group--' + this.orientation() : '',
             this.size ? 'fd-avatar-group--' + this.size : ''
         ];
     }
@@ -165,7 +165,7 @@ export class AvatarGroupHostComponent
         hiddenItems: AvatarGroupItemRendererDirective[];
         visibleItems: AvatarGroupItemRendererDirective[];
     } {
-        if (this.orientation === 'vertical') {
+        if (this.orientation() === 'vertical') {
             return this.maxVisibleItems != null
                 ? this._calculateVisibilityWithMaxItems(Infinity, items)
                 : { visibleItems: items, hiddenItems: [] };

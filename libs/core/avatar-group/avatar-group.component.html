@@ -4,13 +4,13 @@
         #avatarGroupHostComponent
         [type]="type"
         [size]="size"
-        [orientation]="orientation"
+        [orientation]="orientation()"
         [maxVisibleItems]="maxVisibleItems()"
         fdkResizeObserver
         fdkFocusableList
         [contentDirection]="contentDirection()"
         [wrap]="true"
-        [navigationDirection]="orientation"
+        [navigationDirection]="orientation()"
         [items]="_avatars"
         [attr.aria-label]="ariaLabel || _defaultAriaLabelIndividual()"
         (resized)="_detectChanges()"
@@ -74,7 +74,7 @@
 } @else {
     <fd-popover
         #groupPopover
-        [placement]="popoverPlacement()"
+        [placement]="_effectivePlacement()"
         [noArrow]="false"
         [focusAutoCapture]="true"
         [bodyAriaLabel]="_popupBodyAriaLabel(_avatars.length)"
@@ -86,7 +86,7 @@
                 #avatarGroupHostComponent
                 [type]="type"
                 [size]="size"
-                [orientation]="orientation"
+                [orientation]="orientation()"
                 [maxVisibleItems]="maxVisibleItems()"
                 [attr.aria-label]="ariaLabel || _defaultAriaLabelGroup()"
                 role="button"

@@ -17,13 +17,7 @@
                 box-sizing: border-box;
             "
         >
-            <fd-avatar-group
-                type="individual"
-                size="m"
-                overflowPopoverTitle="Team members"
-                style="width: 100%"
-                orientation="vertical"
-            >
+            <fd-avatar-group type="individual" size="m" overflowPopoverTitle="Team members" style="width: 100%">
                 @for (person of people; track person) {
                     <fd-avatar
                         *fdAvatarGroupItem="details; title: person.firstName + ' ' + person.lastName"
@@ -85,7 +79,6 @@
                 [maxVisibleItems]="5"
                 overflowButtonShape="circle"
                 style="width: 100%"
-                orientation="vertical"
             >
                 @for (person of people; track person) {
                     <fd-avatar
