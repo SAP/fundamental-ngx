@@ -166,10 +166,9 @@ export class AvatarGroupHostComponent
         visibleItems: AvatarGroupItemRendererDirective[];
     } {
         if (this.orientation === 'vertical') {
-            return {
-                visibleItems: items,
-                hiddenItems: []
-            };
+            return this.maxVisibleItems != null
+                ? this._calculateVisibilityWithMaxItems(Infinity, items)
+                : { visibleItems: items, hiddenItems: [] };
         }
 
         return this.maxVisibleItems != null

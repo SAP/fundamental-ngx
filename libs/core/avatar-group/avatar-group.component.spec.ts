@@ -408,6 +408,46 @@ describe('AvatarGroupComponent maxVisibleItems', () => {
         expect(runCalc(4, items).hiddenItems.length).toBe(2);
     });
 
+    describe('vertical orientation with maxVisibleItems', () => {
+        function getHostInstanceVertical(): AvatarGroupHostComponent {
+            const host = getHostInstance();
+            host.orientation = 'vertical';
+            return host;
+        }
+
+        it('hides items beyond maxVisibleItems in vertical orientation', () => {
+            const host = getHostInstanceVertical();
+            host.maxVisibleItems = 3;
+            const result = (host as any)._calculateVisibility(0, makeItems(5));
+            // maxVisibleItems=3, one moved for overflow button → 2 visible, 3 hidden
+            expect(result.visibleItems.length).toBe(2);
+            expect(result.hiddenItems.length).toBe(3);
+        });
+
+        it('shows all items when maxVisibleItems is null in vertical orientation', () => {
+            const host = getHostInstanceVertical();
+            host.maxVisibleItems = null;
+            const result = (host as any)._calculateVisibility(0, makeItems(5));
+            expect(result.visibleItems.length).toBe(5);
+            expect(result.hiddenItems.length).toBe(0);
+        });
+
+        it('ignores container width when applying count cap in vertical orientation', () => {
+            const host = getHostInstanceVertical();
+            host.maxVisibleItems = 3;
+            // Items have explicit width — vertical should ignore it entirely
+             
+            const items = Array.from(
+                { length: 5 },
+                () => ({ forceVisibility: false, width: 500 }) as unknown as AvatarGroupItemRendererDirective
+            );
+            const result = (host as any)._calculateVisibility(100, items);
+            // Width would exclude all items horizontally, but vertical ignores width
+            expect(result.visibleItems.length).toBe(2);
+            expect(result.hiddenItems.length).toBe(3);
+        });
+    });
+
     describe('group type', () => {
         beforeEach(() => {
             fixture.componentRef.setInput('type', 'group');
