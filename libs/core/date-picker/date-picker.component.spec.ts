@@ -85,6 +85,26 @@ describe('DatePickerComponent', () => {
         expect(component.selectedMultipleDatesChange.emit).toHaveBeenCalledWith(dates);
     });
 
+    it('should preserve the displayed month when adding a multiple date', () => {
+        component.allowMultipleSelection = true;
+        component.showTodayButton = true;
+        const firstDate = new FdDate(2000, 10, 10);
+        const newlySelectedDate = new FdDate(2000, 11, 10);
+
+        component.selectedMultipleDates = [firstDate];
+        component._calendarComponent.setCurrentlyDisplayed(newlySelectedDate);
+        component.handleMultipleDatesChange([firstDate, newlySelectedDate]);
+
+        expect(component._calendarComponent._currentlyDisplayed).toEqual({
+            month: newlySelectedDate.month,
+            year: newlySelectedDate.year
+        });
+        expect(component.selectedMultipleDates).toEqual([firstDate, newlySelectedDate]);
+        expect(component._inputFieldDate).toBe(
+            [firstDate, newlySelectedDate].map((date) => (<any>component)._formatDate(date)).join(', ')
+        );
+    });
+
     it('should handle range date change and update input', () => {
         jest.spyOn(component, 'onChange');
         jest.spyOn(component.selectedRangeDateChange, 'emit');
@@ -117,6 +137,18 @@ describe('DatePickerComponent', () => {
         expect(component._inputFieldDate).toBe(dateStr + component._rangeDelimiter + dateStr);
         expect(component.onChange).toHaveBeenCalledWith({ start: date, end: date });
         expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith({ start: date, end: date });
+    });
+
+    it('should navigate to today when clicking the Today button in multiple date mode', () => {
+        component.allowMultipleSelection = true;
+        component.showTodayButton = true;
+        const today = adapter.today();
+
+        component._calendarComponent.setCurrentlyDisplayed(new FdDate(2000, 10, 10));
+        component.onTodayButtonClick();
+
+        expect(component.selectedMultipleDates).toEqual([today]);
+        expect(component._calendarComponent._currentlyDisplayed).toEqual({ month: today.month, year: today.year });
     });
 
     it('should handle correct write value for single mode', () => {
