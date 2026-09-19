@@ -36,6 +36,7 @@
                 "main": "apps/docs/src/main.ts",
                 "polyfills": "apps/docs/src/polyfills.ts",
                 "tsConfig": "apps/docs/tsconfig.app.json",
+                "externalDependencies": ["marked-katex-extension"],
                 "assets": [
                     "apps/docs/src/favicon.ico",
                     "apps/docs/src/llms.txt",
