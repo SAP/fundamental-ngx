@@ -596,13 +596,11 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     _toggleSelection(item: SelectableOptionItem, fromTokenCloseClick = false): void {
         const selectedSuggestions = this._selectedSuggestions();
         const idx = getTokenIndexByIdlOrValue(item, selectedSuggestions);
-        if (idx === -1) {
-            this._selectedSuggestions.set([...selectedSuggestions, item]);
-        } else {
-            this._selectedSuggestions.set(selectedSuggestions.filter((_, i) => i !== idx));
-        }
+        const updatedSelectedSuggestions =
+            idx === -1 ? [...selectedSuggestions, item] : selectedSuggestions.filter((_, index) => index !== idx);
 
         item.selected = !item.selected;
+        this._setSelectedSuggestions(updatedSelectedSuggestions.map(({ value }) => value));
 
         this._propagateChange(fromTokenCloseClick);
 
@@ -652,7 +650,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
         if (event) {
             event.preventDefault();
         }
-        const optionItem = this._flatSuggestions().find((s) => s.value === token.value);
+        const optionItem = this._flatSuggestions()[getTokenIndexByIdlOrValue(token, this._flatSuggestions())];
         if (optionItem) {
             this._toggleSelection(optionItem, true);
             this._rangeSelector.reset();
@@ -724,7 +722,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
      * Handle dialog dismissing, closes popover and sets backup data.
      */
     _dialogDismiss(backup: SelectableOptionItem[]): void {
-        this._selectedSuggestions.set([...backup]);
+        this._setSelectedSuggestions(backup.map(({ value }) => value));
         this._setInputText('');
         this._showList(false);
         this.selectedShown.set(false);
