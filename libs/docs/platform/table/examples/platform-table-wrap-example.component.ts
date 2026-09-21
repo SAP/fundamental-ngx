@@ -81,11 +81,6 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
     fetch(tableState?: TableState): Observable<ExampleItem[]> {
         this.items = [...ITEMS];
 
-        // apply searching
-        if (tableState?.searchInput) {
-            this.items = this.search(this.items, tableState);
-        }
-
         // apply filtering
         if (tableState?.filterBy) {
             this.items = this.filter(tableState);
@@ -99,23 +94,6 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
         this.totalItems = this.items.length;
 
         return of(this.items);
-    }
-
-    search(items: ExampleItem[], { searchInput, columnKeys }: TableState): ExampleItem[] {
-        const searchText = searchInput?.text || '';
-        const keysToSearchBy = columnKeys;
-
-        if (searchText.trim() === '' || keysToSearchBy.length === 0) {
-            return items;
-        }
-
-        return items.filter((item) => {
-            const valuesForSearch = keysToSearchBy.map((key) => item[key as keyof ExampleItem]);
-            return valuesForSearch
-                .filter((value): value is NonNullable<typeof value> => !!value)
-                .map((value): string => value.toString())
-                .some((value) => value.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()));
-        });
     }
 
     private sort({ sortBy }: TableState): ExampleItem[] {
