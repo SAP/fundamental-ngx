@@ -159,6 +159,22 @@ export class MessagesListComponent implements AfterViewInit {
         });
     }
 
+    /** @hidden Map message type to icon name */
+    protected getIconForType(type: string): string {
+        switch (type) {
+            case 'error':
+                return 'error';
+            case 'success':
+                return 'sys-enter-2';
+            case 'warning':
+                return 'alert';
+            case 'information':
+                return 'information';
+            default:
+                return 'sys-help-2';
+        }
+    }
+
     /** @hidden Animate the transition between list and details screens. */
     private _animateScreenTransition(screen: 'list' | 'details'): void {
         const listEl = this.listSection?.nativeElement;

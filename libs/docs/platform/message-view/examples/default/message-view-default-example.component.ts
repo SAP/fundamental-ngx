@@ -8,7 +8,8 @@ import {
     viewChild
 } from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/platform/button';
-import { MessagePopoverErrorGroup, MessageViewComponent } from '@fundamental-ngx/platform/message-view';
+import { MessageViewComponent } from '@fundamental-ngx/platform/message-view';
+import { MessagePopoverErrorGroup } from '@fundamental-ngx/platform/messages-shared';
 
 @Component({
     selector: 'fdp-message-view-default-example',
@@ -126,6 +127,26 @@ export class MessageViewDefaultExampleComponent implements AfterViewInit {
                         link: {
                             text: 'Upload profile picture',
                             callback: () => alert('Upload profile picture clicked!')
+                        }
+                    },
+                    {
+                        type: 'default',
+                        state: 'neutral',
+                        heading: {
+                            type: 'string',
+                            message: 'Need Help?'
+                        },
+                        description: {
+                            type: 'string',
+                            message:
+                                'If you have questions about your account settings, visit our help center or contact support.'
+                        },
+                        name: 'help',
+                        fieldName: 'Help',
+                        errors: null,
+                        link: {
+                            text: 'Visit Help Center',
+                            href: 'https://www.example.com/help'
                         }
                     }
                 ]

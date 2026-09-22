@@ -31,4 +31,20 @@ import { MessageViewComponent } from '../message-view.component';
 export class MessageViewDialogComponent {
     readonly dialogRef = inject(DialogRef);
     readonly messageView = inject(MessageViewComponent);
+
+    /** @hidden Map message type to icon name */
+    protected getIconForType(type: string): string {
+        switch (type) {
+            case 'error':
+                return 'error';
+            case 'success':
+                return 'sys-enter-2';
+            case 'warning':
+                return 'alert';
+            case 'information':
+                return 'information';
+            default:
+                return 'sys-help-2';
+        }
+    }
 }

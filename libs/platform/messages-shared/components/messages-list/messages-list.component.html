@@ -72,7 +72,7 @@
                                 fd-object-status
                                 class="fd-list__icon"
                                 [status]="item.state"
-                                [glyph]="'message-' + item.type"
+                                [glyph]="getIconForType(item.type)"
                             ></span>
                         </ng-template>
                         <ng-template #listSubtitle>
@@ -121,7 +121,7 @@
                         fd-object-status
                         class="fd-message-view__icon"
                         [status]="currentEntry.state"
-                        [glyph]="'message-' + currentEntry.type"
+                        [glyph]="getIconForType(currentEntry.type)"
                     ></span>
                     <ng-template
                         [ngTemplateOutlet]="headingTemplate"

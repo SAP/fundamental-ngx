@@ -38,9 +38,13 @@
                             [label]="('platformMessagePopover.allErrors' | fdTranslate)()"
                             value="all"
                         ></button>
-                        @for (type of messageView._errorTypes$(); track type) {
+                        @for (type of messageView._errorTypes$(); track type.group) {
                             <button fd-button [value]="type.group">
-                                <span fd-object-status [status]="type.state" [glyph]="'message-' + type.group"></span>
+                                <span
+                                    fd-object-status
+                                    [status]="type.state"
+                                    [glyph]="getIconForType(type.group)"
+                                ></span>
                                 <span class="fd-button__text">{{ type.count }}</span>
                             </button>
                         }

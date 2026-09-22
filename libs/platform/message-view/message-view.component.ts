@@ -1,8 +1,8 @@
-import { BooleanInput } from '@angular/cdk/coercion';
 import {
     ChangeDetectionStrategy,
     Component,
     Injector,
+    OnDestroy,
     ViewEncapsulation,
     booleanAttribute,
     inject,
@@ -20,7 +20,7 @@ import { MessageViewDialogComponent } from './components/message-view-dialog.com
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MessageViewComponent extends MessageListShared {
+export class MessageViewComponent extends MessageListShared implements OnDestroy {
     /**
      * Messages to display in the message view.
      */
@@ -39,7 +39,7 @@ export class MessageViewComponent extends MessageListShared {
     /**
      * Whether the message view dialog should be opened in mobile mode.
      */
-    readonly mobile = input<boolean, BooleanInput>(false, { transform: booleanAttribute });
+    readonly mobile = input(false, { transform: booleanAttribute });
 
     /** @hidden */
     protected readonly dialogService = inject(DialogService);
@@ -72,5 +72,10 @@ export class MessageViewComponent extends MessageListShared {
     /** Closes the dialog. */
     close(): void {
         this.dialogRef?.close();
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this.close();
     }
 }

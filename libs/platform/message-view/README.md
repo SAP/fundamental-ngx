@@ -7,18 +7,20 @@ The `fdp-message-view` component is a message display component for showing mess
 ### Basic Example
 
 ```typescript
-import { Component, signal } from '@angular/core';
+import { Component, signal, viewChild } from '@angular/core';
 import { MessageViewComponent, MessagePopoverErrorGroup } from '@fundamental-ngx/platform/message-view';
 
 @Component({
     selector: 'app-example',
     template: `
         <fdp-message-view [messages]="messages()"> </fdp-message-view>
-        <button (click)="messageView.open()">Show Messages</button>
+        <button (click)="messageView()?.open()">Show Messages</button>
     `,
     imports: [MessageViewComponent]
 })
 export class ExampleComponent {
+    readonly messageView = viewChild(MessageViewComponent);
+
     messages = signal<MessagePopoverErrorGroup[]>([
         {
             group: 'Errors',
@@ -30,6 +32,20 @@ export class ExampleComponent {
                     description: { type: 'string', message: 'Please provide valid data.' },
                     name: 'input1',
                     fieldName: 'Input Field',
+                    errors: null
+                }
+            ]
+        },
+        {
+            group: 'Information',
+            errors: [
+                {
+                    type: 'information',
+                    state: 'informative',
+                    heading: { type: 'string', message: 'Help Available' },
+                    description: { type: 'string', message: 'Click for more details.' },
+                    name: 'help1',
+                    fieldName: 'Help Section',
                     errors: null
                 }
             ]
