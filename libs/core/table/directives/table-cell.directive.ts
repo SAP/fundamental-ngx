@@ -1,15 +1,6 @@
-import {
-    AfterContentInit,
-    ContentChildren,
-    Directive,
-    HostBinding,
-    HostListener,
-    Input,
-    QueryList,
-    booleanAttribute
-} from '@angular/core';
+import { AfterContentInit, booleanAttribute, computed, contentChildren, Directive, effect, input } from '@angular/core';
 import { FDK_FOCUSABLE_ITEM_DIRECTIVE, FocusableItemDirective } from '@fundamental-ngx/cdk/utils';
-import { CheckboxComponent, FD_CHECKBOX_COMPONENT } from '@fundamental-ngx/core/checkbox';
+import { FD_CHECKBOX_COMPONENT } from '@fundamental-ngx/core/checkbox';
 
 @Directive({
     selector: '[fdTableCell], [fd-table-cell]',
@@ -19,70 +10,103 @@ import { CheckboxComponent, FD_CHECKBOX_COMPONENT } from '@fundamental-ngx/core/
             useExisting: TableCellDirective
         }
     ],
-    standalone: true
+    host: {
+        class: 'fd-table__cell',
+        '[class.fd-table__cell--no-horizontal-border]': 'noBorderX()',
+        '[class.fd-table__cell--no-vertical-border]': 'noBorderY()',
+        '[class.fd-table__cell--activable]': 'activable()',
+        '[class.fd-table__cell--hoverable]': 'hoverable()',
+        '[class.fd-table__cell--fit-content]': 'fitContent()',
+        '[class.fd-table__cell--no-padding]': 'noPadding()',
+        '[class.fd-table__cell--no-data]': 'noData()',
+        '[class.fd-table__cell--non-interactive]': 'nonInteractive()',
+        '[class.fd-table__cell--focusable]': 'isFocusable()',
+        '[attr.role]': 'computedRole()',
+        '[attr.scope]': 'scope()',
+        '(focusin)': '_focusIn()',
+        '(focusout)': '_focusOut()'
+    }
 })
 export class TableCellDirective extends FocusableItemDirective implements AfterContentInit {
+    /** ARIA role for the table cell (only used if explicitly provided) */
+    readonly role = input<string>();
+
     /** Whether to show the table cell's horizontal borders */
-    @HostBinding('class.fd-table__cell--no-horizontal-border')
-    @Input()
-    noBorderX = false;
+    readonly noBorderX = input(false, { transform: booleanAttribute });
 
     /** Whether to show the table cell's vertical borders */
-    @HostBinding('class.fd-table__cell--no-vertical-border')
-    @Input()
-    noBorderY = false;
+    readonly noBorderY = input(false, { transform: booleanAttribute });
 
     /** Whether the table cell is activable */
-    @HostBinding('class.fd-table__cell--activable')
-    @Input()
-    activable = false;
+    readonly activable = input(false, { transform: booleanAttribute });
 
-    /** @hidden */
-    @HostBinding('class.fd-table__cell--focusable')
-    @Input({ transform: booleanAttribute })
-    set focusable(value: boolean) {
-        this.setFocusable(value);
-    }
-    get focusable(): boolean {
-        return this.isFocusable();
-    }
+    /**
+     * Whether the table cell is focusable.
+     * This input syncs with the parent FocusableItemDirective's focusable state.
+     */
+    readonly focusable = input(false, { transform: booleanAttribute });
 
     /** Whether the table cell is hoverable */
-    @HostBinding('class.fd-table__cell--hoverable')
-    @Input()
-    hoverable = false;
+    readonly hoverable = input(false, { transform: booleanAttribute });
 
     /** Whether the table cell's width should fit to content  */
-    @HostBinding('class.fd-table__cell--fit-content')
-    @Input()
-    fitContent = false;
+    readonly fitContent = input(false, { transform: booleanAttribute });
 
     /** Whether the table cell shouldn't have padding on sides */
-    @HostBinding('class.fd-table__cell--no-padding')
-    @Input()
-    noPadding = false;
+    readonly noPadding = input(false, { transform: booleanAttribute });
 
     /** Whether the table cell indicates that there is no data */
-    @HostBinding('class.fd-table__cell--no-data')
-    @Input()
-    noData = false;
+    readonly noData = input(false, { transform: booleanAttribute });
 
     /** Whether the table cell inside table header should be non-interactive */
-    @HostBinding('class.fd-table__cell--non-interactive')
-    @Input()
-    nonInteractive = false;
+    readonly nonInteractive = input(false, { transform: booleanAttribute });
 
     /** Key of a cell element, it's used to identify this cell with certain column */
-    @Input()
-    key: string;
+    readonly key = input<string>();
 
     /** @hidden */
-    @ContentChildren(FD_CHECKBOX_COMPONENT)
-    _checkboxes: QueryList<CheckboxComponent>;
+    readonly _checkboxes = contentChildren(FD_CHECKBOX_COMPONENT);
 
-    /** @hidden */
-    @HostBinding('class.fd-table__cell')
-    _fdTableCellClass = true;
+    /** @hidden Computed scope attribute for th elements in tbody */
+    protected readonly scope = computed(() => (this.computedRole() === 'rowheader' ? 'row' : null));
+
+    /** @hidden Computed role based on element type and parent context */
+    protected readonly computedRole = computed(() => {
+        // If role is explicitly provided via input, use it
+        const explicitRole = this.role();
+
+        if (explicitRole) {
+            return explicitRole;
+        }
+
+        // Otherwise, determine role based on element and parent context
+        const element = this.elementRef.nativeElement;
+        const tagName = element.tagName.toLowerCase();
+
+        // td elements always get gridcell
+        if (tagName === 'td') {
+            return 'gridcell';
+        }
+
+        // th elements need to check their parent context
+        if (tagName === 'th') {
+            const parent = element.parentElement;
+            const grandparent = parent?.parentElement;
+
+            if (grandparent) {
+                const grandparentTag = grandparent.tagName.toLowerCase();
+
+                if (grandparentTag === 'thead') {
+                    return 'columnheader';
+                } else if (grandparentTag === 'tbody') {
+                    return 'rowheader';
+                }
+            }
+        }
+
+        // Default fallback
+        return 'gridcell';
+    });
 
     /** @hidden */
     private _parentPreviousTabIndex: number | undefined;
@@ -90,11 +114,24 @@ export class TableCellDirective extends FocusableItemDirective implements AfterC
     /** @hidden */
     constructor() {
         super();
-        this.setFocusable(false);
+        // Reactively sync focusable input with parent FocusableItemDirective state
+        effect(() => this.setFocusable(this.focusable()));
     }
 
     /** @hidden */
-    @HostListener('focusin')
+    ngAfterContentInit(): void {
+        const cell = this.elementRef.nativeElement;
+
+        if (this._checkboxes().length) {
+            cell.classList.add('fd-table__cell--checkbox');
+        }
+
+        if (this.noData()) {
+            cell.setAttribute('colspan', '100%');
+        }
+    }
+
+    /** @hidden */
     protected _focusIn(): void {
         const parentEl = this.elementRef.nativeElement.parentElement;
         this._parentPreviousTabIndex = parentEl?.tabIndex;
@@ -102,24 +139,10 @@ export class TableCellDirective extends FocusableItemDirective implements AfterC
     }
 
     /** @hidden */
-    @HostListener('focusout')
     protected _focusOut(): void {
         const parentEl = this.elementRef.nativeElement.parentElement;
         if (this._parentPreviousTabIndex) {
             parentEl?.setAttribute('tabindex', this._parentPreviousTabIndex.toString());
-        }
-    }
-
-    /** @hidden */
-    ngAfterContentInit(): void {
-        const cell = this.elementRef.nativeElement;
-
-        if (this._checkboxes && this._checkboxes.length) {
-            cell.classList.add('fd-table__cell--checkbox');
-        }
-
-        if (this.noData) {
-            cell.setAttribute('colspan', '100%');
         }
     }
 }

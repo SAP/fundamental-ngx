@@ -1,56 +1,31 @@
 import {
-    ContentChild,
+    booleanAttribute,
+    contentChild,
+    DestroyRef,
     Directive,
     ElementRef,
-    Input,
-    OnDestroy,
-    Renderer2,
-    booleanAttribute,
-    inject
+    inject,
+    input,
+    Renderer2
 } from '@angular/core';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { ResizeObserverService } from '@fundamental-ngx/cdk/utils';
 import { FD_TOOLBAR } from '@fundamental-ngx/core/toolbar';
-import { Subscription } from 'rxjs';
+import { combineLatestWith, EMPTY, switchMap } from 'rxjs';
 import { TableHeaderDirective } from './table-header.directive';
 
 @Directive({
-    selector: '[fdTableContainer], [fd-table-container]',
-    standalone: true
+    selector: '[fdTableContainer], [fd-table-container]'
 })
-export class TableContainerDirective implements OnDestroy {
+export class TableContainerDirective {
     /** Whether the scroll is applied on the page and not on the table */
-    @Input({ transform: booleanAttribute })
-    outerScroll = false;
+    readonly outerScroll = input(false, { transform: booleanAttribute });
 
     /** @hidden */
-    @ContentChild(FD_TOOLBAR, { read: ElementRef })
-    set toolbar(toolbarElRef: ElementRef) {
-        if (this.outerScroll && toolbarElRef) {
-            const toolbarEl = toolbarElRef.nativeElement;
-
-            if (this._resizeSubscription) {
-                this._resizeSubscription.unsubscribe();
-            }
-
-            this._resizeSubscription = this.resizeObserverService.observe(toolbarEl).subscribe(() => {
-                this._renderer.setStyle(toolbarEl, 'position', 'sticky');
-                this._renderer.setStyle(toolbarEl, 'top', '0');
-
-                this._renderer.setStyle(this._tableHeaderEl, 'position', 'sticky');
-                this._renderer.setStyle(this._tableHeaderEl, 'top', `${toolbarEl.offsetHeight}px`);
-            });
-        }
-    }
+    readonly toolbar = contentChild(FD_TOOLBAR, { read: ElementRef });
 
     /** @hidden */
-    @ContentChild(TableHeaderDirective, { read: ElementRef })
-    set tableHeader(tableHeaderEl: ElementRef) {
-        if (this.outerScroll) {
-            this._tableHeaderEl = tableHeaderEl.nativeElement;
-            this._renderer.setStyle(this._tableHeaderEl, 'position', 'sticky');
-            this._renderer.setStyle(this._tableHeaderEl, 'top', '0');
-        }
-    }
+    readonly tableHeader = contentChild(TableHeaderDirective, { read: ElementRef });
 
     /** @hidden */
     readonly resizeObserverService = inject(ResizeObserverService);
@@ -59,15 +34,46 @@ export class TableContainerDirective implements OnDestroy {
     private readonly _renderer = inject(Renderer2);
 
     /** @hidden */
-    private _tableHeaderEl: HTMLElement;
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
-    private _resizeSubscription = new Subscription();
+    constructor() {
+        // Handle toolbar sticky positioning when outerScroll is enabled
+        toObservable(this.toolbar)
+            .pipe(
+                combineLatestWith(toObservable(this.outerScroll)),
+                switchMap(([toolbarElRef, outerScroll]) =>
+                    outerScroll && toolbarElRef ? this.resizeObserverService.observe(toolbarElRef.nativeElement) : EMPTY
+                ),
+                takeUntilDestroyed(this._destroyRef)
+            )
+            .subscribe(() => {
+                const toolbarElRef = this.toolbar();
+                if (toolbarElRef) {
+                    const toolbarEl = toolbarElRef.nativeElement;
+                    this._renderer.setStyle(toolbarEl, 'position', 'sticky');
+                    this._renderer.setStyle(toolbarEl, 'top', '0');
+                    this._renderer.setStyle(toolbarEl, 'z-index', '2');
 
-    /** @hidden */
-    ngOnDestroy(): void {
-        if (this._resizeSubscription) {
-            this._resizeSubscription.unsubscribe();
-        }
+                    const tableHeaderEl = this.tableHeader();
+                    if (tableHeaderEl) {
+                        const headerNativeEl = tableHeaderEl.nativeElement;
+                        this._renderer.setStyle(headerNativeEl, 'position', 'sticky');
+                        this._renderer.setStyle(headerNativeEl, 'top', `${toolbarEl.offsetHeight}px`);
+                        this._renderer.setStyle(headerNativeEl, 'z-index', '2');
+                    }
+                }
+            });
+
+        // Handle table header sticky positioning when outerScroll is enabled
+        toObservable(this.tableHeader)
+            .pipe(combineLatestWith(toObservable(this.outerScroll)), takeUntilDestroyed(this._destroyRef))
+            .subscribe(([tableHeaderElRef, outerScroll]) => {
+                if (outerScroll && tableHeaderElRef) {
+                    const headerEl = tableHeaderElRef.nativeElement;
+                    this._renderer.setStyle(headerEl, 'position', 'sticky');
+                    this._renderer.setStyle(headerEl, 'top', '0');
+                }
+            });
     }
 }

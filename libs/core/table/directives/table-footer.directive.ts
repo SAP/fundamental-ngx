@@ -1,11 +1,13 @@
-import { Directive, HostBinding } from '@angular/core';
+import { Directive, input } from '@angular/core';
 
 @Directive({
     selector: '[fdTableFooter], [fd-table-footer]',
-    standalone: true
+    host: {
+        class: 'fd-table__footer',
+        '[attr.role]': 'role()'
+    }
 })
 export class TableFooterDirective {
-    /** @hidden */
-    @HostBinding('class.fd-table__footer')
-    fdTableFooterClass = true;
+    /** ARIA role for the table footer */
+    readonly role = input('rowgroup');
 }
