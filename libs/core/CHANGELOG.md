@@ -1,3 +1,13 @@
+## 0.65.0-rc.19 (2026-09-22)
+
+### 🩹 Fixes
+
+- **core, platform:** refactor Core Table ([#14542](https://github.com/SAP/fundamental-ngx/pull/14542))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.65.0-rc.18 (2026-09-19)
 
 This was a version bump only for core to align it with other projects, there were no code changes.
