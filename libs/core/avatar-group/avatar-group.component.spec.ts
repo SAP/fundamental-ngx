@@ -338,10 +338,7 @@ describe('AvatarGroupComponent maxVisibleItems', () => {
         items: AvatarGroupItemRendererDirective[],
         containerWidth = 1000
     ): { hiddenItems: AvatarGroupItemRendererDirective[]; visibleItems: AvatarGroupItemRendererDirective[] } {
-        const host = getHostInstance();
-        host.maxVisibleItems = max;
-
-        return (host as any)._calculateVisibility(containerWidth, items);
+        return (getHostInstance() as any)._calculateVisibility(containerWidth, items, max);
     }
 
     beforeEach(async () => {
@@ -356,7 +353,7 @@ describe('AvatarGroupComponent maxVisibleItems', () => {
     it('passes maxVisibleItems to the host component', () => {
         fixture.componentRef.setInput('max', 3);
         fixture.detectChanges();
-        expect(getHostInstance().maxVisibleItems).toBe(3);
+        expect(getHostInstance().maxVisibleItems()).toBe(3);
     });
 
     it('falls through to width-based calculation when maxVisibleItems is null', () => {
@@ -367,7 +364,8 @@ describe('AvatarGroupComponent maxVisibleItems', () => {
     });
 
     it('hides items beyond maxVisibleItems', () => {
-        const result = runCalc(3, makeItems(5));
+        const maxVisibleItems = 3;
+        const result = runCalc(maxVisibleItems, makeItems(5));
         // maxVisibleItems=3, all items fit (0 width), but one is moved to hidden for overflow button
         expect(result.visibleItems.length).toBe(2);
         expect(result.hiddenItems.length).toBe(3);
@@ -386,14 +384,14 @@ describe('AvatarGroupComponent maxVisibleItems', () => {
     });
 
     it('counts forceVisibility items against the limit and never hides them', () => {
+        const maxVisibleItems = 3;
         const host = getHostInstance();
-        host.maxVisibleItems = 3;
         const items: AvatarGroupItemRendererDirective[] = [
             { forceVisibility: true, width: 0 } as unknown as AvatarGroupItemRendererDirective,
             ...makeItems(4)
         ];
 
-        const result = (host as any)._calculateVisibility(1000, items);
+        const result = (host as any)._calculateVisibility(1000, items, maxVisibleItems);
         // maxVisibleItems=3, so 1 forced + 2 regular fit, then one moved for button
         expect(result.visibleItems.length).toBe(2); // 1 forced + 1 regular
         expect(result.hiddenItems.length).toBe(3);
@@ -421,9 +419,9 @@ describe('AvatarGroupComponent maxVisibleItems', () => {
         });
 
         it('hides items beyond maxVisibleItems in vertical orientation', () => {
+            const maxVisibleItems = 3;
             const host = getHostInstance();
-            host.maxVisibleItems = 3;
-            const result = (host as any)._calculateVisibility(0, makeItems(5));
+            const result = (host as any)._calculateVisibility(0, makeItems(5), maxVisibleItems);
             // maxVisibleItems=3, one moved for overflow button → 2 visible, 3 hidden
             expect(result.visibleItems.length).toBe(2);
             expect(result.hiddenItems.length).toBe(3);
@@ -431,22 +429,21 @@ describe('AvatarGroupComponent maxVisibleItems', () => {
 
         it('shows all items when maxVisibleItems is null in vertical orientation', () => {
             const host = getHostInstance();
-            host.maxVisibleItems = null;
-            const result = (host as any)._calculateVisibility(0, makeItems(5));
+            const result = (host as any)._calculateVisibility(0, makeItems(5), null);
             expect(result.visibleItems.length).toBe(5);
             expect(result.hiddenItems.length).toBe(0);
         });
 
         it('ignores container width when applying count cap in vertical orientation', () => {
+            const maxVisibleItems = 3;
             const host = getHostInstance();
-            host.maxVisibleItems = 3;
             // Items have explicit width — vertical should ignore it entirely
 
             const items = Array.from(
                 { length: 5 },
                 () => ({ forceVisibility: false, width: 500 }) as unknown as AvatarGroupItemRendererDirective
             );
-            const result = (host as any)._calculateVisibility(100, items);
+            const result = (host as any)._calculateVisibility(100, items, maxVisibleItems);
             // Width would exclude all items horizontally, but vertical ignores width
             expect(result.visibleItems.length).toBe(2);
             expect(result.hiddenItems.length).toBe(3);
@@ -460,7 +457,8 @@ describe('AvatarGroupComponent maxVisibleItems', () => {
         });
 
         it('hides items beyond maxVisibleItems', () => {
-            const result = runCalc(3, makeItems(5));
+            const maxVisibleItems = 3;
+            const result = runCalc(maxVisibleItems, makeItems(5));
             // maxVisibleItems=3, all items fit (0 width), but one is moved to hidden for overflow button
             expect(result.visibleItems.length).toBe(2);
             expect(result.hiddenItems.length).toBe(3);
