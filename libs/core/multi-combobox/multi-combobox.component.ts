@@ -650,11 +650,15 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
         if (event) {
             event.preventDefault();
         }
-        const optionItem = this._flatSuggestions()[getTokenIndexByIdlOrValue(token, this._flatSuggestions())];
-        if (optionItem) {
-            this._toggleSelection(optionItem, true);
-            this._rangeSelector.reset();
+        const flatSuggestions = this._flatSuggestions();
+        const optionItemIndex = getTokenIndexByIdlOrValue(token, flatSuggestions);
+
+        if (optionItemIndex === -1) {
+            return;
         }
+
+        this._toggleSelection(flatSuggestions[optionItemIndex], true);
+        this._rangeSelector.reset();
     }
 
     /** @hidden */
