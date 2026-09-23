@@ -953,19 +953,20 @@ export class ComboboxComponent<T = any>
 
     /** @hidden */
     private _handleClickActions(term: any, shouldClosePopover = true): void {
-        if (this.closeOnSelect && shouldClosePopover) {
-            this.isOpenChangeHandle(false);
-        }
         this._lastConfirmedValue = term;
         if (this.fillOnSelect) {
             this.setValue(term);
-            this.inputText = this.displayFn(term);
-            this.searchInputElement.nativeElement.value = this.inputText;
+            const displayText = this.displayFn(term);
+            this.searchInputElement.nativeElement.value = displayText;
+            this.inputText = displayText;
             this._cdRef.detectChanges();
 
             if (this.mobile) {
                 this._propagateChange();
             }
+        }
+        if (this.closeOnSelect && shouldClosePopover) {
+            this.isOpenChangeHandle(false);
         }
         if (shouldClosePopover) {
             this.handleSearchTermChange();

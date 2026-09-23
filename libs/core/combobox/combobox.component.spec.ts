@@ -848,6 +848,30 @@ describe('ComboboxComponent', () => {
             expect(component.getValue()).toBe('Kiwi');
         });
 
+        it('commits a clicked native autocomplete candidate once', () => {
+            const onChange = jest.fn();
+            const inputTextChange = jest.spyOn(component.inputTextChange, 'emit');
+            component.communicateByObject = false;
+            component.registerOnChange(onChange);
+            fixture.detectChanges();
+
+            setInputText(component, fixture, 'K');
+            const nativeInput: HTMLInputElement = fixture.nativeElement.querySelector('input');
+            nativeInput.value = 'Kiwi';
+            nativeInput.setSelectionRange(1, 4);
+            component.isOpenChangeHandle(true);
+            onChange.mockClear();
+            inputTextChange.mockClear();
+
+            component.onMenuClickHandler(kiwiItem);
+
+            expect(component.inputText).toBe('Kiwi');
+            expect(onChange).toHaveBeenCalledTimes(1);
+            expect(onChange).toHaveBeenCalledWith('Kiwi');
+            expect(inputTextChange).toHaveBeenCalledTimes(1);
+            expect(inputTextChange).toHaveBeenCalledWith('Kiwi');
+        });
+
         it('1.3ba object mode: a completed candidate emits valueProperty exactly once', () => {
             const onChange = jest.fn();
             component.communicateByObject = true;
