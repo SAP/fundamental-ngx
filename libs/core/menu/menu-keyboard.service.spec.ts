@@ -42,6 +42,28 @@ describe('MenuKeyboardService', () => {
         expect(menuItems[index].click).toHaveBeenCalledTimes(2);
     });
 
+    it('should focus first item on Home and last item on End', () => {
+        const index = 1;
+
+        service.keyDownHandler(new KeyboardEvent('keydown', { key: 'Home' }), index, menuItems);
+        expect(menuItems[0].focus).toHaveBeenCalled();
+
+        service.keyDownHandler(new KeyboardEvent('keydown', { key: 'End' }), index, menuItems);
+        expect(menuItems[menuItems.length - 1].focus).toHaveBeenCalled();
+    });
+
+    it('should skip disabled items for Home and End when disabled metadata exists', () => {
+        const enabledDummy = (): any => ({ focus: jest.fn(), click: jest.fn(), disabled: false });
+        const disabledDummy = (): any => ({ focus: jest.fn(), click: jest.fn(), disabled: true });
+        const itemsWithDisabled = [disabledDummy(), enabledDummy(), disabledDummy(), enabledDummy(), disabledDummy()];
+
+        service.keyDownHandler(new KeyboardEvent('keydown', { key: 'Home' }), 3, itemsWithDisabled);
+        expect(itemsWithDisabled[1].focus).toHaveBeenCalled();
+
+        service.keyDownHandler(new KeyboardEvent('keydown', { key: 'End' }), 1, itemsWithDisabled);
+        expect(itemsWithDisabled[3].focus).toHaveBeenCalled();
+    });
+
     it('should not interact with items if disabled', () => {
         const index = 1;
         service.disableKeydownHandling = true;

@@ -1,3 +1,67 @@
+## 0.65.0-rc.19 (2026-09-22)
+
+### 🩹 Fixes
+
+- **core, platform:** refactor Core Table ([#14542](https://github.com/SAP/fundamental-ngx/pull/14542))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
+## 0.65.0-rc.18 (2026-09-19)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.65.0-rc.17 (2026-09-18)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.65.0-rc.16 (2026-09-18)
+
+### 🩹 Fixes
+
+- ⚠️  **core:** emit datetime picker dateChange events ([#14544](https://github.com/SAP/fundamental-ngx/pull/14544))
+
+### ⚠️  Breaking Changes
+
+- **core:** emit datetime picker dateChange events  ([#14544](https://github.com/SAP/fundamental-ngx/pull/14544))
+  DatetimePickerComponent.dateChange now emits D | null. Event handlers must accept null when allowNull is enabled."
+  M	libs/core/datetime-picker/datetime-picker.component.spec.ts
+  M	libs/core/datetime-picker/datetime-picker.component.ts
+  M	libs/docs/core/datetime-picker/datetime-picker-docs.component.html
+
+### ❤️ Thank You
+
+- deno
+
+## 0.65.0-rc.15 (2026-09-17)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.65.0-rc.14 (2026-09-16)
+
+### 🩹 Fixes
+
+- **core:** remove duplicate icon CSS import ([#14540](https://github.com/SAP/fundamental-ngx/pull/14540))
+
+### ❤️ Thank You
+
+- deno
+
+## 0.65.0-rc.13 (2026-09-16)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.65.0-rc.12 (2026-09-16)
+
+### 🩹 Fixes
+
+- **core:** add Home/End keyboard support for menu navigation ([#14537](https://github.com/SAP/fundamental-ngx/pull/14537))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.65.0-rc.11 (2026-09-14)
 
 ### 🩹 Fixes
