@@ -1,3 +1,13 @@
+## 0.65.0-rc.21 (2026-09-23)
+
+### 🩹 Fixes
+
+- **core:** prevent duplicate combobox selection propagation ([#14556](https://github.com/SAP/fundamental-ngx/pull/14556))
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.65.0-rc.20 (2026-09-23)
 
 ### 🩹 Fixes
