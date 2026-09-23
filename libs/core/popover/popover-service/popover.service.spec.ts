@@ -599,13 +599,17 @@ describe('PopoverService', () => {
             jest.restoreAllMocks();
         });
 
-        it('should start observing the scrollable ancestor when the popover opens', () => {
+        it('should observe document.body (not just the scroll container) so external layout shifts are detected', () => {
+            // Regression for https://github.com/SAP/fundamental-ngx/issues/13224:
+            // When elements OUTSIDE the scroll container change (e.g. a banner above it),
+            // the observer must still fire so the popover repositions. Watching only the
+            // scroll container's subtree misses those mutations.
             service.open();
             fixture.detectChanges();
 
             expect(observeSpy).toHaveBeenCalled();
             const [target, opts] = observeSpy.mock.calls[0];
-            expect(target).toBe(component.scrollContainerRef.nativeElement);
+            expect(target).toBe(document.body);
             expect(opts.subtree).toBe(true);
             expect(opts.childList).toBe(true);
             expect(opts.attributes).toBe(true);
@@ -679,22 +683,6 @@ describe('PopoverService', () => {
             service.open();
 
             expect(observeSpy).not.toHaveBeenCalled();
-        });
-
-        it('should fall back to document.body when no scrollable ancestor exists', () => {
-            // The triggerElement in the default template has a scrollable parent (scrollContainer).
-            // Point the trigger directly at document.body's child to test the fallback.
-            const orphan = document.createElement('button');
-            document.body.appendChild(orphan);
-            service.updateTriggerElement(orphan);
-
-            service.open();
-            fixture.detectChanges();
-
-            const observedTarget = observeSpy.mock.calls[0]?.[0];
-            expect(observedTarget).toBe(document.body);
-
-            document.body.removeChild(orphan);
         });
 
         // ---------------------------------------------------------------------------------------

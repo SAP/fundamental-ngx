@@ -958,16 +958,16 @@ export class PopoverService {
 
     /**
      * @hidden
-     * Starts a MutationObserver on the nearest scrollable ancestor of the trigger element (falling
-     * back to document.body) to detect layout shifts that would invalidate the overlay position.
-     * Two mutation types are observed within the subtree:
-     *  - `childList`: catches elements being added to or removed from the DOM (e.g. a banner/toast
-     *    that is fully removed after its timer expires).
-     *  - `attributes` with `attributeFilter: ['style', 'class']`: catches visibility toggling via
-     *    CSS (e.g. `display: none` applied inline or through a utility class, as the
-     *    `fd-message-strip` autoDismiss directive does).
-     * The callback is debounced through `requestAnimationFrame` so that rapid batched mutations
-     * (Angular rendering a whole subtree at once) only trigger a single `updatePosition()` call.
+     * Starts a MutationObserver on document.body to detect any layout shift that could
+     * invalidate the overlay position — including mutations in elements outside the trigger's
+     * nearest scroll container (e.g. a collapsible header above a table pushing the trigger down).
+     *
+     * Observed mutation types:
+     *  - `childList`: elements added/removed from the DOM (Angular `@if`, ngIf, toast dismissed).
+     *  - `attributes` with `attributeFilter: ['style', 'class']`: visibility toggled via CSS.
+     *
+     * The callback is debounced through `requestAnimationFrame` so rapid batched mutations
+     * only trigger a single `updatePosition()` call per frame.
      */
     private _startAncestorResizeObserver(): void {
         const trigger = this._triggerHtmlElement;
@@ -996,29 +996,11 @@ export class PopoverService {
         };
 
         this._ancestorMutationObserver = new MutationObserver(scheduleUpdate);
-
-        const container = this._findScrollableAncestor(trigger);
-        this._ancestorMutationObserver.observe(container, {
+        this._ancestorMutationObserver.observe(document.body, {
             subtree: true,
             childList: true,
             attributes: true,
             attributeFilter: ['style', 'class']
         });
-    }
-
-    /**
-     * @hidden
-     * Returns the nearest scrollable ancestor, or document.body when none is found.
-     */
-    private _findScrollableAncestor(el: HTMLElement): HTMLElement {
-        let parent = el.parentElement;
-        while (parent && parent !== document.body) {
-            const { overflow, overflowX, overflowY } = getComputedStyle(parent);
-            if (/auto|scroll|overlay/.test(overflow + overflowX + overflowY)) {
-                return parent;
-            }
-            parent = parent.parentElement;
-        }
-        return document.body;
     }
 }
