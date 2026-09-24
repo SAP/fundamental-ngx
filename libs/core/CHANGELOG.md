@@ -1,3 +1,14 @@
+## 0.65.0-rc.23 (2026-09-24)
+
+### 🚀 Features
+
+- **core:** avatar group feature requests ([#14546](https://github.com/SAP/fundamental-ngx/pull/14546))
+
+### ❤️ Thank You
+
+- Copilot
+- Maria Dineva @MariaIDineva
+
 ## 0.65.0-rc.21 (2026-09-23)
 
 ### 🩹 Fixes
