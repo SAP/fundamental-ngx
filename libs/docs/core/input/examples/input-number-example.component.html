@@ -1,0 +1,23 @@
+<h4 fd-form-header>Examples</h4>
+<br />
+<div fd-form-item>
+    <label fd-form-label for="num-input-1" [colon]="true">Default Input</label>
+    <input fd-form-control type="number" id="num-input-1" value="0" />
+</div>
+<div fd-form-item>
+    <label fd-form-label [colon]="true" for="num-input-2">Min Max Input</label>
+    <input fd-form-control type="number" id="num-input-2" min="0" max="100" value="10" step="10" />
+</div>
+<div fd-form-item>
+    <label fd-form-label [required]="true" for="num-input-3">Value Precision</label>
+    <input
+        fd-form-control
+        type="number"
+        id="num-input-3"
+        step="0.01"
+        min="0"
+        max="1"
+        placeholder="Value Precision"
+        aria-required="true"
+    />
+</div>
