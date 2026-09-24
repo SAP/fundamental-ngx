@@ -2,11 +2,21 @@
 <br />
 <div fd-form-item>
     <label fd-form-label for="num-input-1" [colon]="true">Default Input</label>
-    <input fd-form-control type="number" id="num-input-1" value="0" />
+    <input fd-form-control type="number" id="num-input-1" value="1234567" thousandsSeparator />
 </div>
 <div fd-form-item>
     <label fd-form-label [colon]="true" for="num-input-2">Min Max Input</label>
-    <input fd-form-control type="number" id="num-input-2" min="0" max="100" value="10" step="10" />
+    <input
+        fd-form-control
+        type="number"
+        id="num-input-2"
+        min="0"
+        max="100"
+        value="10"
+        step="1"
+        [largerStep]="10"
+        valueAlignment="center"
+    />
 </div>
 <div fd-form-item>
     <label fd-form-label [required]="true" for="num-input-3">Value Precision</label>
@@ -14,9 +24,11 @@
         fd-form-control
         type="number"
         id="num-input-3"
-        step="0.01"
+        step="0.1"
+        [valuePrecision]="6"
         min="0"
         max="1"
+        value="0.1"
         placeholder="Value Precision"
         aria-required="true"
     />
