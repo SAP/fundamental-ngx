@@ -66,7 +66,13 @@
                     </li>
                 }
                 @for (item of group.errors; track item; let i = $index) {
-                    <li fd-list-item [tabindex]="i === 0 ? 0 : -1" [byline]="true" (fdkClicked)="showDetails(item)">
+                    <li
+                        fd-list-item
+                        [tabindex]="i === 0 ? 0 : -1"
+                        [byline]="true"
+                        [counter]="item.aggregatedMessages!"
+                        (fdkClicked)="showDetails(item)"
+                    >
                         <ng-template #itemIcon>
                             <span
                                 fd-object-status
@@ -76,12 +82,16 @@
                             ></span>
                         </ng-template>
                         <ng-template #listSubtitle>
-                            <span class="fd-list__subtitle">
-                                <ng-template
-                                    [ngTemplateOutlet]="headingTemplate"
-                                    [ngTemplateOutletContext]="{ $implicit: item }"
-                                ></ng-template>
-                            </span>
+                            @if (item.heading.type === 'string' && item.heading.message) {
+                                <fd-text [text]="getHeadingText(item)" [maxLines]="3" [expandable]="true"></fd-text>
+                            } @else {
+                                <span fd-list-subline>
+                                    <ng-template
+                                        [ngTemplateOutlet]="headingTemplate"
+                                        [ngTemplateOutletContext]="{ $implicit: item }"
+                                    ></ng-template>
+                                </span>
+                            }
                         </ng-template>
                         @if (item.element && !!item.description.message) {
                             <span fd-list-link [navigationIndicator]="!!item.description.message">

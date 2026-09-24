@@ -19,8 +19,8 @@
             fd-link
             tabindex="0"
             class="fd-text__link--more"
-            (keydown.enter)="toggleTextView()"
-            (click)="toggleTextView()"
+            (keydown.enter)="toggleTextView(); $event.stopPropagation()"
+            (click)="toggleTextView(); $event.stopPropagation()"
         >
             {{ (isCollapsed() ? ('coreText.moreLabel' | fdTranslate) : ('coreText.lessLabel' | fdTranslate))() }}
         </a>

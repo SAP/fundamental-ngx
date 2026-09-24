@@ -55,18 +55,20 @@ export class MessageViewComponent extends MessageListShared implements OnDestroy
 
     /** Opens the dialog. */
     open(): void {
-        this.dialogRef = this.dialogService.open(
-            MessageViewDialogComponent,
-            {
-                focusTrapped: true,
-                responsivePadding: false,
-                disablePaddings: true,
-                width: '24rem',
-                height: 'auto',
-                mobile: this.mobile()
-            },
-            this.injector
-        );
+        const dialogConfig = this.mobile()
+            ? {
+                  focusTrapped: true,
+                  disablePaddings: true,
+                  mobile: true
+              }
+            : {
+                  focusTrapped: true,
+                  disablePaddings: true,
+                  width: '24rem',
+                  height: 'auto',
+                  resizable: true
+              };
+        this.dialogRef = this.dialogService.open(MessageViewDialogComponent, dialogConfig, this.injector);
     }
 
     /** Closes the dialog. */

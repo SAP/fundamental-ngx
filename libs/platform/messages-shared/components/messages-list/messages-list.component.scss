@@ -4,3 +4,35 @@
     margin-block-start: 0.25rem;
     margin-block-end: 0.5rem;
 }
+
+// Force navigation indicator arrow to consistent width
+.message-popover__list.fd-list--navigation-indication .fd-list__link--navigation-indicator::after {
+    min-width: 3rem;
+}
+
+// Allow fd-text to display multiple lines in list content
+.fd-list__content fd-text {
+    display: block;
+    width: 100%;
+
+    .fd-text {
+        white-space: normal;
+        margin: 0; // Remove default paragraph margins
+        padding: 0;
+        line-height: normal; // Match list line-height
+    }
+
+    .fd-text__lineclamp {
+        display: block;
+        line-height: normal;
+    }
+
+    // Ensure the "More" link is interactive and styled properly
+    .fd-text__link--more {
+        pointer-events: auto;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

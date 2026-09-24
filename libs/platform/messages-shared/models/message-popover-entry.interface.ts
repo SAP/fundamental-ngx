@@ -17,6 +17,7 @@ export interface MessagePopoverEntry {
     formField?: PlatformFormFieldControl;
     link?: MessagePopoverEntryLink;
     subtitle?: string;
+    aggregatedMessages?: number;
 }
 
 export interface MessagePopoverError {

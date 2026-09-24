@@ -1,15 +1,8 @@
 <fd-dialog>
-    <fd-dialog-body>
-        <div fd-bar barDesign="header" class="fd-bar--growing">
-            <div fd-bar-left>
-                @if (messageView.currentScreen() === 'list') {
-                    <div fd-bar-element>
-                        <h1 class="fd-title fd-title--h5">
-                            {{ messageView.title() || ('platformMessageView.title' | fdTranslate)() }}
-                        </h1>
-                    </div>
-                }
-                @if (messageView.currentScreen() === 'details') {
+    <fd-dialog-header>
+        @if (messageView.currentScreen() === 'details') {
+            <ng-template fdkTemplate="header">
+                <div fd-bar-left>
                     <button
                         fd-button
                         fdkInitialFocus
@@ -18,16 +11,20 @@
                         [title]="('platformMessagePopover.backButton' | fdTranslate)()"
                         (click)="messageView.showList()"
                     ></button>
-                    <div fd-bar-element>
-                        <h1 class="fd-title fd-title--h5">
+                    <fd-bar-element>
+                        <h1 fd-title>
                             {{ messageView.detailsTitle() || ('platformMessageView.detailsTitle' | fdTranslate)() }}
                         </h1>
-                    </div>
-                }
-            </div>
-        </div>
+                    </fd-bar-element>
+                </div>
+            </ng-template>
+        } @else {
+            <h1 fd-title>
+                {{ messageView.title() || ('platformMessageView.title' | fdTranslate)() }}
+            </h1>
+        }
         @if (messageView.currentScreen() === 'list') {
-            <div fd-bar barDesign="subheader">
+            <ng-template fdkTemplate="subheader">
                 <div fd-bar-left>
                     <fd-segmented-button
                         [ngModel]="messageView._currentErrorType()"
@@ -50,8 +47,10 @@
                         }
                     </fd-segmented-button>
                 </div>
-            </div>
+            </ng-template>
         }
+    </fd-dialog-header>
+    <fd-dialog-body>
         <fdp-messages-list
             [currentScreen]="messageView.currentScreen()"
             [filteredErrors]="messageView._filteredErrors$()"

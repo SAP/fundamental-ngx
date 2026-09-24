@@ -20,6 +20,7 @@ import { LinkComponent } from '@fundamental-ngx/core/link';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { TextComponent } from '@fundamental-ngx/core/text';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { debounceTime } from 'rxjs';
 import { MessagePopoverEntry, MessagePopoverErrorGroup } from '../../models/message-popover-entry.interface';
@@ -45,7 +46,8 @@ const ANIMATION_DURATION = 100;
         ObjectStatusComponent,
         LinkComponent,
         FdTranslatePipe,
-        ClickedDirective
+        ClickedDirective,
+        TextComponent
     ]
 })
 export class MessagesListComponent implements AfterViewInit {
@@ -173,6 +175,14 @@ export class MessagesListComponent implements AfterViewInit {
             default:
                 return 'sys-help-2';
         }
+    }
+
+    /** @hidden Get heading text for fd-text component */
+    protected getHeadingText(item: MessagePopoverEntry): string {
+        if (item.heading.type === 'string' && typeof item.heading.message === 'string') {
+            return item.heading.message;
+        }
+        return '';
     }
 
     /** @hidden Animate the transition between list and details screens. */

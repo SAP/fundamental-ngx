@@ -1,12 +1,4 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    Component,
-    ElementRef,
-    ViewEncapsulation,
-    signal,
-    viewChild
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import { MessageViewComponent } from '@fundamental-ngx/platform/message-view';
 import { MessagePopoverErrorGroup } from '@fundamental-ngx/platform/messages-shared';
@@ -19,10 +11,6 @@ import { MessagePopoverErrorGroup } from '@fundamental-ngx/platform/messages-sha
     imports: [MessageViewComponent, ButtonComponent]
 })
 export class MessageViewDefaultExampleComponent implements AfterViewInit {
-    readonly messageView = viewChild.required(MessageViewComponent);
-
-    readonly profileButton = viewChild<ElementRef>('profileButton');
-
     readonly messages = signal<MessagePopoverErrorGroup[]>([]);
 
     ngAfterViewInit(): void {
@@ -65,14 +53,17 @@ export class MessageViewDefaultExampleComponent implements AfterViewInit {
                             text: 'Learn more about email validation',
                             href: 'https://www.example.com/email-help'
                         },
-                        subtitle: 'Occurred on 2024-03-15 at 10:30 AM'
+                        subtitle:
+                            'This error occurred on 2024-03-15 at 10:30 AM during the automated validation process. The system detected multiple invalid email formats in the submission queue.',
+                        aggregatedMessages: 5
                     },
                     {
                         type: 'warning',
                         state: 'critical',
                         heading: {
                             type: 'string',
-                            message: 'Weak Password'
+                            message:
+                                'Weak Password - Your password does not meet the minimum security requirements and should be updated immediately to protect your account from unauthorized access'
                         },
                         description: {
                             type: 'string',
@@ -81,7 +72,8 @@ export class MessageViewDefaultExampleComponent implements AfterViewInit {
                         },
                         name: 'password',
                         fieldName: 'Password',
-                        errors: null
+                        errors: null,
+                        aggregatedMessages: 3
                     }
                 ]
             },
@@ -103,7 +95,6 @@ export class MessageViewDefaultExampleComponent implements AfterViewInit {
                         name: 'profile',
                         fieldName: 'Profile',
                         errors: null,
-                        element: this.profileButton(),
                         link: {
                             text: 'Profile',
                             href: '#/platform/message-view'
@@ -152,9 +143,5 @@ export class MessageViewDefaultExampleComponent implements AfterViewInit {
                 ]
             }
         ]);
-    }
-
-    showMessageView(): void {
-        this.messageView()?.open();
     }
 }
