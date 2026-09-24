@@ -1,0 +1,118 @@
+<div style="display: flex; flex-direction: column; gap: 1.5rem">
+    <div>
+        <p style="margin-bottom: 0.5rem">Default (width-based) — {{ defaultContainerWidth() }}px</p>
+        <fd-slider
+            [min]="100"
+            [max]="800"
+            [ngModel]="defaultContainerWidth()"
+            (ngModelChange)="defaultContainerWidth.set($event)"
+            style="width: 100%; max-width: 800px; margin-bottom: 0.75rem"
+        ></fd-slider>
+        <div
+            [style.width.px]="defaultContainerWidth()"
+            style="
+                max-width: 100%;
+                border: 1px dashed var(--sapNeutralBorderColor, #ccc);
+                padding: 4px;
+                box-sizing: border-box;
+            "
+        >
+            <fd-avatar-group type="individual" size="m" overflowPopoverTitle="Team members" style="width: 100%">
+                @for (person of people; track person) {
+                    <fd-avatar
+                        *fdAvatarGroupItem="details; title: person.firstName + ' ' + person.lastName"
+                        [circle]="true"
+                        [border]="true"
+                        size="m"
+                        role="img"
+                        [title]="person.firstName + ' ' + person.lastName"
+                        [label]="person.firstName[0] + person.lastName[0]"
+                        [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"
+                    ></fd-avatar>
+                    <ng-template #details>
+                        <fd-quick-view [id]="person.id">
+                            <fd-quick-view-title align="left">Business card</fd-quick-view-title>
+                            <fd-quick-view-subheader>
+                                <fd-avatar
+                                    [circle]="true"
+                                    size="s"
+                                    role="img"
+                                    [label]="person.firstName[0] + person.lastName[0]"
+                                    [title]="person.firstName + ' ' + person.lastName"
+                                ></fd-avatar>
+                                <fd-quick-view-subheader-title
+                                    >{{ person.firstName }} {{ person.lastName }}</fd-quick-view-subheader-title
+                                >
+                                <fd-quick-view-subheader-subtitle>{{
+                                    person.position
+                                }}</fd-quick-view-subheader-subtitle>
+                            </fd-quick-view-subheader>
+                        </fd-quick-view>
+                    </ng-template>
+                }
+            </fd-avatar-group>
+        </div>
+    </div>
+
+    <div>
+        <p style="margin-bottom: 0.5rem"><code>[maxVisibleItems]="5"</code> — {{ maxItemsContainerWidth() }}px</p>
+        <fd-slider
+            [min]="100"
+            [max]="800"
+            [ngModel]="maxItemsContainerWidth()"
+            (ngModelChange)="maxItemsContainerWidth.set($event)"
+            style="width: 100%; max-width: 800px; margin-bottom: 0.75rem"
+        ></fd-slider>
+        <div
+            [style.width.px]="maxItemsContainerWidth()"
+            style="
+                max-width: 100%;
+                border: 1px dashed var(--sapNeutralBorderColor, #ccc);
+                padding: 4px;
+                box-sizing: border-box;
+            "
+        >
+            <fd-avatar-group
+                type="individual"
+                size="m"
+                overflowPopoverTitle="Team members"
+                [maxVisibleItems]="5"
+                overflowButtonShape="circle"
+                style="width: 100%"
+            >
+                @for (person of people; track person) {
+                    <fd-avatar
+                        *fdAvatarGroupItem="details; title: person.firstName + ' ' + person.lastName"
+                        [circle]="true"
+                        [border]="true"
+                        size="m"
+                        role="img"
+                        [title]="person.firstName + ' ' + person.lastName"
+                        [label]="person.firstName[0] + person.lastName[0]"
+                        [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"
+                    ></fd-avatar>
+                    <ng-template #details>
+                        <fd-quick-view [id]="person.id">
+                            <fd-quick-view-title align="left">Business card</fd-quick-view-title>
+                            <fd-quick-view-subheader>
+                                <fd-avatar
+                                    [circle]="true"
+                                    size="s"
+                                    role="img"
+                                    [label]="person.firstName[0] + person.lastName[0]"
+                                    [title]="person.firstName + ' ' + person.lastName"
+                                ></fd-avatar>
+                                <fd-quick-view-subheader-title
+                                    >{{ person.firstName }} {{ person.lastName }}</fd-quick-view-subheader-title
+                                >
+                                <fd-quick-view-subheader-subtitle>{{
+                                    person.position
+                                }}</fd-quick-view-subheader-subtitle>
+                            </fd-quick-view-subheader>
+                        </fd-quick-view>
+                    </ng-template>
+                }
+            </fd-avatar-group>
+        </div>
+    </div>
+</div>
