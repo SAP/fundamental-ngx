@@ -2,18 +2,14 @@ import {
     Attribute,
     ChangeDetectionStrategy,
     Component,
+    computed,
     ElementRef,
-    HostBinding,
-    Input,
-    OnChanges,
-    OnDestroy,
-    OnInit,
+    inject,
+    input,
     ViewEncapsulation
 } from '@angular/core';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
-import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
-import { Subscription } from 'rxjs';
 import { FormItemControl, registerFormItemControl } from '../form-item-control/form-item-control';
 
 /**
@@ -32,77 +28,53 @@ import { FormItemControl, registerFormItemControl } from '../form-item-control/f
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [registerFormItemControl(FormControlComponent), contentDensityObserverProviders()],
     host: {
-        '[attr.aria-label]': 'ariaLabelAttr || ariaLabel || null',
-        '[attr.aria-labelledby]': 'ariaLabelledByAttr || ariaLabelledBy || null',
-        '[attr.aria-invalid]': 'state === "error" ? true : null'
+        '[class]': 'cssClass()',
+        '[attr.aria-label]': 'ariaLabel() ?? ariaLabelAttr ?? null',
+        '[attr.aria-labelledby]': 'ariaLabelledBy() ?? ariaLabelledByAttr ?? null',
+        '[attr.aria-invalid]': 'state() === "error" ? true : null',
+        '[attr.type]': 'type() || null'
     }
 })
-export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges, OnDestroy, FormItemControl {
+export class FormControlComponent implements FormItemControl {
     /**
      *  The state of the form control - applies css classes.
      *  Can be `success`, `error`, `warning`, `information` or blank for default.
      */
-    @Input()
-    state: FormStates | null = null;
+    readonly state = input<FormStates | null>(null);
 
     /** Type of the form control. */
-    @HostBinding('attr.type')
-    @Input()
-    type: string;
+    readonly type = input<string>();
 
     /** user's custom classes */
-    @Input()
-    class: string;
+    readonly class = input<string>('');
 
     /** aria-label for form-control. */
-    @Input()
-    ariaLabel: string | undefined | null;
+    readonly ariaLabel = input<string | undefined | null>(null);
 
     /** aria-label for form-control. */
-    @Input()
-    ariaLabelledBy: string | undefined | null;
+    readonly ariaLabelledBy = input<string | undefined | null>(null);
 
     /** @hidden */
-    private _subscriptions = new Subscription();
+    readonly elementRef = inject<ElementRef<HTMLInputElement | HTMLTextAreaElement>>(ElementRef);
+
+    /** @hidden Injected to activate content density CSS class effects */
+    readonly _contentDensityObserver = inject(ContentDensityObserver);
+
+    /** @hidden */
+    protected readonly cssClass = computed(() => {
+        const tagName = this.elementRef.nativeElement.tagName.toLowerCase();
+        return [
+            this.state() ? 'is-' + this.state() : '',
+            this.class(),
+            tagName === 'textarea' ? 'fd-textarea' : tagName === 'input' ? 'fd-input' : ''
+        ]
+            .filter(Boolean)
+            .join(' ');
+    });
 
     /** @hidden */
     constructor(
-        public elementRef: ElementRef<HTMLInputElement | HTMLTextAreaElement>,
-        _contentDensityObserver: ContentDensityObserver,
         @Attribute('aria-label') protected ariaLabelAttr: string,
         @Attribute('aria-labelledby') protected ariaLabelledByAttr: string
-    ) {
-        _contentDensityObserver.subscribe();
-    }
-
-    /**
-     * @hidden
-     * CssClassBuilder interface implementation
-     * function must return single string
-     * function is responsible for order which css classes are applied
-     */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        const tagName = this.elementRef.nativeElement.tagName.toLowerCase();
-        return [
-            this.state ? 'is-' + this.state : '',
-            this.class,
-            tagName === 'textarea' ? 'fd-textarea' : tagName === 'input' ? 'fd-input' : ''
-        ];
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._subscriptions.unsubscribe();
-    }
+    ) {}
 }
