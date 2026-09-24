@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import {
     FormControlComponent,
     FormHeaderComponent,
@@ -10,6 +9,6 @@ import {
 @Component({
     selector: 'fd-input-number-example',
     templateUrl: './input-number-example.component.html',
-    imports: [FormHeaderComponent, FormItemComponent, FormLabelComponent, FormControlComponent, ContentDensityDirective]
+    imports: [FormHeaderComponent, FormItemComponent, FormLabelComponent, FormControlComponent]
 })
 export class InputNumberExampleComponent {}
