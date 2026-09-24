@@ -1,3 +1,13 @@
+## 0.65.0-rc.24 (2026-09-24)
+
+### 🩹 Fixes
+
+- **core:** synchronize multi-combobox token and option selection ([#14558](https://github.com/SAP/fundamental-ngx/pull/14558))
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.65.0-rc.23 (2026-09-24)
 
 ### 🚀 Features
