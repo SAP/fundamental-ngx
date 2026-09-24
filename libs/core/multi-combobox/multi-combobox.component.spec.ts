@@ -425,7 +425,6 @@ describe('MultiComboBox — programmatic selectedItems (#13553)', () => {
 
         // Reopen-state assertion via signal — CDK overlay in jsdom doesn't reliably render
         // is-selected on fd-list-item after a programmatic replace without user interaction.
-        // _setSelectedSuggestions() updates _fullFlatSuggestions (not _suggestions), so assert there.
         const flat = component._fullFlatSuggestions();
         const apple = flat.find((s) => s.label === 'Apple');
         const banana = flat.find((s) => s.label === 'Banana');
@@ -534,6 +533,282 @@ class MultiComboboxWithPresetFormControlTestComponent {
     ];
     control = new FormControl<{ name: string; type: string }[]>([this.formDataSource[0]]);
 }
+
+@Component({
+    template: `<fd-multi-combobox
+        [mobile]="true"
+        [mobileConfig]="mobileConfig"
+        [formControl]="control"
+    ></fd-multi-combobox>`,
+    imports: [MultiComboboxModule, ReactiveFormsModule]
+})
+class MobileMultiComboboxWithPrimitiveFormControlTestComponent {
+    readonly mobileConfig = { approveButtonText: 'Approve', cancelButtonText: 'Cancel' };
+    readonly formDataSource = ['Apple', 'Banana', 'Pineapple'];
+    control = new FormControl<string[]>(['Banana']);
+}
+
+@Component({
+    template: `
+        <fd-multi-combobox
+            [mobile]="true"
+            [mobileConfig]="mobileConfig"
+            [group]="true"
+            groupKey="type"
+            displayKey="name"
+            [formControl]="control"
+        ></fd-multi-combobox>
+    `,
+    imports: [MultiComboboxModule, ReactiveFormsModule]
+})
+class MobileGroupedMultiComboboxWithFormControlTestComponent {
+    readonly mobileConfig = { approveButtonText: 'Approve', cancelButtonText: 'Cancel' };
+    readonly formDataSource = [
+        { name: 'Apple', type: 'Fruit' },
+        { name: 'Banana', type: 'Fruit' },
+        { name: 'Broccoli', type: 'Vegetable' }
+    ];
+    control = new FormControl<{ name: string; type: string }[]>([this.formDataSource[1]]);
+}
+
+describe('MultiComboBox mobile dialog cancellation (#13308)', () => {
+    let hostFixture: ComponentFixture<
+        | MobileMultiComboboxWithPrimitiveFormControlTestComponent
+        | MobileGroupedMultiComboboxWithFormControlTestComponent
+    >;
+    let host:
+        | MobileMultiComboboxWithPrimitiveFormControlTestComponent
+        | MobileGroupedMultiComboboxWithFormControlTestComponent;
+    let combobox: MultiComboboxComponent;
+
+    async function openDialog(): Promise<void> {
+        const control = hostFixture.nativeElement.querySelector<HTMLElement>('.fd-multi-combobox fd-input-group');
+        expect(control).toBeTruthy();
+        control?.click();
+        hostFixture.detectChanges();
+        await hostFixture.whenStable();
+        hostFixture.detectChanges();
+    }
+
+    function option(label: string): HTMLLIElement | undefined {
+        return Array.from(document.querySelectorAll<HTMLLIElement>('li[role="option"]')).find((item) =>
+            item.textContent?.includes(label)
+        );
+    }
+
+    async function toggleOption(label: string): Promise<void> {
+        const checkbox = option(label)?.querySelector<HTMLInputElement>('input[type="checkbox"]');
+        expect(checkbox).toBeTruthy();
+        checkbox?.click();
+        hostFixture.detectChanges();
+        await hostFixture.whenStable();
+        hostFixture.detectChanges();
+    }
+
+    async function cancelDialog(): Promise<void> {
+        const cancel = Array.from(document.querySelectorAll<HTMLButtonElement>('fd-dialog-footer button')).find(
+            (button) => button.textContent?.includes('Cancel')
+        );
+        expect(cancel).toBeTruthy();
+        cancel?.click();
+        hostFixture.detectChanges();
+        await hostFixture.whenStable();
+        hostFixture.detectChanges();
+    }
+
+    async function approveDialog(): Promise<void> {
+        const approve = Array.from(document.querySelectorAll<HTMLButtonElement>('fd-dialog-footer button')).find(
+            (button) => button.textContent?.includes('Approve')
+        );
+        expect(approve).toBeTruthy();
+        approve?.click();
+        hostFixture.detectChanges();
+        await hostFixture.whenStable();
+        hostFixture.detectChanges();
+    }
+
+    async function createPrimitiveHost(initialValue: string[]): Promise<void> {
+        await TestBed.configureTestingModule({
+            imports: [
+                FormsModule,
+                ReactiveFormsModule,
+                MultiComboboxModule,
+                MobileMultiComboboxWithPrimitiveFormControlTestComponent
+            ]
+        }).compileComponents();
+        hostFixture = TestBed.createComponent(MobileMultiComboboxWithPrimitiveFormControlTestComponent);
+        host = hostFixture.componentInstance;
+        host.control.setValue(initialValue);
+        combobox = hostFixture.debugElement.query(By.directive(MultiComboboxComponent)).componentInstance;
+        combobox.dataSourceDirective.dataSource = host.formDataSource;
+        hostFixture.detectChanges();
+        await hostFixture.whenStable();
+        hostFixture.detectChanges();
+    }
+
+    function deferSuggestionRefresh(): void {
+        jest.spyOn(combobox.dataSourceDirective.dataSourceProvider!, 'match').mockImplementation();
+    }
+
+    it('restores the initial primitive selection and does not commit a cancelled mobile draft', async () => {
+        await createPrimitiveHost(['Banana']);
+        deferSuggestionRefresh();
+        const formValues: string[][] = [];
+        const selectionChanges: unknown[] = [];
+        host.control.valueChanges.subscribe((value) => formValues.push(value ?? []));
+        combobox.selectionChange.subscribe((event) => selectionChanges.push(event));
+
+        await openDialog();
+        await toggleOption('Apple');
+        await cancelDialog();
+        await openDialog();
+
+        expect(option('Apple')?.classList.contains('is-selected')).toBe(false);
+        expect(option('Apple')?.querySelector<HTMLInputElement>('input[type="checkbox"]')?.checked).toBe(false);
+        expect(option('Banana')?.classList.contains('is-selected')).toBe(true);
+        expect(option('Banana')?.querySelector<HTMLInputElement>('input[type="checkbox"]')?.checked).toBe(true);
+        expect(host.control.value).toEqual(['Banana']);
+        expect(formValues).toEqual([]);
+        expect(selectionChanges).toEqual([]);
+    });
+
+    it('clears every primitive option when cancelling a draft from an empty selection', async () => {
+        await createPrimitiveHost([]);
+        deferSuggestionRefresh();
+
+        await openDialog();
+        await toggleOption('Apple');
+        await cancelDialog();
+        await openDialog();
+
+        for (const label of ['Apple', 'Banana', 'Pineapple']) {
+            expect(option(label)?.classList.contains('is-selected')).toBe(false);
+            expect(option(label)?.querySelector<HTMLInputElement>('input[type="checkbox"]')?.checked).toBe(false);
+        }
+        expect(host.control.value).toEqual([]);
+    });
+
+    it('commits an approved mobile draft exactly once', async () => {
+        await createPrimitiveHost(['Banana']);
+        deferSuggestionRefresh();
+        const formValues: string[][] = [];
+        const selectionChanges: unknown[] = [];
+        host.control.valueChanges.subscribe((value) => formValues.push(value ?? []));
+        combobox.selectionChange.subscribe((event) => selectionChanges.push(event));
+
+        await openDialog();
+        await toggleOption('Apple');
+        await approveDialog();
+
+        expect(host.control.value).toEqual(['Apple', 'Banana']);
+        expect(formValues).toEqual([['Apple', 'Banana']]);
+        expect(selectionChanges).toHaveLength(1);
+    });
+
+    it('restores selected flags for grouped object options when cancelling a mobile draft', async () => {
+        await TestBed.configureTestingModule({
+            imports: [
+                FormsModule,
+                ReactiveFormsModule,
+                MultiComboboxModule,
+                MobileGroupedMultiComboboxWithFormControlTestComponent
+            ]
+        }).compileComponents();
+        hostFixture = TestBed.createComponent(MobileGroupedMultiComboboxWithFormControlTestComponent);
+        host = hostFixture.componentInstance;
+        combobox = hostFixture.debugElement.query(By.directive(MultiComboboxComponent)).componentInstance;
+        combobox.dataSourceDirective.dataSource = host.formDataSource;
+        hostFixture.detectChanges();
+        await hostFixture.whenStable();
+        hostFixture.detectChanges();
+        deferSuggestionRefresh();
+
+        await openDialog();
+        await toggleOption('Apple');
+        await cancelDialog();
+        await openDialog();
+
+        expect(option('Apple')?.classList.contains('is-selected')).toBe(false);
+        expect(option('Banana')?.classList.contains('is-selected')).toBe(true);
+        expect(option('Broccoli')?.classList.contains('is-selected')).toBe(false);
+        expect(host.control.value?.map((item) => item.name)).toEqual(['Banana']);
+    });
+});
+
+describe('MultiComboBox — token removal keeps the open menu in sync (#13308)', () => {
+    let hostFixture: ComponentFixture<MultiComboboxWithPresetFormControlTestComponent>;
+    let host: MultiComboboxWithPresetFormControlTestComponent;
+    let combobox: MultiComboboxComponent;
+    let overlayContainerEl: HTMLElement;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [
+                FormsModule,
+                ReactiveFormsModule,
+                MultiComboboxModule,
+                MultiComboboxWithPresetFormControlTestComponent
+            ]
+        }).compileComponents();
+
+        inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
+            overlayContainerEl = overlayContainer.getContainerElement();
+        })();
+    }));
+
+    beforeEach(waitForAsync(() => {
+        hostFixture = TestBed.createComponent(MultiComboboxWithPresetFormControlTestComponent);
+        host = hostFixture.componentInstance;
+        combobox = hostFixture.debugElement.query(By.directive(MultiComboboxComponent)).componentInstance;
+        combobox.dataSourceDirective.dataSource = host.formDataSource;
+        hostFixture.detectChanges();
+        return hostFixture.whenStable();
+    }));
+
+    it('deselects a removed token in the live open menu without changing other selections', async () => {
+        const addOnButton = hostFixture.nativeElement.querySelector<HTMLButtonElement>(
+            'button[fdinputgroupaddonbutton]'
+        );
+        expect(addOnButton).toBeTruthy();
+        addOnButton?.click();
+        hostFixture.detectChanges();
+        await hostFixture.whenStable();
+        hostFixture.detectChanges();
+        expect(combobox.isOpen).toBe(true);
+
+        const bananaOption = Array.from(overlayContainerEl.querySelectorAll<HTMLLIElement>('li[role="option"]')).find(
+            (option) => option.textContent?.includes('Banana')
+        );
+        const bananaCheckbox = bananaOption?.querySelector<HTMLInputElement>('input[type="checkbox"]');
+        expect(bananaCheckbox).toBeTruthy();
+        bananaCheckbox?.click();
+        await hostFixture.whenStable();
+
+        const bananaToken = Array.from(hostFixture.nativeElement.querySelectorAll<HTMLElement>('fd-token')).find(
+            (token) => token.textContent?.includes('Banana')
+        );
+        expect(bananaToken).toBeTruthy();
+
+        const formValues: { name: string; type: string }[][] = [];
+        const selectionChanges: unknown[] = [];
+        host.control.valueChanges.subscribe((value) => formValues.push(value ?? []));
+        combobox.selectionChange.subscribe((event) => selectionChanges.push(event));
+
+        const bananaTokenClose = bananaToken?.querySelector<HTMLElement>('.fd-token__close');
+        expect(bananaTokenClose).toBeTruthy();
+        bananaTokenClose?.click();
+        await hostFixture.whenStable();
+
+        expect(combobox.isOpen).toBe(true);
+        expect(overlayContainerEl.querySelector('ul[role="listbox"]')).toBeTruthy();
+        expect(bananaOption?.classList.contains('is-selected')).toBe(false);
+        expect(bananaCheckbox?.checked).toBe(false);
+        expect(combobox._selectedSuggestions().map((item) => item.label)).toEqual(['Apple']);
+        expect(host.control.value?.map((item) => item.name)).toEqual(['Apple']);
+        expect(formValues.map((value) => value.map((item) => item.name))).toEqual([['Apple']]);
+        expect(selectionChanges).toHaveLength(1);
+    });
+});
 
 describe('MultiComboBox — FormControl initial value renders on datasource populate (#13553)', () => {
     let hostFixture: ComponentFixture<MultiComboboxWithPresetFormControlTestComponent>;
