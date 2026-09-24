@@ -730,32 +730,18 @@ describe('PopoverService', () => {
                 expect(updatePositionSpy).toHaveBeenCalled();
             });
 
-            it('should NOT call updatePosition for a style mutation on the overlay position wrapper (parent of overlayElement)', () => {
-                // CDK writes the churning `style` on the position wrapper, not on overlayElement --
-                // and the wrapper is overlayElement's parent, nested under .cdk-overlay-container:
-                //
-                //   .cdk-overlay-container
-                //     └─ .cdk-overlay-connected-position-bounding-box   <- churning style writes
-                //          └─ .cdk-overlay-pane (= overlayElement)
-                //
-                // So a guard checking overlayElement.contains(target) misses the wrapper and the
-                // loop survives. This test reconstructs that ancestry to lock the container guard in.
+            it('should NOT call updatePosition for a style mutation on the overlay position wrapper (hostElement)', () => {
+                // hostElement is the CDK bounding-box element (.cdk-overlay-connected-position-bounding-box).
+                // CDK writes churning `style` updates on it during positioning; the guard must
+                // recognise these as self-caused and skip them.
                 service.open();
                 fixture.detectChanges();
 
-                const overlayElement = service['_overlayRef'].overlayElement;
-                const container = document.createElement('div');
-                container.className = 'cdk-overlay-container';
-                const boundingBox = document.createElement('div');
-                boundingBox.className = 'cdk-overlay-connected-position-bounding-box';
-                container.appendChild(boundingBox);
-                boundingBox.appendChild(overlayElement);
-                document.body.appendChild(container);
-
+                const hostElement = service['_overlayRef'].hostElement;
                 const wrapperRecord = {
                     type: 'attributes',
                     attributeName: 'style',
-                    target: boundingBox
+                    target: hostElement
                 } as unknown as MutationRecord;
 
                 updatePositionSpy = jest.spyOn(service['_overlayRef'], 'updatePosition');
@@ -763,8 +749,35 @@ describe('PopoverService', () => {
                 mutationCallback([wrapperRecord], {} as MutationObserver);
 
                 expect(updatePositionSpy).not.toHaveBeenCalled();
+            });
 
-                container.remove();
+            it('should guard against self-mutations when placementContainer is used (host moved outside .cdk-overlay-container)', () => {
+                // Regression guard: when placementContainer is set, CDK moves hostElement out of
+                // .cdk-overlay-container. The old guard (closest('.cdk-overlay-container') ?? overlayElement)
+                // fell back to overlayElement which does not contain hostElement, so self-mutations on the
+                // bounding-box still triggered updatePosition(). Using hostElement directly covers both cases.
+                const placementContainer = document.createElement('div');
+                document.body.appendChild(placementContainer);
+
+                service.refreshConfiguration({ placementContainer });
+                service.open();
+                fixture.detectChanges();
+
+                const hostElement = service['_overlayRef'].hostElement;
+                const selfRecord = {
+                    type: 'attributes',
+                    attributeName: 'style',
+                    target: hostElement
+                } as unknown as MutationRecord;
+
+                updatePositionSpy = jest.spyOn(service['_overlayRef'], 'updatePosition');
+
+                mutationCallback([selfRecord], {} as MutationObserver);
+
+                expect(updatePositionSpy).not.toHaveBeenCalled();
+
+                service.close();
+                placementContainer.remove();
             });
         });
     });

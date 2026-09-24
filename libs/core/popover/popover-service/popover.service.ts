@@ -357,7 +357,7 @@ export class PopoverService {
         if ((!this._overlayRef || !this._overlayRef.hasAttached()) && !this.disabled() && this._triggerElement) {
             const position = this._getPositionStrategy();
             this._overlayRef = this._overlay.create(this._getOverlayConfig(position));
-            this._startAncestorResizeObserver();
+            this._startLayoutShiftObserver();
 
             if (this._placementContainerValue) {
                 const placementElement =
@@ -969,7 +969,7 @@ export class PopoverService {
      * The callback is debounced through `requestAnimationFrame` so rapid batched mutations
      * only trigger a single `updatePosition()` call per frame.
      */
-    private _startAncestorResizeObserver(): void {
+    private _startLayoutShiftObserver(): void {
         const trigger = this._triggerHtmlElement;
         if (!trigger) {
             return;
@@ -977,13 +977,12 @@ export class PopoverService {
 
         let animationFrame: number | null = null;
         const scheduleUpdate = (records: MutationRecord[]): void => {
-            // Skip self-caused mutations, else we loop: updatePosition() writes `style` on the
-            // overlay's position wrapper (.cdk-overlay-connected-position-bounding-box), which this
-            // observer would see and react to. Test against .cdk-overlay-container, not
-            // overlayElement -- the wrapper is overlayElement's parent, so it isn't contained by it.
-            const overlayEl = this._overlayRef?.overlayElement;
-            const overlayContainer = overlayEl?.closest('.cdk-overlay-container') ?? overlayEl;
-            if (overlayContainer && records.every((record) => overlayContainer.contains(record.target as Node))) {
+            // Skip self-caused mutations: updatePosition() writes `style` on hostElement
+            // (the CDK position bounding-box) and its descendants. Using hostElement as the
+            // scope boundary covers both the default case (.cdk-overlay-container) and the
+            // placementContainer case where the host is moved outside that container.
+            const overlayHost = this._overlayRef?.hostElement;
+            if (overlayHost && records.every((record) => overlayHost.contains(record.target as Node))) {
                 return;
             }
             if (animationFrame !== null) {
