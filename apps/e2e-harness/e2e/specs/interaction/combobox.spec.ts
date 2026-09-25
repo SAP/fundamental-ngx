@@ -87,6 +87,20 @@ test.describe('core/combobox leave behavior', () => {
         await expect.poll(() => cvaWrites(page, 1)).toEqual(['Kiwi']);
     });
 
+    test('commits a clicked autocomplete candidate exactly once in display-value mode', async ({ page }) => {
+        await typeAutocompletePrefix(page, 1);
+        await captureCvaWrites(page, 1);
+
+        const listbox = page.locator('[role="listbox"]');
+        await expect(listbox).toBeVisible();
+        await listbox.locator('[role="option"]').filter({ hasText: 'Kiwi' }).click();
+
+        await expect(input(page, 1)).toHaveValue('Kiwi');
+        await expect(valueReadout(page, 1)).toContainText('Json Value: "Kiwi"');
+        await expect(listbox).toBeHidden();
+        await expect.poll(() => cvaWrites(page, 1)).toEqual(['Kiwi']);
+    });
+
     test('commits an autocomplete candidate once when a focusable outside button is clicked', async ({ page }) => {
         await page.evaluate(() => {
             const outsideButtonElement = document.createElement('button');

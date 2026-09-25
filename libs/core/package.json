@@ -1,6 +1,6 @@
 {
     "name": "@fundamental-ngx/core",
-    "version": "0.65.0-rc.19",
+    "version": "0.65.0-rc.24",
     "schematics": "./schematics/collection.json",
     "ng-update": {
         "packageGroupName": "@fundamental-ngx/core",

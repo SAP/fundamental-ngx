@@ -1,3 +1,44 @@
+## 0.65.0-rc.24 (2026-09-24)
+
+### 🩹 Fixes
+
+- **core:** synchronize multi-combobox token and option selection ([#14558](https://github.com/SAP/fundamental-ngx/pull/14558))
+
+### ❤️ Thank You
+
+- deno
+
+## 0.65.0-rc.23 (2026-09-24)
+
+### 🚀 Features
+
+- **core:** avatar group feature requests ([#14546](https://github.com/SAP/fundamental-ngx/pull/14546))
+
+### ❤️ Thank You
+
+- Copilot
+- Maria Dineva @MariaIDineva
+
+## 0.65.0-rc.21 (2026-09-23)
+
+### 🩹 Fixes
+
+- **core:** prevent duplicate combobox selection propagation ([#14556](https://github.com/SAP/fundamental-ngx/pull/14556))
+
+### ❤️ Thank You
+
+- deno
+
+## 0.65.0-rc.20 (2026-09-23)
+
+### 🩹 Fixes
+
+- **core:** preserve month during multi-date selection ([#14554](https://github.com/SAP/fundamental-ngx/pull/14554))
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.65.0-rc.19 (2026-09-22)
 
 ### 🩹 Fixes
