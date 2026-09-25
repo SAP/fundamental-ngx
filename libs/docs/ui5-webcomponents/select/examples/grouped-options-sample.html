@@ -1,0 +1,24 @@
+<div class="fd-container fd-padding--none">
+    <div class="fd-row">
+        <div class="fd-col fd-col--6">
+            <ui5-select (ui5Change)="onCountryChange($event)">
+                <ui5-option-group header-text="Oceania">
+                    <ui5-option value="AU">Australia</ui5-option>
+                    <ui5-option value="NZ">New Zealand</ui5-option>
+                </ui5-option-group>
+                <ui5-option-group header-text="Europe">
+                    <ui5-option value="FR">France</ui5-option>
+                    <ui5-option value="DE" selected>Germany</ui5-option>
+                    <ui5-option value="ES">Spain</ui5-option>
+                    <ui5-option value="IT">Italy</ui5-option>
+                </ui5-option-group>
+            </ui5-select>
+        </div>
+    </div>
+
+    <div class="fd-row">
+        <div class="fd-col">
+            <p><strong>Selected Country Code:</strong> {{ selectedCountry() }}</p>
+        </div>
+    </div>
+</div>

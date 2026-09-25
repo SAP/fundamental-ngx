@@ -1,0 +1,34 @@
+<div class="fddocs-container">
+    <div class="fd-margin-bottom--sm">
+        <ui5-number-input id="number-input-default" [value]="0" />
+    </div>
+
+    <div class="fd-margin-bottom--sm">
+        <ui5-number-input id="number-input-success" [value]="100" valueState="Positive" />
+    </div>
+
+    <div class="fd-margin-bottom--sm">
+        <ui5-number-input id="number-input-warning" [value]="75" valueState="Critical" />
+    </div>
+
+    <div class="fd-margin-bottom--sm">
+        <ui5-number-input
+            id="number-input-error"
+            [value]="-10"
+            valueState="Negative"
+            valueStateMessage="Value must be positive"
+        />
+    </div>
+
+    <div class="fd-margin-bottom--sm">
+        <ui5-number-input id="number-input-information" [value]="50" valueState="Information" />
+    </div>
+
+    <div class="fd-margin-bottom--sm">
+        <ui5-number-input id="number-input-disabled" [value]="0" disabled />
+    </div>
+
+    <div class="fd-margin-bottom--sm">
+        <ui5-number-input id="number-input-readonly" [value]="42" readonly />
+    </div>
+</div>

@@ -11,6 +11,7 @@ import { ToolbarAlignmentSample } from './examples/alignment';
 import { ToolbarBasicSample } from './examples/basic-sample';
 import { ToolbarComplexSample } from './examples/complex';
 import { ToolbarDesignSample } from './examples/design';
+import { ToolbarGroupedOverflowSample } from './examples/grouped-overflow-sample';
 import { ToolbarOverflowSample } from './examples/overflow';
 
 const basicSampleHtml = 'basic-sample.html';
@@ -21,6 +22,8 @@ const alignmentHtml = 'alignment.html';
 const alignmentTs = 'alignment.ts';
 const overflowHtml = 'overflow.html';
 const overflowTs = 'overflow.ts';
+const groupedOverflowHtml = 'grouped-overflow-sample.html';
+const groupedOverflowTs = 'grouped-overflow-sample.ts';
 const complexHtml = 'complex.html';
 const complexTs = 'complex.ts';
 
@@ -37,6 +40,7 @@ const complexTs = 'complex.ts';
         ToolbarDesignSample,
         ToolbarAlignmentSample,
         ToolbarOverflowSample,
+        ToolbarGroupedOverflowSample,
         ToolbarComplexSample
     ]
 })
@@ -97,6 +101,20 @@ export class ToolbarDocs {
         }
     ]);
 
+    private readonly groupedOverflowExampleFiles = signal<ExampleFile[]>([
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(groupedOverflowHtml),
+            originalFileName: 'grouped-overflow-sample'
+        },
+        {
+            language: 'typescript',
+            component: 'ToolbarGroupedOverflowSample',
+            code: getAssetFromModuleAssets(groupedOverflowTs),
+            originalFileName: 'grouped-overflow-sample'
+        }
+    ]);
+
     private readonly complexExampleFiles = signal<ExampleFile[]>([
         {
             language: 'html',
@@ -115,5 +133,6 @@ export class ToolbarDocs {
     readonly designExamples = this.designExampleFiles.asReadonly();
     readonly alignmentExamples = this.alignmentExampleFiles.asReadonly();
     readonly overflowExamples = this.overflowExampleFiles.asReadonly();
+    readonly groupedOverflowExamples = this.groupedOverflowExampleFiles.asReadonly();
     readonly complexExamples = this.complexExampleFiles.asReadonly();
 }

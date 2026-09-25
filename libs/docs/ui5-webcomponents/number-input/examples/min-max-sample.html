@@ -1,0 +1,13 @@
+<div class="fddocs-container">
+    <div class="fd-margin-bottom--sm">
+        <ui5-label for="number-input-min-max" showColon>Value between 0 and 10</ui5-label>
+        <ui5-number-input
+            id="number-input-min-max"
+            [value]="value()"
+            [min]="0"
+            [max]="10"
+            [step]="1"
+            (ui5Change)="onValueChange($event)"
+        />
+    </div>
+</div>

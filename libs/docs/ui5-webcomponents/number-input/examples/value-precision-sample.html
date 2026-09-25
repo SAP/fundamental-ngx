@@ -1,0 +1,23 @@
+<div class="fddocs-container">
+    <div class="fd-margin-bottom--sm">
+        <ui5-label showColon for="number-input-precision-2">Two decimal places</ui5-label>
+        <ui5-number-input
+            id="number-input-precision-2"
+            [value]="value1()"
+            [valuePrecision]="2"
+            [step]="0.01"
+            (ui5Change)="onValueChange($event, value1)"
+        />
+    </div>
+
+    <div class="fd-margin-bottom--sm">
+        <ui5-label showColon for="number-input-precision-5">Five decimal places</ui5-label>
+        <ui5-number-input
+            id="number-input-precision-5"
+            [value]="value2()"
+            [valuePrecision]="5"
+            [step]="0.001"
+            (ui5Change)="onValueChange($event, value2)"
+        />
+    </div>
+</div>

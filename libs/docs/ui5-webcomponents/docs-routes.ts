@@ -165,6 +165,10 @@ const componentRoutes = [
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/multi-input').then(configureLibRoutes)
     },
     {
+        path: 'number-input',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/number-input').then(configureLibRoutes)
+    },
+    {
         path: 'panel',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/panel').then(configureLibRoutes)
     },
