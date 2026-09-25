@@ -437,6 +437,11 @@ export default {
             requiredTrue: 'Feltet er obligatorisk'
         }
     },
+    platformMessageView: {
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        title: 'Messages'
+    },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Vælg muligheder',
         inputIconTitle: 'Vælg muligheder',

@@ -39,8 +39,7 @@ export type MessagePopoverForm = NgForm | FormGroupDirective;
     template: `<ng-content></ng-content>`,
     exportAs: 'messagePopoverWrapper',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None,
-    standalone: true
+    encapsulation: ViewEncapsulation.None
 })
 export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper, AfterViewInit, OnDestroy {
     /** @hidden */

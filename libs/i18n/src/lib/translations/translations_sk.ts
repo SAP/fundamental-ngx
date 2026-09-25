@@ -438,6 +438,11 @@ export default {
             requiredTrue: 'Toto pole je povinné'
         }
     },
+    platformMessageView: {
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        title: 'Messages'
+    },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Výber - možnosti',
         inputIconTitle: 'Výber - možnosti',

@@ -1,9 +1,13 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { mergeWith } from '@fundamental-ngx/cdk/utils';
-import { MessagePopoverFormWrapperComponent } from './components/message-popover-form-wrapper/message-popover-form-wrapper.component';
-import { MessageViewComponent } from './components/message-view/message-view.component';
-import { FDP_MESSAGE_POPOVER_CONFIG, FDP_MESSAGE_POPOVER_DEFAULT_CONFIG, MessagePopoverConfig } from './default-config';
-import { MessagePopoverFormItemDirective } from './directives/message-popover-form-item.directive';
+import {
+    FDP_MESSAGE_POPOVER_CONFIG,
+    FDP_MESSAGE_POPOVER_DEFAULT_CONFIG,
+    MessagePopoverConfig,
+    MessagePopoverFormItemDirective,
+    MessagePopoverFormWrapperComponent,
+    MessagesListComponent
+} from '@fundamental-ngx/platform/messages-shared';
 import { MessagePopoverComponent } from './message-popover.component';
 
 /**
@@ -14,13 +18,13 @@ import { MessagePopoverComponent } from './message-popover.component';
     imports: [
         MessagePopoverComponent,
         MessagePopoverFormWrapperComponent,
-        MessageViewComponent,
+        MessagesListComponent,
         MessagePopoverFormItemDirective
     ],
     exports: [
         MessagePopoverComponent,
         MessagePopoverFormWrapperComponent,
-        MessageViewComponent,
+        MessagesListComponent,
         MessagePopoverFormItemDirective
     ],
     providers: [
