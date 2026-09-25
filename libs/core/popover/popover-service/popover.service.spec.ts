@@ -599,13 +599,17 @@ describe('PopoverService', () => {
             jest.restoreAllMocks();
         });
 
-        it('should start observing the scrollable ancestor when the popover opens', () => {
+        it('should observe document.body (not just the scroll container) so external layout shifts are detected', () => {
+            // Regression for https://github.com/SAP/fundamental-ngx/issues/13224:
+            // When elements OUTSIDE the scroll container change (e.g. a banner above it),
+            // the observer must still fire so the popover repositions. Watching only the
+            // scroll container's subtree misses those mutations.
             service.open();
             fixture.detectChanges();
 
             expect(observeSpy).toHaveBeenCalled();
             const [target, opts] = observeSpy.mock.calls[0];
-            expect(target).toBe(component.scrollContainerRef.nativeElement);
+            expect(target).toBe(document.body);
             expect(opts.subtree).toBe(true);
             expect(opts.childList).toBe(true);
             expect(opts.attributes).toBe(true);
@@ -681,22 +685,6 @@ describe('PopoverService', () => {
             expect(observeSpy).not.toHaveBeenCalled();
         });
 
-        it('should fall back to document.body when no scrollable ancestor exists', () => {
-            // The triggerElement in the default template has a scrollable parent (scrollContainer).
-            // Point the trigger directly at document.body's child to test the fallback.
-            const orphan = document.createElement('button');
-            document.body.appendChild(orphan);
-            service.updateTriggerElement(orphan);
-
-            service.open();
-            fixture.detectChanges();
-
-            const observedTarget = observeSpy.mock.calls[0]?.[0];
-            expect(observedTarget).toBe(document.body);
-
-            document.body.removeChild(orphan);
-        });
-
         // ---------------------------------------------------------------------------------------
         // Regression: self-feeding reposition loop. updatePosition() writes `style` on the overlay's
         // own position elements; the observer watches that subtree, so it reacts to its own writes
@@ -742,32 +730,18 @@ describe('PopoverService', () => {
                 expect(updatePositionSpy).toHaveBeenCalled();
             });
 
-            it('should NOT call updatePosition for a style mutation on the overlay position wrapper (parent of overlayElement)', () => {
-                // CDK writes the churning `style` on the position wrapper, not on overlayElement --
-                // and the wrapper is overlayElement's parent, nested under .cdk-overlay-container:
-                //
-                //   .cdk-overlay-container
-                //     └─ .cdk-overlay-connected-position-bounding-box   <- churning style writes
-                //          └─ .cdk-overlay-pane (= overlayElement)
-                //
-                // So a guard checking overlayElement.contains(target) misses the wrapper and the
-                // loop survives. This test reconstructs that ancestry to lock the container guard in.
+            it('should NOT call updatePosition for a style mutation on the overlay position wrapper (hostElement)', () => {
+                // hostElement is the CDK bounding-box element (.cdk-overlay-connected-position-bounding-box).
+                // CDK writes churning `style` updates on it during positioning; the guard must
+                // recognise these as self-caused and skip them.
                 service.open();
                 fixture.detectChanges();
 
-                const overlayElement = service['_overlayRef'].overlayElement;
-                const container = document.createElement('div');
-                container.className = 'cdk-overlay-container';
-                const boundingBox = document.createElement('div');
-                boundingBox.className = 'cdk-overlay-connected-position-bounding-box';
-                container.appendChild(boundingBox);
-                boundingBox.appendChild(overlayElement);
-                document.body.appendChild(container);
-
+                const hostElement = service['_overlayRef'].hostElement;
                 const wrapperRecord = {
                     type: 'attributes',
                     attributeName: 'style',
-                    target: boundingBox
+                    target: hostElement
                 } as unknown as MutationRecord;
 
                 updatePositionSpy = jest.spyOn(service['_overlayRef'], 'updatePosition');
@@ -775,8 +749,35 @@ describe('PopoverService', () => {
                 mutationCallback([wrapperRecord], {} as MutationObserver);
 
                 expect(updatePositionSpy).not.toHaveBeenCalled();
+            });
 
-                container.remove();
+            it('should guard against self-mutations when placementContainer is used (host moved outside .cdk-overlay-container)', () => {
+                // Regression guard: when placementContainer is set, CDK moves hostElement out of
+                // .cdk-overlay-container. The old guard (closest('.cdk-overlay-container') ?? overlayElement)
+                // fell back to overlayElement which does not contain hostElement, so self-mutations on the
+                // bounding-box still triggered updatePosition(). Using hostElement directly covers both cases.
+                const placementContainer = document.createElement('div');
+                document.body.appendChild(placementContainer);
+
+                service.refreshConfiguration({ placementContainer });
+                service.open();
+                fixture.detectChanges();
+
+                const hostElement = service['_overlayRef'].hostElement;
+                const selfRecord = {
+                    type: 'attributes',
+                    attributeName: 'style',
+                    target: hostElement
+                } as unknown as MutationRecord;
+
+                updatePositionSpy = jest.spyOn(service['_overlayRef'], 'updatePosition');
+
+                mutationCallback([selfRecord], {} as MutationObserver);
+
+                expect(updatePositionSpy).not.toHaveBeenCalled();
+
+                service.close();
+                placementContainer.remove();
             });
         });
     });
