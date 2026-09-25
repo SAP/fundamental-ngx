@@ -1,22 +1,21 @@
-import { Directive, Input } from '@angular/core';
-
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { computed, Directive, input } from '@angular/core';
 
 export type TableStatuses = 'valid' | 'warning' | 'information' | 'error';
 
 @Directive({
     selector: '[fdTableStatusIndicator], [fd-table-status-indicator]',
     host: {
-        class: 'fd-table__cell--status-indicator',
-        '[class.fd-table__cell--status-indicator--valid]': 'status === "valid"',
-        '[class.fd-table__cell--status-indicator--warning]': 'status === "warning"',
-        '[class.fd-table__cell--status-indicator--information]': 'status === "information"',
-        '[class.fd-table__cell--status-indicator--error]': 'status === "error"'
-    },
-    standalone: true
+        '[class]': 'cssClass()'
+    }
 })
 export class TableStatusIndicatorDirective {
     /** The type of indicator. Options are 'valid', 'warning', 'information' and 'error'. */
-    @Input()
-    status: Nullable<TableStatuses>;
+    readonly status = input<TableStatuses | null | undefined>();
+
+    /** @hidden */
+    protected readonly cssClass = computed(() =>
+        ['fd-table__cell--status-indicator', this.status() ? 'fd-table__cell--status-indicator--' + this.status() : '']
+            .filter(Boolean)
+            .join(' ')
+    );
 }

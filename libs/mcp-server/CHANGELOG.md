@@ -1,3 +1,59 @@
+## 0.65.0-rc.25 (2026-09-25)
+
+This was a version bump only for mcp-server to align it with other projects, there were no code changes.
+
+## 0.65.0-rc.24 (2026-09-24)
+
+This was a version bump only for mcp-server to align it with other projects, there were no code changes.
+
+## 0.65.0-rc.23 (2026-09-24)
+
+This was a version bump only for mcp-server to align it with other projects, there were no code changes.
+
+## 0.65.0-rc.21 (2026-09-23)
+
+This was a version bump only for mcp-server to align it with other projects, there were no code changes.
+
+## 0.65.0-rc.20 (2026-09-23)
+
+This was a version bump only for mcp-server to align it with other projects, there were no code changes.
+
+## 0.65.0-rc.19 (2026-09-22)
+
+This was a version bump only for mcp-server to align it with other projects, there were no code changes.
+
+## 0.65.0-rc.18 (2026-09-19)
+
+This was a version bump only for mcp-server to align it with other projects, there were no code changes.
+
+## 0.65.0-rc.17 (2026-09-18)
+
+This was a version bump only for mcp-server to align it with other projects, there were no code changes.
+
+## 0.65.0-rc.16 (2026-09-18)
+
+This was a version bump only for mcp-server to align it with other projects, there were no code changes.
+
+## 0.65.0-rc.15 (2026-09-17)
+
+This was a version bump only for mcp-server to align it with other projects, there were no code changes.
+
+## 0.65.0-rc.14 (2026-09-16)
+
+This was a version bump only for mcp-server to align it with other projects, there were no code changes.
+
+## 0.65.0-rc.13 (2026-09-16)
+
+This was a version bump only for mcp-server to align it with other projects, there were no code changes.
+
+## 0.65.0-rc.12 (2026-09-16)
+
+This was a version bump only for mcp-server to align it with other projects, there were no code changes.
+
+## 0.65.0-rc.11 (2026-09-14)
+
+This was a version bump only for mcp-server to align it with other projects, there were no code changes.
+
 ## 0.65.0-rc.10 (2026-09-14)
 
 This was a version bump only for mcp-server to align it with other projects, there were no code changes.

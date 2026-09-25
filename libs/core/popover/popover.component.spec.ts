@@ -16,6 +16,7 @@ import { PopoverModule } from './popover.module';
             [disabled]="disabled()"
             [isOpen]="isOpen()"
             [noArrow]="noArrow()"
+            [closeOnOutsideClick]="closeOnOutsideClick()"
             [closeOnEscapeKey]="closeOnEscapeKey()"
             [mobile]="mobile()"
         >
@@ -39,6 +40,7 @@ class TestPopoverComponent {
     readonly disabled = input(false);
     readonly isOpen = input(false);
     readonly noArrow = input(true);
+    readonly closeOnOutsideClick = input(true);
     readonly closeOnEscapeKey = input(true);
     readonly mobile = input(false);
 }
@@ -307,6 +309,14 @@ describe('PopoverComponent', () => {
         expect(popover.disableScrollbar()).toBe(false);
         expect(popover.mobile()).toBe(false);
     });
+
+    it('syncs projected-control closeOnOutsideClick changes to PopoverService', fakeAsync(() => {
+        fixture.componentRef.setInput('closeOnOutsideClick', false);
+        fixture.detectChanges();
+        tick();
+
+        expect(popover['_popoverService'].closeOnOutsideClick()).toBe(false);
+    }));
 });
 
 describe('PopoverComponent with config input', () => {

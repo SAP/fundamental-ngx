@@ -17,6 +17,11 @@
         "ui5-webcomponents-ai",
         "ui5-webcomponents"
     ],
+    "cli": {
+        "cache": {
+            "enabled": false
+        }
+    },
     "generators": {
         "@nx/schematics:component": {
             "style": "scss"
@@ -31,6 +36,7 @@
                 "main": "apps/docs/src/main.ts",
                 "polyfills": "apps/docs/src/polyfills.ts",
                 "tsConfig": "apps/docs/tsconfig.app.json",
+                "externalDependencies": ["marked-katex-extension"],
                 "assets": [
                     "apps/docs/src/favicon.ico",
                     "apps/docs/src/llms.txt",
