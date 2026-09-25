@@ -1,3 +1,13 @@
+## 0.65.0-rc.26 (2026-09-25)
+
+### 🩹 Fixes
+
+- **platform:** platform table cell title performance improvements ([#14548](https://github.com/SAP/fundamental-ngx/pull/14548))
+
+### ❤️ Thank You
+
+- Mike O'Donnell @mikerodonnell89
+
 ## 0.65.0-rc.25 (2026-09-25)
 
 This was a version bump only for platform to align it with other projects, there were no code changes.
