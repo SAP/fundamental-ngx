@@ -2,7 +2,15 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 
 import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { ButtonComponent } from '@fundamental-ngx/platform/button';
-import { PlatformTableModule, TableDataProvider, TableDataSource, TableState } from '@fundamental-ngx/platform/table';
+import {
+    FilterType,
+    PlatformTableModule,
+    SortDirection,
+    TableDataProvider,
+    TableDataSource,
+    TableFilterSelectOption,
+    TableState
+} from '@fundamental-ngx/platform/table';
 import {
     TableDataSourceDirective,
     TableHeaderResizerDirective,
@@ -25,6 +33,14 @@ import { Observable, of } from 'rxjs';
     ]
 })
 export class PlatformTableWrapExampleComponent {
+    readonly filterTypeEnum = FilterType;
+    statusFilteringValues: TableFilterSelectOption[] = [
+        { value: 'Available', label: 'Available' },
+        { value: 'Out of stock', label: 'Out of stock' },
+        { value: 'Stocked on demand', label: 'Stocked on demand' },
+        { value: 'No info', label: 'No info' }
+    ];
+
     source: TableDataSource<ExampleItem>;
 
     constructor() {
@@ -65,9 +81,14 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
     fetch(tableState?: TableState): Observable<ExampleItem[]> {
         this.items = [...ITEMS];
 
-        // apply searching
-        if (tableState?.searchInput) {
-            this.items = this.search(this.items, tableState);
+        // apply filtering
+        if (tableState?.filterBy) {
+            this.items = this.filter(tableState);
+        }
+
+        // apply sorting
+        if (tableState?.sortBy) {
+            this.items = this.sort(tableState);
         }
 
         this.totalItems = this.items.length;
@@ -75,26 +96,46 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
         return of(this.items);
     }
 
-    search(items: ExampleItem[], { searchInput, columnKeys }: TableState): ExampleItem[] {
-        const searchText = searchInput?.text || '';
-        const keysToSearchBy = columnKeys;
+    private sort({ sortBy }: TableState): ExampleItem[] {
+        const items = this.items.slice();
 
-        if (searchText.trim() === '' || keysToSearchBy.length === 0) {
+        if (sortBy.length === 0) {
             return items;
         }
 
-        return items.filter((item) => {
-            const valuesForSearch = keysToSearchBy.map((key) => getNestedValue(key, item));
-            return valuesForSearch
-                .filter((value) => !!value)
-                .map((value): string => value.toString())
-                .some((value) => value.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()));
+        return items.sort((a, b) => {
+            for (const { field, direction } of sortBy) {
+                if (!field) {
+                    continue;
+                }
+
+                // Only name and description are sortable (both strings)
+                const aValue = (field === 'name' ? a.name : a.description).toLowerCase();
+                const bValue = (field === 'name' ? b.name : b.description).toLowerCase();
+                const comparison = aValue > bValue ? 1 : aValue < bValue ? -1 : 0;
+
+                if (comparison !== 0) {
+                    return direction === SortDirection.ASC ? comparison : -comparison;
+                }
+            }
+            return 0;
         });
     }
-}
 
-function getNestedValue<T extends Record<string, any>>(key: string, object: T): any {
-    return key.split('.').reduce((a, b) => (a ? a[b] : null), object);
+    private filter({ filterBy }: TableState): ExampleItem[] {
+        let items = this.items;
+
+        filterBy.forEach((rule) => {
+            if (rule.field === 'status' && Array.isArray(rule.value)) {
+                const statusValues = rule.value as string[];
+                if (statusValues.length > 0) {
+                    items = items.filter((item) => statusValues.includes(item.status));
+                }
+            }
+        });
+
+        return items;
+    }
 }
 
 // Example items
