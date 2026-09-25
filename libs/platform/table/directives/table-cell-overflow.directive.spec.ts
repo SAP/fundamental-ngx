@@ -20,20 +20,6 @@ class TestComponent {
  * These tests have inherent limitations because JSDOM (the test environment) does not
  * calculate real layout. In JSDOM, `offsetWidth` and `scrollWidth` typically return 0
  * or identical values, making it impossible to test actual overflow detection.
- *
- * What we CAN test:
- * - The directive sets up ResizeObserver and MutationObserver
- * - The directive responds to the `enabled` input
- * - The directive calls setAttribute/removeAttribute on the element
- *
- * What requires E2E testing in a real browser:
- * - Actual overflow detection (offsetWidth < scrollWidth)
- * - Observer callbacks triggering on real layout changes
- * - Title attribute appearing/disappearing based on actual overflow
- *
- * Your coworker was correct that the original `if` guards made tests pass silently
- * when they should have failed. The proper solution is to acknowledge that unit tests
- * cannot fully validate layout-dependent behavior and supplement with E2E tests.
  */
 describe('TableCellOverflowDirective', () => {
     let component: TestComponent;
