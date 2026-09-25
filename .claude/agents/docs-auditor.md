@@ -33,14 +33,15 @@ Import change: remove `Output, EventEmitter`; add `output`.
 Only flag when the BehaviorSubject holds local UI state (a string label, a counter, a boolean flag).
 Do NOT flag BehaviorSubjects that come from injected services or represent async data streams.
 Old: `public label$ = new BehaviorSubject<string>('Tab');`
-New: `protected readonly label = signal<string>('Tab');`
+New: `readonly label = signal<string>('Tab');`
+Access modifier: preserve the original modifier (`public`, `protected`, or `private`). Template-only state is typically `protected`.
 Mutation change: `.next(val)` → `.set(val)`; `.next(this.x$.value + 1)` → `.update(v => v + 1)`.
 Import change: remove `BehaviorSubject` from `rxjs`; add `signal` to `@angular/core`. Remove `AsyncPipe` from imports if signals are used directly in the template.
 
 ### 4. `*ngIf` / `*ngFor` / `*ngSwitch` structural directives
 
-Old: `*ngIf="show"` / `*ngFor="let item of items"`
-New: `@if (show)` / `@for (item of items; track item.id)`
+Old: `*ngIf="show"` / `*ngFor="let item of items"` / `*ngSwitch="val" / *ngSwitchCase="'a'"`
+New: `@if (show)` / `@for (item of items; track item.id)` / `@switch (val) { @case ('a') { ... } }`
 
 ### 5. `ngClass` / `ngStyle` bindings
 
@@ -97,4 +98,4 @@ If no files had findings, print: `No stale patterns found.`
 
 When given a component name or directory, use Glob to find all `.ts` files under that directory, then Read each one and apply the checks above.
 
-When auditing the full docs library, glob `libs/docs/**/*.ts` and process files in batches.
+When auditing the full docs library, glob `libs/docs/**/*.ts` and process files in batches of 20–30 files per pass to avoid hitting the context window. Work per-component directory rather than per-library in a single call.
