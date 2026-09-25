@@ -23,7 +23,8 @@ const Configuration = {
                 'moment-adapter',
                 'ui5',
                 'mcp',
-                'skills'
+                'skills',
+                'agents'
             ]
         ],
         'body-max-line-length': [2, 'always', 400],
