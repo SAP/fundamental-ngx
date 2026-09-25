@@ -27,7 +27,11 @@
                 (ui5ItemDelete)="onItemDelete($event)"
             >
                 @for (country of countries(); track country.name) {
-                <ui5-li [description]="'Capital: ' + country.capital" [additionalText]="country.population">
+                <ui5-li
+                    [type]="country.type"
+                    [description]="'Capital: ' + country.capital"
+                    [additionalText]="country.population"
+                >
                     {{ country.name }}
                 </ui5-li>
                 }

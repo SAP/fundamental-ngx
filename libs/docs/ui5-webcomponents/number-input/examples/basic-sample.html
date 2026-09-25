@@ -1,0 +1,16 @@
+<div class="fddocs-container">
+    <div class="fd-margin-bottom--sm">
+        <ui5-label for="number-input-1" showColon>Default step (1)</ui5-label>
+        <ui5-number-input id="number-input-1" [value]="value1()" (ui5Change)="onValueChange($event, value1)" />
+    </div>
+
+    <div class="fd-margin-bottom--sm">
+        <ui5-label for="number-input-2" showColon>Custom step (5)</ui5-label>
+        <ui5-number-input
+            id="number-input-2"
+            [value]="value2()"
+            [step]="5"
+            (ui5Change)="onValueChange($event, value2)"
+        />
+    </div>
+</div>

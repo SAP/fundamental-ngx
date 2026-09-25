@@ -32,12 +32,19 @@ export class ListSelectionModesExample {
         { value: ListSelectionMode.Delete, label: 'Delete Mode' }
     ]);
 
-    readonly countries = signal([
+    readonly countries = signal<
+        Array<{
+            name: string;
+            capital: string;
+            population: string;
+            type?: 'Inactive' | 'InactiveSelectable' | 'Active' | 'Detail' | 'Navigation';
+        }>
+    >([
         { name: 'Germany', capital: 'Berlin', population: '83M' },
         { name: 'France', capital: 'Paris', population: '67M' },
         { name: 'Italy', capital: 'Rome', population: '60M' },
         { name: 'Spain', capital: 'Madrid', population: '47M' },
-        { name: 'Poland', capital: 'Warsaw', population: '38M' }
+        { name: 'Poland (Inactive)', capital: 'Warsaw', population: '38M', type: 'Inactive' }
     ]);
 
     onSelectionModeChange(event: UI5WrapperCustomEvent<Select, 'ui5Change'>): void {

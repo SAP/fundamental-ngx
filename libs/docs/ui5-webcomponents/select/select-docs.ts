@@ -12,6 +12,7 @@ import { AdditionalTextSample } from './examples/additional-text-sample';
 import { BasicSample } from './examples/basic-sample';
 import { CustomOptionsSample } from './examples/custom-options-sample';
 import { DisabledReadonlySample } from './examples/disabled-readonly-sample';
+import { GroupedOptionsSample } from './examples/grouped-options-sample';
 import { ReactiveSample } from './examples/reactive-sample';
 import { ValueStateSample } from './examples/value-state-sample';
 
@@ -27,6 +28,8 @@ const customOptionsSampleTs = 'custom-options-sample.ts';
 const customOptionsSampleHtml = 'custom-options-sample.html';
 const reactiveSampleTs = 'reactive-sample.ts';
 const reactiveSampleHtml = 'reactive-sample.html';
+const groupedOptionsSampleTs = 'grouped-options-sample.ts';
+const groupedOptionsSampleHtml = 'grouped-options-sample.html';
 
 @Component({
     selector: 'ui5-doc-select',
@@ -43,7 +46,8 @@ const reactiveSampleHtml = 'reactive-sample.html';
         ValueStateSample,
         DisabledReadonlySample,
         CustomOptionsSample,
-        ReactiveSample
+        ReactiveSample,
+        GroupedOptionsSample
     ]
 })
 export class SelectDocs {
@@ -140,6 +144,22 @@ export class SelectDocs {
             language: 'html',
             code: getAssetFromModuleAssets(reactiveSampleHtml),
             originalFileName: 'reactive-sample'
+        }
+    ]);
+
+    groupedOptionsExample = signal<ExampleFile[]>([
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(groupedOptionsSampleTs),
+            originalFileName: 'grouped-options-sample',
+            component: 'GroupedOptionsSample',
+            typescriptFileCode: getAssetFromModuleAssets(groupedOptionsSampleTs),
+            scssFileCode: ''
+        },
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(groupedOptionsSampleHtml),
+            originalFileName: 'grouped-options-sample'
         }
     ]);
 }

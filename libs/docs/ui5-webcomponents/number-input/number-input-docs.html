@@ -1,0 +1,48 @@
+<fd-docs-section-title id="basic" componentName="number-input"> Basic Number Input </fd-docs-section-title>
+<description>
+    The Number Input component is a numeric input field that allows users to enter, edit, and select numeric values. Use
+    the <code>value</code> property to control the current value. The <code>step</code> property defines the increment
+    when using the increase/decrease buttons or keyboard navigation (default is 1). The <code>ui5Change</code> event
+    fires when the value changes.
+</description>
+<component-example>
+    <ui5-doc-number-input-basic-sample />
+</component-example>
+<code-example [exampleFiles]="basicExample()" />
+
+<separator />
+
+<fd-docs-section-title id="min-max" componentName="number-input"> Min and Max Values </fd-docs-section-title>
+<description>
+    The Number Input supports <code>min</code> and <code>max</code> properties to restrict the allowed range. The
+    increase/decrease buttons and keyboard navigation become disabled when the value reaches the limits. Users can still
+    manually enter values outside the range, but validation will indicate the error.
+</description>
+<component-example>
+    <ui5-doc-number-input-min-max-sample />
+</component-example>
+<code-example [exampleFiles]="minMaxExample()" />
+
+<separator />
+
+<fd-docs-section-title id="value-precision" componentName="number-input"> Value Precision </fd-docs-section-title>
+<description>
+    The Number Input supports decimal values with configurable precision using the <code>valuePrecision</code> property.
+    This controls how many decimal places are displayed and accepted.
+</description>
+<component-example>
+    <ui5-doc-number-input-value-precision-sample />
+</component-example>
+<code-example [exampleFiles]="valuePrecisionExample()" />
+
+<separator />
+
+<fd-docs-section-title id="states" componentName="number-input"> States </fd-docs-section-title>
+<description>
+    The <code>ui5-number-input</code> component supports several semantic value states, read-only mode, and disabled
+    mode.
+</description>
+<component-example>
+    <ui5-doc-number-input-states-sample />
+</component-example>
+<code-example [exampleFiles]="statesExample()" />
