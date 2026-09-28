@@ -255,7 +255,7 @@
         <ui5-user-settings-item icon="bell" text="Notifications" tooltip="Notifications" headerText="Notifications">
             <ui5-user-settings-notifications-view
                 id="notifications-main-view"
-                (ui5SelectionChange)="onNotificationsSelectionChange($event)"
+                (ui5ItemClick)="onNotificationsItemClick($event)"
             >
                 <ui5-message-strip slot="additionalContent" design="Information" [hideCloseButton]="true">
                     Some settings are managed by your organization. <ui5-link>Learn More</ui5-link>

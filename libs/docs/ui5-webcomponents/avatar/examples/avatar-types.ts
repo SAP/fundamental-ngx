@@ -6,6 +6,17 @@ import '@ui5/webcomponents-icons/dist/AllIcons.js';
     selector: 'ui5-avatar-types-sample',
     templateUrl: './avatar-types.html',
     imports: [Avatar],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    styles: [
+        `
+            section {
+                display: flex;
+                gap: 1rem;
+                align-items: center;
+                padding: 1rem;
+                flex-wrap: wrap;
+            }
+        `
+    ]
 })
 export class AvatarTypesSample {}

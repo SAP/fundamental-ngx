@@ -286,7 +286,7 @@
                     text="Allow Notifications"
                     [checked]="pendingNotifications()"
                     [navigable]="true"
-                    (ui5Change)="onNotificationsChange($event)"
+                    (ui5SwitchChange)="onNotificationsChange($event)"
                 >
                 </ui5-user-settings-notifications-view-item>
                 <ui5-user-settings-notifications-view-item
@@ -296,7 +296,7 @@
                     bylineText="Switch on Banner for Notifications"
                     [checked]="pendingBannerAlerts()"
                     [navigable]="true"
-                    (ui5Change)="onBannerAlertsChange($event)"
+                    (ui5SwitchChange)="onBannerAlertsChange($event)"
                 >
                 </ui5-user-settings-notifications-view-item>
 

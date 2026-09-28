@@ -72,8 +72,9 @@ import '@ui5/webcomponents-icons/dist/user-settings.js';
     ],
     styles: [
         `
-            body {
-                height: 600px;
+            :host {
+                display: block;
+                min-height: 600px;
             }
 
             .ua-panel {
@@ -196,7 +197,7 @@ export class SaveModeSample {
         this.toastReset()?.open();
     }
 
-    onThemeSelectionChange(event: any): void {
+    onThemeSelectionChange(event: UI5WrapperCustomEvent<UserSettingsAppearanceView, 'ui5SelectionChange'>): void {
         const selectedItem = event.detail?.item;
         if (selectedItem?.itemKey) {
             this.pendingTheme.set(selectedItem.itemKey);
@@ -228,12 +229,12 @@ export class SaveModeSample {
         this.mobileSecondaryViewText.set(platform);
     }
 
-    onNotificationsChange(event: any): void {
-        this.pendingNotifications.set(event.currentTarget?.checked ?? false);
+    onNotificationsChange(event: UI5WrapperCustomEvent<UserSettingsNotificationsViewItem, 'ui5SwitchChange'>): void {
+        this.pendingNotifications.set(event.currentTarget.checked ?? false);
     }
 
-    onBannerAlertsChange(event: any): void {
-        this.pendingBannerAlerts.set(event.currentTarget?.checked ?? false);
+    onBannerAlertsChange(event: UI5WrapperCustomEvent<UserSettingsNotificationsViewItem, 'ui5SwitchChange'>): void {
+        this.pendingBannerAlerts.set(event.currentTarget.checked ?? false);
     }
 
     onResetPersonalization(): void {

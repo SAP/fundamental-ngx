@@ -72,8 +72,9 @@ import '@ui5/webcomponents-icons/dist/user-settings.js';
     ],
     styles: [
         `
-            body {
-                height: 600px;
+            :host {
+                display: block;
+                min-height: 600px;
             }
 
             .ua-panel {
@@ -220,8 +221,8 @@ export class BasicSample {
         this.mobileSecondaryViewText.set(platform);
     }
 
-    onNotificationsSelectionChange(event: any): void {
-        console.log(`Notifications selection change: ${event.detail?.view?.text}`, event.detail);
+    onNotificationsItemClick(event: UI5WrapperCustomEvent<UserSettingsNotificationsView, 'ui5ItemClick'>): void {
+        console.log('Notifications item clicked', event.detail);
     }
 
     onResetPersonalization(): void {

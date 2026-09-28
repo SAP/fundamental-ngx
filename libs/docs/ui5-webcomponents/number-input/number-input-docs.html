@@ -2,8 +2,9 @@
 <description>
     The Number Input component is a numeric input field that allows users to enter, edit, and select numeric values. Use
     the <code>value</code> property to control the current value. The <code>step</code> property defines the increment
-    when using the increase/decrease buttons or keyboard navigation (default is 1). The <code>ui5Change</code> event
-    fires when the value changes.
+    value (default is 1), which you can customize to any numeric value that fits your use case. The
+    <code>ui5Change</code>
+    event fires when the value changes.
 </description>
 <component-example>
     <ui5-doc-number-input-basic-sample />
@@ -14,9 +15,8 @@
 
 <fd-docs-section-title id="min-max" componentName="number-input"> Min and Max Values </fd-docs-section-title>
 <description>
-    The Number Input supports <code>min</code> and <code>max</code> properties to restrict the allowed range. The
-    increase/decrease buttons and keyboard navigation become disabled when the value reaches the limits. Users can still
-    manually enter values outside the range, but validation will indicate the error.
+    The Number Input supports <code>min</code> and <code>max</code> properties to restrict the allowed range. Users can
+    still manually enter values outside the range, but validation will indicate the error.
 </description>
 <component-example>
     <ui5-doc-number-input-min-max-sample />
