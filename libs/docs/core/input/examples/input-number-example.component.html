@@ -1,35 +1,163 @@
-<h4 fd-form-header>Examples</h4>
-<br />
-<div fd-form-item>
-    <label fd-form-label for="num-input-1" [colon]="true">Default Input</label>
-    <input fd-form-control type="number" id="num-input-1" value="1234567" thousandsSeparator />
+<h3>Number Input Features</h3>
+
+<div class="docs-feature">
+    <h4>Value & Placeholder</h4>
+    <p>
+        The numeric input always displays a value when not in active state. The value is a rational number. The default
+        value is 0. If a minimum or maximum value is defined, the default is the closest value to 0. When no value is
+        set, on focus out the field is empty. Applications can set an initial value. While the field is active and the
+        value has been cleared, placeholder text can be displayed.
+    </p>
+    <div fd-form-item>
+        <label fd-form-label for="num-input-placeholder" [colon]="true">Placeholder</label>
+        <input fd-form-control type="number" id="num-input-placeholder" placeholder="Enter a number" />
+    </div>
 </div>
-<div fd-form-item>
-    <label fd-form-label [colon]="true" for="num-input-2">Min Max Input</label>
-    <input
-        fd-form-control
-        type="number"
-        id="num-input-2"
-        min="0"
-        max="100"
-        value="10"
-        step="1"
-        [largerStep]="10"
-        valueAlignment="center"
-    />
+
+<div class="docs-feature">
+    <h4>Reset</h4>
+    <p>
+        When the Escape key is pressed while the numeric input is in active state, the value that was set before the
+        field became active is restored.
+    </p>
+    <div fd-form-item>
+        <label fd-form-label for="num-input-reset" [colon]="true">Reset</label>
+        <input fd-form-control type="number" id="num-input-reset" placeholder="Enter a number" />
+    </div>
 </div>
-<div fd-form-item>
-    <label fd-form-label [required]="true" for="num-input-3">Value Precision</label>
-    <input
-        fd-form-control
-        type="number"
-        id="num-input-3"
-        step="0.1"
-        [valuePrecision]="6"
-        min="0"
-        max="1"
-        value="0.1"
-        placeholder="Value Precision"
-        aria-required="true"
-    />
+
+<div class="docs-feature">
+    <h4>Step Size</h4>
+    <p>
+        A step size can be set, defined as a rational number that is added or subtracted from the current value when the
+        value is increased or decreased via keyboard or scroll.
+    </p>
+    <div fd-form-item>
+        <label fd-form-label for="num-input-step" [colon]="true">Step Size</label>
+        <input fd-form-control type="number" id="num-input-step" value="0" step="5" />
+    </div>
+</div>
+
+<div class="docs-feature">
+    <h4>Larger Step Size</h4>
+    <p>
+        A larger step size can be set, defined as a rational number. When pressing Page Up/Down keys, the current value
+        is increased or decreased by the product of the step size multiplied by the larger step size.
+    </p>
+    <div fd-form-item>
+        <label fd-form-label for="num-input-larger-step" [colon]="true">Larger Step Size (step=1, largerStep=10)</label>
+        <input fd-form-control type="number" id="num-input-larger-step" value="0" step="1" [largerStep]="10" />
+    </div>
+    <br />
+    <div fd-form-item>
+        <label fd-form-label for="num-input-larger-step-2" [colon]="true"
+            >Larger Step Size (step=3, largerStep=5)</label
+        >
+        <input fd-form-control type="number" id="num-input-larger-step-2" value="0" step="3" [largerStep]="5" />
+    </div>
+</div>
+
+<div class="docs-feature">
+    <h4>Step Mode</h4>
+    <p>The step mode defines how the new value is calculated when stepping:</p>
+    <ul>
+        <li>
+            Addition and subtraction — the new value results from adding or subtracting the step size from the current
+            value.
+        </li>
+        <li>
+            Multiple — the new value results from rounding the current value to the nearest multiple of the step size.
+        </li>
+    </ul>
+
+    <div fd-form-item>
+        <label fd-form-label for="num-input-step-mode" [colon]="true">Step Mode</label>
+        <input
+            fd-form-control
+            type="number"
+            id="num-input-step-mode"
+            value="1"
+            step="5"
+            [largerStep]="3"
+            stepMode="multiple"
+        />
+    </div>
+</div>
+
+<div class="docs-feature">
+    <h4>Minimum & Maximum Value</h4>
+    <p>
+        Minimum and maximum values can be set as rational numbers. When the value reaches the minimum or maximum, the
+        Up/Down keyboard shortcuts are disabled at that boundary. If a value outside the range is entered, an error
+        state appears. When adding or subtracting a step size would exceed the minimum or maximum, the value is set to
+        the minimum or maximum instead.
+    </p>
+
+    <div fd-form-item>
+        <label fd-form-label for="num-input-min-max" [colon]="true">Minimum & Maximum Value</label>
+        <input fd-form-control type="number" id="num-input-min-max" value="0" min="0" max="10" step="2" />
+    </div>
+</div>
+
+<div class="docs-feature">
+    <h4>Value Precision</h4>
+    <p>
+        The number of digits after the decimal point can be defined as a natural number, including 0. When typing or
+        pasting a value, digits exceeding the defined precision are not accepted and an error state appears briefly.
+    </p>
+
+    <div fd-form-item>
+        <label fd-form-label for="num-input-value-precision" [colon]="true">Value Precision</label>
+        <input
+            fd-form-control
+            type="number"
+            id="num-input-value-precision"
+            step="0.1"
+            min="0"
+            max="1"
+            value="0.1"
+            [valuePrecision]="4"
+        />
+    </div>
+</div>
+
+<div class="docs-feature">
+    <h4>Value Alignment</h4>
+    <p>
+        The value can be aligned within the input field. End alignment is the default and is recommended for easier
+        comparison of numbers.
+    </p>
+
+    <div fd-form-item>
+        <label fd-form-label for="num-input-value-alignment-start" [colon]="true">Value Alignment Start</label>
+        <input fd-form-control type="number" id="num-input-value-alignment-start" value="50" valueAlignment="start" />
+    </div>
+    <br />
+    <div fd-form-item>
+        <label fd-form-label for="num-input-value-alignment-center" [colon]="true">Value Alignment Center</label>
+        <input fd-form-control type="number" id="num-input-value-alignment-center" value="50" valueAlignment="center" />
+    </div>
+</div>
+
+<div class="docs-feature">
+    <h4>Thousands Separator</h4>
+    <p>Large values can be grouped using thousands separators to improve readability.</p>
+
+    <div fd-form-item>
+        <label fd-form-label for="num-input-thousands-separator" [colon]="true">Thousands Separator</label>
+        <input fd-form-control type="number" id="num-input-thousands-separator" value="1234567" thousandsSeparator />
+    </div>
+</div>
+
+<div class="docs-feature">
+    <h4>International Number Format</h4>
+    <p>
+        Numbers can be displayed in an international format, which may include different grouping and decimal separators
+        based on locale.
+    </p>
+
+    <div fd-form-item>
+        <label fd-form-label for="num-input-international-format" [colon]="true">International Number Format</label>
+        <input fd-form-control type="number" id="num-input-international-format" placeholder="Enter a number" />
+    </div>
 </div>
