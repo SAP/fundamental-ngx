@@ -1,4 +1,12 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@angular/core';
+import {
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    Component,
+    TemplateRef,
+    ViewEncapsulation,
+    signal,
+    viewChild
+} from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import { MessageViewComponent } from '@fundamental-ngx/platform/message-view';
 import { MessagePopoverErrorGroup } from '@fundamental-ngx/platform/messages-shared';
@@ -12,6 +20,7 @@ import { MessagePopoverErrorGroup } from '@fundamental-ngx/platform/messages-sha
 })
 export class MessageViewDefaultExampleComponent implements AfterViewInit {
     readonly messages = signal<MessagePopoverErrorGroup[]>([]);
+    readonly customDescriptionTemplate = viewChild<TemplateRef<any>>('customDescriptionTemplate');
 
     ngAfterViewInit(): void {
         this.messages.set([
@@ -42,9 +51,8 @@ export class MessageViewDefaultExampleComponent implements AfterViewInit {
                             message: 'Invalid Email'
                         },
                         description: {
-                            type: 'string',
-                            message:
-                                'Please enter a valid email address in the format: user@example.com. This email will be used for account notifications.'
+                            type: 'directive',
+                            message: this.customDescriptionTemplate()
                         },
                         name: 'email',
                         fieldName: 'Email',

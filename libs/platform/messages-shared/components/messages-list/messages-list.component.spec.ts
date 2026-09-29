@@ -1,5 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { MessagePopoverEntry, MessagePopoverErrorGroup } from '../../models/message-popover-entry.interface';
 import { MessagesListComponent } from './messages-list.component';
 
@@ -35,7 +36,8 @@ describe('MessagesListComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [MessagesListComponent]
+            imports: [MessagesListComponent],
+            providers: [FdTranslatePipe]
         }).compileComponents();
 
         fixture = TestBed.createComponent(MessagesListComponent);

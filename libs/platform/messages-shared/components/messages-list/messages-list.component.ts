@@ -12,7 +12,8 @@ import {
     Input,
     Output,
     ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ClickedDirective, Nullable, TabbableElementService, resizeObservable } from '@fundamental-ngx/cdk/utils';
@@ -113,6 +114,9 @@ export class MessagesListComponent implements AfterViewInit {
     private _detailsAnimation: Animation | null = null;
 
     /** @hidden */
+    private readonly _translatePipe = inject(FdTranslatePipe);
+
+    /** @hidden */
     constructor(
         private readonly _destroyRef: DestroyRef,
         private readonly _tabbableService: TabbableElementService,
@@ -183,6 +187,16 @@ export class MessagesListComponent implements AfterViewInit {
             return item.heading.message;
         }
         return '';
+    }
+
+    /** @hidden Get announcement text for screen reader when navigating to details */
+    protected getAnnouncementText(entry: MessagePopoverEntry): string {
+        let headingText = '';
+        if (entry.heading.type === 'string' && entry.heading.message) {
+            headingText = typeof entry.heading.message === 'string' ? entry.heading.message : '';
+        }
+        const additionalInfoText = this._translatePipe.transform('platformMessageView.additionalInformation')();
+        return headingText ? `${headingText}. ${additionalInfoText}` : '';
     }
 
     /** @hidden Animate the transition between list and details screens. */

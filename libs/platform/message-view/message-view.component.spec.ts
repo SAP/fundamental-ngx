@@ -1,17 +1,34 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
 import { MessageViewComponent } from './message-view.component';
 
 describe('MessageViewComponent', () => {
     let component: MessageViewComponent;
     let fixture: ComponentFixture<MessageViewComponent>;
+    let dialogService: DialogService;
+    let mockDialogRef: jest.Mocked<DialogRef>;
 
     beforeEach(async () => {
+        mockDialogRef = {
+            close: jest.fn(),
+            dismiss: jest.fn()
+        } as any;
+
         await TestBed.configureTestingModule({
-            imports: [MessageViewComponent]
+            imports: [MessageViewComponent],
+            providers: [
+                {
+                    provide: DialogService,
+                    useValue: {
+                        open: jest.fn().mockReturnValue(mockDialogRef)
+                    }
+                }
+            ]
         }).compileComponents();
 
         fixture = TestBed.createComponent(MessageViewComponent);
         component = fixture.componentInstance;
+        dialogService = TestBed.inject(DialogService);
         fixture.detectChanges();
     });
 
@@ -249,56 +266,57 @@ describe('MessageViewComponent', () => {
     describe('Dialog operations', () => {
         it('should open dialog when open() is called', () => {
             component.open();
-            expect(component['_dialogRef']).toBeDefined();
+            expect(dialogService.open).toHaveBeenCalled();
         });
 
         it('should close dialog when close() is called', () => {
             component.open();
-            const dialogRef = component['_dialogRef'];
-            const closeSpy = jest.spyOn(dialogRef!, 'close');
-
             component.close();
-            expect(closeSpy).toHaveBeenCalled();
+            expect(mockDialogRef.close).toHaveBeenCalled();
         });
 
         it('should pass mobile config to dialog when mobile input is true', () => {
             fixture.componentRef.setInput('mobile', true);
-            const openSpy = jest.spyOn(component['_dialogService'], 'open');
+            fixture.detectChanges();
 
             component.open();
 
-            expect(openSpy).toHaveBeenCalledWith(
+            expect(dialogService.open).toHaveBeenCalledWith(
                 expect.anything(),
                 expect.objectContaining({ mobile: true }),
                 expect.anything()
             );
         });
 
-        it('should pass mobile false to dialog by default', () => {
-            const openSpy = jest.spyOn(component['_dialogService'], 'open');
-
+        it('should not include mobile in config when mobile input is false', () => {
             component.open();
 
-            expect(openSpy).toHaveBeenCalledWith(
-                expect.anything(),
-                expect.objectContaining({ mobile: false }),
-                expect.anything()
+            const callArgs = (dialogService.open as jest.Mock).mock.calls[0];
+            const config = callArgs[1];
+
+            expect(config).not.toHaveProperty('mobile');
+            expect(config).toEqual(
+                expect.objectContaining({
+                    focusTrapped: true,
+                    disablePaddings: true,
+                    width: '24rem',
+                    height: 'auto',
+                    resizable: true
+                })
             );
         });
 
         it('should pass correct dialog configuration', () => {
-            const openSpy = jest.spyOn(component['_dialogService'], 'open');
-
             component.open();
 
-            expect(openSpy).toHaveBeenCalledWith(
+            expect(dialogService.open).toHaveBeenCalledWith(
                 expect.anything(),
                 expect.objectContaining({
                     focusTrapped: true,
-                    responsivePadding: false,
                     disablePaddings: true,
                     width: '24rem',
-                    height: 'auto'
+                    height: 'auto',
+                    resizable: true
                 }),
                 expect.anything()
             );

@@ -437,9 +437,18 @@ export default {
         }
     },
     platformMessageView: {
+        additionalInformation: 'Additional information available via reading keys',
         cancel: 'Cancel',
         detailsTitle: 'Message Details',
-        title: 'Messages'
+        errorButton: 'Error',
+        headerRoleDescription: 'Interactive Header',
+        informationButton: 'Information',
+        successButton: 'Success',
+        title: 'Messages',
+        warningButton: 'Warning'
+    },
+    coreDialog: {
+        resizable: 'Resizable'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Select Options',

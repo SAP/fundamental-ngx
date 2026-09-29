@@ -1,11 +1,10 @@
-<fd-dialog>
-    <fd-dialog-header>
+<fd-dialog [role]="'alertdialog'">
+    <fd-dialog-header [attr.aria-roledescription]="('platformMessageView.headerRoleDescription' | fdTranslate)()">
         @if (messageView.currentScreen() === 'details') {
             <ng-template fdkTemplate="header">
                 <div fd-bar-left>
                     <button
                         fd-button
-                        fdkInitialFocus
                         fdType="transparent"
                         glyph="navigation-left-arrow"
                         [title]="('platformMessagePopover.backButton' | fdTranslate)()"
@@ -36,7 +35,11 @@
                             value="all"
                         ></button>
                         @for (type of messageView._errorTypes$(); track type.group) {
-                            <button fd-button [value]="type.group">
+                            <button
+                                fd-button
+                                [value]="type.group"
+                                [title]="(getTitleKeyForType(type.group) | fdTranslate)()"
+                            >
                                 <span
                                     fd-object-status
                                     [status]="type.state"

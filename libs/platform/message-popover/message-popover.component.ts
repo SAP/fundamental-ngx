@@ -20,6 +20,7 @@ import {
     styleUrl: './message-popover.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [FdTranslatePipe],
     imports: [
         PopoverModule,
         ButtonComponent,

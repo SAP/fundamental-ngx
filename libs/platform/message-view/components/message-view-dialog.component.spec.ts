@@ -1,6 +1,7 @@
 import { computed, EventEmitter, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DialogRef } from '@fundamental-ngx/core/dialog';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { MessageViewComponent } from '../message-view.component';
 import { MessageViewDialogComponent } from './message-view-dialog.component';
 
@@ -33,7 +34,8 @@ describe('MessageViewDialogComponent', () => {
             imports: [MessageViewDialogComponent],
             providers: [
                 { provide: MessageViewComponent, useValue: mockMessageView },
-                { provide: DialogRef, useValue: mockDialogRef }
+                { provide: DialogRef, useValue: mockDialogRef },
+                FdTranslatePipe
             ]
         }).compileComponents();
 

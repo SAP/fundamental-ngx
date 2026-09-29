@@ -13,7 +13,7 @@ import {
 import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button';
 import { TitleComponent } from '@fundamental-ngx/core/title';
-import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { FdLanguageKeyIdentifier, FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { MessagesListComponent } from '@fundamental-ngx/platform/messages-shared';
 import { MessageViewComponent } from '../message-view.component';
 
@@ -55,6 +55,21 @@ export class MessageViewDialogComponent {
                 return 'information';
             default:
                 return 'sys-help-2';
+        }
+    }
+
+    /** @hidden Map message type to title translation key */
+    protected getTitleKeyForType(type: string): FdLanguageKeyIdentifier {
+        switch (type) {
+            case 'error':
+                return 'platformMessageView.errorButton';
+            case 'success':
+                return 'platformMessageView.successButton';
+            case 'warning':
+                return 'platformMessageView.warningButton';
+            case 'information':
+            default:
+                return 'platformMessageView.informationButton';
         }
     }
 }

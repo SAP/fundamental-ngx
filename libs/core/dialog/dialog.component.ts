@@ -24,6 +24,7 @@ import { CdkScrollable } from '@angular/cdk/overlay';
 
 import { ResizeDirective, ResizeHandleDirective } from '@fundamental-ngx/cdk/utils';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { DialogBase } from './base/dialog-base.class';
 import { DialogBodyComponent } from './dialog-body/dialog-body.component';
 import { DialogFooterComponent } from './dialog-footer/dialog-footer.component';
@@ -60,13 +61,22 @@ import { DialogRef } from './utils/dialog-ref.class';
         CdkScrollable,
         ScrollbarDirective,
         ResizeHandleDirective,
-        CdkDragHandle
+        CdkDragHandle,
+        FdTranslatePipe
     ]
 })
 export class DialogComponent
     extends DialogBase<DialogRef>
     implements OnInit, OnChanges, AfterViewInit, OnDestroy, CssClassBuilder
 {
+    /** ARIA role for the dialog. Defaults to "dialog". Use "alertdialog" for dialogs that require immediate user attention. */
+    @Input()
+    role: 'dialog' | 'alertdialog' = 'dialog';
+
+    /** ARIA description for the dialog. Defaults to null. */
+    @Input()
+    ariaDescription: string | null = null;
+
     /** Custom classes */
     @Input()
     set class(userClass: string) {

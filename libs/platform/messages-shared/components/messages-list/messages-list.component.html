@@ -12,7 +12,7 @@
         ></ng-template>
     </ng-template>
     <ng-template #stringHeading>
-        {{ (item.heading.message | fdTranslate: { error: item.heading.error } : item.heading.message)() }}
+        {{ item.heading.message }}
     </ng-template>
     <ng-template
         [ngTemplateOutlet]="
@@ -38,23 +38,31 @@
         ></ng-template>
     </ng-template>
     <ng-template #stringDescription>
-        {{ (item.description.message | fdTranslate: { error: item.description.error } : item.description.message)() }}
+        {{ item.description.message }}
     </ng-template>
     <ng-template
         [ngTemplateOutlet]="
-            item.heading.type === 'directive'
+            item.description.type === 'directive'
                 ? directiveDescription
-                : item.heading.type === 'string'
+                : item.description.type === 'string'
                   ? stringDescription
                   : i18nDescription
         "
     ></ng-template>
 </ng-template>
 <div class="fd-message-view">
+    <!-- Screen reader announcement region for details view navigation -->
+    <div aria-live="assertive" aria-atomic="true" class="fd-message-view__sr-announcement">
+        @if (currentScreen === 'details' && currentEntry) {
+            {{ getAnnouncementText(currentEntry) }}
+        }
+    </div>
     <section
         #listSection
         class="fd-message-view__list"
         [class.fd-message-view__list--hidden]="currentScreen === 'details'"
+        [attr.inert]="currentScreen === 'details' ? '' : null"
+        [attr.aria-hidden]="currentScreen === 'details'"
         tabindex="-1"
         fd-scrollbar
     >
@@ -123,6 +131,8 @@
         #detailsSection
         class="fd-message-view__details"
         [class.fd-message-view__details--visible]="currentScreen === 'details'"
+        [attr.inert]="currentScreen === 'list' ? '' : null"
+        [attr.aria-hidden]="currentScreen === 'list'"
     >
         <div #detailsView>
             @if (currentEntry) {
