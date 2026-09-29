@@ -5,11 +5,14 @@
     Product switch (App Launcher) with enabled <code>Drag And Drop</code>. The DnD functionality can be switched off by
     passing <code>[dragAndDropEnabled]="false"</code> to component. The event thrown on drop can be handled by binding
     to <code>(productsChange)</code>. The element can stick to it's position, it can be achieved by passing
-    <code>stickToPosition: true</code> value to the interface object. Example of usage is in <code>Home</code> product.
-    Use <code>(isOpenChange)</code> to listen for open/close state changes. <br /><br />
+    <code>stickToPosition: true</code> value to the interface object. Use <code>(isOpenChange)</code> to listen for
+    open/close state changes. <br /><br />
     <strong>SAP Start must be the first item.</strong> The panel always focuses the first product on open. By
     convention, the first entry in the <code>products</code> array must be the SAP Start product so that focus lands
-    there consistently.
+    there consistently. <br /><br />
+    <strong>Theme-aware images:</strong> Set <code>avatar.image</code> to the resolved image path for the active theme.
+    Inject <code>ThemingService</code> and use a <code>computed()</code> or <code>linkedSignal()</code> to switch the
+    path when the theme changes — see the examples below for the recommended pattern.
 </description>
 <component-example>
     <fd-product-switch-dnd-example></fd-product-switch-dnd-example>

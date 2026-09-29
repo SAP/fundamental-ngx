@@ -383,10 +383,10 @@ export class PopoverComponent implements AfterViewInit, AfterContentInit, OnDest
                 bodyAriaLabelledBy: effectiveConfig.bodyAriaLabelledBy
             });
 
-            // Full sync only when trigger is set and not in mobile mode (for fdPopoverTrigger directive).
             // In mobile mode, the dialog handles open/close — the popover service should not be involved.
-            if (triggerValue && !this.mobile()) {
-                this._syncToService(effectiveConfig, triggerValue);
+            const triggerElement = triggerValue ?? this.triggerOrigin()?.elementRef.nativeElement;
+            if (triggerElement && !this.mobile()) {
+                this._syncToService(effectiveConfig, triggerElement);
             }
         });
     }
@@ -522,7 +522,6 @@ export class PopoverComponent implements AfterViewInit, AfterContentInit, OnDest
         this._popoverService.closeOnNavigation.set(effectiveConfig.closeOnNavigation);
         this._popoverService.fixedPosition.set(effectiveConfig.fixedPosition);
         this._popoverService.resizable.set(effectiveConfig.resizable);
-        this._popoverService.isOpen.set(this.isOpen());
         this._popoverService.updateTriggerElement(triggerValue);
     }
 

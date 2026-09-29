@@ -1,74 +1,207 @@
-import { Component, ViewChild } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
-import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
-import { TableModule } from '../table.module';
+import { Component } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TableCellDirective } from './table-cell.directive';
 
 @Component({
     template: `
-        <tr tabindex="-1">
-            <td fd-table-cell>
-                <fd-checkbox></fd-checkbox>
-            </td>
-            <td fd-table-cell [key]="key">{{ key }}</td>
-        </tr>
+        <table>
+            <thead>
+                <tr>
+                    <th fd-table-cell>Header</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td fd-table-cell>Cell</td>
+                    <th fd-table-cell>Row Header</th>
+                </tr>
+            </tbody>
+        </table>
     `,
-    standalone: true,
-    imports: [TableModule, CheckboxModule]
+    imports: [TableCellDirective]
 })
-class TestComponent {
-    @ViewChild(TableCellDirective)
-    cell: TableCellDirective;
+class TestComponent {}
 
-    key = 'key1';
+@Component({
+    template: `
+        <table>
+            <tbody>
+                <tr>
+                    <td
+                        fd-table-cell
+                        [noBorderX]="noBorderX"
+                        [noBorderY]="noBorderY"
+                        [activable]="activable"
+                        [hoverable]="hoverable"
+                        [fitContent]="fitContent"
+                        [noPadding]="noPadding"
+                        [noData]="noData"
+                        [nonInteractive]="nonInteractive"
+                    >
+                        Cell
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    `,
+    imports: [TableCellDirective]
+})
+class ModifierTestComponent {
+    noBorderX = false;
+    noBorderY = false;
+    activable = false;
+    hoverable = false;
+    fitContent = false;
+    noPadding = false;
+    noData = false;
+    nonInteractive = false;
 }
 
 describe('TableCellDirective', () => {
-    let component: TestComponent;
-    let fixture: ComponentFixture<TestComponent>;
+    describe('role attributes', () => {
+        let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [TestComponent]
-        }).compileComponents();
-    }));
+        beforeEach(async () => {
+            await TestBed.configureTestingModule({
+                imports: [TestComponent]
+            }).compileComponents();
 
-    beforeEach(async () => {
-        fixture = TestBed.createComponent(TestComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-        await fixture.whenStable();
+            fixture = TestBed.createComponent(TestComponent);
+            fixture.detectChanges();
+        });
+
+        it('should create', () => {
+            expect(fixture.componentInstance).toBeTruthy();
+        });
+
+        it('should apply base class', () => {
+            const cells = fixture.nativeElement.querySelectorAll('[fd-table-cell]');
+            cells.forEach((cell: HTMLElement) => {
+                expect(cell.classList.contains('fd-table__cell')).toBe(true);
+            });
+        });
+
+        it('should set role="columnheader" for th in thead', () => {
+            const theadCell = fixture.nativeElement.querySelector('thead th');
+            expect(theadCell.getAttribute('role')).toBe('columnheader');
+        });
+
+        it('should set role="gridcell" for td in tbody', () => {
+            const tbodyCell = fixture.nativeElement.querySelector('tbody td');
+            expect(tbodyCell.getAttribute('role')).toBe('gridcell');
+        });
+
+        it('should set role="rowheader" and scope="row" for th in tbody', () => {
+            const tbodyHeader = fixture.nativeElement.querySelector('tbody th');
+            expect(tbodyHeader.getAttribute('role')).toBe('rowheader');
+            expect(tbodyHeader.getAttribute('scope')).toBe('row');
+        });
     });
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
+    describe('modifier classes', () => {
+        let modifierFixture: ComponentFixture<ModifierTestComponent>;
+
+        beforeEach(async () => {
+            await TestBed.configureTestingModule({
+                imports: [ModifierTestComponent]
+            }).compileComponents();
+
+            modifierFixture = TestBed.createComponent(ModifierTestComponent);
+            modifierFixture.detectChanges();
+        });
+
+        it('should apply noBorderX modifier class', () => {
+            const cell = modifierFixture.nativeElement.querySelector('td');
+            expect(cell.classList.contains('fd-table__cell--no-horizontal-border')).toBe(false);
+            modifierFixture.componentInstance.noBorderX = true;
+            modifierFixture.detectChanges();
+            expect(cell.classList.contains('fd-table__cell--no-horizontal-border')).toBe(true);
+        });
+
+        it('should apply noBorderY modifier class', () => {
+            const cell = modifierFixture.nativeElement.querySelector('td');
+            expect(cell.classList.contains('fd-table__cell--no-vertical-border')).toBe(false);
+            modifierFixture.componentInstance.noBorderY = true;
+            modifierFixture.detectChanges();
+            expect(cell.classList.contains('fd-table__cell--no-vertical-border')).toBe(true);
+        });
+
+        it('should apply activable modifier class', () => {
+            const cell = modifierFixture.nativeElement.querySelector('td');
+            expect(cell.classList.contains('fd-table__cell--activable')).toBe(false);
+            modifierFixture.componentInstance.activable = true;
+            modifierFixture.detectChanges();
+            expect(cell.classList.contains('fd-table__cell--activable')).toBe(true);
+        });
+
+        it('should apply hoverable modifier class', () => {
+            const cell = modifierFixture.nativeElement.querySelector('td');
+            expect(cell.classList.contains('fd-table__cell--hoverable')).toBe(false);
+            modifierFixture.componentInstance.hoverable = true;
+            modifierFixture.detectChanges();
+            expect(cell.classList.contains('fd-table__cell--hoverable')).toBe(true);
+        });
+
+        it('should apply fitContent modifier class', () => {
+            const cell = modifierFixture.nativeElement.querySelector('td');
+            expect(cell.classList.contains('fd-table__cell--fit-content')).toBe(false);
+            modifierFixture.componentInstance.fitContent = true;
+            modifierFixture.detectChanges();
+            expect(cell.classList.contains('fd-table__cell--fit-content')).toBe(true);
+        });
+
+        it('should apply noPadding modifier class', () => {
+            const cell = modifierFixture.nativeElement.querySelector('td');
+            expect(cell.classList.contains('fd-table__cell--no-padding')).toBe(false);
+            modifierFixture.componentInstance.noPadding = true;
+            modifierFixture.detectChanges();
+            expect(cell.classList.contains('fd-table__cell--no-padding')).toBe(true);
+        });
+
+        it('should apply noData modifier class', () => {
+            const cell = modifierFixture.nativeElement.querySelector('td');
+            expect(cell.classList.contains('fd-table__cell--no-data')).toBe(false);
+            modifierFixture.componentInstance.noData = true;
+            modifierFixture.detectChanges();
+            expect(cell.classList.contains('fd-table__cell--no-data')).toBe(true);
+        });
+
+        it('should apply nonInteractive modifier class', () => {
+            const cell = modifierFixture.nativeElement.querySelector('td');
+            expect(cell.classList.contains('fd-table__cell--non-interactive')).toBe(false);
+            modifierFixture.componentInstance.nonInteractive = true;
+            modifierFixture.detectChanges();
+            expect(cell.classList.contains('fd-table__cell--non-interactive')).toBe(true);
+        });
     });
 
-    it('should assign classes', () => {
-        expect(component.cell.elementRef.nativeElement.classList.length).toBe(2);
+    describe('focus behavior', () => {
+        let focusFixture: ComponentFixture<TestComponent>;
 
-        component.cell.activable = true;
-        component.cell.hoverable = true;
-        component.cell.fitContent = true;
-        component.cell.noPadding = true;
-        component.cell.noBorderX = true;
-        component.cell.noBorderY = true;
+        beforeEach(async () => {
+            await TestBed.configureTestingModule({
+                imports: [TestComponent]
+            }).compileComponents();
 
-        fixture.detectChanges();
+            focusFixture = TestBed.createComponent(TestComponent);
+            focusFixture.detectChanges();
+        });
 
-        expect(component.cell.elementRef.nativeElement.classList.length).toBe(9);
-    });
+        it('should remove parent tabindex on focus and restore on blur', () => {
+            const cell = focusFixture.nativeElement.querySelector('tbody td') as HTMLElement;
+            const parentEl = cell.parentElement as HTMLElement;
 
-    it('should handle focus events', () => {
-        const parentEl = component.cell.elementRef.nativeElement.parentElement as HTMLElement;
-        expect(parentEl).toBeTruthy();
-        jest.spyOn(parentEl, 'setAttribute');
-        jest.spyOn(parentEl, 'removeAttribute');
-        expect(parentEl?.tabIndex).toBe(-1);
-        component.cell.elementRef.nativeElement.focus();
-        expect(parentEl?.removeAttribute).toHaveBeenCalled();
-        component.cell.elementRef.nativeElement.blur();
-        expect(parentEl?.setAttribute).toHaveBeenCalledWith('tabindex', '-1');
+            // Set up initial tabindex on parent
+            parentEl.setAttribute('tabindex', '-1');
+            expect(parentEl.tabIndex).toBe(-1);
+
+            // Focus the cell - should remove parent tabindex
+            cell.dispatchEvent(new FocusEvent('focusin', { bubbles: true }));
+            expect(parentEl.hasAttribute('tabindex')).toBe(false);
+
+            // Blur the cell - should restore parent tabindex
+            cell.dispatchEvent(new FocusEvent('focusout', { bubbles: true }));
+            expect(parentEl.getAttribute('tabindex')).toBe('-1');
+        });
     });
 });

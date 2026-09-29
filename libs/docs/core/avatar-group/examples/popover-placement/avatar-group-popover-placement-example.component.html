@@ -1,0 +1,37 @@
+<div style="display: flex; gap: 3rem; flex-wrap: wrap; align-items: flex-start">
+    <div>
+        <p style="margin-bottom: 0.5rem"><code>popoverPlacement="bottom"</code> (default — centered)</p>
+        <fd-avatar-group type="group" size="m" overflowPopoverTitle="Team members" popoverPlacement="bottom">
+            @for (person of people; track person) {
+                <fd-avatar
+                    *fdAvatarGroupItem="''; title: person.firstName + ' ' + person.lastName"
+                    [circle]="true"
+                    [border]="true"
+                    size="m"
+                    role="img"
+                    [title]="person.firstName + ' ' + person.lastName"
+                    [label]="person.firstName[0] + person.lastName[0]"
+                    [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"
+                ></fd-avatar>
+            }
+        </fd-avatar-group>
+    </div>
+
+    <div>
+        <p style="margin-bottom: 0.5rem"><code>popoverPlacement="bottom-end"</code> (right-aligned)</p>
+        <fd-avatar-group type="group" size="m" overflowPopoverTitle="Team members" popoverPlacement="bottom-end">
+            @for (person of people; track person) {
+                <fd-avatar
+                    *fdAvatarGroupItem="''; title: person.firstName + ' ' + person.lastName"
+                    [circle]="true"
+                    [border]="true"
+                    size="m"
+                    role="img"
+                    [title]="person.firstName + ' ' + person.lastName"
+                    [label]="person.firstName[0] + person.lastName[0]"
+                    [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"
+                ></fd-avatar>
+            }
+        </fd-avatar-group>
+    </div>
+</div>

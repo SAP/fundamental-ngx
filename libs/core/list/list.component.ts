@@ -50,7 +50,8 @@ import { FD_LIST_COMPONENT, FD_LIST_UNREAD_INDICATOR } from './tokens';
         class: 'fd-list',
         '[class.fd-settings__list]': 'settingsList() || settingsListFooter()',
         '[class.fd-settings__list--footer]': 'settingsListFooter()',
-        '[class.fd-list--search-results]': 'searchResultsList()'
+        '[class.fd-list--search-results]': 'searchResultsList()',
+        '[class.fd-list--notification]': 'notification()'
     },
     styleUrls: ['./list.component.scss', '../../cdk/utils/drag-and-drop/drag-and-drop.scss'],
     encapsulation: ViewEncapsulation.None,
@@ -110,7 +111,7 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
     keyboardSupport = true;
 
     /** Whether list should have a byline */
-    @Input()
+    @Input({ transform: booleanAttribute })
     @HostBinding('class.fd-list--byline')
     byline = false;
 
@@ -166,6 +167,9 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
 
     /** Whether the list is used inside Settings Dialog Footer */
     settingsListFooter = input(false, { transform: booleanAttribute });
+
+    /** Whether the list is a notification list used inside Settings Dialog */
+    notification = input(false, { transform: booleanAttribute });
 
     /** @hidden Whether the list is the shell search results list. */
     searchResultsList = input(false);

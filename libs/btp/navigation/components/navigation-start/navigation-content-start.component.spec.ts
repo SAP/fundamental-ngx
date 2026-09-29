@@ -84,6 +84,38 @@ describe('NavigationContentStartComponent', () => {
         const items = component.listItems$();
         expect(Array.isArray(items)).toBe(true);
     });
+
+    it('should add sticky class when sticky input is true', () => {
+        fixture.componentRef.setInput('sticky', true);
+        fixture.detectChanges();
+
+        const element = fixture.nativeElement;
+        expect(element.classList.contains('fd-navigation__container--sticky')).toBe(true);
+    });
+
+    it('should not add sticky class when sticky input is false', () => {
+        fixture.componentRef.setInput('sticky', false);
+        fixture.detectChanges();
+
+        const element = fixture.nativeElement;
+        expect(element.classList.contains('fd-navigation__container--sticky')).toBe(false);
+    });
+
+    it('should set flex-grow to 0 when sticky is true', () => {
+        fixture.componentRef.setInput('sticky', true);
+        fixture.detectChanges();
+
+        const element = fixture.nativeElement;
+        expect(element.style.flexGrow).toBe('0');
+    });
+
+    it('should set flex-grow to 1 when sticky is false', () => {
+        fixture.componentRef.setInput('sticky', false);
+        fixture.detectChanges();
+
+        const element = fixture.nativeElement;
+        expect(element.style.flexGrow).toBe('1');
+    });
 });
 
 describe('NavigationContentStartComponent (zoneless)', () => {

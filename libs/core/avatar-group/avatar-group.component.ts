@@ -24,6 +24,7 @@ import {
     RtlService
 } from '@fundamental-ngx/cdk/utils';
 import { PopoverBodyDirective, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
+import { Placement } from '@fundamental-ngx/core/shared';
 import { resolveTranslationSignalFn } from '@fundamental-ngx/i18n';
 import { AvatarGroupHostComponent } from './components/avatar-group-host.component';
 import { AvatarGroupOverflowButtonComponent } from './components/avatar-group-overflow-button.component';
@@ -34,7 +35,7 @@ import { AvatarGroupItemDirective } from './directives/avatar-group-item.directi
 import { AvatarGroupOverflowBodyDirective } from './directives/avatar-group-overflow-body.directive';
 import { AvatarGroupOverflowButtonDirective } from './directives/avatar-group-overflow-button.directive';
 import { AVATAR_GROUP_HOST_CONFIG } from './tokens';
-import { AvatarGroupHostConfig } from './types';
+import { AvatarGroupHostConfig, AvatarGroupOrientation } from './types';
 
 @Component({
     selector: 'fd-avatar-group',
@@ -71,15 +72,6 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
      * */
     @Input()
     type: AvatarGroupHostConfig['type'] = 'individual';
-
-    /**
-     * Orientation of the AvatarGroup control.
-     *
-     * `horizontal`: The avatars are displayed horizontally.
-     * `vertical`: The avatars are displayed vertically.
-     */
-    @Input()
-    orientation: AvatarGroupHostConfig['orientation'] = 'horizontal';
 
     /**
      * The spacing between the items depends on the size of the avatars in the group.
@@ -123,10 +115,47 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
     _avatarGroupPopoverBody: AvatarGroupOverflowBodyDirective;
 
     /**
+     * Orientation of the AvatarGroup control.
+     *
+     * `horizontal`: The avatars are displayed horizontally.
+     * `vertical`: The avatars are displayed vertically.
+     */
+    readonly orientation = input<AvatarGroupOrientation>('horizontal');
+
+    /**
      * Heading level for the overflow popover title.
      * @default 5
      */
     readonly overflowHeadingLevel = input<1 | 2 | 3 | 4 | 5 | 6>(5);
+
+    /**
+     * Placement of the group overflow popover relative to the avatar group.
+     * Defaults to `'right'` when `orientation="vertical"`, otherwise `'bottom'`.
+     * Use `'bottom-start'` / `'bottom-end'` to align to an edge.
+     * Only applies to `type="group"`.
+     */
+    readonly popoverPlacement = input<Placement | undefined>();
+
+    /** @hidden */
+    readonly _effectivePlacement = computed<Placement>(
+        () => this.popoverPlacement() ?? (this.orientation() === 'vertical' ? 'right' : 'bottom')
+    );
+
+    /**
+     * Shape of the default overflow button.
+     * Use `'circle'` when the avatar group displays circle avatars, so the overflow button matches their shape.
+     * Has no effect when a custom overflow button is provided via `fdAvatarGroupOverflowButton`.
+     * @default 'square'
+     */
+    readonly overflowButtonShape = input<'circle' | 'square'>('square');
+
+    /**
+     * Maximum number of avatars to display before the overflow button appears.
+     * When set, the group shows exactly this many avatars regardless of the container width.
+     * When `null` (default), visibility is determined by the available container width.
+     * @default null
+     */
+    readonly maxVisibleItems = input<number | null>(null);
 
     /** @hidden */
     readonly _avatarGroupHost = viewChild(AvatarGroupHostComponent);

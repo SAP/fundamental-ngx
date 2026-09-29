@@ -23,13 +23,6 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { PopoverBodyComponent, PopoverComponent, PopoverTriggerDirective } from '@fundamental-ngx/core/popover';
 import { ShellbarComponent, ShellbarModule } from '@fundamental-ngx/core/shellbar';
 
-export interface ExampleNavigationItem {
-    icon?: string;
-    title: string;
-    expanded?: boolean;
-    group?: boolean;
-}
-
 @Component({
     selector: 'fdb-overlay',
     templateUrl: './overlay.component.html',

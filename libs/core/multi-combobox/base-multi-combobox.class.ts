@@ -434,37 +434,26 @@ export abstract class BaseMultiCombobox<T = any> {
     }
 
     /** @hidden */
-    protected _setSelectedSuggestions(): void {
-        this._selectedSuggestions.set([]);
-
-        const selectedItems = this._selectedItems();
-        if (!selectedItems?.length) {
-            return;
-        }
-
-        const fullFlatSuggestions = this._fullFlatSuggestions();
-        const selectedSuggestions: SelectableOptionItem<T>[] = [];
-
-        // Update immutably
-        const updatedSuggestions = fullFlatSuggestions.map((item) => {
-            const isSelected = selectedItems.some(
-                (selectedItem) => item.label === selectedItem || item.value === selectedItem
+    protected _setSelectedSuggestions(selectedItems = this._selectedItems()): void {
+        const isSelected = (item: SelectableOptionItem<T>): boolean =>
+            selectedItems.some(
+                (selectedItem) =>
+                    item.id === lookupValue(selectedItem, this.lookupKey()) || shallowEqual(item.value, selectedItem)
             );
+        const updateSelection = (items: SelectableOptionItem<T>[]): SelectableOptionItem<T>[] =>
+            items.map((item) => {
+                const children = item.children ? updateSelection(item.children) : undefined;
+                const selected = isSelected(item);
 
-            if (isSelected) {
-                selectedSuggestions.push({ ...item, selected: true });
-                return { ...item, selected: true };
-            } else if (item.selected) {
-                // Item was selected but is now deselected - must update to false
-                return { ...item, selected: false };
-            }
+                return { ...item, selected, children };
+            });
 
-            // Item was not and is not selected - no change needed
-            return item;
-        });
+        const fullFlatSuggestions = updateSelection(this._fullFlatSuggestions());
 
-        this._selectedSuggestions.set(selectedSuggestions);
-        this._fullFlatSuggestions.set(updatedSuggestions);
+        this._selectedSuggestions.set(fullFlatSuggestions.filter((item) => item.selected));
+        this._suggestions.set(updateSelection(this._suggestions()));
+        this._flatSuggestions.set(updateSelection(this._flatSuggestions()));
+        this._fullFlatSuggestions.set(fullFlatSuggestions);
     }
 
     /**
@@ -654,8 +643,6 @@ export abstract class BaseMultiCombobox<T = any> {
         this.writeValue(selectedItems);
 
         this._cva.onChange(selectedItems);
-
-        this._emitChangeEvent();
     }
 
     /**

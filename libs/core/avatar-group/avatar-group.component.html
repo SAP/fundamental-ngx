@@ -4,12 +4,13 @@
         #avatarGroupHostComponent
         [type]="type"
         [size]="size"
-        [orientation]="orientation"
+        [orientation]="orientation()"
+        [maxVisibleItems]="maxVisibleItems()"
         fdkResizeObserver
         fdkFocusableList
         [contentDirection]="contentDirection()"
         [wrap]="true"
-        [navigationDirection]="orientation"
+        [navigationDirection]="orientation()"
         [items]="_avatars"
         [attr.aria-label]="ariaLabel || _defaultAriaLabelIndividual()"
         (resized)="_detectChanges()"
@@ -52,7 +53,11 @@
                             [ngTemplateOutletContext]="{ hiddenItems: hiddenItems }"
                         />
                     } @else {
-                        <fd-avatar-group-overflow-button [size]="size" [colorAccent]="1">
+                        <fd-avatar-group-overflow-button
+                            [size]="size"
+                            [colorAccent]="1"
+                            [circle]="overflowButtonShape() === 'circle'"
+                        >
                             +{{ hiddenItems.length }}
                         </fd-avatar-group-overflow-button>
                     }
@@ -69,6 +74,7 @@
 } @else {
     <fd-popover
         #groupPopover
+        [placement]="_effectivePlacement()"
         [noArrow]="false"
         [focusAutoCapture]="true"
         [bodyAriaLabel]="_popupBodyAriaLabel(_avatars.length)"
@@ -80,7 +86,8 @@
                 #avatarGroupHostComponent
                 [type]="type"
                 [size]="size"
-                [orientation]="orientation"
+                [orientation]="orientation()"
+                [maxVisibleItems]="maxVisibleItems()"
                 [attr.aria-label]="ariaLabel || _defaultAriaLabelGroup()"
                 role="button"
                 tabindex="0"
@@ -120,7 +127,12 @@
             [ngTemplateOutletContext]="{ hiddenItems: hiddenItems }"
         />
     } @else {
-        <fd-avatar-group-overflow-button [size]="size" [colorAccent]="1" [fdkFocusableItem]="false">
+        <fd-avatar-group-overflow-button
+            [size]="size"
+            [colorAccent]="1"
+            [fdkFocusableItem]="false"
+            [circle]="overflowButtonShape() === 'circle'"
+        >
             +{{ hiddenItems.length }}
         </fd-avatar-group-overflow-button>
     }

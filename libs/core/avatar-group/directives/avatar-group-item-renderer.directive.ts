@@ -62,7 +62,7 @@ export class AvatarGroupItemRendererDirective implements OnInit, FocusableItem {
             const marginLeft = parseFloat(style.marginLeft);
             const marginRight = parseFloat(style.marginRight);
 
-            if (!isNaN(width) && !isNaN(marginLeft) && !isNaN(marginRight)) {
+            if (width > 0 && !isNaN(marginLeft) && !isNaN(marginRight)) {
                 this._lastSavedWidth = width + marginLeft + marginRight;
             }
         }

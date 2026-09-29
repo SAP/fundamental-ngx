@@ -2,15 +2,13 @@ import {
     AfterContentInit,
     ChangeDetectionStrategy,
     Component,
+    effect,
     ElementRef,
-    OnDestroy,
+    inject,
+    Renderer2,
     ViewEncapsulation
 } from '@angular/core';
-import {
-    ContentDensityObserver,
-    ContentDensityObserverTarget,
-    contentDensityObserverProviders
-} from '@fundamental-ngx/core/content-density';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 /**
  * The component that represents a table wrapper, it will add fd-table class to its first child.
@@ -27,30 +25,47 @@ import {
     styleUrl: './table.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [contentDensityObserverProviders()],
-    standalone: true
+    providers: [contentDensityObserverProviders()]
 })
-export class TableWrapperComponent implements AfterContentInit, OnDestroy {
+export class TableWrapperComponent implements AfterContentInit {
     /** @hidden */
-    private _contentDensitySettings: ContentDensityObserverTarget | undefined;
+    private readonly _elementRef = inject(ElementRef);
 
     /** @hidden */
-    constructor(
-        private elementRef: ElementRef,
-        private _contentDensityObserver: ContentDensityObserver
-    ) {}
+    private readonly _renderer = inject(Renderer2);
+
+    /** @hidden */
+    private readonly _contentDensityObserver = inject(ContentDensityObserver);
+
+    /** @hidden */
+    constructor() {
+        // Apply content density classes to child table element reactively
+        effect(() => {
+            const density = this._contentDensityObserver.contentDensity();
+            const config = this._contentDensityObserver.config;
+
+            if (this._elementRef.nativeElement?.firstChild && config?.modifiers) {
+                const tableElement = this._elementRef.nativeElement.firstChild;
+
+                // Remove all density modifier classes
+                Object.values(config.modifiers).forEach((className) => {
+                    this._renderer.removeClass(tableElement, className);
+                });
+
+                // Add the current density class
+                const modifierClass = config.modifiers[density];
+                if (modifierClass) {
+                    this._renderer.addClass(tableElement, modifierClass);
+                }
+            }
+        });
+    }
 
     /** @hidden */
     ngAfterContentInit(): void {
-        if (this.elementRef.nativeElement && this.elementRef.nativeElement.firstChild) {
-            const tableElement = this.elementRef.nativeElement.firstChild;
+        if (this._elementRef.nativeElement && this._elementRef.nativeElement.firstChild) {
+            const tableElement = this._elementRef.nativeElement.firstChild;
             tableElement.classList.add('fd-table');
-
-            const tableElementRef = new ElementRef<HTMLTableElement>(tableElement);
-            this._contentDensitySettings = {
-                elementRef: tableElementRef
-            };
-            this._contentDensityObserver.consume(this._contentDensitySettings);
 
             if (tableElement.children) {
                 for (let i = 0; i < tableElement.children.length; i++) {
@@ -64,13 +79,5 @@ export class TableWrapperComponent implements AfterContentInit, OnDestroy {
                 }
             }
         }
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        if (!this._contentDensitySettings) {
-            return;
-        }
-        this._contentDensityObserver.removeConsumer(this._contentDensitySettings);
     }
 }

@@ -3,9 +3,9 @@
 }
 @if (this.showDetailArea()) {
     <div fd-settings-detail-area style="max-width: 100%; overflow: hidden">
-        <div fd-bar barDesign="header" [clear]="true" fd-settings-header>
+        <div fd-bar barDesign="header" fd-settings-header>
             <div fd-bar-left>
-                @if (viewMode() !== 'lg') {
+                @if (viewMode() !== 'lg' || hasStackedView()) {
                     <fd-bar-element>
                         <button
                             fd-button
@@ -26,7 +26,7 @@
                         fd-title
                         [headerSize]="detailsAreaTitleHeadingSize()"
                     >
-                        {{ activeTitle() }}
+                        {{ currentTitle() }}
                     </div>
                 </fd-bar-element>
             </div>

@@ -19,8 +19,17 @@
 
 <fd-docs-section-title id="selection" componentName="list">Selection Modes</fd-docs-section-title>
 <description>
-    Lists support various selection modes including <b>None</b>, <b>Single</b>, <b>SingleStart</b>, <b>SingleEnd</b>,
-    <b>SingleAuto</b>, <b>Multiple</b> and <b>Delete</b>.
+    <p>
+        Lists support various selection modes including <b>None</b>, <b>Single</b>, <b>SingleStart</b>,
+        <b>SingleEnd</b>, <b>SingleAuto</b>, <b>Multiple</b> and <b>Delete</b>.
+    </p>
+    <p>
+        List items can be set to <b>InactiveSelectable</b> type, which allows selection via checkbox/radio controls
+        while preventing active press feedback and click events. Unlike <b>Inactive</b> items (which disable both
+        interaction and selection), InactiveSelectable items remain selectable when the list has a selection mode
+        enabled. This is useful for items that should be included in selection operations but should not trigger
+        navigation or other item-level actions.
+    </p>
 </description>
 <component-example>
     <ui5-list-selection-modes-example></ui5-list-selection-modes-example>

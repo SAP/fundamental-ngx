@@ -1,10 +1,15 @@
 <fd-docs-section-title id="simple" componentName="datetime-picker"> Simple Datetime Picker </fd-docs-section-title>
 <description>
     The simplest form of the datetime picker. It makes use of ngModel to bind to the desired value. The alternative is
-    to use the date input combined with the dateChange output. There is also added <code>[placement]</code> attribute
-    which allows us to decide where popup should be shown
+    to use the date input combined with the dateChange output. The <code>dateChange</code> output reports accepted
+    user-originated changes, including <code>null</code> when an allowed value is cleared; it does not fire for
+    programmatic writes. There is also added <code>[placement]</code> attribute which allows us to decide where popup
+    should be shown
 </description>
-<description> The value for the input only changes the model on blur or an enter/return keystroke. </description>
+<description>
+    By default, valid input updates the model as the user types. Set <code>processInputOnBlur</code> to
+    <code>true</code> to process the value on Enter or blur instead.
+</description>
 <description>
     Some default options that belong to the <code>time</code> component such as <code>[displaySeconds]</code>,
     <code>[displayMinutes]</code>, <code>[displayHours]</code> and <code>[meridian]</code> are based on the

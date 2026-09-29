@@ -14,6 +14,8 @@ import { ListComponent } from './list.component';
             [noBorder]="noBorder()"
             [fdCompact]="compact()"
             [unreadIndicator]="unreadIndicator()"
+            [notification]="notification()"
+            [byline]="byline()"
             fd-list
         >
             Action Bar Title Test Text
@@ -37,6 +39,10 @@ class TestComponent {
     readonly noBorder = input(false);
 
     readonly unreadIndicator = input(false);
+
+    readonly notification = input(false);
+
+    readonly byline = input(false);
 }
 
 describe('ListComponent', () => {
@@ -83,6 +89,20 @@ describe('ListComponent', () => {
         fixture.detectChanges();
 
         expect(component.ref.nativeElement.classList).toContain('fd-list--unread-indicator');
+    });
+
+    it('should add notification modifier class', () => {
+        fixture.componentRef.setInput('notification', true);
+        fixture.detectChanges();
+
+        expect(component.ref.nativeElement.classList).toContain('fd-list--notification');
+    });
+
+    it('should add byline modifier class with boolean attribute transform', () => {
+        fixture.componentRef.setInput('byline', true);
+        fixture.detectChanges();
+
+        expect(component.ref.nativeElement.classList).toContain('fd-list--byline');
     });
 });
 

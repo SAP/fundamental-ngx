@@ -1,3 +1,119 @@
+## 0.65.0-rc.29 (2026-09-29)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
+## 0.65.0-rc.28 (2026-09-28)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
+## 0.65.0-rc.27 (2026-09-28)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
+## 0.65.0-rc.26 (2026-09-25)
+
+### 🩹 Fixes
+
+- **platform:** platform table cell title performance improvements ([#14548](https://github.com/SAP/fundamental-ngx/pull/14548))
+
+### ❤️ Thank You
+
+- Mike O'Donnell @mikerodonnell89
+
+## 0.65.0-rc.25 (2026-09-25)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
+## 0.65.0-rc.24 (2026-09-24)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
+## 0.65.0-rc.23 (2026-09-24)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
+## 0.65.0-rc.21 (2026-09-23)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
+## 0.65.0-rc.20 (2026-09-23)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
+## 0.65.0-rc.19 (2026-09-22)
+
+### 🩹 Fixes
+
+- **core, platform:** refactor Core Table ([#14542](https://github.com/SAP/fundamental-ngx/pull/14542))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
+## 0.65.0-rc.18 (2026-09-19)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
+## 0.65.0-rc.17 (2026-09-18)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
+## 0.65.0-rc.16 (2026-09-18)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
+## 0.65.0-rc.15 (2026-09-17)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
+## 0.65.0-rc.14 (2026-09-16)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
+## 0.65.0-rc.13 (2026-09-16)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
+## 0.65.0-rc.12 (2026-09-16)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
+## 0.65.0-rc.11 (2026-09-14)
+
+### 🩹 Fixes
+
+- **core,platform:** correct combobox leave behavior and popover sync ([#14536](https://github.com/SAP/fundamental-ngx/pull/14536))
+
+### ❤️ Thank You
+
+- deno
+
+## 0.65.0-rc.10 (2026-09-14)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
+## 0.65.0-rc.9 (2026-09-11)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
+## 0.65.0-rc.8 (2026-09-11)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
+## 0.65.0-rc.7 (2026-09-11)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
+## 0.65.0-rc.6 (2026-09-10)
+
+### 🩹 Fixes
+
+- **core:** restore dynamic page subheader pin functionality ([#14530](https://github.com/SAP/fundamental-ngx/pull/14530))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.65.0-rc.5 (2026-09-04)
 
 ### 🩹 Fixes

@@ -15,7 +15,8 @@ import {
     computed,
     inject,
     input,
-    output
+    output,
+    signal
 } from '@angular/core';
 import { FocusableListDirective, RtlService, elementClick$ } from '@fundamental-ngx/cdk/utils';
 import { BarComponent, BarElementDirective, BarLeftDirective, ButtonBarComponent } from '@fundamental-ngx/core/bar';
@@ -26,7 +27,7 @@ import { filter, switchMap } from 'rxjs/operators';
 import { AvatarGroupItemRendererDirective } from '../../directives/avatar-group-item-renderer.directive';
 import { AvatarGroupItemDirective } from '../../directives/avatar-group-item.directive';
 import { AVATAR_GROUP_HOST_CONFIG } from '../../tokens';
-import { AvatarGroupHostConfig } from '../../types';
+import { AvatarGroupHostConfig, AvatarGroupOrientation } from '../../types';
 
 @Component({
     selector: 'fd-default-avatar-group-overflow-body',
@@ -54,7 +55,11 @@ import { AvatarGroupHostConfig } from '../../types';
             // tabindex=-1 and isFocusable=false on each avatar via AvatarGroupItemRendererDirective,
             // making them invisible to fdkFocusableList and unreachable by keyboard.
             provide: AVATAR_GROUP_HOST_CONFIG,
-            useValue: { type: 'individual', orientation: 'horizontal', size: 's' } as AvatarGroupHostConfig
+            useValue: {
+                type: 'individual',
+                orientation: signal<AvatarGroupOrientation>('horizontal'),
+                size: 's'
+            } as AvatarGroupHostConfig
         }
     ],
     styleUrl: './default-avatar-group-overflow-body.component.scss',

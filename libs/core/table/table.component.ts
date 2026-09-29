@@ -1,25 +1,20 @@
 import {
-    AfterContentInit,
-    AfterViewInit,
+    booleanAttribute,
     ChangeDetectionStrategy,
     Component,
-    ContentChildren,
-    DestroyRef,
-    HostBinding,
-    Input,
-    NgZone,
-    QueryList,
-    ViewEncapsulation,
-    booleanAttribute
+    computed,
+    contentChildren,
+    effect,
+    inject,
+    input,
+    ViewEncapsulation
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
 import {
     ContentDensityMode,
     ContentDensityObserver,
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
-import { first, startWith } from 'rxjs';
 import { TableCellDirective } from './directives/table-cell.directive';
 import { TableService } from './table.service';
 
@@ -44,84 +39,104 @@ export const FdTableContentDensityProviderParams = {
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [TableService, contentDensityObserverProviders(FdTableContentDensityProviderParams)],
     hostDirectives: [FocusableGridDirective],
-    standalone: true
+    host: {
+        class: 'fd-table',
+        '[class.fd-table--no-horizontal-borders]': 'noBorderX()',
+        '[class.fd-table--no-vertical-borders]': 'noBorderY()',
+        '[class.fd-table--no-outer-border]': 'noOuterBorder()',
+        '[class.fd-table--top-border]': 'topBorder()',
+        '[class.fd-table--pop-in]': 'popIn()',
+        '[class.fd-table--responsive]': 'responsive()',
+        '[attr.role]': 'role()',
+        '[attr.aria-colcount]': 'ariaColCount()'
+    }
 })
-export class TableComponent implements AfterContentInit, AfterViewInit {
-    /** @hidden */
-    @HostBinding('class.fd-table')
-    fdTableClass = true;
+export class TableComponent {
+    /** ARIA role for the table */
+    readonly role = input('grid');
 
     /** Whether or not to show the table's horizontal borders */
-    @HostBinding('class.fd-table--no-horizontal-borders')
-    @Input()
-    noBorderX = false;
+    readonly noBorderX = input(false, { transform: booleanAttribute });
 
     /** Whether or not to show the table's vertical borders */
-    @HostBinding('class.fd-table--no-vertical-borders')
-    @Input()
-    noBorderY = false;
+    readonly noBorderY = input(false, { transform: booleanAttribute });
 
     /** Whether or not to show the table's outer border */
-    @HostBinding('class.fd-table--no-outer-border')
-    @Input()
-    noOuterBorder = false;
+    readonly noOuterBorder = input(false, { transform: booleanAttribute });
 
     /** Whether or not to show the table's top border */
-    @HostBinding('class.fd-table--top-border')
-    @Input()
-    topBorder = false;
+    readonly topBorder = input(false, { transform: booleanAttribute });
 
     /** Whether or not to display the table in pop in mode, it also require change of markup */
-    @HostBinding('class.fd-table--pop-in')
-    @Input()
-    popIn = false;
+    readonly popIn = input(false, { transform: booleanAttribute });
 
     /** Whether or not to display the table in responsive mode. */
-    @HostBinding('class.fd-table--responsive')
-    @Input()
-    responsive = false;
+    readonly responsive = input(false, { transform: booleanAttribute });
 
     /** List of keys that identifies single columns */
-    @Input()
-    keys: string[];
+    readonly keys = input<string[]>();
 
     /** Applies `focusable` to all cells within this table */
-    @Input({ transform: booleanAttribute })
-    set allCellsFocusable(value: boolean) {
-        this._allCellsFocusable = value;
-        this._updateCells();
-    }
-    get allCellsFocusable(): boolean {
-        return this._allCellsFocusable;
-    }
+    readonly allCellsFocusable = input(false, { transform: booleanAttribute });
 
     /** @hidden */
-    @ContentChildren(TableCellDirective, { descendants: true })
-    readonly _cells: QueryList<TableCellDirective>;
+    readonly _cells = contentChildren(TableCellDirective, { descendants: true });
+
+    /**
+     * @hidden
+     * Computed aria-colcount attribute - total number of columns in the grid
+     * Required when aria-colindex is set on cells */
+    protected readonly ariaColCount = computed(() => {
+        const keys = this.keys();
+        if (keys && keys.length > 0) {
+            // If keys are provided, use that count (includes hidden columns)
+            return keys.length;
+        }
+
+        // Otherwise, determine from the first row's visible cell count
+        // This assumes all rows have the same number of columns
+        const cells = this._cells();
+        if (cells.length === 0) {
+            return null;
+        }
+
+        // Group cells by their parent row and count cells in first row
+        const firstRow = cells[0]?.elementRef.nativeElement.parentElement;
+        if (!firstRow) {
+            return null;
+        }
+
+        const cellsInFirstRow = cells.filter((cell) => cell.elementRef.nativeElement.parentElement === firstRow);
+
+        return cellsInFirstRow.length || null;
+    });
 
     /** @hidden */
-    private _allCellsFocusable = false;
+    private readonly _tableService = inject(TableService);
+
+    /** @hidden Injected to activate content density CSS class effects */
+    private readonly _contentDensityObserver = inject(ContentDensityObserver);
 
     /** @hidden */
-    constructor(
-        private readonly _tableService: TableService,
-        private readonly _contentDensityObserver: ContentDensityObserver,
-        private readonly _destroyRef: DestroyRef,
-        private readonly _ngZone: NgZone
-    ) {
-        this._contentDensityObserver.subscribe();
-    }
+    constructor() {
+        // Update cell focusable property when cells or allCellsFocusable changes
+        effect(() => {
+            const cells = this._cells();
+            const allFocusable = this.allCellsFocusable();
 
-    /** @hidden */
-    ngAfterContentInit(): void {
-        this._cells.changes
-            .pipe(startWith(this._cells), takeUntilDestroyed(this._destroyRef))
-            .subscribe(() => this._updateCells());
-    }
+            // Set focusable on all cells based on allCellsFocusable or individual cell's focusable state
+            cells.forEach((cell) => {
+                cell.setFocusable(allFocusable || cell.focusable());
+            });
+        });
 
-    /** @hidden */
-    ngAfterViewInit(): void {
-        this._propagateKeys(this.keys);
+        // Propagate keys to table service when keys input changes
+        effect(() => {
+            const keys = this.keys();
+            if (keys) {
+                this._propagateKeys(keys);
+            }
+        });
     }
 
     /** Method that sorts and changes visible state of particular cells  */
@@ -134,12 +149,5 @@ export class TableComponent implements AfterContentInit, AfterViewInit {
         if (keys) {
             this._tableService.changeKeys([...keys]);
         }
-    }
-
-    /** @hidden */
-    private _updateCells(): void {
-        this._ngZone.onStable.pipe(first()).subscribe(() => {
-            this._cells?.forEach((cell) => (cell.focusable = cell.focusable || this.allCellsFocusable));
-        });
     }
 }

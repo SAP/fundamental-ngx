@@ -1,27 +1,24 @@
-import { Directive, HostBinding, Input } from '@angular/core';
+import { booleanAttribute, Directive, input } from '@angular/core';
 
 @Directive({
     selector: '[fdTableText], [fd-table-text]',
-    standalone: true
+    host: {
+        '[class.fd-table__text]': 'fdTableTextClass()',
+        '[class.fd-table__text--no-wrap]': 'noWrap()',
+        '[class.fd-table__text--title]': 'title()',
+        '[style.max-width]': 'maxWidth()'
+    }
 })
 export class TableTextDirective {
     /** Whether the text should have shadow (halo) & overflow should be hidden. */
-    @HostBinding('class.fd-table__text')
-    @Input()
-    fdTableTextClass = true;
+    readonly fdTableTextClass = input(true, { transform: booleanAttribute });
 
     /** Whether the text should wrap when the text is too long for 1 line */
-    @HostBinding('class.fd-table__text--no-wrap')
-    @Input()
-    noWrap = false;
+    readonly noWrap = input(false, { transform: booleanAttribute });
 
     /** Whether the text should be bolded and marked as a title */
-    @HostBinding('class.fd-table__text--title')
-    @Input()
-    title = false;
+    readonly title = input(false, { transform: booleanAttribute });
 
     /** Maximum width of a text element */
-    @HostBinding('style.max-width')
-    @Input()
-    maxWidth: string;
+    readonly maxWidth = input('');
 }

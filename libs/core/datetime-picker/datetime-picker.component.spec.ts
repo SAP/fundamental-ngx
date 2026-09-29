@@ -1,3 +1,4 @@
+import { Component } from '@angular/core';
 import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
@@ -6,6 +7,15 @@ import { DATE_TIME_FORMATS, DateTimeFormats, FdDate, FdDatetimeModule } from '@f
 import { runValueAccessorTests } from 'ngx-cva-test-suite';
 import { DatetimePickerComponent } from './datetime-picker.component';
 import { DatetimePickerModule } from './datetime-picker.module';
+
+@Component({
+    template: '<fd-datetime-picker [date]="date" (dateChange)="dateChanges.push($event)"></fd-datetime-picker>',
+    imports: [DatetimePickerModule]
+})
+class DatetimePickerDateChangeHostComponent {
+    date = new FdDate(2024, 5, 15, 9, 30);
+    dateChanges: Array<FdDate | null> = [];
+}
 
 describe('DatetimePickerComponent', () => {
     let component: DatetimePickerComponent<FdDate>;
@@ -314,7 +324,7 @@ describe('DatetimePickerComponent', () => {
             expect(component.date?.minute).toBe(20);
         });
 
-        it('should emit dateChange on submit', () => {
+        it('should notify the CVA on submit', () => {
             jest.spyOn(component, 'onChange');
             const date = new FdDate(2024, 5, 15, 10, 30);
             component._tempDate = date;
@@ -342,6 +352,186 @@ describe('DatetimePickerComponent', () => {
             // after reopening, it shows August, not June.
             expect((component as any)._calendarPendingDate?.month).toBe(augustDate.month);
             expect((component as any)._calendarPendingDate?.day).toBe(augustDate.day);
+        });
+    });
+
+    describe('dateChange output', () => {
+        let host: DatetimePickerDateChangeHostComponent;
+        let hostFixture: ComponentFixture<DatetimePickerDateChangeHostComponent>;
+        let hostPicker: DatetimePickerComponent<FdDate>;
+
+        beforeEach(() => {
+            hostFixture = TestBed.createComponent(DatetimePickerDateChangeHostComponent);
+            hostFixture.detectChanges();
+            host = hostFixture.componentInstance;
+            hostPicker = hostFixture.debugElement.query(By.directive(DatetimePickerComponent)).componentInstance;
+        });
+
+        it('should emit the combined calendar date and time when a selection is submitted', () => {
+            hostPicker.date = new FdDate(2024, 5, 15, 9, 30);
+            hostPicker._tempDate = new FdDate(2024, 6, 20);
+            hostPicker._tempTime = new FdDate(2024, 1, 1, 14, 45, 30);
+
+            hostPicker.submit();
+
+            expect(host.dateChanges).toEqual([new FdDate(2024, 6, 20, 14, 45, 30)]);
+        });
+
+        it('should emit when only the time changes on submit', () => {
+            const initialDate = new FdDate(2024, 5, 15, 9, 30);
+            hostPicker.date = initialDate;
+            hostPicker._tempDate = new FdDate(2024, 5, 15);
+            hostPicker._tempTime = new FdDate(2024, 1, 1, 14, 45);
+
+            hostPicker.submit();
+
+            expect(host.dateChanges).toEqual([new FdDate(2024, 5, 15, 14, 45)]);
+        });
+
+        it('should not emit when submit does not change the date or time', () => {
+            const initialDate = new FdDate(2024, 5, 15, 9, 30);
+            hostPicker.date = initialDate;
+            hostPicker._tempDate = new FdDate(2024, 5, 15);
+            hostPicker._tempTime = new FdDate(2024, 1, 1, 9, 30);
+
+            hostPicker.submit();
+
+            expect(host.dateChanges).toEqual([]);
+        });
+
+        describe('without a footer', () => {
+            beforeEach(() => {
+                hostPicker.showFooter = false;
+            });
+
+            it('should emit when a changed calendar day is selected', () => {
+                hostPicker.date = new FdDate(2024, 5, 15, 9, 30);
+                hostPicker._tempTime = new FdDate(2024, 1, 1, 14, 45);
+
+                hostPicker.handleDateChange(new FdDate(2024, 6, 20));
+
+                expect(host.dateChanges).toEqual([new FdDate(2024, 6, 20, 14, 45)]);
+            });
+
+            it('should not emit when the selected calendar date has the same effective date-time', () => {
+                hostPicker.date = new FdDate(2024, 5, 15, 9, 30);
+                hostPicker._tempTime = new FdDate(2024, 1, 1, 9, 30);
+
+                hostPicker.handleDateChange(new FdDate(2024, 5, 15));
+
+                expect(host.dateChanges).toEqual([]);
+            });
+
+            it('should emit when a changed time is selected on the same day', () => {
+                hostPicker.date = new FdDate(2024, 5, 15, 9, 30);
+                hostPicker._tempDate = new FdDate(2024, 5, 15);
+
+                hostPicker.handleTimeChange(new FdDate(2024, 1, 1, 14, 45));
+
+                expect(host.dateChanges).toEqual([new FdDate(2024, 5, 15, 14, 45)]);
+            });
+
+            it('should not emit when the selected time has the same effective date-time', () => {
+                hostPicker.date = new FdDate(2024, 5, 15, 9, 30);
+                hostPicker._tempDate = new FdDate(2024, 5, 15);
+
+                hostPicker.handleTimeChange(new FdDate(2024, 1, 1, 9, 30));
+
+                expect(host.dateChanges).toEqual([]);
+            });
+        });
+
+        it('should emit once for accepted typing in the default processing mode', () => {
+            hostPicker.handleInputChange('6/20/2024', true);
+            hostPicker.handleInputChange('6/20/2024', false);
+
+            expect(host.dateChanges).toEqual([new FdDate(2024, 6, 20)]);
+        });
+
+        it('should emit once when Enter and blur accept the same input', () => {
+            hostPicker.processInputOnBlur = true;
+
+            hostPicker.handleInputChange('6/20/2024', true);
+            hostPicker.handleInputChange('6/20/2024', false);
+            hostPicker.handleInputChange('6/20/2024', false);
+
+            expect(host.dateChanges).toEqual([new FdDate(2024, 6, 20)]);
+        });
+
+        it('should emit once when the same valid value is accepted twice', () => {
+            hostPicker.handleInputChange('6/20/2024', true);
+            hostPicker.handleInputChange('6/20/2024', true);
+
+            expect(host.dateChanges).toEqual([new FdDate(2024, 6, 20)]);
+        });
+
+        it('should emit null once when an allowed value is cleared', () => {
+            hostPicker.allowNull = true;
+            hostPicker.date = new FdDate(2024, 5, 15, 9, 30);
+
+            hostPicker.handleInputChange('', true);
+            hostPicker.handleInputChange('', true);
+
+            expect(host.dateChanges).toEqual([null]);
+        });
+
+        it('should not emit for invalid input when null is disallowed', () => {
+            hostPicker.allowNull = false;
+
+            hostPicker.handleInputChange('not a date', true);
+
+            expect(host.dateChanges).toEqual([]);
+        });
+
+        it('should not emit for programmatic writeValue updates', () => {
+            hostPicker.writeValue(new FdDate(2024, 6, 20, 14, 45));
+
+            expect(host.dateChanges).toEqual([]);
+        });
+
+        it('should not emit again when Angular Forms writes back an emitted value', () => {
+            hostPicker.handleInputChange('6/20/2024', true);
+            hostPicker.writeValue(host.dateChanges[0]);
+
+            expect(host.dateChanges).toEqual([new FdDate(2024, 6, 20)]);
+        });
+
+        it('should not emit when a desktop selection is cancelled', () => {
+            hostPicker.date = new FdDate(2024, 5, 15, 9, 30);
+            hostPicker._tempDate = new FdDate(2024, 6, 20);
+            hostPicker._tempTime = new FdDate(2024, 1, 1, 14, 45);
+
+            hostPicker.cancel();
+
+            expect(host.dateChanges).toEqual([]);
+        });
+
+        it('should not emit when a mobile selection is dismissed', () => {
+            hostPicker.dialogDismiss(new FdDate(2024, 5, 15, 9, 30));
+
+            expect(host.dateChanges).toEqual([]);
+        });
+
+        it('should emit once when a mobile selection is approved', () => {
+            hostPicker.date = new FdDate(2024, 5, 15, 9, 30);
+            hostPicker._tempDate = new FdDate(2024, 6, 20);
+            hostPicker._tempTime = new FdDate(2024, 1, 1, 14, 45);
+
+            hostPicker.dialogApprove();
+
+            expect(host.dateChanges).toEqual([new FdDate(2024, 6, 20, 14, 45)]);
+        });
+
+        it('should not emit when the adapter fails to combine date and time', () => {
+            jest.spyOn((hostPicker as any)._dateTimeAdapter, 'setTime').mockImplementation(() => {
+                throw new Error('adapter failure');
+            });
+            hostPicker._tempDate = new FdDate(2024, 6, 20);
+            hostPicker._tempTime = new FdDate(2024, 1, 1, 14, 45);
+
+            hostPicker.submit();
+
+            expect(host.dateChanges).toEqual([]);
         });
     });
 

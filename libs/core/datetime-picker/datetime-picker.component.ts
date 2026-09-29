@@ -353,7 +353,7 @@ export class DatetimePickerComponent<D>
 
     /** Event emitted when the date changes. This can be a time or day change. */
     @Output()
-    readonly dateChange: EventEmitter<D> = new EventEmitter<D>();
+    readonly dateChange: EventEmitter<D | null> = new EventEmitter<D | null>();
 
     /** Event emitted when the day changes from the calendar. */
     @Output()
@@ -708,6 +708,7 @@ export class DatetimePickerComponent<D>
      * Method that is triggered when 'OK' button is pressed.
      */
     submit(): void {
+        const previousDate = this.date;
         // Initialize date and time values, defaulting to the current date if invalid
         let currentDate = this._tempDate!;
         let currentTime = this._tempTime!;
@@ -720,6 +721,7 @@ export class DatetimePickerComponent<D>
             currentTime = this._dateTimeAdapter.today()!;
         }
 
+        let isSubmissionSuccessful = true;
         try {
             this.date = this._dateTimeAdapter.setTime(
                 currentDate,
@@ -730,12 +732,16 @@ export class DatetimePickerComponent<D>
             this._refreshCurrentlyDisplayedCalendarDate(this.date);
         } catch {
             this.date = null;
+            isSubmissionSuccessful = false;
         }
         this._isInvalidDateInput = !this.isCurrentModelValid();
 
         this._setInput(this.date);
 
         this.onChange(this.date);
+        if (isSubmissionSuccessful) {
+            this._emitDateChange(previousDate);
+        }
 
         if (this.showFooter) {
             this.closePopover();
@@ -773,11 +779,13 @@ export class DatetimePickerComponent<D>
             // if processInputOnBlur === false, ignore blur/enter event
             return;
         }
+        const previousDate = this.date;
         this._inputFieldDate = inputStr ?? '';
         if (!inputStr) {
             this._isInvalidDateInput = !this.allowNull;
             this.date = null;
             this.onChange(null);
+            this._emitDateChange(previousDate);
             return;
         }
 
@@ -791,6 +799,7 @@ export class DatetimePickerComponent<D>
             this._refreshCurrentlyDisplayedCalendarDate(this.date);
         }
         this.onChange(this.date);
+        this._emitDateChange(previousDate);
     }
 
     /** @hidden */
@@ -932,5 +941,21 @@ export class DatetimePickerComponent<D>
                 injector
             }
         );
+    }
+
+    private _emitDateChange(previousDate: Nullable<D>): void {
+        if (this._isInvalidDateInput || this._datesAreEqual(previousDate, this.date)) {
+            return;
+        }
+
+        this.dateChange.emit(this.date);
+    }
+
+    private _datesAreEqual(firstDate: Nullable<D>, secondDate: Nullable<D>): boolean {
+        if (!firstDate && !secondDate) {
+            return true;
+        }
+
+        return !!firstDate && !!secondDate && this._dateTimeAdapter.dateTimesEqual(firstDate, secondDate);
     }
 }

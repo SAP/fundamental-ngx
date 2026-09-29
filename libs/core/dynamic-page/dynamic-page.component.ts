@@ -219,7 +219,16 @@ export class DynamicPageComponent implements AfterViewInit, DynamicPage {
 
     /** @hidden */
     _getScrollElement(): HTMLElement | null {
-        return this._tabComponent?.scrollableElement?.nativeElement || this._scrollbar?.elementRef?.nativeElement;
+        // When using tabs, use the tab's scrollable element
+        if (this._tabComponent?.scrollableElement?.nativeElement) {
+            return this._tabComponent.scrollableElement.nativeElement;
+        }
+        // When using icon-tab-bar or regular tabs, the content component itself is scrollable
+        if (this._contentComponent?.first?.elementRef?.nativeElement) {
+            return this._contentComponent.first.elementRef.nativeElement;
+        }
+        // Fallback to scrollbar directive
+        return this._scrollbar?.elementRef?.nativeElement || null;
     }
 
     /** @hidden */
@@ -268,17 +277,23 @@ export class DynamicPageComponent implements AfterViewInit, DynamicPage {
 
     /** @hidden */
     private _addScrollListeners(): void {
-        const element = this._getScrollElement();
-        if (element) {
+        // Listen to scroll on all content components
+        this._contentComponent?.forEach((content) => {
+            const element = content.elementRef.nativeElement;
             fromEvent(element, 'scroll')
                 .pipe(debounceTime(10), takeUntilDestroyed(this._destroyRef))
                 .subscribe(() => {
-                    const collapse =
-                        !this._dynamicPageService.pinned() &&
-                        (element.scrollTop > 0 || element.scrollHeight <= element.clientHeight);
+                    const isPinned = this._dynamicPageService.pinned();
+                    // When pinned, keep the header expanded regardless of scroll position
+                    if (isPinned) {
+                        this._dynamicPageService.collapsed.set(false);
+                        return;
+                    }
+                    // When not pinned, collapse when scrolled down (scrollTop > 0)
+                    const collapse = element.scrollTop > 0;
                     this._dynamicPageService.collapsed.set(collapse);
                 });
-        }
+        });
     }
 
     /** @hidden Listen for window resize and adjust tab and content positions accordingly */

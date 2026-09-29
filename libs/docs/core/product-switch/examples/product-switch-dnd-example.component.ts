@@ -1,10 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, inject, linkedSignal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import {
     ProductSwitchBodyComponent,
     ProductSwitchComponent,
     ProductSwitchItem
 } from '@fundamental-ngx/core/product-switch';
 import { ShellbarActionsComponent, ShellbarComponent } from '@fundamental-ngx/core/shellbar';
+import { ThemingService } from '@fundamental-ngx/core/theming';
+import { map } from 'rxjs/operators';
+import { DEFAULT_SUFFIX, THEME_SUFFIX } from './product-switch-theme-suffix';
 
 @Component({
     selector: 'fd-product-switch-dnd-example',
@@ -12,84 +16,69 @@ import { ShellbarActionsComponent, ShellbarComponent } from '@fundamental-ngx/co
     imports: [ShellbarComponent, ShellbarActionsComponent, ProductSwitchComponent, ProductSwitchBodyComponent]
 })
 export class ProductSwitchDndExampleComponent {
-    list: ProductSwitchItem[] = [
-        {
-            title: 'SAP Start',
-            subtitle: 'Central Home',
-            avatar: {
-                image: 'assets/images/sap-start.svg',
-                contain: true
+    readonly list = linkedSignal<ProductSwitchItem[]>(() => {
+        const suffix = THEME_SUFFIX[this._themeId()] ?? DEFAULT_SUFFIX;
+        return [
+            {
+                title: 'SAP Start',
+                subtitle: 'Central Home',
+                avatar: { image: 'assets/images/SAP-Start' + suffix, contain: true, transparent: true },
+                stickToPosition: true,
+                disabledDragAndDrop: true
             },
-            stickToPosition: true,
-            disabledDragAndDrop: true
-        },
-        {
-            title: 'Analytics Cloud',
-            subtitle: 'Analytics Cloud',
-            icon: 'business-objects-experience',
-            url: 'https://www.sap.com/products/technology-platform/cloud-analytics.html',
-            target: '_blank'
-        },
-        {
-            title: 'Catalog',
-            subtitle: 'Ariba',
-            avatar: {
-                glyph: 'contacts',
-                colorAccent: 5,
-                ariaLabel: 'Ariba Catalog',
-                circle: true
+            {
+                title: 'SAP Ariba',
+                subtitle: 'Procurement',
+                avatar: { image: 'assets/images/SAP-Ariba' + suffix, contain: true, transparent: true }
+            },
+            {
+                title: 'Business Data Cloud',
+                subtitle: 'Data & Analytics',
+                avatar: { image: 'assets/images/SAP-BusinessDataCloud' + suffix, contain: true, transparent: true }
+            },
+            {
+                title: 'Integration Suite',
+                subtitle: 'Integration',
+                avatar: { image: 'assets/images/SAP-IntegrationSuite' + suffix, contain: true, transparent: true }
+            },
+            {
+                title: 'S/4HANA Cloud',
+                subtitle: 'ERP',
+                avatar: { image: 'assets/images/s4hana-cloud' + suffix, contain: true, transparent: true }
+            },
+            {
+                title: 'SuccessFactors',
+                subtitle: 'HXM Suite',
+                avatar: { image: 'assets/images/SAP-SuccessFactors' + suffix, contain: true, transparent: true }
+            },
+            {
+                title: 'Concur',
+                subtitle: 'Travel & Expense',
+                avatar: { image: 'assets/images/SAP-Concur' + suffix, contain: true, transparent: true }
+            },
+            {
+                title: 'Sales Cloud',
+                subtitle: 'CRM',
+                avatar: { image: 'assets/images/SAP-SalesCloud' + suffix, contain: true, transparent: true }
+            },
+            {
+                title: 'SAP Build',
+                subtitle: 'Low-Code Platform',
+                avatar: { image: 'assets/images/SAP-Build' + suffix, contain: true, transparent: true }
+            },
+            {
+                title: 'Analytics Cloud',
+                subtitle: 'BI & Planning',
+                avatar: { image: 'assets/images/SAP-AnalyticsCloud' + suffix, contain: true, transparent: true }
             }
-        },
-        {
-            title: 'Guided Buying',
-            avatar: {
-                image: 'https://picsum.photos/id/1018/400',
-                ariaLabel: 'Guided Buying',
-                transparent: true
-            }
-        },
-        {
-            title: 'Strategic Procurement',
-            icon: 'cart-3',
-            url: 'https://www.sap.com/products/spend-management/strategic-sourcing.html',
-            target: '_top'
-        },
-        {
-            title: 'Vendor Managemen',
-            subtitle: 'Fieldglass',
-            icon: 'shipping-status'
-        },
-        {
-            title: 'Human Capital Management',
-            icon: 'customer'
-        },
-        {
-            title: 'Sales Cloud',
-            subtitle: 'Sales Cloud',
-            icon: 'sales-notification'
-        },
-        {
-            title: 'Commerce Cloud',
-            subtitle: 'Commerce Cloud',
-            icon: 'retail-store'
-        },
-        {
-            title: 'Marketing Cloud',
-            subtitle: 'Marketing Cloud',
-            icon: 'marketing-campaign'
-        },
-        {
-            title: 'Service Cloud',
-            icon: 'family-care'
-        },
-        {
-            title: 'S/4HANA',
-            icon: 'batch-payments'
-        }
-    ];
+        ];
+    });
+
+    private readonly _themeId = toSignal(inject(ThemingService).currentTheme.pipe(map((t) => t?.id ?? '')), {
+        initialValue: ''
+    });
 
     productChangeHandle(products: ProductSwitchItem[]): void {
-        this.list = products;
-        console.log(products);
+        this.list.set(products);
     }
 }

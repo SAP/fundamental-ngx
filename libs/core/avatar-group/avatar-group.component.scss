@@ -32,6 +32,10 @@ fd-avatar-group {
                 @include sap.sap-set-margin-x-equal(0);
             }
         }
+        // Collapse to the avatar's width, so no oversized focus ring is shown when the avatar is focused.
+        &.fd-avatar-group--vertical > fd-popover {
+            align-self: flex-start;
+        }
     }
 
     > .fd-popover-custom {
@@ -41,8 +45,12 @@ fd-avatar-group {
             display: inline-block;
         }
 
-        .fd-avatar-group {
+        .fd-avatar-group:not(.fd-avatar-group--vertical) {
             display: inline-block;
+        }
+
+        .fd-avatar-group.fd-avatar-group--vertical {
+            display: flex;
         }
     }
 }

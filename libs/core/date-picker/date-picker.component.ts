@@ -705,10 +705,6 @@ export class DatePickerComponent<D>
         this.selectedMultipleDates = dates;
         this.selectedMultipleDatesChange.emit(dates);
         this.onChange(dates);
-        /** Assuming the first date in the array is used for refresh */
-        if (this.showTodayButton) {
-            this._refreshCurrentlyDisplayedCalendarDate(dates[0]);
-        }
         this._inputFieldDate = this.formatDateArray(dates);
         this._isInvalidDateInput = !this.isModelValid();
     }
@@ -800,6 +796,7 @@ export class DatePickerComponent<D>
         if (this.allowMultipleSelection) {
             if (this.type === CalendarTypeEnum.Single) {
                 this.handleMultipleDatesChange([todayDate]);
+                this._refreshCurrentlyDisplayedCalendarDate(todayDate);
                 this.closeFromCalendar();
             } else if (this.type === CalendarTypeEnum.Range) {
                 this.handleMultipleDateRangesChange([

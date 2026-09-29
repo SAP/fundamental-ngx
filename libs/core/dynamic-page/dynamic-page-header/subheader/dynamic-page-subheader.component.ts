@@ -160,6 +160,7 @@ export class DynamicPageSubheaderComponent {
      */
     toggleCollapse(): void {
         this._pinned = false;
+        this._dynamicPageService.pinned.set(this._pinned);
         this.collapsed = !this.collapsed;
         this.collapsedChange.emit(this.collapsed);
     }

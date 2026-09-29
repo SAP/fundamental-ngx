@@ -1,4 +1,4 @@
-import { DOWN_ARROW, ENTER, ESCAPE, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
+import { DOWN_ARROW, END, ENTER, ESCAPE, HOME, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 import { ElementRef, inject, Injectable, OnDestroy, Renderer2 } from '@angular/core';
 import { KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
 import { Observable, Subject } from 'rxjs';
@@ -285,6 +285,16 @@ export class MenuService implements OnDestroy {
             if (closest) {
                 this.setFocused(closest.item);
             }
+        } else if (KeyUtil.isKeyCode(event, HOME)) {
+            const firstEnabled = this._boundaryEnabled(this.focusedNode, 'start');
+            if (firstEnabled) {
+                this.setFocused(firstEnabled.item);
+            }
+        } else if (KeyUtil.isKeyCode(event, END)) {
+            const lastEnabled = this._boundaryEnabled(this.focusedNode, 'end');
+            if (lastEnabled) {
+                this.setFocused(lastEnabled.item);
+            }
         } else if (KeyUtil.isKeyCode(event, ESCAPE) && this.menuComponent.closeOnEscapeKey()) {
             this.menuComponent.close();
         } else if (!KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
@@ -332,5 +342,17 @@ export class MenuService implements OnDestroy {
         }
 
         return null;
+    }
+
+    /** @hidden Returns first/last enabled sibling for Home/End keyboard support */
+    private _boundaryEnabled(node: MenuNode, position: 'start' | 'end'): MenuNode | null {
+        const siblings = this._nodeSiblings(node);
+
+        if (!siblings?.length) {
+            return null;
+        }
+
+        const items = position === 'start' ? siblings : [...siblings].reverse();
+        return items.find((sibling) => sibling.item && !sibling.item.disabled) ?? null;
     }
 }

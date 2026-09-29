@@ -1,4 +1,4 @@
-import { DOWN_ARROW, ENTER, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
+import { DOWN_ARROW, END, ENTER, HOME, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 import { Injectable, Output } from '@angular/core';
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { ListItemComponent } from '@fundamental-ngx/core/list';
@@ -22,7 +22,8 @@ export class MenuKeyboardService {
 
     /** Function that should be called every time, keydown event is used on some menu item,
      * it provides whole functionality for handling
-     * ArrowDown - focus, ArrowUp - focus, Space bar - simulate click, Enter key - simulate click.
+     * ArrowDown - focus, ArrowUp - focus, Home - focus first enabled item, End - focus last enabled item,
+     * Space bar - simulate click, Enter key - simulate click.
      * @param event KeyboardEvent
      * @param index index of items starts from 0
      * @param menuItems array of menu item directives
@@ -54,11 +55,56 @@ export class MenuKeyboardService {
                 }
             }
             event.preventDefault();
+        } else if (KeyUtil.isKeyCode(event, HOME)) {
+            const firstEnabled = this._findBoundaryEnabledIndex(menuItems, 'start');
+            if (firstEnabled !== -1) {
+                menuItems[firstEnabled].focus();
+            }
+            event.preventDefault();
+        } else if (KeyUtil.isKeyCode(event, END)) {
+            const lastEnabled = this._findBoundaryEnabledIndex(menuItems, 'end');
+            if (lastEnabled !== -1) {
+                menuItems[lastEnabled].focus();
+            }
+            event.preventDefault();
         } else if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
             if (menuItems[index]) {
                 menuItems[index].click();
                 event.preventDefault();
             }
         }
+    }
+
+    /** @hidden Returns index of first/last enabled item. Falls back to first/last if disabled state is unavailable. */
+    private _findBoundaryEnabledIndex(
+        menuItems: DefaultMenuItem[] | ListItemComponent[],
+        position: 'start' | 'end'
+    ): number {
+        if (!menuItems.length) {
+            return -1;
+        }
+
+        if (position === 'start') {
+            for (let i = 0; i < menuItems.length; i++) {
+                if (!this._isItemDisabled(menuItems[i])) {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        for (let i = menuItems.length - 1; i >= 0; i--) {
+            if (!this._isItemDisabled(menuItems[i])) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    /** @hidden Detects disabled state if supported by the item implementation. */
+    private _isItemDisabled(menuItem: DefaultMenuItem | ListItemComponent): boolean {
+        const maybeDisabled = (menuItem as { disabled?: boolean }).disabled;
+        return maybeDisabled === true;
     }
 }
