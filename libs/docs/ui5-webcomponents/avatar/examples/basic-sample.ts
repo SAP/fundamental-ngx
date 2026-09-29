@@ -8,11 +8,12 @@ import { Avatar } from '@fundamental-ngx/ui5-webcomponents/avatar';
     templateUrl: './basic-sample.html',
     styles: [
         `
-            .avatar-examples {
+            section {
                 display: flex;
                 gap: 1rem;
                 align-items: center;
                 padding: 1rem;
+                flex-wrap: wrap;
             }
         `
     ]
