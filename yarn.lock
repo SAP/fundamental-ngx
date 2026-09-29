@@ -9164,7 +9164,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ui5/webcomponents-ai@npm:~2.27.2":
+"@ui5/webcomponents-ai@npm:~2.27.0":
   version: 2.27.2
   resolution: "@ui5/webcomponents-ai@npm:2.27.2"
   dependencies:
@@ -9176,7 +9176,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ui5/webcomponents-base@npm:2.27.2, @ui5/webcomponents-base@npm:~2.27.2":
+"@ui5/webcomponents-base@npm:2.27.2, @ui5/webcomponents-base@npm:~2.27.0":
   version: 2.27.2
   resolution: "@ui5/webcomponents-base@npm:2.27.2"
   dependencies:
@@ -9191,7 +9191,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ui5/webcomponents-fiori@npm:~2.27.2":
+"@ui5/webcomponents-fiori@npm:~2.27.0":
   version: 2.27.2
   resolution: "@ui5/webcomponents-fiori@npm:2.27.2"
   dependencies:
@@ -9204,7 +9204,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ui5/webcomponents-icons-business-suite@npm:2.27.2, @ui5/webcomponents-icons-business-suite@npm:~2.27.2":
+"@ui5/webcomponents-icons-business-suite@npm:2.27.2, @ui5/webcomponents-icons-business-suite@npm:~2.27.0":
   version: 2.27.2
   resolution: "@ui5/webcomponents-icons-business-suite@npm:2.27.2"
   dependencies:
@@ -9213,7 +9213,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ui5/webcomponents-icons-tnt@npm:2.27.2, @ui5/webcomponents-icons-tnt@npm:~2.27.2":
+"@ui5/webcomponents-icons-tnt@npm:2.27.2, @ui5/webcomponents-icons-tnt@npm:~2.27.0":
   version: 2.27.2
   resolution: "@ui5/webcomponents-icons-tnt@npm:2.27.2"
   dependencies:
@@ -9222,7 +9222,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ui5/webcomponents-icons@npm:2.27.2, @ui5/webcomponents-icons@npm:~2.27.2":
+"@ui5/webcomponents-icons@npm:2.27.2, @ui5/webcomponents-icons@npm:~2.27.0":
   version: 2.27.2
   resolution: "@ui5/webcomponents-icons@npm:2.27.2"
   dependencies:
@@ -9241,7 +9241,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ui5/webcomponents-theming@npm:2.27.2, @ui5/webcomponents-theming@npm:~2.27.2":
+"@ui5/webcomponents-theming@npm:2.27.2, @ui5/webcomponents-theming@npm:~2.27.0":
   version: 2.27.2
   resolution: "@ui5/webcomponents-theming@npm:2.27.2"
   dependencies:
@@ -9251,7 +9251,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ui5/webcomponents-tools@npm:~2.27.2":
+"@ui5/webcomponents-tools@npm:~2.27.0":
   version: 2.27.2
   resolution: "@ui5/webcomponents-tools@npm:2.27.2"
   dependencies:
@@ -9314,7 +9314,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ui5/webcomponents@npm:2.27.2, @ui5/webcomponents@npm:~2.27.2":
+"@ui5/webcomponents@npm:2.27.2, @ui5/webcomponents@npm:~2.27.0":
   version: 2.27.2
   resolution: "@ui5/webcomponents@npm:2.27.2"
   dependencies:
@@ -16141,15 +16141,15 @@ __metadata:
     "@types/node": "npm:22.10.2"
     "@typescript-eslint/utils": "npm:^8.29.0"
     "@ui5/tooling-webc": "npm:~0.3.1"
-    "@ui5/webcomponents": "npm:~2.27.2"
-    "@ui5/webcomponents-ai": "npm:~2.27.2"
-    "@ui5/webcomponents-base": "npm:~2.27.2"
-    "@ui5/webcomponents-fiori": "npm:~2.27.2"
-    "@ui5/webcomponents-icons": "npm:~2.27.2"
-    "@ui5/webcomponents-icons-business-suite": "npm:~2.27.2"
-    "@ui5/webcomponents-icons-tnt": "npm:~2.27.2"
-    "@ui5/webcomponents-theming": "npm:~2.27.2"
-    "@ui5/webcomponents-tools": "npm:~2.27.2"
+    "@ui5/webcomponents": "npm:~2.27.0"
+    "@ui5/webcomponents-ai": "npm:~2.27.0"
+    "@ui5/webcomponents-base": "npm:~2.27.0"
+    "@ui5/webcomponents-fiori": "npm:~2.27.0"
+    "@ui5/webcomponents-icons": "npm:~2.27.0"
+    "@ui5/webcomponents-icons-business-suite": "npm:~2.27.0"
+    "@ui5/webcomponents-icons-tnt": "npm:~2.27.0"
+    "@ui5/webcomponents-theming": "npm:~2.27.0"
+    "@ui5/webcomponents-tools": "npm:~2.27.0"
     angular-eslint: "npm:22.1.0"
     autoprefixer: "npm:^10.4.0"
     compare-versions: "npm:6.1.0"
