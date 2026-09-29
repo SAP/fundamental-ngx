@@ -18,6 +18,20 @@ describe('DatePickerComponent', () => {
     let component: DatePickerComponent<FdDate>;
     let fixture: ComponentFixture<DatePickerComponent<FdDate>>;
     let adapter: FdDatetimeAdapter;
+    const expectRenderedCalendarHeaderDate = (expected: { month: number; year: number }): void => {
+        const header = document.querySelector<HTMLElement>('fd-calendar-header');
+        const monthElement = header?.querySelector<HTMLElement>('[data-fd-calendar-month]');
+        const yearElement = header?.querySelector<HTMLElement>('[data-fd-calendar-year]');
+
+        if (!monthElement || !yearElement) {
+            throw new Error('Expected the rendered calendar header to expose month and year attributes');
+        }
+
+        expect(Number(monthElement.getAttribute('data-fd-calendar-month'))).toBe(expected.month);
+        expect(Number(yearElement.getAttribute('data-fd-calendar-year'))).toBe(expected.year);
+        expect(monthElement.textContent?.trim()).toBe(adapter.getMonthNames('long')[expected.month - 1]);
+        expect(yearElement.textContent?.trim()).toBe(adapter.getYearName(adapter.createDate(expected.year)));
+    };
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
@@ -85,20 +99,40 @@ describe('DatePickerComponent', () => {
         expect(component.selectedMultipleDatesChange.emit).toHaveBeenCalledWith(dates);
     });
 
-    it('should preserve the displayed month when adding a multiple date', () => {
+    it('should preserve the displayed month when adding a multiple date', async () => {
         component.allowMultipleSelection = true;
         component.showTodayButton = true;
         const firstDate = new FdDate(2000, 10, 10);
         const newlySelectedDate = new FdDate(2000, 11, 10);
 
-        component.selectedMultipleDates = [firstDate];
-        component._calendarComponent.setCurrentlyDisplayed(newlySelectedDate);
-        component.handleMultipleDatesChange([firstDate, newlySelectedDate]);
+        component.writeValue([firstDate]);
+        fixture.detectChanges();
+        await fixture.whenStable();
+        expectRenderedCalendarHeaderDate(firstDate);
 
-        expect(component._calendarComponent._currentlyDisplayed).toEqual({
-            month: newlySelectedDate.month,
-            year: newlySelectedDate.year
-        });
+        const nextMonthButton = document.querySelector<HTMLButtonElement>(
+            'fd-calendar-header .fd-calendar__action--arrow-right button'
+        );
+        if (!nextMonthButton) {
+            throw new Error('Expected the rendered calendar header to contain a next-month button');
+        }
+        nextMonthButton.click();
+        fixture.detectChanges();
+        await fixture.whenStable();
+        expectRenderedCalendarHeaderDate(newlySelectedDate);
+
+        const calendar = document.querySelector<HTMLElement>('fd-calendar');
+        const dayButton = calendar?.querySelector<HTMLElement>(
+            '[data-fd-calendar-date-day="10"]:not(.fd-calendar__item--other)'
+        );
+        if (!dayButton) {
+            throw new Error('Expected the rendered current month to contain day 10');
+        }
+        dayButton.click();
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        expectRenderedCalendarHeaderDate(newlySelectedDate);
         expect(component.selectedMultipleDates).toEqual([firstDate, newlySelectedDate]);
         expect(component._inputFieldDate).toBe(
             [firstDate, newlySelectedDate].map((date) => (<any>component)._formatDate(date)).join(', ')
@@ -139,16 +173,26 @@ describe('DatePickerComponent', () => {
         expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith({ start: date, end: date });
     });
 
-    it('should navigate to today when clicking the Today button in multiple date mode', () => {
+    it('should navigate to today when clicking the Today button in multiple date mode', async () => {
         component.allowMultipleSelection = true;
         component.showTodayButton = true;
         const today = adapter.today();
 
-        component._calendarComponent.setCurrentlyDisplayed(new FdDate(2000, 10, 10));
-        component.onTodayButtonClick();
+        component.writeValue([new FdDate(2000, 10, 10)]);
+        fixture.detectChanges();
+        await fixture.whenStable();
+        expectRenderedCalendarHeaderDate({ month: 10, year: 2000 });
+
+        const todayButton = document.querySelector<HTMLButtonElement>('.fd-date-picker__bar button');
+        if (!todayButton) {
+            throw new Error('Expected the rendered Date Picker bar to contain the Today button');
+        }
+        todayButton.click();
+        fixture.detectChanges();
+        await fixture.whenStable();
 
         expect(component.selectedMultipleDates).toEqual([today]);
-        expect(component._calendarComponent._currentlyDisplayed).toEqual({ month: today.month, year: today.year });
+        expectRenderedCalendarHeaderDate(today);
     });
 
     it('should handle correct write value for single mode', () => {
@@ -241,7 +285,7 @@ describe('DatePickerComponent', () => {
         expect(component.isModelValid()).toBe(false);
     });
 
-    it('should handle valid reversed range string date', () => {
+    it('should handle valid reversed range string date', async () => {
         jest.spyOn(component.selectedRangeDateChange, 'emit');
         jest.spyOn(component, 'onChange');
         const date1 = new FdDate(2011, 10, 10);
@@ -261,65 +305,85 @@ describe('DatePickerComponent', () => {
 
         component.type = 'range';
         component.dateStringUpdate(strDate1 + ' - ' + strDate2);
+        fixture.detectChanges();
+        await fixture.whenStable();
 
         expect(component._isInvalidDateInput).toBe(false);
-        expect(component._calendarComponent._currentlyDisplayed.month).toBe(date2.month);
-        expect(component._calendarComponent._currentlyDisplayed.year).toBe(date2.year);
+        expectRenderedCalendarHeaderDate(date2);
         expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith({ start: date2, end: date1 });
         expect(component.onChange).toHaveBeenCalledWith({ start: date2, end: date1 });
     });
 
-    it('should handle single date blocked by disable function and set invalid', () => {
+    it('should handle single date blocked by disable function and set invalid', async () => {
         jest.spyOn(component.selectedDateChange, 'emit');
         jest.spyOn(component, 'onChange');
-        component.disableFunction = () => true;
-        const todayDate = new FdDate();
+        const sentinelDate = new FdDate(1999, 3, 15);
         const date = new FdDate(2000, 10, 10);
         const strDate = (<any>component)._formatDate(date);
         component.type = 'single';
+
+        component.writeValue(sentinelDate);
+        fixture.detectChanges();
+        await fixture.whenStable();
+        expectRenderedCalendarHeaderDate(sentinelDate);
+
+        component.disableFunction = () => true;
         jest.spyOn(adapter, 'parse').mockReturnValue(date);
         component.dateStringUpdate(strDate);
+        fixture.detectChanges();
+        await fixture.whenStable();
         expect(component._isInvalidDateInput).toBe(true);
-        expect(component._calendarComponent._currentlyDisplayed.month).toBe(todayDate.month);
-        expect(component._calendarComponent._currentlyDisplayed.year).toBe(todayDate.year);
+        expectRenderedCalendarHeaderDate(sentinelDate);
         expect(component.selectedDateChange.emit).toHaveBeenCalledWith(date);
         expect(component.onChange).toHaveBeenCalledWith(date);
     });
 
-    it('should handle multiple dates blocked by disable function and set invalid', () => {
+    it('should handle multiple dates blocked by disable function and set invalid', async () => {
         component.allowMultipleSelection = true;
         jest.spyOn(component.selectedMultipleDatesChange, 'emit');
         jest.spyOn(component, 'onChange');
-        component.disableFunction = () => true;
-        const todayDate = new FdDate();
+        const sentinelDate = new FdDate(1999, 3, 15);
         const dates = [new FdDate(2000, 10, 10)];
         const datesStr = (<any>component).formatDateArray(dates);
         component.type = 'single';
+
+        component.writeValue([sentinelDate]);
+        fixture.detectChanges();
+        await fixture.whenStable();
+        expectRenderedCalendarHeaderDate(sentinelDate);
+
+        component.disableFunction = () => true;
         jest.spyOn(adapter, 'parse').mockImplementation((str) => {
             const [day, month, year] = str.split('/').map(Number);
             return new FdDate(year, month, day);
         });
         component.dateStringUpdate(datesStr);
+        fixture.detectChanges();
+        await fixture.whenStable();
         expect(component._isInvalidDateInput).toBe(true);
-        expect(component._calendarComponent._currentlyDisplayed.month).toBe(todayDate.month);
-        expect(component._calendarComponent._currentlyDisplayed.year).toBe(todayDate.year);
+        expectRenderedCalendarHeaderDate(sentinelDate);
         expect(component.selectedMultipleDatesChange.emit).toHaveBeenCalledWith(dates);
         expect(component.onChange).toHaveBeenCalledWith(dates);
     });
 
-    it('should handle both range dates blocked by disable function and set invalid', () => {
+    it('should handle both range dates blocked by disable function and set invalid', async () => {
         jest.spyOn(component.selectedRangeDateChange, 'emit');
         jest.spyOn(component, 'onChange');
         component.type = 'range';
-        component.disableRangeStartFunction = () => true;
-        component.disableRangeEndFunction = () => true;
-        const todayDate = new FdDate();
+        const sentinelDate = new FdDate(1999, 3, 15);
         const date1 = new FdDate(2011, 10, 10);
         const date2 = new FdDate(2000, 10, 10);
         const strDate1 = (<any>component)._formatDate(date1);
         const strDate2 = (<any>component)._formatDate(date2);
         const rangeDateInvalidObject: DateRange<FdDate> = { start: date2, end: date1 };
 
+        component.writeValue({ start: sentinelDate, end: sentinelDate });
+        fixture.detectChanges();
+        await fixture.whenStable();
+        expectRenderedCalendarHeaderDate(sentinelDate);
+
+        component.disableRangeStartFunction = () => true;
+        component.disableRangeEndFunction = () => true;
         jest.spyOn(adapter, 'parse').mockImplementation((str) => {
             if (str === strDate1) {
                 return date1;
@@ -330,15 +394,16 @@ describe('DatePickerComponent', () => {
             return null;
         });
         component.dateStringUpdate(strDate1 + ' - ' + strDate2);
+        fixture.detectChanges();
+        await fixture.whenStable();
 
         expect(component._isInvalidDateInput).toBe(true);
-        expect(component._calendarComponent._currentlyDisplayed.month).toBe(todayDate.month);
-        expect(component._calendarComponent._currentlyDisplayed.year).toBe(todayDate.year);
+        expectRenderedCalendarHeaderDate(sentinelDate);
         expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith(rangeDateInvalidObject);
         expect(component.onChange).toHaveBeenCalledWith(rangeDateInvalidObject);
     });
 
-    it('should handle end range date blocked by disable function and set invalid', () => {
+    it('should handle end range date blocked by disable function and set invalid', async () => {
         jest.spyOn(component.selectedRangeDateChange, 'emit');
         jest.spyOn(component, 'onChange');
         component.type = 'range';
@@ -360,10 +425,11 @@ describe('DatePickerComponent', () => {
             return null;
         });
         component.dateStringUpdate(strDate1 + ' - ' + strDate2);
+        fixture.detectChanges();
+        await fixture.whenStable();
 
         expect(component._isInvalidDateInput).toBe(true);
-        expect(component._calendarComponent._currentlyDisplayed.month).toBe(date1.month);
-        expect(component._calendarComponent._currentlyDisplayed.year).toBe(date1.year);
+        expectRenderedCalendarHeaderDate(date1);
         expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith(rangeDateInvalidObject);
         expect(component.onChange).toHaveBeenCalledWith(rangeDateInvalidObject);
     });

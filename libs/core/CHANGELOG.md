@@ -1,3 +1,25 @@
+## 0.65.0-rc.28 (2026-09-28)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.65.0-rc.27 (2026-09-28)
+
+### 🩹 Fixes
+
+- **core:** correctly update popover position in case of dom changes ([#14559](https://github.com/SAP/fundamental-ngx/pull/14559))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
+## 0.65.0-rc.26 (2026-09-25)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.65.0-rc.25 (2026-09-25)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
 ## 0.65.0-rc.24 (2026-09-24)
 
 ### 🩹 Fixes

@@ -1,16 +1,33 @@
-<fdp-table [dataSource]="source" [trackBy]="trackBy" emptyTableMessage="No data found">
-    <fdp-table-toolbar title="Order Line Items" [hideItemCount]="false">
+<fdp-table #table [dataSource]="source" [trackBy]="trackBy" emptyTableMessage="No data found">
+    <fdp-table-toolbar title="Order Line Items" [hideItemCount]="false" [hideSearchInput]="true">
         <fdp-table-toolbar-actions>
             <fdp-button label="Action One" (click)="alert('Action One')"></fdp-button>
             <fdp-button label="Action Two" (click)="alert('Action Two')"></fdp-button>
         </fdp-table-toolbar-actions>
     </fdp-table-toolbar>
 
-    <fdp-column name="name" key="name" label="Name" align="start"> </fdp-column>
+    <fdp-column name="name" key="name" label="Name" align="start" [sortable]="true"> </fdp-column>
 
-    <fdp-column name="description" key="description" width="200px" [noWrap]="true" label="Description"> </fdp-column>
+    <fdp-column
+        name="description"
+        key="description"
+        width="200px"
+        [noWrap]="true"
+        label="Description"
+        [sortable]="true"
+    >
+    </fdp-column>
 
     <fdp-column name="price" key="price.value" label="Price" align="end"> </fdp-column>
 
     <fdp-column name="status" key="status" label="Status" align="center"> </fdp-column>
 </fdp-table>
+<fdp-table-view-settings-dialog [table]="table">
+    <fdp-table-view-settings-filter
+        column="status"
+        [type]="filterTypeEnum.MULTI"
+        label="Status"
+        [values]="statusFilteringValues"
+    >
+    </fdp-table-view-settings-filter>
+</fdp-table-view-settings-dialog>
