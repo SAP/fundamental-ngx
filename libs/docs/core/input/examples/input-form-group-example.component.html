@@ -23,6 +23,26 @@
             Input Value: {{ myForm.get('disabledInputControl')?.value }} <br />
             Disabled : {{ myForm.get('disabledInputControl')?.disabled }}
         </div>
+        <div fd-form-item>
+            <label fd-form-label for="form-number-input">Number Input (0-10):</label>
+            <fd-form-input-message-group>
+                <input
+                    formControlName="numberInputControl"
+                    fd-form-control
+                    type="number"
+                    id="form-number-input"
+                    min="0"
+                    max="10"
+                    step="2"
+                    [state]="numberInputControl.invalid ? 'error' : null"
+                />
+                @if (numberInputControl.invalid && (numberInputControl.dirty || numberInputControl.touched)) {
+                    <fd-form-message type="error"> Value must be between 0 and 10. </fd-form-message>
+                }
+            </fd-form-input-message-group>
+            Input Value: {{ numberInputControl.value }} <br />
+            Valid: {{ numberInputControl.valid }}
+        </div>
     </div>
     @for (a of arr.controls; track a; let i = $index) {
         <div formArrayName="arr">

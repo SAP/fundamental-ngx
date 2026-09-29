@@ -8,6 +8,7 @@ import {
     ElementRef,
     inject,
     input,
+    numberAttribute,
     OnInit,
     output,
     signal,
@@ -18,6 +19,15 @@ import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { FD_LOCALE_SIGNAL } from '@fundamental-ngx/i18n';
 import { FormItemControl, registerFormItemControl } from '../form-item-control/form-item-control';
+
+function optionalNumberAttribute(value: number | string | undefined): number | undefined {
+    if (value === undefined || value === '') {
+        return undefined;
+    }
+
+    const parsed = numberAttribute(value);
+    return Number.isNaN(parsed) ? undefined : parsed;
+}
 
 /**
  * Validation error emitted when number input validation fails
@@ -92,40 +102,46 @@ export class FormControlComponent implements FormItemControl, ControlValueAccess
     readonly numberLocale = input<string>();
 
     /**
-     * Number of digits after the decimal point (0 or positive integer).
+     * Number of digits after the decimal point (0 or positive integer, or numeric string).
      * When set, enforces precision and displays trailing zeros.
-     * Example: valuePrecision=6 formats "1.5" as "1.500000"
+     * Example: valuePrecision=6 or valuePrecision="6" formats "1.5" as "1.500000"
      */
-    readonly valuePrecision = input<number>();
+    readonly valuePrecision = input<number | undefined, number | string | undefined>(undefined, {
+        transform: optionalNumberAttribute
+    });
 
     /**
      * Minimum allowed value (rational number or string).
      * When value reaches minimum, Up/Down shortcuts are disabled at that boundary.
      * Values below minimum show error state.
      */
-    readonly min = input<number | string>();
+    readonly min = input<number | undefined, number | string | undefined>(undefined, {
+        transform: optionalNumberAttribute
+    });
 
     /**
      * Maximum allowed value (rational number or string).
      * When value reaches maximum, Up/Down shortcuts are disabled at that boundary.
      * Values above maximum show error state.
      */
-    readonly max = input<number | string>();
+    readonly max = input<number | undefined, number | string | undefined>(undefined, {
+        transform: optionalNumberAttribute
+    });
 
     /**
      * Step size for increment/decrement operations (rational number or string).
      * Applied when using arrow keys, scroll, or step buttons.
      * Default: 1
      */
-    readonly step = input<number | string>(1);
+    readonly step = input(1, { transform: (value: number | string) => numberAttribute(value) });
 
     /**
-     * Larger step size multiplier for Page Up/Page Down operations (rational number).
+     * Larger step size multiplier for Page Up/Page Down operations (rational number or numeric string).
      * The actual step = step × largerStep
-     * Example: step=1, largerStep=10 → Page Up increases by 10
-     * Default: 10
+     * Example: step=1, largerStep=10 or largerStep="10" → Page Up increases by 10
+     * Default: 1
      */
-    readonly largerStep = input<number>(10);
+    readonly largerStep = input(1, { transform: (value: number | string) => numberAttribute(value) });
 
     /**
      * Step mode determines how new values are calculated when stepping.
@@ -175,33 +191,37 @@ export class FormControlComponent implements FormItemControl, ControlValueAccess
     readonly _contentDensityObserver = inject(ContentDensityObserver);
 
     /** @hidden Whether number input mode is active */
-    protected readonly isNumberMode = computed(
-        () =>
-            this.type() === 'number' &&
-            (!!this.numberLocale() || this.valuePrecision() !== undefined || this.thousandsSeparator())
-    );
+    protected readonly isNumberMode = computed(() => this.type() === 'number');
 
     /** @hidden Effective locale for number formatting */
     protected readonly effectiveLocale = computed(() => {
-        if (!this.isNumberMode()) {return null;}
+        if (!this.isNumberMode()) {
+            return null;
+        }
         return this.numberLocale() || this._localeSignal?.() || 'en-US';
     });
 
     /** @hidden Effective type attribute (text when number mode is active) */
     protected readonly effectiveType = computed(() => {
-        if (this.isNumberMode()) {return 'text';}
+        if (this.isNumberMode()) {
+            return 'text';
+        }
         return this.type();
     });
 
     /** @hidden Input mode for mobile keyboards */
     protected readonly inputMode = computed(() => {
-        if (this.isNumberMode()) {return 'decimal';}
+        if (this.isNumberMode()) {
+            return 'decimal';
+        }
         return null;
     });
 
     /** @hidden Effective state (user-provided or validation error) */
     protected readonly effectiveState = computed(() => {
-        if (this._validationError()) {return 'error';}
+        if (this._validationError()) {
+            return 'error';
+        }
         return this.state();
     });
 
@@ -221,6 +241,12 @@ export class FormControlComponent implements FormItemControl, ControlValueAccess
     private _initialValueProcessed = false;
 
     /** @hidden */
+    private _isFocused = false;
+
+    /** @hidden Numeric value captured when the current editing session started */
+    private _valueOnFocus: number | null = null;
+
+    /** @hidden */
     private readonly _localeSignal = inject(FD_LOCALE_SIGNAL, { optional: true });
 
     /** @hidden Current numeric value */
@@ -229,14 +255,12 @@ export class FormControlComponent implements FormItemControl, ControlValueAccess
     /** @hidden Internal validation error state */
     private readonly _validationError = signal<NumberValidationError | null>(null);
 
-    /** @hidden Convert string/number to number (for backwards compatibility) */
-    private readonly _minValue = computed(() => this._toNumber(this.min()));
-
-    /** @hidden Convert string/number to number (for backwards compatibility) */
-    private readonly _maxValue = computed(() => this._toNumber(this.max()));
-
-    /** @hidden Convert string/number to number (for backwards compatibility) */
-    private readonly _stepSizeValue = computed(() => this._toNumber(this.step()) ?? 1);
+    /** @hidden Closest allowed value to zero */
+    private readonly _defaultValue = computed(() => {
+        const min = this.min() ?? Number.NEGATIVE_INFINITY;
+        const max = this.max() ?? Number.POSITIVE_INFINITY;
+        return Math.min(max, Math.max(min, 0));
+    });
 
     /** @hidden */
     constructor(
@@ -305,7 +329,9 @@ export class FormControlComponent implements FormItemControl, ControlValueAccess
 
     /** @hidden */
     protected _handleInput(event: Event): void {
-        if (!this.isNumberMode()) {return;}
+        if (!this.isNumberMode()) {
+            return;
+        }
 
         const inputElement = event.target as HTMLInputElement;
         const text = inputElement.value;
@@ -324,8 +350,8 @@ export class FormControlComponent implements FormItemControl, ControlValueAccess
 
         // Validate precision
         if (parsed !== null && this.valuePrecision() !== undefined) {
-            const precision = this.valuePrecision();
-            const precisionValid = this._validatePrecision(text, precision!);
+            const precision = this.valuePrecision()!;
+            const precisionValid = this._validatePrecision(text, precision);
             if (!precisionValid) {
                 this._setValidationError('precision', `Value exceeds precision of ${precision} decimal places`);
                 return;
@@ -334,8 +360,11 @@ export class FormControlComponent implements FormItemControl, ControlValueAccess
 
         // Validate min/max
         if (parsed !== null) {
-            const min = this._minValue();
-            const max = this._maxValue();
+            const min = this.min();
+            const max = this.max();
+
+            this._numericValue.set(parsed);
+            this._onChange(parsed);
 
             if (min !== undefined && parsed < min) {
                 this._setValidationError('min', `Value must be at least ${min}`);
@@ -346,18 +375,24 @@ export class FormControlComponent implements FormItemControl, ControlValueAccess
                 this._setValidationError('max', `Value must be at most ${max}`);
                 return;
             }
+
+            return;
         }
 
         // Update model value
-        this._numericValue.set(parsed);
-        this._onChange(parsed);
+        this._numericValue.set(null);
+        this._onChange(null);
     }
 
     /** @hidden */
     protected _handleBlur(): void {
         this._onTouched();
 
-        if (!this.isNumberMode()) {return;}
+        if (!this.isNumberMode()) {
+            return;
+        }
+
+        this._isFocused = false;
 
         // Format the display value on blur
         const value = this._numericValue();
@@ -366,12 +401,19 @@ export class FormControlComponent implements FormItemControl, ControlValueAccess
 
     /** @hidden */
     protected _handleFocus(): void {
-        // Optional: show raw number on focus for easier editing
+        if (!this.isNumberMode()) {
+            return;
+        }
+
+        this._isFocused = true;
+        this._valueOnFocus = this._numericValue();
     }
 
     /** @hidden */
     protected _handleKeydown(event: KeyboardEvent): void {
-        if (!this.isNumberMode() || this.disabled() || this.readonly()) {return;}
+        if (!this.isNumberMode() || this.disabled() || this.readonly()) {
+            return;
+        }
 
         const key = event.key;
         let shouldStep = false;
@@ -393,6 +435,13 @@ export class FormControlComponent implements FormItemControl, ControlValueAccess
             shouldStep = true;
             multiplier = -this.largerStep();
             event.preventDefault();
+        } else if (key === 'Enter' && this._numericValue() === null) {
+            event.preventDefault();
+            this._setNumericValue(this._defaultValue());
+        } else if (key === 'Escape' && this._isFocused) {
+            event.preventDefault();
+            this._validationError.set(null);
+            this._setNumericValue(this._valueOnFocus);
         }
 
         if (shouldStep) {
@@ -402,10 +451,14 @@ export class FormControlComponent implements FormItemControl, ControlValueAccess
 
     /** @hidden */
     protected _handleWheel(event: WheelEvent): void {
-        if (!this.isNumberMode() || this.disabled() || this.readonly()) {return;}
+        if (!this.isNumberMode() || this.disabled() || this.readonly()) {
+            return;
+        }
 
         // Only step on wheel if input is focused
-        if (document.activeElement !== this.elementRef.nativeElement) {return;}
+        if (document.activeElement !== this.elementRef.nativeElement) {
+            return;
+        }
 
         event.preventDefault();
         const multiplier = event.deltaY < 0 ? 1 : -1;
@@ -417,28 +470,43 @@ export class FormControlComponent implements FormItemControl, ControlValueAccess
     /** @hidden */
     private _stepValue(multiplier: number): void {
         const currentValue = this._numericValue() ?? 0;
-        const stepSize = this._stepSizeValue() * multiplier;
+        if (!this._isWithinBounds(currentValue)) {
+            return;
+        }
+
+        const stepSize = this.step() * multiplier;
         let newValue: number;
 
         if (this.stepMode() === 'multiple') {
-            // Round to nearest multiple of step
-            const step = this._stepSizeValue();
-            newValue = Math.round((currentValue + stepSize) / step) * step;
+            const step = Math.abs(stepSize);
+            const currentMultiple = currentValue / step;
+            newValue =
+                multiplier > 0
+                    ? (Number.isInteger(currentMultiple) ? currentMultiple + 1 : Math.ceil(currentMultiple)) * step
+                    : (Number.isInteger(currentMultiple) ? currentMultiple - 1 : Math.floor(currentMultiple)) * step;
         } else {
             // Simple increment/decrement
             newValue = currentValue + stepSize;
         }
 
         // Clamp to min/max
-        const min = this._minValue();
-        const max = this._maxValue();
-        if (min !== undefined) {newValue = Math.max(min, newValue);}
-        if (max !== undefined) {newValue = Math.min(max, newValue);}
+        const min = this.min();
+        const max = this.max();
+        if (min !== undefined) {
+            newValue = Math.max(min, newValue);
+        }
+        if (max !== undefined) {
+            newValue = Math.min(max, newValue);
+        }
 
-        // Update value
-        this._numericValue.set(newValue);
-        this._onChange(newValue);
-        this._updateDisplayValue(newValue);
+        this._setNumericValue(newValue);
+    }
+
+    /** @hidden */
+    private _isWithinBounds(value: number): boolean {
+        const min = this.min();
+        const max = this.max();
+        return (min === undefined || value >= min) && (max === undefined || value <= max);
     }
 
     /** @hidden ControlValueAccessor callbacks */
@@ -448,8 +516,17 @@ export class FormControlComponent implements FormItemControl, ControlValueAccess
     private _onTouched: () => void = () => {};
 
     /** @hidden */
+    private _setNumericValue(value: number | null): void {
+        this._numericValue.set(value);
+        this._onChange(value);
+        this._updateDisplayValue(value);
+    }
+
+    /** @hidden */
     private _updateDisplayValue(value: number | null): void {
-        if (!this.isNumberMode()) {return;}
+        if (!this.isNumberMode()) {
+            return;
+        }
 
         const locale = this.effectiveLocale();
         if (!locale || value === null) {
@@ -478,10 +555,14 @@ export class FormControlComponent implements FormItemControl, ControlValueAccess
 
     /** @hidden */
     private _parseNumber(text: string): number | null {
-        if (!text || text.trim() === '') {return null;}
+        if (!text || text.trim() === '') {
+            return null;
+        }
 
         const locale = this.effectiveLocale();
-        if (!locale) {return parseFloat(text);}
+        if (!locale) {
+            return parseFloat(text);
+        }
 
         // Get locale-specific decimal and grouping separators
         const formatter = new Intl.NumberFormat(locale);
@@ -501,14 +582,18 @@ export class FormControlComponent implements FormItemControl, ControlValueAccess
     /** @hidden */
     private _validatePrecision(text: string, precision: number): boolean {
         const locale = this.effectiveLocale();
-        if (!locale) {return true;}
+        if (!locale) {
+            return true;
+        }
 
         const formatter = new Intl.NumberFormat(locale);
         const parts = formatter.formatToParts(1234.5);
         const decimalSeparator = parts.find((p) => p.type === 'decimal')?.value || '.';
 
         const decimalIndex = text.indexOf(decimalSeparator);
-        if (decimalIndex === -1) {return true;}
+        if (decimalIndex === -1) {
+            return true;
+        }
 
         const fractionalPart = text.slice(decimalIndex + 1);
         return fractionalPart.length <= precision;
@@ -517,13 +602,5 @@ export class FormControlComponent implements FormItemControl, ControlValueAccess
     /** @hidden */
     private _setValidationError(type: NumberValidationError['type'], message: string): void {
         this._validationError.set({ type, message });
-    }
-
-    /** @hidden Convert string or number to number (for backwards compatibility) */
-    private _toNumber(value: number | string | undefined): number | undefined {
-        if (value === undefined || value === null) {return undefined;}
-        if (typeof value === 'number') {return value;}
-        const parsed = parseFloat(value);
-        return isNaN(parsed) ? undefined : parsed;
     }
 }

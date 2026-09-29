@@ -9,7 +9,13 @@ import {
     Validators
 } from '@angular/forms';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { FormControlComponent, FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
+import {
+    FormControlComponent,
+    FormInputMessageGroupComponent,
+    FormItemComponent,
+    FormLabelComponent,
+    FormMessageComponent
+} from '@fundamental-ngx/core/form';
 
 @Component({
     selector: 'fd-input-form-group-example',
@@ -20,21 +26,26 @@ import { FormControlComponent, FormItemComponent, FormLabelComponent } from '@fu
         ReactiveFormsModule,
         FormItemComponent,
         FormLabelComponent,
+        FormInputMessageGroupComponent,
         FormControlComponent,
+        FormMessageComponent,
         ButtonComponent
     ]
 })
 export class InputFormGroupExampleComponent implements OnInit {
     myForm: FormGroup;
     arr: FormArray;
+    numberInputControl: FormControl<number | null>;
 
     constructor(private fb: FormBuilder) {}
 
     ngOnInit(): void {
         this.arr = this.fb.array([this.createItem()]);
+        this.numberInputControl = new FormControl(0, [Validators.min(0), Validators.max(10)]);
         this.myForm = this.fb.group({
             inputControl: new FormControl('', Validators.required),
             disabledInputControl: new FormControl({ value: 'initial value', disabled: true }, Validators.required),
+            numberInputControl: this.numberInputControl,
             arr: this.arr
         });
     }
