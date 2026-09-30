@@ -249,8 +249,8 @@ describe('MessagesListComponent', () => {
     describe('Animation', () => {
         beforeEach(() => {
             // Mock view children
-            component['_listSection'] = { nativeElement: document.createElement('div') } as any;
-            component['_detailsSection'] = { nativeElement: document.createElement('div') } as any;
+            component['listSection'] = { nativeElement: document.createElement('div') } as any;
+            component['detailsSection'] = { nativeElement: document.createElement('div') } as any;
         });
 
         it('should cancel ongoing animations when new transition starts', () => {
@@ -265,8 +265,8 @@ describe('MessagesListComponent', () => {
         });
 
         it('should not animate if elements are not available', () => {
-            component['_listSection'] = null as any;
-            component['_detailsSection'] = null as any;
+            component['listSection'] = null as any;
+            component['detailsSection'] = null as any;
 
             // Should not throw
             expect(() => {
@@ -279,8 +279,8 @@ describe('MessagesListComponent', () => {
             const mockDiv = document.createElement('div');
             delete (mockDiv as any).animate;
 
-            component['_listSection'] = { nativeElement: mockDiv } as any;
-            component['_detailsSection'] = { nativeElement: document.createElement('div') } as any;
+            component['listSection'] = { nativeElement: mockDiv } as any;
+            component['detailsSection'] = { nativeElement: document.createElement('div') } as any;
 
             // Should not throw
             expect(() => {

@@ -52,7 +52,7 @@
 </ng-template>
 <div class="fd-message-view">
     <!-- Screen reader announcement region for details view navigation -->
-    <div aria-live="assertive" aria-atomic="true" class="fd-message-view__sr-announcement">
+    <div aria-live="assertive" aria-atomic="true" class="fd-message-view__sr-only">
         @if (currentScreen === 'details' && currentEntry) {
             {{ getAnnouncementText(currentEntry) }}
         }

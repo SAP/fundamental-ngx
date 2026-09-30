@@ -10,7 +10,8 @@ import {
     OnInit,
     Optional,
     ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    input
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
@@ -69,14 +70,6 @@ export class DialogComponent
     extends DialogBase<DialogRef>
     implements OnInit, OnChanges, AfterViewInit, OnDestroy, CssClassBuilder
 {
-    /** ARIA role for the dialog. Defaults to "dialog". Use "alertdialog" for dialogs that require immediate user attention. */
-    @Input()
-    role: 'dialog' | 'alertdialog' = 'dialog';
-
-    /** ARIA description for the dialog. Defaults to null. */
-    @Input()
-    ariaDescription: string | null = null;
-
     /** Custom classes */
     @Input()
     set class(userClass: string) {
@@ -140,6 +133,12 @@ export class DialogComponent
             component.dialogConfig = this.dialogConfig;
         }
     }
+
+    /** ARIA role for the dialog. Defaults to "dialog". Use "alertdialog" for dialogs that require immediate user attention. */
+    readonly role = input<'dialog' | 'alertdialog'>('dialog');
+
+    /** ARIA description for the dialog. Defaults to null. */
+    readonly ariaDescription = input<string | null>(null);
 
     /** @hidden Whenever dialog should be visible */
     showDialogWindow: boolean;

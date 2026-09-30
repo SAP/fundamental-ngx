@@ -1,5 +1,6 @@
 import {
     AfterContentInit,
+    AfterViewInit,
     booleanAttribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -70,7 +71,10 @@ let listItemUniqueId = 0;
     imports: [FormItemComponent, DecimalPipe, IconComponent, FdTranslatePipe],
     exportAs: 'fdListItem'
 })
-export class ListItemComponent<T = any> extends ListFocusItem<T> implements AfterContentInit, ListItemInterface {
+export class ListItemComponent<T = any>
+    extends ListFocusItem<T>
+    implements AfterContentInit, AfterViewInit, ListItemInterface
+{
     /** Whether list item is selected */
     @Input()
     @HostBinding('class.is-selected')
@@ -319,6 +323,10 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
     ngAfterContentInit(): void {
         this._listenOnLinkQueryChange();
         this._listenOnButtonQueryChange();
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
         this._moveCounterToLink();
     }
 
