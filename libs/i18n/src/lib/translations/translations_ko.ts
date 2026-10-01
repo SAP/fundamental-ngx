@@ -241,7 +241,7 @@ export default {
         search: '검색'
     },
     coreSlider: {
-        ariaLabel: 'Slider Handle'
+        ariaLabel: '슬라이더 핸들'
     },
     coreSplitButton: {
         arialLabel: '분할 버튼',

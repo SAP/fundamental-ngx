@@ -242,7 +242,7 @@ export default {
         search: 'Søk'
     },
     coreSlider: {
-        ariaLabel: 'Slider Handle'
+        ariaLabel: 'Handle for glidebryter'
     },
     coreSplitButton: {
         arialLabel: 'Oppdelt knapp',

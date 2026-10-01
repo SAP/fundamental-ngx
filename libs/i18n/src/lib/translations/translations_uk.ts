@@ -241,7 +241,7 @@ export default {
         search: 'Пошук'
     },
     coreSlider: {
-        ariaLabel: 'Slider Handle'
+        ariaLabel: 'Повзунок'
     },
     coreSplitButton: {
         arialLabel: 'Кнопка розділення',

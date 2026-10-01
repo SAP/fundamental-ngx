@@ -241,7 +241,7 @@ export default {
         search: 'Hae'
     },
     coreSlider: {
-        ariaLabel: 'Slider Handle'
+        ariaLabel: 'Liukusäätimen kahva'
     },
     coreSplitButton: {
         arialLabel: 'Jaa-painike',
