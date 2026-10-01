@@ -236,6 +236,447 @@ test.describe('core/combobox leave behavior', () => {
     });
 });
 
+test.describe('core/combobox mobile confirmation transactions', () => {
+    const combobox = (page: import('@playwright/test').Page): import('@playwright/test').Locator =>
+        page.locator('#doc-core-combobox-mobile');
+    const input = (page: import('@playwright/test').Page): import('@playwright/test').Locator =>
+        combobox(page).locator('input[role="combobox"]');
+    const dialog = (page: import('@playwright/test').Page): import('@playwright/test').Locator =>
+        page.locator('[role="dialog"]');
+
+    const captureInteractions = async (page: import('@playwright/test').Page): Promise<void> => {
+        await combobox(page).evaluate((host) => {
+            type Combobox = {
+                onChange: (value: unknown) => void;
+                openChange: { subscribe: (listener: (open: boolean) => void) => void };
+                inputTextChange: { subscribe: (listener: (value: string) => void) => void };
+                itemClicked: { subscribe: (listener: () => void) => void };
+                __e2eCvaWrites?: unknown[];
+                __e2eOpenChanges?: boolean[];
+                __e2eInputTextChanges?: string[];
+                __e2eItemClicks?: number;
+            };
+            type AngularDebug = { getComponent: (element: Element) => Combobox };
+
+            const component = (window as unknown as { ng: AngularDebug }).ng.getComponent(host);
+            const originalOnChange = component.onChange;
+            component.__e2eCvaWrites = [];
+            component.__e2eOpenChanges = [];
+            component.__e2eInputTextChanges = [];
+            component.__e2eItemClicks = 0;
+            component.onChange = (value: unknown) => {
+                component.__e2eCvaWrites?.push(value);
+                originalOnChange(value);
+            };
+            component.openChange.subscribe((open) => component.__e2eOpenChanges?.push(open));
+            component.inputTextChange.subscribe((value) => component.__e2eInputTextChanges?.push(value));
+            component.itemClicked.subscribe(() => (component.__e2eItemClicks = (component.__e2eItemClicks ?? 0) + 1));
+        });
+    };
+
+    const interactionState = (
+        page: import('@playwright/test').Page
+    ): Promise<{
+        cvaWrites: unknown[];
+        openChanges: boolean[];
+        inputTextChanges: string[];
+        itemClicks: number;
+        open: boolean;
+        value: unknown;
+    }> =>
+        combobox(page).evaluate((host) => {
+            type Combobox = {
+                getValue: () => unknown;
+                open: boolean;
+                __e2eCvaWrites?: unknown[];
+                __e2eOpenChanges?: boolean[];
+                __e2eInputTextChanges?: string[];
+                __e2eItemClicks?: number;
+            };
+            type AngularDebug = { getComponent: (element: Element) => Combobox };
+
+            const component = (window as unknown as { ng: AngularDebug }).ng.getComponent(host);
+            return {
+                cvaWrites: component.__e2eCvaWrites ?? [],
+                openChanges: component.__e2eOpenChanges ?? [],
+                inputTextChanges: component.__e2eInputTextChanges ?? [],
+                itemClicks: component.__e2eItemClicks ?? 0,
+                open: component.open,
+                value: component.getValue()
+            };
+        });
+
+    const externalValue = (page: import('@playwright/test').Page): Promise<unknown> =>
+        page.locator('fd-combobox-mobile-example').evaluate((host) => {
+            type MobileExample = { selectedValue: unknown };
+            type AngularDebug = { getComponent: (element: Element) => MobileExample };
+
+            return (window as unknown as { ng: AngularDebug }).ng.getComponent(host).selectedValue;
+        });
+
+    const setInitialValue = async (page: import('@playwright/test').Page, value: string): Promise<void> => {
+        await combobox(page).evaluate((host, initialValue) => {
+            type Combobox = { writeValue: (value: string) => void; onChange: (value: string) => void };
+            type AngularDebug = { getComponent: (element: Element) => Combobox };
+
+            const component = (window as unknown as { ng: AngularDebug }).ng.getComponent(host);
+            component.writeValue(initialValue);
+            component.onChange(initialValue);
+        }, value);
+    };
+
+    const configureImmediateMode = async (
+        page: import('@playwright/test').Page,
+        closeOnSelect: boolean
+    ): Promise<void> => {
+        await combobox(page).evaluate((host, shouldCloseOnSelect) => {
+            type Combobox = {
+                closeOnSelect: boolean;
+                mobileConfig: { approveButtonText?: string; cancelButtonText?: string };
+            };
+            type AngularDebug = { getComponent: (element: Element) => Combobox };
+
+            const component = (window as unknown as { ng: AngularDebug }).ng.getComponent(host);
+            component.closeOnSelect = shouldCloseOnSelect;
+            component.mobileConfig.approveButtonText = undefined;
+            component.mobileConfig.cancelButtonText = undefined;
+        }, closeOnSelect);
+    };
+
+    const select = async (page: import('@playwright/test').Page, label: string): Promise<void> => {
+        await dialog(page).getByRole('option', { name: label, exact: true }).click();
+    };
+
+    test.beforeEach(async ({ goto }) => {
+        await goto('core/combobox/mobile');
+    });
+
+    test('keeps a mobile confirmation selection as a draft until Approve commits it once', async ({ page }) => {
+        await captureInteractions(page);
+        await input(page).click();
+        await expect(dialog(page)).toBeVisible();
+
+        await select(page, 'Kiwi');
+
+        await expect.soft(input(page)).toHaveValue('Kiwi');
+        await expect.soft(dialog(page)).toBeVisible();
+        await expect.soft
+            .poll(() => interactionState(page))
+            .toMatchObject({
+                cvaWrites: [],
+                open: true,
+                openChanges: [true],
+                inputTextChanges: ['Kiwi'],
+                itemClicks: 1
+            });
+        await expect.soft.poll(() => externalValue(page)).toBe('');
+
+        await dialog(page).getByText('Approve', { exact: true }).click();
+
+        await expect.soft(dialog(page)).toBeHidden();
+        await expect.soft
+            .poll(() => interactionState(page))
+            .toMatchObject({
+                cvaWrites: ['Kiwi'],
+                open: false,
+                openChanges: [true, false]
+            });
+        await expect.soft.poll(() => externalValue(page)).toBe('Kiwi');
+    });
+
+    test('restores Kiwi and emits no Apple CVA value when Cancel dismisses a mobile confirmation draft', async ({
+        page
+    }) => {
+        await setInitialValue(page, 'Kiwi');
+        await captureInteractions(page);
+        await input(page).click();
+        await expect(dialog(page)).toBeVisible();
+
+        await select(page, 'Apple');
+        await expect.soft
+            .poll(() => interactionState(page))
+            .toMatchObject({ cvaWrites: [], open: true, openChanges: [true] });
+
+        await dialog(page).getByText('Cancel', { exact: true }).click();
+
+        await expect.soft(dialog(page)).toBeHidden();
+        await expect.soft(input(page)).toHaveValue('Kiwi');
+        await expect.soft
+            .poll(() => interactionState(page))
+            .toMatchObject({
+                cvaWrites: [],
+                open: false,
+                openChanges: [true, false],
+                value: 'Kiwi'
+            });
+        await expect.soft.poll(() => externalValue(page)).toBe('Kiwi');
+    });
+
+    test('uses the confirmation rollback contract for Close and Escape', async ({ page }) => {
+        await setInitialValue(page, 'Kiwi');
+        await captureInteractions(page);
+        await input(page).click();
+        await select(page, 'Apple');
+        await dialog(page).getByTitle('Close').click();
+
+        await expect.soft(dialog(page)).toBeHidden();
+        await expect.soft(input(page)).toHaveValue('Kiwi');
+        await expect.soft
+            .poll(() => interactionState(page))
+            .toMatchObject({ cvaWrites: [], openChanges: [true, false] });
+
+        await input(page).click();
+        await select(page, 'Apple');
+        await page.keyboard.press('Escape');
+
+        await expect.soft(dialog(page)).toBeHidden();
+        await expect.soft(input(page)).toHaveValue('Kiwi');
+        await expect.soft
+            .poll(() => interactionState(page))
+            .toMatchObject({
+                cvaWrites: [],
+                open: false,
+                openChanges: [true, false, true, false],
+                value: 'Kiwi'
+            });
+        await expect.soft.poll(() => externalValue(page)).toBe('Kiwi');
+    });
+
+    test('commits immediately and closes the actual dialog when no Approve button uses closeOnSelect', async ({
+        page
+    }) => {
+        await configureImmediateMode(page, true);
+        await captureInteractions(page);
+        await input(page).click();
+        await select(page, 'Kiwi');
+
+        await expect.soft(input(page)).toHaveValue('Kiwi');
+        await expect.soft(dialog(page)).toBeHidden();
+        await expect.soft
+            .poll(() => interactionState(page))
+            .toMatchObject({
+                cvaWrites: ['Kiwi'],
+                open: false,
+                openChanges: [true, false]
+            });
+        await expect.soft.poll(() => externalValue(page)).toBe('Kiwi');
+    });
+
+    test('keeps an immediate no-Approve selection after a later dismiss when closeOnSelect is false', async ({
+        page
+    }) => {
+        await configureImmediateMode(page, false);
+        await captureInteractions(page);
+        await input(page).click();
+        await select(page, 'Kiwi');
+
+        await expect.soft(dialog(page)).toBeVisible();
+        await expect.soft
+            .poll(() => interactionState(page))
+            .toMatchObject({
+                cvaWrites: ['Kiwi'],
+                open: true,
+                openChanges: [true]
+            });
+        await expect.soft.poll(() => externalValue(page)).toBe('Kiwi');
+
+        await dialog(page).getByTitle('Close').click();
+
+        await expect.soft(dialog(page)).toBeHidden();
+        await expect.soft(input(page)).toHaveValue('Kiwi');
+        await expect.soft
+            .poll(() => interactionState(page))
+            .toMatchObject({
+                cvaWrites: ['Kiwi'],
+                open: false,
+                openChanges: [true, false],
+                value: 'Kiwi'
+            });
+        await expect.soft.poll(() => externalValue(page)).toBe('Kiwi');
+    });
+
+    test('restores focus to the combobox input after Approve, Cancel, and Escape', async ({ page }) => {
+        const activeElement = (): Promise<{ tagName: string; role: string | null; connected: boolean }> =>
+            page.evaluate(() => ({
+                tagName: document.activeElement?.tagName ?? '',
+                role: document.activeElement?.getAttribute('role') ?? null,
+                connected: document.activeElement?.isConnected ?? false
+            }));
+
+        const assertFocusRecoveryAndReopen = async (): Promise<void> => {
+            expect.soft(await activeElement()).toEqual({ tagName: 'INPUT', role: 'combobox', connected: true });
+            await page.keyboard.press('Alt+ArrowDown');
+            await expect.soft(dialog(page)).toBeVisible({ timeout: 1_000 });
+            if (!(await dialog(page).isVisible())) {
+                await input(page).click();
+                await expect(dialog(page)).toBeVisible();
+            }
+        };
+
+        await input(page).click();
+        await select(page, 'Kiwi');
+        await dialog(page).getByText('Approve', { exact: true }).click();
+        await expect(dialog(page)).toBeHidden();
+        await assertFocusRecoveryAndReopen();
+
+        await select(page, 'Apple');
+        await dialog(page).getByText('Cancel', { exact: true }).click();
+        await expect(dialog(page)).toBeHidden();
+        await assertFocusRecoveryAndReopen();
+
+        await select(page, 'Apple');
+        await page.keyboard.press('Escape');
+        await expect(dialog(page)).toBeHidden();
+        await assertFocusRecoveryAndReopen();
+
+        await dialog(page).getByText('Cancel', { exact: true }).click();
+    });
+});
+
+test.describe('core/combobox mobile documentation transactions', () => {
+    const dialog = (page: import('@playwright/test').Page): import('@playwright/test').Locator =>
+        page.locator('[role="dialog"]');
+    const dialogInstruction = (page: import('@playwright/test').Page): import('@playwright/test').Locator =>
+        dialog(page).locator('[data-dialog-instruction]');
+    const input = (page: import('@playwright/test').Page, controlId: string): import('@playwright/test').Locator =>
+        page.locator(controlId).locator('input[role="combobox"]');
+    const commitToast = (page: import('@playwright/test').Page): import('@playwright/test').Locator =>
+        page.locator('.fd-message-toast');
+    const select = async (page: import('@playwright/test').Page, label: string): Promise<void> => {
+        await dialog(page).getByRole('option', { name: label, exact: true }).click();
+    };
+
+    const localCommittedValue = (page: import('@playwright/test').Page): import('@playwright/test').Locator =>
+        page.locator('#doc-core-combobox-mobile-committed-value');
+    const localCommitCount = (page: import('@playwright/test').Page): import('@playwright/test').Locator =>
+        page.locator('#doc-core-combobox-mobile-commit-count');
+    const globalCommittedValue = (page: import('@playwright/test').Page): import('@playwright/test').Locator =>
+        page.locator('#doc-core-combobox-mobile-global-committed-value');
+    const globalCommitCount = (page: import('@playwright/test').Page): import('@playwright/test').Locator =>
+        page.locator('#doc-core-combobox-mobile-global-commit-count');
+    const immediateCommittedValue = (page: import('@playwright/test').Page): import('@playwright/test').Locator =>
+        page.locator('#doc-core-combobox-mobile-immediate-committed-value');
+    const immediateCommitCount = (page: import('@playwright/test').Page): import('@playwright/test').Locator =>
+        page.locator('#doc-core-combobox-mobile-immediate-commit-count');
+
+    test.beforeEach(async ({ goto }) => {
+        await goto('core/combobox/mobile');
+    });
+
+    test('documents global-only confirmation transactions through visible committed-value, dialog-state, and commit-count statuses', async ({
+        page
+    }) => {
+        const globalInput = input(page, '#doc-core-combobox-mobile-global');
+
+        // Before open: committed value and count are visibly readable
+        await expect(globalCommittedValue(page)).toHaveText('Committed value: None');
+        await expect(globalCommitCount(page)).toHaveText('Model commits: 0');
+
+        await globalInput.click();
+        await expect(dialog(page)).toBeVisible();
+
+        // While open: a person can see the dialog title, instruction, and the Approve action
+        await expect(dialog(page).getByRole('heading', { name: 'Global confirmation', exact: true })).toBeVisible();
+        await expect(dialogInstruction(page)).toContainText('Select an item, then tap Approve to confirm');
+        await expect(dialog(page).getByText('Approve', { exact: true })).toBeVisible();
+
+        await select(page, 'Kiwi');
+
+        // Confirmation mode: dialog remains open after selection — a person sees no commit yet
+        await expect(dialog(page)).toBeVisible();
+        await expect(commitToast(page)).toHaveCount(0);
+
+        await dialog(page).getByText('Approve', { exact: true }).click();
+
+        // After Approve: dialog is hidden; now-visible readouts show exactly one commit
+        await expect(dialog(page)).toBeHidden();
+        await expect(globalCommittedValue(page)).toHaveText('Committed value: Kiwi');
+        await expect(globalCommitCount(page)).toHaveText('Model commits: 1');
+        await expect(commitToast(page)).toHaveText('CVA committed value: Kiwi');
+        await expect(commitToast(page)).toBeHidden();
+
+        await globalInput.click();
+        await expect(dialog(page)).toBeVisible();
+        await select(page, 'Apple');
+        await dialog(page).getByText('Cancel', { exact: true }).click();
+
+        // After Cancel: dialog is hidden; now-visible readouts remain unchanged
+        await expect(dialog(page)).toBeHidden();
+        await expect(globalCommittedValue(page)).toHaveText('Committed value: Kiwi');
+        await expect(globalCommitCount(page)).toHaveText('Model commits: 1');
+    });
+
+    test('documents static immediate mode as a one-commit, close-on-select transaction without an Approve action', async ({
+        page
+    }) => {
+        const immediateInput = input(page, '#doc-core-combobox-mobile-immediate');
+
+        // Before open: committed value and count are visibly readable
+        await expect(immediateCommittedValue(page)).toHaveText('Committed value: None');
+        await expect(immediateCommitCount(page)).toHaveText('Model commits: 0');
+
+        await immediateInput.click();
+        await expect(dialog(page)).toBeVisible();
+
+        // While open: a person can see the dialog title, instruction, and no Approve action
+        await expect(dialog(page).getByRole('heading', { name: 'Immediate selection', exact: true })).toBeVisible();
+        await expect(dialogInstruction(page)).toContainText('Tap an item to select and close immediately');
+        await expect(dialog(page).getByText('Approve', { exact: true })).toHaveCount(0);
+
+        await select(page, 'Kiwi');
+
+        // After selection: immediate mode closes the dialog and commits exactly once
+        await expect(dialog(page)).toBeHidden();
+        await expect(immediateCommittedValue(page)).toHaveText('Committed value: Kiwi');
+        await expect(immediateCommitCount(page)).toHaveText('Model commits: 1');
+        await expect(commitToast(page)).toHaveText('CVA committed value: Kiwi');
+    });
+
+    test('documents the local confirmation dialog title, instruction, and draft visibility before commit', async ({
+        page
+    }) => {
+        const localInput = input(page, '#doc-core-combobox-mobile');
+
+        // Before open: committed value and count are visibly readable
+        await expect(localCommittedValue(page)).toHaveText('Committed value: None');
+        await expect(localCommitCount(page)).toHaveText('Model commits: 0');
+
+        await localInput.click();
+        await expect(dialog(page)).toBeVisible();
+
+        // While open: a person can see the mode-specific title, instruction, and the selected draft
+        await expect(dialog(page).getByRole('heading', { name: 'Confirm selection', exact: true })).toBeVisible();
+        await expect(dialogInstruction(page)).toContainText('Select an item, then tap Approve to confirm');
+
+        await select(page, 'Kiwi');
+
+        // The combobox input inside the dialog shows the selected draft
+        await expect(localInput).toHaveValue('Kiwi');
+        // Confirmation mode: dialog remains open after selection
+        await expect(dialog(page)).toBeVisible();
+        await expect(commitToast(page)).toHaveCount(0);
+
+        await dialog(page).getByText('Approve', { exact: true }).click();
+
+        // After Approve: dialog is hidden; now-visible committed value updates exactly once
+        await expect(dialog(page)).toBeHidden();
+        await expect(localCommittedValue(page)).toHaveText('Committed value: Kiwi');
+        await expect(localCommitCount(page)).toHaveText('Model commits: 1');
+        await expect(commitToast(page)).toHaveText('CVA committed value: Kiwi');
+        await expect(commitToast(page)).toBeHidden();
+
+        await localInput.click();
+        await expect(dialog(page)).toBeVisible();
+        await select(page, 'Apple');
+        await page.keyboard.press('Escape');
+
+        // After Escape: dialog is hidden; now-visible readouts remain unchanged
+        await expect(dialog(page)).toBeHidden();
+        await expect(localCommittedValue(page)).toHaveText('Committed value: Kiwi');
+        await expect(localCommitCount(page)).toHaveText('Model commits: 1');
+    });
+});
+
 test.describe('core/combobox valueProperty leave behavior', () => {
     const input = (page: import('@playwright/test').Page): import('@playwright/test').Locator =>
         page.locator('fd-combobox').nth(1).locator('input[role="combobox"]');

@@ -480,6 +480,17 @@ export class ComboboxComponent<T = any>
     /** Last value confirmed by an explicit selection (item click) or external writeValue. */
     private _lastConfirmedValue: any;
 
+    /** Value state to restore when a mobile confirmation dialog is dismissed. */
+    private _mobileConfirmationSnapshot?: {
+        inputText: string;
+        nativeInputValue: string;
+        value: any;
+        lastConfirmedValue: any;
+    };
+
+    /** Resolved global and local mobile configuration supplied by the mobile wrapper. */
+    private _mobileModeConfig?: MobileModeConfig;
+
     private readonly _elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
     private readonly _destroyRef = inject(DestroyRef);
@@ -499,7 +510,7 @@ export class ComboboxComponent<T = any>
         fromEvent<MouseEvent>(document, 'mousedown')
             .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe((event) => {
-                if (!this.closeOnOutsideClick) {
+                if (this.mobile || !this.closeOnOutsideClick) {
                     return;
                 }
                 const target = event.target as Node;
@@ -629,16 +640,37 @@ export class ComboboxComponent<T = any>
         }
     }
 
-    /** Handle dialog dismissing, closes popover and sets backup data. */
-    dialogDismiss(term: any): void {
-        this.inputText = this.displayFn(term);
-        this.setValue(term);
-        this._lastConfirmedValue = term;
+    /**
+     * @hidden
+     * Receives the resolved mobile configuration from the mobile wrapper.
+     */
+    setMobileModeConfig(config: MobileModeConfig): void {
+        this._mobileModeConfig = config;
+    }
+
+    /**
+     * @hidden
+     * Whether the resolved mobile configuration provides a usable Approve action.
+     */
+    hasMobileApproveAction(): boolean {
+        return !!this._mobileModeConfig?.approveButtonText?.trim();
+    }
+
+    /** Handle dialog dismissing, restoring an unconfirmed mobile selection when needed. */
+    dialogDismiss(term?: any): void {
+        if (this._isMobileConfirmationMode()) {
+            this._restoreMobileConfirmationSnapshot();
+        } else if (term !== undefined) {
+            this.inputText = this.displayFn(term);
+            this.setValue(term);
+            this._lastConfirmedValue = term;
+        }
         this.isOpenChangeHandle(false);
     }
 
     /** Handle dialog approval, closes popover and propagates data changes. */
     dialogApprove(): void {
+        this._confirmMobileSelection();
         this._propagateChange();
         this.isOpenChangeHandle(false);
     }
@@ -705,6 +737,9 @@ export class ComboboxComponent<T = any>
         }
 
         this._lastConfirmedValue = valueToDisplay;
+        if (this.open && this._isMobileConfirmationMode()) {
+            this._captureMobileConfirmationSnapshot();
+        }
         this._cdRef.markForCheck();
     }
 
@@ -755,6 +790,9 @@ export class ComboboxComponent<T = any>
         /** Reset displayed values on every mobile open */
         if (this.mobile && !this.open) {
             this._resetDisplayedValues();
+        }
+        if (isOpen && !this.open && this._isMobileConfirmationMode()) {
+            this._captureMobileConfirmationSnapshot();
         }
         if (this.open !== isOpen) {
             this.open = isOpen;
@@ -953,7 +991,10 @@ export class ComboboxComponent<T = any>
 
     /** @hidden */
     private _handleClickActions(term: any, shouldClosePopover = true): void {
-        this._lastConfirmedValue = term;
+        const confirmationMode = this._isMobileConfirmationMode();
+        if (!confirmationMode) {
+            this._lastConfirmedValue = term;
+        }
         if (this.fillOnSelect) {
             this.setValue(term);
             const displayText = this.displayFn(term);
@@ -961,11 +1002,11 @@ export class ComboboxComponent<T = any>
             this.inputText = displayText;
             this._cdRef.detectChanges();
 
-            if (this.mobile) {
+            if (this.mobile && !confirmationMode) {
                 this._propagateChange();
             }
         }
-        if (this.closeOnSelect && shouldClosePopover) {
+        if (!confirmationMode && this.closeOnSelect && shouldClosePopover) {
             this.isOpenChangeHandle(false);
         }
         if (shouldClosePopover) {
@@ -976,6 +1017,48 @@ export class ComboboxComponent<T = any>
     /** @hidden */
     private _getOptionObjectByDisplayedValue(displayValue: string): any {
         return this.dropdownValues.filter((value) => this.displayFn(value) === displayValue);
+    }
+
+    /** @hidden */
+    private _isMobileConfirmationMode(): boolean {
+        return this.mobile && this.hasMobileApproveAction();
+    }
+
+    /** @hidden */
+    private _captureMobileConfirmationSnapshot(): void {
+        this._mobileConfirmationSnapshot = {
+            inputText: this.inputTextValue,
+            nativeInputValue: this.searchInputElement?.nativeElement.value ?? this.inputTextValue,
+            value: this._value,
+            lastConfirmedValue: this._lastConfirmedValue
+        };
+    }
+
+    /** @hidden */
+    private _restoreMobileConfirmationSnapshot(): void {
+        const snapshot = this._mobileConfirmationSnapshot;
+        if (!snapshot) {
+            return;
+        }
+
+        this.inputText = snapshot.inputText;
+        this._value = snapshot.value;
+        this._lastConfirmedValue = snapshot.lastConfirmedValue;
+        if (this.searchInputElement?.nativeElement) {
+            this.searchInputElement.nativeElement.value = snapshot.nativeInputValue;
+        }
+        this._cdRef.markForCheck();
+    }
+
+    /** @hidden */
+    private _confirmMobileSelection(): void {
+        if (!this._isMobileConfirmationMode()) {
+            return;
+        }
+
+        const selectedValues = this._getOptionObjectByDisplayedValue(this.inputText);
+        this._lastConfirmedValue =
+            this.communicateByObject && selectedValues.length === 1 ? selectedValues[0] : this.inputText;
     }
 
     /** @hidden */
