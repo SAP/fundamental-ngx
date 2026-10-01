@@ -89,7 +89,7 @@ export class ShellbarBrandingContextAreaExampleComponent {
 
     inputText = '';
 
-    showButtonWithPriority3 = true;
+    showStatusWithPriority2 = true;
 
     suggestions: SuggestionItem[] = [
         {
@@ -381,8 +381,8 @@ export class ShellbarBrandingContextAreaExampleComponent {
         });
     }
 
-    toggleButton3(): void {
-        this.showButtonWithPriority3 = !this.showButtonWithPriority3;
+    toggleStatus2(): void {
+        this.showStatusWithPriority2 = !this.showStatusWithPriority2;
     }
 
     itemVisibilityChanged(event: any): void {

@@ -60,7 +60,7 @@
         gap: 0;
     }
 
-    .fd-shellbar__separator {
+    .fd-shellbar__separator:not(.fd-shellbar-never-hide) {
         display: none;
     }
 }
