@@ -1,3 +1,13 @@
+## 0.65.0-rc.31 (2026-10-01)
+
+### 🩹 Fixes
+
+- **core:** align mobile combobox selection with approve and cancel lifecycle ([#14571](https://github.com/SAP/fundamental-ngx/pull/14571))
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.65.0-rc.30 (2026-10-01)
 
 This was a version bump only for core to align it with other projects, there were no code changes.
