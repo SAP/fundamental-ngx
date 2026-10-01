@@ -57,6 +57,9 @@ export class MessageViewComponent extends MessageListShared implements OnDestroy
 
     /** Opens the dialog. */
     open(): void {
+        // Reset to list view when opening the dialog
+        this.showList();
+
         const dialogConfig = this.mobile()
             ? {
                   focusTrapped: true,

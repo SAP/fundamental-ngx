@@ -221,6 +221,7 @@ export class MessagesListComponent implements AfterViewInit {
     /** @hidden Slide list out left, details in from right. */
     private _animateListToDetails(listEl: HTMLElement, detailsEl: HTMLElement): void {
         if (typeof listEl.animate !== 'function') {
+            this._focusDetailsView();
             return;
         }
 
@@ -243,6 +244,7 @@ export class MessagesListComponent implements AfterViewInit {
         this._detailsAnimation.finished
             .then(() => {
                 this._detailsAnimation = null;
+                this._focusDetailsView();
             })
             .catch(() => {
                 this._detailsAnimation = null;
@@ -282,5 +284,19 @@ export class MessagesListComponent implements AfterViewInit {
             .catch(() => {
                 this._listAnimation = null;
             });
+    }
+
+    /** @hidden Focus the first interactive element in the details view. */
+    private _focusDetailsView(): void {
+        if (!this.detailsView?.nativeElement) {
+            return;
+        }
+
+        // Try to find the first tabbable element in the details view
+        const firstTabbable = this._tabbableService.getTabbableElement(this.detailsView.nativeElement);
+
+        if (firstTabbable) {
+            firstTabbable.focus();
+        }
     }
 }
