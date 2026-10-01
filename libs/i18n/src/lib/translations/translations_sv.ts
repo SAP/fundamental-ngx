@@ -241,7 +241,7 @@ export default {
         search: 'Sök'
     },
     coreSlider: {
-        ariaLabel: 'Slider Handle'
+        ariaLabel: 'Reglagehandtag'
     },
     coreSplitButton: {
         arialLabel: 'Delningsknapp',

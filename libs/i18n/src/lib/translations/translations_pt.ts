@@ -241,7 +241,7 @@ export default {
         search: 'Pesquisar'
     },
     coreSlider: {
-        ariaLabel: 'Slider Handle'
+        ariaLabel: 'Alça do controle deslizante'
     },
     coreSplitButton: {
         arialLabel: 'Botão Ratear',

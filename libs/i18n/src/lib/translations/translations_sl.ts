@@ -242,7 +242,7 @@ export default {
         search: 'Iskanje'
     },
     coreSlider: {
-        ariaLabel: 'Slider Handle'
+        ariaLabel: 'Držalo drsnika'
     },
     coreSplitButton: {
         arialLabel: 'Razdelilni gumb',

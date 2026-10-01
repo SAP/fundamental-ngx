@@ -242,7 +242,7 @@ export default {
         search: 'بحث'
     },
     coreSlider: {
-        ariaLabel: 'Slider Handle'
+        ariaLabel: 'مؤشر مربع التمرير'
     },
     coreSplitButton: {
         arialLabel: 'الزر ’تقسيم‘',

@@ -241,7 +241,7 @@ export default {
         search: 'Ara'
     },
     coreSlider: {
-        ariaLabel: 'Slider Handle'
+        ariaLabel: 'Kaydırıcı Tutamacı'
     },
     coreSplitButton: {
         arialLabel: 'İki bölümlü düğme',

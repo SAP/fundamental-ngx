@@ -240,7 +240,7 @@ export default {
         search: '搜尋'
     },
     coreSlider: {
-        ariaLabel: 'Slider Handle'
+        ariaLabel: '滑動軸控制器'
     },
     coreSplitButton: {
         arialLabel: '拆分按鈕',

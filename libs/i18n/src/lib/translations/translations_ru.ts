@@ -108,7 +108,7 @@ export default {
         moreLabel: 'больше {count}'
     },
     coreFormMessage: {
-        error: 'Недопустимый ввод',
+        error: 'Недействительный ввод',
         information: 'Информация',
         success: 'Успешно',
         warning: 'Предупреждение'
@@ -195,7 +195,7 @@ export default {
         critical: 'Выведено предупреждение',
         indicationColor: 'Цвет индикации',
         informative: 'Информативная запись',
-        negative: 'Недопустимый ввод',
+        negative: 'Недействительный ввод',
         positive: 'Запись успешно проверена'
     },
     coreOverflowLayout: {
@@ -242,7 +242,7 @@ export default {
         search: 'Поиск'
     },
     coreSlider: {
-        ariaLabel: 'Slider Handle'
+        ariaLabel: 'Ползунок'
     },
     coreSplitButton: {
         arialLabel: 'Разделенная кнопка',
@@ -441,7 +441,7 @@ export default {
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Опции выбора',
         inputIconTitle: 'Опции выбора',
-        invalidEntryError: 'Недопустимый ввод',
+        invalidEntryError: 'Недействительный ввод',
         mobileShowAllItemsButton: 'Показать все позиции',
         mobileShowSelectedItemsButton: 'Показать выбранные позиции'
     },

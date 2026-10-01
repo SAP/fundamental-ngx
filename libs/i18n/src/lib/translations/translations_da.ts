@@ -241,7 +241,7 @@ export default {
         search: 'Søg'
     },
     coreSlider: {
-        ariaLabel: 'Slider Handle'
+        ariaLabel: 'Greb for skyder'
     },
     coreSplitButton: {
         arialLabel: 'Opdelt trykknap',
