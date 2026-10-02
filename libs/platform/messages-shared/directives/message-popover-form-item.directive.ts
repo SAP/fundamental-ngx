@@ -3,8 +3,7 @@ import { NgControl } from '@angular/forms';
 import { MessagePopoverConfig } from '../default-config';
 
 @Directive({
-    selector: '[fdpMessagePopoverFormItem]',
-    standalone: true
+    selector: '[fdpMessagePopoverFormItem]'
 })
 export class MessagePopoverFormItemDirective {
     /** Form item name. */

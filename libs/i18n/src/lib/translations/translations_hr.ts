@@ -438,6 +438,20 @@ export default {
             requiredTrue: 'Ovo je polje obvezno'
         }
     },
+    platformMessageView: {
+        additionalInformation: 'Additional information available via reading keys',
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        errorButton: 'Error',
+        headerRoleDescription: 'Interactive Header',
+        informationButton: 'Information',
+        successButton: 'Success',
+        title: 'Messages',
+        warningButton: 'Warning'
+    },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Odaberi mogućnosti',
         inputIconTitle: 'Odaberi mogućnosti',

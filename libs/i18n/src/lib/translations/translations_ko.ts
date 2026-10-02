@@ -436,6 +436,20 @@ export default {
             requiredTrue: '필수 필드입니다.'
         }
     },
+    platformMessageView: {
+        additionalInformation: 'Additional information available via reading keys',
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        errorButton: 'Error',
+        headerRoleDescription: 'Interactive Header',
+        informationButton: 'Information',
+        successButton: 'Success',
+        title: 'Messages',
+        warningButton: 'Warning'
+    },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     platformMultiCombobox: {
         inputGlyphAriaLabel: '옵션 선택',
         inputIconTitle: '옵션 선택',

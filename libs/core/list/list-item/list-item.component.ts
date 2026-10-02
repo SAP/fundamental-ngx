@@ -1,5 +1,6 @@
 import {
     AfterContentInit,
+    AfterViewInit,
     booleanAttribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -7,6 +8,7 @@ import {
     ContentChild,
     ContentChildren,
     DestroyRef,
+    ElementRef,
     forwardRef,
     HostBinding,
     HostListener,
@@ -16,6 +18,7 @@ import {
     output,
     QueryList,
     TemplateRef,
+    ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 
@@ -68,7 +71,10 @@ let listItemUniqueId = 0;
     imports: [FormItemComponent, DecimalPipe, IconComponent, FdTranslatePipe],
     exportAs: 'fdListItem'
 })
-export class ListItemComponent<T = any> extends ListFocusItem<T> implements AfterContentInit, ListItemInterface {
+export class ListItemComponent<T = any>
+    extends ListFocusItem<T>
+    implements AfterContentInit, AfterViewInit, ListItemInterface
+{
     /** Whether list item is selected */
     @Input()
     @HostBinding('class.is-selected')
@@ -185,6 +191,10 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
     /** @hidden */
     @ContentChildren(FD_BUTTON_COMPONENT, { descendants: true })
     buttons: QueryList<ButtonComponent>;
+
+    /** @hidden */
+    @ViewChild('counterElement', { read: ElementRef })
+    counterElement: ElementRef<HTMLElement>;
 
     /** @hidden Implementation of KeyboardSupportItemInterface */
     readonly keyDown = output<KeyboardEvent>();
@@ -316,14 +326,32 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
     }
 
     /** @hidden */
+    ngAfterViewInit(): void {
+        this._moveCounterToLink();
+    }
+
+    /** @hidden */
     private _listenOnLinkQueryChange(): void {
         this.linkDirectives.changes
             .pipe(startWith(this.linkDirectives), takeUntilDestroyed(this._destroyRef))
             .subscribe(() => {
                 this._onLinkListChanged$.next();
                 this.link = this.linkDirectives.length > 0;
+                this._moveCounterToLink();
                 this._changeDetectorRef.detectChanges();
             });
+    }
+
+    /** @hidden Move counter element inside list-link if it exists */
+    private _moveCounterToLink(): void {
+        if (this.counterElement && this.linkDirectives.length > 0) {
+            const listLink = this.linkDirectives.first.elementRef.nativeElement;
+            const counter = this.counterElement.nativeElement;
+            // Only move if counter is not already inside the link
+            if (!listLink.contains(counter)) {
+                listLink.appendChild(counter);
+            }
+        }
     }
 
     /** @hidden */
