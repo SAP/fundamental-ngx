@@ -51,6 +51,7 @@
             [attr.aria-required]="required"
             [placeholder]="placeholder"
             [disabled]="disabled"
+            [ngModelOptions]="{ standalone: true }"
             [ngModel]="_inputFieldDate | translateDayPeriod"
             (keydown.f4)="togglePopover()"
             (keyup.enter)="handleInputChange($any($event.target).value, false)"
@@ -75,7 +76,7 @@
             [class.fd-datetime__display-type-switcher--desktop]="!mobile || (mobile && mobileLandscape)"
             [class.fd-datetime__display-type-switcher--mobile]="mobile && mobilePortrait"
         >
-            <fd-segmented-button [(ngModel)]="_displayType">
+            <fd-segmented-button [ngModelOptions]="{ standalone: true }" [(ngModel)]="_displayType">
                 <button
                     fd-button
                     [label]="('coreDatetimePicker.displayTypeDateLabel' | fdTranslate)()"
@@ -124,6 +125,7 @@
                     [disabled]="disabled"
                     [elementsAtOnce]="5"
                     [keepTwoDigits]="keepTwoDigitsTime"
+                    [ngModelOptions]="{ standalone: true }"
                     [ngModel]="_tempTime"
                     [spinnerButtons]="spinnerButtons"
                     [meridian]="_meridian"

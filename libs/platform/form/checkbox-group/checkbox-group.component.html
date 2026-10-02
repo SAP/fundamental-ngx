@@ -71,6 +71,7 @@
         [title]="title"
         [disabled]="checkboxDisabled"
         [state]="state"
+        [ngModelOptions]="{ standalone: true }"
         [ngModel]="_selectionModel.isSelected(checkboxValue) ? checkboxValue : false"
         (ngModelChange)="onModelChanged($event, checkboxValue)"
         (click)="onCheckboxClick(idx, source, $event)"

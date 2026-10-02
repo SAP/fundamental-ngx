@@ -10,6 +10,7 @@
         [ariaLabel]="ariaLabel"
         [ariaLabelledBy]="ariaLabelledBy"
         [ariaDescribedBy]="ariaDescribedBy"
+        [ngModelOptions]="{ standalone: true }"
         [ngModel]="_currentValue"
         (ngModelChange)="_valueChange($event, true)"
     >

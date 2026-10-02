@@ -84,6 +84,7 @@
             [placeholder]="placeholder"
             [id]="inputId"
             [(ngModel)]="inputText"
+            [ngModelOptions]="{ standalone: true }"
             (onComplete)="handleAutoComplete($event)"
             (keydown)="onInputKeydownHandler($event)"
             (paste)="onInputKeydownHandler('fromPaste')"
