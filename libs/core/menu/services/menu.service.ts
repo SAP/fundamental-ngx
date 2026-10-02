@@ -1,4 +1,15 @@
-import { DOWN_ARROW, END, ENTER, ESCAPE, HOME, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
+import {
+    DOWN_ARROW,
+    END,
+    ENTER,
+    ESCAPE,
+    HOME,
+    LEFT_ARROW,
+    RIGHT_ARROW,
+    SPACE,
+    TAB,
+    UP_ARROW
+} from '@angular/cdk/keycodes';
 import { ElementRef, inject, Injectable, OnDestroy, Renderer2 } from '@angular/core';
 import { KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
 import { Observable, Subject } from 'rxjs';
@@ -255,6 +266,12 @@ export class MenuService implements OnDestroy {
 
     /** @hidden Handles keydown events: navigation and scroll prevention for Space/Enter */
     private _handleKeydown(event: KeyboardEvent): void {
+        if (KeyUtil.isKeyCode(event, TAB) && !this.menuComponent.mobile()) {
+            this.menuComponent.close();
+            // Let the browser continue tabbing from the menu trigger.
+            return;
+        }
+
         if (!this.focusedNode) {
             return;
         }
