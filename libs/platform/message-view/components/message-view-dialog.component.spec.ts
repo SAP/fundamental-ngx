@@ -13,8 +13,8 @@ describe('MessageViewDialogComponent', () => {
 
     beforeEach(async () => {
         mockMessageView = {
-            currentScreen: signal('list'),
-            currentEntry: signal(null),
+            currentScreen: 'list',
+            currentEntry: null,
             title: signal('Test Title'),
             detailsTitle: signal('Test Details'),
             _currentErrorType: signal('all'),
@@ -57,7 +57,7 @@ describe('MessageViewDialogComponent', () => {
     });
 
     it('should have access to messageView properties', () => {
-        expect(component.messageView.currentScreen()).toBe('list');
+        expect(component.messageView.currentScreen).toBe('list');
         expect(component.messageView.title()).toBe('Test Title');
         expect(component.messageView.detailsTitle()).toBe('Test Details');
     });

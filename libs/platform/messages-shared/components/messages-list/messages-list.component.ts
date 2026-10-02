@@ -25,6 +25,7 @@ import { TextComponent } from '@fundamental-ngx/core/text';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { debounceTime } from 'rxjs';
 import { MessagePopoverEntry, MessagePopoverErrorGroup } from '../../models/message-popover-entry.interface';
+import { getIconForMessageType } from '../../utils';
 
 const ANIMATION_EASING = 'cubic-bezier(0, 0, 0.2, 1)';
 const ANIMATION_DURATION = 100;
@@ -35,7 +36,7 @@ const ANIMATION_DURATION = 100;
     styleUrl: './messages-list.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [TabbableElementService],
+    providers: [TabbableElementService, FdTranslatePipe],
     host: {
         class: 'fd-message-popover__view-container'
     },
@@ -167,18 +168,7 @@ export class MessagesListComponent implements AfterViewInit {
 
     /** @hidden Map message type to icon name */
     protected getIconForType(type: string): string {
-        switch (type) {
-            case 'error':
-                return 'error';
-            case 'success':
-                return 'sys-enter-2';
-            case 'warning':
-                return 'alert';
-            case 'information':
-                return 'information';
-            default:
-                return 'sys-help-2';
-        }
+        return getIconForMessageType(type);
     }
 
     /** @hidden Get heading text for fd-text component */

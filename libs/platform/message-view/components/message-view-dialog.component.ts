@@ -14,7 +14,7 @@ import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { FdLanguageKeyIdentifier, FdTranslatePipe } from '@fundamental-ngx/i18n';
-import { MessagesListComponent } from '@fundamental-ngx/platform/messages-shared';
+import { MessagesListComponent, getIconForMessageType } from '@fundamental-ngx/platform/messages-shared';
 import { MessageViewComponent } from '../message-view.component';
 
 @Component({
@@ -44,18 +44,7 @@ export class MessageViewDialogComponent {
 
     /** @hidden Map message type to icon name */
     protected getIconForType(type: string): string {
-        switch (type) {
-            case 'error':
-                return 'error';
-            case 'success':
-                return 'sys-enter-2';
-            case 'warning':
-                return 'alert';
-            case 'information':
-                return 'information';
-            default:
-                return 'sys-help-2';
-        }
+        return getIconForMessageType(type);
     }
 
     /** @hidden Map message type to title translation key */

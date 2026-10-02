@@ -10,7 +10,6 @@ import {
 } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
-import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { MessageListShared, MessagePopoverErrorGroup } from '@fundamental-ngx/platform/messages-shared';
 import { MessageViewDialogComponent } from './components/message-view-dialog.component';
 
@@ -19,8 +18,7 @@ import { MessageViewDialogComponent } from './components/message-view-dialog.com
     template: ``,
     styleUrl: './message-view.component.scss',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [FdTranslatePipe]
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MessageViewComponent extends MessageListShared implements OnDestroy {
     /**
@@ -42,6 +40,24 @@ export class MessageViewComponent extends MessageListShared implements OnDestroy
      * Whether the message view dialog should be opened in mobile mode.
      */
     readonly mobile = input(false, { transform: booleanAttribute });
+
+    /**
+     * Width of the dialog when not in mobile mode.
+     * @default '24rem'
+     */
+    readonly width = input<string>('24rem');
+
+    /**
+     * Height of the dialog when not in mobile mode.
+     * @default 'auto'
+     */
+    readonly height = input<string>('auto');
+
+    /**
+     * Whether the dialog should be resizable when not in mobile mode.
+     * @default true
+     */
+    readonly resizable = input(true, { transform: booleanAttribute });
 
     /** @hidden */
     protected readonly dialogService = inject(DialogService);
@@ -69,9 +85,9 @@ export class MessageViewComponent extends MessageListShared implements OnDestroy
             : {
                   focusTrapped: true,
                   disablePaddings: true,
-                  width: '24rem',
-                  height: 'auto',
-                  resizable: true
+                  width: this.width(),
+                  height: this.height(),
+                  resizable: this.resizable()
               };
         this.dialogRef = this.dialogService.open(MessageViewDialogComponent, dialogConfig, this.injector);
     }

@@ -20,7 +20,7 @@
             <div fd-popover-body-header>
                 <div fd-bar barDesign="header" class="fd-bar--growing">
                     <div fd-bar-left>
-                        @if (currentScreen() === 'list') {
+                        @if (currentScreen === 'list') {
                             <fd-segmented-button
                                 [ngModel]="_currentErrorType()"
                                 (ngModelChange)="_currentErrorType.set($event)"
@@ -42,7 +42,7 @@
                                 }
                             </fd-segmented-button>
                         }
-                        @if (currentScreen() === 'details') {
+                        @if (currentScreen === 'details') {
                             <button
                                 fd-button
                                 fdkInitialFocus
@@ -59,9 +59,9 @@
                 </div>
             </div>
             <fdp-messages-list
-                [currentScreen]="currentScreen()"
+                [currentScreen]="currentScreen"
                 [filteredErrors]="_filteredErrors$()"
-                [currentEntry]="currentEntry()"
+                [currentEntry]="currentEntry"
                 (openDetails)="showDetails($event)"
                 (closePopover)="_closePopover($event)"
                 (focusItem)="focusItem.emit($event)"

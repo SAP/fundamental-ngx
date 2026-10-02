@@ -37,7 +37,7 @@ describe('MessageViewComponent', () => {
     });
 
     it('should show list screen by default', () => {
-        expect(component.currentScreen()).toBe('list');
+        expect(component.currentScreen).toBe('list');
     });
 
     it('should switch to details screen', () => {
@@ -52,15 +52,15 @@ describe('MessageViewComponent', () => {
         };
 
         component.showDetails(entry);
-        expect(component.currentScreen()).toBe('details');
-        expect(component.currentEntry()).toBe(entry);
+        expect(component.currentScreen).toBe('details');
+        expect(component.currentEntry).toBe(entry);
     });
 
     it('should switch back to list screen', () => {
-        component.currentScreen.set('details');
+        component.currentScreen = 'details';
         component.showList();
-        expect(component.currentScreen()).toBe('list');
-        expect(component.currentEntry()).toBeNull();
+        expect(component.currentScreen).toBe('list');
+        expect(component.currentEntry).toBeNull();
     });
 
     it('should accept messages input', () => {

@@ -68,6 +68,9 @@ export class ExampleComponent {
 - `title: string` - Title for the dialog header
 - `detailsTitle: string` - Title for the details view
 - `mobile: boolean` - Whether the dialog should be opened in mobile mode
+- `width: string` - Width of the dialog when not in mobile mode (default: `'24rem'`)
+- `height: string` - Height of the dialog when not in mobile mode (default: `'auto'`)
+- `resizable: boolean` - Whether the dialog should be resizable when not in mobile mode (default: `true`)
 
 ### Outputs
 

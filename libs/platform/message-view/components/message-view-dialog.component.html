@@ -1,6 +1,6 @@
 <fd-dialog [role]="'alertdialog'">
     <fd-dialog-header [attr.aria-roledescription]="('platformMessageView.headerRoleDescription' | fdTranslate)()">
-        @if (messageView.currentScreen() === 'details') {
+        @if (messageView.currentScreen === 'details') {
             <ng-template fdkTemplate="header">
                 <div fd-bar-left>
                     <button
@@ -23,7 +23,7 @@
                 {{ messageView.title() || ('platformMessageView.title' | fdTranslate)() }}
             </h1>
         }
-        @if (messageView.currentScreen() === 'list') {
+        @if (messageView.currentScreen === 'list') {
             <ng-template fdkTemplate="subheader">
                 <div fd-bar-left>
                     <fd-segmented-button
@@ -56,9 +56,9 @@
     </fd-dialog-header>
     <fd-dialog-body>
         <fdp-messages-list
-            [currentScreen]="messageView.currentScreen()"
+            [currentScreen]="messageView.currentScreen"
             [filteredErrors]="messageView._filteredErrors$()"
-            [currentEntry]="messageView.currentEntry()"
+            [currentEntry]="messageView.currentEntry"
             (openDetails)="messageView.showDetails($event)"
             (closePopover)="dialogRef.close()"
             (focusItem)="messageView.focusItem.emit($event)"

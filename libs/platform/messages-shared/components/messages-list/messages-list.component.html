@@ -12,7 +12,7 @@
         ></ng-template>
     </ng-template>
     <ng-template #stringHeading>
-        {{ item.heading.message }}
+        {{ (item.heading.message | fdTranslate: { error: item.heading.error } : item.heading.message)() }}
     </ng-template>
     <ng-template
         [ngTemplateOutlet]="
@@ -38,7 +38,7 @@
         ></ng-template>
     </ng-template>
     <ng-template #stringDescription>
-        {{ item.description.message }}
+        {{ (item.description.message | fdTranslate: { error: item.description.error } : item.description.message)() }}
     </ng-template>
     <ng-template
         [ngTemplateOutlet]="
@@ -91,7 +91,12 @@
                         </ng-template>
                         <ng-template #listSubtitle>
                             @if (item.heading.type === 'string' && item.heading.message) {
-                                <fd-text [text]="getHeadingText(item)" [maxLines]="3" [expandable]="true"></fd-text>
+                                <fd-text
+                                    [text]="getHeadingText(item)"
+                                    [maxLines]="3"
+                                    [expandable]="true"
+                                    (fdkClicked)="$event.stopPropagation()"
+                                ></fd-text>
                             } @else {
                                 <span fd-list-subline>
                                     <ng-template

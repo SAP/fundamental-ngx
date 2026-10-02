@@ -19,7 +19,7 @@ export const ROUTES: Routes = [
 ];
 export const LIBRARY_NAME = 'message-view';
 export const API_FILE_KEY = 'messageView';
-export const I18N_KEY = 'platformMessagePopover';
+export const I18N_KEY = 'platformMessageView';
 
 export * from './examples';
 export * from './message-view-docs.component';

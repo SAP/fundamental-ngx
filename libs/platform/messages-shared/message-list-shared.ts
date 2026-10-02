@@ -20,10 +20,10 @@ export abstract class MessageListShared implements MessagePopover {
     focusItem = new EventEmitter<MessagePopoverEntry>();
 
     /** Current message popover screen. Can be `list` or `details`. */
-    readonly currentScreen = signal<'list' | 'details'>('list');
+    currentScreen: 'list' | 'details' = 'list';
 
     /** Current error entry. */
-    readonly currentEntry = signal<Nullable<MessagePopoverEntry>>(null);
+    currentEntry: Nullable<MessagePopoverEntry> = null;
 
     /** @hidden */
     _currentErrorType: WritableSignal<MessagePopoverError['group']> = signal('all');
@@ -94,13 +94,13 @@ export abstract class MessageListShared implements MessagePopover {
 
     /** @hidden */
     showList(): void {
-        this.currentScreen.set('list');
-        this.currentEntry.set(null);
+        this.currentScreen = 'list';
+        this.currentEntry = null;
     }
 
     /** @hidden */
     showDetails(entry: MessagePopoverEntry): void {
-        this.currentScreen.set('details');
-        this.currentEntry.set(entry);
+        this.currentScreen = 'details';
+        this.currentEntry = entry;
     }
 }
