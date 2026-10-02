@@ -1,3 +1,13 @@
+## 0.65.0-rc.32 (2026-10-02)
+
+### 🚀 Features
+
+- **agents:** add docs-auditor Claude Code agent for stale pattern detection ([#14564](https://github.com/SAP/fundamental-ngx/pull/14564))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
 ## 0.65.0-rc.31 (2026-10-01)
 
 This was a version bump only for moment-adapter to align it with other projects, there were no code changes.
