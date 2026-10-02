@@ -46,6 +46,7 @@
                 [tablet]="tablet"
                 [disabled]="disabled"
                 [keepTwoDigits]="keepTwoDigitsTime"
+                [ngModelOptions]="{ standalone: true }"
                 [ngModel]="time"
                 (ngModelChange)="_timeComponentValueChanged($event)"
                 [meridian]="_meridian"

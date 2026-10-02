@@ -22,6 +22,7 @@
                     <div fd-bar-left>
                         @if (currentScreen === 'list') {
                             <fd-segmented-button
+                                [ngModelOptions]="{ standalone: true }"
                                 [ngModel]="_currentErrorType$()"
                                 (ngModelChange)="_currentErrorType$.set($event)"
                             >

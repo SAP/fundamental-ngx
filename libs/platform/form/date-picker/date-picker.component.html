@@ -42,6 +42,7 @@
     [mobileConfig]="mobileConfig"
     [mobileLandscape]="mobileLandscape"
     [mobilePortrait]="mobilePortrait"
+    [ngModelOptions]="{ standalone: true }"
     [(ngModel)]="value"
     (ngModelChange)="handleDateChange($event)"
     (isOpenChange)="handleOpenChange($event)"

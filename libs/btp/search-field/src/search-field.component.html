@@ -5,6 +5,7 @@
         type="search"
         [attr.aria-label]="('btpSearchField.searchInputAriaLabel' | fdTranslate)()"
         class="fd-search-field__input"
+        [ngModelOptions]="{ standalone: true }"
         [ngModel]="_value"
         (ngModelChange)="updateValue($event)"
         (keydown.enter)="_search()"
