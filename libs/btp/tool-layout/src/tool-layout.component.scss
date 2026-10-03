@@ -4,6 +4,11 @@
     width: 100%;
 }
 
+// Keep snapped navigation flyouts above sibling content.
+.fd-tool-layout__navigation-container {
+    z-index: 1;
+}
+
 .fd-tool-layout__content-container {
     overflow: hidden;
 }
