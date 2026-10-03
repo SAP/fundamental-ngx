@@ -124,6 +124,25 @@ describe('TableComponent Virtual Scrolling', () => {
             expect(hostComponent.virtualScrollDirective.virtualScroll).toBe(true);
         });
 
+        it.each([
+            [300, 8],
+            [283, 7]
+        ])('should fit whole rows in a %i px scroll viewport', (viewportHeight, expectedRows) => {
+            hostComponent.virtualScrollDirective.rowHeight = 32;
+            const scrollViewport = tableComponent.tableScrollable.elementRef.nativeElement;
+            const header = scrollViewport.querySelector('thead');
+            if (!header) {
+                throw new Error('Expected the table header to be rendered');
+            }
+            jest.spyOn(tableComponent.tableContainer.nativeElement, 'clientHeight', 'get').mockReturnValue(300);
+            jest.spyOn(scrollViewport, 'clientHeight', 'get').mockReturnValue(viewportHeight);
+            jest.spyOn(header, 'clientHeight', 'get').mockReturnValue(34);
+
+            hostComponent.virtualScrollDirective.calculateVirtualScrollRows();
+
+            expect(tableComponent.getCurrentlyRenderedRows()).toHaveLength(expectedRows);
+        });
+
         it('should set up itemFocused subscription on first calculateVirtualScrollRows call', () => {
             // Create a new component to test fresh subscription setup
             const newFixture = TestBed.createComponent(TableHostComponent);
