@@ -426,6 +426,45 @@ describe('PopoverService', () => {
             fixture.detectChanges();
         });
 
+        it.each(['popover', 'body'])(
+            'should restore trigger focus after an outside click leaves focus on the %s',
+            fakeAsync((focusLocation) => {
+                component.triggerRef.nativeElement.focus();
+                service.open();
+                fixture.detectChanges();
+                tick();
+                const action = document.querySelector<HTMLButtonElement>('.popover-action') as HTMLButtonElement;
+                action.focus();
+                if (focusLocation === 'body') {
+                    action.blur();
+                }
+
+                component.siblingRef.nativeElement.click();
+                fixture.detectChanges();
+                tick();
+
+                expect(service.isOpen()).toBe(false);
+                expect(document.activeElement).toBe(component.triggerRef.nativeElement);
+            })
+        );
+
+        it('should respect disabled focus restoration after clicking outside', fakeAsync(() => {
+            service.restoreFocusOnClose.set(false);
+            component.triggerRef.nativeElement.focus();
+            service.open();
+            fixture.detectChanges();
+            tick();
+            const action = document.querySelector<HTMLButtonElement>('.popover-action') as HTMLButtonElement;
+            action.focus();
+
+            component.siblingRef.nativeElement.click();
+            fixture.detectChanges();
+            tick();
+
+            expect(service.isOpen()).toBe(false);
+            expect(document.activeElement).not.toBe(component.triggerRef.nativeElement);
+        }));
+
         it('should preserve focus on an outside button when it closes the popover', fakeAsync(() => {
             const outsideButton = document.createElement('button');
             fixture.nativeElement.appendChild(outsideButton);
