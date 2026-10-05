@@ -15,8 +15,10 @@ import {
     inject,
     input,
     Input,
+    OnChanges,
     output,
     QueryList,
+    SimpleChanges,
     TemplateRef,
     ViewChild,
     ViewEncapsulation
@@ -73,7 +75,7 @@ let listItemUniqueId = 0;
 })
 export class ListItemComponent<T = any>
     extends ListFocusItem<T>
-    implements AfterContentInit, AfterViewInit, ListItemInterface
+    implements AfterContentInit, AfterViewInit, OnChanges, ListItemInterface
 {
     /** Whether list item is selected */
     @Input()
@@ -328,6 +330,14 @@ export class ListItemComponent<T = any>
     /** @hidden */
     ngAfterViewInit(): void {
         this._moveCounterToLink();
+    }
+
+    /** @hidden */
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes['counter'] && !changes['counter'].firstChange) {
+            // Wait for next tick to ensure the counter element is updated in the DOM
+            setTimeout(() => this._moveCounterToLink());
+        }
     }
 
     /** @hidden */
