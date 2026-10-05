@@ -294,7 +294,13 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
         const scrollViewport = this._table.tableScrollable.elementRef.nativeElement;
         let tableHeight = scrollViewport.clientHeight;
         tableHeight = tableHeight - (scrollViewport.querySelector('thead')?.clientHeight ?? 0);
-        const numberOfRows = Math.floor(tableHeight / this.rowHeight);
+        const renderedRows = scrollViewport.querySelectorAll<HTMLTableRowElement>('tbody[fd-table-body] > tr');
+        // Cell controls and borders can make rows taller than the configured minimum.
+        let rowHeight = this.rowHeight;
+        for (const row of renderedRows) {
+            rowHeight = Math.max(rowHeight, row.offsetHeight);
+        }
+        const numberOfRows = Math.floor(tableHeight / rowHeight);
         if (this._table._tableRowsVisible.length < numberOfRows) {
             return this._table._tableRowsVisible.length;
         } else {
