@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "button.component.ts",
   "sourceLine": 61,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/047f9ed5fa/libs/core/button/button.component.ts#L61",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/8a61347a26/libs/core/button/button.component.ts#L61",
   "description": "Button directive, used to enhance standard HTML buttons.\n\n``` selector: button[fd-button], a[fd-button] ```\n\n```html\n<button fd-button label=\"Button Text\"></button>\n<a fd-button label=\"Button Text\"></a>\n```",
   "inputs": [
     {

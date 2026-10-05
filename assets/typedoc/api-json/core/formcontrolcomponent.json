@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "form-control.component.ts",
   "sourceLine": 40,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/core/form/form-control/form-control.component.ts#L40",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/fa9aaa671c/libs/core/form/form-control/form-control.component.ts#L40",
   "description": "Directive intended for use on form controls.\n\n```html\n<input type=\"text\" fd-form-control />\n```",
   "inputs": [
     {

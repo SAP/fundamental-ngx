@@ -1,0 +1,24 @@
+<div>
+    <h3>Delayed Datasource Scenario</h3>
+
+    <button fd-button type="button" (click)="setValueBeforeDataload()">1. Set Banana + Carrot (before load)</button>
+
+    <button fd-button type="button" (click)="loadDataSourceDelayed()">2. Load Datasource (2 sec delay)</button>
+
+    <p>
+        Current State <strong>Datasource:</strong>
+        {{ dataSource().length === 0 ? 'EMPTY (not loaded yet)' : dataSource().length + ' items loaded' }}
+        <strong>Form Value:</strong>
+        <code>{{ formControl.value | json }}</code>
+    </p>
+
+    <fdp-multi-combobox
+        [dataSource]="dataSource()"
+        displayKey="name"
+        [formControl]="formControl"
+        placeholder="Select items (datasource delayed)..."
+        style="width: 100%; max-width: 400px"
+    ></fdp-multi-combobox>
+
+    <button fd-button type="button" (click)="reset()">Reset</button>
+</div>

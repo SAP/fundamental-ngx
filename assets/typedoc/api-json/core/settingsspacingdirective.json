@@ -1,0 +1,24 @@
+{
+  "name": "SettingsSpacingDirective",
+  "selector": "[fd-settings-spacing]",
+  "kind": "Directive",
+  "sourceFile": "settings-spacing.directive.ts",
+  "sourceLine": 14,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/fa9aaa671c/libs/core/settings/settings-spacing/settings-spacing.directive.ts#L14",
+  "description": "",
+  "inputs": [
+    {
+      "name": "size",
+      "type": "SettingsSpacingSize",
+      "default": null,
+      "description": "",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 15,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

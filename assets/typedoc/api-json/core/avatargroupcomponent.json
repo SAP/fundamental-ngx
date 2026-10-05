@@ -3,8 +3,8 @@
   "selector": "fd-avatar-group",
   "kind": "Component",
   "sourceFile": "avatar-group.component.ts",
-  "sourceLine": 65,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/core/avatar-group/avatar-group.component.ts#L65",
+  "sourceLine": 66,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/fa9aaa671c/libs/core/avatar-group/avatar-group.component.ts#L66",
   "description": "",
   "inputs": [
     {
@@ -14,17 +14,37 @@
       "description": "Aria label for the avatar group container.\nWhen not provided, a default label is generated from the i18n `coreAvatarGroup.ariaLabelGroup` key\nfor group type, or `coreAvatarGroup.ariaLabelIndividual` for individual type,\nusing the current displayed and hidden avatar counts as context.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 107,
+      "sourceLine": 99,
+      "since": null
+    },
+    {
+      "name": "maxVisibleItems",
+      "type": "null | number",
+      "default": null,
+      "description": "Maximum number of avatars to display before the overflow button appears.\nWhen set, the group shows exactly this many avatars regardless of the container width.\nWhen `null` (default), visibility is determined by the available container width.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 158,
       "since": null
     },
     {
       "name": "orientation",
       "type": "AvatarGroupOrientation",
-      "default": "'horizontal'",
+      "default": null,
       "description": "Orientation of the AvatarGroup control.\n\n`horizontal`: The avatars are displayed horizontally.\n`vertical`: The avatars are displayed vertically.",
-      "isSignal": false,
+      "isSignal": true,
       "deprecated": null,
-      "sourceLine": 82,
+      "sourceLine": 123,
+      "since": null
+    },
+    {
+      "name": "overflowButtonShape",
+      "type": "'circle' | 'square'",
+      "default": null,
+      "description": "Shape of the default overflow button.\nUse `'circle'` when the avatar group displays circle avatars, so the overflow button matches their shape.\nHas no effect when a custom overflow button is provided via `fdAvatarGroupOverflowButton`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 150,
       "since": null
     },
     {
@@ -44,7 +64,17 @@
       "description": "The title which is displayed when user opens the overflow popover.\nThis takes effect only when default overflow popover body is used,\notherwise the title should be set on the custom overflow popover body component.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 98,
+      "sourceLine": 90,
+      "since": null
+    },
+    {
+      "name": "popoverPlacement",
+      "type": "Placement",
+      "default": null,
+      "description": "Placement of the group overflow popover relative to the avatar group.\nDefaults to `'right'` when `orientation=\"vertical\"`, otherwise `'bottom'`.\nUse `'bottom-start'` / `'bottom-end'` to align to an edge.\nOnly applies to `type=\"group\"`.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 137,
       "since": null
     },
     {
@@ -54,7 +84,7 @@
       "description": "The spacing between the items depends on the size of the avatars in the group.\nThe size is also used for the default overflow button.\n`xs`, `s`, `m`, `l`, `xl`",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 90,
+      "sourceLine": 82,
       "since": null
     },
     {
@@ -64,7 +94,7 @@
       "description": "The AvatarGroup control has two group types:\n\n`group`: The avatars are displayed as partially overlapped on top of each other and the entire group has one click/tap area.\n`individual`: The avatars are displayed side-by-side and each avatar has its own click/tap area.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 73,
+      "sourceLine": 74,
       "since": null
     }
   ],

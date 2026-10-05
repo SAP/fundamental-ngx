@@ -1,0 +1,24 @@
+{
+  "name": "OptionGroup",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 41,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "headerText",
+      "type": "string",
+      "default": null,
+      "description": "Defines the header text of the group.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 46,
+      "since": null
+    }
+  ],
+  "outputs": [],
+  "methods": [],
+  "inherited": null
+}

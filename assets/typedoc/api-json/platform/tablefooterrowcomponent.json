@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "table-footer-row.component.ts",
   "sourceLine": 14,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/platform/table/components/table-footer-row/table-footer-row.component.ts#L14",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/fa9aaa671c/libs/platform/table/components/table-footer-row/table-footer-row.component.ts#L14",
   "description": "",
   "inputs": [],
   "outputs": [],
@@ -13,6 +13,46 @@
     "from": "TableRowDirective",
     "inputs": [
       {
+        "name": "activable",
+        "type": "boolean",
+        "default": null,
+        "description": "Whether the table row is activable",
+        "isSignal": true,
+        "deprecated": null,
+        "sourceLine": 47,
+        "since": null
+      },
+      {
+        "name": "active",
+        "type": "boolean",
+        "default": null,
+        "description": "Whether the table row is active.",
+        "isSignal": true,
+        "deprecated": null,
+        "sourceLine": 63,
+        "since": null
+      },
+      {
+        "name": "highlightActive",
+        "type": "boolean",
+        "default": null,
+        "description": "Whether to highlight active row when clicked.",
+        "isSignal": true,
+        "deprecated": null,
+        "sourceLine": 51,
+        "since": null
+      },
+      {
+        "name": "hoverable",
+        "type": "boolean",
+        "default": null,
+        "description": "Whether the table row is hoverable",
+        "isSignal": true,
+        "deprecated": null,
+        "sourceLine": 54,
+        "since": null
+      },
+      {
         "name": "listFocusedEventAnnouncer",
         "type": "(position: FocusableListPosition) => string",
         "default": null,
@@ -20,6 +60,36 @@
         "isSignal": true,
         "deprecated": null,
         "sourceLine": 102,
+        "since": null
+      },
+      {
+        "name": "main",
+        "type": "boolean",
+        "default": null,
+        "description": "Whether the table row is main row, it's concerned only on pop in mode",
+        "isSignal": true,
+        "deprecated": null,
+        "sourceLine": 57,
+        "since": null
+      },
+      {
+        "name": "role",
+        "type": "string",
+        "default": null,
+        "description": "ARIA role for the table row",
+        "isSignal": true,
+        "deprecated": null,
+        "sourceLine": 41,
+        "since": null
+      },
+      {
+        "name": "secondary",
+        "type": "boolean",
+        "default": null,
+        "description": "Whether the table row is secondary row, it's concerned only on pop in mode",
+        "isSignal": true,
+        "deprecated": null,
+        "sourceLine": 60,
         "since": null
       },
       {

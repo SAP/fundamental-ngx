@@ -1,0 +1,79 @@
+<div style="display: flex; gap: 3rem; flex-wrap: wrap; align-items: flex-start">
+    <div>
+        <p style="margin-bottom: 0.5rem">Default (square overflow button)</p>
+        <fd-avatar-group type="individual" size="m" overflowPopoverTitle="Team members" style="max-width: 200px">
+            @for (person of people; track person) {
+                <fd-avatar
+                    *fdAvatarGroupItem="details; title: person.firstName + ' ' + person.lastName"
+                    [circle]="true"
+                    [border]="true"
+                    size="m"
+                    role="img"
+                    [title]="person.firstName + ' ' + person.lastName"
+                    [label]="person.firstName[0] + person.lastName[0]"
+                    [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"
+                ></fd-avatar>
+                <ng-template #details>
+                    <fd-quick-view [id]="person.id">
+                        <fd-quick-view-title align="left">Business card</fd-quick-view-title>
+                        <fd-quick-view-subheader>
+                            <fd-avatar
+                                [circle]="true"
+                                size="s"
+                                role="img"
+                                [label]="person.firstName[0] + person.lastName[0]"
+                                [title]="person.firstName + ' ' + person.lastName"
+                            ></fd-avatar>
+                            <fd-quick-view-subheader-title
+                                >{{ person.firstName }} {{ person.lastName }}</fd-quick-view-subheader-title
+                            >
+                            <fd-quick-view-subheader-subtitle>{{ person.position }}</fd-quick-view-subheader-subtitle>
+                        </fd-quick-view-subheader>
+                    </fd-quick-view>
+                </ng-template>
+            }
+        </fd-avatar-group>
+    </div>
+
+    <div>
+        <p style="margin-bottom: 0.5rem"><code>overflowButtonShape="circle"</code></p>
+        <fd-avatar-group
+            type="individual"
+            size="m"
+            overflowPopoverTitle="Team members"
+            overflowButtonShape="circle"
+            style="max-width: 200px"
+        >
+            @for (person of people; track person) {
+                <fd-avatar
+                    *fdAvatarGroupItem="details; title: person.firstName + ' ' + person.lastName"
+                    [circle]="true"
+                    [border]="true"
+                    size="m"
+                    role="img"
+                    [title]="person.firstName + ' ' + person.lastName"
+                    [label]="person.firstName[0] + person.lastName[0]"
+                    [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"
+                ></fd-avatar>
+                <ng-template #details>
+                    <fd-quick-view [id]="person.id">
+                        <fd-quick-view-title align="left">Business card</fd-quick-view-title>
+                        <fd-quick-view-subheader>
+                            <fd-avatar
+                                [circle]="true"
+                                size="s"
+                                role="img"
+                                [label]="person.firstName[0] + person.lastName[0]"
+                                [title]="person.firstName + ' ' + person.lastName"
+                            ></fd-avatar>
+                            <fd-quick-view-subheader-title
+                                >{{ person.firstName }} {{ person.lastName }}</fd-quick-view-subheader-title
+                            >
+                            <fd-quick-view-subheader-subtitle>{{ person.position }}</fd-quick-view-subheader-subtitle>
+                        </fd-quick-view-subheader>
+                    </fd-quick-view>
+                </ng-template>
+            }
+        </fd-avatar-group>
+    </div>
+</div>

@@ -1,0 +1,1 @@
+import'./main-7S7RBFK2.js';var s=":host {}";export{s as default};

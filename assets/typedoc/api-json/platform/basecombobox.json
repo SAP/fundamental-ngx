@@ -4,7 +4,7 @@
   "kind": "Class",
   "sourceFile": "base-combobox.ts",
   "sourceLine": 72,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/platform/form/combobox/commons/base-combobox.ts#L72",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/fa9aaa671c/libs/platform/form/combobox/commons/base-combobox.ts#L72",
   "description": "Defines specific behavior for Input controls which deals with list of values including:\n - Select\n - RadioGroup\n - CheckboxGroup\n - ComboBox\n ...",
   "inputs": [
     {
@@ -206,7 +206,7 @@
       "signature": "(direction: FocusEscapeDirection) => void",
       "description": "Method passed to list component",
       "deprecated": null,
-      "sourceLine": 497,
+      "sourceLine": 496,
       "since": null,
       "parameters": [
         {

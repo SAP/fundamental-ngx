@@ -3,8 +3,8 @@
   "selector": "[fd-list], [fdList]",
   "kind": "Component",
   "sourceFile": "list.component.ts",
-  "sourceLine": 72,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/core/list/list.component.ts#L72",
+  "sourceLine": 73,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/fa9aaa671c/libs/core/list/list.component.ts#L73",
   "description": "The directive that represents a list.\nIt is used to display a list of items with simple information such as scopes, names, etc.",
   "inputs": [
     {
@@ -14,7 +14,17 @@
       "description": "Whether internal keyboard support should be enabled. It's enabled by default",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 110,
+      "sourceLine": 111,
+      "since": null
+    },
+    {
+      "name": "notification",
+      "type": "boolean",
+      "default": null,
+      "description": "Whether the list is a notification list used inside Settings Dialog",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 172,
       "since": null
     },
     {
@@ -24,7 +34,7 @@
       "description": "User-provided role.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 144,
+      "sourceLine": 145,
       "since": null
     },
     {
@@ -34,7 +44,7 @@
       "description": "Whether the list is used inside Settings Dialog",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 165,
+      "sourceLine": 166,
       "since": null
     },
     {
@@ -44,7 +54,7 @@
       "description": "Whether the list is used inside Settings Dialog Footer",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 168,
+      "sourceLine": 169,
       "since": null
     },
     {
@@ -54,7 +64,7 @@
       "description": "Whether to display unread notification indicator.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 130,
+      "sourceLine": 131,
       "since": null
     }
   ],
@@ -66,7 +76,7 @@
       "description": "Event thrown, when focus escapes the list",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 134,
+      "sourceLine": 135,
       "since": null
     }
   ],
@@ -76,7 +86,7 @@
       "signature": "() => null | ListFocusItem<any>",
       "description": "",
       "deprecated": null,
-      "sourceLine": 234,
+      "sourceLine": 238,
       "since": null,
       "parameters": [],
       "returnType": "null | ListFocusItem<any>"
@@ -86,7 +96,7 @@
       "signature": "(index: number, updateOnly: boolean) => void",
       "description": "Set fake focus on element with passed index",
       "deprecated": null,
-      "sourceLine": 223,
+      "sourceLine": 227,
       "since": null,
       "parameters": [
         {

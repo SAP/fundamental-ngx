@@ -8,15 +8,10 @@ import { Select } from '@fundamental-ngx/ui5-webcomponents/select';
 import { Text } from '@fundamental-ngx/ui5-webcomponents/text';
 import { ListSelectionMode } from '@fundamental-ngx/ui5-webcomponents/types';
 
-// Import Fundamental Styles
-import 'fundamental-styles/dist/layout-grid.css';
-import 'fundamental-styles/dist/margins.css';
-import 'fundamental-styles/dist/paddings.css';
-
 @Component({
     selector: 'ui5-list-selection-modes-example',
     templateUrl: './selection-modes.html',
-    standalone: true,
+    styleUrls: ['./selection-modes.scss'],
     imports: [List, ListItemStandard, Label, Select, Option, Text]
 })
 export class ListSelectionModesExample {
@@ -32,12 +27,25 @@ export class ListSelectionModesExample {
         { value: ListSelectionMode.Delete, label: 'Delete Mode' }
     ]);
 
-    readonly countries = signal([
+    readonly countries = signal<
+        Array<{
+            name: string;
+            capital: string;
+            population: string;
+            type?: 'Inactive' | 'InactiveSelectable' | 'Active' | 'Detail' | 'Navigation';
+        }>
+    >([
         { name: 'Germany', capital: 'Berlin', population: '83M' },
         { name: 'France', capital: 'Paris', population: '67M' },
         { name: 'Italy', capital: 'Rome', population: '60M' },
         { name: 'Spain', capital: 'Madrid', population: '47M' },
-        { name: 'Poland', capital: 'Warsaw', population: '38M' }
+        { name: 'Poland (Inactive)', capital: 'Warsaw', population: '38M', type: 'Inactive' },
+        {
+            name: 'Netherlands (InactiveSelectable)',
+            capital: 'Amsterdam',
+            population: '17M',
+            type: 'InactiveSelectable'
+        }
     ]);
 
     onSelectionModeChange(event: UI5WrapperCustomEvent<Select, 'ui5Change'>): void {

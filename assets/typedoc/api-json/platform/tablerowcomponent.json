@@ -3,8 +3,8 @@
   "selector": "[fdp-table-row]",
   "kind": "Component",
   "sourceFile": "table-row.component.ts",
-  "sourceLine": 109,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/platform/table/components/table-row/table-row.component.ts#L109",
+  "sourceLine": 111,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/fa9aaa671c/libs/platform/table/components/table-row/table-row.component.ts#L111",
   "description": "",
   "inputs": [
     {
@@ -14,7 +14,7 @@
       "description": "Whether to enable checkbox tristate mode.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 132,
+      "sourceLine": 134,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Whether to fix the table header and footer. Default is true.\nNote that if the table contains freezable columns, the header and\nfooter will be fixed automatically, regardless of this input value.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 140,
+      "sourceLine": 142,
       "since": null
     },
     {
@@ -34,7 +34,7 @@
       "description": "The column `name` to freeze columns up to and including.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 148,
+      "sourceLine": 150,
       "since": null
     },
     {
@@ -44,7 +44,7 @@
       "description": "The column `name` to freeze columns after and including.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 152,
+      "sourceLine": 154,
       "since": null
     },
     {
@@ -54,7 +54,7 @@
       "description": "Row index.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 120,
+      "sourceLine": 122,
       "since": null
     },
     {
@@ -64,7 +64,7 @@
       "description": "Table Row.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 116,
+      "sourceLine": 118,
       "since": null
     },
     {
@@ -74,7 +74,7 @@
       "description": "Row ID.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 112,
+      "sourceLine": 114,
       "since": null
     },
     {
@@ -84,7 +84,7 @@
       "description": "Selectable flag key.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 128,
+      "sourceLine": 130,
       "since": null
     },
     {
@@ -94,7 +94,7 @@
       "description": "Selection column width.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 144,
+      "sourceLine": 146,
       "since": null
     },
     {
@@ -104,7 +104,7 @@
       "description": "Selection mode.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 124,
+      "sourceLine": 126,
       "since": null
     }
   ],
@@ -116,7 +116,7 @@
       "description": "Event emitted when keyboard drag performed.",
       "isSignal": false,
       "deprecated": null,
-      "sourceLine": 158,
+      "sourceLine": 160,
       "since": null
     }
   ],
@@ -125,6 +125,46 @@
     "from": "TableRowDirective",
     "inputs": [
       {
+        "name": "activable",
+        "type": "boolean",
+        "default": null,
+        "description": "Whether the table row is activable",
+        "isSignal": true,
+        "deprecated": null,
+        "sourceLine": 47,
+        "since": null
+      },
+      {
+        "name": "active",
+        "type": "boolean",
+        "default": null,
+        "description": "Whether the table row is active.",
+        "isSignal": true,
+        "deprecated": null,
+        "sourceLine": 63,
+        "since": null
+      },
+      {
+        "name": "highlightActive",
+        "type": "boolean",
+        "default": null,
+        "description": "Whether to highlight active row when clicked.",
+        "isSignal": true,
+        "deprecated": null,
+        "sourceLine": 51,
+        "since": null
+      },
+      {
+        "name": "hoverable",
+        "type": "boolean",
+        "default": null,
+        "description": "Whether the table row is hoverable",
+        "isSignal": true,
+        "deprecated": null,
+        "sourceLine": 54,
+        "since": null
+      },
+      {
         "name": "listFocusedEventAnnouncer",
         "type": "(position: FocusableListPosition) => string",
         "default": null,
@@ -132,6 +172,36 @@
         "isSignal": true,
         "deprecated": null,
         "sourceLine": 102,
+        "since": null
+      },
+      {
+        "name": "main",
+        "type": "boolean",
+        "default": null,
+        "description": "Whether the table row is main row, it's concerned only on pop in mode",
+        "isSignal": true,
+        "deprecated": null,
+        "sourceLine": 57,
+        "since": null
+      },
+      {
+        "name": "role",
+        "type": "string",
+        "default": null,
+        "description": "ARIA role for the table row",
+        "isSignal": true,
+        "deprecated": null,
+        "sourceLine": 41,
+        "since": null
+      },
+      {
+        "name": "secondary",
+        "type": "boolean",
+        "default": null,
+        "description": "Whether the table row is secondary row, it's concerned only on pop in mode",
+        "isSignal": true,
+        "deprecated": null,
+        "sourceLine": 60,
         "since": null
       },
       {

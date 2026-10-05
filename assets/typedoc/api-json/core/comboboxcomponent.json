@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "combobox.component.ts",
   "sourceLine": 150,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/core/combobox/combobox.component.ts#L150",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/fa9aaa671c/libs/core/combobox/combobox.component.ts#L150",
   "description": "Allows users to filter through results and select a value.\n\nSupports Angular Forms.\n```html\n<fd-combobox\n     [(ngModel)]=\"searchTerm\"\n     [dropdownValues]=\"dropdownValues\"\n     placeholder=\"Type some text...\">\n</fd-combobox>\n```",
   "inputs": [
     {
@@ -466,24 +466,24 @@
       "signature": "() => void",
       "description": "Handle dialog approval, closes popover and propagates data changes.",
       "deprecated": null,
-      "sourceLine": 641,
+      "sourceLine": 672,
       "since": null,
       "parameters": [],
       "returnType": "void"
     },
     {
       "name": "dialogDismiss",
-      "signature": "(term: any) => void",
-      "description": "Handle dialog dismissing, closes popover and sets backup data.",
+      "signature": "(term?: any) => void",
+      "description": "Handle dialog dismissing, restoring an unconfirmed mobile selection when needed.",
       "deprecated": null,
-      "sourceLine": 633,
+      "sourceLine": 660,
       "since": null,
       "parameters": [
         {
           "name": "term",
           "type": "any",
           "description": "",
-          "optional": false
+          "optional": true
         }
       ],
       "returnType": "void"
@@ -493,7 +493,7 @@
       "signature": "() => any",
       "description": "Current select value",
       "deprecated": null,
-      "sourceLine": 818,
+      "sourceLine": 860,
       "since": null,
       "parameters": [],
       "returnType": "any"
@@ -503,7 +503,7 @@
       "signature": "(event: AutoCompleteEvent) => void",
       "description": "Method that handles complete event from auto complete directive, setting the new value, and closing popover",
       "deprecated": null,
-      "sourceLine": 786,
+      "sourceLine": 824,
       "since": null,
       "parameters": [
         {
@@ -520,7 +520,7 @@
       "signature": "(direction: FocusEscapeDirection) => void",
       "description": "Method passed to list component",
       "deprecated": null,
-      "sourceLine": 722,
+      "sourceLine": 757,
       "since": null,
       "parameters": [
         {

@@ -27,7 +27,11 @@
                 (ui5ItemDelete)="onItemDelete($event)"
             >
                 @for (country of countries(); track country.name) {
-                <ui5-li [description]="'Capital: ' + country.capital" [additionalText]="country.population">
+                <ui5-li
+                    [type]="country.type"
+                    [description]="'Capital: ' + country.capital"
+                    [additionalText]="country.population"
+                >
                     {{ country.name }}
                 </ui5-li>
                 }
@@ -58,6 +62,14 @@
                 } @case ('Delete') {
                 <ui5-text>Items can be deleted using delete buttons. Click the delete button to remove items.</ui5-text>
                 } }
+            </div>
+            <div class="fd-padding--sm item-type-info">
+                <ui5-text>
+                    <strong>Note:</strong> This example includes <strong>Inactive</strong> and
+                    <strong>InactiveSelectable</strong> items. Inactive items cannot be clicked or selected, while
+                    InactiveSelectable items can be selected via checkbox/radio but do not respond to clicks or fire
+                    item-click events.
+                </ui5-text>
             </div>
         </div>
     </div>

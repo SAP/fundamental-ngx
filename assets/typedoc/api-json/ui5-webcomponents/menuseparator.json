@@ -3,7 +3,7 @@
   "selector": null,
   "kind": "Class",
   "sourceFile": "index.ts",
-  "sourceLine": 46,
+  "sourceLine": 40,
   "sourceUrl": "",
   "description": "",
   "inputs": [],
@@ -15,7 +15,7 @@
       "description": "Fired when the component is activated either with a mouse/tap or by using the Enter or Space key.\n\n*Note:** The event will not be fired if the `disabled` property is set to `true`.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 56,
+      "sourceLine": 50,
       "since": null
     }
   ],

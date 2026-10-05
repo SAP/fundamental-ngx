@@ -3,8 +3,8 @@
   "selector": "fd-settings-container",
   "kind": "Component",
   "sourceFile": "settings-container.component.ts",
-  "sourceLine": 57,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/core/settings/settings-container/settings-container.component.ts#L57",
+  "sourceLine": 67,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/fa9aaa671c/libs/core/settings/settings-container/settings-container.component.ts#L67",
   "description": "",
   "inputs": [
     {
@@ -14,7 +14,7 @@
       "description": "aria-label and title value for the back button",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 75,
+      "sourceLine": 85,
       "since": null
     },
     {
@@ -24,7 +24,7 @@
       "description": "Heading level for the title in the Details Area\nDefault value is 2\nAcceptable values: number 1 | 2 | 3 | 4 | 5 | 6",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 63,
+      "sourceLine": 73,
       "since": null
     },
     {
@@ -34,11 +34,55 @@
       "description": "Heading level display size for the title in the Details Area (controls the font size)\nDefault value is 5\nAcceptable values: number 1 | 2 | 3 | 4 | 5 | 6",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 70,
+      "sourceLine": 80,
       "since": null
     }
   ],
   "outputs": [],
-  "methods": [],
+  "methods": [
+    {
+      "name": "clearViewStack",
+      "signature": "() => void",
+      "description": "Clear all stacked views and return to the main template.",
+      "deprecated": null,
+      "sourceLine": 205,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "popView",
+      "signature": "() => void",
+      "description": "Pop the top view from the stack, returning to the previous view.\nIf no stacked views exist, this method does nothing.",
+      "deprecated": null,
+      "sourceLine": 194,
+      "since": null,
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "pushView",
+      "signature": "(template: TemplateRef<any>, title: string) => void",
+      "description": "Push a secondary view onto the stack.\nUse this to navigate to a drill-down view within a settings section.",
+      "deprecated": null,
+      "sourceLine": 182,
+      "since": null,
+      "parameters": [
+        {
+          "name": "template",
+          "type": "TemplateRef<any>",
+          "description": "The template to render",
+          "optional": false
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "description": "The title to display in the header",
+          "optional": false
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
   "inherited": null
 }

@@ -21,7 +21,7 @@
       "name": "headerText",
       "type": "string",
       "default": null,
-      "description": "Defines the header text of the <code>ui5-li-group</code>.",
+      "description": "Defines the header text of the group.",
       "isSignal": true,
       "deprecated": null,
       "sourceLine": 52,

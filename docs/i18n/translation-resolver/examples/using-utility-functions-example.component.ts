@@ -5,14 +5,13 @@ import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import {
-    FD_LANGUAGE_ENGLISH,
-    FD_LANGUAGE_POLISH,
     FD_LANGUAGE_SIGNAL,
     FdLanguage,
     resolveTranslationSignal,
     resolveTranslationSignalFn
 } from '@fundamental-ngx/i18n';
-
+import { FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n/en';
+import { FD_LANGUAGE_POLISH } from '@fundamental-ngx/i18n/pl';
 @Component({
     selector: 'fd-translation-resolver-using-utility-functions-example',
     template: `

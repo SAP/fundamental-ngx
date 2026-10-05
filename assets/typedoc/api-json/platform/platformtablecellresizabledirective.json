@@ -4,7 +4,7 @@
   "kind": "Directive",
   "sourceFile": "table-cell-resizable.directive.ts",
   "sourceLine": 35,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/platform/table-helpers/directives/table-cell-resizable.directive.ts#L35",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/fa9aaa671c/libs/platform/table-helpers/directives/table-cell-resizable.directive.ts#L35",
   "description": "Tracks mouse movement over the cell if the mouse pointer near the side of the cell, informs resize service.",
   "inputs": [
     {
@@ -24,6 +24,16 @@
     "from": "TableCellDirective",
     "inputs": [
       {
+        "name": "activable",
+        "type": "boolean",
+        "default": null,
+        "description": "Whether the table cell is activable",
+        "isSignal": true,
+        "deprecated": null,
+        "sourceLine": 41,
+        "since": null
+      },
+      {
         "name": "cellFocusedEventAnnouncer",
         "type": "CellFocusedEventAnnouncer",
         "default": null,
@@ -31,6 +41,106 @@
         "isSignal": true,
         "deprecated": null,
         "sourceLine": 54,
+        "since": null
+      },
+      {
+        "name": "fitContent",
+        "type": "boolean",
+        "default": null,
+        "description": "Whether the table cell's width should fit to content",
+        "isSignal": true,
+        "deprecated": null,
+        "sourceLine": 53,
+        "since": null
+      },
+      {
+        "name": "focusable",
+        "type": "boolean",
+        "default": null,
+        "description": "Whether the table cell is focusable.\nThis input syncs with the parent FocusableItemDirective's focusable state.",
+        "isSignal": true,
+        "deprecated": null,
+        "sourceLine": 47,
+        "since": null
+      },
+      {
+        "name": "hoverable",
+        "type": "boolean",
+        "default": null,
+        "description": "Whether the table cell is hoverable",
+        "isSignal": true,
+        "deprecated": null,
+        "sourceLine": 50,
+        "since": null
+      },
+      {
+        "name": "key",
+        "type": "string",
+        "default": null,
+        "description": "Key of a cell element, it's used to identify this cell with certain column",
+        "isSignal": true,
+        "deprecated": null,
+        "sourceLine": 65,
+        "since": null
+      },
+      {
+        "name": "noBorderX",
+        "type": "boolean",
+        "default": null,
+        "description": "Whether to show the table cell's horizontal borders",
+        "isSignal": true,
+        "deprecated": null,
+        "sourceLine": 35,
+        "since": null
+      },
+      {
+        "name": "noBorderY",
+        "type": "boolean",
+        "default": null,
+        "description": "Whether to show the table cell's vertical borders",
+        "isSignal": true,
+        "deprecated": null,
+        "sourceLine": 38,
+        "since": null
+      },
+      {
+        "name": "noData",
+        "type": "boolean",
+        "default": null,
+        "description": "Whether the table cell indicates that there is no data",
+        "isSignal": true,
+        "deprecated": null,
+        "sourceLine": 59,
+        "since": null
+      },
+      {
+        "name": "noPadding",
+        "type": "boolean",
+        "default": null,
+        "description": "Whether the table cell shouldn't have padding on sides",
+        "isSignal": true,
+        "deprecated": null,
+        "sourceLine": 56,
+        "since": null
+      },
+      {
+        "name": "nonInteractive",
+        "type": "boolean",
+        "default": null,
+        "description": "Whether the table cell inside table header should be non-interactive",
+        "isSignal": true,
+        "deprecated": null,
+        "sourceLine": 62,
+        "since": null
+      },
+      {
+        "name": "role",
+        "type": "string",
+        "default": null,
+        "description": "ARIA role for the table cell (only used if explicitly provided)",
+        "isSignal": true,
+        "deprecated": null,
+        "sourceLine": 32,
         "since": null
       }
     ],

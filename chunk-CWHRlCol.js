@@ -1,0 +1,1 @@
+var r=(function(n){return n.Scroll="Scroll",n.Popin="Popin",n})(r||{}),o=r;export{o};

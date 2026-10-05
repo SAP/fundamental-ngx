@@ -1,4 +1,4 @@
-<label fd-form-label>Mobile Mode Combobox</label>
+<label fd-form-label for="doc-core-combobox-mobile">Local confirmation</label>
 <br />
 <fd-combobox
     id="doc-core-combobox-mobile"
@@ -6,6 +6,29 @@
     [mobile]="true"
     [dropdownValues]="values"
     [mobileConfig]="mobileConfig"
-    [(ngModel)]="selectedValue"
+    [ngModel]="selectedValue"
+    (ngModelChange)="onLocalModelChange($event)"
 >
 </fd-combobox>
+<p id="doc-core-combobox-mobile-committed-value" aria-live="polite">Committed value: {{ selectedValue || 'None' }}</p>
+<p id="doc-core-combobox-mobile-commit-count" aria-live="polite">Model commits: {{ localCommitCount }}</p>
+
+<fd-combobox-mobile-global-example [values]="values"></fd-combobox-mobile-global-example>
+
+<label fd-form-label for="doc-core-combobox-mobile-immediate">Immediate selection (Cancel-only)</label>
+<br />
+<fd-combobox
+    id="doc-core-combobox-mobile-immediate"
+    placeholder="Search here..."
+    [mobile]="true"
+    [dropdownValues]="values"
+    [mobileConfig]="immediateMobileConfig"
+    [closeOnSelect]="true"
+    [ngModel]="immediateSelectedValue"
+    (ngModelChange)="onImmediateModelChange($event)"
+>
+</fd-combobox>
+<p id="doc-core-combobox-mobile-immediate-committed-value" aria-live="polite">
+    Committed value: {{ immediateSelectedValue || 'None' }}
+</p>
+<p id="doc-core-combobox-mobile-immediate-commit-count" aria-live="polite">Model commits: {{ immediateCommitCount }}</p>

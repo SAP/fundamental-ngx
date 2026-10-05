@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "combobox.component.ts",
   "sourceLine": 78,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/platform/form/combobox/combobox/combobox.component.ts#L78",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/fa9aaa671c/libs/platform/form/combobox/combobox/combobox.component.ts#L78",
   "description": "Combobox Interface to have typing and avoid circular dependency between\nComboboxComponent <==> ComboboxMobileComponent",
   "inputs": [],
   "outputs": [
@@ -25,7 +25,7 @@
       "signature": "() => void",
       "description": "Handle dialog approval, closes popover and propagates data changes.",
       "deprecated": null,
-      "sourceLine": 219,
+      "sourceLine": 268,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -35,7 +35,7 @@
       "signature": "(term: string) => void",
       "description": "Handle dialog dismissing, closes popover and sets backup data.",
       "deprecated": null,
-      "sourceLine": 209,
+      "sourceLine": 258,
       "since": null,
       "parameters": [
         {
@@ -91,7 +91,7 @@
         "signature": "(direction: FocusEscapeDirection) => void",
         "description": "Method passed to list component",
         "deprecated": null,
-        "sourceLine": 497,
+        "sourceLine": 496,
         "since": null,
         "parameters": [
           {

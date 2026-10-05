@@ -4,7 +4,7 @@
   "kind": "Class",
   "sourceFile": "base-multi-combobox.ts",
   "sourceLine": 90,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/platform/form/multi-combobox/commons/base-multi-combobox.ts#L90",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/fa9aaa671c/libs/platform/form/multi-combobox/commons/base-multi-combobox.ts#L90",
   "description": "Defines specific behavior for Input controls which deals with list of values including:\n - Select\n - RadioGroup\n - CheckboxGroup\n - ComboBox\n ...",
   "inputs": [
     {
@@ -236,7 +236,7 @@
       "signature": "() => void",
       "description": "Closes the select popover body.",
       "deprecated": null,
-      "sourceLine": 482,
+      "sourceLine": 491,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -246,7 +246,7 @@
       "signature": "(direction: FocusEscapeDirection) => void",
       "description": "Method passed to list component",
       "deprecated": null,
-      "sourceLine": 591,
+      "sourceLine": 600,
       "since": null,
       "parameters": [
         {
@@ -263,7 +263,7 @@
       "signature": "() => void",
       "description": "Opens the select popover body.",
       "deprecated": null,
-      "sourceLine": 475,
+      "sourceLine": 484,
       "since": null,
       "parameters": [],
       "returnType": "void"

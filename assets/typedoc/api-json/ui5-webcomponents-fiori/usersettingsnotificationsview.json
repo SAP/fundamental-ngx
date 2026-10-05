@@ -1,0 +1,55 @@
+{
+  "name": "UserSettingsNotificationsView",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 42,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "secondary",
+      "type": "boolean",
+      "default": null,
+      "description": "Indicates whether the view is secondary. It is relevant only if the view is used in `pages` slot of `ui5-user-settings-item`\nand controls the visibility of the back button.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 48,
+      "since": null
+    },
+    {
+      "name": "selected",
+      "type": "boolean",
+      "default": null,
+      "description": "Defines whether the view is selected. There can be just one selected view at a time.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 53,
+      "since": null
+    },
+    {
+      "name": "text",
+      "type": "string",
+      "default": null,
+      "description": "Defines the title text of the user settings view.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 58,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5ItemClick",
+      "type": "UI5CustomEvent<UserSettingsNotificationsView, 'item-click'>",
+      "default": null,
+      "description": "Fired when a navigable item in the list is clicked.\n\nThe event is cancelable: preventing it skips the built-in drill-in to the\nparent's secondary view, allowing the application to take over.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 68,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

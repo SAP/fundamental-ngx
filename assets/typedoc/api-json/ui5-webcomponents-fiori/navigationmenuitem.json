@@ -171,10 +171,10 @@
       "name": "type",
       "type": "'Inactive' | 'InactiveSelectable' | 'Active' | 'Detail' | 'Navigation'",
       "default": null,
-      "description": "Defines the visual indication and behavior of the list items.\nAvailable options are `Active` (by default), `Inactive`, `InactiveSelectable`, `Detail` and `Navigation`.\n\n*Note:** When set to `Active` or `Navigation`, the item will provide visual response upon press and hover,\nwhile with type `Inactive`, `InactiveSelectable` and `Detail` - will not.\n\n*Note:** `InactiveSelectable` behaves like `Inactive` but allows selection (checkbox/radio) to be toggled\nwhen the list has a selection mode. The `item-click` event is not fired for this type.",
+      "description": "Defines the visual indication and behavior of the list items.\nAvailable options are `Active` (by default), `Inactive`, `InactiveSelectable`, `Detail` and `Navigation`.\n\n*Note:** When set to `Active` or `Navigation`, the item will provide visual response upon press and hover,\nwhile with type `Inactive`, `InactiveSelectable` and `Detail` - will not.\n\n*Note:** `InactiveSelectable` behaves like `Inactive` (no active press/hover feedback and the\n`item-click` event is not fired), but the item can still be selected. Clicking the item body,\npressing Space/Enter, or interacting with the selection component (checkbox in Multi mode, radio\nbutton in Single modes) toggles the selection when the list has a selection mode.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 182,
+      "sourceLine": 184,
       "since": null
     }
   ],
@@ -186,7 +186,7 @@
       "description": "Fired before the menu is closed. This event can be cancelled, which will prevent the menu from closing.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 189,
+      "sourceLine": 191,
       "since": null
     },
     {
@@ -196,7 +196,7 @@
       "description": "Fired before the menu is opened. This event can be cancelled, which will prevent the menu from opening.\n\n*Note:** Since 1.14.0 the event is also fired before a sub-menu opens.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 196,
+      "sourceLine": 198,
       "since": null
     },
     {
@@ -206,7 +206,7 @@
       "description": "Fired when an item is checked or unchecked.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 201,
+      "sourceLine": 203,
       "since": null
     },
     {
@@ -216,7 +216,7 @@
       "description": "Fired when the component is activated either with a mouse/tap or by using the Enter or Space key.\n\n*Note:** The event will not be fired if the `disabled` property is set to `true`.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 208,
+      "sourceLine": 210,
       "since": null
     },
     {
@@ -226,7 +226,7 @@
       "description": "Fired after the menu is closed.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 213,
+      "sourceLine": 215,
       "since": null
     },
     {
@@ -236,7 +236,7 @@
       "description": "Fired when the user clicks on the detail button when type is `Detail`.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 218,
+      "sourceLine": 220,
       "since": null
     },
     {
@@ -246,7 +246,7 @@
       "description": "Fired after the menu is opened.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 223,
+      "sourceLine": 225,
       "since": null
     }
   ],

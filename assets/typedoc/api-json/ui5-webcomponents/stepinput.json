@@ -61,20 +61,20 @@
       "name": "name",
       "type": "string",
       "default": null,
-      "description": "Determines the name by which the component will be identified upon submission in an HTML form.\n\n*Note:** This property is only applicable within the context of an HTML Form element.",
+      "description": "Determines the name by which the component will be identified upon submission in an HTML form.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 74,
+      "sourceLine": 72,
       "since": null
     },
     {
       "name": "placeholder",
       "type": "string",
       "default": null,
-      "description": "Defines a short hint, intended to aid the user with data entry when the\ncomponent has no value.\n\n*Note:** When no placeholder is set, the format pattern is displayed as a placeholder.\nPassing an empty string as the value of this property will make the component appear empty - without placeholder or format pattern.",
+      "description": "Defines a short hint, intended to aid the user with data entry when the\ncomponent has no value.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 83,
+      "sourceLine": 78,
       "since": null
     },
     {
@@ -84,7 +84,7 @@
       "description": "Determines whether the component is displayed as read-only.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 88,
+      "sourceLine": 83,
       "since": null
     },
     {
@@ -94,7 +94,7 @@
       "description": "Defines whether the component is required.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 93,
+      "sourceLine": 88,
       "since": null
     },
     {
@@ -104,7 +104,7 @@
       "description": "Defines a step of increasing/decreasing the value of the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 98,
+      "sourceLine": 93,
       "since": null
     },
     {
@@ -114,7 +114,7 @@
       "description": "Defines a value of the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 103,
+      "sourceLine": 98,
       "since": null
     },
     {
@@ -124,7 +124,7 @@
       "description": "Determines the number of digits after the decimal point of the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 108,
+      "sourceLine": 103,
       "since": null
     },
     {
@@ -134,7 +134,7 @@
       "description": "Defines the value state of the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 113,
+      "sourceLine": 108,
       "since": null
     }
   ],
@@ -146,7 +146,7 @@
       "description": "Fired when the input operation has finished by pressing Enter or on focusout.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 120,
+      "sourceLine": 115,
       "since": null
     },
     {
@@ -156,7 +156,7 @@
       "description": "Fired when the value of the component changes at each keystroke.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 125,
+      "sourceLine": 120,
       "since": null
     },
     {
@@ -166,7 +166,7 @@
       "description": "Fired before the value state of the component is updated internally.\nThe event is preventable, meaning that if it's default action is\nprevented, the component will not update the value state.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 132,
+      "sourceLine": 127,
       "since": null
     }
   ],

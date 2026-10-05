@@ -1,0 +1,155 @@
+{
+  "name": "NumberInput",
+  "selector": null,
+  "kind": "Class",
+  "sourceFile": "index.ts",
+  "sourceLine": 42,
+  "sourceUrl": "",
+  "description": "",
+  "inputs": [
+    {
+      "name": "accessibleName",
+      "type": "string",
+      "default": null,
+      "description": "Defines the accessible ARIA name of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 47,
+      "since": null
+    },
+    {
+      "name": "accessibleNameRef",
+      "type": "string",
+      "default": null,
+      "description": "Receives ID (or many IDs) of the elements that label the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 52,
+      "since": null
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": null,
+      "description": "Determines whether the component is displayed as disabled.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 57,
+      "since": null
+    },
+    {
+      "name": "max",
+      "type": "number",
+      "default": null,
+      "description": "Defines a maximum value of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 62,
+      "since": null
+    },
+    {
+      "name": "min",
+      "type": "number",
+      "default": null,
+      "description": "Defines a minimum value of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 67,
+      "since": null
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "default": null,
+      "description": "Determines the name by which the component will be identified upon submission in an HTML form.\n\n*Note:** This property is only applicable within the context of an HTML Form element.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 74,
+      "since": null
+    },
+    {
+      "name": "readonly",
+      "type": "boolean",
+      "default": null,
+      "description": "Determines whether the component is displayed as read-only.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 79,
+      "since": null
+    },
+    {
+      "name": "step",
+      "type": "number",
+      "default": null,
+      "description": "Defines a step of increasing/decreasing the value of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 84,
+      "since": null
+    },
+    {
+      "name": "value",
+      "type": "number",
+      "default": null,
+      "description": "Defines a value of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 89,
+      "since": null
+    },
+    {
+      "name": "valuePrecision",
+      "type": "number",
+      "default": null,
+      "description": "Determines the number of digits after the decimal point of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 94,
+      "since": null
+    },
+    {
+      "name": "valueState",
+      "type": "'None' | 'Positive' | 'Critical' | 'Negative' | 'Information'",
+      "default": null,
+      "description": "Defines the value state of the component.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 99,
+      "since": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ui5Change",
+      "type": "UI5CustomEvent<NumberInput, 'change'>",
+      "default": null,
+      "description": "Fired when the input operation has finished by pressing Enter or on focusout.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 106,
+      "since": null
+    },
+    {
+      "name": "ui5Input",
+      "type": "UI5CustomEvent<NumberInput, 'input'>",
+      "default": null,
+      "description": "Fired when the value of the component changes at each keystroke.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 111,
+      "since": null
+    },
+    {
+      "name": "ui5ValueStateChange",
+      "type": "UI5CustomEvent<NumberInput, 'value-state-change'>",
+      "default": null,
+      "description": "Fired before the value state of the component is updated internally.\nThe event is preventable, meaning that if its default action is\nprevented, the component will not update the value state.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 118,
+      "since": null
+    }
+  ],
+  "methods": [],
+  "inherited": null
+}

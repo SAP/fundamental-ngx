@@ -8,23 +8,33 @@
   "description": "",
   "inputs": [
     {
+      "name": "colorScheme",
+      "type": "string",
+      "default": null,
+      "description": "Defines the color scheme of the badge using the indication color palette.\n\nAvailable options are `\"1\"` through `\"10\"`, matching the indication colors.\n\n*Note:** `state` takes precedence - when `state` is set to any value other than `None`,\nthe semantic state styling applies and `colorScheme` is ignored.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 51,
+      "since": null
+    },
+    {
       "name": "icon",
       "type": "string",
       "default": null,
       "description": "Defines the icon name to be displayed inside the badge.\n\n*Note:** You should import the desired icon first, then use its name as \"icon\".\n\n`import \"@ui5/webcomponents-icons/dist/{icon_name}.js\"`",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 50,
+      "sourceLine": 60,
       "since": null
     },
     {
       "name": "state",
       "type": "'None' | 'Positive' | 'Critical' | 'Negative' | 'Information'",
       "default": null,
-      "description": "Defines the state of the badge, which determines its styling.\n\nAvailable options:\n- `None` (default) - Standard appearance\n- `Positive` - Green, used for success/approved states\n- `Critical` - Orange, used for warning states\n- `Negative` - Red, used for error/rejected states\n- `Information` - Blue, used for informational states",
+      "description": "Defines the state of the badge, which determines its styling.\n\nAvailable options:\n- `None` (default) - Standard appearance\n- `Positive` - Green, used for success/approved states\n- `Critical` - Orange, used for warning states\n- `Negative` - Red, used for error/rejected states\n- `Information` - Blue, used for informational states\n\n*Note:** `state` takes precedence over `colorScheme`. When `state` is set\nto any value other than `None`, the semantic styling applies and `colorScheme` is ignored.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 62,
+      "sourceLine": 75,
       "since": null
     },
     {
@@ -34,7 +44,7 @@
       "description": "Defines the tooltip text of the badge icon.\n\n*Note:** If not provided, the badge uses the icon accessible name.\nIf no icon accessible name is available, a generic fallback text is used.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 70,
+      "sourceLine": 83,
       "since": null
     }
   ],

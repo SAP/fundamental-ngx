@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "slider.component.ts",
   "sourceLine": 96,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/core/slider/slider.component.ts#L96",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/fa9aaa671c/libs/core/slider/slider.component.ts#L96",
   "description": "Set of fields of FormItemControl component",
   "inputs": [
     {

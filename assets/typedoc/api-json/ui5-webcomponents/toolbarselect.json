@@ -38,13 +38,23 @@
       "since": null
     },
     {
+      "name": "overflowGroup",
+      "type": "string",
+      "default": null,
+      "description": "Co-overflow tag. Items in the same `ui5-toolbar` whose `overflowGroup` is the same\nnon-empty string overflow as one atomic unit: either all visible in the bar, or all\nin the overflow popover, never split. The empty string (the default) means \"no group\" —\nthe item participates in overflow independently.\n\nThe tag is a free-form, case-sensitive string label (e.g. `\"filters\"`, `\"search\"`). It is\nlayout-only and carries no ARIA, keyboard, or visual-cluster semantics. Items in a\nnon-empty group must have `overflowPriority = \"Default\"`; `AlwaysOverflow` and\n`NeverOverflow` are forbidden inside a group — setting one of those on a grouped item\nemits a one-shot `console.warn` and the item's priority is treated as `Default` for\nthe layout pass. Spacers (`ui5-toolbar-spacer`) do not participate in grouping; setting\na non-empty `overflowGroup` on a spacer emits a one-shot `console.warn` and the spacer's\nexisting overflow behavior is unchanged.\n\nThe visible bar always preserves slot order — ungrouped items between group members\nkeep their slot positions and the toolbar never reorders DOM children. In the popover\ngroup members appear adjacent in slot order.",
+      "isSignal": true,
+      "deprecated": null,
+      "sourceLine": 81,
+      "since": null
+    },
+    {
       "name": "overflowPriority",
       "type": "'Default' | 'NeverOverflow' | 'AlwaysOverflow'",
       "default": null,
       "description": "Property used to define the access of the item to the overflow Popover. If \"NeverOverflow\" option is set,\nthe item never goes in the Popover, if \"AlwaysOverflow\" - it never comes out of it.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 66,
+      "sourceLine": 87,
       "since": null
     },
     {
@@ -54,7 +64,7 @@
       "description": "Defines if the toolbar overflow popup should close upon interaction with the item.\nIt will close by default.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 72,
+      "sourceLine": 93,
       "since": null
     },
     {
@@ -64,7 +74,7 @@
       "description": "Defines the value of the component:",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 77,
+      "sourceLine": 98,
       "since": null
     },
     {
@@ -74,7 +84,7 @@
       "description": "Defines the value state of the component.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 82,
+      "sourceLine": 103,
       "since": null
     },
     {
@@ -84,7 +94,7 @@
       "description": "Defines the width of the select.\n\n*Note:** all CSS sizes are supported - 'percentage', 'px', 'rem', 'auto', etc.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 89,
+      "sourceLine": 110,
       "since": null
     }
   ],
@@ -96,7 +106,7 @@
       "description": "Fired when the selected option changes.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 96,
+      "sourceLine": 117,
       "since": null
     },
     {
@@ -106,7 +116,7 @@
       "description": "Fired after the component's dropdown menu closes.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 101,
+      "sourceLine": 122,
       "since": null
     },
     {
@@ -116,7 +126,7 @@
       "description": "Fired after the component's dropdown menu opens.",
       "isSignal": true,
       "deprecated": null,
-      "sourceLine": 106,
+      "sourceLine": 127,
       "since": null
     }
   ],

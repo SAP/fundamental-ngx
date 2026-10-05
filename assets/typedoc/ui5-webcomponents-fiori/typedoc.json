@@ -5295,28 +5295,28 @@
 			]
 		},
 		{
-			"id": 1604,
+			"id": 1686,
 			"name": "GenericControlValueAccessor",
 			"variant": "declaration",
 			"kind": 128,
 			"flags": {},
 			"children": [
 				{
-					"id": 1605,
+					"id": 1687,
 					"name": "constructor",
 					"variant": "declaration",
 					"kind": 512,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 1606,
+							"id": 1688,
 							"name": "new GenericControlValueAccessor",
 							"variant": "signature",
 							"kind": 16384,
 							"flags": {},
 							"typeParameter": [
 								{
-									"id": 1607,
+									"id": 1689,
 									"name": "ValueType",
 									"variant": "typeParam",
 									"kind": 131072,
@@ -5329,7 +5329,7 @@
 							],
 							"type": {
 								"type": "reference",
-								"target": 1604,
+								"target": 1686,
 								"typeArguments": [
 									{
 										"type": "reference",
@@ -5345,7 +5345,7 @@
 					]
 				},
 				{
-					"id": 1608,
+					"id": 1690,
 					"name": "onChange",
 					"variant": "declaration",
 					"kind": 1024,
@@ -5360,7 +5360,7 @@
 					"type": {
 						"type": "reflection",
 						"declaration": {
-							"id": 1609,
+							"id": 1691,
 							"name": "__type",
 							"variant": "declaration",
 							"kind": 65536,
@@ -5374,7 +5374,7 @@
 							],
 							"signatures": [
 								{
-									"id": 1610,
+									"id": 1692,
 									"name": "__type",
 									"variant": "signature",
 									"kind": 4096,
@@ -5388,7 +5388,7 @@
 									],
 									"parameters": [
 										{
-											"id": 1611,
+											"id": 1693,
 											"name": "val",
 											"variant": "param",
 											"kind": 32768,
@@ -5411,7 +5411,7 @@
 					}
 				},
 				{
-					"id": 1612,
+					"id": 1694,
 					"name": "onTouched",
 					"variant": "declaration",
 					"kind": 1024,
@@ -5426,7 +5426,7 @@
 					"type": {
 						"type": "reflection",
 						"declaration": {
-							"id": 1613,
+							"id": 1695,
 							"name": "__type",
 							"variant": "declaration",
 							"kind": 65536,
@@ -5440,7 +5440,7 @@
 							],
 							"signatures": [
 								{
-									"id": 1614,
+									"id": 1696,
 									"name": "__type",
 									"variant": "signature",
 									"kind": 4096,
@@ -5462,7 +5462,7 @@
 					}
 				},
 				{
-					"id": 1624,
+					"id": 1706,
 					"name": "ngAfterViewInit",
 					"variant": "declaration",
 					"kind": 2048,
@@ -5476,7 +5476,7 @@
 					],
 					"signatures": [
 						{
-							"id": 1625,
+							"id": 1707,
 							"name": "ngAfterViewInit",
 							"variant": "signature",
 							"kind": 4096,
@@ -5506,7 +5506,7 @@
 					}
 				},
 				{
-					"id": 1629,
+					"id": 1711,
 					"name": "registerOnChange",
 					"variant": "declaration",
 					"kind": 2048,
@@ -5520,7 +5520,7 @@
 					],
 					"signatures": [
 						{
-							"id": 1630,
+							"id": 1712,
 							"name": "registerOnChange",
 							"variant": "signature",
 							"kind": 4096,
@@ -5534,7 +5534,7 @@
 							],
 							"parameters": [
 								{
-									"id": 1631,
+									"id": 1713,
 									"name": "fn",
 									"variant": "param",
 									"kind": 32768,
@@ -5542,7 +5542,7 @@
 									"type": {
 										"type": "reflection",
 										"declaration": {
-											"id": 1632,
+											"id": 1714,
 											"name": "__type",
 											"variant": "declaration",
 											"kind": 65536,
@@ -5556,7 +5556,7 @@
 											],
 											"signatures": [
 												{
-													"id": 1633,
+													"id": 1715,
 													"name": "__type",
 													"variant": "signature",
 													"kind": 4096,
@@ -5570,7 +5570,7 @@
 													],
 													"parameters": [
 														{
-															"id": 1634,
+															"id": 1716,
 															"name": "newVal",
 															"variant": "param",
 															"kind": 32768,
@@ -5611,7 +5611,7 @@
 					}
 				},
 				{
-					"id": 1635,
+					"id": 1717,
 					"name": "registerOnTouched",
 					"variant": "declaration",
 					"kind": 2048,
@@ -5625,7 +5625,7 @@
 					],
 					"signatures": [
 						{
-							"id": 1636,
+							"id": 1718,
 							"name": "registerOnTouched",
 							"variant": "signature",
 							"kind": 4096,
@@ -5639,7 +5639,7 @@
 							],
 							"parameters": [
 								{
-									"id": 1637,
+									"id": 1719,
 									"name": "fn",
 									"variant": "param",
 									"kind": 32768,
@@ -5647,7 +5647,7 @@
 									"type": {
 										"type": "reflection",
 										"declaration": {
-											"id": 1638,
+											"id": 1720,
 											"name": "__type",
 											"variant": "declaration",
 											"kind": 65536,
@@ -5661,7 +5661,7 @@
 											],
 											"signatures": [
 												{
-													"id": 1639,
+													"id": 1721,
 													"name": "__type",
 													"variant": "signature",
 													"kind": 4096,
@@ -5701,7 +5701,7 @@
 					}
 				},
 				{
-					"id": 1626,
+					"id": 1708,
 					"name": "setDisabledState",
 					"variant": "declaration",
 					"kind": 2048,
@@ -5715,7 +5715,7 @@
 					],
 					"signatures": [
 						{
-							"id": 1627,
+							"id": 1709,
 							"name": "setDisabledState",
 							"variant": "signature",
 							"kind": 4096,
@@ -5729,7 +5729,7 @@
 							],
 							"parameters": [
 								{
-									"id": 1628,
+									"id": 1710,
 									"name": "isDisabled",
 									"variant": "param",
 									"kind": 32768,
@@ -5758,7 +5758,7 @@
 					}
 				},
 				{
-					"id": 1640,
+					"id": 1722,
 					"name": "writeValue",
 					"variant": "declaration",
 					"kind": 2048,
@@ -5772,7 +5772,7 @@
 					],
 					"signatures": [
 						{
-							"id": 1641,
+							"id": 1723,
 							"name": "writeValue",
 							"variant": "signature",
 							"kind": 4096,
@@ -5786,7 +5786,7 @@
 							],
 							"parameters": [
 								{
-									"id": 1642,
+									"id": 1724,
 									"name": "val",
 									"variant": "param",
 									"kind": 32768,
@@ -5821,24 +5821,24 @@
 				{
 					"title": "Constructors",
 					"children": [
-						1605
+						1687
 					]
 				},
 				{
 					"title": "Properties",
 					"children": [
-						1608,
-						1612
+						1690,
+						1694
 					]
 				},
 				{
 					"title": "Methods",
 					"children": [
-						1624,
-						1629,
-						1635,
-						1626,
-						1640
+						1706,
+						1711,
+						1717,
+						1708,
+						1722
 					]
 				}
 			],
@@ -5851,7 +5851,7 @@
 			],
 			"typeParameters": [
 				{
-					"id": 1652,
+					"id": 1734,
 					"name": "ValueType",
 					"variant": "typeParam",
 					"kind": 131072,
@@ -11016,7 +11016,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/navigation-menu-item/index.ts",
-							"line": 288,
+							"line": 290,
 							"character": 9
 						}
 					],
@@ -11258,7 +11258,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/navigation-menu-item/index.ts",
-							"line": 289,
+							"line": 291,
 							"character": 9
 						}
 					],
@@ -11639,7 +11639,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/navigation-menu-item/index.ts",
-							"line": 270,
+							"line": 272,
 							"character": 11
 						}
 					],
@@ -11666,7 +11666,7 @@
 												"sources": [
 													{
 														"fileName": "ui5-webcomponents-fiori/navigation-menu-item/index.ts",
-														"line": 273,
+														"line": 275,
 														"character": 10
 													}
 												],
@@ -11685,7 +11685,7 @@
 												"sources": [
 													{
 														"fileName": "ui5-webcomponents-fiori/navigation-menu-item/index.ts",
-														"line": 272,
+														"line": 274,
 														"character": 10
 													}
 												],
@@ -11730,7 +11730,7 @@
 										"sources": [
 											{
 												"fileName": "ui5-webcomponents-fiori/navigation-menu-item/index.ts",
-												"line": 271,
+												"line": 273,
 												"character": 6
 											}
 										]
@@ -11754,7 +11754,7 @@
 												"sources": [
 													{
 														"fileName": "ui5-webcomponents-fiori/navigation-menu-item/index.ts",
-														"line": 277,
+														"line": 279,
 														"character": 10
 													}
 												],
@@ -11773,7 +11773,7 @@
 												"sources": [
 													{
 														"fileName": "ui5-webcomponents-fiori/navigation-menu-item/index.ts",
-														"line": 276,
+														"line": 278,
 														"character": 10
 													}
 												],
@@ -11792,7 +11792,7 @@
 												"sources": [
 													{
 														"fileName": "ui5-webcomponents-fiori/navigation-menu-item/index.ts",
-														"line": 278,
+														"line": 280,
 														"character": 10
 													}
 												],
@@ -11816,7 +11816,7 @@
 										"sources": [
 											{
 												"fileName": "ui5-webcomponents-fiori/navigation-menu-item/index.ts",
-												"line": 275,
+												"line": 277,
 												"character": 6
 											}
 										]
@@ -12122,7 +12122,7 @@
 							},
 							{
 								"kind": "text",
-								"text": " but allows selection (checkbox/radio) to be toggled\nwhen the list has a selection mode. The "
+								"text": " (no active press/hover feedback and the\n"
 							},
 							{
 								"kind": "code",
@@ -12130,14 +12130,14 @@
 							},
 							{
 								"kind": "text",
-								"text": " event is not fired for this type."
+								"text": " event is not fired), but the item can still be selected. Clicking the item body,\npressing Space/Enter, or interacting with the selection component (checkbox in Multi mode, radio\nbutton in Single modes) toggles the selection when the list has a selection mode."
 							}
 						]
 					},
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/navigation-menu-item/index.ts",
-							"line": 182,
+							"line": 184,
 							"character": 2
 						}
 					],
@@ -12200,7 +12200,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/navigation-menu-item/index.ts",
-							"line": 189,
+							"line": 191,
 							"character": 2
 						}
 					],
@@ -12258,7 +12258,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/navigation-menu-item/index.ts",
-							"line": 196,
+							"line": 198,
 							"character": 2
 						}
 					],
@@ -12316,7 +12316,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/navigation-menu-item/index.ts",
-							"line": 201,
+							"line": 203,
 							"character": 2
 						}
 					],
@@ -12390,7 +12390,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/navigation-menu-item/index.ts",
-							"line": 208,
+							"line": 210,
 							"character": 2
 						}
 					],
@@ -12448,7 +12448,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/navigation-menu-item/index.ts",
-							"line": 213,
+							"line": 215,
 							"character": 2
 						}
 					],
@@ -12514,7 +12514,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/navigation-menu-item/index.ts",
-							"line": 218,
+							"line": 220,
 							"character": 2
 						}
 					],
@@ -12572,7 +12572,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/navigation-menu-item/index.ts",
-							"line": 223,
+							"line": 225,
 							"character": 2
 						}
 					],
@@ -12622,7 +12622,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/navigation-menu-item/index.ts",
-							"line": 299,
+							"line": 301,
 							"character": 6
 						}
 					],
@@ -12635,7 +12635,7 @@
 						"sources": [
 							{
 								"fileName": "ui5-webcomponents-fiori/navigation-menu-item/index.ts",
-								"line": 299,
+								"line": 301,
 								"character": 6
 							}
 						],
@@ -12659,7 +12659,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/navigation-menu-item/index.ts",
-							"line": 303,
+							"line": 305,
 							"character": 2
 						}
 					],
@@ -12673,7 +12673,7 @@
 							"sources": [
 								{
 									"fileName": "ui5-webcomponents-fiori/navigation-menu-item/index.ts",
-									"line": 303,
+									"line": 305,
 									"character": 2
 								}
 							],
@@ -23951,7 +23951,7 @@
 						"summary": [
 							{
 								"kind": "text",
-								"text": "Defines the header text of the <code>ui5-li-group</code>."
+								"text": "Defines the header text of the group."
 							}
 						]
 					},
@@ -24034,7 +24034,7 @@
 							},
 							{
 								"kind": "text",
-								"text": " attribute on child elements to target specific slots.\n\n- **(default)**: Defines the items of the <code>ui5-li-group</code>.\n- **header**: Defines the header of the component.\n\n*Note:** Using this slot, the default header text of group and the value of "
+								"text": " attribute on child elements to target specific slots.\n\n- **(default)**: Defines the items of the group.\n- **header**: Defines the header of the component.\n\n*Note:** Using this slot, the default header text of group and the value of "
 							},
 							{
 								"kind": "code",
@@ -24103,7 +24103,7 @@
 											"type": "intrinsic",
 											"name": "string"
 										},
-										"defaultValue": "\"Defines the items of the <code>ui5-li-group</code>.\""
+										"defaultValue": "\"Defines the items of the group.\""
 									},
 									{
 										"id": 686,
@@ -36679,7 +36679,7 @@
 							"fileName": "ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
 							"line": 49,
 							"character": 12,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L49"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/fa9aaa671c/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L49"
 						}
 					],
 					"type": {
@@ -36742,7 +36742,7 @@
 							"fileName": "ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
 							"line": 42,
 							"character": 12,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L42"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/fa9aaa671c/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L42"
 						}
 					],
 					"type": {
@@ -36807,7 +36807,7 @@
 							"fileName": "ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
 							"line": 53,
 							"character": 14,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L53"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/fa9aaa671c/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L53"
 						}
 					],
 					"type": {
@@ -36823,7 +36823,7 @@
 									"fileName": "ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
 									"line": 53,
 									"character": 30,
-									"url": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L53"
+									"url": "https://github.com/SAP/fundamental-ngx/blob/fa9aaa671c/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L53"
 								}
 							],
 							"signatures": [
@@ -36838,7 +36838,7 @@
 											"fileName": "ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
 											"line": 53,
 											"character": 30,
-											"url": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L53"
+											"url": "https://github.com/SAP/fundamental-ngx/blob/fa9aaa671c/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L53"
 										}
 									],
 									"type": {
@@ -36877,7 +36877,7 @@
 							"fileName": "ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
 							"line": 80,
 							"character": 2,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L80"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/fa9aaa671c/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L80"
 						}
 					],
 					"signatures": [
@@ -36915,7 +36915,7 @@
 									"fileName": "ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
 									"line": 80,
 									"character": 2,
-									"url": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L80"
+									"url": "https://github.com/SAP/fundamental-ngx/blob/fa9aaa671c/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L80"
 								}
 							],
 							"type": {
@@ -36972,7 +36972,7 @@
 							"fileName": "ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
 							"line": 94,
 							"character": 8,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L94"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/fa9aaa671c/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L94"
 						}
 					],
 					"signatures": [
@@ -37026,7 +37026,7 @@
 									"fileName": "ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
 									"line": 94,
 									"character": 8,
-									"url": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L94"
+									"url": "https://github.com/SAP/fundamental-ngx/blob/fa9aaa671c/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L94"
 								}
 							],
 							"parameters": [
@@ -37089,7 +37089,7 @@
 							"fileName": "ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
 							"line": 71,
 							"character": 2,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L71"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/fa9aaa671c/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L71"
 						}
 					],
 					"signatures": [
@@ -37139,7 +37139,7 @@
 									"fileName": "ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
 									"line": 71,
 									"character": 2,
-									"url": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L71"
+									"url": "https://github.com/SAP/fundamental-ngx/blob/fa9aaa671c/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L71"
 								}
 							],
 							"parameters": [
@@ -38420,7 +38420,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/upload-collection-item/index.ts",
-							"line": 243,
+							"line": 245,
 							"character": 9
 						}
 					],
@@ -38887,7 +38887,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/upload-collection-item/index.ts",
-							"line": 244,
+							"line": 246,
 							"character": 9
 						}
 					],
@@ -39130,7 +39130,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/upload-collection-item/index.ts",
-							"line": 226,
+							"line": 228,
 							"character": 11
 						}
 					],
@@ -39157,7 +39157,7 @@
 												"sources": [
 													{
 														"fileName": "ui5-webcomponents-fiori/upload-collection-item/index.ts",
-														"line": 229,
+														"line": 231,
 														"character": 10
 													}
 												],
@@ -39176,7 +39176,7 @@
 												"sources": [
 													{
 														"fileName": "ui5-webcomponents-fiori/upload-collection-item/index.ts",
-														"line": 228,
+														"line": 230,
 														"character": 10
 													}
 												],
@@ -39221,7 +39221,7 @@
 										"sources": [
 											{
 												"fileName": "ui5-webcomponents-fiori/upload-collection-item/index.ts",
-												"line": 227,
+												"line": 229,
 												"character": 6
 											}
 										]
@@ -39245,7 +39245,7 @@
 												"sources": [
 													{
 														"fileName": "ui5-webcomponents-fiori/upload-collection-item/index.ts",
-														"line": 237,
+														"line": 239,
 														"character": 10
 													}
 												],
@@ -39264,7 +39264,7 @@
 												"sources": [
 													{
 														"fileName": "ui5-webcomponents-fiori/upload-collection-item/index.ts",
-														"line": 236,
+														"line": 238,
 														"character": 10
 													}
 												],
@@ -39283,7 +39283,7 @@
 												"sources": [
 													{
 														"fileName": "ui5-webcomponents-fiori/upload-collection-item/index.ts",
-														"line": 238,
+														"line": 240,
 														"character": 10
 													}
 												],
@@ -39307,7 +39307,7 @@
 										"sources": [
 											{
 												"fileName": "ui5-webcomponents-fiori/upload-collection-item/index.ts",
-												"line": 235,
+												"line": 237,
 												"character": 6
 											}
 										]
@@ -39471,7 +39471,7 @@
 							},
 							{
 								"kind": "text",
-								"text": " but allows selection (checkbox/radio) to be toggled\nwhen the list has a selection mode. The "
+								"text": " (no active press/hover feedback and the\n"
 							},
 							{
 								"kind": "code",
@@ -39479,14 +39479,14 @@
 							},
 							{
 								"kind": "text",
-								"text": " event is not fired for this type."
+								"text": " event is not fired), but the item can still be selected. Clicking the item body,\npressing Space/Enter, or interacting with the selection component (checkbox in Multi mode, radio\nbutton in Single modes) toggles the selection when the list has a selection mode."
 							}
 						]
 					},
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/upload-collection-item/index.ts",
-							"line": 155,
+							"line": 157,
 							"character": 2
 						}
 					],
@@ -39565,7 +39565,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/upload-collection-item/index.ts",
-							"line": 193,
+							"line": 195,
 							"character": 2
 						}
 					],
@@ -39631,7 +39631,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/upload-collection-item/index.ts",
-							"line": 198,
+							"line": 200,
 							"character": 2
 						}
 					],
@@ -39705,7 +39705,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/upload-collection-item/index.ts",
-							"line": 164,
+							"line": 166,
 							"character": 2
 						}
 					],
@@ -39795,7 +39795,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/upload-collection-item/index.ts",
-							"line": 172,
+							"line": 174,
 							"character": 2
 						}
 					],
@@ -39869,7 +39869,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/upload-collection-item/index.ts",
-							"line": 179,
+							"line": 181,
 							"character": 2
 						}
 					],
@@ -39943,7 +39943,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/upload-collection-item/index.ts",
-							"line": 186,
+							"line": 188,
 							"character": 2
 						}
 					],
@@ -40100,7 +40100,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/upload-collection-item/index.ts",
-							"line": 254,
+							"line": 256,
 							"character": 6
 						}
 					],
@@ -40113,7 +40113,7 @@
 						"sources": [
 							{
 								"fileName": "ui5-webcomponents-fiori/upload-collection-item/index.ts",
-								"line": 254,
+								"line": 256,
 								"character": 6
 							}
 						],
@@ -40137,7 +40137,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/upload-collection-item/index.ts",
-							"line": 258,
+							"line": 260,
 							"character": 2
 						}
 					],
@@ -40151,7 +40151,7 @@
 							"sources": [
 								{
 									"fileName": "ui5-webcomponents-fiori/upload-collection-item/index.ts",
-									"line": 258,
+									"line": 260,
 									"character": 2
 								}
 							],
@@ -42730,7 +42730,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/user-menu-item/index.ts",
-							"line": 266,
+							"line": 268,
 							"character": 9
 						}
 					],
@@ -42917,7 +42917,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/user-menu-item/index.ts",
-							"line": 267,
+							"line": 269,
 							"character": 9
 						}
 					],
@@ -43308,7 +43308,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/user-menu-item/index.ts",
-							"line": 248,
+							"line": 250,
 							"character": 11
 						}
 					],
@@ -43335,7 +43335,7 @@
 												"sources": [
 													{
 														"fileName": "ui5-webcomponents-fiori/user-menu-item/index.ts",
-														"line": 251,
+														"line": 253,
 														"character": 10
 													}
 												],
@@ -43354,7 +43354,7 @@
 												"sources": [
 													{
 														"fileName": "ui5-webcomponents-fiori/user-menu-item/index.ts",
-														"line": 250,
+														"line": 252,
 														"character": 10
 													}
 												],
@@ -43399,7 +43399,7 @@
 										"sources": [
 											{
 												"fileName": "ui5-webcomponents-fiori/user-menu-item/index.ts",
-												"line": 249,
+												"line": 251,
 												"character": 6
 											}
 										]
@@ -43423,7 +43423,7 @@
 												"sources": [
 													{
 														"fileName": "ui5-webcomponents-fiori/user-menu-item/index.ts",
-														"line": 255,
+														"line": 257,
 														"character": 10
 													}
 												],
@@ -43442,7 +43442,7 @@
 												"sources": [
 													{
 														"fileName": "ui5-webcomponents-fiori/user-menu-item/index.ts",
-														"line": 254,
+														"line": 256,
 														"character": 10
 													}
 												],
@@ -43461,7 +43461,7 @@
 												"sources": [
 													{
 														"fileName": "ui5-webcomponents-fiori/user-menu-item/index.ts",
-														"line": 256,
+														"line": 258,
 														"character": 10
 													}
 												],
@@ -43485,7 +43485,7 @@
 										"sources": [
 											{
 												"fileName": "ui5-webcomponents-fiori/user-menu-item/index.ts",
-												"line": 253,
+												"line": 255,
 												"character": 6
 											}
 										]
@@ -43696,7 +43696,7 @@
 							},
 							{
 								"kind": "text",
-								"text": " but allows selection (checkbox/radio) to be toggled\nwhen the list has a selection mode. The "
+								"text": " (no active press/hover feedback and the\n"
 							},
 							{
 								"kind": "code",
@@ -43704,14 +43704,14 @@
 							},
 							{
 								"kind": "text",
-								"text": " event is not fired for this type."
+								"text": " event is not fired), but the item can still be selected. Clicking the item body,\npressing Space/Enter, or interacting with the selection component (checkbox in Multi mode, radio\nbutton in Single modes) toggles the selection when the list has a selection mode."
 							}
 						]
 					},
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/user-menu-item/index.ts",
-							"line": 167,
+							"line": 169,
 							"character": 2
 						}
 					],
@@ -43774,7 +43774,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/user-menu-item/index.ts",
-							"line": 174,
+							"line": 176,
 							"character": 2
 						}
 					],
@@ -43832,7 +43832,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/user-menu-item/index.ts",
-							"line": 181,
+							"line": 183,
 							"character": 2
 						}
 					],
@@ -43890,7 +43890,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/user-menu-item/index.ts",
-							"line": 186,
+							"line": 188,
 							"character": 2
 						}
 					],
@@ -43964,7 +43964,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/user-menu-item/index.ts",
-							"line": 193,
+							"line": 195,
 							"character": 2
 						}
 					],
@@ -44022,7 +44022,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/user-menu-item/index.ts",
-							"line": 198,
+							"line": 200,
 							"character": 2
 						}
 					],
@@ -44088,7 +44088,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/user-menu-item/index.ts",
-							"line": 203,
+							"line": 205,
 							"character": 2
 						}
 					],
@@ -44146,7 +44146,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/user-menu-item/index.ts",
-							"line": 208,
+							"line": 210,
 							"character": 2
 						}
 					],
@@ -44196,7 +44196,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/user-menu-item/index.ts",
-							"line": 277,
+							"line": 279,
 							"character": 6
 						}
 					],
@@ -44209,7 +44209,7 @@
 						"sources": [
 							{
 								"fileName": "ui5-webcomponents-fiori/user-menu-item/index.ts",
-								"line": 277,
+								"line": 279,
 								"character": 6
 							}
 						],
@@ -44233,7 +44233,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/user-menu-item/index.ts",
-							"line": 281,
+							"line": 283,
 							"character": 2
 						}
 					],
@@ -44247,7 +44247,7 @@
 							"sources": [
 								{
 									"fileName": "ui5-webcomponents-fiori/user-menu-item/index.ts",
-									"line": 281,
+									"line": 283,
 									"character": 2
 								}
 							],
@@ -46156,7 +46156,7 @@
 						"summary": [
 							{
 								"kind": "text",
-								"text": "Defines the header text of the <code>ui5-li-group</code>."
+								"text": "Defines the header text of the group."
 							}
 						]
 					},
@@ -47029,7 +47029,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/user-settings-appearance-view-item/index.ts",
-							"line": 184,
+							"line": 186,
 							"character": 9
 						}
 					],
@@ -47216,7 +47216,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/user-settings-appearance-view-item/index.ts",
-							"line": 185,
+							"line": 187,
 							"character": 9
 						}
 					],
@@ -47469,7 +47469,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/user-settings-appearance-view-item/index.ts",
-							"line": 171,
+							"line": 173,
 							"character": 11
 						}
 					],
@@ -47496,7 +47496,7 @@
 												"sources": [
 													{
 														"fileName": "ui5-webcomponents-fiori/user-settings-appearance-view-item/index.ts",
-														"line": 174,
+														"line": 176,
 														"character": 10
 													}
 												],
@@ -47515,7 +47515,7 @@
 												"sources": [
 													{
 														"fileName": "ui5-webcomponents-fiori/user-settings-appearance-view-item/index.ts",
-														"line": 173,
+														"line": 175,
 														"character": 10
 													}
 												],
@@ -47560,7 +47560,7 @@
 										"sources": [
 											{
 												"fileName": "ui5-webcomponents-fiori/user-settings-appearance-view-item/index.ts",
-												"line": 172,
+												"line": 174,
 												"character": 6
 											}
 										]
@@ -47584,7 +47584,7 @@
 												"sources": [
 													{
 														"fileName": "ui5-webcomponents-fiori/user-settings-appearance-view-item/index.ts",
-														"line": 178,
+														"line": 180,
 														"character": 10
 													}
 												],
@@ -47603,7 +47603,7 @@
 												"sources": [
 													{
 														"fileName": "ui5-webcomponents-fiori/user-settings-appearance-view-item/index.ts",
-														"line": 177,
+														"line": 179,
 														"character": 10
 													}
 												],
@@ -47622,7 +47622,7 @@
 												"sources": [
 													{
 														"fileName": "ui5-webcomponents-fiori/user-settings-appearance-view-item/index.ts",
-														"line": 179,
+														"line": 181,
 														"character": 10
 													}
 												],
@@ -47646,7 +47646,7 @@
 										"sources": [
 											{
 												"fileName": "ui5-webcomponents-fiori/user-settings-appearance-view-item/index.ts",
-												"line": 176,
+												"line": 178,
 												"character": 6
 											}
 										]
@@ -47857,7 +47857,7 @@
 							},
 							{
 								"kind": "text",
-								"text": " but allows selection (checkbox/radio) to be toggled\nwhen the list has a selection mode. The "
+								"text": " (no active press/hover feedback and the\n"
 							},
 							{
 								"kind": "code",
@@ -47865,14 +47865,14 @@
 							},
 							{
 								"kind": "text",
-								"text": " event is not fired for this type."
+								"text": " event is not fired), but the item can still be selected. Clicking the item body,\npressing Space/Enter, or interacting with the selection component (checkbox in Multi mode, radio\nbutton in Single modes) toggles the selection when the list has a selection mode."
 							}
 						]
 					},
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/user-settings-appearance-view-item/index.ts",
-							"line": 132,
+							"line": 134,
 							"character": 2
 						}
 					],
@@ -47951,7 +47951,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/user-settings-appearance-view-item/index.ts",
-							"line": 141,
+							"line": 143,
 							"character": 2
 						}
 					],
@@ -48017,7 +48017,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/user-settings-appearance-view-item/index.ts",
-							"line": 146,
+							"line": 148,
 							"character": 2
 						}
 					],
@@ -48067,7 +48067,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/user-settings-appearance-view-item/index.ts",
-							"line": 195,
+							"line": 197,
 							"character": 6
 						}
 					],
@@ -48080,7 +48080,7 @@
 						"sources": [
 							{
 								"fileName": "ui5-webcomponents-fiori/user-settings-appearance-view-item/index.ts",
-								"line": 195,
+								"line": 197,
 								"character": 6
 							}
 						],
@@ -48104,7 +48104,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-fiori/user-settings-appearance-view-item/index.ts",
-							"line": 199,
+							"line": 201,
 							"character": 2
 						}
 					],
@@ -48118,7 +48118,7 @@
 							"sources": [
 								{
 									"fileName": "ui5-webcomponents-fiori/user-settings-appearance-view-item/index.ts",
-									"line": 199,
+									"line": 201,
 									"character": 2
 								}
 							],
@@ -49917,7 +49917,7 @@
 		},
 		{
 			"id": 1421,
-			"name": "UserSettingsView",
+			"name": "UserSettingsNotificationsView",
 			"variant": "declaration",
 			"kind": 128,
 			"flags": {},
@@ -49931,13 +49931,2921 @@
 					"signatures": [
 						{
 							"id": 1423,
-							"name": "new UserSettingsView",
+							"name": "new UserSettingsNotificationsView",
 							"variant": "signature",
 							"kind": 16384,
 							"flags": {},
 							"type": {
 								"type": "reference",
 								"target": 1421,
+								"name": "UserSettingsNotificationsView",
+								"package": "@fundamental-ngx/ui5-webcomponents-fiori"
+							}
+						}
+					]
+				},
+				{
+					"id": 1432,
+					"name": "elementRef",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isPublic": true
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view/index.ts",
+							"line": 112,
+							"character": 9
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/types/_debug_node-chunk.d.ts",
+							"qualifiedName": "ElementRef"
+						},
+						"typeArguments": [
+							{
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/@ui5/webcomponents-fiori/dist/UserSettingsNotificationsView.d.ts",
+									"qualifiedName": "UserSettingsNotificationsView"
+								},
+								"name": "UserSettingsNotificationsView",
+								"package": "@ui5/webcomponents-fiori"
+							}
+						],
+						"name": "ElementRef",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 1433,
+					"name": "injector",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isPublic": true
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view/index.ts",
+							"line": 113,
+							"character": 9
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/types/_chrome_dev_tools_performance-chunk.d.ts",
+							"qualifiedName": "Injector"
+						},
+						"name": "Injector",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 1424,
+					"name": "secondary",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Indicates whether the view is secondary. It is relevant only if the view is used in "
+							},
+							{
+								"kind": "code",
+								"text": "`pages`"
+							},
+							{
+								"kind": "text",
+								"text": " slot of "
+							},
+							{
+								"kind": "code",
+								"text": "`ui5-user-settings-item`"
+							},
+							{
+								"kind": "text",
+								"text": "\nand controls the visibility of the back button."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view/index.ts",
+							"line": 48,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/types/core.d.ts",
+							"qualifiedName": "InputSignalWithTransform"
+						},
+						"typeArguments": [
+							{
+								"type": "intrinsic",
+								"name": "boolean"
+							},
+							{
+								"type": "intrinsic",
+								"name": "unknown"
+							}
+						],
+						"name": "InputSignalWithTransform",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 1425,
+					"name": "selected",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Defines whether the view is selected. There can be just one selected view at a time."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view/index.ts",
+							"line": 53,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/types/core.d.ts",
+							"qualifiedName": "InputSignalWithTransform"
+						},
+						"typeArguments": [
+							{
+								"type": "intrinsic",
+								"name": "boolean"
+							},
+							{
+								"type": "intrinsic",
+								"name": "unknown"
+							}
+						],
+						"name": "InputSignalWithTransform",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 1428,
+					"name": "slots",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Available slots for content projection in this component.\n\nSlots allow you to insert custom content into predefined areas of the web component.\nUse the "
+							},
+							{
+								"kind": "code",
+								"text": "`slot`"
+							},
+							{
+								"kind": "text",
+								"text": " attribute on child elements to target specific slots.\n\n- **additionalContent**: Defines additional content displayed above the items list.\n- **(default)**: Defines the items of the component. Can be a mix of\n"
+							},
+							{
+								"kind": "code",
+								"text": "`ui5-user-settings-notifications-view-item`"
+							},
+							{
+								"kind": "text",
+								"text": " and\n"
+							},
+							{
+								"kind": "code",
+								"text": "`ui5-user-settings-notifications-view-group`"
+							},
+							{
+								"kind": "text",
+								"text": " elements.\n- **headerItems**: Defines header items rendered above the grouped items list.\nEach item is wrapped in a "
+							},
+							{
+								"kind": "code",
+								"text": "`role=\"form\"`"
+							},
+							{
+								"kind": "text",
+								"text": " landmark — a separate Tab stop.\nUse this slot for product-level toggles (e.g. \"Allow Notifications\") that appear\nabove the notification-type groups."
+							}
+						],
+						"blockTags": [
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "code",
+										"text": "```html\n<ui5-user-settings-notifications-view>\n  <div slot=\"header\">Custom header content</div>\n  <p>Default slot content</p>\n</ui5-user-settings-notifications-view>\n```"
+									}
+								]
+							},
+							{
+								"tag": "@see",
+								"content": [
+									{
+										"kind": "inline-tag",
+										"tag": "@link",
+										"text": "MDN Web Components Slots",
+										"target": "https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_templates_and_slots"
+									}
+								]
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view/index.ts",
+							"line": 96,
+							"character": 11
+						}
+					],
+					"type": {
+						"type": "array",
+						"elementType": {
+							"type": "reflection",
+							"declaration": {
+								"id": 1429,
+								"name": "__type",
+								"variant": "declaration",
+								"kind": 65536,
+								"flags": {},
+								"children": [
+									{
+										"id": 1431,
+										"name": "description",
+										"variant": "declaration",
+										"kind": 1024,
+										"flags": {},
+										"sources": [
+											{
+												"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view/index.ts",
+												"line": 99,
+												"character": 10
+											}
+										],
+										"type": {
+											"type": "intrinsic",
+											"name": "string"
+										},
+										"defaultValue": "\"Defines additional content displayed above the items list.\""
+									},
+									{
+										"id": 1430,
+										"name": "name",
+										"variant": "declaration",
+										"kind": 1024,
+										"flags": {},
+										"sources": [
+											{
+												"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view/index.ts",
+												"line": 98,
+												"character": 10
+											}
+										],
+										"type": {
+											"type": "intrinsic",
+											"name": "string"
+										},
+										"defaultValue": "\"additionalContent\""
+									}
+								],
+								"groups": [
+									{
+										"title": "Properties",
+										"children": [
+											1431,
+											1430
+										]
+									}
+								],
+								"sources": [
+									{
+										"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view/index.ts",
+										"line": 97,
+										"character": 6
+									}
+								]
+							}
+						}
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 1426,
+					"name": "text",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Defines the title text of the user settings view."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view/index.ts",
+							"line": 58,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/types/core.d.ts",
+							"qualifiedName": "InputSignal"
+						},
+						"typeArguments": [
+							{
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "intrinsic",
+										"name": "string"
+									}
+								]
+							}
+						],
+						"name": "InputSignal",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 1427,
+					"name": "ui5ItemClick",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Fired when a navigable item in the list is clicked.\n\nThe event is cancelable: preventing it skips the built-in drill-in to the\nparent's secondary view, allowing the application to take over."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view/index.ts",
+							"line": 68,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/types/_api-chunk.d.ts",
+							"qualifiedName": "OutputEmitterRef"
+						},
+						"typeArguments": [
+							{
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/@ui5/webcomponents-base/dist/index.d.ts",
+									"qualifiedName": "UI5CustomEvent"
+								},
+								"typeArguments": [
+									{
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@ui5/webcomponents-fiori/dist/UserSettingsNotificationsView.d.ts",
+											"qualifiedName": "UserSettingsNotificationsView"
+										},
+										"name": "UserSettingsNotificationsView",
+										"package": "@ui5/webcomponents-fiori"
+									},
+									{
+										"type": "literal",
+										"value": "item-click"
+									}
+								],
+								"name": "UI5CustomEvent",
+								"package": "@ui5/webcomponents-base"
+							}
+						],
+						"name": "OutputEmitterRef",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 1436,
+					"name": "element",
+					"variant": "declaration",
+					"kind": 262144,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view/index.ts",
+							"line": 123,
+							"character": 6
+						}
+					],
+					"getSignature": {
+						"id": 1437,
+						"name": "element",
+						"variant": "signature",
+						"kind": 524288,
+						"flags": {},
+						"sources": [
+							{
+								"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view/index.ts",
+								"line": 123,
+								"character": 6
+							}
+						],
+						"type": {
+							"type": "reference",
+							"target": {
+								"sourceFileName": "node_modules/@ui5/webcomponents-fiori/dist/UserSettingsNotificationsView.d.ts",
+								"qualifiedName": "UserSettingsNotificationsView"
+							},
+							"name": "UserSettingsNotificationsView",
+							"package": "@ui5/webcomponents-fiori"
+						}
+					}
+				},
+				{
+					"id": 1438,
+					"name": "ngAfterViewInit",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view/index.ts",
+							"line": 127,
+							"character": 2
+						}
+					],
+					"signatures": [
+						{
+							"id": 1439,
+							"name": "ngAfterViewInit",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view/index.ts",
+									"line": 127,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "void"
+							},
+							"implementationOf": {
+								"type": "reference",
+								"target": -1,
+								"name": "AfterViewInit.ngAfterViewInit"
+							}
+						}
+					],
+					"implementationOf": {
+						"type": "reference",
+						"target": -1,
+						"name": "AfterViewInit.ngAfterViewInit"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Constructors",
+					"children": [
+						1422
+					]
+				},
+				{
+					"title": "Properties",
+					"children": [
+						1432,
+						1433,
+						1424,
+						1425,
+						1428,
+						1426,
+						1427
+					]
+				},
+				{
+					"title": "Accessors",
+					"children": [
+						1436
+					]
+				},
+				{
+					"title": "Methods",
+					"children": [
+						1438
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view/index.ts",
+					"line": 42,
+					"character": 13
+				}
+			],
+			"implementedTypes": [
+				{
+					"type": "reference",
+					"target": {
+						"sourceFileName": "node_modules/@angular/core/types/core.d.ts",
+						"qualifiedName": "AfterViewInit"
+					},
+					"name": "AfterViewInit",
+					"package": "@angular/core"
+				}
+			]
+		},
+		{
+			"id": 1441,
+			"name": "UserSettingsNotificationsViewGroup",
+			"variant": "declaration",
+			"kind": 128,
+			"flags": {},
+			"children": [
+				{
+					"id": 1442,
+					"name": "constructor",
+					"variant": "declaration",
+					"kind": 512,
+					"flags": {},
+					"signatures": [
+						{
+							"id": 1443,
+							"name": "new UserSettingsNotificationsViewGroup",
+							"variant": "signature",
+							"kind": 16384,
+							"flags": {},
+							"type": {
+								"type": "reference",
+								"target": 1441,
+								"name": "UserSettingsNotificationsViewGroup",
+								"package": "@fundamental-ngx/ui5-webcomponents-fiori"
+							}
+						}
+					]
+				},
+				{
+					"id": 1453,
+					"name": "elementRef",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isPublic": true
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-group/index.ts",
+							"line": 119,
+							"character": 9
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/types/_debug_node-chunk.d.ts",
+							"qualifiedName": "ElementRef"
+						},
+						"typeArguments": [
+							{
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/@ui5/webcomponents-fiori/dist/UserSettingsNotificationsViewGroup.d.ts",
+									"qualifiedName": "UserSettingsNotificationsViewGroup"
+								},
+								"name": "UserSettingsNotificationsViewGroup",
+								"package": "@ui5/webcomponents-fiori"
+							}
+						],
+						"name": "ElementRef",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 1444,
+					"name": "headerAccessibleName",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Defines the accessible name of the header."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-group/index.ts",
+							"line": 47,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/types/core.d.ts",
+							"qualifiedName": "InputSignal"
+						},
+						"typeArguments": [
+							{
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "intrinsic",
+										"name": "string"
+									}
+								]
+							}
+						],
+						"name": "InputSignal",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 1445,
+					"name": "headerText",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Defines the header text of the group."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-group/index.ts",
+							"line": 52,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/types/core.d.ts",
+							"qualifiedName": "InputSignal"
+						},
+						"typeArguments": [
+							{
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "intrinsic",
+										"name": "string"
+									}
+								]
+							}
+						],
+						"name": "InputSignal",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 1454,
+					"name": "injector",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isPublic": true
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-group/index.ts",
+							"line": 120,
+							"character": 9
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/types/_chrome_dev_tools_performance-chunk.d.ts",
+							"qualifiedName": "Injector"
+						},
+						"name": "Injector",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 1449,
+					"name": "slots",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Available slots for content projection in this component.\n\nSlots allow you to insert custom content into predefined areas of the web component.\nUse the "
+							},
+							{
+								"kind": "code",
+								"text": "`slot`"
+							},
+							{
+								"kind": "text",
+								"text": " attribute on child elements to target specific slots.\n\n- **(default)**: Defines the items of the "
+							},
+							{
+								"kind": "code",
+								"text": "`ui5-user-settings-notifications-view-group`"
+							},
+							{
+								"kind": "text",
+								"text": ".\n- **header**: Defines the header of the component.\n\n*Note:** Using this slot, the default header text of group and the value of "
+							},
+							{
+								"kind": "code",
+								"text": "`headerText`"
+							},
+							{
+								"kind": "text",
+								"text": " property will be overwritten."
+							}
+						],
+						"blockTags": [
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "code",
+										"text": "```html\n<ui5-user-settings-notifications-view-group>\n  <div slot=\"header\">Custom header content</div>\n  <p>Default slot content</p>\n</ui5-user-settings-notifications-view-group>\n```"
+									}
+								]
+							},
+							{
+								"tag": "@see",
+								"content": [
+									{
+										"kind": "inline-tag",
+										"tag": "@link",
+										"text": "MDN Web Components Slots",
+										"target": "https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_templates_and_slots"
+									}
+								]
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-group/index.ts",
+							"line": 107,
+							"character": 11
+						}
+					],
+					"type": {
+						"type": "array",
+						"elementType": {
+							"type": "reflection",
+							"declaration": {
+								"id": 1450,
+								"name": "__type",
+								"variant": "declaration",
+								"kind": 65536,
+								"flags": {},
+								"children": [
+									{
+										"id": 1452,
+										"name": "description",
+										"variant": "declaration",
+										"kind": 1024,
+										"flags": {},
+										"sources": [
+											{
+												"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-group/index.ts",
+												"line": 110,
+												"character": 10
+											}
+										],
+										"type": {
+											"type": "intrinsic",
+											"name": "string"
+										},
+										"defaultValue": "\"Defines the items of the `ui5-user-settings-notifications-view-group`.\""
+									},
+									{
+										"id": 1451,
+										"name": "name",
+										"variant": "declaration",
+										"kind": 1024,
+										"flags": {},
+										"sources": [
+											{
+												"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-group/index.ts",
+												"line": 109,
+												"character": 10
+											}
+										],
+										"type": {
+											"type": "intrinsic",
+											"name": "string"
+										},
+										"defaultValue": "\"default\""
+									}
+								],
+								"groups": [
+									{
+										"title": "Properties",
+										"children": [
+											1452,
+											1451
+										]
+									}
+								],
+								"sources": [
+									{
+										"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-group/index.ts",
+										"line": 108,
+										"character": 6
+									}
+								]
+							}
+						}
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 1447,
+					"name": "ui5Move",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Fired when a movable list item is dropped onto a drop target.\n\n*Note:** "
+							},
+							{
+								"kind": "code",
+								"text": "`move`"
+							},
+							{
+								"kind": "text",
+								"text": " event is fired only if there was a preceding "
+							},
+							{
+								"kind": "code",
+								"text": "`move-over`"
+							},
+							{
+								"kind": "text",
+								"text": " with prevented default action."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-group/index.ts",
+							"line": 76,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/types/_api-chunk.d.ts",
+							"qualifiedName": "OutputEmitterRef"
+						},
+						"typeArguments": [
+							{
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/@ui5/webcomponents-base/dist/index.d.ts",
+									"qualifiedName": "UI5CustomEvent"
+								},
+								"typeArguments": [
+									{
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@ui5/webcomponents-fiori/dist/UserSettingsNotificationsViewGroup.d.ts",
+											"qualifiedName": "UserSettingsNotificationsViewGroup"
+										},
+										"name": "UserSettingsNotificationsViewGroup",
+										"package": "@ui5/webcomponents-fiori"
+									},
+									{
+										"type": "literal",
+										"value": "move"
+									}
+								],
+								"name": "UI5CustomEvent",
+								"package": "@ui5/webcomponents-base"
+							}
+						],
+						"name": "OutputEmitterRef",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 1448,
+					"name": "ui5MoveOver",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Fired when a movable list item is moved over a potential drop target during a dragging operation.\n\nIf the new position is valid, prevent the default action of the event using "
+							},
+							{
+								"kind": "code",
+								"text": "`preventDefault()`"
+							},
+							{
+								"kind": "text",
+								"text": "."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-group/index.ts",
+							"line": 83,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/types/_api-chunk.d.ts",
+							"qualifiedName": "OutputEmitterRef"
+						},
+						"typeArguments": [
+							{
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/@ui5/webcomponents-base/dist/index.d.ts",
+									"qualifiedName": "UI5CustomEvent"
+								},
+								"typeArguments": [
+									{
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@ui5/webcomponents-fiori/dist/UserSettingsNotificationsViewGroup.d.ts",
+											"qualifiedName": "UserSettingsNotificationsViewGroup"
+										},
+										"name": "UserSettingsNotificationsViewGroup",
+										"package": "@ui5/webcomponents-fiori"
+									},
+									{
+										"type": "literal",
+										"value": "move-over"
+									}
+								],
+								"name": "UI5CustomEvent",
+								"package": "@ui5/webcomponents-base"
+							}
+						],
+						"name": "OutputEmitterRef",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 1446,
+					"name": "wrappingType",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Defines if the text of the component should wrap when it's too long.\nWhen set to \"Normal\", the content (title, description) will be wrapped\nusing the "
+							},
+							{
+								"kind": "code",
+								"text": "`ui5-expandable-text`"
+							},
+							{
+								"kind": "text",
+								"text": " component.<br/>\n\nThe text can wrap up to 100 characters on small screens (size S) and\nup to 300 characters on larger screens (size M and above). When text exceeds\nthese limits, it truncates with an ellipsis followed by a text expansion trigger.\n\nAvailable options are:\n- "
+							},
+							{
+								"kind": "code",
+								"text": "`None`"
+							},
+							{
+								"kind": "text",
+								"text": " (default) - The text will truncate with an ellipsis.\n- "
+							},
+							{
+								"kind": "code",
+								"text": "`Normal`"
+							},
+							{
+								"kind": "text",
+								"text": " - The text will wrap (without truncation)."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-group/index.ts",
+							"line": 67,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/types/core.d.ts",
+							"qualifiedName": "InputSignal"
+						},
+						"typeArguments": [
+							{
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "literal",
+										"value": "None"
+									},
+									{
+										"type": "literal",
+										"value": "Normal"
+									}
+								]
+							}
+						],
+						"name": "InputSignal",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 1457,
+					"name": "element",
+					"variant": "declaration",
+					"kind": 262144,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-group/index.ts",
+							"line": 130,
+							"character": 6
+						}
+					],
+					"getSignature": {
+						"id": 1458,
+						"name": "element",
+						"variant": "signature",
+						"kind": 524288,
+						"flags": {},
+						"sources": [
+							{
+								"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-group/index.ts",
+								"line": 130,
+								"character": 6
+							}
+						],
+						"type": {
+							"type": "reference",
+							"target": {
+								"sourceFileName": "node_modules/@ui5/webcomponents-fiori/dist/UserSettingsNotificationsViewGroup.d.ts",
+								"qualifiedName": "UserSettingsNotificationsViewGroup"
+							},
+							"name": "UserSettingsNotificationsViewGroup",
+							"package": "@ui5/webcomponents-fiori"
+						}
+					}
+				},
+				{
+					"id": 1459,
+					"name": "ngAfterViewInit",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-group/index.ts",
+							"line": 134,
+							"character": 2
+						}
+					],
+					"signatures": [
+						{
+							"id": 1460,
+							"name": "ngAfterViewInit",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-group/index.ts",
+									"line": 134,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "void"
+							},
+							"implementationOf": {
+								"type": "reference",
+								"target": -1,
+								"name": "AfterViewInit.ngAfterViewInit"
+							}
+						}
+					],
+					"implementationOf": {
+						"type": "reference",
+						"target": -1,
+						"name": "AfterViewInit.ngAfterViewInit"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Constructors",
+					"children": [
+						1442
+					]
+				},
+				{
+					"title": "Properties",
+					"children": [
+						1453,
+						1444,
+						1445,
+						1454,
+						1449,
+						1447,
+						1448,
+						1446
+					]
+				},
+				{
+					"title": "Accessors",
+					"children": [
+						1457
+					]
+				},
+				{
+					"title": "Methods",
+					"children": [
+						1459
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-group/index.ts",
+					"line": 42,
+					"character": 13
+				}
+			],
+			"implementedTypes": [
+				{
+					"type": "reference",
+					"target": {
+						"sourceFileName": "node_modules/@angular/core/types/core.d.ts",
+						"qualifiedName": "AfterViewInit"
+					},
+					"name": "AfterViewInit",
+					"package": "@angular/core"
+				}
+			]
+		},
+		{
+			"id": 1462,
+			"name": "UserSettingsNotificationsViewItem",
+			"variant": "declaration",
+			"kind": 128,
+			"flags": {},
+			"children": [
+				{
+					"id": 1463,
+					"name": "constructor",
+					"variant": "declaration",
+					"kind": 512,
+					"flags": {},
+					"signatures": [
+						{
+							"id": 1464,
+							"name": "new UserSettingsNotificationsViewItem",
+							"variant": "signature",
+							"kind": 16384,
+							"flags": {},
+							"type": {
+								"type": "reference",
+								"target": 1462,
+								"name": "UserSettingsNotificationsViewItem",
+								"package": "@fundamental-ngx/ui5-webcomponents-fiori"
+							}
+						}
+					]
+				},
+				{
+					"id": 1470,
+					"name": "accessibilityAttributes",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Defines the additional accessibility attributes that will be applied to the component.\nThe following fields are supported:\n\n- **ariaSetsize**: Defines the number of items in the current set  when not all items in the set are present in the DOM.\n*Note:** The value is an integer reflecting the number of items in the complete set. If the size of the entire set is unknown, set "
+							},
+							{
+								"kind": "code",
+								"text": "`-1`"
+							},
+							{
+								"kind": "text",
+								"text": ".\n\n- **ariaPosinset**: Defines an element's number or position in the current set when not all items are present in the DOM.\n*Note:** The value is an integer greater than or equal to 1, and less than or equal to the size of the set when that size is known."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+							"line": 88,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/types/core.d.ts",
+							"qualifiedName": "InputSignal"
+						},
+						"typeArguments": [
+							{
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@ui5/webcomponents/dist/ListItem.d.ts",
+											"qualifiedName": "ListItemAccessibilityAttributes"
+										},
+										"name": "ListItemAccessibilityAttributes",
+										"package": "@ui5/webcomponents"
+									}
+								]
+							}
+						],
+						"name": "InputSignal",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 1471,
+					"name": "accessibleName",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Defines the text alternative of the component.\n\n*Note**: If not provided a default text alternative will be set, if present."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+							"line": 95,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/types/core.d.ts",
+							"qualifiedName": "InputSignal"
+						},
+						"typeArguments": [
+							{
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "intrinsic",
+										"name": "string"
+									}
+								]
+							}
+						],
+						"name": "InputSignal",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 1472,
+					"name": "accessibleRole",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Used to define the role of the list item.\n\n*Note:** If not set, the role is automatically inherited from the parent "
+							},
+							{
+								"kind": "code",
+								"text": "`ui5-list`"
+							},
+							{
+								"kind": "text",
+								"text": " based on its "
+							},
+							{
+								"kind": "code",
+								"text": "`accessible-role`"
+							},
+							{
+								"kind": "text",
+								"text": " property\n(e.g. "
+							},
+							{
+								"kind": "code",
+								"text": "`Menu`"
+							},
+							{
+								"kind": "text",
+								"text": " -> "
+							},
+							{
+								"kind": "code",
+								"text": "`MenuItem`"
+							},
+							{
+								"kind": "text",
+								"text": ", "
+							},
+							{
+								"kind": "code",
+								"text": "`Tree`"
+							},
+							{
+								"kind": "text",
+								"text": " -> "
+							},
+							{
+								"kind": "code",
+								"text": "`TreeItem`"
+							},
+							{
+								"kind": "text",
+								"text": ", "
+							},
+							{
+								"kind": "code",
+								"text": "`ListBox`"
+							},
+							{
+								"kind": "text",
+								"text": " -> "
+							},
+							{
+								"kind": "code",
+								"text": "`Option`"
+							},
+							{
+								"kind": "text",
+								"text": ").\nAn explicitly set "
+							},
+							{
+								"kind": "code",
+								"text": "`accessible-role`"
+							},
+							{
+								"kind": "text",
+								"text": " on the list item takes precedence over the inherited role."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+							"line": 104,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/types/core.d.ts",
+							"qualifiedName": "InputSignal"
+						},
+						"typeArguments": [
+							{
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "literal",
+										"value": "ListItem"
+									},
+									{
+										"type": "literal",
+										"value": "MenuItem"
+									},
+									{
+										"type": "literal",
+										"value": "TreeItem"
+									},
+									{
+										"type": "literal",
+										"value": "Option"
+									},
+									{
+										"type": "literal",
+										"value": "None"
+									}
+								]
+							}
+						],
+						"name": "InputSignal",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 1465,
+					"name": "bylineText",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Defines the byline text of the item, rendered below the title."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+							"line": 50,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/types/core.d.ts",
+							"qualifiedName": "InputSignal"
+						},
+						"typeArguments": [
+							{
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "intrinsic",
+										"name": "string"
+									}
+								]
+							}
+						],
+						"name": "InputSignal",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 1466,
+					"name": "checked",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Defines whether the trailing switch is on.\n\nIgnored when the "
+							},
+							{
+								"kind": "code",
+								"text": "`endContent`"
+							},
+							{
+								"kind": "text",
+								"text": " slot is used."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+							"line": 57,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/types/core.d.ts",
+							"qualifiedName": "InputSignalWithTransform"
+						},
+						"typeArguments": [
+							{
+								"type": "intrinsic",
+								"name": "boolean"
+							},
+							{
+								"type": "intrinsic",
+								"name": "unknown"
+							}
+						],
+						"name": "InputSignalWithTransform",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 1491,
+					"name": "elementRef",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isPublic": true
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+							"line": 211,
+							"character": 9
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/types/_debug_node-chunk.d.ts",
+							"qualifiedName": "ElementRef"
+						},
+						"typeArguments": [
+							{
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/@ui5/webcomponents-fiori/dist/UserSettingsNotificationsViewItem.d.ts",
+									"qualifiedName": "UserSettingsNotificationsViewItem"
+								},
+								"name": "UserSettingsNotificationsViewItem",
+								"package": "@ui5/webcomponents-fiori"
+							}
+						],
+						"name": "ElementRef",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 1473,
+					"name": "highlight",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Defines the highlight state of the list items.\nAvailable options are: "
+							},
+							{
+								"kind": "code",
+								"text": "`\"None\"`"
+							},
+							{
+								"kind": "text",
+								"text": " (by default), "
+							},
+							{
+								"kind": "code",
+								"text": "`\"Positive\"`"
+							},
+							{
+								"kind": "text",
+								"text": ", "
+							},
+							{
+								"kind": "code",
+								"text": "`\"Critical\"`"
+							},
+							{
+								"kind": "text",
+								"text": ", "
+							},
+							{
+								"kind": "code",
+								"text": "`\"Information\"`"
+							},
+							{
+								"kind": "text",
+								"text": " and "
+							},
+							{
+								"kind": "code",
+								"text": "`\"Negative\"`"
+							},
+							{
+								"kind": "text",
+								"text": "."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+							"line": 110,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/types/core.d.ts",
+							"qualifiedName": "InputSignal"
+						},
+						"typeArguments": [
+							{
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "literal",
+										"value": "None"
+									},
+									{
+										"type": "literal",
+										"value": "Positive"
+									},
+									{
+										"type": "literal",
+										"value": "Critical"
+									},
+									{
+										"type": "literal",
+										"value": "Negative"
+									},
+									{
+										"type": "literal",
+										"value": "Information"
+									}
+								]
+							}
+						],
+						"name": "InputSignal",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 1492,
+					"name": "injector",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isPublic": true
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+							"line": 212,
+							"character": 9
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/types/_chrome_dev_tools_performance-chunk.d.ts",
+							"qualifiedName": "Injector"
+						},
+						"name": "Injector",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 1467,
+					"name": "itemKey",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Defines the unique identifier of the item.\n\nWhen the item is navigable, "
+							},
+							{
+								"kind": "code",
+								"text": "`itemKey`"
+							},
+							{
+								"kind": "text",
+								"text": " is also used to route to a matching sibling\n"
+							},
+							{
+								"kind": "code",
+								"text": "`secondary`"
+							},
+							{
+								"kind": "text",
+								"text": " view by id."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+							"line": 65,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/types/core.d.ts",
+							"qualifiedName": "InputSignal"
+						},
+						"typeArguments": [
+							{
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "intrinsic",
+										"name": "string"
+									}
+								]
+							}
+						],
+						"name": "InputSignal",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 1474,
+					"name": "movable",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Defines whether the item is movable."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+							"line": 115,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/types/core.d.ts",
+							"qualifiedName": "InputSignalWithTransform"
+						},
+						"typeArguments": [
+							{
+								"type": "intrinsic",
+								"name": "boolean"
+							},
+							{
+								"type": "intrinsic",
+								"name": "unknown"
+							}
+						],
+						"name": "InputSignalWithTransform",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 1468,
+					"name": "navigable",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Defines whether the item is navigable. When true, a navigation arrow is rendered\nand the whole row becomes clickable (fires the parent view's "
+							},
+							{
+								"kind": "code",
+								"text": "`item-click`"
+							},
+							{
+								"kind": "text",
+								"text": " event)."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+							"line": 71,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/types/core.d.ts",
+							"qualifiedName": "InputSignalWithTransform"
+						},
+						"typeArguments": [
+							{
+								"type": "intrinsic",
+								"name": "boolean"
+							},
+							{
+								"type": "intrinsic",
+								"name": "unknown"
+							}
+						],
+						"name": "InputSignalWithTransform",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 1475,
+					"name": "navigated",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "The navigated state of the list item.\nIf set to "
+							},
+							{
+								"kind": "code",
+								"text": "`true`"
+							},
+							{
+								"kind": "text",
+								"text": ", a navigation indicator is displayed at the end of the list item."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+							"line": 121,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/types/core.d.ts",
+							"qualifiedName": "InputSignalWithTransform"
+						},
+						"typeArguments": [
+							{
+								"type": "intrinsic",
+								"name": "boolean"
+							},
+							{
+								"type": "intrinsic",
+								"name": "unknown"
+							}
+						],
+						"name": "InputSignalWithTransform",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 1476,
+					"name": "selected",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Defines the selected state of the component."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+							"line": 126,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/types/core.d.ts",
+							"qualifiedName": "InputSignalWithTransform"
+						},
+						"typeArguments": [
+							{
+								"type": "intrinsic",
+								"name": "boolean"
+							},
+							{
+								"type": "intrinsic",
+								"name": "unknown"
+							}
+						],
+						"name": "InputSignalWithTransform",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 1482,
+					"name": "slots",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Available slots for content projection in this component.\n\nSlots allow you to insert custom content into predefined areas of the web component.\nUse the "
+							},
+							{
+								"kind": "code",
+								"text": "`slot`"
+							},
+							{
+								"kind": "text",
+								"text": " attribute on child elements to target specific slots.\n\n- **endContent**: Defines custom content rendered at the trailing end of the item, replacing the\ndefault switch. Use this to place a "
+							},
+							{
+								"kind": "code",
+								"text": "`ui5-select`"
+							},
+							{
+								"kind": "text",
+								"text": ", "
+							},
+							{
+								"kind": "code",
+								"text": "`ui5-input`"
+							},
+							{
+								"kind": "text",
+								"text": ", or any other\ncontrol instead of a boolean toggle.\n- **(default)**: Defines the content of the component.\n- **deleteButton**: Defines the delete button, displayed in \"Delete\" mode.\n*Note:** While the slot allows custom buttons, to match\ndesign guidelines, please use the "
+							},
+							{
+								"kind": "code",
+								"text": "`ui5-button`"
+							},
+							{
+								"kind": "text",
+								"text": " component.\n*Note:** When the slot is not present, a built-in delete button will be displayed."
+							}
+						],
+						"blockTags": [
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "code",
+										"text": "```html\n<ui5-user-settings-notifications-view-item>\n  <div slot=\"header\">Custom header content</div>\n  <p>Default slot content</p>\n</ui5-user-settings-notifications-view-item>\n```"
+									}
+								]
+							},
+							{
+								"tag": "@see",
+								"content": [
+									{
+										"kind": "inline-tag",
+										"tag": "@link",
+										"text": "MDN Web Components Slots",
+										"target": "https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_templates_and_slots"
+									}
+								]
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+							"line": 194,
+							"character": 11
+						}
+					],
+					"type": {
+						"type": "array",
+						"elementType": {
+							"type": "union",
+							"types": [
+								{
+									"type": "reflection",
+									"declaration": {
+										"id": 1483,
+										"name": "__type",
+										"variant": "declaration",
+										"kind": 65536,
+										"flags": {},
+										"children": [
+											{
+												"id": 1485,
+												"name": "description",
+												"variant": "declaration",
+												"kind": 1024,
+												"flags": {},
+												"sources": [
+													{
+														"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+														"line": 197,
+														"character": 10
+													}
+												],
+												"type": {
+													"type": "intrinsic",
+													"name": "string"
+												},
+												"defaultValue": "\"Defines custom content rendered at the trailing end of the item, replacing the\\ndefault switch. Use this to place a `ui5-select`, `ui5-input`, or any other\\ncontrol instead of a boolean toggle.\""
+											},
+											{
+												"id": 1484,
+												"name": "name",
+												"variant": "declaration",
+												"kind": 1024,
+												"flags": {},
+												"sources": [
+													{
+														"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+														"line": 196,
+														"character": 10
+													}
+												],
+												"type": {
+													"type": "intrinsic",
+													"name": "string"
+												},
+												"defaultValue": "\"endContent\""
+											},
+											{
+												"id": 1486,
+												"name": "since",
+												"variant": "declaration",
+												"kind": 1024,
+												"flags": {
+													"isOptional": true
+												},
+												"sources": [
+													{
+														"fileName": "ui5-webcomponents-fiori/dynamic-page-title/index.ts",
+														"line": 119,
+														"character": 10
+													}
+												],
+												"type": {
+													"type": "intrinsic",
+													"name": "undefined"
+												},
+												"defaultValue": "\"2.3.0\""
+											}
+										],
+										"groups": [
+											{
+												"title": "Properties",
+												"children": [
+													1485,
+													1484,
+													1486
+												]
+											}
+										],
+										"sources": [
+											{
+												"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+												"line": 195,
+												"character": 6
+											}
+										]
+									}
+								},
+								{
+									"type": "reflection",
+									"declaration": {
+										"id": 1487,
+										"name": "__type",
+										"variant": "declaration",
+										"kind": 65536,
+										"flags": {},
+										"children": [
+											{
+												"id": 1489,
+												"name": "description",
+												"variant": "declaration",
+												"kind": 1024,
+												"flags": {},
+												"sources": [
+													{
+														"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+														"line": 205,
+														"character": 10
+													}
+												],
+												"type": {
+													"type": "intrinsic",
+													"name": "string"
+												},
+												"defaultValue": "\"Defines the delete button, displayed in \\\"Delete\\\" mode.\\n**Note:** While the slot allows custom buttons, to match\\ndesign guidelines, please use the `ui5-button` component.\\n**Note:** When the slot is not present, a built-in delete button will be displayed.\""
+											},
+											{
+												"id": 1488,
+												"name": "name",
+												"variant": "declaration",
+												"kind": 1024,
+												"flags": {},
+												"sources": [
+													{
+														"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+														"line": 204,
+														"character": 10
+													}
+												],
+												"type": {
+													"type": "intrinsic",
+													"name": "string"
+												},
+												"defaultValue": "\"deleteButton\""
+											},
+											{
+												"id": 1490,
+												"name": "since",
+												"variant": "declaration",
+												"kind": 1024,
+												"flags": {},
+												"sources": [
+													{
+														"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+														"line": 206,
+														"character": 10
+													}
+												],
+												"type": {
+													"type": "intrinsic",
+													"name": "string"
+												},
+												"defaultValue": "\"1.9.0\""
+											}
+										],
+										"groups": [
+											{
+												"title": "Properties",
+												"children": [
+													1489,
+													1488,
+													1490
+												]
+											}
+										],
+										"sources": [
+											{
+												"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+												"line": 203,
+												"character": 6
+											}
+										]
+									}
+								}
+							]
+						}
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 1469,
+					"name": "text",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Defines the title text of the item."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+							"line": 76,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/types/core.d.ts",
+							"qualifiedName": "InputSignal"
+						},
+						"typeArguments": [
+							{
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "intrinsic",
+										"name": "string"
+									}
+								]
+							}
+						],
+						"name": "InputSignal",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 1477,
+					"name": "tooltip",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Defines the text of the tooltip that would be displayed for the list item."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+							"line": 131,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/types/core.d.ts",
+							"qualifiedName": "InputSignal"
+						},
+						"typeArguments": [
+							{
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "intrinsic",
+										"name": "string"
+									}
+								]
+							}
+						],
+						"name": "InputSignal",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 1478,
+					"name": "type",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Defines the visual indication and behavior of the list items.\nAvailable options are "
+							},
+							{
+								"kind": "code",
+								"text": "`Active`"
+							},
+							{
+								"kind": "text",
+								"text": " (by default), "
+							},
+							{
+								"kind": "code",
+								"text": "`Inactive`"
+							},
+							{
+								"kind": "text",
+								"text": ", "
+							},
+							{
+								"kind": "code",
+								"text": "`InactiveSelectable`"
+							},
+							{
+								"kind": "text",
+								"text": ", "
+							},
+							{
+								"kind": "code",
+								"text": "`Detail`"
+							},
+							{
+								"kind": "text",
+								"text": " and "
+							},
+							{
+								"kind": "code",
+								"text": "`Navigation`"
+							},
+							{
+								"kind": "text",
+								"text": ".\n\n*Note:** When set to "
+							},
+							{
+								"kind": "code",
+								"text": "`Active`"
+							},
+							{
+								"kind": "text",
+								"text": " or "
+							},
+							{
+								"kind": "code",
+								"text": "`Navigation`"
+							},
+							{
+								"kind": "text",
+								"text": ", the item will provide visual response upon press and hover,\nwhile with type "
+							},
+							{
+								"kind": "code",
+								"text": "`Inactive`"
+							},
+							{
+								"kind": "text",
+								"text": ", "
+							},
+							{
+								"kind": "code",
+								"text": "`InactiveSelectable`"
+							},
+							{
+								"kind": "text",
+								"text": " and "
+							},
+							{
+								"kind": "code",
+								"text": "`Detail`"
+							},
+							{
+								"kind": "text",
+								"text": " - will not.\n\n*Note:** "
+							},
+							{
+								"kind": "code",
+								"text": "`InactiveSelectable`"
+							},
+							{
+								"kind": "text",
+								"text": " behaves like "
+							},
+							{
+								"kind": "code",
+								"text": "`Inactive`"
+							},
+							{
+								"kind": "text",
+								"text": " (no active press/hover feedback and the\n"
+							},
+							{
+								"kind": "code",
+								"text": "`item-click`"
+							},
+							{
+								"kind": "text",
+								"text": " event is not fired), but the item can still be selected. Clicking the item body,\npressing Space/Enter, or interacting with the selection component (checkbox in Multi mode, radio\nbutton in Single modes) toggles the selection when the list has a selection mode."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+							"line": 145,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/types/core.d.ts",
+							"qualifiedName": "InputSignal"
+						},
+						"typeArguments": [
+							{
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "literal",
+										"value": "Inactive"
+									},
+									{
+										"type": "literal",
+										"value": "InactiveSelectable"
+									},
+									{
+										"type": "literal",
+										"value": "Active"
+									},
+									{
+										"type": "literal",
+										"value": "Detail"
+									},
+									{
+										"type": "literal",
+										"value": "Navigation"
+									}
+								]
+							}
+						],
+						"name": "InputSignal",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 1480,
+					"name": "ui5Click",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Fired when the component is activated either with a mouse/tap or by using the Enter or Space key.\n\n*Note:** The event will not be fired if the "
+							},
+							{
+								"kind": "code",
+								"text": "`disabled`"
+							},
+							{
+								"kind": "text",
+								"text": " property is set to "
+							},
+							{
+								"kind": "code",
+								"text": "`true`"
+							},
+							{
+								"kind": "text",
+								"text": "."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+							"line": 161,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/types/_api-chunk.d.ts",
+							"qualifiedName": "OutputEmitterRef"
+						},
+						"typeArguments": [
+							{
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/@ui5/webcomponents-base/dist/index.d.ts",
+									"qualifiedName": "UI5CustomEvent"
+								},
+								"typeArguments": [
+									{
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@ui5/webcomponents-fiori/dist/UserSettingsNotificationsViewItem.d.ts",
+											"qualifiedName": "UserSettingsNotificationsViewItem"
+										},
+										"name": "UserSettingsNotificationsViewItem",
+										"package": "@ui5/webcomponents-fiori"
+									},
+									{
+										"type": "literal",
+										"value": "click"
+									}
+								],
+								"name": "UI5CustomEvent",
+								"package": "@ui5/webcomponents-base"
+							}
+						],
+						"name": "OutputEmitterRef",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 1481,
+					"name": "ui5DetailClick",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Fired when the user clicks on the detail button when type is "
+							},
+							{
+								"kind": "code",
+								"text": "`Detail`"
+							},
+							{
+								"kind": "text",
+								"text": "."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+							"line": 166,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/types/_api-chunk.d.ts",
+							"qualifiedName": "OutputEmitterRef"
+						},
+						"typeArguments": [
+							{
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/@ui5/webcomponents-base/dist/index.d.ts",
+									"qualifiedName": "UI5CustomEvent"
+								},
+								"typeArguments": [
+									{
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@ui5/webcomponents-fiori/dist/UserSettingsNotificationsViewItem.d.ts",
+											"qualifiedName": "UserSettingsNotificationsViewItem"
+										},
+										"name": "UserSettingsNotificationsViewItem",
+										"package": "@ui5/webcomponents-fiori"
+									},
+									{
+										"type": "literal",
+										"value": "detail-click"
+									}
+								],
+								"name": "UI5CustomEvent",
+								"package": "@ui5/webcomponents-base"
+							}
+						],
+						"name": "OutputEmitterRef",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 1479,
+					"name": "ui5SwitchChange",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Fired when the switch state changes.\n\nNot fired when the "
+							},
+							{
+								"kind": "code",
+								"text": "`endContent`"
+							},
+							{
+								"kind": "text",
+								"text": " slot is used to override the trailing control."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+							"line": 154,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/types/_api-chunk.d.ts",
+							"qualifiedName": "OutputEmitterRef"
+						},
+						"typeArguments": [
+							{
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/@ui5/webcomponents-base/dist/index.d.ts",
+									"qualifiedName": "UI5CustomEvent"
+								},
+								"typeArguments": [
+									{
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@ui5/webcomponents-fiori/dist/UserSettingsNotificationsViewItem.d.ts",
+											"qualifiedName": "UserSettingsNotificationsViewItem"
+										},
+										"name": "UserSettingsNotificationsViewItem",
+										"package": "@ui5/webcomponents-fiori"
+									},
+									{
+										"type": "literal",
+										"value": "switch-change"
+									}
+								],
+								"name": "UI5CustomEvent",
+								"package": "@ui5/webcomponents-base"
+							}
+						],
+						"name": "OutputEmitterRef",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 1495,
+					"name": "element",
+					"variant": "declaration",
+					"kind": 262144,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+							"line": 222,
+							"character": 6
+						}
+					],
+					"getSignature": {
+						"id": 1496,
+						"name": "element",
+						"variant": "signature",
+						"kind": 524288,
+						"flags": {},
+						"sources": [
+							{
+								"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+								"line": 222,
+								"character": 6
+							}
+						],
+						"type": {
+							"type": "reference",
+							"target": {
+								"sourceFileName": "node_modules/@ui5/webcomponents-fiori/dist/UserSettingsNotificationsViewItem.d.ts",
+								"qualifiedName": "UserSettingsNotificationsViewItem"
+							},
+							"name": "UserSettingsNotificationsViewItem",
+							"package": "@ui5/webcomponents-fiori"
+						}
+					}
+				},
+				{
+					"id": 1497,
+					"name": "ngAfterViewInit",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+							"line": 226,
+							"character": 2
+						}
+					],
+					"signatures": [
+						{
+							"id": 1498,
+							"name": "ngAfterViewInit",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+									"line": 226,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "void"
+							},
+							"implementationOf": {
+								"type": "reference",
+								"target": -1,
+								"name": "AfterViewInit.ngAfterViewInit"
+							}
+						}
+					],
+					"implementationOf": {
+						"type": "reference",
+						"target": -1,
+						"name": "AfterViewInit.ngAfterViewInit"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Constructors",
+					"children": [
+						1463
+					]
+				},
+				{
+					"title": "Properties",
+					"children": [
+						1470,
+						1471,
+						1472,
+						1465,
+						1466,
+						1491,
+						1473,
+						1492,
+						1467,
+						1474,
+						1468,
+						1475,
+						1476,
+						1482,
+						1469,
+						1477,
+						1478,
+						1480,
+						1481,
+						1479
+					]
+				},
+				{
+					"title": "Accessors",
+					"children": [
+						1495
+					]
+				},
+				{
+					"title": "Methods",
+					"children": [
+						1497
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+					"line": 45,
+					"character": 13
+				}
+			],
+			"implementedTypes": [
+				{
+					"type": "reference",
+					"target": {
+						"sourceFileName": "node_modules/@angular/core/types/core.d.ts",
+						"qualifiedName": "AfterViewInit"
+					},
+					"name": "AfterViewInit",
+					"package": "@angular/core"
+				}
+			]
+		},
+		{
+			"id": 1500,
+			"name": "UserSettingsView",
+			"variant": "declaration",
+			"kind": 128,
+			"flags": {},
+			"children": [
+				{
+					"id": 1501,
+					"name": "constructor",
+					"variant": "declaration",
+					"kind": 512,
+					"flags": {},
+					"signatures": [
+						{
+							"id": 1502,
+							"name": "new UserSettingsView",
+							"variant": "signature",
+							"kind": 16384,
+							"flags": {},
+							"type": {
+								"type": "reference",
+								"target": 1500,
 								"name": "UserSettingsView",
 								"package": "@fundamental-ngx/ui5-webcomponents-fiori"
 							}
@@ -49945,7 +52853,7 @@
 					]
 				},
 				{
-					"id": 1431,
+					"id": 1510,
 					"name": "elementRef",
 					"variant": "declaration",
 					"kind": 1024,
@@ -49982,7 +52890,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 1432,
+					"id": 1511,
 					"name": "injector",
 					"variant": "declaration",
 					"kind": 1024,
@@ -50008,7 +52916,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 1424,
+					"id": 1503,
 					"name": "secondary",
 					"variant": "declaration",
 					"kind": 1024,
@@ -50066,7 +52974,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 1425,
+					"id": 1504,
 					"name": "selected",
 					"variant": "declaration",
 					"kind": 1024,
@@ -50108,7 +53016,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 1427,
+					"id": 1506,
 					"name": "slots",
 					"variant": "declaration",
 					"kind": 1024,
@@ -50165,14 +53073,14 @@
 						"elementType": {
 							"type": "reflection",
 							"declaration": {
-								"id": 1428,
+								"id": 1507,
 								"name": "__type",
 								"variant": "declaration",
 								"kind": 65536,
 								"flags": {},
 								"children": [
 									{
-										"id": 1430,
+										"id": 1509,
 										"name": "description",
 										"variant": "declaration",
 										"kind": 1024,
@@ -50191,7 +53099,7 @@
 										"defaultValue": "\"Defines the content of the view.\""
 									},
 									{
-										"id": 1429,
+										"id": 1508,
 										"name": "name",
 										"variant": "declaration",
 										"kind": 1024,
@@ -50214,8 +53122,8 @@
 									{
 										"title": "Properties",
 										"children": [
-											1430,
-											1429
+											1509,
+											1508
 										]
 									}
 								],
@@ -50232,7 +53140,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 1426,
+					"id": 1505,
 					"name": "text",
 					"variant": "declaration",
 					"kind": 1024,
@@ -50279,7 +53187,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 1434,
+					"id": 1513,
 					"name": "element",
 					"variant": "declaration",
 					"kind": 262144,
@@ -50292,7 +53200,7 @@
 						}
 					],
 					"getSignature": {
-						"id": 1435,
+						"id": 1514,
 						"name": "element",
 						"variant": "signature",
 						"kind": 524288,
@@ -50316,7 +53224,7 @@
 					}
 				},
 				{
-					"id": 1436,
+					"id": 1515,
 					"name": "ngAfterViewInit",
 					"variant": "declaration",
 					"kind": 2048,
@@ -50330,7 +53238,7 @@
 					],
 					"signatures": [
 						{
-							"id": 1437,
+							"id": 1516,
 							"name": "ngAfterViewInit",
 							"variant": "signature",
 							"kind": 4096,
@@ -50364,30 +53272,30 @@
 				{
 					"title": "Constructors",
 					"children": [
-						1422
+						1501
 					]
 				},
 				{
 					"title": "Properties",
 					"children": [
-						1431,
-						1432,
-						1424,
-						1425,
-						1427,
-						1426
+						1510,
+						1511,
+						1503,
+						1504,
+						1506,
+						1505
 					]
 				},
 				{
 					"title": "Accessors",
 					"children": [
-						1434
+						1513
 					]
 				},
 				{
 					"title": "Methods",
 					"children": [
-						1436
+						1515
 					]
 				}
 			],
@@ -50411,28 +53319,28 @@
 			]
 		},
 		{
-			"id": 1440,
+			"id": 1519,
 			"name": "ViewSettingsDialog",
 			"variant": "declaration",
 			"kind": 128,
 			"flags": {},
 			"children": [
 				{
-					"id": 1441,
+					"id": 1520,
 					"name": "constructor",
 					"variant": "declaration",
 					"kind": 512,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 1442,
+							"id": 1521,
 							"name": "new ViewSettingsDialog",
 							"variant": "signature",
 							"kind": 16384,
 							"flags": {},
 							"type": {
 								"type": "reference",
-								"target": 1440,
+								"target": 1519,
 								"name": "ViewSettingsDialog",
 								"package": "@fundamental-ngx/ui5-webcomponents-fiori"
 							}
@@ -50440,7 +53348,7 @@
 					]
 				},
 				{
-					"id": 1462,
+					"id": 1541,
 					"name": "elementRef",
 					"variant": "declaration",
 					"kind": 1024,
@@ -50477,7 +53385,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 1443,
+					"id": 1522,
 					"name": "groupDescending",
 					"variant": "declaration",
 					"kind": 1024,
@@ -50519,7 +53427,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 1463,
+					"id": 1542,
 					"name": "injector",
 					"variant": "declaration",
 					"kind": 1024,
@@ -50545,7 +53453,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 1444,
+					"id": 1523,
 					"name": "open",
 					"variant": "declaration",
 					"kind": 1024,
@@ -50587,7 +53495,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 1445,
+					"id": 1524,
 					"name": "resetEnabled",
 					"variant": "declaration",
 					"kind": 1024,
@@ -50645,7 +53553,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 1453,
+					"id": 1532,
 					"name": "slots",
 					"variant": "declaration",
 					"kind": 1024,
@@ -50765,14 +53673,14 @@
 								{
 									"type": "reflection",
 									"declaration": {
-										"id": 1454,
+										"id": 1533,
 										"name": "__type",
 										"variant": "declaration",
 										"kind": 65536,
 										"flags": {},
 										"children": [
 											{
-												"id": 1456,
+												"id": 1535,
 												"name": "description",
 												"variant": "declaration",
 												"kind": 1024,
@@ -50791,7 +53699,7 @@
 												"defaultValue": "\"Defines custom tabs for the dialog.\\n\\nThe custom tabs are rendered after the built-in tabs (`Sort`, `Filter`, `Group`).\\n\\n**Note:** If you want to use this slot, you need to import the item: `import \\\"@ui5/webcomponents-fiori/dist/ViewSettingsDialogCustomTab.js\\\";`\""
 											},
 											{
-												"id": 1455,
+												"id": 1534,
 												"name": "name",
 												"variant": "declaration",
 												"kind": 1024,
@@ -50810,7 +53718,7 @@
 												"defaultValue": "\"customTabs\""
 											},
 											{
-												"id": 1457,
+												"id": 1536,
 												"name": "since",
 												"variant": "declaration",
 												"kind": 1024,
@@ -50833,9 +53741,9 @@
 											{
 												"title": "Properties",
 												"children": [
-													1456,
-													1455,
-													1457
+													1535,
+													1534,
+													1536
 												]
 											}
 										],
@@ -50851,14 +53759,14 @@
 								{
 									"type": "reflection",
 									"declaration": {
-										"id": 1458,
+										"id": 1537,
 										"name": "__type",
 										"variant": "declaration",
 										"kind": 65536,
 										"flags": {},
 										"children": [
 											{
-												"id": 1460,
+												"id": 1539,
 												"name": "description",
 												"variant": "declaration",
 												"kind": 1024,
@@ -50877,7 +53785,7 @@
 												"defaultValue": "\"Defines the `filterItems` list.\\n\\n**Note:** If you want to use this slot, you need to import used item: `import \\\"@ui5/webcomponents-fiori/dist/FilterItem.js\\\";`\""
 											},
 											{
-												"id": 1459,
+												"id": 1538,
 												"name": "name",
 												"variant": "declaration",
 												"kind": 1024,
@@ -50896,7 +53804,7 @@
 												"defaultValue": "\"filterItems\""
 											},
 											{
-												"id": 1461,
+												"id": 1540,
 												"name": "since",
 												"variant": "declaration",
 												"kind": 1024,
@@ -50921,9 +53829,9 @@
 											{
 												"title": "Properties",
 												"children": [
-													1460,
-													1459,
-													1461
+													1539,
+													1538,
+													1540
 												]
 											}
 										],
@@ -50942,7 +53850,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 1446,
+					"id": 1525,
 					"name": "sortDescending",
 					"variant": "declaration",
 					"kind": 1024,
@@ -50984,7 +53892,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 1447,
+					"id": 1526,
 					"name": "ui5BeforeOpen",
 					"variant": "declaration",
 					"kind": 1024,
@@ -51042,7 +53950,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 1448,
+					"id": 1527,
 					"name": "ui5Cancel",
 					"variant": "declaration",
 					"kind": 1024,
@@ -51100,7 +54008,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 1449,
+					"id": 1528,
 					"name": "ui5Close",
 					"variant": "declaration",
 					"kind": 1024,
@@ -51158,7 +54066,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 1450,
+					"id": 1529,
 					"name": "ui5Confirm",
 					"variant": "declaration",
 					"kind": 1024,
@@ -51216,7 +54124,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 1451,
+					"id": 1530,
 					"name": "ui5Open",
 					"variant": "declaration",
 					"kind": 1024,
@@ -51274,7 +54182,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 1452,
+					"id": 1531,
 					"name": "ui5Reset",
 					"variant": "declaration",
 					"kind": 1024,
@@ -51332,7 +54240,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 1466,
+					"id": 1545,
 					"name": "element",
 					"variant": "declaration",
 					"kind": 262144,
@@ -51345,7 +54253,7 @@
 						}
 					],
 					"getSignature": {
-						"id": 1467,
+						"id": 1546,
 						"name": "element",
 						"variant": "signature",
 						"kind": 524288,
@@ -51369,7 +54277,7 @@
 					}
 				},
 				{
-					"id": 1468,
+					"id": 1547,
 					"name": "ngAfterViewInit",
 					"variant": "declaration",
 					"kind": 2048,
@@ -51383,7 +54291,7 @@
 					],
 					"signatures": [
 						{
-							"id": 1469,
+							"id": 1548,
 							"name": "ngAfterViewInit",
 							"variant": "signature",
 							"kind": 4096,
@@ -51417,37 +54325,37 @@
 				{
 					"title": "Constructors",
 					"children": [
-						1441
+						1520
 					]
 				},
 				{
 					"title": "Properties",
 					"children": [
-						1462,
-						1443,
-						1463,
-						1444,
-						1445,
-						1453,
-						1446,
-						1447,
-						1448,
-						1449,
-						1450,
-						1451,
-						1452
+						1541,
+						1522,
+						1542,
+						1523,
+						1524,
+						1532,
+						1525,
+						1526,
+						1527,
+						1528,
+						1529,
+						1530,
+						1531
 					]
 				},
 				{
 					"title": "Accessors",
 					"children": [
-						1466
+						1545
 					]
 				},
 				{
 					"title": "Methods",
 					"children": [
-						1468
+						1547
 					]
 				}
 			],
@@ -51471,28 +54379,28 @@
 			]
 		},
 		{
-			"id": 1471,
+			"id": 1550,
 			"name": "ViewSettingsDialogCustomTab",
 			"variant": "declaration",
 			"kind": 128,
 			"flags": {},
 			"children": [
 				{
-					"id": 1472,
+					"id": 1551,
 					"name": "constructor",
 					"variant": "declaration",
 					"kind": 512,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 1473,
+							"id": 1552,
 							"name": "new ViewSettingsDialogCustomTab",
 							"variant": "signature",
 							"kind": 16384,
 							"flags": {},
 							"type": {
 								"type": "reference",
-								"target": 1471,
+								"target": 1550,
 								"name": "ViewSettingsDialogCustomTab",
 								"package": "@fundamental-ngx/ui5-webcomponents-fiori"
 							}
@@ -51500,7 +54408,7 @@
 					]
 				},
 				{
-					"id": 1481,
+					"id": 1560,
 					"name": "elementRef",
 					"variant": "declaration",
 					"kind": 1024,
@@ -51537,7 +54445,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 1474,
+					"id": 1553,
 					"name": "icon",
 					"variant": "declaration",
 					"kind": 1024,
@@ -51584,7 +54492,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 1482,
+					"id": 1561,
 					"name": "injector",
 					"variant": "declaration",
 					"kind": 1024,
@@ -51610,7 +54518,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 1477,
+					"id": 1556,
 					"name": "slots",
 					"variant": "declaration",
 					"kind": 1024,
@@ -51667,14 +54575,14 @@
 						"elementType": {
 							"type": "reflection",
 							"declaration": {
-								"id": 1478,
+								"id": 1557,
 								"name": "__type",
 								"variant": "declaration",
 								"kind": 65536,
 								"flags": {},
 								"children": [
 									{
-										"id": 1480,
+										"id": 1559,
 										"name": "description",
 										"variant": "declaration",
 										"kind": 1024,
@@ -51693,7 +54601,7 @@
 										"defaultValue": "\"Defines the custom tab content.\""
 									},
 									{
-										"id": 1479,
+										"id": 1558,
 										"name": "name",
 										"variant": "declaration",
 										"kind": 1024,
@@ -51716,8 +54624,8 @@
 									{
 										"title": "Properties",
 										"children": [
-											1480,
-											1479
+											1559,
+											1558
 										]
 									}
 								],
@@ -51734,7 +54642,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 1475,
+					"id": 1554,
 					"name": "titleText",
 					"variant": "declaration",
 					"kind": 1024,
@@ -51781,7 +54689,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 1476,
+					"id": 1555,
 					"name": "tooltip",
 					"variant": "declaration",
 					"kind": 1024,
@@ -51828,7 +54736,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 1484,
+					"id": 1563,
 					"name": "element",
 					"variant": "declaration",
 					"kind": 262144,
@@ -51841,7 +54749,7 @@
 						}
 					],
 					"getSignature": {
-						"id": 1485,
+						"id": 1564,
 						"name": "element",
 						"variant": "signature",
 						"kind": 524288,
@@ -51865,7 +54773,7 @@
 					}
 				},
 				{
-					"id": 1486,
+					"id": 1565,
 					"name": "ngAfterViewInit",
 					"variant": "declaration",
 					"kind": 2048,
@@ -51879,7 +54787,7 @@
 					],
 					"signatures": [
 						{
-							"id": 1487,
+							"id": 1566,
 							"name": "ngAfterViewInit",
 							"variant": "signature",
 							"kind": 4096,
@@ -51913,30 +54821,30 @@
 				{
 					"title": "Constructors",
 					"children": [
-						1472
+						1551
 					]
 				},
 				{
 					"title": "Properties",
 					"children": [
-						1481,
-						1474,
-						1482,
-						1477,
-						1475,
-						1476
+						1560,
+						1553,
+						1561,
+						1556,
+						1554,
+						1555
 					]
 				},
 				{
 					"title": "Accessors",
 					"children": [
-						1484
+						1563
 					]
 				},
 				{
 					"title": "Methods",
 					"children": [
-						1486
+						1565
 					]
 				}
 			],
@@ -51960,28 +54868,28 @@
 			]
 		},
 		{
-			"id": 1489,
+			"id": 1568,
 			"name": "Wizard",
 			"variant": "declaration",
 			"kind": 128,
 			"flags": {},
 			"children": [
 				{
-					"id": 1490,
+					"id": 1569,
 					"name": "constructor",
 					"variant": "declaration",
 					"kind": 512,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 1491,
+							"id": 1570,
 							"name": "new Wizard",
 							"variant": "signature",
 							"kind": 16384,
 							"flags": {},
 							"type": {
 								"type": "reference",
-								"target": 1489,
+								"target": 1568,
 								"name": "Wizard",
 								"package": "@fundamental-ngx/ui5-webcomponents-fiori"
 							}
@@ -51989,7 +54897,7 @@
 					]
 				},
 				{
-					"id": 1492,
+					"id": 1571,
 					"name": "accessibleName",
 					"variant": "declaration",
 					"kind": 1024,
@@ -52036,7 +54944,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 1493,
+					"id": 1572,
 					"name": "accessibleNameRef",
 					"variant": "declaration",
 					"kind": 1024,
@@ -52083,7 +54991,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 1494,
+					"id": 1573,
 					"name": "contentLayout",
 					"variant": "declaration",
 					"kind": 1024,
@@ -52142,7 +55050,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 1500,
+					"id": 1579,
 					"name": "elementRef",
 					"variant": "declaration",
 					"kind": 1024,
@@ -52179,7 +55087,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 1501,
+					"id": 1580,
 					"name": "injector",
 					"variant": "declaration",
 					"kind": 1024,
@@ -52205,7 +55113,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 1496,
+					"id": 1575,
 					"name": "slots",
 					"variant": "declaration",
 					"kind": 1024,
@@ -52270,14 +55178,14 @@
 						"elementType": {
 							"type": "reflection",
 							"declaration": {
-								"id": 1497,
+								"id": 1576,
 								"name": "__type",
 								"variant": "declaration",
 								"kind": 65536,
 								"flags": {},
 								"children": [
 									{
-										"id": 1499,
+										"id": 1578,
 										"name": "description",
 										"variant": "declaration",
 										"kind": 1024,
@@ -52296,7 +55204,7 @@
 										"defaultValue": "\"Defines the steps.\\n\\n**Note:** Use the available `ui5-wizard-step` component.\""
 									},
 									{
-										"id": 1498,
+										"id": 1577,
 										"name": "name",
 										"variant": "declaration",
 										"kind": 1024,
@@ -52319,8 +55227,8 @@
 									{
 										"title": "Properties",
 										"children": [
-											1499,
-											1498
+											1578,
+											1577
 										]
 									}
 								],
@@ -52337,7 +55245,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 1495,
+					"id": 1574,
 					"name": "ui5StepChange",
 					"variant": "declaration",
 					"kind": 1024,
@@ -52395,7 +55303,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 1504,
+					"id": 1583,
 					"name": "element",
 					"variant": "declaration",
 					"kind": 262144,
@@ -52408,7 +55316,7 @@
 						}
 					],
 					"getSignature": {
-						"id": 1505,
+						"id": 1584,
 						"name": "element",
 						"variant": "signature",
 						"kind": 524288,
@@ -52432,7 +55340,7 @@
 					}
 				},
 				{
-					"id": 1506,
+					"id": 1585,
 					"name": "ngAfterViewInit",
 					"variant": "declaration",
 					"kind": 2048,
@@ -52446,7 +55354,7 @@
 					],
 					"signatures": [
 						{
-							"id": 1507,
+							"id": 1586,
 							"name": "ngAfterViewInit",
 							"variant": "signature",
 							"kind": 4096,
@@ -52480,31 +55388,31 @@
 				{
 					"title": "Constructors",
 					"children": [
-						1490
+						1569
 					]
 				},
 				{
 					"title": "Properties",
 					"children": [
-						1492,
-						1493,
-						1494,
-						1500,
-						1501,
-						1496,
-						1495
+						1571,
+						1572,
+						1573,
+						1579,
+						1580,
+						1575,
+						1574
 					]
 				},
 				{
 					"title": "Accessors",
 					"children": [
-						1504
+						1583
 					]
 				},
 				{
 					"title": "Methods",
 					"children": [
-						1506
+						1585
 					]
 				}
 			],
@@ -52528,28 +55436,28 @@
 			]
 		},
 		{
-			"id": 1509,
+			"id": 1588,
 			"name": "WizardStep",
 			"variant": "declaration",
 			"kind": 128,
 			"flags": {},
 			"children": [
 				{
-					"id": 1510,
+					"id": 1589,
 					"name": "constructor",
 					"variant": "declaration",
 					"kind": 512,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 1511,
+							"id": 1590,
 							"name": "new WizardStep",
 							"variant": "signature",
 							"kind": 16384,
 							"flags": {},
 							"type": {
 								"type": "reference",
-								"target": 1509,
+								"target": 1588,
 								"name": "WizardStep",
 								"package": "@fundamental-ngx/ui5-webcomponents-fiori"
 							}
@@ -52557,7 +55465,7 @@
 					]
 				},
 				{
-					"id": 1512,
+					"id": 1591,
 					"name": "branching",
 					"variant": "declaration",
 					"kind": 1024,
@@ -52615,7 +55523,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 1513,
+					"id": 1592,
 					"name": "disabled",
 					"variant": "declaration",
 					"kind": 1024,
@@ -52689,7 +55597,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 1522,
+					"id": 1601,
 					"name": "elementRef",
 					"variant": "declaration",
 					"kind": 1024,
@@ -52726,7 +55634,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 1514,
+					"id": 1593,
 					"name": "icon",
 					"variant": "declaration",
 					"kind": 1024,
@@ -52789,7 +55697,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 1523,
+					"id": 1602,
 					"name": "injector",
 					"variant": "declaration",
 					"kind": 1024,
@@ -52815,7 +55723,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 1515,
+					"id": 1594,
 					"name": "selected",
 					"variant": "declaration",
 					"kind": 1024,
@@ -52889,7 +55797,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 1518,
+					"id": 1597,
 					"name": "slots",
 					"variant": "declaration",
 					"kind": 1024,
@@ -52946,14 +55854,14 @@
 						"elementType": {
 							"type": "reflection",
 							"declaration": {
-								"id": 1519,
+								"id": 1598,
 								"name": "__type",
 								"variant": "declaration",
 								"kind": 65536,
 								"flags": {},
 								"children": [
 									{
-										"id": 1521,
+										"id": 1600,
 										"name": "description",
 										"variant": "declaration",
 										"kind": 1024,
@@ -52972,7 +55880,7 @@
 										"defaultValue": "\"Defines the step content.\""
 									},
 									{
-										"id": 1520,
+										"id": 1599,
 										"name": "name",
 										"variant": "declaration",
 										"kind": 1024,
@@ -52995,8 +55903,8 @@
 									{
 										"title": "Properties",
 										"children": [
-											1521,
-											1520
+											1600,
+											1599
 										]
 									}
 								],
@@ -53013,7 +55921,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 1516,
+					"id": 1595,
 					"name": "subtitleText",
 					"variant": "declaration",
 					"kind": 1024,
@@ -53076,7 +55984,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 1517,
+					"id": 1596,
 					"name": "titleText",
 					"variant": "declaration",
 					"kind": 1024,
@@ -53139,7 +56047,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 1525,
+					"id": 1604,
 					"name": "element",
 					"variant": "declaration",
 					"kind": 262144,
@@ -53152,7 +56060,7 @@
 						}
 					],
 					"getSignature": {
-						"id": 1526,
+						"id": 1605,
 						"name": "element",
 						"variant": "signature",
 						"kind": 524288,
@@ -53176,7 +56084,7 @@
 					}
 				},
 				{
-					"id": 1527,
+					"id": 1606,
 					"name": "ngAfterViewInit",
 					"variant": "declaration",
 					"kind": 2048,
@@ -53190,7 +56098,7 @@
 					],
 					"signatures": [
 						{
-							"id": 1528,
+							"id": 1607,
 							"name": "ngAfterViewInit",
 							"variant": "signature",
 							"kind": 4096,
@@ -53224,33 +56132,33 @@
 				{
 					"title": "Constructors",
 					"children": [
-						1510
+						1589
 					]
 				},
 				{
 					"title": "Properties",
 					"children": [
-						1512,
-						1513,
-						1522,
-						1514,
-						1523,
-						1515,
-						1518,
-						1516,
-						1517
+						1591,
+						1592,
+						1601,
+						1593,
+						1602,
+						1594,
+						1597,
+						1595,
+						1596
 					]
 				},
 				{
 					"title": "Accessors",
 					"children": [
-						1525
+						1604
 					]
 				},
 				{
 					"title": "Methods",
 					"children": [
-						1527
+						1606
 					]
 				}
 			],
@@ -53274,28 +56182,28 @@
 			]
 		},
 		{
-			"id": 1530,
+			"id": 1609,
 			"name": "WizardTab",
 			"variant": "declaration",
 			"kind": 128,
 			"flags": {},
 			"children": [
 				{
-					"id": 1531,
+					"id": 1610,
 					"name": "constructor",
 					"variant": "declaration",
 					"kind": 512,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 1532,
+							"id": 1611,
 							"name": "new WizardTab",
 							"variant": "signature",
 							"kind": 16384,
 							"flags": {},
 							"type": {
 								"type": "reference",
-								"target": 1530,
+								"target": 1609,
 								"name": "WizardTab",
 								"package": "@fundamental-ngx/ui5-webcomponents-fiori"
 							}
@@ -53303,7 +56211,7 @@
 					]
 				},
 				{
-					"id": 1533,
+					"id": 1612,
 					"name": "elementRef",
 					"variant": "declaration",
 					"kind": 1024,
@@ -53340,7 +56248,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 1534,
+					"id": 1613,
 					"name": "injector",
 					"variant": "declaration",
 					"kind": 1024,
@@ -53366,7 +56274,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 1536,
+					"id": 1615,
 					"name": "element",
 					"variant": "declaration",
 					"kind": 262144,
@@ -53379,7 +56287,7 @@
 						}
 					],
 					"getSignature": {
-						"id": 1537,
+						"id": 1616,
 						"name": "element",
 						"variant": "signature",
 						"kind": 524288,
@@ -53403,7 +56311,7 @@
 					}
 				},
 				{
-					"id": 1538,
+					"id": 1617,
 					"name": "ngAfterViewInit",
 					"variant": "declaration",
 					"kind": 2048,
@@ -53417,7 +56325,7 @@
 					],
 					"signatures": [
 						{
-							"id": 1539,
+							"id": 1618,
 							"name": "ngAfterViewInit",
 							"variant": "signature",
 							"kind": 4096,
@@ -53451,26 +56359,26 @@
 				{
 					"title": "Constructors",
 					"children": [
-						1531
+						1610
 					]
 				},
 				{
 					"title": "Properties",
 					"children": [
-						1533,
-						1534
+						1612,
+						1613
 					]
 				},
 				{
 					"title": "Accessors",
 					"children": [
-						1536
+						1615
 					]
 				},
 				{
 					"title": "Methods",
 					"children": [
-						1538
+						1617
 					]
 				}
 			],
@@ -53494,7 +56402,7 @@
 			]
 		},
 		{
-			"id": 1603,
+			"id": 1685,
 			"name": "CVA_CONFIG",
 			"variant": "declaration",
 			"kind": 32,
@@ -53552,7 +56460,7 @@
 				118,
 				135,
 				148,
-				1604,
+				1686,
 				180,
 				193,
 				213,
@@ -53603,17 +56511,20 @@
 				1369,
 				1395,
 				1421,
-				1440,
-				1471,
-				1489,
-				1509,
-				1530
+				1441,
+				1462,
+				1500,
+				1519,
+				1550,
+				1568,
+				1588,
+				1609
 			]
 		},
 		{
 			"title": "Variables",
 			"children": [
-				1603
+				1685
 			]
 		}
 	],
@@ -58290,494 +61201,750 @@
 			"qualifiedName": "UserSettingsItem.ngAfterViewInit"
 		},
 		"1421": {
-			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-view/index.ts",
-			"qualifiedName": "UserSettingsView"
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view/index.ts",
+			"qualifiedName": "UserSettingsNotificationsView"
 		},
 		"1424": {
-			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-view/index.ts",
-			"qualifiedName": "UserSettingsView.secondary"
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view/index.ts",
+			"qualifiedName": "UserSettingsNotificationsView.secondary"
 		},
 		"1425": {
-			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-view/index.ts",
-			"qualifiedName": "UserSettingsView.selected"
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view/index.ts",
+			"qualifiedName": "UserSettingsNotificationsView.selected"
 		},
 		"1426": {
-			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-view/index.ts",
-			"qualifiedName": "UserSettingsView.text"
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view/index.ts",
+			"qualifiedName": "UserSettingsNotificationsView.text"
 		},
 		"1427": {
-			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-view/index.ts",
-			"qualifiedName": "UserSettingsView.slots"
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view/index.ts",
+			"qualifiedName": "UserSettingsNotificationsView.ui5ItemClick"
 		},
 		"1428": {
-			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-view/index.ts",
-			"qualifiedName": "__object"
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view/index.ts",
+			"qualifiedName": "UserSettingsNotificationsView.slots"
 		},
 		"1429": {
-			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-view/index.ts",
-			"qualifiedName": "__object.name"
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view/index.ts",
+			"qualifiedName": "__object"
 		},
 		"1430": {
-			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-view/index.ts",
-			"qualifiedName": "__object.description"
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view/index.ts",
+			"qualifiedName": "__object.name"
 		},
 		"1431": {
-			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-view/index.ts",
-			"qualifiedName": "UserSettingsView.elementRef"
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view/index.ts",
+			"qualifiedName": "__object.description"
 		},
 		"1432": {
-			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-view/index.ts",
-			"qualifiedName": "UserSettingsView.injector"
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view/index.ts",
+			"qualifiedName": "UserSettingsNotificationsView.elementRef"
 		},
-		"1434": {
-			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-view/index.ts",
-			"qualifiedName": "UserSettingsView.element"
-		},
-		"1435": {
-			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-view/index.ts",
-			"qualifiedName": "UserSettingsView.element"
+		"1433": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view/index.ts",
+			"qualifiedName": "UserSettingsNotificationsView.injector"
 		},
 		"1436": {
-			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-view/index.ts",
-			"qualifiedName": "UserSettingsView.ngAfterViewInit"
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view/index.ts",
+			"qualifiedName": "UserSettingsNotificationsView.element"
 		},
 		"1437": {
-			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-view/index.ts",
-			"qualifiedName": "UserSettingsView.ngAfterViewInit"
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view/index.ts",
+			"qualifiedName": "UserSettingsNotificationsView.element"
 		},
-		"1440": {
-			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog/index.ts",
-			"qualifiedName": "ViewSettingsDialog"
+		"1438": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view/index.ts",
+			"qualifiedName": "UserSettingsNotificationsView.ngAfterViewInit"
 		},
-		"1443": {
-			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog/index.ts",
-			"qualifiedName": "ViewSettingsDialog.groupDescending"
+		"1439": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view/index.ts",
+			"qualifiedName": "UserSettingsNotificationsView.ngAfterViewInit"
+		},
+		"1441": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-group/index.ts",
+			"qualifiedName": "UserSettingsNotificationsViewGroup"
 		},
 		"1444": {
-			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog/index.ts",
-			"qualifiedName": "ViewSettingsDialog.open"
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-group/index.ts",
+			"qualifiedName": "UserSettingsNotificationsViewGroup.headerAccessibleName"
 		},
 		"1445": {
-			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog/index.ts",
-			"qualifiedName": "ViewSettingsDialog.resetEnabled"
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-group/index.ts",
+			"qualifiedName": "UserSettingsNotificationsViewGroup.headerText"
 		},
 		"1446": {
-			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog/index.ts",
-			"qualifiedName": "ViewSettingsDialog.sortDescending"
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-group/index.ts",
+			"qualifiedName": "UserSettingsNotificationsViewGroup.wrappingType"
 		},
 		"1447": {
-			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog/index.ts",
-			"qualifiedName": "ViewSettingsDialog.ui5BeforeOpen"
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-group/index.ts",
+			"qualifiedName": "UserSettingsNotificationsViewGroup.ui5Move"
 		},
 		"1448": {
-			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog/index.ts",
-			"qualifiedName": "ViewSettingsDialog.ui5Cancel"
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-group/index.ts",
+			"qualifiedName": "UserSettingsNotificationsViewGroup.ui5MoveOver"
 		},
 		"1449": {
-			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog/index.ts",
-			"qualifiedName": "ViewSettingsDialog.ui5Close"
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-group/index.ts",
+			"qualifiedName": "UserSettingsNotificationsViewGroup.slots"
 		},
 		"1450": {
-			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog/index.ts",
-			"qualifiedName": "ViewSettingsDialog.ui5Confirm"
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-group/index.ts",
+			"qualifiedName": "__object"
 		},
 		"1451": {
-			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog/index.ts",
-			"qualifiedName": "ViewSettingsDialog.ui5Open"
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-group/index.ts",
+			"qualifiedName": "__object.name"
 		},
 		"1452": {
-			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog/index.ts",
-			"qualifiedName": "ViewSettingsDialog.ui5Reset"
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-group/index.ts",
+			"qualifiedName": "__object.description"
 		},
 		"1453": {
-			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog/index.ts",
-			"qualifiedName": "ViewSettingsDialog.slots"
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-group/index.ts",
+			"qualifiedName": "UserSettingsNotificationsViewGroup.elementRef"
 		},
 		"1454": {
-			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog/index.ts",
-			"qualifiedName": "__object"
-		},
-		"1455": {
-			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog/index.ts",
-			"qualifiedName": "__object.name"
-		},
-		"1456": {
-			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog/index.ts",
-			"qualifiedName": "__object.description"
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-group/index.ts",
+			"qualifiedName": "UserSettingsNotificationsViewGroup.injector"
 		},
 		"1457": {
-			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog/index.ts",
-			"qualifiedName": "__object.since"
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-group/index.ts",
+			"qualifiedName": "UserSettingsNotificationsViewGroup.element"
 		},
 		"1458": {
-			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog/index.ts",
-			"qualifiedName": "__object"
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-group/index.ts",
+			"qualifiedName": "UserSettingsNotificationsViewGroup.element"
 		},
 		"1459": {
-			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog/index.ts",
-			"qualifiedName": "__object.name"
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-group/index.ts",
+			"qualifiedName": "UserSettingsNotificationsViewGroup.ngAfterViewInit"
 		},
 		"1460": {
-			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog/index.ts",
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-group/index.ts",
+			"qualifiedName": "UserSettingsNotificationsViewGroup.ngAfterViewInit"
+		},
+		"1462": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+			"qualifiedName": "UserSettingsNotificationsViewItem"
+		},
+		"1465": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+			"qualifiedName": "UserSettingsNotificationsViewItem.bylineText"
+		},
+		"1466": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+			"qualifiedName": "UserSettingsNotificationsViewItem.checked"
+		},
+		"1467": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+			"qualifiedName": "UserSettingsNotificationsViewItem.itemKey"
+		},
+		"1468": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+			"qualifiedName": "UserSettingsNotificationsViewItem.navigable"
+		},
+		"1469": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+			"qualifiedName": "UserSettingsNotificationsViewItem.text"
+		},
+		"1470": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+			"qualifiedName": "UserSettingsNotificationsViewItem.accessibilityAttributes"
+		},
+		"1471": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+			"qualifiedName": "UserSettingsNotificationsViewItem.accessibleName"
+		},
+		"1472": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+			"qualifiedName": "UserSettingsNotificationsViewItem.accessibleRole"
+		},
+		"1473": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+			"qualifiedName": "UserSettingsNotificationsViewItem.highlight"
+		},
+		"1474": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+			"qualifiedName": "UserSettingsNotificationsViewItem.movable"
+		},
+		"1475": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+			"qualifiedName": "UserSettingsNotificationsViewItem.navigated"
+		},
+		"1476": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+			"qualifiedName": "UserSettingsNotificationsViewItem.selected"
+		},
+		"1477": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+			"qualifiedName": "UserSettingsNotificationsViewItem.tooltip"
+		},
+		"1478": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+			"qualifiedName": "UserSettingsNotificationsViewItem.type"
+		},
+		"1479": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+			"qualifiedName": "UserSettingsNotificationsViewItem.ui5SwitchChange"
+		},
+		"1480": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+			"qualifiedName": "UserSettingsNotificationsViewItem.ui5Click"
+		},
+		"1481": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+			"qualifiedName": "UserSettingsNotificationsViewItem.ui5DetailClick"
+		},
+		"1482": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+			"qualifiedName": "UserSettingsNotificationsViewItem.slots"
+		},
+		"1483": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+			"qualifiedName": "__object"
+		},
+		"1484": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+			"qualifiedName": "__object.name"
+		},
+		"1485": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
 			"qualifiedName": "__object.description"
 		},
-		"1461": {
+		"1486": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/dynamic-page-title/index.ts",
 			"qualifiedName": "__object.since"
 		},
-		"1462": {
+		"1487": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+			"qualifiedName": "__object"
+		},
+		"1488": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+			"qualifiedName": "__object.name"
+		},
+		"1489": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+			"qualifiedName": "__object.description"
+		},
+		"1490": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+			"qualifiedName": "__object.since"
+		},
+		"1491": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+			"qualifiedName": "UserSettingsNotificationsViewItem.elementRef"
+		},
+		"1492": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+			"qualifiedName": "UserSettingsNotificationsViewItem.injector"
+		},
+		"1495": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+			"qualifiedName": "UserSettingsNotificationsViewItem.element"
+		},
+		"1496": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+			"qualifiedName": "UserSettingsNotificationsViewItem.element"
+		},
+		"1497": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+			"qualifiedName": "UserSettingsNotificationsViewItem.ngAfterViewInit"
+		},
+		"1498": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-notifications-view-item/index.ts",
+			"qualifiedName": "UserSettingsNotificationsViewItem.ngAfterViewInit"
+		},
+		"1500": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-view/index.ts",
+			"qualifiedName": "UserSettingsView"
+		},
+		"1503": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-view/index.ts",
+			"qualifiedName": "UserSettingsView.secondary"
+		},
+		"1504": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-view/index.ts",
+			"qualifiedName": "UserSettingsView.selected"
+		},
+		"1505": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-view/index.ts",
+			"qualifiedName": "UserSettingsView.text"
+		},
+		"1506": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-view/index.ts",
+			"qualifiedName": "UserSettingsView.slots"
+		},
+		"1507": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-view/index.ts",
+			"qualifiedName": "__object"
+		},
+		"1508": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-view/index.ts",
+			"qualifiedName": "__object.name"
+		},
+		"1509": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-view/index.ts",
+			"qualifiedName": "__object.description"
+		},
+		"1510": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-view/index.ts",
+			"qualifiedName": "UserSettingsView.elementRef"
+		},
+		"1511": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-view/index.ts",
+			"qualifiedName": "UserSettingsView.injector"
+		},
+		"1513": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-view/index.ts",
+			"qualifiedName": "UserSettingsView.element"
+		},
+		"1514": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-view/index.ts",
+			"qualifiedName": "UserSettingsView.element"
+		},
+		"1515": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-view/index.ts",
+			"qualifiedName": "UserSettingsView.ngAfterViewInit"
+		},
+		"1516": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/user-settings-view/index.ts",
+			"qualifiedName": "UserSettingsView.ngAfterViewInit"
+		},
+		"1519": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog/index.ts",
+			"qualifiedName": "ViewSettingsDialog"
+		},
+		"1522": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog/index.ts",
+			"qualifiedName": "ViewSettingsDialog.groupDescending"
+		},
+		"1523": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog/index.ts",
+			"qualifiedName": "ViewSettingsDialog.open"
+		},
+		"1524": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog/index.ts",
+			"qualifiedName": "ViewSettingsDialog.resetEnabled"
+		},
+		"1525": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog/index.ts",
+			"qualifiedName": "ViewSettingsDialog.sortDescending"
+		},
+		"1526": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog/index.ts",
+			"qualifiedName": "ViewSettingsDialog.ui5BeforeOpen"
+		},
+		"1527": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog/index.ts",
+			"qualifiedName": "ViewSettingsDialog.ui5Cancel"
+		},
+		"1528": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog/index.ts",
+			"qualifiedName": "ViewSettingsDialog.ui5Close"
+		},
+		"1529": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog/index.ts",
+			"qualifiedName": "ViewSettingsDialog.ui5Confirm"
+		},
+		"1530": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog/index.ts",
+			"qualifiedName": "ViewSettingsDialog.ui5Open"
+		},
+		"1531": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog/index.ts",
+			"qualifiedName": "ViewSettingsDialog.ui5Reset"
+		},
+		"1532": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog/index.ts",
+			"qualifiedName": "ViewSettingsDialog.slots"
+		},
+		"1533": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog/index.ts",
+			"qualifiedName": "__object"
+		},
+		"1534": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog/index.ts",
+			"qualifiedName": "__object.name"
+		},
+		"1535": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog/index.ts",
+			"qualifiedName": "__object.description"
+		},
+		"1536": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog/index.ts",
+			"qualifiedName": "__object.since"
+		},
+		"1537": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog/index.ts",
+			"qualifiedName": "__object"
+		},
+		"1538": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog/index.ts",
+			"qualifiedName": "__object.name"
+		},
+		"1539": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog/index.ts",
+			"qualifiedName": "__object.description"
+		},
+		"1540": {
+			"sourceFileName": "libs/ui5-webcomponents-fiori/dynamic-page-title/index.ts",
+			"qualifiedName": "__object.since"
+		},
+		"1541": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog/index.ts",
 			"qualifiedName": "ViewSettingsDialog.elementRef"
 		},
-		"1463": {
+		"1542": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog/index.ts",
 			"qualifiedName": "ViewSettingsDialog.injector"
 		},
-		"1466": {
+		"1545": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog/index.ts",
 			"qualifiedName": "ViewSettingsDialog.element"
 		},
-		"1467": {
+		"1546": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog/index.ts",
 			"qualifiedName": "ViewSettingsDialog.element"
 		},
-		"1468": {
+		"1547": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog/index.ts",
 			"qualifiedName": "ViewSettingsDialog.ngAfterViewInit"
 		},
-		"1469": {
+		"1548": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog/index.ts",
 			"qualifiedName": "ViewSettingsDialog.ngAfterViewInit"
 		},
-		"1471": {
+		"1550": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog-custom-tab/index.ts",
 			"qualifiedName": "ViewSettingsDialogCustomTab"
 		},
-		"1474": {
+		"1553": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog-custom-tab/index.ts",
 			"qualifiedName": "ViewSettingsDialogCustomTab.icon"
 		},
-		"1475": {
+		"1554": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog-custom-tab/index.ts",
 			"qualifiedName": "ViewSettingsDialogCustomTab.titleText"
 		},
-		"1476": {
+		"1555": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog-custom-tab/index.ts",
 			"qualifiedName": "ViewSettingsDialogCustomTab.tooltip"
 		},
-		"1477": {
+		"1556": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog-custom-tab/index.ts",
 			"qualifiedName": "ViewSettingsDialogCustomTab.slots"
 		},
-		"1478": {
+		"1557": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog-custom-tab/index.ts",
 			"qualifiedName": "__object"
 		},
-		"1479": {
+		"1558": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog-custom-tab/index.ts",
 			"qualifiedName": "__object.name"
 		},
-		"1480": {
+		"1559": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog-custom-tab/index.ts",
 			"qualifiedName": "__object.description"
 		},
-		"1481": {
+		"1560": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog-custom-tab/index.ts",
 			"qualifiedName": "ViewSettingsDialogCustomTab.elementRef"
 		},
-		"1482": {
+		"1561": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog-custom-tab/index.ts",
 			"qualifiedName": "ViewSettingsDialogCustomTab.injector"
 		},
-		"1484": {
+		"1563": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog-custom-tab/index.ts",
 			"qualifiedName": "ViewSettingsDialogCustomTab.element"
 		},
-		"1485": {
+		"1564": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog-custom-tab/index.ts",
 			"qualifiedName": "ViewSettingsDialogCustomTab.element"
 		},
-		"1486": {
+		"1565": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog-custom-tab/index.ts",
 			"qualifiedName": "ViewSettingsDialogCustomTab.ngAfterViewInit"
 		},
-		"1487": {
+		"1566": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/view-settings-dialog-custom-tab/index.ts",
 			"qualifiedName": "ViewSettingsDialogCustomTab.ngAfterViewInit"
 		},
-		"1489": {
+		"1568": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/wizard/index.ts",
 			"qualifiedName": "Wizard"
 		},
-		"1492": {
+		"1571": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/wizard/index.ts",
 			"qualifiedName": "Wizard.accessibleName"
 		},
-		"1493": {
+		"1572": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/wizard/index.ts",
 			"qualifiedName": "Wizard.accessibleNameRef"
 		},
-		"1494": {
+		"1573": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/wizard/index.ts",
 			"qualifiedName": "Wizard.contentLayout"
 		},
-		"1495": {
+		"1574": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/wizard/index.ts",
 			"qualifiedName": "Wizard.ui5StepChange"
 		},
-		"1496": {
+		"1575": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/wizard/index.ts",
 			"qualifiedName": "Wizard.slots"
 		},
-		"1497": {
+		"1576": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/wizard/index.ts",
 			"qualifiedName": "__object"
 		},
-		"1498": {
+		"1577": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/wizard/index.ts",
 			"qualifiedName": "__object.name"
 		},
-		"1499": {
+		"1578": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/wizard/index.ts",
 			"qualifiedName": "__object.description"
 		},
-		"1500": {
+		"1579": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/wizard/index.ts",
 			"qualifiedName": "Wizard.elementRef"
 		},
-		"1501": {
+		"1580": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/wizard/index.ts",
 			"qualifiedName": "Wizard.injector"
 		},
-		"1504": {
+		"1583": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/wizard/index.ts",
 			"qualifiedName": "Wizard.element"
 		},
-		"1505": {
+		"1584": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/wizard/index.ts",
 			"qualifiedName": "Wizard.element"
 		},
-		"1506": {
+		"1585": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/wizard/index.ts",
 			"qualifiedName": "Wizard.ngAfterViewInit"
 		},
-		"1507": {
+		"1586": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/wizard/index.ts",
 			"qualifiedName": "Wizard.ngAfterViewInit"
 		},
-		"1509": {
+		"1588": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/wizard-step/index.ts",
 			"qualifiedName": "WizardStep"
 		},
-		"1512": {
+		"1591": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/wizard-step/index.ts",
 			"qualifiedName": "WizardStep.branching"
 		},
-		"1513": {
+		"1592": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/wizard-step/index.ts",
 			"qualifiedName": "WizardStep.disabled"
 		},
-		"1514": {
+		"1593": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/wizard-step/index.ts",
 			"qualifiedName": "WizardStep.icon"
 		},
-		"1515": {
+		"1594": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/wizard-step/index.ts",
 			"qualifiedName": "WizardStep.selected"
 		},
-		"1516": {
+		"1595": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/wizard-step/index.ts",
 			"qualifiedName": "WizardStep.subtitleText"
 		},
-		"1517": {
+		"1596": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/wizard-step/index.ts",
 			"qualifiedName": "WizardStep.titleText"
 		},
-		"1518": {
+		"1597": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/wizard-step/index.ts",
 			"qualifiedName": "WizardStep.slots"
 		},
-		"1519": {
+		"1598": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/wizard-step/index.ts",
 			"qualifiedName": "__object"
 		},
-		"1520": {
+		"1599": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/wizard-step/index.ts",
 			"qualifiedName": "__object.name"
 		},
-		"1521": {
+		"1600": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/wizard-step/index.ts",
 			"qualifiedName": "__object.description"
 		},
-		"1522": {
+		"1601": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/wizard-step/index.ts",
 			"qualifiedName": "WizardStep.elementRef"
 		},
-		"1523": {
+		"1602": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/wizard-step/index.ts",
 			"qualifiedName": "WizardStep.injector"
 		},
-		"1525": {
+		"1604": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/wizard-step/index.ts",
 			"qualifiedName": "WizardStep.element"
 		},
-		"1526": {
+		"1605": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/wizard-step/index.ts",
 			"qualifiedName": "WizardStep.element"
 		},
-		"1527": {
+		"1606": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/wizard-step/index.ts",
 			"qualifiedName": "WizardStep.ngAfterViewInit"
 		},
-		"1528": {
+		"1607": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/wizard-step/index.ts",
 			"qualifiedName": "WizardStep.ngAfterViewInit"
 		},
-		"1530": {
+		"1609": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/wizard-tab/index.ts",
 			"qualifiedName": "WizardTab"
 		},
-		"1533": {
+		"1612": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/wizard-tab/index.ts",
 			"qualifiedName": "WizardTab.elementRef"
 		},
-		"1534": {
+		"1613": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/wizard-tab/index.ts",
 			"qualifiedName": "WizardTab.injector"
 		},
-		"1536": {
+		"1615": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/wizard-tab/index.ts",
 			"qualifiedName": "WizardTab.element"
 		},
-		"1537": {
+		"1616": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/wizard-tab/index.ts",
 			"qualifiedName": "WizardTab.element"
 		},
-		"1538": {
+		"1617": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/wizard-tab/index.ts",
 			"qualifiedName": "WizardTab.ngAfterViewInit"
 		},
-		"1539": {
+		"1618": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/wizard-tab/index.ts",
 			"qualifiedName": "WizardTab.ngAfterViewInit"
 		},
-		"1603": {
+		"1685": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/utils/cva.ts",
 			"qualifiedName": "CVA_CONFIG"
 		},
-		"1604": {
+		"1686": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/utils/cva.ts",
 			"qualifiedName": "GenericControlValueAccessor"
 		},
-		"1607": {
+		"1689": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/utils/cva.ts",
 			"qualifiedName": "GenericControlValueAccessor.ValueType"
 		},
-		"1608": {
+		"1690": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/utils/cva.ts",
 			"qualifiedName": "GenericControlValueAccessor.onChange"
 		},
-		"1609": {
+		"1691": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/utils/cva.ts",
 			"qualifiedName": "__type"
 		},
-		"1610": {
+		"1692": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/utils/cva.ts",
 			"qualifiedName": "__type"
 		},
-		"1611": {
+		"1693": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/utils/cva.ts",
 			"qualifiedName": "val"
 		},
-		"1612": {
+		"1694": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/utils/cva.ts",
 			"qualifiedName": "GenericControlValueAccessor.onTouched"
 		},
-		"1613": {
+		"1695": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/utils/cva.ts",
 			"qualifiedName": "__type"
 		},
-		"1614": {
+		"1696": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/utils/cva.ts",
 			"qualifiedName": "__type"
 		},
-		"1624": {
+		"1706": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/utils/cva.ts",
 			"qualifiedName": "GenericControlValueAccessor.ngAfterViewInit"
 		},
-		"1625": {
+		"1707": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/utils/cva.ts",
 			"qualifiedName": "GenericControlValueAccessor.ngAfterViewInit"
 		},
-		"1626": {
+		"1708": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/utils/cva.ts",
 			"qualifiedName": "GenericControlValueAccessor.setDisabledState"
 		},
-		"1627": {
+		"1709": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/utils/cva.ts",
 			"qualifiedName": "GenericControlValueAccessor.setDisabledState"
 		},
-		"1628": {
+		"1710": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/utils/cva.ts",
 			"qualifiedName": "isDisabled"
 		},
-		"1629": {
+		"1711": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/utils/cva.ts",
 			"qualifiedName": "GenericControlValueAccessor.registerOnChange"
 		},
-		"1630": {
+		"1712": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/utils/cva.ts",
 			"qualifiedName": "GenericControlValueAccessor.registerOnChange"
 		},
-		"1631": {
+		"1713": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/utils/cva.ts",
 			"qualifiedName": "fn"
 		},
-		"1632": {
+		"1714": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/utils/cva.ts",
 			"qualifiedName": "__type"
 		},
-		"1633": {
+		"1715": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/utils/cva.ts",
 			"qualifiedName": "__type"
 		},
-		"1634": {
+		"1716": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/utils/cva.ts",
 			"qualifiedName": "newVal"
 		},
-		"1635": {
+		"1717": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/utils/cva.ts",
 			"qualifiedName": "GenericControlValueAccessor.registerOnTouched"
 		},
-		"1636": {
+		"1718": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/utils/cva.ts",
 			"qualifiedName": "GenericControlValueAccessor.registerOnTouched"
 		},
-		"1637": {
+		"1719": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/utils/cva.ts",
 			"qualifiedName": "fn"
 		},
-		"1638": {
+		"1720": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/utils/cva.ts",
 			"qualifiedName": "__type"
 		},
-		"1639": {
+		"1721": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/utils/cva.ts",
 			"qualifiedName": "__type"
 		},
-		"1640": {
+		"1722": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/utils/cva.ts",
 			"qualifiedName": "GenericControlValueAccessor.writeValue"
 		},
-		"1641": {
+		"1723": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/utils/cva.ts",
 			"qualifiedName": "GenericControlValueAccessor.writeValue"
 		},
-		"1642": {
+		"1724": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/utils/cva.ts",
 			"qualifiedName": "val"
 		},
-		"1652": {
+		"1734": {
 			"sourceFileName": "libs/ui5-webcomponents-fiori/utils/cva.ts",
 			"qualifiedName": "GenericControlValueAccessor.ValueType"
 		}

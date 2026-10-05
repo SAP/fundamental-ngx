@@ -3,18 +3,18 @@
   "selector": "[fdTableText], [fd-table-text]",
   "kind": "Directive",
   "sourceFile": "table-text.directive.ts",
-  "sourceLine": 7,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/core/table/directives/table-text.directive.ts#L7",
+  "sourceLine": 12,
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/fa9aaa671c/libs/core/table/directives/table-text.directive.ts#L12",
   "description": "",
   "inputs": [
     {
       "name": "fdTableTextClass",
       "type": "boolean",
-      "default": "true",
+      "default": null,
       "description": "Whether the text should have shadow (halo) & overflow should be hidden.",
-      "isSignal": false,
+      "isSignal": true,
       "deprecated": null,
-      "sourceLine": 11,
+      "sourceLine": 14,
       "since": null
     },
     {
@@ -22,29 +22,29 @@
       "type": "string",
       "default": null,
       "description": "Maximum width of a text element",
-      "isSignal": false,
+      "isSignal": true,
       "deprecated": null,
-      "sourceLine": 26,
+      "sourceLine": 23,
       "since": null
     },
     {
       "name": "noWrap",
       "type": "boolean",
-      "default": "false",
+      "default": null,
       "description": "Whether the text should wrap when the text is too long for 1 line",
-      "isSignal": false,
+      "isSignal": true,
       "deprecated": null,
-      "sourceLine": 16,
+      "sourceLine": 17,
       "since": null
     },
     {
       "name": "title",
       "type": "boolean",
-      "default": "false",
+      "default": null,
       "description": "Whether the text should be bolded and marked as a title",
-      "isSignal": false,
+      "isSignal": true,
       "deprecated": null,
-      "sourceLine": 21,
+      "sourceLine": 20,
       "since": null
     }
   ],

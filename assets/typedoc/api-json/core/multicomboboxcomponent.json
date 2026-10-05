@@ -4,7 +4,7 @@
   "kind": "Component",
   "sourceFile": "multi-combobox.component.ts",
   "sourceLine": 138,
-  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/29266eeb5d/libs/core/multi-combobox/multi-combobox.component.ts#L138",
+  "sourceUrl": "https://github.com/SAP/fundamental-ngx/blob/fa9aaa671c/libs/core/multi-combobox/multi-combobox.component.ts#L138",
   "description": "",
   "inputs": [
     {
@@ -316,7 +316,7 @@
       "signature": "() => void",
       "description": "Closes the select popover body.",
       "deprecated": null,
-      "sourceLine": 754,
+      "sourceLine": 770,
       "since": null,
       "parameters": [],
       "returnType": "void"
@@ -326,7 +326,7 @@
       "signature": "() => void",
       "description": "Opens the select popover body.",
       "deprecated": null,
-      "sourceLine": 747,
+      "sourceLine": 763,
       "since": null,
       "parameters": [],
       "returnType": "void"

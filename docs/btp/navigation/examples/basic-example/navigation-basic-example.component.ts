@@ -6,13 +6,6 @@ import { FdbViewMode } from '@fundamental-ngx/btp/shared';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button';
 
-export interface ExampleNavigationItem {
-    icon?: string;
-    title: string;
-    expanded?: boolean;
-    group?: boolean;
-}
-
 @Component({
     selector: 'fdb-navigation-basic-example',
     templateUrl: './navigation-basic-example.component.html',
