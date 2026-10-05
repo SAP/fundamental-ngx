@@ -1180,6 +1180,101 @@ describe('ComboboxComponent', () => {
             expect(component.getValue()).toBe(kiwiItem);
         });
     });
+
+    describe('autoComplete=false free-text mode (issue #14576)', () => {
+        interface AutoCompleteItem {
+            displayedValue: string;
+            value: string;
+        }
+
+        const appleItem: AutoCompleteItem = { displayedValue: 'Apple', value: 'apple-val' };
+        const bananaItem: AutoCompleteItem = { displayedValue: 'Banana', value: 'banana-val' };
+
+        beforeEach(() => {
+            fixture = TestBed.createComponent(ComboboxComponent<AutoCompleteItem>);
+            component = fixture.componentInstance;
+            component.dropdownValues = [appleItem, bananaItem];
+            component.autoComplete = false;
+            component.communicateByObject = true;
+            component.displayFn = (item: AutoCompleteItem): string => item?.displayedValue ?? '';
+            component.searchFn = () => {};
+            fixture.detectChanges();
+        });
+
+        it('should NOT revert typed text on _close() when autoComplete is false and communicateByObject is true', () => {
+            // Establish a prior confirmed selection so _lastConfirmedValue is set
+            component.onMenuClickHandler(appleItem);
+            expect(component.inputText).toBe('Apple');
+
+            // User opens the popover and types free text that matches no dropdown item
+            component.isOpenChangeHandle(true);
+            component.inputText = 'custom free text';
+            component.searchInputElement.nativeElement.value = 'custom free text';
+            fixture.detectChanges();
+
+            // Trigger _close() (as would happen on Tab-out)
+            component._close();
+
+            // The input must NOT revert to 'Apple' (the last confirmed value)
+            expect(component.inputText).toBe('custom free text');
+            expect(component.searchInputElement.nativeElement.value).toBe('custom free text');
+        });
+
+        it('should preserve free-text as the new _lastConfirmedValue after _close(), preventing future revert', () => {
+            // Establish a prior confirmed selection
+            component.onMenuClickHandler(bananaItem);
+            expect(component.inputText).toBe('Banana');
+
+            // User opens and types free text
+            component.isOpenChangeHandle(true);
+            component.inputText = 'my free text';
+            component.searchInputElement.nativeElement.value = 'my free text';
+            component._close();
+
+            // _lastConfirmedValue should now be the free text, so a second _close() also keeps it
+            component.isOpenChangeHandle(true);
+            component._close();
+
+            expect(component.inputText).toBe('my free text');
+        });
+
+        it('should NOT revert typed text on Tab-out when autoComplete is false and communicateByObject is true', () => {
+            // Establish a prior confirmed selection
+            component.onMenuClickHandler(appleItem);
+            expect(component.inputText).toBe('Apple');
+
+            // User opens the popover and types free text
+            component.isOpenChangeHandle(true);
+            component.inputText = 'typed something';
+            component.searchInputElement.nativeElement.value = 'typed something';
+            fixture.detectChanges();
+
+            // Simulate Tab key (the usual path that calls _close())
+            component.onInputKeydownHandler(new KeyboardEvent('keydown', { key: 'Tab' }));
+            fixture.detectChanges();
+
+            expect(component.inputText).toBe('typed something');
+        });
+
+        it('should NOT revert typed text with tabOutStrategy=close when autoComplete is false and communicateByObject is true', () => {
+            component.tabOutStrategy = 'close';
+            fixture.detectChanges();
+
+            // Establish a prior confirmed selection
+            component.onMenuClickHandler(bananaItem);
+            expect(component.inputText).toBe('Banana');
+
+            // User opens the popover and types free text
+            component.isOpenChangeHandle(true);
+            component.inputText = 'free entry close strategy';
+            component.searchInputElement.nativeElement.value = 'free entry close strategy';
+            fixture.detectChanges();
+
+            component._close();
+
+            expect(component.inputText).toBe('free entry close strategy');
+        });
+    });
 });
 
 describe('ComboboxComponent mobile selection transactions', () => {

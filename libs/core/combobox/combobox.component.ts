@@ -884,6 +884,14 @@ export class ComboboxComponent<T = any>
             return;
         }
 
+        // When autoComplete is disabled, the user is in free-text mode.
+        // Typed text is intentional and must not be reverted on close.
+        if (!this.autoComplete) {
+            this._lastConfirmedValue = this.inputText;
+            this.isOpenChangeHandle(false);
+            return;
+        }
+
         const revertText = this._lastConfirmedValue != null ? this.displayFn(this._lastConfirmedValue) : '';
         this.inputText = revertText;
         this.searchInputElement.nativeElement.value = revertText;
