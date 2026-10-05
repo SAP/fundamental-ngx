@@ -2436,6 +2436,9 @@ export class TableComponent<T = any>
             resizeObservable(this.table.nativeElement).subscribe(() => {
                 // this._tableScrollWidth = this.table.nativeElement.scrollWidth;
                 this._checkCellMock();
+                if (this._virtualScrollDirective?.scrollWholeRows) {
+                    this._virtualScrollDirective.calculateVirtualScrollRows();
+                }
             })
         );
     }

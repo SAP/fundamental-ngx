@@ -155,6 +155,50 @@ describe('TableComponent Virtual Scrolling', () => {
             expect(tableComponent.getCurrentlyRenderedRows()).toHaveLength(expectedRows);
         });
 
+        it('should account for rendered rows taller than the configured minimum', () => {
+            tableComponent.setColumns(['name', 'description', 'status']);
+            hostComponent.virtualScrollDirective.rowHeight = 32;
+            const scrollViewport = tableComponent.tableScrollable.elementRef.nativeElement;
+            jest.spyOn(scrollViewport, 'clientHeight', 'get').mockReturnValue(300);
+            tableComponent.setCurrentlyRenderedRows(0, 8);
+            fixture.detectChanges();
+            const header = scrollViewport.querySelector('thead');
+            const rows = scrollViewport.querySelectorAll<HTMLTableRowElement>('tbody[fd-table-body] > tr');
+            if (!header || rows.length < 2) {
+                throw new Error('Expected the table header and rows to be rendered');
+            }
+            jest.spyOn(header, 'clientHeight', 'get').mockReturnValue(33);
+            jest.spyOn(rows[0], 'offsetHeight', 'get').mockReturnValue(32);
+            jest.spyOn(rows[1], 'offsetHeight', 'get').mockReturnValue(34);
+
+            hostComponent.virtualScrollDirective.calculateVirtualScrollRows();
+
+            expect(tableComponent.getCurrentlyRenderedRows()).toHaveLength(7);
+        });
+
+        it('should recalculate whole rows after the rendered header changes height', fakeAsync(() => {
+            hostComponent.virtualScrollDirective.rowHeight = 44;
+            const scrollViewport = tableComponent.tableScrollable.elementRef.nativeElement;
+            const header = scrollViewport.querySelector('thead');
+            if (!header) {
+                throw new Error('Expected the table header to be rendered');
+            }
+            jest.spyOn(scrollViewport, 'clientHeight', 'get').mockReturnValue(300);
+            const headerHeight = jest.spyOn(header, 'clientHeight', 'get').mockReturnValue(32);
+            hostComponent.virtualScrollDirective.calculateVirtualScrollRows();
+            expect(tableComponent.getCurrentlyRenderedRows()).toHaveLength(6);
+
+            const resize = resizeCallbacks.get(tableComponent.table.nativeElement);
+            if (!resize) {
+                throw new Error('Expected the rendered table to be observed');
+            }
+            headerHeight.mockReturnValue(44);
+            resize();
+            tick(16);
+
+            expect(tableComponent.getCurrentlyRenderedRows()).toHaveLength(5);
+        }));
+
         it('should update whole rows when resizing adds or removes a horizontal scrollbar', fakeAsync(() => {
             hostComponent.virtualScrollDirective.rowHeight = 32;
             const scrollViewport = tableComponent.tableScrollable.elementRef.nativeElement;
