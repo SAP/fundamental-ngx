@@ -426,7 +426,7 @@ describe('PopoverService', () => {
             fixture.detectChanges();
         });
 
-        it.each(['popover', 'body'])(
+        it.each(['popover', 'body', 'ancestor'])(
             'should restore trigger focus after an outside click leaves focus on the %s',
             fakeAsync((focusLocation) => {
                 component.triggerRef.nativeElement.focus();
@@ -437,6 +437,10 @@ describe('PopoverService', () => {
                 action.focus();
                 if (focusLocation === 'body') {
                     action.blur();
+                } else if (focusLocation === 'ancestor') {
+                    const container = component.scrollContainerRef.nativeElement;
+                    container.tabIndex = 0;
+                    container.focus();
                 }
 
                 component.siblingRef.nativeElement.click();
@@ -465,22 +469,26 @@ describe('PopoverService', () => {
             expect(document.activeElement).not.toBe(component.triggerRef.nativeElement);
         }));
 
-        it('should preserve focus on an outside button when it closes the popover', fakeAsync(() => {
-            const outsideButton = document.createElement('button');
-            fixture.nativeElement.appendChild(outsideButton);
-            component.triggerRef.nativeElement.focus();
-            service.open();
-            fixture.detectChanges();
-            tick();
+        it.each(['button', 'input', 'div'])(
+            'should preserve focus on an outside focusable %s when it closes the popover',
+            fakeAsync((tagName) => {
+                const outsideControl = document.createElement(tagName);
+                outsideControl.tabIndex = 0;
+                fixture.nativeElement.appendChild(outsideControl);
+                component.triggerRef.nativeElement.focus();
+                service.open();
+                fixture.detectChanges();
+                tick();
 
-            outsideButton.focus();
-            outsideButton.click();
-            fixture.detectChanges();
-            tick();
+                outsideControl.focus();
+                outsideControl.click();
+                fixture.detectChanges();
+                tick();
 
-            expect(service.isOpen()).toBe(false);
-            expect(document.activeElement).toBe(outsideButton);
-        }));
+                expect(service.isOpen()).toBe(false);
+                expect(document.activeElement).toBe(outsideControl);
+            })
+        );
 
         it('should restore focus to the trigger on Escape', fakeAsync(() => {
             component.triggerRef.nativeElement.focus();

@@ -829,10 +829,10 @@ export class PopoverService {
             this._outsideClicks$().pipe(
                 map(() => {
                     const activeElement = document.activeElement;
-                    // Preserve an outside focus target, but restore focus after a click on empty space.
+                    // A blank-space click can focus a scrollable ancestor instead of another control.
                     return (
                         !activeElement ||
-                        activeElement === document.body ||
+                        activeElement.contains(this._triggerHtmlElement) ||
                         this._overlayRef.overlayElement.contains(activeElement)
                     );
                 })

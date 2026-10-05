@@ -73,6 +73,28 @@ test.describe('core/popover', () => {
         await expect(outsideInput).toBeFocused();
     });
 
+    test('restores trigger focus after clicking blank space in a focusable page container', async ({ page }) => {
+        await page.evaluate(() => {
+            const container = document.querySelector('e2e-root') as HTMLElement;
+            container.tabIndex = 0;
+            const outside = document.createElement('div');
+            outside.id = 'popover-outside-space';
+            outside.textContent = 'Outside space';
+            outside.style.cssText = 'position: fixed; right: 0; bottom: 0; padding: 20px';
+            container.append(outside);
+        });
+        const trigger = page.getByRole('button', { name: 'Sample', exact: true });
+        await trigger.click();
+        const action = page.locator('.cdk-overlay-container').getByRole('button', { name: 'Save', exact: true });
+        await action.focus();
+        await expect(action).toBeFocused();
+
+        await page.locator('#popover-outside-space').click();
+
+        await expect(action).toBeHidden();
+        await expect(trigger).toBeFocused();
+    });
+
     test('popover has correct positioning relative to trigger', async ({ page }) => {
         const trigger = page.locator('fd-popover fd-popover-control button, [fdPopoverTrigger]').first();
         const triggerBox = await trigger.boundingBox();
