@@ -63,6 +63,8 @@ describe('TableComponent Virtual Scrolling', () => {
     let hostComponent: TableHostComponent;
     let fixture: ComponentFixture<TableHostComponent>;
     let tableComponent: TableComponent<SourceItem>;
+    let resizeCallbacks: Map<Element, () => void>;
+    let resizeObserverSpy: jest.SpyInstance;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
@@ -72,6 +74,15 @@ describe('TableComponent Virtual Scrolling', () => {
     }));
 
     beforeEach(() => {
+        resizeCallbacks = new Map();
+        resizeObserverSpy = jest.spyOn(window, 'ResizeObserver').mockImplementation((callback) => {
+            const observer: ResizeObserver = {
+                observe: (target) => resizeCallbacks.set(target, () => callback([], observer)),
+                unobserve: (target) => resizeCallbacks.delete(target),
+                disconnect: jest.fn()
+            };
+            return observer;
+        });
         fixture = TestBed.createComponent(TableHostComponent);
         hostComponent = fixture.componentInstance;
 
@@ -84,6 +95,8 @@ describe('TableComponent Virtual Scrolling', () => {
 
         tableComponent = hostComponent.table;
     });
+
+    afterEach(() => resizeObserverSpy.mockRestore());
 
     describe('Scroll Whole Rows', () => {
         beforeEach(() => {
@@ -134,7 +147,6 @@ describe('TableComponent Virtual Scrolling', () => {
             if (!header) {
                 throw new Error('Expected the table header to be rendered');
             }
-            jest.spyOn(tableComponent.tableContainer.nativeElement, 'clientHeight', 'get').mockReturnValue(300);
             jest.spyOn(scrollViewport, 'clientHeight', 'get').mockReturnValue(viewportHeight);
             jest.spyOn(header, 'clientHeight', 'get').mockReturnValue(34);
 
@@ -142,6 +154,33 @@ describe('TableComponent Virtual Scrolling', () => {
 
             expect(tableComponent.getCurrentlyRenderedRows()).toHaveLength(expectedRows);
         });
+
+        it('should update whole rows when resizing adds or removes a horizontal scrollbar', fakeAsync(() => {
+            hostComponent.virtualScrollDirective.rowHeight = 32;
+            const scrollViewport = tableComponent.tableScrollable.elementRef.nativeElement;
+            const header = scrollViewport.querySelector('thead');
+            if (!header) {
+                throw new Error('Expected the table header to be rendered');
+            }
+            const viewportHeight = jest.spyOn(scrollViewport, 'clientHeight', 'get').mockReturnValue(300);
+            jest.spyOn(header, 'clientHeight', 'get').mockReturnValue(34);
+            hostComponent.virtualScrollDirective.calculateVirtualScrollRows();
+            expect(tableComponent.getCurrentlyRenderedRows()).toHaveLength(8);
+
+            const resize = resizeCallbacks.get(tableComponent.tableContainer.nativeElement);
+            if (!resize) {
+                throw new Error('Expected the table container to be observed');
+            }
+            viewportHeight.mockReturnValue(283);
+            resize();
+            tick(116);
+            expect(tableComponent.getCurrentlyRenderedRows()).toHaveLength(7);
+
+            viewportHeight.mockReturnValue(300);
+            resize();
+            tick(116);
+            expect(tableComponent.getCurrentlyRenderedRows()).toHaveLength(8);
+        }));
 
         it('should set up itemFocused subscription on first calculateVirtualScrollRows call', () => {
             // Create a new component to test fresh subscription setup

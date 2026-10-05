@@ -291,9 +291,9 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
     /** @hidden */
     private _getNumberOfRowsToDisplay(): number {
         // The scroll viewport excludes the space occupied by a horizontal scrollbar.
-        const tableContainer = this._table.tableScrollable.elementRef.nativeElement;
-        let tableHeight = tableContainer.clientHeight;
-        tableHeight = tableHeight - (tableContainer.querySelector('thead')?.clientHeight ?? 0);
+        const scrollViewport = this._table.tableScrollable.elementRef.nativeElement;
+        let tableHeight = scrollViewport.clientHeight;
+        tableHeight = tableHeight - (scrollViewport.querySelector('thead')?.clientHeight ?? 0);
         const numberOfRows = Math.floor(tableHeight / this.rowHeight);
         if (this._table._tableRowsVisible.length < numberOfRows) {
             return this._table._tableRowsVisible.length;
