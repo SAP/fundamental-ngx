@@ -1,3 +1,7 @@
+## 0.65.0-rc.33 (2026-10-05)
+
+This was a version bump only for datetime-adapter to align it with other projects, there were no code changes.
+
 ## 0.65.0-rc.32 (2026-10-02)
 
 ### 🚀 Features

@@ -1,3 +1,13 @@
+## 0.65.0-rc.33 (2026-10-05)
+
+### 🩹 Fixes
+
+- **core:** preserve free-text value in combobox when autoComplete is disabled ([#14582](https://github.com/SAP/fundamental-ngx/pull/14582), [#14576](https://github.com/SAP/fundamental-ngx/issues/14576))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
 ## 0.65.0-rc.32 (2026-10-02)
 
 ### 🚀 Features
