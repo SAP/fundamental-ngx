@@ -826,8 +826,17 @@ export class PopoverService {
             merge(this._overlayRef.detachments(), outputToObservable(body.onClose), this._escapeKeydowns$()).pipe(
                 map(() => true)
             ),
-            // An outside click has already moved focus to the user's next target.
-            this._outsideClicks$().pipe(map(() => false))
+            this._outsideClicks$().pipe(
+                map(() => {
+                    const activeElement = document.activeElement;
+                    // Preserve an outside focus target, but restore focus after a click on empty space.
+                    return (
+                        !activeElement ||
+                        activeElement === document.body ||
+                        this._overlayRef.overlayElement.contains(activeElement)
+                    );
+                })
+            )
         );
         // Only use _stopCloseListening$ to stop listening, not _refresh$
         // _refresh$ can emit due to signal effects and would complete the subscription prematurely
