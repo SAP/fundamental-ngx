@@ -23,6 +23,7 @@
     [mobile]="mobile"
     [mobileConfig]="mobileConfig"
     [inline]="inline"
+    [ngModelOptions]="{ standalone: true }"
     [(ngModel)]="value"
     [tabOutStrategy]="tabOutStrategy"
     (valueChange)="_onSelection($event)"

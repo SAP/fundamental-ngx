@@ -37,6 +37,7 @@
     [mobileConfig]="mobileConfig"
     [mobileLandscape]="mobileLandscape"
     [mobilePortrait]="mobilePortrait"
+    [ngModelOptions]="{ standalone: true }"
     [(ngModel)]="value"
     (ngModelChange)="handleDatetimeInputChange($event)"
     (activeViewChange)="handleActiveViewChange($event)"

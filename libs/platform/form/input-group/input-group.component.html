@@ -1,5 +1,6 @@
 <fd-input-group
     [disabled]="!!_cvaControl.cvaDirective?.disabled"
+    [ngModelOptions]="{ standalone: true }"
     [(ngModel)]="value"
     [state]="_cvaControl.cvaDirective?.normalizedState$() || 'default'"
     [stateMessage]="_cvaControl.cvaDirective?.stateMessage"
@@ -18,6 +19,7 @@
             [type]="_input.type"
             [disabled]="!!_cvaControl.cvaDirective?.disabled"
             [class.is-disabled]="!!_cvaControl.cvaDirective?.disabled"
+            [ngModelOptions]="{ standalone: true }"
             [(ngModel)]="value"
             [ariaLabel]="_cvaControl.cvaDirective?.ariaLabel"
             [ariaLabelledBy]="_cvaControl.cvaDirective?.ariaLabelledBy"
