@@ -1,3 +1,13 @@
+## 0.65.1-rc.0 (2026-10-06)
+
+### 🩹 Fixes
+
+- **core, platform, btp:** NG01354 warning for forms ([#14577](https://github.com/SAP/fundamental-ngx/pull/14577))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
 ## 0.65.0 (2026-10-05)
 
 ### 🚀 Features
