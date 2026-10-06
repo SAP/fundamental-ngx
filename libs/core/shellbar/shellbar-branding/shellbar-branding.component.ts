@@ -19,6 +19,7 @@ import { FD_SHELLBAR_COMPONENT } from '../tokens';
         `
             .fd-shellbar__branding {
                 padding-inline: 0;
+                gap: 4px !important;
 
                 .fd-shellbar__title {
                     padding-inline: 0.25rem;

@@ -1,0 +1,10 @@
+// Override fundamental-styles default white-space: nowrap
+// to allow text wrapping (max 2 lines with font shrinking)
+.fd-shellbar__title {
+    white-space: normal !important;
+    // Set a max-height based on 2 lines at the default font size
+    // This creates a boundary for wrapping before font shrinking kicks in
+    max-height: calc(1.2em * 2);
+    overflow: hidden;
+    line-height: 1.2;
+}

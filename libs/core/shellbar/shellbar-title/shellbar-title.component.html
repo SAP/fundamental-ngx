@@ -1,3 +1,9 @@
-<h1 class="fd-shellbar__title">
+<h1
+    class="fd-shellbar__title"
+    [style.font-size.px]="_fontSize()"
+    fdkLineClamp
+    [fdLineClampLines]="2"
+    [fdLineclampState]="true"
+>
     <ng-content></ng-content>
 </h1>
