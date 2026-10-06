@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { InitialFocusDirective, Nullable } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
@@ -34,6 +34,10 @@ import {
     ]
 })
 export class MessagePopoverComponent extends MessageListShared {
+    /** Event emits when user clicks on error entry and item's element needs to be focused. */
+    @Output()
+    override focusItem!: typeof MessageListShared.prototype.focusItem;
+
     /** @hidden */
     @ViewChild('popover')
     readonly _popover: PopoverComponent;

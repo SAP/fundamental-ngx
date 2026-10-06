@@ -3,6 +3,7 @@ import {
     Component,
     Injector,
     OnDestroy,
+    Output,
     ViewEncapsulation,
     booleanAttribute,
     inject,
@@ -21,6 +22,10 @@ import { MessageViewDialogComponent } from './components/message-view-dialog.com
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MessageViewComponent extends MessageListShared implements OnDestroy {
+    /** Event emits when user clicks on error entry and item's element needs to be focused. */
+    @Output()
+    override focusItem!: typeof MessageListShared.prototype.focusItem;
+
     /**
      * Messages to display in the message view.
      */
