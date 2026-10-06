@@ -1,0 +1,90 @@
+<!-- Floating Action Button -->
+<button
+    class="fd-guide-fab"
+    fd-button
+    glyph="ai"
+    label="Ask FD Guide"
+    title="Ask FD Guide"
+    ariaLabel="Ask FD Guide"
+    (click)="toggleChat()"
+    [attr.aria-expanded]="isOpen()"
+></button>
+<!-- Chat Window -->
+@if (isOpen()) {
+    <div
+        class="fd-guide-chat"
+        [class.fd-guide-chat--expanded]="isExpanded()"
+        role="dialog"
+        aria-label="Fundamental Guide Chat"
+        aria-modal="false"
+    >
+        <!-- Header -->
+        <header class="fd-guide-chat__header">
+            <div class="fd-guide-chat__header-icon">
+                <fd-icon glyph="ai"></fd-icon>
+            </div>
+            <div class="fd-guide-chat__header-text">
+                <h2>Fundamental Guide</h2>
+                <p>Grounded in NGX v0.65 & Fiori Horizon</p>
+            </div>
+
+            <button
+                class="fd-guide-chat__header-button"
+                fdType="transparent"
+                fd-button
+                [glyph]="isExpanded() ? 'exitfullscreen' : 'full-screen'"
+                [ariaLabel]="isExpanded() ? 'Collapse chat' : 'Expand chat'"
+                [title]="isExpanded() ? 'Collapse chat' : 'Expand chat'"
+                (click)="toggleExpand()"
+            ></button>
+
+            <button
+                class="fd-guide-chat__header-button"
+                fdType="transparent"
+                fd-button
+                glyph="decline"
+                ariaLabel="Close chat"
+                title="Close chat"
+                (click)="closeChat()"
+            ></button>
+        </header>
+
+        <!-- Messages Container -->
+        <div class="fd-guide-chat__messages" role="log" aria-live="polite" aria-atomic="false">
+            <div class="fd-guide-chat__message-group">
+                <!-- Assistant message placeholder -->
+                <div class="fd-guide-chat__message fd-guide-chat__message--assistant">
+                    <div class="fd-guide-chat__message-avatar" aria-hidden="true">FD</div>
+                    <div class="fd-guide-chat__message-content">
+                        <p>Welcome! Ask me anything about Fundamental NGX components, APIs, or examples...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Input Area -->
+        <form class="fd-guide-chat__input-form" (submit)="$event.preventDefault()">
+            <label for="fd-guide-input" class="fd-guide-sr-only">
+                Ask about Fundamental NGX components, APIs, or examples...
+            </label>
+            <div class="fd-guide-chat__input-wrapper">
+                <textarea
+                    id="fd-guide-input"
+                    class="fd-guide-chat__input"
+                    placeholder="Ask about Fundamental NGX components, APIs, or examples..."
+                    rows="1"
+                    aria-label="Message input"
+                ></textarea>
+                <button
+                    type="submit"
+                    class="fd-guide-chat__send-btn"
+                    fdType="emphasized"
+                    fd-button
+                    glyph="paper-plane"
+                    ariaLabel="Send message"
+                    title="Send message"
+                ></button>
+            </div>
+        </form>
+    </div>
+}
