@@ -45,6 +45,12 @@ export class ShellbarContextAreaComponent implements AfterViewInit {
     /** Event emitted when items in the context area are hidden or shown. Event parameter is an array of all the items that are hidden. */
     contentItemVisibilityChange = output<HTMLElement[]>();
 
+    /** Event emitted when an individual element is hidden. */
+    elementHidden = output<HTMLElement>();
+
+    /** Event emitted when an individual element is shown. */
+    elementShown = output<HTMLElement>();
+
     /** @hidden */
     readonly el: ElementRef = inject(ElementRef);
 
@@ -94,6 +100,7 @@ export class ShellbarContextAreaComponent implements AfterViewInit {
             if (lastItem?.el?.style) {
                 newHiddenItems.push(lastItem.el);
                 lastItem.el.style.display = 'none';
+                this.elementHidden.emit(lastItem.el);
             }
         }
         if (!this._arraysEqual(this._hiddenItems, newHiddenItems)) {
@@ -109,7 +116,11 @@ export class ShellbarContextAreaComponent implements AfterViewInit {
     showElements(): void {
         this._getContextAreaItemsWithPriority().forEach((item) => {
             if (item?.el?.style) {
+                const wasHidden = item.el.style.display === 'none';
                 item.el.style.display = '';
+                if (wasHidden) {
+                    this.elementShown.emit(item.el);
+                }
             }
         });
     }

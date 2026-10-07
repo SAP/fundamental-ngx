@@ -36,7 +36,7 @@ export class ShellbarTitleComponent {
     private readonly _renderer = inject(Renderer2);
     private readonly _destroyRef = inject(DestroyRef);
     private readonly _maxLines = 2;
-    private readonly _minFontSizeRem = 0.75;
+    private readonly _minFontSizeRem = 0.875;
     private readonly _maxFontSizeRem = 1;
     private _resizeObserver: ResizeObserver | null = null;
 
