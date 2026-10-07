@@ -1,3 +1,13 @@
+## 0.65.1-rc.1 (2026-10-07)
+
+### 🚀 Features
+
+- **agents:** add a ui5-wrapper-updater agent ([#14578](https://github.com/SAP/fundamental-ngx/pull/14578))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
 ## 0.65.1-rc.0 (2026-10-06)
 
 ### 🩹 Fixes
