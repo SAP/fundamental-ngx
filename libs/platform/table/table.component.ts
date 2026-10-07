@@ -2422,6 +2422,9 @@ export class TableComponent<T = any>
                 )
                 .subscribe(() => {
                     this.recalculateTableColumnWidth();
+                    if (this._virtualScrollDirective?.scrollWholeRows) {
+                        this._virtualScrollDirective.calculateVirtualScrollRows();
+                    }
                     if (this._freezableColumns.size || this._freezableEndColumns.size) {
                         this._tableColumnResizeService.updateFrozenColumnsWidth();
                         this._cdr.detectChanges();
@@ -2433,6 +2436,9 @@ export class TableComponent<T = any>
             resizeObservable(this.table.nativeElement).subscribe(() => {
                 // this._tableScrollWidth = this.table.nativeElement.scrollWidth;
                 this._checkCellMock();
+                if (this._virtualScrollDirective?.scrollWholeRows) {
+                    this._virtualScrollDirective.calculateVirtualScrollRows();
+                }
             })
         );
     }
