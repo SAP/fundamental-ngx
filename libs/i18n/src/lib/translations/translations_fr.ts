@@ -440,6 +440,20 @@ export default {
             requiredTrue: 'Le champ est obligatoire.'
         }
     },
+    platformMessageView: {
+        additionalInformation: 'Additional information available via reading keys',
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        errorButton: 'Error',
+        headerRoleDescription: 'Interactive Header',
+        informationButton: 'Information',
+        successButton: 'Success',
+        title: 'Messages',
+        warningButton: 'Warning'
+    },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Sélectionner des options',
         inputIconTitle: 'Sélectionner des options',

@@ -12,27 +12,31 @@ import {
     Input,
     Output,
     ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Nullable, TabbableElementService, resizeObservable } from '@fundamental-ngx/cdk/utils';
+import { ClickedDirective, Nullable, TabbableElementService, resizeObservable } from '@fundamental-ngx/cdk/utils';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { TextComponent } from '@fundamental-ngx/core/text';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { debounceTime } from 'rxjs';
 import { MessagePopoverEntry, MessagePopoverErrorGroup } from '../../models/message-popover-entry.interface';
+import { getIconForMessageType } from '../../utils';
 
 const ANIMATION_EASING = 'cubic-bezier(0, 0, 0.2, 1)';
 const ANIMATION_DURATION = 100;
 
 @Component({
-    selector: 'fdp-message-view',
-    templateUrl: './message-view.component.html',
+    selector: 'fdp-messages-list',
+    templateUrl: './messages-list.component.html',
+    styleUrl: './messages-list.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [TabbableElementService],
+    providers: [TabbableElementService, FdTranslatePipe],
     host: {
         class: 'fd-message-popover__view-container'
     },
@@ -43,10 +47,12 @@ const ANIMATION_DURATION = 100;
         ListModule,
         ObjectStatusComponent,
         LinkComponent,
-        FdTranslatePipe
+        FdTranslatePipe,
+        ClickedDirective,
+        TextComponent
     ]
 })
-export class MessageViewComponent implements AfterViewInit {
+export class MessagesListComponent implements AfterViewInit {
     /** Current Message Popover screen. Can be either `list` or `details`. */
     @Input()
     set currentScreen(value: 'list' | 'details') {
@@ -82,19 +88,19 @@ export class MessageViewComponent implements AfterViewInit {
 
     /** @hidden */
     @ViewChild('listView', { read: ElementRef })
-    protected _listView: ElementRef;
+    protected listView: ElementRef;
 
     /** @hidden */
     @ViewChild('detailsView', { read: ElementRef })
-    protected _detailsView: ElementRef;
+    protected detailsView: ElementRef;
 
     /** @hidden */
     @ViewChild('listSection', { read: ElementRef })
-    protected _listSection: ElementRef;
+    protected listSection: ElementRef;
 
     /** @hidden */
     @ViewChild('detailsSection', { read: ElementRef })
-    protected _detailsSection: ElementRef;
+    protected detailsSection: ElementRef;
 
     /** @hidden */
     private _currentScreen: 'list' | 'details' = 'list';
@@ -107,6 +113,9 @@ export class MessageViewComponent implements AfterViewInit {
 
     /** @hidden */
     private _detailsAnimation: Animation | null = null;
+
+    /** @hidden */
+    private readonly _translatePipe = inject(FdTranslatePipe);
 
     /** @hidden */
     constructor(
@@ -124,16 +133,16 @@ export class MessageViewComponent implements AfterViewInit {
 
     /** @hidden */
     ngAfterViewInit(): void {
-        resizeObservable(this._detailsView.nativeElement)
+        resizeObservable(this.detailsView.nativeElement)
             .pipe(debounceTime(20), takeUntilDestroyed(this._destroyRef))
             .subscribe(() => {
-                const { height } = this._detailsView.nativeElement.getBoundingClientRect();
-                this._listSection.nativeElement.style.minHeight = `${height}px`;
+                const { height } = this.detailsView.nativeElement.getBoundingClientRect();
+                this.listSection.nativeElement.style.minHeight = `${height}px`;
             });
     }
 
     /** @hidden */
-    _showDetails(entry: MessagePopoverEntry): void {
+    showDetails(entry: MessagePopoverEntry): void {
         this._activeListElement = this._document.activeElement as HTMLElement;
         if (!entry.description.message) {
             this._focusElement(undefined, entry);
@@ -144,7 +153,7 @@ export class MessageViewComponent implements AfterViewInit {
     }
 
     /** @hidden */
-    _focusElement(event?: MouseEvent, item?: MessagePopoverEntry): void {
+    _focusElement(event?: MouseEvent | KeyboardEvent, item?: MessagePopoverEntry): void {
         if (!item?.element?.nativeElement) {
             return;
         }
@@ -157,10 +166,33 @@ export class MessageViewComponent implements AfterViewInit {
         });
     }
 
+    /** @hidden Map message type to icon name */
+    protected getIconForType(type: string): string {
+        return getIconForMessageType(type);
+    }
+
+    /** @hidden Get heading text for fd-text component */
+    protected getHeadingText(item: MessagePopoverEntry): string {
+        if (item.heading.type === 'string' && typeof item.heading.message === 'string') {
+            return item.heading.message;
+        }
+        return '';
+    }
+
+    /** @hidden Get announcement text for screen reader when navigating to details */
+    protected getAnnouncementText(entry: MessagePopoverEntry): string {
+        let headingText = '';
+        if (entry.heading.type === 'string' && entry.heading.message) {
+            headingText = typeof entry.heading.message === 'string' ? entry.heading.message : '';
+        }
+        const additionalInfoText = this._translatePipe.transform('platformMessageView.additionalInformation')();
+        return headingText ? `${headingText}. ${additionalInfoText}` : '';
+    }
+
     /** @hidden Animate the transition between list and details screens. */
     private _animateScreenTransition(screen: 'list' | 'details'): void {
-        const listEl = this._listSection?.nativeElement;
-        const detailsEl = this._detailsSection?.nativeElement;
+        const listEl = this.listSection?.nativeElement;
+        const detailsEl = this.detailsSection?.nativeElement;
 
         if (!listEl || !detailsEl) {
             return;
@@ -179,6 +211,7 @@ export class MessageViewComponent implements AfterViewInit {
     /** @hidden Slide list out left, details in from right. */
     private _animateListToDetails(listEl: HTMLElement, detailsEl: HTMLElement): void {
         if (typeof listEl.animate !== 'function') {
+            this._focusDetailsView();
             return;
         }
 
@@ -195,12 +228,13 @@ export class MessageViewComponent implements AfterViewInit {
                 { transform: 'translateX(50px)', opacity: 0 },
                 { transform: 'translateX(0)', opacity: 1 }
             ],
-            { duration: ANIMATION_DURATION, easing: ANIMATION_EASING, fill: 'forwards', delay: ANIMATION_DURATION }
+            { duration: ANIMATION_DURATION, easing: ANIMATION_EASING, fill: 'forwards' }
         );
 
         this._detailsAnimation.finished
             .then(() => {
                 this._detailsAnimation = null;
+                this._focusDetailsView();
             })
             .catch(() => {
                 this._detailsAnimation = null;
@@ -226,7 +260,7 @@ export class MessageViewComponent implements AfterViewInit {
                 { transform: 'translateX(-50px)', opacity: 0 },
                 { transform: 'translateX(0)', opacity: 1 }
             ],
-            { duration: ANIMATION_DURATION, easing: ANIMATION_EASING, fill: 'forwards', delay: ANIMATION_DURATION }
+            { duration: ANIMATION_DURATION, easing: ANIMATION_EASING, fill: 'forwards' }
         );
 
         this._listAnimation.finished
@@ -240,5 +274,19 @@ export class MessageViewComponent implements AfterViewInit {
             .catch(() => {
                 this._listAnimation = null;
             });
+    }
+
+    /** @hidden Focus the first interactive element in the details view. */
+    private _focusDetailsView(): void {
+        if (!this.detailsView?.nativeElement) {
+            return;
+        }
+
+        // Try to find the first tabbable element in the details view
+        const firstTabbable = this._tabbableService.getTabbableElement(this.detailsView.nativeElement);
+
+        if (firstTabbable) {
+            firstTabbable.focus();
+        }
     }
 }

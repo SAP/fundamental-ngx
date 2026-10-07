@@ -437,6 +437,20 @@ export default {
             requiredTrue: 'Feltet er obligatorisk'
         }
     },
+    platformMessageView: {
+        additionalInformation: 'Additional information available via reading keys',
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        errorButton: 'Error',
+        headerRoleDescription: 'Interactive Header',
+        informationButton: 'Information',
+        successButton: 'Success',
+        title: 'Messages',
+        warningButton: 'Warning'
+    },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Vælg muligheder',
         inputIconTitle: 'Vælg muligheder',

@@ -1,9 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA, Injectable, NO_ERRORS_SCHEMA, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { MessagePopoverErrorGroup, MessagePopoverWrapper } from '@fundamental-ngx/platform/messages-shared';
 import { MessagePopoverComponent } from './message-popover.component';
-import { MessagePopoverErrorGroup } from './models/message-popover-entry.interface';
-import { MessagePopoverWrapper } from './models/message-popover-wrapper.interface';
 
 const stubErrors: MessagePopoverErrorGroup[] = [
     {
@@ -124,7 +122,7 @@ describe('MessagePopoverComponent', () => {
     it('should filter errors', async () => {
         await fixture.whenStable();
 
-        component._currentErrorType$.set('error');
+        component._currentErrorType.set('error');
 
         fixture.detectChanges();
 

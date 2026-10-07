@@ -132,6 +132,10 @@ export interface FdLanguage {
         datetimeOkLabel: FdLanguageKey;
         datetimeCancelLabel: FdLanguageKey;
     };
+    coreDialog: {
+        /** Resizable description */
+        resizable: FdLanguageKey;
+    };
     coreDynamicPage: {
         breadcrumbsLabel: FdLanguageKey;
         expandLabel: FdLanguageKey;
@@ -908,5 +912,25 @@ export interface FdLanguage {
         warning: FdLanguageKey;
         /** Value State Information */
         information: FdLanguageKey;
+    };
+    platformMessageView: {
+        /** Text for the cancel button in the message view dialog */
+        cancel: FdLanguageKey;
+        /** Text for the message view dialog title */
+        title: FdLanguageKey;
+        /** Text for the message view dialog details page title */
+        detailsTitle: FdLanguageKey;
+        /** Role description for message view dialog header */
+        headerRoleDescription: FdLanguageKey;
+        /** Invisible message announced when navigating from messages list to message detail page */
+        additionalInformation: FdLanguageKey;
+        /** Text for the success button in the segmented button */
+        successButton: FdLanguageKey;
+        /** Text for the error button in the segmented button */
+        errorButton: FdLanguageKey;
+        /** Text for the warning button in the segmented button */
+        warningButton: FdLanguageKey;
+        /** Text for the information button in the segmented button */
+        informationButton: FdLanguageKey;
     };
 }

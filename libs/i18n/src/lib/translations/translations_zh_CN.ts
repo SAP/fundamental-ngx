@@ -434,6 +434,20 @@ export default {
             requiredTrue: '该字段为必填'
         }
     },
+    platformMessageView: {
+        additionalInformation: 'Additional information available via reading keys',
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        errorButton: 'Error',
+        headerRoleDescription: 'Interactive Header',
+        informationButton: 'Information',
+        successButton: 'Success',
+        title: 'Messages',
+        warningButton: 'Warning'
+    },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     platformMultiCombobox: {
         inputGlyphAriaLabel: '选择选项',
         inputIconTitle: '选择选项',
