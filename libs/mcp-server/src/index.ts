@@ -1,7 +1,15 @@
 #!/usr/bin/env node
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { InMemoryTransport } from '@modelcontextprotocol/sdk/inMemory.js';
-import { server, startStdioServer } from './server';
+import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
+import { createServer, loadCatalogFromDisk } from './server';
+
+const server = createServer(loadCatalogFromDisk());
+
+async function startStdioServer(): Promise<void> {
+    const transport = new StdioServerTransport();
+    await server.connect(transport);
+}
 
 const args = process.argv.slice(2);
 

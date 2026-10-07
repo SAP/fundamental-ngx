@@ -117,6 +117,7 @@
             "@fundamental-ngx/i18n/zh-hans": ["libs/i18n/zh-hans/index.ts"],
             "@fundamental-ngx/i18n/zh-hant": ["libs/i18n/zh-hant/index.ts"],
             "@fundamental-ngx/mcp-server": ["libs/mcp-server/src/index.ts"],
+            "@fundamental-ngx/mcp-server/web": ["libs/mcp-server/src/web.ts"],
             "@fundamental-ngx/moment-adapter": ["libs/moment-adapter/src/index.ts"],
             "@fundamental-ngx/nx-plugin": ["libs/nx-plugin/src/index.ts"],
             "@fundamental-ngx/platform": ["libs/platform/index.ts"],
