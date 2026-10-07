@@ -27,6 +27,10 @@ axe-reports
 /.nx/cache
 /.nx/workspace-data
 
+# Loose Next.js chatbot app — generated build output and local deps
+/apps/chatbot/.next
+/apps/chatbot/node_modules
+
 # Angular parser has issues with this file's heavy use of escaped curly braces
 libs/docs/i18n/writing-translations.component.html
 # Example file with deliberately formatted code snippets

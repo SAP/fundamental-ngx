@@ -1,0 +1,23 @@
+{
+    "extends": "../../tsconfig.base.json",
+    "compilerOptions": {
+        "jsx": "preserve",
+        "module": "esnext",
+        "moduleResolution": "bundler",
+        "allowJs": true,
+        "noEmit": true,
+        "incremental": true,
+        "plugins": [
+            {
+                "name": "next"
+            }
+        ],
+        "paths": {
+            "@fundamental-ngx/mcp-server/web": ["../../libs/mcp-server/src/web.ts"]
+        },
+        "strict": false,
+        "isolatedModules": true
+    },
+    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+    "exclude": ["node_modules"]
+}

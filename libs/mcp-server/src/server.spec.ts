@@ -7,10 +7,13 @@
  * For protocol-level integration testing, see server.integration.spec.ts.
  */
 
+import { Client } from '@modelcontextprotocol/sdk/client/index.js';
+import { InMemoryTransport } from '@modelcontextprotocol/sdk/inMemory.js';
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
 import { SETUP_GUIDES } from './data/setup-guides';
 import { USAGE_GUIDES } from './data/usage-guides';
+import { createServer } from './server';
 import { ComponentCatalog, ComponentMetadata } from './types/component-metadata';
 import { buildPitfalls, buildTemplate, deriveImportPath, getSelectorType } from './utils/selector-utils';
 
@@ -1037,6 +1040,49 @@ describe('SETUP_GUIDES', () => {
 
     it('core+ui5 angularJsonStylesSnippet should include @ui5/webcomponents-theming path', () => {
         expect(SETUP_GUIDES['core+ui5'].angularJsonStylesSnippet).toContain('@ui5/webcomponents-theming');
+    });
+});
+
+// ---------------------------------------------------------------------------
+// createServer factory
+// ---------------------------------------------------------------------------
+
+describe('createServer', () => {
+    const emptyCatalog: ComponentCatalog = {
+        generatedAt: '2026-01-01T00:00:00.000Z',
+        version: '1.2.3',
+        components: []
+    };
+
+    it('builds an independent server exposing the tool set', async () => {
+        const server = createServer(emptyCatalog);
+        const [serverTransport, clientTransport] = InMemoryTransport.createLinkedPair();
+        await server.connect(serverTransport);
+        const client = new Client({ name: 'test', version: '1.0' });
+        await client.connect(clientTransport);
+
+        try {
+            const { tools } = await client.listTools();
+            const names = tools.map((t) => t.name).sort();
+
+            expect(names).toEqual(
+                [
+                    'compare_components',
+                    'get_component_api',
+                    'get_component_examples',
+                    'get_setup_guide',
+                    'get_usage_guide',
+                    'list_components',
+                    'search_components'
+                ].sort()
+            );
+        } finally {
+            await client.close();
+        }
+    });
+
+    it('returns a new McpServer instance on each call', () => {
+        expect(createServer(emptyCatalog)).not.toBe(createServer(emptyCatalog));
     });
 });
 

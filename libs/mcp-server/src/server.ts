@@ -1,5 +1,4 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
 import { z } from 'zod';
@@ -9,213 +8,254 @@ import { ComponentCatalog, ComponentMetadata, LIBRARY_ALIAS_MAP, LibraryAlias } 
 import type { SetupGuide } from './types/setup-guide';
 import { buildPitfalls, buildTemplate, deriveImportPath, getSelectorType } from './utils/selector-utils';
 
-// Load component catalog from pre-built JSON
-let catalog: ComponentCatalog;
-try {
-    const dataPath = resolve(__dirname, 'data', 'components.json');
-    const raw = JSON.parse(readFileSync(dataPath, 'utf-8')) as ComponentCatalog;
-    // Strip Signal<T> / WritableSignal<T> inputs — these are internal state properties
-    // that TypeDoc exposes as public, not bindable Angular @Input() properties.
-    catalog = {
+/**
+ * Strips `Signal<T>` / `WritableSignal<T>` input types from every component in
+ * the catalog.  TypeDoc exposes these as public properties, but they are
+ * internal state — not bindable Angular `@Input()` properties — so we remove
+ * them before serving the catalog to any consumer (stdio or web).
+ *
+ * Exported so that the web handler can apply identical normalization without
+ * duplicating the filter logic.
+ */
+export function normalizeCatalog(raw: ComponentCatalog): ComponentCatalog {
+    return {
         ...raw,
+        // isSignalWrapperType is a hoisted function declaration (defined below)
         components: raw.components.map((c) => ({
             ...c,
             inputs: c.inputs.filter((i) => !isSignalWrapperType(i.type))
         }))
     };
-} catch {
-    catalog = { generatedAt: new Date().toISOString(), version: 'unknown', components: [] };
-    console.error('Warning: components.json not found. Run `nx run mcp-server:extract-metadata` first.');
 }
 
-const server = new McpServer({
-    name: 'fundamental-ngx',
-    version: catalog.version
-});
+export function loadCatalogFromDisk(): ComponentCatalog {
+    try {
+        const dataPath = resolve(__dirname, 'data', 'components.json');
+        const raw = JSON.parse(readFileSync(dataPath, 'utf-8')) as ComponentCatalog;
+        return normalizeCatalog(raw);
+    } catch {
+        console.error('Warning: components.json not found. Run `nx run mcp-server:extract-metadata` first.');
+        return { generatedAt: new Date().toISOString(), version: 'unknown', components: [] };
+    }
+}
 
-// ---------------------------------------------------------------------------
-// Tool: list_components
-// ---------------------------------------------------------------------------
-server.tool(
-    'list_components',
-    `List all Fundamental NGX components. Returns name, selector, library, and description.
+export function createServer(catalog: ComponentCatalog): McpServer {
+    const server = new McpServer({
+        name: 'fundamental-ngx',
+        version: catalog.version
+    });
+
+    // ---------------------------------------------------------------------------
+    // Tool: list_components
+    // ---------------------------------------------------------------------------
+    server.tool(
+        'list_components',
+        `List all Fundamental NGX components. Returns name, selector, library, and description.
 Optionally filter by library (core, platform, btp, cx, cdk, ui5, ui5-fiori, ui5-ai)
 or category (Action, Form, Layout, Display, Navigation, etc.).
 Use this to discover what components are available.`,
-    {
-        library: z
-            .enum(['core', 'platform', 'btp', 'cx', 'cdk', 'i18n', 'ui5', 'ui5-fiori', 'ui5-ai'] as const)
-            .optional()
-            .describe('Filter by library'),
-        category: z.string().optional().describe('Filter by category')
-    },
-    async ({ library, category }) => {
-        let components = catalog.components;
+        {
+            library: z
+                .enum(['core', 'platform', 'btp', 'cx', 'cdk', 'i18n', 'ui5', 'ui5-fiori', 'ui5-ai'] as const)
+                .optional()
+                .describe('Filter by library'),
+            category: z.string().optional().describe('Filter by category')
+        },
+        async ({ library, category }) => {
+            let components = catalog.components;
 
-        if (library) {
-            const fullLibrary = LIBRARY_ALIAS_MAP[library as LibraryAlias];
-            if (fullLibrary) {
-                components = components.filter((c) => c.library === fullLibrary);
-            }
-        }
-
-        if (category) {
-            const lowerCategory = category.toLowerCase();
-            components = components.filter((c) => c.category.toLowerCase().includes(lowerCategory));
-        }
-
-        const summary = components.map((c) => ({
-            name: c.name,
-            selector: c.selector,
-            library: c.library,
-            description: truncate(c.description, 120)
-        }));
-
-        return {
-            content: [
-                {
-                    type: 'text' as const,
-                    text: JSON.stringify({ count: summary.length, components: summary }, null, 2)
+            if (library) {
+                const fullLibrary = LIBRARY_ALIAS_MAP[library as LibraryAlias];
+                if (fullLibrary) {
+                    components = components.filter((c) => c.library === fullLibrary);
                 }
-            ]
-        };
-    }
-);
+            }
 
-// ---------------------------------------------------------------------------
-// Tool: search_components
-// ---------------------------------------------------------------------------
-server.tool(
-    'search_components',
-    `Search Fundamental NGX components by keyword. Searches across component names,
+            if (category) {
+                const lowerCategory = category.toLowerCase();
+                components = components.filter((c) => c.category.toLowerCase().includes(lowerCategory));
+            }
+
+            const summary = components.map((c) => ({
+                name: c.name,
+                selector: c.selector,
+                library: c.library,
+                description: truncate(c.description, 120)
+            }));
+
+            return {
+                content: [
+                    {
+                        type: 'text' as const,
+                        text: JSON.stringify({ count: summary.length, components: summary }, null, 2)
+                    }
+                ]
+            };
+        }
+    );
+
+    // ---------------------------------------------------------------------------
+    // Tool: search_components
+    // ---------------------------------------------------------------------------
+    server.tool(
+        'search_components',
+        `Search Fundamental NGX components by keyword. Searches across component names,
 selectors, descriptions, and input/output property names.
 Use this when you need to find a component by a partial name or feature keyword.`,
-    {
-        query: z.string().describe('Search keyword (e.g., "button", "table", "date", "navigation")'),
-        library: z
-            .enum(['core', 'platform', 'btp', 'cx', 'cdk', 'ui5', 'ui5-fiori', 'ui5-ai'] as const)
-            .optional()
-            .describe('Restrict search to a specific library')
-    },
-    async ({ query, library }) => {
-        const lowerQuery = query.toLowerCase();
-        let components = catalog.components;
+        {
+            query: z.string().describe('Search keyword (e.g., "button", "table", "date", "navigation")'),
+            library: z
+                .enum(['core', 'platform', 'btp', 'cx', 'cdk', 'ui5', 'ui5-fiori', 'ui5-ai'] as const)
+                .optional()
+                .describe('Restrict search to a specific library')
+        },
+        async ({ query, library }) => {
+            const lowerQuery = query.toLowerCase();
+            let components = catalog.components;
 
-        if (library) {
-            const fullLibrary = LIBRARY_ALIAS_MAP[library as LibraryAlias];
-            if (fullLibrary) {
-                components = components.filter((c) => c.library === fullLibrary);
-            }
-        }
-
-        // Multi-word queries: sum the per-word scores so that components matching
-        // more words rank higher. Single-word queries use the existing path.
-        const queryWords = lowerQuery.split(/\s+/).filter((w) => w.length > 2);
-        const isMultiWord = queryWords.length > 1;
-
-        const scored = components
-            .map((c) => ({
-                component: c,
-                score: isMultiWord
-                    ? queryWords.reduce((sum, word) => sum + scoreMatch(c, word), 0)
-                    : scoreMatch(c, lowerQuery)
-            }))
-            .filter((s) => s.score > 0)
-            .sort((a, b) => b.score - a.score)
-            .slice(0, 20);
-
-        const results = scored.map((s) => ({
-            name: s.component.name,
-            selector: s.component.selector,
-            library: s.component.library,
-            category: s.component.category,
-            description: truncate(s.component.description, 150),
-            relevance: s.score
-        }));
-
-        return {
-            content: [
-                {
-                    type: 'text' as const,
-                    text: JSON.stringify({ query, count: results.length, results }, null, 2)
+            if (library) {
+                const fullLibrary = LIBRARY_ALIAS_MAP[library as LibraryAlias];
+                if (fullLibrary) {
+                    components = components.filter((c) => c.library === fullLibrary);
                 }
-            ]
-        };
-    }
-);
+            }
 
-// ---------------------------------------------------------------------------
-// Tool: get_component_api
-// ---------------------------------------------------------------------------
-server.tool(
-    'get_component_api',
-    `Get full API details for a specific Fundamental NGX component.
+            // Multi-word queries: sum the per-word scores so that components matching
+            // more words rank higher. Single-word queries use the existing path.
+            const queryWords = lowerQuery.split(/\s+/).filter((w) => w.length > 2);
+            const isMultiWord = queryWords.length > 1;
+
+            const scored = components
+                .map((c) => ({
+                    component: c,
+                    score: isMultiWord
+                        ? queryWords.reduce((sum, word) => sum + scoreMatch(c, word), 0)
+                        : scoreMatch(c, lowerQuery)
+                }))
+                .filter((s) => s.score > 0)
+                .sort((a, b) => b.score - a.score)
+                .slice(0, 20);
+
+            const results = scored.map((s) => ({
+                name: s.component.name,
+                selector: s.component.selector,
+                library: s.component.library,
+                category: s.component.category,
+                description: truncate(s.component.description, 150),
+                relevance: s.score
+            }));
+
+            return {
+                content: [
+                    {
+                        type: 'text' as const,
+                        text: JSON.stringify({ query, count: results.length, results }, null, 2)
+                    }
+                ]
+            };
+        }
+    );
+
+    // ---------------------------------------------------------------------------
+    // Tool: get_component_api
+    // ---------------------------------------------------------------------------
+    server.tool(
+        'get_component_api',
+        `Get full API details for a specific Fundamental NGX component.
 Accepts component name (e.g., "ButtonComponent"), selector (e.g., "fd-button", "ui5-button"),
 or partial match. Returns all inputs, outputs, slots, methods, and enum values.
 Use this when you need to know how to use a specific component.`,
-    {
-        name: z.string().describe('Component name, selector, or search term')
-    },
-    async ({ name }) => {
-        const component = findComponent(name);
+        {
+            name: z.string().describe('Component name, selector, or search term')
+        },
+        async ({ name }) => {
+            const component = findComponent(name, catalog);
 
-        if (!component) {
+            if (!component) {
+                return {
+                    content: [
+                        {
+                            type: 'text' as const,
+                            text: `Component "${name}" not found. Use search_components to find available components.`
+                        }
+                    ]
+                };
+            }
+
+            const result: Record<string, unknown> = { ...component };
+            if (component.deprecated) {
+                result.deprecationWarning = `This component is deprecated: ${component.deprecated}`;
+            }
+
+            result.selectorType = getSelectorType(component.selector);
+            result.templateUsage = buildTemplate(component);
+            result.importPath = deriveImportPath(component);
+
             return {
                 content: [
                     {
                         type: 'text' as const,
-                        text: `Component "${name}" not found. Use search_components to find available components.`
+                        text: JSON.stringify(result, null, 2)
                     }
                 ]
             };
         }
+    );
 
-        const result: Record<string, unknown> = { ...component };
-        if (component.deprecated) {
-            result.deprecationWarning = `This component is deprecated: ${component.deprecated}`;
-        }
-
-        result.selectorType = getSelectorType(component.selector);
-        result.templateUsage = buildTemplate(component);
-        result.importPath = deriveImportPath(component);
-
-        return {
-            content: [
-                {
-                    type: 'text' as const,
-                    text: JSON.stringify(result, null, 2)
-                }
-            ]
-        };
-    }
-);
-
-// ---------------------------------------------------------------------------
-// Tool: get_component_examples
-// ---------------------------------------------------------------------------
-server.tool(
-    'get_component_examples',
-    `Get working code examples for a Fundamental NGX component.
+    // ---------------------------------------------------------------------------
+    // Tool: get_component_examples
+    // ---------------------------------------------------------------------------
+    server.tool(
+        'get_component_examples',
+        `Get working code examples for a Fundamental NGX component.
 Returns TypeScript and HTML snippets from the documentation examples.
 Use this when you need real usage patterns for a component.`,
-    {
-        name: z.string().describe('Component name or selector')
-    },
-    async ({ name }) => {
-        const component = findComponent(name);
+        {
+            name: z.string().describe('Component name or selector')
+        },
+        async ({ name }) => {
+            const component = findComponent(name, catalog);
 
-        if (!component) {
-            return {
-                content: [
-                    {
-                        type: 'text' as const,
-                        text: `Component "${name}" not found. Use search_components to find available components.`
-                    }
-                ]
-            };
-        }
+            if (!component) {
+                return {
+                    content: [
+                        {
+                            type: 'text' as const,
+                            text: `Component "${name}" not found. Use search_components to find available components.`
+                        }
+                    ]
+                };
+            }
 
-        if (!component.examples || component.examples.length === 0) {
+            if (!component.examples || component.examples.length === 0) {
+                return {
+                    content: [
+                        {
+                            type: 'text' as const,
+                            text: JSON.stringify(
+                                {
+                                    component: component.name,
+                                    selector: component.selector,
+                                    docsUrl: component.docsUrl || 'https://sap.github.io/fundamental-ngx',
+                                    note: 'No examples found for this component. Check the docs site for usage guidance.'
+                                },
+                                null,
+                                2
+                            )
+                        }
+                    ]
+                };
+            }
+
+            const formatted = component.examples.map((ex) => {
+                let code = `// --- ${ex.description} ---\n\n`;
+                code += ex.typescript;
+                if (ex.html) {
+                    code += `\n\n<!-- Template: ${ex.name}.component.html -->\n\n${ex.html}`;
+                }
+                return { name: ex.description, code };
+            });
+
             return {
                 content: [
                     {
@@ -224,8 +264,8 @@ Use this when you need real usage patterns for a component.`,
                             {
                                 component: component.name,
                                 selector: component.selector,
-                                docsUrl: component.docsUrl || 'https://sap.github.io/fundamental-ngx',
-                                note: 'No examples found for this component. Check the docs site for usage guidance.'
+                                exampleCount: formatted.length,
+                                examples: formatted
                             },
                             null,
                             2
@@ -234,42 +274,14 @@ Use this when you need real usage patterns for a component.`,
                 ]
             };
         }
+    );
 
-        const formatted = component.examples.map((ex) => {
-            let code = `// --- ${ex.description} ---\n\n`;
-            code += ex.typescript;
-            if (ex.html) {
-                code += `\n\n<!-- Template: ${ex.name}.component.html -->\n\n${ex.html}`;
-            }
-            return { name: ex.description, code };
-        });
-
-        return {
-            content: [
-                {
-                    type: 'text' as const,
-                    text: JSON.stringify(
-                        {
-                            component: component.name,
-                            selector: component.selector,
-                            exampleCount: formatted.length,
-                            examples: formatted
-                        },
-                        null,
-                        2
-                    )
-                }
-            ]
-        };
-    }
-);
-
-// ---------------------------------------------------------------------------
-// Tool: get_usage_guide
-// ---------------------------------------------------------------------------
-server.tool(
-    'get_usage_guide',
-    `Get a practical usage guide for a Fundamental NGX component.
+    // ---------------------------------------------------------------------------
+    // Tool: get_usage_guide
+    // ---------------------------------------------------------------------------
+    server.tool(
+        'get_usage_guide',
+        `Get a practical usage guide for a Fundamental NGX component.
 Returns the correct import path, a minimal template snippet showing proper selector usage,
 required inputs that must be provided, and common pitfalls to avoid.
 Use this as the first step when adding a new component to an Angular template.
@@ -282,215 +294,219 @@ patchLanguage, runtime language switching).
 Use "migrate-from-ui5-webcomponents-ngx" to get the migration guide from the deprecated
 @ui5/webcomponents-ngx package (camelCase inputs, ValueState renames, ThemingService bridge,
 additionalText replacing status).`,
-    {
-        name: z
-            .string()
-            .describe(
-                'Component name or selector. Examples: "fd-button", "fdp-table", "ui5-input", "setup", "ui5", "i18n", "FdTranslatePipe", "migrate-from-ui5-webcomponents-ngx"'
-            )
-    },
-    async ({ name }) => {
-        const lowerComponent = name.toLowerCase().replace(/\s+/g, '-');
-        const curatedGuide = USAGE_GUIDES[lowerComponent];
-        if (curatedGuide) {
-            return { content: [{ type: 'text' as const, text: JSON.stringify(curatedGuide, null, 2) }] };
-        }
+        {
+            name: z
+                .string()
+                .describe(
+                    'Component name or selector. Examples: "fd-button", "fdp-table", "ui5-input", "setup", "ui5", "i18n", "FdTranslatePipe", "migrate-from-ui5-webcomponents-ngx"'
+                )
+        },
+        async ({ name }) => {
+            const lowerComponent = name.toLowerCase().replace(/\s+/g, '-');
+            const curatedGuide = USAGE_GUIDES[lowerComponent];
+            if (curatedGuide) {
+                return { content: [{ type: 'text' as const, text: JSON.stringify(curatedGuide, null, 2) }] };
+            }
 
-        const found = findComponent(name);
+            const found = findComponent(name, catalog);
 
-        if (!found) {
+            if (!found) {
+                return {
+                    content: [
+                        {
+                            type: 'text' as const,
+                            text: `Component "${name}" not found. Use search_components to find available components.`
+                        }
+                    ]
+                };
+            }
+
+            const importPath = deriveImportPath(found);
+            const templateUsage = buildTemplate(found);
+            const pitfalls = buildPitfalls(found, importPath);
+            const requiredInputs = found.inputs.filter((i) => i.required && !i.defaultValue);
+            const firstExample = found.examples && found.examples.length > 0 ? found.examples[0] : null;
+
+            const result: Record<string, unknown> = {
+                component: found.name,
+                selector: found.selector,
+                library: found.library,
+                importPath,
+                selectorType: getSelectorType(found.selector),
+                templateUsage,
+                requiredInputs: requiredInputs.map((i) => ({ name: i.name, type: i.type, description: i.description })),
+                pitfalls,
+                docsUrl: found.docsUrl
+            };
+
+            if (found.deprecated) {
+                result.deprecated = found.deprecated;
+            }
+
+            if (firstExample) {
+                result.example = {
+                    name: firstExample.description,
+                    typescript: firstExample.typescript,
+                    html: firstExample.html
+                };
+            }
+
             return {
                 content: [
                     {
                         type: 'text' as const,
-                        text: `Component "${name}" not found. Use search_components to find available components.`
+                        text: JSON.stringify(result, null, 2)
                     }
                 ]
             };
         }
+    );
 
-        const importPath = deriveImportPath(found);
-        const templateUsage = buildTemplate(found);
-        const pitfalls = buildPitfalls(found, importPath);
-        const requiredInputs = found.inputs.filter((i) => i.required && !i.defaultValue);
-        const firstExample = found.examples && found.examples.length > 0 ? found.examples[0] : null;
-
-        const result: Record<string, unknown> = {
-            component: found.name,
-            selector: found.selector,
-            library: found.library,
-            importPath,
-            selectorType: getSelectorType(found.selector),
-            templateUsage,
-            requiredInputs: requiredInputs.map((i) => ({ name: i.name, type: i.type, description: i.description })),
-            pitfalls,
-            docsUrl: found.docsUrl
-        };
-
-        if (found.deprecated) {
-            result.deprecated = found.deprecated;
-        }
-
-        if (firstExample) {
-            result.example = {
-                name: firstExample.description,
-                typescript: firstExample.typescript,
-                html: firstExample.html
-            };
-        }
-
-        return {
-            content: [
-                {
-                    type: 'text' as const,
-                    text: JSON.stringify(result, null, 2)
-                }
-            ]
-        };
-    }
-);
-
-// ---------------------------------------------------------------------------
-// Tool: compare_components
-// ---------------------------------------------------------------------------
-server.tool(
-    'compare_components',
-    `Compare two Fundamental NGX components side by side.
+    // ---------------------------------------------------------------------------
+    // Tool: compare_components
+    // ---------------------------------------------------------------------------
+    server.tool(
+        'compare_components',
+        `Compare two Fundamental NGX components side by side.
 Returns shared and unique inputs, outputs, slots, and methods.
 Useful for choosing between core (fd-) and UI5 (ui5-) variants,
 or comparing alternative components for the same use case.`,
-    {
-        component_a: z.string().describe('First component name or selector (e.g., "fd-button")'),
-        component_b: z.string().describe('Second component name or selector (e.g., "ui5-button")')
-    },
-    async ({ component_a, component_b }) => {
-        const compA = findComponent(component_a);
-        const compB = findComponent(component_b);
+        {
+            component_a: z.string().describe('First component name or selector (e.g., "fd-button")'),
+            component_b: z.string().describe('Second component name or selector (e.g., "ui5-button")')
+        },
+        async ({ component_a, component_b }) => {
+            const compA = findComponent(component_a, catalog);
+            const compB = findComponent(component_b, catalog);
 
-        if (!compA || !compB) {
-            const missing = [...(!compA ? [component_a] : []), ...(!compB ? [component_b] : [])];
+            if (!compA || !compB) {
+                const missing = [...(!compA ? [component_a] : []), ...(!compB ? [component_b] : [])];
+                return {
+                    content: [
+                        {
+                            type: 'text' as const,
+                            text: `Component(s) not found: ${missing.map((m) => `"${m}"`).join(', ')}. Use search_components to find available components.`
+                        }
+                    ]
+                };
+            }
+
+            // Compare inputs by name
+            const inputNamesA = new Set(compA.inputs.map((i) => i.name));
+            const inputNamesB = new Set(compB.inputs.map((i) => i.name));
+
+            const sharedInputs = compA.inputs
+                .filter((i) => inputNamesB.has(i.name))
+                .map((i) => {
+                    const bInput = compB.inputs.find((bi) => bi.name === i.name)!;
+                    return {
+                        name: i.name,
+                        typeA: i.type,
+                        typeB: bInput.type,
+                        defaultA: i.defaultValue,
+                        defaultB: bInput.defaultValue
+                    };
+                });
+            const onlyInA_inputs = compA.inputs
+                .filter((i) => !inputNamesB.has(i.name))
+                .map((i) => ({ name: i.name, type: i.type, defaultValue: i.defaultValue }));
+            const onlyInB_inputs = compB.inputs
+                .filter((i) => !inputNamesA.has(i.name))
+                .map((i) => ({ name: i.name, type: i.type, defaultValue: i.defaultValue }));
+
+            // Compare outputs by name
+            const outputNamesA = new Set(compA.outputs.map((o) => o.name));
+            const outputNamesB = new Set(compB.outputs.map((o) => o.name));
+
+            const sharedOutputs = compA.outputs
+                .filter((o) => outputNamesB.has(o.name))
+                .map((o) => {
+                    const bOutput = compB.outputs.find((bo) => bo.name === o.name)!;
+                    return { name: o.name, typeA: o.type, typeB: bOutput.type };
+                });
+            const onlyInA_outputs = compA.outputs
+                .filter((o) => !outputNamesB.has(o.name))
+                .map((o) => ({ name: o.name, type: o.type }));
+            const onlyInB_outputs = compB.outputs
+                .filter((o) => !outputNamesA.has(o.name))
+                .map((o) => ({ name: o.name, type: o.type }));
+
+            // Build summary
+            const summaryParts: string[] = [];
+            summaryParts.push(
+                `${compA.selector} is from ${compA.library}; ${compB.selector} is from ${compB.library}.`
+            );
+            summaryParts.push(
+                `Inputs: ${compA.inputs.length} vs ${compB.inputs.length} (${sharedInputs.length} shared).`
+            );
+            summaryParts.push(
+                `Outputs: ${compA.outputs.length} vs ${compB.outputs.length} (${sharedOutputs.length} shared).`
+            );
+
+            if (compA.slots.length > 0 || compB.slots.length > 0) {
+                const slotsA = compA.slots.map((s) => s.name).join(', ') || 'none';
+                const slotsB = compB.slots.map((s) => s.name).join(', ') || 'none';
+                summaryParts.push(`Slots: ${compA.selector} [${slotsA}], ${compB.selector} [${slotsB}].`);
+            }
+
+            if (compA.deprecated) {
+                summaryParts.push(`${compA.selector} is deprecated: ${compA.deprecated}`);
+            }
+            if (compB.deprecated) {
+                summaryParts.push(`${compB.selector} is deprecated: ${compB.deprecated}`);
+            }
+
+            // Find alternatives from UI_PATTERNS
+            const alternatives = findAlternatives(compA.selector, compB.selector);
+
+            const result = {
+                componentA: {
+                    name: compA.name,
+                    selector: compA.selector,
+                    library: compA.library,
+                    category: compA.category,
+                    description: truncate(compA.description, 200)
+                },
+                componentB: {
+                    name: compB.name,
+                    selector: compB.selector,
+                    library: compB.library,
+                    category: compB.category,
+                    description: truncate(compB.description, 200)
+                },
+                comparison: {
+                    sharedInputs,
+                    onlyInA: onlyInA_inputs,
+                    onlyInB: onlyInB_inputs,
+                    sharedOutputs,
+                    onlyOutputsInA: onlyInA_outputs,
+                    onlyOutputsInB: onlyInB_outputs,
+                    slotsA: compA.slots.map((s) => ({ name: s.name, description: truncate(s.description, 80) })),
+                    slotsB: compB.slots.map((s) => ({ name: s.name, description: truncate(s.description, 80) })),
+                    methodsA: compA.methods.map((m) => m.name),
+                    methodsB: compB.methods.map((m) => m.name),
+                    summary: summaryParts.join(' ')
+                },
+                alternatives
+            };
+
             return {
                 content: [
                     {
                         type: 'text' as const,
-                        text: `Component(s) not found: ${missing.map((m) => `"${m}"`).join(', ')}. Use search_components to find available components.`
+                        text: JSON.stringify(result, null, 2)
                     }
                 ]
             };
         }
+    );
 
-        // Compare inputs by name
-        const inputNamesA = new Set(compA.inputs.map((i) => i.name));
-        const inputNamesB = new Set(compB.inputs.map((i) => i.name));
-
-        const sharedInputs = compA.inputs
-            .filter((i) => inputNamesB.has(i.name))
-            .map((i) => {
-                const bInput = compB.inputs.find((bi) => bi.name === i.name)!;
-                return {
-                    name: i.name,
-                    typeA: i.type,
-                    typeB: bInput.type,
-                    defaultA: i.defaultValue,
-                    defaultB: bInput.defaultValue
-                };
-            });
-        const onlyInA_inputs = compA.inputs
-            .filter((i) => !inputNamesB.has(i.name))
-            .map((i) => ({ name: i.name, type: i.type, defaultValue: i.defaultValue }));
-        const onlyInB_inputs = compB.inputs
-            .filter((i) => !inputNamesA.has(i.name))
-            .map((i) => ({ name: i.name, type: i.type, defaultValue: i.defaultValue }));
-
-        // Compare outputs by name
-        const outputNamesA = new Set(compA.outputs.map((o) => o.name));
-        const outputNamesB = new Set(compB.outputs.map((o) => o.name));
-
-        const sharedOutputs = compA.outputs
-            .filter((o) => outputNamesB.has(o.name))
-            .map((o) => {
-                const bOutput = compB.outputs.find((bo) => bo.name === o.name)!;
-                return { name: o.name, typeA: o.type, typeB: bOutput.type };
-            });
-        const onlyInA_outputs = compA.outputs
-            .filter((o) => !outputNamesB.has(o.name))
-            .map((o) => ({ name: o.name, type: o.type }));
-        const onlyInB_outputs = compB.outputs
-            .filter((o) => !outputNamesA.has(o.name))
-            .map((o) => ({ name: o.name, type: o.type }));
-
-        // Build summary
-        const summaryParts: string[] = [];
-        summaryParts.push(`${compA.selector} is from ${compA.library}; ${compB.selector} is from ${compB.library}.`);
-        summaryParts.push(`Inputs: ${compA.inputs.length} vs ${compB.inputs.length} (${sharedInputs.length} shared).`);
-        summaryParts.push(
-            `Outputs: ${compA.outputs.length} vs ${compB.outputs.length} (${sharedOutputs.length} shared).`
-        );
-
-        if (compA.slots.length > 0 || compB.slots.length > 0) {
-            const slotsA = compA.slots.map((s) => s.name).join(', ') || 'none';
-            const slotsB = compB.slots.map((s) => s.name).join(', ') || 'none';
-            summaryParts.push(`Slots: ${compA.selector} [${slotsA}], ${compB.selector} [${slotsB}].`);
-        }
-
-        if (compA.deprecated) {
-            summaryParts.push(`${compA.selector} is deprecated: ${compA.deprecated}`);
-        }
-        if (compB.deprecated) {
-            summaryParts.push(`${compB.selector} is deprecated: ${compB.deprecated}`);
-        }
-
-        // Find alternatives from UI_PATTERNS
-        const alternatives = findAlternatives(compA.selector, compB.selector);
-
-        const result = {
-            componentA: {
-                name: compA.name,
-                selector: compA.selector,
-                library: compA.library,
-                category: compA.category,
-                description: truncate(compA.description, 200)
-            },
-            componentB: {
-                name: compB.name,
-                selector: compB.selector,
-                library: compB.library,
-                category: compB.category,
-                description: truncate(compB.description, 200)
-            },
-            comparison: {
-                sharedInputs,
-                onlyInA: onlyInA_inputs,
-                onlyInB: onlyInB_inputs,
-                sharedOutputs,
-                onlyOutputsInA: onlyInA_outputs,
-                onlyOutputsInB: onlyInB_outputs,
-                slotsA: compA.slots.map((s) => ({ name: s.name, description: truncate(s.description, 80) })),
-                slotsB: compB.slots.map((s) => ({ name: s.name, description: truncate(s.description, 80) })),
-                methodsA: compA.methods.map((m) => m.name),
-                methodsB: compB.methods.map((m) => m.name),
-                summary: summaryParts.join(' ')
-            },
-            alternatives
-        };
-
-        return {
-            content: [
-                {
-                    type: 'text' as const,
-                    text: JSON.stringify(result, null, 2)
-                }
-            ]
-        };
-    }
-);
-
-// ---------------------------------------------------------------------------
-// Tool: get_setup_guide
-// ---------------------------------------------------------------------------
-server.tool(
-    'get_setup_guide',
-    `Get a complete Angular project setup guide for @fundamental-ngx.
+    // ---------------------------------------------------------------------------
+    // Tool: get_setup_guide
+    // ---------------------------------------------------------------------------
+    server.tool(
+        'get_setup_guide',
+        `Get a complete Angular project setup guide for @fundamental-ngx.
 Returns the full theming dependency chain, the exact angular.json styles array in load order,
 font fix steps for the esbuild application builder, and known issues with fixes.
 
@@ -501,58 +517,61 @@ Use this tool when:
 
 Pass "core" for a project using only @fundamental-ngx/core.
 Pass "core+ui5" or "ui5" for a project that also uses @fundamental-ngx/ui5-webcomponents.`,
-    {
-        packages: z
-            .enum(['core', 'core+ui5', 'ui5'])
-            .describe(
-                'Which packages are being set up. ' +
-                    '"core" — @fundamental-ngx/core only. ' +
-                    '"core+ui5" (or the alias "ui5") — @fundamental-ngx/core plus @fundamental-ngx/ui5-webcomponents.'
-            )
-    },
-    async ({ packages }) => {
-        const guide: SetupGuide | undefined = SETUP_GUIDES[packages];
+        {
+            packages: z
+                .enum(['core', 'core+ui5', 'ui5'])
+                .describe(
+                    'Which packages are being set up. ' +
+                        '"core" — @fundamental-ngx/core only. ' +
+                        '"core+ui5" (or the alias "ui5") — @fundamental-ngx/core plus @fundamental-ngx/ui5-webcomponents.'
+                )
+        },
+        async ({ packages }) => {
+            const guide: SetupGuide | undefined = SETUP_GUIDES[packages];
 
-        if (!guide) {
+            if (!guide) {
+                return {
+                    content: [
+                        {
+                            type: 'text' as const,
+                            text: `No setup guide found for "${packages}". Valid options: "core", "core+ui5", "ui5".`
+                        }
+                    ]
+                };
+            }
+
             return {
                 content: [
                     {
                         type: 'text' as const,
-                        text: `No setup guide found for "${packages}". Valid options: "core", "core+ui5", "ui5".`
+                        text: JSON.stringify(guide, null, 2)
                     }
                 ]
             };
         }
+    );
 
-        return {
-            content: [
-                {
-                    type: 'text' as const,
-                    text: JSON.stringify(guide, null, 2)
-                }
-            ]
-        };
-    }
-);
+    // ---------------------------------------------------------------------------
+    // Resource: component catalog
+    // ---------------------------------------------------------------------------
+    server.resource('component-catalog', 'fundamental-ngx://components/catalog', async (uri) => ({
+        contents: [
+            {
+                uri: uri.href,
+                mimeType: 'application/json',
+                text: JSON.stringify(catalog, null, 2)
+            }
+        ]
+    }));
 
-// ---------------------------------------------------------------------------
-// Resource: component catalog
-// ---------------------------------------------------------------------------
-server.resource('component-catalog', 'fundamental-ngx://components/catalog', async (uri) => ({
-    contents: [
-        {
-            uri: uri.href,
-            mimeType: 'application/json',
-            text: JSON.stringify(catalog, null, 2)
-        }
-    ]
-}));
+    return server;
+}
 
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
 
-function findComponent(nameOrSelector: string): ComponentMetadata | undefined {
+function findComponent(nameOrSelector: string, catalog: ComponentCatalog): ComponentMetadata | undefined {
     const lower = nameOrSelector.toLowerCase();
 
     // Exact match on selector
@@ -741,15 +760,3 @@ const UI_PATTERNS: Record<string, string[]> = {
         'ui5-ai-writing-assistant'
     ]
 };
-
-// ---------------------------------------------------------------------------
-// Start server
-// ---------------------------------------------------------------------------
-
-/** Start in MCP stdio transport mode (normal operation). */
-export async function startStdioServer(): Promise<void> {
-    const transport = new StdioServerTransport();
-    await server.connect(transport);
-}
-
-export { server };

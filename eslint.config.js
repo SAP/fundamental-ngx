@@ -3,7 +3,11 @@ const pluginTs = require('typescript-eslint');
 
 module.exports = pluginTs.config(
     {
-        ignores: ['**/dist', '.nx', '**/typedoc', '**/eslint.config.js']
+        // apps/chatbot is a loose Next.js app intentionally kept out of the NX
+        // graph (own package.json/node_modules, consumed via path alias +
+        // transpilePackages). The workspace rules — NX module boundaries, the
+        // Angular/TS config blocks — don't apply to it; it owns its own tooling.
+        ignores: ['**/dist', '.nx', '**/typedoc', '**/eslint.config.js', 'apps/chatbot/**']
     },
     ...nx.configs['flat/base'],
     ...nx.configs['flat/javascript'],
