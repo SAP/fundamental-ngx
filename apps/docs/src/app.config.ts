@@ -1,5 +1,5 @@
 import { HttpClient, provideHttpClient, withXhr } from '@angular/common/http';
-import { ApplicationConfig, signal } from '@angular/core';
+import { ApplicationConfig, SecurityContext, signal } from '@angular/core';
 import { PreloadAllModules, provideRouter, withHashLocation, withPreloading } from '@angular/router';
 import { provideContentDensity } from '@fundamental-ngx/core/content-density';
 import { provideDialogService } from '@fundamental-ngx/core/dialog';
@@ -19,7 +19,6 @@ import { provideUi5ThemingBridge } from '@fundamental-ngx/ui5-webcomponents-base
 
 import { provideUi5WebcomponentsFiori } from '@fundamental-ngx/ui5-webcomponents-fiori/theming-bridge';
 
-import { SecurityContext } from '@angular/core';
 import { provideUi5Webcomponents } from '@fundamental-ngx/ui5-webcomponents/theming-bridge';
 import { provideMarkdown, SANITIZE } from 'ngx-markdown';
 // eslint-disable-next-line @nx/enforce-module-boundaries
