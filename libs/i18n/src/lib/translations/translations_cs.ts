@@ -241,7 +241,7 @@ export default {
         search: 'Hledat'
     },
     coreSlider: {
-        ariaLabel: 'Slider Handle'
+        ariaLabel: 'Úchyt posuvníku'
     },
     coreSplitButton: {
         arialLabel: 'Vícefunkční (rozdělené) tlačítko',

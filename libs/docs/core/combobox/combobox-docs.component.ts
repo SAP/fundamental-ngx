@@ -43,6 +43,8 @@ const comboboxTemplateH = 'combobox-template-example.component.html';
 const comboboxTemplateT = 'combobox-template-example.component.ts';
 const comboboxMobileH = 'combobox-mobile/combobox-mobile-example.component.html';
 const comboboxMobileT = 'combobox-mobile/combobox-mobile-example.component.ts';
+const comboboxMobileGlobalH = 'combobox-mobile/combobox-mobile-global-example.component.html';
+const comboboxMobileGlobalT = 'combobox-mobile/combobox-mobile-global-example.component.ts';
 const comboboxDisabledTemplateH = 'combobox-disabled-example.component.html';
 const comboboxDisabledTemplateT = 'combobox-disabled-example.component.ts';
 const comboboxColumnsTemplateH = 'combobox-columns-example.component.html';
@@ -267,6 +269,17 @@ export class ComboboxDocsComponent {
             component: 'ComboboxMobileExampleComponent',
             code: getAssetFromModuleAssets(comboboxMobileT),
             fileName: 'combobox-mobile-example'
+        },
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(comboboxMobileGlobalH),
+            fileName: 'combobox-mobile-global-example'
+        },
+        {
+            language: 'typescript',
+            component: 'ComboboxMobileGlobalExampleComponent',
+            code: getAssetFromModuleAssets(comboboxMobileGlobalT),
+            fileName: 'combobox-mobile-global-example'
         }
     ];
 

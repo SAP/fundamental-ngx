@@ -242,7 +242,7 @@ export default {
         search: 'Wyszukiwanie'
     },
     coreSlider: {
-        ariaLabel: 'Slider Handle'
+        ariaLabel: 'Uchwyt suwaka'
     },
     coreSplitButton: {
         arialLabel: 'Przycisk podzielony na dwie części',

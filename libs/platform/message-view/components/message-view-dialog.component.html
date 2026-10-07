@@ -27,6 +27,7 @@
             <ng-template fdkTemplate="subheader">
                 <div fd-bar-left>
                     <fd-segmented-button
+                        [ngModelOptions]="{ standalone: true }"
                         [ngModel]="messageView._currentErrorType()"
                         (ngModelChange)="messageView._currentErrorType.set($event)"
                     >

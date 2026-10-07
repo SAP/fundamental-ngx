@@ -239,7 +239,7 @@ export default {
         search: '搜索'
     },
     coreSlider: {
-        ariaLabel: 'Slider Handle'
+        ariaLabel: '滑块手柄'
     },
     coreSplitButton: {
         arialLabel: '拆分按钮',

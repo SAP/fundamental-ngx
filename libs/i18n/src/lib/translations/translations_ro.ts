@@ -242,7 +242,7 @@ export default {
         search: 'Căutare'
     },
     coreSlider: {
-        ariaLabel: 'Slider Handle'
+        ariaLabel: 'Mâner cursor de reglare'
     },
     coreSplitButton: {
         arialLabel: 'Buton de divizare',

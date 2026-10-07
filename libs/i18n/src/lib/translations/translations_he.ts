@@ -241,7 +241,7 @@ export default {
         search: 'חפש'
     },
     coreSlider: {
-        ariaLabel: 'Slider Handle'
+        ariaLabel: 'נקודת אחיזה של מחוון'
     },
     coreSplitButton: {
         arialLabel: 'לחצן פיצול',

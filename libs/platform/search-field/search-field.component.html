@@ -212,6 +212,7 @@
                 (keydown)="onKeydown($event)"
                 (keydown.enter)="onSearchSubmit($event)"
                 (keydown.tab)="_handleInputTabKey($event)"
+                [ngModelOptions]="{ standalone: true }"
                 [(ngModel)]="inputText"
                 (ngModelChange)="onValueChange($event)"
                 (click)="mobile() && openMobileMode()"

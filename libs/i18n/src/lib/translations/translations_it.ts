@@ -242,7 +242,7 @@ export default {
         search: 'Cerca'
     },
     coreSlider: {
-        ariaLabel: 'Slider Handle'
+        ariaLabel: 'Cursore del dispositivo di scorrimento'
     },
     coreSplitButton: {
         arialLabel: 'Pulsante Suddividi',

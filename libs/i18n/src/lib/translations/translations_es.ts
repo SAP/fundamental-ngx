@@ -242,7 +242,7 @@ export default {
         search: 'Buscar'
     },
     coreSlider: {
-        ariaLabel: 'Slider Handle'
+        ariaLabel: 'Handle del botón deslizante'
     },
     coreSplitButton: {
         arialLabel: 'Botón Dividir',

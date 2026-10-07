@@ -242,7 +242,7 @@ export default {
         search: '検索'
     },
     coreSlider: {
-        ariaLabel: 'Slider Handle'
+        ariaLabel: 'スライダハンドル'
     },
     coreSplitButton: {
         arialLabel: '分割ボタン',

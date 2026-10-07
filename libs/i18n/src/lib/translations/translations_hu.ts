@@ -242,7 +242,7 @@ export default {
         search: 'Keresés'
     },
     coreSlider: {
-        ariaLabel: 'Slider Handle'
+        ariaLabel: 'Csúszka fogantyúja'
     },
     coreSplitButton: {
         arialLabel: 'Felosztott gomb',

@@ -1,7 +1,7 @@
 // Do not modify, it's automatically created. Modify translations_nl.properties instead
 export default {
     btpNavigation: {
-        expanderAriaLabel: 'Subelementen uitvouwen/samenvouwen',
+        expanderAriaLabel: 'Subitems uitvouwen/samenvouwen',
         moreButtonAriaLabel:
             'Geeft aanvullende navigatie-elementen weer die zijn verborgen vanwege beperkte schermruimte',
         overflowMenuAriaLabel: 'Aanvullende navigatie-elementen',
@@ -242,7 +242,7 @@ export default {
         search: 'Zoeken'
     },
     coreSlider: {
-        ariaLabel: 'Slider Handle'
+        ariaLabel: 'Greep van schuifbalk'
     },
     coreSplitButton: {
         arialLabel: 'Knop Splitsen',

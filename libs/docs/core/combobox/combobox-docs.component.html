@@ -68,6 +68,14 @@
     Combobox Mobile Mode can be configured <strong>globally</strong> by providing <code>MOBILE_MODE_CONFIG</code> token.
     Check <a [routerLink]="['/core/global-config']" fragment="mobile-mode-config">Global Configuration page</a> for more
     information.
+    <p>
+        A non-whitespace Approve label in the resolved mobile configuration enables staged selection: Approve commits,
+        while Cancel, Close, and Escape restore the prior committed value. Without a usable Approve action, including a
+        Cancel-only configuration, selection is immediate and <code>closeOnSelect</code> controls whether the mobile
+        dialog closes. The examples below show local confirmation, component-scoped global-only confirmation, and
+        immediate selection. Each example shows the committed value and model-commit count, and displays a message toast
+        whenever the ControlValueAccessor commits a value.
+    </p>
 </description>
 <component-example>
     <fd-combobox-mobile-example></fd-combobox-mobile-example>

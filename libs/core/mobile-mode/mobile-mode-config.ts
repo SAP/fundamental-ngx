@@ -4,6 +4,9 @@ export interface MobileModeConfig {
     /** Dialog Title */
     title?: string;
 
+    /** Short instruction text rendered below the dialog title to guide the user. */
+    instruction?: string;
+
     /** Approve Button Label. If empty, button will not appear */
     approveButtonText?: string;
 

@@ -243,7 +243,7 @@ export default {
         search: 'Rechercher'
     },
     coreSlider: {
-        ariaLabel: 'Slider Handle'
+        ariaLabel: 'Poignée du curseur'
     },
     coreSplitButton: {
         arialLabel: 'Bouton de fractionnement',

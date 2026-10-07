@@ -242,7 +242,7 @@ export default {
         search: 'Іздеу'
     },
     coreSlider: {
-        ariaLabel: 'Slider Handle'
+        ariaLabel: 'Жүгірткі'
     },
     coreSplitButton: {
         arialLabel: 'Бөлу түймесі',

@@ -242,7 +242,7 @@ export default {
         search: 'Търсене'
     },
     coreSlider: {
-        ariaLabel: 'Slider Handle'
+        ariaLabel: 'Регулатор на плъзгач'
     },
     coreSplitButton: {
         arialLabel: 'Бутон разделяне',

@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { observeOn } from 'rxjs/operators';
 
-import { MobileModeBase, MobileModeControl } from '@fundamental-ngx/core/mobile-mode';
+import { MobileModeBase, MobileModeConfig, MobileModeControl } from '@fundamental-ngx/core/mobile-mode';
 
 import { NgTemplateOutlet } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -27,6 +27,11 @@ import {
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { asyncScheduler } from 'rxjs';
 import { COMBOBOX_COMPONENT, ComboboxInterface } from '../combobox.interface';
+
+interface ComboboxMobileBridge extends ComboboxInterface {
+    setMobileModeConfig(config: MobileModeConfig): void;
+    hasMobileApproveAction(): boolean;
+}
 
 @Component({
     selector: 'fd-combobox-mobile',
@@ -50,7 +55,7 @@ import { COMBOBOX_COMPONENT, ComboboxInterface } from '../combobox.interface';
         InitialFocusDirective
     ]
 })
-export class ComboboxMobileComponent extends MobileModeBase<ComboboxInterface> implements OnInit {
+export class ComboboxMobileComponent extends MobileModeBase<ComboboxMobileBridge> implements OnInit {
     /** @hidden */
     @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
 
@@ -63,11 +68,15 @@ export class ComboboxMobileComponent extends MobileModeBase<ComboboxInterface> i
     childContent: { listTemplate: TemplateRef<any>; controlTemplate: TemplateRef<any> } | null = null;
 
     /** @hidden */
-    private _selectedBackup: string;
+    private _handlingDialogAction = false;
 
     /** @hidden */
-    constructor(@Inject(COMBOBOX_COMPONENT) comboboxComponent: ComboboxInterface) {
+    private _dismissedByAction = false;
+
+    /** @hidden */
+    constructor(@Inject(COMBOBOX_COMPONENT) comboboxComponent: ComboboxMobileBridge) {
         super(comboboxComponent, MobileModeControl.COMBOBOX);
+        this._component.setMobileModeConfig(this.mobileConfig);
     }
 
     /** @hidden */
@@ -77,23 +86,29 @@ export class ComboboxMobileComponent extends MobileModeBase<ComboboxInterface> i
 
     /** @hidden */
     handleDismiss(): void {
-        this.dialogRef.dismiss();
-        this._component.dialogDismiss(this._selectedBackup);
+        this._handlingDialogAction = true;
+        this._component.dialogDismiss();
+        this._dismissedByAction = true;
+        this._dismissDialog();
+        this._handlingDialogAction = false;
     }
 
     /** @hidden */
     handleApprove(): void {
-        this.dialogRef.close();
+        this._handlingDialogAction = true;
         this._component.dialogApprove();
+        this._closeDialog();
+        this._handlingDialogAction = false;
     }
 
     /** @hidden */
     private _toggleDialog(open: boolean): void {
         if (open) {
-            this._selectedBackup = this._component.getValue();
             if (!this._dialogService.hasOpenDialogs()) {
                 this._open();
             }
+        } else if (!this._handlingDialogAction) {
+            this._closeDialog();
         }
     }
 
@@ -106,8 +121,10 @@ export class ComboboxMobileComponent extends MobileModeBase<ComboboxInterface> i
 
     /** @hidden */
     private _open(): void {
+        this._dismissedByAction = false;
         this.dialogRef = this._dialogService.open(this.dialogTemplate, {
             mobile: true,
+            focusTrapped: true,
             ...this.dialogConfig,
             backdropClickCloseable: false,
             container: this._elementRef.nativeElement,
@@ -117,13 +134,32 @@ export class ComboboxMobileComponent extends MobileModeBase<ComboboxInterface> i
         this._focusInputElementOnceOpened();
 
         const refSub = this.dialogRef.afterClosed.subscribe({
-            error: (type) => {
-                if (type === 'escape') {
-                    this._component.dialogDismiss(this._selectedBackup);
-                    refSub.unsubscribe();
+            error: () => {
+                if (this.dialogRef.status() === 'dismissed' && !this._dismissedByAction) {
+                    this._component.dialogDismiss();
                 }
+                refSub.unsubscribe();
             }
         });
+    }
+
+    /** @hidden */
+    private _closeDialog(): void {
+        if (this._canCloseDialog()) {
+            this.dialogRef.close();
+        }
+    }
+
+    /** @hidden */
+    private _dismissDialog(): void {
+        if (this._canCloseDialog()) {
+            this.dialogRef.dismiss();
+        }
+    }
+
+    /** @hidden */
+    private _canCloseDialog(): boolean {
+        return (this.dialogRef?.isOpen() || this.dialogRef?.status() === 'pending') && !this.dialogRef.isClosed();
     }
 
     /** @hidden */

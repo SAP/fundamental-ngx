@@ -241,7 +241,7 @@ export default {
         search: 'Cari'
     },
     coreSlider: {
-        ariaLabel: 'Slider Handle'
+        ariaLabel: 'Pemegang Penggelongsor'
     },
     coreSplitButton: {
         arialLabel: 'Butang pisahan',

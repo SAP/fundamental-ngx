@@ -1,7 +1,7 @@
 // Do not modify, it's automatically created. Modify translations_hr.properties instead
 export default {
     btpNavigation: {
-        expanderAriaLabel: 'proširi/sažmi podstavke',
+        expanderAriaLabel: 'proširenje/sažimanje podstavki',
         moreButtonAriaLabel:
             'Prikazuje dodatne stavke navigacije koje su skrivene zbog ograničenog prostora na zaslonu',
         overflowMenuAriaLabel: 'Dodane stavke navigacije',
@@ -242,7 +242,7 @@ export default {
         search: 'Pretraži'
     },
     coreSlider: {
-        ariaLabel: 'Slider Handle'
+        ariaLabel: 'Ručica klizača'
     },
     coreSplitButton: {
         arialLabel: 'Gumb za razdiobu',

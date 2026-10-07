@@ -242,7 +242,7 @@ export default {
         search: 'Suchen'
     },
     coreSlider: {
-        ariaLabel: 'Slider Handle'
+        ariaLabel: 'Griff des Schiebereglers'
     },
     coreSplitButton: {
         arialLabel: 'Trenndrucktaste',
