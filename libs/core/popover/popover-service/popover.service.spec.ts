@@ -10,6 +10,7 @@ import { PopoverService, PopoverTemplate } from './popover.service';
             <fd-popover-body></fd-popover-body>
             <ng-template #templateRef>
                 <div class="template-content">Template Content</div>
+                <button class="popover-action">Popover action</button>
             </ng-template>
             <ng-container #container></ng-container>
             <button #triggerElement class="trigger-button">Open Popover</button>
@@ -415,6 +416,126 @@ describe('PopoverService', () => {
             // Cleanup
             document.body.removeChild(newTrigger);
         });
+    });
+
+    describe('focus when closing', () => {
+        beforeEach(() => {
+            service.focusAutoCapture.set(true);
+            service.restoreFocusOnClose.set(true);
+            service.initialise(component.triggerRef, undefined, component.getPopoverTemplateData());
+            fixture.detectChanges();
+        });
+
+        it.each(['popover', 'body', 'ancestor'])(
+            'should restore trigger focus after an outside click leaves focus on the %s',
+            fakeAsync((focusLocation) => {
+                component.triggerRef.nativeElement.focus();
+                service.open();
+                fixture.detectChanges();
+                tick();
+                const action = document.querySelector<HTMLButtonElement>('.popover-action') as HTMLButtonElement;
+                action.focus();
+                if (focusLocation === 'body') {
+                    action.blur();
+                } else if (focusLocation === 'ancestor') {
+                    const container = component.scrollContainerRef.nativeElement;
+                    container.tabIndex = 0;
+                    container.focus();
+                }
+
+                component.siblingRef.nativeElement.click();
+                fixture.detectChanges();
+                tick();
+
+                expect(service.isOpen()).toBe(false);
+                expect(document.activeElement).toBe(component.triggerRef.nativeElement);
+            })
+        );
+
+        it('should respect disabled focus restoration after clicking outside', fakeAsync(() => {
+            service.restoreFocusOnClose.set(false);
+            component.triggerRef.nativeElement.focus();
+            service.open();
+            fixture.detectChanges();
+            tick();
+            const action = document.querySelector<HTMLButtonElement>('.popover-action') as HTMLButtonElement;
+            action.focus();
+
+            component.siblingRef.nativeElement.click();
+            fixture.detectChanges();
+            tick();
+
+            expect(service.isOpen()).toBe(false);
+            expect(document.activeElement).not.toBe(component.triggerRef.nativeElement);
+        }));
+
+        it.each(['button', 'input', 'div'])(
+            'should preserve focus on an outside focusable %s when it closes the popover',
+            fakeAsync((tagName) => {
+                const outsideControl = document.createElement(tagName);
+                outsideControl.tabIndex = 0;
+                fixture.nativeElement.appendChild(outsideControl);
+                component.triggerRef.nativeElement.focus();
+                service.open();
+                fixture.detectChanges();
+                tick();
+
+                outsideControl.focus();
+                outsideControl.click();
+                fixture.detectChanges();
+                tick();
+
+                expect(service.isOpen()).toBe(false);
+                expect(document.activeElement).toBe(outsideControl);
+            })
+        );
+
+        it('should restore focus to the trigger on Escape', fakeAsync(() => {
+            component.triggerRef.nativeElement.focus();
+            service.open();
+            fixture.detectChanges();
+            tick();
+            const action = document.querySelector<HTMLButtonElement>('.popover-action') as HTMLButtonElement;
+            action.focus();
+            action.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+            tick();
+
+            expect(service.isOpen()).toBe(false);
+            expect(document.activeElement).toBe(component.triggerRef.nativeElement);
+        }));
+
+        it('should not restore focus when explicitly closed without restoration', fakeAsync(() => {
+            const outsideButton = document.createElement('button');
+            fixture.nativeElement.appendChild(outsideButton);
+            component.triggerRef.nativeElement.focus();
+            service.open();
+            fixture.detectChanges();
+            tick();
+            outsideButton.focus();
+
+            service.close(false);
+            fixture.detectChanges();
+            tick();
+
+            expect(service.isOpen()).toBe(false);
+            expect(document.activeElement).toBe(outsideButton);
+        }));
+
+        it('should restore focus when the open signal is set to false', fakeAsync(() => {
+            component.triggerRef.nativeElement.focus();
+            service.open();
+            fixture.detectChanges();
+            tick();
+            const action = document.querySelector<HTMLButtonElement>('.popover-action') as HTMLButtonElement;
+            action.focus();
+
+            service.isOpen.set(false);
+            fixture.detectChanges();
+            tick();
+
+            expect(document.querySelector('.popover-action')).toBeNull();
+            expect(document.activeElement).toBe(component.triggerRef.nativeElement);
+        }));
     });
 
     describe('focusout trigger handling', () => {
