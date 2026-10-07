@@ -50,30 +50,86 @@
         </header>
 
         <!-- Messages Container -->
-        <div class="fd-guide-chat__messages" role="log" aria-live="polite" aria-atomic="false">
-            <div class="fd-guide-chat__message-group">
-                <!-- Assistant message placeholder -->
-                <div class="fd-guide-chat__message fd-guide-chat__message--assistant">
-                    <div class="fd-guide-chat__message-avatar" aria-hidden="true">FD</div>
-                    <div class="fd-guide-chat__message-content">
-                        <p>Welcome! Ask me anything about Fundamental NGX components, APIs, or examples...</p>
+        <div
+            #messagesContainer
+            class="fd-guide-chat__messages"
+            [class.fd-guide-chat__messages--loading]="isBusy()"
+            role="log"
+            aria-live="polite"
+            aria-atomic="false"
+        >
+            @if (messages().length === 0) {
+                <div class="fd-guide-chat__message-group">
+                    <!-- Welcome message -->
+                    <div class="fd-guide-chat__message fd-guide-chat__message--assistant">
+                        <div class="fd-guide-chat__message-avatar" aria-hidden="true">FD</div>
+                        <div class="fd-guide-chat__message-content">
+                            <p>Welcome! Ask me anything about Fundamental NGX components, APIs, or examples...</p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            } @else {
+                @for (message of messages(); track message.id) {
+                    <div class="fd-guide-chat__message-group">
+                        <div
+                            class="fd-guide-chat__message"
+                            [class.fd-guide-chat__message--user]="message.role === 'user'"
+                            [class.fd-guide-chat__message--assistant]="message.role === 'assistant'"
+                        >
+                            @if (message.role === 'assistant') {
+                                <div class="fd-guide-chat__message-avatar" aria-hidden="true">FD</div>
+                            }
+                            <div
+                                class="fd-guide-chat__message-content"
+                                [class.fd-guide-chat__message-content--loading]="
+                                    message.role === 'assistant' && !message.content && isBusy()
+                                "
+                            >
+                                @if (message.role === 'assistant') {
+                                    @if (!message.content && isBusy()) {
+                                        <div class="fd-guide-chat__thinking-dots">
+                                            <span></span>
+                                            <span></span>
+                                            <span></span>
+                                        </div>
+                                    } @else {
+                                        <markdown [data]="message.content" class="fd-guide-chat__markdown"></markdown>
+                                    }
+                                } @else {
+                                    <p>{{ message.content }}</p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            @if (error()) {
+                <div class="fd-guide-chat__message-group">
+                    <div class="fd-guide-chat__message fd-guide-chat__message--error">
+                        <div class="fd-guide-chat__message-content">
+                            <p role="alert">Error: {{ error() }}</p>
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
 
         <!-- Input Area -->
-        <form class="fd-guide-chat__input-form" (submit)="$event.preventDefault()">
+        <form class="fd-guide-chat__input-form" (submit)="sendMessage(); $event.preventDefault()">
             <label for="fd-guide-input" class="fd-guide-sr-only">
                 Ask about Fundamental NGX components, APIs, or examples...
             </label>
             <div class="fd-guide-chat__input-wrapper">
                 <textarea
                     id="fd-guide-input"
+                    name="userInput"
                     class="fd-guide-chat__input"
                     placeholder="Ask about Fundamental NGX components, APIs, or examples..."
                     rows="1"
                     aria-label="Message input"
+                    [(ngModel)]="userInput"
+                    [disabled]="isBusy()"
+                    (keydown.enter)="onEnterKey($event)"
                 ></textarea>
                 <button
                     type="submit"
@@ -83,6 +139,7 @@
                     glyph="paper-plane"
                     ariaLabel="Send message"
                     title="Send message"
+                    [disabled]="isBusy() || !userInput.trim()"
                 ></button>
             </div>
         </form>

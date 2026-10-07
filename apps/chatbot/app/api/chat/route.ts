@@ -12,6 +12,13 @@ compare_components, get_setup_guide, list_components) rather than prior knowledg
 because the library changes frequently. Cite the component selector (e.g. fd-dialog)
 and show minimal, correct Angular usage. If a tool returns nothing, say so plainly.`;
 
+/** CORS headers for local development */
+const corsHeaders = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type'
+};
+
 function mcpUrl(): string {
     return process.env.MCP_SERVER_URL ?? 'http://localhost:3000/api/mcp';
 }
@@ -51,6 +58,13 @@ export async function loadMcpTools(url = mcpUrl()): Promise<{
     return { tools, close: () => client.close() };
 }
 
+export async function OPTIONS(): Promise<Response> {
+    return new Response(null, {
+        status: 204,
+        headers: corsHeaders
+    });
+}
+
 export async function POST(req: Request): Promise<Response> {
     const { messages }: { messages: UIMessage[] } = await req.json();
     const { tools, close } = await loadMcpTools();
@@ -77,6 +91,7 @@ export async function POST(req: Request): Promise<Response> {
     // Forward the real error text to the client instead of the SDK's masked
     // "An error occurred." so failures are visible during local dev.
     return result.toUIMessageStreamResponse({
-        onError: (error) => (error instanceof Error ? error.message : String(error))
+        onError: (error) => (error instanceof Error ? error.message : String(error)),
+        headers: corsHeaders
     });
 }
