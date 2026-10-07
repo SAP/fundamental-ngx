@@ -19,6 +19,7 @@ import {
     ViewChild,
     ViewEncapsulation,
     computed,
+    contentChildren,
     inject
 } from '@angular/core';
 import { outputToObservable, takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -159,10 +160,6 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     productSwitches: QueryList<ProductSwitchComponent>;
 
     /** @hidden */
-    @ContentChild(ShellbarContextAreaComponent)
-    contextArea: ShellbarContextAreaComponent;
-
-    /** @hidden */
     @ContentChild(ShellbarBrandingComponent)
     branding: ShellbarBrandingComponent;
 
@@ -182,6 +179,20 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     _showMobileSearch = false;
 
     protected readonly navigationIcon = computed<string>(() => (this.isRtl() ? 'slim-arrow-right' : 'nav-back'));
+
+    /** @hidden */
+    protected readonly _contextAreas = contentChildren(ShellbarContextAreaComponent);
+
+    /** @hidden */
+    protected readonly _contextArea = computed(() => this._contextAreas()[0]);
+
+    /**
+     * @hidden
+     * Backward compatibility getter for single context area.
+     */
+    get contextArea(): ShellbarContextAreaComponent | undefined {
+        return this._contextArea();
+    }
 
     /** @hidden */
     private readonly isRtl = computed<boolean>(() => this._rtlService?.rtl() ?? false);
@@ -433,7 +444,8 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     private _placeSearch(): void {
         const size = this._currentSize$.value;
 
-        if ((size === 'xl' && !this.contextArea) || (size === 's' && this._showMobileSearch)) {
+        // Search stays in shellbar at XL only if NO context areas exist
+        if ((size === 'xl' && this._contextAreas().length === 0) || (size === 's' && this._showMobileSearch)) {
             this._attachSearch();
         } else {
             this._detachSearch();
@@ -465,11 +477,14 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
                 if (this._actionsExceedShellbarWidth()) {
                     this._actions._handleOverflow(true);
                 }
+                // Hide context area items first (they have lower priority than title)
+                const contextArea = this._contextArea();
+                if (contextArea) {
+                    contextArea.hideElementsIfNeeded();
+                }
+                // Then hide branding title if still overflowing
                 if (this.branding) {
                     this.branding.hideTitleIfNeeded();
-                }
-                if (this.contextArea) {
-                    this.contextArea.hideElementsIfNeeded();
                 }
                 if (this._showMobileSearch && this._actionsExceedShellbarWidth()) {
                     this._closeMobileSearch();
@@ -480,11 +495,12 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
 
     /** @hidden */
     private _resetOverflow(): void {
-        if (this.contextArea) {
-            this.contextArea.showElements();
-        }
         if (this.branding) {
             this.branding.showTitle();
+        }
+        const contextArea = this._contextArea();
+        if (contextArea) {
+            contextArea.showElements();
         }
         if (this._actions) {
             this._actions._handleOverflow(this._currentSize === 's' && this.showSearchFieldOnSizeSmall);

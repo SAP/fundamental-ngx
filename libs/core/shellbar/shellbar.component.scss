@@ -24,6 +24,10 @@
     display: none;
 }
 
+.fd-shellbar__action:empty {
+    display: none;
+}
+
 .fd-shellbar .fd-shellbar__group .fd-shellbar__button.fd-shellbar__button--menu {
     --fdButtonColor: var(--sapShell_TextColor);
 }
@@ -38,16 +42,6 @@
 
 .fd-shellbar.fd-shellbar--has-context-area {
     justify-content: start;
-
-    .fd-shellbar__group--actions {
-        margin-right: 0;
-        margin-left: auto;
-
-        @include rtl() {
-            margin-right: auto;
-            margin-left: 0;
-        }
-    }
 }
 
 .fd-shellbar__title {
@@ -72,6 +66,10 @@
         white-space: nowrap;
         overflow: hidden;
     }
+}
+
+.fd-shellbar .fd-shellbar__group--context-area[data-position='right'] {
+    margin-inline-start: auto;
 }
 
 .fd-shellbar.fd-shellbar--s {

@@ -4,29 +4,38 @@ import {
     Component,
     DestroyRef,
     ElementRef,
+    contentChildren,
     inject,
     output
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ResizeObserverService } from '@fundamental-ngx/cdk/utils';
+import { ShellbarPositionDirective } from '../shellbar-position.directive';
 import { FD_SHELLBAR_COMPONENT } from '../tokens';
 
 /**
  * Component representing the context area of the shellbar.
  * It manages the visibility of its child elements based on the available width.
+ * Child items can be positioned left or right using the fdShellbarPosition directive.
  */
 @Component({
     selector: 'fd-shellbar-context-area',
     standalone: true,
-    template: ` <ng-content></ng-content>`,
+    template: `
+        <div class="fd-shellbar__group fd-shellbar__group--context-area" data-position="left">
+            <ng-content select="[fdShellbarPosition='left']"></ng-content>
+        </div>
+        <div class="fd-shellbar__group fd-shellbar__group--context-area" data-position="right">
+            <ng-content select="[fdShellbarPosition='right']"></ng-content>
+        </div>
+    `,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        '[class.fd-shellbar__group]': 'true',
-        '[class.fd-shellbar__group--context-area]': 'true'
+        '[style.display]': '"contents"'
     },
     styles: [
         `
-            :host {
+            .fd-shellbar__group--context-area {
                 min-width: 0;
             }
         `
@@ -37,13 +46,16 @@ export class ShellbarContextAreaComponent implements AfterViewInit {
     contentItemVisibilityChange = output<HTMLElement[]>();
 
     /** @hidden */
-    el: ElementRef = inject(ElementRef);
+    readonly el: ElementRef = inject(ElementRef);
+
+    /** @hidden */
+    protected readonly _positionedItems = contentChildren(ShellbarPositionDirective, { descendants: true });
 
     /** @hidden */
     private readonly _shellbar = inject(FD_SHELLBAR_COMPONENT);
 
     /** @hidden */
-    private _resizeObserverService = inject(ResizeObserverService);
+    private readonly _resizeObserverService = inject(ResizeObserverService);
 
     /** @hidden */
     private readonly _destroyRef = inject(DestroyRef);
@@ -92,7 +104,7 @@ export class ShellbarContextAreaComponent implements AfterViewInit {
 
     /**
      * Iteratively shows elements if they can be displayed in the shellbar without causing the actions
-     * to exceed the end of th eshellbar.
+     * to exceed the end of the shellbar.
      */
     showElements(): void {
         this._getContextAreaItemsWithPriority().forEach((item) => {
@@ -103,17 +115,37 @@ export class ShellbarContextAreaComponent implements AfterViewInit {
     }
 
     /**
+     * Get all positioned items grouped by their position.
+     */
+    private _getPositionedItemsByPosition(): { left: HTMLElement[]; right: HTMLElement[] } {
+        const items = this._positionedItems();
+        const left: HTMLElement[] = [];
+        const right: HTMLElement[] = [];
+
+        items.forEach((item) => {
+            const element = item.el.nativeElement;
+            if (item.fdShellbarPosition() === 'right') {
+                right.push(element);
+            } else {
+                left.push(element);
+            }
+        });
+
+        return { left, right };
+    }
+
+    /**
      * Retrieves the child elements with their respective priority values.
      * The elements are sorted based on their priority, with elements having
      * higher priority shown first.
      */
     private _getContextAreaItemsWithPriority(): { el: HTMLElement; priority: number }[] {
-        return [...this.el.nativeElement.children]
-            .map((element: HTMLElement, index) => {
+        return this._positionedItems()
+            .map((directive, index) => {
+                const element = directive.el.nativeElement;
                 const hasPriorityAttribute = element.hasAttribute && element.hasAttribute('fdShellbarHidePriority');
-                const priority = hasPriorityAttribute
-                    ? parseInt(element.getAttribute('fdShellbarHidePriority')!, 10)
-                    : index + 1;
+                const priorityValue = element.getAttribute('fdShellbarHidePriority');
+                const priority = hasPriorityAttribute && priorityValue ? parseInt(priorityValue, 10) : index + 1;
 
                 return { el: element, priority };
             })

@@ -14,6 +14,7 @@ import { ShellbarBrandingComponent } from './shellbar-branding/shellbar-branding
 import { ShellbarContextAreaComponent } from './shellbar-context-area/shellbar-context-area.component';
 import { ShellbarHidePriorityDirective } from './shellbar-hide-priority.directive';
 import { ShellbarNeverHideDirective } from './shellbar-never-hide.directive';
+import { ShellbarPositionDirective } from './shellbar-position.directive';
 import { ShellbarSeparatorComponent } from './shellbar-separator/shellbar-separator.component';
 import { ShellbarSidenavDirective } from './shellbar-sidenav.directive';
 import { ShellbarUserMenuButtonDirective } from './user-menu/shellbar-user-menu-button.directive';
@@ -41,7 +42,8 @@ import { ShellbarUserMenuComponent } from './user-menu/shellbar-user-menu.compon
         ShellbarContextAreaComponent,
         ShellbarSeparatorComponent,
         ShellbarHidePriorityDirective,
-        ShellbarNeverHideDirective
+        ShellbarNeverHideDirective,
+        ShellbarPositionDirective
     ],
     exports: [
         ShellbarComponent,
@@ -61,6 +63,7 @@ import { ShellbarUserMenuComponent } from './user-menu/shellbar-user-menu.compon
         ShellbarSeparatorComponent,
         ShellbarHidePriorityDirective,
         ShellbarNeverHideDirective,
+        ShellbarPositionDirective,
         ContentDensityModule
     ]
 })

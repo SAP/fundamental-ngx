@@ -112,6 +112,31 @@
 
 <separator></separator>
 
+<fd-docs-section-title id="dual-context-areas" componentName="shellbar">
+    Shellbar context area with positioned items
+</fd-docs-section-title>
+<description>
+    <p>
+        The shellbar context area can contain items positioned on the left (after branding) or right (before actions).
+        Use the <code>fdShellbarPosition</code> directive to specify each item's position.
+    </p>
+    <p>
+        Set <code>fdShellbarPosition="left"</code> or <code>fdShellbarPosition="right"</code> on individual items within
+        the context area. If no position is specified, items default to the left position.
+    </p>
+    <p>
+        When the shellbar becomes too narrow, items are hidden based on their <code>fdShellbarHidePriority</code> value
+        (lower numbers are hidden first). Priority works globally across both left and right positioned items, allowing
+        fine-grained control over which items disappear when space is limited.
+    </p>
+</description>
+<component-example>
+    <fd-shellbar-dual-context-area-example></fd-shellbar-dual-context-area-example>
+</component-example>
+<code-example [exampleFiles]="shellbarDualContextAreaExample"></code-example>
+
+<separator></separator>
+
 <fd-docs-section-title id="context-area-overflow" componentName="shellbar">
     Context Area Overflow
 </fd-docs-section-title>
