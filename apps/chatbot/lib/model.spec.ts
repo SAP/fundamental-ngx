@@ -1,4 +1,4 @@
-import { chatModel, chatModelId } from './model';
+import { activeProvider, chatModel, chatModelId } from './model';
 
 /** Save/restore the env vars the model layer reads, so tests don't leak state. */
 const ENV_KEYS = [
@@ -98,5 +98,32 @@ describe('chatModel', () => {
     it('throws when ANTHROPIC_BASE_URL is set but the key is missing', () => {
         process.env.ANTHROPIC_BASE_URL = 'http://localhost:6655/anthropic/v1';
         expect(() => chatModel()).toThrow(/ANTHROPIC_API_KEY is missing/);
+    });
+});
+
+describe('activeProvider', () => {
+    it('returns null when no provider is configured', () => {
+        expect(activeProvider()).toBeNull();
+    });
+
+    it('returns "google" when a Gemini key is set', () => {
+        process.env.GOOGLE_GENERATIVE_AI_API_KEY = 'aiza_test';
+        expect(activeProvider()).toBe('google');
+    });
+
+    it('returns "groq" when only a Groq key is set', () => {
+        process.env.GROQ_API_KEY = 'gsk_test';
+        expect(activeProvider()).toBe('groq');
+    });
+
+    it('returns "anthropic" when only the gateway base URL is set', () => {
+        process.env.ANTHROPIC_BASE_URL = 'http://localhost:6655/anthropic/v1';
+        expect(activeProvider()).toBe('anthropic');
+    });
+
+    it('prefers Google over Groq, mirroring chatModel() precedence', () => {
+        process.env.GOOGLE_GENERATIVE_AI_API_KEY = 'aiza_test';
+        process.env.GROQ_API_KEY = 'gsk_test';
+        expect(activeProvider()).toBe('google');
     });
 });

@@ -12354,6 +12354,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"chalk@npm:5.6.2, chalk@npm:^5.6.0, chalk@npm:^5.6.2":
+  version: 5.6.2
+  resolution: "chalk@npm:5.6.2"
+  checksum: 10/1b2f48f6fba1370670d5610f9cd54c391d6ede28f4b7062dd38244ea5768777af72e5be6b74fb6c6d54cb84c4a2dff3f3afa9b7cb5948f7f022cfd3d087989e0
+  languageName: node
+  linkType: hard
+
 "chalk@npm:^1.1.3":
   version: 1.1.3
   resolution: "chalk@npm:1.1.3"
@@ -12375,13 +12382,6 @@ __metadata:
     escape-string-regexp: "npm:^1.0.5"
     supports-color: "npm:^5.3.0"
   checksum: 10/3d1d103433166f6bfe82ac75724951b33769675252d8417317363ef9d54699b7c3b2d46671b772b893a8e50c3ece70c4b933c73c01e81bc60ea4df9b55afa303
-  languageName: node
-  linkType: hard
-
-"chalk@npm:^5.6.0, chalk@npm:^5.6.2":
-  version: 5.6.2
-  resolution: "chalk@npm:5.6.2"
-  checksum: 10/1b2f48f6fba1370670d5610f9cd54c391d6ede28f4b7062dd38244ea5768777af72e5be6b74fb6c6d54cb84c4a2dff3f3afa9b7cb5948f7f022cfd3d087989e0
   languageName: node
   linkType: hard
 
@@ -12947,6 +12947,23 @@ __metadata:
     readable-stream: "npm:^3.0.2"
     typedarray: "npm:^0.0.6"
   checksum: 10/250e576d0617e7c58e1c4b2dd6fe69560f316d2c962a409f9f3aac794018499ddb31948b1e4296f217008e124cd5d526432097745157fe504b5d9f3dc469eadb
+  languageName: node
+  linkType: hard
+
+"concurrently@npm:^10.0.5":
+  version: 10.0.5
+  resolution: "concurrently@npm:10.0.5"
+  dependencies:
+    chalk: "npm:5.6.2"
+    rxjs: "npm:7.8.2"
+    shell-quote: "npm:1.9.0"
+    supports-color: "npm:10.2.2"
+    tree-kill: "npm:1.2.2"
+    yargs: "npm:18.0.0"
+  bin:
+    conc: dist/bin/index.js
+    concurrently: dist/bin/index.js
+  checksum: 10/1bfd879dbd1f6f9d6a1df717c73546a6f03cf3d3e838e5ac7b5eb14da78ed0d2eeade6ff7ec803f6fc74f8d0ffc7157650328550e2e29fbbfb272037e68027b5
   languageName: node
   linkType: hard
 
@@ -16712,6 +16729,7 @@ __metadata:
     angular-eslint: "npm:22.1.0"
     autoprefixer: "npm:^10.4.0"
     compare-versions: "npm:6.1.0"
+    concurrently: "npm:^10.0.5"
     conventional-changelog: "npm:4.0.0"
     conventional-changelog-angular: "npm:6.0.0"
     conventional-changelog-cli: "npm:3.0.0"
@@ -26372,6 +26390,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"shell-quote@npm:1.9.0":
+  version: 1.9.0
+  resolution: "shell-quote@npm:1.9.0"
+  checksum: 10/c3bc91e74a469c4f96b6fd13b0c777fff16bcbda202692a4e5402d3d6b78fc6e02fe92fdf8dc0bddf992a9c6758e43207bfc5bdbefbf8a58190b1c885cbcc171
+  languageName: node
+  linkType: hard
+
 "shell-quote@npm:^1.8.4":
   version: 1.10.0
   resolution: "shell-quote@npm:1.10.0"
@@ -27114,6 +27139,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"supports-color@npm:10.2.2":
+  version: 10.2.2
+  resolution: "supports-color@npm:10.2.2"
+  checksum: 10/bd132705fc07213a4024131fb061f0a46a48b49ecaf434bb029c0a5aa0339b969236d496d63969e3c248a90fdcac16d4f9c5bf187e7be0bfb5e804ed13bef6b0
+  languageName: node
+  linkType: hard
+
 "supports-color@npm:7.2.0, supports-color@npm:^7.1.0":
   version: 7.2.0
   resolution: "supports-color@npm:7.2.0"
@@ -27599,6 +27631,15 @@ __metadata:
   peerDependencies:
     tslib: 2
   checksum: 10/2c20118d2671996aa6f1ba1310cef1404fb525bde5d989ab542013f62b23a3633c0f0b32cbd516ee6205051ec21912b2470dabca006d19c9eba0740b567e2b60
+  languageName: node
+  linkType: hard
+
+"tree-kill@npm:1.2.2":
+  version: 1.2.2
+  resolution: "tree-kill@npm:1.2.2"
+  bin:
+    tree-kill: cli.js
+  checksum: 10/49117f5f410d19c84b0464d29afb9642c863bc5ba40fcb9a245d474c6d5cc64d1b177a6e6713129eb346b40aebb9d4631d967517f9fbe8251c35b21b13cd96c7
   languageName: node
   linkType: hard
 
@@ -29537,6 +29578,20 @@ __metadata:
     y18n: "npm:^5.0.5"
     yargs-parser: "npm:^21.1.1"
   checksum: 10/abb3e37678d6e38ea85485ed86ebe0d1e3464c640d7d9069805ea0da12f69d5a32df8e5625e370f9c96dd1c2dc088ab2d0a4dd32af18222ef3c4224a19471576
+  languageName: node
+  linkType: hard
+
+"yargs@npm:18.0.0":
+  version: 18.0.0
+  resolution: "yargs@npm:18.0.0"
+  dependencies:
+    cliui: "npm:^9.0.1"
+    escalade: "npm:^3.1.1"
+    get-caller-file: "npm:^2.0.5"
+    string-width: "npm:^7.2.0"
+    y18n: "npm:^5.0.5"
+    yargs-parser: "npm:^22.0.0"
+  checksum: 10/5af36234871390386b31cac99f00e79fcbc2ead858a61b30a8ca381c5fde5df8af0b407c36b000d3f774bcbe4aec5833f2f1c915f6ddc49ce97b78176b651801
   languageName: node
   linkType: hard
 

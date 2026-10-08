@@ -1,5 +1,22 @@
 import { createMcpFetchHandler } from './web';
 
+// web.ts statically imports the generated `./data/components.json` so the catalog
+// gets bundled into serverless deployments. That file is git-ignored and only
+// produced by `nx run mcp-server:extract-metadata`, so it is absent in CI and on
+// fresh checkouts — a static import of it would make this suite fail to load.
+// This is a unit test of the handler's wiring, not of the catalog data, so we
+// stub the import with an empty catalog (the same shape `loadCatalogFromDisk()`
+// falls back to when the file is missing). The tool set asserted below is
+// registered by `createServer` regardless of catalog contents.
+jest.mock(
+    './data/components.json',
+    () => ({
+        __esModule: true,
+        default: { generatedAt: '2026-01-01T00:00:00.000Z', version: 'test', components: [] }
+    }),
+    { virtual: true }
+);
+
 function jsonRpcRequest(body: unknown): Request {
     return new Request('http://local/api/mcp', {
         method: 'POST',

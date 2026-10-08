@@ -5,7 +5,14 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { MarkdownComponent } from 'ngx-markdown';
 import { provideChatMarkdown } from './services/chat-markdown.config';
-import { ChatMessage, ChatService, ChatStatus } from './services/chat.service';
+import { Attachment, ChatMessage, ChatService, ChatStatus } from './services/chat.service';
+
+/** MIME types the attachment picker accepts — images and PDF (vision-capable providers). */
+const ALLOWED_FILE_TYPES = ['image/png', 'image/jpeg', 'image/webp', 'image/gif', 'application/pdf'];
+/** Per-file size ceiling. Base64 inflates ~33%, so this keeps payloads well within model limits. */
+const MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024;
+/** Max files per message. */
+const MAX_FILES = 3;
 
 @Component({
     selector: 'fd-guide-chat',
@@ -19,6 +26,11 @@ export class FdGuideChatComponent {
     readonly isExpanded = signal(false);
     userInput = ''; // Regular property for ngModel
 
+    /** Files staged for the next message, shown as removable chips above the input. */
+    readonly attachments = signal<Attachment[]>([]);
+    /** Validation message for rejected files (wrong type / too big / too many). */
+    readonly attachmentError = signal<string | null>(null);
+
     readonly messages: Signal<ChatMessage[]>;
     readonly status: Signal<ChatStatus>;
     readonly error: Signal<string | null>;
@@ -30,6 +42,7 @@ export class FdGuideChatComponent {
 
     private readonly chatService = inject(ChatService);
     private readonly messagesContainer = viewChild<ElementRef<HTMLDivElement>>('messagesContainer');
+    private readonly fileInput = viewChild<ElementRef<HTMLInputElement>>('fileInput');
 
     constructor() {
         this.messages = this.chatService.messages;
@@ -119,19 +132,79 @@ export class FdGuideChatComponent {
     closeChat(): void {
         this.isOpen.set(false);
         this.isExpanded.set(false);
+        this.attachmentError.set(null);
     }
 
     async sendMessage(): Promise<void> {
         const input = this.userInput.trim();
-        if (!input || this.isBusy()) {
+        const attachments = this.attachments();
+        if ((!input && attachments.length === 0) || this.isBusy()) {
             return;
         }
 
-        // Clear input immediately for better UX
+        // Clear input + staged files immediately for better UX
         this.userInput = '';
+        this.attachments.set([]);
+        this.attachmentError.set(null);
 
         // Send the message
-        await this.chatService.sendMessage(input);
+        await this.chatService.sendMessage(input, attachments);
+    }
+
+    /** Open the native file picker (triggered by the paper-clip button). */
+    openFilePicker(): void {
+        this.attachmentError.set(null);
+        this.fileInput()?.nativeElement.click();
+    }
+
+    /** Validate the chosen files and stage the accepted ones as data-URL attachments. */
+    async onFilesSelected(event: Event): Promise<void> {
+        const target = event.target as HTMLInputElement;
+        const files = target.files ? Array.from(target.files) : [];
+        // Reset the input so selecting the same file again still fires `change`.
+        target.value = '';
+        if (files.length === 0) {
+            return;
+        }
+
+        this.attachmentError.set(null);
+        const errors: string[] = [];
+        const accepted: Attachment[] = [];
+
+        for (const file of files) {
+            if (this.attachments().length + accepted.length >= MAX_FILES) {
+                errors.push(`You can attach at most ${MAX_FILES} files.`);
+                break;
+            }
+            if (!ALLOWED_FILE_TYPES.includes(file.type)) {
+                errors.push(`"${file.name}" is not a supported type (images or PDF only).`);
+                continue;
+            }
+            if (file.size > MAX_FILE_SIZE_BYTES) {
+                errors.push(`"${file.name}" is larger than ${MAX_FILE_SIZE_BYTES / (1024 * 1024)} MB.`);
+                continue;
+            }
+            try {
+                const url = await this.readAsDataUrl(file);
+                accepted.push({ name: file.name, mediaType: file.type, url });
+            } catch {
+                errors.push(`"${file.name}" could not be read.`);
+            }
+        }
+
+        if (accepted.length > 0) {
+            this.attachments.update((list) => [...list, ...accepted]);
+        }
+        if (errors.length > 0) {
+            this.attachmentError.set(errors.join(' '));
+        }
+    }
+
+    /** Remove a staged attachment by its data URL. */
+    removeAttachment(url: string): void {
+        this.attachments.update((list) => list.filter((attachment) => attachment.url !== url));
+        // Removing a file resolves "too many files" (and clears any stale notice).
+        this.attachmentError.set(null);
     }
 
     onEnterKey(event: Event): void {
@@ -147,6 +220,7 @@ export class FdGuideChatComponent {
 
     clearChat(): void {
         this.chatService.clearMessages();
+        this.attachmentError.set(null);
     }
 
     private scrollToBottom(): void {
@@ -156,5 +230,15 @@ export class FdGuideChatComponent {
                 container.scrollTop = container.scrollHeight;
             }
         }, 0);
+    }
+
+    /** Read a File into a base64 data URL (`data:<mime>;base64,...`). */
+    private readAsDataUrl(file: File): Promise<string> {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result as string);
+            reader.onerror = () => reject(reader.error ?? new Error('FileReader failed'));
+            reader.readAsDataURL(file);
+        });
     }
 }

@@ -39,11 +39,74 @@ export function loadCatalogFromDisk(): ComponentCatalog {
     }
 }
 
+/**
+ * Whether to log each tool invocation. On by default outside production so local
+ * dev (e.g. the Next.js chatbot) shows tool activity without extra setup; force
+ * it with `MCP_LOG_TOOLS=1` / silence it with `MCP_LOG_TOOLS=0`.
+ */
+const TOOL_LOGGING_ENABLED =
+    process.env.MCP_LOG_TOOLS === '1' ||
+    process.env.MCP_LOG_TOOLS === 'true' ||
+    (process.env.MCP_LOG_TOOLS !== '0' &&
+        process.env.MCP_LOG_TOOLS !== 'false' &&
+        process.env.NODE_ENV !== 'production');
+
+/**
+ * Wraps a tool handler so each call logs its name, arguments, and duration.
+ *
+ * This is the server-side ground truth that a tool actually ran (as opposed to a
+ * model answering from memory and never reaching the MCP server). Logs go to
+ * `stderr` so they never corrupt the stdio MCP protocol, which owns `stdout`.
+ */
+function withToolLogging<F extends (...args: never[]) => unknown>(name: string, handler: F): F {
+    if (!TOOL_LOGGING_ENABLED) {
+        return handler;
+    }
+    const wrapped = async (...args: Parameters<F>): Promise<unknown> => {
+        const start = Date.now();
+        let argPreview = '';
+        try {
+            argPreview = JSON.stringify(args[0] ?? {});
+        } catch {
+            argPreview = '<unserializable>';
+        }
+        console.error(`[mcp:tool] → ${name} ${argPreview}`);
+        try {
+            const result = await handler(...args);
+            console.error(`[mcp:tool] ✓ ${name} (${Date.now() - start}ms)`);
+            return result;
+        } catch (err) {
+            console.error(`[mcp:tool] ✗ ${name} (${Date.now() - start}ms):`, err);
+            throw err;
+        }
+    };
+    return wrapped as unknown as F;
+}
+
 export function createServer(catalog: ComponentCatalog): McpServer {
     const server = new McpServer({
         name: 'fundamental-ngx',
         version: catalog.version
     });
+
+    // Centrally wrap every registered tool's handler with invocation logging.
+    // Intercepting `server.tool` here means all tools below — and any added
+    // later — are covered without touching each registration call.
+    if (TOOL_LOGGING_ENABLED) {
+        const registerTool = server.tool.bind(server);
+        type RegisterArgs = Parameters<typeof registerTool>;
+        server.tool = ((...args: RegisterArgs): ReturnType<typeof registerTool> => {
+            const name = args[0];
+            const lastIndex = args.length - 1;
+            const handler = args[lastIndex];
+            if (typeof name === 'string' && typeof handler === 'function') {
+                const callArgs = [...args] as unknown[];
+                callArgs[lastIndex] = withToolLogging(name, handler as (...a: never[]) => unknown);
+                return registerTool(...(callArgs as RegisterArgs));
+            }
+            return registerTool(...args);
+        }) as typeof server.tool;
+    }
 
     // ---------------------------------------------------------------------------
     // Tool: list_components

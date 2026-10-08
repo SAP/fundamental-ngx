@@ -2,11 +2,21 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
+export interface Attachment {
+    /** Original file name, shown as the chip label and sent as the file-part filename. */
+    name: string;
+    /** MIME type, e.g. `image/png` or `application/pdf`. */
+    mediaType: string;
+    /** Base64 data URL (`data:<mediaType>;base64,...`) — self-contained, no upload step. */
+    url: string;
+}
+
 export interface ChatMessage {
     id: string;
     role: 'user' | 'assistant';
     content: string;
     timestamp: Date;
+    attachments?: Attachment[];
 }
 
 export type ChatStatus = 'idle' | 'submitted' | 'streaming' | 'error';
@@ -36,9 +46,10 @@ export class ChatService {
     /**
      * Send a message to the chat API and handle the streaming response.
      * @param content The user's message text
+     * @param attachments Optional files (images/PDF) to send with this message
      */
-    async sendMessage(content: string): Promise<void> {
-        if (!content.trim()) {
+    async sendMessage(content: string, attachments: Attachment[] = []): Promise<void> {
+        if (!content.trim() && attachments.length === 0) {
             return;
         }
 
@@ -56,7 +67,8 @@ export class ChatService {
             id: this.generateId(),
             role: 'user',
             content: content.trim(),
-            timestamp: new Date()
+            timestamp: new Date(),
+            attachments: attachments.length > 0 ? attachments : undefined
         };
         this.messages.update((msgs) => [...msgs, userMessage]);
 
@@ -71,13 +83,41 @@ export class ChatService {
         this.messages.update((msgs) => [...msgs, assistantMessage]);
 
         try {
+            // Attach file parts only to the newest user message: older turns keep
+            // their attachments for display, but resending every base64 blob each
+            // turn would bloat the payload (and the backend re-grounds via MCP, not
+            // old files). The server keeps 'file' parts on the current turn only.
+            const lastUserId = [...this.messages()].reverse().find((msg) => msg.role === 'user')?.id;
+
             // Prepare the request payload (all messages in the conversation)
             const payload = {
-                messages: this.messages().map((msg) => ({
-                    id: msg.id,
-                    role: msg.role,
-                    parts: [{ type: 'text', text: msg.content }]
-                }))
+                messages: this.messages().map((msg) => {
+                    const parts: {
+                        type: string;
+                        text?: string;
+                        mediaType?: string;
+                        filename?: string;
+                        url?: string;
+                    }[] = [];
+                    if (msg.content) {
+                        parts.push({ type: 'text', text: msg.content });
+                    }
+                    if (msg.id === lastUserId && msg.attachments?.length) {
+                        for (const attachment of msg.attachments) {
+                            parts.push({
+                                type: 'file',
+                                mediaType: attachment.mediaType,
+                                filename: attachment.name,
+                                url: attachment.url
+                            });
+                        }
+                    }
+                    // Guarantee at least one part (e.g. the empty assistant placeholder)
+                    if (parts.length === 0) {
+                        parts.push({ type: 'text', text: msg.content });
+                    }
+                    return { id: msg.id, role: msg.role, parts };
+                })
             };
 
             // Get the API URL from environment or default to localhost
@@ -93,7 +133,18 @@ export class ChatService {
             });
 
             if (!response.ok) {
-                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                // Surface the backend's JSON `error` (e.g. "provider can't read files")
+                // instead of a bare status line; fall back if the body isn't JSON.
+                let message = `HTTP ${response.status}: ${response.statusText}`;
+                try {
+                    const body = await response.json();
+                    if (body?.error) {
+                        message = body.error;
+                    }
+                } catch {
+                    // non-JSON error body — keep the status-line message
+                }
+                throw new Error(message);
             }
 
             if (!response.body) {

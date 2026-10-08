@@ -48,6 +48,7 @@ jobs:
                   scopes: |
                       core
                       platform
+                      chatbot
                       docs
                       e2e
                       release

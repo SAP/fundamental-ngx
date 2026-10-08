@@ -23,6 +23,7 @@ const Configuration = {
                 'moment-adapter',
                 'ui5',
                 'mcp',
+                'chatbot',
                 'skills',
                 'agents'
             ]
