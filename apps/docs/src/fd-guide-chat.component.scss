@@ -190,6 +190,7 @@
 
 // Header
 .fd-guide-chat__header {
+    gap: 0.25rem;
     display: flex;
     padding: 1rem;
     flex-shrink: 0;
@@ -604,7 +605,7 @@
 .fd-guide-chat__input-form {
     padding: 1rem;
     flex-shrink: 0;
-    background: var(--sapAssistant_Active_Background);
+    background: var(--sapButton_Background);
     border-top: 1px solid var(--sapGroup_ContentBorderColor);
     border-radius: 0 0 var(--sapElement_BorderCornerRadius) var(--sapElement_BorderCornerRadius);
 
@@ -619,16 +620,23 @@
     align-items: flex-end;
 }
 
+.fd-guide-chat__input-wrapper-controls {
+    gap: 0.25rem;
+    display: flex;
+    flex-direction: column;
+}
+
 .fd-guide-chat__input {
     flex: 1;
     resize: none;
     line-height: 1.5;
     padding: 0.75rem;
     max-height: 8rem;
-    min-height: 2.75rem;
+    min-height: 3rem;
     font-family: inherit;
     font-size: var(--sapFontSize);
     transition: border-color 0.2s ease;
+    background: var(--sapButton_Background);
     border-radius: var(--sapButton_BorderCornerRadius);
     border: 0.0625rem solid var(--sapAssistant_BorderColor);
 
@@ -660,6 +668,23 @@
 .fd-guide-chat__attach-btn {
     flex-shrink: 0;
     color: var(--sapContent_IconColor);
+
+    &--listening {
+        color: var(--sapAssistant_Background, #5d36ff);
+        animation: pulse 1.5s ease-in-out infinite;
+    }
+}
+
+@keyframes pulse {
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.7;
+        transform: scale(1.1);
+    }
 }
 
 // Staged attachment chips (above the input)
