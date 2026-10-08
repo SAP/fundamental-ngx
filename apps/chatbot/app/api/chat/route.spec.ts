@@ -54,6 +54,51 @@ describe('trimHistoryForBudget', () => {
         expect(trimmed[0].id).toBe('1');
     });
 
+    it('keeps file parts (attachments) alongside text on the current turn', () => {
+        const messages = [
+            { id: '1', role: 'assistant', parts: [{ type: 'text', text: 'Hi, how can I help?' }] },
+            {
+                id: '2',
+                role: 'user',
+                parts: [
+                    { type: 'text', text: 'What component is this?' },
+                    { type: 'file', mediaType: 'image/png', filename: 'shot.png', url: 'data:image/png;base64,AAAA' }
+                ]
+            }
+        ] as unknown as UIMessage[];
+
+        const trimmed = trimHistoryForBudget(messages);
+
+        expect(trimmed).toHaveLength(2);
+        expect(trimmed[1].parts).toEqual([
+            { type: 'text', text: 'What component is this?' },
+            { type: 'file', mediaType: 'image/png', filename: 'shot.png', url: 'data:image/png;base64,AAAA' }
+        ]);
+    });
+
+    it('keeps a file-only user message (no text) rather than dropping it', () => {
+        const messages = [
+            {
+                id: '1',
+                role: 'user',
+                parts: [
+                    {
+                        type: 'file',
+                        mediaType: 'application/pdf',
+                        filename: 'spec.pdf',
+                        url: 'data:application/pdf;base64,AAAA'
+                    }
+                ]
+            }
+        ] as unknown as UIMessage[];
+
+        const trimmed = trimHistoryForBudget(messages);
+
+        expect(trimmed).toHaveLength(1);
+        expect(trimmed[0].parts).toHaveLength(1);
+        expect(trimmed[0].parts[0].type).toBe('file');
+    });
+
     it('keeps only the last 8 messages', () => {
         const messages = Array.from({ length: 12 }, (_, i) => ({
             id: String(i),

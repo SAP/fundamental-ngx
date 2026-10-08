@@ -1,3 +1,7 @@
 # Ignore test files while computing dependency graph
 **/*.spec.ts
 /**/*/typedoc
+
+# Next.js build output — Next writes package.json files into .next, which the NX
+# project-graph scanner otherwise mistakes for unnamed projects.
+**/.next

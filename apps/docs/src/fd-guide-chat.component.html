@@ -96,7 +96,29 @@
                                         <markdown [data]="message.content" class="fd-guide-chat__markdown"></markdown>
                                     }
                                 } @else {
-                                    <p>{{ message.content }}</p>
+                                    @if (message.attachments?.length) {
+                                        <ul class="fd-guide-chat__bubble-attachments" aria-label="Attached files">
+                                            @for (attachment of message.attachments; track attachment.url) {
+                                                <li class="fd-guide-chat__bubble-attachment">
+                                                    @if (attachment.mediaType.startsWith('image/')) {
+                                                        <img
+                                                            class="fd-guide-chat__bubble-thumb"
+                                                            [src]="attachment.url"
+                                                            [alt]="attachment.name"
+                                                        />
+                                                    } @else {
+                                                        <span class="fd-guide-chat__bubble-file">
+                                                            <fd-icon glyph="pdf-attachment"></fd-icon>
+                                                            {{ attachment.name }}
+                                                        </span>
+                                                    }
+                                                </li>
+                                            }
+                                        </ul>
+                                    }
+                                    @if (message.content) {
+                                        <p>{{ message.content }}</p>
+                                    }
                                 }
                             </div>
                         </div>
@@ -119,7 +141,60 @@
             <label for="fd-guide-input" class="fd-guide-sr-only">
                 Ask about Fundamental NGX components, APIs, or examples...
             </label>
+
+            @if (attachments().length > 0) {
+                <ul class="fd-guide-chat__attachments" aria-label="Attached files">
+                    @for (attachment of attachments(); track attachment.url) {
+                        <li class="fd-guide-chat__attachment-chip">
+                            @if (attachment.mediaType.startsWith('image/')) {
+                                <img class="fd-guide-chat__attachment-thumb" [src]="attachment.url" alt="" />
+                            } @else {
+                                <fd-icon class="fd-guide-chat__attachment-icon" glyph="pdf-attachment"></fd-icon>
+                            }
+                            <span class="fd-guide-chat__attachment-name" [title]="attachment.name">
+                                {{ attachment.name }}
+                            </span>
+                            <button
+                                type="button"
+                                class="fd-guide-chat__attachment-remove"
+                                fdType="transparent"
+                                fd-button
+                                glyph="decline"
+                                [ariaLabel]="'Remove ' + attachment.name"
+                                [title]="'Remove ' + attachment.name"
+                                (click)="removeAttachment(attachment.url)"
+                            ></button>
+                        </li>
+                    }
+                </ul>
+            }
+
+            @if (attachmentError()) {
+                <p class="fd-guide-chat__attachment-error" role="alert">{{ attachmentError() }}</p>
+            }
+
             <div class="fd-guide-chat__input-wrapper">
+                <button
+                    type="button"
+                    class="fd-guide-chat__attach-btn"
+                    fdType="transparent"
+                    fd-button
+                    glyph="attachment"
+                    ariaLabel="Attach files (images or PDF)"
+                    title="Attach files (images or PDF)"
+                    [disabled]="isBusy()"
+                    (click)="openFilePicker()"
+                ></button>
+                <input
+                    #fileInput
+                    type="file"
+                    class="fd-guide-sr-only"
+                    accept="image/png,image/jpeg,image/webp,image/gif,application/pdf"
+                    multiple
+                    tabindex="-1"
+                    aria-hidden="true"
+                    (change)="onFilesSelected($event)"
+                />
                 <textarea
                     id="fd-guide-input"
                     name="userInput"
@@ -139,7 +214,7 @@
                     glyph="paper-plane"
                     ariaLabel="Send message"
                     title="Send message"
-                    [disabled]="isBusy() || !userInput.trim()"
+                    [disabled]="isBusy() || (!userInput.trim() && attachments().length === 0)"
                 ></button>
             </div>
         </form>

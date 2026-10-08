@@ -1,7 +1,7 @@
 import { createMCPClient } from '@ai-sdk/mcp';
 import { convertToModelMessages, stepCountIs, streamText, type UIMessage } from 'ai';
 import { corsHeaders, preflight } from '../../../lib/cors';
-import { chatModel } from '../../../lib/model';
+import { FILE_CAPABLE_PROVIDERS, activeProvider, chatModel } from '../../../lib/model';
 
 export const runtime = 'nodejs';
 export const maxDuration = 60;
@@ -37,7 +37,7 @@ function logChat(message: string): void {
     }
 }
 
-/** How many trailing messages of the (text-only) history to keep per request. */
+/** How many trailing messages of the (text + file) history to keep per request. */
 const MAX_HISTORY_MESSAGES = 8;
 
 /**
@@ -46,10 +46,15 @@ const MAX_HISTORY_MESSAGES = 8;
  * `useChat` accumulates the full conversation client-side and resends it every
  * turn — including the MCP tool-call/tool-result parts, whose JSON (a single
  * `get_component_api` dump is thousands of tokens) is by far the bulk. We keep the
- * conversational thread the model actually needs for context — every user question
- * and the assistant's *text* answers — but drop the raw tool parts from the
- * history. If the model needs that data again it re-calls the tool for the current
- * turn (a fresh, small result). A sliding window then bounds very long chats.
+ * conversational thread the model actually needs for context — every user question,
+ * the assistant's *text* answers, and any *file* parts the user attached — but drop
+ * the raw tool parts from the history. If the model needs that data again it
+ * re-calls the tool for the current turn (a fresh, small result). A sliding window
+ * then bounds very long chats.
+ *
+ * File parts are kept because the client only sends them on the newest user message
+ * (see chat.service.ts), so history stays cheap while the current turn's attachment
+ * survives into the model request.
  *
  * This mattered most on Groq's 8K free-tier TPM cap (a single turn could blow past
  * it); it's a no-op cost on roomier providers like Gemini but kept as a cheap,
@@ -57,7 +62,7 @@ const MAX_HISTORY_MESSAGES = 8;
  */
 export function trimHistoryForBudget(messages: UIMessage[]): UIMessage[] {
     return messages
-        .map((m) => ({ ...m, parts: m.parts.filter((p) => p.type === 'text') }))
+        .map((m) => ({ ...m, parts: m.parts.filter((p) => p.type === 'text' || p.type === 'file') }))
         .filter((m) => m.parts.length > 0)
         .slice(-MAX_HISTORY_MESSAGES);
 }
@@ -78,6 +83,25 @@ export function OPTIONS(req: Request): Response {
 
 export async function POST(req: Request): Promise<Response> {
     const { messages }: { messages: UIMessage[] } = await req.json();
+
+    // Fail fast if the user attached files but the configured model can't read them
+    // (e.g. Groq's text-only qwen fallback). Done before opening the MCP client so a
+    // doomed request spends no tool/network work; the message surfaces in the widget.
+    const hasFileParts = messages.some((m) => m.parts?.some((p) => p.type === 'file'));
+    if (hasFileParts) {
+        const provider = activeProvider();
+        if (provider && !FILE_CAPABLE_PROVIDERS.has(provider)) {
+            return Response.json(
+                {
+                    error:
+                        `The active model provider ("${provider}") can't read file attachments. ` +
+                        `Remove the attachment, or configure a vision-capable provider ` +
+                        `(Gemini or the Anthropic-compatible gateway).`
+                },
+                { status: 400, headers: corsHeaders(req) }
+            );
+        }
+    }
 
     const endpoint = mcpUrl();
     const { tools, close } = await loadMcpTools(endpoint);

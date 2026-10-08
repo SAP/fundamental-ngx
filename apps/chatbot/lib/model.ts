@@ -33,6 +33,34 @@ function hasGroqKey(): boolean {
     return !!process.env.GROQ_API_KEY?.trim();
 }
 
+/** The provider families `chatModel()` can select, in precedence order. */
+export type ChatProvider = 'google' | 'groq' | 'anthropic';
+
+/**
+ * Which provider `chatModel()` will use for the current env — or `null` when none
+ * is configured. Mirrors the precedence in `chatModel()` exactly, so callers can
+ * reason about provider capabilities (e.g. file support) without building a model.
+ */
+export function activeProvider(): ChatProvider | null {
+    if (hasGoogleKey()) {
+        return 'google';
+    }
+    if (hasGroqKey()) {
+        return 'groq';
+    }
+    if (process.env.ANTHROPIC_BASE_URL?.trim()) {
+        return 'anthropic';
+    }
+    return null;
+}
+
+/**
+ * Providers whose default models can read file parts (images + PDFs). Gemini and
+ * the Anthropic-compatible gateway (Claude) are multimodal; Groq's qwen fallback is
+ * text-only, so file attachments must be rejected before they reach it.
+ */
+export const FILE_CAPABLE_PROVIDERS: ReadonlySet<ChatProvider> = new Set<ChatProvider>(['google', 'anthropic']);
+
 /**
  * The model id to call. Override with CHAT_MODEL; otherwise a provider-appropriate
  * default. An empty/whitespace CHAT_MODEL falls back to the default — the `.env.local`
