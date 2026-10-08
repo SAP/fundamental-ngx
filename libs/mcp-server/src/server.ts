@@ -8,6 +8,33 @@ import { ComponentCatalog, ComponentMetadata, LIBRARY_ALIAS_MAP, LibraryAlias } 
 import type { SetupGuide } from './types/setup-guide';
 import { buildPitfalls, buildTemplate, deriveImportPath, getSelectorType } from './utils/selector-utils';
 
+const MAX_TOOL_RESULT_BYTES = 64 * 1024;
+const DEFAULT_SEARCH_LIMIT = 8;
+const MAX_SEARCH_LIMIT = 10;
+const DEFAULT_LIST_LIMIT = 50;
+const MAX_LIST_LIMIT = 100;
+const SEARCH_STOP_WORDS = new Set([
+    'about',
+    'can',
+    'component',
+    'could',
+    'does',
+    'how',
+    'please',
+    'show',
+    'the',
+    'use',
+    'using',
+    'what',
+    'with',
+    'would'
+]);
+const SELECTOR_REFERENCE_PATTERN = /\b(?:fd|fdp|fdb|fdk|ui5)-[a-z0-9-]+\b/g;
+
+export interface CreateServerOptions {
+    includeCatalogResource?: boolean;
+}
+
 /**
  * Strips `Signal<T>` / `WritableSignal<T>` input types from every component in
  * the catalog.  TypeDoc exposes these as public properties, but they are
@@ -83,7 +110,8 @@ function withToolLogging<F extends (...args: never[]) => unknown>(name: string, 
     return wrapped as unknown as F;
 }
 
-export function createServer(catalog: ComponentCatalog): McpServer {
+export function createServer(catalog: ComponentCatalog, options: CreateServerOptions = {}): McpServer {
+    const { includeCatalogResource = true } = options;
     const server = new McpServer({
         name: 'fundamental-ngx',
         version: catalog.version
@@ -122,9 +150,15 @@ Use this to discover what components are available.`,
                 .enum(['core', 'platform', 'btp', 'cx', 'cdk', 'i18n', 'ui5', 'ui5-fiori', 'ui5-ai'] as const)
                 .optional()
                 .describe('Filter by library'),
-            category: z.string().optional().describe('Filter by category')
+            category: z.string().optional().describe('Filter by category'),
+            limit: z.number().int().min(1).max(MAX_LIST_LIMIT).default(DEFAULT_LIST_LIMIT).describe('Page size'),
+            cursor: z
+                .string()
+                .regex(/^(0|[1-9]\d{0,9})$/)
+                .optional()
+                .describe('Continuation cursor returned by the previous page')
         },
-        async ({ library, category }) => {
+        async ({ library, category, limit, cursor }) => {
             let components = catalog.components;
 
             if (library) {
@@ -146,14 +180,16 @@ Use this to discover what components are available.`,
                 description: truncate(c.description, 120)
             }));
 
-            return {
-                content: [
-                    {
-                        type: 'text' as const,
-                        text: JSON.stringify({ count: summary.length, components: summary }, null, 2)
-                    }
-                ]
-            };
+            const start = Number(cursor ?? 0);
+            const page = summary.slice(start, start + limit);
+            const nextOffset = start + page.length;
+
+            return jsonToolResult({
+                count: page.length,
+                totalCount: summary.length,
+                components: page,
+                ...(nextOffset < summary.length ? { nextCursor: String(nextOffset) } : {})
+            });
         }
     );
 
@@ -170,9 +206,16 @@ Use this when you need to find a component by a partial name or feature keyword.
             library: z
                 .enum(['core', 'platform', 'btp', 'cx', 'cdk', 'ui5', 'ui5-fiori', 'ui5-ai'] as const)
                 .optional()
-                .describe('Restrict search to a specific library')
+                .describe('Restrict search to a specific library'),
+            limit: z
+                .number()
+                .int()
+                .min(1)
+                .max(MAX_SEARCH_LIMIT)
+                .default(DEFAULT_SEARCH_LIMIT)
+                .describe('Maximum number of matches')
         },
-        async ({ query, library }) => {
+        async ({ query, library, limit }) => {
             const lowerQuery = query.toLowerCase();
             let components = catalog.components;
 
@@ -183,9 +226,10 @@ Use this when you need to find a component by a partial name or feature keyword.
                 }
             }
 
-            // Multi-word queries: sum the per-word scores so that components matching
-            // more words rank higher. Single-word queries use the existing path.
-            const queryWords = lowerQuery.split(/\s+/).filter((w) => w.length > 2);
+            // Natural-language questions often contain generic words that match many
+            // API descriptions. Prioritize explicit selectors and their meaningful
+            // suffixes so "How do I use fd-dialog?" resolves to fd-dialog.
+            const queryWords = getSearchTerms(lowerQuery);
             const isMultiWord = queryWords.length > 1;
 
             const scored = components
@@ -197,7 +241,7 @@ Use this when you need to find a component by a partial name or feature keyword.
                 }))
                 .filter((s) => s.score > 0)
                 .sort((a, b) => b.score - a.score)
-                .slice(0, 20);
+                .slice(0, limit);
 
             const results = scored.map((s) => ({
                 name: s.component.name,
@@ -208,14 +252,7 @@ Use this when you need to find a component by a partial name or feature keyword.
                 relevance: s.score
             }));
 
-            return {
-                content: [
-                    {
-                        type: 'text' as const,
-                        text: JSON.stringify({ query, count: results.length, results }, null, 2)
-                    }
-                ]
-            };
+            return jsonToolResult({ query, count: results.length, results });
         }
     );
 
@@ -235,17 +272,13 @@ Use this when you need to know how to use a specific component.`,
             const component = findComponent(name, catalog);
 
             if (!component) {
-                return {
-                    content: [
-                        {
-                            type: 'text' as const,
-                            text: `Component "${name}" not found. Use search_components to find available components.`
-                        }
-                    ]
-                };
+                return jsonToolError(
+                    `Component "${name}" not found. Use search_components to find available components.`
+                );
             }
 
-            const result: Record<string, unknown> = { ...component };
+            const { examples: _examples, ...apiMetadata } = component;
+            const result: Record<string, unknown> = { ...apiMetadata };
             if (component.deprecated) {
                 result.deprecationWarning = `This component is deprecated: ${component.deprecated}`;
             }
@@ -254,14 +287,7 @@ Use this when you need to know how to use a specific component.`,
             result.templateUsage = buildTemplate(component);
             result.importPath = deriveImportPath(component);
 
-            return {
-                content: [
-                    {
-                        type: 'text' as const,
-                        text: JSON.stringify(result, null, 2)
-                    }
-                ]
-            };
+            return jsonToolResult(result);
         }
     );
 
@@ -274,68 +300,39 @@ Use this when you need to know how to use a specific component.`,
 Returns TypeScript and HTML snippets from the documentation examples.
 Use this when you need real usage patterns for a component.`,
         {
-            name: z.string().describe('Component name or selector')
+            name: z.string().describe('Component name or selector'),
+            exampleName: z.string().optional().describe('Exact example name to return'),
+            query: z.string().optional().describe('Text to match against an example name or description')
         },
-        async ({ name }) => {
+        async ({ name, exampleName, query }) => {
             const component = findComponent(name, catalog);
 
             if (!component) {
-                return {
-                    content: [
-                        {
-                            type: 'text' as const,
-                            text: `Component "${name}" not found. Use search_components to find available components.`
-                        }
-                    ]
-                };
+                return jsonToolError(
+                    `Component "${name}" not found. Use search_components to find available components.`
+                );
             }
 
             if (!component.examples || component.examples.length === 0) {
-                return {
-                    content: [
-                        {
-                            type: 'text' as const,
-                            text: JSON.stringify(
-                                {
-                                    component: component.name,
-                                    selector: component.selector,
-                                    docsUrl: component.docsUrl || 'https://sap.github.io/fundamental-ngx',
-                                    note: 'No examples found for this component. Check the docs site for usage guidance.'
-                                },
-                                null,
-                                2
-                            )
-                        }
-                    ]
-                };
+                return jsonToolResult({
+                    component: component.name,
+                    selector: component.selector,
+                    docsUrl: component.docsUrl || 'https://sap.github.io/fundamental-ngx',
+                    availableExamples: [],
+                    examples: [],
+                    note: 'No examples found for this component. Check the docs site for usage guidance.'
+                });
             }
 
-            const formatted = component.examples.map((ex) => {
-                let code = `// --- ${ex.description} ---\n\n`;
-                code += ex.typescript;
-                if (ex.html) {
-                    code += `\n\n<!-- Template: ${ex.name}.component.html -->\n\n${ex.html}`;
-                }
-                return { name: ex.description, code };
-            });
+            const selected = selectExample(component.examples, exampleName, query);
 
-            return {
-                content: [
-                    {
-                        type: 'text' as const,
-                        text: JSON.stringify(
-                            {
-                                component: component.name,
-                                selector: component.selector,
-                                exampleCount: formatted.length,
-                                examples: formatted
-                            },
-                            null,
-                            2
-                        )
-                    }
-                ]
-            };
+            return jsonToolResult({
+                component: component.name,
+                selector: component.selector,
+                availableExamples: component.examples.map((example) => example.name),
+                examples: selected ? [selected] : [],
+                ...(!selected ? { note: 'No example matched the requested selector.' } : {})
+            });
         }
     );
 
@@ -368,28 +365,21 @@ additionalText replacing status).`,
             const lowerComponent = name.toLowerCase().replace(/\s+/g, '-');
             const curatedGuide = USAGE_GUIDES[lowerComponent];
             if (curatedGuide) {
-                return { content: [{ type: 'text' as const, text: JSON.stringify(curatedGuide, null, 2) }] };
+                return jsonToolResult(toConciseUsageGuide(curatedGuide));
             }
 
             const found = findComponent(name, catalog);
 
             if (!found) {
-                return {
-                    content: [
-                        {
-                            type: 'text' as const,
-                            text: `Component "${name}" not found. Use search_components to find available components.`
-                        }
-                    ]
-                };
+                return jsonToolError(
+                    `Component "${name}" not found. Use search_components to find available components.`
+                );
             }
 
             const importPath = deriveImportPath(found);
             const templateUsage = buildTemplate(found);
             const pitfalls = buildPitfalls(found, importPath);
             const requiredInputs = found.inputs.filter((i) => i.required && !i.defaultValue);
-            const firstExample = found.examples && found.examples.length > 0 ? found.examples[0] : null;
-
             const result: Record<string, unknown> = {
                 component: found.name,
                 selector: found.selector,
@@ -406,22 +396,7 @@ additionalText replacing status).`,
                 result.deprecated = found.deprecated;
             }
 
-            if (firstExample) {
-                result.example = {
-                    name: firstExample.description,
-                    typescript: firstExample.typescript,
-                    html: firstExample.html
-                };
-            }
-
-            return {
-                content: [
-                    {
-                        type: 'text' as const,
-                        text: JSON.stringify(result, null, 2)
-                    }
-                ]
-            };
+            return jsonToolResult(result);
         }
     );
 
@@ -444,14 +419,9 @@ or comparing alternative components for the same use case.`,
 
             if (!compA || !compB) {
                 const missing = [...(!compA ? [component_a] : []), ...(!compB ? [component_b] : [])];
-                return {
-                    content: [
-                        {
-                            type: 'text' as const,
-                            text: `Component(s) not found: ${missing.map((m) => `"${m}"`).join(', ')}. Use search_components to find available components.`
-                        }
-                    ]
-                };
+                return jsonToolError(
+                    `Component(s) not found: ${missing.map((m) => `"${m}"`).join(', ')}. Use search_components to find available components.`
+                );
             }
 
             // Compare inputs by name
@@ -553,14 +523,7 @@ or comparing alternative components for the same use case.`,
                 alternatives
             };
 
-            return {
-                content: [
-                    {
-                        type: 'text' as const,
-                        text: JSON.stringify(result, null, 2)
-                    }
-                ]
-            };
+            return jsonToolResult(result);
         }
     );
 
@@ -593,39 +556,29 @@ Pass "core+ui5" or "ui5" for a project that also uses @fundamental-ngx/ui5-webco
             const guide: SetupGuide | undefined = SETUP_GUIDES[packages];
 
             if (!guide) {
-                return {
-                    content: [
-                        {
-                            type: 'text' as const,
-                            text: `No setup guide found for "${packages}". Valid options: "core", "core+ui5", "ui5".`
-                        }
-                    ]
-                };
+                return jsonToolError(
+                    `No setup guide found for "${packages}". Valid options: "core", "core+ui5", "ui5".`
+                );
             }
 
-            return {
-                content: [
-                    {
-                        type: 'text' as const,
-                        text: JSON.stringify(guide, null, 2)
-                    }
-                ]
-            };
+            return jsonToolResult(guide);
         }
     );
 
     // ---------------------------------------------------------------------------
     // Resource: component catalog
     // ---------------------------------------------------------------------------
-    server.resource('component-catalog', 'fundamental-ngx://components/catalog', async (uri) => ({
-        contents: [
-            {
-                uri: uri.href,
-                mimeType: 'application/json',
-                text: JSON.stringify(catalog, null, 2)
-            }
-        ]
-    }));
+    if (includeCatalogResource) {
+        server.resource('component-catalog', 'fundamental-ngx://components/catalog', async (uri) => ({
+            contents: [
+                {
+                    uri: uri.href,
+                    mimeType: 'application/json',
+                    text: JSON.stringify(catalog, null, 2)
+                }
+            ]
+        }));
+    }
 
     return server;
 }
@@ -633,6 +586,86 @@ Pass "core+ui5" or "ui5" for a project that also uses @fundamental-ngx/ui5-webco
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
+
+function jsonToolResult(payload: unknown): {
+    content: [{ type: 'text'; text: string }];
+    isError?: boolean;
+} {
+    const text = JSON.stringify(payload);
+    if (new TextEncoder().encode(text).byteLength <= MAX_TOOL_RESULT_BYTES) {
+        return { content: [{ type: 'text', text }] };
+    }
+
+    return jsonToolError('The requested result exceeds the 64 KB tool-result limit. Narrow the request and try again.');
+}
+
+function jsonToolError(message: string): { content: [{ type: 'text'; text: string }]; isError: true } {
+    return {
+        content: [{ type: 'text', text: JSON.stringify({ error: message }) }],
+        isError: true
+    };
+}
+
+function selectExample(
+    examples: NonNullable<ComponentMetadata['examples']>,
+    exampleName?: string,
+    query?: string
+): NonNullable<ComponentMetadata['examples']>[number] | undefined {
+    if (exampleName) {
+        const normalizedName = exampleName.toLowerCase();
+        return examples.find((example) => example.name.toLowerCase() === normalizedName);
+    }
+
+    if (query) {
+        const normalizedQuery = normalizeSearchText(query);
+        return examples.find((example) =>
+            normalizeSearchText(`${example.name} ${example.description}`).includes(normalizedQuery)
+        );
+    }
+
+    return examples[0];
+}
+
+function normalizeSearchText(value: string): string {
+    return value
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, ' ')
+        .trim();
+}
+
+function toConciseUsageGuide(guide: (typeof USAGE_GUIDES)[string]): Record<string, unknown> {
+    const { compositionPattern: _compositionPattern, decisionTree, ...summary } = guide;
+
+    return {
+        ...summary,
+        decisionTree: decisionTree.map((node) => ({
+            question: node.question,
+            options: node.options.map(({ answer, recommendation }) => ({ answer, recommendation }))
+        }))
+    };
+}
+
+function getSearchTerms(query: string): string[] {
+    const selectorReferences = query.match(SELECTOR_REFERENCE_PATTERN) ?? [];
+    if (selectorReferences.length > 0) {
+        return [
+            ...new Set(
+                selectorReferences.flatMap((selector) => [
+                    selector,
+                    ...selector
+                        .split('-')
+                        .slice(1)
+                        .filter((word) => word.length > 2)
+                ])
+            )
+        ];
+    }
+
+    const meaningfulWords = query
+        .split(/[^a-z0-9-]+/)
+        .filter((word) => word.length > 2 && !SEARCH_STOP_WORDS.has(word));
+    return meaningfulWords.length > 0 ? meaningfulWords : [query];
+}
 
 function findComponent(nameOrSelector: string, catalog: ComponentCatalog): ComponentMetadata | undefined {
     const lower = nameOrSelector.toLowerCase();

@@ -1,87 +1,165 @@
-# Fundamental NGX Assistant
+# Fundamental NGX documentation assistant
 
-Next.js chatbot grounded in the Fundamental NGX MCP server (`libs/mcp-server`).
-The model is given the MCP tools (`search_components`, `get_component_api`,
-`get_usage_guide`, …) and must answer from them, so replies track the live
-component API instead of training data.
+The assistant answers Fundamental NGX questions using the generated MCP component catalog.
 
-Two routes, both in this one app:
+There are two ways to run it:
 
-- `/api/mcp` — the MCP server over HTTP (shared `createMcpFetchHandler()`).
-- `/api/chat` — the orchestrator: opens an MCP client to `/api/mcp`, runs
-  `streamText`, and streams the answer back.
+- **Embedded docs assistant (recommended):** the Angular documentation site with Netlify Functions at `/api/chat` and `/api/mcp`.
+- **Standalone chatbot:** the original Next.js prototype in `apps/chatbot`, served at `http://localhost:3000`.
 
-See [`../../PR.md`](../../PR.md) for the full architecture and request flow.
+## Run the embedded docs assistant
 
-## Local dev
+Run these commands from the repository root.
+
+### 1. Install and generate the MCP catalog
+
+Use Node and Yarn versions compatible with the root `package.json`, then run:
 
 ```bash
-nx run mcp-server:extract-metadata   # generate the static components.json catalog
+yarn install --immutable
+yarn nx run mcp-server:extract-metadata
+```
+
+The second command creates `libs/mcp-server/src/data/components.json`, which the MCP function needs.
+
+### 2. Choose how to provide an AI key
+
+For local development, either configure a server-side provider or enter a Gemini key in the assistant UI.
+
+To use a server-side provider, create the ignored local environment file:
+
+```bash
+cp apps/chatbot/.env.local.example apps/chatbot/.env.local
+```
+
+Edit `apps/chatbot/.env.local` and configure one provider:
+
+```dotenv
+# Gemini
+GOOGLE_GENERATIVE_AI_API_KEY=...
+
+# Or Groq
+GROQ_API_KEY=...
+
+# Or a local Anthropic-compatible proxy
+ANTHROPIC_BASE_URL=http://localhost:6655/anthropic/v1
+ANTHROPIC_API_KEY=...
+```
+
+Set only the provider you want to use. `CHAT_MODEL` is optional; provider defaults are documented in [`.env.local.example`](./.env.local.example). Restart Netlify Dev after changing the file.
+
+> Never commit `.env.local` or paste a key into a URL. The file is git-ignored.
+
+### 3. Start Angular and the Netlify Functions
+
+```bash
+NPM_CONFIG_USERCONFIG="$PWD/.npmrc" npx netlify dev \
+  --filter docs \
+  --command "yarn nx serve docs --excludeTaskDependencies --port=4200" \
+  --target-port 4200 \
+  --skip-wait-port \
+  --skip-gitignore
+```
+
+Wait for the Angular build to finish, then open the Netlify URL printed in the terminal, normally:
+
+```text
+http://localhost:8888
+```
+
+Do not open `http://localhost:4200` when testing the assistant. Port `4200` is the Angular server only; port `8888` proxies the site and the `/api/*` Netlify Functions together.
+
+Open the assistant from the floating button:
+
+- If `.env.local` contains a valid provider, the UI reports that the local provider is active and no browser key is required.
+- Without a local provider, enter a Gemini key in the UI for the current page session.
+- The key field accepts Gemini keys only. Groq and Anthropic-compatible providers are local server configuration options.
+
+## Run the docs without the assistant backend
+
+```bash
+yarn start:docs
+```
+
+This serves the Angular docs directly. The assistant UI may be visible, but `/api/chat` and `/api/mcp` are unavailable because Netlify Functions are not running.
+
+## Run the standalone Next.js chatbot
+
+The standalone prototype reads `apps/chatbot/.env.local` and serves its own chat and MCP routes.
+
+```bash
+yarn nx run mcp-server:extract-metadata
 cd apps/chatbot
 yarn install
-# create .env.local and set ONE provider key (see Configuration below)
-yarn dev                             # http://localhost:3000
+yarn dev
 ```
 
-Then ask e.g. _"How do I use fd-dialog?"_ — the answer is assembled from live MCP
-tool calls.
+Open `http://localhost:3000` and ask a question such as _"How do I use fd-dialog?"_
 
-> `.env.local` is read only at server startup. After editing it, restart `yarn dev`.
+From the repository root, `yarn start` starts both the Angular docs and this standalone chatbot. It requires the standalone dependencies, generated catalog, and `.env.local` to exist.
 
-## Configuration
+## Provider behavior
 
-Set these in `apps/chatbot/.env.local` (not committed). The provider is chosen by
-which key is present; if several are set the first in this order wins.
+| Where it runs            | Supported credential mode                                                                              |
+| ------------------------ | ------------------------------------------------------------------------------------------------------ |
+| Netlify Dev on localhost | Local `.env.local` provider (Gemini, Groq, or Anthropic-compatible), or a Gemini key entered in the UI |
+| Deployed Netlify site    | Gemini key entered in the UI                                                                           |
+| Standalone Next.js app   | Local `.env.local` provider                                                                            |
 
-| Variable                       | Required | Purpose                                                                                                                           |
-| ------------------------------ | -------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `GOOGLE_GENERATIVE_AI_API_KEY` | deploy   | Google Gemini (AI Studio) key — free, no credit card. **Recommended** deploy path. Highest priority.                              |
-| `GROQ_API_KEY`                 | fallback | Groq key (free, no credit card). Used when no Google key is set. Roomier models aside, its 8K TPM is tight for this bot.          |
-| `ANTHROPIC_BASE_URL`           | local    | Anthropic-compatible gateway, e.g. `http://localhost:6655/anthropic/v1` (SAP Hyperspace "Hai" proxy). Selects the Anthropic path. |
-| `ANTHROPIC_API_KEY`            | local    | Token for the gateway above, sent as `Authorization: Bearer …`. Required when `ANTHROPIC_BASE_URL` is set.                        |
-| `CHAT_MODEL`                   | no       | Model id override. Blank → `gemini-3.5-flash` (Google), `qwen/qwen3.8-27b` (Groq), or `claude-sonnet-4-5` (Anthropic).            |
-| `MCP_SERVER_URL`               | no       | MCP endpoint the chat route connects to. Blank → `http://localhost:3000/api/mcp` (this app's own route).                          |
+On a deployed Netlify site, the browser key is kept only in page memory and sent to the same-origin `/api/chat` function. It is not placed in the URL or local storage. The deployed function intentionally does not use `apps/chatbot/.env.local`.
 
-> **On `CHAT_MODEL` for Gemini:** leave it blank to use `gemini-3.5-flash`
-> (verified available and good at tool-calling). Avoid pinning the
-> `gemini-flash-latest` alias or the newest `gemini-3.8-flash` as a default — the
-> newest release is often capacity-throttled (503), and the AI SDK retries 503s
-> silently, which looks like a hang. Other known-good ids: `gemini-3.7-flash`,
-> `gemini-3.6-flash`, `gemini-3.5-flash-lite`.
+Provider selection for local environment variables uses this priority: Gemini, Groq, then Anthropic-compatible. If multiple providers are configured, the first one wins.
 
-## Deploy to Vercel (free)
+## Attachments
 
-- New Project → import this repo. **Root Directory:** `apps/chatbot` (Vercel checks
-  out the full repo, so `../../libs/mcp-server` resolves via `transpilePackages`).
-- **Framework preset:** Next.js (auto-detected).
-- **Environment variables:** set `GOOGLE_GENERATIVE_AI_API_KEY` (free key from
-  Google AI Studio, no card required) and
-  `MCP_SERVER_URL=https://<your-deployment>/api/mcp`. Leave `CHAT_MODEL` blank.
-  Do **not** point `ANTHROPIC_BASE_URL` at a `localhost` gateway — it isn't
-  reachable from Vercel's network.
-- The Vercel Hobby plan is free and needs no credit card; this app calls providers
-  directly and does not use the paid Vercel AI Gateway product.
-- First deploy: confirm `/api/mcp` returns the tool list and the chat answers a
-  live question.
+Each question can include up to three PNG, JPEG, WebP, GIF, or PDF files. A non-empty text question is still required. The combined decoded file limit is 256 KiB on deployed sites and 5 MiB only through trusted loopback Netlify Dev. The UI shows the active limit; the Function validates the files and limit again.
 
-> Free public inference tiers have rate limits and may use prompts for training.
-> Fine for a public component-library assistant; confirm with your team before
-> sending anything non-public.
+Attachments are kept only in the current page's memory. File data is sent in the current `/api/chat` request to the selected model provider, never to MCP tools, diagnostics, sources, URLs, or browser storage, and it is not resent with later questions. Gemini and the Anthropic-compatible local provider accept attachments. The local Groq provider rejects attachment requests before model or MCP work.
 
-## Swapping the model
+## Troubleshooting
 
-`lib/model.ts` is the only place that decides which endpoint is called. For a
-provider already supported, just set the env vars above — no code change. To add a
-new provider, extend `chatModel()` there (and `chatModelId()` for its default).
+### `/api/chat` returns 404
 
-## Testing
+Make sure Netlify Dev is running and open `http://localhost:8888`, not the Angular server on port `4200`.
+
+### The send button is disabled
+
+Enter a Gemini key in the assistant UI, or configure a valid provider in `apps/chatbot/.env.local` and restart Netlify Dev.
+
+An attachment cannot be sent by itself; enter a non-empty question. If files are rejected, confirm that there are no more than three, every file is a supported type, and their combined size is within the limit shown in the assistant.
+
+### Netlify reports `EALLOWSCRIPTS`
+
+Keep the `NPM_CONFIG_USERCONFIG="$PWD/.npmrc"` prefix in the Netlify command. It makes the plugin installation use this repository's npm configuration.
+
+### Browser console shows `rum_collection ... ERR_BLOCKED_BY_CLIENT`
+
+This is typically a browser privacy or ad-blocking extension blocking telemetry. It is unrelated to `/api/chat`.
+
+### Enable safe browser traces
+
+Append `?fdGuideDebug=1` to the docs URL, for example:
+
+```text
+http://localhost:8888/?fdGuideDebug=1
+```
+
+The console traces request timing, response status, and stream event counts. They do not print the API key or message content.
+
+## Tests
+
+From the repository root:
 
 ```bash
-cd apps/chatbot && yarn test
+yarn nx run docs-functions:test
+yarn nx run docs-functions:build
+yarn nx run docs:test
+yarn nx run mcp-server:test
 ```
 
-Covers the model layer (provider defaults and precedence, `CHAT_MODEL` override,
-blank/whitespace fallback, the built instance per path) and the
-`trimHistoryForBudget` history-trimming helper. An opt-in integration test in
-`app/api/chat/route.spec.ts` loads the real MCP tools when `MCP_SERVER_URL` is set;
-it's skipped by default.
+For the standalone Next.js chatbot:
+
+```bash
+cd apps/chatbot
+yarn test
+```

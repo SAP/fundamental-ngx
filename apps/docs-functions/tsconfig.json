@@ -1,0 +1,15 @@
+{
+    "extends": "../../tsconfig.base.json",
+    "compilerOptions": {
+        "target": "es2023",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "lib": ["dom", "es2023"],
+        "types": ["node"],
+        "resolveJsonModule": true,
+        "outDir": "../../dist/out-tsc",
+        "rootDir": "../../"
+    },
+    "include": ["src/**/*.ts"],
+    "exclude": ["tests/**/*.ts", "jest.config.ts"]
+}

@@ -1,5 +1,5 @@
 import type { UIMessage } from 'ai';
-import { loadMcpTools, trimHistoryForBudget } from './route';
+import { loadMcpTools, trimHistoryForBudget } from '../../../lib/chat-route-helpers';
 
 // Integration test: requires a live MCP endpoint. Opt in by setting MCP_SERVER_URL
 // (e.g. http://localhost:3000/api/mcp with `yarn dev` running). Skipped by default so

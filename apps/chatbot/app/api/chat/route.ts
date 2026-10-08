@@ -1,5 +1,5 @@
-import { createMCPClient } from '@ai-sdk/mcp';
 import { convertToModelMessages, stepCountIs, streamText, type UIMessage } from 'ai';
+import { loadMcpTools, trimHistoryForBudget } from '../../../lib/chat-route-helpers';
 import { corsHeaders, preflight } from '../../../lib/cors';
 import { FILE_CAPABLE_PROVIDERS, activeProvider, chatModel } from '../../../lib/model';
 
@@ -12,10 +12,6 @@ Angular component library. ALWAYS answer using the provided MCP tools
 compare_components, get_setup_guide, list_components) rather than prior knowledge,
 because the library changes frequently. Cite the component selector (e.g. fd-dialog)
 and show minimal, correct Angular usage. If a tool returns nothing, say so plainly.`;
-
-function mcpUrl(): string {
-    return process.env.MCP_SERVER_URL ?? 'http://localhost:3000/api/mcp';
-}
 
 /**
  * Tool-call logging gate — mirrors the MCP server's `MCP_LOG_TOOLS` switch so the
@@ -37,50 +33,9 @@ function logChat(message: string): void {
     }
 }
 
-/** How many trailing messages of the (text + file) history to keep per request. */
-const MAX_HISTORY_MESSAGES = 8;
-
-/**
- * Shrink the conversation before it goes to the model to keep each request small.
- *
- * `useChat` accumulates the full conversation client-side and resends it every
- * turn — including the MCP tool-call/tool-result parts, whose JSON (a single
- * `get_component_api` dump is thousands of tokens) is by far the bulk. We keep the
- * conversational thread the model actually needs for context — every user question,
- * the assistant's *text* answers, and any *file* parts the user attached — but drop
- * the raw tool parts from the history. If the model needs that data again it
- * re-calls the tool for the current turn (a fresh, small result). A sliding window
- * then bounds very long chats.
- *
- * File parts are kept because the client only sends them on the newest user message
- * (see chat.service.ts), so history stays cheap while the current turn's attachment
- * survives into the model request.
- *
- * This mattered most on Groq's 8K free-tier TPM cap (a single turn could blow past
- * it); it's a no-op cost on roomier providers like Gemini but kept as a cheap,
- * provider-agnostic safeguard.
- */
-export function trimHistoryForBudget(messages: UIMessage[]): UIMessage[] {
-    return messages
-        .map((m) => ({ ...m, parts: m.parts.filter((p) => p.type === 'text' || p.type === 'file') }))
-        .filter((m) => m.parts.length > 0)
-        .slice(-MAX_HISTORY_MESSAGES);
-}
-
-/** Opens an MCP client against the HTTP endpoint and returns its tool set + a closer. */
-export async function loadMcpTools(url = mcpUrl()): Promise<{
-    tools: Awaited<ReturnType<Awaited<ReturnType<typeof createMCPClient>>['tools']>>;
-    close: () => Promise<void>;
-}> {
-    const client = await createMCPClient({ transport: { type: 'http', url } });
-    const tools = await client.tools();
-    return { tools, close: () => client.close() };
-}
-
 export function OPTIONS(req: Request): Response {
     return preflight(req);
 }
-
 export async function POST(req: Request): Promise<Response> {
     const { messages }: { messages: UIMessage[] } = await req.json();
 
@@ -103,7 +58,7 @@ export async function POST(req: Request): Promise<Response> {
         }
     }
 
-    const endpoint = mcpUrl();
+    const endpoint = process.env.MCP_SERVER_URL ?? 'http://localhost:3000/api/mcp';
     const { tools, close } = await loadMcpTools(endpoint);
     logChat(`[api/chat] MCP endpoint ${endpoint} → loaded tools: ${Object.keys(tools).join(', ') || '(none)'}`);
 

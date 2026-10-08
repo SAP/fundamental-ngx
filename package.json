@@ -1,6 +1,9 @@
 {
     "name": "fundamental-ngx",
     "private": true,
+    "workspaces": [
+        "apps/chatbot"
+    ],
     "license": "Apache-2.0",
     "main": "dist/libs/core/index.js",
     "description": "The official SAP Angular library for UI5 Web Components and Fiori design system. 1000+ components for Angular 22+.",
@@ -58,6 +61,10 @@
         "registry": "https://repository.hybris.com/api/npm/npm-repository/"
     },
     "dependencies": {
+        "@ai-sdk/anthropic": "^4.0.72",
+        "@ai-sdk/google": "^4.0.0",
+        "@ai-sdk/groq": "^4.0.57",
+        "@ai-sdk/mcp": "^2.0.67",
         "@angular/cdk": "22.2.1",
         "@angular/common": "22.2.1",
         "@angular/compiler": "22.2.1",
@@ -81,6 +88,7 @@
         "@ui5/webcomponents-icons-tnt": "~2.27.0",
         "@ui5/webcomponents-theming": "~2.27.0",
         "@ui5/webcomponents-tools": "~2.27.0",
+        "ai": "^7.0.128",
         "compare-versions": "6.1.0",
         "dayjs": "1.11.11",
         "fast-equals": "^6.0.0",

@@ -43,12 +43,14 @@
         "test": {
             "executor": "@nx/jest:jest",
             "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "dependsOn": ["extract-metadata"],
             "options": {
                 "jestConfig": "libs/mcp-server/jest.config.ts"
             }
         },
         "extract-metadata": {
             "executor": "nx:run-commands",
+            "outputs": ["{projectRoot}/src/data/components.json"],
             "options": {
                 "command": "npx tsx libs/mcp-server/src/extractors/build-metadata.ts",
                 "cwd": "{workspaceRoot}"

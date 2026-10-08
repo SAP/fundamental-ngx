@@ -1,5 +1,5 @@
-<!-- Floating Action Button for opening the chat window -->
 <button
+    #chatToggle
     class="fd-guide-fab"
     fd-button
     glyph="ai"
@@ -9,7 +9,7 @@
     (click)="toggleChat()"
     [attr.aria-expanded]="isOpen()"
 ></button>
-<!-- Chat Window -->
+
 @if (isOpen()) {
     <div
         class="fd-guide-chat"
@@ -18,15 +18,29 @@
         aria-label="Fundamental Guide Chat"
         aria-modal="false"
     >
-        <!-- Header -->
         <header class="fd-guide-chat__header">
             <div class="fd-guide-chat__header-icon">
                 <fd-icon glyph="ai"></fd-icon>
             </div>
             <div class="fd-guide-chat__header-text">
                 <h2>Fundamental Guide</h2>
-                <p>Grounded in NGX v0.65 & Fiori Horizon</p>
+                @if (catalogVersion(); as version) {
+                    <p>Grounded in NGX {{ version }} &amp; Fiori Horizon</p>
+                } @else {
+                    <p>Grounded in Fundamental NGX &amp; Fiori Horizon</p>
+                }
             </div>
+
+            <button
+                class="fd-guide-chat__header-button"
+                fdType="transparent"
+                fd-button
+                glyph="action-settings"
+                [attr.aria-pressed]="isApiKeyEditorOpen()"
+                [ariaLabel]="isApiKeyEditorOpen() ? 'Hide Gemini API key settings' : 'Configure Gemini API key'"
+                [title]="isApiKeyEditorOpen() ? 'Hide Gemini API key settings' : 'Configure Gemini API key'"
+                (click)="toggleApiKeyEditor()"
+            ></button>
 
             <button
                 class="fd-guide-chat__header-button"
@@ -49,18 +63,17 @@
             ></button>
         </header>
 
-        <!-- Messages Container -->
         <div
             #messagesContainer
             class="fd-guide-chat__messages"
             [class.fd-guide-chat__messages--loading]="isBusy()"
+            [attr.aria-busy]="isBusy()"
             role="log"
             aria-live="polite"
             aria-atomic="false"
         >
             @if (messages().length === 0) {
                 <div class="fd-guide-chat__message-group">
-                    <!-- Welcome message -->
                     <div class="fd-guide-chat__message fd-guide-chat__message--assistant">
                         <div class="fd-guide-chat__message-avatar" aria-hidden="true">FD</div>
                         <div class="fd-guide-chat__message-content">
@@ -87,23 +100,38 @@
                             >
                                 @if (message.role === 'assistant') {
                                     @if (!message.content && isBusy()) {
-                                        <div class="fd-guide-chat__thinking-dots">
+                                        <div class="fd-guide-chat__thinking-dots" aria-hidden="true">
                                             <span></span>
                                             <span></span>
                                             <span></span>
                                         </div>
+                                    } @else if (message.renderedHtml !== null) {
+                                        <div class="fd-guide-chat__markdown" [innerHTML]="message.renderedHtml"></div>
                                     } @else {
-                                        <markdown [data]="message.content" class="fd-guide-chat__markdown"></markdown>
+                                        <p class="fd-guide-chat__stream-text">{{ message.content }}</p>
+                                    }
+                                    @if (message.sources.length) {
+                                        <nav class="fd-guide-chat__sources" aria-label="Answer sources">
+                                            <span>Sources:</span>
+                                            @for (source of message.sources; track source.selector + source.docsUrl) {
+                                                <a
+                                                    [href]="source.docsUrl"
+                                                    [attr.target]="isExternalSource(source) ? '_blank' : null"
+                                                    [attr.rel]="isExternalSource(source) ? 'noopener noreferrer' : null"
+                                                    >{{ source.selector }}</a
+                                                >
+                                            }
+                                        </nav>
                                     }
                                 } @else {
-                                    @if (message.attachments?.length) {
+                                    @if (message.attachments.length) {
                                         <ul class="fd-guide-chat__bubble-attachments" aria-label="Attached files">
-                                            @for (attachment of message.attachments; track attachment.url) {
+                                            @for (attachment of message.attachments; track attachment.dataUrl) {
                                                 <li class="fd-guide-chat__bubble-attachment">
                                                     @if (attachment.mediaType.startsWith('image/')) {
                                                         <img
                                                             class="fd-guide-chat__bubble-thumb"
-                                                            [src]="attachment.url"
+                                                            [src]="attachment.dataUrl"
                                                             [alt]="attachment.name"
                                                         />
                                                     } @else {
@@ -116,9 +144,7 @@
                                             }
                                         </ul>
                                     }
-                                    @if (message.content) {
-                                        <p>{{ message.content }}</p>
-                                    }
+                                    <p>{{ message.content }}</p>
                                 }
                             </div>
                         </div>
@@ -134,20 +160,59 @@
                     </div>
                 </div>
             }
+            <p class="fd-guide-sr-only" role="status">{{ statusMessage() }}</p>
         </div>
 
-        <!-- Input Area -->
         <form class="fd-guide-chat__input-form" (submit)="sendMessage(); $event.preventDefault()">
+            @if (isApiKeyEditorOpen()) {
+                <div class="fd-guide-chat__key-wrapper">
+                    <label for="fd-guide-api-key" class="fd-guide-sr-only">Gemini API key</label>
+                    <input
+                        id="fd-guide-api-key"
+                        name="apiKey"
+                        class="fd-guide-chat__input fd-guide-chat__api-key"
+                        type="password"
+                        autocomplete="off"
+                        aria-label="Gemini API key"
+                        placeholder="Gemini API key"
+                        [value]="apiKey()"
+                        (input)="apiKey.set($any($event.target).value)"
+                    />
+                    <button
+                        type="button"
+                        class="fd-guide-chat__clear-key-btn"
+                        fdType="transparent"
+                        fd-button
+                        ariaLabel="Clear API key"
+                        title="Clear API key"
+                        (click)="clearApiKey()"
+                    >
+                        Clear
+                    </button>
+                </div>
+                <p class="fd-guide-chat__key-notice">
+                    @if (localProviderAvailable()) {
+                        The local server provider is active. A Gemini key entered here overrides it for this page.
+                    } @else {
+                        Your key stays in this page's memory and is sent through this site's Function to Google.
+                    }
+                </p>
+            } @else if (localProviderAvailable()) {
+                <p class="fd-guide-chat__key-notice">Using the local server provider configuration.</p>
+            }
             <label for="fd-guide-input" class="fd-guide-sr-only">
                 Ask about Fundamental NGX components, APIs, or examples...
             </label>
-
-            @if (attachments().length > 0) {
-                <ul class="fd-guide-chat__attachments" aria-label="Attached files">
-                    @for (attachment of attachments(); track attachment.url) {
+            <p id="fd-guide-attachment-limit" class="fd-guide-chat__attachment-hint">
+                Attach up to 3 PNG, JPEG, WebP, GIF, or PDF files ({{ attachmentLimitLabel() }} total). A question is
+                required.
+            </p>
+            @if (attachments().length) {
+                <ul class="fd-guide-chat__attachments" aria-label="Files attached to the next message">
+                    @for (attachment of attachments(); track attachment.id) {
                         <li class="fd-guide-chat__attachment-chip">
                             @if (attachment.mediaType.startsWith('image/')) {
-                                <img class="fd-guide-chat__attachment-thumb" [src]="attachment.url" alt="" />
+                                <img class="fd-guide-chat__attachment-thumb" [src]="attachment.previewUrl" alt="" />
                             } @else {
                                 <fd-icon class="fd-guide-chat__attachment-icon" glyph="pdf-attachment"></fd-icon>
                             }
@@ -162,21 +227,18 @@
                                 glyph="decline"
                                 [ariaLabel]="'Remove ' + attachment.name"
                                 [title]="'Remove ' + attachment.name"
-                                (click)="removeAttachment(attachment.url)"
+                                (click)="removeAttachment(attachment.id)"
                             ></button>
                         </li>
                     }
                 </ul>
             }
-
             @if (attachmentError()) {
                 <p class="fd-guide-chat__attachment-error" role="alert">{{ attachmentError() }}</p>
             }
-
             @if (speechError()) {
                 <p class="fd-guide-chat__attachment-error" role="alert">{{ speechError() }}</p>
             }
-
             <div class="fd-guide-chat__input-wrapper">
                 <div class="fd-guide-chat__input-wrapper-controls">
                     <button
@@ -200,8 +262,9 @@
                         fd-button
                         glyph="attachment"
                         [ariaLabel]="'Attach files (' + attachShortcut + ')'"
-                        [title]="'Attach files (' + attachShortcut + ')'"
-                        [disabled]="isBusy()"
+                        [title]="'Attach PNG, JPEG, WebP, GIF, or PDF files (' + attachShortcut + ')'"
+                        aria-describedby="fd-guide-attachment-limit"
+                        [disabled]="isBusy() || attachments().length >= 3"
                         (click)="openFilePicker()"
                     ></button>
                     <input
@@ -212,6 +275,7 @@
                         multiple
                         tabindex="-1"
                         aria-hidden="true"
+                        [disabled]="isBusy()"
                         (change)="onFilesSelected($event)"
                     />
                 </div>
@@ -223,21 +287,34 @@
                     placeholder="Ask about Fundamental NGX components, APIs, or examples..."
                     rows="1"
                     aria-label="Message input"
-                    [(ngModel)]="userInput"
-                    [disabled]="isBusy()"
+                    [value]="userInput()"
+                    (input)="onTextareaInput($event)"
                     (keydown.enter)="onEnterKey($event)"
-                    (input)="onTextareaInput()"
                 ></textarea>
-                <button
-                    type="submit"
-                    class="fd-guide-chat__send-btn"
-                    fdType="emphasized"
-                    fd-button
-                    glyph="paper-plane"
-                    ariaLabel="Send message"
-                    title="Send message"
-                    [disabled]="isBusy() || (!userInput.trim() && attachments().length === 0)"
-                ></button>
+                @if (isBusy()) {
+                    <button
+                        type="button"
+                        class="fd-guide-chat__stop-btn"
+                        fdType="emphasized"
+                        fd-button
+                        ariaLabel="Stop generating"
+                        title="Stop generating"
+                        (click)="stopGenerating()"
+                    >
+                        Stop
+                    </button>
+                } @else {
+                    <button
+                        type="submit"
+                        class="fd-guide-chat__send-btn"
+                        fdType="emphasized"
+                        fd-button
+                        glyph="paper-plane"
+                        ariaLabel="Send message"
+                        title="Send message"
+                        [disabled]="!canSend()"
+                    ></button>
+                }
             </div>
         </form>
     </div>

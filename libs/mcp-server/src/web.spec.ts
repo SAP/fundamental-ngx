@@ -40,4 +40,14 @@ describe('createMcpFetchHandler', () => {
         expect(names).toContain('search_components');
         expect(names).toContain('get_usage_guide');
     });
+
+    it('does not expose the full component-catalog resource over HTTP', async () => {
+        const handler = createMcpFetchHandler();
+        const res = await handler(jsonRpcRequest({ jsonrpc: '2.0', id: 2, method: 'resources/list', params: {} }));
+
+        expect(res.status).toBe(200);
+        const payload = (await res.json()) as { result?: { resources?: Array<{ name: string }> } };
+        const resourceNames = payload.result?.resources?.map((resource) => resource.name) ?? [];
+        expect(resourceNames).not.toContain('component-catalog');
+    });
 });

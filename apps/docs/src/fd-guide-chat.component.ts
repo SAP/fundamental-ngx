@@ -1,21 +1,43 @@
-import { CommonModule } from '@angular/common';
-import { Component, DestroyRef, ElementRef, Signal, computed, effect, inject, signal, viewChild } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    DestroyRef,
+    ElementRef,
+    afterRenderEffect,
+    computed,
+    effect,
+    inject,
+    signal,
+    viewChild
+} from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { IconComponent } from '@fundamental-ngx/core/icon';
-import { MarkdownComponent } from 'ngx-markdown';
-import { provideChatMarkdown } from './services/chat-markdown.config';
-import { Attachment, ChatMessage, ChatService, ChatStatus } from './services/chat.service';
+import { isAllowedChatUrl, renderChatMarkdown } from './fd-guide-chat-markdown';
+import { ChatEvent, ChatSource } from './fd-guide-chat-stream';
+import {
+    CHAT_ATTACHMENT_MEDIA_TYPES,
+    ChatAttachment,
+    ChatAttachmentMediaType,
+    DEPLOYED_ATTACHMENT_LIMIT_BYTES,
+    FdGuideChatService,
+    LOCAL_ATTACHMENT_LIMIT_BYTES
+} from './fd-guide-chat.service';
 
-// Web Speech API types
+const MAXIMUM_CHAT_ATTACHMENTS = 3;
+const IS_APPLE_PLATFORM = typeof navigator !== 'undefined' && /Mac|iPhone|iPad|iPod/i.test(navigator.platform);
+
+type ChatStatus = 'idle' | 'submitted' | 'streaming' | 'error';
+type SpeechStatus = 'idle' | 'listening' | 'processing' | 'error';
+
 interface SpeechRecognition extends EventTarget {
     continuous: boolean;
     interimResults: boolean;
     lang: string;
-    onstart: ((this: SpeechRecognition, ev: Event) => void) | null;
-    onend: ((this: SpeechRecognition, ev: Event) => void) | null;
-    onerror: ((this: SpeechRecognition, ev: SpeechRecognitionErrorEvent) => void) | null;
-    onresult: ((this: SpeechRecognition, ev: SpeechRecognitionEvent) => void) | null;
+    onstart: (() => void) | null;
+    onend: (() => void) | null;
+    onerror: ((event: SpeechRecognitionErrorEvent) => void) | null;
+    onresult: ((event: SpeechRecognitionEvent) => void) | null;
     start(): void;
     stop(): void;
     abort(): void;
@@ -26,26 +48,21 @@ interface SpeechRecognitionErrorEvent extends Event {
 }
 
 interface SpeechRecognitionEvent extends Event {
-    resultIndex: number;
     results: SpeechRecognitionResultList;
 }
 
 interface SpeechRecognitionResultList {
     [index: number]: SpeechRecognitionResult;
-    length: number;
-    item(index: number): SpeechRecognitionResult;
+    readonly length: number;
 }
 
 interface SpeechRecognitionResult {
     [index: number]: SpeechRecognitionAlternative;
-    isFinal: boolean;
-    length: number;
-    item(index: number): SpeechRecognitionAlternative;
+    readonly isFinal: boolean;
 }
 
 interface SpeechRecognitionAlternative {
-    transcript: string;
-    confidence: number;
+    readonly transcript: string;
 }
 
 interface WindowWithSpeechRecognition extends Window {
@@ -53,30 +70,40 @@ interface WindowWithSpeechRecognition extends Window {
     webkitSpeechRecognition?: new () => SpeechRecognition;
 }
 
-/** MIME types the attachment picker accepts — images and PDF (vision-capable providers). */
-const ALLOWED_FILE_TYPES = ['image/png', 'image/jpeg', 'image/webp', 'image/gif', 'application/pdf'];
-/** Per-file size ceiling. Base64 inflates ~33%, so this keeps payloads well within model limits. */
-const MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024;
-/** Max files per message. */
-const MAX_FILES = 3;
-const IS_MAC = /Mac|iPhone|iPad|iPod/i.test(navigator.platform);
+interface ChatMessage {
+    id: string;
+    role: 'user' | 'assistant';
+    content: string;
+    renderedHtml: string | null;
+    sources: ChatSource[];
+    attachments: ChatAttachment[];
+}
+
+interface StagedChatAttachment {
+    id: number;
+    name: string;
+    mediaType: ChatAttachmentMediaType;
+    dataUrl: string | null;
+    previewUrl: string;
+    size: number;
+}
+
+const TRANSPARENT_IMAGE_PREVIEW = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
 
 @Component({
     selector: 'fd-guide-chat',
-    imports: [CommonModule, FormsModule, IconComponent, ButtonComponent, MarkdownComponent],
-    providers: [provideChatMarkdown()],
+    imports: [IconComponent, ButtonComponent],
     templateUrl: './fd-guide-chat.component.html',
     styleUrls: ['./fd-guide-chat.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
+        '(click)': 'handleMessagesClick($event)',
         '(document:keydown.escape)': 'onEscapeKey()',
         '(document:keydown.space)': 'onSpaceKey($event)',
-        // Mic: Ctrl+Shift+M (Win/Linux) or ⌘+Shift+M (Mac)
         '(document:keydown.ctrl.shift.m)': 'onMicShortcut($event)',
         '(document:keydown.meta.shift.m)': 'onMicShortcut($event)',
-        // Attach: ⌘+Shift+A (Mac) or Ctrl+Shift+U (Win/Linux — Ctrl+Shift+A opens tab search in Chrome on Windows)
         '(document:keydown.meta.shift.a)': 'onAttachShortcut($event)',
         '(document:keydown.ctrl.shift.u)': 'onAttachShortcut($event)',
-        // Chat toggle: Ctrl+Shift+G (Win/Linux) or ⌘B (Mac)
         '(document:keydown.ctrl.shift.g)': 'onToggleChatShortcut($event)',
         '(document:keydown.meta.b)': 'onToggleChatShortcut($event)'
     }
@@ -84,40 +111,34 @@ const IS_MAC = /Mac|iPhone|iPad|iPod/i.test(navigator.platform);
 export class FdGuideChatComponent {
     readonly isOpen = signal(false);
     readonly isExpanded = signal(false);
-    userInput = ''; // Regular property for ngModel
-
-    readonly chatToggleShortcut = IS_MAC ? '⌘B' : 'Ctrl+Shift+G';
-    readonly micShortcut = IS_MAC ? '⌘+Shift+M' : 'Ctrl+Shift+M';
-    readonly attachShortcut = IS_MAC ? '⌘+Shift+A' : 'Ctrl+Shift+U';
-
-    /** Files staged for the next message, shown as removable chips above the input. */
-    readonly attachments = signal<Attachment[]>([]);
-    /** Validation message for rejected files (wrong type / too big / too many). */
+    readonly isApiKeyEditorOpen = signal(true);
+    readonly userInput = signal('');
+    readonly apiKey = signal('');
+    readonly localProviderAvailable = signal(false);
+    readonly attachments = signal<StagedChatAttachment[]>([]);
     readonly attachmentError = signal<string | null>(null);
-
-    /** Speech recognition state: 'idle' | 'listening' | 'processing' | 'error' */
-    readonly speechStatus = signal<'idle' | 'listening' | 'processing' | 'error'>('idle');
-    /** Error message for speech recognition. */
+    readonly attachmentLimitBytes = signal(DEPLOYED_ATTACHMENT_LIMIT_BYTES);
+    readonly speechStatus = signal<SpeechStatus>('idle');
     readonly speechError = signal<string | null>(null);
-    /** True while the browser is reading the assistant response aloud. */
     readonly isSpeaking = signal(false);
-    /** True while TTS is paused (Space to resume, ESC to cancel). */
     readonly isSpeechPaused = signal(false);
-
-    readonly messages: Signal<ChatMessage[]>;
-    readonly status: Signal<ChatStatus>;
-    readonly error: Signal<string | null>;
-
-    readonly isBusy = computed(() => {
-        const currentStatus = this.status();
-        return currentStatus === 'submitted' || currentStatus === 'streaming';
-    });
-
+    readonly messages = signal<ChatMessage[]>([]);
+    readonly status = signal<ChatStatus>('idle');
+    readonly error = signal<string | null>(null);
+    readonly catalogVersion = signal<string | null>(null);
+    readonly statusMessage = signal('Chat ready.');
+    readonly attachmentLimitLabel = computed(() => formatAttachmentLimit(this.attachmentLimitBytes()));
+    readonly isBusy = computed(() => this.status() === 'submitted' || this.status() === 'streaming');
+    readonly chatToggleShortcut = IS_APPLE_PLATFORM ? '⌘B' : 'Ctrl+Shift+G';
+    readonly micShortcut = IS_APPLE_PLATFORM ? '⌘+Shift+M' : 'Ctrl+Shift+M';
+    readonly attachShortcut = IS_APPLE_PLATFORM ? '⌘+Shift+A' : 'Ctrl+Shift+U';
     readonly isSpeechRecognitionSupported = computed(() => {
-        const win = window as WindowWithSpeechRecognition;
-        return !!(win.SpeechRecognition || win.webkitSpeechRecognition);
+        if (typeof window === 'undefined') {
+            return false;
+        }
+        const speechWindow = window as WindowWithSpeechRecognition;
+        return Boolean(speechWindow.SpeechRecognition || speechWindow.webkitSpeechRecognition);
     });
-
     readonly speechButtonLabel = computed(() => {
         if (this.isSpeechPaused()) {
             return 'AI speech paused — Space to resume, Esc to cancel';
@@ -132,284 +153,211 @@ export class FdGuideChatComponent {
             ? `Start voice input (${this.micShortcut})`
             : 'Voice input not supported';
     });
+    readonly speechButtonGlyph = computed(() =>
+        this.speechStatus() === 'listening' || this.isSpeaking() || this.isSpeechPaused() ? 'stop' : 'microphone'
+    );
+    readonly canSend = computed(
+        () =>
+            Boolean(this.userInput().trim() && (this.apiKey().trim() || this.localProviderAvailable())) &&
+            this.attachments().every((attachment) => attachment.dataUrl !== null) &&
+            !this.isBusy()
+    );
 
-    readonly speechButtonGlyph = computed(() => {
-        if (this.speechStatus() === 'listening' || this.isSpeaking() || this.isSpeechPaused()) {
-            return 'stop';
-        }
-        return 'microphone';
-    });
-
-    private readonly chatService = inject(ChatService);
-    private readonly destroyRef = inject(DestroyRef);
-    private readonly messagesContainer = viewChild<ElementRef<HTMLDivElement>>('messagesContainer');
-    private readonly fileInput = viewChild<ElementRef<HTMLInputElement>>('fileInput');
-    private readonly chatInput = viewChild<ElementRef<HTMLTextAreaElement>>('chatInput');
-    /** Speech recognition instance (lazy-initialized). */
-    private recognition: SpeechRecognition | null = null;
-    private readonly pendingTimeouts: ReturnType<typeof setTimeout>[] = [];
-    private lastInputWasVoice = false;
-    private speechResponsePending = false;
-    private lastSpokenLength = 0;
+    private readonly _chatService = inject(FdGuideChatService);
+    private readonly _destroyRef = inject(DestroyRef);
+    private readonly _sanitizer = inject(DomSanitizer);
+    private readonly _chatToggle = viewChild(ButtonComponent);
+    private readonly _messagesContainer = viewChild<ElementRef<HTMLDivElement>>('messagesContainer');
+    private readonly _fileInput = viewChild<ElementRef<HTMLInputElement>>('fileInput');
+    private readonly _chatInput = viewChild<ElementRef<HTMLTextAreaElement>>('chatInput');
+    private readonly _fileReaders = new Set<FileReader>();
+    private readonly _pendingTimeouts = new Set<number>();
+    private _activeAssistantId: string | null = null;
+    private _attachmentSequence = 0;
+    private _messageSequence = 0;
+    private _requestSequence = 0;
+    private _destroyed = false;
+    private _shouldFocusInput = false;
+    private _recognition: SpeechRecognition | null = null;
+    private _lastInputWasVoice = false;
+    private _speechResponsePending = false;
+    private _lastSpokenLength = 0;
 
     constructor() {
-        this.messages = this.chatService.messages;
-        this.status = this.chatService.status;
-        this.error = this.chatService.error;
-        // Auto-scroll to bottom when new messages arrive
-        effect(() => {
-            const msgs = this.messages();
-            if (msgs.length > 0) {
-                this.scrollToBottom();
+        afterRenderEffect({
+            mixedReadWrite: () => {
+                this.messages();
+                this.status();
+                this.isOpen();
+                const container = this._messagesContainer()?.nativeElement;
+                if (container) {
+                    container.scrollTop = container.scrollHeight;
+                }
+                if (this._shouldFocusInput && this.isOpen()) {
+                    this._shouldFocusInput = false;
+                    this._chatInput()?.nativeElement.focus();
+                }
             }
         });
-
-        // Speak assistant response in real time as it streams in
         effect(() => {
-            const s = this.status();
-            const msgs = this.messages();
-
-            if (!this.speechResponsePending) {
+            const status = this.status();
+            const messages = this.messages();
+            if (!this._speechResponsePending) {
                 return;
             }
 
-            const lastAssistant = [...msgs].reverse().find((m) => m.role === 'assistant');
-            if (!lastAssistant?.content) {
+            const assistant = messages.findLast((message) => message.role === 'assistant');
+            if (!assistant?.content) {
                 return;
             }
 
-            const unspoken = lastAssistant.content.slice(this.lastSpokenLength);
-
-            if (s === 'streaming') {
-                // Find the last sentence boundary so we speak complete sentences
-                let lastBoundary = -1;
-                for (const ch of ['.', '!', '?', '\n']) {
-                    const idx = unspoken.lastIndexOf(ch);
-                    if (idx > lastBoundary) {
-                        lastBoundary = idx;
+            const unspoken = assistant.content.slice(this._lastSpokenLength);
+            if (status === 'streaming') {
+                const boundary = lastSentenceBoundary(unspoken);
+                if (boundary >= 0) {
+                    const chunk = stripMarkdownForSpeech(unspoken.slice(0, boundary + 1));
+                    if (chunk) {
+                        this._queueSpeech(chunk);
                     }
+                    this._lastSpokenLength += boundary + 1;
                 }
-                if (lastBoundary >= 0) {
-                    const chunk = this.stripMarkdown(unspoken.slice(0, lastBoundary + 1));
-                    if (chunk.trim()) {
-                        this.queueSpeech(chunk);
-                    }
-                    this.lastSpokenLength += lastBoundary + 1;
+            } else if (status === 'idle') {
+                this._speechResponsePending = false;
+                const remaining = stripMarkdownForSpeech(unspoken);
+                if (remaining) {
+                    this._queueSpeech(remaining);
                 }
-            } else if (s === 'idle') {
-                // Streaming finished — speak whatever remains
-                this.speechResponsePending = false;
-                const remaining = this.stripMarkdown(unspoken);
-                if (remaining.trim()) {
-                    this.queueSpeech(remaining);
-                }
-                this.lastSpokenLength = 0;
+                this._lastSpokenLength = 0;
             }
         });
-
-        // Set up event delegation for copy buttons using effect
-        effect(() => {
-            const container = this.messagesContainer()?.nativeElement;
-            if (container) {
-                const handleClick = (event: Event): void => {
-                    const target = event.target as HTMLElement;
-                    const button = target.closest('.code-block-copy') as HTMLButtonElement;
-
-                    if (!button) {
-                        return;
-                    }
-
-                    const base64Code = button.getAttribute('data-code');
-                    if (!base64Code) {
-                        return;
-                    }
-
-                    // Decode base64
-                    let decodedCode: string;
-                    try {
-                        decodedCode = decodeURIComponent(escape(atob(base64Code)));
-                    } catch (e) {
-                        console.error('Failed to decode code:', e);
-                        return;
-                    }
-
-                    // Copy to clipboard
-                    navigator.clipboard
-                        .writeText(decodedCode)
-                        .then(() => {
-                            // Show success feedback
-                            const originalText = button.innerHTML;
-                            button.innerHTML = `
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-                                </svg>
-                                Copied!
-                            `;
-                            button.classList.add('code-block-copy--success');
-
-                            // Reset after 2 seconds
-                            setTimeout(() => {
-                                button.innerHTML = originalText;
-                                button.classList.remove('code-block-copy--success');
-                            }, 2000);
-                        })
-                        .catch((err) => {
-                            console.error('Failed to copy code:', err);
-                        });
-                };
-
-                container.addEventListener('click', handleClick);
-
-                // Cleanup function
-                return () => {
-                    container.removeEventListener('click', handleClick);
-                };
-            }
-            return;
-        });
-
-        this.destroyRef.onDestroy(() => {
-            this.recognition?.abort();
+        this._destroyRef.onDestroy(() => {
+            this._destroyed = true;
+            this.attachments.set([]);
+            this._fileReaders.forEach((reader) => reader.abort());
+            this._fileReaders.clear();
+            this._recognition?.abort();
             window.speechSynthesis?.cancel();
-            for (const id of this.pendingTimeouts) {
-                clearTimeout(id);
-            }
+            this._pendingTimeouts.forEach((timeoutId) => window.clearTimeout(timeoutId));
+            this._pendingTimeouts.clear();
+            this._chatService.stop();
         });
+        void this._detectCapabilities();
     }
 
     toggleChat(): void {
-        this.isOpen.update((v) => !v);
-        if (!this.isOpen()) {
-            this.isExpanded.set(false);
+        if (this.isOpen()) {
+            this.closeChat();
         } else {
-            setTimeout(() => this.chatInput()?.nativeElement.focus(), 0);
+            this._shouldFocusInput = true;
+            this.isOpen.set(true);
         }
     }
 
     toggleExpand(): void {
-        this.isExpanded.update((v) => !v);
+        this.isExpanded.update((expanded) => !expanded);
+    }
+
+    toggleApiKeyEditor(): void {
+        this.isApiKeyEditorOpen.update((isOpen) => !isOpen);
     }
 
     closeChat(): void {
+        this._stopActiveRequest('Generation stopped.');
+        this._stopSpeechRecognition();
+        this.stopSpeaking();
         this.isOpen.set(false);
         this.isExpanded.set(false);
-        this.attachmentError.set(null);
+        this._chatToggle()?.elementRef.nativeElement.focus();
     }
 
     async sendMessage(): Promise<void> {
-        const input = this.userInput.trim();
-        const attachments = this.attachments();
-        if ((!input && attachments.length === 0) || this.isBusy()) {
+        const question = this.userInput().trim();
+        const key = this.apiKey().trim();
+        if (!question || (!key && !this.localProviderAvailable()) || this.isBusy()) {
             return;
         }
-
-        // Capture voice intent before resetting state
-        this.speechResponsePending = this.lastInputWasVoice;
-        this.lastInputWasVoice = false;
-        this.lastSpokenLength = 0;
-
-        // Auto-stop recognition if still active
-        const s = this.speechStatus();
-        if (s === 'listening' || s === 'processing') {
-            this.stopSpeechRecognition();
+        const attachments = this._validatedAttachmentsForSend();
+        if (!attachments) {
+            return;
+        }
+        this._speechResponsePending = this._lastInputWasVoice;
+        this._lastInputWasVoice = false;
+        this._lastSpokenLength = 0;
+        if (this.speechStatus() === 'listening' || this.speechStatus() === 'processing') {
+            this._stopSpeechRecognition();
         }
 
-        // Clear input + staged files immediately for better UX
-        this.userInput = '';
+        const requestSequence = ++this._requestSequence;
+        const assistantId = this._nextMessageId();
+        this._activeAssistantId = assistantId;
+        this.isApiKeyEditorOpen.set(false);
+        this.userInput.set('');
         this.attachments.set([]);
         this.attachmentError.set(null);
+        this.error.set(null);
+        this.status.set('submitted');
+        this.statusMessage.set('Searching the component docs…');
+        this.messages.update((messages) => [
+            ...messages,
+            {
+                id: this._nextMessageId(),
+                role: 'user',
+                content: question,
+                renderedHtml: null,
+                sources: [],
+                attachments
+            },
+            { id: assistantId, role: 'assistant', content: '', renderedHtml: null, sources: [], attachments: [] }
+        ]);
 
-        // Send the message
-        await this.chatService.sendMessage(input, attachments);
-    }
-
-    /** Open the native file picker (triggered by the paper-clip button). */
-    openFilePicker(): void {
-        this.attachmentError.set(null);
-        this.fileInput()?.nativeElement.click();
-    }
-
-    /** Validate the chosen files and stage the accepted ones as data-URL attachments. */
-    async onFilesSelected(event: Event): Promise<void> {
-        const target = event.target as HTMLInputElement;
-        const files = target.files ? Array.from(target.files) : [];
-        // Reset the input so selecting the same file again still fires `change`.
-        target.value = '';
-        if (files.length === 0) {
-            return;
-        }
-
-        this.attachmentError.set(null);
-        const errors: string[] = [];
-        const accepted: Attachment[] = [];
-
-        for (const file of files) {
-            if (this.attachments().length + accepted.length >= MAX_FILES) {
-                errors.push(`You can attach at most ${MAX_FILES} files.`);
-                break;
+        try {
+            const onEvent = (event: ChatEvent): void => this._handleEvent(event, assistantId, requestSequence);
+            if (attachments.length) {
+                await this._chatService.send(question, key, onEvent, attachments);
+            } else {
+                await this._chatService.send(question, key, onEvent);
             }
-            if (!ALLOWED_FILE_TYPES.includes(file.type)) {
-                errors.push(`"${file.name}" is not a supported type (images or PDF only).`);
-                continue;
+        } catch {
+            if (requestSequence === this._requestSequence) {
+                this._speechResponsePending = false;
+                this._lastSpokenLength = 0;
+                this.error.set('The assistant could not complete this request. Please try again.');
+                this.status.set('error');
+                this.statusMessage.set('The assistant could not complete this request.');
             }
-            if (file.size > MAX_FILE_SIZE_BYTES) {
-                errors.push(`"${file.name}" is larger than ${MAX_FILE_SIZE_BYTES / (1024 * 1024)} MB.`);
-                continue;
-            }
-            try {
-                const url = await this.readAsDataUrl(file);
-                accepted.push({ name: file.name, mediaType: file.type, url });
-            } catch {
-                errors.push(`"${file.name}" could not be read.`);
+        } finally {
+            if (requestSequence === this._requestSequence && this.isBusy()) {
+                this.status.set('idle');
+                this.statusMessage.set('Chat ready.');
             }
         }
-
-        if (accepted.length > 0) {
-            this.attachments.update((list) => [...list, ...accepted]);
-        }
-        if (errors.length > 0) {
-            this.attachmentError.set(errors.join(' '));
-        }
-    }
-
-    /** Remove a staged attachment by its data URL. */
-    removeAttachment(url: string): void {
-        this.attachments.update((list) => list.filter((attachment) => attachment.url !== url));
-        // Removing a file resolves "too many files" (and clears any stale notice).
-        this.attachmentError.set(null);
     }
 
     onEnterKey(event: Event): void {
-        const keyboardEvent = event as KeyboardEvent;
-        // Allow Shift+Enter for new lines
-        if (keyboardEvent.shiftKey) {
+        if ((event as KeyboardEvent).shiftKey) {
             return;
         }
-        // Otherwise, send the message
         event.preventDefault();
         void this.sendMessage();
     }
 
-    clearChat(): void {
-        this.chatService.clearMessages();
-        this.attachmentError.set(null);
+    onTextareaInput(event: Event): void {
+        this.userInput.set((event.target as HTMLTextAreaElement).value);
+        this._lastInputWasVoice = false;
     }
 
-    /** Toggle speech recognition on/off. */
     toggleSpeechRecognition(): void {
         if (this.isSpeaking() || this.isSpeechPaused() || window.speechSynthesis?.pending) {
             this.stopSpeaking();
             return;
         }
-        const s = this.speechStatus();
-        if (s === 'listening' || s === 'processing') {
-            this.stopSpeechRecognition();
+        if (this.speechStatus() === 'listening' || this.speechStatus() === 'processing') {
+            this._stopSpeechRecognition();
         } else {
-            this.startSpeechRecognition();
+            this._startSpeechRecognition();
         }
     }
 
-    /** Escape key: cancel TTS if active, otherwise close the chat popup. */
     onEscapeKey(): void {
         if (this.isSpeaking() || this.isSpeechPaused() || window.speechSynthesis?.pending) {
             this.stopSpeaking();
@@ -418,251 +366,513 @@ export class FdGuideChatComponent {
         }
     }
 
-    /** Cancel TTS playback entirely. Bound to ESC key via host binding. */
     stopSpeaking(): void {
-        if (!window.speechSynthesis) {
-            return;
-        }
-        window.speechSynthesis.cancel();
+        window.speechSynthesis?.cancel();
         this.isSpeaking.set(false);
         this.isSpeechPaused.set(false);
-        this.speechResponsePending = false;
-        this.lastSpokenLength = 0;
+        this._speechResponsePending = false;
+        this._lastSpokenLength = 0;
     }
 
-    /** Toggle TTS pause/resume. Bound to Space key via host binding. */
     onSpaceKey(event: Event): void {
-        const hasSpeechActivity = this.isSpeaking() || this.isSpeechPaused() || !!window.speechSynthesis?.pending;
-        if (!hasSpeechActivity) {
+        const synthesis = window.speechSynthesis;
+        if (!synthesis || (!this.isSpeaking() && !this.isSpeechPaused() && !synthesis.pending)) {
             return;
         }
-        const target = event.target as HTMLElement;
-        if (target instanceof HTMLTextAreaElement || target instanceof HTMLInputElement) {
+        if (isTextEntryTarget(event.target)) {
             return;
         }
+
         event.preventDefault();
         if (this.isSpeechPaused()) {
-            window.speechSynthesis.resume();
+            synthesis.resume();
             this.isSpeechPaused.set(false);
         } else {
-            window.speechSynthesis.pause();
+            synthesis.pause();
             this.isSpeechPaused.set(true);
         }
     }
 
-    /** Reset voice-input flag when the user types manually. */
-    onTextareaInput(): void {
-        this.lastInputWasVoice = false;
-    }
-
-    /** Alt+M shortcut: toggle mic (same as clicking the mic button). */
     onMicShortcut(event: Event): void {
-        const target = event.target as HTMLElement;
-        if (target instanceof HTMLTextAreaElement || target instanceof HTMLInputElement) {
+        if (isTextEntryTarget(event.target) || this.isBusy()) {
             return;
         }
         event.preventDefault();
         this.toggleSpeechRecognition();
     }
 
-    /** Ctrl+Shift+A shortcut: open the file picker (same as clicking the attach button). */
     onAttachShortcut(event: Event): void {
-        const target = event.target as HTMLElement;
-        if (target instanceof HTMLTextAreaElement || target instanceof HTMLInputElement) {
+        if (isTextEntryTarget(event.target) || this.isBusy() || this.attachments().length >= MAXIMUM_CHAT_ATTACHMENTS) {
             return;
         }
         event.preventDefault();
-        if (!this.isBusy()) {
-            this.openFilePicker();
-        }
+        this.openFilePicker();
     }
 
-    /** Ctrl+Shift+C shortcut: toggle the chat popup open/closed. */
     onToggleChatShortcut(event: Event): void {
-        const target = event.target as HTMLElement;
-        if (target instanceof HTMLTextAreaElement || target instanceof HTMLInputElement) {
+        if (isTextEntryTarget(event.target)) {
             return;
         }
         event.preventDefault();
         this.toggleChat();
     }
 
-    /** Start listening for speech input. */
-    private startSpeechRecognition(): void {
+    openFilePicker(): void {
+        this.attachmentError.set(null);
+        this._fileInput()?.nativeElement.click();
+    }
+
+    async onFilesSelected(event: Event): Promise<void> {
+        const input = event.target as HTMLInputElement;
+        const files = input.files ? Array.from(input.files) : [];
+        input.value = '';
+        if (!files.length) {
+            return;
+        }
+
+        this.attachmentError.set(null);
+        const errors: string[] = [];
+        const acceptedFiles: File[] = [];
+        let acceptedCount = this.attachments().length;
+        let decodedBytes = this.attachments().reduce((total, attachment) => total + attachment.size, 0);
+
+        for (const file of files) {
+            if (acceptedCount >= MAXIMUM_CHAT_ATTACHMENTS) {
+                errors.push(`You can attach at most ${MAXIMUM_CHAT_ATTACHMENTS} files.`);
+                break;
+            }
+            if (!isSafeAttachmentName(file.name)) {
+                errors.push('An attachment has an invalid file name.');
+                continue;
+            }
+            if (!isAttachmentMediaType(file.type)) {
+                errors.push(`"${file.name}" is not a supported type. Use PNG, JPEG, WebP, GIF, or PDF.`);
+                continue;
+            }
+            if (file.size === 0) {
+                errors.push(`"${file.name}" is empty and cannot be attached.`);
+                continue;
+            }
+            if (decodedBytes + file.size > this.attachmentLimitBytes()) {
+                errors.push(`Attachments must be ${this.attachmentLimitLabel()} or less in total.`);
+                continue;
+            }
+
+            acceptedFiles.push(file);
+            acceptedCount += 1;
+            decodedBytes += file.size;
+        }
+
+        const accepted = acceptedFiles.map(
+            (file): StagedChatAttachment => ({
+                id: ++this._attachmentSequence,
+                name: file.name,
+                mediaType: file.type as ChatAttachmentMediaType,
+                dataUrl: null,
+                previewUrl: file.type.startsWith('image/') ? TRANSPARENT_IMAGE_PREVIEW : '',
+                size: file.size
+            })
+        );
+        this.attachments.update((current) => [...current, ...accepted]);
+
+        await Promise.all(
+            accepted.map(async (attachment, index) => {
+                try {
+                    const dataUrl = await this._readAsDataUrl(acceptedFiles[index]);
+                    if (this._destroyed) {
+                        return;
+                    }
+                    this.attachments.update((current) =>
+                        current.map((item) =>
+                            item.id === attachment.id
+                                ? {
+                                      ...item,
+                                      dataUrl,
+                                      previewUrl: item.mediaType.startsWith('image/') ? dataUrl : ''
+                                  }
+                                : item
+                        )
+                    );
+                } catch {
+                    if (this._destroyed) {
+                        return;
+                    }
+                    this.attachments.update((current) => current.filter((item) => item.id !== attachment.id));
+                    this.attachmentError.set(`"${attachment.name}" could not be read.`);
+                }
+            })
+        );
+
+        if (errors.length) {
+            this.attachmentError.set(errors.join(' '));
+        }
+    }
+
+    removeAttachment(id: number): void {
+        this.attachments.update((attachments) => attachments.filter((attachment) => attachment.id !== id));
+        this.attachmentError.set(null);
+    }
+
+    stopGenerating(): void {
+        this._stopActiveRequest('Generation stopped.');
+    }
+
+    clearApiKey(): void {
+        this.apiKey.set('');
+        this.isApiKeyEditorOpen.set(true);
+        if (this.isBusy()) {
+            this._stopActiveRequest('API key cleared.');
+        }
+    }
+
+    handleMessagesClick(event: MouseEvent): void {
+        if (!(event.target instanceof Element)) {
+            return;
+        }
+
+        const button = event.target.closest<HTMLButtonElement>('.code-block-copy');
+        const code = button?.closest('.code-block-wrapper')?.querySelector('code')?.textContent;
+        if (!button || code === undefined || !navigator.clipboard) {
+            return;
+        }
+
+        const originalContent = button.innerHTML;
+        void navigator.clipboard.writeText(code).then(
+            () => {
+                button.textContent = 'Copied!';
+                button.classList.add('code-block-copy--success');
+                window.setTimeout(() => {
+                    button.innerHTML = originalContent;
+                    button.classList.remove('code-block-copy--success');
+                }, 2000);
+            },
+            () => {
+                button.title = 'Copy failed';
+            }
+        );
+    }
+
+    isExternalSource(source: ChatSource): boolean {
+        return source.docsUrl.startsWith('https://');
+    }
+
+    private _startSpeechRecognition(): void {
         if (!this.isSpeechRecognitionSupported()) {
             this.speechError.set('Speech recognition is not supported in your browser.');
             this.speechStatus.set('error');
             return;
         }
 
-        // Lazy-initialize recognition
-        if (!this.recognition) {
-            const win = window as WindowWithSpeechRecognition;
-            const SpeechRecognitionClass = win.SpeechRecognition || win.webkitSpeechRecognition;
-            if (!SpeechRecognitionClass) {
+        if (!this._recognition) {
+            const speechWindow = window as WindowWithSpeechRecognition;
+            const SpeechRecognitionConstructor = speechWindow.SpeechRecognition || speechWindow.webkitSpeechRecognition;
+            if (!SpeechRecognitionConstructor) {
                 this.speechError.set('Speech recognition is not available.');
                 this.speechStatus.set('error');
                 return;
             }
 
-            this.recognition = new SpeechRecognitionClass();
-            this.recognition.continuous = false;
-            this.recognition.interimResults = true;
-            this.recognition.lang = document.documentElement.lang || 'en-US';
-
-            this.recognition.onstart = () => {
+            this._recognition = new SpeechRecognitionConstructor();
+            this._recognition.continuous = false;
+            this._recognition.interimResults = true;
+            this._recognition.lang = document.documentElement.lang || 'en-US';
+            this._recognition.onstart = () => {
                 this.speechStatus.set('listening');
                 this.speechError.set(null);
             };
-
-            this.recognition.onresult = (event: SpeechRecognitionEvent) => {
+            this._recognition.onresult = (event) => {
                 let finalTranscript = '';
                 let interimTranscript = '';
-                for (let i = 0; i < event.results.length; i++) {
-                    const result = event.results[i];
+                for (let index = 0; index < event.results.length; index++) {
+                    const result = event.results[index];
                     if (result.isFinal) {
                         finalTranscript += result[0].transcript;
                     } else {
                         interimTranscript += result[0].transcript;
                     }
                 }
-                this.userInput = finalTranscript + interimTranscript;
-                this.lastInputWasVoice = true;
+                this.userInput.set(finalTranscript + interimTranscript);
+                this._lastInputWasVoice = true;
             };
-
-            this.recognition.onerror = (event: SpeechRecognitionErrorEvent) => {
+            this._recognition.onerror = (event) => {
                 this.speechStatus.set('error');
-                if (event.error === 'no-speech') {
-                    this.speechError.set('No speech detected. Please try again.');
-                } else if (event.error === 'audio-capture') {
-                    this.speechError.set('No microphone found. Please ensure a microphone is connected.');
-                } else if (event.error === 'not-allowed') {
-                    this.speechError.set('Microphone permission denied. Please allow microphone access.');
-                } else {
-                    this.speechError.set(`Speech recognition error: ${event.error}`);
-                }
-                this.pendingTimeouts.push(
-                    setTimeout(() => {
-                        this.speechError.set(null);
-                        this.speechStatus.set('idle');
-                    }, 5000)
-                );
+                this.speechError.set(speechRecognitionErrorMessage(event.error));
+                this._scheduleSpeechReset();
             };
-
-            this.recognition.onend = () => {
-                if (this.speechStatus() !== 'listening') {
+            this._recognition.onend = () => {
+                if (this._destroyed || this.speechStatus() !== 'listening') {
                     return;
                 }
-                // Auto-send if there is a transcript; otherwise just reset state
-                if (this.userInput.trim()) {
+                this.speechStatus.set('idle');
+                if (this.userInput().trim()) {
                     void this.sendMessage();
-                } else {
-                    this.speechStatus.set('idle');
                 }
             };
         }
 
         try {
-            this.recognition.start();
+            this.speechStatus.set('processing');
+            this._recognition.start();
         } catch {
             this.speechStatus.set('error');
             this.speechError.set('Failed to start speech recognition.');
-            this.pendingTimeouts.push(
-                setTimeout(() => {
-                    this.speechError.set(null);
-                    this.speechStatus.set('idle');
-                }, 5000)
-            );
+            this._scheduleSpeechReset();
         }
     }
 
-    /** Stop listening for speech input. */
-    private stopSpeechRecognition(): void {
-        if (this.recognition) {
-            try {
-                this.recognition.stop();
-            } catch {
-                // Already stopped (e.g. called from onend after auto-send)
-            }
-            this.speechStatus.set('idle');
+    private _stopSpeechRecognition(): void {
+        try {
+            this._recognition?.stop();
+        } catch {
+            // The browser may have already stopped recognition before this handler runs.
         }
+        this.speechStatus.set('idle');
     }
 
-    private scrollToBottom(): void {
-        setTimeout(() => {
-            const container = this.messagesContainer()?.nativeElement;
-            if (container) {
-                container.scrollTop = container.scrollHeight;
+    private _scheduleSpeechReset(): void {
+        const timeoutId = window.setTimeout(() => {
+            this._pendingTimeouts.delete(timeoutId);
+            if (!this._destroyed) {
+                this.speechError.set(null);
+                this.speechStatus.set('idle');
             }
-        }, 0);
+        }, 5000);
+        this._pendingTimeouts.add(timeoutId);
     }
 
-    private queueSpeech(text: string): void {
-        if (!window.speechSynthesis) {
+    private _queueSpeech(text: string): void {
+        const synthesis = window.speechSynthesis;
+        if (!synthesis || typeof SpeechSynthesisUtterance === 'undefined') {
             return;
         }
+
         const utterance = new SpeechSynthesisUtterance(text);
         utterance.lang = document.documentElement.lang || 'en-US';
-        utterance.voice = this.getBestVoice();
+        utterance.voice = this._bestVoice(synthesis.getVoices());
         utterance.onstart = () => this.isSpeaking.set(true);
-        utterance.onend = () => {
-            if (!window.speechSynthesis.speaking && !window.speechSynthesis.pending) {
-                this.isSpeaking.set(false);
-            }
-        };
-        utterance.onerror = () => {
-            if (!window.speechSynthesis.speaking && !window.speechSynthesis.pending) {
-                this.isSpeaking.set(false);
-            }
-        };
-        window.speechSynthesis.speak(utterance);
+        utterance.onend = () => this._syncSpeakingState();
+        utterance.onerror = () => this._syncSpeakingState();
+        synthesis.speak(utterance);
     }
 
-    private getBestVoice(): SpeechSynthesisVoice | null {
-        const voices = window.speechSynthesis.getVoices();
-        if (!voices.length) {
-            return null;
-        }
-        const lang = (document.documentElement.lang || 'en-US').toLowerCase();
-        const prefix = lang.split('-')[0];
-        const matching = voices.filter((v) => v.lang.toLowerCase().startsWith(prefix));
-        const pool = matching.length ? matching : voices;
+    private _bestVoice(voices: SpeechSynthesisVoice[]): SpeechSynthesisVoice | null {
+        const language = (document.documentElement.lang || 'en-US').toLowerCase().split('-')[0];
+        const matching = voices.filter((voice) => voice.lang.toLowerCase().startsWith(language));
+        const candidates = matching.length ? matching : voices;
         return (
-            pool.find((v) => /google.*neural/i.test(v.name)) ??
-            pool.find((v) => /google/i.test(v.name)) ??
-            pool.find((v) => /premium|enhanced|neural/i.test(v.name)) ??
-            pool[0] ??
+            candidates.find((voice) => /google.*neural/i.test(voice.name)) ??
+            candidates.find((voice) => /google/i.test(voice.name)) ??
+            candidates.find((voice) => /premium|enhanced|neural/i.test(voice.name)) ??
+            candidates[0] ??
             null
         );
     }
 
-    private stripMarkdown(text: string): string {
-        return text
-            .replace(/```[\s\S]*?```/g, 'code block')
-            .replace(/`([^`\n]+)`/g, '$1')
-            .replace(/^#{1,6}\s+/gm, '')
-            .replace(/\*{3}([^*\n]+)\*{3}/g, '$1')
-            .replace(/_{3}([^_\n]+)_{3}/g, '$1')
-            .replace(/\*{2}([^*\n]+)\*{2}/g, '$1')
-            .replace(/_{2}([^_\n]+)_{2}/g, '$1')
-            .replace(/\*([^*\n]+)\*/g, '$1')
-            .replace(/_([^_\n]+)_/g, '$1')
-            .replace(/!\[([^\]]*)\]\([^)]+\)/g, '$1')
-            .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
-            .replace(/^[ \t]*[-*+]\s+/gm, '')
-            .replace(/^[ \t]*\d+\.\s+/gm, '')
-            .replace(/^[-*_]{3,}\s*$/gm, '')
-            .replace(/\n{3,}/g, '\n\n')
-            .trim();
+    private _syncSpeakingState(): void {
+        const synthesis = window.speechSynthesis;
+        if (!synthesis?.speaking && !synthesis?.pending) {
+            this.isSpeaking.set(false);
+            this.isSpeechPaused.set(false);
+        }
     }
 
-    /** Read a File into a base64 data URL (`data:<mime>;base64,...`). */
-    private readAsDataUrl(file: File): Promise<string> {
+    private _handleEvent(event: ChatEvent, assistantId: string, requestSequence: number): void {
+        if (requestSequence !== this._requestSequence || this._activeAssistantId !== assistantId) {
+            return;
+        }
+
+        switch (event.type) {
+            case 'meta':
+                this.catalogVersion.set(event.catalogVersion);
+                break;
+            case 'status':
+                this.statusMessage.set(event.message);
+                break;
+            case 'text-delta':
+                this.status.set('streaming');
+                this._updateAssistant(assistantId, (message) => ({
+                    ...message,
+                    content: message.content + event.text
+                }));
+                break;
+            case 'sources':
+                this._updateAssistant(assistantId, (message) => ({
+                    ...message,
+                    sources: event.items.filter((source) => isAllowedChatUrl(source.docsUrl))
+                }));
+                break;
+            case 'error':
+                this._speechResponsePending = false;
+                this._lastSpokenLength = 0;
+                this.error.set(event.message);
+                this.status.set('error');
+                this.statusMessage.set(event.message);
+                break;
+            case 'done':
+                this._completeAssistant(assistantId);
+                this._activeAssistantId = null;
+                if (!this.error()) {
+                    this.status.set('idle');
+                    this.statusMessage.set('Answer complete.');
+                }
+                break;
+        }
+    }
+
+    private _stopActiveRequest(statusMessage: string): void {
+        ++this._requestSequence;
+        this._speechResponsePending = false;
+        this._lastSpokenLength = 0;
+        this._chatService.stop();
+        if (this._activeAssistantId) {
+            const assistantId = this._activeAssistantId;
+            const message = this.messages().find((item) => item.id === assistantId);
+            if (!message?.content) {
+                this.messages.update((messages) => messages.filter((item) => item.id !== assistantId));
+            }
+        }
+        this._activeAssistantId = null;
+        this.status.set('idle');
+        this.statusMessage.set(statusMessage);
+    }
+
+    private _completeAssistant(assistantId: string): void {
+        this._updateAssistant(assistantId, (message) => ({
+            ...message,
+            renderedHtml: renderChatMarkdown(message.content, this._sanitizer)
+        }));
+    }
+
+    private _updateAssistant(assistantId: string, update: (message: ChatMessage) => ChatMessage): void {
+        this.messages.update((messages) =>
+            messages.map((message) => (message.id === assistantId ? update(message) : message))
+        );
+    }
+
+    private _nextMessageId(): string {
+        return 'fd-guide-message-' + ++this._messageSequence;
+    }
+
+    private _validatedAttachmentsForSend(): ChatAttachment[] | undefined {
+        const attachments = this.attachments();
+        const totalBytes = attachments.reduce((total, attachment) => total + attachment.size, 0);
+        if (attachments.length > MAXIMUM_CHAT_ATTACHMENTS || totalBytes > this.attachmentLimitBytes()) {
+            this.attachmentError.set(
+                `Attachments must be up to ${MAXIMUM_CHAT_ATTACHMENTS} supported files and ${this.attachmentLimitLabel()} or less in total.`
+            );
+            return undefined;
+        }
+
+        const outgoing: ChatAttachment[] = [];
+        for (const attachment of attachments) {
+            if (
+                !isSafeAttachmentName(attachment.name) ||
+                !isAttachmentMediaType(attachment.mediaType) ||
+                attachment.dataUrl === null ||
+                !attachment.dataUrl.startsWith(`data:${attachment.mediaType};base64,`)
+            ) {
+                this.attachmentError.set('An attachment is still being read or is invalid.');
+                return undefined;
+            }
+            outgoing.push({
+                name: attachment.name,
+                mediaType: attachment.mediaType,
+                dataUrl: attachment.dataUrl
+            });
+        }
+        return outgoing;
+    }
+
+    private _readAsDataUrl(file: File): Promise<string> {
         return new Promise((resolve, reject) => {
             const reader = new FileReader();
-            reader.onload = () => resolve(reader.result as string);
-            reader.onerror = () => reject(reader.error ?? new Error('FileReader failed'));
+            const cleanup = (): void => {
+                this._fileReaders.delete(reader);
+            };
+            this._fileReaders.add(reader);
+            reader.onload = () => {
+                cleanup();
+                typeof reader.result === 'string' ? resolve(reader.result) : reject(new Error('FileReader failed'));
+            };
+            reader.onerror = () => {
+                cleanup();
+                reject(reader.error ?? new Error('FileReader failed'));
+            };
+            reader.onabort = () => {
+                cleanup();
+                reject(new DOMException('Aborted', 'AbortError'));
+            };
             reader.readAsDataURL(file);
         });
     }
+
+    private async _detectCapabilities(): Promise<void> {
+        const capabilities = await this._chatService.getCapabilities();
+        if (this._destroyed) {
+            return;
+        }
+
+        this.localProviderAvailable.set(capabilities.localProvider);
+        this.attachmentLimitBytes.set(
+            capabilities.attachmentLimitBytes === LOCAL_ATTACHMENT_LIMIT_BYTES
+                ? LOCAL_ATTACHMENT_LIMIT_BYTES
+                : DEPLOYED_ATTACHMENT_LIMIT_BYTES
+        );
+        if (capabilities.localProvider && !this.apiKey()) {
+            this.isApiKeyEditorOpen.set(false);
+        }
+    }
+}
+
+function isAttachmentMediaType(value: string): value is ChatAttachmentMediaType {
+    return CHAT_ATTACHMENT_MEDIA_TYPES.some((mediaType) => mediaType === value);
+}
+
+function isSafeAttachmentName(value: string): boolean {
+    const hasInvalidCharacter = Array.from(value).some((character) => {
+        const code = character.charCodeAt(0);
+        return code <= 31 || code === 127 || character === '/' || character === '\\';
+    });
+    return value.trim().length > 0 && value.length <= 255 && !hasInvalidCharacter && value !== '.' && value !== '..';
+}
+
+function formatAttachmentLimit(bytes: number): string {
+    return bytes === LOCAL_ATTACHMENT_LIMIT_BYTES ? '5 MiB' : '256 KiB';
+}
+
+function isTextEntryTarget(target: EventTarget | null): boolean {
+    return target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement;
+}
+
+function lastSentenceBoundary(value: string): number {
+    return ['.', '!', '?', '\n'].reduce((latest, character) => Math.max(latest, value.lastIndexOf(character)), -1);
+}
+
+function speechRecognitionErrorMessage(error: string): string {
+    if (error === 'no-speech') {
+        return 'No speech detected. Please try again.';
+    }
+    if (error === 'audio-capture') {
+        return 'No microphone found. Please ensure a microphone is connected.';
+    }
+    if (error === 'not-allowed') {
+        return 'Microphone permission denied. Please allow microphone access.';
+    }
+    return `Speech recognition error: ${error}`;
+}
+
+function stripMarkdownForSpeech(value: string): string {
+    return value
+        .replace(/```[\s\S]*?```/g, 'code block')
+        .replace(/`([^`\n]+)`/g, '$1')
+        .replace(/^#{1,6}\s+/gm, '')
+        .replace(/\*{1,3}([^*\n]+)\*{1,3}/g, '$1')
+        .replace(/_{1,3}([^_\n]+)_{1,3}/g, '$1')
+        .replace(/!\[([^\]]*)\]\([^)]+\)/g, '$1')
+        .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+        .replace(/^[ \t]*[-*+]\s+/gm, '')
+        .replace(/^[ \t]*\d+\.\s+/gm, '')
+        .replace(/^[-*_]{3,}\s*$/gm, '')
+        .replace(/\n{3,}/g, '\n\n')
+        .trim();
 }

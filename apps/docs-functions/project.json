@@ -1,0 +1,35 @@
+{
+    "name": "docs-functions",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "apps/docs-functions/src",
+    "projectType": "application",
+    "tags": ["scope:docs", "type:app"],
+    "implicitDependencies": ["mcp-server"],
+    "targets": {
+        "build": {
+            "executor": "@nx/js:tsc",
+            "outputs": ["{options.outputPath}"],
+            "dependsOn": ["mcp-server:extract-metadata"],
+            "options": {
+                "outputPath": "dist/apps/docs-functions",
+                "main": "apps/docs-functions/src/chat.ts",
+                "tsConfig": "apps/docs-functions/tsconfig.json",
+                "assets": [
+                    {
+                        "input": "libs/mcp-server/src/data",
+                        "glob": "components.json",
+                        "output": "./libs/mcp-server/src/data",
+                        "includeIgnoredFiles": true
+                    }
+                ]
+            }
+        },
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "apps/docs-functions/jest.config.ts"
+            }
+        }
+    }
+}
