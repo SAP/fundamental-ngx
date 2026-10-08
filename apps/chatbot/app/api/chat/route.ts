@@ -1,5 +1,6 @@
 import { createMCPClient } from '@ai-sdk/mcp';
 import { convertToModelMessages, stepCountIs, streamText, type UIMessage } from 'ai';
+import { corsHeaders, preflight } from '../../../lib/cors';
 import { chatModel } from '../../../lib/model';
 
 export const runtime = 'nodejs';
@@ -12,15 +13,28 @@ compare_components, get_setup_guide, list_components) rather than prior knowledg
 because the library changes frequently. Cite the component selector (e.g. fd-dialog)
 and show minimal, correct Angular usage. If a tool returns nothing, say so plainly.`;
 
-/** CORS headers for local development */
-const corsHeaders = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type'
-};
-
 function mcpUrl(): string {
     return process.env.MCP_SERVER_URL ?? 'http://localhost:3000/api/mcp';
+}
+
+/**
+ * Tool-call logging gate — mirrors the MCP server's `MCP_LOG_TOOLS` switch so the
+ * two layers turn on and off together. On by default in development, off in
+ * production unless explicitly enabled, so a deployed build stays quiet until you
+ * opt in to debug (set `MCP_LOG_TOOLS=1` in the host's env vars). These lines
+ * carry tool names, arguments, and short result previews — never secrets or keys.
+ */
+const LOG_TOOLS =
+    process.env.MCP_LOG_TOOLS === '1' ||
+    process.env.MCP_LOG_TOOLS === 'true' ||
+    (process.env.MCP_LOG_TOOLS !== '0' &&
+        process.env.MCP_LOG_TOOLS !== 'false' &&
+        process.env.NODE_ENV !== 'production');
+
+function logChat(message: string): void {
+    if (LOG_TOOLS) {
+        console.log(message);
+    }
 }
 
 /** How many trailing messages of the (text-only) history to keep per request. */
@@ -58,18 +72,20 @@ export async function loadMcpTools(url = mcpUrl()): Promise<{
     return { tools, close: () => client.close() };
 }
 
-export async function OPTIONS(): Promise<Response> {
-    return new Response(null, {
-        status: 204,
-        headers: corsHeaders
-    });
+export function OPTIONS(req: Request): Response {
+    return preflight(req);
 }
 
 export async function POST(req: Request): Promise<Response> {
     const { messages }: { messages: UIMessage[] } = await req.json();
-    const { tools, close } = await loadMcpTools();
+
+    const endpoint = mcpUrl();
+    const { tools, close } = await loadMcpTools(endpoint);
+    logChat(`[api/chat] MCP endpoint ${endpoint} → loaded tools: ${Object.keys(tools).join(', ') || '(none)'}`);
 
     const modelMessages = await convertToModelMessages(trimHistoryForBudget(messages));
+
+    let toolCallCount = 0;
 
     const result = streamText({
         model: chatModel(),
@@ -81,7 +97,27 @@ export async function POST(req: Request): Promise<Response> {
         // versions behind a proxy reject ("Extra inputs are not permitted").
         providerOptions: { anthropic: { toolStreaming: false } },
         stopWhen: stepCountIs(6),
-        onFinish: () => void close(),
+        // Per-step trace: which MCP tools the model called this step, with args,
+        // and the results that came back. Zero tool calls across a whole turn
+        // means the model answered from memory — i.e. it did NOT use the MCP.
+        onStepEnd: (step) => {
+            for (const call of step.toolCalls) {
+                toolCallCount++;
+                logChat(`[api/chat] tool call → ${call.toolName} ${JSON.stringify(call.input)}`);
+            }
+            for (const toolResult of step.toolResults) {
+                const preview = JSON.stringify(toolResult.output).slice(0, 300);
+                logChat(`[api/chat] tool result ← ${toolResult.toolName}: ${preview}`);
+            }
+        },
+        onFinish: () => {
+            logChat(
+                toolCallCount > 0
+                    ? `[api/chat] turn finished — ${toolCallCount} MCP tool call(s) used.`
+                    : `[api/chat] turn finished — NO MCP tool calls (answered from the model's own knowledge).`
+            );
+            void close();
+        },
         onError: (event) => {
             console.error('[api/chat] streamText error:', event.error);
             void close();
@@ -92,6 +128,6 @@ export async function POST(req: Request): Promise<Response> {
     // "An error occurred." so failures are visible during local dev.
     return result.toUIMessageStreamResponse({
         onError: (error) => (error instanceof Error ? error.message : String(error)),
-        headers: corsHeaders
+        headers: corsHeaders(req)
     });
 }

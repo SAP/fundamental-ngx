@@ -24,12 +24,12 @@ import { createGroq } from '@ai-sdk/groq';
 import type { LanguageModel } from 'ai';
 
 /** True when a Google Gemini key is configured — the primary free + deploy path. */
-function useGoogle(): boolean {
+function hasGoogleKey(): boolean {
     return !!process.env.GOOGLE_GENERATIVE_AI_API_KEY?.trim();
 }
 
 /** True when a Groq key is configured — the secondary, no-credit-card path. */
-function useGroq(): boolean {
+function hasGroqKey(): boolean {
     return !!process.env.GROQ_API_KEY?.trim();
 }
 
@@ -44,10 +44,10 @@ export function chatModelId(): string {
     if (configured) {
         return configured;
     }
-    if (useGoogle()) {
+    if (hasGoogleKey()) {
         return 'gemini-3.5-flash';
     }
-    if (useGroq()) {
+    if (hasGroqKey()) {
         return 'qwen/qwen3.8-27b';
     }
     return 'claude-sonnet-4-5';
