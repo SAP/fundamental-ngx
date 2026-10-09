@@ -12,7 +12,8 @@ const knownScopes = new Set([
     'tools',
     'datetime-adapter',
     'i18n',
-    'ui5'
+    'ui5',
+    'chatbot'
 ]);
 
 // For some reason this test hangs. TODO: investigate whats wrong.
