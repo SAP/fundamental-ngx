@@ -3,9 +3,9 @@
     class="fd-guide-fab"
     fd-button
     glyph="ai"
-    label="Ask FD Guide"
-    title="Ask FD Guide"
-    ariaLabel="Ask FD Guide"
+    [label]="'Ask FD Guide (' + chatToggleShortcut + ')'"
+    [title]="'Ask FD Guide (' + chatToggleShortcut + ')'"
+    [ariaLabel]="'Ask FD Guide (' + chatToggleShortcut + ')'"
     (click)="toggleChat()"
     [attr.aria-expanded]="isOpen()"
 ></button>
@@ -183,23 +183,13 @@
                         type="button"
                         class="fd-guide-chat__attach-btn"
                         [class.fd-guide-chat__attach-btn--listening]="speechStatus() === 'listening'"
+                        [class.fd-guide-chat__attach-btn--speaking]="isSpeaking()"
+                        [class.fd-guide-chat__attach-btn--paused]="isSpeechPaused()"
                         fdType="transparent"
                         fd-button
-                        [glyph]="speechStatus() === 'listening' ? 'microphone' : 'microphone'"
-                        [ariaLabel]="
-                            speechStatus() === 'listening'
-                                ? 'Stop recording'
-                                : isSpeechRecognitionSupported()
-                                  ? 'Start voice input'
-                                  : 'Voice input not supported'
-                        "
-                        [title]="
-                            speechStatus() === 'listening'
-                                ? 'Stop recording'
-                                : isSpeechRecognitionSupported()
-                                  ? 'Start voice input'
-                                  : 'Voice input not supported'
-                        "
+                        [glyph]="speechButtonGlyph()"
+                        [ariaLabel]="speechButtonLabel()"
+                        [title]="speechButtonLabel()"
                         [disabled]="isBusy() || !isSpeechRecognitionSupported()"
                         (click)="toggleSpeechRecognition()"
                     ></button>
@@ -209,8 +199,8 @@
                         fdType="transparent"
                         fd-button
                         glyph="attachment"
-                        ariaLabel="Attach files (images or PDF)"
-                        title="Attach files (images or PDF)"
+                        [ariaLabel]="'Attach files (' + attachShortcut + ')'"
+                        [title]="'Attach files (' + attachShortcut + ')'"
                         [disabled]="isBusy()"
                         (click)="openFilePicker()"
                     ></button>
@@ -226,6 +216,7 @@
                     />
                 </div>
                 <textarea
+                    #chatInput
                     id="fd-guide-input"
                     name="userInput"
                     class="fd-guide-chat__input"
@@ -235,6 +226,7 @@
                     [(ngModel)]="userInput"
                     [disabled]="isBusy()"
                     (keydown.enter)="onEnterKey($event)"
+                    (input)="onTextareaInput()"
                 ></textarea>
                 <button
                     type="submit"

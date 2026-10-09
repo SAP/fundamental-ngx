@@ -157,6 +157,7 @@ export class ChatService {
             const reader = response.body.getReader();
             const decoder = new TextDecoder();
             let accumulatedContent = '';
+            let hadToolCallSinceLastText = false;
 
             while (true) {
                 const { done, value } = await reader.read();
@@ -184,6 +185,13 @@ export class ChatService {
                         // Handle different response formats from AI SDK
                         if (parsed.type === 'text-delta') {
                             const textDelta = parsed.delta || parsed.textDelta || '';
+                            // Insert a paragraph break when text resumes after a tool call
+                            if (hadToolCallSinceLastText && accumulatedContent.trim().length > 0) {
+                                if (!accumulatedContent.endsWith('\n')) {
+                                    accumulatedContent += '\n\n';
+                                }
+                            }
+                            hadToolCallSinceLastText = false;
                             accumulatedContent += textDelta;
                             this.messageSubject.next(textDelta);
 
@@ -195,8 +203,10 @@ export class ChatService {
                             );
                         } else if (parsed.type === 'error') {
                             throw new Error(parsed.error || 'Unknown error occurred');
+                        } else if (parsed.type === 'tool-call' || parsed.type === 'tool-result') {
+                            hadToolCallSinceLastText = true;
                         }
-                        // Silently ignore other event types (start, finish, tool-call, tool-output-available, etc.)
+                        // Silently ignore other event types (start, finish, tool-output-available, etc.)
                     } catch (parseError) {
                         // Only re-throw actual errors (like the Error() we throw above)
                         // Silently ignore JSON parsing errors - they're expected for some SSE chunks
