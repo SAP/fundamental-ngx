@@ -673,6 +673,15 @@
         color: var(--sapAssistant_Background, #5d36ff);
         animation: pulse 1.5s ease-in-out infinite;
     }
+
+    &--speaking {
+        color: var(--sapAssistant_Background, #5d36ff);
+        animation: pulse 2s ease-in-out infinite;
+    }
+
+    &--paused {
+        color: var(--sapAssistant_Background, #5d36ff);
+    }
 }
 
 @keyframes pulse {
