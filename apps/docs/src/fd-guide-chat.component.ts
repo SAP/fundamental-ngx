@@ -68,7 +68,7 @@ const IS_MAC = /Mac|iPhone|iPad|iPod/i.test(navigator.platform);
     templateUrl: './fd-guide-chat.component.html',
     styleUrls: ['./fd-guide-chat.component.scss'],
     host: {
-        '(document:keydown.escape)': 'stopSpeaking()',
+        '(document:keydown.escape)': 'onEscapeKey()',
         '(document:keydown.space)': 'onSpaceKey($event)',
         // Mic: Ctrl+Shift+M (Win/Linux) or ⌘+Shift+M (Mac)
         '(document:keydown.ctrl.shift.m)': 'onMicShortcut($event)',
@@ -144,11 +144,13 @@ export class FdGuideChatComponent {
     private readonly destroyRef = inject(DestroyRef);
     private readonly messagesContainer = viewChild<ElementRef<HTMLDivElement>>('messagesContainer');
     private readonly fileInput = viewChild<ElementRef<HTMLInputElement>>('fileInput');
+    private readonly chatInput = viewChild<ElementRef<HTMLTextAreaElement>>('chatInput');
     /** Speech recognition instance (lazy-initialized). */
     private recognition: SpeechRecognition | null = null;
     private readonly pendingTimeouts: ReturnType<typeof setTimeout>[] = [];
     private lastInputWasVoice = false;
     private speechResponsePending = false;
+    private lastSpokenLength = 0;
 
     constructor() {
         this.messages = this.chatService.messages;
@@ -162,16 +164,46 @@ export class FdGuideChatComponent {
             }
         });
 
-        // Speak the assistant response when voice was used for the input
+        // Speak assistant response in real time as it streams in
         effect(() => {
             const s = this.status();
             const msgs = this.messages();
-            if (s === 'idle' && this.speechResponsePending) {
-                this.speechResponsePending = false;
-                const lastAssistant = [...msgs].reverse().find((m) => m.role === 'assistant');
-                if (lastAssistant?.content) {
-                    this.speakText(this.stripMarkdown(lastAssistant.content));
+
+            if (!this.speechResponsePending) {
+                return;
+            }
+
+            const lastAssistant = [...msgs].reverse().find((m) => m.role === 'assistant');
+            if (!lastAssistant?.content) {
+                return;
+            }
+
+            const unspoken = lastAssistant.content.slice(this.lastSpokenLength);
+
+            if (s === 'streaming') {
+                // Find the last sentence boundary so we speak complete sentences
+                let lastBoundary = -1;
+                for (const ch of ['.', '!', '?', '\n']) {
+                    const idx = unspoken.lastIndexOf(ch);
+                    if (idx > lastBoundary) {
+                        lastBoundary = idx;
+                    }
                 }
+                if (lastBoundary >= 0) {
+                    const chunk = this.stripMarkdown(unspoken.slice(0, lastBoundary + 1));
+                    if (chunk.trim()) {
+                        this.queueSpeech(chunk);
+                    }
+                    this.lastSpokenLength += lastBoundary + 1;
+                }
+            } else if (s === 'idle') {
+                // Streaming finished — speak whatever remains
+                this.speechResponsePending = false;
+                const remaining = this.stripMarkdown(unspoken);
+                if (remaining.trim()) {
+                    this.queueSpeech(remaining);
+                }
+                this.lastSpokenLength = 0;
             }
         });
 
@@ -249,6 +281,8 @@ export class FdGuideChatComponent {
         this.isOpen.update((v) => !v);
         if (!this.isOpen()) {
             this.isExpanded.set(false);
+        } else {
+            setTimeout(() => this.chatInput()?.nativeElement.focus(), 0);
         }
     }
 
@@ -272,6 +306,7 @@ export class FdGuideChatComponent {
         // Capture voice intent before resetting state
         this.speechResponsePending = this.lastInputWasVoice;
         this.lastInputWasVoice = false;
+        this.lastSpokenLength = 0;
 
         // Auto-stop recognition if still active
         const s = this.speechStatus();
@@ -362,7 +397,7 @@ export class FdGuideChatComponent {
 
     /** Toggle speech recognition on/off. */
     toggleSpeechRecognition(): void {
-        if (this.isSpeaking() || this.isSpeechPaused()) {
+        if (this.isSpeaking() || this.isSpeechPaused() || window.speechSynthesis?.pending) {
             this.stopSpeaking();
             return;
         }
@@ -374,20 +409,31 @@ export class FdGuideChatComponent {
         }
     }
 
+    /** Escape key: cancel TTS if active, otherwise close the chat popup. */
+    onEscapeKey(): void {
+        if (this.isSpeaking() || this.isSpeechPaused() || window.speechSynthesis?.pending) {
+            this.stopSpeaking();
+        } else if (this.isOpen()) {
+            this.closeChat();
+        }
+    }
+
     /** Cancel TTS playback entirely. Bound to ESC key via host binding. */
     stopSpeaking(): void {
         if (!window.speechSynthesis) {
             return;
         }
-        if (this.isSpeaking() || this.isSpeechPaused()) {
-            window.speechSynthesis.cancel();
-            this.isSpeechPaused.set(false);
-        }
+        window.speechSynthesis.cancel();
+        this.isSpeaking.set(false);
+        this.isSpeechPaused.set(false);
+        this.speechResponsePending = false;
+        this.lastSpokenLength = 0;
     }
 
     /** Toggle TTS pause/resume. Bound to Space key via host binding. */
     onSpaceKey(event: Event): void {
-        if (!this.isSpeaking() && !this.isSpeechPaused()) {
+        const hasSpeechActivity = this.isSpeaking() || this.isSpeechPaused() || !!window.speechSynthesis?.pending;
+        if (!hasSpeechActivity) {
             return;
         }
         const target = event.target as HTMLElement;
@@ -551,17 +597,24 @@ export class FdGuideChatComponent {
         }, 0);
     }
 
-    private speakText(text: string): void {
+    private queueSpeech(text: string): void {
         if (!window.speechSynthesis) {
             return;
         }
-        window.speechSynthesis.cancel();
         const utterance = new SpeechSynthesisUtterance(text);
         utterance.lang = document.documentElement.lang || 'en-US';
         utterance.voice = this.getBestVoice();
         utterance.onstart = () => this.isSpeaking.set(true);
-        utterance.onend = () => this.isSpeaking.set(false);
-        utterance.onerror = () => this.isSpeaking.set(false);
+        utterance.onend = () => {
+            if (!window.speechSynthesis.speaking && !window.speechSynthesis.pending) {
+                this.isSpeaking.set(false);
+            }
+        };
+        utterance.onerror = () => {
+            if (!window.speechSynthesis.speaking && !window.speechSynthesis.pending) {
+                this.isSpeaking.set(false);
+            }
+        };
         window.speechSynthesis.speak(utterance);
     }
 
