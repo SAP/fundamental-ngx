@@ -9,6 +9,8 @@ import {
     TEST_ONLY_NOT_A_REAL_KEY
 } from './fd-guide-chat.test-fixtures';
 
+const RATE_LIMIT_MESSAGE = 'Too many requests. Please wait a moment and try again.';
+
 describe('FdGuideChatComponent', () => {
     let fixture: ComponentFixture<FdGuideChatComponent>;
     let service: { hasLocalProvider: jest.Mock; send: jest.Mock; stop: jest.Mock };
@@ -60,11 +62,9 @@ describe('FdGuideChatComponent', () => {
 
     function submitWith(question: string, key = TEST_ONLY_NOT_A_REAL_KEY): void {
         input('#fd-guide-input', question);
-        const keyInput = fixture.nativeElement.querySelector<HTMLInputElement>(
-            'input[type="password"][aria-label="Gemini API key"]'
-        );
+        const keyInput = fixture.nativeElement.querySelector<HTMLInputElement>('input[type="password"]');
         if (keyInput) {
-            input('input[type="password"][aria-label="Gemini API key"]', key);
+            input('input[type="password"]', key);
         }
         fixture.nativeElement
             .querySelector<HTMLFormElement>('.fd-guide-chat__input-form')
@@ -80,6 +80,16 @@ describe('FdGuideChatComponent', () => {
         }
         Object.defineProperty(picker, 'files', { configurable: true, value: files });
         await fixture.componentInstance.onFilesSelected({ target: picker } as unknown as Event);
+        fixture.detectChanges();
+    }
+
+    async function sendAndWait(question: string): Promise<void> {
+        input('#fd-guide-input', question);
+        const keyInput = fixture.nativeElement.querySelector<HTMLInputElement>('input[type="password"]');
+        if (keyInput) {
+            input('input[type="password"]', TEST_ONLY_NOT_A_REAL_KEY);
+        }
+        await fixture.componentInstance.sendMessage();
         fixture.detectChanges();
     }
 
@@ -117,7 +127,7 @@ describe('FdGuideChatComponent', () => {
         expect(fixture.nativeElement.querySelector<HTMLButtonElement>('.fd-guide-chat__send-btn').disabled).toBe(false);
         submitWith('Explain fd-dialog');
 
-        expect(service.send).toHaveBeenCalledWith('Explain fd-dialog', '', expect.any(Function));
+        expect(service.send).toHaveBeenCalledWith('Explain fd-dialog', '', expect.any(Function), [], 'google');
         request.resolve();
     });
 
@@ -127,7 +137,7 @@ describe('FdGuideChatComponent', () => {
         expect(fixture.nativeElement.querySelector('input[type="password"]')).toBeNull();
 
         const settings = fixture.nativeElement.querySelector<HTMLButtonElement>(
-            'button[aria-label="Configure Gemini API key"]'
+            'button[aria-label="Configure AI provider"]'
         );
         settings.click();
         fixture.detectChanges();
@@ -148,6 +158,33 @@ describe('FdGuideChatComponent', () => {
 
         expect(fixture.nativeElement.querySelector<HTMLInputElement>('input[type="password"]').value).toBe('');
         expect(fixture.nativeElement.querySelector<HTMLButtonElement>('.fd-guide-chat__send-btn').disabled).toBe(true);
+    });
+
+    it('uses an in-memory Groq key with the internal Qwen model and disables attachments', () => {
+        openChat();
+        const provider = fixture.nativeElement.querySelector<HTMLSelectElement>('select[aria-label="AI provider"]');
+        provider.value = 'groq';
+        provider.dispatchEvent(new Event('change', { bubbles: true }));
+        fixture.detectChanges();
+
+        expect(fixture.nativeElement.querySelector('input[type="password"]').getAttribute('aria-label')).toBe(
+            'Groq API key'
+        );
+        expect(fixture.nativeElement.textContent).toContain('Attachments are unavailable with Groq.');
+        expect(
+            fixture.nativeElement.querySelector<HTMLButtonElement>('button[aria-label^="Attach files"]').disabled
+        ).toBe(true);
+
+        submitWith('Explain fd-button');
+
+        expect(service.send).toHaveBeenCalledWith(
+            'Explain fd-button',
+            TEST_ONLY_NOT_A_REAL_KEY,
+            expect.any(Function),
+            [],
+            'groq'
+        );
+        request.resolve();
     });
 
     it('renders partial text as text and only converts restricted Markdown after done', () => {
@@ -193,6 +230,64 @@ describe('FdGuideChatComponent', () => {
         request.resolve();
     });
 
+    it('keeps the complete visible conversation while transport history is bounded', async () => {
+        service.send.mockImplementation(
+            (question: string, _key: string, onEvent: (event: unknown) => void): Promise<void> => {
+                onEvent({ type: 'text-delta', text: `answer-${question}` });
+                onEvent({ type: 'done' });
+                return Promise.resolve();
+            }
+        );
+        openChat();
+
+        for (let turn = 1; turn <= 8; turn++) {
+            await sendAndWait(`question-${turn}`);
+        }
+
+        expect(fixture.componentInstance.messages()).toHaveLength(16);
+        expect(fixture.componentInstance.messages().map(({ role, content }) => ({ role, content }))).toEqual(
+            Array.from({ length: 8 }, (_, index) => [
+                { role: 'user', content: `question-${index + 1}` },
+                { role: 'assistant', content: `answer-question-${index + 1}` }
+            ]).flat()
+        );
+        const log = fixture.nativeElement.querySelector<HTMLElement>('[role="log"]');
+        for (let turn = 1; turn <= 8; turn++) {
+            expect(log.textContent).toContain(`question-${turn}`);
+            expect(log.textContent).toContain(`answer-question-${turn}`);
+        }
+    });
+
+    it('shows a stable retry-later message for a typed 429 failure without exposing untrusted details', async () => {
+        const providerBody = `provider detail ${TEST_ONLY_NOT_A_REAL_KEY}`;
+        const rateLimitError = Object.assign(new Error(providerBody), {
+            name: 'ChatRateLimitError',
+            status: 429
+        });
+        service.send.mockRejectedValue(rateLimitError);
+        openChat();
+
+        await sendAndWait('Question that hit the limit');
+
+        const text = fixture.nativeElement.textContent;
+        expect(fixture.nativeElement.querySelector('[role="alert"]')?.textContent).toBe(`Error: ${RATE_LIMIT_MESSAGE}`);
+        expect(text).toContain(RATE_LIMIT_MESSAGE);
+        expect(text).not.toContain(providerBody);
+        expect(text).not.toContain(TEST_ONLY_NOT_A_REAL_KEY);
+    });
+
+    it('keeps the existing generic safe message for non-429 failures', async () => {
+        service.send.mockRejectedValue(new Error('provider outage details'));
+        openChat();
+
+        await sendAndWait('Question during an outage');
+
+        expect(fixture.nativeElement.querySelector('[role="alert"]')?.textContent).toBe(
+            'Error: The assistant could not complete this request. Please try again.'
+        );
+        expect(fixture.nativeElement.textContent).not.toContain('provider outage details');
+    });
+
     it('supports keyboard open, Escape close, submit, Stop, focus return, and a polite message log', () => {
         const fab = fixture.nativeElement.querySelector<HTMLButtonElement>('.fd-guide-fab');
         fab.focus();
@@ -211,7 +306,13 @@ describe('FdGuideChatComponent', () => {
         input('input[type="password"][aria-label="Gemini API key"]', TEST_ONLY_NOT_A_REAL_KEY);
         textarea.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
         fixture.detectChanges();
-        expect(service.send).toHaveBeenCalledWith('Explain fd-dialog', TEST_ONLY_NOT_A_REAL_KEY, expect.any(Function));
+        expect(service.send).toHaveBeenCalledWith(
+            'Explain fd-dialog',
+            TEST_ONLY_NOT_A_REAL_KEY,
+            expect.any(Function),
+            [],
+            'google'
+        );
 
         const stop = fixture.nativeElement.querySelector<HTMLButtonElement>('button[aria-label="Stop generating"]');
         expect(stop).not.toBeNull();
@@ -304,7 +405,8 @@ describe('FdGuideChatComponent', () => {
                     mediaType: 'image/png',
                     dataUrl: expect.stringContaining('data:image/png;base64,')
                 })
-            ]
+            ],
+            'google'
         );
         expect(fixture.nativeElement.querySelector('.fd-guide-chat__bubble-attachments')).not.toBeNull();
         request.resolve();

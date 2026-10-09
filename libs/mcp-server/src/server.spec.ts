@@ -17,6 +17,14 @@ import { createServer, loadCatalogFromDisk } from './server';
 import { ComponentCatalog, ComponentMetadata } from './types/component-metadata';
 import { buildPitfalls, buildTemplate, deriveImportPath, getSelectorType } from './utils/selector-utils';
 
+jest.mock('fs', () => {
+    const actual = jest.requireActual<typeof import('fs')>('fs');
+    return { ...actual, readFileSync: jest.fn(actual.readFileSync) };
+});
+
+const realReadFileSync = jest.requireActual<typeof import('fs')>('fs').readFileSync;
+const mockedReadFileSync = readFileSync as jest.MockedFunction<typeof readFileSync>;
+
 // ---------------------------------------------------------------------------
 // We test the server's helper functions by re-implementing the lookup logic
 // against a fixture catalog. This avoids spawning a full MCP server process
@@ -573,6 +581,68 @@ describe('MCP Server helpers', () => {
             const queryWords = ['flexible', 'column'];
             const score = queryWords.reduce((sum, w) => sum + scoreMatch(FIXTURE_COMPONENTS[4], w), 0); // DeprecatedComponent
             expect(score).toBe(0);
+        });
+    });
+});
+
+describe('MCP catalog loading contract', () => {
+    const validCatalog = {
+        generatedAt: '2026-10-09T00:00:00.000Z',
+        version: '0.65.1-rc.0',
+        components: [
+            {
+                name: 'FixtureComponent',
+                selector: 'fd-fixture',
+                library: '@fundamental-ngx/core',
+                category: 'Test',
+                description: 'Fixture component',
+                inputs: [
+                    { name: 'state', type: 'Signal<boolean>', description: 'Internal state', required: false },
+                    { name: 'label', type: 'string', description: 'Visible label', required: false }
+                ],
+                outputs: [],
+                slots: [],
+                methods: [],
+                cssProperties: [],
+                source: 'typedoc'
+            }
+        ]
+    };
+
+    afterEach(() => {
+        mockedReadFileSync.mockReset();
+        mockedReadFileSync.mockImplementation(realReadFileSync);
+    });
+
+    it.each<[string, () => string]>([
+        [
+            'missing components.json',
+            () => {
+                throw new Error('ENOENT');
+            }
+        ],
+        ['malformed JSON', () => '{not-json'],
+        ['wrong top-level structure', () => JSON.stringify([])],
+        ['missing version', () => JSON.stringify({ ...validCatalog, version: undefined })],
+        ['invalid version', () => JSON.stringify({ ...validCatalog, version: 42 })],
+        ['empty component array', () => JSON.stringify({ ...validCatalog, components: [] })]
+    ])('fails clearly for %s instead of returning a successful empty catalog', (_caseName, readFixture) => {
+        mockedReadFileSync.mockImplementation(readFixture as never);
+
+        expect(() => loadCatalogFromDisk()).toThrow(/catalog|component|version|json|empty|ENOENT/i);
+    });
+
+    it('loads valid generated metadata and normalizes signal-wrapper inputs', () => {
+        mockedReadFileSync.mockReturnValue(JSON.stringify(validCatalog) as never);
+
+        expect(loadCatalogFromDisk()).toEqual({
+            ...validCatalog,
+            components: [
+                expect.objectContaining({
+                    selector: 'fd-fixture',
+                    inputs: [{ name: 'label', type: 'string', description: 'Visible label', required: false }]
+                })
+            ]
         });
     });
 });
@@ -1259,6 +1329,24 @@ describe('bounded chat-facing tool contracts', () => {
         });
     });
 
+    it('describes list_components as bounded pagination with an accurate continuation contract', async () => {
+        await withFullCatalogClient(async (client) => {
+            const { tools } = await client.listTools();
+            const listTool = tools.find((tool) => tool.name === 'list_components');
+            const description = listTool?.description ?? '';
+
+            expect(description).toMatch(/paginated/i);
+            expect(description).toMatch(/default.*50|50.*default/i);
+            expect(description).toMatch(/maximum.*100|100.*maximum/i);
+            expect(description).toMatch(/limit/i);
+            expect(description).toMatch(/cursor/i);
+            expect(description).toMatch(/nextCursor/i);
+            expect(description).toMatch(/count.*page|page.*count/i);
+            expect(description).toMatch(/totalCount.*matching|matching.*totalCount/i);
+            expect(description).not.toMatch(/list all .*components|all .*components in one/i);
+        });
+    });
+
     it('get_component_api excludes documentation examples, including for fdp-table', async () => {
         await withFullCatalogClient(async (client) => {
             const result = (await client.callTool({
@@ -1332,6 +1420,32 @@ describe('bounded chat-facing tool contracts', () => {
             });
         });
     }
+
+    it('logs only tool name, duration, and outcome for tool calls', async () => {
+        const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => undefined);
+        try {
+            await withFullCatalogClient(async (client) => {
+                await client.callTool({
+                    name: 'search_components',
+                    arguments: { query: 'fixture-sensitive-query' }
+                });
+                await client.callTool({
+                    name: 'get_component_api',
+                    arguments: { name: 'fixture-sensitive-component' }
+                });
+            });
+
+            const output = JSON.stringify(errorSpy.mock.calls);
+            expect(output).toContain('search_components');
+            expect(output).toMatch(/duration|elapsed|\d+ms/i);
+            expect(output).toMatch(/outcome|success|failure|✓|✗/i);
+            expect(output).not.toContain('fixture-sensitive-query');
+            expect(output).not.toContain('fixture-sensitive-component');
+            expect(output).not.toMatch(/arguments|result|preview|Error:|stack|credential|secret/i);
+        } finally {
+            errorSpy.mockRestore();
+        }
+    });
 
     it('the default server retains the complete component-catalog resource for local clients', async () => {
         await withFullCatalogClient(async (client) => {

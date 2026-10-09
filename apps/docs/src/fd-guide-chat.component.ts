@@ -1,11 +1,11 @@
 import {
+    afterRenderEffect,
     ChangeDetectionStrategy,
     Component,
-    DestroyRef,
-    ElementRef,
-    afterRenderEffect,
     computed,
+    DestroyRef,
     effect,
+    ElementRef,
     inject,
     signal,
     viewChild
@@ -19,12 +19,15 @@ import {
     CHAT_ATTACHMENT_MEDIA_TYPES,
     ChatAttachment,
     ChatAttachmentMediaType,
+    ChatProvider,
     DEPLOYED_ATTACHMENT_LIMIT_BYTES,
     FdGuideChatService,
+    isChatRateLimitError,
     LOCAL_ATTACHMENT_LIMIT_BYTES
 } from './fd-guide-chat.service';
 
 const MAXIMUM_CHAT_ATTACHMENTS = 3;
+const CHAT_RATE_LIMIT_MESSAGE = 'Too many requests. Please wait a moment and try again.';
 const IS_APPLE_PLATFORM = typeof navigator !== 'undefined' && /Mac|iPhone|iPad|iPod/i.test(navigator.platform);
 
 type ChatStatus = 'idle' | 'submitted' | 'streaming' | 'error';
@@ -114,6 +117,7 @@ export class FdGuideChatComponent {
     readonly isApiKeyEditorOpen = signal(true);
     readonly userInput = signal('');
     readonly apiKey = signal('');
+    readonly provider = signal<ChatProvider>('google');
     readonly localProviderAvailable = signal(false);
     readonly attachments = signal<StagedChatAttachment[]>([]);
     readonly attachmentError = signal<string | null>(null);
@@ -128,6 +132,9 @@ export class FdGuideChatComponent {
     readonly catalogVersion = signal<string | null>(null);
     readonly statusMessage = signal('Chat ready.');
     readonly attachmentLimitLabel = computed(() => formatAttachmentLimit(this.attachmentLimitBytes()));
+    readonly providerName = computed(() => (this.provider() === 'google' ? 'Gemini' : 'Groq'));
+    readonly apiKeyLabel = computed(() => `${this.providerName()} API key`);
+    readonly canAttachFiles = computed(() => this.provider() !== 'groq');
     readonly isBusy = computed(() => this.status() === 'submitted' || this.status() === 'streaming');
     readonly chatToggleShortcut = IS_APPLE_PLATFORM ? '⌘B' : 'Ctrl+Shift+G';
     readonly micShortcut = IS_APPLE_PLATFORM ? '⌘+Shift+M' : 'Ctrl+Shift+M';
@@ -313,17 +320,25 @@ export class FdGuideChatComponent {
         try {
             const onEvent = (event: ChatEvent): void => this._handleEvent(event, assistantId, requestSequence);
             if (attachments.length) {
-                await this._chatService.send(question, key, onEvent, attachments);
+                await this._chatService.send(question, key, onEvent, attachments, this.provider());
             } else {
-                await this._chatService.send(question, key, onEvent);
+                await this._chatService.send(question, key, onEvent, [], this.provider());
             }
-        } catch {
+        } catch (error) {
             if (requestSequence === this._requestSequence) {
                 this._speechResponsePending = false;
                 this._lastSpokenLength = 0;
-                this.error.set('The assistant could not complete this request. Please try again.');
+                this.error.set(
+                    isChatRateLimitError(error)
+                        ? CHAT_RATE_LIMIT_MESSAGE
+                        : 'The assistant could not complete this request. Please try again.'
+                );
                 this.status.set('error');
-                this.statusMessage.set('The assistant could not complete this request.');
+                this.statusMessage.set(
+                    isChatRateLimitError(error)
+                        ? CHAT_RATE_LIMIT_MESSAGE
+                        : 'The assistant could not complete this request.'
+                );
             }
         } finally {
             if (requestSequence === this._requestSequence && this.isBusy()) {
@@ -344,6 +359,22 @@ export class FdGuideChatComponent {
     onTextareaInput(event: Event): void {
         this.userInput.set((event.target as HTMLTextAreaElement).value);
         this._lastInputWasVoice = false;
+    }
+
+    onApiKeyInput(event: Event): void {
+        this.apiKey.set((event.target as HTMLInputElement).value);
+    }
+
+    onProviderChange(event: Event): void {
+        const provider = (event.target as HTMLSelectElement).value;
+        if ((provider !== 'google' && provider !== 'groq') || provider === this.provider()) {
+            return;
+        }
+
+        this.provider.set(provider);
+        this.apiKey.set('');
+        this.attachments.set([]);
+        this.attachmentError.set(null);
     }
 
     toggleSpeechRecognition(): void {
@@ -402,7 +433,12 @@ export class FdGuideChatComponent {
     }
 
     onAttachShortcut(event: Event): void {
-        if (isTextEntryTarget(event.target) || this.isBusy() || this.attachments().length >= MAXIMUM_CHAT_ATTACHMENTS) {
+        if (
+            isTextEntryTarget(event.target) ||
+            this.isBusy() ||
+            !this.canAttachFiles() ||
+            this.attachments().length >= MAXIMUM_CHAT_ATTACHMENTS
+        ) {
             return;
         }
         event.preventDefault();
@@ -418,6 +454,9 @@ export class FdGuideChatComponent {
     }
 
     openFilePicker(): void {
+        if (!this.canAttachFiles()) {
+            return;
+        }
         this.attachmentError.set(null);
         this._fileInput()?.nativeElement.click();
     }
@@ -426,6 +465,9 @@ export class FdGuideChatComponent {
         const input = event.target as HTMLInputElement;
         const files = input.files ? Array.from(input.files) : [];
         input.value = '';
+        if (!this.canAttachFiles()) {
+            return;
+        }
         if (!files.length) {
             return;
         }

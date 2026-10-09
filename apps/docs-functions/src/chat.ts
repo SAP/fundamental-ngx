@@ -22,8 +22,10 @@ import {
 } from './_shared/chat-contract';
 import { createRequestDeadline, withDeadline } from './_shared/deadline';
 import { isJsonRequest, jsonError, readLimitedBody, STREAM_HEADERS } from './_shared/http';
+import { createOperationalLogger, type OperationalOutcome } from './_shared/operational-logger';
 
 const API_KEY_HEADER = 'x-gemini-api-key';
+const GROQ_API_KEY_HEADER = 'x-groq-api-key';
 const OVERALL_DEADLINE_MS = 50_000;
 const MCP_DEADLINE_MS = 10_000;
 const MAXIMUM_SOURCES = 5;
@@ -65,9 +67,11 @@ export type {
     ChatRequest,
     ChatSource
 } from './_shared/chat-contract';
-export { API_KEY_HEADER };
+export { API_KEY_HEADER, GROQ_API_KEY_HEADER };
 
 export default async function chat(request: Request): Promise<Response> {
+    const logger = createOperationalLogger();
+
     if (request.method === 'GET' && isLocalDevelopmentRequest(request)) {
         return localProviderStatusResponse();
     }
@@ -79,9 +83,38 @@ export default async function chat(request: Request): Promise<Response> {
     if (validation.hasAttachments && validation.credentials.provider === 'groq') {
         return jsonError(400, 'Attachments are not supported by the configured model');
     }
+    const deterministicAnswer = validation.hasAttachments ? undefined : classifyDeterministic(validation.body.messages);
+    if (deterministicAnswer) {
+        return eventResponse([
+            { type: 'text-delta', text: deterministicAnswer },
+            { type: 'sources', items: [] },
+            { type: 'done' }
+        ]);
+    }
 
     const deadline = createRequestDeadline(request.signal, OVERALL_DEADLINE_MS);
     let client: MCPClient | undefined;
+    let cleanupRequested = false;
+    let closeStarted = false;
+    let closePromise = Promise.resolve();
+    const cleanup = async (): Promise<void> => {
+        cleanupRequested = true;
+        deadline.signal.removeEventListener('abort', cleanupOnAbort);
+        deadline.abort();
+        deadline.dispose();
+
+        if (!closeStarted && client) {
+            closeStarted = true;
+            const activeClient = client;
+            client = undefined;
+            closePromise = closeClient(activeClient);
+        }
+        await closePromise;
+    };
+    const cleanupOnAbort = (): void => {
+        void cleanup();
+    };
+    deadline.signal.addEventListener('abort', cleanupOnAbort, { once: true });
 
     try {
         const { createMCPClient } = await import('@ai-sdk/mcp');
@@ -95,21 +128,9 @@ export default async function chat(request: Request): Promise<Response> {
             },
             maxRetries: 0
         });
-
-        const deterministicAnswer = validation.hasAttachments
-            ? undefined
-            : classifyDeterministic(validation.body.messages);
-        if (deterministicAnswer) {
-            const deterministicCatalogVersion = readCatalogVersion(client);
-            await closeClient(client);
-            client = undefined;
-            deadline.dispose();
-            return eventResponse([
-                { type: 'meta', catalogVersion: deterministicCatalogVersion },
-                { type: 'text-delta', text: deterministicAnswer },
-                { type: 'sources', items: [] },
-                { type: 'done' }
-            ]);
+        if (cleanupRequested) {
+            await cleanup();
+            throw new Error('Operation cancelled');
         }
 
         const discoveredTools = await loadTools(client, deadline.signal);
@@ -147,16 +168,12 @@ export default async function chat(request: Request): Promise<Response> {
         };
         const result = streamText(options);
         const catalogVersion = readCatalogVersion(client);
-        const activeClient = client;
-        const response = streamResponse(result.textStream, catalogVersion, sourceState, async () => {
-            await closeClient(activeClient);
-            deadline.dispose();
-        });
-        client = undefined;
-        return response;
-    } catch {
-        await closeClient(client);
-        deadline.dispose();
+        return streamResponse(result.textStream, catalogVersion, sourceState, cleanup, (stage, error, outcome) =>
+            logger.record(stage, error, outcome)
+        );
+    } catch (error) {
+        logger.record('chat-orchestration', error, deadline.signal.aborted ? 'cancelled' : 'failure');
+        await cleanup();
         return jsonError(500, 'The documentation assistant could not complete this request');
     }
 }
@@ -174,8 +191,11 @@ async function validateRequest(request: Request): Promise<ValidatedChatRequest |
     }
 
     const credentials = resolveCredentials(request);
+    if (credentials === 'ambiguous') {
+        return jsonError(400, 'Provide only one supported API key header');
+    }
     if (!credentials) {
-        return jsonError(401, `The ${API_KEY_HEADER} header is required`);
+        return jsonError(401, `The ${API_KEY_HEADER} or ${GROQ_API_KEY_HEADER} header is required`);
     }
 
     const localDevelopment = isLocalDevelopmentRequest(request);
@@ -206,10 +226,17 @@ async function validateRequest(request: Request): Promise<ValidatedChatRequest |
     return { body: validation.body, credentials, hasAttachments: validation.hasAttachments };
 }
 
-function resolveCredentials(request: Request): ModelCredentials | undefined {
-    const apiKey = request.headers.get(API_KEY_HEADER)?.trim();
-    if (apiKey) {
-        return { provider: 'google', apiKey, modelId: MODEL_ID };
+function resolveCredentials(request: Request): ModelCredentials | 'ambiguous' | undefined {
+    const googleApiKey = request.headers.get(API_KEY_HEADER)?.trim();
+    const groqApiKey = request.headers.get(GROQ_API_KEY_HEADER)?.trim();
+    if (googleApiKey && groqApiKey) {
+        return 'ambiguous';
+    }
+    if (googleApiKey) {
+        return { provider: 'google', apiKey: googleApiKey, modelId: MODEL_ID };
+    }
+    if (groqApiKey) {
+        return { provider: 'groq', apiKey: groqApiKey, modelId: GROQ_MODEL_ID };
     }
     if (!isLocalDevelopmentRequest(request)) {
         return undefined;
@@ -343,14 +370,21 @@ function resolveMcpUrl(request: Request): string {
 async function loadTools(client: MCPClient, signal: AbortSignal): Promise<ToolSet> {
     if (typeof client.listTools === 'function' && typeof client.toolsFromDefinitions === 'function') {
         const definitions = await withDeadline(
-            client.listTools({ options: { signal, timeout: MCP_DEADLINE_MS, maxTotalTimeout: MCP_DEADLINE_MS } }),
+            (operationSignal) =>
+                client.listTools({
+                    options: { signal: operationSignal, timeout: MCP_DEADLINE_MS, maxTotalTimeout: MCP_DEADLINE_MS }
+                }),
             MCP_DEADLINE_MS,
             signal
         );
         return client.toolsFromDefinitions(definitions);
     }
 
-    return withDeadline(client.tools(), MCP_DEADLINE_MS, signal);
+    return withDeadline(
+        (operationSignal) => client.tools({ signal: operationSignal } as never),
+        MCP_DEADLINE_MS,
+        signal
+    );
 }
 
 function selectTools(
@@ -389,15 +423,14 @@ function wrapTool(
             if (containsAttachmentPayload(input, forbiddenAttachmentPayloads)) {
                 throw new Error('Attachment data is not allowed in documentation tool input');
             }
-            const operation = createRequestDeadline(parentSignal, MCP_DEADLINE_MS);
-            try {
-                const output = await execute(input, { ...options, abortSignal: operation.signal });
-                sourceState.evidence = true;
-                collectSources(output, sourceState.items);
-                return output;
-            } finally {
-                operation.dispose();
-            }
+            const output = await withDeadline(
+                (operationSignal) => execute(input, { ...options, abortSignal: operationSignal }),
+                MCP_DEADLINE_MS,
+                parentSignal
+            );
+            sourceState.evidence = true;
+            collectSources(output, sourceState.items);
+            return output;
         }
     } as ToolSet[string];
 }
@@ -410,11 +443,16 @@ async function collectInitialEvidence(
 ): Promise<void> {
     const query = (messages.at(-1)?.content ?? '').slice(0, 512);
     const searchResult = await withDeadline(
-        client.callTool({
-            name: 'search_components',
-            arguments: { query, limit: MAXIMUM_SOURCES },
-            options: { signal, timeout: MCP_DEADLINE_MS, maxTotalTimeout: MCP_DEADLINE_MS }
-        }),
+        (operationSignal) =>
+            client.callTool({
+                name: 'search_components',
+                arguments: { query, limit: MAXIMUM_SOURCES },
+                options: {
+                    signal: operationSignal,
+                    timeout: MCP_DEADLINE_MS,
+                    maxTotalTimeout: MCP_DEADLINE_MS
+                }
+            }),
         MCP_DEADLINE_MS,
         signal
     );
@@ -429,11 +467,16 @@ async function collectInitialEvidence(
     }
 
     const apiResult = await withDeadline(
-        client.callTool({
-            name: 'get_component_api',
-            arguments: { name: selector },
-            options: { signal, timeout: MCP_DEADLINE_MS, maxTotalTimeout: MCP_DEADLINE_MS }
-        }),
+        (operationSignal) =>
+            client.callTool({
+                name: 'get_component_api',
+                arguments: { name: selector },
+                options: {
+                    signal: operationSignal,
+                    timeout: MCP_DEADLINE_MS,
+                    maxTotalTimeout: MCP_DEADLINE_MS
+                }
+            }),
         MCP_DEADLINE_MS,
         signal
     );
@@ -545,9 +588,11 @@ function streamResponse(
     textStream: AsyncIterable<string>,
     catalogVersion: string,
     sourceState: SourceState,
-    cleanup: () => Promise<void>
+    cleanup: () => Promise<void>,
+    log: (stage: string, error: unknown, outcome: OperationalOutcome) => void
 ): Response {
     let cleanupPromise: Promise<void> | undefined;
+    let cancelled = false;
     const cleanupOnce = (): Promise<void> => (cleanupPromise ??= cleanup());
     const body = new ReadableStream<Uint8Array>({
         async start(controller) {
@@ -570,20 +615,27 @@ function streamResponse(
                 controller.enqueue(
                     encodeEvent({ type: 'sources', items: sourceState.items.slice(0, MAXIMUM_SOURCES) })
                 );
-            } catch {
-                controller.enqueue(
-                    encodeEvent({
-                        type: 'error',
-                        message: 'The answer could not be completed. Please retry with a narrower question.'
-                    })
-                );
+            } catch (error) {
+                if (!cancelled) {
+                    log('chat-stream', error, 'failure');
+                    controller.enqueue(
+                        encodeEvent({
+                            type: 'error',
+                            message: 'The answer could not be completed. Please retry with a narrower question.'
+                        })
+                    );
+                }
             } finally {
                 await cleanupOnce();
-                controller.enqueue(encodeEvent({ type: 'done' }));
-                controller.close();
+                if (!cancelled) {
+                    controller.enqueue(encodeEvent({ type: 'done' }));
+                    controller.close();
+                }
             }
         },
         async cancel() {
+            cancelled = true;
+            log('chat-stream', undefined, 'cancelled');
             await cleanupOnce();
         }
     });

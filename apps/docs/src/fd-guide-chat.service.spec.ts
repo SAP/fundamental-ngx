@@ -39,6 +39,26 @@ describe('FdGuideChatService', () => {
         )(content, apiKey, onEvent, attachments);
     }
 
+    function responseFor(answer: string): Response {
+        return ndjsonResponse([{ type: 'text-delta', text: answer }, { type: 'done' }]);
+    }
+
+    function requestMessages(callIndex: number): Array<{ role: string; content: string; attachments?: unknown[] }> {
+        const body = JSON.parse(String(fetchSpy.mock.calls[callIndex][1]?.body)) as {
+            messages: Array<{ role: string; content: string; attachments?: unknown[] }>;
+        };
+        return body.messages;
+    }
+
+    async function completeTurn(question: string, answer: string, attachments: unknown[] = []): Promise<void> {
+        fetchSpy.mockResolvedValueOnce(responseFor(answer));
+        if (attachments.length) {
+            await sendWithAttachments(question, TEST_ONLY_NOT_A_REAL_KEY, attachments, () => undefined);
+        } else {
+            await service.send(question, TEST_ONLY_NOT_A_REAL_KEY, () => undefined);
+        }
+    }
+
     it('detects when the local Function has a server-side provider', async () => {
         fetchSpy.mockResolvedValue(Response.json({ localProvider: true }));
 
@@ -89,6 +109,20 @@ describe('FdGuideChatService', () => {
         expect(events).toEqual([{ type: 'done' }]);
     });
 
+    it('sends a Groq key only in x-groq-api-key', async () => {
+        fetchSpy.mockResolvedValue(ndjsonResponse([{ type: 'done' }]));
+
+        await service.send('How do I use fd-button?', TEST_ONLY_NOT_A_REAL_KEY, () => undefined, [], 'groq');
+
+        const [url, init] = fetchSpy.mock.calls[0];
+        const headers = new Headers(init?.headers);
+        expect(url).toBe('/api/chat');
+        expect(headers.get('x-groq-api-key')).toBe(TEST_ONLY_NOT_A_REAL_KEY);
+        expect(headers.has('x-gemini-api-key')).toBe(false);
+        expect(String(init?.body)).not.toContain(TEST_ONLY_NOT_A_REAL_KEY);
+        expect(String(url)).not.toContain(TEST_ONLY_NOT_A_REAL_KEY);
+    });
+
     it('puts attachments only on the newest user message and never resends file data in later text-only history', async () => {
         const attachment = fakeChatAttachment('image/png');
         fetchSpy
@@ -110,6 +144,103 @@ describe('FdGuideChatService', () => {
         expect(String(fetchSpy.mock.calls[1][0])).not.toContain(attachment.dataUrl);
     });
 
+    it('retains exactly the newest four complete pairs and sends the newest three pairs plus the current user', async () => {
+        for (let turn = 1; turn <= 6; turn++) {
+            await completeTurn(`question-${turn}`, `answer-${turn}`);
+        }
+
+        await completeTurn('question-7', 'answer-7');
+
+        expect(requestMessages(6)).toEqual([
+            { role: 'user', content: 'question-4' },
+            { role: 'assistant', content: 'answer-4' },
+            { role: 'user', content: 'question-5' },
+            { role: 'assistant', content: 'answer-5' },
+            { role: 'user', content: 'question-6' },
+            { role: 'assistant', content: 'answer-6' },
+            { role: 'user', content: 'question-7' }
+        ]);
+        expect(requestMessages(6)).toHaveLength(7);
+        expect(requestMessages(6)[0].role).toBe('user');
+        expect(requestMessages(6).at(-1)).toEqual({ role: 'user', content: 'question-7' });
+        expect(
+            requestMessages(6).some((message) => message.role === 'assistant' && message.content === 'answer-3')
+        ).toBe(false);
+    });
+
+    it('preserves exact role/content order and does not regrow bounded history on later successful turns', async () => {
+        for (let turn = 1; turn <= 8; turn++) {
+            await completeTurn(`question-${turn}`, `answer-${turn}`);
+        }
+
+        expect(requestMessages(6)).toEqual([
+            { role: 'user', content: 'question-4' },
+            { role: 'assistant', content: 'answer-4' },
+            { role: 'user', content: 'question-5' },
+            { role: 'assistant', content: 'answer-5' },
+            { role: 'user', content: 'question-6' },
+            { role: 'assistant', content: 'answer-6' },
+            { role: 'user', content: 'question-7' }
+        ]);
+        expect(requestMessages(7)).toEqual([
+            { role: 'user', content: 'question-5' },
+            { role: 'assistant', content: 'answer-5' },
+            { role: 'user', content: 'question-6' },
+            { role: 'assistant', content: 'answer-6' },
+            { role: 'user', content: 'question-7' },
+            { role: 'assistant', content: 'answer-7' },
+            { role: 'user', content: 'question-8' }
+        ]);
+        expect(requestMessages(7)).toHaveLength(7);
+    });
+
+    it('keeps attachments current-turn-only while older text pairs fall out of bounded history', async () => {
+        const attachment = fakeChatAttachment('image/png');
+        await completeTurn('question-1', 'answer-1');
+        await completeTurn('question-2-with-file', 'answer-2', [attachment]);
+        await completeTurn('question-3', 'answer-3');
+        await completeTurn('question-4', 'answer-4');
+        await completeTurn('question-5', 'answer-5');
+        await completeTurn('question-6', 'answer-6');
+        await completeTurn('question-7', 'answer-7');
+
+        expect(requestMessages(1)).toEqual([
+            { role: 'user', content: 'question-1' },
+            { role: 'assistant', content: 'answer-1' },
+            { role: 'user', content: 'question-2-with-file', attachments: [attachment] }
+        ]);
+        const messages = requestMessages(6);
+        expect(messages).toEqual([
+            { role: 'user', content: 'question-4' },
+            { role: 'assistant', content: 'answer-4' },
+            { role: 'user', content: 'question-5' },
+            { role: 'assistant', content: 'answer-5' },
+            { role: 'user', content: 'question-6' },
+            { role: 'assistant', content: 'answer-6' },
+            { role: 'user', content: 'question-7' }
+        ]);
+        expect(JSON.stringify(messages)).not.toContain(attachment.dataUrl);
+        expect(JSON.stringify(messages)).not.toContain('question-2-with-file');
+    });
+
+    it('returns a typed stable rate-limit outcome without exposing the 429 response body or key', async () => {
+        const providerBody = `provider failure details ${TEST_ONLY_NOT_A_REAL_KEY}`;
+        const response = new Response(providerBody, { status: 429 });
+        const textSpy = jest.spyOn(response, 'text');
+        const jsonSpy = jest.spyOn(response, 'json');
+        fetchSpy.mockResolvedValue(response);
+
+        const request = service.send('Question', TEST_ONLY_NOT_A_REAL_KEY, () => undefined);
+
+        await expect(request).rejects.toMatchObject({ name: 'ChatRateLimitError', status: 429 });
+        await request.catch((error: unknown) => {
+            expect(String(error)).not.toContain(providerBody);
+            expect(String(error)).not.toContain(TEST_ONLY_NOT_A_REAL_KEY);
+        });
+        expect(textSpy).not.toHaveBeenCalled();
+        expect(jsonSpy).not.toHaveBeenCalled();
+    });
+
     it('omits the key header when using the local server provider', async () => {
         fetchSpy.mockResolvedValue(ndjsonResponse([{ type: 'done' }]));
 
@@ -118,6 +249,7 @@ describe('FdGuideChatService', () => {
         expect(fetchSpy).toHaveBeenCalledTimes(1);
         const [, init] = fetchSpy.mock.calls[0];
         expect(new Headers(init?.headers).has('x-gemini-api-key')).toBe(false);
+        expect(new Headers(init?.headers).has('x-groq-api-key')).toBe(false);
     });
 
     it('does not place the key in Web Storage, cookies, credentials, or request URL state', async () => {

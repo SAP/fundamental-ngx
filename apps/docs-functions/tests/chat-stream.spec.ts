@@ -17,8 +17,19 @@ jest.mock('@ai-sdk/mcp', () => ({
         return {
             tools: async () =>
                 Object.fromEntries(mockedMcpState.toolNames.map((name) => [name, { description: name }])),
-            callTool: async ({ name, arguments: args }: { name: string; arguments: unknown }) => {
+            callTool: async ({
+                name,
+                arguments: args,
+                options
+            }: {
+                name: string;
+                arguments: unknown;
+                options?: { signal?: AbortSignal };
+            }) => {
                 mockedMcpState.calls.push({ name, args });
+                if (options?.signal) {
+                    mockedMcpState.operationSignals.push(options.signal);
+                }
                 const result =
                     name === 'search_components'
                         ? { results: [{ name: 'DialogComponent', selector: 'fd-dialog' }] }
@@ -43,9 +54,10 @@ jest.mock('@ai-sdk/google', () => ({
 
 jest.mock('ai', () => ({
     stepCountIs: (value: number) => ({ type: 'step-count', value }),
-    streamText: () => {
+    streamText: (options: unknown) => {
         const { sharedGeminiState: mockedGeminiState } =
             require('./fixtures/fakes') as typeof import('./fixtures/fakes');
+        mockedGeminiState.abortSignals.push((options as { abortSignal: AbortSignal }).abortSignal);
         return {
             textStream: (async function* () {
                 if (!mockedGeminiState.emptyStream) {
@@ -79,6 +91,8 @@ describe('/api/chat NDJSON stream contract', () => {
         sharedMcpState.openedUrls.length = 0;
         sharedMcpState.closeCalls = 0;
         sharedMcpState.calls.length = 0;
+        sharedMcpState.operationSignals.length = 0;
+        sharedGeminiState.abortSignals.length = 0;
     });
 
     it('uses the application-owned NDJSON content type and no-store/no-transform headers', async () => {

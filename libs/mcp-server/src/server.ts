@@ -31,6 +31,10 @@ const SEARCH_STOP_WORDS = new Set([
 ]);
 const SELECTOR_REFERENCE_PATTERN = /\b(?:fd|fdp|fdb|fdk|ui5)-[a-z0-9-]+\b/g;
 
+function isRecord(value: unknown): value is Record<string, unknown> {
+    return typeof value === 'object' && value !== null && !Array.isArray(value);
+}
+
 export interface CreateServerOptions {
     includeCatalogResource?: boolean;
 }
@@ -56,14 +60,35 @@ export function normalizeCatalog(raw: ComponentCatalog): ComponentCatalog {
 }
 
 export function loadCatalogFromDisk(): ComponentCatalog {
+    const dataPath = resolve(__dirname, 'data', 'components.json');
+    let source: string;
     try {
-        const dataPath = resolve(__dirname, 'data', 'components.json');
-        const raw = JSON.parse(readFileSync(dataPath, 'utf-8')) as ComponentCatalog;
-        return normalizeCatalog(raw);
-    } catch {
-        console.error('Warning: components.json not found. Run `nx run mcp-server:extract-metadata` first.');
-        return { generatedAt: new Date().toISOString(), version: 'unknown', components: [] };
+        source = readFileSync(dataPath, 'utf-8');
+    } catch (cause) {
+        throw new Error('Component catalog file is missing or unreadable', { cause });
     }
+
+    let parsed: unknown;
+    try {
+        parsed = JSON.parse(source);
+    } catch (cause) {
+        throw new Error('Component catalog contains invalid JSON', { cause });
+    }
+
+    if (!isRecord(parsed) || typeof parsed.generatedAt !== 'string' || !Array.isArray(parsed.components)) {
+        throw new Error('Component catalog has an invalid top-level structure');
+    }
+    if (typeof parsed.version !== 'string' || parsed.version.trim().length === 0) {
+        throw new Error('Component catalog has an invalid version');
+    }
+    if (parsed.components.length === 0) {
+        throw new Error('Component catalog has an empty components array');
+    }
+    if (parsed.components.some((component) => !isRecord(component) || !Array.isArray(component.inputs))) {
+        throw new Error('Component catalog has invalid component metadata');
+    }
+
+    return normalizeCatalog(parsed as unknown as ComponentCatalog);
 }
 
 /**
@@ -79,7 +104,7 @@ const TOOL_LOGGING_ENABLED =
         process.env.NODE_ENV !== 'production');
 
 /**
- * Wraps a tool handler so each call logs its name, arguments, and duration.
+ * Wraps a tool handler so each call logs its name, duration, and outcome.
  *
  * This is the server-side ground truth that a tool actually ran (as opposed to a
  * model answering from memory and never reaching the MCP server). Logs go to
@@ -91,20 +116,13 @@ function withToolLogging<F extends (...args: never[]) => unknown>(name: string, 
     }
     const wrapped = async (...args: Parameters<F>): Promise<unknown> => {
         const start = Date.now();
-        let argPreview = '';
-        try {
-            argPreview = JSON.stringify(args[0] ?? {});
-        } catch {
-            argPreview = '<unserializable>';
-        }
-        console.error(`[mcp:tool] → ${name} ${argPreview}`);
         try {
             const result = await handler(...args);
-            console.error(`[mcp:tool] ✓ ${name} (${Date.now() - start}ms)`);
+            console.error(`[mcp:tool] ${name} duration=${Date.now() - start}ms outcome=success`);
             return result;
-        } catch (err) {
-            console.error(`[mcp:tool] ✗ ${name} (${Date.now() - start}ms):`, err);
-            throw err;
+        } catch (error) {
+            console.error(`[mcp:tool] ${name} duration=${Date.now() - start}ms outcome=failure`);
+            throw error;
         }
     };
     return wrapped as unknown as F;
@@ -141,7 +159,10 @@ export function createServer(catalog: ComponentCatalog, options: CreateServerOpt
     // ---------------------------------------------------------------------------
     server.tool(
         'list_components',
-        `List all Fundamental NGX components. Returns name, selector, library, and description.
+        `List Fundamental NGX components as paginated results with a default page size of 50 and maximum of 100.
+Use limit to select the page size and cursor to continue; follow nextCursor until it is omitted.
+The count field is the number of components on the current page, while totalCount is the size of the matching set.
+Returns name, selector, library, and description.
 Optionally filter by library (core, platform, btp, cx, cdk, ui5, ui5-fiori, ui5-ai)
 or category (Action, Form, Layout, Display, Navigation, etc.).
 Use this to discover what components are available.`,

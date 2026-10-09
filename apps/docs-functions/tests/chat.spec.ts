@@ -17,35 +17,89 @@ import {
 } from './fixtures/fakes';
 
 jest.mock('@ai-sdk/mcp', () => ({
-    createMCPClient: jest.fn(async ({ transport }: { transport: { url: string } }) => {
-        const { sharedMcpState: mockedMcpState } = require('./fixtures/fakes') as typeof import('./fixtures/fakes');
-        mockedMcpState.openedUrls.push(transport.url);
-        return {
-            tools: async () =>
-                Object.fromEntries(mockedMcpState.toolNames.map((name) => [name, { description: name }])),
-            callTool: async ({ name, arguments: args }: { name: string; arguments: unknown }) => {
-                mockedMcpState.calls.push({ name, args });
-                if (mockedMcpState.blockTools) {
-                    return new Promise(() => undefined);
-                }
-                if (mockedMcpState.failTools) {
-                    throw new Error('fixture MCP failure');
-                }
-                const result =
-                    name === 'search_components'
-                        ? { results: [{ name: 'DialogComponent', selector: 'fd-dialog' }] }
-                        : {
-                              name: 'DialogComponent',
-                              selector: 'fd-dialog',
-                              docsUrl: require('./fixtures/fakes').FIXTURE_DOCS_URL
-                          };
-                return { content: [{ type: 'text', text: JSON.stringify(result) }] };
-            },
-            close: async () => {
-                mockedMcpState.closeCalls += 1;
+    createMCPClient: jest.fn(
+        async ({
+            transport,
+            initializationOptions
+        }: {
+            transport: { url: string };
+            initializationOptions?: { signal?: AbortSignal };
+        }) => {
+            const { sharedMcpState: mockedMcpState } = require('./fixtures/fakes') as typeof import('./fixtures/fakes');
+            if (mockedMcpState.failCreate) {
+                throw new Error('fixture adapter initialization secret');
             }
-        };
-    })
+            if (initializationOptions?.signal) {
+                mockedMcpState.initializationSignals.push(initializationOptions.signal);
+            }
+            mockedMcpState.openedUrls.push(transport.url);
+            return {
+                tools: async (options?: { signal?: AbortSignal }) => {
+                    if (options?.signal) {
+                        mockedMcpState.operationSignals.push(options.signal);
+                    }
+                    if (mockedMcpState.blockTools) {
+                        return new Promise((resolve, reject) => {
+                            if (options?.signal?.aborted) {
+                                reject(new Error('fixture MCP operation aborted'));
+                                return;
+                            }
+                            options?.signal?.addEventListener(
+                                'abort',
+                                () => reject(new Error('fixture MCP operation aborted')),
+                                { once: true }
+                            );
+                            void resolve;
+                        });
+                    }
+                    return Object.fromEntries(mockedMcpState.toolNames.map((name) => [name, { description: name }]));
+                },
+                callTool: async ({
+                    name,
+                    arguments: args,
+                    options
+                }: {
+                    name: string;
+                    arguments: unknown;
+                    options?: { signal?: AbortSignal };
+                }) => {
+                    mockedMcpState.calls.push({ name, args });
+                    if (options?.signal) {
+                        mockedMcpState.operationSignals.push(options.signal);
+                    }
+                    if (mockedMcpState.blockTools) {
+                        return new Promise((resolve, reject) => {
+                            if (options?.signal?.aborted) {
+                                reject(new Error('fixture MCP operation aborted'));
+                                return;
+                            }
+                            options?.signal?.addEventListener(
+                                'abort',
+                                () => reject(new Error('fixture MCP operation aborted')),
+                                { once: true }
+                            );
+                            void resolve;
+                        });
+                    }
+                    if (mockedMcpState.failTools) {
+                        throw new Error('fixture MCP failure');
+                    }
+                    const result =
+                        name === 'search_components'
+                            ? { results: [{ name: 'DialogComponent', selector: 'fd-dialog' }] }
+                            : {
+                                  name: 'DialogComponent',
+                                  selector: 'fd-dialog',
+                                  docsUrl: require('./fixtures/fakes').FIXTURE_DOCS_URL
+                              };
+                    return { content: [{ type: 'text', text: JSON.stringify(result) }] };
+                },
+                close: async () => {
+                    mockedMcpState.closeCalls += 1;
+                }
+            };
+        }
+    )
 }));
 
 jest.mock('@ai-sdk/google', () => ({
@@ -62,7 +116,7 @@ jest.mock('@ai-sdk/groq', () => ({
         const { sharedGeminiState: mockedModelState } =
             require('./fixtures/fakes') as typeof import('./fixtures/fakes');
         mockedModelState.keys.push(apiKey);
-        return () => ({ provider: 'fixture-groq' });
+        return (modelId: string) => ({ provider: 'fixture-groq', modelId });
     })
 }));
 
@@ -84,6 +138,7 @@ jest.mock('ai', () => ({
         const { abortSignal } = options as { abortSignal: AbortSignal };
         mockedGeminiState.calls += 1;
         mockedGeminiState.options.push(options);
+        mockedGeminiState.abortSignals.push(abortSignal);
         mockedGeminiState.prompts.push(JSON.stringify(options));
         return {
             textStream: (async function* () {
@@ -125,12 +180,16 @@ describe('/api/chat request and orchestration contract', () => {
         sharedMcpState.openedUrls.length = 0;
         sharedMcpState.closeCalls = 0;
         sharedMcpState.calls.length = 0;
+        sharedMcpState.operationSignals.length = 0;
+        sharedMcpState.initializationSignals.length = 0;
         sharedMcpState.toolNames = [...APPROVED_READ_ONLY_TOOLS];
         sharedMcpState.blockTools = false;
         sharedMcpState.failTools = false;
+        sharedMcpState.failCreate = false;
         sharedGeminiState.keys.length = 0;
         sharedGeminiState.prompts.length = 0;
         sharedGeminiState.options.length = 0;
+        sharedGeminiState.abortSignals.length = 0;
         sharedGeminiState.calls = 0;
         sharedGeminiState.blockStream = false;
         sharedGeminiState.emptyStream = false;
@@ -183,6 +242,23 @@ describe('/api/chat request and orchestration contract', () => {
 
         expect(sharedMcpState.openedUrls).toEqual([CHAT_ORIGIN + '/api/mcp']);
     });
+
+    it.each([
+        ['hello', 'Hello! Ask me about Fundamental NGX components, setup, APIs, or examples.'],
+        ['what is the weather?', 'I can only help with Fundamental NGX documentation questions.']
+    ])(
+        'classifies %s before MCP/model creation and emits the deterministic response without metadata',
+        async (question, text) => {
+            const response = await chat(validRequest({ messages: [{ role: 'user', content: question }] }));
+
+            expect(response.status).toBe(200);
+            const events = await responseEvents(response);
+            expect(events).toEqual([{ type: 'text-delta', text }, { type: 'sources', items: [] }, { type: 'done' }]);
+            expect(sharedMcpState.openedUrls).toEqual([]);
+            expect(sharedGeminiState.calls).toBe(0);
+            expect(JSON.stringify(events)).not.toContain('unknown');
+        }
+    );
 
     it('uses a valid absolute MCP_SERVER_URL override instead of same-origin resolution', async () => {
         process.env.MCP_SERVER_URL = 'https://separate-mcp.example.test/api/mcp';
@@ -242,11 +318,40 @@ describe('/api/chat request and orchestration contract', () => {
         expect(sharedGeminiState.calls).toBe(0);
     });
 
-    it('requires x-gemini-api-key and never starts expensive work without it', async () => {
+    it('requires a supported API key header and never starts expensive work without it', async () => {
         const request = jsonRequest(CHAT_ORIGIN + '/api/chat', validBody);
         const response = await chat(request);
 
         expect(response.status).toBe(401);
+        expect(sharedMcpState.openedUrls).toEqual([]);
+        expect(sharedGeminiState.calls).toBe(0);
+    });
+
+    it('uses a browser-supplied Groq key with the internal Qwen model', async () => {
+        const response = await chat(
+            jsonRequest(CHAT_ORIGIN + '/api/chat', validBody, {
+                headers: { 'x-groq-api-key': 'groq-fixture-key' }
+            })
+        );
+        await response.text();
+        const options = sharedGeminiState.options[0] as { model: { provider: string; modelId: string } };
+
+        expect(response.status).toBe(200);
+        expect(sharedGeminiState.keys).toEqual(['groq-fixture-key']);
+        expect(options.model).toEqual({ provider: 'fixture-groq', modelId: 'qwen/qwen3.8-27b' });
+    });
+
+    it('rejects ambiguous browser credentials before MCP or model work', async () => {
+        const response = await chat(
+            jsonRequest(CHAT_ORIGIN + '/api/chat', validBody, {
+                headers: {
+                    'x-gemini-api-key': FIXTURE_API_KEY,
+                    'x-groq-api-key': 'groq-fixture-key'
+                }
+            })
+        );
+
+        expect(response.status).toBe(400);
         expect(sharedMcpState.openedUrls).toEqual([]);
         expect(sharedGeminiState.calls).toBe(0);
     });
@@ -360,6 +465,7 @@ describe('/api/chat request and orchestration contract', () => {
         await response.text();
 
         expect(sharedMcpState.closeCalls).toBe(1);
+        expect(sharedGeminiState.abortSignals[0]?.aborted).toBe(true);
     });
 
     it('closes MCP after an orchestration error', async () => {
@@ -406,6 +512,7 @@ describe('/api/chat request and orchestration contract', () => {
 
             expect(response.status).toBeGreaterThanOrEqual(400);
             expect(sharedMcpState.closeCalls).toBe(1);
+            expect(sharedMcpState.operationSignals[0]?.aborted).toBe(true);
         } finally {
             jest.useRealTimers();
         }
@@ -435,15 +542,108 @@ describe('/api/chat request and orchestration contract', () => {
         const controller = new AbortController();
         try {
             const responsePromise = chat(validRequest(undefined, { signal: controller.signal }));
-            await Promise.resolve();
+            for (let attempt = 0; attempt < 50 && sharedMcpState.operationSignals.length === 0; attempt += 1) {
+                await Promise.resolve();
+            }
+            expect(sharedMcpState.operationSignals).not.toHaveLength(0);
             controller.abort();
             await jest.advanceTimersByTimeAsync(1);
             const response = await responsePromise;
 
             expect(response.status).toBeGreaterThanOrEqual(400);
             expect(sharedMcpState.closeCalls).toBe(1);
+            expect(sharedMcpState.operationSignals[0]?.aborted).toBe(true);
         } finally {
             jest.useRealTimers();
+        }
+    });
+
+    it('aborts active work and closes MCP exactly once when stream output is cancelled', async () => {
+        sharedGeminiState.blockStream = true;
+        const response = await chat(validRequest());
+        const reader = response.body?.getReader();
+
+        await reader?.read();
+        await reader?.cancel('fixture client disconnected');
+
+        expect(sharedGeminiState.abortSignals[0]?.aborted).toBe(true);
+        expect(sharedMcpState.closeCalls).toBe(1);
+    });
+
+    it('aborts active work and closes MCP exactly once after a provider stream failure', async () => {
+        sharedGeminiState.streamErrorAfterStart = true;
+        const response = await chat(validRequest());
+
+        await response.text();
+
+        expect(sharedGeminiState.abortSignals[0]?.aborted).toBe(true);
+        expect(sharedMcpState.closeCalls).toBe(1);
+    });
+
+    it('aborts the request-owned work and returns a stable 500 when MCP initialization fails before streaming', async () => {
+        sharedMcpState.failCreate = true;
+
+        const response = await chat(validRequest());
+
+        expect(response.status).toBe(500);
+        expect(await response.text()).toBe(
+            JSON.stringify({ error: 'The documentation assistant could not complete this request' })
+        );
+        expect(sharedMcpState.closeCalls).toBe(0);
+    });
+
+    it('aborts request-owned work and closes MCP exactly once for a pre-stream orchestration exception', async () => {
+        sharedMcpState.toolNames = APPROVED_READ_ONLY_TOOLS.slice(0, -1);
+
+        const response = await chat(validRequest());
+
+        expect(response.status).toBe(500);
+        expect(sharedMcpState.initializationSignals[0]?.aborted).toBe(true);
+        expect(sharedMcpState.closeCalls).toBe(1);
+    });
+
+    it('extends API-key privacy across every console method, failure, and cleanup paths', async () => {
+        const methods = ['debug', 'info', 'log', 'warn', 'error'] as const;
+        const spies = methods.map((method) => jest.spyOn(console, method).mockImplementation(() => undefined));
+        try {
+            sharedMcpState.failTools = true;
+            const response = await chat(validRequest());
+            await response.text();
+            const calls = spies.flatMap((spy) => spy.mock.calls);
+
+            expect(JSON.stringify(calls)).not.toContain(FIXTURE_API_KEY);
+        } finally {
+            spies.forEach((spy) => spy.mockRestore());
+        }
+    });
+
+    it('logs one safe structured trace for an operational failure without request data or raw errors', async () => {
+        const methods = ['debug', 'info', 'log', 'warn', 'error'] as const;
+        const spies = methods.map((method) => jest.spyOn(console, method).mockImplementation(() => undefined));
+        try {
+            sharedMcpState.failTools = true;
+            const response = await chat(validRequest());
+            await response.text();
+            const calls = spies.flatMap((spy) => spy.mock.calls);
+
+            expect(calls.length).toBeGreaterThan(0);
+            const lines = calls.map((call) =>
+                call.map((entry) => (typeof entry === 'string' ? entry : JSON.stringify(entry))).join(' ')
+            );
+            const traceIds = lines.map((line) => line.match(/traceId["']?\s*[:=]\s*["']?([0-9a-f]{8})/i)?.[1]);
+            expect(new Set(traceIds).size).toBe(1);
+            expect(traceIds[0]).toMatch(/^[0-9a-f]{8}$/);
+            for (const line of lines) {
+                expect(line).toMatch(/stage["']?\s*[:=]/i);
+                expect(line).toMatch(/error(?:Type|Name)?["']?\s*[:=]/i);
+                expect(line).toMatch(/duration(?:Ms)?["']?\s*[:=]/i);
+                expect(line).toMatch(/outcome["']?\s*[:=]/i);
+            }
+            expect(JSON.stringify(calls)).not.toMatch(
+                /fixture MCP failure|How do I use fd-dialog|api-key|https:\/\/separate-mcp/i
+            );
+        } finally {
+            spies.forEach((spy) => spy.mockRestore());
         }
     });
 
@@ -715,6 +915,21 @@ describe('/api/chat request and orchestration contract', () => {
         expect(response.status).toBeGreaterThanOrEqual(400);
         expect(body).toMatch(/attachment/i);
         expect(body).not.toMatch(/groq|local-groq-fixture-key/i);
+        expect(sharedMcpState.openedUrls).toEqual([]);
+        expect(sharedGeminiState.calls).toBe(0);
+    });
+
+    it('rejects browser Groq attachment requests safely before MCP or model work', async () => {
+        const response = await chat(
+            jsonRequest(CHAT_ORIGIN + '/api/chat', attachmentBody([fakeAttachment('image/png', 24)]), {
+                headers: { 'x-groq-api-key': 'groq-fixture-key' }
+            })
+        );
+        const body = await response.text();
+
+        expect(response.status).toBeGreaterThanOrEqual(400);
+        expect(body).toMatch(/attachment/i);
+        expect(body).not.toMatch(/groq|groq-fixture-key/i);
         expect(sharedMcpState.openedUrls).toEqual([]);
         expect(sharedGeminiState.calls).toBe(0);
     });
