@@ -1,4 +1,24 @@
+import type { LanguageModel } from 'ai';
 import { activeProvider, chatModel, chatModelId } from './model';
+
+type ProviderModel = {
+    readonly modelId: string;
+    readonly provider: string;
+};
+
+function providerModel(model: LanguageModel): ProviderModel {
+    if (
+        typeof model !== 'object' ||
+        model === null ||
+        !('modelId' in model) ||
+        typeof model.modelId !== 'string' ||
+        !('provider' in model) ||
+        typeof model.provider !== 'string'
+    ) {
+        throw new Error('Expected chatModel() to return a provider model');
+    }
+    return model;
+}
 
 /** Save/restore the env vars the model layer reads, so tests don't leak state. */
 const ENV_KEYS = [
@@ -19,8 +39,11 @@ beforeEach(() => {
 
 afterEach(() => {
     for (const k of ENV_KEYS) {
-        if (original[k] === undefined) delete process.env[k];
-        else process.env[k] = original[k];
+        if (original[k] === undefined) {
+            delete process.env[k];
+        } else {
+            process.env[k] = original[k];
+        }
     }
 });
 
@@ -64,7 +87,7 @@ describe('chatModelId', () => {
 describe('chatModel', () => {
     it('builds a Google model instance when GOOGLE_GENERATIVE_AI_API_KEY is set', () => {
         process.env.GOOGLE_GENERATIVE_AI_API_KEY = 'aiza_test';
-        const model = chatModel();
+        const model = providerModel(chatModel());
         expect(model.modelId).toBe('gemini-3.5-flash');
         expect(model.provider).toContain('google');
     });
@@ -72,14 +95,14 @@ describe('chatModel', () => {
     it('builds an Anthropic model instance when the gateway is configured', () => {
         process.env.ANTHROPIC_BASE_URL = 'http://localhost:6655/anthropic/v1';
         process.env.ANTHROPIC_API_KEY = 'token_test';
-        const model = chatModel();
+        const model = providerModel(chatModel());
         expect(model.modelId).toBe('claude-sonnet-4-5');
         expect(model.provider).toContain('anthropic');
     });
 
     it('builds a Groq model instance when GROQ_API_KEY is set', () => {
         process.env.GROQ_API_KEY = 'gsk_test';
-        const model = chatModel();
+        const model = providerModel(chatModel());
         expect(model.modelId).toBe('qwen/qwen3.8-27b');
         expect(model.provider).toContain('groq');
     });
@@ -87,7 +110,7 @@ describe('chatModel', () => {
     it('prefers Gemini over Groq when both keys are set', () => {
         process.env.GOOGLE_GENERATIVE_AI_API_KEY = 'aiza_test';
         process.env.GROQ_API_KEY = 'gsk_test';
-        const model = chatModel();
+        const model = providerModel(chatModel());
         expect(model.provider).toContain('google');
     });
 

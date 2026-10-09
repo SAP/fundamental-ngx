@@ -4,6 +4,7 @@
         "jsx": "preserve",
         "module": "esnext",
         "moduleResolution": "bundler",
+        "rootDir": "../..",
         "allowJs": true,
         "noEmit": true,
         "incremental": true,

@@ -37,8 +37,8 @@
                 fd-button
                 glyph="action-settings"
                 [attr.aria-pressed]="isApiKeyEditorOpen()"
-                [ariaLabel]="isApiKeyEditorOpen() ? 'Hide Gemini API key settings' : 'Configure Gemini API key'"
-                [title]="isApiKeyEditorOpen() ? 'Hide Gemini API key settings' : 'Configure Gemini API key'"
+                [ariaLabel]="isApiKeyEditorOpen() ? 'Hide AI provider settings' : 'Configure AI provider'"
+                [title]="isApiKeyEditorOpen() ? 'Hide AI provider settings' : 'Configure AI provider'"
                 (click)="toggleApiKeyEditor()"
             ></button>
 
@@ -166,17 +166,29 @@
         <form class="fd-guide-chat__input-form" (submit)="sendMessage(); $event.preventDefault()">
             @if (isApiKeyEditorOpen()) {
                 <div class="fd-guide-chat__key-wrapper">
-                    <label for="fd-guide-api-key" class="fd-guide-sr-only">Gemini API key</label>
+                    <label for="fd-guide-provider" class="fd-guide-sr-only">AI provider</label>
+                    <select
+                        id="fd-guide-provider"
+                        name="provider"
+                        class="fd-guide-chat__input fd-guide-chat__provider-select"
+                        aria-label="AI provider"
+                        [value]="provider()"
+                        (change)="onProviderChange($event)"
+                    >
+                        <option value="google">Gemini</option>
+                        <option value="groq">Groq (Qwen)</option>
+                    </select>
+                    <label for="fd-guide-api-key" class="fd-guide-sr-only">{{ apiKeyLabel() }}</label>
                     <input
                         id="fd-guide-api-key"
                         name="apiKey"
                         class="fd-guide-chat__input fd-guide-chat__api-key"
                         type="password"
                         autocomplete="off"
-                        aria-label="Gemini API key"
-                        placeholder="Gemini API key"
+                        [attr.aria-label]="apiKeyLabel()"
+                        [placeholder]="apiKeyLabel()"
                         [value]="apiKey()"
-                        (input)="apiKey.set($any($event.target).value)"
+                        (input)="onApiKeyInput($event)"
                     />
                     <button
                         type="button"
@@ -192,9 +204,14 @@
                 </div>
                 <p class="fd-guide-chat__key-notice">
                     @if (localProviderAvailable()) {
-                        The local server provider is active. A Gemini key entered here overrides it for this page.
+                        The local server provider is active. A {{ providerName() }} key entered here overrides it for
+                        this page.
                     } @else {
-                        Your key stays in this page's memory and is sent through this site's Function to Google.
+                        Your key stays in this page's memory and is sent through this site's Function to
+                        {{ provider() === 'google' ? 'Google' : 'Groq' }}.
+                    }
+                    @if (!canAttachFiles()) {
+                        Attachments are unavailable with Groq.
                     }
                 </p>
             } @else if (localProviderAvailable()) {
@@ -204,8 +221,12 @@
                 Ask about Fundamental NGX components, APIs, or examples...
             </label>
             <p id="fd-guide-attachment-limit" class="fd-guide-chat__attachment-hint">
-                Attach up to 3 PNG, JPEG, WebP, GIF, or PDF files ({{ attachmentLimitLabel() }} total). A question is
-                required.
+                @if (canAttachFiles()) {
+                    Attach up to 3 PNG, JPEG, WebP, GIF, or PDF files ({{ attachmentLimitLabel() }} total). A question
+                    is required.
+                } @else {
+                    Attachments are unavailable with Groq. A question is required.
+                }
             </p>
             @if (attachments().length) {
                 <ul class="fd-guide-chat__attachments" aria-label="Files attached to the next message">
@@ -264,7 +285,7 @@
                         [ariaLabel]="'Attach files (' + attachShortcut + ')'"
                         [title]="'Attach PNG, JPEG, WebP, GIF, or PDF files (' + attachShortcut + ')'"
                         aria-describedby="fd-guide-attachment-limit"
-                        [disabled]="isBusy() || attachments().length >= 3"
+                        [disabled]="isBusy() || !canAttachFiles() || attachments().length >= 3"
                         (click)="openFilePicker()"
                     ></button>
                     <input
@@ -275,7 +296,7 @@
                         multiple
                         tabindex="-1"
                         aria-hidden="true"
-                        [disabled]="isBusy()"
+                        [disabled]="isBusy() || !canAttachFiles()"
                         (change)="onFilesSelected($event)"
                     />
                 </div>

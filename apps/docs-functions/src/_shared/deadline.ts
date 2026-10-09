@@ -1,5 +1,6 @@
 export type RequestDeadline = {
     signal: AbortSignal;
+    abort: () => void;
     dispose: () => void;
 };
 
@@ -16,6 +17,7 @@ export function createRequestDeadline(requestSignal: AbortSignal, milliseconds: 
 
     return {
         signal: controller.signal,
+        abort,
         dispose: () => {
             clearTimeout(timer);
             requestSignal.removeEventListener('abort', abort);
@@ -24,11 +26,11 @@ export function createRequestDeadline(requestSignal: AbortSignal, milliseconds: 
 }
 
 export function withDeadline<T>(
-    operation: PromiseLike<T>,
+    operation: (signal: AbortSignal) => PromiseLike<T>,
     milliseconds: number,
     parentSignal: AbortSignal
 ): Promise<T> {
-    return new Promise<T>((resolve, reject) => {
+    const result = new Promise<T>((resolve, reject) => {
         const controller = new AbortController();
         const abort = (): void => controller.abort();
         const timer = setTimeout(abort, milliseconds);
@@ -53,15 +55,30 @@ export function withDeadline<T>(
             parentSignal.addEventListener('abort', abort, { once: true });
         }
 
-        Promise.resolve(operation).then(
+        if (controller.signal.aborted) {
+            return;
+        }
+
+        let operationResult: PromiseLike<T>;
+        try {
+            operationResult = operation(controller.signal);
+        } catch (cause) {
+            cleanup();
+            reject(new Error('Operation failed', { cause }));
+            return;
+        }
+
+        Promise.resolve(operationResult).then(
             (value) => {
                 cleanup();
                 resolve(value);
             },
-            () => {
+            (cause) => {
                 cleanup();
-                reject(new Error('Operation failed'));
+                reject(new Error('Operation failed', { cause }));
             }
         );
     });
+    void result.catch(() => undefined);
+    return result;
 }

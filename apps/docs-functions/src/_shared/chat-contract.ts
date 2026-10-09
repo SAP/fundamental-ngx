@@ -1,3 +1,5 @@
+// Keep these contracts synchronized with apps/docs/src/fd-guide-chat-stream.ts (NDJSON events) and
+// apps/docs/src/fd-guide-chat.service.ts (attachment media types); do not add an app-to-app import.
 export type ChatRole = 'user' | 'assistant';
 export const CHAT_ATTACHMENT_MEDIA_TYPES = [
     'image/png',

@@ -3,6 +3,7 @@ export interface ChatSource {
     docsUrl: string;
 }
 
+// Keep this event contract synchronized with apps/docs-functions/src/_shared/chat-contract.ts.
 export type ChatEvent =
     | { type: 'meta'; catalogVersion: string }
     | { type: 'status'; message: string }

@@ -78,8 +78,11 @@ export type FakeMcpState = {
     closeCalls: number;
     toolNames: string[];
     calls: Array<{ name: string; args: unknown }>;
+    operationSignals: AbortSignal[];
+    initializationSignals: AbortSignal[];
     blockTools: boolean;
     failTools: boolean;
+    failCreate: boolean;
 };
 
 export type FakeGeminiState = {
@@ -90,10 +93,21 @@ export type FakeGeminiState = {
     blockStream: boolean;
     emptyStream: boolean;
     streamErrorAfterStart: boolean;
+    abortSignals: AbortSignal[];
 };
 
 export function createFakeMcpState(toolNames = [...APPROVED_READ_ONLY_TOOLS]): FakeMcpState {
-    return { openedUrls: [], closeCalls: 0, toolNames, calls: [], blockTools: false, failTools: false };
+    return {
+        openedUrls: [],
+        closeCalls: 0,
+        toolNames,
+        calls: [],
+        operationSignals: [],
+        initializationSignals: [],
+        blockTools: false,
+        failTools: false,
+        failCreate: false
+    };
 }
 
 export function createFakeGeminiState(): FakeGeminiState {
@@ -104,7 +118,8 @@ export function createFakeGeminiState(): FakeGeminiState {
         calls: 0,
         blockStream: false,
         emptyStream: false,
-        streamErrorAfterStart: false
+        streamErrorAfterStart: false,
+        abortSignals: []
     };
 }
 

@@ -24,7 +24,7 @@ The second command creates `libs/mcp-server/src/data/components.json`, which the
 
 ### 2. Choose how to provide an AI key
 
-For local development, either configure a server-side provider or enter a Gemini key in the assistant UI.
+For local development, either configure a server-side provider or enter a Gemini or Groq key in the assistant UI.
 
 To use a server-side provider, create the ignored local environment file:
 
@@ -72,8 +72,8 @@ Do not open `http://localhost:4200` when testing the assistant. Port `4200` is t
 Open the assistant from the floating button:
 
 - If `.env.local` contains a valid provider, the UI reports that the local provider is active and no browser key is required.
-- Without a local provider, enter a Gemini key in the UI for the current page session.
-- The key field accepts Gemini keys only. Groq and Anthropic-compatible providers are local server configuration options.
+- Without a local provider, select Gemini or Groq and enter that provider's key for the current page session.
+- Groq uses the internally configured `qwen/qwen3.8-27b` model; the model ID is not supplied by the browser.
 
 ## Run the docs without the assistant backend
 
@@ -100,11 +100,11 @@ From the repository root, `yarn start` starts both the Angular docs and this sta
 
 ## Provider behavior
 
-| Where it runs            | Supported credential mode                                                                              |
-| ------------------------ | ------------------------------------------------------------------------------------------------------ |
-| Netlify Dev on localhost | Local `.env.local` provider (Gemini, Groq, or Anthropic-compatible), or a Gemini key entered in the UI |
-| Deployed Netlify site    | Gemini key entered in the UI                                                                           |
-| Standalone Next.js app   | Local `.env.local` provider                                                                            |
+| Where it runs            | Supported credential mode                                                                                   |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------- |
+| Netlify Dev on localhost | Local `.env.local` provider (Gemini, Groq, or Anthropic-compatible), or a Gemini/Groq key entered in the UI |
+| Deployed Netlify site    | Gemini or Groq key entered in the UI                                                                        |
+| Standalone Next.js app   | Local `.env.local` provider                                                                                 |
 
 On a deployed Netlify site, the browser key is kept only in page memory and sent to the same-origin `/api/chat` function. It is not placed in the URL or local storage. The deployed function intentionally does not use `apps/chatbot/.env.local`.
 
@@ -114,7 +114,7 @@ Provider selection for local environment variables uses this priority: Gemini, G
 
 Each question can include up to three PNG, JPEG, WebP, GIF, or PDF files. A non-empty text question is still required. The combined decoded file limit is 256 KiB on deployed sites and 5 MiB only through trusted loopback Netlify Dev. The UI shows the active limit; the Function validates the files and limit again.
 
-Attachments are kept only in the current page's memory. File data is sent in the current `/api/chat` request to the selected model provider, never to MCP tools, diagnostics, sources, URLs, or browser storage, and it is not resent with later questions. Gemini and the Anthropic-compatible local provider accept attachments. The local Groq provider rejects attachment requests before model or MCP work.
+Attachments are kept only in the current page's memory. File data is sent in the current `/api/chat` request to the selected model provider, never to MCP tools, diagnostics, sources, URLs, or browser storage, and it is not resent with later questions. Gemini and the Anthropic-compatible local provider accept attachments. Groq does not; the UI disables them for a browser-supplied Groq key and the Function rejects Groq attachment requests before model or MCP work.
 
 ## Troubleshooting
 
@@ -124,7 +124,7 @@ Make sure Netlify Dev is running and open `http://localhost:8888`, not the Angul
 
 ### The send button is disabled
 
-Enter a Gemini key in the assistant UI, or configure a valid provider in `apps/chatbot/.env.local` and restart Netlify Dev.
+Select Gemini or Groq and enter that provider's key in the assistant UI, or configure a valid provider in `apps/chatbot/.env.local` and restart Netlify Dev.
 
 An attachment cannot be sent by itself; enter a non-empty question. If files are rejected, confirm that there are no more than three, every file is a supported type, and their combined size is within the limit shown in the assistant.
 

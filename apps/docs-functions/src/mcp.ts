@@ -1,13 +1,12 @@
 import { isJsonRequest, jsonError, readLimitedBody } from './_shared/http';
+import { createOperationalLogger } from './_shared/operational-logger';
 
 const MAXIMUM_MCP_BODY_BYTES = 64 * 1024;
-// eslint-disable-next-line @nx/enforce-module-boundaries -- This Function is the intentional HTTP adapter for the shared MCP server.
-const { createMcpFetchHandler } = require('@fundamental-ngx/mcp-server/web') as {
-    createMcpFetchHandler: () => (request: Request) => Promise<Response>;
-};
-const handler = createMcpFetchHandler();
+type McpFetchHandler = (request: Request) => Promise<Response>;
+let handlerPromise: Promise<McpFetchHandler> | undefined;
 
 export default async function mcp(request: Request): Promise<Response> {
+    const logger = createOperationalLogger();
     if (request.method !== 'GET' && request.method !== 'POST') {
         return jsonError(405, 'Method not allowed', { allow: 'GET, POST' });
     }
@@ -29,15 +28,34 @@ export default async function mcp(request: Request): Promise<Response> {
         }
     }
 
+    let handler: McpFetchHandler;
+    try {
+        handler = await loadHandler();
+    } catch (error) {
+        logger.record('mcp-adapter-load', error, 'failure');
+        return jsonError(500, 'The MCP request could not be completed');
+    }
+
     try {
         const response = await handler(request);
         const headers = new Headers(response.headers);
         headers.set('cache-control', 'no-store');
         headers.set('x-content-type-options', 'nosniff');
         return new Response(response.body, { status: response.status, statusText: response.statusText, headers });
-    } catch {
+    } catch (error) {
+        logger.record('mcp-request', error, 'failure');
         return jsonError(500, 'The MCP request could not be completed');
     }
+}
+
+function loadHandler(): Promise<McpFetchHandler> {
+    return (handlerPromise ??= Promise.resolve().then(() => {
+        // eslint-disable-next-line @nx/enforce-module-boundaries -- This Function is the intentional HTTP adapter for the shared MCP server.
+        const { createMcpFetchHandler } = require('@fundamental-ngx/mcp-server/web') as {
+            createMcpFetchHandler: () => McpFetchHandler;
+        };
+        return createMcpFetchHandler();
+    }));
 }
 
 export const config = {

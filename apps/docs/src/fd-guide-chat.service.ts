@@ -4,6 +4,7 @@ import { ChatEvent, parseChatStream } from './fd-guide-chat-stream';
 export const DEPLOYED_ATTACHMENT_LIMIT_BYTES = 256 * 1024;
 export const LOCAL_ATTACHMENT_LIMIT_BYTES = 5 * 1024 * 1024;
 
+// Keep these attachment media types synchronized with apps/docs-functions/src/_shared/chat-contract.ts.
 export const CHAT_ATTACHMENT_MEDIA_TYPES = [
     'image/png',
     'image/jpeg',
@@ -25,6 +26,8 @@ export interface ChatCapabilities {
     attachmentLimitBytes: number;
 }
 
+export type ChatProvider = 'google' | 'groq';
+
 type ChatHistoryMessage = {
     role: 'user' | 'assistant';
     content: string;
@@ -34,6 +37,27 @@ type ChatRequestMessage = ChatHistoryMessage & { attachments?: ChatAttachment[] 
 
 const CHAT_DEBUG_STORAGE_KEY = 'fd-guide-chat-debug';
 const CHAT_ENDPOINT = '/api/chat';
+const MAXIMUM_CHAT_HISTORY_MESSAGES = 8;
+const CHAT_PROVIDER_KEY_HEADERS: Record<ChatProvider, string> = {
+    google: 'x-gemini-api-key',
+    groq: 'x-groq-api-key'
+};
+
+export class ChatRateLimitError extends Error {
+    readonly status = 429;
+
+    constructor() {
+        super('The chat request was rate limited.');
+        this.name = 'ChatRateLimitError';
+    }
+}
+
+export function isChatRateLimitError(error: unknown): error is ChatRateLimitError {
+    return (
+        error instanceof ChatRateLimitError ||
+        (isRecord(error) && error.name === 'ChatRateLimitError' && error.status === 429)
+    );
+}
 
 @Injectable({
     providedIn: 'root'
@@ -83,7 +107,8 @@ export class FdGuideChatService {
         content: string,
         apiKey: string,
         onEvent: (event: ChatEvent) => void,
-        attachments: readonly ChatAttachment[] = []
+        attachments: readonly ChatAttachment[] = [],
+        provider: ChatProvider = 'google'
     ): Promise<void> {
         const question = content.trim();
         const key = apiKey.trim();
@@ -101,7 +126,8 @@ export class FdGuideChatService {
                   attachments: attachments.map((attachment) => ({ ...attachment }))
               }
             : { role: 'user', content: question };
-        const requestMessages: ChatRequestMessage[] = [...this._history, newestMessage];
+        const requestHistory = selectNewestCompletePairs(this._history, MAXIMUM_CHAT_HISTORY_MESSAGES - 2);
+        const requestMessages: ChatRequestMessage[] = [...requestHistory, newestMessage];
         const traceId = ++this._traceSequence;
         const startedAt = Date.now();
         const eventCounts: Record<ChatEvent['type'], number> = {
@@ -124,7 +150,7 @@ export class FdGuideChatService {
         try {
             const headers = new Headers({ 'Content-Type': 'application/json' });
             if (key) {
-                headers.set('x-gemini-api-key', key);
+                headers.set(CHAT_PROVIDER_KEY_HEADERS[provider], key);
             }
             const response = await fetch(CHAT_ENDPOINT, {
                 method: 'POST',
@@ -140,6 +166,9 @@ export class FdGuideChatService {
                 elapsedMs: Date.now() - startedAt
             });
 
+            if (response.status === 429) {
+                throw new ChatRateLimitError();
+            }
             if (!response.ok) {
                 throw new Error('The chat request could not be started.');
             }
@@ -164,11 +193,10 @@ export class FdGuideChatService {
             }
 
             if (!streamFailed && answer) {
-                this._history = [
-                    ...this._history,
-                    { role: 'user', content: question },
-                    { role: 'assistant', content: answer }
-                ];
+                this._history = selectNewestCompletePairs(
+                    [...this._history, { role: 'user', content: question }, { role: 'assistant', content: answer }],
+                    MAXIMUM_CHAT_HISTORY_MESSAGES
+                );
             }
             traceChat('request:complete', {
                 traceId,
@@ -198,6 +226,24 @@ export class FdGuideChatService {
         this._abortController?.abort();
         this._abortController = null;
     }
+}
+
+function selectNewestCompletePairs(
+    history: readonly ChatHistoryMessage[],
+    maximumMessages: number
+): ChatHistoryMessage[] {
+    const pairs: Array<[ChatHistoryMessage, ChatHistoryMessage]> = [];
+    for (let index = 0; index + 1 < history.length; index += 2) {
+        const userMessage = history[index];
+        const assistantMessage = history[index + 1];
+        if (userMessage.role === 'user' && assistantMessage.role === 'assistant') {
+            pairs.push([userMessage, assistantMessage]);
+        }
+    }
+
+    return pairs
+        .slice(-Math.floor(maximumMessages / 2))
+        .flatMap(([userMessage, assistantMessage]) => [userMessage, assistantMessage]);
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {
