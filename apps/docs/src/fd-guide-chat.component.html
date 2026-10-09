@@ -173,28 +173,58 @@
                 <p class="fd-guide-chat__attachment-error" role="alert">{{ attachmentError() }}</p>
             }
 
+            @if (speechError()) {
+                <p class="fd-guide-chat__attachment-error" role="alert">{{ speechError() }}</p>
+            }
+
             <div class="fd-guide-chat__input-wrapper">
-                <button
-                    type="button"
-                    class="fd-guide-chat__attach-btn"
-                    fdType="transparent"
-                    fd-button
-                    glyph="attachment"
-                    ariaLabel="Attach files (images or PDF)"
-                    title="Attach files (images or PDF)"
-                    [disabled]="isBusy()"
-                    (click)="openFilePicker()"
-                ></button>
-                <input
-                    #fileInput
-                    type="file"
-                    class="fd-guide-sr-only"
-                    accept="image/png,image/jpeg,image/webp,image/gif,application/pdf"
-                    multiple
-                    tabindex="-1"
-                    aria-hidden="true"
-                    (change)="onFilesSelected($event)"
-                />
+                <div class="fd-guide-chat__input-wrapper-controls">
+                    <button
+                        type="button"
+                        class="fd-guide-chat__attach-btn"
+                        [class.fd-guide-chat__attach-btn--listening]="speechStatus() === 'listening'"
+                        fdType="transparent"
+                        fd-button
+                        [glyph]="speechStatus() === 'listening' ? 'microphone' : 'microphone'"
+                        [ariaLabel]="
+                            speechStatus() === 'listening'
+                                ? 'Stop recording'
+                                : isSpeechRecognitionSupported()
+                                  ? 'Start voice input'
+                                  : 'Voice input not supported'
+                        "
+                        [title]="
+                            speechStatus() === 'listening'
+                                ? 'Stop recording'
+                                : isSpeechRecognitionSupported()
+                                  ? 'Start voice input'
+                                  : 'Voice input not supported'
+                        "
+                        [disabled]="isBusy() || !isSpeechRecognitionSupported()"
+                        (click)="toggleSpeechRecognition()"
+                    ></button>
+                    <button
+                        type="button"
+                        class="fd-guide-chat__attach-btn"
+                        fdType="transparent"
+                        fd-button
+                        glyph="attachment"
+                        ariaLabel="Attach files (images or PDF)"
+                        title="Attach files (images or PDF)"
+                        [disabled]="isBusy()"
+                        (click)="openFilePicker()"
+                    ></button>
+                    <input
+                        #fileInput
+                        type="file"
+                        class="fd-guide-sr-only"
+                        accept="image/png,image/jpeg,image/webp,image/gif,application/pdf"
+                        multiple
+                        tabindex="-1"
+                        aria-hidden="true"
+                        (change)="onFilesSelected($event)"
+                    />
+                </div>
                 <textarea
                     id="fd-guide-input"
                     name="userInput"

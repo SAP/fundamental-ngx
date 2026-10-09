@@ -7,6 +7,53 @@ import { MarkdownComponent } from 'ngx-markdown';
 import { provideChatMarkdown } from './services/chat-markdown.config';
 import { Attachment, ChatMessage, ChatService, ChatStatus } from './services/chat.service';
 
+// Web Speech API types
+interface SpeechRecognition extends EventTarget {
+    continuous: boolean;
+    interimResults: boolean;
+    lang: string;
+    onstart: ((this: SpeechRecognition, ev: Event) => void) | null;
+    onend: ((this: SpeechRecognition, ev: Event) => void) | null;
+    onerror: ((this: SpeechRecognition, ev: SpeechRecognitionErrorEvent) => void) | null;
+    onresult: ((this: SpeechRecognition, ev: SpeechRecognitionEvent) => void) | null;
+    start(): void;
+    stop(): void;
+    abort(): void;
+}
+
+interface SpeechRecognitionErrorEvent extends Event {
+    error: string;
+    message: string;
+}
+
+interface SpeechRecognitionEvent extends Event {
+    resultIndex: number;
+    results: SpeechRecognitionResultList;
+}
+
+interface SpeechRecognitionResultList {
+    [index: number]: SpeechRecognitionResult;
+    length: number;
+    item(index: number): SpeechRecognitionResult;
+}
+
+interface SpeechRecognitionResult {
+    [index: number]: SpeechRecognitionAlternative;
+    isFinal: boolean;
+    length: number;
+    item(index: number): SpeechRecognitionAlternative;
+}
+
+interface SpeechRecognitionAlternative {
+    transcript: string;
+    confidence: number;
+}
+
+interface WindowWithSpeechRecognition extends Window {
+    SpeechRecognition?: new () => SpeechRecognition;
+    webkitSpeechRecognition?: new () => SpeechRecognition;
+}
+
 /** MIME types the attachment picker accepts — images and PDF (vision-capable providers). */
 const ALLOWED_FILE_TYPES = ['image/png', 'image/jpeg', 'image/webp', 'image/gif', 'application/pdf'];
 /** Per-file size ceiling. Base64 inflates ~33%, so this keeps payloads well within model limits. */
@@ -31,6 +78,11 @@ export class FdGuideChatComponent {
     /** Validation message for rejected files (wrong type / too big / too many). */
     readonly attachmentError = signal<string | null>(null);
 
+    /** Speech recognition state: 'idle' | 'listening' | 'processing' | 'error' */
+    readonly speechStatus = signal<'idle' | 'listening' | 'processing' | 'error'>('idle');
+    /** Error message for speech recognition. */
+    readonly speechError = signal<string | null>(null);
+
     readonly messages: Signal<ChatMessage[]>;
     readonly status: Signal<ChatStatus>;
     readonly error: Signal<string | null>;
@@ -43,6 +95,8 @@ export class FdGuideChatComponent {
     private readonly chatService = inject(ChatService);
     private readonly messagesContainer = viewChild<ElementRef<HTMLDivElement>>('messagesContainer');
     private readonly fileInput = viewChild<ElementRef<HTMLInputElement>>('fileInput');
+    /** Speech recognition instance (lazy-initialized). */
+    private recognition: SpeechRecognition | null = null;
 
     constructor() {
         this.messages = this.chatService.messages;
@@ -221,6 +275,107 @@ export class FdGuideChatComponent {
     clearChat(): void {
         this.chatService.clearMessages();
         this.attachmentError.set(null);
+    }
+
+    /** Check if speech recognition is supported in the current browser. */
+    isSpeechRecognitionSupported(): boolean {
+        const win = window as WindowWithSpeechRecognition;
+        return !!(win.SpeechRecognition || win.webkitSpeechRecognition);
+    }
+
+    /** Toggle speech recognition on/off. */
+    toggleSpeechRecognition(): void {
+        if (this.speechStatus() === 'listening') {
+            this.stopSpeechRecognition();
+        } else {
+            this.startSpeechRecognition();
+        }
+    }
+
+    /** Start listening for speech input. */
+    private startSpeechRecognition(): void {
+        if (!this.isSpeechRecognitionSupported()) {
+            this.speechError.set('Speech recognition is not supported in your browser.');
+            this.speechStatus.set('error');
+            return;
+        }
+
+        // Lazy-initialize recognition
+        if (!this.recognition) {
+            const win = window as WindowWithSpeechRecognition;
+            const SpeechRecognitionClass = win.SpeechRecognition || win.webkitSpeechRecognition;
+            if (!SpeechRecognitionClass) {
+                this.speechError.set('Speech recognition is not available.');
+                this.speechStatus.set('error');
+                return;
+            }
+
+            this.recognition = new SpeechRecognitionClass();
+            this.recognition.continuous = false;
+            this.recognition.interimResults = true;
+            this.recognition.lang = 'en-US';
+
+            this.recognition.onstart = () => {
+                this.speechStatus.set('listening');
+                this.speechError.set(null);
+            };
+
+            this.recognition.onresult = (event: SpeechRecognitionEvent) => {
+                let transcript = '';
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    transcript += event.results[i][0].transcript;
+                }
+                // Update the input field with the recognized text
+                this.userInput = transcript;
+            };
+
+            this.recognition.onerror = (event: SpeechRecognitionErrorEvent) => {
+                this.speechStatus.set('error');
+                if (event.error === 'no-speech') {
+                    this.speechError.set('No speech detected. Please try again.');
+                } else if (event.error === 'audio-capture') {
+                    this.speechError.set('No microphone found. Please ensure a microphone is connected.');
+                } else if (event.error === 'not-allowed') {
+                    this.speechError.set('Microphone permission denied. Please allow microphone access.');
+                } else {
+                    this.speechError.set(`Speech recognition error: ${event.error}`);
+                }
+                // Clear error after 5 seconds
+                setTimeout(() => {
+                    this.speechError.set(null);
+                    this.speechStatus.set('idle');
+                }, 5000);
+            };
+
+            this.recognition.onend = () => {
+                if (this.speechStatus() === 'listening') {
+                    this.speechStatus.set('processing');
+                    // Set to idle after a brief delay
+                    setTimeout(() => {
+                        this.speechStatus.set('idle');
+                    }, 500);
+                }
+            };
+        }
+
+        try {
+            this.recognition.start();
+        } catch {
+            this.speechStatus.set('error');
+            this.speechError.set('Failed to start speech recognition.');
+            setTimeout(() => {
+                this.speechError.set(null);
+                this.speechStatus.set('idle');
+            }, 5000);
+        }
+    }
+
+    /** Stop listening for speech input. */
+    private stopSpeechRecognition(): void {
+        if (this.recognition) {
+            this.recognition.stop();
+            this.speechStatus.set('idle');
+        }
     }
 
     private scrollToBottom(): void {
