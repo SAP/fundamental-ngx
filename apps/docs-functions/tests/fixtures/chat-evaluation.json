@@ -1,0 +1,213 @@
+{
+    "version": "2026-10-07",
+    "title": "Fundamental NGX Deploy Preview grounding evaluation",
+    "rubric": {
+        "minimumScore": 15,
+        "demoQuestionIds": ["q01", "q03", "q05", "q08", "q17"],
+        "dimensions": ["component", "selector", "importPath", "api", "deprecation", "exampleEvidence"],
+        "scoring": "Score one point for each applicable dimension supported by the answer and returned MCP evidence. Unknown-component answers must explicitly say the result could not be verified. All five demo questions must pass."
+    },
+    "questions": [
+        {
+            "id": "q01",
+            "prompt": "How do I open a standard Fundamental NGX dialog and what should I import?",
+            "expected": {
+                "selectors": ["fd-dialog"],
+                "importPaths": ["@fundamental-ngx/core/dialog"],
+                "apiTerms": ["DialogService"],
+                "exampleEvidence": true
+            }
+        },
+        {
+            "id": "q02",
+            "prompt": "Which dialog API should I use for a UI5 Web Component dialog?",
+            "expected": {
+                "selectors": ["ui5-dialog"],
+                "importPaths": ["@fundamental-ngx/ui5-webcomponents/dialog"],
+                "apiTerms": ["header-text"],
+                "exampleEvidence": true
+            }
+        },
+        {
+            "id": "q03",
+            "prompt": "I need sorting and pagination in a data table. Which table should I choose?",
+            "expected": {
+                "selectors": ["fdp-table"],
+                "importPaths": ["@fundamental-ngx/platform/table"],
+                "apiTerms": ["dataSource"],
+                "exampleEvidence": true
+            }
+        },
+        {
+            "id": "q04",
+            "prompt": "Show the lightweight core table pattern and its selector.",
+            "expected": {
+                "selectors": ["fd-table"],
+                "importPaths": ["@fundamental-ngx/core/table"],
+                "apiTerms": ["fd-table"],
+                "exampleEvidence": true
+            }
+        },
+        {
+            "id": "q05",
+            "prompt": "Is fd-button an element or an attribute, and how do I import it?",
+            "expected": {
+                "selectors": ["fd-button"],
+                "importPaths": ["@fundamental-ngx/core/button"],
+                "apiTerms": ["attribute"],
+                "exampleEvidence": true
+            }
+        },
+        {
+            "id": "q06",
+            "prompt": "How do I set up an Angular project using @fundamental-ngx/core?",
+            "expected": {
+                "selectors": [],
+                "importPaths": ["@fundamental-ngx/core"],
+                "apiTerms": ["css_variables", "theming"],
+                "exampleEvidence": true
+            }
+        },
+        {
+            "id": "q07",
+            "prompt": "What package and setup steps are needed for Fundamental NGX UI5 Web Components?",
+            "expected": {
+                "selectors": ["ui5-button"],
+                "importPaths": ["@fundamental-ngx/ui5-webcomponents"],
+                "apiTerms": ["peer dependencies"],
+                "exampleEvidence": true
+            }
+        },
+        {
+            "id": "q08",
+            "prompt": "How do signal-based translations work in Fundamental NGX?",
+            "expected": {
+                "selectors": [],
+                "importPaths": ["@fundamental-ngx/i18n"],
+                "apiTerms": ["FD_LANGUAGE_SIGNAL", "FdTranslatePipe"],
+                "exampleEvidence": true
+            }
+        },
+        {
+            "id": "q09",
+            "prompt": "How do I use the core date picker and what is its selector?",
+            "expected": {
+                "selectors": ["fd-date-picker"],
+                "importPaths": ["@fundamental-ngx/core/date-picker"],
+                "apiTerms": ["dateChange"],
+                "exampleEvidence": true
+            }
+        },
+        {
+            "id": "q10",
+            "prompt": "How do I use the core multi-combobox?",
+            "expected": {
+                "selectors": ["fd-multi-combobox"],
+                "importPaths": ["@fundamental-ngx/core/multi-combobox"],
+                "apiTerms": ["selected"],
+                "exampleEvidence": true
+            }
+        },
+        {
+            "id": "q11",
+            "prompt": "Which package provides the platform combobox and what selector does it use?",
+            "expected": {
+                "selectors": ["fdp-combobox"],
+                "importPaths": ["@fundamental-ngx/platform/combobox"],
+                "apiTerms": ["valueProperty"],
+                "exampleEvidence": true
+            }
+        },
+        {
+            "id": "q12",
+            "prompt": "Show a message strip example with its correct import path.",
+            "expected": {
+                "selectors": ["fd-message-strip"],
+                "importPaths": ["@fundamental-ngx/core/message-strip"],
+                "apiTerms": ["dismissible"],
+                "exampleEvidence": true
+            }
+        },
+        {
+            "id": "q13",
+            "prompt": "How do I create a notification in Fundamental NGX?",
+            "expected": {
+                "selectors": ["fd-notification"],
+                "importPaths": ["@fundamental-ngx/core/notification"],
+                "apiTerms": ["NotificationService"],
+                "exampleEvidence": true
+            }
+        },
+        {
+            "id": "q14",
+            "prompt": "What is the import and selector for the core shellbar?",
+            "expected": {
+                "selectors": ["fd-shellbar"],
+                "importPaths": ["@fundamental-ngx/core/shellbar"],
+                "apiTerms": ["Shellbar"],
+                "exampleEvidence": true
+            }
+        },
+        {
+            "id": "q15",
+            "prompt": "How should I structure a Fundamental NGX carousel?",
+            "expected": {
+                "selectors": ["fd-carousel"],
+                "importPaths": ["@fundamental-ngx/core/carousel"],
+                "apiTerms": ["orientation"],
+                "exampleEvidence": true
+            }
+        },
+        {
+            "id": "q16",
+            "prompt": "How do I migrate from the deprecated @ui5/webcomponents-ngx package?",
+            "expected": {
+                "selectors": ["ui5-button"],
+                "importPaths": ["@fundamental-ngx/ui5-webcomponents"],
+                "apiTerms": ["additionalText", "deprecated"],
+                "exampleEvidence": true
+            }
+        },
+        {
+            "id": "q17",
+            "prompt": "What is the API for fd-component-that-does-not-exist?",
+            "expected": {
+                "selectors": [],
+                "importPaths": [],
+                "apiTerms": ["not found", "could not be verified"],
+                "notFound": true,
+                "exampleEvidence": false
+            }
+        },
+        {
+            "id": "q18",
+            "prompt": "Compare fd-table, fdp-table, and ui5-table for a Fiori data-heavy screen.",
+            "expected": {
+                "selectors": ["fd-table", "fdp-table", "ui5-table"],
+                "importPaths": ["@fundamental-ngx/core/table", "@fundamental-ngx/platform/table"],
+                "apiTerms": ["dataSource"],
+                "exampleEvidence": true
+            }
+        },
+        {
+            "id": "q19",
+            "prompt": "Which styling files and load order matter when using static Fundamental NGX CSS?",
+            "expected": {
+                "selectors": [],
+                "importPaths": [],
+                "apiTerms": ["css_variables.css", "fundamental-styles.css"],
+                "exampleEvidence": true
+            }
+        },
+        {
+            "id": "q20",
+            "prompt": "Where should fd-table-view-settings-dialog be placed relative to fdp-table?",
+            "expected": {
+                "selectors": ["fdp-table-view-settings-dialog", "fdp-table"],
+                "importPaths": ["@fundamental-ngx/platform/table"],
+                "apiTerms": ["sibling"],
+                "exampleEvidence": true
+            }
+        }
+    ]
+}

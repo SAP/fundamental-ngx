@@ -13,7 +13,7 @@ import { readFileSync } from 'fs';
 import { resolve } from 'path';
 import { SETUP_GUIDES } from './data/setup-guides';
 import { USAGE_GUIDES } from './data/usage-guides';
-import { createServer } from './server';
+import { createServer, loadCatalogFromDisk } from './server';
 import { ComponentCatalog, ComponentMetadata } from './types/component-metadata';
 import { buildPitfalls, buildTemplate, deriveImportPath, getSelectorType } from './utils/selector-utils';
 
@@ -30,6 +30,33 @@ try {
     catalog = JSON.parse(readFileSync(dataPath, 'utf-8'));
 } catch {
     catalog = { generatedAt: '', version: 'test', components: [] };
+}
+
+const FULL_CATALOG = loadCatalogFromDisk();
+
+type TextToolResult = {
+    content?: Array<{ type: string; text?: string }>;
+    isError?: boolean;
+};
+
+async function withFullCatalogClient<T>(callback: (client: Client) => Promise<T>): Promise<T> {
+    const server = createServer(FULL_CATALOG);
+    const [serverTransport, clientTransport] = InMemoryTransport.createLinkedPair();
+    await server.connect(serverTransport);
+    const client = new Client({ name: 'contract-test', version: '1.0' });
+    await client.connect(clientTransport);
+
+    try {
+        return await callback(client);
+    } finally {
+        await client.close();
+    }
+}
+
+function parseToolJson(result: TextToolResult): Record<string, unknown> {
+    const text = result.content?.find((item) => item.type === 'text')?.text;
+    expect(text).toBeDefined();
+    return JSON.parse(text ?? '{}') as Record<string, unknown>;
 }
 
 // ---------------------------------------------------------------------------
@@ -1114,5 +1141,210 @@ describe('get_setup_guide tool data', () => {
         const cmd = SETUP_GUIDES['core+ui5'].installCommand;
         expect(cmd).toContain('@ui5/webcomponents-theming');
         expect(cmd).toContain('@sap-theming/theming-base-content');
+    });
+});
+
+describe('bounded chat-facing tool contracts', () => {
+    it('prioritizes an explicit selector in a natural-language question', async () => {
+        await withFullCatalogClient(async (client) => {
+            const result = (await client.callTool({
+                name: 'search_components',
+                arguments: { query: 'How can I use the fd-dialog?', limit: 5 }
+            })) as TextToolResult;
+            const payload = parseToolJson(result);
+            const matches = payload.results as Array<{ selector: string }>;
+
+            expect(matches[0].selector).toBe('fd-dialog');
+        });
+    });
+
+    it('falls back to the selector keywords when an exact selector does not exist', async () => {
+        await withFullCatalogClient(async (client) => {
+            const result = (await client.callTool({
+                name: 'search_components',
+                arguments: { query: 'How can I use fd-label?', limit: 5 }
+            })) as TextToolResult;
+            const payload = parseToolJson(result);
+            const matches = payload.results as Array<{ selector: string }>;
+
+            expect(matches.length).toBeGreaterThan(0);
+            expect(matches[0].selector).toContain('label');
+            expect(matches[0].selector).not.toBe('[fd-user-menu-list-item]');
+        });
+    });
+
+    it('search_components returns eight results by default', async () => {
+        await withFullCatalogClient(async (client) => {
+            const defaultResult = (await client.callTool({
+                name: 'search_components',
+                arguments: { query: 'table' }
+            })) as TextToolResult;
+            const defaultPayload = parseToolJson(defaultResult);
+            expect(defaultPayload.results).toHaveLength(8);
+        });
+    });
+
+    it('search_components rejects or clamps limits above ten', async () => {
+        await withFullCatalogClient(async (client) => {
+            const oversizedResult = (await client.callTool({
+                name: 'search_components',
+                arguments: { query: 'table', limit: 11 }
+            })) as TextToolResult;
+            if (!oversizedResult.isError) {
+                const oversizedPayload = parseToolJson(oversizedResult);
+                expect((oversizedPayload.results as unknown[]).length).toBeLessThanOrEqual(10);
+            }
+        });
+    });
+
+    it('list_components defaults to fifty entries and returns a continuation cursor', async () => {
+        await withFullCatalogClient(async (client) => {
+            const defaultResult = (await client.callTool({
+                name: 'list_components',
+                arguments: {}
+            })) as TextToolResult;
+            const defaultPayload = parseToolJson(defaultResult);
+            expect(defaultPayload.components as unknown[]).toHaveLength(50);
+            expect(typeof defaultPayload.nextCursor).toBe('string');
+        });
+    });
+
+    it('list_components never accepts more than one hundred entries per page', async () => {
+        await withFullCatalogClient(async (client) => {
+            const oversizedResult = (await client.callTool({
+                name: 'list_components',
+                arguments: { limit: 101 }
+            })) as TextToolResult;
+            if (!oversizedResult.isError) {
+                const oversizedPayload = parseToolJson(oversizedResult);
+                expect((oversizedPayload.components as unknown[]).length).toBeLessThanOrEqual(100);
+            }
+        });
+    });
+
+    it('list_components makes all 1,015 entries reachable without adding or dropping catalog entries', async () => {
+        await withFullCatalogClient(async (client) => {
+            const identities: string[] = [];
+            let cursor: string | undefined;
+
+            for (let pageNumber = 0; pageNumber < 20; pageNumber++) {
+                const arguments_: Record<string, unknown> = { limit: 100 };
+                if (cursor) {
+                    arguments_.cursor = cursor;
+                }
+
+                const result = (await client.callTool({
+                    name: 'list_components',
+                    arguments: arguments_
+                })) as TextToolResult;
+                const payload = parseToolJson(result);
+                const components = payload.components as Array<Record<string, string>>;
+
+                expect(components.length).toBeLessThanOrEqual(100);
+                for (const component of components) {
+                    identities.push(`${component.name}\u0000${component.selector}`);
+                }
+
+                cursor = payload.nextCursor as string | undefined;
+                if (!cursor) {
+                    break;
+                }
+            }
+
+            const catalogIdentities = FULL_CATALOG.components.map(
+                (component) => `${component.name}\u0000${component.selector}`
+            );
+            expect(identities).toHaveLength(1015);
+            expect(identities.sort()).toEqual(catalogIdentities.sort());
+        });
+    });
+
+    it('get_component_api excludes documentation examples, including for fdp-table', async () => {
+        await withFullCatalogClient(async (client) => {
+            const result = (await client.callTool({
+                name: 'get_component_api',
+                arguments: { name: 'fdp-table' }
+            })) as TextToolResult;
+            const payload = parseToolJson(result);
+
+            expect(payload.selector).toBe('fdp-table');
+            expect(payload).not.toHaveProperty('examples');
+        });
+    });
+
+    it('get_component_examples returns one selected example and advertises selectable example names', async () => {
+        await withFullCatalogClient(async (client) => {
+            const byQuery = (await client.callTool({
+                name: 'get_component_examples',
+                arguments: { name: 'fdp-table', query: 'custom width' }
+            })) as TextToolResult;
+            const queryPayload = parseToolJson(byQuery);
+            const queryExamples = queryPayload.examples as Array<Record<string, string>>;
+            const availableExamples = queryPayload.availableExamples as string[];
+
+            expect(queryExamples).toHaveLength(1);
+            expect(queryExamples[0].name).toBe('platform-table-custom-width-example');
+            expect(availableExamples).toContain('platform-table-custom-title-example');
+            expect(availableExamples).toContain('platform-table-custom-width-example');
+
+            const byName = (await client.callTool({
+                name: 'get_component_examples',
+                arguments: { name: 'fdp-table', exampleName: 'platform-table-custom-title-example' }
+            })) as TextToolResult;
+            const namePayload = parseToolJson(byName);
+            const namedExamples = namePayload.examples as Array<Record<string, string>>;
+            expect(namedExamples).toHaveLength(1);
+            expect(namedExamples[0].name).toBe('platform-table-custom-title-example');
+        });
+    });
+
+    it('get_usage_guide does not embed a full documentation example', async () => {
+        await withFullCatalogClient(async (client) => {
+            const result = (await client.callTool({
+                name: 'get_usage_guide',
+                arguments: { name: 'fdp-table' }
+            })) as TextToolResult;
+            const payload = parseToolJson(result);
+
+            expect(payload).not.toHaveProperty('example');
+            expect(JSON.stringify(payload)).not.toMatch(/"example"\s*:/);
+        });
+    });
+
+    const chatFacingCalls: Array<{ name: string; arguments: Record<string, unknown> }> = [
+        { name: 'search_components', arguments: { query: 'table' } },
+        { name: 'list_components', arguments: {} },
+        { name: 'get_component_api', arguments: { name: 'fdp-table' } },
+        { name: 'get_component_examples', arguments: { name: 'fdp-table' } },
+        { name: 'get_usage_guide', arguments: { name: 'fdp-table' } },
+        { name: 'compare_components', arguments: { component_a: 'fd-table', component_b: 'fdp-table' } },
+        { name: 'get_setup_guide', arguments: { packages: 'core' } }
+    ];
+
+    for (const toolCall of chatFacingCalls) {
+        it(`serializes ${toolCall.name} as valid JSON no larger than 64 KB`, async () => {
+            await withFullCatalogClient(async (client) => {
+                const result = (await client.callTool(toolCall)) as TextToolResult;
+                const text = result.content?.find((item) => item.type === 'text')?.text ?? '';
+
+                expect(() => JSON.parse(text)).not.toThrow();
+                expect(Buffer.byteLength(text, 'utf8')).toBeLessThanOrEqual(64 * 1024);
+            });
+        });
+    }
+
+    it('the default server retains the complete component-catalog resource for local clients', async () => {
+        await withFullCatalogClient(async (client) => {
+            const resources = await client.listResources();
+            expect(resources.resources.map((resource) => resource.name)).toContain('component-catalog');
+
+            const catalogResource = await client.readResource({ uri: 'fundamental-ngx://components/catalog' });
+            const text = catalogResource.contents.find((content) => 'text' in content)?.text;
+            const resourcePayload = JSON.parse(text ?? '{}') as ComponentCatalog;
+            const table = resourcePayload.components.find((component) => component.selector === 'fdp-table');
+
+            expect(resourcePayload.components).toHaveLength(1015);
+            expect(table?.examples).toHaveLength(40);
+        });
     });
 });

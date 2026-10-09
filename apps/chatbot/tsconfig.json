@@ -13,7 +13,7 @@
             }
         ],
         "paths": {
-            "@fundamental-ngx/mcp-server/web": ["../../libs/mcp-server/src/web.ts"]
+            "@fundamental-ngx/mcp-server/web": ["libs/mcp-server/src/web.ts"]
         },
         "strict": false,
         "isolatedModules": true

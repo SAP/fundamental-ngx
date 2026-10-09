@@ -28,7 +28,7 @@ const catalog = normalizeCatalog(catalogData as unknown as ComponentCatalog);
  */
 export function createMcpFetchHandler(): (req: Request) => Promise<Response> {
     return async (req: Request): Promise<Response> => {
-        const server = createServer(catalog);
+        const server = createServer(catalog, { includeCatalogResource: false });
         const transport = new WebStandardStreamableHTTPServerTransport({
             sessionIdGenerator: undefined, // stateless — no session tracking
             enableJsonResponse: true // buffered JSON instead of SSE for POST requests

@@ -1,3 +1,17 @@
+// Inna's authored AI palette from PR #14586, scoped to the chat component.
+:host {
+    --fd-guide-chat-ai-purple: #5d36ff;
+    --fd-guide-chat-ai-purple-light: #9d7aff;
+    --fd-guide-chat-ai-purple-pale: #c4b3ff;
+    --fd-guide-chat-code-background: #2b2b2b;
+    --fd-guide-chat-code-text: #f8f8f2;
+    --fd-guide-chat-code-border: rgba(255, 255, 255, 0.1);
+    --fd-guide-chat-code-label: rgba(255, 255, 255, 0.6);
+    --fd-guide-chat-copy-text: rgba(255, 255, 255, 0.8);
+    --fd-guide-chat-copy-success: #abe338;
+    --fd-guide-chat-copy-success-background: rgba(171, 227, 56, 0.2);
+}
+
 // Floating Action Button
 .fd-guide-fab {
     right: 2rem;
@@ -23,21 +37,24 @@
     }
 }
 
-// High-contrast syntax highlighting colors
-// Based on a11y-dark theme for better accessibility
-:host ::ng-deep {
+/*
+ * Sanitized Markdown is inserted through [innerHTML], so Angular's emulated
+ * encapsulation cannot reach its generated descendants. Keep this deep rule
+ * scoped to the chat host and Markdown surface; it must not become global.
+ */
+:host ::ng-deep .fd-guide-chat__markdown {
     .hljs {
-        background: #2b2b2b;
-        color: #f8f8f2;
+        background: var(--fd-guide-chat-code-background);
+        color: var(--fd-guide-chat-code-text);
     }
 
-    // Comments - tan
+    // Comments
     .hljs-comment,
     .hljs-quote {
         color: #d4d0ab;
     }
 
-    // Keywords - light purple
+    // Keywords
     .hljs-keyword,
     .hljs-selector-tag,
     .hljs-tag {
@@ -45,16 +62,16 @@
         font-weight: 600;
     }
 
-    // Strings - bright green
+    // Strings
     .hljs-string,
     .hljs-attr,
     .hljs-symbol,
     .hljs-bullet,
     .hljs-addition {
-        color: #abe338;
+        color: var(--fd-guide-chat-copy-success);
     }
 
-    // Numbers, built-ins - orange
+    // Numbers and built-ins
     .hljs-number,
     .hljs-built_in,
     .hljs-literal,
@@ -65,12 +82,12 @@
         color: #f5ab35;
     }
 
-    // Attributes - gold
+    // Attributes
     .hljs-attribute {
         color: #ffd700;
     }
 
-    // Tags, names - coral
+    // Tags and names
     .hljs-variable,
     .hljs-template-variable,
     .hljs-name,
@@ -81,7 +98,7 @@
         color: #ffa07a;
     }
 
-    // Titles - cyan
+    // Titles
     .hljs-title,
     .hljs-section,
     .hljs-title.class_,
@@ -127,6 +144,8 @@
     display: flex;
     position: fixed;
     flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
     animation: slideUp 0.3s ease;
     max-width: calc(100vw - 4rem);
     max-height: calc(100vh - 10rem);
@@ -146,27 +165,10 @@
         right: 0;
         width: 100vw;
         height: 100vh;
+        height: 100dvh;
         max-width: 100vw;
         max-height: 100vh;
         border-radius: 0;
-    }
-}
-
-@keyframes moveBorder {
-    0% {
-        border-image-source: linear-gradient(0deg, #5d36ff, #9d7aff, #c4b3ff, transparent, transparent, transparent);
-    }
-    25% {
-        border-image-source: linear-gradient(90deg, #5d36ff, #9d7aff, #c4b3ff, transparent, transparent, transparent);
-    }
-    50% {
-        border-image-source: linear-gradient(180deg, #5d36ff, #9d7aff, #c4b3ff, transparent, transparent, transparent);
-    }
-    75% {
-        border-image-source: linear-gradient(270deg, #5d36ff, #9d7aff, #c4b3ff, transparent, transparent, transparent);
-    }
-    100% {
-        border-image-source: linear-gradient(360deg, #5d36ff, #9d7aff, #c4b3ff, transparent, transparent, transparent);
     }
 }
 
@@ -252,8 +254,11 @@
     flex: 1;
     gap: 1rem;
     display: flex;
+    min-height: 0;
     padding: 1rem;
     overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
     flex-direction: column;
     background: var(--sapBackgroundColor);
     border: 3px solid transparent;
@@ -262,14 +267,14 @@
     &--loading {
         border-image: linear-gradient(
                 90deg,
-                #5d36ff,
-                #9d7aff,
-                #c4b3ff,
+                var(--fd-guide-chat-ai-purple),
+                var(--fd-guide-chat-ai-purple-light),
+                var(--fd-guide-chat-ai-purple-pale),
                 transparent,
                 transparent,
                 transparent,
                 transparent,
-                #5d36ff
+                var(--fd-guide-chat-ai-purple)
             )
             1;
         animation: moveBorder 4s linear infinite;
@@ -279,19 +284,59 @@
 
 @keyframes moveBorder {
     0% {
-        border-image-source: linear-gradient(0deg, #5d36ff, #9d7aff, #c4b3ff, transparent, transparent, transparent);
+        border-image-source: linear-gradient(
+            0deg,
+            var(--fd-guide-chat-ai-purple),
+            var(--fd-guide-chat-ai-purple-light),
+            var(--fd-guide-chat-ai-purple-pale),
+            transparent,
+            transparent,
+            transparent
+        );
     }
     25% {
-        border-image-source: linear-gradient(90deg, #5d36ff, #9d7aff, #c4b3ff, transparent, transparent, transparent);
+        border-image-source: linear-gradient(
+            90deg,
+            var(--fd-guide-chat-ai-purple),
+            var(--fd-guide-chat-ai-purple-light),
+            var(--fd-guide-chat-ai-purple-pale),
+            transparent,
+            transparent,
+            transparent
+        );
     }
     50% {
-        border-image-source: linear-gradient(180deg, #5d36ff, #9d7aff, #c4b3ff, transparent, transparent, transparent);
+        border-image-source: linear-gradient(
+            180deg,
+            var(--fd-guide-chat-ai-purple),
+            var(--fd-guide-chat-ai-purple-light),
+            var(--fd-guide-chat-ai-purple-pale),
+            transparent,
+            transparent,
+            transparent
+        );
     }
     75% {
-        border-image-source: linear-gradient(270deg, #5d36ff, #9d7aff, #c4b3ff, transparent, transparent, transparent);
+        border-image-source: linear-gradient(
+            270deg,
+            var(--fd-guide-chat-ai-purple),
+            var(--fd-guide-chat-ai-purple-light),
+            var(--fd-guide-chat-ai-purple-pale),
+            transparent,
+            transparent,
+            transparent
+        );
     }
     100% {
-        border-image-source: linear-gradient(360deg, #5d36ff, #9d7aff, #c4b3ff, transparent, transparent, transparent);
+        border-image-source: linear-gradient(
+            360deg,
+            var(--fd-guide-chat-ai-purple),
+            var(--fd-guide-chat-ai-purple-light),
+            var(--fd-guide-chat-ai-purple-pale),
+            transparent,
+            transparent,
+            transparent
+        );
     }
 }
 
@@ -349,9 +394,11 @@
 }
 
 .fd-guide-chat__message-content {
+    min-width: 0;
     max-width: 80%;
     padding: 0.75rem;
-    word-wrap: break-word;
+    overflow-wrap: anywhere;
+    word-break: break-word;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
     border-radius: var(--sapElement_BorderCornerRadius);
 
@@ -386,7 +433,7 @@
         width: 0.625rem;
         height: 0.625rem;
         border-radius: 50%;
-        background: linear-gradient(135deg, #5d36ff, #9d7aff);
+        background: linear-gradient(135deg, var(--fd-guide-chat-ai-purple), var(--fd-guide-chat-ai-purple-light));
         box-shadow: 0 2px 4px rgba(93, 54, 255, 0.3);
         animation: thinkingDots 1.4s ease-in-out infinite;
 
@@ -418,193 +465,222 @@
 }
 
 // Markdown formatting for assistant messages
-.fd-guide-chat__markdown {
-    ::ng-deep {
-        > *:first-child {
-            margin-top: 0;
+:host ::ng-deep .fd-guide-chat__markdown {
+    min-width: 0;
+    overflow-wrap: anywhere;
+
+    :is(a, code, pre) {
+        overflow-wrap: anywhere;
+    }
+
+    > *:first-child {
+        margin-top: 0;
+    }
+
+    > *:last-child {
+        margin-bottom: 0;
+    }
+
+    // Code block wrapper with header
+    .code-block-wrapper {
+        margin: 0.75rem 0;
+        border-radius: 0.375rem;
+        background: var(--fd-guide-chat-code-background);
+        border: 1px solid var(--fd-guide-chat-code-border);
+        overflow: hidden;
+        max-width: 100%;
+    }
+
+    .code-block-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 1rem;
+        background: rgba(0, 0, 0, 0.2);
+        border-bottom: 1px solid var(--fd-guide-chat-code-border);
+    }
+
+    .code-block-lang {
+        font-size: 0.75rem;
+        color: var(--fd-guide-chat-code-label);
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+    }
+
+    .code-block-copy {
+        display: flex;
+        align-items: center;
+        gap: 0.375rem;
+        padding: 0.25rem 0.5rem;
+        border: none;
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--fd-guide-chat-copy-text);
+        border-radius: 0.25rem;
+        font-size: 0.75rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-family: var(--sapFontFamily);
+
+        svg {
+            flex-shrink: 0;
         }
 
-        > *:last-child {
-            margin-bottom: 0;
+        &:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
         }
 
-        // Code block wrapper with header
-        .code-block-wrapper {
-            margin: 0.75rem 0;
-            border-radius: 0.375rem;
-            background: #2b2b2b;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            overflow: hidden;
+        &:active {
+            transform: scale(0.95);
         }
 
-        .code-block-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.5rem 1rem;
-            background: rgba(0, 0, 0, 0.2);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .code-block-lang {
-            font-size: 0.75rem;
-            color: rgba(255, 255, 255, 0.6);
-            text-transform: uppercase;
-            font-weight: 600;
-            letter-spacing: 0.05em;
-        }
-
-        .code-block-copy {
-            display: flex;
-            align-items: center;
-            gap: 0.375rem;
-            padding: 0.25rem 0.5rem;
-            border: none;
-            background: rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.8);
-            border-radius: 0.25rem;
-            font-size: 0.75rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-family: var(--sapFontFamily);
-
-            svg {
-                flex-shrink: 0;
-            }
-
-            &:hover {
-                background: rgba(255, 255, 255, 0.15);
-                color: #fff;
-            }
-
-            &:active {
-                transform: scale(0.95);
-            }
-
-            &--success {
-                background: rgba(171, 227, 56, 0.2);
-                color: #abe338;
-            }
-        }
-
-        p {
-            margin: 0 0 0.75rem 0;
-            line-height: 1.6;
-
-            &:last-child {
-                margin-bottom: 0;
-            }
-        }
-
-        code {
-            padding: 0.125rem 0.375rem;
-            border-radius: 0.25rem;
-            font-size: 0.875em;
-            background: var(--sapField_Background);
-            font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
-        }
-
-        pre {
-            margin: 0;
-            padding: 1rem;
-            overflow-x: auto;
-
-            code {
-                padding: 0;
-                border: none;
-                background: transparent;
-                color: #f8f8f2;
-                font-size: var(--sapFontSmallSize);
-                line-height: 1.5;
-                display: block;
-
-                // The a11y-dark theme provides high-contrast syntax colors
-                // optimized for accessibility (WCAG AA compliant)
-            }
-        }
-
-        ul,
-        ol {
-            margin: 0.5rem 0;
-            padding-left: 1.5rem;
-
-            li {
-                margin: 0.25rem 0;
-                line-height: 1.6;
-            }
-        }
-
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            margin: 1rem 0 0.5rem 0;
-            font-weight: 600;
-            line-height: 1.4;
-
-            &:first-child {
-                margin-top: 0;
-            }
-        }
-
-        h1 {
-            font-size: 1.5rem;
-        }
-        h2 {
-            font-size: 1.25rem;
-        }
-        h3 {
-            font-size: 1.125rem;
-        }
-
-        blockquote {
-            margin: 0.75rem 0;
-            padding-left: 1rem;
-            border-left: 3px solid var(--sapField_BorderColor);
-            color: var(--sapContent_LabelColor);
-        }
-
-        a {
-            color: var(--sapLink_Color);
-            text-decoration: none;
-
-            &:hover {
-                text-decoration: underline;
-            }
-        }
-
-        hr {
-            margin: 1rem 0;
-            border: none;
-            border-top: 1px solid var(--sapField_BorderColor);
-        }
-
-        table {
-            width: 100%;
-            margin: 0.75rem 0;
-            border-collapse: collapse;
-
-            th,
-            td {
-                padding: 0.5rem;
-                text-align: left;
-                border: 1px solid var(--sapField_BorderColor);
-            }
-
-            th {
-                font-weight: 600;
-                background: var(--sapField_Background);
-            }
+        &--success {
+            background: var(--fd-guide-chat-copy-success-background);
+            color: var(--fd-guide-chat-copy-success);
         }
     }
+
+    p {
+        margin: 0 0 0.75rem 0;
+        line-height: 1.6;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    code {
+        padding: 0.125rem 0.375rem;
+        border-radius: 0.25rem;
+        font-size: 0.875em;
+        background: var(--sapField_Background);
+        font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+    }
+
+    pre {
+        margin: 0;
+        padding: 1rem;
+        overflow-x: auto;
+        max-width: 100%;
+        overscroll-behavior: contain;
+
+        code {
+            padding: 0;
+            border: none;
+            background: transparent;
+            color: var(--fd-guide-chat-code-text);
+            font-size: var(--sapFontSmallSize);
+            line-height: 1.5;
+            display: block;
+        }
+    }
+
+    ul,
+    ol {
+        margin: 0.5rem 0;
+        padding-left: 1.5rem;
+
+        li {
+            margin: 0.25rem 0;
+            line-height: 1.6;
+        }
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin: 1rem 0 0.5rem 0;
+        font-weight: 600;
+        line-height: 1.4;
+
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+    h2 {
+        font-size: 1.25rem;
+    }
+    h3 {
+        font-size: 1.125rem;
+    }
+
+    blockquote {
+        margin: 0.75rem 0;
+        padding-left: 1rem;
+        border-left: 3px solid var(--sapField_BorderColor);
+        color: var(--sapContent_LabelColor);
+    }
+
+    a {
+        color: var(--sapLink_Color);
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    hr {
+        margin: 1rem 0;
+        border: none;
+        border-top: 1px solid var(--sapField_BorderColor);
+    }
+
+    table {
+        width: 100%;
+        margin: 0.75rem 0;
+        border-collapse: collapse;
+
+        th,
+        td {
+            padding: 0.5rem;
+            text-align: left;
+            border: 1px solid var(--sapField_BorderColor);
+        }
+
+        th {
+            font-weight: 600;
+            background: var(--sapField_Background);
+        }
+    }
+}
+
+// Sources and error feedback remain readable in compact, narrow layouts.
+.fd-guide-chat__sources {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.5rem;
+    align-items: baseline;
+    margin-block-start: 0.75rem;
+    color: var(--sapContent_LabelColor);
+    font-size: var(--sapFontSmallSize);
+
+    a {
+        max-width: 100%;
+        overflow-wrap: anywhere;
+        color: var(--sapLink_Color);
+    }
+}
+
+.fd-guide-chat__message--error .fd-guide-chat__message-content {
+    color: var(--sapNegativeColor);
+    background: color-mix(in srgb, var(--sapNegativeColor) 8%, var(--sapBackgroundColor));
+    border-color: var(--sapNegativeColor);
 }
 
 // Input Area
 .fd-guide-chat__input-form {
     padding: 1rem;
     flex-shrink: 0;
+    min-width: 0;
     background: var(--sapButton_Background);
     border-top: 1px solid var(--sapGroup_ContentBorderColor);
     border-radius: 0 0 var(--sapElement_BorderCornerRadius) var(--sapElement_BorderCornerRadius);
@@ -614,9 +690,33 @@
     }
 }
 
+.fd-guide-chat__key-wrapper {
+    gap: 0.5rem;
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    margin-block-end: 0.375rem;
+}
+
+.fd-guide-chat__api-key {
+    min-width: 0;
+}
+
+.fd-guide-chat__clear-key-btn {
+    flex-shrink: 0;
+}
+
+.fd-guide-chat__key-notice {
+    margin: 0 0 0.75rem;
+    color: var(--sapContent_LabelColor);
+    font-size: var(--sapFontSmallSize);
+    line-height: 1.4;
+}
+
 .fd-guide-chat__input-wrapper {
     gap: 0.5rem;
     display: flex;
+    min-width: 0;
     align-items: flex-end;
 }
 
@@ -628,6 +728,7 @@
 
 .fd-guide-chat__input {
     flex: 1;
+    min-width: 0;
     resize: none;
     line-height: 1.5;
     padding: 0.75rem;
@@ -661,7 +762,35 @@
     }
 
     &:active {
-        color: var(--sapAssistant_TextColor, #fff);
+        color: var(--sapAssistant_TextColor);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .fd-guide-chat,
+    .fd-guide-chat--expanded,
+    .fd-guide-chat__messages--loading,
+    .fd-guide-chat__thinking-dots span,
+    .fd-guide-chat__attach-btn--listening,
+    .fd-guide-chat__attach-btn--speaking,
+    .fd-guide-chat__input,
+    .fd-guide-chat__markdown .code-block-copy {
+        animation: none;
+        transition-duration: 0.01ms;
+    }
+
+    .fd-guide-chat__messages--loading {
+        border-image: linear-gradient(
+                90deg,
+                var(--fd-guide-chat-ai-purple),
+                var(--fd-guide-chat-ai-purple-light),
+                var(--fd-guide-chat-ai-purple-pale)
+            )
+            1;
+    }
+
+    .fd-guide-chat__thinking-dots span {
+        opacity: 1;
     }
 }
 
@@ -670,17 +799,17 @@
     color: var(--sapContent_IconColor);
 
     &--listening {
-        color: var(--sapAssistant_Background, #5d36ff);
+        color: var(--sapAssistant_Background, var(--fd-guide-chat-ai-purple));
         animation: pulse 1.5s ease-in-out infinite;
     }
 
     &--speaking {
-        color: var(--sapAssistant_Background, #5d36ff);
+        color: var(--sapAssistant_Background, var(--fd-guide-chat-ai-purple));
         animation: pulse 2s ease-in-out infinite;
     }
 
     &--paused {
-        color: var(--sapAssistant_Background, #5d36ff);
+        color: var(--sapAssistant_Background, var(--fd-guide-chat-ai-purple));
     }
 }
 
@@ -690,6 +819,7 @@
         opacity: 1;
         transform: scale(1);
     }
+
     50% {
         opacity: 0.7;
         transform: scale(1.1);
@@ -702,17 +832,18 @@
     margin: 0 0 0.5rem;
     padding: 0;
     display: flex;
-    // Keep every chip on one line; chips shrink to share the row instead of wrapping.
-    flex-wrap: nowrap;
+    // Preserve readable names when several chips share a narrow input area.
+    flex-wrap: wrap;
     list-style: none;
 }
 
 .fd-guide-chat__attachment-chip {
     gap: 0.375rem;
     display: flex;
-    // Size to content, but allow shrinking (with min-width: 0) so 3 chips fit one line.
-    flex: 0 1 auto;
+    // Give each chip enough room for its identity before truncating long names.
+    flex: 1 1 10rem;
     min-width: 0;
+    max-width: 100%;
     padding: 0.25rem 0.25rem 0.25rem 0.5rem;
     align-items: center;
     background: var(--sapField_Background);

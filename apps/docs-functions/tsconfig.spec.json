@@ -1,0 +1,11 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "module": "preserve",
+        "moduleResolution": "bundler",
+        "types": ["jest", "node"],
+        "isolatedModules": true,
+        "noEmit": true
+    },
+    "include": ["jest.config.ts", "tests/**/*.ts"]
+}

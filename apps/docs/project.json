@@ -28,6 +28,13 @@
         }
     },
     "targets": {
+        "test": {
+            "executor": "@nx/jest:jest",
+            "options": {
+                "jestConfig": "apps/docs/jest.config.ts"
+            },
+            "outputs": ["{workspaceRoot}/coverage/apps/docs"]
+        },
         "compile": {
             "executor": "@angular-devkit/build-angular:browser-esbuild",
             "options": {
