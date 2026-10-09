@@ -3,7 +3,7 @@
     class="fd-guide-fab"
     fd-button
     glyph="ai"
-    label="Ask FD Guide"
+    [label]="'Ask FD Guide (' + chatToggleShortcut + ')'"
     [title]="'Ask FD Guide (' + chatToggleShortcut + ')'"
     [ariaLabel]="'Ask FD Guide (' + chatToggleShortcut + ')'"
     (click)="toggleChat()"
