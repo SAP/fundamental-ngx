@@ -16,9 +16,9 @@ const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 const problems = [];
 
-// 1. Chatbot dependencies installed (the app has its own isolated node_modules).
+// 1. Chatbot dependencies installed (Yarn workspace — installed from the repo root).
 if (!fs.existsSync(path.join(root, 'apps/chatbot/node_modules/next'))) {
-    problems.push('Chatbot dependencies are not installed.\n' + '      Fix:  cd apps/chatbot && yarn install');
+    problems.push('Chatbot dependencies are not installed.\n' + '      Fix:  yarn install  (run from the repo root)');
 }
 
 // 2. MCP catalog generated — the MCP server imports this at build/request time.
