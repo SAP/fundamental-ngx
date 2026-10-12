@@ -214,20 +214,20 @@
                         Attachments are unavailable with Groq.
                     }
                 </p>
-            } @else if (localProviderAvailable()) {
-                <p class="fd-guide-chat__key-notice">Using the local server provider configuration.</p>
             }
-            <label for="fd-guide-input" class="fd-guide-sr-only">
-                Ask about Fundamental NGX components, APIs, or examples...
-            </label>
-            <p id="fd-guide-attachment-limit" class="fd-guide-chat__attachment-hint">
-                @if (canAttachFiles()) {
-                    Attach up to 3 PNG, JPEG, WebP, GIF, or PDF files ({{ attachmentLimitLabel() }} total). A question
-                    is required.
-                } @else {
-                    Attachments are unavailable with Groq. A question is required.
-                }
-            </p>
+            @if (!localProviderAvailable()) {
+                <label for="fd-guide-input" class="fd-guide-sr-only">
+                    Ask about Fundamental NGX components, APIs, or examples...
+                </label>
+                <p id="fd-guide-attachment-limit" class="fd-guide-chat__attachment-hint">
+                    @if (canAttachFiles()) {
+                        Attach up to 3 PNG, JPEG, WebP, GIF, or PDF files ({{ attachmentLimitLabel() }} total). A
+                        question is required.
+                    } @else {
+                        Attachments are unavailable with Groq. A question is required.
+                    }
+                </p>
+            }
             @if (attachments().length) {
                 <ul class="fd-guide-chat__attachments" aria-label="Files attached to the next message">
                     @for (attachment of attachments(); track attachment.id) {
@@ -284,7 +284,7 @@
                         glyph="attachment"
                         [ariaLabel]="'Attach files (' + attachShortcut + ')'"
                         [title]="'Attach PNG, JPEG, WebP, GIF, or PDF files (' + attachShortcut + ')'"
-                        aria-describedby="fd-guide-attachment-limit"
+                        [attr.aria-describedby]="localProviderAvailable() ? null : 'fd-guide-attachment-limit'"
                         [disabled]="isBusy() || !canAttachFiles() || attachments().length >= 3"
                         (click)="openFilePicker()"
                     ></button>

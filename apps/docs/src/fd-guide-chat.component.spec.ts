@@ -121,7 +121,8 @@ describe('FdGuideChatComponent', () => {
 
         openChat();
         expect(fixture.nativeElement.querySelector('input[type="password"]')).toBeNull();
-        expect(fixture.nativeElement.textContent).toContain('Using the local server provider configuration.');
+        // The local-provider notice is intentionally hidden when the local provider is active.
+        expect(fixture.nativeElement.textContent).not.toContain('Using the local server provider configuration.');
 
         input('#fd-guide-input', 'Explain fd-dialog');
         expect(fixture.nativeElement.querySelector<HTMLButtonElement>('.fd-guide-chat__send-btn').disabled).toBe(false);
@@ -340,9 +341,10 @@ describe('FdGuideChatComponent', () => {
         expect(service.stop).toHaveBeenCalledTimes(2);
     });
 
-    it('displays the deployed 256 KiB default and adopts 5 MiB only from loopback capabilities', async () => {
+    it('shows the 256 KiB attachment-limit hint in the deployed UI and hides it when the local provider is active', async () => {
         openChat();
         expect(fixture.nativeElement.textContent).toContain('256 KiB');
+        expect(fixture.nativeElement.querySelector('#fd-guide-attachment-limit')).not.toBeNull();
 
         fixture.destroy();
         service.getCapabilities.mockResolvedValue({
@@ -355,7 +357,9 @@ describe('FdGuideChatComponent', () => {
         fixture.detectChanges();
         openChat();
 
-        expect(fixture.nativeElement.textContent).toContain('5 MiB');
+        // The attachment-limit hint is hidden entirely when the local provider is active.
+        expect(fixture.nativeElement.querySelector('#fd-guide-attachment-limit')).toBeNull();
+        expect(fixture.nativeElement.textContent).not.toContain('5 MiB');
     });
 
     it('stages image/PDF previews, removes files, and never stages more than three', async () => {

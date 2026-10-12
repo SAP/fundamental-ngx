@@ -1,12 +1,13 @@
+/**
+ * @jest-environment-options {"url": "https://docs.fundamental-ngx.com/"}
+ *
+ * These tests exercise the DEPLOYED transport: a non-loopback host routes the service to
+ * the same-origin Netlify Function using the NDJSON protocol. The localhost transport (the
+ * standalone chatbot, old AI-SDK protocol) is covered in fd-guide-chat.service.local.spec.ts,
+ * which runs on jsdom's default `localhost` host.
+ */
 import { FdGuideChatService } from './fd-guide-chat.service';
-import {
-    deferred,
-    DEPLOYED_ATTACHMENT_LIMIT_BYTES,
-    fakeChatAttachment,
-    LOCAL_ATTACHMENT_LIMIT_BYTES,
-    ndjsonResponse,
-    TEST_ONLY_NOT_A_REAL_KEY
-} from './fd-guide-chat.test-fixtures';
+import { deferred, fakeChatAttachment, ndjsonResponse, TEST_ONLY_NOT_A_REAL_KEY } from './fd-guide-chat.test-fixtures';
 
 describe('FdGuideChatService', () => {
     let service: FdGuideChatService;
@@ -58,36 +59,6 @@ describe('FdGuideChatService', () => {
             await service.send(question, TEST_ONLY_NOT_A_REAL_KEY, () => undefined);
         }
     }
-
-    it('detects when the local Function has a server-side provider', async () => {
-        fetchSpy.mockResolvedValue(Response.json({ localProvider: true }));
-
-        await expect(service.hasLocalProvider()).resolves.toBe(true);
-        expect(fetchSpy).toHaveBeenCalledWith('/api/chat', {
-            method: 'GET',
-            headers: { Accept: 'application/json' },
-            cache: 'no-store'
-        });
-    });
-
-    it('adopts the 5 MiB attachment limit only from the loopback status response and keeps 256 KiB as default', async () => {
-        fetchSpy.mockResolvedValue(
-            Response.json({ localProvider: true, attachmentLimitBytes: LOCAL_ATTACHMENT_LIMIT_BYTES })
-        );
-
-        const capabilities = await (
-            service as unknown as {
-                getCapabilities: () => Promise<{ localProvider: boolean; attachmentLimitBytes: number }>;
-            }
-        ).getCapabilities();
-
-        expect(capabilities).toEqual({
-            localProvider: true,
-            attachmentLimitBytes: LOCAL_ATTACHMENT_LIMIT_BYTES
-        });
-        expect(DEPLOYED_ATTACHMENT_LIMIT_BYTES).toBe(256 * 1024);
-        expect(JSON.stringify(capabilities)).not.toMatch(/provider.*key|api.?key/i);
-    });
 
     it('uses native fetch and sends the key only in x-gemini-api-key', async () => {
         fetchSpy.mockResolvedValue(ndjsonResponse([{ type: 'done' }]));

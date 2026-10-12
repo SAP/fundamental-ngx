@@ -37,6 +37,10 @@ type ChatRequestMessage = ChatHistoryMessage & { attachments?: ChatAttachment[] 
 
 const CHAT_DEBUG_STORAGE_KEY = 'fd-guide-chat-debug';
 const CHAT_ENDPOINT = '/api/chat';
+// Local development talks directly to the standalone chatbot (apps/chatbot, `next dev`),
+// cross-origin, using the AI SDK protocol it speaks. Production uses the same-origin
+// Netlify Function at CHAT_ENDPOINT instead. The branch is chosen by isLoopbackBrowser().
+const CHATBOT_ENDPOINT = 'http://localhost:3000/api/chat';
 const MAXIMUM_CHAT_HISTORY_MESSAGES = 8;
 const CHAT_PROVIDER_KEY_HEADERS: Record<ChatProvider, string> = {
     google: 'x-gemini-api-key',
@@ -72,35 +76,35 @@ export class FdGuideChatService {
     }
 
     async getCapabilities(): Promise<ChatCapabilities> {
-        const fallback = { localProvider: false, attachmentLimitBytes: DEPLOYED_ATTACHMENT_LIMIT_BYTES };
         if (!isLoopbackBrowser()) {
-            return fallback;
+            return { localProvider: false, attachmentLimitBytes: DEPLOYED_ATTACHMENT_LIMIT_BYTES };
         }
+        // On localhost the backend is either the Netlify Function (via `netlify dev`, which
+        // answers this probe) or the standalone chatbot (via `yarn start`, which has no
+        // capability endpoint and so the probe can't resolve). When the probe doesn't yield
+        // JSON, assume the local provider is available — the chatbot supplies its own key.
         try {
             const response = await fetch(CHAT_ENDPOINT, {
                 method: 'GET',
                 headers: { Accept: 'application/json' },
                 cache: 'no-store'
             });
-            if (!response.ok) {
-                return fallback;
+            if (response.ok) {
+                const body: unknown = await response.json();
+                if (isRecord(body)) {
+                    return {
+                        localProvider: body.localProvider === true,
+                        attachmentLimitBytes:
+                            body.attachmentLimitBytes === LOCAL_ATTACHMENT_LIMIT_BYTES
+                                ? LOCAL_ATTACHMENT_LIMIT_BYTES
+                                : DEPLOYED_ATTACHMENT_LIMIT_BYTES
+                    };
+                }
             }
-
-            const body: unknown = await response.json();
-            if (!isRecord(body)) {
-                return fallback;
-            }
-
-            return {
-                localProvider: body.localProvider === true,
-                attachmentLimitBytes:
-                    body.attachmentLimitBytes === LOCAL_ATTACHMENT_LIMIT_BYTES
-                        ? LOCAL_ATTACHMENT_LIMIT_BYTES
-                        : DEPLOYED_ATTACHMENT_LIMIT_BYTES
-            };
         } catch {
-            return fallback;
+            // Probe unavailable (standalone chatbot under `yarn start`) — fall through.
         }
+        return { localProvider: true, attachmentLimitBytes: LOCAL_ATTACHMENT_LIMIT_BYTES };
     }
 
     async send(
@@ -119,6 +123,22 @@ export class FdGuideChatService {
         this.stop();
         const controller = new AbortController();
         this._abortController = controller;
+
+        if (isLoopbackBrowser()) {
+            try {
+                await this._streamFromChatbot(question, onEvent, attachments, controller);
+            } catch (error) {
+                if (!isAbortError(error)) {
+                    throw error;
+                }
+            } finally {
+                if (this._abortController === controller) {
+                    this._abortController = null;
+                }
+            }
+            return;
+        }
+
         const newestMessage: ChatRequestMessage = attachments.length
             ? {
                   role: 'user',
@@ -225,6 +245,122 @@ export class FdGuideChatService {
     stop(): void {
         this._abortController?.abort();
         this._abortController = null;
+    }
+
+    /**
+     * Local-development transport. Talks to the standalone chatbot (apps/chatbot) using the
+     * AI SDK UI-message protocol it speaks — UIMessage request shape plus an SSE (`data:`)
+     * response stream — and translates that stream into the same ChatEvent callbacks the
+     * component consumes from the production Netlify Function. The chatbot reads its provider
+     * key from its own .env.local, so no browser key is sent here.
+     */
+    private async _streamFromChatbot(
+        question: string,
+        onEvent: (event: ChatEvent) => void,
+        attachments: readonly ChatAttachment[],
+        controller: AbortController
+    ): Promise<void> {
+        const newestParts: Array<Record<string, unknown>> = [{ type: 'text', text: question }];
+        for (const attachment of attachments) {
+            newestParts.push({
+                type: 'file',
+                mediaType: attachment.mediaType,
+                filename: attachment.name,
+                url: attachment.dataUrl
+            });
+        }
+        const messages = [
+            ...this._history.map((message, index) => ({
+                id: `history-${index}`,
+                role: message.role,
+                parts: [{ type: 'text', text: message.content }]
+            })),
+            { id: 'current', role: 'user', parts: newestParts }
+        ];
+
+        const response = await fetch(CHATBOT_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ messages }),
+            signal: controller.signal
+        });
+        if (!response.ok || !response.body) {
+            throw new Error('The chat request could not be started.');
+        }
+
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let answer = '';
+        let hadToolCallSinceText = false;
+        let failed = false;
+
+        try {
+            while (true) {
+                const { done, value } = await reader.read();
+                if (done) {
+                    break;
+                }
+                const chunk = decoder.decode(value, { stream: true });
+                for (const line of chunk.split('\n')) {
+                    const trimmed = line.trim();
+                    if (!trimmed.startsWith('data:')) {
+                        continue;
+                    }
+                    const data = trimmed.slice(5).trim();
+                    if (!data || data === '[DONE]') {
+                        continue;
+                    }
+                    let parsed: Record<string, unknown>;
+                    try {
+                        parsed = JSON.parse(data) as Record<string, unknown>;
+                    } catch {
+                        continue;
+                    }
+                    const type = typeof parsed.type === 'string' ? parsed.type : '';
+                    if (type === 'text-delta') {
+                        let text =
+                            typeof parsed.delta === 'string'
+                                ? parsed.delta
+                                : typeof parsed.textDelta === 'string'
+                                  ? parsed.textDelta
+                                  : '';
+                        if (!text) {
+                            continue;
+                        }
+                        // Insert a paragraph break when text resumes after a tool call.
+                        if (hadToolCallSinceText && answer.trim().length > 0 && !answer.endsWith('\n')) {
+                            text = `\n\n${text}`;
+                        }
+                        hadToolCallSinceText = false;
+                        answer += text;
+                        onEvent({ type: 'text-delta', text });
+                    } else if (type === 'error') {
+                        failed = true;
+                        const message =
+                            typeof parsed.errorText === 'string'
+                                ? parsed.errorText
+                                : typeof parsed.error === 'string'
+                                  ? parsed.error
+                                  : 'The assistant could not complete this request.';
+                        onEvent({ type: 'error', message });
+                    } else if (type.startsWith('tool-')) {
+                        hadToolCallSinceText = true;
+                    }
+                }
+            }
+        } finally {
+            reader.releaseLock();
+        }
+
+        if (!failed) {
+            onEvent({ type: 'done' });
+            if (answer) {
+                this._history = selectNewestCompletePairs(
+                    [...this._history, { role: 'user', content: question }, { role: 'assistant', content: answer }],
+                    MAXIMUM_CHAT_HISTORY_MESSAGES
+                );
+            }
+        }
     }
 }
 
