@@ -91,12 +91,15 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
         if (!this.previousContainerWidth || this.containerWidth < this.previousContainerWidth) {
             // and the title extends past the container, 1.05x padding to prevent jaggy resizing.
             if (this.titleWidth * 1.05 >= this.containerWidth) {
-                this.resizeFileTitle(this._titleDirective.elRef.nativeElement.innerHTML);
+                const host = this._titleDirective.elRef.nativeElement as HTMLElement;
+                const span = host.querySelector('span.' + LINK_CLASS_NAME.linkContent);
+                const currentText = span?.textContent ?? this.fileNameFull;
+                this.resizeFileTitle(currentText);
             }
         } else if (this.previousContainerWidth && this.containerWidth > this.previousContainerWidth) {
             // Looks to expand file title if container width is resized to greater than before
             // reset file title to initial
-            this._titleDirective.elRef.nativeElement.innerHTML = this.fileNameFull;
+            this._setTitleText(this.fileNameFull);
             this.resizeFileTitle(this.fileNameFull);
         }
 
@@ -107,8 +110,7 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
     ngAfterContentInit(): void {
         this.fileNameFull = this.fileName + '.' + this.extension;
         this._titleDirective.elRef.nativeElement.tabIndex = '0';
-        this._titleDirective.elRef.nativeElement.innerHTML =
-            '<span class="' + LINK_CLASS_NAME.linkContent + '">' + this.fileNameFull + '</span>';
+        this._setTitleText(this.fileNameFull);
         this._handleDeleteClickedSubscription();
         this._handleOkClickedSubscription();
         this._handleEditClickedSubscription();
@@ -134,7 +136,7 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
                     this.fileName = this._formItemComponent.fileName;
                     this._titleDirective.elRef.nativeElement.style.display = 'inline-block';
                     this.fileNameFull = this.fileName + '.' + this.extension;
-                    this._titleDirective.elRef.nativeElement.innerHTML = this.fileNameFull;
+                    this._setTitleText(this.fileNameFull);
                     this.resizeFileTitle(this.fileNameFull);
                     this._formItemComponent._editMode = false;
                     this._buttonGroupComponent._editMode = false;
@@ -196,6 +198,19 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
         return this._titleDirective.elRef.nativeElement.parentElement.getBoundingClientRect().width;
     }
 
+    /** @hidden */
+    private _setTitleText(text: string): void {
+        const host = this._titleDirective.elRef.nativeElement as HTMLElement;
+        let span = host.querySelector<HTMLSpanElement>('span.' + LINK_CLASS_NAME.linkContent);
+        if (!span) {
+            host.textContent = '';
+            span = document.createElement('span');
+            span.className = LINK_CLASS_NAME.linkContent;
+            host.appendChild(span);
+        }
+        span.textContent = text;
+    }
+
     /**
      * @hidden
      *
@@ -225,7 +240,7 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
         // repeatedly truncate the title until it fits inside container
         while (this.titleWidth * 1.05 >= this.containerWidth) {
             const truncatedTitleStr = this.truncateTitle(curTitle);
-            this._titleDirective.elRef.nativeElement.innerHTML = truncatedTitleStr;
+            this._setTitleText(truncatedTitleStr);
             curTitle = truncatedTitleStr;
             this.titleWidth = this.getTitleWidth();
             this.containerWidth = this.getContainerWidth();
