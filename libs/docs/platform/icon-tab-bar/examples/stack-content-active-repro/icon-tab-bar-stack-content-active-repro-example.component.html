@@ -1,6 +1,7 @@
 <!--
     BUG REPRO — issue #14593
-    Steps:
+    The second tab ("Account") is pre-selected via [active]="true".
+    Steps to see the scroll jump (before the fix):
     1. Scroll slowly downward past "Home — row 15".
     2. As the "Account" tab header highlights, the view snaps BACKWARD ~108 px —
        you can see "Home — row 12" reappear at the top even though Account is active.
@@ -18,7 +19,7 @@
             }
         </div>
     </fdp-icon-tab-bar-tab>
-    <fdp-icon-tab-bar-tab label="Account" color="positive" icon="account">
+    <fdp-icon-tab-bar-tab label="Account" color="positive" icon="account" [active]="true">
         <div class="scroll-repro-panel">
             @for (i of rows; track i) {
                 <p class="scroll-repro-row">Account — row {{ i }}</p>
