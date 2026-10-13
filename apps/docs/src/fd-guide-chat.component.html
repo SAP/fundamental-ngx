@@ -215,19 +215,9 @@
                     }
                 </p>
             }
-            @if (!localProviderAvailable()) {
-                <label for="fd-guide-input" class="fd-guide-sr-only">
-                    Ask about Fundamental NGX components, APIs, or examples...
-                </label>
-                <p id="fd-guide-attachment-limit" class="fd-guide-chat__attachment-hint">
-                    @if (canAttachFiles()) {
-                        Attach up to 3 PNG, JPEG, WebP, GIF, or PDF files ({{ attachmentLimitLabel() }} total). A
-                        question is required.
-                    } @else {
-                        Attachments are unavailable with Groq. A question is required.
-                    }
-                </p>
-            }
+            <label for="fd-guide-input" class="fd-guide-sr-only">
+                Ask about Fundamental NGX components, APIs, or examples...
+            </label>
             @if (attachments().length) {
                 <ul class="fd-guide-chat__attachments" aria-label="Files attached to the next message">
                     @for (attachment of attachments(); track attachment.id) {
@@ -254,8 +244,18 @@
                     }
                 </ul>
             }
-            @if (attachmentError()) {
-                <p class="fd-guide-chat__attachment-error" role="alert">{{ attachmentError() }}</p>
+            @if (attachments().length || attachmentError()) {
+                <div class="fd-guide-chat__attachment-meta">
+                    @if (attachments().length) {
+                        <p class="fd-guide-chat__attachment-count">
+                            {{ attachments().length }} / 3 files · {{ attachmentsSizeLabel() }} /
+                            {{ attachmentLimitLabel() }}
+                        </p>
+                    }
+                    @if (attachmentError()) {
+                        <p class="fd-guide-chat__attachment-error" role="alert">{{ attachmentError() }}</p>
+                    }
+                </div>
             }
             @if (speechError()) {
                 <p class="fd-guide-chat__attachment-error" role="alert">{{ speechError() }}</p>
@@ -284,7 +284,6 @@
                         glyph="attachment"
                         [ariaLabel]="'Attach files (' + attachShortcut + ')'"
                         [title]="'Attach PNG, JPEG, WebP, GIF, or PDF files (' + attachShortcut + ')'"
-                        [attr.aria-describedby]="localProviderAvailable() ? null : 'fd-guide-attachment-limit'"
                         [disabled]="isBusy() || !canAttachFiles() || attachments().length >= 3"
                         (click)="openFilePicker()"
                     ></button>
