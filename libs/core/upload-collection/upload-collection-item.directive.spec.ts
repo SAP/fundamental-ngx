@@ -97,9 +97,9 @@ describe('UploadCollectionItemDirective', () => {
 
     it('should set the fileName and extension', () => {
         component.item.ngAfterContentInit();
-        expect(component.item._titleDirective.elRef.nativeElement.innerHTML).toEqual(
-            '<span class="fd-link__content">File_Name.txt</span>'
-        );
+        const titleEl: HTMLElement = component.item._titleDirective.elRef.nativeElement;
+        expect(titleEl.querySelector('span.fd-link__content')).toBeTruthy();
+        expect(titleEl.querySelector('span.fd-link__content')!.textContent).toBe('File_Name.txt');
     });
 
     it('should handle the delete button subscriptions', fakeAsync(() => {
@@ -121,7 +121,9 @@ describe('UploadCollectionItemDirective', () => {
         component.item._buttonGroupComponent.okClicked.emit();
         fixture.detectChanges();
         expect(component.item._titleDirective.elRef.nativeElement.style.display).toEqual('inline-block');
-        expect(component.item._titleDirective.elRef.nativeElement.innerHTML).toEqual('newName.txt');
+        expect(
+            component.item._titleDirective.elRef.nativeElement.querySelector('span.fd-link__content')!.textContent
+        ).toBe('newName.txt');
         expect(emitSpy).toHaveBeenCalled();
         expect(component.item.fileName).toEqual('newName');
         expect(component.item._formItemComponent._editMode).toBe(false);
@@ -141,4 +143,43 @@ describe('UploadCollectionItemDirective', () => {
         expect(component.item._formItemComponent.fileName).toEqual('File_Name');
         expect(component.item._formItemComponent._extension).toEqual('txt');
     }));
+
+    describe('XSS — file name must not be parsed as HTML', () => {
+        const xssPayload = 'x<img src=x onerror="window.__xss=true">';
+
+        afterEach(() => {
+            delete (window as any).__xss;
+        });
+
+        it('should NOT parse fileName XSS payload as HTML in initial render', () => {
+            component.item.fileName = xssPayload;
+            component.item.extension = 'png';
+            component.item.ngAfterContentInit();
+            fixture.detectChanges();
+
+            const titleEl: HTMLElement = component.item._titleDirective.elRef.nativeElement;
+            // span wrapper must still exist
+            expect(titleEl.querySelector('span.fd-link__content')).toBeTruthy();
+            // payload must NOT be parsed as HTML
+            expect(titleEl.querySelector('img')).toBeNull();
+            // raw text must be present escaped
+            expect(titleEl.querySelector('span.fd-link__content')!.textContent).toContain(xssPayload + '.png');
+            // handler must never have fired
+            expect((window as any).__xss).toBeUndefined();
+        });
+
+        it('should NOT parse rename (okClicked) XSS payload as HTML', () => {
+            component.item.ngAfterContentInit();
+            component.item._formItemComponent.fileName = xssPayload;
+            jest.spyOn<any, any>(component.item, 'getTitleWidth').mockReturnValue(30);
+            jest.spyOn<any, any>(component.item, 'getContainerWidth').mockReturnValue(50);
+            component.item._buttonGroupComponent.okClicked.emit();
+            fixture.detectChanges();
+
+            const titleEl: HTMLElement = component.item._titleDirective.elRef.nativeElement;
+            expect(titleEl.querySelector('img')).toBeNull();
+            expect(titleEl.textContent).toContain(xssPayload);
+            expect((window as any).__xss).toBeUndefined();
+        });
+    });
 });

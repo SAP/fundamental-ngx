@@ -43,13 +43,7 @@
 <ng-template #author>
     <span class="fd-feed-list__name">
         @if (authorLink) {
-            <a
-                target="_blank"
-                fd-link
-                [attr.title]="authorTitle"
-                [attr.href]="authorLink | safe: 'url'"
-                [emphasized]="true"
-            >
+            <a target="_blank" fd-link [attr.title]="authorTitle" [attr.href]="authorLink" [emphasized]="true">
                 <ng-template [ngTemplateOutlet]="authorTitleTemplate"></ng-template>
             </a>
         } @else {
