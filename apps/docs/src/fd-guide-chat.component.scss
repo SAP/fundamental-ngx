@@ -702,10 +702,11 @@
 // textarea; shrink them back to single-line controls so the key editor stays compact.
 .fd-guide-chat__input.fd-guide-chat__api-key,
 .fd-guide-chat__input.fd-guide-chat__provider-select {
-    min-height: 2rem;
-    max-height: 2rem;
+    min-height: 2.25rem;
+    max-height: 2.25rem;
     line-height: 1.4;
     padding: 0.25rem 0.5rem;
+    box-sizing: border-box;
     font-size: var(--sapFontSmallSize);
 }
 
@@ -887,10 +888,10 @@
     flex: 1 1 0;
     min-width: 0;
     max-width: 100%;
-    padding: 0.25rem 0.25rem 0.25rem 0.5rem;
+    padding: 0.1rem 0.25rem 0.1rem 0.5rem;
     align-items: center;
     background: var(--sapField_Background);
-    border: 0.0625rem solid var(--sapField_BorderColor);
+    border: 0.0625rem solid var(--sapAssistant_BorderColor);
     border-radius: var(--sapButton_BorderCornerRadius);
 }
 

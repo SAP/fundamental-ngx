@@ -13,7 +13,7 @@ import {
 import { DomSanitizer } from '@angular/platform-browser';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { IconComponent } from '@fundamental-ngx/core/icon';
-import { isAllowedChatUrl, renderChatMarkdown } from './fd-guide-chat-markdown';
+import { injectCopyButtons, isAllowedChatUrl, renderChatMarkdown } from './fd-guide-chat-markdown';
 import { ChatEvent, ChatSource } from './fd-guide-chat-stream';
 import {
     CHAT_ATTACHMENT_MEDIA_TYPES,
@@ -202,6 +202,7 @@ export class FdGuideChatComponent {
                 const container = this._messagesContainer()?.nativeElement;
                 if (container) {
                     container.scrollTop = container.scrollHeight;
+                    injectCopyButtons(container);
                 }
                 if (this._shouldFocusInput && this.isOpen()) {
                     this._shouldFocusInput = false;

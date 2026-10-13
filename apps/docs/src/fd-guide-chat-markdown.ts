@@ -25,6 +25,23 @@ export function renderChatMarkdown(markdown: string, sanitizer?: DomSanitizer): 
     return sanitizer ? (sanitizer.sanitize(SecurityContext.HTML, html) ?? '') : html;
 }
 
+export function injectCopyButtons(container: HTMLElement): void {
+    const headers = container.querySelectorAll('.code-block-header');
+    headers.forEach((header) => {
+        if (header.querySelector('.code-block-copy')) {
+            return;
+        }
+
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'code-block-copy';
+        button.setAttribute('aria-label', 'Copy code');
+        button.title = 'Copy code';
+        button.textContent = 'Copy';
+        header.appendChild(button);
+    });
+}
+
 export function isAllowedChatUrl(value: string): boolean {
     return normalizeChatUrl(value) !== null;
 }
@@ -55,7 +72,7 @@ function createRenderer(): Renderer {
         return (
             '<div class="code-block-wrapper"><div class="code-block-header"><span class="code-block-lang">' +
             label +
-            '</span><button type="button" class="code-block-copy" aria-label="Copy code" title="Copy code">Copy</button></div><pre><code class="hljs' +
+            '</span></div><pre><code class="hljs' +
             languageClass +
             '">' +
             highlighted +

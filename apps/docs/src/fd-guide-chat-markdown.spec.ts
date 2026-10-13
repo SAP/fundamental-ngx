@@ -1,4 +1,4 @@
-import { renderChatMarkdown } from './fd-guide-chat-markdown';
+import { injectCopyButtons, renderChatMarkdown } from './fd-guide-chat-markdown';
 
 function renderIntoDocument(markdown: string): HTMLElement {
     const host = document.createElement('div');
@@ -66,5 +66,31 @@ describe('renderChatMarkdown', () => {
         expect(host.querySelector('script, iframe, img')).toBeNull();
         expect(host.querySelector('[onclick], [onerror]')).toBeNull();
         expect(host.textContent).toContain('untrusted');
+    });
+
+    it('injects copy buttons into code block headers', () => {
+        const fence = String.fromCharCode(96).repeat(3);
+        const host = renderIntoDocument(fence + 'typescript\nconst x = 42;\n' + fence);
+
+        expect(host.querySelector('.code-block-copy')).toBeNull();
+
+        injectCopyButtons(host);
+
+        const button = host.querySelector<HTMLButtonElement>('.code-block-copy');
+        expect(button).not.toBeNull();
+        expect(button?.type).toBe('button');
+        expect(button?.getAttribute('aria-label')).toBe('Copy code');
+        expect(button?.textContent).toBe('Copy');
+    });
+
+    it('does not duplicate copy buttons on repeated calls', () => {
+        const fence = String.fromCharCode(96).repeat(3);
+        const host = renderIntoDocument(fence + 'typescript\nconst x = 42;\n' + fence);
+
+        injectCopyButtons(host);
+        injectCopyButtons(host);
+        injectCopyButtons(host);
+
+        expect(host.querySelectorAll('.code-block-copy')).toHaveLength(1);
     });
 });
