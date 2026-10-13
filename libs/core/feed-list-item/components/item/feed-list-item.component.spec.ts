@@ -102,4 +102,37 @@ describe('FeedListItemComponent', () => {
         component.toggleTextView();
         expect(component.isCollapsed).toBe(true);
     });
+
+    describe('authorLink XSS — javascript: scheme', () => {
+        afterEach(() => {
+            delete (window as any).__xss;
+        });
+
+        it('should strip or prefix javascript: scheme — href must NOT start with javascript:', () => {
+            component.authorTitle = 'Evil';
+            component.authorLink = 'javascript:window.__xss=true';
+            fixture.detectChanges();
+
+            const anchor: HTMLAnchorElement | null = component.elementRef.nativeElement.querySelector(
+                '.fd-feed-list__name a[fd-link]'
+            );
+            expect(anchor).toBeTruthy();
+            const href = anchor!.getAttribute('href') ?? '';
+            expect(href.startsWith('javascript:')).toBe(false);
+            expect((window as any).__xss).toBeUndefined();
+        });
+
+        it('should preserve https: authorLink unchanged', () => {
+            component.authorTitle = 'Safe';
+            component.authorLink = 'https://example.com';
+            fixture.detectChanges();
+
+            const anchor: HTMLAnchorElement | null = component.elementRef.nativeElement.querySelector(
+                '.fd-feed-list__name a[fd-link]'
+            );
+            expect(anchor).toBeTruthy();
+            const href = anchor!.getAttribute('href') ?? '';
+            expect(href).toMatch(/^https:\/\/example\.com/);
+        });
+    });
 });
