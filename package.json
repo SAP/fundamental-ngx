@@ -46,7 +46,7 @@
         "generate:ui5": "echo Generating UI5 Webcomponents Wrappers && nx run-many --target=generate --projects=ui5-webcomponents,ui5-webcomponents-ai,ui5-webcomponents-fiori,ui5-webcomponents-base",
         "ng": "ng",
         "hotfix-release": "node scripts/release-hotfix.js",
-        "start": "node scripts/check-chatbot-prereqs.js && concurrently -k -n docs,chatbot -c cyan,magenta \"nx serve\" \"cd apps/chatbot && ./node_modules/.bin/next dev\"",
+        "start": "node scripts/check-chatbot-prereqs.js && concurrently -k -n docs,chatbot -c cyan,magenta \"nx serve\" \"cd apps/chatbot && yarn exec next dev\"",
         "start:docs": "nx serve",
         "check:chatbot": "node scripts/check-chatbot-prereqs.js",
         "test:coveralls": "cat ./coverage/libs/core/lcov.info  | ./node_modules/coveralls/bin/coveralls.js || echo -e \"Coveralls failed.\"",

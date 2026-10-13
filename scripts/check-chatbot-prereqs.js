@@ -16,8 +16,16 @@ const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 const problems = [];
 
-// 1. Chatbot dependencies installed (Yarn workspace — installed from the repo root).
-if (!fs.existsSync(path.join(root, 'apps/chatbot/node_modules/next'))) {
+// 1. Chatbot dependencies installed. Resolve `next` the way Node would from the chatbot
+//    package, so this works whether Yarn hoists it to the repo-root node_modules or keeps
+//    it in apps/chatbot/node_modules (the hoisting target varies between installs).
+let chatbotDepsInstalled = true;
+try {
+    require.resolve('next/package.json', { paths: [path.join(root, 'apps/chatbot')] });
+} catch {
+    chatbotDepsInstalled = false;
+}
+if (!chatbotDepsInstalled) {
     problems.push('Chatbot dependencies are not installed.\n' + '      Fix:  yarn install  (run from the repo root)');
 }
 
