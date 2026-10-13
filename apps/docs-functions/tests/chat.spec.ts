@@ -647,6 +647,61 @@ describe('/api/chat request and orchestration contract', () => {
         }
     });
 
+    it('deployed path (NETLIFY_DEV unset) emits only coarse structured lines — no verbose fields', async () => {
+        const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => undefined);
+        try {
+            sharedMcpState.failTools = true;
+            const response = await chat(validRequest());
+            await response.text();
+            const allArgs = errorSpy.mock.calls.flat();
+            for (const arg of allArgs) {
+                const serialized = typeof arg === 'string' ? arg : JSON.stringify(arg);
+                expect(serialized).not.toMatch(/\bverbose\b/);
+                expect(serialized).not.toMatch(/\berrorName\b/);
+                expect(serialized).not.toMatch(/\berrorMessage\b/);
+                expect(serialized).not.toMatch(/\bstack\b/);
+            }
+        } finally {
+            errorSpy.mockRestore();
+        }
+    });
+
+    it('verbose path (NETLIFY_DEV=true) adds name/message/cause/stack and nothing else sensitive', async () => {
+        const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => undefined);
+        process.env.NETLIFY_DEV = 'true';
+        try {
+            sharedMcpState.failTools = true;
+            const response = await chat(validRequest());
+            await response.text();
+            const allCalls = errorSpy.mock.calls;
+            const verboseCalls = allCalls.filter((call) =>
+                call.some(
+                    (arg) =>
+                        typeof arg === 'object' && arg !== null && (arg as Record<string, unknown>).verbose === true
+                )
+            );
+            expect(verboseCalls.length).toBeGreaterThan(0);
+            for (const call of verboseCalls) {
+                const serialized = JSON.stringify(call);
+                // Must contain verbose fields
+                expect(serialized).toMatch(/\berrorName\b/);
+                expect(serialized).toMatch(/\berrorMessage\b/);
+                expect(serialized).toMatch(/\bstack\b/);
+                // Must share the same traceId as coarse lines
+                const verboseArg = call.find(
+                    (arg) =>
+                        typeof arg === 'object' && arg !== null && (arg as Record<string, unknown>).verbose === true
+                ) as Record<string, unknown>;
+                expect(typeof verboseArg.traceId).toBe('string');
+                // Must NOT contain API key, request bodies, or payloads
+                expect(serialized).not.toContain(FIXTURE_API_KEY);
+            }
+        } finally {
+            errorSpy.mockRestore();
+            delete process.env.NETLIFY_DEV;
+        }
+    });
+
     it('never places the API key in URLs, prompts, logs, responses, or errors', async () => {
         const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => undefined);
         try {

@@ -52,6 +52,11 @@ jest.mock('@ai-sdk/google', () => ({
     })
 }));
 
+// Mutable gate for timing the first text chunk in heartbeat tests. When set, the
+// first chunk only resolves after the given delay (driven by fake timers), so the
+// gap between stream open and first text-delta is controllable.
+const firstChunkControl: { delayMs: number } = { delayMs: 0 };
+
 jest.mock('ai', () => ({
     stepCountIs: (value: number) => ({ type: 'step-count', value }),
     streamText: (options: unknown) => {
@@ -61,6 +66,9 @@ jest.mock('ai', () => ({
         return {
             textStream: (async function* () {
                 if (!mockedGeminiState.emptyStream) {
+                    if (firstChunkControl.delayMs > 0) {
+                        await new Promise<void>((res) => setTimeout(res, firstChunkControl.delayMs));
+                    }
                     yield 'fixture text';
                 }
                 if (mockedGeminiState.streamErrorAfterStart) {
@@ -93,6 +101,7 @@ describe('/api/chat NDJSON stream contract', () => {
         sharedMcpState.calls.length = 0;
         sharedMcpState.operationSignals.length = 0;
         sharedGeminiState.abortSignals.length = 0;
+        firstChunkControl.delayMs = 0;
     });
 
     it('uses the application-owned NDJSON content type and no-store/no-transform headers', async () => {
@@ -184,5 +193,159 @@ describe('/api/chat NDJSON stream contract', () => {
 
         expect(text).not.toContain(FIXTURE_API_KEY);
         expect([...response.headers.values()].join('\n')).not.toContain(FIXTURE_API_KEY);
+    });
+});
+
+describe('/api/chat NDJSON stream heartbeat (HTTP/2 idle-kill mitigation)', () => {
+    const decoder = new TextDecoder();
+
+    function streamReader(response: Response): ReadableStreamDefaultReader<Uint8Array> {
+        if (!response.body) {
+            throw new Error('Expected a streaming response body');
+        }
+        return response.body.getReader();
+    }
+
+    beforeEach(() => {
+        jest.useFakeTimers();
+        sharedGeminiState.streamErrorAfterStart = false;
+        sharedGeminiState.emptyStream = false;
+        sharedMcpState.toolNames = [...APPROVED_READ_ONLY_TOOLS];
+        sharedMcpState.openedUrls.length = 0;
+        sharedMcpState.closeCalls = 0;
+        sharedMcpState.calls.length = 0;
+        sharedMcpState.operationSignals.length = 0;
+        sharedGeminiState.abortSignals.length = 0;
+        firstChunkControl.delayMs = 0;
+    });
+
+    afterEach(() => {
+        jest.clearAllTimers();
+        jest.useRealTimers();
+    });
+
+    // Continuously reads the NDJSON stream in the background into `events`, while the
+    // test advances fake timers so heartbeat ticks (and the gated first chunk) fire.
+    // Returns a controller to drive time and inspect collected events.
+    function pumpStream(reader: ReadableStreamDefaultReader<Uint8Array>): {
+        events: Record<string, unknown>[];
+        tick: (ms: number) => Promise<void>;
+        done: () => boolean;
+    } {
+        const events: Record<string, unknown>[] = [];
+        let buffer = '';
+        let finished = false;
+        const read = (): void => {
+            reader
+                .read()
+                .then(({ done, value }) => {
+                    if (done) {
+                        finished = true;
+                        return;
+                    }
+                    if (value) {
+                        buffer += decoder.decode(value, { stream: true });
+                        let newline = buffer.indexOf('\n');
+                        while (newline !== -1) {
+                            const line = buffer.slice(0, newline).trim();
+                            buffer = buffer.slice(newline + 1);
+                            if (line) {
+                                events.push(JSON.parse(line) as Record<string, unknown>);
+                            }
+                            newline = buffer.indexOf('\n');
+                        }
+                    }
+                    read();
+                })
+                .catch(() => {
+                    finished = true;
+                });
+        };
+        read();
+        return {
+            events,
+            done: () => finished,
+            tick: async (ms: number) => {
+                await jest.advanceTimersByTimeAsync(ms);
+            }
+        };
+    }
+
+    it('emits repeated keep-alive status heartbeats before the first text-delta when the first chunk is delayed', async () => {
+        // First real chunk arrives far later than one heartbeat interval.
+        firstChunkControl.delayMs = 10_000;
+
+        const response = await chat(request());
+        const reader = streamReader(response);
+        const pump = pumpStream(reader);
+
+        // Advance ~3 heartbeat intervals while the model loop is "working" (before text).
+        await pump.tick(7_000);
+
+        const firstTextIndex = pump.events.findIndex((event) => event.type === 'text-delta');
+        const statusesBeforeText = pump.events
+            .slice(0, firstTextIndex === -1 ? pump.events.length : firstTextIndex)
+            .filter((event) => event.type === 'status');
+
+        // Current code emits exactly ONE upfront status, so this requires the heartbeat loop.
+        expect(statusesBeforeText.length).toBeGreaterThanOrEqual(2);
+        // No text should have arrived yet (first chunk is gated at 10s).
+        expect(firstTextIndex).toBe(-1);
+        // Heartbeats must stay payload-free: neutral labels only.
+        for (const status of statusesBeforeText) {
+            expect(typeof status.message).toBe('string');
+            expect(JSON.stringify(status)).not.toMatch(
+                /tool|query|selector|api[-_ ]?key|authorization|fd-dialog|arguments|result/i
+            );
+        }
+
+        await pump.tick(10_000);
+        reader.releaseLock();
+    });
+
+    it('stops heartbeats once real text flows and still terminates with done', async () => {
+        firstChunkControl.delayMs = 10_000;
+
+        const response = await chat(request());
+        const reader = streamReader(response);
+        const pump = pumpStream(reader);
+
+        // Drive well past the first-chunk gate so text flows and the stream completes.
+        await pump.tick(20_000);
+        reader.releaseLock();
+
+        const events = pump.events;
+        const firstTextIndex = events.findIndex((event) => event.type === 'text-delta');
+        expect(firstTextIndex).toBeGreaterThanOrEqual(0);
+
+        // No further status heartbeats after text begins.
+        const statusesAfterText = events.slice(firstTextIndex).filter((event) => event.type === 'status');
+        expect(statusesAfterText.length).toBe(0);
+
+        expect(events.map((event) => event.type)).toContain('sources');
+        expect(events.at(-1)).toEqual({ type: 'done' });
+    });
+
+    it('clears the heartbeat interval on cancel() without leaking or double-clearing', async () => {
+        firstChunkControl.delayMs = 10_000;
+        const clearSpy = jest.spyOn(global, 'clearInterval');
+
+        const response = await chat(request());
+        const reader = streamReader(response);
+        const pump = pumpStream(reader);
+
+        // Let at least one heartbeat tick fire so an interval is actually running.
+        await pump.tick(5_000);
+        expect(pump.events.some((event) => event.type === 'status')).toBe(true);
+        expect(jest.getTimerCount()).toBeGreaterThan(0);
+
+        // Cancel mid-flight before any text arrives.
+        await reader.cancel();
+        // Draining any remaining time must not throw (no double-clear) and no timers remain.
+        await jest.advanceTimersByTimeAsync(20_000);
+
+        expect(clearSpy).toHaveBeenCalled();
+        expect(jest.getTimerCount()).toBe(0);
+        clearSpy.mockRestore();
     });
 });

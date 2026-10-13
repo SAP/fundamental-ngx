@@ -19,6 +19,18 @@ export function createOperationalLogger(): OperationalLogger {
                 durationMs: Date.now() - startedAt,
                 outcome
             });
+            if (process.env.NETLIFY_DEV === 'true' && error instanceof Error) {
+                console.error({
+                    traceId,
+                    stage,
+                    verbose: true,
+                    errorName: error.name,
+                    errorMessage: error.message,
+                    causeName: error.cause instanceof Error ? error.cause.name : undefined,
+                    causeMessage: error.cause instanceof Error ? error.cause.message : undefined,
+                    stack: error.stack
+                });
+            }
         }
     };
 }

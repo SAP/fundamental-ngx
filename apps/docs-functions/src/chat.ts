@@ -28,6 +28,12 @@ const API_KEY_HEADER = 'x-gemini-api-key';
 const GROQ_API_KEY_HEADER = 'x-groq-api-key';
 const OVERALL_DEADLINE_MS = 50_000;
 const MCP_DEADLINE_MS = 10_000;
+const HEARTBEAT_INTERVAL_MS = 2_250;
+const HEARTBEAT_LABELS = [
+    'Searching the component docs…',
+    'Reading the component API…',
+    'Composing the answer…'
+] as const;
 const MAXIMUM_SOURCES = 5;
 const MODEL_ID = 'gemini-3.5-flash';
 const GROQ_MODEL_ID = 'qwen/qwen3.8-27b';
@@ -116,24 +122,37 @@ export default async function chat(request: Request): Promise<Response> {
     };
     deadline.signal.addEventListener('abort', cleanupOnAbort, { once: true });
 
+    const stageOutcome = (): OperationalOutcome => (deadline.signal.aborted ? 'cancelled' : 'failure');
+    const runStage = async <T>(name: string, fn: () => Promise<T>): Promise<T> => {
+        try {
+            return await fn();
+        } catch (stageError) {
+            logger.record(name, stageError, stageOutcome());
+            throw stageError;
+        }
+    };
+
     try {
         const { createMCPClient } = await import('@ai-sdk/mcp');
         const mcpUrl = resolveMcpUrl(request);
-        client = await createMCPClient({
-            transport: { type: 'http', url: mcpUrl },
-            initializationOptions: {
-                signal: deadline.signal,
-                timeout: MCP_DEADLINE_MS,
-                maxTotalTimeout: MCP_DEADLINE_MS
-            },
-            maxRetries: 0
-        });
+        const connectedClient = await runStage('mcp-connect', () =>
+            createMCPClient({
+                transport: { type: 'http', url: mcpUrl },
+                initializationOptions: {
+                    signal: deadline.signal,
+                    timeout: MCP_DEADLINE_MS,
+                    maxTotalTimeout: MCP_DEADLINE_MS
+                },
+                maxRetries: 0
+            })
+        );
+        client = connectedClient;
         if (cleanupRequested) {
             await cleanup();
             throw new Error('Operation cancelled');
         }
 
-        const discoveredTools = await loadTools(client, deadline.signal);
+        const discoveredTools = await runStage('load-tools', () => loadTools(connectedClient, deadline.signal));
         const sourceState: SourceState = { evidence: false, items: [] };
         const tools = selectTools(
             discoveredTools,
@@ -141,12 +160,13 @@ export default async function chat(request: Request): Promise<Response> {
             deadline.signal,
             attachmentPayloads(validation.body.messages)
         );
-        await collectInitialEvidence(client, validation.body.messages, sourceState, deadline.signal);
+        await runStage('collect-evidence', () =>
+            collectInitialEvidence(connectedClient, validation.body.messages, sourceState, deadline.signal)
+        );
 
-        const [{ stepCountIs, streamText }, modelConfig] = await Promise.all([
-            import('ai'),
-            createModel(validation.credentials)
-        ]);
+        const [{ stepCountIs, streamText }, modelConfig] = await runStage('model-setup', () =>
+            Promise.all([import('ai'), createModel(validation.credentials)])
+        );
         const options = {
             model: modelConfig.model,
             system: SYSTEM_PROMPT,
@@ -167,12 +187,12 @@ export default async function chat(request: Request): Promise<Response> {
                 : {})
         };
         const result = streamText(options);
-        const catalogVersion = readCatalogVersion(client);
+        const catalogVersion = readCatalogVersion(connectedClient);
         return streamResponse(result.textStream, catalogVersion, sourceState, cleanup, (stage, error, outcome) =>
             logger.record(stage, error, outcome)
         );
     } catch (error) {
-        logger.record('chat-orchestration', error, deadline.signal.aborted ? 'cancelled' : 'failure');
+        logger.record('chat-orchestration', error, stageOutcome());
         await cleanup();
         return jsonError(500, 'The documentation assistant could not complete this request');
     }
@@ -593,18 +613,35 @@ function streamResponse(
 ): Response {
     let cleanupPromise: Promise<void> | undefined;
     let cancelled = false;
+    let heartbeat: ReturnType<typeof setInterval> | undefined;
+    const stopHeartbeat = (): void => {
+        if (heartbeat !== undefined) {
+            clearInterval(heartbeat);
+            heartbeat = undefined;
+        }
+    };
     const cleanupOnce = (): Promise<void> => (cleanupPromise ??= cleanup());
     const body = new ReadableStream<Uint8Array>({
         async start(controller) {
             let emittedText = false;
             controller.enqueue(encodeEvent({ type: 'meta', catalogVersion }));
-            controller.enqueue(encodeEvent({ type: 'status', message: 'Searching the component docs…' }));
+            controller.enqueue(encodeEvent({ type: 'status', message: HEARTBEAT_LABELS[0] }));
+            // Keep DATA frames flowing while the forced multi-tool model loop runs so an
+            // HTTP/2 intermediary never sees the stream idle long enough to terminate it.
+            // Neutral rotating labels only — carries no tool args/results/queries/keys.
+            let heartbeatIndex = 1;
+            heartbeat = setInterval(() => {
+                const message = HEARTBEAT_LABELS[heartbeatIndex % HEARTBEAT_LABELS.length];
+                heartbeatIndex += 1;
+                controller.enqueue(encodeEvent({ type: 'status', message }));
+            }, HEARTBEAT_INTERVAL_MS);
             try {
                 for await (const text of textStream) {
                     if (!sourceState.evidence) {
                         throw new Error('Missing MCP evidence');
                     }
                     if (text.length > 0) {
+                        stopHeartbeat();
                         emittedText = true;
                         controller.enqueue(encodeEvent({ type: 'text-delta', text }));
                     }
@@ -626,6 +663,7 @@ function streamResponse(
                     );
                 }
             } finally {
+                stopHeartbeat();
                 await cleanupOnce();
                 if (!cancelled) {
                     controller.enqueue(encodeEvent({ type: 'done' }));
@@ -635,6 +673,7 @@ function streamResponse(
         },
         async cancel() {
             cancelled = true;
+            stopHeartbeat();
             log('chat-stream', undefined, 'cancelled');
             await cleanupOnce();
         }
