@@ -1,11 +1,35 @@
-<fdp-icon-tab-bar layoutMode="row" maxContentHeight="250px" iconTabType="icon" [stackContent]="true">
+<!--
+    BUG REPRO — issue #14593
+    Steps:
+    1. Scroll slowly downward past "Home — row 15".
+    2. As the "Account" tab header highlights, the view snaps BACKWARD ~108 px —
+       you can see "Home — row 12" reappear at the top even though Account is active.
+    Root cause: scroll-spy fires → highlightActiveTab → _selectedUid change →
+      header ngOnChanges → _selectItem → _scrollToPanel → backward smooth scroll.
+    CSS note: position:relative on the content container forces it to become the
+      offsetParent for panels, making panelEl.offsetTop - containerEl.offsetTop
+      differ from the spy threshold by ~108 px, which makes the jump visible.
+-->
+<fdp-icon-tab-bar layoutMode="row" maxContentHeight="220px" iconTabType="icon" [stackContent]="true">
     <fdp-icon-tab-bar-tab label="Home" color="critical" icon="home">
-        <div class="tab-container-example">Home content</div>
+        <div class="scroll-repro-panel">
+            @for (i of rows; track i) {
+                <p class="scroll-repro-row">Home — row {{ i }}</p>
+            }
+        </div>
     </fdp-icon-tab-bar-tab>
-    <fdp-icon-tab-bar-tab label="Account" color="positive" icon="account" [active]="true">
-        <div class="tab-container-example">Account content — this tab is active on load</div>
+    <fdp-icon-tab-bar-tab label="Account" color="positive" icon="account">
+        <div class="scroll-repro-panel">
+            @for (i of rows; track i) {
+                <p class="scroll-repro-row">Account — row {{ i }}</p>
+            }
+        </div>
     </fdp-icon-tab-bar-tab>
     <fdp-icon-tab-bar-tab label="Media" color="informative" icon="picture">
-        <div class="tab-container-example">Media content</div>
+        <div class="scroll-repro-panel">
+            @for (i of rows; track i) {
+                <p class="scroll-repro-row">Media — row {{ i }}</p>
+            }
+        </div>
     </fdp-icon-tab-bar-tab>
 </fdp-icon-tab-bar>
