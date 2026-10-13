@@ -1,3 +1,13 @@
+## 0.65.1-rc.2 (2026-10-13)
+
+### 🩹 Fixes
+
+- **core, cdk:** prevent XSS in upload-collection-item and SafePipe url binding ([#14596](https://github.com/SAP/fundamental-ngx/pull/14596))
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.65.1-rc.1 (2026-10-07)
 
 ### 🚀 Features
