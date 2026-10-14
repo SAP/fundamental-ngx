@@ -2,10 +2,7 @@
 
 The assistant answers Fundamental NGX questions using the generated MCP component catalog.
 
-There are two ways to run it:
-
-- **Embedded docs assistant (recommended):** the Angular documentation site with Netlify Functions at `/api/chat` and `/api/mcp`.
-- **Standalone chatbot:** the original Next.js prototype in `apps/chatbot`, served at `http://localhost:3000`.
+Run the Angular documentation site with the assistant backend via Netlify Functions at `/api/chat` and `/api/mcp`.
 
 ## Run the embedded docs assistant
 
@@ -96,37 +93,12 @@ yarn start:docs
 
 This serves the Angular docs directly. The assistant UI may be visible, but `/api/chat` and `/api/mcp` are unavailable because Netlify Functions are not running.
 
-## Run the standalone Next.js chatbot
-
-The standalone prototype is a deprecated reference implementation. It reads
-`apps/chatbot/.env.local` and serves its own chat and MCP routes.
-
-Launch it from the repository root with:
-
-```bash
-yarn start:chatbot-legacy
-```
-
-This runs the Angular docs and the standalone Next.js chatbot together (it requires
-the standalone dependencies, the generated catalog, and `apps/chatbot/.env.local`).
-Alternatively, run it manually:
-
-```bash
-yarn nx run mcp-server:extract-metadata
-cd apps/chatbot
-yarn install
-yarn dev
-```
-
-Open `http://localhost:3000` and ask a question such as _"How do I use fd-dialog?"_
-
 ## Provider behavior
 
 | Where it runs            | Supported credential mode                                                                                   |
 | ------------------------ | ----------------------------------------------------------------------------------------------------------- |
 | Netlify Dev on localhost | Local `.env.local` provider (Gemini, Groq, or Anthropic-compatible), or a Gemini/Groq key entered in the UI |
 | Deployed Netlify site    | Gemini or Groq key entered in the UI                                                                        |
-| Standalone Next.js app   | Local `.env.local` provider                                                                                 |
 
 On a deployed Netlify site, the browser key is kept only in page memory and sent to the same-origin `/api/chat` function. It is not placed in the URL or local storage. The deployed function intentionally does not use `apps/chatbot/.env.local`.
 
@@ -179,7 +151,7 @@ yarn nx run docs:test
 yarn nx run mcp-server:test
 ```
 
-For the standalone Next.js chatbot:
+For the chatbot app:
 
 ```bash
 cd apps/chatbot
