@@ -1,3 +1,7 @@
+## 0.65.1-rc.3 (2026-10-14)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
 ## 0.65.1-rc.2 (2026-10-13)
 
 This was a version bump only for platform to align it with other projects, there were no code changes.

@@ -1,3 +1,13 @@
+## 0.65.1-rc.3 (2026-10-14)
+
+### 🩹 Fixes
+
+- **core:** increase specificity for illustrated-message modifiers ([#14598](https://github.com/SAP/fundamental-ngx/pull/14598))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.65.1-rc.2 (2026-10-13)
 
 ### 🩹 Fixes
