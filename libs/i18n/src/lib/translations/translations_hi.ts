@@ -94,6 +94,9 @@ export default {
         displayTypeDateLabel: 'दिनांक',
         displayTypeTimeLabel: 'समय'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: 'Breadcrumbs',
         collapseLabel: 'हेडर संकुचित करें',
@@ -447,9 +450,6 @@ export default {
         successButton: 'Success',
         title: 'Messages',
         warningButton: 'Warning'
-    },
-    coreDialog: {
-        resizable: 'Resizable'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'विकल्प चुनें',

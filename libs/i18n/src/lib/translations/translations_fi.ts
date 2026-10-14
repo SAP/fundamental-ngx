@@ -94,6 +94,9 @@ export default {
         displayTypeDateLabel: 'Päivämäärä',
         displayTypeTimeLabel: 'Aika'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: 'Navigointipolut',
         collapseLabel: 'Tiivistä otsikko',
@@ -447,9 +450,6 @@ export default {
         successButton: 'Success',
         title: 'Messages',
         warningButton: 'Warning'
-    },
-    coreDialog: {
-        resizable: 'Resizable'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Valitse vaihtoehdot',

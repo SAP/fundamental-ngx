@@ -95,6 +95,9 @@ export default {
         displayTypeDateLabel: '[[[Ďąţē]]]',
         displayTypeTimeLabel: '[[[Ţįɱē]]]'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: '[[[Ɓŗēąƌċŗűɱƃş∙∙∙∙∙∙∙∙]]]',
         collapseLabel: '[[[Ĉŏĺĺąρşē Ĥēąƌēŗ∙∙∙∙]]]',
@@ -449,9 +452,6 @@ export default {
         successButton: 'Success',
         title: 'Messages',
         warningButton: 'Warning'
-    },
-    coreDialog: {
-        resizable: 'Resizable'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: '[[[Ŝēĺēċţ Ŏρţįŏŋş∙∙∙∙∙]]]',

@@ -94,6 +94,9 @@ export default {
         displayTypeDateLabel: 'תאריך',
         displayTypeTimeLabel: 'זמן'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: 'שביל ניווט',
         collapseLabel: 'צמצם כותרת',
@@ -446,9 +449,6 @@ export default {
         successButton: 'Success',
         title: 'Messages',
         warningButton: 'Warning'
-    },
-    coreDialog: {
-        resizable: 'Resizable'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'בחר אפשרויות',

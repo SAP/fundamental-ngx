@@ -95,6 +95,9 @@ export default {
         displayTypeDateLabel: 'Күні',
         displayTypeTimeLabel: 'Уақыт'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: 'Шарлау тарихы',
         collapseLabel: 'Тақырыпты жию',
@@ -448,9 +451,6 @@ export default {
         successButton: 'Success',
         title: 'Messages',
         warningButton: 'Warning'
-    },
-    coreDialog: {
-        resizable: 'Resizable'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Таңдау опциялары',

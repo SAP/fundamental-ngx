@@ -94,6 +94,9 @@ export default {
         displayTypeDateLabel: '날짜',
         displayTypeTimeLabel: '시간'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: '탐색 경로',
         collapseLabel: '헤더 접기',
@@ -446,9 +449,6 @@ export default {
         successButton: 'Success',
         title: 'Messages',
         warningButton: 'Warning'
-    },
-    coreDialog: {
-        resizable: 'Resizable'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: '옵션 선택',

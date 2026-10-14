@@ -95,6 +95,9 @@ export default {
         displayTypeDateLabel: 'Data',
         displayTypeTimeLabel: 'Ora'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: 'Istoric navigare',
         collapseLabel: 'Restrângere antet',
@@ -449,9 +452,6 @@ export default {
         successButton: 'Success',
         title: 'Messages',
         warningButton: 'Warning'
-    },
-    coreDialog: {
-        resizable: 'Resizable'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Opțiuni de selecție',

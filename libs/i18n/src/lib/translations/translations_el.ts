@@ -94,6 +94,9 @@ export default {
         displayTypeDateLabel: 'Ημερομηνία',
         displayTypeTimeLabel: 'Ώρα'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: 'Δυναμικές διαδρομές',
         collapseLabel: 'Σύμπτυξη Κεφαλίδας',
@@ -448,9 +451,6 @@ export default {
         successButton: 'Success',
         title: 'Messages',
         warningButton: 'Warning'
-    },
-    coreDialog: {
-        resizable: 'Resizable'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Επιλογή Δυνατοτήτων',

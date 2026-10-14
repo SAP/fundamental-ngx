@@ -95,6 +95,9 @@ export default {
         displayTypeDateLabel: 'Date',
         displayTypeTimeLabel: 'Heure'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: 'Fil d’Ariane',
         collapseLabel: "Réduire l'en-tête",
@@ -450,9 +453,6 @@ export default {
         successButton: 'Success',
         title: 'Messages',
         warningButton: 'Warning'
-    },
-    coreDialog: {
-        resizable: 'Resizable'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Sélectionner des options',

@@ -95,6 +95,9 @@ export default {
         displayTypeDateLabel: 'Datum',
         displayTypeTimeLabel: 'Vrijeme'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: 'Put navigacije',
         collapseLabel: 'Sažmi zaglavlje',
@@ -448,9 +451,6 @@ export default {
         successButton: 'Success',
         title: 'Messages',
         warningButton: 'Warning'
-    },
-    coreDialog: {
-        resizable: 'Resizable'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Odaberi mogućnosti',

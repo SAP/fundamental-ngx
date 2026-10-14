@@ -95,6 +95,9 @@ export default {
         displayTypeDateLabel: 'Datum',
         displayTypeTimeLabel: 'Tijd'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: 'Navigatiepad',
         collapseLabel: 'Kop samenvouwen',
@@ -449,9 +452,6 @@ export default {
         successButton: 'Success',
         title: 'Messages',
         warningButton: 'Warning'
-    },
-    coreDialog: {
-        resizable: 'Resizable'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Opties selecteren',

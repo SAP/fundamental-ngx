@@ -94,6 +94,9 @@ export default {
         displayTypeDateLabel: 'თარიღი',
         displayTypeTimeLabel: 'დრო'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: 'Breadcrumbs',
         collapseLabel: 'სათაურის შეკუმშვა',
@@ -447,9 +450,6 @@ export default {
         successButton: 'Success',
         title: 'Messages',
         warningButton: 'Warning'
-    },
-    coreDialog: {
-        resizable: 'Resizable'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'აირჩიეთ ოფციები',

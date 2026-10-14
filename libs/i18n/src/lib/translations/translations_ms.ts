@@ -94,6 +94,9 @@ export default {
         displayTypeDateLabel: 'Tarikh',
         displayTypeTimeLabel: 'Masa'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: 'Tinggalan',
         collapseLabel: 'Runtuhkan Pengepala',
@@ -446,9 +449,6 @@ export default {
         successButton: 'Success',
         title: 'Messages',
         warningButton: 'Warning'
-    },
-    coreDialog: {
-        resizable: 'Resizable'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Pilih Pilihan',

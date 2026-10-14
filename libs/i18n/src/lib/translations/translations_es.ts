@@ -95,6 +95,9 @@ export default {
         displayTypeDateLabel: 'Fecha',
         displayTypeTimeLabel: 'Hora'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: 'Rutas de navegación',
         collapseLabel: 'Contraer cabecera',
@@ -449,9 +452,6 @@ export default {
         successButton: 'Success',
         title: 'Messages',
         warningButton: 'Warning'
-    },
-    coreDialog: {
-        resizable: 'Resizable'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Seleccionar opciones',

@@ -95,6 +95,9 @@ export default {
         displayTypeDateLabel: '日付',
         displayTypeTimeLabel: '時刻'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: '階層リンク',
         collapseLabel: 'ヘッダーを圧縮',
@@ -448,9 +451,6 @@ export default {
         successButton: 'Success',
         title: 'Messages',
         warningButton: 'Warning'
-    },
-    coreDialog: {
-        resizable: 'Resizable'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'オプションを選択',

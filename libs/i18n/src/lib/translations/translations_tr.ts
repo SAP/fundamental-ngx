@@ -94,6 +94,9 @@ export default {
         displayTypeDateLabel: 'Tarih',
         displayTypeTimeLabel: 'Saat'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: 'İçerik Haritaları',
         collapseLabel: 'Üst Bilgiyi Daralt',
@@ -448,9 +451,6 @@ export default {
         successButton: 'Success',
         title: 'Messages',
         warningButton: 'Warning'
-    },
-    coreDialog: {
-        resizable: 'Resizable'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Seçenekleri Belirle',

@@ -94,6 +94,9 @@ export default {
         displayTypeDateLabel: 'Dato',
         displayTypeTimeLabel: 'Klokkeslæt'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: 'Brødkrummer',
         collapseLabel: 'Skjul overskrift',
@@ -447,9 +450,6 @@ export default {
         successButton: 'Success',
         title: 'Messages',
         warningButton: 'Warning'
-    },
-    coreDialog: {
-        resizable: 'Resizable'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Vælg muligheder',

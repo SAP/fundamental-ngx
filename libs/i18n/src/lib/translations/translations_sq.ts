@@ -94,6 +94,9 @@ export default {
         displayTypeDateLabel: 'Data',
         displayTypeTimeLabel: 'Koha'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: 'Breadcrumbs',
         collapseLabel: 'Tkurre titullin',
@@ -448,9 +451,6 @@ export default {
         successButton: 'Success',
         title: 'Messages',
         warningButton: 'Warning'
-    },
-    coreDialog: {
-        resizable: 'Resizable'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Zgjidhni Opsionet',

@@ -93,6 +93,9 @@ export default {
         displayTypeDateLabel: '日期',
         displayTypeTimeLabel: '时间'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: '面包屑导航',
         collapseLabel: '折叠标题',
@@ -444,9 +447,6 @@ export default {
         successButton: 'Success',
         title: 'Messages',
         warningButton: 'Warning'
-    },
-    coreDialog: {
-        resizable: 'Resizable'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: '选择选项',

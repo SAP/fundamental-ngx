@@ -95,6 +95,9 @@ export default {
         displayTypeDateLabel: 'التاريخ',
         displayTypeTimeLabel: 'الوقت'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: 'مسارات التنقل',
         collapseLabel: 'طي المقدمة',
@@ -447,9 +450,6 @@ export default {
         successButton: 'Success',
         title: 'Messages',
         warningButton: 'Warning'
-    },
-    coreDialog: {
-        resizable: 'Resizable'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'تحديد الخيارات',

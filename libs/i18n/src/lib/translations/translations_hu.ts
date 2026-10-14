@@ -95,6 +95,9 @@ export default {
         displayTypeDateLabel: 'Dátum',
         displayTypeTimeLabel: 'Időpont'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: 'Útkövetés',
         collapseLabel: 'Fejléc visszazárása',
@@ -448,9 +451,6 @@ export default {
         successButton: 'Success',
         title: 'Messages',
         warningButton: 'Warning'
-    },
-    coreDialog: {
-        resizable: 'Resizable'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Kiválasztási beállítások',

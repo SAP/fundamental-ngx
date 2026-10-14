@@ -95,6 +95,9 @@ export default {
         displayTypeDateLabel: 'Дата',
         displayTypeTimeLabel: 'Час'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: 'Навигационни пътеки',
         collapseLabel: 'Свиване на заглавна област',
@@ -448,9 +451,6 @@ export default {
         successButton: 'Success',
         title: 'Messages',
         warningButton: 'Warning'
-    },
-    coreDialog: {
-        resizable: 'Resizable'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Избор на опции',

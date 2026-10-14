@@ -95,6 +95,9 @@ export default {
         displayTypeDateLabel: 'Dato',
         displayTypeTimeLabel: 'Klokkeslett'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: 'Navigeringssti',
         collapseLabel: 'Komprimer overskrift',
@@ -449,9 +452,6 @@ export default {
         successButton: 'Success',
         title: 'Messages',
         warningButton: 'Warning'
-    },
-    coreDialog: {
-        resizable: 'Resizable'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Velg alternativer',

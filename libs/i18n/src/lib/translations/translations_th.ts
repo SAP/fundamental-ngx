@@ -94,6 +94,9 @@ export default {
         displayTypeDateLabel: 'วันที่',
         displayTypeTimeLabel: 'เวลา'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: 'เมนูที่ใช้นำทางในเว็บไซต์ (Breadcrumb)',
         collapseLabel: 'ยุบรวมส่วนหัว',
@@ -447,9 +450,6 @@ export default {
         successButton: 'Success',
         title: 'Messages',
         warningButton: 'Warning'
-    },
-    coreDialog: {
-        resizable: 'Resizable'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'เลือกตัวเลือก',
