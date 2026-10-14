@@ -2,6 +2,7 @@ import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
 import { z } from 'zod';
+import { DOCS_ROUTE_SLUGS } from './data/docs-route-slugs';
 import { SETUP_GUIDES } from './data/setup-guides';
 import { USAGE_GUIDES } from './data/usage-guides';
 import { ComponentCatalog, ComponentMetadata, LIBRARY_ALIAS_MAP, LibraryAlias } from './types/component-metadata';
@@ -15,19 +16,32 @@ const DEFAULT_LIST_LIMIT = 50;
 const MAX_LIST_LIMIT = 100;
 const SEARCH_STOP_WORDS = new Set([
     'about',
+    'and',
+    'are',
+    'best',
     'can',
     'component',
+    'components',
     'could',
     'does',
+    'for',
+    'from',
     'how',
+    'into',
+    'need',
     'please',
+    'right',
+    'should',
     'show',
     'the',
     'use',
     'using',
+    'want',
     'what',
+    'which',
     'with',
-    'would'
+    'would',
+    'your'
 ]);
 const SELECTOR_REFERENCE_PATTERN = /\b(?:fd|fdp|fdb|fdk|ui5)-[a-z0-9-]+\b/g;
 
@@ -257,7 +271,7 @@ Use this when you need to find a component by a partial name or feature keyword.
                 .map((c) => ({
                     component: c,
                     score: isMultiWord
-                        ? queryWords.reduce((sum, word) => sum + scoreMatch(c, word), 0)
+                        ? queryWords.reduce((sum, word) => sum + scoreMatch(c, word, true), 0)
                         : scoreMatch(c, lowerQuery)
                 }))
                 .filter((s) => s.score > 0)
@@ -307,6 +321,7 @@ Use this when you need to know how to use a specific component.`,
             result.selectorType = getSelectorType(component.selector);
             result.templateUsage = buildTemplate(component);
             result.importPath = deriveImportPath(component);
+            result.docsUrl = resolveDocsUrl(component);
 
             return jsonToolResult(result);
         }
@@ -338,7 +353,7 @@ Use this when you need real usage patterns for a component.`,
                 return jsonToolResult({
                     component: component.name,
                     selector: component.selector,
-                    docsUrl: component.docsUrl || 'https://sap.github.io/fundamental-ngx',
+                    docsUrl: resolveDocsUrl(component),
                     availableExamples: [],
                     examples: [],
                     note: 'No examples found for this component. Check the docs site for usage guidance.'
@@ -410,7 +425,7 @@ additionalText replacing status).`,
                 templateUsage,
                 requiredInputs: requiredInputs.map((i) => ({ name: i.name, type: i.type, description: i.description })),
                 pitfalls,
-                docsUrl: found.docsUrl
+                docsUrl: resolveDocsUrl(found)
             };
 
             if (found.deprecated) {
@@ -737,52 +752,103 @@ function isSignalWrapperType(type: string | undefined): boolean {
     return !!type && /^(Writable)?Signal</.test(type);
 }
 
-function scoreMatch(component: ComponentMetadata, query: string): number {
+// Split a value into lowercase word tokens, honoring camelCase and any
+// non-alphanumeric separator (dashes, commas, brackets, spaces). Used for
+// whole-word matching so a filler term like "for" cannot substring-match "form".
+function tokenizeForSearch(value: string): string[] {
+    return value
+        .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
+        .toLowerCase()
+        .split(/[^a-z0-9]+/)
+        .filter(Boolean);
+}
+
+function containsWord(value: string, word: string): boolean {
+    return tokenizeForSearch(value).includes(word);
+}
+
+// When `wholeWord` is true, partial-field matches require a full token match
+// instead of a raw substring. This is used for multi-word natural-language
+// queries, where each term is scored independently and substring collisions
+// (e.g. "for" inside "form") would otherwise poison the ranking.
+function scoreMatch(component: ComponentMetadata, query: string, wholeWord = false): number {
     let score = 0;
+    const matchField = (field: string): boolean =>
+        wholeWord ? containsWord(field, query) : field.toLowerCase().includes(query);
 
     if (component.selector.toLowerCase() === query) {
         score += 100;
-    } else if (component.selector.toLowerCase().includes(query)) {
+    } else if (matchField(component.selector)) {
         score += 50;
-        // Prefer selectors where the query covers most of the primary part.
-        // Avoids picking compound directives (e.g. [fd-button][fdbNestedButton])
-        // over the primary component (e.g. button[fd-button], a[fd-button]).
-        const selectorParts = component.selector.split(',').map((p) => p.trim().toLowerCase());
-        const matchingParts = selectorParts.filter((p) => p.includes(query));
-        if (matchingParts.length > 0) {
-            const shortestPart = Math.min(...matchingParts.map((p) => p.length));
-            score += Math.max(0, 20 - (shortestPart - query.length));
+        if (!wholeWord) {
+            // Prefer selectors where the query covers most of the primary part.
+            // Avoids picking compound directives (e.g. [fd-button][fdbNestedButton])
+            // over the primary component (e.g. button[fd-button], a[fd-button]).
+            const selectorParts = component.selector.split(',').map((p) => p.trim().toLowerCase());
+            const matchingParts = selectorParts.filter((p) => p.includes(query));
+            if (matchingParts.length > 0) {
+                const shortestPart = Math.min(...matchingParts.map((p) => p.length));
+                score += Math.max(0, 20 - (shortestPart - query.length));
+            }
         }
     }
 
     if (component.name.toLowerCase() === query) {
         score += 90;
-    } else if (component.name.toLowerCase().includes(query)) {
+    } else if (matchField(component.name)) {
         score += 40;
     }
 
-    if (component.description.toLowerCase().includes(query)) {
+    if (matchField(component.description)) {
         score += 20;
     }
-    if (component.category.toLowerCase().includes(query)) {
+    if (matchField(component.category)) {
         score += 30;
     }
 
     // Search in input/output names
     for (const input of component.inputs) {
-        if (input.name.toLowerCase().includes(query)) {
+        if (matchField(input.name)) {
             score += 15;
             break;
         }
     }
     for (const output of component.outputs) {
-        if (output.name.toLowerCase().includes(query)) {
+        if (matchField(output.name)) {
             score += 15;
             break;
         }
     }
 
     return score;
+}
+
+const GENERIC_DOCS_URL = 'https://sap.github.io/fundamental-ngx';
+const DOCS_SELECTOR_PATTERN = /\b(fd|fdp|fdb|fdk|cx|ui5)-[a-z0-9-]+/;
+
+// Resolve a component's documentation URL by mapping it to the curated docs route
+// for its library. The catalog does not carry docsUrl, and docs pages group related
+// components (e.g. fd-notification-footer-content lives on the `notification` page),
+// so we match the component's selector to the longest route slug it falls under.
+// Falls back to the generic docs site when no confident match exists.
+export function resolveDocsUrl(component: ComponentMetadata): string {
+    const library = component.library.replace('@fundamental-ngx/', '');
+    const slugs = DOCS_ROUTE_SLUGS[library];
+    if (!slugs) {
+        return GENERIC_DOCS_URL;
+    }
+    const dasherized = component.selector.match(DOCS_SELECTOR_PATTERN)?.[0];
+    if (!dasherized) {
+        return GENERIC_DOCS_URL;
+    }
+    const stripped = dasherized.replace(/^(fd|fdp|fdb|fdk|cx|ui5)-/, '');
+    let best = '';
+    for (const slug of slugs) {
+        if ((stripped === slug || stripped.startsWith(slug + '-')) && slug.length > best.length) {
+            best = slug;
+        }
+    }
+    return best ? `${GENERIC_DOCS_URL}/#/${library}/${best}` : GENERIC_DOCS_URL;
 }
 
 function truncate(text: string, maxLength: number): string {
