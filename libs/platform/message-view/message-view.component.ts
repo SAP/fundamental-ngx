@@ -1,6 +1,7 @@
 import {
     ChangeDetectionStrategy,
     Component,
+    EventEmitter,
     Injector,
     OnDestroy,
     Output,
@@ -11,7 +12,11 @@ import {
 } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
-import { MessageListShared, MessagePopoverErrorGroup } from '@fundamental-ngx/platform/messages-shared';
+import {
+    MessageListShared,
+    MessagePopoverEntry,
+    MessagePopoverErrorGroup
+} from '@fundamental-ngx/platform/messages-shared';
 import { MessageViewDialogComponent } from './components/message-view-dialog.component';
 
 @Component({
@@ -24,7 +29,7 @@ import { MessageViewDialogComponent } from './components/message-view-dialog.com
 export class MessageViewComponent extends MessageListShared implements OnDestroy {
     /** Event emits when user clicks on error entry and item's element needs to be focused. */
     @Output()
-    override focusItem!: typeof MessageListShared.prototype.focusItem;
+    override focusItem = new EventEmitter<MessagePopoverEntry>();
 
     /**
      * Messages to display in the message view.

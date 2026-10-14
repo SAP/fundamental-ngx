@@ -118,6 +118,9 @@ export class MessagesListComponent implements AfterViewInit {
     private readonly _translatePipe = inject(FdTranslatePipe);
 
     /** @hidden */
+    private readonly _additionalInfoText = this._translatePipe.transform('platformMessageView.additionalInformation');
+
+    /** @hidden */
     constructor(
         private readonly _destroyRef: DestroyRef,
         private readonly _tabbableService: TabbableElementService,
@@ -185,7 +188,7 @@ export class MessagesListComponent implements AfterViewInit {
         if (entry.heading.type === 'string' && entry.heading.message) {
             headingText = typeof entry.heading.message === 'string' ? entry.heading.message : '';
         }
-        const additionalInfoText = this._translatePipe.transform('platformMessageView.additionalInformation')();
+        const additionalInfoText = this._additionalInfoText();
         return headingText ? `${headingText}. ${additionalInfoText}` : '';
     }
 

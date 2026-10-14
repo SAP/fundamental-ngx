@@ -1,5 +1,13 @@
 import { NgClass } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, Output, ViewChild, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    EventEmitter,
+    Input,
+    Output,
+    ViewChild,
+    ViewEncapsulation
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { InitialFocusDirective, Nullable } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
@@ -10,6 +18,7 @@ import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import {
     MessageListShared,
+    MessagePopoverEntry,
     MessagePopoverWrapper,
     MessagesListComponent
 } from '@fundamental-ngx/platform/messages-shared';
@@ -36,7 +45,7 @@ import {
 export class MessagePopoverComponent extends MessageListShared {
     /** Event emits when user clicks on error entry and item's element needs to be focused. */
     @Output()
-    override focusItem!: typeof MessageListShared.prototype.focusItem;
+    override focusItem = new EventEmitter<MessagePopoverEntry>();
 
     /** @hidden */
     @ViewChild('popover')
