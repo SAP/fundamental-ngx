@@ -95,6 +95,9 @@ export default {
         displayTypeDateLabel: 'Dátum',
         displayTypeTimeLabel: 'Időpont'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: 'Útkövetés',
         collapseLabel: 'Fejléc visszazárása',
@@ -437,6 +440,17 @@ export default {
             required: 'Ez a mező kötelezően kitöltendő',
             requiredTrue: 'Ez a mező kötelezően kitöltendő'
         }
+    },
+    platformMessageView: {
+        additionalInformation: 'Additional information available via reading keys',
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        errorButton: 'Error',
+        headerRoleDescription: 'Interactive Header',
+        informationButton: 'Information',
+        successButton: 'Success',
+        title: 'Messages',
+        warningButton: 'Warning'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Kiválasztási beállítások',

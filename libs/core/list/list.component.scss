@@ -15,6 +15,10 @@
 }
 
 // TODO: move to fundamental-styles
+.fd-list__item-counter {
+    flex-shrink: 0;
+}
+
 .fd-list {
     max-width: 100% !important;
 }

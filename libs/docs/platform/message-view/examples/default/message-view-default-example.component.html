@@ -1,0 +1,12 @@
+<p>Click the button to display the message view with different message types:</p>
+
+<fdp-button label="Show Message View" (click)="messageView.open()" style="margin-inline-end: 0.5rem"></fdp-button>
+<fdp-button label="Show Mobile Message View" (click)="mobileMessageView.open()"></fdp-button>
+
+<fdp-message-view #messageView [messages]="messages()"></fdp-message-view>
+<fdp-message-view #mobileMessageView [messages]="messages()" [mobile]="true"></fdp-message-view>
+
+<ng-template #customDescriptionTemplate>
+    <strong>This is a custom TemplateRef!</strong>
+    <p>You can include any HTML content here, including custom styling and formatting.</p>
+</ng-template>

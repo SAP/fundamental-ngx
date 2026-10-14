@@ -94,6 +94,9 @@ export default {
         displayTypeDateLabel: 'Date',
         displayTypeTimeLabel: 'Time'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: 'Breadcrumbs',
         collapseLabel: 'Collapse Header',
@@ -435,6 +438,17 @@ export default {
             required: 'The field is mandatory',
             requiredTrue: 'The field is mandatory'
         }
+    },
+    platformMessageView: {
+        additionalInformation: 'Additional information available via reading keys',
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        errorButton: 'Error',
+        headerRoleDescription: 'Interactive Header',
+        informationButton: 'Information',
+        successButton: 'Success',
+        title: 'Messages',
+        warningButton: 'Warning'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Select Options',

@@ -95,6 +95,9 @@ export default {
         displayTypeDateLabel: 'Date',
         displayTypeTimeLabel: 'Heure'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: 'Fil d’Ariane',
         collapseLabel: "Réduire l'en-tête",
@@ -439,6 +442,17 @@ export default {
             required: 'Le champ est obligatoire.',
             requiredTrue: 'Le champ est obligatoire.'
         }
+    },
+    platformMessageView: {
+        additionalInformation: 'Additional information available via reading keys',
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        errorButton: 'Error',
+        headerRoleDescription: 'Interactive Header',
+        informationButton: 'Information',
+        successButton: 'Success',
+        title: 'Messages',
+        warningButton: 'Warning'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Sélectionner des options',

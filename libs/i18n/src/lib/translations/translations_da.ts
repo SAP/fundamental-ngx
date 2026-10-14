@@ -94,6 +94,9 @@ export default {
         displayTypeDateLabel: 'Dato',
         displayTypeTimeLabel: 'Klokkeslæt'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: 'Brødkrummer',
         collapseLabel: 'Skjul overskrift',
@@ -436,6 +439,17 @@ export default {
             required: 'Feltet er obligatorisk',
             requiredTrue: 'Feltet er obligatorisk'
         }
+    },
+    platformMessageView: {
+        additionalInformation: 'Additional information available via reading keys',
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        errorButton: 'Error',
+        headerRoleDescription: 'Interactive Header',
+        informationButton: 'Information',
+        successButton: 'Success',
+        title: 'Messages',
+        warningButton: 'Warning'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Vælg muligheder',

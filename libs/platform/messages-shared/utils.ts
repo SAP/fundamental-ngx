@@ -39,3 +39,23 @@ export function convertFormState(type: FormStates): ObjectStatus {
             return 'neutral';
     }
 }
+
+/**
+ * Maps message type to icon name.
+ * @param type Message type (error, success, warning, information, default).
+ * @returns Icon name for the given message type.
+ */
+export function getIconForMessageType(type: string): string {
+    switch (type) {
+        case 'error':
+            return 'error';
+        case 'success':
+            return 'sys-enter-2';
+        case 'warning':
+            return 'alert';
+        case 'information':
+            return 'information';
+        default:
+            return 'sys-help-2';
+    }
+}
