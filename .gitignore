@@ -113,3 +113,6 @@ libs/ui5-webcomponents-ai/theming-bridge/*
 apps/e2e-harness/e2e/config/e2e.routes.json
 # generated before build by NX generate-routes target — not committed
 apps/e2e-harness/src/app/app.routes.generated.ts
+
+# Local Netlify folder
+.netlify

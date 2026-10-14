@@ -52,14 +52,27 @@ Set only the provider you want to use. `CHAT_MODEL` is optional; provider defaul
 
 ### 3. Start Angular and the Netlify Functions
 
+From the repository root:
+
 ```bash
-NPM_CONFIG_USERCONFIG="$PWD/.npmrc" npx netlify dev \
+yarn start
+```
+
+This is the recommended way to launch the integrated local assistant (Angular docs
+plus the `/api/chat` and `/api/mcp` Netlify Functions) on `http://localhost:8888`.
+
+Under the hood, `yarn start` ensures the MCP catalog exists and then runs:
+
+```bash
+NPM_CONFIG_USERCONFIG="$PWD/.npmrc" netlify dev \
   --filter docs \
   --command "yarn nx serve docs --excludeTaskDependencies --port=4200" \
-  --target-port 4200 \
-  --skip-wait-port \
-  --skip-gitignore
+  --target-port 4200
 ```
+
+First-run note: `yarn start` waits for the Angular build (~30s) before the
+Netlify dev server reports ready on `:8888`. This is expected — wait for
+`Server now ready on http://localhost:8888` before opening it.
 
 Wait for the Angular build to finish, then open the Netlify URL printed in the terminal, normally:
 
@@ -85,7 +98,18 @@ This serves the Angular docs directly. The assistant UI may be visible, but `/ap
 
 ## Run the standalone Next.js chatbot
 
-The standalone prototype reads `apps/chatbot/.env.local` and serves its own chat and MCP routes.
+The standalone prototype is a deprecated reference implementation. It reads
+`apps/chatbot/.env.local` and serves its own chat and MCP routes.
+
+Launch it from the repository root with:
+
+```bash
+yarn start:chatbot-legacy
+```
+
+This runs the Angular docs and the standalone Next.js chatbot together (it requires
+the standalone dependencies, the generated catalog, and `apps/chatbot/.env.local`).
+Alternatively, run it manually:
 
 ```bash
 yarn nx run mcp-server:extract-metadata
@@ -95,8 +119,6 @@ yarn dev
 ```
 
 Open `http://localhost:3000` and ask a question such as _"How do I use fd-dialog?"_
-
-From the repository root, `yarn start` starts both the Angular docs and this standalone chatbot. It requires the standalone dependencies, generated catalog, and `.env.local` to exist.
 
 ## Provider behavior
 
