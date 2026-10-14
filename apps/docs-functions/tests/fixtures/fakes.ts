@@ -92,6 +92,8 @@ export type FakeGeminiState = {
     calls: number;
     blockStream: boolean;
     emptyStream: boolean;
+    emptySynthesis: boolean;
+    responseMessages: unknown[];
     streamErrorAfterStart: boolean;
     abortSignals: AbortSignal[];
 };
@@ -118,6 +120,8 @@ export function createFakeGeminiState(): FakeGeminiState {
         calls: 0,
         blockStream: false,
         emptyStream: false,
+        emptySynthesis: false,
+        responseMessages: [],
         streamErrorAfterStart: false,
         abortSignals: []
     };

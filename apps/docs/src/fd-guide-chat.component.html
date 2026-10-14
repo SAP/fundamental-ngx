@@ -31,16 +31,18 @@
                 }
             </div>
 
-            <button
-                class="fd-guide-chat__header-button"
-                fdType="transparent"
-                fd-button
-                glyph="action-settings"
-                [attr.aria-pressed]="isApiKeyEditorOpen()"
-                [ariaLabel]="isApiKeyEditorOpen() ? 'Hide AI provider settings' : 'Configure AI provider'"
-                [title]="isApiKeyEditorOpen() ? 'Hide AI provider settings' : 'Configure AI provider'"
-                (click)="toggleApiKeyEditor()"
-            ></button>
+            @if (!localProviderAvailable()) {
+                <button
+                    class="fd-guide-chat__header-button"
+                    fdType="transparent"
+                    fd-button
+                    glyph="action-settings"
+                    [attr.aria-pressed]="isApiKeyEditorOpen()"
+                    [ariaLabel]="isApiKeyEditorOpen() ? 'Hide AI provider settings' : 'Configure AI provider'"
+                    [title]="isApiKeyEditorOpen() ? 'Hide AI provider settings' : 'Configure AI provider'"
+                    (click)="toggleApiKeyEditor()"
+                ></button>
+            }
 
             <button
                 class="fd-guide-chat__header-button"
@@ -84,7 +86,7 @@
                             <p><strong>Try asking:</strong></p>
                             <ul>
                                 <li>"Which component should I use for a dismissible notification?"</li>
-                                <li>"Show me a form with validation using fdp-form-group"</li>
+                                <li>"How do I open a dialog with fd-dialog?"</li>
                                 <li>"What's the difference between fd-table and fdp-table?"</li>
                             </ul>
                         </div>

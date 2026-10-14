@@ -1,4 +1,4 @@
-import chat, { config } from '../src/chat';
+import chat, { answerMentionsSelector, config } from '../src/chat';
 import {
     APPROVED_READ_ONLY_TOOLS,
     CHAT_ORIGIN,
@@ -135,15 +135,18 @@ jest.mock('ai', () => ({
     streamText: (options: unknown) => {
         const { sharedGeminiState: mockedGeminiState } =
             require('./fixtures/fakes') as typeof import('./fixtures/fakes');
-        const { abortSignal } = options as { abortSignal: AbortSignal };
+        const { abortSignal, toolChoice } = options as { abortSignal: AbortSignal; toolChoice?: string };
         mockedGeminiState.calls += 1;
         mockedGeminiState.options.push(options);
         mockedGeminiState.abortSignals.push(abortSignal);
         mockedGeminiState.prompts.push(JSON.stringify(options));
+        // The tools-disabled synthesis fallback is the only call made with toolChoice 'none'.
+        const isSynthesis = toolChoice === 'none';
         return {
             textStream: (async function* () {
-                if (!mockedGeminiState.emptyStream) {
-                    yield 'fixture answer';
+                const empty = isSynthesis ? mockedGeminiState.emptySynthesis : mockedGeminiState.emptyStream;
+                if (!empty) {
+                    yield isSynthesis ? 'fixture synthesis answer' : 'fixture answer';
                 }
                 if (mockedGeminiState.blockStream) {
                     await new Promise((_, reject) => {
@@ -157,6 +160,8 @@ jest.mock('ai', () => ({
                     });
                 }
             })(),
+            response: Promise.resolve({ messages: mockedGeminiState.responseMessages }),
+            responseMessages: Promise.resolve(mockedGeminiState.responseMessages),
             toTextStreamResponse: () => new Response('fixture answer'),
             toUIMessageStreamResponse: () => new Response('fixture answer')
         };
@@ -193,6 +198,8 @@ describe('/api/chat request and orchestration contract', () => {
         sharedGeminiState.calls = 0;
         sharedGeminiState.blockStream = false;
         sharedGeminiState.emptyStream = false;
+        sharedGeminiState.emptySynthesis = false;
+        sharedGeminiState.responseMessages = [];
         sharedGeminiState.streamErrorAfterStart = false;
         delete process.env.MCP_SERVER_URL;
         providerEnvironmentKeys.forEach((key) => delete process.env[key]);
@@ -241,6 +248,64 @@ describe('/api/chat request and orchestration contract', () => {
         await chat(validRequest());
 
         expect(sharedMcpState.openedUrls).toEqual([CHAT_ORIGIN + '/api/mcp']);
+    });
+
+    it('always streams the synthesized answer, never the agentic loop narration', async () => {
+        // The agentic (gather) call yields 'fixture answer'; the tools-disabled
+        // synthesis call yields 'fixture synthesis answer'. Only the synthesis must
+        // reach the user — the agentic text is suppressed so planning narration is
+        // never shown.
+        const response = await chat(validRequest());
+
+        expect(response.status).toBe(200);
+        const events = await responseEvents(response);
+        expect(events).toEqual(expect.arrayContaining([{ type: 'text-delta', text: 'fixture synthesis answer' }]));
+        expect(events.some((event) => event.type === 'text-delta' && event.text === 'fixture answer')).toBe(false);
+        expect(events.at(-1)).toEqual({ type: 'done' });
+        expect(events.some((event) => event.type === 'error')).toBe(false);
+        // One agentic (gather) call plus exactly one tools-disabled synthesis call.
+        expect(sharedGeminiState.calls).toBe(2);
+        const synthesisOptions = sharedGeminiState.options.at(-1) as {
+            toolChoice?: string;
+            messages?: Array<{ role: string; content: unknown }>;
+        };
+        expect(synthesisOptions.toolChoice).toBe('none');
+        // The synthesis call must end with an explicit user turn telling the model to
+        // answer now — without it the model has no prompt to speak and stays silent.
+        const lastMessage = synthesisOptions.messages?.at(-1);
+        expect(lastMessage?.role).toBe('user');
+        expect(JSON.stringify(lastMessage?.content)).toMatch(/final answer/i);
+    });
+
+    it('emits an error when the synthesis produces no text', async () => {
+        sharedGeminiState.emptySynthesis = true;
+
+        const response = await chat(validRequest());
+
+        expect(response.status).toBe(200);
+        const events = await responseEvents(response);
+        expect(events.at(-2)).toEqual(expect.objectContaining({ type: 'error' }));
+        expect(events.at(-1)).toEqual({ type: 'done' });
+        expect(sharedGeminiState.calls).toBe(2);
+    });
+
+    describe('answerMentionsSelector (source filtering)', () => {
+        it('matches a plain selector named in the answer', () => {
+            expect(answerMentionsSelector('Use the fd-message-strip component.', 'fd-message-strip')).toBe(true);
+        });
+
+        it('matches via the dasherized form inside a compound selector', () => {
+            expect(answerMentionsSelector('Use fd-message-strip.', '[fdMessageStrip], [fd-message-strip]')).toBe(true);
+        });
+
+        it('does not match a component the answer never names', () => {
+            expect(
+                answerMentionsSelector(
+                    'For a dismissable notification, use fd-message-strip.',
+                    '[fdNotificationFooterContent], [fd-notification-footer-content]'
+                )
+            ).toBe(false);
+        });
     });
 
     it.each([
@@ -381,7 +446,8 @@ describe('/api/chat request and orchestration contract', () => {
         });
         expect(statusResponse.headers.get('cache-control')).toBe('no-store');
         expect(sharedGeminiState.keys).toEqual(['local-fixture-key']);
-        expect(sharedGeminiState.calls).toBe(1);
+        // Agentic gather call + tools-disabled synthesis call.
+        expect(sharedGeminiState.calls).toBe(2);
     });
 
     it('uses the local Anthropic-compatible proxy without exposing its credentials', async () => {
@@ -437,7 +503,8 @@ describe('/api/chat request and orchestration contract', () => {
         await chat(validRequest());
 
         expect(sharedGeminiState.keys).toEqual([FIXTURE_API_KEY]);
-        expect(sharedGeminiState.options).toHaveLength(1);
+        // Two model calls: the agentic gather and the tools-disabled synthesis.
+        expect(sharedGeminiState.options).toHaveLength(2);
         const options = sharedGeminiState.options[0] as { tools: Record<string, unknown> };
         expect(Object.keys(options.tools)).toEqual(APPROVED_READ_ONLY_TOOLS);
     });

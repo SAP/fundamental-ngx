@@ -735,10 +735,14 @@ export class FdGuideChatComponent {
                 break;
             case 'text-delta':
                 this.status.set('streaming');
-                this._updateAssistant(assistantId, (message) => ({
-                    ...message,
-                    content: message.content + event.text
-                }));
+                this._updateAssistant(assistantId, (message) => {
+                    const content = message.content + event.text;
+                    return {
+                        ...message,
+                        content,
+                        renderedHtml: renderChatMarkdown(content, this._sanitizer)
+                    };
+                });
                 break;
             case 'sources':
                 this._updateAssistant(assistantId, (message) => ({

@@ -68,7 +68,9 @@ jest.mock('ai', () => ({
                 }
             })(),
             toTextStreamResponse: () => new Response('fixture text'),
-            toUIMessageStreamResponse: () => new Response('fixture text')
+            toUIMessageStreamResponse: () => new Response('fixture text'),
+            response: Promise.resolve({ messages: mockedGeminiState.responseMessages }),
+            responseMessages: Promise.resolve(mockedGeminiState.responseMessages)
         };
     }
 }));

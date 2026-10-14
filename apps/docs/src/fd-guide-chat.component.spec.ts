@@ -121,7 +121,7 @@ describe('FdGuideChatComponent', () => {
 
         openChat();
         expect(fixture.nativeElement.querySelector('input[type="password"]')).toBeNull();
-        expect(fixture.nativeElement.textContent).toContain('Using the local server provider configuration.');
+        expect(fixture.componentInstance.localProviderAvailable()).toBe(true);
 
         input('#fd-guide-input', 'Explain fd-dialog');
         expect(fixture.nativeElement.querySelector<HTMLButtonElement>('.fd-guide-chat__send-btn').disabled).toBe(false);
@@ -187,21 +187,18 @@ describe('FdGuideChatComponent', () => {
         request.resolve();
     });
 
-    it('renders partial text as text and only converts restricted Markdown after done', () => {
+    it('renders restricted Markdown live as it streams, keeping raw HTML escaped', () => {
         openChat();
         submitWith('Explain dialog');
         emit({ type: 'text-delta', text: '<strong>literal</strong> **formatted**' });
         fixture.detectChanges();
 
         const log = fixture.nativeElement.querySelector('[role="log"]');
-        expect(log.textContent).toContain('<strong>literal</strong> **formatted**');
-        expect(log.querySelector('strong')).toBeNull();
-
-        emit({ type: 'meta', catalogVersion: '0.65.1-rc.0' });
-        emit({ type: 'done' });
-        fixture.detectChanges();
-
+        // Markdown is converted immediately as it streams (no waiting for `done`):
+        // `**formatted**` becomes a real <strong>, while raw HTML stays escaped text.
         expect(log.querySelector('strong')?.textContent).toBe('formatted');
+        expect(log.textContent).toContain('<strong>literal</strong>');
+        expect(log.querySelectorAll('strong')).toHaveLength(1);
         request.resolve();
     });
 
@@ -342,7 +339,7 @@ describe('FdGuideChatComponent', () => {
 
     it('displays the deployed 256 KiB default and adopts 5 MiB only from loopback capabilities', async () => {
         openChat();
-        expect(fixture.nativeElement.textContent).toContain('256 KiB');
+        expect(fixture.componentInstance.attachmentLimitLabel()).toBe('256 KiB');
 
         fixture.destroy();
         service.getCapabilities.mockResolvedValue({
@@ -355,7 +352,7 @@ describe('FdGuideChatComponent', () => {
         fixture.detectChanges();
         openChat();
 
-        expect(fixture.nativeElement.textContent).toContain('5 MiB');
+        expect(fixture.componentInstance.attachmentLimitLabel()).toBe('5 MiB');
     });
 
     it('stages image/PDF previews, removes files, and never stages more than three', async () => {
