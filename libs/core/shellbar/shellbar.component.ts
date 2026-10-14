@@ -178,6 +178,9 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     /** @hidden */
     _showMobileSearch = false;
 
+    /** @hidden */
+    _isTitleHidden = false;
+
     protected readonly navigationIcon = computed<string>(() => (this.isRtl() ? 'slim-arrow-right' : 'nav-back'));
 
     /** @hidden */
@@ -415,6 +418,16 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
         event.preventDefault();
         event.stopPropagation();
         this.backButtonClicked.emit(event);
+    }
+
+    /** @hidden */
+    _notifyTitleHidden(hidden: boolean): void {
+        this._isTitleHidden = hidden;
+        this._actions?._setTitleHidden(
+            hidden,
+            this.branding?.getTitleText() || '',
+            this.branding?.getLogoElement() || null
+        );
     }
 
     /** @hidden */

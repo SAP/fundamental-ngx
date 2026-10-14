@@ -10,6 +10,9 @@
         <fd-shellbar-actions-mobile
             [shellbarActions]="shellbarActions"
             [searchExists]="!!_searchPortal"
+            [titleHidden]="_titleHidden"
+            [hiddenTitleText]="_hiddenTitleText"
+            [hiddenLogoElement]="_hiddenLogoElement"
             (showSearch)="_toggleSearch()"
             [assistiveToolsCallback]="assistiveToolsCallback"
         ></fd-shellbar-actions-mobile>

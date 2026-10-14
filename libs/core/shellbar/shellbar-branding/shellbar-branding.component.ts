@@ -43,17 +43,39 @@ export class ShellbarBrandingComponent {
     hideTitleIfNeeded(): void {
         if (this._shellbar._actionsExceedShellbarWidth()) {
             const titleEl = this._elRef.nativeElement.querySelector('fd-shellbar-title');
+            const logoEl = this._elRef.nativeElement.querySelector('fd-shellbar-logo');
             if (titleEl) {
                 titleEl.style.display = 'none';
             }
+            if (logoEl) {
+                logoEl.style.display = 'none';
+            }
+            this._shellbar._notifyTitleHidden(true);
         }
     }
 
     /** @hidden */
     showTitle(): void {
         const titleEl = this._elRef.nativeElement.querySelector('fd-shellbar-title');
+        const logoEl = this._elRef.nativeElement.querySelector('fd-shellbar-logo');
         if (titleEl) {
             titleEl.style.display = 'flex';
         }
+        if (logoEl) {
+            logoEl.style.display = 'block';
+        }
+        this._shellbar._notifyTitleHidden(false);
+    }
+
+    /** @hidden */
+    getTitleText(): string {
+        const titleEl = this._elRef.nativeElement.querySelector('fd-shellbar-title');
+        return titleEl?.textContent?.trim() || '';
+    }
+
+    /** @hidden */
+    getLogoElement(): HTMLElement | null {
+        const logoEl = this._elRef.nativeElement.querySelector('fd-shellbar-logo');
+        return logoEl;
     }
 }

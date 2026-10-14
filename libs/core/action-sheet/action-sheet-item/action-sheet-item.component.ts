@@ -2,10 +2,12 @@ import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
+    HostBinding,
     HostListener,
     Input,
     ViewChild,
     ViewEncapsulation,
+    booleanAttribute,
     input,
     output,
     signal
@@ -68,6 +70,11 @@ export class ActionSheetItemComponent implements KeyboardSupportItemInterface {
     /** Whether or not the action sheet item is disabled. */
     @Input()
     disabled = false;
+
+    /** Whether the action sheet item has a separator */
+    @Input({ transform: booleanAttribute })
+    @HostBinding('class.has-separator')
+    hasSeparator = false;
 
     /** @hidden */
     @ViewChild(ButtonComponent, { read: ElementRef })
