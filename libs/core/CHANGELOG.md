@@ -1,3 +1,14 @@
+## 0.65.1-rc.4 (2026-10-14)
+
+### 🚀 Features
+
+- **platform:** add fdp-message-view component, refactor fdp-message-popover ([#14527](https://github.com/SAP/fundamental-ngx/pull/14527))
+
+### ❤️ Thank You
+
+- fundamental-bot
+- Mike O'Donnell @mikerodonnell89
+
 ## 0.65.1-rc.3 (2026-10-14)
 
 ### 🩹 Fixes
