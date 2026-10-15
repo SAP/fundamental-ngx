@@ -13,7 +13,7 @@ import { readFileSync } from 'fs';
 import { resolve } from 'path';
 import { SETUP_GUIDES } from './data/setup-guides';
 import { USAGE_GUIDES } from './data/usage-guides';
-import { createServer, loadCatalogFromDisk } from './server';
+import { createServer, loadCatalogFromDisk, resolveDocsUrl } from './server';
 import { ComponentCatalog, ComponentMetadata } from './types/component-metadata';
 import { buildPitfalls, buildTemplate, deriveImportPath, getSelectorType } from './utils/selector-utils';
 
@@ -99,42 +99,58 @@ function findComponent(nameOrSelector: string, components: ComponentMetadata[]):
     return undefined;
 }
 
-function scoreMatch(component: ComponentMetadata, query: string): number {
+function tokenizeForSearch(value: string): string[] {
+    return value
+        .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
+        .toLowerCase()
+        .split(/[^a-z0-9]+/)
+        .filter(Boolean);
+}
+
+function containsWord(value: string, word: string): boolean {
+    return tokenizeForSearch(value).includes(word);
+}
+
+function scoreMatch(component: ComponentMetadata, query: string, wholeWord = false): number {
     let score = 0;
+    const matchField = (field: string): boolean =>
+        wholeWord ? containsWord(field, query) : field.toLowerCase().includes(query);
 
     if (component.selector.toLowerCase() === query) {
         score += 100;
-    } else if (component.selector.toLowerCase().includes(query)) {
+    } else if (matchField(component.selector)) {
         score += 50;
-        const selectorParts = component.selector.split(',').map((p) => p.trim().toLowerCase());
-        const matchingParts = selectorParts.filter((p) => p.includes(query));
-        if (matchingParts.length > 0) {
-            const shortestPart = Math.min(...matchingParts.map((p) => p.length));
-            score += Math.max(0, 20 - (shortestPart - query.length));
+        if (!wholeWord) {
+            const selectorParts = component.selector.split(',').map((p) => p.trim().toLowerCase());
+            const matchingParts = selectorParts.filter((p) => p.includes(query));
+            if (matchingParts.length > 0) {
+                const shortestPart = Math.min(...matchingParts.map((p) => p.length));
+                score += Math.max(0, 20 - (shortestPart - query.length));
+            }
         }
     }
 
     if (component.name.toLowerCase() === query) {
         score += 90;
-    } else if (component.name.toLowerCase().includes(query)) {
+    } else if (matchField(component.name)) {
         score += 40;
     }
 
-    if (component.description.toLowerCase().includes(query)) {
+    if (matchField(component.description)) {
         score += 20;
     }
-    if (component.category.toLowerCase().includes(query)) {
+    if (matchField(component.category)) {
         score += 30;
     }
 
     for (const input of component.inputs) {
-        if (input.name.toLowerCase().includes(query)) {
+        if (matchField(input.name)) {
             score += 15;
             break;
         }
     }
     for (const output of component.outputs) {
-        if (output.name.toLowerCase().includes(query)) {
+        if (matchField(output.name)) {
             score += 15;
             break;
         }
@@ -570,18 +586,88 @@ describe('MCP Server helpers', () => {
             };
 
             const queryWords = ['flexible', 'column'];
-            const flexScore = queryWords.reduce((sum, w) => sum + scoreMatch(flexLayout, w), 0);
-            const listScore = queryWords.reduce((sum, w) => sum + scoreMatch(listComp, w), 0);
+            const flexScore = queryWords.reduce((sum, w) => sum + scoreMatch(flexLayout, w, true), 0);
+            const listScore = queryWords.reduce((sum, w) => sum + scoreMatch(listComp, w, true), 0);
 
             expect(flexScore).toBeGreaterThan(listScore);
             expect(flexScore).toBeGreaterThan(0);
         });
 
+        it('does not substring-match a filler word against an unrelated token (whole-word mode)', () => {
+            const formComponent: ComponentMetadata = {
+                name: 'FormGeneratorComponent',
+                selector: 'fdp-form-generator',
+                library: '@fundamental-ngx/platform',
+                category: 'form',
+                description: 'Generates a form from a configuration.',
+                inputs: [],
+                outputs: [],
+                slots: [],
+                methods: [],
+                cssProperties: [],
+                source: 'typedoc'
+            };
+            // "for" is a substring of "form" but not a whole token, so whole-word scoring must ignore it.
+            expect(scoreMatch(formComponent, 'for', true)).toBe(0);
+            // Sanity check: legacy substring mode still (wrongly) matches, which is why multi-word uses whole-word mode.
+            expect(scoreMatch(formComponent, 'for', false)).toBeGreaterThan(0);
+            // A real token still matches in whole-word mode.
+            expect(scoreMatch(formComponent, 'form', true)).toBeGreaterThan(0);
+        });
+
         it('should return zero score for a multi-word query when no word matches', () => {
             const queryWords = ['flexible', 'column'];
-            const score = queryWords.reduce((sum, w) => sum + scoreMatch(FIXTURE_COMPONENTS[4], w), 0); // DeprecatedComponent
+            const score = queryWords.reduce((sum, w) => sum + scoreMatch(FIXTURE_COMPONENTS[4], w, true), 0); // DeprecatedComponent
             expect(score).toBe(0);
         });
+    });
+});
+
+describe('resolveDocsUrl', () => {
+    const component = (selector: string, library: string): ComponentMetadata => ({
+        name: 'X',
+        selector,
+        library,
+        category: '',
+        description: '',
+        inputs: [],
+        outputs: [],
+        slots: [],
+        methods: [],
+        cssProperties: [],
+        source: 'typedoc'
+    });
+
+    it('deep-links an exact selector match to its docs page', () => {
+        expect(resolveDocsUrl(component('fd-message-strip', '@fundamental-ngx/core'))).toBe(
+            'https://sap.github.io/fundamental-ngx/#/core/message-strip'
+        );
+    });
+
+    it('maps a grouped sub-component to its parent docs page (longest slug prefix)', () => {
+        expect(
+            resolveDocsUrl(
+                component('[fdNotificationFooterContent], [fd-notification-footer-content]', '@fundamental-ngx/core')
+            )
+        ).toBe('https://sap.github.io/fundamental-ngx/#/core/notification');
+    });
+
+    it('resolves platform components under the platform segment', () => {
+        expect(resolveDocsUrl(component('fdp-form-generator', '@fundamental-ngx/platform'))).toBe(
+            'https://sap.github.io/fundamental-ngx/#/platform/form-generator'
+        );
+    });
+
+    it('falls back to the generic docs site for an unknown library', () => {
+        expect(resolveDocsUrl(component('xx-thing', '@fundamental-ngx/unknown'))).toBe(
+            'https://sap.github.io/fundamental-ngx'
+        );
+    });
+
+    it('falls back to the generic docs site when no slug matches', () => {
+        expect(resolveDocsUrl(component('fd-totally-made-up-widget', '@fundamental-ngx/core'))).toBe(
+            'https://sap.github.io/fundamental-ngx'
+        );
     });
 });
 
@@ -766,7 +852,7 @@ describe('Real catalog validation', () => {
     (skip ? it.skip : it)('multi-word search should surface fd-flexible-column-layout for "flexible column"', () => {
         const queryWords = ['flexible', 'column'];
         const scored = catalog.components
-            .map((c) => ({ c, score: queryWords.reduce((sum, w) => sum + scoreMatch(c, w), 0) }))
+            .map((c) => ({ c, score: queryWords.reduce((sum, w) => sum + scoreMatch(c, w, true), 0) }))
             .filter((s) => s.score > 0)
             .sort((a, b) => b.score - a.score);
 
@@ -777,7 +863,7 @@ describe('Real catalog validation', () => {
     (skip ? it.skip : it)('multi-word search "master detail flexible column" should not return zero results', () => {
         const queryWords = 'master detail flexible column'.split(/\s+/).filter((w) => w.length > 2);
         const scored = catalog.components
-            .map((c) => ({ c, score: queryWords.reduce((sum, w) => sum + scoreMatch(c, w), 0) }))
+            .map((c) => ({ c, score: queryWords.reduce((sum, w) => sum + scoreMatch(c, w, true), 0) }))
             .filter((s) => s.score > 0)
             .sort((a, b) => b.score - a.score);
 
@@ -1228,6 +1314,22 @@ describe('bounded chat-facing tool contracts', () => {
         });
     });
 
+    it('does not let the filler word "for" pull form components into an unrelated query', async () => {
+        await withFullCatalogClient(async (client) => {
+            const result = (await client.callTool({
+                name: 'search_components',
+                arguments: { query: 'which components should I use for a dismissable notification', limit: 5 }
+            })) as TextToolResult;
+            const payload = parseToolJson(result);
+            const matches = payload.results as Array<{ selector: string }>;
+
+            expect(matches.length).toBeGreaterThan(0);
+            // "for" must not substring-match "form"; the top hit should be a notification component.
+            expect(matches[0].selector).toContain('notification');
+            expect(matches[0].selector).not.toContain('form');
+        });
+    });
+
     it('falls back to the selector keywords when an exact selector does not exist', async () => {
         await withFullCatalogClient(async (client) => {
             const result = (await client.callTool({
@@ -1357,6 +1459,18 @@ describe('bounded chat-facing tool contracts', () => {
 
             expect(payload.selector).toBe('fdp-table');
             expect(payload).not.toHaveProperty('examples');
+        });
+    });
+
+    it('get_component_api returns a deep docs link, not the generic site', async () => {
+        await withFullCatalogClient(async (client) => {
+            const result = (await client.callTool({
+                name: 'get_component_api',
+                arguments: { name: 'fd-message-strip' }
+            })) as TextToolResult;
+            const payload = parseToolJson(result);
+
+            expect(payload.docsUrl).toBe('https://sap.github.io/fundamental-ngx/#/core/message-strip');
         });
     });
 

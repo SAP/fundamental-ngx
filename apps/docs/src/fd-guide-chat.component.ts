@@ -13,7 +13,7 @@ import {
 import { DomSanitizer } from '@angular/platform-browser';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { IconComponent } from '@fundamental-ngx/core/icon';
-import { isAllowedChatUrl, renderChatMarkdown } from './fd-guide-chat-markdown';
+import { injectCopyButtons, isAllowedChatUrl, renderChatMarkdown } from './fd-guide-chat-markdown';
 import { ChatEvent, ChatSource } from './fd-guide-chat-stream';
 import {
     CHAT_ATTACHMENT_MEDIA_TYPES,
@@ -132,6 +132,9 @@ export class FdGuideChatComponent {
     readonly catalogVersion = signal<string | null>(null);
     readonly statusMessage = signal('Chat ready.');
     readonly attachmentLimitLabel = computed(() => formatAttachmentLimit(this.attachmentLimitBytes()));
+    readonly attachmentsSizeLabel = computed(() =>
+        formatBytes(this.attachments().reduce((total, attachment) => total + attachment.size, 0))
+    );
     readonly providerName = computed(() => (this.provider() === 'google' ? 'Gemini' : 'Groq'));
     readonly apiKeyLabel = computed(() => `${this.providerName()} API key`);
     readonly canAttachFiles = computed(() => this.provider() !== 'groq');
@@ -199,6 +202,7 @@ export class FdGuideChatComponent {
                 const container = this._messagesContainer()?.nativeElement;
                 if (container) {
                     container.scrollTop = container.scrollHeight;
+                    injectCopyButtons(container);
                 }
                 if (this._shouldFocusInput && this.isOpen()) {
                     this._shouldFocusInput = false;
@@ -732,10 +736,14 @@ export class FdGuideChatComponent {
                 break;
             case 'text-delta':
                 this.status.set('streaming');
-                this._updateAssistant(assistantId, (message) => ({
-                    ...message,
-                    content: message.content + event.text
-                }));
+                this._updateAssistant(assistantId, (message) => {
+                    const content = message.content + event.text;
+                    return {
+                        ...message,
+                        content,
+                        renderedHtml: renderChatMarkdown(content, this._sanitizer)
+                    };
+                });
                 break;
             case 'sources':
                 this._updateAssistant(assistantId, (message) => ({
@@ -880,6 +888,13 @@ function isSafeAttachmentName(value: string): boolean {
 
 function formatAttachmentLimit(bytes: number): string {
     return bytes === LOCAL_ATTACHMENT_LIMIT_BYTES ? '5 MiB' : '256 KiB';
+}
+
+function formatBytes(bytes: number): string {
+    if (bytes >= 1024 * 1024) {
+        return `${(bytes / (1024 * 1024)).toFixed(1)} MiB`;
+    }
+    return `${Math.max(1, Math.round(bytes / 1024))} KiB`;
 }
 
 function isTextEntryTarget(target: EventTarget | null): boolean {
