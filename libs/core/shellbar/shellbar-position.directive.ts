@@ -2,12 +2,14 @@ import { Directive, ElementRef, inject, input } from '@angular/core';
 
 /**
  * Directive to specify the position of an item within a shellbar context area.
- * Items can be positioned on the left (after branding) or right (before actions).
+ * Items default to the left position (after branding) unless explicitly positioned right.
  *
  * @example
  * ```html
  * <fd-shellbar-context-area>
- *     <span fdShellbarPosition="left">Left item</span>
+ *     <!-- Defaults to left, no directive needed -->
+ *     <span>Left item</span>
+ *     <!-- Explicitly positioned right -->
  *     <span fdShellbarPosition="right">Right item</span>
  * </fd-shellbar-context-area>
  * ```

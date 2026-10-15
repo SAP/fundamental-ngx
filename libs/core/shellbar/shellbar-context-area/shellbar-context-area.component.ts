@@ -4,13 +4,11 @@ import {
     Component,
     DestroyRef,
     ElementRef,
-    contentChildren,
     inject,
     output
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ResizeObserverService } from '@fundamental-ngx/cdk/utils';
-import { ShellbarPositionDirective } from '../shellbar-position.directive';
 import { FD_SHELLBAR_COMPONENT } from '../tokens';
 
 /**
@@ -23,7 +21,7 @@ import { FD_SHELLBAR_COMPONENT } from '../tokens';
     standalone: true,
     template: `
         <div class="fd-shellbar__group fd-shellbar__group--context-area" data-position="left">
-            <ng-content select="[fdShellbarPosition='left']"></ng-content>
+            <ng-content select="[fdShellbarPosition='left'], :not([fdShellbarPosition])"></ng-content>
         </div>
         <div class="fd-shellbar__group fd-shellbar__group--context-area" data-position="right">
             <ng-content select="[fdShellbarPosition='right']"></ng-content>
@@ -53,9 +51,6 @@ export class ShellbarContextAreaComponent implements AfterViewInit {
 
     /** @hidden */
     readonly el: ElementRef = inject(ElementRef);
-
-    /** @hidden */
-    protected readonly _positionedItems = contentChildren(ShellbarPositionDirective, { descendants: true });
 
     /** @hidden */
     private readonly _shellbar = inject(FD_SHELLBAR_COMPONENT);
@@ -126,34 +121,24 @@ export class ShellbarContextAreaComponent implements AfterViewInit {
     }
 
     /**
-     * Get all positioned items grouped by their position.
-     */
-    private _getPositionedItemsByPosition(): { left: HTMLElement[]; right: HTMLElement[] } {
-        const items = this._positionedItems();
-        const left: HTMLElement[] = [];
-        const right: HTMLElement[] = [];
-
-        items.forEach((item) => {
-            const element = item.el.nativeElement;
-            if (item.fdShellbarPosition() === 'right') {
-                right.push(element);
-            } else {
-                left.push(element);
-            }
-        });
-
-        return { left, right };
-    }
-
-    /**
      * Retrieves the child elements with their respective priority values.
      * The elements are sorted based on their priority, with elements having
      * higher priority shown first.
      */
     private _getContextAreaItemsWithPriority(): { el: HTMLElement; priority: number }[] {
-        return this._positionedItems()
-            .map((directive, index) => {
-                const element = directive.el.nativeElement;
+        // Get direct children from the DOM (all elements inside the context area groups)
+        const contextAreaGroups = this.el.nativeElement.querySelectorAll('.fd-shellbar__group--context-area');
+        const allElements: HTMLElement[] = [];
+
+        contextAreaGroups.forEach((group: HTMLElement) => {
+            // Get direct children of each group
+            Array.from(group.children).forEach((child) => {
+                allElements.push(child as HTMLElement);
+            });
+        });
+
+        return allElements
+            .map((element, index) => {
                 const hasPriorityAttribute = element.hasAttribute && element.hasAttribute('fdShellbarHidePriority');
                 const priorityValue = element.getAttribute('fdShellbarHidePriority');
                 const priority = hasPriorityAttribute && priorityValue ? parseInt(priorityValue, 10) : index + 1;
