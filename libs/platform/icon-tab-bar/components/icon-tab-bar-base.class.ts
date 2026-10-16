@@ -339,15 +339,25 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
     /**
      * @hidden
      * Handles changes to the selected UID.
+     *
+     * This method is called when the [selectedUid] input changes (i.e. the parent drove
+     * the change). We must NOT call _selectItem here because that would emit (selected)
+     * back to the parent, which would then call _selectItem → _scrollToPanel, producing
+     * an unwanted scroll jump on every scroll-spy tab boundary crossing (#14593).
+     * Instead we apply only the visual side-effects that _selectExtraItem normally performs.
      */
     private _handleSelectedUidChange(): void {
-        const isExtraTab = this._extraTabs$().find((tab) => tab.uId === this.selectedUid);
-        const selected = this.tabs.find((tab) => tab.uId === this.selectedUid);
-        if (isExtraTab) {
-            this._selectExtraItem(isExtraTab);
-        } else if (selected) {
-            this._selectExtraItem(selected);
+        const item =
+            this._extraTabs$().find((tab) => tab.uId === this.selectedUid) ??
+            this.tabs.find((tab) => tab.uId === this.selectedUid);
+        if (!item) {
+            return;
         }
+        if (item.color) {
+            item.cssClasses = [`fd-icon-tab-bar__item--${item.color}`];
+        }
+        item.badge = false;
+        this._triggerRecalculationVisibleItems();
     }
 
     /**
