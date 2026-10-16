@@ -96,7 +96,7 @@ export default {
         displayTypeTimeLabel: '[[[Ţįɱē]]]'
     },
     coreDialog: {
-        resizable: 'Resizable'
+        resizable: '[[[Řēşįžąƃĺē∙∙∙∙∙]]]'
     },
     coreDynamicPage: {
         breadcrumbsLabel: '[[[Ɓŗēąƌċŗűɱƃş∙∙∙∙∙∙∙∙]]]',
@@ -443,15 +443,15 @@ export default {
         }
     },
     platformMessageView: {
-        additionalInformation: 'Additional information available via reading keys',
-        cancel: 'Cancel',
-        detailsTitle: 'Message Details',
-        errorButton: 'Error',
-        headerRoleDescription: 'Interactive Header',
-        informationButton: 'Information',
-        successButton: 'Success',
-        title: 'Messages',
-        warningButton: 'Warning'
+        additionalInformation: '[[[Āƌƌįţįŏŋąĺ įŋƒŏŗɱąţįŏŋ ąʋąįĺąƃĺē ʋįą ŗēąƌįŋğ ķēŷş∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]',
+        cancel: '[[[Ĉąŋċēĺ∙∙∙∙∙∙∙∙]]]',
+        detailsTitle: '[[[Μēşşąğē Ďēţąįĺş∙∙∙∙]]]',
+        errorButton: '[[[Ĕŗŗŏŗ∙∙∙∙∙∙∙∙∙]]]',
+        headerRoleDescription: '[[[Ĭŋţēŗąċţįʋē Ĥēąƌēŗ∙∙∙∙∙∙]]]',
+        informationButton: '[[[Ĭŋƒŏŗɱąţįŏŋ∙∙∙∙∙∙∙∙]]]',
+        successButton: '[[[Ŝűċċēşş∙∙∙∙∙∙∙]]]',
+        title: '[[[Μēşşąğēş∙∙∙∙∙∙]]]',
+        warningButton: '[[[Ŵąŗŋįŋğ∙∙∙∙∙∙∙]]]'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: '[[[Ŝēĺēċţ Ŏρţįŏŋş∙∙∙∙∙]]]',
