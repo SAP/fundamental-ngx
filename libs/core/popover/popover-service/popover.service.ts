@@ -26,7 +26,7 @@ import {
     signal
 } from '@angular/core';
 import { Observable, Subject, merge } from 'rxjs';
-import { distinctUntilChanged, filter, startWith, takeUntil } from 'rxjs/operators';
+import { distinctUntilChanged, filter, map, startWith, takeUntil } from 'rxjs/operators';
 
 import { Nullable, RtlService, destroyObservable, isOdd } from '@fundamental-ngx/cdk/utils';
 import { GetDefaultPosition, Placement, PopoverFillMode, PopoverPosition } from '@fundamental-ngx/core/shared';
@@ -261,7 +261,8 @@ export class PopoverService {
             if (currentOpen !== previousOpen && this._triggerElement && !this._programmaticChange) {
                 if (currentOpen) {
                     this.open();
-                } else {
+                } else if (this._overlayRef?.hasAttached()) {
+                    // close(false) may already have disposed the overlay before this effect runs.
                     this.close();
                 }
             }
@@ -336,6 +337,8 @@ export class PopoverService {
 
     /** Closes the popover. */
     close(focusActiveElement = true): void {
+        // Disposal emits a detachment; don't close again and override the focus decision.
+        this._stopCloseListening$.next();
         this._ancestorMutationObserver?.disconnect();
         this._ancestorMutationObserver = null;
 
@@ -820,16 +823,26 @@ export class PopoverService {
     private _listenOnClose(): void {
         const body = this._getPopoverBody();
         const closeEvents$ = merge(
-            this._overlayRef.detachments(),
-            outputToObservable(body.onClose),
-            this._outsideClicks$(),
-            this._escapeKeydowns$()
+            merge(this._overlayRef.detachments(), outputToObservable(body.onClose), this._escapeKeydowns$()).pipe(
+                map(() => true)
+            ),
+            this._outsideClicks$().pipe(
+                map(() => {
+                    const activeElement = document.activeElement;
+                    // A blank-space click can focus a scrollable ancestor instead of another control.
+                    return (
+                        !activeElement ||
+                        activeElement.contains(this._triggerHtmlElement) ||
+                        this._overlayRef.overlayElement.contains(activeElement)
+                    );
+                })
+            )
         );
         // Only use _stopCloseListening$ to stop listening, not _refresh$
         // _refresh$ can emit due to signal effects and would complete the subscription prematurely
-        closeEvents$.pipe(takeUntil(this._stopCloseListening$), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
-            this.close();
-        });
+        closeEvents$
+            .pipe(takeUntil(this._stopCloseListening$), takeUntilDestroyed(this._destroyRef))
+            .subscribe((restoreFocus) => this.close(restoreFocus));
     }
 
     /** Listener for click events */
