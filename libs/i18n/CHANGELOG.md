@@ -1,3 +1,7 @@
+## 0.65.1-rc.7 (2026-10-16)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
 ## 0.65.1-rc.6 (2026-10-16)
 
 This was a version bump only for i18n to align it with other projects, there were no code changes.

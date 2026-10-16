@@ -1,3 +1,13 @@
+## 0.65.1-rc.7 (2026-10-16)
+
+### 🩹 Fixes
+
+- **core:** use public i18n import path in calendar type declarations ([#14603](https://github.com/SAP/fundamental-ngx/pull/14603))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
 ## 0.65.1-rc.6 (2026-10-16)
 
 This was a version bump only for core to align it with other projects, there were no code changes.
