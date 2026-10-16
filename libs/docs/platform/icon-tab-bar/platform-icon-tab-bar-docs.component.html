@@ -1,25 +1,9 @@
-<fd-docs-section-title id="stack-content-active" componentName="icon-tab-bar">
-    stackContent — scroll jump bug repro (#14593)
-</fd-docs-section-title>
+<fd-docs-section-title id="stack-content" componentName="icon-tab-bar"> Stacked content </fd-docs-section-title>
 <description>
     <p>
         When <code class="code-snippet">[stackContent]="true"</code> is set, all tab panels are rendered one below the
-        other and a scroll-spy highlights the matching tab header as the user scrolls.
-    </p>
-    <p>
-        <strong>Bug:</strong> every time the scroll-spy crosses a tab boundary it also triggers
-        <code class="code-snippet">_scrollToPanel</code>, which jumps the view back to the top of the newly active tab.
-        Scroll slowly past the end of the <em>Home</em> rows — when the <em>Account</em> header activates you will see
-        the view snap backward instead of staying at your scroll position.
-    </p>
-    <p>
-        The repro example sets <code class="code-snippet">position: relative</code> on the content container to make the
-        jump visible. Without it, the docs page wrapper causes
-        <code class="code-snippet">panelEl.offsetTop − containerEl.offsetTop</code> (the
-        <code class="code-snippet">_scrollToPanel</code> target) to equal the scroll-spy threshold, so the jump is 0 px.
-        With <code class="code-snippet">position: relative</code> the container becomes its own
-        <code class="code-snippet">offsetParent</code>, and the two values diverge by the container's own
-        <code class="code-snippet">offsetTop</code> (~108 px), producing a clearly visible backward snap.
+        other instead of swapping. Use <code class="code-snippet">[active]="true"</code> on a tab to make it the
+        initially selected tab — the container will scroll to that panel on load.
     </p>
 </description>
 <component-example>

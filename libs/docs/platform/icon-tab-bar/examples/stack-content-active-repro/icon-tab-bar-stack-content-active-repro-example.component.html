@@ -1,35 +1,22 @@
-<!--
-    BUG REPRO — issue #14593
-    The second tab ("Account") is pre-selected via [active]="true".
-    Steps to see the scroll jump (before the fix):
-    1. Scroll slowly downward past "Home — row 15".
-    2. As the "Account" tab header highlights, the view snaps BACKWARD ~108 px —
-       you can see "Home — row 12" reappear at the top even though Account is active.
-    Root cause: scroll-spy fires → highlightActiveTab → _selectedUid change →
-      header ngOnChanges → _selectItem → _scrollToPanel → backward smooth scroll.
-    CSS note: position:relative on the content container forces it to become the
-      offsetParent for panels, making panelEl.offsetTop - containerEl.offsetTop
-      differ from the spy threshold by ~108 px, which makes the jump visible.
--->
 <fdp-icon-tab-bar layoutMode="row" maxContentHeight="220px" iconTabType="icon" [stackContent]="true">
     <fdp-icon-tab-bar-tab label="Home" color="critical" icon="home">
-        <div class="scroll-repro-panel">
+        <div class="stack-content-panel">
             @for (i of rows; track i) {
-                <p class="scroll-repro-row">Home — row {{ i }}</p>
+                <p class="stack-content-row">Home — row {{ i }}</p>
             }
         </div>
     </fdp-icon-tab-bar-tab>
     <fdp-icon-tab-bar-tab label="Account" color="positive" icon="account" [active]="true">
-        <div class="scroll-repro-panel">
+        <div class="stack-content-panel">
             @for (i of rows; track i) {
-                <p class="scroll-repro-row">Account — row {{ i }}</p>
+                <p class="stack-content-row">Account — row {{ i }}</p>
             }
         </div>
     </fdp-icon-tab-bar-tab>
     <fdp-icon-tab-bar-tab label="Media" color="informative" icon="picture">
-        <div class="scroll-repro-panel">
+        <div class="stack-content-panel">
             @for (i of rows; track i) {
-                <p class="scroll-repro-row">Media — row {{ i }}</p>
+                <p class="stack-content-row">Media — row {{ i }}</p>
             }
         </div>
     </fdp-icon-tab-bar-tab>
