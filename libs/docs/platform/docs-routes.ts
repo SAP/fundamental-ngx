@@ -179,6 +179,10 @@ const componentRoutes = [
         loadChildren: () => import('@fundamental-ngx/docs/platform/message-popover').then(configureLibRoutes)
     },
     {
+        path: 'message-view',
+        loadChildren: () => import('@fundamental-ngx/docs/platform/message-view').then(configureLibRoutes)
+    },
+    {
         path: 'variant-management',
         loadChildren: () => import('@fundamental-ngx/docs/platform/variant-management').then(configureLibRoutes)
     },

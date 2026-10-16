@@ -95,6 +95,9 @@ export default {
         displayTypeDateLabel: 'Дата',
         displayTypeTimeLabel: 'Время'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: 'Навигационная цепочка',
         collapseLabel: 'Свернуть заголовок',
@@ -437,6 +440,17 @@ export default {
             required: 'Это поле является обязательным',
             requiredTrue: 'Это поле является обязательным'
         }
+    },
+    platformMessageView: {
+        additionalInformation: 'Additional information available via reading keys',
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        errorButton: 'Error',
+        headerRoleDescription: 'Interactive Header',
+        informationButton: 'Information',
+        successButton: 'Success',
+        title: 'Messages',
+        warningButton: 'Warning'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Опции выбора',

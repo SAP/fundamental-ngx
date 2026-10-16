@@ -95,6 +95,9 @@ export default {
         displayTypeDateLabel: '[[[Ďąţē]]]',
         displayTypeTimeLabel: '[[[Ţįɱē]]]'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: '[[[Ɓŗēąƌċŗűɱƃş∙∙∙∙∙∙∙∙]]]',
         collapseLabel: '[[[Ĉŏĺĺąρşē Ĥēąƌēŗ∙∙∙∙]]]',
@@ -438,6 +441,17 @@ export default {
             required: '[[[Ţĥē ƒįēĺƌ įş ɱąŋƌąţŏŗŷ∙∙∙∙∙]]]',
             requiredTrue: '[[[Ţĥē ƒįēĺƌ įş ɱąŋƌąţŏŗŷ∙∙∙∙∙]]]'
         }
+    },
+    platformMessageView: {
+        additionalInformation: 'Additional information available via reading keys',
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        errorButton: 'Error',
+        headerRoleDescription: 'Interactive Header',
+        informationButton: 'Information',
+        successButton: 'Success',
+        title: 'Messages',
+        warningButton: 'Warning'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: '[[[Ŝēĺēċţ Ŏρţįŏŋş∙∙∙∙∙]]]',

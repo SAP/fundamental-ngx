@@ -1,3 +1,32 @@
+## 0.65.1-rc.5 (2026-10-15)
+
+This was a version bump only for cdk to align it with other projects, there were no code changes.
+
+## 0.65.1-rc.4 (2026-10-14)
+
+### 🚀 Features
+
+- **platform:** add fdp-message-view component, refactor fdp-message-popover ([#14527](https://github.com/SAP/fundamental-ngx/pull/14527))
+
+### ❤️ Thank You
+
+- fundamental-bot
+- Mike O'Donnell @mikerodonnell89
+
+## 0.65.1-rc.3 (2026-10-14)
+
+This was a version bump only for cdk to align it with other projects, there were no code changes.
+
+## 0.65.1-rc.2 (2026-10-13)
+
+### 🩹 Fixes
+
+- **core, cdk:** prevent XSS in upload-collection-item and SafePipe url binding ([#14596](https://github.com/SAP/fundamental-ngx/pull/14596))
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.65.1-rc.1 (2026-10-07)
 
 ### 🚀 Features

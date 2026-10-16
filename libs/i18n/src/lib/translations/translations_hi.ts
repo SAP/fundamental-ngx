@@ -94,6 +94,9 @@ export default {
         displayTypeDateLabel: 'दिनांक',
         displayTypeTimeLabel: 'समय'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: 'Breadcrumbs',
         collapseLabel: 'हेडर संकुचित करें',
@@ -436,6 +439,17 @@ export default {
             required: 'The field is mandatory',
             requiredTrue: 'The field is mandatory'
         }
+    },
+    platformMessageView: {
+        additionalInformation: 'Additional information available via reading keys',
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        errorButton: 'Error',
+        headerRoleDescription: 'Interactive Header',
+        informationButton: 'Information',
+        successButton: 'Success',
+        title: 'Messages',
+        warningButton: 'Warning'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'विकल्प चुनें',

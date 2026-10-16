@@ -95,6 +95,9 @@ export default {
         displayTypeDateLabel: 'Fecha',
         displayTypeTimeLabel: 'Hora'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: 'Rutas de navegación',
         collapseLabel: 'Contraer cabecera',
@@ -438,6 +441,17 @@ export default {
             required: 'El campo es obligatorio',
             requiredTrue: 'El campo es obligatorio'
         }
+    },
+    platformMessageView: {
+        additionalInformation: 'Additional information available via reading keys',
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        errorButton: 'Error',
+        headerRoleDescription: 'Interactive Header',
+        informationButton: 'Information',
+        successButton: 'Success',
+        title: 'Messages',
+        warningButton: 'Warning'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Seleccionar opciones',

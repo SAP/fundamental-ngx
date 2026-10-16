@@ -23,8 +23,8 @@
                         @if (currentScreen === 'list') {
                             <fd-segmented-button
                                 [ngModelOptions]="{ standalone: true }"
-                                [ngModel]="_currentErrorType$()"
-                                (ngModelChange)="_currentErrorType$.set($event)"
+                                [ngModel]="_currentErrorType()"
+                                (ngModelChange)="_currentErrorType.set($event)"
                             >
                                 <button
                                     fd-button
@@ -50,7 +50,7 @@
                                 fdType="transparent"
                                 glyph="navigation-left-arrow"
                                 [title]="('platformMessagePopover.backButton' | fdTranslate)()"
-                                (click)="_showList()"
+                                (click)="showList()"
                             ></button>
                         }
                     </div>
@@ -59,14 +59,14 @@
                     </div>
                 </div>
             </div>
-            <fdp-message-view
+            <fdp-messages-list
                 [currentScreen]="currentScreen"
                 [filteredErrors]="_filteredErrors$()"
                 [currentEntry]="currentEntry"
-                (openDetails)="_showDetails($event)"
+                (openDetails)="showDetails($event)"
                 (closePopover)="_closePopover($event)"
                 (focusItem)="focusItem.emit($event)"
-            ></fdp-message-view>
+            ></fdp-messages-list>
         </div>
     </fd-popover>
 }

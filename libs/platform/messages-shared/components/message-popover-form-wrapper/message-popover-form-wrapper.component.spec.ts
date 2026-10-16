@@ -9,7 +9,7 @@ import {
     ReactiveFormsModule,
     Validators
 } from '@angular/forms';
-import { PlatformMessagePopoverModule } from '../../platform-message-popover.module';
+import { PlatformMessagesSharedModule } from '../../platform-messages-shared.module';
 
 import { MessagePopoverFormWrapperComponent } from './message-popover-form-wrapper.component';
 
@@ -27,8 +27,7 @@ import { MessagePopoverFormWrapperComponent } from './message-popover-form-wrapp
             <input fdpMessagePopoverFormItem="email" formControlName="email" />
         </form>
     </fdp-message-popover-form-wrapper>`,
-    standalone: true,
-    imports: [FormsModule, ReactiveFormsModule, PlatformMessagePopoverModule]
+    imports: [FormsModule, ReactiveFormsModule, PlatformMessagesSharedModule]
 })
 export class ReactiveFormTestComponent {
     @ViewChild('form', { read: FormGroupDirective })
@@ -122,8 +121,7 @@ describe('MessagePopoverFormWrapperComponent reactive form', () => {
             <input fdpMessagePopoverFormItem="email" type="email" [(ngModel)]="formGroup.email" email name="email" />
         </form>
     </fdp-message-popover-form-wrapper>`,
-    standalone: true,
-    imports: [FormsModule, ReactiveFormsModule, PlatformMessagePopoverModule]
+    imports: [FormsModule, ReactiveFormsModule, PlatformMessagesSharedModule]
 })
 export class TemplateFormTestComponent {
     @ViewChild(NgForm)

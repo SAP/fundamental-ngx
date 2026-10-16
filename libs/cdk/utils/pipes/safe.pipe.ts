@@ -21,8 +21,12 @@ export class SafePipe implements PipeTransform {
             case 'script':
                 return this.sanitizer.bypassSecurityTrustScript(value);
 
-            case 'url':
+            case 'url': {
+                if (!this._isSafeUrl(value)) {
+                    return this.sanitizer.bypassSecurityTrustUrl('');
+                }
                 return this.sanitizer.bypassSecurityTrustUrl(value);
+            }
 
             case 'resourceUrl':
                 return this.sanitizer.bypassSecurityTrustResourceUrl(value);
@@ -30,5 +34,29 @@ export class SafePipe implements PipeTransform {
             default:
                 throw new Error(`Invalid safe type specified: ${type}`);
         }
+    }
+
+    /**
+     * @hidden
+     *
+     * Browsers strip ASCII tab/newline characters from the whole URL before parsing, so a
+     * value like `java\tscript:...` must not evade scheme detection. Any URL containing C0
+     * control characters is rejected outright — legitimate URLs never contain them.
+     */
+    private _isSafeUrl(value: unknown): boolean {
+        if (value == null) {
+            return false;
+        }
+        const str = String(value).trim();
+        if (str === '') {
+            return true;
+        }
+        if (Array.from(str).some((ch) => ch.charCodeAt(0) < 32 || ch.charCodeAt(0) === 127)) {
+            return false;
+        }
+        if (!/^[a-z][a-z0-9+.-]*:/i.test(str)) {
+            return true;
+        }
+        return /^(https?|mailto|tel):/i.test(str);
     }
 }

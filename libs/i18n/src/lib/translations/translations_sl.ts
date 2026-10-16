@@ -95,6 +95,9 @@ export default {
         displayTypeDateLabel: 'Datum',
         displayTypeTimeLabel: 'Čas'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: 'Drobtinice',
         collapseLabel: 'Skrčitev glave',
@@ -437,6 +440,17 @@ export default {
             required: 'Polje je obvezno',
             requiredTrue: 'Polje je obvezno'
         }
+    },
+    platformMessageView: {
+        additionalInformation: 'Additional information available via reading keys',
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        errorButton: 'Error',
+        headerRoleDescription: 'Interactive Header',
+        informationButton: 'Information',
+        successButton: 'Success',
+        title: 'Messages',
+        warningButton: 'Warning'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Izbira možnosti',
