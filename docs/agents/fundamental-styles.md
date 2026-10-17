@@ -17,7 +17,7 @@
 
 ## Architecture
 
-[fundamental-styles](https://github.com/SAP/fundamental-styles) is a standalone, framework-agnostic CSS library implementing the SAP Fiori design system. Each Angular component in Fundamental NGX wraps one or more fundamental-styles CSS components.
+[fundamental-styles](https://github.com/SAP/fundamental-styles) is a standalone, framework-agnostic CSS library implementing the SAP design system. Each Angular component in Fundamental NGX wraps one or more fundamental-styles CSS components.
 
 The relationship:
 

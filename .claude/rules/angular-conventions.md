@@ -36,7 +36,6 @@ alwaysApply: false
     selector: 'fd-example',
     templateUrl: './example.component.html',
     styleUrl: './example.component.scss',
-    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [OtherComponent],
     host: {
         '[class]': '_cssClass()',
@@ -113,7 +112,7 @@ readonly editableValue = linkedSignal(() => this.initialValue());
 
 The codebase is migrating toward zoneless change detection. For new code:
 
-- Use `OnPush` change detection strategy.
+- Do not add an explicit `changeDetection` setting; OnPush is the Angular 22 default. Legacy explicit uses are allowed and are not a migration target.
 - Rely on signals for state -- they notify the framework automatically.
 - Avoid `ChangeDetectorRef.markForCheck()` when using signals.
 

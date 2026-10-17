@@ -181,15 +181,29 @@ See the [documentation site](https://sap.github.io/fundamental-ngx) for componen
 
 ## AI Integration (MCP Server)
 
-[`@fundamental-ngx/mcp`](libs/mcp-server) is an MCP ([Model Context Protocol](https://modelcontextprotocol.io)) server that gives AI coding assistants structured access to the entire component catalog — APIs, examples, design tokens, accessibility guidance, and migration help from actual component metadata.
+[`@fundamental-ngx/mcp`](libs/mcp-server) is an MCP ([Model Context Protocol](https://modelcontextprotocol.io)) server that gives AI coding assistants structured access to the component catalog: component discovery, API metadata, examples, comparisons, usage guides, and project setup guides. For SAP design tokens, use [`@fundamental-styles/mcp`](https://www.npmjs.com/package/@fundamental-styles/mcp).
 
 ### Quick Start
 
-**VS Code / Cursor** — create or edit `.vscode/mcp.json`:
+**VS Code** — create or edit `.vscode/mcp.json`:
 
 ```json
 {
     "servers": {
+        "fundamental-ngx": {
+            "command": "npx",
+            "args": ["-y", "@fundamental-ngx/mcp"],
+            "type": "stdio"
+        }
+    }
+}
+```
+
+**Cursor** — create or edit `.cursor/mcp.json`:
+
+```json
+{
+    "mcpServers": {
         "fundamental-ngx": {
             "command": "npx",
             "args": ["-y", "@fundamental-ngx/mcp"]
