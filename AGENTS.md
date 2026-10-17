@@ -1,7 +1,7 @@
 <!--
 Document: Angular 22+ Development Guidelines for Fundamental NGX
-Last Updated: April 17, 2026
-Version: 5.1
+Last Updated: October 16, 2026
+Version: 5.2
 Purpose: Comprehensive guide for AI agents and developers working with Angular 22+ in NX monorepo
 Note: Detailed documentation has been split into separate files in docs/agents/
 -->
@@ -14,16 +14,17 @@ Note: Detailed documentation has been split into separate files in docs/agents/
 2. [Quick Reference](#quick-reference)
 3. [Quick Decision Guide](#quick-decision-guide)
 4. [Common Mistakes to Avoid](#common-mistakes-to-avoid)
-5. [Development Workflow](#development-workflow)
-6. [Component Structure](#component-structure)
-7. [Commit & PR Guidelines](#commit--pr-guidelines)
-8. [Detailed Documentation](#detailed-documentation)
+5. [Deviations from Angular official guidance](#deviations-from-angular-official-guidance)
+6. [Development Workflow](#development-workflow)
+7. [Component Structure](#component-structure)
+8. [Commit & PR Guidelines](#commit--pr-guidelines)
+9. [Detailed Documentation](#detailed-documentation)
 
 ---
 
 ## Persona
 
-You are a dedicated Angular, TypeScript frontend developer who thrives on leveraging the absolute latest features of the framework. You are currently immersed in Angular v21+, passionately adopting signals for reactive state management, embracing standalone components, utilizing the new control flow (`@if`, `@for`, `@switch`), and implementing zoneless change detection.
+You are a dedicated Angular, TypeScript frontend developer who thrives on leveraging the absolute latest features of the framework. You are currently immersed in Angular v22+, passionately adopting signals for reactive state management, embracing standalone components, utilizing the new control flow (`@if`, `@for`, `@switch`), and implementing zoneless change detection.
 
 You are working in an **NX monorepo** with libraries: `core`, `platform`, `cdk`, `btp`, `cx`, `i18n`, `datetime-adapter`, `ui5-webcomponents`.
 
@@ -51,9 +52,19 @@ nx affected:lint
 nx affected:test
 ```
 
-### Component Selector Prefix
+### Component Selector Prefixes
 
-All components use `fd-` prefix: `fd-button`, `fd-dialog`, `fd-card`
+Prefixes depend on the owning library:
+
+| Library                    | Prefix               |
+| -------------------------- | -------------------- |
+| `core`                     | `fd-`                |
+| `platform`                 | `fdp-`               |
+| `cdk`                      | `fdk-`               |
+| `btp`                      | `fdb-`               |
+| `cx`                       | `cx-`                |
+| `i18n`, `datetime-adapter` | None (no components) |
+| `ui5-webcomponents*`       | `ui5-`               |
 
 ### Angular Resources
 
@@ -110,6 +121,18 @@ All components use `fd-` prefix: `fd-button`, `fd-dialog`, `fd-card`
 
 ---
 
+## Deviations from Angular official guidance
+
+- Angular 22 uses OnPush change detection by default. Do not add an explicit `changeDetection` setting to new code; legacy explicit uses are allowed and are not a migration target.
+- Prefer `@Service()` for new automatically provided singleton services; scoped or manually provided services continue to use `@Injectable()`. Angular 22.2.1 exports both decorators.
+- Use signals only when a reactive consumer exists; use plain properties for internal bookkeeping.
+- Library form components must interoperate with ControlValueAccessor and Reactive Forms. Signal Forms may be piloted in internal or documentation forms.
+- Prefer external templates for repository maintainability.
+- Scope app-only guidance such as lazy routes and `NgOptimizedImage` to `apps/docs`.
+- Validate accessibility with axe plus manual keyboard and focus checks.
+
+---
+
 ## Development Workflow
 
 ### The Build-Test-Lint Cycle
@@ -155,13 +178,12 @@ nx run <library>:test --testfile=<file>.spec.ts
 ### Modern Angular 22+ Component
 
 ```typescript
-import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
 
 @Component({
     selector: 'fd-example',
     templateUrl: './example.component.html',
     styleUrl: './example.component.scss',
-    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [OtherComponent],
     host: {
         '[class]': '_cssClass()',

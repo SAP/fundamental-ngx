@@ -7,13 +7,15 @@ MCP (Model Context Protocol) server that exposes the entire Fundamental NGX comp
 AI coding assistants (Claude Code, Cursor, VS Code Copilot, Windsurf, etc.) can connect to this MCP server and get structured access to:
 
 - **1000+ components** across 8 libraries (core, platform, btp, cx, cdk, ui5-webcomponents, ui5-webcomponents-fiori, ui5-webcomponents-ai)
-- **Full API metadata** — inputs, outputs, slots, methods, enum values, CSS properties, and keyboard interactions
+- **Component API metadata** — inputs, outputs, slots, methods, enum values, and, where available, CSS and keyboard-handling metadata
 - **Component comparison** — side-by-side comparison of alternative components
 - **Usage guides** — decision trees and composition patterns for complex components (dialog, table, card, etc.)
 - **Selector classification** — whether a component is an element, attribute directive, or both, with correct template usage
-- **Companion skills** — installable Claude Code skills for project setup, form generation, table scaffolding, and page layout (`/setup-project`, `/build-form`, `/build-table`, `/build-page-layout`, and more)
+- **Project setup guides** — theming, styles, fonts, and known setup issues for core and UI5 projects
 
 This eliminates hallucinated APIs and outdated documentation — the assistant works from the actual component metadata.
+
+For SAP design-token discovery, use [`@fundamental-styles/mcp`](https://www.npmjs.com/package/@fundamental-styles/mcp).
 
 ## Quick Start
 
@@ -25,11 +27,13 @@ This eliminates hallucinated APIs and outdated documentation — the assistant w
 # Install latest version
 claude mcp add fundamental-ngx -- npx -y @fundamental-ngx/mcp
 
-# Or install a specific version
-claude mcp add fundamental-ngx -- npx -y @fundamental-ngx/mcp@0.62.4
+# Or install a specific version. Replace VERSION with a published package version before running this command.
+claude mcp add fundamental-ngx -- npx -y @fundamental-ngx/mcp@VERSION
 ```
 
 This command automatically adds the MCP server to your `.claude/mcp.json` configuration.
+
+- **Companion Agent Skills** are available separately from the Fundamental NGX repository via `npx skills add SAP/fundamental-ngx`; they are not bundled in this MCP npm package.
 
 **Option 2: Manual configuration**
 
@@ -90,7 +94,7 @@ npx @modelcontextprotocol/inspector npx -y @fundamental-ngx/mcp
 
 This opens a browser UI where you can:
 
-- Browse all 10 available tools
+- Browse all seven available tools
 - Send test requests with custom parameters
 - View formatted JSON responses
 - Debug tool behavior without an AI client
@@ -106,7 +110,8 @@ The server communicates over **stdio** using the MCP JSON-RPC protocol.
 | `get_component_api`      | Full API details for a specific component                        | `{ "name": "fd-button" }` or `{ "name": "ui5-table" }`        |
 | `get_component_examples` | Usage examples from the docs app                                 | `{ "name": "fd-dialog" }`                                     |
 | `compare_components`     | Side-by-side comparison of two components                        | `{ "component_a": "fd-button", "component_b": "ui5-button" }` |
-| `get_usage_guide`        | Decision tree and composition patterns for a component           | `{ "component": "dialog" }`                                   |
+| `get_usage_guide`        | Practical usage guidance for a component                         | `{ "name": "dialog" }`                                        |
+| `get_setup_guide`        | Project setup guidance for core and UI5 packages                 | `{ "packages": "core+ui5" }`                                  |
 
 ## Example Queries
 
@@ -123,23 +128,14 @@ The server communicates over **stdio** using the MCP JSON-RPC protocol.
 "Show me HTML examples for fd-dialog"
   → get_component_examples with name "fd-dialog"
 
-"I need to build a filterable data table with pagination"
-  → recommend_components with description "filterable data table with pagination"
-
-"What broke between 0.60.0 and 0.62.0?"
-  → get_migration_guide with from_version "0.60.0", to_version "0.62.0"
-
-"What SAP design tokens are available for background colors?"
-  → get_design_tokens with query "background color", category "color"
-
-"How do I handle keyboard navigation in fd-menu?"
-  → get_accessibility_guide with name "fd-menu"
-
 "What is the difference between fd-table and fdp-table?"
   → compare_components with component_a "fd-table", component_b "fdp-table"
 
 "Which dialog API should I use?"
-  → get_usage_guide with component "dialog"
+  → get_usage_guide with name "dialog"
+
+"How do I configure a core project with UI5 wrappers?"
+  → get_setup_guide with packages "core+ui5"
 ```
 
 ## Contributing

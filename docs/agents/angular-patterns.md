@@ -11,7 +11,7 @@
 - [Host Bindings](#host-bindings)
 - [Queries](#queries)
 - [Render Lifecycle Hooks](#render-lifecycle-hooks)
-- [Resource API (Experimental)](#resource-api-experimental)
+- [Resource API](#resource-api)
 - [Migrating from CssClassBuilder](#migrating-from-cssclassbuilder)
 - [Component Member Ordering](#component-member-ordering)
 
@@ -513,11 +513,9 @@ afterRender(
 
 ---
 
-## Resource API (Experimental)
+## Resource API
 
-> **Warning:** `resource()`, `rxResource()`, and `httpResource()` are in **developer preview** as of Angular 22. Known issues include: `value()` throws when in error state, `fixture.whenStable()` doesn't resolve with pending resources, errors don't trigger `ErrorHandler`, and the error signal is typed as `unknown`. Use with caution and expect API changes.
-
-Angular 22 introduced experimental `resource()` API for async data fetching:
+`resource()` is stable since Angular 22.0. Use it for signal-based asynchronous data fetching:
 
 ```typescript
 export class UserProfile {

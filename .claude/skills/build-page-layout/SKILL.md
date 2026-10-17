@@ -31,23 +31,24 @@ Default to `fd-dynamic-page` with header + one content area unless the user spec
 ### Standalone app setup (skip for NX projects)
 
 If `project type` is `standalone`, run these steps before generating the component:
+Replace `APP_NAME`, `VERSION`, `PEER_VERSION`, and `ANGULAR_MAJOR` with the desired app name and resolved published versions before running them.
 
 ```bash
 # 1. Create the app (--standalone is accepted but is the default since Angular 19, so it's a no-op)
-ng new <app-name> --routing=true --style=scss --skip-git --package-manager=npm
+ng new APP_NAME --routing=true --style=scss --skip-git --package-manager=npm
 
 # 2. Resolve the exact @fundamental-ngx version and fundamental-styles peer version first
 npm show @fundamental-ngx/core version          # → e.g. 0.62.2
 npm show @fundamental-ngx/core peerDependencies  # → check fundamental-styles exact pin
 
 # 3. Install @fundamental-ngx and peer deps (--legacy-peer-deps is required to resolve Angular CDK peer conflicts)
-cd <app-name>
+cd APP_NAME
 npm install --legacy-peer-deps \
-  @fundamental-ngx/core@<version> \
-  @fundamental-ngx/cdk@<version> \
-  @fundamental-ngx/i18n@<version> \
-  fundamental-styles@<peer-version> \
-  "@angular/cdk@^<angular-major>.0.0" \
+  @fundamental-ngx/core@VERSION \
+  @fundamental-ngx/cdk@VERSION \
+  @fundamental-ngx/i18n@VERSION \
+  fundamental-styles@PEER_VERSION \
+  "@angular/cdk@^ANGULAR_MAJOR.0.0" \
   @sap-theming/theming-base-content
 ```
 
@@ -139,7 +140,7 @@ Create three files in the target path (ask the user if not already known).
 ### TypeScript (`.component.ts`)
 
 ```typescript
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
 import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';  // include when header has breadcrumbs
@@ -151,7 +152,6 @@ import { ButtonModule } from '@fundamental-ngx/core/button';
 @Component({
     selector: 'app-[kebab-name]-page',
     templateUrl: './[kebab-name]-page.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
     // RouterLink required when breadcrumb anchors use routerLink
     // LinkModule required when breadcrumb anchors use fd-link directive
     // BarModule required only when footer is present
