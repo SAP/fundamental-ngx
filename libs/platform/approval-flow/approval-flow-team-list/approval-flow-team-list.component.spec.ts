@@ -4,7 +4,7 @@ import { PlatformApprovalFlowModule } from '../approval-flow.module';
 import { ApprovalTeam } from '../interfaces';
 import { ApprovalFlowTeamListComponent } from './approval-flow-team-list.component';
 
-fdescribe('ApprovalFlowTeamListComponent', () => {
+describe('ApprovalFlowTeamListComponent', () => {
     let component: ApprovalFlowTeamListComponent;
     let fixture: ComponentFixture<ApprovalFlowTeamListComponent>;
 
