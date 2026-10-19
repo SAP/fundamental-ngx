@@ -59,6 +59,10 @@ $block: fd-select;
         align-items: center;
         position: relative;
     }
+
+    .fd-list__item.fd-list__group-header {
+        border-bottom: var(--sapList_BorderWidth) solid var(--sapList_GroupHeaderBorderColor);
+    }
 }
 
 .fd-popover__body {
