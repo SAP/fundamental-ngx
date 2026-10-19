@@ -74,7 +74,7 @@
                 @for (token of _hiddenTokens; track token) {
                     <li fd-list-item class="fd-tokenizer__overflow-list-item">
                         <ng-container #viewContainer></ng-container>
-                        @if (!token.readOnly) {
+                        @if (!token.readOnly()) {
                             <span
                                 class="fd-token__close"
                                 role="button"
