@@ -9,7 +9,7 @@ allowed-tools: Read, Bash(node --version), Bash(npm *), Bash(npx *), Bash(yarn *
 
 # Setup Project: $ARGUMENTS
 
-If `$ARGUMENTS` is empty, ask: (1) project name, (2) preferred SAP Fiori theme (default: `horizon`).
+If `$ARGUMENTS` is empty, ask: (1) project name, (2) preferred SAP theme (default: `horizon`).
 
 ## Phase 1: Check Prerequisites
 
@@ -120,7 +120,7 @@ Generate a minimal smoke-test to confirm theming and components work.
 Create `src/app/hello/hello.component.ts`:
 
 ```typescript
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { MessageStripModule } from '@fundamental-ngx/core/message-strip';
 
@@ -136,7 +136,6 @@ import { MessageStripModule } from '@fundamental-ngx/core/message-strip';
             <fd-message-strip type="success" style="margin: 1rem"> Setup is working correctly! </fd-message-strip>
         }
     `,
-    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [ButtonModule, MessageStripModule]
 })
 export class HelloComponent {
@@ -171,7 +170,7 @@ ng serve
 
 Open http://localhost:4200 and confirm:
 
-- [ ] SAP Fiori typography is applied (correct font, not default browser sans-serif)
+- [ ] SAP typography is applied (correct font, not default browser sans-serif)
 - [ ] "Click me" renders as a styled SAP button (not a plain grey browser button)
 - [ ] Clicking it shows the success message strip with SAP green styling
 - [ ] No console errors about missing CSS variables or broken imports
@@ -199,7 +198,7 @@ If the buttons look unstyled:
 **Theme:** SAP Horizon (horizon)
 **Packages installed:** @fundamental-ngx/core, @fundamental-ngx/platform, fundamental-styles
 
-**Verification:** ✓ App served at http://localhost:4200 with SAP Fiori styling
+**Verification:** ✓ App served at http://localhost:4200 with SAP styling
 
 **Next steps:**
 - [ ] Run /scaffold form  — generate your first form

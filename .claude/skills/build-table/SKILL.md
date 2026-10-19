@@ -68,7 +68,7 @@ Create three files in the target path (ask the user if not already known).
 ### TypeScript (`.component.ts`)
 
 ```typescript
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import {
     TableComponent,
     TableColumnComponent,
@@ -93,7 +93,6 @@ export interface [Name]Row {
 @Component({
     selector: 'app-[kebab-name]-table',
     templateUrl: './[kebab-name]-table.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [TableComponent, TableColumnComponent, TableToolbarComponent, TableToolbarActionsComponent, TableViewSettingsDialogComponent,
               TableInitialStateDirective]
 })

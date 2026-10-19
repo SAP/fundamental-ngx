@@ -65,7 +65,7 @@ New: `host: { '[class.active]': '_isActive()' }` in the `@Component` decorator.
 
 - Missing `standalone: true` — omitting it is correct in Angular 19+, do NOT suggest adding it
 - `ngOnInit` / `ngAfterContentInit` / other lifecycle hooks — these are not stale
-- `ChangeDetectionStrategy.OnPush` — this is correct and encouraged
+- Legacy uses of `ChangeDetectionStrategy.OnPush` are allowed; do not add it to new Angular 22 code
 - `ViewEncapsulation.None` — valid and not stale
 - `structuredClone`, `inject()`, `DestroyRef`, `takeUntilDestroyed()` — current patterns
 - RxJS Observables used for async data (HTTP, streams from services) — only flag BehaviorSubject used as local state
