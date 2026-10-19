@@ -8,6 +8,7 @@ import {
 import { FdDnDEvent } from './directives/dnd/icon-bar-dnd-container.directive';
 import { IconBarDndItemDirective } from './directives/dnd/icon-bar-dnd-item.directive';
 import { IconTabBarComponent } from './icon-tab-bar.component';
+import { IconTabBarItem } from './interfaces/icon-tab-bar-item.interface';
 import { TabConfig } from './interfaces/tab-config.interface';
 import { generateTestConfig } from './tests-helper';
 import { IconTabBarSize, TabType } from './types';
@@ -682,5 +683,64 @@ describe('IconTabBarComponent — reorder panels match tabs (BLOCKER 2 — #1450
         // All uIds still unique
         const uIds = after.map((t) => t.uId);
         expect(new Set(uIds).size).toBe(uIds.length);
+    });
+});
+
+@Component({
+    template: `
+        <fdp-icon-tab-bar [stackContent]="true" [tabsConfig]="tabs" (iconTabSelected)="onSelected($event)">
+        </fdp-icon-tab-bar>
+    `,
+    imports: [IconTabBarComponent]
+})
+class ScrollSpyEmitHostComponent {
+    @ViewChild(IconTabBarComponent) tabBar!: IconTabBarComponent;
+    tabs: TabConfig[] = [
+        { id: 'alpha', label: 'Alpha' },
+        { id: 'beta', label: 'Beta' },
+        { id: 'gamma', label: 'Gamma' }
+    ];
+    selectedItems: IconTabBarItem[] = [];
+
+    onSelected(item: IconTabBarItem): void {
+        this.selectedItems.push(item);
+    }
+}
+
+describe('IconTabBarComponent — scroll-spy emits (iconTabSelected) without re-scrolling (#14593)', () => {
+    let fixture: ComponentFixture<ScrollSpyEmitHostComponent>;
+    let component: ScrollSpyEmitHostComponent;
+
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            imports: [ScrollSpyEmitHostComponent]
+        }).compileComponents();
+        fixture = TestBed.createComponent(ScrollSpyEmitHostComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+        await fixture.whenStable();
+        fixture.detectChanges();
+    });
+
+    it('notifies consumers of the active-tab change on a boundary crossing, but does not scroll back', async () => {
+        const tabBar = component.tabBar;
+        // _scrollToPanel is the backward-jump mechanism; it must NOT run for a scroll-driven change.
+        const scrollSpy = jest.spyOn(tabBar as any, '_scrollToPanel');
+        // Clear any emit that happened during initial render so we measure only the boundary crossing.
+        component.selectedItems = [];
+        // Scroll-spy guards itself after a programmatic scroll; reset it to simulate a fresh scroll event.
+        (tabBar as any)._disableScrollSpy = false;
+
+        // Scroll-spy reports that the user scrolled into the "gamma" panel.
+        tabBar.highlightActiveTab('gamma');
+        fixture.detectChanges();
+        await fixture.whenStable();
+        fixture.detectChanges();
+
+        // The public event fires for the newly active tab (the header follows the scroll)...
+        expect(component.selectedItems.length).toBe(1);
+        expect(component.selectedItems[0].id).toBe('gamma');
+        // ...and no backward scroll jump is triggered.
+        expect(scrollSpy).not.toHaveBeenCalled();
     });
 });

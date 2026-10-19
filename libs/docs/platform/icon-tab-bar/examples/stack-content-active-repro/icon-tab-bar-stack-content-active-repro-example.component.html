@@ -1,23 +1,16 @@
-<fdp-icon-tab-bar layoutMode="row" maxContentHeight="220px" iconTabType="icon" [stackContent]="true">
-    <fdp-icon-tab-bar-tab label="Home" color="critical" icon="home">
-        <div class="stack-content-panel">
-            @for (i of rows; track i) {
-                <p class="stack-content-row">Home — row {{ i }}</p>
-            }
-        </div>
-    </fdp-icon-tab-bar-tab>
-    <fdp-icon-tab-bar-tab label="Account" color="positive" icon="account" [active]="true">
-        <div class="stack-content-panel">
-            @for (i of rows; track i) {
-                <p class="stack-content-row">Account — row {{ i }}</p>
-            }
-        </div>
-    </fdp-icon-tab-bar-tab>
-    <fdp-icon-tab-bar-tab label="Media" color="informative" icon="picture">
-        <div class="stack-content-panel">
-            @for (i of rows; track i) {
-                <p class="stack-content-row">Media — row {{ i }}</p>
-            }
-        </div>
-    </fdp-icon-tab-bar-tab>
+<fdp-icon-tab-bar
+    iconTabType="process"
+    maxContentHeight="220px"
+    [stackContent]="true"
+    (iconTabSelected)="setLastSelected($event)"
+>
+    @for (step of steps; track step.id) {
+        <fdp-icon-tab-bar-tab [label]="step.label" [active]="step.id === 'step-2'">
+            <div class="stack-content-panel">
+                @for (i of rows; track i) {
+                    <p class="stack-content-row">{{ step.label }} — row {{ i }}</p>
+                }
+            </div>
+        </fdp-icon-tab-bar-tab>
+    }
 </fdp-icon-tab-bar>

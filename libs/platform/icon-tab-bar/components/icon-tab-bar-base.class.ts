@@ -327,6 +327,25 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
 
     /**
      * @hidden
+     * Non-emitting synchronization hook, invoked when the parent drives the [selectedUid]
+     * input (e.g. scroll-spy crossing a tab boundary in stackContent mode, #14593).
+     *
+     * Unlike `_selectExtraItem`, this must NOT call `_selectItem` — doing so would emit
+     * `(selected)` back to the parent, which would re-run `_scrollToPanel` and produce an
+     * unwanted backward scroll jump on every boundary crossing. It applies only the visual
+     * side-effects of selection. Subclasses override this to keep their selection-derived
+     * state (e.g. process type's `_currentStepIndex`) in sync without re-emitting.
+     */
+    protected _syncSelectedItem(item: IconTabBarItem): void {
+        if (item.color) {
+            item.cssClasses = [`fd-icon-tab-bar__item--${item.color}`];
+        }
+        item.badge = false;
+        this._triggerRecalculationVisibleItems();
+    }
+
+    /**
+     * @hidden
      * Resets and hides extra tabs.
      * @param tabs - The list of tab items.
      * @param extraTabs - The list of extra tab items.
@@ -338,13 +357,10 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
 
     /**
      * @hidden
-     * Handles changes to the selected UID.
-     *
-     * This method is called when the [selectedUid] input changes (i.e. the parent drove
-     * the change). We must NOT call _selectItem here because that would emit (selected)
-     * back to the parent, which would then call _selectItem → _scrollToPanel, producing
-     * an unwanted scroll jump on every scroll-spy tab boundary crossing (#14593).
-     * Instead we apply only the visual side-effects that _selectExtraItem normally performs.
+     * Handles changes to the selected UID driven by the parent (i.e. the [selectedUid]
+     * input changed). Delegates to the non-emitting `_syncSelectedItem` hook so that
+     * process type can keep `_currentStepIndex` in sync without re-emitting `(selected)`
+     * and causing a scroll jump (#14593).
      */
     private _handleSelectedUidChange(): void {
         const item =
@@ -353,11 +369,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
         if (!item) {
             return;
         }
-        if (item.color) {
-            item.cssClasses = [`fd-icon-tab-bar__item--${item.color}`];
-        }
-        item.badge = false;
-        this._triggerRecalculationVisibleItems();
+        this._syncSelectedItem(item);
     }
 
     /**

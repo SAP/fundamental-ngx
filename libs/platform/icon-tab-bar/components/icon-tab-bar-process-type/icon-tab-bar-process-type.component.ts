@@ -92,6 +92,43 @@ export class IconTabBarProcessTypeComponent extends ClosableIconTabBar {
      * @description select extra item inside popover
      */
     _selectExtraItem(selectedItem: IconTabBarItem): void {
+        this._selectItem(selectedItem);
+        this._applyStepOverflow(selectedItem);
+    }
+
+    /**
+     * @hidden
+     * @description recalculate _nextSteps and _prevSteps array if we have extra items
+     */
+    _recalculateVisibleItems(extraItems: number): void {
+        const amountOfPrevSteps = this._currentStepIndex > extraItems ? extraItems : this._currentStepIndex;
+        this.recalculateItemsByPrevArr(extraItems, amountOfPrevSteps);
+        this._cd.markForCheck();
+    }
+
+    /**
+     * @hidden
+     * Non-emitting synchronization hook used when the parent drives [selectedUid]
+     * (e.g. scroll-spy in stackContent mode, #14593). Keeps `_currentStepIndex` and the
+     * overflow arrays in sync with the active step WITHOUT calling `_selectItem`, so no
+     * `(selected)` is re-emitted and no backward scroll jump occurs.
+     */
+    protected override _syncSelectedItem(selectedItem: IconTabBarItem): void {
+        if (selectedItem.color) {
+            selectedItem.cssClasses = [`fd-icon-tab-bar__item--${selectedItem.color}`];
+        }
+        selectedItem.badge = false;
+        this._applyStepOverflow(selectedItem);
+    }
+
+    /**
+     * @hidden
+     * Computes the prev/next overflow strategy for `selectedItem`, updates `_currentStepIndex`
+     * and the left/right button visibility, then schedules the matching overflow recalculation.
+     * Shared by `_selectExtraItem` (popover click) and `_syncSelectedItem` (parent-driven
+     * selection). It never emits, so callers that need `(selected)` emitted must do so themselves.
+     */
+    private _applyStepOverflow(selectedItem: IconTabBarItem): void {
         this._currentStepIndex = selectedItem.index;
         let amountOfPreviousSteps;
         let amountOfNextSteps;
@@ -110,7 +147,6 @@ export class IconTabBarProcessTypeComponent extends ClosableIconTabBar {
             isPreviousStepsStrategy = true;
             this._showLeftBtn = amountOfPreviousSteps > 0;
         }
-        this._selectItem(selectedItem);
 
         afterNextRender(
             () => {
@@ -126,17 +162,6 @@ export class IconTabBarProcessTypeComponent extends ClosableIconTabBar {
         );
     }
 
-    /**
-     * @hidden
-     * @param extraItems
-     * @description recalculate _nextSteps and _prevSteps array if we have extra items
-     */
-    _recalculateVisibleItems(extraItems: number): void {
-        const amountOfPrevSteps = this._currentStepIndex > extraItems ? extraItems : this._currentStepIndex;
-        this.recalculateItemsByPrevArr(extraItems, amountOfPrevSteps);
-        this._cd.markForCheck();
-    }
-
     /** @hidden */
     private _clearExtraList(): void {
         this._nextSteps = [];
@@ -145,6 +170,18 @@ export class IconTabBarProcessTypeComponent extends ClosableIconTabBar {
             item.hidden = false;
             item.cssClasses = item.cssClasses.filter((cssClass) => cssClass !== ICON_TAB_HIDDEN_CLASS_NAME);
         });
+    }
+
+    /**
+     * @hidden
+     * Snapshots a tab for the prev/next-steps popover. We cannot use `structuredClone` here:
+     * projected tabs (stackContent mode) carry non-cloneable fields such as `titleTemplate`
+     * / `renderer` (Angular TemplateRefs) and would throw DataCloneError. A shallow copy with
+     * a fresh `cssClasses` array is enough — the array is copied so the subsequent
+     * `ICON_TAB_HIDDEN_CLASS_NAME` push on the original does not leak into the popover copy.
+     */
+    private _cloneTab(tab: IconTabBarItem): IconTabBarItem {
+        return { ...tab, cssClasses: [...tab.cssClasses] };
     }
 
     /**
@@ -162,7 +199,7 @@ export class IconTabBarProcessTypeComponent extends ClosableIconTabBar {
         const tabs = [...this.tabs];
         const visibleAmountOfItems = tabs.length - extraItems;
         for (let i = tabs.length - amountOfNextSteps; i < tabs.length; i++) {
-            this._nextSteps.push(structuredClone(tabs[i]));
+            this._nextSteps.push(this._cloneTab(tabs[i]));
             tabs[i].hidden = true;
             tabs[i].cssClasses.push(ICON_TAB_HIDDEN_CLASS_NAME);
         }
@@ -178,7 +215,7 @@ export class IconTabBarProcessTypeComponent extends ClosableIconTabBar {
         let amountOfPrevSteps = extraItems - this._nextSteps.length;
         let nextIndex = this._firstVisibleTabIndex - 1;
         while (amountOfPrevSteps > 0) {
-            this._prevSteps.push(structuredClone(tabs[nextIndex]));
+            this._prevSteps.push(this._cloneTab(tabs[nextIndex]));
             tabs[nextIndex].hidden = true;
             tabs[nextIndex].cssClasses.push(ICON_TAB_HIDDEN_CLASS_NAME);
 
@@ -209,7 +246,7 @@ export class IconTabBarProcessTypeComponent extends ClosableIconTabBar {
         const tabs = [...this.tabs];
         const visibleAmountOfItems = tabs.length - extraItems;
         for (let i = amountOfPreviousSteps - 1; i >= 0; i--) {
-            this._prevSteps.push(structuredClone(tabs[i]));
+            this._prevSteps.push(this._cloneTab(tabs[i]));
             tabs[i].hidden = true;
             tabs[i].cssClasses.push(ICON_TAB_HIDDEN_CLASS_NAME);
         }
@@ -226,7 +263,7 @@ export class IconTabBarProcessTypeComponent extends ClosableIconTabBar {
         let amountOfNextSteps = extraItems - this._prevSteps.length;
         let nextIndex = this._prevSteps.length ? this._prevSteps.length + visibleAmountOfItems : visibleAmountOfItems;
         while (amountOfNextSteps > 0) {
-            this._nextSteps.push(structuredClone(tabs[nextIndex]));
+            this._nextSteps.push(this._cloneTab(tabs[nextIndex]));
             tabs[nextIndex].hidden = true;
             tabs[nextIndex].cssClasses.push(ICON_TAB_HIDDEN_CLASS_NAME);
 
