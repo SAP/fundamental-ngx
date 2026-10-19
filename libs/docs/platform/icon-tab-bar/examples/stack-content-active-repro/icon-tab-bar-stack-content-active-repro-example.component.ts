@@ -12,7 +12,7 @@ import { FDP_ICON_TAB_BAR, IconTabBarItem } from '@fundamental-ngx/platform/icon
         .stack-content-row {
             margin: 0;
             padding: 0.35rem 0.5rem;
-            border-bottom: 1px solid #e0e0e0;
+            border-bottom: 1px solid var(--sapList_BorderColor);
         }
     `,
     templateUrl: './icon-tab-bar-stack-content-active-repro-example.component.html',

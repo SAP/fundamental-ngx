@@ -114,11 +114,8 @@ export class IconTabBarProcessTypeComponent extends ClosableIconTabBar {
      * `(selected)` is re-emitted and no backward scroll jump occurs.
      */
     protected override _syncSelectedItem(selectedItem: IconTabBarItem): void {
-        if (selectedItem.color) {
-            selectedItem.cssClasses = [`fd-icon-tab-bar__item--${selectedItem.color}`];
-        }
-        selectedItem.badge = false;
-        this._applyStepOverflow(selectedItem);
+        super._syncSelectedItem(selectedItem); // handles cssClasses + badge reset
+        this._applyStepOverflow(selectedItem); // process-specific: keeps _currentStepIndex in sync
     }
 
     /**

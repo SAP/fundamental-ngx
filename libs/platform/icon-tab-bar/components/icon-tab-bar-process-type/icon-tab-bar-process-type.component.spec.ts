@@ -268,6 +268,6 @@ describe('IconTabBarProcessTypeComponent — parent-driven selectedUid sync (#14
         fixture.detectChanges();
 
         // Overflow recalculation must have re-centered on the fresh step, so it is now visible.
-        expect(component.tabs[target.index].hidden).toBeFalsy();
+        expect(component.tabs[target.index].hidden).toBe(false);
     }));
 });

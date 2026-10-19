@@ -359,8 +359,9 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
      * @hidden
      * Handles changes to the selected UID driven by the parent (i.e. the [selectedUid]
      * input changed). Delegates to the non-emitting `_syncSelectedItem` hook so that
-     * process type can keep `_currentStepIndex` in sync without re-emitting `(selected)`
-     * and causing a scroll jump (#14593).
+     * process type can keep `_currentStepIndex` in sync without re-emitting `(selected)`.
+     * For ALL parent-driven [selectedUid] changes — not just scroll-spy crossings — no
+     * `(selected)` re-emit occurs, to avoid the scroll-jump loop (#14593).
      */
     private _handleSelectedUidChange(): void {
         const item =
