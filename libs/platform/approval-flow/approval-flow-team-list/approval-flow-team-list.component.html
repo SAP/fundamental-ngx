@@ -1,4 +1,5 @@
 <fdp-list [hasByLine]="true" fdCompact>
+    @if (teams.length > 0) {
     <fd-form-group>
         @for (team of teams; track _trackByFn(i, team); let i = $index) {
             <div fd-form-item>
@@ -22,4 +23,9 @@
             </div>
         }
     </fd-form-group>
+} @else {
+    <fdp-standard-list-item
+        [noDataText]="('platformApprovalFlow.noDataFound' | fdTranslate)()"
+    ></fdp-standard-list-item>
+}
 </fdp-list>
