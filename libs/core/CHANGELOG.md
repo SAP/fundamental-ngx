@@ -1,3 +1,13 @@
+## 0.65.1-rc.10 (2026-10-19)
+
+### 🩹 Fixes
+
+- **core:** call readOnly signal in tokenizer overflow template ([#14615](https://github.com/SAP/fundamental-ngx/pull/14615))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.65.1-rc.9 (2026-10-19)
 
 This was a version bump only for core to align it with other projects, there were no code changes.
