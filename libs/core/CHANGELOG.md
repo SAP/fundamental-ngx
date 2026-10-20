@@ -1,3 +1,13 @@
+## 0.66.0-rc.2 (2026-10-20)
+
+### 🩹 Fixes
+
+- **core:** update group header styling for Select component ([#14613](https://github.com/SAP/fundamental-ngx/pull/14613))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.66.0-rc.1 (2026-10-20)
 
 This was a version bump only for core to align it with other projects, there were no code changes.
