@@ -1,3 +1,7 @@
+## 0.66.0-rc.0 (2026-10-20)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
 ## 0.65.1-rc.10 (2026-10-19)
 
 This was a version bump only for cx to align it with other projects, there were no code changes.
