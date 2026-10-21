@@ -11,11 +11,14 @@ import {
 import { InputExampleComponent } from './examples/input-example.component';
 import { InputFormGroupExampleComponent } from './examples/input-form-group-example.component';
 import { InputInlineHelpExampleComponent } from './examples/input-inline-help-example.component';
+import { InputNumberExampleComponent } from './examples/input-number-example.component';
 import { InputStateExampleComponent } from './examples/input-state-example.component';
 
 const formGroupInputScss = 'input-form-group-example.component.scss';
 
 const formHtml = 'input-example.component.html';
+const formNumberHtml = 'input-number-example.component.html';
+const formNumberTs = 'input-number-example.component.ts';
 const formInlineHelpHtml = 'input-inline-help-example.component.html';
 const formStateHtml = 'input-state-example.component.html';
 const formGroupInputHtml = 'input-form-group-example.component.html';
@@ -28,6 +31,7 @@ const formGroupInputTs = 'input-form-group-example.component.ts';
         DocsSectionTitleComponent,
         ComponentExampleComponent,
         InputExampleComponent,
+        InputNumberExampleComponent,
         CodeExampleComponent,
         SeparatorComponent,
         DescriptionComponent,
@@ -44,6 +48,21 @@ export class InputDocsComponent {
             fileName: 'input-example'
         }
     ];
+
+    inputsNumberFormHtml: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(formNumberHtml),
+            fileName: 'input-number-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(formNumberTs),
+            fileName: 'input-number-example',
+            component: 'InputNumberExampleComponent'
+        }
+    ];
+
     inputsHelpFormHtml: ExampleFile[] = [
         {
             language: 'html',

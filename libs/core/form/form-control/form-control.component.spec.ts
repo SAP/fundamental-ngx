@@ -46,20 +46,14 @@ describe('FormControlComponent', () => {
         fixture.detectChanges();
         directive = debugElement.query(By.directive(FormControlComponent));
         componentInstance = directive.injector.get(FormControlComponent);
-
-        jest.spyOn(componentInstance, 'buildComponentCssClass');
     });
 
     it('should create', () => {
         expect(component).toBeTruthy();
-        componentInstance.ngOnInit();
-        expect(componentInstance.buildComponentCssClass).toHaveBeenCalled();
+        expect(componentInstance).toBeTruthy();
     });
 
     it('should add appropriate classes', () => {
-        componentInstance.ngOnChanges();
-        expect(componentInstance.buildComponentCssClass).toHaveBeenCalled();
-
         component.controls.forEach((control) => {
             const tagName = control.elementRef.nativeElement.tagName.toLowerCase();
             if (tagName === 'input') {

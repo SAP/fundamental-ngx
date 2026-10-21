@@ -1,0 +1,144 @@
+<h3>Value & Placeholder</h3>
+<p>
+    The numeric input always displays a value when not in active state. When no value is set, on focus out the field is
+    empty.
+</p>
+<div fd-form-item>
+    <label fd-form-label for="input-number-1" [colon]="true">Amount</label>
+    <input fd-form-control type="number" id="input-number-1" placeholder="Enter amount" [(ngModel)]="value1" />
+</div>
+<p><strong>Instructions:</strong> Click input → Delete → See placeholder → Press Enter → Input shows 0</p>
+
+<hr />
+
+<h3>Reset (Escape Key)</h3>
+<p>When the Escape key is pressed while the numeric input is active, the value before focus is restored.</p>
+<div fd-form-item>
+    <label fd-form-label for="input-number-2" [colon]="true">Quantity</label>
+    <input fd-form-control type="number" id="input-number-2" placeholder="Enter quantity" [(ngModel)]="value2" />
+</div>
+<p>
+    <strong>Instructions:</strong> Input shows 50 → Delete → Input shows placeholder → Press Escape → Input shows 50
+    again
+</p>
+
+<hr />
+
+<h3>Step Size</h3>
+<p>A step size defines the increment/decrement value when using arrow keys or scroll.</p>
+<div fd-form-item>
+    <label fd-form-label for="input-number-3" [colon]="true">Count (step = 1)</label>
+    <input fd-form-control type="number" id="input-number-3" placeholder="Count" [(ngModel)]="value3" [step]="1" />
+</div>
+<p><strong>Instructions:</strong> Use Arrow Up/Down keys or scroll to increment/decrement by 1</p>
+
+<div fd-form-item>
+    <label fd-form-label for="input-number-3b" [colon]="true">Count by 5 (step = 5)</label>
+    <input fd-form-control type="number" id="input-number-3b" placeholder="Count" [(ngModel)]="value3b" [step]="5" />
+</div>
+<p><strong>Instructions:</strong> Use Arrow Up/Down keys to increment/decrement by 5 (3 → 8 → 13)</p>
+
+<hr />
+
+<h3>Larger Step Size</h3>
+<p>Page Up/Down keys increase or decrease the value by (step × largeStep).</p>
+<div fd-form-item>
+    <label fd-form-label for="input-number-4" [colon]="true">Value (step = 1, largeStep = 10)</label>
+    <input fd-form-control type="number" id="input-number-4" placeholder="Value" [(ngModel)]="value4" />
+</div>
+<p>
+    <strong>Instructions:</strong> Arrow Up = +1, Arrow Down = -1, Page Up = +10, Page Down = -10. Start at 0 → Arrow Up
+    → 1 → Page Up → 11
+</p>
+
+<div fd-form-item>
+    <label fd-form-label for="input-number-4b" [colon]="true">Value (step = 5, largeStep = 3)</label>
+    <input fd-form-control type="number" id="input-number-4b" placeholder="Value" [(ngModel)]="value4b" />
+</div>
+<p><strong>Instructions:</strong> Step = 5, larger step = 3. Start at 0 → Arrow Up → 5 → Page Up → 20 (5 + 5×3)</p>
+
+<hr />
+
+<h3>Step Mode - Multiple</h3>
+<p>In 'multiple' mode, values round to the nearest multiple of the step size.</p>
+<div fd-form-item>
+    <label fd-form-label for="input-number-5" [colon]="true">Value (step = 5, mode = multiple)</label>
+    <input fd-form-control type="number" id="input-number-5" placeholder="Value" [(ngModel)]="value5" />
+</div>
+<p>
+    <strong>Instructions:</strong> Start at 1 → Arrow Up → 5 (rounds to nearest multiple of 5) → Arrow Up → 10 → Arrow
+    Down → 5
+</p>
+
+<div fd-form-item>
+    <label fd-form-label for="input-number-5b" [colon]="true">Value (step = 5, largeStep = 3, mode = multiple)</label>
+    <input fd-form-control type="number" id="input-number-5b" placeholder="Value" [(ngModel)]="value5b" [step]="5" />
+</div>
+<p><strong>Instructions:</strong> Start at 3 → Page Up → 15 (3 + 15 = 18, rounds to 15) → Page Down → 0</p>
+
+<hr />
+
+<h3>Min & Max Value</h3>
+<p>Minimum and maximum values enforce boundaries. Values outside the range show an error state.</p>
+<div fd-form-item>
+    <label fd-form-label for="input-number-6" [colon]="true">Rating (min = 1, max = 10)</label>
+    <input fd-form-control type="number" id="input-number-6" placeholder="Rating" [(ngModel)]="value6" />
+</div>
+<p><strong>Instructions:</strong> Try entering 0 or 11 to see error state. Arrow keys stop at boundaries.</p>
+
+<hr />
+
+<h3>Value Precision</h3>
+<p>The number of digits after the decimal point can be defined.</p>
+<div fd-form-item>
+    <label fd-form-label for="input-number-7" [colon]="true">Price (precision = 2)</label>
+    <input fd-form-control type="number" id="input-number-7" placeholder="0.00" [(ngModel)]="value7" />
+</div>
+<p><strong>Instructions:</strong> Try entering 3.14159 → blur → displays as 3.14 (2 decimals)</p>
+
+<hr />
+
+<h3>Validation Mode - Live</h3>
+<p>Live validation validates immediately on each keystroke.</p>
+<div fd-form-item>
+    <label fd-form-label for="input-number-8" [colon]="true">Percentage (0-100, live validation)</label>
+    <input fd-form-control type="number" id="input-number-8" placeholder="Percentage" [(ngModel)]="value8" />
+</div>
+<p><strong>Instructions:</strong> Type 150 → error appears immediately as you type</p>
+
+<hr />
+
+<h3>Value Alignment</h3>
+<p>The value can be aligned within the input field. End alignment (right in LTR) is the default.</p>
+<div fd-form-item>
+    <label fd-form-label for="input-number-9a" [colon]="true">Amount (start-aligned)</label>
+    <input fd-form-control type="number" id="input-number-9a" placeholder="0.00" [(ngModel)]="value9" />
+</div>
+<div fd-form-item>
+    <label fd-form-label for="input-number-9b" [colon]="true">Amount (center-aligned)</label>
+    <input fd-form-control type="number" id="input-number-9b" placeholder="0.00" [(ngModel)]="value9b" />
+</div>
+<div fd-form-item>
+    <label fd-form-label for="input-number-9c" [colon]="true">Amount (end-aligned, default)</label>
+    <input fd-form-control type="number" id="input-number-9c" placeholder="0.00" [(ngModel)]="value9c" />
+</div>
+
+<hr />
+
+<h3>Thousands Separator</h3>
+<p>Large values can be grouped using thousands separators to improve readability.</p>
+<div fd-form-item>
+    <label fd-form-label for="input-number-10" [colon]="true">Budget (with separator)</label>
+    <input fd-form-control type="number" id="input-number-10" placeholder="Amount" [(ngModel)]="value10" />
+</div>
+<p><strong>Instructions:</strong> Enter 1000000 → blur → displays as 1,000,000</p>
+
+<hr />
+
+<h3>Internationalization (i18n)</h3>
+<p>Decimal separator can be configured for different locales.</p>
+<div fd-form-item>
+    <label fd-form-label for="input-number-11" [colon]="true">European Format (comma decimal)</label>
+    <input fd-form-control type="number" id="input-number-11" placeholder="0,00" [(ngModel)]="value11" />
+</div>
+<p><strong>Instructions:</strong> Decimal separator is comma (e.g., 1.234,56 instead of 1,234.56)</p>
