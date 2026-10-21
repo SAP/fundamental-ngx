@@ -1,3 +1,13 @@
+## 0.66.0-rc.5 (2026-10-21)
+
+### 🩹 Fixes
+
+- **platform:** platform icon tab bar scrolling past a tab boundary jumps the view to the tab top ([#14595](https://github.com/SAP/fundamental-ngx/pull/14595), [#14593](https://github.com/SAP/fundamental-ngx/issues/14593))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
 ## 0.66.0-rc.4 (2026-10-21)
 
 This was a version bump only for platform to align it with other projects, there were no code changes.
