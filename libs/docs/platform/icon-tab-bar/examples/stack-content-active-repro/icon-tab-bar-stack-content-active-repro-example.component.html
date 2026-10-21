@@ -1,11 +1,16 @@
-<fdp-icon-tab-bar layoutMode="row" maxContentHeight="250px" iconTabType="icon" [stackContent]="true">
-    <fdp-icon-tab-bar-tab label="Home" color="critical" icon="home">
-        <div class="tab-container-example">Home content</div>
-    </fdp-icon-tab-bar-tab>
-    <fdp-icon-tab-bar-tab label="Account" color="positive" icon="account" [active]="true">
-        <div class="tab-container-example">Account content — this tab is active on load</div>
-    </fdp-icon-tab-bar-tab>
-    <fdp-icon-tab-bar-tab label="Media" color="informative" icon="picture">
-        <div class="tab-container-example">Media content</div>
-    </fdp-icon-tab-bar-tab>
+<fdp-icon-tab-bar
+    iconTabType="process"
+    maxContentHeight="220px"
+    [stackContent]="true"
+    (iconTabSelected)="setLastSelected($event)"
+>
+    @for (step of steps; track step.id) {
+        <fdp-icon-tab-bar-tab [label]="step.label" [active]="step.id === 'step-2'">
+            <div class="stack-content-panel">
+                @for (i of rows; track i) {
+                    <p class="stack-content-row">{{ step.label }} — row {{ i }}</p>
+                }
+            </div>
+        </fdp-icon-tab-bar-tab>
+    }
 </fdp-icon-tab-bar>

@@ -327,6 +327,25 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
 
     /**
      * @hidden
+     * Non-emitting synchronization hook, invoked when the parent drives the [selectedUid]
+     * input (e.g. scroll-spy crossing a tab boundary in stackContent mode, #14593).
+     *
+     * Unlike `_selectExtraItem`, this must NOT call `_selectItem` — doing so would emit
+     * `(selected)` back to the parent, which would re-run `_scrollToPanel` and produce an
+     * unwanted backward scroll jump on every boundary crossing. It applies only the visual
+     * side-effects of selection. Subclasses override this to keep their selection-derived
+     * state (e.g. process type's `_currentStepIndex`) in sync without re-emitting.
+     */
+    protected _syncSelectedItem(item: IconTabBarItem): void {
+        if (item.color) {
+            item.cssClasses = [`fd-icon-tab-bar__item--${item.color}`];
+        }
+        item.badge = false;
+        this._triggerRecalculationVisibleItems();
+    }
+
+    /**
+     * @hidden
      * Resets and hides extra tabs.
      * @param tabs - The list of tab items.
      * @param extraTabs - The list of extra tab items.
@@ -338,16 +357,20 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
 
     /**
      * @hidden
-     * Handles changes to the selected UID.
+     * Handles changes to the selected UID driven by the parent (i.e. the [selectedUid]
+     * input changed). Delegates to the non-emitting `_syncSelectedItem` hook so that
+     * process type can keep `_currentStepIndex` in sync without re-emitting `(selected)`.
+     * For ALL parent-driven [selectedUid] changes — not just scroll-spy crossings — no
+     * `(selected)` re-emit occurs, to avoid the scroll-jump loop (#14593).
      */
     private _handleSelectedUidChange(): void {
-        const isExtraTab = this._extraTabs$().find((tab) => tab.uId === this.selectedUid);
-        const selected = this.tabs.find((tab) => tab.uId === this.selectedUid);
-        if (isExtraTab) {
-            this._selectExtraItem(isExtraTab);
-        } else if (selected) {
-            this._selectExtraItem(selected);
+        const item =
+            this._extraTabs$().find((tab) => tab.uId === this.selectedUid) ??
+            this.tabs.find((tab) => tab.uId === this.selectedUid);
+        if (!item) {
+            return;
         }
+        this._syncSelectedItem(item);
     }
 
     /**

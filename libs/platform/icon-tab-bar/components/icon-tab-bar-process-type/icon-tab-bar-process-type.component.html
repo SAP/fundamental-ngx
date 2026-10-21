@@ -18,6 +18,7 @@
                 [extraTabs]="_prevSteps"
                 [label]="_prevSteps.length.toString()"
                 [isSeparators]="true"
+                [showItemLabel]="true"
                 [colorAssociations]="colorAssociations()"
                 (selectedExtraItem)="_selectExtraItem($event)"
             ></fdp-icon-tab-bar-popover>
@@ -99,6 +100,7 @@
                 [isRtl]="isRtl"
                 [extraTabs]="_nextSteps"
                 [isSeparators]="true"
+                [showItemLabel]="true"
                 [label]="_nextSteps.length.toString()"
                 [colorAssociations]="colorAssociations()"
                 (selectedExtraItem)="_selectExtraItem($event)"

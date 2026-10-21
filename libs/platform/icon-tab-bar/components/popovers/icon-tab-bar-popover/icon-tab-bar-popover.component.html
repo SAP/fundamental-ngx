@@ -28,11 +28,13 @@
                         (click)="_selectItem(item)"
                         (keydown)="_keyDownHandler($event, item, idx)"
                     >
-                        <span class="fd-icon-tab-bar__list-item-icon-container">
-                            <span class="fd-list__icon fd-icon-tab-bar__list-item-icon">
-                                <fd-icon [glyph]="item.icon | fdkAsyncOrSync"></fd-icon>
+                        @if (item.icon | fdkAsyncOrSync) {
+                            <span class="fd-icon-tab-bar__list-item-icon-container">
+                                <span class="fd-list__icon fd-icon-tab-bar__list-item-icon">
+                                    <fd-icon [glyph]="item.icon | fdkAsyncOrSync"></fd-icon>
+                                </span>
                             </span>
-                        </span>
+                        }
                         @if (showItemLabel && (item.label | fdkAsyncOrSync)) {
                             <span class="fd-list__title fd-icon-tab-bar__list-item-title">{{
                                 item.label | fdkAsyncOrSync
