@@ -1,3 +1,13 @@
+## 0.66.0-rc.4 (2026-10-21)
+
+### 🩹 Fixes
+
+- **core:** preserve popover focus and let Tab exit desktop menus ([#14579](https://github.com/SAP/fundamental-ngx/pull/14579))
+
+### ❤️ Thank You
+
+- Minwook Shin @minwookshin
+
 ## 0.66.0-rc.3 (2026-10-20)
 
 This was a version bump only for core to align it with other projects, there were no code changes.
