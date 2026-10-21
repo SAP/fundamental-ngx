@@ -15,6 +15,7 @@ import { FixedItemsSample } from './examples/fixed-items-sample';
 import { IndicationTagSample } from './examples/indication-tag-sample';
 import { NestedSample } from './examples/nested-sample';
 import { OverlayModeSample } from './examples/overlay-mode-sample';
+import { SearchFilterSample } from './examples/search-filter-sample';
 
 const basicSampleTs = 'basic-sample.ts';
 const basicSampleHtml = 'basic-sample.html';
@@ -30,6 +31,8 @@ const customWidthTs = 'custom-width-sample.ts';
 const customWidthHtml = 'custom-width-sample.html';
 const indicationTagTs = 'indication-tag-sample.ts';
 const indicationTagHtml = 'indication-tag-sample.html';
+const searchFilterSampleTs = 'search-filter-sample.ts';
+const searchFilterSampleHtml = 'search-filter-sample.html';
 
 @Component({
     selector: 'ui5-doc-side-navigation',
@@ -46,7 +49,8 @@ const indicationTagHtml = 'indication-tag-sample.html';
         OverlayModeSample,
         NestedSample,
         CustomWidthSample,
-        IndicationTagSample
+        IndicationTagSample,
+        SearchFilterSample
     ]
 })
 export class SideNavigationDocs {
@@ -164,6 +168,23 @@ export class SideNavigationDocs {
             code: getAssetFromModuleAssets(indicationTagHtml),
             originalFileName: 'indication-tag-sample',
             component: 'IndicationTagSample'
+        }
+    ]);
+
+    searchFilterExample = signal<ExampleFile[]>([
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(searchFilterSampleTs),
+            originalFileName: 'search-filter-sample',
+            component: 'SearchFilterSample',
+            typescriptFileCode: getAssetFromModuleAssets(searchFilterSampleTs),
+            scssFileCode: ''
+        },
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(searchFilterSampleHtml),
+            originalFileName: 'search-filter-sample',
+            component: 'SearchFilterSample'
         }
     ]);
 }

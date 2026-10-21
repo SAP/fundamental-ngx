@@ -193,7 +193,8 @@ module.exports = pluginTs.config(
                                 'scope:datetime-adapter',
                                 'scope:i18n',
                                 'scope:cx',
-                                'scope:cdk'
+                                'scope:cdk',
+                                'scope:ui5'
                             ]
                         },
                         {

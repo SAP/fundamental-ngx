@@ -1,0 +1,25 @@
+<ui5-button design="Transparent" (ui5Click)="toggleNavigation()">
+    {{ _collapsed() ? 'Expand navigation' : 'Collapse navigation' }}
+</ui5-button>
+
+<ui5-side-navigation [collapsed]="_collapsed()" [highlightedText]="_query()">
+    <ui5-side-navigation-search-field
+        slot="filterSection"
+        accessibleName="Search navigation"
+        placeholder="Search navigation"
+        (ui5Input)="onSearchInput($event)"
+        (keydown)="onSearchKeydown($event)"
+    />
+
+    @for (item of _visibleItems(); track item.text) {
+    <ui5-side-navigation-item [text]="item.text" />
+    }
+</ui5-side-navigation>
+
+<span role="status" aria-live="polite" aria-atomic="true" [attr.aria-label]="_visibleItems().length + ' matches found'">
+    {{ _visibleItems().length }} matches found
+</span>
+
+@if (_visibleItems().length === 0) {
+<p>No matching navigation items</p>
+}

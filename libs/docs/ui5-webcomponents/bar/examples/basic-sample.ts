@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import '@ui5/webcomponents-icons/dist/action-settings.js';
+import '@ui5/webcomponents-icons/dist/home.js';
 
 import { Bar } from '@fundamental-ngx/ui5-webcomponents/bar';
 import { Button } from '@fundamental-ngx/ui5-webcomponents/button';

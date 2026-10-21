@@ -122,7 +122,7 @@
                                 [valueState]="hasFieldError('bio') ? 'Negative' : 'None'"
                                 placeholder="Tell us about yourself (max 500 characters)"
                                 [rows]="4"
-                                showExceededText="true"
+                                counterMode="Auto"
                                 [maxlength]="500"
                                 (ui5Input)="onTextAreaChange('bio', $event)"
                             >

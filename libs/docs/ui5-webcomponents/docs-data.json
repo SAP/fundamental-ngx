@@ -151,8 +151,8 @@
             "name": "Multi Input"
         },
         {
-            "url": "ui5-webcomponents/number-input",
-            "name": "Number Input"
+            "url": "ui5-webcomponents/numeric-input",
+            "name": "Numeric Input"
         },
         {
             "url": "ui5-webcomponents/panel",

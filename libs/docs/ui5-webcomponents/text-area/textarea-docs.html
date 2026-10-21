@@ -15,16 +15,18 @@
 </component-example>
 <code-example [exampleFiles]="growingExamples()"></code-example>
 
-<fd-docs-section-title id="character-limit" componentName="text-area">Character Limits</fd-docs-section-title>
+<fd-docs-section-title id="character-counter-modes" componentName="text-area"
+    >Character Counter Modes</fd-docs-section-title
+>
 <description>
-    Control text length using <b>maxlength</b> and <b>showExceededText</b> properties. When <b>showExceededText</b> is
-    false, users cannot exceed the limit. When true, exceeded characters are highlighted and counted, useful for soft
-    limits with warnings.
+    Use <b>counterMode</b> with <b>maxlength</b> to control the character counter and limit behavior. <b>None</b> hides
+    the counter and applies a hard limit. <b>Auto</b> reveals the counter on focus, overflow, or critical/negative value
+    states while reserving its space. <b>Always</b> keeps the counter visible and supports a soft limit.
 </description>
 <component-example>
-    <ui5-textarea-character-limit-sample></ui5-textarea-character-limit-sample>
+    <ui5-textarea-character-counter-modes-sample></ui5-textarea-character-counter-modes-sample>
 </component-example>
-<code-example [exampleFiles]="characterLimitExamples()"></code-example>
+<code-example [exampleFiles]="characterCounterModesExamples()"></code-example>
 
 <fd-docs-section-title id="value-states" componentName="text-area">Value States</fd-docs-section-title>
 <description>
