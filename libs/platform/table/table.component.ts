@@ -2433,13 +2433,19 @@ export class TableComponent<T = any>
         );
 
         this._subscriptions.add(
-            resizeObservable(this.table.nativeElement).subscribe(() => {
-                // this._tableScrollWidth = this.table.nativeElement.scrollWidth;
-                this._checkCellMock();
-                if (this._virtualScrollDirective?.scrollWholeRows) {
-                    this._virtualScrollDirective.calculateVirtualScrollRows();
-                }
-            })
+            resizeObservable(this.table.nativeElement)
+                .pipe(
+                    tap(() => {
+                        // this._tableScrollWidth = this.table.nativeElement.scrollWidth;
+                        this._checkCellMock();
+                    }),
+                    debounceTime(100)
+                )
+                .subscribe(() => {
+                    if (this._virtualScrollDirective?.scrollWholeRows) {
+                        this._virtualScrollDirective.calculateVirtualScrollRows();
+                    }
+                })
         );
     }
 

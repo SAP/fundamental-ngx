@@ -194,7 +194,7 @@ describe('TableComponent Virtual Scrolling', () => {
             }
             headerHeight.mockReturnValue(44);
             resize();
-            tick(16);
+            tick(116);
 
             expect(tableComponent.getCurrentlyRenderedRows()).toHaveLength(5);
         }));
@@ -224,6 +224,34 @@ describe('TableComponent Virtual Scrolling', () => {
             resize();
             tick(116);
             expect(tableComponent.getCurrentlyRenderedRows()).toHaveLength(8);
+        }));
+
+        it('should coalesce repeated table resizes before rendering whole rows', fakeAsync(() => {
+            const scrollViewport = tableComponent.tableScrollable.elementRef.nativeElement;
+            const header = scrollViewport.querySelector('thead');
+            if (!header) {
+                throw new Error('Expected the table header to be rendered');
+            }
+            jest.spyOn(scrollViewport, 'clientHeight', 'get').mockReturnValue(300);
+            const headerHeight = jest.spyOn(header, 'clientHeight', 'get').mockReturnValue(32);
+            hostComponent.virtualScrollDirective.calculateVirtualScrollRows();
+            const renderedRows = tableComponent.getCurrentlyRenderedRows();
+            expect(renderedRows).toHaveLength(6);
+
+            const resize = resizeCallbacks.get(tableComponent.table.nativeElement);
+            if (!resize) {
+                throw new Error('Expected the rendered table to be observed');
+            }
+            for (let frame = 0; frame < 3; frame++) {
+                resize();
+                tick(16);
+            }
+            expect(tableComponent.getCurrentlyRenderedRows()).toBe(renderedRows);
+
+            headerHeight.mockReturnValue(44);
+            resize();
+            tick(116);
+            expect(tableComponent.getCurrentlyRenderedRows()).toHaveLength(5);
         }));
 
         it('should set up itemFocused subscription on first calculateVirtualScrollRows call', () => {
