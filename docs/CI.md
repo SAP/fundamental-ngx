@@ -25,10 +25,11 @@ Create release workflow consists of multiple jobs:
 - Nx Cloud Agents fire up - Runs always
 - Nx Cloud Run initialization - Runs always
 - Release Creation - Runs always
-- Github Pages Deployment - Runs only when the release is meant to be `latest`
+- GitHub Pages Artifact Build - Runs only when the release is meant to be `latest`
+- GitHub Pages Deployment - Runs only after a successful artifact build
 - Nx Cloud Run finalization - Runs always, even if something fails somewhere or if the pipeline is canceled.
 
-For explanation, we will be explaining `Release Creation` and `Github Pages Deployment` jobs, about the
+For explanation, we will be explaining `Release Creation` and GitHub Pages jobs, about the
 other jobs, you can read in the [Nx Cloud documentation](https://nx.dev/nx-cloud/intro/what-is-nx-cloud).
 
 ### Release Creation
@@ -84,10 +85,19 @@ So, `Release Creation` job consists of multiple tasks:
   if the release is a prerelease or not, and for the tag which should be used for the github release. The release body
   will be taken from the `Generate Release Body` step.
 
-### Github Pages Deployment
+### GitHub Pages Deployment
 
-`Github Pages Deployment` job is triggered only when the release is meant to be `latest`, it just checks out the code
-which will be deployed to the github pages, and deploys it to the github pages.
+The `Build GitHub Pages artifact` job is triggered only when the release is meant to be `latest`. It checks out `main`
+after release creation, installs dependencies, unconditionally regenerates the component metadata catalog, and builds
+the production documentation with Nx Cloud distributed execution disabled. Before uploading, it validates that
+`dist/apps/docs` contains non-empty `index.html` and `llms.txt` files plus a valid `components.json` catalog with at
+least one component. The job has read-only repository access and uploads exactly `dist/apps/docs` as the official
+GitHub Pages artifact.
+
+The `Deploy GitHub Pages artifact` job starts only after that build succeeds. It has only `pages: write` and
+`id-token: write` permissions, deploys the uploaded artifact to the `github-pages` environment, and records the URL
+returned by GitHub's deployment action. It does not check out the repository, use a custom deployment token, or write
+to the `gh-pages` branch.
 
 ## Pull Request checks
 
