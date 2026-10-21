@@ -238,7 +238,9 @@ export default {
         cancel: 'Zrušit',
         collapsedItemMenuLabel: 'Sbalená položka menu',
         navigationButtonLabel: 'Navigace',
-        search: 'Hledat'
+        openSearch: 'Open Search',
+        search: 'Hledat',
+        shellbarLabel: 'Shellbar'
     },
     coreSlider: {
         ariaLabel: 'Slider Handle'
@@ -325,6 +327,7 @@ export default {
         menuOkText: 'OK'
     },
     coreUserMenu: {
+        ariaLabel: 'User Menu',
         closeButton: 'Zavřít',
         previousButton: 'Předchozí'
     },

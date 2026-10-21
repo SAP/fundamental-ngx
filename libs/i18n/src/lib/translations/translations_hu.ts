@@ -239,7 +239,9 @@ export default {
         cancel: 'Mégse',
         collapsedItemMenuLabel: 'Visszazárt menüelem',
         navigationButtonLabel: 'Navigáció',
-        search: 'Keresés'
+        openSearch: 'Open Search',
+        search: 'Keresés',
+        shellbarLabel: 'Shellbar'
     },
     coreSlider: {
         ariaLabel: 'Slider Handle'
@@ -326,6 +328,7 @@ export default {
         menuOkText: 'OK'
     },
     coreUserMenu: {
+        ariaLabel: 'User Menu',
         closeButton: 'Bezárás',
         previousButton: 'Előző'
     },

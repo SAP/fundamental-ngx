@@ -119,3 +119,26 @@
         padding-inline: 0;
     }
 }
+
+.fd-shellbar-actions-mobile__menu {
+    min-width: 11rem;
+    max-width: 100vw;
+
+    .fd-button__badge {
+        --fdButton_Badge_Padding_Inline: 0.3125rem;
+        --fdButton_Badge_Width: auto;
+        --fdButton_Badge_Margin: 0.25rem;
+    }
+
+    @media (max-width: 320px) {
+        left: 0 !important;
+        right: 0 !important;
+        width: 100vw !important;
+        max-width: 100vw !important;
+
+        .fd-popover__popper {
+            width: 100vw !important;
+            max-width: 100vw !important;
+        }
+    }
+}

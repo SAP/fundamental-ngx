@@ -20,10 +20,10 @@ import { FD_SHELLBAR_COMPONENT } from '../tokens';
     selector: 'fd-shellbar-context-area',
     standalone: true,
     template: `
-        <div class="fd-shellbar__group fd-shellbar__group--context-area" data-position="left">
+        <div class="fd-shellbar__group fd-shellbar__group--context-area" data-position="left" role="group">
             <ng-content select="[fdShellbarPosition='left'], :not([fdShellbarPosition])"></ng-content>
         </div>
-        <div class="fd-shellbar__group fd-shellbar__group--context-area" data-position="right">
+        <div class="fd-shellbar__group fd-shellbar__group--context-area" data-position="right" role="group">
             <ng-content select="[fdShellbarPosition='right']"></ng-content>
         </div>
     `,
@@ -98,6 +98,10 @@ export class ShellbarContextAreaComponent implements AfterViewInit {
                 this.elementHidden.emit(lastItem.el);
             }
         }
+
+        // Hide separators if all other items in their group are hidden
+        this._updateSeparatorVisibility();
+
         if (!this._arraysEqual(this._hiddenItems, newHiddenItems)) {
             this._hiddenItems = newHiddenItems;
             this.contentItemVisibilityChange.emit(newHiddenItems);
@@ -118,6 +122,9 @@ export class ShellbarContextAreaComponent implements AfterViewInit {
                 }
             }
         });
+
+        // Show separators if there are visible items in their group
+        this._updateSeparatorVisibility();
     }
 
     /**
@@ -162,5 +169,43 @@ export class ShellbarContextAreaComponent implements AfterViewInit {
         const sorted1 = [...arr1].sort();
         const sorted2 = [...arr2].sort();
         return sorted1.every((el, index) => el === sorted2[index]);
+    }
+
+    /**
+     * Updates separator visibility based on whether there are visible non-separator items
+     * in each context area group.
+     */
+    private _updateSeparatorVisibility(): void {
+        const contextAreaGroups = this.el.nativeElement.querySelectorAll('.fd-shellbar__group--context-area');
+
+        contextAreaGroups.forEach((group: HTMLElement) => {
+            const children = Array.from(group.children) as HTMLElement[];
+
+            // Separate separators from other items
+            const separators = children.filter((el) => this._isSeparator(el));
+            const nonSeparators = children.filter((el) => !this._isSeparator(el));
+
+            // Check if there are any visible non-separator items
+            const hasVisibleNonSeparators = nonSeparators.some((el) => el.style.display !== 'none');
+
+            // Update separator visibility
+            separators.forEach((separator) => {
+                if (hasVisibleNonSeparators) {
+                    separator.style.display = '';
+                } else {
+                    separator.style.display = 'none';
+                }
+            });
+        });
+    }
+
+    /**
+     * Checks if an element is a shellbar separator.
+     */
+    private _isSeparator(element: HTMLElement): boolean {
+        return (
+            element.tagName.toLowerCase() === 'fd-shellbar-separator' ||
+            element.classList.contains('fd-shellbar__separator')
+        );
     }
 }

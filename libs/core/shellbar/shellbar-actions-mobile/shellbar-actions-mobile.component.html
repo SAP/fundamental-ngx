@@ -17,12 +17,16 @@
                 </span>
             }
         </button>
-        <fd-menu #menu placement="bottom-end">
+        <fd-menu #menu placement="bottom-end" [config]="{ additionalBodyClass: 'fd-shellbar-actions-mobile__menu' }">
             @if (titleHidden && (hiddenLogoElement || hiddenTitleText)) {
                 <li fd-menu-item [hasSeparator]="true">
-                    <div fd-menu-interactive>
-                        <span style="order: -1; margin-inline-start: 0" #logoContainer></span>
-                        <span fd-menu-title>{{ hiddenTitleText }}</span>
+                    <div
+                        fd-menu-interactive
+                        style="padding-inline: 0.8125rem"
+                        [attr.aria-label]="brandingAriaLabel || null"
+                    >
+                        <span style="order: -1; margin-inline-end: 0.25rem" #logoContainer></span>
+                        <fd-text [text]="hiddenTitleText" [maxLines]="2" fd-menu-title></fd-text>
                     </div>
                 </li>
             }
@@ -36,14 +40,23 @@
             }
             @for (action of shellbarActions; track action) {
                 <li fd-menu-item (onSelect)="actionClicked(action); menu.close()">
-                    <div fd-menu-interactive>
+                    <div
+                        fd-menu-interactive
+                        [attr.aria-label]="action.ariaLabel() || null"
+                        [attr.aria-expanded]="action.ariaExpanded()"
+                        [attr.aria-haspopup]="action.ariaHaspopup() || null"
+                        [attr.aria-controls]="action.ariaControls() || null"
+                        [attr.aria-describedby]="action.ariaDescribedby() || null"
+                    >
                         @if (action.glyph()) {
                             <fd-menu-addon position="before" [glyph]="action.glyph()"></fd-menu-addon>
                         }
-                        <span fd-menu-title>{{ action.label() }}</span>
-                        @if (action.notificationCount()) {
-                            <span class="fd-button__badge">{{ action.notificationCount() }}</span>
-                        }
+                        <span fd-menu-title>
+                            {{ action.label() }}
+                            @if (action.notificationCount()) {
+                                <span class="fd-button__badge">{{ action.notificationCount() }}</span>
+                            }
+                        </span>
                     </div>
                 </li>
             }

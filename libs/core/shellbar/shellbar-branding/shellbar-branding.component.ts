@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, inject, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, inject, input, Input, ViewEncapsulation } from '@angular/core';
 import { FD_SHELLBAR_COMPONENT } from '../tokens';
 
 /**
@@ -9,6 +9,9 @@ import { FD_SHELLBAR_COMPONENT } from '../tokens';
     template: ` <div
         class="fd-shellbar__branding"
         [class.fd-shellbar__branding--non-interactive]="!interactiveBranding"
+        [attr.aria-label]="ariaLabel()"
+        role="link"
+        tabindex="0"
     >
         <ng-content></ng-content>
     </div>`,
@@ -32,6 +35,9 @@ export class ShellbarBrandingComponent {
     /** Whether the shellbar branding is interactive. */
     @Input()
     interactiveBranding = false;
+
+    /** Aria-label for the branding element. */
+    readonly ariaLabel = input<string | undefined>(undefined);
 
     /** @hidden */
     private readonly _shellbar = inject(FD_SHELLBAR_COMPONENT);

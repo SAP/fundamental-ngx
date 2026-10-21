@@ -22,6 +22,7 @@ import {
     MenuTitleDirective,
     MenuTriggerDirective
 } from '@fundamental-ngx/core/menu';
+import { TextComponent } from '@fundamental-ngx/core/text';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.component';
 
@@ -40,7 +41,8 @@ import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.comp
         MenuInteractiveComponent,
         MenuTitleDirective,
         MenuTriggerDirective,
-        FdTranslatePipe
+        FdTranslatePipe,
+        TextComponent
     ]
 })
 export class ShellbarActionsMobileComponent implements AfterContentChecked {
@@ -71,6 +73,12 @@ export class ShellbarActionsMobileComponent implements AfterContentChecked {
      */
     @Input()
     hiddenLogoElement: HTMLElement | null = null;
+
+    /**
+     * The aria-label from the branding component.
+     */
+    @Input()
+    brandingAriaLabel = '';
 
     /** @hidden */
     @Input()

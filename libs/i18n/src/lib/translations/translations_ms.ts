@@ -238,7 +238,9 @@ export default {
         cancel: 'Batalkan',
         collapsedItemMenuLabel: 'Menu Item yang Diruntuhkan',
         navigationButtonLabel: 'Navigasi',
-        search: 'Cari'
+        openSearch: 'Open Search',
+        search: 'Cari',
+        shellbarLabel: 'Shellbar'
     },
     coreSlider: {
         ariaLabel: 'Slider Handle'
@@ -325,6 +327,7 @@ export default {
         menuOkText: 'Ok'
     },
     coreUserMenu: {
+        ariaLabel: 'User Menu',
         closeButton: 'Tutup',
         previousButton: 'Sebelumnya'
     },

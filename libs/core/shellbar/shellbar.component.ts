@@ -1,3 +1,5 @@
+import { InteractivityChecker } from '@angular/cdk/a11y';
+import { END, HOME, LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 import { CdkPortalOutlet, DomPortal, PortalModule } from '@angular/cdk/portal';
 import { NgTemplateOutlet } from '@angular/common';
 import {
@@ -20,17 +22,18 @@ import {
     ViewEncapsulation,
     computed,
     contentChildren,
-    inject
+    inject,
+    input
 } from '@angular/core';
 import { outputToObservable, takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ClickedDirective, Nullable, ResizeObserverService, RtlService } from '@fundamental-ngx/cdk/utils';
+import { ClickedDirective, KeyUtil, Nullable, ResizeObserverService, RtlService } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent, FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/button';
 import { ComboboxInterface, FD_COMBOBOX_COMPONENT } from '@fundamental-ngx/core/combobox';
 import { ContentDensityDirective, ContentDensityMode } from '@fundamental-ngx/core/content-density';
 import { ProductSwitchComponent } from '@fundamental-ngx/core/product-switch';
 import { SearchComponent } from '@fundamental-ngx/core/shared';
 import { SideNavigationInterface } from '@fundamental-ngx/core/side-navigation';
-import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { FdTranslatePipe, resolveTranslationSignal } from '@fundamental-ngx/i18n';
 import { shallowEqual } from 'fast-equals';
 import { BehaviorSubject, Subscription, distinctUntilChanged } from 'rxjs';
 import { Breakpoints, NormalizedBreakpoint, ShellbarGroupFlexOptions, ShellbarSizes } from './model/shellbar-sizes';
@@ -181,6 +184,13 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     /** @hidden */
     _isTitleHidden = false;
 
+    /** Whether the navigation button is expanded (for aria-expanded). */
+    readonly navigationButtonExpanded = input<boolean | undefined>(undefined);
+
+    /** ID of the element controlled by the navigation button (for aria-controls). Typically references the side navigation element. */
+    readonly navigationButtonControls = input<string | undefined>(undefined);
+
+    /** @hidden */
     protected readonly navigationIcon = computed<string>(() => (this.isRtl() ? 'slim-arrow-right' : 'nav-back'));
 
     /** @hidden */
@@ -188,6 +198,9 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
 
     /** @hidden */
     protected readonly _contextArea = computed(() => this._contextAreas()[0]);
+
+    /** @hidden */
+    protected readonly _shellbarLabel = resolveTranslationSignal('coreShellbar.shellbarLabel');
 
     /**
      * @hidden
@@ -315,6 +328,9 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     });
 
     /** @hidden */
+    private readonly _interactivityChecker = inject(InteractivityChecker);
+
+    /** @hidden */
     ngAfterContentInit(): void {
         this.applyShellbarModeToCombobox();
         this.applyShellbarModeToButtons();
@@ -335,6 +351,9 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
         });
 
         this._setProductSwitchDensities();
+
+        // Set up keyboard navigation listener
+        this._setupKeyboardNavigation();
     }
 
     /** @hidden */
@@ -426,8 +445,121 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
         this._actions?._setTitleHidden(
             hidden,
             this.branding?.getTitleText() || '',
-            this.branding?.getLogoElement() || null
+            this.branding?.getLogoElement() || null,
+            this.branding?.ariaLabel() || ''
         );
+    }
+
+    /** @hidden */
+    _handleKeydown(event: KeyboardEvent): void {
+        // Check if the key is one we handle
+        if (!KeyUtil.isKeyCode(event, [LEFT_ARROW, RIGHT_ARROW, HOME, END])) {
+            return;
+        }
+
+        const tabbableElements = this._getTabbableElements();
+        const currentIndex = tabbableElements.indexOf(event.target as HTMLElement);
+
+        // Only handle Home/End if focus is already in the shellbar
+        if (currentIndex === -1) {
+            return;
+        }
+
+        event.preventDefault();
+
+        let nextIndex: number;
+
+        // Handle Home and End keys
+        if (KeyUtil.isKeyCode(event, HOME)) {
+            // Move to first element
+            nextIndex = 0;
+        } else if (KeyUtil.isKeyCode(event, END)) {
+            // Move to last element
+            nextIndex = tabbableElements.length - 1;
+        } else {
+            // Handle arrow keys
+            // Handle RTL: swap arrow key behavior
+            const isLeftKey = KeyUtil.isKeyCode(event, LEFT_ARROW);
+            const shouldMovePrevious = this.isRtl() ? !isLeftKey : isLeftKey;
+
+            if (shouldMovePrevious) {
+                // Move to previous element (like Shift+Tab)
+                nextIndex = currentIndex - 1;
+                if (nextIndex < 0) {
+                    nextIndex = tabbableElements.length - 1;
+                }
+            } else {
+                // Move to next element (like Tab)
+                nextIndex = currentIndex + 1;
+                if (nextIndex >= tabbableElements.length) {
+                    nextIndex = 0;
+                }
+            }
+        }
+
+        const nextElement = tabbableElements[nextIndex];
+        if (nextElement) {
+            nextElement.focus();
+        }
+    }
+
+    /** @hidden */
+    private _setupKeyboardNavigation(): void {
+        // Listen for keydown events on the shellbar container
+        this._shellbar.nativeElement.addEventListener(
+            'keydown',
+            (event: KeyboardEvent) => {
+                this._handleKeydown(event);
+            },
+            true // Use capture phase to catch events before they reach the target
+        );
+
+        // Listen for global keyboard shortcuts
+        const handleGlobalShortcut = (event: KeyboardEvent): void => {
+            // Shift+Ctrl/Cmd+F: Focus search
+            if (event.shiftKey && (event.ctrlKey || event.metaKey) && (event.key === 'f' || event.key === 'F')) {
+                if (this.searchComponent) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    this.searchComponent.focus();
+                }
+            }
+        };
+
+        document.addEventListener('keydown', handleGlobalShortcut);
+
+        // Clean up the global listener on destroy
+        this._destroyRef.onDestroy(() => {
+            document.removeEventListener('keydown', handleGlobalShortcut);
+        });
+    }
+
+    /** @hidden */
+    private _getTabbableElements(): HTMLElement[] {
+        const shellbarEl = this._shellbar.nativeElement;
+        const allElements = Array.from(shellbarEl.querySelectorAll<HTMLElement>('*'));
+
+        const tabbableElements = allElements.filter((el) => {
+            const style = window.getComputedStyle(el);
+
+            return (
+                this._interactivityChecker.isTabbable(el) &&
+                !el.hasAttribute('disabled') &&
+                el.getAttribute('aria-disabled') !== 'true' &&
+                !el.classList.contains('is-disabled') &&
+                // <a> elements must have href to be truly focusable
+                (el.tagName !== 'A' || el.hasAttribute('href')) &&
+                // Element must be visible
+                style.display !== 'none' &&
+                style.visibility !== 'hidden' &&
+                !el.hasAttribute('hidden') &&
+                el.offsetParent !== null
+            );
+        });
+
+        // Filter out elements that are descendants of other tabbable elements
+        // This prevents navigating into nested focusable areas
+        return tabbableElements.filter((el) => !tabbableElements.some((otherEl) => otherEl !== el && otherEl.contains(el)));
     }
 
     /** @hidden */

@@ -238,7 +238,9 @@ export default {
         cancel: 'Peruuta',
         collapsedItemMenuLabel: 'Tiivistetty kohteen valikko',
         navigationButtonLabel: 'Navigointi',
-        search: 'Hae'
+        openSearch: 'Open Search',
+        search: 'Hae',
+        shellbarLabel: 'Shellbar'
     },
     coreSlider: {
         ariaLabel: 'Slider Handle'
@@ -325,6 +327,7 @@ export default {
         menuOkText: 'Ok'
     },
     coreUserMenu: {
+        ariaLabel: 'User Menu',
         closeButton: 'Sulje',
         previousButton: 'Edellinen'
     },

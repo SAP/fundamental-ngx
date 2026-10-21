@@ -150,6 +150,14 @@ export class UserMenuComponent implements AfterViewInit {
             const isMobile = this.mobile();
             this._listItems()?.forEach((item) => item.mobile.set(isMobile));
         });
+
+        effect(() => {
+            const control = this.userMenuControl();
+            const isOpen = this.isOpen();
+            if (control) {
+                control.isExpanded.set(isOpen);
+            }
+        });
     }
 
     /** @hidden */

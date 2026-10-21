@@ -141,6 +141,9 @@ export class ShellbarActionsComponent implements OnDestroy {
     /** @hidden */
     _hiddenLogoElement: HTMLElement | null = null;
 
+    /** @hidden */
+    _brandingAriaLabel = '';
+
     /**
      * Whether to show the search field.
      */
@@ -234,10 +237,11 @@ export class ShellbarActionsComponent implements OnDestroy {
     }
 
     /** @hidden */
-    _setTitleHidden(hidden: boolean, titleText: string, logoElement: HTMLElement | null): void {
+    _setTitleHidden(hidden: boolean, titleText: string, logoElement: HTMLElement | null, ariaLabel: string): void {
         this._titleHidden = hidden;
         this._hiddenTitleText = titleText;
         this._hiddenLogoElement = logoElement;
+        this._brandingAriaLabel = ariaLabel;
         this._cd.detectChanges();
     }
 

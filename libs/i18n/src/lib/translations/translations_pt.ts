@@ -238,7 +238,9 @@ export default {
         cancel: 'Cancelar',
         collapsedItemMenuLabel: 'Menu de item recolhido',
         navigationButtonLabel: 'Navegação',
-        search: 'Pesquisar'
+        openSearch: 'Open Search',
+        search: 'Pesquisar',
+        shellbarLabel: 'Shellbar'
     },
     coreSlider: {
         ariaLabel: 'Slider Handle'
@@ -325,6 +327,7 @@ export default {
         menuOkText: 'OK'
     },
     coreUserMenu: {
+        ariaLabel: 'User Menu',
         closeButton: 'Fechar',
         previousButton: 'Anterior'
     },

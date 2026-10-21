@@ -239,7 +239,9 @@ export default {
         cancel: 'Annuleren',
         collapsedItemMenuLabel: 'Menu-item samengevouwen',
         navigationButtonLabel: 'Navigatie',
-        search: 'Zoeken'
+        openSearch: 'Open Search',
+        search: 'Zoeken',
+        shellbarLabel: 'Shellbar'
     },
     coreSlider: {
         ariaLabel: 'Slider Handle'
@@ -326,6 +328,7 @@ export default {
         menuOkText: 'OK'
     },
     coreUserMenu: {
+        ariaLabel: 'User Menu',
         closeButton: 'Sluiten',
         previousButton: 'Vorige'
     },

@@ -238,7 +238,9 @@ export default {
         cancel: 'Скасувати',
         collapsedItemMenuLabel: 'Згорнуте меню елементів',
         navigationButtonLabel: 'Навігація',
-        search: 'Пошук'
+        openSearch: 'Open Search',
+        search: 'Пошук',
+        shellbarLabel: 'Shellbar'
     },
     coreSlider: {
         ariaLabel: 'Slider Handle'
@@ -325,6 +327,7 @@ export default {
         menuOkText: 'ОК'
     },
     coreUserMenu: {
+        ariaLabel: 'User Menu',
         closeButton: 'Закрити',
         previousButton: 'Назад'
     },

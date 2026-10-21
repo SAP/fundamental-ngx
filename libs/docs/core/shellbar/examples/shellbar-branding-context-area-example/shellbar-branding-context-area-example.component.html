@@ -4,7 +4,11 @@
     (navigationButtonClicked)="navClicked($event)"
     (backButtonClicked)="backClicked($event)"
 >
-    <fd-shellbar-branding [interactiveBranding]="true" (fdkClicked)="brandingClicked($event)">
+    <fd-shellbar-branding
+        [interactiveBranding]="true"
+        (fdkClicked)="brandingClicked($event)"
+        ariaLabel="SAP Product Identifier Home"
+    >
         <fd-shellbar-logo>
             <a class="fd-shellbar__logo fd-shellbar__logo--image-replaced" aria-label="SAP"></a>
         </fd-shellbar-logo>
@@ -39,6 +43,7 @@
         [categories]="categories"
         (searchSubmit)="onSearchSubmit($event)"
         (inputChange)="onInputChange($event)"
+        ariaDescription="search results will be shown in the main area"
     ></fdp-search-field>
 
     <fd-shellbar-actions>
