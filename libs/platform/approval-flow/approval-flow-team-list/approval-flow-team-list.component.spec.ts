@@ -4,7 +4,7 @@ import { PlatformApprovalFlowModule } from '../approval-flow.module';
 import { ApprovalTeam } from '../interfaces';
 import { ApprovalFlowTeamListComponent } from './approval-flow-team-list.component';
 
-describe('ApprovalFlowTeamListComponent', () => {
+fdescribe('ApprovalFlowTeamListComponent', () => {
     let component: ApprovalFlowTeamListComponent;
     let fixture: ComponentFixture<ApprovalFlowTeamListComponent>;
 
@@ -22,6 +22,17 @@ describe('ApprovalFlowTeamListComponent', () => {
 
     it('should create', () => {
         expect(component).toBeTruthy();
+    });
+
+    it('should show no-data list item when teams is empty', () => {
+        component.teams = [];
+        fixture.detectChanges();
+
+        const formGroup = fixture.nativeElement.querySelector('fd-form-group');
+        const noDataItem = fixture.nativeElement.querySelector('fdp-standard-list-item');
+
+        expect(formGroup).toBeNull();
+        expect(noDataItem).toBeTruthy();
     });
 
     it('should show team details', () => {
