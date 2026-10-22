@@ -1,3 +1,7 @@
+## 0.66.0-rc.9 (2026-10-22)
+
+This was a version bump only for moment-adapter to align it with other projects, there were no code changes.
+
 ## 0.66.0-rc.8 (2026-10-22)
 
 ### 🚀 Features
