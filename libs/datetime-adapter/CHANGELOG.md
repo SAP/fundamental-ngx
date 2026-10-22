@@ -1,3 +1,66 @@
+## 0.66.0-rc.8 (2026-10-22)
+
+### 🚀 Features
+
+- ⚠️  **ui5:** adopt UI5 Web Components 2.28 ([#14619](https://github.com/SAP/fundamental-ngx/pull/14619))
+
+### ⚠️  Breaking Changes
+
+- **ui5:** adopt UI5 Web Components 2.28  ([#14619](https://github.com/SAP/fundamental-ngx/pull/14619))
+  ui5-webcomponents has renamed ui5-number-input component to ui5-numeric-input. Use the new tag name and import the NumericInput instead of NumberInput."
+  A	apps/e2e-harness/e2e/specs/interaction/bar.spec.ts
+  A	apps/e2e-harness/e2e/specs/interaction/numeric-input.spec.ts
+  M	apps/e2e-harness/e2e/specs/interaction/popover.spec.ts
+  M	apps/e2e-harness/e2e/specs/interaction/side-navigation.spec.ts
+  A	apps/e2e-harness/e2e/specs/interaction/text-area.spec.ts
+  M	eslint.config.js
+  A	libs/docs/ui5-webcomponents-fiori/side-navigation/examples/search-filter-sample.html
+  A	libs/docs/ui5-webcomponents-fiori/side-navigation/examples/search-filter-sample.ts
+  M	libs/docs/ui5-webcomponents-fiori/side-navigation/side-navigation-docs.html
+  M	libs/docs/ui5-webcomponents-fiori/side-navigation/side-navigation-docs.ts
+  M	libs/docs/ui5-webcomponents/api-files.ts
+  M	libs/docs/ui5-webcomponents/bar/bar-docs.html
+  M	libs/docs/ui5-webcomponents/bar/bar-docs.ts
+  D	libs/docs/ui5-webcomponents/bar/examples/accessible-role.html
+  D	libs/docs/ui5-webcomponents/bar/examples/accessible-role.ts
+  M	libs/docs/ui5-webcomponents/bar/examples/basic-sample.ts
+  M	libs/docs/ui5-webcomponents/docs-data.json
+  M	libs/docs/ui5-webcomponents/docs-routes.ts
+  M	libs/docs/ui5-webcomponents/form/examples/validation.html
+  D	libs/docs/ui5-webcomponents/number-input/examples/states-sample.html
+  D	libs/docs/ui5-webcomponents/number-input/index.ts
+  D	libs/docs/ui5-webcomponents/number-input/number-input-docs.html
+  R061	libs/docs/ui5-webcomponents/number-input/examples/basic-sample.html	libs/docs/ui5-webcomponents/numeric-input/examples/basic-sample.html
+  R060	libs/docs/ui5-webcomponents/number-input/examples/basic-sample.ts	libs/docs/ui5-webcomponents/numeric-input/examples/basic-sample.ts
+  R064	libs/docs/ui5-webcomponents/number-input/examples/min-max-sample.html	libs/docs/ui5-webcomponents/numeric-input/examples/min-max-sample.html
+  R061	libs/docs/ui5-webcomponents/number-input/examples/min-max-sample.ts	libs/docs/ui5-webcomponents/numeric-input/examples/min-max-sample.ts
+  A	libs/docs/ui5-webcomponents/numeric-input/examples/states-sample.html
+  R050	libs/docs/ui5-webcomponents/number-input/examples/states-sample.ts	libs/docs/ui5-webcomponents/numeric-input/examples/states-sample.ts
+  R100	libs/docs/ui5-webcomponents/number-input/examples/styles.scss	libs/docs/ui5-webcomponents/numeric-input/examples/styles.scss
+  R065	libs/docs/ui5-webcomponents/number-input/examples/value-precision-sample.html	libs/docs/ui5-webcomponents/numeric-input/examples/value-precision-sample.html
+  R060	libs/docs/ui5-webcomponents/number-input/examples/value-precision-sample.ts	libs/docs/ui5-webcomponents/numeric-input/examples/value-precision-sample.ts
+  R073	libs/docs/ui5-webcomponents/number-input/header/number-input-header.html	libs/docs/ui5-webcomponents/numeric-input/header/numeric-input-header.html
+  R069	libs/docs/ui5-webcomponents/number-input/header/number-input-header.ts	libs/docs/ui5-webcomponents/numeric-input/header/numeric-input-header.ts
+  A	libs/docs/ui5-webcomponents/numeric-input/index.ts
+  A	libs/docs/ui5-webcomponents/numeric-input/numeric-input-docs.html
+  R096	libs/docs/ui5-webcomponents/number-input/number-input-docs.ts	libs/docs/ui5-webcomponents/numeric-input/numeric-input-docs.ts
+  A	libs/docs/ui5-webcomponents/popover/examples/resizable-keyboard-sample.html
+  A	libs/docs/ui5-webcomponents/popover/examples/resizable-keyboard-sample.ts
+  M	libs/docs/ui5-webcomponents/popover/popover-docs.html
+  M	libs/docs/ui5-webcomponents/popover/popover-docs.ts
+  A	libs/docs/ui5-webcomponents/text-area/examples/character-counter-modes-sample.html
+  A	libs/docs/ui5-webcomponents/text-area/examples/character-counter-modes-sample.ts
+  D	libs/docs/ui5-webcomponents/text-area/examples/character-limit.html
+  D	libs/docs/ui5-webcomponents/text-area/examples/character-limit.ts
+  M	libs/docs/ui5-webcomponents/text-area/textarea-docs.html
+  M	libs/docs/ui5-webcomponents/text-area/textarea-docs.ts
+  M	package.json
+  M	yarn.lock
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.66.0-rc.7 (2026-10-22)
 
 This was a version bump only for datetime-adapter to align it with other projects, there were no code changes.
