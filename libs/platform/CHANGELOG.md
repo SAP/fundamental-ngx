@@ -1,3 +1,13 @@
+## 0.66.0-rc.6 (2026-10-22)
+
+### 🩹 Fixes
+
+- **platform:** show no data found in approval flow team list ([#14620](https://github.com/SAP/fundamental-ngx/pull/14620))
+
+### ❤️ Thank You
+
+- deepikaSap1
+
 ## 0.66.0-rc.5 (2026-10-21)
 
 ### 🩹 Fixes
