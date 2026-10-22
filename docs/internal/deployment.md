@@ -4,6 +4,64 @@
 
 ---
 
+## GitHub Pages Artifact Deployment
+
+Stable releases publish the documentation through the official GitHub Pages artifact flow in the `Create Release`
+workflow. When the release's npm tag is `latest`, `pages_build` checks out `main`, regenerates `components.json`,
+builds the production documentation, validates the complete `dist/apps/docs` directory, and uploads that directory as
+the Pages artifact. `pages_deploy` then deploys only the uploaded artifact to the `github-pages` environment.
+Prereleases and archived hotfixes skip both jobs.
+
+### One-time cutover from branch deployment
+
+Repository administrator access is required. Merge and validate the workflow change before changing repository
+settings. Complete this cutover before the next stable release. Do not trigger a synthetic release to test the
+cutover.
+
+1. Record the current Pages configuration, protected `gh-pages` branch SHA, and the status and response headers for the
+   root page, `llms.txt`, and `components.json`:
+
+    ```bash
+    gh api repos/SAP/fundamental-ngx/pages
+    git ls-remote origin refs/heads/gh-pages
+    curl -fsSIL https://sap.github.io/fundamental-ngx/
+    curl -fsSIL https://sap.github.io/fundamental-ngx/llms.txt
+    curl -sSIL https://sap.github.io/fundamental-ngx/components.json
+    ```
+
+2. Confirm the merged workflow's normal `main` prerelease run skips `pages_build`; the existing `npmTag == latest`
+   gate must remain unchanged.
+3. In **Settings → Pages → Build and deployment → Source**, select **GitHub Actions**. Do not use
+   `actions/configure-pages` enablement to change the source.
+4. Confirm the setting changed:
+
+    ```bash
+    gh api repos/SAP/fundamental-ngx/pages --jq .build_type
+    ```
+
+    The result must be `workflow`.
+
+5. Keep the protected `gh-pages` branch unchanged as the rollback copy. Use the normal next stable-release process; do
+   not publish a release solely to exercise Pages.
+6. After that stable release deploys, verify the published artifact:
+
+    ```bash
+    curl -fsSIL https://sap.github.io/fundamental-ngx/
+    curl -fsSIL https://sap.github.io/fundamental-ngx/llms.txt
+    curl -fsS https://sap.github.io/fundamental-ngx/components.json \
+        | jq -e '.components | type == "array" and length > 0'
+    ```
+
+    The root must return HTML, `llms.txt` must be non-empty plain text, and `components.json` must be valid JSON with a
+    non-empty `components` array.
+
+### Rollback to the retained branch
+
+If the first Actions deployment fails or the site regresses, return to **Settings → Pages → Build and deployment →
+Source**, select **Deploy from a branch**, choose `gh-pages` and `/ (root)`, and verify the URLs recorded before the
+cutover. This restores the last known branch artifact; it does not repair the legacy automation, which cannot write to
+the protected branch. Keep `gh-pages` intact, and revert the workflow change separately before a later stable release.
+
 ## Netlify Deploy Older Versions (Manual)
 
 Deploy older version documentation to Netlify so users can access historical docs. Netlify cleans up old branch deployments automatically, so we manually configure specific versions to persist.
