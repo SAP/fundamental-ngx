@@ -41,7 +41,8 @@ import { NumberInputService } from './number-input.service';
         '(keydown)': '_handleKeydown($any($event))',
         '(paste)': '_handlePaste($any($event))',
         '(focus)': '_handleFocus($any($event))',
-        '(blur)': '_handleBlur($any($event))'
+        '(blur)': '_handleBlur($any($event))',
+        '(wheel)': '_handleWheel($any($event))'
     }
 })
 export class FormControlComponent implements FormItemControl {
@@ -366,6 +367,30 @@ export class FormControlComponent implements FormItemControl {
             this.decimalSeparator(),
             this.useGrouping()
         );
+    }
+
+    /** @hidden Handle mouse wheel events for number input */
+    protected _handleWheel(event: WheelEvent): void {
+        // Only apply for number type and when input is focused
+        if (this.type() !== 'number') {
+            return;
+        }
+
+        const inputElement = event.target as HTMLInputElement;
+
+        // Only handle wheel events when the input is focused
+        if (document.activeElement !== inputElement) {
+            return;
+        }
+
+        // Prevent page scroll when input is focused
+        event.preventDefault();
+
+        // Determine direction: negative deltaY = scroll up (increment), positive = scroll down (decrement)
+        const direction: 1 | -1 = event.deltaY < 0 ? 1 : -1;
+
+        // Use normal step (not large step) for scroll
+        this._stepValue(direction, false);
     }
 
     /** @hidden Step the value up or down */

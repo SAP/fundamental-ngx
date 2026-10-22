@@ -242,7 +242,30 @@
 
 <hr />
 
-<h3>Internationalization (i18n)</h3>
+<h3>Mouse Wheel Scroll</h3>
+<p>Mouse wheel scrolling can be used to increment or decrement values when the input is focused.</p>
+<div fd-form-item>
+    <label fd-form-label for="input-number-12" [colon]="true">Quantity (scroll to change)</label>
+    <input fd-form-control type="number" id="input-number-12" placeholder="Quantity" [(ngModel)]="value12" [step]="1" />
+</div>
+<p><strong>Instructions:</strong> Click input to focus → Scroll up to increment by 1 → Scroll down to decrement by 1</p>
+
+<div fd-form-item>
+    <label fd-form-label for="input-number-12b" [colon]="true">Price (scroll by 0.5)</label>
+    <input
+        fd-form-control
+        type="number"
+        id="input-number-12b"
+        placeholder="0.00"
+        [(ngModel)]="value12b"
+        [step]="0.5"
+        [valuePrecision]="2"
+    />
+</div>
+<p>
+    <strong>Instructions:</strong> Focus input → Scroll to change value by 0.5 (displays with 2 decimal places). Start
+    at 10.00 → Scroll up → 10.50 → Scroll up → 11.00
+</p>
 <p>Decimal separator can be configured for different locales.</p>
 <div fd-form-item>
     <label fd-form-label for="input-number-11" [colon]="true">European Format (comma decimal)</label>

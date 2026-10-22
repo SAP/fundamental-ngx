@@ -26,4 +26,6 @@ export class InputNumberExampleComponent {
     value9c = 1234.56;
     value10 = 1000000;
     value11 = 1234.56;
+    value12 = 10;
+    value12b = 10.0;
 }
