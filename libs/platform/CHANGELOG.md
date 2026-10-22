@@ -1,3 +1,13 @@
+## 0.66.0-rc.7 (2026-10-22)
+
+### 🩹 Fixes
+
+- **platform:** fit whole table rows within the scroll viewport ([#14581](https://github.com/SAP/fundamental-ngx/pull/14581))
+
+### ❤️ Thank You
+
+- Minwook Shin @minwookshin
+
 ## 0.66.0-rc.6 (2026-10-22)
 
 ### 🩹 Fixes
