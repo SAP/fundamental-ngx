@@ -9,6 +9,7 @@ import { FormControlComponent, FormItemComponent, FormLabelComponent } from '@fu
 })
 export class InputNumberExampleComponent {
     // Example values for demonstration
+    valueValidation = 0;
     value1 = 50;
     value2 = 50;
     value3 = 3;
