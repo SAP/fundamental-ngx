@@ -1,4 +1,4 @@
-@if (shellbarActions.length > 0 || searchExists || titleHidden) {
+@if (shellbarActions()?.length || searchExists() || titleHidden()) {
     <div class="fd-shellbar-collapse">
         <button
             fd-button
@@ -11,26 +11,26 @@
             [title]="('coreShellbar.collapsedItemMenuLabel' | fdTranslate)()"
             fdCozy
         >
-            @if (totalNotifications) {
+            @if (getTotalNotifications()) {
                 <span class="fd-button__badge">
-                    {{ totalNotifications }}
+                    {{ getTotalNotifications() }}
                 </span>
             }
         </button>
         <fd-menu #menu placement="bottom-end" [config]="{ additionalBodyClass: 'fd-shellbar-actions-mobile__menu' }">
-            @if (titleHidden && (hiddenLogoElement || hiddenTitleText)) {
+            @if (titleHidden() && (hiddenLogoElement() || hiddenTitleText())) {
                 <li fd-menu-item [hasSeparator]="true">
                     <div
                         fd-menu-interactive
                         style="padding-inline: 0.8125rem"
-                        [attr.aria-label]="brandingAriaLabel || null"
+                        [attr.aria-label]="brandingAriaLabel() || null"
                     >
                         <span style="order: -1; margin-inline-end: 0.25rem" #logoContainer></span>
-                        <fd-text [text]="hiddenTitleText" [maxLines]="2" fd-menu-title></fd-text>
+                        <fd-text [text]="hiddenTitleText()" [maxLines]="2" fd-menu-title></fd-text>
                     </div>
                 </li>
             }
-            @if (searchExists) {
+            @if (searchExists()) {
                 <li fd-menu-item (onSelect)="showSearch.emit(); menu.close()">
                     <div fd-menu-interactive>
                         <fd-menu-addon position="before" [glyph]="'search'"></fd-menu-addon>
@@ -38,7 +38,7 @@
                     </div>
                 </li>
             }
-            @for (action of shellbarActions; track action) {
+            @for (action of shellbarActions(); track action) {
                 <li fd-menu-item (onSelect)="actionClicked(action); menu.close()">
                     <div
                         fd-menu-interactive
@@ -60,7 +60,7 @@
                     </div>
                 </li>
             }
-            @if (!!assistiveToolsCallback) {
+            @if (assistiveToolsCallback()) {
                 <li fd-menu-item (onSelect)="assistiveToolsClickedHandler(); menu.close()">
                     <div fd-menu-interactive>
                         <fd-menu-addon position="before" [glyph]="'sys-help'"></fd-menu-addon>

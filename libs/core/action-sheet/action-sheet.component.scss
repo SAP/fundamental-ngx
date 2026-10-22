@@ -16,8 +16,3 @@ fd-action-sheet-body {
 .fd-action-sheet__wrapper .fd-action-sheet__bar.fd-bar + fd-action-sheet-body .fd-action-sheet.fd-action-sheet--mobile {
     border-radius: 0 0 var(--sapPopover_BorderCornerRadius) var(--sapPopover_BorderCornerRadius);
 }
-
-// TODO: move to fundamental-styles
-.fd-action-sheet__item.has-separator {
-    border-bottom: 0.0625rem solid var(--sapGroup_ContentBorderColor);
-}

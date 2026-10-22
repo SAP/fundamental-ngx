@@ -83,10 +83,7 @@ export class ShellbarContextAreaComponent implements AfterViewInit {
         const contextAreaItems: { el: HTMLElement; priority: number }[] = this._getContextAreaItemsWithPriority();
         while (this._shellbar._actionsExceedShellbarWidth()) {
             const shownElements = contextAreaItems.filter(
-                (item) =>
-                    item?.el?.style?.display !== 'none' &&
-                    !item?.el?.hasAttribute('fdShellbarNeverHide') &&
-                    !item?.el?.hasAttribute('fdshellbarneverhide')
+                (item) => item?.el?.style?.display !== 'none' && !item?.el?.hasAttribute('fdShellbarNeverHide')
             );
             if (shownElements.length === 0) {
                 break;

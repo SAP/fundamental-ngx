@@ -320,6 +320,9 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     private _searchSubmitSubscription: Nullable<Subscription>;
 
     /** @hidden */
+    private _tabbableElementsCache: HTMLElement[] | null = null;
+
+    /** @hidden */
     private _resizeObserverService = inject(ResizeObserverService);
 
     /** @hidden */
@@ -452,13 +455,20 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
 
     /** @hidden */
     _handleKeydown(event: KeyboardEvent): void {
+        // Don't interfere with text input behavior
+        const target = event.target as HTMLElement;
+        const isTextInput = target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable;
+        if (isTextInput) {
+            return;
+        }
+
         // Check if the key is one we handle
         if (!KeyUtil.isKeyCode(event, [LEFT_ARROW, RIGHT_ARROW, HOME, END])) {
             return;
         }
 
         const tabbableElements = this._getTabbableElements();
-        const currentIndex = tabbableElements.indexOf(event.target as HTMLElement);
+        const currentIndex = tabbableElements.indexOf(target);
 
         // Only handle Home/End if focus is already in the shellbar
         if (currentIndex === -1) {
@@ -536,30 +546,35 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
 
     /** @hidden */
     private _getTabbableElements(): HTMLElement[] {
+        // Return cached result if available
+        if (this._tabbableElementsCache) {
+            return this._tabbableElementsCache;
+        }
+
         const shellbarEl = this._shellbar.nativeElement;
+        // Query all descendant elements
         const allElements = Array.from(shellbarEl.querySelectorAll<HTMLElement>('*'));
 
-        const tabbableElements = allElements.filter((el) => {
-            const style = window.getComputedStyle(el);
-
-            return (
-                this._interactivityChecker.isTabbable(el) &&
-                !el.hasAttribute('disabled') &&
-                el.getAttribute('aria-disabled') !== 'true' &&
-                !el.classList.contains('is-disabled') &&
-                // <a> elements must have href to be truly focusable
-                (el.tagName !== 'A' || el.hasAttribute('href')) &&
-                // Element must be visible
-                style.display !== 'none' &&
-                style.visibility !== 'hidden' &&
-                !el.hasAttribute('hidden') &&
-                el.offsetParent !== null
-            );
-        });
+        // Use CDK InteractivityChecker for robust tabbability detection
+        const tabbableElements = allElements.filter(
+            (el) => this._interactivityChecker.isTabbable(el) && this._interactivityChecker.isVisible(el)
+        );
 
         // Filter out elements that are descendants of other tabbable elements
         // This prevents navigating into nested focusable areas
-        return tabbableElements.filter((el) => !tabbableElements.some((otherEl) => otherEl !== el && otherEl.contains(el)));
+        const filteredElements = tabbableElements.filter(
+            (el) => !tabbableElements.some((otherEl) => otherEl !== el && otherEl.contains(el))
+        );
+
+        // Cache the result
+        this._tabbableElementsCache = filteredElements;
+
+        // Invalidate cache after a short delay to allow for DOM updates
+        setTimeout(() => {
+            this._tabbableElementsCache = null;
+        }, 100);
+
+        return filteredElements;
     }
 
     /** @hidden */
