@@ -40,7 +40,7 @@ export const API_FILES = {
     messageStrip: ['MessageStrip'],
     multiComboBox: ['MultiComboBox', 'MultiComboBoxItem', 'MultiComboBoxItemGroup'],
     multiInput: ['MultiInput'],
-    numberInput: ['NumberInput'],
+    numericInput: ['NumericInput'],
     panel: ['Panel'],
     popover: ['Popover'],
     progressIndicator: ['ProgressIndicator'],

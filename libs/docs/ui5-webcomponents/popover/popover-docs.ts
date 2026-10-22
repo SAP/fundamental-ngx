@@ -11,11 +11,14 @@ import {
 
 import { BasicPopoverExample } from './examples/basic-popover';
 import { MinWidthPopoverExample } from './examples/min-width-popover';
+import { ResizableKeyboardPopoverSample } from './examples/resizable-keyboard-sample';
 
 const basicSampleHtml = 'basic-popover.html';
 const basicSampleTs = 'basic-popover.ts';
 const minWidthSampleHtml = 'min-width-popover.html';
 const minWidthSampleTs = 'min-width-popover.ts';
+const resizableKeyboardSampleHtml = 'resizable-keyboard-sample.html';
+const resizableKeyboardSampleTs = 'resizable-keyboard-sample.ts';
 
 @Component({
     selector: 'ui5-popover-docs',
@@ -28,7 +31,8 @@ const minWidthSampleTs = 'min-width-popover.ts';
         DescriptionComponent,
         SeparatorComponent,
         BasicPopoverExample,
-        MinWidthPopoverExample
+        MinWidthPopoverExample,
+        ResizableKeyboardPopoverSample
     ]
 })
 export class PopoverDocs {
@@ -57,6 +61,20 @@ export class PopoverDocs {
             component: 'MinWidthPopoverExample',
             code: getAssetFromModuleAssets(minWidthSampleTs),
             originalFileName: 'min-width-popover'
+        }
+    ];
+
+    resizableKeyboardPopoverSamples: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(resizableKeyboardSampleHtml),
+            originalFileName: 'resizable-keyboard-sample'
+        },
+        {
+            language: 'typescript',
+            component: 'ResizableKeyboardPopoverSample',
+            code: getAssetFromModuleAssets(resizableKeyboardSampleTs),
+            originalFileName: 'resizable-keyboard-sample'
         }
     ];
 }

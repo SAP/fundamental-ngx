@@ -7,7 +7,6 @@ import {
     ExampleFile,
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
-import { AccessibleRoleBarSample } from './examples/accessible-role';
 import { BasicBarSample } from './examples/basic-sample';
 
 const basicSampleHtml = 'basic-sample.html';
@@ -21,8 +20,7 @@ const basicSampleTs = 'basic-sample.ts';
         ComponentExampleComponent,
         CodeExampleComponent,
         DescriptionComponent,
-        BasicBarSample,
-        AccessibleRoleBarSample
+        BasicBarSample
     ]
 })
 export class BarDocs {
@@ -37,20 +35,6 @@ export class BarDocs {
             component: 'BasicBarSample',
             code: getAssetFromModuleAssets(basicSampleTs),
             originalFileName: 'basic-sample'
-        }
-    ];
-
-    accessibleRoleBarSamples: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets('accessible-role.html'),
-            originalFileName: 'accessible-role'
-        },
-        {
-            language: 'typescript',
-            component: 'AccessibleRoleBarSample',
-            code: getAssetFromModuleAssets('accessible-role.ts'),
-            originalFileName: 'accessible-role'
         }
     ];
 }

@@ -23,8 +23,8 @@ const statesSampleTs = 'states-sample.ts';
 const statesSampleHtml = 'states-sample.html';
 
 @Component({
-    selector: 'ui5-doc-number-input',
-    templateUrl: './number-input-docs.html',
+    selector: 'ui5-doc-numeric-input',
+    templateUrl: './numeric-input-docs.html',
     imports: [
         CodeExampleComponent,
         ComponentExampleComponent,
@@ -37,7 +37,7 @@ const statesSampleHtml = 'states-sample.html';
         StatesSample
     ]
 })
-export class NumberInputDocs {
+export class NumericInputDocs {
     basicExample = signal<ExampleFile[]>([
         {
             language: 'html',
