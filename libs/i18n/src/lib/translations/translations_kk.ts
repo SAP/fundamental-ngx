@@ -242,7 +242,9 @@ export default {
         cancel: 'Болдырмау',
         collapsedItemMenuLabel: 'Жиылған тармақ мәзірі',
         navigationButtonLabel: 'Навигация',
-        search: 'Іздеу'
+        openSearch: 'Open Search',
+        search: 'Іздеу',
+        shellbarLabel: 'Shellbar'
     },
     coreSlider: {
         ariaLabel: 'Жүгірткі'
@@ -329,6 +331,7 @@ export default {
         menuOkText: 'OK'
     },
     coreUserMenu: {
+        ariaLabel: 'User Menu',
         closeButton: 'Жабу',
         previousButton: 'Алдыңғы'
     },

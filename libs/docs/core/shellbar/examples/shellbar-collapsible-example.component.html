@@ -6,7 +6,7 @@
 </fd-segmented-button>
 <div [style.margin-top.px]="60" [style.maxWidth]="sizesWidth[currentSize] + 'px'">
     <fd-shellbar [size]="currentSize">
-        <fd-shellbar-branding [interactiveBranding]="true">
+        <fd-shellbar-branding [interactiveBranding]="true" ariaLabel="SAP Product Identifier Home">
             <fd-shellbar-logo>
                 <a class="fd-shellbar__logo fd-shellbar__logo--image-replaced" aria-label="SAP"></a>
             </fd-shellbar-logo>
@@ -19,6 +19,7 @@
                 [categories]="categories"
                 (searchSubmit)="onSearchSubmit($event)"
                 (inputChange)="onInputChange($event)"
+                ariaDescription="search results will be shown in the main area"
             ></fdp-search-field>
         }
         <fd-shellbar-actions>

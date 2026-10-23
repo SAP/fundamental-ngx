@@ -18,6 +18,7 @@ import {
     Renderer2,
     signal,
     TemplateRef,
+    untracked,
     viewChild,
     ViewEncapsulation
 } from '@angular/core';
@@ -149,6 +150,15 @@ export class UserMenuComponent implements AfterViewInit {
         effect(() => {
             const isMobile = this.mobile();
             this._listItems()?.forEach((item) => item.mobile.set(isMobile));
+        });
+
+        effect(() => {
+            const isOpen = this.isOpen();
+            // Use untracked to prevent circular dependencies
+            const control = untracked(() => this.userMenuControl());
+            if (control) {
+                control.isExpanded.set(isOpen);
+            }
         });
     }
 
@@ -295,8 +305,8 @@ export class UserMenuComponent implements AfterViewInit {
     private _setupMobileControlSubscription(): void {
         toObservable(this.userMenuControl, { injector: this._injector })
             .pipe(
-                filter((control) => !!control && this.mobile()),
-                switchMap((control) => control!.clicked),
+                filter((control): control is NonNullable<typeof control> => !!control && this.mobile()),
+                switchMap((control) => control.clicked),
                 takeUntilDestroyed(this._destroyRef)
             )
             .subscribe(() => {

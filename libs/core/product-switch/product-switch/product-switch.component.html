@@ -18,7 +18,8 @@
                     fd-button
                     [attr.aria-label]="('coreProductSwitch.ariaLabel' | fdTranslate)()"
                     [attr.title]="('coreProductSwitch.ariaLabel' | fdTranslate)()"
-                    aria-haspopup="menu"
+                    aria-haspopup="dialog"
+                    [attr.aria-expanded]="isOpen()"
                     class="fd-shellbar__button"
                     glyph="grid"
                     fdType="transparent"

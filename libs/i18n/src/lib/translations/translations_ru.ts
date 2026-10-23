@@ -242,7 +242,9 @@ export default {
         cancel: 'Отмена',
         collapsedItemMenuLabel: 'Свернутое меню позиций',
         navigationButtonLabel: 'Навигация',
-        search: 'Поиск'
+        openSearch: 'Open Search',
+        search: 'Поиск',
+        shellbarLabel: 'Shellbar'
     },
     coreSlider: {
         ariaLabel: 'Ползунок'
@@ -329,6 +331,7 @@ export default {
         menuOkText: 'ОК'
     },
     coreUserMenu: {
+        ariaLabel: 'User Menu',
         closeButton: 'Закрыть',
         previousButton: 'Назад'
     },

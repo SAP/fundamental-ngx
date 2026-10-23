@@ -10,6 +10,10 @@
         <fd-shellbar-actions-mobile
             [shellbarActions]="shellbarActions"
             [searchExists]="!!_searchPortal"
+            [titleHidden]="_titleHidden"
+            [hiddenTitleText]="_hiddenTitleText"
+            [hiddenLogoElement]="_hiddenLogoElement"
+            [brandingAriaLabel]="_brandingAriaLabel"
             (showSearch)="_toggleSearch()"
             [assistiveToolsCallback]="assistiveToolsCallback"
         ></fd-shellbar-actions-mobile>
@@ -19,7 +23,12 @@
     <ng-content></ng-content>
 </div>
 @if (_addSearchIcon && !showSearch && !_showMobileActions) {
-    <fd-shellbar-action glyph="search" [callback]="_toggleSearch"></fd-shellbar-action>
+    <fd-shellbar-action
+        glyph="search"
+        [callback]="_toggleSearch"
+        [ariaLabel]="('coreShellbar.openSearch' | fdTranslate)()"
+        [ariaExpanded]="false"
+    ></fd-shellbar-action>
 }
 <ng-content select="fd-shellbar-action"></ng-content>
 @if (userComponent || userItem) {

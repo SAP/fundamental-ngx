@@ -239,9 +239,11 @@ export default {
         assistiveTools: 'Assistive Tools',
         backButtonLabel: 'Back',
         cancel: 'Cancel',
-        collapsedItemMenuLabel: 'Collapsed Item Menu',
-        navigationButtonLabel: 'Navigation',
-        search: 'Search'
+        collapsedItemMenuLabel: 'Additional Options',
+        navigationButtonLabel: 'Main Navigation',
+        openSearch: 'Open Search',
+        search: 'Search',
+        shellbarLabel: 'Shellbar'
     },
     coreSlider: {
         ariaLabel: 'Slider Handle'
@@ -328,6 +330,7 @@ export default {
         menuOkText: 'Ok'
     },
     coreUserMenu: {
+        ariaLabel: 'User Menu',
         closeButton: 'Close',
         previousButton: 'Previous'
     },
@@ -469,7 +472,7 @@ export default {
         deleteButtonAriaLabel: 'Remove',
         deleteButtonTitle: 'Remove Suggestion',
         groupHeader: 'Group Header',
-        searchInputLabel: 'Search',
+        searchInputLabel: 'Search Field',
         searchSuggestionMessage: '{count} suggestions found.',
         searchSuggestionNavigateMessage: 'use up and down arrows to navigate',
         selectScopeLabel: 'Select scope',

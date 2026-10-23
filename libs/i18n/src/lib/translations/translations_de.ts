@@ -242,7 +242,9 @@ export default {
         cancel: 'Abbrechen',
         collapsedItemMenuLabel: 'Komprimiertes Elementmenü',
         navigationButtonLabel: 'Navigation',
-        search: 'Suchen'
+        openSearch: 'Open Search',
+        search: 'Suchen',
+        shellbarLabel: 'Shellbar'
     },
     coreSlider: {
         ariaLabel: 'Griff des Schiebereglers'
@@ -329,6 +331,7 @@ export default {
         menuOkText: 'OK'
     },
     coreUserMenu: {
+        ariaLabel: 'User Menu',
         closeButton: 'Schließen',
         previousButton: 'Zurück'
     },

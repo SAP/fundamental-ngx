@@ -2,7 +2,8 @@
     class="fd-shellbar"
     [class]="'fd-shellbar--' + _currentSize + _getSideNavClass()"
     [class.fd-shellbar--side-nav]="showNavigationButton === true"
-    [class.fd-shellbar--has-context-area]="!!contextArea"
+    [class.fd-shellbar--has-context-area]="_contextAreas().length > 0"
+    [attr.aria-label]="_shellbarLabel()"
     #shellbar
     fdCozy
 >
@@ -26,6 +27,8 @@
                         [attr.aria-label]="
                             navigationButtonLabel || ('coreShellbar.navigationButtonLabel' | fdTranslate)()
                         "
+                        [attr.aria-expanded]="navigationButtonExpanded()"
+                        [attr.aria-controls]="navigationButtonControls()"
                         fdCozy
                     ></button>
                 }
@@ -37,8 +40,8 @@
                     fdType="transparent"
                     [glyph]="navigationIcon()"
                     (fdkClicked)="_backClicked($event)"
-                    [attr.title]="backButtonLabel || ('coreShellbar.backButtonLabel' | fdTranslate)"
-                    [attr.aria-label]="backButtonLabel || ('coreShellbar.backButtonLabel' | fdTranslate)"
+                    [attr.title]="backButtonLabel || ('coreShellbar.backButtonLabel' | fdTranslate)()"
+                    [attr.aria-label]="backButtonLabel || ('coreShellbar.backButtonLabel' | fdTranslate)()"
                     fdCozy
                 ></button>
             }

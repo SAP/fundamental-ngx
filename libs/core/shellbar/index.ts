@@ -11,6 +11,8 @@ export * from './shellbar-branding/shellbar-branding.component';
 export * from './shellbar-context-area/shellbar-context-area.component';
 export * from './shellbar-hide-priority.directive';
 export * from './shellbar-logo/shellbar-logo.component';
+export * from './shellbar-never-hide.directive';
+export * from './shellbar-position.directive';
 export * from './shellbar-separator/shellbar-separator.component';
 export * from './shellbar-sidenav.directive';
 export * from './shellbar-subtitle/shellbar-subtitle.component';
