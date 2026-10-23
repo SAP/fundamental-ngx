@@ -69,16 +69,13 @@ export class NumberInputService {
         }
 
         // Allow decimal separator (. or ,) only once
-        if (
-            key === decimalSeparator ||
-            (decimalSeparator === '.' && key === '.') ||
-            (decimalSeparator === ',' && key === ',')
-        ) {
-            // Check if decimal separator already exists in the value (outside selection)
+        // Accept both . and , as decimal separators for better UX - parsing will normalize them
+        if (key === '.' || key === ',') {
+            // Check if any decimal separator already exists in the value (outside selection)
             const valueBeforeCursor = currentValue.substring(0, selectionStart);
             const valueAfterCursor = currentValue.substring(selectionEnd);
-            const hasDecimalBefore = valueBeforeCursor.includes(decimalSeparator);
-            const hasDecimalAfter = valueAfterCursor.includes(decimalSeparator);
+            const hasDecimalBefore = /[.,]/.test(valueBeforeCursor);
+            const hasDecimalAfter = /[.,]/.test(valueAfterCursor);
 
             // Allow if no decimal separator exists outside the selection
             return !hasDecimalBefore && !hasDecimalAfter;
@@ -135,23 +132,104 @@ export class NumberInputService {
 
         if (decimalSeparator === ',') {
             // When comma is decimal separator:
-            // Check if value has a period - it might be from ngModel (always uses period)
+            // Accept both . and , as decimal input, normalize to the locale's separator
             const hasPeriod = cleanedValue.includes('.');
             const hasComma = cleanedValue.includes(',');
 
-            if (hasPeriod && !hasComma) {
-                // Value like "1234.56" from ngModel - period is the decimal, not thousands separator
-                // Just parse it directly
+            if (hasPeriod && hasComma) {
+                // Has both - assume thousands separators exist
+                // Common formats: "1.234,56" (de-DE) or "1,234.56" (should be rare)
+                // Check which appears last to determine which is decimal
+                const lastPeriod = cleanedValue.lastIndexOf('.');
+                const lastComma = cleanedValue.lastIndexOf(',');
+
+                if (lastComma > lastPeriod) {
+                    // Comma is decimal: "1.234,56"
+                    cleanedValue = cleanedValue.replace(/[\s.]/g, ''); // Remove spaces and periods (thousands)
+                    cleanedValue = cleanedValue.replace(',', '.'); // Replace comma decimal with period
+                } else {
+                    // Period is decimal (unusual for comma locale): "1,234.56"
+                    cleanedValue = cleanedValue.replace(/[\s,]/g, ''); // Remove spaces and commas (thousands)
+                }
+            } else if (hasPeriod && !hasComma) {
+                // Only period - could be decimal OR thousands separator
+                const periodCount = (cleanedValue.match(/\./g) || []).length;
+
+                if (periodCount > 1) {
+                    // Multiple periods = thousands separators: "1.000.000"
+                    cleanedValue = cleanedValue.replace(/[\s.]/g, '');
+                } else {
+                    // Single period - check if it looks like thousands or decimal
+                    const periodIndex = cleanedValue.indexOf('.');
+                    const afterPeriod = cleanedValue.substring(periodIndex + 1);
+
+                    // If there are exactly 3 digits after the period and more before, likely thousands
+                    if (afterPeriod.length === 3 && /^\d+$/.test(afterPeriod) && periodIndex > 0) {
+                        // Thousands separator
+                        cleanedValue = cleanedValue.replace(/[\s.]/g, '');
+                    } else {
+                        // Decimal separator (user typed . in comma-locale input)
+                        cleanedValue = cleanedValue.replace(/[\s]/g, '');
+                    }
+                }
+            } else if (!hasPeriod && hasComma) {
+                // Only comma - treat as decimal
                 cleanedValue = cleanedValue.replace(/[\s]/g, ''); // Only remove spaces
-            } else {
-                // Value like "1.234,56" or "1234,56" - comma is decimal, period is thousands
-                cleanedValue = cleanedValue.replace(/[\s.]/g, ''); // Remove spaces and periods (thousands)
                 cleanedValue = cleanedValue.replace(',', '.'); // Replace comma decimal with period
+            } else {
+                // No separators
+                cleanedValue = cleanedValue.replace(/[\s]/g, ''); // Only remove spaces
             }
         } else {
             // When period is decimal separator (default):
-            // Remove thousands separators (commas and spaces)
-            cleanedValue = cleanedValue.replace(/[\s,]/g, '');
+            // Accept both . and , as decimal input
+            const hasPeriod = cleanedValue.includes('.');
+            const hasComma = cleanedValue.includes(',');
+
+            if (hasPeriod && hasComma) {
+                // Has both - determine which is decimal by position (last one is decimal)
+                const lastPeriod = cleanedValue.lastIndexOf('.');
+                const lastComma = cleanedValue.lastIndexOf(',');
+
+                if (lastPeriod > lastComma) {
+                    // Period is decimal: "1,234.56"
+                    cleanedValue = cleanedValue.replace(/[\s,]/g, ''); // Remove spaces and commas (thousands)
+                } else {
+                    // Comma is decimal (unusual for period locale): "1.234,56"
+                    cleanedValue = cleanedValue.replace(/[\s.]/g, ''); // Remove spaces and periods (thousands)
+                    cleanedValue = cleanedValue.replace(',', '.'); // Replace comma decimal with period
+                }
+            } else if (hasComma && !hasPeriod) {
+                // Only comma - could be decimal OR thousands separator
+                // If there are multiple commas, they're thousands separators: "1,000,000"
+                // If there's one comma, check position:
+                //   - If it appears every 3 digits from the right, it's thousands: "1,000"
+                //   - Otherwise it's likely decimal: "1,5"
+                const commaCount = (cleanedValue.match(/,/g) || []).length;
+
+                if (commaCount > 1) {
+                    // Multiple commas = thousands separators
+                    cleanedValue = cleanedValue.replace(/[\s,]/g, '');
+                } else {
+                    // Single comma - check if it looks like thousands or decimal
+                    const commaIndex = cleanedValue.indexOf(',');
+                    const afterComma = cleanedValue.substring(commaIndex + 1);
+
+                    // If there are exactly 3 digits after the comma and more before, likely thousands
+                    // e.g., "1,000" or "123,456" but not "1,5" or "12,34"
+                    if (afterComma.length === 3 && /^\d+$/.test(afterComma) && commaIndex > 0) {
+                        // Thousands separator
+                        cleanedValue = cleanedValue.replace(/[\s,]/g, '');
+                    } else {
+                        // Decimal separator
+                        cleanedValue = cleanedValue.replace(/[\s]/g, '');
+                        cleanedValue = cleanedValue.replace(',', '.'); // Normalize comma to period
+                    }
+                }
+            } else {
+                // Only period or no separators
+                cleanedValue = cleanedValue.replace(/[\s]/g, ''); // Remove spaces only
+            }
         }
 
         const parsed = parseFloat(cleanedValue);

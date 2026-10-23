@@ -283,17 +283,63 @@
 
 <hr />
 
-<h3>i18n</h3>
-<p>Decimal separator can be configured for different locales.</p>
+<h3>i18n / Locale Support</h3>
+<p>Number formatting automatically adapts to different locales. The decimal separator is determined by the locale.</p>
 <div fd-form-item>
-    <label fd-form-label for="input-number-11" [colon]="true">European Format (comma decimal)</label>
+    <label fd-form-label for="input-number-11a" [colon]="true">US Format (en-US)</label>
     <input
         fd-form-control
         type="number"
-        id="input-number-11"
-        placeholder="0,00"
+        id="input-number-11a"
+        placeholder="0.00"
         [(ngModel)]="value11"
-        [decimalSeparator]="','"
+        [locale]="'en-US'"
+        [useGrouping]="true"
     />
 </div>
-<p><strong>Instructions:</strong> Paste 1234.56 → blur → displays as 1234,56</p>
+<p><strong>Decimal separator:</strong> . (dot) — Current value: {{ value11 }}</p>
+
+<div fd-form-item>
+    <label fd-form-label for="input-number-11b" [colon]="true">German Format (de-DE)</label>
+    <input
+        fd-form-control
+        type="number"
+        id="input-number-11b"
+        placeholder="0,00"
+        [(ngModel)]="value11b"
+        [locale]="'de-DE'"
+        [useGrouping]="true"
+    />
+</div>
+<p><strong>Decimal separator:</strong> , (comma) — Current value: {{ value11b }}</p>
+
+<div fd-form-item>
+    <label fd-form-label for="input-number-11c" [colon]="true">French Format (fr-FR)</label>
+    <input
+        fd-form-control
+        type="number"
+        id="input-number-11c"
+        placeholder="0,00"
+        [(ngModel)]="value11c"
+        [locale]="'fr-FR'"
+        [useGrouping]="true"
+    />
+</div>
+<p><strong>Decimal separator:</strong> , (comma) — Current value: {{ value11c }}</p>
+
+<div fd-form-item>
+    <label fd-form-label for="input-number-11d" [colon]="true">Uses Application Locale (default)</label>
+    <input
+        fd-form-control
+        type="number"
+        id="input-number-11d"
+        placeholder="Enter amount"
+        [(ngModel)]="value11d"
+        [useGrouping]="true"
+    />
+</div>
+<p>
+    <strong>Instructions:</strong> Try entering 1234.56 (with dot) in any field above, then blur (click outside). The
+    input will format according to its locale: en-US shows 1,234.56 (comma thousands, dot decimal), de-DE and fr-FR show
+    1.234,56 (period thousands, comma decimal).
+</p>

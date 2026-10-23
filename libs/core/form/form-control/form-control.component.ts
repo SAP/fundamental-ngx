@@ -8,8 +8,10 @@ import {
     inject,
     Injector,
     input,
+    LOCALE_ID,
     numberAttribute,
     output,
+    untracked,
     ViewEncapsulation
 } from '@angular/core';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
@@ -33,14 +35,15 @@ import { NumberInputService } from './number-input.service';
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [registerFormItemControl(FormControlComponent), contentDensityObserverProviders(), NumberInputService],
     host: {
-        '[class]': '_cssClass()',
-        '[attr.type]': '_internalType()',
-        '[attr.aria-label]': '_ariaLabelAttr || ariaLabel() || null',
-        '[attr.aria-labelledby]': '_ariaLabelledByAttr || ariaLabelledBy() || null',
+        '[class]': 'cssClass()',
+        '[attr.type]': 'internalType()',
+        '[attr.aria-label]': 'ariaLabelAttr || ariaLabel() || null',
+        '[attr.aria-labelledby]': 'ariaLabelledByAttr || ariaLabelledBy() || null',
         '[attr.aria-invalid]': 'state() === "error" ? true : null',
-        '[style.text-align]': '_isEnhancedNumberMode() ? textAlign() : null',
+        '[style.text-align]': 'isEnhancedNumberMode() ? textAlign() : null',
         '(keydown)': '_handleKeydown($any($event))',
         '(paste)': '_handlePaste($any($event))',
+        '(input)': '_handleInput($any($event))',
         '(focus)': '_handleFocus($any($event))',
         '(blur)': '_handleBlur($any($event))',
         '(wheel)': '_handleWheel($any($event))'
@@ -80,16 +83,16 @@ export class FormControlComponent implements FormItemControl {
      * Minimum value for number input.
      * Accepts number or string and normalizes to number.
      */
-    readonly min = input<number | string | undefined | null, number | string | undefined | null>(undefined, {
-        transform: (value) => (value !== undefined && value !== null ? numberAttribute(value) : undefined)
+    readonly min = input<number | undefined, number | string | undefined | null>(undefined, {
+        transform: (value) => (value != null ? numberAttribute(value) : undefined)
     });
 
     /**
      * Maximum value for number input.
      * Accepts number or string and normalizes to number.
      */
-    readonly max = input<number | string | undefined | null, number | string | undefined | null>(undefined, {
-        transform: (value) => (value !== undefined && value !== null ? numberAttribute(value) : undefined)
+    readonly max = input<number | undefined, number | string | undefined | null>(undefined, {
+        transform: (value) => (value != null ? numberAttribute(value) : undefined)
     });
 
     /**
@@ -98,8 +101,8 @@ export class FormControlComponent implements FormItemControl {
      * Accepts number or string and normalizes to number.
      * @default 1
      */
-    readonly step = input<number | string | undefined | null, number | string | undefined | null>(1, {
-        transform: (value) => (value !== undefined && value !== null ? numberAttribute(value) : 1)
+    readonly step = input<number, number | string | undefined | null>(1, {
+        transform: (value) => (value != null ? numberAttribute(value) : 1)
     });
 
     /**
@@ -107,16 +110,16 @@ export class FormControlComponent implements FormItemControl {
      * The actual step is calculated as: step × largeStep
      * @default 10
      */
-    readonly largeStep = input<number | string | undefined | null, number | string | undefined | null>(10, {
-        transform: (value) => (value !== undefined && value !== null ? numberAttribute(value) : 10)
+    readonly largeStep = input<number, number | string | undefined | null>(10, {
+        transform: (value) => (value != null ? numberAttribute(value) : 10)
     });
 
     /**
      * Number of decimal places to display.
      * When undefined, precision is not enforced.
      */
-    readonly valuePrecision = input<number | string | undefined | null, number | string | undefined | null>(undefined, {
-        transform: (value) => (value !== undefined && value !== null ? numberAttribute(value) : undefined)
+    readonly valuePrecision = input<number | undefined, number | string | undefined | null>(undefined, {
+        transform: (value) => (value != null ? numberAttribute(value) : undefined)
     });
 
     /**
@@ -152,12 +155,24 @@ export class FormControlComponent implements FormItemControl {
     readonly useGrouping = input<boolean>(false);
 
     /**
+     * Locale identifier for number formatting.
+     * Determines the decimal separator and thousands separator based on locale conventions.
+     * - 'en-US': uses . for decimal and , for thousands (1,234.56)
+     * - 'de-DE': uses , for decimal and . for thousands (1.234,56)
+     * - 'fr-FR': uses , for decimal and space for thousands (1 234,56)
+     * @default Injected LOCALE_ID from Angular
+     */
+    readonly locale = input<string | undefined>(undefined);
+
+    /**
      * Decimal separator character.
+     * When set explicitly, overrides the locale-based separator.
      * - '.': period (en-US style)
      * - ',': comma (de-DE style)
-     * @default '.'
+     * @default Determined by locale
+     * @deprecated Use `locale` input instead for automatic locale-based formatting
      */
-    readonly decimalSeparator = input<'.' | ','>('.');
+    readonly decimalSeparator = input<'.' | ',' | undefined>(undefined);
 
     /**
      * Emits validation state for number inputs.
@@ -169,19 +184,22 @@ export class FormControlComponent implements FormItemControl {
     readonly elementRef = inject<ElementRef<HTMLInputElement | HTMLTextAreaElement>>(ElementRef);
 
     /** @hidden */
-    protected readonly _contentDensityObserver = inject(ContentDensityObserver);
+    protected readonly contentDensityObserver = inject(ContentDensityObserver);
 
     /** @hidden */
-    protected readonly _numberInputService = inject(NumberInputService);
+    protected readonly numberInputService = inject(NumberInputService);
 
     /** @hidden */
-    protected readonly _ariaLabelAttr: string;
+    protected readonly localeId = inject(LOCALE_ID);
 
     /** @hidden */
-    protected readonly _ariaLabelledByAttr: string;
+    protected readonly ariaLabelAttr: string;
+
+    /** @hidden */
+    protected readonly ariaLabelledByAttr: string;
 
     /** @hidden Computed CSS classes */
-    protected readonly _cssClass = computed(() => {
+    protected readonly cssClass = computed(() => {
         const tagName = this.elementRef.nativeElement.tagName.toLowerCase();
         const classes: string[] = [];
 
@@ -206,13 +224,30 @@ export class FormControlComponent implements FormItemControl {
     });
 
     /** @hidden Internal type - converts number to text */
-    protected readonly _internalType = computed(() => {
+    protected readonly internalType = computed(() => {
         const inputType = this.type();
         return inputType === 'number' ? 'text' : inputType;
     });
 
     /** @hidden Enhanced number mode is active when type is number */
-    protected readonly _isEnhancedNumberMode = computed(() => this.type() === 'number');
+    protected readonly isEnhancedNumberMode = computed(() => this.type() === 'number');
+
+    /**
+     * @hidden
+     * Computed decimal separator based on locale or explicit override.
+     * Priority: decimalSeparator input (deprecated) > locale input > LOCALE_ID injection
+     */
+    protected readonly effectiveDecimalSeparator = computed<'.' | ','>(() => {
+        // Explicit decimalSeparator takes precedence (backward compatibility)
+        const explicitSeparator = this.decimalSeparator();
+        if (explicitSeparator !== undefined) {
+            return explicitSeparator;
+        }
+
+        // Determine from locale
+        const localeIdValue = this.locale() || this.localeId;
+        return this._getDecimalSeparatorForLocale(localeIdValue);
+    });
 
     /** @hidden */
     private readonly _injector = inject(Injector);
@@ -220,20 +255,30 @@ export class FormControlComponent implements FormItemControl {
     /** @hidden Value before focus - used for Escape key reset */
     private _valueBeforeFocus: string | null = null;
 
+    /** @hidden Cache for locale to decimal separator mapping */
+    private _decimalSeparatorCache = new Map<string, '.' | ','>();
+
     /** @hidden */
     constructor(
         @Attribute('aria-label') ariaLabelAttr: string,
         @Attribute('aria-labelledby') ariaLabelledByAttr: string
     ) {
-        this._ariaLabelAttr = ariaLabelAttr;
-        this._ariaLabelledByAttr = ariaLabelledByAttr;
-        this._contentDensityObserver.subscribe();
+        this.ariaLabelAttr = ariaLabelAttr;
+        this.ariaLabelledByAttr = ariaLabelledByAttr;
+        this.contentDensityObserver.subscribe();
 
         // Format initial value if enhanced number mode needs formatting
         // Use a slightly longer delay to ensure ngModel has written its value
         afterNextRender(
             () => {
-                if (this.type() === 'number' && (this.useGrouping() || this.decimalSeparator() === ',')) {
+                // Use untracked to avoid creating dependencies during initialization
+                const needsFormatting = untracked(
+                    () =>
+                        this.type() === 'number' &&
+                        (this.useGrouping() || this.effectiveDecimalSeparator() === ',' || this.locale() !== undefined)
+                );
+
+                if (needsFormatting) {
                     // Small delay to let ngModel finish writing
                     setTimeout(() => this._formatInitialValue(), 100);
                 }
@@ -280,7 +325,7 @@ export class FormControlComponent implements FormItemControl {
         }
 
         // Validate the key press
-        if (!this._numberInputService.isValidKeyPress(event, currentValue, this.decimalSeparator())) {
+        if (!this.numberInputService.isValidKeyPress(event, currentValue, this.effectiveDecimalSeparator())) {
             event.preventDefault();
         }
 
@@ -301,9 +346,19 @@ export class FormControlComponent implements FormItemControl {
         const pastedText = event.clipboardData?.getData('text') || '';
 
         // Validate the pasted content
-        if (!this._numberInputService.isValidPaste(pastedText, this.decimalSeparator())) {
+        if (!this.numberInputService.isValidPaste(pastedText, this.effectiveDecimalSeparator())) {
             event.preventDefault();
         }
+    }
+
+    /** @hidden Handle input events - currently a pass-through for ngModel */
+    protected _handleInput(_event: Event): void {
+        // Only apply for number type
+        if (this.type() !== 'number') {
+            return;
+        }
+
+        // For now, let the input event propagate normally to ngModel. The formatting will be handled on blur
     }
 
     /** @hidden Handle focus - store current value for Escape reset */
@@ -316,14 +371,18 @@ export class FormControlComponent implements FormItemControl {
         this._valueBeforeFocus = inputElement.value;
 
         // Parse and reformat value for editing (remove thousands separator if present)
-        const numericValue = this._numberInputService.parseNumericValue(inputElement.value, this.decimalSeparator());
+        const numericValue = this.numberInputService.parseNumericValue(
+            inputElement.value,
+            this.effectiveDecimalSeparator()
+        );
 
         if (numericValue !== null) {
-            // Format without grouping for editing
-            inputElement.value = this._numberInputService.formatNumber(
+            // Format without grouping and always use DOT for decimal during editing
+            // This ensures ngModel receives standard numeric strings that JavaScript can parse
+            inputElement.value = this.numberInputService.formatNumber(
                 numericValue,
                 undefined,
-                this.decimalSeparator(),
+                '.', // Always use dot during editing for ngModel compatibility
                 false
             );
         }
@@ -349,7 +408,7 @@ export class FormControlComponent implements FormItemControl {
         }
 
         // Parse and validate the value
-        const numericValue = this._numberInputService.parseNumericValue(value, this.decimalSeparator());
+        const numericValue = this.numberInputService.parseNumericValue(value, this.effectiveDecimalSeparator());
 
         if (numericValue === null) {
             // Invalid value - revert to value before focus or empty
@@ -381,10 +440,10 @@ export class FormControlComponent implements FormItemControl {
         this.validationChange.emit(isValid);
 
         // Format and update the input (but don't clamp the value - let user see their input)
-        inputElement.value = this._numberInputService.formatNumber(
+        inputElement.value = this.numberInputService.formatNumber(
             finalValue,
             typeof precision === 'number' ? precision : undefined,
-            this.decimalSeparator(),
+            this.effectiveDecimalSeparator(),
             this.useGrouping()
         );
     }
@@ -416,7 +475,10 @@ export class FormControlComponent implements FormItemControl {
     /** @hidden Step the value up or down */
     private _stepValue(direction: 1 | -1, isLargeStep: boolean): void {
         const inputElement = this.elementRef.nativeElement as HTMLInputElement;
-        const currentValue = this._numberInputService.parseNumericValue(inputElement.value, this.decimalSeparator());
+        const currentValue = this.numberInputService.parseNumericValue(
+            inputElement.value,
+            this.effectiveDecimalSeparator()
+        );
 
         // Get step size
         const stepValue = this.step();
@@ -431,8 +493,9 @@ export class FormControlComponent implements FormItemControl {
 
         if (this.stepMode() === 'multiple') {
             // Multiple mode: round to nearest multiple of step
+            // After adding/subtracting, round DOWN to the nearest multiple
             const targetValue = baseValue + actualStep;
-            newValue = Math.round(targetValue / stepSize) * stepSize;
+            newValue = Math.floor(targetValue / stepSize) * stepSize;
         } else {
             // Addition mode: simple arithmetic
             newValue = baseValue + actualStep;
@@ -455,10 +518,10 @@ export class FormControlComponent implements FormItemControl {
         }
 
         // Update the input value
-        inputElement.value = this._numberInputService.formatNumber(
+        inputElement.value = this.numberInputService.formatNumber(
             newValue,
             typeof precision === 'number' ? precision : undefined,
-            this.decimalSeparator(),
+            this.effectiveDecimalSeparator(),
             this.useGrouping()
         );
 
@@ -505,7 +568,7 @@ export class FormControlComponent implements FormItemControl {
             return;
         }
 
-        const numericValue = this._numberInputService.parseNumericValue(currentValue, this.decimalSeparator());
+        const numericValue = this.numberInputService.parseNumericValue(currentValue, this.effectiveDecimalSeparator());
 
         if (numericValue === null) {
             return;
@@ -519,10 +582,10 @@ export class FormControlComponent implements FormItemControl {
         }
 
         // Format with decimal separator and optional grouping
-        inputElement.value = this._numberInputService.formatNumber(
+        inputElement.value = this.numberInputService.formatNumber(
             finalValue,
             typeof precision === 'number' ? precision : undefined,
-            this.decimalSeparator(),
+            this.effectiveDecimalSeparator(),
             this.useGrouping()
         );
     }
@@ -538,7 +601,7 @@ export class FormControlComponent implements FormItemControl {
         }
 
         // Parse the value
-        const numericValue = this._numberInputService.parseNumericValue(value, this.decimalSeparator());
+        const numericValue = this.numberInputService.parseNumericValue(value, this.effectiveDecimalSeparator());
 
         if (numericValue === null) {
             this.validationChange.emit(false);
@@ -558,5 +621,34 @@ export class FormControlComponent implements FormItemControl {
         }
 
         this.validationChange.emit(isValid);
+    }
+
+    /**
+     * @hidden
+     * Get the decimal separator for a given locale.
+     * Results are cached to avoid recreating Intl.NumberFormat on every call.
+     */
+    private _getDecimalSeparatorForLocale(localeId: string): '.' | ',' {
+        // Check cache first
+        const cached = this._decimalSeparatorCache.get(localeId);
+        if (cached !== undefined) {
+            return cached;
+        }
+
+        // Determine separator for this locale
+        let separator: '.' | ',' = '.';
+        try {
+            const formatter = new Intl.NumberFormat(localeId);
+            const parts = formatter.formatToParts(1.1);
+            const decimalPart = parts.find((part) => part.type === 'decimal');
+            separator = decimalPart?.value === ',' ? ',' : '.';
+        } catch {
+            // Fallback to dot if locale is invalid
+            separator = '.';
+        }
+
+        // Cache the result
+        this._decimalSeparatorCache.set(localeId, separator);
+        return separator;
     }
 }
