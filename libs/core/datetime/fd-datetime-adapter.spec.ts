@@ -341,6 +341,13 @@ describe('FdDatetimeAdapter', () => {
         ).toEqual('January 1, 2017');
     });
 
+    it('should replace AM/PM with the day period in a time-only format', () => {
+        const format = { hour: '2-digit', minute: '2-digit', dayPeriod: true } as Intl.DateTimeFormatOptions;
+
+        expect(adapter.format(new FdDate(2017, 1, 1, 9, 5), format)).toEqual('09:05 coreTime.morningLabel');
+        expect(adapter.format(new FdDate(2017, 1, 1, 21, 5), format)).toEqual('09:05 coreTime.eveningLabel');
+    });
+
     it('should format with a different locale', () => {
         adapter.setLocale('ja-JP');
         // Edge & IE use a different format in Japanese.
