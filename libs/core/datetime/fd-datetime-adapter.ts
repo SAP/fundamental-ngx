@@ -477,7 +477,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
                 .replace(/(\d{1,2}:\d{2})( [AP]M)?/, `$1 ${dayPeriodName}`)
                 .replace(/,\s*(\d{1,2}:\d{2})/, `, at $1 ${dayPeriodName}`);
         } else {
-            return formattedTime.replace(/(\d{1,2}:\d{2}(:\d{2})?)/, `$1 ${dayPeriodName}`);
+            return formattedTime.replace(/(\d{1,2}:\d{2}(:\d{2})?)( [AP]M)?/, `$1 ${dayPeriodName}`);
         }
     }
 
